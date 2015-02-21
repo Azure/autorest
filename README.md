@@ -1,10 +1,8 @@
 # AutoRest #
 
-----------
 The AutoRest tool generates client libraries for accessing RESTful web services described by a [Swagger](http://github.com/swagger-api/swagger-spec) documentation file. 
 The project is open-source on GitHub at [https://github.com/Azure/AutoRest](https://github.com/Azure/AutoRest).
 
-[TOC]
 ##Hello World##
 For the AutoRest version  of Hello World, we will look at three distinct parts: the REST API that returns a greeting, the Swagger spec that documents the API, and the code for using the client library that AutoRest generates. 
 ### RESTful HelloWorld ###
