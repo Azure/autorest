@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <LibraryFxTarget Condition="'$(LibraryFxTarget)' == ''">net45</LibraryFxTarget>
+    <ProjectGuid>{50B0A8CE-D290-4EB7-8C6C-16EAAB75225E}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Microsoft.Rest.Common.Tracing.Etw</RootNamespace>
+    <AssemblyName>Microsoft.Rest.ClientRuntime.Etw</AssemblyName>
+    <OutputType>Library</OutputType>
+    <RestorePackages>true</RestorePackages>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NuGetPackageImportStamp>644881db</NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Net45-Debug'">
+    <DocumentationFile>bin\Net45-Debug\Microsoft.Rest.ClientRuntime.Etw.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Net45-Release'">
+    <DocumentationFile>bin\Net45-Release\Microsoft.Rest.ClientRuntime.Etw.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Net40-Debug'">
+    <DocumentationFile>bin\Net40-Debug\Microsoft.Rest.ClientRuntime.Etw.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Net40-Release'">
+    <DocumentationFile>bin\Net40-Release\Microsoft.Rest.ClientRuntime.Etw.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Portable-Debug'">
+    <DocumentationFile>bin\Portable-Debug\Microsoft.Rest.ClientRuntime.Etw.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Portable-Release'">
+    <DocumentationFile>bin\Portable-Release\Microsoft.Rest.ClientRuntime.Etw.xml</DocumentationFile>
+  </PropertyGroup>
+  <Import Project="$(SolutionDir)\tools\AutoRest.Settings.targets" />
+  <ItemGroup>
+    <Compile Include="HttpOperationEventSource.cs" />
+    <Compile Include="EtwTracingInterceptor.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Microsoft.Rest.ClientRuntime.Etw.nuget.proj" />
+    <None Include="Microsoft.Rest.ClientRuntime.Etw.nuspec">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClientRuntime\ClientRuntime.csproj">
+      <Project>{7f524559-93f9-4f3f-9e2c-af41a0c2e6f4}</Project>
+      <Name>ClientRuntime</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\..\tools\CustomDictionary.xml">
+      <Link>CustomDictionary.xml</Link>
+    </CodeAnalysisDictionary>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

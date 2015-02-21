@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata minClientVersion="2.5">
+    <id>Microsoft.Rest.ClientRuntime</id>
+    <title>Client Runtime Library for Microsoft AutoRest Code Generator</title>
+    <version>$version$</version>
+    <authors>Microsoft</authors>
+    <owners>azure-sdk, Microsoft</owners>
+    <licenseUrl>https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/Azure/AutoRest</projectUrl>
+    <iconUrl>http://go.microsoft.com/fwlink/?LinkID=288890</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <summary>Provides infrastructure for common error handling, tracing, configuration, and HTTP/REST-based pipeline manipulation for clients generated with AutoRest.</summary>
+    <description>Provides infrastructure for common error handling, tracing, configuration, and HTTP/REST-based pipeline manipulation for clients generated with AutoRest.
+    
+Supported Portable Library Platforms:
+- .NET Framework 4.0, 4.5
+- .NET for Windows Store apps
+- Windows Phone 8.1
+- Portable Class Libraries</description>
+    <copyright>Copyright © Microsoft Corporation</copyright>
+    <tags>Microsoft AutoRest cloud REST HTTP client core common</tags>
+    <references>
+      <group targetFramework="portable-net403+win+wpa81">
+        <reference file="Microsoft.Rest.ClientRuntime.dll" />
+      </group>
+      <group targetFramework="net40">
+        <reference file="Microsoft.Rest.ClientRuntime.dll" />
+      </group>
+      <group targetFramework="net45">
+        <reference file="Microsoft.Rest.ClientRuntime.dll" />
+      </group>
+    </references>
+    <dependencies>
+      <group targetFramework="portable-net403+win+wpa81">
+        <dependency id="Microsoft.Bcl" version="1.1.9" />
+        <dependency id="Microsoft.Bcl.Async" version="1.0.168" />
+        <dependency id="Microsoft.Bcl.Build" version="1.0.21" />
+        <dependency id="Microsoft.Net.Http" version="2.2.22" />
+        <dependency id="Newtonsoft.Json" version="6.0.4" />
+      </group>
+      <group targetFramework="net40">
+        <dependency id="Microsoft.Bcl" version="1.1.9" />
+        <dependency id="Microsoft.Bcl.Async" version="1.0.168" />
+        <dependency id="Microsoft.Bcl.Build" version="1.0.21" />
+        <dependency id="Microsoft.Net.Http" version="2.2.22" />
+        <dependency id="Newtonsoft.Json" version="6.0.4" />
+      </group>
+      <group targetFramework="net45">
+        <dependency id="Newtonsoft.Json" version="6.0.4" />
+      </group>
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.Net.Http" targetFramework="net45" />
+    </frameworkAssemblies>
+  </metadata>
+  <files>
+    <file src="Common\**\*.cs" target="src\Common" />
+    <file src="Common\Properties\*.resx" target="src\Common\Properties" />
+    <file src="..\binaries\portable\Microsoft.Rest.ClientRuntime.dll" target="lib\portable-net403+win+wpa81" />
+    <file src="..\binaries\portable\Microsoft.Rest.ClientRuntime.pdb" target="lib\portable-net403+win+wpa81" />
+    <file src="..\binaries\portable\Microsoft.Rest.ClientRuntime.xml" target="lib\portable-net403+win+wpa81" />
+    <file src="..\binaries\net40\Microsoft.Rest.ClientRuntime.dll" target="lib\net40" />
+    <file src="..\binaries\net40\Microsoft.Rest.ClientRuntime.pdb" target="lib\net40" />
+    <file src="..\binaries\net40\Microsoft.Rest.ClientRuntime.xml" target="lib\net40" />
+    <file src="..\binaries\net45\Microsoft.Rest.ClientRuntime.dll" target="lib\net45" />
+    <file src="..\binaries\net45\Microsoft.Rest.ClientRuntime.pdb" target="lib\net45" />
+    <file src="..\binaries\net45\Microsoft.Rest.ClientRuntime.xml" target="lib\net45" />
+  </files>
+</package>

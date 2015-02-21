@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- 
+  Targets:
+
+  /t:Clean
+    Removes temporary build outputs.
+    
+  /t:Build
+    Builds assemblies.
+
+  /t:Test
+    Run unit tests.
+
+  /t:Package 
+    Builds NuGet packages using the binaries folder contents.
+    The packages will drop to .\binaries\packages.
+
+  /t:Publish
+    Publishes the built packages. You will need to include your
+    publishing key when running. Include: /p:NuGetKey=YOUR_PUBLISHING_KEY
+
+  Properties of interest:
+  /P:CodeSign=True
+    Code sign binaries, mainly for official release 
+
+  /p:CodeSign=True;DelaySign=True
+    Test the code sign workflow locally
+
+  /p:NuGetKey=NUGET_PUBLISHING_KEY
+    Provides the key used to publish to a NuGet or MyGet server.
+
+    This key should never be committed to source control.
+
+  /p:PublishSymbolSourcePackages
+    A true/false value indicating whether to push the symbol + source
+    packages to a symbol server.
+
+  /p:NuGetPublishingSource=Uri
+    The NuGet Server to push packages to.
+
+  /p:NuGetSymbolPublishingSource=Uri
+    The NuGet Server to push symbol + source packages to.
+  -->
+  
+  <PropertyGroup>
+    <SolutionName>ClientRuntime.sln</SolutionName>
+    <LibraryRoot>$(MSBuildThisFileDirectory)</LibraryRoot>
+    <LibrarySourceFolder>$(LibraryRoot)</LibrarySourceFolder>
+    <LibraryToolsFolder>$(LibraryRoot)tools</LibraryToolsFolder>
+    <BinariesFolder>$(LibraryRoot)binaries</BinariesFolder>
+    <PackageOutputDir>$(BinariesFolder)\packages</PackageOutputDir>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <CodeSign Condition=" '$(CodeSign)' == '' ">false</CodeSign>
+    <!-- Only set set this to true for testing the code sign workflow locally. -->
+    <DelaySign Condition =" '$(DelaySign)' == '' ">false</DelaySign>
+  </PropertyGroup>
+ 
+  <ItemGroup>
+    <LibraryFxTargetList Condition=" '$(FxTargetList)' == '' " Include="portable;net40;net45" />
+    <LibraryFxTargetList Condition=" '$(FxTargetList)' != '' " Include="$(FxTargetList)" />
+  </ItemGroup>
+  
+  <PropertyGroup>
+    <NuGetCommand>&quot;$(LibraryToolsFolder)\nuget.exe&quot;</NuGetCommand>
+  </PropertyGroup>
+
+  <UsingTask AssemblyFile="tools\AutoRest.Build.Tasks.dll" TaskName="ValidateStrongNameSignatureTask" />
+  <UsingTask AssemblyFile="tools\AutoRest.Build.Tasks.dll" TaskName="RegexReplacementTask" />
+
+  <!-- CI build related. -->
+  <PropertyGroup>
+    <!--OnPremiseBuildTasks is not a good name, but CI server is using that, will update across soon-->
+    <CIToolsPath>$(OnPremiseBuildTasks)</CIToolsPath>
+    <OnPremiseBuild Condition=" Exists($(OnPremiseBuildTasks)) ">true</OnPremiseBuild>
+    <OnPremiseBuild Condition=" ! Exists($(OnPremiseBuildTasks)) ">false</OnPremiseBuild>
+  </PropertyGroup>
+  <UsingTask Condition=" $(OnPremiseBuild) " TaskName="CodeSigningTask" AssemblyFile="$(CIToolsPath)\Microsoft.WindowsAzure.Tools.Build.Tasks.OnPremise.dll" />
+  <UsingTask Condition=" $(OnPremiseBuild) " TaskName="CorporateValidation" AssemblyFile="$(CIToolsPath)\Microsoft.WindowsAzure.Tools.Build.Tasks.OnPremise.dll" />
+  <Import Condition=" $(OnPremiseBuild) " Project="$(CIToolsPath)\Microsoft.WindowsAzure.Build.OnPremise.msbuild" />
+
+  <Target Name="Build" DependsOnTargets="RestoreNugetPackages">
+    <CallTarget Targets="BuildMsBuildTask" />
+    <CallTarget Targets="BuildServerPreparation" Condition=" '$(CodeSign)' == 'true' " />
+    <!--
+    The solution file contains configurations for each platform such as Net40-Debug, Net45-Release, etc
+        When invoking msbuild, provide the right configuration name.
+    -->
+    <MSBuild Projects="$(SolutionName)"
+             Properties="Configuration=%(LibraryFxTargetList.Identity)-$(Configuration);Platform=Any CPU;CodeSign=$(CodeSign)"
+             Targets="Build" />
+    <CallTarget Targets="CodeSignBinaries" Condition=" '$(CodeSign)' == 'true' " />
+  </Target>
+
+  <!-- Project files import some targets coming from nuget packages, so need to restore them first to avoid errors
+      such as "The imported project ....build\Microsoft.Bcl.Build.targets was not found. " -->
+  <Target Name="Clean" DependsOnTargets="RestoreNugetPackages">
+    <MSBuild Projects="$(SolutionName)"
+             Properties="Configuration=%(LibraryFxTargetList.Identity)-$(Configuration);Platform=Any CPU"
+             Targets="Clean" />
+    <RemoveDir Directories="$(BinariesFolder)" />
+  </Target>
+
+  <!-- Run all tests. -->
+  <UsingTask TaskName="Xunit.Runner.msbuild.xunit" AssemblyFile="packages\xunit.1.9.2\lib\net20\xunit.runner.msbuild.dll" />
+  <Target Name="Test">
+    <ItemGroup>
+      <!-- Only running test projects compiled for net45. -->
+      <TestDlls Include=".\src\*.Test\bin\net45*\*Test.dll"/>
+    </ItemGroup>
+    <MakeDir Directories="$(LibraryRoot)TestResults"/>
+    <Message Text="%(TestDlls.Filename)" />
+    <xunit Assemblies="@(TestDlls)" Html="$(MSBuildProjectDirectory)\TestResults\xunit.results.html" ContinueOnError="false" />
+  </Target>
+  
+  <PropertyGroup>
+    <!-- This property is used by the continuous intergration job. 
+         Do not remove without first updating the CI job. -->
+    <CorporateScanPaths>$(LibrarySourceFolder)</CorporateScanPaths>
+  </PropertyGroup>
+  <Target Name="SignBinariesForAFxTarget">
+    <PropertyGroup>
+      <!-- Public token of MSSharedLibKey.snk. -->
+      <StrongNameToken Condition=" '$(StrongNameToken)' == '' ">31bf3856ad364e35</StrongNameToken>
+    </PropertyGroup>
+    <GetFrameworkSdkPath>
+      <Output TaskParameter="Path" PropertyName="WindowsSdkPath"/>
+    </GetFrameworkSdkPath>
+    <ItemGroup>
+      <DelaySignedAssembliesToValidate Include="binaries\$(LibraryFxTarget)\unsigned\*.dll" />
+    </ItemGroup>
+    <ValidateStrongNameSignatureTask
+        WindowsSdkPath="$(WindowsSdkPath)"
+        Assembly="%(DelaySignedAssembliesToValidate.Identity)"
+        ExpectedTokenSignature="$(StrongNameToken)"
+        ExpectedDelaySigned="true"
+        ContinueOnError="false" />
+    <CodeSigningTask
+        Description="Microsoft AutoRest"
+        Keywords="Microsoft AutoRest"
+        UnsignedFiles="@(DelaySignedAssembliesToValidate)"
+        DestinationPath="binaries\$(LibraryFxTarget)"
+        SigningLogPath="binaries\$(LibraryFxTarget)\signing.log"
+        ToolsPath="$(CIToolsPath)"
+        Condition="!$(DelaySign)"/>
+    <!-- DelaySigned binaries copied locally for testing and not submitted to codesign service. -->
+    <Copy SourceFiles="@(DelaySignedAssembliesToValidate)" DestinationFolder="binaries\$(LibraryFxTarget)" Condition="$(DelaySign)" />  
+    <ItemGroup>
+      <AfterSignedAssembliesToValidate Include="binaries\$(LibraryFxTarget)\*.dll" />
+    </ItemGroup>
+    <ValidateStrongNameSignatureTask
+        WindowsSdkPath="$(WindowsSdkPath)"
+        Assembly="%(AfterSignedAssembliesToValidate.Identity)"
+        ExpectedTokenSignature="$(StrongNameToken)"
+        ExpectedDelaySigned="false"
+        ContinueOnError="false" 
+        Condition="!$(DelaySign)"/>
+    <RemoveDir Directories="binaries\$(LibraryFxTarget)\unsigned;" ContinueOnError="true" />
+  </Target>
+   
+  <Target Name="CodeSignBinaries">
+    <Error Condition=" !$(OnPremiseBuild) and !$(DelaySign) " Text="No CI tools path available, the code sign will be unable to continue. $(CIToolsPath)" />
+    <Message Text="Code signing" Importance="high" />
+    <MSBuild Projects="$(MSBuildProjectFullPath)"
+             Targets="SignBinariesForAFxTarget"
+             Properties="LibraryFxTarget=%(LibraryFxTargetList.Identity);StrongNameToken=$(StrongNameToken)">    
+    </MSBuild>
+    <CallTarget Targets="ValidateCorporateCompliance" Condition="!$(DelaySign)"/>
+  </Target>
+
+  <!--
+  The build tasks project is used for:
+    providing date-based build numbers,
+    processing regular expressions text replacements (e.g. in NuGet specs),
+    validating strong name signatures.
+  -->
+  <Target Name="BuildMsBuildTask" DependsOnTargets="RestoreNugetPackages">
+    <MSBuild Projects="$(LibraryToolsFolder)\AutoRest.Build.Tasks\AutoRest.Build.Tasks.csproj"
+             Targets="Build"
+             Properties="Configuration=Debug;Platform=AnyCPU"/>
+  </Target>
+
+  <Target Name="RestoreNugetPackages">
+    <Exec Command="$(NuGetCommand) restore $(SolutionName)" ContinueOnError="false" />
+  </Target>
+  
+  <!-- Official releases require tools only available on corp network. -->
+  <Target Name="ValidateCorporateCompliance">
+    <Error Text="This target must be run in an on-premise build server." Condition=" '$(OnPremiseBuild)'=='false' " />
+    <CallTarget Targets="CorporateValidation" />
+  </Target>
+
+  <!-- Build server tasks.  -->
+  <Target Name="BuildServerPreparation">
+    <!-- Log build server information. -->
+    <Message Text="Build Server Information" Importance="high" />
+    <Message Text="Hostname      : $(COMPUTERNAME)" />
+    <Message Text="Build Account : $(USERDOMAIN)\$(USERNAME)" />
+
+    <!-- Log build properties.  -->
+    <Message Text="Build Properties and Variables" Importance="high" />
+    <Message Text="Common Solution    : $(SolutionName)" />
+    <Message Text="Source folder      : $(LibrarySourceFolder)" />
+  </Target>
+
+  <Import Project="$(LibraryToolsFolder)\nuget.targets" />
+
+</Project>

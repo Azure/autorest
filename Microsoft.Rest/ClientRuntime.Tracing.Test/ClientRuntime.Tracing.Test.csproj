@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\xunit.runner.visualstudio.0.99.9-build1021\build\net20\xunit.runner.visualstudio.props" Condition="Exists('..\..\packages\xunit.runner.visualstudio.0.99.9-build1021\build\net20\xunit.runner.visualstudio.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B2FAA0E6-2643-4011-8CFE-BA28BDFFC7E7}</ProjectGuid>
+    <LibraryFxTarget Condition="'$(LibraryFxTarget)' == ''">net45</LibraryFxTarget>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Microsoft.Rest.Common.Tracing.Test</RootNamespace>
+    <AssemblyName>Microsoft.Rest.Common.Tracing.Test</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <NuGetPackageImportStamp>92060766</NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup>
+    <_DiagnosticsTracingPackageName>Microsoft.Diagnostics.Tracing.TraceEvent.1.0.5</_DiagnosticsTracingPackageName>
+    <_DiagnosticsTracingTargets>..\..\packages\$(_DiagnosticsTracingPackageName)\tools\Microsoft.Diagnostics.Tracing.TraceEvent.targets</_DiagnosticsTracingTargets>
+  </PropertyGroup>
+  <Import Project="$(SolutionDir)\tools\AutoRest.Settings.targets" />
+  <ItemGroup>
+    <Reference Include="Microsoft.Diagnostics.Tracing.TraceEvent, Version=1.0.11.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.Diagnostics.Tracing.TraceEvent.1.0.11\lib\net40\Microsoft.Diagnostics.Tracing.TraceEvent.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.extensions">
+      <HintPath>..\..\packages\xunit.extensions.1.9.2\lib\net20\xunit.extensions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EtwTracingInterceptorTest.cs" />
+    <Compile Include="Log4NetTracingInterceptorTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClientRuntime\ClientRuntime.csproj">
+      <Project>{7f524559-93f9-4f3f-9e2c-af41a0c2e6f4}</Project>
+      <Name>ClientRuntime</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ClientRuntime.Etw\ClientRuntime.Etw.csproj">
+      <Project>{50b0a8ce-d290-4eb7-8c6c-16eaab75225e}</Project>
+      <Name>ClientRuntime.Etw</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ClientRuntime.Log4Net\ClientRuntime.Log4Net.csproj">
+      <Project>{2efd6648-39b4-476a-b302-8bc236f5f1b8}</Project>
+      <Name>ClientRuntime.Log4Net</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(_DiagnosticsTracingTargets)" Condition="Exists('$(_DiagnosticsTracingTargets)')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\xunit.runner.visualstudio.0.99.9-build1021\build\net20\xunit.runner.visualstudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\xunit.runner.visualstudio.0.99.9-build1021\build\net20\xunit.runner.visualstudio.props'))" />
+  </Target>
+</Project>
