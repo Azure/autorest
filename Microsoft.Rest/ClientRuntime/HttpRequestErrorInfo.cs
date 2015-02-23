@@ -66,7 +66,6 @@ namespace Microsoft.Rest
 
             // Copy HttpErrorInfo properties
             errorInfo.Content = content;
-            errorInfo.Version = request.Version;
             errorInfo.CopyHeaders(request.Headers);
             errorInfo.CopyHeaders(request.GetContentHeaders());
 

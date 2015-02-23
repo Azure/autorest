@@ -33,11 +33,6 @@ namespace Microsoft.Rest
         public IDictionary<string, IEnumerable<string>> Headers { get; private set; }
 
         /// <summary>
-        /// Exposes a version for the HTTP message.
-        /// </summary>
-        public Version Version { get; protected set; }
-
-        /// <summary>
         /// Copies HTTP message headers to the error object.
         /// </summary>
         /// <param name="headers">Collection of HTTP headers.</param>

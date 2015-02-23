@@ -4,7 +4,7 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microsoft.Rest", "Microsoft.Rest", "{868850B4-1073-41A1-ABA8-A3B465880148}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{7C044DD1-F76B-49A7-A8DF-A5DEEE748EBB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7C044DD1-F76B-49A7-A8DF-A5DEEE748EBB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "git", "git", "{EAC2DE24-42C6-4B7F-ACAB-73C0E113FC40}"
 	ProjectSection(SolutionItems) = preProject

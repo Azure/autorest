@@ -28,14 +28,14 @@ Using Log4Net for AutoRest Generated Clients:
 	  </log4net>
 	</configuration>
 
-2- Configure log4net and start watching. This can be done by
-	A) Adding this line to ```AssemblyInfo.cs```:
+2- Configure log4net in the application that is using a generated client library. This can be done by
+	A) Adding this line to ```AssemblyInfo.cs``` of the application:
 ```csharp 
 [assembly: log4net.Config.XmlConfigurator(Watch = true, ConfigFile = "FileName.ext")]
 ```
-	B) Pass the config file name to ```Log4NetTracingInterceptor``` constructor.
+	B) Passing the config file name to ```Log4NetTracingInterceptor``` constructor.
 
-3- Last step is to register the logger into the CloudContext by having this line called at the start of your application
+3- Last step is to register the logger into the ServiceClientTracing by having this line called at the start of the application:
 ```csharp
-	TracingAdapter.AddTracingInterceptor(new Log4NetTracingInterceptor());
+	ServiceClientTracing.AddTracingInterceptor(new Log4NetTracingInterceptor());
 ```
