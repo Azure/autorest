@@ -8,7 +8,7 @@ using System.Net.Http;
 namespace Microsoft.Rest.Tracing.Etw
 {
     /// <summary>
-    /// Implementation for ICloudTracingInterceptor that raises ETW events.
+    /// Implementation for IServiceClientTracingInterceptor that raises ETW events.
     /// </summary>
     /// <remarks>
     /// To use ETW with the Microsoft AutoRest generated client:

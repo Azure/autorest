@@ -10,7 +10,7 @@ using log4net;
 namespace Microsoft.Rest.Tracing.Log4Net
 {
     /// <summary>
-    /// Implementation for ICloudTracingInterceptor that works using log4net framework.
+    /// Implementation for IServiceClientTracingInterceptor that works using log4net framework.
     /// </summary>
     public class Log4NetTracingInterceptor : IServiceClientTracingInterceptor
     {
