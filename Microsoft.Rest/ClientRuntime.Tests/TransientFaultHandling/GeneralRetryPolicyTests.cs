@@ -5,7 +5,7 @@ using System;
 using Microsoft.Rest.TransientFaultHandling;
 using Xunit;
 
-namespace Microsoft.Rest.Test.TransientFaultHandling
+namespace Microsoft.Rest.ClientRuntime.Tests.TransientFaultHandling
 {
     /// <summary>
     /// Implements general test cases for retry policies.

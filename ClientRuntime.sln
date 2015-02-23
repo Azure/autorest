@@ -18,9 +18,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime.Etw", "Micros
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime.Log4Net", "Microsoft.Rest\ClientRuntime.Log4Net\ClientRuntime.Log4Net.csproj", "{2EFD6648-39B4-476A-B302-8BC236F5F1B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime.Tracing.Test", "Microsoft.Rest\ClientRuntime.Tracing.Test\ClientRuntime.Tracing.Test.csproj", "{B2FAA0E6-2643-4011-8CFE-BA28BDFFC7E7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime.Tracing.Tests", "Microsoft.Rest\ClientRuntime.Tracing.Tests\ClientRuntime.Tracing.Tests.csproj", "{B2FAA0E6-2643-4011-8CFE-BA28BDFFC7E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime.Test", "Microsoft.Rest\ClientRuntime.Test\ClientRuntime.Test.csproj", "{CB18ACEB-2825-4884-91FA-05C31AC779FE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime.Tests", "Microsoft.Rest\ClientRuntime.Tests\ClientRuntime.Tests.csproj", "{CB18ACEB-2825-4884-91FA-05C31AC779FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

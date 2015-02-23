@@ -55,8 +55,8 @@ Supported Portable Library Platforms:
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="Common\**\*.cs" target="src\Common" />
-    <file src="Common\Properties\*.resx" target="src\Common\Properties" />
+    <file src="ClientRuntime\**\*.cs" target="src\Common" />
+    <file src="ClientRuntime\Properties\*.resx" target="src\Common\Properties" />
     <file src="..\binaries\portable\Microsoft.Rest.ClientRuntime.dll" target="lib\portable-net403+win+wpa81" />
     <file src="..\binaries\portable\Microsoft.Rest.ClientRuntime.pdb" target="lib\portable-net403+win+wpa81" />
     <file src="..\binaries\portable\Microsoft.Rest.ClientRuntime.xml" target="lib\portable-net403+win+wpa81" />

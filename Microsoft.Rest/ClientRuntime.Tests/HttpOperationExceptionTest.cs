@@ -7,7 +7,7 @@ using System.Net.Http;
 using Xunit;
 using Xunit.Extensions;
 
-namespace Microsoft.Rest.Test
+namespace Microsoft.Rest.ClientRuntime.Tests
 {
     public class HttpOperationExceptionTest
     {

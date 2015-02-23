@@ -4,11 +4,11 @@
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using Microsoft.Rest.Test.Fakes;
+using Microsoft.Rest.ClientRuntime.Tests.Fakes;
 using Microsoft.Rest.TransientFaultHandling;
 using Xunit;
 
-namespace Microsoft.Rest.Test
+namespace Microsoft.Rest.ClientRuntime.Tests
 {
     public class ServiceClientTest
     {

@@ -5,13 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.Rest.Tracing.Etw;
 using Microsoft.Diagnostics.Tracing;
 using Microsoft.Diagnostics.Tracing.Session;
+using Microsoft.Rest.Tracing.Etw;
 using Xunit;
 using Xunit.Extensions;
 
-namespace Microsoft.Rest.Tracing.Test
+namespace Microsoft.Rest.ClientRuntime.Tracing.Tests
 {
     class EtwTracingInterceptorTest : IDisposable
     {

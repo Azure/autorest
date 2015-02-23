@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Microsoft.Rest.Test.Fakes
+namespace Microsoft.Rest.ClientRuntime.Tests.Fakes
 {
     public class FakeServiceClient : ServiceClient<FakeServiceClient>
     {

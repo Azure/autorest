@@ -3,7 +3,7 @@
 
 using Xunit;
 
-namespace Microsoft.Rest.Test.Internals
+namespace Microsoft.Rest.ClientRuntime.Tests.Internals
 {
     public class LazyDictionaryTest
     {

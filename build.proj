@@ -106,7 +106,7 @@
   <Target Name="Test">
     <ItemGroup>
       <!-- Only running test projects compiled for net45. -->
-      <TestDlls Include=".\src\*.Test\bin\net45*\*Test.dll"/>
+      <TestDlls Include=".\**\*.Tests\bin\net45*\*Tests.dll"/>
     </ItemGroup>
     <MakeDir Directories="$(LibraryRoot)TestResults"/>
     <Message Text="%(TestDlls.Filename)" />

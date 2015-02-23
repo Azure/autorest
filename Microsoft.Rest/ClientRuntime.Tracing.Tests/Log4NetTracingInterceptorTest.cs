@@ -8,7 +8,7 @@ using System.Net.Http;
 using Microsoft.Rest.Tracing.Log4Net;
 using Xunit;
 
-namespace Microsoft.Rest.Tracing.Test
+namespace Microsoft.Rest.ClientRuntime.Tracing.Tests
 {
     public class Log4NetTracingInterceptorTest
     {

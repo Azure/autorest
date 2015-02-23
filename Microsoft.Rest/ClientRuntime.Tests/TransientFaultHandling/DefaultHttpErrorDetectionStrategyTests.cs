@@ -7,7 +7,7 @@ using Microsoft.Rest.TransientFaultHandling;
 using Xunit;
 using Xunit.Extensions;
 
-namespace Microsoft.Rest.Test.TransientFaultHandling
+namespace Microsoft.Rest.ClientRuntime.Tests.TransientFaultHandling
 {
     /// <summary>
     /// Implements general test cases for http error detections.

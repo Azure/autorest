@@ -5,10 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using Microsoft.Rest;
 using Xunit;
 
-namespace Microsoft.Azure.Common.Tracing.Etw.Test
+namespace Microsoft.Rest.ClientRuntime.Tests.Tracing
 {
     public class CloudTracingExtensionsTest
     {

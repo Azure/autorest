@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-  <Import Project="$(LibrarySourceFolder)\*\*.nuget.proj"/>
+  <Import Project="$(LibrarySourceFolder)\**\*.nuget.proj"/>
 
   <PropertyGroup>
     <NuGetVerbosity>normal</NuGetVerbosity>
@@ -45,11 +45,11 @@
     
     <Message Text="Generating NuGet library &amp; symbols + source packages" Importance="high" />
     <Exec Condition=" '%(SdkNuGetPackage.SkipSymbolSourcePackage)' != 'true' "
-          Command="$(NuGetCommand) pack -BasePath .\src\ -Verbosity $(NuGetVerbosity) &quot;binaries\packages\specs\%(SdkNuGetPackage.Identity).nuspec&quot; -Version %(SdkNuGetPackage.PackageVersion) -OutputDirectory &quot;$(PackageOutputDir)&quot; -Symbols" />
+          Command="$(NuGetCommand) pack -BasePath &quot;%(SdkNuGetPackage.Folder)..&quot; -Verbosity $(NuGetVerbosity) &quot;binaries\packages\specs\%(SdkNuGetPackage.Identity).nuspec&quot; -Version %(SdkNuGetPackage.PackageVersion) -OutputDirectory &quot;$(PackageOutputDir)&quot; -Symbols" />
 
     <Message Text="Generating NuGet packages without symbol + source packages into $(PackageOutputDir)" Importance="high" />
     <Exec Condition=" '%(SdkNuGetPackage.SkipSymbolSourcePackage)' == 'true' "
-          Command="$(NuGetCommand) pack -BasePath .\src\ -Verbosity $(NuGetVerbosity) &quot;binaries\packages\specs\%(SdkNuGetPackage.Identity).nuspec&quot; -Version %(SdkNuGetPackage.PackageVersion) -OutputDirectory &quot;$(PackageOutputDir)&quot;" />
+          Command="$(NuGetCommand) pack -BasePath &quot;%(SdkNuGetPackage.Folder)..&quot; -Verbosity $(NuGetVerbosity) &quot;binaries\packages\specs\%(SdkNuGetPackage.Identity).nuspec&quot; -Version %(SdkNuGetPackage.PackageVersion) -OutputDirectory &quot;$(PackageOutputDir)&quot;" />
   </Target>
 
   <!--

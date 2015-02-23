@@ -9,12 +9,30 @@
     <LibraryFxTarget Condition="'$(LibraryFxTarget)' == ''">net45</LibraryFxTarget>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Microsoft.Rest.Common.Test</RootNamespace>
-    <AssemblyName>Microsoft.Rest.Common.Test</AssemblyName>
+    <RootNamespace>Microsoft.Rest.ClientRuntime.Tests</RootNamespace>
+    <AssemblyName>Microsoft.Rest.ClientRuntime.Tests</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <NuGetPackageImportStamp>844cdc5f</NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Net45-Debug'">
+    <DocumentationFile>bin\Net45-Debug\Microsoft.Rest.ClientRuntime.Tests.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Net45-Release'">
+    <DocumentationFile>bin\Net45-Release\Microsoft.Rest.ClientRuntime.Tests.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Net40-Debug'">
+    <DocumentationFile>bin\Net40-Debug\Microsoft.Rest.ClientRuntime.Tests.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Net40-Release'">
+    <DocumentationFile>bin\Net40-Release\Microsoft.Rest.ClientRuntime.Tests.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Portable-Debug'">
+    <DocumentationFile>bin\Portable-Debug\Microsoft.Rest.ClientRuntime.Tests.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Portable-Release'">
+    <DocumentationFile>bin\Portable-Release\Microsoft.Rest.ClientRuntime.Tests.xml</DocumentationFile>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\tools\AutoRest.Settings.targets" />
   <ItemGroup>
