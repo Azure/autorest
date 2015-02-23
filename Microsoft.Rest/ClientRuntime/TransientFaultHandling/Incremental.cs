@@ -16,6 +16,11 @@ namespace Microsoft.Rest.TransientFaultHandling
         private readonly int _retryCount;
 
         /// <summary>
+        /// Represents the default time increment between retry attempts in the progressive delay policy.
+        /// </summary>
+        public static readonly TimeSpan DefaultRetryIncrement = TimeSpan.FromSeconds(1.0);
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Incremental"/> class. 
         /// </summary>
         public Incremental()

@@ -28,32 +28,9 @@ namespace Microsoft.Rest.TransientFaultHandling
         public static readonly int DefaultClientRetryCount = 10;
 
         /// <summary>
-        /// Represents the default amount of time used when calculating a random delta in the exponential 
-        /// delay between retries.
-        /// </summary>
-        public static readonly TimeSpan DefaultClientBackoff = TimeSpan.FromSeconds(10.0);
-
-        /// <summary>
-        /// Represents the default maximum amount of time used when calculating the exponential 
-        /// delay between retries.
-        /// </summary>
-        public static readonly TimeSpan DefaultMaxBackoff = TimeSpan.FromSeconds(30.0);
-
-        /// <summary>
-        /// Represents the default minimum amount of time used when calculating the exponential 
-        /// delay between retries.
-        /// </summary>
-        public static readonly TimeSpan DefaultMinBackoff = TimeSpan.FromSeconds(1.0);
-
-        /// <summary>
         /// Represents the default interval between retries.
         /// </summary>
         public static readonly TimeSpan DefaultRetryInterval = TimeSpan.FromSeconds(1.0);
-
-        /// <summary>
-        /// Represents the default time increment between retry attempts in the progressive delay policy.
-        /// </summary>
-        public static readonly TimeSpan DefaultRetryIncrement = TimeSpan.FromSeconds(1.0);
 
         /// <summary>
         /// Represents the default flag indicating whether the first retry attempt will be made immediately,
@@ -62,15 +39,6 @@ namespace Microsoft.Rest.TransientFaultHandling
         public static readonly bool DefaultFirstFastRetry = true;
 
         #endregion
-
-        private static RetryStrategy noRetry = new FixedIntervalRetryStrategy(0, DefaultRetryInterval);
-        private static RetryStrategy defaultFixed = new FixedIntervalRetryStrategy(DefaultClientRetryCount, 
-            DefaultRetryInterval);
-        private static RetryStrategy defaultProgressive = new Incremental(DefaultClientRetryCount, DefaultRetryInterval, 
-            DefaultRetryIncrement);
-        private static RetryStrategy defaultExponential = new ExponentialBackoffRetryStrategy(DefaultClientRetryCount, 
-            DefaultMinBackoff, DefaultMaxBackoff, DefaultClientBackoff);
-
         /// <summary>
         /// Initializes a new instance of the <see cref="RetryStrategy"/> class. 
         /// </summary>
@@ -81,46 +49,6 @@ namespace Microsoft.Rest.TransientFaultHandling
         {
             this.Name = name;
             this.FastFirstRetry = firstFastRetry;
-        }
-
-        /// <summary>
-        /// Returns a default policy that performs no retries, but invokes the action only once.
-        /// </summary>
-        public static RetryStrategy NoRetry
-        {
-            get { return noRetry; }
-        }
-
-        /// <summary>
-        /// Returns a default policy that implements a fixed retry interval configured with the 
-        /// <see cref="RetryStrategy.DefaultClientRetryCount"/> and <see cref="RetryStrategy.DefaultRetryInterval"/> parameters.
-        /// The default retry policy treats all caught exceptions as transient errors.
-        /// </summary>
-        public static RetryStrategy DefaultFixed
-        {
-            get { return defaultFixed; }
-        }
-
-        /// <summary>
-        /// Returns a default policy that implements a progressive retry interval configured with the 
-        /// <see cref="RetryStrategy.DefaultClientRetryCount"/>, <see cref="RetryStrategy.DefaultRetryInterval"/>, 
-        /// and <see cref="RetryStrategy.DefaultRetryIncrement"/> parameters.
-        /// The default retry policy treats all caught exceptions as transient errors.
-        /// </summary>
-        public static RetryStrategy DefaultProgressive
-        {
-            get { return defaultProgressive; }
-        }
-
-        /// <summary>
-        /// Returns a default policy that implements a random exponential retry interval configured with the 
-        /// <see cref="RetryStrategy.DefaultClientRetryCount"/>, <see cref="RetryStrategy.DefaultMinBackoff"/>, 
-        /// <see cref="RetryStrategy.DefaultMaxBackoff"/>, and <see cref="RetryStrategy.DefaultClientBackoff"/> parameters.
-        /// The default retry policy treats all caught exceptions as transient errors.
-        /// </summary>
-        public static RetryStrategy DefaultExponential
-        {
-            get { return defaultExponential; }
         }
 
         /// <summary>

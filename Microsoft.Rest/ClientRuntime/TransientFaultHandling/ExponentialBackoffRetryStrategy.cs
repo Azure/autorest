@@ -15,6 +15,25 @@ namespace Microsoft.Rest.TransientFaultHandling
         private readonly TimeSpan _maxBackoff;
         private readonly TimeSpan _deltaBackoff;
 
+
+        /// <summary>
+        /// Represents the default amount of time used when calculating a random delta in the exponential 
+        /// delay between retries.
+        /// </summary>
+        public static readonly TimeSpan DefaultClientBackoff = TimeSpan.FromSeconds(10.0);
+
+        /// <summary>
+        /// Represents the default maximum amount of time used when calculating the exponential 
+        /// delay between retries.
+        /// </summary>
+        public static readonly TimeSpan DefaultMaxBackoff = TimeSpan.FromSeconds(30.0);
+
+        /// <summary>
+        /// Represents the default minimum amount of time used when calculating the exponential 
+        /// delay between retries.
+        /// </summary>
+        public static readonly TimeSpan DefaultMinBackoff = TimeSpan.FromSeconds(1.0);
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ExponentialBackoffRetryStrategy"/> class. 
         /// </summary>
