@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <LibraryFxTarget Condition="'$(LibraryFxTarget)' == ''">net45</LibraryFxTarget>
+    <ProjectGuid>{7F524559-93F9-4F3F-9E2C-AF41A0C2E6F4}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Microsoft.Rest</RootNamespace>
+    <AssemblyName>Microsoft.Rest.ClientRuntime</AssemblyName>
+    <OutputType>Library</OutputType>
+    <RestorePackages>true</RestorePackages>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NuGetPackageImportStamp>d6eb8bcd</NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\Microsoft.Rest.ClientRuntime.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Net45-Debug|AnyCPU'">
+    <DocumentationFile>bin\Net45-Debug\Microsoft.Rest.ClientRuntime.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Net45-Release|AnyCPU'">
+    <DocumentationFile>bin\Net45-Release\Microsoft.Rest.ClientRuntime.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Net40-Debug|AnyCPU'">
+    <DocumentationFile>bin\Net40-Debug\Microsoft.Rest.ClientRuntime.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Net40-Release|AnyCPU'">
+    <DocumentationFile>bin\Net40-Release\Microsoft.Rest.ClientRuntime.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Portable-Debug|AnyCPU'">
+    <DocumentationFile>bin\Portable-Debug\Microsoft.Rest.ClientRuntime.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Portable-Release|AnyCPU'">
+    <DocumentationFile>bin\Portable-Release\Microsoft.Rest.ClientRuntime.xml</DocumentationFile>
+  </PropertyGroup>
+  <Import Project="$(SolutionDir)\tools\AutoRest.Settings.targets" />
+  <ItemGroup>
+    <Compile Include="BasicAuthenticationCredentials.cs" />
+    <Compile Include="HttpErrorInfo.cs" />
+    <Compile Include="HttpRequestErrorInfo.cs" />
+    <Compile Include="HttpResponseErrorInfo.cs" />
+    <Compile Include="HttpExtensions.cs" />
+    <Compile Include="IDeserializationModel.cs" />
+    <Compile Include="TypeConversion.cs" />
+    <Compile Include="ILazyCollection.cs" />
+    <Compile Include="LazyDictionary.cs" />
+    <Compile Include="LazyList.cs" />
+    <Compile Include="HttpOperationResponse.cs" />
+    <Compile Include="ServiceClientCredentials.cs" />
+    <Compile Include="RetryDelegatingHandler.cs" />
+    <Compile Include="PlatformTaskEx.cs" />
+    <Compile Include="ServiceClientTracing.cs" />
+    <Compile Include="ServiceClient.cs" />
+    <Compile Include="IServiceOperations.cs" />
+    <Compile Include="HttpOperationException.cs" />
+    <Compile Include="IServiceClientTracingInterceptor.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TransientFaultHandling\AsyncExecution.cs" />
+    <Compile Include="TransientFaultHandling\HttpStatusCodeErrorDetectionStrategy.cs" />
+    <Compile Include="TransientFaultHandling\ExponentialBackoffRetryStrategy.cs" />
+    <Compile Include="TransientFaultHandling\FixedIntervalRetryStrategy.cs" />
+    <Compile Include="TransientFaultHandling\Guard.cs" />
+    <Compile Include="TransientFaultHandling\HttpRequestExceptionWithStatus.cs" />
+    <Compile Include="TransientFaultHandling\Incremental.cs" />
+    <Compile Include="TransientFaultHandling\ITransientErrorDetectionStrategy.cs" />
+    <Compile Include="TransientFaultHandling\RetryingEventArgs.cs" />
+    <Compile Include="TransientFaultHandling\RetryManager.cs" />
+    <Compile Include="TransientFaultHandling\RetryPolicy.cs" />
+    <Compile Include="TransientFaultHandling\RetryPolicy.Generic.cs" />
+    <Compile Include="TransientFaultHandling\RetryStrategy.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Microsoft.Rest.ClientRuntime.nuget.proj" />
+    <None Include="Microsoft.Rest.ClientRuntime.nuspec">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\..\tools\CustomDictionary.xml">
+      <Link>CustomDictionary.xml</Link>
+    </CodeAnalysisDictionary>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" Condition=" '$(LibraryFxTarget)' == 'portable' " />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" Condition=" '$(LibraryFxTarget)' != 'portable' " />
+  <Import Project="$(CommonNugetPackageFolder)\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition=" '$(LibraryFxTarget)' != 'net45' " />
+</Project>
