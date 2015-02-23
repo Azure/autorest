@@ -13,53 +13,6 @@ namespace Microsoft.Rest.TransientFaultHandling
     /// </summary>
     public class RetryPolicy
     {
-        private static readonly RetryPolicy noRetry = new RetryPolicy(new TransientErrorIgnoreStrategy(), 
-            RetryStrategy.NoRetry);
-        private static readonly RetryPolicy defaultFixed = new RetryPolicy(new TransientErrorCatchAllStrategy(), 
-            RetryStrategy.DefaultFixed);
-        private static readonly RetryPolicy defaultProgressive = new RetryPolicy(new TransientErrorCatchAllStrategy(), 
-            RetryStrategy.DefaultProgressive);
-        private static readonly RetryPolicy defaultExponential = new RetryPolicy(new TransientErrorCatchAllStrategy(), 
-            RetryStrategy.DefaultExponential);
-
-        /// <summary>
-        /// Returns a default policy that performs no retries, but invokes the action only once.
-        /// </summary>
-        public static RetryPolicy NoRetry 
-        {
-            get { return noRetry; }
-        }
-
-        /// <summary>
-        /// Returns a default policy that implements a fixed retry interval configured with the default 
-        /// <see cref="FixedIntervalRetryStrategy"/> retry strategy.
-        /// The default retry policy treats all caught exceptions as transient errors.
-        /// </summary>
-        public static RetryPolicy DefaultFixed
-        {
-            get { return defaultFixed; }
-        }
-
-        /// <summary>
-        /// Returns a default policy that implements a progressive retry interval configured with the default 
-        /// <see cref="Incremental"/> retry strategy.
-        /// The default retry policy treats all caught exceptions as transient errors.
-        /// </summary>
-        public static RetryPolicy DefaultProgressive
-        {
-            get { return defaultProgressive; }
-        }
-
-        /// <summary>
-        /// Returns a default policy that implements a random exponential retry interval configured with the default 
-        /// <see cref="FixedIntervalRetryStrategy"/> retry strategy.
-        /// The default retry policy treats all caught exceptions as transient errors.
-        /// </summary>
-        public static RetryPolicy DefaultExponential
-        {
-            get { return defaultExponential; }
-        }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="RetryPolicy"/> class with the specified number of retry 
         /// attempts and parameters defining the progressive delay between retries.
