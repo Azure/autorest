@@ -36,7 +36,6 @@
   </PropertyGroup>
   <Import Project="$(SolutionDir)\tools\AutoRest.Settings.targets" />
   <ItemGroup>
-    <Compile Include="HttpOperationExceptionTest.cs" />
     <Compile Include="Fakes\AddHeaderResponseDelegatingHandler.cs" />
     <Compile Include="Fakes\BadResponseDelegatingHandler.cs" />
     <Compile Include="Fakes\FakeHttpHandler.cs" />

@@ -39,9 +39,6 @@
   <Import Project="$(SolutionDir)\tools\AutoRest.Settings.targets" />
   <ItemGroup>
     <Compile Include="BasicAuthenticationCredentials.cs" />
-    <Compile Include="HttpErrorInfo.cs" />
-    <Compile Include="HttpRequestErrorInfo.cs" />
-    <Compile Include="HttpResponseErrorInfo.cs" />
     <Compile Include="HttpExtensions.cs" />
     <Compile Include="IDeserializationModel.cs" />
     <Compile Include="TypeConversion.cs" />

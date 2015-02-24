@@ -1,8 +1,10 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
 
 namespace Microsoft.Rest
 {
@@ -12,26 +14,18 @@ namespace Microsoft.Rest
     public class HttpOperationResponse<T>
     {
         /// <summary>
-        /// Initializes a new instance of HttpOperationResponse.
+        /// Gets information about the associated HTTP request.
         /// </summary>
-        public HttpOperationResponse()
-        {
-            Headers = new Dictionary<string, string>();
-        }
+        public HttpRequestMessage Request { get; protected set; }
 
         /// <summary>
-        /// Gets the collection of HTTP response headers.
+        /// Gets information about the associated HTTP response.
         /// </summary>
-        public IDictionary<string, string> Headers { get; private set; }
+        public HttpResponseMessage Response { get; protected set; }
 
         /// <summary>
         /// Gets or sets the response object.
         /// </summary>
         public T Body { get; set; }
-
-        /// <summary>
-        /// Gets or sets the status code of the HTTP response.
-        /// </summary>
-        public HttpStatusCode StatusCode { get; set; }
     }
 }
