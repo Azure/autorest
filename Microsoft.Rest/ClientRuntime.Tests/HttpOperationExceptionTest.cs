@@ -5,7 +5,6 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using Xunit;
-using Xunit.Extensions;
 
 namespace Microsoft.Rest.ClientRuntime.Tests
 {

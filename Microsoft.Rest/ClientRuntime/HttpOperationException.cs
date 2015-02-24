@@ -1,12 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using Microsoft.Rest.Properties;
 using System;
 using System.Net.Http;
-using System.Runtime.CompilerServices;
-using System.Xml.Linq;
-using Microsoft.Rest.Properties;
-using Newtonsoft.Json.Linq;
 
 namespace Microsoft.Rest
 {
