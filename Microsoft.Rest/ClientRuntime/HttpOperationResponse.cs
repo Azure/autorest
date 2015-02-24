@@ -1,38 +1,31 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
+using System.Collections.Generic;
 using System.Net;
-using System.Xml.Linq;
-using Newtonsoft.Json.Linq;
+using System.Net.Http;
 
 namespace Microsoft.Rest
 {
     /// <summary>
     /// Represents the base return type of all ServiceClient REST operations.
     /// </summary>
-    public class HttpOperationResponse : IDeserializationModel
+    public class HttpOperationResponse<T>
     {
         /// <summary>
-        /// Exposes the HTTP status code.
+        /// Gets information about the associated HTTP request.
         /// </summary>
-        public HttpStatusCode StatusCode { get; set; }
+        public HttpRequestMessage Request { get; protected set; }
 
         /// <summary>
-        /// In an extending class, deserialize the instance with data from the given Xml Container
+        /// Gets information about the associated HTTP response.
         /// </summary>
-        /// <param name="inputObject">The Xml Container containing the serialized data for this instance</param>
-        public virtual void DeserializeXml(XContainer inputObject)
-        {
-            
-        }
+        public HttpResponseMessage Response { get; protected set; }
 
         /// <summary>
-        /// In an extending class, deserialize the instance with data from the given Json Token
+        /// Gets or sets the response object.
         /// </summary>
-        /// <param name="inputObject">The Json Token that contains serialized data for this instance</param>
-        public virtual void DeserializeJson(JToken inputObject)
-        {
-            
-        }
+        public T Body { get; set; }
     }
 }

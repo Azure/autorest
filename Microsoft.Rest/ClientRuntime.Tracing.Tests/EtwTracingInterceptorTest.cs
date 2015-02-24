@@ -1,13 +1,13 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using Microsoft.Diagnostics.Tracing;
+using Microsoft.Diagnostics.Tracing.Session;
+using Microsoft.Rest.Tracing.Etw;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.Diagnostics.Tracing;
-using Microsoft.Diagnostics.Tracing.Session;
-using Microsoft.Rest.Tracing.Etw;
 using Xunit;
 using Xunit.Extensions;
 
@@ -239,8 +239,11 @@ namespace Microsoft.Rest.ClientRuntime.Tracing.Tests
 
             eventSession.Source.Dynamic.All += eventDelegate;
 
+#if NET45
             var task = Task.Run(() => eventSession.Source.Process());
-
+#else
+            var task = TaskEx.Run(() => eventSession.Source.Process());
+#endif
             doAction();
 
             task.Wait();

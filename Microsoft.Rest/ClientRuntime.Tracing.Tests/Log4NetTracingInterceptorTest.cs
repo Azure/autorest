@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using Microsoft.Rest.Tracing.Log4Net;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
-using Microsoft.Rest.Tracing.Log4Net;
 using Xunit;
 
 namespace Microsoft.Rest.ClientRuntime.Tracing.Tests
@@ -87,7 +87,7 @@ namespace Microsoft.Rest.ClientRuntime.Tracing.Tests
         {
             Log4NetTracingInterceptor logger = new Log4NetTracingInterceptor("app.config");
             string invocationId = "12345";
-            HttpOperationException exception = HttpOperationException.Create("I'm a cloud exception!");
+            var exception = new HttpOperationException<string>("I'm a cloud exception!" );
             string expected = string.Format("ERROR - invocationId: {0}\r\n{1}\r\n", invocationId, exception.ToString());
 
             logger.Error(invocationId, exception);
