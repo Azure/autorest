@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Net;
 using AutoRest02;
+using Microsoft.Rest;
 
 namespace SampleApp
 {
@@ -19,7 +19,7 @@ namespace SampleApp
                 Console.WriteLine(e.Message);
             }
 
-            Console.WriteLine("Enter to exit.");
+            Console.WriteLine("Any key to exit.");
             Console.ReadLine();
         }
     }
