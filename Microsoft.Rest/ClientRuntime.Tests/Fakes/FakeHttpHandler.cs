@@ -31,7 +31,11 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Fakes
                 NumberOfTimesFailedSoFar++;
             }
 
+#if NET45
             return Task.Run(() => response);
+#else
+            return TaskEx.Run(() => response);
+#endif
         }
     }
 }

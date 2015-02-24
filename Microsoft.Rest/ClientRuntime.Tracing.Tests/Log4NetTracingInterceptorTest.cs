@@ -87,7 +87,7 @@ namespace Microsoft.Rest.ClientRuntime.Tracing.Tests
         {
             Log4NetTracingInterceptor logger = new Log4NetTracingInterceptor("app.config");
             string invocationId = "12345";
-            HttpOperationException exception = HttpOperationException.Create("I'm a cloud exception!");
+            HttpOperationException exception = HttpOperationException<object>.Create(null, null, null, "I'm a cloud exception!", null);
             string expected = string.Format("ERROR - invocationId: {0}\r\n{1}\r\n", invocationId, exception.ToString());
 
             logger.Error(invocationId, exception);

@@ -239,8 +239,11 @@ namespace Microsoft.Rest.ClientRuntime.Tracing.Tests
 
             eventSession.Source.Dynamic.All += eventDelegate;
 
+#if NET45
             var task = Task.Run(() => eventSession.Source.Process());
-
+#else
+            var task = TaskEx.Run(() => eventSession.Source.Process());
+#endif
             doAction();
 
             task.Wait();

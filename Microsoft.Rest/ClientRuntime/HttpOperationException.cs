@@ -13,7 +13,7 @@ namespace Microsoft.Rest
     /// <summary>
     /// Exception thrown for an invalid response with custom error information.
     /// </summary>
-    public class HttpOperationException<T> : HttpOperationException where T : IDeserializationModel, new()
+    public class HttpOperationException<T> : HttpOperationException where T : new()
     {
         /// <summary>
         /// Custom error information parsed from error response 
@@ -46,27 +46,19 @@ namespace Microsoft.Rest
         /// <param name="requestContent">The HTTP request content.</param>
         /// <param name="response">The HTTP response.</param>
         /// <param name="responseContent">The HTTP response content.</param>
-        /// <param name="innerException">Optional inner exception.</param>
+        /// <param name="errorModel">The deserialized body of the error response.</param>
         /// <returns>A HttpOperationException representing the failure.</returns>
-        public static new HttpOperationException<T> Create(
+        public static HttpOperationException<T> Create(
             HttpRequestMessage request,
             string requestContent,
             HttpResponseMessage response,
             string responseContent,
-            Exception innerException = null)
+            T errorModel)
         {
-            T errorModel = default(T);
-            if (responseContent != null)
-            {
-                TryParseErrorModel(responseContent, out errorModel);
-
-            }
-
-            return Create(request, requestContent, response, responseContent, 
-                errorModel, innerException);
+            return Create(request, requestContent, response, responseContent, errorModel, null);
         }
 
-         /// <summary>
+        /// <summary>
         /// Create a HttpOperationException from a failed response.
         /// </summary>
         /// <param name="request">The HTTP request.</param>
@@ -76,12 +68,13 @@ namespace Microsoft.Rest
         /// <param name="errorModel">The deserialized body of the error response.</param>
         /// <param name="innerException">Optional inner exception.</param>
         /// <returns>A HttpOperationException representing the failure.</returns>
-       public static HttpOperationException<T> Create(HttpRequestMessage request,
+        public static HttpOperationException<T> Create(
+            HttpRequestMessage request,
             string requestContent,
             HttpResponseMessage response,
             string responseContent,
             T errorModel,
-            Exception innerException = null)
+            Exception innerException)
         {
             // Get the most descriptive message that we can
             string exceptionMessage;
@@ -121,81 +114,10 @@ namespace Microsoft.Rest
             exception.Model = errorModel;
             return exception;
         }
-
-        /// <summary>
-        /// Try to parse an error response body as Json or Xml.
-        /// </summary>
-        /// <param name="responseContent">The response body.</param>
-        /// <param name="errorModel">The model, if parsing is successful.</param>
-        /// <returns>True if the model was successfully parsed, otherwise false</returns>
-        public static bool TryParseErrorModel(string responseContent, out T errorModel)
-        {
-            return TryParseJsonModel(responseContent, out errorModel)
-                || TryParseXmlModel(responseContent, out errorModel);
-        }
-
-        /// <summary>
-        /// Try to parse an error response body as Json.
-        /// </summary>
-        /// <param name="responseContent">The response body.</param>
-        /// <param name="errorModel">The model, if parsing was successful.</param>
-        /// <returns>True if the content was successfully parsed, otherwise false.</returns>
-        public static bool TryParseJsonModel(string responseContent, out T errorModel)
-        {
-            try
-            {
-                var jsonToken = JToken.Parse(responseContent);
-                errorModel = new T();
-                errorModel.DeserializeJson(jsonToken);
-                return true;
-            }
-            catch(Exception)
-            {
-            }
-
-           errorModel = default(T);
-           return false;
-        }
-
-        /// <summary>
-        /// Try to parse an error response body as Xml.
-        /// </summary>
-        /// <param name="responseContent">The response body.</param>
-        /// <param name="errorModel">The model, if parsing was successful.</param>
-        /// <returns>True if the content was successfully parsed, otherwise false.</returns>
-        public static bool TryParseXmlModel(string responseContent, out T errorModel)
-        {
-            try
-            {
-                var xmlDocument = System.Xml.Linq.XDocument.Parse(responseContent);
-                errorModel = new T();
-                errorModel.DeserializeXml(xmlDocument);
-                return true;
-            }
-            catch(Exception)
-            {
-            }
-
-            errorModel = default(T);
-            return false;
-        }
-
-
     }
 
     public class HttpOperationException : Exception
     {
-        private class NullErrorModel : IDeserializationModel
-        {
-
-            public void DeserializeXml(XContainer inputObject)
-            {
-            }
-
-            public void DeserializeJson(JToken inputObject)
-            {
-            }
-        }
         /// <summary>
         /// Gets information about the associated HTTP request.
         /// </summary>
@@ -224,39 +146,5 @@ namespace Microsoft.Rest
             : base(message, innerException)
         {
         }
-
-        /// <summary>
-        /// Create a HttpOperationException from a failed response.
-        /// </summary>
-        /// <param name="request">The HTTP request.</param>
-        /// <param name="requestContent">The HTTP request content.</param>
-        /// <param name="response">The HTTP response.</param>
-        /// <param name="responseContent">The HTTP response content.</param>
-        /// <param name="innerException">Optional inner exception.</param>
-        /// <returns>A HttpOperationException representing the failure.</returns>
-        public static HttpOperationException Create(
-            HttpRequestMessage request,
-            string requestContent,
-            HttpResponseMessage response,
-            string responseContent,
-            Exception innerException = null)
-        {
-            return HttpOperationException<NullErrorModel>.Create(request, requestContent, response, responseContent,
-                innerException);
-        }
-
-        /// <summary>
-        /// Create a HttpOperationException from a response string.
-        /// </summary>
-        /// <param name="responseContent">The HTTP response content.</param>
-        /// <param name="innerException">Optional inner exception.</param>
-        /// <returns>A HttpOperationException representing the failure.</returns>
-        public static HttpOperationException Create(
-            string responseContent,
-            Exception innerException = null)
-        {
-            return HttpOperationException<NullErrorModel>.Create(null, null, null, responseContent, innerException);
-        }
-
     }
 }
