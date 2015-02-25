@@ -46,7 +46,7 @@
   <PropertyGroup>
     <SolutionName>ClientRuntime.sln</SolutionName>
     <LibraryRoot>$(MSBuildThisFileDirectory)</LibraryRoot>
-    <LibrarySourceFolder>$(LibraryRoot)</LibrarySourceFolder>
+    <LibrarySourceFolder>$(LibraryRoot)Microsoft.Rest</LibrarySourceFolder>
     <LibraryToolsFolder>$(LibraryRoot)tools</LibraryToolsFolder>
     <BinariesFolder>$(LibraryRoot)binaries</BinariesFolder>
     <PackageOutputDir>$(BinariesFolder)\packages</PackageOutputDir>
@@ -115,7 +115,8 @@
   
   <PropertyGroup>
     <!-- This property is used by the continuous intergration job. 
-         Do not remove without first updating the CI job. -->
+         Do not remove without first updating the CI job. Also due to a known limitation, 
+         make sure pathes do not end with a backslash -->
     <CorporateScanPaths>$(LibrarySourceFolder)</CorporateScanPaths>
   </PropertyGroup>
   <Target Name="SignBinariesForAFxTarget">
