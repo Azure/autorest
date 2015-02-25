@@ -37,11 +37,21 @@ namespace Microsoft.Rest
         /// <summary>
         /// Initializes a new instance of the ServiceClient class.
         /// </summary>
-        protected ServiceClient(): this(CreateRootHandler())
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Reliability", 
+            "CA2000:Dispose objects before losing scope",
+            Justification="The created objects should be disposed on caller's side")]
+        protected ServiceClient()
+            : this(CreateRootHandler())
         {
         }
 
-        protected ServiceClient(params DelegatingHandler[] handlers) : this(CreateRootHandler(), handlers)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Reliability", 
+            "CA2000:Dispose objects before losing scope", 
+            Justification="The created objects should be disposed on caller's side")]
+        protected ServiceClient(params DelegatingHandler[] handlers) 
+            : this(CreateRootHandler(), handlers)
         {
         }
 
@@ -78,37 +88,22 @@ namespace Microsoft.Rest
         }
 
         /// <summary>
-        /// Dispose the ServiceClient.
-        /// </summary>
-        public virtual void Dispose()
-        {
-            // Only dispose once
-            if (!_disposed)
-            {
-                _disposed = true;
-
-                // Dispose the client
-                HttpClient.Dispose();
-                HttpClient = null;
-                _outerHandler = null;
-                _innerHandler = null;
-            }
-        }
-
-        /// <summary>
-        /// Get the HTTP pipeline for the given service client.
+        /// Get the HTTP pipelines for the given service client.
         /// </summary>
         /// <returns>The client's HTTP pipeline.</returns>
-        public virtual IEnumerable<HttpMessageHandler> GetHttpPipeline()
+        public virtual IEnumerable<HttpMessageHandler> HttpPipelines
         {
-            var handler = _outerHandler;
-
-            while (handler != null)
+            get
             {
-                yield return handler;
+                var handler = _outerHandler;
 
-                DelegatingHandler delegating = handler as DelegatingHandler;
-                handler = delegating != null ? delegating.InnerHandler : null;
+                while (handler != null)
+                {
+                    yield return handler;
+
+                    DelegatingHandler delegating = handler as DelegatingHandler;
+                    handler = delegating != null ? delegating.InnerHandler : null;
+                }
             }
         }
 
@@ -123,7 +118,7 @@ namespace Microsoft.Rest
                 throw new ArgumentNullException("retryPolicy");
             }
 
-            RetryDelegatingHandler delegatingHandler = this.GetHttpPipeline().OfType<RetryDelegatingHandler>().FirstOrDefault();
+            RetryDelegatingHandler delegatingHandler = this.HttpPipelines.OfType<RetryDelegatingHandler>().FirstOrDefault();
             if (delegatingHandler != null)
             {
                 delegatingHandler.RetryPolicy = retryPolicy;
@@ -135,11 +130,38 @@ namespace Microsoft.Rest
         }
 
         /// <summary>
+        /// Dispose the ServiceClient.
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                _disposed = true;
+
+                // Dispose the client
+                HttpClient.Dispose();
+                HttpClient = null;
+                _outerHandler = null;
+                _innerHandler = null;
+            }
+        }           
+        
+        /// <summary>
         /// Initializes HttpClient using HttpClientHandler.
         /// </summary>
         /// <param name="httpMessageHandler">Base HttpClientHandler.</param>
         /// <param name="handlers">List of handlers from top to bottom (outer handler is the first in the list)</param>
-        protected virtual void InitializeHttpClient(HttpClientHandler httpMessageHandler, params DelegatingHandler[] handlers)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Reliability", 
+            "CA2000:Dispose objects before losing scope", 
+            Justification="The created objects should be disposed on caller's side")]
+        protected void InitializeHttpClient(HttpClientHandler httpMessageHandler, params DelegatingHandler[] handlers)
         {
             _innerHandler = httpMessageHandler;
             DelegatingHandler currentHandler = new RetryDelegatingHandler();

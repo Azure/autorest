@@ -19,6 +19,8 @@ namespace Microsoft.Rest
         /// <summary>
         /// Basic auth username.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", 
+            "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "Username")]
         public string Username { get; set; }
 
         /// <summary>

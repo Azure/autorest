@@ -224,6 +224,7 @@ namespace Microsoft.Rest.TransientFaultHandling
         /// the retry limit is reached, the returned task will transition to a faulted state and the exception 
         /// must be observed.
         /// </returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public Task<TResult> ExecuteAsync<TResult>(Func<Task<TResult>> taskFunc)
         {
             return this.ExecuteAsync<TResult>(taskFunc, default(CancellationToken));
@@ -241,6 +242,7 @@ namespace Microsoft.Rest.TransientFaultHandling
         /// the retry limit is reached, the returned task will transition to a faulted state and the exception must 
         /// be observed.
         /// </returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public Task<TResult> ExecuteAsync<TResult>(Func<Task<TResult>> taskFunc, CancellationToken cancellationToken)
         {
             if (taskFunc == null) throw new ArgumentNullException("taskFunc");
