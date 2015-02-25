@@ -35,6 +35,7 @@
   </PropertyGroup>
   <Import Project="$(SolutionDir)\tools\AutoRest.Settings.targets" />
   <ItemGroup>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HttpOperationEventSource.cs" />
     <Compile Include="EtwTracingInterceptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
