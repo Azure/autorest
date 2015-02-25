@@ -37,15 +37,15 @@ namespace Microsoft.Rest
         /// <summary>
         /// Initializes a new instance of the ServiceClient class.
         /// </summary>
-        public ServiceClient(): this(CreateRootHandler())
+        protected ServiceClient(): this(CreateRootHandler())
         {
         }
 
-        public ServiceClient(params DelegatingHandler[] handlers) : this(CreateRootHandler(), handlers)
+        protected ServiceClient(params DelegatingHandler[] handlers) : this(CreateRootHandler(), handlers)
         {
         }
 
-        public ServiceClient(HttpClientHandler rootHandler, params DelegatingHandler[] handlers)
+        protected ServiceClient(HttpClientHandler rootHandler, params DelegatingHandler[] handlers)
         {
             InitializeHttpClient(rootHandler, handlers);
         }
@@ -176,7 +176,7 @@ namespace Microsoft.Rest
                 .FullName
                 .Split(',')
                 .Select(c => c.Trim())
-                .Where(c => c.StartsWith("Version="))
+                .Where(c => c.StartsWith("Version=", StringComparison.OrdinalIgnoreCase))
                 .FirstOrDefault()
                 .Substring("Version=".Length);
             return version;

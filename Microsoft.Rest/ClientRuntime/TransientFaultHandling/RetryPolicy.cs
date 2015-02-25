@@ -29,8 +29,7 @@ namespace Microsoft.Rest.TransientFaultHandling
 
             if (errorDetectionStrategy == null)
             {
-                throw new InvalidOperationException("The error detection strategy type must implement the " +
-                                                    "ITransientErrorDetectionStrategy interface.");
+                throw new InvalidOperationException(Properties.Resources.ITransientErrorDetectionStrategyNotImplemented);
             }
 
             this.RetryStrategy = retryStrategy;

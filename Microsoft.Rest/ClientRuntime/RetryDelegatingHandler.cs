@@ -98,7 +98,7 @@ namespace Microsoft.Rest
 
                         if (!responseMessage.IsSuccessStatusCode)
                         {
-                            throw new HttpRequestExceptionWithStatus(string.Format(
+                            throw new HttpRequestWithStatusException(string.Format(
                                 CultureInfo.InvariantCulture,
                                 Resources.ResponseStatusCodeError,
                                 (int)responseMessage.StatusCode,

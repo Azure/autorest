@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Microsoft.Rest
 {
-    public class PlatformTaskEx
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", 
+        "CA1711:IdentifiersShouldNotHaveIncorrectSuffix",
+        Justification="We think with Ex is better than using 2")]
+    public static class PlatformTaskEx
     {
-        //Per FxCop performance rule to prevent the compiler from generating a default constructor.
-        private PlatformTaskEx() { }
-
         public static Task FromResult(object result)
         {
 #if NET45
@@ -21,12 +21,12 @@ namespace Microsoft.Rest
 #endif
         }
 
-        public static Task Delay(TimeSpan delay)
+        public static Task Delay(TimeSpan delayTime)
         {
 #if NET45
-            return Task.Delay(delay);
+            return Task.Delay(delayTime);
 #else
-            return TaskEx.Delay(delay);
+            return TaskEx.Delay(delayTime);
 #endif
         }
 

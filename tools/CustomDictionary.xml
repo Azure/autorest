@@ -4,6 +4,8 @@
       <Word>Etw</Word>
       <Word>AutoRest</Word>
       <Word>Rest</Word>
+      <Word>Backoff</Word>
+      <Word>Username</Word>
     </Recognized>
   </Words>
 </Dictionary>

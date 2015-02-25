@@ -21,8 +21,8 @@ namespace Microsoft.Rest.TransientFaultHandling
         {
             if (ex != null)
             {
-                HttpRequestExceptionWithStatus httpException;
-                if ((httpException = ex as HttpRequestExceptionWithStatus) != null)
+                HttpRequestWithStatusException httpException;
+                if ((httpException = ex as HttpRequestWithStatusException) != null)
                 {
                     if (httpException.StatusCode == HttpStatusCode.RequestTimeout || 
                         (httpException.StatusCode >= HttpStatusCode.InternalServerError &&

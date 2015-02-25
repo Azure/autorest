@@ -58,7 +58,7 @@ namespace Microsoft.Rest
         /// <returns>The content headers.</returns>
         public static HttpHeaders GetContentHeaders(this HttpResponseMessage response)
         {
-            if (response.Content != null)
+            if (response != null && response.Content != null)
             {
                 return response.Content.Headers;
             }
