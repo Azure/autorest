@@ -115,7 +115,8 @@
   
   <PropertyGroup>
     <!-- This property is used by the continuous intergration job. 
-         Do not remove without first updating the CI job. -->
+         Do not remove without first updating the CI job. Also due to a known limitation, 
+         make sure pathes do not end with a backslash -->
     <CorporateScanPaths>$(LibrarySourceFolder)</CorporateScanPaths>
   </PropertyGroup>
   <Target Name="SignBinariesForAFxTarget">
