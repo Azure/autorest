@@ -19,6 +19,9 @@
   /t:Publish
     Publishes the built packages. You will need to include your
     publishing key when running. Include: /p:NuGetKey=YOUR_PUBLISHING_KEY
+    
+  /t:CodeAnalysis
+    Run Code analysis. 
 
   Properties of interest:
   /P:CodeSign=True
@@ -101,6 +104,13 @@
     <RemoveDir Directories="$(BinariesFolder)" />
   </Target>
 
+  <Target Name="CodeAnalysis">
+    <!--Note, we use "Rebuild" rather "Build", because code analysis happens during the build, and this ensures the build is not skipped-->
+    <MSBuild Projects="$(SolutionName)"
+             Properties="Configuration=%(LibraryFxTargetList.Identity)-$(Configuration);Platform=Any CPU;RunCodeAnalysis=true;CodeAnalysisTreatWarningsAsErrors=true"
+             Targets="Rebuild" />
+  </Target>
+  
   <!-- Run all tests. -->
   <UsingTask TaskName="Xunit.Runner.msbuild.xunit" AssemblyFile="packages\xunit.1.9.2\lib\net20\xunit.runner.msbuild.dll" />
   <Target Name="Test">

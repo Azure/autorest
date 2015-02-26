@@ -90,13 +90,6 @@ namespace Microsoft.Rest.TransientFaultHandling
                 }
             }
 
-            if (task == null)
-            {
-                throw new ArgumentException(
-                    string.Format(CultureInfo.InvariantCulture, Resources.TaskCannotBeNull, "taskFunc"),
-                    "taskFunc");
-            }
-
             // Fast path if the user-initiated task is already completed.
             if (task.Status == TaskStatus.RanToCompletion)
             {
@@ -105,9 +98,8 @@ namespace Microsoft.Rest.TransientFaultHandling
 
             if (task.Status == TaskStatus.Created)
             {
-                throw new ArgumentException(
-                    string.Format(CultureInfo.InvariantCulture, Resources.TaskMustBeScheduled, "taskFunc"),
-                    "taskFunc");
+                throw new InvalidOperationException(
+                    string.Format(CultureInfo.InvariantCulture, Resources.TaskMustBeScheduled, "taskFunc"));
             }
 
             return task

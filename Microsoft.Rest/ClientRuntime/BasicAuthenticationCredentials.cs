@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Globalization;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -18,6 +19,8 @@ namespace Microsoft.Rest
         /// <summary>
         /// Basic auth username.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", 
+            "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "Username")]
         public string Username { get; set; }
 
         /// <summary>
@@ -34,9 +37,15 @@ namespace Microsoft.Rest
         public override Task ProcessHttpRequestAsync(HttpRequestMessage request,
             CancellationToken cancellationToken)
         {
+            if (request == null)
+            {
+                throw new ArgumentNullException("request");
+            }
             // Add username and password to "Basic" header of each request.
             request.Headers.Authorization = new AuthenticationHeaderValue("Basic",
-                Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}:{1}",
+                Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format(
+                    CultureInfo.InvariantCulture, 
+                    "{0}:{1}",
                     Username,
                     Password).ToCharArray())));
             return PlatformTaskEx.FromResult(null);

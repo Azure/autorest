@@ -75,7 +75,6 @@ namespace Microsoft.Rest.TransientFaultHandling
         /// <summary>
         /// Gets the default <see cref="RetryManager"/> for the application.
         /// </summary>
-        /// <remarks>You can update the default retry manager by calling the <see cref="RetryManager.SetDefault"/> method.</remarks>
         public static RetryManager Instance
         {
             get
@@ -121,13 +120,20 @@ namespace Microsoft.Rest.TransientFaultHandling
 
         /// <summary>
         /// Sets the specified retry manager as the default retry manager.
+        /// Will throw an exception if the manager is already set.
         /// </summary>
         /// <param name="retryManager">The retry manager.</param>
-        /// <param name="throwIfSet">true to throw an exception if the manager is already set; otherwise, false. 
-        /// Defaults to <see langword="true"/>.</param>
-        /// <exception cref="InvalidOperationException">The singleton is already set and 
-        /// <paramref name="throwIfSet"/> is true.</exception>
-        public static void SetDefault(RetryManager retryManager, bool throwIfSet = true)
+        public static void SetDefault(RetryManager retryManager)
+        {
+            SetDefault(retryManager, true);
+        }
+
+        /// <summary>
+        /// Sets the specified retry manager as the default retry manager.
+        /// </summary>
+        /// <param name="retryManager">The retry manager.</param>
+        /// <param name="throwIfSet">true to throw an exception if the manager is already set; otherwise, false.</param>
+        public static void SetDefault(RetryManager retryManager, bool throwIfSet)
         {
             if (_defaultRetryManager != null && throwIfSet && retryManager != _defaultRetryManager)
             {
@@ -136,6 +142,7 @@ namespace Microsoft.Rest.TransientFaultHandling
 
             _defaultRetryManager = retryManager;
         }
+
 
         /// <summary>
         /// Returns a retry policy with the specified error detection strategy and the default retry strategy 

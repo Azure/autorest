@@ -10,6 +10,8 @@ namespace Microsoft.Rest
     /// Represents an object list that supports on-demand initialization.
     /// </summary>
     /// <typeparam name="T"></typeparam>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", 
+        "CA1710:IdentifiersShouldHaveCorrectSuffix")]
     public class LazyList<T> : IList<T>, ILazyCollection
     {
         private IList<T> _list;

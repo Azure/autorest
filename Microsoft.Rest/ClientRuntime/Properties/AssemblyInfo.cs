@@ -2,8 +2,10 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 
+using System;
 using System.Reflection;
 using System.Resources;
+using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Microsoft Rest Client Library")]
 [assembly: AssemblyDescription("Provides an HTTP pipeline for authentication, tracing, logging and transient fault handling.")]
@@ -18,3 +20,6 @@ using System.Resources;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: NeutralResourcesLanguage("en")]
+
+[assembly: ComVisible(false)]
+[assembly: CLSCompliant(false)]

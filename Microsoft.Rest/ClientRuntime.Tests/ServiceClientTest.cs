@@ -64,7 +64,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests
             int attemptsFailed = 0;
 
             fakeClient.SetRetryPolicy(new RetryPolicy<HttpStatusCodeErrorDetectionStrategy>(2));
-            var retryHandler = fakeClient.GetHttpPipeline().OfType<RetryDelegatingHandler>().FirstOrDefault();
+            var retryHandler = fakeClient.HttpPipelines.OfType<RetryDelegatingHandler>().FirstOrDefault();
             retryHandler.Retrying += (sender, args) => { attemptsFailed++; };
 
             var result = fakeClient.DoStuff();
@@ -79,7 +79,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests
             int attemptsFailed = 0;
 
             fakeClient.SetRetryPolicy(new RetryPolicy<HttpStatusCodeErrorDetectionStrategy>(2));
-            var retryHandler = fakeClient.GetHttpPipeline().OfType<RetryDelegatingHandler>().FirstOrDefault();
+            var retryHandler = fakeClient.HttpPipelines.OfType<RetryDelegatingHandler>().FirstOrDefault();
             retryHandler.Retrying += (sender, args) => { attemptsFailed++; };
 
             var result = fakeClient.DoStuff();
@@ -94,7 +94,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests
             int attemptsFailed = 0;
 
             fakeClient.SetRetryPolicy(new RetryPolicy<HttpStatusCodeErrorDetectionStrategy>(2));
-            var retryHandler = fakeClient.GetHttpPipeline().OfType<RetryDelegatingHandler>().FirstOrDefault();
+            var retryHandler = fakeClient.HttpPipelines.OfType<RetryDelegatingHandler>().FirstOrDefault();
             retryHandler.Retrying += (sender, args) => { attemptsFailed++; };
 
             var result = fakeClient.DoStuff();

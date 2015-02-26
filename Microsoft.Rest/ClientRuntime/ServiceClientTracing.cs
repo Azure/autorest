@@ -36,6 +36,9 @@ namespace Microsoft.Rest
         /// <summary>
         /// Initializes a new instance of the CloudTracing class.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", 
+            "CA1810:InitializeReferenceTypeStaticFieldsInline",
+            Justification="Can not do it on \'IsEnabled\' which is a auto property")]
         static ServiceClientTracing()
         {
             IsEnabled = true;

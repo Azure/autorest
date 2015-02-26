@@ -111,6 +111,13 @@
     <Exec Command="$(PowerShellExe) -NonInteractive -ExecutionPolicy bypass -Command &quot;&amp; { &amp;&apos;$(NuSpecSyncScript)&apos; &apos;$(MSBuildProjectDirectory)&apos; -BasePath &apos;$(ProductSourceFolder)&apos; }&quot;" />
   </Target>
 
+  <Target Name="TurnOffCodeAnalysis">
+    <PropertyGroup>
+      <RunCodeAnalysis>false</RunCodeAnalysis>
+      <RunCodeAnalysisOnThisProject>false</RunCodeAnalysisOnThisProject>
+    </PropertyGroup>
+  </Target>
+  
   <!-- 
   StyleCop
   -->
