@@ -46,7 +46,7 @@ namespace Microsoft.Rest
                     "{0}:{1}",
                     UserName,
                     Password).ToCharArray())));
-            return PlatformTaskEx.FromResult(null);
+            return PlatformTask.FromResult(null);
         }
     }
 }

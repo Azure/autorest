@@ -153,7 +153,7 @@ namespace Microsoft.Rest
             {
                 foreach (IServiceClientTracingInterceptor writer in TracingInterceptors)
                 {
-                    writer.Enter(invocationId, instance, method, parameters);
+                    writer.EnterMethod(invocationId, instance, method, parameters);
                 }
             }
         }
@@ -186,7 +186,7 @@ namespace Microsoft.Rest
             {
                 foreach (IServiceClientTracingInterceptor writer in TracingInterceptors)
                 {
-                    writer.Error(invocationId, ex);
+                    writer.TraceError(invocationId, ex);
                 }
             }
         }
@@ -197,7 +197,7 @@ namespace Microsoft.Rest
             {
                 foreach (IServiceClientTracingInterceptor writer in TracingInterceptors)
                 {
-                    writer.Exit(invocationId, result);
+                    writer.ExitMethod(invocationId, result);
                 }
             }
         }

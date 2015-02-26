@@ -170,7 +170,7 @@ namespace Microsoft.Rest.TransientFaultHandling
 
                 if (retryCount > 1 || !this.RetryStrategy.FastFirstRetry)
                 {
-                    PlatformTaskEx.Delay(delay).Wait();
+                    PlatformTask.Delay(delay).Wait();
                 }
             }
         }

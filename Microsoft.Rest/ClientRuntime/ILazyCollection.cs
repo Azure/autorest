@@ -7,7 +7,8 @@ namespace Microsoft.Rest
     /// Represents a collection that supports on-demand initialization.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", 
-        "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+        "CA1711:IdentifiersShouldNotHaveIncorrectSuffix",
+        Justification = "The name has been reviewed and decided. Changing it has too broad impact")]
     public interface ILazyCollection
     {
         /// <summary>

@@ -7,10 +7,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.Rest
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", 
-        "CA1711:IdentifiersShouldNotHaveIncorrectSuffix",
-        Justification="We think with Ex is better than using 2")]
-    public static class PlatformTaskEx
+    public static class PlatformTask
     {
         public static Task FromResult(object result)
         {

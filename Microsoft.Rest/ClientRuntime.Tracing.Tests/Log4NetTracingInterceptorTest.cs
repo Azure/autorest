@@ -49,7 +49,7 @@ namespace Microsoft.Rest.ClientRuntime.Tracing.Tests
             string expected = string.Format("DEBUG - invocationId: {0}\r\ninstance: {1}\r\nmethod: {2}\r\nparameters: {3}\r\n",
                 invocationId, instance, method, parametersLog);
 
-            logger.Enter(invocationId, instance, method, parameters);
+            logger.EnterMethod(invocationId, instance, method, parameters);
 
             Assert.Equal(expected, File.ReadAllText(logFileName));
         }
@@ -90,7 +90,7 @@ namespace Microsoft.Rest.ClientRuntime.Tracing.Tests
             var exception = new HttpOperationException<string>("I'm a cloud exception!" );
             string expected = string.Format("ERROR - invocationId: {0}\r\n{1}\r\n", invocationId, exception.ToString());
 
-            logger.Error(invocationId, exception);
+            logger.TraceError(invocationId, exception);
             string actual = File.ReadAllText(logFileName);
 
             Assert.Equal(expected, actual);
@@ -104,7 +104,7 @@ namespace Microsoft.Rest.ClientRuntime.Tracing.Tests
             string returnValue = "bye bye!";
             string expected = string.Format("DEBUG - Exit with invocation id {0}, the return value is {1}\r\n", invocationId, returnValue);
 
-            logger.Exit(invocationId, returnValue);
+            logger.ExitMethod(invocationId, returnValue);
             string actual = File.ReadAllText(logFileName);
 
             Assert.Equal(expected, actual);
@@ -145,7 +145,7 @@ namespace Microsoft.Rest.ClientRuntime.Tracing.Tests
             string expected = string.Format("DEBUG - invocationId: {0}\r\ninstance: {1}\r\nmethod: {2}\r\nparameters: {3}\r\n",
                 invocationId, instance, method, parametersLog);
 
-            logger.Enter(invocationId, instance, method, parameters);
+            logger.EnterMethod(invocationId, instance, method, parameters);
 
             Assert.Equal(expected, File.ReadAllText(logFileName));
         }
@@ -183,7 +183,7 @@ namespace Microsoft.Rest.ClientRuntime.Tracing.Tests
             string invocationId = null;
             string expected = string.Format("ERROR - invocationId: \r\n", invocationId, null);
 
-            logger.Error(invocationId, null);
+            logger.TraceError(invocationId, null);
             string actual = File.ReadAllText(logFileName);
 
             Assert.Equal(expected, actual);
@@ -197,7 +197,7 @@ namespace Microsoft.Rest.ClientRuntime.Tracing.Tests
             string returnValue = null;
             string expected = string.Format("DEBUG - Exit with invocation id {0}, the return value is {1}\r\n", invocationId, returnValue);
 
-            logger.Exit(invocationId, returnValue);
+            logger.ExitMethod(invocationId, returnValue);
             string actual = File.ReadAllText(logFileName);
 
             Assert.Equal(expected, actual);

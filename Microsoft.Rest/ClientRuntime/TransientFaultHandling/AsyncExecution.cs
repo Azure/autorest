@@ -136,7 +136,7 @@ namespace Microsoft.Rest.TransientFaultHandling
             this._previousTask = runningTask;
             if (delay > TimeSpan.Zero && (this._retryCount > 1 || !this._fastFirstRetry))
             {
-                return PlatformTaskEx.Delay(delay)
+                return PlatformTask.Delay(delay)
                     .ContinueWith<Task<TResult>>(this.ExecuteAsyncImpl, CancellationToken.None, 
                     TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default)
                     .Unwrap();
