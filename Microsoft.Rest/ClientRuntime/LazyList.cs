@@ -13,7 +13,7 @@ namespace Microsoft.Rest
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", 
         "CA1710:IdentifiersShouldHaveCorrectSuffix",
         Justification = "The name has been reviewed and decided. Changing it has too broad impact")]
-    public class LazyList<T> : IList<T>, ILazyCollection
+    public class LazyList<T> : IList<T>, ILazyCollectionInitialized
     {
         private IList<T> _list;
 

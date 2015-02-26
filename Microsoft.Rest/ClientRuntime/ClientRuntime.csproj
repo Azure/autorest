@@ -42,6 +42,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HttpExtensions.cs" />
     <Compile Include="IDeserializationModel.cs" />
+    <Compile Include="TransientFaultHandling\RetryCondition.cs" />
     <Compile Include="TypeConversion.cs" />
     <Compile Include="ILazyCollection.cs" />
     <Compile Include="LazyDictionary.cs" />

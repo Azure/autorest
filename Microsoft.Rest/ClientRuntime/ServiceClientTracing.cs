@@ -14,7 +14,8 @@ namespace Microsoft.Rest
         /// <summary>
         /// The collection of tracing interceptors to notify.
         /// </summary>
-        private static List<IServiceClientTracingInterceptor> _interceptors;
+        private static List<IServiceClientTracingInterceptor> _interceptors = 
+            new List<IServiceClientTracingInterceptor>();
 
         /// <summary>
         /// A read-only, thread-safe collection of tracing interceptors.  Since
@@ -24,34 +25,33 @@ namespace Microsoft.Rest
         /// in progress on a different thread will not be affected by the
         /// change.
         /// </summary>
-        private static List<IServiceClientTracingInterceptor> _threadSafeInterceptors;
+        private static List<IServiceClientTracingInterceptor> _threadSafeInterceptors = 
+            new List<IServiceClientTracingInterceptor>();
 
         /// <summary>
         /// Lock used to synchronize mutation of the tracing interceptors.
         /// </summary>
-        private static object _lock;
+        private static object _lock = new object();
 
         private static long _nextInvocationId = 0;
 
-        /// <summary>
-        /// Initializes a new instance of the CloudTracing class.
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", 
-            "CA1810:InitializeReferenceTypeStaticFieldsInline",
-            Justification="Can not do it on \'IsEnabled\' which is a auto property")]
-        static ServiceClientTracing()
-        {
-            IsEnabled = true;
-            _lock = new object();
-            _interceptors = new List<IServiceClientTracingInterceptor>();
-            _threadSafeInterceptors = new List<IServiceClientTracingInterceptor>();
-        }
+        private static bool _isEnabled = false;
 
         /// <summary>
         /// Gets or sets a value indicating whether tracing is enabled.
         /// Tracing can be disabled for performance.
         /// </summary>
-        public static bool IsEnabled { get; set; }
+        public static bool IsEnabled
+        {
+            get
+            {
+                return _isEnabled;
+            }
+            set
+            {
+                _isEnabled = value;
+            }
+        }
 
         /// <summary>
         /// Gets a sequence of the tracing interceptors to notify of changes.

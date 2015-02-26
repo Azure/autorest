@@ -151,11 +151,16 @@ namespace Microsoft.Rest.TransientFaultHandling
                 {
                     lastError = ex;
 
-                    if (!(this.ErrorDetectionStrategy.IsTransient(lastError) && shouldRetry(retryCount++, 
-                        lastError, out delay)))
+                    if (!(this.ErrorDetectionStrategy.IsTransient(lastError)))
                     {
                         throw;
                     }
+
+                    RetryCondition condition = shouldRetry(retryCount++, lastError);
+                    if (!condition.RetryAllowed){
+                        throw;
+                    }
+                    delay = condition.DelayBeforeRetry;
                 }
 
                 // Perform an extra check in the delay interval. Should prevent from accidentally ending up with the 
