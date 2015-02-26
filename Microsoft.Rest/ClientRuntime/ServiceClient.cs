@@ -60,6 +60,10 @@ namespace Microsoft.Rest
             InitializeHttpClient(rootHandler, handlers);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Reliability", 
+            "CA2000:Dispose objects before losing scope", 
+            Justification="The created objects should be disposed on caller's side")]
         protected static HttpClientHandler CreateRootHandler()
         {
             // Create our root handler
