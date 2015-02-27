@@ -121,16 +121,16 @@ namespace Microsoft.Rest.TransientFaultHandling
 
             if (!(this._isTransient(lastError)))
             {
+                // if not transient, return the faulted running task.
                 return runningTask;
             }
             
             RetryCondition condition = this._shouldRetryHandler(this._retryCount++, lastError);
-            delay = condition.DelayBeforeRetry;
             if (!condition.RetryAllowed)
             {
-                // if not transient, return the faulted running task.
                 return runningTask;
             }
+            delay = condition.DelayBeforeRetry;
             
             // Perform an extra check in the delay interval.
             if (delay < TimeSpan.Zero)
