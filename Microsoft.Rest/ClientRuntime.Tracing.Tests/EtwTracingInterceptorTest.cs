@@ -82,7 +82,7 @@ namespace Microsoft.Rest.ClientRuntime.Tracing.Tests
                 () =>
                 {
                     EtwTracingInterceptor etwTracer = new EtwTracingInterceptor();
-                    etwTracer.Enter("1", 23, "main", parameters);
+                    etwTracer.EnterMethod("1", 23, "main", parameters);
                 },
                 (dict) =>
                 {
@@ -106,7 +106,7 @@ namespace Microsoft.Rest.ClientRuntime.Tracing.Tests
                 () =>
                 {
                     EtwTracingInterceptor etwTracer = new EtwTracingInterceptor();
-                    etwTracer.Enter("1", null, "main", parameters);
+                    etwTracer.EnterMethod("1", null, "main", parameters);
                 },
                 (dict) =>
                 {
@@ -197,7 +197,7 @@ namespace Microsoft.Rest.ClientRuntime.Tracing.Tests
                 () =>
                 {
                     EtwTracingInterceptor etwTracer = new EtwTracingInterceptor();
-                    etwTracer.Exit("1", 5);
+                    etwTracer.ExitMethod("1", 5);
                 },
                 (dict) =>
                 {
@@ -213,7 +213,7 @@ namespace Microsoft.Rest.ClientRuntime.Tracing.Tests
                 () =>
                 {
                     EtwTracingInterceptor etwTracer = new EtwTracingInterceptor();
-                    etwTracer.Exit(null, null);
+                    etwTracer.ExitMethod(null, null);
                 },
                 (dict) =>
                 {

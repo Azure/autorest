@@ -113,7 +113,9 @@
 
   <Target Name="TurnOffCodeAnalysis">
     <PropertyGroup>
-      <RunCodeAnalysis>false</RunCodeAnalysis>
+      <!--'RunCodeAnalysisOnThisProject' is the ultimate property to decide whether or not to invoke CA for the current project.
+        Not ideal, setting to 'False' works to skip code analysis for both in VS and command line build.
+        Related test projects should reference in "InitialTargets", so it has the chance to tweak the value. -->
       <RunCodeAnalysisOnThisProject>false</RunCodeAnalysisOnThisProject>
     </PropertyGroup>
   </Target>

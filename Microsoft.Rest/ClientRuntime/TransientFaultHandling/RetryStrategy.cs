@@ -10,10 +10,8 @@ namespace Microsoft.Rest.TransientFaultHandling
     /// </summary>
     /// <param name="retryCount">The current retry attempt count.</param>
     /// <param name="lastException">The exception that caused the retry conditions to occur.</param>
-    /// <param name="delay">The delay that indicates how long the current thread will be suspended before 
-    /// the next iteration is invoked.</param>
-    /// <returns><see langword="true"/> if a retry is allowed; otherwise, <see langword="false"/>.</returns>
-    public delegate bool ShouldRetryHandler(int retryCount, Exception lastException, out TimeSpan delay);
+    /// <returns>A retry condition instance</returns>
+    public delegate RetryCondition ShouldRetryHandler(int retryCount, Exception lastException);
 
     /// <summary>
     /// Represents a retry strategy that determines the number of retry attempts and the interval 

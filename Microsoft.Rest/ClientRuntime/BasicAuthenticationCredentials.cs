@@ -17,11 +17,9 @@ namespace Microsoft.Rest
     public class BasicAuthenticationCredentials : ServiceClientCredentials
     {
         /// <summary>
-        /// Basic auth username.
+        /// Basic auth UserName.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", 
-            "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "Username")]
-        public string Username { get; set; }
+        public string UserName { get; set; }
 
         /// <summary>
         /// Basic auth password.
@@ -46,9 +44,9 @@ namespace Microsoft.Rest
                 Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format(
                     CultureInfo.InvariantCulture, 
                     "{0}:{1}",
-                    Username,
+                    UserName,
                     Password).ToCharArray())));
-            return PlatformTaskEx.FromResult(null);
+            return PlatformTask.FromResult(null);
         }
     }
 }

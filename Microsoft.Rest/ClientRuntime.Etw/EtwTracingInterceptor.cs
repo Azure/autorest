@@ -52,7 +52,7 @@ namespace Microsoft.Rest.Tracing.Etw
         /// <param name="instance">The instance with the method.</param>
         /// <param name="method">Name of the method.</param>
         /// <param name="parameters">Method parameters.</param>
-        public void Enter(string invocationId, object instance, string method, IDictionary<string, object> parameters)
+        public void EnterMethod(string invocationId, object instance, string method, IDictionary<string, object> parameters)
         {
             string instanceAsString = instance == null ? string.Empty : instance.ToString();
             string parametersAsString = parameters == null ? string.Empty : parameters.AsFormattedString();
@@ -89,7 +89,7 @@ namespace Microsoft.Rest.Tracing.Etw
         /// </summary>
         /// <param name="invocationId">Method invocation identifier.</param>
         /// <param name="exception">The error.</param>
-        public void Error(string invocationId, Exception exception)
+        public void TraceError(string invocationId, Exception exception)
         {
             string exceptionAsString = exception == null ? string.Empty : exception.ToString();
 
@@ -102,7 +102,7 @@ namespace Microsoft.Rest.Tracing.Etw
         /// </summary>
         /// <param name="invocationId">Method invocation identifier.</param>
         /// <param name="returnValue">Method return value.</param>
-        public void Exit(string invocationId, object returnValue)
+        public void ExitMethod(string invocationId, object returnValue)
         {
             string returnValueAsString = returnValue == null ? string.Empty : returnValue.ToString();
 

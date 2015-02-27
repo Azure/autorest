@@ -20,24 +20,6 @@
     <_DiagnosticsTracingPackageName>Microsoft.Diagnostics.Tracing.TraceEvent.1.0.5</_DiagnosticsTracingPackageName>
     <_DiagnosticsTracingTargets>..\..\packages\$(_DiagnosticsTracingPackageName)\tools\Microsoft.Diagnostics.Tracing.TraceEvent.targets</_DiagnosticsTracingTargets>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Net45-Debug'">
-    <DocumentationFile>bin\Net45-Debug\Microsoft.Rest.ClientRuntime.Tracing.Tests.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Net45-Release'">
-    <DocumentationFile>bin\Net45-Release\Microsoft.Rest.ClientRuntime.Tracing.Tests.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Net40-Debug'">
-    <DocumentationFile>bin\Net40-Debug\Microsoft.Rest.ClientRuntime.Tracing.Tests.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Net40-Release'">
-    <DocumentationFile>bin\Net40-Release\Microsoft.Rest.ClientRuntime.Tracing.Tests.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Portable-Debug'">
-    <DocumentationFile>bin\Portable-Debug\Microsoft.Rest.ClientRuntime.Tracing.Tests.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Portable-Release'">
-    <DocumentationFile>bin\Portable-Release\Microsoft.Rest.ClientRuntime.Tracing.Tests.xml</DocumentationFile>
-  </PropertyGroup>
   <Import Project="$(SolutionDir)\tools\AutoRest.Settings.targets" />
   <ItemGroup>
     <Reference Include="Microsoft.Diagnostics.Tracing.TraceEvent, Version=1.0.11.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">

@@ -4,6 +4,7 @@
 using log4net;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Net.Http;
 
@@ -56,7 +57,8 @@ namespace Microsoft.Rest.Tracing.Log4Net
         /// <param name="value">The value of the setting in the source.</param>
         public void Configuration(string source, string name, string value)
         {
-            _logger.DebugFormat("Configuration: source={0}, name={1}, value={2}", source, name, value);
+            _logger.DebugFormat(CultureInfo.InvariantCulture,
+                "Configuration: source={0}, name={1}, value={2}", source, name, value);
         }
 
         /// <summary>
@@ -66,9 +68,9 @@ namespace Microsoft.Rest.Tracing.Log4Net
         /// <param name="instance">The instance with the method.</param>
         /// <param name="method">Name of the method.</param>
         /// <param name="parameters">Method parameters.</param>
-        public void Enter(string invocationId, object instance, string method, IDictionary<string, object> parameters)
+        public void EnterMethod(string invocationId, object instance, string method, IDictionary<string, object> parameters)
         {
-            _logger.DebugFormat(
+            _logger.DebugFormat(CultureInfo.InvariantCulture,
                 "invocationId: {0}\r\ninstance: {1}\r\nmethod: {2}\r\nparameters: {3}",
                 invocationId, instance, method, parameters.AsFormattedString());
         }
@@ -80,8 +82,9 @@ namespace Microsoft.Rest.Tracing.Log4Net
         /// <param name="request">The request about to be sent.</param>
         public void SendRequest(string invocationId, HttpRequestMessage request)
         {
-            string requestAsString = request == null ? string.Empty : request.AsFormattedString();
-            _logger.DebugFormat("invocationId: {0}\r\nrequest: {1}", invocationId, requestAsString);
+            string requestAsString = (request == null ? string.Empty : request.AsFormattedString());
+            _logger.DebugFormat(CultureInfo.InvariantCulture, 
+                "invocationId: {0}\r\nrequest: {1}", invocationId, requestAsString);
         }
 
         /// <summary>
@@ -91,8 +94,9 @@ namespace Microsoft.Rest.Tracing.Log4Net
         /// <param name="response">The response instance.</param>
         public void ReceiveResponse(string invocationId, HttpResponseMessage response)
         {
-            string requestAsString = response == null ? string.Empty : response.AsFormattedString();
-            _logger.DebugFormat("invocationId: {0}\r\nresponse: {1}", invocationId, requestAsString);
+            string requestAsString = (response == null ? string.Empty : response.AsFormattedString());
+            _logger.DebugFormat(CultureInfo.InvariantCulture, 
+                "invocationId: {0}\r\nresponse: {1}", invocationId, requestAsString);
         }
 
         /// <summary>
@@ -100,7 +104,7 @@ namespace Microsoft.Rest.Tracing.Log4Net
         /// </summary>
         /// <param name="invocationId">Method invocation identifier.</param>
         /// <param name="exception">The error.</param>
-        public void Error(string invocationId, Exception exception)
+        public void TraceError(string invocationId, Exception exception)
         {
             _logger.Error("invocationId: " + invocationId, exception);
         }
@@ -111,13 +115,13 @@ namespace Microsoft.Rest.Tracing.Log4Net
         /// </summary>
         /// <param name="invocationId">Method invocation identifier.</param>
         /// <param name="returnValue">Method return value.</param>
-        public void Exit(string invocationId, object returnValue)
+        public void ExitMethod(string invocationId, object returnValue)
         {
-            string returnValueAsString = returnValue == null ? string.Empty : returnValue.ToString();
-            _logger.Debug(
-                string.Format("Exit with invocation id {0}, the return value is {1}", 
+            string returnValueAsString = (returnValue == null ? string.Empty : returnValue.ToString());
+            _logger.DebugFormat(CultureInfo.InvariantCulture,
+                "Exit with invocation id {0}, the return value is {1}", 
                 invocationId,
-                returnValueAsString));
+                returnValueAsString);
         }
     }
 }

@@ -35,7 +35,7 @@ namespace Microsoft.Rest
         /// <param name="instance">The instance with the method.</param>
         /// <param name="method">Name of the method.</param>
         /// <param name="parameters">Method parameters.</param>
-        void Enter(string invocationId, object instance, string method, IDictionary<string, object> parameters);
+        void EnterMethod(string invocationId, object instance, string method, IDictionary<string, object> parameters);
 
         /// <summary>
         /// Send an HTTP request.
@@ -56,11 +56,7 @@ namespace Microsoft.Rest
         /// </summary>
         /// <param name="invocationId">Method invocation identifier.</param>
         /// <param name="exception">The error.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", 
-            "CA1716:IdentifiersShouldNotMatchKeywords", 
-            MessageId = "Error",
-            Justification="The primary client applications will be C#")]
-        void Error(string invocationId, Exception exception);
+        void TraceError(string invocationId, Exception exception);
 
         /// <summary>
         /// Exit a method.  Note: Exit will not be called in the event of an
@@ -68,10 +64,6 @@ namespace Microsoft.Rest
         /// </summary>
         /// <param name="invocationId">Method invocation identifier.</param>
         /// <param name="returnValue">Method return value.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", 
-            "CA1716:IdentifiersShouldNotMatchKeywords", 
-            MessageId = "Exit",
-            Justification="The primary client applications will be C#")]
-        void Exit(string invocationId, object returnValue);
+        void ExitMethod(string invocationId, object returnValue);
     }
 }

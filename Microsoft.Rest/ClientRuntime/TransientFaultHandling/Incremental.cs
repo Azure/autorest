@@ -82,19 +82,15 @@ namespace Microsoft.Rest.TransientFaultHandling
         /// <returns>The ShouldRetry delegate.</returns>
         public override ShouldRetryHandler GetShouldRetryHandler()
         {
-            return delegate(int currentRetryCount, Exception lastException, out TimeSpan retryInterval)
+            return delegate(int currentRetryCount, Exception lastException)
             {
                 if (currentRetryCount < this._retryCount)
                 {
-                    retryInterval = TimeSpan.FromMilliseconds(this._initialInterval.TotalMilliseconds + 
+                    TimeSpan retryInterval = TimeSpan.FromMilliseconds(this._initialInterval.TotalMilliseconds + 
                         (this._increment.TotalMilliseconds * currentRetryCount));
-
-                    return true;
+                    return new RetryCondition(true, retryInterval);
                 }
-
-                retryInterval = TimeSpan.Zero;
-
-                return false;
+                return new RetryCondition(false, TimeSpan.Zero);
             };
         }
     }

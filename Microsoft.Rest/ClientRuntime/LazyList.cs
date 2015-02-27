@@ -11,8 +11,9 @@ namespace Microsoft.Rest
     /// </summary>
     /// <typeparam name="T"></typeparam>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", 
-        "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-    public class LazyList<T> : IList<T>, ILazyCollection
+        "CA1710:IdentifiersShouldHaveCorrectSuffix",
+        Justification = "The name has been reviewed and decided. Changing it has too broad impact")]
+    public class LazyList<T> : IList<T>, ILazyCollectionInitialized
     {
         private IList<T> _list;
 

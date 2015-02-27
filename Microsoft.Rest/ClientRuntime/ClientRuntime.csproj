@@ -42,14 +42,15 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HttpExtensions.cs" />
     <Compile Include="IDeserializationModel.cs" />
+    <Compile Include="TransientFaultHandling\RetryCondition.cs" />
     <Compile Include="TypeConversion.cs" />
-    <Compile Include="ILazyCollection.cs" />
+    <Compile Include="ILazyCollectionInitialized.cs" />
     <Compile Include="LazyDictionary.cs" />
     <Compile Include="LazyList.cs" />
     <Compile Include="HttpOperationResponse.cs" />
     <Compile Include="ServiceClientCredentials.cs" />
     <Compile Include="RetryDelegatingHandler.cs" />
-    <Compile Include="PlatformTaskEx.cs" />
+    <Compile Include="PlatformTask.cs" />
     <Compile Include="ServiceClientTracing.cs" />
     <Compile Include="ServiceClient.cs" />
     <Compile Include="IServiceOperations.cs" />
@@ -66,7 +67,7 @@
     <Compile Include="TransientFaultHandling\ExponentialBackoffRetryStrategy.cs" />
     <Compile Include="TransientFaultHandling\FixedIntervalRetryStrategy.cs" />
     <Compile Include="TransientFaultHandling\Guard.cs" />
-    <Compile Include="TransientFaultHandling\HttpRequestExceptionWithStatus.cs" />
+    <Compile Include="TransientFaultHandling\HttpRequestWithStatusException.cs" />
     <Compile Include="TransientFaultHandling\Incremental.cs" />
     <Compile Include="TransientFaultHandling\ITransientErrorDetectionStrategy.cs" />
     <Compile Include="TransientFaultHandling\RetryingEventArgs.cs" />

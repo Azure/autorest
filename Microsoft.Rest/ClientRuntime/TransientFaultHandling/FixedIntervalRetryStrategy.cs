@@ -81,23 +81,19 @@ namespace Microsoft.Rest.TransientFaultHandling
         {
             if (this._retryCount == 0)
             {
-                return delegate(int currentRetryCount, Exception lastException, out TimeSpan interval)
+                return delegate(int currentRetryCount, Exception lastException)
                 {
-                    interval = TimeSpan.Zero;
-                    return false;
+                    return new RetryCondition(false, TimeSpan.Zero);
                 };
             }
             
-            return delegate(int currentRetryCount, Exception lastException, out TimeSpan interval)
+            return delegate(int currentRetryCount, Exception lastException)
             {
                 if (currentRetryCount < this._retryCount)
                 {
-                    interval = this._retryInterval;
-                    return true;
+                    return new RetryCondition(true, this._retryInterval);
                 }
-
-                interval = TimeSpan.Zero;
-                return false;
+                return new RetryCondition(false, TimeSpan.Zero);
             };
         }
     }
