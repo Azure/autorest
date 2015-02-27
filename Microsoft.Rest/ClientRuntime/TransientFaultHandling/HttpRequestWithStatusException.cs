@@ -17,7 +17,7 @@ namespace Microsoft.Rest.TransientFaultHandling
     System.Diagnostics.CodeAnalysis.SuppressMessage(
         "Microsoft.Usage", 
         "CA2237:MarkISerializableTypesWithSerializable",
-        Justification = "All properties of this class get serialized manually")]
+        Justification = "HttpRequestException hides the constructor needed for serialization.")]
     public class HttpRequestWithStatusException : HttpRequestException
     {
         /// <summary>

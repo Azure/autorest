@@ -44,7 +44,7 @@
     <Compile Include="IDeserializationModel.cs" />
     <Compile Include="TransientFaultHandling\RetryCondition.cs" />
     <Compile Include="TypeConversion.cs" />
-    <Compile Include="ILazyCollection.cs" />
+    <Compile Include="ILazyCollectionInitialized.cs" />
     <Compile Include="LazyDictionary.cs" />
     <Compile Include="LazyList.cs" />
     <Compile Include="HttpOperationResponse.cs" />

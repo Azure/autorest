@@ -164,7 +164,7 @@ namespace Microsoft.Rest
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Reliability", 
             "CA2000:Dispose objects before losing scope", 
-            Justification="The created objects should be disposed on caller's side")]
+            Justification="We let HttpClient instance dispose")]
         protected void InitializeHttpClient(HttpClientHandler httpMessageHandler, params DelegatingHandler[] handlers)
         {
             _innerHandler = httpMessageHandler;
