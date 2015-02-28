@@ -11,25 +11,43 @@ using Microsoft.Build.Utilities;
 
 namespace Microsoft.Rest.Common.Build.Tasks
 {
-    public class RegexReplacementTask : Task
+    /// <summary>
+    /// Build task to apply RegularExpression to file[s].
+    /// </summary>
+    public class RegexReplaceTask : Task
     {
+        /// <summary>
+        /// The files to search for a match.
+        /// </summary>
         [Required]
         public ITaskItem[] Files { get; set; }
 
-        [Required]
-        public string Find { get; set; }
-
-        [Required]
-        public string Replace { get; set; }
-
-        public bool LogReplacement { get; set; }
+        /// <summary>
+        /// True/False to log Replace actions.
+        /// </summary>
+        public bool LogTask { get; set; }
 
         /// <summary>
-        ///     Gets or sets the optional output directory. If a OutputDir value is
-        ///     specified, the original file contents will not be overwritten.
+        /// If provided, results of applying the Regex are written to the OutputDirectory.  
         /// </summary>
-        public string OutputDir { get; set; }
+        public string OutputDirectory { get; set; }
 
+        /// <summary>
+        /// The regular expression pattern to match.
+        /// </summary>
+        [Required]
+        public string Pattern { get; set; }
+
+        /// <summary>
+        /// The replacement string.
+        /// </summary>
+        [Required]
+        public string Replacement { get; set; }
+
+        /// <summary>
+        /// Executes the Regex.Replace task.
+        /// </summary>
+        /// <returns>True if the task succeeded; otherwise, false.</returns>
         public override bool Execute()
         {
             try
@@ -41,14 +59,14 @@ namespace Microsoft.Rest.Common.Build.Tasks
 
                     string content = Regex.Replace(
                         File.ReadAllText(fileName),
-                        Find,
-                        Replace);
+                        Pattern,
+                        Replacement);
 
                     string outputFileName = fileName;
                     string message = null;
-                    if (!string.IsNullOrEmpty(OutputDir))
+                    if (!string.IsNullOrEmpty(OutputDirectory))
                     {
-                        string path = Path.GetFullPath(OutputDir);
+                        string path = Path.GetFullPath(OutputDirectory);
                         outputFileName = Path.Combine(path, Path.GetFileName(fileName));
                         message = " saved as " + outputFileName;
                     }
@@ -56,7 +74,7 @@ namespace Microsoft.Rest.Common.Build.Tasks
                     File.WriteAllText(outputFileName, content, Encoding.UTF8);
                     File.SetAttributes(outputFileName, oldAttributes);
 
-                    if (LogReplacement)
+                    if (LogTask)
                     {
                         Log.LogMessage("Processed regular expression replacement in file {0}{1}", fileName, message);
                     }

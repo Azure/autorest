@@ -69,7 +69,7 @@
   </PropertyGroup>
 
   <UsingTask AssemblyFile="tools\AutoRest.Build.Tasks.dll" TaskName="ValidateStrongNameSignatureTask" />
-  <UsingTask AssemblyFile="tools\AutoRest.Build.Tasks.dll" TaskName="RegexReplacementTask" />
+  <UsingTask AssemblyFile="tools\AutoRest.Build.Tasks.dll" TaskName="RegexReplaceTask" />
 
   <!-- CI build related. -->
   <PropertyGroup>

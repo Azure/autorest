@@ -8,7 +8,7 @@
     <PublishSymbolSourcePackages>true</PublishSymbolSourcePackages>
   </PropertyGroup>
 
-  <UsingTask AssemblyFile="Microsoft.Rest.Common.Build.Tasks.dll" TaskName="RegexReplacementTask" />
+  <UsingTask AssemblyFile="Microsoft.Rest.Common.Build.Tasks.dll" TaskName="RegexReplaceTask" />
   <Target Name="EnsureBinariesFolderExists">
     <MakeDir Directories="binaries" Condition="!Exists('binaries')" />
     <MakeDir Directories="binaries\packages" Condition="!Exists('binaries\packages')" />
@@ -16,25 +16,21 @@
   </Target>
   
   <!-- Replacing version token dependency. -->
-  <Target Name="BuildDynamicNuSpecs"
-          DependsOnTargets="EnsureBinariesFolderExists">
-    <!-- First we copy nuspec files to binaries folder -->
+  <Target Name="BuildDynamicNuSpecs" DependsOnTargets="EnsureBinariesFolderExists">
+    <!-- Copy nuspec files to binaries folder. -->
     <ItemGroup>
       <NuspecFilesToCopy Include="%(SdkNuGetPackage.Folder)%(SdkNuGetPackage.Identity).nuspec" />
     </ItemGroup>    
-    <Copy SourceFiles="@(NuspecFilesToCopy)"
-          DestinationFolder="binaries\packages\specs"/>
-
-    <!-- Then we update version string -->
+    <Copy SourceFiles="@(NuspecFilesToCopy)" DestinationFolder="binaries\packages\specs"/>
+    <!-- Update version string. -->
     <ItemGroup>
       <NuspecFilesToUpdate Include="binaries\packages\specs\*.nuspec" />
     </ItemGroup>   
-    <RegexReplacementTask Files="@(NuspecFilesToUpdate)"
-                          OutputDir="binaries\packages\specs\"
-                          Find="__VERSION_%(SdkNuGetPackage.Identity)__"
-                          Replace="%(SdkNuGetPackage.PackageVersion)"
-                          LogReplacement="false" />
-
+    <RegexReplaceTask Files="@(NuspecFilesToUpdate)"
+                          OutputDirectory="binaries\packages\specs\"
+                          Pattern="__VERSION_%(SdkNuGetPackage.Identity)__"
+                          Replacement="%(SdkNuGetPackage.PackageVersion)"
+                          LogTask="false" />
     <Message Text="Created dynamic nuspec %(NuspecFilesToUpdate2.Identity)" />
   </Target>
 
