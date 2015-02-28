@@ -135,13 +135,13 @@
       <StrongNameToken Condition=" '$(StrongNameToken)' == '' ">31bf3856ad364e35</StrongNameToken>
     </PropertyGroup>
     <GetFrameworkSdkPath>
-      <Output TaskParameter="Path" PropertyName="WindowsSdkPath"/>
+      <Output TaskParameter="Path" PropertyName="SdkPath"/>
     </GetFrameworkSdkPath>
     <ItemGroup>
       <DelaySignedAssembliesToValidate Include="binaries\$(LibraryFxTarget)\unsigned\*.dll" />
     </ItemGroup>
     <ValidateStrongNameSignatureTask
-        WindowsSdkPath="$(WindowsSdkPath)"
+        SdkPath="$(WindowsSdkPath)"
         Assembly="%(DelaySignedAssembliesToValidate.Identity)"
         ExpectedTokenSignature="$(StrongNameToken)"
         ExpectedDelaySigned="true"
@@ -160,7 +160,7 @@
       <AfterSignedAssembliesToValidate Include="binaries\$(LibraryFxTarget)\*.dll" />
     </ItemGroup>
     <ValidateStrongNameSignatureTask
-        WindowsSdkPath="$(WindowsSdkPath)"
+        SdkPath="$(WindowsSdkPath)"
         Assembly="%(AfterSignedAssembliesToValidate.Identity)"
         ExpectedTokenSignature="$(StrongNameToken)"
         ExpectedDelaySigned="false"

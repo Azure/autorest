@@ -13,16 +13,15 @@ namespace Microsoft.Rest.Common.Build.Tasks
     public class ValidateStrongNameSignatureTask : Task
     {
         /// <summary>
-        ///     The path to the Windows SDK on the machine.
-        /// </summary>
-        [Required]
-        public string WindowsSdkPath { get; set; }
-
-        /// <summary>
         ///     The assembly to verify.
         /// </summary>
         [Required]
         public ITaskItem Assembly { get; set; }
+
+        /// <summary>
+        ///     Expected state of delay signing for validation. 
+        /// </summary>
+        public bool ExpectedDelaySigned { get; set; }
 
         /// <summary>
         ///     The strong name token expected for validation. 
@@ -31,26 +30,28 @@ namespace Microsoft.Rest.Common.Build.Tasks
         public string ExpectedTokenSignature { get; set; }
 
         /// <summary>
-        ///     Expected state of delay signing for validation. 
+        ///     The path to the Windows SDK on the machine.
         /// </summary>
-        public bool ExpectedDelaySigned { get; set; }
+        [Required]
+        public string SdkPath { get; set; }
+
 
         /// <summary>
-        ///     Executes the task to validate expected strong name values. 
+        ///     Executes the task to validate strong name signature. 
         /// </summary>
         /// <returns>
-        ///     True if validation succeeded. False if validation failed.
+        ///     True if validation succeeded; otherwise False.
         /// </returns>
         public override bool Execute()
         {
             try
             {
                 var utility = new StrongNameUtility();
-                if (!utility.ValidateStrongNameToolExistance(WindowsSdkPath))
+                if (!utility.ValidateStrongNameToolExistance(SdkPath))
                 {
                     Log.LogError(
-                        "The strong name tool (sn.exe) could not be located within the Windows SDK directory structure ({0})).",
-                        WindowsSdkPath);
+                        "The strong name tool (sn.exe) could not be located within the provided SDK directory ({0})).",
+                        SdkPath);
                     return false;
                 }
 
