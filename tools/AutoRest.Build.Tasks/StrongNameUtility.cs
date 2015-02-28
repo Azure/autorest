@@ -13,20 +13,38 @@ namespace Microsoft.Rest.Common.Build.Tasks
     /// </summary>
     internal class StrongNameUtility
     {
+        /// <summary>
+        /// Path to sn.exe.
+        /// </summary>
         private string _snPath;
 
-        public bool ValidateStrongNameToolExistance(string windowsSdkPath)
+        /// <summary>
+        /// Recursively search for a file.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="fileToFind"></param>
+        /// <returns>File, if found; otherwise, null.</returns>
+        private static string FindFile(string path, string fileToFind)
         {
-            // Location the .NET strong name signing utility
-            _snPath = FindFile(windowsSdkPath, "sn.exe");
-            if (_snPath == null)
+            foreach (string d in Directory.GetDirectories(path))
             {
-                return false;
-            }
+                string result = Directory.GetFiles(d, fileToFind).FirstOrDefault();
+                if (result != null)
+                {
+                    return result;
+                }
 
-            return true;
+                return FindFile(d, fileToFind);
+            }
+            return null;
         }
 
+        /// <summary>
+        /// Execute StrongName Verification.
+        /// </summary>
+        /// <param name="arguments"></param>
+        /// <param name="output"></param>
+        /// <returns>0 for success, 1 for error.</returns>
         public bool Execute(string arguments, out string output)
         {
             int exitCode;
@@ -46,24 +64,23 @@ namespace Microsoft.Rest.Common.Build.Tasks
 
                 exitCode = process.ExitCode;
             }
-
             return exitCode == 0;
         }
 
-        private static string FindFile(string path, string filenameOfInterest)
+        /// <summary>
+        /// Validates StrongName signature on a file.
+        /// </summary>
+        /// <param name="sdkPath"></param>
+        /// <returns></returns>
+        public bool ValidateStrongNameToolExistance(string sdkPath)
         {
-            foreach (string d in Directory.GetDirectories(path))
+            // Location the .NET strong name signing utility
+            _snPath = FindFile(sdkPath, "sn.exe");
+            if (_snPath == null)
             {
-                string result = Directory.GetFiles(d, filenameOfInterest).FirstOrDefault();
-                if (result != null)
-                {
-                    return result;
-                }
-
-                return FindFile(d, filenameOfInterest);
+                return false;
             }
-
-            return null;
+            return true;
         }
     }
 }
