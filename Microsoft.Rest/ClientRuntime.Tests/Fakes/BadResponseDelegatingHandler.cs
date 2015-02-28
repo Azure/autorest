@@ -3,6 +3,7 @@
 
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Microsoft.Rest.ClientRuntime.Tests.Fakes
@@ -20,14 +21,15 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Fakes
         public int NumberOfTimesToFail { get; set; }
 
         public HttpStatusCode StatusCodeToReturn { get; set; }
-        
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, System.Threading.CancellationToken cancellationToken)
+
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
+            CancellationToken cancellationToken)
         {
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
             if (NumberOfTimesToFail > NumberOfTimesFailedSoFar)
             {
                 response = new HttpResponseMessage(StatusCodeToReturn);
-                NumberOfTimesFailedSoFar++;                
+                NumberOfTimesFailedSoFar++;
             }
 #if NET45
             return Task.Run(() => response);

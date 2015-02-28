@@ -22,7 +22,8 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Fakes
 
         public HttpStatusCode StatusCodeToReturn { get; set; }
 
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
+            CancellationToken cancellationToken)
         {
             var response = new HttpResponseMessage(HttpStatusCode.OK);
             if (NumberOfTimesToFail > NumberOfTimesFailedSoFar)

@@ -8,17 +8,17 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Fakes
 {
     public class AddHeaderResponseDelegatingHandler : DelegatingHandler
     {
-        public string HeaderName { get; set; }
-
-        public string HeaderValue { get; set; }
-
         public AddHeaderResponseDelegatingHandler(string headerName, string headerValue)
         {
             HeaderName = headerName;
             HeaderValue = headerValue;
         }
 
-        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, System.Threading.CancellationToken cancellationToken)
+        public string HeaderName { get; set; }
+        public string HeaderValue { get; set; }
+
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
+            System.Threading.CancellationToken cancellationToken)
         {
             HttpResponseMessage response = await base.SendAsync(request, cancellationToken);
             response.Headers.Add(HeaderName, HeaderValue);

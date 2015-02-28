@@ -10,41 +10,26 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Internals
         [Fact]
         public void LazyByDefaultTest()
         {
-            // Arrange
             var lazyDictionary = new LazyDictionary<string, string>();
-
-            // Act
             var initialized = lazyDictionary.IsInitialized;
-
-            // Assert
             Assert.False(initialized);
         }
 
         [Fact]
         public void LazyAddTest()
         {
-            // Arrange
             var lazyDictionary = new LazyDictionary<string, string>();
-
-            // Act
             lazyDictionary.Add("key", "value");
             var initialized = lazyDictionary.IsInitialized;
-
-            // Assert
             Assert.True(initialized);
         }
 
         [Fact]
         public void LazyKeyAddTest()
         {
-            // Arrange
             var lazyDictionary = new LazyDictionary<string, string>();
-
-            // Act
             lazyDictionary["key"] = "value";
             var initialized = lazyDictionary.IsInitialized;
-
-            // Assert
             Assert.True(initialized);
         }
     }

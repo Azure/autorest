@@ -25,22 +25,21 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Fakes
         }
 
 
-
         public async Task<HttpResponseMessage> DoStuff()
         {
             // Construct URL
             string url = "http://www.microsoft.com";
-            
+
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = null;
-            
+
             httpRequest = new HttpRequestMessage();
             httpRequest.Method = HttpMethod.Get;
             httpRequest.RequestUri = new Uri(url);
-                
+
             // Set Headers
             httpRequest.Headers.Add("x-ms-version", "2013-11-01");
-                
+
             // Set Credentials
             var cancellationToken = new CancellationToken();
             cancellationToken.ThrowIfCancellationRequested();

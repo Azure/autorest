@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using Microsoft.Rest.ClientRuntime.Tests.Fakes;
-using Microsoft.Rest.TransientFaultHandling;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using Microsoft.Rest.ClientRuntime.Tests.Fakes;
+using Microsoft.Rest.TransientFaultHandling;
 using Xunit;
 
 namespace Microsoft.Rest.ClientRuntime.Tests
@@ -18,9 +18,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests
             var fakeClient = new FakeServiceClient(new WebRequestHandler());
             var result1 = fakeClient.DoStuff();
             Assert.Equal(HttpStatusCode.OK, result1.Result.StatusCode);
-
             fakeClient = new FakeServiceClient(new WebRequestHandler(), new BadResponseDelegatingHandler());
-
             var result2 = fakeClient.DoStuff();
             Assert.Equal(HttpStatusCode.InternalServerError, result2.Result.StatusCode);
         }
@@ -34,7 +32,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests
 
             fakeClient = new FakeServiceClient(new WebRequestHandler(),
                 new BadResponseDelegatingHandler()
-            );
+                );
 
             var result2 = fakeClient.DoStuff();
             Assert.Equal(HttpStatusCode.InternalServerError, result2.Result.StatusCode);
@@ -47,10 +45,10 @@ namespace Microsoft.Rest.ClientRuntime.Tests
             var result1 = fakeClient.DoStuff();
             Assert.Equal(HttpStatusCode.OK, result1.Result.StatusCode);
 
-            fakeClient = new FakeServiceClient( new WebRequestHandler(), 
-                 new AddHeaderResponseDelegatingHandler("foo", "bar"),
-               new BadResponseDelegatingHandler()
-            );
+            fakeClient = new FakeServiceClient(new WebRequestHandler(),
+                new AddHeaderResponseDelegatingHandler("foo", "bar"),
+                new BadResponseDelegatingHandler()
+                );
 
             var result2 = fakeClient.DoStuff();
             Assert.Equal(result2.Result.Headers.GetValues("foo").FirstOrDefault(), "bar");
@@ -75,7 +73,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests
         [Fact]
         public void RetryHandlerRetriesWith500ErrorsAndSucceeds()
         {
-            var fakeClient = new FakeServiceClient(new FakeHttpHandler() { NumberOfTimesToFail = 1 });
+            var fakeClient = new FakeServiceClient(new FakeHttpHandler() {NumberOfTimesToFail = 1});
             int attemptsFailed = 0;
 
             fakeClient.SetRetryPolicy(new RetryPolicy<HttpStatusCodeErrorDetectionStrategy>(2));
@@ -90,7 +88,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests
         [Fact]
         public void RetryHandlerDoesntRetryFor400Errors()
         {
-            var fakeClient = new FakeServiceClient(new FakeHttpHandler() { StatusCodeToReturn = HttpStatusCode.Conflict });
+            var fakeClient = new FakeServiceClient(new FakeHttpHandler() {StatusCodeToReturn = HttpStatusCode.Conflict});
             int attemptsFailed = 0;
 
             fakeClient.SetRetryPolicy(new RetryPolicy<HttpStatusCodeErrorDetectionStrategy>(2));

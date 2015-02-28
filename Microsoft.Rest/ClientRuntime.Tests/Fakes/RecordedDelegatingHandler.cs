@@ -38,7 +38,8 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Fakes
 
         public Uri Uri { get; private set; }
 
-        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, System.Threading.CancellationToken cancellationToken)
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
+            System.Threading.CancellationToken cancellationToken)
         {
             // Save request
             if (request.Content == null)

@@ -14,7 +14,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Tracing
         [Fact]
         public void HttpRequestMessageAsFormattedStringThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => HttpExtensions.AsFormattedString((HttpRequestMessage)null));
+            Assert.Throws<ArgumentNullException>(() => HttpExtensions.AsFormattedString((HttpRequestMessage) null));
         }
 
         [Fact]
@@ -23,7 +23,6 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Tracing
             using (var httpRequest = new HttpRequestMessage())
             {
                 var formattedString = httpRequest.AsFormattedString();
-
                 Assert.Contains("Method: GET", formattedString);
             }
         }
@@ -35,7 +34,6 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Tracing
             {
                 httpRequest.Headers.Add("x-ms-version", "2013-11-01");
                 var formattedString = httpRequest.AsFormattedString();
-
                 Assert.Contains("Method: GET", formattedString);
                 Assert.Contains("RequestUri: 'http://www.windowsazure.com/test'", formattedString);
                 Assert.Contains("x-ms-version: 2013-11-01", formattedString);
@@ -49,7 +47,6 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Tracing
             {
                 httpRequest.Content = new StringContent("<body/>");
                 var formattedString = httpRequest.AsFormattedString();
-
                 Assert.Contains("Method: GET", formattedString);
                 Assert.Contains("RequestUri: 'http://www.windowsazure.com/test'", formattedString);
                 Assert.Contains("<body/>", formattedString);
@@ -59,7 +56,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Tracing
         [Fact]
         public void HttpResponseMessageAsFormattedStringThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => HttpExtensions.AsFormattedString((HttpResponseMessage)null));
+            Assert.Throws<ArgumentNullException>(() => HttpExtensions.AsFormattedString((HttpResponseMessage) null));
         }
 
         [Fact]
@@ -68,7 +65,6 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Tracing
             using (var httpRequest = new HttpResponseMessage())
             {
                 var formattedString = httpRequest.AsFormattedString();
-
                 Assert.Contains("StatusCode: 200", formattedString);
             }
         }
@@ -80,7 +76,6 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Tracing
             {
                 httpRequest.Headers.Add("x-ms-version", "2013-11-01");
                 var formattedString = httpRequest.AsFormattedString();
-
                 Assert.Contains("StatusCode: 200", formattedString);
                 Assert.Contains("x-ms-version: 2013-11-01", formattedString);
             }
@@ -93,7 +88,6 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Tracing
             {
                 httpRequest.Content = new StringContent("<body/>");
                 var formattedString = httpRequest.AsFormattedString();
-
                 Assert.Contains("StatusCode: 200", formattedString);
                 Assert.Contains("<body/>", formattedString);
             }
@@ -102,8 +96,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Tracing
         [Fact]
         public void DictionaryAsFormattedStringReturnsEmptyBracesForNull()
         {
-            var formattedString = HttpExtensions.AsFormattedString((Dictionary<string, object>)null);
-
+            var formattedString = HttpExtensions.AsFormattedString((Dictionary<string, object>) null);
             Assert.Equal("{}", formattedString);
         }
 
@@ -111,7 +104,6 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Tracing
         public void DictionaryAsFormattedStringReturnsEmptyBracesForEmptySet()
         {
             var formattedString = new Dictionary<string, object>().AsFormattedString();
-
             Assert.Equal("{}", formattedString);
         }
 
@@ -123,7 +115,6 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Tracing
             parameters["b"] = "str";
             parameters["c"] = true;
             var formattedString = parameters.AsFormattedString();
-
             Assert.Equal("{a=1,b=str,c=True}", formattedString);
         }
 
@@ -135,7 +126,6 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Tracing
             parameters["b"] = "str";
             parameters["c"] = null;
             var formattedString = parameters.AsFormattedString();
-
             Assert.Equal("{a=1,b=str,c=}", formattedString);
         }
     }
