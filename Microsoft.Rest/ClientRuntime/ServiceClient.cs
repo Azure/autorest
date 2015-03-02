@@ -20,19 +20,19 @@ namespace Microsoft.Rest
         /// <summary>
         /// Indicates whether the ServiceClient has been disposed. 
         /// </summary>
-        protected bool Disposed = false;
+        protected bool Disposed { get; set; }
         
         /// <summary>
         /// Reference to the outermost HTTP handler (which is the end of HTTP
         /// pipeline).
         /// </summary>
-        protected HttpMessageHandler OuterHandler = null;
+        protected HttpMessageHandler OuterHandler { get; set; }
 
         /// <summary>
         /// Reference to the innermost HTTP handler (which is the start of HTTP
         /// pipeline).
         /// </summary>
-        protected HttpMessageHandler InnerHandler = null;
+        protected HttpMessageHandler InnerHandler { get; set; }
        
         /// <summary>
         /// Initializes a new instance of the ServiceClient class.
