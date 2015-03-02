@@ -20,7 +20,7 @@ namespace Microsoft.Rest
         /// <summary>
         /// Indicates whether the ServiceClient has been disposed. 
         /// </summary>
-        protected bool Disposed { get; set; }
+        private bool _disposed;
         
         /// <summary>
         /// Reference to the outermost HTTP handler (which is the end of HTTP
@@ -144,9 +144,9 @@ namespace Microsoft.Rest
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!Disposed)
+            if (!_disposed)
             {
-                Disposed = true;
+                _disposed = true;
 
                 // Dispose the client
                 HttpClient.Dispose();
