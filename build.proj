@@ -73,6 +73,7 @@
 
   <!-- CI build related. -->
   <PropertyGroup>
+    <ContinueOnPoliCheckError>false</ContinueOnPoliCheckError>
     <!--OnPremiseBuildTasks is not a good name, but CI server is using that, will update across soon-->
     <CIToolsPath>$(OnPremiseBuildTasks)</CIToolsPath>
     <OnPremiseBuild Condition=" Exists($(OnPremiseBuildTasks)) ">true</OnPremiseBuild>
@@ -141,7 +142,7 @@
       <DelaySignedAssembliesToValidate Include="binaries\$(LibraryFxTarget)\unsigned\*.dll" />
     </ItemGroup>
     <ValidateStrongNameSignatureTask
-        SdkPath="$(WindowsSdkPath)"
+        SdkPath="$(SdkPath)"
         Assembly="%(DelaySignedAssembliesToValidate.Identity)"
         ExpectedTokenSignature="$(StrongNameToken)"
         ExpectedDelaySigned="true"
@@ -160,7 +161,7 @@
       <AfterSignedAssembliesToValidate Include="binaries\$(LibraryFxTarget)\*.dll" />
     </ItemGroup>
     <ValidateStrongNameSignatureTask
-        SdkPath="$(WindowsSdkPath)"
+        SdkPath="$(SdkPath)"
         Assembly="%(AfterSignedAssembliesToValidate.Identity)"
         ExpectedTokenSignature="$(StrongNameToken)"
         ExpectedDelaySigned="false"
