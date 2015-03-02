@@ -20,6 +20,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Net45-Debug|AnyCPU'">
     <DocumentationFile>bin\Net45-Debug\Microsoft.Rest.ClientRuntime.xml</DocumentationFile>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Net45-Release|AnyCPU'">
     <DocumentationFile>bin\Net45-Release\Microsoft.Rest.ClientRuntime.xml</DocumentationFile>
@@ -41,10 +42,9 @@
     <Compile Include="BasicAuthenticationCredentials.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HttpExtensions.cs" />
-    <Compile Include="IDeserializationModel.cs" />
     <Compile Include="TransientFaultHandling\RetryCondition.cs" />
     <Compile Include="TypeConversion.cs" />
-    <Compile Include="ILazyCollectionInitialized.cs" />
+    <Compile Include="ILazyCollection.cs" />
     <Compile Include="LazyDictionary.cs" />
     <Compile Include="LazyList.cs" />
     <Compile Include="HttpOperationResponse.cs" />

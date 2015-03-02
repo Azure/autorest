@@ -20,19 +20,19 @@ namespace Microsoft.Rest
         /// <summary>
         /// Indicates whether the ServiceClient has been disposed. 
         /// </summary>
-        internal bool _disposed = false;
+        private bool _disposed;
         
         /// <summary>
         /// Reference to the outermost HTTP handler (which is the end of HTTP
         /// pipeline).
         /// </summary>
-        internal HttpMessageHandler _outerHandler = null;
+        protected HttpMessageHandler OuterHandler { get; set; }
 
         /// <summary>
         /// Reference to the innermost HTTP handler (which is the start of HTTP
         /// pipeline).
         /// </summary>
-        internal HttpMessageHandler _innerHandler = null;
+        protected HttpClientHandler InnerHandler { get; set; }
        
         /// <summary>
         /// Initializes a new instance of the ServiceClient class.
@@ -95,11 +95,11 @@ namespace Microsoft.Rest
         /// Get the HTTP pipelines for the given service client.
         /// </summary>
         /// <returns>The client's HTTP pipeline.</returns>
-        public virtual IEnumerable<HttpMessageHandler> HttpPipelines
+        public virtual IEnumerable<HttpMessageHandler> HttpMessageHandlers
         {
             get
             {
-                var handler = _outerHandler;
+                var handler = OuterHandler;
 
                 while (handler != null)
                 {
@@ -122,7 +122,7 @@ namespace Microsoft.Rest
                 throw new ArgumentNullException("retryPolicy");
             }
 
-            RetryDelegatingHandler delegatingHandler = this.HttpPipelines.OfType<RetryDelegatingHandler>().FirstOrDefault();
+            RetryDelegatingHandler delegatingHandler = this.HttpMessageHandlers.OfType<RetryDelegatingHandler>().FirstOrDefault();
             if (delegatingHandler != null)
             {
                 delegatingHandler.RetryPolicy = retryPolicy;
@@ -151,8 +151,8 @@ namespace Microsoft.Rest
                 // Dispose the client
                 HttpClient.Dispose();
                 HttpClient = null;
-                _outerHandler = null;
-                _innerHandler = null;
+                OuterHandler = null;
+                InnerHandler = null;
             }
         }           
         
@@ -167,9 +167,9 @@ namespace Microsoft.Rest
             Justification="We let HttpClient instance dispose")]
         protected void InitializeHttpClient(HttpClientHandler httpMessageHandler, params DelegatingHandler[] handlers)
         {
-            _innerHandler = httpMessageHandler;
+            InnerHandler = httpMessageHandler;
             DelegatingHandler currentHandler = new RetryDelegatingHandler();
-            currentHandler.InnerHandler = _innerHandler;
+            currentHandler.InnerHandler = InnerHandler;
 
             if (handlers != null)
             {
@@ -182,7 +182,7 @@ namespace Microsoft.Rest
             }
 
             var newClient = new HttpClient(currentHandler, true);
-            _outerHandler = currentHandler;
+            OuterHandler = currentHandler;
             this.HttpClient = newClient;
             Type type = this.GetType();
             this.HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(type.FullName,
@@ -202,8 +202,7 @@ namespace Microsoft.Rest
                 .FullName
                 .Split(',')
                 .Select(c => c.Trim())
-                .Where(c => c.StartsWith("Version=", StringComparison.OrdinalIgnoreCase))
-                .FirstOrDefault()
+                .First(c => c.StartsWith("Version=", StringComparison.OrdinalIgnoreCase))
                 .Substring("Version=".Length);
             return version;
         }
