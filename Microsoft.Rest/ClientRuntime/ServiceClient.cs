@@ -32,7 +32,7 @@ namespace Microsoft.Rest
         /// Reference to the innermost HTTP handler (which is the start of HTTP
         /// pipeline).
         /// </summary>
-        protected HttpMessageHandler InnerHandler { get; set; }
+        protected HttpClientHandler InnerHandler { get; set; }
        
         /// <summary>
         /// Initializes a new instance of the ServiceClient class.
@@ -165,7 +165,7 @@ namespace Microsoft.Rest
             "Microsoft.Reliability", 
             "CA2000:Dispose objects before losing scope", 
             Justification="We let HttpClient instance dispose")]
-        protected void InitializeHttpClient(HttpMessageHandler httpMessageHandler, params DelegatingHandler[] handlers)
+        protected void InitializeHttpClient(HttpClientHandler httpMessageHandler, params DelegatingHandler[] handlers)
         {
             InnerHandler = httpMessageHandler;
             DelegatingHandler currentHandler = new RetryDelegatingHandler();
