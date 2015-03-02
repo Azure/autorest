@@ -2,8 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using Xunit;
 using Microsoft.Rest.TransientFaultHandling;
+using Xunit;
 
 namespace Microsoft.Rest.ClientRuntime.Tests.TransientFaultHandling
 {
@@ -12,7 +12,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests.TransientFaultHandling
         [Fact]
         public void PropertiesAreSetByConstrutor()
         {
-            RetryCondition condition = new RetryCondition(true, TimeSpan.FromSeconds(1));
+            var condition = new RetryCondition(true, TimeSpan.FromSeconds(1));
             Assert.Equal(true, condition.RetryAllowed);
             Assert.Equal(TimeSpan.FromSeconds(1), condition.DelayBeforeRetry);
 

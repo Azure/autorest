@@ -16,15 +16,15 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Fakes
         /// <summary>
         /// Initializes a new instance of the FakeServiceClientWithCredentials class.
         /// </summary>
-        private FakeServiceClientWithCredentials()
-            : base()
+        private FakeServiceClientWithCredentials() : base()
         {
         }
 
         /// <summary>
         /// Initializes a new instance of the FakeServiceClientWithCredentials class.
         /// </summary>
-        public FakeServiceClientWithCredentials(ServiceClientCredentials credentials, Uri baseUri, params DelegatingHandler[] handlers)
+        public FakeServiceClientWithCredentials(ServiceClientCredentials credentials, Uri baseUri,
+            params DelegatingHandler[] handlers)
             : base(handlers)
         {
             if (credentials == null)
@@ -35,7 +35,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Fakes
             {
                 throw new ArgumentNullException("baseUri");
             }
-            
+
             InitializeClient(credentials, baseUri);
         }
 
@@ -50,15 +50,15 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Fakes
             {
                 throw new ArgumentNullException("baseUri");
             }
-            
+
             InitializeClient(credentials, baseUri);
         }
 
         /// <summary>
         /// Initializes a new instance of the FakeServiceClientWithCredentials class.
         /// </summary>
-        
-        public FakeServiceClientWithCredentials(ServiceClientCredentials credentials, params DelegatingHandler[] handlers)
+        public FakeServiceClientWithCredentials(ServiceClientCredentials credentials,
+            params DelegatingHandler[] handlers)
             : base(handlers)
         {
             if (credentials == null)
@@ -69,7 +69,8 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Fakes
             InitializeClient(credentials, new Uri("https://TBD"));
         }
 
-         public FakeServiceClientWithCredentials(ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers)
+        public FakeServiceClientWithCredentials(ServiceClientCredentials credentials, HttpClientHandler rootHandler,
+            params DelegatingHandler[] handlers)
             : base(rootHandler, handlers)
         {
             if (credentials == null)
@@ -94,24 +95,25 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Fakes
         {
             // Construct URL
             string url = "http://www.microsoft.com";
-            
+
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = null;
-            
+
             httpRequest = new HttpRequestMessage();
             httpRequest.Method = HttpMethod.Get;
             httpRequest.RequestUri = new Uri(url);
 
             await this.Credentials.ProcessHttpRequestAsync(httpRequest, new CancellationToken());
-                
+
             // Set Headers
             httpRequest.Headers.Add("x-ms-version", "2013-11-01");
-                
+
             // Set Credentials
             var cancellationToken = new CancellationToken();
             cancellationToken.ThrowIfCancellationRequested();
             return await HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
         }
+
         protected void InitializeClient(ServiceClientCredentials credentials, Uri baseUri)
         {
             this._credentials = credentials;

@@ -1,16 +1,16 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using Microsoft.Rest.TransientFaultHandling;
 using System;
 using System.Net;
+using Microsoft.Rest.TransientFaultHandling;
 using Xunit;
 using Xunit.Extensions;
 
 namespace Microsoft.Rest.ClientRuntime.Tests.TransientFaultHandling
 {
     /// <summary>
-    /// Implements general test cases for http error detections.
+    ///     Implements general test cases for http error detections.
     /// </summary>
     public class DefaultHttpErrorDetectionStrategyTests
     {
@@ -21,7 +21,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests.TransientFaultHandling
         public void ResponseCodeIsConsideredTransient(HttpStatusCode code)
         {
             var strategy = new HttpStatusCodeErrorDetectionStrategy();
-            Assert.True(strategy.IsTransient(new HttpRequestWithStatusException { StatusCode = code }));
+            Assert.True(strategy.IsTransient(new HttpRequestWithStatusException {StatusCode = code}));
         }
 
         [Theory]
@@ -30,7 +30,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests.TransientFaultHandling
         public void ResponseCodeIsNotConsideredTransient(HttpStatusCode code)
         {
             var strategy = new HttpStatusCodeErrorDetectionStrategy();
-            Assert.False(strategy.IsTransient(new HttpRequestWithStatusException { StatusCode = code }));
+            Assert.False(strategy.IsTransient(new HttpRequestWithStatusException {StatusCode = code}));
         }
 
         [Fact]
