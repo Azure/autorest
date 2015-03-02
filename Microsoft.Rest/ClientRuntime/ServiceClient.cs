@@ -165,7 +165,7 @@ namespace Microsoft.Rest
             "Microsoft.Reliability", 
             "CA2000:Dispose objects before losing scope", 
             Justification="We let HttpClient instance dispose")]
-        protected void InitializeHttpClient(HttpClientHandler httpMessageHandler, params DelegatingHandler[] handlers)
+        protected void InitializeHttpClient(HttpMessageHandler httpMessageHandler, params DelegatingHandler[] handlers)
         {
             InnerHandler = httpMessageHandler;
             DelegatingHandler currentHandler = new RetryDelegatingHandler();

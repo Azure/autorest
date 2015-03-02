@@ -20,6 +20,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Net45-Debug|AnyCPU'">
     <DocumentationFile>bin\Net45-Debug\Microsoft.Rest.ClientRuntime.xml</DocumentationFile>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Net45-Release|AnyCPU'">
     <DocumentationFile>bin\Net45-Release\Microsoft.Rest.ClientRuntime.xml</DocumentationFile>
