@@ -142,7 +142,7 @@
       <DelaySignedAssembliesToValidate Include="binaries\$(LibraryFxTarget)\unsigned\*.dll" />
     </ItemGroup>
     <ValidateStrongNameSignatureTask
-        SdkPath="$(WindowsSdkPath)"
+        SdkPath="$(SdkPath)"
         Assembly="%(DelaySignedAssembliesToValidate.Identity)"
         ExpectedTokenSignature="$(StrongNameToken)"
         ExpectedDelaySigned="true"
@@ -161,7 +161,7 @@
       <AfterSignedAssembliesToValidate Include="binaries\$(LibraryFxTarget)\*.dll" />
     </ItemGroup>
     <ValidateStrongNameSignatureTask
-        SdkPath="$(WindowsSdkPath)"
+        SdkPath="$(SdkPath)"
         Assembly="%(AfterSignedAssembliesToValidate.Identity)"
         ExpectedTokenSignature="$(StrongNameToken)"
         ExpectedDelaySigned="false"
