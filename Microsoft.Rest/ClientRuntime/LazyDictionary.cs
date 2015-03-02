@@ -11,7 +11,7 @@ namespace Microsoft.Rest
     /// </summary>
     /// <typeparam name="TKey">Type parameter for Key.</typeparam>
     /// <typeparam name="TValue">Type parameter for Value.</typeparam>
-    public class LazyDictionary<TKey, TValue> : IDictionary<TKey, TValue>, ILazyCollectionInitialized
+    public class LazyDictionary<TKey, TValue> : IDictionary<TKey, TValue>, ILazyCollection<KeyValuePair<TKey, TValue>>
     {
         private IDictionary<TKey, TValue> _dictionary;
 
