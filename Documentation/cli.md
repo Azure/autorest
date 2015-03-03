@@ -18,10 +18,10 @@
 ```bash
 'AutoRest.exe' -CodeGenerator <value> -Modeler <value> -Input <value> -BaseNamespace <value> [-OutputFolder <value>] [-OutputAsSingleFile <value>] [-Header <value>] [-AddCredentials <value>]
 ```
-###Description
+##Description
 AutoRest is an extensible client library generator and can support multiple types of input and output. AutoRest.exe comes with the `AutoRest.json` configuration file that defines the available inputs (Modelers) and outputs (CodeGenerators). When invoking AutoRest.exe, you must specify the `-Modeler` and `-CodeGenerator` to use.
 
-###Parameters
+##Parameters
 **-OutputFolder** 
 Output folder for generated files. Defaults to current directory.
 
@@ -49,7 +49,7 @@ Default file header contents. Use `NONE` if no header is required.
 If set to true generated client will have [ServiceClientCredentials](https://github.com/Azure/AutoRest/blob/master/Microsoft.Rest/ClientRuntime/ServiceClientCredentials.cs) in property and constructor.
 
 
-#Examples
+##Examples
 - Generate C# client library from a Swagger formatted input specification `swagger.json` with namespace `MyNamespace`:
 ```bash
 AutoRest.exe -CodeGenerator CSharp -Modeler Swagger -Input swagger.json -BaseNamespace MyNamespace
