@@ -42,7 +42,7 @@ namespace Microsoft.Rest
             // Add username and password to "Basic" header of each request.
             request.Headers.Authorization = new AuthenticationHeaderValue("Basic",
                 Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format(
-                    CultureInfo.InvariantCulture, 
+                    CultureInfo.InvariantCulture,
                     "{0}:{1}",
                     UserName,
                     Password).ToCharArray())));

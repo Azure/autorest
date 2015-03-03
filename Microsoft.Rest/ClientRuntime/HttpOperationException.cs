@@ -10,12 +10,12 @@ namespace Microsoft.Rest
     /// Exception thrown for an invalid response with custom error information.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage(
-        "Microsoft.Design", 
-        "CA1032:ImplementStandardExceptionConstructors"), 
-    System.Diagnostics.CodeAnalysis.SuppressMessage(
-        "Microsoft.Usage", 
-        "CA2237:MarkISerializableTypesWithSerializable", 
-        Justification = "HttpRequestException hides the constructor needed for serialization.")]
+        "Microsoft.Design",
+        "CA1032:ImplementStandardExceptionConstructors"),
+     System.Diagnostics.CodeAnalysis.SuppressMessage(
+         "Microsoft.Usage",
+         "CA2237:MarkISerializableTypesWithSerializable",
+         Justification = "HttpRequestException hides the constructor needed for serialization.")]
     public class HttpOperationException<T> : HttpOperationException
     {
         /// <summary>
@@ -26,7 +26,7 @@ namespace Microsoft.Rest
         /// <summary>
         /// Initializes a new instance of the HttpOperationException class.
         /// </summary>
-        public HttpOperationException() 
+        public HttpOperationException()
             : base()
         {
         }
@@ -48,7 +48,7 @@ namespace Microsoft.Rest
         public HttpOperationException(string message, Exception innerException)
             : base(message, innerException)
         {
-        }       
+        }
     }
 
     /// <summary>
@@ -57,10 +57,10 @@ namespace Microsoft.Rest
     [System.Diagnostics.CodeAnalysis.SuppressMessage(
         "Microsoft.Design",
         "CA1032:ImplementStandardExceptionConstructors"),
-    System.Diagnostics.CodeAnalysis.SuppressMessage(
-        "Microsoft.Usage",
-        "CA2237:MarkISerializableTypesWithSerializable",
-        Justification = "HttpRequestException hides the constructor needed for serialization.")]
+     System.Diagnostics.CodeAnalysis.SuppressMessage(
+         "Microsoft.Usage",
+         "CA2237:MarkISerializableTypesWithSerializable",
+         Justification = "HttpRequestException hides the constructor needed for serialization.")]
     public class HttpOperationException : HttpRequestException
     {
         /// <summary>

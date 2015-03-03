@@ -47,15 +47,7 @@ namespace Microsoft.Rest
 
         private IDictionary<TKey, TValue> InnerDictionary
         {
-            get
-            {
-                if (_dictionary == null)
-                {
-                    _dictionary = new Dictionary<TKey, TValue>();
-                }
-
-                return _dictionary;
-            }
+            get { return _dictionary ?? (_dictionary = new Dictionary<TKey, TValue>()); }
 
             set { _dictionary = value; }
         }

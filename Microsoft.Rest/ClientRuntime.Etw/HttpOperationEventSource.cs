@@ -13,7 +13,9 @@ namespace Microsoft.Rest.Tracing.Etw
     {
         private static HttpOperationEventSource _log;
 
-        private HttpOperationEventSource() { }
+        private HttpOperationEventSource()
+        {
+        }
 
         /// <summary>
         /// Gets an instance of the HttpOperationEventSource.

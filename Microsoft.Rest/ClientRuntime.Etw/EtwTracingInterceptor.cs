@@ -52,7 +52,8 @@ namespace Microsoft.Rest.Tracing.Etw
         /// <param name="instance">The instance with the method.</param>
         /// <param name="method">Name of the method.</param>
         /// <param name="parameters">Method parameters.</param>
-        public void EnterMethod(string invocationId, object instance, string method, IDictionary<string, object> parameters)
+        public void EnterMethod(string invocationId, object instance, string method,
+            IDictionary<string, object> parameters)
         {
             string instanceAsString = instance == null ? string.Empty : instance.ToString();
             string parametersAsString = parameters == null ? string.Empty : parameters.AsFormattedString();

@@ -13,7 +13,7 @@ namespace Microsoft.Rest
         {
 #if NET45
             return Task.FromResult<object>(result);
-#else 
+#else
             return TaskEx.FromResult<object>(result);
 #endif
         }

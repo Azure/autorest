@@ -10,7 +10,7 @@ namespace Microsoft.Rest
     /// Represents an object list that supports on-demand initialization.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming",
         "CA1710:IdentifiersShouldHaveCorrectSuffix",
         Justification = "The name has been reviewed and decided. Changing it has too broad impact")]
     public class LazyList<T> : IList<T>, ILazyCollection<T>
@@ -34,15 +34,7 @@ namespace Microsoft.Rest
 
         private IList<T> InnerList
         {
-            get
-            {
-                if (_list == null)
-                {
-                    _list = new List<T>();
-                }
-
-                return _list;
-            }
+            get { return _list ?? (_list = new List<T>()); }
 
             set { _list = value; }
         }

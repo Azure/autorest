@@ -14,7 +14,7 @@ namespace Microsoft.Rest
         /// <summary>
         /// The collection of tracing interceptors to notify.
         /// </summary>
-        private static List<IServiceClientTracingInterceptor> _interceptors = 
+        private static List<IServiceClientTracingInterceptor> _interceptors =
             new List<IServiceClientTracingInterceptor>();
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace Microsoft.Rest
         /// in progress on a different thread will not be affected by the
         /// change.
         /// </summary>
-        private static List<IServiceClientTracingInterceptor> _threadSafeInterceptors = 
+        private static List<IServiceClientTracingInterceptor> _threadSafeInterceptors =
             new List<IServiceClientTracingInterceptor>();
 
         /// <summary>
@@ -43,14 +43,8 @@ namespace Microsoft.Rest
         /// </summary>
         public static bool IsEnabled
         {
-            get
-            {
-                return _isEnabled;
-            }
-            set
-            {
-                _isEnabled = value;
-            }
+            get { return _isEnabled; }
+            set { _isEnabled = value; }
         }
 
         /// <summary>
@@ -104,7 +98,7 @@ namespace Microsoft.Rest
                 throw new ArgumentNullException("interceptor");
             }
 
-            bool removed = false;
+            bool removed;
             lock (_lock)
             {
                 removed = _interceptors.Remove(interceptor);

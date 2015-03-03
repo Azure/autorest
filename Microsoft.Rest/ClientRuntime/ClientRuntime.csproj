@@ -68,7 +68,7 @@
     <Compile Include="TransientFaultHandling\FixedIntervalRetryStrategy.cs" />
     <Compile Include="TransientFaultHandling\Guard.cs" />
     <Compile Include="TransientFaultHandling\HttpRequestWithStatusException.cs" />
-    <Compile Include="TransientFaultHandling\Incremental.cs" />
+    <Compile Include="TransientFaultHandling\IncrementalRetryStrategy.cs" />
     <Compile Include="TransientFaultHandling\ITransientErrorDetectionStrategy.cs" />
     <Compile Include="TransientFaultHandling\RetryingEventArgs.cs" />
     <Compile Include="TransientFaultHandling\RetryManager.cs" />

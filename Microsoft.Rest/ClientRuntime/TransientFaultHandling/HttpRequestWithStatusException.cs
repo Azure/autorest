@@ -12,25 +12,29 @@ namespace Microsoft.Rest.TransientFaultHandling
     /// Inherits HttpRequestException adding HttpStatusCode to the exception.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage(
-        "Microsoft.Design", 
-        "CA1032:ImplementStandardExceptionConstructors"), 
-    System.Diagnostics.CodeAnalysis.SuppressMessage(
-        "Microsoft.Usage", 
-        "CA2237:MarkISerializableTypesWithSerializable",
-        Justification = "HttpRequestException hides the constructor needed for serialization.")]
+        "Microsoft.Design",
+        "CA1032:ImplementStandardExceptionConstructors"),
+     System.Diagnostics.CodeAnalysis.SuppressMessage(
+         "Microsoft.Usage",
+         "CA2237:MarkISerializableTypesWithSerializable",
+         Justification = "HttpRequestException hides the constructor needed for serialization.")]
     public class HttpRequestWithStatusException : HttpRequestException
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpRequestWithStatusException"/> class.
         /// </summary>
-        public HttpRequestWithStatusException() : base() { }
-        
+        public HttpRequestWithStatusException() : base()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpRequestWithStatusException"/> class
         /// with a specific message that describes the current exception.
         /// </summary>
         /// <param name="message">A message that describes the current exception.</param>
-        public HttpRequestWithStatusException(string message) : base(message) { }
+        public HttpRequestWithStatusException(string message) : base(message)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpRequestWithStatusException"/> class
@@ -39,7 +43,9 @@ namespace Microsoft.Rest.TransientFaultHandling
         /// </summary>
         /// <param name="message">A message that describes the current exception.</param>
         /// <param name="inner">The inner exception.</param>
-        public HttpRequestWithStatusException(string message, Exception inner) : base(message, inner) { }
+        public HttpRequestWithStatusException(string message, Exception inner) : base(message, inner)
+        {
+        }
 
         /// <summary>
         /// Http status code.

@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using Microsoft.Rest.Properties;
 using System;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Rest.Properties;
 
 namespace Microsoft.Rest.TransientFaultHandling
 {
@@ -103,8 +103,8 @@ namespace Microsoft.Rest.TransientFaultHandling
             }
 
             return task
-                .ContinueWith<Task<TResult>>(this.ExecuteAsyncContinueWith, CancellationToken.None, 
-                TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default)
+                .ContinueWith<Task<TResult>>(this.ExecuteAsyncContinueWith, CancellationToken.None,
+                    TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default)
                 .Unwrap();
         }
 
@@ -124,14 +124,14 @@ namespace Microsoft.Rest.TransientFaultHandling
                 // if not transient, return the faulted running task.
                 return runningTask;
             }
-            
+
             RetryCondition condition = this._shouldRetryHandler(this._retryCount++, lastError);
             if (!condition.RetryAllowed)
             {
                 return runningTask;
             }
             delay = condition.DelayBeforeRetry;
-            
+
             // Perform an extra check in the delay interval.
             if (delay < TimeSpan.Zero)
             {
@@ -144,8 +144,8 @@ namespace Microsoft.Rest.TransientFaultHandling
             if (delay > TimeSpan.Zero && (this._retryCount > 1 || !this._fastFirstRetry))
             {
                 return PlatformTask.Delay(delay)
-                    .ContinueWith<Task<TResult>>(this.ExecuteAsyncImpl, CancellationToken.None, 
-                    TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default)
+                    .ContinueWith<Task<TResult>>(this.ExecuteAsyncImpl, CancellationToken.None,
+                        TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default)
                     .Unwrap();
             }
 
@@ -168,7 +168,9 @@ namespace Microsoft.Rest.TransientFaultHandling
             Action<int, Exception, TimeSpan> onRetrying,
             bool fastFirstRetry,
             CancellationToken cancellationToken)
-            : base(() => StartAsGenericTask(taskAction), shouldRetryHandler, isTransient, onRetrying, fastFirstRetry, cancellationToken)
+            : base(
+                () => StartAsGenericTask(taskAction), shouldRetryHandler, isTransient, onRetrying, fastFirstRetry,
+                cancellationToken)
         {
         }
 

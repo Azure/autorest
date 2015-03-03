@@ -1,12 +1,12 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using log4net;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Net.Http;
+using log4net;
 
 namespace Microsoft.Rest.Tracing.Log4Net
 {
@@ -38,7 +38,9 @@ namespace Microsoft.Rest.Tracing.Log4Net
         /// <summary>
         /// Initializes a new instance of the <see cref="Log4NetTracingInterceptor" /> class without configuration file.
         /// </summary>
-        public Log4NetTracingInterceptor() : this(null) { }
+        public Log4NetTracingInterceptor() : this(null)
+        {
+        }
 
         /// <summary>
         /// Trace information.
@@ -68,7 +70,8 @@ namespace Microsoft.Rest.Tracing.Log4Net
         /// <param name="instance">The instance with the method.</param>
         /// <param name="method">Name of the method.</param>
         /// <param name="parameters">Method parameters.</param>
-        public void EnterMethod(string invocationId, object instance, string method, IDictionary<string, object> parameters)
+        public void EnterMethod(string invocationId, object instance, string method,
+            IDictionary<string, object> parameters)
         {
             _logger.DebugFormat(CultureInfo.InvariantCulture,
                 "invocationId: {0}\r\ninstance: {1}\r\nmethod: {2}\r\nparameters: {3}",
@@ -83,7 +86,7 @@ namespace Microsoft.Rest.Tracing.Log4Net
         public void SendRequest(string invocationId, HttpRequestMessage request)
         {
             string requestAsString = (request == null ? string.Empty : request.AsFormattedString());
-            _logger.DebugFormat(CultureInfo.InvariantCulture, 
+            _logger.DebugFormat(CultureInfo.InvariantCulture,
                 "invocationId: {0}\r\nrequest: {1}", invocationId, requestAsString);
         }
 
@@ -95,7 +98,7 @@ namespace Microsoft.Rest.Tracing.Log4Net
         public void ReceiveResponse(string invocationId, HttpResponseMessage response)
         {
             string requestAsString = (response == null ? string.Empty : response.AsFormattedString());
-            _logger.DebugFormat(CultureInfo.InvariantCulture, 
+            _logger.DebugFormat(CultureInfo.InvariantCulture,
                 "invocationId: {0}\r\nresponse: {1}", invocationId, requestAsString);
         }
 
@@ -119,7 +122,7 @@ namespace Microsoft.Rest.Tracing.Log4Net
         {
             string returnValueAsString = (returnValue == null ? string.Empty : returnValue.ToString());
             _logger.DebugFormat(CultureInfo.InvariantCulture,
-                "Exit with invocation id {0}, the return value is {1}", 
+                "Exit with invocation id {0}, the return value is {1}",
                 invocationId,
                 returnValueAsString);
         }
