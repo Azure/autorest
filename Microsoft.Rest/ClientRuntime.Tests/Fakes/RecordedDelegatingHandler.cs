@@ -63,18 +63,16 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Fakes
             {
                 return await base.SendAsync(request, cancellationToken);
             }
+
+            if (_response != null)
+            {
+                return _response;
+            }
             else
             {
-                if (_response != null)
-                {
-                    return _response;
-                }
-                else
-                {
-                    HttpResponseMessage response = new HttpResponseMessage(StatusCodeToReturn);
-                    response.Content = new StringContent("");
-                    return response;
-                }
+                var response = new HttpResponseMessage(StatusCodeToReturn);
+                response.Content = new StringContent("");
+                return response;
             }
         }
     }

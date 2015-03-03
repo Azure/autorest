@@ -1,12 +1,12 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using Microsoft.Rest.TransientFaultHandling;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using Microsoft.Rest.TransientFaultHandling;
 
 namespace Microsoft.Rest
 {
@@ -21,7 +21,7 @@ namespace Microsoft.Rest
         /// Indicates whether the ServiceClient has been disposed. 
         /// </summary>
         private bool _disposed;
-        
+
         /// <summary>
         /// Reference to the outermost HTTP handler (which is the end of HTTP
         /// pipeline).
@@ -33,24 +33,24 @@ namespace Microsoft.Rest
         /// pipeline).
         /// </summary>
         protected HttpClientHandler InnerHandler { get; set; }
-       
+
         /// <summary>
         /// Initializes a new instance of the ServiceClient class.
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Reliability", 
+            "Microsoft.Reliability",
             "CA2000:Dispose objects before losing scope",
-            Justification="The created objects should be disposed on caller's side")]
+            Justification = "The created objects should be disposed on caller's side")]
         protected ServiceClient()
             : this(CreateRootHandler())
         {
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Reliability", 
-            "CA2000:Dispose objects before losing scope", 
-            Justification="The created objects should be disposed on caller's side")]
-        protected ServiceClient(params DelegatingHandler[] handlers) 
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "The created objects should be disposed on caller's side")]
+        protected ServiceClient(params DelegatingHandler[] handlers)
             : this(CreateRootHandler(), handlers)
         {
         }
@@ -61,9 +61,9 @@ namespace Microsoft.Rest
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Reliability", 
-            "CA2000:Dispose objects before losing scope", 
-            Justification="The created objects should be disposed on caller's side")]
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "The created objects should be disposed on caller's side")]
         protected static HttpClientHandler CreateRootHandler()
         {
             // Create our root handler
@@ -81,7 +81,7 @@ namespace Microsoft.Rest
         /// Gets the HttpClient used for making HTTP requests.
         /// </summary>
         public HttpClient HttpClient { get; protected set; }
-        
+
         /// <summary>
         /// Gets the UserAgent collection which can be augmented with custom
         /// user agent strings.
@@ -122,7 +122,8 @@ namespace Microsoft.Rest
                 throw new ArgumentNullException("retryPolicy");
             }
 
-            RetryDelegatingHandler delegatingHandler = this.HttpMessageHandlers.OfType<RetryDelegatingHandler>().FirstOrDefault();
+            RetryDelegatingHandler delegatingHandler =
+                HttpMessageHandlers.OfType<RetryDelegatingHandler>().FirstOrDefault();
             if (delegatingHandler != null)
             {
                 delegatingHandler.RetryPolicy = retryPolicy;
@@ -154,17 +155,17 @@ namespace Microsoft.Rest
                 OuterHandler = null;
                 InnerHandler = null;
             }
-        }           
-        
+        }
+
         /// <summary>
         /// Initializes HttpClient using HttpClientHandler.
         /// </summary>
         /// <param name="httpMessageHandler">Base HttpClientHandler.</param>
         /// <param name="handlers">List of handlers from top to bottom (outer handler is the first in the list)</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Reliability", 
-            "CA2000:Dispose objects before losing scope", 
-            Justification="We let HttpClient instance dispose")]
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "We let HttpClient instance dispose")]
         protected void InitializeHttpClient(HttpClientHandler httpMessageHandler, params DelegatingHandler[] handlers)
         {
             InnerHandler = httpMessageHandler;
@@ -183,9 +184,9 @@ namespace Microsoft.Rest
 
             var newClient = new HttpClient(currentHandler, true);
             OuterHandler = currentHandler;
-            this.HttpClient = newClient;
+            HttpClient = newClient;
             Type type = this.GetType();
-            this.HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(type.FullName,
+            HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(type.FullName,
                 GetAssemblyVersion()));
         }
 
@@ -198,12 +199,12 @@ namespace Microsoft.Rest
             Type type = this.GetType();
             string version =
                 type
-                .Assembly
-                .FullName
-                .Split(',')
-                .Select(c => c.Trim())
-                .First(c => c.StartsWith("Version=", StringComparison.OrdinalIgnoreCase))
-                .Substring("Version=".Length);
+                    .Assembly
+                    .FullName
+                    .Split(',')
+                    .Select(c => c.Trim())
+                    .First(c => c.StartsWith("Version=", StringComparison.OrdinalIgnoreCase))
+                    .Substring("Version=".Length);
             return version;
         }
     }

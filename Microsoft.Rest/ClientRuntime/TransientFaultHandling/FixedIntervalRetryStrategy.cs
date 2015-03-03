@@ -17,7 +17,8 @@ namespace Microsoft.Rest.TransientFaultHandling
         /// <summary>
         /// Initializes a new instance of the <see cref="FixedIntervalRetryStrategy"/> class. 
         /// </summary>
-        public FixedIntervalRetryStrategy() : this(DefaultClientRetryCount)
+        public FixedIntervalRetryStrategy()
+            : this(DefaultClientRetryCount)
         {
         }
 
@@ -81,12 +82,13 @@ namespace Microsoft.Rest.TransientFaultHandling
         {
             if (this._retryCount == 0)
             {
-                return delegate(int currentRetryCount, Exception lastException)
-                {
-                    return new RetryCondition(false, TimeSpan.Zero);
-                };
+                return
+                    delegate(int currentRetryCount, Exception lastException)
+                    {
+                        return new RetryCondition(false, TimeSpan.Zero);
+                    };
             }
-            
+
             return delegate(int currentRetryCount, Exception lastException)
             {
                 if (currentRetryCount < this._retryCount)

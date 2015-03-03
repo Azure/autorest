@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using Microsoft.Rest.Properties;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Microsoft.Rest.Properties;
 
 namespace Microsoft.Rest.TransientFaultHandling
 {
@@ -47,7 +47,7 @@ namespace Microsoft.Rest.TransientFaultHandling
         /// <param name="retryStrategies">The complete set of retry strategies.</param>
         /// <param name="defaultRetryStrategyName">The default retry strategy.</param>
         /// <param name="defaultRetryStrategyNamesMap">The names of the default strategies for different technologies.</param>
-        public RetryManager(IEnumerable<RetryStrategy> retryStrategies, string defaultRetryStrategyName, 
+        public RetryManager(IEnumerable<RetryStrategy> retryStrategies, string defaultRetryStrategyName,
             IDictionary<string, string> defaultRetryStrategyNamesMap)
         {
             _retryStrategies = retryStrategies.ToDictionary(p => p.Name);
@@ -63,8 +63,8 @@ namespace Microsoft.Rest.TransientFaultHandling
                     {
                         throw new ArgumentOutOfRangeException(
                             "defaultRetryStrategyNamesMap",
-                            string.Format(CultureInfo.CurrentCulture, Resources.DefaultRetryStrategyMappingNotFound, 
-                            map.Key, map.Value));
+                            string.Format(CultureInfo.CurrentCulture, Resources.DefaultRetryStrategyMappingNotFound,
+                                map.Key, map.Value));
                     }
 
                     _defaultRetryStrategiesMap.Add(map.Key, strategy);
@@ -107,7 +107,7 @@ namespace Microsoft.Rest.TransientFaultHandling
                     }
                     else
                     {
-                        throw new ArgumentOutOfRangeException("value", string.Format(CultureInfo.CurrentCulture, 
+                        throw new ArgumentOutOfRangeException("value", string.Format(CultureInfo.CurrentCulture,
                             Resources.RetryStrategyNotFound, value));
                     }
                 }
@@ -190,14 +190,14 @@ namespace Microsoft.Rest.TransientFaultHandling
         {
             if (string.IsNullOrEmpty(retryStrategyName))
             {
-                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Resources.StringCannotBeEmpty, 
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Resources.StringCannotBeEmpty,
                     "retryStrategyName"));
             }
 
             RetryStrategy retryStrategy;
             if (!this._retryStrategies.TryGetValue(retryStrategyName, out retryStrategy))
             {
-                throw new ArgumentOutOfRangeException(string.Format(CultureInfo.CurrentCulture, 
+                throw new ArgumentOutOfRangeException(string.Format(CultureInfo.CurrentCulture,
                     Resources.RetryStrategyNotFound, retryStrategyName));
             }
 
@@ -213,7 +213,7 @@ namespace Microsoft.Rest.TransientFaultHandling
         {
             if (string.IsNullOrEmpty(technology))
             {
-                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Resources.StringCannotBeEmpty, 
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Resources.StringCannotBeEmpty,
                     "technology"));
             }
 
@@ -226,7 +226,7 @@ namespace Microsoft.Rest.TransientFaultHandling
 
             if (retryStrategy == null)
             {
-                throw new ArgumentOutOfRangeException(string.Format(CultureInfo.CurrentCulture, 
+                throw new ArgumentOutOfRangeException(string.Format(CultureInfo.CurrentCulture,
                     Resources.DefaultRetryStrategyNotFound, technology));
             }
 

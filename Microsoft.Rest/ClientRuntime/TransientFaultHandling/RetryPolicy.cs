@@ -89,7 +89,7 @@ namespace Microsoft.Rest.TransientFaultHandling
         /// retries.</param>
         public RetryPolicy(ITransientErrorDetectionStrategy errorDetectionStrategy, int retryCount, TimeSpan initialInterval, 
             TimeSpan increment)
-            : this(errorDetectionStrategy, new Incremental(retryCount, initialInterval, increment))
+            : this(errorDetectionStrategy, new IncrementalRetryStrategy(retryCount, initialInterval, increment))
         {
         }
 

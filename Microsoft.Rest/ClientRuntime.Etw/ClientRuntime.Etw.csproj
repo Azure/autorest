@@ -8,7 +8,7 @@
     <ProjectGuid>{50B0A8CE-D290-4EB7-8C6C-16EAAB75225E}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Microsoft.Rest.Common.Tracing.Etw</RootNamespace>
+    <RootNamespace>Microsoft.Rest.Tracing.Etw</RootNamespace>
     <AssemblyName>Microsoft.Rest.ClientRuntime.Etw</AssemblyName>
     <OutputType>Library</OutputType>
     <RestorePackages>true</RestorePackages>

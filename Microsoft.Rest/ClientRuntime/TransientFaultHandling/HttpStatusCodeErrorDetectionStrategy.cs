@@ -24,10 +24,10 @@ namespace Microsoft.Rest.TransientFaultHandling
                 HttpRequestWithStatusException httpException;
                 if ((httpException = ex as HttpRequestWithStatusException) != null)
                 {
-                    if (httpException.StatusCode == HttpStatusCode.RequestTimeout || 
+                    if (httpException.StatusCode == HttpStatusCode.RequestTimeout ||
                         (httpException.StatusCode >= HttpStatusCode.InternalServerError &&
-                        httpException.StatusCode != HttpStatusCode.NotImplemented &&
-                        httpException.StatusCode != HttpStatusCode.HttpVersionNotSupported))
+                         httpException.StatusCode != HttpStatusCode.NotImplemented &&
+                         httpException.StatusCode != HttpStatusCode.HttpVersionNotSupported))
                     {
                         return true;
                     }

@@ -1,13 +1,13 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using Microsoft.Rest.Properties;
-using Microsoft.Rest.TransientFaultHandling;
 using System;
 using System.Globalization;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Rest.Properties;
+using Microsoft.Rest.TransientFaultHandling;
 
 namespace Microsoft.Rest
 {
@@ -28,9 +28,9 @@ namespace Microsoft.Rest
         public RetryDelegatingHandler()
         {
             var retryStrategy = new ExponentialBackoffRetryStrategy(
-                DefaultNumberOfAttempts, 
+                DefaultNumberOfAttempts,
                 DefaultMinBackoff,
-                DefaultMaxBackoff, 
+                DefaultMaxBackoff,
                 DefaultBackoffDelta);
             RetryPolicy = new RetryPolicy<HttpStatusCodeErrorDetectionStrategy>(retryStrategy);
         }
@@ -79,7 +79,8 @@ namespace Microsoft.Rest
         /// <param name="cancellationToken">A cancellation token to cancel operation.</param>
         /// <returns>Returns System.Threading.Tasks.Task&lt;TResult&gt;. The 
         /// task object representing the asynchronous operation.</returns>
-        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
+            CancellationToken cancellationToken)
         {
             RetryPolicy.Retrying += (sender, args) =>
             {
@@ -93,20 +94,20 @@ namespace Microsoft.Rest
             try
             {
                 await RetryPolicy.ExecuteAsync(async () =>
+                {
+                    responseMessage = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
+
+                    if (!responseMessage.IsSuccessStatusCode)
                     {
-                        responseMessage = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
+                        throw new HttpRequestWithStatusException(string.Format(
+                            CultureInfo.InvariantCulture,
+                            Resources.ResponseStatusCodeError,
+                            (int) responseMessage.StatusCode,
+                            responseMessage.StatusCode)) {StatusCode = responseMessage.StatusCode};
+                    }
 
-                        if (!responseMessage.IsSuccessStatusCode)
-                        {
-                            throw new HttpRequestWithStatusException(string.Format(
-                                CultureInfo.InvariantCulture,
-                                Resources.ResponseStatusCodeError,
-                                (int)responseMessage.StatusCode,
-                                responseMessage.StatusCode)) { StatusCode = responseMessage.StatusCode };
-                        }
-
-                        return responseMessage;
-                    }, cancellationToken).ConfigureAwait(false);
+                    return responseMessage;
+                }, cancellationToken).ConfigureAwait(false);
 
                 return responseMessage;
             }
@@ -120,7 +121,7 @@ namespace Microsoft.Rest
                 {
                     throw;
                 }
-            }            
+            }
         }
 
         /// <summary>

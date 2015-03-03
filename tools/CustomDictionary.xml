@@ -1,10 +1,10 @@
 <Dictionary>
   <Words>
     <Recognized>
-      <Word>Etw</Word>
       <Word>AutoRest</Word>
-      <Word>Rest</Word>
       <Word>Backoff</Word>
+      <Word>Etw</Word>
+      <Word>Rest</Word>
     </Recognized>
   </Words>
 </Dictionary>

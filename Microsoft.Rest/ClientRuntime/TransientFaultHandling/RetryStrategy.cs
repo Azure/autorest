@@ -19,7 +19,6 @@ namespace Microsoft.Rest.TransientFaultHandling
     /// </summary>
     public abstract class RetryStrategy
     {
-        #region Public members
         /// <summary>
         /// Represents the default number of retry attempts.
         /// </summary>
@@ -36,7 +35,6 @@ namespace Microsoft.Rest.TransientFaultHandling
         /// </summary>
         public static readonly bool DefaultFirstFastRetry = true;
 
-        #endregion
         /// <summary>
         /// Initializes a new instance of the <see cref="RetryStrategy"/> class. 
         /// </summary>
@@ -54,7 +52,7 @@ namespace Microsoft.Rest.TransientFaultHandling
         /// whereas subsequent retries will remain subject to the retry interval.
         /// </summary>
         public bool FastFirstRetry { get; set; }
-       
+
         /// <summary>
         /// Gets the name of the retry strategy.
         /// </summary>
@@ -64,7 +62,7 @@ namespace Microsoft.Rest.TransientFaultHandling
         /// Returns the corresponding ShouldRetry delegate.
         /// </summary>
         /// <returns>The ShouldRetry delegate.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate",
             Justification = "Getter not appropriate for returning new delegate instance for each call.")]
         public abstract ShouldRetryHandler GetShouldRetryHandler();
     }

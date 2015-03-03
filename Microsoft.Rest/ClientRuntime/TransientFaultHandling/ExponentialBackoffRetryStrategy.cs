@@ -51,7 +51,7 @@ namespace Microsoft.Rest.TransientFaultHandling
         /// <param name="maxBackoff">The maximum backoff time.</param>
         /// <param name="deltaBackoff">The value that will be used to calculate a random delta in the exponential delay 
         /// between retries.</param>
-        public ExponentialBackoffRetryStrategy(int retryCount, TimeSpan minBackoff, TimeSpan maxBackoff, 
+        public ExponentialBackoffRetryStrategy(int retryCount, TimeSpan minBackoff, TimeSpan maxBackoff,
             TimeSpan deltaBackoff)
             : this(null, retryCount, minBackoff, maxBackoff, deltaBackoff, DefaultFirstFastRetry)
         {
@@ -67,7 +67,7 @@ namespace Microsoft.Rest.TransientFaultHandling
         /// <param name="maxBackoff">The maximum backoff time.</param>
         /// <param name="deltaBackoff">The value that will be used to calculate a random delta in the exponential delay 
         /// between retries.</param>
-        public ExponentialBackoffRetryStrategy(string name, int retryCount, TimeSpan minBackoff, TimeSpan maxBackoff, 
+        public ExponentialBackoffRetryStrategy(string name, int retryCount, TimeSpan minBackoff, TimeSpan maxBackoff,
             TimeSpan deltaBackoff)
             : this(name, retryCount, minBackoff, maxBackoff, deltaBackoff, DefaultFirstFastRetry)
         {
@@ -85,7 +85,7 @@ namespace Microsoft.Rest.TransientFaultHandling
         /// between retries.</param>
         /// <param name="firstFastRetry">true to immediately retry in the first attempt; otherwise, false. The subsequent 
         /// retries will remain subject to the configured retry interval.</param>
-        public ExponentialBackoffRetryStrategy(string name, int retryCount, TimeSpan minBackoff, TimeSpan maxBackoff, 
+        public ExponentialBackoffRetryStrategy(string name, int retryCount, TimeSpan minBackoff, TimeSpan maxBackoff,
             TimeSpan deltaBackoff, bool firstFastRetry)
             : base(name, firstFastRetry)
         {
@@ -113,12 +113,11 @@ namespace Microsoft.Rest.TransientFaultHandling
                 {
                     var random = new Random();
 
-                    var delta = (int)((Math.Pow(2.0, currentRetryCount) - 1.0) * 
-                        random.Next((int)(this._deltaBackoff.TotalMilliseconds * 0.8), 
-                        (int)(this._deltaBackoff.TotalMilliseconds * 1.2)));
-                    var interval = (int)Math.Min(checked(this._minBackoff.TotalMilliseconds + delta), 
+                    var delta = (int) ((Math.Pow(2.0, currentRetryCount) - 1.0)*
+                                       random.Next((int) (this._deltaBackoff.TotalMilliseconds*0.8),
+                                           (int) (this._deltaBackoff.TotalMilliseconds*1.2)));
+                    var interval = (int) Math.Min(checked(this._minBackoff.TotalMilliseconds + delta),
                         this._maxBackoff.TotalMilliseconds);
-
                     TimeSpan retryInterval = TimeSpan.FromMilliseconds(interval);
 
                     return new RetryCondition(true, retryInterval);
