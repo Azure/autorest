@@ -160,15 +160,15 @@ namespace Microsoft.Rest
         /// <summary>
         /// Initializes HttpClient using HttpClientHandler.
         /// </summary>
-        /// <param name="httpMessageHandler">Base HttpClientHandler.</param>
+        /// <param name="httpClientHandler">Base HttpClientHandler.</param>
         /// <param name="handlers">List of handlers from top to bottom (outer handler is the first in the list)</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Reliability",
             "CA2000:Dispose objects before losing scope",
             Justification = "We let HttpClient instance dispose")]
-        protected void InitializeHttpClient(HttpClientHandler httpMessageHandler, params DelegatingHandler[] handlers)
+        protected void InitializeHttpClient(HttpClientHandler httpClientHandler, params DelegatingHandler[] handlers)
         {
-            InnerHandler = httpMessageHandler;
+            InnerHandler = httpClientHandler;
             DelegatingHandler currentHandler = new RetryDelegatingHandler();
             currentHandler.InnerHandler = InnerHandler;
 
