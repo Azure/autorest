@@ -71,6 +71,21 @@ namespace Microsoft.Rest.ClientRuntime.Tests
         }
 
         [Fact]
+        public void MobileServicesCredentialsSendsZumoHeader()
+        {
+            var httpHandler = new RecordedDelegatingHandler();
+            var fakeClient = new FakeServiceClient(
+                new FakeHttpHandler(), 
+                new MobileServicesCredentials("123"), httpHandler);
+            
+            fakeClient.DoStuff();
+            Assert.True(httpHandler.RequestHeaders.Contains("X-ZUMO-AUTH"));
+            Assert.Equal(
+                "123", 
+                httpHandler.RequestHeaders.GetValues("X-ZUMO-AUTH").Single());
+        }
+
+        [Fact]
         public void RetryHandlerRetriesWith500ErrorsAndSucceeds()
         {
             var fakeClient = new FakeServiceClient(new FakeHttpHandler() {NumberOfTimesToFail = 1});
