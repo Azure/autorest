@@ -6,9 +6,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Rest;
 
-namespace Microsoft.Azure
+namespace Microsoft.Rest
 {
     /// <summary>
     /// Token based credentials for use with a REST Service Client.
