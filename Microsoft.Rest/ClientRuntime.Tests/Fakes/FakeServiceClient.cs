@@ -49,7 +49,10 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Fakes
 
             // Set Credentials
             var cancellationToken = new CancellationToken();
-            await _clientCredentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_clientCredentials != null)
+            {
+                await _clientCredentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            }
             cancellationToken.ThrowIfCancellationRequested();
             return await this.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
         }
