@@ -2,8 +2,6 @@
 // 
 // Changes to this file may cause incorrect behavior and will be lost if 
 // the code is regenerated. 
-// 
-// Microsoft (R) AutoRest Code Generator 1.0.5529.18494
 
 using System;
 using System.Collections.Generic;
@@ -13,7 +11,6 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest01;
-using AutoRest01.Models;
 using Microsoft.Rest;
 using Newtonsoft.Json.Linq;
 
@@ -93,7 +90,7 @@ namespace AutoRest01
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<GetGreetingOKResponseResult> GetGreetingAsync(CancellationToken cancellationToken)
+        public async Task<HttpOperationResponse<string>> GetGreetingAsync(CancellationToken cancellationToken)
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -122,83 +119,63 @@ namespace AutoRest01
             url = url.Replace(" ", "%20");
             
             // Create HTTP transport objects
-            HttpRequestMessage httpRequest = null;
-            try
+            HttpRequestMessage httpRequest = new HttpRequestMessage();
+            httpRequest.Method = HttpMethod.Get;
+            httpRequest.RequestUri = new Uri(url);
+            
+            // Send Request
+            if (shouldTrace)
             {
-                httpRequest = new HttpRequestMessage();
-                httpRequest.Method = HttpMethod.Get;
-                httpRequest.RequestUri = new Uri(url);
-                
-                // Set Headers
-                
-                // Send Request
-                HttpResponseMessage httpResponse = null;
-                try
-                {
-                    if (shouldTrace)
-                    {
-                        ServiceClientTracing.SendRequest(invocationId, httpRequest);
-                    }
-                    cancellationToken.ThrowIfCancellationRequested();
-                    httpResponse = await this.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
-                    if (shouldTrace)
-                    {
-                        ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
-                    }
-                    HttpStatusCode statusCode = httpResponse.StatusCode;
-                    cancellationToken.ThrowIfCancellationRequested();
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    if (statusCode != HttpStatusCode.OK)
-                    {
-                        HttpOperationException ex = HttpOperationException.Create(httpRequest, null, httpResponse, responseContent);
-                        if (shouldTrace)
-                        {
-                            ServiceClientTracing.Error(invocationId, ex);
-                        }
-                        throw ex;
-                    }
-                    
-                    // Create Result
-                    GetGreetingOKResponseResult result = new GetGreetingOKResponseResult();
-                    
-                    // Deserialize Response
-                    if (statusCode == HttpStatusCode.OK)
-                    {
-                        result = new GetGreetingOKResponseResult();
-                        JToken responseDoc = null;
-                        if (string.IsNullOrEmpty(responseContent) == false)
-                        {
-                            responseDoc = JToken.Parse(responseContent);
-                        }
-                        if (responseDoc != null)
-                        {
-                            result.DeserializeJson(responseDoc);
-                        }
-                        
-                    }
-                    result.StatusCode = statusCode;
-                    
-                    if (shouldTrace)
-                    {
-                        ServiceClientTracing.Exit(invocationId, result);
-                    }
-                    return result;
-                }
-                finally
-                {
-                    if (httpResponse != null)
-                    {
-                        httpResponse.Dispose();
-                    }
-                }
+                ServiceClientTracing.SendRequest(invocationId, httpRequest);
             }
-            finally
+            cancellationToken.ThrowIfCancellationRequested();
+            HttpResponseMessage httpResponse = await this.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            if (shouldTrace)
             {
-                if (httpRequest != null)
-                {
-                    httpRequest.Dispose();
-                }
+                ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
             }
+            HttpStatusCode statusCode = httpResponse.StatusCode;
+            cancellationToken.ThrowIfCancellationRequested();
+            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            if (statusCode != HttpStatusCode.OK)
+            {
+                HttpOperationException<object> ex = new HttpOperationException<object>();
+                ex.Request = httpRequest;
+                ex.Response = httpResponse;
+                ex.Body = null;
+                if (shouldTrace)
+                {
+                    ServiceClientTracing.Error(invocationId, ex);
+                }
+                throw ex;
+            }
+            
+            // Create Result
+            HttpOperationResponse<string> result = new HttpOperationResponse<string>();
+            result.Request = httpRequest;
+            result.Response = httpResponse;
+            
+            // Deserialize Response
+            if (statusCode == HttpStatusCode.OK)
+            {
+                string resultModel = default(string);
+                JToken responseDoc = null;
+                if (string.IsNullOrEmpty(responseContent) == false)
+                {
+                    responseDoc = JToken.Parse(responseContent);
+                }
+                if (responseDoc != null)
+                {
+                    resultModel = ((string)responseDoc);
+                }
+                result.Body = resultModel;
+            }
+            
+            if (shouldTrace)
+            {
+                ServiceClientTracing.Exit(invocationId, result);
+            }
+            return result;
         }
     }
 }
