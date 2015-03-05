@@ -2,14 +2,12 @@
 // 
 // Changes to this file may cause incorrect behavior and will be lost if 
 // the code is regenerated. 
-// 
-// Microsoft (R) AutoRest Code Generator 1.0.5529.18494
 
 using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoRest01.Models;
+using Microsoft.Rest;
 
 namespace AutoRest01
 {
@@ -26,6 +24,6 @@ namespace AutoRest01
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<GetGreetingOKResponseResult> GetGreetingAsync(CancellationToken cancellationToken);
+        Task<HttpOperationResponse<string>> GetGreetingAsync(CancellationToken cancellationToken);
     }
 }

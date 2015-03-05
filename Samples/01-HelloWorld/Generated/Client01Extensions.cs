@@ -2,15 +2,13 @@
 // 
 // Changes to this file may cause incorrect behavior and will be lost if 
 // the code is regenerated. 
-// 
-// Microsoft (R) AutoRest Code Generator 1.0.5529.18494
 
 using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest01;
-using AutoRest01.Models;
+using Microsoft.Rest;
 
 namespace AutoRest01
 {
@@ -19,7 +17,7 @@ namespace AutoRest01
         /// <param name='operations'>
         /// Reference to the AutoRest01.IClient01.
         /// </param>
-        public static GetGreetingOKResponseResult GetGreeting(this IClient01 operations)
+        public static string GetGreeting(this IClient01 operations)
         {
             return Task.Factory.StartNew((object s) => 
             {
@@ -31,9 +29,10 @@ namespace AutoRest01
         /// <param name='operations'>
         /// Reference to the AutoRest01.IClient01.
         /// </param>
-        public static Task<GetGreetingOKResponseResult> GetGreetingAsync(this IClient01 operations)
+        public static async Task<string> GetGreetingAsync(this IClient01 operations)
         {
-            return operations.GetGreetingAsync(CancellationToken.None);
+            Microsoft.Rest.HttpOperationResponse<string> result = await operations.GetGreetingAsync(CancellationToken.None).ConfigureAwait(false);
+            return result.Body;
         }
     }
 }

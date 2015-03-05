@@ -8,11 +8,10 @@ namespace SampleApp
         static void Main(string[] args)
         {
             var client01 = new Client01();
-            var result = client01.GetGreeting();
-            var salutation = result.Body;
+            var salutation = client01.GetGreeting();
             Console.WriteLine(salutation);
             Console.WriteLine("Any key to exit.");
-            Console.ReadLine();
+            Console.ReadKey();
         }
     }
 }

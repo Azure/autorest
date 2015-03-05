@@ -2,8 +2,6 @@
 // 
 // Changes to this file may cause incorrect behavior and will be lost if 
 // the code is regenerated. 
-// 
-// Microsoft (R) AutoRest Code Generator 1.0.5529.18494
 
 using System;
 using System.Linq;

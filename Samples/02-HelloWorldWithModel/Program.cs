@@ -20,7 +20,7 @@ namespace SampleApp
             }
 
             Console.WriteLine("Any key to exit.");
-            Console.ReadLine();
+            Console.ReadKey();
         }
     }
 }
