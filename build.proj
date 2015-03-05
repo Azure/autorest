@@ -116,8 +116,7 @@
   <UsingTask TaskName="Xunit.Runner.msbuild.xunit" AssemblyFile="packages\xunit.1.9.2\lib\net20\xunit.runner.msbuild.dll" />
   <Target Name="Test">
     <ItemGroup>
-      <!-- Only running test projects compiled for net45. -->
-      <TestDlls Include=".\**\*.Tests\bin\net45*\*Tests.dll"/>
+      <TestDlls Include=".\**\*.Tests\bin\*\*Tests.dll"/>
     </ItemGroup>
     <MakeDir Directories="$(LibraryRoot)TestResults"/>
     <Message Text="%(TestDlls.Filename)" />
