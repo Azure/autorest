@@ -56,5 +56,13 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Fakes
             cancellationToken.ThrowIfCancellationRequested();
             return await this.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
         }
+
+        public void DoStuffSync()
+        {
+            Task.Factory.StartNew(() =>
+            {
+                return DoStuff();
+            }).Unwrap().GetAwaiter().GetResult();
+        }
     }
 }

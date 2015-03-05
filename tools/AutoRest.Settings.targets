@@ -28,6 +28,7 @@
     <AdditionalBinariesFolder>$(LibraryFxTarget)\</AdditionalBinariesFolder>
     <!-- Turn off XML documentation warnings. -->
     <NoWarn>1591</NoWarn>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <CodeAnalysisRuleSet Condition="'$(CodeAnalysisRuleSet)' == ''">AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   
