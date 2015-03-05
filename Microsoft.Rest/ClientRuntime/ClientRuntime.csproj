@@ -15,28 +15,6 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <NuGetPackageImportStamp>d6eb8bcd</NuGetPackageImportStamp>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\Microsoft.Rest.ClientRuntime.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Net45-Debug|AnyCPU'">
-    <DocumentationFile>bin\Net45-Debug\Microsoft.Rest.ClientRuntime.xml</DocumentationFile>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Net45-Release|AnyCPU'">
-    <DocumentationFile>bin\Net45-Release\Microsoft.Rest.ClientRuntime.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Net40-Debug|AnyCPU'">
-    <DocumentationFile>bin\Net40-Debug\Microsoft.Rest.ClientRuntime.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Net40-Release|AnyCPU'">
-    <DocumentationFile>bin\Net40-Release\Microsoft.Rest.ClientRuntime.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Portable-Debug|AnyCPU'">
-    <DocumentationFile>bin\Portable-Debug\Microsoft.Rest.ClientRuntime.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Portable-Release|AnyCPU'">
-    <DocumentationFile>bin\Portable-Release\Microsoft.Rest.ClientRuntime.xml</DocumentationFile>
-  </PropertyGroup>
   <Import Project="$(SolutionDir)\tools\AutoRest.Settings.targets" />
   <ItemGroup>
     <Compile Include="BasicAuthenticationCredentials.cs" />
