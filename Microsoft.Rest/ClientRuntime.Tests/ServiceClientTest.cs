@@ -78,7 +78,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests
                 new FakeHttpHandler(), 
                 new MobileServicesCredentials("123"), httpHandler);
             
-            fakeClient.DoStuff();
+            fakeClient.DoStuffSync();
             Assert.True(httpHandler.RequestHeaders.Contains("X-ZUMO-AUTH"));
             Assert.Equal(
                 "123", 
