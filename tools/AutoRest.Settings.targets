@@ -26,8 +26,9 @@
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <DocumentationFile>bin\$(Configuration)\$(AssemblyName).xml</DocumentationFile>
     <AdditionalBinariesFolder>$(LibraryFxTarget)\</AdditionalBinariesFolder>
+    <WarnOnMissingDocument Condition="'$(WarnOnMissingDocument)' == ''">false</WarnOnMissingDocument>
     <!-- Turn off XML documentation warnings. -->
-    <NoWarn>1591</NoWarn>
+    <NoWarn Condition="'$(WarnOnMissingDocument)' == 'false'">1591</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <CodeAnalysisRuleSet Condition="'$(CodeAnalysisRuleSet)' == ''">AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
