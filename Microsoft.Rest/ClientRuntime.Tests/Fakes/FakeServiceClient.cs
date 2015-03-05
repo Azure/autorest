@@ -10,6 +10,8 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Fakes
 {
     public class FakeServiceClient : ServiceClient<FakeServiceClient>
     {
+        private ServiceClientCredentials _clientCredentials;
+
         public FakeServiceClient()
         {
             // Prevent base constructor from executing
@@ -20,8 +22,13 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Fakes
         {
         }
 
-        public FakeServiceClient(params DelegatingHandler[] handlers) : base(handlers)
+        public FakeServiceClient(
+                        HttpClientHandler httpMessageHandler, 
+                        ServiceClientCredentials credentials, 
+                        params DelegatingHandler[] handlers)
+                            : this(httpMessageHandler, handlers)
         {
+            _clientCredentials = credentials;
         }
 
 
@@ -42,6 +49,10 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Fakes
 
             // Set Credentials
             var cancellationToken = new CancellationToken();
+            if (_clientCredentials != null)
+            {
+                await _clientCredentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            }
             cancellationToken.ThrowIfCancellationRequested();
             return await this.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
         }

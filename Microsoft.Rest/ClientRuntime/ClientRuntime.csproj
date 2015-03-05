@@ -42,6 +42,8 @@
     <Compile Include="BasicAuthenticationCredentials.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HttpExtensions.cs" />
+    <Compile Include="MobileServicesCredentials.cs" />
+    <Compile Include="TokenCredentials.cs" />
     <Compile Include="TransientFaultHandling\RetryCondition.cs" />
     <Compile Include="TypeConversion.cs" />
     <Compile Include="ILazyCollection.cs" />
