@@ -12,7 +12,6 @@
     <AssemblyName>Microsoft.Rest.ClientRuntime.Log4Net</AssemblyName>
     <OutputType>Library</OutputType>
     <RestorePackages>true</RestorePackages>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <NuGetPackageImportStamp>e31a3ee2</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Net40-Debug'">
