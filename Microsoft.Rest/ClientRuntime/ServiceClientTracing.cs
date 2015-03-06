@@ -9,6 +9,9 @@ using System.Threading;
 
 namespace Microsoft.Rest
 {
+    /// <summary>
+    /// Provides a set of methods and properties that help you trace the serviceclient.
+    /// </summary>
     public static class ServiceClientTracing
     {
         /// <summary>
@@ -33,8 +36,14 @@ namespace Microsoft.Rest
         /// </summary>
         private static object _lock = new object();
 
+        /// <summary>
+        /// The invocation identifier.
+        /// </summary>
         private static long _nextInvocationId = 0;
 
+        /// <summary>
+        /// Value indicating whether tracing is enabled.
+        /// </summary>
         private static bool _isEnabled = false;
 
         /// <summary>
@@ -55,6 +64,9 @@ namespace Microsoft.Rest
             get { return _threadSafeInterceptors; }
         }
 
+        /// <summary>
+        /// Get the next invocation identifier.
+        /// </summary>
         public static long NextInvocationId
         {
             get
@@ -110,6 +122,11 @@ namespace Microsoft.Rest
             return removed;
         }
 
+        /// <summary>
+        /// Write the informational tracing message.
+        /// </summary>
+        /// <param name="message">The msessage to trace.</param>
+        /// <param name="parameters">An object array containing zero or more objects to format</param>
         public static void Information(string message, params object[] parameters)
         {
             if (IsEnabled)
@@ -118,6 +135,12 @@ namespace Microsoft.Rest
             }
         }
 
+        /// <summary>
+        /// Represents the tracing configuration for the value of a setting.
+        /// </summary>
+        /// <param name="source">The configuration source.</param>
+        /// <param name="name">The name of the setting.</param>
+        /// <param name="value">The value of the setting in the source.</param>
         public static void Configuration(string source, string name, string value)
         {
             if (IsEnabled)
@@ -129,6 +152,10 @@ namespace Microsoft.Rest
             }
         }
 
+        /// <summary>
+        /// Specifies the tracing information.
+        /// </summary>
+        /// <param name="message">the message to trace.</param>
         public static void Information(string message)
         {
             if (IsEnabled)
@@ -140,6 +167,13 @@ namespace Microsoft.Rest
             }
         }
 
+        /// <summary>
+        /// Represents the tracing entry.
+        /// </summary>
+        /// <param name="invocationId"></param>
+        /// <param name="instance">The tracing instance.</param>
+        /// <param name="method">The tracing method.</param>
+        /// <param name="parameters">Method parameters.</param>     
         public static void Enter(string invocationId, object instance, string method,
             IDictionary<string, object> parameters)
         {
@@ -152,6 +186,11 @@ namespace Microsoft.Rest
             }
         }
 
+        /// <summary>
+        /// Sends a tracing request.
+        /// </summary>
+        /// <param name="invocationId">The invocation identifier.</param>
+        /// <param name="request">The request about to be sent.</param>
         public static void SendRequest(string invocationId, HttpRequestMessage request)
         {
             if (IsEnabled)
@@ -163,6 +202,11 @@ namespace Microsoft.Rest
             }
         }
 
+        /// <summary>
+        /// Receives a tracing response.
+        /// </summary>
+        /// <param name="invocationId">The invocation identifier.</param>
+        /// <param name="response">The response message instance.</param>
         public static void ReceiveResponse(string invocationId, HttpResponseMessage response)
         {
             if (IsEnabled)
@@ -174,6 +218,11 @@ namespace Microsoft.Rest
             }
         }
 
+        /// <summary>
+        /// Represents the tracing error.
+        /// </summary>
+        /// <param name="invocationId">The invocation identifier.</param>
+        /// <param name="ex">The tracing exception.</param>
         public static void Error(string invocationId, Exception ex)
         {
             if (IsEnabled)
@@ -185,6 +234,11 @@ namespace Microsoft.Rest
             }
         }
 
+        /// <summary>
+        /// Abandons the tracing method.
+        /// </summary>
+        /// <param name="invocationId">The invocation identifier.</param>
+        /// <param name="returnValue">Method return value.</param>
         public static void Exit(string invocationId, object result)
         {
             if (IsEnabled)

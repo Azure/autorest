@@ -9,9 +9,9 @@ namespace Microsoft.Rest.TransientFaultHandling
     /// Defines a retry condition.
     /// </summary>
     public class RetryCondition
-    {
-        /// <param name="retryAllowed">is retry allowed</param>
-        /// <param name="delay">The delay that indicates how long the current thread will be suspended before
+    {       
+        /// <param name="retryAllowed">Is retry allowed.</param>
+        /// <param name="delay">The delay that indicates how long the current thread will be suspended before.
         /// the next iteration is invoked.</param>
         public RetryCondition(bool retryAllowed, TimeSpan delay)
         {
@@ -19,8 +19,14 @@ namespace Microsoft.Rest.TransientFaultHandling
             DelayBeforeRetry = delay;
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether retry attempt is allowed.
+        /// </summary>
         public Boolean RetryAllowed { get; set; }
 
+        /// <summary>
+        /// Gets or sets the retry interval value for retry.
+        /// </summary>
         public TimeSpan DelayBeforeRetry { get; set; }
     }
 }

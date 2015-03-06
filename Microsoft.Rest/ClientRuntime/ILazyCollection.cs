@@ -5,6 +5,10 @@ using System.Collections.Generic;
 
 namespace Microsoft.Rest
 {
+    /// <summary>
+    /// Represents an object Collection that supports on-demand initialization.
+    /// </summary>
+    /// <typeparam name="T">The type elements in the collection.</typeparam>
     public interface ILazyCollection<T> : ICollection<T>
     {
         /// <summary>
