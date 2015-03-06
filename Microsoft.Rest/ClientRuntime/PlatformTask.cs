@@ -7,8 +7,16 @@ using System.Threading.Tasks;
 
 namespace Microsoft.Rest
 {
+    /// <summary>
+    /// PlatformTask define specific tasks based on platforms.
+    /// </summary>
     public static class PlatformTask
     {
+        /// <summary>
+        /// Creates an already completed Tasks from the specified result.
+        /// </summary>
+        /// <param name="result">The result from which to create the completed task.</param>
+        /// <returns>The completed Tasks.</returns>
         public static Task FromResult(object result)
         {
 #if NET45
@@ -18,6 +26,11 @@ namespace Microsoft.Rest
 #endif
         }
 
+        /// <summary>
+        /// Starts a Task that will complete after the specified time interval.
+        /// </summary>
+        /// <param name="delayTime">time interval.</param>
+        /// <returns>The timed Task.</returns>
         public static Task Delay(TimeSpan delayTime)
         {
 #if NET45
@@ -27,6 +40,12 @@ namespace Microsoft.Rest
 #endif
         }
 
+        /// <summary>
+        /// Starts a Task that will complete after the specified due time.
+        /// </summary>
+        /// <param name="millisecondsDelay">The delay in milliseconds before the returned task completes.</param>
+        /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+        /// <returns>The timed Task.</returns>
         public static Task Delay(int millisecondsDelay, CancellationToken cancellationToken)
         {
 #if NET45

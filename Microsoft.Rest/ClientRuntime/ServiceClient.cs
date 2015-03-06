@@ -46,6 +46,10 @@ namespace Microsoft.Rest
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the ServiceClient class.
+        /// </summary>
+        /// <param name="handlers">List of handlers from top to bottom (outer handler is the first in the list)</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Reliability",
             "CA2000:Dispose objects before losing scope",
@@ -55,11 +59,20 @@ namespace Microsoft.Rest
         {
         }
 
+        /// <summary>
+        /// Initializes ServiceClient using base HttpClientHandler and list of handlers.
+        /// </summary>
+        /// <param name="rootHandler">Base HttpClientHandler.</param>
+        /// <param name="handlers">List of handlers from top to bottom (outer handler is the first in the list)</param>
         protected ServiceClient(HttpClientHandler rootHandler, params DelegatingHandler[] handlers)
         {
             InitializeHttpClient(rootHandler, handlers);
         }
 
+        /// <summary>
+        /// Create a new instance of the root handler.
+        /// </summary>
+        /// <returns>HttpClientHandler created.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Reliability",
             "CA2000:Dispose objects before losing scope",
@@ -143,6 +156,10 @@ namespace Microsoft.Rest
             GC.SuppressFinalize(this);
         }
 
+        /// <summary>
+        /// Dispose the HttpClient and Handlers.
+        /// </summary>
+        /// <param name="disposing">True to release both managed and unmanaged resources; false to releases only unmanaged resources.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (!_disposed)
@@ -193,7 +210,7 @@ namespace Microsoft.Rest
         /// <summary>
         /// Get the assembly version of a service client.
         /// </summary>
-        /// <returns>The assembly version of the client.</returns>
+        /// <returns>The assembly version of the client.</returns>        
         private string GetAssemblyVersion()
         {
             Type type = this.GetType();
