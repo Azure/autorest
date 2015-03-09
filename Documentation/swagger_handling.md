@@ -10,6 +10,8 @@ This documentation introduces the rules AutoRest users are suggested to follow i
 			- [Basic Data Types](#basic-data-types)
 			- [`byte[]`, `DateTimeOffset`, `int`, `long`](#byte-datetimeoffset-int-long)
 			- [Sequences and Dictionaries](#sequences-and-dictionaries)
+				- [Sequences](#sequences)
+				- [Dictionaries](#dictionaries)
 			- [Inheritance and Polymorphism](#inheritance-and-polymorphism)
 				- [Inheritance](#inheritance)
 				- [Polymorphism](#polymorphism)
@@ -74,13 +76,13 @@ public partial class Pet
 ```
 
 ### `byte[]`, `DateTimeOffset`, `int`, `long`
-- `byte[]`
+- **`byte[]`**
 In order to generated `byte` arrays in the generated code, the property of the Swagger definition should have `string` as its type and `byte` as its format.
 
-- `DateTimeOffset`
+- **`DateTimeOffset`**
 AutoRest generate `DateTimeOffset` typed variables in generated C# code for Swagger properties that have `string` as the type and `date-time` as the format.
 
-- `int` / `long`
+- **`int` / `long`**
 Both `int` and `long` variables in the generated code correspond to `integer` types in Swagger properties. If the format of the Swagger property is `int32`, `int` will be generated; if the format is `int64`, `long` will be generated. If the format field of the Swagger property is not set, AutoRest will default the format to `int32`.
 
 **Example:**
@@ -165,6 +167,76 @@ public partial class Pet
 ```
 
 ### Sequences and Dictionaries
+#### Sequences
+AutoRest build sequences from `array` schema in Swagger specification. 
+The following definition
+```json
+"pet": {
+  "properties": {
+    "names": {
+      "type": "array",
+      "items": { 
+        "type": "string"
+      }
+    }
+  }
+}
+```
+will generate C# client library
+```csharp
+public partial class Pet
+{
+    private IList<string> _names;
+    
+    /// <summary>
+    /// Optional.
+    /// </summary>
+    public IList<string> Names
+    {
+        get { return this._names; }
+        set { this._names = value; }
+    }
+    
+    /// <summary>
+    /// Initializes a new instance of the Pet class.
+    /// </summary>
+    public Pet()
+    {
+        this.Names = new LazyList<string>();
+    }
+}
+```
+
+#### Dictionaries
+AutoRest generate dictionaries (or hash maps in some contexts) using `additionalProperites` from [JSON Schema v4](http://json-schema.org/latest/json-schema-validation.html#anchor64). However, AutoRest currently only support objects (Swagger schema) but not Boolean values. The key of the dictionary generated could only be `string`.
+
+The following definition
+```json
+"StringDictionary": {
+  "additionalProperties": {
+    "type": "string"
+  }
+}
+```
+will generate C# client library
+```csharp
+public static partial class StringDictionary
+{
+    /// <summary>
+    /// Deserialize the object
+    /// </summary>
+    public static IDictionary<string, string> DeserializeJson(JToken inputObject)
+    {
+        IDictionary<string, string> deserializedObject = new Dictionary<string, string>();
+        foreach (JProperty property in inputObject)
+        {
+            deserializedObject.Add(((string)property.Name), ((string)property.Value));
+        }
+        return deserializedObject;
+    }
+}
+```
+Notice that in the example for Sequences, the `Pet` is a POCO model while in this example the `StringDictionary` only generates a static class helper for deserialization. Note that a model is generated if the corresponding Swagger scheme appears as a property of some other scheme, while a static helper class is generated if the corresponding Swagger scheme is the top-level object sent on the wire. This rule applies to all sequences and dictionaries in both requests and responses.
 
 ### Inheritance and Polymorphism
 #### Inheritance
@@ -387,8 +459,8 @@ Type name generation is simple and straightforward if a Swagger schema is define
 
 Type name generation becomes tricky in inline schema definitions. There are 3 scenarios that AutoRest generate a name on its own. The names are generated in the way that their context in the Swagger specification is easy to be found and developers can move them into "#/definitions" list if they'd like a different name.
 
-- Inline parameters 
-Schema defined inside a `body` parameter. The parameter name will be used for the generated type name as it is required according to the definition [here](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#parameterObject).
+- **Inline parameters**
+*Schema defined inside a `body` parameter.* The parameter name will be used for the generated type name as it is required according to the definition [here](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#parameterObject).
 The following example will generate a type `PetStyle`.
 ```json
 "parameters": [
@@ -409,8 +481,8 @@ The following example will generate a type `PetStyle`.
 ]
 ```
 
-- Inline responses
-Responses with a schema definition inside. The return type name will be `operationId` + `http status code` + "Response".
+- **Inline responses**
+*Responses with a schema definition inside.* The return type name will be `operationId` + `http status code` + "Response".
 The following example will generate a type `AddPetOkResponse`.
 ```json
 ......
@@ -432,8 +504,8 @@ The following example will generate a type `AddPetOkResponse`.
 }
 ```
 
-- Inline properties
-A property of a reference type contains an inline Swagger schema definition. The parent class's type name concatenated with the property's name inside the parent class will be used as its type name.
+- **Inline properties**
+*A property of a reference type contains an inline Swagger schema definition.* The parent class's type name concatenated with the property's name inside the parent class will be used as its type name.
 The following example will generate a type `PetStyle`.
 ```json
 "Pet": {
@@ -452,8 +524,8 @@ The following example will generate a type `PetStyle`.
 }
 ```
 
-- Properties inside sequences / dictionaries
-A property defined as the element of a sequence or the value of a dictionary. Elements of a sequence are named as the parent class's name concatenated with "Item", and values of a dictionary are named as the parent class's name concatenated with "Value".
+- **Properties inside sequences / dictionaries**
+*A property defined as the element of a sequence or the value of a dictionary.* Elements of a sequence are named as the parent class's name concatenated with "Item", and values of a dictionary are named as the parent class's name concatenated with "Value".
 The following example will generate types `PetFavFoodItem` and `PetFavFoodBrandValue`.
 ```json
 "Pet": {
@@ -483,3 +555,23 @@ The following example will generate types `PetFavFoodItem` and `PetFavFoodBrandV
   }
 }
 ```
+
+## Operations
+### Generating Operation Classes
+In many cases, different operations are intended to put into different classes for better clarification and readability. AutoRest supports categorizing operations using `_` in `operationId` fields. The part appearing before `_` will be treated as the class name the method will be inside, and the part after it will be treated as the actual method name.
+
+**Example:**
+The following Swagger specification:
+```json
+"paths": {
+  "/api/Values/{id}": {
+    "get": {
+      "tags": [
+        "Values"
+      ],
+      "operationId": "Values_Get",
+......
+```
+will generate a `Get` method inside `*.*.*.Values` namespace where `*.*.*` is the namespace passed in from the AutoRest Command Line Interface. This is a neat way of organizing methods if you have methods of same names in different namespaces from your API server side code.
+
+If you are 
