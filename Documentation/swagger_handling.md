@@ -585,23 +585,36 @@ Parameters use a `'required'` Boolean field as the example shown below.
   {
     "name": "subscriptionId",
     "in": "path",
-    "required": false,
+    "required": true,
     "type": "integer"
   },
   {
     "name": "resourceGroupName",
     "in": "path",
-    "required": false,
     "type": "string"
   },
   {
-    "name": "apiVersion",
-    "in": "path",
-    "required": true,
+    "name": "api-version",
+    "in": "query",
+    "required": false,
     "type": "integer"
   }
 ]
 ```
+will generate C# client side method of
+```csharp
+public async Task<HttpOperationResponse<Product>> ListAsync(int subscriptionId, string resourceGroupName, int? apiVersion, CancellationToken cancellationToken)
+{
+    // Validate
+    if (resourceGroupName == null)
+    {
+        throw new ArgumentNullException("resourceGroupName");
+    }
+............
+```
+where not-nullable types are changed into their nullable wrapper if it's optional and a validation is added if a nullable type is marked as required.
+
+> Note that parameters that has field `in` as path are always required and it's `required` field will be ignored. 
 
 Properties, however, doesn't not contain a required field since it's a list of Swagger schema and there is not placeholder for a `'required'` field. Instead, Each definition scheme can specify a `'required'` array that tells which ones in the property list are required. An example is shown below.
 ```json
@@ -611,22 +624,75 @@ Properties, however, doesn't not contain a required field since it's a list of S
   ],
   "properties": {
     "product_id": {
-      "type": "string",
+      "type": "string"
     },
     "description": {
-      "type": "string",
+      "type": "string"
     },
     "display_name": {
-      "type": "string",
+      "type": "string"
     },
     "capacity": {
-      "type": "string",
+      "type": "string"
     },
     "image": {
-      "type": "string",
+      "type": "string"
     }
   }
 }
 ```
 
 ### Error Modeling
+At the runtime of the client library, if the server returns an undesired status code or throws exceptions, the exception will be expected to be an `HttpOperationException`. The exception instance will contain the request of type `HttpRequestMessage` (in property `Request`), the response of type `HttpResponseMessage` (in property `Response`), and the error model if defined in Swagger specification (in property `Body`). The error model must be defined as the `default` response's scheme.
+**Example:**
+A response of 
+```json
+"default": {
+  "description": "Unexpected error",
+  "schema": {
+    "$ref": "Error"
+  }
+}
+```
+together with its definition
+```json
+"Error": {
+  "properties": {
+    "code": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "message": {
+      "type": "string"
+    },
+    "fields": {
+      "type": "string"
+    }
+  }
+}
+```
+will generate the following error handling code:
+```csharp
+if (statusCode != HttpStatusCode.OK) // and more if more acceptable status codes
+{
+    Error errorModel = new Error();
+    JToken responseDoc = null;
+    if (string.IsNullOrEmpty(responseContent) == false)
+    {
+        responseDoc = JToken.Parse(responseContent);
+    }
+    if (responseDoc != null)
+    {
+        errorModel.DeserializeJson(responseDoc);
+    }
+    HttpOperationException<Error> ex = new HttpOperationException<Error>();
+    ex.Request = httpRequest;
+    ex.Response = httpResponse;
+    ex.Body = errorModel;
+    if (shouldTrace)
+    {
+        ServiceClientTracing.Error(invocationId, ex);
+    }
+    throw ex;
+}
+```
