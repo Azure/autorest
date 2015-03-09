@@ -399,7 +399,7 @@ In order to describe polymorphic inheritance between types, AutoRest uses an ext
 ```
 The generated C# code looks exactly the same in the models but the base serialization and deserialization calls in the operations will look like:
 ```csharp
-        public async Task<HttpOperationResponse<Pet>> GetPolymorphicPetsAsync(CancellationToken cancellationToken)
+public async Task<HttpOperationResponse<Pet>> GetPolymorphicPetsAsync(CancellationToken cancellationToken)
 {
 
 ............
@@ -570,7 +570,7 @@ The following Swagger specification:
         "Values"
       ],
       "operationId": "Values_Get",
-......
+............
 ```
 will generate a `Get` method inside `*.*.*.Values` namespace where `*.*.*` is the namespace passed in from the AutoRest Command Line Interface. This is a neat way of organizing methods if you have methods of same names in different namespaces from your API server side code.
 
