@@ -612,11 +612,11 @@ public async Task<HttpOperationResponse<Product>> ListAsync(int subscriptionId, 
     }
 ............
 ```
-where not-nullable types are changed into their nullable wrapper if it's optional and a validation is added if a nullable type is marked as required.
+where a not-nullable type is changed into its nullable wrapper if it's optional and a validation is added if a nullable type is marked as required.
 
-> Note that parameters that has field `in` as path are always required and it's `required` field will be ignored. 
+> Note that parameters that have field `in` as path are always required and the `required` field will be ignored. 
 
-Properties, however, doesn't not contain a required field since it's a list of Swagger schema and there is not placeholder for a `'required'` field. Instead, Each definition scheme can specify a `'required'` array that tells which ones in the property list are required. An example is shown below.
+Properties, however, doesn't not contain a required field since it's a list of Swagger schema and there is no placeholder for a `'required'` field. Instead, Each definition scheme can specify a `'required'` array that tells which ones in the property list are required. An example is shown below.
 ```json
 "Product": {
   "required": [ 
@@ -643,7 +643,8 @@ Properties, however, doesn't not contain a required field since it's a list of S
 ```
 
 ### Error Modeling
-At the runtime of the client library, if the server returns an undesired status code or throws exceptions, the exception will be expected to be an `HttpOperationException`. The exception instance will contain the request of type `HttpRequestMessage` (in property `Request`), the response of type `HttpResponseMessage` (in property `Response`), and the error model if defined in Swagger specification (in property `Body`). The error model must be defined as the `default` response's scheme.
+At the runtime of the client library, if the server returns an undesired status code or throws exceptions, an exception of type `HttpOperationException` will thrown from the AutoRest generated client library. The exception instance will contain the request of type `HttpRequestMessage` (in property `Request`), the response of type `HttpResponseMessage` (in property `Response`), and the error model if defined in Swagger specification (in property `Body`). The error model must be defined as the `default` response's scheme.
+
 **Example:**
 A response of 
 ```json
