@@ -99,10 +99,7 @@ namespace Microsoft.Rest
         /// Remove a tracing interceptor from change notifications.
         /// </summary>
         /// <param name="interceptor">The tracing interceptor.</param>
-        /// <returns>
-        /// True if the tracing interceptor was found and removed; false
-        /// otherwise.
-        /// </returns>
+        /// <returns>True if the tracing interceptor was found and removed; false otherwise.</returns>
         public static bool RemoveTracingInterceptor(IServiceClientTracingInterceptor interceptor)
         {
             if (interceptor == null)
@@ -155,7 +152,7 @@ namespace Microsoft.Rest
         /// <summary>
         /// Specifies the tracing information.
         /// </summary>
-        /// <param name="message">the message to trace.</param>
+        /// <param name="message">The message to trace.</param>
         public static void Information(string message)
         {
             if (IsEnabled)
@@ -233,12 +230,12 @@ namespace Microsoft.Rest
                 }
             }
         }
-
+       
         /// <summary>
         /// Abandons the tracing method.
         /// </summary>
         /// <param name="invocationId">The invocation identifier.</param>
-        /// <param name="returnValue">Method return value.</param>
+        /// <param name="result">Method return result.</param>
         public static void Exit(string invocationId, object result)
         {
             if (IsEnabled)

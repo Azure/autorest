@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 namespace Microsoft.Rest
 {
     /// <summary>
-    /// PlatformTask define specific tasks based on platforms.
+    /// Provides a platform-neutral abstraction for Task and TaskEx.
     /// </summary>
     public static class PlatformTask
     {
         /// <summary>
-        /// Creates an already completed Tasks from the specified result.
+        /// Creates an already completed Task from the specified result.
         /// </summary>
         /// <param name="result">The result from which to create the completed task.</param>
-        /// <returns>The completed Tasks.</returns>
+        /// <returns>The completed Task.</returns>
         public static Task FromResult(object result)
         {
 #if NET45
