@@ -574,4 +574,59 @@ The following Swagger specification:
 ```
 will generate a `Get` method inside `*.*.*.Values` namespace where `*.*.*` is the namespace passed in from the AutoRest Command Line Interface. This is a neat way of organizing methods if you have methods of same names in different namespaces from your API server side code.
 
-If you are 
+If `-OutputAsSingleFile` parameter is not specified for AutoRest Command Line Interface, generated files will also be organized by namespaces. If you have `operationId`s `ns1` and `ns2`, you will have `ns1.cs` and `ns2.cs` generated for C# client library.
+
+### Specifying required parameters and properties
+Parameters and properties in Swagger schema use different notations to define if it's required or optional. 
+
+Parameters use a `'required'` Boolean field as the example shown below.
+```json
+"parameters": [
+  {
+    "name": "subscriptionId",
+    "in": "path",
+    "required": false,
+    "type": "integer"
+  },
+  {
+    "name": "resourceGroupName",
+    "in": "path",
+    "required": false,
+    "type": "string"
+  },
+  {
+    "name": "apiVersion",
+    "in": "path",
+    "required": true,
+    "type": "integer"
+  }
+]
+```
+
+Properties, however, doesn't not contain a required field since it's a list of Swagger schema and there is not placeholder for a `'required'` field. Instead, Each definition scheme can specify a `'required'` array that tells which ones in the property list are required. An example is shown below.
+```json
+"Product": {
+  "required": [ 
+    "product_id", "display_name"
+  ],
+  "properties": {
+    "product_id": {
+      "type": "string",
+    },
+    "description": {
+      "type": "string",
+    },
+    "display_name": {
+      "type": "string",
+    },
+    "capacity": {
+      "type": "string",
+    },
+    "image": {
+      "type": "string",
+    }
+  }
+}
+```
+
+### Error Modeling
