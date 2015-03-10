@@ -1,5 +1,5 @@
 
-#AutoRest Swagger Handling
+#Working with Swagger Specifications
 
 This documentation introduces the rules AutoRest users are suggested to follow in handling advanced scenarios in Swagger specifications. AutoRest handles Swagger specification input files according to [Swagger RESTful API Documentation Specification](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md) and this documentation clarifies the occasions that are not clearly defined there or might bring ambiguity.
 
