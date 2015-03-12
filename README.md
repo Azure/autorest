@@ -66,7 +66,7 @@ using MyNamespace;
 We now access the REST API with the fact that `GetGreeting` will throw an exception if the response is not a 200 OK, we can access the REST API with very little code (see [using generated clients](Documentation/using-clients.md) for details).
 ```
 var myClient = new MyClient();
-var salutation = myClient.GetGreeting().Body();
+var salutation = myClient.GetGreeting();
 Console.WriteLine(salutation);
 ```
 Running the console app shows the greeting retrieved from the service API.
