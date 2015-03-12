@@ -2,13 +2,11 @@
 
 ##Contents
 
-- [AutoRest Command Line Interface Documentation](#autorest-command-line-interface -documentation)
-	- [Contents](#contents)
-		- [Name](#name)
-		- [Synopsis](#synopsis)
-		- [Description](#description)
-		- [Parameters](#parameters)
-		- [Examples](#examples)
+* [Name](#name)
+* [Synopsis](#synopsis)
+* [Description](#description)
+* [Parameters](#parameters)
+* [Examples](#examples)
 
 
 ##Name
