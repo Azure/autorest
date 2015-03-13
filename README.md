@@ -6,6 +6,7 @@ The **AutoRest** tool generates client libraries for accessing RESTful web servi
 AutoRest is shipped as part of Visual Studio 2015 web tools.
 
 Alternatively it can be installed from [Chocolatey](https://chocolatey.org/) by running:
+
     choco install autorest
 
 ##Hello World##
