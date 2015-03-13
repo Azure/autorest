@@ -2,8 +2,11 @@
 
 The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to *AutoRest* is a spec that describes the REST API using the [Swagger](http://github.com/swagger-api/swagger-spec) format. 
 
-##Downloading AutoRest##
-TODO
+##Getting AutoRest##
+AutoRest is shipped as part of Visual Studio 2015 web tools.
+
+Alternatively it can be installed from [Chocolatey](https://chocolatey.org/) by running:
+    choco install autorest
 
 ##Hello World##
 For this version  of Hello World, we will use **AutoRest** to generate a client library and use it to call a web service. The trivial web service that just returns a string is defined as follows: 
