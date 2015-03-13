@@ -1,17 +1,17 @@
 #Automatic Retries
 AutoRest generated clients support a number of retry policies based on [The Transient Fault Handling Application Block](https://msdn.microsoft.com/en-us/library/hh680934%28v=pandp.50%29.aspx). Retry policies allow generated clients to automatically recover from transient server errors (e.g. error code 5XX).
 
-There are two ways of customizing the retry behavior:
+There are two ways to customize the retry behavior:
 
-- Changing the detection strategy - defining which server error responses need to be retried and which ones should to be re-thrown
-- Changing the retry strategy - specifying how long and how many times to continue retrying
+- Change the detection strategy - define which server error responses need to be retried and which ones should to be re-thrown
+- Change the retry strategy - specify how long and how many times to continue retrying
 
-By default, the detection strategy is configured to retry on HttpStatusCode 408 (RequestTimeout) as well as all 5XX codes. The only exceptions are 501 (NotImplemented) and 505 (HttpVersionNotSupported) which are re-thrown to the user.
+By default, the detection strategy is configured to retry on HttpStatusCode 408 (RequestTimeout) as well as all 5XX codes. The only exceptions are 501 (NotImplemented) and 505 (HttpVersionNotSupported) status codes which are re-thrown to the user.
 
 The default retry strategy is based on exponential back-off with maximum of three attempts, back-off delta of 10 seconds, minimum back-off of 1 second, and maximum back-off of 10 seconds.
 
 ## Changing the Detection Strategy
-Detection strategy can be customized by implementing interface [ITransientErrorDetectionStrategy](../Microsoft.Rest/ClientRuntime/TransientFaultHandling/ITransientErrorDetectionStrategy.cs).
+Detection strategy can be customized by implementing interface [ITransientErrorDetectionStrategy](../Microsoft.Rest/ClientRuntime/TransientFaultHandling/ITransientErrorDetectionStrategy.cs):
 ```csharp
 public class ServerErrorDetectionStrategy : ITransientErrorDetectionStrategy
 {
@@ -19,9 +19,11 @@ public class ServerErrorDetectionStrategy : ITransientErrorDetectionStrategy
     {
         if (ex != null)
         {
+            // AutoRest will use this error type for all server errors.
             HttpRequestWithStatusException httpException;
             if ((httpException = ex as HttpRequestWithStatusException) != null)
             {
+                // Condition to retry
                 if (httpException.StatusCode == HttpStatusCode.InternalServerError)
                 {
                     return true;
@@ -32,7 +34,7 @@ public class ServerErrorDetectionStrategy : ITransientErrorDetectionStrategy
     }
 }
 ```
-Finally, set the client retry policy using preferred retry strategy
+Finally, set the client retry policy using preferred retry strategy:
 ```csharp
 var retryPolicy = new RetryPolicy<ServerErrorDetectionStrategy>(new FixedIntervalRetryStrategy());
 client.SetRetryPolicy(retryPolicy);
@@ -51,4 +53,4 @@ var retryPolicy = new RetryPolicy<HttpStatusCodeErrorDetectionStrategy>(new Fixe
 client.SetRetryPolicy(retryPolicy);
 ```
 
-In order to implement a custom retry strategy extend `RetryStrategy` abstract class and use that with generated clients.
+In order to implement a custom retry strategy extend [RetryStrategy](../Microsoft.Rest/ClientRuntime/TransientFaultHandling/RetryPolicy.cs) abstract class.
