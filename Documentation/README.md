@@ -19,7 +19,7 @@ This is the official documentation for AutoRest.
     - Error Handling
     - Custom Http Pipeline
     - [Tracing](clients-tracing.md)
-    - Automatic Retries
+    - [Automatic Retries](clients-retry.md)
 5. AutoRest Architecture
     - Overview
     - Code Generators

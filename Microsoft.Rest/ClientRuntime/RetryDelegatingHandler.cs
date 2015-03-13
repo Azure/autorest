@@ -102,8 +102,8 @@ namespace Microsoft.Rest
                         throw new HttpRequestWithStatusException(string.Format(
                             CultureInfo.InvariantCulture,
                             Resources.ResponseStatusCodeError,
-                            (int) responseMessage.StatusCode,
-                            responseMessage.StatusCode)) {StatusCode = responseMessage.StatusCode};
+                            (int)responseMessage.StatusCode,
+                            responseMessage.StatusCode)) { StatusCode = responseMessage.StatusCode };
                     }
 
                     return responseMessage;
