@@ -24,6 +24,6 @@ This is the official documentation for AutoRest.
     - Overview
     - Code Generators
     - Modelers
-6. Building the code
-    - Unit testing
+6. Building
+    - [Code & Unit testing](building-code.md)
 7. Contributing to the code
