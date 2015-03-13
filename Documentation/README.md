@@ -11,15 +11,15 @@ This is the official documentation for AutoRest.
     - [Command Line Interface](cli.md) - documentation for AutoRest.exe command line interface
     - Visual Studio Integration
     - Troubleshooting
-4. [Using Generated Clients (C#)](using-clients.md) - overview of generated code and various extensibility points
+4. Using Generated Clients (C#) - overview of generated code and various extensibility points
     - Project Setup
     - Initialization
     - Operations
     - Authentication
     - Error Handling
     - Custom Http Pipeline
-    - Tracing
-    - Automatic Retries
+    - [Tracing](clients-tracing.md)
+    - [Automatic Retries](clients-retry.md)
 5. AutoRest Architecture
     - Overview
     - Code Generators
