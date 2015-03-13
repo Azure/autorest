@@ -11,7 +11,7 @@ var myClient = new SwaggerPetstore();
 ```csharp
 var myClient = new SwaggerPetstore(new Uri("https://contoso.org/myclient"));
 ```
-* A constructor that accepts Credentials object (see [Authentication](using-auth.md))
+* A constructor that accepts Credentials object (see [Authentication](clients-auth.md))
 ```csharp
 var myClient = new SwaggerPetstore(new BasicAuthenticationCredentials
 	{
@@ -19,7 +19,7 @@ var myClient = new SwaggerPetstore(new BasicAuthenticationCredentials
 		Password = "P@$$w0rd"
 	});
 ```
-* A constructor that accepts the above parameters and a collection of delegating handlers (see [Custom Http Handlers](using-handlers.md))
+* A constructor that accepts the above parameters and a collection of delegating handlers (see [Custom Http Handlers](clients-handlers.md))
 ```csharp
 var myClient = new SwaggerPetstore(new MyCustomDelegatingHandler());
 ```
