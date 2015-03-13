@@ -12,12 +12,12 @@ This is the official documentation for AutoRest.
     - Visual Studio Integration
     - Troubleshooting
 4. Using Generated Clients (C#) - overview of generated code and various extensibility points
-    - Project Setup
-    - Initialization
-    - Operations
-    - Authentication
-    - Error Handling
-    - Custom Http Pipeline
+    - [Project Setup](clients-proj-setup.md)
+    - [Initialization](clients-init.md)
+    - [Operations](clients-ops.md)
+    - [Authentication](clients-auth.md)
+    - [Error Handling](clients-error.md)
+    - [Custom Http Pipeline](clients-handlers.md)
     - [Tracing](clients-tracing.md)
     - [Automatic Retries](clients-retry.md)
 5. AutoRest Architecture
