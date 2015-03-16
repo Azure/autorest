@@ -32,7 +32,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Fakes
         }
 
 
-        public async Task<HttpResponseMessage> DoStuff()
+        public async Task<HttpResponseMessage> DoStuff(string content = null)
         {
             // Construct URL
             string url = "http://www.microsoft.com";
@@ -43,6 +43,12 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Fakes
             httpRequest = new HttpRequestMessage();
             httpRequest.Method = HttpMethod.Get;
             httpRequest.RequestUri = new Uri(url);
+
+            // Set content
+            if (content != null)
+            {
+                httpRequest.Content = new StringContent(content);
+            }
 
             // Set Headers
             httpRequest.Headers.Add("x-ms-version", "2013-11-01");

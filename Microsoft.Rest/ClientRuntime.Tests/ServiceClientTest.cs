@@ -56,6 +56,52 @@ namespace Microsoft.Rest.ClientRuntime.Tests
         }
 
         [Fact]
+        public void ClientAddHandlersToPipelineChainsEmptyHandler()
+        {
+            var handlerA = new AppenderDelegatingHandler("A");
+            var handlerB = new AppenderDelegatingHandler("B");
+            var handlerC = new AppenderDelegatingHandler("C");
+
+            var fakeClient = new FakeServiceClient(new WebRequestHandler(),
+                handlerA, handlerB, handlerC,
+                new MirrorDelegatingHandler());
+
+            var response = fakeClient.DoStuff("Text").Result.Content.ReadAsStringAsync().Result;
+            Assert.Equal("Text+A+B+C", response);
+        }
+
+        [Fact]
+        public void ClientAddHandlersToPipelineChainsNestedHandler()
+        {
+            var handlerA = new AppenderDelegatingHandler("A");
+            var handlerB = new AppenderDelegatingHandler("B");
+            var handlerC = new AppenderDelegatingHandler("C");
+            handlerA.InnerHandler = handlerB;
+            handlerB.InnerHandler = handlerC;
+            var handlerD = new AppenderDelegatingHandler("D");
+            var handlerE = new AppenderDelegatingHandler("E");
+            handlerD.InnerHandler = handlerE;
+            handlerE.InnerHandler = new MirrorMessageHandler("F");
+
+            var fakeClient = new FakeServiceClient(new WebRequestHandler(),
+                handlerA, handlerD,
+                new MirrorDelegatingHandler());
+
+            var response = fakeClient.DoStuff("Text").Result.Content.ReadAsStringAsync().Result;
+            Assert.Equal("Text+A+B+C+D+E", response);
+        }
+
+        [Fact]
+        public void ClientWithoutHandlerWorks()
+        {
+            var fakeClient = new FakeServiceClient(new WebRequestHandler(),
+                new MirrorDelegatingHandler());
+
+            var response = fakeClient.DoStuff("Text").Result.Content.ReadAsStringAsync().Result;
+            Assert.Equal("Text", response);
+        }
+
+        [Fact]
         public void RetryHandlerRetriesWith500Errors()
         {
             var fakeClient = new FakeServiceClient(new FakeHttpHandler());
@@ -68,21 +114,6 @@ namespace Microsoft.Rest.ClientRuntime.Tests
             var result = fakeClient.DoStuff();
             Assert.Equal(HttpStatusCode.InternalServerError, result.Result.StatusCode);
             Assert.Equal(2, attemptsFailed);
-        }
-
-        [Fact]
-        public void MobileServicesCredentialsSendsZumoHeader()
-        {
-            var httpHandler = new RecordedDelegatingHandler();
-            var fakeClient = new FakeServiceClient(
-                new FakeHttpHandler(), 
-                new MobileServicesCredentials("123"), httpHandler);
-            
-            fakeClient.DoStuffSync();
-            Assert.True(httpHandler.RequestHeaders.Contains("X-ZUMO-AUTH"));
-            Assert.Equal(
-                "123", 
-                httpHandler.RequestHeaders.GetValues("X-ZUMO-AUTH").Single());
         }
 
         [Fact]

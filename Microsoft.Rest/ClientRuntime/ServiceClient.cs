@@ -23,16 +23,16 @@ namespace Microsoft.Rest
         private bool _disposed;
 
         /// <summary>
-        /// Reference to the outermost HTTP handler (which is the end of HTTP
+        /// Reference to the first HTTP handler (which is the start of send HTTP
         /// pipeline).
         /// </summary>
-        protected HttpMessageHandler OuterHandler { get; set; }
+        protected HttpMessageHandler FirstMessageHandler { get; set; }
 
         /// <summary>
-        /// Reference to the innermost HTTP handler (which is the start of HTTP
+        /// Reference to the innermost HTTP handler (which is the end of send HTTP
         /// pipeline).
         /// </summary>
-        protected HttpClientHandler InnerHandler { get; set; }
+        protected HttpClientHandler HttpClientHandler { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the ServiceClient class.
@@ -112,7 +112,7 @@ namespace Microsoft.Rest
         {
             get
             {
-                var handler = OuterHandler;
+                var handler = FirstMessageHandler;
 
                 while (handler != null)
                 {
@@ -169,8 +169,8 @@ namespace Microsoft.Rest
                 // Dispose the client
                 HttpClient.Dispose();
                 HttpClient = null;
-                OuterHandler = null;
-                InnerHandler = null;
+                FirstMessageHandler = null;
+                HttpClientHandler = null;
             }
         }
 
@@ -185,22 +185,28 @@ namespace Microsoft.Rest
             Justification = "We let HttpClient instance dispose")]
         protected void InitializeHttpClient(HttpClientHandler httpClientHandler, params DelegatingHandler[] handlers)
         {
-            InnerHandler = httpClientHandler;
+            HttpClientHandler = httpClientHandler;
             DelegatingHandler currentHandler = new RetryDelegatingHandler();
-            currentHandler.InnerHandler = InnerHandler;
+            currentHandler.InnerHandler = HttpClientHandler;
 
             if (handlers != null)
             {
                 for (int i = handlers.Length - 1; i >= 0; --i)
                 {
                     DelegatingHandler handler = handlers[i];
+                    // Non-delegating handlers are ignored since we always 
+                    // have RetryDelegatingHandler as the outer-most handler
+                    while (handler.InnerHandler is DelegatingHandler)
+                    {
+                        handler = handler.InnerHandler as DelegatingHandler;
+                    }
                     handler.InnerHandler = currentHandler;
-                    currentHandler = handler;
+                    currentHandler = handlers[i];
                 }
             }
 
             var newClient = new HttpClient(currentHandler, true);
-            OuterHandler = currentHandler;
+            FirstMessageHandler = currentHandler;
             HttpClient = newClient;
             Type type = this.GetType();
             HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(type.FullName,
