@@ -21,7 +21,7 @@ public class HelloWorldController : ApiController
     }
 }
 ```
-By convention, Swagger documents are exposed by web services with the name `swagger.json`.  The `title` property of the `info` object is used by **AutoRest**  as the name of the client object in the generated library. The `host` + `path` of the operation corresponds to the URL of the operation endpoint. The `operationId` is used as the method name. The spec declares that a `GET` request will return an HTTP 200 status code with content of mime-type `application/json` and the body will be a string. For a more in-depth overview of swagger parsing refer to [working with swagger](Documentation\swagger.md) section of the [documentation](Documentation).
+By convention, Swagger documents are exposed by web services with the name `swagger.json`.  The `title` property of the `info` object is used by **AutoRest**  as the name of the client object in the generated library. The `host` + `path` of the operation corresponds to the URL of the operation endpoint. The `operationId` is used as the method name. The spec declares that a `GET` request will return an HTTP 200 status code with content of mime-type `application/json` and the body will be a string. For a more in-depth overview of swagger parsing refer to [working with swagger](Documentation/swagger.md) section of the [documentation](Documentation).
 
 ```
 {
@@ -55,9 +55,9 @@ Next, we invoke **AutoRest.exe** with this swagger document to generate client l
 
 **AutoRest** is extensible and can support multiple types of input and output. *AutoRest.exe* comes with the *AutoRest.json* configuration file that defines the available inputs (*Modelers*) and outputs (*CodeGenerators*). When invoking *AutoRest.exe*, you must specify the `-Modeler` and `-CodeGenerator` to use.
 
-The Swagger schema is language agnostic and doesn't include the notion of namespace, but for generating code, AutoRest requires `-BaseNamespace` be specified.  By default, the CodeGenerator will place output in a directory named *Generated*. This can be overridden by providing the `-OutputFolder` parameter.
+The Swagger schema is language agnostic and doesn't include the notion of namespace, but for generating code, AutoRest requires `-Namespace` be specified.  By default, the CodeGenerator will place output in a directory named *Generated*. This can be overridden by providing the `-OutputDirectory` parameter.
 
->AutoRest.exe -CodeGenerator CSharp -Modeler Swagger -Input swagger.json -BaseNamespace MyNamespace
+>AutoRest.exe -CodeGenerator CSharp -Modeler Swagger -Input swagger.json -Namespace MyNamespace
 
 Now, we will use the generated code to call the web serviced.
 
@@ -70,7 +70,7 @@ Add the namespace that was given to AutoRest.
 ```
 using MyNamespace;
 ```
-We now access the REST API with the fact that `GetGreeting` will throw an exception if the response is not a 200 OK, we can access the REST API with very little code (see [using generated clients](Documentation/using-clients.md) for details).
+Access the REST API with very little code (see [Initialization](Documentation/clients-init.md) and [Operations](Documentation/clients-ops.md) for details).
 ```
 var myClient = new MyClient();
 var salutation = myClient.GetGreeting();
