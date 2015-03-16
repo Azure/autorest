@@ -1,4 +1,4 @@
-# AutoRest #
+# <img align="center" src="Documentation/images/autorest-small-flat.png">  AutoRest
 
 The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to *AutoRest* is a spec that describes the REST API using the [Swagger](http://github.com/swagger-api/swagger-spec) format. 
 
