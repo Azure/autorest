@@ -2,25 +2,27 @@
 
 ##Syntax
 ```bash
-AutoRest.exe -CodeGenerator <value> -Modeler <value> -Input <value> -BaseNamespace <value> [-OutputFolder <value>] [-OutputAsSingleFile <value>] [-Header <value>] [-AddCredentials <value>] 
+AutoRest.exe -Input <value> -Namespace <value> [-OutputDirectory <value>] [-OutputFileName <value>] [-CodeGenerator <value>] [-Modeler <value>] [-ClientName <value>] [-Header <value>] [-AddCredentials <value>] 
 ```
 
 ##Parameters
-**-OutputFolder** Output folder for generated files. Defaults to Generated directory.
+**-OutputDirectory** Output directory for generated files. Defaults to Generated directory.
 
-**-OutputAsSingleFile** Output file name. If specified, all the code will be written into this single file. Otherwise, AutoRest will split code by operations and write individual files into OutputFolder.
+**-OutputFileName** Output file name. If specified, all the code will be written into this single file. Otherwise, AutoRest will split code by operations and write individual files into OutputFolder.
 
-**-CodeGenerator** Code generation language.
+**-CodeGenerator** Code generation language. If not specified, will default to CSharp.
 
-**-Modeler** Modeler for the input specification.
+**-Modeler** Modeler for the input specification. If not specified, will default to Swagger.
 
-**-Input** Path to the input specification file. URLs are not supported at this moment.
+**-Input** Path to the input specification file.
 
-**-BaseNamespace** Base namespace for generated code
+**-Namespace** Base namespace for generated code
 
-**-Header** Default file header contents. Use NONE if no header is required.
+**-ClientName** Name of the generated client type. If not specified, will default to the value in the specification. For Swagger specifications, this is the value in the 'Title' field.
 
-**-AddCredentials** If set to true the generated client will have ServiceClientCredentials property. A set of corresponding constructors will be generated and its ProcessHtppRequestAsync method will be called on the http requests. Users can derive from this class to add their customized authentication behaviors.
+**-Header** Header to be included in each generated file as a comment. Use NONE if no header is required.
+
+**-AddCredentials** If set to true the generated service client will have ServiceClientCredentials property. A set of corresponding constructors will be generated and its ProcessHtppRequestAsync method will be called on the http requests. Users can derive from this class to add their customized authentication behaviors.
 
 
 
@@ -39,3 +41,5 @@ AutoRest.exe -CodeGenerator CSharp -OutputAsSingleFile client.cs -Modeler Swagge
 ```bash
 AutoRest.exe -CodeGenerator CSharp -Modeler Swagger -Input swagger.json -BaseNamespace MyNamespace -AddCredentials true
 ```
+
+
