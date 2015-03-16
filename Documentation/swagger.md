@@ -397,7 +397,7 @@ In order to describe polymorphic inheritance between types, AutoRest uses an ext
 ```
 The generated C# code looks exactly the same in the models but the base serialization and deserialization calls in the operations will look like:
 ```csharp
-public async Task<HttpOperationResponse<Pet>> GetPolymorphicPetsAsync(CancellationToken cancellationToken)
+public async Task<HttpOperationResponse<Pet>> GetPolymorphicPetsWithOperationResponseAsync(CancellationToken cancellationToken)
 {
 
 ............
@@ -601,7 +601,7 @@ Parameters use a `'required'` Boolean field as the example shown below.
 ```
 will generate C# client side method of
 ```csharp
-public async Task<HttpOperationResponse<Product>> ListAsync(int subscriptionId, string resourceGroupName, int? apiVersion, CancellationToken cancellationToken)
+public async Task<HttpOperationResponse<Product>> ListWithOperationResponseAsync(int subscriptionId, string resourceGroupName, int? apiVersion, CancellationToken cancellationToken)
 {
     // Validate
     if (resourceGroupName == null)
