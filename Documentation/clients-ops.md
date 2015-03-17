@@ -18,9 +18,9 @@ if (petsTask.Wait(TimeSpan.FromSeconds(10)))
 ```
 
 ## Getting HTTP request and response information
-To access HTTP request and response information for a service operation, use the following method overload: 
+To access HTTP request and response information for a service operation, use the following method: 
 ```csharp
-var petsResult = client.FindPetsAsync(null, 10, CancellationToken.None).Result;
+var petsResult = client.FindPetsWithOperationResponseAsync(null, 10, CancellationToken.None).Result;
 ```
 To access the HTTP request:
 ```csharp
@@ -30,31 +30,3 @@ To access the HTTP response:
 ```csharp
 var response = petsResult.Response;
 ```
-## Handling errors
-To access information about HTTP errors, including the HTTP request and response, use the `HttpOperationException` class as follows:
-```csharp
-try
-{
-    pets = client.FindPets(null, -1);
-}
-catch (HttpOperationException ex)
-{
-    var request = ex.Request;
-    var response = ex.Response;
-}
-```
-Many service operations have service specific error data, use the `HttpOperationException<T>` class to access this data:
-```csharp
-try
-{
-    pets = client.FindPets(null, -1);
-}
-catch (HttpOperationException<ErrorModel> ex)
-{
-    var errorData = ex.Body;
-    var message = errorData.Message;
-    var request = ex.Request;
-    var response = ex.Response;
-}
-```
-See [Error Modeling](swagger.md#error-modeling) for more information on modeling service specific errors.
