@@ -670,7 +670,7 @@ together with its definition
   }
 }
 ```
-will generate the following error handling code:
+Generates the following error handling code:
 ```csharp
 if (statusCode != HttpStatusCode.OK) // and more if more acceptable status codes
 {
