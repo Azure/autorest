@@ -8,7 +8,7 @@ AutoRest.exe -Input <value> -Namespace <value> [-OutputDirectory <value>] [-Outp
 ##Parameters
 **-OutputDirectory** Output directory for generated files. Defaults to Generated directory.
 
-**-OutputFileName** Output file name. If specified, all the code will be written into this single file. Otherwise, AutoRest will split code by operations and write individual files into OutputFolder.
+**-OutputFileName** Output file name. If specified, all the generated code is written into this single file. Otherwise, AutoRest will split code by operations and models and write individual files into OutputDirectory.
 
 **-CodeGenerator** Code generation language. If not specified, will default to CSharp.
 
@@ -16,30 +16,35 @@ AutoRest.exe -Input <value> -Namespace <value> [-OutputDirectory <value>] [-Outp
 
 **-Input** Path to the input specification file.
 
-**-Namespace** Base namespace for generated code
+**-Namespace** Namespace for generated code
 
 **-ClientName** Name of the generated client type. If not specified, will default to the value in the specification. For Swagger specifications, this is the value in the 'Title' field.
 
 **-Header** Header to be included in each generated file as a comment. Use NONE if no header is required.
 
-**-AddCredentials** If set to true the generated service client will have ServiceClientCredentials property. A set of corresponding constructors will be generated and its ProcessHtppRequestAsync method will be called on the http requests. Users can derive from this class to add their customized authentication behaviors.
+**-AddCredentials** If set to true the generated service client will have a ServiceClientCredentials property. The constructors will include a parameter for passing the credentials object. When processing HTTP requests, the ProcessHtppRequestAsync method of the credentials object will be invoked. Custom authentication behaviors can be added to the generated client by passing in types that derive from ServiceClientCredentials. 
 
 
 
 ##Examples
-- Generate C# client library from a Swagger formatted input specification swagger.json with namespace MyNamespace:
+- Generate C# client library from a Swagger-formatted input specification `swagger.json` in the `MyNamespace` namespace:
 ```bash
-AutoRest.exe -CodeGenerator CSharp -Modeler Swagger -Input swagger.json -BaseNamespace MyNamespace
+AutoRest.exe -Input swagger.json -Namespace MyNamespace
 ```
 
-- Generate C# client library from a Swagger formatted input specification swagger.json with namespace MyNamespace into one single file client.cs with a customized header:
+- Generate C# client library from a Swagger-formatted input specification `swagger.json` in the `MyNamespace` namespace:
 ```bash
-AutoRest.exe -CodeGenerator CSharp -OutputAsSingleFile client.cs -Modeler Swagger -Input swagger.json -BaseNamespace MyNamespace -Header "Copyright Contoso Ltd"
+AutoRest.exe -Input swagger.json -Namespace MyNamespace -Modeler Swagger -CodeGenerator CSharp  
 ```
 
-- Generate C# client library from a Swagger formatted input specification swagger.json with namespace MyNamespace with credential property added:
+- Generate C# client library from a Swagger-formatted input specification `swagger.json` with namespace `MyNamespace` into the `client.cs` file with custom header text:
 ```bash
-AutoRest.exe -CodeGenerator CSharp -Modeler Swagger -Input swagger.json -BaseNamespace MyNamespace -AddCredentials true
+AutoRest.exe -Input swagger.json -Namespace MyNamespace -OutputAsSingleFile client.cs -Modeler Swagger -CodeGenerator CSharp -Header "Copyright Contoso Ltd"
+```
+
+- Generate C# client library from a Swagger-formatted input specification `swagger.json` in the `MyNamespace` namespace and include a credential property:
+```bash
+AutoRest.exe -Input swagger.json -Namespace MyNamespace -Modeler Swagger -CodeGenerator CSharp -AddCredentials true
 ```
 
 
