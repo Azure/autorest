@@ -1,7 +1,7 @@
 
 #Working with Swagger Specifications
 
-This documentation introduces the rules AutoRest users are suggested to follow in handling advanced scenarios in Swagger specifications. AutoRest handles Swagger specification input files according to [Swagger RESTful API Documentation Specification](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md) and this documentation clarifies the scenarios that are not clearly defined there or might bring ambiguity.
+This document outlines best practices for using AutoRest to generate user-friendly clients in advanced scenarios. AutoRest handles Swagger specification input files according to [Swagger RESTful API Documentation Specification](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md.  However, API descriptions that are valid sometimes produce client libraries that do not have all the desired usability features. This document outlines some simple techniques for improving the usability of the client generated from Swagger.
 
 ## Contents
 - [Data Types](#data-types)
@@ -38,7 +38,7 @@ Please follow https://github.com/swagger-api/swagger-spec/blob/master/versions/2
   }
 }
 ```
-will generate C# client model type:
+Generates C# client model type:
 ```csharp
 public partial class Pet
 {
@@ -75,13 +75,13 @@ public partial class Pet
 
 ### `byte[]`, `DateTimeOffset`, `int`, `long`
 - **`byte[]`**
-In order to represent `byte` arrays in the generated code, the property of the Swagger definition should have `string` as its type and `byte` as its format.
+To represent `byte` arrays in the generated code, the property of the Swagger definition should have `string` as its type and `byte` as its format. This indicates binary data that will be represented as a base64-encoded string in requests and responses. The generated client will automatically do this encoding when processing requests and responses.
 
 - **`DateTimeOffset`**
-AutoRest generates `DateTimeOffset` typed variables in generated C# code for Swagger properties that have `string` as the type and `date-time` as the format.
+AutoRest generates `DateTimeOffset` typed properties in generated C# code for Swagger properties that have `string` as the type and `date-time` as the format.
 
 - **`int` / `long`**
-Both `int` and `long` variables in the generated code correspond to `integer` types in Swagger properties. If the format of the Swagger property is `int32`, `int` will be generated; if the format is `int64`, `long` will be generated. If the format field of the Swagger property is not set, AutoRest will default the format to `int32`.
+Both `int` and `long` proeprties in the generated code correspond to `integer` types in Swagger properties. If the format of the Swagger property is `int32`, `int` will be generated; if the format is `int64`, `long` will be generated. If the format field of the Swagger property is not set, AutoRest use  format `int32`.
 
 **Example:**
 ```json
@@ -107,7 +107,7 @@ Both `int` and `long` variables in the generated code correspond to `integer` ty
   }
 }
 ```
-will generate C# model type:
+Generates C# client model type:
 ```csharp
 public partial class Pet
 {
@@ -122,12 +122,12 @@ public partial class Pet
         set { this._age = value; }
     }
     
-    private DateTime? _birthday;
+    private DateTimeOffset? _birthday;
     
     /// <summary>
     /// Optional.
     /// </summary>
-    public DateTime? Birthday
+    public DateTimeOffset? Birthday
     {
         get { return this._birthday; }
         set { this._birthday = value; }
@@ -166,7 +166,7 @@ public partial class Pet
 
 ### Sequences and Dictionaries
 #### Sequences
-AutoRest builds sequences from `array` schema in Swagger specification. 
+AutoRest builds sequences from schemas with type `array`. 
 The following definition
 ```json
 "pet": {
@@ -180,7 +180,7 @@ The following definition
   }
 }
 ```
-will generate C# client library
+Generates C# client model type
 ```csharp
 public partial class Pet
 {
@@ -206,7 +206,7 @@ public partial class Pet
 ```
 
 #### Dictionaries
-AutoRest generates dictionaries (or hash maps in some contexts) using `additionalProperites` from [JSON Schema v4](http://json-schema.org/latest/json-schema-validation.html#anchor64). However, AutoRest currently only support objects (Swagger schema) but not Boolean values. The key of the dictionary generated could only be `string`.
+AutoRest generates dictionaries (or hash maps in some contexts) using `additionalProperites` from [JSON Schema v4](http://json-schema.org/latest/json-schema-validation.html#anchor64). The additionalProperties element should specify the SwaggerSchema of the values in the dictionary . The keys of the generated dictionary will be type `string`.
 
 The following definition
 ```json
@@ -234,13 +234,13 @@ public static partial class StringDictionary
     }
 }
 ```
-Notice that in the example for Sequences, the `Pet` is a POCO model while in this example the `StringDictionary` only generates a static class helper for deserialization. Note that a model is generated if the corresponding Swagger scheme appears as a property of some other scheme, while a static helper class is generated if the corresponding Swagger scheme is the top-level object sent on the wire. This rule applies to all sequences and dictionaries in both requests and responses.
+In the example for Sequences, the `Pet` is a POCO model while in this example the `StringDictionary` only generates a static class helper for deserialization. A model type is generated if the corresponding Swagger schema is of type 'object' or has one or more 'properties'. A static helper class is generated if the corresponding Swagger schema specifies a primitive type or 'array'. This rule applies to all schemas in both parameters and responses.
 
 ### Inheritance and Polymorphism
 #### Inheritance
 AutoRest builds inheritance between types if an `AllOf` field is specified in a Swagger definition with ONLY one reference to another Swagger definition. The following example demonstrate a `Cat` type inheriting a `Pet` with its `AllOf` set to `[{"$ref": "Pet"}]`. 
 
-> Note: Only `AllOf` fields with one reference will be treated as inheritance. If `AllOf` contains more than one schema that has `"$ref"` as the key the inheritance will not be built. However, inheritance will not be broken if there are other inline schema definitions in `AllOf` because their properties will only be merged into the current type's property list.
+> Note: Only `AllOf` fields with one schema reference will be treated as inheritance. If `AllOf` contains more than one schema that has `"$ref"` as the key, the properties from the referenced schemas will be composed without inheritance. However, if an allOf contains multiple inline schemas and a single schema reference, the generated model type will use inheritance. 
 
 **Example:**
 ```json
@@ -375,27 +375,27 @@ public partial class Pet
     }
 }
 ```
-Notice that in `Cat`'s serialization and deserialization methods, `Pet`'s corresponding methods are called first to build all the properties of `Pet`.
+In `Cat`'s serialization and deserialization methods, `Pet`'s corresponding methods are called first to build all the properties of `Pet`.
 
 #### Polymorphism
-In order to describe polymorphic inheritance between types, AutoRest uses an extra "discriminator" field to determine what the exact type of an object is on the wire. Therefore on top of inheritance, polymorphism can be easily achieved with little effort by adding a discriminator field to the base class. In the example above, by adding a discriminator `$type` (commonly used by Web APIs) to `Pet` we have a following new `Pet`:
+To describe polymorphic inheritance between types, Swagger uses an extra "discriminator" field to indicate the exact serialization of the object on the wire. To make a set of classes polymorphic, use 'allOf' with a schema reference to indicate inheritance from a base schema and a discriminator field to the base schema. In the example above, adding a discriminator field named `objectType` to `Pet` will make the genereated set of classes polymorphic:
 ```json
 "Pet": {
-  "discriminator": "$type",
+  "discriminator": "Type",
   "required": [
-    "$type"
+    "objectType"
   ],
   "properties": {
     "name": {
       "type": "string"
     },
-    "$type": {
+    "objectType": {
       "type": "string"
     }
   }
 }
 ```
-The generated C# code looks exactly the same in the models but the base serialization and deserialization calls in the operations will look like:
+The generated models in C# code are nearly identical, but the base serialization and deserialization methods are changed as follows:
 ```csharp
 public async Task<HttpOperationResponse<Pet>> GetPolymorphicPetsWithOperationResponseAsync(CancellationToken cancellationToken)
 {
@@ -407,15 +407,15 @@ public async Task<HttpOperationResponse<Pet>> GetPolymorphicPetsWithOperationRes
 	JToken requestDoc = petCreateOrUpdateParameter.SerializeJson(null);
 	if (petCreateOrUpdateParameter is Cat)
 	{
-	    requestDoc["$type"] = "Cat";
+	    requestDoc["ObjectType"] = "Cat";
 	}
 	else if (petCreateOrUpdateParameter is Dog)
 	{
-	    requestDoc["$type"] = "Dog";
+	    requestDoc["ObjectType"] = "Dog";
 	}
 	else
 	{
-	    requestDoc["$type"] = "Pet";
+	    requestDoc["ObjectType"] = "Pet";
 	}
 	
 ............
@@ -431,7 +431,7 @@ public async Task<HttpOperationResponse<Pet>> GetPolymorphicPetsWithOperationRes
 	    }
 	    if (responseDoc != null)
 	    {
-	        string typeName = ((string)responseDoc["$type"]);
+	        string typeName = ((string)responseDoc["ObjectType"]);
 	        if (typeName == "Cat")
 	        {
 	            resultModel = new Cat();
@@ -453,13 +453,13 @@ public async Task<HttpOperationResponse<Pet>> GetPolymorphicPetsWithOperationRes
 ```
 
 ### Type Name Generation
-Type name generation is simple and straightforward if a Swagger schema is defined in the "#/definitions" block. The name of the Swagger Schema will be respected, like the `Pet` model in the examples above. Unfriendly characters will be filtered but the generated model name should make sense if the one in the Swagger definitions list makes sense.
+Type name generation is straightforward if a Swagger schema is defined in the "#/definitions" block. The name of the Swagger Schema will be respected in the corresponding generated model type, like the `Pet` model in the examples above. Invalid characters will be filtered, and type capitalization is changed to comply with language-specific coding guidelines, but the generated model name should make sense if the one in the Swagger definitions list makes sense.
 
-Type name generation becomes tricky in inline schema definitions. There are 3 scenarios when AutoRest generates a name on its own. The names are generated in the way that their context in the Swagger specification is easy to be found and developers can move them into "#/definitions" list if they'd like a different name.
+Type name generation becomes tricky in inline schema definitions. There are three scenarios when AutoRest generates a name on its own. The names are generated using the context of the schema in the Swagger specification so that the correlation between model type and swagger schema is easy to find.  A generated type name can easily be changed by moving the corresponding schema into the "#/definitions" list and referencing the schema from the parameters and responses where it appears in the Swagger specification.
 
 - **Inline parameters**
-*Schema defined inside a `body` parameter.* The parameter name will be used for the generated type name as it is required according to the definition [here](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#parameterObject).
-The following example will generate a type `PetStyle`.
+*A Schema defined inside a `body` parameter.* The parameter name will be used for the generated type name.
+The following example will generate a model type named `Style`.
 ```json
 "parameters": [
   {
@@ -480,7 +480,7 @@ The following example will generate a type `PetStyle`.
 ```
 
 - **Inline responses**
-*Responses with a schema definition inside.* The return type name will be `operationId` + `http status code` + "Response".
+*A response with a schema definition inside.* The model type name will be `operationId` + `http status code` + "Response".
 The following example will generate a type `AddPetOkResponse`.
 ```json
 ......
@@ -503,7 +503,7 @@ The following example will generate a type `AddPetOkResponse`.
 ```
 
 - **Inline properties**
-*A property of a reference type contains an inline Swagger schema definition.* The parent class's type name concatenated with the property's name inside the parent class will be used as its type name.
+*A property of a reference type contains an inline Swagger schema definition.* The type name for the generated model is composed of the parent class's type name concatenated with the property's name.
 The following example will generate a type `PetStyle`.
 ```json
 "Pet": {
@@ -522,8 +522,8 @@ The following example will generate a type `PetStyle`.
 }
 ```
 
-- **Properties inside sequences / dictionaries**
-*A property defined as the element of a sequence or the value of a dictionary.* Elements of a sequence are named as the parent class's name concatenated with "Item", and values of a dictionary are named as the parent class's name concatenated with "Value".
+- **Schemas in sequences and dictionaries**
+*A schema defined in the 'items' proeprty of a sequence or the 'additionalProperties' value of a dictionary.* Model types corresponding to Items of a sequence are named using the parent class's name concatenated with "Item". Model types corresponding to the 'additinalPropeties' value of a dictionary are named using the parent class's name concatenated with "Value".
 The following example will generate types `PetFavFoodItem` and `PetFavFoodBrandValue`.
 ```json
 "Pet": {
@@ -556,7 +556,7 @@ The following example will generate types `PetFavFoodItem` and `PetFavFoodBrandV
 
 ## Operations
 ### Generating Operation Classes
-In many cases, client operations are intended to be grouped by resource type for better clarification and readability. AutoRest supports categorizing operations using `_` in `operationId` fields. The part appearing before `_` will be treated as the class name, and the part after it will be treated as the method name.
+In many cases, client operations are intended to be grouped by resource type for better usability. AutoRest supports categorizing operations using `_` in the `operationId` field of a SwaggerOperation. The part appearing before `_` will be treated as the operations class name, and the part after will be treated as the method name.
 
 **Example:**
 The following Swagger specification:
@@ -570,14 +570,14 @@ The following Swagger specification:
       "operationId": "Values_Get",
 ............
 ```
-will generate a `Get` method inside `Values` class. The end user will access the method by calling `client.Values.Get()`. This is a neat way of organizing your client if you have multiple operations with the same name but different underlying resources.
+will generate a `Get` method inside a `Values` class. The end user will access the method by calling `client.Values.Get()`. This is a neat way of organizing your client if you have multiple operations with the same operation name but different underlying resources.
 
-If `-OutputAsSingleFile` parameter is not specified for AutoRest Command Line Interface, generated files will also be organized by namespaces. If you have `operationId`s `ns1` and `ns2`, you will have `ns1.cs` and `ns2.cs` generated for C# client library.
+If the `-OutputFile` parameter is not specified when invoking the AutoRest Command Line Interface, generated files will also be organized by namespaces. If you have `operationId`s `ns1_get` and `ns2_get`, you will have `ns1.cs` and `ns2.cs` in the generated C# client library.
 
 ### Specifying required parameters and properties
-Parameters and properties in Swagger schema use different notations to define if they're required or optional. 
+Parameters and properties in Swagger schema use different notations and conventions to determine if they are required or optional. 
 
-Parameters use a `'required'` Boolean field as the example shown below.
+Parameters in the 'path' or 'body' are **always** required. Parameters may also use a `'required'` Boolean property to indicate that they are required for the operation, as in the example shown below.
 ```json
 "parameters": [
   {
@@ -599,7 +599,7 @@ Parameters use a `'required'` Boolean field as the example shown below.
   }
 ]
 ```
-will generate C# client side method of
+Generates C# client side method of
 ```csharp
 public async Task<HttpOperationResponse<Product>> ListWithOperationResponseAsync(int subscriptionId, string resourceGroupName, int? apiVersion, CancellationToken cancellationToken)
 {
@@ -610,11 +610,11 @@ public async Task<HttpOperationResponse<Product>> ListWithOperationResponseAsync
     }
 ............
 ```
-where a non-nullable type is changed into its nullable wrapper if it's optional and a validation is added if a nullable type is marked as required.
+where a non-nullable type is changed into its nullable wrapper if the corresponding parameter is optional and a validation is added if a nullable type is marked as required.
 
 > Note that parameters that have field `in` as path are always required and the `required` field will be ignored. 
 
-Properties, however, doesn't not contain a required field since it's a list of Swagger schema and there is no placeholder for a `'required'` field. Instead, Each definition scheme can specify a `'required'` array that tells which ones in the property list are required. An example is shown below.
+Properties in SwaggerSchema do not contain a required field. Instead, Each definition schema can provide a `'required'` array that specifies which proeprties are required. An example is shown below.
 ```json
 "Product": {
   "required": [ 
@@ -641,7 +641,7 @@ Properties, however, doesn't not contain a required field since it's a list of S
 ```
 
 ### Error Modeling
-At the runtime of the client library, if the server returns an undesired status code or throws exceptions, an exception of type `HttpOperationException` will thrown from the AutoRest generated client library. The exception instance will contain the request of type `HttpRequestMessage` (in property `Request`), the response of type `HttpResponseMessage` (in property `Response`), and the error model if defined in Swagger specification (in property `Body`). The error model must be defined as the `default` response's scheme.
+At runtime, if the server returns an unexpected status code,  the generated client throws an exception of type `HttpOperationException`. The exception instance will contain the request of type `HttpRequestMessage` (in property `Request`), the response of type `HttpResponseMessage` (in property `Response`), and the error model (in property `Body`). The error model must be defined as the schema of the `default` response.
 
 **Example:**
 A response of 
@@ -670,7 +670,7 @@ together with its definition
   }
 }
 ```
-will generate the following error handling code:
+Generates the following error handling code:
 ```csharp
 if (statusCode != HttpStatusCode.OK) // and more if more acceptable status codes
 {
@@ -695,3 +695,5 @@ if (statusCode != HttpStatusCode.OK) // and more if more acceptable status codes
     throw ex;
 }
 ```
+
+See [Error Handling](clients-error.md) for details on how to catch and use the exceptions from generated clients.
