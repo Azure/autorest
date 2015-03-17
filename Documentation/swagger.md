@@ -696,4 +696,4 @@ if (statusCode != HttpStatusCode.OK) // and more if more acceptable status codes
 }
 ```
 
-See [Error Handling](using-errors.md) for details on how to catch and use the exceptions from generated clients.
+See [Error Handling](clients-error.md) for details on how to catch and use the exceptions from generated clients.
