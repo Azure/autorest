@@ -10,8 +10,8 @@
     <projectUrl>https://github.com/Azure/azure-sdk-for-net</projectUrl>
     <iconUrl>http://go.microsoft.com/fwlink/?LinkID=288890</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <summary>This package provides a logging implementation for generated Rest client libraries exposing HTTP messaging via Log4Net.</summary>
-    <description>Exposes generated Rest client libraries HTTP messaging via Log4Net.</description>
+    <summary>Provides Log4Net logging for AutoRest generated client libraries.</summary>
+    <description>Enables logging of event messages for AutoRest generated client libraries via Log4Net.</description>
     <copyright>Copyright © Microsoft Corporation</copyright>
     <tags>Microsoft AutoRest ClientRuntime Log4Net</tags>
     <references>

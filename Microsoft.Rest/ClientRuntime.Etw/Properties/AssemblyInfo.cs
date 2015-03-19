@@ -7,10 +7,10 @@ using System.Resources;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Microsoft AutoRest Client Library ETW Logger")]
-[assembly: AssemblyDescription("Provides ETW tracing of Microsoft REST Client Library events.")]
+[assembly: AssemblyDescription("Provides ETW tracing of \"Microsoft.Rest\" Client Library events.")]
 
 [assembly: AssemblyVersion("0.9.0.0")]
-[assembly: AssemblyFileVersion("0.9.0.0")]
+[assembly: AssemblyFileVersion("0.9.1.0")]
 
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
