@@ -205,7 +205,7 @@ namespace Microsoft.Rest
                 }
             }
 
-            var newClient = new HttpClient(currentHandler, true);
+            var newClient = new HttpClient(currentHandler, false);
             FirstMessageHandler = currentHandler;
             HttpClient = newClient;
             Type type = this.GetType();

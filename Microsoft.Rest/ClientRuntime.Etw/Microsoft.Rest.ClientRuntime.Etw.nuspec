@@ -10,9 +10,8 @@
     <projectUrl>https://github.com/Azure/AutoRest</projectUrl>
     <iconUrl>http://go.microsoft.com/fwlink/?LinkID=288890</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <summary>This package provides a logging implementation for generated Rest client libraries exposing events via ETW (Event Tracing for Windows).</summary>
-    <description>Exposes AutoRest generated client libraries events via ETW (Event Tracing for Windows). ETW events can be captured by subscribing to Microsoft.Rest event source.
-        The ETW tracing provider requires .NET Framework 4.5 or newer.</description>
+    <summary>Provides ETW support for AutoRest generated client libraries.</summary>
+    <description>Enables tracing of event messages for AutoRest generated client libraries events via ETW (Event Tracing for Windows). ETW events can be captured by subscribing to the "Microsoft.Rest" event source.</description>
     <copyright>Copyright © Microsoft Corporation</copyright>
     <tags>Microsoft AutoRest ClientRuntime ETW "Event Tracing"</tags>
     <references>
