@@ -1,17 +1,11 @@
 #AutoRest Documentation
-
-This is the official documentation for AutoRest.
-
-## Contents
 1. Getting AutoRest
 2. Defining Clients
-    - Generating Swagger from Web API
-    - [Working with Swagger](swagger.md) - overview of rules used by AutoRest while parsing [Swagger 2.0](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md) specifications
+    - [Working with Swagger](swagger.md) - the conventions used by AutoRest in processing [Swagger 2.0][Swagger2.0] specifications.
 3. Generating Clients
-    - [Command Line Interface](cli.md) - documentation for AutoRest.exe command line interface
-    - Visual Studio Integration
-    - Troubleshooting
-4. Using Generated Clients (C#) - overview of generated code and various extensibility points
+    - [Command Line Interface](cli.md) - using AutoRest.exe from the command line.
+    - using AutoRest in Visual Studio.
+4. Using a Generated Client (C#) - overview of the generated code and extensibility points.
     - [Project Setup](clients-proj-setup.md)
     - [Initialization](clients-init.md)
     - [Operations](clients-ops.md)
@@ -24,6 +18,8 @@ This is the official documentation for AutoRest.
     - Overview
     - Code Generators
     - Modelers
-6. Building
-    - [Code & Unit testing](building-code.md)
+6. Compiling AutoRest
+    - [Functional & Unit testing](building-code.md)
 7. Contributing to the code
+
+[Swagger2.0]:https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md
