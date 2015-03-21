@@ -1,7 +1,6 @@
 #AutoRest Documentation
 1. Getting AutoRest
-2. Defining Clients
-    - [Working with Swagger](swagger.md) - the conventions used by AutoRest in processing [Swagger 2.0][Swagger2.0] specifications.
+2. [Defining Clients With Swagger](defining-clients-swagger.md)
 3. Generating Clients
     - [Command Line Interface](cli.md) - using AutoRest.exe from the command line.
     - using AutoRest in Visual Studio.
