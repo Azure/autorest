@@ -3,8 +3,10 @@
 The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to *AutoRest* is a spec that describes the REST API using the [Swagger](http://github.com/swagger-api/swagger-spec) format. 
 
 ##Getting AutoRest##
-AutoRest is shipped as part of Visual Studio 2015 web tools.
+The AutoRest tools can be installed with Nuget for use in a Visual Studio project.
 
+    nuget.exe install AutoRest
+    
 Alternatively it can be installed from [Chocolatey](https://chocolatey.org/) by running:
 
     choco install autorest
@@ -53,7 +55,7 @@ By convention, Swagger documents are exposed by web services with the name `swag
 ```
 Next, we invoke **AutoRest.exe** with this swagger document to generate client library code (see [command line interface documentation](Documentation/cli.md) for details). 
 
-**AutoRest** is extensible and can support multiple types of input and output. *AutoRest.exe* comes with the *AutoRest.json* configuration file that defines the available inputs (*Modelers*) and outputs (*CodeGenerators*). When invoking *AutoRest.exe*, you must specify the `-Modeler` and `-CodeGenerator` to use.
+**AutoRest** is extensible and can support multiple types of input and output. *AutoRest.exe* comes with the *AutoRest.json* configuration file that defines the available inputs (*Modelers*) and outputs (*CodeGenerators*). When invoking *AutoRest.exe*, if you don't specify the `-Modeler` then Swagger is assumed and if you don't specify `-CodeGenerator` then CSharp is used.
 
 The Swagger schema is language agnostic and doesn't include the notion of namespace, but for generating code, AutoRest requires `-Namespace` be specified.  By default, the CodeGenerator will place output in a directory named *Generated*. This can be overridden by providing the `-OutputDirectory` parameter.
 
