@@ -21,7 +21,7 @@ API descriptions that are valid according to the schema can produce client libra
 
 ## Data Types
 ### Primitive Data Types
-The primitive types are based on [JSON-Schema Draft 4](JSON-primitive-types). More details in the Swagger Specification [here](Swagger-primitive-types). 
+The primitive types are based on [JSON-Schema Draft 4](JSON-primitive-types). More details in the Swagger Specification [here](Swagger-primitive-types).
 
 **Example:**
 ```json
@@ -43,7 +43,7 @@ Generates C# client model type:
 public partial class Pet
 {
     private int? _age;
-    
+
     /// <summary>
     /// Optional.
     /// </summary>
@@ -52,9 +52,9 @@ public partial class Pet
         get { return this._age; }
         set { this._age = value; }
     }
-    
+
     private string _name;
-    
+
     /// <summary>
     /// Optional.
     /// </summary>
@@ -63,7 +63,7 @@ public partial class Pet
         get { return this._name; }
         set { this._name = value; }
     }
-    
+
     /// <summary>
     /// Initializes a new instance of the Pet class.
     /// </summary>
@@ -112,7 +112,7 @@ Generates C# client model type:
 public partial class Pet
 {
     private int? _age;
-    
+
     /// <summary>
     /// Optional.
     /// </summary>
@@ -121,9 +121,9 @@ public partial class Pet
         get { return this._age; }
         set { this._age = value; }
     }
-    
+
     private DateTimeOffset? _birthday;
-    
+
     /// <summary>
     /// Optional.
     /// </summary>
@@ -132,9 +132,9 @@ public partial class Pet
         get { return this._birthday; }
         set { this._birthday = value; }
     }
-    
+
     private byte[] _name;
-    
+
     /// <summary>
     /// Optional.
     /// </summary>
@@ -143,9 +143,9 @@ public partial class Pet
         get { return this._name; }
         set { this._name = value; }
     }
-    
+
     private long? _number;
-    
+
     /// <summary>
     /// Optional.
     /// </summary>
@@ -154,7 +154,7 @@ public partial class Pet
         get { return this._number; }
         set { this._number = value; }
     }
-    
+
     /// <summary>
     /// Initializes a new instance of the Pet class.
     /// </summary>
@@ -165,14 +165,14 @@ public partial class Pet
 ```
 
 ### Arrays and Sequences
-AutoRest builds sequences from schemas with type `array`. 
+AutoRest builds sequences from schemas with type `array`.
 The following definition
 ```json
 "pet": {
   "properties": {
     "names": {
       "type": "array",
-      "items": { 
+      "items": {
         "type": "string"
       }
     }
@@ -184,7 +184,7 @@ Generates C# client model type
 public partial class Pet
 {
     private IList<string> _names;
-    
+
     /// <summary>
     /// Optional.
     /// </summary>
@@ -193,7 +193,7 @@ public partial class Pet
         get { return this._names; }
         set { this._names = value; }
     }
-    
+
     /// <summary>
     /// Initializes a new instance of the Pet class.
     /// </summary>
@@ -237,9 +237,9 @@ In the example for Sequences, the `Pet` is a POCO model while in this example th
 
 ### Inheritance and Polymorphism
 #### Inheritance
-AutoRest builds inheritance between types if an `AllOf` field is specified in a Swagger definition with ONLY one reference to another Swagger definition. The following example demonstrate a `Cat` type inheriting a `Pet` with its `AllOf` set to `[{"$ref": "Pet"}]`. 
+AutoRest builds inheritance between types if an `allOf` field is specified in a Swagger definition with ONLY one reference to another Swagger definition. The following example demonstrate a `Cat` type inheriting a `Pet` with its `allOf` set to `[{"$ref": "Pet"}]`.
 
-> Note: Only `AllOf` fields with one schema reference will be treated as inheritance. If `AllOf` contains more than one schema that has `"$ref"` as the key, the properties from the referenced schemas will be composed without inheritance. However, if an allOf contains multiple inline schemas and a single schema reference, the generated model type will use inheritance. 
+> Note: Only `allOf` fields with one schema reference will be treated as inheritance. If `allOf` contains more than one schema that has `"$ref"` as the key, the properties from the referenced schemas will be composed without inheritance. However, if an `allOf` contains multiple inline schemas and a single schema reference, the generated model type will use inheritance. 
 
 **Example:**
 ```json
@@ -251,7 +251,7 @@ AutoRest builds inheritance between types if an `AllOf` field is specified in a 
   }
 },
 "Cat": {
-  "AllOf": [ { "$ref":  "Pet" } ],
+  "allOf": [ { "$ref":  "Pet" } ],
   "properties": {
     "color": {
       "type": "string",
@@ -265,7 +265,7 @@ will generate C# model types
 public partial class Cat : Pet
 {
     private string _color;
-    
+
     /// <summary>
     /// Optional. cat color
     /// </summary>
@@ -274,14 +274,14 @@ public partial class Cat : Pet
         get { return this._color; }
         set { this._color = value; }
     }
-    
+
     /// <summary>
     /// Initializes a new instance of the Cat class.
     /// </summary>
     public Cat()
     {
     }
-    
+
     /// <summary>
     /// Serialize the object
     /// </summary>
@@ -301,7 +301,7 @@ public partial class Cat : Pet
         }
         return outputObject;
     }
-    
+
     /// <summary>
     /// Deserialize the object
     /// </summary>
@@ -322,7 +322,7 @@ public partial class Cat : Pet
 public partial class Pet
 {
     private string _name;
-    
+
     /// <summary>
     /// Optional.
     /// </summary>
@@ -331,14 +331,14 @@ public partial class Pet
         get { return this._name; }
         set { this._name = value; }
     }
-    
+
     /// <summary>
     /// Initializes a new instance of the Pet class.
     /// </summary>
     public Pet()
     {
     }
-    
+
     /// <summary>
     /// Serialize the object
     /// </summary>
@@ -357,7 +357,7 @@ public partial class Pet
         }
         return outputObject;
     }
-    
+
     /// <summary>
     /// Deserialize the object
     /// </summary>
@@ -416,7 +416,7 @@ public async Task<HttpOperationResponse<Pet>> GetPolymorphicPetsWithOperationRes
 	{
 	    requestDoc["ObjectType"] = "Pet";
 	}
-	
+
 ............
 
 	// Deserialize Response
@@ -447,7 +447,7 @@ public async Task<HttpOperationResponse<Pet>> GetPolymorphicPetsWithOperationRes
 	    }
 	    result.Body = resultModel;
 	}
-	
+
 ............
 ```
 
@@ -574,7 +574,7 @@ will generate a `Get` method inside a `Values` class. The end user will access t
 If the `-OutputFile` parameter is not specified when invoking the AutoRest Command Line Interface, generated files will also be organized by namespaces. If you have `operationId`s `ns1_get` and `ns2_get`, you will have `ns1.cs` and `ns2.cs` in the generated C# client library.
 
 ### Specifying required parameters and properties
-Parameters and properties in Swagger schema use different notations and conventions to determine if they are required or optional. 
+Parameters and properties in Swagger schema use different notations and conventions to determine if they are required or optional.
 
 Parameters in the 'path' or 'body' are **always** required. Parameters may also use a `'required'` Boolean property to indicate that they are required for the operation, as in the example shown below.
 ```json
@@ -611,12 +611,12 @@ public async Task<HttpOperationResponse<Product>> ListWithOperationResponseAsync
 ```
 where a non-nullable type is changed into its nullable wrapper if the corresponding parameter is optional and a validation is added if a nullable type is marked as required.
 
-> Note that parameters that have field `in` as path are always required and the `required` field will be ignored. 
+> Note that parameters that have field `in` as path are always required and the `required` field will be ignored.
 
 Properties in SwaggerSchema do not contain a required field. Instead, Each definition schema can provide a `'required'` array that specifies which proeprties are required. An example is shown below.
 ```json
 "Product": {
-  "required": [ 
+  "required": [
     "product_id", "display_name"
   ],
   "properties": {
@@ -643,7 +643,7 @@ Properties in SwaggerSchema do not contain a required field. Instead, Each defin
 At runtime, if the server returns an unexpected status code,  the generated client throws an exception of type `HttpOperationException`. The exception instance will contain the request of type `HttpRequestMessage` (in property `Request`), the response of type `HttpResponseMessage` (in property `Response`), and the error model (in property `Body`). The error model must be defined as the schema of the `default` response.
 
 **Example:**
-A response of 
+A response of
 ```json
 "default": {
   "description": "Unexpected error",
@@ -699,5 +699,5 @@ See [Error Handling](clients-error.md) for details on how to catch and use the e
 
 [Swagger-spec2.0]:https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md
 [JSON-primitive-types]:http://json-schema.org/latest/json-schema-core.html#anchor8
-[Swagger-primitive-types]:https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#datatypes] 
+[Swagger-primitive-types]:https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#datatypes]
 [JSON-schema-validation-properties]:http://json-schema.org/latest/json-schema-validation.html#anchor64
