@@ -1,0 +1,47 @@
+{
+  "name": "petstore",
+  "author": "Microsoft Corporation",
+  "contributors": [
+    "Block, Glenn <gblock@microsoft.com>",
+    "Cowlishaw, Mark <markcowl@microsoft.com>",
+    "Dejardin, Louis <loudej@microsoft.com>",
+    "Georgiev, Yavor <yavorg@microsoft.com>",
+    "Janczuk, Tomasz <tjanczuk@microsoft.com>",
+    "Rodrigues, Andre <andrerod@microsoft.com>",
+    "Tavares, Chris <ctavares@microsoft.com>"
+  ],
+  "version": "0.9.11",
+  "description": "Microsoft Azure Common Client Library for node",
+  "tags": [
+    "azure",
+    "sdk"
+  ],
+  "keywords": [
+    "node",
+    "azure"
+  ],
+  "main": "./SwaggerPetstore.js",
+  "engines": {
+    "node": ">= 0.6.15"
+  },
+  "licenses": [
+    {
+      "type": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "dependencies": {
+    "microsoft-clientruntime": "0.0.1"
+  },
+  "homepage": "http://github.com/Azure/azure-sdk-for-node",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Azure/azure-sdk-for-node.git"
+  },
+  "bugs": {
+    "url": "http://github.com/Azure/azure-sdk-for-node/issues"
+  },
+  "scripts": {
+    "test": "npm -s run-script jshint"
+  }
+}

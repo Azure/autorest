@@ -1,0 +1,56 @@
+{
+  "name": "microsoft-clientruntime",
+  "author": "Microsoft Corporation",
+  "contributors": [
+    "Block, Glenn <gblock@microsoft.com>",
+    "Cowlishaw, Mark <markcowl@microsoft.com>",
+    "Dejardin, Louis <loudej@microsoft.com>",
+    "Georgiev, Yavor <yavorg@microsoft.com>",
+    "Janczuk, Tomasz <tjanczuk@microsoft.com>",
+    "Rodrigues, Andre <andrerod@microsoft.com>",
+    "Tavares, Chris <ctavares@microsoft.com>"
+  ],
+  "version": "0.0.1",
+  "description": "Microsoft Azure Common Client Library for node",
+  "tags": [
+    "azure",
+    "sdk"
+  ],
+  "keywords": [
+    "node",
+    "azure"
+  ],
+  "main": "./lib/common.js",
+  "engines": {
+    "node": ">= 0.6.15"
+  },
+  "licenses": [
+    {
+      "type": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "dependencies": {
+    "xml2js": "0.2.7",
+    "xmlbuilder": "0.4.3",
+    "dateformat": "1.0.2-1.2.3",
+    "underscore": "1.4.x",
+    "tunnel": "~0.0.2",
+    "request": "2.45.0",
+    "validator": "~3.1.0",
+    "envconf": "~0.0.4",
+    "duplexer": "~0.1.1",
+    "through": "~2.3.4"
+  },
+  "homepage": "http://github.com/Azure/azure-sdk-for-node",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Azure/azure-sdk-for-node.git"
+  },
+  "bugs": {
+    "url": "http://github.com/Azure/azure-sdk-for-node/issues"
+  },
+  "scripts": {
+    "test": "npm -s run-script jshint"
+  }
+}
