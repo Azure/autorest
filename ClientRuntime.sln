@@ -12,15 +12,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "git", "git", "{EAC2DE24-42C
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime", "Microsoft.Rest\ClientRuntime\ClientRuntime.csproj", "{7F524559-93F9-4F3F-9E2C-AF41A0C2E6F4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime", "ClientRuntime\CSharp\Microsoft.Rest.ClientRuntime\ClientRuntime.csproj", "{7F524559-93F9-4F3F-9E2C-AF41A0C2E6F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime.Etw", "Microsoft.Rest\ClientRuntime.Etw\ClientRuntime.Etw.csproj", "{50B0A8CE-D290-4EB7-8C6C-16EAAB75225E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime.Etw", "ClientRuntime\CSharp\Microsoft.Rest.ClientRuntime.Etw\ClientRuntime.Etw.csproj", "{50B0A8CE-D290-4EB7-8C6C-16EAAB75225E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime.Log4Net", "Microsoft.Rest\ClientRuntime.Log4Net\ClientRuntime.Log4Net.csproj", "{2EFD6648-39B4-476A-B302-8BC236F5F1B8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime.Log4Net", "ClientRuntime\CSharp\Microsoft.Rest.ClientRuntime.Log4Net\ClientRuntime.Log4Net.csproj", "{2EFD6648-39B4-476A-B302-8BC236F5F1B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime.Tracing.Tests", "Microsoft.Rest\ClientRuntime.Tracing.Tests\ClientRuntime.Tracing.Tests.csproj", "{B2FAA0E6-2643-4011-8CFE-BA28BDFFC7E7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime.Tracing.Tests", "ClientRuntime\CSharp\Microsoft.Rest.ClientRuntime.Tracing.Tests\ClientRuntime.Tracing.Tests.csproj", "{B2FAA0E6-2643-4011-8CFE-BA28BDFFC7E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime.Tests", "Microsoft.Rest\ClientRuntime.Tests\ClientRuntime.Tests.csproj", "{CB18ACEB-2825-4884-91FA-05C31AC779FE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime.Tests", "ClientRuntime\CSharp\Microsoft.Rest.ClientRuntime.Tests\ClientRuntime.Tests.csproj", "{CB18ACEB-2825-4884-91FA-05C31AC779FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
