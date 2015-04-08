@@ -49,7 +49,7 @@
   <PropertyGroup>
     <SolutionName>ClientRuntime.sln</SolutionName>
     <LibraryRoot>$(MSBuildThisFileDirectory)</LibraryRoot>
-    <LibrarySourceFolder>$(LibraryRoot)</LibrarySourceFolder>
+    <LibrarySourceFolder>$(LibraryRoot)Microsoft.Rest</LibrarySourceFolder>
     <LibraryToolsFolder>$(LibraryRoot)tools</LibraryToolsFolder>
     <BinariesFolder>$(LibraryRoot)binaries</BinariesFolder>
     <PackageOutputDir>$(BinariesFolder)\packages</PackageOutputDir>
