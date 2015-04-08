@@ -1,47 +1,45 @@
 {
-  "name": "petstore",
-  "author": "Microsoft Corporation",
-  "contributors": [
-    "Block, Glenn <gblock@microsoft.com>",
-    "Cowlishaw, Mark <markcowl@microsoft.com>",
-    "Dejardin, Louis <loudej@microsoft.com>",
-    "Georgiev, Yavor <yavorg@microsoft.com>",
-    "Janczuk, Tomasz <tjanczuk@microsoft.com>",
-    "Rodrigues, Andre <andrerod@microsoft.com>",
-    "Tavares, Chris <ctavares@microsoft.com>"
-  ],
-  "version": "0.9.11",
-  "description": "Microsoft Azure Common Client Library for node",
-  "tags": [
-    "azure",
-    "sdk"
-  ],
-  "keywords": [
-    "node",
-    "azure"
-  ],
-  "main": "./SwaggerPetstore.js",
+  "name": "ms-autorest-runtime",
+  "author": {
+    "name": "Microsoft Corporation",
+    "email": "azsdkteam@microsoft.com",
+    "url": "https://github.com/Azure/AutoRest"
+  },
+  "version": "0.9.0",
+  "description": "Infrastructure for error handling, tracing, and http client pipeline configuration. Required by client libraries generated using AutoRest.",
+  "tags": ["node", "microsoft", "autorest", "clientruntime"],
+  "keywords": ["node", "microsoft", "autorest", "clientruntime"],
+  "main": "./lib/common.js",
   "engines": {
     "node": ">= 0.6.15"
   },
   "licenses": [
     {
-      "type": "Apache 2.0",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+      "type": "MIT",
+      "url": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE"
     }
   ],
   "dependencies": {
-    "microsoft-clientruntime": "0.0.1"
+    "underscore": "1.4.x",
+    "tunnel": "~0.0.2",
+    "request": "2.45.0",
+    "validator": "~3.1.0",
+    "duplexer": "~0.1.1",
+    "through": "~2.3.4"
   },
-  "homepage": "http://github.com/Azure/azure-sdk-for-node",
+  "devDependencies": {
+    "jshint": "2.6.3",
+    "mocha": "1.16.0"
+  },
+  "homepage": "https://github.com/Azure/AutoRest",
   "repository": {
     "type": "git",
-    "url": "git@github.com:Azure/azure-sdk-for-node.git"
+    "url": "git@github.com:Azure/AutoRest.git"
   },
   "bugs": {
-    "url": "http://github.com/Azure/azure-sdk-for-node/issues"
+    "url": "http://github.com/Azure/AutoRest/issues"
   },
   "scripts": {
-    "test": "npm -s run-script jshint"
+    "jshint": "jshint lib --reporter=jslint"
   }
 }
