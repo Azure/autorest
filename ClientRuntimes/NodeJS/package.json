@@ -1,0 +1,48 @@
+{
+  "name": "ms-autorest-runtime",
+  "author": {
+    "name": "Microsoft Corporation",
+    "email": "azsdkteam@microsoft.com",
+    "url": "https://github.com/Azure/AutoRest"
+  },
+  "version": "0.9.0",
+  "description": "Infrastructure for error handling, tracing, and http client pipeline configuration. Required by client libraries generated using AutoRest.",
+  "tags": ["node", "microsoft", "autorest", "clientruntime"],
+  "keywords": ["node", "microsoft", "autorest", "clientruntime"],
+  "main": "./lib/common.js",
+  "engines": {
+    "node": ">= 0.6.15"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE"
+    }
+  ],
+  "dependencies": {
+    "underscore": "1.4.x",
+    "tunnel": "~0.0.2",
+    "request": "2.45.0",
+    "validator": "~3.1.0",
+    "duplexer": "~0.1.1",
+    "through": "~2.3.4"
+  },
+  "devDependencies": {
+    "jshint": "2.6.3",
+    "mocha": "1.16.0",
+    "should": "5.2.0"
+  },
+  "homepage": "https://github.com/Azure/AutoRest",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Azure/AutoRest.git"
+  },
+  "bugs": {
+    "url": "http://github.com/Azure/AutoRest/issues"
+  },
+  "scripts": {
+    "test": "npm -s run-script jshint && npm -s run-script unit",
+    "unit": "node scripts/unit.js testlist.txt",
+    "jshint": "jshint lib --reporter=jslint"
+  }
+}
