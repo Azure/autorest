@@ -7,46 +7,66 @@
 
 package com.microsoft.rest.core;
 
-public class HttpOperationResponse {
-    private int httpStatusCode;
+import org.apache.http.HttpRequest;
+import org.apache.http.HttpResponse;
+
+public class HttpOperationResponse<T> {
+    private HttpRequest request;
+    private HttpResponse response;
 
     /**
-     * Gets the HTTP status code for the request.
-     * 
-     * @return The HTTP status code.
+     * Gets the HTTP request.
+     *
+     * @return The HTTP request.
      */
-    public int getStatusCode() {
-        return this.httpStatusCode;
+    public HttpRequest getHttpRequest() {
+        return this.request;
     }
 
     /**
-     * Sets the HTTP status code for the request.
-     * 
-     * @param httpStatusCode
-     *            The HTTP status code.
+     * Sets the HTTP request.
+     *
+     * @param request The HTTP request.
      */
-    public void setStatusCode(int httpStatusCode) {
-        this.httpStatusCode = httpStatusCode;
-    }
-
-    private String requestId;
-
-    /**
-     * Gets the request identifier.
-     * 
-     * @return The request identifier.
-     */
-    public String getRequestId() {
-        return this.requestId;
+    public void setHttpRequest(HttpRequest request) {
+        this.request = request;
     }
 
     /**
-     * Sets the request identifier.
-     * 
-     * @param requestId
-     *            The request identifier.
+     * Gets the HTTP response.
+     *
+     * @return The HTTP response.
      */
-    public void setRequestId(String requestId) {
-        this.requestId = requestId;
+    public HttpResponse getHttpResponse() {
+        return this.response;
+    }
+
+    /**
+     * Sets the HTTP response.
+     *
+     * @param request The HTTP response.
+     */
+    public void setHttpResponse(HttpResponse request) {
+        this.response = response;
+    }
+
+    private T body;
+
+    /**
+     * Gets the response object.
+     * 
+     * @return The response object.
+     */
+    public T getBody() {
+        return this.body;
+    }
+
+    /**
+     * Sets the response object.
+     * 
+     * @param body The response object.
+     */
+    public void setBody(T body) {
+        this.body = body;
     }
 }
