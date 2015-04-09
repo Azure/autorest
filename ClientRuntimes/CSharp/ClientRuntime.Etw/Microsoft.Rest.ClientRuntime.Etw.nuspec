@@ -25,8 +25,8 @@
   </metadata>
   <files>
     <file src="ClientRuntime.Etw\**\*.cs" target="src" />
-    <file src="..\binaries\net45\Microsoft.Rest.ClientRuntime.Etw.dll" target="lib\net45" />
-    <file src="..\binaries\net45\Microsoft.Rest.ClientRuntime.Etw.pdb" target="lib\net45" />
-    <file src="..\binaries\net45\Microsoft.Rest.ClientRuntime.Etw.xml" target="lib\net45" />
+    <file src="..\..\binaries\net45\Microsoft.Rest.ClientRuntime.Etw.dll" target="lib\net45" />
+    <file src="..\..\binaries\net45\Microsoft.Rest.ClientRuntime.Etw.pdb" target="lib\net45" />
+    <file src="..\..\binaries\net45\Microsoft.Rest.ClientRuntime.Etw.xml" target="lib\net45" />
   </files>
 </package>
