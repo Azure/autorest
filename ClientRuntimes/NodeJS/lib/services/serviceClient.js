@@ -5,7 +5,7 @@
 
 var url = require('url');
 
-var requestPipeline = require('../http/request-pipeline');
+var requestPipeline = require('../http/requestPipeline');
 var ProxyFilter = require('./filters/proxyfilter');
 var SigningFilter = require('./filters/signingfilter');
 var RedirectFilter = require('./filters/redirectfilter');
@@ -13,7 +13,7 @@ var RedirectFilter = require('./filters/redirectfilter');
 var Constants = require('../util/constants');
 var utils = require('../util/util');
 
-function Service(credentials, filters) {
+function ServiceClient(credentials, filters) {
   if (!filters) {
     filters = [];
   }
@@ -40,7 +40,7 @@ function Service(credentials, filters) {
 *
 * @return {string} or null
 */
-Service._loadEnvironmentProxyValue = function () {
+ServiceClient._loadEnvironmentProxyValue = function () {
   var proxyUrl = null;
   if (process.env[Constants.HTTPS_PROXY]) {
     proxyUrl = process.env[Constants.HTTPS_PROXY];
@@ -60,8 +60,8 @@ Service._loadEnvironmentProxyValue = function () {
 * Can be overridden by calling _setProxyUrl or _setProxy
 *
 */
-Service.prototype._setDefaultProxy = function () {
-  var proxyUrl = Service._loadEnvironmentProxyValue();
+ServiceClient.prototype._setDefaultProxy = function () {
+  var proxyUrl = ServiceClient._loadEnvironmentProxyValue();
   if (proxyUrl) {
     var parsedUrl = url.parse(proxyUrl);
     if (!parsedUrl.port) {
@@ -97,7 +97,7 @@ Service.prototype._setDefaultProxy = function () {
 * @param {function (requestOptins, next, callback)} filter The new filter object.
 * @return {QueueService} A new service client with the filter applied.
 */
-Service.prototype.withFilter = function (newFilter) {
+ServiceClient.prototype.withFilter = function (newFilter) {
   if (!newFilter) {
     throw new Error('No filter passed');
   }
@@ -109,4 +109,4 @@ Service.prototype.withFilter = function (newFilter) {
   return this;
 };
 
-module.exports = Service;
+module.exports = ServiceClient;

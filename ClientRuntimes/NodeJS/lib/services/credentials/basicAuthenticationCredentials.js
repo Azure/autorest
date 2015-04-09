@@ -35,7 +35,7 @@ function BasicAuthenticationCredentials(credentials) {
 /**
 * Signs a request with the Authentication header.
 *
-* @param {WebResource} The webresource to be signed.
+* @param {WebResource} The WebResource to be signed.
 * @param {function(error)}  callback  The callback function.
 * @return {undefined}
 */

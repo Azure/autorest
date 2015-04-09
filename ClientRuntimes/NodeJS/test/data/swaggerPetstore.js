@@ -8,10 +8,10 @@
 'use strict';
 
 var util = require('util');
-var azureCommon = require('../lib/common');
-var Service = azureCommon.Service;
+var azureCommon = require('../../lib/clientRuntime');
+var ServiceClient = azureCommon.ServiceClient;
 var WebResource = azureCommon.WebResource;
-var Pet = require('./Models/Pet');
+var Pet = require('./models/Pet');
 
 var SwaggerPetstore = ( /** @lends SwaggerPetstore */ function() {
   /**
@@ -32,7 +32,7 @@ var SwaggerPetstore = ( /** @lends SwaggerPetstore */ function() {
     }
   }
   
-  util.inherits(SwaggerPetstore, Service);
+  util.inherits(SwaggerPetstore, ServiceClient);
   
   /**
    * Returns a pet.

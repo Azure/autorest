@@ -29,7 +29,8 @@
   },
   "devDependencies": {
     "jshint": "2.6.3",
-    "mocha": "1.16.0"
+    "mocha": "1.16.0",
+    "should": "5.2.0"
   },
   "homepage": "https://github.com/Azure/AutoRest",
   "repository": {
@@ -40,6 +41,8 @@
     "url": "http://github.com/Azure/AutoRest/issues"
   },
   "scripts": {
+    "test": "npm -s run-script jshint && npm -s run-script unit",
+    "unit": "node scripts/unit.js testlist.txt",
     "jshint": "jshint lib --reporter=jslint"
   }
 }

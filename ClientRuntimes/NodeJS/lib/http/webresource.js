@@ -30,7 +30,7 @@ function WebResource() {
 * Creates a new put request web resource.
 *
 * @param {string} path The path for the put operation.
-* @return {WebResource} A new webresource with a put operation for the given path.
+* @return {WebResource} A new WebResource with a put operation for the given path.
 */
 WebResource.put = function (path) {
   var webResource = new WebResource();
@@ -43,7 +43,7 @@ WebResource.put = function (path) {
 * Creates a new get request web resource.
 *
 * @param {string} path The path for the get operation.
-* @return {WebResource} A new webresource with a get operation for the given path.
+* @return {WebResource} A new WebResource with a get operation for the given path.
 */
 WebResource.get = function (path) {
   var webResource = new WebResource();
@@ -56,7 +56,7 @@ WebResource.get = function (path) {
 * Creates a new head request web resource.
 *
 * @param {string} path The path for the head operation.
-* @return {WebResource} A new webresource with a head operation for the given path.
+* @return {WebResource} A new WebResource with a head operation for the given path.
 */
 WebResource.head = function (path) {
   var webResource = new WebResource();
@@ -69,7 +69,7 @@ WebResource.head = function (path) {
 * Creates a new delete request web resource.
 *
 * @param {string} path The path for the delete operation.
-* @return {WebResource} A new webresource with a delete operation for the given path.
+* @return {WebResource} A new WebResource with a delete operation for the given path.
 */
 WebResource.del = function (path) {
   var webResource = new WebResource();
@@ -82,7 +82,7 @@ WebResource.del = function (path) {
 * Creates a new post request web resource.
 *
 * @param {string} path The path for the post operation.
-* @return {WebResource} A new webresource with a post operation for the given path.
+* @return {WebResource} A new WebResource with a post operation for the given path.
 */
 WebResource.post = function (path) {
   var webResource = new WebResource();
@@ -95,7 +95,7 @@ WebResource.post = function (path) {
 * Creates a new merge request web resource.
 *
 * @param {string} path The path for the merge operation.
-* @return {WebResource} A new webresource with a merge operation for the given path.
+* @return {WebResource} A new WebResource with a merge operation for the given path.
 */
 WebResource.merge = function (path) {
   var webResource = new WebResource();
@@ -108,7 +108,7 @@ WebResource.merge = function (path) {
 * Creates a new patch request web resource.
 *
 * @param {string} path The path for the patch operation.
-* @return {WebResource} A new webresource with a patch operation for the given path.
+* @return {WebResource} A new WebResource with a patch operation for the given path.
 */
 WebResource.patch = function (path) {
   var webResource = new WebResource();
@@ -122,7 +122,7 @@ WebResource.patch = function (path) {
 *
 * @param {string} name  The property name.
 * @param {string} value The property value.
-* @return {WebResource} The webresource.
+* @return {WebResource} The WebResource.
 */
 WebResource.prototype.withProperty = function (name, value) {
   if (!this.properties) {
@@ -138,7 +138,7 @@ WebResource.prototype.withProperty = function (name, value) {
 * Specifies if the response should be parsed or not.
 *
 * @param {bool} rawResponse true if the response should not be parse; false otherwise.
-* @return {WebResource} The webresource.
+* @return {WebResource} The WebResource.
 */
 WebResource.prototype.withRawResponse = function (rawResponse) {
   if (rawResponse) {
