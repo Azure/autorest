@@ -10,7 +10,6 @@ var util = require('util');
 var ps = require('./data/swaggerPetstore');
 var clientRuntime = require('../lib/clientRuntime');
 
-
 describe('nodejs', function () {
   var suite;
   var server;
