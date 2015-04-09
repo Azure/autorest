@@ -16,7 +16,7 @@
  * 
  */
 
-package com.microsoft.windowsazure.core.pipeline.apache;
+package com.microsoft.rest.core.pipeline;
 
 import org.apache.http.client.methods.HttpPost;
 
