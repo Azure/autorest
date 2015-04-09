@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public abstract class ServiceClient<TClient extends ServiceClient> implements Closeable {
+public abstract class ServiceClient<TClient> implements Closeable {
     private final ExecutorService executorService;
     private CloseableHttpClient httpClient;
     private HttpRequestInterceptorFrontAdapter httpRequestInterceptorFrontAdapter;
