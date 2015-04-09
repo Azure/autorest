@@ -22,8 +22,7 @@ import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public abstract class ServiceClient<TClient> implements
-        FilterableService<TClient>, Closeable {
+public abstract class ServiceClient<TClient extends ServiceClient> implements Closeable {
     private final ExecutorService executorService;
     private CloseableHttpClient httpClient;
     private HttpRequestInterceptorFrontAdapter httpRequestInterceptorFrontAdapter;
@@ -65,7 +64,6 @@ public abstract class ServiceClient<TClient> implements
         return this.httpClient;
     }
 
-    @Override
     public ServiceClient<TClient> withRequestFilterFirst(
             ServiceRequestFilter serviceRequestFilter) {
         if (httpRequestInterceptorFrontAdapter == null) {
@@ -76,7 +74,6 @@ public abstract class ServiceClient<TClient> implements
         return this;
     }
 
-    @Override
     public ServiceClient<TClient> withRequestFilterLast(
             ServiceRequestFilter serviceRequestFilter) {
         if (httpRequestInterceptorBackAdapter == null) {
@@ -87,7 +84,6 @@ public abstract class ServiceClient<TClient> implements
         return this;
     }
 
-    @Override
     public ServiceClient<TClient> withResponseFilterFirst(
             ServiceResponseFilter serviceResponseFilter) {
         if (httpResponseInterceptorFrontAdapter == null) {
@@ -98,7 +94,6 @@ public abstract class ServiceClient<TClient> implements
         return this;
     }
 
-    @Override
     public ServiceClient<TClient> withResponseFilterLast(
             ServiceResponseFilter serviceResponseFilter) {
         if (httpResponseInterceptorBackAdapter == null) {
@@ -109,7 +104,6 @@ public abstract class ServiceClient<TClient> implements
         return this;
     }
 
-    @Override
     public void close() throws IOException {
         if (httpClient != null) {
             httpClient.close();
