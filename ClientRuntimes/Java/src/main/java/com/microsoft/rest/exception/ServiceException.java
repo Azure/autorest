@@ -21,12 +21,17 @@ public class ServiceException extends Exception {
     /**
      * Information about the associated HTTP request.
      */
-    public HttpRequest request;
+    private HttpRequest request;
 
     /**
      * Information about the associated HTTP response.
      */
-    public HttpResponse response;
+    private HttpResponse response;
+
+    /**
+     * The actual error model from the response.
+     */
+    private ServiceExceptionModel errorModel;
 
     public ServiceException() {
         super();
@@ -42,6 +47,30 @@ public class ServiceException extends Exception {
 
     public ServiceException(final Throwable cause) {
         super(cause);
+    }
+
+    public HttpRequest getRequest() {
+        return request;
+    }
+
+    public HttpResponse getResponse() {
+        return response;
+    }
+
+    public ServiceExceptionModel getErrorModel() {
+        return errorModel;
+    }
+
+    public void setRequest(HttpRequest request) {
+        this.request = request;
+    }
+
+    public void setResponse(HttpResponse response) {
+        this.response = response;
+    }
+
+    public void setErrorModel(ServiceExceptionModel errorModel) {
+        this.errorModel = errorModel;
     }
 
     @Override

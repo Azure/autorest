@@ -19,7 +19,7 @@ public class HttpOperationResponse<T> {
      *
      * @return The HTTP request.
      */
-    public HttpRequest getHttpRequest() {
+    public HttpRequest getRequest() {
         return this.request;
     }
 
@@ -28,7 +28,7 @@ public class HttpOperationResponse<T> {
      *
      * @param request The HTTP request.
      */
-    public void setHttpRequest(HttpRequest request) {
+    public void setRequest(HttpRequest request) {
         this.request = request;
     }
 
@@ -37,7 +37,7 @@ public class HttpOperationResponse<T> {
      *
      * @return The HTTP response.
      */
-    public HttpResponse getHttpResponse() {
+    public HttpResponse getResponse() {
         return this.response;
     }
 
@@ -46,7 +46,7 @@ public class HttpOperationResponse<T> {
      *
      * @param request The HTTP response.
      */
-    public void setHttpResponse(HttpResponse request) {
+    public void setResponse(HttpResponse request) {
         this.response = response;
     }
 
