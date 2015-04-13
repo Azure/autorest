@@ -15,6 +15,7 @@ exports.Logger = require('./logger');
 
 exports.WebResource = require('./webResource');
 exports.ServiceClient = require('./serviceClient');
+exports.HttpOperationResponse = require('./httpOperationResponse');
 
 // Credentials
 exports.TokenCredentials = require('./credentials/tokenCredentials');
