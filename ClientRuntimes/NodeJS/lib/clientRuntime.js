@@ -3,29 +3,29 @@
 
 var exports = module.exports;
 
-var utils = require('./util/util');
+var utils = require('./utils');
 
 var nodeVersion = utils.getNodeVersion();
 if (nodeVersion.major === 0 && nodeVersion.minor > 8 && !(nodeVersion.minor > 10 || (nodeVersion.minor === 10 && nodeVersion.patch >= 3))) {
   throw new Error('The Microsoft client runtime does not work with node versions > 0.8.22 and < 0.10.3, due to security issues. Please upgrade to node >= 0.10.3');
 }
 
-exports.Constants = require('./util/constants');
-exports.Logger = require('./diagnostics/logger');
+exports.Constants = require('./constants');
+exports.Logger = require('./logger');
 
-exports.WebResource = require('./http/webResource');
-exports.ServiceClient = require('./services/serviceClient');
+exports.WebResource = require('./webResource');
+exports.ServiceClient = require('./serviceClient');
 
 // Credentials
-exports.TokenCredentials = require('./services/credentials/tokenCredentials');
-exports.BasicAuthenticationCredentials = require('./services/credentials/basicAuthenticationCredentials');
+exports.TokenCredentials = require('./credentials/tokenCredentials');
+exports.BasicAuthenticationCredentials = require('./credentials/basicAuthenticationCredentials');
 
 // Other filters
-exports.LinearRetryPolicyFilter = require('./services/filters/linearRetryPolicyFilter');
-exports.ExponentialRetryPolicyFilter = require('./services/filters/exponentialRetryPolicyFilter');
-exports.ProxyFilter = require('./services/filters/proxyFilter');
-exports.LogFilter = require('./services/filters/logFilter');
-exports.SigningFilter = require('./services/filters/signingFilter');
+exports.LinearRetryPolicyFilter = require('./filters/linearRetryPolicyFilter');
+exports.ExponentialRetryPolicyFilter = require('./filters/exponentialRetryPolicyFilter');
+exports.ProxyFilter = require('./filters/proxyFilter');
+exports.LogFilter = require('./filters/logFilter');
+exports.SigningFilter = require('./filters/signingFilter');
 
-exports.validate = require('./util/validate');
-exports.requestPipeline = require('./http/requestPipeline');
+exports.validate = require('./validate');
+exports.requestPipeline = require('./requestPipeline');

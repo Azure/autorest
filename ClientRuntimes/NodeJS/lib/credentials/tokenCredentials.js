@@ -3,10 +3,10 @@
 
 var util = require('util');
 
-var Constants = require('../../util/constants');
+var Constants = require('../constants');
 var HeaderConstants = Constants.HeaderConstants;
 
-var validate = require('../../util/validate');
+var validate = require('../validate');
 
 var DEFAULT_AUTHORIZATION_SCHEME = 'Bearer';
 
