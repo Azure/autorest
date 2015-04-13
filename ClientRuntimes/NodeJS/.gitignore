@@ -36,3 +36,4 @@ test/output/*
 
 # Test Files#
 netconfig.json
+xunit.xml
