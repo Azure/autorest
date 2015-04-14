@@ -48,6 +48,21 @@ var SwaggerPetstore = ( /** @lends SwaggerPetstore */ function() {
    * @returns {Stream} The response stream.
    */
   SwaggerPetstore.prototype.findPetById = function(id, callback) {
+    this.findPetByIdWithHttpResponse(1, function (error, resultWithEnvelope) {
+      return callback(null, resultWithEnvelope.body);
+    });
+  };
+
+  /**
+   * Returns a pet.
+   * 
+   * @param {Number} id ID of pet to fetch
+   * 
+   * @param {function} callback
+   * 
+   * @returns {Stream} The response stream.
+   */
+  SwaggerPetstore.prototype.findPetByIdWithHttpResponse = function(id, callback) {
     if (callback === null || callback === undefined) {
       throw new Error('callback cannot be null.');
     }
