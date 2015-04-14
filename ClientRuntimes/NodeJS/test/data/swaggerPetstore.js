@@ -48,7 +48,7 @@ var SwaggerPetstore = ( /** @lends SwaggerPetstore */ function() {
    * @returns {Stream} The response stream.
    */
   SwaggerPetstore.prototype.findPetById = function(id, callback) {
-    this.findPetByIdWithHttpResponse(1, function (error, resultWithEnvelope) {
+    this.findPetByIdWithOperationResponse(1, function (error, resultWithEnvelope) {
       return callback(null, resultWithEnvelope.body);
     });
   };
@@ -62,7 +62,7 @@ var SwaggerPetstore = ( /** @lends SwaggerPetstore */ function() {
    * 
    * @returns {Stream} The response stream.
    */
-  SwaggerPetstore.prototype.findPetByIdWithHttpResponse = function(id, callback) {
+  SwaggerPetstore.prototype.findPetByIdWithOperationResponse = function(id, callback) {
     if (callback === null || callback === undefined) {
       throw new Error('callback cannot be null.');
     }
