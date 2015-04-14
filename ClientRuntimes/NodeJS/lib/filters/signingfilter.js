@@ -4,7 +4,7 @@
 'use strict';
 
 // Module dependencies.
-var requestPipeline = require('../../http/requestPipeline');
+var requestPipeline = require('../requestPipeline');
 
 /**
 * Creates a filter to do the signing of a request.

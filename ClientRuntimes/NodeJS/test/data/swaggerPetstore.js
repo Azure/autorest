@@ -13,6 +13,7 @@
 var util = require('util');
 var azureCommon = require('../../lib/clientRuntime');
 var ServiceClient = azureCommon.ServiceClient;
+var HttpOperationResponse = azureCommon.HttpOperationResponse;
 var WebResource = azureCommon.WebResource;
 var Pet = require('./models/Pet');
 
@@ -101,17 +102,17 @@ var SwaggerPetstore = ( /** @lends SwaggerPetstore */ function() {
       }
       
       // Create Result
-      
+      var result = new HttpOperationResponse(httpRequest, response);
+
       // Deserialize Response
       if (statusCode === 200) {
-        var resultModel = new Pet.Pet();
-        var result;
+        var resultModel = new Pet();
         var responseDoc = null;
         if (responseContent) {
           responseDoc = JSON.parse(responseContent);
         }
         if (responseDoc !== null) {
-          result = resultModel.deserializeJsonSync(responseDoc);
+          result.body = resultModel.deserializeJsonSync(responseDoc);
         }
       }
 

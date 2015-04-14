@@ -3,9 +3,7 @@ targets/*
 
 # Visual Studio #
 /app.js
-*.sln
 .ntvs_analysis.*
-*.njsproj
 
 # Node #
 node_modules/
@@ -38,3 +36,4 @@ test/output/*
 
 # Test Files#
 netconfig.json
+xunit.xml

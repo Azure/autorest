@@ -50,4 +50,4 @@ var Pet = ( /** @lends Pet */ function() {
   
   return Pet;
 })();
-exports.Pet = Pet;
+exports = module.exports = Pet;

@@ -2,8 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information. 
 
 // Module dependencies.
-var utils = require('../util/util');
-var Constants = require('../util/constants');
+var utils = require('./utils');
+var Constants = require('./constants');
 var HeaderConstants = Constants.HeaderConstants;
 var HttpConstants = Constants.HttpConstants;
 var HttpConstants = Constants.HttpConstants;

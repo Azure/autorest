@@ -5,13 +5,13 @@
 
 var url = require('url');
 
-var requestPipeline = require('../http/requestPipeline');
+var requestPipeline = require('./requestPipeline');
 var ProxyFilter = require('./filters/proxyfilter');
 var SigningFilter = require('./filters/signingfilter');
 var RedirectFilter = require('./filters/redirectfilter');
 
-var Constants = require('../util/constants');
-var utils = require('../util/util');
+var Constants = require('./constants');
+var utils = require('./utils');
 
 function ServiceClient(credentials, filters) {
   if (!filters) {
