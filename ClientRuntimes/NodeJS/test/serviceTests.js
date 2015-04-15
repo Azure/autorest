@@ -61,10 +61,9 @@ describe('nodejs', function () {
       var petstore = new ps.SwaggerPetstore("http://localhost:1337", credentials).addFilter(createLogFilter());
 
       petstore.findPetById(1, function (error, result) {
-        result.request.url.should.equal("http://localhost:1337/pets/1");
-        result.body.id.should.equal("1");
-        result.body.name.should.equal("Pet Rock");
-        result.body.tag.should.equal("Low Maintenance");
+        result.id.should.equal("1");
+        result.name.should.equal("Pet Rock");
+        result.tag.should.equal("Low Maintenance");
         done();
       });
     });
@@ -73,10 +72,9 @@ describe('nodejs', function () {
       var petstore = new ps.SwaggerPetstore("http://localhost:1337", credentials);
 
       petstore.findPetById(1, function (error, result) {
-        result.body.id.should.equal("1");
-        result.body.name.should.equal("Pet Rock");
-        result.body.tag.should.equal("Low Maintenance");
-        result.response.statusCode.should.equal(200);
+        result.id.should.equal("1");
+        result.name.should.equal("Pet Rock");
+        result.tag.should.equal("Low Maintenance");
         done();
       });
     });
@@ -85,9 +83,22 @@ describe('nodejs', function () {
       var petstore = new ps.SwaggerPetstore("http://localhost:1337");
 
       petstore.findPetById(1, function (error, result) {
+        result.id.should.equal("1");
+        result.name.should.equal("Pet Rock");
+        result.tag.should.equal("Low Maintenance");
+        done();
+      });
+    });
+
+    it('executed with envelope should work', function (done) {
+      var petstore = new ps.SwaggerPetstore("http://localhost:1337", credentials);
+
+      petstore.findPetByIdWithOperationResponse(1, function (error, result) {
+        result.request.url.should.equal("http://localhost:1337/pets/1");
         result.body.id.should.equal("1");
         result.body.name.should.equal("Pet Rock");
         result.body.tag.should.equal("Low Maintenance");
+        result.response.statusCode.should.equal(200);
         done();
       });
     });
