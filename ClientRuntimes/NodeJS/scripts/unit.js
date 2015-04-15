@@ -3,7 +3,7 @@
 
 var fs = require('fs');
 var args = (process.ARGV || process.argv);
-var reporter = 'list';
+var reporter = 'xunit-file';
 var testList = args.pop();
 var fileContent;
 var root = false;

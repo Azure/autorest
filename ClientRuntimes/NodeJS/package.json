@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "jshint": "2.6.3",
+    "xunit-file": "0.0.5",
     "mocha": "1.16.0",
     "should": "5.2.0"
   },

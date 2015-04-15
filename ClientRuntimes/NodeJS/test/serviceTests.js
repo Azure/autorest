@@ -61,9 +61,10 @@ describe('nodejs', function () {
       var petstore = new ps.SwaggerPetstore("http://localhost:1337", credentials).withFilter(createLogFilter());
 
       petstore.findPetById(1, function (error, result) {
-        result.id.should.equal("1");
-        result.name.should.equal("Pet Rock");
-        result.tag.should.equal("Low Maintenance");
+        result.request.url.should.equal("http://localhost:1337/pets/1");
+        result.body.id.should.equal("1");
+        result.body.name.should.equal("Pet Rock");
+        result.body.tag.should.equal("Low Maintenance");
         done();
       });
     });
@@ -72,9 +73,10 @@ describe('nodejs', function () {
       var petstore = new ps.SwaggerPetstore("http://localhost:1337", credentials);
 
       petstore.findPetById(1, function (error, result) {
-        result.id.should.equal("1");
-        result.name.should.equal("Pet Rock");
-        result.tag.should.equal("Low Maintenance");
+        result.body.id.should.equal("1");
+        result.body.name.should.equal("Pet Rock");
+        result.body.tag.should.equal("Low Maintenance");
+        result.response.statusCode.should.equal(200);
         done();
       });
     });
@@ -83,9 +85,9 @@ describe('nodejs', function () {
       var petstore = new ps.SwaggerPetstore("http://localhost:1337");
 
       petstore.findPetById(1, function (error, result) {
-        result.id.should.equal("1");
-        result.name.should.equal("Pet Rock");
-        result.tag.should.equal("Low Maintenance");
+        result.body.id.should.equal("1");
+        result.body.name.should.equal("Pet Rock");
+        result.body.tag.should.equal("Low Maintenance");
         done();
       });
     });

@@ -8,7 +8,7 @@ var tunnel = require('tunnel');
 var https = require('https');
 var url = require('url');
 
-var utils = require('../../util/util');
+var utils = require('../utils');
 
 /**
 * Creates a filter to set proxy options;

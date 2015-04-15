@@ -2,15 +2,15 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 var _ = require('underscore');
-var utils = require('../../util/util');
+var utils = require('../utils');
 
 /**
-* Determines if the operation should be retried and how long to wait until the next retry.
-*
+ * Determines if the operation should be retried and how long to wait until the next retry.
+ *
  * @param {number} statusCode The HTTP status code.
  * @param {object} retryData  The retry data.
  * @return {bool} True if the operation qualifies for a retry; false otherwise.
-*/
+ */
 function shouldRetry(statusCode, retryData) {
   // Retry on HTTP TimeOut 408
   if (statusCode < 500 && statusCode != 408) {
@@ -23,17 +23,16 @@ function shouldRetry(statusCode, retryData) {
 }
 
 /**
-* Updates the retry data for the next attempt.
-*
-* @param {object} retryData  The retry data.
-* @param {object} err        The operation's error, if any.
-* @return {undefined}
-*/
-function updateRetryData(retryData, err) {
+ * Updates the retry data for the next attempt.
+ *
+ * @param {object} retryData  The retry data.
+ * @param {object} err        The operation's error, if any.
+ * @return {undefined}
+ */
+function updateRetryData (retryData, err) {
   if (!retryData) {
     retryData = {
       retryCount: 0,
-      retryInterval: this.retryInterval,
       error: null
     };
   }
@@ -46,20 +45,30 @@ function updateRetryData(retryData, err) {
     retryData.error = err;
   }
 
+  // Adjust retry count
   retryData.retryCount++;
+
+  // Adjust retry interval
+  var incrementDelta = Math.pow(2, retryData.retryCount) - 1;
+  var boundedRandDelta = this.retryInterval * 0.8 + Math.floor(Math.random() * (this.retryInterval * 1.2 - this.retryInterval * 0.8));
+  incrementDelta *= boundedRandDelta;
+
+  retryData.retryInterval = Math.min(this.minRetryInterval + incrementDelta, this.maxRetryInterval);
+
   return retryData;
 }
 
+
 /**
-* Handles an operation with a linear retry policy.
+* Handles an operation with an exponential retry policy.
 *
 * @param {Object}   requestOptions The original request options.
 * @param {function} next           The next filter to be handled.
 * @return {undefined}
 */
 function handle(requestOptions, next) {
-  var retryData = null;
   var self = this;
+  var retryData = null;
 
   var operation = function () {
     // retry policies dont really do anything to the request options
@@ -99,18 +108,20 @@ function handle(requestOptions, next) {
 }
 
 /**
-* Creates a new LinearRetryPolicyFilter instance.
+* Creates a new 'ExponentialRetryPolicyFilter' instance.
 *
 * @constructor
 * @param {number} retryCount        The client retry count.
 * @param {number} retryInterval     The client retry interval, in milliseconds.
+* @param {number} minRetryInterval  The minimum retry interval, in milliseconds.
+* @param {number} maxRetryInterval  The maximum retry interval, in milliseconds.
 */
-function LinearRetryPolicyFilter(retryCount, retryInterval) {
+function ExponentialRetryPolicyFilter(retryCount, retryInterval, minRetryInterval, maxRetryInterval) {
   // Implement the new style filter in terms of the old implementation
   function newFilter(options, next, callback) {
     var retryData = null;
 
-    function retryCallback(err, result, response, body) {
+    function retryCallback(err, response, body) {
       retryData = newFilter.updateRetryData(retryData, err);
       if (err &&
         ((!utils.objectIsNull(response) &&
@@ -127,7 +138,7 @@ function LinearRetryPolicyFilter(retryCount, retryInterval) {
           // If the operation failed in the end, return all errors instead of just the last one
           err = retryData.error;
         }
-        callback(err, result, response, body);
+        callback(err, response, body);
       }
     }
 
@@ -135,24 +146,38 @@ function LinearRetryPolicyFilter(retryCount, retryInterval) {
   }
 
   _.extend(newFilter, {
-    retryCount: retryCount || LinearRetryPolicyFilter.DEFAULT_CLIENT_RETRY_COUNT,
-    retryInterval: retryInterval || LinearRetryPolicyFilter.DEFAULT_CLIENT_RETRY_INTERVAL,
+    retryCount: retryCount || ExponentialRetryPolicyFilter.DEFAULT_CLIENT_RETRY_COUNT,
+    retryInterval: retryInterval || ExponentialRetryPolicyFilter.DEFAULT_CLIENT_RETRY_INTERVAL,
+    minRetryInterval: minRetryInterval || ExponentialRetryPolicyFilter.DEFAULT_CLIENT_MIN_RETRY_INTERVAL,
+    maxRetryInterval: maxRetryInterval || ExponentialRetryPolicyFilter.DEFAULT_CLIENT_MAX_RETRY_INTERVAL,
     handle: handle,
     shouldRetry: shouldRetry,
     updateRetryData: updateRetryData
   });
 
   return newFilter;
+
+
 }
 
 /**
 * Represents the default client retry interval, in milliseconds.
 */
-LinearRetryPolicyFilter.DEFAULT_CLIENT_RETRY_INTERVAL = 1000 * 30;
+ExponentialRetryPolicyFilter.DEFAULT_CLIENT_RETRY_INTERVAL = 1000 * 30;
 
 /**
 * Represents the default client retry count.
 */
-LinearRetryPolicyFilter.DEFAULT_CLIENT_RETRY_COUNT = 3;
+ExponentialRetryPolicyFilter.DEFAULT_CLIENT_RETRY_COUNT = 3;
 
-module.exports = LinearRetryPolicyFilter;
+/**
+* Represents the default maximum retry interval, in milliseconds.
+*/
+ExponentialRetryPolicyFilter.DEFAULT_CLIENT_MAX_RETRY_INTERVAL = 1000 * 90;
+
+/**
+* Represents the default minimum retry interval, in milliseconds.
+*/
+ExponentialRetryPolicyFilter.DEFAULT_CLIENT_MIN_RETRY_INTERVAL = 1000 * 3;
+
+module.exports = ExponentialRetryPolicyFilter;
