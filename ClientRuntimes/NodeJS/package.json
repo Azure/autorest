@@ -1,11 +1,11 @@
 {
-  "name": "ms-autorest-runtime",
+  "name": "ms-rest",
   "author": {
     "name": "Microsoft Corporation",
     "email": "azsdkteam@microsoft.com",
     "url": "https://github.com/Azure/AutoRest"
   },
-  "version": "0.9.0",
+  "version": "0.1.0",
   "description": "Infrastructure for error handling, tracing, and http client pipeline configuration. Required by client libraries generated using AutoRest.",
   "tags": ["node", "microsoft", "autorest", "clientruntime"],
   "keywords": ["node", "microsoft", "autorest", "clientruntime"],
@@ -43,7 +43,7 @@
   },
   "scripts": {
     "test": "npm -s run-script jshint && npm -s run-script unit",
-    "unit": "node scripts/unit.js testlist.txt",
+    "unit": "node test/unit.js testlist.txt",
     "jshint": "jshint lib --reporter=jslint"
   }
 }

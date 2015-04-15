@@ -58,7 +58,7 @@ describe('nodejs', function () {
 
   describe('client', function () {
     it('created with log filter should work', function (done) {
-      var petstore = new ps.SwaggerPetstore("http://localhost:1337", credentials).withFilter(createLogFilter());
+      var petstore = new ps.SwaggerPetstore("http://localhost:1337", credentials).addFilter(createLogFilter());
 
       petstore.findPetById(1, function (error, result) {
         result.request.url.should.equal("http://localhost:1337/pets/1");

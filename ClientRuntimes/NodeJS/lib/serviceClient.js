@@ -4,15 +4,23 @@
 'use strict';
 
 var url = require('url');
-
 var requestPipeline = require('./requestPipeline');
 var ProxyFilter = require('./filters/proxyfilter');
 var SigningFilter = require('./filters/signingfilter');
 var RedirectFilter = require('./filters/redirectfilter');
-
 var Constants = require('./constants');
 var utils = require('./utils');
 
+/**
+   * @class
+   * Initializes a new instance of the ServiceClient class.
+   * @constructor
+   * 
+   * @param {object} credentials - BasicAuthenticationCredentials or 
+   * TokenCredentials object used for authentication.  
+   * 
+   * @param {Array} filters
+   */
 function ServiceClient(credentials, filters) {
   if (!filters) {
     filters = [];
@@ -25,10 +33,10 @@ function ServiceClient(credentials, filters) {
   if (credentials) {
     filters.push(SigningFilter.create(credentials));
   }
-  filters.push(RedirectFilter.create());
 
+  filters.push(RedirectFilter.create());
   this.pipeline = requestPipeline.create.apply(requestPipeline, filters);
-  
+  // enable fiddler tracing
   this._setDefaultProxy();
 }
 
@@ -58,7 +66,7 @@ ServiceClient._loadEnvironmentProxyValue = function () {
 /**
 * Sets the service host default proxy from the environment.
 * Can be overridden by calling _setProxyUrl or _setProxy
-*
+* It is useful for enabling Fiddler trace
 */
 ServiceClient.prototype._setDefaultProxy = function () {
   var proxyUrl = ServiceClient._loadEnvironmentProxyValue();
@@ -97,7 +105,7 @@ ServiceClient.prototype._setDefaultProxy = function () {
 * @param {function (requestOptins, next, callback)} filter The new filter object.
 * @return {QueueService} A new service client with the filter applied.
 */
-ServiceClient.prototype.withFilter = function (newFilter) {
+ServiceClient.prototype.addFilter = function (newFilter) {
   if (!newFilter) {
     throw new Error('No filter passed');
   }

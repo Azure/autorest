@@ -6,19 +6,6 @@ exports = module.exports;
 
 var Constants = {
   /**
-  * Buffer width used to copy data to output streams.
-  *
-  * @const
-  * @type {string}
-  */
-  BUFFER_COPY_LENGTH: 8 * 1024,
-
-  /**
-  * Default client request time out
-  */
-  DEFAULT_CLIENT_REQUEST_TIMEOUT : 5 * 60 * 1000,
-
-  /**
   * Specifies HTTP.
   *
   * @const
@@ -66,27 +53,6 @@ var Constants = {
       HEAD: 'HEAD',
       PATCH: 'PATCH'
     },
-
-    /**
-    * Response codes.
-    *
-    * @const
-    * @enum {int}
-    */
-    HttpResponseCodes: {
-      Ok: 200,
-      Created: 201,
-      Accepted: 202,
-      NoContent: 204,
-      PartialContent: 206,
-      BadRequest: 400,
-      Unauthorized: 401,
-      Forbidden: 403,
-      NotFound: 404,
-      Conflict: 409,
-      LengthRequired: 411,
-      PreconditionFailed: 412
-    }
   },
 
   /**
