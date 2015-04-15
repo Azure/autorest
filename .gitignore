@@ -96,10 +96,47 @@ ClientBin
 # Build tasks
 tools/*.dll
 
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# Azure Tooling #
+node_modules
+
+# Eclipse #
+*.pydevproject
+.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+
+# Other Tooling #
+.classpath
+.project
+target
+.idea
+*.iml
+
 # Sensitive files
 *.keys
 *.pfx
 *.cer
+*.pem
+*.jks
 
 # Backup & report files from converting a project to a new version of VS. 
 _UpgradeReport_Files/
@@ -109,6 +146,10 @@ UpgradeLog*.XML
 # NuGet
 packages
 
-# Mac development
+# Mac OS #
 .DS_Store
+.DS_Store?
+
+# Windows #
+Thumbs.db
 
