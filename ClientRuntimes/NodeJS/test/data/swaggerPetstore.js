@@ -48,7 +48,7 @@ var SwaggerPetstore = ( /** @lends SwaggerPetstore */ function() {
    * @returns {Stream} The response stream.
    */
   SwaggerPetstore.prototype.findPetById = function(id, callback) {
-    this.findPetByIdWithOperationResponse(1, function (error, resultWithEnvelope) {
+    this.findPetByIdWithOperationResponse(id, function (error, resultWithEnvelope) {
       return callback(null, resultWithEnvelope.body);
     });
   };

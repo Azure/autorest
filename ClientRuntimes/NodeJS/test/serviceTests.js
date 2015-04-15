@@ -10,7 +10,6 @@ var util = require('util');
 var ps = require('./data/swaggerPetstore');
 var clientRuntime = require('../lib/clientRuntime');
 
-
 describe('nodejs', function () {
   var suite;
   var server;
@@ -59,7 +58,7 @@ describe('nodejs', function () {
 
   describe('client', function () {
     it('created with log filter should work', function (done) {
-      var petstore = new ps.SwaggerPetstore("http://localhost:1337", credentials).withFilter(createLogFilter());
+      var petstore = new ps.SwaggerPetstore("http://localhost:1337", credentials).addFilter(createLogFilter());
 
       petstore.findPetById(1, function (error, result) {
         result.id.should.equal("1");

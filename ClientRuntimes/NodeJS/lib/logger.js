@@ -12,19 +12,9 @@ function Logger(level, loggerFunction) {
 
 Logger.LogLevels = {
   /**
-  * System is unusable.
+  * Fatal condition.
   */
-  EMERGENCY: 'emergency',
-
-  /**
-  * Action must be taken immediately.
-  */
-  ALERT : 'alert',
-
-  /**
-  * Critical condition.
-  */
-  CRITICAL : 'critical',
+  FATAL : 'fatal',
 
   /**
   * Error condition.
@@ -35,11 +25,6 @@ Logger.LogLevels = {
   * Warning condition.
   */
   WARNING : 'warning',
-
-  /**
-  * Normal but significant condition.
-  */
-  NOTICE : 'notice',
 
   /**
   * Purely informational message.
@@ -53,9 +38,7 @@ Logger.LogLevels = {
 };
 
 Logger.logPriority = [
-  Logger.LogLevels.EMERGENCY,
-  Logger.LogLevels.ALERT,
-  Logger.LogLevels.CRITICAL,
+  Logger.LogLevels.FATAL,
   Logger.LogLevels.ERROR,
   Logger.LogLevels.WARNING,
   Logger.LogLevels.NOTICE,
@@ -67,16 +50,8 @@ Logger.prototype.log = function (level, msg) {
   this.loggerFunction(level, msg);
 };
 
-Logger.prototype.emergency = function(msg) {
-  this.log(Logger.LogLevels.EMERGENCY, msg);
-};
-
-Logger.prototype.critical = function(msg) {
-  this.log(Logger.LogLevels.CRITICAL, msg);
-};
-
-Logger.prototype.alert = function(msg) {
-  this.log(Logger.LogLevels.ALERT, msg);
+Logger.prototype.fatal = function(msg) {
+  this.log(Logger.LogLevels.FATAL, msg);
 };
 
 Logger.prototype.error = function(msg) {
@@ -85,10 +60,6 @@ Logger.prototype.error = function(msg) {
 
 Logger.prototype.warn = function(msg) {
   this.log(Logger.LogLevels.WARNING, msg);
-};
-
-Logger.prototype.notice = function(msg) {
-  this.log(Logger.LogLevels.NOTICE, msg);
 };
 
 Logger.prototype.info = function(msg) {
