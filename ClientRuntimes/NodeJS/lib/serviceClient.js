@@ -4,11 +4,11 @@
 'use strict';
 
 var url = require('url');
-var requestPipeline = require('./requestPipeline');
-var ProxyFilter = require('./filters/proxyfilter');
-var SigningFilter = require('./filters/signingfilter');
-var RedirectFilter = require('./filters/redirectfilter');
 var Constants = require('./constants');
+var ProxyFilter = require('./filters/proxyfilter');
+var RedirectFilter = require('./filters/redirectfilter');
+var SigningFilter = require('./filters/signingfilter');
+var requestPipeline = require('./requestPipeline');
 var utils = require('./utils');
 
 /**
@@ -36,6 +36,7 @@ function ServiceClient(credentials, filters) {
 
   filters.push(RedirectFilter.create());
   this.pipeline = requestPipeline.create.apply(requestPipeline, filters);
+  
   // enable fiddler tracing
   this._setDefaultProxy();
 }

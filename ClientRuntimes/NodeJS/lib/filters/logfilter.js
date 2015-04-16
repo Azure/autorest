@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information. 
 
 var util = require('util');
+
 var dump = util.inspect;
 
 /**

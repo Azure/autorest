@@ -7,7 +7,6 @@ var _ = require('underscore');
 var tunnel = require('tunnel');
 var https = require('https');
 var url = require('url');
-
 var utils = require('../utils');
 
 /**

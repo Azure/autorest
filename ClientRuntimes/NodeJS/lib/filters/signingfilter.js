@@ -3,7 +3,6 @@
 
 'use strict';
 
-// Module dependencies.
 var requestPipeline = require('../requestPipeline');
 
 /**

@@ -6,8 +6,10 @@
 var request = require('request');
 var through = require('through');
 var duplexer = require('duplexer');
-
 var _ = require('underscore');
+var Constants = require('./constants');
+
+var HttpVerbs = Constants.HttpVerbs;
 
 //
 // Request pipelines are functions that allow you to
@@ -24,7 +26,7 @@ var _ = require('underscore');
  * @return function(request, callback) - function to make a request.
  *
  */
-function createWithSink(sink) {
+exports.createWithSink = function(sink) {
   var pipeline = sink;
 
   // The function that actually runs the pipeline. It starts simple
@@ -47,14 +49,14 @@ function createWithSink(sink) {
   };
 
   // Add verb specific helper methods
-  var verbs = ['get', 'post', 'delete', 'put', 'merge', 'head', 'patch'];
+  var verbs = _.values(HttpVerbs);
   verbs.forEach(function (method) {
     runFilteredRequest[method] = (function (m) {
       return function (options, callback) {
         options.method = m;
         return pipeline(options, callback);
       };
-    })(method.toUpperCase());
+    })(method);
   });
 
   // If user passed any other parameters, assume they're filters
@@ -64,7 +66,7 @@ function createWithSink(sink) {
   }
 
   return runFilteredRequest;
-}
+};
 
 /**
  * This function acts as the final sink for a request, actually
@@ -76,7 +78,7 @@ function createWithSink(sink) {
  * will be called at completion of the request.
  */
 
-function requestLibrarySink(options, callback) {
+exports.requestLibrarySink = function(options, callback) {
   if (options.headersOnly) {
     var requestStream = request(options);
     requestStream.on('error', function (err) {
@@ -96,7 +98,7 @@ function requestLibrarySink(options, callback) {
       return callback(null, response, body);
     });
   }
-}
+};
 
 /**
  *
@@ -106,14 +108,14 @@ function requestLibrarySink(options, callback) {
  * @return function(request, callback) - function to make a request.
  *
  */
-function create() {
+exports.create = function() {
   if (arguments.length === 0 ) {
-    return createWithSink(requestLibrarySink);
+    return exports.createWithSink(exports.requestLibrarySink);
   }
   // User passed filters to add to the pipeline.
-  // build up appropriate arguments and call createWithSink
-  return createWithSink.apply(null, [requestLibrarySink].concat(_.toArray(arguments)));
-}
+  // build up appropriate arguments and call exports.createWithSink
+  return exports.createWithSink.apply(null, [exports.requestLibrarySink].concat(_.toArray(arguments)));
+};
 
 /**
  * Create a new filter that's a combination of all the filters
@@ -126,7 +128,7 @@ function create() {
  *
  * @return the new filter.
  */
-function createCompositeFilter() {
+exports.createCompositeFilter = function() {
   var filter = arguments[0];
 
   function makePairedFilter(filterA, filterB) {
@@ -142,7 +144,7 @@ function createCompositeFilter() {
     filter = makePairedFilter(filter, arguments[i]);
   }
   return filter;
-}
+};
 
 /**
  * Creates an interim stream which can be returned to the
@@ -161,17 +163,12 @@ function createCompositeFilter() {
  * @returns a duplex stream that writes to the input stream and
  * produces data from the output stream.
  */
-function interimStream(setPipes) {
+exports.interimStream = function(setPipes) {
   var input = through();
   var output = through();
   var duplex = duplexer(input, output);
   setPipes(input, output);
   return duplex;
-}
+};
 
-_.extend(exports, {
-  create: create,
-  createWithSink: createWithSink,
-  createCompositeFilter: createCompositeFilter,
-  interimStream: interimStream
-});
+exports = module.exports;
