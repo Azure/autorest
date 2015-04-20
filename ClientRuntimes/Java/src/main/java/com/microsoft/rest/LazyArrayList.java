@@ -5,7 +5,7 @@
  *
  */
 
-package com.microsoft.rest.core;
+package com.microsoft.rest;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,6 +13,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+/**
+ * Represents an object list that supports on-demand initialization.
+ * @param <E> The element
+ */
 public class LazyArrayList<E> extends ArrayList<E> implements LazyCollection {
     private static final long serialVersionUID = 1L;
     

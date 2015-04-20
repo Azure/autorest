@@ -5,10 +5,10 @@
  *
  */
 
-package com.microsoft.rest.core.pipeline;
+package com.microsoft.rest.pipeline;
 
-public class HttpResponseInterceptorBackAdapter extends HttpResponseInterceptorAdapter {
-    public void addBack(ServiceResponseFilter filter) {
+public class HttpRequestInterceptorBackAdapter extends HttpRequestInterceptorAdapter {
+    public void addBack(ServiceRequestFilter filter) {
         getFilterList().addLast(filter);
     }
 }

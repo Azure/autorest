@@ -7,9 +7,9 @@
 
 package com.microsoft.rest.credentials;
 
-import com.microsoft.rest.core.pipeline.ServiceRequestContext;
-import com.microsoft.rest.core.pipeline.ServiceRequestFilter;
-import com.microsoft.rest.core.utils.Base64;
+import com.microsoft.rest.pipeline.ServiceRequestFilter;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.http.HttpRequest;
 
 import java.util.concurrent.ExecutorService;
 
@@ -21,12 +21,12 @@ public class BasicAuthenticationCredentialsFilter implements ServiceRequestFilte
     }
 
     @Override
-    public void filter(ServiceRequestContext request) {
+    public void filter(HttpRequest request) {
         ExecutorService service = null;
 
         try {
             String auth = credentials.getUserName() + ":" + credentials.getPassword();
-            auth = new String(Base64.encode(auth.getBytes("UTF8")));
+            auth = Base64.encodeBase64String(auth.getBytes("UTF8"));
             request.setHeader("Authorization", "Basic " + auth);
         } catch (Exception e) {
             // silently fail

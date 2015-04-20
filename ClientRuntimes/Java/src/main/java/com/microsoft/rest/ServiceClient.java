@@ -5,14 +5,14 @@
  *
  */
 
-package com.microsoft.rest.core;
+package com.microsoft.rest;
 
-import com.microsoft.rest.core.pipeline.HttpRequestInterceptorBackAdapter;
-import com.microsoft.rest.core.pipeline.HttpRequestInterceptorFrontAdapter;
-import com.microsoft.rest.core.pipeline.HttpResponseInterceptorBackAdapter;
-import com.microsoft.rest.core.pipeline.HttpResponseInterceptorFrontAdapter;
-import com.microsoft.rest.core.pipeline.ServiceRequestFilter;
-import com.microsoft.rest.core.pipeline.ServiceResponseFilter;
+import com.microsoft.rest.pipeline.HttpRequestInterceptorBackAdapter;
+import com.microsoft.rest.pipeline.HttpRequestInterceptorFrontAdapter;
+import com.microsoft.rest.pipeline.HttpResponseInterceptorBackAdapter;
+import com.microsoft.rest.pipeline.HttpResponseInterceptorFrontAdapter;
+import com.microsoft.rest.pipeline.ServiceRequestFilter;
+import com.microsoft.rest.pipeline.ServiceResponseFilter;
 import org.apache.http.HttpHost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;

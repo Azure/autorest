@@ -5,7 +5,7 @@
  *
  */
 
-package com.microsoft.rest.core;
+package com.microsoft.rest;
 
 import java.util.Collection;
 import java.util.HashMap;

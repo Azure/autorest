@@ -5,7 +5,7 @@
  *
  */
 
-package com.microsoft.rest.core.pipeline;
+package com.microsoft.rest.pipeline;
 
 public class HttpRequestInterceptorFrontAdapter extends HttpRequestInterceptorAdapter {
     public void addFront(ServiceRequestFilter filter) {

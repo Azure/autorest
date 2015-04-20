@@ -5,7 +5,7 @@
  *
  */
 
-package com.microsoft.rest.core.pipeline;
+package com.microsoft.rest.pipeline;
 
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpRequestInterceptor;
@@ -27,9 +27,8 @@ public class HttpRequestInterceptorAdapter implements HttpRequestInterceptor {
 
     @Override
     public void process(HttpRequest request, HttpContext context) {
-        HttpServiceRequestContext serviceRequestContext = new HttpServiceRequestContext(request, context);
         for (ServiceRequestFilter filter : filters) {
-            filter.filter(serviceRequestContext);
+            filter.filter(request);
         }
     }
 }

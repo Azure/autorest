@@ -5,7 +5,7 @@
  *
  */
 
-package com.microsoft.rest.core;
+package com.microsoft.rest;
 
 public interface ServiceOperations<TClient> {
     TClient getClient();

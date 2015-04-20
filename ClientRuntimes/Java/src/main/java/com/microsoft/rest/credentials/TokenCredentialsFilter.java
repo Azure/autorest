@@ -7,8 +7,8 @@
 
 package com.microsoft.rest.credentials;
 
-import com.microsoft.rest.core.pipeline.ServiceRequestContext;
-import com.microsoft.rest.core.pipeline.ServiceRequestFilter;
+import com.microsoft.rest.pipeline.ServiceRequestFilter;
+import org.apache.http.HttpRequest;
 
 import java.util.concurrent.ExecutorService;
 
@@ -20,7 +20,7 @@ public class TokenCredentialsFilter implements ServiceRequestFilter {
     }
 
     @Override
-    public void filter(ServiceRequestContext request) {
+    public void filter(HttpRequest request) {
         ExecutorService service = null;
 
         try {

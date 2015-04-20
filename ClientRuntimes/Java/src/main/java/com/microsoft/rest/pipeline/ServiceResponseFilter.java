@@ -5,8 +5,11 @@
  *
  */
 
-package com.microsoft.rest.core.pipeline;
+package com.microsoft.rest.pipeline;
+
+import org.apache.http.HttpRequest;
+import org.apache.http.HttpResponse;
 
 public interface ServiceResponseFilter {
-    void filter(ServiceRequestContext request, ServiceResponseContext response);
+    void filter(HttpResponse response);
 }

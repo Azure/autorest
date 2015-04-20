@@ -5,17 +5,22 @@
  *
  */
 
-package com.microsoft.rest.core;
+package com.microsoft.rest;
 
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 
+/**
+ * Represents the base return type of all ServiceClient REST operations.
+ * @param <T> The type of Http response object.
+ */
 public class HttpOperationResponse<T> {
     private HttpRequest request;
     private HttpResponse response;
+    private T body;
 
     /**
-     * Gets the HTTP request.
+     * Gets information about the associated HTTP request.
      *
      * @return The HTTP request.
      */
@@ -33,7 +38,7 @@ public class HttpOperationResponse<T> {
     }
 
     /**
-     * Gets the HTTP response.
+     * Gets information about the associated HTTP response.
      *
      * @return The HTTP response.
      */
@@ -50,21 +55,19 @@ public class HttpOperationResponse<T> {
         this.response = response;
     }
 
-    private T body;
-
     /**
-     * Gets the response object.
+     * Gets the HTTP response object.
      * 
-     * @return The response object.
+     * @return The HTTP response object.
      */
     public T getBody() {
         return this.body;
     }
 
     /**
-     * Sets the response object.
+     * Sets the HTTP response object.
      * 
-     * @param body The response object.
+     * @param body The HTTP response object.
      */
     public void setBody(T body) {
         this.body = body;
