@@ -23,7 +23,7 @@ public class HelloWorldController : ApiController
     }
 }
 ```
-By convention, Swagger documents are exposed by web services with the name `swagger.json`.  The `title` property of the `info` object is used by **AutoRest**  as the name of the client object in the generated library. The `host` + `path` of the operation corresponds to the URL of the operation endpoint. The `operationId` is used as the method name. The spec declares that a `GET` request will return an HTTP 200 status code with content of mime-type `application/json` and the body will be a string. For a more in-depth overview of swagger parsing refer to [working with swagger](Documentation/swagger.md) section of the [documentation](Documentation).
+By convention, Swagger documents are exposed by web services with the name `swagger.json`.  The `title` property of the `info` object is used by **AutoRest**  as the name of the client object in the generated library. The `host` + `path` of the operation corresponds to the URL of the operation endpoint. The `operationId` is used as the method name. The spec declares that a `GET` request will return an HTTP 200 status code with content of mime-type `application/json` and the body will be a string. For a more in-depth overview of swagger processing, refer to [Defining Clients With Swagger](Documentation/defining-clients-swagger.md) section of the [documentation](Documentation).
 
 ```
 {
@@ -53,7 +53,7 @@ By convention, Swagger documents are exposed by web services with the name `swag
   }
 }
 ```
-Next, we invoke **AutoRest.exe** with this swagger document to generate client library code (see [command line interface documentation](Documentation/cli.md) for details). 
+Next, we invoke **AutoRest.exe** with this swagger document to generate client library code (see [Command Line Interface documentation](Documentation/cli.md) for details). 
 
 **AutoRest** is extensible and can support multiple types of input and output. *AutoRest.exe* comes with the *AutoRest.json* configuration file that defines the available inputs (*Modelers*) and outputs (*CodeGenerators*). When invoking *AutoRest.exe*, if you don't specify the `-Modeler` then Swagger is assumed and if you don't specify `-CodeGenerator` then CSharp is used.
 
@@ -72,7 +72,7 @@ Add the namespace that was given to AutoRest.
 ```
 using MyNamespace;
 ```
-Access the REST API with very little code (see [Initialization](Documentation/clients-init.md) and [Operations](Documentation/clients-ops.md) for details).
+Access the REST API with very little code (see [Client Initialization](Documentation/clients-init.md) and [Client Operations](Documentation/clients-ops.md) for details).
 ```
 var myClient = new MyClient();
 var salutation = myClient.GetGreeting();
