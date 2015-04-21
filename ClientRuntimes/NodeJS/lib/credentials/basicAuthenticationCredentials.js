@@ -38,8 +38,14 @@ function BasicAuthenticationCredentials(credentials) {
 * @return {undefined}
 */
 BasicAuthenticationCredentials.prototype.signRequest = function (webResource, callback) {
-  webResource.headers[HeaderConstants.AUTHORIZATION] = util.format('%s %s:%s', 
-  	this.credentials.authorizationScheme, this.credentials.userName, this.credentials.password);
+  var credentials = util.format('%s:%s', 
+    this.credentials.userName, 
+    this.credentials.password);
+
+  var encodedCredentials = util.format('%s %s',
+    this.credentials.authorizationScheme,
+    new Buffer(credentials).toString('base64'));
+    webResource.headers[HeaderConstants.AUTHORIZATION] = encodedCredentials;
 
   callback(null);
 };

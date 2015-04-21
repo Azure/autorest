@@ -9,10 +9,6 @@ var HttpConstants = Constants.HttpConstants;
 var HttpConstants = Constants.HttpConstants;
 var HttpVerbs = HttpConstants.HttpVerbs;
 
-function encodeSpecialCharacters(path) {
-  return path.replace(/'/g, '%27');
-}
-
 /**
 * Creates a new WebResource object.
 *
@@ -34,7 +30,7 @@ function WebResource() {
 */
 WebResource.put = function (path) {
   var webResource = new WebResource();
-  webResource.path = path ? encodeSpecialCharacters(path) : null;
+  webResource.path = path ? utils.encodeUri(path) : null;
   webResource.method = HttpConstants.HttpVerbs.PUT;
   return webResource;
 };
@@ -47,7 +43,7 @@ WebResource.put = function (path) {
 */
 WebResource.get = function (path) {
   var webResource = new WebResource();
-  webResource.path = path ? encodeSpecialCharacters(path) : null;
+  webResource.path = path ? utils.encodeUri(path) : null;
   webResource.method = HttpConstants.HttpVerbs.GET;
   return webResource;
 };
@@ -60,7 +56,7 @@ WebResource.get = function (path) {
 */
 WebResource.head = function (path) {
   var webResource = new WebResource();
-  webResource.path = path ? encodeSpecialCharacters(path) : null;
+  webResource.path = path ? utils.encodeUri(path) : null;
   webResource.method = HttpConstants.HttpVerbs.HEAD;
   return webResource;
 };
@@ -73,7 +69,7 @@ WebResource.head = function (path) {
 */
 WebResource.del = function (path) {
   var webResource = new WebResource();
-  webResource.path = path ? encodeSpecialCharacters(path) : null;
+  webResource.path = path ? utils.encodeUri(path) : null;
   webResource.method = HttpConstants.HttpVerbs.DELETE;
   return webResource;
 };
@@ -86,7 +82,7 @@ WebResource.del = function (path) {
 */
 WebResource.post = function (path) {
   var webResource = new WebResource();
-  webResource.path = path ? encodeSpecialCharacters(path) : null;
+  webResource.path = path ? utils.encodeUri(path) : null;
   webResource.method = HttpConstants.HttpVerbs.POST;
   return webResource;
 };
@@ -99,7 +95,7 @@ WebResource.post = function (path) {
 */
 WebResource.merge = function (path) {
   var webResource = new WebResource();
-  webResource.path = path ? encodeSpecialCharacters(path) : null;
+  webResource.path = path ? utils.encodeUri(path) : null;
   webResource.method = HttpConstants.HttpVerbs.MERGE;
   return webResource;
 };
@@ -112,7 +108,7 @@ WebResource.merge = function (path) {
 */
 WebResource.patch = function (path) {
   var webResource = new WebResource();
-  webResource.path = path ? encodeSpecialCharacters(path) : null;
+  webResource.path = path ? utils.encodeUri(path) : null;
   webResource.method = HttpConstants.HttpVerbs.PATCH;
   return webResource;
 };
