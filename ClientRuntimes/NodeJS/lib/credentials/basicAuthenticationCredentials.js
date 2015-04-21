@@ -2,12 +2,10 @@
 // Licensed under the MIT License. See License.txt in the project root for license information. 
 
 var util = require('util');
-
 var Constants = require('../constants');
-var HeaderConstants = Constants.HeaderConstants;
-
 var validate = require('../validate');
 
+var HeaderConstants = Constants.HeaderConstants;
 var DEFAULT_AUTHORIZATION_SCHEME = 'Basic';
 
 /**

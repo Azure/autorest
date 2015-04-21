@@ -3,7 +3,6 @@
 
 'use strict';
 
-
 var HttpOperationResponse = ( function() {
   /**
    * Wrapper object for http request and response. Deserialized object is stored in 
