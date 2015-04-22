@@ -5,7 +5,7 @@
  *
  */
 
-package com.microsoft.rest.tracing;
+package com.microsoft.rest;
 
 import java.util.HashMap;
 import org.apache.http.HttpRequest;
@@ -16,7 +16,7 @@ import org.apache.http.HttpResponse;
  * operations. Interception is global and a tracing interceptor can be added via
  * CloudContext.Configuration.Tracing.AddTracingInterceptor.
  */
-public interface CloudTracingInterceptor {
+public interface ServiceClientTracingInterceptor {
     /**
      * Trace information.
      * 

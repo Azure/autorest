@@ -5,7 +5,7 @@
  *
  */
 
-package com.microsoft.rest.exception;
+package com.microsoft.rest;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpRequest;

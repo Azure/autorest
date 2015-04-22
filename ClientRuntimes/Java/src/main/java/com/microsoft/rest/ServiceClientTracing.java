@@ -5,7 +5,7 @@
  *
  */
 
-package com.microsoft.rest.tracing;
+package com.microsoft.rest;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,21 +19,21 @@ import org.apache.http.HttpResponse;
  * via implementations of the ICloudTracingInterceptor interface. All tracing is
  * global.
  */
-public abstract class CloudTracing {
-    private CloudTracing() {
+public abstract class ServiceClientTracing {
+    private ServiceClientTracing() {
     }
 
     /**
      * The collection of tracing interceptors to notify.
      */
-    private static List<CloudTracingInterceptor> interceptors;
+    private static List<ServiceClientTracingInterceptor> interceptors;
 
     /**
      * Gets the collection of tracing interceptors to notify.
      * 
      * @return the collection of tracing interceptors.
      */
-    public static List<CloudTracingInterceptor> getInterceptors() {
+    public static List<ServiceClientTracingInterceptor> getInterceptors() {
         return interceptors;
     }
 
@@ -65,39 +65,39 @@ public abstract class CloudTracing {
     static {
         isEnabled = true;
         interceptors = Collections
-                .synchronizedList(new ArrayList<CloudTracingInterceptor>());
+                .synchronizedList(new ArrayList<ServiceClientTracingInterceptor>());
     }
 
     /**
      * Add a tracing interceptor to be notified of changes.
      * 
-     * @param cloudTracingInterceptor
+     * @param serviceClientTracingInterceptor
      *            The tracing interceptor.
      */
     public static void addTracingInterceptor(
-            final CloudTracingInterceptor cloudTracingInterceptor) {
-        if (cloudTracingInterceptor == null) {
+            final ServiceClientTracingInterceptor serviceClientTracingInterceptor) {
+        if (serviceClientTracingInterceptor == null) {
             throw new NullPointerException();
         }
 
-        interceptors.add(cloudTracingInterceptor);
+        interceptors.add(serviceClientTracingInterceptor);
     }
 
     /**
      * Remove a tracing interceptor from change notifications.
      * 
-     * @param cloudTracingInterceptor
+     * @param serviceClientTracingInterceptor
      *            The tracing interceptor.
      * @return True if the tracing interceptor was found and removed; false
      *         otherwise.
      */
     public static boolean removeTracingInterceptor(
-            CloudTracingInterceptor cloudTracingInterceptor) {
-        if (cloudTracingInterceptor == null) {
+            ServiceClientTracingInterceptor serviceClientTracingInterceptor) {
+        if (serviceClientTracingInterceptor == null) {
             throw new NullPointerException();
         }
 
-        return interceptors.remove(cloudTracingInterceptor);
+        return interceptors.remove(serviceClientTracingInterceptor);
     }
 
     private static long nextInvocationId = 0;
@@ -115,7 +115,7 @@ public abstract class CloudTracing {
     public static void configuration(String source, String name, String value) {
         if (isEnabled) {
             synchronized (interceptors) {
-                for (CloudTracingInterceptor writer : interceptors) {
+                for (ServiceClientTracingInterceptor writer : interceptors) {
                     writer.configuration(source, name, value);
                 }
             }
@@ -125,7 +125,7 @@ public abstract class CloudTracing {
     public static void information(String message) {
         if (isEnabled) {
             synchronized (interceptors) {
-                for (CloudTracingInterceptor writer : interceptors) {
+                for (ServiceClientTracingInterceptor writer : interceptors) {
                     writer.information(message);
                 }
             }
@@ -136,7 +136,7 @@ public abstract class CloudTracing {
             String method, HashMap<String, Object> parameters) {
         if (isEnabled) {
             synchronized (interceptors) {
-                for (CloudTracingInterceptor writer : interceptors) {
+                for (ServiceClientTracingInterceptor writer : interceptors) {
                     writer.enter(invocationId, instance, method, parameters);
                 }
             }
@@ -146,7 +146,7 @@ public abstract class CloudTracing {
     public static void sendRequest(String invocationId, HttpRequest request) {
         if (isEnabled) {
             synchronized (interceptors) {
-                for (CloudTracingInterceptor writer : interceptors) {
+                for (ServiceClientTracingInterceptor writer : interceptors) {
                     writer.sendRequest(invocationId, request);
                 }
             }
@@ -157,7 +157,7 @@ public abstract class CloudTracing {
             HttpResponse response) {
         if (isEnabled) {
             synchronized (interceptors) {
-                for (CloudTracingInterceptor writer : interceptors) {
+                for (ServiceClientTracingInterceptor writer : interceptors) {
                     writer.receiveResponse(invocationId, response);
                 }
             }
@@ -167,7 +167,7 @@ public abstract class CloudTracing {
     public static void error(String invocationId, Exception ex) {
         if (isEnabled) {
             synchronized (interceptors) {
-                for (CloudTracingInterceptor writer : interceptors) {
+                for (ServiceClientTracingInterceptor writer : interceptors) {
                     writer.error(invocationId, ex);
                 }
             }
@@ -177,7 +177,7 @@ public abstract class CloudTracing {
     public static void exit(String invocationId, Object result) {
         if (isEnabled) {
             synchronized (interceptors) {
-                for (CloudTracingInterceptor writer : interceptors) {
+                for (ServiceClientTracingInterceptor writer : interceptors) {
                     writer.exit(invocationId, result);
                 }
             }

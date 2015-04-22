@@ -11,7 +11,7 @@ import com.microsoft.rest.pipeline.ServiceRequestFilter;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpRequest;
 
-import java.util.concurrent.ExecutorService;
+import java.io.UnsupportedEncodingException;
 
 public class BasicAuthenticationCredentialsFilter implements ServiceRequestFilter {
     private BasicAuthenticationCredentials credentials;
@@ -22,18 +22,12 @@ public class BasicAuthenticationCredentialsFilter implements ServiceRequestFilte
 
     @Override
     public void filter(HttpRequest request) {
-        ExecutorService service = null;
-
         try {
             String auth = credentials.getUserName() + ":" + credentials.getPassword();
             auth = Base64.encodeBase64String(auth.getBytes("UTF8"));
             request.setHeader("Authorization", "Basic " + auth);
-        } catch (Exception e) {
+        } catch (UnsupportedEncodingException e) {
             // silently fail
-        } finally {
-            if (service != null) {
-                service.shutdown();
-            }
         }
     }
 }

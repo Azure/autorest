@@ -10,8 +10,6 @@ package com.microsoft.rest.credentials;
 import com.microsoft.rest.pipeline.ServiceRequestFilter;
 import org.apache.http.HttpRequest;
 
-import java.util.concurrent.ExecutorService;
-
 public class TokenCredentialsFilter implements ServiceRequestFilter {
     private TokenCredentials credentials;
 
@@ -21,16 +19,6 @@ public class TokenCredentialsFilter implements ServiceRequestFilter {
 
     @Override
     public void filter(HttpRequest request) {
-        ExecutorService service = null;
-
-        try {
-            request.setHeader("Authorization", credentials.getScheme() + " " + credentials.getToken());
-        } catch (Exception e) {
-            // silently fail
-        } finally {
-            if (service != null) {
-                service.shutdown();
-            }
-        }
+        request.setHeader("Authorization", credentials.getScheme() + " " + credentials.getToken());
     }
 }

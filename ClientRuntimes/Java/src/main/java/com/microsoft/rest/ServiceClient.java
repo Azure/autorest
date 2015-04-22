@@ -39,12 +39,14 @@ public abstract class ServiceClient<TClient> implements Closeable {
             ExecutorService executorService) {
         this.httpClientBuilder = httpClientBuilder;
         this.executorService = executorService;
-        this.withRequestFilterFirst(new UserAgentFilter(this.getClass().getName()));
-
     }
 
     public ExecutorService getExecutorService() {
         return this.executorService;
+    }
+
+    public HttpClientBuilder getHttpClientBuilder() {
+        return this.httpClientBuilder;
     }
 
     public CloseableHttpClient getHttpClient() {
@@ -64,44 +66,40 @@ public abstract class ServiceClient<TClient> implements Closeable {
         return this.httpClient;
     }
 
-    public ServiceClient<TClient> withRequestFilterFirst(
+    public void addRequestFilterFirst(
             ServiceRequestFilter serviceRequestFilter) {
         if (httpRequestInterceptorFrontAdapter == null) {
             httpRequestInterceptorFrontAdapter = new HttpRequestInterceptorFrontAdapter();
             httpClientBuilder.addInterceptorFirst(httpRequestInterceptorFrontAdapter);
         }
         httpRequestInterceptorFrontAdapter.addFront(serviceRequestFilter);
-        return this;
     }
 
-    public ServiceClient<TClient> withRequestFilterLast(
+    public void addRequestFilterLast(
             ServiceRequestFilter serviceRequestFilter) {
         if (httpRequestInterceptorBackAdapter == null) {
             httpRequestInterceptorBackAdapter = new HttpRequestInterceptorBackAdapter();
             httpClientBuilder.addInterceptorLast(httpRequestInterceptorBackAdapter);
         }
         httpRequestInterceptorBackAdapter.addBack(serviceRequestFilter);
-        return this;
     }
 
-    public ServiceClient<TClient> withResponseFilterFirst(
+    public void addResponseFilterFirst(
             ServiceResponseFilter serviceResponseFilter) {
         if (httpResponseInterceptorFrontAdapter == null) {
             httpResponseInterceptorFrontAdapter = new HttpResponseInterceptorFrontAdapter();
             httpClientBuilder.addInterceptorFirst(httpResponseInterceptorFrontAdapter);
         }
         httpResponseInterceptorFrontAdapter.addFront(serviceResponseFilter);
-        return this;
     }
 
-    public ServiceClient<TClient> withResponseFilterLast(
+    public void addResponseFilterLast(
             ServiceResponseFilter serviceResponseFilter) {
         if (httpResponseInterceptorBackAdapter == null) {
             httpResponseInterceptorBackAdapter = new HttpResponseInterceptorBackAdapter();
             httpClientBuilder.addInterceptorLast(httpResponseInterceptorBackAdapter);
         }
         httpResponseInterceptorBackAdapter.addBack(serviceResponseFilter);
-        return this;
     }
 
     public void close() throws IOException {

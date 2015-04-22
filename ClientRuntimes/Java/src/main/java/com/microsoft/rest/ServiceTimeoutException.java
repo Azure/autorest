@@ -7,8 +7,6 @@
 
 package com.microsoft.rest;
 
-import com.microsoft.rest.exception.ServiceException;
-
 /**
  * Exception indicating a service operation has timed out.
  */
