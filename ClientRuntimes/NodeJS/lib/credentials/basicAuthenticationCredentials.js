@@ -19,8 +19,8 @@ var DEFAULT_AUTHORIZATION_SCHEME = 'Basic';
 function BasicAuthenticationCredentials(credentials) {
   validate.validateArgs('BasicAuthenticationCredentials', function (v) {
     v.object(credentials, 'credentials');
-    v.string(credentials.token, 'credentials.userName');
-    v.string(credentials.token, 'credentials.password');
+    v.string(credentials.userName, 'credentials.userName');
+    v.string(credentials.password, 'credentials.password');
   });
 
   if (!credentials.authorizationScheme) {
@@ -38,8 +38,14 @@ function BasicAuthenticationCredentials(credentials) {
 * @return {undefined}
 */
 BasicAuthenticationCredentials.prototype.signRequest = function (webResource, callback) {
-  webResource.headers[HeaderConstants.AUTHORIZATION] = util.format('%s %s:%s', 
-  	this.credentials.authorizationScheme, this.credentials.userName, this.credentials.password);
+  var credentials = util.format('%s:%s', 
+    this.credentials.userName, 
+    this.credentials.password);
+
+  var encodedCredentials = util.format('%s %s',
+    this.credentials.authorizationScheme,
+    new Buffer(credentials).toString('base64'));
+    webResource.headers[HeaderConstants.AUTHORIZATION] = encodedCredentials;
 
   callback(null);
 };
