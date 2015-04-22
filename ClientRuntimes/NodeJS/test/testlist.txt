@@ -1,1 +1,2 @@
 serviceTests.js
+credentialTests.js

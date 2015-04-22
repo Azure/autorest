@@ -22,7 +22,7 @@ describe('nodejs', function () {
     server.listen(1337, '127.0.0.1');
     console.log('Server running at http://127.0.0.1:1337/');
     credentials = new clientRuntime.TokenCredentials({
-      subscriptionId: "<your subscription id>",
+      authorizationScheme: "Bearer",
       token: "<your token here>"
     });
     done();

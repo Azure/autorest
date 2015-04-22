@@ -19,8 +19,8 @@ var DEFAULT_AUTHORIZATION_SCHEME = 'Basic';
 function BasicAuthenticationCredentials(credentials) {
   validate.validateArgs('BasicAuthenticationCredentials', function (v) {
     v.object(credentials, 'credentials');
-    v.string(credentials.token, 'credentials.userName');
-    v.string(credentials.token, 'credentials.password');
+    v.string(credentials.userName, 'credentials.userName');
+    v.string(credentials.password, 'credentials.password');
   });
 
   if (!credentials.authorizationScheme) {
