@@ -40,4 +40,4 @@ files.forEach(function (file) {
 args.push('-R');
 args.push(reporter);
 
-require('../node_modules/mocha/bin/_mocha');
+require('../node_modules/mocha/bin/mocha');
