@@ -7,9 +7,19 @@
 
 package com.microsoft.rest.pipeline;
 
-import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 
+/**
+ * Filter for processing a response received on the wire. An instance
+ * of this class needs to be wrapped in
+ * <code>com.microsoft.rest.pipeline.HttpResponseInterceptorAdapter</code> to
+ * be plugged into Apache pipeline.
+ */
 public interface ServiceResponseFilter {
+
+    /**
+     * Processes an <code>HttpRequest</code> that is about to sent on the wire.
+     * @param response an apache HttpResponse
+     */
     void filter(HttpResponse response);
 }

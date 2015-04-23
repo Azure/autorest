@@ -14,6 +14,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
  * Token based credentials for use with a REST Service Client.
  */
 public class TokenCredentials extends ServiceClientCredentials {
+
     /** The authentication scheme. */
     private String scheme;
     
@@ -53,7 +54,7 @@ public class TokenCredentials extends ServiceClientCredentials {
     }
 
     /* (non-Javadoc)
-     * @see com.microsoft.rest.credentials.ServiceClientCredentials#applyCredentialsFilter(org.apache.http.impl.client.HttpClientBuilder)
+     * @see com.microsoft.rest.credentials.ServiceClientCredentials#applyCredentialsFilter(com.microsoft.rest.ServiceClient)
      */
     @Override
     public void applyCredentialsFilter(ServiceClient client) {

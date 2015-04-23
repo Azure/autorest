@@ -13,18 +13,34 @@ import org.apache.http.protocol.HttpContext;
 
 import java.util.LinkedList;
 
+/**
+ * The adapter to wrap a list of
+ * <code>com.microsoft.rest.pipeline.ServiceResponseFilter</code> to be placed
+ * in Apache pipeline.
+ */
 public class HttpResponseInterceptorAdapter implements HttpResponseInterceptor {
     private LinkedList<ServiceResponseFilter> filters;
 
+    /**
+     * Initialize a new instance of HttpResponseInterceptorAdapter.
+     */
     public HttpResponseInterceptorAdapter() {
         filters = new LinkedList<ServiceResponseFilter>();
     }
 
+    /**
+     * Get all <code>com.microsoft.rest.pipeline.ServiceResponseFilter</code> in
+     * the current adapter.
+     * @return a linked list of the filters
+     */
     public LinkedList<ServiceResponseFilter> getFilterList()
     {
         return filters;
     }
 
+    /* (non-Javadoc)
+     * @see org.apache.http.HttpResponseInterceptor#process(org.apache.http.HttpResponse, org.apache.http.protocol.HttpContext)
+     */
     @Override
     public void process(HttpResponse response, HttpContext context) {
         for (ServiceResponseFilter filter : filters) {

@@ -10,13 +10,24 @@ package com.microsoft.rest.credentials;
 import com.microsoft.rest.pipeline.ServiceRequestFilter;
 import org.apache.http.HttpRequest;
 
+/**
+ * Token credentials filter for placing a token credentials into Apache pipeline.
+ */
 public class TokenCredentialsFilter implements ServiceRequestFilter {
     private TokenCredentials credentials;
 
+    /**
+     * Initialize a <code>TokenCredentialsFilter</code> class with a
+     * <code>TokenCredentials</code> credential.
+     * @param credentials
+     */
     public TokenCredentialsFilter(TokenCredentials credentials) {
         this.credentials = credentials;
     }
 
+    /* (non-Javadoc)
+     * @see com.microsoft.rest.pipeline.ServiceRequestFilter#filter(org.apache.http.HttpRequest)
+     */
     @Override
     public void filter(HttpRequest request) {
         request.setHeader("Authorization", credentials.getScheme() + " " + credentials.getToken());

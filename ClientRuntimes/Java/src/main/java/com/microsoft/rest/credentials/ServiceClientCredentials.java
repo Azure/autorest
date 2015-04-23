@@ -8,12 +8,12 @@
 package com.microsoft.rest.credentials;
 
 import com.microsoft.rest.ServiceClient;
-import org.apache.http.impl.client.HttpClientBuilder;
 
 /**
  * ServiceClientCredentials is the abstraction for credentials used by ServiceClients accessing REST services.
  */
 public abstract class ServiceClientCredentials {
+
     /**
      * Apply the credentials to the HTTP client builder.
      * @param client The ServiceClient.
