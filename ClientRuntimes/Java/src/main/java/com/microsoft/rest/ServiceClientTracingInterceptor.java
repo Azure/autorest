@@ -12,42 +12,37 @@ import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 
 /**
- * The CloudTracingInterceptor provides useful information about cloud
- * operations. Interception is global and a tracing interceptor can be added via
+ * ServiceClientTracingInterceptor provides useful information about cloud
+ * operations.
+ * <p>
+ * Interception is global and a tracing interceptor can be added via
  * CloudContext.Configuration.Tracing.AddTracingInterceptor.
+ * </p>
  */
 public interface ServiceClientTracingInterceptor {
     /**
      * Trace information.
      * 
-     * @param message
-     *            The information to trace.
+     * @param message the information to trace
      */
     void information(String message);
 
     /**
      * Probe configuration for the value of a setting.
      * 
-     * @param source
-     *            The configuration source.
-     * @param name
-     *            The name of the setting.
-     * @param value
-     *            The value of the setting in the source.
+     * @param source the configuration source
+     * @param name   the name of the setting
+     * @param value  the value of the setting in the source
      */
     void configuration(String source, String name, String value);
 
     /**
      * Enter a method.
      * 
-     * @param invocationId
-     *            Method invocation identifier.
-     * @param instance
-     *            The instance with the method.
-     * @param method
-     *            Name of the method.
-     * @param parameters
-     *            Method parameters.
+     * @param invocationId method invocation identifier
+     * @param instance     the instance with the method
+     * @param method       name of the method
+     * @param parameters   method parameters
      */
     void enter(String invocationId, Object instance, String method,
             HashMap<String, Object> parameters);
@@ -55,40 +50,32 @@ public interface ServiceClientTracingInterceptor {
     /**
      * Send an HTTP request.
      * 
-     * @param invocationId
-     *            Method invocation identifier.
-     * @param request
-     *            The request about to be sent.
+     * @param invocationId method invocation identifier
+     * @param request      the request about to be sent
      */
     void sendRequest(String invocationId, HttpRequest request);
 
     /**
      * Receive an HTTP response.
      * 
-     * @param invocationId
-     *            Method invocation identifier.
-     * @param response
-     *            The response instance.
+     * @param invocationId method invocation identifier
+     * @param response     the response instance
      */
     void receiveResponse(String invocationId, HttpResponse response);
 
     /**
      * Raise an error.
      * 
-     * @param invocationId
-     *            Method invocation identifier.
-     * @param exception
-     *            The error.
+     * @param invocationId method invocation identifier
+     * @param exception    the error
      */
     void error(String invocationId, Exception exception);
 
     /**
      * Exit a method. Note: Exit will not be called in the event of an error.
      * 
-     * @param invocationId
-     *            Method invocation identifier.
-     * @param returnValue
-     *            Method return value.
+     * @param invocationId method invocation identifier
+     * @param returnValue method return value
      */
     void exit(String invocationId, Object returnValue);
 }

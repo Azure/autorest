@@ -24,8 +24,8 @@ public class TokenCredentials extends ServiceClientCredentials {
     /**
      * Initializes a new instance of the TokenCredentials.
      *
-     * @param scheme Scheme to use. If null, defaults to Bearer.
-     * @param token Valid token.
+     * @param scheme scheme to use. If null, defaults to Bearer
+     * @param token  valid token
      */
     public TokenCredentials(String scheme, String token) {
         if (scheme == null)
@@ -39,7 +39,7 @@ public class TokenCredentials extends ServiceClientCredentials {
     /**
      * Get the secure token.
      *
-     * @return the ADAL authentication token
+     * @return the secure token
      */
     public String getToken() {
         return token;
@@ -48,6 +48,7 @@ public class TokenCredentials extends ServiceClientCredentials {
     /**
      * Get the authentication scheme.
      *
+     * @return the authentication scheme
      */
     public String getScheme() {
         return scheme;

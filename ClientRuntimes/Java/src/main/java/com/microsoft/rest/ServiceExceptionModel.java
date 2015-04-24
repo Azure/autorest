@@ -14,24 +14,37 @@ import org.apache.http.HttpResponse;
 import java.io.IOException;
 
 /**
- * The Service Exception indicates an error while executing a service operation.
+ * A generic wrapper for the HTTP response object.
+ *
+ * @param <T> the type of the HTTP response object
  */
 public class ServiceExceptionModel<T> {
 
     /**
-     * Information about the associated HTTP request.
+     * Information about the HTTP response object.
      */
     private T body;
 
-
-
+    /**
+     * Initialize an instance of ServiceExceptionModel with an empty body.
+     */
     public ServiceExceptionModel() {
     }
 
+    /**
+     * Initialize an instance of ServiceExceptionModel with a response object.
+     *
+     * @param body the HTTP response object
+     */
     public ServiceExceptionModel(final T body) {
         this.body = body;
     }
 
+    /**
+     * Gets the HTTP response object.
+     *
+     * @return the HTTP response object
+     */
     public T getBody() {
         return body;
     }

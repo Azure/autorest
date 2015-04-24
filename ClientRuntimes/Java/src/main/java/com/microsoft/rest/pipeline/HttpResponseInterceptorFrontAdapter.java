@@ -8,15 +8,14 @@
 package com.microsoft.rest.pipeline;
 
 /**
- * The adapter to wrap a list of
- * <code>com.microsoft.rest.pipeline.ServiceResponseFilter</code> to be placed
+ * The adapter to wrap a list of ServiceResponseFilter to be placed
  * at the front of all the response filters in Apache pipeline.
  */
 public class HttpResponseInterceptorFrontAdapter extends HttpResponseInterceptorAdapter {
 
     /**
-     * Add a <code>com.microsoft.rest.pipeline.ServiceResponseFilter</code> to
-     * the front of the the filter list.
+     * Add a ServiceResponseFilter to the end of the the filter list.
+     *
      * @param filter a ServiceResponseFilter instance
      */
     public void addFront(ServiceResponseFilter filter) {

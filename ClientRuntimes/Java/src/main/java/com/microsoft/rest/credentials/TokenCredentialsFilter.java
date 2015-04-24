@@ -17,9 +17,10 @@ public class TokenCredentialsFilter implements ServiceRequestFilter {
     private TokenCredentials credentials;
 
     /**
-     * Initialize a <code>TokenCredentialsFilter</code> class with a
-     * <code>TokenCredentials</code> credential.
-     * @param credentials
+     * Initialize a TokenCredentialsFilter class with a
+     * TokenCredentials credential.
+     *
+     * @param credentials a TokenCredentials instance
      */
     public TokenCredentialsFilter(TokenCredentials credentials) {
         this.credentials = credentials;

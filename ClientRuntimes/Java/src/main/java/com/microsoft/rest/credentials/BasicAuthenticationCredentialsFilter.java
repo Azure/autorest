@@ -20,9 +20,10 @@ public class BasicAuthenticationCredentialsFilter implements ServiceRequestFilte
     private BasicAuthenticationCredentials credentials;
 
     /**
-     * Initialize a <code>BasicAuthenticationCredentialsFilter</code> class with a
-     * <code>BasicAuthenticationCredentials</code> credential.
-     * @param credentials
+     * Initialize a BasicAuthenticationCredentialsFilter class with a
+     * BasicAuthenticationCredentials credential.
+     *
+     * @param credentials a BasicAuthenticationCredentials instance
      */
     public BasicAuthenticationCredentialsFilter(BasicAuthenticationCredentials credentials) {
         this.credentials = credentials;

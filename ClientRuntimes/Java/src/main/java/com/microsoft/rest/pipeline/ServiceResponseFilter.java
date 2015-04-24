@@ -11,14 +11,14 @@ import org.apache.http.HttpResponse;
 
 /**
  * Filter for processing a response received on the wire. An instance
- * of this class needs to be wrapped in
- * <code>com.microsoft.rest.pipeline.HttpResponseInterceptorAdapter</code> to
+ * of this class needs to be wrapped in HttpResponseInterceptorAdapter to
  * be plugged into Apache pipeline.
  */
 public interface ServiceResponseFilter {
 
     /**
-     * Processes an <code>HttpRequest</code> that is about to sent on the wire.
+     * Processes an HttpResponse that is about to sent on the wire.
+     *
      * @param response an apache HttpResponse
      */
     void filter(HttpResponse response);

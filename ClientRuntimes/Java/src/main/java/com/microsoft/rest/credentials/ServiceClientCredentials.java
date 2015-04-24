@@ -10,13 +10,15 @@ package com.microsoft.rest.credentials;
 import com.microsoft.rest.ServiceClient;
 
 /**
- * ServiceClientCredentials is the abstraction for credentials used by ServiceClients accessing REST services.
+ * ServiceClientCredentials is the abstraction for credentials used by
+ * ServiceClients accessing REST services.
  */
 public abstract class ServiceClientCredentials {
 
     /**
      * Apply the credentials to the HTTP client builder.
-     * @param client The ServiceClient.
+     *
+     * @param client the ServiceClient instance
      */
     public void applyCredentialsFilter(ServiceClient client) {
         return;

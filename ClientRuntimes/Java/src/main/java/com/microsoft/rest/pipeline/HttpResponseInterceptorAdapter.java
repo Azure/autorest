@@ -14,9 +14,7 @@ import org.apache.http.protocol.HttpContext;
 import java.util.LinkedList;
 
 /**
- * The adapter to wrap a list of
- * <code>com.microsoft.rest.pipeline.ServiceResponseFilter</code> to be placed
- * in Apache pipeline.
+ * The adapter to wrap a list of ServiceResponseFilter to be placed in Apache pipeline.
  */
 public class HttpResponseInterceptorAdapter implements HttpResponseInterceptor {
     private LinkedList<ServiceResponseFilter> filters;
@@ -29,8 +27,8 @@ public class HttpResponseInterceptorAdapter implements HttpResponseInterceptor {
     }
 
     /**
-     * Get all <code>com.microsoft.rest.pipeline.ServiceResponseFilter</code> in
-     * the current adapter.
+     * Get all ServiceResponseFilters in the current adapter.
+     *
      * @return a linked list of the filters
      */
     public LinkedList<ServiceResponseFilter> getFilterList()

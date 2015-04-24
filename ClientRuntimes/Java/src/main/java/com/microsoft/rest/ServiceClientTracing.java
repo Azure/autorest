@@ -31,7 +31,7 @@ public abstract class ServiceClientTracing {
     /**
      * Gets the collection of tracing interceptors to notify.
      * 
-     * @return the collection of tracing interceptors.
+     * @return the collection of tracing interceptors
      */
     public static List<ServiceClientTracingInterceptor> getInterceptors() {
         return interceptors;
@@ -46,7 +46,7 @@ public abstract class ServiceClientTracing {
     /**
      * Gets the value indicating whether tracing is enabled.
      * 
-     * @return Boolean value indicating if tracing is enabled.
+     * @return <code>boolean</code> value indicating if tracing is enabled
      */
     public static boolean getIsEnabled() {
         return isEnabled;
@@ -55,8 +55,7 @@ public abstract class ServiceClientTracing {
     /**
      * Sets the value indicating whether tracing is enabled.
      * 
-     * @param enabled
-     *            Boolean value indicating if tracing is enabled.
+     * @param enabled <code>boolean</code> value indicating if tracing is enabled
      */
     public static void setIsEnabled(final boolean enabled) {
         isEnabled = enabled;
@@ -71,8 +70,7 @@ public abstract class ServiceClientTracing {
     /**
      * Add a tracing interceptor to be notified of changes.
      * 
-     * @param serviceClientTracingInterceptor
-     *            The tracing interceptor.
+     * @param serviceClientTracingInterceptor the tracing interceptor
      */
     public static void addTracingInterceptor(
             final ServiceClientTracingInterceptor serviceClientTracingInterceptor) {
@@ -86,10 +84,10 @@ public abstract class ServiceClientTracing {
     /**
      * Remove a tracing interceptor from change notifications.
      * 
-     * @param serviceClientTracingInterceptor
-     *            The tracing interceptor.
-     * @return True if the tracing interceptor was found and removed; false
-     *         otherwise.
+     * @param serviceClientTracingInterceptor the tracing interceptor
+     * @return                                <code>true</code> if the tracing
+     *                                        interceptor was found and removed;
+     *                                        <code>false</code> otherwise
      */
     public static boolean removeTracingInterceptor(
             ServiceClientTracingInterceptor serviceClientTracingInterceptor) {
@@ -100,18 +98,38 @@ public abstract class ServiceClientTracing {
         return interceptors.remove(serviceClientTracingInterceptor);
     }
 
+    /**
+     * The invocation identifier.
+     */
     private static long nextInvocationId = 0;
 
+    /**
+     * Get the next invocation identifier.
+     * @return the next invocation identifier
+     */
     public static long getNextInvocationId() {
         return ++nextInvocationId;
     }
 
+    /**
+     * Write the informational tracing message.
+     *
+     * @param message    the msessage to trace
+     * @param parameters an object array containing zero or more objects to format
+     */
     public static void information(String message, Object... parameters) {
         if (isEnabled) {
             information(String.format(message, parameters));
         }
     }
 
+    /**
+     * Represents the tracing configuration for the value of a setting.
+     *
+     * @param source the configuration source
+     * @param name   the name of the setting
+     * @param value  the name of the setting
+     */
     public static void configuration(String source, String name, String value) {
         if (isEnabled) {
             synchronized (interceptors) {
@@ -122,6 +140,11 @@ public abstract class ServiceClientTracing {
         }
     }
 
+    /**
+     * Write the informational tracing message.
+     *
+     * @param message the message to trace
+     */
     public static void information(String message) {
         if (isEnabled) {
             synchronized (interceptors) {
@@ -132,6 +155,14 @@ public abstract class ServiceClientTracing {
         }
     }
 
+    /**
+     * Represents the tracing entry.
+     *
+     * @param invocationId the invocation identifier
+     * @param instance     the tracing instance
+     * @param method       the tracing method
+     * @param parameters   method parameters
+     */
     public static void enter(String invocationId, Object instance,
             String method, HashMap<String, Object> parameters) {
         if (isEnabled) {
@@ -143,6 +174,12 @@ public abstract class ServiceClientTracing {
         }
     }
 
+    /**
+     * Sends a tracing request.
+     *
+     * @param invocationId the invocation identifier
+     * @param request      the request about to be sent
+     */
     public static void sendRequest(String invocationId, HttpRequest request) {
         if (isEnabled) {
             synchronized (interceptors) {
@@ -153,6 +190,12 @@ public abstract class ServiceClientTracing {
         }
     }
 
+    /**
+     * Receives a tracing response.
+     *
+     * @param invocationId the invocation identifier
+     * @param response     the response message instance
+     */
     public static void receiveResponse(String invocationId,
             HttpResponse response) {
         if (isEnabled) {
@@ -164,6 +207,12 @@ public abstract class ServiceClientTracing {
         }
     }
 
+    /**
+     * Represents the tracing error.
+     *
+     * @param invocationId the invocation identifier
+     * @param ex           the tracing exception
+     */
     public static void error(String invocationId, Exception ex) {
         if (isEnabled) {
             synchronized (interceptors) {
@@ -174,6 +223,12 @@ public abstract class ServiceClientTracing {
         }
     }
 
+    /**
+     * Abandons the tracing method.
+     *
+     * @param invocationId the invocation identifier
+     * @param result       method return result
+     */
     public static void exit(String invocationId, Object result) {
         if (isEnabled) {
             synchronized (interceptors) {
