@@ -1,5 +1,5 @@
 # Error Handling
-To access information about HTTP errors, including the HTTP request and response, use the `HttpOperationException` class as follows:
+When errors are encountered while executing client operations, they are surfaced with an `HttpOperationException`. The exception includes the HTTP Request and Response objects as shown in this example:
 ```csharp
 try
 {
@@ -11,7 +11,7 @@ catch (HttpOperationException ex)
     var response = ex.Response;
 }
 ```
-Many service operations have service specific error data, use the `HttpOperationException<T>` class to access this data:
+Many services define models for error conditions. Use the `HttpOperationException<T>` class to access the specific error type:
 ```csharp
 try
 {
@@ -19,9 +19,10 @@ try
 }
 catch (HttpOperationException<ErrorModel> ex)
 {
-    var errorData = ex.Body;
-    var message = errorData.Message;
     var request = ex.Request;
     var response = ex.Response;
+  
+    var errorData = ex.Body;
+    var message = errorData.Message;
 }
 ```
