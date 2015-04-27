@@ -1,50 +1,53 @@
-#AutoRest Command Line Interface Documentation
+#AutoRest Command-Line Documentation
 
 ##Syntax
 ```bash
-AutoRest.exe -Input <value> -Namespace <value> [-OutputDirectory <value>] [-OutputFileName <value>] [-CodeGenerator <value>] [-Modeler <value>] [-ClientName <value>] [-Header <value>] [-AddCredentials <value>] 
+AutoRest.exe -Input <value> -Namespace <value> 
+            [-OutputDirectory <value>] 
+            [-OutputFileName <value>] 
+            [-CodeGenerator <value>] 
+            [-Modeler <value>] 
+            [-ClientName <value>] 
+            [-Header <value>] 
+            [-AddCredentials <value>] 
 ```
 
 ##Parameters
-**-OutputDirectory** Output directory for generated files. Defaults to Generated directory.
+**-OutputDirectory** Output directory for generated files. Defaults to `.\Generated` directory.
 
-**-OutputFileName** Output file name. If specified, all the generated code is written into this single file. Otherwise, AutoRest will split code by operations and models and write individual files into OutputDirectory.
+**-OutputFileName** Output file name. If specified, all generated code is written into this single file. By default, AutoRest splits code by operations and models and writes individual files into *OutputDirectory*.
 
-**-CodeGenerator** Code generation language. If not specified, will default to CSharp.
+**-CodeGenerator** If not provided, defaults to CSharp. Specifies the name of the code generator to use. Available code generators are defined in the *AutoRest.json* settings file.
 
-**-Modeler** Modeler for the input specification. If not specified, will default to Swagger.
+**-Modeler** If note provided, defaults to Swagger. Specifies the name of the modeler to use in processing the `Input`. Available modelers are defined in the the *AutoRest.json* settings file.
 
 **-Input** Path to the input specification file.
 
-**-Namespace** Namespace for generated code
+**-Namespace** Namespace to use, where applicable, for the generated code
 
-**-ClientName** Name of the generated client type. If not specified, will default to the value in the specification. For Swagger specifications, this is the value in the 'Title' field.
+**-ClientName** Name of the generated client type. If not specified, the modeler will select a value from the specification. For Swagger specifications, the client name is taken from the **Title** field.
 
-**-Header** Header to be included in each generated file as a comment. Use NONE if no header is required.
+**-Header** Specifies header text to be included in each generated file as a comment. Pass `NONE` to suppress the default AutoRest header.
 
-**-AddCredentials** If set to true the generated service client will have a ServiceClientCredentials property. The constructors will include a parameter for passing the credentials object. When processing HTTP requests, the ProcessHtppRequestAsync method of the credentials object will be invoked. Custom authentication behaviors can be added to the generated client by passing in types that derive from ServiceClientCredentials. 
-
-
+**-AddCredentials** If `true` the generated client includes a **Credentials** property. The constructors include a parameter for passing the credentials object. The credentials object includes a **ProcessHttpRequestAsync** method that is called for each HTTP requests. Custom authentication behaviors can be added to the generated client by providing a type that derives from [ServiceClientCredentials](../Microsoft.Rest/ClientRuntime/ServiceClientCredenetials.cs). 
 
 ##Examples
-- Generate C# client library from a Swagger-formatted input specification `swagger.json` in the `MyNamespace` namespace:
+- Generate a C# client from a Swagger-formatted input  `swagger.json` in the `MyNamespace` namespace:
 ```bash
 AutoRest.exe -Input swagger.json -Namespace MyNamespace
 ```
 
-- Generate C# client library from a Swagger-formatted input specification `swagger.json` in the `MyNamespace` namespace:
+- Generate a C# client from a Swagger-formatted input `swagger.json` in the `MyNamespace` namespace:
 ```bash
 AutoRest.exe -Input swagger.json -Namespace MyNamespace -Modeler Swagger -CodeGenerator CSharp  
 ```
 
-- Generate C# client library from a Swagger-formatted input specification `swagger.json` with namespace `MyNamespace` into the `client.cs` file with custom header text:
+- Generate a C# client from a Swagger-formatted input specification `swagger.json` with namespace `MyNamespace` into the `client.cs` file with custom header text:
 ```bash
 AutoRest.exe -Input swagger.json -Namespace MyNamespace -OutputAsSingleFile client.cs -Modeler Swagger -CodeGenerator CSharp -Header "Copyright Contoso Ltd"
 ```
 
-- Generate C# client library from a Swagger-formatted input specification `swagger.json` in the `MyNamespace` namespace and include a credential property:
+- Generate a C# client from a Swagger-formatted input specification `swagger.json` in the `MyNamespace` namespace and include a ServiceClientCredentials property:
 ```bash
 AutoRest.exe -Input swagger.json -Namespace MyNamespace -Modeler Swagger -CodeGenerator CSharp -AddCredentials true
 ```
-
-
