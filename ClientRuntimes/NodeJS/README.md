@@ -1,6 +1,6 @@
 # MS-Rest
 
-Infrastructure for error handling, tracing, and http client pipeline configuration. Required by NodeJS client libraries generated using AutoRest.
+Infrastructure for error handling, tracing, and http client pipeline configuration. Required by nodeJS client libraries generated using AutoRest.
 
 - **Node.js version: 0.6.15 or higher**
 
