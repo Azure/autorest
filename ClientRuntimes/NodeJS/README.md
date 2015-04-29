@@ -11,6 +11,6 @@ Infrastructure for error handling, tracing, and http client pipeline configurati
 npm install ms-rest
 ```
 
-##Related Projects
+## Related Projects
 
 - [AutoRest](https://github.com/Azure/AutoRest)
