@@ -8,7 +8,7 @@ var http = require('http');
 var util = require('util');
 
 var ps = require('./data/swaggerPetstore');
-var clientRuntime = require('../lib/clientRuntime');
+var msRest = require('../lib/msRest');
 
 describe('nodejs', function () {
   var suite;
@@ -21,7 +21,7 @@ describe('nodejs', function () {
     });
     server.listen(1337, '127.0.0.1');
     console.log('Server running at http://127.0.0.1:1337/');
-    credentials = new clientRuntime.TokenCredentials({
+    credentials = new msRest.TokenCredentials({
       authorizationScheme: "Bearer",
       token: "<your token here>"
     });
