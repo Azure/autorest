@@ -16,9 +16,9 @@
 
 var should = require('should');
 
-var clientRuntime = require('../lib/clientRuntime');
-var TokenCredentials = clientRuntime.TokenCredentials;
-var BasicAuthenticationCredentials = clientRuntime.BasicAuthenticationCredentials;
+var msRest = require('../lib/msRest');
+var TokenCredentials = msRest.TokenCredentials;
+var BasicAuthenticationCredentials = msRest.BasicAuthenticationCredentials;
 var dummyToken = 'A-dummy-access-token';
 var fakeScheme = 'fake-auth-scheme';
 var dummyuserName = 'dummy@mummy.com';

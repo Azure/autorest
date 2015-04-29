@@ -9,7 +9,7 @@
   "description": "Infrastructure for error handling, tracing, and http client pipeline configuration. Required by client libraries generated using AutoRest.",
   "tags": ["node", "microsoft", "autorest", "clientruntime"],
   "keywords": ["node", "microsoft", "autorest", "clientruntime"],
-  "main": "./lib/common.js",
+  "main": "./lib/msRest.js",
   "engines": {
     "node": ">= 0.6.15"
   },

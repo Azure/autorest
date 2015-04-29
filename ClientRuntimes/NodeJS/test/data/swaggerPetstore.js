@@ -11,7 +11,7 @@
 'use strict';
 
 var util = require('util');
-var azureCommon = require('../../lib/clientRuntime');
+var azureCommon = require('../../lib/msRest');
 var ServiceClient = azureCommon.ServiceClient;
 var HttpOperationResponse = azureCommon.HttpOperationResponse;
 var WebResource = azureCommon.WebResource;
