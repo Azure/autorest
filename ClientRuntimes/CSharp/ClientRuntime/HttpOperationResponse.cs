@@ -8,7 +8,18 @@ namespace Microsoft.Rest
     /// <summary>
     /// Represents the base return type of all ServiceClient REST operations.
     /// </summary>
-    public class HttpOperationResponse<T>
+    public class HttpOperationResponse<T> : HttpOperationResponse
+    {
+        /// <summary>
+        /// Gets or sets the response object.
+        /// </summary>
+        public T Body { get; set; }
+    }
+
+    /// <summary>
+    /// Represents the base return type of all ServiceClient REST operations without response body.
+    /// </summary>
+    public class HttpOperationResponse
     {
         /// <summary>
         /// Gets information about the associated HTTP request.
@@ -19,10 +30,5 @@ namespace Microsoft.Rest
         /// Gets information about the associated HTTP response.
         /// </summary>
         public HttpResponseMessage Response { get; set; }
-
-        /// <summary>
-        /// Gets or sets the response object.
-        /// </summary>
-        public T Body { get; set; }
     }
 }
