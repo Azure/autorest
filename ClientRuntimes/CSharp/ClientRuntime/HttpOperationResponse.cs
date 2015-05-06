@@ -25,4 +25,20 @@ namespace Microsoft.Rest
         /// </summary>
         public T Body { get; set; }
     }
+
+    /// <summary>
+    /// Represents the base return type of all ServiceClient REST operations without response body.
+    /// </summary>
+    public class HttpOperationResponse
+    {
+        /// <summary>
+        /// Gets information about the associated HTTP request.
+        /// </summary>
+        public HttpRequestMessage Request { get; set; }
+
+        /// <summary>
+        /// Gets information about the associated HTTP response.
+        /// </summary>
+        public HttpResponseMessage Response { get; set; }
+    }
 }
