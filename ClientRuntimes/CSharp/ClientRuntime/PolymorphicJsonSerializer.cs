@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
@@ -71,7 +72,7 @@ namespace Microsoft.Rest
             writer.WriteValue(typeName);
 
             PropertyInfo[] properties = value.GetType().GetProperties();
-            foreach (var property in properties.Where(p => p.SetMethod != null))
+            foreach (var property in properties)
             {
                 string propertyName = property.Name;
                 if (property.GetCustomAttributes<JsonPropertyAttribute>().Any())
@@ -84,4 +85,18 @@ namespace Microsoft.Rest
             writer.WriteEndObject();
         }
     }
+#if !NET45
+    public static class AttributeExtensions
+    {
+        public static IEnumerable<T> GetCustomAttributes<T>(this MemberInfo memberInfo) where T : class
+        {
+            return memberInfo.GetCustomAttributes(typeof(T), true).Select(a => a as T);
+        }
+
+        public static T GetCustomAttribute<T>(this MemberInfo memberInfo) where T : class
+        {
+            return memberInfo.GetCustomAttributes(typeof(T), true).First() as T;
+        }
+    }
+#endif
 }
