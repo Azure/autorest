@@ -5,7 +5,7 @@
     Microsoft.Rest.ClientRuntime
     -->
     <SdkNuGetPackage Include="Microsoft.Rest.ClientRuntime">
-      <PackageVersion>0.9.7</PackageVersion>
+      <PackageVersion>0.9.7.1</PackageVersion>
       <Folder>$(MSBuildThisFileDirectory)</Folder>
     </SdkNuGetPackage>
   </ItemGroup>
