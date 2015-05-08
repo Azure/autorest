@@ -14,15 +14,15 @@ namespace Microsoft.Rest
     /// based on discriminator field.
     /// </summary>
     /// <typeparam name="T">The base type.</typeparam>
-    public class PolymorphicJsonSerializer<T> : JsonConverter where T : new()
+    public class PolymorphicSerializeJsonConverter<T> : JsonConverter where T : new()
     {
         private readonly string _discriminatorField;
 
         /// <summary>
-        /// Initializes an instance of the PolymorphicJsonSerializer.
+        /// Initializes an instance of the PolymorphicSerializeJsonConverter.
         /// </summary>
         /// <param name="discriminatorField">The JSON field used as a discriminator</param>
-        public PolymorphicJsonSerializer(string discriminatorField)
+        public PolymorphicSerializeJsonConverter(string discriminatorField)
         {
             this._discriminatorField = discriminatorField;
         }
@@ -61,6 +61,19 @@ namespace Microsoft.Rest
         public override void WriteJson(JsonWriter writer,
             object value, JsonSerializer serializer)
         {
+            if (writer == null)
+            {
+                throw new ArgumentNullException("writer");
+            }
+            if (value == null)
+            {
+                throw new ArgumentNullException("value");
+            }
+            if (serializer == null)
+            {
+                throw new ArgumentNullException("serializer");
+            }
+
             string typeName = value.GetType().Name;
             if (value.GetType().GetCustomAttributes<JsonObjectAttribute>().Any())
             {
@@ -90,11 +103,19 @@ namespace Microsoft.Rest
     {
         public static IEnumerable<T> GetCustomAttributes<T>(this MemberInfo memberInfo) where T : class
         {
+            if (memberInfo == null)
+            {
+                return Enumerable.Empty<T>();
+            }
             return memberInfo.GetCustomAttributes(typeof(T), true).Select(a => a as T);
         }
 
         public static T GetCustomAttribute<T>(this MemberInfo memberInfo) where T : class
         {
+            if (memberInfo == null)
+            {
+                return null;
+            }
             return memberInfo.GetCustomAttributes(typeof(T), true).First() as T;
         }
     }

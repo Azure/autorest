@@ -23,11 +23,11 @@ namespace Microsoft.Rest.ClientRuntime.Tests
             zoo.Animals.Add(new Cat() { Name = "Felix", LikesMice = false, Dislikes = new Dog() { Name = "Angry", LikesDogfood = true } });
             var serializeSettings = new JsonSerializerSettings();
             serializeSettings.ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
-            serializeSettings.Converters.Add(new PolymorphicJsonSerializer<Animal>("dType"));
+            serializeSettings.Converters.Add(new PolymorphicSerializeJsonConverter<Animal>("dType"));
 
             var deserializeSettings = new JsonSerializerSettings();
             deserializeSettings.ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
-            deserializeSettings.Converters.Add(new PolymorphicJsonDeserializer<Animal>("dType"));
+            deserializeSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<Animal>("dType"));
 
             var serializedJson = JsonConvert.SerializeObject(zoo, Formatting.Indented, serializeSettings);
             var zoo2 = JsonConvert.DeserializeObject<Zoo>(serializedJson, deserializeSettings);

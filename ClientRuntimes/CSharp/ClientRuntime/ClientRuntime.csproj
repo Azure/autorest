@@ -19,10 +19,10 @@
     <Compile Include="BasicAuthenticationCredentials.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HttpExtensions.cs" />
-    <Compile Include="PolymorphicJsonDeserializer.cs" />
+    <Compile Include="PolymorphicDeserializeJsonConverter.cs" />
     <Compile Include="TokenCredentials.cs" />
     <Compile Include="TransientFaultHandling\RetryCondition.cs" />
-    <Compile Include="PolymorphicJsonSerializer.cs" />
+    <Compile Include="PolymorphicSerializeJsonConverter.cs" />
     <Compile Include="TypeConversion.cs" />
     <Compile Include="ILazyCollection.cs" />
     <Compile Include="LazyDictionary.cs" />

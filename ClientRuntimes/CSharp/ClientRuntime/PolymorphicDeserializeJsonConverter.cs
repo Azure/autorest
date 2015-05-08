@@ -14,15 +14,15 @@ namespace Microsoft.Rest
     /// based on discriminator field.
     /// </summary>
     /// <typeparam name="T">The base type.</typeparam>
-    public class PolymorphicJsonDeserializer<T> : JsonConverter where T : new()
+    public class PolymorphicDeserializeJsonConverter<T> : JsonConverter where T : new()
     {
         private readonly string _discriminatorField;
 
         /// <summary>
-        /// Initializes an instance of the PolymorphicJsonDeserializer.
+        /// Initializes an instance of the PolymorphicDeserializeJsonConverter.
         /// </summary>
         /// <param name="discriminatorField">The JSON field used as a discriminator</param>
-        public PolymorphicJsonDeserializer(string discriminatorField)
+        public PolymorphicDeserializeJsonConverter(string discriminatorField)
         {
             this._discriminatorField = discriminatorField;
         }
