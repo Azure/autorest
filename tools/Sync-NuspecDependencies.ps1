@@ -34,11 +34,12 @@ function SyncNuspecFile([string]$FolderPath)
         $packageVersion = $nuproj.Project.ItemGroup.SdkNuGetPackage.PackageVersion
         $packageVersion = ([regex]"[\d\.]+").Match($packageVersion).Value
         $tokens = $packageVersion.split(".")
-        if ($tokens.Length -ne 3) {
-            Throw "Invalid package version from $nuproj"
-        }
         $majorVersion = $tokens[0]
-        $assemblyFileVersion = "$packageVersion.0" 
+        if ($tokens.Length -eq 3) {
+            $assemblyFileVersion = "$packageVersion.0" 
+        } else {
+            $assemblyFileVersion = "$packageVersion"
+        }
         $assemblyContent = $assemblyContent -replace "\[assembly\:\s*AssemblyFileVersion\s*\(\s*`"[\d\.\s]+`"\s*\)\s*\]","[assembly: AssemblyFileVersion(`"$assemblyFileVersion`")]"
 
         #Updating AssemblyVersion

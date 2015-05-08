@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Microsoft.Rest.ClientRuntime.Tests
 {
-    public class ServiceClientTest
+    public class ServiceClientTests
     {
         [Fact]
         public void ClientAddHandlerToPipelineAddsHandler()
