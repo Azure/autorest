@@ -30,7 +30,9 @@
     <Compile Include="Internals\LazyDictionaryTest.cs" />
     <Compile Include="Internals\LazyListTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceClientTest.cs" />
+    <Compile Include="JsonSerializationTests.cs" />
+    <Compile Include="Resources\Animal.cs" />
+    <Compile Include="ServiceClientTests.cs" />
     <Compile Include="Tracing\CloudTracingExtensionsTest.cs" />
     <Compile Include="TransientFaultHandling\DefaultHttpErrorDetectionStrategyTests.cs" />
     <Compile Include="TransientFaultHandling\GeneralRetryPolicyTests.cs" />
