@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using Newtonsoft.Json;
 
 namespace Microsoft.Rest.ClientRuntime.Tests.Resources
@@ -28,6 +29,46 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Resources
 
         [JsonProperty("dislikes")]
         public Animal Dislikes { get; set; }
+    }
+
+    [JsonObject("siamese")]
+    public class Siamese : Cat
+    {
+        [JsonProperty("color")]
+        public string Color { get; private set; }
+    }
+
+    [JsonObject("alien")]
+    public class Alien
+    {
+        public Alien()
+        {
+            
+        }
+
+        public Alien(string color)
+        {
+            Color = color;
+        }
+
+        private string _planet;
+
+        [JsonProperty("planet")]
+        public string Planet { set { _planet = value; } }
+
+        [JsonProperty("color")]
+        public string Color { get; private set; }
+
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        [JsonProperty("body")]
+        public dynamic Body { get; set; }
+
+        public string GetPlanetName()
+        {
+            return _planet;
+        }
     }
 
     public class Zoo

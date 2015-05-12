@@ -6,8 +6,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
 
-namespace Microsoft.Rest
+namespace Microsoft.Rest.JsonSerialization
 {
     /// <summary>
     /// JsonConverter that handles serialization for polymorphic objects
@@ -80,20 +82,44 @@ namespace Microsoft.Rest
                 typeName = value.GetType().GetCustomAttribute<JsonObjectAttribute>().Id;
             }
 
+            // Add discriminator field
             writer.WriteStartObject();
             writer.WritePropertyName(_discriminatorField);
             writer.WriteValue(typeName);
 
+            // Getting contract to determine property bindings
+            var contract = (JsonObjectContract)serializer.ContractResolver.ResolveContract(value.GetType());
+
             PropertyInfo[] properties = value.GetType().GetProperties();
-            foreach (var property in properties)
+            // Getting all properties with public get method
+            foreach (var propertyInfo in properties.Where(p => p.GetGetMethod() != null))
             {
-                string propertyName = property.Name;
-                if (property.GetCustomAttributes<JsonPropertyAttribute>().Any())
+                // Get property name via reflection or from JsonProperty attribute
+                string propertyName = propertyInfo.Name;
+                if (propertyInfo.GetCustomAttributes<JsonPropertyAttribute>().Any())
                 {
-                    propertyName = property.GetCustomAttribute<JsonPropertyAttribute>().PropertyName;
+                    propertyName = propertyInfo.GetCustomAttribute<JsonPropertyAttribute>().PropertyName;
                 }
-                writer.WritePropertyName(propertyName);
-                serializer.Serialize(writer, property.GetValue(value, null));
+
+                // Skipping properties with null value if NullValueHandling is set to Ignore
+                if (serializer.NullValueHandling == NullValueHandling.Ignore &&
+                    propertyInfo.GetValue(value, null) == null)
+                {
+                    continue;
+                }
+
+                // Skipping properties with JsonIgnore attribute, non-readable, and 
+                // ShouldSerialize returning false when set
+                if (!contract.Properties[propertyName].Ignored &&
+                    contract.Properties[propertyName].Readable &&
+                    (contract.Properties[propertyName].ShouldSerialize == null ||
+                    contract.Properties[propertyName].ShouldSerialize(propertyInfo.GetValue(value, null))))
+                {
+                    writer.WritePropertyName(propertyName);
+                    serializer.Serialize(
+                        writer,
+                        propertyInfo.GetValue(value, null));
+                }
             }
             writer.WriteEndObject();
         }
