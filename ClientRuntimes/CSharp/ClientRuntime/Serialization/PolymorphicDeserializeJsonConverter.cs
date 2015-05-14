@@ -7,7 +7,7 @@ using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Microsoft.Rest.JsonSerialization
+namespace Microsoft.Rest.Serialization
 {
     /// <summary>
     /// JsonConverter that handles deserialization for polymorphic objects

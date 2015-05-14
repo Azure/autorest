@@ -19,9 +19,9 @@
     <Compile Include="BasicAuthenticationCredentials.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HttpExtensions.cs" />
-    <Compile Include="JsonSerialization\PolymorphicDeserializeJsonConverter.cs" />
-    <Compile Include="JsonSerialization\PolymorphicSerializeJsonConverter.cs" />
-    <Compile Include="JsonSerialization\ReadOnlyJsonContractResolver.cs" />
+    <Compile Include="Serialization\PolymorphicDeserializeJsonConverter.cs" />
+    <Compile Include="Serialization\PolymorphicSerializeJsonConverter.cs" />
+    <Compile Include="Serialization\ReadOnlyJsonContractResolver.cs" />
     <Compile Include="TokenCredentials.cs" />
     <Compile Include="TransientFaultHandling\RetryCondition.cs" />
     <Compile Include="TypeConversion.cs" />
