@@ -2,14 +2,12 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 
-namespace Microsoft.Rest.JsonSerialization
+namespace Microsoft.Rest.Serialization
 {
     /// <summary>
     /// JsonConverter that handles serialization for polymorphic objects

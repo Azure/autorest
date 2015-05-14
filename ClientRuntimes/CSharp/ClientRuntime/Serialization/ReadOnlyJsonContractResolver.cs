@@ -5,7 +5,7 @@ using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace Microsoft.Rest.JsonSerialization
+namespace Microsoft.Rest.Serialization
 {
     /// <summary>
     /// JSON contract resolver that ignores read-only properties during serialization.
