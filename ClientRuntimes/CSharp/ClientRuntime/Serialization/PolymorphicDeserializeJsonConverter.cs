@@ -14,7 +14,7 @@ namespace Microsoft.Rest.Serialization
     /// based on discriminator field.
     /// </summary>
     /// <typeparam name="T">The base type.</typeparam>
-    public class PolymorphicDeserializeJsonConverter<T> : JsonConverter where T : new()
+    public class PolymorphicDeserializeJsonConverter<T> : JsonConverter where T : class
     {
         private readonly string _discriminatorField;
 
