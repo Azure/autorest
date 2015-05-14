@@ -27,8 +27,6 @@
     <Compile Include="Fakes\FakeServiceClientWithCredentials.cs" />
     <Compile Include="Fakes\FakeServiceClient.cs" />
     <Compile Include="Fakes\RecordedDelegatingHandler.cs" />
-    <Compile Include="Internals\LazyDictionaryTest.cs" />
-    <Compile Include="Internals\LazyListTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="JsonSerializationTests.cs" />
     <Compile Include="Resources\Animal.cs" />
