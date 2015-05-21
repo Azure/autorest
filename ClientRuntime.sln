@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{868850B4-1073-41A1-ABA8-A3B465880148}"
 EndProject
@@ -75,9 +75,7 @@ Global
 		{B2FAA0E6-2643-4011-8CFE-BA28BDFFC7E7}.Portable-Debug|Any CPU.ActiveCfg = Portable-Debug|Any CPU
 		{B2FAA0E6-2643-4011-8CFE-BA28BDFFC7E7}.Portable-Release|Any CPU.ActiveCfg = Portable-Release|Any CPU
 		{CB18ACEB-2825-4884-91FA-05C31AC779FE}.Net40-Debug|Any CPU.ActiveCfg = Net40-Debug|Any CPU
-		{CB18ACEB-2825-4884-91FA-05C31AC779FE}.Net40-Debug|Any CPU.Build.0 = Net40-Debug|Any CPU
 		{CB18ACEB-2825-4884-91FA-05C31AC779FE}.Net40-Release|Any CPU.ActiveCfg = Net40-Release|Any CPU
-		{CB18ACEB-2825-4884-91FA-05C31AC779FE}.Net40-Release|Any CPU.Build.0 = Net40-Release|Any CPU
 		{CB18ACEB-2825-4884-91FA-05C31AC779FE}.Net45-Debug|Any CPU.ActiveCfg = Net45-Debug|Any CPU
 		{CB18ACEB-2825-4884-91FA-05C31AC779FE}.Net45-Debug|Any CPU.Build.0 = Net45-Debug|Any CPU
 		{CB18ACEB-2825-4884-91FA-05C31AC779FE}.Net45-Release|Any CPU.ActiveCfg = Net45-Release|Any CPU
@@ -97,17 +95,13 @@ Global
 		{856A1D19-C3BF-439A-BEBF-E822A332BC12}.Portable-Release|Any CPU.ActiveCfg = Portable-Release|Any CPU
 		{856A1D19-C3BF-439A-BEBF-E822A332BC12}.Portable-Release|Any CPU.Build.0 = Portable-Release|Any CPU
 		{8B10D480-4A8A-47B5-9574-AA8E79F431DB}.Net40-Debug|Any CPU.ActiveCfg = Net40-Debug|Any CPU
-		{8B10D480-4A8A-47B5-9574-AA8E79F431DB}.Net40-Debug|Any CPU.Build.0 = Net40-Debug|Any CPU
 		{8B10D480-4A8A-47B5-9574-AA8E79F431DB}.Net40-Release|Any CPU.ActiveCfg = Net40-Release|Any CPU
-		{8B10D480-4A8A-47B5-9574-AA8E79F431DB}.Net40-Release|Any CPU.Build.0 = Net40-Release|Any CPU
 		{8B10D480-4A8A-47B5-9574-AA8E79F431DB}.Net45-Debug|Any CPU.ActiveCfg = Net45-Debug|Any CPU
 		{8B10D480-4A8A-47B5-9574-AA8E79F431DB}.Net45-Debug|Any CPU.Build.0 = Net45-Debug|Any CPU
 		{8B10D480-4A8A-47B5-9574-AA8E79F431DB}.Net45-Release|Any CPU.ActiveCfg = Net45-Release|Any CPU
 		{8B10D480-4A8A-47B5-9574-AA8E79F431DB}.Net45-Release|Any CPU.Build.0 = Net45-Release|Any CPU
 		{8B10D480-4A8A-47B5-9574-AA8E79F431DB}.Portable-Debug|Any CPU.ActiveCfg = Portable-Debug|Any CPU
-		{8B10D480-4A8A-47B5-9574-AA8E79F431DB}.Portable-Debug|Any CPU.Build.0 = Portable-Debug|Any CPU
 		{8B10D480-4A8A-47B5-9574-AA8E79F431DB}.Portable-Release|Any CPU.ActiveCfg = Portable-Release|Any CPU
-		{8B10D480-4A8A-47B5-9574-AA8E79F431DB}.Portable-Release|Any CPU.Build.0 = Portable-Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

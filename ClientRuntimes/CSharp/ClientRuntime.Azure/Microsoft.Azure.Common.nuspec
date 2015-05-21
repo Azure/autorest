@@ -35,7 +35,7 @@ Supported Portable Library Platforms:
       </group>
     </references>
     <dependencies>
-      <dependency id="Microsoft.Rest.ClientRuntime" version="0.9.7.3" />
+      <dependency id="Microsoft.Rest.ClientRuntime" version="__VERSION_Microsoft.Rest.ClientRuntime__" />
     </dependencies>
   </metadata>
   <files>

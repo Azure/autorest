@@ -113,7 +113,7 @@
   </Target>
   
   <!-- Run all tests. -->
-  <UsingTask TaskName="Xunit.Runner.msbuild.xunit" AssemblyFile="packages\xunit.1.9.2\lib\net20\xunit.runner.msbuild.dll" />
+  <UsingTask TaskName="Xunit.Runner.msbuild.xunit" AssemblyFile="packages\xunit.runner.msbuild.2.0.0\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.runner.msbuild.dll" />
   <Target Name="Test">
     <ItemGroup>
       <TestDlls Include=".\**\*.Tests\bin\*\*Tests.dll"/>
