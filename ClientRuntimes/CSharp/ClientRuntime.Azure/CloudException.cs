@@ -3,11 +3,12 @@
 
 using System;
 using System.Net.Http;
+using Microsoft.Rest;
 
-namespace Microsoft.Rest
+namespace Microsoft.Azure
 {
     /// <summary>
-    /// Exception thrown for an invalid response with custom error information.
+    /// An exception generated from an http response returned from a Microsoft Azure service
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage(
         "Microsoft.Design",
@@ -15,8 +16,8 @@ namespace Microsoft.Rest
      System.Diagnostics.CodeAnalysis.SuppressMessage(
          "Microsoft.Usage",
          "CA2237:MarkISerializableTypesWithSerializable",
-         Justification = "HttpRequestException hides the constructor needed for serialization.")]
-    public class HttpOperationException : HttpRequestException
+         Justification = "CloudException hides the constructor needed for serialization.")]
+    public class CloudException : HttpRequestException
     {
         /// <summary>
         /// Gets information about the associated HTTP request.
@@ -31,32 +32,29 @@ namespace Microsoft.Rest
         /// <summary>
         /// Gets or sets the response object.
         /// </summary>
-        public object Body { get; set; }
+        public CloudError Body { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the HttpOperationException class.
+        /// Initializes a new instance of the CloudException class.
         /// </summary>
-        public HttpOperationException()
-            : base()
+        public CloudException() : base()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the HttpOperationException class.
+        /// Initializes a new instance of the CloudException class given exception message.
         /// </summary>
-        /// <param name="message">The exception message.</param>
-        public HttpOperationException(string message)
-            : this(message, null)
+        /// <param name="message">A message describing the error.</param>
+        public CloudException(string message) : base(message)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the HttpOperationException class.
+        /// Initializes a new instance of the CloudException class caused by another exception.
         /// </summary>
-        /// <param name="message">The exception message.</param>
-        /// <param name="innerException">Inner exception.</param>
-        public HttpOperationException(string message, Exception innerException)
-            : base(message, innerException)
+        /// <param name="message">A description of the error.</param>
+        /// <param name="innerException">The exception which caused the current exception.</param>
+        public CloudException(string message, Exception innerException) : base(message, innerException)
         {
         }
     }

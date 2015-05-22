@@ -20,4 +20,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCulture("")]
 [assembly: NeutralResourcesLanguage("en")]
 [assembly: CLSCompliant(true)]
-[assembly: ComVisibleAttribute(false)]
+[assembly: ComVisible(false)]
