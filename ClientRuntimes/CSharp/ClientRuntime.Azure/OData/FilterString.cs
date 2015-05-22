@@ -4,12 +4,12 @@
 using System;
 using System.Linq.Expressions;
 
-namespace Microsoft.Azure.Common.OData
+namespace Microsoft.Azure.OData
 {
     /// <summary>
     /// Handles OData filter generation.
     /// </summary>
-    public class FilterString
+    public static class FilterString
     {
         /// <summary>
         /// Generates an OData filter from a specified Linq expression.

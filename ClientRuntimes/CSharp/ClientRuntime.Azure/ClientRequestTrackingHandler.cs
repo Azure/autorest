@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Threading;
 
@@ -37,6 +39,10 @@ namespace Microsoft.Azure
         protected override HttpRequestMessage ProcessRequest(HttpRequestMessage request, 
             CancellationToken cancellationToken)
         {
+            if (request == null)
+            {
+                throw new ArgumentNullException("request");
+            }
             request.Headers.Add("client-tracking-id", TrackingId);
             return request;
         }
@@ -50,6 +56,10 @@ namespace Microsoft.Azure
        protected override HttpResponseMessage ProcessResponse(HttpResponseMessage response, 
            CancellationToken cancellationToken)
         {
+            if (response == null)
+            {
+                throw new ArgumentNullException("response");
+            }
             response.Headers.Add("client-tracking-id", TrackingId);
             return response;
         }

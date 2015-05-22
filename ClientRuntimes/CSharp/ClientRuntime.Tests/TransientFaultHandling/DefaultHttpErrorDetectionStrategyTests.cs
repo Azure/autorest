@@ -5,7 +5,6 @@ using System;
 using System.Net;
 using Microsoft.Rest.TransientFaultHandling;
 using Xunit;
-using Xunit.Extensions;
 
 namespace Microsoft.Rest.ClientRuntime.Tests.TransientFaultHandling
 {

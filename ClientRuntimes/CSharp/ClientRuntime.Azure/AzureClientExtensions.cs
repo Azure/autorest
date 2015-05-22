@@ -30,7 +30,7 @@ namespace Microsoft.Azure
         public static async Task<AzureOperationResponse<T>> GetPutOperationResultAsync<T>(this IAzureClient client, 
             AzureOperationResponse<T> response,
             Func<Task<AzureOperationResponse<T>>> getOperationAction,
-            CancellationToken cancellationToken = default(System.Threading.CancellationToken)) where T : Resource
+            CancellationToken cancellationToken) where T : Resource
         {
             if (response == null)
             {
@@ -128,7 +128,7 @@ namespace Microsoft.Azure
         /// <returns>Operation response</returns>
         public static async Task<AzureOperationResponse> GetPostOrDeleteOperationResultAsync(this IAzureClient client,
             AzureOperationResponse response,
-            CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            CancellationToken cancellationToken)
         {
             if (response == null)
             {
@@ -253,7 +253,7 @@ namespace Microsoft.Azure
         public static async Task<AzureOperationResponse<AzureAsyncOperation>> GetLongRunningOperationStatusAsync(
             this IAzureClient client,
             string operationUrl, 
-            CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            CancellationToken cancellationToken)
         {
             // Validate
             if (operationUrl == null)

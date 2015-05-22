@@ -3,7 +3,7 @@
 
 using System;
 using System.Linq;
-using Microsoft.Azure.Common.OData;
+using Microsoft.Azure.OData;
 using Newtonsoft.Json;
 using Xunit;
 

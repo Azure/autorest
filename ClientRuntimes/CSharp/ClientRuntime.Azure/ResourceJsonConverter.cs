@@ -2,16 +2,12 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
-using Microsoft.Azure;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
 
-namespace Microsoft.Rest.Serialization
+namespace Microsoft.Azure
 {
     /// <summary>
     /// JsonConverter that provides custom serialization for resource-based objects.
@@ -124,6 +120,10 @@ namespace Microsoft.Rest.Serialization
         /// <returns></returns>
         protected JsonSerializer GetSerializerWithoutCurrentConverter(JsonSerializer serializer)
         {
+            if (serializer == null)
+            {
+                throw new ArgumentNullException("serializer");
+            }
             JsonSerializer newSerializer = new JsonSerializer();
             PropertyInfo[] properties = typeof(JsonSerializer).GetProperties();
             foreach (var property in properties.Where(p => p.GetSetMethod() != null))

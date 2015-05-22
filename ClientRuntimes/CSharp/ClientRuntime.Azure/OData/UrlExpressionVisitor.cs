@@ -2,14 +2,14 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using Microsoft.Rest.Serialization;
 using Newtonsoft.Json;
 
-namespace Microsoft.Azure.Common.OData
+namespace Microsoft.Azure.OData
 {
     /// <summary>
     /// Expression visitor class that generates OData style $filter parameter.
@@ -27,6 +27,10 @@ namespace Microsoft.Azure.Common.OData
         /// <returns>Original node.</returns>
         protected override Expression VisitBinary(BinaryExpression node)
         {
+            if (node == null)
+            {
+                throw new ArgumentNullException("node");
+            }
             this.Visit(node.Left);
 
             _generatedUrl.Append(" " + GetODataOperatorName(node.NodeType) + " ");
@@ -45,6 +49,10 @@ namespace Microsoft.Azure.Common.OData
         /// <returns>Original node.</returns>
         protected override Expression VisitUnary(UnaryExpression node)
         {
+            if (node == null)
+            {
+                throw new ArgumentNullException("node");
+            }
             if (node.NodeType == ExpressionType.Not)
             {
                 throw new NotSupportedException(
@@ -74,6 +82,10 @@ namespace Microsoft.Azure.Common.OData
         /// <returns>Original node.</returns>
         protected override Expression VisitNew(NewExpression node)
         {
+            if (node == null)
+            {
+                throw new ArgumentNullException("node");
+            }
             var newObject = node.Constructor.Invoke(node.Arguments.Select(a => ((ConstantExpression)a).Value).ToArray());
             PrintConstant(newObject);
 
@@ -87,6 +99,10 @@ namespace Microsoft.Azure.Common.OData
         /// <returns>Original node.</returns>
         protected override Expression VisitConstant(ConstantExpression node)
         {
+            if (node == null)
+            {
+                throw new ArgumentNullException("node");
+            }
             PrintConstant(node.Value);
             return node;
         }
@@ -98,6 +114,10 @@ namespace Microsoft.Azure.Common.OData
         /// <returns>Original node.</returns>
         protected override Expression VisitMember(MemberExpression node)
         {
+            if (node == null)
+            {
+                throw new ArgumentNullException("node");
+            }
             // Assumes that left side expression parameters are properties like p.Foo
             if (node.Expression.NodeType == ExpressionType.Parameter)
             {
@@ -134,6 +154,10 @@ namespace Microsoft.Azure.Common.OData
         /// <returns>Original node.</returns>
         protected override Expression VisitMethodCall(MethodCallExpression node)
         {
+            if (node == null)
+            {
+                throw new ArgumentNullException("node");
+            }
             if (node.Method.Name == "Contains" && 
                 (node.Arguments.Count == 2 ||
                 node.Arguments.Count == 1))
@@ -226,11 +250,13 @@ namespace Microsoft.Azure.Common.OData
                 if (val is DateTime)
                 {
                     val = ((DateTime)val).ToUniversalTime();
-                    formattedString = string.Format("{0:" + DefaultDateTimeFormat + "}", val);
+                    formattedString = string.Format(CultureInfo.InvariantCulture, 
+                        "{0:" + DefaultDateTimeFormat + "}", val);
                 }
                 else
                 {
-                    formattedString = string.Format("{0}", val);
+                    formattedString = string.Format(CultureInfo.InvariantCulture, 
+                        "{0}", val);
                 }
 
                 if (val is int ||
@@ -252,7 +278,7 @@ namespace Microsoft.Azure.Common.OData
         /// </summary>
         /// <param name="propertyInfo">Property to examine.</param>
         /// <returns>Property name or value specified in the FilterParameterAttribute.</returns>
-        private string GetPropertyName(PropertyInfo propertyInfo)
+        private static string GetPropertyName(PropertyInfo propertyInfo)
         {
             if (propertyInfo == null)
             {

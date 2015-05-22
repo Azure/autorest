@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
@@ -18,6 +19,10 @@ namespace Microsoft.Azure
         public static JsonSerializer WithoutConverter(this JsonSerializer serializer, 
             JsonConverter converterToExclude)
         {
+            if (serializer == null)
+            {
+                throw new ArgumentNullException("serializer");
+            }
             JsonSerializer newSerializer = new JsonSerializer();
             PropertyInfo[] properties = typeof(JsonSerializer).GetProperties();
             foreach (var property in properties.Where(p => p.GetSetMethod() != null))

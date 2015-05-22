@@ -9,7 +9,6 @@ using Microsoft.Diagnostics.Tracing;
 using Microsoft.Diagnostics.Tracing.Session;
 using Microsoft.Rest.Tracing.Etw;
 using Xunit;
-using Xunit.Extensions;
 
 namespace Microsoft.Rest.ClientRuntime.Tracing.Tests
 {

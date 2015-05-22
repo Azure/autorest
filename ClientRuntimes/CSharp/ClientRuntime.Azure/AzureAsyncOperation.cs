@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json.Linq;
 
 namespace Microsoft.Azure
 {
@@ -21,19 +20,25 @@ namespace Microsoft.Azure
     public class AzureAsyncOperation
     {
         /// <summary>
+        /// Default delay in seconds for long running operations.
+        /// </summary>
+        public const int DefaultDelay = 30;
+
+        /// <summary>
         /// Successful terminal statuses for long running operations.
         /// </summary>
-        public static readonly string[] SuccessStatuses = {"Succeeded"};
+        public static IEnumerable<string> SuccessStatuses
+        {
+            get { return new[] { "Succeeded" }; }   
+        }
         
         /// <summary>
         /// Failed terminal statuses for long running operations.
         /// </summary>
-        public static readonly string[] FailedStatuses = { "Failed", "Canceled" };
-
-        /// <summary>
-        /// Default delay in seconds for long running operations.
-        /// </summary>
-        public static int DefaultDelay = 30;
+        public static IEnumerable<string> FailedStatuses
+        {
+            get { return new[] { "Failed", "Canceled" }; }   
+        }
 
         /// <summary>
         /// Terminal statuses for long running operations.

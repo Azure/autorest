@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using Microsoft.Rest;
-using System.Net.Http;
 
 namespace Microsoft.Azure
 {

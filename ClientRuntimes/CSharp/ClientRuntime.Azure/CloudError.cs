@@ -2,10 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
-using Microsoft.Rest;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Xml.Linq;
 
 namespace Microsoft.Azure
 {
@@ -14,6 +10,13 @@ namespace Microsoft.Azure
     /// </summary>
     public class CloudError
     {
+        /// <summary>
+        /// Initializes a new instance of CloudError.
+        /// </summary>
+        public CloudError()
+        {
+            Details = new List<CloudError>();
+        }
         /// <summary>
         /// The error code parsed from the body of the http error response
         /// </summary>
@@ -32,6 +35,6 @@ namespace Microsoft.Azure
         /// <summary>
         /// Gets or sets details for the error.
         /// </summary>
-        public IList<CloudError> Details { get; set; }
+        public IList<CloudError> Details { get; private set; }
     }
 }
