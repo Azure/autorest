@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Net.Http;
 using Microsoft.Rest;
 
 namespace Microsoft.Azure
@@ -9,8 +10,23 @@ namespace Microsoft.Azure
     /// <summary>
     /// An exception generated from an http response returned from a Microsoft Azure service
     /// </summary>
-    public class CloudException : HttpOperationException<CloudError>
+    public class CloudException : HttpRequestException
     {
+        /// <summary>
+        /// Gets information about the associated HTTP request.
+        /// </summary>
+        public HttpRequestMessage Request { get; set; }
+
+        /// <summary>
+        /// Gets information about the associated HTTP response.
+        /// </summary>
+        public HttpResponseMessage Response { get; set; }
+
+        /// <summary>
+        /// Gets or sets the response object.
+        /// </summary>
+        public CloudError Body { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the CloudException class.
         /// </summary>
