@@ -10,6 +10,13 @@ namespace Microsoft.Azure
     /// <summary>
     /// An exception generated from an http response returned from a Microsoft Azure service
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Design",
+        "CA1032:ImplementStandardExceptionConstructors"),
+     System.Diagnostics.CodeAnalysis.SuppressMessage(
+         "Microsoft.Usage",
+         "CA2237:MarkISerializableTypesWithSerializable",
+         Justification = "CloudException hides the constructor needed for serialization.")]
     public class CloudException : HttpRequestException
     {
         /// <summary>
