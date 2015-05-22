@@ -10,14 +10,13 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Azure.Common.Properties;
+using Microsoft.Azure.Properties;
 using Microsoft.Rest;
-using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 
 namespace Microsoft.Azure
 {
-    public static class AzureClientLongRunningOperationExtensions
+    public static class AzureClientExtensions
     {
         /// <summary>
         /// Gets operation result for PUT operations.
@@ -28,7 +27,7 @@ namespace Microsoft.Azure
         /// <param name="getOperationAction">Delegate for the get operation</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Response with created resource</returns>
-        public static async Task<AzureOperationResponse<T>> GetCreateOrUpdateOperationResultAsync<T>(this IAzureClient client, 
+        public static async Task<AzureOperationResponse<T>> GetPutOperationResultAsync<T>(this IAzureClient client, 
             AzureOperationResponse<T> response,
             Func<Task<AzureOperationResponse<T>>> getOperationAction,
             CancellationToken cancellationToken = default(System.Threading.CancellationToken)) where T : Resource
@@ -41,7 +40,10 @@ namespace Microsoft.Azure
             {
                 throw new ArgumentNullException("getOperationAction");
             }
-            Debug.Assert(response.Body != null);
+            if (response.Body == null)
+            {
+                throw new ArgumentNullException("response.Body");
+            }
 
             AzureOperationResponse<T> responseWithResource = response;
             AzureOperationResponse<AzureAsyncOperation> responseWithOperationStatus = null;
@@ -50,10 +52,9 @@ namespace Microsoft.Azure
             int delayInSeconds = GetRetryAfter(client.LongRunningOperationInitialTimeout, response);
 
             // Check provisioning state
-            while (!AzureAsyncOperation.AzureAsyncOperationTerminalStates.Any(s => s.Equals(status,
+            while (!AzureAsyncOperation.TerminalStatuses.Any(s => s.Equals(status,
                 StringComparison.OrdinalIgnoreCase)))
             {
-                //TODO: Use platform agnostic TaskEx
                 await PlatformTask.Delay(delayInSeconds * 1000, cancellationToken).ConfigureAwait(false);
 
                 // Check Azure-AsyncOperation header
@@ -89,7 +90,7 @@ namespace Microsoft.Azure
             }
 
             // Check if operation failed
-            if (AzureAsyncOperation.AzureAsyncOperationFailedStates.Any(
+            if (AzureAsyncOperation.FailedStatuses.Any(
                         s => s.Equals(status, StringComparison.OrdinalIgnoreCase)))
             {
                 CloudException exception = new CloudException(Resources.LongRunningOperationFailed)
@@ -129,31 +130,30 @@ namespace Microsoft.Azure
             AzureOperationResponse response,
             CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            Debug.Assert(response != null);
-            Debug.Assert(response.Response != null);
-            Debug.Assert(response.Response.StatusCode == HttpStatusCode.OK ||
-                         response.Response.StatusCode == HttpStatusCode.Accepted ||
-                         response.Response.StatusCode == HttpStatusCode.NoContent);
+            if (response == null)
+            {
+                throw new ArgumentNullException("response");
+            }
+
+            if (response.Response == null)
+            {
+                throw new ArgumentNullException("response.Response");
+            }
+
+            if (response.Response.StatusCode != HttpStatusCode.OK &&
+                response.Response.StatusCode != HttpStatusCode.Accepted &&
+                response.Response.StatusCode != HttpStatusCode.NoContent)
+            {
+                throw new CloudException("Unexpected status code from long running operation: " + response.Response.StatusCode);
+            }
 
             AzureOperationResponse operationResponse = response;
-            string status;
-            if (response.Response.StatusCode == HttpStatusCode.Accepted)
-            {
-                status = "InProgress";
-            }
-            else if (response.Response.StatusCode < HttpStatusCode.BadRequest)
-            {
-                status = "Succeeded";
-            }
-            else
-            {
-                status = "Failed";
-            }
+            string status = GetStatusFromHttpStatusCode(response.Response.StatusCode);
             CloudError cloudError = null;
             int delayInSeconds = GetRetryAfter(client.LongRunningOperationInitialTimeout, response);
 
             // Check provisioning state
-            while (!AzureAsyncOperation.AzureAsyncOperationTerminalStates.Any(s => s.Equals(status,
+            while (!AzureAsyncOperation.TerminalStatuses.Any(s => s.Equals(status,
                 StringComparison.OrdinalIgnoreCase)))
             {
                 await PlatformTask.Delay(delayInSeconds * 1000, cancellationToken).ConfigureAwait(false);
@@ -186,7 +186,7 @@ namespace Microsoft.Azure
                 delayInSeconds = GetRetryAfter(client.LongRunningOperationRetryTimeout, responseWithOperationStatus);
             }
 
-            if (AzureAsyncOperation.AzureAsyncOperationFailedStates.Any(
+            if (AzureAsyncOperation.FailedStatuses.Any(
                     s => s.Equals(status, StringComparison.OrdinalIgnoreCase)))
             {
                 CloudException exception = new CloudException(Resources.LongRunningOperationFailed)
@@ -201,6 +201,25 @@ namespace Microsoft.Azure
             }
 
             return operationResponse;
+        }
+
+        private static string GetStatusFromHttpStatusCode(HttpStatusCode statusCode)
+        {
+            string status;
+            if (statusCode == HttpStatusCode.Accepted)
+            {
+                status = "InProgress";
+            }
+            else if (statusCode == HttpStatusCode.OK || statusCode == HttpStatusCode.Created)
+            {
+                status = "Succeeded";
+            }
+            else
+            {
+                status = "Failed";
+            }
+
+            return status;
         }
 
         /// <summary>
@@ -292,17 +311,9 @@ namespace Microsoft.Azure
             }
             else
             {
-                if (statusCode == HttpStatusCode.Accepted)
+                resultModel.Status = GetStatusFromHttpStatusCode(statusCode);
+                if (resultModel.Status == "Failed")
                 {
-                    resultModel.Status = "InProgress";
-                }
-                else if (statusCode < HttpStatusCode.BadRequest)
-                {
-                    resultModel.Status = "Succeeded";
-                }
-                else
-                {
-                    resultModel.Status = "Failed";
                     resultModel.Error = new CloudError
                     {
                         Message = Resources.LongRunningOperationFailed
@@ -320,7 +331,7 @@ namespace Microsoft.Azure
                 resultModel.RetryAfter = client.LongRunningOperationRetryTimeout;
             }
 
-            if (statusCode >= HttpStatusCode.BadRequest)
+            if (resultModel.Status == "Failed")
             {
                 string errorMessage = Resources.LongRunningOperationFailed;
                 if (resultModel.Error != null && !string.IsNullOrWhiteSpace(resultModel.Error.Message))

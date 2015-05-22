@@ -10,30 +10,30 @@ using Newtonsoft.Json.Linq;
 namespace Microsoft.Azure
 {
     /// <summary>
-    /// Information for resource.
+    /// Defines Azure resource.
     /// </summary>
     public abstract class Resource
     {
         /// <summary>
-        /// Optional. Gets or sets the ID of the resource.
+        /// Gets the ID of the resource.
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; private set; }
 
         /// <summary>
-        /// Optional. Gets or sets the name of the resource.
+        /// Gets the name of the resource.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; private set; }
 
         /// <summary>
-        /// Optional. Gets or sets the type of the resource.
+        /// Gets the type of the resource.
         /// </summary>
         [JsonProperty("type")]
         public string Type { get; private set; }
 
         /// <summary>
-        /// Optional. Gets or sets the provisioning state of the resource.
+        /// Gets the provisioning state of the resource.
         /// </summary>
         [JsonProperty("provisioningState")]
         public string ProvisioningState { get; private set; }

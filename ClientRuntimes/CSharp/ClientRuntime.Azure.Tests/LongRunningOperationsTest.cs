@@ -109,7 +109,6 @@ namespace Microsoft.Azure.Common.Test
             }
             catch (CloudException ex)
             {
-                Assert.Equal("", ex.Message);
                 Assert.Equal(HttpStatusCode.InternalServerError, ex.Response.StatusCode);
             }
         }
@@ -177,7 +176,7 @@ namespace Microsoft.Azure.Common.Test
             }
             catch (CloudException ex)
             {
-                Assert.Empty(ex.Message);
+                Assert.Null(ex.Body);
             }
         }
 

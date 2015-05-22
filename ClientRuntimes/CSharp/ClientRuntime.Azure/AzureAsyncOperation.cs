@@ -21,14 +21,14 @@ namespace Microsoft.Azure
     public class AzureAsyncOperation
     {
         /// <summary>
-        /// Successful terminal states for long running operations.
+        /// Successful terminal statuses for long running operations.
         /// </summary>
-        public static readonly string[] AzureAsyncOperationSuccessStates = {"Succeeded"};
+        public static readonly string[] SuccessStatuses = {"Succeeded"};
         
         /// <summary>
-        /// Failed terminal states for long running operations.
+        /// Failed terminal statuses for long running operations.
         /// </summary>
-        public static readonly string[] AzureAsyncOperationFailedStates = { "Failed", "Canceled" };
+        public static readonly string[] FailedStatuses = { "Failed", "Canceled" };
 
         /// <summary>
         /// Default delay in seconds for long running operations.
@@ -36,11 +36,11 @@ namespace Microsoft.Azure
         public static int DefaultDelay = 30;
 
         /// <summary>
-        /// Terminal states for long running operations.
+        /// Terminal statuses for long running operations.
         /// </summary>
-        public static IEnumerable<string> AzureAsyncOperationTerminalStates
+        public static IEnumerable<string> TerminalStatuses
         {
-            get { return AzureAsyncOperationSuccessStates.Union(AzureAsyncOperationFailedStates); }
+            get { return SuccessStatuses.Union(FailedStatuses); }
         }
 
         /// <summary>

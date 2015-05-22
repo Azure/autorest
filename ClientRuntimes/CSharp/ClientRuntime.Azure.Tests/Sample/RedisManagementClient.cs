@@ -477,6 +477,7 @@ namespace Microsoft.Azure.Management.Redis
                 ContractResolver = new ReadOnlyJsonContractResolver()
             };
             DeserializationSettings.Converters.Add(new ResourceJsonConverter());
+            DeserializationSettings.Converters.Add(new CloudErrorJsonConverter());
         }    
     }
 
@@ -899,11 +900,14 @@ namespace Microsoft.Azure.Management.Redis
             string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (statusCode != HttpStatusCode.OK && statusCode != HttpStatusCode.Created)
             {
-                CloudError cloudError = new CloudError(responseContent);
-                CloudException ex = new CloudException(cloudError.Message);
+                CloudError error = JsonConvert.DeserializeObject<CloudError>(responseContent, Client.DeserializationSettings);
+                CloudException ex = new CloudException();
+                if (error != null)
+                {
+                    ex = new CloudException(error.Message);
+                }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
-                ex.Body = cloudError;
                     
                 if (shouldTrace)
                 {
@@ -943,7 +947,7 @@ namespace Microsoft.Azure.Management.Redis
 
             Debug.Assert(response.Response.StatusCode == HttpStatusCode.OK || response.Response.StatusCode == HttpStatusCode.Created);
 
-            return await this.Client.GetCreateOrUpdateOperationResultAsync(response, 
+            return await this.Client.GetPutOperationResultAsync(response, 
                 () => GetWithOperationResponseAsync(resourceGroupName, name, subscriptionId, cancellationToken),
                 cancellationToken);
         }
@@ -1041,11 +1045,14 @@ namespace Microsoft.Azure.Management.Redis
             string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (statusCode != HttpStatusCode.OK && statusCode != HttpStatusCode.Accepted && statusCode != HttpStatusCode.NotFound)
             {
-                CloudError cloudError = new CloudError(responseContent);
-                CloudException ex = new CloudException(cloudError.Message);
+                CloudError error = JsonConvert.DeserializeObject<CloudError>(responseContent, Client.DeserializationSettings);
+                CloudException ex = new CloudException();
+                if (error != null)
+                {
+                    ex = new CloudException(error.Message);
+                } 
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
-                ex.Body = cloudError;
                 if (shouldTrace)
                 {
                     ServiceClientTracing.Error(invocationId, ex);
@@ -1178,11 +1185,14 @@ namespace Microsoft.Azure.Management.Redis
             string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (statusCode != HttpStatusCode.OK)
             {
-                CloudError cloudError = new CloudError(responseContent);
-                CloudException ex = new CloudException(cloudError.Message);
+                CloudError error = JsonConvert.DeserializeObject<CloudError>(responseContent, Client.DeserializationSettings);
+                CloudException ex = new CloudException();
+                if (error != null)
+                {
+                    ex = new CloudException(error.Message);
+                }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
-                ex.Body = cloudError;
                 if (shouldTrace)
                 {
                     ServiceClientTracing.Error(invocationId, ex);

@@ -8,7 +8,7 @@
     <ProjectGuid>{856A1D19-C3BF-439A-BEBF-E822A332BC12}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Microsoft.Azure.Common</RootNamespace>
+    <RootNamespace>Microsoft.Azure</RootNamespace>
     <AssemblyName>Microsoft.Azure.Common</AssemblyName>
     <OutputType>Library</OutputType>
     <RestorePackages>true</RestorePackages>
@@ -21,12 +21,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IAzureClient.cs" />
-    <Compile Include="AzureClientLongRunningOperationExtensions.cs" />
+    <Compile Include="AzureClientExtensions.cs" />
     <Compile Include="CloudError.cs" />
     <Compile Include="CloudException.cs" />
+    <Compile Include="JsonSerializerExtensions.cs" />
     <Compile Include="OData\FilterString.cs" />
     <Compile Include="OData\UrlExpressionVisitor.cs" />
     <Compile Include="Resource.cs" />
+    <Compile Include="CloudErrorJsonConverter.cs" />
     <Compile Include="ResourceJsonConverter.cs" />
     <Compile Include="TokenCloudCredentials.cs" />
     <Compile Include="SubscriptionCloudCredentials.cs" />

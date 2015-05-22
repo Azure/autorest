@@ -20,7 +20,6 @@
   </PropertyGroup>
   <Import Project="$(SolutionDir)\tools\AutoRest.Settings.targets" />
   <ItemGroup>
-    <Compile Include="CloudExceptionTests.cs" />
     <Compile Include="Fakes\FakeServiceClientWithCredentials.cs" />
     <Compile Include="Fakes\FakeServiceClient.cs" />
     <Compile Include="Fakes\PlaybackTestHandler.cs" />
@@ -28,6 +27,7 @@
     <Compile Include="ODataTests.cs" />
     <Compile Include="LongRunningOperationsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CloudErrorJsonConverterTest.cs" />
     <Compile Include="ResourceJsonConverterTest.cs" />
     <Compile Include="Sample\RedisManagementClient.cs" />
     <Compile Include="Sample\SampleResource2.cs" />
