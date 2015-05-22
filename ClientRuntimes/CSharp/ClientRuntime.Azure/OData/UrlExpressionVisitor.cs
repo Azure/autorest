@@ -7,6 +7,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+using Microsoft.Rest.Serialization;
 using Newtonsoft.Json;
 
 namespace Microsoft.Azure.OData
