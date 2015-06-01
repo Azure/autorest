@@ -29,5 +29,6 @@ exports.SigningFilter = require('./filters/signingFilter');
 
 exports.validate = require('./validate');
 exports.requestPipeline = require('./requestPipeline');
+exports.serializeObject = require('./serialization').serializeObject;
 
 exports = module.exports;
