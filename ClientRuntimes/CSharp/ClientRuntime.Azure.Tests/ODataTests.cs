@@ -18,8 +18,11 @@ namespace Microsoft.Azure.Common.Test
 
             var result = FilterString.Generate<Param1>(p => p.Foo == "foo" || p.Val < 20 || p.Foo == "bar" && p.Val == null &&
                 p.Date > new DateTime(2004, 11, 5) && p.Date < date && p.Values.Contains("x"));
-            Assert.Equal("foo eq 'foo' or Val lt 20 or foo eq 'bar' and Val eq null and d gt '2004-11-05T08:00:00Z' " +
-                "and d lt '2013-11-05T08:00:00Z' and vals/any(c: c eq 'x')", result);
+            string time1 = Uri.EscapeDataString("2004-11-05T08:00:00Z");
+            string time2 = Uri.EscapeDataString("2013-11-05T08:00:00Z");
+            string expected = string.Format("foo eq 'foo' or Val lt 20 or foo eq 'bar' and Val eq null and d gt '{0}' " +
+                "and d lt '{1}' and vals/any(c: c eq 'x')", time1, time2);
+            Assert.Equal(expected, result);
         }
 
         [Fact]
@@ -148,7 +151,7 @@ namespace Microsoft.Azure.Common.Test
         public void DefaultDateTimeProducesProperStringInODataFilter()
         {
             var result = FilterString.Generate<Param1>(p => p.Date2 == new DateTime(2012, 5, 1, 11, 5, 1, DateTimeKind.Utc));
-            Assert.Equal("Date2 eq '2012-05-01T11:05:01Z'", result);
+            Assert.Equal("Date2 eq '" + Uri.EscapeDataString("2012-05-01T11:05:01Z") + "'", result);
         }
 
         [Fact]
@@ -157,7 +160,18 @@ namespace Microsoft.Azure.Common.Test
             var localDate = new DateTime(2012, 5, 1, 11, 5, 1, DateTimeKind.Local);
             var utcDate = localDate.ToUniversalTime();
             var result = FilterString.Generate<Param1>(p => p.Date2 == localDate);
-            Assert.Equal("Date2 eq '" + utcDate.ToString("yyyy-MM-ddTHH:mm:ssZ") + "'", result);
+            Assert.Equal("Date2 eq '" + Uri.EscapeDataString(utcDate.ToString("yyyy-MM-ddTHH:mm:ssZ")) + "'", result);
+        }
+
+        [Fact]
+        public void EncodingTheParameters()
+        {
+            var param = new Param1
+            {
+                Foo = "Microsoft.Web/sites"
+            };
+            var result = FilterString.Generate<Param1>(p => p.Foo == param.Foo);
+            Assert.Equal("foo eq 'Microsoft.Web%2Fsites'", result);
         }
     }
 

@@ -269,7 +269,7 @@ namespace Microsoft.Azure.OData
                 }
                 else
                 {
-                    _generatedUrl.AppendFormat(CultureInfo.InvariantCulture, "'{0}'", formattedString);
+                    _generatedUrl.AppendFormat(CultureInfo.InvariantCulture, "'{0}'", Uri.EscapeDataString(formattedString));
                 }
             }
         }
