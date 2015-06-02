@@ -11,7 +11,7 @@
   "keywords": ["node", "microsoft", "autorest", "clientruntime"],
   "main": "./lib/msRest.js",
   "engines": {
-    "node": ">= 0.6.15"
+    "node": ">= 0.8.26"
   },
   "licenses": [
     {
