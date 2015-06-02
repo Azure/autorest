@@ -19,6 +19,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HttpExtensions.cs" />
     <Compile Include="Serialization\PolymorphicDeserializeJsonConverter.cs" />
+    <Compile Include="Serialization\DateJsonConverter.cs" />
     <Compile Include="Serialization\PolymorphicSerializeJsonConverter.cs" />
     <Compile Include="Serialization\ReadOnlyJsonContractResolver.cs" />
     <Compile Include="TokenCredentials.cs" />
