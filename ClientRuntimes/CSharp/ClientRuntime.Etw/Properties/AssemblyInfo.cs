@@ -6,18 +6,18 @@ using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Microsoft AutoRest Client Library ETW Logger")]
+[assembly: AssemblyTitle("Microsoft REST Client Runtime ETW Logger")]
 [assembly: AssemblyDescription("Provides ETW tracing of \"Microsoft.Rest\" Client Library events.")]
-
-[assembly: AssemblyVersion("0.9.0.0")]
-[assembly: AssemblyFileVersion("0.9.1.0")]
-
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("Microsoft Corporation")]
 [assembly: AssemblyProduct("Microsoft AutoRest")]
-[assembly: AssemblyCopyright("Copyright (c) Microsoft Corporation")]
+[assembly: AssemblyCopyright("Copyright © Microsoft Corporation")]
+[assembly: AssemblyConfiguration("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: NeutralResourcesLanguage("en")]
 [assembly: CLSCompliant(true)]
 [assembly: ComVisible(false)]
+
+// Third party tools use AssemblyVersion. Only update for major version changes.
+[assembly: AssemblyVersion("0.9.0.0")]
+[assembly: AssemblyFileVersion("0.9.1.0")]
