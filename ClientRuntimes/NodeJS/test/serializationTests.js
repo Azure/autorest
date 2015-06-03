@@ -30,6 +30,7 @@ describe('msrest', function () {
     
     it('should correctly serialize Primitive types', function (done) {
       msRest.serializeObject(true).should.equal(true);
+      msRest.serializeObject(false).should.equal(false);
       msRest.serializeObject('true').should.equal('true');
       msRest.serializeObject(1).should.equal(1);
       msRest.serializeObject(100.0123).should.equal(100.0123);

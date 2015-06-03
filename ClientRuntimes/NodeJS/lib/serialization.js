@@ -11,7 +11,7 @@
  * @returns {Object} serializedObject
  */
 exports.serializeObject = function (toSerialize) {
-  if (!toSerialize) return null;
+  if (toSerialize === null || toSerialize === undefined) return null;
   if (Buffer.isBuffer(toSerialize)) {
     toSerialize = toSerialize.toString('base64');
     return toSerialize;
