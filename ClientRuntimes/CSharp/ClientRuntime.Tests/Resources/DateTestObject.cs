@@ -23,8 +23,19 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Resources
         [JsonProperty("dtn")]
         [JsonConverter(typeof(DateJsonConverter))]
         public DateTime? DateTimeNullable { get; set; }
+        
+        [JsonProperty("dtoc")]
+        [JsonConverter(typeof(DateJsonConverter))]
+        public DateTimeOffset DateTimeOffsetWithConverter { get; set; }
+        
+        [JsonProperty("dtonc")]
+        [JsonConverter(typeof(DateJsonConverter))]
+        public DateTimeOffset? DateTimeOffsetNullableWithConverter { get; set; }
 
         [JsonProperty("dto")]
         public DateTimeOffset DateTimeOffset { get; set; }
+
+        [JsonProperty("dton")]
+        public DateTimeOffset? DateTimeOffsetNullable { get; set; }
     }
 }
