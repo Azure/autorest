@@ -26,12 +26,12 @@ namespace Microsoft.Azure
         /// <summary>
         /// Gets the initial timeout for Long Running Operations.
         /// </summary>
-        int LongRunningOperationInitialTimeout { get; }
+        int? LongRunningOperationInitialTimeout { get; }
         
         /// <summary>
         /// Gets the retry timeout for Long Running Operations.
         /// </summary>
-        int LongRunningOperationRetryTimeout { get; }
+        int? LongRunningOperationRetryTimeout { get; }
         
         /// <summary>
         /// Gets or sets json serialization settings.
