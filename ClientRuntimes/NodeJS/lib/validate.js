@@ -52,22 +52,6 @@ exports.isValidUuid = function(uuid, callback) {
 };
 
 /**
-* Creates a anonymous function that check if a given key is base 64 encoded.
-*
-* @param {string} key The key to validate.
-* @return {function}
-*/
-exports.isBase64Encoded = function (key) {
-  var isValidBase64String = key.match('^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$');
-
-  if (isValidBase64String) {
-    return true;
-  } else {
-    throw new Error('The provided account key ' + key + ' is not a valid base64 string.');
-  }
-};
-
-/**
 * Validates a function.
 *
 * @param {object} function The function to validate.

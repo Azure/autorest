@@ -19,8 +19,17 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
+    <Compile Include="serialization-deserializationTests.js">
+      <TestFramework>Mocha</TestFramework>
+    </Compile>
+    <Compile Include="credentialTests.js">
+      <TestFramework>Mocha</TestFramework>
+    </Compile>
+    <Compile Include="unit.js" />
     <Content Include="testlist.txt" />
-    <Compile Include="serviceTests.js" />
+    <Compile Include="serviceTests.js">
+      <TestFramework>Mocha</TestFramework>
+    </Compile>
     <Compile Include="data\swaggerPetstore.js" />
     <Compile Include="data\models\Pet.js" />
   </ItemGroup>
