@@ -141,7 +141,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests
         public void DateSerializationWithoutNulls()
         {
             var localDateTime = DateTime.Parse("2015-06-01T16:10:08.0121-07:00", CultureInfo.InvariantCulture);
-            var utcDate = DateTime.Parse("2015-05-31T17:00:00.0-07:00", CultureInfo.InvariantCulture);
+            var utcDate = DateTime.Parse("2015-06-01T00:00:00.0", CultureInfo.InvariantCulture);
             var serializeSettings = new JsonSerializerSettings();
             serializeSettings.ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
             serializeSettings.Formatting = Formatting.Indented;
@@ -154,13 +154,19 @@ namespace Microsoft.Rest.ClientRuntime.Tests
             test.DateTime = localDateTime;
             test.DateTimeNullable = localDateTime;
             test.DateTimeOffset = new DateTimeOffset(localDateTime, new TimeSpan(-7, 0, 0));
+            test.DateTimeOffsetNullable = localDateTime;
+            test.DateTimeOffsetWithConverter = localDateTime;
+            test.DateTimeOffsetNullableWithConverter = localDateTime;
 
             var expectedJson = @"{
   ""d"": ""2015-06-01"",
   ""dt"": ""2015-06-01T23:10:08.0121Z"",
   ""dn"": ""2015-06-01T23:10:08.0121Z"",
   ""dtn"": ""2015-06-01"",
-  ""dto"": ""2015-06-01T16:10:08.0121-07:00""
+  ""dtoc"": ""2015-06-01"",
+  ""dtonc"": ""2015-06-01"",
+  ""dto"": ""2015-06-01T16:10:08.0121-07:00"",
+  ""dton"": ""2015-06-01T16:10:08.0121-07:00""
 }";
             var json = JsonConvert.SerializeObject(test, serializeSettings);
 
@@ -187,6 +193,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests
             var expectedJson = @"{
   ""d"": ""0001-01-01"",
   ""dt"": ""0001-01-01T00:00:00Z"",
+  ""dtoc"": ""0001-01-01"",
   ""dto"": ""0001-01-01T00:00:00+00:00""
 }";
             var json = JsonConvert.SerializeObject(test, serializeSettings);
@@ -213,13 +220,19 @@ namespace Microsoft.Rest.ClientRuntime.Tests
             test.DateNullable = localDateTime;
             test.DateTime = localDateTime;
             test.DateTimeNullable = localDateTime;
+            test.DateTimeOffsetNullable = localDateTime;
+            test.DateTimeOffsetNullableWithConverter = localDateTime;
+            test.DateTimeOffsetWithConverter = localDateTime;
 
             var expectedJson = @"{
   ""d"": ""9999-12-31"",
   ""dt"": ""9999-12-31T23:59:59Z"",
   ""dn"": ""9999-12-31T23:59:59Z"",
   ""dtn"": ""9999-12-31"",
-  ""dto"": ""0001-01-01T00:00:00+00:00""
+  ""dtoc"": ""9999-12-31"",
+  ""dtonc"": ""9999-12-31"",
+  ""dto"": ""0001-01-01T00:00:00+00:00"",
+  ""dton"": ""9999-12-31T15:59:59-08:00""
 }";
             var json = JsonConvert.SerializeObject(test, serializeSettings);
 
