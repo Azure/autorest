@@ -238,13 +238,13 @@ namespace Microsoft.Azure.Management.Redis
             set;
         }
 
-        int LongRunningOperationInitialTimeout
+        int? LongRunningOperationInitialTimeout
         {
             get;
             set;
         }
 
-        int LongRunningOperationRetryTimeout
+        int? LongRunningOperationRetryTimeout
         {
             get;
             set;
@@ -295,17 +295,17 @@ namespace Microsoft.Azure.Management.Redis
             set { this._credentials = value; }
         }
 
-        private int _longRunningOperationInitialTimeout;
+        private int? _longRunningOperationInitialTimeout;
 
-        public int LongRunningOperationInitialTimeout
+        public int? LongRunningOperationInitialTimeout
         {
             get { return this._longRunningOperationInitialTimeout; }
             set { this._longRunningOperationInitialTimeout = value; }
         }
 
-        private int _longRunningOperationRetryTimeout;
+        private int? _longRunningOperationRetryTimeout;
 
-        public int LongRunningOperationRetryTimeout
+        public int? LongRunningOperationRetryTimeout
         {
             get { return this._longRunningOperationRetryTimeout; }
             set { this._longRunningOperationRetryTimeout = value; }
@@ -327,8 +327,6 @@ namespace Microsoft.Azure.Management.Redis
             this._redisOperations = new RedisOperations(this);
             this._baseUri = new Uri("https://management.azure.com");
             this._apiVersion = "2014-04-01-preview";
-            this._longRunningOperationInitialTimeout = -1;
-            this._longRunningOperationRetryTimeout = -1;
             this.HttpClient.Timeout = TimeSpan.FromSeconds(300);
             this.Initialize();
         }
@@ -346,8 +344,6 @@ namespace Microsoft.Azure.Management.Redis
             this._redisOperations = new RedisOperations(this);
             this._baseUri = new Uri("https://management.azure.com");
             this._apiVersion = "2014-04-01-preview";
-            this._longRunningOperationInitialTimeout = -1;
-            this._longRunningOperationRetryTimeout = -1;
             this.HttpClient.Timeout = TimeSpan.FromSeconds(300);
             this.Initialize();
         }
@@ -368,8 +364,6 @@ namespace Microsoft.Azure.Management.Redis
             this._redisOperations = new RedisOperations(this);
             this._baseUri = new Uri("https://management.azure.com");
             this._apiVersion = "2014-04-01-preview";
-            this._longRunningOperationInitialTimeout = -1;
-            this._longRunningOperationRetryTimeout = -1;
             this.HttpClient.Timeout = TimeSpan.FromSeconds(300);
             this.Initialize();
         }

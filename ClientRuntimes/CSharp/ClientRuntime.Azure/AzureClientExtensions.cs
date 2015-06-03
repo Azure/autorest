@@ -228,16 +228,31 @@ namespace Microsoft.Azure
         /// <param name="clientTimeout">Client defined timeout.</param>
         /// <param name="response">Http operation response</param>
         /// <returns>Timeout in seconds.</returns>
-        private static int GetRetryAfter(int clientTimeout, HttpOperationResponse response)
+        private static int GetRetryAfter(int? clientTimeout, HttpOperationResponse response)
         {
-            if (clientTimeout >= 0)
+            HttpResponseMessage responseMessage = null;
+            if (response != null)
             {
-                return clientTimeout;
+                responseMessage = response.Response;
             }
-            if (response != null && response.Response != null &&
-                response.Response.Headers.Contains("Retry-After"))
+            return GetRetryAfter(clientTimeout, responseMessage);
+        }
+
+        /// <summary>
+        /// Returns timeout value from either response header or client timeout.
+        /// </summary>
+        /// <param name="clientTimeout">Client defined timeout.</param>
+        /// <param name="responseMessage">Http response</param>
+        /// <returns>Timeout in seconds.</returns>
+        private static int GetRetryAfter(int? clientTimeout, HttpResponseMessage responseMessage)
+        {
+            if (clientTimeout != null)
             {
-                return int.Parse(response.Response.Headers.GetValues("Retry-After").FirstOrDefault(),
+                return clientTimeout.Value;
+            }
+            if (responseMessage != null && responseMessage.Headers.Contains("Retry-After"))
+            {
+                return int.Parse(responseMessage.Headers.GetValues("Retry-After").FirstOrDefault(),
                     CultureInfo.InvariantCulture);
             }
             return AzureAsyncOperation.DefaultDelay;
@@ -321,15 +336,7 @@ namespace Microsoft.Azure
                 }
             }
 
-            if (httpResponse.Headers.Contains("Retry-After"))
-            {
-                resultModel.RetryAfter = int.Parse(httpResponse.Headers.GetValues("Retry-After").FirstOrDefault(),
-                    CultureInfo.InvariantCulture);
-            }
-            else
-            {
-                resultModel.RetryAfter = client.LongRunningOperationRetryTimeout;
-            }
+            resultModel.RetryAfter = GetRetryAfter(client.LongRunningOperationRetryTimeout, httpResponse);
 
             if (resultModel.Status == "Failed")
             {
