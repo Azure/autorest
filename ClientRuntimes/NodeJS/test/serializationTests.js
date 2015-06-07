@@ -108,4 +108,195 @@ describe('msrest', function () {
       done();
     });
   });
+
+  describe('deserializeDate', function () {
+    it('should correctly deserialize max local positive offset \'9999-12-31T23:59:59+23:59\' value', function (done) {
+      var date = msRest.deserializeDate('9999-12-31T23:59:59+23:59');
+      date.getUTCFullYear().should.equal(9999);
+      date.getUTCMonth().should.equal(11);
+      date.getUTCDate().should.equal(31);
+      date.getUTCHours().should.equal(0);
+      date.getUTCMinutes().should.equal(0);
+      date.getUTCSeconds().should.equal(59);
+      date.getUTCMilliseconds().should.equal(0);
+      done();
+    });
+
+    it('should correctly max local negative offset deserialize \'9999-12-31T23:59:59-23:59\' value', function (done) {
+      var date = msRest.deserializeDate('9999-12-31T23:59:59-23:59');
+      date.getUTCFullYear().should.equal(10000);
+      date.getUTCMonth().should.equal(0);
+      date.getUTCDate().should.equal(1);
+      date.getUTCHours().should.equal(23);
+      date.getUTCMinutes().should.equal(58);
+      date.getUTCSeconds().should.equal(59);
+      date.getUTCMilliseconds().should.equal(0);
+      done();
+    });
+    
+    it('should correctly deserialize min local negative offset \'0000-01-01T00:00:00-23:59\' value', function (done) {
+      var date = msRest.deserializeDate('0000-01-01T00:00:00-23:59');
+      date.getUTCFullYear().should.equal(0);
+      date.getUTCMonth().should.equal(0);
+      date.getUTCDate().should.equal(1);
+      date.getUTCHours().should.equal(23);
+      date.getUTCMinutes().should.equal(59);
+      date.getUTCSeconds().should.equal(0);
+      date.getUTCMilliseconds().should.equal(0);
+      done();
+    });
+    
+    it('should correctly deserialize min local positive offset \'0000-01-01T00:00:00+23:59\' value', function (done) {
+      var date = msRest.deserializeDate('0000-01-01T00:00:00+23:59');
+      date.getUTCFullYear().should.equal(-1);
+      date.getUTCMonth().should.equal(11);
+      date.getUTCDate().should.equal(31);
+      date.getUTCHours().should.equal(0);
+      date.getUTCMinutes().should.equal(1);
+      date.getUTCSeconds().should.equal(0);
+      date.getUTCMilliseconds().should.equal(0);
+      done();
+    });
+    
+    it('should correctly deserialize max UTC \'9999-12-31T23:59:59.9999999Z\' value', function (done) {
+      var date = msRest.deserializeDate('9999-12-31T23:59:59.9999999Z');
+      date.getUTCFullYear().should.equal(9999);
+      date.getUTCMonth().should.equal(11);
+      date.getUTCDate().should.equal(31);
+      date.getUTCHours().should.equal(23);
+      date.getUTCMinutes().should.equal(59);
+      date.getUTCSeconds().should.equal(59);
+      date.getUTCMilliseconds().should.equal(999);
+      done();
+    });
+    
+    it('should correctly deserialize min UTC \'0001-01-01T00:00:00Z\' value', function (done) {
+      var date = msRest.deserializeDate('0001-01-01T00:00:00Z');
+      date.getUTCFullYear().should.equal(1);
+      date.getUTCMonth().should.equal(0);
+      date.getUTCDate().should.equal(1);
+      date.getUTCHours().should.equal(0);
+      date.getUTCMinutes().should.equal(0);
+      date.getUTCSeconds().should.equal(0);
+      date.getUTCMilliseconds().should.equal(0);
+      done();
+    });
+    
+    it('should deserialize \'2010-06-31T00:00:00Z\' to \'2010-07-01T00:00:00Z\' as month of \'June\' has only \'30\' days', function (done) {
+      var date = msRest.deserializeDate('2010-06-31T00:00:00Z');
+      date.getUTCFullYear().should.equal(2010);
+      date.getUTCMonth().should.equal(6);
+      date.getUTCDate().should.equal(1);
+      date.getUTCHours().should.equal(0);
+      date.getUTCMinutes().should.equal(0);
+      date.getUTCSeconds().should.equal(0);
+      date.getUTCMilliseconds().should.equal(0);
+      done();
+    });
+
+    it('should correctly deserialize min date \'0000-01-01\' value', function (done) {
+      var date = msRest.deserializeDate('0000-01-01');
+      date.getUTCFullYear().should.equal(0);
+      date.getUTCMonth().should.equal(0);
+      date.getUTCDate().should.equal(1);
+      date.getUTCHours().should.equal(0);
+      date.getUTCMinutes().should.equal(0);
+      date.getUTCSeconds().should.equal(0);
+      date.getUTCMilliseconds().should.equal(0);
+      done();
+    });
+    
+    it('should correctly deserialize max date \'9999-12-31\' value', function (done) {
+      var date = msRest.deserializeDate('9999-12-31');
+      date.getUTCFullYear().should.equal(9999);
+      date.getUTCMonth().should.equal(11);
+      date.getUTCDate().should.equal(31);
+      date.getUTCHours().should.equal(0);
+      date.getUTCMinutes().should.equal(0);
+      date.getUTCSeconds().should.equal(0);
+      date.getUTCMilliseconds().should.equal(0);
+      done();
+    });
+
+    it('should throw an error for null value', function (done) {
+      msRest.deserializeDate.bind(null, null).should.throw();
+      done();
+    });
+    
+    it('should throw an error for value \'Happy New Year 2016\'', function (done) {
+      msRest.deserializeDate.bind(null, 'Happy New Year 2016').should.throw();
+      done();
+    });
+
+    it('should throw an error for undefined value', function (done) {
+      msRest.deserializeDate.bind(null, undefined).should.throw();
+      done();
+    });
+
+    it('should throw an error for 2010 value', function (done) {
+      msRest.deserializeDate.bind(null, 2010).should.throw();
+      done();
+    });
+
+    it('should throw an error for true value', function (done) {
+      msRest.deserializeDate.bind(null, true).should.throw();
+      done();
+    });
+
+    it('should throw an error for \'99999-12-31\' value', function (done) {
+      msRest.deserializeDate.bind(null, '99999-12-31').should.throw();
+      done();
+    });
+
+    it('should throw an error for \'2010-13-31\' value', function (done) {
+      msRest.deserializeDate.bind(null, '2010-13-31').should.throw();
+      done();
+    });
+
+    it('should throw an error for \'2015-22-01\' value', function (done) {
+      msRest.deserializeDate.bind(null, '2015-22-01').should.throw();
+      done();
+    });
+
+    it('should throw an error for \'2015-02-32\' value', function (done) {
+      msRest.deserializeDate.bind(null, '2015-02-32').should.throw();
+      done();
+    });
+
+    it('should throw an error for \'1996-01-01F01:01:01+00:30\' value', function (done) {
+      msRest.deserializeDate.bind(null, '1996-01-01F01:01:01+00:30').should.throw();
+      done();
+    });
+
+    it('should throw an error for \'1996-01-01t01:01:01/00:30\' value', function (done) {
+      msRest.deserializeDate.bind(null, '1996-01-01t01:01:01/00:30').should.throw();
+      done();
+    });
+
+    it('should throw an error for \'1996-01-01T24:01:01+00:30\' value', function (done) {
+      msRest.deserializeDate.bind(null, '1996-01-01T24:01:01+00:30').should.throw();
+      done();
+    });
+
+    it('should throw an error for \'1996-01-01T23:60:01+00:30\' value', function (done) {
+      msRest.deserializeDate.bind(null, '1996-01-01T23:60:01+00:30').should.throw();
+      done();
+    });
+
+    it('should throw an error for \'1996-01-01T23:01:78+00:30\' value', function (done) {
+      msRest.deserializeDate.bind(null, '1996-01-01T23:01:78+00:30').should.throw();
+      done();
+    });
+
+    it('should throw an error for \'1996-01-01T23:01:54-24:30\' value', function (done) {
+      msRest.deserializeDate.bind(null, '1996-01-01T23:01:54-24:30').should.throw();
+      done();
+    });
+
+    it('should throw an error for \'1996-01-01T23:01:54-22:66\' value', function (done) {
+      msRest.deserializeDate.bind(null, '1996-01-01T23:01:54-22:66').should.throw();
+      done();
+    });
+
+  });
 });
