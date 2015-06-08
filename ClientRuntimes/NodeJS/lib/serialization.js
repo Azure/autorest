@@ -34,4 +34,34 @@ exports.serializeObject = function (toSerialize) {
   }
   return toSerialize;
 };
+
+/**
+ * Deserializes the given input in to a Date() object if it is compliant 
+ * with ISO 8601 format
+ * 
+ * @param {string} input
+ * 
+ * @returns {Date} Date Object
+ */
+exports.deserializeDate = function (input) {
+  if (exports.isValidISODateTime(input)) {
+    return new Date(input);
+  } else {
+    throw new Error('Invalid input  \'' + input + '\'.  It cannot be deserialized as a Date().');
+  }
+};
+
+/**
+ * Validates if the given string is compliant with the ISO 8601 
+ * Date and DateTime format
+ * 
+ * @param {string} dateString
+ * 
+ * @returns {bool} true - if valid, false otherwise
+ */
+exports.isValidISODateTime = function (dateString) {
+  var re = /^([0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])?(T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(\.[0-9]+)?(Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9]))?$/i;
+  return re.test(dateString);
+};
+
 exports = module.exports;
