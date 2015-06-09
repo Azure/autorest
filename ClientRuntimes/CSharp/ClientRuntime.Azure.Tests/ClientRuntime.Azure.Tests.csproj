@@ -30,7 +30,7 @@
     <Compile Include="CloudErrorJsonConverterTest.cs" />
     <Compile Include="ResourceJsonConverterTest.cs" />
     <Compile Include="Sample\RedisManagementClient.cs" />
-    <Compile Include="Sample\SampleResource2.cs" />
+    <Compile Include="Sample\GenericResource.cs" />
     <Compile Include="Sample\SampleResource.cs" />
     <Compile Include="TokenCloudCredentialsTest.cs" />
   </ItemGroup>

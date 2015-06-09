@@ -8,12 +8,12 @@ namespace Microsoft.Azure
     /// <summary>
     /// Information for resource.
     /// </summary>
-    public partial class SampleResource2 : Resource
+    public partial class GenericResource : Resource
     {
         /// <summary>
-        /// Optional. Gets or sets the size of the resource.
+        /// Optional. Gets or sets the resource properties.
         /// </summary>
-        [JsonProperty("size")]
-        public string Size2 { get; set; }
+        [JsonProperty("properties")]
+        public object Properties { get; set; }
     }
 }

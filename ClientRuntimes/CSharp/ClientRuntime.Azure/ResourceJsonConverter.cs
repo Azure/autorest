@@ -88,30 +88,38 @@ namespace Microsoft.Azure
 
             JsonSerializer newSerializer = GetSerializerWithoutCurrentConverter(serializer);
 
-            JObject rootObject = JObject.FromObject(value, newSerializer);
-            JObject propertyObject = new JObject();
-            rootObject.Add(PropertiesNode, propertyObject);
-
+            // Getting all properties that do NOT exist in the Resource object
             PropertyInfo[] propertyInfos = value.GetType().GetProperties()
                 .Where(p => typeof(Resource).GetProperty(p.Name) == null).ToArray();
-            // Getting all properties that do NOT exist in the Resource object
-            foreach (var propertyInfo in propertyInfos.Where(p => p.GetGetMethod() != null))
+
+            // If generic resource - serialize as-is
+            if (propertyInfos.Any(p => p.Name == "Properties" && p.PropertyType == typeof (object)))
             {
-                // Get property name via reflection or from JsonProperty attribute
-                string propertyName = propertyInfo.Name;
-                if (propertyInfo.GetCustomAttributes<JsonPropertyAttribute>().Any())
-                {
-                    propertyName = propertyInfo.GetCustomAttribute<JsonPropertyAttribute>().PropertyName;
-                }
-
-                if (rootObject.Property(propertyName) != null)
-                {
-                    propertyObject.Add(rootObject.Property(propertyName));
-                    rootObject.Property(propertyName).Remove();
-                }
+                newSerializer.Serialize(writer, value);
             }
+            else
+            {
+                JObject rootObject = JObject.FromObject(value, newSerializer);
+                JObject propertyObject = new JObject();
+                rootObject.Add(PropertiesNode, propertyObject);
 
-            rootObject.WriteTo(writer);
+                foreach (var propertyInfo in propertyInfos.Where(p => p.GetGetMethod() != null))
+                {
+                    // Get property name via reflection or from JsonProperty attribute
+                    string propertyName = propertyInfo.Name;
+                    if (propertyInfo.GetCustomAttributes<JsonPropertyAttribute>().Any())
+                    {
+                        propertyName = propertyInfo.GetCustomAttribute<JsonPropertyAttribute>().PropertyName;
+                    }
+
+                    if (rootObject.Property(propertyName) != null)
+                    {
+                        propertyObject.Add(rootObject.Property(propertyName));
+                        rootObject.Property(propertyName).Remove();
+                    }
+                }
+                rootObject.WriteTo(writer);
+            }
         }
 
         /// <summary>
