@@ -22,11 +22,6 @@ namespace Microsoft.Azure
         /// Gets the HttpClient used for making HTTP requests.
         /// </summary>
         HttpClient HttpClient { get; }
-
-        /// <summary>
-        /// Gets the initial timeout for Long Running Operations.
-        /// </summary>
-        int? LongRunningOperationInitialTimeout { get; }
         
         /// <summary>
         /// Gets the retry timeout for Long Running Operations.

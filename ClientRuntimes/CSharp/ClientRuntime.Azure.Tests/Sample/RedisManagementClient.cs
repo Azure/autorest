@@ -887,7 +887,7 @@ namespace Microsoft.Azure.Management.Redis
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-            if (statusCode != HttpStatusCode.OK && statusCode != HttpStatusCode.Created)
+            if (statusCode != HttpStatusCode.OK && statusCode != HttpStatusCode.Created && statusCode != HttpStatusCode.Accepted)
             {
                 CloudError error = JsonConvert.DeserializeObject<CloudError>(responseContent, Client.DeserializationSettings);
                 CloudException ex = new CloudException();
@@ -934,7 +934,9 @@ namespace Microsoft.Azure.Management.Redis
                 subscriptionId,
                 cancellationToken);
 
-            Debug.Assert(response.Response.StatusCode == HttpStatusCode.OK || response.Response.StatusCode == HttpStatusCode.Created);
+            Debug.Assert(response.Response.StatusCode == HttpStatusCode.OK || 
+                         response.Response.StatusCode == HttpStatusCode.Created ||
+                         response.Response.StatusCode == HttpStatusCode.Accepted);
 
             return await this.Client.GetPutOperationResultAsync(response, 
                 () => GetWithOperationResponseAsync(resourceGroupName, name, subscriptionId, cancellationToken),
