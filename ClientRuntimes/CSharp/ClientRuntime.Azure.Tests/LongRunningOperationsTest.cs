@@ -70,7 +70,7 @@ namespace Microsoft.Azure.Common.Test
             }
             catch (CloudException ex)
             {
-                Assert.Equal("Long running operation failed.", ex.Message);
+                Assert.Equal("Long running operation failed with status 'Failed'.", ex.Message);
                 Assert.Contains("Failed", ex.Response.Content.ReadAsStringAsync().Result);
             }
 
@@ -194,7 +194,7 @@ namespace Microsoft.Azure.Common.Test
             }
             catch (CloudException ex)
             {
-                Assert.Equal("Long running operation failed.", ex.Message);
+                Assert.Equal("Long running operation failed with status 'Failed'.", ex.Message);
             }
         }
 
