@@ -81,7 +81,7 @@ namespace Microsoft.Azure
                     cloudError = new CloudError()
                     {
                         Code = status,
-                        Message = Resources.LongRunningOperationFailed
+                        Message = string.Format(Resources.LongRunningOperationFailed, status)
                     };
                 }
 
@@ -93,7 +93,7 @@ namespace Microsoft.Azure
             if (AzureAsyncOperation.FailedStatuses.Any(
                         s => s.Equals(status, StringComparison.OrdinalIgnoreCase)))
             {
-                CloudException exception = new CloudException(Resources.LongRunningOperationFailed)
+                CloudException exception = new CloudException(string.Format(Resources.LongRunningOperationFailed,status))
                 {
                     Body = cloudError
                 };
@@ -189,7 +189,8 @@ namespace Microsoft.Azure
             if (AzureAsyncOperation.FailedStatuses.Any(
                     s => s.Equals(status, StringComparison.OrdinalIgnoreCase)))
             {
-                CloudException exception = new CloudException(Resources.LongRunningOperationFailed)
+                CloudException exception = new CloudException(
+                    string.Format(Resources.LongRunningOperationFailed, status))
                 {
                     Body = cloudError
                 };
@@ -331,7 +332,7 @@ namespace Microsoft.Azure
                 {
                     resultModel.Error = new CloudError
                     {
-                        Message = Resources.LongRunningOperationFailed
+                        Message = string.Format(Resources.LongRunningOperationFailed, resultModel.Status)
                     };
                 }
             }
@@ -340,7 +341,7 @@ namespace Microsoft.Azure
 
             if (resultModel.Status == "Failed")
             {
-                string errorMessage = Resources.LongRunningOperationFailed;
+                string errorMessage = string.Format(Resources.LongRunningOperationFailed, resultModel.Status);
                 if (resultModel.Error != null && !string.IsNullOrWhiteSpace(resultModel.Error.Message))
                 {
                     errorMessage = resultModel.Error.Message;

@@ -197,7 +197,7 @@ namespace Microsoft.Azure.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Long running operation failed..
+        ///   Looks up a localized string similar to Long running operation failed with status &apos;{0}&apos;..
         /// </summary>
         internal static string LongRunningOperationFailed {
             get {
