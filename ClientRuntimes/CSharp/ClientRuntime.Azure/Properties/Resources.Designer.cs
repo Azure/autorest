@@ -224,6 +224,15 @@ namespace Microsoft.Azure.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Provisioning state is missing from long running operation..
+        /// </summary>
+        internal static string NoProvisioningState {
+            get {
+                return ResourceManager.GetString("NoProvisioningState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Response status code indicates server error: {0} ({1})..
         /// </summary>
         internal static string ResponseStatusCodeError {

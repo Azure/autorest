@@ -303,7 +303,7 @@ namespace Microsoft.Azure
                 pollingState.Response.Headers.GetValues("Azure-AsyncOperation").FirstOrDefault(),
                 cancellationToken).ConfigureAwait(false);
 
-            if (asyncOperationResponse.Body == null)
+            if (asyncOperationResponse.Body == null || asyncOperationResponse.Body.Status == null)
             {
                 throw new CloudException(Resources.NoBody);
             }
@@ -371,7 +371,16 @@ namespace Microsoft.Azure
                 ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);           
+            HttpStatusCode statusCode = httpResponse.StatusCode;
+
+            if (statusCode != HttpStatusCode.OK &&
+                statusCode != HttpStatusCode.Accepted &&
+                statusCode != HttpStatusCode.Created &&
+                statusCode != HttpStatusCode.NoContent)
+            {
+                throw new CloudException(string.Format(CultureInfo.InvariantCulture, Resources.LongRunningOperationFailed, statusCode));
+            }
 
             T body = null;
             if (!string.IsNullOrWhiteSpace(responseContent))

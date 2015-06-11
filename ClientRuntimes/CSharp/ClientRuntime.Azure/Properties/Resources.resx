@@ -172,6 +172,9 @@ Parameter name: {0}</value>
   <data name="NoHeader" xml:space="preserve">
     <value>Location header is missing from long running operation.</value>
   </data>
+  <data name="NoProvisioningState" xml:space="preserve">
+    <value>Provisioning state is missing from long running operation.</value>
+  </data>
   <data name="ResponseStatusCodeError" xml:space="preserve">
     <value>Response status code indicates server error: {0} ({1}).</value>
   </data>

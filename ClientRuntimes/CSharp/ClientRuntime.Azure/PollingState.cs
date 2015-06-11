@@ -69,10 +69,24 @@ namespace Microsoft.Azure
             }
         }
 
+        private string _status;
         /// <summary>
         /// Gets or sets polling status.
         /// </summary>
-        public string Status { get; set; }
+        public string Status {
+            get
+            {
+                return _status;
+            }
+            set
+            {
+                if (value == null)
+                {
+                    throw new CloudException(Resources.NoProvisioningState);
+                }
+                _status = value;
+            }
+        }
         
         /// <summary>
         /// Gets or sets last operation response. 
