@@ -95,20 +95,20 @@ namespace Microsoft.Azure
         public T Resource { get; set; }
 
         /// <summary>
-        /// Gets long running operation delay.
+        /// Gets long running operation delay in milliseconds.
         /// </summary>
-        public int Delay
+        public int DelayInMilliseconds
         {
             get
             {
                 if (_retryTimeout != null)
                 {
-                    return _retryTimeout.Value;
+                    return _retryTimeout.Value * 1000;
                 }
                 if (Response != null && Response.Headers.Contains("Retry-After"))
                 {
                     return int.Parse(Response.Headers.GetValues("Retry-After").FirstOrDefault(),
-                        CultureInfo.InvariantCulture);
+                        CultureInfo.InvariantCulture) * 1000;
                 }
                 return AzureAsyncOperation.DefaultDelay;
             }

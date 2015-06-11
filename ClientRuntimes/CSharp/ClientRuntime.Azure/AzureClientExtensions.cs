@@ -54,7 +54,8 @@ namespace Microsoft.Azure
             while (!AzureAsyncOperation.TerminalStatuses.Any(s => s.Equals(pollingState.Status,
                 StringComparison.OrdinalIgnoreCase)))
             {
-                await PlatformTask.Delay(pollingState.Delay * 1000, cancellationToken).ConfigureAwait(false);
+                await PlatformTask.Delay(pollingState.DelayInMilliseconds, cancellationToken).ConfigureAwait(false);
+
                 if (pollingState.Response.Headers.Contains("Azure-AsyncOperation"))
                 {
                     await UpdateStateFromAzureAsyncOperationHeader(client, pollingState, cancellationToken);
@@ -121,9 +122,9 @@ namespace Microsoft.Azure
             while (!AzureAsyncOperation.TerminalStatuses.Any(s => s.Equals(pollingState.Status,
                 StringComparison.OrdinalIgnoreCase)))
             {
-                await PlatformTask.Delay(pollingState.Delay * 1000, cancellationToken).ConfigureAwait(false);
+                await PlatformTask.Delay(pollingState.DelayInMilliseconds, cancellationToken).ConfigureAwait(false);
 
-                if (response.Response.Headers.Contains("Azure-AsyncOperation"))
+                if (pollingState.Response.Headers.Contains("Azure-AsyncOperation"))
                 {
                     await UpdateStateFromAzureAsyncOperationHeader(client, pollingState, cancellationToken);
                 }
@@ -137,6 +138,7 @@ namespace Microsoft.Azure
                 }
             }
 
+            // Check if operation failed
             if (AzureAsyncOperation.FailedStatuses.Any(
                     s => s.Equals(pollingState.Status, StringComparison.OrdinalIgnoreCase)))
             {
@@ -190,7 +192,7 @@ namespace Microsoft.Azure
             AzureOperationResponse<T> responseWithResource = await getOperationAction().ConfigureAwait(false);
             if (responseWithResource.Body == null)
             {
-                throw new CloudException("The response from GET operation does not contain a body.");
+                throw new CloudException(Resources.NoBody);
             }
 
             pollingState.Status = responseWithResource.Body.ProvisioningState;
@@ -303,7 +305,7 @@ namespace Microsoft.Azure
 
             if (asyncOperationResponse.Body == null)
             {
-                throw new CloudException("The response from long running operation does not contain a body.");
+                throw new CloudException(Resources.NoBody);
             }
 
             pollingState.Status = asyncOperationResponse.Body.Status;
