@@ -121,7 +121,8 @@ namespace Microsoft.Azure
         {
             get
             {
-                return new CloudException(string.Format(Resources.LongRunningOperationFailed, Status))
+                return new CloudException(string.Format(CultureInfo.InvariantCulture, 
+                    Resources.LongRunningOperationFailed, Status))
                 {
                     Body = Error,
                     Request = Request,
