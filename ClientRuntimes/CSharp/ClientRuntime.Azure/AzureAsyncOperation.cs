@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace Microsoft.Azure
 {
@@ -25,19 +26,31 @@ namespace Microsoft.Azure
         public const int DefaultDelay = 30;
 
         /// <summary>
-        /// Successful terminal statuses for long running operations.
+        /// Successful status for long running operations.
         /// </summary>
-        public static IEnumerable<string> SuccessStatuses
-        {
-            get { return new[] { "Succeeded" }; }   
-        }
+        public const string SuccessStatus = "Succeeded";
+
+        /// <summary>
+        /// In progress status for long running operations.
+        /// </summary>
+        public const string InProgressStatus = "InProgress";
+
+        /// <summary>
+        /// Failed status for long running operations.
+        /// </summary>
+        public const string FailedStatus = "Failed";
+
+        /// <summary>
+        /// Canceled status for long running operations.
+        /// </summary>
+        public const string CanceledStatus = "Canceled";
         
         /// <summary>
         /// Failed terminal statuses for long running operations.
         /// </summary>
         public static IEnumerable<string> FailedStatuses
         {
-            get { return new[] { "Failed", "Canceled" }; }   
+            get { return new[] { FailedStatus, CanceledStatus }; }   
         }
 
         /// <summary>
@@ -45,7 +58,7 @@ namespace Microsoft.Azure
         /// </summary>
         public static IEnumerable<string> TerminalStatuses
         {
-            get { return SuccessStatuses.Union(FailedStatuses); }
+            get { return FailedStatuses.Union(new []{ SuccessStatus }); }
         }
 
         /// <summary>
@@ -65,6 +78,5 @@ namespace Microsoft.Azure
         /// for the status of the operation.  
         /// </summary>
         public int RetryAfter { get; set; }
-
      }
 }

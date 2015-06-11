@@ -197,11 +197,38 @@ namespace Microsoft.Azure.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Long running operation failed..
+        ///   Looks up a localized string similar to Long running operation failed with status &apos;{0}&apos;..
         /// </summary>
         internal static string LongRunningOperationFailed {
             get {
                 return ResourceManager.GetString("LongRunningOperationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The response from long running operation does not contain a body..
+        /// </summary>
+        internal static string NoBody {
+            get {
+                return ResourceManager.GetString("NoBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location header is missing from long running operation..
+        /// </summary>
+        internal static string NoHeader {
+            get {
+                return ResourceManager.GetString("NoHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provisioning state is missing from long running operation..
+        /// </summary>
+        internal static string NoProvisioningState {
+            get {
+                return ResourceManager.GetString("NoProvisioningState", resourceCulture);
             }
         }
         
@@ -256,6 +283,15 @@ namespace Microsoft.Azure.Properties {
         internal static string TaskMustBeScheduled {
             get {
                 return ResourceManager.GetString("TaskMustBeScheduled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unexpected polling status code from long running operation &apos;{0}&apos;..
+        /// </summary>
+        internal static string UnexpectedPollingStatus {
+            get {
+                return ResourceManager.GetString("UnexpectedPollingStatus", resourceCulture);
             }
         }
     }

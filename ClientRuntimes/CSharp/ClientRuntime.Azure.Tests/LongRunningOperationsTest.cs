@@ -35,6 +35,152 @@ namespace Microsoft.Azure.Common.Test
         }
 
         [Fact]
+        public void TestAsyncOperationWithNoPayload()
+        {
+            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var handler = new PlaybackTestHandler(MockAsyncOperaionWithNoBody());
+            var fakeClient = new RedisManagementClient(tokenCredentials, handler);
+            fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
+            var error = Assert.Throws<CloudException>(() => 
+                fakeClient.RedisOperations.CreateOrUpdate("rg", "redis", new RedisCreateOrUpdateParameters(), "1234"));
+            Assert.Equal("The response from long running operation does not contain a body.", error.Message);
+        }
+
+        [Fact]
+        public void TestAsyncOperationWithEmptyPayload()
+        {
+            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var handler = new PlaybackTestHandler(MockAsyncOperaionWithEmptyBody());
+            var fakeClient = new RedisManagementClient(tokenCredentials, handler);
+            fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
+            var error = Assert.Throws<CloudException>(() =>
+                fakeClient.RedisOperations.Delete("rg", "redis", "1234"));
+            Assert.Equal("The response from long running operation does not contain a body.", error.Message);
+        }
+
+        [Fact]
+        public void TestPutOperationWithoutProvisioningState()
+        {
+            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var handler = new PlaybackTestHandler(MockPutOperaionWithoutProvisioningStateInResponse());
+            var fakeClient = new RedisManagementClient(tokenCredentials, handler);
+            fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
+            var error = Assert.Throws<CloudException>(() =>
+                fakeClient.RedisOperations.CreateOrUpdate("rg", "redis", new RedisCreateOrUpdateParameters(), "1234"));
+            Assert.Equal("Provisioning state is missing from long running operation.", error.Message);
+        }
+
+        [Fact]
+        public void TestPostOperationWithBody()
+        {
+            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var handler = new PlaybackTestHandler(MockPostOperaionWithBody());
+            var fakeClient = new RedisManagementClient(tokenCredentials, handler);
+            fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
+            fakeClient.RedisOperations.Post("rg", "redis", "1234");
+            Assert.Equal(2, handler.Requests.Count);
+            Assert.Equal(HttpMethod.Post, handler.Requests[0].Method);
+            Assert.Equal("https://management.azure.com/subscriptions/1234/resourceGroups/rg/providers/Microsoft.Cache/Redis/redis",
+                handler.Requests[0].RequestUri.ToString());
+            Assert.Equal(HttpMethod.Get, handler.Requests[1].Method);
+            Assert.Equal("http://custom/status", handler.Requests[1].RequestUri.ToString());
+        }
+
+        [Fact]
+        public void TestDeleteOperationWithNonRetryableErrorInResponse()
+        {
+            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var handler = new PlaybackTestHandler(MockDeleteOperaionWithNoRetryableErrorInResponse());
+            var fakeClient = new RedisManagementClient(tokenCredentials, handler);
+            fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
+            var error = Assert.Throws<CloudException>(() => fakeClient.RedisOperations.Delete("rg", "redis", "1234"));
+            Assert.Equal("Long running operation failed with status 'BadRequest'.", error.Message);
+            Assert.Equal(2, handler.Requests.Count);
+        }
+
+
+        [Fact]
+        public void TestCreateOrUpdateWithLocationHeaderWith202()
+        {
+            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var handler = new PlaybackTestHandler(MockCreateOrUpdateWithLocationHeaderAnd202());
+            var fakeClient = new RedisManagementClient(tokenCredentials, handler);
+            fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
+            fakeClient.RedisOperations.CreateOrUpdate("rg", "redis", new RedisCreateOrUpdateParameters(), "1234");
+
+            Assert.Equal(4, handler.Requests.Count);
+            Assert.Equal(HttpMethod.Put, handler.Requests[0].Method);
+            Assert.Equal("https://management.azure.com/subscriptions/1234/resourceGroups/rg/providers/Microsoft.Cache/Redis/redis",
+                handler.Requests[0].RequestUri.ToString());
+            Assert.Equal(HttpMethod.Get, handler.Requests[1].Method);
+            Assert.Equal("http://custom/status", handler.Requests[1].RequestUri.ToString());
+            Assert.Equal(HttpMethod.Get, handler.Requests[2].Method);
+            Assert.Equal("http://custom/locationstatus", handler.Requests[2].RequestUri.ToString());
+            Assert.Equal(HttpMethod.Get, handler.Requests[3].Method);
+            Assert.Equal("https://management.azure.com/subscriptions/1234/resourceGroups/rg/providers/Microsoft.Cache/Redis/redis", 
+                handler.Requests[3].RequestUri.ToString());
+        }
+
+        [Fact]
+        public void TestCreateOrUpdateWithAsyncHeaderWith202()
+        {
+            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var handler = new PlaybackTestHandler(MockCreateOrUpdateWithAsyncHeaderAnd202());
+            var fakeClient = new RedisManagementClient(tokenCredentials, handler);
+            fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
+            fakeClient.RedisOperations.CreateOrUpdate("rg", "redis", new RedisCreateOrUpdateParameters(), "1234");
+
+            Assert.Equal(3, handler.Requests.Count);
+            Assert.Equal(HttpMethod.Put, handler.Requests[0].Method);
+            Assert.Equal("https://management.azure.com/subscriptions/1234/resourceGroups/rg/providers/Microsoft.Cache/Redis/redis",
+                handler.Requests[0].RequestUri.ToString());
+            Assert.Equal(HttpMethod.Get, handler.Requests[1].Method);
+            Assert.Equal("http://custom/status", handler.Requests[1].RequestUri.ToString());
+            Assert.Equal(HttpMethod.Get, handler.Requests[2].Method);
+            Assert.Equal("https://management.azure.com/subscriptions/1234/resourceGroups/rg/providers/Microsoft.Cache/Redis/redis", handler.Requests[2].RequestUri.ToString());
+        }
+
+        [Fact]
+        public void TestCreateOrUpdateWithWith202AndResource()
+        {
+            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var handler = new PlaybackTestHandler(MockCreateOrUpdateWithWith202AndResource());
+            var fakeClient = new RedisManagementClient(tokenCredentials, handler);
+            fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
+            var resource = fakeClient.RedisOperations.CreateOrUpdate("rg", "redis", new RedisCreateOrUpdateParameters(), "1234");
+
+            Assert.Equal(3, handler.Requests.Count);
+            Assert.Equal(HttpMethod.Put, handler.Requests[0].Method);
+            Assert.Equal("https://management.azure.com/subscriptions/1234/resourceGroups/rg/providers/Microsoft.Cache/Redis/redis",
+                handler.Requests[0].RequestUri.ToString());
+            Assert.Equal(HttpMethod.Get, handler.Requests[1].Method);
+            Assert.Equal("http://custom/status", handler.Requests[1].RequestUri.ToString());
+            Assert.Equal(HttpMethod.Get, handler.Requests[2].Method);
+            Assert.Equal("https://management.azure.com/subscriptions/1234/resourceGroups/rg/providers/Microsoft.Cache/Redis/redis", 
+                handler.Requests[2].RequestUri.ToString());
+            Assert.Equal("Succeeded", resource.ProvisioningState);
+        }
+
+        [Fact]
+        public void TestPostWithResponse()
+        {
+            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var handler = new PlaybackTestHandler(MockPostWithResourceSku());
+            var fakeClient = new RedisManagementClient(tokenCredentials, handler);
+            fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
+            var resource = fakeClient.RedisOperations.Post("rg", "redis", "1234");
+
+            Assert.Equal(2, handler.Requests.Count);
+            Assert.Equal(HttpMethod.Post, handler.Requests[0].Method);
+            Assert.Equal("https://management.azure.com/subscriptions/1234/resourceGroups/rg/providers/Microsoft.Cache/Redis/redis",
+                handler.Requests[0].RequestUri.ToString());
+            Assert.Equal(HttpMethod.Get, handler.Requests[1].Method);
+            Assert.Equal("http://custom/status",
+                handler.Requests[1].RequestUri.ToString());
+            Assert.Equal("Family", resource.Family);
+        }
+
+        [Fact]
         public void TestCreateOrUpdateNoAsyncHeader()
         {
             var tokenCredentials = new TokenCloudCredentials("123", "abc");
@@ -70,8 +216,8 @@ namespace Microsoft.Azure.Common.Test
             }
             catch (CloudException ex)
             {
-                Assert.Equal("Long running operation failed.", ex.Message);
-                Assert.Contains("Failed", ex.Response.Content.ReadAsStringAsync().Result);
+                Assert.Equal("Long running operation failed with status 'Failed'.", ex.Message);
+                Assert.Contains(AzureAsyncOperation.FailedStatus, ex.Response.Content.ReadAsStringAsync().Result);
             }
 
         }
@@ -187,15 +333,8 @@ namespace Microsoft.Azure.Common.Test
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
 
-            try
-            {
-                fakeClient.RedisOperations.Delete("rg", "redis", "1234");
-                Assert.False(true, "Expected exception was not thrown.");
-            }
-            catch (CloudException ex)
-            {
-                Assert.Equal("Long running operation failed.", ex.Message);
-            }
+            var ex = Assert.Throws<CloudException>(()=>fakeClient.RedisOperations.Delete("rg", "redis", "1234"));
+            Assert.Equal("Long running operation failed with status 'InternalServerError'.", ex.Message);
         }
 
         [Fact]
@@ -260,6 +399,265 @@ namespace Microsoft.Azure.Common.Test
                         ""provisioningState"": ""Succeeded"",
                         ""comment"": ""Resource defined structure""
                     }
+                }")
+            };
+
+            yield return response3;
+        }
+
+        private IEnumerable<HttpResponseMessage> MockAsyncOperaionWithNoBody()
+        {
+            var response1 = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(@"
+                {
+                    ""location"": ""North US"",
+                    ""tags"": {
+                        ""key1"": ""value 1"",
+                        ""key2"": ""value 2""
+                        },
+    
+                    ""properties"": { 
+                        ""provisioningState"": ""InProgress"",
+                        ""comment"": ""Resource defined structure""
+                    }
+                }")
+            };
+            response1.Headers.Add("Azure-AsyncOperation", "http://custom/status");
+
+            yield return response1;
+
+            var response2 = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("")
+            };
+
+            yield return response2;
+        }
+
+        private IEnumerable<HttpResponseMessage> MockAsyncOperaionWithEmptyBody()
+        {
+            var response1 = new HttpResponseMessage(HttpStatusCode.Accepted)
+            {
+                Content = new StringContent("")
+            };
+            response1.Headers.Add("Azure-AsyncOperation", "http://custom/status");
+
+            yield return response1;
+
+            var response2 = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("{}")
+            };
+
+            yield return response2;
+        }
+
+        private IEnumerable<HttpResponseMessage> MockPutOperaionWithoutProvisioningStateInResponse()
+        {
+            var response1 = new HttpResponseMessage(HttpStatusCode.Created)
+            {
+                Content = new StringContent("{ \"properties\": { }, \"id\": \"100\", \"name\": \"foo\" }")
+            };
+
+            yield return response1;
+        }
+
+        private IEnumerable<HttpResponseMessage> MockPostOperaionWithBody()
+        {
+            var response1 = new HttpResponseMessage(HttpStatusCode.Accepted)
+            {
+                Content = new StringContent("")
+            };
+            response1.Headers.Add("Location", "http://custom/status");
+
+            yield return response1;
+
+            var response2 = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("{ \"properties\": { \"provisioningState\": \"Succeeded\"}, \"id\": \"100\", \"name\": \"foo\" }")
+            };
+
+            yield return response2;
+        }
+
+        private IEnumerable<HttpResponseMessage> MockDeleteOperaionWithNoRetryableErrorInResponse()
+        {
+            var response1 = new HttpResponseMessage(HttpStatusCode.Accepted)
+            {
+                Content = new StringContent("")
+            };
+            response1.Headers.Add("Location", "http://custom/status");
+            yield return response1;
+
+            var response2 = new HttpResponseMessage(HttpStatusCode.BadRequest)
+            {
+                Content = new StringContent("")
+            };
+            yield return response2;
+        }
+
+        private IEnumerable<HttpResponseMessage> MockCreateOrUpdateWithLocationHeaderAnd202()
+        {
+            var response1 = new HttpResponseMessage(HttpStatusCode.Accepted)
+            {
+                Content = new StringContent("null")
+            };
+            response1.Headers.Add("Location", "http://custom/status");
+
+            yield return response1;
+
+            var response2 = new HttpResponseMessage(HttpStatusCode.Accepted)
+            {
+                Content = new StringContent("")
+            };
+            response2.Headers.Add("Location", "http://custom/locationstatus");
+
+            yield return response2;
+
+            var response3 = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(@"
+                {
+                    ""location"": ""North US"",
+                    ""tags"": {
+                        ""key1"": ""value 1"",
+                        ""key2"": ""value 2""
+                        },
+    
+                    ""properties"": { 
+                        ""provisioningState"": ""InProgress"",
+                        ""comment"": ""Resource defined structure""
+                    }
+                }")
+            };
+
+            yield return response3;
+
+            var response4 = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(@"
+                {
+                    ""location"": ""North US"",
+                    ""tags"": {
+                        ""key1"": ""value 1"",
+                        ""key2"": ""value 2""
+                        },
+    
+                    ""properties"": { 
+                        ""provisioningState"": ""Succeeded"",
+                        ""comment"": ""Resource defined structure""
+                    }
+                }")
+            };
+
+            yield return response4;
+        }
+
+        private IEnumerable<HttpResponseMessage> MockCreateOrUpdateWithAsyncHeaderAnd202()
+        {
+            var response1 = new HttpResponseMessage(HttpStatusCode.Accepted)
+            {
+                Content = new StringContent("null")
+            };
+            response1.Headers.Add("Azure-AsyncOperation", "http://custom/status");
+
+            yield return response1;
+
+            var response2 = new HttpResponseMessage(HttpStatusCode.Accepted)
+            {
+                Content = new StringContent(@"
+                {
+                    ""status"" : ""Succeeded"", 
+                    ""error"" : {
+                        ""code"": ""BadArgument"",  
+                        ""message"": ""The provided database ‘foo’ has an invalid username."" 
+                    }
+                }")
+            };
+
+            yield return response2;
+
+            var response3 = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(@"
+                {
+                    ""location"": ""North US"",
+                    ""tags"": {
+                        ""key1"": ""value 1"",
+                        ""key2"": ""value 2""
+                        },
+    
+                    ""properties"": { 
+                        ""provisioningState"": ""InProgress"",
+                        ""comment"": ""Resource defined structure""
+                    }
+                }")
+            };
+
+            yield return response3;
+        }
+
+        private IEnumerable<HttpResponseMessage> MockCreateOrUpdateWithWith202AndResource()
+        {
+            var response1 = new HttpResponseMessage(HttpStatusCode.Accepted)
+            {
+                Content = new StringContent("null")
+            };
+            response1.Headers.Add("Azure-AsyncOperation", "http://custom/status");
+
+            yield return response1;
+
+            var response2 = new HttpResponseMessage(HttpStatusCode.Accepted)
+            {
+                Content = new StringContent(@"
+                {
+                    ""status"" : ""Succeeded"", 
+                    ""error"" : {
+                        ""code"": ""BadArgument"",  
+                        ""message"": ""The provided database ‘foo’ has an invalid username."" 
+                    }
+                }")
+            };
+
+            yield return response2;
+
+            var response3 = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(@"
+                {
+                    ""location"": ""North US"",
+                    ""tags"": {
+                        ""key1"": ""value 1"",
+                        ""key2"": ""value 2""
+                        },
+    
+                    ""properties"": { 
+                        ""provisioningState"": ""Succeeded"",
+                        ""comment"": ""Resource defined structure""
+                    }
+                }")
+            };
+
+            yield return response3;
+        }
+
+        private IEnumerable<HttpResponseMessage> MockPostWithResourceSku()
+        {
+            var response1 = new HttpResponseMessage(HttpStatusCode.Accepted)
+            {
+                Content = new StringContent("null")
+            };
+            response1.Headers.Add("Location", "http://custom/status");
+
+            yield return response1;
+
+            var response3 = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(@"
+                {
+                    ""Capacity"": ""1"",
+                    ""Family"": ""Family""
                 }")
             };
 

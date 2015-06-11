@@ -28,6 +28,7 @@
     <Compile Include="JsonSerializerExtensions.cs" />
     <Compile Include="OData\FilterString.cs" />
     <Compile Include="OData\UrlExpressionVisitor.cs" />
+    <Compile Include="PollingState.cs" />
     <Compile Include="Resource.cs" />
     <Compile Include="CloudErrorJsonConverter.cs" />
     <Compile Include="ResourceJsonConverter.cs" />

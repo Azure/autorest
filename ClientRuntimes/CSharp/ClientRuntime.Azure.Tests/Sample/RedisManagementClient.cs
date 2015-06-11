@@ -646,6 +646,35 @@ namespace Microsoft.Azure.Management.Redis
             return;
         }
 
+        public static Sku BeginPost(this IRedisOperations operations, string resourceGroupName, string name, string subscriptionId)
+        {
+            return Task.Factory.StartNew((object s) =>
+            {
+                return ((IRedisOperations)s).BeginPostAsync(resourceGroupName, name, subscriptionId);
+            }
+            , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+        }
+
+        public static Sku Post(this IRedisOperations operations, string resourceGroupName, string name, string subscriptionId)
+        {
+            return Task.Factory.StartNew((object s) =>
+            {
+                return ((IRedisOperations)s).PostAsync(resourceGroupName, name, subscriptionId);
+            }
+            , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+        }
+        public static async Task<Sku> BeginPostAsync(this IRedisOperations operations, string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            AzureOperationResponse<Sku> result = await operations.BeginPostWithOperationResponseAsync(resourceGroupName, name, subscriptionId, cancellationToken).ConfigureAwait(false);
+            return result.Body;
+        }
+        public static async Task<Sku> PostAsync(this IRedisOperations operations, string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            AzureOperationResponse<Sku> result = await operations.PostWithOperationResponseAsync(resourceGroupName, name, subscriptionId, cancellationToken).ConfigureAwait(false);
+            return result.Body;
+        }
+
+
         /// <summary>
         /// Gets a redis cache (resource description).
         /// </summary>
@@ -754,6 +783,9 @@ namespace Microsoft.Azure.Management.Redis
         /// Cancellation token.
         /// </param>
         Task<AzureOperationResponse<RedisResource>> GetWithOperationResponseAsync(string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        Task<AzureOperationResponse<Sku>> BeginPostWithOperationResponseAsync(string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<AzureOperationResponse<Sku>> PostWithOperationResponseAsync(string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     }
 
     internal partial class RedisOperations : IServiceOperations<RedisManagementClient>, IRedisOperations
@@ -887,7 +919,7 @@ namespace Microsoft.Azure.Management.Redis
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-            if (statusCode != HttpStatusCode.OK && statusCode != HttpStatusCode.Created)
+            if (statusCode != HttpStatusCode.OK && statusCode != HttpStatusCode.Created && statusCode != HttpStatusCode.Accepted)
             {
                 CloudError error = JsonConvert.DeserializeObject<CloudError>(responseContent, Client.DeserializationSettings);
                 CloudException ex = new CloudException();
@@ -934,7 +966,9 @@ namespace Microsoft.Azure.Management.Redis
                 subscriptionId,
                 cancellationToken);
 
-            Debug.Assert(response.Response.StatusCode == HttpStatusCode.OK || response.Response.StatusCode == HttpStatusCode.Created);
+            Debug.Assert(response.Response.StatusCode == HttpStatusCode.OK || 
+                         response.Response.StatusCode == HttpStatusCode.Created ||
+                         response.Response.StatusCode == HttpStatusCode.Accepted);
 
             return await this.Client.GetPutOperationResultAsync(response, 
                 () => GetWithOperationResponseAsync(resourceGroupName, name, subscriptionId, cancellationToken),
@@ -1080,6 +1114,134 @@ namespace Microsoft.Azure.Management.Redis
 
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
         }
+
+        public async Task<AzureOperationResponse<Sku>> BeginPostWithOperationResponseAsync(string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // Validate
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException("resourceGroupName");
+            }
+            if (name == null)
+            {
+                throw new ArgumentNullException("name");
+            }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException("subscriptionId");
+            }
+
+            // Tracing
+            bool shouldTrace = ServiceClientTracing.IsEnabled;
+            string invocationId = null;
+            if (shouldTrace)
+            {
+                invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("resourceGroupName", resourceGroupName);
+                tracingParameters.Add("name", name);
+                tracingParameters.Add("subscriptionId", subscriptionId);
+                ServiceClientTracing.Enter(invocationId, this, "BeginDeleteAsync", tracingParameters);
+            }
+
+            // Construct URL
+            string url = "";
+            url = url + "/subscriptions/";
+            url = url + Uri.EscapeDataString(subscriptionId);
+            url = url + "/resourceGroups/";
+            url = url + Uri.EscapeDataString(resourceGroupName);
+            url = url + "/providers/Microsoft.Cache/Redis/";
+            url = url + Uri.EscapeDataString(name);
+            string baseUrl = this.Client.BaseUri.AbsoluteUri;
+            // Trim '/' character from the end of baseUrl and beginning of url.
+            if (baseUrl[baseUrl.Length - 1] == '/')
+            {
+                baseUrl = baseUrl.Substring(0, baseUrl.Length - 1);
+            }
+            if (url[0] == '/')
+            {
+                url = url.Substring(1);
+            }
+            url = baseUrl + "/" + url;
+            url = url.Replace(" ", "%20");
+
+            // Create HTTP transport objects
+            HttpRequestMessage httpRequest = new HttpRequestMessage();
+            httpRequest.Method = HttpMethod.Post;
+            httpRequest.RequestUri = new Uri(url);
+
+            // Set Credentials
+            if (this.Client.Credentials != null)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            }
+
+            // Send Request
+            if (shouldTrace)
+            {
+                ServiceClientTracing.SendRequest(invocationId, httpRequest);
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            if (shouldTrace)
+            {
+                ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
+            }
+            HttpStatusCode statusCode = httpResponse.StatusCode;
+            cancellationToken.ThrowIfCancellationRequested();
+            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            if (statusCode != HttpStatusCode.OK && statusCode != HttpStatusCode.Accepted && statusCode != HttpStatusCode.NotFound)
+            {
+                CloudError error = JsonConvert.DeserializeObject<CloudError>(responseContent, Client.DeserializationSettings);
+                CloudException ex = new CloudException();
+                if (error != null)
+                {
+                    ex = new CloudException(error.Message);
+                }
+                ex.Request = httpRequest;
+                ex.Response = httpResponse;
+                if (shouldTrace)
+                {
+                    ServiceClientTracing.Error(invocationId, ex);
+                }
+                throw ex;
+            }
+
+            // Create Result
+            AzureOperationResponse<Sku> result = new AzureOperationResponse<Sku>();
+            result.Request = httpRequest;
+            result.Response = httpResponse;
+            result.Body = JsonConvert.DeserializeObject<Sku>(responseContent, this.Client.DeserializationSettings);
+
+            if (shouldTrace)
+            {
+                ServiceClientTracing.Exit(invocationId, result);
+            }
+            return result;
+        }
+
+        public async Task<AzureOperationResponse<Sku>> PostWithOperationResponseAsync(
+            string resourceGroupName,
+            string name,
+            string subscriptionId,
+            CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // Send Request
+            AzureOperationResponse<Sku> response = await BeginPostWithOperationResponseAsync(
+                resourceGroupName,
+                name,
+                subscriptionId,
+                cancellationToken);
+
+            Debug.Assert(response.Response.StatusCode == HttpStatusCode.OK ||
+                response.Response.StatusCode == HttpStatusCode.Accepted ||
+                response.Response.StatusCode == HttpStatusCode.Created);
+
+            return await this.Client.GetPostOrDeleteOperationResultAsync<Sku>(response, cancellationToken);
+        }
+
+
 
         /// <summary>
         /// Gets a redis cache (resource description).

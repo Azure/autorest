@@ -17,6 +17,7 @@ namespace Microsoft.Azure
         {
             Details = new List<CloudError>();
         }
+
         /// <summary>
         /// The error code parsed from the body of the http error response
         /// </summary>

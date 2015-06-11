@@ -164,7 +164,16 @@ Parameter name: {0}</value>
     <value>The default RetryManager has not been set. Set it by invoking the RetryManager.SetDefault static method, or if you are using declarative configuration, you can invoke the RetryPolicyFactory.CreateDefault() method to automatically create the retry manager from the configuration file.</value>
   </data>
   <data name="LongRunningOperationFailed" xml:space="preserve">
-    <value>Long running operation failed.</value>
+    <value>Long running operation failed with status '{0}'.</value>
+  </data>
+  <data name="NoBody" xml:space="preserve">
+    <value>The response from long running operation does not contain a body.</value>
+  </data>
+  <data name="NoHeader" xml:space="preserve">
+    <value>Location header is missing from long running operation.</value>
+  </data>
+  <data name="NoProvisioningState" xml:space="preserve">
+    <value>Provisioning state is missing from long running operation.</value>
   </data>
   <data name="ResponseStatusCodeError" xml:space="preserve">
     <value>Response status code indicates server error: {0} ({1}).</value>
@@ -183,5 +192,8 @@ Parameter name: {0}</value>
   </data>
   <data name="TaskMustBeScheduled" xml:space="preserve">
     <value>The specified argument '{0}' must return a scheduled task (also known as "hot" task) when invoked.</value>
+  </data>
+  <data name="UnexpectedPollingStatus" xml:space="preserve">
+    <value>Unexpected polling status code from long running operation '{0}'.</value>
   </data>
 </root>
