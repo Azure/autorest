@@ -71,6 +71,62 @@ namespace Microsoft.Azure.Common.Test
         }
 
         [Fact]
+        public void TestPutOperationWithImmediateSuccess()
+        {
+            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var handler = new PlaybackTestHandler(MockPutOperaionWithImmediateSuccess());
+            var fakeClient = new RedisManagementClient(tokenCredentials, handler);
+            fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
+            fakeClient.RedisOperations.CreateOrUpdate("rg", "redis", new RedisCreateOrUpdateParameters(), "1234");
+            Assert.Equal(1, handler.Requests.Count);
+        }
+
+        [Fact]
+        public void TestDeleteOperationWithImmediateSuccessAndOkStatus()
+        {
+            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var handler = new PlaybackTestHandler(MockOperaionWithImmediateSuccessOKStatus());
+            var fakeClient = new RedisManagementClient(tokenCredentials, handler);
+            fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
+            fakeClient.RedisOperations.Delete("rg", "redis", "1234");
+            Assert.Equal(1, handler.Requests.Count);
+        }
+
+        [Fact]
+        public void TestDeleteOperationWithImmediateSuccessAndNoContentStatus()
+        {
+            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var handler = new PlaybackTestHandler(MockOperaionWithImmediateSuccessNoContentStatus());
+            var fakeClient = new RedisManagementClient(tokenCredentials, handler);
+            fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
+            fakeClient.RedisOperations.Delete("rg", "redis", "1234");
+            Assert.Equal(1, handler.Requests.Count);
+        }
+
+        [Fact]
+        public void TestPostOperationWithImmediateSuccessAndOkStatus()
+        {
+            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var handler = new PlaybackTestHandler(MockPostOperaionWithImmediateSuccessOKStatus());
+            var fakeClient = new RedisManagementClient(tokenCredentials, handler);
+            fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
+            var sku = fakeClient.RedisOperations.Post("rg", "redis", "1234");
+            Assert.Equal(1, handler.Requests.Count);
+            Assert.Equal("Family", sku.Family);
+        }
+
+        [Fact]
+        public void TestPostOperationWithImmediateSuccessAndNoContentStatus()
+        {
+            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var handler = new PlaybackTestHandler(MockOperaionWithImmediateSuccessNoContentStatus());
+            var fakeClient = new RedisManagementClient(tokenCredentials, handler);
+            fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
+            var sku = fakeClient.RedisOperations.Post("rg", "redis", "1234");
+            Assert.Equal(1, handler.Requests.Count);
+        }
+
+        [Fact]
         public void TestPostOperationWithBody()
         {
             var tokenCredentials = new TokenCloudCredentials("123", "abc");
@@ -458,6 +514,46 @@ namespace Microsoft.Azure.Common.Test
             var response1 = new HttpResponseMessage(HttpStatusCode.Created)
             {
                 Content = new StringContent("{ \"properties\": { }, \"id\": \"100\", \"name\": \"foo\" }")
+            };
+
+            yield return response1;
+        }
+
+        private IEnumerable<HttpResponseMessage> MockPutOperaionWithImmediateSuccess()
+        {
+            var response1 = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("{ \"properties\": { \"provisioningState\": \"Succeeded\"}, \"id\": \"100\", \"name\": \"foo\" }")
+            };
+
+            yield return response1;
+        }
+
+        private IEnumerable<HttpResponseMessage> MockOperaionWithImmediateSuccessOKStatus()
+        {
+            var response1 = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("")
+            };
+
+            yield return response1;
+        }
+
+        private IEnumerable<HttpResponseMessage> MockPostOperaionWithImmediateSuccessOKStatus()
+        {
+            var response1 = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("{\"Capacity\":1,\"Family\":\"Family\"}")
+            };
+
+            yield return response1;
+        }
+
+        private IEnumerable<HttpResponseMessage> MockOperaionWithImmediateSuccessNoContentStatus()
+        {
+            var response1 = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("")
             };
 
             yield return response1;

@@ -19,16 +19,17 @@ namespace Microsoft.Azure
         private int? _retryTimeout;
 
         /// <summary>
-        /// Initializes an instance of PollingState from HttpOperationResponse.
+        /// Initializes an instance of PollingState.
         /// </summary>
         /// <param name="response">First operation response.</param>
         /// <param name="retryTimeout">Default timeout.</param>
-        public PollingState(HttpOperationResponse response, int? retryTimeout)
+        public PollingState(HttpOperationResponse<T> response, int? retryTimeout)
         {
+            _retryTimeout = retryTimeout;
             Response = response.Response;
             Request = response.Request;
-            _retryTimeout = retryTimeout;
-
+            Resource = response.Body;
+            
             switch (Response.StatusCode)
             {
                 case HttpStatusCode.Accepted:
@@ -45,27 +46,10 @@ namespace Microsoft.Azure
                     Status = AzureAsyncOperation.FailedStatus;
                     break;
             }
-        }
 
-        /// <summary>
-        /// Initializes an instance of PollingState from generic HttpOperationResponse.
-        /// </summary>
-        /// <param name="response">First operation response.</param>
-        /// <param name="retryTimeout">Default timeout.</param>
-        public PollingState(HttpOperationResponse<T> response, int? retryTimeout)
-            : this((HttpOperationResponse) response, retryTimeout)
-        {
-            if (Response.StatusCode != HttpStatusCode.Accepted)
+            if (response.Body is Resource)
             {
-                if (response.Body == null)
-                {
-                    throw new CloudException(Resources.NoBody);
-                }
-
-                if (response.Body is Resource)
-                {
-                    Status = (response.Body as Resource).ProvisioningState;
-                }
+                Status = (response.Body as Resource).ProvisioningState;
             }
         }
 

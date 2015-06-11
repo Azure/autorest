@@ -1066,7 +1066,8 @@ namespace Microsoft.Azure.Management.Redis
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-            if (statusCode != HttpStatusCode.OK && statusCode != HttpStatusCode.Accepted && statusCode != HttpStatusCode.NotFound)
+            if (statusCode != HttpStatusCode.OK && statusCode != HttpStatusCode.Accepted 
+                && statusCode != HttpStatusCode.NotFound && statusCode != HttpStatusCode.NoContent)
             {
                 CloudError error = JsonConvert.DeserializeObject<CloudError>(responseContent, Client.DeserializationSettings);
                 CloudException ex = new CloudException();
@@ -1110,7 +1111,8 @@ namespace Microsoft.Azure.Management.Redis
 
             Debug.Assert(response.Response.StatusCode == HttpStatusCode.OK || 
                 response.Response.StatusCode == HttpStatusCode.Accepted || 
-                response.Response.StatusCode == HttpStatusCode.Created);
+                response.Response.StatusCode == HttpStatusCode.Created ||
+                response.Response.StatusCode == HttpStatusCode.NoContent);
 
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
         }
