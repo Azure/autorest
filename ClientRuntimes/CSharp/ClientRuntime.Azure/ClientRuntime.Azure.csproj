@@ -13,6 +13,9 @@
     <OutputType>Library</OutputType>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Net45-Debug'">
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
   <Import Project="$(SolutionDir)\tools\AutoRest.Settings.targets" />
   <ItemGroup>
     <None Include="Microsoft.Azure.Common.nuget.proj" />
