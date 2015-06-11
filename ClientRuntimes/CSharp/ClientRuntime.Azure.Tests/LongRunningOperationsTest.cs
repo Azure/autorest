@@ -99,8 +99,20 @@ namespace Microsoft.Azure.Common.Test
         [Fact]
         public void TestPostWithResponse()
         {
-            // Location header should point to the resource.
-            Assert.False(true);
+            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var handler = new PlaybackTestHandler(MockPostWithResourceSku());
+            var fakeClient = new RedisManagementClient(tokenCredentials, handler);
+            fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
+            var resource = fakeClient.RedisOperations.Post("rg", "redis", "1234");
+
+            Assert.Equal(2, handler.Requests.Count);
+            Assert.Equal(HttpMethod.Post, handler.Requests[0].Method);
+            Assert.Equal("https://management.azure.com/subscriptions/1234/resourceGroups/rg/providers/Microsoft.Cache/Redis/redis",
+                handler.Requests[0].RequestUri.ToString());
+            Assert.Equal(HttpMethod.Get, handler.Requests[1].Method);
+            Assert.Equal("http://custom/status",
+                handler.Requests[1].RequestUri.ToString());
+            Assert.Equal("Family", resource.Family);
         }
 
         [Fact]
@@ -474,6 +486,28 @@ namespace Microsoft.Azure.Common.Test
                         ""provisioningState"": ""Succeeded"",
                         ""comment"": ""Resource defined structure""
                     }
+                }")
+            };
+
+            yield return response3;
+        }
+
+        private IEnumerable<HttpResponseMessage> MockPostWithResourceSku()
+        {
+            var response1 = new HttpResponseMessage(HttpStatusCode.Accepted)
+            {
+                Content = new StringContent("null")
+            };
+            response1.Headers.Add("Location", "http://custom/status");
+
+            yield return response1;
+
+            var response3 = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(@"
+                {
+                    ""Capacity"": ""1"",
+                    ""Family"": ""Family""
                 }")
             };
 

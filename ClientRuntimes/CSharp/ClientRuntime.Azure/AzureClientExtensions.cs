@@ -95,7 +95,7 @@ namespace Microsoft.Azure
         /// <returns>Operation response</returns>
         public static async Task<AzureOperationResponse<T>> GetPostOrDeleteOperationResultAsync<T>(
             this IAzureClient client,
-            AzureOperationResponse response,
+            AzureOperationResponse<T> response,
             CancellationToken cancellationToken) where T : class
         {
             if (response == null)
@@ -158,7 +158,14 @@ namespace Microsoft.Azure
             AzureOperationResponse response,
             CancellationToken cancellationToken)
         {
-            var azureOperationResponse = await client.GetPostOrDeleteOperationResultAsync<object>(response, cancellationToken);
+            var newResponse = new AzureOperationResponse<object>
+            {
+                Request = response.Request,
+                Response = response.Response,
+                RequestId = response.RequestId
+            };
+
+            var azureOperationResponse = await client.GetPostOrDeleteOperationResultAsync<object>(newResponse, cancellationToken);
             return new AzureOperationResponse
             {
                 Request = azureOperationResponse.Request,
