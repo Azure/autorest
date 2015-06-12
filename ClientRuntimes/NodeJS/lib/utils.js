@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information. 
 
 var Constants = require('./constants');
+var _ = require('underscore');
 
 /**
 * Checks if a parsed URL is HTTPS
@@ -25,6 +26,16 @@ exports.getNodeVersion = function () {
     minor: parseInt(parsedVersion[1], 10),
     patch: parseInt(parsedVersion[2], 10)
   };
+};
+
+/**
+* Checks if a value is null or undefined.
+*
+* @param {object} value The value to check for null or undefined.
+* @return {bool} True if the value is null or undefined, false otherwise.
+*/
+exports.objectIsNull = function (value) {
+  return _.isNull(value) || _.isUndefined(value);
 };
 
 /**

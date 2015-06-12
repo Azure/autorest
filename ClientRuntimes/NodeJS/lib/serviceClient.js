@@ -8,34 +8,48 @@ var Constants = require('./constants');
 var ProxyFilter = require('./filters/proxyfilter');
 var RedirectFilter = require('./filters/redirectfilter');
 var SigningFilter = require('./filters/signingfilter');
+var ExponentialRetryPolicyFilter = require('./filters/exponentialretrypolicyfilter');
 var requestPipeline = require('./requestPipeline');
 var utils = require('./utils');
 
 /**
-   * @class
-   * Initializes a new instance of the ServiceClient class.
-   * @constructor
-   * 
-   * @param {object} credentials - BasicAuthenticationCredentials or 
-   * TokenCredentials object used for authentication.  
-   * 
-   * @param {Array} filters
-   */
-function ServiceClient(credentials, filters) {
-  if (!filters) {
-    filters = [];
+ * @class
+ * Initializes a new instance of the ServiceClient class.
+ * @constructor
+ * @param {object} options The parameter options
+ * 
+ * @param {object} [options.credentials]    - BasicAuthenticationCredentials or 
+ * TokenCredentials object used for authentication.  
+ * 
+ * @param {Array} [options.filters]         - Filters to be added to the request pipeline
+ * 
+ * @param {object} [options.requestOptions] - Options for the request object
+ * {@link https://github.com/request/request#requestoptions-callback Options doc}
+ */
+function ServiceClient(options) {
+  if (!options) {
+    options = {};
+  }
+  
+  if (!options.requestOptions) {
+    options.requestOptions = {};
   }
 
-  if (credentials && !credentials.signRequest) {
+  if (!options.filters) {
+    options.filters = [];
+  }
+  
+  if (options.credentials && !options.credentials.signRequest) {
     throw new Error('credentials argument needs to implement signRequest method');
   }
 
-  if (credentials) {
-    filters.push(SigningFilter.create(credentials));
+  if (options.credentials) {
+    options.filters.push(SigningFilter.create(options.credentials));
   }
 
-  filters.push(RedirectFilter.create());
-  this.pipeline = requestPipeline.create.apply(requestPipeline, filters);
+  options.filters.push(RedirectFilter.create());
+  options.filters.push(new ExponentialRetryPolicyFilter());
+  this.pipeline = requestPipeline.create(options.requestOptions).apply(requestPipeline, options.filters);
   
   // enable fiddler tracing
   this._setDefaultProxy();

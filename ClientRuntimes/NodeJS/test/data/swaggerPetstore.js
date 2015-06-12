@@ -25,10 +25,18 @@ var SwaggerPetstore = ( /** @lends SwaggerPetstore */ function() {
    * 
    * @param {string} [baseUri] The base URI of the service.
    * 
-   * @param {Array} filters
+   * @param {object} options The parameter options
+   *
+   * @param {object} [options.credentials] - BasicAuthenticationCredentials or 
+   * TokenCredentials object used for authentication.  
+   * 
+   * @param {Array} [options.filters] - Filters to be added to the request pipeline
+   * 
+   * @param {object} [options.requestOptions] - Options for the request object
+   * {@link https://github.com/request/request#requestoptions-callback Options doc}
    */
-  function SwaggerPetstore(baseUri, credentials, filters) {
-    SwaggerPetstore['super_'].call(this, credentials, filters);
+  function SwaggerPetstore(baseUri, options) {
+    SwaggerPetstore['super_'].call(this, options);
     
     this.baseUri = baseUri;
     if (this.baseUri === null || this.baseUri === undefined) {

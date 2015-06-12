@@ -26,6 +26,7 @@ exports.BasicAuthenticationCredentials = require('./credentials/basicAuthenticat
 exports.ProxyFilter = require('./filters/proxyFilter');
 exports.LogFilter = require('./filters/logFilter');
 exports.SigningFilter = require('./filters/signingFilter');
+exports.ExponentialRetryPolicyFilter = require('./filters/exponentialretrypolicyfilter');
 
 exports.validate = require('./validate');
 exports.requestPipeline = require('./requestPipeline');
