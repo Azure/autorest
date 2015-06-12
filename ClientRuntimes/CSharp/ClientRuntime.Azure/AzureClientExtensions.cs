@@ -195,7 +195,17 @@ namespace Microsoft.Azure
                 throw new CloudException(Resources.NoBody);
             }
 
-            pollingState.Status = responseWithResource.Body.ProvisioningState;
+            // In 202 pattern on PUT ProvisioningState may not be present in 
+            // the response. In that case the assumption is the status is Succeeded.
+            if (responseWithResource.Body.ProvisioningState != null)
+            {
+                pollingState.Status = responseWithResource.Body.ProvisioningState;
+            }
+            else
+            {
+                pollingState.Status = AzureAsyncOperation.SuccessStatus;
+            }
+
             pollingState.Error = new CloudError()
             {
                 Code = pollingState.Status,
@@ -240,7 +250,17 @@ namespace Microsoft.Azure
                     throw new CloudException(Resources.NoBody);
                 }
 
-                pollingState.Status = responseWithResource.Body.ProvisioningState;
+                // In 202 pattern on PUT ProvisioningState may not be present in 
+                // the response. In that case the assumption is the status is Succeeded.
+                if (responseWithResource.Body.ProvisioningState != null)
+                {
+                    pollingState.Status = responseWithResource.Body.ProvisioningState;
+                }
+                else
+                {
+                    pollingState.Status = AzureAsyncOperation.SuccessStatus;
+                }
+
                 pollingState.Error = new CloudError()
                 {
                     Code = pollingState.Status,

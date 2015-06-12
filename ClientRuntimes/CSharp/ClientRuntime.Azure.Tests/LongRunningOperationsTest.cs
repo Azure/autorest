@@ -59,6 +59,28 @@ namespace Microsoft.Azure.Common.Test
         }
 
         [Fact]
+        public void TestAsyncOperationWithBadPayload()
+        {
+            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var handler = new PlaybackTestHandler(MockAsyncOperaionWithBadPayload());
+            var fakeClient = new RedisManagementClient(tokenCredentials, handler);
+            fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
+            var resource = fakeClient.RedisOperations.CreateOrUpdate("rg", "redis", new RedisCreateOrUpdateParameters(), "1234");
+            Assert.Equal("100", resource.Id);
+        }
+
+        [Fact]
+        public void TestAsyncOperationWithMissingProvisioningState()
+        {
+            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var handler = new PlaybackTestHandler(MockAsyncOperaionWithMissingProvisioningState());
+            var fakeClient = new RedisManagementClient(tokenCredentials, handler);
+            fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
+            var resource = fakeClient.RedisOperations.CreateOrUpdate("rg", "redis", new RedisCreateOrUpdateParameters(), "1234");
+            Assert.Equal("100", resource.Id);
+        }
+
+        [Fact]
         public void TestPutOperationWithoutProvisioningState()
         {
             var tokenCredentials = new TokenCloudCredentials("123", "abc");
@@ -507,6 +529,58 @@ namespace Microsoft.Azure.Common.Test
             };
 
             yield return response2;
+        }
+
+        private IEnumerable<HttpResponseMessage> MockAsyncOperaionWithBadPayload()
+        {
+            var response1 = new HttpResponseMessage(HttpStatusCode.Accepted)
+            {
+                Content = new StringContent("")
+            };
+            response1.Headers.Add("Location", "http://custom/status");
+
+            yield return response1;
+
+            var response2 = new HttpResponseMessage(HttpStatusCode.Accepted)
+            {
+                Content = new StringContent("null")
+            };
+            response2.Headers.Add("Location", "http://custom/status2");
+
+            yield return response2;
+
+            var response3 = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("{ \"properties\": { \"provisioningState\" : \"Succeeded\" }, \"id\": \"100\", \"name\": \"foo\" }")
+            };
+
+            yield return response3;
+        }
+
+        private IEnumerable<HttpResponseMessage> MockAsyncOperaionWithMissingProvisioningState()
+        {
+            var response1 = new HttpResponseMessage(HttpStatusCode.Accepted)
+            {
+                Content = new StringContent("")
+            };
+            response1.Headers.Add("Location", "http://custom/status");
+
+            yield return response1;
+
+            var response2 = new HttpResponseMessage(HttpStatusCode.Accepted)
+            {
+                Content = new StringContent("null")
+            };
+            response2.Headers.Add("Location", "http://custom/status2");
+
+            yield return response2;
+
+            var response3 = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("{ \"properties\": { }, \"id\": \"100\", \"name\": \"foo\" }")
+            };
+
+            yield return response3;
         }
 
         private IEnumerable<HttpResponseMessage> MockPutOperaionWithoutProvisioningStateInResponse()

@@ -53,15 +53,22 @@ namespace Microsoft.Azure
 
             JsonSerializer newSerializer = GetSerializerWithoutCurrentConverter(serializer);
 
-            JObject resourceJObject = JObject.Load(reader);
-            var resource = resourceJObject.ToObject(objectType, newSerializer);
-            JObject propertiesJObject = resourceJObject[PropertiesNode] as JObject;
-            if (propertiesJObject != null)
+            try
             {
-                newSerializer.Populate(propertiesJObject.CreateReader(), resource);
+                JObject resourceJObject = JObject.Load(reader);
+                var resource = resourceJObject.ToObject(objectType, newSerializer);
+                JObject propertiesJObject = resourceJObject[PropertiesNode] as JObject;
+                if (propertiesJObject != null)
+                {
+                    newSerializer.Populate(propertiesJObject.CreateReader(), resource);
+                }
+
+                return resource;
             }
-            
-            return resource;
+            catch (JsonException)
+            {
+                return null;
+            }
         }
 
         /// <summary>
