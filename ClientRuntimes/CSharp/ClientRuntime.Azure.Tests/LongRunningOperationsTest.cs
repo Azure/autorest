@@ -87,9 +87,8 @@ namespace Microsoft.Azure.Common.Test
             var handler = new PlaybackTestHandler(MockPutOperaionWithoutProvisioningStateInResponse());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
-            var error = Assert.Throws<CloudException>(() =>
-                fakeClient.RedisOperations.CreateOrUpdate("rg", "redis", new RedisCreateOrUpdateParameters(), "1234"));
-            Assert.Equal("Provisioning state is missing from long running operation.", error.Message);
+            var resource = fakeClient.RedisOperations.CreateOrUpdate("rg", "redis", new RedisCreateOrUpdateParameters(), "1234");
+            Assert.Equal("100", resource.Id);
         }
 
         [Fact]
