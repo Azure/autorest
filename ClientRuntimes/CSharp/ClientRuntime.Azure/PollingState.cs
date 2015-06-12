@@ -47,7 +47,7 @@ namespace Microsoft.Azure
                     break;
             }
 
-            if (response.Body is Resource)
+            if (response.Body is Resource && (response.Body as Resource).ProvisioningState != null)
             {
                 Status = (response.Body as Resource).ProvisioningState;
             }
