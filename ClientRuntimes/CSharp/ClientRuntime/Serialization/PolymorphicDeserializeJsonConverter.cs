@@ -49,22 +49,29 @@ namespace Microsoft.Rest.Serialization
         public override object ReadJson(JsonReader reader,
             Type objectType, object existingValue, JsonSerializer serializer)
         {
-            JObject item = JObject.Load(reader);
-            string typeDiscriminator = (string)item[_discriminatorField];
-            foreach (Type type in typeof(T).Assembly.GetTypes()
-                .Where(t => t.Namespace == typeof(T).Namespace && t != typeof(T)))
+            try
             {
-                string typeName = type.Name;
-                if (type.GetCustomAttributes<JsonObjectAttribute>().Any())
+                JObject item = JObject.Load(reader);
+                string typeDiscriminator = (string) item[_discriminatorField];
+                foreach (Type type in typeof (T).Assembly.GetTypes()
+                    .Where(t => t.Namespace == typeof (T).Namespace && t != typeof (T)))
                 {
-                    typeName = type.GetCustomAttribute<JsonObjectAttribute>().Id;
+                    string typeName = type.Name;
+                    if (type.GetCustomAttributes<JsonObjectAttribute>().Any())
+                    {
+                        typeName = type.GetCustomAttribute<JsonObjectAttribute>().Id;
+                    }
+                    if (typeName.Equals(typeDiscriminator, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return item.ToObject(type, serializer);
+                    }
                 }
-                if (typeName.Equals(typeDiscriminator, StringComparison.OrdinalIgnoreCase))
-                {
-                    return item.ToObject(type, serializer);
-                }
+                return item.ToObject(objectType);
             }
-            return item.ToObject(objectType);
+            catch (JsonException)
+            {
+                return null;
+            }
         }
 
         /// <summary>
