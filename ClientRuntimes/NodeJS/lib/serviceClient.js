@@ -51,7 +51,7 @@ function ServiceClient(options) {
   options.filters.push(new ExponentialRetryPolicyFilter());
   this.pipeline = requestPipeline.create(options.requestOptions).apply(requestPipeline, options.filters);
   
-  // enable fiddler tracing
+  // enable network tracing
   this._setDefaultProxy();
 }
 
