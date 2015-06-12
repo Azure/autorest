@@ -72,6 +72,9 @@ exports.createWithSink = function(sink) {
  * This function acts as the final sink for a request, actually
  * going out over the wire.
  *
+ * @param {Object} [requestOptions] - The request options
+ * {@link https://github.com/request/request#requestoptions-callback Options doc}
+ *
  * @private
  * @param options The request to perform
  * @param callback function(err, result, response, body) callback function that
@@ -107,6 +110,9 @@ exports.requestLibrarySink = function (requestOptions) {
  *
  * create a new http client pipeline that ends with a call to the
  * request library.
+ *
+ * @param {Object} [requestOptions] - The request options
+ * {@link https://github.com/request/request#requestoptions-callback Options doc}
  *
  * @return function(request, callback) - function to make a request.
  *
