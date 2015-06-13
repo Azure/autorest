@@ -25,6 +25,8 @@ var utils = require('./utils');
  * 
  * @param {object} [options.requestOptions] - Options for the request object
  * {@link https://github.com/request/request#requestoptions-callback Options doc}
+ * 
+ * @param {bool} [options.noRetryPolicy] - If set to true, turn off default retry policy
  */
 function ServiceClient(options) {
   if (!options) {
@@ -48,7 +50,10 @@ function ServiceClient(options) {
   }
 
   options.filters.push(RedirectFilter.create());
-  options.filters.push(new ExponentialRetryPolicyFilter());
+  if (!options.noRetryPolicy) {
+    options.filters.push(new ExponentialRetryPolicyFilter());
+  }
+
   this.pipeline = requestPipeline.create(options.requestOptions).apply(requestPipeline, options.filters);
   
   // enable network tracing
