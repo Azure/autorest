@@ -12,12 +12,16 @@ var utils = require('../utils');
  * @return {bool} True if the operation qualifies for a retry; false otherwise.
  */
 function shouldRetry(statusCode, retryData) {
-  // Retry on HTTP TimeOut 408
   if ((statusCode < 500 && statusCode !== 408) || statusCode === 501 || statusCode === 505) {
     return false;
   }
-
-  var currentCount = (retryData && retryData.retryCount) ? retryData.retryCount : 0;
+  
+  var currentCount;
+  if (!retryData) {
+    throw new Error('retryData for the ExponentialRetryPolicyFilter cannot be null.');
+  } else {
+    currentCount = (retryData && retryData.retryCount);
+  }
 
   return (currentCount < this.retryCount);
 }
@@ -50,7 +54,8 @@ function updateRetryData (retryData, err) {
 
   // Adjust retry interval
   var incrementDelta = Math.pow(2, retryData.retryCount) - 1;
-  var boundedRandDelta = this.retryInterval * 0.8 + Math.floor(Math.random() * (this.retryInterval * 1.2 - this.retryInterval * 0.8));
+  var boundedRandDelta = this.retryInterval * 0.8 + 
+    Math.floor(Math.random() * (this.retryInterval * 1.2 - this.retryInterval * 0.8));
   incrementDelta *= boundedRandDelta;
 
   retryData.retryInterval = Math.min(this.minRetryInterval + incrementDelta, this.maxRetryInterval);
@@ -117,7 +122,6 @@ function handle(requestOptions, next) {
 * @param {number} maxRetryInterval  The maximum retry interval, in milliseconds.
 */
 function ExponentialRetryPolicyFilter(retryCount, retryInterval, minRetryInterval, maxRetryInterval) {
-  // Implement the new style filter in terms of the old implementation
   function newFilter(options, next, callback) {
     var retryData = null;
 

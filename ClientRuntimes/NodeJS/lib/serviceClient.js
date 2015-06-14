@@ -18,8 +18,7 @@ var utils = require('./utils');
  * @constructor
  * @param {object} options The parameter options
  * 
- * @param {object} [options.credentials]    - BasicAuthenticationCredentials or 
- * TokenCredentials object used for authentication.  
+ * @param {object} [options.credentials]    - Credentials object
  * 
  * @param {Array} [options.filters]         - Filters to be added to the request pipeline
  * 
