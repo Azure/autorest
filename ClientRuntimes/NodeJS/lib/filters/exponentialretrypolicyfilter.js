@@ -31,7 +31,6 @@ function shouldRetry(statusCode, retryData) {
  *
  * @param {object} retryData  The retry data.
  * @param {object} err        The operation's error, if any.
- * @return {undefined}
  */
 function updateRetryData (retryData, err) {
   if (!retryData) {
