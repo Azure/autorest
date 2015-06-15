@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{25d00e7b-b5b1-4b27-ae07-4794c5203bca}</ProjectGuid>
     <ProjectHome>lib\</ProjectHome>
-    <ProjectView>ShowAllFiles</ProjectView>
+    <ProjectView>ProjectFiles</ProjectView>
     <StartupFile>test.js</StartupFile>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -23,7 +23,6 @@
     <Compile Include="requestPipeline.js" />
     <Compile Include="serialization.js" />
     <Compile Include="serviceClient.js" />
-    <Compile Include="test.js" />
     <Compile Include="utils.js" />
     <Compile Include="validate.js" />
     <Compile Include="webresource.js" />

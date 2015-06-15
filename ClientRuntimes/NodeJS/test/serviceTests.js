@@ -58,7 +58,7 @@ describe('nodejs', function () {
 
   describe('client', function () {
     it('created with log filter should work', function (done) {
-      var petstore = new ps.SwaggerPetstore("http://localhost:1337", credentials).addFilter(createLogFilter());
+      var petstore = new ps.SwaggerPetstore("http://localhost:1337", {'credentials': credentials}).addFilter(createLogFilter());
 
       petstore.findPetById(1, function (error, result) {
         result.id.should.equal("1");
@@ -69,7 +69,7 @@ describe('nodejs', function () {
     });
 
     it('created without log filter should work', function (done) {
-      var petstore = new ps.SwaggerPetstore("http://localhost:1337", credentials);
+      var petstore = new ps.SwaggerPetstore("http://localhost:1337", {'credentials': credentials});
 
       petstore.findPetById(1, function (error, result) {
         result.id.should.equal("1");
@@ -91,7 +91,7 @@ describe('nodejs', function () {
     });
 
     it('executed with envelope should work', function (done) {
-      var petstore = new ps.SwaggerPetstore("http://localhost:1337", credentials);
+      var petstore = new ps.SwaggerPetstore("http://localhost:1337", {'credentials': credentials});
 
       petstore.findPetByIdWithOperationResponse(1, function (error, result) {
         result.request.url.should.equal("http://localhost:1337/pets/1");

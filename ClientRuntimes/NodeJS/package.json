@@ -25,7 +25,8 @@
     "request": "2.45.0",
     "validator": "~3.1.0",
     "duplexer": "~0.1.1",
-    "through": "~2.3.4"
+    "through": "~2.3.4",
+    "tough-cookie": "*"
   },
   "devDependencies": {
     "jshint": "2.6.3",

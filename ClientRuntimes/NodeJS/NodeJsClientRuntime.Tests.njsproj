@@ -19,12 +19,10 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
-    <Compile Include="serialization-deserializationTests.js">
-      <TestFramework>Mocha</TestFramework>
-    </Compile>
     <Compile Include="credentialTests.js">
       <TestFramework>Mocha</TestFramework>
     </Compile>
+    <Compile Include="serializationTests.js" />
     <Compile Include="unit.js" />
     <Content Include="testlist.txt" />
     <Compile Include="serviceTests.js">

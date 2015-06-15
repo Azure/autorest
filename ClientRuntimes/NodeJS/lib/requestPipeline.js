@@ -72,49 +72,60 @@ exports.createWithSink = function(sink) {
  * This function acts as the final sink for a request, actually
  * going out over the wire.
  *
+ * @param {Object} [requestOptions] - The request options
+ * {@link https://github.com/request/request#requestoptions-callback Options doc}
+ *
  * @private
  * @param options The request to perform
  * @param callback function(err, result, response, body) callback function that
  * will be called at completion of the request.
  */
 
-exports.requestLibrarySink = function(options, callback) {
-  if (options.headersOnly) {
-    var requestStream = request(options);
-    requestStream.on('error', function (err) {
-      return callback(err);
-    });
+exports.requestLibrarySink = function (requestOptions) {
 
-    requestStream.on('response', function (response) {
-      requestStream.on('end', function () {
-        return callback(null, response);
+  return function (options, callback) {
+    request = request.defaults(requestOptions);
+    if (options.headersOnly) {
+      var requestStream = request(options);
+      requestStream.on('error', function (err) {
+        return callback(err);
       });
-    });
-
-    return requestStream;
-  } else {
-    return request(options, function (err, response, body) {
-      if (err) { return callback(err); }
-      return callback(null, response, body);
-    });
-  }
+      
+      requestStream.on('response', function (response) {
+        requestStream.on('end', function () {
+          return callback(null, response);
+        });
+      });
+      
+      return requestStream;
+    } else {
+      return request(options, function (err, response, body) {
+        if (err) { return callback(err); }
+        return callback(null, response, body);
+      });
+    }
+  };
 };
-
 /**
  *
  * create a new http client pipeline that ends with a call to the
  * request library.
  *
+ * @param {Object} [requestOptions] - The request options
+ * {@link https://github.com/request/request#requestoptions-callback Options doc}
+ *
  * @return function(request, callback) - function to make a request.
  *
  */
-exports.create = function() {
-  if (arguments.length === 0 ) {
-    return exports.createWithSink(exports.requestLibrarySink);
-  }
-  // User passed filters to add to the pipeline.
-  // build up appropriate arguments and call exports.createWithSink
-  return exports.createWithSink.apply(null, [exports.requestLibrarySink].concat(_.toArray(arguments)));
+exports.create = function (requestOptions) {
+  return function () {
+    if (arguments.length === 0) {
+      return exports.createWithSink(exports.requestLibrarySink);
+    }
+    // User passed filters to add to the pipeline.
+    // build up appropriate arguments and call exports.createWithSink
+    return exports.createWithSink.apply(null, [exports.requestLibrarySink(requestOptions)].concat(_.toArray(arguments)));
+  };
 };
 
 /**
