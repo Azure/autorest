@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Rest;
 
-namespace Microsoft.Azure.Common.Test.Fakes
+namespace Microsoft.Rest.ClientRuntime.Azure.Test.Fakes
 {
     public class FakeServiceClient : ServiceClient<FakeServiceClient>
     {

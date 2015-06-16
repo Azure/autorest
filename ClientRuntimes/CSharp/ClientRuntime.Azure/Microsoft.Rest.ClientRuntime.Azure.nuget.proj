@@ -2,10 +2,10 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <!--
-    Microsoft.Azure.Common
+    Microsoft.Rest.ClientRuntime.Azure
     -->
-    <SdkNuGetPackage Include="Microsoft.Azure.Common">
-      <PackageVersion>3.0.9</PackageVersion>
+    <SdkNuGetPackage Include="Microsoft.Rest.ClientRuntime.Azure">
+      <PackageVersion>1.0.0</PackageVersion>
       <Folder>$(MSBuildThisFileDirectory)</Folder>
     </SdkNuGetPackage>
   </ItemGroup>

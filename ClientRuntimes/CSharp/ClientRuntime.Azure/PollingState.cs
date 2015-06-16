@@ -108,7 +108,7 @@ namespace Microsoft.Azure
                     return int.Parse(Response.Headers.GetValues("Retry-After").FirstOrDefault(),
                         CultureInfo.InvariantCulture) * 1000;
                 }
-                return AzureAsyncOperation.DefaultDelay;
+                return AzureAsyncOperation.DefaultDelay * 1000;
             }
         }
 

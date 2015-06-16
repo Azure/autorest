@@ -6,8 +6,9 @@ using Microsoft.Rest.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit;
+using Microsoft.Azure;
 
-namespace Microsoft.Azure.Common.Test
+namespace Microsoft.Rest.ClientRuntime.Azure.Test
 {
     public class ResourceJsonConverterTest
     {

@@ -2,10 +2,11 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Net;
-using Microsoft.Azure.Common.Test.Fakes;
+using Microsoft.Rest.ClientRuntime.Azure.Test.Fakes;
 using Xunit;
+using Microsoft.Azure;
 
-namespace Microsoft.Azure.Common.Test
+namespace Microsoft.Rest.ClientRuntime.Azure.Test
 {
     public class TokenCloudCredentialsTest
     {

@@ -5,12 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using Microsoft.Azure.Common.Test.Fakes;
+using Microsoft.Rest.ClientRuntime.Azure.Test.Fakes;
 using Microsoft.Azure.Management.Redis;
 using Microsoft.Azure.Management.Redis.Models;
 using Xunit;
+using Microsoft.Azure;
 
-namespace Microsoft.Azure.Common.Test
+namespace Microsoft.Rest.ClientRuntime.Azure.Test
 {
     public class LongRunningOperationsTest
     {
