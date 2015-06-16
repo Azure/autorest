@@ -6,8 +6,9 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Rest;
+using Microsoft.Azure;
 
-namespace Microsoft.Azure.Common.Test.Fakes
+namespace Microsoft.Rest.ClientRuntime.Azure.Test.Fakes
 {
     public class FakeServiceClientWithCredentials : ServiceClient<FakeServiceClientWithCredentials>
     {

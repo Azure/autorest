@@ -12,8 +12,8 @@
     <ProjectGuid>{8B10D480-4A8A-47B5-9574-AA8E79F431DB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Microsoft.Azure.Common.Tests</RootNamespace>
-    <AssemblyName>Microsoft.Azure.Common.Tests</AssemblyName>
+    <RootNamespace>Microsoft.Rest.ClientRuntime.Azure.Tests</RootNamespace>
+    <AssemblyName>Microsoft.Rest.ClientRuntime.Azure.Tests</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <RestorePackages>true</RestorePackages>
     <NuGetPackageImportStamp>836aa096</NuGetPackageImportStamp>

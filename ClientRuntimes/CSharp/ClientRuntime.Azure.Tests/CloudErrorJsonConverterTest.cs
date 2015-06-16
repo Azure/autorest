@@ -1,11 +1,12 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using Microsoft.Azure;
 using Microsoft.Rest.Serialization;
 using Newtonsoft.Json;
 using Xunit;
 
-namespace Microsoft.Azure.Common.Test
+namespace Microsoft.Rest.ClientRuntime.Azure.Test
 {
     public class CloudErrorJsonConverterTest
     {  

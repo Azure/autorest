@@ -7,7 +7,7 @@ using Microsoft.Azure.OData;
 using Newtonsoft.Json;
 using Xunit;
 
-namespace Microsoft.Azure.Common.Test
+namespace Microsoft.Rest.ClientRuntime.Azure.Test
 {
     public class ODataTests
     {

@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Microsoft.Azure.Common.Test.Fakes
+namespace Microsoft.Rest.ClientRuntime.Azure.Test.Fakes
 {
     /// <summary>
     /// Plays back specified HTTP messages
