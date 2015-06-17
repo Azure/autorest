@@ -16,9 +16,10 @@ var utils = require('./utils');
  * @class
  * Initializes a new instance of the ServiceClient class.
  * @constructor
- * @param {object} options The parameter options
+ * @param {object} [credentials]    - BasicAuthenticationCredentials or 
+ * TokenCredentials object used for authentication. 
  * 
- * @param {object} [options.credentials]    - Credentials object
+ * @param {object} [options] The parameter options
  * 
  * @param {Array} [options.filters]         - Filters to be added to the request pipeline
  * 
@@ -27,7 +28,7 @@ var utils = require('./utils');
  * 
  * @param {bool} [options.noRetryPolicy] - If set to true, turn off default retry policy
  */
-function ServiceClient(options) {
+function ServiceClient(credentials, options) {
   if (!options) {
     options = {};
   }
@@ -40,12 +41,12 @@ function ServiceClient(options) {
     options.filters = [];
   }
   
-  if (options.credentials && !options.credentials.signRequest) {
+  if (credentials && !credentials.signRequest) {
     throw new Error('credentials argument needs to implement signRequest method');
   }
 
-  if (options.credentials) {
-    options.filters.push(SigningFilter.create(options.credentials));
+  if (credentials) {
+    options.filters.push(SigningFilter.create(credentials));
   }
 
   options.filters.push(RedirectFilter.create());

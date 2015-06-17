@@ -29,7 +29,6 @@
     <Compile Include="credentials\basicAuthenticationCredentials.js" />
     <Compile Include="credentials\tokenCredentials.js" />
     <Compile Include="filters\exponentialretrypolicyfilter.js" />
-    <Compile Include="filters\linearretrypolicyfilter.js" />
     <Compile Include="filters\logfilter.js" />
     <Compile Include="filters\proxyfilter.js" />
     <Compile Include="filters\redirectfilter.js" />
