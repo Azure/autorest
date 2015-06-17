@@ -22,6 +22,7 @@
     <Compile Include="credentialTests.js">
       <TestFramework>Mocha</TestFramework>
     </Compile>
+    <Compile Include="retrypolicyTests.js" />
     <Compile Include="serializationTests.js" />
     <Compile Include="unit.js" />
     <Content Include="testlist.txt" />
