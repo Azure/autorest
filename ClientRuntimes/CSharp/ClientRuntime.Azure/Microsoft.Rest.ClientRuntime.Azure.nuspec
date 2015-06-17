@@ -20,6 +20,9 @@ Supported Portable Library Platforms:
 - Portable Class Libraries</description>
     <copyright>Copyright © Microsoft Corporation</copyright>
     <tags>Microsoft "Microsoft Azure" Azure cloud REST HTTP client core common azureofficial windowsazureofficial</tags>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.Runtime.Serialization" targetFramework="net40, net45" />
+    </frameworkAssemblies>
     <references>
       <group targetFramework="portable-net403+win+wpa81">
         <reference file="Microsoft.Rest.ClientRuntime.Azure.dll" />
