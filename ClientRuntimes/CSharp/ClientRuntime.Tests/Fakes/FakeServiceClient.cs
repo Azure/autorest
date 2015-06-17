@@ -32,10 +32,10 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Fakes
         }
 
 
-        public async Task<HttpResponseMessage> DoStuff(string content = null)
+        private async Task<HttpResponseMessage> DoStuff(string content = null)
         {
             // Construct URL
-            string url = "http://www.microsoft.com";
+            string url = "http://tempuri.norg";
 
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = null;
@@ -63,11 +63,11 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Fakes
             return await this.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
         }
 
-        public void DoStuffSync()
+        public HttpResponseMessage DoStuffSync(string content = null)
         {
-            Task.Factory.StartNew(() =>
+            return Task.Factory.StartNew(() =>
             {
-                return DoStuff();
+                return DoStuff(content);
             }).Unwrap().GetAwaiter().GetResult();
         }
     }
