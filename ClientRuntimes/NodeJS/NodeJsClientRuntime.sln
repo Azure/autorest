@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "NodeJsClientRuntime.Tests", "NodeJsClientRuntime.Tests.njsproj", "{7CF696E4-219A-47BA-9AA3-8D96EC4EC152}"
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "NodeJsClientRuntime.Tests", "ms-rest\NodeJsClientRuntime.Tests.njsproj", "{7CF696E4-219A-47BA-9AA3-8D96EC4EC152}"
 EndProject
-Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "NodeJsClientRuntime", "NodeJsClientRuntime.njsproj", "{25D00E7B-B5B1-4B27-AE07-4794C5203BCA}"
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "NodeJsClientRuntime", "ms-rest\NodeJsClientRuntime.njsproj", "{25D00E7B-B5B1-4B27-AE07-4794C5203BCA}"
+EndProject
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "NodeJsAzureClientRuntime", "ms-rest-azure\NodeJsAzureClientRuntime.njsproj", "{A918D493-8D30-4004-A682-B01EE252DBBB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{25D00E7B-B5B1-4B27-AE07-4794C5203BCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25D00E7B-B5B1-4B27-AE07-4794C5203BCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25D00E7B-B5B1-4B27-AE07-4794C5203BCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A918D493-8D30-4004-A682-B01EE252DBBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A918D493-8D30-4004-A682-B01EE252DBBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A918D493-8D30-4004-A682-B01EE252DBBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A918D493-8D30-4004-A682-B01EE252DBBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
