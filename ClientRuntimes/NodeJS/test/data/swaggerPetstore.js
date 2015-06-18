@@ -36,7 +36,10 @@ var SwaggerPetstore = ( /** @lends SwaggerPetstore */ function() {
    * {@link https://github.com/request/request#requestoptions-callback Options doc}
    */
   function SwaggerPetstore(baseUri, options) {
-    SwaggerPetstore['super_'].call(this, options);
+    if (!options) {
+      options = {};
+    }
+    SwaggerPetstore['super_'].call(this, options.credentials, options);
     
     this.baseUri = baseUri;
     if (this.baseUri === null || this.baseUri === undefined) {
