@@ -90,7 +90,7 @@ namespace Microsoft.Azure
                 foreach (JsonProperty property in contract.Properties)
                 {
                     JToken propertyValueToken = resourceJObject[property.PropertyName];
-                    if (propertyValueToken != null)
+                    if (propertyValueToken != null && property.Writable)
                     {
                         var propertyValue = propertyValueToken.ToObject(property.PropertyType, serializer);
                         property.ValueProvider.SetValue(resource, propertyValue);
