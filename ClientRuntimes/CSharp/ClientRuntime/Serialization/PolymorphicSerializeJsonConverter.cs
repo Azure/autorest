@@ -15,17 +15,19 @@ namespace Microsoft.Rest.Serialization
     /// based on discriminator field.
     /// </summary>
     /// <typeparam name="T">The base type.</typeparam>
-    public class PolymorphicSerializeJsonConverter<T> : JsonConverter where T : class
+    public class PolymorphicSerializeJsonConverter<T> : PolymorphicJsonConverter where T : class
     {
-        private readonly string _discriminatorField;
-
         /// <summary>
         /// Initializes an instance of the PolymorphicSerializeJsonConverter.
         /// </summary>
         /// <param name="discriminatorField">The JSON field used as a discriminator</param>
         public PolymorphicSerializeJsonConverter(string discriminatorField)
         {
-            this._discriminatorField = discriminatorField;
+            if (discriminatorField == null)
+            {
+                throw new ArgumentNullException("discriminatorField");
+            }
+            Discriminator = discriminatorField;
         }
 
         /// <summary>
@@ -83,66 +85,18 @@ namespace Microsoft.Rest.Serialization
 
             // Add discriminator field
             writer.WriteStartObject();
-            writer.WritePropertyName(_discriminatorField);
+            writer.WritePropertyName(Discriminator);
             writer.WriteValue(typeName);
-
-            // Getting contract to determine property bindings
-            var contract = (JsonObjectContract)serializer.ContractResolver.ResolveContract(value.GetType());
-
-            PropertyInfo[] properties = value.GetType().GetProperties();
-            // Getting all properties with public get method
-            foreach (var propertyInfo in properties.Where(p => p.GetGetMethod() != null))
-            {
-                // Get property name via reflection or from JsonProperty attribute
-                string propertyName = propertyInfo.Name;
-                if (propertyInfo.GetCustomAttributes<JsonPropertyAttribute>().Any())
-                {
-                    propertyName = propertyInfo.GetCustomAttribute<JsonPropertyAttribute>().PropertyName;
-                }
-
-                // Skipping properties with null value if NullValueHandling is set to Ignore
-                if (serializer.NullValueHandling == NullValueHandling.Ignore &&
-                    propertyInfo.GetValue(value, null) == null)
-                {
-                    continue;
-                }
-
-                // Skipping properties with JsonIgnore attribute, non-readable, and 
-                // ShouldSerialize returning false when set
-                if (!contract.Properties[propertyName].Ignored &&
-                    contract.Properties[propertyName].Readable &&
-                    (contract.Properties[propertyName].ShouldSerialize == null ||
-                    contract.Properties[propertyName].ShouldSerialize(propertyInfo.GetValue(value, null))))
-                {
-                    writer.WritePropertyName(propertyName);
-                    serializer.Serialize(
-                        writer,
-                        propertyInfo.GetValue(value, null));
-                }
-            }
+            JsonConverterHelper.SerializeProperties(writer, value, serializer);
             writer.WriteEndObject();
         }
-    }
-#if !NET45
-    public static class AttributeExtensions
-    {
-        public static IEnumerable<T> GetCustomAttributes<T>(this MemberInfo memberInfo) where T : class
-        {
-            if (memberInfo == null)
-            {
-                return Enumerable.Empty<T>();
-            }
-            return memberInfo.GetCustomAttributes(typeof(T), true).Select(a => a as T);
-        }
 
-        public static T GetCustomAttribute<T>(this MemberInfo memberInfo) where T : class
+        /// <summary>
+        /// Returns false.
+        /// </summary>
+        public override bool CanRead
         {
-            if (memberInfo == null)
-            {
-                return null;
-            }
-            return memberInfo.GetCustomAttributes(typeof(T), true).First() as T;
+            get { return false; }
         }
     }
-#endif
 }
