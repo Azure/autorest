@@ -10,10 +10,31 @@ using Newtonsoft.Json.Serialization;
 
 namespace Microsoft.Rest.Serialization
 {
+    /// <summary>
+    /// Helper class for JsonConverters.
+    /// </summary>
     public static class JsonConverterHelper
     {
+        /// <summary>
+        /// Serializes properties of the value object into JsonWriter.
+        /// </summary>
+        /// <param name="writer">The JSON writer.</param>
+        /// <param name="value">The value to serialize.</param>
+        /// <param name="serializer">The JSON serializer.</param>
+        public static void SerializeProperties(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            SerializeProperties(writer, value, serializer, null);
+        }
+
+        /// <summary>
+        /// Serializes properties of the value object into JsonWriter.
+        /// </summary>
+        /// <param name="writer">The JSON writer.</param>
+        /// <param name="value">The value to serialize.</param>
+        /// <param name="serializer">The JSON serializer.</param>
+        /// <param name="filter">If specified identifies properties that should be serialized.</param>
         public static void SerializeProperties(JsonWriter writer, object value, JsonSerializer serializer,
-            IEnumerable<string> filter = null)
+            IEnumerable<string> filter)
         {
             if (writer == null)
             {

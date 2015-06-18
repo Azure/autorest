@@ -26,6 +26,10 @@ namespace Microsoft.Rest.Serialization
         /// <returns></returns>
         public static Type GetDerivedType(Type baseType, string name)
         {
+            if (baseType == null)
+            {
+                throw new ArgumentNullException("baseType");
+            }
             foreach (Type type in baseType.Assembly.GetTypes()
                 .Where(t => t.Namespace == baseType.Namespace && t != baseType))
             {
