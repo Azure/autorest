@@ -80,7 +80,7 @@ describe('nodejs', function () {
     });
 
     it('created without credentials should work', function (done) {
-      var petstore = new ps.SwaggerPetstore("http://localhost:1337");
+      var petstore = new ps.SwaggerPetstore("http://localhost:1337", {});
 
       petstore.findPetById(1, function (error, result) {
         result.id.should.equal("1");
