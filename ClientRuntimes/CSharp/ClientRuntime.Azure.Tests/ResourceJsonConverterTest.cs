@@ -45,13 +45,10 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
     ""size"": ""3"",
     ""child"": {
       ""dType"": ""SampleResourceChild1"",
-      ""location"": null,
-      ""tags"": null,
       ""properties"": {
         ""name1"": ""name1""
       }
-    },
-    ""name"": null
+    }
   }
 }", json);
             
@@ -102,13 +99,8 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
     ""size"": ""3"",
     ""child"": {
       ""dType"": ""SampleResourceChild1"",
-      ""location"": null,
-      ""tags"": null,
-      ""properties"": {
-        ""name1"": null
-      }
-    },
-    ""name"": null
+      ""properties"": {}
+    }
   }
 }", json);
         }

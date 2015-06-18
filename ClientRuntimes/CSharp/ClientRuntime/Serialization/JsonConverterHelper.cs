@@ -34,6 +34,13 @@ namespace Microsoft.Rest.Serialization
             {
                 object memberValue = property.ValueProvider.GetValue(value);
 
+                // Skipping properties with null value if NullValueHandling is set to Ignore
+                if (serializer.NullValueHandling == NullValueHandling.Ignore &&
+                    memberValue == null)
+                {
+                    continue;
+                }
+
                 // Skipping properties with JsonIgnore attribute, non-readable, and 
                 // ShouldSerialize returning false when set
                 if (!property.Ignored && property.Readable &&
