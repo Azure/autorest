@@ -14,17 +14,19 @@ namespace Microsoft.Rest.Serialization
     /// based on discriminator field.
     /// </summary>
     /// <typeparam name="T">The base type.</typeparam>
-    public class PolymorphicDeserializeJsonConverter<T> : JsonConverter where T : class
+    public class PolymorphicDeserializeJsonConverter<T> : PolymorphicJsonConverter where T : class
     {
-        private readonly string _discriminatorField;
-
         /// <summary>
         /// Initializes an instance of the PolymorphicDeserializeJsonConverter.
         /// </summary>
         /// <param name="discriminatorField">The JSON field used as a discriminator</param>
         public PolymorphicDeserializeJsonConverter(string discriminatorField)
         {
-            this._discriminatorField = discriminatorField;
+            if (discriminatorField == null)
+            {
+                throw new ArgumentNullException("discriminatorField");
+            }
+            Discriminator = discriminatorField;
         }
 
         /// <summary>
@@ -52,19 +54,11 @@ namespace Microsoft.Rest.Serialization
             try
             {
                 JObject item = JObject.Load(reader);
-                string typeDiscriminator = (string) item[_discriminatorField];
-                foreach (Type type in typeof (T).Assembly.GetTypes()
-                    .Where(t => t.Namespace == typeof (T).Namespace && t != typeof (T)))
+                string typeDiscriminator = (string) item[Discriminator];
+                Type derivedType = GetDerivedType(typeof (T), typeDiscriminator);
+                if (derivedType != null)
                 {
-                    string typeName = type.Name;
-                    if (type.GetCustomAttributes<JsonObjectAttribute>().Any())
-                    {
-                        typeName = type.GetCustomAttribute<JsonObjectAttribute>().Id;
-                    }
-                    if (typeName.Equals(typeDiscriminator, StringComparison.OrdinalIgnoreCase))
-                    {
-                        return item.ToObject(type, serializer);
-                    }
+                    return item.ToObject(derivedType, serializer);
                 }
                 return item.ToObject(objectType);
             }
@@ -84,6 +78,14 @@ namespace Microsoft.Rest.Serialization
             object value, JsonSerializer serializer)
         {
             throw new NotSupportedException();
+        }
+
+        /// <summary>
+        /// Returns false.
+        /// </summary>
+        public override bool CanWrite
+        {
+            get { return false; }
         }
     }
 }

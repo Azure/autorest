@@ -32,13 +32,8 @@ namespace Microsoft.Azure
     /// <summary>
     /// Information for resource.
     /// </summary>
-    public abstract class SampleResourceChild
+    public abstract class SampleResourceChild : ResourceId
     {
-        /// <summary>
-        /// Optional. Gets or sets the Id of the resource.
-        /// </summary>
-        [JsonProperty("id")]
-        public string ChildId { get; set; }
     }
 
     /// <summary>
