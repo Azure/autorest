@@ -1,4 +1,3 @@
-serializationTests.js
 serviceTests.js
 credentialTests.js
 retryPolicyTests.js
