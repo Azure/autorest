@@ -11,7 +11,7 @@
   "keywords": ["node", "microsoft", "autorest", "clientruntime"],
   "main": "./lib/msRest.js",
   "engines": {
-    "node": ">= 0.8.26"
+    "node": ">= 0.6.15"
   },
   "licenses": [
     {
@@ -25,7 +25,8 @@
     "request": "2.45.0",
     "validator": "~3.1.0",
     "duplexer": "~0.1.1",
-    "through": "~2.3.4"
+    "through": "~2.3.4",
+    "tough-cookie": "*"
   },
   "devDependencies": {
     "jshint": "2.6.3",
@@ -42,7 +43,7 @@
     "url": "http://github.com/Azure/AutoRest/issues"
   },
   "scripts": {
-    "test": "npm -s run-script jshint && npm -s run-script unit",
+    "test": "npm install && npm -s run-script jshint && npm -s run-script unit",
     "unit": "node test/unit.js testlist.txt",
     "jshint": "jshint lib --reporter=jslint"
   }

@@ -2,7 +2,7 @@
 
 Infrastructure for error handling, tracing, and http client pipeline configuration. Required by nodeJS client libraries generated using AutoRest.
 
-- **Node.js version: 0.8.26 or higher**
+- **Node.js version: 0.10.0 or higher**
 
 
 ## How to Install
