@@ -10,8 +10,14 @@ namespace Microsoft.Azure
     /// <summary>
     /// Defines Azure resource.
     /// </summary>
-    public abstract class Resource : ResourceId
+    public abstract class Resource
     {
+        /// <summary>
+        /// Gets the ID of the resource.
+        /// </summary>
+        [JsonProperty("id")]
+        public string Id { get; private set; }
+
         /// <summary>
         /// Gets the name of the resource.
         /// </summary>
@@ -45,9 +51,8 @@ namespace Microsoft.Azure
         /// <summary>
         /// Validate the object. Throws ArgumentException or ArgumentNullException if validation fails.
         /// </summary>
-        public override void Validate()
+        public virtual void Validate()
         {
-            base.Validate();
             if (Location == null)
             {
                 throw new ArgumentNullException("Location");
