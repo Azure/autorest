@@ -32,7 +32,7 @@ namespace Microsoft.Azure
     /// <summary>
     /// Information for resource.
     /// </summary>
-    public abstract class SampleResourceChild : ResourceId
+    public abstract class SampleResourceChild : SubResource
     {
     }
 
