@@ -45,36 +45,44 @@ namespace Microsoft.Rest.ClientRuntime.Tests
             deserializeSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<Animal>("dType"));
 
             string zooWithPrivateSet = @"{
-              ""Id"": 1,
-              ""Animals"": [
-                {
-                  ""dType"": ""dog"",
-                  ""likesDogfood"": true,
-                  ""name"": ""Fido""
-                },
-                {
-                  ""dType"": ""cat"",
-                  ""likesMice"": false,
-                  ""dislikes"": {
-                    ""dType"": ""dog"",
-                    ""likesDogfood"": true,
-                    ""name"": ""Angry""
-                  },
-                  ""name"": ""Felix""
-                },
-                {
-                  ""dType"": ""siamese"",
-                  ""color"": ""grey"",
-                  ""likesMice"": false,
-                  ""dislikes"": null,
-                  ""name"": ""Felix""
-                }
-              ]
-            }";
+  ""Id"": 1,
+  ""Animals"": [
+    {
+      ""dType"": ""dog"",
+      ""likesDogfood"": true,
+      ""name"": ""Fido""
+    },
+    {
+      ""dType"": ""cat"",
+      ""likesMice"": false,
+      ""dislikes"": {
+        ""dType"": ""dog"",
+        ""likesDogfood"": true,
+        ""name"": ""Angry""
+      },
+      ""name"": ""Felix""
+    },
+    {
+      ""dType"": ""siamese"",
+      ""color"": ""grey"",
+      ""likesMice"": false,
+      ""name"": ""Felix""
+    }
+  ]
+}";
 
             var zoo2 = JsonConvert.DeserializeObject<Zoo>(zooWithPrivateSet, deserializeSettings);
 
             Assert.Equal("grey", ((Siamese)zoo2.Animals[2]).Color);
+
+            var serializeSettings = new JsonSerializerSettings();
+            serializeSettings.ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
+            serializeSettings.NullValueHandling = NullValueHandling.Ignore;
+            serializeSettings.Formatting = Formatting.Indented;
+            serializeSettings.Converters.Add(new PolymorphicSerializeJsonConverter<Animal>("dType"));
+            var zooReserialized = JsonConvert.SerializeObject(zoo2, serializeSettings);
+
+            Assert.Equal(zooWithPrivateSet, zooReserialized);
         }
 
         [Fact]

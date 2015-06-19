@@ -20,7 +20,6 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                 Size = "3",
                 Child = new SampleResourceChild1()
                 {
-                    ChildId = "child",
                     ChildName1 = "name1"
                 },
                 Location = "EastUS"
@@ -46,8 +45,9 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
     ""size"": ""3"",
     ""child"": {
       ""dType"": ""SampleResourceChild1"",
-      ""name1"": ""name1"",
-      ""id"": ""child""
+      ""properties"": {
+        ""name1"": ""name1""
+      }
     }
   }
 }", json);
@@ -73,10 +73,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             var sampleResource = new SampleResource()
             {
                 Size = "3",
-                Child = new SampleResourceChild1()
-                {
-                    ChildId = "child"
-                },
+                Child = new SampleResourceChild1(),
                 Location = "EastUS"
             };
             sampleResource.Tags = new Dictionary<string, string>();
@@ -102,7 +99,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
     ""size"": ""3"",
     ""child"": {
       ""dType"": ""SampleResourceChild1"",
-      ""id"": ""child""
+      ""properties"": {}
     }
   }
 }", json);
