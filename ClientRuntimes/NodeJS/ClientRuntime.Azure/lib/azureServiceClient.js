@@ -25,31 +25,31 @@ util.inherits(AzureServiceClient, msrest.ServiceClient);
 
 /**
  * Poll Azure long running PUT operation.
- * @param {object} [response] - Response of the initial operation.
+ * @param {object} [resultOfInitialRequest] - Response of the initial request for the long running operation.
  * @param {function} [poller] - Poller function used to poll operation result.
  */
-AzureServiceClient.prototype.getPutOperationResult = function (response, poller, callback) {
+AzureServiceClient.prototype.getPutOperationResult = function (resultOfInitialRequest, poller, callback) {
   var self = this;
   if (!callback) {
     throw new Error('Missing callback');
   }
   
-  if (!response) {
-    return callback(new Error('Missing response parameter'));
+  if (!resultOfInitialRequest) {
+    return callback(new Error('Missing resultOfInitialRequest parameter'));
   }
   
   if (!poller) {
     return callback(new Error('Missing poller parameter'));
   }
   
-  if (response.response.statusCode != 200 &&
-      response.response.statusCode != 201 &&
-      response.response.statusCode != 202) {
+  if (resultOfInitialRequest.response.statusCode !== 200 &&
+      resultOfInitialRequest.response.statusCode !== 201 &&
+      resultOfInitialRequest.response.statusCode !== 202) {
     return callback(new Error(util.format('Unexpected polling status code from long running operation \'%s\'', 
-      response.response.statusCode)));
+      resultOfInitialRequest.response.statusCode)));
   }
   
-  var pollingState = new PollingState(response, this.longRunningOperationRetryTimeout);
+  var pollingState = new PollingState(resultOfInitialRequest, this.longRunningOperationRetryTimeout);
   
   async.whilst(
     //while condition

@@ -3,7 +3,8 @@
 
 var fs = require('fs');
 var args = (process.ARGV || process.argv);
-var reporter = 'xunit-file';
+//'xunit-file' reporter does not show failures correctly. Hence we should always use the list reporter
+var reporter = 'list';
 var testList = args.pop();
 var fileContent;
 var root = false;

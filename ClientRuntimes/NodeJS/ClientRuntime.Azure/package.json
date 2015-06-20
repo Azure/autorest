@@ -21,13 +21,14 @@
   ],
   "dependencies": {
     "async": "0.2.7",
-    "ms-rest": "0.1.1"
+    "ms-rest": "file:../ClientRuntime"
   },
   "devDependencies": {
     "jshint": "2.6.3",
     "xunit-file": "0.0.5",
     "mocha": "1.16.0",
-    "should": "5.2.0"
+    "should": "5.2.0",
+    "underscore":  "*"
   },
   "homepage": "https://github.com/Azure/AutoRest",
   "repository": {
