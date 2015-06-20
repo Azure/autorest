@@ -42,7 +42,8 @@ describe('AzureServiceClient', function () {
         statusCode : 201,
         headers: {
           'azure-asyncoperation' : requestUrl
-        }
+        },
+        body: 'success'
       }
     };
     var mockedGetStatus = function (url, callback) {
@@ -56,12 +57,17 @@ describe('AzureServiceClient', function () {
       var client = new AzureServiceClient();
       client._getStatus = mockedGetStatus;
       client.longRunningOperationRetryTimeout = 0.001;
-      client.getPutOperationResult(resultOfInitialRequest, function () { }, function (err, result) {
+      var poller = function (callback) {
+        console.log('In poller');
+        var result = { body: { "properties": { "provisioningState": "Succeeded" }, "id": "100", "name": "foo" } };
+        callback(null, result);
+      };
+      client.getPutOperationResult(resultOfInitialRequest, poller, function (err, result) {
         if (err) {
           console.log('err is');
           console.log(err);
         }
-        console.log('result is' + result);
+        console.log('result is' + dump(result));
         console.log('We are here!!');
         done();
       });
