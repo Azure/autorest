@@ -7,8 +7,8 @@
   },
   "version": "0.1.0",
   "description": "Client Runtime for nodeJS Azure client libraries generated using AutoRest",
-  "tags": ["node", "microsoft", "autorest", "azure", "clientruntime"],
-  "keywords": ["node", "microsoft", "autorest", "azure", "clientruntime"],
+  "tags": [ "node", "microsoft", "autorest", "azure", "clientruntime" ],
+  "keywords": [ "node", "microsoft", "autorest", "azure", "clientruntime" ],
   "main": "./lib/msRestAzure.js",
   "engines": {
     "node": ">= 0.10.0"
@@ -20,15 +20,14 @@
     }
   ],
   "dependencies": {
-    "async": "0.2.7",
-    "ms-rest": "file:../ClientRuntime"
+    "async": "0.2.7"
   },
   "devDependencies": {
     "jshint": "2.6.3",
     "xunit-file": "0.0.5",
     "mocha": "1.16.0",
     "should": "5.2.0",
-    "underscore":  "*"
+    "underscore": "*"
   },
   "homepage": "https://github.com/Azure/AutoRest",
   "repository": {
@@ -39,6 +38,7 @@
     "url": "http://github.com/Azure/AutoRest/issues"
   },
   "scripts": {
+    "preinstall": "npm link ../ClientRuntime",
     "test": "npm install && npm -s run-script jshint && npm -s run-script unit",
     "unit": "node test/unit.js testlist.txt",
     "jshint": "jshint lib --reporter=jslint"
