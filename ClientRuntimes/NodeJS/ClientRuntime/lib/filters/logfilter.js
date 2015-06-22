@@ -8,17 +8,18 @@ var dump = util.inspect;
 /**
  * logFilter = simple filter to do logging on requests and responses
  */
-exports.create = function () {
+exports.create = function (logger) {
+  var log = logger ? logger.log : console.log;
   return function handle (options, next, callback) {
-    console.log('logFilter, request: %s', dump(options));
+    log('logFilter, request: %s', dump(options));
     return next(options, function (err, response, body) {
       if (err) {
-        console.log('Error from response, message: ' + err.message);
+        log('Error from response, message: ' + err.message);
         return callback(err);
       }
 
-      console.log('Response status code: ' + response.statusCode);
-      console.log('Body: ' + body);
+      log('Response status code: ' + response.statusCode);
+      log('Body: ' + body);
       return callback(err, response, body);
     });
   };

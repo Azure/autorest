@@ -1,9 +1,10 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information. 
+'use strict';
 
 var util = require('util');
 var msRest = require('ms-rest');
-var LroStates = require('./constants').AzureAsyncOperationStates;
+var LroStates = require('./constants').LongRunningOperationStates;
 
 /**
  * @class
@@ -15,11 +16,11 @@ var LroStates = require('./constants').AzureAsyncOperationStates;
  * @param {number} retryTimeout - The timeout in seconds to retry on
  * intermediate operation results.
  */
-function PollingState(response, retryTimeout) {
+function PollingState(resultOfInitialRequest, retryTimeout) {
   this._retryTimeout = retryTimeout;
-  this.response = response.response;
-  this.request = response.request;
-  this.resource = response.body;
+  this.response = resultOfInitialRequest.response;
+  this.request = resultOfInitialRequest.request;
+  this.resource = resultOfInitialRequest.body;
 
   switch (this.response.statusCode) {
     case 202:
@@ -37,9 +38,9 @@ function PollingState(response, retryTimeout) {
       break;
   }
   
-  if (response.body && response.body.properties && response.body.properties.provisioningState)
+  if (this.resource && this.resource.properties &&this.resource.properties.provisioningState)
   {
-    this.status = response.body.properties.provisioningState;
+    this.status = this.resource.properties.provisioningState;
   }
 }
 
@@ -48,14 +49,14 @@ function PollingState(response, retryTimeout) {
  * @returns {number} timeout
  */
 PollingState.prototype.getTimeout = function () {
-  if (this._retryTimeout) {
+  if (this._retryTimeout || this._retryTimeout === 0) {
     return this._retryTimeout * 1000;
   }
   if (this.response && this.response.headers['retry-after']) {
     return parseInt(this.response.headers['retry-after']) * 1000;
   }
   return 30 * 1000;
-}
+};
 
 /**
  * Returns long running operation result.
@@ -67,7 +68,7 @@ PollingState.prototype.getOperationResponse = function () {
   result.response = this.response;
   result.body = this.resource;
   return result;
-}
+};
 
 /**
  * Returns an Error on operation failure.
@@ -86,6 +87,6 @@ PollingState.prototype.getCloudError = function (err) {
   error.request = this.request;
   error.response = this.response;
   return error;
-}
+};
 
 module.exports = PollingState;

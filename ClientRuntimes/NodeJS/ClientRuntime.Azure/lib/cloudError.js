@@ -1,6 +1,7 @@
-'use strict';
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information. 
 
-var util = require('util');
+'use strict';
 
 /**
  * @class
@@ -31,8 +32,8 @@ CloudError.prototype.deserialize = function (instance) {
       var deserializedArray = [];
       instance.details.forEach(function(element1) {
         if (element1 !== null && element1 !== undefined) {
-      element1 = models['CloudError'].deserialize(element1);
-    }
+          element1 = this.deserialize(element1);
+        }
         deserializedArray.push(element1);
       });
       instance.details = deserializedArray;
