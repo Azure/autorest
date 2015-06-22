@@ -121,7 +121,8 @@
     <MakeDir Directories="$(LibraryRoot)TestResults"/>
     <Message Text="%(TestDlls.Filename)" />
     <xunit Assemblies="@(TestDlls)" Html="$(MSBuildProjectDirectory)\TestResults\xunit.results.html" ContinueOnError="false" />
-	<Exec WorkingDirectory=".\ClientRuntimes\NodeJS\ClientRuntime\" Command="npm test"/>
+	  <Exec WorkingDirectory=".\ClientRuntimes\NodeJS\ClientRuntime\" Command="npm test"/>
+    <Exec WorkingDirectory=".\ClientRuntimes\NodeJS\ClientRuntime.Azure\" Command="npm test"/>
   </Target>
   
   <PropertyGroup>
