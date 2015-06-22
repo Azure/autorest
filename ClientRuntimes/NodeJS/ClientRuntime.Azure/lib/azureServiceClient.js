@@ -1,11 +1,12 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information. 
+'use strict';
 
 var util = require('util');
 var async = require('async');
 var msrest = require('ms-rest');
 var PollingState = require('./pollingState');
-var LroStates = require('./constants').AzureAsyncOperationStates;
+var LroStates = require('./constants').LongRunningOperationStates;
 var WebResource = msrest.WebResource;
 
 /**
@@ -82,7 +83,7 @@ AzureServiceClient.prototype.getPutOperationResult = function (resultOfInitialRe
     function (err) {
       if (pollingState.status === LroStates.Succeeded) {
         if (!pollingState.resource) {
-          self._updateStateFromGetResourceOperation(poller, pollingState, function (err, result) {
+          self._updateStateFromGetResourceOperation(poller, pollingState, function (err) {
             return callback(err, pollingState.getOperationResponse());
           });
         } else {
@@ -96,30 +97,30 @@ AzureServiceClient.prototype.getPutOperationResult = function (resultOfInitialRe
 
 /**
  * Poll Azure long running POST or DELETE operations.
- * @param {object} [response] - Response of the initial operation.
+ * @param {object} [resultOfInitialRequest] - result of the initial request.
  */
-AzureServiceClient.prototype.getPostOrDeleteOperationResult = function (response, callback) {
+AzureServiceClient.prototype.getPostOrDeleteOperationResult = function (resultOfInitialRequest, callback) {
   var self = this;
   if (!callback) {
     throw new Error('Missing callback');
   }
   
-  if (!response) {
-    return callback(new Error('Missing response parameter'));
+  if (!resultOfInitialRequest) {
+    return callback(new Error('Missing resultOfInitialRequest parameter'));
   }
   
-  if (!response.response) {
-    return callback(new Error('Missing response.response'));
+  if (!resultOfInitialRequest.response) {
+    return callback(new Error('Missing resultOfInitialRequest.response'));
   }
   
-  if (response.response.statusCode != 200 &&
-      response.response.statusCode != 202 &&
-      response.response.statusCode != 204) {
+  if (resultOfInitialRequest.response.statusCode != 200 &&
+      resultOfInitialRequest.response.statusCode != 202 &&
+      resultOfInitialRequest.response.statusCode != 204) {
     return callback(new Error(util.format('Unexpected polling status code from long running operation \'%s\'', 
-      response.response.statusCode)));
+      resultOfInitialRequest.response.statusCode)));
   }
   
-  var pollingState = new PollingState(response, this.longRunningOperationRetryTimeout);
+  var pollingState = new PollingState(resultOfInitialRequest, this.longRunningOperationRetryTimeout);
   
   async.whilst(
     function () {
@@ -168,7 +169,7 @@ AzureServiceClient.prototype._updateStateFromAzureAsyncOperationHeader = functio
     pollingState.error = result.body.error;
     pollingState.response = result.response;
     pollingState.request = result.request;
-    pollingState.resource = null;
+    pollingState.resource = null;//TODO: confirm we do want to clear.
     callback(null);
   });
 };

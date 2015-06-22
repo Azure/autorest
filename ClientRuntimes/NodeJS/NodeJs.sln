@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "NodeJsClientRuntime", "ClientRuntime\NodeJsClientRuntime.njsproj", "{FFCCB0E4-74AE-413A-B685-C67CDFB34A11}"
+EndProject
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "NodeJsAzureClientRuntime", "ClientRuntime.Azure\NodeJsAzureClientRuntime.njsproj", "{00B6D45E-5087-4585-A724-EF61AC7AEDBF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FFCCB0E4-74AE-413A-B685-C67CDFB34A11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFCCB0E4-74AE-413A-B685-C67CDFB34A11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFCCB0E4-74AE-413A-B685-C67CDFB34A11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFCCB0E4-74AE-413A-B685-C67CDFB34A11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00B6D45E-5087-4585-A724-EF61AC7AEDBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00B6D45E-5087-4585-A724-EF61AC7AEDBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00B6D45E-5087-4585-A724-EF61AC7AEDBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00B6D45E-5087-4585-A724-EF61AC7AEDBF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
