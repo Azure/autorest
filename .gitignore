@@ -108,6 +108,7 @@ tools/*.dll
 
 # Azure Tooling #
 node_modules
+.ntvs_analysis.dat
 
 # Eclipse #
 *.pydevproject

@@ -79,9 +79,8 @@ describe('AzureServiceClient', function () {
       }
     };
     
-    var client = new AzureServiceClient();
+    var client = new AzureServiceClient(null, { longRunningOperationRetryTimeoutInSeconds : 0});
     client._getStatus = mockedGetStatus;
-    client.longRunningOperationRetryTimeout = 0;
     
     describe('Put', function () {
       resultOfInitialRequest.response.statusCode = 201;

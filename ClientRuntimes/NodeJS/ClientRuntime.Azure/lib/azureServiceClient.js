@@ -17,9 +17,16 @@ var WebResource = msrest.WebResource;
  * TokenCredentials object used for authentication.  
  * 
  * @param {object} options - The parameter options used by ServiceClient
+ * 
+ * @param {Array} [options.longRunningOperationRetryTimeoutInSeconds] - Retry timeout
+ * 
  */
 function AzureServiceClient(credentials, options) {
   AzureServiceClient['super_'].call(this, credentials, options);
+  if (options) {
+    this.longRunningOperationRetryTimeoutInSeconds = 
+      options.longRunningOperationRetryTimeoutInSeconds;
+  }
 }
 
 util.inherits(AzureServiceClient, msrest.ServiceClient);
@@ -50,7 +57,7 @@ AzureServiceClient.prototype.getPutOperationResult = function (resultOfInitialRe
       resultOfInitialRequest.response.statusCode)));
   }
   
-  var pollingState = new PollingState(resultOfInitialRequest, this.longRunningOperationRetryTimeout);
+  var pollingState = new PollingState(resultOfInitialRequest, this.longRunningOperationRetryTimeoutInSeconds);
   
   async.whilst(
     //while condition
@@ -113,14 +120,14 @@ AzureServiceClient.prototype.getPostOrDeleteOperationResult = function (resultOf
     return callback(new Error('Missing resultOfInitialRequest.response'));
   }
   
-  if (resultOfInitialRequest.response.statusCode != 200 &&
-      resultOfInitialRequest.response.statusCode != 202 &&
-      resultOfInitialRequest.response.statusCode != 204) {
+  if (resultOfInitialRequest.response.statusCode !== 200 &&
+      resultOfInitialRequest.response.statusCode !== 202 &&
+      resultOfInitialRequest.response.statusCode !== 204) {
     return callback(new Error(util.format('Unexpected polling status code from long running operation \'%s\'', 
       resultOfInitialRequest.response.statusCode)));
   }
   
-  var pollingState = new PollingState(resultOfInitialRequest, this.longRunningOperationRetryTimeout);
+  var pollingState = new PollingState(resultOfInitialRequest, this.longRunningOperationRetryTimeoutInSeconds);
   
   async.whilst(
     function () {
