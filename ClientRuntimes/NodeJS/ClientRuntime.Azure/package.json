@@ -20,7 +20,8 @@
     }
   ],
   "dependencies": {
-    "async": "0.2.7"
+    "async": "0.2.7",
+    "ms-rest": "file:../ClientRuntime"
   },
   "devDependencies": {
     "jshint": "2.6.3",
@@ -38,7 +39,6 @@
     "url": "http://github.com/Azure/AutoRest/issues"
   },
   "scripts": {
-    "preinstall": "npm link ../ClientRuntime",
     "test": "npm install && npm -s run-script jshint && npm -s run-script unit",
     "unit": "node test/unit.js testlist.txt",
     "jshint": "jshint lib --reporter=jslint"

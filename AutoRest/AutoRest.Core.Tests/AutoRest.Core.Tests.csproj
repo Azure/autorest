@@ -12,7 +12,7 @@
     <ProjectGuid>{31E6BAA3-C606-4D44-B0D7-46BE7AFAC656}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Microsoft.Rest.Generator.Test</RootNamespace>
-    <AssemblyName>AutoRest.Tests</AssemblyName>
+    <AssemblyName>AutoRest.Core.Tests</AssemblyName>
     <RestorePackages>true</RestorePackages>
     <AutoRestTest>true</AutoRestTest>
     <NuGetPackageImportStamp>87018e71</NuGetPackageImportStamp>

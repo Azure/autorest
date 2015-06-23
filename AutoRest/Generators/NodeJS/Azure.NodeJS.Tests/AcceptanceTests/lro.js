@@ -28,9 +28,9 @@ describe('nodejs', function () {
     clientOptions.requestOptions = { jar: true };
     clientOptions.filters = [new msRest.ExponentialRetryPolicyFilter(3, 0.0001, 0.0001, 0.0001)];
     clientOptions.noRetryPolicy = true;
+    clientOptions.longRunningOperationRetryTimeoutInSeconds = 0;
     
     var testClient = new lroClient(credentials, baseUri, clientOptions);
-    testClient.longRunningOperationRetryTimeout = 0.0001;
     var product = { Location: 'West US' };
     it('should work with Put201CreatingSucceeded200', function (done) {
       testClient.lROs.put201CreatingSucceeded200(product, function (error, result) {

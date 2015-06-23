@@ -17,8 +17,8 @@
     }
   ],
   "dependencies": {
-    "ms-rest": "file:../NodeRuntime/ms-rest",
-    "ms-rest-azure": "file:../NodeRuntime/ms-rest-azure"
+    "ms-rest": "file:../../../../ClientRuntimes/NodeJS/ClientRuntime",
+    "ms-rest-azure": "file:../../../../ClientRuntimes/NodeJS/ClientRuntime.Azure"
   },
   "devDependencies": {
     "jshint": "2.6.3",
@@ -36,7 +36,7 @@
     "url": "http://github.com/Azure/AutoRest/issues"
   },
   "scripts": {
-    "pretest": "npm install --prefix ../AcceptanceTests/server && npm install", 
+    "pretest": "npm install --prefix ../../AcceptanceTests/server && npm install", 
     "test": "npm -s run-script xunit",
     "unit": "node unit.js testlist.txt list",
     "xunit": "node unit.js testlist.txt",

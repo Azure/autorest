@@ -26,12 +26,12 @@ describe('nodejs', function () {
     describe('Basic Types Operations', function () {
       var testClient = new complexClient(credentials, baseUri, clientOptions);
       it('should get and put valid basic type properties', function (done) {
-        testClient.basic.getValid(function (error, result) {
+        testClient.basicOperations.getValid(function (error, result) {
           should.not.exist(error);
           result.body.id.should.equal(2);
           result.body.name.should.equal('abc');
           result.body.color.should.equal('YELLOW');
-          testClient.basic.putValid({ 'id': 2, 'name': 'abc', color: 'Magenta' }, function (error, result) {
+          testClient.basicOperations.putValid({ 'id': 2, 'name': 'abc', color: 'Magenta' }, function (error, result) {
             should.not.exist(error);
             done();
           });
@@ -39,7 +39,7 @@ describe('nodejs', function () {
       });
       
       it('should handle invalid enum value in a complex type', function (done) {
-        testClient.basic.putValid({ 'id': 2, 'name': 'abc', color: 'Blue' }, function (error, result) {
+        testClient.basicOperations.putValid({ 'id': 2, 'name': 'abc', color: 'Blue' }, function (error, result) {
           should.exist(error);
           error.message.should.match(/.*is not a valid value.*/ig);
           done();
@@ -47,7 +47,7 @@ describe('nodejs', function () {
       });
 
       it('should get null basic type properties', function (done) {
-        testClient.basic.getNull(function (error, result) {
+        testClient.basicOperations.getNull(function (error, result) {
           should.not.exist(error);
           assert.equal(null, result.body.id);
           assert.equal(null, result.body.name);
@@ -56,7 +56,7 @@ describe('nodejs', function () {
       });
       
       it('should get empty basic type properties', function (done) {
-        testClient.basic.getEmpty(function (error, result) {
+        testClient.basicOperations.getEmpty(function (error, result) {
           should.not.exist(error);
           should.not.exist(result.body.id);
           should.not.exist(result.body.name);
@@ -65,7 +65,7 @@ describe('nodejs', function () {
       });
       
       it('should get basic type properties when the payload is empty', function (done) {
-        testClient.basic.getNotProvided(function (error, result) {
+        testClient.basicOperations.getNotProvided(function (error, result) {
           should.not.exist(error);
           should.not.exist(result.body);
           done();
@@ -73,7 +73,7 @@ describe('nodejs', function () {
       });
       
       it('should deserialize invalid basic types without throwing', function (done) {
-        testClient.basic.getInvalid(function (error, result) {
+        testClient.basicOperations.getInvalid(function (error, result) {
           should.not.exist(error);
           should.exist(result.body);
           done();
