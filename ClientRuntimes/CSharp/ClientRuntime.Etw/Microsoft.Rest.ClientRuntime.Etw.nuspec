@@ -9,8 +9,8 @@
     <licenseUrl>https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/Azure/AutoRest</projectUrl>
     <iconUrl>http://go.microsoft.com/fwlink/?LinkID=288890</iconUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <summary>Provides ETW support for AutoRest generated client libraries.</summary>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <summary>Provides ETW tracing of \"Microsoft.Rest\" Client Library events.</summary>
     <description>Enables tracing of event messages for AutoRest generated client libraries events via ETW (Event Tracing for Windows). ETW events can be captured by subscribing to the "Microsoft.Rest" event source.</description>
     <copyright>Copyright © Microsoft Corporation</copyright>
     <tags>Microsoft AutoRest ClientRuntime ETW "Event Tracing"</tags>

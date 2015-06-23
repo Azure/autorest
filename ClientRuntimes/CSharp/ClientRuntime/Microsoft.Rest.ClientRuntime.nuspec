@@ -20,7 +20,7 @@
       -   Windows 8
       -   Windows Phone 8.1</description>
     <copyright>Copyright © Microsoft Corporation</copyright>
-    <tags>Microsoft AutoRest ClientRuntime</tags>
+    <tags>Microsoft AutoRest ClientRuntime REST</tags>
     <references>
       <group targetFramework="portable-net403+win8+wpa81">
         <reference file="Microsoft.Rest.ClientRuntime.dll" />
