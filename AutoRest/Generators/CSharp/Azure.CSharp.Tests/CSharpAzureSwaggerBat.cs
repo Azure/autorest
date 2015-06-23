@@ -14,11 +14,13 @@ using Fixtures.Azure.SwaggerBatPaging;
 using Fixtures.Azure.SwaggerBatReport;
 using Microsoft.Azure;
 using Microsoft.Rest.Generator.CSharp.Tests;
+using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger.Tests;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Linq;
 using Xunit;
+using Xunit.Abstractions;
 using Error = Fixtures.SwaggerBatHttp.Models.Error;
 using Fixtures.Azure.SwaggerBatResourceFlattening;
 using Fixtures.Azure.SwaggerBatResourceFlattening.Models;
@@ -31,9 +33,12 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         "AutoRest.Generator.CSharp.Tests")]
     public class CSharpAzureSwaggerBat : IClassFixture<ServiceController>
     {
-        public CSharpAzureSwaggerBat(ServiceController data)
+        private readonly ITestOutputHelper _output;
+
+        public CSharpAzureSwaggerBat(ServiceController data, ITestOutputHelper output)
         {
             this.Fixture = data;
+            _output = output;
         }
 
         public ServiceController Fixture { get; set; }
@@ -243,8 +248,12 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
             var report = client.GetReport();
             float totalTests = report.Count;
             float executedTests = report.Values.Count(v => v > 0);
-            Trace.WriteLine(string.Format("The test coverage for Azure is {0}/{1}.", executedTests, totalTests));
-            Assert.True(executedTests == totalTests);
+            if (executedTests < totalTests)
+            {
+                report.ForEach(r => _output.WriteLine(string.Format("{0}:{1}.", r.Key, r.Value)));
+                _output.WriteLine(string.Format("The test coverage for Azure is {0}/{1}.", executedTests, totalTests));
+                Assert.Equal(executedTests, totalTests);
+            }
         }
 
         [Fact]

@@ -31,10 +31,12 @@ using Fixtures.SwaggerBatUrl.Models;
 using Fixtures.SwaggerBatHeader;
 using Fixtures.SwaggerBatHeader.Models;
 using Fixtures.SwaggerBatRequiredOptional;
+using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger.Tests;
 using Newtonsoft.Json;
 using Xunit;
 using System.Text;
+using Xunit.Abstractions;
 using Error = Fixtures.SwaggerBatHttp.Models.Error;
 
 namespace Microsoft.Rest.Generator.CSharp.Tests
@@ -44,9 +46,12 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         "AutoRest.Generator.CSharp.Tests")]
     public class CSharpSwaggerBat : IClassFixture<ServiceController>
     {
-        public CSharpSwaggerBat(ServiceController data)
+        private readonly ITestOutputHelper _output;
+
+        public CSharpSwaggerBat(ServiceController data, ITestOutputHelper output)
         {
             this.Fixture = data;
+            _output = output;
         }
 
         public ServiceController Fixture { get; set; }
@@ -1244,8 +1249,12 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             var report = client.GetReport();
             float totalTests = report.Count;
             float executedTests = report.Values.Count(v => v > 0);
-            Trace.WriteLine(string.Format("The test coverage is {0}/{1}.", executedTests, totalTests));
-            Assert.True(executedTests/totalTests > 0.7);
+            if (executedTests / totalTests < 0.7)
+            {
+                report.ForEach(r => _output.WriteLine(string.Format("{0}:{1}.", r.Key, r.Value)));
+                _output.WriteLine(string.Format("The test coverage is {0}/{1}.", executedTests, totalTests));
+                Assert.True(executedTests / totalTests > 0.7);
+            }
         }
 
         private static void EnsureStatusCode(HttpStatusCode expectedStatusCode, Func<Task<HttpOperationResponse>> operation)
