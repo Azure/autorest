@@ -7,25 +7,29 @@
 
 package com.microsoft.rest.credentials;
 
+import com.microsoft.rest.ServiceClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+
 /**
- * The Class CertificateCloudCredentials.
+ * Basic Auth credentials for use with a REST Service Client.
  */
 public class BasicAuthenticationCredentials extends ServiceClientCredentials {
+
+    /**
+     * Basic auth UserName.
+     */
     private String userName;
 
+    /**
+     * Basic auth password.
+     */
     private String password;
 
     /**
      * Instantiates a new basic authentication credential.
-     */
-    public BasicAuthenticationCredentials() {
-    }
-
-    /**
-     * Instantiates a new basic authentication credential.
      *
-     * @param userName the uri
-     * @param password the subscription id
+     * @param userName basic auth user name
+     * @param password basic auth password
      */
     public BasicAuthenticationCredentials(String userName, String password) {
         this.userName = userName;
@@ -33,7 +37,9 @@ public class BasicAuthenticationCredentials extends ServiceClientCredentials {
     }
 
     /**
-     * Get the username of the credential.
+     * Get the user name of the credential.
+     *
+     * @return the user name
      */
     public String getUserName() {
         return userName;
@@ -41,8 +47,18 @@ public class BasicAuthenticationCredentials extends ServiceClientCredentials {
 
     /**
      * Get the password of the credential.
+     *
+     * @return the password
      */
     public String getPassword() {
         return password;
+    }
+
+    /* (non-Javadoc)
+     * @see com.microsoft.rest.credentials.ServiceClientCredentials#applyCredentialsFilter(com.microsoft.rest.ServiceClient)
+     */
+    @Override
+    public void applyCredentialsFilter(ServiceClient client) {
+        client.addRequestFilterFirst(new BasicAuthenticationCredentialsFilter(this));
     }
 }

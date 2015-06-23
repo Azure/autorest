@@ -7,30 +7,25 @@
 
 package com.microsoft.rest.credentials;
 
-import java.util.ArrayList;
-import java.util.Map;
+import com.microsoft.rest.ServiceClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 
 /**
- * The Class CertificateCloudCredentials.
+ * Token based credentials for use with a REST Service Client.
  */
 public class TokenCredentials extends ServiceClientCredentials {
-    /** The scheme. */
+
+    /** The authentication scheme. */
     private String scheme;
     
-    /** The token */
+    /** The secure token */
     private String token;
 
     /**
-     * Instantiates a new certificate cloud credentials.
-     */
-    public TokenCredentials() {
-    }
-
-    /**
-     * Instantiates a new certificate cloud credentials.
+     * Initializes a new instance of the TokenCredentials.
      *
-     * @param scheme the scheme in the authorization header
-     * @param token the access token
+     * @param scheme scheme to use. If null, defaults to Bearer
+     * @param token  valid token
      */
     public TokenCredentials(String scheme, String token) {
         if (scheme == null)
@@ -42,9 +37,9 @@ public class TokenCredentials extends ServiceClientCredentials {
     }
 
     /**
-     * Get the authentication token.
+     * Get the secure token.
      *
-     * @return the ADAL authentication token
+     * @return the secure token
      */
     public String getToken() {
         return token;
@@ -53,8 +48,17 @@ public class TokenCredentials extends ServiceClientCredentials {
     /**
      * Get the authentication scheme.
      *
+     * @return the authentication scheme
      */
     public String getScheme() {
         return scheme;
+    }
+
+    /* (non-Javadoc)
+     * @see com.microsoft.rest.credentials.ServiceClientCredentials#applyCredentialsFilter(com.microsoft.rest.ServiceClient)
+     */
+    @Override
+    public void applyCredentialsFilter(ServiceClient client) {
+        client.addRequestFilterFirst(new TokenCredentialsFilter(this));
     }
 }

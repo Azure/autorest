@@ -5,14 +5,14 @@
  *
  */
 
-package com.microsoft.rest.core;
+package com.microsoft.rest;
 
-import com.microsoft.rest.core.pipeline.HttpRequestInterceptorBackAdapter;
-import com.microsoft.rest.core.pipeline.HttpRequestInterceptorFrontAdapter;
-import com.microsoft.rest.core.pipeline.HttpResponseInterceptorBackAdapter;
-import com.microsoft.rest.core.pipeline.HttpResponseInterceptorFrontAdapter;
-import com.microsoft.rest.core.pipeline.ServiceRequestFilter;
-import com.microsoft.rest.core.pipeline.ServiceResponseFilter;
+import com.microsoft.rest.pipeline.HttpRequestInterceptorBackAdapter;
+import com.microsoft.rest.pipeline.HttpRequestInterceptorFrontAdapter;
+import com.microsoft.rest.pipeline.HttpResponseInterceptorBackAdapter;
+import com.microsoft.rest.pipeline.HttpResponseInterceptorFrontAdapter;
+import com.microsoft.rest.pipeline.ServiceRequestFilter;
+import com.microsoft.rest.pipeline.ServiceResponseFilter;
 import org.apache.http.HttpHost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -22,7 +22,12 @@ import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public abstract class ServiceClient<TClient> implements Closeable {
+/**
+ * ServiceClient is the abstraction for accessing REST operations and their payload data types.
+ *
+ * @param <T> type of the ServiceClient
+ */
+public abstract class ServiceClient<T> implements Closeable {
     private final ExecutorService executorService;
     private CloseableHttpClient httpClient;
     private HttpRequestInterceptorFrontAdapter httpRequestInterceptorFrontAdapter;
@@ -31,22 +36,49 @@ public abstract class ServiceClient<TClient> implements Closeable {
     private HttpResponseInterceptorBackAdapter httpResponseInterceptorBackAdapter;
     private final HttpClientBuilder httpClientBuilder;
 
+    /**
+     * Initializes a new instance of the ServiceClient class.
+     */
     public ServiceClient() {
         this(HttpClientBuilder.create(), Executors.newCachedThreadPool());
     }
 
+    /**
+     * Initializes a new instance of the ServiceClient class.
+     *
+     * @param httpClientBuilder the apache HttpClientBuilder for creating Http clients
+     * @param executorService   the ExecutorService for asynchronous operations
+     */
     public ServiceClient(HttpClientBuilder httpClientBuilder,
             ExecutorService executorService) {
         this.httpClientBuilder = httpClientBuilder;
         this.executorService = executorService;
-        this.withRequestFilterFirst(new UserAgentFilter(this.getClass().getName()));
-
     }
 
+    /**
+     * Get the ExecutorService.
+     *
+     * @return the ExecutorService
+     */
     public ExecutorService getExecutorService() {
         return this.executorService;
     }
 
+    /**
+     * Get the HttpClientBuilder.
+     *
+     * @return the HttpClientBuilder
+     */
+    public HttpClientBuilder getHttpClientBuilder() {
+        return this.httpClientBuilder;
+    }
+
+    /**
+     * Get the HttpClient. A new HttpClient will be built from the HttpClientBuilder
+     * if one is not built yet.
+     *
+     * @return the HttpClient instance
+     */
     public CloseableHttpClient getHttpClient() {
         if (this.httpClient == null) {
             String proxyHost = System.getProperty("http.proxyHost");
@@ -64,46 +96,69 @@ public abstract class ServiceClient<TClient> implements Closeable {
         return this.httpClient;
     }
 
-    public ServiceClient<TClient> withRequestFilterFirst(
+    /**
+     * Add a ServiceRequestFilter to the beginning of all the request filters in
+     * Apache pipeline.
+     *
+     * @param serviceRequestFilter the filter to be added
+     */
+    public void addRequestFilterFirst(
             ServiceRequestFilter serviceRequestFilter) {
         if (httpRequestInterceptorFrontAdapter == null) {
             httpRequestInterceptorFrontAdapter = new HttpRequestInterceptorFrontAdapter();
             httpClientBuilder.addInterceptorFirst(httpRequestInterceptorFrontAdapter);
         }
         httpRequestInterceptorFrontAdapter.addFront(serviceRequestFilter);
-        return this;
     }
 
-    public ServiceClient<TClient> withRequestFilterLast(
+    /**
+     * Add a ServiceRequestFilter to the end of all the request filters in
+     * Apache pipeline.
+     *
+     * @param serviceRequestFilter the filter to be added
+     */
+    public void addRequestFilterLast(
             ServiceRequestFilter serviceRequestFilter) {
         if (httpRequestInterceptorBackAdapter == null) {
             httpRequestInterceptorBackAdapter = new HttpRequestInterceptorBackAdapter();
             httpClientBuilder.addInterceptorLast(httpRequestInterceptorBackAdapter);
         }
         httpRequestInterceptorBackAdapter.addBack(serviceRequestFilter);
-        return this;
     }
 
-    public ServiceClient<TClient> withResponseFilterFirst(
+    /**
+     * Add a ServiceResponseFilter to the beginning of all the response filters in
+     * Apache pipeline.
+     *
+     * @param serviceResponseFilter the filter to be added
+     */
+    public void addResponseFilterFirst(
             ServiceResponseFilter serviceResponseFilter) {
         if (httpResponseInterceptorFrontAdapter == null) {
             httpResponseInterceptorFrontAdapter = new HttpResponseInterceptorFrontAdapter();
             httpClientBuilder.addInterceptorFirst(httpResponseInterceptorFrontAdapter);
         }
         httpResponseInterceptorFrontAdapter.addFront(serviceResponseFilter);
-        return this;
     }
 
-    public ServiceClient<TClient> withResponseFilterLast(
+    /**
+     * Add a ServiceResponseFilter to the end of all the response filters in
+     * Apache pipeline.
+     *
+     * @param serviceResponseFilter the filter to be added
+     */
+    public void addResponseFilterLast(
             ServiceResponseFilter serviceResponseFilter) {
         if (httpResponseInterceptorBackAdapter == null) {
             httpResponseInterceptorBackAdapter = new HttpResponseInterceptorBackAdapter();
             httpClientBuilder.addInterceptorLast(httpResponseInterceptorBackAdapter);
         }
         httpResponseInterceptorBackAdapter.addBack(serviceResponseFilter);
-        return this;
     }
 
+    /* (non-Javadoc)
+     * @see java.io.Closeable#close()
+     */
     public void close() throws IOException {
         if (httpClient != null) {
             httpClient.close();

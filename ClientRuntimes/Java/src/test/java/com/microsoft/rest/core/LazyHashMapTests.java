@@ -9,6 +9,7 @@ package com.microsoft.rest.core;
 
 import static org.junit.Assert.assertEquals;
 
+import com.microsoft.rest.LazyHashMap;
 import org.junit.Test;
 
 public class LazyHashMapTests {

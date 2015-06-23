@@ -5,9 +5,19 @@
  *
  */
 
-package com.microsoft.rest.core.pipeline;
+package com.microsoft.rest.pipeline;
 
+/**
+ * The adapter to wrap a list of ServiceResponseFilter to be placed
+ * at the end of all the response filters in Apache pipeline.
+ */
 public class HttpResponseInterceptorBackAdapter extends HttpResponseInterceptorAdapter {
+
+    /**
+     * Add a ServiceResponseFilter to the end of the the filter list.
+     *
+     * @param filter a ServiceResponseFilter instance
+     */
     public void addBack(ServiceResponseFilter filter) {
         getFilterList().addLast(filter);
     }
