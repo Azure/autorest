@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <LibraryFxTarget Condition="'$(LibraryFxTarget)' == ''">net45</LibraryFxTarget>
+    <ProjectGuid>{CC1EEC96-41EF-44B6-8761-00FA3E647248}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Microsoft.Rest.Generator.JavaScript.Angular</RootNamespace>
+    <AssemblyName>AutoRest.Generator.JavaScript.Angular</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <Import Project="$(SolutionDir)\Tools\AutoRest.Settings.targets" />
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(SolutionDir)\Tools\AssemblyVersionInfo.cs">
+      <Link>Properties\AssemblyVersionInfo.cs</Link>
+    </Compile>
+    <Compile Include="JavaScriptAngularCodeGenerator.cs" />
+    <Compile Include="JavaScriptAngularCodeNamingFramework.cs" />
+    <Compile Include="Templates\*.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Templates\ServiceClientTemplate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\AutoRest.Core\AutoRest.Core.csproj">
+      <Project>{c876085f-9dc3-41f0-b7b4-17022cd84684}</Project>
+      <Name>AutoRest.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

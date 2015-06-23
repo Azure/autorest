@@ -1,0 +1,217 @@
+﻿{
+    "swagger": "2.0",
+    "info":
+    {
+        "title": "Test of swagger response schemas in error and non-errors",
+        "description": "Some cool documentation.",
+        "version": "2014-04-01-preview"
+    }
+    ,
+    "host": "management.azure.com",
+    "schemes": [
+    "https"
+    ],
+    "basePath": "/",
+    "produces": [ "application/json" ],
+    "consumes": [ "application/json" ],
+    "paths":
+    {
+        "/defaultonly":
+        {
+            "get":
+            {
+                "operationId": "list_defaultonly",
+                "summary": "Product Types",
+                "description": "The Products endpoint returns information about the Uber products offered at a given location. The response includes the display name and other details about each product, and lists the products in the proper display order.",
+                "responses":
+                {
+                    "default":
+                    {
+                        "description": "error or success response",
+                        "schema":
+                        {
+                            "$ref": "DefaultOnlyResponse"
+                        }
+                    }
+                }
+            }
+        }
+        ,
+        "/defaultandspecific":
+        {
+            "get":
+            {
+                "operationId": "list_defaultandspecific",
+                "summary": "Product Types",
+                "description": "The Products endpoint returns information about the Uber products offered at a given location. The response includes the display name and other details about each product, and lists the products in the proper display order.",
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "200 response result",
+                        "schema":
+                        {
+                            "$ref": "Product"
+                        }
+                    }
+                    ,
+                    "default":
+                    {
+                        "description": "error or success response for status code != 200",
+                        "schema":
+                        {
+                            "$ref": "DefaultOnlyResponse"
+                        }
+                    }
+                }
+            }
+        }
+        ,
+        "/nodefault":
+        {
+            "get":
+            {
+                "operationId": "list_nodefault",
+                "summary": "Product Types",
+                "description": "The Products endpoint returns information about the Uber products offered at a given location. The response includes the display name and other details about each product, and lists the products in the proper display order.",
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "200 response result",
+                        "schema":
+                        {
+                            "$ref": "Product"
+                        }
+                    }
+                    ,
+                    "202":
+                    {
+                        "description": "error or success response for status code != 200",
+                        "schema":
+                        {
+                            "$ref": "DefaultOnlyResponse"
+                        }
+                    }
+                }
+            }
+        }
+        ,
+        "/defaultandspecificerror":
+        {
+            "get":
+            {
+                "operationId": "list_defaultandspecificerror",
+                "summary": "Product Types",
+                "description": "The Products endpoint returns information about the Uber products offered at a given location. The response includes the display name and other details about each product, and lists the products in the proper display order.",
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "200 response result",
+                        "schema":
+                        {
+                            "$ref": "Product"
+                        }
+                    }
+                    ,
+                    "404":
+                    {
+                        "description": "error or success response for status code != 200",
+                        "schema":
+                        {
+                            "$ref": "DefaultOnlyResponse"
+                        }
+                    }
+                    ,
+                    "default":
+                    {
+                        "description": "error or success response for status code != 200",
+                        "schema":
+                        {
+                            "$ref": "ErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    }
+    ,
+    "definitions":
+    {
+        "Product":
+        {
+            "properties":
+            {
+                "product_id":
+                {
+                    "type": "string",
+                    "description": "Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles."
+                }
+                ,
+                "description":
+                {
+                    "type": "string",
+                    "description": "Description of product."
+                }
+                ,
+                "display_name":
+                {
+                    "type": "string",
+                    "description": "Display name of product."
+                }
+                ,
+                "capacity":
+                {
+                    "type": "string",
+                    "description": "Capacity of product. For example, 4 people."
+                }
+                ,
+                "image":
+                {
+                    "type": "string",
+                    "description": "Image URL representing the product."
+                }
+            }
+        }
+        ,
+        "DefaultOnlyResponse":
+        {
+            "properties":
+            {
+                "code":
+                {
+                    "type": "integer",
+                    "format": "int32"
+                }
+                ,
+                "message":
+                {
+                    "type": "string"
+                }
+                ,
+                "fields":
+                {
+                    "type": "string"
+                }
+            }
+        }
+        ,
+        "ErrorResponse":
+        {
+            "properties":
+            {
+                "errorCode":
+                {
+                    "type": "integer",
+                    "format": "int32"
+                }
+                ,
+                "errorMessage":
+                {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

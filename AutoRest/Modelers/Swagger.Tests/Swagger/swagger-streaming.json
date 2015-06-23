@@ -1,0 +1,81 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.13",
+    "title": "Swagger Stream Store"
+  },
+  "host": "http://autorestresourcesproxysite.azurewebsites.net/Autorest.HelloWorld",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/values": {
+      "post": {
+        "tags": [
+          "Values"
+        ],
+        "operationId": "GetWithStream",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "fileContent",
+            "description": "file to upload",
+            "required": true,
+            "type": "file",
+            "in": "formData"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Values"
+        ],
+        "operationId": "PostWithByteArray",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "fileContent",
+            "description": "file to upload",
+            "required": true,
+            "type": "string",
+            "format": "byte",
+            "in": "formData"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string",
+              "format": "byte"
+            }
+          }
+        }
+      }
+    }
+  }
+}

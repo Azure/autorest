@@ -1,0 +1,30 @@
+﻿{
+    "swagger": "2.0",
+    "info": {
+        "title": "Hello Swagger",
+        "version": "1.0.0"
+    },
+    "host": "localhost:12510",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/pets": {
+            "get": {
+                "description": "Returns a greeting.",
+                "operationId": "findPetById",
+                "produces": [
+                    "application/json"
+                ],
+               "responses": {
+                    "200": {
+                        "description": "GETs a greeting.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

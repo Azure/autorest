@@ -1,0 +1,160 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Microsoft Nullable Primitves test API",
+        "description": "Some cool documentation.",
+        "version": "2014-04-01-preview"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "basePath": "/",
+    "produces": [ "application/json" ],
+    "consumes": [ "application/json" ],
+    "paths": {
+        "/subscriptions/{intAutoRequiredBecauseUsedInPath}/{requiredInt}/{longAutoRequiredBecauseUsedInPath}?number={requiredNumber}&float={optionalFloat}": {
+            "get": {
+                "operationId": "list",
+                "summary": "Product Types",
+                "description": "The Products endpoint returns information about the Uber products offered at a given location. The response includes the display name and other details about each product, and lists the products in the proper display order.",
+                "parameters": [
+                    {
+                        "name": "intAutoRequiredBecauseUsedInPath",
+                        "in": "path",
+                        "type": "integer"
+                    },
+                    {
+                        "name": "requiredInt",
+                        "in": "path",
+                        "type": "integer",
+                        "format": "int32",
+                        "required": true
+                    },
+                    {
+                        "name": "longAutoRequiredBecauseUsedInPath",
+                        "in": "path",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "requiredNumber",
+                        "in": "query",
+                        "type": "number",
+                        "required": true
+                    },
+                    {
+                        "name": "optionalFloat",
+                        "in": "query",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    {
+                        "name": "requiredDouble",
+                        "in": "header",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    {
+                        "name": "booleanAutoRequiredBecasueUsedInHeader",
+                        "in": "header",
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "product",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Product"
+                            }
+                        }
+                    }
+                ],
+                "tags": [
+                    "Redis"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list of caches",
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Product": {
+            "type": "object",
+            "required": [
+                "requiredInt",
+                "requiredLong",
+                "requiredFloat",
+                "requiredBoolean",
+                "requiredDateTime"
+            ],
+            "properties": {
+                "requiredInt": {
+                    "type": "integer"
+                },
+                "optionalInt": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "requiredLong": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "optionalNumber": {
+                    "type": "number"
+                },
+                "requiredFloat": {
+                    "type": "number",
+                    "format": "float"
+                },
+                "optionalEnum": {
+                    "type": "string",
+                    "enum": [ "red", "blue", "green" ]
+                },
+                "requiredBoolean": {
+                    "type": "boolean"
+                },
+                "optionalDate": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "requiredDateTime": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "Object": {
+            "type": "object",
+            "properties": { }
+        },
+        "Error": {
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "fields": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

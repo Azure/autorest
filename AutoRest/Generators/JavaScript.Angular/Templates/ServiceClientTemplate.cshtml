@@ -1,0 +1,41 @@
+﻿@using Microsoft.Rest.Generator.ClientModel
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.ClientModel.ServiceClient>
+
+<script src="Scripts/angular.js"></script>
+<script type="text/javascript">
+    angular.module('@Model.Name', []).controller('@(Model.Name)Ctrlr', function ($scope, $http) {
+        $scope.baseUri = '@Model.BaseUrl';
+        @foreach(var method in Model.Methods)
+        {
+            var url = "$scope.baseUri + '" + method.Url +  "'";
+            //TODO: Add support for query parameters
+            foreach (var param in method.Parameters)
+            {
+                if (param.Location == ParameterLocation.Path)
+                {
+                    url += ".replace('{" + param.SerializedName + "}', " + param.Name + ")";
+                }
+            }
+@:        $scope.@method.Name = function () {
+@:            $http({
+@:                method: '@method.HttpMethod.ToString().ToUpper()',
+@:                url: @url,
+@:                headers: {
+@:                    'Content-Type': 'application/json'
+@:                }
+@:            }).then(function (data, status) {
+                foreach(var response in method.Responses)
+                {
+                  if (response.Value == null)
+                  {
+                      continue;
+                  }
+@:                if (status == @((int)response.Key)) {
+@:                    $scope.@response.Value.Name = data;
+@:                }
+                }
+@:            });
+@:        };
+        }
+    });
+</script>

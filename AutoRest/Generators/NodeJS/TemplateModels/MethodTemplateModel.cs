@@ -1,0 +1,389 @@
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using Microsoft.CSharp;
+using Microsoft.Rest.Generator.ClientModel;
+using Microsoft.Rest.Generator.NodeJS.TemplateModels;
+using Microsoft.Rest.Generator.Utilities;
+
+namespace Microsoft.Rest.Generator.NodeJS
+{
+    public class MethodTemplateModel : Method
+    {
+        private readonly IScopeProvider _scopeProvider = new ScopeProvider();
+
+        public MethodTemplateModel(Method source, ServiceClient serviceClient)
+        {
+            this.LoadFrom(source);
+            ParameterTemplateModels = new List<ParameterTemplateModel>();
+            source.Parameters.ForEach(p => ParameterTemplateModels.Add(new ParameterTemplateModel(p)));
+            ServiceClient = serviceClient;
+            if (source.Group != null)
+            {
+                OperationName = source.Group.ToPascalCase();
+            }
+            else
+            {
+                OperationName = serviceClient.Name;
+            }
+        }
+
+        public string OperationName { get; set; }
+
+        public ServiceClient ServiceClient { get; set; }
+
+        public List<ParameterTemplateModel> ParameterTemplateModels { get; protected set; }
+
+        public IScopeProvider Scope
+        {
+            get { return _scopeProvider; }
+        }
+
+
+        /// <summary>
+        /// Get the predicate to determine of the http operation status code indicates success
+        /// </summary>
+        public string FailureStatusCodePredicate
+        {
+            get
+            {
+                if (Responses.Any())
+                {
+                    List<string> predicates = new List<string>();
+                    foreach (var responseStatus in Responses.Keys)
+                    {
+                        predicates.Add(string.Format("statusCode !== {0}", GetStatusCodeReference(responseStatus)));
+                    }
+
+                    return string.Join(" && ", predicates);
+                }
+
+                return "statusCode < 200 || statusCode >= 300";
+            }
+        }
+
+        /// <summary>
+        /// Generate the method parameter declarations for a method
+        /// </summary>
+        public string MethodParameterDeclaration
+        {
+            get
+            {
+                List<string> declarations = new List<string>();
+                foreach (var parameter in LocalParameters)
+                {
+                    declarations.Add(parameter.Name);
+                }
+
+                var declaration = string.Join(", ", declarations);
+                if (!string.IsNullOrEmpty(declaration))
+                {
+                    declaration += ", ";
+                }
+                return declaration;
+            }
+        }
+
+        /// <summary>
+        /// Gets the expression for response body initialization 
+        /// </summary>
+        public virtual string InitializeResponseBody
+        {
+            get
+            {
+                return string.Empty;
+            }
+        }
+
+        /// <summary>
+        /// Generate the method parameter declarations with callback for a method
+        /// </summary>
+        public string MethodParameterDeclarationWithCallback
+        {
+            get
+            {
+                var parameters = MethodParameterDeclaration;
+                parameters += "callback";
+                return parameters;
+            }
+        }
+
+        /// <summary>
+        /// Get the parameters that are actually method parameters in the order they appear in the method signature
+        /// exclude global parameters
+        /// </summary>
+        public IEnumerable<ParameterTemplateModel> LocalParameters
+        {
+            get
+            {
+                return ParameterTemplateModels.Where(
+                    p => p != null && p.GlobalProperty == null && !string.IsNullOrWhiteSpace(p.Name))
+                    .OrderBy(item => !item.IsRequired);
+            }
+        }
+
+        /// <summary>
+        /// Returns list of parameters and their properties in (alphabetical order) that needs to be documented over a method.
+        /// This property does simple tree traversal using stack and hashtable for already visited complex types.
+        /// </summary>
+        public IEnumerable<ParameterTemplateModel> DocumentationParameters
+        {
+            get
+            {
+                var traversalStack = new Stack<ParameterTemplateModel>();
+                var visitedHash = new Dictionary<string, ParameterTemplateModel>();
+                var retValue = new List<ParameterTemplateModel>();
+
+                foreach (var param in LocalParameters)
+                {
+                    traversalStack.Push(param);
+                }
+
+                while (traversalStack.Count() != 0)
+                {
+                    var param = traversalStack.Pop();
+                    retValue.Add(param);
+                    if (param.Type is CompositeType)
+                    {
+                        if (!visitedHash.ContainsKey(param.Type.Name))
+                        {
+                            foreach (var property in ((CompositeType)param.Type).Properties)
+                            {
+                                var propertyParameter = new Parameter();
+                                propertyParameter.Type = property.Type;
+                                propertyParameter.Name = param.Name + "." + property.Name;
+                                propertyParameter.Documentation = property.Documentation;
+                                traversalStack.Push(new ParameterTemplateModel(propertyParameter));
+                            }
+                            visitedHash.Add(param.Type.Name, new ParameterTemplateModel(param));
+                        }
+                    }
+                }
+
+                return retValue.OrderBy(p => p.Name).ToList();
+            }
+        }
+
+        /// <summary>
+        /// Get the type name for the method's return type
+        /// </summary>
+        public string ReturnTypeString
+        {
+            get
+            {
+                if (ReturnType != null)
+                {
+                    return ReturnType.Name;
+                }
+                return "void";
+            }
+        }
+
+        /// <summary>
+        /// The Deserialization Error handling code block that provides a useful Error 
+        /// message when exceptions occure in deserialization along with the request 
+        /// and response object
+        /// </summary>
+        public string DeserializationError
+        {
+            get
+            {
+                var builder = new IndentedStringBuilder("  ");
+                var errorVariable = this.Scope.GetVariableName("deserializationError");
+                return builder.AppendLine("var {0} = new Error(util.format('Error \"%s\" occurred in " +
+                    "deserializing the responseBody - \"%s\"', error, responseBody));", errorVariable)
+                    .AppendLine("{0}.request = httpRequest;", errorVariable)
+                    .AppendLine("{0}.response = response;", errorVariable)
+                    .AppendLine("return callback({0});", errorVariable).ToString();
+            }
+        }
+
+        public string GetDeserializationString(IType type, string valueReference = "result.body")
+        {
+            CompositeType composite = type as CompositeType;
+            SequenceType sequence = type as SequenceType;
+            DictionaryType dictionary = type as DictionaryType;
+            PrimaryType primary = type as PrimaryType;
+            EnumType enumType = type as EnumType;
+            var builder = new IndentedStringBuilder("  ");
+            if (primary != null)
+            {
+                if (primary == PrimaryType.DateTime ||
+                    primary == PrimaryType.Date)
+                {
+                    builder.AppendLine("{0} = new Date({0});", valueReference);
+                }
+                else if (primary == PrimaryType.ByteArray)
+                {
+                    builder.AppendLine("{0} = new Buffer({0}, 'base64');", valueReference);
+                }
+            }
+            else if (sequence != null)
+            {
+                builder.AppendLine("for (var i = 0; i < {0}.length; i++) {{", valueReference)
+                    .Indent()
+                    .AppendLine("if ({0}[i] !== null && {0}[i] !== undefined) {{", valueReference)
+                        .Indent();
+                // Loop through the sequence if each property is Date, DateTime or ByteArray 
+                // as they need special treatment for deserialization
+                if (sequence.ElementType == PrimaryType.DateTime ||
+                    sequence.ElementType == PrimaryType.Date)
+                {
+                    builder.AppendLine("{0}[i] = new Date({0}[i]);", valueReference);
+                }
+                else if (sequence.ElementType == PrimaryType.ByteArray)
+                {
+                    builder.AppendLine("{0}[i] = new Buffer({0}[i], 'base64');", valueReference);
+                }
+                else if (sequence.ElementType is CompositeType)
+                {
+                    builder.AppendLine(GetDeserializationString(sequence.ElementType, string.Format("{0}[i]", valueReference)));
+                }
+
+                builder.Outdent()
+                        .AppendLine("}")
+                        .Outdent()
+                    .AppendLine("}");
+            }
+            else if (dictionary != null)
+            {
+                builder.AppendLine("for (var property in {0}) {{", valueReference)
+                    .Indent()
+                    .AppendLine("if ({0}[property] !== null && {0}[property] !== undefined) {{", valueReference)
+                        .Indent();
+                if (dictionary.ValueType == PrimaryType.DateTime ||
+                    dictionary.ValueType == PrimaryType.Date)
+                {
+                    builder.AppendLine("{0}[property] = new Date({0}[property]);", valueReference);
+                }
+                else if (dictionary.ValueType == PrimaryType.ByteArray)
+                {
+                    builder.AppendLine("{0}[property] = new Buffer({0}[property], 'base64');", valueReference);
+                }
+                else if (dictionary.ValueType is CompositeType)
+                {
+                    builder.AppendLine(GetDeserializationString(dictionary.ValueType, string.Format("{0}[property]", valueReference)));
+                }
+                builder.Outdent()
+                        .AppendLine("}")
+                        .Outdent()
+                    .AppendLine("}");
+            }
+            else if (composite != null)
+            {
+                if (!string.IsNullOrEmpty(composite.PolymorphicDiscriminator))
+                {
+                    builder.AppendLine("if({0}['{1}'] !== null && {0}['{1}'] !== undefined && client._models.discriminators[{0}['{1}']]) {{",
+                        valueReference,
+                        composite.PolymorphicDiscriminator)
+                        .Indent()
+                            .AppendLine("{0} = client._models.discriminators[{0}['{1}']].deserialize({0});",
+                                valueReference,
+                                composite.PolymorphicDiscriminator)
+                            .Outdent()
+                        .AppendLine("} else {")
+                        .Indent()
+                            .AppendLine("throw new Error('No discriminator field \"{0}\" was found in response.');",
+                                composite.PolymorphicDiscriminator)
+                            .Outdent()
+                        .AppendLine("}");
+                }
+                else
+                {
+                    builder.AppendLine("{0} = client._models['{1}'].deserialize({0});", valueReference, type.Name);
+                }
+            }
+            else if (enumType != null)
+            {
+                //Do No special deserialization
+            }
+            else
+            {
+                throw new InvalidOperationException("Invalid type: " + ReturnType);
+            }
+            return builder.ToString();
+        }
+
+        /// <summary>
+        /// Get the method's request body (or null if there is no request body)
+        /// </summary>
+        public ParameterTemplateModel RequestBody
+        {
+            get { return ParameterTemplateModels.FirstOrDefault(p => p.Location == ParameterLocation.Body); }
+        }
+
+        /// <summary>
+        /// Generate a reference to the ServiceClient
+        /// </summary>
+        public string ClientReference
+        {
+            get { return Group == null ? "this" : "this.client"; }
+        }
+
+        // TODO: no callers. Is this needed for NodeJS generator?
+        public string GetExtensionParameters(string methodParameters)
+        {
+            string operationsParameter = "this I" + OperationName + " operations";
+            return string.IsNullOrWhiteSpace(methodParameters)
+                ? operationsParameter
+                : operationsParameter + ", " + methodParameters;
+        }
+
+        public string GetStatusCodeReference(HttpStatusCode code)
+        {
+            return string.Format("{0}", (int)code);
+        }
+
+        /// <summary>
+        /// Generate code to build the URL from a url expression and method parameters
+        /// </summary>
+        /// <param name="variableName">The variable to store the url in.</param>
+        /// <returns></returns>
+        public virtual string BuildUrl(string variableName)
+        {
+            var builder = new IndentedStringBuilder("  ");
+
+            foreach (var pathParameter in ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
+            {
+                builder.AppendLine("{0} = {0}.replace(\"{{{1}}}\", encodeURIComponent({2}));",
+                    variableName,
+                    pathParameter.Name,
+                    pathParameter.Type.ToString(pathParameter.Name));
+            }
+            if (ParameterTemplateModels.Any(p => p.Location == ParameterLocation.Query))
+            {
+                builder.AppendLine("var queryParameters = [];");
+                foreach (var queryParameter in ParameterTemplateModels
+                    .Where(p => p.Location == ParameterLocation.Query))
+                {
+                    builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", queryParameter.Name)
+                        .Indent()
+                        .AppendLine("queryParameters.push('{0}=' + encodeURIComponent({1}));",
+                            queryParameter.SerializedName, queryParameter.GetFormattedReferenceValue()).Outdent()
+                        .AppendLine("}");
+                }
+
+                builder.AppendLine("if (queryParameters.length > 0) {")
+                    .Indent()
+                    .AppendLine("{0} += '?' + queryParameters.join('&');", variableName).Outdent()
+                    .AppendLine("}");
+            }
+
+            return builder.ToString();
+        }
+
+        public virtual string RemoveDuplicateForwardSlashes(string urlVariableName)
+        {
+            var builder = new IndentedStringBuilder("  ");
+
+            builder.AppendLine("// trim all duplicate forward slashes in the url");
+            builder.AppendLine("var regex = /([^:]\\/)\\/+/gi;");
+            builder.AppendLine("{0} = {0}.replace(regex, '$1');", urlVariableName);
+            return builder.ToString();
+        }
+    }
+}

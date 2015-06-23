@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <LibraryFxTarget Condition="'$(LibraryFxTarget)' == ''">net45</LibraryFxTarget>
+    <ProjectGuid>{CC1EEC95-41EF-44B6-8761-00FA3E647248}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Microsoft.Rest.Generator.CSharp</RootNamespace>
+    <AssemblyName>AutoRest.Generator.CSharp</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <Import Project="$(SolutionDir)\Tools\AutoRest.Settings.targets" />
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(SolutionDir)\Tools\AssemblyVersionInfo.cs">
+      <Link>Properties\AssemblyVersionInfo.cs</Link>
+    </Compile>
+    <Compile Include="CSharpCodeGenerator.cs" />
+    <Compile Include="CSharpCodeNamingFramework.cs" />
+    <Compile Include="IScopeProvider.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ScopeProvider.cs" />
+    <Compile Include="TemplateModels\ExtensionsTemplateModel.cs" />
+    <Compile Include="TemplateModels\MethodGroupTemplateModel.cs" />
+    <Compile Include="TemplateModels\EnumTemplateModel.cs" />
+    <Compile Include="TemplateModels\ServiceClientTemplateModel.cs" />
+    <Compile Include="TemplateModels\MethodTemplateModel.cs" />
+    <Compile Include="ClientModelExtensions.cs" />
+    <Compile Include="TemplateModels\ParameterTemplateModel.cs" />
+    <Compile Include="TemplateModels\PropertyTemplateModel.cs" />
+    <Compile Include="TemplateModels\ModelTemplateModel.cs" />
+    <Compile Include="Templates\*.cs" />
+    <None Include="Templates\ExtensionMethodTemplate.cshtml" />
+    <None Include="Templates\ExtensionsTemplate.cshtml" />
+    <None Include="Templates\EnumTemplate.cshtml" />
+    <None Include="Templates\ServiceClientInterfaceTemplate.cshtml" />
+    <None Include="Templates\MethodGroupTemplate.cshtml" />
+    <None Include="Templates\MethodGroupInterfaceTemplate.cshtml" />
+    <None Include="Templates\ServiceClientTemplate.cshtml" />
+    <None Include="Templates\MethodTemplate.cshtml" />
+    <None Include="Templates\ModelTemplate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\AutoRest.Core\AutoRest.Core.csproj">
+      <Project>{c876085f-9dc3-41f0-b7b4-17022cd84684}</Project>
+      <Name>AutoRest.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

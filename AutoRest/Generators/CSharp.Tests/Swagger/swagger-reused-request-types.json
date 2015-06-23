@@ -1,0 +1,137 @@
+{
+    "$schema": "http://json.schemastore.org/swagger-2.0",
+    "swagger": "2.0",
+    "info": {
+        "title": "Microsoft Azure Redis Cache Management API",
+        "description": "Some cool documentation.",
+        "version": "2014-04-01-preview",
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "basePath": "/",
+    "produces": [ "application/json" ],
+    "consumes": [ "application/json" ],
+    "paths": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{resourceName}/regenerateKey": {
+            "post": {
+                "description": "",
+                "operationId": "RegenerateKey",
+                "consumes": [
+                    "application/x-www-form-urlencoded",
+                    "application/json",
+                    "text/xml",
+                    "application/xml",
+                    "text/json"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/RegenerateKeyRequest"
+                        }
+                    },
+                    {
+                        "name": "subscriptionId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{resourceName}/regenerateKey2": {
+            "put": {
+                "description": "",
+                "operationId": "RegenerateKey2",
+                "consumes": [
+                    "application/x-www-form-urlencoded",
+                    "application/json",
+                    "text/xml",
+                    "application/xml",
+                    "text/json"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/RegenerateKeyRequest"
+                        }
+                    },
+                    {
+                        "name": "subscriptionId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+            }
+        }
+        },
+    "definitions": {
+    "RegenerateKeyRequest": {
+      "properties": {
+        "KeyType": {
+          "enum": [
+            "Primary",
+            "Secondary"
+          ],
+          "type": "string"
+        }
+      }
+    }
+    }
+}

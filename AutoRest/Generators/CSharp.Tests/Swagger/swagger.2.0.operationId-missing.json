@@ -1,0 +1,55 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "VSO Git API",
+    "description": "Interact with a Git repository hosted in VSO",
+    "version": "1.0-preview.1"
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/pullrequests": {
+      "get": {
+        "summary": "Get a list of pull requests",
+        "externalDocs": {
+          "description": "API Reference",
+          "url": "https://www.visualstudio.com/integrate/api/git/pull-requests"
+        },
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "Version of the API to use.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Return pull requests with a specific status.",
+            "type": "string",
+            "default": "Active"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A collection of pull requests",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

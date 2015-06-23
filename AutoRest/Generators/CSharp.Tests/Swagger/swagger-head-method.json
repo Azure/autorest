@@ -1,0 +1,30 @@
+﻿{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "simple json head method"
+    },
+
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "basePath": "/",
+    "produces": [ "application/json" ],
+    "consumes": [ "application/json" ],
+
+    "paths": {
+        "/users": {
+            "head": {
+                "operationId": "head",
+                "parameters": [ ],
+                "responses": {
+                    "200": {
+                        "description": "Describe the 200 response in more detail"
+                    }
+                }
+            }
+        }
+    }
+}
+

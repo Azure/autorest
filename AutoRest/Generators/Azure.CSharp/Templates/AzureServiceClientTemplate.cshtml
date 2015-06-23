@@ -1,0 +1,240 @@
+﻿@using Microsoft.Rest.Generator.CSharp
+@using Microsoft.Rest.Generator.CSharp.Templates
+@using Microsoft.Rest.Generator.CSharp.Azure
+@using Microsoft.Rest.Generator.CSharp.Azure.Templates
+@using Microsoft.Rest.Generator.Utilities
+@using System.Linq
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.Azure.AzureServiceClientTemplateModel>
+@Header("/// ")
+namespace @Settings.Namespace
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Net;
+    using System.Net.Http;
+    using System.Net.Http.Headers;
+    using System.Text;
+    using System.Text.RegularExpressions;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
+    using Newtonsoft.Json;
+@foreach (var usingString in Model.Usings) {
+@:    using @usingString;
+}
+@EmptyLine
+    /// <summary>
+    @WrapComment("/// ", Model.Documentation)
+    /// </summary>
+    public partial class @Model.Name : ServiceClient<@Model.Name>, I@(Model.Name), IAzureClient
+    {
+        /// <summary>
+        /// The base URI of the service.
+        /// </summary>
+        public Uri BaseUri { get; set; }
+        @EmptyLine
+
+        /// <summary>
+        /// Gets or sets json serialization settings.
+        /// </summary>
+        public JsonSerializerSettings SerializationSettings { get; private set; }
+        @EmptyLine
+
+        /// <summary>
+        /// Gets or sets json deserialization settings.
+        /// </summary>
+        public JsonSerializerSettings DeserializationSettings { get; private set; }        
+        @EmptyLine
+        
+        @foreach (var property in Model.Properties)
+        {
+        @:/// <summary>
+        @:@WrapComment("/// ", property.Documentation)
+        @:/// </summary>
+        @:public @property.Type @property.Name { get; @(property.IsReadOnly ? "private " : "")set; }
+        @EmptyLine
+        }
+        
+        @foreach (var operation in Model.Operations) 
+        {
+        @:public virtual I@(operation.MethodGroupType) @(operation.MethodGroupName) { get; private set; }
+        @EmptyLine
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the @Model.Name class.
+        /// </summary>
+        public @(Model.Name)() : base()
+        {
+            this.Initialize();
+        }
+        @EmptyLine
+        /// <summary>
+        /// Initializes a new instance of the @Model.Name class.
+        /// </summary>
+        /// <param name='handlers'>
+        /// Optional. The set of delegating handlers to insert in the http
+        /// client pipeline.
+        /// </param>
+        public @(Model.Name)(params DelegatingHandler[] handlers) : base(handlers)
+        {
+            this.Initialize();
+        }
+        @EmptyLine
+
+        /// <summary>
+        /// Initializes a new instance of the @Model.Name class.
+        /// </summary>
+        /// <param name='rootHandler'>
+        /// Optional. The http client handler used to handle http transport.
+        /// </param>
+        /// <param name='handlers'>
+        /// Optional. The set of delegating handlers to insert in the http
+        /// client pipeline.
+        /// </param>
+        public @(Model.Name)(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
+        {
+            this.Initialize();
+        }
+        @EmptyLine
+
+        /// <summary>
+        /// Initializes a new instance of the @Model.Name class.
+        /// </summary>
+        /// <param name='baseUri'>
+        /// Optional. The base URI of the service.
+        /// </param>
+        /// <param name='handlers'>
+        /// Optional. The set of delegating handlers to insert in the http
+        /// client pipeline.
+        /// </param>
+        public @(Model.Name)(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
+        {
+            if (baseUri == null)
+            {
+                throw new ArgumentNullException("baseUri");
+            }
+            this.BaseUri = baseUri;
+        }
+        @EmptyLine
+
+        @{var parameters = Model.Properties.Where(p => p.IsRequired);}
+        @if (parameters.Any())
+        {
+        @:/// <summary>
+        @:/// Initializes a new instance of the @Model.Name class.
+        @:/// </summary>
+        foreach (var param in parameters)
+        {
+        @:/// <param name='@(param.Name.ToCamelCase())'>
+        @:/// Required. @(param.Documentation)
+        @:/// </param>
+        }
+        @:/// <param name='handlers'>
+        @:/// Optional. The set of delegating handlers to insert in the http
+        @:/// client pipeline.
+        @:/// </param>
+        @:public @(Model.Name)(@(Model.RequiredContructorParameters), params DelegatingHandler[] handlers) : this(handlers)
+        @:{
+        foreach (var param in parameters)
+        {
+        @:    if (@(param.Name.ToCamelCase()) == null)
+        @:    {
+        @:        throw new ArgumentNullException("@(param.Name.ToCamelCase())");
+        @:    }
+        }
+        foreach (var param in parameters)
+        {
+        @:    this.@(param.Name) = @(param.Name.ToCamelCase());
+        }
+        @:}
+        @:@EmptyLine
+
+        @:/// <summary>
+        @:/// Initializes a new instance of the @Model.Name class.
+        @:/// </summary>
+        @:/// <param name='baseUri'>
+        @:/// Optional. The base URI of the service.
+        @:/// </param>
+        foreach (var param in parameters)
+        {
+        @:/// <param name='@(param.Name.ToCamelCase())'>
+        @:/// Required. @(param.Documentation)
+        @:/// </param>
+        }
+        @:/// <param name='handlers'>
+        @:/// Optional. The set of delegating handlers to insert in the http
+        @:/// client pipeline.
+        @:/// </param>
+        @:public @(Model.Name)(Uri baseUri, @(Model.RequiredContructorParameters), params DelegatingHandler[] handlers) : this(handlers)
+        @:{
+        @:    if (baseUri == null)
+        @:    {
+        @:        throw new ArgumentNullException("baseUri");
+        @:    }
+        foreach (var param in parameters)
+        {
+        @:    if (@(param.Name.ToCamelCase()) == null)
+        @:    {
+        @:        throw new ArgumentNullException("@(param.Name.ToCamelCase())");
+        @:    }
+        }
+        @:    this.BaseUri = baseUri;
+        foreach (var param in parameters)
+        {
+        @:    this.@(param.Name) = @(param.Name.ToCamelCase());
+        }
+        @:}
+        @:@EmptyLine
+        }
+    
+        /// <summary>
+        /// Initializes client properties.
+        /// </summary>
+        private void Initialize()
+        {
+        @foreach (var operation in Model.Operations) 
+        {
+            @:this.@(operation.MethodGroupName) = new @(operation.MethodGroupType)(this);
+        }
+            this.BaseUri = new Uri("@Model.BaseUrl");
+        @foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
+        {
+            @:this.@(property.Name) = @(property.DefaultValue);
+        }
+            SerializationSettings = new JsonSerializerSettings
+            {
+                Formatting = Formatting.Indented,
+                DateFormatHandling = DateFormatHandling.IsoDateFormat,
+                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
+                NullValueHandling = NullValueHandling.Ignore,
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                ContractResolver = new ReadOnlyJsonContractResolver()
+            };
+            SerializationSettings.Converters.Add(new ResourceJsonConverter()); 
+            DeserializationSettings = new JsonSerializerSettings{
+                DateFormatHandling = DateFormatHandling.IsoDateFormat,
+                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
+                NullValueHandling = NullValueHandling.Ignore,
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                ContractResolver = new ReadOnlyJsonContractResolver()
+            };
+            @foreach (var polymorphicType in Model.ModelTypes.Where(t => t.PolymorphicDiscriminator != null))
+            {
+            @:SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<@(polymorphicType.Name)>("@(polymorphicType.PolymorphicDiscriminator)"));
+            @:DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<@(polymorphicType.Name)>("@(polymorphicType.PolymorphicDiscriminator)"));
+            }
+            DeserializationSettings.Converters.Add(new ResourceJsonConverter()); 
+            DeserializationSettings.Converters.Add(new CloudErrorJsonConverter()); 
+        }    
+    
+        @foreach (var method in Model.MethodTemplateModels)
+        {
+        @:@(Include<AzureMethodTemplate, AzureMethodTemplateModel>((AzureMethodTemplateModel)method))
+        @EmptyLine
+        @:
+        }
+    }
+}

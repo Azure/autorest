@@ -1,0 +1,385 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutoRest Number Test Service",
+    "description": "Test Infrastructure for AutoRest",
+    "version": "1.0.0"
+  },
+  "host": "localhost",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/number/null": {
+      "get": {
+        "operationId": "number_getNull",
+        "description": "Get null Number value",
+        "responses": {
+          "200": {
+            "description": "The null number value",
+            "schema": {
+              "type": "number"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/number/invalidfloat": {
+      "get": {
+        "operationId": "number_getInvalidFloat",
+        "description": "Get invalid float Number value",
+        "responses": {
+          "200": {
+            "description": "The invalid float number value",
+            "schema": {
+              "type": "number",
+              "format": "float"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/number/invaliddouble": {
+      "get": {
+        "operationId": "number_getInvalidDouble",
+        "description": "Get invalid double Number value",
+        "responses": {
+          "200": {
+            "description": "The invalid double number value",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/number/big/float/3.402823e+20": {
+      "put": {
+        "operationId": "number_putBigFloat",
+        "description": "Put big float value 3.402823e+20",
+        "parameters": [
+          {
+            "name": "numberBody",
+            "in": "body",
+            "schema": {
+              "type": "number",
+              "format": "float"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The big float value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "number_getBigFloat",
+        "description": "Get big float value 3.402823e+20",
+        "responses": {
+          "200": {
+            "description": "The big float value",
+            "schema": {
+              "type": "number",
+              "format": "float",
+              "enum":  [3.402823e+20]
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/number/big/double/2.5976931e+101": {
+      "put": {
+        "operationId": "number_putBigDouble",
+        "description": "Put big double value 2.5976931e+101",
+        "parameters": [
+          {
+            "name": "numberBody",
+            "in": "body",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The big double value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "number_getBigDouble",
+        "description": "Get big double value 2.5976931e+101",
+        "responses": {
+          "200": {
+            "description": "The big double value 2.5976931e+101",
+            "schema": {
+              "type": "number",
+              "format": "double",
+              "enum":  [2.5976931e+101]
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/number/big/double/99999999.99": {
+      "put": {
+        "operationId": "number_putBigDoublePositiveDecimal",
+        "description": "Put big double value 99999999.99",
+        "parameters": [
+          {
+            "name": "numberBody",
+            "in": "body",
+            "schema": {
+              "type": "number",
+              "format": "double",
+              "enum":  [99999999.99]
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The big double value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "number_getBigDoublePositiveDecimal",
+        "description": "Get big double value 99999999.99",
+        "responses": {
+          "200": {
+            "description": "The big double value 99999999.99",
+            "schema": {
+              "type": "number",
+              "format": "double",
+              "enum":  [99999999.99]
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/number/big/double/-99999999.99": {
+      "put": {
+        "operationId": "number_putBigDoubleNegativeDecimal",
+        "description": "Put big double value -99999999.99",
+        "parameters": [
+          {
+            "name": "numberBody",
+            "in": "body",
+            "schema": {
+              "type": "number",
+              "format": "double",
+              "enum":  [-99999999.99]
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The big double value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "number_getBigDoubleNegativeDecimal",
+        "description": "Get big double value -99999999.99",
+        "responses": {
+          "200": {
+            "description": "The big double value -99999999.99",
+            "schema": {
+              "type": "number",
+              "format": "double",
+              "enum":  [-99999999.99]
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/number/small/float/3.402823e-20": {
+      "put": {
+        "operationId": "number_putSmallFloat",
+        "description": "Put small float value 3.402823e-20",
+        "parameters": [
+          {
+            "name": "numberBody",
+            "in": "body",
+            "schema": {
+              "type": "number",
+              "format": "float"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The small float value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "number_getSmallFloat",
+        "description": "Get big double value 3.402823e-20",
+        "responses": {
+          "200": {
+            "description": "The big double value 3.402823e-20",
+            "schema": {
+              "type": "number",
+              "format": "double",
+              "enum":  [3.402823e-20]
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/number/small/double/2.5976931e-101": {
+      "put": {
+        "operationId": "number_putSmallDouble",
+        "description": "Put small double value 2.5976931e-101",
+        "parameters": [
+          {
+            "name": "numberBody",
+            "in": "body",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The small double value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "number_getSmallDouble",
+        "description": "Get big double value 2.5976931e-101",
+        "responses": {
+          "200": {
+            "description": "The big double value 2.5976931e-101",
+            "schema": {
+              "type": "number",
+              "format": "double",
+              "enum":  [2.5976931e-101]
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

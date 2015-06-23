@@ -1,0 +1,257 @@
+{
+  "definitions": {
+    "InputParameterWithContent": {
+      "description": "Extra input parameters for HTTP Method PUT and POST",
+      "properties": {
+        "Content": {
+          "description": "Optional. Specify the actual content to send to HTTP endpoint.",
+          "type": "string"
+        },
+        "ContentType": {
+          "description": "Optional. Specify the content-type for the body.",
+          "type": "string"
+        },
+        "Headers": {
+          "description": "",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "RelativeUrl": { "type": "string" }
+      },
+      "type": "object"
+    },
+    "InputParameters": {
+      "description": "Common Input parameters for HTTP methods",
+      "properties": {
+        "Headers": {
+          "description": "Optional. Specify headers to be passed along with the HTTP request.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "RelativeUrl": {
+          "description": "Optional. Specify a URL relative to base URL.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ResponseMessage": {
+      "description": "Response Message received from the Http Destination endpoint",
+      "properties": {
+        "ResponseBody": {
+          "description": "Response body received from the Http Destination endpoint",
+          "type": "string"
+        },
+        "ResponseContentType": {
+          "description": "Content-Type of the response body",
+          "type": "string"
+        },
+        "ResponseHeaders": {
+          "description": "Response Headers received from the Http Destination endpoint",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "type": "object"
+    },
+    "Void": {
+      "properties": { },
+      "type": "object"
+    }
+  },
+  "host": "localhost:45721",
+  "info": {
+    "title": "HttpDestinationConnector",
+    "version": "1.0"
+  },
+  "paths": {
+    "/Delete": {
+      "post": {
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "deprecated": false,
+        "operationId": "Delete",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": { "$ref": "#/definitions/InputParameters" }
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource is successfully deleted at the destination HTTP endpoint",
+            "schema": { "$ref": "#/definitions/ResponseMessage" }
+          },
+          "400": { "description": "BadRequest" },
+          "401": { "description": "UnAuthorized" },
+          "404": { "description": "NotFound" },
+          "500": { "description": "Internal Server Error" },
+          "default": {
+            "description": "Resource is successfully deleted at the destination HTTP endpoint",
+            "schema": { "$ref": "#/definitions/ResponseMessage" }
+          }
+        },
+        "summary": "Deletes the resource identified by the request URI.",
+        "tags": [ "HttpDestinationConnector" ]
+      }
+    },
+    "/Get": {
+      "post": {
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "deprecated": false,
+        "operationId": "Get",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": { "$ref": "#/definitions/InputParameters" }
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource is successfully retrieved from the destination HTTP endpoint",
+            "schema": { "$ref": "#/definitions/ResponseMessage" }
+          },
+          "400": { "description": "BadRequest" },
+          "401": { "description": "UnAuthorized" },
+          "404": { "description": "NotFound" },
+          "500": { "description": "Internal Server Error" },
+          "default": {
+            "description": "Resource is successfully retrieved from the destination HTTP endpoint",
+            "schema": { "$ref": "#/definitions/ResponseMessage" }
+          }
+        },
+        "summary": "Retrieves the resource identified by the request URI.",
+        "tags": [ "HttpDestinationConnector" ]
+      }
+    },
+    "/Post": {
+      "post": {
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "deprecated": false,
+        "operationId": "Post",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": { "$ref": "#/definitions/InputParameterWithContent" }
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource is successfully created at the destination HTTP endpoint",
+            "schema": { "$ref": "#/definitions/ResponseMessage" }
+          },
+          "201": {
+            "description": "Created",
+            "schema": { "$ref": "#/definitions/ResponseMessage" }
+          },
+          "400": { "description": "BadRequest" },
+          "401": { "description": "UnAuthorized" },
+          "404": { "description": "NotFound" },
+          "500": { "description": "Internal Server Error" },
+          "default": {
+            "description": "Resource is successfully created at the destination HTTP endpoint",
+            "schema": { "$ref": "#/definitions/ResponseMessage" }
+          }
+        },
+        "summary": "Creates a new resource identified by the request URI.",
+        "tags": [ "HttpDestinationConnector" ]
+      }
+    },
+    "/Put": {
+      "put": {
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "deprecated": false,
+        "operationId": "Put",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": { "$ref": "#/definitions/InputParameterWithContent" }
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource is successfully updated at the destination HTTP endpoint",
+            "schema": { "$ref": "#/definitions/ResponseMessage" }
+          },
+          "201": {
+            "description": "Created",
+            "schema": { "$ref": "#/definitions/ResponseMessage" }
+          },
+          "400": { "description": "BadRequest" },
+          "401": { "description": "UnAuthorized" },
+          "404": { "description": "NotFound" },
+          "500": { "description": "Internal Server Error" },
+          "default": {
+            "description": "Resource is successfully updated at the destination HTTP endpoint",
+            "schema": { "$ref": "#/definitions/ResponseMessage" }
+          }
+        },
+        "summary": "Updates a resource identified by the request URI.",
+        "tags": [ "HttpDestinationConnector" ]
+      }
+    }
+  },
+  "schemes": [ "http" ],
+  "swagger": "2.0"
+}

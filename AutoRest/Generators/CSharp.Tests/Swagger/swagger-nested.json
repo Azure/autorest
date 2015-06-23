@@ -1,0 +1,223 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Swagger Nest Store",
+    "description": "Some cool documentation.",
+    "version": "2014-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "produces": [ "application/json" ],
+  "consumes": [ "application/json" ],
+  "paths": {
+    "/resourcegroups": {
+      "get": {
+        "operationId": "list",
+        "summary": "Product Types",
+        "description": "The Products endpoint returns information about the Uber products offered at a given location. The response includes the display name and other details about each product, and lists the products in the proper display order.",
+        "parameters": [
+          {
+            "name": "arrayArray",
+            "in": "body",
+            "description": "array of arrays.",
+            "required": true,
+            "schema": {
+              "$ref": "ArrayArray"
+            }
+          }
+        ],
+        "tags": [
+          "Redis"
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of arrays",
+            "schema": {
+              "$ref": "ArrayArray"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "create",
+        "summary": "Product Types",
+        "description": "The Products endpoint returns information about the Uber products offered at a given location. The response includes the display name and other details about each product, and lists the products in the proper display order.",
+        "parameters": [
+          {
+            "name": "arrayDictionary",
+            "in": "body",
+            "description": "dictionary of arrays.",
+            "required": true,
+            "schema": {
+              "$ref": "ArrayDictionary"
+            }
+          }
+        ],
+        "tags": [
+          "Redis"
+        ],
+        "responses": {
+          "200": {
+            "description": "A dictionary of arrays",
+            "schema": {
+              "$ref": "ArrayDictionary"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "post",
+        "summary": "Product Types",
+        "description": "The Products endpoint returns information about the Uber products offered at a given location. The response includes the display name and other details about each product, and lists the products in the proper display order.",
+        "parameters": [
+          {
+            "name": "dictionaryArray",
+            "in": "body",
+            "description": "array of dictionaries.",
+            "required": true,
+            "schema": {
+              "$ref": "DictionaryArray"
+            }
+          }
+        ],
+        "tags": [
+          "Redis"
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of dictionaries",
+            "schema": {
+              "$ref": "DictionaryArray"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "delete",
+        "summary": "Product Types",
+        "description": "The Products endpoint returns information about the Uber products offered at a given location. The response includes the display name and other details about each product, and lists the products in the proper display order.",
+        "parameters": [
+          {
+            "name": "dictionaryDictionary",
+            "in": "body",
+            "description": "dictionary of dictionaries.",
+            "required": true,
+            "schema": {
+              "$ref": "DictionaryDictionary"
+            }
+          }
+        ],
+        "tags": [
+          "Redis"
+        ],
+        "responses": {
+          "200": {
+            "description": "A dictionary of dictionaries",
+            "schema": {
+              "$ref": "DictionaryDictionary"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ArrayDictionary": {
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "DictionaryArray": {
+      "type": "array",
+      "items": { 
+        "additionalProperties": {
+          "type": "string"
+        }
+      }
+    },
+    "ArrayArray": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "DictionaryDictionary": {
+      "additionalProperties": {
+        "additionalProperties": {
+          "type": "string"
+        }
+      }
+    },
+    "Product": {
+      "properties": {
+        "product_id": {
+          "type": "string",
+          "description": "Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of product."
+        },
+        "display_name": {
+          "type": "string",
+          "description": "Display name of product."
+        },
+        "capacity": {
+          "type": "string",
+          "description": "Capacity of product. For example, 4 people."
+        },
+        "image": {
+          "type": "string",
+          "description": "Image URL representing the product."
+        }
+      }
+    },
+    "Error": {
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -23,16 +23,17 @@
   Shared Project properties
   -->
   <PropertyGroup>
-    <OutputPath>bin\$(Configuration)\</OutputPath>
-    <DocumentationFile>bin\$(Configuration)\$(AssemblyName).xml</DocumentationFile>
-    <AdditionalBinariesFolder>$(LibraryFxTarget)\</AdditionalBinariesFolder>
+    <OutputPath Condition=" '$(AutoRestTest)' == 'true' ">bin\$(Configuration)\</OutputPath>
+    <BinariesFolderForConfiguration>$(CommonRoot)\binaries\$(Configuration)\</BinariesFolderForConfiguration>
+    <OutputPath Condition=" '$(AutoRestTest)' != 'true' and '$(CodeSign)' != 'true' ">$(BinariesFolderForConfiguration)</OutputPath>
+    <OutputPath Condition=" '$(AutoRestTest)' != 'true' and '$(CodeSign)' == 'true' ">$(BinariesFolderForConfiguration)\unsigned\</OutputPath>
+    <DocumentationFile Condition="'$(AutoRestTest)' != 'true'" >$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
     <WarnOnMissingDocument Condition="'$(WarnOnMissingDocument)' == ''">false</WarnOnMissingDocument>
     <!-- Turn off XML documentation warnings. -->
     <NoWarn Condition="'$(WarnOnMissingDocument)' == 'false'">1591</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <CodeAnalysisRuleSet Condition="'$(CodeAnalysisRuleSet)' == ''">AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  
   <PropertyGroup>
     <SignAssembly>$(CodeSign)</SignAssembly>
     <DelaySign>$(CodeSign)</DelaySign>
@@ -81,27 +82,6 @@
     <Message Text="TargetFrameworkVersion: $(TargetFrameworkVersion) TargetFrameworkProfile: $(TargetFrameworkProfile)" />
   </Target>
 
-  <Target Name="CopySdkBinaries" AfterTargets="AfterBuild">
-    <PropertyGroup>
-      <!--Folder where nuget.exe gets xml and pdb files to create the package-->
-      <_ArtifactsDirectory>$(CommonRoot)\binaries\$(LibraryFxTarget)</_ArtifactsDirectory>
-      <!--
-      Folder where nuget.exe gets dll. If under codesign, we copy to 'unsigned' first, 
-      codesign task will sign it and copy back to  _ArtifactsDirectory. 
-      (Check out the SignBinariesForAFxTarget in build.proj)
-      -->
-      <_BinariesDirectory Condition="'$(CodeSign)' != 'true'">$(_ArtifactsDirectory)</_BinariesDirectory>
-      <_BinariesDirectory Condition="'$(CodeSign)' == 'true'">$(_ArtifactsDirectory)\unsigned\</_BinariesDirectory>
-    </PropertyGroup>
-    <Message Text="Copying assembly files to $(_BinariesDirectory)." />
-    <Message Text="Copying symbols and documentation files to $(_ArtifactsDirectory)." />
-    <MakeDir Directories="$(_BinariesDirectory)" Condition="!Exists($(_BinariesDirectory))" />
-    <Copy SourceFiles="$(ProjectDir)$(OutputPath)$(AssemblyName).xml;$(ProjectDir)$(OutputPath)$(AssemblyName).pdb"
-          DestinationFolder="$(_ArtifactsDirectory)"/>
-     <Copy SourceFiles="$(ProjectDir)$(OutputPath)$(AssemblyName).dll"
-          DestinationFolder="$(_BinariesDirectory)"/>
-  </Target>
-
   <Target Name="SyncPackageVersions" BeforeTargets="BeforeBuild">
     <PropertyGroup>
       <PowerShellExe Condition=" '$(PowerShellExe)'=='' ">%WINDIR%\System32\WindowsPowerShell\v1.0\powershell.exe</PowerShellExe>   
@@ -111,6 +91,12 @@
 
     <!-- Update all explicit references to dependent versions. -->
     <Exec Command="$(PowerShellExe) -NonInteractive -ExecutionPolicy bypass -Command &quot;&amp; { &amp;&apos;$(NuSpecSyncScript)&apos; &apos;$(MSBuildProjectDirectory)&apos; -BasePath &apos;$(ProductSourceFolder)&apos; }&quot;" />
+  </Target>
+  
+  <Target Name="CompileRazorTemplates" BeforeTargets="BeforeBuild">
+    <Message Text="Compiling Razor templates for project $(MSBuildProjectDirectory)" />
+    <!-- Compile razor template. -->
+    <Exec Command="$(CommonRoot)\tools\rzc.exe &quot;$(MSBuildProjectDirectory)\Templates&quot; $(RootNamespace).Templates" />
   </Target>
 
   <Target Name="TurnOffCodeAnalysis">
