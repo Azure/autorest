@@ -47,7 +47,8 @@
   -->
   
   <PropertyGroup>
-    <SolutionName>ClientRuntime.sln</SolutionName>
+    <ClientRuntimeSolution>ClientRuntime.sln</ClientRuntimeSolution>
+    <CodeGeneratorSolution>AutoRest.sln</CodeGeneratorSolution>
     <LibraryRoot>$(MSBuildThisFileDirectory)</LibraryRoot>
     <LibrarySourceFolder>$(LibraryRoot)</LibrarySourceFolder>
     <LibraryToolsFolder>$(LibraryRoot)tools</LibraryToolsFolder>
@@ -90,8 +91,11 @@
     The solution file contains configurations for each platform such as Net40-Debug, Net45-Release, etc
         When invoking msbuild, provide the right configuration name.
     -->
-    <MSBuild Projects="$(SolutionName)"
+    <MSBuild Projects="$(ClientRuntimeSolution)"
              Properties="Configuration=%(LibraryFxTargetList.Identity)-$(Configuration);Platform=Any CPU;CodeSign=$(CodeSign)"
+             Targets="Build" />
+    <MSBuild Projects="$(CodeGeneratorSolution)"
+             Properties="Configuration=Net45-$(Configuration);Platform=Any CPU;CodeSign=$(CodeSign)"
              Targets="Build" />
     <CallTarget Targets="CodeSignBinaries" Condition=" '$(CodeSign)' == 'true' " />
   </Target>
@@ -99,16 +103,22 @@
   <!-- Project files import some targets coming from nuget packages, so need to restore them first to avoid errors
       such as "The imported project ....build\Microsoft.Bcl.Build.targets was not found. " -->
   <Target Name="Clean" DependsOnTargets="RestoreNugetPackages">
-    <MSBuild Projects="$(SolutionName)"
+    <MSBuild Projects="$(ClientRuntimeSolution)"
              Properties="Configuration=%(LibraryFxTargetList.Identity)-$(Configuration);Platform=Any CPU"
+             Targets="Clean" />
+    <MSBuild Projects="$(CodeGeneratorSolution)"
+             Properties="Configuration=Net45-$(Configuration);Platform=Any CPU"
              Targets="Clean" />
     <RemoveDir Directories="$(BinariesFolder)" />
   </Target>
 
   <Target Name="CodeAnalysis">
     <!--Note, we use "Rebuild" rather "Build", because code analysis happens during the build, and this ensures the build is not skipped-->
-    <MSBuild Projects="$(SolutionName)"
+    <MSBuild Projects="$(ClientRuntimeSolution)"
              Properties="Configuration=%(LibraryFxTargetList.Identity)-$(Configuration);Platform=Any CPU;RunCodeAnalysis=true;CodeAnalysisTreatWarningsAsErrors=true"
+             Targets="Rebuild" />
+    <MSBuild Projects="$(CodeGeneratorSolution)"
+             Properties="Configuration=Net45-$(Configuration);Platform=Any CPU;RunCodeAnalysis=true;CodeAnalysisTreatWarningsAsErrors=true"
              Targets="Rebuild" />
   </Target>
   
@@ -194,7 +204,8 @@
   </Target>
 
   <Target Name="RestoreNugetPackages">
-    <Exec Command="$(NuGetCommand) restore $(SolutionName)" ContinueOnError="false" />
+    <Exec Command="$(NuGetCommand) restore $(ClientRuntimeSolution)" ContinueOnError="false" />
+    <Exec Command="$(NuGetCommand) restore $(CodeGeneratorSolution)" ContinueOnError="false" />
   </Target>
   
   <!-- Official releases require tools only available on corp network. -->
@@ -207,13 +218,14 @@
   <Target Name="BuildServerPreparation">
     <!-- Log build server information. -->
     <Message Text="Build Server Information" Importance="high" />
-    <Message Text="Hostname      : $(COMPUTERNAME)" />
-    <Message Text="Build Account : $(USERDOMAIN)\$(USERNAME)" />
+    <Message Text="Hostname                : $(COMPUTERNAME)" />
+    <Message Text="Build Account           : $(USERDOMAIN)\$(USERNAME)" />
 
     <!-- Log build properties.  -->
     <Message Text="Build Properties and Variables" Importance="high" />
-    <Message Text="Common Solution    : $(SolutionName)" />
-    <Message Text="Source folder      : $(LibrarySourceFolder)" />
+    <Message Text="Client Runtime Solution : $(ClientRuntimeSolution)" />
+    <Message Text="Code Generator Solution : $(CodeGeneratorSolution)" />
+    <Message Text="Source folder           : $(LibrarySourceFolder)" />
   </Target>
 
   <Import Project="$(LibraryToolsFolder)\nuget.targets" />
