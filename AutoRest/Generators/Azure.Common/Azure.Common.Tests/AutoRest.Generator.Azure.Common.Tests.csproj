@@ -10,8 +10,8 @@
     <ProjectGuid>{2C062B51-EFD0-4FDC-8F75-3D76161FBCB5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Microsoft.Rest.Modeler.Swagger.Azure.Tests</RootNamespace>
-    <AssemblyName>AutoRest.Modeler.Swagger.Azure.Tests</AssemblyName>
+    <RootNamespace>Microsoft.Rest.Generator.Azure.Common.Tests</RootNamespace>
+    <AssemblyName>AutoRest.Generator.Azure.Common.Tests</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <RestorePackages>true</RestorePackages>
     <AutoRestTest>true</AutoRestTest>
