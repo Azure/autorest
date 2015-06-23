@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(SolutionDir)\packages\xunit.runner.visualstudio.2.0.0\build\net20\xunit.runner.visualstudio.props" Condition="Exists('$(SolutionDir)\packages\xunit.runner.visualstudio.2.0.0\build\net20\xunit.runner.visualstudio.props')" />
+  <Import Project="$(SolutionDir)\packages\xunit.core.2.0.0\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.props" Condition="Exists('$(SolutionDir)\packages\xunit.core.2.0.0\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.props')" />
+  <PropertyGroup>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\..\</SolutionDir>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <LibraryFxTarget Condition="'$(LibraryFxTarget)' == ''">net45</LibraryFxTarget>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1A0199F0-FAEB-4A25-AB4C-347288C2CD91}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Microsoft.Rest.Generator.Azure.NodeJS.Tests</RootNamespace>
+    <AssemblyName>AutoRest.Generator.Azure.NodeJS.Tests</AssemblyName>
+    <RestorePackages>true</RestorePackages>
+    <AutoRestTest>true</AutoRestTest>
+    <NuGetPackageImportStamp>c999b926</NuGetPackageImportStamp>
+  </PropertyGroup>
+  <Import Project="$(SolutionDir)\Tools\AutoRest.Settings.targets" />
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>$(SolutionDir)\packages\xunit.abstractions.2.0.0\lib\net35\xunit.abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.assert">
+      <HintPath>$(SolutionDir)\packages\xunit.assert.2.0.0\lib\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.assert.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.core">
+      <HintPath>$(SolutionDir)\packages\xunit.extensibility.core.2.0.0\lib\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\AutoRest.Core\AutoRest.Core.csproj">
+      <Project>{c876085f-9dc3-41f0-b7b4-17022cd84684}</Project>
+      <Name>AutoRest.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Modelers\Swagger.Tests\AutoRest.Modeler.Swagger.Tests.csproj">
+      <Project>{c6c4e139-d7af-486c-95ba-2b879f58f18d}</Project>
+      <Name>AutoRest.Modeler.Swagger.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Azure.Common\Azure.Common\AutoRest.Generator.Azure.Common.csproj">
+      <Project>{90b943ab-3879-4b64-b9ff-1a21297c0f26}</Project>
+      <Name>AutoRest.Generator.Azure.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Azure.NodeJS\AutoRest.Generator.Azure.NodeJS.csproj">
+      <Project>{909BF4EF-4ECA-4AC4-8E21-CDCF05393161}</Project>
+      <Name>AutoRest.Generator.Azure.NodeJS</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="package.json" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="RegenerateExpectedClasses.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AcceptanceTests\coverage.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="AcceptanceTests\resourceFlattening.js" />
+    <Content Include="AcceptanceTests\lro.js" />
+    <Content Include="AcceptanceTests\head.js" />
+    <Content Include="AcceptanceTests\paging.js" />
+    <Content Include="AcceptanceTests\startServer.js" />
+    <Content Include="AcceptanceTests\testlist.txt" />
+    <Content Include="Expected\SwaggerBat\Report\AutoRestReportServiceForAzure.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\SwaggerBat\Report\models\ErrorModel.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\SwaggerBat\Report\models\index.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\SwaggerBat\Head\AutoRestHeadTestService.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\SwaggerBat\Head\models\index.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\SwaggerBat\Head\operations\HttpSuccess.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\SwaggerBat\Head\operations\index.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\SwaggerBat\Lro\AutoRestLongRunningOperationTestService.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\SwaggerBat\Lro\models\index.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\SwaggerBat\Lro\models\OperationResult.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\SwaggerBat\Lro\models\OperationResultError.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\SwaggerBat\Lro\models\Product.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\SwaggerBat\Lro\models\Sku.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\SwaggerBat\Lro\operations\DONOTCALLs.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\SwaggerBat\Lro\operations\index.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\SwaggerBat\Lro\operations\LRORetrys.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\SwaggerBat\Lro\operations\LROs.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\SwaggerBat\Lro\operations\LROSADs.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\SwaggerBat\Paging\AutoRestPagingTestService.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\SwaggerBat\Paging\models\index.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\SwaggerBat\Paging\models\OperationResult.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\SwaggerBat\Paging\models\Product.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\SwaggerBat\Paging\models\ProductProperties.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\SwaggerBat\Paging\models\ProductResult.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\SwaggerBat\Paging\operations\index.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\SwaggerBat\Paging\operations\Paging.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\SwaggerBat\ResourceFlattening\AutoRestResourceFlatteningTestService.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\SwaggerBat\ResourceFlattening\models\ErrorModel.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\SwaggerBat\ResourceFlattening\models\FlattenedProduct.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\SwaggerBat\ResourceFlattening\models\index.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\SwaggerBat\ResourceFlattening\models\ResourceCollection.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="unit.js" />
+  </ItemGroup>
+  <ItemGroup />
+</Project>

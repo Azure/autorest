@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(SolutionDir)\packages\xunit.core.2.0.0\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.props" Condition="Exists('$(SolutionDir)\packages\xunit.core.2.0.0\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.props')" />
+  <Import Project="$(SolutionDir)\packages\xunit.runner.visualstudio.2.0.0\build\net20\xunit.runner.visualstudio.props" Condition="Exists('$(SolutionDir)\packages\xunit.runner.visualstudio.2.0.0\build\net20\xunit.runner.visualstudio.props')" />
+  <PropertyGroup>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\..\</SolutionDir>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <LibraryFxTarget Condition="'$(LibraryFxTarget)' == ''">net45</LibraryFxTarget>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CA4DDAA2-9558-47B9-8838-A077A628E94C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Microsoft.Rest.Generator.CSharp.Azure.Tests</RootNamespace>
+    <AssemblyName>AutoRest.Generator.Azure.CSharp.Tests</AssemblyName>
+    <RestorePackages>true</RestorePackages>
+    <AutoRestTest>true</AutoRestTest>
+    <NuGetPackageImportStamp>2c7e2ccf</NuGetPackageImportStamp>
+  </PropertyGroup>
+  <Import Project="$(SolutionDir)\Tools\AutoRest.Settings.targets" />
+  <ItemGroup>
+    <Reference Include="Microsoft.Rest.ClientRuntime, Version=0.9.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>$(SolutionDir)\packages\Microsoft.Rest.ClientRuntime.0.9.9\lib\net45\Microsoft.Rest.ClientRuntime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Rest.ClientRuntime.Azure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>$(SolutionDir)\packages\Microsoft.Rest.ClientRuntime.Azure.1.0.1\lib\net45\Microsoft.Rest.ClientRuntime.Azure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>$(SolutionDir)\packages\xunit.abstractions.2.0.0\lib\net35\xunit.abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.assert">
+      <HintPath>$(SolutionDir)\packages\xunit.assert.2.0.0\lib\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.assert.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.core">
+      <HintPath>$(SolutionDir)\packages\xunit.extensibility.core.2.0.0\lib\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\AutoRest.Core\AutoRest.Core.csproj">
+      <Project>{c876085f-9dc3-41f0-b7b4-17022cd84684}</Project>
+      <Name>AutoRest.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Modelers\Swagger.Tests\AutoRest.Modeler.Swagger.Tests.csproj">
+      <Project>{c6c4e139-d7af-486c-95ba-2b879f58f18d}</Project>
+      <Name>AutoRest.Modeler.Swagger.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Modelers\Swagger\AutoRest.Modeler.Swagger.csproj">
+      <Project>{9517265e-5127-460c-9dde-fe017d73121c}</Project>
+      <Name>AutoRest.Modeler.Swagger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Azure.Common\Azure.Common\AutoRest.Generator.Azure.Common.csproj">
+      <Project>{90b943ab-3879-4b64-b9ff-1a21297c0f26}</Project>
+      <Name>AutoRest.Generator.Azure.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Azure.CSharp\AutoRest.Generator.Azure.CSharp.csproj">
+      <Project>{4899b527-6815-4e89-84b3-dd5a507b205a}</Project>
+      <Name>AutoRest.Generator.Azure.CSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSharp.Tests\AutoRest.Generator.CSharp.Tests.csproj">
+      <Project>{84211169-9441-44f9-b626-10bf75ff25a6}</Project>
+      <Name>AutoRest.Generator.CSharp.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSharp\AutoRest.Generator.CSharp.csproj">
+      <Project>{CC1EEC95-41EF-44B6-8761-00FA3E647248}</Project>
+      <Name>AutoRest.Generator.CSharp</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(SolutionDir)\AutoRest\AutoRest.Cli\AutoRest.json">
+      <Link>AutoRest.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="app.config" />
+    <None Include="RegenerateExpectedClasses.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CSharpAzureSwaggerBat.cs" />
+    <Compile Include="Expected\SwaggerBat\Head.Cs\AutoRestHeadTestService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Head.Cs\AutoRestHeadTestServiceExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Head.Cs\HttpSuccessOperations.cs">
+      <SubType>Code</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Head.Cs\HttpSuccessOperationsExtensions.cs">
+      <SubType>Code</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Head.Cs\IAutoRestHeadTestService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Head.Cs\IHttpSuccessOperations.cs">
+      <SubType>Code</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Lro.Cs\AutoRestLongRunningOperationTestService.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Lro.Cs\AutoRestLongRunningOperationTestServiceExtensions.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Lro.Cs\DONOTCALLsOperations.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Lro.Cs\DONOTCALLsOperationsExtensions.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Lro.Cs\IAutoRestLongRunningOperationTestService.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Lro.Cs\IDONOTCALLsOperations.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Lro.Cs\ILRORetrysOperations.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Lro.Cs\ILROSADsOperations.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Lro.Cs\ILROsOperations.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Lro.Cs\LRORetrysOperations.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Lro.Cs\LRORetrysOperationsExtensions.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Lro.Cs\LROSADsOperations.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Lro.Cs\LROSADsOperationsExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Lro.Cs\LROsOperations.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Lro.Cs\LROsOperationsExtensions.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Lro.Cs\Models\Error.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Lro.Cs\Models\OperationResult.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Lro.Cs\Models\OperationResultError.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Lro.Cs\Models\Product.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Lro.Cs\Models\Sku.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Paging.Cs\AutoRestPagingTestService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Paging.Cs\AutoRestPagingTestServiceExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Paging.Cs\IAutoRestPagingTestService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Paging.Cs\IPagingOperations.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Paging.Cs\Models\Error.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Paging.Cs\Models\OperationResult.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Paging.Cs\Models\OperationResultError.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Paging.Cs\Models\Product.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Paging.Cs\Models\ProductProperties.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Paging.Cs\Models\ProductResult.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Paging.Cs\PagingOperations.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Paging.Cs\PagingOperationsExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Report.Cs\AutoRestReportServiceForAzure.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Report.Cs\AutoRestReportServiceForAzureExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Report.Cs\IAutoRestReportServiceForAzure.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Report.Cs\Models\Error.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\ResourceFlattening.Cs\AutoRestResourceFlatteningTestService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\ResourceFlattening.Cs\AutoRestResourceFlatteningTestServiceExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\ResourceFlattening.Cs\IAutoRestResourceFlatteningTestService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\ResourceFlattening.Cs\Models\Error.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\ResourceFlattening.Cs\Models\FlattenedProduct.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\ResourceFlattening.Cs\Models\ResourceCollection.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup />
+</Project>
