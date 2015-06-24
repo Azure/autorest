@@ -1,0 +1,6 @@
+source 'https://rubygems.org'
+
+group :development, :local, :test do
+  gem 'rspec'
+  gem 'ms-rest',path:'../../../../ClientRuntimes/Ruby'
+end

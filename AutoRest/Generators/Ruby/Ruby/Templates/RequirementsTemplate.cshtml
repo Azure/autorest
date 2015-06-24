@@ -1,0 +1,20 @@
+﻿@using Microsoft.Rest.Generator.Ruby
+@using Microsoft.Rest.Generator.Ruby.Templates
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Ruby.RequirementsTemplateModel>
+@Header("# ")
+@EmptyLine
+require 'uri'
+require 'cgi'
+require 'date'
+require 'json'
+require 'base64'
+require 'securerandom'
+require 'time'
+require 'timeliness'
+require 'duration'
+require 'concurrent'
+require 'client_runtime'
+@EmptyLine
+@Model.GetModelsRequiredFiles()
+@Model.GetOperationsRequiredFiles()
+@Model.GetClientRequiredFile()
