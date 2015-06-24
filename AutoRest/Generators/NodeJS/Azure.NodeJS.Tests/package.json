@@ -37,7 +37,7 @@
   },
   "scripts": {
     "pretest": "npm install --prefix ../../AcceptanceTests/server && npm install", 
-    "test": "npm -s run-script xunit",
+    "test": "npm -s run-script unit",
     "unit": "node unit.js testlist.txt list",
     "xunit": "node unit.js testlist.txt",
     "jshint": "jshint lib --reporter=jslint"
