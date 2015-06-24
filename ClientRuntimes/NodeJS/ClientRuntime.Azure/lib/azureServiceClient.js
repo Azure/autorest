@@ -312,6 +312,7 @@ AzureServiceClient.prototype._getStatus = function (operationUrl, callback) {
       error.statusCode = response.statusCode;
       error.request = httpRequest;
       error.response = response;
+      if (responseBody === '') responseBody = null;
       try {
         error.body = JSON.parse(responseBody);
 

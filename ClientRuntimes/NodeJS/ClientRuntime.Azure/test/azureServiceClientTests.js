@@ -89,8 +89,8 @@ describe('AzureServiceClient', function () {
         }
       };
       
-      var badResponseBody = '{';
       it('lro put does not throw if invalid json is received on polling', function (done) {
+        var badResponseBody = '{';
         var negativeClient = new AzureServiceClient(null, { longRunningOperationRetryTimeoutInSeconds : 0 });
         negativeClient.addFilter(mockFilter({ statusCode: 202, body: badResponseBody }, badResponseBody));
         resultOfInitialRequest.response.headers['azure-asyncoperation'] = '';
@@ -99,12 +99,28 @@ describe('AzureServiceClient', function () {
           should.exist(err);
           should.exist(err.response);
           should.exist(err.message);
-          err.message.should.match(/^Error.*occurred in deserializing the response body.*/ig);
+          err.message.should.match(/^Long running operation failed with error: 'Error.*occurred in deserializing the response body.*/ig);
+          done();
+        });
+      });
+      
+      it('lro put does not throw if invalid json with single quote is received on polling', function (done) {
+        var badResponseBody = '{\'"}';
+        var negativeClient = new AzureServiceClient(null, { longRunningOperationRetryTimeoutInSeconds : 0 });
+        negativeClient.addFilter(mockFilter({ statusCode: 202, body: badResponseBody }, badResponseBody));
+        resultOfInitialRequest.response.headers['azure-asyncoperation'] = '';
+        resultOfInitialRequest.response.headers['location'] = urlFromLocationHeader_Return200;
+        negativeClient.getPutOperationResult(resultOfInitialRequest, negativeClient._getStatus, function (err, result) {
+          should.exist(err);
+          should.exist(err.response);
+          should.exist(err.message);
+          err.message.should.match(/^Long running operation failed with error: 'Error.*occurred in deserializing the response body.*/ig);
           done();
         });
       });
 
       it('lro put does not throw if invalid json is received with invalid status code on polling', function (done) {
+        var badResponseBody = '{';
         var negativeClient = new AzureServiceClient(null, { longRunningOperationRetryTimeoutInSeconds : 0 });
         negativeClient.addFilter(mockFilter({ statusCode: 203, body: badResponseBody }, badResponseBody));
        resultOfInitialRequest.response.headers['azure-asyncoperation'] = '';
@@ -113,6 +129,7 @@ describe('AzureServiceClient', function () {
           should.exist(err);
           should.exist(err.response);
           should.exist(err.message);
+          err.message.should.match(/^Long running operation failed with error:/ig);
           err.message.should.match(/.*Could not deserialize error response body - .*/ig);
           done();
         });
