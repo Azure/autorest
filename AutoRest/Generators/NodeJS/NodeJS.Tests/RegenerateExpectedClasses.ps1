@@ -17,7 +17,7 @@ $tests =
     "SwaggerBat\Report"="..\..\AcceptanceTests\swagger\report.json";
 }
 
-Import-Module "$PSScriptRoot\..\..\..\..\binaries\Net45-Debug\AutoRest.Core.dll"
+Import-Module "$PSScriptRoot\..\..\..\..\binaries\Net45\AutoRest.Core.dll"
 
 foreach ($test in $tests.GetEnumerator())
 {
@@ -29,5 +29,5 @@ foreach ($test in $tests.GetEnumerator())
     $settings.Header = "NONE"
     Write-Output "Generating $($test.Value)"
     [Microsoft.Rest.Generator.AutoRest]::Generate($settings)
-    #&"$PSScriptRoot\..\..\..\..\binaries\Net45-Debug\AutoRest.exe" -Modeler Swagger -CodeGenerator $flavor -OutputDirectory "$PSScriptRoot\Expected" -Namespace "$namespace" -Input "$PSScriptRoot\$($test.Value)" -Header NONE
+    #&"$PSScriptRoot\..\..\..\..\binaries\Net45\AutoRest.exe" -Modeler Swagger -CodeGenerator $flavor -OutputDirectory "$PSScriptRoot\Expected" -Namespace "$namespace" -Input "$PSScriptRoot\$($test.Value)" -Header NONE
 }

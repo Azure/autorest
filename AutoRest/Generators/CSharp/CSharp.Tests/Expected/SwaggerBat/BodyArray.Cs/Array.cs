@@ -1395,7 +1395,7 @@ namespace Fixtures.SwaggerBatBodyArray
         }
 
         /// <summary>
-        /// Get float array value [0.0, null, 1.2e20]
+        /// Get float array value [0.0, null, -1.2e20]
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1697,7 +1697,7 @@ namespace Fixtures.SwaggerBatBodyArray
         }
 
         /// <summary>
-        /// Get float array value [0.0, null, 1.2e20]
+        /// Get float array value [0.0, null, -1.2e20]
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
