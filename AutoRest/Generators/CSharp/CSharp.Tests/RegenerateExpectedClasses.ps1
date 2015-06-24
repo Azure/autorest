@@ -35,7 +35,7 @@ foreach ($test in $tests.GetEnumerator())
     $settings.OutputDirectory = "$PSScriptRoot\Expected\$($test.Key)"
     $settings.Input = "$PSScriptRoot\$($test.Value)"
     $settings.Header = "NONE"
-    #Remove-Item .\$($settings.OutputDirectory) -Recurse -Force
+    Remove-Item "$($settings.OutputDirectory)" -Recurse -Force
     Write-Output "Generating $($test.Value)"
     [Microsoft.Rest.Generator.AutoRest]::Generate($settings)
     #&"$PSScriptRoot\..\..\..\..\binaries\net45\AutoRest.exe" -Modeler Swagger -CodeGenerator $flavor -OutputDirectory "$PSScriptRoot\Expected" -Namespace "$namespace" -Input "$PSScriptRoot\$($test.Value)" -Header NONE
