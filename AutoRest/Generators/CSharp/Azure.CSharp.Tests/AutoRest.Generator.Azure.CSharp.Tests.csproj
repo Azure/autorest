@@ -74,7 +74,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="$(SolutionDir)\AutoRest\AutoRest.Cli\AutoRest.json">
+    <None Include="$(SolutionDir)\AutoRest\AutoRest\AutoRest.json">
       <Link>AutoRest.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

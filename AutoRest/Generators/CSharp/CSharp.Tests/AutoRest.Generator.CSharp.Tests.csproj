@@ -17,6 +17,9 @@
     <NuGetPackageImportStamp>c999b926</NuGetPackageImportStamp>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\Tools\AutoRest.Settings.targets" />
+  <PropertyGroup>
+    <NoWarn>1570;1591</NoWarn>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Rest.ClientRuntime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\packages\Microsoft.Rest.ClientRuntime.1.0.0\lib\net45\Microsoft.Rest.ClientRuntime.dll</HintPath>
@@ -54,7 +57,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="$(SolutionDir)\AutoRest\AutoRest.Cli\AutoRest.json">
+    <None Include="$(SolutionDir)\AutoRest\AutoRest\AutoRest.json">
       <Link>AutoRest.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

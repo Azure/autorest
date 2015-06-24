@@ -159,7 +159,7 @@
       <Output TaskParameter="Path" PropertyName="SdkPath"/>
     </GetFrameworkSdkPath>
     <ItemGroup>
-      <DelaySignedAssembliesToValidate Include="binaries\$(LibraryFxTarget)\unsigned\*.dll" />
+      <DelaySignedAssembliesToValidate Include="binaries\$(LibraryFxTarget)\unsigned\*.*" />
     </ItemGroup>
     <ValidateStrongNameSignatureTask
         SdkPath="$(SdkPath)"
@@ -178,7 +178,7 @@
     <!-- DelaySigned binaries copied locally for testing and not submitted to codesign service. -->
     <Copy SourceFiles="@(DelaySignedAssembliesToValidate)" DestinationFolder="binaries\$(LibraryFxTarget)" Condition="$(DelaySign)" />  
     <ItemGroup>
-      <AfterSignedAssembliesToValidate Include="binaries\$(LibraryFxTarget)\*.dll" />
+      <AfterSignedAssembliesToValidate Include="binaries\$(LibraryFxTarget)\*.dll;binaries\$(LibraryFxTarget)\*.exe" />
     </ItemGroup>
     <ValidateStrongNameSignatureTask
         SdkPath="$(SdkPath)"

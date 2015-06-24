@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Core", "AutoRest\A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Generators", "Generators", "{EF9E346D-70C6-45F5-8FF9-9B734F4A1298}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Cli", "AutoRest\AutoRest.Cli\AutoRest.Cli.csproj", "{F589D8B7-1B0F-4182-842B-09866A4A2CEB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest", "AutoRest\AutoRest\AutoRest.csproj", "{F589D8B7-1B0F-4182-842B-09866A4A2CEB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modelers", "Modelers", "{02144BF6-4489-4AFC-9B2D-0306C3DD3C19}"
 EndProject
