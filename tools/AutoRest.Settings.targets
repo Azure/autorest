@@ -81,7 +81,7 @@
     <Message Text="TargetFrameworkVersion: $(TargetFrameworkVersion) TargetFrameworkProfile: $(TargetFrameworkProfile)" />
   </Target>
 
-  <Target Name="CopySdkBinaries" AfterTargets="AfterBuild">
+  <Target Name="CopySdkBinaries" AfterTargets="AfterBuild" Condition=" $(AutoRestTest) != 'true' ">
     <PropertyGroup>
       <!--Folder where nuget.exe gets xml and pdb files to create the package-->
       <_BinariesDirectory>$(CommonRoot)\binaries\$(LibraryFxTarget)</_BinariesDirectory>
