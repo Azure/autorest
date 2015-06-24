@@ -24,7 +24,7 @@ describe('nodejs', function () {
   
   describe('Swagger BAT coverage report', function () {
     var testClient = new reportClient(credentials, baseUri, clientOptions);
-    it('should have at least 75% coverage for Azure', function (done) {
+    it('should have 100% coverage for Azure', function (done) {
       testClient.getReport(function (error, result) {
         should.not.exist(error);
         //console.log('The test coverage for azure is ' + util.inspect(result.body));
@@ -39,7 +39,7 @@ describe('nodejs', function () {
         });
         var result = Math.floor((passed/total)*100);
         console.log('Passed: ' + passed + ', Total: ' + total + ', coverage: ' + result + '% .');
-        //result.should.above(80);
+        result.should.equal(100);
         done();
       });
     });
