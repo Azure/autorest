@@ -1,0 +1,173 @@
+﻿@using System.Linq;
+@using Microsoft.Rest.Generator.ClientModel
+@using Microsoft.Rest.Generator.NodeJS.TemplateModels
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.NodeJS.MethodTemplateModel>
+
+/**
+@WrapComment(" * ", Model.Documentation)
+@foreach (var parameter in Model.DocumentationParameters)
+{
+ @:* @@param {@parameter.Type.Name} [@parameter.Name] @parameter.Documentation
+ @:*
+}
+@WrapComment(" * ",  " @param {function} callback")
+ *
+@WrapComment(" * ",  " @returns {Stream} The Response stream")
+ */
+@(Model.OperationName).prototype.@(Model.Name) = function (@(Model.MethodParameterDeclarationWithCallback)) {
+  var client = @(Model.ClientReference);
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+  @if (Model.LocalParameters.Any())
+  {
+  @:// Validate
+  @:try {
+  @foreach (var parameter in Model.LocalParameters)
+  {
+    if (parameter.IsRequired)
+    {
+    @:if (@(parameter.Name) === null || @(parameter.Name) === undefined) {
+      @:throw new Error('\'@(parameter.Name)\' cannot be null');
+    @:}
+   @:
+    }
+      if (!(Model.HttpMethod == HttpMethod.Patch  && parameter.Type is CompositeType))
+    {
+    @:@(parameter.Type.ValidateType(Model.Scope, parameter.Name))
+    }
+  }
+  @:} catch (error) {
+    @:return callback(error);
+  @:}
+  }
+  @EmptyLine
+  // Construct URL
+  @if (Model.IsAbsoluteUrl)
+  {
+  @:var requestUrl = '@(Model.Url)';
+  }
+  else
+  {
+  @:var requestUrl = @(Model.ClientReference).baseUri + 
+  @:                 '/@(Model.Url)';
+  }
+  @(Model.BuildUrl("requestUrl"))
+  @(Model.RemoveDuplicateForwardSlashes("requestUrl"))
+  @EmptyLine
+  // Create HTTP transport objects
+  var httpRequest = new WebResource();
+  httpRequest.method = '@(Model.HttpMethod.ToString().ToUpper())';
+  httpRequest.headers = {};
+  httpRequest.url = requestUrl;
+
+  // Set Headers
+  @foreach (var parameter in Model.Parameters.Where(p => p.Location == ParameterLocation.Header))
+  {
+  @:if (@(parameter.Name) !== null) {
+  @:  httpRequest.headers['@(parameter.SerializedName)'] = @parameter.Type.ToString(parameter.Name);
+  @:}
+  }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+
+  @if (Model.RequestBody != null)
+  {
+  <text>
+  // Serialize Request
+  var requestContent = null;
+  requestContent = JSON.stringify(msRest.serializeObject(@(Model.RequestBody.Name)));
+  httpRequest.body = requestContent;
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  </text>
+  }
+  else
+  {
+  <text>
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
+  </text>
+  }
+  // Send Request
+  return client.pipeline(httpRequest, function (err, response, responseBody) {
+    if (err) {
+      return callback(err);
+    }
+    var statusCode = response.statusCode;
+    if (@(Model.FailureStatusCodePredicate)) {
+      var error = new Error(responseBody);
+      error.statusCode = response.statusCode;
+      error.request = httpRequest;
+      error.response = response;
+      if (responseBody === '') responseBody = null;
+      var parsedErrorResponse;
+      try {
+        parsedErrorResponse = JSON.parse(responseBody);
+        error.body = parsedErrorResponse;
+            @if (Model.DefaultResponse != null) {
+            var deserializeErrorBody = Model.GetDeserializationString(Model.DefaultResponse, "error.body");
+            if (!string.IsNullOrWhiteSpace(deserializeErrorBody))
+            {
+    @:      if (error.body !== null && error.body !== undefined) {
+    @:        @(deserializeErrorBody)
+    @:      }
+            }
+            }
+      } catch (defaultError) {
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        return callback(error);
+      }
+      return callback(error);
+    }
+
+    // Create Result
+    var result = new msRest.HttpOperationResponse();
+    result.request = httpRequest;
+    result.response = response;
+    if (responseBody === '') responseBody = null;
+    @Model.InitializeResponseBody
+
+    @foreach (var responsePair in Model.Responses.Where(r => r.Value != null))
+    {
+     <text>
+    // Deserialize Response
+    if (statusCode === @Model.GetStatusCodeReference(responsePair.Key)) {
+      var parsedResponse;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result.body = parsedResponse;
+        @{
+          var deserializeBody = Model.GetDeserializationString(Model.ReturnType);
+          if (!string.IsNullOrWhiteSpace(deserializeBody))
+          {
+@:        if (result.body !== null && result.body !== undefined) {
+@:          @(deserializeBody)
+@:        }
+          }
+        }
+      } catch (error) {
+        @(Model.DeserializationError)
+      }
+    }
+    </text>
+    }
+    @if (Model.ReturnType != null && Model.DefaultResponse != null && !Model.Responses.Any())
+    {
+      @:var parsedResponse;
+      @:try {
+        @:parsedResponse = JSON.parse(responseBody);
+        @:result.body = parsedResponse;
+        var deserializeBody = Model.GetDeserializationString(Model.DefaultResponse);
+        if (!string.IsNullOrWhiteSpace(deserializeBody))
+        {
+@:        if (result.body !== null && result.body !== undefined) {
+@:          @(deserializeBody)
+@:        }
+        }
+      @:} catch (error) {
+        @:@(Model.DeserializationError)
+      @:}
+    }
+@EmptyLine
+    return callback(null, result);
+  });
+};

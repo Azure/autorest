@@ -1,0 +1,37 @@
+﻿@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.MethodGroupTemplateModel>
+@Header("/// ")
+namespace @Settings.Namespace
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Net.Http;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using Microsoft.Rest;
+@foreach (var usingString in Model.Usings) {
+@:    using @usingString;
+}
+@EmptyLine
+    /// <summary>
+    @WrapComment("/// ", Model.Documentation)
+    /// </summary>
+    public partial interface I@(Model.MethodGroupType)
+    {
+    @foreach(var method in Model.MethodTemplateModels)
+    {
+        @:/// <summary>
+        @:@WrapComment("/// ", method.Documentation)
+        @:/// </summary>
+        foreach (var parameter in method.Parameters)
+        {
+        @:/// <param name='@parameter.Name'>
+        @:@WrapComment("/// ", parameter.Documentation)
+        @:/// </param>
+        }
+        @:/// <param name='cancellationToken'>
+        @:/// Cancellation token.
+        @:/// </param>
+        @:Task<@method.OperationResponseReturnTypeString> @(method.Name)WithOperationResponseAsync(@method.AsyncMethodParameterDeclaration);
+    }
+    }
+}

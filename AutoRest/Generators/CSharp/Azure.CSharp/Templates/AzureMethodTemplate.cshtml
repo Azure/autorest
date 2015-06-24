@@ -1,0 +1,66 @@
+﻿@using Microsoft.Rest.Generator.CSharp
+@using Microsoft.Rest.Generator.CSharp.Templates
+@using Microsoft.Rest.Generator.CSharp.TemplateModels
+@using Microsoft.Rest.Generator.CSharp.Azure
+@using Microsoft.Rest.Generator.CSharp.Azure.Templates
+@using Microsoft.Rest.Generator.Utilities
+@using Microsoft.Rest.Generator.ClientModel
+@using System.Linq
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.Azure.AzureMethodTemplateModel>
+
+@if (!Model.IsLongRunningOperation)
+{
+@:@(Include<MethodTemplate, MethodTemplateModel>(Model))
+}
+else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.Delete)
+{
+@:/// <summary>
+@WrapComment("/// ", Model.Documentation)@:
+@:/// </summary>
+@foreach (var parameter in Model.Parameters)
+{
+@:/// <param name='@parameter.Name'>
+@WrapComment("/// ", parameter.Documentation)@:
+@:/// </param>    
+}
+@:/// <param name='cancellationToken'>
+@:/// Cancellation token.
+@:/// </param>
+<text>
+public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithOperationResponseAsync(@(Model.AsyncMethodParameterDeclaration))
+{
+    // Send request
+    @(Model.OperationResponseReturnTypeString) response = await Begin@(Model.Name)WithOperationResponseAsync(
+        @(Model.AsyncMethodInvocationArgs));
+
+    return await @(Model.ClientReference).GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+}
+</text>
+}
+else if (Model.HttpMethod == HttpMethod.Put)
+{
+@:/// <summary>
+@WrapComment("/// ", Model.Documentation)@:
+@:/// </summary>
+@foreach (var parameter in Model.Parameters)
+{
+@:/// <param name='@parameter.Name'>
+@WrapComment("/// ", parameter.Documentation)@:
+@:/// </param>    
+}
+@:/// <param name='cancellationToken'>
+@:/// Cancellation token.
+@:/// </param>
+<text>
+public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithOperationResponseAsync(@(Model.AsyncMethodParameterDeclaration))
+{
+    // Send Request
+    @(Model.OperationResponseReturnTypeString) response = await Begin@(Model.Name)WithOperationResponseAsync(
+        @(Model.AsyncMethodInvocationArgs));
+
+    return await @(Model.ClientReference).GetPutOperationResultAsync<@(Model.ReturnType.Name)>(response, 
+        () => @(Model.GetMethod.Name)WithOperationResponseAsync(@(Model.GetMethod.AsyncMethodInvocationArgs)),
+        cancellationToken);
+}
+</text>
+}

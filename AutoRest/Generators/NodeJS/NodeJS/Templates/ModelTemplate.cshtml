@@ -1,0 +1,58 @@
+﻿@using System.Linq
+@using Microsoft.Rest.Generator.ClientModel
+@using Microsoft.Rest.Generator.NodeJS.TemplateModels
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.NodeJS.ModelTemplateModel>
+'use strict';
+@EmptyLine
+var util = require('util');
+@EmptyLine
+var models = require('./index');
+@EmptyLine
+/**
+ * @@class
+ * Initializes a new instance of the @(Model.Name) class.
+ * @@constructor
+ */
+function @(Model.Name)() { }
+@EmptyLine
+/**
+ * Validate the payload against the @Model.Name schema
+ *
+ * @@param {JSON} payload
+ *
+ */
+@(Model.Name).prototype.validate = function (payload) {
+  if (!payload) {
+    throw new Error('@(Model.Name) cannot be null.');
+  }
+  @foreach (var property in Model.ComposedProperties)
+  {
+  @:@(Model.ValidateProperty("payload", property))
+  @EmptyLine
+  }
+};
+@EmptyLine
+/**
+ * Deserialize the instance to @Model.Name schema
+ *
+ * @@param {JSON} instance
+ *
+ */
+@(Model.Name).prototype.deserialize = function (instance) {
+  @{
+  var specialProperties = Model.SpecialProperties;
+  if (specialProperties.Count() > 0)
+  {
+  @:if (instance) {
+    foreach (var property in Model.SpecialProperties)
+    {
+    @:@(Model.DeserializeProperty("instance", property))
+    @EmptyLine
+    }
+  @:}
+  }
+  @:return instance;
+  }
+};
+@EmptyLine
+module.exports = new @(Model.Name)();

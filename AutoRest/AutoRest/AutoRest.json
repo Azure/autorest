@@ -1,0 +1,32 @@
+﻿{
+  "codeGenerators": {
+    "Angular": {
+      "type": "JavaScriptAngularCodeGenerator, AutoRest.Generator.JavaScript.Angular"
+    },
+    "CSharp": {
+      "type": "CSharpCodeGenerator, AutoRest.Generator.CSharp"
+    },
+    "Azure.CSharp": {
+      "type": "AzureCSharpCodeGenerator, AutoRest.Generator.Azure.CSharp",
+      "settings": {
+        "includeCredentials": "true",
+        "requireOperationId": "true"
+      }
+    },
+    "NodeJS": {
+      "type": "NodeJSCodeGenerator, AutoRest.Generator.NodeJS"
+    },
+    "Azure.NodeJS": {
+      "type": "AzureNodeJSCodeGenerator, AutoRest.Generator.Azure.NodeJS",
+      "settings": {
+        "includeCredentials": "true",
+        "requireOperationId": "true"
+      }
+    }
+  },
+  "modelers": {
+    "Swagger": {
+      "type": "SwaggerModeler, AutoRest.Modeler.Swagger"
+    }
+  }
+}

@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Microsoft Rest Client Runtime ETW Logger")]
 [assembly: AssemblyDescription("Provides ETW tracing of \"Microsoft.Rest\" Client Library events.")]
 [assembly: AssemblyVersion("0.9.0.0")]
-[assembly: AssemblyFileVersion("0.9.1.0")]
+[assembly: AssemblyFileVersion("0.10.0.0")]
 
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft Corporation")]

@@ -2,16 +2,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{868850B4-1073-41A1-ABA8-A3B465880148}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{7C044DD1-F76B-49A7-A8DF-A5DEEE748EBB}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "git", "git", "{EAC2DE24-42C6-4B7F-ACAB-73C0E113FC40}"
-	ProjectSection(SolutionItems) = preProject
-		.gitignore = .gitignore
-		README.md = README.md
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime", "ClientRuntimes\CSharp\ClientRuntime\ClientRuntime.csproj", "{7F524559-93F9-4F3F-9E2C-AF41A0C2E6F4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime.Etw", "ClientRuntimes\CSharp\ClientRuntime.Etw\ClientRuntime.Etw.csproj", "{50B0A8CE-D290-4EB7-8C6C-16EAAB75225E}"
@@ -105,14 +95,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{7F524559-93F9-4F3F-9E2C-AF41A0C2E6F4} = {868850B4-1073-41A1-ABA8-A3B465880148}
-		{50B0A8CE-D290-4EB7-8C6C-16EAAB75225E} = {868850B4-1073-41A1-ABA8-A3B465880148}
-		{2EFD6648-39B4-476A-B302-8BC236F5F1B8} = {868850B4-1073-41A1-ABA8-A3B465880148}
-		{B2FAA0E6-2643-4011-8CFE-BA28BDFFC7E7} = {7C044DD1-F76B-49A7-A8DF-A5DEEE748EBB}
-		{CB18ACEB-2825-4884-91FA-05C31AC779FE} = {7C044DD1-F76B-49A7-A8DF-A5DEEE748EBB}
-		{856A1D19-C3BF-439A-BEBF-E822A332BC12} = {868850B4-1073-41A1-ABA8-A3B465880148}
-		{8B10D480-4A8A-47B5-9574-AA8E79F431DB} = {7C044DD1-F76B-49A7-A8DF-A5DEEE748EBB}
 	EndGlobalSection
 EndGlobal

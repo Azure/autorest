@@ -1,0 +1,76 @@
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
+using System.IO;
+using System.Net;
+
+namespace Microsoft.Rest.Generator.Utilities
+{
+    public class FileSystem : IFileSystem
+    {
+        public void WriteFile(string path, string contents)
+        {
+            File.WriteAllText(path, contents);
+        }
+
+        public string ReadFileAsText(string path)
+        {
+            using (var client = new WebClient())
+            {
+                return client.DownloadString(path);
+            }
+        }
+
+        public TextWriter WriteFileAsStream(string path)
+        {
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+            return File.CreateText(path);
+        }
+
+        public bool FileExists(string path)
+        {
+            return File.Exists(path);
+        }
+
+        public void DeleteFile(string path)
+        {
+            File.Delete(path);
+        }
+
+        public void DeleteDirectory(string dir)
+        {
+            Directory.Delete(dir, true);
+        }
+
+        public void EmptyDirectory(string dirPath)
+        {
+            foreach (var filePath in Directory.GetFiles(dirPath))
+            {
+                File.Delete(filePath);
+            }
+        }
+
+        public string[] GetFiles(string startDirectory, string filePattern, SearchOption options)
+        {
+            return Directory.GetFiles(startDirectory, filePattern, options);
+        }
+
+        public bool DirectoryExists(string path)
+        {
+            return Directory.Exists(path);
+        }
+
+        public void CreateDirectory(string path)
+        {
+            Directory.CreateDirectory(path);
+        }
+
+        public string[] GetDirectories(string startDirectory, string filePattern, SearchOption options)
+        {
+            return Directory.GetDirectories(startDirectory, filePattern, options);
+        }
+    }
+}

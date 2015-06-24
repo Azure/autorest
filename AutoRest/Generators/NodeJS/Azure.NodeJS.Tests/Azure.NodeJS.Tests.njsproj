@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8e7b23e3-7e9f-478b-8f69-ab0b531647ab}</ProjectGuid>
+    <ProjectHome />
+    <ProjectView>ShowAllFiles</ProjectView>
+    <StartupFile>
+    </StartupFile>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <ItemGroup>
+    <Content Include="package.json" />
+    <Compile Include="AcceptanceTests\coverage.js" />
+    <Compile Include="AcceptanceTests\head.js" />
+    <Compile Include="AcceptanceTests\paging.js" />
+    <Compile Include="AcceptanceTests\resourceFlattening.js" />
+    <Compile Include="Expected\Redis\models\CacheSku.js" />
+    <Compile Include="Expected\Redis\models\index.js" />
+    <Compile Include="Expected\Redis\models\KeyValuePairStringString.js" />
+    <Compile Include="Expected\Redis\models\ListKeysResponse.js" />
+    <Compile Include="Expected\Redis\models\RedisAccessKeys.js" />
+    <Compile Include="Expected\Redis\models\RedisResource.js" />
+    <Compile Include="Expected\Redis\models\RedisResourceListResponse.js" />
+    <Compile Include="Expected\Redis\models\RedisResponsePropertiesWithAccessKey.js" />
+    <Compile Include="Expected\Redis\models\RegenerateKeyRequest.js" />
+    <Compile Include="Expected\Redis\models\ResourceSpec.js" />
+    <Compile Include="Expected\Redis\operations\index.js" />
+    <Compile Include="Expected\Redis\operations\Redis.js" />
+    <Compile Include="Expected\Redis\RedisManagementClient.js" />
+    <Compile Include="Expected\SwaggerBat\Head\AutoRestHeadTestService.js" />
+    <Compile Include="Expected\SwaggerBat\Head\models\index.js" />
+    <Compile Include="Expected\SwaggerBat\Head\operations\HttpSuccess.js" />
+    <Compile Include="Expected\SwaggerBat\Head\operations\index.js" />
+    <Compile Include="Expected\SwaggerBat\Lro\AutoRestLongRunningOperationTestService.js" />
+    <Compile Include="Expected\SwaggerBat\Lro\models\index.js" />
+    <Compile Include="Expected\SwaggerBat\Lro\models\OperationResult.js" />
+    <Compile Include="Expected\SwaggerBat\Lro\models\OperationResultError.js" />
+    <Compile Include="Expected\SwaggerBat\Lro\models\Product.js" />
+    <Compile Include="Expected\SwaggerBat\Lro\models\Sku.js" />
+    <Compile Include="Expected\SwaggerBat\Lro\operations\DONOTCALLs.js" />
+    <Compile Include="Expected\SwaggerBat\Lro\operations\index.js" />
+    <Compile Include="Expected\SwaggerBat\Lro\operations\LRORetrys.js" />
+    <Compile Include="Expected\SwaggerBat\Lro\operations\LROs.js" />
+    <Compile Include="Expected\SwaggerBat\Lro\operations\LROSADs.js" />
+    <Compile Include="Expected\SwaggerBat\Paging\AutoRestPagingTestService.js" />
+    <Compile Include="Expected\SwaggerBat\Paging\models\index.js" />
+    <Compile Include="Expected\SwaggerBat\Paging\models\OperationResult.js" />
+    <Compile Include="Expected\SwaggerBat\Paging\models\Product.js" />
+    <Compile Include="Expected\SwaggerBat\Paging\models\ProductProperties.js" />
+    <Compile Include="Expected\SwaggerBat\Paging\models\ProductResult.js" />
+    <Compile Include="Expected\SwaggerBat\Paging\operations\index.js" />
+    <Compile Include="Expected\SwaggerBat\Paging\operations\Paging.js" />
+    <Compile Include="Expected\SwaggerBat\Report\AutoRestReportServiceForAzure.js" />
+    <Compile Include="Expected\SwaggerBat\Report\models\ErrorModel.js" />
+    <Compile Include="Expected\SwaggerBat\Report\models\index.js" />
+    <Compile Include="Expected\SwaggerBat\ResourceFlattening\AutoRestResourceFlatteningTestService.js" />
+    <Compile Include="Expected\SwaggerBat\ResourceFlattening\models\ErrorModel.js" />
+    <Compile Include="Expected\SwaggerBat\ResourceFlattening\models\FlattenedProduct.js" />
+    <Compile Include="Expected\SwaggerBat\ResourceFlattening\models\index.js" />
+    <Compile Include="Expected\SwaggerBat\ResourceFlattening\models\ResourceCollection.js" />
+    <Compile Include="unit.js" />
+    <Content Include="AcceptanceTests\testlist.txt" />
+    <Compile Include="AcceptanceTests\lro.js">
+      <TestFramework>Mocha</TestFramework>
+    </Compile>
+    <Compile Include="AcceptanceTests\startServer.js">
+      <TestFramework>Mocha</TestFramework>
+    </Compile>
+    <Content Include="bin\Net45-Debug\AutoRest.json" />
+    <Content Include="bin\Net45-Debug\AutoRest.Core.xml" />
+    <Content Include="bin\Net45-Debug\AutoRest.Generator.Azure.Common.xml" />
+    <Content Include="bin\Net45-Debug\AutoRest.Generator.Azure.NodeJS.xml" />
+    <Content Include="bin\Net45-Debug\AutoRest.Generator.NodeJS.xml" />
+    <Content Include="bin\Net45-Debug\AutoRest.Modeler.Swagger.xml" />
+    <Content Include="bin\Net45-Debug\Newtonsoft.Json.xml" />
+    <Content Include="bin\Net45-Debug\xunit.assert.xml" />
+    <Content Include="bin\Net45-Debug\xunit.core.xml" />
+    <Content Include="bin\Net45-Debug\Swagger\swagger-allOf-circular.json" />
+    <Content Include="bin\Net45-Debug\Swagger\swagger-allOf.json" />
+    <Content Include="bin\Net45-Debug\Swagger\swagger-data-types.json" />
+    <Content Include="bin\Net45-Debug\Swagger\swagger-external-def.json" />
+    <Content Include="bin\Net45-Debug\Swagger\swagger-external-ref-no-definitions.json" />
+    <Content Include="bin\Net45-Debug\Swagger\swagger-external-ref.json" />
+    <Content Include="bin\Net45-Debug\Swagger\swagger-multiple-response-schemas.json" />
+    <Content Include="bin\Net45-Debug\Swagger\swagger-no-content.json" />
+    <Content Include="bin\Net45-Debug\Swagger\swagger-optional-params.json" />
+    <Content Include="bin\Net45-Debug\Swagger\swagger-polymorphism.json" />
+    <Content Include="bin\Net45-Debug\Swagger\swagger-recursive-type.json" />
+    <Content Include="bin\Net45-Debug\Swagger\swagger-simple-spec.json" />
+    <Content Include="bin\Net45-Debug\Swagger\swagger-streaming.json" />
+    <Content Include="obj\Net45-Debug\AutoRest.Generator.Azure.NodeJS.Tests.csproj.FileListAbsolute.txt" />
+    <Content Include="RegenerateExpectedClasses.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AcceptanceTests" />
+    <Folder Include="bin" />
+    <Folder Include="bin\Net45-Debug" />
+    <Folder Include="bin\Net45-Debug\Swagger" />
+    <Folder Include="Expected" />
+    <Folder Include="Expected\Redis\" />
+    <Folder Include="Expected\Redis\models\" />
+    <Folder Include="Expected\Redis\operations\" />
+    <Folder Include="Expected\SwaggerBat\" />
+    <Folder Include="Expected\SwaggerBat\Head\" />
+    <Folder Include="Expected\SwaggerBat\Head\models\" />
+    <Folder Include="Expected\SwaggerBat\Head\operations\" />
+    <Folder Include="Expected\SwaggerBat\Lro\" />
+    <Folder Include="Expected\SwaggerBat\Lro\models\" />
+    <Folder Include="Expected\SwaggerBat\Lro\operations\" />
+    <Folder Include="Expected\SwaggerBat\Paging\" />
+    <Folder Include="Expected\SwaggerBat\Paging\models\" />
+    <Folder Include="Expected\SwaggerBat\Paging\operations\" />
+    <Folder Include="Expected\SwaggerBat\Report\" />
+    <Folder Include="Expected\SwaggerBat\Report\models\" />
+    <Folder Include="Expected\SwaggerBat\ResourceFlattening\" />
+    <Folder Include="Expected\SwaggerBat\ResourceFlattening\models\" />
+    <Folder Include="obj" />
+    <Folder Include="obj\Net45-Debug" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <!--Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them.-->
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />
+  <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsTools.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:48022/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost:1337</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
