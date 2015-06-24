@@ -22,10 +22,10 @@ Import-Module "$PSScriptRoot\..\..\..\..\binaries\net45\AutoRest.Core.dll"
 foreach ($test in $tests.GetEnumerator())
 {
     $settings = New-Object Microsoft.Rest.Generator.Settings
-    $settings.CodeGenerator = "NodeJS";
+    $settings.CodeGenerator = "Ruby";
     $settings.Modeler = "Swagger"
-    $settings.OutputDirectory = "$PSScriptRoot\Expected\$($test.Key)"
-    $settings.Input = "$PSScriptRoot\..\CSharp.Tests\$($test.Value)"
+    $settings.OutputDirectory = "$PSScriptRoot\Expected\RspecTests"
+    $settings.Input = "$PSScriptRoot\$($test.Value)"
     $settings.Header = "NONE"
     #Remove-Item .\$($settings.OutputDirectory) -Recurse -Force
     Write-Output "Generating $($test.Value)"

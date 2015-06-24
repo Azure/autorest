@@ -1,7 +1,7 @@
 ﻿{
   "codeGenerators": {
-    "Angular": {
-      "type": "JavaScriptAngularCodeGenerator, AutoRest.Generator.JavaScript.Angular"
+    "Ruby": {
+      "type": "RubyCodeGenerator, AutoRest.Generator.Ruby"
     },
     "CSharp": {
       "type": "CSharpCodeGenerator, AutoRest.Generator.CSharp"
