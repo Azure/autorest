@@ -1,0 +1,158 @@
+﻿@using System.Linq;
+@using Microsoft.Rest.Generator.ClientModel
+@using Microsoft.Rest.Generator.CSharp.TemplateModels
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.MethodTemplateModel>
+/// <summary>
+@WrapComment("/// ", Model.Documentation)
+/// </summary>
+@foreach (var parameter in Model.LocalParameters)
+{
+@:/// <param name='@parameter.Name'>
+@WrapComment("/// ", parameter.Documentation)@:
+@:/// </param>    
+}
+/// <param name='cancellationToken'>
+/// Cancellation token.
+/// </param>
+public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithOperationResponseAsync(@(Model.AsyncMethodParameterDeclaration))
+{
+    @foreach (var parameter in Model.LocalParameters)
+    {
+        if (parameter.IsRequired)
+        {
+    @:if (@(parameter.Name) == null)
+    @:{
+        @:throw new ArgumentNullException("@(parameter.Name)");
+    @:}
+@:
+        }
+        if(parameter.Location != ParameterLocation.Query &&
+            (Model.HttpMethod != HttpMethod.Patch || parameter.Location != ParameterLocation.Body))
+        {
+    @:@(parameter.Type.ValidateType(Model.Scope, parameter.Name))
+        }
+    }
+    // Tracing
+    bool shouldTrace = ServiceClientTracing.IsEnabled;
+    string invocationId = null;
+    if (shouldTrace)
+    {
+        invocationId = ServiceClientTracing.NextInvocationId.ToString();
+        Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+    @foreach (var parameter in Model.LocalParameters)
+    {
+        @:tracingParameters.Add("@(parameter.Name)", @(parameter.Name));
+    }
+        tracingParameters.Add("cancellationToken", cancellationToken);
+        ServiceClientTracing.Enter(invocationId, this, "@(Model.Name)", tracingParameters);
+    }
+
+    // Construct URL
+    @if (Model.IsAbsoluteUrl)
+    {
+    @:string url = "@(Model.Url)";       
+    } 
+    else 
+    {
+    @:string url = @(Model.ClientReference).BaseUri.AbsoluteUri + 
+    @:             "/@(Model.Url)";
+    }
+    @(Model.BuildUrl("url"))
+    @(Model.RemoveDuplicateForwardSlashes("url"))
+    // Create HTTP transport objects
+    HttpRequestMessage httpRequest = new HttpRequestMessage();
+    httpRequest.Method = new HttpMethod("@(Model.HttpMethod.ToString().ToUpper())");
+    httpRequest.RequestUri = new Uri(url);
+    // Set Headers
+    @foreach (var parameter in Model.Parameters.Where(p => p.Location == ParameterLocation.Header))
+    {
+    @:if (@(parameter.Name) != null)
+    @:{
+    @:    httpRequest.Headers.Add("@(parameter.SerializedName)", @parameter.Type.ToString(Model.ClientReference, parameter.Name));
+    @:}
+    }
+    @if (Settings.AddCredentials)
+    {
+        <text>
+    // Set Credentials
+    cancellationToken.ThrowIfCancellationRequested();
+    await @(Model.ClientReference).Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+        </text>
+    }
+
+
+    @if (Model.RequestBody != null)
+    {
+        <text>
+    // Serialize Request  
+    string requestContent = JsonConvert.SerializeObject(@(Model.RequestBody.Name), @(Model.GetSerializationSettingsReference(Model.RequestBody.Type)));
+    httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
+    httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+        </text>        
+    }
+    // Send Request
+    if (shouldTrace)
+    {
+        ServiceClientTracing.SendRequest(invocationId, httpRequest);
+    }
+
+    cancellationToken.ThrowIfCancellationRequested();
+    HttpResponseMessage httpResponse = await @(Model.ClientReference).HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+    if (shouldTrace)
+    {
+        ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
+    }
+
+    HttpStatusCode statusCode = httpResponse.StatusCode;
+    cancellationToken.ThrowIfCancellationRequested();
+    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+    if (!(@(Model.SuccessStatusCodePredicate)))
+    {
+        var ex = new @(Model.OperationExceptionTypeString)(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+    @if (Model.DefaultResponse != null)
+    {
+        @:@(Model.DefaultResponse.Name) errorBody = JsonConvert.DeserializeObject<@(Model.DefaultResponse.Name)>(responseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse)));
+        @:if (errorBody != null)
+        @:{
+            @:@(Model.InitializeExceptionWithMessage)
+            @:ex.Body = errorBody;
+        @:}
+    }
+        ex.Request = httpRequest;
+        ex.Response = httpResponse;
+        if (shouldTrace)
+        {
+            ServiceClientTracing.Error(invocationId, ex);
+        }
+
+        throw ex;
+    }
+
+    // Create Result
+    var result = new @(Model.OperationResponseReturnTypeString)();
+    result.Request = httpRequest;
+    result.Response = httpResponse;
+    @(Model.InitializeResponseBody)
+
+    @foreach (var responsePair in Model.Responses.Where(r => r.Value != null))
+    {
+    <text>
+    // Deserialize Response
+    if (statusCode == @Model.GetStatusCodeReference(responsePair.Key))
+    {
+        result.Body = JsonConvert.DeserializeObject<@(responsePair.Value.Name)>(responseContent, @(Model.GetDeserializationSettingsReference(responsePair.Value)));
+    }
+    </text>        
+    }
+    @if (Model.ReturnType != null && Model.DefaultResponse != null && !Model.Responses.Any())
+    {
+@:result.Body = JsonConvert.DeserializeObject<@(Model.DefaultResponse.Name)>(responseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse)));
+    }
+    
+    if (shouldTrace)
+    {
+        ServiceClientTracing.Exit(invocationId, result);
+    }
+
+    return result;
+}

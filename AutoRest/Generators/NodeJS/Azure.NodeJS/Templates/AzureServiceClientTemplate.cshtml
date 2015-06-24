@@ -1,0 +1,89 @@
+﻿@using Microsoft.Rest.Generator.NodeJS
+@using Microsoft.Rest.Generator.Azure.NodeJS
+@using Microsoft.Rest.Generator.NodeJS.Templates
+@using Microsoft.Rest.Generator.Azure.NodeJS.Templates
+@using Microsoft.Rest.Generator.Utilities
+@using System.Linq
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Azure.NodeJS.AzureServiceClientTemplateModel>
+@Header("/// ")
+/* jshint latedef:false */
+/* jshint forin:false */
+/* jshint noempty:false */
+@EmptyLine
+'use strict';
+@EmptyLine
+var util = require('util');
+var msRest = require('ms-rest');
+var msRestAzure = require('ms-rest-azure');
+var ServiceClient = msRestAzure.AzureServiceClient;
+var WebResource = msRest.WebResource;
+
+@EmptyLine
+@if (Model.ModelTypes.Any())
+{
+@:var models = require('./models');
+}
+@if (Model.MethodGroups.Any())
+{
+@:var operations = require('./operations');
+}
+@EmptyLine
+/**
+ * @@class
+ * Initializes a new instance of the @Model.Name class.
+ * @@constructor
+ *
+ * @@param {ServiceClientCredentials} credentials - Credentials for
+ * authenticating with the service.
+ *
+ * @@param {string} [baseUri] - The base URI of the service.
+ *
+ * @@param {object} [options] - The parameter options
+ *
+ * @@param {Array} [options.filters] - Filters to be added to the request pipeline
+ *
+ * @@param {object} [options.requestOptions] - Options for the underlying request object
+ * {@@link https://github.com/request/request#requestoptions-callback Options doc}
+ *
+ * @@param {bool} [options.noRetryPolicy] - If set to true, turn off default retry policy
+ */
+function @(Model.Name)(credentials, baseUri, options) {
+  if (!credentials) {
+    throw new Error('credentials cannot be null.');
+  }
+  @EmptyLine
+  if (!options) options = {};
+  @(Model.Name)['super_'].call(this, credentials, options);
+  this.baseUri = baseUri;
+  this.credentials = credentials;
+  if (!this.baseUri) {
+    this.baseUri = '@Model.BaseUrl';
+  }
+  @EmptyLine
+  @foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
+  {
+  @:if (!this.@(property.Name)) {
+    @:this.@(property.Name) = @(property.DefaultValue);
+  @:}
+  }
+  
+  @foreach (var methodGroup in Model.MethodGroupModels)
+  {
+  @:this.@(methodGroup.MethodGroupName) = new operations.@(methodGroup.MethodGroupType)(this);
+  }
+  
+  @if (Model.ModelTypes.Any())
+  {
+    @:this._models = models;
+  }
+}
+
+@EmptyLine
+util.inherits(@Model.Name, ServiceClient);
+@foreach (var method in Model.MethodTemplateModels)
+{
+@EmptyLine
+@:@(Include<AzureMethodTemplate, AzureMethodTemplateModel>(method as AzureMethodTemplateModel))
+}
+@EmptyLine
+module.exports = @Model.Name;

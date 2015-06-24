@@ -30,7 +30,7 @@ var HttpOperationResponse = ( function() {
      * The response object.
      * @type {object}
      */
-    this.body = {};
+    this.body = null;
   }
   
   return HttpOperationResponse;
