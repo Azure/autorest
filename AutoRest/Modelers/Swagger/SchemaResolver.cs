@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Microsoft.Rest.Modeler.Swagger.Model;
+using System.Globalization;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
@@ -84,7 +85,8 @@ namespace Microsoft.Rest.Modeler.Swagger
                     if (schema.Extends != null)
                     {
                         throw new ArgumentException(
-                            string.Format(Properties.Resources.InvalidTypeExtendsWithAllOf, schema.Title));
+                            string.Format(CultureInfo.InvariantCulture, 
+                            Properties.Resources.InvalidTypeExtendsWithAllOf, schema.Title));
                     }
 
                     schema.Extends = references[0].Reference;
@@ -116,7 +118,8 @@ namespace Microsoft.Rest.Modeler.Swagger
                                     schema.Properties[propertyName], unwrappedProperty))
                                 {
                                     throw new InvalidOperationException(
-                                        string.Format(Properties.Resources.IncompatibleTypesInSchemaComposition,
+                                        string.Format(CultureInfo.InvariantCulture, 
+                                        Properties.Resources.IncompatibleTypesInSchemaComposition,
                                             propertyName,
                                             unwrappedComponent.Properties[propertyName].Type,
                                             schema.Properties[propertyName].Type,
@@ -132,7 +135,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                                     if (!SchemaTypesAreEquivalent(parentProperty, unwrappedProperty))
                                     {
                                         throw new InvalidOperationException(
-                                            string.Format(
+                                            string.Format(CultureInfo.InvariantCulture, 
                                                 Properties.Resources.IncompatibleTypesInBaseSchema, propertyName,
                                                 parentProperty.Type,
                                                 unwrappedProperty.Type, schema.Title));
@@ -247,20 +250,22 @@ namespace Microsoft.Rest.Modeler.Swagger
                 referencePath = "#" + splitReference[1];
             }
 
-            if (_visitedReferences.Contains(referencePath.ToLower()))
+            if (_visitedReferences.Contains(referencePath.ToLower(CultureInfo.InvariantCulture)))
             {
-                throw new ArgumentException(string.Format(Properties.Resources.CircularReference, referencePath));
+                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, 
+                    Properties.Resources.CircularReference, referencePath));
             }
 
             if (_visitedReferences.Count >= MaximumReferenceDepth)
             {
                 throw new ArgumentException(Properties.Resources.ExceededMaximumReferenceDepth, referencePath);
             }
-            _visitedReferences.Add(referencePath.ToLower());
+            _visitedReferences.Add(referencePath.ToLower(CultureInfo.InvariantCulture));
             var definitions = _serviceDefinition.Definitions;
             if (definitions == null || !definitions.ContainsKey(referencePath.StripDefinitionPath()))
             {
-                throw new ArgumentException(string.Format(Properties.Resources.ReferenceDoesNotExist,
+                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, 
+                    Properties.Resources.ReferenceDoesNotExist,
                     referencePath.StripDefinitionPath()));
             }
 

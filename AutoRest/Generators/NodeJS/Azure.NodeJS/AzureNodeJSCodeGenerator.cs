@@ -53,24 +53,6 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
                 Settings.Namespace + ".Models");
         }
 
-        private void PopulateAdditionalProperties(ServiceClient serviceClient)
-        {
-            // TODO: Shouldn't this be handled by the modeler?
-            if (Settings.AddCredentials)
-            {
-                serviceClient.Properties.Add(new Property
-                {
-                    Name = "Credentials",
-                    Type = new CompositeType
-                    {
-                        Name = "ServiceClientCredentials"
-                    },
-                    IsRequired = true,
-                    Documentation = "Credentials for client authentication."
-                });
-            }
-        }
-
         /// <summary>
         /// Generate Azure NodeJS client code for given ServiceClient.
         /// </summary>

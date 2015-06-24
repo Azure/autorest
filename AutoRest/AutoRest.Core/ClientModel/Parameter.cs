@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Microsoft.Rest.Generator.ClientModel
 {
@@ -77,7 +78,7 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// </returns>
         public override string ToString()
         {
-            return string.Format("{0} {1}", Type, Name);
+            return string.Format(CultureInfo.InvariantCulture, "{0} {1}", Type, Name);
         }
     }
 }

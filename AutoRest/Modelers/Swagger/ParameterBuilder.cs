@@ -7,6 +7,7 @@ using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger.Model;
 using ParameterLocation = Microsoft.Rest.Modeler.Swagger.Model.ParameterLocation;
+using System.Globalization;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
@@ -56,7 +57,9 @@ namespace Microsoft.Rest.Modeler.Swagger
                     parameter.Documentation = parameter.Documentation.TrimEnd('.') + ". ";
                 }
                 parameter.Documentation += "Possible values for this parameter include: " +
-                                           string.Join(", ", enumType.Values.Select(v => string.Format("'{0}'", v.Name)));
+                                           string.Join(", ", enumType.Values.Select(v =>
+                                               string.Format(CultureInfo.InvariantCulture, 
+                                               "'{0}'", v.Name)));
             }
             _swaggerParameter.Extensions.ForEach(e => parameter.Extensions[e.Key] = e.Value);
 

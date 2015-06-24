@@ -4,6 +4,7 @@
 using Microsoft.Rest.Modeler.Swagger.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
 
 namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
 {
@@ -27,9 +28,9 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
             // Unwrap if it's a reference object
             if (jo.First.Path == "$ref")
             {
-                referencePath = jo.GetValue("$ref").ToString();
+                referencePath = jo.GetValue("$ref", StringComparison.Ordinal).ToString();
                 // Shorthand notation
-                if (!referencePath.StartsWith("#/parameters"))
+                if (!referencePath.StartsWith("#/parameters", StringComparison.Ordinal))
                 {
                     referencePath = "#/parameters/" + referencePath;
                 }

@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -29,11 +30,18 @@ namespace Microsoft.Rest.Generator.Utilities
         /// Initializes a new instance of IndentedStringBuilder.
         /// </summary>
         /// <param name="indentation">String to use as an indentation.</param>
-        public IndentedStringBuilder(string indentation = FourSpaces)
+        public IndentedStringBuilder(string indentation)
         {
             _indentation = indentation;
             _builder = new StringBuilder();
             _indentationCount = 0;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of IndentedStringBuilder with Fourspaces as indentation.
+        /// </summary>
+        public IndentedStringBuilder():this(FourSpaces)
+        {
         }
 
         /// <summary>
@@ -89,7 +97,7 @@ namespace Microsoft.Rest.Generator.Utilities
                     }
                 }
             }
-            _builder.AppendFormat(format, args);
+            _builder.AppendFormat(CultureInfo.InvariantCulture, format, args);
             return this;
         }
 

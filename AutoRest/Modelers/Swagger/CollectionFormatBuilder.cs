@@ -8,6 +8,7 @@ using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Modeler.Swagger.Model;
 using Microsoft.Rest.Modeler.Swagger.Properties;
 using ParameterLocation = Microsoft.Rest.Modeler.Swagger.Model.ParameterLocation;
+using System.Globalization;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
@@ -31,8 +32,8 @@ namespace Microsoft.Rest.Modeler.Swagger
                 if (currentSwaggerParam.In == ParameterLocation.Path)
                 {
                     method.Url = method.Url.Replace(
-                        string.Format("{0}", currentSwaggerParam.Name),
-                        string.Format("{0}", paramNameBuilder));
+                        string.Format(CultureInfo.InvariantCulture, "{0}", currentSwaggerParam.Name),
+                        string.Format(CultureInfo.InvariantCulture, "{0}", paramNameBuilder));
                 }
             }
             return paramNameBuilder;
@@ -70,11 +71,14 @@ namespace Microsoft.Rest.Modeler.Swagger
 
                 case CollectionFormat.Multi:
                     // TODO multi is not supported yet: http://vstfrd:8080/Azure/RD/_workitems/edit/3172867
-                    throw new NotSupportedException(string.Format(Resources.MultiCollectionFormatNotSupported,
+                    throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture, 
+                        Resources.MultiCollectionFormatNotSupported,
                         swaggerParameter.Name));
                 default:
-                    throw new ArgumentException(string.Format(Resources.InvalidCollectionFormat,
-                        swaggerParameter.CollectionFormat, swaggerParameter.Name));
+                    throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, 
+                        Resources.InvalidCollectionFormat,
+                        swaggerParameter.CollectionFormat, 
+                        swaggerParameter.Name));
             }
         }
     }

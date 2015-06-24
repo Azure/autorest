@@ -45,6 +45,10 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <summary>
         /// Gets or sets the base url of the service.  This can be a templated url.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design",
+            "CA1056:UriPropertiesShouldNotBeStrings", 
+            Justification = "Url might be used as a template, thus making " + 
+            "it invalid url in certain scenarios.")]
         public string BaseUrl { get; set; }
 
         /// <summary>

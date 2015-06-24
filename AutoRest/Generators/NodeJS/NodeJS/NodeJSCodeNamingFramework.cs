@@ -7,6 +7,7 @@ using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.NodeJS.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
+using System.Globalization;
 
 namespace Microsoft.Rest.Generator.NodeJS
 {
@@ -183,7 +184,8 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
 
 
-            throw new NotSupportedException(string.Format("Type {0} is not supported.", type.GetType()));
+            throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture, 
+                "Type {0} is not supported.", type.GetType()));
         }
 
         private IType NormalizeEnumType(EnumType enumType)

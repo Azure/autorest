@@ -8,6 +8,7 @@ using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.CSharp.Azure.Properties;
 using Microsoft.Rest.Generator.CSharp.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
+using System.Globalization;
 
 namespace Microsoft.Rest.Generator.CSharp.Azure
 {
@@ -35,7 +36,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                 if (getMethod == null)
                 {
                     throw new InvalidOperationException(
-                        string.Format(Resources.InvalidLongRunningOperationForCreateOrUpdate,
+                        string.Format(CultureInfo.InvariantCulture, 
+                        Resources.InvalidLongRunningOperationForCreateOrUpdate,
                             Name, Group));
                 }
                 return new AzureMethodTemplateModel(getMethod, ServiceClient);
@@ -74,7 +76,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             {
                 if (ReturnType != null)
                 {
-                    return string.Format("AzureOperationResponse<{0}>", ReturnType.Name);
+                    return string.Format(CultureInfo.InvariantCulture, 
+                        "AzureOperationResponse<{0}>", ReturnType.Name);
                 }
                 else
                 {

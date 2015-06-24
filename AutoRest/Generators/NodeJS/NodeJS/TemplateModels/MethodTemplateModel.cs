@@ -9,6 +9,7 @@ using Microsoft.CSharp;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.NodeJS.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
+using System.Globalization;
 
 namespace Microsoft.Rest.Generator.NodeJS
 {
@@ -56,7 +57,8 @@ namespace Microsoft.Rest.Generator.NodeJS
                     List<string> predicates = new List<string>();
                     foreach (var responseStatus in Responses.Keys)
                     {
-                        predicates.Add(string.Format("statusCode !== {0}", GetStatusCodeReference(responseStatus)));
+                        predicates.Add(string.Format(CultureInfo.InvariantCulture, 
+                            "statusCode !== {0}", GetStatusCodeReference(responseStatus)));
                     }
 
                     return string.Join(" && ", predicates);
@@ -241,7 +243,8 @@ namespace Microsoft.Rest.Generator.NodeJS
                 }
                 else if (sequence.ElementType is CompositeType)
                 {
-                    builder.AppendLine(GetDeserializationString(sequence.ElementType, string.Format("{0}[i]", valueReference)));
+                    builder.AppendLine(GetDeserializationString(sequence.ElementType,
+                        string.Format(CultureInfo.InvariantCulture, "{0}[i]", valueReference)));
                 }
 
                 builder.Outdent()
@@ -266,7 +269,8 @@ namespace Microsoft.Rest.Generator.NodeJS
                 }
                 else if (dictionary.ValueType is CompositeType)
                 {
-                    builder.AppendLine(GetDeserializationString(dictionary.ValueType, string.Format("{0}[property]", valueReference)));
+                    builder.AppendLine(GetDeserializationString(dictionary.ValueType,
+                        string.Format(CultureInfo.InvariantCulture, "{0}[property]", valueReference)));
                 }
                 builder.Outdent()
                         .AppendLine("}")
@@ -335,7 +339,7 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         public string GetStatusCodeReference(HttpStatusCode code)
         {
-            return string.Format("{0}", (int)code);
+            return string.Format(CultureInfo.InvariantCulture, "{0}", (int)code);
         }
 
         /// <summary>

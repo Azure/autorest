@@ -1,10 +1,9 @@
 <Dictionary>
   <Words>
     <Recognized>
-      <Word>AutoRest</Word>
-      <Word>Backoff</Word>
-      <Word>Etw</Word>
-      <Word>Rest</Word>
+      <Word>Outdent</Word>
+      <Word>Infos</Word>
+      <Word>queryParameters</Word>
     </Recognized>
   </Words>
 </Dictionary>

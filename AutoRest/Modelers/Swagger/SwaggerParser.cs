@@ -9,6 +9,7 @@ using Microsoft.Rest.Modeler.Swagger.Model;
 using Microsoft.Rest.Modeler.Swagger.Properties;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Globalization;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
@@ -50,7 +51,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             }
             catch (JsonException ex)
             {
-                throw ErrorManager.CreateError(string.Format("{0}. {1}",
+                throw ErrorManager.CreateError(string.Format(CultureInfo.InvariantCulture, "{0}. {1}",
                     Resources.ErrorParsingSpec, ex.Message), ex);
             }
         }

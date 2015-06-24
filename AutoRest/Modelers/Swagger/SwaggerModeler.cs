@@ -12,6 +12,7 @@ using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger.Model;
 using ParameterLocation = Microsoft.Rest.Modeler.Swagger.Model.ParameterLocation;
 using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
+using System.Globalization;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
@@ -143,7 +144,8 @@ namespace Microsoft.Rest.Modeler.Swagger
             {
                 ServiceDefinition.Host = "localhost";
             }
-            ServiceClient.BaseUrl = string.Format("{0}://{1}{2}", ServiceDefinition.Schemes[0].ToString().ToLower(),
+            ServiceClient.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}://{1}{2}", 
+                ServiceDefinition.Schemes[0].ToString().ToLower(CultureInfo.InvariantCulture),
                 ServiceDefinition.Host, ServiceDefinition.BasePath);
         }
 
@@ -155,7 +157,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         /// <returns>A string representing the full http (parameterized) path for the operation</returns>
         public virtual string BuildMethodBaseUrl(ServiceClient serviceClient, string path)
         {
-            return string.Format("{{{0}}}{1}", BaseUriParameterName, path);
+            return string.Format(CultureInfo.InvariantCulture, "{{{0}}}{1}", BaseUriParameterName, path);
         }
 
         /// <summary>
@@ -278,7 +280,8 @@ namespace Microsoft.Rest.Modeler.Swagger
                 if (!ServiceDefinition.Parameters.ContainsKey(referenceKey))
                 {
                     throw new ArgumentException(
-                        string.Format("Reference specifies the definition {0} that does not exist.", referenceKey));
+                        string.Format(CultureInfo.InvariantCulture, 
+                        "Reference specifies the definition {0} that does not exist.", referenceKey));
                 }
 
                 swaggerParameter = ServiceDefinition.Parameters[referenceKey];

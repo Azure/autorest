@@ -4,6 +4,7 @@
 using System;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
+using System.Globalization;
 
 namespace Microsoft.Rest.Generator.CSharp.TemplateModels
 {
@@ -15,7 +16,7 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
             {
                 return "new HttpMethod(\"Patch\")";
             }
-            return string.Format("HttpMethod.{0}", method);
+            return string.Format(CultureInfo.InvariantCulture, "HttpMethod.{0}", method);
         }
 
         /// <summary>
@@ -42,11 +43,13 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
             if (primaryType != PrimaryType.String)
             {
                 throw new InvalidOperationException(
-                    string.Format("Cannot generate a formatted sequence from a " +
+                    string.Format(CultureInfo.InvariantCulture, 
+                    "Cannot generate a formatted sequence from a " +
                                   "non-string List parameter {0}", parameter));
             }
 
-            return string.Format("string.Join(\"{0}\", {1})", parameter.CollectionFormat.GetSeparator(), parameter.Name);
+            return string.Format(CultureInfo.InvariantCulture, 
+                "string.Join(\"{0}\", {1})", parameter.CollectionFormat.GetSeparator(), parameter.Name);
         }
 
         /// <summary>
@@ -67,7 +70,9 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
                 case CollectionFormat.Tsv:
                     return "\t";
                 default:
-                    throw new NotSupportedException(string.Format("Collection format {0} is not supported.", format));
+                    throw new NotSupportedException(
+                        string.Format(CultureInfo.InvariantCulture, 
+                        "Collection format {0} is not supported.", format));
             }
         }
 
@@ -87,9 +92,10 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
 
             var serializationSettings = (type == PrimaryType.Date) ?
                 "new DateJsonConverter()"
-                : string.Format("{0}.SerializationSettings", clientReference);
+                : string.Format(CultureInfo.InvariantCulture, 
+                "{0}.SerializationSettings", clientReference);
 
-            return string.Format(
+            return string.Format(CultureInfo.InvariantCulture,
                     "JsonConvert.SerializeObject({0}, {1}).Trim('\"')",
                     reference,
                     serializationSettings);
@@ -108,7 +114,8 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
 
         public static string CheckNull(string valueReference, string executionBlock)
         {
-            return string.Format("if ({0} != null)\r\n{{\r\n    {1}\r\n}}", valueReference, executionBlock);
+            return string.Format(CultureInfo.InvariantCulture, 
+                "if ({0} != null)\r\n{{\r\n    {1}\r\n}}", valueReference, executionBlock);
         }
 
         /// <summary>
@@ -125,7 +132,8 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
             DictionaryType dictionary = type as DictionaryType;
             if (model != null && model.Properties.Any())
             {
-                return CheckNull(valueReference, string.Format("{0}.Validate();", valueReference));
+                return CheckNull(valueReference, string.Format(CultureInfo.InvariantCulture, 
+                    "{0}.Validate();", valueReference));
             }
             if (sequence != null)
             {
@@ -133,9 +141,11 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
                 var innerValidation = sequence.ElementType.ValidateType(scope, elementVar);
                 if (!string.IsNullOrEmpty(innerValidation))
                 {
-                    var sequenceBuilder = string.Format("foreach ( var {0} in {1})\r\n{{\r\n", elementVar,
+                    var sequenceBuilder = string.Format(CultureInfo.InvariantCulture, 
+                        "foreach ( var {0} in {1})\r\n{{\r\n", elementVar,
                         valueReference);
-                    sequenceBuilder += string.Format("    {0}\r\n}}", innerValidation);
+                    sequenceBuilder += string.Format(CultureInfo.InvariantCulture, 
+                        "    {0}\r\n}}", innerValidation);
                     return CheckNull(valueReference, sequenceBuilder);
                 }
             }
@@ -145,10 +155,13 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
                 var innerValidation = dictionary.ValueType.ValidateType(scope, valueVar);
                 if (!string.IsNullOrEmpty(innerValidation))
                 {
-                    var sequenceBuilder = string.Format("if ( {0} != null)\r\n{{\r\n", valueReference);
-                    sequenceBuilder += string.Format("    foreach ( var {0} in {1}.Values)\r\n    {{\r\n", valueVar,
+                    var sequenceBuilder = string.Format(CultureInfo.InvariantCulture, 
+                        "if ( {0} != null)\r\n{{\r\n", valueReference);
+                    sequenceBuilder += string.Format(CultureInfo.InvariantCulture, 
+                        "    foreach ( var {0} in {1}.Values)\r\n    {{\r\n", valueVar,
                         valueReference);
-                    sequenceBuilder += string.Format("        {0}\r\n    }}\r\n}}", innerValidation);
+                    sequenceBuilder += string.Format(CultureInfo.InvariantCulture, 
+                        "        {0}\r\n    }}\r\n}}", innerValidation);
                     return CheckNull(valueReference, sequenceBuilder);
                 }
             }

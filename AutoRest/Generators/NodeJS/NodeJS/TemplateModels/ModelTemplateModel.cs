@@ -6,6 +6,7 @@ using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.NodeJS.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
+using System.Globalization;
 
 namespace Microsoft.Rest.Generator.NodeJS
 {
@@ -73,7 +74,8 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         public string ValidateProperty(string objectName, Property property)
         {
-            var propertyName = string.Format("{0}['{1}']", objectName, property.Name);
+            var propertyName = string.Format(CultureInfo.InvariantCulture, 
+                "{0}['{1}']", objectName, property.Name);
 
             if (property.IsRequired)
             {

@@ -8,6 +8,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Rest.Generator.Utilities;
+using Microsoft.Rest.Generator.Properties;
 
 namespace Microsoft.Rest.Generator
 {
@@ -192,7 +193,7 @@ namespace Microsoft.Rest.Generator
             }
 
             // escape comment as needed
-            comment = comment.Replace("\\", "\\\\");
+            comment = comment.Replace("\\", Resources.CommentString);
 
             int available =
                 MaximumCommentColumn - // Maximum desired width
@@ -227,7 +228,7 @@ namespace Microsoft.Rest.Generator
             if (Model != null)
             {
                 var existingOutput = TextWriter;
-                using (TextWriter = new StringWriter(sb))
+                using (TextWriter = new StringWriter(sb, CultureInfo.InvariantCulture))
                 {
                     ExecuteAsync().ConfigureAwait(false).GetAwaiter().GetResult();
                 }

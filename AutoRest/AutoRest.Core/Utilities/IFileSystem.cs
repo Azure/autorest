@@ -18,9 +18,9 @@ namespace Microsoft.Rest.Generator.Utilities
 
         void DeleteFile(string path);
 
-        void DeleteDirectory(string dir);
+        void DeleteDirectory(string directory);
 
-        void EmptyDirectory(string dirPath);
+        void EmptyDirectory(string directory);
 
         bool DirectoryExists(string path);
 

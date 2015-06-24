@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Rest.Generator.ClientModel;
+using System.Globalization;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
 {
@@ -105,7 +106,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                     return PrimaryType.Stream;
                 default:
                     throw new NotImplementedException(
-                        string.Format(
+                        string.Format(CultureInfo.InvariantCulture, 
                             "\"{0}\" is not implemented in SwaggerSchema.ToType extension method.",
                             Type));
             }

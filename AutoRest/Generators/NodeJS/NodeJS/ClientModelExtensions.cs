@@ -5,6 +5,7 @@ using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
@@ -19,7 +20,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             }
             else
             {
-                return string.Format("HttpMethod.{0}", method);
+                return string.Format(CultureInfo.InvariantCulture, "HttpMethod.{0}", method);
             }
         }
         
@@ -46,11 +47,13 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             if (primaryType != PrimaryType.String)
             {
                 throw new InvalidOperationException(
-                    string.Format("Cannot generate a formatted sequence from a " +
+                    string.Format(CultureInfo.InvariantCulture, 
+                    "Cannot generate a formatted sequence from a " +
                                   "non-string array parameter {0}", parameter));
             }
 
-            return string.Format("{0}.join('{1}')", parameter.Name, parameter.CollectionFormat.GetSeparator());
+            return string.Format(CultureInfo.InvariantCulture, 
+                "{0}.join('{1}')", parameter.Name, parameter.CollectionFormat.GetSeparator());
         }
 
         /// <summary>
@@ -71,7 +74,8 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 case CollectionFormat.Tsv:
                     return "\t";
                 default:
-                    throw new NotSupportedException(string.Format("Collection format {0} is not supported.", format));
+                    throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture, 
+                        "Collection format {0} is not supported.", format));
             }
         }
 
@@ -90,16 +94,18 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             }
             else if (known == PrimaryType.Date)
             {
-                return string.Format("msRest.serializeObject({0}).replace(/[Tt].*[Zz]/, '')", reference);
+                return string.Format(CultureInfo.InvariantCulture, 
+                    "msRest.serializeObject({0}).replace(/[Tt].*[Zz]/, '')", reference);
             }
             else if (known == PrimaryType.DateTime
                 || known == PrimaryType.ByteArray)
             {
-                return string.Format("msRest.serializeObject({0})", reference);
+                return string.Format(CultureInfo.InvariantCulture, 
+                    "msRest.serializeObject({0})", reference);
             }
             else
             {
-                return string.Format("{0}.toString()", reference);
+                return string.Format(CultureInfo.InvariantCulture, "{0}.toString()", reference);
             }
         }
         
@@ -129,7 +135,9 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
         /// <returns>The Javascript Array as a string</returns>
         public static string GetEnumValuesArray(this EnumType type)
         {
-            return string.Format("[ {0} ]", string.Join(", ", type.Values.Select(p => string.Format("'{0}'", p.Name))));
+            return string.Format(CultureInfo.InvariantCulture, 
+                "[ {0} ]", string.Join(", ",
+                type.Values.Select(p => string.Format(CultureInfo.InvariantCulture, "'{0}'", p.Name))));
         }
 
         public static string EscapeSingleQuotes(this string valueReference)
@@ -162,9 +170,9 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                     primary == PrimaryType.Int ||
                     primary == PrimaryType.Long)
                 {
-                    return builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0} !== '{1}') {{", valueReference, primary.Name.ToLower())
+                    return builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0} !== '{1}') {{", valueReference, primary.Name.ToLower(CultureInfo.InvariantCulture))
                             .Indent()
-                                .AppendLine("throw new Error('{0} must be of type {1}.');", escapedValueReference, primary.Name.ToLower())
+                                .AppendLine("throw new Error('{0} must be of type {1}.');", escapedValueReference, primary.Name.ToLower(CultureInfo.InvariantCulture))
                             .Outdent()
                           .AppendLine("}").ToString();
                 }
@@ -172,7 +180,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 {
                     return builder.AppendLine("if ({0} !== null && {0} !== undefined && !Buffer.isBuffer({0})) {{", valueReference)
                             .Indent()
-                                .AppendLine("throw new Error('{0} must be of type {1}.');", escapedValueReference, primary.Name.ToLower())
+                                .AppendLine("throw new Error('{0} must be of type {1}.');", escapedValueReference, primary.Name.ToLower(CultureInfo.InvariantCulture))
                             .Outdent()
                           .AppendLine("}").ToString();
                 }
@@ -186,7 +194,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                                 .AppendLine("(typeof {0} === 'string' && !isNaN(Date.parse({0}))))) {{", valueReference)
                            .Outdent()
                            .Outdent()
-                    .AppendLine("throw new Error('{0} must be of type {1}.');", escapedValueReference, primary.Name.ToLower())
+                    .AppendLine("throw new Error('{0} must be of type {1}.');", escapedValueReference, primary.Name.ToLower(CultureInfo.InvariantCulture))
                            .Outdent()
                            .AppendLine("}").ToString();
                 }
@@ -196,7 +204,8 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 }
                 else
                 {
-                    throw new NotImplementedException(string.Format("'{0}' not implemented", valueReference));
+                    throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture, 
+                        "'{0}' not implemented", valueReference));
                 }
             }
             else if (enumType != null && enumType.Values.Any()) {

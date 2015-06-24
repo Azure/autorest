@@ -7,6 +7,7 @@ using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.CSharp.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
+using System.Globalization;
 
 namespace Microsoft.Rest.Generator.CSharp
 {
@@ -90,7 +91,8 @@ namespace Microsoft.Rest.Generator.CSharp
                 return NormalizeEnumType(type as EnumType);
             }
 
-            throw new NotSupportedException(string.Format("Type {0} is not supported.", type.GetType()));
+            throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture, 
+                "Type {0} is not supported.", type.GetType()));
         }
 
         private IType NormalizeCompositeType(CompositeType compositeType)

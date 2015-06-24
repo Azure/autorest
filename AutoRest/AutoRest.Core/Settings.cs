@@ -9,6 +9,7 @@ using System.Reflection;
 using Microsoft.Rest.Generator.Logging;
 using Microsoft.Rest.Generator.Properties;
 using Microsoft.Rest.Generator.Utilities;
+using System.Globalization;
 
 namespace Microsoft.Rest.Generator
 {
@@ -41,8 +42,8 @@ Licensed under the MIT License. See License.txt in the project root for license 
         {
             FileSystem = new FileSystem();
             OutputDirectory = Path.Combine(Environment.CurrentDirectory, "Generated");
-            CustomSettings = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
-            Header = String.Format(DefaultCodeGenerationHeader, AutoRest.Version);
+            CustomSettings = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            Header = String.Format(CultureInfo.InvariantCulture, DefaultCodeGenerationHeader, AutoRest.Version);
             CodeGenerator = "CSharp";
             Modeler = "Swagger";
         }
@@ -151,7 +152,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// <returns>CodeGenerationSettings</returns>
         public static Settings Create(string[] arguments)
         {
-            var argsDictionary = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
+            var argsDictionary = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
             if (arguments != null && arguments.Length > 0)
             {
                 string key = null;
@@ -161,7 +162,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
                     string argument = arguments[i] ?? String.Empty;
                     argument = argument.Trim();
 
-                    if (argument.StartsWith("-"))
+                    if (argument.StartsWith("-", StringComparison.OrdinalIgnoreCase))
                     {
                         if (key != null)
                         {
@@ -207,7 +208,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
                 foreach (var setting in settings)
                 {
                     PropertyInfo property = (typeof (Settings)).GetProperties()
-                        .FirstOrDefault(p => p.Name.Equals(setting.Key, StringComparison.InvariantCultureIgnoreCase));
+                        .FirstOrDefault(p => p.Name.Equals(setting.Key, StringComparison.OrdinalIgnoreCase));
 
                     if (property != null)
                     {
@@ -220,12 +221,12 @@ Licensed under the MIT License. See License.txt in the project root for license 
                             else
                             {
                                 property.SetValue(autoRestSettings,
-                                    Convert.ChangeType(setting.Value, property.PropertyType), null);
+                                    Convert.ChangeType(setting.Value, property.PropertyType, CultureInfo.InvariantCulture), null);
                             }
                         }
                         catch (Exception exception)
                         {
-                            throw new ArgumentException(String.Format(Resources.ParameterValueIsNotValid,
+                            throw new ArgumentException(String.Format(CultureInfo.InvariantCulture, Resources.ParameterValueIsNotValid,
                                 setting.Key, property.GetType().Name), exception);
                         }
                     }

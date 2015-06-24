@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger.Model;
+using System.Globalization;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
@@ -91,7 +92,9 @@ namespace Microsoft.Rest.Modeler.Swagger
                                 propertyObj.Documentation = propertyObj.Documentation.TrimEnd('.') + ". ";
                             }
                             propertyObj.Documentation += "Possible values for this property include: " +
-                                                       string.Join(", ", enumType.Values.Select(v => string.Format("'{0}'", v.Name)));
+                                                       string.Join(", ", enumType.Values.Select(v =>
+                                                           string.Format(CultureInfo.InvariantCulture, 
+                                                           "'{0}'", v.Name)));
                         }
                         propertyObj.IsReadOnly = property.Value.ReadOnly;
                         objectType.Properties.Add(propertyObj);

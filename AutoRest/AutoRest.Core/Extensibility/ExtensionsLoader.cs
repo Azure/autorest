@@ -30,7 +30,7 @@ namespace Microsoft.Rest.Generator.Extensibility
             Logger.LogInfo(Resources.InitializingCodeGenerator);
             if (settings == null || string.IsNullOrEmpty(settings.CodeGenerator))
             {
-                throw new ArgumentNullException("settings.CodeGenerator");
+                throw new ArgumentNullException("settings");
             }
 
             CodeGenerator codeGenerator = null;
@@ -54,7 +54,7 @@ namespace Microsoft.Rest.Generator.Extensibility
             {
                 throw ErrorManager.CreateError(Resources.ConfigurationFileNotFound);
             }
-            Logger.LogInfo("Successfully initialized {0} Code Generator {1}",
+            Logger.LogInfo(Resources.GeneratorInitialized,
                 settings.CodeGenerator,
                 codeGenerator.GetType().Assembly.GetName().Version);
             return codeGenerator;
@@ -67,10 +67,10 @@ namespace Microsoft.Rest.Generator.Extensibility
         /// <returns>Modeler specified in Settings.Modeler</returns>
         public static Modeler GetModeler(Settings settings)
         {
-            Logger.LogInfo("Initializing modeler.");
+            Logger.LogInfo(Resources.ModelerInitialized);
             if (settings == null || string.IsNullOrEmpty(settings.Modeler))
             {
-                throw new ArgumentNullException("settings.Modeler");
+                throw new ArgumentNullException("settings", "settings or settings.Modeler cannot be null.");
             }
 
             Modeler modeler = null;
@@ -94,7 +94,7 @@ namespace Microsoft.Rest.Generator.Extensibility
                 throw ErrorManager.CreateError(Resources.ConfigurationFileNotFound);
             }
 
-            Logger.LogInfo("Successfully initialized {0} Modeler {1}",
+            Logger.LogInfo(Resources.ModelerInitialized,
                 settings.Modeler,
                 modeler.GetType().Assembly.GetName().Version);
             return modeler;

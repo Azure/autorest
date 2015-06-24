@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using Microsoft.Rest.Generator.Utilities;
 using System;
+using System.Globalization;
 
 namespace Microsoft.Rest.Generator.ClientModel
 {
@@ -38,6 +39,8 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <summary>
         /// Gets or sets the HTTP url.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings", 
+            Justification= "Url might be used as a template, thus making it invalid url in certain scenarios.")]
         public string Url { get; set; }
 
         /// <summary>
@@ -103,7 +106,7 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// </returns>
         public override string ToString()
         {
-            return string.Format("{0} {1} ({2})", ReturnType, Name,
+            return string.Format(CultureInfo.InvariantCulture, "{0} {1} ({2})", ReturnType, Name,
                 string.Join(",", Parameters.Select(p => p.ToString())));
         }
 

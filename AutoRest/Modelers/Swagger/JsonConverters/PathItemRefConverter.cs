@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Microsoft.Rest.Modeler.Swagger.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
 
 namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
 {
@@ -29,7 +30,8 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
             while (jobject.First.Path == "$ref")
             {
                 jobject =
-                    Document.SelectToken(jobject.GetValue("$ref").ToString().Replace("#/", "").Replace("/", ".")) as
+                    Document.SelectToken(jobject.GetValue("$ref", StringComparison.Ordinal).ToString().
+                    Replace("#/", "").Replace("/", ".")) as
                         JObject;
             }
             return JsonConvert.DeserializeObject<Dictionary<string, Operation>>(jobject.ToString(),

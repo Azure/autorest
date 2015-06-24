@@ -9,6 +9,7 @@ using Microsoft.Rest.Generator.Azure.Properties;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger;
+using System.Globalization;
 
 namespace Microsoft.Rest.Generator.Azure
 {
@@ -69,7 +70,8 @@ namespace Microsoft.Rest.Generator.Azure
                 else
                 {
                     throw new NotSupportedException(
-                        string.Format(Resources.HeadMethodInvalidResponses, method.Name));
+                        string.Format(CultureInfo.InvariantCulture, 
+                        Resources.HeadMethodInvalidResponses, method.Name));
                 }
             }
         }
@@ -132,7 +134,9 @@ namespace Microsoft.Rest.Generator.Azure
                 string odataModelPath = (string) method.Extensions[ODataExtension];
                 if (odataModelPath == null)
                 {
-                    throw new InvalidOperationException(string.Format(Resources.ODataEmpty, ODataExtension));
+                    throw new InvalidOperationException(
+                        string.Format(CultureInfo.InvariantCulture, 
+                        Resources.ODataEmpty, ODataExtension));
                 }
 
                 odataModelPath = odataModelPath.StripDefinitionPath();
@@ -143,14 +147,17 @@ namespace Microsoft.Rest.Generator.Azure
                 if (odataType == null)
                 {
                     throw new InvalidOperationException(
-                        string.Format(Resources.ODataInvalidReferance, ODataExtension));
+                        string.Format(CultureInfo.InvariantCulture, 
+                        Resources.ODataInvalidReferance, ODataExtension));
                 }
                 var filterParameter = method.Parameters
                     .FirstOrDefault(p => p.Location == ParameterLocation.Query &&
                                          p.Name == "$filter");
                 if (filterParameter == null)
                 {
-                    throw new InvalidOperationException(string.Format(Resources.ODataFilterMissing, ODataExtension));
+                    throw new InvalidOperationException(
+                        string.Format(CultureInfo.InvariantCulture, 
+                        Resources.ODataFilterMissing, ODataExtension));
                 }
 
                 filterParameter.Type = odataType;
@@ -233,7 +240,9 @@ namespace Microsoft.Rest.Generator.Azure
                         p => p.Name.Equals(ResourceProperties, StringComparison.OrdinalIgnoreCase));
                     if (propertiesProperty == null)
                     {
-                        throw new InvalidOperationException(string.Format(Resources.MissingProperties,
+                        throw new InvalidOperationException(
+                            string.Format(CultureInfo.InvariantCulture, 
+                            Resources.MissingProperties,
                             compositeType.Name));
                     }
                     var propertiesModel = propertiesProperty.Type as CompositeType;
