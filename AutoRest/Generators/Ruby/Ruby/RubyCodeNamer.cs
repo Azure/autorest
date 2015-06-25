@@ -12,14 +12,14 @@ namespace Microsoft.Rest.Generator.Ruby
 {
     using System.Text.RegularExpressions;
 
-    public class RubyCodeNamingFramework : CodeNamingFramework
+    public class RubyCodeNamer : CodeNamer
     {
         private readonly HashSet<IType> normalizedTypes;
 
         /// <summary>
         /// Initializes a new instance of RubyCodeNamingFramework.
         /// </summary>
-        public RubyCodeNamingFramework()
+        public RubyCodeNamer()
         {
             new HashSet<string>
             {
