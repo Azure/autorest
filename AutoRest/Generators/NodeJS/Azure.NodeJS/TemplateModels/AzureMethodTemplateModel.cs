@@ -81,6 +81,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
                     "queryParameters.push('api-version=' + encodeURIComponent({0}.apiVersion));",
                     ClientReference);
             }
+
             builder.AppendLine("if (queryParameters.length > 0) {")
                 .Indent()
                 .AppendLine("{0} += '?' + queryParameters.join('&');", variableName).Outdent()
