@@ -152,9 +152,6 @@
     <Compile Include="Expected\SwaggerBat\Lro.Cs\LROsOperationsExtensions.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Expected\SwaggerBat\Lro.Cs\Models\Error.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
     <Compile Include="Expected\SwaggerBat\Lro.Cs\Models\OperationResult.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
@@ -179,13 +176,7 @@
     <Compile Include="Expected\SwaggerBat\Paging.Cs\IPagingOperations.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Expected\SwaggerBat\Paging.Cs\Models\Error.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
     <Compile Include="Expected\SwaggerBat\Paging.Cs\Models\OperationResult.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="Expected\SwaggerBat\Paging.Cs\Models\OperationResultError.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Expected\SwaggerBat\Paging.Cs\Models\Product.cs">

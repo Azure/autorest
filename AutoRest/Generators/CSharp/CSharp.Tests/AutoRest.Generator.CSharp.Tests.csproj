@@ -660,12 +660,6 @@
     <Compile Include="Expected\SwaggerBat\Http.Cs\HttpFailureExtensions.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Expected\SwaggerBat\Http.Cs\HttpRedirect.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="Expected\SwaggerBat\Http.Cs\HttpRedirectExtensions.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
     <Compile Include="Expected\SwaggerBat\Http.Cs\HttpRedirects.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
@@ -697,9 +691,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Expected\SwaggerBat\Http.Cs\IHttpFailure.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="Expected\SwaggerBat\Http.Cs\IHttpRedirect.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Expected\SwaggerBat\Http.Cs\IHttpRedirects.cs">

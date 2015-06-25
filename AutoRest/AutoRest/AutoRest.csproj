@@ -13,6 +13,10 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\Tools\AutoRest.Settings.targets" />
+  <PropertyGroup>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(CommonRoot)\binaries\$(LibraryFxTarget)\AutoRest.exe</StartProgram>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
