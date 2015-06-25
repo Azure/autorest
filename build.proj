@@ -24,6 +24,12 @@
     Run Code analysis. 
 
   Properties of interest:
+  /p:Scope 
+    'All' : builds ClientRuntime and CodeGenerator solutions
+    'CodeGenerator': builds CodeGenerator solution only
+    'ClientRuntime': builds ClientRuntime solution only
+    By default, it builds all.
+
   /P:CodeSign=True
     Code sign binaries, mainly for official release 
 
@@ -58,10 +64,13 @@
     <CodeSign Condition=" '$(CodeSign)' == '' ">false</CodeSign>
     <!-- Only set set this to true for testing the code sign workflow locally. -->
     <DelaySign Condition =" '$(DelaySign)' == '' ">false</DelaySign>
+    <Scope Condition=" '$(Scope)' == '' ">all</Scope>
   </PropertyGroup>
  
   <ItemGroup>
-    <LibraryFxTargetList Condition=" '$(FxTargetList)' == '' " Include="portable;net40;net45" />
+    <LibraryFxTargetList Condition=" '$(FxTargetList)' == '' and '$(Scope)' == 'ClientRuntime' " Include="portable;net40;net45" />
+    <LibraryFxTargetList Condition=" '$(FxTargetList)' == '' and '$(Scope)' == 'all' " Include="portable;net40;net45" />
+    <LibraryFxTargetList Condition=" '$(FxTargetList)' == '' and '$(Scope)' == 'CodeGenerator' " Include="net45" />
     <LibraryFxTargetList Condition=" '$(FxTargetList)' != '' " Include="$(FxTargetList)" />
   </ItemGroup>
   
@@ -93,10 +102,12 @@
     -->
     <MSBuild Projects="$(ClientRuntimeSolution)"
              Properties="Configuration=%(LibraryFxTargetList.Identity)-$(Configuration);Platform=Any CPU;CodeSign=$(CodeSign)"
-             Targets="Build" />
+             Targets="Build"
+             Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />
     <MSBuild Projects="$(CodeGeneratorSolution)"
              Properties="Configuration=Net45-$(Configuration);Platform=Any CPU;CodeSign=$(CodeSign)"
-             Targets="Build" />
+             Targets="Build"
+             Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
     <CallTarget Targets="CodeSignBinaries" Condition=" '$(CodeSign)' == 'true' " />
   </Target>
 
@@ -105,10 +116,12 @@
   <Target Name="Clean" DependsOnTargets="RestoreNugetPackages">
     <MSBuild Projects="$(ClientRuntimeSolution)"
              Properties="Configuration=%(LibraryFxTargetList.Identity)-$(Configuration);Platform=Any CPU"
-             Targets="Clean" />
+             Targets="Clean"
+             Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />
     <MSBuild Projects="$(CodeGeneratorSolution)"
              Properties="Configuration=Net45-$(Configuration);Platform=Any CPU"
-             Targets="Clean" />
+             Targets="Clean"
+             Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
     <RemoveDir Directories="$(BinariesFolder)" />
   </Target>
 
@@ -116,21 +129,24 @@
     <!--Note, we use "Rebuild" rather "Build", because code analysis happens during the build, and this ensures the build is not skipped-->
     <MSBuild Projects="$(ClientRuntimeSolution)"
              Properties="Configuration=%(LibraryFxTargetList.Identity)-$(Configuration);Platform=Any CPU;RunCodeAnalysis=true;CodeAnalysisTreatWarningsAsErrors=true"
-             Targets="Rebuild" />
+             Targets="Rebuild"
+             Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />
              
     <MSBuild Projects="$(CodeGeneratorSolution)"
              Properties="Configuration=Net45-$(Configuration);Platform=Any CPU;RunCodeAnalysis=true;CodeAnalysisTreatWarningsAsErrors=true"
-             Targets="Rebuild" />
+             Targets="Rebuild"
+             Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
   </Target>
   
-  <!-- Run all tests. -->
+  <!-- Run tests. -->
   <UsingTask TaskName="Xunit.Runner.msbuild.xunit" AssemblyFile="packages\xunit.runner.msbuild.2.0.0\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.runner.msbuild.dll" />
   <Target Name="Test">
+    <CallTarget Targets="TestClientRuntime" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />
+    <CallTarget Targets="TestCodeGenerator" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
+  </Target>
+
+  <Target Name="TestClientRuntime">
     <ItemGroup>
-      <TestDlls Include=".\AutoRest\Generators\CSharp\CSharp.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.CSharp.Tests.dll" />
-      <TestDlls Include=".\AutoRest\Generators\CSharp\Azure.CSharp.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.Azure.CSharp.Tests.dll" />
-      <TestDlls Include=".\AutoRest\AutoRest.Core.Tests\bin\Net45-$(Configuration)\AutoRest.Core.Tests.dll" />
-      <TestDlls Include=".\AutoRest\Modelers\Swagger.Tests\bin\Net45-$(Configuration)\AutoRest.Modeler.Swagger.Tests.dll" />
       <TestDlls Include=".\AutoRest\ClientRuntimes\*.Tests\bin\*\*Tests.dll" />
     </ItemGroup>
     
@@ -139,6 +155,19 @@
     <xunit Assemblies="@(TestDlls)" Html="$(MSBuildProjectDirectory)\TestResults\xunit.results.html" ContinueOnError="false" />
     <Exec WorkingDirectory=".\ClientRuntimes\NodeJS\ClientRuntime\" Command="npm test"/>
     <Exec WorkingDirectory=".\ClientRuntimes\NodeJS\ClientRuntime.Azure\" Command="npm test"/>
+  </Target>
+
+  <Target Name="TestCodeGenerator">
+    <ItemGroup>
+      <TestDlls Include=".\AutoRest\Generators\CSharp\CSharp.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.CSharp.Tests.dll" />
+      <TestDlls Include=".\AutoRest\Generators\CSharp\Azure.CSharp.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.Azure.CSharp.Tests.dll" />
+      <TestDlls Include=".\AutoRest\AutoRest.Core.Tests\bin\Net45-$(Configuration)\AutoRest.Core.Tests.dll" />
+      <TestDlls Include=".\AutoRest\Modelers\Swagger.Tests\bin\Net45-$(Configuration)\AutoRest.Modeler.Swagger.Tests.dll" />
+    </ItemGroup>
+    
+    <Message Text="@(TestDlls)" />
+    <MakeDir Directories="$(LibraryRoot)TestResults"/>
+    <xunit Assemblies="@(TestDlls)" Html="$(MSBuildProjectDirectory)\TestResults\xunit.results.html" ContinueOnError="false" />
     <Exec WorkingDirectory=".\AutoRest\Generators\NodeJS\NodeJS.Tests\" Command="npm test"/>
     <Exec WorkingDirectory=".\AutoRest\Generators\NodeJS\Azure.NodeJS.Tests\" Command="npm test"/>
   </Target>
@@ -177,7 +206,8 @@
     <!-- DelaySigned binaries copied locally for testing and not submitted to codesign service. -->
     <Copy SourceFiles="@(DelaySignedAssembliesToValidate)" DestinationFolder="binaries\$(LibraryFxTarget)" Condition="$(DelaySign)" />  
     <ItemGroup>
-      <AfterSignedAssembliesToValidate Include="binaries\$(LibraryFxTarget)\*.dll;binaries\$(LibraryFxTarget)\*.exe" />
+      <AfterSignedAssembliesToValidate Include="binaries\$(LibraryFxTarget)\*.dll;binaries\$(LibraryFxTarget)\*.exe" 
+        Exclude="binaries\$(LibraryFxTarget)\Newtonsoft.*.dll" />
     </ItemGroup>
     <ValidateStrongNameSignatureTask
         SdkPath="$(SdkPath)"
@@ -212,8 +242,8 @@
   </Target>
 
   <Target Name="RestoreNugetPackages">
-    <Exec Command="$(NuGetCommand) restore $(ClientRuntimeSolution)" ContinueOnError="false" />
-    <Exec Command="$(NuGetCommand) restore $(CodeGeneratorSolution)" ContinueOnError="false" />
+    <Exec Command="$(NuGetCommand) restore $(ClientRuntimeSolution)" ContinueOnError="false" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />
+    <Exec Command="$(NuGetCommand) restore $(CodeGeneratorSolution)" ContinueOnError="false" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
   </Target>
   
   <!-- Official releases require tools only available on corp network. -->
