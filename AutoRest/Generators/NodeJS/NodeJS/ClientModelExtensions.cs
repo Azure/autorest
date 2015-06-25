@@ -155,6 +155,11 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
         /// <returns>The code to validate the reference of the given type</returns>
         public static string ValidateType(this IType type, IScopeProvider scope, string valueReference, string modelReference = "client._models")
         {
+            if (scope == null)
+            {
+                throw new ArgumentNullException("scope");
+            }
+
             CompositeType composite = type as CompositeType;
             SequenceType sequence = type as SequenceType;
             DictionaryType dictionary = type as DictionaryType;
@@ -300,6 +305,11 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
         /// <returns>The code to deserialize the given type</returns>
         public static string DeserializeType(this IType type, IScopeProvider scope, string valueReference, string modelReference = "self._models")
         {
+            if (scope == null)
+            {
+                throw new ArgumentNullException("scope");
+            }
+
             CompositeType composite = type as CompositeType;
             SequenceType sequence = type as SequenceType;
             DictionaryType dictionary = type as DictionaryType;

@@ -20,7 +20,7 @@ namespace @Settings.Namespace
     {
         @foreach (var method in Model.MethodTemplateModels)
         {
-            @:@(Include<ExtensionMethodTemplate, MethodTemplateModel>(method))
+            @:@(Include(new ExtensionMethodTemplate(), method))
             @EmptyLine 
         }
     }

@@ -20,12 +20,17 @@ namespace Microsoft.Rest.Modeler.Swagger
     {
         private const string BaseUriParameterName = "BaseUri";
 
-        protected bool AddCredentials;
+        protected bool AddCredentials { get; set; }
         internal Dictionary<string, string> ExtendedTypes = new Dictionary<string, string>();
         internal Dictionary<string, CompositeType> GeneratedTypes = new Dictionary<string, CompositeType>();
 
         public SwaggerModeler(Settings settings) : base(settings)
         {
+            if (settings == null)
+            {
+                throw new ArgumentNullException("settings");
+            }
+
             AddCredentials = settings.AddCredentials;
             DefaultProtocol = TransferProtocolScheme.Http;
         }
@@ -56,9 +61,9 @@ namespace Microsoft.Rest.Modeler.Swagger
         /// <returns></returns>
         public override ServiceClient Build()
         {
-            Logger.LogInfo("Parsing swagger json file.");
+            Logger.LogInfo(Resources.ParsingSwagger);
             ServiceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
-            Logger.LogInfo("Generating client model from swagger model.");
+            Logger.LogInfo(Resources.GeneratingClient);
             InitializeClientModel();
             BuildCompositeTypes();
 
@@ -83,7 +88,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                     }
                     else
                     {
-                        Logger.LogWarning("Options HTTP verb is not supported.");
+                        Logger.LogWarning(Resources.OptionsNotSupported);
                     }
                 }
             }
@@ -184,7 +189,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                     var schema = ServiceDefinition.Definitions[schemaName];
                     schema.GetBuilder(this).BuildServiceType(schemaName);
 
-                    GetResolver().ExpandAllOf(schema);
+                    Resolver.ExpandAllOf(schema);
                     var parent = string.IsNullOrEmpty(schema.Extends.StripDefinitionPath())
                         ? null
                         : ServiceDefinition.Definitions[schema.Extends.StripDefinitionPath()];
@@ -273,6 +278,11 @@ namespace Microsoft.Rest.Modeler.Swagger
 
         public SwaggerParameter Unwrap(SwaggerParameter swaggerParameter)
         {
+            if (swaggerParameter == null)
+            {
+                throw new ArgumentNullException("swaggerParameter");
+            }
+
             // If referencing global parameters serializationProperty
             if (swaggerParameter.Reference != null)
             {
@@ -281,7 +291,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 {
                     throw new ArgumentException(
                         string.Format(CultureInfo.InvariantCulture, 
-                        "Reference specifies the definition {0} that does not exist.", referenceKey));
+                        Resources.DefinitionDoesNotExist, referenceKey));
                 }
 
                 swaggerParameter = ServiceDefinition.Parameters[referenceKey];
@@ -290,15 +300,15 @@ namespace Microsoft.Rest.Modeler.Swagger
             // Unwrap the schema if in "body"
             if (swaggerParameter.Schema != null && swaggerParameter.In == ParameterLocation.Body)
             {
-                swaggerParameter.Schema = GetResolver().Unwrap(swaggerParameter.Schema);
+                swaggerParameter.Schema = Resolver.Unwrap(swaggerParameter.Schema);
             }
 
             return swaggerParameter;
         }
 
-        public SchemaResolver GetResolver()
+        public SchemaResolver Resolver
         {
-            return new SchemaResolver(this);
+            get { return new SchemaResolver(this); }
         }
     }
 }

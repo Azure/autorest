@@ -41,7 +41,7 @@ namespace @Settings.Namespace
         @EmptyLine
         @foreach (var method in Model.MethodTemplateModels)
         {
-        @:@(Include<AzureMethodTemplate, AzureMethodTemplateModel>((AzureMethodTemplateModel)method))
+        @:@(Include(new AzureMethodTemplate(), (AzureMethodTemplateModel)method))
         @EmptyLine
         }
     }

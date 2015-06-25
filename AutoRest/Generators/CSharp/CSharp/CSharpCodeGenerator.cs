@@ -9,11 +9,11 @@ namespace Microsoft.Rest.Generator.CSharp
 {
     public class CSharpCodeGenerator : CodeGenerator
     {
-        private readonly CSharpCodeNamingFramework _namingFramework;
+        private readonly CSharpCodeNamer _namer;
 
         public CSharpCodeGenerator(Settings settings) : base(settings)
         {
-            _namingFramework = new CSharpCodeNamingFramework();
+            _namer = new CSharpCodeNamer();
         }
 
         public override string Name
@@ -44,8 +44,8 @@ namespace Microsoft.Rest.Generator.CSharp
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
             PopulateAdditionalProperties(serviceClient);
-            _namingFramework.NormalizeClientModel(serviceClient);
-            _namingFramework.ResolveNameCollisions(serviceClient, Settings.Namespace,
+            _namer.NormalizeClientModel(serviceClient);
+            _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
         }
 

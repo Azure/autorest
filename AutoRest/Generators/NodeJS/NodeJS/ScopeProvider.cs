@@ -14,17 +14,26 @@ namespace Microsoft.Rest.Generator.NodeJS
         /// Get a variable name that is unique in this scope.
         /// </summary>
         /// <param name="prefix">Prefix to use in creating variable.</param>
-        /// <param name="suffix">An integer counter to use as a variable suffix.</param>
         /// <returns>A variable name unique in this scope.</returns>
-        public string GetVariableName(string prefix, int suffix = 0)
+        public string GetVariableName(string prefix)
         {
-            string name = (suffix > 0) ? prefix + suffix : prefix;
+            if (_variables.Add(prefix))
+            {
+                return prefix;
+            }
+
+            return GetAlternateVariableName(prefix, 1);
+        }
+
+        private string GetAlternateVariableName(string prefix, int suffix)
+        {
+            string name = prefix + suffix;
             if (_variables.Add(name))
             {
                 return name;
             }
 
-            return GetVariableName(prefix, ++suffix);
+            return GetAlternateVariableName(prefix, ++suffix);
         }
     }
 }

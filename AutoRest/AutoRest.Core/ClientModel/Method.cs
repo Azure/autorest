@@ -1,12 +1,13 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using Microsoft.Rest.Generator.Utilities;
-using System;
-using System.Globalization;
 
 namespace Microsoft.Rest.Generator.ClientModel
 {
@@ -56,7 +57,7 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <summary>
         /// Gets or sets the method parameters.
         /// </summary>
-        public List<Parameter> Parameters { get; set; }
+        public IList<Parameter> Parameters { get; set; }
 
         /// <summary>
         /// Gets or sets request headers.

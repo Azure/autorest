@@ -37,7 +37,7 @@ function @(Model.MethodGroupType)(client) {
 @EmptyLine
 @foreach (var method in Model.MethodTemplateModels)
 {
-    @:@(Include<AzureMethodTemplate, AzureMethodTemplateModel>(method as AzureMethodTemplateModel))
+    @:@(Include(new AzureMethodTemplate(), method as AzureMethodTemplateModel))
     @EmptyLine
 }
 @EmptyLine

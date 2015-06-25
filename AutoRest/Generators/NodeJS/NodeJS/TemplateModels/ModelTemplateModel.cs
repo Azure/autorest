@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
@@ -27,6 +28,11 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         public string DeserializeProperty(string objectName, Property property)
         {
+            if (property == null || property.Type == null)
+            {
+                throw new ArgumentNullException("property");
+            }
+
             return property.Type.DeserializeType(_scope, objectName + "." + property.Name, "models");
         }
 
@@ -74,6 +80,11 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         public string ValidateProperty(string objectName, Property property)
         {
+            if (property == null)
+            {
+                throw new ArgumentNullException("property");
+            }
+
             var propertyName = string.Format(CultureInfo.InvariantCulture, 
                 "{0}['{1}']", objectName, property.Name);
 

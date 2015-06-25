@@ -67,8 +67,7 @@ namespace Microsoft.Rest.Generator.Cli
 
                         if (settings != null)
                         {
-                            // TODO: use resource string
-                            Console.WriteLine(@"Finished generating {0} code for {1}.",
+                            Console.WriteLine(Resources.GenerationComplete,
                                 settings.CodeGenerator, settings.Input);
                         }
 
@@ -78,8 +77,8 @@ namespace Microsoft.Rest.Generator.Cli
             }
             catch (Exception exception)
             {
-                Console.Error.WriteLine("error: {0}", exception.Message);
-                Console.Error.WriteLine("\t{0}", exception.StackTrace);
+                Console.Error.WriteLine(Resources.ConsoleErrorMessage, exception.Message);
+                Console.Error.WriteLine(Resources.ConsoleErrorStackTrace, exception.StackTrace);
             }
         }
 

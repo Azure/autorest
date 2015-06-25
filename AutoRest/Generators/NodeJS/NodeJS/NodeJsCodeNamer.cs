@@ -5,43 +5,125 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.CSharp.TemplateModels;
+using Microsoft.Rest.Generator.NodeJS.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
 using System.Globalization;
 
-namespace Microsoft.Rest.Generator.CSharp
+namespace Microsoft.Rest.Generator.NodeJS
 {
-    public class CSharpCodeNamingFramework : CodeNamingFramework
+    public class NodeJsCodeNamer : CodeNamer
     {
         private readonly HashSet<IType> _normalizedTypes;
 
         /// <summary>
         /// Initializes a new instance of CSharpCodeNamingFramework.
         /// </summary>
-        public CSharpCodeNamingFramework()
+        public NodeJsCodeNamer()
         {
+            // List retrieved from 
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Keywords
             new HashSet<string>
             {
-                "abstract", "as",       "async",      "await",     "base",
-                "bool",     "break",    "byte",       "case",      "catch",
-                "char",     "checked",  "class",      "const",     "continue",
-                "decimal",  "default",  "delegate",   "do",        "double",
-                "dynamic",  "else",     "enum",       "event",     "explicit",
-                "extern",   "false",    "finally",    "fixed",     "float",
-                "for",      "foreach",  "from",       "global",    "goto",
-                "if",       "implicit", "in",         "int",       "interface",
-                "internal", "is",       "lock",       "long",      "namespace",
-                "new",      "null",     "object",     "operator",  "out",
-                "override", "params",   "private",    "protected", "public",
-                "readonly", "ref",      "return",     "sbyte",     "sealed",
-                "short",    "sizeof",   "stackalloc", "static",    "string",
-                "struct",   "switch",   "this",       "throw",     "true",
-                "try",      "typeof",   "uint",       "ulong",     "unchecked",
-                "unsafe",   "ushort",   "using",       "virtual",  "void",
-                "volatile", "while",    "yield",       "var"
+                "array",
+                "await",
+                "abstract",
+                "boolean",
+                "buffer",
+                "break",
+                "byte",
+                "case",
+                "catch",
+                "char",
+                "class",
+                "const",
+                "continue",
+                "debugger",
+                "default",
+                "delete",
+                "do",
+                "double",
+                "date",
+                "else",
+                "enum",
+                "error",
+                "export",
+                "extends",
+                "false",
+                "final",
+                "finally",
+                "float",
+                "for",
+                "function",
+                "goto",
+                "if",
+                "implements",
+                "import",
+                "in",
+                "int",
+                "interface",
+                "instanceof",
+                "let",
+                "long",
+                "native",
+                "new",
+                "null",
+                "package",
+                "private",
+                "protected",
+                "public",
+                "return",
+                "short",
+                "static",
+                "super",
+                "switch",
+                "synchronized",
+                "this",
+                "throw",
+                "transient",
+                "true",
+                "try",
+                "typeof",
+                "util",
+                "var",
+                "void",
+                "volatile",
+                "while",
+                "with",
+                "yield"
             }.ForEach(s => ReservedWords.Add(s));
 
             _normalizedTypes = new HashSet<IType>();
+        }
+
+        public override string GetFieldName(string name)
+        {
+            return CamelCase(name);
+        }
+
+        public override string GetPropertyName(string name)
+        {
+            return CamelCase(name);
+        }
+
+        public override string GetMethodName(string name)
+        {
+            name = GetEscapedReservedName(name, "Method");
+            return CamelCase(name);
+        }
+
+        public override string GetEnumMemberName(string name)
+        {
+            return CamelCase(name);
+        }
+
+        public override string GetParameterName(string name)
+        {
+            return base.GetParameterName(GetEscapedReservedName(name, "Parameter"));
+        }
+
+        public override string GetVariableName(string name)
+        {
+            return base.GetVariableName(GetEscapedReservedName(name, "Variable"));
         }
 
         public override void NormalizeClientModel(ServiceClient client)
@@ -49,6 +131,10 @@ namespace Microsoft.Rest.Generator.CSharp
             base.NormalizeClientModel(client);
             foreach (var method in client.Methods)
             {
+                if (method.Group != null)
+                {
+                    method.Group = method.Group.ToCamelCase();
+                }
                 var scope = new ScopeProvider();
                 foreach (var parameter in method.Parameters)
                 {
@@ -63,6 +149,12 @@ namespace Microsoft.Rest.Generator.CSharp
             {
                 return null;
             }
+            var enumType = type as EnumType;
+            if (enumType != null && enumType.IsExpandable)
+            {
+                type = PrimaryType.String;
+            }
+
             // Using Any instead of Contains since object hash is bound to a property which is modified during normalization
             if (_normalizedTypes.Any(item => type.Equals(item)))
             {
@@ -91,8 +183,14 @@ namespace Microsoft.Rest.Generator.CSharp
                 return NormalizeEnumType(type as EnumType);
             }
 
+
             throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture, 
                 "Type {0} is not supported.", type.GetType()));
+        }
+
+        private IType NormalizeEnumType(EnumType enumType)
+        {
+            return enumType;
         }
 
         private IType NormalizeCompositeType(CompositeType compositeType)
@@ -110,71 +208,51 @@ namespace Microsoft.Rest.Generator.CSharp
             return compositeType;
         }
 
-        private IType NormalizeEnumType(EnumType enumType)
-        {
-            if (enumType.IsExpandable)
-            {
-                enumType.SerializedName = "string";
-                enumType.Name = "string";
-            }
-            else
-            {
-                enumType.SerializedName = enumType.Name;
-                enumType.Name = GetTypeName(enumType.Name) + "?";
-            }
-            for (int i = 0; i < enumType.Values.Count; i++)
-            {
-                enumType.Values[i].SerializedName = enumType.Values[i].Name;
-                enumType.Values[i].Name = GetEnumMemberName(enumType.Values[i].Name);
-            }
-            return enumType;
-        }
-
         private IType NormalizePrimaryType(PrimaryType primaryType)
         {
             if (primaryType == PrimaryType.Boolean)
             {
-                primaryType.Name = "bool?";
+                primaryType.Name = "Boolean";
             }
             else if (primaryType == PrimaryType.ByteArray)
             {
-                primaryType.Name = "byte[]";
+                primaryType.Name = "Buffer";
             }
             else if (primaryType == PrimaryType.Date)
             {
-                primaryType.Name = "DateTime?";
+                primaryType.Name = "Date";
             }
             else if (primaryType == PrimaryType.DateTime)
             {
-                primaryType.Name = "DateTime?";
+                primaryType.Name = "Date";
             }
             else if (primaryType == PrimaryType.Double)
             {
-                primaryType.Name = "double?";
+                primaryType.Name = "Number";
             }
             else if (primaryType == PrimaryType.Int)
             {
-                primaryType.Name = "int?";
+                primaryType.Name = "Number";
             }
             else if (primaryType == PrimaryType.Long)
             {
-                primaryType.Name = "long?";
+                primaryType.Name = "Number";
             }
             else if (primaryType == PrimaryType.Stream)
             {
-                primaryType.Name = "System.IO.Stream";
+                primaryType.Name = "Object";
             }
             else if (primaryType == PrimaryType.String)
             {
-                primaryType.Name = "string";
+                primaryType.Name = "String";
             }
             else if (primaryType == PrimaryType.TimeSpan)
             {
-                primaryType.Name = "TimeSpan?";
+                primaryType.Name = "TimeSpan";
             }
             else if (primaryType == PrimaryType.Object)
             {
-                primaryType.Name = "object";
+                primaryType.Name = "Object";
             }
 
             return primaryType;
@@ -183,14 +261,14 @@ namespace Microsoft.Rest.Generator.CSharp
         private IType NormalizeSequenceType(SequenceType sequenceType)
         {
             sequenceType.ElementType = NormalizeType(sequenceType.ElementType);
-            sequenceType.NameFormat = "IList<{0}>";
+            sequenceType.NameFormat = "Array";
             return sequenceType;
         }
 
         private IType NormalizeDictionaryType(DictionaryType dictionaryType)
         {
             dictionaryType.ValueType = NormalizeType(dictionaryType.ValueType);
-            dictionaryType.NameFormat = "IDictionary<string, {0}>";
+            dictionaryType.NameFormat = "Object";
             return dictionaryType;
         }
     }

@@ -12,11 +12,11 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
 {
     public class AzureNodeJSCodeGenerator : AzureCodeGenerator
     {
-        private readonly AzureNodeJSCodeNamingFramework _namingFramework;
+        private readonly AzureNodeJsCodeNamer _namer;
 
         public AzureNodeJSCodeGenerator(Settings settings) : base(settings)
         {
-            _namingFramework = new AzureNodeJSCodeNamingFramework();
+            _namer = new AzureNodeJsCodeNamer();
         }
 
         public override string Name
@@ -48,8 +48,8 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
             base.NormalizeClientModel(serviceClient);
-            _namingFramework.NormalizeClientModel(serviceClient);
-            _namingFramework.ResolveNameCollisions(serviceClient, Settings.Namespace,
+            _namer.NormalizeClientModel(serviceClient);
+            _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
         }
 

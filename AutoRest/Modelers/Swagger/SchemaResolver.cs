@@ -26,6 +26,11 @@ namespace Microsoft.Rest.Modeler.Swagger
         /// <param name="modeler">The swagger spec modeler</param>
         public SchemaResolver(SwaggerModeler modeler)
         {
+            if (modeler == null)
+            {
+                throw new ArgumentNullException("modeler");
+            }
+
             _modeler = modeler;
             _serviceDefinition = modeler.ServiceDefinition;
             _visitedReferences = new List<string>();
@@ -77,9 +82,14 @@ namespace Microsoft.Rest.Modeler.Swagger
         /// <param name="schema">The swagger schema to evaluate.</param>
         public void ExpandAllOf(Schema schema)
         {
+            if (schema == null)
+            {
+                throw new ArgumentNullException("schema");
+            }
+
             if (schema.AllOf != null)
             {
-                var references = schema.AllOf.FindAll(s => s.Reference != null);
+                var references = schema.AllOf.Where(s => s.Reference != null).ToList();
                 if (references.Count == 1)
                 {
                     if (schema.Extends != null)

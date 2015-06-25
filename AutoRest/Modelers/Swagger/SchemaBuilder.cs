@@ -31,7 +31,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 return Modeler.GeneratedTypes[serviceTypeName];
             }
 
-            _schema = Modeler.GetResolver().Unwrap(_schema);
+            _schema = Modeler.Resolver.Unwrap(_schema);
 
             // If primitive type
             if ((_schema.Type != null && _schema.Type != DataType.Object) ||

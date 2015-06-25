@@ -25,7 +25,7 @@
     <Compile Include="ClientModel\PrimaryType.cs" />
     <Compile Include="ClientModel\ParameterLocation.cs" />
     <Compile Include="ClientModel\Constraint.cs" />
-    <Compile Include="CodeNamingFramework.cs" />
+    <Compile Include="CodeNamer.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Modeler.cs" />
@@ -74,6 +74,11 @@
   <ItemGroup>
     <None Include="AutoRest.nuget.proj" />
     <None Include="AutoRest.nuspec" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\..\tools\CustomDictionary.xml">
+      <Link>CustomDictionary.xml</Link>
+    </CodeAnalysisDictionary>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

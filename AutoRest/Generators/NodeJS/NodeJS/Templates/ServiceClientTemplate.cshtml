@@ -80,7 +80,7 @@ util.inherits(@Model.Name, ServiceClient);
 @foreach (var method in Model.MethodTemplateModels)
 {
 @EmptyLine
-@:@(Include<MethodTemplate, MethodTemplateModel>(method))
+@:@(Include(new MethodTemplate(), method))
 }
 @EmptyLine
 module.exports = @Model.Name;

@@ -127,6 +127,11 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
         /// <returns>The code to validate the reference of the given type</returns>
         public static string ValidateType(this IType type, IScopeProvider scope, string valueReference)
         {
+            if (scope == null)
+            {
+                throw new ArgumentNullException("scope");
+            }
+
             CompositeType model = type as CompositeType;
             SequenceType sequence = type as SequenceType;
             DictionaryType dictionary = type as DictionaryType;

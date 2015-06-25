@@ -5,6 +5,7 @@ using System;
 using System.Globalization;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
+using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger.Model;
 
 namespace Microsoft.Rest.Modeler.Swagger
@@ -15,8 +16,8 @@ namespace Microsoft.Rest.Modeler.Swagger
     /// </summary>
     public class ObjectBuilder
     {
-        protected SwaggerObject SwaggerObject;
-        protected SwaggerModeler Modeler;
+        protected SwaggerObject SwaggerObject { get; set; }
+        protected SwaggerModeler Modeler { get; set; }
 
         public ObjectBuilder(SwaggerObject swaggerObject, SwaggerModeler modeler)
         {

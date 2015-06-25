@@ -159,11 +159,11 @@ namespace Microsoft.Rest.Generator
         /// </summary>
         /// <typeparam name="TU">Template type</typeparam>
         /// <typeparam name="TV">Template model type</typeparam>
+        /// <param name="template">Template</param>
         /// <param name="templateModel">Template model</param>
         /// <returns></returns>
-        protected string Include<TU, TV>(TV templateModel) where TU : Template<TV>, new()
+        protected string Include<TU, TV>(TU template, TV templateModel) where TU : Template<TV>, new()
         {
-            TU template = new TU();
             template.Model = templateModel;
             template.Settings = Settings;
             return template.ToString();

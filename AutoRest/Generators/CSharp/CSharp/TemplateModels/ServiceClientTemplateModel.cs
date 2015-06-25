@@ -41,7 +41,7 @@ namespace Microsoft.Rest.Generator.CSharp
             }
         }
 
-        public string RequiredContructorParameters
+        public string RequiredConstructorParameters
         {
             get
             {

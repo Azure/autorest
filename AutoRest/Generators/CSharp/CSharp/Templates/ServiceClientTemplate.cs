@@ -409,7 +409,7 @@ Write(WrapComment("/// ", Model.Documentation));
 #line hidden
             WriteLiteral("(");
 #line 133 "ServiceClientTemplate.cshtml"
-                           Write(Model.RequiredContructorParameters);
+                           Write(Model.RequiredConstructorParameters);
 
 #line default
 #line hidden
@@ -517,7 +517,7 @@ Write(WrapComment("/// ", Model.Documentation));
 #line hidden
             WriteLiteral("(Uri baseUri, ");
 #line 165 "ServiceClientTemplate.cshtml"
-                                        Write(Model.RequiredContructorParameters);
+                                        Write(Model.RequiredConstructorParameters);
 
 #line default
 #line hidden
@@ -742,7 +742,7 @@ Write(WrapComment("/// ", Model.Documentation));
 
             WriteLiteral("        ");
 #line 226 "ServiceClientTemplate.cshtml"
-      Write(Include<MethodTemplate, MethodTemplateModel>(method));
+      Write(Include(new MethodTemplate(), method));
 
 #line default
 #line hidden

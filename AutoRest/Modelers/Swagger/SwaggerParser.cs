@@ -13,10 +13,15 @@ using System.Globalization;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
-    public class SwaggerParser
+    public static class SwaggerParser
     {
         public static ServiceDefinition Load(string path, IFileSystem fileSystem)
         {
+            if (fileSystem == null)
+            {
+                throw new ArgumentNullException("fileSystem");
+            }
+
             return SwaggerParser.Parse(fileSystem.ReadFileAsText(path));
         }
 

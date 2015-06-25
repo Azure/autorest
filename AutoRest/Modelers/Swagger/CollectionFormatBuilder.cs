@@ -18,6 +18,11 @@ namespace Microsoft.Rest.Modeler.Swagger
             SwaggerParameter currentSwaggerParam,
             StringBuilder paramNameBuilder)
         {
+            if (currentSwaggerParam == null)
+            {
+                throw new ArgumentNullException("currentSwaggerParam");
+            }
+
             bool hasCollectionFormat = currentSwaggerParam.CollectionFormat != CollectionFormat.None;
 
             if (currentSwaggerParam.Type == DataType.Array && !hasCollectionFormat)
@@ -31,6 +36,11 @@ namespace Microsoft.Rest.Modeler.Swagger
                 AddCollectionFormat(currentSwaggerParam, paramNameBuilder);
                 if (currentSwaggerParam.In == ParameterLocation.Path)
                 {
+                    if (method == null || method.Url == null)
+                    {
+                       throw new ArgumentNullException("method"); 
+                    }
+
                     method.Url = method.Url.Replace(
                         string.Format(CultureInfo.InvariantCulture, "{0}", currentSwaggerParam.Name),
                         string.Format(CultureInfo.InvariantCulture, "{0}", paramNameBuilder));

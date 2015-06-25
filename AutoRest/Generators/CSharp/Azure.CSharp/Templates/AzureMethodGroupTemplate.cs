@@ -165,7 +165,7 @@ Write(EmptyLine);
 
             WriteLiteral("        ");
 #line 44 "AzureMethodGroupTemplate.cshtml"
-      Write(Include<AzureMethodTemplate, AzureMethodTemplateModel>((AzureMethodTemplateModel)method));
+      Write(Include(new AzureMethodTemplate(), (AzureMethodTemplateModel)method));
 
 #line default
 #line hidden

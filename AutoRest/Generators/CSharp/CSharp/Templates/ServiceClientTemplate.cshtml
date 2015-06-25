@@ -130,7 +130,7 @@ namespace @Settings.Namespace
         @:/// <param name='handlers'>
         @:/// Optional. The delegating handlers to add to the http client pipeline.
         @:/// </param>
-        @:public @(Model.Name)(@(Model.RequiredContructorParameters), params DelegatingHandler[] handlers) : this(handlers)
+        @:public @(Model.Name)(@(Model.RequiredConstructorParameters), params DelegatingHandler[] handlers) : this(handlers)
         @:{
         foreach (var param in parameters)
         {
@@ -162,7 +162,7 @@ namespace @Settings.Namespace
         @:/// <param name='handlers'>
         @:/// Optional. The delegating handlers to add to the http client pipeline.
         @:/// </param>
-        @:public @(Model.Name)(Uri baseUri, @(Model.RequiredContructorParameters), params DelegatingHandler[] handlers) : this(handlers)
+        @:public @(Model.Name)(Uri baseUri, @(Model.RequiredConstructorParameters), params DelegatingHandler[] handlers) : this(handlers)
         @:{
         @:    if (baseUri == null)
         @:    {
@@ -223,7 +223,7 @@ namespace @Settings.Namespace
     
         @foreach (var method in Model.MethodTemplateModels)
         {
-        @:@(Include<MethodTemplate, MethodTemplateModel>(method))
+        @:@(Include(new MethodTemplate(), method))
         @EmptyLine
         @:
         }

@@ -71,7 +71,7 @@ using System.Linq
 #line hidden
 
 #line 13 "AzureMethodTemplate.cshtml"
-Write(Include<MethodTemplate, MethodTemplateModel>(Model));
+Write(Include( new MethodTemplate(), Model as MethodTemplateModel));
 
 #line default
 #line hidden

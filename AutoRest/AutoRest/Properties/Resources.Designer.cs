@@ -61,6 +61,33 @@ namespace Microsoft.Rest.Generator.Cli.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to error: {0}.
+        /// </summary>
+        internal static string ConsoleErrorMessage {
+            get {
+                return ResourceManager.GetString("ConsoleErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to \t{0}.
+        /// </summary>
+        internal static string ConsoleErrorStackTrace {
+            get {
+                return ResourceManager.GetString("ConsoleErrorStackTrace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Finished generating {0} code for {1}..
+        /// </summary>
+        internal static string GenerationComplete {
+            get {
+                return ResourceManager.GetString("GenerationComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to #AutoRest Command Line Interface Documentation
         ///
         ///##Syntax
@@ -93,15 +120,14 @@ namespace Microsoft.Rest.Generator.Cli.Properties {
         ///   Looks up a localized string similar to Microsoft (R) AutoRest $version$
         ///Copyright (C) Microsoft Corporation. All rights reserved.
         ///
-        ///Syntax         : $syntax$
+        ///Usage: $syntax$
         ///
-        ///Parameters     :
+        ///Parameters:
         ///$parameters-start$
-        ///        -$parameter$ : $parameter-desc$
+        ///  -$parameter$: $parameter-desc$
         ///$parameters-end$
         ///
-        ///Examples       :
-        ///
+        ///Examples:
         ///$examples-start$
         ///  $example-desc$
         ///  &gt;$example$

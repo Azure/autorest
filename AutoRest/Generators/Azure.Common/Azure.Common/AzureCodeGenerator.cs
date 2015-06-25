@@ -80,7 +80,7 @@ namespace Microsoft.Rest.Generator.Azure
         /// Set default response to CloudError if not defined explicitly.
         /// </summary>
         /// <param name="serviceClient"></param>
-        public static void SetDefaultResponses(ServiceClient serviceClient)
+        internal static void SetDefaultResponses(ServiceClient serviceClient)
         {
             // Create CloudError if not already defined
             CompositeType cloudError = serviceClient.ModelTypes.FirstOrDefault(c =>
@@ -108,11 +108,12 @@ namespace Microsoft.Rest.Generator.Azure
         /// Removes common properties including subscriptionId and apiVersion from method signatures.
         /// </summary>
         /// <param name="serviceClient"></param>
-        public static void RemoveCommonPropertiesFromMethods(ServiceClient serviceClient)
+        internal static void RemoveCommonPropertiesFromMethods(ServiceClient serviceClient)
         {
             foreach (var method in serviceClient.Methods)
             {
-                method.Parameters.RemoveAll(
+                var parameters = new List<Parameter>(method.Parameters);
+                parameters.RemoveAll(
                     p => (!p.Extensions.ContainsKey(GlobalParameter) ||
                          (bool)p.Extensions[GlobalParameter]) 
                          &&
@@ -120,6 +121,7 @@ namespace Microsoft.Rest.Generator.Azure
                          p.Name.Equals("subscriptionId", StringComparison.OrdinalIgnoreCase)) ||
                         (p.Location == ParameterLocation.Query &&
                          p.Name.Replace("-", "").Equals("apiversion", StringComparison.OrdinalIgnoreCase))));
+                method.Parameters = parameters;
             }
         }
 
@@ -127,7 +129,7 @@ namespace Microsoft.Rest.Generator.Azure
         /// Converts Azure Parameters to regular parameters.
         /// </summary>
         /// <param name="serviceClient">Service client</param>
-        public static void ParseODataExtension(ServiceClient serviceClient)
+        internal static void ParseODataExtension(ServiceClient serviceClient)
         {
             foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(ODataExtension)))
             {
@@ -168,7 +170,7 @@ namespace Microsoft.Rest.Generator.Azure
         /// Creates long running operation methods.
         /// </summary>
         /// <param name="serviceClient"></param>
-        public static void AddLongRunningOperations(ServiceClient serviceClient)
+        internal static void AddLongRunningOperations(ServiceClient serviceClient)
         {
             for (int i = 0; i < serviceClient.Methods.Count; i++)
             {
@@ -192,7 +194,7 @@ namespace Microsoft.Rest.Generator.Azure
         /// Creates azure specific properties.
         /// </summary>
         /// <param name="serviceClient"></param>
-        public static void AddAzureProperties(ServiceClient serviceClient)
+        internal static void AddAzureProperties(ServiceClient serviceClient)
         {
             serviceClient.Properties.Add(new Property
             {
@@ -225,7 +227,7 @@ namespace Microsoft.Rest.Generator.Azure
         /// Flattens the Resource Properties.
         /// </summary>
         /// <param name="serviceClient"></param>
-        public static void FlattenResourceProperties(ServiceClient serviceClient)
+        internal static void FlattenResourceProperties(ServiceClient serviceClient)
         {
             HashSet<string> typesToDelete = new HashSet<string>();
             foreach (var compositeType in serviceClient.ModelTypes.ToArray())
@@ -271,7 +273,7 @@ namespace Microsoft.Rest.Generator.Azure
         /// Adds ListNext() method for each List method with x-ms-pageable extension.
         /// </summary>
         /// <param name="serviceClient"></param>
-        public static void AddPageableMethod(ServiceClient serviceClient)
+        internal static void AddPageableMethod(ServiceClient serviceClient)
         {
             foreach (var method in serviceClient.Methods.ToArray())
             {

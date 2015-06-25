@@ -55,7 +55,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
         public virtual string Pattern { get; set; }
 
-        public virtual List<string> Enum { get; set; }
+        public virtual IList<string> Enum { get; set; }
 
         public ObjectBuilder GetBuilder(SwaggerModeler swaggerSpecBuilder)
         {

@@ -1,5 +1,64 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
@@ -61,6 +120,9 @@
   <data name="CircularReference" xml:space="preserve">
     <value>Circular reference detected: {0}</value>
   </data>
+  <data name="DefinitionDoesNotExist" xml:space="preserve">
+    <value>Reference specifies the definition {0} that does not exist.</value>
+  </data>
   <data name="DuplicateOperationIdException" xml:space="preserve">
     <value>Found operation objects with duplicate operationId '{0}'. OperationId must be unique among all operations described in the API.</value>
   </data>
@@ -69,6 +131,9 @@
   </data>
   <data name="ExceededMaximumReferenceDepth" xml:space="preserve">
     <value>Reached Maximum reference depth when resolving reference '{0}'.</value>
+  </data>
+  <data name="GeneratingClient" xml:space="preserve">
+    <value>Generating client model from swagger model.</value>
   </data>
   <data name="IncompatibleTypesInBaseSchema" xml:space="preserve">
     <value>Found incompatible property types {1}, {2} for property '{0}' in schema inheritance chain {3}</value>
@@ -96,6 +161,12 @@
   </data>
   <data name="OperationIdMissing" xml:space="preserve">
     <value>OperationId is required for all operations.</value>
+  </data>
+  <data name="OptionsNotSupported" xml:space="preserve">
+    <value>Options HTTP verb is not supported.</value>
+  </data>
+  <data name="ParsingSwagger" xml:space="preserve">
+    <value>Parsing swagger json file.</value>
   </data>
   <data name="ReferenceDoesNotExist" xml:space="preserve">
     <value>Reference path '{0}' does not exist in the definition section of the Swagger document.</value>
