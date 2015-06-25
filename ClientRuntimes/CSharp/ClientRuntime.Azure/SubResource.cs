@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using Newtonsoft.Json;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.Azure
 {
