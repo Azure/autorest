@@ -46,6 +46,11 @@ namespace Microsoft.Rest.Generator.CSharp
 
         public override void NormalizeClientModel(ServiceClient client)
         {
+            if (client == null)
+            {
+                throw new ArgumentNullException("client");
+            }
+
             base.NormalizeClientModel(client);
             foreach (var method in client.Methods)
             {

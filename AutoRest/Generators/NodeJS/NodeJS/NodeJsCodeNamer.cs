@@ -128,6 +128,11 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         public override void NormalizeClientModel(ServiceClient client)
         {
+            if (client == null)
+            {
+                throw new ArgumentNullException("client");
+            }
+
             base.NormalizeClientModel(client);
             foreach (var method in client.Methods)
             {

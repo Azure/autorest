@@ -31,6 +31,11 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
         /// <returns>A reference to the formatted parameter value</returns>
         public static string GetFormattedReferenceValue(this Parameter parameter)
         {
+            if (parameter == null)
+            {
+                throw new ArgumentNullException("parameter");
+            }
+
             SequenceType sequence = parameter.Type as SequenceType;
             if (sequence == null)
             {
@@ -135,6 +140,11 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
         /// <returns>The Javascript Array as a string</returns>
         public static string GetEnumValuesArray(this EnumType type)
         {
+            if (type == null)
+            {
+                throw new ArgumentNullException("type");
+            }
+
             return string.Format(CultureInfo.InvariantCulture, 
                 "[ {0} ]", string.Join(", ",
                 type.Values.Select(p => string.Format(CultureInfo.InvariantCulture, "'{0}'", p.Name))));
@@ -142,6 +152,11 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 
         public static string EscapeSingleQuotes(this string valueReference)
         {
+            if (valueReference == null)
+            {
+                throw new ArgumentNullException("valueReference");
+            }
+
             return valueReference.Replace('\'', '"');
         }
 

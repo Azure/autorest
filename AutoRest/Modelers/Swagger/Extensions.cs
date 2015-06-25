@@ -20,6 +20,11 @@ namespace Microsoft.Rest.Modeler.Swagger
 
         public static HttpMethod ToHttpMethod(this string verb)
         {
+            if (verb == null)
+            {
+                throw new ArgumentNullException("verb");
+            }
+
             switch (verb.ToLower(CultureInfo.InvariantCulture))
             {
                 case "get":

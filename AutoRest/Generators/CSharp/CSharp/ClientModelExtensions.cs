@@ -27,6 +27,11 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
         /// <returns>A reference to the formatted parameter value</returns>
         public static string GetFormattedReferenceValue(this Parameter parameter, string clientReference)
         {
+            if (parameter == null)
+            {
+                throw new ArgumentNullException("parameter");
+            }
+
             SequenceType sequence = parameter.Type as SequenceType;
             if (sequence == null)
             {
