@@ -494,7 +494,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get float array value [0.0, null, 1.2e20]
+            /// Get float array value [0.0, null, -1.2e20]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -505,7 +505,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get float array value [0.0, null, 1.2e20]
+            /// Get float array value [0.0, null, -1.2e20]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -601,7 +601,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get float array value [0.0, null, 1.2e20]
+            /// Get float array value [0.0, null, -1.2e20]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -612,7 +612,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get float array value [0.0, null, 1.2e20]
+            /// Get float array value [0.0, null, -1.2e20]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method

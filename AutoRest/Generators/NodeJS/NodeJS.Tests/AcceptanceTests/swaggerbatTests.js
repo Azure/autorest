@@ -731,7 +731,7 @@ describe('nodejs', function () {
           testClient.arrayModel.getDateValid(function (error, result) {
             should.not.exist(error);
             assert.deepEqual(result.body, testArray);
-            //TODO, 4213536
+            //TODO, 4213536: Fix date serialization
             //testClient.arrayModel.putDateValid(testArray, function (error, result) {
             //  should.not.exist(error);
             testClient.arrayModel.getDateInvalidNull(function (error, result) {

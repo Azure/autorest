@@ -10,7 +10,7 @@ var scenarioMap = {
   "1000000": "Positive",
   "-1000000": "Negative",
   "10000000000": "Positive",
-  "-10000000000": "Positive",
+  "-10000000000": "Negative",
   "1.034E+20": "Positive",
   "-1.034E-20": "Negative",
   "9999999.999": "Positive",
@@ -222,7 +222,7 @@ var queries = function (coverage) {
     } else if (type === 'datetime') {
       if (utils.coerceDate(wireParameter) === scenario) {
         console.log("Success!\n");
-        coverage['UrlPaths' + test]++;
+        coverage['UrlQueries' + test]++;
         res.status(200).end();
       } else {
         utils.send400(res, next, 'Failed date-time scenario \"' + utils.coerceDate(wireParameter) + '\" does not match expected date string \"' + scenario +'\"');

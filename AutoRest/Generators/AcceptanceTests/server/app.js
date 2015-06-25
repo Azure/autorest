@@ -30,6 +30,7 @@ var app = express();
 var util = require('util');
 
 var azurecoverage = {};
+var optionalCoverage = {};
 var coverage = {
   "getArrayNull": 0,
   "getArrayEmpty": 0,
@@ -392,7 +393,7 @@ app.use('/queries', new queries(coverage).router);
 app.use('/pathitem', new pathitem(coverage).router);
 app.use('/header', new header(coverage).router);
 app.use('/reqopt', new reqopt(coverage).router);
-app.use('/http', new httpResponses(coverage).router);
+app.use('/http', new httpResponses(coverage, optionalCoverage).router);
 app.use('/lro', new lros(azurecoverage).router);
 app.use('/paging', new paging(azurecoverage).router);
 app.use('/azure/resource-flatten', new resourceFlatten(azurecoverage).router);

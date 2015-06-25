@@ -31,12 +31,10 @@ using Fixtures.SwaggerBatUrl.Models;
 using Fixtures.SwaggerBatHeader;
 using Fixtures.SwaggerBatHeader.Models;
 using Fixtures.SwaggerBatRequiredOptional;
-using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger.Tests;
 using Newtonsoft.Json;
 using Xunit;
 using System.Text;
-using Xunit.Abstractions;
 using Error = Fixtures.SwaggerBatHttp.Models.Error;
 
 namespace Microsoft.Rest.Generator.CSharp.Tests
@@ -46,12 +44,9 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         "AutoRest.Generator.CSharp.Tests")]
     public class CSharpSwaggerBat : IClassFixture<ServiceController>
     {
-        private readonly ITestOutputHelper _output;
-
-        public CSharpSwaggerBat(ServiceController data, ITestOutputHelper output)
+        public CSharpSwaggerBat(ServiceController data)
         {
             this.Fixture = data;
-            _output = output;
         }
 
         public ServiceController Fixture { get; set; }
@@ -311,6 +306,26 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             };
             Assert.True(listDictionary3.SequenceEqual(client.Array.GetDictionaryItemEmpty(),
                 new DictionaryEqualityComparer<string>()));
+
+            Assert.Null(client.Array.GetArrayNull());
+            Assert.Throws<JsonSerializationException>(() => client.Array.GetInvalid());
+            Assert.True(client.Array.GetBooleanInvalidNull().SequenceEqual(new List<bool?> {true, null, false}));
+            Assert.Throws<JsonSerializationException>(() => client.Array.GetBooleanInvalidString());
+            Assert.True(client.Array.GetIntInvalidNull().SequenceEqual(new List<int?> {1, null, 0}));
+            Assert.Throws<JsonReaderException>(() => client.Array.GetIntInvalidString());
+            Assert.True(client.Array.GetLongInvalidNull().SequenceEqual(new List<long?> {1, null, 0}));
+            Assert.Throws<JsonSerializationException>(() => client.Array.GetLongInvalidString());
+            Assert.True(client.Array.GetFloatInvalidNull().SequenceEqual(new List<double?> {0.0, null, -1.2e20}));
+            Assert.Throws<JsonSerializationException>(() => client.Array.GetFloatInvalidString());
+            Assert.True(client.Array.GetDoubleInvalidNull().SequenceEqual(new List<double?> {0.0, null, -1.2e20}));
+            Assert.Throws<JsonSerializationException>(() => client.Array.GetDoubleInvalidString());
+            Assert.True(client.Array.GetStringWithInvalid().SequenceEqual(new List<string> {"foo", "123", "foo2"}));
+            var dateNullArray = client.Array.GetDateInvalidNull();
+            Assert.True(dateNullArray.SequenceEqual(new List<DateTime?> {DateTime.Parse("2012-01-01"), null, DateTime.Parse("1776-07-04")}));
+            Assert.Throws<JsonReaderException>(() => client.Array.GetDateInvalidChars());
+            var dateTimeNullArray = client.Array.GetDateTimeInvalidNull();
+            Assert.True(dateTimeNullArray.SequenceEqual(new List<DateTime?> {DateTime.Parse("2000-12-01t00:00:01z").ToUniversalTime(), null}));
+            Assert.Throws<JsonReaderException>(() => client.Array.GetDateTimeInvalidChars());
         }
 
         [Fact]
@@ -1247,14 +1262,11 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             var client =
                 new AutoRestReportService(Fixture.Uri);
             var report = client.GetReport();
+            var skipped = report.Where(p => p.Value == 0).Select(p => p.Key);
             float totalTests = report.Count;
             float executedTests = report.Values.Count(v => v > 0);
-            if (executedTests / totalTests < 0.7)
-            {
-                report.ForEach(r => _output.WriteLine(string.Format("{0}:{1}.", r.Key, r.Value)));
-                _output.WriteLine(string.Format("The test coverage is {0}/{1}.", executedTests, totalTests));
-                Assert.True(executedTests / totalTests > 0.7);
-            }
+            Trace.WriteLine(string.Format("The test coverage is {0}/{1}.", executedTests, totalTests));
+            Assert.True(executedTests/totalTests > 0.8);
         }
 
         private static void EnsureStatusCode(HttpStatusCode expectedStatusCode, Func<Task<HttpOperationResponse>> operation)

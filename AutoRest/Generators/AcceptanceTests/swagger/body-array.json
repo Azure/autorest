@@ -531,15 +531,15 @@
         "/array/prim/float/0.0-null-1.2e20": {
             "get": {
                 "operationId": "array_getFloatInvalidNull",
-                "description": "Get float array value [0.0, null, 1.2e20]",
+                "description": "Get float array value [0.0, null, -1.2e20]",
                 "tags": [
                     "Array Operations"
                 ],
                 "responses": {
                     "200": {
-                        "description": "The array value [0.0, null, 1.2e20]",
+                        "description": "The array value [0.0, null, -1.2e20]",
                         "schema": {
-                            "description": "The array value [0.0, null, 1.2e20]",
+                            "description": "The array value [0.0, null, -1.2e20]",
                             "type": "array",
                             "items":  {
                                 "type":  "number",
@@ -648,15 +648,15 @@
         "/array/prim/double/0.0-null-1.2e20": {
             "get": {
                 "operationId": "array_getDoubleInvalidNull",
-                "description": "Get float array value [0.0, null, 1.2e20]",
+                "description": "Get float array value [0.0, null, -1.2e20]",
                 "tags": [
                     "Array Operations"
                 ],
                 "responses": {
                     "200": {
-                        "description": "The array value [0.0, null, 1.2e20]",
+                        "description": "The array value [0.0, null, -1.2e20]",
                         "schema": {
-                            "description": "The array value [0.0, null, 1.2e20]",
+                            "description": "The array value [0.0, null, -1.2e20]",
                             "type": "array",
                             "items":  {
                                 "type":  "number",
