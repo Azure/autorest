@@ -303,10 +303,12 @@ var getMultipleResponseScenarioName = function( scenario, code, type) {
     }
 };
 
-var httpResponses = function(coverage) {
+
+
+var httpResponses = function(coverage, optionalCoverage) {
     coverage['HttpSuccess200Head'] = 0;
     coverage['HttpSuccess200Get'] = 0;
-    coverage['HttpSuccess200Options'] = 0;
+    optionalCoverage['HttpSuccess200Options'] = 0;
     coverage['HttpSuccess200Put'] = 0;
     coverage['HttpSuccess200Post'] = 0;
     coverage['HttpSuccess200Patch'] = 0;
@@ -334,7 +336,7 @@ var httpResponses = function(coverage) {
     coverage['HttpRedirect303Post'] = 0;
     coverage['HttpRedirect307Head'] = 0;
     coverage['HttpRedirect307Get'] = 0;
-    coverage['HttpRedirect307Options'] = 0;
+    optionalCoverage['HttpRedirect307Options'] = 0;
     coverage['HttpRedirect307Put'] = 0;
     coverage['HttpRedirect307Post'] = 0;
     coverage['HttpRedirect307Patch'] = 0;
@@ -342,7 +344,7 @@ var httpResponses = function(coverage) {
     coverage['HttpRetry408Head'] = 0;
     coverage['HttpRetry500Put'] = 0;
     coverage['HttpRetry500Patch'] = 0;
-    coverage['HttpRetry502Options'] = 0;
+    optionalCoverage['HttpRetry502Options'] = 0;
     coverage['HttpRetry502Get'] = 0;
     coverage['HttpRetry503Post'] = 0;
     coverage['HttpRetry503Delete'] = 0;
@@ -350,7 +352,7 @@ var httpResponses = function(coverage) {
     coverage['HttpRetry504Patch'] = 0;
     coverage['HttpClientFailure400Head'] = 0;
     coverage['HttpClientFailure400Get'] = 0;
-    coverage['HttpClientFailure400Options'] = 0;
+    optionalCoverage['HttpClientFailure400Options'] = 0;
     coverage['HttpClientFailure400Put'] = 0;
     coverage['HttpClientFailure400Post'] = 0;
     coverage['HttpClientFailure400Patch'] = 0;
@@ -358,7 +360,7 @@ var httpResponses = function(coverage) {
     coverage['HttpClientFailure401Head'] = 0;
     coverage['HttpClientFailure402Get'] = 0;
     coverage['HttpClientFailure403Get'] = 0;
-    coverage['HttpClientFailure403Options'] = 0;
+    optionalCoverage['HttpClientFailure403Options'] = 0;
     coverage['HttpClientFailure404Put'] = 0;
     coverage['HttpClientFailure405Patch'] = 0;
     coverage['HttpClientFailure406Post'] = 0;
@@ -367,7 +369,7 @@ var httpResponses = function(coverage) {
     coverage['HttpClientFailure410Head'] = 0;
     coverage['HttpClientFailure411Get'] = 0;
     coverage['HttpClientFailure412Get'] = 0;
-    coverage['HttpClientFailure412Options'] = 0;
+    optionalCoverage['HttpClientFailure412Options'] = 0;
     coverage['HttpClientFailure413Put'] = 0;
     coverage['HttpClientFailure414Patch'] = 0;
     coverage['HttpClientFailure415Post'] = 0;
@@ -413,12 +415,20 @@ var httpResponses = function(coverage) {
     coverage['ResponsesScenarioH400NonMatchingInvalid'] = 0;
     coverage['ResponsesScenarioH202NonMatchingModel'] = 0;
     coverage['ResponsesScenarioEmptyErrorBody'] = 0;
+    
+    var updateScenarioCoverage = function(scenario, method) {
+        if (method.toLowerCase() === 'options') {
+            optionalCoverage[scenario]++
+        } else {
+            coverage[scenario]++;
+        }
+    };
 
     router.all('/success/:code', function(req, res, next) {
         var scenario = getHttpScenarioName("Success", req.method, req.params.code);
         var code = JSON.parse(req.params.code);
         if (scenario !== null) {
-            coverage[scenario]++;
+            updateScenarioCoverage(scenario, req.method);
             if (req.method === 'GET' || req.method === 'OPTIONS') {
                 res.status(code).end('true');
             } else {
@@ -451,7 +461,7 @@ var httpResponses = function(coverage) {
     router.all('/redirect/:code', function(req, res, next) {
         var scenario = getHttpScenarioName("Redirect", req.method, req.params.code);
         if (scenario !== null) {
-            coverage[scenario]++;
+            updateScenarioCoverage(scenario, req.method);
             status = (JSON.parse(req.params.code));
             if ((req.params.code === '301' || req.params.code === '302')  && req.method !== 'HEAD' && req.method !== 'GET') {
                 res.append('Location', '/http/failure/500');
@@ -475,7 +485,7 @@ var httpResponses = function(coverage) {
     router.all('/failure/:type/:code', function(req, res, next) {
         var scenario = getHttpScenarioName("Failure", req.method, req.params.code);
         if (scenario !== null) {
-            coverage[scenario]++;
+            updateScenarioCoverage(scenario, req.method);
             res.status(JSON.parse(req.params.code)).end();
         }
         else {
@@ -488,7 +498,7 @@ var httpResponses = function(coverage) {
        var code = JSON.parse(req.params.code);
         if (scenario !== null) {
             if (isRetryRequest(req, code, req.method.toLowerCase())) {
-               coverage[scenario]++;
+               updateScenarioCoverage(scenario, req.method);
                removeRetryTracker(res).status(200).end();
             } else {
                utils.sendError(code, addRetryTracker(res, code, req.method.toLowerCase()), next, "Retry scenario initial request");

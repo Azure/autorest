@@ -1504,7 +1504,7 @@ ArrayModel.prototype.putFloatValid = function (arrayBody, callback) {
 };
 
 /**
- * Get float array value [0.0, null, 1.2e20]
+ * Get float array value [0.0, null, -1.2e20]
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
@@ -1833,7 +1833,7 @@ ArrayModel.prototype.putDoubleValid = function (arrayBody, callback) {
 };
 
 /**
- * Get float array value [0.0, null, 1.2e20]
+ * Get float array value [0.0, null, -1.2e20]
  * @param {function} callback
  *
  * @returns {Stream} The Response stream

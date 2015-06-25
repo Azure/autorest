@@ -169,13 +169,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CSharpSwaggerBat.cs" />
     <Compile Include="Expected\Mirror.RecursiveTypes.Cs\IRecursiveTypesAPI.cs" />
     <Compile Include="Expected\Mirror.RecursiveTypes.Cs\Models\Error.cs" />
     <Compile Include="Expected\Mirror.RecursiveTypes.Cs\Models\Product.cs" />
     <Compile Include="Expected\Mirror.RecursiveTypes.Cs\RecursiveTypesAPI.cs" />
     <Compile Include="Expected\Mirror.RecursiveTypes.Cs\RecursiveTypesAPIExtensions.cs" />
     <Compile Include="Utilities\Comparers.cs" />
-    <Compile Include="CSharpSwaggerBat.cs" />
     <Compile Include="CSharpCodeNamingFrameworkTests.cs" />
     <Compile Include="Expected\Mirror.Polymorphic.Cs\IPolymorphicAnimalStore.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

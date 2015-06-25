@@ -150,7 +150,7 @@ namespace Fixtures.SwaggerBatBodyArray
         /// </param>
         Task<HttpOperationResponse> PutFloatValidWithOperationResponseAsync(IList<double?> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Get float array value [0.0, null, 1.2e20]
+        /// Get float array value [0.0, null, -1.2e20]
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -180,7 +180,7 @@ namespace Fixtures.SwaggerBatBodyArray
         /// </param>
         Task<HttpOperationResponse> PutDoubleValidWithOperationResponseAsync(IList<double?> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Get float array value [0.0, null, 1.2e20]
+        /// Get float array value [0.0, null, -1.2e20]
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
