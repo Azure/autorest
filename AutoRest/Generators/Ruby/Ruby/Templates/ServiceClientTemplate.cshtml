@@ -1,0 +1,69 @@
+﻿@using Microsoft.Rest.Generator.Ruby
+@using Microsoft.Rest.Generator.Ruby.Templates
+@using Microsoft.Rest.Generator.Utilities
+@using System.Linq
+@using Microsoft.Rest.Generator.Ruby.TemplateModels
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Ruby.ServiceClientTemplateModel>
+@Header("# ")
+@EmptyLine
+module @Settings.Namespace
+  #
+  @WrapComment("# ", Model.Documentation)
+  #
+  class @Model.Name < @Model.BaseType
+    # @@return [String] the base URI of the service.
+    attr_accessor :base_url
+@EmptyLine
+
+@foreach (var property in Model.Properties)
+{
+    @:@WrapComment("# ", string.Format("@return {0}{1}", property.Type.GetYardDocumentation(), property.Documentation))
+    @:@(property.IsReadOnly ? "attr_reader" : "attr_accessor") :@property.Name
+@EmptyLine
+}
+
+@foreach (var operation in Model.MethodGroups) 
+{
+    @:@WrapComment("# ", string.Format("@return {0}", RubyCodeNamingFramework.UnderscoreCase(operation)))
+    @:attr_reader :@(RubyCodeNamingFramework.UnderscoreCase(operation))
+@EmptyLine
+}
+
+@{var parameters = Model.Properties.Where(p => p.IsRequired);}
+
+    #
+    # Creates and initializes a new instance of the @Model.Name class.
+    # @@param base_url [String] base url for accessing current service.
+    @foreach (var param in parameters)
+    {
+    @WrapComment("# ", string.Format("@param {0} {1}{2}", param.Name, param.Type.GetYardDocumentation(), param.Documentation))
+    @:
+    }
+    #
+    def initialize(base_url = nil@(Model.RequiredContructorParametersWithSeparator))
+      super()
+      @@base_url = base_url || '@Model.BaseUrl'
+      @foreach (var operation in Model.MethodGroups) 
+      {
+      @:@@@(RubyCodeNamingFramework.UnderscoreCase(operation)) = @(operation).new(self)
+      }
+      @foreach (var param in parameters)
+      {
+      @:fail ArgumentError, '@param.Name is nil' if @@@(param.Name).nil?
+      }
+      @foreach (var param in parameters)
+      {
+      @:@@@param.Name = @param.Name;
+      }
+
+    end
+
+    @EmptyLine
+    @foreach (var method in Model.MethodTemplateModels)
+    {
+    @:@(Include<MethodTemplate, MethodTemplateModel>(method))
+    @EmptyLine
+    @:
+    }
+  end
+end
