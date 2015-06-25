@@ -21,7 +21,7 @@ namespace Microsoft.Rest.Generator.Utilities
             }
         }
 
-        public TextWriter WriteFileAsStream(string path)
+        public TextWriter GetTextWriter(string path)
         {
             if (File.Exists(path))
             {
@@ -40,14 +40,14 @@ namespace Microsoft.Rest.Generator.Utilities
             File.Delete(path);
         }
 
-        public void DeleteDirectory(string dir)
+        public void DeleteDirectory(string directory)
         {
-            Directory.Delete(dir, true);
+            Directory.Delete(directory, true);
         }
 
-        public void EmptyDirectory(string dirPath)
+        public void EmptyDirectory(string directory)
         {
-            foreach (var filePath in Directory.GetFiles(dirPath))
+            foreach (var filePath in Directory.GetFiles(directory))
             {
                 File.Delete(filePath);
             }

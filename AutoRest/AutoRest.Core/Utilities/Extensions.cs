@@ -57,7 +57,7 @@ namespace Microsoft.Rest.Generator.Utilities
                 yield return item;
             }
         }
-        
+
         /// <summary>
         /// Determines whether a sequence is empty.
         /// </summary>
@@ -143,15 +143,18 @@ namespace Microsoft.Rest.Generator.Utilities
         /// <param name="source">Source object.</param>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "U", Justification = "Common naming for generics.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "V", Justification = "Common naming for generics.")]
-        public static void LoadFrom<TU, TV>(this TU destination, TV source) where TU : TV
+        public static void LoadFrom<TU, TV>(this TU destination, TV source)
+            where TU : TV
+            where TV : class
         {
-            if (source != null)
+            if (source == null)
             {
-                PropertyInfo[] properties = typeof (TV).GetProperties();
-                foreach (var property in properties.Where(p => p.SetMethod != null))
-                {
-                    property.SetValue(destination, property.GetValue(source, null), null);
-                }
+                throw new ArgumentNullException("source");
+            }
+            PropertyInfo[] properties = typeof(TV).GetProperties();
+            foreach (var property in properties.Where(p => p.SetMethod != null))
+            {
+                property.SetValue(destination, property.GetValue(source, null), null);
             }
         }
 
@@ -162,7 +165,7 @@ namespace Microsoft.Rest.Generator.Utilities
         /// <returns>The camel case string.</returns>
         public static string ToCamelCase(this string value)
         {
-            return CodeNamingFramework.CamelCase(value);
+            return CodeNamer.CamelCase(value);
         }
 
         /// <summary>
@@ -172,7 +175,7 @@ namespace Microsoft.Rest.Generator.Utilities
         /// <returns>The pascal case string.</returns>
         public static string ToPascalCase(this string value)
         {
-            return CodeNamingFramework.PascalCase(value);
+            return CodeNamer.PascalCase(value);
         }
     }
 }

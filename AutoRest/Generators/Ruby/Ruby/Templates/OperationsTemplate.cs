@@ -97,7 +97,7 @@ Write(EmptyLine);
 
             WriteLiteral("    ");
 #line 27 "OperationsTemplate.cshtml"
-  Write(Include<MethodTemplate, MethodTemplateModel>(method));
+  Write(Include( new MethodTemplate(),method));
 
 #line default
 #line hidden

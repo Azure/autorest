@@ -6,7 +6,7 @@ using Microsoft.Rest.Generator.ClientModel;
 
 namespace Microsoft.Rest.Generator.CSharp
 {
-    public class AzureCSharpCodeNamingFramework : CSharpCodeNamingFramework
+    public class AzureCSharpCodeNamer : CSharpCodeNamer
     {
         /// <summary>
         /// Skips name collision resolution for method groups (operations) as they get

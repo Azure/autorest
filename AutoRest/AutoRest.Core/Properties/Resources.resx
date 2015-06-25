@@ -123,8 +123,14 @@
   <data name="CodeGenerationFailed" xml:space="preserve">
     <value>Code generation failed with errors. See inner exceptions for details.</value>
   </data>
+  <data name="CommentString" xml:space="preserve">
+    <value>\\\\</value>
+  </data>
   <data name="ConfigurationFileNotFound" xml:space="preserve">
     <value>AutoRest.json was not found in the current directory</value>
+  </data>
+  <data name="DirectoryNotExist" xml:space="preserve">
+    <value>Directory {0} does not exist.</value>
   </data>
   <data name="EntityConflictTitleMessage" xml:space="preserve">
     <value>{0} with name '{1}' was renamed to '{2}' because it conflicts with following entities: {3}</value>
@@ -144,11 +150,17 @@
   <data name="ExtensionNotFound" xml:space="preserve">
     <value>Plugin {0} does not have an assembly name in AutoRest.json</value>
   </data>
+  <data name="GeneratorInitialized" xml:space="preserve">
+    <value>Successfully initialized {0} Code Generator {1}</value>
+  </data>
   <data name="InitializingCodeGenerator" xml:space="preserve">
     <value>Initializing code generator.</value>
   </data>
   <data name="InvalidIdentifierName" xml:space="preserve">
     <value>Property name {0} cannot be used as an Identifier, as it contains only invalid characters.</value>
+  </data>
+  <data name="ModelerInitialized" xml:space="preserve">
+    <value>Initializing modeler.</value>
   </data>
   <data name="NamespaceConflictReasonMessage" xml:space="preserve">
     <value>{0} (already used in {1})</value>

@@ -13,6 +13,10 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\Tools\AutoRest.Settings.targets" />
+  <PropertyGroup>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(CommonRoot)\binaries\$(LibraryFxTarget)\AutoRest.exe</StartProgram>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -21,6 +25,7 @@
     <Compile Include="..\..\Tools\AssemblyVersionInfo.cs">
       <Link>Properties\AssemblyVersionInfo.cs</Link>
     </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HelpExample.cs" />
     <Compile Include="HelpGenerator.cs" />
     <Compile Include="Program.cs" />
@@ -32,6 +37,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <CodeAnalysisDictionary Include="..\..\tools\CustomDictionary.xml">
+      <Link>CustomDictionary.xml</Link>
+    </CodeAnalysisDictionary>
     <Content Include="AutoRest.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

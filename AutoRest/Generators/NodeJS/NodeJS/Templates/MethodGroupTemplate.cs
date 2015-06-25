@@ -127,7 +127,7 @@ Write(EmptyLine);
 #line hidden
 
 #line 37 "MethodGroupTemplate.cshtml"
-Write(Include<MethodTemplate, MethodTemplateModel>(method));
+Write(Include(new MethodTemplate(), method));
 
 #line default
 #line hidden

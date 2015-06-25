@@ -13,7 +13,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// <summary>
         /// A list of tags for API documentation control.
         /// </summary>
-        public List<string> Tags { get; set; }
+        public IList<string> Tags { get; set; }
 
         /// <summary>
         /// A friendly serviceTypeName for the operation. The id MUST be unique among all 
@@ -34,19 +34,19 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// <summary>
         /// A list of MIME types the operation can consume.
         /// </summary>
-        public List<string> Consumes { get; set; }
+        public IList<string> Consumes { get; set; }
 
         /// <summary>
         /// A list of MIME types the operation can produce. 
         /// </summary>
-        public List<string> Produces { get; set; }
+        public IList<string> Produces { get; set; }
 
         /// <summary>
         /// A list of parameters that are applicable for this operation. 
         /// If a parameter is already defined at the Path Item, the 
         /// new definition will override it, but can never remove it.
         /// </summary>
-        public List<SwaggerParameter> Parameters { get; set; }
+        public IList<SwaggerParameter> Parameters { get; set; }
 
         /// <summary>
         /// The list of possible responses as they are returned from executing this operation.
@@ -56,7 +56,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// <summary>
         /// The transfer protocol for the operation. 
         /// </summary>
-        public List<TransferProtocolScheme> Schemes { get; set; }
+        public IList<TransferProtocolScheme> Schemes { get; set; }
 
         public bool Deprecated { get; set; }
 
@@ -67,6 +67,6 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// This definition overrides any declared top-level security. To remove a 
         /// top-level security declaration, an empty array can be used.
         /// </summary>
-        public List<Dictionary<string, List<string>>> Security { get; set; }
+        public IList<Dictionary<string, List<string>>> Security { get; set; }
     }
 }

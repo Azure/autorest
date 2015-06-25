@@ -1,11 +1,13 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using Microsoft.Rest.Generator.Utilities;
-using System;
 
 namespace Microsoft.Rest.Generator.ClientModel
 {
@@ -38,6 +40,8 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <summary>
         /// Gets or sets the HTTP url.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings", 
+            Justification= "Url might be used as a template, thus making it invalid url in certain scenarios.")]
         public string Url { get; set; }
 
         /// <summary>
@@ -53,12 +57,12 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <summary>
         /// Gets or sets the method parameters.
         /// </summary>
-        public List<Parameter> Parameters { get; set; }
+        public List<Parameter> Parameters { get; private set; }
 
         /// <summary>
         /// Gets or sets request headers.
         /// </summary>
-        public Dictionary<string, string> RequestHeaders { get; set; }
+        public Dictionary<string, string> RequestHeaders { get; private set; }
 
         /// <summary>
         /// Gets or sets the request format.
@@ -73,7 +77,7 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <summary>
         /// Gets or sets response bodies by HttpStatusCode.
         /// </summary>
-        public Dictionary<HttpStatusCode, IType> Responses { get; set; }
+        public Dictionary<HttpStatusCode, IType> Responses { get; private set; }
 
         /// <summary>
         /// Gets or sets the default response.
@@ -103,7 +107,7 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// </returns>
         public override string ToString()
         {
-            return string.Format("{0} {1} ({2})", ReturnType, Name,
+            return string.Format(CultureInfo.InvariantCulture, "{0} {1} ({2})", ReturnType, Name,
                 string.Join(",", Parameters.Select(p => p.ToString())));
         }
 

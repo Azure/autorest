@@ -45,27 +45,31 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <summary>
         /// Gets or sets the base url of the service.  This can be a templated url.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design",
+            "CA1056:UriPropertiesShouldNotBeStrings", 
+            Justification = "Url might be used as a template, thus making " + 
+            "it invalid url in certain scenarios.")]
         public string BaseUrl { get; set; }
 
         /// <summary>
         /// Gets or sets the client parameters.
         /// </summary>
-        public List<Property> Properties { get; private set; }
+        public IList<Property> Properties { get; private set; }
 
         /// <summary>
         /// Gets the model types.
         /// </summary>
-        public List<CompositeType> ModelTypes { get; private set; }
+        public IList<CompositeType> ModelTypes { get; private set; }
 
         /// <summary>
         /// Gets the enum types.
         /// </summary>
-        public List<EnumType> EnumTypes { get; private set; }
+        public IList<EnumType> EnumTypes { get; private set; }
 
         /// <summary>
         /// Gets the methods.
         /// </summary>
-        public List<Method> Methods { get; private set; }
+        public IList<Method> Methods { get; private set; }
 
         /// <summary>
         /// Gets the method groups.

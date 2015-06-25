@@ -9,7 +9,7 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
 {
     public abstract class SwaggerJsonConverter : JsonConverter
     {
-        protected JObject Document;
+        protected JObject Document { get; set; }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
@@ -18,6 +18,11 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
 
         protected JsonSerializerSettings GetSettings(JsonSerializer serializer)
         {
+            if (serializer == null)
+            {
+                throw new ArgumentNullException("serializer");
+            }
+
             var settings = new JsonSerializerSettings
             {
                 TypeNameHandling = TypeNameHandling.All,

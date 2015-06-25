@@ -15,12 +15,11 @@ using Microsoft.Rest.Generator.Utilities;
 
 namespace Microsoft.Rest.Generator
 {
-    [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "CodeNaming")]
-    public abstract class CodeNamingFramework
+    public abstract class CodeNamer
     {
         private static readonly IDictionary<char, string> basicLaticCharacters;
 
-        protected CodeNamingFramework()
+        protected CodeNamer()
         {
             ReservedWords = new HashSet<string>();
         }
@@ -94,7 +93,7 @@ namespace Microsoft.Rest.Generator
                 normalizedModels.Add(NormalizeType(modelType) as CompositeType);
             }
             client.ModelTypes.Clear();
-            client.ModelTypes.AddRange(normalizedModels);
+            normalizedModels.ForEach( (item) => client.ModelTypes.Add(item));
 
             var normalizedEnums = new List<EnumType>();
             foreach (var enumType in client.EnumTypes)
@@ -106,7 +105,7 @@ namespace Microsoft.Rest.Generator
                 }
             }
             client.EnumTypes.Clear();
-            client.EnumTypes.AddRange(normalizedEnums);
+            normalizedEnums.ForEach((item) => client.EnumTypes.Add(item));
             
             foreach (var method in client.Methods)
             {
@@ -532,7 +531,7 @@ namespace Microsoft.Rest.Generator
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
-        static CodeNamingFramework()
+        static CodeNamer()
         {
             basicLaticCharacters = new Dictionary<char, string>();
             basicLaticCharacters[(char)32] = "Space";

@@ -12,15 +12,15 @@ namespace Microsoft.Rest.Generator.Utilities
 
         string ReadFileAsText(string path);
 
-        TextWriter WriteFileAsStream(string path);
+        TextWriter GetTextWriter(string path);
 
         bool FileExists(string path);
 
         void DeleteFile(string path);
 
-        void DeleteDirectory(string dir);
+        void DeleteDirectory(string directory);
 
-        void EmptyDirectory(string dirPath);
+        void EmptyDirectory(string directory);
 
         bool DirectoryExists(string path);
 

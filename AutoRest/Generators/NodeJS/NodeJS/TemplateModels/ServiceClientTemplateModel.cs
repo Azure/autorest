@@ -6,6 +6,7 @@ using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.NodeJS.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
+using System.Globalization;
 
 namespace Microsoft.Rest.Generator.NodeJS
 {
@@ -22,9 +23,9 @@ namespace Microsoft.Rest.Generator.NodeJS
             ModelTypes.ForEach(m => ModelTemplateModels.Add(new ModelTemplateModel(m, serviceClient)));
         }
 
-        public List<MethodTemplateModel> MethodTemplateModels { get; set; }
+        public List<MethodTemplateModel> MethodTemplateModels { get; private set; }
 
-        public virtual List<ModelTemplateModel> ModelTemplateModels { get; set; }
+        public List<ModelTemplateModel> ModelTemplateModels { get; private set; }
 
         public virtual IEnumerable<MethodGroupTemplateModel> MethodGroupModels
         {
@@ -38,13 +39,13 @@ namespace Microsoft.Rest.Generator.NodeJS
         {
             get
             {
-                List<string> dicriminators = new List<string>();
                 IndentedStringBuilder builder = new IndentedStringBuilder(IndentedStringBuilder.TwoSpaces);
                 var polymorphicTypes = ModelTemplateModels.Where(m => m.IsPolymorphic);
 
                 for (int i = 0; i < polymorphicTypes.Count(); i++ )
                 {
-                    builder.Append(string.Format("'{0}' : exports.{1}",
+                    builder.Append(string.Format(CultureInfo.InvariantCulture, 
+                        "'{0}' : exports.{1}",
                             polymorphicTypes.ElementAt(i).SerializedName, 
                             polymorphicTypes.ElementAt(i).Name));
 

@@ -284,7 +284,7 @@ Write(EmptyLine);
 #line hidden
 
 #line 83 "ServiceClientTemplate.cshtml"
-Write(Include<MethodTemplate, MethodTemplateModel>(method));
+Write(Include(new MethodTemplate(), method));
 
 #line default
 #line hidden

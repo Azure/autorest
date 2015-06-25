@@ -12,6 +12,7 @@ using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger.Model;
 using ParameterLocation = Microsoft.Rest.Modeler.Swagger.Model.ParameterLocation;
 using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
+using System.Globalization;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
@@ -19,12 +20,17 @@ namespace Microsoft.Rest.Modeler.Swagger
     {
         private const string BaseUriParameterName = "BaseUri";
 
-        protected bool AddCredentials;
+        protected bool AddCredentials { get; set; }
         internal Dictionary<string, string> ExtendedTypes = new Dictionary<string, string>();
         internal Dictionary<string, CompositeType> GeneratedTypes = new Dictionary<string, CompositeType>();
 
         public SwaggerModeler(Settings settings) : base(settings)
         {
+            if (settings == null)
+            {
+                throw new ArgumentNullException("settings");
+            }
+
             AddCredentials = settings.AddCredentials;
             DefaultProtocol = TransferProtocolScheme.Http;
         }
@@ -55,9 +61,9 @@ namespace Microsoft.Rest.Modeler.Swagger
         /// <returns></returns>
         public override ServiceClient Build()
         {
-            Logger.LogInfo("Parsing swagger json file.");
+            Logger.LogInfo(Resources.ParsingSwagger);
             ServiceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
-            Logger.LogInfo("Generating client model from swagger model.");
+            Logger.LogInfo(Resources.GeneratingClient);
             InitializeClientModel();
             BuildCompositeTypes();
 
@@ -82,7 +88,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                     }
                     else
                     {
-                        Logger.LogWarning("Options HTTP verb is not supported.");
+                        Logger.LogWarning(Resources.OptionsNotSupported);
                     }
                 }
             }
@@ -143,7 +149,8 @@ namespace Microsoft.Rest.Modeler.Swagger
             {
                 ServiceDefinition.Host = "localhost";
             }
-            ServiceClient.BaseUrl = string.Format("{0}://{1}{2}", ServiceDefinition.Schemes[0].ToString().ToLower(),
+            ServiceClient.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}://{1}{2}", 
+                ServiceDefinition.Schemes[0].ToString().ToLower(CultureInfo.InvariantCulture),
                 ServiceDefinition.Host, ServiceDefinition.BasePath);
         }
 
@@ -155,7 +162,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         /// <returns>A string representing the full http (parameterized) path for the operation</returns>
         public virtual string BuildMethodBaseUrl(ServiceClient serviceClient, string path)
         {
-            return string.Format("{{{0}}}{1}", BaseUriParameterName, path);
+            return string.Format(CultureInfo.InvariantCulture, "{{{0}}}{1}", BaseUriParameterName, path);
         }
 
         /// <summary>
@@ -182,7 +189,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                     var schema = ServiceDefinition.Definitions[schemaName];
                     schema.GetBuilder(this).BuildServiceType(schemaName);
 
-                    GetResolver().ExpandAllOf(schema);
+                    Resolver.ExpandAllOf(schema);
                     var parent = string.IsNullOrEmpty(schema.Extends.StripDefinitionPath())
                         ? null
                         : ServiceDefinition.Definitions[schema.Extends.StripDefinitionPath()];
@@ -242,7 +249,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         /// </summary>
         /// <param name="operation">The swagger operation.</param>
         /// <returns>Method group name or null.</returns>
-        private string GetMethodGroup(Operation operation)
+        private static string GetMethodGroup(Operation operation)
         {
             if (operation.OperationId.IndexOf('_') == -1)
             {
@@ -258,7 +265,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         /// </summary>
         /// <param name="operation">The swagger operation.</param>
         /// <returns>Method name.</returns>
-        private string GetMethodName(Operation operation)
+        private static string GetMethodName(Operation operation)
         {
             if (operation.OperationId.IndexOf('_') == -1)
             {
@@ -271,6 +278,11 @@ namespace Microsoft.Rest.Modeler.Swagger
 
         public SwaggerParameter Unwrap(SwaggerParameter swaggerParameter)
         {
+            if (swaggerParameter == null)
+            {
+                throw new ArgumentNullException("swaggerParameter");
+            }
+
             // If referencing global parameters serializationProperty
             if (swaggerParameter.Reference != null)
             {
@@ -278,7 +290,8 @@ namespace Microsoft.Rest.Modeler.Swagger
                 if (!ServiceDefinition.Parameters.ContainsKey(referenceKey))
                 {
                     throw new ArgumentException(
-                        string.Format("Reference specifies the definition {0} that does not exist.", referenceKey));
+                        string.Format(CultureInfo.InvariantCulture, 
+                        Resources.DefinitionDoesNotExist, referenceKey));
                 }
 
                 swaggerParameter = ServiceDefinition.Parameters[referenceKey];
@@ -287,15 +300,15 @@ namespace Microsoft.Rest.Modeler.Swagger
             // Unwrap the schema if in "body"
             if (swaggerParameter.Schema != null && swaggerParameter.In == ParameterLocation.Body)
             {
-                swaggerParameter.Schema = GetResolver().Unwrap(swaggerParameter.Schema);
+                swaggerParameter.Schema = Resolver.Unwrap(swaggerParameter.Schema);
             }
 
             return swaggerParameter;
         }
 
-        public SchemaResolver GetResolver()
+        public SchemaResolver Resolver
         {
-            return new SchemaResolver(this);
+            get { return new SchemaResolver(this); }
         }
     }
 }

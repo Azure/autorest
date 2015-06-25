@@ -12,11 +12,11 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
 {
     public class AzureNodeJSCodeGenerator : AzureCodeGenerator
     {
-        private readonly AzureNodeJSCodeNamingFramework _namingFramework;
+        private readonly AzureNodeJsCodeNamer _namer;
 
         public AzureNodeJSCodeGenerator(Settings settings) : base(settings)
         {
-            _namingFramework = new AzureNodeJSCodeNamingFramework();
+            _namer = new AzureNodeJsCodeNamer();
         }
 
         public override string Name
@@ -48,27 +48,9 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
             base.NormalizeClientModel(serviceClient);
-            _namingFramework.NormalizeClientModel(serviceClient);
-            _namingFramework.ResolveNameCollisions(serviceClient, Settings.Namespace,
+            _namer.NormalizeClientModel(serviceClient);
+            _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
-        }
-
-        private void PopulateAdditionalProperties(ServiceClient serviceClient)
-        {
-            // TODO: Shouldn't this be handled by the modeler?
-            if (Settings.AddCredentials)
-            {
-                serviceClient.Properties.Add(new Property
-                {
-                    Name = "Credentials",
-                    Type = new CompositeType
-                    {
-                        Name = "ServiceClientCredentials"
-                    },
-                    IsRequired = true,
-                    Documentation = "Credentials for client authentication."
-                });
-            }
         }
 
         /// <summary>

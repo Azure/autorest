@@ -24,7 +24,7 @@ namespace Microsoft.Rest.Generator.CSharp
                 .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient)));
         }
 
-        public List<MethodTemplateModel> MethodTemplateModels { get; set; }
+        public List<MethodTemplateModel> MethodTemplateModels { get; private set; }
 
         public string MethodGroupName { get; set; }
 

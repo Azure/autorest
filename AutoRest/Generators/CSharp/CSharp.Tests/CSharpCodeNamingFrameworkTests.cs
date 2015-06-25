@@ -62,7 +62,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             serviceClient.ModelTypes.Add(customObjectType);
             serviceClient.ModelTypes.Add(baseType);
 
-            var framework = new CSharpCodeNamingFramework();
+            var framework = new CSharpCodeNamer();
             framework.NormalizeClientModel(serviceClient);
 
             Assert.Equal("Azurealwaysrocks", serviceClient.Name);
@@ -119,7 +119,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             serviceClient.ModelTypes.Add(customObjectType);
             serviceClient.ModelTypes.Add(childObject);
 
-            var framework = new CSharpCodeNamingFramework();
+            var framework = new CSharpCodeNamer();
             framework.NormalizeClientModel(serviceClient);
             framework.ResolveNameCollisions(serviceClient, "SampleNs", "SampleNs.Models");
 
@@ -154,7 +154,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 ReturnType = customObjectType
             });
 
-            var framework = new CSharpCodeNamingFramework();
+            var framework = new CSharpCodeNamer();
             framework.NormalizeClientModel(serviceClient);
 
             Assert.Equal("Methodnamewithlotsofspaces", serviceClient.Methods[0].Name);
@@ -184,7 +184,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             serviceClient.ModelTypes.Add(customObjectType);
             serviceClient.ModelTypes.Add(baseType);
 
-            var framework = new CSharpCodeNamingFramework();
+            var framework = new CSharpCodeNamer();
             framework.ResolveNameCollisions(serviceClient, null, null);
 
             Assert.Equal("azure always rocks!Client", serviceClient.Name);
@@ -216,7 +216,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             serviceClient.ModelTypes.Add(customObjectType);
             serviceClient.ModelTypes.Add(baseType);
 
-            var framework = new CSharpCodeNamingFramework();
+            var framework = new CSharpCodeNamer();
             framework.ResolveNameCollisions(serviceClient, "azure always rocks!", "azure always rocks!.Models");
 
             Assert.Equal("azure always rocks!Client", serviceClient.Name);

@@ -5,42 +5,92 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.CSharp.TemplateModels;
+using Microsoft.Rest.Generator.Ruby.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
 
-namespace Microsoft.Rest.Generator.CSharp
+namespace Microsoft.Rest.Generator.Ruby
 {
-    public class CSharpCodeNamingFramework : CodeNamingFramework
+    using System.Text.RegularExpressions;
+
+    public class RubyCodeNamer : CodeNamer
     {
-        private readonly HashSet<IType> _normalizedTypes;
+        private readonly HashSet<IType> normalizedTypes;
 
         /// <summary>
-        /// Initializes a new instance of CSharpCodeNamingFramework.
+        /// Initializes a new instance of RubyCodeNamingFramework.
         /// </summary>
-        public CSharpCodeNamingFramework()
+        public RubyCodeNamer()
         {
             new HashSet<string>
             {
-                "abstract", "as",       "async",      "await",     "base",
-                "bool",     "break",    "byte",       "case",      "catch",
-                "char",     "checked",  "class",      "const",     "continue",
-                "decimal",  "default",  "delegate",   "do",        "double",
-                "dynamic",  "else",     "enum",       "event",     "explicit",
-                "extern",   "false",    "finally",    "fixed",     "float",
-                "for",      "foreach",  "from",       "global",    "goto",
-                "if",       "implicit", "in",         "int",       "interface",
-                "internal", "is",       "lock",       "long",      "namespace",
-                "new",      "null",     "object",     "operator",  "out",
-                "override", "params",   "private",    "protected", "public",
-                "readonly", "ref",      "return",     "sbyte",     "sealed",
-                "short",    "sizeof",   "stackalloc", "static",    "string",
-                "struct",   "switch",   "this",       "throw",     "true",
-                "try",      "typeof",   "uint",       "ulong",     "unchecked",
-                "unsafe",   "ushort",   "using",       "virtual",  "void",
-                "volatile", "while",    "yield",       "var"
+                "begin",    "do",       "next",     "then",     "end",
+                "else",     "nil",      "true",     "alias",    "elsif",
+                "not",      "undef",    "and",      "end",      "or",
+                "unless",   "begin",    "ensure",   "redo",     "until",
+                "break",    "false",    "rescue",   "when",     "case",
+                "for",      "retry",    "while",    "class",    "if",
+                "return",   "while",    "def",      "in",       "self",   
+                "__file__", "defined?", "module",   "super",    "__line__",
+                "yield"
             }.ForEach(s => ReservedWords.Add(s));
 
-            _normalizedTypes = new HashSet<IType>();
+            normalizedTypes = new HashSet<IType>();
+        }
+
+        /// <summary>
+        /// Formats segments of a string into "underscore" case.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>The formatted string.</returns>
+        public static string UnderscoreCase(string name)
+        {
+            return Regex.Replace(name, @"(\p{Ll})(\p{Lu})", "$1_$2").ToLower();
+        }
+
+        /// <summary>
+        /// Corrects characters for Ruby compatibility.
+        /// </summary>
+        /// <param name="name">String to correct.</param>
+        /// <returns>Corrected string.</returns>
+        public string RubyRemoveInvalidCharacters(string name)
+        {
+            return RemoveInvalidCharacters(name).Replace('-', '_');
+        }
+
+        public override string GetMethodName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return name;
+            }
+            return UnderscoreCase(RubyRemoveInvalidCharacters(GetEscapedReservedName(name, "Operation")));
+        }
+
+        public override string GetFieldName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return name;
+            }
+            return GetVariableName(name);
+        }
+
+        public override string GetPropertyName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return name;
+            }
+            return UnderscoreCase(RubyRemoveInvalidCharacters(GetEscapedReservedName(name, "Property")));
+        }
+
+        public override string GetVariableName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return name;
+            }
+            return UnderscoreCase(RubyRemoveInvalidCharacters(GetEscapedReservedName(name, "Variable")));
         }
 
         public override void NormalizeClientModel(ServiceClient client)
@@ -52,6 +102,7 @@ namespace Microsoft.Rest.Generator.CSharp
                 foreach (var parameter in method.Parameters)
                 {
                     parameter.Name = scope.GetVariableName(parameter.Name);
+                    parameter.SetRequiredOptional();
                 }
             }
         }
@@ -63,28 +114,32 @@ namespace Microsoft.Rest.Generator.CSharp
                 return null;
             }
             // Using Any instead of Contains since object hash is bound to a property which is modified during normalization
-            if (_normalizedTypes.Any(item => type.Equals(item)))
+            if (normalizedTypes.Any(item => type.Equals(item)))
             {
-                return _normalizedTypes.First(item => type.Equals(item));
+                return normalizedTypes.First(item => type.Equals(item));
             }
 
-            _normalizedTypes.Add(type);
+            normalizedTypes.Add(type);
             if (type is PrimaryType)
             {
                 return NormalizePrimaryType(type as PrimaryType);
             }
+
             if (type is SequenceType)
             {
                 return NormalizeSequenceType(type as SequenceType);
             }
+
             if (type is DictionaryType)
             {
                 return NormalizeDictionaryType(type as DictionaryType);
             }
+
             if (type is CompositeType)
             {
                 return NormalizeCompositeType(type as CompositeType);
             }
+
             if (type is EnumType)
             {
                 return NormalizeEnumType(type as EnumType);
@@ -110,21 +165,6 @@ namespace Microsoft.Rest.Generator.CSharp
 
         private IType NormalizeEnumType(EnumType enumType)
         {
-            if (enumType.IsExpandable)
-            {
-                enumType.SerializedName = "string";
-                enumType.Name = "string";
-            }
-            else
-            {
-                enumType.SerializedName = enumType.Name;
-                enumType.Name = GetTypeName(enumType.Name) + "?";
-            }
-            for (int i = 0; i < enumType.Values.Count; i++)
-            {
-                enumType.Values[i].SerializedName = enumType.Values[i].Name;
-                enumType.Values[i].Name = GetEnumMemberName(enumType.Values[i].Name);
-            }
             return enumType;
         }
 
@@ -132,47 +172,44 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             if (primaryType == PrimaryType.Boolean)
             {
-                primaryType.Name = "bool?";
+                primaryType.Name = "Boolean";
             }
             else if (primaryType == PrimaryType.ByteArray)
             {
-                primaryType.Name = "byte[]";
-            }
-            else if (primaryType == PrimaryType.Date)
-            {
-                primaryType.Name = "DateTime?";
+                primaryType.Name = "Array";
             }
             else if (primaryType == PrimaryType.DateTime)
             {
-                primaryType.Name = "DateTime?";
+                primaryType.Name = "DateTime";
             }
             else if (primaryType == PrimaryType.Double)
             {
-                primaryType.Name = "double?";
+                primaryType.Name = "Float";
             }
             else if (primaryType == PrimaryType.Int)
             {
-                primaryType.Name = "int?";
+                primaryType.Name = "Number";
             }
             else if (primaryType == PrimaryType.Long)
             {
-                primaryType.Name = "long?";
+                primaryType.Name = "Bignum";
             }
             else if (primaryType == PrimaryType.Stream)
             {
+                //TODO: verify this
                 primaryType.Name = "System.IO.Stream";
             }
             else if (primaryType == PrimaryType.String)
             {
-                primaryType.Name = "string";
+                primaryType.Name = "String";
             }
             else if (primaryType == PrimaryType.TimeSpan)
             {
-                primaryType.Name = "TimeSpan?";
+                primaryType.Name = "Duration";
             }
             else if (primaryType == PrimaryType.Object)
             {
-                primaryType.Name = "object";
+                primaryType.Name = "Object";
             }
 
             return primaryType;
@@ -181,14 +218,14 @@ namespace Microsoft.Rest.Generator.CSharp
         private IType NormalizeSequenceType(SequenceType sequenceType)
         {
             sequenceType.ElementType = NormalizeType(sequenceType.ElementType);
-            sequenceType.NameFormat = "IList<{0}>";
+            sequenceType.NameFormat = "Array";
             return sequenceType;
         }
 
         private IType NormalizeDictionaryType(DictionaryType dictionaryType)
         {
             dictionaryType.ValueType = NormalizeType(dictionaryType.ValueType);
-            dictionaryType.NameFormat = "IDictionary<string, {0}>";
+            dictionaryType.NameFormat = "Hash";
             return dictionaryType;
         }
     }

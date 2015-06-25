@@ -9,13 +9,19 @@ using Microsoft.Rest.Modeler.Swagger.Model;
 using Microsoft.Rest.Modeler.Swagger.Properties;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Globalization;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
-    public class SwaggerParser
+    public static class SwaggerParser
     {
         public static ServiceDefinition Load(string path, IFileSystem fileSystem)
         {
+            if (fileSystem == null)
+            {
+                throw new ArgumentNullException("fileSystem");
+            }
+
             return SwaggerParser.Parse(fileSystem.ReadFileAsText(path));
         }
 
@@ -50,7 +56,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             }
             catch (JsonException ex)
             {
-                throw ErrorManager.CreateError(string.Format("{0}. {1}",
+                throw ErrorManager.CreateError(string.Format(CultureInfo.InvariantCulture, "{0}. {1}",
                     Resources.ErrorParsingSpec, ex.Message), ex);
             }
         }

@@ -9,6 +9,7 @@ using System.Net;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.CSharp.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
+using System.Globalization;
 
 namespace Microsoft.Rest.Generator.CSharp
 {
@@ -29,7 +30,7 @@ namespace Microsoft.Rest.Generator.CSharp
 
         public ServiceClient ServiceClient { get; set; }
 
-        public List<ParameterTemplateModel> ParameterTemplateModels { get; protected set; }
+        public List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
 
         public IScopeProvider Scope
         {
@@ -48,7 +49,8 @@ namespace Microsoft.Rest.Generator.CSharp
                     List<string> predicates = new List<string>();
                     foreach (var responseStatus in Responses.Keys)
                     {
-                        predicates.Add(string.Format("statusCode == {0}", GetStatusCodeReference(responseStatus)));
+                        predicates.Add(string.Format(CultureInfo.InvariantCulture, 
+                            "statusCode == {0}", GetStatusCodeReference(responseStatus)));
                     }
 
                     return string.Join(" || ", predicates);
@@ -68,7 +70,8 @@ namespace Microsoft.Rest.Generator.CSharp
                 foreach (var parameter in  LocalParameters)
                 {
                     string format = (parameter.IsRequired ? "{0} {1}" : "{0} {1} = default({0})");
-                    declarations.Add(string.Format(format, parameter.DeclarationExpression, parameter.Name));
+                    declarations.Add(string.Format(CultureInfo.InvariantCulture, 
+                        format, parameter.DeclarationExpression, parameter.Name));
                 }
 
                 return string.Join(", ", declarations);
@@ -143,7 +146,8 @@ namespace Microsoft.Rest.Generator.CSharp
             {
                 if (ReturnType != null)
                 {
-                    return string.Format("HttpOperationResponse<{0}>", ReturnType.Name);
+                    return string.Format(CultureInfo.InvariantCulture, 
+                        "HttpOperationResponse<{0}>", ReturnType.Name);
                 }
                 return "HttpOperationResponse";
             }
@@ -158,7 +162,8 @@ namespace Microsoft.Rest.Generator.CSharp
             {
                 if (ReturnType != null)
                 {
-                    return string.Format("Task<{0}>", ReturnType.Name);
+                    return string.Format(CultureInfo.InvariantCulture, 
+                        "Task<{0}>", ReturnType.Name);
                 }
                 return "Task";
             }
@@ -277,7 +282,8 @@ namespace Microsoft.Rest.Generator.CSharp
 
         public string GetStatusCodeReference(HttpStatusCode code)
         {
-            return string.Format("(HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), \"{0}\")", code);
+            return string.Format(CultureInfo.InvariantCulture, 
+                "(HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), \"{0}\")", code);
         }
 
         /// <summary>

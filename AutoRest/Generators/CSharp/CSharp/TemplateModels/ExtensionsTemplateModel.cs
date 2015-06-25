@@ -22,7 +22,7 @@ namespace Microsoft.Rest.Generator.CSharp
         }
 
 
-        public List<MethodTemplateModel> MethodTemplateModels { get; set; }
+        public List<MethodTemplateModel> MethodTemplateModels { get; private set; }
 
         public string ExtensionName { get; set; }
 

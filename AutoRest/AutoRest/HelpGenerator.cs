@@ -15,33 +15,28 @@ namespace Microsoft.Rest.Generator.Cli
     /// </summary>
     public static class HelpGenerator
     {
-        private static readonly List<HelpExample> Examples = new List<HelpExample>();
-
-        /// <summary>
-        /// Initializes the static HelpGenerator class.
-        /// </summary>
-        static HelpGenerator()
+        private static readonly List<HelpExample> Examples = new List<HelpExample>
         {
-            // Populating examples
-            Examples.Add(new HelpExample
+            new HelpExample
             {
                 Description = "Generate C# client in MyNamespace from swagger.json input:",
                 Example = "AutoRest.exe -Namespace MyNamespace -Input swagger.json"
-            });
-            Examples.Add(new HelpExample
+            },
+            new HelpExample
             {
                 Description =
                     "Generate C# client in MyNamespace including custom header from swagger.json input:",
                 Example =
                     "AutoRest.exe -Namespace MyNamespace -Header \"Copyright Contoso Ltd\" -Input swagger.json",
-            });
-            Examples.Add(new HelpExample
+            },
+            new HelpExample
             {
                 Description = "Generate C# client with a credentials property in MyNamespace from swagger.json input:",
                 Example =
                     "AutoRest.exe -AddCredentials true -Namespace MyNamespace -CodeGenerator CSharp -Modeler Swagger -Input swagger.json"
-            });
-        }
+            }
+        };
+
 
         /// <summary>
         /// Generates help string based on the passed in template.
@@ -81,15 +76,15 @@ namespace Microsoft.Rest.Generator.Cli
         {
             if (String.IsNullOrEmpty(template))
             {
-                throw new ArgumentException("template");
+                throw new ArgumentNullException("template");
             }
 
             // Reflect over properties in Settings to get documentation content
             var parameters = new List<Tuple<string, SettingsInfoAttribute>>();
-            foreach (PropertyInfo property in typeof (Settings).GetProperties())
+            foreach (PropertyInfo property in typeof(Settings).GetProperties())
             {
-                var doc = (SettingsInfoAttribute) property.GetCustomAttributes(
-                    typeof (SettingsInfoAttribute)).FirstOrDefault();
+                var doc = (SettingsInfoAttribute)property.GetCustomAttributes(
+                    typeof(SettingsInfoAttribute)).FirstOrDefault();
 
                 if (doc != null)
                 {
@@ -115,10 +110,10 @@ namespace Microsoft.Rest.Generator.Cli
             var parametersSection = new StringBuilder();
             const string parametersPattern = @"\$parameters-start\$\r\n(.+)\r\n\$parameters-end\$";
             var parameterTemplate = Regex.Match(template, parametersPattern, RegexOptions.Singleline).Groups[1].Value;
-            foreach (PropertyInfo property in typeof (Settings).GetProperties())
+            foreach (PropertyInfo property in typeof(Settings).GetProperties())
             {
-                SettingsInfoAttribute doc = (SettingsInfoAttribute) property.GetCustomAttributes(
-                    typeof (SettingsInfoAttribute)).FirstOrDefault();
+                SettingsInfoAttribute doc = (SettingsInfoAttribute)property.GetCustomAttributes(
+                    typeof(SettingsInfoAttribute)).FirstOrDefault();
 
                 if (doc != null)
                 {

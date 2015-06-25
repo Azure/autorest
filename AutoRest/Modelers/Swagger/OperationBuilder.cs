@@ -13,6 +13,7 @@ using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger.Model;
 using Microsoft.Rest.Modeler.Swagger.Properties;
 using ParameterLocation = Microsoft.Rest.Modeler.Swagger.Model.ParameterLocation;
+using System.Globalization;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
@@ -21,16 +22,23 @@ namespace Microsoft.Rest.Modeler.Swagger
     /// </summary>
     public class OperationBuilder
     {
-        protected List<string> _effectiveConsumes;
-        protected List<string> _effectiveProduces;
-        protected SwaggerModeler _swaggerModeler;
-        protected Operation Operation;
+        private IList<string> _effectiveProduces;
+        private SwaggerModeler _swaggerModeler;
+        private Operation _operation;
 
         public OperationBuilder(Operation operation, SwaggerModeler swaggerModeler)
         {
-            this.Operation = operation;
+            if (operation == null)
+            {
+                throw new ArgumentNullException("operation");
+            }
+            if (swaggerModeler == null)
+            {
+                throw new ArgumentNullException("swaggerModeler");
+            }
+
+            this._operation = operation;
             this._swaggerModeler = swaggerModeler;
-            this._effectiveConsumes = operation.Consumes ?? swaggerModeler.ServiceDefinition.Consumes;
             this._effectiveProduces = operation.Produces ?? swaggerModeler.ServiceDefinition.Produces;
         }
 
@@ -45,32 +53,31 @@ namespace Microsoft.Rest.Modeler.Swagger
                 Name = methodName
             };
 
-            method.Documentation = Operation.Description;
+            method.Documentation = _operation.Description;
 
             // Service parameters
-            if (Operation.Parameters != null)
+            if (_operation.Parameters != null)
             {
-                CollectionFormatBuilder collectionBuilder = new CollectionFormatBuilder();
-
-                foreach (var swaggerParameter in DeduplicateParameters(Operation.Parameters))
+                foreach (var swaggerParameter in DeduplicateParameters(_operation.Parameters))
                 {
                     var parameter = ((ParameterBuilder) swaggerParameter.GetBuilder(_swaggerModeler)).Build();
                     method.Parameters.Add(parameter);
 
                     StringBuilder parameterName = new StringBuilder(parameter.Name);
-                    parameterName = collectionBuilder.OnBuildMethodParameter(method, swaggerParameter,
+                    parameterName = CollectionFormatBuilder.OnBuildMethodParameter(method, swaggerParameter,
                         parameterName);
 
                     if (swaggerParameter.In == ParameterLocation.Header)
                     {
-                        method.RequestHeaders[swaggerParameter.Name] = string.Format("{{{0}}}", parameterName);
+                        method.RequestHeaders[swaggerParameter.Name] = 
+                            string.Format(CultureInfo.InvariantCulture, "{{{0}}}", parameterName);
                     }
                 }
             }
 
             // Response format
             var typesList = new List<Stack<IType>>();
-            Operation.Responses.ForEach(response =>
+            _operation.Responses.ForEach(response =>
             {
                 if (string.Equals(response.Key, "default", StringComparison.OrdinalIgnoreCase))
                 {
@@ -86,7 +93,10 @@ namespace Microsoft.Rest.Modeler.Swagger
                               typesList)))
                     {
                         throw new InvalidOperationException(
-                            string.Format(Resources.UnsupportedMimeTypeForResponseBody, methodName, response.Key));
+                            string.Format(CultureInfo.InvariantCulture, 
+                            Resources.UnsupportedMimeTypeForResponseBody, 
+                            methodName, 
+                            response.Key));
                     }
                 }
             });
@@ -99,12 +109,12 @@ namespace Microsoft.Rest.Modeler.Swagger
             }
 
             // Copy extensions
-            Operation.Extensions.ForEach(extention => method.Extensions.Add(extention.Key, extention.Value));
+            _operation.Extensions.ForEach(extention => method.Extensions.Add(extention.Key, extention.Value));
 
             return method;
         }
 
-        private IEnumerable<SwaggerParameter> DeduplicateParameters(IEnumerable<SwaggerParameter> parameters)
+        private static IEnumerable<SwaggerParameter> DeduplicateParameters(IEnumerable<SwaggerParameter> parameters)
         {
             return parameters
                 .Select(s =>
@@ -116,7 +126,7 @@ namespace Microsoft.Rest.Modeler.Swagger
 
                         while (parameters.Any(t => t.In != ParameterLocation.Body &&
                                                    string.Equals(t.Name, newName,
-                                                       StringComparison.InvariantCultureIgnoreCase)))
+                                                       StringComparison.OrdinalIgnoreCase)))
                         {
                             newName += "Body";
                         }
@@ -125,7 +135,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                     // if parameter with same name exists in Query and Path, make Query one required 
                     if (s.In == ParameterLocation.Query &&
                         parameters.Any(t => t.In == ParameterLocation.Path &&
-                                            string.Equals(t.Name, s.Name, StringComparison.InvariantCultureIgnoreCase)))
+                                            string.Equals(t.Name, s.Name, StringComparison.OrdinalIgnoreCase)))
                     {
                         s.IsRequired = true;
                     }
@@ -134,7 +144,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 });
         }
 
-        private void BuildMethodReturnTypeStack(IType type, List<Stack<IType>> types)
+        private static void BuildMethodReturnTypeStack(IType type, List<Stack<IType>> types)
         {
             var typeStack = new Stack<IType>();
             typeStack.Push(type);
@@ -194,7 +204,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             Method method, List<Stack<IType>> types)
         {
             bool handled = false;
-            if (SwaggerOperationProducesOctetStream(Operation, _swaggerModeler.ServiceDefinition))
+            if (SwaggerOperationProducesOctetStream(_operation))
             {
                 if (response.Schema != null)
                 {
@@ -230,7 +240,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         {
             bool handled = false;
             IType serviceType;
-            if (SwaggerOperationProducesJson(Operation, _swaggerModeler.ServiceDefinition))
+            if (SwaggerOperationProducesJson(_operation))
             {
                 if (TryBuildResponseBody(methodName, response,
                     s => GenerateResponseObjectName(s, responseStatusCode), out serviceType))
@@ -256,7 +266,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             }
             else
             {
-                if (Operation.Produces.IsNullOrEmpty())
+                if (_operation.Produces.IsNullOrEmpty())
                 {
                     method.Responses[responseStatusCode] = PrimaryType.Object;
                     BuildMethodReturnTypeStack(PrimaryType.Object, types);
@@ -264,7 +274,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 }
 
                 var unwrapedSchemaProperties =
-                    _swaggerModeler.GetResolver().Unwrap(response.Schema).Properties;
+                    _swaggerModeler.Resolver.Unwrap(response.Schema).Properties;
                 if (unwrapedSchemaProperties != null && unwrapedSchemaProperties.Any())
                 {
                     Logger.LogWarning(Resources.NoProduceOperationWithBody,
@@ -278,7 +288,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         private void TryBuildDefaultResponse(string methodName, Response response, Method method)
         {
             IType errorModel = null;
-            if (SwaggerOperationProducesJson(Operation, _swaggerModeler.ServiceDefinition))
+            if (SwaggerOperationProducesJson(_operation))
             {
                 if (TryBuildResponseBody(methodName, response, s => GenerateErrorModelName(s), out errorModel))
                 {
@@ -292,7 +302,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         {
             bool handled = false;
             responseType = null;
-            if (SwaggerOperationProducesJson(Operation, _swaggerModeler.ServiceDefinition))
+            if (SwaggerOperationProducesJson(_operation))
             {
                 if (response.Schema != null)
                 {
@@ -315,28 +325,16 @@ namespace Microsoft.Rest.Modeler.Swagger
             return handled;
         }
 
-        private bool SwaggerOperationProducesJson(Operation operation, ServiceDefinition serviceDefinition)
+        private bool SwaggerOperationProducesJson(Operation operation)
         {
             return _effectiveProduces != null &&
                    _effectiveProduces.Contains("application/json", StringComparer.OrdinalIgnoreCase);
         }
 
-        private bool SwaggerOperationConsumesJson(Operation operation, ServiceDefinition serviceDefinition)
-        {
-            return _effectiveConsumes != null &&
-                   _effectiveConsumes.Contains("application/json", StringComparer.OrdinalIgnoreCase);
-        }
-
-        private bool SwaggerOperationProducesOctetStream(Operation operation, ServiceDefinition serviceDefinition)
+        private bool SwaggerOperationProducesOctetStream(Operation operation)
         {
             return _effectiveProduces != null &&
                    _effectiveProduces.Contains("application/octet-stream", StringComparer.OrdinalIgnoreCase);
-        }
-
-        private bool SwaggerOperationConsumesMultipartFormData(Operation operation, ServiceDefinition serviceDefinition)
-        {
-            return _effectiveConsumes != null &&
-                   _effectiveConsumes.Contains("multipart/form-data", StringComparer.OrdinalIgnoreCase);
         }
 
         private void EnsureUniqueMethodName(string methodName, string methodGroup)
@@ -349,7 +347,7 @@ namespace Microsoft.Rest.Modeler.Swagger
 
             if (_swaggerModeler.ServiceClient.Methods.Any(m => m.Group == methodGroup && m.Name == methodName))
             {
-                throw new ArgumentException(string.Format(
+                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, 
                     Resources.DuplicateOperationIdException,
                     serviceOperationPrefix + methodName));
             }
@@ -357,12 +355,14 @@ namespace Microsoft.Rest.Modeler.Swagger
 
         private static string GenerateResponseObjectName(string methodName, HttpStatusCode responseStatusCode)
         {
-            return string.Format("{0}{1}Response", methodName, responseStatusCode);
+            return string.Format(CultureInfo.InvariantCulture, 
+                "{0}{1}Response", methodName, responseStatusCode);
         }
 
         private static string GenerateErrorModelName(string methodName)
         {
-            return string.Format("{0}ErrorModel", methodName);
+            return string.Format(CultureInfo.InvariantCulture, 
+                "{0}ErrorModel", methodName);
         }
     }
 }

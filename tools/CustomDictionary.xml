@@ -1,10 +1,18 @@
 <Dictionary>
   <Words>
     <Recognized>
-      <Word>AutoRest</Word>
-      <Word>Backoff</Word>
+      <Word>Outdent</Word>
+      <Word>Infos</Word>
+      <Word>queryParameters</Word>
+      <Word>Cli</Word>
+      <Word>Api</Word>
       <Word>Etw</Word>
-      <Word>Rest</Word>
+      <Word>Usings</Word>
+      <Word>OAuth</Word>
+      <Word>OAuthFlow</Word>
+      <Word>Backoff</Word>
+      <Word>SubscriptionCloudCredentials</Word>
+      <Word>ArgumentNullException</Word>
     </Recognized>
   </Words>
 </Dictionary>

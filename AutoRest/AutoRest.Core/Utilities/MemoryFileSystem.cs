@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -16,12 +17,11 @@ namespace Microsoft.Rest.Generator.Utilities
         private const string FolderKey = "Folder";
 
         private Dictionary<string, StringBuilder> _virtualStore =
-            new Dictionary<string, StringBuilder>(StringComparer.InvariantCultureIgnoreCase);
+            new Dictionary<string, StringBuilder>(StringComparer.OrdinalIgnoreCase);
 
         public Dictionary<string, StringBuilder> VirtualStore
         {
             get { return _virtualStore; }
-            set { _virtualStore = value; }
         }
 
         public void WriteFile(string path, string contents)
@@ -29,7 +29,7 @@ namespace Microsoft.Rest.Generator.Utilities
             var directory = Path.GetDirectoryName(path);
             if (!string.IsNullOrEmpty((directory)) && !VirtualStore.ContainsKey(directory))
             {
-                throw new IOException(string.Format("Directory {0} does not exist.", directory));
+                throw new IOException(string.Format(CultureInfo.InvariantCulture, "Directory {0} does not exist.", directory));
             }
 
             VirtualStore[path] = new StringBuilder(contents);
@@ -44,21 +44,22 @@ namespace Microsoft.Rest.Generator.Utilities
             throw new IOException("File not found: " + path);
         }
 
-        public TextWriter WriteFileAsStream(string path)
+        public TextWriter GetTextWriter(string path)
         {
             if (path.IsNullOrEmpty())
             {
-                throw new ArgumentException("path");
+                throw new ArgumentException("path cannot be null.", "path");
             }
             var directory = Path.GetDirectoryName(path);
             if (!VirtualStore.ContainsKey(directory))
             {
-                throw new IOException(string.Format("Directory {0} does not exist.", directory));
+                throw new IOException(string.Format(CultureInfo.InvariantCulture, "Directory {0} does not exist.", directory));
             }
 
             var stringBuilder = new StringBuilder();
-            var stringWriter = new StringWriter(stringBuilder);
+            var stringWriter = new StringWriter(stringBuilder, CultureInfo.InvariantCulture);
             VirtualStore[path] = stringBuilder;
+
             return stringWriter;
         }
 
@@ -79,22 +80,22 @@ namespace Microsoft.Rest.Generator.Utilities
             }
         }
 
-        public void DeleteDirectory(string dir)
+        public void DeleteDirectory(string directory)
         {
             foreach (var key in VirtualStore.Keys.ToArray())
             {
-                if (key.StartsWith(dir))
+                if (key.StartsWith(directory, StringComparison.OrdinalIgnoreCase))
                 {
                     VirtualStore.Remove(key);
                 }
             }
         }
 
-        public void EmptyDirectory(string dirPath)
+        public void EmptyDirectory(string directory)
         {
             foreach (var key in VirtualStore.Keys.ToArray())
             {
-                if (key.StartsWith(dirPath))
+                if (key.StartsWith(directory, StringComparison.OrdinalIgnoreCase))
                 {
                     VirtualStore.Remove(key);
                 }
@@ -105,7 +106,7 @@ namespace Microsoft.Rest.Generator.Utilities
         {
             foreach (var key in VirtualStore.Keys.ToArray())
             {
-                if (key.StartsWith(path))
+                if (key.StartsWith(path, StringComparison.OrdinalIgnoreCase))
                 {
                     return true;
                 }
@@ -123,7 +124,7 @@ namespace Microsoft.Rest.Generator.Utilities
             HashSet<string> dirs = new HashSet<string>();
             foreach (var key in VirtualStore.Keys.ToArray())
             {
-                if (key.StartsWith(startDirectory) &&
+                if (key.StartsWith(startDirectory, StringComparison.OrdinalIgnoreCase) &&
                     Regex.IsMatch(key, WildcardToRegex(filePattern), RegexOptions.IgnoreCase))
                 {
                     var directoryName = Path.GetDirectoryName(key);
@@ -141,7 +142,8 @@ namespace Microsoft.Rest.Generator.Utilities
             HashSet<string> files = new HashSet<string>();
             foreach (var key in VirtualStore.Keys.ToArray())
             {
-                if (key.StartsWith(startDirectory) && VirtualStore[key].ToString() != FolderKey &&
+                if (key.StartsWith(startDirectory, StringComparison.OrdinalIgnoreCase) && 
+                    VirtualStore[key].ToString() != FolderKey &&
                     Regex.IsMatch(key, WildcardToRegex(filePattern), RegexOptions.IgnoreCase))
                 {
                     if (!files.Contains(key))
@@ -158,6 +160,7 @@ namespace Microsoft.Rest.Generator.Utilities
         /// </summary>
         /// <param name="wildcard">Asterisk based pattern</param>
         /// <returns>Regeular expression of null is empty</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
         private static string WildcardToRegex(string wildcard)
         {
             if (string.IsNullOrEmpty(wildcard)) return wildcard;
