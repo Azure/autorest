@@ -27,6 +27,7 @@ function AzureServiceClient(credentials, options) {
     this.longRunningOperationRetryTimeoutInSeconds = 
       options.longRunningOperationRetryTimeoutInSeconds;
   }
+  this.subscriptionId = credentials.subscriptionId;
 }
 
 util.inherits(AzureServiceClient, msrest.ServiceClient);

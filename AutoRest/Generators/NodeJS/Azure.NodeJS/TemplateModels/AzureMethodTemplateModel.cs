@@ -37,12 +37,21 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         {
             var builder = new IndentedStringBuilder("  ");
 
+            if (this.Url != null && this.Url.Contains("{subscriptionId}")
+                && !ParameterTemplateModels.Any(p => p.SerializedName.Equals("subscriptionId", StringComparison.OrdinalIgnoreCase)))
+            {
+                builder
+                    .AppendLine("{0} = {0}.replace('{{subscriptionId}}', encodeURIComponent({1}.credentials.subscriptionId));",
+                            variableName,
+                            ClientReference);
+            }
+
             foreach (var pathParameter in ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
             {
-                string replaceString = "{0} = {0}.replace(\"{{{1}}}\", encodeURIComponent({2}));";
+                string replaceString = "{0} = {0}.replace('{{{1}}}', encodeURIComponent({2}));";
                 if (pathParameter.Extensions.ContainsKey(AzureCodeGenerator.SkipUrlEncodingExtension))
                 {
-                    replaceString = "{0} = {0}.replace(\"{{{1}}}\", {2});";
+                    replaceString = "{0} = {0}.replace('{{{1}}}', {2});";
                 }
 
                 builder.AppendLine(replaceString,
@@ -50,9 +59,10 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
                     pathParameter.Name,
                     pathParameter.Type.ToString(pathParameter.Name));
             }
+
+            builder.AppendLine("var queryParameters = [];");
             if (ParameterTemplateModels.Any(p => p.Location == ParameterLocation.Query))
             {
-                builder.AppendLine("var queryParameters = [];");
                 foreach (var queryParameter in ParameterTemplateModels
                     .Where(p => p.Location == ParameterLocation.Query))
                 {
@@ -62,12 +72,19 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
                             queryParameter.SerializedName, queryParameter.GetFormattedReferenceValue()).Outdent()
                         .AppendLine("}");
                 }
-
-                builder.AppendLine("if (queryParameters.length > 0) {")
-                    .Indent()
-                    .AppendLine("{0} += '?' + queryParameters.join('&');", variableName).Outdent()
-                    .AppendLine("}");
             }
+
+            if (!Parameters.Any(p => p.Name.Equals("apiVersion", StringComparison.OrdinalIgnoreCase)) &&
+                !IsAbsoluteUrl)
+            {
+                builder.AppendLine(
+                    "queryParameters.push('api-version=' + encodeURIComponent({0}.apiVersion));",
+                    ClientReference);
+            }
+            builder.AppendLine("if (queryParameters.length > 0) {")
+                .Indent()
+                .AppendLine("{0} += '?' + queryParameters.join('&');", variableName).Outdent()
+                .AppendLine("}");  
 
             return builder.ToString();
         }
