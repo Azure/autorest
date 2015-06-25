@@ -7,30 +7,30 @@
 
 package com.microsoft.rest.credentials;
 
-import com.microsoft.rest.core.pipeline.ServiceRequestContext;
-import com.microsoft.rest.core.pipeline.ServiceRequestFilter;
+import com.microsoft.rest.pipeline.ServiceRequestFilter;
+import org.apache.http.HttpRequest;
 
-import java.util.concurrent.ExecutorService;
-
+/**
+ * Token credentials filter for placing a token credentials into Apache pipeline.
+ */
 public class TokenCredentialsFilter implements ServiceRequestFilter {
     private TokenCredentials credentials;
 
+    /**
+     * Initialize a TokenCredentialsFilter class with a
+     * TokenCredentials credential.
+     *
+     * @param credentials a TokenCredentials instance
+     */
     public TokenCredentialsFilter(TokenCredentials credentials) {
         this.credentials = credentials;
     }
 
+    /* (non-Javadoc)
+     * @see com.microsoft.rest.pipeline.ServiceRequestFilter#filter(org.apache.http.HttpRequest)
+     */
     @Override
-    public void filter(ServiceRequestContext request) {
-        ExecutorService service = null;
-
-        try {
-            request.setHeader("Authorization", credentials.getScheme() + " " + credentials.getToken());
-        } catch (Exception e) {
-            // silently fail
-        } finally {
-            if (service != null) {
-                service.shutdown();
-            }
-        }
+    public void filter(HttpRequest request) {
+        request.setHeader("Authorization", credentials.getScheme() + " " + credentials.getToken());
     }
 }

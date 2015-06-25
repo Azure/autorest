@@ -5,9 +5,7 @@
  *
  */
 
-package com.microsoft.rest.core;
-
-import com.microsoft.rest.exception.ServiceException;
+package com.microsoft.rest;
 
 /**
  * Exception indicating a service operation has timed out.
@@ -25,8 +23,7 @@ public class ServiceTimeoutException extends ServiceException {
     /**
      * Construct a ServiceTimeoutException instance with the specified message.
      * 
-     * @param message
-     *            Exception message
+     * @param message exception message
      */
     public ServiceTimeoutException(String message) {
         super(message);
@@ -34,12 +31,10 @@ public class ServiceTimeoutException extends ServiceException {
 
     /**
      * Construct a ServiceTimeoutException instance with specified message and
-     * cause
+     * cause.
      * 
-     * @param message
-     *            Exception message
-     * @param cause
-     *            Exception that caused this exception to occur
+     * @param message exception message
+     * @param cause exception that caused this exception to occur
      */
     public ServiceTimeoutException(String message, Throwable cause) {
         super(message, cause);
@@ -48,8 +43,7 @@ public class ServiceTimeoutException extends ServiceException {
     /**
      * Construct a ServiceTimeoutException instance with the specified cause.
      * 
-     * @param cause
-     *            Exception that caused this exception to occur
+     * @param cause exception that caused this exception to occur
      */
     public ServiceTimeoutException(Throwable cause) {
         super(cause);

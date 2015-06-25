@@ -307,8 +307,20 @@ AzureServiceClient.prototype._getStatus = function (operationUrl, callback) {
     }
     var statusCode = response.statusCode;
     if (statusCode !== 200 && statusCode !== 201 && statusCode !== 202 && statusCode !== 204) {
-      var error = new Error(responseBody);
+      var error = new Error(util.format('Invalid status code with response body "%s" occurred ' + 
+        'when polling for operation status.', responseBody));
       error.statusCode = response.statusCode;
+      error.request = httpRequest;
+      error.response = response;
+      if (responseBody === '') responseBody = null;
+      try {
+        error.body = JSON.parse(responseBody);
+
+      } catch (badResponse) {
+        error.message += util.format(' Could not deserialize error response body - "%s" -.', responseBody);
+        error.body = responseBody;
+      }
+
       return callback(error);
     }
     // Create Result
@@ -316,7 +328,17 @@ AzureServiceClient.prototype._getStatus = function (operationUrl, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.body = JSON.parse(responseBody);
+    try {
+      result.body = JSON.parse(responseBody);
+    } catch (deserializationError) {
+      var parseError = new Error(util.format('Error "%s" occurred in deserializing the response body - "%s" -' + 
+        ' when polling for operation status.', deserializationError, responseBody));
+      parseError.request = httpRequest;
+      parseError.response = response;
+      parseError.body = responseBody;
+      return callback(parseError);
+    }
+
     return callback(null, result);
   });
 };

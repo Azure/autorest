@@ -78,10 +78,64 @@ describe('AzureServiceClient', function () {
         throw new Error('The given url does not match the expected url');
       }
     };
-    
-    var client = new AzureServiceClient(null, { longRunningOperationRetryTimeoutInSeconds : 0});
+
+    var client = new AzureServiceClient(null, { longRunningOperationRetryTimeoutInSeconds : 0 });
     client._getStatus = mockedGetStatus;
-    
+
+    describe('Negative tests for status deserialization', function() {
+      var mockFilter = function (response, responseBody) {
+        return function handle(options, next, callback) {
+          return callback(null, response, responseBody);
+        }
+      };
+      
+      it('lro put does not throw if invalid json is received on polling', function (done) {
+        var badResponseBody = '{';
+        var negativeClient = new AzureServiceClient(null, { longRunningOperationRetryTimeoutInSeconds : 0 });
+        negativeClient.addFilter(mockFilter({ statusCode: 202, body: badResponseBody }, badResponseBody));
+        resultOfInitialRequest.response.headers['azure-asyncoperation'] = '';
+        resultOfInitialRequest.response.headers['location'] = urlFromLocationHeader_Return200;
+        negativeClient.getPutOperationResult(resultOfInitialRequest, negativeClient._getStatus, function (err, result) {
+          should.exist(err);
+          should.exist(err.response);
+          should.exist(err.message);
+          err.message.should.match(/^Long running operation failed with error: 'Error.*occurred in deserializing the response body.*/ig);
+          done();
+        });
+      });
+      
+      it('lro put does not throw if invalid json with single quote is received on polling', function (done) {
+        var badResponseBody = '{\'"}';
+        var negativeClient = new AzureServiceClient(null, { longRunningOperationRetryTimeoutInSeconds : 0 });
+        negativeClient.addFilter(mockFilter({ statusCode: 202, body: badResponseBody }, badResponseBody));
+        resultOfInitialRequest.response.headers['azure-asyncoperation'] = '';
+        resultOfInitialRequest.response.headers['location'] = urlFromLocationHeader_Return200;
+        negativeClient.getPutOperationResult(resultOfInitialRequest, negativeClient._getStatus, function (err, result) {
+          should.exist(err);
+          should.exist(err.response);
+          should.exist(err.message);
+          err.message.should.match(/^Long running operation failed with error: 'Error.*occurred in deserializing the response body.*/ig);
+          done();
+        });
+      });
+
+      it('lro put does not throw if invalid json is received with invalid status code on polling', function (done) {
+        var badResponseBody = '{';
+        var negativeClient = new AzureServiceClient(null, { longRunningOperationRetryTimeoutInSeconds : 0 });
+        negativeClient.addFilter(mockFilter({ statusCode: 203, body: badResponseBody }, badResponseBody));
+       resultOfInitialRequest.response.headers['azure-asyncoperation'] = '';
+        resultOfInitialRequest.response.headers['location'] = urlFromLocationHeader_Return200;
+        negativeClient.getPutOperationResult(resultOfInitialRequest, negativeClient._getStatus, function (err, result) {
+          should.exist(err);
+          should.exist(err.response);
+          should.exist(err.message);
+          err.message.should.match(/^Long running operation failed with error:/ig);
+          err.message.should.match(/.*Could not deserialize error response body - .*/ig);
+          done();
+        });
+      });
+    });
+
     describe('Put', function () {
       resultOfInitialRequest.response.statusCode = 201;
       var pollerProvidedByClient = function (callback) {

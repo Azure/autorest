@@ -77,9 +77,9 @@ PollingState.prototype.getOperationResponse = function () {
 PollingState.prototype.getCloudError = function (err) {
   var errMsg;
   if (err && err.message) {
-    errMsg = err.message;  
+    errMsg = util.format('Long running operation failed with error: \'%s\'.', err.message);  
   } else {
-    errMsg = util.format('Long running operation failed with status \'%s\'.', this.status);
+    errMsg = util.format('Long running operation failed with status: \'%s\'.', this.status);
   }
   
   var error = new Error(errMsg);

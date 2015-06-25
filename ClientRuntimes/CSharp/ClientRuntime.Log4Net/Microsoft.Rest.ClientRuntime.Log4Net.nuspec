@@ -7,9 +7,9 @@
     <authors>Microsoft</authors>
     <owners>azure-sdk, Microsoft</owners>
     <licenseUrl>https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/Azure/azure-sdk-for-net</projectUrl>
+    <projectUrl>https://github.com/Azure/AutoRest</projectUrl>
     <iconUrl>http://go.microsoft.com/fwlink/?LinkID=288890</iconUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <summary>Provides Log4Net logging for AutoRest generated client libraries.</summary>
     <description>Enables logging of event messages for AutoRest generated client libraries via Log4Net.</description>
     <copyright>Copyright © Microsoft Corporation</copyright>

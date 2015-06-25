@@ -6,20 +6,22 @@
     <version>$version$</version>
     <authors>Microsoft</authors>
     <owners>azure-sdk, Microsoft</owners>
-    <licenseUrl>http://aka.ms/windowsazureapache2</licenseUrl>
-    <projectUrl>https://github.com/Azure/azure-sdk-for-net</projectUrl>
+    <licenseUrl>https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/Azure/AutoRest</projectUrl>
     <iconUrl>http://go.microsoft.com/fwlink/?LinkID=288890</iconUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
-    <summary>Provides infrastructure for common error handling, tracing, and HTTP/REST-based pipeline manipulation.</summary>
-    <description>Provides infrastructure for common error handling, tracing, and HTTP/REST-based pipeline manipulation.
+    <summary>Client infrastructure for Azure client libraries.</summary>
+    <description>Provides common error handling, tracing, and HTTP/REST-based pipeline manipulation.
 
-Supported Portable Library Platforms:
-- .NET Framework 4.0, 4.5, 4.5.1
-- .NET for Windows Store apps
-- Windows Phone 8.1
-- Portable Class Libraries</description>
+      Supported Platforms:
+      -   Portable Class Libraries
+      -   .NET Framework 4.5
+      -   .NET Framework 4.0
+      -   Windows 8
+      -   Windows Phone 8.1
+    </description>
     <copyright>Copyright © Microsoft Corporation</copyright>
-    <tags>Microsoft "Microsoft Azure" Azure cloud REST HTTP client core common azureofficial windowsazureofficial</tags>
+    <tags>Microsoft "Microsoft Azure" Azure REST azureofficial</tags>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="System.Runtime.Serialization" targetFramework="net40, net45" />
     </frameworkAssemblies>

@@ -42,7 +42,7 @@ describe('nodejs', function () {
     it('should work with Put201CreatingFailed200', function (done) {
       testClient.lROs.put201CreatingFailed200(product, function (error, result) {
         should.exist(error);
-        error.message.should.be.exactly('Long running operation failed with status \'Failed\'.');
+        error.message.should.be.exactly('Long running operation failed with status: \'Failed\'.');
         done();
       });
     });
@@ -57,7 +57,7 @@ describe('nodejs', function () {
     it('should work with Put200Acceptedcanceled200', function (done) {
       testClient.lROs.put200Acceptedcanceled200(product, function (error, result) {
         should.exist(error);
-        error.message.should.containEql('Long running operation failed with status \'Canceled\'.');
+        error.message.should.containEql('Long running operation failed with status: \'Canceled\'.');
         done();
       });
     });
@@ -229,7 +229,7 @@ describe('nodejs', function () {
     it('should work with PostAsyncRetrycanceled', function (done) {
       testClient.lROs.postAsyncRetrycanceled(product, function (error, result) {
         should.exist(error);
-        error.message.should.containEql('Long running operation failed with status \'Canceled\'');
+        error.message.should.containEql('Long running operation failed with status: \'Canceled\'');
         done();
       });
     });
@@ -237,7 +237,7 @@ describe('nodejs', function () {
     it('should work with PostAsyncRetryFailed', function (done) {
       testClient.lROs.postAsyncRetryFailed(product, function (error, result) {
         should.exist(error);
-        error.message.should.containEql('Long running operation failed with status \'Failed\'');
+        error.message.should.containEql('Long running operation failed with status: \'Failed\'');
         var errObject = JSON.parse(error.body);
         errObject.error.code.should.be.exactly(500);
         errObject.error.message.should.be.exactly('Internal Server Error');
@@ -328,7 +328,7 @@ describe('nodejs', function () {
         should.exist(error);
         //For C# we get "Long running operation failed with status 'BadRequest'
         //TODO: see whether we can get the parity. Node.js has different exception system.
-        error.message.should.containEql('Long running operation failed with status \'Creating\'.');
+        error.message.should.match(/^Long running operation failed with error: 'Invalid status code with response body.*/ig);
         done();
       });
     });
@@ -459,14 +459,13 @@ describe('nodejs', function () {
       });
     });
     
-    //TODO 4232358: should call callback on error in LRO polls
-    //it('should throw on PutAsyncRelativeRetryInvalidJsonPolling', function (done) {
-    //  testClient.lROSADs.putAsyncRelativeRetryInvalidJsonPolling(product, function (error, result) {
-    //    should.exist(error);
-    //    error.message.should.containEql('SyntaxError: Unexpected end of input');
-    //    done();
-    //  });
-    //});
+    it('should throw on PutAsyncRelativeRetryInvalidJsonPolling', function (done) {
+      testClient.lROSADs.putAsyncRelativeRetryInvalidJsonPolling(product, function (error, result) {
+        should.exist(error);
+        error.message.should.match(/.*SyntaxError: Unexpected end of input.*/ig);
+        done();
+      });
+    });
 
     it('should throw on Delete202RetryInvalidHeader', function (done) {
       testClient.lROSADs.delete202RetryInvalidHeader(function (error, result) {
@@ -484,14 +483,13 @@ describe('nodejs', function () {
       });
     });
     
-    //TODO 4232358: should call callback on error in LRO polls
-    //it('should throw on DeleteAsyncRelativeRetryInvalidJsonPolling', function (done) {
-    //  testClient.lROSADs.deleteAsyncRelativeRetryInvalidJsonPolling(function (error, result) {
-    //    should.exist(error);
-    //    error.message.should.containEql('SyntaxError: Unexpected end of input');
-    //    done();
-    //  });
-    //});
+    it('should throw on DeleteAsyncRelativeRetryInvalidJsonPolling', function (done) {
+      testClient.lROSADs.deleteAsyncRelativeRetryInvalidJsonPolling(function (error, result) {
+        should.exist(error);
+        error.message.should.match(/.*SyntaxError: Unexpected end of input.*/ig);
+        done();
+      });
+    });
 
     it('should throw on Post202RetryInvalidHeader', function (done) {
       testClient.lROSADs.post202RetryInvalidHeader(product, function (error, result) {
@@ -509,13 +507,12 @@ describe('nodejs', function () {
       });
     });
 
-    //TODO 4232358: should call callback on error in LRO polls
-    //it('should throw on PostAsyncRelativeRetryInvalidJsonPolling', function (done) {
-    //  testClient.lROSADs.postAsyncRelativeRetryInvalidJsonPolling(product, function (error, result) {
-    //    should.exist(error);
-    //    error.message.should.containEql('SyntaxError: Unexpected end of input');
-    //    done();
-    //  });
-    //});
+    it('should throw on PostAsyncRelativeRetryInvalidJsonPolling', function (done) {
+      testClient.lROSADs.postAsyncRelativeRetryInvalidJsonPolling(product, function (error, result) {
+        should.exist(error);
+        error.message.should.match(/.*SyntaxError: Unexpected end of input.*/ig);
+        done();
+      });
+    });
   });
 });

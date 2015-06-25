@@ -7,33 +7,39 @@
 
 package com.microsoft.rest.credentials;
 
-import com.microsoft.rest.core.pipeline.ServiceRequestContext;
-import com.microsoft.rest.core.pipeline.ServiceRequestFilter;
-import com.microsoft.rest.core.utils.Base64;
+import com.microsoft.rest.pipeline.ServiceRequestFilter;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.http.HttpRequest;
 
-import java.util.concurrent.ExecutorService;
+import java.io.UnsupportedEncodingException;
 
+/**
+ * Basic Auth credentials filter for placing a basic auth credentials into Apache pipeline.
+ */
 public class BasicAuthenticationCredentialsFilter implements ServiceRequestFilter {
     private BasicAuthenticationCredentials credentials;
 
+    /**
+     * Initialize a BasicAuthenticationCredentialsFilter class with a
+     * BasicAuthenticationCredentials credential.
+     *
+     * @param credentials a BasicAuthenticationCredentials instance
+     */
     public BasicAuthenticationCredentialsFilter(BasicAuthenticationCredentials credentials) {
         this.credentials = credentials;
     }
 
+    /* (non-Javadoc)
+     * @see com.microsoft.rest.pipeline.ServiceRequestFilter#filter(org.apache.http.HttpRequest)
+     */
     @Override
-    public void filter(ServiceRequestContext request) {
-        ExecutorService service = null;
-
+    public void filter(HttpRequest request) {
         try {
             String auth = credentials.getUserName() + ":" + credentials.getPassword();
-            auth = new String(Base64.encode(auth.getBytes("UTF8")));
+            auth = Base64.encodeBase64String(auth.getBytes("UTF8"));
             request.setHeader("Authorization", "Basic " + auth);
-        } catch (Exception e) {
+        } catch (UnsupportedEncodingException e) {
             // silently fail
-        } finally {
-            if (service != null) {
-                service.shutdown();
-            }
         }
     }
 }

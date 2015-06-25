@@ -37,6 +37,9 @@
     <Compile Include="test\logfilterTests.js">
       <TestFramework>Mocha</TestFramework>
     </Compile>
+    <Compile Include="test\redirectfilterTests.js">
+      <TestFramework>Mocha</TestFramework>
+    </Compile>
     <Compile Include="test\proxyfilterTests.js">
       <TestFramework>Mocha</TestFramework>
     </Compile>

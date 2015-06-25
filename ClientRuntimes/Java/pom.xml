@@ -1,12 +1,8 @@
-<!--
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the MIT License. See License.txt in the project root for license information.
--->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.microsoft.rest</groupId>
-  <artifactId>autorest</artifactId>
+  <artifactId>client-runtime</artifactId>
   <version>0.0.1</version>
   <packaging>jar</packaging>
 
@@ -16,8 +12,8 @@ Licensed under the MIT License. See License.txt in the project root for license 
 
   <licenses>
     <license>
-      <name>The Apache Software License, Version 2.0</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <name>The MIT License (MIT)</name>
+      <url>http://opensource.org/licenses/MIT</url>
       <distribution>repo</distribution>
     </license>
   </licenses>
@@ -50,6 +46,11 @@ Licensed under the MIT License. See License.txt in the project root for license 
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-io</artifactId>
       <version>1.3.2</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <version>1.10</version>
     </dependency>
     <dependency>
       <groupId>commons-lang</groupId>
@@ -106,7 +107,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>2.8</version>
         <configuration>
-          <excludePackageNames>*.implementation.*;*.utils.*;com.microsoft.schemas._2003._10.serialization;*.blob.core.storage</excludePackageNames>
           <bottom><![CDATA[<code>/**
 <br/>* Copyright (c) Microsoft Corporation. All rights reserved.
 <br/>* Licensed under the MIT License. See License.txt in the project root for license information.
