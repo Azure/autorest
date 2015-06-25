@@ -53,11 +53,11 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         //For now (till the PBI gets addressed for the refactoring work), a generic field is used
         //for the reason that SwaggerParameter inherits from this class, but per spec, it's 'IsRequired' 
         //field should be boolean, not an array.
-        public List<string> Required { get; set; }
+        public IList<string> Required { get; set; }
 
         /// <summary>
         /// Defines the set of schemas this shema is composed of
         /// </summary>
-        public List<Schema> AllOf { get; set; }
+        public IList<Schema> AllOf { get; set; }
     }
 }

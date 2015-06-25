@@ -13,8 +13,6 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
 {
     public class AzureMethodTemplateModel : MethodTemplateModel
     {
-        private readonly IScopeProvider _scopeProvider = new ScopeProvider();
-
         public AzureMethodTemplateModel(Method source, ServiceClient serviceClient)
             : base(source, serviceClient)
         {

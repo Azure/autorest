@@ -4,6 +4,8 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Rest.Generator.ClientModel;
+using System.Globalization;
+using Microsoft.Rest.Modeler.Swagger.Properties;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
 {
@@ -54,7 +56,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
         public virtual string Pattern { get; set; }
 
-        public virtual List<string> Enum { get; set; }
+        public virtual IList<string> Enum { get; set; }
 
         public ObjectBuilder GetBuilder(SwaggerModeler swaggerSpecBuilder)
         {
@@ -105,8 +107,8 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                     return PrimaryType.Stream;
                 default:
                     throw new NotImplementedException(
-                        string.Format(
-                            "\"{0}\" is not implemented in SwaggerSchema.ToType extension method.",
+                        string.Format(CultureInfo.InvariantCulture, 
+                           Resources.InvalidTypeInSwaggerSchema,
                             Type));
             }
         }

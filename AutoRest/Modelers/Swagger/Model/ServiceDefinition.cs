@@ -28,10 +28,11 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             Tags = new List<Tag>();
             ExternalReferences = new List<string>();
         }
+
         /// <summary>
         /// Specifies the Swagger Specification version being used. 
         /// </summary>
-        public string Swagger;
+        public string Swagger { get; set; }
 
         /// <summary>
         /// Provides metadata about the API. The metadata can be used by the clients if needed.
@@ -51,17 +52,17 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// <summary>
         /// The transfer protocol of the API.
         /// </summary>
-        public List<TransferProtocolScheme> Schemes { get; set; }
+        public IList<TransferProtocolScheme> Schemes { get; set; }
 
         /// <summary>
         /// A list of MIME types the service can consume.
         /// </summary>
-        public List<string> Consumes { get; set; }
+        public IList<string> Consumes { get; set; }
 
         /// <summary>
         /// A list of MIME types the APIs can produce.
         /// </summary>
-        public List<string> Produces { get; set; }
+        public IList<string> Produces { get; set; }
 
         /// <summary>
         /// Key is actual path and the value is serializationProperty of http operations and operation objects.
@@ -95,7 +96,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// (that is, there is a logical OR between the security requirements). Individual 
         /// operations can override this definition.
         /// </summary>
-        public List<Dictionary<string, List<string>>> Security { get; set; }
+        public IList<Dictionary<string, List<string>>> Security { get; set; }
 
         /// <summary>
         /// A list of tags used by the specification with additional metadata. The order 
@@ -104,7 +105,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// not declared may be organized randomly or based on the tools' logic. Each 
         /// tag name in the list MUST be unique.
         /// </summary>
-        public List<Tag> Tags { get; set; }
+        public IList<Tag> Tags { get; set; }
 
         /// <summary>
         /// Additional external documentation
@@ -114,6 +115,6 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// <summary>
         /// A list of all external references listed in the service.
         /// </summary>
-        public List<string> ExternalReferences { get; set; }
+        public IList<string> ExternalReferences { get; set; }
     }
 }

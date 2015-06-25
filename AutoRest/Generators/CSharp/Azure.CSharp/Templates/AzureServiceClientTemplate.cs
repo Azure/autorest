@@ -425,7 +425,7 @@ Write(WrapComment("/// ", Model.Documentation));
 #line hidden
             WriteLiteral("(");
 #line 139 "AzureServiceClientTemplate.cshtml"
-                           Write(Model.RequiredContructorParameters);
+                           Write(Model.RequiredConstructorParameters);
 
 #line default
 #line hidden
@@ -534,7 +534,7 @@ Write(WrapComment("/// ", Model.Documentation));
 #line hidden
             WriteLiteral("(Uri baseUri, ");
 #line 171 "AzureServiceClientTemplate.cshtml"
-                                        Write(Model.RequiredContructorParameters);
+                                        Write(Model.RequiredConstructorParameters);
 
 #line default
 #line hidden
@@ -762,7 +762,7 @@ Write(WrapComment("/// ", Model.Documentation));
 
             WriteLiteral("        ");
 #line 235 "AzureServiceClientTemplate.cshtml"
-      Write(Include<AzureMethodTemplate, AzureMethodTemplateModel>((AzureMethodTemplateModel)method));
+      Write(Include(new AzureMethodTemplate(), (AzureMethodTemplateModel)method));
 
 #line default
 #line hidden

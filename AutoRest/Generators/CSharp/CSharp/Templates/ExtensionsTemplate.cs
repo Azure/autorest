@@ -99,7 +99,7 @@ Write(EmptyLine);
 
             WriteLiteral("            ");
 #line 23 "ExtensionsTemplate.cshtml"
-          Write(Include<ExtensionMethodTemplate, MethodTemplateModel>(method));
+          Write(Include(new ExtensionMethodTemplate(), method));
 
 #line default
 #line hidden

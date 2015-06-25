@@ -136,7 +136,7 @@ namespace @Settings.Namespace
         @:/// Optional. The set of delegating handlers to insert in the http
         @:/// client pipeline.
         @:/// </param>
-        @:public @(Model.Name)(@(Model.RequiredContructorParameters), params DelegatingHandler[] handlers) : this(handlers)
+        @:public @(Model.Name)(@(Model.RequiredConstructorParameters), params DelegatingHandler[] handlers) : this(handlers)
         @:{
         foreach (var param in parameters)
         {
@@ -168,7 +168,7 @@ namespace @Settings.Namespace
         @:/// Optional. The set of delegating handlers to insert in the http
         @:/// client pipeline.
         @:/// </param>
-        @:public @(Model.Name)(Uri baseUri, @(Model.RequiredContructorParameters), params DelegatingHandler[] handlers) : this(handlers)
+        @:public @(Model.Name)(Uri baseUri, @(Model.RequiredConstructorParameters), params DelegatingHandler[] handlers) : this(handlers)
         @:{
         @:    if (baseUri == null)
         @:    {
@@ -232,7 +232,7 @@ namespace @Settings.Namespace
     
         @foreach (var method in Model.MethodTemplateModels)
         {
-        @:@(Include<AzureMethodTemplate, AzureMethodTemplateModel>((AzureMethodTemplateModel)method))
+        @:@(Include(new AzureMethodTemplate(), (AzureMethodTemplateModel)method))
         @EmptyLine
         @:
         }

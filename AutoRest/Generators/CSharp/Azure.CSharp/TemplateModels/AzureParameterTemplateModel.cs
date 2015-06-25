@@ -3,6 +3,7 @@
 
 using System;
 using Microsoft.Rest.Generator.ClientModel;
+using System.Globalization;
 
 namespace Microsoft.Rest.Generator.CSharp.Azure
 {
@@ -23,7 +24,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                     Location == ParameterLocation.Query &&
                     Type is CompositeType)
                 {
-                    return string.Format("Expression<Func<{0}, bool>>", Type.Name);
+                    return string.Format(CultureInfo.InvariantCulture, 
+                        "Expression<Func<{0}, bool>>", Type.Name);
                 }
 
                 return base.DeclarationExpression;

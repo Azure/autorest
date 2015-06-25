@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Microsoft.Rest.Generator.ClientModel
 {
@@ -51,7 +52,7 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <summary>
         /// Gets or sets the constraints.
         /// </summary>
-        public Dictionary<Constraint, string> Constraints { get; set; }
+        public Dictionary<Constraint, string> Constraints { get; private set; }
 
         /// <summary>
         /// Gets or sets the documentation.
@@ -66,7 +67,7 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// </returns>
         public override string ToString()
         {
-            return string.Format("{0} {1} {{get;{2}}}", Type, Name, IsReadOnly ? "" : "set;");
+            return string.Format(CultureInfo.InvariantCulture, "{0} {1} {{get;{2}}}", Type, Name, IsReadOnly ? "" : "set;");
         }
     }
 }

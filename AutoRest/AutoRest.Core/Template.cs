@@ -8,6 +8,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Rest.Generator.Utilities;
+using Microsoft.Rest.Generator.Properties;
 
 namespace Microsoft.Rest.Generator
 {
@@ -158,11 +159,11 @@ namespace Microsoft.Rest.Generator
         /// </summary>
         /// <typeparam name="TU">Template type</typeparam>
         /// <typeparam name="TV">Template model type</typeparam>
+        /// <param name="template">Template</param>
         /// <param name="templateModel">Template model</param>
         /// <returns></returns>
-        protected string Include<TU, TV>(TV templateModel) where TU : Template<TV>, new()
+        protected string Include<TU, TV>(TU template, TV templateModel) where TU : Template<TV>, new()
         {
-            TU template = new TU();
             template.Model = templateModel;
             template.Settings = Settings;
             return template.ToString();
@@ -192,7 +193,7 @@ namespace Microsoft.Rest.Generator
             }
 
             // escape comment as needed
-            comment = comment.Replace("\\", "\\\\");
+            comment = comment.Replace("\\", Resources.CommentString);
 
             int available =
                 MaximumCommentColumn - // Maximum desired width
@@ -227,7 +228,7 @@ namespace Microsoft.Rest.Generator
             if (Model != null)
             {
                 var existingOutput = TextWriter;
-                using (TextWriter = new StringWriter(sb))
+                using (TextWriter = new StringWriter(sb, CultureInfo.InvariantCulture))
                 {
                     ExecuteAsync().ConfigureAwait(false).GetAwaiter().GetResult();
                 }

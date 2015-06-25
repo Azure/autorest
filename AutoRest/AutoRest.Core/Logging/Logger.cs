@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 
@@ -33,7 +34,7 @@ namespace Microsoft.Rest.Generator.Logging
         /// <param name="args">Optional arguments to use if message includes formatting.</param>
         public static void LogInfo(string message, params object[] args)
         {
-            Entries.Add(new LogEntry(LogEntrySeverity.Info, string.Format(message, args)));
+            Entries.Add(new LogEntry(LogEntrySeverity.Info, string.Format(CultureInfo.InvariantCulture, message, args)));
         }
 
         /// <summary>
@@ -43,7 +44,7 @@ namespace Microsoft.Rest.Generator.Logging
         /// <param name="args">Optional arguments to use if the message includes formatting.</param>
         public static void LogWarning(string text, params object[] args)
         {
-            Entries.Add(new LogEntry(LogEntrySeverity.Warning, string.Format(text, args)));
+            Entries.Add(new LogEntry(LogEntrySeverity.Warning, string.Format(CultureInfo.InvariantCulture, text, args)));
         }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace Microsoft.Rest.Generator.Logging
         /// <param name="args">Optional arguments to use if the message includes formatting.</param>
         public static void LogError(Exception exception, string message, params object[] args)
         {
-            string formattedMessage = String.Format(message, args);
+            string formattedMessage = String.Format(CultureInfo.InvariantCulture, message, args);
             Entries.Add(exception != null
                 ? new LogEntry(LogEntrySeverity.Error, formattedMessage)
                 {
@@ -118,7 +119,9 @@ namespace Microsoft.Rest.Generator.Logging
             }
             foreach (var logEntry in Entries.Where(e => e.Severity == LogEntrySeverity.Warning))
             {
-                writer.WriteLine("{0}: {1}", logEntry.Severity.ToString().ToLower(), logEntry.Message);
+                writer.WriteLine("{0}: {1}", 
+                    logEntry.Severity.ToString().ToUpperInvariant(), 
+                    logEntry.Message);
             }
         }
 
@@ -135,7 +138,9 @@ namespace Microsoft.Rest.Generator.Logging
 
             foreach (var logEntry in Entries.Where(e => e.Severity == LogEntrySeverity.Info))
             {
-                writer.WriteLine("{0}: {1}", logEntry.Severity.ToString().ToLower(), logEntry.Message);
+                writer.WriteLine("{0}: {1}", 
+                    logEntry.Severity.ToString().ToUpperInvariant(), 
+                    logEntry.Message);
             }
         }
     }

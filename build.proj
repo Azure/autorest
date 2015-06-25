@@ -118,10 +118,9 @@
              Properties="Configuration=%(LibraryFxTargetList.Identity)-$(Configuration);Platform=Any CPU;RunCodeAnalysis=true;CodeAnalysisTreatWarningsAsErrors=true"
              Targets="Rebuild" />
              
-    <!-- TODO: Re-enable code analysis once all issues are resolved -->
-    <!--<MSBuild Projects="$(CodeGeneratorSolution)"
+    <MSBuild Projects="$(CodeGeneratorSolution)"
              Properties="Configuration=Net45-$(Configuration);Platform=Any CPU;RunCodeAnalysis=true;CodeAnalysisTreatWarningsAsErrors=true"
-             Targets="Rebuild" />-->
+             Targets="Rebuild" />
   </Target>
   
   <!-- Run all tests. -->

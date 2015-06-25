@@ -10,7 +10,7 @@
 
 @if (!Model.IsLongRunningOperation)
 {
-@:@(Include<MethodTemplate, MethodTemplateModel>(Model))
+@:@(Include( new MethodTemplate(), Model as MethodTemplateModel))
 }
 else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.Delete)
 {

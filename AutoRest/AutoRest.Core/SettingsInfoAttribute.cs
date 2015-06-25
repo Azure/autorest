@@ -11,6 +11,7 @@ namespace Microsoft.Rest.Generator
     [AttributeUsageAttribute(AttributeTargets.Property)]
     public sealed class SettingsInfoAttribute : Attribute
     {
+        private string _documentation;
         /// <summary>
         /// Initializes a new instance of SettingsInfoAttribute with documentation and required flag.
         /// </summary>
@@ -19,7 +20,7 @@ namespace Microsoft.Rest.Generator
         /// line argument.</param>
         public SettingsInfoAttribute(string documentation, bool isRequired)
         {
-            Documentation = documentation;
+            _documentation = documentation;
             IsRequired = isRequired;
         }
 
@@ -36,7 +37,7 @@ namespace Microsoft.Rest.Generator
         /// <summary>
         /// Documentation text of the settings property.
         /// </summary>
-        public string Documentation { get; set; }
+        public string Documentation { get { return _documentation; } }
 
         /// <summary>
         /// True if property is required, false otherwise.

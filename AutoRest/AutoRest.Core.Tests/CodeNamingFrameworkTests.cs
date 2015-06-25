@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Microsoft.Rest.Generator.Test
 {
-    public class FakeCodeNamingFramework : CodeNamingFramework
+    public class FakeCodeNamer : CodeNamer
     {
         protected override ClientModel.IType NormalizeType(ClientModel.IType type)
         {
@@ -24,7 +24,7 @@ namespace Microsoft.Rest.Generator.Test
         [InlineData(null, null)]
         public void PascalCase(string expected, string value)
         {
-            var result = CodeNamingFramework.PascalCase(value);
+            var result = CodeNamer.PascalCase(value);
             Assert.Equal(expected, result);
         }
 
@@ -36,14 +36,14 @@ namespace Microsoft.Rest.Generator.Test
         [InlineData(null, null)]
         public void CamelCase(string expected, string value)
         {
-            var result = CodeNamingFramework.CamelCase(value);
+            var result = CodeNamer.CamelCase(value);
             Assert.Equal(expected, result);
         }
 
         [Fact]
         public void SpecialCharacterGetReplacedWithTheirNames()
         {
-            var codeNameing= new FakeCodeNamingFramework();
+            var codeNameing= new FakeCodeNamer();
 
             Assert.Equal(
                 "AsteriskAsteriskSpaceAsteriskAsteriskPercentSignCircumflexAccentSpaceCircumflexAccentCircumflexAccentDollarSignSpaceNumberSignNumberSignDollarSign",

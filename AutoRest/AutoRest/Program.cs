@@ -55,20 +55,19 @@ namespace Microsoft.Rest.Generator.Cli
                         }
 
                         Logger.WriteErrors(Console.Error,
-                            args.Any(a => "-Verbose".Equals(a, StringComparison.InvariantCultureIgnoreCase)));
+                            args.Any(a => "-Verbose".Equals(a, StringComparison.OrdinalIgnoreCase)));
 
                         Logger.WriteWarnings(Console.Out);
 
                         // Include LogEntrySeverity.Infos for verbose logging.
-                        if (args.Any(a => "-Verbose".Equals(a, StringComparison.InvariantCultureIgnoreCase)))
+                        if (args.Any(a => "-Verbose".Equals(a, StringComparison.OrdinalIgnoreCase)))
                         {
                             Logger.WriteInfos(Console.Out);
                         }
 
                         if (settings != null)
                         {
-                            // TODO: use resource string
-                            Console.WriteLine(@"Finished generating {0} code for {1}.",
+                            Console.WriteLine(Resources.GenerationComplete,
                                 settings.CodeGenerator, settings.Input);
                         }
 
@@ -78,8 +77,8 @@ namespace Microsoft.Rest.Generator.Cli
             }
             catch (Exception exception)
             {
-                Console.Error.WriteLine("error: {0}", exception.Message);
-                Console.Error.WriteLine("\t{0}", exception.StackTrace);
+                Console.Error.WriteLine(Resources.ConsoleErrorMessage, exception.Message);
+                Console.Error.WriteLine(Resources.ConsoleErrorStackTrace, exception.StackTrace);
             }
         }
 
@@ -92,7 +91,7 @@ namespace Microsoft.Rest.Generator.Cli
         private static bool IsShowHelpIncluded(string[] args)
         {
             if (args == null || args.Length == 0 ||
-                args.Any(a => a == "-?" || a == "/?" || "-help".Equals(a, StringComparison.InvariantCultureIgnoreCase)))
+                args.Any(a => a == "-?" || a == "/?" || "-help".Equals(a, StringComparison.OrdinalIgnoreCase)))
             {
                 return true;
             }
@@ -107,7 +106,7 @@ namespace Microsoft.Rest.Generator.Cli
         private static bool IsShowMarkdownHelpIncluded(string[] args)
         {
             if (IsShowHelpIncluded(args) &&
-                args.Any(a => a == "-md" || "-markdown".Equals(a, StringComparison.InvariantCultureIgnoreCase)))
+                args.Any(a => a == "-md" || "-markdown".Equals(a, StringComparison.OrdinalIgnoreCase)))
             {
                 return true;
             }

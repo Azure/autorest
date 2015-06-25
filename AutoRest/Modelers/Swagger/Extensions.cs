@@ -4,6 +4,7 @@
 using System;
 using System.Net;
 using Microsoft.Rest.Generator.ClientModel;
+using System.Globalization;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
@@ -19,7 +20,12 @@ namespace Microsoft.Rest.Modeler.Swagger
 
         public static HttpMethod ToHttpMethod(this string verb)
         {
-            switch (verb.ToLower())
+            if (verb == null)
+            {
+                throw new ArgumentNullException("verb");
+            }
+
+            switch (verb.ToLower(CultureInfo.InvariantCulture))
             {
                 case "get":
                     return HttpMethod.Get;

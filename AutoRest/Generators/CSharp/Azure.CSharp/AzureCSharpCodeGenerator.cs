@@ -11,11 +11,11 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
 {
     public class AzureCSharpCodeGenerator : AzureCodeGenerator
     {
-        private readonly AzureCSharpCodeNamingFramework _namingFramework;
+        private readonly AzureCSharpCodeNamer _namer;
 
         public AzureCSharpCodeGenerator(Settings settings) : base(settings)
         {
-            _namingFramework = new AzureCSharpCodeNamingFramework();
+            _namer = new AzureCSharpCodeNamer();
         }
 
         public override string Name
@@ -45,8 +45,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
             base.NormalizeClientModel(serviceClient);
-            _namingFramework.NormalizeClientModel(serviceClient);
-            _namingFramework.ResolveNameCollisions(serviceClient, Settings.Namespace,
+            _namer.NormalizeClientModel(serviceClient);
+            _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
         }
 

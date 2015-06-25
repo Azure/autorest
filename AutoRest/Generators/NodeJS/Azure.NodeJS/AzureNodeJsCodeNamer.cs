@@ -5,7 +5,7 @@ using Microsoft.Rest.Generator.NodeJS;
 
 namespace Microsoft.Rest.Generator.Azure.NodeJS
 {
-    public class AzureNodeJSCodeNamingFramework : NodeJSCodeNamingFramework
+    public class AzureNodeJsCodeNamer : NodeJsCodeNamer
     {
     }
 }

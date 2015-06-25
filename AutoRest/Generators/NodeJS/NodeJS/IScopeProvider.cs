@@ -5,6 +5,6 @@ namespace Microsoft.Rest.Generator.NodeJS
 {
     public interface IScopeProvider
     {
-        string GetVariableName(string prefix, int suffix = 0);
+        string GetVariableName(string prefix);
     }
 }

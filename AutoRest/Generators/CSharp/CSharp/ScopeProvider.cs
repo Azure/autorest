@@ -16,17 +16,26 @@ namespace Microsoft.Rest.Generator.CSharp
         /// Get a variable name that is unique in this method's scope
         /// </summary>
         /// <param name="prefix">The variable prefix</param>
-        /// <param name="suffix">The suffix added to the variable - a simple counter is used to generate new variable names</param>
         /// <returns>A variable name unique in this method</returns>
-        public string GetVariableName(string prefix, int suffix = 0)
+        public string GetVariableName(string prefix)
         {
-            string name = (suffix > 0) ? prefix + suffix : prefix;
+            if (_variables.Add(prefix))
+            {
+                return prefix;
+            }
+
+            return GetAlternateVariableName(prefix, 1);
+        }
+
+        private string GetAlternateVariableName(string prefix, int suffix)
+        {
+            string name = prefix + suffix;
             if (_variables.Add(name))
             {
                 return name;
             }
 
-            return GetVariableName(prefix, ++suffix);
+            return GetAlternateVariableName(prefix, ++suffix);
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.CSharp.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
+using System.Globalization;
 
 namespace Microsoft.Rest.Generator.CSharp
 {
@@ -19,7 +20,7 @@ namespace Microsoft.Rest.Generator.CSharp
                 .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient)));
         }
 
-        public List<MethodTemplateModel> MethodTemplateModels { get; set; }
+        public List<MethodTemplateModel> MethodTemplateModels { get; private set; }
 
         public virtual IEnumerable<MethodGroupTemplateModel> Operations
         {
@@ -40,13 +41,14 @@ namespace Microsoft.Rest.Generator.CSharp
             }
         }
 
-        public string RequiredContructorParameters
+        public string RequiredConstructorParameters
         {
             get
             {
                 List<string> requireParams = new List<string>();
                 this.Properties.Where(p => p.IsRequired)
-                    .ForEach(p => requireParams.Add(string.Format("{0} {1}", p.Type.Name, p.Name.ToCamelCase())));
+                    .ForEach(p => requireParams.Add(string.Format(CultureInfo.InvariantCulture, 
+                        "{0} {1}", p.Type.Name, p.Name.ToCamelCase())));
                 return string.Join(", ", requireParams);
             }
         }

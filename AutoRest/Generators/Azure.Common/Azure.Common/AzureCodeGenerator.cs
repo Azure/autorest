@@ -9,6 +9,7 @@ using Microsoft.Rest.Generator.Azure.Properties;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger;
+using System.Globalization;
 
 namespace Microsoft.Rest.Generator.Azure
 {
@@ -55,7 +56,7 @@ namespace Microsoft.Rest.Generator.Azure
         /// Changes head method return type.
         /// </summary>
         /// <param name="serviceClient">Service client</param>
-        private void UpdateHeadMethods(ServiceClient serviceClient)
+        private static void UpdateHeadMethods(ServiceClient serviceClient)
         {
             foreach (var method in serviceClient.Methods.Where(m => m.HttpMethod == HttpMethod.Head)
                                                              .Where(m => m.ReturnType == null))
@@ -69,7 +70,8 @@ namespace Microsoft.Rest.Generator.Azure
                 else
                 {
                     throw new NotSupportedException(
-                        string.Format(Resources.HeadMethodInvalidResponses, method.Name));
+                        string.Format(CultureInfo.InvariantCulture, 
+                        Resources.HeadMethodInvalidResponses, method.Name));
                 }
             }
         }
@@ -78,7 +80,7 @@ namespace Microsoft.Rest.Generator.Azure
         /// Set default response to CloudError if not defined explicitly.
         /// </summary>
         /// <param name="serviceClient"></param>
-        public static void SetDefaultResponses(ServiceClient serviceClient)
+        internal static void SetDefaultResponses(ServiceClient serviceClient)
         {
             // Create CloudError if not already defined
             CompositeType cloudError = serviceClient.ModelTypes.FirstOrDefault(c =>
@@ -106,7 +108,7 @@ namespace Microsoft.Rest.Generator.Azure
         /// Removes common properties including subscriptionId and apiVersion from method signatures.
         /// </summary>
         /// <param name="serviceClient"></param>
-        public static void RemoveCommonPropertiesFromMethods(ServiceClient serviceClient)
+        internal static void RemoveCommonPropertiesFromMethods(ServiceClient serviceClient)
         {
             foreach (var method in serviceClient.Methods)
             {
@@ -125,14 +127,16 @@ namespace Microsoft.Rest.Generator.Azure
         /// Converts Azure Parameters to regular parameters.
         /// </summary>
         /// <param name="serviceClient">Service client</param>
-        public static void ParseODataExtension(ServiceClient serviceClient)
+        internal static void ParseODataExtension(ServiceClient serviceClient)
         {
             foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(ODataExtension)))
             {
                 string odataModelPath = (string) method.Extensions[ODataExtension];
                 if (odataModelPath == null)
                 {
-                    throw new InvalidOperationException(string.Format(Resources.ODataEmpty, ODataExtension));
+                    throw new InvalidOperationException(
+                        string.Format(CultureInfo.InvariantCulture, 
+                        Resources.ODataEmpty, ODataExtension));
                 }
 
                 odataModelPath = odataModelPath.StripDefinitionPath();
@@ -143,14 +147,17 @@ namespace Microsoft.Rest.Generator.Azure
                 if (odataType == null)
                 {
                     throw new InvalidOperationException(
-                        string.Format(Resources.ODataInvalidReferance, ODataExtension));
+                        string.Format(CultureInfo.InvariantCulture, 
+                        Resources.ODataInvalidReferance, ODataExtension));
                 }
                 var filterParameter = method.Parameters
                     .FirstOrDefault(p => p.Location == ParameterLocation.Query &&
                                          p.Name == "$filter");
                 if (filterParameter == null)
                 {
-                    throw new InvalidOperationException(string.Format(Resources.ODataFilterMissing, ODataExtension));
+                    throw new InvalidOperationException(
+                        string.Format(CultureInfo.InvariantCulture, 
+                        Resources.ODataFilterMissing, ODataExtension));
                 }
 
                 filterParameter.Type = odataType;
@@ -161,7 +168,7 @@ namespace Microsoft.Rest.Generator.Azure
         /// Creates long running operation methods.
         /// </summary>
         /// <param name="serviceClient"></param>
-        public static void AddLongRunningOperations(ServiceClient serviceClient)
+        internal static void AddLongRunningOperations(ServiceClient serviceClient)
         {
             for (int i = 0; i < serviceClient.Methods.Count; i++)
             {
@@ -185,7 +192,7 @@ namespace Microsoft.Rest.Generator.Azure
         /// Creates azure specific properties.
         /// </summary>
         /// <param name="serviceClient"></param>
-        public static void AddAzureProperties(ServiceClient serviceClient)
+        internal static void AddAzureProperties(ServiceClient serviceClient)
         {
             serviceClient.Properties.Add(new Property
             {
@@ -218,7 +225,7 @@ namespace Microsoft.Rest.Generator.Azure
         /// Flattens the Resource Properties.
         /// </summary>
         /// <param name="serviceClient"></param>
-        public static void FlattenResourceProperties(ServiceClient serviceClient)
+        internal static void FlattenResourceProperties(ServiceClient serviceClient)
         {
             HashSet<string> typesToDelete = new HashSet<string>();
             foreach (var compositeType in serviceClient.ModelTypes.ToArray())
@@ -233,7 +240,9 @@ namespace Microsoft.Rest.Generator.Azure
                         p => p.Name.Equals(ResourceProperties, StringComparison.OrdinalIgnoreCase));
                     if (propertiesProperty == null)
                     {
-                        throw new InvalidOperationException(string.Format(Resources.MissingProperties,
+                        throw new InvalidOperationException(
+                            string.Format(CultureInfo.InvariantCulture, 
+                            Resources.MissingProperties,
                             compositeType.Name));
                     }
                     var propertiesModel = propertiesProperty.Type as CompositeType;
@@ -262,7 +271,7 @@ namespace Microsoft.Rest.Generator.Azure
         /// Adds ListNext() method for each List method with x-ms-pageable extension.
         /// </summary>
         /// <param name="serviceClient"></param>
-        public static void AddPageableMethod(ServiceClient serviceClient)
+        internal static void AddPageableMethod(ServiceClient serviceClient)
         {
             foreach (var method in serviceClient.Methods.ToArray())
             {

@@ -83,7 +83,7 @@ util.inherits(@Model.Name, ServiceClient);
 @foreach (var method in Model.MethodTemplateModels)
 {
 @EmptyLine
-@:@(Include<AzureMethodTemplate, AzureMethodTemplateModel>(method as AzureMethodTemplateModel))
+@:@(Include(new AzureMethodTemplate(), method as AzureMethodTemplateModel))
 }
 @EmptyLine
 module.exports = @Model.Name;

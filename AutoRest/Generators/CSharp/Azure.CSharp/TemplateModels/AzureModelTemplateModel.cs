@@ -8,8 +8,6 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
 {
     public class AzureModelTemplateModel : ModelTemplateModel
     {
-        private readonly IScopeProvider _scope = new ScopeProvider();
-
         public AzureModelTemplateModel(CompositeType source) : base(source)
         {
         }

@@ -34,7 +34,7 @@ function @(Model.MethodGroupType)(client) {
 @EmptyLine
 @foreach (var method in Model.MethodTemplateModels)
 {
-@:@(Include<MethodTemplate, MethodTemplateModel>(method))
+@:@(Include(new MethodTemplate(), method))
 @EmptyLine
 }
 @EmptyLine

@@ -291,7 +291,7 @@ Write(EmptyLine);
 #line hidden
 
 #line 86 "AzureServiceClientTemplate.cshtml"
-Write(Include<AzureMethodTemplate, AzureMethodTemplateModel>(method as AzureMethodTemplateModel));
+Write(Include(new AzureMethodTemplate(), method as AzureMethodTemplateModel));
 
 #line default
 #line hidden
