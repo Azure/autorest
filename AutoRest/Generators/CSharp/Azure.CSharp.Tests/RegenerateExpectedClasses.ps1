@@ -2,7 +2,7 @@ $tests =
 @{
     "SwaggerBat\Lro.Cs"="..\..\AcceptanceTests\swagger\lro.json";
     "SwaggerBat\Paging.Cs"="..\..\AcceptanceTests\swagger\paging.json";
-    "SwaggerBat\Report.Cs"="..\..\AcceptanceTests\swagger\azure-report.json";
+    "SwaggerBat\AzureReport.Cs"="..\..\AcceptanceTests\swagger\azure-report.json";
     "SwaggerBat\ResourceFlattening.Cs"="..\..\AcceptanceTests\swagger\resource-flattening.json";
     "SwaggerBat\Head.Cs"="..\..\AcceptanceTests\swagger\head.json";
 }

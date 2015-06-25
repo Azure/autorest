@@ -31,7 +31,7 @@ namespace Microsoft.Azure
             this IAzureClient client, 
             AzureOperationResponse<T> response,
             Func<Task<AzureOperationResponse<T>>> getOperationAction,
-            CancellationToken cancellationToken) where T : Resource
+            CancellationToken cancellationToken) where T : class
         {
             if (response == null)
             {
@@ -186,7 +186,7 @@ namespace Microsoft.Azure
         private static async Task UpdateStateFromGetResourceOperation<T>(
             Func<Task<AzureOperationResponse<T>>> getOperationAction, 
             PollingState<T> pollingState)
-            where T : Resource
+            where T : class
         {
             // use get getOperationAction if Azure-AsyncOperation header is not present
             AzureOperationResponse<T> responseWithResource = await getOperationAction().ConfigureAwait(false);
@@ -197,9 +197,10 @@ namespace Microsoft.Azure
 
             // In 202 pattern on PUT ProvisioningState may not be present in 
             // the response. In that case the assumption is the status is Succeeded.
-            if (responseWithResource.Body.ProvisioningState != null)
+            var resource = responseWithResource.Body as IResource;
+            if (resource != null && resource.ProvisioningState != null)
             {
-                pollingState.Status = responseWithResource.Body.ProvisioningState;
+                pollingState.Status = resource.ProvisioningState;
             }
             else
             {
@@ -228,7 +229,7 @@ namespace Microsoft.Azure
             IAzureClient client,
             PollingState<T> pollingState,
             CancellationToken cancellationToken) 
-            where T : Resource
+            where T : class
         {
             AzureOperationResponse<T> responseWithResource = await client.GetAsync<T>(
                 pollingState.Response.Headers.GetValues("Location").FirstOrDefault(),
@@ -252,9 +253,10 @@ namespace Microsoft.Azure
 
                 // In 202 pattern on PUT ProvisioningState may not be present in 
                 // the response. In that case the assumption is the status is Succeeded.
-                if (responseWithResource.Body.ProvisioningState != null)
+                var resource = responseWithResource.Body as IResource;
+                if (resource != null && resource.ProvisioningState != null)
                 {
-                    pollingState.Status = responseWithResource.Body.ProvisioningState;
+                    pollingState.Status = resource.ProvisioningState;
                 }
                 else
                 {
