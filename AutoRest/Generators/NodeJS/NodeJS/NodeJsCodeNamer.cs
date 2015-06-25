@@ -193,7 +193,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                 "Type {0} is not supported.", type.GetType()));
         }
 
-        private IType NormalizeEnumType(EnumType enumType)
+        private static IType NormalizeEnumType(EnumType enumType)
         {
             return enumType;
         }
@@ -213,7 +213,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             return compositeType;
         }
 
-        private IType NormalizePrimaryType(PrimaryType primaryType)
+        private static IType NormalizePrimaryType(PrimaryType primaryType)
         {
             if (primaryType == PrimaryType.Boolean)
             {

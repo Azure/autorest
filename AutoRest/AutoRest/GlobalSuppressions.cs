@@ -13,3 +13,17 @@
     "CA1303:Do not pass literals as localized parameters", 
     MessageId = "System.Console.WriteLine(System.String,System.Object,System.Object)", Scope = "member", 
     Target = "Microsoft.Rest.Generator.Cli.Program.#Main(System.String[])")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", 
+    "CA1815:OverrideEqualsAndOperatorEqualsOnValueTypes", Scope = "type", Target = "Microsoft.Rest.Generator.Cli.HelpExample")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", 
+    "CA1703:ResourceStringsShouldBeSpelledCorrectly", MessageId = "parameter-desc", Scope = "resource", 
+    Target = "Microsoft.Rest.Generator.Cli.Properties.Resources.resources")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", 
+    "CA1703:ResourceStringsShouldBeSpelledCorrectly", MessageId = "example-desc", Scope = "resource", 
+    Target = "Microsoft.Rest.Generator.Cli.Properties.Resources.resources")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", 
+    "CA1703:ResourceStringsShouldBeSpelledCorrectly", MessageId = "xamples", Scope = "resource", 
+    Target = "Microsoft.Rest.Generator.Cli.Properties.Resources.resources")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", 
+    "CA1703:ResourceStringsShouldBeSpelledCorrectly", MessageId = "uto", Scope = "resource", 
+    Target = "Microsoft.Rest.Generator.Cli.Properties.Resources.resources")]

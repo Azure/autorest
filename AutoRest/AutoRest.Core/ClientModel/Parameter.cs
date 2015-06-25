@@ -47,7 +47,7 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <summary>
         /// Gets or sets the constraints.
         /// </summary>
-        public Dictionary<Constraint, string> Constraints { get; set; }
+        public Dictionary<Constraint, string> Constraints { get; private set; }
 
         /// <summary>
         /// Gets or sets collection format for array parameters.

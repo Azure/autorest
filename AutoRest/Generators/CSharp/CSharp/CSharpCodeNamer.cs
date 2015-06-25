@@ -135,7 +135,7 @@ namespace Microsoft.Rest.Generator.CSharp
             return enumType;
         }
 
-        private IType NormalizePrimaryType(PrimaryType primaryType)
+        private static IType NormalizePrimaryType(PrimaryType primaryType)
         {
             if (primaryType == PrimaryType.Boolean)
             {

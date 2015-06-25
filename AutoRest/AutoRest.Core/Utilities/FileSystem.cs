@@ -21,7 +21,7 @@ namespace Microsoft.Rest.Generator.Utilities
             }
         }
 
-        public TextWriter WriteFileAsStream(string path)
+        public TextWriter GetTextWriter(string path)
         {
             if (File.Exists(path))
             {

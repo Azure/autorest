@@ -76,7 +76,7 @@ namespace Microsoft.Rest.Generator.Cli
         {
             if (String.IsNullOrEmpty(template))
             {
-                throw new ArgumentException("template");
+                throw new ArgumentNullException("template");
             }
 
             // Reflect over properties in Settings to get documentation content

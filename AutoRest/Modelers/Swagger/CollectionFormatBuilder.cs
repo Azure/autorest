@@ -12,9 +12,9 @@ using System.Globalization;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
-    public class CollectionFormatBuilder
+    public static class CollectionFormatBuilder
     {
-        public StringBuilder OnBuildMethodParameter(Method method,
+        public static StringBuilder OnBuildMethodParameter(Method method,
             SwaggerParameter currentSwaggerParam,
             StringBuilder paramNameBuilder)
         {
@@ -49,7 +49,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             return paramNameBuilder;
         }
 
-        private void AddCollectionFormat(SwaggerParameter swaggerParameter, StringBuilder parameterName)
+        private static void AddCollectionFormat(SwaggerParameter swaggerParameter, StringBuilder parameterName)
         {
             if (swaggerParameter.In == ParameterLocation.FormData)
             {

@@ -169,6 +169,15 @@ namespace Microsoft.Rest.Modeler.Swagger.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; is not implemented in SwaggerSchema.ToType extension method..
+        /// </summary>
+        internal static string InvalidTypeInSwaggerSchema {
+            get {
+                return ResourceManager.GetString("InvalidTypeInSwaggerSchema", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Collection format &quot;multi&quot; is not supported (in parameter &apos;{0}&apos;)..
         /// </summary>
         internal static string MultiCollectionFormatNotSupported {

@@ -84,7 +84,7 @@ namespace Microsoft.Rest.Generator
             Settings.FileSystem.CreateDirectory(Path.GetDirectoryName(filePath));
 
             using (StringReader streamReader = new StringReader(template))
-            using (TextWriter textWriter = Settings.FileSystem.WriteFileAsStream(filePath))
+            using (TextWriter textWriter = Settings.FileSystem.GetTextWriter(filePath))
             {
                 string line;
                 while ((line = streamReader.ReadLine()) != null)

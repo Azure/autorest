@@ -56,7 +56,7 @@ namespace Microsoft.Rest.Generator.Azure
         /// Changes head method return type.
         /// </summary>
         /// <param name="serviceClient">Service client</param>
-        private void UpdateHeadMethods(ServiceClient serviceClient)
+        private static void UpdateHeadMethods(ServiceClient serviceClient)
         {
             foreach (var method in serviceClient.Methods.Where(m => m.HttpMethod == HttpMethod.Head)
                                                              .Where(m => m.ReturnType == null))
@@ -112,8 +112,7 @@ namespace Microsoft.Rest.Generator.Azure
         {
             foreach (var method in serviceClient.Methods)
             {
-                var parameters = new List<Parameter>(method.Parameters);
-                parameters.RemoveAll(
+                method.Parameters.RemoveAll(
                     p => (!p.Extensions.ContainsKey(GlobalParameter) ||
                          (bool)p.Extensions[GlobalParameter]) 
                          &&
@@ -121,7 +120,6 @@ namespace Microsoft.Rest.Generator.Azure
                          p.Name.Equals("subscriptionId", StringComparison.OrdinalIgnoreCase)) ||
                         (p.Location == ParameterLocation.Query &&
                          p.Name.Replace("-", "").Equals("apiversion", StringComparison.OrdinalIgnoreCase))));
-                method.Parameters = parameters;
             }
         }
 

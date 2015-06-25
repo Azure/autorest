@@ -84,3 +84,64 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", 
     MessageId = "operation", Scope = "member", 
     Target = "Microsoft.Rest.Modeler.Swagger.OperationBuilder.#SwaggerOperationConsumesMultipartFormData(Microsoft.Rest.Modeler.Swagger.Model.Operation)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", 
+    "CA1703:ResourceStringsShouldBeSpelledCorrectly", MessageId = "multi", Scope = "resource", 
+    Target = "Microsoft.Rest.Modeler.Swagger.Properties.Resources.resources")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", 
+    MessageId = "Auth", Scope = "type", Target = "Microsoft.Rest.Modeler.Swagger.Model.OAuthFlow")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", 
+    MessageId = "Auth", Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.SecuritySchemeType.#OAuth2")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
+    Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.Operation.#Tags")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
+    Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.Operation.#Consumes")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
+    Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.Operation.#Produces")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
+    Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.Operation.#Parameters")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
+    Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.Operation.#Responses")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
+    Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.Operation.#Schemes")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
+    Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.Operation.#Security")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
+    Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.Response.#Headers")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
+    Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.Response.#Examples")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
+    Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.Schema.#Properties")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
+    Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.Schema.#Required")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
+    Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.Schema.#AllOf")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
+    Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.SecurityDefinition.#Scopes")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
+    Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.ServiceDefinition.#Schemes")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
+    Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.ServiceDefinition.#Consumes")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
+    Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.ServiceDefinition.#Produces")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
+    Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.ServiceDefinition.#Paths")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
+    Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.ServiceDefinition.#Definitions")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
+    Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.ServiceDefinition.#Parameters")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
+    Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.ServiceDefinition.#Responses")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
+    Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.ServiceDefinition.#SecurityDefinitions")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
+    Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.ServiceDefinition.#Security")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
+    Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.ServiceDefinition.#Tags")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
+    Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.ServiceDefinition.#ExternalReferences")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
+    Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.SwaggerBase.#Extensions")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
+    Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.SwaggerObject.#Enum")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
+    Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.JsonConverters.SwaggerJsonConverter.#Document")]

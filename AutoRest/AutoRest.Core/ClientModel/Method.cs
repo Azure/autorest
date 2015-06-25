@@ -57,12 +57,12 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <summary>
         /// Gets or sets the method parameters.
         /// </summary>
-        public IList<Parameter> Parameters { get; set; }
+        public List<Parameter> Parameters { get; private set; }
 
         /// <summary>
         /// Gets or sets request headers.
         /// </summary>
-        public Dictionary<string, string> RequestHeaders { get; set; }
+        public Dictionary<string, string> RequestHeaders { get; private set; }
 
         /// <summary>
         /// Gets or sets the request format.
@@ -77,7 +77,7 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <summary>
         /// Gets or sets response bodies by HttpStatusCode.
         /// </summary>
-        public Dictionary<HttpStatusCode, IType> Responses { get; set; }
+        public Dictionary<HttpStatusCode, IType> Responses { get; private set; }
 
         /// <summary>
         /// Gets or sets the default response.

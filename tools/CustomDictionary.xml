@@ -8,6 +8,9 @@
       <Word>Api</Word>
       <Word>Usings</Word>
       <Word>OAuth</Word>
+      <Word>OAuthFlow</Word>
+      <Word>SubscriptionCloudCredentials</Word>
+      <Word>ArgumentNullException</Word>
     </Recognized>
   </Words>
 </Dictionary>

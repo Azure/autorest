@@ -49,3 +49,7 @@
     MessageId = "Usings", Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.MethodGroupTemplateModel.#Usings")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", 
     MessageId = "Namer", Scope = "type", Target = "Microsoft.Rest.Generator.CSharp.CSharpCodeNamer")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1703:ResourceStringsShouldBeSpelledCorrectly", 
+    MessageId = "nuget", Scope = "resource", Target = "Microsoft.Rest.Generator.CSharp.Properties.Resources.resources")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", 
+    Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.MethodTemplateModel.#GetStatusCodeReference(System.Net.HttpStatusCode)")]

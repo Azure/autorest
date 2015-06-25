@@ -12,7 +12,7 @@ namespace Microsoft.Rest.Generator.Utilities
 
         string ReadFileAsText(string path);
 
-        TextWriter WriteFileAsStream(string path);
+        TextWriter GetTextWriter(string path);
 
         bool FileExists(string path);
 

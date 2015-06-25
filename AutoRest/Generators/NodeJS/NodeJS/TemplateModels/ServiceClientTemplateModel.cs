@@ -23,9 +23,9 @@ namespace Microsoft.Rest.Generator.NodeJS
             ModelTypes.ForEach(m => ModelTemplateModels.Add(new ModelTemplateModel(m, serviceClient)));
         }
 
-        public List<MethodTemplateModel> MethodTemplateModels { get; set; }
+        public List<MethodTemplateModel> MethodTemplateModels { get; private set; }
 
-        public virtual List<ModelTemplateModel> ModelTemplateModels { get; set; }
+        public List<ModelTemplateModel> ModelTemplateModels { get; private set; }
 
         public virtual IEnumerable<MethodGroupTemplateModel> MethodGroupModels
         {

@@ -85,3 +85,7 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily", 
     Scope = "member", 
     Target = "Microsoft.Rest.Generator.NodeJS.ModelTemplateModel.#isSpecial(Microsoft.Rest.Generator.ClientModel.IType)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", 
+    Scope = "member", Target = "Microsoft.Rest.Generator.NodeJS.MethodTemplateModel.#GetStatusCodeReference(System.Net.HttpStatusCode)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", 
+    MessageId = "gi", Scope = "member", Target = "Microsoft.Rest.Generator.NodeJS.MethodTemplateModel.#RemoveDuplicateForwardSlashes(System.String)")]

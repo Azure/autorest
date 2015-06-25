@@ -153,6 +153,9 @@
   <data name="InvalidTypeExtendsWithAllOf" xml:space="preserve">
     <value>Cannot use 'extend' property with 'allOf' property in schema {0}</value>
   </data>
+  <data name="InvalidTypeInSwaggerSchema" xml:space="preserve">
+    <value>'{0}' is not implemented in SwaggerSchema.ToType extension method.</value>
+  </data>
   <data name="MultiCollectionFormatNotSupported" xml:space="preserve">
     <value>Collection format "multi" is not supported (in parameter '{0}').</value>
   </data>

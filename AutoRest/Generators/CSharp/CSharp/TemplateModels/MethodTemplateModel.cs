@@ -30,7 +30,7 @@ namespace Microsoft.Rest.Generator.CSharp
 
         public ServiceClient ServiceClient { get; set; }
 
-        public List<ParameterTemplateModel> ParameterTemplateModels { get; protected set; }
+        public List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
 
         public IScopeProvider Scope
         {

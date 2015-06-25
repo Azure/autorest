@@ -56,7 +56,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// <summary>
         /// Custom provider specific settings.
         /// </summary>
-        public IDictionary<string, string> CustomSettings { get; set; }
+        public IDictionary<string, string> CustomSettings { get; private set; }
 
         // The CommandLineInfo attribute is reflected to display help.
         // Prefer to show required properties before optional.

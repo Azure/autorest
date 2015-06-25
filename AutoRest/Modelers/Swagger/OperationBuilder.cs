@@ -22,7 +22,6 @@ namespace Microsoft.Rest.Modeler.Swagger
     /// </summary>
     public class OperationBuilder
     {
-        private IList<string> _effectiveConsumes;
         private IList<string> _effectiveProduces;
         private SwaggerModeler _swaggerModeler;
         private Operation _operation;
@@ -40,7 +39,6 @@ namespace Microsoft.Rest.Modeler.Swagger
 
             this._operation = operation;
             this._swaggerModeler = swaggerModeler;
-            this._effectiveConsumes = operation.Consumes ?? swaggerModeler.ServiceDefinition.Consumes;
             this._effectiveProduces = operation.Produces ?? swaggerModeler.ServiceDefinition.Produces;
         }
 
@@ -60,15 +58,13 @@ namespace Microsoft.Rest.Modeler.Swagger
             // Service parameters
             if (_operation.Parameters != null)
             {
-                CollectionFormatBuilder collectionBuilder = new CollectionFormatBuilder();
-
                 foreach (var swaggerParameter in DeduplicateParameters(_operation.Parameters))
                 {
                     var parameter = ((ParameterBuilder) swaggerParameter.GetBuilder(_swaggerModeler)).Build();
                     method.Parameters.Add(parameter);
 
                     StringBuilder parameterName = new StringBuilder(parameter.Name);
-                    parameterName = collectionBuilder.OnBuildMethodParameter(method, swaggerParameter,
+                    parameterName = CollectionFormatBuilder.OnBuildMethodParameter(method, swaggerParameter,
                         parameterName);
 
                     if (swaggerParameter.In == ParameterLocation.Header)
@@ -118,7 +114,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             return method;
         }
 
-        private IEnumerable<SwaggerParameter> DeduplicateParameters(IEnumerable<SwaggerParameter> parameters)
+        private static IEnumerable<SwaggerParameter> DeduplicateParameters(IEnumerable<SwaggerParameter> parameters)
         {
             return parameters
                 .Select(s =>
@@ -148,7 +144,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 });
         }
 
-        private void BuildMethodReturnTypeStack(IType type, List<Stack<IType>> types)
+        private static void BuildMethodReturnTypeStack(IType type, List<Stack<IType>> types)
         {
             var typeStack = new Stack<IType>();
             typeStack.Push(type);
@@ -335,22 +331,10 @@ namespace Microsoft.Rest.Modeler.Swagger
                    _effectiveProduces.Contains("application/json", StringComparer.OrdinalIgnoreCase);
         }
 
-        private bool SwaggerOperationConsumesJson(Operation operation)
-        {
-            return _effectiveConsumes != null &&
-                   _effectiveConsumes.Contains("application/json", StringComparer.OrdinalIgnoreCase);
-        }
-
         private bool SwaggerOperationProducesOctetStream(Operation operation)
         {
             return _effectiveProduces != null &&
                    _effectiveProduces.Contains("application/octet-stream", StringComparer.OrdinalIgnoreCase);
-        }
-
-        private bool SwaggerOperationConsumesMultipartFormData(Operation operation)
-        {
-            return _effectiveConsumes != null &&
-                   _effectiveConsumes.Contains("multipart/form-data", StringComparer.OrdinalIgnoreCase);
         }
 
         private void EnsureUniqueMethodName(string methodName, string methodGroup)

@@ -37,7 +37,7 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         public ServiceClient ServiceClient { get; set; }
 
-        public List<ParameterTemplateModel> ParameterTemplateModels { get; protected set; }
+        public List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
 
         public IScopeProvider Scope
         {

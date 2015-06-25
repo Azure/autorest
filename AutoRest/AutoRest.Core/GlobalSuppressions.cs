@@ -40,3 +40,13 @@
     Scope = "member", Target = "Microsoft.Rest.Generator.ClientModel.Parameter.#Type")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods", 
     Scope = "member", Target = "Microsoft.Rest.Generator.ClientModel.Property.#Type")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", 
+    Scope = "member", Target = "Microsoft.Rest.Generator.Utilities.MemoryFileSystem.#GetTextWriter(System.String)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", 
+    "CA1810:InitializeReferenceTypeStaticFieldsInline", Scope = "member", 
+    Target = "Microsoft.Rest.Generator.ClientModel.PrimaryType.#.cctor()")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", 
+    "CA2000:Dispose objects before losing scope", 
+    Scope = "member", Target = "Microsoft.Rest.Generator.Template`1.#ToString()")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists", 
+    Scope = "member", Target = "Microsoft.Rest.Generator.ClientModel.Method.#Parameters")]

@@ -28,3 +28,5 @@
     Target = "Microsoft.Rest.Generator.CSharp.Azure.AzureMethodTemplateModel.#ReplaceSubscriptionIdInUri(System.String,Microsoft.Rest.Generator.Utilities.IndentedStringBuilder)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", 
     MessageId = "Namer", Scope = "type", Target = "Microsoft.Rest.Generator.CSharp.AzureCSharpCodeNamer")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1703:ResourceStringsShouldBeSpelledCorrectly", 
+    MessageId = "nuget", Scope = "resource", Target = "Microsoft.Rest.Generator.CSharp.Azure.Properties.Resources.resources")]

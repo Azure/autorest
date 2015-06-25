@@ -190,12 +190,12 @@ namespace Microsoft.Rest.Modeler.Swagger
             Debug.Assert(parentProperty != null && unwrappedProperty != null);
             if (parentProperty == null)
             {
-                throw new ArgumentException("parentProperty");
+                throw new ArgumentNullException("parentProperty");
             }
 
             if (unwrappedProperty == null)
             {
-                throw new ArgumentException("unwrappedProperty");
+                throw new ArgumentNullException("unwrappedProperty");
             }
 
             if ((parentProperty.Type == null || parentProperty.Type == DataType.Object) &&

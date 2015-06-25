@@ -44,7 +44,7 @@ namespace Microsoft.Rest.Generator.Utilities
             throw new IOException("File not found: " + path);
         }
 
-        public TextWriter WriteFileAsStream(string path)
+        public TextWriter GetTextWriter(string path)
         {
             if (path.IsNullOrEmpty())
             {
