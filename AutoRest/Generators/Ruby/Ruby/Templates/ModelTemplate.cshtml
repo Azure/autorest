@@ -1,0 +1,106 @@
+﻿@using System
+@using System.Linq
+@using Microsoft.Rest.Generator.ClientModel
+@using Microsoft.Rest.Generator.Ruby.TemplateModels
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Ruby.ModelTemplateModel>
+@Header("# ")
+@EmptyLine
+module @(Settings.Namespace)
+  module Models
+    #
+    @WrapComment("# ", string.IsNullOrEmpty(Model.Documentation) ? "Model object." : Model.Documentation)
+    #
+    class @Model.Name@(Model.BaseModelType != null ? " < " + Model.BaseModelType.Name : "")
+    @foreach (var property in Model.PropertyTemplateModels)
+    {
+      @:@WrapComment("# ", string.Format("@return {0}{1}", property.Type.GetYardDocumentation(), property.Documentation))
+      @:@(property.IsReadOnly ? "attr_reader" : "attr_accessor") :@property.Name
+      @EmptyLine
+      @:
+    }
+
+    @if (Model.Properties.Any(p => p.Type is SequenceType || p.Type is DictionaryType))
+    {
+      @:def initialize
+        foreach (var property in Model.PropertyTemplateModels)
+        {
+            if (property.Type is SequenceType)
+            {
+        @:@@@property.Name = [];
+            }
+            else if (property.Type is DictionaryType)
+            {
+        @:@@@property.Name = {};
+            }
+        }
+      @:end
+      @EmptyLine
+    }
+
+      #
+      # Validate the object. Throws ArgumentError if validation fails.
+      #
+      def validate
+        @{
+            bool anythingToValidate = false;
+            foreach (var property in Model.Properties.Where(p => p.IsRequired && !p.IsReadOnly && p.Type.IsNullable()))
+            {
+                anythingToValidate = true;
+        @:fail ArgumentError, '@property.Name is nil' if @@@(property.Name).nil?
+            }
+            foreach (var property in Model.Properties.Where(p => !(p.Type is PrimaryType)))
+            {
+                anythingToValidate = true;
+        @:@property.Type.ValidateType(Model.Scope, string.Format("@{0}", property.Name))
+        @:
+            }
+            if (!anythingToValidate)
+            {
+        @:# Nothing to validate
+            }
+        }
+      end
+
+      @EmptyLine
+      #
+      # Serializes given Model object into Ruby Hash.
+      @WrapComment("# ", string.Format("@param {0} {1}", "object", "Model object to serialize."))
+      @WrapComment("# ", string.Format("@return [Hash] {0}", "Serialized object in form of Ruby Hash."))
+      #
+      def self.serialize_object(object)
+        object.validate
+        output_object = {}
+        @foreach (var property in Model.PropertyTemplateModels.Where(x => !x.IsReadOnly).OrderByDescending(x => x.IsRequired))
+        {
+        @EmptyLine
+        @:serialized_property = @("object." + property.Name)
+        @:@Model.SerializeProperty("serialized_property", property.Type, property.IsRequired, Settings.Namespace)
+        @:output_object['@(property.SerializedName)'] = serialized_property
+        }
+        output_object
+      end
+
+      @EmptyLine
+      #
+      # Deserializes given Ruby Hash into Model object.
+      @WrapComment("# ", string.Format("@param {0} [Hash] {1}", "object", "Ruby Hash object to deserialize."))
+      @WrapComment("# ", string.Format("@return [{0}] {1}", Model.Name, "Deserialized object."))
+      #
+      def self.deserialize_object(object)
+        return if object.nil?
+
+        output_object = @(Model.Name).new
+        
+        @foreach (var property in Model.PropertyTemplateModels.Where(x => !x.IsReadOnly).OrderByDescending(x => x.IsRequired))
+        {
+        @EmptyLine    
+        @:deserialized_property = @(string.Format("object['{0}']", property.SerializedName))
+        @:@Model.DeserializeProperty("deserialized_property", property.Type, property.IsRequired, Settings.Namespace)
+        @:output_object.@(property.Name) = deserialized_property
+        }
+        output_object.validate
+        output_object
+      end
+    end
+  end
+end
