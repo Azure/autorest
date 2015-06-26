@@ -48,7 +48,7 @@ function MicrosoftAzureTestUrl(credentials, baseUri, options) {
   if (!this.apiVersion) {
     this.apiVersion = "2014-04-01-preview";
   }
-  this.groupOperations = new operations.GroupOperations(this);
+  this.group = new operations.Group(this);
     this._models = models;
 }
 

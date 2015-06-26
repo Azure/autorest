@@ -9,5 +9,5 @@ var msRestAzure = require('ms-rest-azure');
 
 exports.Resource = msRestAzure.Resource;
 exports.CloudError = msRestAzure.CloudError;
-exports.Group = require('./Group');
+exports.SampleResourceGroup = require('./SampleResourceGroup');
 exports.ErrorModel = require('./ErrorModel');

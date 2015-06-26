@@ -6,20 +6,20 @@ var models = require('./index');
 
 /**
  * @class
- * Initializes a new instance of the Group class.
+ * Initializes a new instance of the SampleResourceGroup class.
  * @constructor
  */
-function Group() { }
+function SampleResourceGroup() { }
 
 /**
- * Validate the payload against the Group schema
+ * Validate the payload against the SampleResourceGroup schema
  *
  * @param {JSON} payload
  *
  */
-Group.prototype.validate = function (payload) {
+SampleResourceGroup.prototype.validate = function (payload) {
   if (!payload) {
-    throw new Error('Group cannot be null.');
+    throw new Error('SampleResourceGroup cannot be null.');
   }
   if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'] !== 'string') {
     throw new Error('payload["name"] must be of type string.');
@@ -32,13 +32,13 @@ Group.prototype.validate = function (payload) {
 };
 
 /**
- * Deserialize the instance to Group schema
+ * Deserialize the instance to SampleResourceGroup schema
  *
  * @param {JSON} instance
  *
  */
-Group.prototype.deserialize = function (instance) {
+SampleResourceGroup.prototype.deserialize = function (instance) {
   return instance;
 };
 
-module.exports = new Group();
+module.exports = new SampleResourceGroup();

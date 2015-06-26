@@ -9,6 +9,7 @@ var azureUrl = function (coverage) {
   router.get('/:subscriptionId/resourcegroups/:resourceGroup', function (req, res, next) {
     var subscriptionId = req.params.subscriptionId;
     var apiVersion = req.query['api-version'];
+    var groupName = req.params.resourceGroup;
     var queryParamCount = Object.keys(req.query).length;
     if (!subscriptionId || typeof subscriptionId !== 'string') {
       utils.send400(res, next, 'The provided subscriptionId ' + util.inspect(subscriptionId) + 
@@ -18,7 +19,8 @@ var azureUrl = function (coverage) {
         'is not equal to "2014-04-01-preview".');
     } else {
       coverage['SubscriptionIdAndApiVersion']++;
-      res.status(200).end();
+      var result = {name: groupName, location: 'West US'};
+      res.status(200).end(JSON.stringify(result));
     }
   });
 }

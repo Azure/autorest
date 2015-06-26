@@ -11,15 +11,15 @@ var WebResource = msRest.WebResource;
 
 /**
  * @class
- * GroupOperations
+ * Group
  * __NOTE__: An instance of this class is automatically created for an
  * instance of the MicrosoftAzureTestUrl.
- * Initializes a new instance of the GroupOperations class.
+ * Initializes a new instance of the Group class.
  * @constructor
  *
  * @param {MicrosoftAzureTestUrl} client Reference to the service client.
  */
-function GroupOperations(client) {
+function Group(client) {
   this.client = client;
 }
 
@@ -30,7 +30,7 @@ function GroupOperations(client) {
      *
      * @returns {Stream} The Response stream
      */
-    GroupOperations.prototype.list = function (resourceGroupName, callback) {
+    Group.prototype.getSampleResourceGroup = function (resourceGroupName, callback) {
       var client = this.client;
       if (!callback) {
         throw new Error('callback cannot be null.');
@@ -107,7 +107,7 @@ function GroupOperations(client) {
             parsedResponse = JSON.parse(responseBody);
             result.body = parsedResponse;
             if (result.body !== null && result.body !== undefined) {
-              result.body = client._models['Group'].deserialize(result.body);
+              result.body = client._models['SampleResourceGroup'].deserialize(result.body);
             }
           } catch (error) {
             var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -122,4 +122,4 @@ function GroupOperations(client) {
     };
 
 
-module.exports = GroupOperations;
+module.exports = Group;

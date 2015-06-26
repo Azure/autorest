@@ -15,7 +15,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}": {
       "get": {
-        "operationId": "group_list",
+        "operationId": "group_getSampleResourceGroup",
         "summary": "get resouce group",
         "parameters": [
           {
@@ -42,9 +42,9 @@
         ],
         "responses": {
           "200": {
-            "description": "A list of resource group",
+            "description": "A sample resource group",
             "schema": {
-              "$ref": "Group"
+              "$ref": "SampleResourceGroup"
             }
           },
           "default": {
@@ -58,7 +58,7 @@
     }
   },
   "definitions": {
-    "Group": {
+    "SampleResourceGroup": {
       "properties": {
         "name": {
           "type": "string",

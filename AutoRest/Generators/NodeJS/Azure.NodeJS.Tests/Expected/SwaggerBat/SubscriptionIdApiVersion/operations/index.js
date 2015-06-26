@@ -5,4 +5,4 @@
 
 'use strict';
 
-exports.GroupOperations = require('./GroupOperations');
+exports.Group = require('./Group');

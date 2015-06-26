@@ -24,7 +24,7 @@ describe('nodejs', function () {
     
     it('should correctly send the subscriptionId as path parameter and api-version ' + 
       'as a query parameter in the request url', function (done) {
-      testClient.groupOperations.list('testgroup101', function (error, result) {
+      testClient.group.getSampleResourceGroup('testgroup101', function (error, result) {
         should.not.exist(error);
         result.response.statusCode.should.equal(200);
         done();
