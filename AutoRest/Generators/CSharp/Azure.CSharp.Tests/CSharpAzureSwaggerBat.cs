@@ -51,8 +51,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 @"Swagger\subscriptionId-apiVersion.json", @"Expected\SwaggerBat\SubscriptionIdApiVersion.cs");
 
             var client = new MicrosoftAzureTestUrl(Fixture.Uri, new TokenCloudCredentials(Guid.NewGuid().ToString(), Guid.NewGuid().ToString()));
-            var group = client.Group.GetSampleResourceGroup("testgroup1");
-            Assert.Equal("testgroup1", group.Name);
+            var group = client.Group.GetSampleResourceGroup("testgroup101");
+            Assert.Equal("testgroup101", group.Name);
             Assert.Equal("West US", group.Location);
         }
 

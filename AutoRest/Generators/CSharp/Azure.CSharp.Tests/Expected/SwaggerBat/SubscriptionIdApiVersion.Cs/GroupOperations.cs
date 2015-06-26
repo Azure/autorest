@@ -33,9 +33,10 @@ namespace Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion
         public MicrosoftAzureTestUrl Client { get; private set; }
 
         /// <summary>
+        /// Provides a resouce group with name 'testgroup101' and location 'West US'.
         /// </summary>
         /// <param name='resourceGroupName'>
-        /// Resource Group Id.
+        /// Resource Group name 'testgroup101'.
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.

@@ -173,39 +173,33 @@ Write(EmptyLine);
 #line default
 #line hidden
 
-            WriteLiteral("  if (!this.");
+            WriteLiteral("  this.");
 #line 63 "ServiceClientTemplate.cshtml"
-          Write(property.Name);
-
-#line default
-#line hidden
-            WriteLiteral(") {\r\n    this.");
-#line 64 "ServiceClientTemplate.cshtml"
-       Write(property.Name);
+     Write(property.Name);
 
 #line default
 #line hidden
             WriteLiteral(" = ");
-#line 64 "ServiceClientTemplate.cshtml"
-                          Write(property.DefaultValue);
+#line 63 "ServiceClientTemplate.cshtml"
+                        Write(property.DefaultValue);
 
 #line default
 #line hidden
-            WriteLiteral(";\r\n  }\r\n");
-#line 66 "ServiceClientTemplate.cshtml"
+            WriteLiteral(";\r\n");
+#line 64 "ServiceClientTemplate.cshtml"
   }
 
 #line default
 #line hidden
 
             WriteLiteral("  \r\n");
-#line 68 "ServiceClientTemplate.cshtml"
+#line 66 "ServiceClientTemplate.cshtml"
   
 
 #line default
 #line hidden
 
-#line 68 "ServiceClientTemplate.cshtml"
+#line 66 "ServiceClientTemplate.cshtml"
    foreach (var methodGroup in Model.MethodGroupModels)
   {
 
@@ -213,32 +207,32 @@ Write(EmptyLine);
 #line hidden
 
             WriteLiteral("  this.");
-#line 70 "ServiceClientTemplate.cshtml"
+#line 68 "ServiceClientTemplate.cshtml"
      Write(methodGroup.MethodGroupName);
 
 #line default
 #line hidden
             WriteLiteral(" = new operations.");
-#line 70 "ServiceClientTemplate.cshtml"
+#line 68 "ServiceClientTemplate.cshtml"
                                                      Write(methodGroup.MethodGroupType);
 
 #line default
 #line hidden
             WriteLiteral("(this);\r\n");
-#line 71 "ServiceClientTemplate.cshtml"
+#line 69 "ServiceClientTemplate.cshtml"
   }
 
 #line default
 #line hidden
 
             WriteLiteral("  \r\n");
-#line 73 "ServiceClientTemplate.cshtml"
+#line 71 "ServiceClientTemplate.cshtml"
   
 
 #line default
 #line hidden
 
-#line 73 "ServiceClientTemplate.cshtml"
+#line 71 "ServiceClientTemplate.cshtml"
    if (Model.ModelTypes.Any())
   {
 
@@ -246,62 +240,62 @@ Write(EmptyLine);
 #line hidden
 
             WriteLiteral("  this._models = models;\r\n");
-#line 76 "ServiceClientTemplate.cshtml"
+#line 74 "ServiceClientTemplate.cshtml"
   }
 
 #line default
 #line hidden
 
             WriteLiteral("}\r\n");
-#line 78 "ServiceClientTemplate.cshtml"
+#line 76 "ServiceClientTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
             WriteLiteral("\r\nutil.inherits(");
-#line 79 "ServiceClientTemplate.cshtml"
+#line 77 "ServiceClientTemplate.cshtml"
          Write(Model.Name);
 
 #line default
 #line hidden
             WriteLiteral(", ServiceClient);\r\n");
-#line 80 "ServiceClientTemplate.cshtml"
+#line 78 "ServiceClientTemplate.cshtml"
  foreach (var method in Model.MethodTemplateModels)
 {
 
 #line default
 #line hidden
 
-#line 82 "ServiceClientTemplate.cshtml"
+#line 80 "ServiceClientTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-#line 82 "ServiceClientTemplate.cshtml"
+#line 80 "ServiceClientTemplate.cshtml"
           
 
 #line default
 #line hidden
 
-#line 83 "ServiceClientTemplate.cshtml"
+#line 81 "ServiceClientTemplate.cshtml"
 Write(Include(new MethodTemplate(), method));
 
 #line default
 #line hidden
             WriteLiteral("\r\n");
-#line 84 "ServiceClientTemplate.cshtml"
+#line 82 "ServiceClientTemplate.cshtml"
 }
 
 #line default
 #line hidden
 
-#line 85 "ServiceClientTemplate.cshtml"
+#line 83 "ServiceClientTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
             WriteLiteral("\r\nmodule.exports = ");
-#line 86 "ServiceClientTemplate.cshtml"
+#line 84 "ServiceClientTemplate.cshtml"
             Write(Model.Name);
 
 #line default

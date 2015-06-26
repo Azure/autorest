@@ -24,7 +24,8 @@ function Group(client) {
 }
 
     /**
-     * @param {String} [resourceGroupName] Resource Group Id.
+     * Provides a resouce group with name 'testgroup101' and location 'West US'.
+     * @param {String} [resourceGroupName] Resource Group name 'testgroup101'.
      *
      * @param {function} callback
      *

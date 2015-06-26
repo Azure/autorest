@@ -44,10 +44,8 @@ function AutoRestReportServiceForAzure(credentials, baseUri, options) {
     this.baseUri = 'http://localhost';
   }
 
-  if (!this.apiVersion) {
-    this.apiVersion = "1.0.0";
-  }
-    this._models = models;
+  this.apiVersion = "1.0.0";
+  this._models = models;
 }
 
 util.inherits(AutoRestReportServiceForAzure, ServiceClient);

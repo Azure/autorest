@@ -45,11 +45,9 @@ function MicrosoftAzureTestUrl(credentials, baseUri, options) {
     this.baseUri = 'https://management.azure.com/';
   }
 
-  if (!this.apiVersion) {
-    this.apiVersion = "2014-04-01-preview";
-  }
+  this.apiVersion = "2014-04-01-preview";
   this.group = new operations.Group(this);
-    this._models = models;
+  this._models = models;
 }
 
 util.inherits(MicrosoftAzureTestUrl, ServiceClient);

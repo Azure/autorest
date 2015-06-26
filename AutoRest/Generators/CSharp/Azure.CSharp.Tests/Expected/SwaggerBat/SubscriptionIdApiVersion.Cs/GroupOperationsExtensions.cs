@@ -12,12 +12,13 @@ namespace Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion
     public static partial class GroupOperationsExtensions
     {
             /// <summary>
+            /// Provides a resouce group with name 'testgroup101' and location 'West US'.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='resourceGroupName'>
-            /// Resource Group Id.
+            /// Resource Group name 'testgroup101'.
             /// </param>
             public static SampleResourceGroup GetSampleResourceGroup(this IGroupOperations operations, string resourceGroupName)
             {
@@ -25,12 +26,13 @@ namespace Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion
             }
 
             /// <summary>
+            /// Provides a resouce group with name 'testgroup101' and location 'West US'.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='resourceGroupName'>
-            /// Resource Group Id.
+            /// Resource Group name 'testgroup101'.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.

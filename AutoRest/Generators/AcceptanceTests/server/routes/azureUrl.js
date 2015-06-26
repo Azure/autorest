@@ -19,7 +19,7 @@ var azureUrl = function (coverage) {
         'is not equal to "2014-04-01-preview".');
     } else {
       coverage['SubscriptionIdAndApiVersion']++;
-      var result = {name: groupName, location: 'West US'};
+      var result = {name: 'testgroup101', location: 'West US'};
       res.status(200).end(JSON.stringify(result));
     }
   });

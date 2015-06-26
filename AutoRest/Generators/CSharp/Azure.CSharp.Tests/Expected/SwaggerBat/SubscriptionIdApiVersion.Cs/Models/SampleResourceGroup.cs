@@ -12,13 +12,13 @@ namespace Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion.Models
     public partial class SampleResourceGroup
     {
         /// <summary>
-        /// resource group name
+        /// resource group name 'testgroup101'
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// resource group location
+        /// resource group location 'West US'
         /// </summary>
         [JsonProperty(PropertyName = "location")]
         public string Location { get; set; }
