@@ -5,6 +5,7 @@ $tests =
     "SwaggerBat\AzureReport.Cs"="..\..\AcceptanceTests\swagger\azure-report.json";
     "SwaggerBat\ResourceFlattening.Cs"="..\..\AcceptanceTests\swagger\resource-flattening.json";
     "SwaggerBat\Head.Cs"="..\..\AcceptanceTests\swagger\head.json";
+    "SwaggerBat\SubscriptionIdApiVersion.Cs"="..\..\AcceptanceTests\swagger\subscriptionId-apiVersion.json";
     "SwaggerBat\AzureSpecials.Cs"="..\..\AcceptanceTests\swagger\azure-special-properties.json";
 }
 

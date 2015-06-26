@@ -62,9 +62,7 @@ function @(Model.Name)(credentials, baseUri, options) {
   @EmptyLine
   @foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
   {
-  @:if (!this.@(property.Name)) {
-    @:this.@(property.Name) = @(property.DefaultValue);
-  @:}
+  @:this.@(property.Name) = @(property.DefaultValue);
   }
   
   @foreach (var methodGroup in Model.MethodGroupModels)
@@ -74,7 +72,7 @@ function @(Model.Name)(credentials, baseUri, options) {
   
   @if (Model.ModelTypes.Any())
   {
-    @:this._models = models;
+  @:this._models = models;
   }
 }
 

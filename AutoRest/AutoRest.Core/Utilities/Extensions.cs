@@ -194,9 +194,7 @@ namespace Microsoft.Rest.Generator.Utilities
             return new StringBuilder(comment)
                 .Replace("&", "&amp;")
                 .Replace("<", "&lt;")
-                .Replace(">", "&gt;")
-                .Replace("\"", "&quot;")
-                .Replace("'", "&apos;").ToString();
+                .Replace(">", "&gt;").ToString();
         }
     }
 }

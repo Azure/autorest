@@ -180,39 +180,33 @@ Write(EmptyLine);
 #line default
 #line hidden
 
-            WriteLiteral("  if (!this.");
+            WriteLiteral("  this.");
 #line 65 "AzureServiceClientTemplate.cshtml"
-          Write(property.Name);
-
-#line default
-#line hidden
-            WriteLiteral(") {\r\n    this.");
-#line 66 "AzureServiceClientTemplate.cshtml"
-       Write(property.Name);
+     Write(property.Name);
 
 #line default
 #line hidden
             WriteLiteral(" = ");
-#line 66 "AzureServiceClientTemplate.cshtml"
-                          Write(property.DefaultValue);
+#line 65 "AzureServiceClientTemplate.cshtml"
+                        Write(property.DefaultValue);
 
 #line default
 #line hidden
-            WriteLiteral(";\r\n  }\r\n");
-#line 68 "AzureServiceClientTemplate.cshtml"
+            WriteLiteral(";\r\n");
+#line 66 "AzureServiceClientTemplate.cshtml"
   }
 
 #line default
 #line hidden
 
             WriteLiteral("  \r\n");
-#line 70 "AzureServiceClientTemplate.cshtml"
+#line 68 "AzureServiceClientTemplate.cshtml"
   
 
 #line default
 #line hidden
 
-#line 70 "AzureServiceClientTemplate.cshtml"
+#line 68 "AzureServiceClientTemplate.cshtml"
    foreach (var methodGroup in Model.MethodGroupModels)
   {
 
@@ -220,95 +214,95 @@ Write(EmptyLine);
 #line hidden
 
             WriteLiteral("  this.");
-#line 72 "AzureServiceClientTemplate.cshtml"
+#line 70 "AzureServiceClientTemplate.cshtml"
      Write(methodGroup.MethodGroupName);
 
 #line default
 #line hidden
             WriteLiteral(" = new operations.");
-#line 72 "AzureServiceClientTemplate.cshtml"
+#line 70 "AzureServiceClientTemplate.cshtml"
                                                      Write(methodGroup.MethodGroupType);
 
 #line default
 #line hidden
             WriteLiteral("(this);\r\n");
-#line 73 "AzureServiceClientTemplate.cshtml"
+#line 71 "AzureServiceClientTemplate.cshtml"
   }
 
 #line default
 #line hidden
 
             WriteLiteral("  \r\n");
-#line 75 "AzureServiceClientTemplate.cshtml"
+#line 73 "AzureServiceClientTemplate.cshtml"
   
 
 #line default
 #line hidden
 
-#line 75 "AzureServiceClientTemplate.cshtml"
+#line 73 "AzureServiceClientTemplate.cshtml"
    if (Model.ModelTypes.Any())
   {
 
 #line default
 #line hidden
 
-            WriteLiteral("    this._models = models;\r\n");
-#line 78 "AzureServiceClientTemplate.cshtml"
+            WriteLiteral("  this._models = models;\r\n");
+#line 76 "AzureServiceClientTemplate.cshtml"
   }
 
 #line default
 #line hidden
 
             WriteLiteral("}\r\n\r\n");
-#line 81 "AzureServiceClientTemplate.cshtml"
+#line 79 "AzureServiceClientTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
             WriteLiteral("\r\nutil.inherits(");
-#line 82 "AzureServiceClientTemplate.cshtml"
+#line 80 "AzureServiceClientTemplate.cshtml"
          Write(Model.Name);
 
 #line default
 #line hidden
             WriteLiteral(", ServiceClient);\r\n");
-#line 83 "AzureServiceClientTemplate.cshtml"
+#line 81 "AzureServiceClientTemplate.cshtml"
  foreach (var method in Model.MethodTemplateModels)
 {
 
 #line default
 #line hidden
 
-#line 85 "AzureServiceClientTemplate.cshtml"
+#line 83 "AzureServiceClientTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-#line 85 "AzureServiceClientTemplate.cshtml"
+#line 83 "AzureServiceClientTemplate.cshtml"
           
 
 #line default
 #line hidden
 
-#line 86 "AzureServiceClientTemplate.cshtml"
+#line 84 "AzureServiceClientTemplate.cshtml"
 Write(Include(new AzureMethodTemplate(), method as AzureMethodTemplateModel));
 
 #line default
 #line hidden
             WriteLiteral("\r\n");
-#line 87 "AzureServiceClientTemplate.cshtml"
+#line 85 "AzureServiceClientTemplate.cshtml"
 }
 
 #line default
 #line hidden
 
-#line 88 "AzureServiceClientTemplate.cshtml"
+#line 86 "AzureServiceClientTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
             WriteLiteral("\r\nmodule.exports = ");
-#line 89 "AzureServiceClientTemplate.cshtml"
+#line 87 "AzureServiceClientTemplate.cshtml"
             Write(Model.Name);
 
 #line default

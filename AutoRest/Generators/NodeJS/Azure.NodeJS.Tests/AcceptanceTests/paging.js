@@ -6,18 +6,15 @@
 var should = require('should');
 var http = require('http');
 var util = require('util');
-var fs = require('fs');
-var child_process = require('child_process');
 var assert = require('assert');
 var msRest = require('ms-rest');
-var _ = require('underscore')
+var msRestAzure = require('ms-rest-azure');
 
 var pagingClient = require('../Expected/SwaggerBat/Paging/AutoRestPagingTestService');
 
-var credentials = new msRest.TokenCredentials({
-  authorizationScheme: "Bearer",
-  token: "<your token here>"
-});
+var dummySubscriptionId = 'a878ae02-6106-429z-9397-58091ee45g98';
+var dummyToken = 'dummy12321343423';
+var credentials = new msRestAzure.SubscriptionCredentials(dummyToken, dummySubscriptionId);
 
 var clientOptions = {};
 var baseUri = 'http://localhost:3000';

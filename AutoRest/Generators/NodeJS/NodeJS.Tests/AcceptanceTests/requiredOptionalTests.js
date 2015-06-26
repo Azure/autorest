@@ -8,14 +8,11 @@ var http = require('http');
 var util = require('util');
 var assert = require('assert');
 var msRest = require('ms-rest');
-var _ = require('underscore')
 
 var reqOptClient = require('../Expected/SwaggerBat/RequiredOptional/AutoRestRequiredOptionalTestService');
 
-var credentials = new msRest.TokenCredentials({
-  authorizationScheme: "Bearer",
-  token: "<your token here>"
-});
+var dummyToken = 'dummy12321343423';
+var credentials = new msRest.TokenCredentials(dummyToken);
 
 var clientOptions = {};
 var baseUri = 'http://localhost:3000';

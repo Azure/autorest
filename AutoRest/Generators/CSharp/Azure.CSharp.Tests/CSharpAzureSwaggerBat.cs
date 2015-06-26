@@ -26,6 +26,7 @@ using Fixtures.Azure.SwaggerBatResourceFlattening;
 using Fixtures.Azure.SwaggerBatResourceFlattening.Models;
 using Fixtures.Azure.SwaggerBatHead;
 using Fixtures.Azure.SwaggerBatAzureReport;
+using Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion;
 
 namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
 {
@@ -43,6 +44,18 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         }
 
         public ServiceController Fixture { get; set; }
+
+        [Fact]
+        public void AzureUrlTests()
+        {
+            SwaggerSpecHelper.RunTests<AzureCSharpCodeGenerator>(
+                @"Swagger\subscriptionId-apiVersion.json", @"Expected\SwaggerBat\SubscriptionIdApiVersion.cs");
+
+            var client = new MicrosoftAzureTestUrl(Fixture.Uri, new TokenCloudCredentials(Guid.NewGuid().ToString(), Guid.NewGuid().ToString()));
+            var group = client.Group.GetSampleResourceGroup("testgroup101");
+            Assert.Equal("testgroup101", group.Name);
+            Assert.Equal("West US", group.Location);
+        }
 
         [Fact]
         public void HeadTests()
