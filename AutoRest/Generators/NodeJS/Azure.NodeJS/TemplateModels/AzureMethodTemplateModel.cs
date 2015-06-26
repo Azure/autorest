@@ -33,6 +33,11 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         /// <param name="builder">The string builder for url construction</param>
         protected override void BuildPathParameters(string variableName, IndentedStringBuilder builder)
         {
+            if (builder == null)
+            {
+                throw new ArgumentNullException("builder");
+            }
+
             if (this.Url != null && this.Url.Contains("{subscriptionId}")
                 && !ParameterTemplateModels.Any(p => p.SerializedName.Equals("subscriptionId", StringComparison.OrdinalIgnoreCase)))
             {
@@ -51,6 +56,11 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         /// <param name="builder">The string builder for uri construction</param>
         protected override void BuildQueryParameterArray(IndentedStringBuilder builder)
         {
+            if (builder == null)
+            {
+                throw new ArgumentNullException("builder");
+            }
+
             base.BuildQueryParameterArray(builder);
             if (!Parameters.Any(p => p.Name.Equals("apiVersion", StringComparison.OrdinalIgnoreCase)) &&
                 !IsAbsoluteUrl)

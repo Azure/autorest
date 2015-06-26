@@ -389,6 +389,11 @@ namespace Microsoft.Rest.Generator.NodeJS
         /// <param name="builder">The stringbuilder for url construction</param>
         protected virtual void BuildQueryParameterArray(IndentedStringBuilder builder)
         {
+            if (builder == null)
+            {
+                throw new ArgumentNullException("builder");
+            }
+
             builder.AppendLine("var queryParameters = [];");
             foreach (var queryParameter in ParameterTemplateModels
                 .Where(p => p.Location == ParameterLocation.Query))
@@ -421,6 +426,11 @@ namespace Microsoft.Rest.Generator.NodeJS
         /// <param name="builder">The string builder for url construction</param>
         protected virtual void BuildPathParameters(string variableName, IndentedStringBuilder builder)
         {
+            if (builder == null)
+            {
+                throw new ArgumentNullException("builder");
+            }
+
             foreach (var pathParameter in ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
             {
                 var pathReplaceFormat = "{0} = {0}.replace(\"{{{1}}}\", encodeURIComponent({2}));";
