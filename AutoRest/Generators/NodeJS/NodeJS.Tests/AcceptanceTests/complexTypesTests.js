@@ -11,10 +11,8 @@ var msRest = require('ms-rest');
 
 var complexClient = require('../Expected/SwaggerBat/BodyComplex/AutoRestComplexTestService');
 
-var credentials = new msRest.TokenCredentials({
-  authorizationScheme: "Bearer",
-  token: "<your token here>"
-});
+var dummyToken = 'dummy12321343423';
+var credentials = new msRest.TokenCredentials(dummyToken);
 
 var clientOptions = {};
 var baseUri = 'http://localhost:3000';

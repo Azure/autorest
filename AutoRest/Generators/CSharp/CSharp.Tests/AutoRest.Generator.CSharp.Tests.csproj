@@ -141,6 +141,10 @@
       <Link>Swagger\resource-flattening.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="..\..\AcceptanceTests\swagger\subscriptionId-apiVersion.json">
+      <Link>Swagger\subscriptionId-apiVersion.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="..\..\AcceptanceTests\swagger\url.json">
       <Link>Swagger\url.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

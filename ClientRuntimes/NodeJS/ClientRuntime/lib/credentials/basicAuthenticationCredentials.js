@@ -12,22 +12,23 @@ var DEFAULT_AUTHORIZATION_SCHEME = 'Basic';
 * Creates a new BasicAuthenticationCredentials object.
 *
 * @constructor
-* @param {string} credentials.authorizationScheme    The authorization scheme.
-* @param {string} credentials.userName               User name.
-* @param {string} credentials.password               Password.
+* @param {string} userName                 User name.
+* @param {string} password                 Password.
+* @param {string} [authorizationScheme]    The authorization scheme.
 */
-function BasicAuthenticationCredentials(credentials) {
+function BasicAuthenticationCredentials(userName, password, authorizationScheme) {
   validate.validateArgs('BasicAuthenticationCredentials', function (v) {
-    v.object(credentials, 'credentials');
-    v.string(credentials.userName, 'credentials.userName');
-    v.string(credentials.password, 'credentials.password');
+    v.string(userName, 'userName');
+    v.string(password, 'password');
   });
 
-  if (!credentials.authorizationScheme) {
-    credentials.authorizationScheme = DEFAULT_AUTHORIZATION_SCHEME;
-  }
+  this.userName = userName;
+  this.password = password;
 
-  this.credentials = credentials;
+  this.authorizationScheme = authorizationScheme;
+  if (!this.authorizationScheme) {
+    this.authorizationScheme = DEFAULT_AUTHORIZATION_SCHEME;
+  }
 }
 
 /**
@@ -39,11 +40,11 @@ function BasicAuthenticationCredentials(credentials) {
 */
 BasicAuthenticationCredentials.prototype.signRequest = function (webResource, callback) {
   var credentials = util.format('%s:%s', 
-    this.credentials.userName, 
-    this.credentials.password);
+    this.userName, 
+    this.password);
 
   var encodedCredentials = util.format('%s %s',
-    this.credentials.authorizationScheme,
+    this.authorizationScheme,
     new Buffer(credentials).toString('base64'));
     webResource.headers[HeaderConstants.AUTHORIZATION] = encodedCredentials;
 

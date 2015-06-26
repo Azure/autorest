@@ -5,6 +5,7 @@ $tests =
     "SwaggerBat\ResourceFlattening"="..\..\AcceptanceTests\swagger\resource-flattening.json";
     "SwaggerBat\Head"="..\..\AcceptanceTests\swagger\head.json";
     "SwaggerBat\Report"="..\..\AcceptanceTests\swagger\azure-report.json";
+    "SwaggerBat\SubscriptionIdApiVersion"="..\..\AcceptanceTests\swagger\subscriptionId-apiVersion.json";
 }
 
 Import-Module "$PSScriptRoot\..\..\..\..\binaries\net45\AutoRest.Core.dll"

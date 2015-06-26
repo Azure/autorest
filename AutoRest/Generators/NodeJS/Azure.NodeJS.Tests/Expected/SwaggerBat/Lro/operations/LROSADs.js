@@ -77,6 +77,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/nonretryerror/put/400';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -175,6 +180,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/nonretryerror/put/400';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -295,6 +305,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/nonretryerror/put/201/creating/400';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -393,6 +408,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/nonretryerror/put/201/creating/400';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -515,6 +535,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/nonretryerror/putasync/retry/400';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -597,6 +622,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/nonretryerror/putasync/retry/400';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -692,6 +722,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/nonretryerror/delete/400';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -771,6 +806,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/nonretryerror/delete/202/retry/400';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -854,6 +894,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/nonretryerror/deleteasync/retry/400';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -949,6 +994,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/nonretryerror/post/400';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -1047,6 +1097,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/nonretryerror/post/202/retry/400';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -1149,6 +1204,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/nonretryerror/postasync/retry/400';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -1256,6 +1316,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/error/put/201/noprovisioningstatepayload';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -1354,6 +1419,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/error/put/201/noprovisioningstatepayload';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -1476,6 +1546,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/error/putasync/retry/nostatus';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -1560,6 +1635,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/error/putasync/retry/nostatus';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -1682,6 +1762,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/error/putasync/retry/nostatuspayload';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -1766,6 +1851,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/error/putasync/retry/nostatuspayload';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -1863,6 +1953,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/error/delete/204/nolocation';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -1946,6 +2041,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/error/deleteasync/retry/nostatus';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -2043,6 +2143,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/error/post/202/nolocation';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -2145,6 +2250,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/error/postasync/retry/nopayload';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -2252,6 +2362,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/error/put/200/invalidjson';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -2334,6 +2449,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/error/put/200/invalidjson';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -2456,6 +2576,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/error/putasync/retry/invalidheader';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -2538,6 +2663,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/error/putasync/retry/invalidheader';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -2660,6 +2790,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/error/putasync/retry/invalidjsonpolling';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -2744,6 +2879,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/error/putasync/retry/invalidjsonpolling';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -2841,6 +2981,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/error/delete/202/retry/invalidheader';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -2922,6 +3067,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/error/deleteasync/retry/invalidheader';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -3005,6 +3155,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/error/deleteasync/retry/invalidjsonpolling';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -3102,6 +3257,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/error/post/202/retry/invalidheader';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -3204,6 +3364,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/error/postasync/retry/invalidheader';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -3306,6 +3471,11 @@ function LROSADs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/error/postasync/retry/invalidjsonpolling';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');

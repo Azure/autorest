@@ -5,6 +5,7 @@ $tests =
     "SwaggerBat\AzureReport.Cs"="..\..\AcceptanceTests\swagger\azure-report.json";
     "SwaggerBat\ResourceFlattening.Cs"="..\..\AcceptanceTests\swagger\resource-flattening.json";
     "SwaggerBat\Head.Cs"="..\..\AcceptanceTests\swagger\head.json";
+    "SwaggerBat\SubscriptionIdApiVersion.Cs"="..\..\AcceptanceTests\swagger\subscriptionId-apiVersion.json";
 }
 
 # TODO: direct reference to AutoRest .Net objects and methods leaves handles to the binaries open. Invoke the command line instead.

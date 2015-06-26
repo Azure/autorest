@@ -3,6 +3,7 @@
 'use strict';
 
 exports.AzureServiceClient = require('./azureServiceClient');
+exports.SubscriptionCredentials = require('./subscriptionCredentials');
 exports.Resource = require('./resource');
 exports.CloudError = require('./cloudError');
 
