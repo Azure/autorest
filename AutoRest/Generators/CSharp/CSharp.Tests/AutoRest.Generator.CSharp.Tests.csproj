@@ -65,6 +65,10 @@
       <Link>Swagger\azure-report.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="..\..\AcceptanceTests\swagger\azure-special-properties.json">
+      <Link>Swagger\azure-special-properties.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="..\..\AcceptanceTests\swagger\body-array.json">
       <Link>Swagger\body-array.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

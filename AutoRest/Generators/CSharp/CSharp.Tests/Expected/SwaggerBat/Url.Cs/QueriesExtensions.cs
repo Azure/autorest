@@ -104,13 +104,13 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get '1000000' integer value
+            /// Get &apos;1000000&apos; integer value
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='intQuery'>
-            /// '1000000' integer value
+            /// &apos;1000000&apos; integer value
             /// </param>
             public static void GetIntOneMillion(this IQueries operations, int? intQuery = default(int?))
             {
@@ -118,13 +118,13 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get '1000000' integer value
+            /// Get &apos;1000000&apos; integer value
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='intQuery'>
-            /// '1000000' integer value
+            /// &apos;1000000&apos; integer value
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -135,13 +135,13 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get '-1000000' integer value
+            /// Get &apos;-1000000&apos; integer value
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='intQuery'>
-            /// '-1000000' integer value
+            /// &apos;-1000000&apos; integer value
             /// </param>
             public static void GetIntNegativeOneMillion(this IQueries operations, int? intQuery = default(int?))
             {
@@ -149,13 +149,13 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get '-1000000' integer value
+            /// Get &apos;-1000000&apos; integer value
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='intQuery'>
-            /// '-1000000' integer value
+            /// &apos;-1000000&apos; integer value
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -197,13 +197,13 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get '10000000000' 64 bit integer value
+            /// Get &apos;10000000000&apos; 64 bit integer value
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='longQuery'>
-            /// '10000000000' 64 bit integer value
+            /// &apos;10000000000&apos; 64 bit integer value
             /// </param>
             public static void GetTenBillion(this IQueries operations, long? longQuery = default(long?))
             {
@@ -211,13 +211,13 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get '10000000000' 64 bit integer value
+            /// Get &apos;10000000000&apos; 64 bit integer value
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='longQuery'>
-            /// '10000000000' 64 bit integer value
+            /// &apos;10000000000&apos; 64 bit integer value
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -228,13 +228,13 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get '-10000000000' 64 bit integer value
+            /// Get &apos;-10000000000&apos; 64 bit integer value
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='longQuery'>
-            /// '-10000000000' 64 bit integer value
+            /// &apos;-10000000000&apos; 64 bit integer value
             /// </param>
             public static void GetNegativeTenBillion(this IQueries operations, long? longQuery = default(long?))
             {
@@ -242,13 +242,13 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get '-10000000000' 64 bit integer value
+            /// Get &apos;-10000000000&apos; 64 bit integer value
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='longQuery'>
-            /// '-10000000000' 64 bit integer value
+            /// &apos;-10000000000&apos; 64 bit integer value
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -259,7 +259,7 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get 'null 64 bit integer value (no query param in uri)
+            /// Get &apos;null 64 bit integer value (no query param in uri)
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -273,7 +273,7 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get 'null 64 bit integer value (no query param in uri)
+            /// Get &apos;null 64 bit integer value (no query param in uri)
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -290,13 +290,13 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get '1.034E+20' numeric value
+            /// Get &apos;1.034E+20&apos; numeric value
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='floatQuery'>
-            /// '1.034E+20'numeric value
+            /// &apos;1.034E+20&apos;numeric value
             /// </param>
             public static void FloatScientificPositive(this IQueries operations, double? floatQuery = default(double?))
             {
@@ -304,13 +304,13 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get '1.034E+20' numeric value
+            /// Get &apos;1.034E+20&apos; numeric value
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='floatQuery'>
-            /// '1.034E+20'numeric value
+            /// &apos;1.034E+20&apos;numeric value
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -321,13 +321,13 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get '-1.034E-20' numeric value
+            /// Get &apos;-1.034E-20&apos; numeric value
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='floatQuery'>
-            /// '-1.034E-20'numeric value
+            /// &apos;-1.034E-20&apos;numeric value
             /// </param>
             public static void FloatScientificNegative(this IQueries operations, double? floatQuery = default(double?))
             {
@@ -335,13 +335,13 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get '-1.034E-20' numeric value
+            /// Get &apos;-1.034E-20&apos; numeric value
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='floatQuery'>
-            /// '-1.034E-20'numeric value
+            /// &apos;-1.034E-20&apos;numeric value
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -383,13 +383,13 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get '9999999.999' numeric value
+            /// Get &apos;9999999.999&apos; numeric value
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='doubleQuery'>
-            /// '9999999.999'numeric value
+            /// &apos;9999999.999&apos;numeric value
             /// </param>
             public static void DoubleDecimalPositive(this IQueries operations, double? doubleQuery = default(double?))
             {
@@ -397,13 +397,13 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get '9999999.999' numeric value
+            /// Get &apos;9999999.999&apos; numeric value
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='doubleQuery'>
-            /// '9999999.999'numeric value
+            /// &apos;9999999.999&apos;numeric value
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -414,13 +414,13 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get '-9999999.999' numeric value
+            /// Get &apos;-9999999.999&apos; numeric value
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='doubleQuery'>
-            /// '-9999999.999'numeric value
+            /// &apos;-9999999.999&apos;numeric value
             /// </param>
             public static void DoubleDecimalNegative(this IQueries operations, double? doubleQuery = default(double?))
             {
@@ -428,13 +428,13 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get '-9999999.999' numeric value
+            /// Get &apos;-9999999.999&apos; numeric value
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='doubleQuery'>
-            /// '-9999999.999'numeric value
+            /// &apos;-9999999.999&apos;numeric value
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -476,14 +476,14 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
+            /// Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='stringQuery'>
-            /// '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter
-            /// include: '啊齄丂狛狜隣郎隣兀﨩'
+            /// &apos;啊齄丂狛狜隣郎隣兀﨩&apos;multi-byte string value. Possible values for this
+            /// parameter include: &apos;啊齄丂狛狜隣郎隣兀﨩&apos;
             /// </param>
             public static void StringUnicode(this IQueries operations, string stringQuery = default(string))
             {
@@ -491,14 +491,14 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
+            /// Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='stringQuery'>
-            /// '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter
-            /// include: '啊齄丂狛狜隣郎隣兀﨩'
+            /// &apos;啊齄丂狛狜隣郎隣兀﨩&apos;multi-byte string value. Possible values for this
+            /// parameter include: &apos;啊齄丂狛狜隣郎隣兀﨩&apos;
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -509,14 +509,15 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get 'begin!*'();:@ &=+$,/?#[]end
+            /// Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='stringQuery'>
-            /// 'begin!*'();:@ &=+$,/?#[]end' url encoded string value. Possible values
-            /// for this parameter include: 'begin!*'();:@ &=+$,/?#[]end'
+            /// &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; url encoded string value.
+            /// Possible values for this parameter include: &apos;begin!*&apos;();:@
+            /// &amp;=+$,/?#[]end&apos;
             /// </param>
             public static void StringUrlEncoded(this IQueries operations, string stringQuery = default(string))
             {
@@ -524,14 +525,15 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get 'begin!*'();:@ &=+$,/?#[]end
+            /// Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='stringQuery'>
-            /// 'begin!*'();:@ &=+$,/?#[]end' url encoded string value. Possible values
-            /// for this parameter include: 'begin!*'();:@ &=+$,/?#[]end'
+            /// &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; url encoded string value.
+            /// Possible values for this parameter include: &apos;begin!*&apos;();:@
+            /// &amp;=+$,/?#[]end&apos;
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -542,13 +544,14 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get ''
+            /// Get &apos;&apos;
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='stringQuery'>
-            /// '' string value. Possible values for this parameter include: ''
+            /// &apos;&apos; string value. Possible values for this parameter include:
+            /// &apos;&apos;
             /// </param>
             public static void StringEmpty(this IQueries operations, string stringQuery = default(string))
             {
@@ -556,13 +559,14 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get ''
+            /// Get &apos;&apos;
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='stringQuery'>
-            /// '' string value. Possible values for this parameter include: ''
+            /// &apos;&apos; string value. Possible values for this parameter include:
+            /// &apos;&apos;
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -604,14 +608,15 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get using uri with query parameter 'green color'
+            /// Get using uri with query parameter &apos;green color&apos;
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='enumQuery'>
-            /// 'green color' enum value. Possible values for this parameter include: 'red
-            /// color', 'green color', 'blue color'
+            /// &apos;green color&apos; enum value. Possible values for this parameter
+            /// include: &apos;red color&apos;, &apos;green color&apos;, &apos;blue
+            /// color&apos;
             /// </param>
             public static void EnumValid(this IQueries operations, UriColor? enumQuery = default(UriColor?))
             {
@@ -619,14 +624,15 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get using uri with query parameter 'green color'
+            /// Get using uri with query parameter &apos;green color&apos;
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='enumQuery'>
-            /// 'green color' enum value. Possible values for this parameter include: 'red
-            /// color', 'green color', 'blue color'
+            /// &apos;green color&apos; enum value. Possible values for this parameter
+            /// include: &apos;red color&apos;, &apos;green color&apos;, &apos;blue
+            /// color&apos;
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -643,8 +649,8 @@ namespace Fixtures.SwaggerBatUrl
             /// The operations group for this extension method
             /// </param>
             /// <param name='enumQuery'>
-            /// null string value. Possible values for this parameter include: 'red
-            /// color', 'green color', 'blue color'
+            /// null string value. Possible values for this parameter include: &apos;red
+            /// color&apos;, &apos;green color&apos;, &apos;blue color&apos;
             /// </param>
             public static void EnumNull(this IQueries operations, UriColor? enumQuery = default(UriColor?))
             {
@@ -658,8 +664,8 @@ namespace Fixtures.SwaggerBatUrl
             /// The operations group for this extension method
             /// </param>
             /// <param name='enumQuery'>
-            /// null string value. Possible values for this parameter include: 'red
-            /// color', 'green color', 'blue color'
+            /// null string value. Possible values for this parameter include: &apos;red
+            /// color&apos;, &apos;green color&apos;, &apos;blue color&apos;
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -670,13 +676,13 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+            /// Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='byteQuery'>
-            /// '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+            /// &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array
             /// </param>
             public static void ByteMultiByte(this IQueries operations, byte[] byteQuery = default(byte[]))
             {
@@ -684,13 +690,13 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+            /// Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='byteQuery'>
-            /// '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+            /// &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -701,13 +707,13 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get '' as byte array
+            /// Get &apos;&apos; as byte array
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='byteQuery'>
-            /// '' as byte array
+            /// &apos;&apos; as byte array
             /// </param>
             public static void ByteEmpty(this IQueries operations, byte[] byteQuery = default(byte[]))
             {
@@ -715,13 +721,13 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get '' as byte array
+            /// Get &apos;&apos; as byte array
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='byteQuery'>
-            /// '' as byte array
+            /// &apos;&apos; as byte array
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -763,13 +769,13 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get '2012-01-01' as date
+            /// Get &apos;2012-01-01&apos; as date
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='dateQuery'>
-            /// '2012-01-01' as date
+            /// &apos;2012-01-01&apos; as date
             /// </param>
             public static void DateValid(this IQueries operations, DateTime? dateQuery = default(DateTime?))
             {
@@ -777,13 +783,13 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get '2012-01-01' as date
+            /// Get &apos;2012-01-01&apos; as date
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='dateQuery'>
-            /// '2012-01-01' as date
+            /// &apos;2012-01-01&apos; as date
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -825,13 +831,13 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get '2012-01-01T01:01:01Z' as date-time
+            /// Get &apos;2012-01-01T01:01:01Z&apos; as date-time
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='dateTimeQuery'>
-            /// '2012-01-01T01:01:01Z' as date-time
+            /// &apos;2012-01-01T01:01:01Z&apos; as date-time
             /// </param>
             public static void DateTimeValid(this IQueries operations, DateTime? dateTimeQuery = default(DateTime?))
             {
@@ -839,13 +845,13 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get '2012-01-01T01:01:01Z' as date-time
+            /// Get &apos;2012-01-01T01:01:01Z&apos; as date-time
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='dateTimeQuery'>
-            /// '2012-01-01T01:01:01Z' as date-time
+            /// &apos;2012-01-01T01:01:01Z&apos; as date-time
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -887,15 +893,15 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
-            /// null, ''] using the csv-array format
+            /// Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@
+            /// &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='arrayQuery'>
-            /// an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
-            /// ''] using the csv-array format
+            /// an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@
+            /// &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format
             /// </param>
             public static void ArrayStringCsvValid(this IQueries operations, IList<string> arrayQuery = default(IList<string>))
             {
@@ -903,15 +909,15 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
-            /// null, ''] using the csv-array format
+            /// Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@
+            /// &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='arrayQuery'>
-            /// an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
-            /// ''] using the csv-array format
+            /// an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@
+            /// &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -984,15 +990,15 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
-            /// null, ''] using the ssv-array format
+            /// Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@
+            /// &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='arrayQuery'>
-            /// an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
-            /// ''] using the ssv-array format
+            /// an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@
+            /// &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format
             /// </param>
             public static void ArrayStringSsvValid(this IQueries operations, IList<string> arrayQuery = default(IList<string>))
             {
@@ -1000,15 +1006,15 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
-            /// null, ''] using the ssv-array format
+            /// Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@
+            /// &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='arrayQuery'>
-            /// an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
-            /// ''] using the ssv-array format
+            /// an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@
+            /// &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1019,15 +1025,15 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
-            /// null, ''] using the tsv-array format
+            /// Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@
+            /// &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='arrayQuery'>
-            /// an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
-            /// ''] using the tsv-array format
+            /// an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@
+            /// &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format
             /// </param>
             public static void ArrayStringTsvValid(this IQueries operations, IList<string> arrayQuery = default(IList<string>))
             {
@@ -1035,15 +1041,15 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
-            /// null, ''] using the tsv-array format
+            /// Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@
+            /// &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='arrayQuery'>
-            /// an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
-            /// ''] using the tsv-array format
+            /// an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@
+            /// &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1054,15 +1060,15 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
-            /// null, ''] using the pipes-array format
+            /// Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@
+            /// &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='arrayQuery'>
-            /// an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
-            /// ''] using the pipes-array format
+            /// an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@
+            /// &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format
             /// </param>
             public static void ArrayStringPipesValid(this IQueries operations, IList<string> arrayQuery = default(IList<string>))
             {
@@ -1070,15 +1076,15 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
-            /// null, ''] using the pipes-array format
+            /// Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@
+            /// &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='arrayQuery'>
-            /// an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
-            /// ''] using the pipes-array format
+            /// an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@
+            /// &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.

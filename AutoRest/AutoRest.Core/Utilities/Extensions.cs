@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 
 namespace Microsoft.Rest.Generator.Utilities
 {
@@ -176,6 +177,26 @@ namespace Microsoft.Rest.Generator.Utilities
         public static string ToPascalCase(this string value)
         {
             return CodeNamer.PascalCase(value);
+        }
+
+        /// <summary>
+        /// Escape reserved characters in xml comments with their escaped representations
+        /// </summary>
+        /// <param name="comment">The xml comment to escape</param>
+        /// <returns>The text appropriately escaped for inclusing in an xml comment</returns>
+        public static string EscapeXmlComment(this string comment)
+        {
+            if (comment == null)
+            {
+                return null;
+            }
+
+            return new StringBuilder(comment)
+                .Replace("&", "&amp;")
+                .Replace("<", "&lt;")
+                .Replace(">", "&gt;")
+                .Replace("\"", "&quot;")
+                .Replace("'", "&apos;").ToString();
         }
     }
 }

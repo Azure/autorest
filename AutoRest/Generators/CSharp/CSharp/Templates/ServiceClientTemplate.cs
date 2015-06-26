@@ -91,7 +91,7 @@ Write(EmptyLine);
 #line hidden
             WriteLiteral("\r\n    /// <summary>\r\n    ");
 #line 26 "ServiceClientTemplate.cshtml"
-Write(WrapComment("/// ", Model.Documentation));
+Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
@@ -152,7 +152,7 @@ Write(WrapComment("/// ", Model.Documentation));
 
             WriteLiteral("        /// <summary>\r\n        ");
 #line 51 "ServiceClientTemplate.cshtml"
-     Write(WrapComment("/// ", property.Documentation));
+     Write(WrapComment("/// ", property.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden

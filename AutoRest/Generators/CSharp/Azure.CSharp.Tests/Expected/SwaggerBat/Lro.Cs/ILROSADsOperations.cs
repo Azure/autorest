@@ -45,7 +45,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         Task<AzureOperationResponse<Product>> GetNonRetry400WithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running put request, service returns a Product with
-        /// 'ProvisioningState' = 'Creating' and 201 response code
+        /// &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201
+        /// response code
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -56,7 +57,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         Task<AzureOperationResponse<Product>> PutNonRetry201Creating400WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running put request, service returns a Product with
-        /// 'ProvisioningState' = 'Creating' and 201 response code
+        /// &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201
+        /// response code
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -502,8 +504,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         Task<AzureOperationResponse<Product>> GetAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running delete request, service returns a 202 to the initial
-        /// request receing a reponse with an invalid 'Location' and
-        /// 'Retry-After' headers
+        /// request receing a reponse with an invalid &apos;Location&apos;
+        /// and &apos;Retry-After&apos; headers
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -511,8 +513,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         Task<AzureOperationResponse> Delete202RetryInvalidHeaderWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running delete request, service returns a 202 to the initial
-        /// request receing a reponse with an invalid 'Location' and
-        /// 'Retry-After' headers
+        /// request receing a reponse with an invalid &apos;Location&apos;
+        /// and &apos;Retry-After&apos; headers
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -556,7 +558,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         Task<AzureOperationResponse> BeginDeleteAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 202 to the initial
-        /// request, with invalid 'Location' and 'Retry-After' headers.
+        /// request, with invalid &apos;Location&apos; and
+        /// &apos;Retry-After&apos; headers.
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -567,7 +570,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         Task<AzureOperationResponse> Post202RetryInvalidHeaderWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 202 to the initial
-        /// request, with invalid 'Location' and 'Retry-After' headers.
+        /// request, with invalid &apos;Location&apos; and
+        /// &apos;Retry-After&apos; headers.
         /// </summary>
         /// <param name='product'>
         /// Product to put

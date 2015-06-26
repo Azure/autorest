@@ -17,9 +17,11 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening.Models
         public string Pname { get; set; }
 
         /// <summary>
-        /// Possible values for this property include: 'Succeeded', 'Failed',
-        /// 'canceled', 'Accepted', 'Creating', 'Created', 'Updating',
-        /// 'Updated', 'Deleting', 'Deleted', 'OK'
+        /// Possible values for this property include: &apos;Succeeded&apos;,
+        /// &apos;Failed&apos;, &apos;canceled&apos;, &apos;Accepted&apos;,
+        /// &apos;Creating&apos;, &apos;Created&apos;, &apos;Updating&apos;,
+        /// &apos;Updated&apos;, &apos;Deleting&apos;, &apos;Deleted&apos;,
+        /// &apos;OK&apos;
         /// </summary>
         [JsonProperty(PropertyName = "provisioningStateValues")]
         public string ProvisioningStateValues { get; private set; }

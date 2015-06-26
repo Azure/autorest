@@ -33,10 +33,12 @@ namespace Fixtures.SwaggerBatHeader
         public AutoRestSwaggerBATHeaderService Client { get; private set; }
 
         /// <summary>
-        /// Send a post request with header value "User-Agent": "overwrite"
+        /// Send a post request with header value &quot;User-Agent&quot;:
+        /// &quot;overwrite&quot;
         /// </summary>
         /// <param name='userAgent'>
-        /// Send a post request with header value "User-Agent": "overwrite"
+        /// Send a post request with header value &quot;User-Agent&quot;:
+        /// &quot;overwrite&quot;
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -114,7 +116,8 @@ namespace Fixtures.SwaggerBatHeader
         }
 
         /// <summary>
-        /// Get a response with header value "User-Agent": "overwrite"
+        /// Get a response with header value &quot;User-Agent&quot;:
+        /// &quot;overwrite&quot;
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -183,10 +186,12 @@ namespace Fixtures.SwaggerBatHeader
         }
 
         /// <summary>
-        /// Send a post request with header value "Content-Type": "text/html"
+        /// Send a post request with header value &quot;Content-Type&quot;:
+        /// &quot;text/html&quot;
         /// </summary>
         /// <param name='contentType'>
-        /// Send a post request with header value "Content-Type": "text/html"
+        /// Send a post request with header value &quot;Content-Type&quot;:
+        /// &quot;text/html&quot;
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -264,7 +269,8 @@ namespace Fixtures.SwaggerBatHeader
         }
 
         /// <summary>
-        /// Get a response with header value "Content-Type": "text/html"
+        /// Get a response with header value &quot;Content-Type&quot;:
+        /// &quot;text/html&quot;
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -333,11 +339,13 @@ namespace Fixtures.SwaggerBatHeader
         }
 
         /// <summary>
-        /// Send a post request with header values "scenario": "positive", "value": 1
-        /// or "scenario": "negative", "value": -2
+        /// Send a post request with header values &quot;scenario&quot;:
+        /// &quot;positive&quot;, &quot;value&quot;: 1 or &quot;scenario&quot;:
+        /// &quot;negative&quot;, &quot;value&quot;: -2
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "positive" or "negative"
+        /// Send a post request with header values &quot;scenario&quot;:
+        /// &quot;positive&quot; or &quot;negative&quot;
         /// </param>    
         /// <param name='value'>
         /// Send a post request with header values 1 or -2
@@ -427,10 +435,11 @@ namespace Fixtures.SwaggerBatHeader
         }
 
         /// <summary>
-        /// Get a response with header value "value": 1 or -2
+        /// Get a response with header value &quot;value&quot;: 1 or -2
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "positive" or "negative"
+        /// Send a post request with header values &quot;scenario&quot;:
+        /// &quot;positive&quot; or &quot;negative&quot;
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -508,11 +517,13 @@ namespace Fixtures.SwaggerBatHeader
         }
 
         /// <summary>
-        /// Send a post request with header values "scenario": "positive", "value":
-        /// 105 or "scenario": "negative", "value": -2
+        /// Send a post request with header values &quot;scenario&quot;:
+        /// &quot;positive&quot;, &quot;value&quot;: 105 or &quot;scenario&quot;:
+        /// &quot;negative&quot;, &quot;value&quot;: -2
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "positive" or "negative"
+        /// Send a post request with header values &quot;scenario&quot;:
+        /// &quot;positive&quot; or &quot;negative&quot;
         /// </param>    
         /// <param name='value'>
         /// Send a post request with header values 105 or -2
@@ -602,10 +613,11 @@ namespace Fixtures.SwaggerBatHeader
         }
 
         /// <summary>
-        /// Get a response with header value "value": 105 or -2
+        /// Get a response with header value &quot;value&quot;: 105 or -2
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "positive" or "negative"
+        /// Send a post request with header values &quot;scenario&quot;:
+        /// &quot;positive&quot; or &quot;negative&quot;
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -683,11 +695,13 @@ namespace Fixtures.SwaggerBatHeader
         }
 
         /// <summary>
-        /// Send a post request with header values "scenario": "positive", "value":
-        /// 0.07 or "scenario": "negative", "value": -3.0
+        /// Send a post request with header values &quot;scenario&quot;:
+        /// &quot;positive&quot;, &quot;value&quot;: 0.07 or &quot;scenario&quot;:
+        /// &quot;negative&quot;, &quot;value&quot;: -3.0
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "positive" or "negative"
+        /// Send a post request with header values &quot;scenario&quot;:
+        /// &quot;positive&quot; or &quot;negative&quot;
         /// </param>    
         /// <param name='value'>
         /// Send a post request with header values 0.07 or -3.0
@@ -777,10 +791,11 @@ namespace Fixtures.SwaggerBatHeader
         }
 
         /// <summary>
-        /// Get a response with header value "value": 0.07 or -3.0
+        /// Get a response with header value &quot;value&quot;: 0.07 or -3.0
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "positive" or "negative"
+        /// Send a post request with header values &quot;scenario&quot;:
+        /// &quot;positive&quot; or &quot;negative&quot;
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -858,11 +873,13 @@ namespace Fixtures.SwaggerBatHeader
         }
 
         /// <summary>
-        /// Send a post request with header values "scenario": "positive", "value":
-        /// 7e120 or "scenario": "negative", "value": -3.0
+        /// Send a post request with header values &quot;scenario&quot;:
+        /// &quot;positive&quot;, &quot;value&quot;: 7e120 or &quot;scenario&quot;:
+        /// &quot;negative&quot;, &quot;value&quot;: -3.0
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "positive" or "negative"
+        /// Send a post request with header values &quot;scenario&quot;:
+        /// &quot;positive&quot; or &quot;negative&quot;
         /// </param>    
         /// <param name='value'>
         /// Send a post request with header values 7e120 or -3.0
@@ -952,10 +969,11 @@ namespace Fixtures.SwaggerBatHeader
         }
 
         /// <summary>
-        /// Get a response with header value "value": 7e120 or -3.0
+        /// Get a response with header value &quot;value&quot;: 7e120 or -3.0
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "positive" or "negative"
+        /// Send a post request with header values &quot;scenario&quot;:
+        /// &quot;positive&quot; or &quot;negative&quot;
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1033,11 +1051,13 @@ namespace Fixtures.SwaggerBatHeader
         }
 
         /// <summary>
-        /// Send a post request with header values "scenario": "true", "value": true
-        /// or "scenario": "false", "value": false
+        /// Send a post request with header values &quot;scenario&quot;:
+        /// &quot;true&quot;, &quot;value&quot;: true or &quot;scenario&quot;:
+        /// &quot;false&quot;, &quot;value&quot;: false
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "true" or "false"
+        /// Send a post request with header values &quot;scenario&quot;:
+        /// &quot;true&quot; or &quot;false&quot;
         /// </param>    
         /// <param name='value'>
         /// Send a post request with header values true or false
@@ -1127,10 +1147,11 @@ namespace Fixtures.SwaggerBatHeader
         }
 
         /// <summary>
-        /// Get a response with header value "value": true or false
+        /// Get a response with header value &quot;value&quot;: true or false
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "true" or "false"
+        /// Send a post request with header values &quot;scenario&quot;:
+        /// &quot;true&quot; or &quot;false&quot;
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1208,17 +1229,19 @@ namespace Fixtures.SwaggerBatHeader
         }
 
         /// <summary>
-        /// Send a post request with header values "scenario": "valid", "value": "The
-        /// quick brown fox jumps over the lazy dog" or "scenario": "null", "value":
-        /// null or "scenario": "empty", "value": ""
+        /// Send a post request with header values &quot;scenario&quot;:
+        /// &quot;valid&quot;, &quot;value&quot;: &quot;The quick brown fox jumps
+        /// over the lazy dog&quot; or &quot;scenario&quot;: &quot;null&quot;,
+        /// &quot;value&quot;: null or &quot;scenario&quot;: &quot;empty&quot;,
+        /// &quot;value&quot;: &quot;&quot;
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "valid" or "null" or
-        /// "empty"
+        /// Send a post request with header values &quot;scenario&quot;:
+        /// &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;
         /// </param>    
         /// <param name='value'>
-        /// Send a post request with header values "The quick brown fox jumps over the
-        /// lazy dog" or null or ""
+        /// Send a post request with header values &quot;The quick brown fox jumps
+        /// over the lazy dog&quot; or null or &quot;&quot;
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1301,12 +1324,12 @@ namespace Fixtures.SwaggerBatHeader
         }
 
         /// <summary>
-        /// Get a response with header values "The quick brown fox jumps over the lazy
-        /// dog" or null or ""
+        /// Get a response with header values &quot;The quick brown fox jumps over the
+        /// lazy dog&quot; or null or &quot;&quot;
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "valid" or "null" or
-        /// "empty"
+        /// Send a post request with header values &quot;scenario&quot;:
+        /// &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1384,14 +1407,18 @@ namespace Fixtures.SwaggerBatHeader
         }
 
         /// <summary>
-        /// Send a post request with header values "scenario": "valid", "value":
-        /// "2010-01-01" or "scenario": "min", "value": "0001-01-01"
+        /// Send a post request with header values &quot;scenario&quot;:
+        /// &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01&quot; or
+        /// &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;:
+        /// &quot;0001-01-01&quot;
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "valid" or "min"
+        /// Send a post request with header values &quot;scenario&quot;:
+        /// &quot;valid&quot; or &quot;min&quot;
         /// </param>    
         /// <param name='value'>
-        /// Send a post request with header values "2010-01-01" or "0001-01-01"
+        /// Send a post request with header values &quot;2010-01-01&quot; or
+        /// &quot;0001-01-01&quot;
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1478,10 +1505,12 @@ namespace Fixtures.SwaggerBatHeader
         }
 
         /// <summary>
-        /// Get a response with header values "2010-01-01" or "0001-01-01"
+        /// Get a response with header values &quot;2010-01-01&quot; or
+        /// &quot;0001-01-01&quot;
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "valid" or "min"
+        /// Send a post request with header values &quot;scenario&quot;:
+        /// &quot;valid&quot; or &quot;min&quot;
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1559,16 +1588,18 @@ namespace Fixtures.SwaggerBatHeader
         }
 
         /// <summary>
-        /// Send a post request with header values "scenario": "valid", "value":
-        /// "2010-01-01T12:34:56Z" or "scenario": "min", "value":
-        /// "0001-01-01T00:00:00Z"
+        /// Send a post request with header values &quot;scenario&quot;:
+        /// &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01T12:34:56Z&quot; or
+        /// &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;:
+        /// &quot;0001-01-01T00:00:00Z&quot;
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "valid" or "min"
+        /// Send a post request with header values &quot;scenario&quot;:
+        /// &quot;valid&quot; or &quot;min&quot;
         /// </param>    
         /// <param name='value'>
-        /// Send a post request with header values "2010-01-01T12:34:56Z" or
-        /// "0001-01-01T00:00:00Z"
+        /// Send a post request with header values &quot;2010-01-01T12:34:56Z&quot; or
+        /// &quot;0001-01-01T00:00:00Z&quot;
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1655,11 +1686,12 @@ namespace Fixtures.SwaggerBatHeader
         }
 
         /// <summary>
-        /// Get a response with header values "2010-01-01T12:34:56Z" or
-        /// "0001-01-01T00:00:00Z"
+        /// Get a response with header values &quot;2010-01-01T12:34:56Z&quot; or
+        /// &quot;0001-01-01T00:00:00Z&quot;
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "valid" or "min"
+        /// Send a post request with header values &quot;scenario&quot;:
+        /// &quot;valid&quot; or &quot;min&quot;
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1737,14 +1769,15 @@ namespace Fixtures.SwaggerBatHeader
         }
 
         /// <summary>
-        /// Send a post request with header values "scenario": "valid", "value":
-        /// "啊齄丂狛狜隣郎隣兀﨩"
+        /// Send a post request with header values &quot;scenario&quot;:
+        /// &quot;valid&quot;, &quot;value&quot;: &quot;啊齄丂狛狜隣郎隣兀﨩&quot;
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "valid"
+        /// Send a post request with header values &quot;scenario&quot;:
+        /// &quot;valid&quot;
         /// </param>    
         /// <param name='value'>
-        /// Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
+        /// Send a post request with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1831,10 +1864,11 @@ namespace Fixtures.SwaggerBatHeader
         }
 
         /// <summary>
-        /// Get a response with header values "啊齄丂狛狜隣郎隣兀﨩"
+        /// Get a response with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "valid"
+        /// Send a post request with header values &quot;scenario&quot;:
+        /// &quot;valid&quot;
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1912,16 +1946,18 @@ namespace Fixtures.SwaggerBatHeader
         }
 
         /// <summary>
-        /// Send a post request with header values "scenario": "valid", "value":
-        /// "GREY" or "scenario": "null", "value": null
+        /// Send a post request with header values &quot;scenario&quot;:
+        /// &quot;valid&quot;, &quot;value&quot;: &quot;GREY&quot; or
+        /// &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "valid" or "null" or
-        /// "empty"
+        /// Send a post request with header values &quot;scenario&quot;:
+        /// &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;
         /// </param>    
         /// <param name='value'>
-        /// Send a post request with header values 'GREY' . Possible values for this
-        /// parameter include: 'White', 'black', 'GREY'
+        /// Send a post request with header values &apos;GREY&apos; . Possible values
+        /// for this parameter include: &apos;White&apos;, &apos;black&apos;,
+        /// &apos;GREY&apos;
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -2004,11 +2040,11 @@ namespace Fixtures.SwaggerBatHeader
         }
 
         /// <summary>
-        /// Get a response with header values "GREY" or null
+        /// Get a response with header values &quot;GREY&quot; or null
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "valid" or "null" or
-        /// "empty"
+        /// Send a post request with header values &quot;scenario&quot;:
+        /// &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.

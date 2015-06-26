@@ -107,7 +107,7 @@ namespace Fixtures.SwaggerBatBodyByte
         }
 
         /// <summary>
-        /// Get empty byte value ''
+        /// Get empty byte value &apos;&apos;
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -336,7 +336,7 @@ namespace Fixtures.SwaggerBatBodyByte
         }
 
         /// <summary>
-        /// Get invalid byte value ':::SWAGGER::::'
+        /// Get invalid byte value &apos;:::SWAGGER::::&apos;
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.

@@ -43,8 +43,9 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// The operations group for this extension method
             /// </param>
             /// <param name='complexBody'>
-            /// Please put an array with 4 items: "1, 2, 3, 4", "", null, "&S#$(*Y", "The
-            /// quick brown fox jumps over the lazy dog"
+            /// Please put an array with 4 items: &quot;1, 2, 3, 4&quot;, &quot;&quot;,
+            /// null, &quot;&amp;S#$(*Y&quot;, &quot;The quick brown fox jumps over the
+            /// lazy dog&quot;
             /// </param>
             public static void PutValid(this IArray operations, ArrayWrapper complexBody)
             {
@@ -58,8 +59,9 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// The operations group for this extension method
             /// </param>
             /// <param name='complexBody'>
-            /// Please put an array with 4 items: "1, 2, 3, 4", "", null, "&S#$(*Y", "The
-            /// quick brown fox jumps over the lazy dog"
+            /// Please put an array with 4 items: &quot;1, 2, 3, 4&quot;, &quot;&quot;,
+            /// null, &quot;&amp;S#$(*Y&quot;, &quot;The quick brown fox jumps over the
+            /// lazy dog&quot;
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -127,7 +129,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             }
 
             /// <summary>
-            /// Get complex types with array property while server doesn't provide a
+            /// Get complex types with array property while server doesn&apos;t provide a
             /// response payload
             /// </summary>
             /// <param name='operations'>
@@ -139,7 +141,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             }
 
             /// <summary>
-            /// Get complex types with array property while server doesn't provide a
+            /// Get complex types with array property while server doesn&apos;t provide a
             /// response payload
             /// </summary>
             /// <param name='operations'>

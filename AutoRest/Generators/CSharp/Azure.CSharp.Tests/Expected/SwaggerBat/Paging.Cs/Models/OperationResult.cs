@@ -13,9 +13,10 @@ namespace Fixtures.Azure.SwaggerBatPaging.Models
     {
         /// <summary>
         /// The status of the request. Possible values for this property
-        /// include: 'Succeeded', 'Failed', 'canceled', 'Accepted',
-        /// 'Creating', 'Created', 'Updating', 'Updated', 'Deleting',
-        /// 'Deleted', 'OK'
+        /// include: &apos;Succeeded&apos;, &apos;Failed&apos;,
+        /// &apos;canceled&apos;, &apos;Accepted&apos;, &apos;Creating&apos;,
+        /// &apos;Created&apos;, &apos;Updating&apos;, &apos;Updated&apos;,
+        /// &apos;Deleting&apos;, &apos;Deleted&apos;, &apos;OK&apos;
         /// </summary>
         [JsonProperty(PropertyName = "status")]
         public string Status { get; set; }

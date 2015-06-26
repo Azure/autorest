@@ -17,7 +17,10 @@ foreach ($test in $tests.GetEnumerator())
     $settings.OutputDirectory = "$PSScriptRoot\Expected\$($test.Key)"
     $settings.Input = "$PSScriptRoot\..\Azure.CSharp.Tests\$($test.Value)"
     $settings.Header = "NONE"
-    Remove-Item "$($settings.OutputDirectory)" -Recurse -Force
+    if (Test-Path "$($settings.OutputDirectory)") 
+    {
+        Remove-Item "$($settings.OutputDirectory)" -Recurse -Force
+    }
     Write-Output "Generating $($test.Value)"
     [Microsoft.Rest.Generator.AutoRest]::Generate($settings)
     #&"$PSScriptRoot\..\..\..\..\binaries\net45\AutoRest.exe" -Modeler Swagger -CodeGenerator $flavor -OutputDirectory "$PSScriptRoot\Expected" -Namespace "$namespace" -Input "$PSScriptRoot\$($test.Value)" -Header NONE

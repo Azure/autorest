@@ -86,6 +86,82 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CSharpAzureSwaggerBat.cs" />
+    <Compile Include="Expected\SwaggerBat\AzureSpecials.Cs\ApiVersionDefaultOperations.cs">
+      <SubType>Code</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\AzureSpecials.Cs\ApiVersionDefaultOperationsExtensions.cs">
+      <SubType>Code</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\AzureSpecials.Cs\ApiVersionLocalOperations.cs">
+      <SubType>Code</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\AzureSpecials.Cs\ApiVersionLocalOperationsExtensions.cs">
+      <SubType>Code</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\AzureSpecials.Cs\AutoRestAzureSpecialParametersTestClient.cs">
+      <SubType>Code</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\AzureSpecials.Cs\AutoRestAzureSpecialParametersTestClientExtensions.cs">
+      <SubType>Code</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\AzureSpecials.Cs\IApiVersionDefaultOperations.cs">
+      <SubType>Code</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\AzureSpecials.Cs\IApiVersionLocalOperations.cs">
+      <SubType>Code</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\AzureSpecials.Cs\IAutoRestAzureSpecialParametersTestClient.cs">
+      <SubType>Code</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\AzureSpecials.Cs\ISkipUrlEncodingOperations.cs">
+      <SubType>Code</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\AzureSpecials.Cs\ISubscriptionInCredentialsOperations.cs">
+      <SubType>Code</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\AzureSpecials.Cs\ISubscriptionInMethodOperations.cs">
+      <SubType>Code</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\AzureSpecials.Cs\Models\Error.cs">
+      <SubType>Code</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\AzureSpecials.Cs\SkipUrlEncodingOperations.cs">
+      <SubType>Code</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\AzureSpecials.Cs\SkipUrlEncodingOperationsExtensions.cs">
+      <SubType>Code</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\AzureSpecials.Cs\SubscriptionInCredentialsOperations.cs">
+      <SubType>Code</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\AzureSpecials.Cs\SubscriptionInCredentialsOperationsExtensions.cs">
+      <SubType>Code</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\AzureSpecials.Cs\SubscriptionInMethodOperations.cs">
+      <SubType>Code</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\AzureSpecials.Cs\SubscriptionInMethodOperationsExtensions.cs">
+      <SubType>Code</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Expected\SwaggerBat\Head.Cs\AutoRestHeadTestService.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>

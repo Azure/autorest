@@ -83,7 +83,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <summary>
         /// Long running put request, service returns a 202 to the initial
         /// request, with a location header that points to a polling URL that
-        /// returns a 200 and an entity that doesn't contains
+        /// returns a 200 and an entity that doesn&apos;t contains
         /// ProvisioningState
         /// </summary>
         /// <param name='product'>
@@ -96,7 +96,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <summary>
         /// Long running put request, service returns a 202 to the initial
         /// request, with a location header that points to a polling URL that
-        /// returns a 200 and an entity that doesn't contains
+        /// returns a 200 and an entity that doesn&apos;t contains
         /// ProvisioningState
         /// </summary>
         /// <param name='product'>
@@ -579,8 +579,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         Task<AzureOperationResponse> BeginDeleteAsyncRetrycanceledWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 202 to the initial
-        /// request, with 'Location' header. Poll returns a 200 with a
-        /// response body after success.
+        /// request, with &apos;Location&apos; header. Poll returns a 200
+        /// with a response body after success.
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -588,8 +588,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         Task<AzureOperationResponse<Sku>> Post200WithPayloadWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 202 to the initial
-        /// request, with 'Location' header. Poll returns a 200 with a
-        /// response body after success.
+        /// request, with &apos;Location&apos; header. Poll returns a 200
+        /// with a response body after success.
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -597,8 +597,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         Task<AzureOperationResponse<Sku>> BeginPost200WithPayloadWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 202 to the initial
-        /// request, with 'Location' and 'Retry-After' headers, Polls return
-        /// a 200 with a response body after success
+        /// request, with &apos;Location&apos; and &apos;Retry-After&apos;
+        /// headers, Polls return a 200 with a response body after success
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -609,8 +609,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         Task<AzureOperationResponse> Post202Retry200WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 202 to the initial
-        /// request, with 'Location' and 'Retry-After' headers, Polls return
-        /// a 200 with a response body after success
+        /// request, with &apos;Location&apos; and &apos;Retry-After&apos;
+        /// headers, Polls return a 200 with a response body after success
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -621,8 +621,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         Task<AzureOperationResponse> BeginPost202Retry200WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 202 to the initial
-        /// request, with 'Location' header, 204 with noresponse body after
-        /// success
+        /// request, with &apos;Location&apos; header, 204 with noresponse
+        /// body after success
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -633,8 +633,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         Task<AzureOperationResponse<Product>> Post202NoRetry204WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 202 to the initial
-        /// request, with 'Location' header, 204 with noresponse body after
-        /// success
+        /// request, with &apos;Location&apos; header, 204 with noresponse
+        /// body after success
         /// </summary>
         /// <param name='product'>
         /// Product to put

@@ -2,11 +2,12 @@
 @using Microsoft.Rest.Generator.CSharp
 @using Microsoft.Rest.Generator.CSharp.Templates
 @using Microsoft.Rest.Generator.CSharp.TemplateModels
+@using Microsoft.Rest.Generator.Utilities
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.MethodTemplateModel>
 
 @{
 @:/// <summary>
-@:@WrapComment("/// ", Model.Documentation)
+@:@WrapComment("/// ", Model.Documentation.EscapeXmlComment())
 @:/// </summary>
 @:/// <param name='operations'>
 @:/// The operations group for this extension method
@@ -14,7 +15,7 @@
 foreach (var parameter in Model.Parameters)
 {
 @:/// <param name='@parameter.Name'>
-@:@WrapComment("/// ", parameter.Documentation)
+@:@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())
 @:/// </param>
 }
 @:public static @Model.ReturnTypeString @(Model.Name)(@Model.GetExtensionParameters(Model.SyncMethodParameterDeclaration))
@@ -30,7 +31,7 @@ foreach (var parameter in Model.Parameters)
 @:}
 @EmptyLine
 @:/// <summary>
-@:@WrapComment("/// ", Model.Documentation)
+@:@WrapComment("/// ", Model.Documentation.EscapeXmlComment())
 @:/// </summary>
 @:/// <param name='operations'>
 @:/// The operations group for this extension method
@@ -38,7 +39,7 @@ foreach (var parameter in Model.Parameters)
 foreach (var parameter in Model.Parameters)
 {
 @:/// <param name='@parameter.Name'>
-@:@WrapComment("/// ", parameter.Documentation)
+@:@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())
 @:/// </param>
 }
 @:/// <param name='cancellationToken'>

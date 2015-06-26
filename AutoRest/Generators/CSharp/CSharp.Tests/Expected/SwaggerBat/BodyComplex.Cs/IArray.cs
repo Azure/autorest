@@ -24,8 +24,9 @@ namespace Fixtures.SwaggerBatBodyComplex
         /// Put complex types with array property
         /// </summary>
         /// <param name='complexBody'>
-        /// Please put an array with 4 items: "1, 2, 3, 4", "", null,
-        /// "&S#$(*Y", "The quick brown fox jumps over the lazy dog"
+        /// Please put an array with 4 items: &quot;1, 2, 3, 4&quot;,
+        /// &quot;&quot;, null, &quot;&amp;S#$(*Y&quot;, &quot;The quick
+        /// brown fox jumps over the lazy dog&quot;
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -49,8 +50,8 @@ namespace Fixtures.SwaggerBatBodyComplex
         /// </param>
         Task<HttpOperationResponse> PutEmptyWithOperationResponseAsync(ArrayWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Get complex types with array property while server doesn't provide
-        /// a response payload
+        /// Get complex types with array property while server doesn&apos;t
+        /// provide a response payload
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.

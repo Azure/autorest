@@ -33,7 +33,7 @@ namespace Fixtures.SwaggerBatBodyComplex
         public AutoRestComplexTestService Client { get; private set; }
 
         /// <summary>
-        /// Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
+        /// Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -107,10 +107,10 @@ namespace Fixtures.SwaggerBatBodyComplex
         }
 
         /// <summary>
-        /// Please put {id: 2, name: 'abc', color: 'Magenta'}
+        /// Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}
         /// </summary>
         /// <param name='complexBody'>
-        /// Please put {id: 2, name: 'abc', color: 'Magenta'}
+        /// Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -414,7 +414,7 @@ namespace Fixtures.SwaggerBatBodyComplex
         }
 
         /// <summary>
-        /// Get a basic complex type while the server doesn't provide a response
+        /// Get a basic complex type while the server doesn&apos;t provide a response
         /// payload
         /// </summary>
         /// <param name='cancellationToken'>

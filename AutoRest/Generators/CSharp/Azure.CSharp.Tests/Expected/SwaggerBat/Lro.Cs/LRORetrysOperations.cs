@@ -756,8 +756,8 @@ namespace Fixtures.Azure.SwaggerBatLro
 
         /// <summary>
         /// Long running post request, service returns a 500, then a 202 to the
-        /// initial request, with 'Location' and 'Retry-After' headers, Polls return
-        /// a 200 with a response body after success
+        /// initial request, with &apos;Location&apos; and &apos;Retry-After&apos;
+        /// headers, Polls return a 200 with a response body after success
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -775,8 +775,8 @@ namespace Fixtures.Azure.SwaggerBatLro
 
         /// <summary>
         /// Long running post request, service returns a 500, then a 202 to the
-        /// initial request, with 'Location' and 'Retry-After' headers, Polls return
-        /// a 200 with a response body after success
+        /// initial request, with &apos;Location&apos; and &apos;Retry-After&apos;
+        /// headers, Polls return a 200 with a response body after success
         /// </summary>
         /// <param name='product'>
         /// Product to put

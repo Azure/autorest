@@ -51,7 +51,8 @@ namespace Fixtures.MirrorPrimitives.Models
         public string StringProperty { get; set; }
 
         /// <summary>
-        /// Possible values for this property include: 'red', 'blue', 'green'
+        /// Possible values for this property include: &apos;red&apos;,
+        /// &apos;blue&apos;, &apos;green&apos;
         /// </summary>
         [JsonProperty(PropertyName = "enum")]
         public string EnumProperty { get; set; }

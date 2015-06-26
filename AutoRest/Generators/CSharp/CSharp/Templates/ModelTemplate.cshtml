@@ -1,6 +1,7 @@
 ﻿@using System.Linq
 @using Microsoft.Rest.Generator.ClientModel
 @using Microsoft.Rest.Generator.CSharp.TemplateModels
+@using Microsoft.Rest.Generator.Utilities
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.ModelTemplateModel>
 @Header("/// ")
 namespace @(Settings.Namespace).Models
@@ -15,7 +16,7 @@ namespace @(Settings.Namespace).Models
 }
 @EmptyLine
     /// <summary>
-    @WrapComment("/// ", Model.Documentation)
+    @WrapComment("/// ", Model.Documentation.EscapeXmlComment())
     /// </summary>
     @if (Model.NeedsPolymorphicConverter)
     {
@@ -26,7 +27,7 @@ namespace @(Settings.Namespace).Models
         @foreach (var property in Model.PropertyTemplateModels)
         {
         @:/// <summary>
-        @:@WrapComment("/// ", property.Documentation)
+        @:@WrapComment("/// ", property.Documentation.EscapeXmlComment())
         @:/// </summary>
             if (property.Type == PrimaryType.Date)
             {

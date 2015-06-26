@@ -557,8 +557,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true
-        /// }
+        /// Get boolean dictionary value {&quot;0&quot;: true, &quot;1&quot;: false,
+        /// &quot;2&quot;: false, &quot;3&quot;: true }
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -632,7 +632,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }
+        /// Set dictionary value empty {&quot;0&quot;: true, &quot;1&quot;: false,
+        /// &quot;2&quot;: false, &quot;3&quot;: true }
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>    
@@ -712,7 +713,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get boolean dictionary value {"0": true, "1": null, "2": false }
+        /// Get boolean dictionary value {&quot;0&quot;: true, &quot;1&quot;: null,
+        /// &quot;2&quot;: false }
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -786,7 +788,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'
+        /// Get boolean dictionary value &apos;{&quot;0&quot;: true, &quot;1&quot;:
+        /// &quot;boolean&quot;, &quot;2&quot;: false}&apos;
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -860,7 +863,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
+        /// Get integer dictionary value {&quot;0&quot;: 1, &quot;1&quot;: -1,
+        /// &quot;2&quot;: 3, &quot;3&quot;: 300}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -934,7 +938,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
+        /// Set dictionary value empty {&quot;0&quot;: 1, &quot;1&quot;: -1,
+        /// &quot;2&quot;: 3, &quot;3&quot;: 300}
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>    
@@ -1014,7 +1019,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get integer dictionary value {"0": 1, "1": null, "2": 0}
+        /// Get integer dictionary value {&quot;0&quot;: 1, &quot;1&quot;: null,
+        /// &quot;2&quot;: 0}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1088,7 +1094,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get integer dictionary value {"0": 1, "1": "integer", "2": 0}
+        /// Get integer dictionary value {&quot;0&quot;: 1, &quot;1&quot;:
+        /// &quot;integer&quot;, &quot;2&quot;: 0}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1162,7 +1169,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
+        /// Get integer dictionary value {&quot;0&quot;: 1, &quot;1&quot;: -1,
+        /// &quot;2&quot;: 3, &quot;3&quot;: 300}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1236,7 +1244,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
+        /// Set dictionary value empty {&quot;0&quot;: 1, &quot;1&quot;: -1,
+        /// &quot;2&quot;: 3, &quot;3&quot;: 300}
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>    
@@ -1316,7 +1325,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get long dictionary value {"0": 1, "1": null, "2": 0}
+        /// Get long dictionary value {&quot;0&quot;: 1, &quot;1&quot;: null,
+        /// &quot;2&quot;: 0}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1390,7 +1400,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get long dictionary value {"0": 1, "1": "integer", "2": 0}
+        /// Get long dictionary value {&quot;0&quot;: 1, &quot;1&quot;:
+        /// &quot;integer&quot;, &quot;2&quot;: 0}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1464,7 +1475,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+        /// Get float dictionary value {&quot;0&quot;: 0, &quot;1&quot;: -0.01,
+        /// &quot;2&quot;: 1.2e20}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1538,7 +1550,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+        /// Set dictionary value {&quot;0&quot;: 0, &quot;1&quot;: -0.01,
+        /// &quot;2&quot;: 1.2e20}
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>    
@@ -1618,7 +1631,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
+        /// Get float dictionary value {&quot;0&quot;: 0.0, &quot;1&quot;: null,
+        /// &quot;2&quot;: 1.2e20}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1692,7 +1706,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
+        /// Get boolean dictionary value {&quot;0&quot;: 1.0, &quot;1&quot;:
+        /// &quot;number&quot;, &quot;2&quot;: 0.0}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1766,7 +1781,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+        /// Get float dictionary value {&quot;0&quot;: 0, &quot;1&quot;: -0.01,
+        /// &quot;2&quot;: 1.2e20}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1840,7 +1856,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+        /// Set dictionary value {&quot;0&quot;: 0, &quot;1&quot;: -0.01,
+        /// &quot;2&quot;: 1.2e20}
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>    
@@ -1920,7 +1937,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
+        /// Get float dictionary value {&quot;0&quot;: 0.0, &quot;1&quot;: null,
+        /// &quot;2&quot;: 1.2e20}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1994,7 +2012,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
+        /// Get boolean dictionary value {&quot;0&quot;: 1.0, &quot;1&quot;:
+        /// &quot;number&quot;, &quot;2&quot;: 0.0}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -2068,7 +2087,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
+        /// Get string dictionary value {&quot;0&quot;: &quot;foo1&quot;,
+        /// &quot;1&quot;: &quot;foo2&quot;, &quot;2&quot;: &quot;foo3&quot;}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -2142,7 +2162,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
+        /// Set dictionary value {&quot;0&quot;: &quot;foo1&quot;, &quot;1&quot;:
+        /// &quot;foo2&quot;, &quot;2&quot;: &quot;foo3&quot;}
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>    
@@ -2222,7 +2243,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}
+        /// Get string dictionary value {&quot;0&quot;: &quot;foo&quot;,
+        /// &quot;1&quot;: null, &quot;2&quot;: &quot;foo2&quot;}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -2296,7 +2318,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}
+        /// Get string dictionary value {&quot;0&quot;: &quot;foo&quot;,
+        /// &quot;1&quot;: 123, &quot;2&quot;: &quot;foo2&quot;}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -2370,8 +2393,9 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2":
-        /// "1492-10-12"}
+        /// Get integer dictionary value {&quot;0&quot;: &quot;2000-12-01&quot;,
+        /// &quot;1&quot;: &quot;1980-01-02&quot;, &quot;2&quot;:
+        /// &quot;1492-10-12&quot;}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -2445,8 +2469,9 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2":
-        /// "1492-10-12"}
+        /// Set dictionary value  {&quot;0&quot;: &quot;2000-12-01&quot;,
+        /// &quot;1&quot;: &quot;1980-01-02&quot;, &quot;2&quot;:
+        /// &quot;1492-10-12&quot;}
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>    
@@ -2526,7 +2551,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}
+        /// Get date dictionary value {&quot;0&quot;: &quot;2012-01-01&quot;,
+        /// &quot;1&quot;: null, &quot;2&quot;: &quot;1776-07-04&quot;}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -2600,7 +2626,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get date dictionary value {"0": "2011-03-22", "1": "date"}
+        /// Get date dictionary value {&quot;0&quot;: &quot;2011-03-22&quot;,
+        /// &quot;1&quot;: &quot;date&quot;}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -2674,8 +2701,10 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1":
-        /// "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
+        /// Get date-time dictionary value {&quot;0&quot;:
+        /// &quot;2000-12-01t00:00:01z&quot;, &quot;1&quot;:
+        /// &quot;1980-01-02T00:11:35+01:00&quot;, &quot;2&quot;:
+        /// &quot;1492-10-12T10:15:01-08:00&quot;}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -2749,8 +2778,9 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Set dictionary value  {"0": "2000-12-01t00:00:01z", "1":
-        /// "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
+        /// Set dictionary value  {&quot;0&quot;: &quot;2000-12-01t00:00:01z&quot;,
+        /// &quot;1&quot;: &quot;1980-01-02T00:11:35+01:00&quot;, &quot;2&quot;:
+        /// &quot;1492-10-12T10:15:01-08:00&quot;}
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>    
@@ -2830,7 +2860,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}
+        /// Get date dictionary value {&quot;0&quot;:
+        /// &quot;2000-12-01t00:00:01z&quot;, &quot;1&quot;: null}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -2904,7 +2935,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}
+        /// Get date dictionary value {&quot;0&quot;:
+        /// &quot;2000-12-01t00:00:01z&quot;, &quot;1&quot;: &quot;date-time&quot;}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -2978,8 +3010,9 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2":
-        /// hex (25, 29, 43)} with each item encoded in base64
+        /// Get byte dictionary value {&quot;0&quot;: hex(FF FF FF FA), &quot;1&quot;:
+        /// hex(01 02 03), &quot;2&quot;: hex (25, 29, 43)} with each item encoded in
+        /// base64
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -3053,8 +3086,9 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2":
-        /// hex (25, 29, 43)} with each elementencoded in base 64
+        /// Put the dictionary value {&quot;0&quot;: hex(FF FF FF FA), &quot;1&quot;:
+        /// hex(01 02 03), &quot;2&quot;: hex (25, 29, 43)} with each elementencoded
+        /// in base 64
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>    
@@ -3134,8 +3168,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the
-        /// first item base64 encoded
+        /// Get byte dictionary value {&quot;0&quot;: hex(FF FF FF FA), &quot;1&quot;:
+        /// null} with the first item base64 encoded
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -3357,8 +3391,10 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get dictionary of complex type with null item {"0": {"integer": 1,
-        /// "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}
+        /// Get dictionary of complex type with null item {&quot;0&quot;:
+        /// {&quot;integer&quot;: 1, &quot;string&quot;: &quot;2&quot;},
+        /// &quot;1&quot;: null, &quot;2&quot;: {&quot;integer&quot;: 5,
+        /// &quot;string&quot;: &quot;6&quot;}}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -3432,8 +3468,10 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get dictionary of complex type with empty item {"0": {"integer": 1,
-        /// "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}
+        /// Get dictionary of complex type with empty item {&quot;0&quot;:
+        /// {&quot;integer&quot;: 1, &quot;string&quot;: &quot;2&quot;},
+        /// &quot;1:&quot; {}, &quot;2&quot;: {&quot;integer&quot;: 5,
+        /// &quot;string&quot;: &quot;6&quot;}}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -3507,8 +3545,11 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get dictionary of complex type with {"0": {"integer": 1, "string": "2"},
-        /// "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}
+        /// Get dictionary of complex type with {&quot;0&quot;: {&quot;integer&quot;:
+        /// 1, &quot;string&quot;: &quot;2&quot;}, &quot;1&quot;:
+        /// {&quot;integer&quot;: 3, &quot;string&quot;: &quot;4&quot;},
+        /// &quot;2&quot;: {&quot;integer&quot;: 5, &quot;string&quot;:
+        /// &quot;6&quot;}}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -3582,9 +3623,11 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Put an dictionary of complex type with values {"0": {"integer": 1,
-        /// "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5,
-        /// "string": "6"}}
+        /// Put an dictionary of complex type with values {&quot;0&quot;:
+        /// {&quot;integer&quot;: 1, &quot;string&quot;: &quot;2&quot;},
+        /// &quot;1&quot;: {&quot;integer&quot;: 3, &quot;string&quot;:
+        /// &quot;4&quot;}, &quot;2&quot;: {&quot;integer&quot;: 5,
+        /// &quot;string&quot;: &quot;6&quot;}}
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>    
@@ -3825,8 +3868,9 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null,
-        /// "2": ["7", "8", "9"]}
+        /// Get an dictionary of array of strings {&quot;0&quot;: [&quot;1&quot;,
+        /// &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: null, &quot;2&quot;:
+        /// [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -3900,8 +3944,9 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2":
-        /// ["7", "8", "9"]}
+        /// Get an array of array of strings [{&quot;0&quot;: [&quot;1&quot;,
+        /// &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [], &quot;2&quot;:
+        /// [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -3975,8 +4020,10 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
-        /// "6"], "2": ["7", "8", "9"]}
+        /// Get an array of array of strings {&quot;0&quot;: [&quot;1&quot;,
+        /// &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [&quot;4&quot;,
+        /// &quot;5&quot;, &quot;6&quot;], &quot;2&quot;: [&quot;7&quot;,
+        /// &quot;8&quot;, &quot;9&quot;]}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -4050,8 +4097,10 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
-        /// "6"], "2": ["7", "8", "9"]}
+        /// Put An array of array of strings {&quot;0&quot;: [&quot;1&quot;,
+        /// &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [&quot;4&quot;,
+        /// &quot;5&quot;, &quot;6&quot;], &quot;2&quot;: [&quot;7&quot;,
+        /// &quot;8&quot;, &quot;9&quot;]}
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>    
@@ -4205,7 +4254,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get an dictionaries of dictionaries of type <string, string> with value {}
+        /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with
+        /// value {}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -4279,9 +4329,11 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get an dictionaries of dictionaries of type <string, string> with value
-        /// {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7":
-        /// "seven", "8": "eight", "9": "nine"}}
+        /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with
+        /// value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;:
+        /// &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: null,
+        /// &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;:
+        /// &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -4355,9 +4407,11 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get an dictionaries of dictionaries of type <string, string> with value
-        /// {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7":
-        /// "seven", "8": "eight", "9": "nine"}}
+        /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with
+        /// value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;:
+        /// &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {},
+        /// &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;:
+        /// &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -4431,9 +4485,13 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get an dictionaries of dictionaries of type <string, string> with value
-        /// {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5":
-        /// "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
+        /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with
+        /// value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;:
+        /// &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;:
+        /// {&quot;4&quot;: &quot;four&quot;, &quot;5&quot;: &quot;five&quot;,
+        /// &quot;6&quot;: &quot;six&quot;}, &quot;2&quot;: {&quot;7&quot;:
+        /// &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;:
+        /// &quot;nine&quot;}}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -4507,9 +4565,13 @@ namespace Fixtures.SwaggerBatBodyDictionary
         }
 
         /// <summary>
-        /// Get an dictionaries of dictionaries of type <string, string> with value
-        /// {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5":
-        /// "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
+        /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with
+        /// value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;:
+        /// &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;:
+        /// {&quot;4&quot;: &quot;four&quot;, &quot;5&quot;: &quot;five&quot;,
+        /// &quot;6&quot;: &quot;six&quot;}, &quot;2&quot;: {&quot;7&quot;:
+        /// &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;:
+        /// &quot;nine&quot;}}
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>    

@@ -533,8 +533,9 @@ namespace Fixtures.Azure.SwaggerBatLro
         }
 
         /// <summary>
-        /// Long running post request poller, service returns a ‘204' with no enetity
-        /// body.  Client should return with success from long-running operation
+        /// Long running post request poller, service returns a ‘204&apos; with no
+        /// enetity body.  Client should return with success from long-running
+        /// operation
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.

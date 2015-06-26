@@ -37,7 +37,7 @@ namespace Fixtures.SwaggerBatBodyByte
             }
 
             /// <summary>
-            /// Get empty byte value ''
+            /// Get empty byte value &apos;&apos;
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -48,7 +48,7 @@ namespace Fixtures.SwaggerBatBodyByte
             }
 
             /// <summary>
-            /// Get empty byte value ''
+            /// Get empty byte value &apos;&apos;
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -120,7 +120,7 @@ namespace Fixtures.SwaggerBatBodyByte
             }
 
             /// <summary>
-            /// Get invalid byte value ':::SWAGGER::::'
+            /// Get invalid byte value &apos;:::SWAGGER::::&apos;
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -131,7 +131,7 @@ namespace Fixtures.SwaggerBatBodyByte
             }
 
             /// <summary>
-            /// Get invalid byte value ':::SWAGGER::::'
+            /// Get invalid byte value &apos;:::SWAGGER::::&apos;
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method

@@ -439,7 +439,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <summary>
         /// Long running put request, service returns a 202 to the initial request,
         /// with a location header that points to a polling URL that returns a 200
-        /// and an entity that doesn't contains ProvisioningState
+        /// and an entity that doesn&apos;t contains ProvisioningState
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -460,7 +460,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <summary>
         /// Long running put request, service returns a 202 to the initial request,
         /// with a location header that points to a polling URL that returns a 200
-        /// and an entity that doesn't contains ProvisioningState
+        /// and an entity that doesn&apos;t contains ProvisioningState
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -3306,8 +3306,8 @@ namespace Fixtures.Azure.SwaggerBatLro
 
         /// <summary>
         /// Long running post request, service returns a 202 to the initial request,
-        /// with 'Location' header. Poll returns a 200 with a response body after
-        /// success.
+        /// with &apos;Location&apos; header. Poll returns a 200 with a response body
+        /// after success.
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -3322,8 +3322,8 @@ namespace Fixtures.Azure.SwaggerBatLro
 
         /// <summary>
         /// Long running post request, service returns a 202 to the initial request,
-        /// with 'Location' header. Poll returns a 200 with a response body after
-        /// success.
+        /// with &apos;Location&apos; header. Poll returns a 200 with a response body
+        /// after success.
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -3413,8 +3413,8 @@ namespace Fixtures.Azure.SwaggerBatLro
 
         /// <summary>
         /// Long running post request, service returns a 202 to the initial request,
-        /// with 'Location' and 'Retry-After' headers, Polls return a 200 with a
-        /// response body after success
+        /// with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls
+        /// return a 200 with a response body after success
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -3432,8 +3432,8 @@ namespace Fixtures.Azure.SwaggerBatLro
 
         /// <summary>
         /// Long running post request, service returns a 202 to the initial request,
-        /// with 'Location' and 'Retry-After' headers, Polls return a 200 with a
-        /// response body after success
+        /// with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls
+        /// return a 200 with a response body after success
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -3525,7 +3525,7 @@ namespace Fixtures.Azure.SwaggerBatLro
 
         /// <summary>
         /// Long running post request, service returns a 202 to the initial request,
-        /// with 'Location' header, 204 with noresponse body after success
+        /// with &apos;Location&apos; header, 204 with noresponse body after success
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -3543,7 +3543,7 @@ namespace Fixtures.Azure.SwaggerBatLro
 
         /// <summary>
         /// Long running post request, service returns a 202 to the initial request,
-        /// with 'Location' header, 204 with noresponse body after success
+        /// with &apos;Location&apos; header, 204 with noresponse body after success
         /// </summary>
         /// <param name='product'>
         /// Product to put

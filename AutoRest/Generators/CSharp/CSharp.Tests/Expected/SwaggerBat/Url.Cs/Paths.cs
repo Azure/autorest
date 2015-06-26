@@ -189,10 +189,10 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get '1000000' integer value
+        /// Get &apos;1000000&apos; integer value
         /// </summary>
         /// <param name='intPath'>
-        /// '1000000' integer value
+        /// &apos;1000000&apos; integer value
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -267,10 +267,10 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get '-1000000' integer value
+        /// Get &apos;-1000000&apos; integer value
         /// </summary>
         /// <param name='intPath'>
-        /// '-1000000' integer value
+        /// &apos;-1000000&apos; integer value
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -345,10 +345,10 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get '10000000000' 64 bit integer value
+        /// Get &apos;10000000000&apos; 64 bit integer value
         /// </summary>
         /// <param name='longPath'>
-        /// '10000000000' 64 bit integer value
+        /// &apos;10000000000&apos; 64 bit integer value
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -423,10 +423,10 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get '-10000000000' 64 bit integer value
+        /// Get &apos;-10000000000&apos; 64 bit integer value
         /// </summary>
         /// <param name='longPath'>
-        /// '-10000000000' 64 bit integer value
+        /// &apos;-10000000000&apos; 64 bit integer value
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -501,10 +501,10 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get '1.034E+20' numeric value
+        /// Get &apos;1.034E+20&apos; numeric value
         /// </summary>
         /// <param name='floatPath'>
-        /// '1.034E+20'numeric value
+        /// &apos;1.034E+20&apos;numeric value
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -579,10 +579,10 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get '-1.034E-20' numeric value
+        /// Get &apos;-1.034E-20&apos; numeric value
         /// </summary>
         /// <param name='floatPath'>
-        /// '-1.034E-20'numeric value
+        /// &apos;-1.034E-20&apos;numeric value
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -657,10 +657,10 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get '9999999.999' numeric value
+        /// Get &apos;9999999.999&apos; numeric value
         /// </summary>
         /// <param name='doublePath'>
-        /// '9999999.999'numeric value
+        /// &apos;9999999.999&apos;numeric value
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -735,10 +735,10 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get '-9999999.999' numeric value
+        /// Get &apos;-9999999.999&apos; numeric value
         /// </summary>
         /// <param name='doublePath'>
-        /// '-9999999.999'numeric value
+        /// &apos;-9999999.999&apos;numeric value
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -813,11 +813,11 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
+        /// Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value
         /// </summary>
         /// <param name='stringPath'>
-        /// '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter
-        /// include: '啊齄丂狛狜隣郎隣兀﨩'
+        /// &apos;啊齄丂狛狜隣郎隣兀﨩&apos;multi-byte string value. Possible values for this
+        /// parameter include: &apos;啊齄丂狛狜隣郎隣兀﨩&apos;
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -892,11 +892,12 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get 'begin!*'();:@ &=+$,/?#[]end
+        /// Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end
         /// </summary>
         /// <param name='stringPath'>
-        /// 'begin!*'();:@ &=+$,/?#[]end' url encoded string value. Possible values
-        /// for this parameter include: 'begin!*'();:@ &=+$,/?#[]end'
+        /// &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; url encoded string value.
+        /// Possible values for this parameter include: &apos;begin!*&apos;();:@
+        /// &amp;=+$,/?#[]end&apos;
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -971,10 +972,11 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get ''
+        /// Get &apos;&apos;
         /// </summary>
         /// <param name='stringPath'>
-        /// '' string value. Possible values for this parameter include: ''
+        /// &apos;&apos; string value. Possible values for this parameter include:
+        /// &apos;&apos;
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1127,11 +1129,11 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get using uri with 'green color' in path parameter
+        /// Get using uri with &apos;green color&apos; in path parameter
         /// </summary>
         /// <param name='enumPath'>
-        /// send the value green. Possible values for this parameter include: 'red
-        /// color', 'green color', 'blue color'
+        /// send the value green. Possible values for this parameter include:
+        /// &apos;red color&apos;, &apos;green color&apos;, &apos;blue color&apos;
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1209,8 +1211,8 @@ namespace Fixtures.SwaggerBatUrl
         /// Get null (should throw on the client before the request is sent on wire)
         /// </summary>
         /// <param name='enumPath'>
-        /// send null should throw. Possible values for this parameter include: 'red
-        /// color', 'green color', 'blue color'
+        /// send null should throw. Possible values for this parameter include:
+        /// &apos;red color&apos;, &apos;green color&apos;, &apos;blue color&apos;
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1284,10 +1286,10 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+        /// Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array
         /// </summary>
         /// <param name='bytePath'>
-        /// '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+        /// &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1362,10 +1364,10 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get '' as byte array
+        /// Get &apos;&apos; as byte array
         /// </summary>
         /// <param name='bytePath'>
-        /// '' as byte array
+        /// &apos;&apos; as byte array
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1518,10 +1520,10 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get '2012-01-01' as date
+        /// Get &apos;2012-01-01&apos; as date
         /// </summary>
         /// <param name='datePath'>
-        /// '2012-01-01' as date
+        /// &apos;2012-01-01&apos; as date
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1675,10 +1677,10 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get '2012-01-01T01:01:01Z' as date-time
+        /// Get &apos;2012-01-01T01:01:01Z&apos; as date-time
         /// </summary>
         /// <param name='dateTimePath'>
-        /// '2012-01-01T01:01:01Z' as date-time
+        /// &apos;2012-01-01T01:01:01Z&apos; as date-time
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.

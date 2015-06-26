@@ -64,8 +64,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         Task<AzureOperationResponse<Product>> Post202Retry200PollingWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Long running post request poller, service returns a ‘204' with no
-        /// enetity body.  Client should return with success from
+        /// Long running post request poller, service returns a ‘204&apos;
+        /// with no enetity body.  Client should return with success from
         /// long-running operation
         /// </summary>
         /// <param name='cancellationToken'>

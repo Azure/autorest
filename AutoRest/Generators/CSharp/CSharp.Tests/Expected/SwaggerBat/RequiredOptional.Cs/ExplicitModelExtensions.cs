@@ -73,8 +73,8 @@ namespace Fixtures.SwaggerBatRequiredOptional
 
             /// <summary>
             /// Test explicitly required integer. Please put a valid int-wrapper with
-            /// 'value' = null and the client library should throw before the request is
-            /// sent.
+            /// &apos;value&apos; = null and the client library should throw before the
+            /// request is sent.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -88,8 +88,8 @@ namespace Fixtures.SwaggerBatRequiredOptional
 
             /// <summary>
             /// Test explicitly required integer. Please put a valid int-wrapper with
-            /// 'value' = null and the client library should throw before the request is
-            /// sent.
+            /// &apos;value&apos; = null and the client library should throw before the
+            /// request is sent.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -107,7 +107,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
 
             /// <summary>
             /// Test explicitly optional integer. Please put a valid int-wrapper with
-            /// 'value' = null.
+            /// &apos;value&apos; = null.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -121,7 +121,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
 
             /// <summary>
             /// Test explicitly optional integer. Please put a valid int-wrapper with
-            /// 'value' = null.
+            /// &apos;value&apos; = null.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -137,8 +137,9 @@ namespace Fixtures.SwaggerBatRequiredOptional
             }
 
             /// <summary>
-            /// Test explicitly required integer. Please put a header 'headerParameter' =>
-            /// null and the client library should throw before the request is sent.
+            /// Test explicitly required integer. Please put a header
+            /// &apos;headerParameter&apos; =&gt; null and the client library should
+            /// throw before the request is sent.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -151,8 +152,9 @@ namespace Fixtures.SwaggerBatRequiredOptional
             }
 
             /// <summary>
-            /// Test explicitly required integer. Please put a header 'headerParameter' =>
-            /// null and the client library should throw before the request is sent.
+            /// Test explicitly required integer. Please put a header
+            /// &apos;headerParameter&apos; =&gt; null and the client library should
+            /// throw before the request is sent.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -169,8 +171,8 @@ namespace Fixtures.SwaggerBatRequiredOptional
             }
 
             /// <summary>
-            /// Test explicitly optional integer. Please put a header 'headerParameter' =>
-            /// null.
+            /// Test explicitly optional integer. Please put a header
+            /// &apos;headerParameter&apos; =&gt; null.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -183,8 +185,8 @@ namespace Fixtures.SwaggerBatRequiredOptional
             }
 
             /// <summary>
-            /// Test explicitly optional integer. Please put a header 'headerParameter' =>
-            /// null.
+            /// Test explicitly optional integer. Please put a header
+            /// &apos;headerParameter&apos; =&gt; null.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -262,8 +264,8 @@ namespace Fixtures.SwaggerBatRequiredOptional
 
             /// <summary>
             /// Test explicitly required string. Please put a valid string-wrapper with
-            /// 'value' = null and the client library should throw before the request is
-            /// sent.
+            /// &apos;value&apos; = null and the client library should throw before the
+            /// request is sent.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -277,8 +279,8 @@ namespace Fixtures.SwaggerBatRequiredOptional
 
             /// <summary>
             /// Test explicitly required string. Please put a valid string-wrapper with
-            /// 'value' = null and the client library should throw before the request is
-            /// sent.
+            /// &apos;value&apos; = null and the client library should throw before the
+            /// request is sent.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -296,7 +298,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
 
             /// <summary>
             /// Test explicitly optional integer. Please put a valid string-wrapper with
-            /// 'value' = null.
+            /// &apos;value&apos; = null.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -310,7 +312,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
 
             /// <summary>
             /// Test explicitly optional integer. Please put a valid string-wrapper with
-            /// 'value' = null.
+            /// &apos;value&apos; = null.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -326,8 +328,9 @@ namespace Fixtures.SwaggerBatRequiredOptional
             }
 
             /// <summary>
-            /// Test explicitly required string. Please put a header 'headerParameter' =>
-            /// null and the client library should throw before the request is sent.
+            /// Test explicitly required string. Please put a header
+            /// &apos;headerParameter&apos; =&gt; null and the client library should
+            /// throw before the request is sent.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -340,8 +343,9 @@ namespace Fixtures.SwaggerBatRequiredOptional
             }
 
             /// <summary>
-            /// Test explicitly required string. Please put a header 'headerParameter' =>
-            /// null and the client library should throw before the request is sent.
+            /// Test explicitly required string. Please put a header
+            /// &apos;headerParameter&apos; =&gt; null and the client library should
+            /// throw before the request is sent.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -358,8 +362,8 @@ namespace Fixtures.SwaggerBatRequiredOptional
             }
 
             /// <summary>
-            /// Test explicitly optional string. Please put a header 'headerParameter' =>
-            /// null.
+            /// Test explicitly optional string. Please put a header
+            /// &apos;headerParameter&apos; =&gt; null.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -372,8 +376,8 @@ namespace Fixtures.SwaggerBatRequiredOptional
             }
 
             /// <summary>
-            /// Test explicitly optional string. Please put a header 'headerParameter' =>
-            /// null.
+            /// Test explicitly optional string. Please put a header
+            /// &apos;headerParameter&apos; =&gt; null.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -451,8 +455,8 @@ namespace Fixtures.SwaggerBatRequiredOptional
 
             /// <summary>
             /// Test explicitly required complex object. Please put a valid class-wrapper
-            /// with 'value' = null and the client library should throw before the
-            /// request is sent.
+            /// with &apos;value&apos; = null and the client library should throw before
+            /// the request is sent.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -466,8 +470,8 @@ namespace Fixtures.SwaggerBatRequiredOptional
 
             /// <summary>
             /// Test explicitly required complex object. Please put a valid class-wrapper
-            /// with 'value' = null and the client library should throw before the
-            /// request is sent.
+            /// with &apos;value&apos; = null and the client library should throw before
+            /// the request is sent.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -485,7 +489,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
 
             /// <summary>
             /// Test explicitly optional complex object. Please put a valid class-wrapper
-            /// with 'value' = null.
+            /// with &apos;value&apos; = null.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -499,7 +503,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
 
             /// <summary>
             /// Test explicitly optional complex object. Please put a valid class-wrapper
-            /// with 'value' = null.
+            /// with &apos;value&apos; = null.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -577,8 +581,8 @@ namespace Fixtures.SwaggerBatRequiredOptional
 
             /// <summary>
             /// Test explicitly required array. Please put a valid array-wrapper with
-            /// 'value' = null and the client library should throw before the request is
-            /// sent.
+            /// &apos;value&apos; = null and the client library should throw before the
+            /// request is sent.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -592,8 +596,8 @@ namespace Fixtures.SwaggerBatRequiredOptional
 
             /// <summary>
             /// Test explicitly required array. Please put a valid array-wrapper with
-            /// 'value' = null and the client library should throw before the request is
-            /// sent.
+            /// &apos;value&apos; = null and the client library should throw before the
+            /// request is sent.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -611,7 +615,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
 
             /// <summary>
             /// Test explicitly optional array. Please put a valid array-wrapper with
-            /// 'value' = null.
+            /// &apos;value&apos; = null.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -625,7 +629,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
 
             /// <summary>
             /// Test explicitly optional array. Please put a valid array-wrapper with
-            /// 'value' = null.
+            /// &apos;value&apos; = null.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -641,8 +645,9 @@ namespace Fixtures.SwaggerBatRequiredOptional
             }
 
             /// <summary>
-            /// Test explicitly required array. Please put a header 'headerParameter' =>
-            /// null and the client library should throw before the request is sent.
+            /// Test explicitly required array. Please put a header
+            /// &apos;headerParameter&apos; =&gt; null and the client library should
+            /// throw before the request is sent.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -655,8 +660,9 @@ namespace Fixtures.SwaggerBatRequiredOptional
             }
 
             /// <summary>
-            /// Test explicitly required array. Please put a header 'headerParameter' =>
-            /// null and the client library should throw before the request is sent.
+            /// Test explicitly required array. Please put a header
+            /// &apos;headerParameter&apos; =&gt; null and the client library should
+            /// throw before the request is sent.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -673,8 +679,8 @@ namespace Fixtures.SwaggerBatRequiredOptional
             }
 
             /// <summary>
-            /// Test explicitly optional integer. Please put a header 'headerParameter' =>
-            /// null.
+            /// Test explicitly optional integer. Please put a header
+            /// &apos;headerParameter&apos; =&gt; null.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -687,8 +693,8 @@ namespace Fixtures.SwaggerBatRequiredOptional
             }
 
             /// <summary>
-            /// Test explicitly optional integer. Please put a header 'headerParameter' =>
-            /// null.
+            /// Test explicitly optional integer. Please put a header
+            /// &apos;headerParameter&apos; =&gt; null.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method

@@ -52,7 +52,8 @@ namespace Fixtures.PetstoreV2.Models
 
         /// <summary>
         /// pet status in the store. Possible values for this property
-        /// include: 'available', 'pending', 'sold'
+        /// include: &apos;available&apos;, &apos;pending&apos;,
+        /// &apos;sold&apos;
         /// </summary>
         [JsonProperty(PropertyName = "status")]
         public string Status { get; set; }

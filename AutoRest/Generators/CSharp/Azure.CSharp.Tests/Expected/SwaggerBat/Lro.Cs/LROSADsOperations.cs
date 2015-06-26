@@ -238,7 +238,7 @@ namespace Fixtures.Azure.SwaggerBatLro
 
         /// <summary>
         /// Long running put request, service returns a Product with
-        /// 'ProvisioningState' = 'Creating' and 201 response code
+        /// &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -258,7 +258,7 @@ namespace Fixtures.Azure.SwaggerBatLro
 
         /// <summary>
         /// Long running put request, service returns a Product with
-        /// 'ProvisioningState' = 'Creating' and 201 response code
+        /// &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -2897,7 +2897,8 @@ namespace Fixtures.Azure.SwaggerBatLro
 
         /// <summary>
         /// Long running delete request, service returns a 202 to the initial request
-        /// receing a reponse with an invalid 'Location' and 'Retry-After' headers
+        /// receing a reponse with an invalid &apos;Location&apos; and
+        /// &apos;Retry-After&apos; headers
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -2912,7 +2913,8 @@ namespace Fixtures.Azure.SwaggerBatLro
 
         /// <summary>
         /// Long running delete request, service returns a 202 to the initial request
-        /// receing a reponse with an invalid 'Location' and 'Retry-After' headers
+        /// receing a reponse with an invalid &apos;Location&apos; and
+        /// &apos;Retry-After&apos; headers
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -3184,7 +3186,7 @@ namespace Fixtures.Azure.SwaggerBatLro
 
         /// <summary>
         /// Long running post request, service returns a 202 to the initial request,
-        /// with invalid 'Location' and 'Retry-After' headers.
+        /// with invalid &apos;Location&apos; and &apos;Retry-After&apos; headers.
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -3202,7 +3204,7 @@ namespace Fixtures.Azure.SwaggerBatLro
 
         /// <summary>
         /// Long running post request, service returns a 202 to the initial request,
-        /// with invalid 'Location' and 'Retry-After' headers.
+        /// with invalid &apos;Location&apos; and &apos;Retry-After&apos; headers.
         /// </summary>
         /// <param name='product'>
         /// Product to put

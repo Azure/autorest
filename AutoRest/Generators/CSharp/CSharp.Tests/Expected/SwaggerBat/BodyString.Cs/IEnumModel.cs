@@ -14,20 +14,20 @@ namespace Fixtures.SwaggerBatBodyString
     public partial interface IEnumModel
     {
         /// <summary>
-        /// Get enum value 'red color' from enumeration of 'red color',
-        /// 'green-color', 'blue_color'.
+        /// Get enum value &apos;red color&apos; from enumeration of &apos;red
+        /// color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;.
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
         Task<HttpOperationResponse<Colors?>> GetNotExpandableWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Sends value 'red color' from enumeration of 'red color',
-        /// 'green-color', 'blue_color'
+        /// Sends value &apos;red color&apos; from enumeration of &apos;red
+        /// color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;
         /// </summary>
         /// <param name='stringBody'>
-        /// Possible values for this parameter include: 'red color',
-        /// 'green-color', 'blue_color'
+        /// Possible values for this parameter include: &apos;red color&apos;,
+        /// &apos;green-color&apos;, &apos;blue_color&apos;
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.

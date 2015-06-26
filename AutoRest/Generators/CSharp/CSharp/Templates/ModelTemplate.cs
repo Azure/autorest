@@ -21,6 +21,12 @@ using Microsoft.Rest.Generator.CSharp.TemplateModels
 #line default
 #line hidden
     ;
+#line 4 "ModelTemplate.cshtml"
+using Microsoft.Rest.Generator.Utilities
+
+#line default
+#line hidden
+    ;
     using System.Threading.Tasks;
 
     public class ModelTemplate : Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.ModelTemplateModel>
@@ -33,13 +39,13 @@ using Microsoft.Rest.Generator.CSharp.TemplateModels
         #pragma warning disable 1998
         public override async Task ExecuteAsync()
         {
-#line 5 "ModelTemplate.cshtml"
+#line 6 "ModelTemplate.cshtml"
 Write(Header("/// "));
 
 #line default
 #line hidden
             WriteLiteral("\r\nnamespace ");
-#line 6 "ModelTemplate.cshtml"
+#line 7 "ModelTemplate.cshtml"
       Write(Settings.Namespace);
 
 #line default
@@ -47,44 +53,44 @@ Write(Header("/// "));
             WriteLiteral(".Models\r\n{\r\n    using System;\r\n    using System.Collections.Generic;\r\n    using N" +
 "ewtonsoft.Json;\r\n    using Microsoft.Rest;\r\n    using Microsoft.Rest.Serializati" +
 "on;\r\n");
-#line 13 "ModelTemplate.cshtml"
+#line 14 "ModelTemplate.cshtml"
  foreach (var usingString in Model.Usings) {
 
 #line default
 #line hidden
 
             WriteLiteral("    using ");
-#line 14 "ModelTemplate.cshtml"
+#line 15 "ModelTemplate.cshtml"
        Write(usingString);
 
 #line default
 #line hidden
             WriteLiteral(";\r\n");
-#line 15 "ModelTemplate.cshtml"
+#line 16 "ModelTemplate.cshtml"
 }
 
 #line default
 #line hidden
 
-#line 16 "ModelTemplate.cshtml"
+#line 17 "ModelTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
             WriteLiteral("\r\n    /// <summary>\r\n    ");
-#line 18 "ModelTemplate.cshtml"
-Write(WrapComment("/// ", Model.Documentation));
+#line 19 "ModelTemplate.cshtml"
+Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
             WriteLiteral("\r\n    /// </summary>\r\n");
-#line 20 "ModelTemplate.cshtml"
+#line 21 "ModelTemplate.cshtml"
     
 
 #line default
 #line hidden
 
-#line 20 "ModelTemplate.cshtml"
+#line 21 "ModelTemplate.cshtml"
      if (Model.NeedsPolymorphicConverter)
     {
 
@@ -92,37 +98,37 @@ Write(WrapComment("/// ", Model.Documentation));
 #line hidden
 
             WriteLiteral("    [JsonObject(\"");
-#line 22 "ModelTemplate.cshtml"
+#line 23 "ModelTemplate.cshtml"
               Write(Model.SerializedName);
 
 #line default
 #line hidden
             WriteLiteral("\")]    \r\n");
-#line 23 "ModelTemplate.cshtml"
+#line 24 "ModelTemplate.cshtml"
     }
 
 #line default
 #line hidden
 
             WriteLiteral("    public partial class ");
-#line 24 "ModelTemplate.cshtml"
+#line 25 "ModelTemplate.cshtml"
                     Write(Model.Name);
 
 #line default
 #line hidden
-#line 24 "ModelTemplate.cshtml"
+#line 25 "ModelTemplate.cshtml"
                                 Write(Model.BaseModelType != null ? " : " + Model.BaseModelType.Name : "");
 
 #line default
 #line hidden
             WriteLiteral("\r\n    {\r\n");
-#line 26 "ModelTemplate.cshtml"
+#line 27 "ModelTemplate.cshtml"
         
 
 #line default
 #line hidden
 
-#line 26 "ModelTemplate.cshtml"
+#line 27 "ModelTemplate.cshtml"
          foreach (var property in Model.PropertyTemplateModels)
         {
 
@@ -130,13 +136,13 @@ Write(WrapComment("/// ", Model.Documentation));
 #line hidden
 
             WriteLiteral("        /// <summary>\r\n        ");
-#line 29 "ModelTemplate.cshtml"
-     Write(WrapComment("/// ", property.Documentation));
+#line 30 "ModelTemplate.cshtml"
+     Write(WrapComment("/// ", property.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
             WriteLiteral("\r\n        /// </summary>\r\n");
-#line 31 "ModelTemplate.cshtml"
+#line 32 "ModelTemplate.cshtml"
             if (property.Type == PrimaryType.Date)
             {
 
@@ -144,56 +150,56 @@ Write(WrapComment("/// ", Model.Documentation));
 #line hidden
 
             WriteLiteral("        [JsonConverter(typeof(DateJsonConverter))]\r\n");
-#line 34 "ModelTemplate.cshtml"
+#line 35 "ModelTemplate.cshtml"
             }
 
 #line default
 #line hidden
 
             WriteLiteral("        [JsonProperty(PropertyName = \"");
-#line 35 "ModelTemplate.cshtml"
+#line 36 "ModelTemplate.cshtml"
                                    Write(property.SerializedName);
 
 #line default
 #line hidden
             WriteLiteral("\")]\r\n        public ");
-#line 36 "ModelTemplate.cshtml"
+#line 37 "ModelTemplate.cshtml"
             Write(property.Type.Name);
 
 #line default
 #line hidden
             WriteLiteral(" ");
-#line 36 "ModelTemplate.cshtml"
+#line 37 "ModelTemplate.cshtml"
                                 Write(property.Name);
 
 #line default
 #line hidden
             WriteLiteral(" { get; ");
-#line 36 "ModelTemplate.cshtml"
+#line 37 "ModelTemplate.cshtml"
                                                        Write(property.IsReadOnly ? "private " : "");
 
 #line default
 #line hidden
             WriteLiteral("set; }\r\n");
-#line 37 "ModelTemplate.cshtml"
+#line 38 "ModelTemplate.cshtml"
         
 
 #line default
 #line hidden
 
-#line 37 "ModelTemplate.cshtml"
+#line 38 "ModelTemplate.cshtml"
    Write(EmptyLine);
 
 #line default
 #line hidden
-#line 37 "ModelTemplate.cshtml"
+#line 38 "ModelTemplate.cshtml"
                   
 
 #line default
 #line hidden
 
             WriteLiteral("        \r\n");
-#line 39 "ModelTemplate.cshtml"
+#line 40 "ModelTemplate.cshtml"
         }
 
 #line default
@@ -202,19 +208,19 @@ Write(WrapComment("/// ", Model.Documentation));
             WriteLiteral("       \r\n        /// <summary>\r\n        /// Validate the object. Throws ArgumentE" +
 "xception or ArgumentNullException if validation fails.\r\n        /// </summary>\r\n" +
 "        public ");
-#line 44 "ModelTemplate.cshtml"
+#line 45 "ModelTemplate.cshtml"
           Write(Model.MethodQualifier);
 
 #line default
 #line hidden
             WriteLiteral(" void Validate()\r\n        {\r\n");
-#line 46 "ModelTemplate.cshtml"
+#line 47 "ModelTemplate.cshtml"
         
 
 #line default
 #line hidden
 
-#line 46 "ModelTemplate.cshtml"
+#line 47 "ModelTemplate.cshtml"
           
             bool anythingToValidate = false;
 
@@ -226,7 +232,7 @@ Write(WrapComment("/// ", Model.Documentation));
 #line hidden
 
             WriteLiteral("            base.Validate();\r\n");
-#line 53 "ModelTemplate.cshtml"
+#line 54 "ModelTemplate.cshtml"
             }
             
             foreach (var property in Model.Properties.Where(p => p.IsRequired && !p.IsReadOnly))
@@ -237,19 +243,19 @@ Write(WrapComment("/// ", Model.Documentation));
 #line hidden
 
             WriteLiteral("            if (");
-#line 58 "ModelTemplate.cshtml"
+#line 59 "ModelTemplate.cshtml"
              Write(property.Name);
 
 #line default
 #line hidden
             WriteLiteral(" == null)\r\n            {\r\n                throw new ArgumentNullException(\"");
-#line 60 "ModelTemplate.cshtml"
+#line 61 "ModelTemplate.cshtml"
                                               Write(property.Name);
 
 #line default
 #line hidden
             WriteLiteral("\");\r\n            }\r\n            \r\n");
-#line 63 "ModelTemplate.cshtml"
+#line 64 "ModelTemplate.cshtml"
             }
             foreach (var property in Model.Properties.Where(p => !(p.Type is PrimaryType)))
             {
@@ -259,13 +265,13 @@ Write(WrapComment("/// ", Model.Documentation));
 #line hidden
 
             WriteLiteral("            ");
-#line 67 "ModelTemplate.cshtml"
+#line 68 "ModelTemplate.cshtml"
          Write(property.Type.ValidateType(Model.Scope, string.Format("this.{0}", property.Name)));
 
 #line default
 #line hidden
             WriteLiteral("\r\n            \r\n");
-#line 69 "ModelTemplate.cshtml"
+#line 70 "ModelTemplate.cshtml"
             }
             if (!anythingToValidate)
             {
@@ -274,7 +280,7 @@ Write(WrapComment("/// ", Model.Documentation));
 #line hidden
 
             WriteLiteral("            //Nothing to validate\r\n");
-#line 73 "ModelTemplate.cshtml"
+#line 74 "ModelTemplate.cshtml"
             }
         
 
