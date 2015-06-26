@@ -21,10 +21,8 @@ var arrayClient = require('../Expected/SwaggerBat/BodyArray/AutoRestSwaggerBATAr
 var dictionaryClient = require('../Expected/SwaggerBat/BodyDictionary/AutoRestSwaggerBATdictionaryService');
 var httpClient = require('../Expected/SwaggerBat/Http/AutoRestHttpInfrastructureTestService');
 
-var credentials = new msRest.TokenCredentials({
-  authorizationScheme: 'Bearer',
-  token: '<your token here>'
-});
+var dummyToken = 'dummy12321343423';
+var credentials = new msRest.TokenCredentials(dummyToken);
 
 var clientOptions = {};
 var baseUri = 'http://localhost:3000';

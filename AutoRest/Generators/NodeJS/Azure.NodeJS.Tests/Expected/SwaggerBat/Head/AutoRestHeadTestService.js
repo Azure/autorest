@@ -45,11 +45,9 @@ function AutoRestHeadTestService(credentials, baseUri, options) {
     this.baseUri = 'http://localhost';
   }
 
-  if (!this.apiVersion) {
-    this.apiVersion = "1.0.0";
-  }
+  this.apiVersion = "1.0.0";
   this.httpSuccess = new operations.HttpSuccess(this);
-    this._models = models;
+  this._models = models;
 }
 
 util.inherits(AutoRestHeadTestService, ServiceClient);

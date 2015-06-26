@@ -44,10 +44,8 @@ function AutoRestReportServiceForAzure(credentials, baseUri, options) {
     this.baseUri = 'http://localhost';
   }
 
-  if (!this.apiVersion) {
-    this.apiVersion = "1.0.0";
-  }
-    this._models = models;
+  this.apiVersion = "1.0.0";
+  this._models = models;
 }
 
 util.inherits(AutoRestReportServiceForAzure, ServiceClient);
@@ -67,6 +65,11 @@ AutoRestReportServiceForAzure.prototype.getReport = function (callback) {
   // Construct URL
   var requestUrl = this.baseUri + 
                    '//report/azure';
+  var queryParameters = [];
+  queryParameters.push('api-version=' + encodeURIComponent(this.apiVersion));
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');

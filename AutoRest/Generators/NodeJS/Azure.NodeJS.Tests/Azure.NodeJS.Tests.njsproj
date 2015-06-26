@@ -19,6 +19,9 @@
   <ItemGroup>
     <Content Include="package.json" />
     <Compile Include="AcceptanceTests\coverage.js" />
+    <Compile Include="AcceptanceTests\subscriptionIdApiVersion.js">
+      <TestFramework>Mocha</TestFramework>
+    </Compile>
     <Compile Include="AcceptanceTests\head.js" />
     <Compile Include="AcceptanceTests\paging.js" />
     <Compile Include="AcceptanceTests\resourceFlattening.js" />
@@ -66,6 +69,12 @@
     <Compile Include="Expected\SwaggerBat\ResourceFlattening\models\FlattenedProduct.js" />
     <Compile Include="Expected\SwaggerBat\ResourceFlattening\models\index.js" />
     <Compile Include="Expected\SwaggerBat\ResourceFlattening\models\ResourceCollection.js" />
+    <Compile Include="Expected\SwaggerBat\SubscriptionIdApiVersion\MicrosoftAzureTestUrl.js" />
+    <Compile Include="Expected\SwaggerBat\SubscriptionIdApiVersion\models\ErrorModel.js" />
+    <Compile Include="Expected\SwaggerBat\SubscriptionIdApiVersion\models\Group.js" />
+    <Compile Include="Expected\SwaggerBat\SubscriptionIdApiVersion\models\index.js" />
+    <Compile Include="Expected\SwaggerBat\SubscriptionIdApiVersion\operations\GroupOperations.js" />
+    <Compile Include="Expected\SwaggerBat\SubscriptionIdApiVersion\operations\index.js" />
     <Compile Include="unit.js" />
     <Content Include="AcceptanceTests\testlist.txt" />
     <Compile Include="AcceptanceTests\lro.js">
@@ -122,6 +131,9 @@
     <Folder Include="Expected\SwaggerBat\Report\models\" />
     <Folder Include="Expected\SwaggerBat\ResourceFlattening\" />
     <Folder Include="Expected\SwaggerBat\ResourceFlattening\models\" />
+    <Folder Include="Expected\SwaggerBat\SubscriptionIdApiVersion\" />
+    <Folder Include="Expected\SwaggerBat\SubscriptionIdApiVersion\models\" />
+    <Folder Include="Expected\SwaggerBat\SubscriptionIdApiVersion\operations\" />
     <Folder Include="obj" />
     <Folder Include="obj\Net45-Debug" />
   </ItemGroup>
