@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 var assert = require('assert');
+var should = require('should');
 var url = require('url');
 
 var LogFilter = require('../lib/filters/logfilter');

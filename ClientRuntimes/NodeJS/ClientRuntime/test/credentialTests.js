@@ -14,7 +14,7 @@ var dummyPassword = 'IL0veDummies';
 describe('Token credentials', function () {
   describe('usage', function () {
     it('should set auth header with bearer scheme in request', function (done) {
-      var creds = new TokenCredentials({token: dummyToken});
+      var creds = new TokenCredentials(dummyToken);
       var request = {
         headers: {}
       };
@@ -27,7 +27,7 @@ describe('Token credentials', function () {
     });
 
     it('should set auth header with custom scheme in request', function (done) {
-      var creds = new TokenCredentials({token: dummyToken, authorizationScheme: fakeScheme});
+      var creds = new TokenCredentials(dummyToken, fakeScheme);
       var request = {
         headers: {}
       };
@@ -44,7 +44,7 @@ describe('Token credentials', function () {
 
     it('should succeed with token', function () {
       (function () {
-        new TokenCredentials({token: dummyToken});
+        new TokenCredentials(dummyToken);
       }).should.not.throw();
     });
 
@@ -56,7 +56,7 @@ describe('Token credentials', function () {
 
     it('should fail without token', function () {
       (function () {
-        new TokenCredentials({authorizationScheme: fakeScheme});
+        new TokenCredentials(null, fakeScheme);
       }).should.throw();
     });
   });
@@ -66,7 +66,7 @@ describe('Basic Authentication credentials', function () {
   var encodedCredentials = new Buffer(dummyuserName + ':' + dummyPassword).toString('base64')
   describe('usage', function () {
     it('should base64 encode the username and password and set auth header with baisc scheme in request', function (done) {
-      var creds = new BasicAuthenticationCredentials({userName: dummyuserName, password: dummyPassword});
+      var creds = new BasicAuthenticationCredentials(dummyuserName, dummyPassword);
       var request = {
         headers: {}
       };
@@ -79,7 +79,7 @@ describe('Basic Authentication credentials', function () {
     });
 
     it('should base64 encode the username and password and set auth header with custom scheme in request', function (done) {
-      var creds = new BasicAuthenticationCredentials({userName: dummyuserName, password: dummyPassword, authorizationScheme: fakeScheme});
+      var creds = new BasicAuthenticationCredentials(dummyuserName, dummyPassword, fakeScheme);
       var request = {
         headers: {}
       };
@@ -96,7 +96,7 @@ describe('Basic Authentication credentials', function () {
 
     it('should succeed with userName and password', function () {
       (function () {
-        new BasicAuthenticationCredentials({userName: dummyuserName, password: dummyPassword});
+        new BasicAuthenticationCredentials(dummyuserName, dummyPassword);
       }).should.not.throw();
     });
 
@@ -108,7 +108,7 @@ describe('Basic Authentication credentials', function () {
 
     it('should fail without userName and password', function () {
       (function () {
-        new BasicAuthenticationCredentials({authorizationScheme: fakeScheme});
+        new BasicAuthenticationCredentials(null, null, fakeScheme);
       }).should.throw();
     });
   });
