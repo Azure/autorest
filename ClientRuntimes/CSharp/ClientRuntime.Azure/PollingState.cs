@@ -16,8 +16,6 @@ namespace Microsoft.Azure
     /// <typeparam name="T">Type of resource.</typeparam>
     internal class PollingState<T> where T : class
     {
-        private int? _retryTimeout;
-
         /// <summary>
         /// Initializes an instance of PollingState.
         /// </summary>
@@ -57,6 +55,7 @@ namespace Microsoft.Azure
         }
 
         private string _status;
+
         /// <summary>
         /// Gets or sets polling status.
         /// </summary>
@@ -74,11 +73,43 @@ namespace Microsoft.Azure
                 _status = value;
             }
         }
-        
+
+        /// <summary>
+        /// Gets or sets the latest value captured from Azure-AsyncOperation header.
+        /// </summary>
+        public string AzureAsyncOperationHeaderLink { get; set; }
+
+        /// <summary>
+        /// Gets or sets the latest value captured from Location header.
+        /// </summary>
+        public string LocationHeaderLink { get; set; }
+
+        private HttpResponseMessage _response;
+
         /// <summary>
         /// Gets or sets last operation response. 
         /// </summary>
-        public HttpResponseMessage Response { get; set; }
+        public HttpResponseMessage Response
+        {
+            get { return _response; }
+            set
+            {
+                _response = value;
+                if (_response != null)
+                {
+                    if (_response.Headers.Contains("Azure-AsyncOperation"))
+                    {
+                        AzureAsyncOperationHeaderLink = _response.Headers
+                            .GetValues("Azure-AsyncOperation").FirstOrDefault();
+                    }
+
+                    if (_response.Headers.Contains("Location"))
+                    {
+                        LocationHeaderLink = _response.Headers.GetValues("Location").FirstOrDefault();
+                    }
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets last operation request.
@@ -94,6 +125,8 @@ namespace Microsoft.Azure
         /// Gets or sets resource.
         /// </summary>
         public T Resource { get; set; }
+
+        private int? _retryTimeout;
 
         /// <summary>
         /// Gets long running operation delay in milliseconds.

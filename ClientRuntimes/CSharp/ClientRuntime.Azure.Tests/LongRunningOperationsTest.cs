@@ -36,6 +36,28 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         }
 
         [Fact]
+        public void TestCreateOrUpdateWithoutHeaderInResponses()
+        {
+            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var handler = new PlaybackTestHandler(MockCreateOrUpdateWithoutHeaderInResponses());
+            var fakeClient = new RedisManagementClient(tokenCredentials, handler);
+            fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
+            fakeClient.RedisOperations.CreateOrUpdate("rg", "redis", new RedisCreateOrUpdateParameters(), "1234");
+
+            Assert.Equal(HttpMethod.Put, handler.Requests[0].Method);
+            Assert.Equal("https://management.azure.com/subscriptions/1234/resourceGroups/rg/providers/Microsoft.Cache/Redis/redis",
+                handler.Requests[0].RequestUri.ToString());
+            Assert.Equal(HttpMethod.Get, handler.Requests[1].Method);
+            Assert.Equal("http://custom/status",
+                handler.Requests[1].RequestUri.ToString());
+            Assert.Equal(HttpMethod.Get, handler.Requests[2].Method);
+            Assert.Equal("http://custom/status",
+                handler.Requests[2].RequestUri.ToString());
+            Assert.Equal("https://management.azure.com/subscriptions/1234/resourceGroups/rg/providers/Microsoft.Cache/Redis/redis",
+                handler.Requests[3].RequestUri.ToString());
+        }
+
+        [Fact]
         public void TestAsyncOperationWithNoPayload()
         {
             var tokenCredentials = new TokenCloudCredentials("123", "abc");
@@ -200,7 +222,44 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             Assert.Equal(2, handler.Requests.Count);
         }
 
+        /// <summary>
+        /// It's assumed that the same pattern is used throughout the long running operation and
+        /// the final http call returns status code OK for Azure-AsyncOperation.
+        /// </summary>
+        [Fact]
+        public void TestDeleteOperationWithoutHeaderInResponse()
+        {
+            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var handler = new PlaybackTestHandler(MockDeleteOperaionWithoutHeaderInResponse());
+            var fakeClient = new RedisManagementClient(tokenCredentials, handler);
+            fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
+            fakeClient.RedisOperations.Delete("rg", "redis", "1234");
+            Assert.Equal(3, handler.Requests.Count);
+            Assert.Equal("http://custom/status", handler.Requests[1].RequestUri.ToString());
+            Assert.Equal("http://custom/status", handler.Requests[2].RequestUri.ToString());
+        }
 
+        /// <summary>
+        /// It's assumed that the same pattern is used throughout the long running operation and
+        /// the final http call returns status code OK, Created or NoContent for Location.
+        /// </summary>
+        [Fact]
+        public void TestDeleteOperationWithoutLocationHeaderInResponse()
+        {
+            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var handler = new PlaybackTestHandler(MockDeleteOperaionWithoutLocationHeaderInResponse());
+            var fakeClient = new RedisManagementClient(tokenCredentials, handler);
+            fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
+            fakeClient.RedisOperations.Delete("rg", "redis", "1234");
+            Assert.Equal(3, handler.Requests.Count);
+            Assert.Equal("http://custom/status", handler.Requests[1].RequestUri.ToString());
+            Assert.Equal("http://custom/status", handler.Requests[2].RequestUri.ToString());
+        }
+
+        /// <summary>
+        /// It's assumed that the same pattern is used throughout the long running operation and
+        /// the final http request return an object with successfull state.
+        /// </summary>
         [Fact]
         public void TestCreateOrUpdateWithLocationHeaderWith202()
         {
@@ -507,6 +566,76 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             yield return response3;
         }
 
+        private IEnumerable<HttpResponseMessage> MockCreateOrUpdateWithoutHeaderInResponses()
+        {
+            var response1 = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(@"
+                {
+                    ""location"": ""North US"",
+                    ""tags"": {
+                        ""key1"": ""value 1"",
+                        ""key2"": ""value 2""
+                        },
+    
+                    ""properties"": { 
+                        ""provisioningState"": ""InProgress"",
+                        ""comment"": ""Resource defined structure""
+                    }
+                }")
+            };
+            response1.Headers.Add("Azure-AsyncOperation", "http://custom/status");
+
+            yield return response1;
+
+            var response2 = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(@"
+                {
+                    ""status"" : ""InProgress"", 
+                    ""error"" : {
+                        ""code"": ""BadArgument"",  
+                        ""message"": ""The provided database ‘foo’ has an invalid username."" 
+                    }
+                }")
+            };
+
+            yield return response2;
+
+            var response3 = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(@"
+                {
+                    ""status"" : ""Succeeded"", 
+                    ""error"" : {
+                        ""code"": ""BadArgument"",  
+                        ""message"": ""The provided database ‘foo’ has an invalid username."" 
+                    }
+                }")
+            };
+
+            yield return response3;
+
+            var response4 = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(@"
+                {
+                    ""location"": ""North US"",
+                    ""tags"": {
+                        ""key1"": ""value 1"",
+                        ""key2"": ""value 2""
+                        },
+    
+                    ""properties"": { 
+                        ""provisioningState"": ""Succeeded"",
+                        ""comment"": ""Resource defined structure""
+                    }
+                }")
+            };
+
+            yield return response4;
+        }
+
         private IEnumerable<HttpResponseMessage> MockAsyncOperaionWithNoBody()
         {
             var response1 = new HttpResponseMessage(HttpStatusCode.OK)
@@ -754,6 +883,64 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             yield return response2;
         }
 
+        private IEnumerable<HttpResponseMessage> MockDeleteOperaionWithoutHeaderInResponse()
+        {
+            var response1 = new HttpResponseMessage(HttpStatusCode.Accepted)
+            {
+                Content = new StringContent("")
+            };
+            response1.Headers.Add("Azure-AsyncOperation", "http://custom/status");
+            yield return response1;
+
+            var response2 = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(@"
+                {
+                    ""status"" : ""InProgress"", 
+                    ""error"" : {
+                        ""code"": ""BadArgument"",  
+                        ""message"": ""The provided database ‘foo’ has an invalid username."" 
+                    }
+                }")
+            };
+            yield return response2;
+
+            var response3 = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(@"
+                {
+                    ""status"" : ""Succeeded"", 
+                    ""error"" : {
+                        ""code"": ""BadArgument"",  
+                        ""message"": ""The provided database ‘foo’ has an invalid username."" 
+                    }
+                }")
+            };
+            yield return response3;
+        }
+
+        private IEnumerable<HttpResponseMessage> MockDeleteOperaionWithoutLocationHeaderInResponse()
+        {
+            var response1 = new HttpResponseMessage(HttpStatusCode.Accepted)
+            {
+                Content = new StringContent("")
+            };
+            response1.Headers.Add("Location", "http://custom/status");
+            yield return response1;
+
+            var response2 = new HttpResponseMessage(HttpStatusCode.Accepted)
+            {
+                Content = new StringContent("")
+            };
+            yield return response2;
+
+            var response3 = new HttpResponseMessage(HttpStatusCode.NoContent)
+            {
+                Content = new StringContent("")
+            };
+            yield return response3;
+        }
+
         private IEnumerable<HttpResponseMessage> MockCreateOrUpdateWithLocationHeaderAnd202()
         {
             var response1 = new HttpResponseMessage(HttpStatusCode.Accepted)
@@ -772,22 +959,11 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
 
             yield return response2;
 
-            var response3 = new HttpResponseMessage(HttpStatusCode.OK)
+            var response3 = new HttpResponseMessage(HttpStatusCode.Accepted)
             {
-                Content = new StringContent(@"
-                {
-                    ""location"": ""North US"",
-                    ""tags"": {
-                        ""key1"": ""value 1"",
-                        ""key2"": ""value 2""
-                        },
-    
-                    ""properties"": { 
-                        ""provisioningState"": ""InProgress"",
-                        ""comment"": ""Resource defined structure""
-                    }
-                }")
+                Content = new StringContent("")
             };
+            response3.Headers.Add("Location", "https://management.azure.com/subscriptions/1234/resourceGroups/rg/providers/Microsoft.Cache/Redis/redis");
 
             yield return response3;
 
