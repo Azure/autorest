@@ -12,20 +12,18 @@ var DEFAULT_AUTHORIZATION_SCHEME = 'Bearer';
 * Creates a new TokenCredentials object.
 *
 * @constructor
-* @param {string} credentials.authorizationScheme The authorization scheme.
-* @param {string} credentials.token               The token.
+* @param {string} token               The token.
+* @param {string} authorizationScheme The authorization scheme.
 */
-function TokenCredentials(credentials) {
-  validate.validateArgs('TokenCredentials', function (v) {
-    v.object(credentials, 'credentials');
-    v.string(credentials.token, 'credentials.token');
-  });
-
-  if (!credentials.authorizationScheme) {
-    credentials.authorizationScheme = DEFAULT_AUTHORIZATION_SCHEME;
+function TokenCredentials(token, authorizationScheme) {
+  if (!token) {
+    throw new Error('token cannot be null.');
   }
-
-  this.credentials = credentials;
+  this.token = token;
+  this.authorizationScheme = authorizationScheme;
+  if (!this.authorizationScheme) {
+    this.authorizationScheme = DEFAULT_AUTHORIZATION_SCHEME;
+  }
 }
 
 /**
@@ -36,7 +34,7 @@ function TokenCredentials(credentials) {
 * @return {undefined}
 */
 TokenCredentials.prototype.signRequest = function (webResource, callback) {
-  webResource.headers[HeaderConstants.AUTHORIZATION] = util.format('%s %s', this.credentials.authorizationScheme, this.credentials.token);
+  webResource.headers[HeaderConstants.AUTHORIZATION] = util.format('%s %s', this.authorizationScheme, this.token);
 
   callback(null);
 };

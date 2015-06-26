@@ -38,6 +38,11 @@ function Paging(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//paging/single';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -117,6 +122,11 @@ function Paging(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//paging/multiple';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -197,6 +207,11 @@ function Paging(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//paging/multiple/retryfirst';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -278,6 +293,11 @@ function Paging(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//paging/multiple/retrysecond';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -357,6 +377,11 @@ function Paging(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//paging/single/failure';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -436,6 +461,11 @@ function Paging(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//paging/multiple/failure';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -515,6 +545,11 @@ function Paging(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//paging/multiple/failureuri';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -606,7 +641,11 @@ function Paging(client) {
 
       // Construct URL
       var requestUrl = '{nextLink}';
-      requestUrl = requestUrl.replace("{nextLink}", nextLink);
+      requestUrl = requestUrl.replace('{nextLink}', nextLink);
+      var queryParameters = [];
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -698,7 +737,11 @@ function Paging(client) {
 
       // Construct URL
       var requestUrl = '{nextLink}';
-      requestUrl = requestUrl.replace("{nextLink}", nextLink);
+      requestUrl = requestUrl.replace('{nextLink}', nextLink);
+      var queryParameters = [];
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -791,7 +834,11 @@ function Paging(client) {
 
       // Construct URL
       var requestUrl = '{nextLink}';
-      requestUrl = requestUrl.replace("{nextLink}", nextLink);
+      requestUrl = requestUrl.replace('{nextLink}', nextLink);
+      var queryParameters = [];
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -885,7 +932,11 @@ function Paging(client) {
 
       // Construct URL
       var requestUrl = '{nextLink}';
-      requestUrl = requestUrl.replace("{nextLink}", nextLink);
+      requestUrl = requestUrl.replace('{nextLink}', nextLink);
+      var queryParameters = [];
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -977,7 +1028,11 @@ function Paging(client) {
 
       // Construct URL
       var requestUrl = '{nextLink}';
-      requestUrl = requestUrl.replace("{nextLink}", nextLink);
+      requestUrl = requestUrl.replace('{nextLink}', nextLink);
+      var queryParameters = [];
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -1069,7 +1124,11 @@ function Paging(client) {
 
       // Construct URL
       var requestUrl = '{nextLink}';
-      requestUrl = requestUrl.replace("{nextLink}", nextLink);
+      requestUrl = requestUrl.replace('{nextLink}', nextLink);
+      var queryParameters = [];
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -1161,7 +1220,11 @@ function Paging(client) {
 
       // Construct URL
       var requestUrl = '{nextLink}';
-      requestUrl = requestUrl.replace("{nextLink}", nextLink);
+      requestUrl = requestUrl.replace('{nextLink}', nextLink);
+      var queryParameters = [];
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');

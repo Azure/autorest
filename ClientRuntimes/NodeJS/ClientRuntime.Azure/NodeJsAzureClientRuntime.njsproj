@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{00b6d45e-5087-4585-a724-ef61ac7aedbf}</ProjectGuid>
     <ProjectHome />
-    <ProjectView>ProjectFiles</ProjectView>
+    <ProjectView>ShowAllFiles</ProjectView>
     <StartupFile />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -16,6 +16,10 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
+    <Compile Include="lib\subscriptionCredentials.js" />
+    <Compile Include="test\subscriptionCredentialsTests.js">
+      <TestFramework>Mocha</TestFramework>
+    </Compile>
     <Compile Include="test\azureServiceClientTests.js">
       <TestFramework>Mocha</TestFramework>
     </Compile>

@@ -6,5 +6,6 @@ paging.js
 lro.js
 head.js
 resourceFlattening.js
+subscriptionIdApiVersion.js
 #####The following test will always be executed as the last test to get test coverage
 coverage.js

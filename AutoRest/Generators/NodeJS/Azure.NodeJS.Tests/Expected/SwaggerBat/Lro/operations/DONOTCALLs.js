@@ -39,6 +39,11 @@ function DONOTCALLs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/delete/provisioning/202/accepted/200/succeeded';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -119,6 +124,11 @@ function DONOTCALLs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/delete/provisioning/202/deleting/200/failed';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -199,6 +209,11 @@ function DONOTCALLs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/delete/provisioning/202/deleting/200/canceled';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -279,6 +294,11 @@ function DONOTCALLs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/delete/202/retry/200';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -343,6 +363,11 @@ function DONOTCALLs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/delete/202/noretry/204';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -407,6 +432,11 @@ function DONOTCALLs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/post/202/retry/200';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -487,6 +517,11 @@ function DONOTCALLs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/post/202/noretry/204';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -551,6 +586,11 @@ function DONOTCALLs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/retryerror/delete/provisioning/202/accepted/200/succeeded';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -631,6 +671,11 @@ function DONOTCALLs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/retryerror/delete/202/retry/200';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -695,6 +740,11 @@ function DONOTCALLs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/retryerror/post/202/retry/200';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -774,6 +824,11 @@ function DONOTCALLs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/nonretryerror/delete/400';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -837,6 +892,11 @@ function DONOTCALLs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/nonretryerror/delete/202/retry/400';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -901,6 +961,11 @@ function DONOTCALLs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/nonretryerror/post/400';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -980,6 +1045,11 @@ function DONOTCALLs(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//lro/nonretryerror/post/202/retry/400';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
