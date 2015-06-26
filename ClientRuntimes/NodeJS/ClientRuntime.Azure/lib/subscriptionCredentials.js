@@ -13,7 +13,7 @@ var msrest = require('ms-rest');
 * @param {string} authorizationScheme The authorization scheme.
 */
 function SubscriptionCredentials(token, subscriptionId, authorizationScheme) {
-  if (!subscriptionId) {
+  if (subscriptionId === null || subscriptionID === undefined || typeof subscriptionId !== 'string') {
     throw new Error('subscriptionId cannot be null.');
   }
 

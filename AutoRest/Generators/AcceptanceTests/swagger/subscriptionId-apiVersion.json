@@ -16,7 +16,7 @@
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}": {
       "get": {
         "operationId": "group_getSampleResourceGroup",
-        "summary": "get resouce group",
+        "description": "Provides a resouce group with name 'testgroup101' and location 'West US'.",
         "parameters": [
           {
             "name": "subscriptionId",
@@ -28,14 +28,14 @@
           {
             "name": "resourceGroupName",
             "in": "path",
-            "description": "Resource Group Id.",
+            "description": "Resource Group name 'testgroup101'.",
             "required": true,
             "type": "string"
           },
           {
             "name": "apiVersion",
             "in": "query",
-            "description": "API Version.",
+            "description": "API Version with value '2014-04-01-preview'.",
             "required": true,
             "type": "string"
           }
@@ -62,11 +62,11 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "resource group name"
+          "description": "resource group name 'testgroup101'"
         },
         "location": {
           "type": "string",
-          "description": "resource group location"
+          "description": "resource group location 'West US'"
         }
       }
     },
