@@ -12,10 +12,13 @@ var DEFAULT_AUTHORIZATION_SCHEME = 'Bearer';
 * Creates a new TokenCredentials object.
 *
 * @constructor
-* @param {string} authorizationScheme The authorization scheme.
 * @param {string} token               The token.
+* @param {string} authorizationScheme The authorization scheme.
 */
 function TokenCredentials(token, authorizationScheme) {
+  if (!token) {
+    throw new Error('token cannot be null.');
+  }
   this.token = token;
   this.authorizationScheme = authorizationScheme;
   if (!this.authorizationScheme) {

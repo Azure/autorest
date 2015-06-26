@@ -19,6 +19,7 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
+    <Compile Include="routes\azureUrl.js" />
     <Compile Include="util\constants.js" />
     <Compile Include="util\utils.js" />
     <Content Include="package.json" />
