@@ -14,20 +14,17 @@ namespace Fixtures.SwaggerBatBodyComplex
     public partial interface IBasicOperations
     {
         /// <summary>
-        /// Get complex type {id: 2, name: &apos;abc&apos;, color:
-        /// &apos;YELLOW&apos;}
+        /// Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
         Task<HttpOperationResponse<Basic>> GetValidWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Please put {id: 2, name: &apos;abc&apos;, color:
-        /// &apos;Magenta&apos;}
+        /// Please put {id: 2, name: 'abc', color: 'Magenta'}
         /// </summary>
         /// <param name='complexBody'>
-        /// Please put {id: 2, name: &apos;abc&apos;, color:
-        /// &apos;Magenta&apos;}
+        /// Please put {id: 2, name: 'abc', color: 'Magenta'}
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -55,7 +52,7 @@ namespace Fixtures.SwaggerBatBodyComplex
         /// </param>
         Task<HttpOperationResponse<Basic>> GetNullWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Get a basic complex type while the server doesn&apos;t provide a
+        /// Get a basic complex type while the server doesn't provide a
         /// response payload
         /// </summary>
         /// <param name='cancellationToken'>

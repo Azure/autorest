@@ -21,8 +21,8 @@ namespace Fixtures.SwaggerBatBodyComplex.Models
         public string Name { get; set; }
 
         /// <summary>
-        /// Possible values for this property include: &apos;cyan&apos;,
-        /// &apos;Magenta&apos;, &apos;YELLOW&apos;, &apos;blacK&apos;
+        /// Possible values for this property include: 'cyan', 'Magenta',
+        /// 'YELLOW', 'blacK'
         /// </summary>
         [JsonProperty(PropertyName = "color")]
         public CMYKColors? Color { get; set; }

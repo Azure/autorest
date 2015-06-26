@@ -112,54 +112,54 @@ namespace Fixtures.SwaggerBatBodyComplex
         /// <param name='complexBody'>
         /// Please put a salmon that looks like this:
         /// {
-        /// &quot;dtype&quot;: &quot;salmon&quot;,
-        /// &quot;species&quot;: &quot;king&quot;,
-        /// &quot;length&quot;: 1,
-        /// &quot;age&quot;: 1,
-        /// &quot;location&quot;: &quot;alaska&quot;,
-        /// &quot;iswild&quot;: true,
-        /// &quot;siblings&quot;: [
+        /// "dtype": "salmon",
+        /// "species": "king",
+        /// "length": 1,
+        /// "age": 1,
+        /// "location": "alaska",
+        /// "iswild": true,
+        /// "siblings": [
         /// {
-        /// &quot;dtype&quot;: &quot;shark&quot;,
-        /// &quot;species&quot;: &quot;predator&quot;,
-        /// &quot;length&quot;: 20,
-        /// &quot;age&quot;: 6,
-        /// &quot;siblings&quot;: [
+        /// "dtype": "shark",
+        /// "species": "predator",
+        /// "length": 20,
+        /// "age": 6,
+        /// "siblings": [
         /// {
-        /// &quot;dtype&quot;: &quot;salmon&quot;,
-        /// &quot;species&quot;: &quot;coho&quot;,
-        /// &quot;length&quot;: 2,
-        /// &quot;age&quot;: 2,
-        /// &quot;location&quot;: &quot;atlantic&quot;,
-        /// &quot;iswild&quot;: true,
-        /// &quot;siblings&quot;: [
+        /// "dtype": "salmon",
+        /// "species": "coho",
+        /// "length": 2,
+        /// "age": 2,
+        /// "location": "atlantic",
+        /// "iswild": true,
+        /// "siblings": [
         /// {
-        /// &quot;dtype&quot;: &quot;shark&quot;,
-        /// &quot;species&quot;: &quot;predator&quot;,
-        /// &quot;length&quot;: 20,
-        /// &quot;age&quot;: 6
+        /// "dtype": "shark",
+        /// "species": "predator",
+        /// "length": 20,
+        /// "age": 6
         /// },
         /// {
-        /// &quot;dtype&quot;: &quot;sawshark&quot;,
-        /// &quot;species&quot;: &quot;dangerous&quot;,
-        /// &quot;length&quot;: 10,
-        /// &quot;age&quot;: 105
+        /// "dtype": "sawshark",
+        /// "species": "dangerous",
+        /// "length": 10,
+        /// "age": 105
         /// }
         /// ]
         /// },
         /// {
-        /// &quot;dtype&quot;: &quot;sawshark&quot;,
-        /// &quot;species&quot;: &quot;dangerous&quot;,
-        /// &quot;length&quot;: 10,
-        /// &quot;age&quot;: 105
+        /// "dtype": "sawshark",
+        /// "species": "dangerous",
+        /// "length": 10,
+        /// "age": 105
         /// }
         /// ]
         /// },
         /// {
-        /// &quot;dtype&quot;: &quot;sawshark&quot;,
-        /// &quot;species&quot;: &quot;dangerous&quot;,
-        /// &quot;length&quot;: 10,
-        /// &quot;age&quot;: 105
+        /// "dtype": "sawshark",
+        /// "species": "dangerous",
+        /// "length": 10,
+        /// "age": 105
         /// }
         /// ]
         /// }

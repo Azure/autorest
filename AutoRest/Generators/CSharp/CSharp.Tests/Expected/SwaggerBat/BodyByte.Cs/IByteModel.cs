@@ -21,7 +21,7 @@ namespace Fixtures.SwaggerBatBodyByte
         /// </param>
         Task<HttpOperationResponse<byte[]>> GetNullWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Get empty byte value &apos;&apos;
+        /// Get empty byte value ''
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -46,7 +46,7 @@ namespace Fixtures.SwaggerBatBodyByte
         /// </param>
         Task<HttpOperationResponse> PutNonAsciiWithOperationResponseAsync(byte[] byteBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Get invalid byte value &apos;:::SWAGGER::::&apos;
+        /// Get invalid byte value ':::SWAGGER::::'
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.

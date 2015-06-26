@@ -279,10 +279,10 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get &apos;1000000&apos; integer value
+        /// Get '1000000' integer value
         /// </summary>
         /// <param name='intQuery'>
-        /// &apos;1000000&apos; integer value
+        /// '1000000' integer value
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -361,10 +361,10 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get &apos;-1000000&apos; integer value
+        /// Get '-1000000' integer value
         /// </summary>
         /// <param name='intQuery'>
-        /// &apos;-1000000&apos; integer value
+        /// '-1000000' integer value
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -525,10 +525,10 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get &apos;10000000000&apos; 64 bit integer value
+        /// Get '10000000000' 64 bit integer value
         /// </summary>
         /// <param name='longQuery'>
-        /// &apos;10000000000&apos; 64 bit integer value
+        /// '10000000000' 64 bit integer value
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -607,10 +607,10 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get &apos;-10000000000&apos; 64 bit integer value
+        /// Get '-10000000000' 64 bit integer value
         /// </summary>
         /// <param name='longQuery'>
-        /// &apos;-10000000000&apos; 64 bit integer value
+        /// '-10000000000' 64 bit integer value
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -689,7 +689,7 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get &apos;null 64 bit integer value (no query param in uri)
+        /// Get 'null 64 bit integer value (no query param in uri)
         /// </summary>
         /// <param name='longQuery'>
         /// null 64 bit integer value
@@ -771,10 +771,10 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get &apos;1.034E+20&apos; numeric value
+        /// Get '1.034E+20' numeric value
         /// </summary>
         /// <param name='floatQuery'>
-        /// &apos;1.034E+20&apos;numeric value
+        /// '1.034E+20'numeric value
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -853,10 +853,10 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get &apos;-1.034E-20&apos; numeric value
+        /// Get '-1.034E-20' numeric value
         /// </summary>
         /// <param name='floatQuery'>
-        /// &apos;-1.034E-20&apos;numeric value
+        /// '-1.034E-20'numeric value
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1017,10 +1017,10 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get &apos;9999999.999&apos; numeric value
+        /// Get '9999999.999' numeric value
         /// </summary>
         /// <param name='doubleQuery'>
-        /// &apos;9999999.999&apos;numeric value
+        /// '9999999.999'numeric value
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1099,10 +1099,10 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get &apos;-9999999.999&apos; numeric value
+        /// Get '-9999999.999' numeric value
         /// </summary>
         /// <param name='doubleQuery'>
-        /// &apos;-9999999.999&apos;numeric value
+        /// '-9999999.999'numeric value
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1263,11 +1263,11 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value
+        /// Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
         /// </summary>
         /// <param name='stringQuery'>
-        /// &apos;啊齄丂狛狜隣郎隣兀﨩&apos;multi-byte string value. Possible values for this
-        /// parameter include: &apos;啊齄丂狛狜隣郎隣兀﨩&apos;
+        /// '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter
+        /// include: '啊齄丂狛狜隣郎隣兀﨩'
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1346,12 +1346,11 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end
+        /// Get 'begin!*'();:@ &amp;=+$,/?#[]end
         /// </summary>
         /// <param name='stringQuery'>
-        /// &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; url encoded string value.
-        /// Possible values for this parameter include: &apos;begin!*&apos;();:@
-        /// &amp;=+$,/?#[]end&apos;
+        /// 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible
+        /// values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1430,11 +1429,10 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get &apos;&apos;
+        /// Get ''
         /// </summary>
         /// <param name='stringQuery'>
-        /// &apos;&apos; string value. Possible values for this parameter include:
-        /// &apos;&apos;
+        /// '' string value. Possible values for this parameter include: ''
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1595,12 +1593,11 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get using uri with query parameter &apos;green color&apos;
+        /// Get using uri with query parameter 'green color'
         /// </summary>
         /// <param name='enumQuery'>
-        /// &apos;green color&apos; enum value. Possible values for this parameter
-        /// include: &apos;red color&apos;, &apos;green color&apos;, &apos;blue
-        /// color&apos;
+        /// 'green color' enum value. Possible values for this parameter include: 'red
+        /// color', 'green color', 'blue color'
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1682,8 +1679,8 @@ namespace Fixtures.SwaggerBatUrl
         /// Get null (no query parameter in url)
         /// </summary>
         /// <param name='enumQuery'>
-        /// null string value. Possible values for this parameter include: &apos;red
-        /// color&apos;, &apos;green color&apos;, &apos;blue color&apos;
+        /// null string value. Possible values for this parameter include: 'red
+        /// color', 'green color', 'blue color'
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1762,10 +1759,10 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array
+        /// Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
         /// </summary>
         /// <param name='byteQuery'>
-        /// &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array
+        /// '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1844,10 +1841,10 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get &apos;&apos; as byte array
+        /// Get '' as byte array
         /// </summary>
         /// <param name='byteQuery'>
-        /// &apos;&apos; as byte array
+        /// '' as byte array
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -2008,10 +2005,10 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get &apos;2012-01-01&apos; as date
+        /// Get '2012-01-01' as date
         /// </summary>
         /// <param name='dateQuery'>
-        /// &apos;2012-01-01&apos; as date
+        /// '2012-01-01' as date
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -2172,10 +2169,10 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get &apos;2012-01-01T01:01:01Z&apos; as date-time
+        /// Get '2012-01-01T01:01:01Z' as date-time
         /// </summary>
         /// <param name='dateTimeQuery'>
-        /// &apos;2012-01-01T01:01:01Z&apos; as date-time
+        /// '2012-01-01T01:01:01Z' as date-time
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -2336,12 +2333,12 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@
-        /// &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format
+        /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
+        /// null, ''] using the csv-array format
         /// </summary>
         /// <param name='arrayQuery'>
-        /// an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@
-        /// &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format
+        /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
+        /// null, ''] using the csv-array format
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -2584,12 +2581,12 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@
-        /// &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format
+        /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
+        /// null, ''] using the ssv-array format
         /// </summary>
         /// <param name='arrayQuery'>
-        /// an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@
-        /// &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format
+        /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
+        /// null, ''] using the ssv-array format
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -2668,12 +2665,12 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@
-        /// &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format
+        /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
+        /// null, ''] using the tsv-array format
         /// </summary>
         /// <param name='arrayQuery'>
-        /// an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@
-        /// &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format
+        /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
+        /// null, ''] using the tsv-array format
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -2752,12 +2749,12 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@
-        /// &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format
+        /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
+        /// null, ''] using the pipes-array format
         /// </summary>
         /// <param name='arrayQuery'>
-        /// an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@
-        /// &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format
+        /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
+        /// null, ''] using the pipes-array format
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.

@@ -11,8 +11,8 @@ namespace Fixtures.SwaggerBatBodyString
     public static partial class EnumModelExtensions
     {
             /// <summary>
-            /// Get enum value &apos;red color&apos; from enumeration of &apos;red
-            /// color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;.
+            /// Get enum value 'red color' from enumeration of 'red color', 'green-color',
+            /// 'blue_color'.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -23,8 +23,8 @@ namespace Fixtures.SwaggerBatBodyString
             }
 
             /// <summary>
-            /// Get enum value &apos;red color&apos; from enumeration of &apos;red
-            /// color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;.
+            /// Get enum value 'red color' from enumeration of 'red color', 'green-color',
+            /// 'blue_color'.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -39,15 +39,15 @@ namespace Fixtures.SwaggerBatBodyString
             }
 
             /// <summary>
-            /// Sends value &apos;red color&apos; from enumeration of &apos;red
-            /// color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;
+            /// Sends value 'red color' from enumeration of 'red color', 'green-color',
+            /// 'blue_color'
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='stringBody'>
-            /// Possible values for this parameter include: &apos;red color&apos;,
-            /// &apos;green-color&apos;, &apos;blue_color&apos;
+            /// Possible values for this parameter include: 'red color', 'green-color',
+            /// 'blue_color'
             /// </param>
             public static void PutNotExpandable(this IEnumModel operations, Colors? stringBody)
             {
@@ -55,15 +55,15 @@ namespace Fixtures.SwaggerBatBodyString
             }
 
             /// <summary>
-            /// Sends value &apos;red color&apos; from enumeration of &apos;red
-            /// color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;
+            /// Sends value 'red color' from enumeration of 'red color', 'green-color',
+            /// 'blue_color'
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='stringBody'>
-            /// Possible values for this parameter include: &apos;red color&apos;,
-            /// &apos;green-color&apos;, &apos;blue_color&apos;
+            /// Possible values for this parameter include: 'red color', 'green-color',
+            /// 'blue_color'
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.

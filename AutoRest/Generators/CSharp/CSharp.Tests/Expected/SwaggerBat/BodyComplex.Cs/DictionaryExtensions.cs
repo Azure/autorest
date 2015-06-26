@@ -43,10 +43,8 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// The operations group for this extension method
             /// </param>
             /// <param name='complexBody'>
-            /// Please put a dictionary with 5 key-value pairs:
-            /// &quot;txt&quot;:&quot;notepad&quot;, &quot;bmp&quot;:&quot;mspaint&quot;,
-            /// &quot;xls&quot;:&quot;excel&quot;, &quot;exe&quot;:&quot;&quot;,
-            /// &quot;&quot;:null
+            /// Please put a dictionary with 5 key-value pairs: "txt":"notepad",
+            /// "bmp":"mspaint", "xls":"excel", "exe":"", "":null
             /// </param>
             public static void PutValid(this IDictionary operations, DictionaryWrapper complexBody)
             {
@@ -60,10 +58,8 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// The operations group for this extension method
             /// </param>
             /// <param name='complexBody'>
-            /// Please put a dictionary with 5 key-value pairs:
-            /// &quot;txt&quot;:&quot;notepad&quot;, &quot;bmp&quot;:&quot;mspaint&quot;,
-            /// &quot;xls&quot;:&quot;excel&quot;, &quot;exe&quot;:&quot;&quot;,
-            /// &quot;&quot;:null
+            /// Please put a dictionary with 5 key-value pairs: "txt":"notepad",
+            /// "bmp":"mspaint", "xls":"excel", "exe":"", "":null
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -157,8 +153,8 @@ namespace Fixtures.SwaggerBatBodyComplex
             }
 
             /// <summary>
-            /// Get complex types with dictionary property while server doesn&apos;t
-            /// provide a response payload
+            /// Get complex types with dictionary property while server doesn't provide a
+            /// response payload
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -169,8 +165,8 @@ namespace Fixtures.SwaggerBatBodyComplex
             }
 
             /// <summary>
-            /// Get complex types with dictionary property while server doesn&apos;t
-            /// provide a response payload
+            /// Get complex types with dictionary property while server doesn't provide a
+            /// response payload
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method

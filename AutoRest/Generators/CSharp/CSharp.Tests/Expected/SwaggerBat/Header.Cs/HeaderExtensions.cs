@@ -11,15 +11,13 @@ namespace Fixtures.SwaggerBatHeader
     public static partial class HeaderExtensions
     {
             /// <summary>
-            /// Send a post request with header value &quot;User-Agent&quot;:
-            /// &quot;overwrite&quot;
+            /// Send a post request with header value "User-Agent": "overwrite"
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='userAgent'>
-            /// Send a post request with header value &quot;User-Agent&quot;:
-            /// &quot;overwrite&quot;
+            /// Send a post request with header value "User-Agent": "overwrite"
             /// </param>
             public static void ParamExistingKey(this IHeader operations, string userAgent)
             {
@@ -27,15 +25,13 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Send a post request with header value &quot;User-Agent&quot;:
-            /// &quot;overwrite&quot;
+            /// Send a post request with header value "User-Agent": "overwrite"
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='userAgent'>
-            /// Send a post request with header value &quot;User-Agent&quot;:
-            /// &quot;overwrite&quot;
+            /// Send a post request with header value "User-Agent": "overwrite"
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -46,8 +42,7 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Get a response with header value &quot;User-Agent&quot;:
-            /// &quot;overwrite&quot;
+            /// Get a response with header value "User-Agent": "overwrite"
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -58,8 +53,7 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Get a response with header value &quot;User-Agent&quot;:
-            /// &quot;overwrite&quot;
+            /// Get a response with header value "User-Agent": "overwrite"
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -73,15 +67,13 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Send a post request with header value &quot;Content-Type&quot;:
-            /// &quot;text/html&quot;
+            /// Send a post request with header value "Content-Type": "text/html"
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='contentType'>
-            /// Send a post request with header value &quot;Content-Type&quot;:
-            /// &quot;text/html&quot;
+            /// Send a post request with header value "Content-Type": "text/html"
             /// </param>
             public static void ParamProtectedKey(this IHeader operations, string contentType)
             {
@@ -89,15 +81,13 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Send a post request with header value &quot;Content-Type&quot;:
-            /// &quot;text/html&quot;
+            /// Send a post request with header value "Content-Type": "text/html"
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='contentType'>
-            /// Send a post request with header value &quot;Content-Type&quot;:
-            /// &quot;text/html&quot;
+            /// Send a post request with header value "Content-Type": "text/html"
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -108,8 +98,7 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Get a response with header value &quot;Content-Type&quot;:
-            /// &quot;text/html&quot;
+            /// Get a response with header value "Content-Type": "text/html"
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -120,8 +109,7 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Get a response with header value &quot;Content-Type&quot;:
-            /// &quot;text/html&quot;
+            /// Get a response with header value "Content-Type": "text/html"
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -135,16 +123,14 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;positive&quot;, &quot;value&quot;: 1 or &quot;scenario&quot;:
-            /// &quot;negative&quot;, &quot;value&quot;: -2
+            /// Send a post request with header values "scenario": "positive", "value": 1
+            /// or "scenario": "negative", "value": -2
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;positive&quot; or &quot;negative&quot;
+            /// Send a post request with header values "scenario": "positive" or "negative"
             /// </param>
             /// <param name='value'>
             /// Send a post request with header values 1 or -2
@@ -155,16 +141,14 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;positive&quot;, &quot;value&quot;: 1 or &quot;scenario&quot;:
-            /// &quot;negative&quot;, &quot;value&quot;: -2
+            /// Send a post request with header values "scenario": "positive", "value": 1
+            /// or "scenario": "negative", "value": -2
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;positive&quot; or &quot;negative&quot;
+            /// Send a post request with header values "scenario": "positive" or "negative"
             /// </param>
             /// <param name='value'>
             /// Send a post request with header values 1 or -2
@@ -178,14 +162,13 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Get a response with header value &quot;value&quot;: 1 or -2
+            /// Get a response with header value "value": 1 or -2
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;positive&quot; or &quot;negative&quot;
+            /// Send a post request with header values "scenario": "positive" or "negative"
             /// </param>
             public static void ResponseInteger(this IHeader operations, string scenario)
             {
@@ -193,14 +176,13 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Get a response with header value &quot;value&quot;: 1 or -2
+            /// Get a response with header value "value": 1 or -2
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;positive&quot; or &quot;negative&quot;
+            /// Send a post request with header values "scenario": "positive" or "negative"
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -211,16 +193,14 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;positive&quot;, &quot;value&quot;: 105 or &quot;scenario&quot;:
-            /// &quot;negative&quot;, &quot;value&quot;: -2
+            /// Send a post request with header values "scenario": "positive", "value":
+            /// 105 or "scenario": "negative", "value": -2
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;positive&quot; or &quot;negative&quot;
+            /// Send a post request with header values "scenario": "positive" or "negative"
             /// </param>
             /// <param name='value'>
             /// Send a post request with header values 105 or -2
@@ -231,16 +211,14 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;positive&quot;, &quot;value&quot;: 105 or &quot;scenario&quot;:
-            /// &quot;negative&quot;, &quot;value&quot;: -2
+            /// Send a post request with header values "scenario": "positive", "value":
+            /// 105 or "scenario": "negative", "value": -2
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;positive&quot; or &quot;negative&quot;
+            /// Send a post request with header values "scenario": "positive" or "negative"
             /// </param>
             /// <param name='value'>
             /// Send a post request with header values 105 or -2
@@ -254,14 +232,13 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Get a response with header value &quot;value&quot;: 105 or -2
+            /// Get a response with header value "value": 105 or -2
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;positive&quot; or &quot;negative&quot;
+            /// Send a post request with header values "scenario": "positive" or "negative"
             /// </param>
             public static void ResponseLong(this IHeader operations, string scenario)
             {
@@ -269,14 +246,13 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Get a response with header value &quot;value&quot;: 105 or -2
+            /// Get a response with header value "value": 105 or -2
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;positive&quot; or &quot;negative&quot;
+            /// Send a post request with header values "scenario": "positive" or "negative"
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -287,16 +263,14 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;positive&quot;, &quot;value&quot;: 0.07 or &quot;scenario&quot;:
-            /// &quot;negative&quot;, &quot;value&quot;: -3.0
+            /// Send a post request with header values "scenario": "positive", "value":
+            /// 0.07 or "scenario": "negative", "value": -3.0
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;positive&quot; or &quot;negative&quot;
+            /// Send a post request with header values "scenario": "positive" or "negative"
             /// </param>
             /// <param name='value'>
             /// Send a post request with header values 0.07 or -3.0
@@ -307,16 +281,14 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;positive&quot;, &quot;value&quot;: 0.07 or &quot;scenario&quot;:
-            /// &quot;negative&quot;, &quot;value&quot;: -3.0
+            /// Send a post request with header values "scenario": "positive", "value":
+            /// 0.07 or "scenario": "negative", "value": -3.0
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;positive&quot; or &quot;negative&quot;
+            /// Send a post request with header values "scenario": "positive" or "negative"
             /// </param>
             /// <param name='value'>
             /// Send a post request with header values 0.07 or -3.0
@@ -330,14 +302,13 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Get a response with header value &quot;value&quot;: 0.07 or -3.0
+            /// Get a response with header value "value": 0.07 or -3.0
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;positive&quot; or &quot;negative&quot;
+            /// Send a post request with header values "scenario": "positive" or "negative"
             /// </param>
             public static void ResponseFloat(this IHeader operations, string scenario)
             {
@@ -345,14 +316,13 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Get a response with header value &quot;value&quot;: 0.07 or -3.0
+            /// Get a response with header value "value": 0.07 or -3.0
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;positive&quot; or &quot;negative&quot;
+            /// Send a post request with header values "scenario": "positive" or "negative"
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -363,16 +333,14 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;positive&quot;, &quot;value&quot;: 7e120 or &quot;scenario&quot;:
-            /// &quot;negative&quot;, &quot;value&quot;: -3.0
+            /// Send a post request with header values "scenario": "positive", "value":
+            /// 7e120 or "scenario": "negative", "value": -3.0
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;positive&quot; or &quot;negative&quot;
+            /// Send a post request with header values "scenario": "positive" or "negative"
             /// </param>
             /// <param name='value'>
             /// Send a post request with header values 7e120 or -3.0
@@ -383,16 +351,14 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;positive&quot;, &quot;value&quot;: 7e120 or &quot;scenario&quot;:
-            /// &quot;negative&quot;, &quot;value&quot;: -3.0
+            /// Send a post request with header values "scenario": "positive", "value":
+            /// 7e120 or "scenario": "negative", "value": -3.0
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;positive&quot; or &quot;negative&quot;
+            /// Send a post request with header values "scenario": "positive" or "negative"
             /// </param>
             /// <param name='value'>
             /// Send a post request with header values 7e120 or -3.0
@@ -406,14 +372,13 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Get a response with header value &quot;value&quot;: 7e120 or -3.0
+            /// Get a response with header value "value": 7e120 or -3.0
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;positive&quot; or &quot;negative&quot;
+            /// Send a post request with header values "scenario": "positive" or "negative"
             /// </param>
             public static void ResponseDouble(this IHeader operations, string scenario)
             {
@@ -421,14 +386,13 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Get a response with header value &quot;value&quot;: 7e120 or -3.0
+            /// Get a response with header value "value": 7e120 or -3.0
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;positive&quot; or &quot;negative&quot;
+            /// Send a post request with header values "scenario": "positive" or "negative"
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -439,16 +403,14 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;true&quot;, &quot;value&quot;: true or &quot;scenario&quot;:
-            /// &quot;false&quot;, &quot;value&quot;: false
+            /// Send a post request with header values "scenario": "true", "value": true
+            /// or "scenario": "false", "value": false
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;true&quot; or &quot;false&quot;
+            /// Send a post request with header values "scenario": "true" or "false"
             /// </param>
             /// <param name='value'>
             /// Send a post request with header values true or false
@@ -459,16 +421,14 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;true&quot;, &quot;value&quot;: true or &quot;scenario&quot;:
-            /// &quot;false&quot;, &quot;value&quot;: false
+            /// Send a post request with header values "scenario": "true", "value": true
+            /// or "scenario": "false", "value": false
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;true&quot; or &quot;false&quot;
+            /// Send a post request with header values "scenario": "true" or "false"
             /// </param>
             /// <param name='value'>
             /// Send a post request with header values true or false
@@ -482,14 +442,13 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Get a response with header value &quot;value&quot;: true or false
+            /// Get a response with header value "value": true or false
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;true&quot; or &quot;false&quot;
+            /// Send a post request with header values "scenario": "true" or "false"
             /// </param>
             public static void ResponseBool(this IHeader operations, string scenario)
             {
@@ -497,14 +456,13 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Get a response with header value &quot;value&quot;: true or false
+            /// Get a response with header value "value": true or false
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;true&quot; or &quot;false&quot;
+            /// Send a post request with header values "scenario": "true" or "false"
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -515,22 +473,20 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;valid&quot;, &quot;value&quot;: &quot;The quick brown fox jumps
-            /// over the lazy dog&quot; or &quot;scenario&quot;: &quot;null&quot;,
-            /// &quot;value&quot;: null or &quot;scenario&quot;: &quot;empty&quot;,
-            /// &quot;value&quot;: &quot;&quot;
+            /// Send a post request with header values "scenario": "valid", "value": "The
+            /// quick brown fox jumps over the lazy dog" or "scenario": "null", "value":
+            /// null or "scenario": "empty", "value": ""
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;
+            /// Send a post request with header values "scenario": "valid" or "null" or
+            /// "empty"
             /// </param>
             /// <param name='value'>
-            /// Send a post request with header values &quot;The quick brown fox jumps
-            /// over the lazy dog&quot; or null or &quot;&quot;
+            /// Send a post request with header values "The quick brown fox jumps over the
+            /// lazy dog" or null or ""
             /// </param>
             public static void ParamString(this IHeader operations, string scenario, string value = default(string))
             {
@@ -538,22 +494,20 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;valid&quot;, &quot;value&quot;: &quot;The quick brown fox jumps
-            /// over the lazy dog&quot; or &quot;scenario&quot;: &quot;null&quot;,
-            /// &quot;value&quot;: null or &quot;scenario&quot;: &quot;empty&quot;,
-            /// &quot;value&quot;: &quot;&quot;
+            /// Send a post request with header values "scenario": "valid", "value": "The
+            /// quick brown fox jumps over the lazy dog" or "scenario": "null", "value":
+            /// null or "scenario": "empty", "value": ""
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;
+            /// Send a post request with header values "scenario": "valid" or "null" or
+            /// "empty"
             /// </param>
             /// <param name='value'>
-            /// Send a post request with header values &quot;The quick brown fox jumps
-            /// over the lazy dog&quot; or null or &quot;&quot;
+            /// Send a post request with header values "The quick brown fox jumps over the
+            /// lazy dog" or null or ""
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -564,15 +518,15 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Get a response with header values &quot;The quick brown fox jumps over the
-            /// lazy dog&quot; or null or &quot;&quot;
+            /// Get a response with header values "The quick brown fox jumps over the lazy
+            /// dog" or null or ""
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;
+            /// Send a post request with header values "scenario": "valid" or "null" or
+            /// "empty"
             /// </param>
             public static void ResponseString(this IHeader operations, string scenario)
             {
@@ -580,15 +534,15 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Get a response with header values &quot;The quick brown fox jumps over the
-            /// lazy dog&quot; or null or &quot;&quot;
+            /// Get a response with header values "The quick brown fox jumps over the lazy
+            /// dog" or null or ""
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;
+            /// Send a post request with header values "scenario": "valid" or "null" or
+            /// "empty"
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -599,21 +553,17 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01&quot; or
-            /// &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;:
-            /// &quot;0001-01-01&quot;
+            /// Send a post request with header values "scenario": "valid", "value":
+            /// "2010-01-01" or "scenario": "min", "value": "0001-01-01"
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;valid&quot; or &quot;min&quot;
+            /// Send a post request with header values "scenario": "valid" or "min"
             /// </param>
             /// <param name='value'>
-            /// Send a post request with header values &quot;2010-01-01&quot; or
-            /// &quot;0001-01-01&quot;
+            /// Send a post request with header values "2010-01-01" or "0001-01-01"
             /// </param>
             public static void ParamDate(this IHeader operations, string scenario, DateTime? value)
             {
@@ -621,21 +571,17 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01&quot; or
-            /// &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;:
-            /// &quot;0001-01-01&quot;
+            /// Send a post request with header values "scenario": "valid", "value":
+            /// "2010-01-01" or "scenario": "min", "value": "0001-01-01"
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;valid&quot; or &quot;min&quot;
+            /// Send a post request with header values "scenario": "valid" or "min"
             /// </param>
             /// <param name='value'>
-            /// Send a post request with header values &quot;2010-01-01&quot; or
-            /// &quot;0001-01-01&quot;
+            /// Send a post request with header values "2010-01-01" or "0001-01-01"
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -646,15 +592,13 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Get a response with header values &quot;2010-01-01&quot; or
-            /// &quot;0001-01-01&quot;
+            /// Get a response with header values "2010-01-01" or "0001-01-01"
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;valid&quot; or &quot;min&quot;
+            /// Send a post request with header values "scenario": "valid" or "min"
             /// </param>
             public static void ResponseDate(this IHeader operations, string scenario)
             {
@@ -662,15 +606,13 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Get a response with header values &quot;2010-01-01&quot; or
-            /// &quot;0001-01-01&quot;
+            /// Get a response with header values "2010-01-01" or "0001-01-01"
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;valid&quot; or &quot;min&quot;
+            /// Send a post request with header values "scenario": "valid" or "min"
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -681,21 +623,19 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01T12:34:56Z&quot; or
-            /// &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;:
-            /// &quot;0001-01-01T00:00:00Z&quot;
+            /// Send a post request with header values "scenario": "valid", "value":
+            /// "2010-01-01T12:34:56Z" or "scenario": "min", "value":
+            /// "0001-01-01T00:00:00Z"
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;valid&quot; or &quot;min&quot;
+            /// Send a post request with header values "scenario": "valid" or "min"
             /// </param>
             /// <param name='value'>
-            /// Send a post request with header values &quot;2010-01-01T12:34:56Z&quot; or
-            /// &quot;0001-01-01T00:00:00Z&quot;
+            /// Send a post request with header values "2010-01-01T12:34:56Z" or
+            /// "0001-01-01T00:00:00Z"
             /// </param>
             public static void ParamDatetime(this IHeader operations, string scenario, DateTime? value)
             {
@@ -703,21 +643,19 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01T12:34:56Z&quot; or
-            /// &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;:
-            /// &quot;0001-01-01T00:00:00Z&quot;
+            /// Send a post request with header values "scenario": "valid", "value":
+            /// "2010-01-01T12:34:56Z" or "scenario": "min", "value":
+            /// "0001-01-01T00:00:00Z"
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;valid&quot; or &quot;min&quot;
+            /// Send a post request with header values "scenario": "valid" or "min"
             /// </param>
             /// <param name='value'>
-            /// Send a post request with header values &quot;2010-01-01T12:34:56Z&quot; or
-            /// &quot;0001-01-01T00:00:00Z&quot;
+            /// Send a post request with header values "2010-01-01T12:34:56Z" or
+            /// "0001-01-01T00:00:00Z"
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -728,15 +666,14 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Get a response with header values &quot;2010-01-01T12:34:56Z&quot; or
-            /// &quot;0001-01-01T00:00:00Z&quot;
+            /// Get a response with header values "2010-01-01T12:34:56Z" or
+            /// "0001-01-01T00:00:00Z"
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;valid&quot; or &quot;min&quot;
+            /// Send a post request with header values "scenario": "valid" or "min"
             /// </param>
             public static void ResponseDatetime(this IHeader operations, string scenario)
             {
@@ -744,15 +681,14 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Get a response with header values &quot;2010-01-01T12:34:56Z&quot; or
-            /// &quot;0001-01-01T00:00:00Z&quot;
+            /// Get a response with header values "2010-01-01T12:34:56Z" or
+            /// "0001-01-01T00:00:00Z"
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;valid&quot; or &quot;min&quot;
+            /// Send a post request with header values "scenario": "valid" or "min"
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -763,18 +699,17 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;valid&quot;, &quot;value&quot;: &quot;啊齄丂狛狜隣郎隣兀﨩&quot;
+            /// Send a post request with header values "scenario": "valid", "value":
+            /// "啊齄丂狛狜隣郎隣兀﨩"
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;valid&quot;
+            /// Send a post request with header values "scenario": "valid"
             /// </param>
             /// <param name='value'>
-            /// Send a post request with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;
+            /// Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
             /// </param>
             public static void ParamByte(this IHeader operations, string scenario, byte[] value)
             {
@@ -782,18 +717,17 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;valid&quot;, &quot;value&quot;: &quot;啊齄丂狛狜隣郎隣兀﨩&quot;
+            /// Send a post request with header values "scenario": "valid", "value":
+            /// "啊齄丂狛狜隣郎隣兀﨩"
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;valid&quot;
+            /// Send a post request with header values "scenario": "valid"
             /// </param>
             /// <param name='value'>
-            /// Send a post request with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;
+            /// Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -804,14 +738,13 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Get a response with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;
+            /// Get a response with header values "啊齄丂狛狜隣郎隣兀﨩"
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;valid&quot;
+            /// Send a post request with header values "scenario": "valid"
             /// </param>
             public static void ResponseByte(this IHeader operations, string scenario)
             {
@@ -819,14 +752,13 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Get a response with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;
+            /// Get a response with header values "啊齄丂狛狜隣郎隣兀﨩"
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;valid&quot;
+            /// Send a post request with header values "scenario": "valid"
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -837,21 +769,19 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;valid&quot;, &quot;value&quot;: &quot;GREY&quot; or
-            /// &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null
+            /// Send a post request with header values "scenario": "valid", "value":
+            /// "GREY" or "scenario": "null", "value": null
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;
+            /// Send a post request with header values "scenario": "valid" or "null" or
+            /// "empty"
             /// </param>
             /// <param name='value'>
-            /// Send a post request with header values &apos;GREY&apos; . Possible values
-            /// for this parameter include: &apos;White&apos;, &apos;black&apos;,
-            /// &apos;GREY&apos;
+            /// Send a post request with header values 'GREY' . Possible values for this
+            /// parameter include: 'White', 'black', 'GREY'
             /// </param>
             public static void ParamEnum(this IHeader operations, string scenario, GreyscaleColors? value = default(GreyscaleColors?))
             {
@@ -859,21 +789,19 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;valid&quot;, &quot;value&quot;: &quot;GREY&quot; or
-            /// &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null
+            /// Send a post request with header values "scenario": "valid", "value":
+            /// "GREY" or "scenario": "null", "value": null
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;
+            /// Send a post request with header values "scenario": "valid" or "null" or
+            /// "empty"
             /// </param>
             /// <param name='value'>
-            /// Send a post request with header values &apos;GREY&apos; . Possible values
-            /// for this parameter include: &apos;White&apos;, &apos;black&apos;,
-            /// &apos;GREY&apos;
+            /// Send a post request with header values 'GREY' . Possible values for this
+            /// parameter include: 'White', 'black', 'GREY'
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -884,14 +812,14 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Get a response with header values &quot;GREY&quot; or null
+            /// Get a response with header values "GREY" or null
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;
+            /// Send a post request with header values "scenario": "valid" or "null" or
+            /// "empty"
             /// </param>
             public static void ResponseEnum(this IHeader operations, string scenario)
             {
@@ -899,14 +827,14 @@ namespace Fixtures.SwaggerBatHeader
             }
 
             /// <summary>
-            /// Get a response with header values &quot;GREY&quot; or null
+            /// Get a response with header values "GREY" or null
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='scenario'>
-            /// Send a post request with header values &quot;scenario&quot;:
-            /// &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;
+            /// Send a post request with header values "scenario": "valid" or "null" or
+            /// "empty"
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.

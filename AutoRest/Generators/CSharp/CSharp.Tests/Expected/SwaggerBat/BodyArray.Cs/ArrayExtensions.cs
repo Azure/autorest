@@ -199,7 +199,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get boolean array value [true, &apos;boolean&apos;, false]
+            /// Get boolean array value [true, 'boolean', false]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -210,7 +210,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get boolean array value [true, &apos;boolean&apos;, false]
+            /// Get boolean array value [true, 'boolean', false]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -306,7 +306,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get integer array value [1, &apos;integer&apos;, 0]
+            /// Get integer array value [1, 'integer', 0]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -317,7 +317,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get integer array value [1, &apos;integer&apos;, 0]
+            /// Get integer array value [1, 'integer', 0]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -413,7 +413,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get long array value [1, &apos;integer&apos;, 0]
+            /// Get long array value [1, 'integer', 0]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -424,7 +424,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get long array value [1, &apos;integer&apos;, 0]
+            /// Get long array value [1, 'integer', 0]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -520,7 +520,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get boolean array value [1.0, &apos;number&apos;, 0.0]
+            /// Get boolean array value [1.0, 'number', 0.0]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -531,7 +531,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get boolean array value [1.0, &apos;number&apos;, 0.0]
+            /// Get boolean array value [1.0, 'number', 0.0]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -627,7 +627,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get boolean array value [1.0, &apos;number&apos;, 0.0]
+            /// Get boolean array value [1.0, 'number', 0.0]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -638,7 +638,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get boolean array value [1.0, &apos;number&apos;, 0.0]
+            /// Get boolean array value [1.0, 'number', 0.0]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -653,8 +653,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get string array value [&apos;foo1&apos;, &apos;foo2&apos;,
-            /// &apos;foo3&apos;]
+            /// Get string array value ['foo1', 'foo2', 'foo3']
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -665,8 +664,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get string array value [&apos;foo1&apos;, &apos;foo2&apos;,
-            /// &apos;foo3&apos;]
+            /// Get string array value ['foo1', 'foo2', 'foo3']
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -681,7 +679,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]
+            /// Set array value ['foo1', 'foo2', 'foo3']
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -694,7 +692,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]
+            /// Set array value ['foo1', 'foo2', 'foo3']
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -710,7 +708,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get string array value [&apos;foo&apos;, null, &apos;foo2&apos;]
+            /// Get string array value ['foo', null, 'foo2']
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -721,7 +719,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get string array value [&apos;foo&apos;, null, &apos;foo2&apos;]
+            /// Get string array value ['foo', null, 'foo2']
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -736,7 +734,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get string array value [&apos;foo&apos;, 123, &apos;foo2&apos;]
+            /// Get string array value ['foo', 123, 'foo2']
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -747,7 +745,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get string array value [&apos;foo&apos;, 123, &apos;foo2&apos;]
+            /// Get string array value ['foo', 123, 'foo2']
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -762,8 +760,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get integer array value [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;,
-            /// &apos;1492-10-12&apos;]
+            /// Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12']
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -774,8 +771,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get integer array value [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;,
-            /// &apos;1492-10-12&apos;]
+            /// Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12']
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -790,8 +786,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Set array value  [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;,
-            /// &apos;1492-10-12&apos;]
+            /// Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -804,8 +799,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Set array value  [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;,
-            /// &apos;1492-10-12&apos;]
+            /// Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -821,7 +815,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get date array value [&apos;2012-01-01&apos;, null, &apos;1776-07-04&apos;]
+            /// Get date array value ['2012-01-01', null, '1776-07-04']
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -832,7 +826,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get date array value [&apos;2012-01-01&apos;, null, &apos;1776-07-04&apos;]
+            /// Get date array value ['2012-01-01', null, '1776-07-04']
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -847,7 +841,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get date array value [&apos;2011-03-22&apos;, &apos;date&apos;]
+            /// Get date array value ['2011-03-22', 'date']
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -858,7 +852,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get date array value [&apos;2011-03-22&apos;, &apos;date&apos;]
+            /// Get date array value ['2011-03-22', 'date']
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -873,9 +867,8 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get date-time array value [&apos;2000-12-01t00:00:01z&apos;,
-            /// &apos;1980-01-02T00:11:35+01:00&apos;,
-            /// &apos;1492-10-12T10:15:01-08:00&apos;]
+            /// Get date-time array value ['2000-12-01t00:00:01z',
+            /// '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -886,9 +879,8 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get date-time array value [&apos;2000-12-01t00:00:01z&apos;,
-            /// &apos;1980-01-02T00:11:35+01:00&apos;,
-            /// &apos;1492-10-12T10:15:01-08:00&apos;]
+            /// Get date-time array value ['2000-12-01t00:00:01z',
+            /// '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -903,9 +895,8 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Set array value  [&apos;2000-12-01t00:00:01z&apos;,
-            /// &apos;1980-01-02T00:11:35+01:00&apos;,
-            /// &apos;1492-10-12T10:15:01-08:00&apos;]
+            /// Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00',
+            /// '1492-10-12T10:15:01-08:00']
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -918,9 +909,8 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Set array value  [&apos;2000-12-01t00:00:01z&apos;,
-            /// &apos;1980-01-02T00:11:35+01:00&apos;,
-            /// &apos;1492-10-12T10:15:01-08:00&apos;]
+            /// Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00',
+            /// '1492-10-12T10:15:01-08:00']
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -936,7 +926,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get date array value [&apos;2000-12-01t00:00:01z&apos;, null]
+            /// Get date array value ['2000-12-01t00:00:01z', null]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -947,7 +937,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get date array value [&apos;2000-12-01t00:00:01z&apos;, null]
+            /// Get date array value ['2000-12-01t00:00:01z', null]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -962,8 +952,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get date array value [&apos;2000-12-01t00:00:01z&apos;,
-            /// &apos;date-time&apos;]
+            /// Get date array value ['2000-12-01t00:00:01z', 'date-time']
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -974,8 +963,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get date array value [&apos;2000-12-01t00:00:01z&apos;,
-            /// &apos;date-time&apos;]
+            /// Get date array value ['2000-12-01t00:00:01z', 'date-time']
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1129,9 +1117,8 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get array of complex type with null item [{&apos;integer&apos;: 1
-            /// &apos;string&apos;: &apos;2&apos;}, null, {&apos;integer&apos;: 5,
-            /// &apos;string&apos;: &apos;6&apos;}]
+            /// Get array of complex type with null item [{'integer': 1 'string': '2'},
+            /// null, {'integer': 5, 'string': '6'}]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1142,9 +1129,8 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get array of complex type with null item [{&apos;integer&apos;: 1
-            /// &apos;string&apos;: &apos;2&apos;}, null, {&apos;integer&apos;: 5,
-            /// &apos;string&apos;: &apos;6&apos;}]
+            /// Get array of complex type with null item [{'integer': 1 'string': '2'},
+            /// null, {'integer': 5, 'string': '6'}]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1159,9 +1145,8 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get array of complex type with empty item [{&apos;integer&apos;: 1
-            /// &apos;string&apos;: &apos;2&apos;}, {}, {&apos;integer&apos;: 5,
-            /// &apos;string&apos;: &apos;6&apos;}]
+            /// Get array of complex type with empty item [{'integer': 1 'string': '2'},
+            /// {}, {'integer': 5, 'string': '6'}]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1172,9 +1157,8 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get array of complex type with empty item [{&apos;integer&apos;: 1
-            /// &apos;string&apos;: &apos;2&apos;}, {}, {&apos;integer&apos;: 5,
-            /// &apos;string&apos;: &apos;6&apos;}]
+            /// Get array of complex type with empty item [{'integer': 1 'string': '2'},
+            /// {}, {'integer': 5, 'string': '6'}]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1189,10 +1173,8 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get array of complex type with [{&apos;integer&apos;: 1
-            /// &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3,
-            /// &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5,
-            /// &apos;string&apos;: &apos;6&apos;}]
+            /// Get array of complex type with [{'integer': 1 'string': '2'}, {'integer':
+            /// 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1203,10 +1185,8 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get array of complex type with [{&apos;integer&apos;: 1
-            /// &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3,
-            /// &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5,
-            /// &apos;string&apos;: &apos;6&apos;}]
+            /// Get array of complex type with [{'integer': 1 'string': '2'}, {'integer':
+            /// 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1221,10 +1201,8 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Put an array of complex type with values [{&apos;integer&apos;: 1
-            /// &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3,
-            /// &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5,
-            /// &apos;string&apos;: &apos;6&apos;}]
+            /// Put an array of complex type with values [{'integer': 1 'string': '2'},
+            /// {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1237,10 +1215,8 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Put an array of complex type with values [{&apos;integer&apos;: 1
-            /// &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3,
-            /// &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5,
-            /// &apos;string&apos;: &apos;6&apos;}]
+            /// Put an array of complex type with values [{'integer': 1 'string': '2'},
+            /// {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1308,8 +1284,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;,
-            /// &apos;3&apos;], null, [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]
+            /// Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1320,8 +1295,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;,
-            /// &apos;3&apos;], null, [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]
+            /// Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1336,8 +1310,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;,
-            /// &apos;3&apos;], [], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]
+            /// Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1348,8 +1321,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;,
-            /// &apos;3&apos;], [], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]
+            /// Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1364,9 +1336,8 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;,
-            /// &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;],
-            /// [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]
+            /// Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7',
+            /// '8', '9']]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1377,9 +1348,8 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;,
-            /// &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;],
-            /// [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]
+            /// Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7',
+            /// '8', '9']]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1394,9 +1364,8 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Put An array of array of strings [[&apos;1&apos;, &apos;2&apos;,
-            /// &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;],
-            /// [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]
+            /// Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7',
+            /// '8', '9']]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1409,9 +1378,8 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Put An array of array of strings [[&apos;1&apos;, &apos;2&apos;,
-            /// &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;],
-            /// [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]
+            /// Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7',
+            /// '8', '9']]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1480,10 +1448,8 @@ namespace Fixtures.SwaggerBatBodyArray
 
             /// <summary>
             /// Get an array of Dictionaries of type &lt;string, string&gt; with value
-            /// [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;,
-            /// &apos;3&apos;: &apos;three&apos;}, null, {&apos;7&apos;:
-            /// &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;:
-            /// &apos;nine&apos;}]
+            /// [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8':
+            /// 'eight', '9': 'nine'}]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1495,10 +1461,8 @@ namespace Fixtures.SwaggerBatBodyArray
 
             /// <summary>
             /// Get an array of Dictionaries of type &lt;string, string&gt; with value
-            /// [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;,
-            /// &apos;3&apos;: &apos;three&apos;}, null, {&apos;7&apos;:
-            /// &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;:
-            /// &apos;nine&apos;}]
+            /// [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8':
+            /// 'eight', '9': 'nine'}]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1514,9 +1478,8 @@ namespace Fixtures.SwaggerBatBodyArray
 
             /// <summary>
             /// Get an array of Dictionaries of type &lt;string, string&gt; with value
-            /// [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;,
-            /// &apos;3&apos;: &apos;three&apos;}, {}, {&apos;7&apos;: &apos;seven&apos;,
-            /// &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]
+            /// [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight',
+            /// '9': 'nine'}]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1528,9 +1491,8 @@ namespace Fixtures.SwaggerBatBodyArray
 
             /// <summary>
             /// Get an array of Dictionaries of type &lt;string, string&gt; with value
-            /// [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;,
-            /// &apos;3&apos;: &apos;three&apos;}, {}, {&apos;7&apos;: &apos;seven&apos;,
-            /// &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]
+            /// [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight',
+            /// '9': 'nine'}]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1546,11 +1508,8 @@ namespace Fixtures.SwaggerBatBodyArray
 
             /// <summary>
             /// Get an array of Dictionaries of type &lt;string, string&gt; with value
-            /// [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;,
-            /// &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;,
-            /// &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;},
-            /// {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;,
-            /// &apos;9&apos;: &apos;nine&apos;}]
+            /// [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6':
+            /// 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1562,11 +1521,8 @@ namespace Fixtures.SwaggerBatBodyArray
 
             /// <summary>
             /// Get an array of Dictionaries of type &lt;string, string&gt; with value
-            /// [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;,
-            /// &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;,
-            /// &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;},
-            /// {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;,
-            /// &apos;9&apos;: &apos;nine&apos;}]
+            /// [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6':
+            /// 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1582,11 +1538,8 @@ namespace Fixtures.SwaggerBatBodyArray
 
             /// <summary>
             /// Get an array of Dictionaries of type &lt;string, string&gt; with value
-            /// [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;,
-            /// &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;,
-            /// &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;},
-            /// {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;,
-            /// &apos;9&apos;: &apos;nine&apos;}]
+            /// [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6':
+            /// 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1600,11 +1553,8 @@ namespace Fixtures.SwaggerBatBodyArray
 
             /// <summary>
             /// Get an array of Dictionaries of type &lt;string, string&gt; with value
-            /// [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;,
-            /// &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;,
-            /// &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;},
-            /// {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;,
-            /// &apos;9&apos;: &apos;nine&apos;}]
+            /// [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6':
+            /// 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method

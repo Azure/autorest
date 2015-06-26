@@ -330,7 +330,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// The operations group for this extension method
             /// </param>
             /// <param name='complexBody'>
-            /// Please put &apos;goodrequest&apos;, &apos;&apos;, and null
+            /// Please put 'goodrequest', '', and null
             /// </param>
             public static void PutString(this IPrimitive operations, StringWrapper complexBody)
             {
@@ -344,7 +344,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// The operations group for this extension method
             /// </param>
             /// <param name='complexBody'>
-            /// Please put &apos;goodrequest&apos;, &apos;&apos;, and null
+            /// Please put 'goodrequest', '', and null
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -387,7 +387,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// The operations group for this extension method
             /// </param>
             /// <param name='complexBody'>
-            /// Please put &apos;0001-01-01&apos; and &apos;2016-02-29&apos;
+            /// Please put '0001-01-01' and '2016-02-29'
             /// </param>
             public static void PutDate(this IPrimitive operations, DateWrapper complexBody)
             {
@@ -401,7 +401,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// The operations group for this extension method
             /// </param>
             /// <param name='complexBody'>
-            /// Please put &apos;0001-01-01&apos; and &apos;2016-02-29&apos;
+            /// Please put '0001-01-01' and '2016-02-29'
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -444,8 +444,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// The operations group for this extension method
             /// </param>
             /// <param name='complexBody'>
-            /// Please put &apos;0001-01-01T12:00:00-04:00&apos; and
-            /// &apos;2015-05-18T11:38:00-08:00&apos;
+            /// Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
             /// </param>
             public static void PutDateTime(this IPrimitive operations, DatetimeWrapper complexBody)
             {
@@ -459,8 +458,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// The operations group for this extension method
             /// </param>
             /// <param name='complexBody'>
-            /// Please put &apos;0001-01-01T12:00:00-04:00&apos; and
-            /// &apos;2015-05-18T11:38:00-08:00&apos;
+            /// Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.

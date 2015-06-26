@@ -110,7 +110,7 @@ namespace Fixtures.SwaggerBatBodyComplex
         /// Put complex types with string properties
         /// </summary>
         /// <param name='complexBody'>
-        /// Please put &apos;goodrequest&apos;, &apos;&apos;, and null
+        /// Please put 'goodrequest', '', and null
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -127,7 +127,7 @@ namespace Fixtures.SwaggerBatBodyComplex
         /// Put complex types with date properties
         /// </summary>
         /// <param name='complexBody'>
-        /// Please put &apos;0001-01-01&apos; and &apos;2016-02-29&apos;
+        /// Please put '0001-01-01' and '2016-02-29'
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -144,8 +144,8 @@ namespace Fixtures.SwaggerBatBodyComplex
         /// Put complex types with datetime properties
         /// </summary>
         /// <param name='complexBody'>
-        /// Please put &apos;0001-01-01T12:00:00-04:00&apos; and
-        /// &apos;2015-05-18T11:38:00-08:00&apos;
+        /// Please put '0001-01-01T12:00:00-04:00' and
+        /// '2015-05-18T11:38:00-08:00'
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.

@@ -11,6 +11,8 @@ namespace Microsoft.Rest.Generator
 {
     public abstract class CodeGenerator
     {
+        public const string SkipUrlEncodingExtension = "x-ms-skip-url-encoding";
+
         protected CodeGenerator(Settings settings)
         {
             Settings = settings;

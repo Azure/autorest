@@ -19,25 +19,24 @@
   <ItemGroup>
     <Content Include="package.json" />
     <Compile Include="AcceptanceTests\coverage.js" />
+    <Compile Include="AcceptanceTests\azureSpecialProperties.js">
+      <TestFramework>Mocha</TestFramework>
+    </Compile>
     <Compile Include="AcceptanceTests\subscriptionIdApiVersion.js">
       <TestFramework>Mocha</TestFramework>
     </Compile>
     <Compile Include="AcceptanceTests\head.js" />
     <Compile Include="AcceptanceTests\paging.js" />
     <Compile Include="AcceptanceTests\resourceFlattening.js" />
-    <Compile Include="Expected\Redis\models\CacheSku.js" />
-    <Compile Include="Expected\Redis\models\index.js" />
-    <Compile Include="Expected\Redis\models\KeyValuePairStringString.js" />
-    <Compile Include="Expected\Redis\models\ListKeysResponse.js" />
-    <Compile Include="Expected\Redis\models\RedisAccessKeys.js" />
-    <Compile Include="Expected\Redis\models\RedisResource.js" />
-    <Compile Include="Expected\Redis\models\RedisResourceListResponse.js" />
-    <Compile Include="Expected\Redis\models\RedisResponsePropertiesWithAccessKey.js" />
-    <Compile Include="Expected\Redis\models\RegenerateKeyRequest.js" />
-    <Compile Include="Expected\Redis\models\ResourceSpec.js" />
-    <Compile Include="Expected\Redis\operations\index.js" />
-    <Compile Include="Expected\Redis\operations\Redis.js" />
-    <Compile Include="Expected\Redis\RedisManagementClient.js" />
+    <Compile Include="Expected\SwaggerBat\AzureSpecials\AutoRestAzureSpecialParametersTestClient.js" />
+    <Compile Include="Expected\SwaggerBat\AzureSpecials\models\ErrorModel.js" />
+    <Compile Include="Expected\SwaggerBat\AzureSpecials\models\index.js" />
+    <Compile Include="Expected\SwaggerBat\AzureSpecials\operations\ApiVersionDefault.js" />
+    <Compile Include="Expected\SwaggerBat\AzureSpecials\operations\ApiVersionLocal.js" />
+    <Compile Include="Expected\SwaggerBat\AzureSpecials\operations\index.js" />
+    <Compile Include="Expected\SwaggerBat\AzureSpecials\operations\SkipUrlEncoding.js" />
+    <Compile Include="Expected\SwaggerBat\AzureSpecials\operations\SubscriptionInCredentials.js" />
+    <Compile Include="Expected\SwaggerBat\AzureSpecials\operations\SubscriptionInMethod.js" />
     <Compile Include="Expected\SwaggerBat\Head\AutoRestHeadTestService.js" />
     <Compile Include="Expected\SwaggerBat\Head\models\index.js" />
     <Compile Include="Expected\SwaggerBat\Head\operations\HttpSuccess.js" />
@@ -71,9 +70,9 @@
     <Compile Include="Expected\SwaggerBat\ResourceFlattening\models\ResourceCollection.js" />
     <Compile Include="Expected\SwaggerBat\SubscriptionIdApiVersion\MicrosoftAzureTestUrl.js" />
     <Compile Include="Expected\SwaggerBat\SubscriptionIdApiVersion\models\ErrorModel.js" />
-    <Compile Include="Expected\SwaggerBat\SubscriptionIdApiVersion\models\Group.js" />
     <Compile Include="Expected\SwaggerBat\SubscriptionIdApiVersion\models\index.js" />
-    <Compile Include="Expected\SwaggerBat\SubscriptionIdApiVersion\operations\GroupOperations.js" />
+    <Compile Include="Expected\SwaggerBat\SubscriptionIdApiVersion\models\SampleResourceGroup.js" />
+    <Compile Include="Expected\SwaggerBat\SubscriptionIdApiVersion\operations\Group.js" />
     <Compile Include="Expected\SwaggerBat\SubscriptionIdApiVersion\operations\index.js" />
     <Compile Include="unit.js" />
     <Content Include="AcceptanceTests\testlist.txt" />
@@ -105,7 +104,6 @@
     <Content Include="bin\Net45-Debug\Swagger\swagger-recursive-type.json" />
     <Content Include="bin\Net45-Debug\Swagger\swagger-simple-spec.json" />
     <Content Include="bin\Net45-Debug\Swagger\swagger-streaming.json" />
-    <Content Include="obj\Net45-Debug\AutoRest.Generator.Azure.NodeJS.Tests.csproj.FileListAbsolute.txt" />
     <Content Include="RegenerateExpectedClasses.ps1" />
   </ItemGroup>
   <ItemGroup>
@@ -114,10 +112,10 @@
     <Folder Include="bin\Net45-Debug" />
     <Folder Include="bin\Net45-Debug\Swagger" />
     <Folder Include="Expected" />
-    <Folder Include="Expected\Redis\" />
-    <Folder Include="Expected\Redis\models\" />
-    <Folder Include="Expected\Redis\operations\" />
     <Folder Include="Expected\SwaggerBat\" />
+    <Folder Include="Expected\SwaggerBat\AzureSpecials\" />
+    <Folder Include="Expected\SwaggerBat\AzureSpecials\models\" />
+    <Folder Include="Expected\SwaggerBat\AzureSpecials\operations\" />
     <Folder Include="Expected\SwaggerBat\Head\" />
     <Folder Include="Expected\SwaggerBat\Head\models\" />
     <Folder Include="Expected\SwaggerBat\Head\operations\" />
@@ -134,8 +132,6 @@
     <Folder Include="Expected\SwaggerBat\SubscriptionIdApiVersion\" />
     <Folder Include="Expected\SwaggerBat\SubscriptionIdApiVersion\models\" />
     <Folder Include="Expected\SwaggerBat\SubscriptionIdApiVersion\operations\" />
-    <Folder Include="obj" />
-    <Folder Include="obj\Net45-Debug" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <!--Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them.-->

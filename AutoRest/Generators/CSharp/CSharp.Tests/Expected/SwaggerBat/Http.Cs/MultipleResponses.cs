@@ -33,8 +33,7 @@ namespace Fixtures.SwaggerBatHttp
         public AutoRestHttpInfrastructureTestService Client { get; private set; }
 
         /// <summary>
-        /// Send a 200 response with valid payload: {&apos;statusCode&apos;:
-        /// &apos;200&apos;}
+        /// Send a 200 response with valid payload: {'statusCode': '200'}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -182,8 +181,7 @@ namespace Fixtures.SwaggerBatHttp
         }
 
         /// <summary>
-        /// Send a 201 response with valid payload: {&apos;statusCode&apos;:
-        /// &apos;201&apos;}
+        /// Send a 201 response with valid payload: {'statusCode': '201'}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -331,8 +329,8 @@ namespace Fixtures.SwaggerBatHttp
         }
 
         /// <summary>
-        /// Send a 400 response with valid error payload: {&apos;status&apos;: 400,
-        /// &apos;message&apos;: &apos;client error&apos;}
+        /// Send a 400 response with valid error payload: {'status': 400, 'message':
+        /// 'client error'}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -406,8 +404,7 @@ namespace Fixtures.SwaggerBatHttp
         }
 
         /// <summary>
-        /// Send a 200 response with valid payload: {&apos;statusCode&apos;:
-        /// &apos;200&apos;}
+        /// Send a 200 response with valid payload: {'statusCode': '200'}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -486,8 +483,8 @@ namespace Fixtures.SwaggerBatHttp
         }
 
         /// <summary>
-        /// Send a 201 response with valid payload: {&apos;statusCode&apos;:
-        /// &apos;201&apos;, &apos;textStatusCode&apos;: &apos;Created&apos;}
+        /// Send a 201 response with valid payload: {'statusCode': '201',
+        /// 'textStatusCode': 'Created'}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -566,8 +563,8 @@ namespace Fixtures.SwaggerBatHttp
         }
 
         /// <summary>
-        /// Send a 400 response with valid payload: {&apos;code&apos;:
-        /// &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}
+        /// Send a 400 response with valid payload: {'code': '400', 'message': 'client
+        /// error'}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -646,8 +643,7 @@ namespace Fixtures.SwaggerBatHttp
         }
 
         /// <summary>
-        /// Send a 200 response with valid payload: {&apos;statusCode&apos;:
-        /// &apos;200&apos;}
+        /// Send a 200 response with valid payload: {'statusCode': '200'}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -731,8 +727,7 @@ namespace Fixtures.SwaggerBatHttp
         }
 
         /// <summary>
-        /// Send a 200 response with valid payload: {&apos;httpCode&apos;:
-        /// &apos;201&apos;}
+        /// Send a 200 response with valid payload: {'httpCode': '201'}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -816,8 +811,7 @@ namespace Fixtures.SwaggerBatHttp
         }
 
         /// <summary>
-        /// Send a 200 response with valid payload: {&apos;httpStatusCode&apos;:
-        /// &apos;404&apos;}
+        /// Send a 200 response with valid payload: {'httpStatusCode': '404'}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -901,8 +895,8 @@ namespace Fixtures.SwaggerBatHttp
         }
 
         /// <summary>
-        /// Send a 400 response with valid payload: {&apos;code&apos;:
-        /// &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}
+        /// Send a 400 response with valid payload: {'code': '400', 'message': 'client
+        /// error'}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1124,8 +1118,8 @@ namespace Fixtures.SwaggerBatHttp
         }
 
         /// <summary>
-        /// Send a 400 response with valid payload: {&apos;code&apos;:
-        /// &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}
+        /// Send a 400 response with valid payload: {'code': '400', 'message': 'client
+        /// error'}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1194,8 +1188,7 @@ namespace Fixtures.SwaggerBatHttp
         }
 
         /// <summary>
-        /// Send a 202 response with an unexpected payload {&apos;property&apos;:
-        /// &apos;value&apos;}
+        /// Send a 202 response with an unexpected payload {'property': 'value'}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1387,8 +1380,7 @@ namespace Fixtures.SwaggerBatHttp
         }
 
         /// <summary>
-        /// Send a 400 response with an unexpected payload {&apos;property&apos;:
-        /// &apos;value&apos;}
+        /// Send a 400 response with an unexpected payload {'property': 'value'}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1452,8 +1444,7 @@ namespace Fixtures.SwaggerBatHttp
         }
 
         /// <summary>
-        /// Send a 200 response with valid payload: {&apos;statusCode&apos;:
-        /// &apos;200&apos;}
+        /// Send a 200 response with valid payload: {'statusCode': '200'}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1593,8 +1584,7 @@ namespace Fixtures.SwaggerBatHttp
         }
 
         /// <summary>
-        /// Send a 400 response with valid payload: {&apos;statusCode&apos;:
-        /// &apos;400&apos;}
+        /// Send a 400 response with valid payload: {'statusCode': '400'}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1734,8 +1724,7 @@ namespace Fixtures.SwaggerBatHttp
         }
 
         /// <summary>
-        /// Send a 200 response with invalid payload: {&apos;statusCode&apos;:
-        /// &apos;200&apos;}
+        /// Send a 200 response with invalid payload: {'statusCode': '200'}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1863,8 +1852,7 @@ namespace Fixtures.SwaggerBatHttp
         }
 
         /// <summary>
-        /// Send a 400 response with valid payload: {&apos;statusCode&apos;:
-        /// &apos;400&apos;}
+        /// Send a 400 response with valid payload: {'statusCode': '400'}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -2062,7 +2050,7 @@ namespace Fixtures.SwaggerBatHttp
         }
 
         /// <summary>
-        /// Send a 200 response with payload {&apos;statusCode&apos;: &apos;200&apos;}
+        /// Send a 200 response with payload {'statusCode': '200'}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -2131,8 +2119,7 @@ namespace Fixtures.SwaggerBatHttp
         }
 
         /// <summary>
-        /// Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;:
-        /// &apos;200&apos;}
+        /// Send a 200 response with invalid payload {'statusCodeInvalid': '200'}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -2271,7 +2258,7 @@ namespace Fixtures.SwaggerBatHttp
         }
 
         /// <summary>
-        /// Send a 200 response with payload {&apos;statusCode&apos;: &apos;400&apos;}
+        /// Send a 200 response with payload {'statusCode': '400'}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -2340,8 +2327,7 @@ namespace Fixtures.SwaggerBatHttp
         }
 
         /// <summary>
-        /// Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;:
-        /// &apos;400&apos;}
+        /// Send a 200 response with invalid payload {'statusCodeInvalid': '400'}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -2410,7 +2396,7 @@ namespace Fixtures.SwaggerBatHttp
         }
 
         /// <summary>
-        /// Send a 202 response with payload {&apos;statusCode&apos;: &apos;202&apos;}
+        /// Send a 202 response with payload {'statusCode': '202'}
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.

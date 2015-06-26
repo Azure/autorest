@@ -11,7 +11,7 @@ namespace Fixtures.SwaggerBatBodyComplex
     public static partial class BasicOperationsExtensions
     {
             /// <summary>
-            /// Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}
+            /// Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -22,7 +22,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             }
 
             /// <summary>
-            /// Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}
+            /// Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -37,13 +37,13 @@ namespace Fixtures.SwaggerBatBodyComplex
             }
 
             /// <summary>
-            /// Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}
+            /// Please put {id: 2, name: 'abc', color: 'Magenta'}
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='complexBody'>
-            /// Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}
+            /// Please put {id: 2, name: 'abc', color: 'Magenta'}
             /// </param>
             public static void PutValid(this IBasicOperations operations, Basic complexBody)
             {
@@ -51,13 +51,13 @@ namespace Fixtures.SwaggerBatBodyComplex
             }
 
             /// <summary>
-            /// Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}
+            /// Please put {id: 2, name: 'abc', color: 'Magenta'}
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='complexBody'>
-            /// Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}
+            /// Please put {id: 2, name: 'abc', color: 'Magenta'}
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -146,7 +146,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             }
 
             /// <summary>
-            /// Get a basic complex type while the server doesn&apos;t provide a response
+            /// Get a basic complex type while the server doesn't provide a response
             /// payload
             /// </summary>
             /// <param name='operations'>
@@ -158,7 +158,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             }
 
             /// <summary>
-            /// Get a basic complex type while the server doesn&apos;t provide a response
+            /// Get a basic complex type while the server doesn't provide a response
             /// payload
             /// </summary>
             /// <param name='operations'>

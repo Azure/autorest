@@ -6,6 +6,7 @@ $tests =
     "SwaggerBat\Head"="..\..\AcceptanceTests\swagger\head.json";
     "SwaggerBat\Report"="..\..\AcceptanceTests\swagger\azure-report.json";
     "SwaggerBat\SubscriptionIdApiVersion"="..\..\AcceptanceTests\swagger\subscriptionId-apiVersion.json";
+    "SwaggerBat\AzureSpecials"="..\..\AcceptanceTests\swagger\azure-special-properties.json";
 }
 
 Import-Module "$PSScriptRoot\..\..\..\..\binaries\net45\AutoRest.Core.dll"

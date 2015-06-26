@@ -39,9 +39,8 @@ describe('nodejs', function () {
           }
         });
         var result = Math.floor((passed / total) * 100);
-// TODO, 4211544: raise test coverage to 100%
         console.log('Passed: ' + passed + ', Total: ' + total + ', coverage: ' + result + '% .');
-        result.should.be.above(75);
+        result.should.equal(100);
         done();
       });
     });

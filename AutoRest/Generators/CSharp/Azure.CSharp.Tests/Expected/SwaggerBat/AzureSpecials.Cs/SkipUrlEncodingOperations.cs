@@ -33,11 +33,10 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         public AutoRestAzureSpecialParametersTestClient Client { get; private set; }
 
         /// <summary>
-        /// Get method with unencoded path parameter with value
-        /// &apos;path1/path2/path3&apos;
+        /// Get method with unencoded path parameter with value 'path1/path2/path3'
         /// </summary>
         /// <param name='unencodedPathParam'>
-        /// Unencoded path parameter with value &apos;path1/path2/path3&apos;
+        /// Unencoded path parameter with value 'path1/path2/path3'
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -121,11 +120,10 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         }
 
         /// <summary>
-        /// Get method with unencoded path parameter with value
-        /// &apos;path1/path2/path3&apos;
+        /// Get method with unencoded path parameter with value 'path1/path2/path3'
         /// </summary>
         /// <param name='unencodedPathParam'>
-        /// Unencoded path parameter with value &apos;path1/path2/path3&apos;
+        /// Unencoded path parameter with value 'path1/path2/path3'
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -209,12 +207,11 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         }
 
         /// <summary>
-        /// Get method with unencoded path parameter with value
-        /// &apos;path1/path2/path3&apos;
+        /// Get method with unencoded path parameter with value 'path1/path2/path3'
         /// </summary>
         /// <param name='unencodedPathParam'>
-        /// An unencoded path parameter with value &apos;path1/path2/path3&apos;.
-        /// Possible values for this parameter include: &apos;path1/path2/path3&apos;
+        /// An unencoded path parameter with value 'path1/path2/path3'. Possible
+        /// values for this parameter include: 'path1/path2/path3'
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -299,11 +296,10 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
 
         /// <summary>
         /// Get method with unencoded query parameter with value
-        /// &apos;value1&amp;q2=value2&amp;q3=value3&apos;
+        /// 'value1&amp;q2=value2&amp;q3=value3'
         /// </summary>
         /// <param name='q1'>
-        /// Unencoded query parameter with value
-        /// &apos;value1&amp;q2=value2&amp;q3=value3&apos;
+        /// Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -477,11 +473,10 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
 
         /// <summary>
         /// Get method with unencoded query parameter with value
-        /// &apos;value1&amp;q2=value2&amp;q3=value3&apos;
+        /// 'value1&amp;q2=value2&amp;q3=value3'
         /// </summary>
         /// <param name='q1'>
-        /// Unencoded query parameter with value
-        /// &apos;value1&amp;q2=value2&amp;q3=value3&apos;
+        /// Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -569,12 +564,12 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
 
         /// <summary>
         /// Get method with unencoded query parameter with value
-        /// &apos;value1&amp;q2=value2&amp;q3=value3&apos;
+        /// 'value1&amp;q2=value2&amp;q3=value3'
         /// </summary>
         /// <param name='q1'>
         /// An unencoded query parameter with value
-        /// &apos;value1&amp;q2=value2&amp;q3=value3&apos;. Possible values for this
-        /// parameter include: &apos;value1&amp;q2=value2&amp;q3=value3&apos;
+        /// 'value1&amp;q2=value2&amp;q3=value3'. Possible values for this parameter
+        /// include: 'value1&amp;q2=value2&amp;q3=value3'
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.

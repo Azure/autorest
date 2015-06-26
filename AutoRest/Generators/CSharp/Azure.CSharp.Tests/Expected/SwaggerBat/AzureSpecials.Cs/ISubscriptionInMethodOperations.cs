@@ -16,11 +16,11 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
     {
         /// <summary>
         /// POST method with subscriptionId modeled in the method.  pass in
-        /// subscription id = &apos;1234-5678-9012-3456&apos; to succeed
+        /// subscription id = '1234-5678-9012-3456' to succeed
         /// </summary>
         /// <param name='subscriptionId'>
         /// This should appear as a method parameter, use value
-        /// &apos;1234-5678-9012-3456&apos;
+        /// '1234-5678-9012-3456'
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -41,11 +41,11 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         Task<AzureOperationResponse> PostMethodLocalNullWithOperationResponseAsync(string subscriptionId, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// POST method with subscriptionId modeled in the method.  pass in
-        /// subscription id = &apos;1234-5678-9012-3456&apos; to succeed
+        /// subscription id = '1234-5678-9012-3456' to succeed
         /// </summary>
         /// <param name='subscriptionId'>
         /// Should appear as a method parameter -use value
-        /// &apos;1234-5678-9012-3456&apos;
+        /// '1234-5678-9012-3456'
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -53,11 +53,11 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         Task<AzureOperationResponse> PostPathLocalValidWithOperationResponseAsync(string subscriptionId, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// POST method with subscriptionId modeled in the method.  pass in
-        /// subscription id = &apos;1234-5678-9012-3456&apos; to succeed
+        /// subscription id = '1234-5678-9012-3456' to succeed
         /// </summary>
         /// <param name='subscriptionId'>
         /// The subscriptionId, which appears in the path, the value is always
-        /// &apos;1234-5678-9012-3456&apos;
+        /// '1234-5678-9012-3456'
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.

@@ -13,10 +13,9 @@ namespace Fixtures.Azure.SwaggerBatLro.Models
     {
         /// <summary>
         /// The status of the request. Possible values for this property
-        /// include: &apos;Succeeded&apos;, &apos;Failed&apos;,
-        /// &apos;canceled&apos;, &apos;Accepted&apos;, &apos;Creating&apos;,
-        /// &apos;Created&apos;, &apos;Updating&apos;, &apos;Updated&apos;,
-        /// &apos;Deleting&apos;, &apos;Deleted&apos;, &apos;OK&apos;
+        /// include: 'Succeeded', 'Failed', 'canceled', 'Accepted',
+        /// 'Creating', 'Created', 'Updating', 'Updated', 'Deleting',
+        /// 'Deleted', 'OK'
         /// </summary>
         [JsonProperty(PropertyName = "status")]
         public string Status { get; set; }

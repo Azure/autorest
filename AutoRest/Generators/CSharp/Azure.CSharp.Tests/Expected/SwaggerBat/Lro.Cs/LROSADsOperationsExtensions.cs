@@ -103,7 +103,7 @@ namespace Fixtures.Azure.SwaggerBatLro
 
             /// <summary>
             /// Long running put request, service returns a Product with
-            /// &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code
+            /// 'ProvisioningState' = 'Creating' and 201 response code
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -118,7 +118,7 @@ namespace Fixtures.Azure.SwaggerBatLro
 
             /// <summary>
             /// Long running put request, service returns a Product with
-            /// &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code
+            /// 'ProvisioningState' = 'Creating' and 201 response code
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -137,7 +137,7 @@ namespace Fixtures.Azure.SwaggerBatLro
 
             /// <summary>
             /// Long running put request, service returns a Product with
-            /// &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code
+            /// 'ProvisioningState' = 'Creating' and 201 response code
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -152,7 +152,7 @@ namespace Fixtures.Azure.SwaggerBatLro
 
             /// <summary>
             /// Long running put request, service returns a Product with
-            /// &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code
+            /// 'ProvisioningState' = 'Creating' and 201 response code
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1487,8 +1487,7 @@ namespace Fixtures.Azure.SwaggerBatLro
 
             /// <summary>
             /// Long running delete request, service returns a 202 to the initial request
-            /// receing a reponse with an invalid &apos;Location&apos; and
-            /// &apos;Retry-After&apos; headers
+            /// receing a reponse with an invalid 'Location' and 'Retry-After' headers
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1500,8 +1499,7 @@ namespace Fixtures.Azure.SwaggerBatLro
 
             /// <summary>
             /// Long running delete request, service returns a 202 to the initial request
-            /// receing a reponse with an invalid &apos;Location&apos; and
-            /// &apos;Retry-After&apos; headers
+            /// receing a reponse with an invalid 'Location' and 'Retry-After' headers
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1516,8 +1514,7 @@ namespace Fixtures.Azure.SwaggerBatLro
 
             /// <summary>
             /// Long running delete request, service returns a 202 to the initial request
-            /// receing a reponse with an invalid &apos;Location&apos; and
-            /// &apos;Retry-After&apos; headers
+            /// receing a reponse with an invalid 'Location' and 'Retry-After' headers
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1529,8 +1526,7 @@ namespace Fixtures.Azure.SwaggerBatLro
 
             /// <summary>
             /// Long running delete request, service returns a 202 to the initial request
-            /// receing a reponse with an invalid &apos;Location&apos; and
-            /// &apos;Retry-After&apos; headers
+            /// receing a reponse with an invalid 'Location' and 'Retry-After' headers
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1657,7 +1653,7 @@ namespace Fixtures.Azure.SwaggerBatLro
 
             /// <summary>
             /// Long running post request, service returns a 202 to the initial request,
-            /// with invalid &apos;Location&apos; and &apos;Retry-After&apos; headers.
+            /// with invalid 'Location' and 'Retry-After' headers.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1672,7 +1668,7 @@ namespace Fixtures.Azure.SwaggerBatLro
 
             /// <summary>
             /// Long running post request, service returns a 202 to the initial request,
-            /// with invalid &apos;Location&apos; and &apos;Retry-After&apos; headers.
+            /// with invalid 'Location' and 'Retry-After' headers.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1690,7 +1686,7 @@ namespace Fixtures.Azure.SwaggerBatLro
 
             /// <summary>
             /// Long running post request, service returns a 202 to the initial request,
-            /// with invalid &apos;Location&apos; and &apos;Retry-After&apos; headers.
+            /// with invalid 'Location' and 'Retry-After' headers.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1705,7 +1701,7 @@ namespace Fixtures.Azure.SwaggerBatLro
 
             /// <summary>
             /// Long running post request, service returns a 202 to the initial request,
-            /// with invalid &apos;Location&apos; and &apos;Retry-After&apos; headers.
+            /// with invalid 'Location' and 'Retry-After' headers.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method

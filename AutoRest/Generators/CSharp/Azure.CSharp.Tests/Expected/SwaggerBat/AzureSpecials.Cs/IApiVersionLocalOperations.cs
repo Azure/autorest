@@ -16,12 +16,11 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
     {
         /// <summary>
         /// Get method with api-version modeled in the method.  pass in
-        /// api-version = &apos;2.0&apos; to succeed
+        /// api-version = '2.0' to succeed
         /// </summary>
         /// <param name='apiVersion'>
-        /// This should appear as a method parameter, use value
-        /// &apos;2.0&apos;. Possible values for this parameter include:
-        /// &apos;2.0&apos;
+        /// This should appear as a method parameter, use value '2.0'.
+        /// Possible values for this parameter include: '2.0'
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -41,12 +40,11 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         Task<AzureOperationResponse> GetMethodLocalNullWithOperationResponseAsync(string apiVersion = default(string), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get method with api-version modeled in the method.  pass in
-        /// api-version = &apos;2.0&apos; to succeed
+        /// api-version = '2.0' to succeed
         /// </summary>
         /// <param name='apiVersion'>
-        /// This should appear as a method parameter, use value
-        /// &apos;2.0&apos;. Possible values for this parameter include:
-        /// &apos;2.0&apos;
+        /// This should appear as a method parameter, use value '2.0'.
+        /// Possible values for this parameter include: '2.0'
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -54,12 +52,11 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         Task<AzureOperationResponse> GetPathLocalValidWithOperationResponseAsync(string apiVersion, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get method with api-version modeled in the method.  pass in
-        /// api-version = &apos;2.0&apos; to succeed
+        /// api-version = '2.0' to succeed
         /// </summary>
         /// <param name='apiVersion'>
         /// The api version, which appears in the query, the value is always
-        /// &apos;2.0&apos;. Possible values for this parameter include:
-        /// &apos;2.0&apos;
+        /// '2.0'. Possible values for this parameter include: '2.0'
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.

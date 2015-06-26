@@ -43,7 +43,7 @@ namespace Fixtures.SwaggerBatBodyString
             /// The operations group for this extension method
             /// </param>
             /// <param name='stringBody'>
-            /// Possible values for this parameter include: &apos;&apos;
+            /// Possible values for this parameter include: ''
             /// </param>
             public static void PutNull(this IStringModel operations, string stringBody = default(string))
             {
@@ -57,7 +57,7 @@ namespace Fixtures.SwaggerBatBodyString
             /// The operations group for this extension method
             /// </param>
             /// <param name='stringBody'>
-            /// Possible values for this parameter include: &apos;&apos;
+            /// Possible values for this parameter include: ''
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -68,7 +68,7 @@ namespace Fixtures.SwaggerBatBodyString
             }
 
             /// <summary>
-            /// Get empty string value value &apos;&apos;
+            /// Get empty string value value ''
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -79,7 +79,7 @@ namespace Fixtures.SwaggerBatBodyString
             }
 
             /// <summary>
-            /// Get empty string value value &apos;&apos;
+            /// Get empty string value value ''
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -94,13 +94,13 @@ namespace Fixtures.SwaggerBatBodyString
             }
 
             /// <summary>
-            /// Set string value empty &apos;&apos;
+            /// Set string value empty ''
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='stringBody'>
-            /// Possible values for this parameter include: &apos;&apos;
+            /// Possible values for this parameter include: ''
             /// </param>
             public static void PutEmpty(this IStringModel operations, string stringBody)
             {
@@ -108,13 +108,13 @@ namespace Fixtures.SwaggerBatBodyString
             }
 
             /// <summary>
-            /// Set string value empty &apos;&apos;
+            /// Set string value empty ''
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='stringBody'>
-            /// Possible values for this parameter include: &apos;&apos;
+            /// Possible values for this parameter include: ''
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -126,8 +126,7 @@ namespace Fixtures.SwaggerBatBodyString
 
             /// <summary>
             /// Get mbcs string value
-            /// &apos;啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
-            /// &apos;
+            /// '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -139,8 +138,7 @@ namespace Fixtures.SwaggerBatBodyString
 
             /// <summary>
             /// Get mbcs string value
-            /// &apos;啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
-            /// &apos;
+            /// '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -156,16 +154,14 @@ namespace Fixtures.SwaggerBatBodyString
 
             /// <summary>
             /// Set string value mbcs
-            /// &apos;啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
-            /// &apos;
+            /// '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='stringBody'>
             /// Possible values for this parameter include:
-            /// &apos;啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
-            /// &apos;
+            /// '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
             /// </param>
             public static void PutMbcs(this IStringModel operations, string stringBody)
             {
@@ -174,16 +170,14 @@ namespace Fixtures.SwaggerBatBodyString
 
             /// <summary>
             /// Set string value mbcs
-            /// &apos;啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
-            /// &apos;
+            /// '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='stringBody'>
             /// Possible values for this parameter include:
-            /// &apos;啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
-            /// &apos;
+            /// '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -195,9 +189,8 @@ namespace Fixtures.SwaggerBatBodyString
 
             /// <summary>
             /// Get string value with leading and trailing whitespace
-            /// &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good
-            /// men to come to the aid of their
-            /// country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;
+            /// '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to
+            /// come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -209,9 +202,8 @@ namespace Fixtures.SwaggerBatBodyString
 
             /// <summary>
             /// Get string value with leading and trailing whitespace
-            /// &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good
-            /// men to come to the aid of their
-            /// country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;
+            /// '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to
+            /// come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -227,16 +219,15 @@ namespace Fixtures.SwaggerBatBodyString
 
             /// <summary>
             /// Set String value with leading and trailing whitespace
-            /// &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good
-            /// men to come to the aid of their
-            /// country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;
+            /// '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to
+            /// come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='stringBody'>
-            /// Possible values for this parameter include: &apos;    Now is the time for
-            /// all good men to come to the aid of their country    &apos;
+            /// Possible values for this parameter include: '    Now is the time for all
+            /// good men to come to the aid of their country    '
             /// </param>
             public static void PutWhitespace(this IStringModel operations, string stringBody)
             {
@@ -245,16 +236,15 @@ namespace Fixtures.SwaggerBatBodyString
 
             /// <summary>
             /// Set String value with leading and trailing whitespace
-            /// &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good
-            /// men to come to the aid of their
-            /// country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;
+            /// '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to
+            /// come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='stringBody'>
-            /// Possible values for this parameter include: &apos;    Now is the time for
-            /// all good men to come to the aid of their country    &apos;
+            /// Possible values for this parameter include: '    Now is the time for all
+            /// good men to come to the aid of their country    '
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.

@@ -16,8 +16,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
     {
         /// <summary>
         /// POST method with subscriptionId modeled in credentials.  Set the
-        /// credential subscriptionId to &apos;1234-5678-9012-3456&apos; to
-        /// succeed
+        /// credential subscriptionId to '1234-5678-9012-3456' to succeed
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -34,8 +33,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         Task<AzureOperationResponse> PostMethodGlobalNullWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// POST method with subscriptionId modeled in credentials.  Set the
-        /// credential subscriptionId to &apos;1234-5678-9012-3456&apos; to
-        /// succeed
+        /// credential subscriptionId to '1234-5678-9012-3456' to succeed
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -43,8 +41,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         Task<AzureOperationResponse> PostMethodGlobalNotProvidedValidWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// POST method with subscriptionId modeled in credentials.  Set the
-        /// credential subscriptionId to &apos;1234-5678-9012-3456&apos; to
-        /// succeed
+        /// credential subscriptionId to '1234-5678-9012-3456' to succeed
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -52,8 +49,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         Task<AzureOperationResponse> PostPathGlobalValidWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// POST method with subscriptionId modeled in credentials.  Set the
-        /// credential subscriptionId to &apos;1234-5678-9012-3456&apos; to
-        /// succeed
+        /// credential subscriptionId to '1234-5678-9012-3456' to succeed
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.

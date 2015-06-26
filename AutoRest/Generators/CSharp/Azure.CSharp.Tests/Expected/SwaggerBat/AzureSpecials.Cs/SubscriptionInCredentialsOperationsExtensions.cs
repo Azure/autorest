@@ -13,7 +13,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
     {
             /// <summary>
             /// POST method with subscriptionId modeled in credentials.  Set the
-            /// credential subscriptionId to &apos;1234-5678-9012-3456&apos; to succeed
+            /// credential subscriptionId to '1234-5678-9012-3456' to succeed
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -25,7 +25,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
 
             /// <summary>
             /// POST method with subscriptionId modeled in credentials.  Set the
-            /// credential subscriptionId to &apos;1234-5678-9012-3456&apos; to succeed
+            /// credential subscriptionId to '1234-5678-9012-3456' to succeed
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -69,7 +69,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
 
             /// <summary>
             /// POST method with subscriptionId modeled in credentials.  Set the
-            /// credential subscriptionId to &apos;1234-5678-9012-3456&apos; to succeed
+            /// credential subscriptionId to '1234-5678-9012-3456' to succeed
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -81,7 +81,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
 
             /// <summary>
             /// POST method with subscriptionId modeled in credentials.  Set the
-            /// credential subscriptionId to &apos;1234-5678-9012-3456&apos; to succeed
+            /// credential subscriptionId to '1234-5678-9012-3456' to succeed
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -96,7 +96,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
 
             /// <summary>
             /// POST method with subscriptionId modeled in credentials.  Set the
-            /// credential subscriptionId to &apos;1234-5678-9012-3456&apos; to succeed
+            /// credential subscriptionId to '1234-5678-9012-3456' to succeed
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -108,7 +108,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
 
             /// <summary>
             /// POST method with subscriptionId modeled in credentials.  Set the
-            /// credential subscriptionId to &apos;1234-5678-9012-3456&apos; to succeed
+            /// credential subscriptionId to '1234-5678-9012-3456' to succeed
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -123,7 +123,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
 
             /// <summary>
             /// POST method with subscriptionId modeled in credentials.  Set the
-            /// credential subscriptionId to &apos;1234-5678-9012-3456&apos; to succeed
+            /// credential subscriptionId to '1234-5678-9012-3456' to succeed
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -135,7 +135,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
 
             /// <summary>
             /// POST method with subscriptionId modeled in credentials.  Set the
-            /// credential subscriptionId to &apos;1234-5678-9012-3456&apos; to succeed
+            /// credential subscriptionId to '1234-5678-9012-3456' to succeed
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
