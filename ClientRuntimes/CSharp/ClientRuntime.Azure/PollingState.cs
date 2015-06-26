@@ -30,26 +30,29 @@ namespace Microsoft.Azure
             Request = response.Request;
             Resource = response.Body;
             
-            switch (Response.StatusCode)
+            var resource = response.Body as IResource;
+            if (resource != null && resource.ProvisioningState != null)
             {
-                case HttpStatusCode.Accepted:
-                    Status = AzureAsyncOperation.InProgressStatus;
-                    break;
-
-                case HttpStatusCode.NoContent:
-                case HttpStatusCode.Created:
-                case HttpStatusCode.OK:
-                    Status = AzureAsyncOperation.SuccessStatus;
-                    break;
-
-                default:
-                    Status = AzureAsyncOperation.FailedStatus;
-                    break;
+                Status = resource.ProvisioningState;
             }
-
-            if (response.Body is Resource && (response.Body as Resource).ProvisioningState != null)
+            else
             {
-                Status = (response.Body as Resource).ProvisioningState;
+                switch (Response.StatusCode)
+                {
+                    case HttpStatusCode.Accepted:
+                        Status = AzureAsyncOperation.InProgressStatus;
+                        break;
+
+                    case HttpStatusCode.NoContent:
+                    case HttpStatusCode.Created:
+                    case HttpStatusCode.OK:
+                        Status = AzureAsyncOperation.SuccessStatus;
+                        break;
+
+                    default:
+                        Status = AzureAsyncOperation.FailedStatus;
+                        break;
+                }
             }
         }
 

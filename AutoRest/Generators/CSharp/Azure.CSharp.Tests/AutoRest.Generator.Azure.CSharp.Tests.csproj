@@ -270,16 +270,16 @@
     <Compile Include="Expected\SwaggerBat\Paging.Cs\PagingOperationsExtensions.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Expected\SwaggerBat\Report.Cs\AutoRestReportServiceForAzure.cs">
+    <Compile Include="Expected\SwaggerBat\AzureReport.Cs\AutoRestReportServiceForAzure.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Expected\SwaggerBat\Report.Cs\AutoRestReportServiceForAzureExtensions.cs">
+    <Compile Include="Expected\SwaggerBat\AzureReport.Cs\AutoRestReportServiceForAzureExtensions.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Expected\SwaggerBat\Report.Cs\IAutoRestReportServiceForAzure.cs">
+    <Compile Include="Expected\SwaggerBat\AzureReport.Cs\IAutoRestReportServiceForAzure.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Expected\SwaggerBat\Report.Cs\Models\Error.cs">
+    <Compile Include="Expected\SwaggerBat\AzureReport.Cs\Models\Error.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Expected\SwaggerBat\ResourceFlattening.Cs\AutoRestResourceFlatteningTestService.cs">

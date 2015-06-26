@@ -12,7 +12,6 @@ using Fixtures.Azure.SwaggerBatAzureSpecials;
 using Fixtures.Azure.SwaggerBatLro.Models;
 using Fixtures.Azure.SwaggerBatLro;
 using Fixtures.Azure.SwaggerBatPaging;
-using Fixtures.Azure.SwaggerBatReport;
 using Microsoft.Azure;
 using Microsoft.Rest.Generator.CSharp.Tests;
 using Microsoft.Rest.Generator.Utilities;
@@ -26,6 +25,7 @@ using Error = Fixtures.SwaggerBatHttp.Models.Error;
 using Fixtures.Azure.SwaggerBatResourceFlattening;
 using Fixtures.Azure.SwaggerBatResourceFlattening.Models;
 using Fixtures.Azure.SwaggerBatHead;
+using Fixtures.Azure.SwaggerBatAzureReport;
 
 namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
 {
@@ -243,7 +243,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         public void EnsureTestCoverage()
         {
             SwaggerSpecHelper.RunTests<AzureCSharpCodeGenerator>(
-                @"Swagger\azure-report.json", @"Expected\SwaggerBat\Report.Cs");
+                @"Swagger\azure-report.json", @"Expected\SwaggerBat\AzureReport.Cs");
             var client =
                 new AutoRestReportServiceForAzure(Fixture.Uri, new TokenCloudCredentials(Guid.NewGuid().ToString(), Guid.NewGuid().ToString()));
             var report = client.GetReport();

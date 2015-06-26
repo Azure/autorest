@@ -52,40 +52,16 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             AutoRest.Generate(settings);
             Assert.NotEmpty(((MemoryFileSystem)settings.FileSystem).VirtualStore);
 
-            foreach (var generatedFile in settings.FileSystem.GetFiles("X:\\Output", "*.*", SearchOption.AllDirectories))
+            var actualFiles = settings.FileSystem.GetFiles("X:\\Output", "*.*", SearchOption.AllDirectories).OrderBy(f => f).ToArray();
+            var expectedFiles = Directory.GetFiles(resultFolder, "*.*", SearchOption.AllDirectories).OrderBy(f => f).ToArray();
+            Assert.Equal(expectedFiles.Length, actualFiles.Length);
+
+            for (int i = 0; i < expectedFiles.Length; i++)
             {
-                var realFile = Path.Combine(resultFolder, generatedFile.Replace("X:\\Output\\", ""));
-                if (!File.Exists(realFile))
-                {
-                    throw new IOException(string.Format("File {0} was not found in '{1}' folder.",
-                        Path.GetFileName(generatedFile), resultFolder));
-                }
-
-                EnsureFilesMatch(File.ReadAllText(realFile),
-                    settings.FileSystem.ReadFileAsText(generatedFile));
+                var actualFile = actualFiles[i];
+                var expectedFile = expectedFiles[i];
+                EnsureFilesMatch(File.ReadAllText(expectedFile), settings.FileSystem.ReadFileAsText(actualFile));
             }
-        }
-
-        public static void RunNodeJSTests<T>(Settings settings, string resultFile)
-        {
-            settings.FileSystem = new MemoryFileSystem();
-            settings.FileSystem.WriteFile("AutoRest.json", File.ReadAllText("AutoRest.json"));
-            settings.FileSystem.CreateDirectory(Path.GetDirectoryName(settings.Input));
-            settings.FileSystem.WriteFile(settings.Input, File.ReadAllText(settings.Input));
-            var flavor =
-                (CodeGenerator)typeof(T).GetConstructor(new[] { typeof(Settings) }).Invoke(new object[] { settings });
-            settings.CodeGenerator = flavor.Name;
-
-            settings.Namespace = "foo";
-
-            AutoRest.Generate(settings);
-            Assert.NotEmpty(((MemoryFileSystem)settings.FileSystem).VirtualStore);
-
-            var generatedFile = settings.FileSystem.GetFiles("X:\\Output",
-                Path.GetFileName(resultFile), SearchOption.AllDirectories).FirstOrDefault();
-
-            EnsureFilesMatch(File.ReadAllText(resultFile),
-               settings.FileSystem.ReadFileAsText(generatedFile));
         }
 
         private static void EnsureFilesMatch(string expectedFileContent, string actualFileContent)

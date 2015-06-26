@@ -93,6 +93,30 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         }
 
         [Fact]
+        public void TestPutOperationWithNonResource()
+        {
+            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var handler = new PlaybackTestHandler(MockPutOperaionWitNonResource());
+            var fakeClient = new RedisManagementClient(tokenCredentials, handler);
+            fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
+            Sku sku = fakeClient.RedisOperations.CreateOrUpdateNonResource("rg", "redis", new RedisCreateOrUpdateParameters(), "1234");
+            Assert.Equal("foo", sku.Name);
+            Assert.Equal(3, handler.Requests.Count);
+        }
+
+        [Fact]
+        public void TestPutOperationWithSubResource()
+        {
+            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var handler = new PlaybackTestHandler(MockPutOperaionWitSubResource());
+            var fakeClient = new RedisManagementClient(tokenCredentials, handler);
+            fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
+            var resource = fakeClient.RedisOperations.CreateOrUpdateSubResource("rg", "redis", new RedisCreateOrUpdateParameters(), "1234");
+            Assert.Equal("100", resource.Id);
+            Assert.Equal(3, handler.Requests.Count);
+        }
+
+        [Fact]
         public void TestPutOperationWithImmediateSuccess()
         {
             var tokenCredentials = new TokenCloudCredentials("123", "abc");
@@ -591,6 +615,69 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             };
 
             yield return response1;
+        }
+
+        private IEnumerable<HttpResponseMessage> MockPutOperaionWitNonResource()
+        {
+            var response1 = new HttpResponseMessage(HttpStatusCode.Accepted)
+            {
+                Content = new StringContent("null")
+            };
+            response1.Headers.Add("Azure-AsyncOperation", "http://custom/status");
+
+            yield return response1;
+
+            var response2 = new HttpResponseMessage(HttpStatusCode.Accepted)
+            {
+                Content = new StringContent(@"
+                {
+                    ""status"" : ""Succeeded"", 
+                    ""error"" : {
+                        ""code"": ""BadArgument"",  
+                        ""message"": ""The provided database ‘foo’ has an invalid username."" 
+                    }
+                }")
+            };
+
+            yield return response2;
+
+            var response3 = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(@"
+                {
+                    ""name"": ""foo""
+                }")
+            };
+
+            yield return response3;
+        }
+
+        private IEnumerable<HttpResponseMessage> MockPutOperaionWitSubResource()
+        {
+            var response1 = new HttpResponseMessage(HttpStatusCode.Accepted)
+            {
+                Content = new StringContent("{ \"properties\": { \"provisioningState\": \"InProgress\"}, \"id\": \"100\", \"name\": \"foo\" }")
+            };
+            response1.Headers.Add("Location", "http://custom/status");
+
+            yield return response1;
+
+            var response2 = new HttpResponseMessage(HttpStatusCode.Accepted)
+            {
+                Content = new StringContent("")
+            };
+
+            yield return response2;
+
+            var response3 = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(@"
+                {
+                    ""id"": ""100""
+                }")
+            };
+
+            yield return response3;
         }
 
         private IEnumerable<HttpResponseMessage> MockPutOperaionWithImmediateSuccess()

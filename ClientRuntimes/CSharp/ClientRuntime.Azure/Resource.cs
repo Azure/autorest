@@ -10,7 +10,7 @@ namespace Microsoft.Azure
     /// <summary>
     /// Defines Azure resource.
     /// </summary>
-    public abstract class Resource
+    public abstract class Resource : IResource
     {
         /// <summary>
         /// Gets the ID of the resource.
