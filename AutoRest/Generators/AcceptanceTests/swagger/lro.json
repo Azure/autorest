@@ -3325,8 +3325,10 @@
           "description": "Resource Type"
         },
         "tags": {
-          "type": "string",
-          "description": "Resource Tags"
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "location": {
           "type": "string",

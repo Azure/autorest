@@ -277,11 +277,11 @@ namespace Microsoft.Rest.Generator.Azure
 
                     // If provisioning-state exist in type that is derived from resources - remove it
                     foreach(var propertyToRemove in compositeType.Properties
-                                                                 .Where(p => p.Name
-                                                                              .Equals(
-                                                                                    ProvisioningState, 
-                                                                                    StringComparison.OrdinalIgnoreCase))
-                                                                 .ToArray())
+                        .Where(p => p.Name
+                                    .Equals(
+                                        ProvisioningState, 
+                                        StringComparison.OrdinalIgnoreCase))
+                        .ToArray())
                     {
                         compositeType.Properties.Remove(propertyToRemove);
                     }
