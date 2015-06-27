@@ -35,14 +35,14 @@ namespace Microsoft.Rest.Generator.Azure
 
         protected AzureCodeGenerator(Settings settings) : base(settings)
         {
-            ResourcePropertyNames = new List<string>(new[]
-            { 
-                "Id",
-                "Name",
-                "Type",
-                "Location",
-                "Tags"
-            }).OrderBy(s=> s);
+            ResourcePropertyNames = new List<string>
+                                        { 
+                                            "Id",
+                                            "Name",
+                                            "Type",
+                                            "Location",
+                                            "Tags"
+                                        }.OrderBy(s=> s);
         }
 
         /// <summary>
@@ -280,8 +280,8 @@ namespace Microsoft.Rest.Generator.Azure
                     foreach(var propertyToRemove in compositeType.Properties
                                                                  .Where(p => p.Name
                                                                               .Equals(
-                                                                                ProvisioningState, 
-                                                                                StringComparison.OrdinalIgnoreCase))
+                                                                                    ProvisioningState, 
+                                                                                    StringComparison.OrdinalIgnoreCase))
                                                                  .ToArray())
                     {
                         compositeType.Properties.Remove(propertyToRemove);
