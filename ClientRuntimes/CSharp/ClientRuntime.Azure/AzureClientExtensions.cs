@@ -56,11 +56,11 @@ namespace Microsoft.Azure
             {
                 await PlatformTask.Delay(pollingState.DelayInMilliseconds, cancellationToken).ConfigureAwait(false);
 
-                if (pollingState.Response.Headers.Contains("Azure-AsyncOperation"))
+                if (!string.IsNullOrEmpty(pollingState.AzureAsyncOperationHeaderLink))
                 {
                     await UpdateStateFromAzureAsyncOperationHeader(client, pollingState, cancellationToken);
                 }
-                else if (pollingState.Response.Headers.Contains("Location"))
+                else if (!string.IsNullOrEmpty(pollingState.LocationHeaderLink))
                 {
                     await UpdateStateFromLocationHeaderOnPut(client, pollingState, cancellationToken);
                 }
@@ -124,11 +124,11 @@ namespace Microsoft.Azure
             {
                 await PlatformTask.Delay(pollingState.DelayInMilliseconds, cancellationToken).ConfigureAwait(false);
 
-                if (pollingState.Response.Headers.Contains("Azure-AsyncOperation"))
+                if (!string.IsNullOrEmpty(pollingState.AzureAsyncOperationHeaderLink))
                 {
                     await UpdateStateFromAzureAsyncOperationHeader(client, pollingState, cancellationToken);
                 }
-                else if (pollingState.Response.Headers.Contains("Location"))
+                else if (!string.IsNullOrEmpty(pollingState.LocationHeaderLink))
                 {
                     await UpdateStateFromLocationHeaderOnPostOrDelete(client, cancellationToken, pollingState);
                 }
@@ -232,7 +232,7 @@ namespace Microsoft.Azure
             where T : class
         {
             AzureOperationResponse<T> responseWithResource = await client.GetAsync<T>(
-                pollingState.Response.Headers.GetValues("Location").FirstOrDefault(),
+                pollingState.LocationHeaderLink,
                 cancellationToken).ConfigureAwait(false);
 
             pollingState.Response = responseWithResource.Response;
@@ -287,7 +287,7 @@ namespace Microsoft.Azure
             where T : class
         {
             AzureOperationResponse<T> responseWithResource = await client.GetAsync<T>(
-                pollingState.Response.Headers.GetValues("Location").FirstOrDefault(),
+                pollingState.LocationHeaderLink,
                 cancellationToken).ConfigureAwait(false);
 
             pollingState.Response = responseWithResource.Response;
@@ -322,7 +322,7 @@ namespace Microsoft.Azure
             where T : class
         {
             var asyncOperationResponse = await client.GetAsync<AzureAsyncOperation>(
-                pollingState.Response.Headers.GetValues("Azure-AsyncOperation").FirstOrDefault(),
+                pollingState.AzureAsyncOperationHeaderLink,
                 cancellationToken).ConfigureAwait(false);
 
             if (asyncOperationResponse.Body == null || asyncOperationResponse.Body.Status == null)
