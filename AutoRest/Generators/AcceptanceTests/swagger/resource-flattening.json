@@ -181,11 +181,13 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Resource Id"
+          "description": "Resource Id",
+          "readOnly": true
         },
         "type": {
           "type": "string",
-          "description": "Resource Type"
+          "description": "Resource Type",
+          "readOnly": true
         },
         "tags": {
           "type": "object",
@@ -199,7 +201,8 @@
         },
         "name": {
           "type": "string",
-          "description": "Resource Name"
+          "description": "Resource Name",
+          "readOnly": true
         },
       }
     },
