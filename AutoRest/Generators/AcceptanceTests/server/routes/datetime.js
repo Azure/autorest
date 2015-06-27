@@ -3,8 +3,12 @@ var router = express.Router();
 var util = require('util');
 var utils = require('../util/utils')
 
-var datetime = function(coverage) {
-    router.put('/max/:type', function(req, res, next) {
+var datetime = function(coverage, optionalCoverage) {
+    optionalCoverage['putDateTimeMaxLocalPositiveOffset'] = 0;
+    optionalCoverage['putDateTimeMaxLocalNegativeOffset']= 0;
+    optionalCoverage['putDateTimeMinLocalPositiveOffset'] = 0;
+    optionalCoverage['putDateTimeMinLocalNegativeOffset']= 0;
+        router.put('/max/:type', function(req, res, next) {
         if (req.params.type === 'utc') {
             if (req.body === '9999-12-31T23:59:59.9999999Z') {
                 coverage['putDateTimeMaxUtc']++;
@@ -14,14 +18,14 @@ var datetime = function(coverage) {
             }
         } else if (req.params.type === 'localpositiveoffset') {
             if (req.body === '9999-12-31T09:59:59.9999999Z') {
-                coverage['putDateTimeMaxLocalPositiveOffset']++;
+                optionalCoverage['putDateTimeMaxLocalPositiveOffset']++;
                 res.status(200).end();
             } else {
                 utils.send400(res, next, "Did not like the value provided for max datetime in the req " + util.inspect(req.body));
             }
         } else if (req.params.type === 'localnegativeoffset') {
             if (req.body === '9999-12-31T23:59:59.9999999-14:00') {
-                coverage['putDateTimeMaxLocalNegativeOffset']++;
+                optionalCoverage['putDateTimeMaxLocalNegativeOffset']++;
                 res.status(200).end();
             } else {
                 utils.send400(res, next, "Did not like the value provided for max datetime in the req " + util.inspect(req.body));
@@ -73,14 +77,14 @@ var datetime = function(coverage) {
             }
         } else if (req.params.type === 'localpositiveoffset') {
             if (req.body === '0001-01-01T10:00:00Z' || req.body === '0001-01-01T00:00:00+14:00') {
-                coverage["putDateTimeMinLocalPositiveOffset"]++;
+                optionalCoverage["putDateTimeMinLocalPositiveOffset"]++;
                 res.status(200).end();
             } else {
                 utils.send400(res, next, "Did not like the value provided for min datetime in the req " + util.inspect(req.body));
             }
         } else if (req.params.type === 'localnegativeoffset') {
             if (req.body === '0001-01-01T14:00:00Z' || req.body === '0001-01-01T00:00:00-14:00') {
-                coverage["putDateTimeMinLocalNegativeOffset"]++;
+                optionalCoverage["putDateTimeMinLocalNegativeOffset"]++;
                 res.status(200).end();
             } else {
                 utils.send400(res, next, "Did not like the value provided for min datetime in the req " + util.inspect(req.body));

@@ -4,7 +4,8 @@ var util = require('util');
 var constants = require('../util/constants');
 var utils = require('../util/utils');
 
-var header = function(coverage) {
+var header = function(coverage, optionalCoverage) {
+    optionalCoverage['HeaderParameterProtectedKey'] = 0;
     router.post('/param/:scenario', function(req, res, next) {
         if (req.params.scenario === "existingkey") {
             if (req.get("User-Agent") === "overwrite") {
@@ -15,7 +16,7 @@ var header = function(coverage) {
             }
         } else if (req.params.scenario === "protectedkey") {
             if (req.get("Content-Type") !== "text/html") {
-                coverage['HeaderParameterProtectedKey']++;
+                optionalCoverage['HeaderParameterProtectedKey']++;
                 res.status(200).end();
             } else {
                 utils.send400(res, next, "Did not like scenario \"" + req.params.scenario + "\" with value " + req.get("Content-Type"));
