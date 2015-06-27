@@ -53,9 +53,7 @@ function ApiVersionLocal(client) {
       var requestUrl = this.client.baseUri + 
                        '//azurespecials/apiVersion/method/string/none/query/local/2.0';
       var queryParameters = [];
-      if (apiVersion !== null && apiVersion !== undefined) {
-        queryParameters.push('api-version=' + encodeURIComponent(apiVersion));
-      }
+      queryParameters.push('api-version=' + encodeURIComponent(apiVersion));
       if (queryParameters.length > 0) {
         requestUrl += '?' + queryParameters.join('&');
       }
@@ -218,9 +216,7 @@ function ApiVersionLocal(client) {
       var requestUrl = this.client.baseUri + 
                        '//azurespecials/apiVersion/path/string/none/query/local/2.0';
       var queryParameters = [];
-      if (apiVersion !== null && apiVersion !== undefined) {
-        queryParameters.push('api-version=' + encodeURIComponent(apiVersion));
-      }
+      queryParameters.push('api-version=' + encodeURIComponent(apiVersion));
       if (queryParameters.length > 0) {
         requestUrl += '?' + queryParameters.join('&');
       }
@@ -302,9 +298,7 @@ function ApiVersionLocal(client) {
       var requestUrl = this.client.baseUri + 
                        '//azurespecials/apiVersion/swagger/string/none/query/local/2.0';
       var queryParameters = [];
-      if (apiVersion !== null && apiVersion !== undefined) {
-        queryParameters.push('api-version=' + encodeURIComponent(apiVersion));
-      }
+      queryParameters.push('api-version=' + encodeURIComponent(apiVersion));
       if (queryParameters.length > 0) {
         requestUrl += '?' + queryParameters.join('&');
       }

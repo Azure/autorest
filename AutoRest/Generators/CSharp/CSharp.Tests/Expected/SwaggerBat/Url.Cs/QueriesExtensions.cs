@@ -509,14 +509,14 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get 'begin!*'();:@ &=+$,/?#[]end
+            /// Get 'begin!*'();:@ &amp;=+$,/?#[]end
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='stringQuery'>
-            /// 'begin!*'();:@ &=+$,/?#[]end' url encoded string value. Possible values
-            /// for this parameter include: 'begin!*'();:@ &=+$,/?#[]end'
+            /// 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible
+            /// values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
             /// </param>
             public static void StringUrlEncoded(this IQueries operations, string stringQuery = default(string))
             {
@@ -524,14 +524,14 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get 'begin!*'();:@ &=+$,/?#[]end
+            /// Get 'begin!*'();:@ &amp;=+$,/?#[]end
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='stringQuery'>
-            /// 'begin!*'();:@ &=+$,/?#[]end' url encoded string value. Possible values
-            /// for this parameter include: 'begin!*'();:@ &=+$,/?#[]end'
+            /// 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible
+            /// values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -887,15 +887,15 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
+            /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
             /// null, ''] using the csv-array format
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='arrayQuery'>
-            /// an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
-            /// ''] using the csv-array format
+            /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
+            /// null, ''] using the csv-array format
             /// </param>
             public static void ArrayStringCsvValid(this IQueries operations, IList<string> arrayQuery = default(IList<string>))
             {
@@ -903,15 +903,15 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
+            /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
             /// null, ''] using the csv-array format
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='arrayQuery'>
-            /// an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
-            /// ''] using the csv-array format
+            /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
+            /// null, ''] using the csv-array format
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -984,15 +984,15 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
+            /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
             /// null, ''] using the ssv-array format
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='arrayQuery'>
-            /// an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
-            /// ''] using the ssv-array format
+            /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
+            /// null, ''] using the ssv-array format
             /// </param>
             public static void ArrayStringSsvValid(this IQueries operations, IList<string> arrayQuery = default(IList<string>))
             {
@@ -1000,15 +1000,15 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
+            /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
             /// null, ''] using the ssv-array format
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='arrayQuery'>
-            /// an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
-            /// ''] using the ssv-array format
+            /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
+            /// null, ''] using the ssv-array format
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1019,15 +1019,15 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
+            /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
             /// null, ''] using the tsv-array format
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='arrayQuery'>
-            /// an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
-            /// ''] using the tsv-array format
+            /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
+            /// null, ''] using the tsv-array format
             /// </param>
             public static void ArrayStringTsvValid(this IQueries operations, IList<string> arrayQuery = default(IList<string>))
             {
@@ -1035,15 +1035,15 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
+            /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
             /// null, ''] using the tsv-array format
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='arrayQuery'>
-            /// an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
-            /// ''] using the tsv-array format
+            /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
+            /// null, ''] using the tsv-array format
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1054,15 +1054,15 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
+            /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
             /// null, ''] using the pipes-array format
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='arrayQuery'>
-            /// an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
-            /// ''] using the pipes-array format
+            /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
+            /// null, ''] using the pipes-array format
             /// </param>
             public static void ArrayStringPipesValid(this IQueries operations, IList<string> arrayQuery = default(IList<string>))
             {
@@ -1070,15 +1070,15 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
+            /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
             /// null, ''] using the pipes-array format
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='arrayQuery'>
-            /// an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
-            /// ''] using the pipes-array format
+            /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
+            /// null, ''] using the pipes-array format
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.

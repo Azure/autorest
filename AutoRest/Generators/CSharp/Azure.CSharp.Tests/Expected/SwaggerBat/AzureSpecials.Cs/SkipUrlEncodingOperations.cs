@@ -296,10 +296,10 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
 
         /// <summary>
         /// Get method with unencoded query parameter with value
-        /// 'value1&q2=value2&q3=value3'
+        /// 'value1&amp;q2=value2&amp;q3=value3'
         /// </summary>
         /// <param name='q1'>
-        /// Unencoded query parameter with value 'value1&q2=value2&q3=value3'
+        /// Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -473,10 +473,10 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
 
         /// <summary>
         /// Get method with unencoded query parameter with value
-        /// 'value1&q2=value2&q3=value3'
+        /// 'value1&amp;q2=value2&amp;q3=value3'
         /// </summary>
         /// <param name='q1'>
-        /// Unencoded query parameter with value 'value1&q2=value2&q3=value3'
+        /// Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -564,11 +564,12 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
 
         /// <summary>
         /// Get method with unencoded query parameter with value
-        /// 'value1&q2=value2&q3=value3'
+        /// 'value1&amp;q2=value2&amp;q3=value3'
         /// </summary>
         /// <param name='q1'>
-        /// An unencoded query parameter with value 'value1&q2=value2&q3=value3'.
-        /// Possible values for this parameter include: 'value1&q2=value2&q3=value3'
+        /// An unencoded query parameter with value
+        /// 'value1&amp;q2=value2&amp;q3=value3'. Possible values for this parameter
+        /// include: 'value1&amp;q2=value2&amp;q3=value3'
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
