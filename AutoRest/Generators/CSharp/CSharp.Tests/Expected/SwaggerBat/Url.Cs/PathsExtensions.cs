@@ -354,14 +354,14 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get 'begin!*'();:@ &=+$,/?#[]end
+            /// Get 'begin!*'();:@ &amp;=+$,/?#[]end
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='stringPath'>
-            /// 'begin!*'();:@ &=+$,/?#[]end' url encoded string value. Possible values
-            /// for this parameter include: 'begin!*'();:@ &=+$,/?#[]end'
+            /// 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible
+            /// values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
             /// </param>
             public static void StringUrlEncoded(this IPaths operations, string stringPath)
             {
@@ -369,14 +369,14 @@ namespace Fixtures.SwaggerBatUrl
             }
 
             /// <summary>
-            /// Get 'begin!*'();:@ &=+$,/?#[]end
+            /// Get 'begin!*'();:@ &amp;=+$,/?#[]end
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
             /// <param name='stringPath'>
-            /// 'begin!*'();:@ &=+$,/?#[]end' url encoded string value. Possible values
-            /// for this parameter include: 'begin!*'();:@ &=+$,/?#[]end'
+            /// 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible
+            /// values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.

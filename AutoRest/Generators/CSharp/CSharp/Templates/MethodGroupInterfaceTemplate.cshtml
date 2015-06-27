@@ -1,4 +1,5 @@
-﻿@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.MethodGroupTemplateModel>
+﻿@using Microsoft.Rest.Generator.Utilities
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.MethodGroupTemplateModel>
 @Header("/// ")
 namespace @Settings.Namespace
 {
@@ -13,19 +14,19 @@ namespace @Settings.Namespace
 }
 @EmptyLine
     /// <summary>
-    @WrapComment("/// ", Model.Documentation)
+    @WrapComment("/// ", Model.Documentation.EscapeXmlComment())
     /// </summary>
     public partial interface I@(Model.MethodGroupType)
     {
     @foreach(var method in Model.MethodTemplateModels)
     {
         @:/// <summary>
-        @:@WrapComment("/// ", method.Documentation)
+        @:@WrapComment("/// ", method.Documentation.EscapeXmlComment())
         @:/// </summary>
         foreach (var parameter in method.Parameters)
         {
         @:/// <param name='@parameter.Name'>
-        @:@WrapComment("/// ", parameter.Documentation)
+        @:@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())
         @:/// </param>
         }
         @:/// <param name='cancellationToken'>

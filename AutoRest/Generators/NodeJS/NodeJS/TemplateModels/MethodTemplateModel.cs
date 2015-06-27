@@ -350,36 +350,104 @@ namespace Microsoft.Rest.Generator.NodeJS
         public virtual string BuildUrl(string variableName)
         {
             var builder = new IndentedStringBuilder("  ");
-
-            foreach (var pathParameter in ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
+            BuildPathParameters(variableName, builder);
+            if (HasQueryParameters())
             {
-                builder.AppendLine("{0} = {0}.replace(\"{{{1}}}\", encodeURIComponent({2}));",
-                    variableName,
-                    pathParameter.Name,
-                    pathParameter.Type.ToString(pathParameter.Name));
-            }
-            if (ParameterTemplateModels.Any(p => p.Location == ParameterLocation.Query))
-            {
-                builder.AppendLine("var queryParameters = [];");
-                foreach (var queryParameter in ParameterTemplateModels
-                    .Where(p => p.Location == ParameterLocation.Query))
-                {
-                    builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", queryParameter.Name)
-                        .Indent()
-                        .AppendLine("queryParameters.push('{0}=' + encodeURIComponent({1}));",
-                            queryParameter.SerializedName, queryParameter.GetFormattedReferenceValue()).Outdent()
-                        .AppendLine("}");
-                }
-
-                builder.AppendLine("if (queryParameters.length > 0) {")
-                    .Indent()
-                    .AppendLine("{0} += '?' + queryParameters.join('&');", variableName).Outdent()
-                    .AppendLine("}");
+                BuildQueryParameterArray(builder);
+                AddQueryParametersToUrl(variableName, builder);
             }
 
             return builder.ToString();
         }
 
+        /// <summary>
+        /// Generate code to construct the query string from an array of query parameter strings containing 'key=value'
+        /// </summary>
+        /// <param name="variableName">The variable reference for the url</param>
+        /// <param name="builder">The string builder for url construction</param>
+        private static void AddQueryParametersToUrl(string variableName, IndentedStringBuilder builder)
+        {
+            builder.AppendLine("if (queryParameters.length > 0) {")
+                .Indent()
+                .AppendLine("{0} += '?' + queryParameters.join('&');", variableName).Outdent()
+                .AppendLine("}");
+        }
+
+        /// <summary>
+        /// Detremines whether the Uri will have any query string
+        /// </summary>
+        /// <returns>True if a query string is possible given the method parameters, otherwise false</returns>
+        protected virtual bool HasQueryParameters()
+        {
+            return ParameterTemplateModels.Any(p => p.Location == ParameterLocation.Query);
+        }
+
+        /// <summary>
+        /// Genrate code to build an array of query parameter strings in a variable named 'queryParameters'.  The 
+        /// array should contain one string element for each query parameter of the form 'key=value'
+        /// </summary>
+        /// <param name="builder">The stringbuilder for url construction</param>
+        protected virtual void BuildQueryParameterArray(IndentedStringBuilder builder)
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException("builder");
+            }
+
+            builder.AppendLine("var queryParameters = [];");
+            foreach (var queryParameter in ParameterTemplateModels
+                .Where(p => p.Location == ParameterLocation.Query))
+            {
+                var queryAddFormat = "queryParameters.push('{0}=' + encodeURIComponent({1}));";
+                if (queryParameter.SkipUrlEncoding())
+                {
+                    queryAddFormat = "queryParameters.push('{0}=' + {1});";
+                }
+                if (!queryParameter.IsRequired)
+                {
+                    builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", queryParameter.Name)
+                        .Indent()
+                        .AppendLine(queryAddFormat,
+                            queryParameter.SerializedName, queryParameter.GetFormattedReferenceValue()).Outdent()
+                        .AppendLine("}");
+                }
+                else
+                {
+                    builder.AppendLine(queryAddFormat,
+                        queryParameter.SerializedName, queryParameter.GetFormattedReferenceValue());
+                }
+            }
+        }
+
+        /// <summary>
+        /// Generate code to replace path parameters in the url template with the appropriate values
+        /// </summary>
+        /// <param name="variableName">The variable name for the url to be constructed</param>
+        /// <param name="builder">The string builder for url construction</param>
+        protected virtual void BuildPathParameters(string variableName, IndentedStringBuilder builder)
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException("builder");
+            }
+
+            foreach (var pathParameter in ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
+            {
+                var pathReplaceFormat = "{0} = {0}.replace(\"{{{1}}}\", encodeURIComponent({2}));";
+                if (pathParameter.SkipUrlEncoding())
+                {
+                    pathReplaceFormat = "{0} = {0}.replace(\"{{{1}}}\", {2});";
+                }
+                builder.AppendLine(pathReplaceFormat, variableName, pathParameter.Name,
+                    pathParameter.Type.ToString(pathParameter.Name));
+            }
+        }
+
+        /// <summary>
+        /// Generate code to remove duplicated forward slashes from a URL in code
+        /// </summary>
+        /// <param name="urlVariableName"></param>
+        /// <returns></returns>
         public virtual string RemoveDuplicateForwardSlashes(string urlVariableName)
         {
             var builder = new IndentedStringBuilder("  ");

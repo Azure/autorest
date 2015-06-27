@@ -43,8 +43,8 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// The operations group for this extension method
             /// </param>
             /// <param name='complexBody'>
-            /// Please put an array with 4 items: "1, 2, 3, 4", "", null, "&S#$(*Y", "The
-            /// quick brown fox jumps over the lazy dog"
+            /// Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y",
+            /// "The quick brown fox jumps over the lazy dog"
             /// </param>
             public static void PutValid(this IArray operations, ArrayWrapper complexBody)
             {
@@ -58,8 +58,8 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// The operations group for this extension method
             /// </param>
             /// <param name='complexBody'>
-            /// Please put an array with 4 items: "1, 2, 3, 4", "", null, "&S#$(*Y", "The
-            /// quick brown fox jumps over the lazy dog"
+            /// Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y",
+            /// "The quick brown fox jumps over the lazy dog"
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.

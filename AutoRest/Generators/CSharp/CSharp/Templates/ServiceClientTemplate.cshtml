@@ -23,7 +23,7 @@ namespace @Settings.Namespace
 }
 @EmptyLine
     /// <summary>
-    @WrapComment("/// ", Model.Documentation)
+    @WrapComment("/// ", Model.Documentation.EscapeXmlComment())
     /// </summary>
     public partial class @Model.Name : ServiceClient<@Model.Name>, I@(Model.Name)
     {
@@ -48,7 +48,7 @@ namespace @Settings.Namespace
         @foreach (var property in Model.Properties)
         {
         @:/// <summary>
-        @:@WrapComment("/// ", property.Documentation)
+        @:@WrapComment("/// ", property.Documentation.EscapeXmlComment())
         @:/// </summary>
         @:public @property.Type @property.Name { get; @(property.IsReadOnly ? "private " : "")set; }
         @EmptyLine

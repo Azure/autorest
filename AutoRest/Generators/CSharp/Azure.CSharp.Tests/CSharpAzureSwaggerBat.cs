@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.PeerToPeer;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Fixtures.Azure.SwaggerBatAzureSpecials;
 using Fixtures.Azure.SwaggerBatLro.Models;
 using Fixtures.Azure.SwaggerBatLro;
 using Fixtures.Azure.SwaggerBatPaging;
@@ -462,6 +463,48 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
             };
             client.PutResourceCollection(resourceComplexObject);
         }
+
+        [Fact]
+        public void AzureSpecialParametersTests()
+        {
+            var validSubscription = "1234-5678-9012-3456";
+            var validApiVersion = "2.0";
+            var unencodedPath = "path1/path2/path3";
+            var unencodedQuery = "value1&q2=value2&q3=value3";
+            SwaggerSpecHelper.RunTests<AzureCSharpCodeGenerator>(
+                @"Swagger\azure-special-properties.json", @"Expected\SwaggerBat\AzureSpecials.Cs");
+            var client = new AutoRestAzureSpecialParametersTestClient(Fixture.Uri, new TokenCloudCredentials(validSubscription, Guid.NewGuid().ToString()));
+            client.SubscriptionInCredentials.PostMethodGlobalNotProvidedValid();
+            client.SubscriptionInCredentials.PostMethodGlobalValid();
+            client.SubscriptionInCredentials.PostPathGlobalValid();
+            client.SubscriptionInCredentials.PostSwaggerGlobalValid();
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
+                        new TokenCloudCredentials(null, Guid.NewGuid().ToString())));
+            client.SubscriptionInMethod.PostMethodLocalValid(validSubscription);
+            client.SubscriptionInMethod.PostPathLocalValid(validSubscription);
+            client.SubscriptionInMethod.PostSwaggerLocalValid(validSubscription);
+            Assert.Throws<ArgumentNullException>(() => client.SubscriptionInMethod.PostMethodLocalNull(null));
+
+            client.ApiVersionDefault.GetMethodGlobalNotProvidedValid();
+            client.ApiVersionDefault.GetMethodGlobalValid();
+            client.ApiVersionDefault.GetPathGlobalValid();
+            client.ApiVersionDefault.GetSwaggerGlobalValid();
+            client.ApiVersionLocal.GetMethodLocalValid(validApiVersion);
+            client.ApiVersionLocal.GetMethodLocalNull(null);
+            client.ApiVersionLocal.GetPathLocalValid(validApiVersion);
+            client.ApiVersionLocal.GetSwaggerLocalValid(validApiVersion);
+
+            client.SkipUrlEncoding.GetMethodPathValid(unencodedPath);
+            client.SkipUrlEncoding.GetPathPathValid(unencodedPath);
+            client.SkipUrlEncoding.GetSwaggerPathValid(unencodedPath);
+            client.SkipUrlEncoding.GetMethodQueryValid(unencodedQuery);
+            client.SkipUrlEncoding.GetPathQueryValid(unencodedQuery);
+            client.SkipUrlEncoding.GetSwaggerQueryValid(unencodedQuery);
+            client.SkipUrlEncoding.GetMethodQueryNull();
+            client.SkipUrlEncoding.GetMethodQueryNull(null);
+       }
 
         private static void EnsureStatusCode(HttpStatusCode expectedStatusCode, Func<Task<HttpOperationResponse>> operation)
         {

@@ -175,11 +175,12 @@ namespace Fixtures.SwaggerBatUrl
         /// </param>
         Task<HttpOperationResponse> StringUnicodeWithOperationResponseAsync(string stringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Get 'begin!*'();:@ &=+$,/?#[]end
+        /// Get 'begin!*'();:@ &amp;=+$,/?#[]end
         /// </summary>
         /// <param name='stringQuery'>
-        /// 'begin!*'();:@ &=+$,/?#[]end' url encoded string value. Possible
-        /// values for this parameter include: 'begin!*'();:@ &=+$,/?#[]end'
+        /// 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value.
+        /// Possible values for this parameter include: 'begin!*'();:@
+        /// &amp;=+$,/?#[]end'
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -299,11 +300,11 @@ namespace Fixtures.SwaggerBatUrl
         Task<HttpOperationResponse> DateTimeNullWithOperationResponseAsync(DateTime? dateTimeQuery = default(DateTime?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an array of string ['ArrayQuery1', 'begin!*'();:@
-        /// &=+$,/?#[]end' , null, ''] using the csv-array format
+        /// &amp;=+$,/?#[]end' , null, ''] using the csv-array format
         /// </summary>
         /// <param name='arrayQuery'>
-        /// an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
-        /// null, ''] using the csv-array format
+        /// an array of string ['ArrayQuery1', 'begin!*'();:@
+        /// &amp;=+$,/?#[]end' , null, ''] using the csv-array format
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -331,11 +332,11 @@ namespace Fixtures.SwaggerBatUrl
         Task<HttpOperationResponse> ArrayStringCsvEmptyWithOperationResponseAsync(IList<string> arrayQuery = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an array of string ['ArrayQuery1', 'begin!*'();:@
-        /// &=+$,/?#[]end' , null, ''] using the ssv-array format
+        /// &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
         /// </summary>
         /// <param name='arrayQuery'>
-        /// an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
-        /// null, ''] using the ssv-array format
+        /// an array of string ['ArrayQuery1', 'begin!*'();:@
+        /// &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -343,11 +344,11 @@ namespace Fixtures.SwaggerBatUrl
         Task<HttpOperationResponse> ArrayStringSsvValidWithOperationResponseAsync(IList<string> arrayQuery = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an array of string ['ArrayQuery1', 'begin!*'();:@
-        /// &=+$,/?#[]end' , null, ''] using the tsv-array format
+        /// &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
         /// </summary>
         /// <param name='arrayQuery'>
-        /// an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
-        /// null, ''] using the tsv-array format
+        /// an array of string ['ArrayQuery1', 'begin!*'();:@
+        /// &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -355,11 +356,11 @@ namespace Fixtures.SwaggerBatUrl
         Task<HttpOperationResponse> ArrayStringTsvValidWithOperationResponseAsync(IList<string> arrayQuery = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an array of string ['ArrayQuery1', 'begin!*'();:@
-        /// &=+$,/?#[]end' , null, ''] using the pipes-array format
+        /// &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
         /// </summary>
         /// <param name='arrayQuery'>
-        /// an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
-        /// null, ''] using the pipes-array format
+        /// an array of string ['ArrayQuery1', 'begin!*'();:@
+        /// &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.

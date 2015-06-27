@@ -27,6 +27,12 @@ using Microsoft.Rest.Generator.CSharp.TemplateModels
 #line default
 #line hidden
     ;
+#line 5 "ExtensionMethodTemplate.cshtml"
+using Microsoft.Rest.Generator.Utilities
+
+#line default
+#line hidden
+    ;
     using System.Threading.Tasks;
 
     public class ExtensionMethodTemplate : Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.MethodTemplateModel>
@@ -39,21 +45,21 @@ using Microsoft.Rest.Generator.CSharp.TemplateModels
         #pragma warning disable 1998
         public override async Task ExecuteAsync()
         {
-#line 7 "ExtensionMethodTemplate.cshtml"
+#line 8 "ExtensionMethodTemplate.cshtml"
   
 
 #line default
 #line hidden
 
             WriteLiteral("/// <summary>\r\n");
-#line 9 "ExtensionMethodTemplate.cshtml"
-Write(WrapComment("/// ", Model.Documentation));
+#line 10 "ExtensionMethodTemplate.cshtml"
+Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
             WriteLiteral("\r\n/// </summary>\r\n/// <param name=\'operations\'>\r\n/// The operations group for thi" +
 "s extension method\r\n/// </param>\r\n");
-#line 14 "ExtensionMethodTemplate.cshtml"
+#line 15 "ExtensionMethodTemplate.cshtml"
 foreach (var parameter in Model.Parameters)
 {
 
@@ -61,44 +67,44 @@ foreach (var parameter in Model.Parameters)
 #line hidden
 
             WriteLiteral("/// <param name=\'");
-#line 16 "ExtensionMethodTemplate.cshtml"
+#line 17 "ExtensionMethodTemplate.cshtml"
               Write(parameter.Name);
 
 #line default
 #line hidden
             WriteLiteral("\'>\r\n");
-#line 17 "ExtensionMethodTemplate.cshtml"
-Write(WrapComment("/// ", parameter.Documentation));
+#line 18 "ExtensionMethodTemplate.cshtml"
+Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
             WriteLiteral("\r\n/// </param>\r\n");
-#line 19 "ExtensionMethodTemplate.cshtml"
+#line 20 "ExtensionMethodTemplate.cshtml"
 }
 
 #line default
 #line hidden
 
             WriteLiteral("public static ");
-#line 20 "ExtensionMethodTemplate.cshtml"
+#line 21 "ExtensionMethodTemplate.cshtml"
            Write(Model.ReturnTypeString);
 
 #line default
 #line hidden
             WriteLiteral(" ");
-#line 20 "ExtensionMethodTemplate.cshtml"
+#line 21 "ExtensionMethodTemplate.cshtml"
                                     Write(Model.Name);
 
 #line default
 #line hidden
             WriteLiteral("(");
-#line 20 "ExtensionMethodTemplate.cshtml"
+#line 21 "ExtensionMethodTemplate.cshtml"
                                                  Write(Model.GetExtensionParameters(Model.SyncMethodParameterDeclaration));
 
 #line default
 #line hidden
             WriteLiteral(")\r\n{\r\n");
-#line 22 "ExtensionMethodTemplate.cshtml"
+#line 23 "ExtensionMethodTemplate.cshtml"
     if (Model.ReturnType != null)
     {
 
@@ -106,26 +112,26 @@ Write(WrapComment("/// ", parameter.Documentation));
 #line hidden
 
             WriteLiteral("    return Task.Factory.StartNew(s => ((I");
-#line 24 "ExtensionMethodTemplate.cshtml"
+#line 25 "ExtensionMethodTemplate.cshtml"
                                        Write(Model.MethodGroupName);
 
 #line default
 #line hidden
             WriteLiteral(")s).");
-#line 24 "ExtensionMethodTemplate.cshtml"
+#line 25 "ExtensionMethodTemplate.cshtml"
                                                                    Write(Model.Name);
 
 #line default
 #line hidden
             WriteLiteral("Async(");
-#line 24 "ExtensionMethodTemplate.cshtml"
+#line 25 "ExtensionMethodTemplate.cshtml"
                                                                                       Write(Model.SyncMethodInvocationArgs);
 
 #line default
 #line hidden
             WriteLiteral("), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.De" +
 "fault).Unwrap().GetAwaiter().GetResult();\r\n");
-#line 25 "ExtensionMethodTemplate.cshtml"
+#line 26 "ExtensionMethodTemplate.cshtml"
     }
     else
     {
@@ -134,57 +140,57 @@ Write(WrapComment("/// ", parameter.Documentation));
 #line hidden
 
             WriteLiteral("    Task.Factory.StartNew(s => ((I");
-#line 28 "ExtensionMethodTemplate.cshtml"
+#line 29 "ExtensionMethodTemplate.cshtml"
                                 Write(Model.MethodGroupName);
 
 #line default
 #line hidden
             WriteLiteral(")s).");
-#line 28 "ExtensionMethodTemplate.cshtml"
+#line 29 "ExtensionMethodTemplate.cshtml"
                                                             Write(Model.Name);
 
 #line default
 #line hidden
             WriteLiteral("Async(");
-#line 28 "ExtensionMethodTemplate.cshtml"
+#line 29 "ExtensionMethodTemplate.cshtml"
                                                                                Write(Model.SyncMethodInvocationArgs);
 
 #line default
 #line hidden
             WriteLiteral("), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.De" +
 "fault).Unwrap().GetAwaiter().GetResult();\r\n");
-#line 29 "ExtensionMethodTemplate.cshtml"
+#line 30 "ExtensionMethodTemplate.cshtml"
     }
 
 #line default
 #line hidden
 
             WriteLiteral("}\r\n");
-#line 31 "ExtensionMethodTemplate.cshtml"
+#line 32 "ExtensionMethodTemplate.cshtml"
 
 #line default
 #line hidden
 
-#line 31 "ExtensionMethodTemplate.cshtml"
+#line 32 "ExtensionMethodTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-#line 31 "ExtensionMethodTemplate.cshtml"
+#line 32 "ExtensionMethodTemplate.cshtml"
           
 
 #line default
 #line hidden
 
             WriteLiteral("/// <summary>\r\n");
-#line 33 "ExtensionMethodTemplate.cshtml"
-Write(WrapComment("/// ", Model.Documentation));
+#line 34 "ExtensionMethodTemplate.cshtml"
+Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
             WriteLiteral("\r\n/// </summary>\r\n/// <param name=\'operations\'>\r\n/// The operations group for thi" +
 "s extension method\r\n/// </param>\r\n");
-#line 38 "ExtensionMethodTemplate.cshtml"
+#line 39 "ExtensionMethodTemplate.cshtml"
 foreach (var parameter in Model.Parameters)
 {
 
@@ -192,19 +198,19 @@ foreach (var parameter in Model.Parameters)
 #line hidden
 
             WriteLiteral("/// <param name=\'");
-#line 40 "ExtensionMethodTemplate.cshtml"
+#line 41 "ExtensionMethodTemplate.cshtml"
               Write(parameter.Name);
 
 #line default
 #line hidden
             WriteLiteral("\'>\r\n");
-#line 41 "ExtensionMethodTemplate.cshtml"
-Write(WrapComment("/// ", parameter.Documentation));
+#line 42 "ExtensionMethodTemplate.cshtml"
+Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
             WriteLiteral("\r\n/// </param>\r\n");
-#line 43 "ExtensionMethodTemplate.cshtml"
+#line 44 "ExtensionMethodTemplate.cshtml"
 }
 
 #line default
@@ -212,25 +218,25 @@ Write(WrapComment("/// ", parameter.Documentation));
 
             WriteLiteral("/// <param name=\'cancellationToken\'>\r\n/// Cancellation token.\r\n/// </param>\r\npubl" +
 "ic static async ");
-#line 47 "ExtensionMethodTemplate.cshtml"
+#line 48 "ExtensionMethodTemplate.cshtml"
                  Write(Model.TaskExtensionReturnTypeString);
 
 #line default
 #line hidden
             WriteLiteral(" ");
-#line 47 "ExtensionMethodTemplate.cshtml"
+#line 48 "ExtensionMethodTemplate.cshtml"
                                                        Write(Model.Name);
 
 #line default
 #line hidden
             WriteLiteral("Async( ");
-#line 47 "ExtensionMethodTemplate.cshtml"
+#line 48 "ExtensionMethodTemplate.cshtml"
                                                                           Write(Model.GetExtensionParameters(Model.AsyncMethodParameterDeclaration));
 
 #line default
 #line hidden
             WriteLiteral(")\r\n{\r\n");
-#line 49 "ExtensionMethodTemplate.cshtml"
+#line 50 "ExtensionMethodTemplate.cshtml"
     if (Model.ReturnType != null)
     {
 
@@ -238,25 +244,25 @@ Write(WrapComment("/// ", parameter.Documentation));
 #line hidden
 
             WriteLiteral("    ");
-#line 51 "ExtensionMethodTemplate.cshtml"
+#line 52 "ExtensionMethodTemplate.cshtml"
  Write(Model.OperationResponseReturnTypeString);
 
 #line default
 #line hidden
             WriteLiteral(" result = await operations.");
-#line 51 "ExtensionMethodTemplate.cshtml"
+#line 52 "ExtensionMethodTemplate.cshtml"
                                                                      Write(Model.Name);
 
 #line default
 #line hidden
             WriteLiteral("WithOperationResponseAsync(");
-#line 51 "ExtensionMethodTemplate.cshtml"
+#line 52 "ExtensionMethodTemplate.cshtml"
                                                                                                              Write(Model.AsyncMethodInvocationArgs);
 
 #line default
 #line hidden
             WriteLiteral(").ConfigureAwait(false);\r\n    return result.Body;\r\n");
-#line 53 "ExtensionMethodTemplate.cshtml"
+#line 54 "ExtensionMethodTemplate.cshtml"
     }
     else
     {
@@ -265,26 +271,26 @@ Write(WrapComment("/// ", parameter.Documentation));
 #line hidden
 
             WriteLiteral("    await operations.");
-#line 56 "ExtensionMethodTemplate.cshtml"
+#line 57 "ExtensionMethodTemplate.cshtml"
                    Write(Model.Name);
 
 #line default
 #line hidden
             WriteLiteral("WithOperationResponseAsync(");
-#line 56 "ExtensionMethodTemplate.cshtml"
+#line 57 "ExtensionMethodTemplate.cshtml"
                                                            Write(Model.AsyncMethodInvocationArgs);
 
 #line default
 #line hidden
             WriteLiteral(").ConfigureAwait(false);\r\n");
-#line 57 "ExtensionMethodTemplate.cshtml"
+#line 58 "ExtensionMethodTemplate.cshtml"
     }
 
 #line default
 #line hidden
 
             WriteLiteral("}\r\n\r\n");
-#line 60 "ExtensionMethodTemplate.cshtml"
+#line 61 "ExtensionMethodTemplate.cshtml"
 
 #line default
 #line hidden

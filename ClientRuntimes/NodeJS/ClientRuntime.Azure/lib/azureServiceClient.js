@@ -22,6 +22,12 @@ var WebResource = msrest.WebResource;
  * 
  */
 function AzureServiceClient(credentials, options) {
+  if (credentials !== null && credentials !== undefined &&
+    (credentials.subscriptionId === null || credentials.subscriptionId === undefined || 
+    typeof credentials.subscriptionId !== 'string')) {
+    throw new Error('Azure clients require credentials with a valid subscriptionId');
+  }
+  
   AzureServiceClient['super_'].call(this, credentials, options);
   if (options) {
     this.longRunningOperationRetryTimeoutInSeconds = 

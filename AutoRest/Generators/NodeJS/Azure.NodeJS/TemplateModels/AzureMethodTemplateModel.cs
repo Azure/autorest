@@ -27,13 +27,16 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         }
 
         /// <summary>
-        /// Generate code to build the URL from a url expression and method parameters
+        /// Replace the subscriptionId in the url path with the subscription id from credentials, if appropriate
         /// </summary>
-        /// <param name="variableName">The variable to store the url in.</param>
-        /// <returns></returns>
-        public override string BuildUrl(string variableName)
+        /// <param name="variableName">The variable reference for the url</param>
+        /// <param name="builder">The string builder for url construction</param>
+        protected override void BuildPathParameters(string variableName, IndentedStringBuilder builder)
         {
-            var builder = new IndentedStringBuilder("  ");
+            if (builder == null)
+            {
+                throw new ArgumentNullException("builder");
+            }
 
             if (this.Url != null && this.Url.Contains("{subscriptionId}")
                 && !ParameterTemplateModels.Any(p => p.SerializedName.Equals("subscriptionId", StringComparison.OrdinalIgnoreCase)))
@@ -44,34 +47,21 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
                             ClientReference);
             }
 
-            foreach (var pathParameter in ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
-            {
-                string replaceString = "{0} = {0}.replace('{{{1}}}', encodeURIComponent({2}));";
-                if (pathParameter.Extensions.ContainsKey(AzureCodeGenerator.SkipUrlEncodingExtension))
-                {
-                    replaceString = "{0} = {0}.replace('{{{1}}}', {2});";
-                }
+            base.BuildPathParameters(variableName, builder);
+        }
 
-                builder.AppendLine(replaceString,
-                    variableName,
-                    pathParameter.Name,
-                    pathParameter.Type.ToString(pathParameter.Name));
+        /// <summary>
+        /// Add the global api-version to the query parameters, as appropriate
+        /// </summary>
+        /// <param name="builder">The string builder for uri construction</param>
+        protected override void BuildQueryParameterArray(IndentedStringBuilder builder)
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException("builder");
             }
 
-            builder.AppendLine("var queryParameters = [];");
-            if (ParameterTemplateModels.Any(p => p.Location == ParameterLocation.Query))
-            {
-                foreach (var queryParameter in ParameterTemplateModels
-                    .Where(p => p.Location == ParameterLocation.Query))
-                {
-                    builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", queryParameter.Name)
-                        .Indent()
-                        .AppendLine("queryParameters.push('{0}=' + encodeURIComponent({1}));",
-                            queryParameter.SerializedName, queryParameter.GetFormattedReferenceValue()).Outdent()
-                        .AppendLine("}");
-                }
-            }
-
+            base.BuildQueryParameterArray(builder);
             if (!Parameters.Any(p => p.Name.Equals("apiVersion", StringComparison.OrdinalIgnoreCase)) &&
                 !IsAbsoluteUrl)
             {
@@ -79,13 +69,15 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
                     "queryParameters.push('api-version=' + encodeURIComponent({0}.apiVersion));",
                     ClientReference);
             }
+        }
 
-            builder.AppendLine("if (queryParameters.length > 0) {")
-                .Indent()
-                .AppendLine("{0} += '?' + queryParameters.join('&');", variableName).Outdent()
-                .AppendLine("}");  
-
-            return builder.ToString();
+        /// <summary>
+        /// If this is a relative uri, we will add api-version query, so add this condition to the check
+        /// </summary>
+        /// <returns>true if there are any query parameters in the uri, otherwise false</returns>
+        protected override bool HasQueryParameters()
+        {
+            return base.HasQueryParameters() || !IsAbsoluteUrl;
         }
 
         /// <summary>

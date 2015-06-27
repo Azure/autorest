@@ -104,7 +104,7 @@ Write(EmptyLine);
 #line hidden
             WriteLiteral("\r\n    /// <summary>\r\n    ");
 #line 29 "AzureServiceClientTemplate.cshtml"
-Write(WrapComment("/// ", Model.Documentation));
+Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
@@ -166,7 +166,7 @@ Write(WrapComment("/// ", Model.Documentation));
 
             WriteLiteral("        /// <summary>\r\n        ");
 #line 54 "AzureServiceClientTemplate.cshtml"
-     Write(WrapComment("/// ", property.Documentation));
+     Write(WrapComment("/// ", property.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden

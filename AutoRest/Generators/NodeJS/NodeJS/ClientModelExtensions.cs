@@ -419,5 +419,21 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 
             return null;
         }
+
+        /// <summary>
+        /// Determine whether URL encoding should be skipped for this parameter
+        /// </summary>
+        /// <param name="parameter">The parameter to check</param>
+        /// <returns>true if url encoding should be skipped for the parameter, otherwise false</returns>
+        public static bool SkipUrlEncoding(this Parameter parameter)
+        {
+            if (parameter == null)
+            {
+                return false;
+            }
+
+            return parameter.Extensions.ContainsKey(CodeGenerator.SkipUrlEncodingExtension) &&
+                   (bool) parameter.Extensions[CodeGenerator.SkipUrlEncodingExtension];
+        }
     }
 }

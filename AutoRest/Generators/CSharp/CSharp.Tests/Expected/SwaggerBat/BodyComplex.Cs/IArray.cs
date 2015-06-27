@@ -25,7 +25,7 @@ namespace Fixtures.SwaggerBatBodyComplex
         /// </summary>
         /// <param name='complexBody'>
         /// Please put an array with 4 items: "1, 2, 3, 4", "", null,
-        /// "&S#$(*Y", "The quick brown fox jumps over the lazy dog"
+        /// "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.

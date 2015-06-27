@@ -27,6 +27,7 @@ var lros = require('./routes/lros');
 var paging = require('./routes/paging');
 var resourceFlatten = require('./routes/resource-flatten');
 var azureUrl = require('./routes/azureUrl');
+var azureSpecial = require('./routes/azureSpecials');
 var app = express();
 var util = require('util');
 
@@ -398,6 +399,7 @@ app.use('/http', new httpResponses(coverage, optionalCoverage).router);
 app.use('/lro', new lros(azurecoverage).router);
 app.use('/paging', new paging(azurecoverage).router);
 app.use('/azure/resource-flatten', new resourceFlatten(azurecoverage).router);
+app.use('/azurespecials', new azureSpecial(azurecoverage).router);
 app.use('/report', new report(coverage, azurecoverage).router);
 app.use('/subscriptions', new azureUrl(azurecoverage).router);
 
