@@ -298,8 +298,8 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
-            /// For valid response try integer IDs with value &lt;= 5 or &gt; 10. Other
-            /// values will generated exceptions
+            /// For valid response try integer IDs with value <= 5 or > 10. Other values
+            /// will generated exceptions
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -313,8 +313,8 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
-            /// For valid response try integer IDs with value &lt;= 5 or &gt; 10. Other
-            /// values will generated exceptions
+            /// For valid response try integer IDs with value <= 5 or > 10. Other values
+            /// will generated exceptions
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -332,8 +332,8 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
-            /// For valid response try integer IDs with value &lt; 1000. Anything above
-            /// 1000 or nonintegers will generate API errors
+            /// For valid response try integer IDs with value < 1000. Anything above 1000
+            /// or nonintegers will generate API errors
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -347,8 +347,8 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
-            /// For valid response try integer IDs with value &lt; 1000. Anything above
-            /// 1000 or nonintegers will generate API errors
+            /// For valid response try integer IDs with value < 1000. Anything above 1000
+            /// or nonintegers will generate API errors
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method

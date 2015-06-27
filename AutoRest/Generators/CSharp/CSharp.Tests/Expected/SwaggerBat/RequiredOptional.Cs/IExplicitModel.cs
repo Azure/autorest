@@ -55,7 +55,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
         Task<HttpOperationResponse> PostOptionalIntegerPropertyWithOperationResponseAsync(IntOptionalWrapper bodyParameter = default(IntOptionalWrapper), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test explicitly required integer. Please put a header
-        /// 'headerParameter' =&gt; null and the client library should throw
+        /// 'headerParameter' => null and the client library should throw
         /// before the request is sent.
         /// </summary>
         /// <param name='headerParameter'>
@@ -66,7 +66,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
         Task<HttpOperationResponse<Error>> PostRequiredIntegerHeaderWithOperationResponseAsync(int? headerParameter, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test explicitly optional integer. Please put a header
-        /// 'headerParameter' =&gt; null.
+        /// 'headerParameter' => null.
         /// </summary>
         /// <param name='headerParameter'>
         /// </param>
@@ -116,7 +116,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
         Task<HttpOperationResponse> PostOptionalStringPropertyWithOperationResponseAsync(StringOptionalWrapper bodyParameter = default(StringOptionalWrapper), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test explicitly required string. Please put a header
-        /// 'headerParameter' =&gt; null and the client library should throw
+        /// 'headerParameter' => null and the client library should throw
         /// before the request is sent.
         /// </summary>
         /// <param name='headerParameter'>
@@ -127,7 +127,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
         Task<HttpOperationResponse<Error>> PostRequiredStringHeaderWithOperationResponseAsync(string headerParameter, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test explicitly optional string. Please put a header
-        /// 'headerParameter' =&gt; null.
+        /// 'headerParameter' => null.
         /// </summary>
         /// <param name='bodyParameter'>
         /// </param>
@@ -217,7 +217,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
         Task<HttpOperationResponse> PostOptionalArrayPropertyWithOperationResponseAsync(ArrayOptionalWrapper bodyParameter = default(ArrayOptionalWrapper), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test explicitly required array. Please put a header
-        /// 'headerParameter' =&gt; null and the client library should throw
+        /// 'headerParameter' => null and the client library should throw
         /// before the request is sent.
         /// </summary>
         /// <param name='headerParameter'>
@@ -228,7 +228,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
         Task<HttpOperationResponse<Error>> PostRequiredArrayHeaderWithOperationResponseAsync(IList<string> headerParameter, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test explicitly optional integer. Please put a header
-        /// 'headerParameter' =&gt; null.
+        /// 'headerParameter' => null.
         /// </summary>
         /// <param name='headerParameter'>
         /// </param>

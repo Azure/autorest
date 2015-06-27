@@ -72,9 +72,8 @@ namespace Fixtures.SwaggerBatBodyString
         Task<HttpOperationResponse> PutMbcsWithOperationResponseAsync(string stringBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get string value with leading and trailing whitespace
-        /// '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all
-        /// good men to come to the aid of their
-        /// country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
+        /// '<tab><space><space>Now is the time for all good men to come to
+        /// the aid of their country<tab><space><space>'
         /// </summary>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -82,9 +81,8 @@ namespace Fixtures.SwaggerBatBodyString
         Task<HttpOperationResponse<string>> GetWhitespaceWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Set String value with leading and trailing whitespace
-        /// '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all
-        /// good men to come to the aid of their
-        /// country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
+        /// '<tab><space><space>Now is the time for all good men to come to
+        /// the aid of their country<tab><space><space>'
         /// </summary>
         /// <param name='stringBody'>
         /// Possible values for this parameter include: '    Now is the time

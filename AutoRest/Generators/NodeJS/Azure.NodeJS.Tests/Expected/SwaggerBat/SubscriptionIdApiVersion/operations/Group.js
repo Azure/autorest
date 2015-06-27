@@ -52,7 +52,7 @@ function Group(client) {
       var requestUrl = this.client.baseUri + 
                        '//subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}';
       requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.credentials.subscriptionId));
-      requestUrl = requestUrl.replace("{resourceGroupName}", encodeURIComponent(resourceGroupName));
+      requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
       var queryParameters = [];
       queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
       if (queryParameters.length > 0) {

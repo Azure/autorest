@@ -29,8 +29,12 @@ Product.prototype.validate = function (payload) {
     throw new Error('payload["type"] must be of type string.');
   }
 
-  if (payload['tags'] !== null && payload['tags'] !== undefined && typeof payload['tags'] !== 'string') {
-    throw new Error('payload["tags"] must be of type string.');
+  if (payload['tags'] !== null && payload['tags'] !== undefined && typeof payload['tags'] === 'object') {
+    for(var valueElement in payload['tags']) {
+      if (payload['tags'][valueElement] !== null && payload['tags'][valueElement] !== undefined && typeof payload['tags'][valueElement] !== 'string') {
+        throw new Error('payload["tags"][valueElement] must be of type string.');
+      }
+    }
   }
 
   if (payload['location'] !== null && payload['location'] !== undefined && typeof payload['location'] !== 'string') {

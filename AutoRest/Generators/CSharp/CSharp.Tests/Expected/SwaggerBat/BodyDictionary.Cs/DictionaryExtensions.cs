@@ -1511,8 +1511,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             }
 
             /// <summary>
-            /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-            /// value {}
+            /// Get an dictionaries of dictionaries of type <string, string> with value {}
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1523,8 +1522,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             }
 
             /// <summary>
-            /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-            /// value {}
+            /// Get an dictionaries of dictionaries of type <string, string> with value {}
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1539,8 +1537,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
             }
 
             /// <summary>
-            /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-            /// value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7":
+            /// Get an dictionaries of dictionaries of type <string, string> with value
+            /// {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7":
             /// "seven", "8": "eight", "9": "nine"}}
             /// </summary>
             /// <param name='operations'>
@@ -1552,8 +1550,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
             }
 
             /// <summary>
-            /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-            /// value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7":
+            /// Get an dictionaries of dictionaries of type <string, string> with value
+            /// {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7":
             /// "seven", "8": "eight", "9": "nine"}}
             /// </summary>
             /// <param name='operations'>
@@ -1569,8 +1567,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
             }
 
             /// <summary>
-            /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-            /// value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7":
+            /// Get an dictionaries of dictionaries of type <string, string> with value
+            /// {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7":
             /// "seven", "8": "eight", "9": "nine"}}
             /// </summary>
             /// <param name='operations'>
@@ -1582,8 +1580,8 @@ namespace Fixtures.SwaggerBatBodyDictionary
             }
 
             /// <summary>
-            /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-            /// value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7":
+            /// Get an dictionaries of dictionaries of type <string, string> with value
+            /// {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7":
             /// "seven", "8": "eight", "9": "nine"}}
             /// </summary>
             /// <param name='operations'>
@@ -1599,9 +1597,9 @@ namespace Fixtures.SwaggerBatBodyDictionary
             }
 
             /// <summary>
-            /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-            /// value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four",
-            /// "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
+            /// Get an dictionaries of dictionaries of type <string, string> with value
+            /// {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5":
+            /// "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1612,9 +1610,9 @@ namespace Fixtures.SwaggerBatBodyDictionary
             }
 
             /// <summary>
-            /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-            /// value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four",
-            /// "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
+            /// Get an dictionaries of dictionaries of type <string, string> with value
+            /// {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5":
+            /// "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1629,9 +1627,9 @@ namespace Fixtures.SwaggerBatBodyDictionary
             }
 
             /// <summary>
-            /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-            /// value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four",
-            /// "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
+            /// Get an dictionaries of dictionaries of type <string, string> with value
+            /// {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5":
+            /// "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1644,9 +1642,9 @@ namespace Fixtures.SwaggerBatBodyDictionary
             }
 
             /// <summary>
-            /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-            /// value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four",
-            /// "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
+            /// Get an dictionaries of dictionaries of type <string, string> with value
+            /// {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5":
+            /// "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method

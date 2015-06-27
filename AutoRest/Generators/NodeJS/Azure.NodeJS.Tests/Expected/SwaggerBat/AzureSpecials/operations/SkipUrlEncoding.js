@@ -51,7 +51,7 @@ function SkipUrlEncoding(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}';
-      requestUrl = requestUrl.replace("{unencodedPathParam}", unencodedPathParam);
+      requestUrl = requestUrl.replace('{unencodedPathParam}', unencodedPathParam);
       var queryParameters = [];
       queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
       if (queryParameters.length > 0) {
@@ -133,7 +133,7 @@ function SkipUrlEncoding(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}';
-      requestUrl = requestUrl.replace("{unencodedPathParam}", unencodedPathParam);
+      requestUrl = requestUrl.replace('{unencodedPathParam}', unencodedPathParam);
       var queryParameters = [];
       queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
       if (queryParameters.length > 0) {
@@ -215,7 +215,7 @@ function SkipUrlEncoding(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}';
-      requestUrl = requestUrl.replace("{unencodedPathParam}", unencodedPathParam);
+      requestUrl = requestUrl.replace('{unencodedPathParam}', unencodedPathParam);
       var queryParameters = [];
       queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
       if (queryParameters.length > 0) {
@@ -299,7 +299,9 @@ function SkipUrlEncoding(client) {
       var requestUrl = this.client.baseUri + 
                        '//azurespecials/skipUrlEncoding/method/query/valid';
       var queryParameters = [];
-      queryParameters.push('q1=' + q1);
+      if (q1 !== null && q1 !== undefined) {
+        queryParameters.push('q1=' + encodeURIComponent(q1));
+      }
       queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
       if (queryParameters.length > 0) {
         requestUrl += '?' + queryParameters.join('&');
@@ -379,7 +381,7 @@ function SkipUrlEncoding(client) {
                        '//azurespecials/skipUrlEncoding/method/query/null';
       var queryParameters = [];
       if (q1 !== null && q1 !== undefined) {
-        queryParameters.push('q1=' + q1);
+        queryParameters.push('q1=' + encodeURIComponent(q1));
       }
       queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
       if (queryParameters.length > 0) {
@@ -463,7 +465,9 @@ function SkipUrlEncoding(client) {
       var requestUrl = this.client.baseUri + 
                        '//azurespecials/skipUrlEncoding/path/query/valid';
       var queryParameters = [];
-      queryParameters.push('q1=' + q1);
+      if (q1 !== null && q1 !== undefined) {
+        queryParameters.push('q1=' + encodeURIComponent(q1));
+      }
       queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
       if (queryParameters.length > 0) {
         requestUrl += '?' + queryParameters.join('&');
@@ -544,7 +548,7 @@ function SkipUrlEncoding(client) {
                        '//azurespecials/skipUrlEncoding/swagger/query/valid';
       var queryParameters = [];
       if (q1 !== null && q1 !== undefined) {
-        queryParameters.push('q1=' + q1);
+        queryParameters.push('q1=' + encodeURIComponent(q1));
       }
       queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
       if (queryParameters.length > 0) {

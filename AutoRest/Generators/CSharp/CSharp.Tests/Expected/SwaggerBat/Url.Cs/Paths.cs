@@ -892,11 +892,11 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get 'begin!*'();:@ &amp;=+$,/?#[]end
+        /// Get 'begin!*'();:@ &=+$,/?#[]end
         /// </summary>
         /// <param name='stringPath'>
-        /// 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible
-        /// values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
+        /// 'begin!*'();:@ &=+$,/?#[]end' url encoded string value. Possible values
+        /// for this parameter include: 'begin!*'();:@ &=+$,/?#[]end'
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.

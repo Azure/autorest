@@ -1346,11 +1346,11 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get 'begin!*'();:@ &amp;=+$,/?#[]end
+        /// Get 'begin!*'();:@ &=+$,/?#[]end
         /// </summary>
         /// <param name='stringQuery'>
-        /// 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible
-        /// values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
+        /// 'begin!*'();:@ &=+$,/?#[]end' url encoded string value. Possible values
+        /// for this parameter include: 'begin!*'();:@ &=+$,/?#[]end'
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -2333,12 +2333,12 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
+        /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
         /// null, ''] using the csv-array format
         /// </summary>
         /// <param name='arrayQuery'>
-        /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
-        /// null, ''] using the csv-array format
+        /// an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
+        /// ''] using the csv-array format
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -2581,12 +2581,12 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
+        /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
         /// null, ''] using the ssv-array format
         /// </summary>
         /// <param name='arrayQuery'>
-        /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
-        /// null, ''] using the ssv-array format
+        /// an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
+        /// ''] using the ssv-array format
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -2665,12 +2665,12 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
+        /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
         /// null, ''] using the tsv-array format
         /// </summary>
         /// <param name='arrayQuery'>
-        /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
-        /// null, ''] using the tsv-array format
+        /// an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
+        /// ''] using the tsv-array format
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -2749,12 +2749,12 @@ namespace Fixtures.SwaggerBatUrl
         }
 
         /// <summary>
-        /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
+        /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
         /// null, ''] using the pipes-array format
         /// </summary>
         /// <param name='arrayQuery'>
-        /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
-        /// null, ''] using the pipes-array format
+        /// an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
+        /// ''] using the pipes-array format
         /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.

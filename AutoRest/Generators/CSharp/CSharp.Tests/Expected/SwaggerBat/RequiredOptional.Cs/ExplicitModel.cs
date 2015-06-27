@@ -359,8 +359,8 @@ namespace Fixtures.SwaggerBatRequiredOptional
         }
 
         /// <summary>
-        /// Test explicitly required integer. Please put a header 'headerParameter'
-        /// =&gt; null and the client library should throw before the request is sent.
+        /// Test explicitly required integer. Please put a header 'headerParameter' =>
+        /// null and the client library should throw before the request is sent.
         /// </summary>
         /// <param name='headerParameter'>
         /// </param>    
@@ -441,8 +441,8 @@ namespace Fixtures.SwaggerBatRequiredOptional
         }
 
         /// <summary>
-        /// Test explicitly optional integer. Please put a header 'headerParameter'
-        /// =&gt; null.
+        /// Test explicitly optional integer. Please put a header 'headerParameter' =>
+        /// null.
         /// </summary>
         /// <param name='headerParameter'>
         /// </param>    
@@ -844,8 +844,8 @@ namespace Fixtures.SwaggerBatRequiredOptional
         }
 
         /// <summary>
-        /// Test explicitly required string. Please put a header 'headerParameter'
-        /// =&gt; null and the client library should throw before the request is sent.
+        /// Test explicitly required string. Please put a header 'headerParameter' =>
+        /// null and the client library should throw before the request is sent.
         /// </summary>
         /// <param name='headerParameter'>
         /// </param>    
@@ -926,8 +926,8 @@ namespace Fixtures.SwaggerBatRequiredOptional
         }
 
         /// <summary>
-        /// Test explicitly optional string. Please put a header 'headerParameter'
-        /// =&gt; null.
+        /// Test explicitly optional string. Please put a header 'headerParameter' =>
+        /// null.
         /// </summary>
         /// <param name='bodyParameter'>
         /// </param>    
@@ -1663,8 +1663,8 @@ namespace Fixtures.SwaggerBatRequiredOptional
         }
 
         /// <summary>
-        /// Test explicitly required array. Please put a header 'headerParameter'
-        /// =&gt; null and the client library should throw before the request is sent.
+        /// Test explicitly required array. Please put a header 'headerParameter' =>
+        /// null and the client library should throw before the request is sent.
         /// </summary>
         /// <param name='headerParameter'>
         /// </param>    
@@ -1745,8 +1745,8 @@ namespace Fixtures.SwaggerBatRequiredOptional
         }
 
         /// <summary>
-        /// Test explicitly optional integer. Please put a header 'headerParameter'
-        /// =&gt; null.
+        /// Test explicitly optional integer. Please put a header 'headerParameter' =>
+        /// null.
         /// </summary>
         /// <param name='headerParameter'>
         /// </param>    

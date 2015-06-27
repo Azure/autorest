@@ -463,7 +463,9 @@ Implicit.prototype.getRequiredGlobalQuery = function (requiredGlobalQuery, callb
   var requestUrl = this.client.baseUri + 
                    '//reqopt/global/required/query';
   var queryParameters = [];
-  queryParameters.push('required_global_query=' + encodeURIComponent(requiredGlobalQuery));
+  if (requiredGlobalQuery !== null && requiredGlobalQuery !== undefined) {
+    queryParameters.push('required_global_query=' + encodeURIComponent(requiredGlobalQuery));
+  }
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
