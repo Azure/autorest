@@ -14,6 +14,8 @@ var credentials = new msRest.TokenCredentials({
   token: '<your token here>'
 });
 
+credentials.subscriptionId = '1234-5678-9012-3456';
+
 describe('AzureServiceClient', function () {
   describe('Constructor intialization', function () {
     it('should intialize with no parameters', function (done) {

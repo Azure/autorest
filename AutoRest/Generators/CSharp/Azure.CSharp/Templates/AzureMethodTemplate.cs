@@ -91,7 +91,7 @@ else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.D
 #line hidden
 
 #line 18 "AzureMethodTemplate.cshtml"
-Write(WrapComment("/// ", Model.Documentation));
+Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
@@ -121,7 +121,7 @@ Write(WrapComment("/// ", Model.Documentation));
 #line hidden
 
 #line 23 "AzureMethodTemplate.cshtml"
-Write(WrapComment("/// ", parameter.Documentation));
+Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
@@ -197,7 +197,7 @@ else if (Model.HttpMethod == HttpMethod.Put)
 #line hidden
 
 #line 43 "AzureMethodTemplate.cshtml"
-Write(WrapComment("/// ", Model.Documentation));
+Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
@@ -227,7 +227,7 @@ Write(WrapComment("/// ", Model.Documentation));
 #line hidden
 
 #line 48 "AzureMethodTemplate.cshtml"
-Write(WrapComment("/// ", parameter.Documentation));
+Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden

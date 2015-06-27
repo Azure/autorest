@@ -21,7 +21,6 @@ namespace Microsoft.Rest.Generator.Azure
     {
         public const string LongRunningExtension = "x-ms-long-running-operation";
         public const string PageableExtension = "x-ms-pageable";
-        public const string SkipUrlEncodingExtension = "x-ms-skip-url-encoding";
         public const string ExternalExtension = "x-ms-external";
         public const string ODataExtension = "x-ms-odata";
         public const string GlobalParameter = "x-ms-global-parameter";

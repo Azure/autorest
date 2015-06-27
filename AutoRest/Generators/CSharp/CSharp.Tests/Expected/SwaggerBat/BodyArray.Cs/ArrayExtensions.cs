@@ -1421,7 +1421,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get an array of Dictionaries of type <string, string> with value []
+            /// Get an array of Dictionaries of type &lt;string, string&gt; with value []
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1432,7 +1432,7 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get an array of Dictionaries of type <string, string> with value []
+            /// Get an array of Dictionaries of type &lt;string, string&gt; with value []
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1447,9 +1447,9 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get an array of Dictionaries of type <string, string> with value [{'1':
-            /// 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9':
-            /// 'nine'}]
+            /// Get an array of Dictionaries of type &lt;string, string&gt; with value
+            /// [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8':
+            /// 'eight', '9': 'nine'}]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1460,9 +1460,9 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get an array of Dictionaries of type <string, string> with value [{'1':
-            /// 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9':
-            /// 'nine'}]
+            /// Get an array of Dictionaries of type &lt;string, string&gt; with value
+            /// [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8':
+            /// 'eight', '9': 'nine'}]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1477,9 +1477,9 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get an array of Dictionaries of type <string, string> with value [{'1':
-            /// 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9':
-            /// 'nine'}]
+            /// Get an array of Dictionaries of type &lt;string, string&gt; with value
+            /// [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight',
+            /// '9': 'nine'}]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1490,9 +1490,9 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get an array of Dictionaries of type <string, string> with value [{'1':
-            /// 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9':
-            /// 'nine'}]
+            /// Get an array of Dictionaries of type &lt;string, string&gt; with value
+            /// [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight',
+            /// '9': 'nine'}]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1507,9 +1507,9 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get an array of Dictionaries of type <string, string> with value [{'1':
-            /// 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'},
-            /// {'7': 'seven', '8': 'eight', '9': 'nine'}]
+            /// Get an array of Dictionaries of type &lt;string, string&gt; with value
+            /// [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6':
+            /// 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1520,9 +1520,9 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get an array of Dictionaries of type <string, string> with value [{'1':
-            /// 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'},
-            /// {'7': 'seven', '8': 'eight', '9': 'nine'}]
+            /// Get an array of Dictionaries of type &lt;string, string&gt; with value
+            /// [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6':
+            /// 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1537,9 +1537,9 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get an array of Dictionaries of type <string, string> with value [{'1':
-            /// 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'},
-            /// {'7': 'seven', '8': 'eight', '9': 'nine'}]
+            /// Get an array of Dictionaries of type &lt;string, string&gt; with value
+            /// [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6':
+            /// 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -1552,9 +1552,9 @@ namespace Fixtures.SwaggerBatBodyArray
             }
 
             /// <summary>
-            /// Get an array of Dictionaries of type <string, string> with value [{'1':
-            /// 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'},
-            /// {'7': 'seven', '8': 'eight', '9': 'nine'}]
+            /// Get an array of Dictionaries of type &lt;string, string&gt; with value
+            /// [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6':
+            /// 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method

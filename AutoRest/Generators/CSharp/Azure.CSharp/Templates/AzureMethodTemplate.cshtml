@@ -15,12 +15,12 @@
 else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.Delete)
 {
 @:/// <summary>
-@WrapComment("/// ", Model.Documentation)@:
+@WrapComment("/// ", Model.Documentation.EscapeXmlComment())@:
 @:/// </summary>
 @foreach (var parameter in Model.Parameters)
 {
 @:/// <param name='@parameter.Name'>
-@WrapComment("/// ", parameter.Documentation)@:
+@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())@:
 @:/// </param>    
 }
 @:/// <param name='cancellationToken'>
@@ -40,12 +40,12 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithO
 else if (Model.HttpMethod == HttpMethod.Put)
 {
 @:/// <summary>
-@WrapComment("/// ", Model.Documentation)@:
+@WrapComment("/// ", Model.Documentation.EscapeXmlComment())@:
 @:/// </summary>
 @foreach (var parameter in Model.Parameters)
 {
 @:/// <param name='@parameter.Name'>
-@WrapComment("/// ", parameter.Documentation)@:
+@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())@:
 @:/// </param>    
 }
 @:/// <param name='cancellationToken'>

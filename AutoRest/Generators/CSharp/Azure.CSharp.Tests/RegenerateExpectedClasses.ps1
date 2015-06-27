@@ -6,6 +6,7 @@ $tests =
     "SwaggerBat\ResourceFlattening.Cs"="..\..\AcceptanceTests\swagger\resource-flattening.json";
     "SwaggerBat\Head.Cs"="..\..\AcceptanceTests\swagger\head.json";
     "SwaggerBat\SubscriptionIdApiVersion.Cs"="..\..\AcceptanceTests\swagger\subscriptionId-apiVersion.json";
+    "SwaggerBat\AzureSpecials.Cs"="..\..\AcceptanceTests\swagger\azure-special-properties.json";
 }
 
 # TODO: direct reference to AutoRest .Net objects and methods leaves handles to the binaries open. Invoke the command line instead.
@@ -20,7 +21,10 @@ foreach ($test in $tests.GetEnumerator())
     $settings.OutputDirectory = "$PSScriptRoot\Expected\$($test.Key)"
     $settings.Input = "$PSScriptRoot\$($test.Value)"
     $settings.Header = "NONE"
-    Remove-Item "$($settings.OutputDirectory)" -Recurse -Force
+    if (Test-Path "$($settings.OutputDirectory)") 
+    {
+        Remove-Item "$($settings.OutputDirectory)" -Recurse -Force
+    }
     Write-Output "Generating $($test.Value)"
     [Microsoft.Rest.Generator.AutoRest]::Generate($settings)
     #&"$PSScriptRoot\..\..\..\..\binaries\net45\AutoRest.exe" -Modeler Swagger -CodeGenerator $flavor -OutputDirectory "$PSScriptRoot\Expected" -Namespace "$namespace" -Input "$PSScriptRoot\$($test.Value)" -Header NONE

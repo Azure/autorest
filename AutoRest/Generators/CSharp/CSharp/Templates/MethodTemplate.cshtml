@@ -1,14 +1,15 @@
 ﻿@using System.Linq;
 @using Microsoft.Rest.Generator.ClientModel
 @using Microsoft.Rest.Generator.CSharp.TemplateModels
+@using Microsoft.Rest.Generator.Utilities
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.MethodTemplateModel>
 /// <summary>
-@WrapComment("/// ", Model.Documentation)
+@WrapComment("/// ", Model.Documentation.EscapeXmlComment())
 /// </summary>
 @foreach (var parameter in Model.LocalParameters)
 {
 @:/// <param name='@parameter.Name'>
-@WrapComment("/// ", parameter.Documentation)@:
+@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())@:
 @:/// </param>    
 }
 /// <param name='cancellationToken'>

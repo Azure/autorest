@@ -3,6 +3,12 @@
 
 namespace Microsoft.Rest.Generator.CSharp.Templates
 {
+#line 1 "MethodGroupInterfaceTemplate.cshtml"
+using Microsoft.Rest.Generator.Utilities
+
+#line default
+#line hidden
+    ;
     using System.Threading.Tasks;
 
     public class MethodGroupInterfaceTemplate : Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.MethodGroupTemplateModel>
@@ -15,13 +21,13 @@ namespace Microsoft.Rest.Generator.CSharp.Templates
         #pragma warning disable 1998
         public override async Task ExecuteAsync()
         {
-#line 2 "MethodGroupInterfaceTemplate.cshtml"
+#line 3 "MethodGroupInterfaceTemplate.cshtml"
 Write(Header("/// "));
 
 #line default
 #line hidden
             WriteLiteral("\r\nnamespace ");
-#line 3 "MethodGroupInterfaceTemplate.cshtml"
+#line 4 "MethodGroupInterfaceTemplate.cshtml"
      Write(Settings.Namespace);
 
 #line default
@@ -29,50 +35,50 @@ Write(Header("/// "));
             WriteLiteral("\r\n{\r\n    using System;\r\n    using System.Collections.Generic;\r\n    using System.N" +
 "et.Http;\r\n    using System.Threading;\r\n    using System.Threading.Tasks;\r\n    us" +
 "ing Microsoft.Rest;\r\n");
-#line 11 "MethodGroupInterfaceTemplate.cshtml"
+#line 12 "MethodGroupInterfaceTemplate.cshtml"
  foreach (var usingString in Model.Usings) {
 
 #line default
 #line hidden
 
             WriteLiteral("    using ");
-#line 12 "MethodGroupInterfaceTemplate.cshtml"
+#line 13 "MethodGroupInterfaceTemplate.cshtml"
        Write(usingString);
 
 #line default
 #line hidden
             WriteLiteral(";\r\n");
-#line 13 "MethodGroupInterfaceTemplate.cshtml"
+#line 14 "MethodGroupInterfaceTemplate.cshtml"
 }
 
 #line default
 #line hidden
 
-#line 14 "MethodGroupInterfaceTemplate.cshtml"
+#line 15 "MethodGroupInterfaceTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
             WriteLiteral("\r\n    /// <summary>\r\n    ");
-#line 16 "MethodGroupInterfaceTemplate.cshtml"
-Write(WrapComment("/// ", Model.Documentation));
+#line 17 "MethodGroupInterfaceTemplate.cshtml"
+Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
             WriteLiteral("\r\n    /// </summary>\r\n    public partial interface I");
-#line 18 "MethodGroupInterfaceTemplate.cshtml"
+#line 19 "MethodGroupInterfaceTemplate.cshtml"
                           Write(Model.MethodGroupType);
 
 #line default
 #line hidden
             WriteLiteral("\r\n    {\r\n");
-#line 20 "MethodGroupInterfaceTemplate.cshtml"
+#line 21 "MethodGroupInterfaceTemplate.cshtml"
     
 
 #line default
 #line hidden
 
-#line 20 "MethodGroupInterfaceTemplate.cshtml"
+#line 21 "MethodGroupInterfaceTemplate.cshtml"
      foreach(var method in Model.MethodTemplateModels)
     {
 
@@ -80,13 +86,13 @@ Write(WrapComment("/// ", Model.Documentation));
 #line hidden
 
             WriteLiteral("        /// <summary>\r\n        ");
-#line 23 "MethodGroupInterfaceTemplate.cshtml"
-     Write(WrapComment("/// ", method.Documentation));
+#line 24 "MethodGroupInterfaceTemplate.cshtml"
+     Write(WrapComment("/// ", method.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
             WriteLiteral("\r\n        /// </summary>\r\n");
-#line 25 "MethodGroupInterfaceTemplate.cshtml"
+#line 26 "MethodGroupInterfaceTemplate.cshtml"
         foreach (var parameter in method.Parameters)
         {
 
@@ -94,19 +100,19 @@ Write(WrapComment("/// ", Model.Documentation));
 #line hidden
 
             WriteLiteral("        /// <param name=\'");
-#line 27 "MethodGroupInterfaceTemplate.cshtml"
+#line 28 "MethodGroupInterfaceTemplate.cshtml"
                       Write(parameter.Name);
 
 #line default
 #line hidden
             WriteLiteral("\'>\r\n        ");
-#line 28 "MethodGroupInterfaceTemplate.cshtml"
-     Write(WrapComment("/// ", parameter.Documentation));
+#line 29 "MethodGroupInterfaceTemplate.cshtml"
+     Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
             WriteLiteral("\r\n        /// </param>\r\n");
-#line 30 "MethodGroupInterfaceTemplate.cshtml"
+#line 31 "MethodGroupInterfaceTemplate.cshtml"
         }
 
 #line default
@@ -114,25 +120,25 @@ Write(WrapComment("/// ", Model.Documentation));
 
             WriteLiteral("        /// <param name=\'cancellationToken\'>\r\n        /// Cancellation token.\r\n  " +
 "      /// </param>\r\n        Task<");
-#line 34 "MethodGroupInterfaceTemplate.cshtml"
+#line 35 "MethodGroupInterfaceTemplate.cshtml"
           Write(method.OperationResponseReturnTypeString);
 
 #line default
 #line hidden
             WriteLiteral("> ");
-#line 34 "MethodGroupInterfaceTemplate.cshtml"
+#line 35 "MethodGroupInterfaceTemplate.cshtml"
                                                       Write(method.Name);
 
 #line default
 #line hidden
             WriteLiteral("WithOperationResponseAsync(");
-#line 34 "MethodGroupInterfaceTemplate.cshtml"
+#line 35 "MethodGroupInterfaceTemplate.cshtml"
                                                                                               Write(method.AsyncMethodParameterDeclaration);
 
 #line default
 #line hidden
             WriteLiteral(");\r\n");
-#line 35 "MethodGroupInterfaceTemplate.cshtml"
+#line 36 "MethodGroupInterfaceTemplate.cshtml"
     }
 
 #line default

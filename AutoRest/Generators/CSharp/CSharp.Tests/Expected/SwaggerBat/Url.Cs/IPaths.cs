@@ -125,11 +125,12 @@ namespace Fixtures.SwaggerBatUrl
         /// </param>
         Task<HttpOperationResponse> StringUnicodeWithOperationResponseAsync(string stringPath, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Get 'begin!*'();:@ &=+$,/?#[]end
+        /// Get 'begin!*'();:@ &amp;=+$,/?#[]end
         /// </summary>
         /// <param name='stringPath'>
-        /// 'begin!*'();:@ &=+$,/?#[]end' url encoded string value. Possible
-        /// values for this parameter include: 'begin!*'();:@ &=+$,/?#[]end'
+        /// 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value.
+        /// Possible values for this parameter include: 'begin!*'();:@
+        /// &amp;=+$,/?#[]end'
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.

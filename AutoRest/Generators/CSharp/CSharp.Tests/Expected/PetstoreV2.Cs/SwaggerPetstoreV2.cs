@@ -16,7 +16,8 @@ namespace Fixtures.PetstoreV2
 
     /// <summary>
     /// This is a sample server Petstore server.  You can find out more about
-    /// Swagger at <a href="http://swagger.io">http://swagger.io</a> or on
+    /// Swagger at &lt;a
+    /// href="http://swagger.io"&gt;http://swagger.io&lt;/a&gt; or on
     /// irc.freenode.net, #swagger.  For this sample, you can use the api key
     /// "special-key" to test the authorization filters
     /// </summary>
@@ -839,8 +840,8 @@ namespace Fixtures.PetstoreV2
         }
 
         /// <summary>
-        /// For valid response try integer IDs with value <= 5 or > 10. Other values
-        /// will generated exceptions
+        /// For valid response try integer IDs with value &lt;= 5 or &gt; 10. Other
+        /// values will generated exceptions
         /// </summary>
         /// <param name='orderId'>
         /// Id of pet that needs to be fetched
@@ -918,8 +919,8 @@ namespace Fixtures.PetstoreV2
         }
 
         /// <summary>
-        /// For valid response try integer IDs with value < 1000. Anything above 1000
-        /// or nonintegers will generate API errors
+        /// For valid response try integer IDs with value &lt; 1000. Anything above
+        /// 1000 or nonintegers will generate API errors
         /// </summary>
         /// <param name='orderId'>
         /// Id of the order that needs to be deleted
