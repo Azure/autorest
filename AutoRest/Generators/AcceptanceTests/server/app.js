@@ -117,8 +117,6 @@ var coverage = {
   "putDateTimeMaxUtc": 0,
   "getDateTimeMaxUtcLowercase": 0,
   "getDateTimeMaxUtcUppercase": 0,
-  "putDateTimeMaxLocalPositiveOffset": 0,
-  "putDateTimeMaxLocalNegativeOffset": 0,
   "getDateTimeMaxLocalPositiveOffsetLowercase": 0,
   "getDateTimeMaxLocalPositiveOffsetUppercase": 0,
   "getDateTimeMaxLocalNegativeOffsetLowercase": 0,
@@ -126,9 +124,7 @@ var coverage = {
   "getDateTimeMinUtc": 0,
   "putDateTimeMinUtc": 0,
   "getDateTimeMinLocalPositiveOffset": 0,
-  "putDateTimeMinLocalPositiveOffset": 0,
   "getDateTimeMinLocalNegativeOffset": 0,
-  "putDateTimeMinLocalNegativeOffset": 0,
   "getIntegerNull": 0,
   "getIntegerInvalid": 0,
   "getIntegerOverflow" : 0,
@@ -322,7 +318,6 @@ var coverage = {
   "getDictionaryDictionaryValid": 0,
   "putDictionaryDictionaryValid": 0,
   "HeaderParameterExistingKey": 0,
-  "HeaderParameterProtectedKey": 0,
   "HeaderResponseExistingKey": 0,
   "HeaderResponseProtectedKey": 0,
   "HeaderParameterIntegerPositive": 0,
@@ -386,14 +381,14 @@ app.use('/number', new number(coverage).router);
 app.use('/string', new string(coverage).router);
 app.use('/byte', new byte(coverage).router);
 app.use('/date', new date(coverage).router);
-app.use('/datetime', new datetime(coverage).router);
+app.use('/datetime', new datetime(coverage, optionalCoverage).router);
 app.use('/array', new array(coverage).router);
 app.use('/complex', new complex(coverage).router);
 app.use('/dictionary', new dictionary(coverage).router);
 app.use('/paths', new paths(coverage).router);
 app.use('/queries', new queries(coverage).router);
 app.use('/pathitem', new pathitem(coverage).router);
-app.use('/header', new header(coverage).router);
+app.use('/header', new header(coverage, optionalCoverage).router);
 app.use('/reqopt', new reqopt(coverage).router);
 app.use('/http', new httpResponses(coverage, optionalCoverage).router);
 app.use('/lro', new lros(azurecoverage).router);
