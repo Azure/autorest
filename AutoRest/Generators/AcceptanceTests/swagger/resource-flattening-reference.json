@@ -179,10 +179,26 @@
     "Resource": {
       "x-ms-external": true,
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource Type"
+        },
+        "tags": {
+          "type": "string",
+          "description": "Resource Tags"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
         "name": {
           "type": "string",
           "description": "Resource Name"
-        }
+        },
       }
     },
     "FlattenedProduct": {
@@ -205,6 +221,9 @@
         "lsize": {
           "type": "integer",
           "format": "int32"
+        },
+        "provisioningState": {
+          "type": "string"          
         }
       }
     },

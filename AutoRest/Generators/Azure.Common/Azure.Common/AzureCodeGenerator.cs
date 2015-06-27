@@ -29,9 +29,20 @@ namespace Microsoft.Rest.Generator.Azure
         private const string ResourceType = "Resource";
         private const string SubResourceType = "SubResource";
         private const string ResourceProperties = "Properties";
+        private const string ProvisioningState = "ProvisioningState";
+
+        private static IEnumerable<string> ResourcePropertyNames;
 
         protected AzureCodeGenerator(Settings settings) : base(settings)
         {
+            ResourcePropertyNames = new List<string>(new[]
+            { 
+                "Id",
+                "Name",
+                "Type",
+                "Location",
+                "Tags"
+            }).OrderBy(s=> s);
         }
 
         /// <summary>
@@ -227,9 +238,33 @@ namespace Microsoft.Rest.Generator.Azure
         /// <param name="serviceClient"></param>
         internal static void FlattenResourceProperties(ServiceClient serviceClient)
         {
+            // 1. If derived from resource with x-ms-external then resource should have resource properties 
+            //    that are in client-runtime, except provisioning state
+            // 2. 
+
             HashSet<string> typesToDelete = new HashSet<string>();
             foreach (var compositeType in serviceClient.ModelTypes.ToArray())
             {
+                if (compositeType.Extensions.ContainsKey(ExternalExtension) && 
+                    compositeType.Name.Equals(ResourceType))
+                {
+                    // If derived from resource with x-ms-external then resource should have resource properties 
+                    // that are in client-runtime, except provisioning state
+                    var extraResourceProperties = compositeType.Properties
+                                                               .Select(p => p.Name.ToLower())
+                                                               .OrderBy(n => n)
+                                                               .Except(ResourcePropertyNames.Select(n => n.ToLower()));
+
+                    if(compositeType.Properties.Count() != ResourcePropertyNames.Count() || 
+                       extraResourceProperties.Count() != 0)
+                    {
+                        throw new InvalidOperationException(
+                            string.Format(CultureInfo.InvariantCulture,
+                            Resources.ResourcePropertyMismatch,
+                            string.Join(", ",ResourcePropertyNames)));
+                    }
+                }
+
                 if (compositeType.BaseModelType != null &&
                         (compositeType.BaseModelType.Name.Equals(ResourceType, StringComparison.OrdinalIgnoreCase) ||
                          compositeType.BaseModelType.Name.Equals(SubResourceType, StringComparison.OrdinalIgnoreCase)) &&
@@ -257,6 +292,17 @@ namespace Microsoft.Rest.Generator.Azure
                             typesToDelete.Add(propertiesModel.Name);
                         }
                         propertiesModel = propertiesModel.BaseModelType;
+                    }
+
+                    // If provisioning-state exist in type that is derived from resources - remove it
+                    foreach(var propertyToRemove in compositeType.Properties
+                                                                 .Where(p => p.Name
+                                                                              .Equals(
+                                                                                ProvisioningState, 
+                                                                                StringComparison.OrdinalIgnoreCase))
+                                                                 .ToArray())
+                    {
+                        compositeType.Properties.Remove(propertyToRemove);
                     }
                 }
             }
