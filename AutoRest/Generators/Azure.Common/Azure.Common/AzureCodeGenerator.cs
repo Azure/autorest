@@ -238,31 +238,13 @@ namespace Microsoft.Rest.Generator.Azure
         /// <param name="serviceClient"></param>
         internal static void FlattenResourceProperties(ServiceClient serviceClient)
         {
-            // 1. If derived from resource with x-ms-external then resource should have resource properties 
-            //    that are in client-runtime, except provisioning state
-            // 2. 
-
             HashSet<string> typesToDelete = new HashSet<string>();
             foreach (var compositeType in serviceClient.ModelTypes.ToArray())
             {
                 if (compositeType.Extensions.ContainsKey(ExternalExtension) && 
                     compositeType.Name.Equals(ResourceType))
                 {
-                    // If derived from resource with x-ms-external then resource should have resource properties 
-                    // that are in client-runtime, except provisioning state
-                    var extraResourceProperties = compositeType.Properties
-                                                               .Select(p => p.Name.ToLower())
-                                                               .OrderBy(n => n)
-                                                               .Except(ResourcePropertyNames.Select(n => n.ToLower()));
-
-                    if(compositeType.Properties.Count() != ResourcePropertyNames.Count() || 
-                       extraResourceProperties.Count() != 0)
-                    {
-                        throw new InvalidOperationException(
-                            string.Format(CultureInfo.InvariantCulture,
-                            Resources.ResourcePropertyMismatch,
-                            string.Join(", ",ResourcePropertyNames)));
-                    }
+                    CheckExternalResourceProperties(compositeType);
                 }
 
                 if (compositeType.BaseModelType != null &&
@@ -310,6 +292,25 @@ namespace Microsoft.Rest.Generator.Azure
             foreach (var typeName in typesToDelete)
             {
                 serviceClient.ModelTypes.Remove(serviceClient.ModelTypes.First(t => t.Name == typeName));
+            }
+        }
+
+        private static void CheckExternalResourceProperties(CompositeType compositeType)
+        {
+            // If derived from resource with x-ms-external then resource should have resource properties 
+            // that are in client-runtime, except provisioning state
+            var extraResourceProperties = compositeType.Properties
+                                                       .Select(p => p.Name.ToUpperInvariant())
+                                                       .OrderBy(n => n)
+                                                       .Except(ResourcePropertyNames.Select(n => n.ToUpperInvariant()));
+
+            if (compositeType.Properties.Count() != ResourcePropertyNames.Count() ||
+               extraResourceProperties.Count() != 0)
+            {
+                throw new InvalidOperationException(
+                    string.Format(CultureInfo.InvariantCulture,
+                    Resources.ResourcePropertyMismatch,
+                    string.Join(", ", ResourcePropertyNames)));
             }
         }
 
