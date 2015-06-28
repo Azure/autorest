@@ -3316,11 +3316,31 @@
     "Resource": {
       "x-ms-external": true,
       "properties": {
-        "name": {
-          "id": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource Type",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
             "type": "string"
           }
-        }
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name",
+          "readOnly": true
+        },
       }
     },
     "Sku": {

@@ -179,10 +179,31 @@
     "Resource": {
       "x-ms-external": true,
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource Type",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
         "name": {
           "type": "string",
-          "description": "Resource Name"
-        }
+          "description": "Resource Name",
+          "readOnly": true
+        },
       }
     },
     "FlattenedProduct": {
@@ -205,6 +226,9 @@
         "lsize": {
           "type": "integer",
           "format": "int32"
+        },
+        "provisioningState": {
+          "type": "string"          
         }
       }
     },
