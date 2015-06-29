@@ -31,7 +31,9 @@ function LRORetrys(client) {
      * ProvisioningState=’Succeeded’
         * @param {Product} [product] Product to put
         *
-        * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+        * @param {ProductProperties} [product.properties] 
+        *
+        * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
         *
      * @param {function} callback
      *
@@ -60,7 +62,9 @@ function LRORetrys(client) {
      * ProvisioningState=’Succeeded’
      * @param {Product} [product] Product to put
      *
-     * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+     * @param {ProductProperties} [product.properties] 
+     *
+     * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
      *
      * @param {function} callback
      *
@@ -264,7 +268,9 @@ function LRORetrys(client) {
      * status
         * @param {Product} [product] Product to put
         *
-        * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+        * @param {ProductProperties} [product.properties] 
+        *
+        * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
         *
      * @param {function} callback
      *
@@ -293,7 +299,9 @@ function LRORetrys(client) {
      * status
      * @param {Product} [product] Product to put
      *
-     * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+     * @param {ProductProperties} [product.properties] 
+     *
+     * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
      *
      * @param {function} callback
      *
@@ -780,7 +788,9 @@ function LRORetrys(client) {
      * with a response body after success
         * @param {Product} [product] Product to put
         *
-        * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+        * @param {ProductProperties} [product.properties] 
+        *
+        * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
         *
      * @param {function} callback
      *
@@ -801,7 +811,9 @@ function LRORetrys(client) {
      * with a response body after success
      * @param {Product} [product] Product to put
      *
-     * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+     * @param {ProductProperties} [product.properties] 
+     *
+     * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
      *
      * @param {function} callback
      *
@@ -888,7 +900,9 @@ function LRORetrys(client) {
      * status
         * @param {Product} [product] Product to put
         *
-        * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+        * @param {ProductProperties} [product.properties] 
+        *
+        * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
         *
      * @param {function} callback
      *
@@ -910,7 +924,9 @@ function LRORetrys(client) {
      * status
      * @param {Product} [product] Product to put
      *
-     * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+     * @param {ProductProperties} [product.properties] 
+     *
+     * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
      *
      * @param {function} callback
      *

@@ -11,5 +11,6 @@ exports.Resource = msRestAzure.Resource;
 exports.CloudError = msRestAzure.CloudError;
 exports.Sku = require('./Sku');
 exports.Product = require('./Product');
+exports.ProductProperties = require('./ProductProperties');
 exports.OperationResult = require('./OperationResult');
 exports.OperationResultError = require('./OperationResultError');

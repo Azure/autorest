@@ -45,8 +45,8 @@ Product.prototype.validate = function (payload) {
     throw new Error('payload["name"] must be of type string.');
   }
 
-  if (payload['provisioningStateValues'] !== null && payload['provisioningStateValues'] !== undefined && typeof payload['provisioningStateValues'] !== 'string') {
-    throw new Error('payload["provisioningStateValues"] must be of type string.');
+  if (payload['properties'] !== null && payload['properties'] !== undefined) {
+    models['ProductProperties'].validate(payload['properties']);
   }
 
 };
@@ -58,6 +58,12 @@ Product.prototype.validate = function (payload) {
  *
  */
 Product.prototype.deserialize = function (instance) {
+  if (instance) {
+    if (instance.properties !== null && instance.properties !== undefined) {
+      instance.properties = models['ProductProperties'].deserialize(instance.properties);
+    }
+
+  }
   return instance;
 };
 

@@ -406,9 +406,13 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (callba
  *
  * @param {FlattenedProduct} [resourceComplexObject.productresource] 
  *
- * @param {String} [resourceComplexObject.productresource.pname] 
+ * @param {FlattenedProductProperties} [resourceComplexObject.productresource.properties] 
  *
- * @param {String} [resourceComplexObject.productresource.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+ * @param {String} [resourceComplexObject.productresource.properties.pname] 
+ *
+ * @param {String} [resourceComplexObject.productresource.properties.provisioningState] 
+ *
+ * @param {String} [resourceComplexObject.productresource.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {function} callback
  *
