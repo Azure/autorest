@@ -10,13 +10,11 @@ using Microsoft.Rest.Generator.NodeJS;
 
 namespace Microsoft.Rest.Generator.Azure.NodeJS
 {
-    public class AzureNodeJSCodeGenerator : AzureCodeGenerator
+    public class AzureNodeJSCodeGenerator : NodeJSCodeGenerator
     {
-        private readonly AzureNodeJsCodeNamer _namer;
-
-        public AzureNodeJSCodeGenerator(Settings settings) : base(settings)
+        public AzureNodeJSCodeGenerator(Settings settings) 
+            : base(settings)
         {
-            _namer = new AzureNodeJsCodeNamer();
         }
 
         public override string Name
@@ -47,10 +45,16 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
+            Settings.AddCredentials = true;
+            AzureCodeGenerator.UpdateHeadMethods(serviceClient);
+            AzureCodeGenerator.ParseODataExtension(serviceClient);
+            AzureCodeGenerator.AddPageableMethod(serviceClient);
+            AzureCodeGenerator.RemoveCommonPropertiesFromMethods(serviceClient);
+            AzureCodeGenerator.AddLongRunningOperations(serviceClient);
+            AzureCodeGenerator.AddAzureProperties(serviceClient);
+            AzureCodeGenerator.SetDefaultResponses(serviceClient);
+
             base.NormalizeClientModel(serviceClient);
-            _namer.NormalizeClientModel(serviceClient);
-            _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
-                Settings.Namespace + ".Models");
         }
 
         /// <summary>

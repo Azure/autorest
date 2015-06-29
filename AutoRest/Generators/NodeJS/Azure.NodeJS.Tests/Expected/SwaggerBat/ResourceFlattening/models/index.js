@@ -11,4 +11,5 @@ exports.Resource = msRestAzure.Resource;
 exports.CloudError = msRestAzure.CloudError;
 exports.ErrorModel = require('./ErrorModel');
 exports.FlattenedProduct = require('./FlattenedProduct');
+exports.FlattenedProductProperties = require('./FlattenedProductProperties');
 exports.ResourceCollection = require('./ResourceCollection');

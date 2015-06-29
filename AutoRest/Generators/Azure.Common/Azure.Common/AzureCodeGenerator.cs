@@ -66,8 +66,13 @@ namespace Microsoft.Rest.Generator.Azure
         /// Changes head method return type.
         /// </summary>
         /// <param name="serviceClient">Service client</param>
-        private static void UpdateHeadMethods(ServiceClient serviceClient)
+        public static void UpdateHeadMethods(ServiceClient serviceClient)
         {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
             foreach (var method in serviceClient.Methods.Where(m => m.HttpMethod == HttpMethod.Head)
                                                              .Where(m => m.ReturnType == null))
             {
@@ -90,8 +95,13 @@ namespace Microsoft.Rest.Generator.Azure
         /// Set default response to CloudError if not defined explicitly.
         /// </summary>
         /// <param name="serviceClient"></param>
-        internal static void SetDefaultResponses(ServiceClient serviceClient)
+        public static void SetDefaultResponses(ServiceClient serviceClient)
         {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
             // Create CloudError if not already defined
             CompositeType cloudError = serviceClient.ModelTypes.FirstOrDefault(c =>
                 c.Name.Equals("cloudError", StringComparison.OrdinalIgnoreCase));
@@ -118,8 +128,13 @@ namespace Microsoft.Rest.Generator.Azure
         /// Removes common properties including subscriptionId and apiVersion from method signatures.
         /// </summary>
         /// <param name="serviceClient"></param>
-        internal static void RemoveCommonPropertiesFromMethods(ServiceClient serviceClient)
+        public static void RemoveCommonPropertiesFromMethods(ServiceClient serviceClient)
         {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
             foreach (var method in serviceClient.Methods)
             {
                 method.Parameters.RemoveAll(
@@ -137,8 +152,13 @@ namespace Microsoft.Rest.Generator.Azure
         /// Converts Azure Parameters to regular parameters.
         /// </summary>
         /// <param name="serviceClient">Service client</param>
-        internal static void ParseODataExtension(ServiceClient serviceClient)
+        public static void ParseODataExtension(ServiceClient serviceClient)
         {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
             foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(ODataExtension)))
             {
                 string odataModelPath = (string) method.Extensions[ODataExtension];
@@ -178,8 +198,13 @@ namespace Microsoft.Rest.Generator.Azure
         /// Creates long running operation methods.
         /// </summary>
         /// <param name="serviceClient"></param>
-        internal static void AddLongRunningOperations(ServiceClient serviceClient)
+        public static void AddLongRunningOperations(ServiceClient serviceClient)
         {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
             for (int i = 0; i < serviceClient.Methods.Count; i++)
             {
                 var method = serviceClient.Methods[i];
@@ -202,8 +227,13 @@ namespace Microsoft.Rest.Generator.Azure
         /// Creates azure specific properties.
         /// </summary>
         /// <param name="serviceClient"></param>
-        internal static void AddAzureProperties(ServiceClient serviceClient)
+        public static void AddAzureProperties(ServiceClient serviceClient)
         {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
             serviceClient.Properties.Add(new Property
             {
                 Name = "ApiVersion",
@@ -235,21 +265,22 @@ namespace Microsoft.Rest.Generator.Azure
         /// Flattens the Resource Properties.
         /// </summary>
         /// <param name="serviceClient"></param>
-        internal static void FlattenResourceProperties(ServiceClient serviceClient)
+        public static void FlattenResourceProperties(ServiceClient serviceClient)
         {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
             HashSet<string> typesToDelete = new HashSet<string>();
             foreach (var compositeType in serviceClient.ModelTypes.ToArray())
             {
-                if (compositeType.Extensions.ContainsKey(ExternalExtension) && 
-                    compositeType.Name.Equals(ResourceType))
+                if (IsExternalResource(compositeType))
                 {
                     CheckExternalResourceProperties(compositeType);
                 }
 
-                if (compositeType.BaseModelType != null &&
-                        (compositeType.BaseModelType.Name.Equals(ResourceType, StringComparison.OrdinalIgnoreCase) ||
-                         compositeType.BaseModelType.Name.Equals(SubResourceType, StringComparison.OrdinalIgnoreCase)) &&
-                    compositeType.BaseModelType.Extensions.ContainsKey(ExternalExtension))
+                if (IsDerivedFromExternalResource(compositeType))
                 {
                     // First find "properties" property
                     var propertiesProperty = compositeType.Properties.FirstOrDefault(
@@ -294,31 +325,49 @@ namespace Microsoft.Rest.Generator.Azure
             }
         }
 
-        private static void CheckExternalResourceProperties(CompositeType compositeType)
+        public static bool IsDerivedFromExternalResource(CompositeType compositeType)
         {
-            // If derived from resource with x-ms-external then resource should have resource properties 
-            // that are in client-runtime, except provisioning state
-            var extraResourceProperties = compositeType.Properties
-                                                       .Select(p => p.Name.ToUpperInvariant())
-                                                       .OrderBy(n => n)
-                                                       .Except(ResourcePropertyNames.Select(n => n.ToUpperInvariant()));
-
-            if (compositeType.Properties.Count() != ResourcePropertyNames.Count() ||
-               extraResourceProperties.Count() != 0)
+            if (compositeType == null)
             {
-                throw new InvalidOperationException(
-                    string.Format(CultureInfo.InvariantCulture,
-                    Resources.ResourcePropertyMismatch,
-                    string.Join(", ", ResourcePropertyNames)));
+                return false;
             }
+
+            return compositeType.BaseModelType != null &&
+                   (compositeType.BaseModelType.Name.Equals(ResourceType, StringComparison.OrdinalIgnoreCase) ||
+                    compositeType.BaseModelType.Name.Equals(SubResourceType, StringComparison.OrdinalIgnoreCase)) &&
+                   compositeType.BaseModelType.Extensions.ContainsKey(ExternalExtension) &&
+                   (bool)compositeType.BaseModelType.Extensions[ExternalExtension];
+        }
+
+        /// <summary>
+        /// Determines a composite type as an External Resource if it's name equals "Resource" 
+        /// and it has an extension named "x-ms-external" marked as true.
+        /// </summary>
+        /// <param name="compositeType">Type to determine if it is an external resource</param>
+        /// <returns>True if it is an external resource, false otherwise</returns>
+        public static bool IsExternalResource(CompositeType compositeType)
+        {
+            if (compositeType == null)
+            {
+                return false;
+            }
+
+            return (compositeType.Extensions.ContainsKey(ExternalExtension) &&
+                                (bool)compositeType.Extensions[ExternalExtension] &&
+                                compositeType.Name.Equals(ResourceType));
         }
 
         /// <summary>
         /// Adds ListNext() method for each List method with x-ms-pageable extension.
         /// </summary>
         /// <param name="serviceClient"></param>
-        internal static void AddPageableMethod(ServiceClient serviceClient)
+        public static void AddPageableMethod(ServiceClient serviceClient)
         {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
             foreach (var method in serviceClient.Methods.ToArray())
             {
                 if (method.Extensions.ContainsKey(PageableExtension))
@@ -340,6 +389,25 @@ namespace Microsoft.Rest.Generator.Azure
                     newMethod.Parameters.Add(nextLinkParameter);
                     serviceClient.Methods.Add(newMethod);
                 }
+            }
+        }
+
+        private static void CheckExternalResourceProperties(CompositeType compositeType)
+        {
+            // If derived from resource with x-ms-external then resource should have resource properties 
+            // that are in client-runtime, except provisioning state
+            var extraResourceProperties = compositeType.Properties
+                                                       .Select(p => p.Name.ToUpperInvariant())
+                                                       .OrderBy(n => n)
+                                                       .Except(ResourcePropertyNames.Select(n => n.ToUpperInvariant()));
+
+            if (compositeType.Properties.Count() != ResourcePropertyNames.Count() ||
+               extraResourceProperties.Count() != 0)
+            {
+                throw new InvalidOperationException(
+                    string.Format(CultureInfo.InvariantCulture,
+                    Resources.ResourcePropertyMismatch,
+                    string.Join(", ", ResourcePropertyNames)));
             }
         }
     }

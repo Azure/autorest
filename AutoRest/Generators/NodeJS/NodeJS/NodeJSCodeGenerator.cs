@@ -10,11 +10,11 @@ namespace Microsoft.Rest.Generator.NodeJS
 {
     public class NodeJSCodeGenerator : CodeGenerator
     {
-        private readonly NodeJsCodeNamer _namer;
+        public NodeJsCodeNamer Namer { get; private set; }
 
         public NodeJSCodeGenerator(Settings settings) : base(settings)
         {
-            _namer = new NodeJsCodeNamer();
+            Namer = new NodeJsCodeNamer();
         }
 
         public override string Name
@@ -45,28 +45,9 @@ namespace Microsoft.Rest.Generator.NodeJS
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
-            PopulateAdditionalProperties(serviceClient);
-            _namer.NormalizeClientModel(serviceClient);
-            _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
+            Namer.NormalizeClientModel(serviceClient);
+            Namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
-        }
-
-        private void PopulateAdditionalProperties(ServiceClient serviceClient)
-        {
-            // TODO: Shouldn't this be handled by the modeler?
-            if (Settings.AddCredentials)
-            {
-                serviceClient.Properties.Add(new Property
-                {
-                    Name = "Credentials",
-                    Type = new CompositeType
-                    {
-                        Name = "ServiceClientCredentials"
-                    },
-                    IsRequired = true,
-                    Documentation = "Credentials for client authentication."
-                });
-            }
         }
 
         /// <summary>

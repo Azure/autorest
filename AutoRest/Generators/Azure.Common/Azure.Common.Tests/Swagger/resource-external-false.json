@@ -177,7 +177,7 @@
       }
     },
     "Resource": {
-      "x-ms-external": true,
+      "x-ms-external": false,
       "properties": {
         "id": {
           "type": "string",
