@@ -10,9 +10,6 @@ var getLRORetryPutScenarioName = function (initialCode, initialState, finalState
   return null;
 };
 
-
-
-
 var hasScenarioCookie = function (req, scenario) {
   var cookies = req.headers['cookie'];
   var cookieMatch;
@@ -205,9 +202,31 @@ var lros = function (coverage) {
   });
   
   ///New LRO- PUT
+  coverage['LROPutNoHeaderInRetry'] = 0;
+  router.put('/put/noheader/202/200', function (req, res, next) {
+    var pollingUri = 'http://localhost.:' + utils.getPort() + '/lro/put/noheader/operationresults';
+    var headers = {
+      'Location': pollingUri
+    };
+    res.set(headers).status(202).end('{ "properties": { "provisioningState": "Accepted"}, "id": "100", "name": "foo" }');
+  });
+
+  router.get('/put/noheader/operationresults', function (req, res, next) {
+    var scenario = 'LROPutNoHeaderInRetry';
+    console.log('In scenario: ' + scenario + '\n');
+    if (!hasScenarioCookie(req, scenario)) {
+      addScenarioCookie(res, scenario);
+      res.status(202).end();
+    } else {
+      removeScenarioCookie(res);
+      coverage[scenario]++;
+      res.status(200).end('{ "properties": { "provisioningState": "Succeeded"}, "id": "100", "name": "foo" }');
+    }
+  });
+  
   coverage['LROPutAsyncNoHeaderInRetry'] = 0;
   router.put('/putasync/noheader/201/200', function (req, res, next) {
-    var pollingUri = 'http://localhost.:' + utils.getPort() + '/lro/putasync/noheader/201/200/operationresults';
+    var pollingUri = 'http://localhost.:' + utils.getPort() + '/lro/putasync/noheader/operationresults/123';
     var headers = {
       'Azure-AsyncOperation': pollingUri,
       'Location': 'somethingBadWhichShouldNotBeUsed'
@@ -220,44 +239,44 @@ var lros = function (coverage) {
     res.status(200).end('{ "properties": { "provisioningState": "Succeeded"}, "id": "100", "name": "foo" }');
   });
   
-  router.get('/putasync/noheader/201/200/operationresults', function (req, res, next) {
+  router.get('/putasync/noheader/operationresults/123', function (req, res, next) {
     var scenario = 'LROPutAsyncNoHeaderInRetry';
     console.log('In scenario: ' + scenario + '\n');
     if (!hasScenarioCookie(req, scenario)) {
       addScenarioCookie(res, scenario);
-      res.set(headers).status(200).end('{ "status": "InProgress"}');
+      res.status(200).end('{ "status": "InProgress"}');
     } else {
       removeScenarioCookie(res);
       res.status(200).end('{ "status": "Succeeded"}');
     }
   });
   
-  coverage['LROPutNoHeaderInRetry'] = 0;
-  router.put('/put/noheader/202/200', function (req, res, next) {
-    var pollingUri = 'http://localhost.:' + utils.getPort() + '/lro/put/noheader/202/200/operationresults';
+  ///New LRO-Delete
+  coverage['LRODeleteNoHeaderInRetry'] = 0;
+  router.delete('/delete/noheader', function (req, res, next) {
+    var pollingUri = 'http://localhost.:' + utils.getPort() + '/lro/delete/noheader/operationresults/123';
     var headers = {
       'Location': pollingUri
     };
-    res.set(headers).status(202).end('{ "properties": { "provisioningState": "Accepted"}, "id": "100", "name": "foo" }');
+    res.set(headers).status(202).end();
   });
-
-  router.get('/put/noheader/202/200/operationresults', function (req, res, next) {
-    var scenario = 'LROPutNoHeaderInRetry';
+  
+  router.get('/delete/noheader/operationresults/123', function (req, res, next) {
+    var scenario = 'LRODeleteNoHeaderInRetry';
     console.log('In scenario: ' + scenario + '\n');
     if (!hasScenarioCookie(req, scenario)) {
       addScenarioCookie(res, scenario);
-      res.set(headers).status(202).end();
+      res.status(202).end();
     } else {
       removeScenarioCookie(res);
       coverage[scenario]++;
-      res.status(200).end('{ "properties": { "provisioningState": "Succeeded"}, "id": "100", "name": "foo" }');
+      res.status(204).end();
     }
   });
   
-  ///New LRO-Delete
   coverage['LRODeleteAsyncNoHeaderInRetry'] = 0;
-  router.put('/deleteasync/noheader/202/204', function (req, res, next) {
-    var pollingUri = 'http://localhost.:' + utils.getPort() + '/lro/deleteasync/noheader/202/204/operationresults';
+  router.delete('/deleteasync/noheader/202/204', function (req, res, next) {
+    var pollingUri = 'http://localhost.:' + utils.getPort() + '/lro/deleteasync/noheader/operationresults/123';
     var headers = {
       'Azure-AsyncOperation': pollingUri,
       'Location': 'somethingBadWhichShouldNotBeUsed'
@@ -265,57 +284,35 @@ var lros = function (coverage) {
     res.set(headers).status(202).end();
   });
    
-  router.get('/deleteasync/noheader/202/204/operationresults', function (req, res, next) {
+  router.get('/deleteasync/noheader/operationresults/123', function (req, res, next) {
     var scenario = 'LRODeleteAsyncNoHeaderInRetry';
     console.log('In scenario: ' + scenario + '\n');
     if (!hasScenarioCookie(req, scenario)) {
       addScenarioCookie(res, scenario);
-      res.set(headers).status(200).end('{ "status": "InProgress"}');
+      res.status(200).end('{ "status": "InProgress"}');
     } else {
       coverage[scenario]++;
       removeScenarioCookie(res);
-      res.status(204).end();
-    }
-  });
-  
-  coverage['LRODeleteNoHeaderInRetry'] = 0;
-  router.put('/delete/noheader/202/204', function (req, res, next) {
-    var pollingUri = 'http://localhost.:' + utils.getPort() + '/lro/put/noheader/202/204/operationresults';
-    var headers = {
-      'Location': pollingUri
-    };
-    res.set(headers).status(202).end();
-  });
-  
-  router.get('/delete/noheader/202/204/operationresults', function (req, res, next) {
-    var scenario = 'LRODeleteNoHeaderInRetry';
-    console.log('In scenario: ' + scenario + '\n');
-    if (!hasScenarioCookie(req, scenario)) {
-      addScenarioCookie(res, scenario);
-      res.set(headers).status(202).end('{ "status": "InProgress"}');
-    } else {
-      removeScenarioCookie(res);
-      coverage[scenario]++;
-      res.status(204).end();
+      res.status(200).end('{ "status": "Succeeded"}');
     }
   });
   
   ////LRO Sub Resource Put
-  coverage['LROPutSubResourceNoHeaderInRetry'] = 0;
-  router.put('/putsubresource/noheader/202/200', function (req, res, next) {
-    var pollingUri = 'http://localhost.:' + utils.getPort() + '/lro/putsubresource/noheader/202/200/operationresults';
+  coverage['LROPutSubResourceInRetry'] = 0;
+  router.put('/putsubresource/202/200', function (req, res, next) {
+    var pollingUri = 'http://localhost.:' + utils.getPort() + '/lro/putsubresource/operationresults';
     var headers = {
       'Location': pollingUri
     };
     res.set(headers).status(202).end('{ "properties": { "provisioningState": "Accepted"}, "id": "100", "subresource": "sub1" }');
   });
   
-  router.get('/putsubresource/noheader/202/200/operationresults', function (req, res, next) {
-    var scenario = 'LROPutSubResourceNoHeaderInRetry';
+  router.get('/putsubresource/operationresults', function (req, res, next) {
+    var scenario = 'LROPutSubResourceInRetry';
     console.log('In scenario: ' + scenario + '\n');
     if (!hasScenarioCookie(req, scenario)) {
       addScenarioCookie(res, scenario);
-      res.set(headers).status(202).end();
+      res.status(202).end();
     } else {
       removeScenarioCookie(res);
       coverage[scenario]++;
@@ -324,44 +321,49 @@ var lros = function (coverage) {
   });
 
   //// (use async operation header)
-  coverage['LROPutSubResourceAsyncNoHeaderInRetry'] = 0;
-  router.put('/putreubresourceasync/noheader/202/200', function (req, res, next) {
-    var pollingUri = 'http://localhost.:' + utils.getPort() + '/lro/putsubresourceasync/noheader/202/200/operationresults';
+  coverage['LROPutSubResourceAsyncInRetry'] = 0;
+  router.put('/putsubresourceasync/202/200', function (req, res, next) {
+    var pollingUri = 'http://localhost.:' + utils.getPort() + '/lro/putsubresourceasync/operationresults/123';
     var headers = {
       'Azure-AsyncOperation': pollingUri,
       'Location': 'somethingBadWhichShouldNotBeUsed'
     };
     res.set(headers).status(202).end('{ "properties": { "provisioningState": "Accepted"}, "id": "100", "subresource": "sub1" }');
   });
- 
-  router.get('/putsubresourceasync/noheader/202/200/operationresults', function (req, res, next) {
-    var scenario = 'LROPutSubResourceAsyncNoHeaderInRetry';
+  
+  router.get('/putsubresourceasync/202/200', function (req, res, next) {
+    res.status(200).end('{ "properties": { "provisioningState": "Succeeded"}, "id": "100", "subresource": "sub1" }');
+  });
+
+  router.get('/putsubresourceasync/operationresults/123', function (req, res, next) {
+    var scenario = 'LROPutSubResourceAsyncInRetry';
+    coverage[scenario]++;
     console.log('In scenario: ' + scenario + '\n');
     if (!hasScenarioCookie(req, scenario)) {
       addScenarioCookie(res, scenario);
-      res.set(headers).status(200).end();
+      res.status(200).end('{ "status": "InProgress"}');
     } else {
       removeScenarioCookie(res);
-      res.status(200).end('{ "properties": { "provisioningState": "Succeeded"}, "id": "100", "subresource": "sub1" }');
+      res.status(200).end('{ "status": "Succeeded"}');
     }
   });
   
   ////LRO Non Resource Put
-  coverage['LROPutNonResourceNoHeaderInRetry'] = 0;
-  router.put('/putnonresource/noheader/202/200', function (req, res, next) {
-    var pollingUri = 'http://localhost.:' + utils.getPort() + '/lro/putnonresource/noheader/202/200/operationresults';
+  coverage['LROPutNonResourceInRetry'] = 0;
+  router.put('/putnonresource/202/200', function (req, res, next) {
+    var pollingUri = 'http://localhost.:' + utils.getPort() + '/lro/putnonresource/operationresults';
     var headers = {
       'Location': pollingUri
     };
     res.set(headers).status(202).end();
   });
   
-  router.get('/putnonresource/noheader/202/200/operationresults', function (req, res, next) {
-    var scenario = 'LROPutNonResourceNoHeaderInRetry';
+  router.get('/putnonresource/operationresults', function (req, res, next) {
+    var scenario = 'LROPutNonResourceInRetry';
     console.log('In scenario: ' + scenario + '\n');
     if (!hasScenarioCookie(req, scenario)) {
       addScenarioCookie(res, scenario);
-      res.set(headers).status(202).end();
+      res.status(202).end();
     } else {
       removeScenarioCookie(res);
       coverage[scenario]++;
@@ -370,9 +372,9 @@ var lros = function (coverage) {
   });
 
   // (use async operation header)
-  coverage['LROPutNonResourceAsyncNoHeaderInRetry'] = 0;
-  router.put('/putnonresourceasync/noheader/202/200', function (req, res, next) {
-    var pollingUri = 'http://localhost.:' + utils.getPort() + '/lro/putnonresourceasync/noheader/202/200/operationresults';
+  coverage['LROPutNonResourceAsyncInRetry'] = 0;
+  router.put('/putnonresourceasync/202/200', function (req, res, next) {
+    var pollingUri = 'http://localhost.:' + utils.getPort() + '/lro/putnonresourceasync/operationresults/123';
     var headers = {
       'Azure-AsyncOperation': pollingUri,
       'Location': 'somethingBadWhichShouldNotBeUsed'
@@ -380,16 +382,20 @@ var lros = function (coverage) {
     res.set(headers).status(202).end();
   });
   
-  router.get('/putnonresourceasync/noheader/202/200/operationresults', function (req, res, next) {
-    var scenario = 'LROPutNonResourceAsyncNoHeaderInRetry';
+  router.get('/putnonresourceasync/202/200', function (req, res, next) {
+    res.status(200).end('{ "name": "sku" , "id": "100" }');
+  });
+
+  router.get('/putnonresourceasync/operationresults/123', function (req, res, next) {
+    var scenario = 'LROPutNonResourceAsyncInRetry';
     console.log('In scenario: ' + scenario + '\n');
     if (!hasScenarioCookie(req, scenario)) {
       addScenarioCookie(res, scenario);
-      res.set(headers).status(202).end();
+      res.status(202).end('{ "status": "InProgress"}');
     } else {
       removeScenarioCookie(res);
       coverage[scenario]++;
-      res.status(200).end('{ "name": "sku" , "id": "100" }');
+      res.status(200).end('{ "status": "Succeeded"}');
     }
   });
   /////////////////////////
