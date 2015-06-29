@@ -165,6 +165,24 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
         }
 
         [Fact]
+        public void SwaggerResourceExternalFalseTest()
+        {
+            var settings = new Settings
+            {
+                Namespace = "Test",
+                Input = @"Swagger\resource-external-false.json"
+            };
+
+
+            var modeler = new SwaggerModeler(settings);
+            var serviceClient = modeler.Build();
+            var codeGen = new SampleAzureCodeGenerator(settings);
+            codeGen.NormalizeClientModel(serviceClient);
+
+            Assert.NotNull(serviceClient);
+        }
+
+        [Fact]
         public void AzureParameterTest()
         {
             var settings = new Settings

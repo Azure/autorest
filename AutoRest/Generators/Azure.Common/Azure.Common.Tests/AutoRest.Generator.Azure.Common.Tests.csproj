@@ -27,6 +27,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AzureServiceClientNormalizerTests.cs" />
     <None Include="app.config" />
+    <None Include="Swagger\resource-external-false.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Swagger\swagger-odata-spec.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

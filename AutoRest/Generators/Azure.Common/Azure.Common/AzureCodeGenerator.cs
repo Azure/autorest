@@ -240,16 +240,12 @@ namespace Microsoft.Rest.Generator.Azure
             HashSet<string> typesToDelete = new HashSet<string>();
             foreach (var compositeType in serviceClient.ModelTypes.ToArray())
             {
-                if (compositeType.Extensions.ContainsKey(ExternalExtension) && 
-                    compositeType.Name.Equals(ResourceType))
+                if (IsExternalResource(compositeType))
                 {
                     CheckExternalResourceProperties(compositeType);
                 }
 
-                if (compositeType.BaseModelType != null &&
-                        (compositeType.BaseModelType.Name.Equals(ResourceType, StringComparison.OrdinalIgnoreCase) ||
-                         compositeType.BaseModelType.Name.Equals(SubResourceType, StringComparison.OrdinalIgnoreCase)) &&
-                    compositeType.BaseModelType.Extensions.ContainsKey(ExternalExtension))
+                if (IsDerivedFromExternalResource(compositeType))
                 {
                     // First find "properties" property
                     var propertiesProperty = compositeType.Properties.FirstOrDefault(
@@ -292,6 +288,28 @@ namespace Microsoft.Rest.Generator.Azure
             {
                 serviceClient.ModelTypes.Remove(serviceClient.ModelTypes.First(t => t.Name == typeName));
             }
+        }
+
+        public static bool IsDerivedFromExternalResource(CompositeType compositeType)
+        {
+            return compositeType.BaseModelType != null &&
+                   (compositeType.BaseModelType.Name.Equals(ResourceType, StringComparison.OrdinalIgnoreCase) ||
+                    compositeType.BaseModelType.Name.Equals(SubResourceType, StringComparison.OrdinalIgnoreCase)) &&
+                   compositeType.BaseModelType.Extensions.ContainsKey(ExternalExtension) &&
+                   (bool)compositeType.BaseModelType.Extensions[ExternalExtension];
+        }
+
+        /// <summary>
+        /// Determines a composite type as an External Resource if it's name equals "Resource" 
+        /// and it has an extension named "x-ms-external" marked as true.
+        /// </summary>
+        /// <param name="compositeType">Type to determine if it is an external resource</param>
+        /// <returns>True if it is an external resource, false otherwise</returns>
+        public static bool IsExternalResource(CompositeType compositeType)
+        {
+            return (compositeType.Extensions.ContainsKey(ExternalExtension) &&
+                                (bool)compositeType.Extensions[ExternalExtension] &&
+                                compositeType.Name.Equals(ResourceType));
         }
 
         /// <summary>
