@@ -736,6 +736,67 @@
         }
       }
     },
+    "/lro/putasync/noheader/201/200": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LRO_putAsyncNoHeaderInRetry",
+        "description": "Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
+        "tags": [
+          "LRO Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Initial response with ProvisioningState='Accepted'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /lro/putasync/noheader/201/200/operationResults",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "LRO_getAsyncNoHeaderInRetry",
+        "description": "Long running gut request for you to retrieve create resource",
+        "tags": [
+          "LRO Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response with create resource",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/lro/delete/provisioning/202/accepted/200/succeeded": {
       "delete": {
         "x-ms-long-running-operation": true,
