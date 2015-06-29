@@ -66,7 +66,7 @@ namespace Microsoft.Rest.Generator.Azure
         /// Changes head method return type.
         /// </summary>
         /// <param name="serviceClient">Service client</param>
-        private static void UpdateHeadMethods(ServiceClient serviceClient)
+        public static void UpdateHeadMethods(ServiceClient serviceClient)
         {
             foreach (var method in serviceClient.Methods.Where(m => m.HttpMethod == HttpMethod.Head)
                                                              .Where(m => m.ReturnType == null))
@@ -90,7 +90,7 @@ namespace Microsoft.Rest.Generator.Azure
         /// Set default response to CloudError if not defined explicitly.
         /// </summary>
         /// <param name="serviceClient"></param>
-        internal static void SetDefaultResponses(ServiceClient serviceClient)
+        public static void SetDefaultResponses(ServiceClient serviceClient)
         {
             // Create CloudError if not already defined
             CompositeType cloudError = serviceClient.ModelTypes.FirstOrDefault(c =>
@@ -118,7 +118,7 @@ namespace Microsoft.Rest.Generator.Azure
         /// Removes common properties including subscriptionId and apiVersion from method signatures.
         /// </summary>
         /// <param name="serviceClient"></param>
-        internal static void RemoveCommonPropertiesFromMethods(ServiceClient serviceClient)
+        public static void RemoveCommonPropertiesFromMethods(ServiceClient serviceClient)
         {
             foreach (var method in serviceClient.Methods)
             {
@@ -137,7 +137,7 @@ namespace Microsoft.Rest.Generator.Azure
         /// Converts Azure Parameters to regular parameters.
         /// </summary>
         /// <param name="serviceClient">Service client</param>
-        internal static void ParseODataExtension(ServiceClient serviceClient)
+        public static void ParseODataExtension(ServiceClient serviceClient)
         {
             foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(ODataExtension)))
             {
@@ -178,7 +178,7 @@ namespace Microsoft.Rest.Generator.Azure
         /// Creates long running operation methods.
         /// </summary>
         /// <param name="serviceClient"></param>
-        internal static void AddLongRunningOperations(ServiceClient serviceClient)
+        public static void AddLongRunningOperations(ServiceClient serviceClient)
         {
             for (int i = 0; i < serviceClient.Methods.Count; i++)
             {
@@ -202,7 +202,7 @@ namespace Microsoft.Rest.Generator.Azure
         /// Creates azure specific properties.
         /// </summary>
         /// <param name="serviceClient"></param>
-        internal static void AddAzureProperties(ServiceClient serviceClient)
+        public static void AddAzureProperties(ServiceClient serviceClient)
         {
             serviceClient.Properties.Add(new Property
             {
@@ -235,7 +235,7 @@ namespace Microsoft.Rest.Generator.Azure
         /// Flattens the Resource Properties.
         /// </summary>
         /// <param name="serviceClient"></param>
-        internal static void FlattenResourceProperties(ServiceClient serviceClient)
+        public static void FlattenResourceProperties(ServiceClient serviceClient)
         {
             HashSet<string> typesToDelete = new HashSet<string>();
             foreach (var compositeType in serviceClient.ModelTypes.ToArray())
@@ -294,30 +294,11 @@ namespace Microsoft.Rest.Generator.Azure
             }
         }
 
-        private static void CheckExternalResourceProperties(CompositeType compositeType)
-        {
-            // If derived from resource with x-ms-external then resource should have resource properties 
-            // that are in client-runtime, except provisioning state
-            var extraResourceProperties = compositeType.Properties
-                                                       .Select(p => p.Name.ToUpperInvariant())
-                                                       .OrderBy(n => n)
-                                                       .Except(ResourcePropertyNames.Select(n => n.ToUpperInvariant()));
-
-            if (compositeType.Properties.Count() != ResourcePropertyNames.Count() ||
-               extraResourceProperties.Count() != 0)
-            {
-                throw new InvalidOperationException(
-                    string.Format(CultureInfo.InvariantCulture,
-                    Resources.ResourcePropertyMismatch,
-                    string.Join(", ", ResourcePropertyNames)));
-            }
-        }
-
         /// <summary>
         /// Adds ListNext() method for each List method with x-ms-pageable extension.
         /// </summary>
         /// <param name="serviceClient"></param>
-        internal static void AddPageableMethod(ServiceClient serviceClient)
+        public static void AddPageableMethod(ServiceClient serviceClient)
         {
             foreach (var method in serviceClient.Methods.ToArray())
             {
@@ -340,6 +321,25 @@ namespace Microsoft.Rest.Generator.Azure
                     newMethod.Parameters.Add(nextLinkParameter);
                     serviceClient.Methods.Add(newMethod);
                 }
+            }
+        }
+
+        private static void CheckExternalResourceProperties(CompositeType compositeType)
+        {
+            // If derived from resource with x-ms-external then resource should have resource properties 
+            // that are in client-runtime, except provisioning state
+            var extraResourceProperties = compositeType.Properties
+                                                       .Select(p => p.Name.ToUpperInvariant())
+                                                       .OrderBy(n => n)
+                                                       .Except(ResourcePropertyNames.Select(n => n.ToUpperInvariant()));
+
+            if (compositeType.Properties.Count() != ResourcePropertyNames.Count() ||
+               extraResourceProperties.Count() != 0)
+            {
+                throw new InvalidOperationException(
+                    string.Format(CultureInfo.InvariantCulture,
+                    Resources.ResourcePropertyMismatch,
+                    string.Join(", ", ResourcePropertyNames)));
             }
         }
     }
