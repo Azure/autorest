@@ -20,3 +20,4 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", 
     MessageId = "Js", Scope = "type", Target = "Microsoft.Rest.Generator.Azure.NodeJS.AzureNodeJsCodeNamer")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "Js", Scope = "type", Target = "Microsoft.Rest.Generator.Azure.NodeJS.AzureNodeJsCodeNamer")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1020:AvoidNamespacesWithFewTypes", Scope = "namespace", Target = "Microsoft.Rest.Generator.Azure.NodeJS")]
