@@ -106,7 +106,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             // Models
             foreach (var model in serviceClient.ModelTypes)
             {
-                if (model.Extensions.ContainsKey(ExternalExtension))
+                if (model.Extensions.ContainsKey(ExternalExtension) && (bool) model.Extensions[ExternalExtension])
                 {
                     continue;
                 }

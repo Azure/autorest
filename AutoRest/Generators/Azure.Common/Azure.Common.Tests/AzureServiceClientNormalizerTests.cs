@@ -4,6 +4,7 @@
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Modeler.Swagger;
 using Microsoft.Rest.Modeler.Swagger.Azure.Tests;
+using System.Linq;
 using Xunit;
 
 namespace Microsoft.Rest.Generator.Azure.Common.Tests
@@ -180,6 +181,13 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
             codeGen.NormalizeClientModel(serviceClient);
 
             Assert.NotNull(serviceClient);
+            var resource = serviceClient.ModelTypes.First(m => 
+                m.Name.Equals("Resource", System.StringComparison.OrdinalIgnoreCase));
+            Assert.True(resource.Extensions.ContainsKey(AzureCodeGenerator.ExternalExtension));
+            Assert.False((bool) resource.Extensions[AzureCodeGenerator.ExternalExtension]);
+            var flattenedProduct = serviceClient.ModelTypes.First(m =>
+                m.Name.Equals("FlattenedProduct", System.StringComparison.OrdinalIgnoreCase));
+            Assert.True(flattenedProduct.BaseModelType.Equals(resource));
         }
 
         [Fact]
