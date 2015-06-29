@@ -92,10 +92,8 @@ ClientBin
 ~$*
 *.dbmdl
 
-
 # Build tasks
 tools/*.dll
-
 *.class
 
 # Mobile Tools for Java (J2ME)
@@ -124,6 +122,9 @@ local.properties
 .classpath
 .settings/
 .loadpath
+
+# Xamarin #
+*.userprefs
 
 # Other Tooling #
 .classpath
