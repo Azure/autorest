@@ -68,6 +68,11 @@ namespace Microsoft.Rest.Generator.Azure
         /// <param name="serviceClient">Service client</param>
         public static void UpdateHeadMethods(ServiceClient serviceClient)
         {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
             foreach (var method in serviceClient.Methods.Where(m => m.HttpMethod == HttpMethod.Head)
                                                              .Where(m => m.ReturnType == null))
             {
@@ -92,6 +97,11 @@ namespace Microsoft.Rest.Generator.Azure
         /// <param name="serviceClient"></param>
         public static void SetDefaultResponses(ServiceClient serviceClient)
         {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
             // Create CloudError if not already defined
             CompositeType cloudError = serviceClient.ModelTypes.FirstOrDefault(c =>
                 c.Name.Equals("cloudError", StringComparison.OrdinalIgnoreCase));
@@ -120,6 +130,11 @@ namespace Microsoft.Rest.Generator.Azure
         /// <param name="serviceClient"></param>
         public static void RemoveCommonPropertiesFromMethods(ServiceClient serviceClient)
         {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
             foreach (var method in serviceClient.Methods)
             {
                 method.Parameters.RemoveAll(
@@ -139,6 +154,11 @@ namespace Microsoft.Rest.Generator.Azure
         /// <param name="serviceClient">Service client</param>
         public static void ParseODataExtension(ServiceClient serviceClient)
         {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
             foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(ODataExtension)))
             {
                 string odataModelPath = (string) method.Extensions[ODataExtension];
@@ -180,6 +200,11 @@ namespace Microsoft.Rest.Generator.Azure
         /// <param name="serviceClient"></param>
         public static void AddLongRunningOperations(ServiceClient serviceClient)
         {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
             for (int i = 0; i < serviceClient.Methods.Count; i++)
             {
                 var method = serviceClient.Methods[i];
@@ -204,6 +229,11 @@ namespace Microsoft.Rest.Generator.Azure
         /// <param name="serviceClient"></param>
         public static void AddAzureProperties(ServiceClient serviceClient)
         {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
             serviceClient.Properties.Add(new Property
             {
                 Name = "ApiVersion",
@@ -237,6 +267,11 @@ namespace Microsoft.Rest.Generator.Azure
         /// <param name="serviceClient"></param>
         public static void FlattenResourceProperties(ServiceClient serviceClient)
         {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
             HashSet<string> typesToDelete = new HashSet<string>();
             foreach (var compositeType in serviceClient.ModelTypes.ToArray())
             {
@@ -292,6 +327,11 @@ namespace Microsoft.Rest.Generator.Azure
 
         public static bool IsDerivedFromExternalResource(CompositeType compositeType)
         {
+            if (compositeType == null)
+            {
+                return false;
+            }
+
             return compositeType.BaseModelType != null &&
                    (compositeType.BaseModelType.Name.Equals(ResourceType, StringComparison.OrdinalIgnoreCase) ||
                     compositeType.BaseModelType.Name.Equals(SubResourceType, StringComparison.OrdinalIgnoreCase)) &&
@@ -307,6 +347,11 @@ namespace Microsoft.Rest.Generator.Azure
         /// <returns>True if it is an external resource, false otherwise</returns>
         public static bool IsExternalResource(CompositeType compositeType)
         {
+            if (compositeType == null)
+            {
+                return false;
+            }
+
             return (compositeType.Extensions.ContainsKey(ExternalExtension) &&
                                 (bool)compositeType.Extensions[ExternalExtension] &&
                                 compositeType.Name.Equals(ResourceType));
@@ -318,6 +363,11 @@ namespace Microsoft.Rest.Generator.Azure
         /// <param name="serviceClient"></param>
         public static void AddPageableMethod(ServiceClient serviceClient)
         {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
             foreach (var method in serviceClient.Methods.ToArray())
             {
                 if (method.Extensions.ContainsKey(PageableExtension))
