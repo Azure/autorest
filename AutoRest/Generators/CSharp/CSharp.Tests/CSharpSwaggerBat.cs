@@ -31,6 +31,7 @@ using Fixtures.SwaggerBatUrl.Models;
 using Fixtures.SwaggerBatHeader;
 using Fixtures.SwaggerBatHeader.Models;
 using Fixtures.SwaggerBatRequiredOptional;
+using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger.Tests;
 using Newtonsoft.Json;
 using Xunit;
@@ -187,13 +188,16 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             client.Datetime.PutUtcMinDateTime(DateTime.Parse("0001-01-01T00:00:00Z",
                 CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal));
             //underflow-for-dotnet
-            client.Datetime.PutLocalPositiveOffsetMinDateTime(DateTime.Parse("0001-01-01T00:00:00+14:00"));
-            client.Datetime.PutLocalNegativeOffsetMinDateTime(DateTime.Parse("0001-01-01T00:00:00-14:00"));
+            client.Datetime.PutLocalPositiveOffsetMinDateTime(DateTime.Parse("0001-01-01T00:00:00+14:00",
+                CultureInfo.InvariantCulture));
+            client.Datetime.PutLocalNegativeOffsetMinDateTime(DateTime.Parse("0001-01-01T00:00:00-14:00",
+                CultureInfo.InvariantCulture));
             //overflow-for-dotnet
             Assert.Throws<FormatException>(
                 () =>
                     client.Datetime.PutLocalNegativeOffsetMaxDateTime(
-                        DateTime.Parse("9999-12-31T23:59:59.9999999-14:00")));
+                        DateTime.Parse("9999-12-31T23:59:59.9999999-14:00",
+                CultureInfo.InvariantCulture)));
         }
 
         [Fact]
@@ -218,8 +222,8 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             client.Array.PutDoubleValid(new List<double?> { 0, -0.01, -1.2e20 });
             Assert.True(new List<string> { "foo1", "foo2", "foo3" }.SequenceEqual(client.Array.GetStringValid()));
             client.Array.PutStringValid(new List<string> { "foo1", "foo2", "foo3" });
-            Assert.True(new List<string> {"foo", null, "foo2"}.SequenceEqual(client.Array.GetStringWithNull()));
-            Assert.True(new List<string> {"foo", "123", "foo2"}.SequenceEqual(client.Array.GetStringWithInvalid()));
+            Assert.True(new List<string> { "foo", null, "foo2" }.SequenceEqual(client.Array.GetStringWithNull()));
+            Assert.True(new List<string> { "foo", "123", "foo2" }.SequenceEqual(client.Array.GetStringWithInvalid()));
             var date1 = new DateTimeOffset(2000, 12, 01, 0, 0, 0, TimeSpan.Zero).UtcDateTime;
             var date2 = new DateTimeOffset(1980, 1, 2, 0, 0, 0, TimeSpan.Zero).UtcDateTime;
             var date3 = new DateTimeOffset(1492, 10, 12, 0, 0, 0, TimeSpan.Zero).UtcDateTime;
@@ -324,10 +328,12 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             Assert.Throws<JsonSerializationException>(() => client.Array.GetDoubleInvalidString());
             Assert.True(client.Array.GetStringWithInvalid().SequenceEqual(new List<string> { "foo", "123", "foo2" }));
             var dateNullArray = client.Array.GetDateInvalidNull();
-            Assert.True(dateNullArray.SequenceEqual(new List<DateTime?> { DateTime.Parse("2012-01-01"), null, DateTime.Parse("1776-07-04") }));
+            Assert.True(dateNullArray.SequenceEqual(new List<DateTime?> { DateTime.Parse("2012-01-01"), null, DateTime.Parse("1776-07-04", 
+                CultureInfo.InvariantCulture) }));
             Assert.Throws<JsonReaderException>(() => client.Array.GetDateInvalidChars());
             var dateTimeNullArray = client.Array.GetDateTimeInvalidNull();
-            Assert.True(dateTimeNullArray.SequenceEqual(new List<DateTime?> { DateTime.Parse("2000-12-01t00:00:01z").ToUniversalTime(), null }));
+            Assert.True(dateTimeNullArray.SequenceEqual(new List<DateTime?> { DateTime.Parse("2000-12-01t00:00:01z", 
+                CultureInfo.InvariantCulture).ToUniversalTime(), null }));
             Assert.Throws<JsonReaderException>(() => client.Array.GetDateTimeInvalidChars());
         }
 
@@ -688,7 +694,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             var stringRequest = new StringWrapper { NullProperty = null, Empty = "", Field = "goodrequest" };
             client.Primitive.PutString(stringRequest);
             // GET primitive/date
-            var dateResult = client.Primitive.GetDate();
+            client.Primitive.GetDate();
             client.Primitive.PutDate(new DateWrapper
             {
                 Field = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
@@ -787,9 +793,9 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
             /* COMPLEX TYPES THAT INVOLVE POLYMORPHISM */
             // GET polymorphism/valid
-            var polymorphismResult = client.Polymorphism.GetValid();
-            Assert.True(polymorphismResult is Salmon);
-            Assert.Equal("alaska", ((Salmon)polymorphismResult).Location);
+            var polymorphismResult = client.Polymorphism.GetValid() as Salmon;
+            Assert.NotNull(polymorphismResult);
+            Assert.Equal("alaska", polymorphismResult.Location);
             Assert.True(polymorphismResult.Siblings[0] is Shark);
             Assert.True(polymorphismResult.Siblings[1] is Sawshark);
             Assert.Equal(6, ((Shark)polymorphismResult.Siblings[0]).Age);
@@ -916,33 +922,41 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             client.Header.ParamInteger("negative", -2);
             // POST response/prim/integer
             var response = client.Header.ResponseIntegerWithOperationResponseAsync("positive").Result;
-            Assert.Equal(1, int.Parse(response.Response.Headers.GetValues("value").FirstOrDefault()));
+            Assert.Equal(1, int.Parse(response.Response.Headers.GetValues("value").FirstOrDefault(), 
+                CultureInfo.InvariantCulture));
             response = client.Header.ResponseIntegerWithOperationResponseAsync("negative").Result;
-            Assert.Equal(-2, int.Parse(response.Response.Headers.GetValues("value").FirstOrDefault()));
+            Assert.Equal(-2, int.Parse(response.Response.Headers.GetValues("value").FirstOrDefault(), 
+                CultureInfo.InvariantCulture));
             // POST param/prim/long
             client.Header.ParamLong("positive", 105);
             client.Header.ParamLong("negative", -2);
             // POST response/prim/long
             response = client.Header.ResponseLongWithOperationResponseAsync("positive").Result;
-            Assert.Equal(105, long.Parse(response.Response.Headers.GetValues("value").FirstOrDefault()));
+            Assert.Equal(105, long.Parse(response.Response.Headers.GetValues("value").FirstOrDefault(), 
+                CultureInfo.InvariantCulture));
             response = client.Header.ResponseLongWithOperationResponseAsync("negative").Result;
-            Assert.Equal(-2, long.Parse(response.Response.Headers.GetValues("value").FirstOrDefault()));
+            Assert.Equal(-2, long.Parse(response.Response.Headers.GetValues("value").FirstOrDefault(), 
+                CultureInfo.InvariantCulture));
             // POST param/prim/float
             client.Header.ParamFloat("positive", 0.07);
             client.Header.ParamFloat("negative", -3.0);
             // POST response/prim/float
             response = client.Header.ResponseFloatWithOperationResponseAsync("positive").Result;
-            Assert.True(Math.Abs(0.07 - float.Parse(response.Response.Headers.GetValues("value").FirstOrDefault())) < 0.00001);
+            Assert.True(Math.Abs(0.07 - float.Parse(response.Response.Headers.GetValues("value").FirstOrDefault(), 
+                CultureInfo.InvariantCulture)) < 0.00001);
             response = client.Header.ResponseFloatWithOperationResponseAsync("negative").Result;
-            Assert.True(Math.Abs(-3 - float.Parse(response.Response.Headers.GetValues("value").FirstOrDefault())) < 0.00001);
+            Assert.True(Math.Abs(-3 - float.Parse(response.Response.Headers.GetValues("value").FirstOrDefault(), 
+                CultureInfo.InvariantCulture)) < 0.00001);
             // POST param/prim/double
             client.Header.ParamDouble("positive", 7e120);
             client.Header.ParamDouble("negative", -3.0);
             // POST response/prim/double
             response = client.Header.ResponseDoubleWithOperationResponseAsync("positive").Result;
-            Assert.Equal(7e120, double.Parse(response.Response.Headers.GetValues("value").FirstOrDefault()));
+            Assert.Equal(7e120, double.Parse(response.Response.Headers.GetValues("value").FirstOrDefault(), 
+                CultureInfo.InvariantCulture));
             response = client.Header.ResponseDoubleWithOperationResponseAsync("negative").Result;
-            Assert.Equal(-3, double.Parse(response.Response.Headers.GetValues("value").FirstOrDefault()));
+            Assert.Equal(-3, double.Parse(response.Response.Headers.GetValues("value").FirstOrDefault(), 
+                CultureInfo.InvariantCulture));
             // POST param/prim/bool
             client.Header.ParamBool("true", true);
             client.Header.ParamBool("false", false);
@@ -1315,9 +1329,11 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             report["HttpRedirect301Put"] = 1;
             report["HttpRedirect302Patch"] = 1;
             var skipped = report.Where(p => p.Value == 0).Select(p => p.Key);
+            skipped.ForEach((item) => Trace.WriteLine(string.Format(CultureInfo.CurrentCulture, "SKIPPED {0}.", item)));
             float totalTests = report.Count;
             float executedTests = report.Values.Count(v => v > 0);
-            Trace.WriteLine(string.Format("The test coverage is {0}/{1}.", executedTests, totalTests));
+            Trace.WriteLine(string.Format(CultureInfo.CurrentCulture, "The test coverage is {0}/{1}.", 
+                executedTests, totalTests));
             Assert.Equal(executedTests, totalTests);
         }
 

@@ -41,7 +41,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
         public Uri Uri
         {
-            get { return new Uri(string.Format("http://localhost.:{0}", Port)); }
+            get { return new Uri(string.Format(CultureInfo.InvariantCulture, "http://localhost.:{0}", Port)); }
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             }
             else
             {
-                throw new InvalidOperationException(string.Format("Failed to start {0} {1} .",
+                throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, "Failed to start {0} {1} .",
                     npmPath, NpmArgument));
             }
         }

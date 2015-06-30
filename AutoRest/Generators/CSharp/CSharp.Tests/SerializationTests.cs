@@ -157,6 +157,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         {
             var client = new PolymorphicAnimalStore(new Uri("http://localhost:3000"), new MirroringHandler());
             var createdPet = client.CreateOrUpdatePolymorphicAnimals(expected);
+            Assert.NotNull(expected);
             Assert.Equal(expected.GetType(), createdPet.GetType());
             foreach (var property in expected.GetType().GetProperties())
             {
@@ -190,6 +191,9 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         public override void WriteJson(JsonWriter writer,
             object value, JsonSerializer serializer)
         {
+            Assert.NotNull(value);
+            Assert.NotNull(writer);
+            Assert.NotNull(serializer);
             string typeName = value.GetType().Name;
             if (value.GetType().GetCustomAttributes<JsonObjectAttribute>().Any())
             {

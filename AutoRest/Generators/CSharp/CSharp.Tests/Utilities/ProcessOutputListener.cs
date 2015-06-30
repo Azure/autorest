@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -30,6 +31,11 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
         public void ProcessOutput(object sendingProcess, DataReceivedEventArgs data)
         {
+            if (data == null)
+            {
+                throw new ArgumentNullException("data");
+            }
+
             ScrubAndWriteValue("SERVICE STDOUT", data.Data);
             if (data.Data!= null && data.Data.Contains("Server started"))
             {
@@ -39,6 +45,11 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
         public void ProcessError(object sendingProcess, DataReceivedEventArgs data)
         {
+            if (data == null)
+            {
+                throw new ArgumentNullException("data");
+            }
+
             ScrubAndWriteValue("SERVICE ERROR", data.Data);
         }
 
