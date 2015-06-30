@@ -1564,6 +1564,221 @@ function LROs(client) {
 
     /**
      *
+     * Long running put request, service returns a 202 to the initial request with
+     * location header. Subsequent calls to operation status do not contain
+     * location header.
+        * @param {Product} [product] Product to put
+        *
+        * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+        *
+     * @param {function} callback
+     *
+     * @returns {Stream} The Response stream
+     */
+    LROs.prototype.putNoHeaderInRetry = function (product, callback) {
+      var client = this.client;
+      var self = this;
+      function getMethod() {
+        var cb = function (callback) {
+          return self.getPutNoHeaderInRetry(callback);
+        }
+        return cb;
+      };
+      // Send request
+      self.beginPutNoHeaderInRetry(product, function (err, result){
+        if (err) return callback(err);
+        client.getPutOperationResult(result, getMethod(), callback);
+      });
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with
+     * location header. Subsequent calls to operation status do not contain
+     * location header.
+     * @param {Product} [product] Product to put
+     *
+     * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+     *
+     * @param {function} callback
+     *
+     * @returns {Stream} The Response stream
+     */
+    LROs.prototype.beginPutNoHeaderInRetry = function (product, callback) {
+      var client = this.client;
+      if (!callback) {
+        throw new Error('callback cannot be null.');
+      }
+      // Validate
+      try {
+        if (product !== null && product !== undefined) {
+          client._models['Product'].validate(product);
+        }
+      } catch (error) {
+        return callback(error);
+      }
+
+      // Construct URL
+      var requestUrl = this.client.baseUri + 
+                       '//lro/put/noheader/202/200';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
+      // trim all duplicate forward slashes in the url
+      var regex = /([^:]\/)\/+/gi;
+      requestUrl = requestUrl.replace(regex, '$1');
+
+      // Create HTTP transport objects
+      var httpRequest = new WebResource();
+      httpRequest.method = 'PUT';
+      httpRequest.headers = {};
+      httpRequest.url = requestUrl;
+      // Set Headers
+      httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+      // Serialize Request
+      var requestContent = null;
+      requestContent = JSON.stringify(msRest.serializeObject(product));
+      httpRequest.body = requestContent;
+      httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+      // Send Request
+      return client.pipeline(httpRequest, function (err, response, responseBody) {
+        if (err) {
+          return callback(err);
+        }
+        var statusCode = response.statusCode;
+        if (statusCode !== 202) {
+          var error = new Error(responseBody);
+          error.statusCode = response.statusCode;
+          error.request = httpRequest;
+          error.response = response;
+          if (responseBody === '') responseBody = null;
+          var parsedErrorResponse;
+          try {
+            parsedErrorResponse = JSON.parse(responseBody);
+            error.body = parsedErrorResponse;
+              if (error.body !== null && error.body !== undefined) {
+                error.body = client._models['CloudError'].deserialize(error.body);
+              }
+          } catch (defaultError) {
+            error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+            return callback(error);
+          }
+          return callback(error);
+        }
+        // Create Result
+        var result = new msRest.HttpOperationResponse();
+        result.request = httpRequest;
+        result.response = response;
+        if (responseBody === '') responseBody = null;
+        // Deserialize Response
+        if (statusCode === 202) {
+          var parsedResponse;
+          try {
+            parsedResponse = JSON.parse(responseBody);
+            result.body = parsedResponse;
+            if (result.body !== null && result.body !== undefined) {
+              result.body = client._models['Product'].deserialize(result.body);
+            }
+          } catch (error) {
+            var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+            deserializationError.request = httpRequest;
+            deserializationError.response = response;
+            return callback(deserializationError);
+          }
+        }
+
+        return callback(null, result);
+      });
+    };
+
+    /**
+     * Long running get request for you to retrieve create resource. This method
+     * should not be invoked
+     * @param {function} callback
+     *
+     * @returns {Stream} The Response stream
+     */
+    LROs.prototype.getPutNoHeaderInRetry = function (callback) {
+      var client = this.client;
+      if (!callback) {
+        throw new Error('callback cannot be null.');
+      }
+
+      // Construct URL
+      var requestUrl = this.client.baseUri + 
+                       '//lro/put/noheader/202/200';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
+      // trim all duplicate forward slashes in the url
+      var regex = /([^:]\/)\/+/gi;
+      requestUrl = requestUrl.replace(regex, '$1');
+
+      // Create HTTP transport objects
+      var httpRequest = new WebResource();
+      httpRequest.method = 'GET';
+      httpRequest.headers = {};
+      httpRequest.url = requestUrl;
+      // Set Headers
+      httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+      httpRequest.body = null;
+      httpRequest.headers['Content-Length'] = 0;
+      // Send Request
+      return client.pipeline(httpRequest, function (err, response, responseBody) {
+        if (err) {
+          return callback(err);
+        }
+        var statusCode = response.statusCode;
+        if (statusCode !== 200) {
+          var error = new Error(responseBody);
+          error.statusCode = response.statusCode;
+          error.request = httpRequest;
+          error.response = response;
+          if (responseBody === '') responseBody = null;
+          var parsedErrorResponse;
+          try {
+            parsedErrorResponse = JSON.parse(responseBody);
+            error.body = parsedErrorResponse;
+              if (error.body !== null && error.body !== undefined) {
+                error.body = client._models['CloudError'].deserialize(error.body);
+              }
+          } catch (defaultError) {
+            error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+            return callback(error);
+          }
+          return callback(error);
+        }
+        // Create Result
+        var result = new msRest.HttpOperationResponse();
+        result.request = httpRequest;
+        result.response = response;
+        if (responseBody === '') responseBody = null;
+        // Deserialize Response
+        if (statusCode === 200) {
+          var parsedResponse;
+          try {
+            parsedResponse = JSON.parse(responseBody);
+            result.body = parsedResponse;
+            if (result.body !== null && result.body !== undefined) {
+              result.body = client._models['Product'].deserialize(result.body);
+            }
+          } catch (error) {
+            var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+            deserializationError.request = httpRequest;
+            deserializationError.response = response;
+            return callback(deserializationError);
+          }
+        }
+
+        return callback(null, result);
+      });
+    };
+
+    /**
+     *
      * Long running put request, service returns a 200 to the initial request,
      * with an entity that contains ProvisioningState=’Creating’. Poll the
      * endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -2428,6 +2643,1068 @@ function LROs(client) {
 
     /**
      *
+     * Long running put request, service returns a 202 to the initial request with
+     * Azure-AsyncOperation header. Subsequent calls to operation status do not
+     * contain Azure-AsyncOperation header.
+        * @param {Product} [product] Product to put
+        *
+        * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+        *
+     * @param {function} callback
+     *
+     * @returns {Stream} The Response stream
+     */
+    LROs.prototype.putAsyncNoHeaderInRetry = function (product, callback) {
+      var client = this.client;
+      var self = this;
+      function getMethod() {
+        var cb = function (callback) {
+          return self.getPutAsyncNoHeaderInRetry(callback);
+        }
+        return cb;
+      };
+      // Send request
+      self.beginPutAsyncNoHeaderInRetry(product, function (err, result){
+        if (err) return callback(err);
+        client.getPutOperationResult(result, getMethod(), callback);
+      });
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with
+     * Azure-AsyncOperation header. Subsequent calls to operation status do not
+     * contain Azure-AsyncOperation header.
+     * @param {Product} [product] Product to put
+     *
+     * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+     *
+     * @param {function} callback
+     *
+     * @returns {Stream} The Response stream
+     */
+    LROs.prototype.beginPutAsyncNoHeaderInRetry = function (product, callback) {
+      var client = this.client;
+      if (!callback) {
+        throw new Error('callback cannot be null.');
+      }
+      // Validate
+      try {
+        if (product !== null && product !== undefined) {
+          client._models['Product'].validate(product);
+        }
+      } catch (error) {
+        return callback(error);
+      }
+
+      // Construct URL
+      var requestUrl = this.client.baseUri + 
+                       '//lro/putasync/noheader/201/200';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
+      // trim all duplicate forward slashes in the url
+      var regex = /([^:]\/)\/+/gi;
+      requestUrl = requestUrl.replace(regex, '$1');
+
+      // Create HTTP transport objects
+      var httpRequest = new WebResource();
+      httpRequest.method = 'PUT';
+      httpRequest.headers = {};
+      httpRequest.url = requestUrl;
+      // Set Headers
+      httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+      // Serialize Request
+      var requestContent = null;
+      requestContent = JSON.stringify(msRest.serializeObject(product));
+      httpRequest.body = requestContent;
+      httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+      // Send Request
+      return client.pipeline(httpRequest, function (err, response, responseBody) {
+        if (err) {
+          return callback(err);
+        }
+        var statusCode = response.statusCode;
+        if (statusCode !== 201) {
+          var error = new Error(responseBody);
+          error.statusCode = response.statusCode;
+          error.request = httpRequest;
+          error.response = response;
+          if (responseBody === '') responseBody = null;
+          var parsedErrorResponse;
+          try {
+            parsedErrorResponse = JSON.parse(responseBody);
+            error.body = parsedErrorResponse;
+              if (error.body !== null && error.body !== undefined) {
+                error.body = client._models['CloudError'].deserialize(error.body);
+              }
+          } catch (defaultError) {
+            error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+            return callback(error);
+          }
+          return callback(error);
+        }
+        // Create Result
+        var result = new msRest.HttpOperationResponse();
+        result.request = httpRequest;
+        result.response = response;
+        if (responseBody === '') responseBody = null;
+        // Deserialize Response
+        if (statusCode === 201) {
+          var parsedResponse;
+          try {
+            parsedResponse = JSON.parse(responseBody);
+            result.body = parsedResponse;
+            if (result.body !== null && result.body !== undefined) {
+              result.body = client._models['Product'].deserialize(result.body);
+            }
+          } catch (error) {
+            var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+            deserializationError.request = httpRequest;
+            deserializationError.response = response;
+            return callback(deserializationError);
+          }
+        }
+
+        return callback(null, result);
+      });
+    };
+
+    /**
+     * Long running get request for you to retrieve create resource
+     * @param {function} callback
+     *
+     * @returns {Stream} The Response stream
+     */
+    LROs.prototype.getPutAsyncNoHeaderInRetry = function (callback) {
+      var client = this.client;
+      if (!callback) {
+        throw new Error('callback cannot be null.');
+      }
+
+      // Construct URL
+      var requestUrl = this.client.baseUri + 
+                       '//lro/putasync/noheader/201/200';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
+      // trim all duplicate forward slashes in the url
+      var regex = /([^:]\/)\/+/gi;
+      requestUrl = requestUrl.replace(regex, '$1');
+
+      // Create HTTP transport objects
+      var httpRequest = new WebResource();
+      httpRequest.method = 'GET';
+      httpRequest.headers = {};
+      httpRequest.url = requestUrl;
+      // Set Headers
+      httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+      httpRequest.body = null;
+      httpRequest.headers['Content-Length'] = 0;
+      // Send Request
+      return client.pipeline(httpRequest, function (err, response, responseBody) {
+        if (err) {
+          return callback(err);
+        }
+        var statusCode = response.statusCode;
+        if (statusCode !== 200) {
+          var error = new Error(responseBody);
+          error.statusCode = response.statusCode;
+          error.request = httpRequest;
+          error.response = response;
+          if (responseBody === '') responseBody = null;
+          var parsedErrorResponse;
+          try {
+            parsedErrorResponse = JSON.parse(responseBody);
+            error.body = parsedErrorResponse;
+              if (error.body !== null && error.body !== undefined) {
+                error.body = client._models['CloudError'].deserialize(error.body);
+              }
+          } catch (defaultError) {
+            error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+            return callback(error);
+          }
+          return callback(error);
+        }
+        // Create Result
+        var result = new msRest.HttpOperationResponse();
+        result.request = httpRequest;
+        result.response = response;
+        if (responseBody === '') responseBody = null;
+        // Deserialize Response
+        if (statusCode === 200) {
+          var parsedResponse;
+          try {
+            parsedResponse = JSON.parse(responseBody);
+            result.body = parsedResponse;
+            if (result.body !== null && result.body !== undefined) {
+              result.body = client._models['Product'].deserialize(result.body);
+            }
+          } catch (error) {
+            var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+            deserializationError.request = httpRequest;
+            deserializationError.response = response;
+            return callback(deserializationError);
+          }
+        }
+
+        return callback(null, result);
+      });
+    };
+
+    /**
+     *
+     * Long running put request with non resource.
+        * @param {Sku} [sku] sku to put
+        *
+        * @param {String} [sku.id] 
+        *
+        * @param {String} [sku.name] 
+        *
+     * @param {function} callback
+     *
+     * @returns {Stream} The Response stream
+     */
+    LROs.prototype.putNonResource = function (sku, callback) {
+      var client = this.client;
+      var self = this;
+      function getMethod() {
+        var cb = function (callback) {
+          return self.getNonResource(callback);
+        }
+        return cb;
+      };
+      // Send request
+      self.beginPutNonResource(sku, function (err, result){
+        if (err) return callback(err);
+        client.getPutOperationResult(result, getMethod(), callback);
+      });
+    }
+
+    /**
+     * Long running put request with non resource.
+     * @param {Sku} [sku] sku to put
+     *
+     * @param {String} [sku.id] 
+     *
+     * @param {String} [sku.name] 
+     *
+     * @param {function} callback
+     *
+     * @returns {Stream} The Response stream
+     */
+    LROs.prototype.beginPutNonResource = function (sku, callback) {
+      var client = this.client;
+      if (!callback) {
+        throw new Error('callback cannot be null.');
+      }
+      // Validate
+      try {
+        if (sku !== null && sku !== undefined) {
+          client._models['Sku'].validate(sku);
+        }
+      } catch (error) {
+        return callback(error);
+      }
+
+      // Construct URL
+      var requestUrl = this.client.baseUri + 
+                       '//lro/putnonresource/202/200';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
+      // trim all duplicate forward slashes in the url
+      var regex = /([^:]\/)\/+/gi;
+      requestUrl = requestUrl.replace(regex, '$1');
+
+      // Create HTTP transport objects
+      var httpRequest = new WebResource();
+      httpRequest.method = 'PUT';
+      httpRequest.headers = {};
+      httpRequest.url = requestUrl;
+      // Set Headers
+      httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+      // Serialize Request
+      var requestContent = null;
+      requestContent = JSON.stringify(msRest.serializeObject(sku));
+      httpRequest.body = requestContent;
+      httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+      // Send Request
+      return client.pipeline(httpRequest, function (err, response, responseBody) {
+        if (err) {
+          return callback(err);
+        }
+        var statusCode = response.statusCode;
+        if (statusCode !== 202) {
+          var error = new Error(responseBody);
+          error.statusCode = response.statusCode;
+          error.request = httpRequest;
+          error.response = response;
+          if (responseBody === '') responseBody = null;
+          var parsedErrorResponse;
+          try {
+            parsedErrorResponse = JSON.parse(responseBody);
+            error.body = parsedErrorResponse;
+              if (error.body !== null && error.body !== undefined) {
+                error.body = client._models['CloudError'].deserialize(error.body);
+              }
+          } catch (defaultError) {
+            error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+            return callback(error);
+          }
+          return callback(error);
+        }
+        // Create Result
+        var result = new msRest.HttpOperationResponse();
+        result.request = httpRequest;
+        result.response = response;
+        if (responseBody === '') responseBody = null;
+        // Deserialize Response
+        if (statusCode === 202) {
+          var parsedResponse;
+          try {
+            parsedResponse = JSON.parse(responseBody);
+            result.body = parsedResponse;
+            if (result.body !== null && result.body !== undefined) {
+              result.body = client._models['Sku'].deserialize(result.body);
+            }
+          } catch (error) {
+            var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+            deserializationError.request = httpRequest;
+            deserializationError.response = response;
+            return callback(deserializationError);
+          }
+        }
+
+        return callback(null, result);
+      });
+    };
+
+    /**
+     * Long running get request for you to retrieve created non resource
+     * @param {function} callback
+     *
+     * @returns {Stream} The Response stream
+     */
+    LROs.prototype.getNonResource = function (callback) {
+      var client = this.client;
+      if (!callback) {
+        throw new Error('callback cannot be null.');
+      }
+
+      // Construct URL
+      var requestUrl = this.client.baseUri + 
+                       '//lro/putnonresource/202/200';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
+      // trim all duplicate forward slashes in the url
+      var regex = /([^:]\/)\/+/gi;
+      requestUrl = requestUrl.replace(regex, '$1');
+
+      // Create HTTP transport objects
+      var httpRequest = new WebResource();
+      httpRequest.method = 'GET';
+      httpRequest.headers = {};
+      httpRequest.url = requestUrl;
+      // Set Headers
+      httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+      httpRequest.body = null;
+      httpRequest.headers['Content-Length'] = 0;
+      // Send Request
+      return client.pipeline(httpRequest, function (err, response, responseBody) {
+        if (err) {
+          return callback(err);
+        }
+        var statusCode = response.statusCode;
+        if (statusCode !== 200) {
+          var error = new Error(responseBody);
+          error.statusCode = response.statusCode;
+          error.request = httpRequest;
+          error.response = response;
+          if (responseBody === '') responseBody = null;
+          var parsedErrorResponse;
+          try {
+            parsedErrorResponse = JSON.parse(responseBody);
+            error.body = parsedErrorResponse;
+              if (error.body !== null && error.body !== undefined) {
+                error.body = client._models['CloudError'].deserialize(error.body);
+              }
+          } catch (defaultError) {
+            error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+            return callback(error);
+          }
+          return callback(error);
+        }
+        // Create Result
+        var result = new msRest.HttpOperationResponse();
+        result.request = httpRequest;
+        result.response = response;
+        if (responseBody === '') responseBody = null;
+        // Deserialize Response
+        if (statusCode === 200) {
+          var parsedResponse;
+          try {
+            parsedResponse = JSON.parse(responseBody);
+            result.body = parsedResponse;
+            if (result.body !== null && result.body !== undefined) {
+              result.body = client._models['Sku'].deserialize(result.body);
+            }
+          } catch (error) {
+            var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+            deserializationError.request = httpRequest;
+            deserializationError.response = response;
+            return callback(deserializationError);
+          }
+        }
+
+        return callback(null, result);
+      });
+    };
+
+    /**
+     *
+     * Long running put request with non resource.
+        * @param {Sku} [sku] Sku to put
+        *
+        * @param {String} [sku.id] 
+        *
+        * @param {String} [sku.name] 
+        *
+     * @param {function} callback
+     *
+     * @returns {Stream} The Response stream
+     */
+    LROs.prototype.putAsyncNonResource = function (sku, callback) {
+      var client = this.client;
+      var self = this;
+      function getMethod() {
+        var cb = function (callback) {
+          return self.getAsyncNonResource(callback);
+        }
+        return cb;
+      };
+      // Send request
+      self.beginPutAsyncNonResource(sku, function (err, result){
+        if (err) return callback(err);
+        client.getPutOperationResult(result, getMethod(), callback);
+      });
+    }
+
+    /**
+     * Long running put request with non resource.
+     * @param {Sku} [sku] Sku to put
+     *
+     * @param {String} [sku.id] 
+     *
+     * @param {String} [sku.name] 
+     *
+     * @param {function} callback
+     *
+     * @returns {Stream} The Response stream
+     */
+    LROs.prototype.beginPutAsyncNonResource = function (sku, callback) {
+      var client = this.client;
+      if (!callback) {
+        throw new Error('callback cannot be null.');
+      }
+      // Validate
+      try {
+        if (sku !== null && sku !== undefined) {
+          client._models['Sku'].validate(sku);
+        }
+      } catch (error) {
+        return callback(error);
+      }
+
+      // Construct URL
+      var requestUrl = this.client.baseUri + 
+                       '//lro/putnonresourceasync/202/200';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
+      // trim all duplicate forward slashes in the url
+      var regex = /([^:]\/)\/+/gi;
+      requestUrl = requestUrl.replace(regex, '$1');
+
+      // Create HTTP transport objects
+      var httpRequest = new WebResource();
+      httpRequest.method = 'PUT';
+      httpRequest.headers = {};
+      httpRequest.url = requestUrl;
+      // Set Headers
+      httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+      // Serialize Request
+      var requestContent = null;
+      requestContent = JSON.stringify(msRest.serializeObject(sku));
+      httpRequest.body = requestContent;
+      httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+      // Send Request
+      return client.pipeline(httpRequest, function (err, response, responseBody) {
+        if (err) {
+          return callback(err);
+        }
+        var statusCode = response.statusCode;
+        if (statusCode !== 202) {
+          var error = new Error(responseBody);
+          error.statusCode = response.statusCode;
+          error.request = httpRequest;
+          error.response = response;
+          if (responseBody === '') responseBody = null;
+          var parsedErrorResponse;
+          try {
+            parsedErrorResponse = JSON.parse(responseBody);
+            error.body = parsedErrorResponse;
+              if (error.body !== null && error.body !== undefined) {
+                error.body = client._models['CloudError'].deserialize(error.body);
+              }
+          } catch (defaultError) {
+            error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+            return callback(error);
+          }
+          return callback(error);
+        }
+        // Create Result
+        var result = new msRest.HttpOperationResponse();
+        result.request = httpRequest;
+        result.response = response;
+        if (responseBody === '') responseBody = null;
+        // Deserialize Response
+        if (statusCode === 202) {
+          var parsedResponse;
+          try {
+            parsedResponse = JSON.parse(responseBody);
+            result.body = parsedResponse;
+            if (result.body !== null && result.body !== undefined) {
+              result.body = client._models['Sku'].deserialize(result.body);
+            }
+          } catch (error) {
+            var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+            deserializationError.request = httpRequest;
+            deserializationError.response = response;
+            return callback(deserializationError);
+          }
+        }
+
+        return callback(null, result);
+      });
+    };
+
+    /**
+     * Long running get request for you to retrieve created non resource
+     * @param {function} callback
+     *
+     * @returns {Stream} The Response stream
+     */
+    LROs.prototype.getAsyncNonResource = function (callback) {
+      var client = this.client;
+      if (!callback) {
+        throw new Error('callback cannot be null.');
+      }
+
+      // Construct URL
+      var requestUrl = this.client.baseUri + 
+                       '//lro/putnonresourceasync/202/200';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
+      // trim all duplicate forward slashes in the url
+      var regex = /([^:]\/)\/+/gi;
+      requestUrl = requestUrl.replace(regex, '$1');
+
+      // Create HTTP transport objects
+      var httpRequest = new WebResource();
+      httpRequest.method = 'GET';
+      httpRequest.headers = {};
+      httpRequest.url = requestUrl;
+      // Set Headers
+      httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+      httpRequest.body = null;
+      httpRequest.headers['Content-Length'] = 0;
+      // Send Request
+      return client.pipeline(httpRequest, function (err, response, responseBody) {
+        if (err) {
+          return callback(err);
+        }
+        var statusCode = response.statusCode;
+        if (statusCode !== 200) {
+          var error = new Error(responseBody);
+          error.statusCode = response.statusCode;
+          error.request = httpRequest;
+          error.response = response;
+          if (responseBody === '') responseBody = null;
+          var parsedErrorResponse;
+          try {
+            parsedErrorResponse = JSON.parse(responseBody);
+            error.body = parsedErrorResponse;
+              if (error.body !== null && error.body !== undefined) {
+                error.body = client._models['CloudError'].deserialize(error.body);
+              }
+          } catch (defaultError) {
+            error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+            return callback(error);
+          }
+          return callback(error);
+        }
+        // Create Result
+        var result = new msRest.HttpOperationResponse();
+        result.request = httpRequest;
+        result.response = response;
+        if (responseBody === '') responseBody = null;
+        // Deserialize Response
+        if (statusCode === 200) {
+          var parsedResponse;
+          try {
+            parsedResponse = JSON.parse(responseBody);
+            result.body = parsedResponse;
+            if (result.body !== null && result.body !== undefined) {
+              result.body = client._models['Sku'].deserialize(result.body);
+            }
+          } catch (error) {
+            var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+            deserializationError.request = httpRequest;
+            deserializationError.response = response;
+            return callback(deserializationError);
+          }
+        }
+
+        return callback(null, result);
+      });
+    };
+
+    /**
+     *
+     * Long running put request with sub resource.
+        * @param {SubProduct} [product] Sub Product to put
+        *
+        * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+        *
+     * @param {function} callback
+     *
+     * @returns {Stream} The Response stream
+     */
+    LROs.prototype.putSubResource = function (product, callback) {
+      var client = this.client;
+      var self = this;
+      function getMethod() {
+        var cb = function (callback) {
+          return self.getSubResource(callback);
+        }
+        return cb;
+      };
+      // Send request
+      self.beginPutSubResource(product, function (err, result){
+        if (err) return callback(err);
+        client.getPutOperationResult(result, getMethod(), callback);
+      });
+    }
+
+    /**
+     * Long running put request with sub resource.
+     * @param {SubProduct} [product] Sub Product to put
+     *
+     * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+     *
+     * @param {function} callback
+     *
+     * @returns {Stream} The Response stream
+     */
+    LROs.prototype.beginPutSubResource = function (product, callback) {
+      var client = this.client;
+      if (!callback) {
+        throw new Error('callback cannot be null.');
+      }
+      // Validate
+      try {
+        if (product !== null && product !== undefined) {
+          client._models['SubProduct'].validate(product);
+        }
+      } catch (error) {
+        return callback(error);
+      }
+
+      // Construct URL
+      var requestUrl = this.client.baseUri + 
+                       '//lro/putsubresource/202/200';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
+      // trim all duplicate forward slashes in the url
+      var regex = /([^:]\/)\/+/gi;
+      requestUrl = requestUrl.replace(regex, '$1');
+
+      // Create HTTP transport objects
+      var httpRequest = new WebResource();
+      httpRequest.method = 'PUT';
+      httpRequest.headers = {};
+      httpRequest.url = requestUrl;
+      // Set Headers
+      httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+      // Serialize Request
+      var requestContent = null;
+      requestContent = JSON.stringify(msRest.serializeObject(product));
+      httpRequest.body = requestContent;
+      httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+      // Send Request
+      return client.pipeline(httpRequest, function (err, response, responseBody) {
+        if (err) {
+          return callback(err);
+        }
+        var statusCode = response.statusCode;
+        if (statusCode !== 202) {
+          var error = new Error(responseBody);
+          error.statusCode = response.statusCode;
+          error.request = httpRequest;
+          error.response = response;
+          if (responseBody === '') responseBody = null;
+          var parsedErrorResponse;
+          try {
+            parsedErrorResponse = JSON.parse(responseBody);
+            error.body = parsedErrorResponse;
+              if (error.body !== null && error.body !== undefined) {
+                error.body = client._models['CloudError'].deserialize(error.body);
+              }
+          } catch (defaultError) {
+            error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+            return callback(error);
+          }
+          return callback(error);
+        }
+        // Create Result
+        var result = new msRest.HttpOperationResponse();
+        result.request = httpRequest;
+        result.response = response;
+        if (responseBody === '') responseBody = null;
+        // Deserialize Response
+        if (statusCode === 202) {
+          var parsedResponse;
+          try {
+            parsedResponse = JSON.parse(responseBody);
+            result.body = parsedResponse;
+            if (result.body !== null && result.body !== undefined) {
+              result.body = client._models['SubProduct'].deserialize(result.body);
+            }
+          } catch (error) {
+            var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+            deserializationError.request = httpRequest;
+            deserializationError.response = response;
+            return callback(deserializationError);
+          }
+        }
+
+        return callback(null, result);
+      });
+    };
+
+    /**
+     * Long running get request for you to retrieve created sub resource
+     * @param {function} callback
+     *
+     * @returns {Stream} The Response stream
+     */
+    LROs.prototype.getSubResource = function (callback) {
+      var client = this.client;
+      if (!callback) {
+        throw new Error('callback cannot be null.');
+      }
+
+      // Construct URL
+      var requestUrl = this.client.baseUri + 
+                       '//lro/putsubresource/202/200';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
+      // trim all duplicate forward slashes in the url
+      var regex = /([^:]\/)\/+/gi;
+      requestUrl = requestUrl.replace(regex, '$1');
+
+      // Create HTTP transport objects
+      var httpRequest = new WebResource();
+      httpRequest.method = 'GET';
+      httpRequest.headers = {};
+      httpRequest.url = requestUrl;
+      // Set Headers
+      httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+      httpRequest.body = null;
+      httpRequest.headers['Content-Length'] = 0;
+      // Send Request
+      return client.pipeline(httpRequest, function (err, response, responseBody) {
+        if (err) {
+          return callback(err);
+        }
+        var statusCode = response.statusCode;
+        if (statusCode !== 200) {
+          var error = new Error(responseBody);
+          error.statusCode = response.statusCode;
+          error.request = httpRequest;
+          error.response = response;
+          if (responseBody === '') responseBody = null;
+          var parsedErrorResponse;
+          try {
+            parsedErrorResponse = JSON.parse(responseBody);
+            error.body = parsedErrorResponse;
+              if (error.body !== null && error.body !== undefined) {
+                error.body = client._models['CloudError'].deserialize(error.body);
+              }
+          } catch (defaultError) {
+            error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+            return callback(error);
+          }
+          return callback(error);
+        }
+        // Create Result
+        var result = new msRest.HttpOperationResponse();
+        result.request = httpRequest;
+        result.response = response;
+        if (responseBody === '') responseBody = null;
+        // Deserialize Response
+        if (statusCode === 200) {
+          var parsedResponse;
+          try {
+            parsedResponse = JSON.parse(responseBody);
+            result.body = parsedResponse;
+            if (result.body !== null && result.body !== undefined) {
+              result.body = client._models['SubProduct'].deserialize(result.body);
+            }
+          } catch (error) {
+            var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+            deserializationError.request = httpRequest;
+            deserializationError.response = response;
+            return callback(deserializationError);
+          }
+        }
+
+        return callback(null, result);
+      });
+    };
+
+    /**
+     *
+     * Long running put request with sub resource.
+        * @param {SubProduct} [product] Sub Product to put
+        *
+        * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+        *
+     * @param {function} callback
+     *
+     * @returns {Stream} The Response stream
+     */
+    LROs.prototype.putAsyncSubResource = function (product, callback) {
+      var client = this.client;
+      var self = this;
+      function getMethod() {
+        var cb = function (callback) {
+          return self.getAsyncSubResource(callback);
+        }
+        return cb;
+      };
+      // Send request
+      self.beginPutAsyncSubResource(product, function (err, result){
+        if (err) return callback(err);
+        client.getPutOperationResult(result, getMethod(), callback);
+      });
+    }
+
+    /**
+     * Long running put request with sub resource.
+     * @param {SubProduct} [product] Sub Product to put
+     *
+     * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+     *
+     * @param {function} callback
+     *
+     * @returns {Stream} The Response stream
+     */
+    LROs.prototype.beginPutAsyncSubResource = function (product, callback) {
+      var client = this.client;
+      if (!callback) {
+        throw new Error('callback cannot be null.');
+      }
+      // Validate
+      try {
+        if (product !== null && product !== undefined) {
+          client._models['SubProduct'].validate(product);
+        }
+      } catch (error) {
+        return callback(error);
+      }
+
+      // Construct URL
+      var requestUrl = this.client.baseUri + 
+                       '//lro/putsubresourceasync/202/200';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
+      // trim all duplicate forward slashes in the url
+      var regex = /([^:]\/)\/+/gi;
+      requestUrl = requestUrl.replace(regex, '$1');
+
+      // Create HTTP transport objects
+      var httpRequest = new WebResource();
+      httpRequest.method = 'PUT';
+      httpRequest.headers = {};
+      httpRequest.url = requestUrl;
+      // Set Headers
+      httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+      // Serialize Request
+      var requestContent = null;
+      requestContent = JSON.stringify(msRest.serializeObject(product));
+      httpRequest.body = requestContent;
+      httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+      // Send Request
+      return client.pipeline(httpRequest, function (err, response, responseBody) {
+        if (err) {
+          return callback(err);
+        }
+        var statusCode = response.statusCode;
+        if (statusCode !== 202) {
+          var error = new Error(responseBody);
+          error.statusCode = response.statusCode;
+          error.request = httpRequest;
+          error.response = response;
+          if (responseBody === '') responseBody = null;
+          var parsedErrorResponse;
+          try {
+            parsedErrorResponse = JSON.parse(responseBody);
+            error.body = parsedErrorResponse;
+              if (error.body !== null && error.body !== undefined) {
+                error.body = client._models['CloudError'].deserialize(error.body);
+              }
+          } catch (defaultError) {
+            error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+            return callback(error);
+          }
+          return callback(error);
+        }
+        // Create Result
+        var result = new msRest.HttpOperationResponse();
+        result.request = httpRequest;
+        result.response = response;
+        if (responseBody === '') responseBody = null;
+        // Deserialize Response
+        if (statusCode === 202) {
+          var parsedResponse;
+          try {
+            parsedResponse = JSON.parse(responseBody);
+            result.body = parsedResponse;
+            if (result.body !== null && result.body !== undefined) {
+              result.body = client._models['SubProduct'].deserialize(result.body);
+            }
+          } catch (error) {
+            var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+            deserializationError.request = httpRequest;
+            deserializationError.response = response;
+            return callback(deserializationError);
+          }
+        }
+
+        return callback(null, result);
+      });
+    };
+
+    /**
+     * Long running get request for you to retrieve created sub resource
+     * @param {function} callback
+     *
+     * @returns {Stream} The Response stream
+     */
+    LROs.prototype.getAsyncSubResource = function (callback) {
+      var client = this.client;
+      if (!callback) {
+        throw new Error('callback cannot be null.');
+      }
+
+      // Construct URL
+      var requestUrl = this.client.baseUri + 
+                       '//lro/putsubresourceasync/202/200';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
+      // trim all duplicate forward slashes in the url
+      var regex = /([^:]\/)\/+/gi;
+      requestUrl = requestUrl.replace(regex, '$1');
+
+      // Create HTTP transport objects
+      var httpRequest = new WebResource();
+      httpRequest.method = 'GET';
+      httpRequest.headers = {};
+      httpRequest.url = requestUrl;
+      // Set Headers
+      httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+      httpRequest.body = null;
+      httpRequest.headers['Content-Length'] = 0;
+      // Send Request
+      return client.pipeline(httpRequest, function (err, response, responseBody) {
+        if (err) {
+          return callback(err);
+        }
+        var statusCode = response.statusCode;
+        if (statusCode !== 200) {
+          var error = new Error(responseBody);
+          error.statusCode = response.statusCode;
+          error.request = httpRequest;
+          error.response = response;
+          if (responseBody === '') responseBody = null;
+          var parsedErrorResponse;
+          try {
+            parsedErrorResponse = JSON.parse(responseBody);
+            error.body = parsedErrorResponse;
+              if (error.body !== null && error.body !== undefined) {
+                error.body = client._models['CloudError'].deserialize(error.body);
+              }
+          } catch (defaultError) {
+            error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+            return callback(error);
+          }
+          return callback(error);
+        }
+        // Create Result
+        var result = new msRest.HttpOperationResponse();
+        result.request = httpRequest;
+        result.response = response;
+        if (responseBody === '') responseBody = null;
+        // Deserialize Response
+        if (statusCode === 200) {
+          var parsedResponse;
+          try {
+            parsedResponse = JSON.parse(responseBody);
+            result.body = parsedResponse;
+            if (result.body !== null && result.body !== undefined) {
+              result.body = client._models['SubProduct'].deserialize(result.body);
+            }
+          } catch (error) {
+            var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+            deserializationError.request = httpRequest;
+            deserializationError.response = response;
+            return callback(deserializationError);
+          }
+        }
+
+        return callback(null, result);
+      });
+    };
+
+    /**
+     *
      * Long running delete request, service returns a 202 to the initial request,
      * with an entity that contains ProvisioningState=’Accepted’.  Polls return
      * this value until the last poll returns a ‘200’ with
@@ -3079,6 +4356,182 @@ function LROs(client) {
             return callback(deserializationError);
           }
         }
+
+        return callback(null, result);
+      });
+    };
+
+    /**
+     *
+     * Long running delete request, service returns a location header in the
+     * initial request. Subsequent calls to operation status do not contain
+     * location header.
+     * @param {function} callback
+     *
+     * @returns {Stream} The Response stream
+     */
+    LROs.prototype.deleteNoHeaderInRetry = function (callback) {
+      var self = this.client;
+      // Send request
+      this.beginDeleteNoHeaderInRetry(function (err, result){
+        if (err) return callback(err);
+        self.getPostOrDeleteOperationResult(result, callback);
+      });
+    }
+
+    /**
+     * Long running delete request, service returns a location header in the
+     * initial request. Subsequent calls to operation status do not contain
+     * location header.
+     * @param {function} callback
+     *
+     * @returns {Stream} The Response stream
+     */
+    LROs.prototype.beginDeleteNoHeaderInRetry = function (callback) {
+      var client = this.client;
+      if (!callback) {
+        throw new Error('callback cannot be null.');
+      }
+
+      // Construct URL
+      var requestUrl = this.client.baseUri + 
+                       '//lro/delete/noheader';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
+      // trim all duplicate forward slashes in the url
+      var regex = /([^:]\/)\/+/gi;
+      requestUrl = requestUrl.replace(regex, '$1');
+
+      // Create HTTP transport objects
+      var httpRequest = new WebResource();
+      httpRequest.method = 'DELETE';
+      httpRequest.headers = {};
+      httpRequest.url = requestUrl;
+      // Set Headers
+      httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+      httpRequest.body = null;
+      httpRequest.headers['Content-Length'] = 0;
+      // Send Request
+      return client.pipeline(httpRequest, function (err, response, responseBody) {
+        if (err) {
+          return callback(err);
+        }
+        var statusCode = response.statusCode;
+        if (statusCode !== 204 && statusCode !== 202) {
+          var error = new Error(responseBody);
+          error.statusCode = response.statusCode;
+          error.request = httpRequest;
+          error.response = response;
+          if (responseBody === '') responseBody = null;
+          var parsedErrorResponse;
+          try {
+            parsedErrorResponse = JSON.parse(responseBody);
+            error.body = parsedErrorResponse;
+              if (error.body !== null && error.body !== undefined) {
+                error.body = client._models['CloudError'].deserialize(error.body);
+              }
+          } catch (defaultError) {
+            error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+            return callback(error);
+          }
+          return callback(error);
+        }
+        // Create Result
+        var result = new msRest.HttpOperationResponse();
+        result.request = httpRequest;
+        result.response = response;
+        if (responseBody === '') responseBody = null;
+
+        return callback(null, result);
+      });
+    };
+
+    /**
+     *
+     * Long running delete request, service returns an Azure-AsyncOperation header
+     * in the initial request. Subsequent calls to operation status do not
+     * contain Azure-AsyncOperation header.
+     * @param {function} callback
+     *
+     * @returns {Stream} The Response stream
+     */
+    LROs.prototype.deleteAsyncNoHeaderInRetry = function (callback) {
+      var self = this.client;
+      // Send request
+      this.beginDeleteAsyncNoHeaderInRetry(function (err, result){
+        if (err) return callback(err);
+        self.getPostOrDeleteOperationResult(result, callback);
+      });
+    }
+
+    /**
+     * Long running delete request, service returns an Azure-AsyncOperation header
+     * in the initial request. Subsequent calls to operation status do not
+     * contain Azure-AsyncOperation header.
+     * @param {function} callback
+     *
+     * @returns {Stream} The Response stream
+     */
+    LROs.prototype.beginDeleteAsyncNoHeaderInRetry = function (callback) {
+      var client = this.client;
+      if (!callback) {
+        throw new Error('callback cannot be null.');
+      }
+
+      // Construct URL
+      var requestUrl = this.client.baseUri + 
+                       '//lro/deleteasync/noheader/202/204';
+      var queryParameters = [];
+      queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+      if (queryParameters.length > 0) {
+        requestUrl += '?' + queryParameters.join('&');
+      }
+      // trim all duplicate forward slashes in the url
+      var regex = /([^:]\/)\/+/gi;
+      requestUrl = requestUrl.replace(regex, '$1');
+
+      // Create HTTP transport objects
+      var httpRequest = new WebResource();
+      httpRequest.method = 'DELETE';
+      httpRequest.headers = {};
+      httpRequest.url = requestUrl;
+      // Set Headers
+      httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+      httpRequest.body = null;
+      httpRequest.headers['Content-Length'] = 0;
+      // Send Request
+      return client.pipeline(httpRequest, function (err, response, responseBody) {
+        if (err) {
+          return callback(err);
+        }
+        var statusCode = response.statusCode;
+        if (statusCode !== 204 && statusCode !== 202) {
+          var error = new Error(responseBody);
+          error.statusCode = response.statusCode;
+          error.request = httpRequest;
+          error.response = response;
+          if (responseBody === '') responseBody = null;
+          var parsedErrorResponse;
+          try {
+            parsedErrorResponse = JSON.parse(responseBody);
+            error.body = parsedErrorResponse;
+              if (error.body !== null && error.body !== undefined) {
+                error.body = client._models['CloudError'].deserialize(error.body);
+              }
+          } catch (defaultError) {
+            error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+            return callback(error);
+          }
+          return callback(error);
+        }
+        // Create Result
+        var result = new msRest.HttpOperationResponse();
+        result.request = httpRequest;
+        result.response = response;
+        if (responseBody === '') responseBody = null;
 
         return callback(null, result);
       });
