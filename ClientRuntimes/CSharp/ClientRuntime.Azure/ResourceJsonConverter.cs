@@ -61,7 +61,7 @@ namespace Microsoft.Azure
                 {
                     foreach (JProperty jProperty in propertiesJObject.Properties())
                     {
-                        resourceJObject.Add(jProperty.Name, jProperty.Value);
+                        resourceJObject[jProperty.Name] = jProperty.Value;
                     }
                     // Remove properties unless generic resource
                     if (!objectType.GetProperties().Any(p => p.Name == "Properties" && p.PropertyType == typeof(object)))
