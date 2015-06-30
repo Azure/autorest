@@ -53,7 +53,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             ScrubAndWriteValue("SERVICE ERROR", data.Data);
         }
 
-        private void ScrubAndWriteValue(string prefix, string data)
+        private static  void ScrubAndWriteValue(string prefix, string data)
         {
             if (!string.IsNullOrEmpty(data))
             {

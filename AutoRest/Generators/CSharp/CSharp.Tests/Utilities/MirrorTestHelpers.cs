@@ -79,6 +79,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         {
             Assert.NotNull(actual);
             Assert.NotNull(expected);
+            Assert.NotNull(assertEqualAction);
             Assert.Equal(expected.Count, actual.Count);
             for (int i = 0; i < expected.Count; ++i)
                 assertEqualAction(expected[i], actual[i]);
@@ -88,6 +89,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         {
             Assert.NotNull(actual);
             Assert.NotNull(expected);
+            Assert.NotNull(assertEqualAction);
             Assert.Equal(expected.Count, actual.Count);
             for (int i = 0; i < expected.Count; ++i)
                 assertEqualAction(expected[i], actual[i]);
