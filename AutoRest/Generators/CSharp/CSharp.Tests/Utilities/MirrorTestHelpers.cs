@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using Fixtures.MirrorPrimitives;
 using Fixtures.MirrorPrimitives.Models;
 using Fixtures.MirrorSequences;
@@ -11,7 +12,7 @@ using Xunit;
 
 namespace Microsoft.Rest.Generator.CSharp.Tests
 {
-    public class MirrorTestHelpers
+    public static class MirrorTestHelpers
     {
         public const string AddedHeader = "x-ms-header-capture";
 
@@ -45,6 +46,8 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
         public static void ValidateProduct(Product expected, Product actual)
         {
+            Assert.NotNull(expected);
+            Assert.NotNull(actual);
             Assert.Equal(expected.Boolean, actual.Boolean);
             Assert.Equal(expected.ByteProperty, actual.ByteProperty);
             Assert.Equal(expected.Date.Value.Year, actual.Date.Value.Year);
@@ -63,6 +66,8 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
         public static void ValidatePet(Pet expected, Pet actual)
         {
+            Assert.NotNull(expected);
+            Assert.NotNull(actual);
             Assert.Equal(expected.Id, actual.Id);
             Assert.Equal(expected.Name, actual.Name);
             Assert.Equal(expected.Tag, actual.Tag);
@@ -73,6 +78,8 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             where T : struct
         {
             Assert.NotNull(actual);
+            Assert.NotNull(expected);
+            Assert.NotNull(assertEqualAction);
             Assert.Equal(expected.Count, actual.Count);
             for (int i = 0; i < expected.Count; ++i)
                 assertEqualAction(expected[i], actual[i]);
@@ -81,6 +88,8 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         public static void ValidateList<T>(IList<T> expected, IList<T> actual, Action<T, T> assertEqualAction)
         {
             Assert.NotNull(actual);
+            Assert.NotNull(expected);
+            Assert.NotNull(assertEqualAction);
             Assert.Equal(expected.Count, actual.Count);
             for (int i = 0; i < expected.Count; ++i)
                 assertEqualAction(expected[i], actual[i]);
@@ -89,7 +98,9 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
         public static Func<string> CreateErrorBody(Error error)
         {
-            return () => string.Format("{{\"code\": {0}, \"message\": \"{1}\", \"fields\": \"{2}\"}}", error.Code,
+            Assert.NotNull(error);
+            return () => string.Format( CultureInfo.InvariantCulture, 
+                "{{\"code\": {0}, \"message\": \"{1}\", \"fields\": \"{2}\"}}", error.Code,
                 error.Message, error.Fields);
         }
 
