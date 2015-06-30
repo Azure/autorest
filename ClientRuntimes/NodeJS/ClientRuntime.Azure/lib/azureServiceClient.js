@@ -78,18 +78,17 @@ AzureServiceClient.prototype.getPutOperationResult = function (resultOfInitialRe
       setTimeout(function () {
         if (pollingState.azureAsyncOperationHeaderLink) {
           self._updateStateFromAzureAsyncOperationHeader(pollingState, function (err) {
-            if (err) return callback(err);
+            return callback(err);
           });
         } else if (pollingState.locationHeaderLink) {
           self._updateStateFromLocationHeaderOnPut(pollingState, function (err) {
-            if (err) return callback(err);
+            return callback(err);
           });
         } else {
           self._updateStateFromGetResourceOperation(poller, pollingState, function (err) {
-            if (err) return callback(err);
+            return callback(err);
           });
         }
-        callback();
       }, pollingState.getTimeout());
     },
     //when done
@@ -147,16 +146,15 @@ AzureServiceClient.prototype.getPostOrDeleteOperationResult = function (resultOf
       setTimeout(function () {
         if (pollingState.azureAsyncOperationHeaderLink) {
           self._updateStateFromAzureAsyncOperationHeader(pollingState, function (err) {
-            if (err) return callback(err);
+            return callback(err);
           });
         } else if (pollingState.locationHeaderLink) {
           self._updateStateFromLocationHeaderOnPostOrDelete(pollingState, function (err) {
-            if (err) return callback(err);
+            return callback(err);
           });
         } else {
           return callback(new Error('Location header is missing from long running operation.'));
         }
-        callback();
       }, pollingState.getTimeout());
     },
     function (err) {
@@ -267,7 +265,7 @@ AzureServiceClient.prototype._updateStateFromGetResourceOperation = function (po
       return callback(new Error('The response from long running operation does not contain a body.'));
     }
     
-    if (result.body.properties.provisioningState) {
+    if (result.body.properties && result.body.properties.provisioningState) {
       pollingState.status = result.body.properties.provisioningState;
     } else {
       pollingState.status = LroStates.Succeeded;
@@ -336,7 +334,7 @@ AzureServiceClient.prototype._getStatus = function (operationUrl, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    if (statusCode === 200 && statusCode === 201) {
+    if (statusCode === 200 || statusCode === 201 || statusCode === 202) {
       try {
         result.body = JSON.parse(responseBody);
       } catch (deserializationError) {

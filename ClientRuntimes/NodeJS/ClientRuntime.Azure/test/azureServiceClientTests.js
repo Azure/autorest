@@ -94,7 +94,7 @@ describe('AzureServiceClient', function () {
       it('lro put does not throw if invalid json is received on polling', function (done) {
         var badResponseBody = '{';
         var negativeClient = new AzureServiceClient(null, { longRunningOperationRetryTimeoutInSeconds : 0 });
-        negativeClient.addFilter(mockFilter({ statusCode: 202, body: badResponseBody }, badResponseBody));
+        negativeClient.addFilter(mockFilter({ statusCode: 200, body: badResponseBody }, badResponseBody));
         resultOfInitialRequest.response.headers['azure-asyncoperation'] = '';
         resultOfInitialRequest.response.headers['location'] = urlFromLocationHeader_Return200;
         negativeClient.getPutOperationResult(resultOfInitialRequest, negativeClient._getStatus, function (err, result) {
@@ -109,7 +109,7 @@ describe('AzureServiceClient', function () {
       it('lro put does not throw if invalid json with single quote is received on polling', function (done) {
         var badResponseBody = '{\'"}';
         var negativeClient = new AzureServiceClient(null, { longRunningOperationRetryTimeoutInSeconds : 0 });
-        negativeClient.addFilter(mockFilter({ statusCode: 202, body: badResponseBody }, badResponseBody));
+        negativeClient.addFilter(mockFilter({ statusCode: 200, body: badResponseBody }, badResponseBody));
         resultOfInitialRequest.response.headers['azure-asyncoperation'] = '';
         resultOfInitialRequest.response.headers['location'] = urlFromLocationHeader_Return200;
         negativeClient.getPutOperationResult(resultOfInitialRequest, negativeClient._getStatus, function (err, result) {
@@ -125,7 +125,7 @@ describe('AzureServiceClient', function () {
         var badResponseBody = '{';
         var negativeClient = new AzureServiceClient(null, { longRunningOperationRetryTimeoutInSeconds : 0 });
         negativeClient.addFilter(mockFilter({ statusCode: 203, body: badResponseBody }, badResponseBody));
-       resultOfInitialRequest.response.headers['azure-asyncoperation'] = '';
+        resultOfInitialRequest.response.headers['azure-asyncoperation'] = '';
         resultOfInitialRequest.response.headers['location'] = urlFromLocationHeader_Return200;
         negativeClient.getPutOperationResult(resultOfInitialRequest, negativeClient._getStatus, function (err, result) {
           should.exist(err);

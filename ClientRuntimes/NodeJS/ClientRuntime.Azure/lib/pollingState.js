@@ -59,7 +59,7 @@ PollingState.prototype.getTimeout = function () {
 
 PollingState.prototype.updateResponse = function (response) {
   this.response = response;
-  if (response != null) {
+  if (response && response.headers) {
     if (response.headers['azure-asyncoperation']) {
       this.azureAsyncOperationHeaderLink = response.headers['azure-asyncoperation'];
     }
@@ -68,7 +68,8 @@ PollingState.prototype.updateResponse = function (response) {
       this.locationHeaderLink = response.headers['location'];
     }
   }
-}
+  return this.response;
+};
 
 /**
  * Returns long running operation result.

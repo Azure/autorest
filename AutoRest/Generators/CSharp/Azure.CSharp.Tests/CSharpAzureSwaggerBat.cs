@@ -86,10 +86,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
 
             Assert.Equal("Succeeded", client.LROs.PutNoHeaderInRetry(new Product { Location = "West US" }).ProvisioningState);
             Assert.Equal("Succeeded", client.LROs.PutAsyncNoHeaderInRetry(new Product {Location = "West US"}).ProvisioningState);
-
             Assert.Equal("Succeeded", client.LROs.PutSubResource(new SubProduct()).ProvisioningState);
             Assert.Equal("Succeeded", client.LROs.PutAsyncSubResource(new SubProduct()).ProvisioningState);
-
             Assert.Equal("100", client.LROs.PutNonResource(new Sku()).Id);
             Assert.Equal("100", client.LROs.PutAsyncNonResource(new Sku()).Id);
 

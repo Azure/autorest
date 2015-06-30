@@ -391,7 +391,7 @@ var lros = function (coverage) {
     console.log('In scenario: ' + scenario + '\n');
     if (!hasScenarioCookie(req, scenario)) {
       addScenarioCookie(res, scenario);
-      res.status(202).end('{ "status": "InProgress"}');
+      res.status(200).end('{ "status": "InProgress"}');
     } else {
       removeScenarioCookie(res);
       coverage[scenario]++;
