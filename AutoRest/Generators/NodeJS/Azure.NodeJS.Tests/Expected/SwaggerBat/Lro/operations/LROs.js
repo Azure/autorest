@@ -29,7 +29,9 @@ function LROs(client) {
      * with an entity that contains ProvisioningState=’Succeeded’.
         * @param {Product} [product] Product to put
         *
-        * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+        * @param {ProductProperties} [product.properties] 
+        *
+        * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
         *
      * @param {function} callback
      *
@@ -56,7 +58,9 @@ function LROs(client) {
      * with an entity that contains ProvisioningState=’Succeeded’.
      * @param {Product} [product] Product to put
      *
-     * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+     * @param {ProductProperties} [product.properties] 
+     *
+     * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
      *
      * @param {function} callback
      *
@@ -242,7 +246,9 @@ function LROs(client) {
      * with an entity that does not contain ProvisioningState=’Succeeded’.
         * @param {Product} [product] Product to put
         *
-        * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+        * @param {ProductProperties} [product.properties] 
+        *
+        * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
         *
      * @param {function} callback
      *
@@ -269,7 +275,9 @@ function LROs(client) {
      * with an entity that does not contain ProvisioningState=’Succeeded’.
      * @param {Product} [product] Product to put
      *
-     * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+     * @param {ProductProperties} [product.properties] 
+     *
+     * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
      *
      * @param {function} callback
      *
@@ -456,7 +464,9 @@ function LROs(client) {
      * an entity that doesn't contains ProvisioningState
         * @param {Product} [product] Product to put
         *
-        * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+        * @param {ProductProperties} [product.properties] 
+        *
+        * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
         *
      * @param {function} callback
      *
@@ -484,7 +494,9 @@ function LROs(client) {
      * an entity that doesn't contains ProvisioningState
      * @param {Product} [product] Product to put
      *
-     * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+     * @param {ProductProperties} [product.properties] 
+     *
+     * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
      *
      * @param {function} callback
      *
@@ -672,7 +684,9 @@ function LROs(client) {
      * ProvisioningState=’Succeeded’
         * @param {Product} [product] Product to put
         *
-        * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+        * @param {ProductProperties} [product.properties] 
+        *
+        * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
         *
      * @param {function} callback
      *
@@ -701,7 +715,9 @@ function LROs(client) {
      * ProvisioningState=’Succeeded’
      * @param {Product} [product] Product to put
      *
-     * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+     * @param {ProductProperties} [product.properties] 
+     *
+     * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
      *
      * @param {function} callback
      *
@@ -905,7 +921,9 @@ function LROs(client) {
      * ProvisioningState=’Succeeded’
         * @param {Product} [product] Product to put
         *
-        * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+        * @param {ProductProperties} [product.properties] 
+        *
+        * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
         *
      * @param {function} callback
      *
@@ -934,7 +952,9 @@ function LROs(client) {
      * ProvisioningState=’Succeeded’
      * @param {Product} [product] Product to put
      *
-     * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+     * @param {ProductProperties} [product.properties] 
+     *
+     * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
      *
      * @param {function} callback
      *
@@ -1121,7 +1141,9 @@ function LROs(client) {
      * ProvisioningState=’Failed’
         * @param {Product} [product] Product to put
         *
-        * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+        * @param {ProductProperties} [product.properties] 
+        *
+        * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
         *
      * @param {function} callback
      *
@@ -1150,7 +1172,9 @@ function LROs(client) {
      * ProvisioningState=’Failed’
      * @param {Product} [product] Product to put
      *
-     * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+     * @param {ProductProperties} [product.properties] 
+     *
+     * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
      *
      * @param {function} callback
      *
@@ -1354,7 +1378,9 @@ function LROs(client) {
      * ProvisioningState=’Canceled’
         * @param {Product} [product] Product to put
         *
-        * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+        * @param {ProductProperties} [product.properties] 
+        *
+        * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
         *
      * @param {function} callback
      *
@@ -1383,7 +1409,9 @@ function LROs(client) {
      * ProvisioningState=’Canceled’
      * @param {Product} [product] Product to put
      *
-     * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+     * @param {ProductProperties} [product.properties] 
+     *
+     * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
      *
      * @param {function} callback
      *
@@ -1569,7 +1597,9 @@ function LROs(client) {
      * location header.
         * @param {Product} [product] Product to put
         *
-        * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+        * @param {ProductProperties} [product.properties] 
+        *
+        * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
         *
      * @param {function} callback
      *
@@ -1597,7 +1627,9 @@ function LROs(client) {
      * location header.
      * @param {Product} [product] Product to put
      *
-     * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+     * @param {ProductProperties} [product.properties] 
+     *
+     * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
      *
      * @param {function} callback
      *
@@ -1784,7 +1816,9 @@ function LROs(client) {
      * endpoint indicated in the Azure-AsyncOperation header for operation status
         * @param {Product} [product] Product to put
         *
-        * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+        * @param {ProductProperties} [product.properties] 
+        *
+        * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
         *
      * @param {function} callback
      *
@@ -1812,7 +1846,9 @@ function LROs(client) {
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      * @param {Product} [product] Product to put
      *
-     * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+     * @param {ProductProperties} [product.properties] 
+     *
+     * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
      *
      * @param {function} callback
      *
@@ -2000,7 +2036,9 @@ function LROs(client) {
      * endpoint indicated in the Azure-AsyncOperation header for operation status
         * @param {Product} [product] Product to put
         *
-        * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+        * @param {ProductProperties} [product.properties] 
+        *
+        * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
         *
      * @param {function} callback
      *
@@ -2028,7 +2066,9 @@ function LROs(client) {
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      * @param {Product} [product] Product to put
      *
-     * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+     * @param {ProductProperties} [product.properties] 
+     *
+     * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
      *
      * @param {function} callback
      *
@@ -2216,7 +2256,9 @@ function LROs(client) {
      * endpoint indicated in the Azure-AsyncOperation header for operation status
         * @param {Product} [product] Product to put
         *
-        * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+        * @param {ProductProperties} [product.properties] 
+        *
+        * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
         *
      * @param {function} callback
      *
@@ -2244,7 +2286,9 @@ function LROs(client) {
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      * @param {Product} [product] Product to put
      *
-     * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+     * @param {ProductProperties} [product.properties] 
+     *
+     * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
      *
      * @param {function} callback
      *
@@ -2432,7 +2476,9 @@ function LROs(client) {
      * endpoint indicated in the Azure-AsyncOperation header for operation status
         * @param {Product} [product] Product to put
         *
-        * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+        * @param {ProductProperties} [product.properties] 
+        *
+        * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
         *
      * @param {function} callback
      *
@@ -2460,7 +2506,9 @@ function LROs(client) {
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      * @param {Product} [product] Product to put
      *
-     * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+     * @param {ProductProperties} [product.properties] 
+     *
+     * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
      *
      * @param {function} callback
      *
@@ -2648,7 +2696,9 @@ function LROs(client) {
      * contain Azure-AsyncOperation header.
         * @param {Product} [product] Product to put
         *
-        * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+        * @param {ProductProperties} [product.properties] 
+        *
+        * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
         *
      * @param {function} callback
      *
@@ -2676,7 +2726,9 @@ function LROs(client) {
      * contain Azure-AsyncOperation header.
      * @param {Product} [product] Product to put
      *
-     * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+     * @param {ProductProperties} [product.properties] 
+     *
+     * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
      *
      * @param {function} callback
      *
@@ -3288,7 +3340,9 @@ function LROs(client) {
      * Long running put request with sub resource.
         * @param {SubProduct} [product] Sub Product to put
         *
-        * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+        * @param {SubProductProperties} [product.properties] 
+        *
+        * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
         *
      * @param {function} callback
      *
@@ -3314,7 +3368,9 @@ function LROs(client) {
      * Long running put request with sub resource.
      * @param {SubProduct} [product] Sub Product to put
      *
-     * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+     * @param {SubProductProperties} [product.properties] 
+     *
+     * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
      *
      * @param {function} callback
      *
@@ -3498,7 +3554,9 @@ function LROs(client) {
      * Long running put request with sub resource.
         * @param {SubProduct} [product] Sub Product to put
         *
-        * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+        * @param {SubProductProperties} [product.properties] 
+        *
+        * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
         *
      * @param {function} callback
      *
@@ -3524,7 +3582,9 @@ function LROs(client) {
      * Long running put request with sub resource.
      * @param {SubProduct} [product] Sub Product to put
      *
-     * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+     * @param {SubProductProperties} [product.properties] 
+     *
+     * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
      *
      * @param {function} callback
      *
@@ -5016,7 +5076,9 @@ function LROs(client) {
      * response body after success
         * @param {Product} [product] Product to put
         *
-        * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+        * @param {ProductProperties} [product.properties] 
+        *
+        * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
         *
      * @param {function} callback
      *
@@ -5037,7 +5099,9 @@ function LROs(client) {
      * response body after success
      * @param {Product} [product] Product to put
      *
-     * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+     * @param {ProductProperties} [product.properties] 
+     *
+     * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
      *
      * @param {function} callback
      *
@@ -5122,7 +5186,9 @@ function LROs(client) {
      * with 'Location' header, 204 with noresponse body after success
         * @param {Product} [product] Product to put
         *
-        * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+        * @param {ProductProperties} [product.properties] 
+        *
+        * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
         *
      * @param {function} callback
      *
@@ -5142,7 +5208,9 @@ function LROs(client) {
      * with 'Location' header, 204 with noresponse body after success
      * @param {Product} [product] Product to put
      *
-     * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+     * @param {ProductProperties} [product.properties] 
+     *
+     * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
      *
      * @param {function} callback
      *
@@ -5244,7 +5312,9 @@ function LROs(client) {
      * endpoint indicated in the Azure-AsyncOperation header for operation status
         * @param {Product} [product] Product to put
         *
-        * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+        * @param {ProductProperties} [product.properties] 
+        *
+        * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
         *
      * @param {function} callback
      *
@@ -5265,7 +5335,9 @@ function LROs(client) {
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      * @param {Product} [product] Product to put
      *
-     * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+     * @param {ProductProperties} [product.properties] 
+     *
+     * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
      *
      * @param {function} callback
      *
@@ -5351,7 +5423,9 @@ function LROs(client) {
      * endpoint indicated in the Azure-AsyncOperation header for operation status
         * @param {Product} [product] Product to put
         *
-        * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+        * @param {ProductProperties} [product.properties] 
+        *
+        * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
         *
      * @param {function} callback
      *
@@ -5372,7 +5446,9 @@ function LROs(client) {
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      * @param {Product} [product] Product to put
      *
-     * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+     * @param {ProductProperties} [product.properties] 
+     *
+     * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
      *
      * @param {function} callback
      *
@@ -5458,7 +5534,9 @@ function LROs(client) {
      * endpoint indicated in the Azure-AsyncOperation header for operation status
         * @param {Product} [product] Product to put
         *
-        * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+        * @param {ProductProperties} [product.properties] 
+        *
+        * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
         *
      * @param {function} callback
      *
@@ -5479,7 +5557,9 @@ function LROs(client) {
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      * @param {Product} [product] Product to put
      *
-     * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+     * @param {ProductProperties} [product.properties] 
+     *
+     * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
      *
      * @param {function} callback
      *
@@ -5565,7 +5645,9 @@ function LROs(client) {
      * endpoint indicated in the Azure-AsyncOperation header for operation status
         * @param {Product} [product] Product to put
         *
-        * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+        * @param {ProductProperties} [product.properties] 
+        *
+        * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
         *
      * @param {function} callback
      *
@@ -5586,7 +5668,9 @@ function LROs(client) {
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      * @param {Product} [product] Product to put
      *
-     * @param {String} [product.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+     * @param {ProductProperties} [product.properties] 
+     *
+     * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
      *
      * @param {function} callback
      *

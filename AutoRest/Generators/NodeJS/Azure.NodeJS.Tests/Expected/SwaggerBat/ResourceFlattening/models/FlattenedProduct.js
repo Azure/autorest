@@ -45,12 +45,8 @@ FlattenedProduct.prototype.validate = function (payload) {
     throw new Error('payload["name"] must be of type string.');
   }
 
-  if (payload['pname'] !== null && payload['pname'] !== undefined && typeof payload['pname'] !== 'string') {
-    throw new Error('payload["pname"] must be of type string.');
-  }
-
-  if (payload['provisioningStateValues'] !== null && payload['provisioningStateValues'] !== undefined && typeof payload['provisioningStateValues'] !== 'string') {
-    throw new Error('payload["provisioningStateValues"] must be of type string.');
+  if (payload['properties'] !== null && payload['properties'] !== undefined) {
+    models['FlattenedProductProperties'].validate(payload['properties']);
   }
 
 };
@@ -62,6 +58,12 @@ FlattenedProduct.prototype.validate = function (payload) {
  *
  */
 FlattenedProduct.prototype.deserialize = function (instance) {
+  if (instance) {
+    if (instance.properties !== null && instance.properties !== undefined) {
+      instance.properties = models['FlattenedProductProperties'].deserialize(instance.properties);
+    }
+
+  }
   return instance;
 };
 
