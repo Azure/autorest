@@ -219,5 +219,92 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             Assert.Equal("3", ((JObject)deserializedResource.Properties)["size"]);
             Assert.Equal("name1", ((JObject)deserializedResource.Properties)["child"]["name1"]);
         }
+
+        [Fact]
+        public void Failure()
+        {
+            var expected = @"{
+  ""id"": ""/subscriptions/5c7c0e6a-3d2f-4b8e-9ffd-089778451d1e/resourceGroups/csmrg6766/providers/Microsoft.Web/sites/csmr6039"",
+  ""name"": ""csmr6039"",
+  ""type"": ""Microsoft.Web/sites"",
+  ""location"": ""South Central US"",
+  ""tags"": {},
+  ""properties"": {
+    ""name"": ""csmr6039"",
+    ""state"": ""Running"",
+    ""hostNames"": [
+      ""csmr6039.antares-int.windows-int.net""
+    ],
+    ""webSpace"": ""csmrg6766-SouthCentralUSwebspace"",
+    ""selfLink"": ""https://antpreview1.api.admin-antares-int.windows-int.net:454/subscriptions/5c7c0e6a-3d2f-4b8e-9ffd-089778451d1e/webspaces/csmrg6766-SouthCentralUSwebspace/sites/csmr6039"",
+    ""repositorySiteName"": ""csmr6039"",
+    ""owner"": null,
+    ""usageState"": 0,
+    ""enabled"": true,
+    ""adminEnabled"": true,
+    ""enabledHostNames"": [
+      ""csmr6039.antares-int.windows-int.net"",
+      ""csmr6039.scm.antares-int.windows-int.net""
+    ],
+    ""siteProperties"": {
+      ""metadata"": null,
+      ""properties"": [],
+      ""appSettings"": null
+    },
+    ""availabilityState"": 0,
+    ""sslCertificates"": null,
+    ""csrs"": [],
+    ""cers"": null,
+    ""siteMode"": null,
+    ""hostNameSslStates"": [
+      {
+        ""name"": ""csmr6039.antares-int.windows-int.net"",
+        ""sslState"": 0,
+        ""ipBasedSslResult"": null,
+        ""virtualIP"": null,
+        ""thumbprint"": null,
+        ""toUpdate"": null,
+        ""toUpdateIpBasedSsl"": null,
+        ""ipBasedSslState"": 0
+      },
+      {
+        ""name"": ""csmr6039.scm.antares-int.windows-int.net"",
+        ""sslState"": 0,
+        ""ipBasedSslResult"": null,
+        ""virtualIP"": null,
+        ""thumbprint"": null,
+        ""toUpdate"": null,
+        ""toUpdateIpBasedSsl"": null,
+        ""ipBasedSslState"": 0
+      }
+    ],
+    ""computeMode"": null,
+    ""serverFarm"": ""Default1"",
+    ""webHostingPlan"": ""Default1"",
+    ""lastModifiedTimeUtc"": ""2014-06-24T22:04:45.16"",
+    ""storageRecoveryDefaultState"": ""Running"",
+    ""contentAvailabilityState"": 0,
+    ""runtimeAvailabilityState"": 0,
+    ""siteConfig"": null,
+    ""deploymentId"": ""csmr6039"",
+    ""trafficManagerHostNames"": null,
+    ""sku"": ""Free""
+  }
+}";
+
+            var deserializeSettings = new JsonSerializerSettings()
+            {
+                Formatting = Formatting.Indented,
+                NullValueHandling = NullValueHandling.Ignore,
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                ContractResolver = new ReadOnlyJsonContractResolver()
+            };
+            deserializeSettings.Converters.Add(new ResourceJsonConverter());
+            deserializeSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<SampleResourceChild>("dType"));
+            var deserializedResource = JsonConvert.DeserializeObject<GenericResource>(expected, deserializeSettings);
+
+            Assert.Equal("South Central US", deserializedResource.Location);
+            Assert.Equal("csmr6039", deserializedResource.Name);
+        }
     }
 }
