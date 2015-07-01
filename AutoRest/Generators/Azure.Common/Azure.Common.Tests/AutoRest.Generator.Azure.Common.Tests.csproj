@@ -17,9 +17,6 @@
     <AutoRestTest>true</AutoRestTest>
     <NuGetPackageImportStamp>22573d97</NuGetPackageImportStamp>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Net45-Debug'">
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
   <Import Project="$(SolutionDir)\Tools\AutoRest.Settings.targets" />
   <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />

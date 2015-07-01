@@ -16,9 +16,6 @@
     <AutoRestTest>true</AutoRestTest>
     <NuGetPackageImportStamp>c999b926</NuGetPackageImportStamp>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Net45-Debug'">
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
   <Import Project="$(SolutionDir)\Tools\AutoRest.Settings.targets" />
   <PropertyGroup>
     <NoWarn>1570;1591</NoWarn>

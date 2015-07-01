@@ -159,7 +159,7 @@ namespace Microsoft.Rest.TransientFaultHandling
     /// </summary>
     internal class AsyncExecution : AsyncExecution<bool>
     {
-        private static Task<bool> cachedBoolTask;
+        private static Task<bool> _cachedBoolTask;
 
         public AsyncExecution(
             Func<Task> taskAction,
@@ -223,14 +223,14 @@ namespace Microsoft.Rest.TransientFaultHandling
 
         private static Task<bool> GetCachedTask()
         {
-            if (cachedBoolTask == null)
+            if (_cachedBoolTask == null)
             {
                 var tcs = new TaskCompletionSource<bool>();
                 tcs.TrySetResult(true);
-                cachedBoolTask = tcs.Task;
+                _cachedBoolTask = tcs.Task;
             }
 
-            return cachedBoolTask;
+            return _cachedBoolTask;
         }
     }
 }
