@@ -33,7 +33,36 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
 
             resource.Name = "resource";
             resource.Extensions[AzureCodeGenerator.ExternalExtension] = true;
-
+            resource.Properties.Add(new Property
+            {
+                Name = "id",
+                Type = PrimaryType.String,
+                IsRequired = true
+            });
+            resource.Properties.Add(new Property
+            {
+                 Name = "location",
+                 Type = PrimaryType.String,
+                 IsRequired = true
+            });
+            resource.Properties.Add(new Property
+            {
+               Name = "name",
+               Type = PrimaryType.String,
+               IsRequired = true
+            });
+            resource.Properties.Add(new Property
+            {
+                Name = "tags",
+                Type = new SequenceType { ElementType = PrimaryType.String },
+                IsRequired = true
+            }); 
+            resource.Properties.Add(new Property
+            {
+                 Name = "type",
+                 Type = PrimaryType.String,
+                 IsRequired = true
+            });
             dogProperties.Name = "dogProperties";
             dogProperties.Properties.Add(new Property
             {
@@ -91,7 +120,37 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
             serviceClient.ModelTypes.Add(resourceProperties);
 
             resource.Name = "resource";
-            resource.Extensions[AzureCodeGenerator.ExternalExtension] = null;
+             resource.Properties.Add(new Property
+            {
+               Name = "id",
+               Type = PrimaryType.String,
+               IsRequired = true
+            });
+            resource.Properties.Add(new Property
+            {
+                 Name = "location",
+                 Type = PrimaryType.String,
+                 IsRequired = true
+            });
+            resource.Properties.Add(new Property
+            {
+               Name = "name",
+               Type = PrimaryType.String,
+               IsRequired = true
+            }); 
+            resource.Properties.Add(new Property
+            {
+                Name = "tags",
+                Type = new SequenceType { ElementType = PrimaryType.String },
+                IsRequired = true
+            }); 
+            resource.Properties.Add(new Property
+            {
+                 Name = "type",
+                 Type = PrimaryType.String,
+                 IsRequired = true
+            });
+           resource.Extensions[AzureCodeGenerator.ExternalExtension] = null;
             resourceProperties.Name = "resourceProperties";
             resourceProperties.Properties.Add(new Property
             {
@@ -127,7 +186,37 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
             serviceClient.ModelTypes.Add(dog);
 
             resource.Name = "resource";
-            resource.Extensions[AzureCodeGenerator.ExternalExtension] = true;
+            resource.Properties.Add(new Property
+            {
+               Name = "id",
+               Type = PrimaryType.String,
+               IsRequired = true
+            });
+            resource.Properties.Add(new Property
+            {
+                 Name = "location",
+                 Type = PrimaryType.String,
+                 IsRequired = true
+            });
+            resource.Properties.Add(new Property
+            {
+               Name = "name",
+               Type = PrimaryType.String,
+               IsRequired = true
+            }); 
+            resource.Properties.Add(new Property
+            {
+                Name = "tags",
+                Type = new SequenceType { ElementType = PrimaryType.String },
+                IsRequired = true
+            }); 
+            resource.Properties.Add(new Property
+            {
+                 Name = "type",
+                 Type = PrimaryType.String,
+                 IsRequired = true
+            });
+            resource.Extensions[AzureCodeGenerator.ExternalExtension] = null;
             resourceProperties.Name = "resourceProperties";
             resourceProperties.Properties.Add(new Property
             {
