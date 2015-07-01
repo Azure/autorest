@@ -336,6 +336,7 @@ namespace Microsoft.Rest.Generator.Azure
                    (compositeType.BaseModelType.Name.Equals(ResourceType, StringComparison.OrdinalIgnoreCase) ||
                     compositeType.BaseModelType.Name.Equals(SubResourceType, StringComparison.OrdinalIgnoreCase)) &&
                    compositeType.BaseModelType.Extensions.ContainsKey(ExternalExtension) &&
+                   compositeType.BaseModelType.Extensions[ExternalExtension] is bool &&
                    (bool)compositeType.BaseModelType.Extensions[ExternalExtension];
         }
 
@@ -353,8 +354,9 @@ namespace Microsoft.Rest.Generator.Azure
             }
 
             return (compositeType.Extensions.ContainsKey(ExternalExtension) &&
-                                (bool)compositeType.Extensions[ExternalExtension] &&
-                                compositeType.Name.Equals(ResourceType));
+                    compositeType.Extensions[ExternalExtension] is bool &&
+                    (bool)compositeType.Extensions[ExternalExtension] &&
+                    compositeType.Name.Equals(ResourceType));
         }
 
         /// <summary>

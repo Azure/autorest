@@ -12,7 +12,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
     /// <summary>
     /// Long-running Operation for AutoRest
     /// </summary>
-    public partial interface IAutoRestPagingTestService : IDisposable
+    public partial interface IAutoRestPagingTestService
     {
         /// <summary>
         /// The base URI of the service.

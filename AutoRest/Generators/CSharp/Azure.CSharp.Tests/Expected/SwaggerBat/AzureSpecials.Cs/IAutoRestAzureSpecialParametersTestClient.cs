@@ -12,7 +12,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
     /// <summary>
     /// Test Infrastructure for AutoRest
     /// </summary>
-    public partial interface IAutoRestAzureSpecialParametersTestClient : IDisposable
+    public partial interface IAutoRestAzureSpecialParametersTestClient
     {
         /// <summary>
         /// The base URI of the service.

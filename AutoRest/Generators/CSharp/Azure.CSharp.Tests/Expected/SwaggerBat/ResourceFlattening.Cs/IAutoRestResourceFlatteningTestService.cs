@@ -12,7 +12,7 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
     /// <summary>
     /// Resource Flattening for AutoRest
     /// </summary>
-    public partial interface IAutoRestResourceFlatteningTestService : IDisposable
+    public partial interface IAutoRestResourceFlatteningTestService
     {
         /// <summary>
         /// The base URI of the service.
