@@ -124,12 +124,22 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             }
         }
 
+        /// <summary>
+        /// Gets Get method invocation arguments for Long Running Operations.
+        /// </summary>
+        /// <param name="getMethod">Get method.</param>
+        /// <returns>Invocation arguments.</returns>
         public string GetMethodInvocationArgs(Method getMethod)
         {
-            List<string> invocationParams = new List<string>();
+            if (getMethod == null)
+            {
+                throw new ArgumentNullException("getMethod");
+            }
+
+            var invocationParams = new List<string>();
             getMethod.Parameters
                 .Where(p => LocalParameters.Any(lp => lp.Name == p.Name))
-                .ForEach(p => invocationParams.Add(string.Format("{0}: {0}", p.Name)));
+                .ForEach(p => invocationParams.Add(string.Format(CultureInfo.InvariantCulture,"{0}: {0}", p.Name)));
             invocationParams.Add("cancellationToken: cancellationToken");
             return string.Join(", ", invocationParams);
         }
