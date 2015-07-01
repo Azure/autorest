@@ -48,7 +48,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             AzureOperationResponse<Product> response = await BeginPut200SucceededWithOperationResponseAsync(
                 product, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => Get200SucceededWithOperationResponseAsync(cancellationToken),
+                () => Get200SucceededWithOperationResponseAsync(cancellationToken: cancellationToken),
                 cancellationToken);
         }
 
@@ -250,7 +250,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             AzureOperationResponse<Product> response = await BeginPut200SucceededNoStateWithOperationResponseAsync(
                 product, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => Get200SucceededNoStateWithOperationResponseAsync(cancellationToken),
+                () => Get200SucceededNoStateWithOperationResponseAsync(cancellationToken: cancellationToken),
                 cancellationToken);
         }
 
@@ -453,7 +453,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             AzureOperationResponse<Product> response = await BeginPut202Retry200WithOperationResponseAsync(
                 product, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetPut202Retry200WithOperationResponseAsync(cancellationToken),
+                () => GetPut202Retry200WithOperationResponseAsync(cancellationToken: cancellationToken),
                 cancellationToken);
         }
 
@@ -658,7 +658,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             AzureOperationResponse<Product> response = await BeginPut201CreatingSucceeded200WithOperationResponseAsync(
                 product, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => Get201CreatingSucceeded200PollingWithOperationResponseAsync(cancellationToken),
+                () => Get201CreatingSucceeded200PollingWithOperationResponseAsync(cancellationToken: cancellationToken),
                 cancellationToken);
         }
 
@@ -869,7 +869,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             AzureOperationResponse<Product> response = await BeginPut200UpdatingSucceeded204WithOperationResponseAsync(
                 product, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => Get200CreatingSucceeded200PollWithOperationResponseAsync(cancellationToken),
+                () => Get200CreatingSucceeded200PollWithOperationResponseAsync(cancellationToken: cancellationToken),
                 cancellationToken);
         }
 
@@ -1074,7 +1074,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             AzureOperationResponse<Product> response = await BeginPut201CreatingFailed200WithOperationResponseAsync(
                 product, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => Get201CreatingFailed200PollingWithOperationResponseAsync(cancellationToken),
+                () => Get201CreatingFailed200PollingWithOperationResponseAsync(cancellationToken: cancellationToken),
                 cancellationToken);
         }
 
@@ -1285,7 +1285,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             AzureOperationResponse<Product> response = await BeginPut200Acceptedcanceled200WithOperationResponseAsync(
                 product, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => Get200Acceptedcanceled200PollWithOperationResponseAsync(cancellationToken),
+                () => Get200Acceptedcanceled200PollWithOperationResponseAsync(cancellationToken: cancellationToken),
                 cancellationToken);
         }
 
@@ -1489,7 +1489,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             AzureOperationResponse<Product> response = await BeginPutAsyncRetrySucceededWithOperationResponseAsync(
                 product, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetAsyncRetrySucceededWithOperationResponseAsync(cancellationToken),
+                () => GetAsyncRetrySucceededWithOperationResponseAsync(cancellationToken: cancellationToken),
                 cancellationToken);
         }
 
@@ -1694,7 +1694,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             AzureOperationResponse<Product> response = await BeginPutAsyncNoRetrySucceededWithOperationResponseAsync(
                 product, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetAsyncNoRetrySucceededWithOperationResponseAsync(cancellationToken),
+                () => GetAsyncNoRetrySucceededWithOperationResponseAsync(cancellationToken: cancellationToken),
                 cancellationToken);
         }
 
@@ -1899,7 +1899,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             AzureOperationResponse<Product> response = await BeginPutAsyncRetryFailedWithOperationResponseAsync(
                 product, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetAsyncRetryFailedWithOperationResponseAsync(cancellationToken),
+                () => GetAsyncRetryFailedWithOperationResponseAsync(cancellationToken: cancellationToken),
                 cancellationToken);
         }
 
@@ -2104,7 +2104,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             AzureOperationResponse<Product> response = await BeginPutAsyncNoRetrycanceledWithOperationResponseAsync(
                 product, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetAsyncNoRetrycanceledWithOperationResponseAsync(cancellationToken),
+                () => GetAsyncNoRetrycanceledWithOperationResponseAsync(cancellationToken: cancellationToken),
                 cancellationToken);
         }
 
