@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.ClientModel;
@@ -121,6 +122,16 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                 }
                 return base.InitializeResponseBody;
             }
+        }
+
+        public string GetMethodInvocationArgs(Method getMethod)
+        {
+            List<string> invocationParams = new List<string>();
+            getMethod.Parameters
+                .Where(p => LocalParameters.Any(lp => lp.Name == p.Name))
+                .ForEach(p => invocationParams.Add(string.Format("{0}: {0}", p.Name)));
+            invocationParams.Add("cancellationToken: cancellationToken");
+            return string.Join(", ", invocationParams);
         }
 
         /// <summary>

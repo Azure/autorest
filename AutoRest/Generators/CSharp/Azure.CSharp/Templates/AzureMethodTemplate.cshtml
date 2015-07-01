@@ -59,7 +59,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithO
         @(Model.AsyncMethodInvocationArgs));
 
     return await @(Model.ClientReference).GetPutOperationResultAsync<@(Model.ReturnType.Name)>(response, 
-        () => @(Model.GetMethod.Name)WithOperationResponseAsync(@(Model.GetMethod.AsyncMethodInvocationArgs)),
+        () => @(Model.GetMethod.Name)WithOperationResponseAsync(@(Model.GetMethodInvocationArgs(Model.GetMethod))),
         cancellationToken);
 }
 </text>
