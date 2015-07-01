@@ -201,7 +201,6 @@ var lros = function (coverage) {
     }
   });
   
-  ///New LRO- PUT
   coverage['LROPutNoHeaderInRetry'] = 0;
   router.put('/put/noheader/202/200', function (req, res, next) {
     var pollingUri = 'http://localhost.:' + utils.getPort() + '/lro/put/noheader/operationresults';
@@ -251,7 +250,6 @@ var lros = function (coverage) {
     }
   });
   
-  ///New LRO-Delete
   coverage['LRODeleteNoHeaderInRetry'] = 0;
   router.delete('/delete/noheader', function (req, res, next) {
     var pollingUri = 'http://localhost.:' + utils.getPort() + '/lro/delete/noheader/operationresults/123';
@@ -297,7 +295,6 @@ var lros = function (coverage) {
     }
   });
   
-  ////LRO Sub Resource Put
   coverage['LROPutSubResourceInRetry'] = 0;
   router.put('/putsubresource/202/200', function (req, res, next) {
     var pollingUri = 'http://localhost.:' + utils.getPort() + '/lro/putsubresource/operationresults';
@@ -320,7 +317,6 @@ var lros = function (coverage) {
     }
   });
 
-  //// (use async operation header)
   coverage['LROPutSubResourceAsyncInRetry'] = 0;
   router.put('/putsubresourceasync/202/200', function (req, res, next) {
     var pollingUri = 'http://localhost.:' + utils.getPort() + '/lro/putsubresourceasync/operationresults/123';
@@ -348,7 +344,6 @@ var lros = function (coverage) {
     }
   });
   
-  ////LRO Non Resource Put
   coverage['LROPutNonResourceInRetry'] = 0;
   router.put('/putnonresource/202/200', function (req, res, next) {
     var pollingUri = 'http://localhost.:' + utils.getPort() + '/lro/putnonresource/operationresults';
@@ -371,7 +366,6 @@ var lros = function (coverage) {
     }
   });
 
-  // (use async operation header)
   coverage['LROPutNonResourceAsyncInRetry'] = 0;
   router.put('/putnonresourceasync/202/200', function (req, res, next) {
     var pollingUri = 'http://localhost.:' + utils.getPort() + '/lro/putnonresourceasync/operationresults/123';
@@ -398,7 +392,6 @@ var lros = function (coverage) {
       res.status(200).end('{ "status": "Succeeded"}');
     }
   });
-  /////////////////////////
 
   coverage['LRODeleteProvisioningSucceededWithBody'] = 0;
   coverage['LRODeleteProvisioningFailed'] = 0;

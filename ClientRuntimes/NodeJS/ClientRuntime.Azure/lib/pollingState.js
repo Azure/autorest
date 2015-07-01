@@ -18,7 +18,7 @@ var LroStates = require('./constants').LongRunningOperationStates;
  */
 function PollingState(resultOfInitialRequest, retryTimeout) {
   this._retryTimeout = retryTimeout;
-  this.response = this.updateResponse(resultOfInitialRequest.response);
+  this.updateResponse(resultOfInitialRequest.response);
   this.request = resultOfInitialRequest.request;
   this.resource = resultOfInitialRequest.body;
   
@@ -57,6 +57,10 @@ PollingState.prototype.getTimeout = function () {
   return 30 * 1000;
 };
 
+/**
+ * Update cached data using the provided response object
+ * @param {object} [response] - provider response object.
+ */
 PollingState.prototype.updateResponse = function (response) {
   this.response = response;
   if (response && response.headers) {
@@ -68,7 +72,6 @@ PollingState.prototype.updateResponse = function (response) {
       this.locationHeaderLink = response.headers['location'];
     }
   }
-  return this.response;
 };
 
 /**
