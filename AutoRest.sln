@@ -50,6 +50,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime", "ClientRuntimes\CSharp\ClientRuntime\ClientRuntime.csproj", "{7F524559-93F9-4F3F-9E2C-AF41A0C2E6F4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime.Azure", "ClientRuntimes\CSharp\ClientRuntime.Azure\ClientRuntime.Azure.csproj", "{856A1D19-C3BF-439A-BEBF-E822A332BC12}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Generator.Azure.Ruby.Tests", "AutoRest\Generators\Ruby\Azure.Ruby.Tests\AutoRest.Generator.Azure.Ruby.Tests.csproj", "{D30EE4A3-366A-473B-9DB5-0E5F6516A4AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -125,6 +126,10 @@ Global
 		{856A1D19-C3BF-439A-BEBF-E822A332BC12}.Net45-Debug|Any CPU.Build.0 = Net45-Debug|Any CPU
 		{856A1D19-C3BF-439A-BEBF-E822A332BC12}.Net45-Release|Any CPU.ActiveCfg = Net45-Release|Any CPU
 		{856A1D19-C3BF-439A-BEBF-E822A332BC12}.Net45-Release|Any CPU.Build.0 = Net45-Release|Any CPU
+		{D30EE4A3-366A-473B-9DB5-0E5F6516A4AD}.Net45-Debug|Any CPU.ActiveCfg = Net45-Debug|Any CPU
+		{D30EE4A3-366A-473B-9DB5-0E5F6516A4AD}.Net45-Debug|Any CPU.Build.0 = Net45-Debug|Any CPU
+		{D30EE4A3-366A-473B-9DB5-0E5F6516A4AD}.Net45-Release|Any CPU.ActiveCfg = Net45-Release|Any CPU
+		{D30EE4A3-366A-473B-9DB5-0E5F6516A4AD}.Net45-Release|Any CPU.Build.0 = Net45-Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -148,5 +153,6 @@ Global
 		{CD930EB5-A0C1-49BF-A320-1C2AEB028E7E} = {DE95444A-F6FD-46DC-BBDC-A1A6886A6F2D}
 		{7F524559-93F9-4F3F-9E2C-AF41A0C2E6F4} = {235139C9-79DE-4242-8F12-327C62377C23}
 		{856A1D19-C3BF-439A-BEBF-E822A332BC12} = {235139C9-79DE-4242-8F12-327C62377C23}
+		{D30EE4A3-366A-473B-9DB5-0E5F6516A4AD} = {DE95444A-F6FD-46DC-BBDC-A1A6886A6F2D}
 	EndGlobalSection
 EndGlobal
