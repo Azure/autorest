@@ -5,8 +5,8 @@ using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("AutoRest.Generator.Azure.CSharp.Tests")]
-[assembly: AssemblyDescription("Tests for Azure Common Code Generators")]
+[assembly: AssemblyTitle("AutoRest.Generator.CSharp.Tests")]
+[assembly: AssemblyDescription("Tests for CSharp Code Generators")]
 [assembly: AssemblyCompany("Microsoft Corporation")]
 [assembly: AssemblyProduct("Microsoft AutoRest")]
 [assembly: AssemblyCopyright("Copyright ©  Microsoft Corporation")]

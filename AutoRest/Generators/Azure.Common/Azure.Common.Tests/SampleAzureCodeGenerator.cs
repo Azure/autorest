@@ -16,27 +16,27 @@ namespace Microsoft.Rest.Modeler.Swagger.Azure.Tests
 
         public override string Name
         {
-            get { throw new System.NotImplementedException(); }
+            get { return null; }
         }
 
         public override string Description
         {
-            get { throw new System.NotImplementedException(); }
+            get { return null; }
         }
 
         public override string UsageInstructions
         {
-            get { throw new System.NotImplementedException(); }
+            get { return null; }
         }
 
         public override string ImplementationFileExtension
         {
-            get { throw new System.NotImplementedException(); }
+            get { return null; }
         }
 
         public override Task Generate(ServiceClient serviceClient)
         {
-            throw new System.NotImplementedException();
+            return null;
         }
     }
 }

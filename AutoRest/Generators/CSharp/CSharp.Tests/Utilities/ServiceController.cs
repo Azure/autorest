@@ -29,7 +29,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         /// <summary>
         /// Directory containing the acceptance test files.
         /// </summary>
-        private string AcceptanceTestsPath
+        private static string AcceptanceTestsPath
         {
             get { return @"..\..\..\..\AcceptanceTests\server"; }
         }
@@ -41,7 +41,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
         public Uri Uri
         {
-            get { return new Uri(string.Format("http://localhost.:{0}", Port)); }
+            get { return new Uri(string.Format(CultureInfo.InvariantCulture, "http://localhost.:{0}", Port)); }
         }
 
         /// <summary>
@@ -51,12 +51,17 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
         public void Dispose()
         {
-            // TODO: not thread safe.
-            if (ServiceProcess != null && !ServiceProcess.HasExited)
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing && ServiceProcess != null && !ServiceProcess.HasExited)
             {
                 EndServiceProcess(ServiceProcess);
                 ServiceProcess = null;
-            }
+            }   
         }
 
         /// <summary>
@@ -100,22 +105,26 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 throw new InvalidOperationException("Could not find path to " + NpmCommand);
             }
 
-            var prepareProcess = StartServiceProcess(npmPath, NpmArgument, AcceptanceTestsPath, /*waitForServerStart*/ false);
-            // Wait for maximum of two minutes; One-time preparation.
-            if (prepareProcess.WaitForExit(120000))
+            using ( var prepareProcess = StartServiceProcess(npmPath, NpmArgument, AcceptanceTestsPath,
+                    waitForServerStart:false))
             {
-                var nodePath = GetPathToExecutable(NodeCommand);
-                if (nodePath == null)
+                // Wait for maximum of two minutes; One-time preparation.
+                if (prepareProcess.WaitForExit(120000))
                 {
-                    throw new InvalidOperationException("Could not find path to " + NodeCommand);
-                }
+                    var nodePath = GetPathToExecutable(NodeCommand);
+                    if (nodePath == null)
+                    {
+                        throw new InvalidOperationException("Could not find path to " + NodeCommand);
+                    }
 
-                ServiceProcess = StartServiceProcess(nodePath, NodeArgument, AcceptanceTestsPath);
-            }
-            else
-            {
-                throw new InvalidOperationException(string.Format("Failed to start {0} {1} .",
-                    npmPath, NpmArgument));
+                    ServiceProcess = StartServiceProcess(nodePath, NodeArgument, AcceptanceTestsPath);
+                }
+                else
+                {
+                    throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture,
+                        "Failed to start {0} {1} .",
+                        npmPath, NpmArgument));
+                }
             }
         }
 

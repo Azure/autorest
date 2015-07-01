@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" InitialTargets="TurnOffCodeAnalysis">
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(SolutionDir)\packages\xunit.runner.visualstudio.2.0.0\build\net20\xunit.runner.visualstudio.props" Condition="Exists('$(SolutionDir)\packages\xunit.runner.visualstudio.2.0.0\build\net20\xunit.runner.visualstudio.props')" />
   <Import Project="$(SolutionDir)\packages\xunit.core.2.0.0\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.props" Condition="Exists('$(SolutionDir)\packages\xunit.core.2.0.0\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.props')" />
   <PropertyGroup>
@@ -177,12 +177,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs"/>
     <Compile Include="CSharpSwaggerBat.cs" />
     <Compile Include="Expected\Mirror.RecursiveTypes.Cs\IRecursiveTypesAPI.cs" />
     <Compile Include="Expected\Mirror.RecursiveTypes.Cs\Models\Error.cs" />
     <Compile Include="Expected\Mirror.RecursiveTypes.Cs\Models\Product.cs" />
     <Compile Include="Expected\Mirror.RecursiveTypes.Cs\RecursiveTypesAPI.cs" />
     <Compile Include="Expected\Mirror.RecursiveTypes.Cs\RecursiveTypesAPIExtensions.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Utilities\Comparers.cs" />
     <Compile Include="CSharpCodeNamingFrameworkTests.cs" />
     <Compile Include="Expected\Mirror.Polymorphic.Cs\IPolymorphicAnimalStore.cs">
