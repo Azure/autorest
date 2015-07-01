@@ -198,41 +198,60 @@ namespace Microsoft.Rest.Generator.Ruby
             return builder.AppendLine("{0} = JSON.generate(request_content, quirks_mode: true)", outputVariable).ToString();
         }
 
-        public virtual string BuildUrlPath(string variableName)
+        /// <summary>
+        /// Generate code to build the URL from a url expression and method parameters.
+        /// </summary>
+        /// <param name="inputVariableName">The variable to prepare url from.</param>
+        /// <param name="outputVariableName">The variable that will keep the url.</param>
+        /// <returns>Code for URL generation.</returns>
+        public virtual string BuildUrl(string inputVariableName, string outputVariableName)
         {
-            var builder = new IndentedStringBuilder("      ");
+            var builder = new IndentedStringBuilder("  ");
 
+            // Filling path parameters (which are directly in the url body).
             foreach (var pathParameter in ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
             {
                 builder.AppendLine("{0}['{{{1}}}'] = CGI.escape({2})",
-                    variableName,
+                    inputVariableName,
                     pathParameter.SerializedName,
                     pathParameter.Type.ToString(pathParameter.Name));
+            }
+
+            // Adding prefix in case of not absolute url.
+            if (!this.IsAbsoluteUrl)
+            {
+                builder.AppendLine("{0} = URI.join({1}.base_url, {2})", outputVariableName, ClientReference, inputVariableName);
+            }
+
+            // Filling query parameters (which are directly in the url query part). 
+            var queryParametres = ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query).ToList();
+
+            if (queryParametres.Any())
+            {
+                builder.AppendLine("properties = {{ {0} }}",
+                    string.Join(", ", queryParametres.Select(x => string.Format("'{0}' => {1}", x.SerializedName, x.Name))));
+
+                builder.AppendLine("properties.reject!{ |key, value| value.nil? }");
+                builder.AppendLine("{0}.query = properties.map{{ |key, value| \"#{{key}}=#{{CGI.escape(value.to_s)}}\" }}.compact.join('&')", outputVariableName);
             }
 
             return builder.ToString();
         }
 
         /// <summary>
-        /// Generate code to build the URL from a url expression and method parameters
+        /// 
         /// </summary>
-        /// <param name="variableName">The variable to store the url in.</param>
+        /// <param name="urlVariableName"></param>
         /// <returns></returns>
-        public virtual string BuildUrlParametres(string variableName)
+        public virtual string RemoveDuplicateForwardSlashes(string urlVariableName)
         {
-            var builder = new IndentedStringBuilder("    ");
+            var builder = new IndentedStringBuilder("  ");
 
-            var queryParametres = ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query);
-            if (queryParametres.Any())
-            {
-                builder.AppendLine("properties = {{ {1} }}", 
-                    variableName,
-                    string.Join(", ", queryParametres.Select(x => string.Format("'{0}' => {1}", x.SerializedName, x.Name))));
-
-                builder.AppendLine("properties.reject!{ |key, value| value.nil? }");
-                builder.AppendLine("{0}.query = properties.map{{ |key, value| \"#{{key}}=#{{CGI.escape(value.to_s)}}\" }}.compact.join('&')", variableName);
-            }
-
+            // TODO: convert it to Ruby.
+            //builder.AppendLine("# trim all duplicate forward slashes in the url");
+            //builder.AppendLine("var regex = /([^:]\\/)\\/+/gi;");
+            //builder.AppendLine("{0} = {0}.replace(regex, '$1');", urlVariableName);
+            
             return builder.ToString();
         }
     }

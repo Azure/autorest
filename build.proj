@@ -164,10 +164,12 @@
       <TestDlls Include=".\AutoRest\Generators\CSharp\Azure.CSharp.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.Azure.CSharp.Tests.dll" />
       <TestDlls Include=".\AutoRest\AutoRest.Core.Tests\bin\Net45-$(Configuration)\AutoRest.Core.Tests.dll" />
       <TestDlls Include=".\AutoRest\Modelers\Swagger.Tests\bin\Net45-$(Configuration)\AutoRest.Modeler.Swagger.Tests.dll" />
+      <TestDlls Include=".\AutoRest\Generators\Ruby\Ruby.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.Ruby.Tests.dll" />
     </ItemGroup>
     
     <Message Text="@(TestDlls)" />
     <MakeDir Directories="$(LibraryRoot)TestResults"/>
+    <Exec WorkingDirectory=".\ClientRuntimes\Ruby\" Command="UpdateRuntime"/>
     <xunit Assemblies="@(TestDlls)" Html="$(MSBuildProjectDirectory)\TestResults\xunit.results.html" ContinueOnError="false" />
     <Exec WorkingDirectory=".\AutoRest\Generators\NodeJS\NodeJS.Tests\" Command="npm test"/>
     <Exec WorkingDirectory=".\AutoRest\Generators\NodeJS\Azure.NodeJS.Tests\" Command="npm test"/>

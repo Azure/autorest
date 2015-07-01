@@ -38,28 +38,32 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\nrequire \'uri\'\r\nrequire \'cgi\'\r\nrequire \'date\'\r\nrequire \'json\'\r\nrequire \'base64\'\r" +
-"\nrequire \'securerandom\'\r\nrequire \'time\'\r\nrequire \'timeliness\'\r\nrequire \'duration" +
-"\'\r\nrequire \'concurrent\'\r\nrequire \'client_runtime\'\r\n");
-#line 17 "RequirementsTemplate.cshtml"
+            WriteLiteral("\r\n");
+#line 6 "RequirementsTemplate.cshtml"
+Write(Model.GetDependencyGems());
+
+#line default
+#line hidden
+            WriteLiteral("\r\n");
+#line 7 "RequirementsTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
             WriteLiteral("\r\n");
-#line 18 "RequirementsTemplate.cshtml"
+#line 8 "RequirementsTemplate.cshtml"
 Write(Model.GetModelsRequiredFiles());
 
 #line default
 #line hidden
             WriteLiteral("\r\n");
-#line 19 "RequirementsTemplate.cshtml"
+#line 9 "RequirementsTemplate.cshtml"
 Write(Model.GetOperationsRequiredFiles());
 
 #line default
 #line hidden
             WriteLiteral("\r\n");
-#line 20 "RequirementsTemplate.cshtml"
+#line 10 "RequirementsTemplate.cshtml"
 Write(Model.GetClientRequiredFile());
 
 #line default
