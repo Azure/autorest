@@ -11,7 +11,7 @@ namespace Fixtures.Azure.SwaggerBatHead
     /// <summary>
     /// Test Infrastructure for AutoRest
     /// </summary>
-    public partial interface IAutoRestHeadTestService : IDisposable
+    public partial interface IAutoRestHeadTestService
     {
         /// <summary>
         /// The base URI of the service.

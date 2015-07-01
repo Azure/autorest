@@ -9,7 +9,9 @@ using Xunit;
 
 namespace Microsoft.Rest.Generator.Azure.Common.Tests
 {
-    [Collection("AutoRest Tests")]    public class AzureServiceClientNormalizerTests    {
+    [Collection("AutoRest Tests")]
+    public class AzureServiceClientNormalizerTests
+    {
         [Fact]
         public void ResourceIsFlattenedForSimpleResource()
         {
@@ -30,7 +32,7 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
             serviceClient.ModelTypes.Add(dog);
 
             resource.Name = "resource";
-            resource.Extensions[AzureCodeGenerator.ExternalExtension] = null;
+            resource.Extensions[AzureCodeGenerator.ExternalExtension] = true;
 
             dogProperties.Name = "dogProperties";
             dogProperties.Properties.Add(new Property
@@ -74,6 +76,36 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
         }
 
         [Fact]
+        public void ExternalResourceTypeIsNullSafe()
+        {
+            var serviceClient = new ServiceClient();
+            serviceClient.BaseUrl = "https://petstore.swagger.wordnik.com";
+            serviceClient.ApiVersion = "1.0.0";
+            serviceClient.Documentation =
+                "A sample API that uses a petstore as an example to demonstrate features in the swagger-2.0 specification";
+            serviceClient.Name = "Swagger Petstore";
+
+            var resource = new CompositeType();
+            var resourceProperties = new CompositeType();
+            serviceClient.ModelTypes.Add(resource);
+            serviceClient.ModelTypes.Add(resourceProperties);
+
+            resource.Name = "resource";
+            resource.Extensions[AzureCodeGenerator.ExternalExtension] = null;
+            resourceProperties.Name = "resourceProperties";
+            resourceProperties.Properties.Add(new Property
+            {
+                Name = "parent",
+                Type = PrimaryType.Long,
+                IsRequired = true
+            });
+
+            var codeGen = new SampleAzureCodeGenerator(new Settings());
+            codeGen.NormalizeClientModel(serviceClient);
+            Assert.Equal(3, serviceClient.ModelTypes.Count);
+        }
+
+        [Fact]
         public void ResourceIsFlattenedForComplexResource()
         {
             var serviceClient = new ServiceClient();
@@ -95,7 +127,7 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
             serviceClient.ModelTypes.Add(dog);
 
             resource.Name = "resource";
-            resource.Extensions[AzureCodeGenerator.ExternalExtension] = null;
+            resource.Extensions[AzureCodeGenerator.ExternalExtension] = true;
             resourceProperties.Name = "resourceProperties";
             resourceProperties.Properties.Add(new Property
             {
@@ -181,10 +213,10 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
             codeGen.NormalizeClientModel(serviceClient);
 
             Assert.NotNull(serviceClient);
-            var resource = serviceClient.ModelTypes.First(m => 
+            var resource = serviceClient.ModelTypes.First(m =>
                 m.Name.Equals("Resource", System.StringComparison.OrdinalIgnoreCase));
             Assert.True(resource.Extensions.ContainsKey(AzureCodeGenerator.ExternalExtension));
-            Assert.False((bool) resource.Extensions[AzureCodeGenerator.ExternalExtension]);
+            Assert.False((bool)resource.Extensions[AzureCodeGenerator.ExternalExtension]);
             var flattenedProduct = serviceClient.ModelTypes.First(m =>
                 m.Name.Equals("FlattenedProduct", System.StringComparison.OrdinalIgnoreCase));
             Assert.True(flattenedProduct.BaseModelType.Equals(resource));

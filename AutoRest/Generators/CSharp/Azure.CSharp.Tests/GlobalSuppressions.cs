@@ -1390,22 +1390,6 @@ Scope = "member", Target = "Fixtures.Azure.SwaggerBatAzureSpecials.SubscriptionI
 Scope = "member", Target = "Fixtures.Azure.SwaggerBatAzureSpecials.SubscriptionInMethodOperationsExtensions.#PostPathLocalValidAsync(Fixtures.Azure.SwaggerBatAzureSpecials.ISubscriptionInMethodOperations,System.String,System.Threading.CancellationToken)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed",
 Scope = "member", Target = "Fixtures.Azure.SwaggerBatAzureSpecials.SubscriptionInMethodOperationsExtensions.#PostSwaggerLocalValidAsync(Fixtures.Azure.SwaggerBatAzureSpecials.ISubscriptionInMethodOperations,System.String,System.Threading.CancellationToken)")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly",
-Scope = "type", Target = "Fixtures.Azure.SwaggerBatAzureSpecials.AutoRestAzureSpecialParametersTestClient")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly",
-Scope = "type", Target = "Fixtures.Azure.SwaggerBatHead.AutoRestHeadTestService")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly",
-Scope = "type", Target = "Fixtures.Azure.SwaggerBatLro.AutoRestLongRunningOperationTestService")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly",
-Scope = "type", Target = "Fixtures.Azure.SwaggerBatPaging.AutoRestPagingTestService")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly",
-Scope = "type", Target = "Fixtures.Azure.SwaggerBatReport.AutoRestReportServiceForAzure")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly",
-Scope = "type", Target = "Fixtures.Azure.SwaggerBatAzureReport.AutoRestReportServiceForAzure")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly",
-Scope = "type", Target = "Fixtures.Azure.SwaggerBatResourceFlattening.AutoRestResourceFlatteningTestService")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly",
-Scope = "type", Target = "Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion.MicrosoftAzureTestUrl")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling",
 Scope = "type", Target = "Fixtures.Azure.SwaggerBatLro.LROSADsOperationsExtensions")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling",
