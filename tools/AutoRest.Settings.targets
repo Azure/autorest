@@ -30,9 +30,10 @@
     <!-- Turn off XML documentation warnings. -->
     <NoWarn Condition="'$(WarnOnMissingDocument)' == 'false'">1591</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <CodeAnalysisRuleSet Condition="'$(CodeAnalysisRuleSet)' == ''">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="$(AutoRestTest) != 'true' ">$(CommonRoot)\tools\ManagedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="$(AutoRestTest) == 'true' ">$(CommonRoot)\tools\TestRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  
+
   <PropertyGroup>
     <SignAssembly>$(CodeSign)</SignAssembly>
     <DelaySign>$(CodeSign)</DelaySign>

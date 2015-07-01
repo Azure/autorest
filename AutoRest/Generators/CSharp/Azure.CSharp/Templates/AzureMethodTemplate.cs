@@ -301,7 +301,7 @@ Write(Model.OperationResponseReturnTypeString);
 #line hidden
             WriteLiteral("WithOperationResponseAsync(");
 #line 62 "AzureMethodTemplate.cshtml"
-                                                            Write(Model.GetMethod.AsyncMethodInvocationArgs);
+                                                            Write(Model.GetMethodInvocationArgs(Model.GetMethod));
 
 #line default
 #line hidden

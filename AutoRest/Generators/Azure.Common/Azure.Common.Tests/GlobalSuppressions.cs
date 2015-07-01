@@ -21,3 +21,4 @@
     Target = "Microsoft.Rest.Generator.Azure.Common.Tests.AzureServiceClientNormalizerTests.#AzureParameterTest()")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", 
     Target = "Microsoft.Rest.Generator.Azure.Common.Tests.AzureServiceClientNormalizerTests.#PageableTest()")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "Microsoft.Rest.Generator.Azure.Common.Tests.AzureServiceClientNormalizerTests.#ExternalResourceTypeIsNullSafe()")]

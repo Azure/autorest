@@ -47,7 +47,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             AzureOperationResponse<Product> response = await BeginPutNonRetry400WithOperationResponseAsync(
                 product, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetNonRetry400WithOperationResponseAsync(cancellationToken),
+                () => GetNonRetry400WithOperationResponseAsync(cancellationToken: cancellationToken),
                 cancellationToken);
         }
 
@@ -252,7 +252,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             AzureOperationResponse<Product> response = await BeginPutNonRetry201Creating400WithOperationResponseAsync(
                 product, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetNonRetry201Creating400WithOperationResponseAsync(cancellationToken),
+                () => GetNonRetry201Creating400WithOperationResponseAsync(cancellationToken: cancellationToken),
                 cancellationToken);
         }
 
@@ -459,7 +459,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetry400WithOperationResponseAsync(
                 product, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetAsyncRelativeRetry400WithOperationResponseAsync(cancellationToken),
+                () => GetAsyncRelativeRetry400WithOperationResponseAsync(cancellationToken: cancellationToken),
                 cancellationToken);
         }
 
@@ -1272,7 +1272,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             AzureOperationResponse<Product> response = await BeginPutError201NoProvisioningStatePayloadWithOperationResponseAsync(
                 product, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetError201NoProvisioningStatePayloadWithOperationResponseAsync(cancellationToken),
+                () => GetError201NoProvisioningStatePayloadWithOperationResponseAsync(cancellationToken: cancellationToken),
                 cancellationToken);
         }
 
@@ -1479,7 +1479,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetryNoStatusWithOperationResponseAsync(
                 product, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetAsyncRelativeRetryNoStatusWithOperationResponseAsync(cancellationToken),
+                () => GetAsyncRelativeRetryNoStatusWithOperationResponseAsync(cancellationToken: cancellationToken),
                 cancellationToken);
         }
 
@@ -1684,7 +1684,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetryNoStatusPayloadWithOperationResponseAsync(
                 product, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetAsyncRelativeRetryNoStatusPayloadWithOperationResponseAsync(cancellationToken),
+                () => GetAsyncRelativeRetryNoStatusPayloadWithOperationResponseAsync(cancellationToken: cancellationToken),
                 cancellationToken);
         }
 
@@ -2302,7 +2302,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             AzureOperationResponse<Product> response = await BeginPut200InvalidJsonWithOperationResponseAsync(
                 product, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => Get200SucceededWithOperationResponseAsync(cancellationToken),
+                () => Get200SucceededWithOperationResponseAsync(cancellationToken: cancellationToken),
                 cancellationToken);
         }
 
@@ -2504,7 +2504,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(
                 product, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(cancellationToken),
+                () => GetAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(cancellationToken: cancellationToken),
                 cancellationToken);
         }
 
@@ -2707,7 +2707,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(
                 product, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(cancellationToken),
+                () => GetAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(cancellationToken: cancellationToken),
                 cancellationToken);
         }
 

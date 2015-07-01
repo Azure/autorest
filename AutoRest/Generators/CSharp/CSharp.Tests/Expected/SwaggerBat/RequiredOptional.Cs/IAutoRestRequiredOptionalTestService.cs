@@ -11,7 +11,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
     /// <summary>
     /// Test Infrastructure for AutoRest
     /// </summary>
-    public partial interface IAutoRestRequiredOptionalTestService : IDisposable
+    public partial interface IAutoRestRequiredOptionalTestService
     {
         /// <summary>
         /// The base URI of the service.

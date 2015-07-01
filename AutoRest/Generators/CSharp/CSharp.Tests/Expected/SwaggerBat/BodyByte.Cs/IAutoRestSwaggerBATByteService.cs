@@ -11,7 +11,7 @@ namespace Fixtures.SwaggerBatBodyByte
     /// <summary>
     /// Test Infrastructure for AutoRest Swagger BAT
     /// </summary>
-    public partial interface IAutoRestSwaggerBATByteService : IDisposable
+    public partial interface IAutoRestSwaggerBATByteService
     {
         /// <summary>
         /// The base URI of the service.

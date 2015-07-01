@@ -1,16 +1,16 @@
-RSpec::Matchers.define :be_equal_dates do |expected|
+RSpec::Matchers.define :be_equal_datetimes do |expected|
   match do |actual|
-    actual.zip(expected).map { |a, b| (a == nil && b == nil) ||
-        ((a != nil && b != nil) && (DateTime.parse(a) == b))}.all?
+      (expected == nil && actual == nil) ||
+      ((expected != nil && actual != nil) && (expected.iso8601 == actual.iso8601))
   end
   failure_message do |actual|
-    "expected array #{actual.inspect} to be equal to #{expected.inspect}"
+    "expected datetime #{actual.inspect} to be equal to #{expected.inspect}"
   end
   failure_message_when_negated do |actual|
-    "expected array #{actual.inspect} not to be equal to #{expected.inspect}"
+    "expected datetime #{actual.inspect} not to be equal to #{expected.inspect}"
   end
   description do
-    'be equal dates'
+    'be equal datetimes'
   end
 end
 

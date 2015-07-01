@@ -332,11 +332,16 @@ namespace Microsoft.Rest.Generator.Azure
                 return false;
             }
 
-            return compositeType.BaseModelType != null &&
-                   (compositeType.BaseModelType.Name.Equals(ResourceType, StringComparison.OrdinalIgnoreCase) ||
-                    compositeType.BaseModelType.Name.Equals(SubResourceType, StringComparison.OrdinalIgnoreCase)) &&
-                   compositeType.BaseModelType.Extensions.ContainsKey(ExternalExtension) &&
-                   (bool)compositeType.BaseModelType.Extensions[ExternalExtension];
+            if (compositeType.BaseModelType != null &&
+                (compositeType.BaseModelType.Name.Equals(ResourceType, StringComparison.OrdinalIgnoreCase) ||
+                 compositeType.BaseModelType.Name.Equals(SubResourceType, StringComparison.OrdinalIgnoreCase)) &&
+                compositeType.BaseModelType.Extensions.ContainsKey(ExternalExtension))
+            {
+                var external = compositeType.BaseModelType.Extensions[ExternalExtension] as bool?;
+                return (external == null || external.Value);
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -352,9 +357,14 @@ namespace Microsoft.Rest.Generator.Azure
                 return false;
             }
 
-            return (compositeType.Extensions.ContainsKey(ExternalExtension) &&
-                                (bool)compositeType.Extensions[ExternalExtension] &&
-                                compositeType.Name.Equals(ResourceType));
+            if (compositeType.Extensions.ContainsKey(ExternalExtension) && 
+                compositeType.Name.Equals(ResourceType, StringComparison.OrdinalIgnoreCase))
+            {
+                var external = compositeType.Extensions[ExternalExtension] as bool?;
+                return (external == null || external.Value);
+            }
+
+            return false;
         }
 
         /// <summary>

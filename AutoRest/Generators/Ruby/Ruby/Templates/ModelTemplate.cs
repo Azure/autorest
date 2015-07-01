@@ -69,7 +69,7 @@ Write(WrapComment("# ", string.IsNullOrEmpty(Model.Documentation) ? "Model objec
 #line default
 #line hidden
 #line 13 "ModelTemplate.cshtml"
-                 Write(Model.BaseModelType != null ? " < " + Model.BaseModelType.Name : "");
+                 Write(Model.GetBaseTypeName());
 
 #line default
 #line hidden
@@ -292,7 +292,7 @@ Write(WrapComment("# ", string.IsNullOrEmpty(Model.Documentation) ? "Model objec
 #line hidden
 
 #line 73 "ModelTemplate.cshtml"
-         foreach (var property in Model.PropertyTemplateModels.Where(x => !x.IsReadOnly).OrderByDescending(x => x.IsRequired))
+         foreach (var property in Model.ComposedProperties.Where(x => !x.IsReadOnly).OrderByDescending(x => x.IsRequired))
         {
         
 
@@ -368,7 +368,7 @@ Write(WrapComment("# ", string.IsNullOrEmpty(Model.Documentation) ? "Model objec
 #line hidden
 
 #line 94 "ModelTemplate.cshtml"
-         foreach (var property in Model.PropertyTemplateModels.Where(x => !x.IsReadOnly).OrderByDescending(x => x.IsRequired))
+         foreach (var property in Model.ComposedProperties.Where(x => !x.IsReadOnly).OrderByDescending(x => x.IsRequired))
         {
         
 

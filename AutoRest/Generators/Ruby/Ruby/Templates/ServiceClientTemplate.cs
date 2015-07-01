@@ -141,13 +141,13 @@ Write(EmptyLine);
 
             WriteLiteral("    ");
 #line 27 "ServiceClientTemplate.cshtml"
- Write(WrapComment("# ", string.Format("@return {0}", RubyCodeNamer.UnderscoreCase(operation))));
+ Write(WrapComment("# ", string.Format("@return {0}", RubyCodeNamingFramework.UnderscoreCase(operation))));
 
 #line default
 #line hidden
             WriteLiteral("\r\n    attr_reader :");
 #line 28 "ServiceClientTemplate.cshtml"
-               Write(RubyCodeNamer.UnderscoreCase(operation));
+               Write(RubyCodeNamingFramework.UnderscoreCase(operation));
 
 #line default
 #line hidden
@@ -244,13 +244,13 @@ Write(WrapComment("# ", string.Format("@param {0} {1}{2}", param.Name, param.Typ
 
             WriteLiteral("      @");
 #line 48 "ServiceClientTemplate.cshtml"
-      Write(RubyCodeNamer.UnderscoreCase(operation));
+      Write(RubyCodeNamingFramework.UnderscoreCase(operation));
 
 #line default
 #line hidden
             WriteLiteral(" = ");
 #line 48 "ServiceClientTemplate.cshtml"
-                                                   Write(operation);
+                                                             Write(operation);
 
 #line default
 #line hidden
@@ -275,9 +275,9 @@ Write(WrapComment("# ", string.Format("@param {0} {1}{2}", param.Name, param.Typ
 
 #line default
 #line hidden
-            WriteLiteral(" is nil\' if @");
+            WriteLiteral(" is nil\' if ");
 #line 52 "ServiceClientTemplate.cshtml"
-                                                  Write(param.Name);
+                                                Write(param.Name);
 
 #line default
 #line hidden

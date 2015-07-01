@@ -1,5 +1,5 @@
 require 'rspec'
-require 'msrest'
+require 'client_runtime'
 require_relative 'Array/sdk_requirements'
 require_relative './helper'
 include MyNamespace
@@ -104,9 +104,7 @@ describe Array do
   end
 
   it 'should get int invalid string' do
-    result = @array_client.get_int_invalid_string().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
-    expect(result.body).to eq([1, "integer", 0])
+    expect { result = @array_client.get_int_invalid_string().value! }.to raise_error(ClientRuntime::DeserializationError)
   end
 
   #Long integer tests. Ruby automtically converts int to long int, so there is no
@@ -129,9 +127,7 @@ describe Array do
   end
 
   it 'should get long invalid string' do
-    result = @array_client.get_long_invalid_string().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
-    expect(result.body).to eq([1, "integer", 0])
+    expect { result = @array_client.get_long_invalid_string().value! }.to raise_error(ClientRuntime::DeserializationError)
   end
 
   #Float tests
@@ -153,9 +149,7 @@ describe Array do
   end
 
   it 'should get float invalid string' do
-    result = @array_client.get_float_invalid_string().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
-    expect(result.body).to eq([1, "number", 0])
+    expect { result = @array_client.get_float_invalid_string().value! }.to raise_error(ClientRuntime::DeserializationError)
   end
 
   #Double tests
@@ -177,9 +171,7 @@ describe Array do
   end
 
   it 'should get double invalid string' do
-    result = @array_client.get_double_invalid_string().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
-    expect(result.body).to eq([1, "number", 0])
+    expect { result = @array_client.get_double_invalid_string().value! }.to raise_error(ClientRuntime::DeserializationError)
   end
 
   #String tests
