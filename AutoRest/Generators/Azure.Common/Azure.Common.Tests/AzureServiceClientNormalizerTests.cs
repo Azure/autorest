@@ -9,7 +9,9 @@ using Xunit;
 
 namespace Microsoft.Rest.Generator.Azure.Common.Tests
 {
-    [Collection("AutoRest Tests")]    public class AzureServiceClientNormalizerTests    {
+    [Collection("AutoRest Tests")]
+    public class AzureServiceClientNormalizerTests
+    {
         [Fact]
         public void ResourceIsFlattenedForSimpleResource()
         {
@@ -31,7 +33,36 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
 
             resource.Name = "resource";
             resource.Extensions[AzureCodeGenerator.ExternalExtension] = null;
-
+            resource.Properties.Add(new Property
+            {
+                Name = "id",
+                Type = PrimaryType.String,
+                IsRequired = true
+            });
+            resource.Properties.Add(new Property
+            {
+                 Name = "location",
+                 Type = PrimaryType.String,
+                 IsRequired = true
+            });
+            resource.Properties.Add(new Property
+            {
+               Name = "name",
+               Type = PrimaryType.String,
+               IsRequired = true
+            });
+            resource.Properties.Add(new Property
+            {
+                Name = "tags",
+                Type = new SequenceType { ElementType = PrimaryType.String },
+                IsRequired = true
+            }); 
+            resource.Properties.Add(new Property
+            {
+                 Name = "type",
+                 Type = PrimaryType.String,
+                 IsRequired = true
+            });
             dogProperties.Name = "dogProperties";
             dogProperties.Properties.Add(new Property
             {
@@ -95,6 +126,36 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
             serviceClient.ModelTypes.Add(dog);
 
             resource.Name = "resource";
+            resource.Properties.Add(new Property
+            {
+               Name = "id",
+               Type = PrimaryType.String,
+               IsRequired = true
+            });
+            resource.Properties.Add(new Property
+            {
+                 Name = "location",
+                 Type = PrimaryType.String,
+                 IsRequired = true
+            });
+            resource.Properties.Add(new Property
+            {
+               Name = "name",
+               Type = PrimaryType.String,
+               IsRequired = true
+            }); 
+            resource.Properties.Add(new Property
+            {
+                Name = "tags",
+                Type = new SequenceType { ElementType = PrimaryType.String },
+                IsRequired = true
+            }); 
+            resource.Properties.Add(new Property
+            {
+                 Name = "type",
+                 Type = PrimaryType.String,
+                 IsRequired = true
+            });
             resource.Extensions[AzureCodeGenerator.ExternalExtension] = null;
             resourceProperties.Name = "resourceProperties";
             resourceProperties.Properties.Add(new Property
@@ -181,10 +242,10 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
             codeGen.NormalizeClientModel(serviceClient);
 
             Assert.NotNull(serviceClient);
-            var resource = serviceClient.ModelTypes.First(m => 
+            var resource = serviceClient.ModelTypes.First(m =>
                 m.Name.Equals("Resource", System.StringComparison.OrdinalIgnoreCase));
             Assert.True(resource.Extensions.ContainsKey(AzureCodeGenerator.ExternalExtension));
-            Assert.False((bool) resource.Extensions[AzureCodeGenerator.ExternalExtension]);
+            Assert.False((bool)resource.Extensions[AzureCodeGenerator.ExternalExtension]);
             var flattenedProduct = serviceClient.ModelTypes.First(m =>
                 m.Name.Equals("FlattenedProduct", System.StringComparison.OrdinalIgnoreCase));
             Assert.True(flattenedProduct.BaseModelType.Equals(resource));

@@ -29,7 +29,7 @@ namespace Microsoft.Rest.Generator.Utilities
             foreach (var property in properties)
             {
                 property.PropertyName = char.ToLower(property.PropertyName[0], CultureInfo.InvariantCulture) +
-                                        string.Join("", property.PropertyName.Skip(1));
+                                        property.PropertyName.Substring(1);
             }
 
             return properties;
