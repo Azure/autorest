@@ -8,9 +8,9 @@
     <Rule Id="CA1026" Action="None" />
     <!--We decide to allow the type coupling in generated code-->
     <Rule Id="CA1506" Action="None" />
-    <!--Spelling issus comes from test swagger file--> 
+    <!--Spelling issus comes from test swagger files, and we can't do too much about it--> 
     <Rule Id="CA1704" Action="None" />
-    <!--JSON.net will set the private field-->
+    <!--JSON.net will set the seemingly unused private field-->
     <Rule Id="CA1811" Action="None" />
     <!-- Rules CA3001-CA3012: Rules apply only to web service code-->
     <Rule Id="CA3001" Action="None" />
