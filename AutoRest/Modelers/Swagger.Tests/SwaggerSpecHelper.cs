@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using System;
 using System.IO;
 using System.Linq;
 using Microsoft.Rest.Generator;
@@ -9,7 +10,7 @@ using Xunit;
 
 namespace Microsoft.Rest.Modeler.Swagger.Tests
 {
-    public class SwaggerSpecHelper
+    public static class SwaggerSpecHelper
     {
         public static void RunTests<T>(string specFile, string resultFolder, string modeler = "Swagger",
             Settings settings = null)
@@ -31,6 +32,16 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
 
         public static void RunTests<T>(Settings settings, string resultFolder)
         {
+            if (settings == null)
+            {
+                throw new ArgumentNullException("settings");
+            }
+
+            if (resultFolder == null)
+            {
+                throw new ArgumentNullException("settings");
+            }
+
             settings.FileSystem = new MemoryFileSystem();
             settings.FileSystem.WriteFile("AutoRest.json", File.ReadAllText("AutoRest.json"));
             settings.FileSystem.CreateDirectory(Path.GetDirectoryName(settings.Input));
@@ -39,7 +50,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
                 (CodeGenerator)typeof(T).GetConstructor(new[] { typeof(Settings) }).Invoke(new object[] { settings });
             settings.CodeGenerator = flavor.Name;
 
-            var specFileName = resultFolder.StartsWith("Expected\\")
+            var specFileName = resultFolder.StartsWith("Expected\\", StringComparison.Ordinal)
                 ? resultFolder.Substring("Expected\\".Length)
                 : resultFolder;
             settings.Namespace = string.IsNullOrEmpty(settings.Namespace)

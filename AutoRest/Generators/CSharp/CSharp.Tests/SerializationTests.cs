@@ -30,9 +30,11 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
             //Now run mocked tests using the client
             var product = MirrorTestHelpers.GenerateProduct();
-            var client = MirrorTestHelpers.CreateDataClient();
-            var response = client.PutProduct("200", product);
-            MirrorTestHelpers.ValidateProduct(product, response);
+            using (var client = MirrorTestHelpers.CreateDataClient())
+            {
+                var response = client.PutProduct("200", product);
+                MirrorTestHelpers.ValidateProduct(product, response);
+            }
         }
 
         [Fact]
@@ -40,38 +42,40 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         {
             SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
                 @"Swagger\swagger-mirror-sequences.json", @"Expected\Mirror.Sequences.cs");
-            var sequenceClient = MirrorTestHelpers.CreateSequenceClient();
-            var testList = new List<int?> {1, 1, 2, 3, 5, 8, 13, 21};
-            var intList = sequenceClient.AddPetStyles(testList);
-            MirrorTestHelpers.ValidateList(testList, intList, (s, t) => Assert.Equal(s, t));
-
-            var petList = new List<Pet>
+            using (var sequenceClient = MirrorTestHelpers.CreateSequenceClient())
             {
-                new Pet
-                {
-                    Id = 1,
-                    Name = "fluffy",
-                    Tag = "rabbit",
-                    Styles = new List<PetStyle> {new PetStyle {Name = "cute"}, new PetStyle {Name = "cuddly"}}
-                },
-                new Pet
-                {
-                    Id = 2,
-                    Name = "rex",
-                    Tag = "dog",
-                    Styles = new List<PetStyle> {new PetStyle {Name = "friendly"}, new PetStyle {Name = "loyal"}}
-                },
-                new Pet
-                {
-                    Id = 10111,
-                    Name = "Tabby",
-                    Tag = "cat",
-                    Styles = new List<PetStyle> {new PetStyle {Name = "independent"}}
-                }
-            };
+                var testList = new List<int?> {1, 1, 2, 3, 5, 8, 13, 21};
+                var intList = sequenceClient.AddPetStyles(testList);
+                MirrorTestHelpers.ValidateList(testList, intList, (s, t) => Assert.Equal(s, t));
 
-            var actualPets = sequenceClient.AddPet(petList);
-            MirrorTestHelpers.ValidateList(petList, actualPets, MirrorTestHelpers.ValidatePet);
+                var petList = new List<Pet>
+                {
+                    new Pet
+                    {
+                        Id = 1,
+                        Name = "fluffy",
+                        Tag = "rabbit",
+                        Styles = new List<PetStyle> {new PetStyle {Name = "cute"}, new PetStyle {Name = "cuddly"}}
+                    },
+                    new Pet
+                    {
+                        Id = 2,
+                        Name = "rex",
+                        Tag = "dog",
+                        Styles = new List<PetStyle> {new PetStyle {Name = "friendly"}, new PetStyle {Name = "loyal"}}
+                    },
+                    new Pet
+                    {
+                        Id = 10111,
+                        Name = "Tabby",
+                        Tag = "cat",
+                        Styles = new List<PetStyle> {new PetStyle {Name = "independent"}}
+                    }
+                };
+
+                var actualPets = sequenceClient.AddPet(petList);
+                MirrorTestHelpers.ValidateList(petList, actualPets, MirrorTestHelpers.ValidatePet);
+            }
         }
 
         [Fact]
@@ -97,72 +101,79 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         [Fact]
         public void CanRoundtripFilledOutNestedTypesWithoutRecursion()
         {
-            var client = new RecursiveTypesAPI(new Uri("http://localhost:3000"), new MirroringHandler());
-
-            var grandParentProduct = new Fixtures.MirrorRecursiveTypes.Models.Product
+            using (var client = new RecursiveTypesAPI(new Uri("http://localhost:3000"), new MirroringHandler()))
             {
-                ProductId = "0"
-            };
 
-            var parentProduct = new Fixtures.MirrorRecursiveTypes.Models.Product
-            {
-                ProductId = "1"
-            };
+                var grandParentProduct = new Fixtures.MirrorRecursiveTypes.Models.Product
+                {
+                    ProductId = "0"
+                };
 
-            var childProduct1 = new Fixtures.MirrorRecursiveTypes.Models.Product
-            {
-                ProductId = "11",
-            };
+                var parentProduct = new Fixtures.MirrorRecursiveTypes.Models.Product
+                {
+                    ProductId = "1"
+                };
 
-            var childProduct2 = new Fixtures.MirrorRecursiveTypes.Models.Product
-            {
-                ProductId = "12",
-            };
+                var childProduct1 = new Fixtures.MirrorRecursiveTypes.Models.Product
+                {
+                    ProductId = "11",
+                };
 
-            parentProduct.ParentProduct = grandParentProduct;
-            parentProduct.InnerProducts = new List<Fixtures.MirrorRecursiveTypes.Models.Product>();
-            parentProduct.InnerProducts.Add(childProduct1);
-            parentProduct.InnerProducts.Add(childProduct2);
+                var childProduct2 = new Fixtures.MirrorRecursiveTypes.Models.Product
+                {
+                    ProductId = "12",
+                };
 
-            var product = client.Post("123", "rg1", "1.0", parentProduct);
-            Assert.Equal(parentProduct.ParentProduct.ProductId, product.ParentProduct.ProductId);
-            Assert.Equal(parentProduct.ProductId, product.ProductId);
-            Assert.Equal(parentProduct.InnerProducts.Count, product.InnerProducts.Count);
-            Assert.Equal(parentProduct.InnerProducts[0].ProductId, product.InnerProducts[0].ProductId);
-            Assert.Equal(parentProduct.InnerProducts[1].ProductId, product.InnerProducts[1].ProductId);
+                parentProduct.ParentProduct = grandParentProduct;
+                parentProduct.InnerProducts = new List<Fixtures.MirrorRecursiveTypes.Models.Product>();
+                parentProduct.InnerProducts.Add(childProduct1);
+                parentProduct.InnerProducts.Add(childProduct2);
+
+                var product = client.Post("123", "rg1", "1.0", parentProduct);
+                Assert.Equal(parentProduct.ParentProduct.ProductId, product.ParentProduct.ProductId);
+                Assert.Equal(parentProduct.ProductId, product.ProductId);
+                Assert.Equal(parentProduct.InnerProducts.Count, product.InnerProducts.Count);
+                Assert.Equal(parentProduct.InnerProducts[0].ProductId, product.InnerProducts[0].ProductId);
+                Assert.Equal(parentProduct.InnerProducts[1].ProductId, product.InnerProducts[1].ProductId);
+            }
         }
 
         [Fact]
         public void CanRoundtripFilledOutNestedTypesWithoutRecursion2()
         {
-            var client = new RecursiveTypesAPI(new Uri("http://localhost:3000"), new MirroringHandler());
-
-            var parentProduct = new Fixtures.MirrorRecursiveTypes.Models.Product
+            using (var client = new RecursiveTypesAPI(new Uri("http://localhost:3000"), new MirroringHandler()))
             {
-                ProductId = "1"
-            };
 
-            var childProduct1 = new Fixtures.MirrorRecursiveTypes.Models.Product
-            {
-                ProductId = "11",
-                ParentProduct = parentProduct
-            };
+                var parentProduct = new Fixtures.MirrorRecursiveTypes.Models.Product
+                {
+                    ProductId = "1"
+                };
 
-            var product = client.Post("123", "rg1", "1.0", childProduct1);
-            Assert.Equal(childProduct1.ProductId, product.ProductId);
-            Assert.Equal(childProduct1.ParentProduct.ProductId, product.ParentProduct.ProductId);
+                var childProduct1 = new Fixtures.MirrorRecursiveTypes.Models.Product
+                {
+                    ProductId = "11",
+                    ParentProduct = parentProduct
+                };
+
+                var product = client.Post("123", "rg1", "1.0", childProduct1);
+                Assert.Equal(childProduct1.ProductId, product.ProductId);
+                Assert.Equal(childProduct1.ParentProduct.ProductId, product.ParentProduct.ProductId);
+            }
         }
 
         public static void SendAndComparePolymorphicObjects(Animal expected)
         {
-            var client = new PolymorphicAnimalStore(new Uri("http://localhost:3000"), new MirroringHandler());
-            var createdPet = client.CreateOrUpdatePolymorphicAnimals(expected);
-            Assert.Equal(expected.GetType(), createdPet.GetType());
-            foreach (var property in expected.GetType().GetProperties())
+            using (var client = new PolymorphicAnimalStore(new Uri("http://localhost:3000"), new MirroringHandler()))
             {
-                var expectedValue = property.GetValue(expected, null);
-                var actualValue = property.GetValue(createdPet, null);
-                Assert.Equal(expectedValue, actualValue);
+                var createdPet = client.CreateOrUpdatePolymorphicAnimals(expected);
+                Assert.NotNull(expected);
+                Assert.Equal(expected.GetType(), createdPet.GetType());
+                foreach (var property in expected.GetType().GetProperties())
+                {
+                    var expectedValue = property.GetValue(expected, null);
+                    var actualValue = property.GetValue(createdPet, null);
+                    Assert.Equal(expectedValue, actualValue);
+                }
             }
         }
     }
@@ -190,6 +201,9 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         public override void WriteJson(JsonWriter writer,
             object value, JsonSerializer serializer)
         {
+            Assert.NotNull(value);
+            Assert.NotNull(writer);
+            Assert.NotNull(serializer);
             string typeName = value.GetType().Name;
             if (value.GetType().GetCustomAttributes<JsonObjectAttribute>().Any())
             {
