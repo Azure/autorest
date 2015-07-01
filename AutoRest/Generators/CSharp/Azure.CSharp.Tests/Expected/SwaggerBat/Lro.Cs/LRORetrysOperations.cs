@@ -50,7 +50,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             AzureOperationResponse<Product> response = await BeginPut201CreatingSucceeded200WithOperationResponseAsync(
                 product, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetRetry201CreatingSucceeded200PollingWithOperationResponseAsync(cancellationToken),
+                () => GetRetry201CreatingSucceeded200PollingWithOperationResponseAsync(cancellationToken: cancellationToken),
                 cancellationToken);
         }
 
@@ -261,7 +261,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetrySucceededWithOperationResponseAsync(
                 product, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetAsyncRelativeRetrySucceededWithOperationResponseAsync(cancellationToken),
+                () => GetAsyncRelativeRetrySucceededWithOperationResponseAsync(cancellationToken: cancellationToken),
                 cancellationToken);
         }
 

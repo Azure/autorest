@@ -11,7 +11,7 @@ namespace Fixtures.SwaggerBatHttp
     /// <summary>
     /// Test Infrastructure for AutoRest
     /// </summary>
-    public partial interface IAutoRestHttpInfrastructureTestService : IDisposable
+    public partial interface IAutoRestHttpInfrastructureTestService
     {
         /// <summary>
         /// The base URI of the service.

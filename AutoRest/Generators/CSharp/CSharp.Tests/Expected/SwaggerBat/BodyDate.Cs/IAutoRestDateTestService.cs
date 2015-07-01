@@ -11,7 +11,7 @@ namespace Fixtures.SwaggerBatBodyDate
     /// <summary>
     /// Test Infrastructure for AutoRest
     /// </summary>
-    public partial interface IAutoRestDateTestService : IDisposable
+    public partial interface IAutoRestDateTestService
     {
         /// <summary>
         /// The base URI of the service.

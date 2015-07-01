@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.ClientModel;
@@ -121,6 +122,26 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                 }
                 return base.InitializeResponseBody;
             }
+        }
+
+        /// <summary>
+        /// Gets Get method invocation arguments for Long Running Operations.
+        /// </summary>
+        /// <param name="getMethod">Get method.</param>
+        /// <returns>Invocation arguments.</returns>
+        public string GetMethodInvocationArgs(Method getMethod)
+        {
+            if (getMethod == null)
+            {
+                throw new ArgumentNullException("getMethod");
+            }
+
+            var invocationParams = new List<string>();
+            getMethod.Parameters
+                .Where(p => LocalParameters.Any(lp => lp.Name == p.Name))
+                .ForEach(p => invocationParams.Add(string.Format(CultureInfo.InvariantCulture,"{0}: {0}", p.Name)));
+            invocationParams.Add("cancellationToken: cancellationToken");
+            return string.Join(", ", invocationParams);
         }
 
         /// <summary>

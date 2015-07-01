@@ -32,7 +32,7 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
             serviceClient.ModelTypes.Add(dog);
 
             resource.Name = "resource";
-            resource.Extensions[AzureCodeGenerator.ExternalExtension] = null;
+            resource.Extensions[AzureCodeGenerator.ExternalExtension] = true;
             resource.Properties.Add(new Property
             {
                 Name = "id",
@@ -102,6 +102,36 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
             Assert.Equal("pedigree", serviceClient.ModelTypes[1].Properties[0].Name);
             Assert.Equal("dog", serviceClient.Methods[0].ReturnType.Name);
             Assert.Equal(serviceClient.ModelTypes[1], serviceClient.Methods[0].ReturnType);
+        }
+
+        [Fact]
+        public void ExternalResourceTypeIsNullSafe()
+        {
+            var serviceClient = new ServiceClient();
+            serviceClient.BaseUrl = "https://petstore.swagger.wordnik.com";
+            serviceClient.ApiVersion = "1.0.0";
+            serviceClient.Documentation =
+                "A sample API that uses a petstore as an example to demonstrate features in the swagger-2.0 specification";
+            serviceClient.Name = "Swagger Petstore";
+
+            var resource = new CompositeType();
+            var resourceProperties = new CompositeType();
+            serviceClient.ModelTypes.Add(resource);
+            serviceClient.ModelTypes.Add(resourceProperties);
+
+            resource.Name = "resource";
+            resource.Extensions[AzureCodeGenerator.ExternalExtension] = null;
+            resourceProperties.Name = "resourceProperties";
+            resourceProperties.Properties.Add(new Property
+            {
+                Name = "parent",
+                Type = PrimaryType.Long,
+                IsRequired = true
+            });
+
+            var codeGen = new SampleAzureCodeGenerator(new Settings());
+            codeGen.NormalizeClientModel(serviceClient);
+            Assert.Equal(3, serviceClient.ModelTypes.Count);
         }
 
         [Fact]

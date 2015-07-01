@@ -71,8 +71,8 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral(" : IDisposable\r\n    {\r\n        /// <summary>\r\n        /// The base URI of the ser" +
-"vice.\r\n        /// </summary>\r\n        Uri BaseUri { get; set; }\r\n        ");
+            WriteLiteral("\r\n    {\r\n        /// <summary>\r\n        /// The base URI of the service.\r\n       " +
+" /// </summary>\r\n        Uri BaseUri { get; set; }\r\n        ");
 #line 25 "ServiceClientInterfaceTemplate.cshtml"
    Write(EmptyLine);
 
