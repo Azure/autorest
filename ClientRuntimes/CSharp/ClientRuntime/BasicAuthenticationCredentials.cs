@@ -39,6 +39,7 @@ namespace Microsoft.Rest
             {
                 throw new ArgumentNullException("request");
             }
+
             // Add username and password to "Basic" header of each request.
             request.Headers.Authorization = new AuthenticationHeaderValue("Basic",
                 Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format(

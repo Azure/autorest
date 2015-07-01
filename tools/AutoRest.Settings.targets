@@ -40,6 +40,9 @@
   <PropertyGroup Condition=" '$(LibraryFxTarget)' == 'net45'" >
     <RestCustomConstants>NET45</RestCustomConstants>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(LibraryFxTarget)' == 'portable'" >
+    <RestCustomConstants>PORTABLE</RestCustomConstants>
+  </PropertyGroup>
   
   <PropertyGroup Condition=" '$(Configuration)' == 'Net45-Debug' or '$(Configuration)' == 'Net40-Debug' or '$(Configuration)' == 'Portable-Debug' ">
     <DebugSymbols>true</DebugSymbols>
