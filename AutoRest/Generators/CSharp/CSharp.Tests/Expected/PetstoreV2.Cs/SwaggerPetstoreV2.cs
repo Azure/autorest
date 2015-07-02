@@ -125,7 +125,7 @@ namespace Fixtures.PetstoreV2
         {
             if (body == null)
             {
-                throw new ArgumentNullException("body");
+                throw new ValidationException(ValidationRules.CannotBeNull, "body");
             }
             if (body != null)
             {
@@ -209,7 +209,7 @@ namespace Fixtures.PetstoreV2
         {
             if (body == null)
             {
-                throw new ArgumentNullException("body");
+                throw new ValidationException(ValidationRules.CannotBeNull, "body");
             }
             if (body != null)
             {
@@ -289,7 +289,7 @@ namespace Fixtures.PetstoreV2
         {
             if (status == null)
             {
-                throw new ArgumentNullException("status");
+                throw new ValidationException(ValidationRules.CannotBeNull, "status");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -376,7 +376,7 @@ namespace Fixtures.PetstoreV2
         {
             if (tags == null)
             {
-                throw new ArgumentNullException("tags");
+                throw new ValidationException(ValidationRules.CannotBeNull, "tags");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -462,7 +462,7 @@ namespace Fixtures.PetstoreV2
         {
             if (petId == null)
             {
-                throw new ArgumentNullException("petId");
+                throw new ValidationException(ValidationRules.CannotBeNull, "petId");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -545,7 +545,7 @@ namespace Fixtures.PetstoreV2
         {
             if (petId == null)
             {
-                throw new ArgumentNullException("petId");
+                throw new ValidationException(ValidationRules.CannotBeNull, "petId");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -621,7 +621,7 @@ namespace Fixtures.PetstoreV2
         {
             if (petId == null)
             {
-                throw new ArgumentNullException("petId");
+                throw new ValidationException(ValidationRules.CannotBeNull, "petId");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -767,7 +767,7 @@ namespace Fixtures.PetstoreV2
         {
             if (body == null)
             {
-                throw new ArgumentNullException("body");
+                throw new ValidationException(ValidationRules.CannotBeNull, "body");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -849,7 +849,7 @@ namespace Fixtures.PetstoreV2
         {
             if (orderId == null)
             {
-                throw new ArgumentNullException("orderId");
+                throw new ValidationException(ValidationRules.CannotBeNull, "orderId");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -928,7 +928,7 @@ namespace Fixtures.PetstoreV2
         {
             if (orderId == null)
             {
-                throw new ArgumentNullException("orderId");
+                throw new ValidationException(ValidationRules.CannotBeNull, "orderId");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1001,7 +1001,7 @@ namespace Fixtures.PetstoreV2
         {
             if (body == null)
             {
-                throw new ArgumentNullException("body");
+                throw new ValidationException(ValidationRules.CannotBeNull, "body");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1076,7 +1076,7 @@ namespace Fixtures.PetstoreV2
         {
             if (body == null)
             {
-                throw new ArgumentNullException("body");
+                throw new ValidationException(ValidationRules.CannotBeNull, "body");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1151,7 +1151,7 @@ namespace Fixtures.PetstoreV2
         {
             if (body == null)
             {
-                throw new ArgumentNullException("body");
+                throw new ValidationException(ValidationRules.CannotBeNull, "body");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1229,11 +1229,11 @@ namespace Fixtures.PetstoreV2
         {
             if (username == null)
             {
-                throw new ArgumentNullException("username");
+                throw new ValidationException(ValidationRules.CannotBeNull, "username");
             }
             if (password == null)
             {
-                throw new ArgumentNullException("password");
+                throw new ValidationException(ValidationRules.CannotBeNull, "password");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1386,7 +1386,7 @@ namespace Fixtures.PetstoreV2
         {
             if (username == null)
             {
-                throw new ArgumentNullException("username");
+                throw new ValidationException(ValidationRules.CannotBeNull, "username");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1467,11 +1467,11 @@ namespace Fixtures.PetstoreV2
         {
             if (username == null)
             {
-                throw new ArgumentNullException("username");
+                throw new ValidationException(ValidationRules.CannotBeNull, "username");
             }
             if (body == null)
             {
-                throw new ArgumentNullException("body");
+                throw new ValidationException(ValidationRules.CannotBeNull, "body");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1549,7 +1549,7 @@ namespace Fixtures.PetstoreV2
         {
             if (username == null)
             {
-                throw new ArgumentNullException("username");
+                throw new ValidationException(ValidationRules.CannotBeNull, "username");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;

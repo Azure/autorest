@@ -902,8 +902,8 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                     }
                 };
                 var missingRequired =
-                    Assert.Throws<ArgumentNullException>(() => client.Polymorphism.PutValidMissingRequired(badRequest));
-                Assert.Equal("Birthday", missingRequired.ParamName);
+                    Assert.Throws<ValidationException>(() => client.Polymorphism.PutValidMissingRequired(badRequest));
+                Assert.Equal("Birthday", missingRequired.Target);
                 /* COMPLEX TYPES THAT INVOLVE RECURSIVE REFERENCE */
                 // GET polymorphicrecursive/valid
                 var recursiveResult = client.Polymorphicrecursive.GetValid();
@@ -987,7 +987,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             using (var client = new AutoRestUrlTestService(Fixture.Uri))
             {
                 client.Paths.ByteEmpty(new byte[0]);
-                Assert.Throws<ArgumentNullException>(() => client.Paths.ByteNull(null));
+                Assert.Throws<ValidationException>(() => client.Paths.ByteNull(null));
                 client.Paths.ByteMultiByte(Encoding.UTF8.GetBytes("啊齄丂狛狜隣郎隣兀﨩"));
                 // appropriately disallowed:client.Paths.DateNull(null);
                 // appropriately disallowed: client.Paths.DateTimeNull(null);
@@ -1004,10 +1004,10 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 client.Paths.GetNegativeTenBillion(-10000000000);
                 client.Paths.GetTenBillion(10000000000);
                 client.Paths.StringEmpty("");
-                Assert.Throws<ArgumentNullException>(() => client.Paths.StringNull(null));
+                Assert.Throws<ValidationException>(() => client.Paths.StringNull(null));
                 client.Paths.StringUrlEncoded(@"begin!*'();:@ &=+$,/?#[]end");
                 client.Paths.EnumValid(UriColor.Greencolor);
-                Assert.Throws<ArgumentNullException>(() => client.Paths.EnumNull(null));
+                Assert.Throws<ValidationException>(() => client.Paths.EnumNull(null));
             }
         }
 
@@ -1375,30 +1375,30 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             using (var client = new AutoRestRequiredOptionalTestService(Fixture.Uri))
             {
 
-                Assert.Throws<ArgumentNullException>(() =>
+                Assert.Throws<ValidationException>(() =>
                     client.ImplicitModel.GetRequiredPath(null));
-                Assert.Throws<ArgumentNullException>(() =>
+                Assert.Throws<ValidationException>(() =>
                     client.ExplicitModel.PostRequiredStringHeader(null));
-                Assert.Throws<ArgumentNullException>(() =>
+                Assert.Throws<ValidationException>(() =>
                     client.ExplicitModel.PostRequiredStringParameter(null));
-                Assert.Throws<ArgumentNullException>(() =>
+                Assert.Throws<ValidationException>(() =>
                     client.ExplicitModel.PostRequiredStringProperty(
                         new Fixtures.SwaggerBatRequiredOptional.Models.StringWrapper {Value = null}));
-                Assert.Throws<ArgumentNullException>(() =>
+                Assert.Throws<ValidationException>(() =>
                     client.ExplicitModel.PostRequiredArrayHeader(null));
-                Assert.Throws<ArgumentNullException>(() =>
+                Assert.Throws<ValidationException>(() =>
                     client.ExplicitModel.PostRequiredArrayParameter(null));
-                Assert.Throws<ArgumentNullException>(() =>
+                Assert.Throws<ValidationException>(() =>
                     client.ExplicitModel.PostRequiredArrayProperty(
                         new Fixtures.SwaggerBatRequiredOptional.Models.ArrayWrapper {Value = null}));
-                Assert.Throws<ArgumentNullException>(() =>
+                Assert.Throws<ValidationException>(() =>
                     client.ExplicitModel.PostRequiredClassParameter(null));
-                Assert.Throws<ArgumentNullException>(() =>
+                Assert.Throws<ValidationException>(() =>
                     client.ExplicitModel.PostRequiredClassProperty(
                         new Fixtures.SwaggerBatRequiredOptional.Models.ClassWrapper {Value = null}));
-                Assert.Throws<ArgumentNullException>(() =>
+                Assert.Throws<ValidationException>(() =>
                     client.ImplicitModel.GetRequiredGlobalPath(null));
-                Assert.Throws<ArgumentNullException>(() =>
+                Assert.Throws<ValidationException>(() =>
                     client.ImplicitModel.GetRequiredGlobalQuery(null));
             }
         }

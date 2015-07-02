@@ -118,6 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="UsageInformation" xml:space="preserve">
-    <value>The Microsoft.Rest.ClientRuntime.1.0.0 nuget package is required to compile the generated code.</value>
+    <value>The Microsoft.Rest.ClientRuntime.1.0.2 nuget package is required to compile the generated code.</value>
   </data>
 </root>

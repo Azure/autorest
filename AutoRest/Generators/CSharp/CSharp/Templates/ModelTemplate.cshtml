@@ -58,7 +58,7 @@ namespace @(Settings.Namespace).Models
                 anythingToValidate = true;
             @:if (@property.Name == null)
             @:{
-                @:throw new ArgumentNullException("@property.Name");
+                @:throw new ValidationException(ValidationRules.CannotBeNull, "@property.Name");
             @:}
             @:
             }

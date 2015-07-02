@@ -33,7 +33,7 @@ namespace Fixtures.SwaggerBatBodyComplex.Models
         {
             if (Length == null)
             {
-                throw new ArgumentNullException("Length");
+                throw new ValidationException(ValidationRules.CannotBeNull, "Length");
             }
             if (this.Siblings != null)
             {

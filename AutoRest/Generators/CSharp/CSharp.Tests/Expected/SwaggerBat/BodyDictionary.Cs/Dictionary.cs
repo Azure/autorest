@@ -192,7 +192,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         {
             if (arrayBody == null)
             {
-                throw new ArgumentNullException("arrayBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, "arrayBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -643,7 +643,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         {
             if (arrayBody == null)
             {
-                throw new ArgumentNullException("arrayBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, "arrayBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -945,7 +945,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         {
             if (arrayBody == null)
             {
-                throw new ArgumentNullException("arrayBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, "arrayBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1247,7 +1247,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         {
             if (arrayBody == null)
             {
-                throw new ArgumentNullException("arrayBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, "arrayBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1549,7 +1549,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         {
             if (arrayBody == null)
             {
-                throw new ArgumentNullException("arrayBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, "arrayBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1851,7 +1851,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         {
             if (arrayBody == null)
             {
-                throw new ArgumentNullException("arrayBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, "arrayBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2153,7 +2153,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         {
             if (arrayBody == null)
             {
-                throw new ArgumentNullException("arrayBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, "arrayBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2457,7 +2457,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         {
             if (arrayBody == null)
             {
-                throw new ArgumentNullException("arrayBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, "arrayBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2761,7 +2761,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         {
             if (arrayBody == null)
             {
-                throw new ArgumentNullException("arrayBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, "arrayBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -3065,7 +3065,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         {
             if (arrayBody == null)
             {
-                throw new ArgumentNullException("arrayBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, "arrayBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -3595,7 +3595,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         {
             if (arrayBody == null)
             {
-                throw new ArgumentNullException("arrayBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, "arrayBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -4049,7 +4049,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         {
             if (arrayBody == null)
             {
-                throw new ArgumentNullException("arrayBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, "arrayBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -4508,7 +4508,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         {
             if (arrayBody == null)
             {
-                throw new ArgumentNullException("arrayBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, "arrayBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;

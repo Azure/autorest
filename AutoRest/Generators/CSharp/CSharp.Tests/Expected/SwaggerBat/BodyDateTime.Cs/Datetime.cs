@@ -340,7 +340,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
         {
             if (datetimeBody == null)
             {
-                throw new ArgumentNullException("datetimeBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, "datetimeBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -569,7 +569,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
         {
             if (datetimeBody == null)
             {
-                throw new ArgumentNullException("datetimeBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, "datetimeBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -800,7 +800,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
         {
             if (datetimeBody == null)
             {
-                throw new ArgumentNullException("datetimeBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, "datetimeBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1030,7 +1030,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
         {
             if (datetimeBody == null)
             {
-                throw new ArgumentNullException("datetimeBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, "datetimeBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1184,7 +1184,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
         {
             if (datetimeBody == null)
             {
-                throw new ArgumentNullException("datetimeBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, "datetimeBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1338,7 +1338,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
         {
             if (datetimeBody == null)
             {
-                throw new ArgumentNullException("datetimeBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, "datetimeBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
