@@ -15,17 +15,6 @@ namespace Microsoft.Rest
     public class TokenCredentials : ServiceClientCredentials
     {
         /// <summary>
-        /// Gets or sets secure token. 
-        /// </summary>
-        public string Token { get; set; }
-
-        /// <summary>
-        /// Gets or sets authentication scheme. 
-        /// Default is Bearer.
-        /// </summary>
-        public string Scheme { get; set; }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="TokenCredentials"/>
         /// class with scheme.
         /// </summary>
@@ -48,7 +37,19 @@ namespace Microsoft.Rest
         /// </summary>
         /// <param name="token">Valid token.</param>
         public TokenCredentials(string token) : this(null, token)
-        { }
+        {
+        }
+
+        /// <summary>
+        /// Gets or sets secure token. 
+        /// </summary>
+        public string Token { get; set; }
+
+        /// <summary>
+        /// Gets or sets authentication scheme. 
+        /// Default is Bearer.
+        /// </summary>
+        public string Scheme { get; set; }
 
         /// <summary>
         /// Apply the credentials to the HTTP request.
@@ -58,7 +59,7 @@ namespace Microsoft.Rest
         /// <returns>
         /// Task that will complete when processing has completed.
         /// </returns>
-        public override Task ProcessHttpRequestAsync(HttpRequestMessage request, 
+        public override Task ProcessHttpRequestAsync(HttpRequestMessage request,
             CancellationToken cancellationToken)
         {
             if (request == null)

@@ -2,11 +2,9 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace Microsoft.Rest.Serialization
 {
@@ -38,6 +36,14 @@ namespace Microsoft.Rest.Serialization
         public override bool CanConvert(Type objectType)
         {
             return typeof(T).IsAssignableFrom(objectType);
+        }
+
+        /// <summary>
+        /// Returns false.
+        /// </summary>
+        public override bool CanRead
+        {
+            get { return false; }
         }
 
         /// <summary>
@@ -89,14 +95,6 @@ namespace Microsoft.Rest.Serialization
             writer.WriteValue(typeName);
             JsonConverterHelper.SerializeProperties(writer, value, serializer);
             writer.WriteEndObject();
-        }
-
-        /// <summary>
-        /// Returns false.
-        /// </summary>
-        public override bool CanRead
-        {
-            get { return false; }
         }
     }
 }

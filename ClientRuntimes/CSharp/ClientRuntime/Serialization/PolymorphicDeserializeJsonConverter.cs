@@ -2,8 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Linq;
-using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -30,13 +28,21 @@ namespace Microsoft.Rest.Serialization
         }
 
         /// <summary>
+        /// Returns false.
+        /// </summary>
+        public override bool CanWrite
+        {
+            get { return false; }
+        }
+
+        /// <summary>
         /// Returns true if the object being deserialized is the base type. False otherwise.
         /// </summary>
         /// <param name="objectType">The type of the object to check.</param>
         /// <returns>True if the object being deserialized is the base type. False otherwise.</returns>
         public override bool CanConvert(Type objectType)
         {
-            return typeof(T) == objectType;
+            return typeof (T) == objectType;
         }
 
         /// <summary>
@@ -78,14 +84,6 @@ namespace Microsoft.Rest.Serialization
             object value, JsonSerializer serializer)
         {
             throw new NotSupportedException();
-        }
-
-        /// <summary>
-        /// Returns false.
-        /// </summary>
-        public override bool CanWrite
-        {
-            get { return false; }
         }
     }
 }

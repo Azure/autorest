@@ -10,12 +10,6 @@ namespace Microsoft.Rest.TransientFaultHandling
     /// </summary>
     public class ExponentialBackoffRetryStrategy : RetryStrategy
     {
-        private readonly int _retryCount;
-        private readonly TimeSpan _minBackoff;
-        private readonly TimeSpan _maxBackoff;
-        private readonly TimeSpan _deltaBackoff;
-
-
         /// <summary>
         /// Represents the default amount of time used when calculating a random delta in the exponential 
         /// delay between retries.
@@ -33,6 +27,11 @@ namespace Microsoft.Rest.TransientFaultHandling
         /// delay between retries.
         /// </summary>
         public static readonly TimeSpan DefaultMinBackoff = TimeSpan.FromSeconds(1.0);
+
+        private readonly TimeSpan _deltaBackoff;
+        private readonly TimeSpan _maxBackoff;
+        private readonly TimeSpan _minBackoff;
+        private readonly int _retryCount;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ExponentialBackoffRetryStrategy"/> class. 
@@ -95,10 +94,10 @@ namespace Microsoft.Rest.TransientFaultHandling
             Guard.ArgumentNotNegativeValue(deltaBackoff.Ticks, "deltaBackoff");
             Guard.ArgumentNotGreaterThan(minBackoff.TotalMilliseconds, maxBackoff.TotalMilliseconds, "minBackoff");
 
-            this._retryCount = retryCount;
-            this._minBackoff = minBackoff;
-            this._maxBackoff = maxBackoff;
-            this._deltaBackoff = deltaBackoff;
+            _retryCount = retryCount;
+            _minBackoff = minBackoff;
+            _maxBackoff = maxBackoff;
+            _deltaBackoff = deltaBackoff;
         }
 
         /// <summary>
@@ -109,15 +108,15 @@ namespace Microsoft.Rest.TransientFaultHandling
         {
             return delegate(int currentRetryCount, Exception lastException)
             {
-                if (currentRetryCount < this._retryCount)
+                if (currentRetryCount < _retryCount)
                 {
                     var random = new Random();
 
                     var delta = (int) ((Math.Pow(2.0, currentRetryCount) - 1.0)*
-                                       random.Next((int) (this._deltaBackoff.TotalMilliseconds*0.8),
-                                           (int) (this._deltaBackoff.TotalMilliseconds*1.2)));
-                    var interval = (int) Math.Min(checked(this._minBackoff.TotalMilliseconds + delta),
-                        this._maxBackoff.TotalMilliseconds);
+                                       random.Next((int) (_deltaBackoff.TotalMilliseconds*0.8),
+                                           (int) (_deltaBackoff.TotalMilliseconds*1.2)));
+                    var interval = (int) Math.Min(checked(_minBackoff.TotalMilliseconds + delta),
+                        _maxBackoff.TotalMilliseconds);
                     TimeSpan retryInterval = TimeSpan.FromMilliseconds(interval);
 
                     return new RetryCondition(true, retryInterval);

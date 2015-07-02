@@ -17,9 +17,9 @@ namespace Microsoft.Rest
     public class RetryDelegatingHandler : DelegatingHandler
     {
         private const int DefaultNumberOfAttempts = 3;
-        private TimeSpan DefaultBackoffDelta = new TimeSpan(0, 0, 10);
-        private TimeSpan DefaultMaxBackoff = new TimeSpan(0, 0, 10);
-        private TimeSpan DefaultMinBackoff = new TimeSpan(0, 0, 1);
+        private readonly TimeSpan DefaultBackoffDelta = new TimeSpan(0, 0, 10);
+        private readonly TimeSpan DefaultMaxBackoff = new TimeSpan(0, 0, 10);
+        private readonly TimeSpan DefaultMinBackoff = new TimeSpan(0, 0, 1);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RetryDelegatingHandler"/> class. 
@@ -84,9 +84,9 @@ namespace Microsoft.Rest
         {
             RetryPolicy.Retrying += (sender, args) =>
             {
-                if (this.Retrying != null)
+                if (Retrying != null)
                 {
-                    this.Retrying(sender, args);
+                    Retrying(sender, args);
                 }
             };
 
@@ -102,8 +102,8 @@ namespace Microsoft.Rest
                         throw new HttpRequestWithStatusException(string.Format(
                             CultureInfo.InvariantCulture,
                             Resources.ResponseStatusCodeError,
-                            (int)responseMessage.StatusCode,
-                            responseMessage.StatusCode)) { StatusCode = responseMessage.StatusCode };
+                            (int) responseMessage.StatusCode,
+                            responseMessage.StatusCode)) {StatusCode = responseMessage.StatusCode};
                     }
 
                     return responseMessage;
