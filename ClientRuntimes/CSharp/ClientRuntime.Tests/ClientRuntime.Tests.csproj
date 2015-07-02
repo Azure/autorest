@@ -39,6 +39,7 @@
     <Compile Include="TransientFaultHandling\DefaultHttpErrorDetectionStrategyTests.cs" />
     <Compile Include="TransientFaultHandling\GeneralRetryPolicyTests.cs" />
     <Compile Include="TransientFaultHandling\RetryConditionTest.cs" />
+    <Compile Include="ValidationExceptionTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

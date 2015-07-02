@@ -57,11 +57,13 @@
     <Compile Include="TransientFaultHandling\RetryPolicy.Generic.cs" />
     <Compile Include="TransientFaultHandling\RetryStrategy.cs" />
     <Compile Include="ValidationException.cs" />
+    <Compile Include="ValidationRules.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
