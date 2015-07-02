@@ -5,6 +5,7 @@ using System;
 using System.Globalization;
 using Microsoft.Rest.ClientRuntime.Tests.Resources;
 using Microsoft.Rest.Serialization;
+using Microsoft.Rest.TransientFaultHandling;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit;

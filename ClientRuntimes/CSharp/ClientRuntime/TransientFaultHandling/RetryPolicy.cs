@@ -276,43 +276,5 @@ namespace Microsoft.Rest.TransientFaultHandling
                 this.Retrying(this, new RetryingEventArgs(retryCount, delay, lastError));
             }
         }
-
-        #region Private classes
-        /// <summary>
-        /// Implements a strategy that ignores any transient errors.
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", 
-            "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated through generics")]
-        private sealed class TransientErrorIgnoreStrategy : ITransientErrorDetectionStrategy
-        {
-            /// <summary>
-            /// Always returns false.
-            /// </summary>
-            /// <param name="ex">The exception.</param>
-            /// <returns>Always false.</returns>
-            public bool IsTransient(Exception ex)
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Implements a strategy that treats all exceptions as transient errors.
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", 
-            "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated through generics")]
-        private sealed class TransientErrorCatchAllStrategy : ITransientErrorDetectionStrategy
-        {
-            /// <summary>
-            /// Always returns true.
-            /// </summary>
-            /// <param name="ex">The exception.</param>
-            /// <returns>Always true.</returns>
-            public bool IsTransient(Exception ex)
-            {
-                return true;
-            }
-        }
-        #endregion
     }
 }
