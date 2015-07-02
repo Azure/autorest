@@ -148,10 +148,16 @@ namespace Microsoft.Rest.Generator.Utilities
             where TU : TV
             where TV : class
         {
+            if (destination == null)
+            {
+                throw new ArgumentNullException("destination");
+            }
+
             if (source == null)
             {
                 throw new ArgumentNullException("source");
             }
+
             PropertyInfo[] properties = typeof(TV).GetProperties();
             foreach (var property in properties.Where(p => p.SetMethod != null))
             {

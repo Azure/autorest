@@ -1,0 +1,14 @@
+﻿@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Ruby.EnumTemplateModel>
+@Header("# ")
+@EmptyLine
+module @Settings.Namespace
+  #
+  @WrapComment("# ", "Defines values for " + Model.TypeDefinitionName)
+  #
+  module @(Model.TypeDefinitionName)
+    @for (int i = 0; i < Model.Values.Count; i++)
+    {
+    @:@(Model.Values[i].SerializedName) = "@(Model.Values[i].Name)"
+    }
+  end
+end

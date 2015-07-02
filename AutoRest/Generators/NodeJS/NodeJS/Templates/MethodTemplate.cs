@@ -431,7 +431,7 @@ Write(Model.InitializeResponseBody);
 
             WriteLiteral("     \r\n    // Deserialize Response\r\n    if (statusCode === ");
 #line 133 "MethodTemplate.cshtml"
-                  Write(Model.GetStatusCodeReference(responsePair.Key));
+                  Write(MethodTemplateModel.GetStatusCodeReference(responsePair.Key));
 
 #line default
 #line hidden

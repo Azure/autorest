@@ -3,20 +3,20 @@
 
 using System;
 using System.Net.Http;
+using System.Runtime.Serialization;
+#if !PORTABLE
+using System.Security.Permissions;
+#endif
 
 namespace Microsoft.Rest
 {
     /// <summary>
     /// Exception thrown for an invalid response with custom error information.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage(
-        "Microsoft.Design",
-        "CA1032:ImplementStandardExceptionConstructors"),
-     System.Diagnostics.CodeAnalysis.SuppressMessage(
-         "Microsoft.Usage",
-         "CA2237:MarkISerializableTypesWithSerializable",
-         Justification = "HttpRequestException hides the constructor needed for serialization.")]
-    public class HttpOperationException : HttpRequestException
+#if !PORTABLE
+    [Serializable]
+#endif
+    public class HttpOperationException : RestException
     {
         /// <summary>
         /// Gets information about the associated HTTP request.
@@ -59,5 +59,36 @@ namespace Microsoft.Rest
             : base(message, innerException)
         {
         }
+
+#if !PORTABLE        
+        /// <summary>
+        /// Initializes a new instance of the HttpOperationException class.
+        /// </summary>
+        /// <param name="info">Serialization info.</param>
+        /// <param name="context">Streaming context.</param>
+        protected HttpOperationException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+        }
+
+        /// <summary>
+        /// Serializes content of the exception.
+        /// </summary>
+        /// <param name="info">Serialization info.</param>
+        /// <param name="context">Streaming context.</param>
+        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+            if (info == null)
+            {
+                throw new ArgumentNullException("info");
+            }
+
+            info.AddValue("Request", Request);
+            info.AddValue("Response", Response);
+            info.AddValue("Body", Body);
+        }
+#endif
     }
 }

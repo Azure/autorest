@@ -337,7 +337,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                 : operationsParameter + ", " + methodParameters;
         }
 
-        public string GetStatusCodeReference(HttpStatusCode code)
+        public static string GetStatusCodeReference(HttpStatusCode code)
         {
             return string.Format(CultureInfo.InvariantCulture, "{0}", (int)code);
         }

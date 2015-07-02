@@ -416,6 +416,67 @@
         }
       }
     },
+    "/lro/put/noheader/202/200": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_putNoHeaderInRetry",
+        "description": "Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.",
+        "tags": [
+          "LROs Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response with ProvisioningState='Accepted'",
+            "headers": {
+              "location": {
+                "description": "Location to poll for result status: will be set to /lro/putasync/noheader/202/200/operationResults",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "LROs_getPutNoHeaderInRetry",
+        "description": "Long running get request for you to retrieve create resource. This method should not be invoked",
+        "tags": [
+          "LROs Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response with create resource",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/lro/putasync/retry/succeeded": {
       "put": {
         "x-ms-long-running-operation": true,
@@ -736,6 +797,286 @@
         }
       }
     },
+    "/lro/putasync/noheader/201/200": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_putAsyncNoHeaderInRetry",
+        "description": "Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.",
+        "tags": [
+          "LROs Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Initial response with ProvisioningState='Accepted'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "LROs_getPutAsyncNoHeaderInRetry",
+        "description": "Long running get request for you to retrieve create resource",
+        "tags": [
+          "LROs Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response with create resource",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/putnonresource/202/200": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_putNonResource",
+        "description": "Long running put request with non resource.",
+        "tags": [
+          "LROs Operations"
+        ],
+        "parameters": [
+          {
+            "name": "sku",
+            "description": "sku to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Sku"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response with ProvisioningState='Accepted'",
+            "schema": {
+              "$ref": "#/definitions/Sku"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "LROs_getNonResource",
+        "description": "Long running get request for you to retrieve created non resource",
+        "tags": [
+          "LROs Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response with created non resource",
+            "schema": {
+              "$ref": "#/definitions/Sku"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/putnonresourceasync/202/200": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_putAsyncNonResource",
+        "description": "Long running put request with non resource.",
+        "tags": [
+          "LROs Operations"
+        ],
+        "parameters": [
+          {
+            "name": "sku",
+            "description": "Sku to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Sku"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response with ProvisioningState='Accepted'",
+            "schema": {
+              "$ref": "#/definitions/Sku"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "LROs_getAsyncNonResource",
+        "description": "Long running get request for you to retrieve created non resource",
+        "tags": [
+          "LROs Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response with created sub resource",
+            "schema": {
+              "$ref": "#/definitions/Sku"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/putsubresource/202/200": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_putSubResource",
+        "description": "Long running put request with sub resource.",
+        "tags": [
+          "LROs Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Sub Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SubProduct"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response with ProvisioningState='Accepted'",
+            "schema": {
+              "$ref": "#/definitions/SubProduct"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "LROs_getSubResource",
+        "description": "Long running get request for you to retrieve created sub resource",
+        "tags": [
+          "LROs Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response with created sub resource",
+            "schema": {
+              "$ref": "#/definitions/SubProduct"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/putsubresourceasync/202/200": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_putAsyncSubResource",
+        "description": "Long running put request with sub resource.",
+        "tags": [
+          "LROs Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Sub Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SubProduct"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response with ProvisioningState='Accepted'",
+            "schema": {
+              "$ref": "#/definitions/SubProduct"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "LROs_getAsyncSubResource",
+        "description": "Long running get request for you to retrieve created sub resource",
+        "tags": [
+          "LROs Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response with created sub resource",
+            "schema": {
+              "$ref": "#/definitions/SubProduct"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/lro/delete/provisioning/202/accepted/200/succeeded": {
       "delete": {
         "x-ms-long-running-operation": true,
@@ -1045,6 +1386,66 @@
         "responses": {
           "204": {
             "description": "Response after completion"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/delete/noheader": {
+      "delete": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_deleteNoHeaderInRetry",
+        "description": "Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.",
+        "tags": [
+          "LRO Operations"
+        ],
+        "responses": {
+          "204": {
+            "description": "Response after completion"
+          },
+          "202": {
+            "description": "Initial response, with no entity body",
+            "headers": {
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/put/noheader/202/204/operationresults",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/deleteasync/noheader/202/204": {
+      "delete": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_deleteAsyncNoHeaderInRetry",
+        "description": "Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.",
+        "tags": [
+          "LRO Operations"
+        ],
+        "responses": {
+          "204": {
+            "description": "Response after completion"
+          },
+          "202": {
+            "description": "Initial response, with no entity body",
+            "headers": {
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/put/noheader/202/204/operationresults",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Unexpected error",
@@ -3381,6 +3782,47 @@
               "readOnly": true
             }
           }
+        }
+      }
+    },
+    "SubProduct": {
+      "allOf": [
+        {
+          "$ref": "SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "provisioningStateValues": {
+              "type": "string",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "canceled",
+                "Accepted",
+                "Creating",
+                "Created",
+                "Updating",
+                "Updated",
+                "Deleting",
+                "Deleted",
+                "OK"
+              ],
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    "SubResource": {
+      "x-ms-external": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Sub Resource Id",
+          "readOnly": true
         }
       }
     },

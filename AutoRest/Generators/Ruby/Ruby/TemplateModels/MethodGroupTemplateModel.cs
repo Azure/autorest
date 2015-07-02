@@ -9,22 +9,27 @@ using Microsoft.Rest.Generator.Utilities;
 
 namespace Microsoft.Rest.Generator.Ruby
 {
-    public class OperationsTemplateModel : ServiceClient
+    public class MethodGroupTemplateModel : ServiceClient
     {
-        public OperationsTemplateModel(ServiceClient serviceClient, string operationName)
+        public MethodGroupTemplateModel(ServiceClient serviceClient, string operationName)
         {
             this.LoadFrom(serviceClient);
+
             HasModelTypes = serviceClient.HasModelTypes();
+
             MethodTemplateModels = new List<MethodTemplateModel>();
+
             Methods.Where(m => m.Group == operationName)
                 .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient)));
-            OperationName = operationName;
+
+            MethodGroupName = operationName;
         }
 
         public bool HasModelTypes { get; private set; }
+
         public List<MethodTemplateModel> MethodTemplateModels { get; set; }
 
-        public string OperationName { get; set; }
+        public string MethodGroupName { get; set; }
 
         public virtual IEnumerable<string> Usings
         {

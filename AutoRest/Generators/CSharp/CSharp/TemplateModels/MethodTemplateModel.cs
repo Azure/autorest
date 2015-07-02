@@ -280,7 +280,7 @@ namespace Microsoft.Rest.Generator.CSharp
                 : operationsParameter + ", " + methodParameters;
         }
 
-        public string GetStatusCodeReference(HttpStatusCode code)
+        public static string GetStatusCodeReference(HttpStatusCode code)
         {
             return string.Format(CultureInfo.InvariantCulture, 
                 "(HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), \"{0}\")", code);

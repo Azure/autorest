@@ -130,7 +130,7 @@
     {
      <text>
     // Deserialize Response
-    if (statusCode === @Model.GetStatusCodeReference(responsePair.Key)) {
+    if (statusCode === @MethodTemplateModel.GetStatusCodeReference(responsePair.Key)) {
       var parsedResponse;
       try {
         parsedResponse = JSON.parse(responseBody);

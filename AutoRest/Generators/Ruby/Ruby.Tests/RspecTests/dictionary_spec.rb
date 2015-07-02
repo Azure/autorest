@@ -17,47 +17,56 @@ describe Dictionary do
     @widget_0 = Models::Widget.new
     @widget_0.string = "2"
     @widget_0.integer = 1
-    widget_1 = Models::Widget.new
-    widget_1.string = "4"
-    widget_1.integer = 3
+    @widget_1 = Models::Widget.new
+    @widget_1.string = "4"
+    @widget_1.integer = 3
     @widget_2 = Models::Widget.new
     @widget_2.string = "6"
     @widget_2.integer = 5
-    @dict_complex = {"0"=> @widget_0, "1"=> widget_1 , "2"=> @widget_2}
+    @dict_complex = {"0"=> @widget_0, "1"=> @widget_1 , "2"=> @widget_2}
     @dict_dateTime = {"0"=> DateTime.new(2000, 12, 01, 0, 0, 1), "1"=> DateTime.new(1980, 1, 2, 0, 11, 35, '+1'), "2"=> DateTime.new(1492, 10, 12, 10, 15, 1, '-8')}
     @dict_byte = {"0" => [0x0FF, 0x0FF, 0x0FF, 0x0FA],"1" => [0x01, 0x02, 0x03],"2" => [0x025, 0x029, 0x043]}
     @dict_array= {"0" => ['1', '2', '3'], "1" => ['4', '5', '6'], "2" => ['7', '8', '9']}
     @dict_dict = {"0" => {'1'=> 'one', '2' => 'two', '3' => 'three'}, "1" => {'4'=> 'four', '5' => 'five', '6' => 'six'}, "2" => {'7'=> 'seven', '8' => 'eight', '9' => 'nine'}}
   end
-  
+
   it 'should create test service' do
     expect{AutoRestSwaggerBATdictionaryService.new(@base_url)}.not_to raise_error
   end
+
   it 'should get null' do
     result = @dictionary_client.get_null().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
     expect(result.body).to be_nil
   end
+
   it 'should get empty' do
     result = @dictionary_client.get_empty().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
     expect(result.body).to be_empty
   end
+
   it 'should put empty' do
     result = @dictionary_client.put_empty({}).value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
   end
+
   it 'should get null value' do
     result = @dictionary_client.get_null_value().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
     expect(result.body).to eq({"key1" => nil})
   end
+
   it 'should get null key' do
     expect{@dictionary_client.get_null_key().value!}.to raise_error(ClientRuntime::DeserializationError)
   end
+
   it 'should get empty string key' do
-    expect{@dictionary_client.get_empty_string_key().value!}.to raise_error(ClientRuntime::DeserializationError)
+    result = @dictionary_client.get_empty_string_key().value!
+	expect(result.response).to be_an_instance_of(Net::HTTPOK)
+	expect(result.body).to eq({"" => "val1"})
   end
+
   it 'should get invalid' do
     expect{@dictionary_client.get_invalid().value!}.to raise_error(ClientRuntime::DeserializationError)
   end
@@ -68,15 +77,18 @@ describe Dictionary do
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
     expect(result.body).to eq(@dict_bool)
   end
+
   it 'should put boolean tfft' do
     result = @dictionary_client.put_boolean_tfft(@dict_bool).value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
   end
+
   it 'should get boolean invalid null' do
     result = @dictionary_client.get_boolean_invalid_null().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
     expect(result.body).to eq({ "0" => true, "1" => nil, "2" => false})
   end
+
   it 'should get boolean invalid string' do
     result = @dictionary_client.get_boolean_invalid_string().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
@@ -89,20 +101,22 @@ describe Dictionary do
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
     expect(result.body).to eq(@dict_int)
   end
+
   it 'should put integer valid' do
     result = @dictionary_client.put_integer_valid(@dict_int).value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
   end
+
   it 'should get int invalid null' do
     result = @dictionary_client.get_int_invalid_null().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
     expect(result.body).to eq({"0"=> 1, "1"=> nil, "2"=> 0})
   end
+
   it 'should get int invalid string' do
-    result = @dictionary_client.get_int_invalid_string().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
-    expect(result.body).to eq({"0"=> 1, "1"=> "integer", "2"=> 0})
+    expect { result = @dictionary_client.get_int_invalid_string().value! }.to raise_error(ClientRuntime::DeserializationError)
   end
+
   #Long integer tests. Ruby automtically converts int to long int, so there is no
   # special data type.
   it 'should get long valid' do
@@ -110,75 +124,84 @@ describe Dictionary do
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
     expect(result.body).to eq(@dict_int)
   end
+
   it 'should put long valid' do
     result = @dictionary_client.put_long_valid(@dict_int).value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
   end
+
   it 'should get long invalid null' do
     result = @dictionary_client.get_long_invalid_null().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
     expect(result.body).to eq({"0"=> 1, "1"=> nil, "2"=> 0})
   end
+
   it 'should get long invalid string' do
-    result = @dictionary_client.get_long_invalid_string().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
-    expect(result.body).to eq({"0"=> 1, "1"=> "integer", "2"=> 0})
+    expect { result = @dictionary_client.get_long_invalid_string().value! }.to raise_error(ClientRuntime::DeserializationError)
   end
+
   #Float tests
   it 'should get float valid' do
     result = @dictionary_client.get_float_valid().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
     expect(result.body).to eq(@dict_float)
   end
+
   it 'should put float valid' do
     result = @dictionary_client.put_float_valid(@dict_float).value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
   end
+
   it 'should get float invalid null' do
     result = @dictionary_client.get_float_invalid_null().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
     expect(result.body).to eq({"0"=> 0.0, "1"=> nil, "2"=> -1.2e20})
   end
+
   it 'should get float invalid string' do
-    result = @dictionary_client.get_float_invalid_string().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
-    expect(result.body).to eq({"0"=> 1, "1"=> "number", "2"=> 0})
+    expect { result = @dictionary_client.get_float_invalid_string().value! }.to raise_error(ClientRuntime::DeserializationError)
   end
+
   #Double tests
   it 'should get double valid' do
     result = @dictionary_client.get_double_valid().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
     expect(result.body).to eq(@dict_float)
   end
+
   it 'should put double valid' do
     result = @dictionary_client.put_double_valid(@dict_float).value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
   end
+
   it 'should get double invalid null' do
     result = @dictionary_client.get_double_invalid_null().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
     expect(result.body).to eq({"0"=> 0.0, "1"=> nil, "2"=> -1.2e20})
   end
+
   it 'should get double invalid string' do
-    result = @dictionary_client.get_double_invalid_string().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
-    expect(result.body).to eq({"0"=> 1, "1"=> "number", "2"=> 0})
+    expect { result = @dictionary_client.get_double_invalid_string().value! }.to raise_error(ClientRuntime::DeserializationError)
   end
+
   #String tests
   it 'should get string valid' do
     result = @dictionary_client.get_string_valid().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
     expect(result.body).to eq(@dict_string)
   end
+
   it 'should put string valid' do
     result = @dictionary_client.put_string_valid(@dict_string).value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
   end
+
   it 'should get string invalid null' do
     result = @dictionary_client.get_string_with_null().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
     expect(result.body).to eq({"0" => "foo", "1" => nil, "2" => "foo2"})
   end
+
   it 'should get string invalid' do
     result = @dictionary_client.get_string_with_invalid().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
@@ -191,39 +214,42 @@ describe Dictionary do
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
     expect(result.body).to eq(@dict_date)
   end
+
   it 'should put date valid' do
     result = @dictionary_client.put_date_valid(@dict_date).value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
   end
+
   it 'should get date invalid null' do
     result = @dictionary_client.get_date_invalid_null().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
     expect(result.body).to eq({"0" => Date.parse("2012-01-01"), "1" => nil, "2" => Date.parse("1776-07-04")})
   end
+
   it 'should get date invalid chars' do
-    result = @dictionary_client.get_date_invalid_chars().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
-    expect(result.body).to eq({"0" => Date.parse("2011-03-22"), "1" => "date"})
+    expect { @dictionary_client.get_date_invalid_chars().value! }.to raise_error(ClientRuntime::DeserializationError)
   end
+
   #DateTime tests
   it 'should get dateTime valid' do
     result = @dictionary_client.get_date_time_valid().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
     expect(result.body).to eq(@dict_dateTime)
   end
+
   it 'should put dateTime valid' do
     result = @dictionary_client.put_date_time_valid(@dict_dateTime).value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
   end
+
   it 'should get dateTime invalid null' do
     result = @dictionary_client.get_date_time_invalid_null().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
     expect(result.body).to eq({"0" => DateTime.parse("2000-12-01t00:00:01z"), "1" => nil})
   end
+
   it 'should get dateTime invalid chars' do
-    result = @dictionary_client.get_date_time_invalid_chars().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
-    expect(result.body).to eq({"0" => DateTime.parse("2000-12-01t00:00:01z"), "1" => "date-time"})
+    expect { @dictionary_client.get_date_time_invalid_chars().value! }.to raise_error(ClientRuntime::DeserializationError)
   end
 
   #Byte tests
@@ -232,15 +258,17 @@ describe Dictionary do
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
     expect(result.body).to eq(@dict_byte)
   end
+
   #test will fail because of Ruby's problems with JSON serialization/deserialization
   it 'should put byte valid' do
     result = @dictionary_client.put_byte_valid(@dict_byte).value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
   end
+
   it 'should get byte invalid null' do
     result = @dictionary_client.get_byte_invalid_null().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
-    expect(result.body).to eq({"0"=>"q6yt", "1"=>nil})
+    expect(result.body).to eq({"0"=> [171, 172, 173], "1" => nil})
   end
 
   #Complex tests
@@ -249,40 +277,45 @@ describe Dictionary do
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
     expect(result.body).to be_nil
   end
+
   it 'should get complex empty' do
     result = @dictionary_client.get_complex_empty().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
     expect(result.body).to eq({})
   end
+
   it 'should get complex item null' do
-    dict_null = {"0"=> @widget_0, "1"=> nil, "2"=> @widget_2}
+    dict_null = {"0" => @widget_0, "1" => nil, "2" => @widget_2 }
     result = @dictionary_client.get_complex_item_null().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
-    expect(result.body.key.count).to eq(dict_null.keys.count)
+    expect(result.body.keys.count).to eq(dict_null.keys.count)
     dict_null.keys.each do |key|
       expect(result.body.keys).to include(key)
-      expect(result.body[key]).to be_equal_widgets(dict_null[key])
+      expect(result.body[key]).to be_equal_objects(dict_null[key])
     end
   end
+
   it 'should get complex item empty' do
-    dict_empty = {"0"=> @widget_0, "1"=> Models::Widget.new, "2"=> @widget_2}
+    dict_empty = { "0"=> @widget_0, "1"=> Models::Widget.new, "2"=> @widget_2 }
     result = @dictionary_client.get_complex_item_empty().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
-    expect(result.body.key.count).to eq(dict_empty.keys.count)
+    expect(result.body.keys.count).to eq(dict_empty.keys.count)
     dict_empty.keys.each do |key|
       expect(result.body.keys).to include(key)
-      expect(result.body[key]).to be_equal_widgets(dict_empty[key])
+      expect(result.body[key]).to be_equal_objects(dict_empty[key])
     end
   end
+
   it 'should get complex valid' do
     result = @dictionary_client.get_complex_valid().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
-    expect(result.body.key.count).to eq(@dict_complex.keys.count)
+    expect(result.body.keys.count).to eq(@dict_complex.keys.count)
     @dict_complex.keys.each do |key|
       expect(result.body.keys).to include(key)
-      expect(result.body[key]).to be_equal_widgets(@dict_complex[key])
+      expect(result.body[key]).to be_equal_objects(@dict_complex[key])
     end
   end
+
   it 'should put complex valid' do
     result = @dictionary_client.put_complex_valid(@dict_complex).value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
@@ -294,31 +327,35 @@ describe Dictionary do
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
     expect(result.body).to be_nil
   end
+
   it 'should get array empty' do
     result = @dictionary_client.get_array_empty().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
     expect(result.body).to eq({})
   end
+
   it 'should get array item null' do
     dict_array_nil= {"0"=> ["1", "2", "3"], "1"=> nil, "2"=> ["7", "8", "9"]}
     result = @dictionary_client.get_array_item_null().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
-    expect(result.body.key.count).to eq(dict_array_nil.keys.count)
+    expect(result.body.keys.count).to eq(dict_array_nil.keys.count)
     dict_array_nil.keys.each do |key|
       expect(result.body.keys).to include(key)
       expect(result.body[key]).to eq(dict_array_nil[key])
     end
   end
+
   it 'should get array item empty' do
     dict_array_empty = {"0"=> ["1", "2", "3"], "1"=> [], "2"=> ["7", "8", "9"]}
     result = @dictionary_client.get_array_item_empty().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
-    expect(result.body.key.count).to eq(dict_arra_empty.keys.count)
+    expect(result.body.keys.count).to eq(dict_array_empty.keys.count)
     dict_array_empty.keys.each do |key|
       expect(result.body.keys).to include(key)
       expect(result.body[key]).to eq(dict_array_empty[key])
     end
   end
+
   it 'should get array valid' do
     result = @dictionary_client.get_array_valid().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
@@ -327,6 +364,7 @@ describe Dictionary do
       expect(result.body[key]).to eq(@dict_array[key])
     end
   end
+
   it 'should put array valid' do
     result = @dictionary_client.put_array_valid(@dict_array).value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
@@ -338,41 +376,45 @@ describe Dictionary do
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
     expect(result.body).to be_nil
   end
+
   it 'should get dictionary empty' do
     result = @dictionary_client.get_dictionary_empty().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
     expect(result.body).to eq({})
   end
+
   it 'should get dictionary item null' do
     dict_item_nil = {"0"=> {'1'=> 'one', '2' => 'two', '3' => 'three'}, "1"=> nil, "2"=> {'7'=> 'seven', '8' => 'eight', '9' => 'nine'}}
     result = @dictionary_client.get_dictionary_item_null().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
-    expect(result.body.key.count).to eq(dict_item_nil.keys.count)
+    expect(result.body.keys.count).to eq(dict_item_nil.keys.count)
     dict_item_nil.keys.each do |key|
       expect(result.body.keys).to include(key)
       expect(result.body[key]).to be_equal_dict(dict_item_nil[key])
     end
-
   end
+
   it 'should get dictionary item empty' do
     dict_item_empty = {"0"=> {'1'=> 'one', '2' => 'two', '3' => 'three'}, "1"=> {}, "2"=> {'7'=> 'seven', '8' => 'eight', '9' => 'nine'}}
     result = @dictionary_client.get_dictionary_item_empty().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
-    expect(result.body.key.count).to eq(dict_item_empty.keys.count)
+    expect(result.body.keys.count).to eq(dict_item_empty.keys.count)
     dict_item_empty.keys.each do |key|
       expect(result.body.keys).to include(key)
       expect(result.body[key]).to be_equal_dict(dict_item_empty[key])
     end
   end
+
   it 'should get dictionary valid' do
     result = @dictionary_client.get_dictionary_valid().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
-    expect(result.body.key.count).to eq(@dict_dict.keys.count)
+    expect(result.body.keys.count).to eq(@dict_dict.keys.count)
     @dict_dict.keys.each do |key|
       expect(result.body.keys).to include(key)
       expect(result.body[key]).to be_equal_dict(@dict_dict[key])
     end
   end
+
   it 'should put dictionary valid' do
     result = @dictionary_client.put_dictionary_valid(@dict_dict).value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)

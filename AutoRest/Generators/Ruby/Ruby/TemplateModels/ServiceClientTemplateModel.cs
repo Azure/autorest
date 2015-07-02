@@ -37,9 +37,11 @@ namespace Microsoft.Rest.Generator.Ruby
             get
             {
                 List<string> requireParams = new List<string>();
+
                 this.Properties.Where(p => p.IsRequired)
                     .ForEach(p => requireParams.Add(string.Format("{0}", p.Name)));
-                return requireParams.Any() ? ", " : "" + string.Join(", ", requireParams);
+
+                return requireParams.Any() ? ", " + string.Join(", ", requireParams) : string.Empty;
             }
         }
     }

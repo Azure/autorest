@@ -2,6 +2,11 @@
   <Words>
     <Recognized>
       <Word>Outdent</Word>
+      <Word>Usings</Word>
+      <Word>Namer</Word>
+      <Word>nuget</Word>
+      <Word>Js</Word>
+      <Word>npm</Word>
       <Word>Infos</Word>
       <Word>queryParameters</Word>
       <Word>Cli</Word>

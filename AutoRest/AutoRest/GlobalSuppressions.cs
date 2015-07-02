@@ -8,7 +8,6 @@
 // "In Suppression File".
 // You do not need to add suppressions to this file manually.
 
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA2210:AssembliesShouldHaveValidStrongNames")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", 
     "CA1303:Do not pass literals as localized parameters", 
     MessageId = "System.Console.WriteLine(System.String,System.Object,System.Object)", Scope = "member", 

@@ -18,6 +18,7 @@
     <Compile Include="BasicAuthenticationCredentials.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HttpExtensions.cs" />
+    <Compile Include="RestException.cs" />
     <Compile Include="Serialization\PolymorphicDeserializeJsonConverter.cs" />
     <Compile Include="Serialization\DateJsonConverter.cs" />
     <Compile Include="Serialization\PolymorphicJsonConverter.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="TransientFaultHandling\RetryPolicy.cs" />
     <Compile Include="TransientFaultHandling\RetryPolicy.Generic.cs" />
     <Compile Include="TransientFaultHandling\RetryStrategy.cs" />
+    <Compile Include="ValidationException.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -72,6 +74,7 @@
   <ItemGroup>
     <CodeAnalysisDictionary Include="$(SolutionDir)tools\CustomDictionary.xml">
       <Link>CustomDictionary.xml</Link>
+      <SubType>Designer</SubType>
     </CodeAnalysisDictionary>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" Condition=" '$(LibraryFxTarget)' == 'portable' " />

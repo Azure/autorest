@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using System;
 using Microsoft.Rest.Generator.ClientModel;
 using System.Linq;
 
@@ -86,6 +87,58 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             }
 
             return string.Empty;
+        }
+
+        /// <summary>
+        /// Return the separator associated with a given collectionFormat
+        /// </summary>
+        /// <param name="format">The collection format</param>
+        /// <returns>The separator</returns>
+        private static string GetSeparator(this CollectionFormat format)
+        {
+            switch (format)
+            {
+                case CollectionFormat.Csv:
+                    return ",";
+                case CollectionFormat.Pipes:
+                    return "|";
+                case CollectionFormat.Ssv:
+                    return " ";
+                case CollectionFormat.Tsv:
+                    return "\t";
+                default:
+                    throw new NotSupportedException(string.Format("Collection format {0} is not supported.", format));
+            }
+        }
+
+        /// <summary>
+        /// Format the value of a sequence given the modeled element format.  Note that only sequences of strings are supported
+        /// </summary>
+        /// <param name="parameter">The parameter to format</param>
+        /// <returns>A reference to the formatted parameter value</returns>
+        public static string GetFormattedReferenceValue(this Parameter parameter)
+        {
+            SequenceType sequence = parameter.Type as SequenceType;
+            if (sequence == null)
+            {
+                return parameter.Type.ToString(parameter.Name);
+            }
+
+            PrimaryType primaryType = sequence.ElementType as PrimaryType;
+            EnumType enumType = sequence.ElementType as EnumType;
+            if (enumType != null && enumType.IsExpandable)
+            {
+                primaryType = PrimaryType.String;
+            }
+
+            if (primaryType != PrimaryType.String)
+            {
+                throw new InvalidOperationException(
+                    string.Format("Cannot generate a formatted sequence from a " +
+                                  "non-string array parameter {0}", parameter));
+            }
+
+            return string.Format("{0}.join('{1}')", parameter.Name, parameter.CollectionFormat.GetSeparator());
         }
 
         /// <summary>
@@ -206,11 +259,22 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             var sequence = type as SequenceType;
             var dictionary = type as DictionaryType;
             var primary = type as PrimaryType;
+            var enumType = type as EnumType;
 
             var builder = new IndentedStringBuilder("  ");
 
             if (primary != null)
             {
+                if (primary == PrimaryType.Int || primary == PrimaryType.Long)
+                {
+                    return builder.AppendLine("{0} = Integer({0}) unless {0}.to_s.empty?", valueReference).ToString();
+                }
+
+                if (primary == PrimaryType.Double)
+                {
+                    return builder.AppendLine("{0} = Float({0}) unless {0}.to_s.empty?", valueReference).ToString();
+                }
+
                 if (primary == PrimaryType.ByteArray)
                 {
                     return builder.AppendLine("{0} = Base64.strict_decode64({0}).unpack('C*') unless {0}.to_s.empty?", valueReference).ToString();
@@ -225,6 +289,12 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
                 {
                     return builder.AppendLine("{0} = DateTime.parse({0}) unless {0}.to_s.empty?", valueReference).ToString();
                 }
+            }
+            else if (enumType != null && !string.IsNullOrEmpty(enumType.Name))
+            {
+                return builder.AppendLine(
+                    "fail ClientRuntime::DeserializationError.new('Error occured in deserializing the enum', nil, nil, nil) if (!{2}.nil? && !{2}.empty? && !{0}::{1}.constants.any? {{ |enum| enum.to_s == {2} }})",
+                    defaultNamespace, enumType.Name, valueReference).ToString();
             }
             else if (sequence != null)
             {
@@ -310,7 +380,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
 
                 if (primary == PrimaryType.DateTime)
                 {
-                    return builder.AppendLine("{0} = {0}.strftime('%FT%TZ')", valueReference).ToString();
+                    return builder.AppendLine("{0} = {0}.new_offset(0).strftime('%FT%TZ')", valueReference).ToString();
                 }
             }
             else if (sequence != null)
