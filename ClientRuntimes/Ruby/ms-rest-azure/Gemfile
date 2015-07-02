@@ -1,0 +1,8 @@
+source 'https://rubygems.org'
+
+# Specify your gem's dependencies in client_runtime.gemspec
+gemspec
+
+group :development, :local, :test do
+  gem 'rspec'
+end
