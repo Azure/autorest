@@ -38,7 +38,7 @@ namespace Fixtures.SwaggerBatHeader
             /// </param>
             public static async Task ParamExistingKeyAsync( this IHeader operations, string userAgent, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ParamExistingKeyWithOperationResponseAsync(userAgent, cancellationToken).ConfigureAwait(false);
+                await operations.ParamExistingKeyWithOperationResponseAsync(userAgent, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -63,7 +63,7 @@ namespace Fixtures.SwaggerBatHeader
             /// </param>
             public static async Task ResponseExistingKeyAsync( this IHeader operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ResponseExistingKeyWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                await operations.ResponseExistingKeyWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -94,7 +94,7 @@ namespace Fixtures.SwaggerBatHeader
             /// </param>
             public static async Task ParamProtectedKeyAsync( this IHeader operations, string contentType, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ParamProtectedKeyWithOperationResponseAsync(contentType, cancellationToken).ConfigureAwait(false);
+                await operations.ParamProtectedKeyWithOperationResponseAsync(contentType, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -119,7 +119,7 @@ namespace Fixtures.SwaggerBatHeader
             /// </param>
             public static async Task ResponseProtectedKeyAsync( this IHeader operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ResponseProtectedKeyWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                await operations.ResponseProtectedKeyWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -158,7 +158,7 @@ namespace Fixtures.SwaggerBatHeader
             /// </param>
             public static async Task ParamIntegerAsync( this IHeader operations, string scenario, int? value, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ParamIntegerWithOperationResponseAsync(scenario, value, cancellationToken).ConfigureAwait(false);
+                await operations.ParamIntegerWithOperationResponseAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -189,7 +189,7 @@ namespace Fixtures.SwaggerBatHeader
             /// </param>
             public static async Task ResponseIntegerAsync( this IHeader operations, string scenario, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ResponseIntegerWithOperationResponseAsync(scenario, cancellationToken).ConfigureAwait(false);
+                await operations.ResponseIntegerWithOperationResponseAsync(scenario, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -228,7 +228,7 @@ namespace Fixtures.SwaggerBatHeader
             /// </param>
             public static async Task ParamLongAsync( this IHeader operations, string scenario, long? value, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ParamLongWithOperationResponseAsync(scenario, value, cancellationToken).ConfigureAwait(false);
+                await operations.ParamLongWithOperationResponseAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -259,7 +259,7 @@ namespace Fixtures.SwaggerBatHeader
             /// </param>
             public static async Task ResponseLongAsync( this IHeader operations, string scenario, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ResponseLongWithOperationResponseAsync(scenario, cancellationToken).ConfigureAwait(false);
+                await operations.ResponseLongWithOperationResponseAsync(scenario, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -298,7 +298,7 @@ namespace Fixtures.SwaggerBatHeader
             /// </param>
             public static async Task ParamFloatAsync( this IHeader operations, string scenario, double? value, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ParamFloatWithOperationResponseAsync(scenario, value, cancellationToken).ConfigureAwait(false);
+                await operations.ParamFloatWithOperationResponseAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -329,7 +329,7 @@ namespace Fixtures.SwaggerBatHeader
             /// </param>
             public static async Task ResponseFloatAsync( this IHeader operations, string scenario, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ResponseFloatWithOperationResponseAsync(scenario, cancellationToken).ConfigureAwait(false);
+                await operations.ResponseFloatWithOperationResponseAsync(scenario, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -368,7 +368,7 @@ namespace Fixtures.SwaggerBatHeader
             /// </param>
             public static async Task ParamDoubleAsync( this IHeader operations, string scenario, double? value, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ParamDoubleWithOperationResponseAsync(scenario, value, cancellationToken).ConfigureAwait(false);
+                await operations.ParamDoubleWithOperationResponseAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -399,7 +399,7 @@ namespace Fixtures.SwaggerBatHeader
             /// </param>
             public static async Task ResponseDoubleAsync( this IHeader operations, string scenario, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ResponseDoubleWithOperationResponseAsync(scenario, cancellationToken).ConfigureAwait(false);
+                await operations.ResponseDoubleWithOperationResponseAsync(scenario, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -438,7 +438,7 @@ namespace Fixtures.SwaggerBatHeader
             /// </param>
             public static async Task ParamBoolAsync( this IHeader operations, string scenario, bool? value, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ParamBoolWithOperationResponseAsync(scenario, value, cancellationToken).ConfigureAwait(false);
+                await operations.ParamBoolWithOperationResponseAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -469,7 +469,7 @@ namespace Fixtures.SwaggerBatHeader
             /// </param>
             public static async Task ResponseBoolAsync( this IHeader operations, string scenario, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ResponseBoolWithOperationResponseAsync(scenario, cancellationToken).ConfigureAwait(false);
+                await operations.ResponseBoolWithOperationResponseAsync(scenario, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -514,7 +514,7 @@ namespace Fixtures.SwaggerBatHeader
             /// </param>
             public static async Task ParamStringAsync( this IHeader operations, string scenario, string value = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ParamStringWithOperationResponseAsync(scenario, value, cancellationToken).ConfigureAwait(false);
+                await operations.ParamStringWithOperationResponseAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -549,7 +549,7 @@ namespace Fixtures.SwaggerBatHeader
             /// </param>
             public static async Task ResponseStringAsync( this IHeader operations, string scenario, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ResponseStringWithOperationResponseAsync(scenario, cancellationToken).ConfigureAwait(false);
+                await operations.ResponseStringWithOperationResponseAsync(scenario, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -588,7 +588,7 @@ namespace Fixtures.SwaggerBatHeader
             /// </param>
             public static async Task ParamDateAsync( this IHeader operations, string scenario, DateTime? value, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ParamDateWithOperationResponseAsync(scenario, value, cancellationToken).ConfigureAwait(false);
+                await operations.ParamDateWithOperationResponseAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -619,7 +619,7 @@ namespace Fixtures.SwaggerBatHeader
             /// </param>
             public static async Task ResponseDateAsync( this IHeader operations, string scenario, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ResponseDateWithOperationResponseAsync(scenario, cancellationToken).ConfigureAwait(false);
+                await operations.ResponseDateWithOperationResponseAsync(scenario, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -662,7 +662,7 @@ namespace Fixtures.SwaggerBatHeader
             /// </param>
             public static async Task ParamDatetimeAsync( this IHeader operations, string scenario, DateTime? value, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ParamDatetimeWithOperationResponseAsync(scenario, value, cancellationToken).ConfigureAwait(false);
+                await operations.ParamDatetimeWithOperationResponseAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -695,7 +695,7 @@ namespace Fixtures.SwaggerBatHeader
             /// </param>
             public static async Task ResponseDatetimeAsync( this IHeader operations, string scenario, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ResponseDatetimeWithOperationResponseAsync(scenario, cancellationToken).ConfigureAwait(false);
+                await operations.ResponseDatetimeWithOperationResponseAsync(scenario, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -734,7 +734,7 @@ namespace Fixtures.SwaggerBatHeader
             /// </param>
             public static async Task ParamByteAsync( this IHeader operations, string scenario, byte[] value, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ParamByteWithOperationResponseAsync(scenario, value, cancellationToken).ConfigureAwait(false);
+                await operations.ParamByteWithOperationResponseAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -765,7 +765,7 @@ namespace Fixtures.SwaggerBatHeader
             /// </param>
             public static async Task ResponseByteAsync( this IHeader operations, string scenario, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ResponseByteWithOperationResponseAsync(scenario, cancellationToken).ConfigureAwait(false);
+                await operations.ResponseByteWithOperationResponseAsync(scenario, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -808,7 +808,7 @@ namespace Fixtures.SwaggerBatHeader
             /// </param>
             public static async Task ParamEnumAsync( this IHeader operations, string scenario, GreyscaleColors? value = default(GreyscaleColors?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ParamEnumWithOperationResponseAsync(scenario, value, cancellationToken).ConfigureAwait(false);
+                await operations.ParamEnumWithOperationResponseAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -841,7 +841,34 @@ namespace Fixtures.SwaggerBatHeader
             /// </param>
             public static async Task ResponseEnumAsync( this IHeader operations, string scenario, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ResponseEnumWithOperationResponseAsync(scenario, cancellationToken).ConfigureAwait(false);
+                await operations.ResponseEnumWithOperationResponseAsync(scenario, null, cancellationToken).ConfigureAwait(false);
+            }
+
+            /// <summary>
+            /// Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the
+            /// header of the request
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            public static void CustomRequestId(this IHeader operations)
+            {
+                Task.Factory.StartNew(s => ((IHeader)s).CustomRequestIdAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the
+            /// header of the request
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// Cancellation token.
+            /// </param>
+            public static async Task CustomRequestIdAsync( this IHeader operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                await operations.CustomRequestIdWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
     }

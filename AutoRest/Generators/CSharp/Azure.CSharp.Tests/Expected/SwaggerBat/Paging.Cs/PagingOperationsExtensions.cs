@@ -33,7 +33,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// </param>
             public static async Task<ProductResult> GetSinglePagesAsync( this IPagingOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<ProductResult> result = await operations.GetSinglePagesWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<ProductResult> result = await operations.GetSinglePagesWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -59,7 +59,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// </param>
             public static async Task<ProductResult> GetMultiplePagesAsync( this IPagingOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<ProductResult> result = await operations.GetMultiplePagesWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<ProductResult> result = await operations.GetMultiplePagesWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -87,7 +87,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// </param>
             public static async Task<ProductResult> GetMultiplePagesRetryFirstAsync( this IPagingOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<ProductResult> result = await operations.GetMultiplePagesRetryFirstWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<ProductResult> result = await operations.GetMultiplePagesRetryFirstWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -117,7 +117,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// </param>
             public static async Task<ProductResult> GetMultiplePagesRetrySecondAsync( this IPagingOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<ProductResult> result = await operations.GetMultiplePagesRetrySecondWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<ProductResult> result = await operations.GetMultiplePagesRetrySecondWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -143,7 +143,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// </param>
             public static async Task<ProductResult> GetSinglePagesFailureAsync( this IPagingOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<ProductResult> result = await operations.GetSinglePagesFailureWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<ProductResult> result = await operations.GetSinglePagesFailureWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -169,7 +169,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// </param>
             public static async Task<ProductResult> GetMultiplePagesFailureAsync( this IPagingOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<ProductResult> result = await operations.GetMultiplePagesFailureWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<ProductResult> result = await operations.GetMultiplePagesFailureWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -195,7 +195,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// </param>
             public static async Task<ProductResult> GetMultiplePagesFailureUriAsync( this IPagingOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<ProductResult> result = await operations.GetMultiplePagesFailureUriWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<ProductResult> result = await operations.GetMultiplePagesFailureUriWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -227,7 +227,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// </param>
             public static async Task<ProductResult> GetSinglePagesNextAsync( this IPagingOperations operations, string nextLink, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<ProductResult> result = await operations.GetSinglePagesNextWithOperationResponseAsync(nextLink, cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<ProductResult> result = await operations.GetSinglePagesNextWithOperationResponseAsync(nextLink, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -259,7 +259,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// </param>
             public static async Task<ProductResult> GetMultiplePagesNextAsync( this IPagingOperations operations, string nextLink, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<ProductResult> result = await operations.GetMultiplePagesNextWithOperationResponseAsync(nextLink, cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<ProductResult> result = await operations.GetMultiplePagesNextWithOperationResponseAsync(nextLink, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -293,7 +293,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// </param>
             public static async Task<ProductResult> GetMultiplePagesRetryFirstNextAsync( this IPagingOperations operations, string nextLink, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<ProductResult> result = await operations.GetMultiplePagesRetryFirstNextWithOperationResponseAsync(nextLink, cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<ProductResult> result = await operations.GetMultiplePagesRetryFirstNextWithOperationResponseAsync(nextLink, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -329,7 +329,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// </param>
             public static async Task<ProductResult> GetMultiplePagesRetrySecondNextAsync( this IPagingOperations operations, string nextLink, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<ProductResult> result = await operations.GetMultiplePagesRetrySecondNextWithOperationResponseAsync(nextLink, cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<ProductResult> result = await operations.GetMultiplePagesRetrySecondNextWithOperationResponseAsync(nextLink, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -361,7 +361,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// </param>
             public static async Task<ProductResult> GetSinglePagesFailureNextAsync( this IPagingOperations operations, string nextLink, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<ProductResult> result = await operations.GetSinglePagesFailureNextWithOperationResponseAsync(nextLink, cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<ProductResult> result = await operations.GetSinglePagesFailureNextWithOperationResponseAsync(nextLink, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -393,7 +393,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// </param>
             public static async Task<ProductResult> GetMultiplePagesFailureNextAsync( this IPagingOperations operations, string nextLink, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<ProductResult> result = await operations.GetMultiplePagesFailureNextWithOperationResponseAsync(nextLink, cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<ProductResult> result = await operations.GetMultiplePagesFailureNextWithOperationResponseAsync(nextLink, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -425,7 +425,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// </param>
             public static async Task<ProductResult> GetMultiplePagesFailureUriNextAsync( this IPagingOperations operations, string nextLink, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<ProductResult> result = await operations.GetMultiplePagesFailureUriNextWithOperationResponseAsync(nextLink, cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<ProductResult> result = await operations.GetMultiplePagesFailureUriNextWithOperationResponseAsync(nextLink, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

@@ -81,18 +81,22 @@ namespace Microsoft.Rest.Generator.CSharp
         /// <summary>
         /// Generate the method parameter declaration for async methods and extensions
         /// </summary>
-        public virtual string AsyncMethodParameterDeclaration
+        public virtual string GetAsyncMethodParameterDeclaration(bool addCustomHeaderParamters = false)
         {
-            get
+            var declarations = this.SyncMethodParameterDeclaration;
+            
+            if (!string.IsNullOrEmpty(declarations))
             {
-                var declarations = this.SyncMethodParameterDeclaration;
-                if (!string.IsNullOrEmpty(declarations))
-                {
-                    declarations += ", ";
-                }
-                declarations += "CancellationToken cancellationToken = default(CancellationToken)";
-                return declarations;
+                declarations += ", ";
             }
+            if (addCustomHeaderParamters)
+            {
+
+                declarations += "Dictionary<string, List<string>> customHeaders = null, ";
+            }
+            declarations += "CancellationToken cancellationToken = default(CancellationToken)";
+
+            return declarations;
         }
 
         /// <summary>
@@ -117,6 +121,7 @@ namespace Microsoft.Rest.Generator.CSharp
             {
                 List<string> invocationParams = new List<string>();
                 LocalParameters.ForEach(p => invocationParams.Add(p.Name));
+                invocationParams.Add("null");
                 invocationParams.Add("cancellationToken");
                 return string.Join(", ", invocationParams);
             }

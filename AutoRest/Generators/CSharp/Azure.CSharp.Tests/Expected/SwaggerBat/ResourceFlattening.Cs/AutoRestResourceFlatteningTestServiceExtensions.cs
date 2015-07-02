@@ -39,7 +39,7 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             /// </param>
             public static async Task PutArrayAsync( this IAutoRestResourceFlatteningTestService operations, IList<Resource> resourceArray = default(IList<Resource>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutArrayWithOperationResponseAsync(resourceArray, cancellationToken).ConfigureAwait(false);
+                await operations.PutArrayWithOperationResponseAsync(resourceArray, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -64,7 +64,7 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             /// </param>
             public static async Task<IList<FlattenedProduct>> GetArrayAsync( this IAutoRestResourceFlatteningTestService operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<IList<FlattenedProduct>> result = await operations.GetArrayWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<IList<FlattenedProduct>> result = await operations.GetArrayWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -96,7 +96,7 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             /// </param>
             public static async Task PutDictionaryAsync( this IAutoRestResourceFlatteningTestService operations, IDictionary<string, FlattenedProduct> resourceDictionary = default(IDictionary<string, FlattenedProduct>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutDictionaryWithOperationResponseAsync(resourceDictionary, cancellationToken).ConfigureAwait(false);
+                await operations.PutDictionaryWithOperationResponseAsync(resourceDictionary, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -121,7 +121,7 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             /// </param>
             public static async Task<IDictionary<string, FlattenedProduct>> GetDictionaryAsync( this IAutoRestResourceFlatteningTestService operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<IDictionary<string, FlattenedProduct>> result = await operations.GetDictionaryWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<IDictionary<string, FlattenedProduct>> result = await operations.GetDictionaryWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -153,7 +153,7 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             /// </param>
             public static async Task PutResourceCollectionAsync( this IAutoRestResourceFlatteningTestService operations, ResourceCollection resourceComplexObject = default(ResourceCollection), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutResourceCollectionWithOperationResponseAsync(resourceComplexObject, cancellationToken).ConfigureAwait(false);
+                await operations.PutResourceCollectionWithOperationResponseAsync(resourceComplexObject, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -178,7 +178,7 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             /// </param>
             public static async Task<ResourceCollection> GetResourceCollectionAsync( this IAutoRestResourceFlatteningTestService operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<ResourceCollection> result = await operations.GetResourceCollectionWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<ResourceCollection> result = await operations.GetResourceCollectionWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

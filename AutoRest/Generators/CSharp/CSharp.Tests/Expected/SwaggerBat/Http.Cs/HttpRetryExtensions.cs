@@ -32,7 +32,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Head408Async( this IHttpRetry operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Head408WithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                await operations.Head408WithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -63,7 +63,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Put500Async( this IHttpRetry operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Put500WithOperationResponseAsync(booleanValue, cancellationToken).ConfigureAwait(false);
+                await operations.Put500WithOperationResponseAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -94,7 +94,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Patch500Async( this IHttpRetry operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Patch500WithOperationResponseAsync(booleanValue, cancellationToken).ConfigureAwait(false);
+                await operations.Patch500WithOperationResponseAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -119,7 +119,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Get502Async( this IHttpRetry operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Get502WithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                await operations.Get502WithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -150,7 +150,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Post503Async( this IHttpRetry operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Post503WithOperationResponseAsync(booleanValue, cancellationToken).ConfigureAwait(false);
+                await operations.Post503WithOperationResponseAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -181,7 +181,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Delete503Async( this IHttpRetry operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Delete503WithOperationResponseAsync(booleanValue, cancellationToken).ConfigureAwait(false);
+                await operations.Delete503WithOperationResponseAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -212,7 +212,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Put504Async( this IHttpRetry operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Put504WithOperationResponseAsync(booleanValue, cancellationToken).ConfigureAwait(false);
+                await operations.Put504WithOperationResponseAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -243,7 +243,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Patch504Async( this IHttpRetry operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Patch504WithOperationResponseAsync(booleanValue, cancellationToken).ConfigureAwait(false);
+                await operations.Patch504WithOperationResponseAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
 
     }

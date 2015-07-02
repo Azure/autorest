@@ -32,7 +32,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// </param>
             public static async Task<double?> GetNullAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<double?> result = await operations.GetNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<double?> result = await operations.GetNullWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -58,7 +58,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// </param>
             public static async Task<double?> GetInvalidFloatAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<double?> result = await operations.GetInvalidFloatWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<double?> result = await operations.GetInvalidFloatWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -84,7 +84,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// </param>
             public static async Task<double?> GetInvalidDoubleAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<double?> result = await operations.GetInvalidDoubleWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<double?> result = await operations.GetInvalidDoubleWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -114,7 +114,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// </param>
             public static async Task PutBigFloatAsync( this INumber operations, double? numberBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutBigFloatWithOperationResponseAsync(numberBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutBigFloatWithOperationResponseAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -139,7 +139,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// </param>
             public static async Task<double?> GetBigFloatAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<double?> result = await operations.GetBigFloatWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<double?> result = await operations.GetBigFloatWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -169,7 +169,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// </param>
             public static async Task PutBigDoubleAsync( this INumber operations, double? numberBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutBigDoubleWithOperationResponseAsync(numberBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutBigDoubleWithOperationResponseAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -194,7 +194,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// </param>
             public static async Task<double?> GetBigDoubleAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<double?> result = await operations.GetBigDoubleWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<double?> result = await operations.GetBigDoubleWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -224,7 +224,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// </param>
             public static async Task PutBigDoublePositiveDecimalAsync( this INumber operations, double? numberBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutBigDoublePositiveDecimalWithOperationResponseAsync(numberBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutBigDoublePositiveDecimalWithOperationResponseAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -249,7 +249,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// </param>
             public static async Task<double?> GetBigDoublePositiveDecimalAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<double?> result = await operations.GetBigDoublePositiveDecimalWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<double?> result = await operations.GetBigDoublePositiveDecimalWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -279,7 +279,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// </param>
             public static async Task PutBigDoubleNegativeDecimalAsync( this INumber operations, double? numberBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutBigDoubleNegativeDecimalWithOperationResponseAsync(numberBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutBigDoubleNegativeDecimalWithOperationResponseAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -304,7 +304,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// </param>
             public static async Task<double?> GetBigDoubleNegativeDecimalAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<double?> result = await operations.GetBigDoubleNegativeDecimalWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<double?> result = await operations.GetBigDoubleNegativeDecimalWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -334,7 +334,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// </param>
             public static async Task PutSmallFloatAsync( this INumber operations, double? numberBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutSmallFloatWithOperationResponseAsync(numberBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutSmallFloatWithOperationResponseAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -359,7 +359,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// </param>
             public static async Task<double?> GetSmallFloatAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<double?> result = await operations.GetSmallFloatWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<double?> result = await operations.GetSmallFloatWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -389,7 +389,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// </param>
             public static async Task PutSmallDoubleAsync( this INumber operations, double? numberBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutSmallDoubleWithOperationResponseAsync(numberBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutSmallDoubleWithOperationResponseAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -414,7 +414,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// </param>
             public static async Task<double?> GetSmallDoubleAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<double?> result = await operations.GetSmallDoubleWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<double?> result = await operations.GetSmallDoubleWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

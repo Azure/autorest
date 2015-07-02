@@ -38,7 +38,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// </param>
             public static async Task<Error> PostRequiredIntegerParameterAsync( this IExplicitModel operations, int? bodyParameter, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<Error> result = await operations.PostRequiredIntegerParameterWithOperationResponseAsync(bodyParameter, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<Error> result = await operations.PostRequiredIntegerParameterWithOperationResponseAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -68,7 +68,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// </param>
             public static async Task PostOptionalIntegerParameterAsync( this IExplicitModel operations, int? bodyParameter = default(int?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostOptionalIntegerParameterWithOperationResponseAsync(bodyParameter, cancellationToken).ConfigureAwait(false);
+                await operations.PostOptionalIntegerParameterWithOperationResponseAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -101,7 +101,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// </param>
             public static async Task<Error> PostRequiredIntegerPropertyAsync( this IExplicitModel operations, IntWrapper bodyParameter, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<Error> result = await operations.PostRequiredIntegerPropertyWithOperationResponseAsync(bodyParameter, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<Error> result = await operations.PostRequiredIntegerPropertyWithOperationResponseAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -133,7 +133,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// </param>
             public static async Task PostOptionalIntegerPropertyAsync( this IExplicitModel operations, IntOptionalWrapper bodyParameter = default(IntOptionalWrapper), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostOptionalIntegerPropertyWithOperationResponseAsync(bodyParameter, cancellationToken).ConfigureAwait(false);
+                await operations.PostOptionalIntegerPropertyWithOperationResponseAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -164,7 +164,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// </param>
             public static async Task<Error> PostRequiredIntegerHeaderAsync( this IExplicitModel operations, int? headerParameter, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<Error> result = await operations.PostRequiredIntegerHeaderWithOperationResponseAsync(headerParameter, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<Error> result = await operations.PostRequiredIntegerHeaderWithOperationResponseAsync(headerParameter, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -196,7 +196,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// </param>
             public static async Task PostOptionalIntegerHeaderAsync( this IExplicitModel operations, int? headerParameter = default(int?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostOptionalIntegerHeaderWithOperationResponseAsync(headerParameter, cancellationToken).ConfigureAwait(false);
+                await operations.PostOptionalIntegerHeaderWithOperationResponseAsync(headerParameter, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -227,7 +227,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// </param>
             public static async Task<Error> PostRequiredStringParameterAsync( this IExplicitModel operations, string bodyParameter, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<Error> result = await operations.PostRequiredStringParameterWithOperationResponseAsync(bodyParameter, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<Error> result = await operations.PostRequiredStringParameterWithOperationResponseAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -257,7 +257,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// </param>
             public static async Task PostOptionalStringParameterAsync( this IExplicitModel operations, string bodyParameter = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostOptionalStringParameterWithOperationResponseAsync(bodyParameter, cancellationToken).ConfigureAwait(false);
+                await operations.PostOptionalStringParameterWithOperationResponseAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -290,7 +290,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// </param>
             public static async Task<Error> PostRequiredStringPropertyAsync( this IExplicitModel operations, StringWrapper bodyParameter, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<Error> result = await operations.PostRequiredStringPropertyWithOperationResponseAsync(bodyParameter, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<Error> result = await operations.PostRequiredStringPropertyWithOperationResponseAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -322,7 +322,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// </param>
             public static async Task PostOptionalStringPropertyAsync( this IExplicitModel operations, StringOptionalWrapper bodyParameter = default(StringOptionalWrapper), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostOptionalStringPropertyWithOperationResponseAsync(bodyParameter, cancellationToken).ConfigureAwait(false);
+                await operations.PostOptionalStringPropertyWithOperationResponseAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -353,7 +353,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// </param>
             public static async Task<Error> PostRequiredStringHeaderAsync( this IExplicitModel operations, string headerParameter, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<Error> result = await operations.PostRequiredStringHeaderWithOperationResponseAsync(headerParameter, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<Error> result = await operations.PostRequiredStringHeaderWithOperationResponseAsync(headerParameter, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -385,7 +385,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// </param>
             public static async Task PostOptionalStringHeaderAsync( this IExplicitModel operations, string bodyParameter = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostOptionalStringHeaderWithOperationResponseAsync(bodyParameter, cancellationToken).ConfigureAwait(false);
+                await operations.PostOptionalStringHeaderWithOperationResponseAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -416,7 +416,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// </param>
             public static async Task<Error> PostRequiredClassParameterAsync( this IExplicitModel operations, Product bodyParameter, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<Error> result = await operations.PostRequiredClassParameterWithOperationResponseAsync(bodyParameter, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<Error> result = await operations.PostRequiredClassParameterWithOperationResponseAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -446,7 +446,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// </param>
             public static async Task PostOptionalClassParameterAsync( this IExplicitModel operations, Product bodyParameter = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostOptionalClassParameterWithOperationResponseAsync(bodyParameter, cancellationToken).ConfigureAwait(false);
+                await operations.PostOptionalClassParameterWithOperationResponseAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -479,7 +479,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// </param>
             public static async Task<Error> PostRequiredClassPropertyAsync( this IExplicitModel operations, ClassWrapper bodyParameter, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<Error> result = await operations.PostRequiredClassPropertyWithOperationResponseAsync(bodyParameter, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<Error> result = await operations.PostRequiredClassPropertyWithOperationResponseAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -511,7 +511,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// </param>
             public static async Task PostOptionalClassPropertyAsync( this IExplicitModel operations, ClassOptionalWrapper bodyParameter = default(ClassOptionalWrapper), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostOptionalClassPropertyWithOperationResponseAsync(bodyParameter, cancellationToken).ConfigureAwait(false);
+                await operations.PostOptionalClassPropertyWithOperationResponseAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -542,7 +542,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// </param>
             public static async Task<Error> PostRequiredArrayParameterAsync( this IExplicitModel operations, IList<string> bodyParameter, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<Error> result = await operations.PostRequiredArrayParameterWithOperationResponseAsync(bodyParameter, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<Error> result = await operations.PostRequiredArrayParameterWithOperationResponseAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -572,7 +572,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// </param>
             public static async Task PostOptionalArrayParameterAsync( this IExplicitModel operations, IList<string> bodyParameter = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostOptionalArrayParameterWithOperationResponseAsync(bodyParameter, cancellationToken).ConfigureAwait(false);
+                await operations.PostOptionalArrayParameterWithOperationResponseAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -605,7 +605,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// </param>
             public static async Task<Error> PostRequiredArrayPropertyAsync( this IExplicitModel operations, ArrayWrapper bodyParameter, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<Error> result = await operations.PostRequiredArrayPropertyWithOperationResponseAsync(bodyParameter, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<Error> result = await operations.PostRequiredArrayPropertyWithOperationResponseAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -637,7 +637,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// </param>
             public static async Task PostOptionalArrayPropertyAsync( this IExplicitModel operations, ArrayOptionalWrapper bodyParameter = default(ArrayOptionalWrapper), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostOptionalArrayPropertyWithOperationResponseAsync(bodyParameter, cancellationToken).ConfigureAwait(false);
+                await operations.PostOptionalArrayPropertyWithOperationResponseAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -668,7 +668,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// </param>
             public static async Task<Error> PostRequiredArrayHeaderAsync( this IExplicitModel operations, IList<string> headerParameter, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<Error> result = await operations.PostRequiredArrayHeaderWithOperationResponseAsync(headerParameter, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<Error> result = await operations.PostRequiredArrayHeaderWithOperationResponseAsync(headerParameter, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -700,7 +700,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// </param>
             public static async Task PostOptionalArrayHeaderAsync( this IExplicitModel operations, IList<string> headerParameter = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostOptionalArrayHeaderWithOperationResponseAsync(headerParameter, cancellationToken).ConfigureAwait(false);
+                await operations.PostOptionalArrayHeaderWithOperationResponseAsync(headerParameter, null, cancellationToken).ConfigureAwait(false);
             }
 
     }

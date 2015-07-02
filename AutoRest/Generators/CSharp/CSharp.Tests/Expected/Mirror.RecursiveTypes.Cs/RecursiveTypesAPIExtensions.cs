@@ -62,7 +62,7 @@ namespace Fixtures.MirrorRecursiveTypes
             /// </param>
             public static async Task<Product> PostAsync( this IRecursiveTypesAPI operations, string subscriptionId, string resourceGroupName, string apiVersion, Product body = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<Product> result = await operations.PostWithOperationResponseAsync(subscriptionId, resourceGroupName, apiVersion, body, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<Product> result = await operations.PostWithOperationResponseAsync(subscriptionId, resourceGroupName, apiVersion, body, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

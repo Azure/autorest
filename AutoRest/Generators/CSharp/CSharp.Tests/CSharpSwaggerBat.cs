@@ -1127,6 +1127,16 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 // POST response/existingkey
                 response = client.Header.ResponseProtectedKeyWithOperationResponseAsync().Result;
                 Assert.False(response.Response.Headers.Any(header => header.Key == "Content-Type"));
+
+                var customHeader = new Dictionary<string, List<string>>
+                {
+                    {
+                        "x-ms-client-request-id", new List<string> {"9C4D50EE-2D56-4CD3-8152-34347DC9F2B0"}
+                    }
+                };
+                
+                Assert.Equal(HttpStatusCode.OK, client.Header.CustomRequestIdWithOperationResponseAsync(customHeader).Result.Response.StatusCode);
+
             }
         }
 

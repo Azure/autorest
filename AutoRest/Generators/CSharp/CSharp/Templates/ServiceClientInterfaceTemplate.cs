@@ -170,45 +170,46 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line default
 #line hidden
 
-            WriteLiteral("        /// <param name=\'cancellationToken\'>\r\n        /// Cancellation token.\r\n  " +
-"      /// </param>\r\n        Task<");
-#line 48 "ServiceClientInterfaceTemplate.cshtml"
+            WriteLiteral("        /// <param name=\'customHeaders\'>\r\n        /// Headers that will be added " +
+"to request.\r\n        /// </param>        \r\n        /// <param name=\'cancellation" +
+"Token\'>\r\n        /// Cancellation token.\r\n        /// </param>\r\n        Task<");
+#line 51 "ServiceClientInterfaceTemplate.cshtml"
            Write(method.OperationResponseReturnTypeString);
 
 #line default
 #line hidden
             WriteLiteral("> ");
-#line 48 "ServiceClientInterfaceTemplate.cshtml"
+#line 51 "ServiceClientInterfaceTemplate.cshtml"
                                                         Write(method.Name);
 
 #line default
 #line hidden
             WriteLiteral("WithOperationResponseAsync(");
-#line 48 "ServiceClientInterfaceTemplate.cshtml"
-                                                                                                Write(method.AsyncMethodParameterDeclaration);
+#line 51 "ServiceClientInterfaceTemplate.cshtml"
+                                                                                                 Write(method.GetAsyncMethodParameterDeclaration(true));
 
 #line default
 #line hidden
             WriteLiteral(");\r\n");
-#line 49 "ServiceClientInterfaceTemplate.cshtml"
+#line 52 "ServiceClientInterfaceTemplate.cshtml"
         
 
 #line default
 #line hidden
 
-#line 49 "ServiceClientInterfaceTemplate.cshtml"
+#line 52 "ServiceClientInterfaceTemplate.cshtml"
    Write(EmptyLine);
 
 #line default
 #line hidden
-#line 49 "ServiceClientInterfaceTemplate.cshtml"
+#line 52 "ServiceClientInterfaceTemplate.cshtml"
                   
 
 #line default
 #line hidden
 
             WriteLiteral("        \r\n");
-#line 51 "ServiceClientInterfaceTemplate.cshtml"
+#line 54 "ServiceClientInterfaceTemplate.cshtml"
     }
 
 #line default

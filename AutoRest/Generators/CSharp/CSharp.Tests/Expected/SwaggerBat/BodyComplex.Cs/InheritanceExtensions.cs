@@ -32,7 +32,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// </param>
             public static async Task<Siamese> GetValidAsync( this IInheritance operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<Siamese> result = await operations.GetValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<Siamese> result = await operations.GetValidWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -70,7 +70,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// </param>
             public static async Task PutValidAsync( this IInheritance operations, Siamese complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutValidWithOperationResponseAsync(complexBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutValidWithOperationResponseAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
 
     }

@@ -45,7 +45,7 @@ foreach (var parameter in Model.Parameters)
 @:/// <param name='cancellationToken'>
 @:/// Cancellation token.
 @:/// </param>
-@:public static async @Model.TaskExtensionReturnTypeString @(Model.Name)Async( @Model.GetExtensionParameters(Model.AsyncMethodParameterDeclaration))
+@:public static async @Model.TaskExtensionReturnTypeString @(Model.Name)Async( @Model.GetExtensionParameters(Model.GetAsyncMethodParameterDeclaration()))
 @:{
     if (Model.ReturnType != null)
     {

@@ -34,7 +34,7 @@ namespace Fixtures.SwaggerBatBodyString
             /// </param>
             public static async Task<Colors?> GetNotExpandableAsync( this IEnumModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<Colors?> result = await operations.GetNotExpandableWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<Colors?> result = await operations.GetNotExpandableWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -70,7 +70,7 @@ namespace Fixtures.SwaggerBatBodyString
             /// </param>
             public static async Task PutNotExpandableAsync( this IEnumModel operations, Colors? stringBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutNotExpandableWithOperationResponseAsync(stringBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutNotExpandableWithOperationResponseAsync(stringBody, null, cancellationToken).ConfigureAwait(false);
             }
 
     }

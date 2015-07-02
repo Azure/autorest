@@ -32,7 +32,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Head200Async( this IHttpSuccess operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Head200WithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                await operations.Head200WithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -57,7 +57,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task<bool?> Get200Async( this IHttpSuccess operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<bool?> result = await operations.Get200WithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<bool?> result = await operations.Get200WithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -89,7 +89,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Put200Async( this IHttpSuccess operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Put200WithOperationResponseAsync(booleanValue, cancellationToken).ConfigureAwait(false);
+                await operations.Put200WithOperationResponseAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -120,7 +120,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Patch200Async( this IHttpSuccess operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Patch200WithOperationResponseAsync(booleanValue, cancellationToken).ConfigureAwait(false);
+                await operations.Patch200WithOperationResponseAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -151,7 +151,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Post200Async( this IHttpSuccess operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Post200WithOperationResponseAsync(booleanValue, cancellationToken).ConfigureAwait(false);
+                await operations.Post200WithOperationResponseAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -182,7 +182,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Delete200Async( this IHttpSuccess operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Delete200WithOperationResponseAsync(booleanValue, cancellationToken).ConfigureAwait(false);
+                await operations.Delete200WithOperationResponseAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -213,7 +213,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Put201Async( this IHttpSuccess operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Put201WithOperationResponseAsync(booleanValue, cancellationToken).ConfigureAwait(false);
+                await operations.Put201WithOperationResponseAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -244,7 +244,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Post201Async( this IHttpSuccess operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Post201WithOperationResponseAsync(booleanValue, cancellationToken).ConfigureAwait(false);
+                await operations.Post201WithOperationResponseAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -275,7 +275,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Put202Async( this IHttpSuccess operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Put202WithOperationResponseAsync(booleanValue, cancellationToken).ConfigureAwait(false);
+                await operations.Put202WithOperationResponseAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -306,7 +306,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Patch202Async( this IHttpSuccess operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Patch202WithOperationResponseAsync(booleanValue, cancellationToken).ConfigureAwait(false);
+                await operations.Patch202WithOperationResponseAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -337,7 +337,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Post202Async( this IHttpSuccess operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Post202WithOperationResponseAsync(booleanValue, cancellationToken).ConfigureAwait(false);
+                await operations.Post202WithOperationResponseAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -368,7 +368,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Delete202Async( this IHttpSuccess operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Delete202WithOperationResponseAsync(booleanValue, cancellationToken).ConfigureAwait(false);
+                await operations.Delete202WithOperationResponseAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -393,7 +393,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Head204Async( this IHttpSuccess operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Head204WithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                await operations.Head204WithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -424,7 +424,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Put204Async( this IHttpSuccess operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Put204WithOperationResponseAsync(booleanValue, cancellationToken).ConfigureAwait(false);
+                await operations.Put204WithOperationResponseAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -455,7 +455,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Patch204Async( this IHttpSuccess operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Patch204WithOperationResponseAsync(booleanValue, cancellationToken).ConfigureAwait(false);
+                await operations.Patch204WithOperationResponseAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -486,7 +486,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Post204Async( this IHttpSuccess operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Post204WithOperationResponseAsync(booleanValue, cancellationToken).ConfigureAwait(false);
+                await operations.Post204WithOperationResponseAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -517,7 +517,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Delete204Async( this IHttpSuccess operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Delete204WithOperationResponseAsync(booleanValue, cancellationToken).ConfigureAwait(false);
+                await operations.Delete204WithOperationResponseAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -542,7 +542,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Head404Async( this IHttpSuccess operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Head404WithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                await operations.Head404WithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
     }

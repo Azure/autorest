@@ -44,7 +44,7 @@ namespace Fixtures.MirrorPolymorphic
             /// </param>
             public static async Task<Animal> CreateOrUpdatePolymorphicAnimalsAsync( this IPolymorphicAnimalStore operations, Animal animalCreateOrUpdateParameter = default(Animal), CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<Animal> result = await operations.CreateOrUpdatePolymorphicAnimalsWithOperationResponseAsync(animalCreateOrUpdateParameter, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<Animal> result = await operations.CreateOrUpdatePolymorphicAnimalsWithOperationResponseAsync(animalCreateOrUpdateParameter, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

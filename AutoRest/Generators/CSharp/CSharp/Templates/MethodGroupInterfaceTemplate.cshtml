@@ -29,10 +29,13 @@ namespace @Settings.Namespace
         @:@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())
         @:/// </param>
         }
+        @:/// <param name='customHeaders'>
+        @:/// Headers that will be added to request.
+        @:/// </param>
         @:/// <param name='cancellationToken'>
         @:/// Cancellation token.
         @:/// </param>
-        @:Task<@method.OperationResponseReturnTypeString> @(method.Name)WithOperationResponseAsync(@method.AsyncMethodParameterDeclaration);
+        @:Task<@method.OperationResponseReturnTypeString> @(method.Name)WithOperationResponseAsync(@(method.GetAsyncMethodParameterDeclaration(true)));
     }
     }
 }

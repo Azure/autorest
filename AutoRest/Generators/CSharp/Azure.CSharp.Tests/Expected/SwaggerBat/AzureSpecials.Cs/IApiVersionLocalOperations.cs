@@ -22,10 +22,13 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// This should appear as a method parameter, use value '2.0'.
         /// Possible values for this parameter include: '2.0'
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> GetMethodLocalValidWithOperationResponseAsync(string apiVersion, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> GetMethodLocalValidWithOperationResponseAsync(string apiVersion, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get method with api-version modeled in the method.  pass in
         /// api-version = null to succeed
@@ -34,10 +37,13 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// This should appear as a method parameter, use value null, this
         /// should result in no serialized parameter
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> GetMethodLocalNullWithOperationResponseAsync(string apiVersion = default(string), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> GetMethodLocalNullWithOperationResponseAsync(string apiVersion = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get method with api-version modeled in the method.  pass in
         /// api-version = '2.0' to succeed
@@ -46,10 +52,13 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// This should appear as a method parameter, use value '2.0'.
         /// Possible values for this parameter include: '2.0'
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> GetPathLocalValidWithOperationResponseAsync(string apiVersion, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> GetPathLocalValidWithOperationResponseAsync(string apiVersion, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get method with api-version modeled in the method.  pass in
         /// api-version = '2.0' to succeed
@@ -58,9 +67,12 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// The api version, which appears in the query, the value is always
         /// '2.0'. Possible values for this parameter include: '2.0'
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> GetSwaggerLocalValidWithOperationResponseAsync(string apiVersion, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> GetSwaggerLocalValidWithOperationResponseAsync(string apiVersion, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

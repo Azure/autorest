@@ -25,10 +25,13 @@ namespace Fixtures.MirrorSequences
         /// <param name='pets'>
         /// Pets to add to the store
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>        
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<IList<Pet>>> AddPetWithOperationResponseAsync(IList<Pet> pets, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<IList<Pet>>> AddPetWithOperationResponseAsync(IList<Pet> pets, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Adds new pet stylesin the store.  Duplicates are allowed
@@ -36,10 +39,13 @@ namespace Fixtures.MirrorSequences
         /// <param name='petStyle'>
         /// Pet style to add to the store
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>        
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<IList<int?>>> AddPetStylesWithOperationResponseAsync(IList<int?> petStyle, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<IList<int?>>> AddPetStylesWithOperationResponseAsync(IList<int?> petStyle, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Updates new pet stylesin the store.  Duplicates are allowed
@@ -47,10 +53,13 @@ namespace Fixtures.MirrorSequences
         /// <param name='petStyle'>
         /// Pet style to add to the store
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>        
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<IList<int?>>> UpdatePetStylesWithOperationResponseAsync(IList<int?> petStyle, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<IList<int?>>> UpdatePetStylesWithOperationResponseAsync(IList<int?> petStyle, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
     }
 }

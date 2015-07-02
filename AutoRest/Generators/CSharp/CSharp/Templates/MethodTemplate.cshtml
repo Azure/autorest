@@ -13,10 +13,13 @@
 @WrapComment("/// ", parameter.Documentation.EscapeXmlComment())@:
 @:/// </param>    
 }
+/// <param name='customHeaders'>
+/// Headers that will be added to request.
+/// </param>
 /// <param name='cancellationToken'>
 /// Cancellation token.
 /// </param>
-public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithOperationResponseAsync(@(Model.AsyncMethodParameterDeclaration))
+public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithOperationResponseAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
     @foreach (var parameter in Model.LocalParameters)
     {
@@ -73,6 +76,14 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithO
     @:    httpRequest.Headers.Add("@(parameter.SerializedName)", @parameter.Type.ToString(Model.ClientReference, parameter.Name));
     @:}
     }
+    if (customHeaders != null)
+    {
+        foreach(var header in customHeaders)
+        {
+            httpRequest.Headers.Add(header.Key, header.Value);
+        }
+    }
+    @EmptyLine
     @if (Settings.AddCredentials)
     {
         <text>

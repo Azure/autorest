@@ -32,7 +32,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task<bool?> GetEmptyErrorAsync( this IHttpFailure operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<bool?> result = await operations.GetEmptyErrorWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<bool?> result = await operations.GetEmptyErrorWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

@@ -32,7 +32,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// </param>
             public static async Task<DateTime?> GetNullAsync( this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<DateTime?> result = await operations.GetNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<DateTime?> result = await operations.GetNullWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -58,7 +58,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// </param>
             public static async Task<DateTime?> GetInvalidAsync( this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<DateTime?> result = await operations.GetInvalidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<DateTime?> result = await operations.GetInvalidWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -84,7 +84,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// </param>
             public static async Task<DateTime?> GetOverflowAsync( this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<DateTime?> result = await operations.GetOverflowWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<DateTime?> result = await operations.GetOverflowWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -110,7 +110,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// </param>
             public static async Task<DateTime?> GetUnderflowAsync( this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<DateTime?> result = await operations.GetUnderflowWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<DateTime?> result = await operations.GetUnderflowWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -140,7 +140,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// </param>
             public static async Task PutUtcMaxDateTimeAsync( this IDatetime operations, DateTime? datetimeBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutUtcMaxDateTimeWithOperationResponseAsync(datetimeBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutUtcMaxDateTimeWithOperationResponseAsync(datetimeBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -165,7 +165,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// </param>
             public static async Task<DateTime?> GetUtcLowercaseMaxDateTimeAsync( this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<DateTime?> result = await operations.GetUtcLowercaseMaxDateTimeWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<DateTime?> result = await operations.GetUtcLowercaseMaxDateTimeWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -191,7 +191,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// </param>
             public static async Task<DateTime?> GetUtcUppercaseMaxDateTimeAsync( this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<DateTime?> result = await operations.GetUtcUppercaseMaxDateTimeWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<DateTime?> result = await operations.GetUtcUppercaseMaxDateTimeWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -223,7 +223,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// </param>
             public static async Task PutLocalPositiveOffsetMaxDateTimeAsync( this IDatetime operations, DateTime? datetimeBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutLocalPositiveOffsetMaxDateTimeWithOperationResponseAsync(datetimeBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutLocalPositiveOffsetMaxDateTimeWithOperationResponseAsync(datetimeBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -250,7 +250,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// </param>
             public static async Task<DateTime?> GetLocalPositiveOffsetLowercaseMaxDateTimeAsync( this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<DateTime?> result = await operations.GetLocalPositiveOffsetLowercaseMaxDateTimeWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<DateTime?> result = await operations.GetLocalPositiveOffsetLowercaseMaxDateTimeWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -278,7 +278,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// </param>
             public static async Task<DateTime?> GetLocalPositiveOffsetUppercaseMaxDateTimeAsync( this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<DateTime?> result = await operations.GetLocalPositiveOffsetUppercaseMaxDateTimeWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<DateTime?> result = await operations.GetLocalPositiveOffsetUppercaseMaxDateTimeWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -310,7 +310,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// </param>
             public static async Task PutLocalNegativeOffsetMaxDateTimeAsync( this IDatetime operations, DateTime? datetimeBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutLocalNegativeOffsetMaxDateTimeWithOperationResponseAsync(datetimeBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutLocalNegativeOffsetMaxDateTimeWithOperationResponseAsync(datetimeBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -337,7 +337,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// </param>
             public static async Task<DateTime?> GetLocalNegativeOffsetUppercaseMaxDateTimeAsync( this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<DateTime?> result = await operations.GetLocalNegativeOffsetUppercaseMaxDateTimeWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<DateTime?> result = await operations.GetLocalNegativeOffsetUppercaseMaxDateTimeWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -365,7 +365,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// </param>
             public static async Task<DateTime?> GetLocalNegativeOffsetLowercaseMaxDateTimeAsync( this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<DateTime?> result = await operations.GetLocalNegativeOffsetLowercaseMaxDateTimeWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<DateTime?> result = await operations.GetLocalNegativeOffsetLowercaseMaxDateTimeWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -395,7 +395,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// </param>
             public static async Task PutUtcMinDateTimeAsync( this IDatetime operations, DateTime? datetimeBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutUtcMinDateTimeWithOperationResponseAsync(datetimeBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutUtcMinDateTimeWithOperationResponseAsync(datetimeBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -420,7 +420,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// </param>
             public static async Task<DateTime?> GetUtcMinDateTimeAsync( this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<DateTime?> result = await operations.GetUtcMinDateTimeWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<DateTime?> result = await operations.GetUtcMinDateTimeWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -450,7 +450,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// </param>
             public static async Task PutLocalPositiveOffsetMinDateTimeAsync( this IDatetime operations, DateTime? datetimeBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutLocalPositiveOffsetMinDateTimeWithOperationResponseAsync(datetimeBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutLocalPositiveOffsetMinDateTimeWithOperationResponseAsync(datetimeBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -475,7 +475,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// </param>
             public static async Task<DateTime?> GetLocalPositiveOffsetMinDateTimeAsync( this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<DateTime?> result = await operations.GetLocalPositiveOffsetMinDateTimeWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<DateTime?> result = await operations.GetLocalPositiveOffsetMinDateTimeWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -505,7 +505,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// </param>
             public static async Task PutLocalNegativeOffsetMinDateTimeAsync( this IDatetime operations, DateTime? datetimeBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutLocalNegativeOffsetMinDateTimeWithOperationResponseAsync(datetimeBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutLocalNegativeOffsetMinDateTimeWithOperationResponseAsync(datetimeBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -530,7 +530,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// </param>
             public static async Task<DateTime?> GetLocalNegativeOffsetMinDateTimeAsync( this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<DateTime?> result = await operations.GetLocalNegativeOffsetMinDateTimeWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<DateTime?> result = await operations.GetLocalNegativeOffsetMinDateTimeWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

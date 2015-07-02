@@ -231,7 +231,7 @@ Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 #line hidden
             WriteLiteral("Async( ");
 #line 48 "ExtensionMethodTemplate.cshtml"
-                                                                          Write(Model.GetExtensionParameters(Model.AsyncMethodParameterDeclaration));
+                                                                          Write(Model.GetExtensionParameters(Model.GetAsyncMethodParameterDeclaration()));
 
 #line default
 #line hidden
