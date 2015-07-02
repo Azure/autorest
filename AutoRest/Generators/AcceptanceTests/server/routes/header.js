@@ -29,7 +29,7 @@ var header = function(coverage, optionalCoverage) {
     
     router.post('/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0', function(req, res, next) {
         if (req.get("x-ms-client-request-id").toLowerCase() === "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0".toLowerCase()) {
-            coverage['CustomHeaderInRequest']++;
+            optionalCoverage['CustomHeaderInRequest']++;
             res.status(200).end();
         } else {
             utils.send400(res, next, "Did not like client request id \"" + req.get("x-ms-client-request-id"));

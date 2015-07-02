@@ -49,12 +49,12 @@ foreach (var parameter in Model.Parameters)
 @:{
     if (Model.ReturnType != null)
     {
-    @:@Model.OperationResponseReturnTypeString result = await operations.@(Model.Name)WithOperationResponseAsync(@(Model.AsyncMethodInvocationArgs)).ConfigureAwait(false);
+    @:@Model.OperationResponseReturnTypeString result = await operations.@(Model.Name)WithOperationResponseAsync(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false);
     @:return result.Body;
     }
     else
     {
-    @:await operations.@(Model.Name)WithOperationResponseAsync(@(Model.AsyncMethodInvocationArgs)).ConfigureAwait(false);
+    @:await operations.@(Model.Name)WithOperationResponseAsync(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false);
     }
 @:}
 @:

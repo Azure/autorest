@@ -257,7 +257,7 @@ Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 #line hidden
             WriteLiteral("WithOperationResponseAsync(");
 #line 52 "ExtensionMethodTemplate.cshtml"
-                                                                                                             Write(Model.AsyncMethodInvocationArgs);
+                                                                                                             Write(Model.GetAsyncMethodInvocationArgs("null"));
 
 #line default
 #line hidden
@@ -278,7 +278,7 @@ Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 #line hidden
             WriteLiteral("WithOperationResponseAsync(");
 #line 57 "ExtensionMethodTemplate.cshtml"
-                                                           Write(Model.AsyncMethodInvocationArgs);
+                                                           Write(Model.GetAsyncMethodInvocationArgs("null"));
 
 #line default
 #line hidden

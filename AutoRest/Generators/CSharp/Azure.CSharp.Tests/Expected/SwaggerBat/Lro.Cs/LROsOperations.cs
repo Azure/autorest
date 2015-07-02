@@ -49,9 +49,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send Request
             AzureOperationResponse<Product> response = await BeginPut200SucceededWithOperationResponseAsync(
-                product, null, cancellationToken);
+                product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => Get200SucceededWithOperationResponseAsync(cancellationToken: cancellationToken),
+                () => Get200SucceededWithOperationResponseAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                customHeaders, 
                 cancellationToken);
         }
 
@@ -272,9 +273,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send Request
             AzureOperationResponse<Product> response = await BeginPut200SucceededNoStateWithOperationResponseAsync(
-                product, null, cancellationToken);
+                product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => Get200SucceededNoStateWithOperationResponseAsync(cancellationToken: cancellationToken),
+                () => Get200SucceededNoStateWithOperationResponseAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                customHeaders, 
                 cancellationToken);
         }
 
@@ -496,9 +498,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send Request
             AzureOperationResponse<Product> response = await BeginPut202Retry200WithOperationResponseAsync(
-                product, null, cancellationToken);
+                product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetPut202Retry200WithOperationResponseAsync(cancellationToken: cancellationToken),
+                () => GetPut202Retry200WithOperationResponseAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                customHeaders, 
                 cancellationToken);
         }
 
@@ -722,9 +725,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send Request
             AzureOperationResponse<Product> response = await BeginPut201CreatingSucceeded200WithOperationResponseAsync(
-                product, null, cancellationToken);
+                product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => Get201CreatingSucceeded200PollingWithOperationResponseAsync(cancellationToken: cancellationToken),
+                () => Get201CreatingSucceeded200PollingWithOperationResponseAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                customHeaders, 
                 cancellationToken);
         }
 
@@ -954,9 +958,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send Request
             AzureOperationResponse<Product> response = await BeginPut200UpdatingSucceeded204WithOperationResponseAsync(
-                product, null, cancellationToken);
+                product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => Get200CreatingSucceeded200PollWithOperationResponseAsync(cancellationToken: cancellationToken),
+                () => Get200CreatingSucceeded200PollWithOperationResponseAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                customHeaders, 
                 cancellationToken);
         }
 
@@ -1180,9 +1185,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send Request
             AzureOperationResponse<Product> response = await BeginPut201CreatingFailed200WithOperationResponseAsync(
-                product, null, cancellationToken);
+                product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => Get201CreatingFailed200PollingWithOperationResponseAsync(cancellationToken: cancellationToken),
+                () => Get201CreatingFailed200PollingWithOperationResponseAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                customHeaders, 
                 cancellationToken);
         }
 
@@ -1412,9 +1418,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send Request
             AzureOperationResponse<Product> response = await BeginPut200Acceptedcanceled200WithOperationResponseAsync(
-                product, null, cancellationToken);
+                product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => Get200Acceptedcanceled200PollWithOperationResponseAsync(cancellationToken: cancellationToken),
+                () => Get200Acceptedcanceled200PollWithOperationResponseAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                customHeaders, 
                 cancellationToken);
         }
 
@@ -1637,9 +1644,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send Request
             AzureOperationResponse<Product> response = await BeginPutNoHeaderInRetryWithOperationResponseAsync(
-                product, null, cancellationToken);
+                product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetPutNoHeaderInRetryWithOperationResponseAsync(cancellationToken: cancellationToken),
+                () => GetPutNoHeaderInRetryWithOperationResponseAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                customHeaders, 
                 cancellationToken);
         }
 
@@ -1862,9 +1870,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send Request
             AzureOperationResponse<Product> response = await BeginPutAsyncRetrySucceededWithOperationResponseAsync(
-                product, null, cancellationToken);
+                product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetAsyncRetrySucceededWithOperationResponseAsync(cancellationToken: cancellationToken),
+                () => GetAsyncRetrySucceededWithOperationResponseAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                customHeaders, 
                 cancellationToken);
         }
 
@@ -2088,9 +2097,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send Request
             AzureOperationResponse<Product> response = await BeginPutAsyncNoRetrySucceededWithOperationResponseAsync(
-                product, null, cancellationToken);
+                product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetAsyncNoRetrySucceededWithOperationResponseAsync(cancellationToken: cancellationToken),
+                () => GetAsyncNoRetrySucceededWithOperationResponseAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                customHeaders, 
                 cancellationToken);
         }
 
@@ -2314,9 +2324,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send Request
             AzureOperationResponse<Product> response = await BeginPutAsyncRetryFailedWithOperationResponseAsync(
-                product, null, cancellationToken);
+                product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetAsyncRetryFailedWithOperationResponseAsync(cancellationToken: cancellationToken),
+                () => GetAsyncRetryFailedWithOperationResponseAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                customHeaders, 
                 cancellationToken);
         }
 
@@ -2540,9 +2551,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send Request
             AzureOperationResponse<Product> response = await BeginPutAsyncNoRetrycanceledWithOperationResponseAsync(
-                product, null, cancellationToken);
+                product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetAsyncNoRetrycanceledWithOperationResponseAsync(cancellationToken: cancellationToken),
+                () => GetAsyncNoRetrycanceledWithOperationResponseAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                customHeaders, 
                 cancellationToken);
         }
 
@@ -2766,9 +2778,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send Request
             AzureOperationResponse<Product> response = await BeginPutAsyncNoHeaderInRetryWithOperationResponseAsync(
-                product, null, cancellationToken);
+                product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetPutAsyncNoHeaderInRetryWithOperationResponseAsync(cancellationToken: cancellationToken),
+                () => GetPutAsyncNoHeaderInRetryWithOperationResponseAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                customHeaders, 
                 cancellationToken);
         }
 
@@ -2988,9 +3001,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send Request
             AzureOperationResponse<Sku> response = await BeginPutNonResourceWithOperationResponseAsync(
-                sku, null, cancellationToken);
+                sku, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Sku>(response, 
-                () => GetNonResourceWithOperationResponseAsync(cancellationToken: cancellationToken),
+                () => GetNonResourceWithOperationResponseAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                customHeaders, 
                 cancellationToken);
         }
 
@@ -3208,9 +3222,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send Request
             AzureOperationResponse<Sku> response = await BeginPutAsyncNonResourceWithOperationResponseAsync(
-                sku, null, cancellationToken);
+                sku, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Sku>(response, 
-                () => GetAsyncNonResourceWithOperationResponseAsync(cancellationToken: cancellationToken),
+                () => GetAsyncNonResourceWithOperationResponseAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                customHeaders, 
                 cancellationToken);
         }
 
@@ -3428,9 +3443,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send Request
             AzureOperationResponse<SubProduct> response = await BeginPutSubResourceWithOperationResponseAsync(
-                product, null, cancellationToken);
+                product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<SubProduct>(response, 
-                () => GetSubResourceWithOperationResponseAsync(cancellationToken: cancellationToken),
+                () => GetSubResourceWithOperationResponseAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                customHeaders, 
                 cancellationToken);
         }
 
@@ -3648,9 +3664,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send Request
             AzureOperationResponse<SubProduct> response = await BeginPutAsyncSubResourceWithOperationResponseAsync(
-                product, null, cancellationToken);
+                product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<SubProduct>(response, 
-                () => GetAsyncSubResourceWithOperationResponseAsync(cancellationToken: cancellationToken),
+                () => GetAsyncSubResourceWithOperationResponseAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                customHeaders, 
                 cancellationToken);
         }
 
@@ -3868,8 +3885,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send request
             AzureOperationResponse<Product> response = await BeginDeleteProvisioning202Accepted200SucceededWithOperationResponseAsync(
-                null, cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+                customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -3991,8 +4008,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send request
             AzureOperationResponse<Product> response = await BeginDeleteProvisioning202DeletingFailed200WithOperationResponseAsync(
-                null, cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+                customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -4114,8 +4131,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send request
             AzureOperationResponse<Product> response = await BeginDeleteProvisioning202Deletingcanceled200WithOperationResponseAsync(
-                null, cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+                customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -4234,8 +4251,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send request
             AzureOperationResponse response = await BeginDelete204SucceededWithOperationResponseAsync(
-                null, cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+                customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -4343,8 +4360,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send request
             AzureOperationResponse<Product> response = await BeginDelete202Retry200WithOperationResponseAsync(
-                null, cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+                customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -4459,8 +4476,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send request
             AzureOperationResponse<Product> response = await BeginDelete202NoRetry204WithOperationResponseAsync(
-                null, cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+                customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -4575,8 +4592,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send request
             AzureOperationResponse response = await BeginDeleteNoHeaderInRetryWithOperationResponseAsync(
-                null, cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+                customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -4686,8 +4703,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send request
             AzureOperationResponse response = await BeginDeleteAsyncNoHeaderInRetryWithOperationResponseAsync(
-                null, cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+                customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -4797,8 +4814,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send request
             AzureOperationResponse response = await BeginDeleteAsyncRetrySucceededWithOperationResponseAsync(
-                null, cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+                customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -4908,8 +4925,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send request
             AzureOperationResponse response = await BeginDeleteAsyncNoRetrySucceededWithOperationResponseAsync(
-                null, cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+                customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -5019,8 +5036,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send request
             AzureOperationResponse response = await BeginDeleteAsyncRetryFailedWithOperationResponseAsync(
-                null, cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+                customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -5130,8 +5147,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send request
             AzureOperationResponse response = await BeginDeleteAsyncRetrycanceledWithOperationResponseAsync(
-                null, cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+                customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -5241,8 +5258,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send request
             AzureOperationResponse<Sku> response = await BeginPost200WithPayloadWithOperationResponseAsync(
-                null, cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+                customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -5365,8 +5382,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send request
             AzureOperationResponse response = await BeginPost202Retry200WithOperationResponseAsync(
-                product, null, cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+                product, customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -5486,8 +5503,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send request
             AzureOperationResponse<Product> response = await BeginPost202NoRetry204WithOperationResponseAsync(
-                product, null, cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+                product, customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -5612,8 +5629,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send request
             AzureOperationResponse response = await BeginPostAsyncRetrySucceededWithOperationResponseAsync(
-                product, null, cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+                product, customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -5734,8 +5751,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send request
             AzureOperationResponse response = await BeginPostAsyncNoRetrySucceededWithOperationResponseAsync(
-                product, null, cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+                product, customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -5856,8 +5873,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send request
             AzureOperationResponse response = await BeginPostAsyncRetryFailedWithOperationResponseAsync(
-                product, null, cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+                product, customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -5978,8 +5995,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         {
             // Send request
             AzureOperationResponse response = await BeginPostAsyncRetrycanceledWithOperationResponseAsync(
-                product, null, cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+                product, customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>

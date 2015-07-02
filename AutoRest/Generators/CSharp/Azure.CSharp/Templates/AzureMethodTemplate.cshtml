@@ -34,9 +34,9 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithO
 {
     // Send request
     @(Model.OperationResponseReturnTypeString) response = await Begin@(Model.Name)WithOperationResponseAsync(
-        @(Model.AsyncMethodInvocationArgs));
+        @(Model.GetAsyncMethodInvocationArgs("customHeaders")));
 
-    return await @(Model.ClientReference).GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+    return await @(Model.ClientReference).GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
 }
 </text>
 }
@@ -62,10 +62,11 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithO
 {
     // Send Request
     @(Model.OperationResponseReturnTypeString) response = await Begin@(Model.Name)WithOperationResponseAsync(
-        @(Model.AsyncMethodInvocationArgs));
+        @(Model.GetAsyncMethodInvocationArgs("customHeaders")));
 
     return await @(Model.ClientReference).GetPutOperationResultAsync<@(Model.ReturnType.Name)>(response, 
         () => @(Model.GetMethod.Name)WithOperationResponseAsync(@(Model.GetMethodInvocationArgs(Model.GetMethod))),
+        customHeaders, 
         cancellationToken);
 }
 </text>

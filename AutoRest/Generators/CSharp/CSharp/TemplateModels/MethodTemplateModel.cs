@@ -115,16 +115,13 @@ namespace Microsoft.Rest.Generator.CSharp
         /// <summary>
         /// Get the invocation args for an invocation with an async method
         /// </summary>
-        public string AsyncMethodInvocationArgs
+        public string GetAsyncMethodInvocationArgs (string customHeaderReference)
         {
-            get
-            {
-                List<string> invocationParams = new List<string>();
-                LocalParameters.ForEach(p => invocationParams.Add(p.Name));
-                invocationParams.Add("null");
-                invocationParams.Add("cancellationToken");
-                return string.Join(", ", invocationParams);
-            }
+            List<string> invocationParams = new List<string>();
+            LocalParameters.ForEach(p => invocationParams.Add(p.Name));
+            invocationParams.Add(customHeaderReference);
+            invocationParams.Add("cancellationToken");
+            return string.Join(", ", invocationParams);
         }
 
         /// <summary>

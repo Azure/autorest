@@ -172,7 +172,7 @@ Write(Model.OperationResponseReturnTypeString);
 #line hidden
             WriteLiteral("WithOperationResponseAsync(\r\n        ");
 #line 37 "AzureMethodTemplate.cshtml"
-    Write(Model.AsyncMethodInvocationArgs);
+    Write(Model.GetAsyncMethodInvocationArgs("customHeaders"));
 
 #line default
 #line hidden
@@ -182,7 +182,8 @@ Write(Model.OperationResponseReturnTypeString);
 
 #line default
 #line hidden
-            WriteLiteral(".GetPostOrDeleteOperationResultAsync(response, cancellationToken);\r\n}\r\n\r\n");
+            WriteLiteral(".GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);" +
+"\r\n}\r\n\r\n");
 #line 42 "AzureMethodTemplate.cshtml"
 }
 else if (Model.HttpMethod == HttpMethod.Put)
@@ -279,7 +280,7 @@ Write(Model.OperationResponseReturnTypeString);
 #line hidden
             WriteLiteral("WithOperationResponseAsync(\r\n        ");
 #line 65 "AzureMethodTemplate.cshtml"
-    Write(Model.AsyncMethodInvocationArgs);
+    Write(Model.GetAsyncMethodInvocationArgs("customHeaders"));
 
 #line default
 #line hidden
@@ -307,8 +308,8 @@ Write(Model.OperationResponseReturnTypeString);
 
 #line default
 #line hidden
-            WriteLiteral("),\r\n        cancellationToken);\r\n}\r\n\r\n");
-#line 72 "AzureMethodTemplate.cshtml"
+            WriteLiteral("),\r\n        customHeaders, \r\n        cancellationToken);\r\n}\r\n\r\n");
+#line 73 "AzureMethodTemplate.cshtml"
 }
 
 #line default
