@@ -5,7 +5,7 @@ var assert = require('assert');
 var should = require('should');
 var url = require('url');
 
-var LogFilter = require('../lib/filters/logfilter');
+var LogFilter = require('../lib/filters/logFilter');
 
 describe('Log filter', function () {
   
