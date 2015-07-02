@@ -1,16 +1,16 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-namespace Microsoft.Rest.Generator.Azure.Ruby.Templates
+namespace AutoRest.Generator.Azure.Ruby.Templates
 {
 #line 1 "AzureMethodGroupTemplate.cshtml"
-using Microsoft.Rest.Generator.Azure.Ruby
+using AutoRest.Generator.Azure.Ruby.Templates
 
 #line default
 #line hidden
     ;
 #line 2 "AzureMethodGroupTemplate.cshtml"
-using Microsoft.Rest.Generator.Azure.Ruby.Templates
+using Microsoft.Rest.Generator.Azure.Ruby
 
 #line default
 #line hidden
@@ -97,7 +97,7 @@ Write(EmptyLine);
 
             WriteLiteral("        ");
 #line 27 "AzureMethodGroupTemplate.cshtml"
-     Write(Include(new AzureMethodTemplate(), method as AzureMethodTemplateModel));
+      Write(Include(new AzureMethodTemplate(), method as AzureMethodTemplateModel));
 
 #line default
 #line hidden

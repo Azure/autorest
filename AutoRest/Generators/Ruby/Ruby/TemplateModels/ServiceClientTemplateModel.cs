@@ -24,12 +24,17 @@ namespace Microsoft.Rest.Generator.Ruby
 
         public List<MethodTemplateModel> MethodTemplateModels { get; set; }
 
-        public string BaseType
+        public virtual string BaseType
         {
             get
             {
                 return "ClientRuntime::ServiceClient";
             }
+        }
+
+        public virtual string BaseClassParams
+        {
+            get { return ""; }
         }
 
         public string RequiredContructorParametersWithSeparator

@@ -222,7 +222,13 @@ Write(WrapComment("# ", string.Format("@param {0} {1}{2}", param.Name, param.Typ
 
 #line default
 #line hidden
-            WriteLiteral(")\r\n      super()\r\n      @base_url = base_url || \'");
+            WriteLiteral(")\r\n      super(");
+#line 44 "ServiceClientTemplate.cshtml"
+        Write(Model.BaseClassParams);
+
+#line default
+#line hidden
+            WriteLiteral(")\r\n      @base_url = base_url || \'");
 #line 45 "ServiceClientTemplate.cshtml"
                            Write(Model.BaseUrl);
 

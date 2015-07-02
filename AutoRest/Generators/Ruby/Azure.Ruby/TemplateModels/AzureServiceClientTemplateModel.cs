@@ -18,5 +18,18 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             Methods.Where(m => m.Group == null)
                 .ForEach(m => MethodTemplateModels.Add(new AzureMethodTemplateModel(m, serviceClient)));
         }
+
+        public override string BaseType
+        {
+            get
+            {
+                return "ClientRuntimeAzure::AzureServiceClient";
+            }
+        }
+
+        public override string BaseClassParams
+        {
+            get { return "credentials, nil"; }
+        }
     }
 }

@@ -197,7 +197,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
 
             if (model != null && model.Properties.Any())
             {
-                return string.Format("{0}.validate", valueReference);
+                return string.Format("{0}.validate unless {0}.nil?", valueReference);
             }
             
             if (sequence != null || dictionary != null)

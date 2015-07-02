@@ -2,9 +2,9 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Threading.Tasks;
+using AutoRest.Generator.Azure.Ruby.Templates;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Ruby;
-using Microsoft.Rest.Generator.Azure.Ruby.Templates;
 using Microsoft.Rest.Generator.Ruby.Templates;
 
 namespace Microsoft.Rest.Generator.Azure.Ruby
@@ -60,7 +60,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             // Service client
             var serviceClientTemplate = new ServiceClientTemplate
             {
-                Model = new ServiceClientTemplateModel(serviceClient),
+                Model = new AzureServiceClientTemplateModel(serviceClient),
             };
             await Write(serviceClientTemplate, RubyCodeNamingFramework.UnderscoreCase(serviceClient.Name) + ImplementationFileExtension);
 

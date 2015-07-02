@@ -70,7 +70,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                         .AppendLine("fail ArgumentError(\"SubscriptionCloudCredentials are missing from the client.\");")
                         .Outdent()
                     .AppendLine("end")
-                    .AppendLine("{0}['{{subscriptionId}}'] = {1}.credentials.subscriptionId,", inputVariableName, ClientReference);
+                    .AppendLine("{0}['{{subscriptionId}}'] = {1}.credentials.subscriptionId", inputVariableName, ClientReference);
             }
 
             // Filling path parameters (which are directly in the url body).
