@@ -41,16 +41,17 @@ namespace Microsoft.Rest
         /// </summary>
         private static long _nextInvocationId = 0;
 
-        static ServiceClientTracing()
-        {
-            IsEnabled = false;
-        }
+        private static bool _isEnabled = false;
 
         /// <summary>
         /// Gets or sets a value indicating whether tracing is enabled.
         /// Tracing can be disabled for performance.
         /// </summary>
-        public static bool IsEnabled { get; set; }
+        public static bool IsEnabled
+        {
+            get { return _isEnabled; }
+            set { _isEnabled = value; }
+        }
 
         /// <summary>
         /// Gets a sequence of the tracing interceptors to notify of changes.
