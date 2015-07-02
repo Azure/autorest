@@ -16,8 +16,8 @@ var WebResource = msRest.WebResource;
 
 @if (Model.ModelTypes.Any())
 {
-    @EmptyLine
-    @:var models = require('../models');
+@EmptyLine
+@:var models = require('../models');
 }
 @EmptyLine
 /**
@@ -37,8 +37,8 @@ function @(Model.MethodGroupType)(client) {
 @EmptyLine
 @foreach (var method in Model.MethodTemplateModels)
 {
-    @:@(Include(new AzureMethodTemplate(), method as AzureMethodTemplateModel))
-    @EmptyLine
+@:@(Include(new AzureMethodTemplate(), method as AzureMethodTemplateModel))
+@EmptyLine
 }
 @EmptyLine
 module.exports = @(Model.MethodGroupType);

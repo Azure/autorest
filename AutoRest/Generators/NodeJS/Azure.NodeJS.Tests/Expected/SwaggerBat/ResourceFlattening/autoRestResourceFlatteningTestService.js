@@ -44,7 +44,7 @@ function AutoRestResourceFlatteningTestService(credentials, baseUri, options) {
     this.baseUri = 'http://localhost';
   }
 
-  this.apiVersion = "1.0.0";
+  this.apiVersion = '1.0.0';
   this._models = models;
 }
 
@@ -66,11 +66,11 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (resourceArr
   // Validate
   try {
     if (resourceArray !== null && resourceArray !== undefined && util.isArray(resourceArray)) {
-      resourceArray.forEach(function(element) {
-        if (element !== null && element !== undefined) {
-          client._models['Resource'].validate(element);
+      for (var i = 0; i < resourceArray.length; i++) {
+        if (resourceArray[i] !== null && resourceArray[i] !== undefined) {
+          client._models['Resource'].validate(resourceArray[i]);
         }
-      });
+      }
     }
   } catch (error) {
     return callback(error);

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jslint>
+	<file name="Expected\SwaggerBat\BodyArray\operations\arrayModel.js">
+		<issue line="91" char="74" reason="Empty block." evidence="            if (result.body[i] !== null &amp;&amp; result.body[i] !== undefined) {" severity="W" />
+		<issue line="173" char="74" reason="Empty block." evidence="            if (result.body[i] !== null &amp;&amp; result.body[i] !== undefined) {" severity="W" />
+		<issue line="255" char="74" reason="Empty block." evidence="            if (result.body[i] !== null &amp;&amp; result.body[i] !== undefined) {" severity="W" />
+		<issue line="420" char="74" reason="Empty block." evidence="            if (result.body[i] !== null &amp;&amp; result.body[i] !== undefined) {" severity="W" />
+		<issue line="585" char="74" reason="Empty block." evidence="            if (result.body[i] !== null &amp;&amp; result.body[i] !== undefined) {" severity="W" />
+		<issue line="667" char="74" reason="Empty block." evidence="            if (result.body[i] !== null &amp;&amp; result.body[i] !== undefined) {" severity="W" />
+		<issue line="749" char="74" reason="Empty block." evidence="            if (result.body[i] !== null &amp;&amp; result.body[i] !== undefined) {" severity="W" />
+		<issue line="914" char="74" reason="Empty block." evidence="            if (result.body[i] !== null &amp;&amp; result.body[i] !== undefined) {" severity="W" />
+		<issue line="996" char="74" reason="Empty block." evidence="            if (result.body[i] !== null &amp;&amp; result.body[i] !== undefined) {" severity="W" />
+		<issue line="1078" char="74" reason="Empty block." evidence="            if (result.body[i] !== null &amp;&amp; result.body[i] !== undefined) {" severity="W" />
+		<issue line="1243" char="74" reason="Empty block." evidence="            if (result.body[i] !== null &amp;&amp; result.body[i] !== undefined) {" severity="W" />
+		<issue line="1325" char="74" reason="Empty block." evidence="            if (result.body[i] !== null &amp;&amp; result.body[i] !== undefined) {" severity="W" />
+		<issue line="1407" char="74" reason="Empty block." evidence="            if (result.body[i] !== null &amp;&amp; result.body[i] !== undefined) {" severity="W" />
+		<issue line="1572" char="74" reason="Empty block." evidence="            if (result.body[i] !== null &amp;&amp; result.body[i] !== undefined) {" severity="W" />
+		<issue line="1654" char="74" reason="Empty block." evidence="            if (result.body[i] !== null &amp;&amp; result.body[i] !== undefined) {" severity="W" />
+		<issue line="1736" char="74" reason="Empty block." evidence="            if (result.body[i] !== null &amp;&amp; result.body[i] !== undefined) {" severity="W" />
+		<issue line="1901" char="74" reason="Empty block." evidence="            if (result.body[i] !== null &amp;&amp; result.body[i] !== undefined) {" severity="W" />
+		<issue line="1983" char="74" reason="Empty block." evidence="            if (result.body[i] !== null &amp;&amp; result.body[i] !== undefined) {" severity="W" />
+		<issue line="2065" char="74" reason="Empty block." evidence="            if (result.body[i] !== null &amp;&amp; result.body[i] !== undefined) {" severity="W" />
+		<issue line="2230" char="74" reason="Empty block." evidence="            if (result.body[i] !== null &amp;&amp; result.body[i] !== undefined) {" severity="W" />
+		<issue line="2312" char="74" reason="Empty block." evidence="            if (result.body[i] !== null &amp;&amp; result.body[i] !== undefined) {" severity="W" />
+		<issue line="3818" char="74" reason="Empty block." evidence="            if (result.body[i] !== null &amp;&amp; result.body[i] !== undefined) {" severity="W" />
+		<issue line="3900" char="74" reason="Empty block." evidence="            if (result.body[i] !== null &amp;&amp; result.body[i] !== undefined) {" severity="W" />
+		<issue line="3982" char="74" reason="Empty block." evidence="            if (result.body[i] !== null &amp;&amp; result.body[i] !== undefined) {" severity="W" />
+		<issue line="4064" char="74" reason="Empty block." evidence="            if (result.body[i] !== null &amp;&amp; result.body[i] !== undefined) {" severity="W" />
+		<issue line="4147" char="74" reason="Empty block." evidence="            if (result.body[i] !== null &amp;&amp; result.body[i] !== undefined) {" severity="W" />
+		<issue line="4317" char="74" reason="Empty block." evidence="            if (result.body[i] !== null &amp;&amp; result.body[i] !== undefined) {" severity="W" />
+		<issue line="4399" char="74" reason="Empty block." evidence="            if (result.body[i] !== null &amp;&amp; result.body[i] !== undefined) {" severity="W" />
+		<issue line="4483" char="74" reason="Empty block." evidence="            if (result.body[i] !== null &amp;&amp; result.body[i] !== undefined) {" severity="W" />
+		<issue line="4567" char="74" reason="Empty block." evidence="            if (result.body[i] !== null &amp;&amp; result.body[i] !== undefined) {" severity="W" />
+		<issue line="4651" char="74" reason="Empty block." evidence="            if (result.body[i] !== null &amp;&amp; result.body[i] !== undefined) {" severity="W" />
+	</file>
+	<file name="Expected\SwaggerBat\BodyDictionary\operations\dictionary.js">
+		<issue line="91" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="173" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="338" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="420" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="502" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="584" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="666" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="831" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="913" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="995" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="1160" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="1242" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="1324" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="1489" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="1571" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="1653" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="1818" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="1900" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="1982" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="2147" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="2229" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="2311" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="2476" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="2558" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="4067" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="4149" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="4232" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="4315" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="4398" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="4568" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="4650" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="4734" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="4818" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+		<issue line="4902" char="88" reason="Empty block." evidence="            if (result.body[property] !== null &amp;&amp; result.body[property] !== undefined) {" severity="W" />
+	</file>
+	<file name="Expected\SwaggerBat\Http\operations\httpRedirects.js">
+		<issue line="154" char="74" reason="Empty block." evidence="            if (result.body[i] !== null &amp;&amp; result.body[i] !== undefined) {" severity="W" />
+	</file>
+</jslint>
+

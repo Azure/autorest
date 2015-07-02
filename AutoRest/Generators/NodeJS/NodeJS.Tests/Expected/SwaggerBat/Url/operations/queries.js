@@ -2293,11 +2293,11 @@ Queries.prototype.arrayStringCsvValid = function (arrayQuery, callback) {
   // Validate
   try {
     if (arrayQuery !== null && arrayQuery !== undefined && util.isArray(arrayQuery)) {
-      arrayQuery.forEach(function(element) {
-        if (element !== null && element !== undefined && typeof element !== 'string') {
-          throw new Error('element must be of type string.');
+      for (var i = 0; i < arrayQuery.length; i++) {
+        if (arrayQuery[i] !== null && arrayQuery[i] !== undefined && typeof arrayQuery[i] !== 'string') {
+          throw new Error('arrayQuery[i] must be of type string.');
         }
-      });
+      }
     }
   } catch (error) {
     return callback(error);
@@ -2377,11 +2377,11 @@ Queries.prototype.arrayStringCsvNull = function (arrayQuery, callback) {
   // Validate
   try {
     if (arrayQuery !== null && arrayQuery !== undefined && util.isArray(arrayQuery)) {
-      arrayQuery.forEach(function(element) {
-        if (element !== null && element !== undefined && typeof element !== 'string') {
-          throw new Error('element must be of type string.');
+      for (var i = 0; i < arrayQuery.length; i++) {
+        if (arrayQuery[i] !== null && arrayQuery[i] !== undefined && typeof arrayQuery[i] !== 'string') {
+          throw new Error('arrayQuery[i] must be of type string.');
         }
-      });
+      }
     }
   } catch (error) {
     return callback(error);
@@ -2461,11 +2461,11 @@ Queries.prototype.arrayStringCsvEmpty = function (arrayQuery, callback) {
   // Validate
   try {
     if (arrayQuery !== null && arrayQuery !== undefined && util.isArray(arrayQuery)) {
-      arrayQuery.forEach(function(element) {
-        if (element !== null && element !== undefined && typeof element !== 'string') {
-          throw new Error('element must be of type string.');
+      for (var i = 0; i < arrayQuery.length; i++) {
+        if (arrayQuery[i] !== null && arrayQuery[i] !== undefined && typeof arrayQuery[i] !== 'string') {
+          throw new Error('arrayQuery[i] must be of type string.');
         }
-      });
+      }
     }
   } catch (error) {
     return callback(error);
@@ -2546,11 +2546,11 @@ Queries.prototype.arrayStringSsvValid = function (arrayQuery, callback) {
   // Validate
   try {
     if (arrayQuery !== null && arrayQuery !== undefined && util.isArray(arrayQuery)) {
-      arrayQuery.forEach(function(element) {
-        if (element !== null && element !== undefined && typeof element !== 'string') {
-          throw new Error('element must be of type string.');
+      for (var i = 0; i < arrayQuery.length; i++) {
+        if (arrayQuery[i] !== null && arrayQuery[i] !== undefined && typeof arrayQuery[i] !== 'string') {
+          throw new Error('arrayQuery[i] must be of type string.');
         }
-      });
+      }
     }
   } catch (error) {
     return callback(error);
@@ -2631,11 +2631,11 @@ Queries.prototype.arrayStringTsvValid = function (arrayQuery, callback) {
   // Validate
   try {
     if (arrayQuery !== null && arrayQuery !== undefined && util.isArray(arrayQuery)) {
-      arrayQuery.forEach(function(element) {
-        if (element !== null && element !== undefined && typeof element !== 'string') {
-          throw new Error('element must be of type string.');
+      for (var i = 0; i < arrayQuery.length; i++) {
+        if (arrayQuery[i] !== null && arrayQuery[i] !== undefined && typeof arrayQuery[i] !== 'string') {
+          throw new Error('arrayQuery[i] must be of type string.');
         }
-      });
+      }
     }
   } catch (error) {
     return callback(error);
@@ -2716,11 +2716,11 @@ Queries.prototype.arrayStringPipesValid = function (arrayQuery, callback) {
   // Validate
   try {
     if (arrayQuery !== null && arrayQuery !== undefined && util.isArray(arrayQuery)) {
-      arrayQuery.forEach(function(element) {
-        if (element !== null && element !== undefined && typeof element !== 'string') {
-          throw new Error('element must be of type string.');
+      for (var i = 0; i < arrayQuery.length; i++) {
+        if (arrayQuery[i] !== null && arrayQuery[i] !== undefined && typeof arrayQuery[i] !== 'string') {
+          throw new Error('arrayQuery[i] must be of type string.');
         }
-      });
+      }
     }
   } catch (error) {
     return callback(error);

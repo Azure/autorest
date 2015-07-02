@@ -22,11 +22,11 @@ ProductResult.prototype.validate = function (payload) {
     throw new Error('ProductResult cannot be null.');
   }
   if (payload['values'] !== null && payload['values'] !== undefined && util.isArray(payload['values'])) {
-    payload['values'].forEach(function(element) {
-      if (element !== null && element !== undefined) {
-        models['Product'].validate(element);
+    for (var i = 0; i < payload['values'].length; i++) {
+      if (payload['values'][i] !== null && payload['values'][i] !== undefined) {
+        models['Product'].validate(payload['values'][i]);
       }
-    });
+    }
   }
 
   if (payload['nextLink'] !== null && payload['nextLink'] !== undefined && typeof payload['nextLink'] !== 'string') {
@@ -45,11 +45,11 @@ ProductResult.prototype.deserialize = function (instance) {
   if (instance) {
     if (instance.values !== null && instance.values !== undefined) {
       var deserializedArray = [];
-      instance.values.forEach(function(element1) {
-        if (element1 !== null && element1 !== undefined) {
-          element1 = models['Product'].deserialize(element1);
+      instance.values.forEach(function(element) {
+        if (element !== null && element !== undefined) {
+          element = models['Product'].deserialize(element);
         }
-        deserializedArray.push(element1);
+        deserializedArray.push(element);
       });
       instance.values = deserializedArray;
     }

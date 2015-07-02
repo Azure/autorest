@@ -33,15 +33,15 @@ Shark.prototype.validate = function (payload) {
   }
 
   if (payload['siblings'] !== null && payload['siblings'] !== undefined && util.isArray(payload['siblings'])) {
-    payload['siblings'].forEach(function(element) {
-      if (element !== null && element !== undefined) {
-        if(element['dtype'] !== null && element['dtype'] !== undefined && models.discriminators[element['dtype']]) {
-          models.discriminators[element['dtype']].validate(element);
+    for (var i = 0; i < payload['siblings'].length; i++) {
+      if (payload['siblings'][i] !== null && payload['siblings'][i] !== undefined) {
+        if(payload['siblings'][i]['dtype'] !== null && payload['siblings'][i]['dtype'] !== undefined && models.discriminators[payload['siblings'][i]['dtype']]) {
+          models.discriminators[payload['siblings'][i]['dtype']].validate(payload['siblings'][i]);
         } else {
-          throw new Error('No discriminator field "dtype" was found in parameter "element".');
+          throw new Error('No discriminator field "dtype" was found in parameter "payload[\'siblings\'][i]".');
         }
       }
-    });
+    }
   }
 
   if (payload['age'] !== null && payload['age'] !== undefined && typeof payload['age'] !== 'number') {
@@ -69,15 +69,15 @@ Shark.prototype.deserialize = function (instance) {
   if (instance) {
     if (instance.siblings !== null && instance.siblings !== undefined) {
       var deserializedArray = [];
-      instance.siblings.forEach(function(element1) {
-        if (element1 !== null && element1 !== undefined) {
-          if(element1['dtype'] !== null && element1['dtype'] !== undefined && models.discriminators[element1['dtype']]) {
-            element1 = models.discriminators[element1['dtype']].deserialize(element1);
+      instance.siblings.forEach(function(element) {
+        if (element !== null && element !== undefined) {
+          if(element['dtype'] !== null && element['dtype'] !== undefined && models.discriminators[element['dtype']]) {
+            element = models.discriminators[element['dtype']].deserialize(element);
           } else {
-            throw new Error('No discriminator field "dtype" was found in parameter "element1".');
+            throw new Error('No discriminator field "dtype" was found in parameter "element".');
           }
         }
-        deserializedArray.push(element1);
+        deserializedArray.push(element);
       });
       instance.siblings = deserializedArray;
     }

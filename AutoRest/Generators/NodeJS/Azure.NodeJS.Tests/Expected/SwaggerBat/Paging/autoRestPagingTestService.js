@@ -45,7 +45,7 @@ function AutoRestPagingTestService(credentials, baseUri, options) {
     this.baseUri = 'http://localhost';
   }
 
-  this.apiVersion = "1.0.0";
+  this.apiVersion = '1.0.0';
   this.paging = new operations.Paging(this);
   this._models = models;
 }

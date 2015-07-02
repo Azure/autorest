@@ -1430,11 +1430,11 @@ Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, callbac
       throw new Error('\'bodyParameter\' cannot be null');
     }
     if (bodyParameter !== null && bodyParameter !== undefined && util.isArray(bodyParameter)) {
-      bodyParameter.forEach(function(element) {
-        if (element !== null && element !== undefined && typeof element !== 'string') {
-          throw new Error('element must be of type string.');
+      for (var i = 0; i < bodyParameter.length; i++) {
+        if (bodyParameter[i] !== null && bodyParameter[i] !== undefined && typeof bodyParameter[i] !== 'string') {
+          throw new Error('bodyParameter[i] must be of type string.');
         }
-      });
+      }
     }
   } catch (error) {
     return callback(error);
@@ -1523,11 +1523,11 @@ Explicit.prototype.postOptionalArrayParameter = function (bodyParameter, callbac
   // Validate
   try {
     if (bodyParameter !== null && bodyParameter !== undefined && util.isArray(bodyParameter)) {
-      bodyParameter.forEach(function(element) {
-        if (element !== null && element !== undefined && typeof element !== 'string') {
-          throw new Error('element must be of type string.');
+      for (var i = 0; i < bodyParameter.length; i++) {
+        if (bodyParameter[i] !== null && bodyParameter[i] !== undefined && typeof bodyParameter[i] !== 'string') {
+          throw new Error('bodyParameter[i] must be of type string.');
         }
-      });
+      }
     }
   } catch (error) {
     return callback(error);
@@ -1782,11 +1782,11 @@ Explicit.prototype.postRequiredArrayHeader = function (headerParameter, callback
       throw new Error('\'headerParameter\' cannot be null');
     }
     if (headerParameter !== null && headerParameter !== undefined && util.isArray(headerParameter)) {
-      headerParameter.forEach(function(element) {
-        if (element !== null && element !== undefined && typeof element !== 'string') {
-          throw new Error('element must be of type string.');
+      for (var i = 0; i < headerParameter.length; i++) {
+        if (headerParameter[i] !== null && headerParameter[i] !== undefined && typeof headerParameter[i] !== 'string') {
+          throw new Error('headerParameter[i] must be of type string.');
         }
-      });
+      }
     }
   } catch (error) {
     return callback(error);
@@ -1876,11 +1876,11 @@ Explicit.prototype.postOptionalArrayHeader = function (headerParameter, callback
   // Validate
   try {
     if (headerParameter !== null && headerParameter !== undefined && util.isArray(headerParameter)) {
-      headerParameter.forEach(function(element) {
-        if (element !== null && element !== undefined && typeof element !== 'string') {
-          throw new Error('element must be of type string.');
+      for (var i = 0; i < headerParameter.length; i++) {
+        if (headerParameter[i] !== null && headerParameter[i] !== undefined && typeof headerParameter[i] !== 'string') {
+          throw new Error('headerParameter[i] must be of type string.');
         }
-      });
+      }
     }
   } catch (error) {
     return callback(error);

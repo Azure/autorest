@@ -34,11 +34,11 @@ Siamese.prototype.validate = function (payload) {
   }
 
   if (payload['hates'] !== null && payload['hates'] !== undefined && util.isArray(payload['hates'])) {
-    payload['hates'].forEach(function(element) {
-      if (element !== null && element !== undefined) {
-        models['Dog'].validate(element);
+    for (var i = 0; i < payload['hates'].length; i++) {
+      if (payload['hates'][i] !== null && payload['hates'][i] !== undefined) {
+        models['Dog'].validate(payload['hates'][i]);
       }
-    });
+    }
   }
 
   if (payload['breed'] !== null && payload['breed'] !== undefined && typeof payload['breed'] !== 'string') {
@@ -57,11 +57,11 @@ Siamese.prototype.deserialize = function (instance) {
   if (instance) {
     if (instance.hates !== null && instance.hates !== undefined) {
       var deserializedArray = [];
-      instance.hates.forEach(function(element1) {
-        if (element1 !== null && element1 !== undefined) {
-          element1 = models['Dog'].deserialize(element1);
+      instance.hates.forEach(function(element) {
+        if (element !== null && element !== undefined) {
+          element = models['Dog'].deserialize(element);
         }
-        deserializedArray.push(element1);
+        deserializedArray.push(element);
       });
       instance.hates = deserializedArray;
     }

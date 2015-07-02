@@ -22,11 +22,11 @@ ArrayOptionalWrapper.prototype.validate = function (payload) {
     throw new Error('ArrayOptionalWrapper cannot be null.');
   }
   if (payload['value'] !== null && payload['value'] !== undefined && util.isArray(payload['value'])) {
-    payload['value'].forEach(function(element) {
-      if (element !== null && element !== undefined && typeof element !== 'string') {
-        throw new Error('element must be of type string.');
+    for (var i = 0; i < payload['value'].length; i++) {
+      if (payload['value'][i] !== null && payload['value'][i] !== undefined && typeof payload['value'][i] !== 'string') {
+        throw new Error('payload[\'value\'][i] must be of type string.');
       }
-    });
+    }
   }
 
 };

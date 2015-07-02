@@ -22,11 +22,11 @@ ArrayWrapper.prototype.validate = function (payload) {
     throw new Error('ArrayWrapper cannot be null.');
   }
   if (payload['array'] !== null && payload['array'] !== undefined && util.isArray(payload['array'])) {
-    payload['array'].forEach(function(element) {
-      if (element !== null && element !== undefined && typeof element !== 'string') {
-        throw new Error('element must be of type string.');
+    for (var i = 0; i < payload['array'].length; i++) {
+      if (payload['array'][i] !== null && payload['array'][i] !== undefined && typeof payload['array'][i] !== 'string') {
+        throw new Error('payload[\'array\'][i] must be of type string.');
       }
-    });
+    }
   }
 
 };

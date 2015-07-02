@@ -26,11 +26,11 @@ ResourceCollection.prototype.validate = function (payload) {
   }
 
   if (payload['arrayofresources'] !== null && payload['arrayofresources'] !== undefined && util.isArray(payload['arrayofresources'])) {
-    payload['arrayofresources'].forEach(function(element) {
-      if (element !== null && element !== undefined) {
-        models['FlattenedProduct'].validate(element);
+    for (var i = 0; i < payload['arrayofresources'].length; i++) {
+      if (payload['arrayofresources'][i] !== null && payload['arrayofresources'][i] !== undefined) {
+        models['FlattenedProduct'].validate(payload['arrayofresources'][i]);
       }
-    });
+    }
   }
 
   if (payload['dictionaryofresources'] !== null && payload['dictionaryofresources'] !== undefined && typeof payload['dictionaryofresources'] === 'object') {
@@ -57,11 +57,11 @@ ResourceCollection.prototype.deserialize = function (instance) {
 
     if (instance.arrayofresources !== null && instance.arrayofresources !== undefined) {
       var deserializedArray = [];
-      instance.arrayofresources.forEach(function(element1) {
-        if (element1 !== null && element1 !== undefined) {
-          element1 = models['FlattenedProduct'].deserialize(element1);
+      instance.arrayofresources.forEach(function(element) {
+        if (element !== null && element !== undefined) {
+          element = models['FlattenedProduct'].deserialize(element);
         }
-        deserializedArray.push(element1);
+        deserializedArray.push(element);
       });
       instance.arrayofresources = deserializedArray;
     }

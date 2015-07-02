@@ -287,11 +287,11 @@ ArrayModel.prototype.putEmpty = function (arrayBody, callback) {
       throw new Error('\'arrayBody\' cannot be null');
     }
     if (arrayBody !== null && arrayBody !== undefined && util.isArray(arrayBody)) {
-      arrayBody.forEach(function(element) {
-        if (element !== null && element !== undefined && typeof element !== 'string') {
-          throw new Error('element must be of type string.');
+      for (var i = 0; i < arrayBody.length; i++) {
+        if (arrayBody[i] !== null && arrayBody[i] !== undefined && typeof arrayBody[i] !== 'string') {
+          throw new Error('arrayBody[i] must be of type string.');
         }
-      });
+      }
     }
   } catch (error) {
     return callback(error);
@@ -452,11 +452,11 @@ ArrayModel.prototype.putBooleanTfft = function (arrayBody, callback) {
       throw new Error('\'arrayBody\' cannot be null');
     }
     if (arrayBody !== null && arrayBody !== undefined && util.isArray(arrayBody)) {
-      arrayBody.forEach(function(element) {
-        if (element !== null && element !== undefined && typeof element !== 'boolean') {
-          throw new Error('element must be of type boolean.');
+      for (var i = 0; i < arrayBody.length; i++) {
+        if (arrayBody[i] !== null && arrayBody[i] !== undefined && typeof arrayBody[i] !== 'boolean') {
+          throw new Error('arrayBody[i] must be of type boolean.');
         }
-      });
+      }
     }
   } catch (error) {
     return callback(error);
@@ -781,11 +781,11 @@ ArrayModel.prototype.putIntegerValid = function (arrayBody, callback) {
       throw new Error('\'arrayBody\' cannot be null');
     }
     if (arrayBody !== null && arrayBody !== undefined && util.isArray(arrayBody)) {
-      arrayBody.forEach(function(element) {
-        if (element !== null && element !== undefined && typeof element !== 'number') {
-          throw new Error('element must be of type number.');
+      for (var i = 0; i < arrayBody.length; i++) {
+        if (arrayBody[i] !== null && arrayBody[i] !== undefined && typeof arrayBody[i] !== 'number') {
+          throw new Error('arrayBody[i] must be of type number.');
         }
-      });
+      }
     }
   } catch (error) {
     return callback(error);
@@ -1110,11 +1110,11 @@ ArrayModel.prototype.putLongValid = function (arrayBody, callback) {
       throw new Error('\'arrayBody\' cannot be null');
     }
     if (arrayBody !== null && arrayBody !== undefined && util.isArray(arrayBody)) {
-      arrayBody.forEach(function(element) {
-        if (element !== null && element !== undefined && typeof element !== 'number') {
-          throw new Error('element must be of type number.');
+      for (var i = 0; i < arrayBody.length; i++) {
+        if (arrayBody[i] !== null && arrayBody[i] !== undefined && typeof arrayBody[i] !== 'number') {
+          throw new Error('arrayBody[i] must be of type number.');
         }
-      });
+      }
     }
   } catch (error) {
     return callback(error);
@@ -1439,11 +1439,11 @@ ArrayModel.prototype.putFloatValid = function (arrayBody, callback) {
       throw new Error('\'arrayBody\' cannot be null');
     }
     if (arrayBody !== null && arrayBody !== undefined && util.isArray(arrayBody)) {
-      arrayBody.forEach(function(element) {
-        if (element !== null && element !== undefined && typeof element !== 'number') {
-          throw new Error('element must be of type number.');
+      for (var i = 0; i < arrayBody.length; i++) {
+        if (arrayBody[i] !== null && arrayBody[i] !== undefined && typeof arrayBody[i] !== 'number') {
+          throw new Error('arrayBody[i] must be of type number.');
         }
-      });
+      }
     }
   } catch (error) {
     return callback(error);
@@ -1768,11 +1768,11 @@ ArrayModel.prototype.putDoubleValid = function (arrayBody, callback) {
       throw new Error('\'arrayBody\' cannot be null');
     }
     if (arrayBody !== null && arrayBody !== undefined && util.isArray(arrayBody)) {
-      arrayBody.forEach(function(element) {
-        if (element !== null && element !== undefined && typeof element !== 'number') {
-          throw new Error('element must be of type number.');
+      for (var i = 0; i < arrayBody.length; i++) {
+        if (arrayBody[i] !== null && arrayBody[i] !== undefined && typeof arrayBody[i] !== 'number') {
+          throw new Error('arrayBody[i] must be of type number.');
         }
-      });
+      }
     }
   } catch (error) {
     return callback(error);
@@ -2097,11 +2097,11 @@ ArrayModel.prototype.putStringValid = function (arrayBody, callback) {
       throw new Error('\'arrayBody\' cannot be null');
     }
     if (arrayBody !== null && arrayBody !== undefined && util.isArray(arrayBody)) {
-      arrayBody.forEach(function(element) {
-        if (element !== null && element !== undefined && typeof element !== 'string') {
-          throw new Error('element must be of type string.');
+      for (var i = 0; i < arrayBody.length; i++) {
+        if (arrayBody[i] !== null && arrayBody[i] !== undefined && typeof arrayBody[i] !== 'string') {
+          throw new Error('arrayBody[i] must be of type string.');
         }
-      });
+      }
     }
   } catch (error) {
     return callback(error);
@@ -2427,13 +2427,13 @@ ArrayModel.prototype.putDateValid = function (arrayBody, callback) {
       throw new Error('\'arrayBody\' cannot be null');
     }
     if (arrayBody !== null && arrayBody !== undefined && util.isArray(arrayBody)) {
-      arrayBody.forEach(function(element) {
-        if (element !== null && element !== undefined && 
-            !(element instanceof Date || 
-              (typeof element === 'string' && !isNaN(Date.parse(element))))) {
-          throw new Error('element must be of type date.');
+      for (var i = 0; i < arrayBody.length; i++) {
+        if (arrayBody[i] !== null && arrayBody[i] !== undefined && 
+            !(arrayBody[i] instanceof Date || 
+              (typeof arrayBody[i] === 'string' && !isNaN(Date.parse(arrayBody[i]))))) {
+          throw new Error('arrayBody[i] must be of type date.');
         }
-      });
+      }
     }
   } catch (error) {
     return callback(error);
@@ -2763,13 +2763,13 @@ ArrayModel.prototype.putDateTimeValid = function (arrayBody, callback) {
       throw new Error('\'arrayBody\' cannot be null');
     }
     if (arrayBody !== null && arrayBody !== undefined && util.isArray(arrayBody)) {
-      arrayBody.forEach(function(element) {
-        if (element !== null && element !== undefined && 
-            !(element instanceof Date || 
-              (typeof element === 'string' && !isNaN(Date.parse(element))))) {
-          throw new Error('element must be of type date.');
+      for (var i = 0; i < arrayBody.length; i++) {
+        if (arrayBody[i] !== null && arrayBody[i] !== undefined && 
+            !(arrayBody[i] instanceof Date || 
+              (typeof arrayBody[i] === 'string' && !isNaN(Date.parse(arrayBody[i]))))) {
+          throw new Error('arrayBody[i] must be of type date.');
         }
-      });
+      }
     }
   } catch (error) {
     return callback(error);
@@ -3099,11 +3099,11 @@ ArrayModel.prototype.putByteValid = function (arrayBody, callback) {
       throw new Error('\'arrayBody\' cannot be null');
     }
     if (arrayBody !== null && arrayBody !== undefined && util.isArray(arrayBody)) {
-      arrayBody.forEach(function(element) {
-        if (element !== null && element !== undefined && !Buffer.isBuffer(element)) {
-          throw new Error('element must be of type buffer.');
+      for (var i = 0; i < arrayBody.length; i++) {
+        if (arrayBody[i] !== null && arrayBody[i] !== undefined && !Buffer.isBuffer(arrayBody[i])) {
+          throw new Error('arrayBody[i] must be of type buffer.');
         }
-      });
+      }
     }
   } catch (error) {
     return callback(error);
@@ -3685,11 +3685,11 @@ ArrayModel.prototype.putComplexValid = function (arrayBody, callback) {
       throw new Error('\'arrayBody\' cannot be null');
     }
     if (arrayBody !== null && arrayBody !== undefined && util.isArray(arrayBody)) {
-      arrayBody.forEach(function(element) {
-        if (element !== null && element !== undefined) {
-          client._models['Product'].validate(element);
+      for (var i = 0; i < arrayBody.length; i++) {
+        if (arrayBody[i] !== null && arrayBody[i] !== undefined) {
+          client._models['Product'].validate(arrayBody[i]);
         }
-      });
+      }
     }
   } catch (error) {
     return callback(error);
@@ -4180,15 +4180,15 @@ ArrayModel.prototype.putArrayValid = function (arrayBody, callback) {
       throw new Error('\'arrayBody\' cannot be null');
     }
     if (arrayBody !== null && arrayBody !== undefined && util.isArray(arrayBody)) {
-      arrayBody.forEach(function(element) {
-        if (element !== null && element !== undefined && util.isArray(element)) {
-          element.forEach(function(element1) {
-            if (element1 !== null && element1 !== undefined && typeof element1 !== 'string') {
-              throw new Error('element1 must be of type string.');
+      for (var i = 0; i < arrayBody.length; i++) {
+        if (arrayBody[i] !== null && arrayBody[i] !== undefined && util.isArray(arrayBody[i])) {
+          for (var i1 = 0; i1 < arrayBody[i].length; i1++) {
+            if (arrayBody[i][i1] !== null && arrayBody[i][i1] !== undefined && typeof arrayBody[i][i1] !== 'string') {
+              throw new Error('arrayBody[i][i1] must be of type string.');
             }
-          });
+          }
         }
-      });
+      }
     }
   } catch (error) {
     return callback(error);
@@ -4685,15 +4685,15 @@ ArrayModel.prototype.putDictionaryValid = function (arrayBody, callback) {
       throw new Error('\'arrayBody\' cannot be null');
     }
     if (arrayBody !== null && arrayBody !== undefined && util.isArray(arrayBody)) {
-      arrayBody.forEach(function(element) {
-        if (element !== null && element !== undefined && typeof element === 'object') {
-          for(var valueElement in element) {
-            if (element[valueElement] !== null && element[valueElement] !== undefined && typeof element[valueElement] !== 'string') {
-              throw new Error('element[valueElement] must be of type string.');
+      for (var i = 0; i < arrayBody.length; i++) {
+        if (arrayBody[i] !== null && arrayBody[i] !== undefined && typeof arrayBody[i] === 'object') {
+          for(var valueElement in arrayBody[i]) {
+            if (arrayBody[i][valueElement] !== null && arrayBody[i][valueElement] !== undefined && typeof arrayBody[i][valueElement] !== 'string') {
+              throw new Error('arrayBody[i][valueElement] must be of type string.');
             }
           }
         }
-      });
+      }
     }
   } catch (error) {
     return callback(error);

@@ -4433,11 +4433,11 @@ Dictionary.prototype.putArrayValid = function (arrayBody, callback) {
     if (arrayBody !== null && arrayBody !== undefined && typeof arrayBody === 'object') {
       for(var valueElement in arrayBody) {
         if (arrayBody[valueElement] !== null && arrayBody[valueElement] !== undefined && util.isArray(arrayBody[valueElement])) {
-          arrayBody[valueElement].forEach(function(element) {
-            if (element !== null && element !== undefined && typeof element !== 'string') {
-              throw new Error('element must be of type string.');
+          for (var i = 0; i < arrayBody[valueElement].length; i++) {
+            if (arrayBody[valueElement][i] !== null && arrayBody[valueElement][i] !== undefined && typeof arrayBody[valueElement][i] !== 'string') {
+              throw new Error('arrayBody[valueElement][i] must be of type string.');
             }
-          });
+          }
         }
       }
     }

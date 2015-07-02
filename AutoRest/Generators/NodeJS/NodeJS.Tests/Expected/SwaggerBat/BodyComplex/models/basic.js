@@ -32,7 +32,7 @@ Basic.prototype.validate = function (payload) {
   if (payload['color'] !== null && payload['color'] !== undefined) {
     var allowedValues = [ 'cyan', 'Magenta', 'YELLOW', 'blacK' ];
     if (!allowedValues.some( function(item) { return item === payload['color']; })) {
-      throw new Error(payload[\'color\'] + ' is not a valid value. The valid values are: ' + allowedValues);
+      throw new Error(payload['color'] + ' is not a valid value. The valid values are: ' + allowedValues);
     }
   }
 

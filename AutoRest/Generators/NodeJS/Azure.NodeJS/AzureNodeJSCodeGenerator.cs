@@ -54,8 +54,17 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
             AzureCodeGenerator.AddLongRunningOperations(serviceClient);
             AzureCodeGenerator.AddAzureProperties(serviceClient);
             AzureCodeGenerator.SetDefaultResponses(serviceClient);
-
+            NormalizeApiVersion(serviceClient);
             base.NormalizeClientModel(serviceClient);
+        }
+
+        private void NormalizeApiVersion(ServiceClient serviceClient)
+        {
+            var property = serviceClient.Properties.First(p => p.Name == AzureCodeGenerator.ApiVersion);
+            if (property != null)
+            {
+                property.DefaultValue = property.DefaultValue.Replace('"', '\'');
+            }
         }
 
         /// <summary>
