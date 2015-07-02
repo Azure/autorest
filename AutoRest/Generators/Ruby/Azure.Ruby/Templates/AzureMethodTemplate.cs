@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-namespace AutoRest.Generator.Azure.Ruby.Templates
+namespace Microsoft.Rest.Generator.Azure.Ruby.Templates
 {
 #line 1 "AzureMethodTemplate.cshtml"
 using Microsoft.Rest.Generator.ClientModel

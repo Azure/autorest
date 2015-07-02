@@ -52,6 +52,10 @@
       <Project>{cd930eb5-a0c1-49bf-a320-1c2aeb028e7e}</Project>
       <Name>AutoRest.Generator.Ruby.Tests</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Azure.Ruby\AutoRest.Generator.Azure.Ruby.csproj">
+      <Project>{31931998-7543-41da-9e58-d9670d810352}</Project>
+      <Name>AutoRest.Generator.Azure.Ruby</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AcceptanceTests.cs" />
