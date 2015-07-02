@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using Microsoft.Rest;
 using Newtonsoft.Json;
 
 namespace Microsoft.Azure
@@ -55,7 +56,7 @@ namespace Microsoft.Azure
         {
             if (Location == null)
             {
-                throw new ArgumentNullException("Location");
+                throw new ValidationException(ValidationRules.CannotBeNull, "Location");
             }
         }
     }

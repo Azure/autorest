@@ -35,11 +35,11 @@ namespace Microsoft.Azure
         {
             if (response == null)
             {
-                throw new ArgumentNullException("response");
+                throw new ValidationException(ValidationRules.CannotBeNull, "response");
             }
             if (getOperationAction == null)
             {
-                throw new ArgumentNullException("getOperationAction");
+                throw new ValidationException(ValidationRules.CannotBeNull, "getOperationAction");
             }
             if (response.Response.StatusCode != HttpStatusCode.OK &&
                 response.Response.StatusCode != HttpStatusCode.Accepted &&
@@ -101,12 +101,12 @@ namespace Microsoft.Azure
         {
             if (response == null)
             {
-                throw new ArgumentNullException("response");
+                throw new ValidationException(ValidationRules.CannotBeNull, "response");
             }
 
             if (response.Response == null)
             {
-                throw new ArgumentNullException("response.Response");
+                throw new ValidationException(ValidationRules.CannotBeNull, "response.Response");
             }
 
             if (response.Response.StatusCode != HttpStatusCode.OK &&
@@ -352,7 +352,7 @@ namespace Microsoft.Azure
             // Validate
             if (operationUrl == null)
             {
-                throw new ArgumentNullException("operationUrl");
+                throw new ValidationException(ValidationRules.CannotBeNull, "operationUrl");
             }
 
             // Tracing

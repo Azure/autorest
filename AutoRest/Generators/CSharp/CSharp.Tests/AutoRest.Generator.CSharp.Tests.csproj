@@ -21,10 +21,6 @@
     <NoWarn>1570;1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Rest.ClientRuntime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\packages\Microsoft.Rest.ClientRuntime.1.0.0\lib\net45\Microsoft.Rest.ClientRuntime.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -43,6 +39,10 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\ClientRuntimes\CSharp\ClientRuntime\ClientRuntime.csproj">
+      <Project>{7f524559-93f9-4f3f-9e2c-af41a0c2e6f4}</Project>
+      <Name>ClientRuntime</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\AutoRest.Core\AutoRest.Core.csproj">
       <Project>{c876085f-9dc3-41f0-b7b4-17022cd84684}</Project>
       <Name>AutoRest.Core</Name>

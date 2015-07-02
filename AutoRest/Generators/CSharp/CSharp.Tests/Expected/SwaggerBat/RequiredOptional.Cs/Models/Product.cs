@@ -27,7 +27,7 @@ namespace Fixtures.SwaggerBatRequiredOptional.Models
         {
             if (Id == null)
             {
-                throw new ArgumentNullException("Id");
+                throw new ValidationException(ValidationRules.CannotBeNull, "Id");
             }
         }
     }

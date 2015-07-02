@@ -122,7 +122,7 @@ namespace Fixtures.SwaggerBatBodyString
         {
             if (stringBody == null)
             {
-                throw new ArgumentNullException("stringBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, "stringBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
