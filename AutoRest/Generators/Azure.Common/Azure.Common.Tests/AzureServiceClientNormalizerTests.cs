@@ -339,8 +339,8 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
             Assert.Equal(3, serviceClient.ModelTypes.Count);
             Assert.Equal("dog", serviceClient.ModelTypes[1].Name);
             Assert.Equal(4, serviceClient.ModelTypes[1].Properties.Count);
-            Assert.Equal("id", serviceClient.ModelTypes[1].Properties[1].Name);
-            Assert.Equal("name", serviceClient.ModelTypes[1].Properties[2].Name);
+            Assert.Equal("dogId", serviceClient.ModelTypes[1].Properties[1].Name);
+            Assert.Equal("dogName", serviceClient.ModelTypes[1].Properties[2].Name);
             Assert.Equal("pedigree", serviceClient.ModelTypes[1].Properties[0].Name);
             Assert.Equal("parent", serviceClient.ModelTypes[1].Properties[3].Name);
         }

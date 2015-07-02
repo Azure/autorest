@@ -9,11 +9,11 @@ namespace Microsoft.Rest.Generator.Ruby
 {
     public class RubyCodeGenerator : CodeGenerator
     {
-        private readonly RubyCodeNamingFramework namingFramework;
+        private readonly RubyCodeNamer namingFramework;
 
         public RubyCodeGenerator(Settings settings) : base(settings)
         {
-            namingFramework = new RubyCodeNamingFramework();
+            namingFramework = new RubyCodeNamer();
         }
 
         public override string Name
@@ -78,7 +78,7 @@ namespace Microsoft.Rest.Generator.Ruby
                 Model = new ServiceClientTemplateModel(serviceClient),
             };
             await Write(serviceClientTemplate, 
-                RubyCodeNamingFramework.UnderscoreCase(serviceClient.Name) + ImplementationFileExtension);
+                RubyCodeNamer.UnderscoreCase(serviceClient.Name) + ImplementationFileExtension);
 
             // Method groups
             foreach (var group in serviceClient.MethodGroups)
@@ -88,7 +88,7 @@ namespace Microsoft.Rest.Generator.Ruby
                     Model = new MethodGroupTemplateModel(serviceClient, group),
                 };
                 await Write(groupTemplate, 
-                    RubyCodeNamingFramework.UnderscoreCase(group) + ImplementationFileExtension);
+                    RubyCodeNamer.UnderscoreCase(group) + ImplementationFileExtension);
             }
 
             // Models
@@ -99,7 +99,7 @@ namespace Microsoft.Rest.Generator.Ruby
                     Model = new ModelTemplateModel(model, serviceClient),
                 };
                 await Write(modelTemplate, "Models\\" + 
-                    RubyCodeNamingFramework.UnderscoreCase(model.Name) + ImplementationFileExtension);
+                    RubyCodeNamer.UnderscoreCase(model.Name) + ImplementationFileExtension);
             }
 
             // Enums
@@ -109,7 +109,7 @@ namespace Microsoft.Rest.Generator.Ruby
                 {
                     Model = new EnumTemplateModel(enumType),
                 };
-                await Write(enumTemplate, "Models\\" + RubyCodeNamingFramework.UnderscoreCase(enumTemplate.Model.TypeDefinitionName) + ImplementationFileExtension);
+                await Write(enumTemplate, "Models\\" + RubyCodeNamer.UnderscoreCase(enumTemplate.Model.TypeDefinitionName) + ImplementationFileExtension);
             }
 
             // Requirements
@@ -118,7 +118,7 @@ namespace Microsoft.Rest.Generator.Ruby
                 Model = new RequirementsTemplateModel(serviceClient),
             };
             await Write(requirementsTemplate,
-                RubyCodeNamingFramework.UnderscoreCase("sdk_requirements") + ImplementationFileExtension);
+                RubyCodeNamer.UnderscoreCase("sdk_requirements") + ImplementationFileExtension);
         }
     }
 }
