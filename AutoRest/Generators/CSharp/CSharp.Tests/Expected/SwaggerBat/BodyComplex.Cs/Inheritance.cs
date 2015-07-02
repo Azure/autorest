@@ -122,7 +122,7 @@ namespace Fixtures.SwaggerBatBodyComplex
         {
             if (complexBody == null)
             {
-                throw new ArgumentNullException("complexBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, "complexBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;

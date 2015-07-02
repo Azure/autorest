@@ -266,7 +266,7 @@ namespace Fixtures.SwaggerBatBodyNumber
         {
             if (numberBody == null)
             {
-                throw new ArgumentNullException("numberBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, "numberBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -420,7 +420,7 @@ namespace Fixtures.SwaggerBatBodyNumber
         {
             if (numberBody == null)
             {
-                throw new ArgumentNullException("numberBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, "numberBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -574,7 +574,7 @@ namespace Fixtures.SwaggerBatBodyNumber
         {
             if (numberBody == null)
             {
-                throw new ArgumentNullException("numberBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, "numberBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -728,7 +728,7 @@ namespace Fixtures.SwaggerBatBodyNumber
         {
             if (numberBody == null)
             {
-                throw new ArgumentNullException("numberBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, "numberBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -882,7 +882,7 @@ namespace Fixtures.SwaggerBatBodyNumber
         {
             if (numberBody == null)
             {
-                throw new ArgumentNullException("numberBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, "numberBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1036,7 +1036,7 @@ namespace Fixtures.SwaggerBatBodyNumber
         {
             if (numberBody == null)
             {
-                throw new ArgumentNullException("numberBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, "numberBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;

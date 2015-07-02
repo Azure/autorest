@@ -44,7 +44,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
         {
             if (pathParameter == null)
             {
-                throw new ArgumentNullException("pathParameter");
+                throw new ValidationException(ValidationRules.CannotBeNull, "pathParameter");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -356,7 +356,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
         {
             if (requiredGlobalPath == null)
             {
-                throw new ArgumentNullException("requiredGlobalPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "requiredGlobalPath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -435,7 +435,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
         {
             if (requiredGlobalQuery == null)
             {
-                throw new ArgumentNullException("requiredGlobalQuery");
+                throw new ValidationException(ValidationRules.CannotBeNull, "requiredGlobalQuery");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;

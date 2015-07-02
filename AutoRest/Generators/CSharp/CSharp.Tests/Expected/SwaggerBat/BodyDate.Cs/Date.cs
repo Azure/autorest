@@ -340,7 +340,7 @@ namespace Fixtures.SwaggerBatBodyDate
         {
             if (dateBody == null)
             {
-                throw new ArgumentNullException("dateBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, "dateBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -494,7 +494,7 @@ namespace Fixtures.SwaggerBatBodyDate
         {
             if (dateBody == null)
             {
-                throw new ArgumentNullException("dateBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, "dateBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;

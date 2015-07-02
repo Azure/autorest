@@ -134,15 +134,15 @@ namespace Fixtures.MirrorRecursiveTypes
         {
             if (subscriptionId == null)
             {
-                throw new ArgumentNullException("subscriptionId");
+                throw new ValidationException(ValidationRules.CannotBeNull, "subscriptionId");
             }
             if (resourceGroupName == null)
             {
-                throw new ArgumentNullException("resourceGroupName");
+                throw new ValidationException(ValidationRules.CannotBeNull, "resourceGroupName");
             }
             if (apiVersion == null)
             {
-                throw new ArgumentNullException("apiVersion");
+                throw new ValidationException(ValidationRules.CannotBeNull, "apiVersion");
             }
             if (body != null)
             {

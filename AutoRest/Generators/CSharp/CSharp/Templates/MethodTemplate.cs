@@ -123,9 +123,10 @@ Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral(" == null)\r\n    {\r\n        throw new ArgumentNullException(\"");
+            WriteLiteral(" == null)\r\n    {\r\n        throw new ValidationException(ValidationRules.CannotBeN" +
+"ull, \"");
 #line 27 "MethodTemplate.cshtml"
-                                       Write(parameter.Name);
+                                                                   Write(parameter.Name);
 
 #line default
 #line hidden
