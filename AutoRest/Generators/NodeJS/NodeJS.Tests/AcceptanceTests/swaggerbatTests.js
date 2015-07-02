@@ -1627,7 +1627,7 @@ describe('nodejs', function () {
     describe('Http infrastructure Client', function () {
       var testOptions = clientOptions;
       testOptions.requestOptions = { jar: true };
-      testOptions.filters = [new msRest.ExponentialRetryPolicyFilter(3, 0.1, 0.1, 0.1)];
+      testOptions.filters = [new msRest.ExponentialRetryPolicyFilter(3, 0, 0, 0)];
       testOptions.noRetryPolicy = true
       var testClient = new httpClient(credentials, baseUri, testOptions);
       it('should work for all http success status codes with different verbs', function (done) {

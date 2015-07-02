@@ -26,7 +26,7 @@ describe('nodejs', function () {
     describe('Resource Flattening Operations', function () {
       var testOptions = clientOptions;
       testOptions.requestOptions = { jar: true };
-      testOptions.filters = [new msRest.ExponentialRetryPolicyFilter(3, 0.1, 0.1, 0.1)];
+      testOptions.filters = [new msRest.ExponentialRetryPolicyFilter(3, 0, 0, 0)];
       testOptions.noRetryPolicy = true;
       var testClient = new flatteningClient(credentials, baseUri, clientOptions);
       
