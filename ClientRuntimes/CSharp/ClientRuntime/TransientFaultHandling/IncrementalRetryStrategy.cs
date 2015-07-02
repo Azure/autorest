@@ -11,14 +11,14 @@ namespace Microsoft.Rest.TransientFaultHandling
     /// </summary>
     public class IncrementalRetryStrategy : RetryStrategy
     {
-        private readonly TimeSpan _increment;
-        private readonly TimeSpan _initialInterval;
-        private readonly int _retryCount;
-
         /// <summary>
         /// Represents the default time increment between retry attempts in the progressive delay policy.
         /// </summary>
         public static readonly TimeSpan DefaultRetryIncrement = TimeSpan.FromSeconds(1.0);
+
+        private readonly TimeSpan _increment;
+        private readonly TimeSpan _initialInterval;
+        private readonly int _retryCount;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="IncrementalRetryStrategy"/> class. 
@@ -64,17 +64,16 @@ namespace Microsoft.Rest.TransientFaultHandling
         /// retries.</param>
         /// <param name="firstFastRetry">true to immediately retry in the first attempt; otherwise, false. The subsequent 
         /// retries will remain subject to the configured retry interval.</param>
-        public IncrementalRetryStrategy(string name, int retryCount, TimeSpan initialInterval, TimeSpan increment,
-            bool firstFastRetry)
+        public IncrementalRetryStrategy(string name, int retryCount, TimeSpan initialInterval, TimeSpan increment, bool firstFastRetry)
             : base(name, firstFastRetry)
         {
             Guard.ArgumentNotNegativeValue(retryCount, "retryCount");
             Guard.ArgumentNotNegativeValue(initialInterval.Ticks, "initialInterval");
             Guard.ArgumentNotNegativeValue(increment.Ticks, "increment");
 
-            this._retryCount = retryCount;
-            this._initialInterval = initialInterval;
-            this._increment = increment;
+            _retryCount = retryCount;
+            _initialInterval = initialInterval;
+            _increment = increment;
         }
 
         /// <summary>
@@ -85,10 +84,10 @@ namespace Microsoft.Rest.TransientFaultHandling
         {
             return delegate(int currentRetryCount, Exception lastException)
             {
-                if (currentRetryCount < this._retryCount)
+                if (currentRetryCount < _retryCount)
                 {
-                    TimeSpan retryInterval = TimeSpan.FromMilliseconds(this._initialInterval.TotalMilliseconds +
-                                                                       (this._increment.TotalMilliseconds*
+                    TimeSpan retryInterval = TimeSpan.FromMilliseconds(_initialInterval.TotalMilliseconds +
+                                                                       (_increment.TotalMilliseconds*
                                                                         currentRetryCount));
                     return new RetryCondition(true, retryInterval);
                 }

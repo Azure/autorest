@@ -13,20 +13,6 @@ namespace Microsoft.Rest
     public static class PlatformTask
     {
         /// <summary>
-        /// Creates an already completed Task from the specified result.
-        /// </summary>
-        /// <param name="result">The result from which to create the completed task.</param>
-        /// <returns>The completed Task.</returns>
-        public static Task FromResult(object result)
-        {
-#if NET45
-            return Task.FromResult<object>(result);
-#else
-            return TaskEx.FromResult<object>(result);
-#endif
-        }
-
-        /// <summary>
         /// Starts a Task that will complete after the specified time interval.
         /// </summary>
         /// <param name="delayTime">time interval.</param>
@@ -54,5 +40,20 @@ namespace Microsoft.Rest
             return TaskEx.Delay(millisecondsDelay, cancellationToken);
 #endif
         }
+
+        /// <summary>
+        /// Creates an already completed Task from the specified result.
+        /// </summary>
+        /// <param name="result">The result from which to create the completed task.</param>
+        /// <returns>The completed Task.</returns>
+        public static Task FromResult(object result)
+        {
+#if NET45
+            return Task.FromResult<object>(result);
+#else
+            return TaskEx.FromResult<object>(result);
+#endif
+        }
+
     }
 }

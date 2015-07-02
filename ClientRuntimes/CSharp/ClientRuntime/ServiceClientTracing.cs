@@ -17,7 +17,7 @@ namespace Microsoft.Rest
         /// <summary>
         /// The collection of tracing interceptors to notify.
         /// </summary>
-        private static List<IServiceClientTracingInterceptor> _interceptors =
+        private static readonly List<IServiceClientTracingInterceptor> _interceptors =
             new List<IServiceClientTracingInterceptor>();
 
         /// <summary>
@@ -34,16 +34,13 @@ namespace Microsoft.Rest
         /// <summary>
         /// Lock used to synchronize mutation of the tracing interceptors.
         /// </summary>
-        private static object _lock = new object();
+        private static readonly object _lock = new object();
 
         /// <summary>
         /// The invocation identifier.
         /// </summary>
         private static long _nextInvocationId = 0;
 
-        /// <summary>
-        /// Value indicating whether tracing is enabled.
-        /// </summary>
         private static bool _isEnabled = false;
 
         /// <summary>
@@ -230,7 +227,7 @@ namespace Microsoft.Rest
                 }
             }
         }
-       
+
         /// <summary>
         /// Abandons the tracing method.
         /// </summary>

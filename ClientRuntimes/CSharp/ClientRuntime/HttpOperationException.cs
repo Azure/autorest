@@ -37,7 +37,6 @@ namespace Microsoft.Rest
         /// Initializes a new instance of the HttpOperationException class.
         /// </summary>
         public HttpOperationException()
-            : base()
         {
         }
 
@@ -60,7 +59,7 @@ namespace Microsoft.Rest
         {
         }
 
-#if !PORTABLE        
+#if !PORTABLE
         /// <summary>
         /// Initializes a new instance of the HttpOperationException class.
         /// </summary>

@@ -11,6 +11,22 @@ Alternatively it can be installed from [Chocolatey](https://chocolatey.org/) by 
 
     choco install autorest
 
+##Build Prerequisites
+AutoRest is developed primarily in C# but generates code for multiple languages. To build and test AutoRest requires a few things be installed locally.
+###Ruby
+[RubyInstaller](http://rubyinstaller.org/downloads/) Version 2.1.6   (32bits)
+By default, it installs to C:\Ruby21. Ensure that C:\Ruby21\bin is in your path.
+[RubyDevKit](http://rubyinstaller.org/downloads/) For use with Ruby 2.0 and above (32bits version)
+The DevKit installer just unpacks files. Navigate to the directory and run the following:
+
+>ruby dk.rb init
+
+This produces a file called `config.yml` that lists the location of the ruby installations it finds. Customize if necessary, and then run:
+
+>ruby dk.rb install
+
+
+
 ##Hello World##
 For this version  of Hello World, we will use **AutoRest** to generate a client library and use it to call a web service. The trivial web service that just returns a string is defined as follows: 
 ```

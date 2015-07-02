@@ -21,9 +21,9 @@ namespace Microsoft.Rest.TransientFaultHandling
         {
             Guard.ArgumentNotNull(lastException, "lastException");
 
-            this.CurrentRetryCount = currentRetryCount;
-            this.Delay = delay;
-            this.LastException = lastException;
+            CurrentRetryCount = currentRetryCount;
+            Delay = delay;
+            LastException = lastException;
         }
 
         /// <summary>
