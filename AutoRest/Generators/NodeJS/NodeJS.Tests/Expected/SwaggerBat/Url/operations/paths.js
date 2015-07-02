@@ -50,7 +50,7 @@ Paths.prototype.getBooleanTrue = function (boolPath, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//paths/bool/true/{boolPath}';
-  requestUrl = requestUrl.replace("{boolPath}", encodeURIComponent(boolPath.toString()));
+  requestUrl = requestUrl.replace('{boolPath}', encodeURIComponent(boolPath.toString()));
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -127,7 +127,7 @@ Paths.prototype.getBooleanFalse = function (boolPath, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//paths/bool/false/{boolPath}';
-  requestUrl = requestUrl.replace("{boolPath}", encodeURIComponent(boolPath.toString()));
+  requestUrl = requestUrl.replace('{boolPath}', encodeURIComponent(boolPath.toString()));
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -204,7 +204,7 @@ Paths.prototype.getIntOneMillion = function (intPath, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//paths/int/1000000/{intPath}';
-  requestUrl = requestUrl.replace("{intPath}", encodeURIComponent(intPath.toString()));
+  requestUrl = requestUrl.replace('{intPath}', encodeURIComponent(intPath.toString()));
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -281,7 +281,7 @@ Paths.prototype.getIntNegativeOneMillion = function (intPath, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//paths/int/-1000000/{intPath}';
-  requestUrl = requestUrl.replace("{intPath}", encodeURIComponent(intPath.toString()));
+  requestUrl = requestUrl.replace('{intPath}', encodeURIComponent(intPath.toString()));
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -358,7 +358,7 @@ Paths.prototype.getTenBillion = function (longPath, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//paths/long/10000000000/{longPath}';
-  requestUrl = requestUrl.replace("{longPath}", encodeURIComponent(longPath.toString()));
+  requestUrl = requestUrl.replace('{longPath}', encodeURIComponent(longPath.toString()));
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -435,7 +435,7 @@ Paths.prototype.getNegativeTenBillion = function (longPath, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//paths/long/-10000000000/{longPath}';
-  requestUrl = requestUrl.replace("{longPath}", encodeURIComponent(longPath.toString()));
+  requestUrl = requestUrl.replace('{longPath}', encodeURIComponent(longPath.toString()));
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -512,7 +512,7 @@ Paths.prototype.floatScientificPositive = function (floatPath, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//paths/float/1.034E+20/{floatPath}';
-  requestUrl = requestUrl.replace("{floatPath}", encodeURIComponent(floatPath.toString()));
+  requestUrl = requestUrl.replace('{floatPath}', encodeURIComponent(floatPath.toString()));
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -589,7 +589,7 @@ Paths.prototype.floatScientificNegative = function (floatPath, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//paths/float/-1.034E-20/{floatPath}';
-  requestUrl = requestUrl.replace("{floatPath}", encodeURIComponent(floatPath.toString()));
+  requestUrl = requestUrl.replace('{floatPath}', encodeURIComponent(floatPath.toString()));
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -666,7 +666,7 @@ Paths.prototype.doubleDecimalPositive = function (doublePath, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//paths/double/9999999.999/{doublePath}';
-  requestUrl = requestUrl.replace("{doublePath}", encodeURIComponent(doublePath.toString()));
+  requestUrl = requestUrl.replace('{doublePath}', encodeURIComponent(doublePath.toString()));
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -743,7 +743,7 @@ Paths.prototype.doubleDecimalNegative = function (doublePath, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//paths/double/-9999999.999/{doublePath}';
-  requestUrl = requestUrl.replace("{doublePath}", encodeURIComponent(doublePath.toString()));
+  requestUrl = requestUrl.replace('{doublePath}', encodeURIComponent(doublePath.toString()));
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -820,7 +820,7 @@ Paths.prototype.stringUnicode = function (stringPath, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//paths/string/unicode/{stringPath}';
-  requestUrl = requestUrl.replace("{stringPath}", encodeURIComponent(stringPath));
+  requestUrl = requestUrl.replace('{stringPath}', encodeURIComponent(stringPath));
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -897,7 +897,7 @@ Paths.prototype.stringUrlEncoded = function (stringPath, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}';
-  requestUrl = requestUrl.replace("{stringPath}", encodeURIComponent(stringPath));
+  requestUrl = requestUrl.replace('{stringPath}', encodeURIComponent(stringPath));
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -974,7 +974,7 @@ Paths.prototype.stringEmpty = function (stringPath, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//paths/string/empty/{stringPath}';
-  requestUrl = requestUrl.replace("{stringPath}", encodeURIComponent(stringPath));
+  requestUrl = requestUrl.replace('{stringPath}', encodeURIComponent(stringPath));
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -1051,7 +1051,7 @@ Paths.prototype.stringNull = function (stringPath, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//paths/string/null/{stringPath}';
-  requestUrl = requestUrl.replace("{stringPath}", encodeURIComponent(stringPath));
+  requestUrl = requestUrl.replace('{stringPath}', encodeURIComponent(stringPath));
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -1131,7 +1131,7 @@ Paths.prototype.enumValid = function (enumPath, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//paths/enum/green%20color/{enumPath}';
-  requestUrl = requestUrl.replace("{enumPath}", encodeURIComponent(enumPath.toString()));
+  requestUrl = requestUrl.replace('{enumPath}', encodeURIComponent(enumPath.toString()));
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -1287,7 +1287,7 @@ Paths.prototype.byteMultiByte = function (bytePath, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//paths/byte/multibyte/{bytePath}';
-  requestUrl = requestUrl.replace("{bytePath}", encodeURIComponent(msRest.serializeObject(bytePath)));
+  requestUrl = requestUrl.replace('{bytePath}', encodeURIComponent(msRest.serializeObject(bytePath)));
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -1364,7 +1364,7 @@ Paths.prototype.byteEmpty = function (bytePath, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//paths/byte/empty/{bytePath}';
-  requestUrl = requestUrl.replace("{bytePath}", encodeURIComponent(msRest.serializeObject(bytePath)));
+  requestUrl = requestUrl.replace('{bytePath}', encodeURIComponent(msRest.serializeObject(bytePath)));
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -1441,7 +1441,7 @@ Paths.prototype.byteNull = function (bytePath, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//paths/byte/null/{bytePath}';
-  requestUrl = requestUrl.replace("{bytePath}", encodeURIComponent(msRest.serializeObject(bytePath)));
+  requestUrl = requestUrl.replace('{bytePath}', encodeURIComponent(msRest.serializeObject(bytePath)));
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -1520,7 +1520,7 @@ Paths.prototype.dateValid = function (datePath, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//paths/date/2012-01-01/{datePath}';
-  requestUrl = requestUrl.replace("{datePath}", encodeURIComponent(msRest.serializeObject(datePath).replace(/[Tt].*[Zz]/, '')));
+  requestUrl = requestUrl.replace('{datePath}', encodeURIComponent(msRest.serializeObject(datePath).replace(/[Tt].*[Zz]/, '')));
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -1600,7 +1600,7 @@ Paths.prototype.dateNull = function (datePath, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//paths/date/null/{datePath}';
-  requestUrl = requestUrl.replace("{datePath}", encodeURIComponent(msRest.serializeObject(datePath).replace(/[Tt].*[Zz]/, '')));
+  requestUrl = requestUrl.replace('{datePath}', encodeURIComponent(msRest.serializeObject(datePath).replace(/[Tt].*[Zz]/, '')));
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -1679,7 +1679,7 @@ Paths.prototype.dateTimeValid = function (dateTimePath, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}';
-  requestUrl = requestUrl.replace("{dateTimePath}", encodeURIComponent(msRest.serializeObject(dateTimePath)));
+  requestUrl = requestUrl.replace('{dateTimePath}', encodeURIComponent(msRest.serializeObject(dateTimePath)));
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -1759,7 +1759,7 @@ Paths.prototype.dateTimeNull = function (dateTimePath, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//paths/datetime/null/{dateTimePath}';
-  requestUrl = requestUrl.replace("{dateTimePath}", encodeURIComponent(msRest.serializeObject(dateTimePath)));
+  requestUrl = requestUrl.replace('{dateTimePath}', encodeURIComponent(msRest.serializeObject(dateTimePath)));
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');

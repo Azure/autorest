@@ -22,11 +22,11 @@ Widget.prototype.validate = function (payload) {
     throw new Error('Widget cannot be null.');
   }
   if (payload['integer'] !== null && payload['integer'] !== undefined && typeof payload['integer'] !== 'number') {
-    throw new Error('payload["integer"] must be of type number.');
+    throw new Error('payload[\'integer\'] must be of type number.');
   }
 
   if (payload['string'] !== null && payload['string'] !== undefined && typeof payload['string'] !== 'string') {
-    throw new Error('payload["string"] must be of type string.');
+    throw new Error('payload[\'string\'] must be of type string.');
   }
 
 };

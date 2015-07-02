@@ -22,11 +22,11 @@ DoubleWrapper.prototype.validate = function (payload) {
     throw new Error('DoubleWrapper cannot be null.');
   }
   if (payload['field1'] !== null && payload['field1'] !== undefined && typeof payload['field1'] !== 'number') {
-    throw new Error('payload["field1"] must be of type number.');
+    throw new Error('payload[\'field1\'] must be of type number.');
   }
 
   if (payload['field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose'] !== null && payload['field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose'] !== undefined && typeof payload['field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose'] !== 'number') {
-    throw new Error('payload["field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose"] must be of type number.');
+    throw new Error('payload[\'field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose\'] must be of type number.');
   }
 
 };

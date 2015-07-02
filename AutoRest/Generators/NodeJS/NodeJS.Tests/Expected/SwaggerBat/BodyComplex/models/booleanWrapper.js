@@ -22,11 +22,11 @@ BooleanWrapper.prototype.validate = function (payload) {
     throw new Error('BooleanWrapper cannot be null.');
   }
   if (payload['fieldTrue'] !== null && payload['fieldTrue'] !== undefined && typeof payload['fieldTrue'] !== 'boolean') {
-    throw new Error('payload["fieldTrue"] must be of type boolean.');
+    throw new Error('payload[\'fieldTrue\'] must be of type boolean.');
   }
 
   if (payload['fieldFalse'] !== null && payload['fieldFalse'] !== undefined && typeof payload['fieldFalse'] !== 'boolean') {
-    throw new Error('payload["fieldFalse"] must be of type boolean.');
+    throw new Error('payload[\'fieldFalse\'] must be of type boolean.');
   }
 
 };

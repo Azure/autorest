@@ -22,11 +22,11 @@ Pet.prototype.validate = function (payload) {
     throw new Error('Pet cannot be null.');
   }
   if (payload['id'] !== null && payload['id'] !== undefined && typeof payload['id'] !== 'number') {
-    throw new Error('payload["id"] must be of type number.');
+    throw new Error('payload[\'id\'] must be of type number.');
   }
 
   if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'] !== 'string') {
-    throw new Error('payload["name"] must be of type string.');
+    throw new Error('payload[\'name\'] must be of type string.');
   }
 
 };

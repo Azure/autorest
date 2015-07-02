@@ -22,7 +22,7 @@ ProductProperties.prototype.validate = function (payload) {
     throw new Error('ProductProperties cannot be null.');
   }
   if (payload['provisioningStateValues'] !== null && payload['provisioningStateValues'] !== undefined && typeof payload['provisioningStateValues'] !== 'string') {
-    throw new Error('payload["provisioningStateValues"] must be of type string.');
+    throw new Error('payload[\'provisioningStateValues\'] must be of type string.');
   }
 
 };

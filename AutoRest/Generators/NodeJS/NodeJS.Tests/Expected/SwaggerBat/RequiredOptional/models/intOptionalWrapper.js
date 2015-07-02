@@ -22,7 +22,7 @@ IntOptionalWrapper.prototype.validate = function (payload) {
     throw new Error('IntOptionalWrapper cannot be null.');
   }
   if (payload['value'] !== null && payload['value'] !== undefined && typeof payload['value'] !== 'number') {
-    throw new Error('payload["value"] must be of type number.');
+    throw new Error('payload[\'value\'] must be of type number.');
   }
 
 };

@@ -22,7 +22,7 @@ ByteWrapper.prototype.validate = function (payload) {
     throw new Error('ByteWrapper cannot be null.');
   }
   if (payload['field'] !== null && payload['field'] !== undefined && !Buffer.isBuffer(payload['field'])) {
-    throw new Error('payload["field"] must be of type buffer.');
+    throw new Error('payload[\'field\'] must be of type buffer.');
   }
 
 };

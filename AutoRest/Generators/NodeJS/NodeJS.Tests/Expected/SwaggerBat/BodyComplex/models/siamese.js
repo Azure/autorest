@@ -22,15 +22,15 @@ Siamese.prototype.validate = function (payload) {
     throw new Error('Siamese cannot be null.');
   }
   if (payload['id'] !== null && payload['id'] !== undefined && typeof payload['id'] !== 'number') {
-    throw new Error('payload["id"] must be of type number.');
+    throw new Error('payload[\'id\'] must be of type number.');
   }
 
   if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'] !== 'string') {
-    throw new Error('payload["name"] must be of type string.');
+    throw new Error('payload[\'name\'] must be of type string.');
   }
 
   if (payload['color'] !== null && payload['color'] !== undefined && typeof payload['color'] !== 'string') {
-    throw new Error('payload["color"] must be of type string.');
+    throw new Error('payload[\'color\'] must be of type string.');
   }
 
   if (payload['hates'] !== null && payload['hates'] !== undefined && util.isArray(payload['hates'])) {
@@ -42,7 +42,7 @@ Siamese.prototype.validate = function (payload) {
   }
 
   if (payload['breed'] !== null && payload['breed'] !== undefined && typeof payload['breed'] !== 'string') {
-    throw new Error('payload["breed"] must be of type string.');
+    throw new Error('payload[\'breed\'] must be of type string.');
   }
 
 };

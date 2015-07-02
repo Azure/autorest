@@ -22,11 +22,11 @@ FloatWrapper.prototype.validate = function (payload) {
     throw new Error('FloatWrapper cannot be null.');
   }
   if (payload['field1'] !== null && payload['field1'] !== undefined && typeof payload['field1'] !== 'number') {
-    throw new Error('payload["field1"] must be of type number.');
+    throw new Error('payload[\'field1\'] must be of type number.');
   }
 
   if (payload['field2'] !== null && payload['field2'] !== undefined && typeof payload['field2'] !== 'number') {
-    throw new Error('payload["field2"] must be of type number.');
+    throw new Error('payload[\'field2\'] must be of type number.');
   }
 
 };

@@ -85,9 +85,9 @@ PathItems.prototype.getAllWithValues = function (localStringPath, pathItemString
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery';
-  requestUrl = requestUrl.replace("{localStringPath}", encodeURIComponent(localStringPath));
-  requestUrl = requestUrl.replace("{pathItemStringPath}", encodeURIComponent(pathItemStringPath));
-  requestUrl = requestUrl.replace("{globalStringPath}", encodeURIComponent(globalStringPath));
+  requestUrl = requestUrl.replace('{localStringPath}', encodeURIComponent(localStringPath));
+  requestUrl = requestUrl.replace('{pathItemStringPath}', encodeURIComponent(pathItemStringPath));
+  requestUrl = requestUrl.replace('{globalStringPath}', encodeURIComponent(globalStringPath));
   var queryParameters = [];
   if (localStringQuery !== null && localStringQuery !== undefined) {
     queryParameters.push('localStringQuery=' + encodeURIComponent(localStringQuery));
@@ -212,9 +212,9 @@ PathItems.prototype.getGlobalQueryNull = function (localStringPath, pathItemStri
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery';
-  requestUrl = requestUrl.replace("{localStringPath}", encodeURIComponent(localStringPath));
-  requestUrl = requestUrl.replace("{pathItemStringPath}", encodeURIComponent(pathItemStringPath));
-  requestUrl = requestUrl.replace("{globalStringPath}", encodeURIComponent(globalStringPath));
+  requestUrl = requestUrl.replace('{localStringPath}', encodeURIComponent(localStringPath));
+  requestUrl = requestUrl.replace('{pathItemStringPath}', encodeURIComponent(pathItemStringPath));
+  requestUrl = requestUrl.replace('{globalStringPath}', encodeURIComponent(globalStringPath));
   var queryParameters = [];
   if (localStringQuery !== null && localStringQuery !== undefined) {
     queryParameters.push('localStringQuery=' + encodeURIComponent(localStringQuery));
@@ -338,9 +338,9 @@ PathItems.prototype.getGlobalAndLocalQueryNull = function (localStringPath, path
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null';
-  requestUrl = requestUrl.replace("{localStringPath}", encodeURIComponent(localStringPath));
-  requestUrl = requestUrl.replace("{pathItemStringPath}", encodeURIComponent(pathItemStringPath));
-  requestUrl = requestUrl.replace("{globalStringPath}", encodeURIComponent(globalStringPath));
+  requestUrl = requestUrl.replace('{localStringPath}', encodeURIComponent(localStringPath));
+  requestUrl = requestUrl.replace('{pathItemStringPath}', encodeURIComponent(pathItemStringPath));
+  requestUrl = requestUrl.replace('{globalStringPath}', encodeURIComponent(globalStringPath));
   var queryParameters = [];
   if (localStringQuery !== null && localStringQuery !== undefined) {
     queryParameters.push('localStringQuery=' + encodeURIComponent(localStringQuery));
@@ -464,9 +464,9 @@ PathItems.prototype.getLocalPathItemQueryNull = function (localStringPath, pathI
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null';
-  requestUrl = requestUrl.replace("{localStringPath}", encodeURIComponent(localStringPath));
-  requestUrl = requestUrl.replace("{pathItemStringPath}", encodeURIComponent(pathItemStringPath));
-  requestUrl = requestUrl.replace("{globalStringPath}", encodeURIComponent(globalStringPath));
+  requestUrl = requestUrl.replace('{localStringPath}', encodeURIComponent(localStringPath));
+  requestUrl = requestUrl.replace('{pathItemStringPath}', encodeURIComponent(pathItemStringPath));
+  requestUrl = requestUrl.replace('{globalStringPath}', encodeURIComponent(globalStringPath));
   var queryParameters = [];
   if (localStringQuery !== null && localStringQuery !== undefined) {
     queryParameters.push('localStringQuery=' + encodeURIComponent(localStringQuery));

@@ -22,11 +22,11 @@ ErrorModel.prototype.validate = function (payload) {
     throw new Error('ErrorModel cannot be null.');
   }
   if (payload['status'] !== null && payload['status'] !== undefined && typeof payload['status'] !== 'number') {
-    throw new Error('payload["status"] must be of type number.');
+    throw new Error('payload[\'status\'] must be of type number.');
   }
 
   if (payload['message'] !== null && payload['message'] !== undefined && typeof payload['message'] !== 'string') {
-    throw new Error('payload["message"] must be of type string.');
+    throw new Error('payload[\'message\'] must be of type string.');
   }
 
 };

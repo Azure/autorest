@@ -22,14 +22,14 @@ Product.prototype.validate = function (payload) {
     throw new Error('Product cannot be null.');
   }
   if (payload['id'] === null || payload['id'] === undefined) {
-    throw new Error('payload["id"] cannot be null or undefined.');
+    throw new Error('payload[\'id\'] cannot be null or undefined.');
   }
   if (payload['id'] !== null && payload['id'] !== undefined && typeof payload['id'] !== 'number') {
-    throw new Error('payload["id"] must be of type number.');
+    throw new Error('payload[\'id\'] must be of type number.');
   }
 
   if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'] !== 'string') {
-    throw new Error('payload["name"] must be of type string.');
+    throw new Error('payload[\'name\'] must be of type string.');
   }
 
 };

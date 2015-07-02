@@ -22,7 +22,7 @@ StringOptionalWrapper.prototype.validate = function (payload) {
     throw new Error('StringOptionalWrapper cannot be null.');
   }
   if (payload['value'] !== null && payload['value'] !== undefined && typeof payload['value'] !== 'string') {
-    throw new Error('payload["value"] must be of type string.');
+    throw new Error('payload[\'value\'] must be of type string.');
   }
 
 };

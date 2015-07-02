@@ -22,11 +22,11 @@ B.prototype.validate = function (payload) {
     throw new Error('B cannot be null.');
   }
   if (payload['statusCode'] !== null && payload['statusCode'] !== undefined && typeof payload['statusCode'] !== 'string') {
-    throw new Error('payload["statusCode"] must be of type string.');
+    throw new Error('payload[\'statusCode\'] must be of type string.');
   }
 
   if (payload['textStatusCode'] !== null && payload['textStatusCode'] !== undefined && typeof payload['textStatusCode'] !== 'string') {
-    throw new Error('payload["textStatusCode"] must be of type string.');
+    throw new Error('payload[\'textStatusCode\'] must be of type string.');
   }
 
 };

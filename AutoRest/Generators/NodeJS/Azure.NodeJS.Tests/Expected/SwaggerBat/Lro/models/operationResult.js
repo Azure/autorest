@@ -22,7 +22,7 @@ OperationResult.prototype.validate = function (payload) {
     throw new Error('OperationResult cannot be null.');
   }
   if (payload['status'] !== null && payload['status'] !== undefined && typeof payload['status'] !== 'string') {
-    throw new Error('payload["status"] must be of type string.');
+    throw new Error('payload[\'status\'] must be of type string.');
   }
 
   if (payload['error'] !== null && payload['error'] !== undefined) {

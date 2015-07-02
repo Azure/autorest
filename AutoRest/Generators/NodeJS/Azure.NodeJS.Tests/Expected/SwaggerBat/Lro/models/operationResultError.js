@@ -22,11 +22,11 @@ OperationResultError.prototype.validate = function (payload) {
     throw new Error('OperationResultError cannot be null.');
   }
   if (payload['code'] !== null && payload['code'] !== undefined && typeof payload['code'] !== 'number') {
-    throw new Error('payload["code"] must be of type number.');
+    throw new Error('payload[\'code\'] must be of type number.');
   }
 
   if (payload['message'] !== null && payload['message'] !== undefined && typeof payload['message'] !== 'string') {
-    throw new Error('payload["message"] must be of type string.');
+    throw new Error('payload[\'message\'] must be of type string.');
   }
 
 };

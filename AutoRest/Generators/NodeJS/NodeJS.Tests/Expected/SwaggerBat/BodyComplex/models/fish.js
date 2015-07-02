@@ -22,14 +22,14 @@ Fish.prototype.validate = function (payload) {
     throw new Error('Fish cannot be null.');
   }
   if (payload['species'] !== null && payload['species'] !== undefined && typeof payload['species'] !== 'string') {
-    throw new Error('payload["species"] must be of type string.');
+    throw new Error('payload[\'species\'] must be of type string.');
   }
 
   if (payload['length'] === null || payload['length'] === undefined) {
-    throw new Error('payload["length"] cannot be null or undefined.');
+    throw new Error('payload[\'length\'] cannot be null or undefined.');
   }
   if (payload['length'] !== null && payload['length'] !== undefined && typeof payload['length'] !== 'number') {
-    throw new Error('payload["length"] must be of type number.');
+    throw new Error('payload[\'length\'] must be of type number.');
   }
 
   if (payload['siblings'] !== null && payload['siblings'] !== undefined && util.isArray(payload['siblings'])) {

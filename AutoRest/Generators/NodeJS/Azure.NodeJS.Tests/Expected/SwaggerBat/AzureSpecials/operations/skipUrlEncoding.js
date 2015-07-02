@@ -51,7 +51,7 @@ function SkipUrlEncoding(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}';
-      requestUrl = requestUrl.replace("{unencodedPathParam}", unencodedPathParam);
+      requestUrl = requestUrl.replace('{unencodedPathParam}', unencodedPathParam);
       var queryParameters = [];
       queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
       if (queryParameters.length > 0) {
@@ -133,7 +133,7 @@ function SkipUrlEncoding(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}';
-      requestUrl = requestUrl.replace("{unencodedPathParam}", unencodedPathParam);
+      requestUrl = requestUrl.replace('{unencodedPathParam}', unencodedPathParam);
       var queryParameters = [];
       queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
       if (queryParameters.length > 0) {
@@ -215,7 +215,7 @@ function SkipUrlEncoding(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}';
-      requestUrl = requestUrl.replace("{unencodedPathParam}", unencodedPathParam);
+      requestUrl = requestUrl.replace('{unencodedPathParam}', unencodedPathParam);
       var queryParameters = [];
       queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
       if (queryParameters.length > 0) {

@@ -433,10 +433,10 @@ namespace Microsoft.Rest.Generator.NodeJS
 
             foreach (var pathParameter in ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
             {
-                var pathReplaceFormat = "{0} = {0}.replace(\"{{{1}}}\", encodeURIComponent({2}));";
+                var pathReplaceFormat = "{0} = {0}.replace('{{{1}}}', encodeURIComponent({2}));";
                 if (pathParameter.SkipUrlEncoding())
                 {
-                    pathReplaceFormat = "{0} = {0}.replace(\"{{{1}}}\", {2});";
+                    pathReplaceFormat = "{0} = {0}.replace('{{{1}}}', {2});";
                 }
                 builder.AppendLine(pathReplaceFormat, variableName, pathParameter.Name,
                     pathParameter.Type.ToString(pathParameter.Name));

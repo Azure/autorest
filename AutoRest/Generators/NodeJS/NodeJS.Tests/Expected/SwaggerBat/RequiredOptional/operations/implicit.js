@@ -50,7 +50,7 @@ Implicit.prototype.getRequiredPath = function (pathParameter, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//reqopt/implicit/required/path/{pathParameter}';
-  requestUrl = requestUrl.replace("{pathParameter}", encodeURIComponent(pathParameter));
+  requestUrl = requestUrl.replace('{pathParameter}', encodeURIComponent(pathParameter));
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -372,7 +372,7 @@ Implicit.prototype.getRequiredGlobalPath = function (requiredGlobalPath, callbac
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//reqopt/global/required/path/{required-global-path}';
-  requestUrl = requestUrl.replace("{requiredGlobalPath}", encodeURIComponent(requiredGlobalPath));
+  requestUrl = requestUrl.replace('{requiredGlobalPath}', encodeURIComponent(requiredGlobalPath));
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');

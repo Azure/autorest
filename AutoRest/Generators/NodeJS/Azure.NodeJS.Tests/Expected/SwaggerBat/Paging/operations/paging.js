@@ -641,7 +641,7 @@ function Paging(client) {
 
       // Construct URL
       var requestUrl = '{nextLink}';
-      requestUrl = requestUrl.replace("{nextLink}", nextLink);
+      requestUrl = requestUrl.replace('{nextLink}', nextLink);
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -733,7 +733,7 @@ function Paging(client) {
 
       // Construct URL
       var requestUrl = '{nextLink}';
-      requestUrl = requestUrl.replace("{nextLink}", nextLink);
+      requestUrl = requestUrl.replace('{nextLink}', nextLink);
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -826,7 +826,7 @@ function Paging(client) {
 
       // Construct URL
       var requestUrl = '{nextLink}';
-      requestUrl = requestUrl.replace("{nextLink}", nextLink);
+      requestUrl = requestUrl.replace('{nextLink}', nextLink);
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -920,7 +920,7 @@ function Paging(client) {
 
       // Construct URL
       var requestUrl = '{nextLink}';
-      requestUrl = requestUrl.replace("{nextLink}", nextLink);
+      requestUrl = requestUrl.replace('{nextLink}', nextLink);
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -1012,7 +1012,7 @@ function Paging(client) {
 
       // Construct URL
       var requestUrl = '{nextLink}';
-      requestUrl = requestUrl.replace("{nextLink}", nextLink);
+      requestUrl = requestUrl.replace('{nextLink}', nextLink);
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -1104,7 +1104,7 @@ function Paging(client) {
 
       // Construct URL
       var requestUrl = '{nextLink}';
-      requestUrl = requestUrl.replace("{nextLink}", nextLink);
+      requestUrl = requestUrl.replace('{nextLink}', nextLink);
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');
@@ -1196,7 +1196,7 @@ function Paging(client) {
 
       // Construct URL
       var requestUrl = '{nextLink}';
-      requestUrl = requestUrl.replace("{nextLink}", nextLink);
+      requestUrl = requestUrl.replace('{nextLink}', nextLink);
       // trim all duplicate forward slashes in the url
       var regex = /([^:]\/)\/+/gi;
       requestUrl = requestUrl.replace(regex, '$1');

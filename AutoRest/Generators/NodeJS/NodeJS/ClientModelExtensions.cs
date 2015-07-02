@@ -157,7 +157,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 throw new ArgumentNullException("valueReference");
             }
 
-            return valueReference.Replace('\'', '"');
+            return valueReference.Replace("'", "\\'");
         }
 
         /// <summary>

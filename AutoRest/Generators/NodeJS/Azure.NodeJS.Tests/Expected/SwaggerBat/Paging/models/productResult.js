@@ -30,7 +30,7 @@ ProductResult.prototype.validate = function (payload) {
   }
 
   if (payload['nextLink'] !== null && payload['nextLink'] !== undefined && typeof payload['nextLink'] !== 'string') {
-    throw new Error('payload["nextLink"] must be of type string.');
+    throw new Error('payload[\'nextLink\'] must be of type string.');
   }
 
 };

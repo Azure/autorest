@@ -52,7 +52,7 @@ function SubscriptionInMethod(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//azurespecials/subscriptionId/method/string/none/path/local/1234-5678-9012-3456/{subscriptionId}';
-      requestUrl = requestUrl.replace("{subscriptionId}", encodeURIComponent(subscriptionId));
+      requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(subscriptionId));
       var queryParameters = [];
       queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
       if (queryParameters.length > 0) {
@@ -136,7 +136,7 @@ function SubscriptionInMethod(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//azurespecials/subscriptionId/method/string/none/path/local/null/{subscriptionId}';
-      requestUrl = requestUrl.replace("{subscriptionId}", encodeURIComponent(subscriptionId));
+      requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(subscriptionId));
       var queryParameters = [];
       queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
       if (queryParameters.length > 0) {
@@ -219,7 +219,7 @@ function SubscriptionInMethod(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//azurespecials/subscriptionId/path/string/none/path/local/1234-5678-9012-3456/{subscriptionId}';
-      requestUrl = requestUrl.replace("{subscriptionId}", encodeURIComponent(subscriptionId));
+      requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(subscriptionId));
       var queryParameters = [];
       queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
       if (queryParameters.length > 0) {
@@ -302,7 +302,7 @@ function SubscriptionInMethod(client) {
       // Construct URL
       var requestUrl = this.client.baseUri + 
                        '//azurespecials/subscriptionId/swagger/string/none/path/local/1234-5678-9012-3456/{subscriptionId}';
-      requestUrl = requestUrl.replace("{subscriptionId}", encodeURIComponent(subscriptionId));
+      requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(subscriptionId));
       var queryParameters = [];
       queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
       if (queryParameters.length > 0) {

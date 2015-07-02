@@ -22,7 +22,7 @@ SubProduct.prototype.validate = function (payload) {
     throw new Error('SubProduct cannot be null.');
   }
   if (payload['id'] !== null && payload['id'] !== undefined && typeof payload['id'] !== 'string') {
-    throw new Error('payload["id"] must be of type string.');
+    throw new Error('payload[\'id\'] must be of type string.');
   }
 
   if (payload['properties'] !== null && payload['properties'] !== undefined) {

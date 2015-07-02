@@ -22,11 +22,11 @@ Sku.prototype.validate = function (payload) {
     throw new Error('Sku cannot be null.');
   }
   if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'] !== 'string') {
-    throw new Error('payload["name"] must be of type string.');
+    throw new Error('payload[\'name\'] must be of type string.');
   }
 
   if (payload['id'] !== null && payload['id'] !== undefined && typeof payload['id'] !== 'string') {
-    throw new Error('payload["id"] must be of type string.');
+    throw new Error('payload[\'id\'] must be of type string.');
   }
 
 };
