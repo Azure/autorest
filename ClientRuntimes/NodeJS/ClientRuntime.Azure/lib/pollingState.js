@@ -18,29 +18,28 @@ var LroStates = require('./constants').LongRunningOperationStates;
  */
 function PollingState(resultOfInitialRequest, retryTimeout) {
   this._retryTimeout = retryTimeout;
-  this.response = resultOfInitialRequest.response;
+  this.updateResponse(resultOfInitialRequest.response);
   this.request = resultOfInitialRequest.request;
   this.resource = resultOfInitialRequest.body;
-
-  switch (this.response.statusCode) {
-    case 202:
-      this.status = LroStates.InProgress;
-      break;
-
-    case 204:
-    case 201:
-    case 200:
-      this.status = LroStates.Succeeded;
-      break;
-
-    default:
-      this.status = LroStates.Failed;
-      break;
-  }
   
-  if (this.resource && this.resource.properties &&this.resource.properties.provisioningState)
-  {
+  if (this.resource && this.resource.properties && this.resource.properties.provisioningState) {
     this.status = this.resource.properties.provisioningState;
+  } else {
+    switch (this.response.statusCode) {
+      case 202:
+        this.status = LroStates.InProgress;
+        break;
+
+      case 204:
+      case 201:
+      case 200:
+        this.status = LroStates.Succeeded;
+        break;
+
+      default:
+        this.status = LroStates.Failed;
+        break;
+    }
   }
 }
 
@@ -56,6 +55,23 @@ PollingState.prototype.getTimeout = function () {
     return parseInt(this.response.headers['retry-after']) * 1000;
   }
   return 30 * 1000;
+};
+
+/**
+ * Update cached data using the provided response object
+ * @param {object} [response] - provider response object.
+ */
+PollingState.prototype.updateResponse = function (response) {
+  this.response = response;
+  if (response && response.headers) {
+    if (response.headers['azure-asyncoperation']) {
+      this.azureAsyncOperationHeaderLink = response.headers['azure-asyncoperation'];
+    }
+    
+    if (response.headers['location']) {
+      this.locationHeaderLink = response.headers['location'];
+    }
+  }
 };
 
 /**

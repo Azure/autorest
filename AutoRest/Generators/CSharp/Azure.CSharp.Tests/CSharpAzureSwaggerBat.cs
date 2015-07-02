@@ -102,6 +102,12 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                     Assert.Throws<CloudException>(
                         () => client.LROs.Put200Acceptedcanceled200(new Product { Location = "West US" }).ProvisioningState);
                 Assert.Contains("Long running operation failed", exception.Message, StringComparison.Ordinal);
+                Assert.Equal("Succeeded", client.LROs.PutNoHeaderInRetry(new Product { Location = "West US" }).ProvisioningState);
+                Assert.Equal("Succeeded", client.LROs.PutAsyncNoHeaderInRetry(new Product { Location = "West US" }).ProvisioningState);
+                Assert.Equal("Succeeded", client.LROs.PutSubResource(new SubProduct()).ProvisioningState);
+                Assert.Equal("Succeeded", client.LROs.PutAsyncSubResource(new SubProduct()).ProvisioningState);
+                Assert.Equal("100", client.LROs.PutNonResource(new Sku()).Id);
+                Assert.Equal("100", client.LROs.PutAsyncNonResource(new Sku()).Id);
                 client.LROs.Post202Retry200(new Product { Location = "West US" });
                 Assert.Equal("Succeeded", client.LROs.Put200Succeeded(new Product { Location = "West US" }).ProvisioningState);
                 Assert.Equal("100", client.LROs.Put200SucceededNoState(new Product { Location = "West US" }).Id);
@@ -121,6 +127,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 client.LROs.Delete202Retry200();
                 client.LROs.Delete202NoRetry204();
                 client.LROs.DeleteAsyncNoRetrySucceeded();
+                client.LROs.DeleteNoHeaderInRetry();
+                client.LROs.DeleteAsyncNoHeaderInRetry();
                 exception = Assert.Throws<CloudException>(() => client.LROs.DeleteAsyncRetrycanceled());
                 Assert.Contains("Long running operation failed", exception.Message, StringComparison.Ordinal);
                 exception = Assert.Throws<CloudException>(() => client.LROs.DeleteAsyncRetryFailed());
