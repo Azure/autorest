@@ -23,7 +23,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithO
         {
     @:if (@(parameter.Name) == null)
     @:{
-        @:throw new ArgumentNullException("@(parameter.Name)");
+        @:throw new ValidationException(ValidationRules.CannotBeNull, "@(parameter.Name)");
     @:}
 @:
         }

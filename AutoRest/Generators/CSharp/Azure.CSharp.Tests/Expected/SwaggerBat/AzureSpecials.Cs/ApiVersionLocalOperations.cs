@@ -47,7 +47,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         {
             if (apiVersion == null)
             {
-                throw new ArgumentNullException("apiVersion");
+                throw new ValidationException(ValidationRules.CannotBeNull, "apiVersion");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -225,7 +225,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         {
             if (apiVersion == null)
             {
-                throw new ArgumentNullException("apiVersion");
+                throw new ValidationException(ValidationRules.CannotBeNull, "apiVersion");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -316,7 +316,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         {
             if (apiVersion == null)
             {
-                throw new ArgumentNullException("apiVersion");
+                throw new ValidationException(ValidationRules.CannotBeNull, "apiVersion");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;

@@ -22,7 +22,7 @@ namespace Fixtures.MirrorSequences.Models
         {
             if (Name == null)
             {
-                throw new ArgumentNullException("Name");
+                throw new ValidationException(ValidationRules.CannotBeNull, "Name");
             }
         }
     }

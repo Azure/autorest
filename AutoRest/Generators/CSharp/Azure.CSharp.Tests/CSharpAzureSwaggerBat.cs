@@ -583,7 +583,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 client.SubscriptionInMethod.PostMethodLocalValid(validSubscription);
                 client.SubscriptionInMethod.PostPathLocalValid(validSubscription);
                 client.SubscriptionInMethod.PostSwaggerLocalValid(validSubscription);
-                Assert.Throws<ArgumentNullException>(() => client.SubscriptionInMethod.PostMethodLocalNull(null));
+                Assert.Throws<ValidationException>(() => client.SubscriptionInMethod.PostMethodLocalNull(null));
 
                 client.ApiVersionDefault.GetMethodGlobalNotProvidedValid();
                 client.ApiVersionDefault.GetMethodGlobalValid();

@@ -248,9 +248,10 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral(" == null)\r\n            {\r\n                throw new ArgumentNullException(\"");
+            WriteLiteral(" == null)\r\n            {\r\n                throw new ValidationException(Validatio" +
+"nRules.CannotBeNull, \"");
 #line 61 "ModelTemplate.cshtml"
-                                              Write(property.Name);
+                                                                          Write(property.Name);
 
 #line default
 #line hidden

@@ -61,7 +61,7 @@ namespace Microsoft.Rest.Generator.CSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Microsoft.Rest.ClientRuntime.1.0.0 nuget package is required to compile the generated code..
+        ///   Looks up a localized string similar to The Microsoft.Rest.ClientRuntime.1.0.2 nuget package is required to compile the generated code..
         /// </summary>
         internal static string UsageInformation {
             get {

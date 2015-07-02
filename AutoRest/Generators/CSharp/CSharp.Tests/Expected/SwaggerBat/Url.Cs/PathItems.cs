@@ -64,15 +64,15 @@ namespace Fixtures.SwaggerBatUrl
         {
             if (localStringPath == null)
             {
-                throw new ArgumentNullException("localStringPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "localStringPath");
             }
             if (pathItemStringPath == null)
             {
-                throw new ArgumentNullException("pathItemStringPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "pathItemStringPath");
             }
             if (globalStringPath == null)
             {
-                throw new ArgumentNullException("globalStringPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "globalStringPath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -193,15 +193,15 @@ namespace Fixtures.SwaggerBatUrl
         {
             if (localStringPath == null)
             {
-                throw new ArgumentNullException("localStringPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "localStringPath");
             }
             if (pathItemStringPath == null)
             {
-                throw new ArgumentNullException("pathItemStringPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "pathItemStringPath");
             }
             if (globalStringPath == null)
             {
-                throw new ArgumentNullException("globalStringPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "globalStringPath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -321,15 +321,15 @@ namespace Fixtures.SwaggerBatUrl
         {
             if (localStringPath == null)
             {
-                throw new ArgumentNullException("localStringPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "localStringPath");
             }
             if (pathItemStringPath == null)
             {
-                throw new ArgumentNullException("pathItemStringPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "pathItemStringPath");
             }
             if (globalStringPath == null)
             {
-                throw new ArgumentNullException("globalStringPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "globalStringPath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -449,15 +449,15 @@ namespace Fixtures.SwaggerBatUrl
         {
             if (localStringPath == null)
             {
-                throw new ArgumentNullException("localStringPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "localStringPath");
             }
             if (pathItemStringPath == null)
             {
-                throw new ArgumentNullException("pathItemStringPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "pathItemStringPath");
             }
             if (globalStringPath == null)
             {
-                throw new ArgumentNullException("globalStringPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "globalStringPath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
