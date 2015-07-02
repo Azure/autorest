@@ -296,8 +296,16 @@ namespace Microsoft.Rest.Generator.Azure
                     // Recursively parsing the "properties" object hierarchy  
                     while (propertiesModel != null)
                     {
-                        // Adding "properties" properties to the compositeType
-                        propertiesModel.Properties.ForEach(p => compositeType.Properties.Add(p));
+                        foreach (Property pp in propertiesModel.Properties)
+                        {
+                            if (ResourcePropertyNames.Any(rp => rp.Equals(pp.Name, StringComparison.OrdinalIgnoreCase)))
+                            {
+                                pp.Name = compositeType.Name + CodeNamer.PascalCase(pp.Name);
+                            }
+
+                            compositeType.Properties.Add(pp);
+                        }
+                        
                         compositeType.Properties.Remove(propertiesProperty);
                         if (!typesToDelete.Contains(propertiesModel.Name))
                         {
