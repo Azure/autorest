@@ -5,7 +5,7 @@ var assert = require('assert');
 var url = require('url');
 var should = require('should');
 
-var ProxyFilter = require('../lib/filters/proxyfilter');
+var ProxyFilter = require('../lib/filters/proxyFilter');
 
 describe('Proxy filter', function () {
 

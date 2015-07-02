@@ -5,10 +5,10 @@
 
 var url = require('url');
 var Constants = require('./constants');
-var ProxyFilter = require('./filters/proxyfilter');
-var RedirectFilter = require('./filters/redirectfilter');
-var SigningFilter = require('./filters/signingfilter');
-var ExponentialRetryPolicyFilter = require('./filters/exponentialretrypolicyfilter');
+var ProxyFilter = require('./filters/proxyFilter');
+var RedirectFilter = require('./filters/redirectFilter');
+var SigningFilter = require('./filters/signingFilter');
+var ExponentialRetryPolicyFilter = require('./filters/exponentialRetryPolicyFilter');
 var requestPipeline = require('./requestPipeline');
 var utils = require('./utils');
 

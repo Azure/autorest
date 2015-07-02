@@ -5,7 +5,7 @@ var assert = require('assert');
 var url = require('url');
 var should = require('should');
 
-var RedirectFilter = require('../lib/filters/redirectfilter');
+var RedirectFilter = require('../lib/filters/redirectFilter');
 
 describe('Redirect filter', function () {
   it('should redirect a POST request with status code 303 into a GET request ' + 
