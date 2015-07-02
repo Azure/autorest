@@ -1638,10 +1638,6 @@ Scope = "type", Target = "Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion.Mode
 Scope = "type", Target = "Fixtures.Azure.SwaggerBatAzureSpecials.Models.Error")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Error",
 Scope = "type", Target = "Fixtures.Azure.SwaggerBatAzureReport.Models.Error")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
-Scope = "member", Target = "Fixtures.Azure.SwaggerBatResourceFlattening.Models.FlattenedProduct.#ProvisioningStateValues")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
-Scope = "member", Target = "Fixtures.Azure.SwaggerBatLro.Models.Product.#ProvisioningStateValues")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
 Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.Azure.Tests.CSharpAzureSwaggerBat.#ResourceFlatteningGenerationTest()")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",

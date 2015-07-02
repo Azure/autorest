@@ -25,12 +25,5 @@ namespace Fixtures.MirrorPolymorphic.Models
         [JsonProperty(PropertyName = "fields")]
         public string Fields { get; set; }
 
-        /// <summary>
-        /// Validate the object. Throws ArgumentException or ArgumentNullException if validation fails.
-        /// </summary>
-        public virtual void Validate()
-        {
-            //Nothing to validate
-        }
     }
 }

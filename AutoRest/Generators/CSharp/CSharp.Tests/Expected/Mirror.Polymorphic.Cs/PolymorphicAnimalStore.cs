@@ -125,10 +125,6 @@ namespace Fixtures.MirrorPolymorphic
         /// </param>
         public async Task<HttpOperationResponse<Animal>> CreateOrUpdatePolymorphicAnimalsWithOperationResponseAsync(Animal animalCreateOrUpdateParameter = default(Animal), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (animalCreateOrUpdateParameter != null)
-            {
-                animalCreateOrUpdateParameter.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;

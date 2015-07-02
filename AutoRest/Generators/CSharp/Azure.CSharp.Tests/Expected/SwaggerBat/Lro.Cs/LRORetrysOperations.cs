@@ -68,10 +68,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse<Product>> BeginPut201CreatingSucceeded200WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -279,10 +275,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetrySucceededWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -786,10 +778,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse> BeginPost202Retry200WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -900,10 +888,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse> BeginPostAsyncRelativeRetrySucceededWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;

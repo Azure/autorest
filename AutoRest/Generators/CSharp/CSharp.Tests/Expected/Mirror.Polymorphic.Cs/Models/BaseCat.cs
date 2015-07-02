@@ -16,12 +16,5 @@ namespace Fixtures.MirrorPolymorphic.Models
         [JsonProperty(PropertyName = "color")]
         public string Color { get; set; }
 
-        /// <summary>
-        /// Validate the object. Throws ArgumentException or ArgumentNullException if validation fails.
-        /// </summary>
-        public override void Validate()
-        {
-            base.Validate();
-        }
     }
 }

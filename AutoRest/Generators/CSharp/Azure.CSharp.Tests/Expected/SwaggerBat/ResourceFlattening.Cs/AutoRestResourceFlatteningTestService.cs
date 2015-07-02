@@ -190,16 +190,6 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
         /// </param>
         public async Task<AzureOperationResponse> PutArrayWithOperationResponseAsync(IList<Resource> resourceArray = default(IList<Resource>), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (resourceArray != null)
-            {
-                foreach ( var element in resourceArray)
-            {
-                if (element != null)
-            {
-                element.Validate();
-            }
-            }
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -369,19 +359,6 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
         /// </param>
         public async Task<AzureOperationResponse> PutDictionaryWithOperationResponseAsync(IDictionary<string, FlattenedProduct> resourceDictionary = default(IDictionary<string, FlattenedProduct>), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (resourceDictionary != null)
-            {
-                if ( resourceDictionary != null)
-            {
-                foreach ( var valueElement in resourceDictionary.Values)
-                {
-                    if (valueElement != null)
-            {
-                valueElement.Validate();
-            }
-                }
-            }
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;

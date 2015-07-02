@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
+using Microsoft.Rest.Generator.CSharp.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
 
 namespace Microsoft.Rest.Generator.CSharp
@@ -32,7 +33,7 @@ namespace Microsoft.Rest.Generator.CSharp
 
         public string MethodQualifier
         {
-            get { return (BaseModelType == null) ? "virtual" : "override"; }
+            get { return (BaseModelType.ShouldValidate()) ? "override" : "virtual"; }
         }
 
         public List<PropertyTemplateModel> PropertyTemplateModels { get; private set; }

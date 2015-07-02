@@ -21,10 +21,6 @@ namespace Fixtures.Azure.SwaggerBatPaging.Models
         /// </summary>
         public virtual void Validate()
         {
-            if (this.Properties != null)
-            {
-                this.Properties.Validate();
-            }
         }
     }
 }
