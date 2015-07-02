@@ -2,6 +2,16 @@
 <RuleSet Name="Code Analysis Rules for Generated Code and Tests" Description="This rule set contains all rules. Running this rule set may result in a large number of warnings being reported. Use this rule set to get a comprehensive picture of all issues in your code. This can help you decide which of the more focused rule sets are most appropriate to run for your projects." ToolsVersion="12.0">
   <IncludeAll Action="Warning" />
   <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
+    <!--We decide to allow nested generic types in generated code-->
+    <Rule Id="CA1006" Action="None" />
+    <!--We decide to allow using default param value in generated code-->
+    <Rule Id="CA1026" Action="None" />
+    <!--We decide to allow the type coupling in generated code-->
+    <Rule Id="CA1506" Action="None" />
+    <!--Spelling issus comes from test swagger files, and we can't do too much about it--> 
+    <Rule Id="CA1704" Action="None" />
+    <!--JSON.net will set the seemingly unused private field-->
+    <Rule Id="CA1811" Action="None" />
     <!-- Rules CA3001-CA3012: Rules apply only to web service code-->
     <Rule Id="CA3001" Action="None" />
     <Rule Id="CA3002" Action="None" />

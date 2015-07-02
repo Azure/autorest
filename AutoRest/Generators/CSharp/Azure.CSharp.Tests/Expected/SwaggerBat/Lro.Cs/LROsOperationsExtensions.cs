@@ -716,6 +716,106 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
 
             /// <summary>
+            /// Long running put request, service returns a 202 to the initial request
+            /// with location header. Subsequent calls to operation status do not contain
+            /// location header.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            public static Product PutNoHeaderInRetry(this ILROsOperations operations, Product product = default(Product))
+            {
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).PutNoHeaderInRetryAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a 202 to the initial request
+            /// with location header. Subsequent calls to operation status do not contain
+            /// location header.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// Cancellation token.
+            /// </param>
+            public static async Task<Product> PutNoHeaderInRetryAsync( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                AzureOperationResponse<Product> result = await operations.PutNoHeaderInRetryWithOperationResponseAsync(product, cancellationToken).ConfigureAwait(false);
+                return result.Body;
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a 202 to the initial request
+            /// with location header. Subsequent calls to operation status do not contain
+            /// location header.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            public static Product BeginPutNoHeaderInRetry(this ILROsOperations operations, Product product = default(Product))
+            {
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutNoHeaderInRetryAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a 202 to the initial request
+            /// with location header. Subsequent calls to operation status do not contain
+            /// location header.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// Cancellation token.
+            /// </param>
+            public static async Task<Product> BeginPutNoHeaderInRetryAsync( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                AzureOperationResponse<Product> result = await operations.BeginPutNoHeaderInRetryWithOperationResponseAsync(product, cancellationToken).ConfigureAwait(false);
+                return result.Body;
+            }
+
+            /// <summary>
+            /// Long running get request for you to retrieve create resource. This method
+            /// should not be invoked
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            public static Product GetPutNoHeaderInRetry(this ILROsOperations operations)
+            {
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).GetPutNoHeaderInRetryAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running get request for you to retrieve create resource. This method
+            /// should not be invoked
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// Cancellation token.
+            /// </param>
+            public static async Task<Product> GetPutNoHeaderInRetryAsync( this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                AzureOperationResponse<Product> result = await operations.GetPutNoHeaderInRetryWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                return result.Body;
+            }
+
+            /// <summary>
             /// Long running put request, service returns a 200 to the initial request,
             /// with an entity that contains ProvisioningState=’Creating’. Poll the
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -1124,6 +1224,464 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
 
             /// <summary>
+            /// Long running put request, service returns a 202 to the initial request
+            /// with Azure-AsyncOperation header. Subsequent calls to operation status do
+            /// not contain Azure-AsyncOperation header.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            public static Product PutAsyncNoHeaderInRetry(this ILROsOperations operations, Product product = default(Product))
+            {
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncNoHeaderInRetryAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a 202 to the initial request
+            /// with Azure-AsyncOperation header. Subsequent calls to operation status do
+            /// not contain Azure-AsyncOperation header.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// Cancellation token.
+            /// </param>
+            public static async Task<Product> PutAsyncNoHeaderInRetryAsync( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                AzureOperationResponse<Product> result = await operations.PutAsyncNoHeaderInRetryWithOperationResponseAsync(product, cancellationToken).ConfigureAwait(false);
+                return result.Body;
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a 202 to the initial request
+            /// with Azure-AsyncOperation header. Subsequent calls to operation status do
+            /// not contain Azure-AsyncOperation header.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            public static Product BeginPutAsyncNoHeaderInRetry(this ILROsOperations operations, Product product = default(Product))
+            {
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutAsyncNoHeaderInRetryAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a 202 to the initial request
+            /// with Azure-AsyncOperation header. Subsequent calls to operation status do
+            /// not contain Azure-AsyncOperation header.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// Cancellation token.
+            /// </param>
+            public static async Task<Product> BeginPutAsyncNoHeaderInRetryAsync( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                AzureOperationResponse<Product> result = await operations.BeginPutAsyncNoHeaderInRetryWithOperationResponseAsync(product, cancellationToken).ConfigureAwait(false);
+                return result.Body;
+            }
+
+            /// <summary>
+            /// Long running get request for you to retrieve create resource
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            public static Product GetPutAsyncNoHeaderInRetry(this ILROsOperations operations)
+            {
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).GetPutAsyncNoHeaderInRetryAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running get request for you to retrieve create resource
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// Cancellation token.
+            /// </param>
+            public static async Task<Product> GetPutAsyncNoHeaderInRetryAsync( this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                AzureOperationResponse<Product> result = await operations.GetPutAsyncNoHeaderInRetryWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                return result.Body;
+            }
+
+            /// <summary>
+            /// Long running put request with non resource.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='sku'>
+            /// sku to put
+            /// </param>
+            public static Sku PutNonResource(this ILROsOperations operations, Sku sku = default(Sku))
+            {
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).PutNonResourceAsync(sku), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running put request with non resource.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='sku'>
+            /// sku to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// Cancellation token.
+            /// </param>
+            public static async Task<Sku> PutNonResourceAsync( this ILROsOperations operations, Sku sku = default(Sku), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                AzureOperationResponse<Sku> result = await operations.PutNonResourceWithOperationResponseAsync(sku, cancellationToken).ConfigureAwait(false);
+                return result.Body;
+            }
+
+            /// <summary>
+            /// Long running put request with non resource.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='sku'>
+            /// sku to put
+            /// </param>
+            public static Sku BeginPutNonResource(this ILROsOperations operations, Sku sku = default(Sku))
+            {
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutNonResourceAsync(sku), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running put request with non resource.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='sku'>
+            /// sku to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// Cancellation token.
+            /// </param>
+            public static async Task<Sku> BeginPutNonResourceAsync( this ILROsOperations operations, Sku sku = default(Sku), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                AzureOperationResponse<Sku> result = await operations.BeginPutNonResourceWithOperationResponseAsync(sku, cancellationToken).ConfigureAwait(false);
+                return result.Body;
+            }
+
+            /// <summary>
+            /// Long running get request for you to retrieve created non resource
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            public static Sku GetNonResource(this ILROsOperations operations)
+            {
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).GetNonResourceAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running get request for you to retrieve created non resource
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// Cancellation token.
+            /// </param>
+            public static async Task<Sku> GetNonResourceAsync( this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                AzureOperationResponse<Sku> result = await operations.GetNonResourceWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                return result.Body;
+            }
+
+            /// <summary>
+            /// Long running put request with non resource.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='sku'>
+            /// Sku to put
+            /// </param>
+            public static Sku PutAsyncNonResource(this ILROsOperations operations, Sku sku = default(Sku))
+            {
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncNonResourceAsync(sku), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running put request with non resource.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='sku'>
+            /// Sku to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// Cancellation token.
+            /// </param>
+            public static async Task<Sku> PutAsyncNonResourceAsync( this ILROsOperations operations, Sku sku = default(Sku), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                AzureOperationResponse<Sku> result = await operations.PutAsyncNonResourceWithOperationResponseAsync(sku, cancellationToken).ConfigureAwait(false);
+                return result.Body;
+            }
+
+            /// <summary>
+            /// Long running put request with non resource.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='sku'>
+            /// Sku to put
+            /// </param>
+            public static Sku BeginPutAsyncNonResource(this ILROsOperations operations, Sku sku = default(Sku))
+            {
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutAsyncNonResourceAsync(sku), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running put request with non resource.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='sku'>
+            /// Sku to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// Cancellation token.
+            /// </param>
+            public static async Task<Sku> BeginPutAsyncNonResourceAsync( this ILROsOperations operations, Sku sku = default(Sku), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                AzureOperationResponse<Sku> result = await operations.BeginPutAsyncNonResourceWithOperationResponseAsync(sku, cancellationToken).ConfigureAwait(false);
+                return result.Body;
+            }
+
+            /// <summary>
+            /// Long running get request for you to retrieve created non resource
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            public static Sku GetAsyncNonResource(this ILROsOperations operations)
+            {
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).GetAsyncNonResourceAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running get request for you to retrieve created non resource
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// Cancellation token.
+            /// </param>
+            public static async Task<Sku> GetAsyncNonResourceAsync( this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                AzureOperationResponse<Sku> result = await operations.GetAsyncNonResourceWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                return result.Body;
+            }
+
+            /// <summary>
+            /// Long running put request with sub resource.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='product'>
+            /// Sub Product to put
+            /// </param>
+            public static SubProduct PutSubResource(this ILROsOperations operations, SubProduct product = default(SubProduct))
+            {
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).PutSubResourceAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running put request with sub resource.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='product'>
+            /// Sub Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// Cancellation token.
+            /// </param>
+            public static async Task<SubProduct> PutSubResourceAsync( this ILROsOperations operations, SubProduct product = default(SubProduct), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                AzureOperationResponse<SubProduct> result = await operations.PutSubResourceWithOperationResponseAsync(product, cancellationToken).ConfigureAwait(false);
+                return result.Body;
+            }
+
+            /// <summary>
+            /// Long running put request with sub resource.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='product'>
+            /// Sub Product to put
+            /// </param>
+            public static SubProduct BeginPutSubResource(this ILROsOperations operations, SubProduct product = default(SubProduct))
+            {
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutSubResourceAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running put request with sub resource.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='product'>
+            /// Sub Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// Cancellation token.
+            /// </param>
+            public static async Task<SubProduct> BeginPutSubResourceAsync( this ILROsOperations operations, SubProduct product = default(SubProduct), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                AzureOperationResponse<SubProduct> result = await operations.BeginPutSubResourceWithOperationResponseAsync(product, cancellationToken).ConfigureAwait(false);
+                return result.Body;
+            }
+
+            /// <summary>
+            /// Long running get request for you to retrieve created sub resource
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            public static SubProduct GetSubResource(this ILROsOperations operations)
+            {
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).GetSubResourceAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running get request for you to retrieve created sub resource
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// Cancellation token.
+            /// </param>
+            public static async Task<SubProduct> GetSubResourceAsync( this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                AzureOperationResponse<SubProduct> result = await operations.GetSubResourceWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                return result.Body;
+            }
+
+            /// <summary>
+            /// Long running put request with sub resource.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='product'>
+            /// Sub Product to put
+            /// </param>
+            public static SubProduct PutAsyncSubResource(this ILROsOperations operations, SubProduct product = default(SubProduct))
+            {
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncSubResourceAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running put request with sub resource.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='product'>
+            /// Sub Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// Cancellation token.
+            /// </param>
+            public static async Task<SubProduct> PutAsyncSubResourceAsync( this ILROsOperations operations, SubProduct product = default(SubProduct), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                AzureOperationResponse<SubProduct> result = await operations.PutAsyncSubResourceWithOperationResponseAsync(product, cancellationToken).ConfigureAwait(false);
+                return result.Body;
+            }
+
+            /// <summary>
+            /// Long running put request with sub resource.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='product'>
+            /// Sub Product to put
+            /// </param>
+            public static SubProduct BeginPutAsyncSubResource(this ILROsOperations operations, SubProduct product = default(SubProduct))
+            {
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutAsyncSubResourceAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running put request with sub resource.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='product'>
+            /// Sub Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// Cancellation token.
+            /// </param>
+            public static async Task<SubProduct> BeginPutAsyncSubResourceAsync( this ILROsOperations operations, SubProduct product = default(SubProduct), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                AzureOperationResponse<SubProduct> result = await operations.BeginPutAsyncSubResourceWithOperationResponseAsync(product, cancellationToken).ConfigureAwait(false);
+                return result.Body;
+            }
+
+            /// <summary>
+            /// Long running get request for you to retrieve created sub resource
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            public static SubProduct GetAsyncSubResource(this ILROsOperations operations)
+            {
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).GetAsyncSubResourceAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running get request for you to retrieve created sub resource
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// Cancellation token.
+            /// </param>
+            public static async Task<SubProduct> GetAsyncSubResourceAsync( this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                AzureOperationResponse<SubProduct> result = await operations.GetAsyncSubResourceWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                return result.Body;
+            }
+
+            /// <summary>
             /// Long running delete request, service returns a 202 to the initial request,
             /// with an entity that contains ProvisioningState=’Accepted’.  Polls return
             /// this value until the last poll returns a ‘200’ with
@@ -1483,6 +2041,122 @@ namespace Fixtures.Azure.SwaggerBatLro
             {
                 AzureOperationResponse<Product> result = await operations.BeginDelete202NoRetry204WithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
                 return result.Body;
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns a location header in the
+            /// initial request. Subsequent calls to operation status do not contain
+            /// location header.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            public static void DeleteNoHeaderInRetry(this ILROsOperations operations)
+            {
+                Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteNoHeaderInRetryAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns a location header in the
+            /// initial request. Subsequent calls to operation status do not contain
+            /// location header.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// Cancellation token.
+            /// </param>
+            public static async Task DeleteNoHeaderInRetryAsync( this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                await operations.DeleteNoHeaderInRetryWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns a location header in the
+            /// initial request. Subsequent calls to operation status do not contain
+            /// location header.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            public static void BeginDeleteNoHeaderInRetry(this ILROsOperations operations)
+            {
+                Task.Factory.StartNew(s => ((ILROsOperations)s).BeginDeleteNoHeaderInRetryAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns a location header in the
+            /// initial request. Subsequent calls to operation status do not contain
+            /// location header.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// Cancellation token.
+            /// </param>
+            public static async Task BeginDeleteNoHeaderInRetryAsync( this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                await operations.BeginDeleteNoHeaderInRetryWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns an Azure-AsyncOperation
+            /// header in the initial request. Subsequent calls to operation status do
+            /// not contain Azure-AsyncOperation header.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            public static void DeleteAsyncNoHeaderInRetry(this ILROsOperations operations)
+            {
+                Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteAsyncNoHeaderInRetryAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns an Azure-AsyncOperation
+            /// header in the initial request. Subsequent calls to operation status do
+            /// not contain Azure-AsyncOperation header.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// Cancellation token.
+            /// </param>
+            public static async Task DeleteAsyncNoHeaderInRetryAsync( this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                await operations.DeleteAsyncNoHeaderInRetryWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns an Azure-AsyncOperation
+            /// header in the initial request. Subsequent calls to operation status do
+            /// not contain Azure-AsyncOperation header.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            public static void BeginDeleteAsyncNoHeaderInRetry(this ILROsOperations operations)
+            {
+                Task.Factory.StartNew(s => ((ILROsOperations)s).BeginDeleteAsyncNoHeaderInRetryAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns an Azure-AsyncOperation
+            /// header in the initial request. Subsequent calls to operation status do
+            /// not contain Azure-AsyncOperation header.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// Cancellation token.
+            /// </param>
+            public static async Task BeginDeleteAsyncNoHeaderInRetryAsync( this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                await operations.BeginDeleteAsyncNoHeaderInRetryWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>

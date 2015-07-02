@@ -252,6 +252,38 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         Task<AzureOperationResponse<Product>> Get200Acceptedcanceled200PollWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
+        /// Long running put request, service returns a 202 to the initial
+        /// request with location header. Subsequent calls to operation
+        /// status do not contain location header.
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        Task<AzureOperationResponse<Product>> PutNoHeaderInRetryWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running put request, service returns a 202 to the initial
+        /// request with location header. Subsequent calls to operation
+        /// status do not contain location header.
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        Task<AzureOperationResponse<Product>> BeginPutNoHeaderInRetryWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running get request for you to retrieve create resource. This
+        /// method should not be invoked
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        Task<AzureOperationResponse<Product>> GetPutNoHeaderInRetryWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
         /// Long running put request, service returns a 200 to the initial
         /// request, with an entity that contains
         /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
@@ -396,6 +428,145 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         Task<AzureOperationResponse<Product>> GetAsyncNoRetrycanceledWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
+        /// Long running put request, service returns a 202 to the initial
+        /// request with Azure-AsyncOperation header. Subsequent calls to
+        /// operation status do not contain Azure-AsyncOperation header.
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        Task<AzureOperationResponse<Product>> PutAsyncNoHeaderInRetryWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running put request, service returns a 202 to the initial
+        /// request with Azure-AsyncOperation header. Subsequent calls to
+        /// operation status do not contain Azure-AsyncOperation header.
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        Task<AzureOperationResponse<Product>> BeginPutAsyncNoHeaderInRetryWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running get request for you to retrieve create resource
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        Task<AzureOperationResponse<Product>> GetPutAsyncNoHeaderInRetryWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running put request with non resource.
+        /// </summary>
+        /// <param name='sku'>
+        /// sku to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        Task<AzureOperationResponse<Sku>> PutNonResourceWithOperationResponseAsync(Sku sku = default(Sku), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running put request with non resource.
+        /// </summary>
+        /// <param name='sku'>
+        /// sku to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        Task<AzureOperationResponse<Sku>> BeginPutNonResourceWithOperationResponseAsync(Sku sku = default(Sku), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running get request for you to retrieve created non resource
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        Task<AzureOperationResponse<Sku>> GetNonResourceWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running put request with non resource.
+        /// </summary>
+        /// <param name='sku'>
+        /// Sku to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        Task<AzureOperationResponse<Sku>> PutAsyncNonResourceWithOperationResponseAsync(Sku sku = default(Sku), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running put request with non resource.
+        /// </summary>
+        /// <param name='sku'>
+        /// Sku to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        Task<AzureOperationResponse<Sku>> BeginPutAsyncNonResourceWithOperationResponseAsync(Sku sku = default(Sku), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running get request for you to retrieve created non resource
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        Task<AzureOperationResponse<Sku>> GetAsyncNonResourceWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running put request with sub resource.
+        /// </summary>
+        /// <param name='product'>
+        /// Sub Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        Task<AzureOperationResponse<SubProduct>> PutSubResourceWithOperationResponseAsync(SubProduct product = default(SubProduct), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running put request with sub resource.
+        /// </summary>
+        /// <param name='product'>
+        /// Sub Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        Task<AzureOperationResponse<SubProduct>> BeginPutSubResourceWithOperationResponseAsync(SubProduct product = default(SubProduct), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running get request for you to retrieve created sub resource
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        Task<AzureOperationResponse<SubProduct>> GetSubResourceWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running put request with sub resource.
+        /// </summary>
+        /// <param name='product'>
+        /// Sub Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        Task<AzureOperationResponse<SubProduct>> PutAsyncSubResourceWithOperationResponseAsync(SubProduct product = default(SubProduct), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running put request with sub resource.
+        /// </summary>
+        /// <param name='product'>
+        /// Sub Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        Task<AzureOperationResponse<SubProduct>> BeginPutAsyncSubResourceWithOperationResponseAsync(SubProduct product = default(SubProduct), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running get request for you to retrieve created sub resource
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        Task<AzureOperationResponse<SubProduct>> GetAsyncSubResourceWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
         /// Long running delete request, service returns a 202 to the initial
         /// request, with an entity that contains
         /// ProvisioningState=’Accepted’.  Polls return this value until the
@@ -505,6 +676,44 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> BeginDelete202NoRetry204WithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running delete request, service returns a location header in
+        /// the initial request. Subsequent calls to operation status do not
+        /// contain location header.
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        Task<AzureOperationResponse> DeleteNoHeaderInRetryWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running delete request, service returns a location header in
+        /// the initial request. Subsequent calls to operation status do not
+        /// contain location header.
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        Task<AzureOperationResponse> BeginDeleteNoHeaderInRetryWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running delete request, service returns an
+        /// Azure-AsyncOperation header in the initial request. Subsequent
+        /// calls to operation status do not contain Azure-AsyncOperation
+        /// header.
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        Task<AzureOperationResponse> DeleteAsyncNoHeaderInRetryWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running delete request, service returns an
+        /// Azure-AsyncOperation header in the initial request. Subsequent
+        /// calls to operation status do not contain Azure-AsyncOperation
+        /// header.
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        Task<AzureOperationResponse> BeginDeleteAsyncNoHeaderInRetryWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running delete request, service returns a 202 to the initial
         /// request. Poll the endpoint indicated in the Azure-AsyncOperation
