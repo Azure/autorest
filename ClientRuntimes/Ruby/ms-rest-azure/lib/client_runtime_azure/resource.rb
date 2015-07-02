@@ -8,16 +8,16 @@ module ClientRuntimeAzure
   class Resource
 
     # @return [String] the id of the resource.
-    attr_reader :id
+    attr_accessor :id
 
     # @return [String] the name of the resource.
-    attr_reader :name
+    attr_accessor :name
 
     # @return [String] the type of the resource.
-    attr_reader :type
+    attr_accessor :type
 
     # @return [String] the state which denotes whether resource is ready to use or not.
-    attr_reader :provisioning_state
+    attr_accessor :provisioning_state
 
     # @return [String] the location of the resource (required).
     attr_accessor :location

@@ -10,20 +10,14 @@ module ClientRuntime
     # @return [Hash] custom headers which are attached to the HTTP requests.
     attr_accessor :custom_headers
 
+    # @return [ClientRuntime::ServiceClientCredentials] The credentials object.
+    attr_accessor :credentials
+
     #
     # Creates and initialize new instance of the ServiceClient class.
     #
     def initialize
-      @client_credentials = nil
       @custom_headers = {}
-    end
-
-    #
-    # Sets the credentials for authenticating HTTP requests.
-    # @param credentials [ClientRuntime::ServiceClientCredentials] the credentials for authenticating HTTP request.
-    def set_credentials(credentials)
-      @client_credentials = credentials
-      self
     end
 
     #
@@ -46,7 +40,7 @@ module ClientRuntime
       end
 
       # sign in
-      @client_credentials.sign_request(request) unless @client_credentials.nil?
+      @credentials.sign_request(request) unless @credentials.nil?
 
       http.request(request)
     end

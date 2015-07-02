@@ -5,12 +5,17 @@ module ClientRuntimeAzure
   #
   # Class which represents a point of access to the REST API.
   #
-  class AzureServiceClient < ServiceClient
+  class AzureServiceClient < ClientRuntime::ServiceClient
+
+    attr_accessor :api_version
 
     #
     # Creates and initialize new instance of the ServiceClient class.
     #
     def initialize(credentials, options)
+      super()
+      @credentials = credentials
+      @api_version = '2015-05-01-preview'
     end
 
     #
