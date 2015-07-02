@@ -25,7 +25,7 @@ describe('nodejs', function () {
     
     describe('Pageable Operations', function () {
       clientOptions.requestOptions = { jar: true };
-      clientOptions.filters = [new msRest.ExponentialRetryPolicyFilter(3, 0.1, 0.1, 0.1)];
+      clientOptions.filters = [new msRest.ExponentialRetryPolicyFilter(3, 0, 0, 0)];
       clientOptions.noRetryPolicy = true;
       var testClient = new pagingClient(credentials, baseUri, clientOptions);
       

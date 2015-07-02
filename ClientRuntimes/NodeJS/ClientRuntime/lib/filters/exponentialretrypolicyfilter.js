@@ -145,10 +145,10 @@ function ExponentialRetryPolicyFilter(retryCount, retryInterval, minRetryInterva
   }
 
   _.extend(newFilter, {
-    retryCount: retryCount || ExponentialRetryPolicyFilter.DEFAULT_CLIENT_RETRY_COUNT,
-    retryInterval: retryInterval || ExponentialRetryPolicyFilter.DEFAULT_CLIENT_RETRY_INTERVAL,
-    minRetryInterval: minRetryInterval || ExponentialRetryPolicyFilter.DEFAULT_CLIENT_MIN_RETRY_INTERVAL,
-    maxRetryInterval: maxRetryInterval || ExponentialRetryPolicyFilter.DEFAULT_CLIENT_MAX_RETRY_INTERVAL,
+    retryCount: isNaN(retryCount) ? ExponentialRetryPolicyFilter.DEFAULT_CLIENT_RETRY_COUNT : retryCount,
+    retryInterval: isNaN(retryInterval) ? ExponentialRetryPolicyFilter.DEFAULT_CLIENT_RETRY_INTERVAL : retryInterval,
+    minRetryInterval: isNaN(minRetryInterval) ? ExponentialRetryPolicyFilter.DEFAULT_CLIENT_MIN_RETRY_INTERVAL : minRetryInterval,
+    maxRetryInterval: isNaN(maxRetryInterval) ? ExponentialRetryPolicyFilter.DEFAULT_CLIENT_MAX_RETRY_INTERVAL : maxRetryInterval,
     handle: handle,
     shouldRetry: shouldRetry,
     updateRetryData: updateRetryData

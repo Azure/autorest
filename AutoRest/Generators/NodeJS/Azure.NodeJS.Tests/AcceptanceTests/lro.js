@@ -23,7 +23,7 @@ describe('nodejs', function () {
   
   describe('Swagger LRO Happy BAT', function () {
     clientOptions.requestOptions = { jar: true };
-    clientOptions.filters = [new msRest.ExponentialRetryPolicyFilter(3, 0.0001, 0.0001, 0.0001)];
+    clientOptions.filters = [new msRest.ExponentialRetryPolicyFilter(3, 0, 0, 0)];
     clientOptions.noRetryPolicy = true;
     clientOptions.longRunningOperationRetryTimeoutInSeconds = 0;
     
@@ -368,7 +368,7 @@ describe('nodejs', function () {
 
   describe('Swagger LRO Sad BAT', function () {
     clientOptions.requestOptions = { jar: true };
-    clientOptions.filters = [new msRest.ExponentialRetryPolicyFilter(3, 0.0001, 0.0001, 0.0001)];
+    clientOptions.filters = [new msRest.ExponentialRetryPolicyFilter(3, 0, 0, 0)];
     clientOptions.noRetryPolicy = true;
     
     var testClient = new lroClient(credentials, baseUri, clientOptions);
