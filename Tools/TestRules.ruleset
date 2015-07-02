@@ -4,14 +4,41 @@
   <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
     <!--We decide to allow nested generic types in generated code-->
     <Rule Id="CA1006" Action="None" />
+    <!--The number of types in generated namespaces is controlled by the swagger, so this shoudl not apply to generated code-->
+    <Rule Id="CA1020" Action="None" />
     <!--We decide to allow using default param value in generated code-->
     <Rule Id="CA1026" Action="None" />
     <!--We decide to allow the type coupling in generated code-->
     <Rule Id="CA1506" Action="None" />
+    <!--Capitalization issus comes from test swagger files, and we can't do too much about it-->
+    <Rule Id="CA1702" Action="None" />
     <!--Spelling issus comes from test swagger files, and we can't do too much about it--> 
     <Rule Id="CA1704" Action="None" />
-    <!--JSON.net will set the seemingly unused private field-->
-    <Rule Id="CA1811" Action="None" />
+    <!--Capitalization issus comes from test swagger files, and we can't do too much about it-->
+    <Rule Id="CA1709" Action="None" />
+    <!--Identifier suffix issus comes from test swagger files, and we can't do too much about it-->
+    <Rule Id="CA1711" Action="None" />
+    <!--Identifier keyword matching that does not cause compile issus comes from test swagger files, 
+    and taking the value from the swagger file is preferrable to renaming when no compile issue occurs-->
+    <Rule Id="CA1716" Action="None" />
+    <!--Plurals in names come from the test swagger files, 
+    and taking the value from the swagger file is preferrable to renaming when no compile issue occurs-->
+    <Rule Id="CA1717" Action="None" />
+    <!--Identifier names that do not cause compile issus comes from test swagger files, 
+    and taking the value from the swagger file is preferrable to renaming when no compile issue occurs-->
+    <Rule Id="CA1720" Action="None" />
+    <!--Identifier names matching Get methods is in control of the swagger file, 
+    and taking the value from the swagger file is preferrable to renaming when no compile issue occurs-->
+    <Rule Id="CA1721" Action="None" />
+    <!--Identifier names that do not match preferred terms spelling are in control of the swagger file, 
+    and taking the value from the swagger file is preferrable to renaming when no compile issue occurs-->
+    <Rule Id="CA1726" Action="None" />
+    <!--This rule is improperly applied to properties of type byte[]-->
+    <Rule Id="CA1819" Action="None" />
+    <!--Assemblies are signed after the code analysis process-->
+    <Rule Id="CA2210" Action="None" />
+    <!--Collection types in poco objects are required for correct serialization and deserialization-->
+    <Rule Id="CA2227" Action="None" />
     <!-- Rules CA3001-CA3012: Rules apply only to web service code-->
     <Rule Id="CA3001" Action="None" />
     <Rule Id="CA3002" Action="None" />

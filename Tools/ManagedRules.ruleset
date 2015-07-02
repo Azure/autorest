@@ -2,6 +2,8 @@
 <RuleSet Name="Microsoft All Managed Code Rules" Description="This rule set contains all rules. Running this rule set may result in a large number of warnings being reported. Use this rule set to get a comprehensive picture of all issues in your code. This can help you decide which of the more focused rule sets are most appropriate to run for your projects." ToolsVersion="12.0">
   <IncludeAll Action="Warning" />
   <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
+    <!--Assemblies are signed after the code analysis process-->
+    <Rule Id="CA2210" Action="None" />
     <!-- Rules CA3001-CA3012: Rules apply only to web service code-->
     <Rule Id="CA3001" Action="None" />
     <Rule Id="CA3002" Action="None" />

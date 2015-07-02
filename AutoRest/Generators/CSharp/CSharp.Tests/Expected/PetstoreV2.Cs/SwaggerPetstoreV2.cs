@@ -769,10 +769,6 @@ namespace Fixtures.PetstoreV2
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "body");
             }
-            if (body != null)
-            {
-                body.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -1007,10 +1003,6 @@ namespace Fixtures.PetstoreV2
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "body");
             }
-            if (body != null)
-            {
-                body.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -1086,16 +1078,6 @@ namespace Fixtures.PetstoreV2
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "body");
             }
-            if (body != null)
-            {
-                foreach ( var element in body)
-            {
-                if (element != null)
-            {
-                element.Validate();
-            }
-            }
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -1170,16 +1152,6 @@ namespace Fixtures.PetstoreV2
             if (body == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "body");
-            }
-            if (body != null)
-            {
-                foreach ( var element in body)
-            {
-                if (element != null)
-            {
-                element.Validate();
-            }
-            }
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1500,10 +1472,6 @@ namespace Fixtures.PetstoreV2
             if (body == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "body");
-            }
-            if (body != null)
-            {
-                body.Validate();
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;

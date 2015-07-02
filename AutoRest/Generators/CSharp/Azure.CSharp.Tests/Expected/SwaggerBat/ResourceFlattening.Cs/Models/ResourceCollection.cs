@@ -31,33 +31,6 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening.Models
         /// </summary>
         public virtual void Validate()
         {
-            if (this.Productresource != null)
-            {
-                this.Productresource.Validate();
-            }
-            if (this.Arrayofresources != null)
-            {
-                foreach ( var element in this.Arrayofresources)
-            {
-                if (element != null)
-            {
-                element.Validate();
-            }
-            }
-            }
-            if (this.Dictionaryofresources != null)
-            {
-                if ( this.Dictionaryofresources != null)
-            {
-                foreach ( var valueElement in this.Dictionaryofresources.Values)
-                {
-                    if (valueElement != null)
-            {
-                valueElement.Validate();
-            }
-                }
-            }
-            }
         }
     }
 }

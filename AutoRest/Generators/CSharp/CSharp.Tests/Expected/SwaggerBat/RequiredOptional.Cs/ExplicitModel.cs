@@ -288,10 +288,6 @@ namespace Fixtures.SwaggerBatRequiredOptional
         /// </param>
         public async Task<HttpOperationResponse> PostOptionalIntegerPropertyWithOperationResponseAsync(IntOptionalWrapper bodyParameter = default(IntOptionalWrapper), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (bodyParameter != null)
-            {
-                bodyParameter.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -773,10 +769,6 @@ namespace Fixtures.SwaggerBatRequiredOptional
         /// </param>
         public async Task<HttpOperationResponse> PostOptionalStringPropertyWithOperationResponseAsync(StringOptionalWrapper bodyParameter = default(StringOptionalWrapper), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (bodyParameter != null)
-            {
-                bodyParameter.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -1592,10 +1584,6 @@ namespace Fixtures.SwaggerBatRequiredOptional
         /// </param>
         public async Task<HttpOperationResponse> PostOptionalArrayPropertyWithOperationResponseAsync(ArrayOptionalWrapper bodyParameter = default(ArrayOptionalWrapper), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (bodyParameter != null)
-            {
-                bodyParameter.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;

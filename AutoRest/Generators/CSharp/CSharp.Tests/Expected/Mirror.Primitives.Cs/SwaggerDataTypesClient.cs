@@ -122,10 +122,6 @@ namespace Fixtures.MirrorPrimitives
         /// </param>
         public async Task<HttpOperationResponse<Product>> GetProductWithOperationResponseAsync(string responseCode = default(string), Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -215,10 +211,6 @@ namespace Fixtures.MirrorPrimitives
         /// </param>
         public async Task<HttpOperationResponse<Product>> PutProductWithOperationResponseAsync(string responseCode = default(string), Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -308,10 +300,6 @@ namespace Fixtures.MirrorPrimitives
         /// </param>
         public async Task<HttpOperationResponse<Product>> PostProductWithOperationResponseAsync(string responseCode = default(string), Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;

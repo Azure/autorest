@@ -19,12 +19,5 @@ namespace Fixtures.Azure.SwaggerBatLro.Models
         [JsonProperty(PropertyName = "provisioningStateValues")]
         public string ProvisioningStateValues { get; private set; }
 
-        /// <summary>
-        /// Validate the object. Throws ArgumentException or ArgumentNullException if validation fails.
-        /// </summary>
-        public override void Validate()
-        {
-            base.Validate();
-        }
     }
 }

@@ -21,3 +21,4 @@ using System.Runtime.InteropServices;
 [assembly: Guid("f0864e5b-064d-4714-ae93-e8f044b5b685")]
 [assembly: CLSCompliant(false)]
 [assembly: NeutralResourcesLanguage("en")]
+[assembly: DefaultDllImportSearchPathsAttribute(DllImportSearchPath.SafeDirectories)]

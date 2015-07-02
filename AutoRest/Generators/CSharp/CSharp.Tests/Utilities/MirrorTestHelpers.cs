@@ -46,8 +46,16 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
         public static void ValidateProduct(Product expected, Product actual)
         {
-            Assert.NotNull(expected);
-            Assert.NotNull(actual);
+            if (expected == null)
+            {
+                throw new ArgumentNullException("expected");
+            }
+
+            if (actual == null)
+            {
+                throw new ArgumentNullException("actual");
+            }
+
             Assert.Equal(expected.Boolean, actual.Boolean);
             Assert.Equal(expected.ByteProperty, actual.ByteProperty);
             Assert.Equal(expected.Date.Value.Year, actual.Date.Value.Year);
@@ -66,8 +74,16 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
         public static void ValidatePet(Pet expected, Pet actual)
         {
-            Assert.NotNull(expected);
-            Assert.NotNull(actual);
+            if (expected == null)
+            {
+                throw new ArgumentNullException("expected");
+            }
+
+            if (actual == null)
+            {
+                throw new ArgumentNullException("actual");
+            }
+
             Assert.Equal(expected.Id, actual.Id);
             Assert.Equal(expected.Name, actual.Name);
             Assert.Equal(expected.Tag, actual.Tag);
@@ -77,9 +93,21 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         public static void ValidateList<T>(IList<T> expected, IList<T?> actual, Action<T, T?> assertEqualAction)
             where T : struct
         {
-            Assert.NotNull(actual);
-            Assert.NotNull(expected);
-            Assert.NotNull(assertEqualAction);
+            if (expected == null)
+            {
+                throw new ArgumentNullException("expected");
+            }
+
+            if (actual == null)
+            {
+                throw new ArgumentNullException("actual");
+            }
+
+            if (assertEqualAction == null)
+            {
+                throw new ArgumentNullException("assertEqualAction");
+            }
+
             Assert.Equal(expected.Count, actual.Count);
             for (int i = 0; i < expected.Count; ++i)
                 assertEqualAction(expected[i], actual[i]);
@@ -87,9 +115,21 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
         public static void ValidateList<T>(IList<T> expected, IList<T> actual, Action<T, T> assertEqualAction)
         {
-            Assert.NotNull(actual);
-            Assert.NotNull(expected);
-            Assert.NotNull(assertEqualAction);
+            if (expected == null)
+            {
+                throw new ArgumentNullException("expected");
+            }
+
+            if (actual == null)
+            {
+                throw new ArgumentNullException("actual");
+            }
+
+            if (assertEqualAction == null)
+            {
+                throw new ArgumentNullException("assertEqualAction");
+            }
+
             Assert.Equal(expected.Count, actual.Count);
             for (int i = 0; i < expected.Count; ++i)
                 assertEqualAction(expected[i], actual[i]);

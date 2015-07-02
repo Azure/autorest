@@ -23,12 +23,5 @@ namespace Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion.Models
         [JsonProperty(PropertyName = "location")]
         public string Location { get; set; }
 
-        /// <summary>
-        /// Validate the object. Throws ArgumentException or ArgumentNullException if validation fails.
-        /// </summary>
-        public virtual void Validate()
-        {
-            //Nothing to validate
-        }
     }
 }

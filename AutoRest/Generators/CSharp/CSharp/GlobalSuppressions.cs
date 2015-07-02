@@ -8,48 +8,40 @@
 // "In Suppression File".
 // You do not need to add suppressions to this file manually.
 
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA2210:AssembliesShouldHaveValidStrongNames")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists", Scope = "member", 
-    Target = "Microsoft.Rest.Generator.CSharp.MethodGroupTemplateModel.#MethodTemplateModels")]
+    Target = "Microsoft.Rest.Generator.CSharp.MethodGroupTemplateModel.#MethodTemplateModels", 
+    Justification = "Generic list is the best type that provides the needed OM (RemoveAll and AddRange).  Moving to a type like Collection would add unnecessary complexity")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists", Scope = "member", 
-    Target = "Microsoft.Rest.Generator.CSharp.MethodTemplateModel.#ParameterTemplateModels")]
+    Target = "Microsoft.Rest.Generator.CSharp.MethodTemplateModel.#ParameterTemplateModels", 
+    Justification = "Generic list is the best type that provides the needed OM (RemoveAll and AddRange).  Moving to a type like Collection would add unnecessary complexity")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists", Scope = "member", 
-    Target = "Microsoft.Rest.Generator.CSharp.ModelTemplateModel.#PropertyTemplateModels")]
+    Target = "Microsoft.Rest.Generator.CSharp.ModelTemplateModel.#PropertyTemplateModels", 
+    Justification = "Generic list is the best type that provides the needed OM (RemoveAll and AddRange).  Moving to a type like Collection would add unnecessary complexity")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists", Scope = "member", 
-    Target = "Microsoft.Rest.Generator.CSharp.ServiceClientTemplateModel.#MethodTemplateModels")]
+    Target = "Microsoft.Rest.Generator.CSharp.ServiceClientTemplateModel.#MethodTemplateModels", 
+    Justification = "Generic list is the best type that provides the needed OM (RemoveAll and AddRange).  Moving to a type like Collection would add unnecessary complexity")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists", Scope = "member", 
-    Target = "Microsoft.Rest.Generator.CSharp.ExtensionsTemplateModel.#MethodTemplateModels")]
+    Target = "Microsoft.Rest.Generator.CSharp.ExtensionsTemplateModel.#MethodTemplateModels", 
+    Justification = "Generic list is the best type that provides the needed OM (RemoveAll and AddRange).  Moving to a type like Collection would add unnecessary complexity")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1020:AvoidNamespacesWithFewTypes", 
-    Scope = "namespace", Target = "Microsoft.Rest.Generator.CSharp.TemplateModels")]
+    Scope = "namespace", Target = "Microsoft.Rest.Generator.CSharp.TemplateModels", Justification="Keep parallelism in namespaces between generators")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", 
     MessageId = "0#", Scope = "member", 
-    Target = "Microsoft.Rest.Generator.CSharp.MethodTemplateModel.#RemoveDuplicateForwardSlashes(System.String)")]
+    Target = "Microsoft.Rest.Generator.CSharp.MethodTemplateModel.#RemoveDuplicateForwardSlashes(System.String)", Justification="This is a Uri that may not pass Uri validation rules")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1055:UriReturnValuesShouldNotBeStrings", 
-    Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.MethodTemplateModel.#BuildUrl(System.String)")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", 
-    MessageId = "0", Scope = "member", 
-    Target = "Microsoft.Rest.Generator.CSharp.MethodTemplateModel.#.ctor(Microsoft.Rest.Generator.ClientModel.Method,Microsoft.Rest.Generator.ClientModel.ServiceClient)")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", 
-    MessageId = "1", Scope = "member", 
-    Target = "Microsoft.Rest.Generator.CSharp.MethodTemplateModel.#.ctor(Microsoft.Rest.Generator.ClientModel.Method,Microsoft.Rest.Generator.ClientModel.ServiceClient)")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", 
-    MessageId = "0", Scope = "member", 
-    Target = "Microsoft.Rest.Generator.CSharp.ModelTemplateModel.#.ctor(Microsoft.Rest.Generator.ClientModel.CompositeType)")]
+    Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.MethodTemplateModel.#BuildUrl(System.String)", Justification="This is a Uri that may not pass Uri validation rules")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", 
     "CA1303:Do not pass literals as localized parameters", 
     MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)", Scope = "member", 
-    Target = "Microsoft.Rest.Generator.CSharp.MethodTemplateModel.#RemoveDuplicateForwardSlashes(System.String)")]
+    Target = "Microsoft.Rest.Generator.CSharp.MethodTemplateModel.#RemoveDuplicateForwardSlashes(System.String)", 
+    Justification="The string is generated cocde, it is much more readable and maintainable if this is a literal rather than a string resource, " + 
+    "and there are no globalization concerns for source code.")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", 
     "CA1303:Do not pass literals as localized parameters", 
     MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)", Scope = "member", 
-    Target = "Microsoft.Rest.Generator.CSharp.MethodTemplateModel.#BuildUrl(System.String)")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", 
-    MessageId = "Usings", Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.ExtensionsTemplateModel.#Usings")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", 
-    MessageId = "Usings", Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.MethodGroupTemplateModel.#Usings")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", 
-    MessageId = "Namer", Scope = "type", Target = "Microsoft.Rest.Generator.CSharp.CSharpCodeNamer")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1703:ResourceStringsShouldBeSpelledCorrectly", 
-    MessageId = "nuget", Scope = "resource", Target = "Microsoft.Rest.Generator.CSharp.Properties.Resources.resources")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", 
-    Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.MethodTemplateModel.#GetStatusCodeReference(System.Net.HttpStatusCode)")]
+    Target = "Microsoft.Rest.Generator.CSharp.MethodTemplateModel.#BuildUrl(System.String)", 
+    Justification="The string is generated cocde, it is much more readable and maintainable if this is a literal rather than a string resource, " + 
+    "and there are no globalization concerns for source code.")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.MethodTemplateModel.#.ctor(Microsoft.Rest.Generator.ClientModel.Method,Microsoft.Rest.Generator.ClientModel.ServiceClient)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "1", Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.MethodTemplateModel.#.ctor(Microsoft.Rest.Generator.ClientModel.Method,Microsoft.Rest.Generator.ClientModel.ServiceClient)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.ModelTemplateModel.#.ctor(Microsoft.Rest.Generator.ClientModel.CompositeType)")]

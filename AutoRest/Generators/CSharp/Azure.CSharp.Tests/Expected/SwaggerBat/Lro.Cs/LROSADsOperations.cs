@@ -62,10 +62,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse<Product>> BeginPutNonRetry400WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -268,10 +264,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse<Product>> BeginPutNonRetry201Creating400WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -476,10 +468,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetry400WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -956,10 +944,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse> BeginPostNonRetry400WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -1064,10 +1048,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse> BeginPost202NonRetry400WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -1176,10 +1156,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse> BeginPostAsyncRelativeRetry400WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -1288,10 +1264,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse<Product>> BeginPutError201NoProvisioningStatePayloadWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -1496,10 +1468,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryNoStatusWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -1701,10 +1669,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryNoStatusPayloadWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -2094,10 +2058,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse> BeginPost202NoLocationWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -2206,10 +2166,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse> BeginPostAsyncRelativeRetryNoPayloadWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -2318,10 +2274,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse<Product>> BeginPut200InvalidJsonWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -2521,10 +2473,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -2724,10 +2672,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -3212,10 +3156,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse> BeginPost202RetryInvalidHeaderWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -3324,10 +3264,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse> BeginPostAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -3436,10 +3372,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse> BeginPostAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;

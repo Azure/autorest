@@ -30,10 +30,6 @@ namespace Fixtures.Azure.SwaggerBatLro.Models
         /// </summary>
         public virtual void Validate()
         {
-            if (this.Error != null)
-            {
-                this.Error.Validate();
-            }
         }
     }
 }

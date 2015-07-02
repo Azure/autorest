@@ -20,11 +20,5 @@ namespace Fixtures.Azure.SwaggerBatPaging.Models
         [JsonProperty(PropertyName = "status")]
         public string Status { get; set; }
 
-        /// <summary>
-        /// Validate the object. Throws ArgumentException or ArgumentNullException if validation fails.
-        /// </summary>
-        public virtual void Validate()
-        {
-        }
     }
 }

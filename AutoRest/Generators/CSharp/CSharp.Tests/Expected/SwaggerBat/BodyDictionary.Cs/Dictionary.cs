@@ -3597,19 +3597,6 @@ namespace Fixtures.SwaggerBatBodyDictionary
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "arrayBody");
             }
-            if (arrayBody != null)
-            {
-                if ( arrayBody != null)
-            {
-                foreach ( var valueElement in arrayBody.Values)
-                {
-                    if (valueElement != null)
-            {
-                valueElement.Validate();
-            }
-                }
-            }
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;

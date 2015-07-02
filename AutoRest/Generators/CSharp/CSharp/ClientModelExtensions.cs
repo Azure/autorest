@@ -5,11 +5,17 @@ using System;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using System.Globalization;
+using Microsoft.Rest.Generator.Utilities;
 
 namespace Microsoft.Rest.Generator.CSharp.TemplateModels
 {
     public static class ClientModelExtensions
     {
+        /// <summary>
+        /// Generate code for the string representation for http method
+        /// </summary>
+        /// <param name="method">The http method</param>
+        /// <returns>The code to generate the http method, as a string</returns>
         public static string GetHttpMethod(this HttpMethod method)
         {
             if (method == HttpMethod.Patch)
@@ -17,6 +23,63 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
                 return "new HttpMethod(\"Patch\")";
             }
             return string.Format(CultureInfo.InvariantCulture, "HttpMethod.{0}", method);
+        }
+
+        public static bool ShouldValidate(this IType model)
+        {
+            if (model == null)
+            {
+                return false;
+            }
+
+            var sequence = model as SequenceType;
+            var dictionary = model as DictionaryType;
+            var composite = model as CompositeType;
+            if (sequence != null && sequence.ElementType  is CompositeType)
+            {
+                return true;
+            }
+            
+            if (dictionary != null && dictionary.ValueType is CompositeType)
+            {
+                return true;
+            }
+
+            if (composite != null && composite.Properties.Any((p) => p.IsRequired || p.Type is CompositeType))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public static bool ShouldValidateChain(this IType model)
+        {
+            if (model == null)
+            {
+                return false;
+            }
+
+            var sequence = model as SequenceType;
+            var dictionary = model as DictionaryType;
+            var composite = model as CompositeType;
+            if (sequence != null)
+            {
+                return sequence.ElementType.ShouldValidateChain();
+            }
+            
+            if (dictionary != null)
+            {
+                return dictionary.ValueType.ShouldValidateChain();
+            }
+
+            if (composite != null)
+            {
+                return composite.BaseModelType.ShouldValidateChain() || 
+                    composite.ShouldValidate();
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -140,12 +203,12 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
             CompositeType model = type as CompositeType;
             SequenceType sequence = type as SequenceType;
             DictionaryType dictionary = type as DictionaryType;
-            if (model != null && model.Properties.Any())
+            if (model != null && model.ShouldValidateChain())
             {
                 return CheckNull(valueReference, string.Format(CultureInfo.InvariantCulture, 
                     "{0}.Validate();", valueReference));
             }
-            if (sequence != null)
+            if (sequence != null && sequence.ShouldValidateChain())
             {
                 var elementVar = scope.GetVariableName("element");
                 var innerValidation = sequence.ElementType.ValidateType(scope, elementVar);
@@ -159,7 +222,7 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
                     return CheckNull(valueReference, sequenceBuilder);
                 }
             }
-            else if (dictionary != null)
+            else if (dictionary != null && dictionary.ShouldValidateChain())
             {
                 var valueVar = scope.GetVariableName("valueElement");
                 var innerValidation = dictionary.ValueType.ValidateType(scope, valueVar);

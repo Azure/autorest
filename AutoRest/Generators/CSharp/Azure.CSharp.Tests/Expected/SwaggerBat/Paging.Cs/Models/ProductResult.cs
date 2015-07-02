@@ -21,21 +21,5 @@ namespace Fixtures.Azure.SwaggerBatPaging.Models
         [JsonProperty(PropertyName = "nextLink")]
         public string NextLink { get; set; }
 
-        /// <summary>
-        /// Validate the object. Throws ArgumentException or ArgumentNullException if validation fails.
-        /// </summary>
-        public virtual void Validate()
-        {
-            if (this.Values != null)
-            {
-                foreach ( var element in this.Values)
-            {
-                if (element != null)
-            {
-                element.Validate();
-            }
-            }
-            }
-        }
     }
 }

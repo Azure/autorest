@@ -42,11 +42,5 @@ namespace Fixtures.PetstoreV2.Models
         [JsonProperty(PropertyName = "complete")]
         public bool? Complete { get; set; }
 
-        /// <summary>
-        /// Validate the object. Throws ArgumentException or ArgumentNullException if validation fails.
-        /// </summary>
-        public virtual void Validate()
-        {
-        }
     }
 }

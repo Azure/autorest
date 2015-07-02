@@ -1,5 +1,6 @@
 ﻿@using System.Linq;
 @using Microsoft.Rest.Generator.ClientModel
+@using Microsoft.Rest.Generator.CSharp
 @using Microsoft.Rest.Generator.CSharp.TemplateModels
 @using Microsoft.Rest.Generator.Utilities
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.MethodTemplateModel>
@@ -139,7 +140,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithO
     {
     <text>
     // Deserialize Response
-    if (statusCode == @Model.GetStatusCodeReference(responsePair.Key))
+    if (statusCode == @MethodTemplateModel.GetStatusCodeReference(responsePair.Key))
     {
         result.Body = JsonConvert.DeserializeObject<@(responsePair.Value.Name)>(responseContent, @(Model.GetDeserializationSettingsReference(responsePair.Value)));
     }

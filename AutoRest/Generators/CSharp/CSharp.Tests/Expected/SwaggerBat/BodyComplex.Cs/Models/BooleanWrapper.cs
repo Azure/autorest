@@ -20,12 +20,5 @@ namespace Fixtures.SwaggerBatBodyComplex.Models
         [JsonProperty(PropertyName = "field_false")]
         public bool? FieldFalse { get; set; }
 
-        /// <summary>
-        /// Validate the object. Throws ArgumentException or ArgumentNullException if validation fails.
-        /// </summary>
-        public virtual void Validate()
-        {
-            //Nothing to validate
-        }
     }
 }

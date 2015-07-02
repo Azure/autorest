@@ -64,10 +64,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse<Product>> BeginPut200SucceededWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -266,10 +262,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse<Product>> BeginPut200SucceededNoStateWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -470,10 +462,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse<Product>> BeginPut202Retry200WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -676,10 +664,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse<Product>> BeginPut201CreatingSucceeded200WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -887,10 +871,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse<Product>> BeginPut200UpdatingSucceeded204WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -1092,10 +1072,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse<Product>> BeginPut201CreatingFailed200WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -1303,10 +1279,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse<Product>> BeginPut200Acceptedcanceled200WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -1506,10 +1478,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse<Product>> BeginPutNoHeaderInRetryWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -1710,10 +1678,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse<Product>> BeginPutAsyncRetrySucceededWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -1915,10 +1879,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse<Product>> BeginPutAsyncNoRetrySucceededWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -2120,10 +2080,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse<Product>> BeginPutAsyncRetryFailedWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -2325,10 +2281,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse<Product>> BeginPutAsyncNoRetrycanceledWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -2530,10 +2482,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse<Product>> BeginPutAsyncNoHeaderInRetryWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -2729,10 +2677,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse<Sku>> BeginPutNonResourceWithOperationResponseAsync(Sku sku = default(Sku), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (sku != null)
-            {
-                sku.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -2928,10 +2872,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse<Sku>> BeginPutAsyncNonResourceWithOperationResponseAsync(Sku sku = default(Sku), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (sku != null)
-            {
-                sku.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -3127,10 +3067,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse<SubProduct>> BeginPutSubResourceWithOperationResponseAsync(SubProduct product = default(SubProduct), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -3326,10 +3262,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse<SubProduct>> BeginPutAsyncSubResourceWithOperationResponseAsync(SubProduct product = default(SubProduct), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -4840,10 +4772,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse> BeginPost202Retry200WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -4950,10 +4878,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse<Product>> BeginPost202NoRetry204WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -5067,10 +4991,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse> BeginPostAsyncRetrySucceededWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -5179,10 +5099,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse> BeginPostAsyncNoRetrySucceededWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -5291,10 +5207,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse> BeginPostAsyncRetryFailedWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -5403,10 +5315,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// </param>
         public async Task<AzureOperationResponse> BeginPostAsyncRetrycanceledWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;

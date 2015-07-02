@@ -3371,16 +3371,6 @@ namespace Fixtures.SwaggerBatBodyArray
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "arrayBody");
             }
-            if (arrayBody != null)
-            {
-                foreach ( var element in arrayBody)
-            {
-                if (element != null)
-            {
-                element.Validate();
-            }
-            }
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
