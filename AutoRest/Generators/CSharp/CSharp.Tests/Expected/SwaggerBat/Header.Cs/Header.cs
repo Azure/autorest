@@ -45,7 +45,7 @@ namespace Fixtures.SwaggerBatHeader
         {
             if (userAgent == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "userAgent");
+                throw new ArgumentNullException("userAgent");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -195,7 +195,7 @@ namespace Fixtures.SwaggerBatHeader
         {
             if (contentType == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "contentType");
+                throw new ArgumentNullException("contentType");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -349,11 +349,11 @@ namespace Fixtures.SwaggerBatHeader
         {
             if (scenario == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
+                throw new ArgumentNullException("scenario");
             }
             if (value == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "value");
+                throw new ArgumentNullException("value");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -439,7 +439,7 @@ namespace Fixtures.SwaggerBatHeader
         {
             if (scenario == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
+                throw new ArgumentNullException("scenario");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -524,11 +524,11 @@ namespace Fixtures.SwaggerBatHeader
         {
             if (scenario == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
+                throw new ArgumentNullException("scenario");
             }
             if (value == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "value");
+                throw new ArgumentNullException("value");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -614,7 +614,7 @@ namespace Fixtures.SwaggerBatHeader
         {
             if (scenario == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
+                throw new ArgumentNullException("scenario");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -699,11 +699,11 @@ namespace Fixtures.SwaggerBatHeader
         {
             if (scenario == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
+                throw new ArgumentNullException("scenario");
             }
             if (value == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "value");
+                throw new ArgumentNullException("value");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -789,7 +789,7 @@ namespace Fixtures.SwaggerBatHeader
         {
             if (scenario == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
+                throw new ArgumentNullException("scenario");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -874,11 +874,11 @@ namespace Fixtures.SwaggerBatHeader
         {
             if (scenario == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
+                throw new ArgumentNullException("scenario");
             }
             if (value == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "value");
+                throw new ArgumentNullException("value");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -964,7 +964,7 @@ namespace Fixtures.SwaggerBatHeader
         {
             if (scenario == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
+                throw new ArgumentNullException("scenario");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1049,11 +1049,11 @@ namespace Fixtures.SwaggerBatHeader
         {
             if (scenario == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
+                throw new ArgumentNullException("scenario");
             }
             if (value == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "value");
+                throw new ArgumentNullException("value");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1139,7 +1139,7 @@ namespace Fixtures.SwaggerBatHeader
         {
             if (scenario == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
+                throw new ArgumentNullException("scenario");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1227,7 +1227,7 @@ namespace Fixtures.SwaggerBatHeader
         {
             if (scenario == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
+                throw new ArgumentNullException("scenario");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1315,7 +1315,7 @@ namespace Fixtures.SwaggerBatHeader
         {
             if (scenario == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
+                throw new ArgumentNullException("scenario");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1400,11 +1400,11 @@ namespace Fixtures.SwaggerBatHeader
         {
             if (scenario == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
+                throw new ArgumentNullException("scenario");
             }
             if (value == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "value");
+                throw new ArgumentNullException("value");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1490,7 +1490,7 @@ namespace Fixtures.SwaggerBatHeader
         {
             if (scenario == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
+                throw new ArgumentNullException("scenario");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1577,11 +1577,11 @@ namespace Fixtures.SwaggerBatHeader
         {
             if (scenario == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
+                throw new ArgumentNullException("scenario");
             }
             if (value == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "value");
+                throw new ArgumentNullException("value");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1668,7 +1668,7 @@ namespace Fixtures.SwaggerBatHeader
         {
             if (scenario == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
+                throw new ArgumentNullException("scenario");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1753,11 +1753,11 @@ namespace Fixtures.SwaggerBatHeader
         {
             if (scenario == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
+                throw new ArgumentNullException("scenario");
             }
             if (value == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "value");
+                throw new ArgumentNullException("value");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1843,7 +1843,7 @@ namespace Fixtures.SwaggerBatHeader
         {
             if (scenario == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
+                throw new ArgumentNullException("scenario");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1930,7 +1930,7 @@ namespace Fixtures.SwaggerBatHeader
         {
             if (scenario == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
+                throw new ArgumentNullException("scenario");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2017,7 +2017,7 @@ namespace Fixtures.SwaggerBatHeader
         {
             if (scenario == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
+                throw new ArgumentNullException("scenario");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;

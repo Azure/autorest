@@ -118,7 +118,7 @@ namespace Fixtures.SwaggerBatBodyBoolean
         {
             if (boolBody == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "boolBody");
+                throw new ArgumentNullException("boolBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -272,7 +272,7 @@ namespace Fixtures.SwaggerBatBodyBoolean
         {
             if (boolBody == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "boolBody");
+                throw new ArgumentNullException("boolBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;

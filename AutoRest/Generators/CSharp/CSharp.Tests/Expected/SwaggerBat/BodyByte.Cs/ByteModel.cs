@@ -267,7 +267,7 @@ namespace Fixtures.SwaggerBatBodyByte
         {
             if (byteBody == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "byteBody");
+                throw new ArgumentNullException("byteBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;

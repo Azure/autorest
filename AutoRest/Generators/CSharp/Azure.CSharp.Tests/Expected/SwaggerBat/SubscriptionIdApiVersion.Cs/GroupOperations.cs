@@ -45,7 +45,7 @@ namespace Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion
         {
             if (resourceGroupName == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "resourceGroupName");
+                throw new ArgumentNullException("resourceGroupName");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;

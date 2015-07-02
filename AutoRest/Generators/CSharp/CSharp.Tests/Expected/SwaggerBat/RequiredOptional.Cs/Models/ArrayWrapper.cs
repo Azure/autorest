@@ -22,7 +22,7 @@ namespace Fixtures.SwaggerBatRequiredOptional.Models
         {
             if (Value == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "Value");
+                throw new ArgumentNullException("Value");
             }
         }
     }

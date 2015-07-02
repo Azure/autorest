@@ -29,7 +29,7 @@ namespace Fixtures.SwaggerBatBodyComplex.Models
             base.Validate();
             if (Birthday == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "Birthday");
+                throw new ArgumentNullException("Birthday");
             }
         }
     }

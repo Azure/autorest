@@ -45,7 +45,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         {
             if (unencodedPathParam == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "unencodedPathParam");
+                throw new ArgumentNullException("unencodedPathParam");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -132,7 +132,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         {
             if (unencodedPathParam == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "unencodedPathParam");
+                throw new ArgumentNullException("unencodedPathParam");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -220,7 +220,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         {
             if (unencodedPathParam == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "unencodedPathParam");
+                throw new ArgumentNullException("unencodedPathParam");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -308,7 +308,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         {
             if (q1 == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "q1");
+                throw new ArgumentNullException("q1");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -485,7 +485,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         {
             if (q1 == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "q1");
+                throw new ArgumentNullException("q1");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;

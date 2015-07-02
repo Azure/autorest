@@ -46,7 +46,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         {
             if (subscriptionId == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "subscriptionId");
+                throw new ArgumentNullException("subscriptionId");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -136,7 +136,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         {
             if (subscriptionId == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "subscriptionId");
+                throw new ArgumentNullException("subscriptionId");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -224,7 +224,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         {
             if (subscriptionId == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "subscriptionId");
+                throw new ArgumentNullException("subscriptionId");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -313,7 +313,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         {
             if (subscriptionId == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "subscriptionId");
+                throw new ArgumentNullException("subscriptionId");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;

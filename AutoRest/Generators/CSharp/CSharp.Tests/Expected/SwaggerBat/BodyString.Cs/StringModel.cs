@@ -270,7 +270,7 @@ namespace Fixtures.SwaggerBatBodyString
         {
             if (stringBody == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "stringBody");
+                throw new ArgumentNullException("stringBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -428,7 +428,7 @@ namespace Fixtures.SwaggerBatBodyString
         {
             if (stringBody == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "stringBody");
+                throw new ArgumentNullException("stringBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -588,7 +588,7 @@ namespace Fixtures.SwaggerBatBodyString
         {
             if (stringBody == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "stringBody");
+                throw new ArgumentNullException("stringBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;

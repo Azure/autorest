@@ -45,7 +45,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
         {
             if (bodyParameter == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "bodyParameter");
+                throw new ArgumentNullException("bodyParameter");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -204,7 +204,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
         {
             if (bodyParameter == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "bodyParameter");
+                throw new ArgumentNullException("bodyParameter");
             }
             if (bodyParameter != null)
             {
@@ -367,7 +367,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
         {
             if (headerParameter == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "headerParameter");
+                throw new ArgumentNullException("headerParameter");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -526,7 +526,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
         {
             if (bodyParameter == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "bodyParameter");
+                throw new ArgumentNullException("bodyParameter");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -685,7 +685,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
         {
             if (bodyParameter == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "bodyParameter");
+                throw new ArgumentNullException("bodyParameter");
             }
             if (bodyParameter != null)
             {
@@ -848,7 +848,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
         {
             if (headerParameter == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "headerParameter");
+                throw new ArgumentNullException("headerParameter");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1007,7 +1007,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
         {
             if (bodyParameter == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "bodyParameter");
+                throw new ArgumentNullException("bodyParameter");
             }
             if (bodyParameter != null)
             {
@@ -1174,7 +1174,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
         {
             if (bodyParameter == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "bodyParameter");
+                throw new ArgumentNullException("bodyParameter");
             }
             if (bodyParameter != null)
             {
@@ -1341,7 +1341,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
         {
             if (bodyParameter == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "bodyParameter");
+                throw new ArgumentNullException("bodyParameter");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1500,7 +1500,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
         {
             if (bodyParameter == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "bodyParameter");
+                throw new ArgumentNullException("bodyParameter");
             }
             if (bodyParameter != null)
             {
@@ -1663,7 +1663,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
         {
             if (headerParameter == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "headerParameter");
+                throw new ArgumentNullException("headerParameter");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;

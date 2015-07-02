@@ -64,11 +64,11 @@ namespace Fixtures.PetstoreV2.Models
         {
             if (Name == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "Name");
+                throw new ArgumentNullException("Name");
             }
             if (PhotoUrls == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "PhotoUrls");
+                throw new ArgumentNullException("PhotoUrls");
             }
         }
     }

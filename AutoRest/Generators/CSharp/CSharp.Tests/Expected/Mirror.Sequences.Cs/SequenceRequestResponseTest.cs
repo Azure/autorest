@@ -123,7 +123,7 @@ namespace Fixtures.MirrorSequences
         {
             if (pets == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "pets");
+                throw new ArgumentNullException("pets");
             }
             if (pets != null)
             {
@@ -219,7 +219,7 @@ namespace Fixtures.MirrorSequences
         {
             if (petStyle == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "petStyle");
+                throw new ArgumentNullException("petStyle");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -305,7 +305,7 @@ namespace Fixtures.MirrorSequences
         {
             if (petStyle == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "petStyle");
+                throw new ArgumentNullException("petStyle");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;

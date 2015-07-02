@@ -488,7 +488,7 @@ namespace Fixtures.SwaggerBatBodyInteger
         {
             if (intBody == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "intBody");
+                throw new ArgumentNullException("intBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -568,7 +568,7 @@ namespace Fixtures.SwaggerBatBodyInteger
         {
             if (intBody == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "intBody");
+                throw new ArgumentNullException("intBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -648,7 +648,7 @@ namespace Fixtures.SwaggerBatBodyInteger
         {
             if (intBody == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "intBody");
+                throw new ArgumentNullException("intBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -728,7 +728,7 @@ namespace Fixtures.SwaggerBatBodyInteger
         {
             if (intBody == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "intBody");
+                throw new ArgumentNullException("intBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
