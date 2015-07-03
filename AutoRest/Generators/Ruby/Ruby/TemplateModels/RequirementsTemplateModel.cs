@@ -19,14 +19,14 @@ namespace Microsoft.Rest.Generator.Ruby
 
         public string GetClientRequiredFile()
         {
-            return this.GetRequiredFormat(RubyCodeNamingFramework.UnderscoreCase(this.Name) + ".rb");
+            return this.GetRequiredFormat(RubyCodeNamer.UnderscoreCase(this.Name) + ".rb");
         }
 
         public string GetOperationsRequiredFiles()
         {
             var sb = new IndentedStringBuilder();
             this.MethodGroups.ForEach(method => sb.AppendLine("{0}", 
-                this.GetRequiredFormat(RubyCodeNamingFramework.UnderscoreCase(method) + ".rb")));
+                this.GetRequiredFormat(RubyCodeNamer.UnderscoreCase(method) + ".rb")));
             return sb.ToString();
         }
 
@@ -35,9 +35,9 @@ namespace Microsoft.Rest.Generator.Ruby
             var sb = new IndentedStringBuilder();
 
             this.GetOrderedModels().Where(m => !m.Extensions.ContainsKey(ExternalExtension)).ForEach(model => sb.AppendLine("{0}",
-                this.GetRequiredFormat("models/" + RubyCodeNamingFramework.UnderscoreCase(model.Name) + ".rb")));
+                this.GetRequiredFormat("models/" + RubyCodeNamer.UnderscoreCase(model.Name) + ".rb")));
 
-            this.EnumTypes.ForEach(enumType => sb.AppendLine(this.GetRequiredFormat("models/" + RubyCodeNamingFramework.UnderscoreCase(enumType.Name) + ".rb")));
+            this.EnumTypes.ForEach(enumType => sb.AppendLine(this.GetRequiredFormat("models/" + RubyCodeNamer.UnderscoreCase(enumType.Name) + ".rb")));
 
             return sb.ToString();
         }

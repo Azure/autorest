@@ -35,11 +35,16 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal(HttpMethod.Get, clientModel.Methods[0].HttpMethod);
             Assert.Equal(3, clientModel.Methods[0].Parameters.Count);
             Assert.Equal("subscriptionId", clientModel.Methods[0].Parameters[0].Name);
+            Assert.Equal("subscriptionId", clientModel.Methods[0].Parameters[0].SerializedName);
             Assert.Equal("Subscription ID.", clientModel.Methods[0].Parameters[0].Documentation);
             Assert.Equal(true, clientModel.Methods[0].Parameters[0].IsRequired);
             Assert.Equal(ParameterLocation.Path, clientModel.Methods[0].Parameters[0].Location);
             Assert.Equal("String", clientModel.Methods[0].Parameters[0].Type.ToString());
             Assert.Equal("reset", clientModel.Methods[1].Name);
+            Assert.Equal("Product", clientModel.ModelTypes[0].Name);
+            Assert.Equal("Product", clientModel.ModelTypes[0].SerializedName);
+            Assert.Equal("product_id", clientModel.ModelTypes[0].Properties[0].Name);
+            Assert.Equal("product_id", clientModel.ModelTypes[0].Properties[0].SerializedName);
             Assert.Null(clientModel.Methods[1].ReturnType);
             Assert.Null(clientModel.Methods[1].Responses[HttpStatusCode.NoContent]);
         }

@@ -17,7 +17,7 @@ namespace Microsoft.Rest.Generator.Ruby
         private readonly HashSet<IType> normalizedTypes;
 
         /// <summary>
-        /// Initializes a new instance of RubyCodeNamingFramework.
+        /// Initializes a new instance of RubyCodeNamer.
         /// </summary>
         public RubyCodeNamer()
         {
@@ -54,6 +54,11 @@ namespace Microsoft.Rest.Generator.Ruby
         /// <returns>Corrected string.</returns>
         public string RubyRemoveInvalidCharacters(string name)
         {
+            if (string.IsNullOrEmpty(name))
+            {
+                return name;
+            }
+
             return RemoveInvalidCharacters(name).Replace('-', '_');
         }
 
@@ -150,12 +155,10 @@ namespace Microsoft.Rest.Generator.Ruby
 
         private IType NormalizeCompositeType(CompositeType compositeType)
         {
-            compositeType.SerializedName = compositeType.Name;
             compositeType.Name = GetTypeName(compositeType.Name);
 
             foreach (var property in compositeType.Properties)
             {
-                property.SerializedName = property.Name;
                 property.Name = GetPropertyName(property.Name);
                 property.Type = NormalizeType(property.Type);
             }
@@ -164,7 +167,16 @@ namespace Microsoft.Rest.Generator.Ruby
         }
 
         private IType NormalizeEnumType(EnumType enumType)
-        {
+        {   
+            for (int i = 0; i < enumType.Values.Count; i++)
+            {
+                if (enumType.Values[i].Name != null)
+                {
+                    enumType.Values[i].Name = GetEnumMemberName(RubyRemoveInvalidCharacters(enumType.Values[i].Name));
+                }              
+                
+            }
+
             return enumType;
         }
 
