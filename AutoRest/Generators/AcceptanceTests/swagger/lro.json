@@ -210,7 +210,7 @@
             }
           },
           "201": {
-            "description": "Initial response, eith ProvisioningState = 'Creating'",
+            "description": "Initial response, with ProvisioningState = 'Creating'",
             "schema": {
               "$ref": "#/definitions/Product"
             }
@@ -326,7 +326,7 @@
             }
           },
           "201": {
-            "description": "Initial response, eith ProvisioningState = 'Created'",
+            "description": "Initial response, with ProvisioningState = 'Created'",
             "schema": {
               "$ref": "#/definitions/Product"
             }
@@ -1093,7 +1093,7 @@
             }
           },
           "202": {
-            "description": "Initial response, eith ProvisioningState = 'Deleting'",
+            "description": "Initial response, with ProvisioningState = 'Deleting'",
             "headers": {
               "Location": {
                 "description": "Location to poll for result status: will be set to /lro/delete/provisioning/202/accepted/200/succeeded",
@@ -1610,13 +1610,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Initial response, eith ProvisioningState = 'Creating'",
+            "description": "Initial response, with ProvisioningState = 'Creating'",
             "schema": {
               "$ref": "#/definitions/Sku"
             }
           },
           "200": {
-            "description": "Initial response, eith ProvisioningState = 'Creating'",
+            "description": "Initial response, with ProvisioningState = 'Creating'",
             "schema": {
               "$ref": "#/definitions/Sku"
             }
@@ -1650,7 +1650,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Initial response, eith ProvisioningState = 'Creating'",
+            "description": "Initial response, with ProvisioningState = 'Creating'",
             "headers": {
               "Location": {
                 "description": "Location to poll for result status: will be set to /lro/post/202/retry/200",
@@ -1673,7 +1673,7 @@
       },
       "get": {
         "operationId": "DONOTCALLs_post202Retry200Polling",
-        "description": "Long running post request poller, service returns a ‘200’ with a Product.  Client should return with successf rom long-running operation",
+        "description": "Long running post request poller, service returns a ‘200’ with a Product.  Client should return with success from long-running operation",
         "tags": [
           "DONOTCALL Operations"
         ],
@@ -1713,7 +1713,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Initial response, eith ProvisioningState = 'Creating'",
+            "description": "Initial response, with ProvisioningState = 'Creating'",
             "headers": {
               "Location": {
                 "description": "Location to poll for result status: will be set to /lro/post/202/noretry/204",
@@ -1966,7 +1966,7 @@
             }
           },
           "201": {
-            "description": "Initial response, eith ProvisioningState = 'Creating'",
+            "description": "Initial response, with ProvisioningState = 'Creating'",
             "schema": {
               "$ref": "#/definitions/Product"
             }
@@ -2102,7 +2102,7 @@
             }
           },
           "202": {
-            "description": "Initial response, eith ProvisioningState = 'Deleting'",
+            "description": "Initial response, with ProvisioningState = 'Deleting'",
             "headers": {
               "Location": {
                 "description": "Location to poll for result status: will be set to /lro/retryerror/delete/provisioning/202/accepted/200/succeeded",
@@ -2254,7 +2254,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Initial response, eith ProvisioningState = 'Creating'",
+            "description": "Initial response, with ProvisioningState = 'Creating'",
             "headers": {
               "Location": {
                 "description": "Location to poll for result status: will be set to /lro/retryerror/post/202/retry/200",
@@ -2277,7 +2277,7 @@
       },
       "get": {
         "operationId": "DONOTCALLs_postRetry202Retry200Polling",
-        "description": "Long running post request poller, service returns a 500, then a  ‘200’ with a Product.  Client should return with successf rom long-running operation",
+        "description": "Long running post request poller, service returns a 500, then a  ‘200’ with a Product.  Client should return with success from long-running operation",
         "tags": [
           "DONOTCALL Operations"
         ],
@@ -2369,7 +2369,7 @@
             }
           },
           "201": {
-            "description": "Initial response, eith ProvisioningState = 'Creating'",
+            "description": "Initial response, with ProvisioningState = 'Creating'",
             "schema": {
               "$ref": "#/definitions/Product"
             }
@@ -2430,7 +2430,7 @@
             }
           },
           "201": {
-            "description": "Initial response, eith ProvisioningState = 'Creating'",
+            "description": "Initial response, with ProvisioningState = 'Creating'",
             "schema": {
               "$ref": "#/definitions/Product"
             }
@@ -2706,7 +2706,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Initial response, eith ProvisioningState = 'Creating'",
+            "description": "Initial response, with ProvisioningState = 'Creating'",
             "headers": {
               "Location": {
                 "description": "Location to poll for result status: will be set to /lro/retryerror/post/202/retry/200",
@@ -2729,7 +2729,7 @@
       },
       "get": {
         "operationId": "DONOTCALLs_postRetry202Retry400Polling",
-        "description": "Long running post request poller, service returns a 500, then a  ‘200’ with a Product.  Client should return with successf rom long-running operation",
+        "description": "Long running post request poller, service returns a 500, then a  ‘200’ with a Product.  Client should return with success from long-running operation",
         "tags": [
           "DONOTCALL Operations"
         ],
@@ -2769,7 +2769,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Initial response, eith ProvisioningState = 'Creating'",
+            "description": "Initial response, with ProvisioningState = 'Creating'",
             "headers": {
               "Location": {
                 "description": "Location to poll for result status: will be set to /lro/retryerror/post/202/retry/200",
@@ -2884,7 +2884,7 @@
             }
           },
           "201": {
-            "description": "Initial response, eith ProvisioningState missing",
+            "description": "Initial response, with ProvisioningState missing",
             "schema": {
               "$ref": "#/definitions/Product"
             }
@@ -3166,7 +3166,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Initial response, eith ProvisioningState = 'Creating'",
+            "description": "Initial response, with ProvisioningState = 'Creating'",
             "headers": {
               "Location": {
                 "description": "Location to poll for result status: will not be set",
@@ -3586,7 +3586,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Initial response, eith ProvisioningState = 'Creating'",
+            "description": "Initial response, with ProvisioningState = 'Creating'",
             "headers": {
               "Location": {
                 "description": "Location to poll for result status: will be set to /foo",
@@ -3682,6 +3682,261 @@
               },
               "Location": {
                 "description": "Location to poll for result status: will be set to /lro/error/postasync/retry/failed/operationResults/invalidjsonpolling",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/customheader/putasync/retry/succeeded": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROsCustomHeader_putAsyncRetrySucceeded",
+        "description": "x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
+        "tags": [
+          "LRO Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /lro/customheader/putasync/retry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/customheader/putasync/retry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "LROsCustomHeader_getAsyncRetrySucceeded",
+        "description": "x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
+        "tags": [
+          "LRO Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /lro/customheader/putasync/retry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/customheader/putasync/retry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/customheader/put/201/creating/succeeded/200": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROsCustomHeader_put201CreatingSucceeded200",
+        "description": "x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’",
+        "tags": [
+          "LRO Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response after completion, with ProvisioningState='Succeeded'",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "201": {
+            "description": "Initial response, with ProvisioningState = 'Creating'",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "LROsCustomHeader_get201CreatingSucceeded200Polling",
+        "description": "x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request poller, service returns a ‘200’ with ProvisioningState=’Succeeded’",
+        "tags": [
+          "LRO Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response after completion, with ProvisioningState='Succeeded'",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/customheader/post/202/retry/200": {
+      "post": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROsCustomHeader_post202Retry200",
+        "description": "x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success",
+        "tags": [
+          "LRO Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response, with ProvisioningState = 'Creating'",
+            "headers": {
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/customheader/post/202/retry/200",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "DONOTCALLs_post202Retry200PollingCustomHeader",
+        "description": "Long running post request poller, service returns a ‘200’ with a Product.  Client should return with success from long-running operation",
+        "tags": [
+          "DONOTCALL Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response after completion.",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/customheader/postasync/retry/succeeded": {
+      "post": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROsCustomHeader_postAsyncRetrySucceeded",
+        "description": "x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
+        "tags": [
+          "LRO Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /lro/customheader/putasync/retry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/customheader/putasync/retry/succeeded/operationResults/200",
                 "type": "string"
               },
               "Retry-After": {

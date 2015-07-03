@@ -151,7 +151,7 @@ namespace Fixtures.Azure.SwaggerBatLro
 
             /// <summary>
             /// Long running post request poller, service returns a ‘200’ with a Product.
-            /// Client should return with successf rom long-running operation
+            /// Client should return with success from long-running operation
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -163,7 +163,7 @@ namespace Fixtures.Azure.SwaggerBatLro
 
             /// <summary>
             /// Long running post request poller, service returns a ‘200’ with a Product.
-            /// Client should return with successf rom long-running operation
+            /// Client should return with success from long-running operation
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method
@@ -261,7 +261,7 @@ namespace Fixtures.Azure.SwaggerBatLro
 
             /// <summary>
             /// Long running post request poller, service returns a 500, then a  ‘200’
-            /// with a Product.  Client should return with successf rom long-running
+            /// with a Product.  Client should return with success from long-running
             /// operation
             /// </summary>
             /// <param name='operations'>
@@ -274,7 +274,7 @@ namespace Fixtures.Azure.SwaggerBatLro
 
             /// <summary>
             /// Long running post request poller, service returns a 500, then a  ‘200’
-            /// with a Product.  Client should return with successf rom long-running
+            /// with a Product.  Client should return with success from long-running
             /// operation
             /// </summary>
             /// <param name='operations'>
@@ -341,7 +341,7 @@ namespace Fixtures.Azure.SwaggerBatLro
 
             /// <summary>
             /// Long running post request poller, service returns a 500, then a  ‘200’
-            /// with a Product.  Client should return with successf rom long-running
+            /// with a Product.  Client should return with success from long-running
             /// operation
             /// </summary>
             /// <param name='operations'>
@@ -354,7 +354,7 @@ namespace Fixtures.Azure.SwaggerBatLro
 
             /// <summary>
             /// Long running post request poller, service returns a 500, then a  ‘200’
-            /// with a Product.  Client should return with successf rom long-running
+            /// with a Product.  Client should return with success from long-running
             /// operation
             /// </summary>
             /// <param name='operations'>
@@ -392,6 +392,34 @@ namespace Fixtures.Azure.SwaggerBatLro
             public static async Task<Product> PostRetry202NonRetry400PollingAsync( this IDONOTCALLsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 AzureOperationResponse<Product> result = await operations.PostRetry202NonRetry400PollingWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                return result.Body;
+            }
+
+            /// <summary>
+            /// Long running post request poller, service returns a ‘200’ with a Product.
+            /// Client should return with success from long-running operation
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            public static Product Post202Retry200PollingCustomHeader(this IDONOTCALLsOperations operations)
+            {
+                return Task.Factory.StartNew(s => ((IDONOTCALLsOperations)s).Post202Retry200PollingCustomHeaderAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running post request poller, service returns a ‘200’ with a Product.
+            /// Client should return with success from long-running operation
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// Cancellation token.
+            /// </param>
+            public static async Task<Product> Post202Retry200PollingCustomHeaderAsync( this IDONOTCALLsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                AzureOperationResponse<Product> result = await operations.Post202Retry200PollingCustomHeaderWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

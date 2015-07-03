@@ -78,10 +78,21 @@ namespace Microsoft.Rest.Generator.CSharp
             }
         }
 
+
         /// <summary>
         /// Generate the method parameter declaration for async methods and extensions
         /// </summary>
-        public virtual string GetAsyncMethodParameterDeclaration(bool addCustomHeaderParamters = false)
+        public virtual string GetAsyncMethodParameterDeclaration()
+        {
+            return this.GetAsyncMethodParameterDeclaration(false);
+        }
+
+        /// <summary>
+        /// Generate the method parameter declaration for async methods and extensions
+        /// </summary>
+        /// <param name="addCustomHeaderParameters">If true add the customHeader to the parameters</param>
+        /// <returns>Generated string of parameters</returns>
+        public virtual string GetAsyncMethodParameterDeclaration(bool addCustomHeaderParameters)
         {
             var declarations = this.SyncMethodParameterDeclaration;
             
@@ -89,9 +100,8 @@ namespace Microsoft.Rest.Generator.CSharp
             {
                 declarations += ", ";
             }
-            if (addCustomHeaderParamters)
+            if (addCustomHeaderParameters)
             {
-
                 declarations += "Dictionary<string, List<string>> customHeaders = null, ";
             }
             declarations += "CancellationToken cancellationToken = default(CancellationToken)";

@@ -504,7 +504,7 @@ namespace Fixtures.Azure.SwaggerBatLro
 
         /// <summary>
         /// Long running post request poller, service returns a ‘200’ with a Product.
-        /// Client should return with successf rom long-running operation
+        /// Client should return with success from long-running operation
         /// </summary>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -878,7 +878,7 @@ namespace Fixtures.Azure.SwaggerBatLro
 
         /// <summary>
         /// Long running post request poller, service returns a 500, then a  ‘200’
-        /// with a Product.  Client should return with successf rom long-running
+        /// with a Product.  Client should return with success from long-running
         /// operation
         /// </summary>
         /// <param name='customHeaders'>
@@ -1155,7 +1155,7 @@ namespace Fixtures.Azure.SwaggerBatLro
 
         /// <summary>
         /// Long running post request poller, service returns a 500, then a  ‘200’
-        /// with a Product.  Client should return with successf rom long-running
+        /// with a Product.  Client should return with success from long-running
         /// operation
         /// </summary>
         /// <param name='customHeaders'>
@@ -1274,6 +1274,102 @@ namespace Fixtures.Azure.SwaggerBatLro
             // Construct URL
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/nonretryerror/post/202/retry/400";
+            List<string> queryParameters = new List<string>();
+            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
+            if (queryParameters.Count > 0)
+            {
+                url += "?" + string.Join("&", queryParameters);
+            }
+            // trim all duplicate forward slashes in the url
+            url = Regex.Replace(url, "([^:]/)/+", "$1");
+            // Create HTTP transport objects
+            HttpRequestMessage httpRequest = new HttpRequestMessage();
+            httpRequest.Method = new HttpMethod("GET");
+            httpRequest.RequestUri = new Uri(url);
+            // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
+            // Set Credentials
+            cancellationToken.ThrowIfCancellationRequested();
+            await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            // Send Request
+            if (shouldTrace)
+            {
+                ServiceClientTracing.SendRequest(invocationId, httpRequest);
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            if (shouldTrace)
+            {
+                ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
+            }
+            HttpStatusCode statusCode = httpResponse.StatusCode;
+            cancellationToken.ThrowIfCancellationRequested();
+            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
+            {
+                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                if (errorBody != null)
+                {
+                    ex = new CloudException(errorBody.Message);
+                    ex.Body = errorBody;
+                }
+                ex.Request = httpRequest;
+                ex.Response = httpResponse;
+                if (shouldTrace)
+                {
+                    ServiceClientTracing.Error(invocationId, ex);
+                }
+                throw ex;
+            }
+            // Create Result
+            var result = new AzureOperationResponse<Product>();
+            result.Request = httpRequest;
+            result.Response = httpResponse;
+            // Deserialize Response
+            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
+            {
+                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+            }
+            if (shouldTrace)
+            {
+                ServiceClientTracing.Exit(invocationId, result);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Long running post request poller, service returns a ‘200’ with a Product.
+        /// Client should return with success from long-running operation
+        /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        public async Task<AzureOperationResponse<Product>> Post202Retry200PollingCustomHeaderWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            // Tracing
+            bool shouldTrace = ServiceClientTracing.IsEnabled;
+            string invocationId = null;
+            if (shouldTrace)
+            {
+                invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("cancellationToken", cancellationToken);
+                ServiceClientTracing.Enter(invocationId, this, "Post202Retry200PollingCustomHeader", tracingParameters);
+            }
+            // Construct URL
+            string url = this.Client.BaseUri.AbsoluteUri + 
+                         "//lro/customheader/post/202/retry/200";
             List<string> queryParameters = new List<string>();
             queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)

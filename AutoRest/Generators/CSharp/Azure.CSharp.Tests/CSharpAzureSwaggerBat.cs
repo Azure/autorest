@@ -89,20 +89,6 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                     new TokenCloudCredentials(Guid.NewGuid().ToString(), Guid.NewGuid().ToString())))
             {
                 client.LongRunningOperationRetryTimeout = 0;
-                var customHeaders = new Dictionary<string, List<string>>
-                {
-                    {
-                    "x-ms-client-request-id", new List<string> {"9C4D50EE-2D56-4CD3-8152-34347DC9F2B0"}
-                    }
-                };
-
-                Assert.Equal("Succeeded",
-                    client.LROs.Put201CreatingSucceeded200WithOperationResponseAsync(
-                        new Product { Location = "West US" },
-                        customHeaders
-                        ).Result.Body.ProvisioningState);
-
-                Assert.NotNull(client.LROs.Delete204SucceededWithOperationResponseAsync(customHeaders).Result);
 
                 Assert.Equal("Succeeded",
                     client.LROs.Put201CreatingSucceeded200(new Product { Location = "West US" }).ProvisioningState);
@@ -178,6 +164,25 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 client.LRORetrys.DeleteAsyncRelativeRetrySucceeded();
                 client.LRORetrys.Post202Retry200(new Product { Location = "West US" });
                 client.LRORetrys.PostAsyncRelativeRetrySucceeded(new Product { Location = "West US" });
+
+                var customHeaders = new Dictionary<string, List<string>>
+                {
+                    {
+                    "x-ms-client-request-id", new List<string> {"9C4D50EE-2D56-4CD3-8152-34347DC9F2B0"}
+                    }
+                };
+
+                Assert.NotNull(client.LROsCustomHeader.PutAsyncRetrySucceededWithOperationResponseAsync(
+                                    new Product { Location = "West US" }, customHeaders).Result);
+
+                Assert.NotNull(client.LROsCustomHeader.PostAsyncRetrySucceededWithOperationResponseAsync(
+                                    new Product { Location = "West US" }, customHeaders).Result);
+                
+                Assert.NotNull(client.LROsCustomHeader.Put201CreatingSucceeded200WithOperationResponseAsync(
+                                    new Product { Location = "West US" }, customHeaders).Result);
+
+                Assert.NotNull(client.LROsCustomHeader.Post202Retry200WithOperationResponseAsync(
+                                    new Product { Location = "West US" }, customHeaders).Result);
             }
         }
 

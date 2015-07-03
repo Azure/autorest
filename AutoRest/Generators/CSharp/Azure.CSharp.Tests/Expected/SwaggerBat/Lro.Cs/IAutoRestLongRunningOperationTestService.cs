@@ -27,5 +27,7 @@ namespace Fixtures.Azure.SwaggerBatLro
 
         ILROSADsOperations LROSADs { get; }
 
+        ILROsCustomHeaderOperations LROsCustomHeader { get; }
+
         }
 }

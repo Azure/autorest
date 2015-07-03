@@ -71,7 +71,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         Task<AzureOperationResponse> Get202NoRetry204WithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running post request poller, service returns a ‘200’ with a
-        /// Product.  Client should return with successf rom long-running
+        /// Product.  Client should return with success from long-running
         /// operation
         /// </summary>
         /// <param name='customHeaders'>
@@ -117,7 +117,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         Task<AzureOperationResponse> GetRetry202Retry200WithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running post request poller, service returns a 500, then a
-        /// ‘200’ with a Product.  Client should return with successf rom
+        /// ‘200’ with a Product.  Client should return with success from
         /// long-running operation
         /// </summary>
         /// <param name='customHeaders'>
@@ -150,7 +150,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         Task<AzureOperationResponse> GetRetry202NonRetry400WithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running post request poller, service returns a 500, then a
-        /// ‘200’ with a Product.  Client should return with successf rom
+        /// ‘200’ with a Product.  Client should return with success from
         /// long-running operation
         /// </summary>
         /// <param name='customHeaders'>
@@ -171,5 +171,17 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> PostRetry202NonRetry400PollingWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running post request poller, service returns a ‘200’ with a
+        /// Product.  Client should return with success from long-running
+        /// operation
+        /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        Task<AzureOperationResponse<Product>> Post202Retry200PollingCustomHeaderWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
