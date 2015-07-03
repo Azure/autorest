@@ -13,7 +13,7 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening.Models
     {
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "pname")]
+        [JsonProperty(PropertyName = "properties.pname")]
         public string Pname { get; set; }
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening.Models
         /// 'canceled', 'Accepted', 'Creating', 'Created', 'Updating',
         /// 'Updated', 'Deleting', 'Deleted', 'OK'
         /// </summary>
-        [JsonProperty(PropertyName = "provisioningStateValues")]
+        [JsonProperty(PropertyName = "properties.provisioningStateValues")]
         public string ProvisioningStateValues { get; private set; }
 
     }

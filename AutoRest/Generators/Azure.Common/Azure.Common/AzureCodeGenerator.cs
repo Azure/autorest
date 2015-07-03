@@ -305,7 +305,7 @@ namespace Microsoft.Rest.Generator.Azure
                             {
                                 pp.Name = compositeType.Name + CodeNamer.PascalCase(pp.Name);
                             }
-
+                            pp.SerializedName = "properties." + pp.SerializedName;
                             compositeType.Properties.Add(pp);
                         }
                         
