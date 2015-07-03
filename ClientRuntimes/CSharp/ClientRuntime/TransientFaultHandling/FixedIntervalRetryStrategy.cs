@@ -70,8 +70,8 @@ namespace Microsoft.Rest.TransientFaultHandling
             Guard.ArgumentNotNegativeValue(retryCount, "retryCount");
             Guard.ArgumentNotNegativeValue(retryInterval.Ticks, "retryInterval");
 
-            this._retryCount = retryCount;
-            this._retryInterval = retryInterval;
+            _retryCount = retryCount;
+            _retryInterval = retryInterval;
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Microsoft.Rest.TransientFaultHandling
         /// <returns>The ShouldRetry delegate.</returns>
         public override ShouldRetryHandler GetShouldRetryHandler()
         {
-            if (this._retryCount == 0)
+            if (_retryCount == 0)
             {
                 return
                     delegate(int currentRetryCount, Exception lastException)
@@ -91,9 +91,9 @@ namespace Microsoft.Rest.TransientFaultHandling
 
             return delegate(int currentRetryCount, Exception lastException)
             {
-                if (currentRetryCount < this._retryCount)
+                if (currentRetryCount < _retryCount)
                 {
-                    return new RetryCondition(true, this._retryInterval);
+                    return new RetryCondition(true, _retryInterval);
                 }
                 return new RetryCondition(false, TimeSpan.Zero);
             };

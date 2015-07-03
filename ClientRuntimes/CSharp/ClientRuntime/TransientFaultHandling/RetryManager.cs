@@ -155,7 +155,7 @@ namespace Microsoft.Rest.TransientFaultHandling
         public virtual RetryPolicy<T> GetRetryPolicy<T>()
             where T : ITransientErrorDetectionStrategy, new()
         {
-            return new RetryPolicy<T>(this.GetRetryStrategy());
+            return new RetryPolicy<T>(GetRetryStrategy());
         }
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace Microsoft.Rest.TransientFaultHandling
         public virtual RetryPolicy<T> GetRetryPolicy<T>(string retryStrategyName)
             where T : ITransientErrorDetectionStrategy, new()
         {
-            return new RetryPolicy<T>(this.GetRetryStrategy(retryStrategyName));
+            return new RetryPolicy<T>(GetRetryStrategy(retryStrategyName));
         }
 
         /// <summary>
@@ -178,7 +178,7 @@ namespace Microsoft.Rest.TransientFaultHandling
         /// <returns>The retry strategy that matches the default strategy.</returns>
         public virtual RetryStrategy GetRetryStrategy()
         {
-            return this._defaultStrategy;
+            return _defaultStrategy;
         }
 
         /// <summary>
@@ -195,7 +195,7 @@ namespace Microsoft.Rest.TransientFaultHandling
             }
 
             RetryStrategy retryStrategy;
-            if (!this._retryStrategies.TryGetValue(retryStrategyName, out retryStrategy))
+            if (!_retryStrategies.TryGetValue(retryStrategyName, out retryStrategy))
             {
                 throw new ArgumentOutOfRangeException(string.Format(CultureInfo.CurrentCulture,
                     Resources.RetryStrategyNotFound, retryStrategyName));
@@ -219,9 +219,9 @@ namespace Microsoft.Rest.TransientFaultHandling
 
 
             RetryStrategy retryStrategy;
-            if (!this._defaultRetryStrategiesMap.TryGetValue(technology, out retryStrategy))
+            if (!_defaultRetryStrategiesMap.TryGetValue(technology, out retryStrategy))
             {
-                retryStrategy = this._defaultStrategy;
+                retryStrategy = _defaultStrategy;
             }
 
             if (retryStrategy == null)

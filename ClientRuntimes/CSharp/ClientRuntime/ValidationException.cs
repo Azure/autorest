@@ -37,7 +37,6 @@ namespace Microsoft.Rest
         /// Initializes a new instance of the ValidationException class.
         /// </summary>
         public ValidationException()
-            : base()
         {
         }
 
