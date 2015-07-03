@@ -98,25 +98,25 @@ Write(WrapComment(" * ", Model.Documentation));
 #line default
 #line hidden
 
-            WriteLiteral("    * @param {");
+            WriteLiteral(" * @param {");
 #line 23 "AzureMethodTemplate.cshtml"
-            Write(parameter.Type.Name);
+         Write(parameter.Type.Name);
 
 #line default
 #line hidden
             WriteLiteral("} [");
 #line 23 "AzureMethodTemplate.cshtml"
-                                   Write(parameter.Name);
+                                Write(parameter.Name);
 
 #line default
 #line hidden
             WriteLiteral("] ");
 #line 23 "AzureMethodTemplate.cshtml"
-                                                    Write(parameter.Documentation);
+                                                 Write(parameter.Documentation);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    *\r\n");
+            WriteLiteral("\r\n *\r\n");
 #line 25 "AzureMethodTemplate.cshtml"
 }
 
@@ -171,7 +171,7 @@ Write(Model.OperationName);
 #line default
 #line hidden
             WriteLiteral("function (err, result){\r\n    if (err) return callback(err);\r\n    self.getPostOrDe" +
-"leteOperationResult(result, callback);\r\n  });\r\n}\r\n\r\n");
+"leteOperationResult(result, callback);\r\n  });\r\n};\r\n\r\n");
 #line 40 "AzureMethodTemplate.cshtml"
 }
 else if (Model.HttpMethod == HttpMethod.Put)
@@ -194,25 +194,25 @@ Write(WrapComment(" * ", Model.Documentation));
 #line default
 #line hidden
 
-            WriteLiteral("    * @param {");
+            WriteLiteral(" * @param {");
 #line 49 "AzureMethodTemplate.cshtml"
-            Write(parameter.Type.Name);
+         Write(parameter.Type.Name);
 
 #line default
 #line hidden
             WriteLiteral("} [");
 #line 49 "AzureMethodTemplate.cshtml"
-                                   Write(parameter.Name);
+                                Write(parameter.Name);
 
 #line default
 #line hidden
             WriteLiteral("] ");
 #line 49 "AzureMethodTemplate.cshtml"
-                                                    Write(parameter.Documentation);
+                                                 Write(parameter.Documentation);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    *\r\n");
+            WriteLiteral("\r\n *\r\n");
 #line 51 "AzureMethodTemplate.cshtml"
 }
 
@@ -267,7 +267,7 @@ Write(Model.OperationName);
 
 #line default
 #line hidden
-            WriteLiteral("callback);\r\n    }\r\n    return cb;\r\n  };\r\n  // Send request\r\n  self.begin");
+            WriteLiteral("callback);\r\n    };\r\n    return cb;\r\n  }\r\n  // Send request\r\n  self.begin");
 #line 66 "AzureMethodTemplate.cshtml"
         Write(Model.Name.ToPascalCase());
 
@@ -280,7 +280,7 @@ Write(Model.OperationName);
 #line default
 #line hidden
             WriteLiteral("function (err, result){\r\n    if (err) return callback(err);\r\n    client.getPutOpe" +
-"rationResult(result, getMethod(), callback);\r\n  });\r\n}\r\n\r\n");
+"rationResult(result, getMethod(), callback);\r\n  });\r\n};\r\n\r\n");
 #line 72 "AzureMethodTemplate.cshtml"
 }
 

@@ -157,7 +157,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 throw new ArgumentNullException("valueReference");
             }
 
-            return valueReference.Replace('\'', '"');
+            return valueReference.Replace("'", "\\'");
         }
 
         /// <summary>
@@ -235,7 +235,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                                 .AppendLine("var {0} = {1};", allowedValues, enumType.GetEnumValuesArray())
                                 .AppendLine("if (!{0}.some( function(item) {{ return item === {1}; }})) {{", allowedValues, valueReference)
                                 .Indent()
-                                   .AppendLine("throw new Error({0} + ' is not a valid value. The valid values are: ' + {1});", escapedValueReference, allowedValues)
+                                   .AppendLine("throw new Error({0} + ' is not a valid value. The valid values are: ' + {1});", valueReference, allowedValues)
                                 .Outdent()
                                 .AppendLine("}")
                            .Outdent()
@@ -259,7 +259,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                         .Indent()
                             .AppendLine("throw new Error('No discriminator field \"{0}\" was found in parameter \"{1}\".');",
                                         composite.PolymorphicDiscriminator,
-                                        valueReference)
+                                        escapedValueReference)
                         .Outdent()
                         .AppendLine("}");
                 }
@@ -273,17 +273,17 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             }
             else if (sequence != null)
             {
-                var elementVar = scope.GetVariableName("element");
-                var innerValidation = sequence.ElementType.ValidateType(scope, elementVar, modelReference);
+                var indexVar = scope.GetVariableName("i");
+                var innerValidation = sequence.ElementType.ValidateType(scope, valueReference + "["+indexVar+"]", modelReference);
                 if (!string.IsNullOrEmpty(innerValidation))
                 {
                     return builder.AppendLine("if ({0} !== null && {0} !== undefined && util.isArray({0})) {{", valueReference)
                             .Indent()
-                              .AppendLine("{0}.forEach(function({1}) {{", valueReference, elementVar)
+                              .AppendLine("for (var {1} = 0; {1} < {0}.length; {1}++) {{", valueReference, indexVar)
                                 .Indent()
                                   .AppendLine(innerValidation)
                                 .Outdent()
-                              .AppendLine("});")
+                              .AppendLine("}")
                             .Outdent()
                           .AppendLine("}").ToString();
                 }

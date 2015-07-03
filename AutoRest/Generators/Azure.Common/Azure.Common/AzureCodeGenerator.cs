@@ -24,7 +24,7 @@ namespace Microsoft.Rest.Generator.Azure
         public const string ExternalExtension = "x-ms-external";
         public const string ODataExtension = "x-ms-odata";
         public const string GlobalParameter = "x-ms-global-parameter";
-
+        public const string ApiVersion = "ApiVersion";
         private const string ResourceType = "Resource";
         private const string SubResourceType = "SubResource";
         private const string ResourceProperties = "Properties";
@@ -236,7 +236,7 @@ namespace Microsoft.Rest.Generator.Azure
 
             serviceClient.Properties.Add(new Property
             {
-                Name = "ApiVersion",
+                Name = ApiVersion,
                 SerializedName = "api-version",
                 Type = PrimaryType.String,
                 Documentation = "The Api Version.",

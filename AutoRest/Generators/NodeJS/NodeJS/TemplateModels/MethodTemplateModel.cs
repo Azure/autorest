@@ -224,7 +224,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                     builder.AppendLine("{0} = new Buffer({0}, 'base64');", valueReference);
                 }
             }
-            else if (sequence != null)
+            else if (IsSpecialDeserializationRequired(sequence))
             {
                 builder.AppendLine("for (var i = 0; i < {0}.length; i++) {{", valueReference)
                     .Indent()
@@ -252,7 +252,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                         .Outdent()
                     .AppendLine("}");
             }
-            else if (dictionary != null)
+            else if (IsSpecialDeserializationRequired(dictionary))
             {
                 builder.AppendLine("for (var property in {0}) {{", valueReference)
                     .Indent()
@@ -307,9 +307,37 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
             else
             {
-                throw new InvalidOperationException("Invalid type: " + ReturnType);
+                return string.Empty;
             }
             return builder.ToString();
+        }
+
+        /// <summary>
+        /// If the element type of a sequenece or value type of a dictionary 
+        /// contains one of the following special types then it needs to be 
+        /// deserialized. The special types are: Date, DateTime, ByteArray 
+        /// and CompositeType
+        /// </summary>
+        /// <param name="type">The type to determine if special deserialization is required</param>
+        /// <returns>True if special deserialization is required. False, otherwise.</returns>
+        private static bool IsSpecialDeserializationRequired(IType type)
+        {
+            PrimaryType[] validTypes = new PrimaryType[] {PrimaryType.DateTime, PrimaryType.Date, PrimaryType.ByteArray};
+            SequenceType sequence = type as SequenceType;
+            DictionaryType dictionary = type as DictionaryType;
+            bool result = false;
+            if (sequence != null && 
+                (validTypes.Any(t => t == sequence.ElementType) || sequence.ElementType is CompositeType))
+            {
+                result = true;
+            }
+            else if (dictionary != null && 
+                (validTypes.Any(t => t == dictionary.ValueType) || dictionary.ValueType is CompositeType))
+            {
+                result = true;
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -433,10 +461,10 @@ namespace Microsoft.Rest.Generator.NodeJS
 
             foreach (var pathParameter in ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
             {
-                var pathReplaceFormat = "{0} = {0}.replace(\"{{{1}}}\", encodeURIComponent({2}));";
+                var pathReplaceFormat = "{0} = {0}.replace('{{{1}}}', encodeURIComponent({2}));";
                 if (pathParameter.SkipUrlEncoding())
                 {
-                    pathReplaceFormat = "{0} = {0}.replace(\"{{{1}}}\", {2});";
+                    pathReplaceFormat = "{0} = {0}.replace('{{{1}}}', {2});";
                 }
                 builder.AppendLine(pathReplaceFormat, variableName, pathParameter.Name,
                     pathParameter.Type.ToString(pathParameter.Name));
