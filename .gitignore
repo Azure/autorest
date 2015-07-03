@@ -93,7 +93,7 @@ ClientBin
 *.dbmdl
 
 # Build tasks
-tools/*.dll
+[Tt]ools/*.dll
 *.class
 
 # Mobile Tools for Java (J2ME)
