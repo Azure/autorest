@@ -32,7 +32,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<int?>> GetNullAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<int?>> result = await operations.GetNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<int?>> result = await operations.GetNullWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -58,7 +58,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<int?>> GetInvalidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<int?>> result = await operations.GetInvalidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<int?>> result = await operations.GetInvalidWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -84,7 +84,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<int?>> GetEmptyAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<int?>> result = await operations.GetEmptyWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<int?>> result = await operations.GetEmptyWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -114,7 +114,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task PutEmptyAsync( this IArray operations, IList<string> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutEmptyWithOperationResponseAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutEmptyWithOperationResponseAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -139,7 +139,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<bool?>> GetBooleanTfftAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<bool?>> result = await operations.GetBooleanTfftWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<bool?>> result = await operations.GetBooleanTfftWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -169,7 +169,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task PutBooleanTfftAsync( this IArray operations, IList<bool?> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutBooleanTfftWithOperationResponseAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutBooleanTfftWithOperationResponseAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -194,7 +194,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<bool?>> GetBooleanInvalidNullAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<bool?>> result = await operations.GetBooleanInvalidNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<bool?>> result = await operations.GetBooleanInvalidNullWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -220,7 +220,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<bool?>> GetBooleanInvalidStringAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<bool?>> result = await operations.GetBooleanInvalidStringWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<bool?>> result = await operations.GetBooleanInvalidStringWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -246,7 +246,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<int?>> GetIntegerValidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<int?>> result = await operations.GetIntegerValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<int?>> result = await operations.GetIntegerValidWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -276,7 +276,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task PutIntegerValidAsync( this IArray operations, IList<int?> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutIntegerValidWithOperationResponseAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutIntegerValidWithOperationResponseAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -301,7 +301,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<int?>> GetIntInvalidNullAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<int?>> result = await operations.GetIntInvalidNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<int?>> result = await operations.GetIntInvalidNullWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -327,7 +327,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<int?>> GetIntInvalidStringAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<int?>> result = await operations.GetIntInvalidStringWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<int?>> result = await operations.GetIntInvalidStringWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -353,7 +353,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<long?>> GetLongValidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<long?>> result = await operations.GetLongValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<long?>> result = await operations.GetLongValidWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -383,7 +383,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task PutLongValidAsync( this IArray operations, IList<long?> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutLongValidWithOperationResponseAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutLongValidWithOperationResponseAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -408,7 +408,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<long?>> GetLongInvalidNullAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<long?>> result = await operations.GetLongInvalidNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<long?>> result = await operations.GetLongInvalidNullWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -434,7 +434,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<long?>> GetLongInvalidStringAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<long?>> result = await operations.GetLongInvalidStringWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<long?>> result = await operations.GetLongInvalidStringWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -460,7 +460,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<double?>> GetFloatValidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<double?>> result = await operations.GetFloatValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<double?>> result = await operations.GetFloatValidWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -490,7 +490,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task PutFloatValidAsync( this IArray operations, IList<double?> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutFloatValidWithOperationResponseAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutFloatValidWithOperationResponseAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -515,7 +515,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<double?>> GetFloatInvalidNullAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<double?>> result = await operations.GetFloatInvalidNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<double?>> result = await operations.GetFloatInvalidNullWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -541,7 +541,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<double?>> GetFloatInvalidStringAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<double?>> result = await operations.GetFloatInvalidStringWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<double?>> result = await operations.GetFloatInvalidStringWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -567,7 +567,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<double?>> GetDoubleValidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<double?>> result = await operations.GetDoubleValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<double?>> result = await operations.GetDoubleValidWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -597,7 +597,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task PutDoubleValidAsync( this IArray operations, IList<double?> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutDoubleValidWithOperationResponseAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutDoubleValidWithOperationResponseAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -622,7 +622,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<double?>> GetDoubleInvalidNullAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<double?>> result = await operations.GetDoubleInvalidNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<double?>> result = await operations.GetDoubleInvalidNullWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -648,7 +648,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<double?>> GetDoubleInvalidStringAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<double?>> result = await operations.GetDoubleInvalidStringWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<double?>> result = await operations.GetDoubleInvalidStringWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -674,7 +674,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<string>> GetStringValidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<string>> result = await operations.GetStringValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<string>> result = await operations.GetStringValidWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -704,7 +704,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task PutStringValidAsync( this IArray operations, IList<string> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutStringValidWithOperationResponseAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutStringValidWithOperationResponseAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -729,7 +729,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<string>> GetStringWithNullAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<string>> result = await operations.GetStringWithNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<string>> result = await operations.GetStringWithNullWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -755,7 +755,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<string>> GetStringWithInvalidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<string>> result = await operations.GetStringWithInvalidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<string>> result = await operations.GetStringWithInvalidWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -781,7 +781,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<DateTime?>> GetDateValidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<DateTime?>> result = await operations.GetDateValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<DateTime?>> result = await operations.GetDateValidWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -811,7 +811,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task PutDateValidAsync( this IArray operations, IList<DateTime?> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutDateValidWithOperationResponseAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutDateValidWithOperationResponseAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -836,7 +836,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<DateTime?>> GetDateInvalidNullAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<DateTime?>> result = await operations.GetDateInvalidNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<DateTime?>> result = await operations.GetDateInvalidNullWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -862,7 +862,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<DateTime?>> GetDateInvalidCharsAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<DateTime?>> result = await operations.GetDateInvalidCharsWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<DateTime?>> result = await operations.GetDateInvalidCharsWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -890,7 +890,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<DateTime?>> GetDateTimeValidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<DateTime?>> result = await operations.GetDateTimeValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<DateTime?>> result = await operations.GetDateTimeValidWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -922,7 +922,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task PutDateTimeValidAsync( this IArray operations, IList<DateTime?> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutDateTimeValidWithOperationResponseAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutDateTimeValidWithOperationResponseAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -947,7 +947,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<DateTime?>> GetDateTimeInvalidNullAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<DateTime?>> result = await operations.GetDateTimeInvalidNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<DateTime?>> result = await operations.GetDateTimeInvalidNullWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -973,7 +973,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<DateTime?>> GetDateTimeInvalidCharsAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<DateTime?>> result = await operations.GetDateTimeInvalidCharsWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<DateTime?>> result = await operations.GetDateTimeInvalidCharsWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1001,7 +1001,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<byte[]>> GetByteValidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<byte[]>> result = await operations.GetByteValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<byte[]>> result = await operations.GetByteValidWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1033,7 +1033,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task PutByteValidAsync( this IArray operations, IList<byte[]> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutByteValidWithOperationResponseAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutByteValidWithOperationResponseAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -1060,7 +1060,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<byte[]>> GetByteInvalidNullAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<byte[]>> result = await operations.GetByteInvalidNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<byte[]>> result = await operations.GetByteInvalidNullWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1086,7 +1086,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<Product>> GetComplexNullAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<Product>> result = await operations.GetComplexNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<Product>> result = await operations.GetComplexNullWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1112,7 +1112,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<Product>> GetComplexEmptyAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<Product>> result = await operations.GetComplexEmptyWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<Product>> result = await operations.GetComplexEmptyWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1140,7 +1140,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<Product>> GetComplexItemNullAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<Product>> result = await operations.GetComplexItemNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<Product>> result = await operations.GetComplexItemNullWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1168,7 +1168,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<Product>> GetComplexItemEmptyAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<Product>> result = await operations.GetComplexItemEmptyWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<Product>> result = await operations.GetComplexItemEmptyWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1196,7 +1196,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<Product>> GetComplexValidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<Product>> result = await operations.GetComplexValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<Product>> result = await operations.GetComplexValidWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1228,7 +1228,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task PutComplexValidAsync( this IArray operations, IList<Product> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutComplexValidWithOperationResponseAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutComplexValidWithOperationResponseAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -1253,7 +1253,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<IList<string>>> GetArrayNullAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<IList<string>>> result = await operations.GetArrayNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<IList<string>>> result = await operations.GetArrayNullWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1279,7 +1279,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<IList<string>>> GetArrayEmptyAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<IList<string>>> result = await operations.GetArrayEmptyWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<IList<string>>> result = await operations.GetArrayEmptyWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1305,7 +1305,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<IList<string>>> GetArrayItemNullAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<IList<string>>> result = await operations.GetArrayItemNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<IList<string>>> result = await operations.GetArrayItemNullWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1331,7 +1331,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<IList<string>>> GetArrayItemEmptyAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<IList<string>>> result = await operations.GetArrayItemEmptyWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<IList<string>>> result = await operations.GetArrayItemEmptyWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1359,7 +1359,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<IList<string>>> GetArrayValidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<IList<string>>> result = await operations.GetArrayValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<IList<string>>> result = await operations.GetArrayValidWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1391,7 +1391,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task PutArrayValidAsync( this IArray operations, IList<IList<string>> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutArrayValidWithOperationResponseAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutArrayValidWithOperationResponseAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -1416,7 +1416,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<IDictionary<string, string>>> GetDictionaryNullAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<IDictionary<string, string>>> result = await operations.GetDictionaryNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<IDictionary<string, string>>> result = await operations.GetDictionaryNullWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1442,7 +1442,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<IDictionary<string, string>>> GetDictionaryEmptyAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<IDictionary<string, string>>> result = await operations.GetDictionaryEmptyWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<IDictionary<string, string>>> result = await operations.GetDictionaryEmptyWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1472,7 +1472,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<IDictionary<string, string>>> GetDictionaryItemNullAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<IDictionary<string, string>>> result = await operations.GetDictionaryItemNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<IDictionary<string, string>>> result = await operations.GetDictionaryItemNullWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1502,7 +1502,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<IDictionary<string, string>>> GetDictionaryItemEmptyAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<IDictionary<string, string>>> result = await operations.GetDictionaryItemEmptyWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<IDictionary<string, string>>> result = await operations.GetDictionaryItemEmptyWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1532,7 +1532,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task<IList<IDictionary<string, string>>> GetDictionaryValidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<IDictionary<string, string>>> result = await operations.GetDictionaryValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<IDictionary<string, string>>> result = await operations.GetDictionaryValidWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1566,7 +1566,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// </param>
             public static async Task PutDictionaryValidAsync( this IArray operations, IList<IDictionary<string, string>> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutDictionaryValidWithOperationResponseAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutDictionaryValidWithOperationResponseAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
 
     }

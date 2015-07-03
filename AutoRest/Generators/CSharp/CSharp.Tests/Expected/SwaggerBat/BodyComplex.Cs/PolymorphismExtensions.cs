@@ -32,7 +32,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// </param>
             public static async Task<Fish> GetValidAsync( this IPolymorphism operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<Fish> result = await operations.GetValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<Fish> result = await operations.GetValidWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -114,7 +114,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// </param>
             public static async Task PutValidAsync( this IPolymorphism operations, Fish complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutValidWithOperationResponseAsync(complexBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutValidWithOperationResponseAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -199,7 +199,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// </param>
             public static async Task PutValidMissingRequiredAsync( this IPolymorphism operations, Fish complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutValidMissingRequiredWithOperationResponseAsync(complexBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutValidMissingRequiredWithOperationResponseAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
 
     }

@@ -1278,6 +1278,7 @@ namespace Microsoft.Azure.Management.Redis
 
             return await this.Client.GetPutOperationResultAsync(response, 
                 () => GetWithOperationResponseAsync(resourceGroupName, name, subscriptionId, cancellationToken),
+                null,
                 cancellationToken);
         }
 
@@ -1441,6 +1442,7 @@ namespace Microsoft.Azure.Management.Redis
 
             return await this.Client.GetPutOperationResultAsync(response,
                 () => GetSkuWithOperationResponseAsync(resourceGroupName, name, subscriptionId, cancellationToken),
+                null,
                 cancellationToken);
         }
 
@@ -1604,6 +1606,7 @@ namespace Microsoft.Azure.Management.Redis
 
             return await this.Client.GetPutOperationResultAsync(response,
                 () => GetSubResourceWithOperationResponseAsync(resourceGroupName, name, subscriptionId, cancellationToken),
+                null,
                 cancellationToken);
         }
 
@@ -1746,7 +1749,7 @@ namespace Microsoft.Azure.Management.Redis
                 response.Response.StatusCode == HttpStatusCode.Created ||
                 response.Response.StatusCode == HttpStatusCode.NoContent);
 
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, null, cancellationToken);
         }
 
         public async Task<AzureOperationResponse<Sku>> BeginPostWithOperationResponseAsync(string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
@@ -1872,7 +1875,7 @@ namespace Microsoft.Azure.Management.Redis
                 response.Response.StatusCode == HttpStatusCode.Accepted ||
                 response.Response.StatusCode == HttpStatusCode.Created);
 
-            return await this.Client.GetPostOrDeleteOperationResultAsync<Sku>(response, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync<Sku>(response, null, cancellationToken);
         }
 
 

@@ -23,17 +23,20 @@ else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.D
 @WrapComment("/// ", parameter.Documentation.EscapeXmlComment())@:
 @:/// </param>    
 }
+@:/// <param name='customHeaders'>
+@:/// Headers that will be added to request.
+@:/// </param>
 @:/// <param name='cancellationToken'>
 @:/// Cancellation token.
 @:/// </param>
 <text>
-public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithOperationResponseAsync(@(Model.AsyncMethodParameterDeclaration))
+public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithOperationResponseAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
     // Send request
     @(Model.OperationResponseReturnTypeString) response = await Begin@(Model.Name)WithOperationResponseAsync(
-        @(Model.AsyncMethodInvocationArgs));
+        @(Model.GetAsyncMethodInvocationArgs("customHeaders")));
 
-    return await @(Model.ClientReference).GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+    return await @(Model.ClientReference).GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
 }
 </text>
 }
@@ -48,18 +51,22 @@ else if (Model.HttpMethod == HttpMethod.Put)
 @WrapComment("/// ", parameter.Documentation.EscapeXmlComment())@:
 @:/// </param>    
 }
+@:/// <param name='customHeaders'>
+@:/// Headers that will be added to request.
+@:/// </param>    
 @:/// <param name='cancellationToken'>
 @:/// Cancellation token.
 @:/// </param>
 <text>
-public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithOperationResponseAsync(@(Model.AsyncMethodParameterDeclaration))
+public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithOperationResponseAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
     // Send Request
     @(Model.OperationResponseReturnTypeString) response = await Begin@(Model.Name)WithOperationResponseAsync(
-        @(Model.AsyncMethodInvocationArgs));
+        @(Model.GetAsyncMethodInvocationArgs("customHeaders")));
 
     return await @(Model.ClientReference).GetPutOperationResultAsync<@(Model.ReturnType.Name)>(response, 
         () => @(Model.GetMethod.Name)WithOperationResponseAsync(@(Model.GetMethodInvocationArgs(Model.GetMethod))),
+        customHeaders, 
         cancellationToken);
 }
 </text>

@@ -39,9 +39,12 @@ var getPascalCase = function (inString) {
   return '' + inString.substring(0, 1).toUpperCase() + inString.substring(1);
 }
 
-
 var lros = function (coverage) {
   coverage['LROPutInlineComplete'] = 0;
+  coverage['CustomHeaderPutAsyncSucceded'] = 0;
+  coverage['CustomHeaderPostAsyncSucceded'] = 0;
+  coverage['CustomHeaderPutSucceeded'] = 0;
+  coverage['CustomHeaderPostSucceeded'] = 0;
   router.put('/put/200/succeeded', function (req, res, next) {
     coverage['LROPutInlineComplete']++;
     res.status(200).end('{ "properties": { "provisioningState": "Succeeded"}, "id": "100", "name": "foo" }');
@@ -1237,6 +1240,155 @@ var lros = function (coverage) {
     coverage['LROErrorPostAsyncInvalidJsonPolling']++;
     res.status(200).end('{ "status": "Accepted"');
   });
+
+  router.put('/customheader/putasync/retry/succeeded', function (req, res, next) {
+    var header = req.get("x-ms-client-request-id");
+    if (header && header.toLowerCase() === "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0".toLowerCase()) {
+      var pollingUri = 'http://localhost.:' + utils.getPort() + '/lro/customheader/putasync/retry/succeeded/operationResults/200';
+      var headers = {
+        'Azure-AsyncOperation': pollingUri,
+        'Location': pollingUri
+      };
+      headers['Retry-After'] = 0;
+      res.set(headers).status(200).end('{ "properties": { "provisioningState": "Accepted"}, "id": "100", "name": "foo" }');
+    } else {
+      utils.send400(res, next, 'Did not receive the correct x-ms-client-request-id header in put: "' + header);
+    }
+  });
+
+  router.get('/customheader/putasync/retry/succeeded', function (req, res, next) {
+    var header = req.get("x-ms-client-request-id");
+    var scenario = 'CustomHeaderPutAsyncSucceded';
+    if (header && header.toLowerCase() === "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0".toLowerCase()) {
+      res.status(200).end('{ "properties": { "provisioningState": "Succeeded"}, "id": "100", "name": "foo" }');
+    } else {
+      utils.send400(res, next, 'Did not receive the correct x-ms-client-request-id header in get: "' + header);
+    }
+  });
+
+  router.get('/customheader/putasync/retry/succeeded/operationResults/200', function (req, res, next) {
+    var header = req.get("x-ms-client-request-id");
+    var scenario = 'CustomHeaderPutAsyncSucceded';
+    if (header && header.toLowerCase() === "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0".toLowerCase()) {
+      var pollingUri = 'http://localhost.:' + utils.getPort() + '/lro/customheader/putasync/retry/succeeded/operationResults/200';
+      var headers = {
+        'Azure-AsyncOperation': pollingUri,
+        'Location': pollingUri
+      };
+      headers['Retry-After'] = 0;
+      if (!hasScenarioCookie(req, scenario)) {
+        addScenarioCookie(res, scenario);
+        res.set(headers).status(202).end('{ "status": "Accepted"}');
+      } else {
+        removeScenarioCookie(res);
+        coverage[scenario]++;
+        res.status(200).end('{ "status": "Succeeded"}');
+      }
+    } else {
+      utils.send400(res, next, 'Did not receive the correct x-ms-client-request-id header in get: "' + header);
+    }
+  });
+
+  router.post('/customheader/postasync/retry/succeeded', function (req, res, next) {
+    var header = req.get("x-ms-client-request-id");
+    if (header && header.toLowerCase() === "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0".toLowerCase()) {
+      var pollingUri = 'http://localhost.:' + utils.getPort() + '/lro/customheader/postasync/retry/succeeded/operationResults/200';
+      var headers = {
+        'Azure-AsyncOperation': pollingUri,
+        'Location': pollingUri
+      };
+      headers['Retry-After'] = 0;
+      res.set(headers).status(202).end('{ "properties": { "provisioningState": "Accepted"}, "id": "100", "name": "foo" }');
+    } else {
+      utils.send400(res, next, 'Did not receive the correct x-ms-client-request-id header in put: "' + header);
+    }
+  });
+
+  router.get('/customheader/postasync/retry/succeeded/operationResults/200', function (req, res, next) {
+    var header = req.get("x-ms-client-request-id");
+    var scenario = 'CustomHeaderPostAsyncSucceded';
+    if (header && header.toLowerCase() === "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0".toLowerCase()) {
+      var pollingUri = 'http://localhost.:' + utils.getPort() + '/lro/customheader/postasync/retry/succeeded/operationResults/200';
+      var headers = {
+        'Azure-AsyncOperation': pollingUri,
+        'Location': pollingUri
+      };
+      headers['Retry-After'] = 0;
+      if (!hasScenarioCookie(req, scenario)) {
+        addScenarioCookie(res, scenario);
+        res.set(headers).status(202).end('{ "status": "Accepted"}');
+      } else {
+        removeScenarioCookie(res);
+        coverage[scenario]++;
+        res.status(200).end('{ "status": "Succeeded"}');
+      }
+    } else {
+      utils.send400(res, next, 'Did not receive the correct x-ms-client-request-id header in get: "' + header);
+    }
+  });
+
+ router.put('/customheader/put/201/creating/succeeded/200', function (req, res, next) {
+    var scenario = 'CustomHeaderPutSucceeded';
+    var header = req.get("x-ms-client-request-id");
+    if (header && header.toLowerCase() === "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0".toLowerCase()) {
+      res.status(201).end('{ "properties": { "provisioningState": "Creating"}, "id": "100", "name": "foo" }');
+    } else {
+      utils.send400(res, next, 'Did not receive the correct x-ms-client-request-id header in put: "' + header);
+    }
+  });
+  
+  router.get('/customheader/put/201/creating/succeeded/200', function (req, res, next) {
+    var scenario = 'CustomHeaderPutSucceeded';
+    var header = req.get("x-ms-client-request-id");
+    if (header && header.toLowerCase() === "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0".toLowerCase()) {
+      coverage[scenario]++;
+      res.status(200).end('{ "properties": { "provisioningState": "Succeeded"}, "id": "100", "name": "foo" }');
+    } else {
+      utils.send400(res, next, 'Did not receive the correct x-ms-client-request-id header in get: "' + header);
+    }
+  });
+
+///////////////////////////////  
+  router.post('/customheader/post/202/retry/200', function (req, res, next) {
+    var scenario = 'CustomHeaderPostSucceeded';
+    var header = req.get("x-ms-client-request-id");
+    if (header && header.toLowerCase() === "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0".toLowerCase()) {
+      var pollingUri = 'http://localhost.:' + utils.getPort() + '/lro/customheader/post/202/retry/200';
+      var headers = {
+        'Location': pollingUri
+      };
+      headers['Retry-After'] = 0;
+      res.set(headers).status(202).end();
+    } else {
+      utils.send400(res, next, 'Did not receive the correct x-ms-client-request-id header in post: "' + header);
+    }
+  });
+  
+  router.get('/customheader/post/202/retry/200', function (req, res, next) {
+    var scenario = 'CustomHeaderPostSucceeded';
+    var header = req.get("x-ms-client-request-id");
+    if (header && header.toLowerCase() === "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0".toLowerCase()) {
+      var pollingUri = 'http://localhost.:' + utils.getPort() + '/lro/customheader/post/newuri/202/retry/200';
+      var headers = {
+        'Location': pollingUri
+      };
+      headers['Retry-After'] = 0;
+      res.set(headers).status(202).end();
+    } else {
+      utils.send400(res, next, 'Did not receive the correct x-ms-client-request-id header in get: "' + header);
+    }
+  });
+
+  router.get('/customheader/post/newuri/202/retry/200', function (req, res, next) {
+    var scenario = 'CustomHeaderPostSucceeded';
+    var header = req.get("x-ms-client-request-id");
+    if (header && header.toLowerCase() === "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0".toLowerCase()) {
+      coverage[scenario]++;
+      res.status(200).end();
+    } else {
+      utils.send400(res, next, 'Did not receive the correct x-ms-client-request-id header in get new uri: "' + header);
+    }
+  });  
 };
 
 lros.prototype.router = router;

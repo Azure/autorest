@@ -853,6 +853,26 @@
           }
         }
       }
+    },
+    "/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0": {
+      "post": {
+        "operationId": "header_customRequestId",
+        "description": "Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request",
+        "tags": [
+          "Header Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response indicates that x-ms-client-request-id was successfuly received"
+            },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {

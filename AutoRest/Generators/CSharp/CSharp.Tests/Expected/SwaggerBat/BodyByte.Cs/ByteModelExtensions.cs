@@ -32,7 +32,7 @@ namespace Fixtures.SwaggerBatBodyByte
             /// </param>
             public static async Task<byte[]> GetNullAsync( this IByteModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<byte[]> result = await operations.GetNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<byte[]> result = await operations.GetNullWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -58,7 +58,7 @@ namespace Fixtures.SwaggerBatBodyByte
             /// </param>
             public static async Task<byte[]> GetEmptyAsync( this IByteModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<byte[]> result = await operations.GetEmptyWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<byte[]> result = await operations.GetEmptyWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -84,7 +84,7 @@ namespace Fixtures.SwaggerBatBodyByte
             /// </param>
             public static async Task<byte[]> GetNonAsciiAsync( this IByteModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<byte[]> result = await operations.GetNonAsciiWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<byte[]> result = await operations.GetNonAsciiWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -116,7 +116,7 @@ namespace Fixtures.SwaggerBatBodyByte
             /// </param>
             public static async Task PutNonAsciiAsync( this IByteModel operations, byte[] byteBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutNonAsciiWithOperationResponseAsync(byteBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutNonAsciiWithOperationResponseAsync(byteBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -141,7 +141,7 @@ namespace Fixtures.SwaggerBatBodyByte
             /// </param>
             public static async Task<byte[]> GetInvalidAsync( this IByteModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<byte[]> result = await operations.GetInvalidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<byte[]> result = await operations.GetInvalidWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

@@ -140,6 +140,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             getMethod.Parameters
                 .Where(p => LocalParameters.Any(lp => lp.Name == p.Name))
                 .ForEach(p => invocationParams.Add(string.Format(CultureInfo.InvariantCulture,"{0}: {0}", p.Name)));
+            invocationParams.Add("customHeaders: customHeaders");
             invocationParams.Add("cancellationToken: cancellationToken");
             return string.Join(", ", invocationParams);
         }

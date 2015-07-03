@@ -60,6 +60,8 @@ namespace Fixtures.Azure.SwaggerBatLro
 
         public virtual ILROSADsOperations LROSADs { get; private set; }
 
+        public virtual ILROsCustomHeaderOperations LROsCustomHeader { get; private set; }
+
         /// <summary>
         /// Initializes a new instance of the AutoRestLongRunningOperationTestService class.
         /// </summary>
@@ -169,6 +171,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             this.DONOTCALLs = new DONOTCALLsOperations(this);
             this.LRORetrys = new LRORetrysOperations(this);
             this.LROSADs = new LROSADsOperations(this);
+            this.LROsCustomHeader = new LROsCustomHeaderOperations(this);
             this.BaseUri = new Uri("http://localhost");
             this.ApiVersion = "1.0.0";
             SerializationSettings = new JsonSerializerSettings

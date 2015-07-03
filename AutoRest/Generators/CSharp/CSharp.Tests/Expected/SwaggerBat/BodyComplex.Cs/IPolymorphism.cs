@@ -16,10 +16,13 @@ namespace Fixtures.SwaggerBatBodyComplex
         /// <summary>
         /// Get complex types that are polymorphic
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<Fish>> GetValidWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<Fish>> GetValidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put complex types that are polymorphic
         /// </summary>
@@ -51,10 +54,13 @@ namespace Fixtures.SwaggerBatBodyComplex
         /// ]
         /// };
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> PutValidWithOperationResponseAsync(Fish complexBody, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutValidWithOperationResponseAsync(Fish complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put complex types that are polymorphic, attempting to omit
         /// required 'birthday' field - the request should not be allowed
@@ -89,9 +95,12 @@ namespace Fixtures.SwaggerBatBodyComplex
         /// ]
         /// }
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> PutValidMissingRequiredWithOperationResponseAsync(Fish complexBody, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutValidMissingRequiredWithOperationResponseAsync(Fish complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

@@ -76,7 +76,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task GetAllWithValuesAsync( this IPathItems operations, string localStringPath, string pathItemStringPath, string globalStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), string globalStringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetAllWithValuesWithOperationResponseAsync(localStringPath, pathItemStringPath, globalStringPath, localStringQuery, pathItemStringQuery, globalStringQuery, cancellationToken).ConfigureAwait(false);
+                await operations.GetAllWithValuesWithOperationResponseAsync(localStringPath, pathItemStringPath, globalStringPath, localStringQuery, pathItemStringQuery, globalStringQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -145,7 +145,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task GetGlobalQueryNullAsync( this IPathItems operations, string localStringPath, string pathItemStringPath, string globalStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), string globalStringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetGlobalQueryNullWithOperationResponseAsync(localStringPath, pathItemStringPath, globalStringPath, localStringQuery, pathItemStringQuery, globalStringQuery, cancellationToken).ConfigureAwait(false);
+                await operations.GetGlobalQueryNullWithOperationResponseAsync(localStringPath, pathItemStringPath, globalStringPath, localStringQuery, pathItemStringQuery, globalStringQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -212,7 +212,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task GetGlobalAndLocalQueryNullAsync( this IPathItems operations, string localStringPath, string pathItemStringPath, string globalStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), string globalStringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetGlobalAndLocalQueryNullWithOperationResponseAsync(localStringPath, pathItemStringPath, globalStringPath, localStringQuery, pathItemStringQuery, globalStringQuery, cancellationToken).ConfigureAwait(false);
+                await operations.GetGlobalAndLocalQueryNullWithOperationResponseAsync(localStringPath, pathItemStringPath, globalStringPath, localStringQuery, pathItemStringQuery, globalStringQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -279,7 +279,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task GetLocalPathItemQueryNullAsync( this IPathItems operations, string localStringPath, string pathItemStringPath, string globalStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), string globalStringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetLocalPathItemQueryNullWithOperationResponseAsync(localStringPath, pathItemStringPath, globalStringPath, localStringQuery, pathItemStringQuery, globalStringQuery, cancellationToken).ConfigureAwait(false);
+                await operations.GetLocalPathItemQueryNullWithOperationResponseAsync(localStringPath, pathItemStringPath, globalStringPath, localStringQuery, pathItemStringQuery, globalStringQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
     }

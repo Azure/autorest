@@ -35,7 +35,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// </param>
             public static async Task PostMethodGlobalValidAsync( this ISubscriptionInCredentialsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostMethodGlobalValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                await operations.PostMethodGlobalValidWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -64,7 +64,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// </param>
             public static async Task PostMethodGlobalNullAsync( this ISubscriptionInCredentialsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostMethodGlobalNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                await operations.PostMethodGlobalNullWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -91,7 +91,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// </param>
             public static async Task PostMethodGlobalNotProvidedValidAsync( this ISubscriptionInCredentialsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostMethodGlobalNotProvidedValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                await operations.PostMethodGlobalNotProvidedValidWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -118,7 +118,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// </param>
             public static async Task PostPathGlobalValidAsync( this ISubscriptionInCredentialsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostPathGlobalValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                await operations.PostPathGlobalValidWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -145,7 +145,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// </param>
             public static async Task PostSwaggerGlobalValidAsync( this ISubscriptionInCredentialsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostSwaggerGlobalValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                await operations.PostSwaggerGlobalValidWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
     }

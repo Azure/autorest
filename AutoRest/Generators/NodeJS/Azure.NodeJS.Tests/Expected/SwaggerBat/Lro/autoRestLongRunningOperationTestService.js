@@ -50,6 +50,7 @@ function AutoRestLongRunningOperationTestService(credentials, baseUri, options) 
   this.dONOTCALLs = new operations.DONOTCALLs(this);
   this.lRORetrys = new operations.LRORetrys(this);
   this.lROSADs = new operations.LROSADs(this);
+  this.lROsCustomHeader = new operations.LROsCustomHeader(this);
   this._models = models;
 }
 

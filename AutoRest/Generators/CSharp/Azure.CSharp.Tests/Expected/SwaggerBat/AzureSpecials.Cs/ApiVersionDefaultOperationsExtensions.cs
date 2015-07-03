@@ -33,7 +33,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// </param>
             public static async Task GetMethodGlobalValidAsync( this IApiVersionDefaultOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetMethodGlobalValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                await operations.GetMethodGlobalValidWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -58,7 +58,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// </param>
             public static async Task GetMethodGlobalNotProvidedValidAsync( this IApiVersionDefaultOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetMethodGlobalNotProvidedValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                await operations.GetMethodGlobalNotProvidedValidWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -83,7 +83,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// </param>
             public static async Task GetPathGlobalValidAsync( this IApiVersionDefaultOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetPathGlobalValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                await operations.GetPathGlobalValidWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -108,7 +108,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// </param>
             public static async Task GetSwaggerGlobalValidAsync( this IApiVersionDefaultOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetSwaggerGlobalValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                await operations.GetSwaggerGlobalValidWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
     }
