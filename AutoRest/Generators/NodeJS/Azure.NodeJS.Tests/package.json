@@ -21,7 +21,7 @@
     "ms-rest-azure": "file:../../../../ClientRuntimes/NodeJS/ClientRuntime.Azure"
   },
   "devDependencies": {
-    "jshint": "2.6.3",
+    "jshint": "2.8.0",
     "xunit-file": "0.0.5",
     "mocha": "1.16.0",
     "should": "5.2.0",
@@ -37,9 +37,9 @@
   },
   "scripts": {
     "pretest": "npm install --prefix ../../AcceptanceTests/server && npm install", 
-    "test": "npm -s run-script unit",
+    "test": "npm -s run-script jshint && npm -s run-script unit",
     "unit": "node unit.js testlist.txt list",
     "xunit": "node unit.js testlist.txt",
-    "jshint": "jshint lib --reporter=jslint"
+    "jshint": "jshint Expected --reporter=jslint"
   }
 }
