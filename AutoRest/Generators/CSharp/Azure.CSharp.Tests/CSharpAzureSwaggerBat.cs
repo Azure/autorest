@@ -14,6 +14,7 @@ using Fixtures.Azure.SwaggerBatLro.Models;
 using Fixtures.Azure.SwaggerBatLro;
 using Fixtures.Azure.SwaggerBatPaging;
 using Microsoft.Azure;
+using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.CSharp.Azure.Tests.Properties;
 using Microsoft.Rest.Generator.CSharp.Tests;
 using Microsoft.Rest.Generator.Utilities;
@@ -373,6 +374,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 Assert.Equal("1", result[0].Id);
                 Assert.Equal("OK", result[0].ProvisioningStateValues);
                 Assert.Equal("Product1", result[0].Pname);
+                Assert.Equal("Flat", result[0].FlattenedProductType);
                 Assert.Equal("Building 44", result[0].Location);
                 Assert.Equal("Resource1", result[0].Name);
                 Assert.Equal("Succeeded", result[0].ProvisioningState);
@@ -396,7 +398,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                         {"tag1", "value1"},
                         {"tag2", "value3"}
                     },
-                    Pname = "Product1"
+                    Pname = "Product1",
+                    FlattenedProductType = "Flat"
                 });
                 resourceArray.Add(new FlattenedProduct
                 {
@@ -422,6 +425,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 Assert.Equal("1", resultDictionary["Product1"].Id);
                 Assert.Equal("OK", resultDictionary["Product1"].ProvisioningStateValues);
                 Assert.Equal("Product1", resultDictionary["Product1"].Pname);
+                Assert.Equal("Flat", resultDictionary["Product1"].FlattenedProductType);
                 Assert.Equal("Building 44", resultDictionary["Product1"].Location);
                 Assert.Equal("Resource1", resultDictionary["Product1"].Name);
                 Assert.Equal("Succeeded", resultDictionary["Product1"].ProvisioningState);
@@ -445,12 +449,14 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                         {"tag1", "value1"},
                         {"tag2", "value3"}
                     },
-                    Pname = "Product1"
+                    Pname = "Product1",
+                    FlattenedProductType = "Flat"
                 });
                 resourceDictionary.Add("Resource2", new FlattenedProduct
                 {
                     Location = "Building 44",
-                    Pname = "Product2"
+                    Pname = "Product2",
+                    FlattenedProductType = "Flat"
                 });
 
                 client.PutDictionary(resourceDictionary);
@@ -473,6 +479,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 Assert.Equal("1", resultResource.Dictionaryofresources["Product1"].Id);
                 Assert.Equal("OK", resultResource.Dictionaryofresources["Product1"].ProvisioningStateValues);
                 Assert.Equal("Product1", resultResource.Dictionaryofresources["Product1"].Pname);
+                Assert.Equal("Flat", resultResource.Dictionaryofresources["Product1"].FlattenedProductType);
                 Assert.Equal("Building 44", resultResource.Dictionaryofresources["Product1"].Location);
                 Assert.Equal("Resource1", resultResource.Dictionaryofresources["Product1"].Name);
                 Assert.Equal("Succeeded", resultResource.Dictionaryofresources["Product1"].ProvisioningState);
@@ -493,6 +500,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 Assert.Equal("4", resultResource.Arrayofresources[0].Id);
                 Assert.Equal("OK", resultResource.Arrayofresources[0].ProvisioningStateValues);
                 Assert.Equal("Product4", resultResource.Arrayofresources[0].Pname);
+                Assert.Equal("Flat", resultResource.Arrayofresources[0].FlattenedProductType);
                 Assert.Equal("Building 44", resultResource.Arrayofresources[0].Location);
                 Assert.Equal("Resource4", resultResource.Arrayofresources[0].Name);
                 Assert.Equal("Succeeded", resultResource.Arrayofresources[0].ProvisioningState);
@@ -520,12 +528,14 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                         {"tag1", "value1"},
                         {"tag2", "value3"}
                     },
-                    Pname = "Product1"
+                    Pname = "Product1",
+                    FlattenedProductType = "Flat"
                 });
                 resourceDictionary.Add("Resource2", new FlattenedProduct
                 {
                     Location = "Building 44",
-                    Pname = "Product2"
+                    Pname = "Product2",
+                    FlattenedProductType = "Flat"
                 });
 
                 var resourceComplexObject = new ResourceCollection()
@@ -541,18 +551,21 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                                 {"tag1", "value1"},
                                 {"tag2", "value3"}
                             },
-                            Pname = "Product1"
+                            Pname = "Product1",
+                            FlattenedProductType = "Flat"
                         },
                         new FlattenedProduct()
                         {
                             Location = "East US",
-                            Pname = "Product2"
+                            Pname = "Product2",
+                            FlattenedProductType = "Flat"
                         }
                     },
                     Productresource = new FlattenedProduct()
                     {
                         Location = "India",
-                        Pname = "Azure"
+                        Pname = "Azure",
+                        FlattenedProductType = "Flat"
                     }
                 };
                 client.PutResourceCollection(resourceComplexObject);

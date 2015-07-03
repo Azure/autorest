@@ -414,6 +414,8 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (callba
  *
  * @param {String} [resourceComplexObject.productresource.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {String} [resourceComplexObject.productresource.properties.type] 
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream

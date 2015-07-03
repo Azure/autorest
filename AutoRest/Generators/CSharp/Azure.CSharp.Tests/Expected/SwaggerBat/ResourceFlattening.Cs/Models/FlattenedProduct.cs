@@ -17,6 +17,11 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening.Models
         public string Pname { get; set; }
 
         /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "properties.type")]
+        public string FlattenedProductType { get; set; }
+
+        /// <summary>
         /// Possible values for this property include: 'Succeeded', 'Failed',
         /// 'canceled', 'Accepted', 'Creating', 'Created', 'Updating',
         /// 'Updated', 'Deleting', 'Deleted', 'OK'
