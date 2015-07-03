@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using Microsoft.Rest.Serialization;
@@ -57,18 +58,6 @@ namespace Microsoft.Azure
                 JObject resourceJObject = JObject.Load(reader);
                 // Flatten resource
                 JObject propertiesJObject = resourceJObject[PropertiesNode] as JObject;
-                if (propertiesJObject != null)
-                {
-                    foreach (JProperty jProperty in propertiesJObject.Properties())
-                    {
-                        resourceJObject[jProperty.Name] = jProperty.Value;
-                    }
-                    // Remove properties unless generic resource
-                    if (!objectType.GetProperties().Any(p => p.Name == "Properties" && p.PropertyType == typeof(object)))
-                    {
-                        resourceJObject.Remove(PropertiesNode);
-                    }
-                }
 
                 // Update type if there is a polymorphism
                 var polymorphicDeserializer = serializer.Converters
@@ -90,6 +79,13 @@ namespace Microsoft.Azure
                 foreach (JsonProperty property in contract.Properties)
                 {
                     JToken propertyValueToken = resourceJObject[property.PropertyName];
+                    if (propertyValueToken == null &&
+                        propertiesJObject != null &&
+                        property.PropertyName.StartsWith("properties.", StringComparison.OrdinalIgnoreCase))
+                    {
+                        propertyValueToken = propertiesJObject[property.PropertyName.Substring("properties.".Length)];
+                    }
+
                     if (propertyValueToken != null && property.Writable)
                     {
                         var propertyValue = propertyValueToken.ToObject(property.PropertyType, serializer);
