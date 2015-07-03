@@ -119,12 +119,6 @@ AutoRestReportServiceForAzure.prototype.getReport = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var property in result.body) {
-            if (result.body[property] !== null && result.body[property] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;

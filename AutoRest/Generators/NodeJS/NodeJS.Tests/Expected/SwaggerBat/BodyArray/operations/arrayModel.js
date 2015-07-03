@@ -86,12 +86,6 @@ ArrayModel.prototype.getNull = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -168,12 +162,6 @@ ArrayModel.prototype.getInvalid = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -250,12 +238,6 @@ ArrayModel.prototype.getEmpty = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -415,12 +397,6 @@ ArrayModel.prototype.getBooleanTfft = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -580,12 +556,6 @@ ArrayModel.prototype.getBooleanInvalidNull = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -662,12 +632,6 @@ ArrayModel.prototype.getBooleanInvalidString = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -744,12 +708,6 @@ ArrayModel.prototype.getIntegerValid = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -909,12 +867,6 @@ ArrayModel.prototype.getIntInvalidNull = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -991,12 +943,6 @@ ArrayModel.prototype.getIntInvalidString = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -1073,12 +1019,6 @@ ArrayModel.prototype.getLongValid = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -1238,12 +1178,6 @@ ArrayModel.prototype.getLongInvalidNull = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -1320,12 +1254,6 @@ ArrayModel.prototype.getLongInvalidString = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -1402,12 +1330,6 @@ ArrayModel.prototype.getFloatValid = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -1567,12 +1489,6 @@ ArrayModel.prototype.getFloatInvalidNull = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -1649,12 +1565,6 @@ ArrayModel.prototype.getFloatInvalidString = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -1731,12 +1641,6 @@ ArrayModel.prototype.getDoubleValid = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -1896,12 +1800,6 @@ ArrayModel.prototype.getDoubleInvalidNull = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -1978,12 +1876,6 @@ ArrayModel.prototype.getDoubleInvalidString = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -2060,12 +1952,6 @@ ArrayModel.prototype.getStringValid = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -2225,12 +2111,6 @@ ArrayModel.prototype.getStringWithNull = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -2307,12 +2187,6 @@ ArrayModel.prototype.getStringWithInvalid = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -3813,12 +3687,6 @@ ArrayModel.prototype.getArrayNull = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -3895,12 +3763,6 @@ ArrayModel.prototype.getArrayEmpty = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -3977,12 +3839,6 @@ ArrayModel.prototype.getArrayItemNull = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -4059,12 +3915,6 @@ ArrayModel.prototype.getArrayItemEmpty = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -4142,12 +3992,6 @@ ArrayModel.prototype.getArrayValid = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -4312,12 +4156,6 @@ ArrayModel.prototype.getDictionaryNull = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -4394,12 +4232,6 @@ ArrayModel.prototype.getDictionaryEmpty = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -4478,12 +4310,6 @@ ArrayModel.prototype.getDictionaryItemNull = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -4562,12 +4388,6 @@ ArrayModel.prototype.getDictionaryItemEmpty = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -4646,12 +4466,6 @@ ArrayModel.prototype.getDictionaryValid = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;

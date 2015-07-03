@@ -149,12 +149,6 @@ HttpRedirects.prototype.get300 = function (callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-            }
-          }
-        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
