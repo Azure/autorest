@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
 using System.Collections.Generic;
 using System.Globalization;
 
@@ -79,6 +78,22 @@ namespace Microsoft.Rest.Generator.ClientModel
         public override string ToString()
         {
             return string.Format(CultureInfo.InvariantCulture, "{0} {1}", Type, Name);
+        }
+
+        /// <summary>
+        /// Performs a deep clone of a parameter.
+        /// </summary>
+        /// <returns>A deep clone of current object.</returns>
+        public object Clone()
+        {
+            Parameter param = (Parameter)this.MemberwiseClone();
+
+            if (param.GlobalProperty != null)
+            {
+                param.GlobalProperty = (Property)this.GlobalProperty.Clone();    
+            }            
+
+            return param;
         }
     }
 }
