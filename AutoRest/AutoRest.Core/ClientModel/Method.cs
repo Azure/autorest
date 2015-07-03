@@ -123,7 +123,7 @@ namespace Microsoft.Rest.Generator.ClientModel
             newMethod.RequestHeaders = new Dictionary<string, string>();
             newMethod.Responses = new Dictionary<HttpStatusCode, IType>();
             this.Extensions.ForEach(e => newMethod.Extensions[e.Key] = e.Value);
-            this.Parameters.ForEach(p => newMethod.Parameters.Add(p));
+            this.Parameters.ForEach(p => newMethod.Parameters.Add((Parameter)p.Clone()));
             this.RequestHeaders.ForEach(r => newMethod.RequestHeaders[r.Key] = r.Value);
             this.Responses.ForEach(r => newMethod.Responses[r.Key] = r.Value);
             return newMethod;
