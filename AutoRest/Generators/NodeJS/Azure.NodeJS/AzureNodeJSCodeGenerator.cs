@@ -58,7 +58,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
             base.NormalizeClientModel(serviceClient);
         }
 
-        private void NormalizeApiVersion(ServiceClient serviceClient)
+        private static void NormalizeApiVersion(ServiceClient serviceClient)
         {
             var property = serviceClient.Properties.First(p => p.Name == AzureCodeGenerator.ApiVersion);
             if (property != null)

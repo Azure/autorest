@@ -308,7 +308,6 @@ namespace Microsoft.Rest.Generator.NodeJS
             else
             {
                 return string.Empty;
-                //throw new InvalidOperationException("Invalid type: " + ReturnType);
             }
             return builder.ToString();
         }
@@ -321,7 +320,7 @@ namespace Microsoft.Rest.Generator.NodeJS
         /// </summary>
         /// <param name="type">The type to determine if special deserialization is required</param>
         /// <returns>True if special deserialization is required. False, otherwise.</returns>
-        private bool IsSpecialDeserializationRequired(IType type)
+        private static bool IsSpecialDeserializationRequired(IType type)
         {
             PrimaryType[] validTypes = new PrimaryType[] {PrimaryType.DateTime, PrimaryType.Date, PrimaryType.ByteArray};
             SequenceType sequence = type as SequenceType;
