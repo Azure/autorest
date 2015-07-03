@@ -1,12 +1,13 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System.Threading.Tasks;
 using Microsoft.Rest.Generator.Azure.NodeJS.Templates;
 using Microsoft.Rest.Generator.ClientModel;
-using System.Linq;
-using Microsoft.Rest.Generator.NodeJS.Templates;
 using Microsoft.Rest.Generator.NodeJS;
+using Microsoft.Rest.Generator.NodeJS.Templates;
+using Microsoft.Rest.Generator.Utilities;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Microsoft.Rest.Generator.Azure.NodeJS
 {
@@ -53,8 +54,17 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
             AzureCodeGenerator.AddLongRunningOperations(serviceClient);
             AzureCodeGenerator.AddAzureProperties(serviceClient);
             AzureCodeGenerator.SetDefaultResponses(serviceClient);
-
+            NormalizeApiVersion(serviceClient);
             base.NormalizeClientModel(serviceClient);
+        }
+
+        private static void NormalizeApiVersion(ServiceClient serviceClient)
+        {
+            var property = serviceClient.Properties.First(p => p.Name == AzureCodeGenerator.ApiVersion);
+            if (property != null)
+            {
+                property.DefaultValue = property.DefaultValue.Replace('"', '\'');
+            }
         }
 
         /// <summary>
@@ -70,7 +80,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
             {
                 Model = serviceClientTemplateModel
             };
-            await Write(serviceClientTemplate, serviceClient.Name + ".js");
+            await Write(serviceClientTemplate, serviceClient.Name.ToCamelCase() + ".js");
 
             //Models
             if (serviceClient.ModelTypes.Any())
@@ -86,7 +96,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
                     {
                         Model = modelType
                     };
-                    await Write(modelTemplate, "models\\" + modelType.Name + ".js");
+                    await Write(modelTemplate, "models\\" + modelType.Name.ToCamelCase() + ".js");
                 }
             }
 
@@ -104,7 +114,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
                     {
                         Model = methodGroupModel as AzureMethodGroupTemplateModel
                     };
-                    await Write(methodGroupTemplate, "operations\\" + methodGroupModel.MethodGroupType + ".js");
+                    await Write(methodGroupTemplate, "operations\\" + methodGroupModel.MethodGroupType.ToCamelCase() + ".js");
                 }
             }
         }

@@ -20,8 +20,8 @@ else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.D
 @WrapComment(" * ", Model.Documentation)
 @foreach (var parameter in Model.DocumentationParameters)
 {
-    @:* @@param {@parameter.Type.Name} [@parameter.Name] @parameter.Documentation
-    @:*
+ @:* @@param {@parameter.Type.Name} [@parameter.Name] @parameter.Documentation
+ @:*
 }
 @WrapComment(" * ", " @param {function} callback")
  *
@@ -35,7 +35,7 @@ else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.D
     if (err) return callback(err);
     self.getPostOrDeleteOperationResult(result, callback);
   });
-}
+};
 </text>
 }
 else if (Model.HttpMethod == HttpMethod.Put)
@@ -46,8 +46,8 @@ else if (Model.HttpMethod == HttpMethod.Put)
 @WrapComment(" * ", Model.Documentation)
 @foreach (var parameter in Model.DocumentationParameters)
 {
-    @:* @@param {@parameter.Type.Name} [@parameter.Name] @parameter.Documentation
-    @:*
+ @:* @@param {@parameter.Type.Name} [@parameter.Name] @parameter.Documentation
+ @:*
 }
 @WrapComment(" * ", " @param {function} callback")
  *
@@ -59,14 +59,14 @@ else if (Model.HttpMethod == HttpMethod.Put)
   function getMethod() {
     var cb = function (callback) {
       return self.@(Model.GetMethod.Name)(@(Model.GetMethod.MethodParameterDeclaration)callback);
-    }
+    };
     return cb;
-  };
+  }
   // Send request
   self.begin@(Model.Name.ToPascalCase())(@(Model.MethodParameterDeclaration)function (err, result){
     if (err) return callback(err);
     client.getPutOperationResult(result, getMethod(), callback);
   });
-}
+};
 </text>
 }
