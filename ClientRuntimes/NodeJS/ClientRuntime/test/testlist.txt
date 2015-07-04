@@ -1,4 +1,4 @@
-serviceTests.js
+serializationTests
 credentialTests.js
 retryPolicyTests.js
 proxyfilterTests.js

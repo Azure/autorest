@@ -22,7 +22,7 @@
   "devDependencies": {
     "jshint": "2.8.0",
     "xunit-file": "0.0.5",
-    "mocha": "1.16.0",
+    "mocha": "2.2.5",
     "should": "5.2.0",
     "underscore": "*"
   },
