@@ -3,7 +3,7 @@
 
 var assert = require('assert');
 
-var ExponentialRetryPolicyFilter = require('../lib/filters/exponentialretrypolicyfilter');
+var ExponentialRetryPolicyFilter = require('../lib/filters/exponentialRetryPolicyFilter');
 
 describe('exponentialretrypolicyfilter-unittests', function () {
   it('RetrySucceedsOnHttp408StatusCode', function (done) {
