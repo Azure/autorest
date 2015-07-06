@@ -50,25 +50,25 @@ Write(Header("# "));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 8 "ServiceClientTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\nmodule ");
+            WriteLiteral("\nmodule ");
 #line 9 "ServiceClientTemplate.cshtml"
   Write(Settings.Namespace);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n  #\r\n  ");
+            WriteLiteral("\n  #\n  ");
 #line 11 "ServiceClientTemplate.cshtml"
 Write(WrapComment("# ", Model.Documentation));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n  #\r\n  class ");
+            WriteLiteral("\n  #\n  class ");
 #line 13 "ServiceClientTemplate.cshtml"
    Write(Model.Name);
 
@@ -80,14 +80,14 @@ Write(WrapComment("# ", Model.Documentation));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    # @return [String] the base URI of the service.\r\n    attr_accessor :base_ur" +
-"l\r\n");
+            WriteLiteral("\n    # @return [String] the base URI of the service.\n    attr_accessor :base_url\n" +
+"");
 #line 16 "ServiceClientTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n\r\n");
+            WriteLiteral("\n\n");
 #line 18 "ServiceClientTemplate.cshtml"
  foreach (var property in Model.Properties)
 {
@@ -101,7 +101,7 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    ");
+            WriteLiteral("\n    ");
 #line 21 "ServiceClientTemplate.cshtml"
   Write(property.IsReadOnly ? "attr_reader" : "attr_accessor");
 
@@ -113,7 +113,7 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 22 "ServiceClientTemplate.cshtml"
 
 #line default
@@ -131,7 +131,7 @@ Write(EmptyLine);
 #line default
 #line hidden
 
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 25 "ServiceClientTemplate.cshtml"
  foreach (var operation in Model.MethodGroups) 
 {
@@ -145,13 +145,13 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    attr_reader :");
+            WriteLiteral("\n    attr_reader :");
 #line 28 "ServiceClientTemplate.cshtml"
                Write(RubyCodeNamingFramework.UnderscoreCase(operation));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 29 "ServiceClientTemplate.cshtml"
 
 #line default
@@ -169,21 +169,20 @@ Write(EmptyLine);
 #line default
 #line hidden
 
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 32 "ServiceClientTemplate.cshtml"
   var parameters = Model.Properties.Where(p => p.IsRequired);
 
 #line default
 #line hidden
 
-            WriteLiteral("\r\n\r\n    #\r\n    # Creates and initializes a new instance of the ");
+            WriteLiteral("\n\n    #\n    # Creates and initializes a new instance of the ");
 #line 35 "ServiceClientTemplate.cshtml"
                                                Write(Model.Name);
 
 #line default
 #line hidden
-            WriteLiteral(" class.\r\n    # @param base_url [String] base url for accessing current service.\r\n" +
-"");
+            WriteLiteral(" class.\n    # @param base_url [String] base url for accessing current service.\n");
 #line 37 "ServiceClientTemplate.cshtml"
     
 
@@ -209,26 +208,26 @@ Write(WrapComment("# ", string.Format("@param {0} {1}{2}", param.Name, param.Typ
 #line default
 #line hidden
 
-            WriteLiteral("    \r\n");
+            WriteLiteral("    \n");
 #line 41 "ServiceClientTemplate.cshtml"
     }
 
 #line default
 #line hidden
 
-            WriteLiteral("    #\r\n    def initialize(base_url = nil");
+            WriteLiteral("    #\n    def initialize(base_url = nil");
 #line 43 "ServiceClientTemplate.cshtml"
                              Write(Model.RequiredContructorParametersWithSeparator);
 
 #line default
 #line hidden
-            WriteLiteral(")\r\n      super()\r\n      @base_url = base_url || \'");
+            WriteLiteral(")\n      super()\n      @base_url = base_url || \'");
 #line 45 "ServiceClientTemplate.cshtml"
                            Write(Model.BaseUrl);
 
 #line default
 #line hidden
-            WriteLiteral("\'\r\n");
+            WriteLiteral("\'\n");
 #line 46 "ServiceClientTemplate.cshtml"
       
 
@@ -254,7 +253,7 @@ Write(WrapComment("# ", string.Format("@param {0} {1}{2}", param.Name, param.Typ
 
 #line default
 #line hidden
-            WriteLiteral(".new(self)\r\n");
+            WriteLiteral(".new(self)\n");
 #line 49 "ServiceClientTemplate.cshtml"
       }
 
@@ -281,7 +280,7 @@ Write(WrapComment("# ", string.Format("@param {0} {1}{2}", param.Name, param.Typ
 
 #line default
 #line hidden
-            WriteLiteral(".nil?\r\n");
+            WriteLiteral(".nil?\n");
 #line 53 "ServiceClientTemplate.cshtml"
       }
 
@@ -308,20 +307,20 @@ Write(WrapComment("# ", string.Format("@param {0} {1}{2}", param.Name, param.Typ
 
 #line default
 #line hidden
-            WriteLiteral(";\r\n");
+            WriteLiteral(";\n");
 #line 57 "ServiceClientTemplate.cshtml"
       }
 
 #line default
 #line hidden
 
-            WriteLiteral("\r\n    end\r\n\r\n    ");
+            WriteLiteral("\n    end\n\n    ");
 #line 61 "ServiceClientTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 62 "ServiceClientTemplate.cshtml"
     
 
@@ -341,7 +340,7 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 65 "ServiceClientTemplate.cshtml"
     
 
@@ -359,14 +358,14 @@ Write(EmptyLine);
 #line default
 #line hidden
 
-            WriteLiteral("    \r\n");
+            WriteLiteral("    \n");
 #line 67 "ServiceClientTemplate.cshtml"
     }
 
 #line default
 #line hidden
 
-            WriteLiteral("  end\r\nend\r\n");
+            WriteLiteral("  end\nend\n");
         }
         #pragma warning restore 1998
     }

@@ -26,15 +26,15 @@ Write(Header("/// "));
 
 #line default
 #line hidden
-            WriteLiteral("\r\nnamespace ");
+            WriteLiteral("\nnamespace ");
 #line 4 "MethodGroupInterfaceTemplate.cshtml"
      Write(Settings.Namespace);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n{\r\n    using System;\r\n    using System.Collections.Generic;\r\n    using System.N" +
-"et.Http;\r\n    using System.Threading;\r\n    using System.Threading.Tasks;\r\n    us" +
-"ing Microsoft.Rest;\r\n");
+            WriteLiteral("\n{\n    using System;\n    using System.Collections.Generic;\n    using System.Net.H" +
+"ttp;\n    using System.Threading;\n    using System.Threading.Tasks;\n    using Mic" +
+"rosoft.Rest;\n");
 #line 12 "MethodGroupInterfaceTemplate.cshtml"
  foreach (var usingString in Model.Usings) {
 
@@ -47,7 +47,7 @@ Write(Header("/// "));
 
 #line default
 #line hidden
-            WriteLiteral(";\r\n");
+            WriteLiteral(";\n");
 #line 14 "MethodGroupInterfaceTemplate.cshtml"
 }
 
@@ -59,19 +59,19 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    /// <summary>\r\n    ");
+            WriteLiteral("\n    /// <summary>\n    ");
 #line 17 "MethodGroupInterfaceTemplate.cshtml"
 Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    /// </summary>\r\n    public partial interface I");
+            WriteLiteral("\n    /// </summary>\n    public partial interface I");
 #line 19 "MethodGroupInterfaceTemplate.cshtml"
                           Write(Model.MethodGroupType);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    {\r\n");
+            WriteLiteral("\n    {\n");
 #line 21 "MethodGroupInterfaceTemplate.cshtml"
     
 
@@ -85,13 +85,13 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line default
 #line hidden
 
-            WriteLiteral("        /// <summary>\r\n        ");
+            WriteLiteral("        /// <summary>\n        ");
 #line 24 "MethodGroupInterfaceTemplate.cshtml"
      Write(WrapComment("/// ", method.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n        /// </summary>\r\n");
+            WriteLiteral("\n        /// </summary>\n");
 #line 26 "MethodGroupInterfaceTemplate.cshtml"
         foreach (var parameter in method.Parameters)
         {
@@ -105,22 +105,22 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\'>\r\n        ");
+            WriteLiteral("\'>\n        ");
 #line 29 "MethodGroupInterfaceTemplate.cshtml"
      Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n        /// </param>\r\n");
+            WriteLiteral("\n        /// </param>\n");
 #line 31 "MethodGroupInterfaceTemplate.cshtml"
         }
 
 #line default
 #line hidden
 
-            WriteLiteral("        /// <param name=\'customHeaders\'>\r\n        /// Headers that will be added " +
-"to request.\r\n        /// </param>\r\n        /// <param name=\'cancellationToken\'>\r" +
-"\n        /// Cancellation token.\r\n        /// </param>\r\n        Task<");
+            WriteLiteral("        /// <param name=\'customHeaders\'>\n        /// Headers that will be added t" +
+"o request.\n        /// </param>\n        /// <param name=\'cancellationToken\'>\n   " +
+"     /// Cancellation token.\n        /// </param>\n        Task<");
 #line 38 "MethodGroupInterfaceTemplate.cshtml"
           Write(method.OperationResponseReturnTypeString);
 
@@ -138,14 +138,14 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral(");\r\n");
+            WriteLiteral(");\n");
 #line 39 "MethodGroupInterfaceTemplate.cshtml"
     }
 
 #line default
 #line hidden
 
-            WriteLiteral("    }\r\n}\r\n");
+            WriteLiteral("    }\n}\n");
         }
         #pragma warning restore 1998
     }

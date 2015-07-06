@@ -20,31 +20,31 @@ Write(Header("# "));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 3 "EnumTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\nmodule ");
+            WriteLiteral("\nmodule ");
 #line 4 "EnumTemplate.cshtml"
   Write(Settings.Namespace);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n  #\r\n  ");
+            WriteLiteral("\n  #\n  ");
 #line 6 "EnumTemplate.cshtml"
 Write(WrapComment("# ", "Defines values for " + Model.TypeDefinitionName));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n  #\r\n  module ");
+            WriteLiteral("\n  #\n  module ");
 #line 8 "EnumTemplate.cshtml"
      Write(Model.TypeDefinitionName);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 9 "EnumTemplate.cshtml"
     
 
@@ -70,14 +70,14 @@ Write(WrapComment("# ", "Defines values for " + Model.TypeDefinitionName));
 
 #line default
 #line hidden
-            WriteLiteral("\"\r\n");
+            WriteLiteral("\"\n");
 #line 12 "EnumTemplate.cshtml"
     }
 
 #line default
 #line hidden
 
-            WriteLiteral("  end\r\nend\r\n");
+            WriteLiteral("  end\nend\n");
         }
         #pragma warning restore 1998
     }

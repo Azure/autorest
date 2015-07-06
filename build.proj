@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <!-- 
+  <!--
   Targets:
 
   /t:Clean
     Removes temporary build outputs.
-    
+
   /t:Build
     Builds assemblies.
 
   /t:Test
     Run unit tests.
 
-  /t:Package 
+  /t:Package
     Builds NuGet packages using the binaries folder contents.
     The packages will drop to .\binaries\packages.
 
   /t:Publish
     Publishes the built packages. You will need to include your
     publishing key when running. Include: /p:NuGetKey=YOUR_PUBLISHING_KEY
-    
+
   /t:CodeAnalysis
-    Run Code analysis. 
+    Run Code analysis.
 
   Properties of interest:
-  /p:Scope 
+  /p:Scope
     'All' : builds ClientRuntime and CodeGenerator solutions
     'CodeGenerator': builds CodeGenerator solution only
     'ClientRuntime': builds ClientRuntime solution only
     By default, it builds all.
 
   /P:CodeSign=True
-    Code sign binaries, mainly for official release 
+    Code sign binaries, mainly for official release
 
   /p:CodeSign=True;DelaySign=True
     Test the code sign workflow locally
@@ -51,13 +51,13 @@
   /p:NuGetSymbolPublishingSource=Uri
     The NuGet Server to push symbol + source packages to.
   -->
-  
+
   <PropertyGroup>
     <ClientRuntimeSolution>ClientRuntime.sln</ClientRuntimeSolution>
     <CodeGeneratorSolution>AutoRest.sln</CodeGeneratorSolution>
     <LibraryRoot>$(MSBuildThisFileDirectory)</LibraryRoot>
     <LibrarySourceFolder>$(LibraryRoot)</LibrarySourceFolder>
-    <LibraryToolsFolder>$(LibraryRoot)tools</LibraryToolsFolder>
+    <LibraryToolsFolder>$(LibraryRoot)Tools</LibraryToolsFolder>
     <BinariesFolder>$(LibraryRoot)binaries</BinariesFolder>
     <PackageOutputDir>$(BinariesFolder)\packages</PackageOutputDir>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -66,17 +66,18 @@
     <DelaySign Condition =" '$(DelaySign)' == '' ">false</DelaySign>
     <Scope Condition=" '$(Scope)' == '' ">all</Scope>
   </PropertyGroup>
- 
+
   <ItemGroup>
     <LibraryFxTargetList Condition=" '$(FxTargetList)' == '' and '$(Scope)' == 'ClientRuntime' " Include="portable;net40;net45" />
     <LibraryFxTargetList Condition=" '$(FxTargetList)' == '' and '$(Scope)' == 'all' " Include="portable;net40;net45" />
     <LibraryFxTargetList Condition=" '$(FxTargetList)' == '' and '$(Scope)' == 'CodeGenerator' " Include="net45" />
     <LibraryFxTargetList Condition=" '$(FxTargetList)' != '' " Include="$(FxTargetList)" />
   </ItemGroup>
-  
+
   <PropertyGroup>
-    <NuGetCommand>&quot;$(LibraryToolsFolder)\nuget.exe&quot;</NuGetCommand>
-  </PropertyGroup>
+    <NuGetCommand Condition=" '$(OS)' == 'Windows_NT'">&quot;$(LibraryToolsFolder)\nuget.exe&quot;</NuGetCommand>
+    <NuGetCommand Condition=" '$(OS)' != 'Windows_NT'">mono &quot;$(LibraryToolsFolder)\nuget.exe&quot;</NuGetCommand>
+   </PropertyGroup>
 
   <UsingTask AssemblyFile="tools\AutoRest.Build.Tasks.dll" TaskName="ValidateStrongNameSignatureTask" />
   <UsingTask AssemblyFile="tools\AutoRest.Build.Tasks.dll" TaskName="RegexReplaceTask" />
@@ -86,8 +87,8 @@
     <ContinueOnPoliCheckError>false</ContinueOnPoliCheckError>
     <!--OnPremiseBuildTasks is not a good name, but CI server is using that, will update across soon-->
     <CIToolsPath>$(OnPremiseBuildTasks)</CIToolsPath>
-    <OnPremiseBuild Condition=" Exists($(OnPremiseBuildTasks)) ">true</OnPremiseBuild>
-    <OnPremiseBuild Condition=" ! Exists($(OnPremiseBuildTasks)) ">false</OnPremiseBuild>
+    <OnPremiseBuild Condition=" Exists('$(OnPremiseBuildTasks)') ">true</OnPremiseBuild>
+    <OnPremiseBuild Condition=" ! Exists('$(OnPremiseBuildTasks)') ">false</OnPremiseBuild>
   </PropertyGroup>
   <UsingTask Condition=" $(OnPremiseBuild) " TaskName="CodeSigningTask" AssemblyFile="$(CIToolsPath)\Microsoft.WindowsAzure.Tools.Build.Tasks.OnPremise.dll" />
   <UsingTask Condition=" $(OnPremiseBuild) " TaskName="CorporateValidation" AssemblyFile="$(CIToolsPath)\Microsoft.WindowsAzure.Tools.Build.Tasks.OnPremise.dll" />
@@ -131,13 +132,13 @@
              Properties="Configuration=%(LibraryFxTargetList.Identity)-$(Configuration);Platform=Any CPU;RunCodeAnalysis=true;CodeAnalysisTreatWarningsAsErrors=true"
              Targets="Rebuild"
              Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />
-             
+
     <MSBuild Projects="$(CodeGeneratorSolution)"
              Properties="Configuration=Net45-$(Configuration);Platform=Any CPU;RunCodeAnalysis=true;CodeAnalysisTreatWarningsAsErrors=true"
              Targets="Rebuild"
              Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
   </Target>
-  
+
   <!-- Run tests. -->
   <UsingTask TaskName="Xunit.Runner.msbuild.xunit" AssemblyFile="packages\xunit.runner.msbuild.2.0.0\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.runner.msbuild.dll" />
   <Target Name="Test">
@@ -149,7 +150,7 @@
     <ItemGroup>
       <TestDlls Include=".\AutoRest\ClientRuntimes\*.Tests\bin\*\*Tests.dll" />
     </ItemGroup>
-    
+
     <Message Text="@(TestDlls)" />
     <MakeDir Directories="$(LibraryRoot)TestResults"/>
     <xunit Assemblies="@(TestDlls)" Html="$(MSBuildProjectDirectory)\TestResults\xunit.results.html" ContinueOnError="false" />
@@ -166,7 +167,7 @@
       <TestDlls Include=".\AutoRest\Modelers\Swagger.Tests\bin\Net45-$(Configuration)\AutoRest.Modeler.Swagger.Tests.dll" />
       <TestDlls Include=".\AutoRest\Generators\Ruby\Ruby.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.Ruby.Tests.dll" />
     </ItemGroup>
-    
+
     <Message Text="@(TestDlls)" />
     <MakeDir Directories="$(LibraryRoot)TestResults"/>
     <Exec WorkingDirectory=".\ClientRuntimes\Ruby\" Command="UpdateRuntime"/>
@@ -174,10 +175,10 @@
     <Exec WorkingDirectory=".\AutoRest\Generators\NodeJS\NodeJS.Tests\" Command="npm test"/>
     <Exec WorkingDirectory=".\AutoRest\Generators\NodeJS\Azure.NodeJS.Tests\" Command="npm test"/>
   </Target>
-  
+
   <PropertyGroup>
-    <!-- This property is used by the continuous intergration job. 
-         Do not remove without first updating the CI job. Also due to a known limitation, 
+    <!-- This property is used by the continuous intergration job.
+         Do not remove without first updating the CI job. Also due to a known limitation,
          make sure pathes do not end with a backslash -->
     <CorporateScanPaths>$(LibrarySourceFolder)ClientRuntimes</CorporateScanPaths>
   </PropertyGroup>
@@ -207,9 +208,9 @@
         ToolsPath="$(CIToolsPath)"
         Condition="!$(DelaySign)"/>
     <!-- DelaySigned binaries copied locally for testing and not submitted to codesign service. -->
-    <Copy SourceFiles="@(DelaySignedAssembliesToValidate)" DestinationFolder="binaries\$(LibraryFxTarget)" Condition="$(DelaySign)" />  
+    <Copy SourceFiles="@(DelaySignedAssembliesToValidate)" DestinationFolder="binaries\$(LibraryFxTarget)" Condition="$(DelaySign)" />
     <ItemGroup>
-      <AfterSignedAssembliesToValidate Include="binaries\$(LibraryFxTarget)\*.dll;binaries\$(LibraryFxTarget)\*.exe" 
+      <AfterSignedAssembliesToValidate Include="binaries\$(LibraryFxTarget)\*.dll;binaries\$(LibraryFxTarget)\*.exe"
         Exclude="binaries\$(LibraryFxTarget)\Newtonsoft.*.dll" />
     </ItemGroup>
     <ValidateStrongNameSignatureTask
@@ -217,17 +218,17 @@
         Assembly="%(AfterSignedAssembliesToValidate.Identity)"
         ExpectedTokenSignature="$(StrongNameToken)"
         ExpectedDelaySigned="false"
-        ContinueOnError="false" 
+        ContinueOnError="false"
         Condition="!$(DelaySign)"/>
     <RemoveDir Directories="binaries\$(LibraryFxTarget)\unsigned;" ContinueOnError="true" />
   </Target>
-   
+
   <Target Name="CodeSignBinaries">
     <Error Condition=" !$(OnPremiseBuild) and !$(DelaySign) " Text="No CI tools path available, the code sign will be unable to continue. $(CIToolsPath)" />
     <Message Text="Code signing" Importance="high" />
     <MSBuild Projects="$(MSBuildProjectFullPath)"
              Targets="SignBinariesForAFxTarget"
-             Properties="LibraryFxTarget=%(LibraryFxTargetList.Identity);StrongNameToken=$(StrongNameToken)">    
+             Properties="LibraryFxTarget=%(LibraryFxTargetList.Identity);StrongNameToken=$(StrongNameToken)">
     </MSBuild>
     <CallTarget Targets="ValidateCorporateCompliance" Condition="!$(DelaySign)"/>
   </Target>
@@ -248,7 +249,7 @@
     <Exec Command="$(NuGetCommand) restore $(ClientRuntimeSolution)" ContinueOnError="false" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />
     <Exec Command="$(NuGetCommand) restore $(CodeGeneratorSolution)" ContinueOnError="false" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
   </Target>
-  
+
   <!-- Official releases require tools only available on corp network. -->
   <Target Name="ValidateCorporateCompliance">
     <Error Text="This target must be run in an on-premise build server." Condition=" '$(OnPremiseBuild)'=='false' " />

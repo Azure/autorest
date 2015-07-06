@@ -8,6 +8,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <LibraryFxTarget Condition="'$(LibraryFxTarget)' == ''">net45</LibraryFxTarget>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{8B10D480-4A8A-47B5-9574-AA8E79F431DB}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -19,7 +20,7 @@
     <AutoRestTest>true</AutoRestTest>
     <NuGetPackageImportStamp>836aa096</NuGetPackageImportStamp>
   </PropertyGroup>
-  <Import Project="$(SolutionDir)\tools\AutoRest.Settings.targets" />
+  <Import Project="$(SolutionDir)\Tools\AutoRest.Settings.targets" />
   <ItemGroup>
     <Compile Include="Fakes\FakeServiceClientWithCredentials.cs" />
     <Compile Include="Fakes\FakeServiceClient.cs" />

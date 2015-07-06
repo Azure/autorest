@@ -36,7 +36,7 @@ namespace Fixtures.PetstoreV2
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        public JsonSerializerSettings DeserializationSettings { get; private set; }        
+        public JsonSerializerSettings DeserializationSettings { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the SwaggerPetstoreV2 class.
@@ -112,12 +112,12 @@ namespace Fixtures.PetstoreV2
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
                 ContractResolver = new ReadOnlyJsonContractResolver()
             };
-        }    
+        }
         /// <summary>
         /// </summary>
         /// <param name='body'>
         /// Pet object that needs to be added to the store
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -146,7 +146,7 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "AddPet", tracingParameters);
             }
             // Construct URL
-            string url = this.BaseUri.AbsoluteUri + 
+            string url = this.BaseUri.AbsoluteUri +
                          "//pet";
             // trim all duplicate forward slashes in the url
             url = Regex.Replace(url, "([^:]/)/+", "$1");
@@ -163,7 +163,7 @@ namespace Fixtures.PetstoreV2
                 }
             }
 
-            // Serialize Request  
+            // Serialize Request
             string requestContent = JsonConvert.SerializeObject(body, this.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
@@ -212,7 +212,7 @@ namespace Fixtures.PetstoreV2
         /// </summary>
         /// <param name='body'>
         /// Pet object that needs to be added to the store
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -241,7 +241,7 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "UpdatePet", tracingParameters);
             }
             // Construct URL
-            string url = this.BaseUri.AbsoluteUri + 
+            string url = this.BaseUri.AbsoluteUri +
                          "//pet";
             // trim all duplicate forward slashes in the url
             url = Regex.Replace(url, "([^:]/)/+", "$1");
@@ -258,7 +258,7 @@ namespace Fixtures.PetstoreV2
                 }
             }
 
-            // Serialize Request  
+            // Serialize Request
             string requestContent = JsonConvert.SerializeObject(body, this.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
@@ -303,7 +303,7 @@ namespace Fixtures.PetstoreV2
         /// </summary>
         /// <param name='status'>
         /// Status values that need to be considered for filter
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -328,7 +328,7 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "FindPetsByStatus", tracingParameters);
             }
             // Construct URL
-            string url = this.BaseUri.AbsoluteUri + 
+            string url = this.BaseUri.AbsoluteUri +
                          "//pet/findByStatus";
             List<string> queryParameters = new List<string>();
             if (status != null)
@@ -401,7 +401,7 @@ namespace Fixtures.PetstoreV2
         /// </summary>
         /// <param name='tags'>
         /// Tags to filter by
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -426,7 +426,7 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "FindPetsByTags", tracingParameters);
             }
             // Construct URL
-            string url = this.BaseUri.AbsoluteUri + 
+            string url = this.BaseUri.AbsoluteUri +
                          "//pet/findByTags";
             List<string> queryParameters = new List<string>();
             if (tags != null)
@@ -498,7 +498,7 @@ namespace Fixtures.PetstoreV2
         /// </summary>
         /// <param name='petId'>
         /// Id of pet to return
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -523,7 +523,7 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "GetPetById", tracingParameters);
             }
             // Construct URL
-            string url = this.BaseUri.AbsoluteUri + 
+            string url = this.BaseUri.AbsoluteUri +
                          "//pet/{petId}";
             url = url.Replace("{petId}", Uri.EscapeDataString(JsonConvert.SerializeObject(petId, this.SerializationSettings).Trim('"')));
             // trim all duplicate forward slashes in the url
@@ -586,13 +586,13 @@ namespace Fixtures.PetstoreV2
         /// </summary>
         /// <param name='petId'>
         /// Id of pet that needs to be updated
-        /// </param>    
+        /// </param>
         /// <param name='name'>
         /// Updated name of the pet
-        /// </param>    
+        /// </param>
         /// <param name='status'>
         /// Updated status of the pet
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -619,7 +619,7 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "UpdatePetWithForm", tracingParameters);
             }
             // Construct URL
-            string url = this.BaseUri.AbsoluteUri + 
+            string url = this.BaseUri.AbsoluteUri +
                          "//pet/{petId}";
             url = url.Replace("{petId}", Uri.EscapeDataString(JsonConvert.SerializeObject(petId, this.SerializationSettings).Trim('"')));
             // trim all duplicate forward slashes in the url
@@ -677,9 +677,9 @@ namespace Fixtures.PetstoreV2
         /// </summary>
         /// <param name='petId'>
         /// Pet id to delete
-        /// </param>    
+        /// </param>
         /// <param name='apiKey'>
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -705,7 +705,7 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "DeletePet", tracingParameters);
             }
             // Construct URL
-            string url = this.BaseUri.AbsoluteUri + 
+            string url = this.BaseUri.AbsoluteUri +
                          "//pet/{petId}";
             url = url.Replace("{petId}", Uri.EscapeDataString(JsonConvert.SerializeObject(petId, this.SerializationSettings).Trim('"')));
             // trim all duplicate forward slashes in the url
@@ -785,7 +785,7 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "GetInventory", tracingParameters);
             }
             // Construct URL
-            string url = this.BaseUri.AbsoluteUri + 
+            string url = this.BaseUri.AbsoluteUri +
                          "//store/inventory";
             // trim all duplicate forward slashes in the url
             url = Regex.Replace(url, "([^:]/)/+", "$1");
@@ -847,7 +847,7 @@ namespace Fixtures.PetstoreV2
         /// </summary>
         /// <param name='body'>
         /// order placed for purchasing the pet
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -872,7 +872,7 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "PlaceOrder", tracingParameters);
             }
             // Construct URL
-            string url = this.BaseUri.AbsoluteUri + 
+            string url = this.BaseUri.AbsoluteUri +
                          "//store/order";
             // trim all duplicate forward slashes in the url
             url = Regex.Replace(url, "([^:]/)/+", "$1");
@@ -889,7 +889,7 @@ namespace Fixtures.PetstoreV2
                 }
             }
 
-            // Serialize Request  
+            // Serialize Request
             string requestContent = JsonConvert.SerializeObject(body, this.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
@@ -940,7 +940,7 @@ namespace Fixtures.PetstoreV2
         /// </summary>
         /// <param name='orderId'>
         /// Id of pet that needs to be fetched
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -965,7 +965,7 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "GetOrderById", tracingParameters);
             }
             // Construct URL
-            string url = this.BaseUri.AbsoluteUri + 
+            string url = this.BaseUri.AbsoluteUri +
                          "//store/order/{orderId}";
             url = url.Replace("{orderId}", Uri.EscapeDataString(orderId));
             // trim all duplicate forward slashes in the url
@@ -1030,7 +1030,7 @@ namespace Fixtures.PetstoreV2
         /// </summary>
         /// <param name='orderId'>
         /// Id of the order that needs to be deleted
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1055,7 +1055,7 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "DeleteOrder", tracingParameters);
             }
             // Construct URL
-            string url = this.BaseUri.AbsoluteUri + 
+            string url = this.BaseUri.AbsoluteUri +
                          "//store/order/{orderId}";
             url = url.Replace("{orderId}", Uri.EscapeDataString(orderId));
             // trim all duplicate forward slashes in the url
@@ -1114,7 +1114,7 @@ namespace Fixtures.PetstoreV2
         /// </summary>
         /// <param name='body'>
         /// Created user object
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1139,7 +1139,7 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "CreateUser", tracingParameters);
             }
             // Construct URL
-            string url = this.BaseUri.AbsoluteUri + 
+            string url = this.BaseUri.AbsoluteUri +
                          "//user";
             // trim all duplicate forward slashes in the url
             url = Regex.Replace(url, "([^:]/)/+", "$1");
@@ -1156,7 +1156,7 @@ namespace Fixtures.PetstoreV2
                 }
             }
 
-            // Serialize Request  
+            // Serialize Request
             string requestContent = JsonConvert.SerializeObject(body, this.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
@@ -1200,7 +1200,7 @@ namespace Fixtures.PetstoreV2
         /// </summary>
         /// <param name='body'>
         /// List of user object
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1225,7 +1225,7 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "CreateUsersWithArrayInput", tracingParameters);
             }
             // Construct URL
-            string url = this.BaseUri.AbsoluteUri + 
+            string url = this.BaseUri.AbsoluteUri +
                          "//user/createWithArray";
             // trim all duplicate forward slashes in the url
             url = Regex.Replace(url, "([^:]/)/+", "$1");
@@ -1242,7 +1242,7 @@ namespace Fixtures.PetstoreV2
                 }
             }
 
-            // Serialize Request  
+            // Serialize Request
             string requestContent = JsonConvert.SerializeObject(body, this.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
@@ -1286,7 +1286,7 @@ namespace Fixtures.PetstoreV2
         /// </summary>
         /// <param name='body'>
         /// List of user object
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1311,7 +1311,7 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "CreateUsersWithListInput", tracingParameters);
             }
             // Construct URL
-            string url = this.BaseUri.AbsoluteUri + 
+            string url = this.BaseUri.AbsoluteUri +
                          "//user/createWithList";
             // trim all duplicate forward slashes in the url
             url = Regex.Replace(url, "([^:]/)/+", "$1");
@@ -1328,7 +1328,7 @@ namespace Fixtures.PetstoreV2
                 }
             }
 
-            // Serialize Request  
+            // Serialize Request
             string requestContent = JsonConvert.SerializeObject(body, this.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
@@ -1372,10 +1372,10 @@ namespace Fixtures.PetstoreV2
         /// </summary>
         /// <param name='username'>
         /// The user name for login
-        /// </param>    
+        /// </param>
         /// <param name='password'>
         /// The password for login in clear text
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1405,7 +1405,7 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "LoginUser", tracingParameters);
             }
             // Construct URL
-            string url = this.BaseUri.AbsoluteUri + 
+            string url = this.BaseUri.AbsoluteUri +
                          "//user/login";
             List<string> queryParameters = new List<string>();
             if (username != null)
@@ -1497,7 +1497,7 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "LogoutUser", tracingParameters);
             }
             // Construct URL
-            string url = this.BaseUri.AbsoluteUri + 
+            string url = this.BaseUri.AbsoluteUri +
                          "//user/logout";
             // trim all duplicate forward slashes in the url
             url = Regex.Replace(url, "([^:]/)/+", "$1");
@@ -1554,7 +1554,7 @@ namespace Fixtures.PetstoreV2
         /// </summary>
         /// <param name='username'>
         /// The name that needs to be fetched. Use user1 for testing.
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1579,7 +1579,7 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "GetUserByName", tracingParameters);
             }
             // Construct URL
-            string url = this.BaseUri.AbsoluteUri + 
+            string url = this.BaseUri.AbsoluteUri +
                          "//user/{username}";
             url = url.Replace("{username}", Uri.EscapeDataString(username));
             // trim all duplicate forward slashes in the url
@@ -1643,10 +1643,10 @@ namespace Fixtures.PetstoreV2
         /// </summary>
         /// <param name='username'>
         /// name that need to be deleted
-        /// </param>    
+        /// </param>
         /// <param name='body'>
         /// Updated user object
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1676,7 +1676,7 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "UpdateUser", tracingParameters);
             }
             // Construct URL
-            string url = this.BaseUri.AbsoluteUri + 
+            string url = this.BaseUri.AbsoluteUri +
                          "//user/{username}";
             url = url.Replace("{username}", Uri.EscapeDataString(username));
             // trim all duplicate forward slashes in the url
@@ -1694,7 +1694,7 @@ namespace Fixtures.PetstoreV2
                 }
             }
 
-            // Serialize Request  
+            // Serialize Request
             string requestContent = JsonConvert.SerializeObject(body, this.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
@@ -1739,7 +1739,7 @@ namespace Fixtures.PetstoreV2
         /// </summary>
         /// <param name='username'>
         /// The name that needs to be deleted
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1764,7 +1764,7 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "DeleteUser", tracingParameters);
             }
             // Construct URL
-            string url = this.BaseUri.AbsoluteUri + 
+            string url = this.BaseUri.AbsoluteUri +
                          "//user/{username}";
             url = url.Replace("{username}", Uri.EscapeDataString(username));
             // trim all duplicate forward slashes in the url

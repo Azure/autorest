@@ -26,15 +26,15 @@ Write(Header("/// "));
 
 #line default
 #line hidden
-            WriteLiteral("\r\nnamespace ");
+            WriteLiteral("\nnamespace ");
 #line 4 "ServiceClientInterfaceTemplate.cshtml"
      Write(Settings.Namespace);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n{\r\n    using System;\r\n    using System.Collections.Generic;\r\n    using System.N" +
-"et.Http;\r\n    using System.Threading;\r\n    using System.Threading.Tasks;\r\n    us" +
-"ing Microsoft.Rest;\r\n");
+            WriteLiteral("\n{\n    using System;\n    using System.Collections.Generic;\n    using System.Net.H" +
+"ttp;\n    using System.Threading;\n    using System.Threading.Tasks;\n    using Mic" +
+"rosoft.Rest;\n");
 #line 12 "ServiceClientInterfaceTemplate.cshtml"
  foreach (var usingString in Model.Usings) {
 
@@ -47,7 +47,7 @@ Write(Header("/// "));
 
 #line default
 #line hidden
-            WriteLiteral(";\r\n");
+            WriteLiteral(";\n");
 #line 14 "ServiceClientInterfaceTemplate.cshtml"
 }
 
@@ -59,26 +59,26 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    /// <summary>\r\n    ");
+            WriteLiteral("\n    /// <summary>\n    ");
 #line 17 "ServiceClientInterfaceTemplate.cshtml"
 Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    /// </summary>\r\n    public partial interface I");
+            WriteLiteral("\n    /// </summary>\n    public partial interface I");
 #line 19 "ServiceClientInterfaceTemplate.cshtml"
                           Write(Model.Name);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    {\r\n        /// <summary>\r\n        /// The base URI of the service.\r\n       " +
-" /// </summary>\r\n        Uri BaseUri { get; set; }\r\n        ");
+            WriteLiteral("\n    {\n        /// <summary>\n        /// The base URI of the service.\n        ///" +
+" </summary>\n        Uri BaseUri { get; set; }\n        ");
 #line 25 "ServiceClientInterfaceTemplate.cshtml"
    Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 26 "ServiceClientInterfaceTemplate.cshtml"
     
 
@@ -104,7 +104,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral(" { get; }\r\n");
+            WriteLiteral(" { get; }\n");
 #line 29 "ServiceClientInterfaceTemplate.cshtml"
         
 
@@ -122,7 +122,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line default
 #line hidden
 
-            WriteLiteral("        \r\n");
+            WriteLiteral("        \n");
 #line 31 "ServiceClientInterfaceTemplate.cshtml"
     }        
 
@@ -137,13 +137,13 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line default
 #line hidden
 
-            WriteLiteral("        \r\n        /// <summary>\r\n        ");
+            WriteLiteral("        \n        /// <summary>\n        ");
 #line 36 "ServiceClientInterfaceTemplate.cshtml"
    Write(WrapComment("/// ", method.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n        /// </summary>\r\n            \r\n");
+            WriteLiteral("\n        /// </summary>\n            \n");
 #line 39 "ServiceClientInterfaceTemplate.cshtml"
         foreach (var parameter in method.Parameters)
         {
@@ -157,22 +157,22 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\'>\r\n        ");
+            WriteLiteral("\'>\n        ");
 #line 42 "ServiceClientInterfaceTemplate.cshtml"
      Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n        /// </param>\r\n");
+            WriteLiteral("\n        /// </param>\n");
 #line 44 "ServiceClientInterfaceTemplate.cshtml"
         }
 
 #line default
 #line hidden
 
-            WriteLiteral("        /// <param name=\'customHeaders\'>\r\n        /// Headers that will be added " +
-"to request.\r\n        /// </param>        \r\n        /// <param name=\'cancellation" +
-"Token\'>\r\n        /// Cancellation token.\r\n        /// </param>\r\n        Task<");
+            WriteLiteral("        /// <param name=\'customHeaders\'>\n        /// Headers that will be added t" +
+"o request.\n        /// </param>        \n        /// <param name=\'cancellationTok" +
+"en\'>\n        /// Cancellation token.\n        /// </param>\n        Task<");
 #line 51 "ServiceClientInterfaceTemplate.cshtml"
            Write(method.OperationResponseReturnTypeString);
 
@@ -190,7 +190,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral(");\r\n");
+            WriteLiteral(");\n");
 #line 52 "ServiceClientInterfaceTemplate.cshtml"
         
 
@@ -208,14 +208,14 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line default
 #line hidden
 
-            WriteLiteral("        \r\n");
+            WriteLiteral("        \n");
 #line 54 "ServiceClientInterfaceTemplate.cshtml"
     }
 
 #line default
 #line hidden
 
-            WriteLiteral("    }\r\n}\r\n");
+            WriteLiteral("    }\n}\n");
         }
         #pragma warning restore 1998
     }

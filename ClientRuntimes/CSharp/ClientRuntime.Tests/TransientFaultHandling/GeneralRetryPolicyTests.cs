@@ -20,6 +20,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests.TransientFaultHandling
                 // First, instantiate a policy directly bypassing the configuration data validation.
                 var retryPolicy = new RetryPolicy<HttpStatusCodeErrorDetectionStrategy>(-1);
                 Assert.True(false, "When the RetryCount is negative, the retry policy should throw an exception.");
+                retryPolicy.ToString();
             }
             catch (ArgumentOutOfRangeException ex)
             {
@@ -35,6 +36,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests.TransientFaultHandling
                 // First, instantiate a policy directly bypassing the configuration data validation.
                 var retryPolicy = new RetryPolicy<HttpStatusCodeErrorDetectionStrategy>(3, TimeSpan.FromMilliseconds(-2));
                 Assert.True(false, "When the RetryInterval is negative, the retry policy should throw an exception.");
+                retryPolicy.ToString();
             }
             catch (ArgumentOutOfRangeException ex)
             {
@@ -48,9 +50,10 @@ namespace Microsoft.Rest.ClientRuntime.Tests.TransientFaultHandling
             try
             {
                 // First, instantiate a policy directly bypassing the configuration data validation.
-                new RetryPolicy<HttpStatusCodeErrorDetectionStrategy>(3, TimeSpan.FromMilliseconds(-1),
+                var retryPolicy = new RetryPolicy<HttpStatusCodeErrorDetectionStrategy>(3, TimeSpan.FromMilliseconds(-1),
                     TimeSpan.FromMilliseconds(1000), TimeSpan.FromMilliseconds(100));
                 Assert.True(false, "When the MinBackoff is negative, the retry policy should throw an exception.");
+                retryPolicy.ToString();
             }
             catch (ArgumentOutOfRangeException ex)
             {
@@ -64,9 +67,10 @@ namespace Microsoft.Rest.ClientRuntime.Tests.TransientFaultHandling
             try
             {
                 // First, instantiate a policy directly bypassing the configuration data validation.
-                new RetryPolicy<HttpStatusCodeErrorDetectionStrategy>(3, TimeSpan.FromMilliseconds(100),
+                var retryPolicy = new RetryPolicy<HttpStatusCodeErrorDetectionStrategy>(3, TimeSpan.FromMilliseconds(100),
                     TimeSpan.FromMilliseconds(-2), TimeSpan.FromMilliseconds(100));
                 Assert.True(false, "When the MaxBackoff is negative, the retry policy should throw an exception.");
+                retryPolicy.ToString();
             }
             catch (ArgumentOutOfRangeException ex)
             {
@@ -80,9 +84,10 @@ namespace Microsoft.Rest.ClientRuntime.Tests.TransientFaultHandling
             try
             {
                 // First, instantiate a policy directly bypassing the configuration data validation.
-                new RetryPolicy<HttpStatusCodeErrorDetectionStrategy>(3, TimeSpan.FromMilliseconds(100),
+                var retryPolicy = new RetryPolicy<HttpStatusCodeErrorDetectionStrategy>(3, TimeSpan.FromMilliseconds(100),
                     TimeSpan.FromMilliseconds(1000), TimeSpan.FromMilliseconds(-1));
                 Assert.True(false, "When the DeltaBackoff is negative, the retry policy should throw an exception.");
+                retryPolicy.ToString();
             }
             catch (ArgumentOutOfRangeException ex)
             {
@@ -96,10 +101,11 @@ namespace Microsoft.Rest.ClientRuntime.Tests.TransientFaultHandling
             try
             {
                 // First, instantiate a policy directly bypassing the configuration data validation.
-                new RetryPolicy<HttpStatusCodeErrorDetectionStrategy>(3, TimeSpan.FromMilliseconds(1000),
+                var retryPolicy = new RetryPolicy<HttpStatusCodeErrorDetectionStrategy>(3, TimeSpan.FromMilliseconds(1000),
                     TimeSpan.FromMilliseconds(100), TimeSpan.FromMilliseconds(100));
                 Assert.True(false,
                     "When the MinBackoff greater than MaxBackoff, the retry policy should throw an exception.");
+                retryPolicy.ToString();
             }
             catch (ArgumentOutOfRangeException ex)
             {

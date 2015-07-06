@@ -321,7 +321,7 @@ namespace Microsoft.Azure.Management.Redis
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        public JsonSerializerSettings DeserializationSettings { get; private set; }        
+        public JsonSerializerSettings DeserializationSettings { get; private set; }
 
         private SubscriptionCloudCredentials _credentials;
 
@@ -503,7 +503,7 @@ namespace Microsoft.Azure.Management.Redis
             };
             DeserializationSettings.Converters.Add(new ResourceJsonConverter());
             DeserializationSettings.Converters.Add(new CloudErrorJsonConverter());
-        }    
+        }
     }
 
     public static partial class RedisOperationsExtensions
@@ -897,12 +897,12 @@ namespace Microsoft.Azure.Management.Redis
         /// </param>
         public static async Task BeginDeleteAsync(this IRedisOperations operations, string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            AzureOperationResponse result = await operations.BeginDeleteWithOperationResponseAsync(resourceGroupName, name, subscriptionId, cancellationToken).ConfigureAwait(false);
+            await operations.BeginDeleteWithOperationResponseAsync(resourceGroupName, name, subscriptionId, cancellationToken).ConfigureAwait(false);
             return;
         }
         public static async Task DeleteAsync(this IRedisOperations operations, string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            AzureOperationResponse result = await operations.DeleteWithOperationResponseAsync(resourceGroupName, name, subscriptionId, cancellationToken).ConfigureAwait(false);
+            await operations.DeleteWithOperationResponseAsync(resourceGroupName, name, subscriptionId, cancellationToken).ConfigureAwait(false);
             return;
         }
 
@@ -1006,7 +1006,7 @@ namespace Microsoft.Azure.Management.Redis
         /// Cancellation token.
         /// </param>
         Task<AzureOperationResponse<RedisResource>> BeginCreateOrUpdateWithOperationResponseAsync(string resourceGroupName, string name, RedisCreateOrUpdateParameters parameters, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-        
+
         Task<AzureOperationResponse<RedisResource>> CreateOrUpdateWithOperationResponseAsync(string resourceGroupName, string name, RedisCreateOrUpdateParameters parameters, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
@@ -1235,7 +1235,7 @@ namespace Microsoft.Azure.Management.Redis
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
-                    
+
                 if (shouldTrace)
                 {
                     ServiceClientTracing.Error(invocationId, ex);
@@ -1272,11 +1272,11 @@ namespace Microsoft.Azure.Management.Redis
                 subscriptionId,
                 cancellationToken);
 
-            Debug.Assert(response.Response.StatusCode == HttpStatusCode.OK || 
+            Debug.Assert(response.Response.StatusCode == HttpStatusCode.OK ||
                          response.Response.StatusCode == HttpStatusCode.Created ||
                          response.Response.StatusCode == HttpStatusCode.Accepted);
 
-            return await this.Client.GetPutOperationResultAsync(response, 
+            return await this.Client.GetPutOperationResultAsync(response,
                 () => GetWithOperationResponseAsync(resourceGroupName, name, subscriptionId, cancellationToken),
                 null,
                 cancellationToken);
@@ -1701,7 +1701,7 @@ namespace Microsoft.Azure.Management.Redis
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-            if (statusCode != HttpStatusCode.OK && statusCode != HttpStatusCode.Accepted 
+            if (statusCode != HttpStatusCode.OK && statusCode != HttpStatusCode.Accepted
                 && statusCode != HttpStatusCode.NotFound && statusCode != HttpStatusCode.NoContent)
             {
                 CloudError error = JsonConvert.DeserializeObject<CloudError>(responseContent, Client.DeserializationSettings);
@@ -1709,7 +1709,7 @@ namespace Microsoft.Azure.Management.Redis
                 if (error != null)
                 {
                     ex = new CloudException(error.Message);
-                } 
+                }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
                 if (shouldTrace)
@@ -1732,8 +1732,8 @@ namespace Microsoft.Azure.Management.Redis
         }
 
         public async Task<AzureOperationResponse> DeleteWithOperationResponseAsync(
-            string resourceGroupName, 
-            string name, 
+            string resourceGroupName,
+            string name,
             string subscriptionId,
             CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
@@ -1744,8 +1744,8 @@ namespace Microsoft.Azure.Management.Redis
                 subscriptionId,
                 cancellationToken);
 
-            Debug.Assert(response.Response.StatusCode == HttpStatusCode.OK || 
-                response.Response.StatusCode == HttpStatusCode.Accepted || 
+            Debug.Assert(response.Response.StatusCode == HttpStatusCode.OK ||
+                response.Response.StatusCode == HttpStatusCode.Accepted ||
                 response.Response.StatusCode == HttpStatusCode.Created ||
                 response.Response.StatusCode == HttpStatusCode.NoContent);
 

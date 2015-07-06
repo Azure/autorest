@@ -44,27 +44,26 @@ Write(Header("/// "));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n/* jshint latedef:false */\r\n/* jshint forin:false */\r\n/* jshint noempty:false *" +
-"/\r\n");
+            WriteLiteral("\n/* jshint latedef:false */\n/* jshint forin:false */\n/* jshint noempty:false */\n");
 #line 10 "ServiceClientTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n\'use strict\';\r\n");
+            WriteLiteral("\n\'use strict\';\n");
 #line 12 "ServiceClientTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\nvar util = require(\'util\');\r\nvar msRest = require(\'ms-rest\');\r\nvar ServiceClien" +
-"t = msRest.ServiceClient;\r\nvar WebResource = msRest.WebResource;\r\n\r\n");
+            WriteLiteral("\nvar util = require(\'util\');\nvar msRest = require(\'ms-rest\');\nvar ServiceClient =" +
+" msRest.ServiceClient;\nvar WebResource = msRest.WebResource;\n\n");
 #line 18 "ServiceClientTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 19 "ServiceClientTemplate.cshtml"
  if (Model.ModelTypes.Any())
 {
@@ -72,7 +71,7 @@ Write(EmptyLine);
 #line default
 #line hidden
 
-            WriteLiteral("var models = require(\'./models\');\r\n");
+            WriteLiteral("var models = require(\'./models\');\n");
 #line 22 "ServiceClientTemplate.cshtml"
 }
 
@@ -86,7 +85,7 @@ Write(EmptyLine);
 #line default
 #line hidden
 
-            WriteLiteral("var operations = require(\'./operations\');\r\n");
+            WriteLiteral("var operations = require(\'./operations\');\n");
 #line 26 "ServiceClientTemplate.cshtml"
 }
 
@@ -98,7 +97,7 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n/**\r\n * @class\r\n * Initializes a new instance of the ");
+            WriteLiteral("\n/**\n * @class\n * Initializes a new instance of the ");
 #line 30 "ServiceClientTemplate.cshtml"
                                 Write(Model.Name);
 
@@ -127,39 +126,39 @@ function ");
 
 #line default
 #line hidden
-            WriteLiteral("(credentials, baseUri, options) {\r\n  if (!credentials) {\r\n    throw new Error(\'cr" +
-"edentials cannot be null.\');\r\n  }\r\n  ");
+            WriteLiteral("(credentials, baseUri, options) {\n  if (!credentials) {\n    throw new Error(\'cred" +
+"entials cannot be null.\');\n  }\n  ");
 #line 51 "ServiceClientTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n  if (!options) options = {};\r\n  ");
+            WriteLiteral("\n  if (!options) options = {};\n  ");
 #line 53 "ServiceClientTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n  ");
+            WriteLiteral("\n  ");
 #line 54 "ServiceClientTemplate.cshtml"
 Write(Model.Name);
 
 #line default
 #line hidden
-            WriteLiteral("[\'super_\'].call(this, credentials, options);\r\n  this.baseUri = baseUri;\r\n  this.c" +
-"redentials = credentials;\r\n  if (!this.baseUri) {\r\n    this.baseUri = \'");
+            WriteLiteral("[\'super_\'].call(this, credentials, options);\n  this.baseUri = baseUri;\n  this.cre" +
+"dentials = credentials;\n  if (!this.baseUri) {\n    this.baseUri = \'");
 #line 58 "ServiceClientTemplate.cshtml"
                Write(Model.BaseUrl);
 
 #line default
 #line hidden
-            WriteLiteral("\';\r\n  }\r\n  ");
+            WriteLiteral("\';\n  }\n  ");
 #line 60 "ServiceClientTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 61 "ServiceClientTemplate.cshtml"
   
 
@@ -185,14 +184,14 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral(";\r\n");
+            WriteLiteral(";\n");
 #line 64 "ServiceClientTemplate.cshtml"
   }
 
 #line default
 #line hidden
 
-            WriteLiteral("  \r\n");
+            WriteLiteral("  \n");
 #line 66 "ServiceClientTemplate.cshtml"
   
 
@@ -218,14 +217,14 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("(this);\r\n");
+            WriteLiteral("(this);\n");
 #line 69 "ServiceClientTemplate.cshtml"
   }
 
 #line default
 #line hidden
 
-            WriteLiteral("  \r\n");
+            WriteLiteral("  \n");
 #line 71 "ServiceClientTemplate.cshtml"
   
 
@@ -239,26 +238,26 @@ Write(EmptyLine);
 #line default
 #line hidden
 
-            WriteLiteral("  this._models = models;\r\n");
+            WriteLiteral("  this._models = models;\n");
 #line 74 "ServiceClientTemplate.cshtml"
   }
 
 #line default
 #line hidden
 
-            WriteLiteral("}\r\n");
+            WriteLiteral("}\n");
 #line 76 "ServiceClientTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\nutil.inherits(");
+            WriteLiteral("\nutil.inherits(");
 #line 77 "ServiceClientTemplate.cshtml"
          Write(Model.Name);
 
 #line default
 #line hidden
-            WriteLiteral(", ServiceClient);\r\n");
+            WriteLiteral(", ServiceClient);\n");
 #line 78 "ServiceClientTemplate.cshtml"
  foreach (var method in Model.MethodTemplateModels)
 {
@@ -282,7 +281,7 @@ Write(Include(new MethodTemplate(), method));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 82 "ServiceClientTemplate.cshtml"
 }
 
@@ -294,13 +293,13 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\nmodule.exports = ");
+            WriteLiteral("\nmodule.exports = ");
 #line 84 "ServiceClientTemplate.cshtml"
             Write(Model.Name);
 
 #line default
 #line hidden
-            WriteLiteral(";\r\n");
+            WriteLiteral(";\n");
         }
         #pragma warning restore 1998
     }

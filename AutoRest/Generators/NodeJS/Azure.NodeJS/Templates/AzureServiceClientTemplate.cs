@@ -56,28 +56,27 @@ Write(Header("/// "));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n/* jshint latedef:false */\r\n/* jshint forin:false */\r\n/* jshint noempty:false *" +
-"/\r\n");
+            WriteLiteral("\n/* jshint latedef:false */\n/* jshint forin:false */\n/* jshint noempty:false */\n");
 #line 12 "AzureServiceClientTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n\'use strict\';\r\n");
+            WriteLiteral("\n\'use strict\';\n");
 #line 14 "AzureServiceClientTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\nvar util = require(\'util\');\r\nvar msRest = require(\'ms-rest\');\r\nvar msRestAzure " +
-"= require(\'ms-rest-azure\');\r\nvar ServiceClient = msRestAzure.AzureServiceClient;" +
-"\r\nvar WebResource = msRest.WebResource;\r\n\r\n");
+            WriteLiteral("\nvar util = require(\'util\');\nvar msRest = require(\'ms-rest\');\nvar msRestAzure = r" +
+"equire(\'ms-rest-azure\');\nvar ServiceClient = msRestAzure.AzureServiceClient;\nvar" +
+" WebResource = msRest.WebResource;\n\n");
 #line 21 "AzureServiceClientTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 22 "AzureServiceClientTemplate.cshtml"
  if (Model.ModelTypes.Any())
 {
@@ -85,7 +84,7 @@ Write(EmptyLine);
 #line default
 #line hidden
 
-            WriteLiteral("var models = require(\'./models\');\r\n");
+            WriteLiteral("var models = require(\'./models\');\n");
 #line 25 "AzureServiceClientTemplate.cshtml"
 }
 
@@ -99,7 +98,7 @@ Write(EmptyLine);
 #line default
 #line hidden
 
-            WriteLiteral("var operations = require(\'./operations\');\r\n");
+            WriteLiteral("var operations = require(\'./operations\');\n");
 #line 29 "AzureServiceClientTemplate.cshtml"
 }
 
@@ -111,7 +110,7 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n/**\r\n * @class\r\n * Initializes a new instance of the ");
+            WriteLiteral("\n/**\n * @class\n * Initializes a new instance of the ");
 #line 33 "AzureServiceClientTemplate.cshtml"
                                 Write(Model.Name);
 
@@ -140,33 +139,33 @@ function ");
 
 #line default
 #line hidden
-            WriteLiteral("(credentials, baseUri, options) {\r\n  if (!credentials) {\r\n    throw new Error(\'cr" +
-"edentials cannot be null.\');\r\n  }\r\n  ");
+            WriteLiteral("(credentials, baseUri, options) {\n  if (!credentials) {\n    throw new Error(\'cred" +
+"entials cannot be null.\');\n  }\n  ");
 #line 54 "AzureServiceClientTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n  if (!options) options = {};\r\n  ");
+            WriteLiteral("\n  if (!options) options = {};\n  ");
 #line 56 "AzureServiceClientTemplate.cshtml"
 Write(Model.Name);
 
 #line default
 #line hidden
-            WriteLiteral("[\'super_\'].call(this, credentials, options);\r\n  this.baseUri = baseUri;\r\n  this.c" +
-"redentials = credentials;\r\n  if (!this.baseUri) {\r\n    this.baseUri = \'");
+            WriteLiteral("[\'super_\'].call(this, credentials, options);\n  this.baseUri = baseUri;\n  this.cre" +
+"dentials = credentials;\n  if (!this.baseUri) {\n    this.baseUri = \'");
 #line 60 "AzureServiceClientTemplate.cshtml"
                Write(Model.BaseUrl);
 
 #line default
 #line hidden
-            WriteLiteral("\';\r\n  }\r\n  ");
+            WriteLiteral("\';\n  }\n  ");
 #line 62 "AzureServiceClientTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 63 "AzureServiceClientTemplate.cshtml"
   
 
@@ -192,14 +191,14 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral(";\r\n");
+            WriteLiteral(";\n");
 #line 66 "AzureServiceClientTemplate.cshtml"
   }
 
 #line default
 #line hidden
 
-            WriteLiteral("  \r\n");
+            WriteLiteral("  \n");
 #line 68 "AzureServiceClientTemplate.cshtml"
   
 
@@ -225,14 +224,14 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("(this);\r\n");
+            WriteLiteral("(this);\n");
 #line 71 "AzureServiceClientTemplate.cshtml"
   }
 
 #line default
 #line hidden
 
-            WriteLiteral("  \r\n");
+            WriteLiteral("  \n");
 #line 73 "AzureServiceClientTemplate.cshtml"
   
 
@@ -246,26 +245,26 @@ Write(EmptyLine);
 #line default
 #line hidden
 
-            WriteLiteral("  this._models = models;\r\n");
+            WriteLiteral("  this._models = models;\n");
 #line 76 "AzureServiceClientTemplate.cshtml"
   }
 
 #line default
 #line hidden
 
-            WriteLiteral("}\r\n\r\n");
+            WriteLiteral("}\n\n");
 #line 79 "AzureServiceClientTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\nutil.inherits(");
+            WriteLiteral("\nutil.inherits(");
 #line 80 "AzureServiceClientTemplate.cshtml"
          Write(Model.Name);
 
 #line default
 #line hidden
-            WriteLiteral(", ServiceClient);\r\n");
+            WriteLiteral(", ServiceClient);\n");
 #line 81 "AzureServiceClientTemplate.cshtml"
  foreach (var method in Model.MethodTemplateModels)
 {
@@ -289,7 +288,7 @@ Write(Include(new AzureMethodTemplate(), method as AzureMethodTemplateModel));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 85 "AzureServiceClientTemplate.cshtml"
 }
 
@@ -301,7 +300,7 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\nmodule.exports = ");
+            WriteLiteral("\nmodule.exports = ");
 #line 87 "AzureServiceClientTemplate.cshtml"
             Write(Model.Name);
 

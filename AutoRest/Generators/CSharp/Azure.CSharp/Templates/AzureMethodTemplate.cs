@@ -75,7 +75,7 @@ Write(Include(new MethodTemplate(), (MethodTemplateModel)Model));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 14 "AzureMethodTemplate.cshtml"
 }
 else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.Delete)
@@ -84,7 +84,7 @@ else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.D
 #line default
 #line hidden
 
-            WriteLiteral("/// <summary>\r\n");
+            WriteLiteral("/// <summary>\n");
 #line 18 "AzureMethodTemplate.cshtml"
 
 #line default
@@ -95,7 +95,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n/// </summary>\r\n");
+            WriteLiteral("\n/// </summary>\n");
 #line 20 "AzureMethodTemplate.cshtml"
 
 #line default
@@ -114,7 +114,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\'>\r\n");
+            WriteLiteral("\'>\n");
 #line 23 "AzureMethodTemplate.cshtml"
 
 #line default
@@ -125,7 +125,7 @@ Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n/// </param>    \r\n");
+            WriteLiteral("\n/// </param>    \n");
 #line 25 "AzureMethodTemplate.cshtml"
 }
 
@@ -138,9 +138,9 @@ Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 #line default
 #line hidden
 
-            WriteLiteral("/// <param name=\'customHeaders\'>\r\n/// Headers that will be added to request.\r\n///" +
-" </param>\r\n/// <param name=\'cancellationToken\'>\r\n/// Cancellation token.\r\n/// </" +
-"param>\r\n\r\npublic async Task<");
+            WriteLiteral("/// <param name=\'customHeaders\'>\n/// Headers that will be added to request.\n/// <" +
+"/param>\n/// <param name=\'cancellationToken\'>\n/// Cancellation token.\n/// </param" +
+">\n\npublic async Task<");
 #line 33 "AzureMethodTemplate.cshtml"
               Write(Model.OperationResponseReturnTypeString);
 
@@ -158,7 +158,7 @@ Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral(")\r\n{\r\n    // Send request\r\n    ");
+            WriteLiteral(")\n{\n    // Send request\n    ");
 #line 36 "AzureMethodTemplate.cshtml"
 Write(Model.OperationResponseReturnTypeString);
 
@@ -170,20 +170,20 @@ Write(Model.OperationResponseReturnTypeString);
 
 #line default
 #line hidden
-            WriteLiteral("WithOperationResponseAsync(\r\n        ");
+            WriteLiteral("WithOperationResponseAsync(\n        ");
 #line 37 "AzureMethodTemplate.cshtml"
     Write(Model.GetAsyncMethodInvocationArgs("customHeaders"));
 
 #line default
 #line hidden
-            WriteLiteral(");\r\n\r\n    return await ");
+            WriteLiteral(");\n\n    return await ");
 #line 39 "AzureMethodTemplate.cshtml"
              Write(Model.ClientReference);
 
 #line default
 #line hidden
             WriteLiteral(".GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);" +
-"\r\n}\r\n\r\n");
+"\n}\n\n");
 #line 42 "AzureMethodTemplate.cshtml"
 }
 else if (Model.HttpMethod == HttpMethod.Put)
@@ -192,7 +192,7 @@ else if (Model.HttpMethod == HttpMethod.Put)
 #line default
 #line hidden
 
-            WriteLiteral("/// <summary>\r\n");
+            WriteLiteral("/// <summary>\n");
 #line 46 "AzureMethodTemplate.cshtml"
 
 #line default
@@ -203,7 +203,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n/// </summary>\r\n");
+            WriteLiteral("\n/// </summary>\n");
 #line 48 "AzureMethodTemplate.cshtml"
 
 #line default
@@ -222,7 +222,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\'>\r\n");
+            WriteLiteral("\'>\n");
 #line 51 "AzureMethodTemplate.cshtml"
 
 #line default
@@ -233,7 +233,7 @@ Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n/// </param>    \r\n");
+            WriteLiteral("\n/// </param>    \n");
 #line 53 "AzureMethodTemplate.cshtml"
 }
 
@@ -246,9 +246,9 @@ Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 #line default
 #line hidden
 
-            WriteLiteral("/// <param name=\'customHeaders\'>\r\n/// Headers that will be added to request.\r\n///" +
-" </param>    \r\n/// <param name=\'cancellationToken\'>\r\n/// Cancellation token.\r\n//" +
-"/ </param>\r\n\r\npublic async Task<");
+            WriteLiteral("/// <param name=\'customHeaders\'>\n/// Headers that will be added to request.\n/// <" +
+"/param>    \n/// <param name=\'cancellationToken\'>\n/// Cancellation token.\n/// </p" +
+"aram>\n\npublic async Task<");
 #line 61 "AzureMethodTemplate.cshtml"
               Write(Model.OperationResponseReturnTypeString);
 
@@ -266,7 +266,7 @@ Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral(")\r\n{\r\n    // Send Request\r\n    ");
+            WriteLiteral(")\n{\n    // Send Request\n    ");
 #line 64 "AzureMethodTemplate.cshtml"
 Write(Model.OperationResponseReturnTypeString);
 
@@ -278,13 +278,13 @@ Write(Model.OperationResponseReturnTypeString);
 
 #line default
 #line hidden
-            WriteLiteral("WithOperationResponseAsync(\r\n        ");
+            WriteLiteral("WithOperationResponseAsync(\n        ");
 #line 65 "AzureMethodTemplate.cshtml"
     Write(Model.GetAsyncMethodInvocationArgs("customHeaders"));
 
 #line default
 #line hidden
-            WriteLiteral(");\r\n\r\n    return await ");
+            WriteLiteral(");\n\n    return await ");
 #line 67 "AzureMethodTemplate.cshtml"
              Write(Model.ClientReference);
 
@@ -296,7 +296,7 @@ Write(Model.OperationResponseReturnTypeString);
 
 #line default
 #line hidden
-            WriteLiteral(">(response, \r\n        () => ");
+            WriteLiteral(">(response, \n        () => ");
 #line 68 "AzureMethodTemplate.cshtml"
           Write(Model.GetMethod.Name);
 
@@ -308,7 +308,7 @@ Write(Model.OperationResponseReturnTypeString);
 
 #line default
 #line hidden
-            WriteLiteral("),\r\n        customHeaders, \r\n        cancellationToken);\r\n}\r\n\r\n");
+            WriteLiteral("),\n        customHeaders, \n        cancellationToken);\n}\n\n");
 #line 73 "AzureMethodTemplate.cshtml"
 }
 

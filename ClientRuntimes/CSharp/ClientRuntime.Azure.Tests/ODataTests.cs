@@ -115,13 +115,6 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void UnsupportedMethodThrowsNotSupportedException()
         {
-            var param = new InputParam2
-            {
-                Param = new InputParam1
-                {
-                    Value = "foo"
-                }
-            };
             Assert.Throws<NotSupportedException>(
                 () => FilterString.Generate<Param1>(p => p.Foo.Replace(" ", "") == "abc"));
         }

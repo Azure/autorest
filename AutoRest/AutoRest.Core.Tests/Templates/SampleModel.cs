@@ -15,25 +15,25 @@ namespace Microsoft.Rest.Generator.Test.Templates
         #pragma warning disable 1998
         public override async Task ExecuteAsync()
         {
-            WriteLiteral("using System;\r\nusing System.Collection;\r\n");
+            WriteLiteral("using System;\nusing System.Collection;\n");
 #line 4 "SampleModel.cshtml"
 Write(Model.Imports);
 
 #line default
 #line hidden
-            WriteLiteral("\r\nnamespace ");
+            WriteLiteral("\nnamespace ");
 #line 5 "SampleModel.cshtml"
      Write(Model.Namespace);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n{\r\n    public partial class ");
+            WriteLiteral("\n{\n    public partial class ");
 #line 7 "SampleModel.cshtml"
                     Write(Model.Name);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    {\r\n");
+            WriteLiteral("\n    {\n");
 #line 9 "SampleModel.cshtml"
         
 
@@ -53,7 +53,7 @@ Write(Model.Imports);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n        public ");
+            WriteLiteral("\n        public ");
 #line 12 "SampleModel.cshtml"
             Write(property.Type);
 
@@ -71,41 +71,41 @@ Write(Model.Imports);
 
 #line default
 #line hidden
-            WriteLiteral(" set; }\r\n        \r\n");
+            WriteLiteral(" set; }\n        \n");
 #line 14 "SampleModel.cshtml"
         }
 
 #line default
 #line hidden
 
-            WriteLiteral("        /// <summary>\r\n        /// Serialize the object\r\n        /// </summary>\r\n" +
-"        /// <returns>\r\n        /// Returns the json model for the type ");
+            WriteLiteral("        /// <summary>\n        /// Serialize the object\n        /// </summary>\n   " +
+"     /// <returns>\n        /// Returns the json model for the type ");
 #line 19 "SampleModel.cshtml"
                                            Write(Model.Name);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n        /// </returns>\r\n        public virtual JToken SerializeJson(JToken outp" +
-"utObject)\r\n        {\r\n            ");
+            WriteLiteral("\n        /// </returns>\n        public virtual JToken SerializeJson(JToken output" +
+"Object)\n        {\n            ");
 #line 23 "SampleModel.cshtml"
        Write(Model.SerializationBlock);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n        }\r\n\r\n        /// <summary>\r\n        ");
+            WriteLiteral("\n        }\n\n        /// <summary>\n        ");
 #line 27 "SampleModel.cshtml"
    Write(WrapComment("/// ", "Deserialize current type to Json object because today is Friday and there is a sun outside the window."));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n        /// </summary>\r\n        public virtual void DeserializeJson(JToken inpu" +
-"tObject)\r\n        {\r\n            ");
+            WriteLiteral("\n        /// </summary>\n        public virtual void DeserializeJson(JToken inputO" +
+"bject)\n        {\n            ");
 #line 31 "SampleModel.cshtml"
        Write(Model.DeserializationBlock);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n        }\r\n    }\r\n}\r\n");
+            WriteLiteral("\n        }\n    }\n}\n");
         }
         #pragma warning restore 1998
     }

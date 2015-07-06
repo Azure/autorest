@@ -37,20 +37,20 @@ Write(Header("/// "));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 6 "MethodGroupTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n\'use strict\';\r\n");
+            WriteLiteral("\n\'use strict\';\n");
 #line 8 "MethodGroupTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\nvar util = require(\'util\');\r\nvar msRest = require(\'ms-rest\');\r\nvar ServiceClien" +
-"t = msRest.ServiceClient;\r\nvar WebResource = msRest.WebResource;\r\n\r\n");
+            WriteLiteral("\nvar util = require(\'util\');\nvar msRest = require(\'ms-rest\');\nvar ServiceClient =" +
+" msRest.ServiceClient;\nvar WebResource = msRest.WebResource;\n\n");
 #line 14 "MethodGroupTemplate.cshtml"
  if (Model.ModelTypes.Any())
 {
@@ -69,7 +69,7 @@ Write(EmptyLine);
 #line default
 #line hidden
 
-            WriteLiteral("var models = require(\'../models\');\r\n");
+            WriteLiteral("var models = require(\'../models\');\n");
 #line 18 "MethodGroupTemplate.cshtml"
 }
 
@@ -81,44 +81,44 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n/**\r\n * @class\r\n * ");
+            WriteLiteral("\n/**\n * @class\n * ");
 #line 22 "MethodGroupTemplate.cshtml"
 Write(Model.MethodGroupType);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n * __NOTE__: An instance of this class is automatically created for an\r\n * inst" +
-"ance of the ");
+            WriteLiteral("\n * __NOTE__: An instance of this class is automatically created for an\n * instan" +
+"ce of the ");
 #line 24 "MethodGroupTemplate.cshtml"
               Write(Model.Name);
 
 #line default
 #line hidden
-            WriteLiteral(".\r\n * Initializes a new instance of the ");
+            WriteLiteral(".\n * Initializes a new instance of the ");
 #line 25 "MethodGroupTemplate.cshtml"
                                 Write(Model.MethodGroupType);
 
 #line default
 #line hidden
-            WriteLiteral(" class.\r\n * @constructor\r\n *\r\n * @param {");
+            WriteLiteral(" class.\n * @constructor\n *\n * @param {");
 #line 28 "MethodGroupTemplate.cshtml"
        Write(Model.Name);
 
 #line default
 #line hidden
-            WriteLiteral("} client Reference to the service client.\r\n */\r\nfunction ");
+            WriteLiteral("} client Reference to the service client.\n */\nfunction ");
 #line 30 "MethodGroupTemplate.cshtml"
      Write(Model.MethodGroupType);
 
 #line default
 #line hidden
-            WriteLiteral("(client) {\r\n  this.client = client;\r\n}\r\n\r\n");
+            WriteLiteral("(client) {\n  this.client = client;\n}\n\n");
 #line 34 "MethodGroupTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 35 "MethodGroupTemplate.cshtml"
  foreach (var method in Model.MethodTemplateModels)
 {
@@ -131,7 +131,7 @@ Write(Include(new MethodTemplate(), method));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 38 "MethodGroupTemplate.cshtml"
 
 #line default
@@ -154,13 +154,13 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\nmodule.exports = ");
+            WriteLiteral("\nmodule.exports = ");
 #line 41 "MethodGroupTemplate.cshtml"
              Write(Model.MethodGroupType);
 
 #line default
 #line hidden
-            WriteLiteral(";\r\n");
+            WriteLiteral(";\n");
         }
         #pragma warning restore 1998
     }

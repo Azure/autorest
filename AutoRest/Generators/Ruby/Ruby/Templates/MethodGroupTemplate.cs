@@ -32,56 +32,56 @@ Write(Header("# "));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 5 "MethodGroupTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\nmodule ");
+            WriteLiteral("\nmodule ");
 #line 6 "MethodGroupTemplate.cshtml"
   Write(Settings.Namespace);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n  #\r\n  ");
+            WriteLiteral("\n  #\n  ");
 #line 8 "MethodGroupTemplate.cshtml"
 Write(WrapComment("# ", string.IsNullOrEmpty(Model.Documentation) ? Model.MethodGroupName : Model.Documentation));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n  #\r\n  class ");
+            WriteLiteral("\n  #\n  class ");
 #line 10 "MethodGroupTemplate.cshtml"
     Write(Model.MethodGroupName);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n\r\n    #\r\n    # Creates and initializes a new instance of the ");
+            WriteLiteral("\n\n    #\n    # Creates and initializes a new instance of the ");
 #line 13 "MethodGroupTemplate.cshtml"
                                                Write(Model.MethodGroupName);
 
 #line default
 #line hidden
-            WriteLiteral(" class.\r\n    # @param client service class for accessing basic functionality.\r\n  " +
-"  #\r\n    def initialize(client)\r\n        @client = client\r\n    end\r\n\r\n    ");
+            WriteLiteral(" class.\n    # @param client service class for accessing basic functionality.\n    " +
+"#\n    def initialize(client)\n        @client = client\n    end\n\n    ");
 #line 20 "MethodGroupTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    # @return reference to the ");
+            WriteLiteral("\n    # @return reference to the ");
 #line 21 "MethodGroupTemplate.cshtml"
                             Write(Model.Name);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    attr_reader :client\r\n\r\n    ");
+            WriteLiteral("\n    attr_reader :client\n\n    ");
 #line 24 "MethodGroupTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 25 "MethodGroupTemplate.cshtml"
     
 
@@ -101,7 +101,7 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 28 "MethodGroupTemplate.cshtml"
     
 
@@ -120,7 +120,7 @@ Write(EmptyLine);
 #line default
 #line hidden
 
-            WriteLiteral("  end\r\nend\r\n");
+            WriteLiteral("  end\nend\n");
         }
         #pragma warning restore 1998
     }
