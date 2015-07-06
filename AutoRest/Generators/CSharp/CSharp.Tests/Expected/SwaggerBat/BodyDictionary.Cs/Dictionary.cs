@@ -41,7 +41,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, int?>>> GetNullWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, int?>>> GetNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -126,7 +126,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, int?>>> GetEmptyWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, int?>>> GetEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -213,7 +213,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> PutEmptyWithOperationResponseAsync(IDictionary<string, string> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutEmptyWithHttpMessagesAsync(IDictionary<string, string> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (arrayBody == null)
             {
@@ -302,7 +302,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, string>>> GetNullValueWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, string>>> GetNullValueWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -387,7 +387,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, string>>> GetNullKeyWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, string>>> GetNullKeyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -472,7 +472,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, string>>> GetEmptyStringKeyWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, string>>> GetEmptyStringKeyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -557,7 +557,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, string>>> GetInvalidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, string>>> GetInvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -643,7 +643,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, bool?>>> GetBooleanTfftWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, bool?>>> GetBooleanTfftWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -730,7 +730,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> PutBooleanTfftWithOperationResponseAsync(IDictionary<string, bool?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutBooleanTfftWithHttpMessagesAsync(IDictionary<string, bool?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (arrayBody == null)
             {
@@ -819,7 +819,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, bool?>>> GetBooleanInvalidNullWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, bool?>>> GetBooleanInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -904,7 +904,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, bool?>>> GetBooleanInvalidStringWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, bool?>>> GetBooleanInvalidStringWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -989,7 +989,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, int?>>> GetIntegerValidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, int?>>> GetIntegerValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1076,7 +1076,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> PutIntegerValidWithOperationResponseAsync(IDictionary<string, int?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutIntegerValidWithHttpMessagesAsync(IDictionary<string, int?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (arrayBody == null)
             {
@@ -1165,7 +1165,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, int?>>> GetIntInvalidNullWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, int?>>> GetIntInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1250,7 +1250,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, int?>>> GetIntInvalidStringWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, int?>>> GetIntInvalidStringWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1335,7 +1335,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, long?>>> GetLongValidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, long?>>> GetLongValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1422,7 +1422,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> PutLongValidWithOperationResponseAsync(IDictionary<string, long?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutLongValidWithHttpMessagesAsync(IDictionary<string, long?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (arrayBody == null)
             {
@@ -1511,7 +1511,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, long?>>> GetLongInvalidNullWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, long?>>> GetLongInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1596,7 +1596,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, long?>>> GetLongInvalidStringWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, long?>>> GetLongInvalidStringWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1681,7 +1681,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, double?>>> GetFloatValidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, double?>>> GetFloatValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1768,7 +1768,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> PutFloatValidWithOperationResponseAsync(IDictionary<string, double?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutFloatValidWithHttpMessagesAsync(IDictionary<string, double?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (arrayBody == null)
             {
@@ -1857,7 +1857,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, double?>>> GetFloatInvalidNullWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, double?>>> GetFloatInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1942,7 +1942,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, double?>>> GetFloatInvalidStringWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, double?>>> GetFloatInvalidStringWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2027,7 +2027,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, double?>>> GetDoubleValidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, double?>>> GetDoubleValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2114,7 +2114,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> PutDoubleValidWithOperationResponseAsync(IDictionary<string, double?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutDoubleValidWithHttpMessagesAsync(IDictionary<string, double?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (arrayBody == null)
             {
@@ -2203,7 +2203,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, double?>>> GetDoubleInvalidNullWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, double?>>> GetDoubleInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2288,7 +2288,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, double?>>> GetDoubleInvalidStringWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, double?>>> GetDoubleInvalidStringWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2373,7 +2373,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, string>>> GetStringValidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, string>>> GetStringValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2460,7 +2460,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> PutStringValidWithOperationResponseAsync(IDictionary<string, string> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutStringValidWithHttpMessagesAsync(IDictionary<string, string> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (arrayBody == null)
             {
@@ -2549,7 +2549,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, string>>> GetStringWithNullWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, string>>> GetStringWithNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2634,7 +2634,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, string>>> GetStringWithInvalidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, string>>> GetStringWithInvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2720,7 +2720,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, DateTime?>>> GetDateValidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, DateTime?>>> GetDateValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2808,7 +2808,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> PutDateValidWithOperationResponseAsync(IDictionary<string, DateTime?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutDateValidWithHttpMessagesAsync(IDictionary<string, DateTime?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (arrayBody == null)
             {
@@ -2897,7 +2897,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, DateTime?>>> GetDateInvalidNullWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, DateTime?>>> GetDateInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2982,7 +2982,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, DateTime?>>> GetDateInvalidCharsWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, DateTime?>>> GetDateInvalidCharsWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -3068,7 +3068,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, DateTime?>>> GetDateTimeValidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, DateTime?>>> GetDateTimeValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -3156,7 +3156,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> PutDateTimeValidWithOperationResponseAsync(IDictionary<string, DateTime?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutDateTimeValidWithHttpMessagesAsync(IDictionary<string, DateTime?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (arrayBody == null)
             {
@@ -3245,7 +3245,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, DateTime?>>> GetDateTimeInvalidNullWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, DateTime?>>> GetDateTimeInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -3330,7 +3330,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, DateTime?>>> GetDateTimeInvalidCharsWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, DateTime?>>> GetDateTimeInvalidCharsWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -3416,7 +3416,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, byte[]>>> GetByteValidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, byte[]>>> GetByteValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -3504,7 +3504,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> PutByteValidWithOperationResponseAsync(IDictionary<string, byte[]> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutByteValidWithHttpMessagesAsync(IDictionary<string, byte[]> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (arrayBody == null)
             {
@@ -3594,7 +3594,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, byte[]>>> GetByteInvalidNullWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, byte[]>>> GetByteInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -3679,7 +3679,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, Widget>>> GetComplexNullWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, Widget>>> GetComplexNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -3764,7 +3764,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, Widget>>> GetComplexEmptyWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, Widget>>> GetComplexEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -3850,7 +3850,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, Widget>>> GetComplexItemNullWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, Widget>>> GetComplexItemNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -3936,7 +3936,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, Widget>>> GetComplexItemEmptyWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, Widget>>> GetComplexItemEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -4022,7 +4022,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, Widget>>> GetComplexValidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, Widget>>> GetComplexValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -4111,7 +4111,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> PutComplexValidWithOperationResponseAsync(IDictionary<string, Widget> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutComplexValidWithHttpMessagesAsync(IDictionary<string, Widget> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (arrayBody == null)
             {
@@ -4200,7 +4200,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, IList<string>>>> GetArrayNullWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, IList<string>>>> GetArrayNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -4285,7 +4285,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, IList<string>>>> GetArrayEmptyWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, IList<string>>>> GetArrayEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -4371,7 +4371,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, IList<string>>>> GetArrayItemNullWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, IList<string>>>> GetArrayItemNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -4457,7 +4457,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, IList<string>>>> GetArrayItemEmptyWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, IList<string>>>> GetArrayItemEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -4543,7 +4543,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, IList<string>>>> GetArrayValidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, IList<string>>>> GetArrayValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -4631,7 +4631,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> PutArrayValidWithOperationResponseAsync(IDictionary<string, IList<string>> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutArrayValidWithHttpMessagesAsync(IDictionary<string, IList<string>> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (arrayBody == null)
             {
@@ -4720,7 +4720,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, IDictionary<string, string>>>> GetDictionaryNullWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, IDictionary<string, string>>>> GetDictionaryNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -4806,7 +4806,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, IDictionary<string, string>>>> GetDictionaryEmptyWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, IDictionary<string, string>>>> GetDictionaryEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -4893,7 +4893,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, IDictionary<string, string>>>> GetDictionaryItemNullWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, IDictionary<string, string>>>> GetDictionaryItemNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -4980,7 +4980,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, IDictionary<string, string>>>> GetDictionaryItemEmptyWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, IDictionary<string, string>>>> GetDictionaryItemEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -5067,7 +5067,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IDictionary<string, IDictionary<string, string>>>> GetDictionaryValidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, IDictionary<string, string>>>> GetDictionaryValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -5156,7 +5156,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> PutDictionaryValidWithOperationResponseAsync(IDictionary<string, IDictionary<string, string>> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutDictionaryValidWithHttpMessagesAsync(IDictionary<string, IDictionary<string, string>> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (arrayBody == null)
             {

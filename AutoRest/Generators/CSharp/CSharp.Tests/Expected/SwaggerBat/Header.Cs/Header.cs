@@ -44,7 +44,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ParamExistingKeyWithOperationResponseAsync(string userAgent, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ParamExistingKeyWithHttpMessagesAsync(string userAgent, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (userAgent == null)
             {
@@ -133,7 +133,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ResponseExistingKeyWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ResponseExistingKeyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -216,7 +216,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ParamProtectedKeyWithOperationResponseAsync(string contentType, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ParamProtectedKeyWithHttpMessagesAsync(string contentType, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (contentType == null)
             {
@@ -305,7 +305,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ResponseProtectedKeyWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ResponseProtectedKeyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -392,7 +392,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ParamIntegerWithOperationResponseAsync(string scenario, int? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ParamIntegerWithHttpMessagesAsync(string scenario, int? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
@@ -493,7 +493,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ResponseIntegerWithOperationResponseAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ResponseIntegerWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
@@ -589,7 +589,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ParamLongWithOperationResponseAsync(string scenario, long? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ParamLongWithHttpMessagesAsync(string scenario, long? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
@@ -690,7 +690,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ResponseLongWithOperationResponseAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ResponseLongWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
@@ -786,7 +786,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ParamFloatWithOperationResponseAsync(string scenario, double? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ParamFloatWithHttpMessagesAsync(string scenario, double? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
@@ -887,7 +887,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ResponseFloatWithOperationResponseAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ResponseFloatWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
@@ -983,7 +983,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ParamDoubleWithOperationResponseAsync(string scenario, double? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ParamDoubleWithHttpMessagesAsync(string scenario, double? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
@@ -1084,7 +1084,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ResponseDoubleWithOperationResponseAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ResponseDoubleWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
@@ -1180,7 +1180,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ParamBoolWithOperationResponseAsync(string scenario, bool? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ParamBoolWithHttpMessagesAsync(string scenario, bool? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
@@ -1281,7 +1281,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ResponseBoolWithOperationResponseAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ResponseBoolWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
@@ -1380,7 +1380,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ParamStringWithOperationResponseAsync(string scenario, string value = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ParamStringWithHttpMessagesAsync(string scenario, string value = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
@@ -1479,7 +1479,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ResponseStringWithOperationResponseAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ResponseStringWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
@@ -1575,7 +1575,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ParamDateWithOperationResponseAsync(string scenario, DateTime? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ParamDateWithHttpMessagesAsync(string scenario, DateTime? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
@@ -1676,7 +1676,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ResponseDateWithOperationResponseAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ResponseDateWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
@@ -1774,7 +1774,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ParamDatetimeWithOperationResponseAsync(string scenario, DateTime? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ParamDatetimeWithHttpMessagesAsync(string scenario, DateTime? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
@@ -1876,7 +1876,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ResponseDatetimeWithOperationResponseAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ResponseDatetimeWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
@@ -1972,7 +1972,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ParamByteWithOperationResponseAsync(string scenario, byte[] value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ParamByteWithHttpMessagesAsync(string scenario, byte[] value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
@@ -2073,7 +2073,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ResponseByteWithOperationResponseAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ResponseByteWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
@@ -2171,7 +2171,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ParamEnumWithOperationResponseAsync(string scenario, GreyscaleColors? value = default(GreyscaleColors?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ParamEnumWithHttpMessagesAsync(string scenario, GreyscaleColors? value = default(GreyscaleColors?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
@@ -2269,7 +2269,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ResponseEnumWithOperationResponseAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ResponseEnumWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
@@ -2359,7 +2359,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> CustomRequestIdWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> CustomRequestIdWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;

@@ -22,7 +22,7 @@ namespace Fixtures.Azure.SwaggerBatHead
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<bool?>> Head204WithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<bool?>> Head204WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Return 404 status code if successful
         /// </summary>
@@ -32,6 +32,6 @@ namespace Fixtures.Azure.SwaggerBatHead
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<bool?>> Head404WithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<bool?>> Head404WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

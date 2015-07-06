@@ -44,7 +44,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> GetMethodPathValidWithOperationResponseAsync(string unencodedPathParam, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> GetMethodPathValidWithHttpMessagesAsync(string unencodedPathParam, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (unencodedPathParam == null)
             {
@@ -142,7 +142,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> GetPathPathValidWithOperationResponseAsync(string unencodedPathParam, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> GetPathPathValidWithHttpMessagesAsync(string unencodedPathParam, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (unencodedPathParam == null)
             {
@@ -241,7 +241,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> GetSwaggerPathValidWithOperationResponseAsync(string unencodedPathParam, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> GetSwaggerPathValidWithHttpMessagesAsync(string unencodedPathParam, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (unencodedPathParam == null)
             {
@@ -340,7 +340,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> GetMethodQueryValidWithOperationResponseAsync(string q1, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> GetMethodQueryValidWithHttpMessagesAsync(string q1, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (q1 == null)
             {
@@ -441,7 +441,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> GetMethodQueryNullWithOperationResponseAsync(string q1 = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> GetMethodQueryNullWithHttpMessagesAsync(string q1 = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -539,7 +539,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> GetPathQueryValidWithOperationResponseAsync(string q1, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> GetPathQueryValidWithHttpMessagesAsync(string q1, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (q1 == null)
             {
@@ -643,7 +643,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> GetSwaggerQueryValidWithOperationResponseAsync(string q1 = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> GetSwaggerQueryValidWithHttpMessagesAsync(string q1 = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;

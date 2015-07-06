@@ -25,7 +25,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ParamExistingKeyWithOperationResponseAsync(string userAgent, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ParamExistingKeyWithHttpMessagesAsync(string userAgent, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get a response with header value "User-Agent": "overwrite"
         /// </summary>
@@ -35,7 +35,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ResponseExistingKeyWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ResponseExistingKeyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a post request with header value "Content-Type": "text/html"
         /// </summary>
@@ -48,7 +48,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ParamProtectedKeyWithOperationResponseAsync(string contentType, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ParamProtectedKeyWithHttpMessagesAsync(string contentType, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get a response with header value "Content-Type": "text/html"
         /// </summary>
@@ -58,7 +58,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ResponseProtectedKeyWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ResponseProtectedKeyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a post request with header values "scenario": "positive",
         /// "value": 1 or "scenario": "negative", "value": -2
@@ -76,7 +76,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ParamIntegerWithOperationResponseAsync(string scenario, int? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ParamIntegerWithHttpMessagesAsync(string scenario, int? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get a response with header value "value": 1 or -2
         /// </summary>
@@ -90,7 +90,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ResponseIntegerWithOperationResponseAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ResponseIntegerWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a post request with header values "scenario": "positive",
         /// "value": 105 or "scenario": "negative", "value": -2
@@ -108,7 +108,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ParamLongWithOperationResponseAsync(string scenario, long? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ParamLongWithHttpMessagesAsync(string scenario, long? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get a response with header value "value": 105 or -2
         /// </summary>
@@ -122,7 +122,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ResponseLongWithOperationResponseAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ResponseLongWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a post request with header values "scenario": "positive",
         /// "value": 0.07 or "scenario": "negative", "value": -3.0
@@ -140,7 +140,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ParamFloatWithOperationResponseAsync(string scenario, double? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ParamFloatWithHttpMessagesAsync(string scenario, double? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get a response with header value "value": 0.07 or -3.0
         /// </summary>
@@ -154,7 +154,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ResponseFloatWithOperationResponseAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ResponseFloatWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a post request with header values "scenario": "positive",
         /// "value": 7e120 or "scenario": "negative", "value": -3.0
@@ -172,7 +172,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ParamDoubleWithOperationResponseAsync(string scenario, double? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ParamDoubleWithHttpMessagesAsync(string scenario, double? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get a response with header value "value": 7e120 or -3.0
         /// </summary>
@@ -186,7 +186,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ResponseDoubleWithOperationResponseAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ResponseDoubleWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a post request with header values "scenario": "true",
         /// "value": true or "scenario": "false", "value": false
@@ -204,7 +204,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ParamBoolWithOperationResponseAsync(string scenario, bool? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ParamBoolWithHttpMessagesAsync(string scenario, bool? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get a response with header value "value": true or false
         /// </summary>
@@ -218,7 +218,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ResponseBoolWithOperationResponseAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ResponseBoolWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a post request with header values "scenario": "valid",
         /// "value": "The quick brown fox jumps over the lazy dog" or
@@ -239,7 +239,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ParamStringWithOperationResponseAsync(string scenario, string value = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ParamStringWithHttpMessagesAsync(string scenario, string value = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get a response with header values "The quick brown fox jumps over
         /// the lazy dog" or null or ""
@@ -254,7 +254,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ResponseStringWithOperationResponseAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ResponseStringWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a post request with header values "scenario": "valid",
         /// "value": "2010-01-01" or "scenario": "min", "value": "0001-01-01"
@@ -271,7 +271,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ParamDateWithOperationResponseAsync(string scenario, DateTime? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ParamDateWithHttpMessagesAsync(string scenario, DateTime? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get a response with header values "2010-01-01" or "0001-01-01"
         /// </summary>
@@ -284,7 +284,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ResponseDateWithOperationResponseAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ResponseDateWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a post request with header values "scenario": "valid",
         /// "value": "2010-01-01T12:34:56Z" or "scenario": "min", "value":
@@ -303,7 +303,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ParamDatetimeWithOperationResponseAsync(string scenario, DateTime? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ParamDatetimeWithHttpMessagesAsync(string scenario, DateTime? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get a response with header values "2010-01-01T12:34:56Z" or
         /// "0001-01-01T00:00:00Z"
@@ -317,7 +317,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ResponseDatetimeWithOperationResponseAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ResponseDatetimeWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a post request with header values "scenario": "valid",
         /// "value": "啊齄丂狛狜隣郎隣兀﨩"
@@ -334,7 +334,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ParamByteWithOperationResponseAsync(string scenario, byte[] value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ParamByteWithHttpMessagesAsync(string scenario, byte[] value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get a response with header values "啊齄丂狛狜隣郎隣兀﨩"
         /// </summary>
@@ -347,7 +347,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ResponseByteWithOperationResponseAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ResponseByteWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a post request with header values "scenario": "valid",
         /// "value": "GREY" or "scenario": "null", "value": null
@@ -366,7 +366,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ParamEnumWithOperationResponseAsync(string scenario, GreyscaleColors? value = default(GreyscaleColors?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ParamEnumWithHttpMessagesAsync(string scenario, GreyscaleColors? value = default(GreyscaleColors?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get a response with header values "GREY" or null
         /// </summary>
@@ -380,7 +380,7 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ResponseEnumWithOperationResponseAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ResponseEnumWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0
         /// in the header of the request
@@ -391,6 +391,6 @@ namespace Fixtures.SwaggerBatHeader
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> CustomRequestIdWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> CustomRequestIdWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

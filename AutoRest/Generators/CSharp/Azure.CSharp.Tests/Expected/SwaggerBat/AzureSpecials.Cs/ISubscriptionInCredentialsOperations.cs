@@ -24,7 +24,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> PostMethodGlobalValidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> PostMethodGlobalValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// POST method with subscriptionId modeled in credentials.  Set the
         /// credential subscriptionId to null, and client-side validation
@@ -36,7 +36,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> PostMethodGlobalNullWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> PostMethodGlobalNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// POST method with subscriptionId modeled in credentials.  Set the
         /// credential subscriptionId to '1234-5678-9012-3456' to succeed
@@ -47,7 +47,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> PostMethodGlobalNotProvidedValidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> PostMethodGlobalNotProvidedValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// POST method with subscriptionId modeled in credentials.  Set the
         /// credential subscriptionId to '1234-5678-9012-3456' to succeed
@@ -58,7 +58,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> PostPathGlobalValidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> PostPathGlobalValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// POST method with subscriptionId modeled in credentials.  Set the
         /// credential subscriptionId to '1234-5678-9012-3456' to succeed
@@ -69,6 +69,6 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> PostSwaggerGlobalValidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> PostSwaggerGlobalValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

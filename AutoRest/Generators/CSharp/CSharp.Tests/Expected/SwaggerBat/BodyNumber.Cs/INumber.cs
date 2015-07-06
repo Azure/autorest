@@ -22,7 +22,7 @@ namespace Fixtures.SwaggerBatBodyNumber
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<double?>> GetNullWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<double?>> GetNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get invalid float Number value
         /// </summary>
@@ -32,7 +32,7 @@ namespace Fixtures.SwaggerBatBodyNumber
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<double?>> GetInvalidFloatWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<double?>> GetInvalidFloatWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get invalid double Number value
         /// </summary>
@@ -42,7 +42,7 @@ namespace Fixtures.SwaggerBatBodyNumber
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<double?>> GetInvalidDoubleWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<double?>> GetInvalidDoubleWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put big float value 3.402823e+20
         /// </summary>
@@ -54,7 +54,7 @@ namespace Fixtures.SwaggerBatBodyNumber
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> PutBigFloatWithOperationResponseAsync(double? numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutBigFloatWithHttpMessagesAsync(double? numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get big float value 3.402823e+20
         /// </summary>
@@ -64,7 +64,7 @@ namespace Fixtures.SwaggerBatBodyNumber
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<double?>> GetBigFloatWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<double?>> GetBigFloatWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put big double value 2.5976931e+101
         /// </summary>
@@ -76,7 +76,7 @@ namespace Fixtures.SwaggerBatBodyNumber
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> PutBigDoubleWithOperationResponseAsync(double? numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutBigDoubleWithHttpMessagesAsync(double? numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get big double value 2.5976931e+101
         /// </summary>
@@ -86,7 +86,7 @@ namespace Fixtures.SwaggerBatBodyNumber
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<double?>> GetBigDoubleWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<double?>> GetBigDoubleWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put big double value 99999999.99
         /// </summary>
@@ -98,7 +98,7 @@ namespace Fixtures.SwaggerBatBodyNumber
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> PutBigDoublePositiveDecimalWithOperationResponseAsync(double? numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutBigDoublePositiveDecimalWithHttpMessagesAsync(double? numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get big double value 99999999.99
         /// </summary>
@@ -108,7 +108,7 @@ namespace Fixtures.SwaggerBatBodyNumber
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<double?>> GetBigDoublePositiveDecimalWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<double?>> GetBigDoublePositiveDecimalWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put big double value -99999999.99
         /// </summary>
@@ -120,7 +120,7 @@ namespace Fixtures.SwaggerBatBodyNumber
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> PutBigDoubleNegativeDecimalWithOperationResponseAsync(double? numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutBigDoubleNegativeDecimalWithHttpMessagesAsync(double? numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get big double value -99999999.99
         /// </summary>
@@ -130,7 +130,7 @@ namespace Fixtures.SwaggerBatBodyNumber
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<double?>> GetBigDoubleNegativeDecimalWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<double?>> GetBigDoubleNegativeDecimalWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put small float value 3.402823e-20
         /// </summary>
@@ -142,7 +142,7 @@ namespace Fixtures.SwaggerBatBodyNumber
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> PutSmallFloatWithOperationResponseAsync(double? numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutSmallFloatWithHttpMessagesAsync(double? numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get big double value 3.402823e-20
         /// </summary>
@@ -152,7 +152,7 @@ namespace Fixtures.SwaggerBatBodyNumber
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<double?>> GetSmallFloatWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<double?>> GetSmallFloatWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put small double value 2.5976931e-101
         /// </summary>
@@ -164,7 +164,7 @@ namespace Fixtures.SwaggerBatBodyNumber
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> PutSmallDoubleWithOperationResponseAsync(double? numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutSmallDoubleWithHttpMessagesAsync(double? numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get big double value 2.5976931e-101
         /// </summary>
@@ -174,6 +174,6 @@ namespace Fixtures.SwaggerBatBodyNumber
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<double?>> GetSmallDoubleWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<double?>> GetSmallDoubleWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

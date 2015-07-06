@@ -44,13 +44,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> PutNonRetry400WithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> PutNonRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product> response = await BeginPutNonRetry400WithOperationResponseAsync(
+            AzureOperationResponse<Product> response = await BeginPutNonRetry400WithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetNonRetry400WithOperationResponseAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                () => GetNonRetry400WithHttpMessagesAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
                 customHeaders, 
                 cancellationToken);
         }
@@ -67,7 +67,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPutNonRetry400WithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> BeginPutNonRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -172,7 +172,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> GetNonRetry400WithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> GetNonRetry400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -271,13 +271,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> PutNonRetry201Creating400WithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> PutNonRetry201Creating400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product> response = await BeginPutNonRetry201Creating400WithOperationResponseAsync(
+            AzureOperationResponse<Product> response = await BeginPutNonRetry201Creating400WithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetNonRetry201Creating400WithOperationResponseAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                () => GetNonRetry201Creating400WithHttpMessagesAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
                 customHeaders, 
                 cancellationToken);
         }
@@ -295,7 +295,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPutNonRetry201Creating400WithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> BeginPutNonRetry201Creating400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -400,7 +400,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> GetNonRetry201Creating400WithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> GetNonRetry201Creating400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -500,13 +500,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> PutAsyncRelativeRetry400WithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> PutAsyncRelativeRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetry400WithOperationResponseAsync(
+            AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetry400WithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetAsyncRelativeRetry400WithOperationResponseAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                () => GetAsyncRelativeRetry400WithHttpMessagesAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
                 customHeaders, 
                 cancellationToken);
         }
@@ -525,7 +525,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetry400WithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -625,7 +625,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> GetAsyncRelativeRetry400WithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> GetAsyncRelativeRetry400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -720,10 +720,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> DeleteNonRetry400WithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> DeleteNonRetry400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginDeleteNonRetry400WithOperationResponseAsync(
+            AzureOperationResponse response = await BeginDeleteNonRetry400WithHttpMessagesAsync(
                 customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -737,7 +737,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginDeleteNonRetry400WithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginDeleteNonRetry400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -827,10 +827,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> Delete202NonRetry400WithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> Delete202NonRetry400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginDelete202NonRetry400WithOperationResponseAsync(
+            AzureOperationResponse response = await BeginDelete202NonRetry400WithHttpMessagesAsync(
                 customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -844,7 +844,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginDelete202NonRetry400WithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginDelete202NonRetry400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -936,10 +936,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> DeleteAsyncRelativeRetry400WithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> DeleteAsyncRelativeRetry400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginDeleteAsyncRelativeRetry400WithOperationResponseAsync(
+            AzureOperationResponse response = await BeginDeleteAsyncRelativeRetry400WithHttpMessagesAsync(
                 customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -955,7 +955,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginDeleteAsyncRelativeRetry400WithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginDeleteAsyncRelativeRetry400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1048,10 +1048,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> PostNonRetry400WithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> PostNonRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginPostNonRetry400WithOperationResponseAsync(
+            AzureOperationResponse response = await BeginPostNonRetry400WithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -1068,7 +1068,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginPostNonRetry400WithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginPostNonRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1166,10 +1166,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> Post202NonRetry400WithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> Post202NonRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginPost202NonRetry400WithOperationResponseAsync(
+            AzureOperationResponse response = await BeginPost202NonRetry400WithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -1186,7 +1186,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginPost202NonRetry400WithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginPost202NonRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1286,10 +1286,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> PostAsyncRelativeRetry400WithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> PostAsyncRelativeRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginPostAsyncRelativeRetry400WithOperationResponseAsync(
+            AzureOperationResponse response = await BeginPostAsyncRelativeRetry400WithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -1308,7 +1308,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginPostAsyncRelativeRetry400WithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginPostAsyncRelativeRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1407,13 +1407,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> PutError201NoProvisioningStatePayloadWithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> PutError201NoProvisioningStatePayloadWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product> response = await BeginPutError201NoProvisioningStatePayloadWithOperationResponseAsync(
+            AzureOperationResponse<Product> response = await BeginPutError201NoProvisioningStatePayloadWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetError201NoProvisioningStatePayloadWithOperationResponseAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                () => GetError201NoProvisioningStatePayloadWithHttpMessagesAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
                 customHeaders, 
                 cancellationToken);
         }
@@ -1431,7 +1431,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPutError201NoProvisioningStatePayloadWithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> BeginPutError201NoProvisioningStatePayloadWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1536,7 +1536,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> GetError201NoProvisioningStatePayloadWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> GetError201NoProvisioningStatePayloadWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1636,13 +1636,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> PutAsyncRelativeRetryNoStatusWithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> PutAsyncRelativeRetryNoStatusWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetryNoStatusWithOperationResponseAsync(
+            AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetryNoStatusWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetAsyncRelativeRetryNoStatusWithOperationResponseAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                () => GetAsyncRelativeRetryNoStatusWithHttpMessagesAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
                 customHeaders, 
                 cancellationToken);
         }
@@ -1661,7 +1661,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryNoStatusWithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryNoStatusWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1763,7 +1763,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> GetAsyncRelativeRetryNoStatusWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> GetAsyncRelativeRetryNoStatusWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1863,13 +1863,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> PutAsyncRelativeRetryNoStatusPayloadWithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> PutAsyncRelativeRetryNoStatusPayloadWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetryNoStatusPayloadWithOperationResponseAsync(
+            AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetryNoStatusPayloadWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetAsyncRelativeRetryNoStatusPayloadWithOperationResponseAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                () => GetAsyncRelativeRetryNoStatusPayloadWithHttpMessagesAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
                 customHeaders, 
                 cancellationToken);
         }
@@ -1888,7 +1888,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryNoStatusPayloadWithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryNoStatusPayloadWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1990,7 +1990,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> GetAsyncRelativeRetryNoStatusPayloadWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> GetAsyncRelativeRetryNoStatusPayloadWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2086,10 +2086,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> Delete204SucceededWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> Delete204SucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginDelete204SucceededWithOperationResponseAsync(
+            AzureOperationResponse response = await BeginDelete204SucceededWithHttpMessagesAsync(
                 customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -2104,7 +2104,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginDelete204SucceededWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginDelete204SucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2196,10 +2196,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> DeleteAsyncRelativeRetryNoStatusWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> DeleteAsyncRelativeRetryNoStatusWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginDeleteAsyncRelativeRetryNoStatusWithOperationResponseAsync(
+            AzureOperationResponse response = await BeginDeleteAsyncRelativeRetryNoStatusWithHttpMessagesAsync(
                 customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -2215,7 +2215,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginDeleteAsyncRelativeRetryNoStatusWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginDeleteAsyncRelativeRetryNoStatusWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2309,10 +2309,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> Post202NoLocationWithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> Post202NoLocationWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginPost202NoLocationWithOperationResponseAsync(
+            AzureOperationResponse response = await BeginPost202NoLocationWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -2330,7 +2330,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginPost202NoLocationWithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginPost202NoLocationWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2430,10 +2430,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> PostAsyncRelativeRetryNoPayloadWithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> PostAsyncRelativeRetryNoPayloadWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginPostAsyncRelativeRetryNoPayloadWithOperationResponseAsync(
+            AzureOperationResponse response = await BeginPostAsyncRelativeRetryNoPayloadWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -2452,7 +2452,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginPostAsyncRelativeRetryNoPayloadWithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginPostAsyncRelativeRetryNoPayloadWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2551,13 +2551,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> Put200InvalidJsonWithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> Put200InvalidJsonWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product> response = await BeginPut200InvalidJsonWithOperationResponseAsync(
+            AzureOperationResponse<Product> response = await BeginPut200InvalidJsonWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => Get200SucceededWithOperationResponseAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                () => Get200SucceededWithHttpMessagesAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
                 customHeaders, 
                 cancellationToken);
         }
@@ -2575,7 +2575,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPut200InvalidJsonWithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> BeginPut200InvalidJsonWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2675,7 +2675,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> Get200SucceededWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> Get200SucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2775,13 +2775,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> PutAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> PutAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(
+            AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                () => GetAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
                 customHeaders, 
                 cancellationToken);
         }
@@ -2800,7 +2800,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2900,7 +2900,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> GetAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> GetAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -3000,13 +3000,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> PutAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> PutAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(
+            AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                () => GetAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
                 customHeaders, 
                 cancellationToken);
         }
@@ -3025,7 +3025,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -3127,7 +3127,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> GetAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> GetAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -3223,10 +3223,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> Delete202RetryInvalidHeaderWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> Delete202RetryInvalidHeaderWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginDelete202RetryInvalidHeaderWithOperationResponseAsync(
+            AzureOperationResponse response = await BeginDelete202RetryInvalidHeaderWithHttpMessagesAsync(
                 customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -3241,7 +3241,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginDelete202RetryInvalidHeaderWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginDelete202RetryInvalidHeaderWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -3332,10 +3332,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> DeleteAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> DeleteAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginDeleteAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(
+            AzureOperationResponse response = await BeginDeleteAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(
                 customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -3350,7 +3350,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginDeleteAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginDeleteAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -3442,10 +3442,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> DeleteAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> DeleteAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginDeleteAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(
+            AzureOperationResponse response = await BeginDeleteAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(
                 customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -3461,7 +3461,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginDeleteAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginDeleteAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -3555,10 +3555,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> Post202RetryInvalidHeaderWithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> Post202RetryInvalidHeaderWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginPost202RetryInvalidHeaderWithOperationResponseAsync(
+            AzureOperationResponse response = await BeginPost202RetryInvalidHeaderWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -3576,7 +3576,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginPost202RetryInvalidHeaderWithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginPost202RetryInvalidHeaderWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -3676,10 +3676,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> PostAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> PostAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginPostAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(
+            AzureOperationResponse response = await BeginPostAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -3698,7 +3698,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginPostAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginPostAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -3798,10 +3798,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> PostAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> PostAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginPostAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(
+            AzureOperationResponse response = await BeginPostAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -3820,7 +3820,7 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginPostAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginPostAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;

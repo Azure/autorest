@@ -184,9 +184,9 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("WithOperationResponseAsync(");
+            WriteLiteral("WithHttpMessagesAsync(");
 #line 51 "ServiceClientInterfaceTemplate.cshtml"
-                                                                                                 Write(method.GetAsyncMethodParameterDeclaration(true));
+                                                                                            Write(method.GetAsyncMethodParameterDeclaration(true));
 
 #line default
 #line hidden

@@ -28,7 +28,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> GetMethodLocalValidWithOperationResponseAsync(string apiVersion, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> GetMethodLocalValidWithHttpMessagesAsync(string apiVersion, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get method with api-version modeled in the method.  pass in
         /// api-version = null to succeed
@@ -43,7 +43,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> GetMethodLocalNullWithOperationResponseAsync(string apiVersion = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> GetMethodLocalNullWithHttpMessagesAsync(string apiVersion = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get method with api-version modeled in the method.  pass in
         /// api-version = '2.0' to succeed
@@ -58,7 +58,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> GetPathLocalValidWithOperationResponseAsync(string apiVersion, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> GetPathLocalValidWithHttpMessagesAsync(string apiVersion, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get method with api-version modeled in the method.  pass in
         /// api-version = '2.0' to succeed
@@ -73,6 +73,6 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> GetSwaggerLocalValidWithOperationResponseAsync(string apiVersion, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> GetSwaggerLocalValidWithHttpMessagesAsync(string apiVersion, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

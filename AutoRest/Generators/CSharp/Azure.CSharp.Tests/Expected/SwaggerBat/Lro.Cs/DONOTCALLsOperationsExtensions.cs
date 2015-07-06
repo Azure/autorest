@@ -35,7 +35,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// </param>
             public static async Task<Product> GetProvisioning202Accepted200SucceededAsync( this IDONOTCALLsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.GetProvisioning202Accepted200SucceededWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<Product> result = await operations.GetProvisioning202Accepted200SucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -63,7 +63,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// </param>
             public static async Task<Product> GetProvisioning202Deleting200FailedAsync( this IDONOTCALLsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.GetProvisioning202Deleting200FailedWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<Product> result = await operations.GetProvisioning202Deleting200FailedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -91,7 +91,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// </param>
             public static async Task<Product> GetProvisioning202Deleting200canceledAsync( this IDONOTCALLsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.GetProvisioning202Deleting200canceledWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<Product> result = await operations.GetProvisioning202Deleting200canceledWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -119,7 +119,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// </param>
             public static async Task GetDelete202Retry200Async( this IDONOTCALLsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetDelete202Retry200WithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                await operations.GetDelete202Retry200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -146,7 +146,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// </param>
             public static async Task Get202NoRetry204Async( this IDONOTCALLsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Get202NoRetry204WithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                await operations.Get202NoRetry204WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -173,7 +173,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// </param>
             public static async Task<Product> Post202Retry200PollingAsync( this IDONOTCALLsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.Post202Retry200PollingWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<Product> result = await operations.Post202Retry200PollingWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -201,7 +201,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// </param>
             public static async Task Post202NoRetry204PollingAsync( this IDONOTCALLsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Post202NoRetry204PollingWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                await operations.Post202NoRetry204PollingWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -228,7 +228,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// </param>
             public static async Task<Product> GetRetryProvisioning202Accepted200SucceededAsync( this IDONOTCALLsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.GetRetryProvisioning202Accepted200SucceededWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<Product> result = await operations.GetRetryProvisioning202Accepted200SucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -256,7 +256,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// </param>
             public static async Task GetRetry202Retry200Async( this IDONOTCALLsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetRetry202Retry200WithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                await operations.GetRetry202Retry200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -285,7 +285,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// </param>
             public static async Task<Product> PostRetry202Retry200PollingAsync( this IDONOTCALLsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.PostRetry202Retry200PollingWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<Product> result = await operations.PostRetry202Retry200PollingWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -311,7 +311,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// </param>
             public static async Task GetNonRetry400Async( this IDONOTCALLsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetNonRetry400WithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                await operations.GetNonRetry400WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -336,7 +336,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// </param>
             public static async Task GetRetry202NonRetry400Async( this IDONOTCALLsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetRetry202NonRetry400WithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                await operations.GetRetry202NonRetry400WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -365,7 +365,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// </param>
             public static async Task<Product> PostRetry202Retry400PollingAsync( this IDONOTCALLsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.PostRetry202Retry400PollingWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<Product> result = await operations.PostRetry202Retry400PollingWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -391,7 +391,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// </param>
             public static async Task<Product> PostRetry202NonRetry400PollingAsync( this IDONOTCALLsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.PostRetry202NonRetry400PollingWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<Product> result = await operations.PostRetry202NonRetry400PollingWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -419,7 +419,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// </param>
             public static async Task<Product> Post202Retry200PollingCustomHeaderAsync( this IDONOTCALLsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.Post202Retry200PollingCustomHeaderWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<Product> result = await operations.Post202Retry200PollingCustomHeaderWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

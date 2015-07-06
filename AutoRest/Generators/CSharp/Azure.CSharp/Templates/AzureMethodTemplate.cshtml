@@ -30,10 +30,10 @@ else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.D
 @:/// Cancellation token.
 @:/// </param>
 <text>
-public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithOperationResponseAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
+public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
     // Send request
-    @(Model.OperationResponseReturnTypeString) response = await Begin@(Model.Name)WithOperationResponseAsync(
+    @(Model.OperationResponseReturnTypeString) response = await Begin@(Model.Name)WithHttpMessagesAsync(
         @(Model.GetAsyncMethodInvocationArgs("customHeaders")));
 
     return await @(Model.ClientReference).GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
@@ -58,14 +58,14 @@ else if (Model.HttpMethod == HttpMethod.Put)
 @:/// Cancellation token.
 @:/// </param>
 <text>
-public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithOperationResponseAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
+public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
     // Send Request
-    @(Model.OperationResponseReturnTypeString) response = await Begin@(Model.Name)WithOperationResponseAsync(
+    @(Model.OperationResponseReturnTypeString) response = await Begin@(Model.Name)WithHttpMessagesAsync(
         @(Model.GetAsyncMethodInvocationArgs("customHeaders")));
 
     return await @(Model.ClientReference).GetPutOperationResultAsync<@(Model.ReturnType.Name)>(response, 
-        () => @(Model.GetMethod.Name)WithOperationResponseAsync(@(Model.GetMethodInvocationArgs(Model.GetMethod))),
+        () => @(Model.GetMethod.Name)WithHttpMessagesAsync(@(Model.GetMethodInvocationArgs(Model.GetMethod))),
         customHeaders, 
         cancellationToken);
 }

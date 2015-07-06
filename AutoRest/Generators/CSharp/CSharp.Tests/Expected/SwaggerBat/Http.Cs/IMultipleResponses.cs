@@ -22,7 +22,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<A>> Get200Model204NoModelDefaultError200ValidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<A>> Get200Model204NoModelDefaultError200ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 204 response with no payload
         /// </summary>
@@ -32,7 +32,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<A>> Get200Model204NoModelDefaultError204ValidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<A>> Get200Model204NoModelDefaultError204ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 201 response with valid payload: {'statusCode': '201'}
         /// </summary>
@@ -42,7 +42,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<A>> Get200Model204NoModelDefaultError201InvalidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<A>> Get200Model204NoModelDefaultError201InvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 202 response with no payload:
         /// </summary>
@@ -52,7 +52,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<A>> Get200Model204NoModelDefaultError202NoneWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<A>> Get200Model204NoModelDefaultError202NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 400 response with valid error payload: {'status': 400,
         /// 'message': 'client error'}
@@ -63,7 +63,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<A>> Get200Model204NoModelDefaultError400ValidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<A>> Get200Model204NoModelDefaultError400ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 200 response with valid payload: {'statusCode': '200'}
         /// </summary>
@@ -73,7 +73,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<A>> Get200Model201ModelDefaultError200ValidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<A>> Get200Model201ModelDefaultError200ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 201 response with valid payload: {'statusCode': '201',
         /// 'textStatusCode': 'Created'}
@@ -84,7 +84,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<A>> Get200Model201ModelDefaultError201ValidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<A>> Get200Model201ModelDefaultError201ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 400 response with valid payload: {'code': '400', 'message':
         /// 'client error'}
@@ -95,7 +95,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<A>> Get200Model201ModelDefaultError400ValidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<A>> Get200Model201ModelDefaultError400ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 200 response with valid payload: {'statusCode': '200'}
         /// </summary>
@@ -105,7 +105,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<object>> Get200ModelA201ModelC404ModelDDefaultError200ValidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<object>> Get200ModelA201ModelC404ModelDDefaultError200ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 200 response with valid payload: {'httpCode': '201'}
         /// </summary>
@@ -115,7 +115,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<object>> Get200ModelA201ModelC404ModelDDefaultError201ValidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<object>> Get200ModelA201ModelC404ModelDDefaultError201ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 200 response with valid payload: {'httpStatusCode': '404'}
         /// </summary>
@@ -125,7 +125,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<object>> Get200ModelA201ModelC404ModelDDefaultError404ValidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<object>> Get200ModelA201ModelC404ModelDDefaultError404ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 400 response with valid payload: {'code': '400', 'message':
         /// 'client error'}
@@ -136,7 +136,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<object>> Get200ModelA201ModelC404ModelDDefaultError400ValidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<object>> Get200ModelA201ModelC404ModelDDefaultError400ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 202 response with no payload
         /// </summary>
@@ -146,7 +146,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> Get202None204NoneDefaultError202NoneWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> Get202None204NoneDefaultError202NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 204 response with no payload
         /// </summary>
@@ -156,7 +156,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> Get202None204NoneDefaultError204NoneWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> Get202None204NoneDefaultError204NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 400 response with valid payload: {'code': '400', 'message':
         /// 'client error'}
@@ -167,7 +167,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> Get202None204NoneDefaultError400ValidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> Get202None204NoneDefaultError400ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 202 response with an unexpected payload {'property':
         /// 'value'}
@@ -178,7 +178,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> Get202None204NoneDefaultNone202InvalidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> Get202None204NoneDefaultNone202InvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 204 response with no payload
         /// </summary>
@@ -188,7 +188,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> Get202None204NoneDefaultNone204NoneWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> Get202None204NoneDefaultNone204NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 400 response with no payload
         /// </summary>
@@ -198,7 +198,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> Get202None204NoneDefaultNone400NoneWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> Get202None204NoneDefaultNone400NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 400 response with an unexpected payload {'property':
         /// 'value'}
@@ -209,7 +209,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> Get202None204NoneDefaultNone400InvalidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> Get202None204NoneDefaultNone400InvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 200 response with valid payload: {'statusCode': '200'}
         /// </summary>
@@ -219,7 +219,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<A>> GetDefaultModelA200ValidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<A>> GetDefaultModelA200ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 200 response with no payload
         /// </summary>
@@ -229,7 +229,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<A>> GetDefaultModelA200NoneWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<A>> GetDefaultModelA200NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 400 response with valid payload: {'statusCode': '400'}
         /// </summary>
@@ -239,7 +239,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<A>> GetDefaultModelA400ValidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<A>> GetDefaultModelA400ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 400 response with no payload
         /// </summary>
@@ -249,7 +249,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<A>> GetDefaultModelA400NoneWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<A>> GetDefaultModelA400NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 200 response with invalid payload: {'statusCode': '200'}
         /// </summary>
@@ -259,7 +259,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> GetDefaultNone200InvalidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> GetDefaultNone200InvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 200 response with no payload
         /// </summary>
@@ -269,7 +269,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> GetDefaultNone200NoneWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> GetDefaultNone200NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 400 response with valid payload: {'statusCode': '400'}
         /// </summary>
@@ -279,7 +279,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> GetDefaultNone400InvalidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> GetDefaultNone400InvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 400 response with no payload
         /// </summary>
@@ -289,7 +289,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> GetDefaultNone400NoneWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> GetDefaultNone400NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 200 response with no payload, when a payload is expected -
         /// client should return a null object of thde type for model A
@@ -300,7 +300,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<A>> Get200ModelA200NoneWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<A>> Get200ModelA200NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 200 response with payload {'statusCode': '200'}
         /// </summary>
@@ -310,7 +310,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<A>> Get200ModelA200ValidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<A>> Get200ModelA200ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 200 response with invalid payload {'statusCodeInvalid':
         /// '200'}
@@ -321,7 +321,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<A>> Get200ModelA200InvalidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<A>> Get200ModelA200InvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 400 response with no payload client should treat as an http
         /// error with no error model
@@ -332,7 +332,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<A>> Get200ModelA400NoneWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<A>> Get200ModelA400NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 200 response with payload {'statusCode': '400'}
         /// </summary>
@@ -342,7 +342,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<A>> Get200ModelA400ValidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<A>> Get200ModelA400ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 200 response with invalid payload {'statusCodeInvalid':
         /// '400'}
@@ -353,7 +353,7 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<A>> Get200ModelA400InvalidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<A>> Get200ModelA400InvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 202 response with payload {'statusCode': '202'}
         /// </summary>
@@ -363,6 +363,6 @@ namespace Fixtures.SwaggerBatHttp
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<A>> Get200ModelA202ValidWithOperationResponseAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<A>> Get200ModelA202ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

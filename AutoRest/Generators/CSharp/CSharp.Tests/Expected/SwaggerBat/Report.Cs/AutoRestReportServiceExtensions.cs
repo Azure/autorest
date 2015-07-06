@@ -32,7 +32,7 @@ namespace Fixtures.SwaggerBatReport
             /// </param>
             public static async Task<IDictionary<string, int?>> GetReportAsync( this IAutoRestReportService operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, int?>> result = await operations.GetReportWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, int?>> result = await operations.GetReportWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

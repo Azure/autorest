@@ -32,7 +32,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// </param>
             public static async Task<Fish> GetValidAsync( this IPolymorphicrecursive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<Fish> result = await operations.GetValidWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<Fish> result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -168,7 +168,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// </param>
             public static async Task PutValidAsync( this IPolymorphicrecursive operations, Fish complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutValidWithOperationResponseAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                await operations.PutValidWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
 
     }

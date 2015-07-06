@@ -616,7 +616,7 @@ namespace Microsoft.Azure.Management.Redis
         /// </param>
         public static async Task<Sku> BeginCreateOrUpdateNonResourceAsync(this IRedisOperations operations, string resourceGroupName, string name, RedisCreateOrUpdateParameters parameters, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            AzureOperationResponse<Sku> result = await operations.BeginCreateOrUpdateNonResourceWithOperationResponseAsync(resourceGroupName, name, parameters, subscriptionId, cancellationToken).ConfigureAwait(false);
+            AzureOperationResponse<Sku> result = await operations.BeginCreateOrUpdateNonResourceWithHttpMessagesAsync(resourceGroupName, name, parameters, subscriptionId, cancellationToken).ConfigureAwait(false);
             return result.Body;
         }
 
@@ -644,7 +644,7 @@ namespace Microsoft.Azure.Management.Redis
         /// </param>
         public static async Task<RedisSubResource> BeginCreateOrUpdateSubResourceAsync(this IRedisOperations operations, string resourceGroupName, string name, RedisCreateOrUpdateParameters parameters, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            AzureOperationResponse<RedisSubResource> result = await operations.BeginCreateOrUpdateSubResourceWithOperationResponseAsync(resourceGroupName, name, parameters, subscriptionId, cancellationToken).ConfigureAwait(false);
+            AzureOperationResponse<RedisSubResource> result = await operations.BeginCreateOrUpdateSubResourceWithHttpMessagesAsync(resourceGroupName, name, parameters, subscriptionId, cancellationToken).ConfigureAwait(false);
             return result.Body;
         }
 
@@ -672,7 +672,7 @@ namespace Microsoft.Azure.Management.Redis
         /// </param>
         public static async Task<RedisResource> BeginCreateOrUpdateAsync(this IRedisOperations operations, string resourceGroupName, string name, RedisCreateOrUpdateParameters parameters, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            AzureOperationResponse<RedisResource> result = await operations.BeginCreateOrUpdateWithOperationResponseAsync(resourceGroupName, name, parameters, subscriptionId, cancellationToken).ConfigureAwait(false);
+            AzureOperationResponse<RedisResource> result = await operations.BeginCreateOrUpdateWithHttpMessagesAsync(resourceGroupName, name, parameters, subscriptionId, cancellationToken).ConfigureAwait(false);
             return result.Body;
         }
 
@@ -784,7 +784,7 @@ namespace Microsoft.Azure.Management.Redis
         /// </param>
         public static async Task<RedisResource> CreateOrUpdateAsync(this IRedisOperations operations, string resourceGroupName, string name, RedisCreateOrUpdateParameters parameters, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            AzureOperationResponse<RedisResource> result = await operations.CreateOrUpdateWithOperationResponseAsync(resourceGroupName, name, parameters, subscriptionId, cancellationToken).ConfigureAwait(false);
+            AzureOperationResponse<RedisResource> result = await operations.CreateOrUpdateWithHttpMessagesAsync(resourceGroupName, name, parameters, subscriptionId, cancellationToken).ConfigureAwait(false);
             return result.Body;
         }
 
@@ -812,7 +812,7 @@ namespace Microsoft.Azure.Management.Redis
         /// </param>
         public static async Task<Sku> CreateOrUpdateNonResourceAsync(this IRedisOperations operations, string resourceGroupName, string name, RedisCreateOrUpdateParameters parameters, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            AzureOperationResponse<Sku> result = await operations.CreateOrUpdateNonResourceWithOperationResponseAsync(resourceGroupName, name, parameters, subscriptionId, cancellationToken).ConfigureAwait(false);
+            AzureOperationResponse<Sku> result = await operations.CreateOrUpdateNonResourceWithHttpMessagesAsync(resourceGroupName, name, parameters, subscriptionId, cancellationToken).ConfigureAwait(false);
             return result.Body;
         }
 
@@ -840,7 +840,7 @@ namespace Microsoft.Azure.Management.Redis
         /// </param>
         public static async Task<RedisSubResource> CreateOrUpdateSubResourceAsync(this IRedisOperations operations, string resourceGroupName, string name, RedisCreateOrUpdateParameters parameters, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            AzureOperationResponse<RedisSubResource> result = await operations.CreateOrUpdateSubResourceWithOperationResponseAsync(resourceGroupName, name, parameters, subscriptionId, cancellationToken).ConfigureAwait(false);
+            AzureOperationResponse<RedisSubResource> result = await operations.CreateOrUpdateSubResourceWithHttpMessagesAsync(resourceGroupName, name, parameters, subscriptionId, cancellationToken).ConfigureAwait(false);
             return result.Body;
         }
 
@@ -897,12 +897,12 @@ namespace Microsoft.Azure.Management.Redis
         /// </param>
         public static async Task BeginDeleteAsync(this IRedisOperations operations, string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            AzureOperationResponse result = await operations.BeginDeleteWithOperationResponseAsync(resourceGroupName, name, subscriptionId, cancellationToken).ConfigureAwait(false);
+            AzureOperationResponse result = await operations.BeginDeleteWithHttpMessagesAsync(resourceGroupName, name, subscriptionId, cancellationToken).ConfigureAwait(false);
             return;
         }
         public static async Task DeleteAsync(this IRedisOperations operations, string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            AzureOperationResponse result = await operations.DeleteWithOperationResponseAsync(resourceGroupName, name, subscriptionId, cancellationToken).ConfigureAwait(false);
+            AzureOperationResponse result = await operations.DeleteWithHttpMessagesAsync(resourceGroupName, name, subscriptionId, cancellationToken).ConfigureAwait(false);
             return;
         }
 
@@ -925,12 +925,12 @@ namespace Microsoft.Azure.Management.Redis
         }
         public static async Task<Sku> BeginPostAsync(this IRedisOperations operations, string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            AzureOperationResponse<Sku> result = await operations.BeginPostWithOperationResponseAsync(resourceGroupName, name, subscriptionId, cancellationToken).ConfigureAwait(false);
+            AzureOperationResponse<Sku> result = await operations.BeginPostWithHttpMessagesAsync(resourceGroupName, name, subscriptionId, cancellationToken).ConfigureAwait(false);
             return result.Body;
         }
         public static async Task<Sku> PostAsync(this IRedisOperations operations, string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            AzureOperationResponse<Sku> result = await operations.PostWithOperationResponseAsync(resourceGroupName, name, subscriptionId, cancellationToken).ConfigureAwait(false);
+            AzureOperationResponse<Sku> result = await operations.PostWithHttpMessagesAsync(resourceGroupName, name, subscriptionId, cancellationToken).ConfigureAwait(false);
             return result.Body;
         }
 
@@ -979,7 +979,7 @@ namespace Microsoft.Azure.Management.Redis
         /// </param>
         public static async Task<RedisResource> GetAsync(this IRedisOperations operations, string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            AzureOperationResponse<RedisResource> result = await operations.GetWithOperationResponseAsync(resourceGroupName, name, subscriptionId, cancellationToken).ConfigureAwait(false);
+            AzureOperationResponse<RedisResource> result = await operations.GetWithHttpMessagesAsync(resourceGroupName, name, subscriptionId, cancellationToken).ConfigureAwait(false);
             return result.Body;
         }
     }
@@ -1005,9 +1005,9 @@ namespace Microsoft.Azure.Management.Redis
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<RedisResource>> BeginCreateOrUpdateWithOperationResponseAsync(string resourceGroupName, string name, RedisCreateOrUpdateParameters parameters, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<AzureOperationResponse<RedisResource>> BeginCreateOrUpdateWithHttpMessagesAsync(string resourceGroupName, string name, RedisCreateOrUpdateParameters parameters, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         
-        Task<AzureOperationResponse<RedisResource>> CreateOrUpdateWithOperationResponseAsync(string resourceGroupName, string name, RedisCreateOrUpdateParameters parameters, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<AzureOperationResponse<RedisResource>> CreateOrUpdateWithHttpMessagesAsync(string resourceGroupName, string name, RedisCreateOrUpdateParameters parameters, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Create a redis cache, or replace (overwrite/recreate, with
@@ -1028,9 +1028,9 @@ namespace Microsoft.Azure.Management.Redis
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<RedisSubResource>> BeginCreateOrUpdateSubResourceWithOperationResponseAsync(string resourceGroupName, string name, RedisCreateOrUpdateParameters parameters, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<AzureOperationResponse<RedisSubResource>> BeginCreateOrUpdateSubResourceWithHttpMessagesAsync(string resourceGroupName, string name, RedisCreateOrUpdateParameters parameters, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
-        Task<AzureOperationResponse<RedisSubResource>> CreateOrUpdateSubResourceWithOperationResponseAsync(string resourceGroupName, string name, RedisCreateOrUpdateParameters parameters, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<AzureOperationResponse<RedisSubResource>> CreateOrUpdateSubResourceWithHttpMessagesAsync(string resourceGroupName, string name, RedisCreateOrUpdateParameters parameters, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Create a redis cache, or replace (overwrite/recreate, with
@@ -1051,9 +1051,9 @@ namespace Microsoft.Azure.Management.Redis
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<Sku>> BeginCreateOrUpdateNonResourceWithOperationResponseAsync(string resourceGroupName, string name, RedisCreateOrUpdateParameters parameters, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<AzureOperationResponse<Sku>> BeginCreateOrUpdateNonResourceWithHttpMessagesAsync(string resourceGroupName, string name, RedisCreateOrUpdateParameters parameters, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
-        Task<AzureOperationResponse<Sku>> CreateOrUpdateNonResourceWithOperationResponseAsync(string resourceGroupName, string name, RedisCreateOrUpdateParameters parameters, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<AzureOperationResponse<Sku>> CreateOrUpdateNonResourceWithHttpMessagesAsync(string resourceGroupName, string name, RedisCreateOrUpdateParameters parameters, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Deletes a redis cache. This operation takes a while to complete.
@@ -1070,8 +1070,8 @@ namespace Microsoft.Azure.Management.Redis
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> BeginDeleteWithOperationResponseAsync(string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-        Task<AzureOperationResponse> DeleteWithOperationResponseAsync(string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<AzureOperationResponse> BeginDeleteWithHttpMessagesAsync(string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<AzureOperationResponse> DeleteWithHttpMessagesAsync(string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Gets a redis cache (resource description).
@@ -1088,10 +1088,10 @@ namespace Microsoft.Azure.Management.Redis
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<RedisResource>> GetWithOperationResponseAsync(string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<AzureOperationResponse<RedisResource>> GetWithHttpMessagesAsync(string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
-        Task<AzureOperationResponse<Sku>> BeginPostWithOperationResponseAsync(string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-        Task<AzureOperationResponse<Sku>> PostWithOperationResponseAsync(string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<AzureOperationResponse<Sku>> BeginPostWithHttpMessagesAsync(string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<AzureOperationResponse<Sku>> PostWithHttpMessagesAsync(string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     }
 
     internal partial class RedisOperations : IServiceOperations<RedisManagementClient>, IRedisOperations
@@ -1137,7 +1137,7 @@ namespace Microsoft.Azure.Management.Redis
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<RedisResource>> BeginCreateOrUpdateWithOperationResponseAsync(string resourceGroupName, string name, RedisCreateOrUpdateParameters parameters, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<AzureOperationResponse<RedisResource>> BeginCreateOrUpdateWithHttpMessagesAsync(string resourceGroupName, string name, RedisCreateOrUpdateParameters parameters, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Validate
             if (resourceGroupName == null)
@@ -1262,10 +1262,10 @@ namespace Microsoft.Azure.Management.Redis
             return result;
         }
 
-        public async Task<AzureOperationResponse<RedisResource>> CreateOrUpdateWithOperationResponseAsync(string resourceGroupName, string name, RedisCreateOrUpdateParameters parameters, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<AzureOperationResponse<RedisResource>> CreateOrUpdateWithHttpMessagesAsync(string resourceGroupName, string name, RedisCreateOrUpdateParameters parameters, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<RedisResource> response = await BeginCreateOrUpdateWithOperationResponseAsync(
+            AzureOperationResponse<RedisResource> response = await BeginCreateOrUpdateWithHttpMessagesAsync(
                 resourceGroupName,
                 name,
                 parameters,
@@ -1277,7 +1277,7 @@ namespace Microsoft.Azure.Management.Redis
                          response.Response.StatusCode == HttpStatusCode.Accepted);
 
             return await this.Client.GetPutOperationResultAsync(response, 
-                () => GetWithOperationResponseAsync(resourceGroupName, name, subscriptionId, cancellationToken),
+                () => GetWithHttpMessagesAsync(resourceGroupName, name, subscriptionId, cancellationToken),
                 null,
                 cancellationToken);
         }
@@ -1301,7 +1301,7 @@ namespace Microsoft.Azure.Management.Redis
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Sku>> BeginCreateOrUpdateNonResourceWithOperationResponseAsync(string resourceGroupName, string name, RedisCreateOrUpdateParameters parameters, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<AzureOperationResponse<Sku>> BeginCreateOrUpdateNonResourceWithHttpMessagesAsync(string resourceGroupName, string name, RedisCreateOrUpdateParameters parameters, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Validate
             if (resourceGroupName == null)
@@ -1426,10 +1426,10 @@ namespace Microsoft.Azure.Management.Redis
             return result;
         }
 
-        public async Task<AzureOperationResponse<Sku>> CreateOrUpdateNonResourceWithOperationResponseAsync(string resourceGroupName, string name, RedisCreateOrUpdateParameters parameters, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<AzureOperationResponse<Sku>> CreateOrUpdateNonResourceWithHttpMessagesAsync(string resourceGroupName, string name, RedisCreateOrUpdateParameters parameters, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Sku> response = await BeginCreateOrUpdateNonResourceWithOperationResponseAsync(
+            AzureOperationResponse<Sku> response = await BeginCreateOrUpdateNonResourceWithHttpMessagesAsync(
                 resourceGroupName,
                 name,
                 parameters,
@@ -1441,7 +1441,7 @@ namespace Microsoft.Azure.Management.Redis
                          response.Response.StatusCode == HttpStatusCode.Accepted);
 
             return await this.Client.GetPutOperationResultAsync(response,
-                () => GetSkuWithOperationResponseAsync(resourceGroupName, name, subscriptionId, cancellationToken),
+                () => GetSkuWithHttpMessagesAsync(resourceGroupName, name, subscriptionId, cancellationToken),
                 null,
                 cancellationToken);
         }
@@ -1465,7 +1465,7 @@ namespace Microsoft.Azure.Management.Redis
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<RedisSubResource>> BeginCreateOrUpdateSubResourceWithOperationResponseAsync(string resourceGroupName, string name, RedisCreateOrUpdateParameters parameters, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<AzureOperationResponse<RedisSubResource>> BeginCreateOrUpdateSubResourceWithHttpMessagesAsync(string resourceGroupName, string name, RedisCreateOrUpdateParameters parameters, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Validate
             if (resourceGroupName == null)
@@ -1590,10 +1590,10 @@ namespace Microsoft.Azure.Management.Redis
             return result;
         }
 
-        public async Task<AzureOperationResponse<RedisSubResource>> CreateOrUpdateSubResourceWithOperationResponseAsync(string resourceGroupName, string name, RedisCreateOrUpdateParameters parameters, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<AzureOperationResponse<RedisSubResource>> CreateOrUpdateSubResourceWithHttpMessagesAsync(string resourceGroupName, string name, RedisCreateOrUpdateParameters parameters, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<RedisSubResource> response = await BeginCreateOrUpdateSubResourceWithOperationResponseAsync(
+            AzureOperationResponse<RedisSubResource> response = await BeginCreateOrUpdateSubResourceWithHttpMessagesAsync(
                 resourceGroupName,
                 name,
                 parameters,
@@ -1605,7 +1605,7 @@ namespace Microsoft.Azure.Management.Redis
                          response.Response.StatusCode == HttpStatusCode.Accepted);
 
             return await this.Client.GetPutOperationResultAsync(response,
-                () => GetSubResourceWithOperationResponseAsync(resourceGroupName, name, subscriptionId, cancellationToken),
+                () => GetSubResourceWithHttpMessagesAsync(resourceGroupName, name, subscriptionId, cancellationToken),
                 null,
                 cancellationToken);
         }
@@ -1625,7 +1625,7 @@ namespace Microsoft.Azure.Management.Redis
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginDeleteWithOperationResponseAsync(string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<AzureOperationResponse> BeginDeleteWithHttpMessagesAsync(string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Validate
             if (resourceGroupName == null)
@@ -1731,14 +1731,14 @@ namespace Microsoft.Azure.Management.Redis
             return result;
         }
 
-        public async Task<AzureOperationResponse> DeleteWithOperationResponseAsync(
+        public async Task<AzureOperationResponse> DeleteWithHttpMessagesAsync(
             string resourceGroupName, 
             string name, 
             string subscriptionId,
             CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Send Request
-            AzureOperationResponse response = await BeginDeleteWithOperationResponseAsync(
+            AzureOperationResponse response = await BeginDeleteWithHttpMessagesAsync(
                 resourceGroupName,
                 name,
                 subscriptionId,
@@ -1752,7 +1752,7 @@ namespace Microsoft.Azure.Management.Redis
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, null, cancellationToken);
         }
 
-        public async Task<AzureOperationResponse<Sku>> BeginPostWithOperationResponseAsync(string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<AzureOperationResponse<Sku>> BeginPostWithHttpMessagesAsync(string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Validate
             if (resourceGroupName == null)
@@ -1858,14 +1858,14 @@ namespace Microsoft.Azure.Management.Redis
             return result;
         }
 
-        public async Task<AzureOperationResponse<Sku>> PostWithOperationResponseAsync(
+        public async Task<AzureOperationResponse<Sku>> PostWithHttpMessagesAsync(
             string resourceGroupName,
             string name,
             string subscriptionId,
             CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Sku> response = await BeginPostWithOperationResponseAsync(
+            AzureOperationResponse<Sku> response = await BeginPostWithHttpMessagesAsync(
                 resourceGroupName,
                 name,
                 subscriptionId,
@@ -1895,7 +1895,7 @@ namespace Microsoft.Azure.Management.Redis
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<RedisResource>> GetWithOperationResponseAsync(string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<AzureOperationResponse<RedisResource>> GetWithHttpMessagesAsync(string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Validate
             if (resourceGroupName == null)
@@ -2022,7 +2022,7 @@ namespace Microsoft.Azure.Management.Redis
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Sku>> GetSkuWithOperationResponseAsync(string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<AzureOperationResponse<Sku>> GetSkuWithHttpMessagesAsync(string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Validate
             if (resourceGroupName == null)
@@ -2149,7 +2149,7 @@ namespace Microsoft.Azure.Management.Redis
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<RedisSubResource>> GetSubResourceWithOperationResponseAsync(string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<AzureOperationResponse<RedisSubResource>> GetSubResourceWithHttpMessagesAsync(string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Validate
             if (resourceGroupName == null)

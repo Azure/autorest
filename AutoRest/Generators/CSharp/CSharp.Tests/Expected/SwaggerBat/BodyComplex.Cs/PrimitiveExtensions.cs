@@ -32,7 +32,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// </param>
             public static async Task<IntWrapper> GetIntAsync( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IntWrapper> result = await operations.GetIntWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IntWrapper> result = await operations.GetIntWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -64,7 +64,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// </param>
             public static async Task PutIntAsync( this IPrimitive operations, IntWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutIntWithOperationResponseAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                await operations.PutIntWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -89,7 +89,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// </param>
             public static async Task<LongWrapper> GetLongAsync( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<LongWrapper> result = await operations.GetLongWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<LongWrapper> result = await operations.GetLongWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -121,7 +121,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// </param>
             public static async Task PutLongAsync( this IPrimitive operations, LongWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutLongWithOperationResponseAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                await operations.PutLongWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -146,7 +146,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// </param>
             public static async Task<FloatWrapper> GetFloatAsync( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<FloatWrapper> result = await operations.GetFloatWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<FloatWrapper> result = await operations.GetFloatWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -178,7 +178,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// </param>
             public static async Task PutFloatAsync( this IPrimitive operations, FloatWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutFloatWithOperationResponseAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                await operations.PutFloatWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -203,7 +203,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// </param>
             public static async Task<DoubleWrapper> GetDoubleAsync( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<DoubleWrapper> result = await operations.GetDoubleWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<DoubleWrapper> result = await operations.GetDoubleWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -237,7 +237,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// </param>
             public static async Task PutDoubleAsync( this IPrimitive operations, DoubleWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutDoubleWithOperationResponseAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                await operations.PutDoubleWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -262,7 +262,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// </param>
             public static async Task<BooleanWrapper> GetBoolAsync( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<BooleanWrapper> result = await operations.GetBoolWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<BooleanWrapper> result = await operations.GetBoolWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -294,7 +294,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// </param>
             public static async Task PutBoolAsync( this IPrimitive operations, BooleanWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutBoolWithOperationResponseAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                await operations.PutBoolWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -319,7 +319,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// </param>
             public static async Task<StringWrapper> GetStringAsync( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<StringWrapper> result = await operations.GetStringWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<StringWrapper> result = await operations.GetStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -351,7 +351,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// </param>
             public static async Task PutStringAsync( this IPrimitive operations, StringWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutStringWithOperationResponseAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                await operations.PutStringWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -376,7 +376,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// </param>
             public static async Task<DateWrapper> GetDateAsync( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<DateWrapper> result = await operations.GetDateWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<DateWrapper> result = await operations.GetDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -408,7 +408,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// </param>
             public static async Task PutDateAsync( this IPrimitive operations, DateWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutDateWithOperationResponseAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                await operations.PutDateWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -433,7 +433,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// </param>
             public static async Task<DatetimeWrapper> GetDateTimeAsync( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<DatetimeWrapper> result = await operations.GetDateTimeWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<DatetimeWrapper> result = await operations.GetDateTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -465,7 +465,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// </param>
             public static async Task PutDateTimeAsync( this IPrimitive operations, DatetimeWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutDateTimeWithOperationResponseAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                await operations.PutDateTimeWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -490,7 +490,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// </param>
             public static async Task<ByteWrapper> GetByteAsync( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<ByteWrapper> result = await operations.GetByteWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<ByteWrapper> result = await operations.GetByteWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -522,7 +522,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// </param>
             public static async Task PutByteAsync( this IPrimitive operations, ByteWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutByteWithOperationResponseAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                await operations.PutByteWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
 
     }

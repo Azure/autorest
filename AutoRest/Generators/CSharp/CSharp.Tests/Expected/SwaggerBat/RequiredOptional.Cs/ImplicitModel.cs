@@ -43,7 +43,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<Error>> GetRequiredPathWithOperationResponseAsync(string pathParameter, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<Error>> GetRequiredPathWithHttpMessagesAsync(string pathParameter, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (pathParameter == null)
             {
@@ -132,7 +132,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> PutOptionalQueryWithOperationResponseAsync(string queryParameter = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutOptionalQueryWithHttpMessagesAsync(string queryParameter = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -224,7 +224,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> PutOptionalHeaderWithOperationResponseAsync(string queryParameter = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutOptionalHeaderWithHttpMessagesAsync(string queryParameter = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -311,7 +311,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> PutOptionalBodyWithOperationResponseAsync(string bodyParameter = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutOptionalBodyWithHttpMessagesAsync(string bodyParameter = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -399,7 +399,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<Error>> GetRequiredGlobalPathWithOperationResponseAsync(string requiredGlobalPath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<Error>> GetRequiredGlobalPathWithHttpMessagesAsync(string requiredGlobalPath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (requiredGlobalPath == null)
             {
@@ -489,7 +489,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<Error>> GetRequiredGlobalQueryWithOperationResponseAsync(string requiredGlobalQuery, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<Error>> GetRequiredGlobalQueryWithHttpMessagesAsync(string requiredGlobalQuery, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (requiredGlobalQuery == null)
             {
@@ -587,7 +587,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<Error>> GetOptionalGlobalQueryWithOperationResponseAsync(int? optionalGlobalQuery = default(int?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<Error>> GetOptionalGlobalQueryWithHttpMessagesAsync(int? optionalGlobalQuery = default(int?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;

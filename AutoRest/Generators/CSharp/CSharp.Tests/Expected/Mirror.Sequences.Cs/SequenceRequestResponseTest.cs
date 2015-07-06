@@ -122,7 +122,7 @@ namespace Fixtures.MirrorSequences
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IList<Pet>>> AddPetWithOperationResponseAsync(IList<Pet> pets, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IList<Pet>>> AddPetWithHttpMessagesAsync(IList<Pet> pets, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (pets == null)
             {
@@ -229,7 +229,7 @@ namespace Fixtures.MirrorSequences
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IList<int?>>> AddPetStylesWithOperationResponseAsync(IList<int?> petStyle, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IList<int?>>> AddPetStylesWithHttpMessagesAsync(IList<int?> petStyle, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (petStyle == null)
             {
@@ -326,7 +326,7 @@ namespace Fixtures.MirrorSequences
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IList<int?>>> UpdatePetStylesWithOperationResponseAsync(IList<int?> petStyle, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IList<int?>>> UpdatePetStylesWithHttpMessagesAsync(IList<int?> petStyle, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (petStyle == null)
             {
