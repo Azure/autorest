@@ -4,7 +4,7 @@
   <PropertyGroup>
     <CommonRoot>$(MsBuildThisFileDirectory)..</CommonRoot>
     <CommonNugetPackageFolder>$(CommonRoot)\packages</CommonNugetPackageFolder>
-    <AssemblyOriginatorKeyFile Condition=" '$(AssemblyOriginatorKeyFile)' == '' ">$(CommonRoot)\tools\MSSharedLibKey.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile Condition=" '$(AssemblyOriginatorKeyFile)' == '' ">$(CommonRoot)\Tools\MSSharedLibKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Net45-Debug' or '$(Configuration)' == 'Net45-Release'">
@@ -13,9 +13,9 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Portable-Debug' or '$(Configuration)' == 'Portable-Release' ">
     <LibraryFxTarget>portable</LibraryFxTarget>
   </PropertyGroup>
-  
-  <Import Project="references.$(LibraryFxTarget).props" />  
-  
+
+  <Import Project="references.$(LibraryFxTarget).props" />
+
   <!--
   Shared Project properties
   -->
@@ -27,8 +27,8 @@
     <!-- Turn off XML documentation warnings. -->
     <NoWarn Condition="'$(WarnOnMissingDocument)' == 'false'">1591</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <CodeAnalysisRuleSet Condition="$(AutoRestTest) != 'true' ">$(CommonRoot)\tools\ManagedRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisRuleSet Condition="$(AutoRestTest) == 'true' ">$(CommonRoot)\tools\TestRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="$(AutoRestTest) != 'true' ">$(CommonRoot)\Tools\ManagedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="$(AutoRestTest) == 'true' ">$(CommonRoot)\Tools\TestRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -41,7 +41,6 @@
   <PropertyGroup Condition=" '$(LibraryFxTarget)' == 'portable'" >
     <RestCustomConstants>PORTABLE</RestCustomConstants>
   </PropertyGroup>
-  
   <PropertyGroup Condition=" '$(Configuration)' == 'Net45-Debug' or '$(Configuration)' == 'Portable-Debug' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
@@ -81,8 +80,8 @@
       <!--Folder where nuget.exe gets xml and pdb files to create the package-->
       <_BinariesDirectory>$(CommonRoot)\binaries\$(LibraryFxTarget)</_BinariesDirectory>
       <!--
-      Folder where nuget.exe gets dll. If under codesign, we copy to 'unsigned' first, 
-      codesign task will sign it and copy back to  _BinariesDirectory. 
+      Folder where nuget.exe gets dll. If under codesign, we copy to 'unsigned' first,
+      codesign task will sign it and copy back to  _BinariesDirectory.
       (Check out the SignBinariesForAFxTarget in build.proj)
       -->
       <_CodeSignDirectory Condition="'$(CodeSign)' != 'true'">$(_BinariesDirectory)</_CodeSignDirectory>
@@ -90,40 +89,42 @@
     </PropertyGroup>
     <Message Text="Copying assembly files to $(_CodeSignDirectory)." />
     <Message Text="Copying symbols and documentation files to $(_BinariesDirectory)." />
-    <MakeDir Directories="$(_CodeSignDirectory)" Condition="!Exists($(_CodeSignDirectory))" />
+    <MakeDir Directories="$(_CodeSignDirectory)" Condition="!Exists('$(_CodeSignDirectory)')" />
     <ItemGroup>
       <_AutoRestBinaries Include="$(ProjectDir)$(OutputPath)*.*"/>
     </ItemGroup>
 
-    <Copy SourceFiles="$(ProjectDir)$(OutputPath)$(AssemblyName).xml;$(ProjectDir)$(OutputPath)$(AssemblyName).pdb"
-          DestinationFolder="$(_BinariesDirectory)"/>
-    <Copy SourceFiles="$(ProjectDir)$(OutputPath)$(AssemblyName).dll" 
+    <Copy Condition=" '$(OS)' == 'Windows_NT'" ContinueOnError="True"
+      SourceFiles="$(ProjectDir)$(OutputPath)$(AssemblyName).xml;$(ProjectDir)$(OutputPath)$(AssemblyName).pdb"
+      DestinationFolder="$(_BinariesDirectory)"/>
+    <Copy Condition=" '$(OS)' != 'Windows_NT'" ContinueOnError="True"
+      SourceFiles="$(ProjectDir)$(OutputPath)$(AssemblyName).xml;$(ProjectDir)$(OutputPath)$(AssemblyName).dll.mdb"
+      DestinationFolder="$(_BinariesDirectory)"/>
+    <Copy SourceFiles="$(ProjectDir)$(OutputPath)$(AssemblyName).dll"
           Condition="Exists('$(ProjectDir)$(OutputPath)$(AssemblyName).dll')"
           DestinationFolder="$(_CodeSignDirectory)"/>
     <!-- AutoRest.exe specific files -->
-    <Copy SourceFiles="@(_AutoRestBinaries)" 
+    <Copy SourceFiles="@(_AutoRestBinaries)"
           Condition=" $(AssemblyName) == 'AutoRest' "
           DestinationFolder="$(_BinariesDirectory)"/>
-    <Copy SourceFiles="$(ProjectDir)$(OutputPath)$(AssemblyName).exe" 
+    <Copy SourceFiles="$(ProjectDir)$(OutputPath)$(AssemblyName).exe"
           Condition=" $(AssemblyName) == 'AutoRest' "
           DestinationFolder="$(_CodeSignDirectory)"/>
   </Target>
 
   <Target Name="SyncPackageVersions" BeforeTargets="BeforeBuild">
-    <PropertyGroup>
-      <PowerShellExe Condition=" '$(PowerShellExe)'=='' ">%WINDIR%\System32\WindowsPowerShell\v1.0\powershell.exe</PowerShellExe>   
-      <NuSpecSyncScript>$(CommonRoot)\tools\Sync-NuspecDependencies.ps1</NuSpecSyncScript>	 
-      <ProductSourceFolder Condition="$(ProductSourceFolder) == ''">$(CommonRoot)$(ProductSourceFolderPath)</ProductSourceFolder>
-    </PropertyGroup>
-
     <!-- Update all explicit references to dependent versions. -->
-    <Exec Command="$(PowerShellExe) -NonInteractive -ExecutionPolicy bypass -Command &quot;&amp; { &amp;&apos;$(NuSpecSyncScript)&apos; &apos;$(MSBuildProjectDirectory)&apos; -BasePath &apos;$(ProductSourceFolder)&apos; }&quot;" />
+    <Exec Command="gulp syncDotNetDependencies --basePath &quot;$(MSBuildProjectDirectory)&quot;" />
   </Target>
-  
+
   <Target Name="CompileRazorTemplates" BeforeTargets="BeforeBuild">
+    <PropertyGroup>
+      <RazorCommand Condition=" '$(OS)' == 'Windows_NT'">&quot;$(CommonRoot)\Tools\rzc.exe&quot;</RazorCommand>
+      <RazorCommand Condition=" '$(OS)' != 'Windows_NT'">mono &quot;$(CommonRoot)\Tools\rzc.exe&quot;</RazorCommand>
+     </PropertyGroup>
     <Message Text="Compiling Razor templates for project $(MSBuildProjectDirectory)" />
     <!-- Compile razor template. -->
-    <Exec Command="$(CommonRoot)\tools\rzc.exe &quot;$(MSBuildProjectDirectory)\Templates&quot; $(RootNamespace).Templates" />
+    <Exec Command="$(RazorCommand) &quot;$(MSBuildProjectDirectory)\Templates&quot; $(RootNamespace).Templates" />
   </Target>
 
   <Target Name="TurnOffCodeAnalysis">
@@ -134,8 +135,8 @@
       <RunCodeAnalysisOnThisProject>false</RunCodeAnalysisOnThisProject>
     </PropertyGroup>
   </Target>
-  
-  <!-- 
+
+  <!--
   StyleCop
   -->
   <PropertyGroup>
