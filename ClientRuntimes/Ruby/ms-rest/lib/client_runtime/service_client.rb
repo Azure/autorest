@@ -10,13 +10,22 @@ module ClientRuntime
     # @return [Hash] custom headers which are attached to the HTTP requests.
     attr_accessor :custom_headers
 
-    # @return [ClientRuntime::ServiceClientCredentials] The credentials object.
+    # @return [ClientRuntime::ServiceClientCredentials] the credentials object.
     attr_accessor :credentials
+
+    # @return [Array] filters to be applied to the HTTP requests.
+    attr_accessor :options
 
     #
     # Creates and initialize new instance of the ServiceClient class.
     #
-    def initialize
+    # @param credentials [ClientRuntime::ServiceClientCredentials] credentials to authorize
+    # HTTP requests made by the service client.
+    # @param options [Array] filters to be applied to the HTTP requests.
+    #
+    def initialize(credentials, options)
+      @credentials = credentials
+      @options = options
       @custom_headers = {}
     end
 

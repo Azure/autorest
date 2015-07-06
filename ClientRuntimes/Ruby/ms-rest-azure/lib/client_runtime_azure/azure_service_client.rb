@@ -7,14 +7,14 @@ module ClientRuntimeAzure
   #
   class AzureServiceClient < ClientRuntime::ServiceClient
 
+    # @return [String] api version of the Azure in string format.
     attr_accessor :api_version
 
     #
     # Creates and initialize new instance of the ServiceClient class.
     #
     def initialize(credentials, options)
-      super()
-      @credentials = credentials
+      super(credentials, options)
       @api_version = '2015-05-01-preview'
     end
 
@@ -27,9 +27,9 @@ module ClientRuntimeAzure
     def get_put_operation_result(azure_response, get_operation_block)
       fail ArgumentError if azure_response.nil?
 
-      if (azure_response.response.code != 200 &&
-          azure_response.response.code != 201 &&
-          azure_response.response.code != 202)
+      if (azure_response.response.code != "200" &&
+          azure_response.response.code != "201" &&
+          azure_response.response.code != "202")
         fail ArgumentError
       end
 
@@ -37,12 +37,20 @@ module ClientRuntimeAzure
 
       if (!AsyncOperationStatus.is_terminal_status(polling_state.status))
         task = Concurrent::TimerTask.new do
-          if polling_state.azure_async_operation_header_link.nil?
-            service_client.update_state_from_azure_async_operation_header(polling_state)
-          elsif pollingState.location_header_link.nil?
-            # TODO await UpdateStateFromLocationHeaderOnPut(client, pollingState, cancellationToken);
+
+          p polling_state.status
+          # p polling_state.response
+          # p polling_state.request
+
+          if !polling_state.azure_async_operation_header_link.nil?
+            p 'update_state_from_azure_async_operation_header'
+            update_state_from_azure_async_operation_header(polling_state)
+          elsif !polling_state.location_header_link.nil?
+            p 'update_state_from_location_header_on_put'
+            update_state_from_location_header_on_put(polling_state)
           else
-            # TODO await UpdateStateFromGetResourceOperation(getOperationAction, pollingState);
+            p 'update_state_from_get_resource_operation'
+            update_state_from_get_resource_operation(get_operation_block, polling_state)
           end
 
           if (AsyncOperationStatus.is_terminal_status(polling_state.status))
@@ -50,32 +58,107 @@ module ClientRuntimeAzure
           end
         end
 
-        task.execution_interval = polling_state.delay_in_milliseconds
+        task.execution_interval = polling_state.get_timeout()
         task.execute
         task.wait_for_termination
       end
 
       if (AsyncOperationStatus.is_successful_status(polling_state.status))
-        # TODO await UpdateStateFromGetResourceOperation(getOperationAction, pollingState);
+        update_state_from_get_resource_operation(get_operation_block, polling_state)
       end
 
       if (AsyncOperationStatus.is_failed_status(polling_state.status))
-        fail CloudError # TODO: proper error
+        fail ArgumentError # TODO: proper error
       end
 
-      polling_state.azure_operation_response
+      # TODO: change to AzureOperationResponse
+      polling_state.response
+    end
+
+    def update_state_from_get_resource_operation(get_operation_block, polling_state)
+      result = get_operation_block.call().value!
+
+      p 'from update_state_from_get_resource_operation'
+      p result
+
+      begin
+        # if (defined? result.body.provisioning_state && !result.body.provisioning_state.nil?)
+        #   p result.body.provisioning_state
+        #   p 'within pro state'
+        #   polling_state.status = result.body.provisioning_state
+        # else
+          p 'within suc state'
+          polling_state.status = AsyncOperationStatus::SUCCESS_STATUS
+        # end
+      rescue Exception => e
+        p e
+      end
+
+      p polling_state.status
+
+      # TODO: fill the polling_state.error
+
+      polling_state.update_response(result.response)
+      polling_state.request = result.request
+      polling_state.resource = result.body
+    end
+
+    def update_state_from_location_header_on_put(polling_state)
+      result = get_async(polling_state.location_header_link).value!
+
+      polling_state.update_response(result.response)
+      polling_state.request = result.request
+
+      status_code = result.response.code
+
+      if (status_code == "202")
+        polling_state.status = AsyncOperationStatus::IN_PROGRESS_STATUS
+      elsif (status_code == "200" || status_code == "201")
+        if (result.body.nil?)
+          # TODO elaborate error
+          fail ArgumentError
+
+          if (!result.body.properties.nil? && !result.body.properties.provisioning_state.nil?)
+            polling_state.status = result.body.properties.provisioning_state
+          else
+            polling_state.status_code = AsyncOperationStatus::SUCCESS_STATUS
+          end
+
+          # TODO add filling of the polling_state.error
+
+          polling_state.resource = result.body
+        end
+      end
     end
 
     def update_state_from_azure_async_operation_header(polling_state)
-      response = self.get_async(polling_state.azure_async_operation_header_link)
+      result = get_async(polling_state.azure_async_operation_header_link).value!
 
-      # TODO: verify these two setters.
-      # polling_state.status = response.body.status
-      # polling_state.error = response.body.error
+      # TODO elaborate error
+      fail ArgumentError if (!result.body.nil? || !result.body.status.nil?)
 
-      polling_state.response = response.response
-      polling_state.request = response.request
+      polling_state.status = result.body.status
+      # TODO: fill the error
+      polling_state.error = nil
+      polling_state.response = result.response
+      polling_state.request = result.request
       polling_state.resource = nil
+    end
+
+    def update_state_from_location_header_on_post_or_delete(polling_state)
+      result = get_async(polling_state.location_header_link).value!
+
+      polling_state.update_response(result.response)
+      polling_state.request = result.request
+
+      status_code = result.response.code
+
+      if (status_code == "202")
+        polling_state.status = AsyncOperationStatus::IN_PROGRESS_STATUS
+      elsif (status_code == "200" || status_code == "201" || status_code == "204")
+        polling_state.status = AsyncOperationStatus::SUCCESS_STATUS
+        polling_state.resource = result.response.body
+      end
     end
 
     def get_async(operation_url)
@@ -102,8 +185,10 @@ module ClientRuntimeAzure
         end
 
         # TODO deserialize
-
         result = ClientRuntime::HttpOperationResponse.new(http_request, http_response, http_response.body)
+
+        p result
+
         result
       end
 

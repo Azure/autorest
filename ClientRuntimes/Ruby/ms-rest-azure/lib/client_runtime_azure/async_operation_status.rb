@@ -38,7 +38,7 @@ module ClientRuntimeAzure
     # @param status [String] status to verify
     #
     # @return [Boolean] True if given status is successful one, false otherwise.
-    def self.is_failed_status(status)
+    def self.is_successful_status(status)
       return status == SUCCESS_STATUS
     end
   end
