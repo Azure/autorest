@@ -152,9 +152,9 @@ Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("WithOperationResponseAsync(");
+            WriteLiteral("WithHttpMessagesAsync(");
 #line 33 "AzureMethodTemplate.cshtml"
-                                                                                                  Write(Model.GetAsyncMethodParameterDeclaration(true));
+                                                                                             Write(Model.GetAsyncMethodParameterDeclaration(true));
 
 #line default
 #line hidden
@@ -170,7 +170,7 @@ Write(Model.OperationResponseReturnTypeString);
 
 #line default
 #line hidden
-            WriteLiteral("WithOperationResponseAsync(\r\n        ");
+            WriteLiteral("WithHttpMessagesAsync(\r\n        ");
 #line 37 "AzureMethodTemplate.cshtml"
     Write(Model.GetAsyncMethodInvocationArgs("customHeaders"));
 
@@ -260,9 +260,9 @@ Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("WithOperationResponseAsync(");
+            WriteLiteral("WithHttpMessagesAsync(");
 #line 61 "AzureMethodTemplate.cshtml"
-                                                                                                  Write(Model.GetAsyncMethodParameterDeclaration(true));
+                                                                                             Write(Model.GetAsyncMethodParameterDeclaration(true));
 
 #line default
 #line hidden
@@ -278,7 +278,7 @@ Write(Model.OperationResponseReturnTypeString);
 
 #line default
 #line hidden
-            WriteLiteral("WithOperationResponseAsync(\r\n        ");
+            WriteLiteral("WithHttpMessagesAsync(\r\n        ");
 #line 65 "AzureMethodTemplate.cshtml"
     Write(Model.GetAsyncMethodInvocationArgs("customHeaders"));
 
@@ -302,9 +302,9 @@ Write(Model.OperationResponseReturnTypeString);
 
 #line default
 #line hidden
-            WriteLiteral("WithOperationResponseAsync(");
+            WriteLiteral("WithHttpMessagesAsync(");
 #line 68 "AzureMethodTemplate.cshtml"
-                                                            Write(Model.GetMethodInvocationArgs(Model.GetMethod));
+                                                       Write(Model.GetMethodInvocationArgs(Model.GetMethod));
 
 #line default
 #line hidden

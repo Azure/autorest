@@ -32,7 +32,7 @@ namespace Fixtures.SwaggerBatBodyDate
             /// </param>
             public static async Task<DateTime?> GetNullAsync( this IDate operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<DateTime?> result = await operations.GetNullWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<DateTime?> result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -58,7 +58,7 @@ namespace Fixtures.SwaggerBatBodyDate
             /// </param>
             public static async Task<DateTime?> GetInvalidDateAsync( this IDate operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<DateTime?> result = await operations.GetInvalidDateWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<DateTime?> result = await operations.GetInvalidDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -84,7 +84,7 @@ namespace Fixtures.SwaggerBatBodyDate
             /// </param>
             public static async Task<DateTime?> GetOverflowDateAsync( this IDate operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<DateTime?> result = await operations.GetOverflowDateWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<DateTime?> result = await operations.GetOverflowDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -110,7 +110,7 @@ namespace Fixtures.SwaggerBatBodyDate
             /// </param>
             public static async Task<DateTime?> GetUnderflowDateAsync( this IDate operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<DateTime?> result = await operations.GetUnderflowDateWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<DateTime?> result = await operations.GetUnderflowDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -140,7 +140,7 @@ namespace Fixtures.SwaggerBatBodyDate
             /// </param>
             public static async Task PutMaxDateAsync( this IDate operations, DateTime? dateBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutMaxDateWithOperationResponseAsync(dateBody, null, cancellationToken).ConfigureAwait(false);
+                await operations.PutMaxDateWithHttpMessagesAsync(dateBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -165,7 +165,7 @@ namespace Fixtures.SwaggerBatBodyDate
             /// </param>
             public static async Task<DateTime?> GetMaxDateAsync( this IDate operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<DateTime?> result = await operations.GetMaxDateWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<DateTime?> result = await operations.GetMaxDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -195,7 +195,7 @@ namespace Fixtures.SwaggerBatBodyDate
             /// </param>
             public static async Task PutMinDateAsync( this IDate operations, DateTime? dateBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutMinDateWithOperationResponseAsync(dateBody, null, cancellationToken).ConfigureAwait(false);
+                await operations.PutMinDateWithHttpMessagesAsync(dateBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -220,7 +220,7 @@ namespace Fixtures.SwaggerBatBodyDate
             /// </param>
             public static async Task<DateTime?> GetMinDateAsync( this IDate operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<DateTime?> result = await operations.GetMinDateWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<DateTime?> result = await operations.GetMinDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

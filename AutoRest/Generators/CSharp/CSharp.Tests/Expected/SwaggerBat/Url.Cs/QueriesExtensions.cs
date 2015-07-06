@@ -38,7 +38,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task GetBooleanTrueAsync( this IQueries operations, bool? boolQuery = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetBooleanTrueWithOperationResponseAsync(boolQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.GetBooleanTrueWithHttpMessagesAsync(boolQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -69,7 +69,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task GetBooleanFalseAsync( this IQueries operations, bool? boolQuery = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetBooleanFalseWithOperationResponseAsync(boolQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.GetBooleanFalseWithHttpMessagesAsync(boolQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -100,7 +100,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task GetBooleanNullAsync( this IQueries operations, bool? boolQuery = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetBooleanNullWithOperationResponseAsync(boolQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.GetBooleanNullWithHttpMessagesAsync(boolQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -131,7 +131,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task GetIntOneMillionAsync( this IQueries operations, int? intQuery = default(int?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetIntOneMillionWithOperationResponseAsync(intQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.GetIntOneMillionWithHttpMessagesAsync(intQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -162,7 +162,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task GetIntNegativeOneMillionAsync( this IQueries operations, int? intQuery = default(int?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetIntNegativeOneMillionWithOperationResponseAsync(intQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.GetIntNegativeOneMillionWithHttpMessagesAsync(intQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -193,7 +193,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task GetIntNullAsync( this IQueries operations, int? intQuery = default(int?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetIntNullWithOperationResponseAsync(intQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.GetIntNullWithHttpMessagesAsync(intQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -224,7 +224,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task GetTenBillionAsync( this IQueries operations, long? longQuery = default(long?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetTenBillionWithOperationResponseAsync(longQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.GetTenBillionWithHttpMessagesAsync(longQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -255,7 +255,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task GetNegativeTenBillionAsync( this IQueries operations, long? longQuery = default(long?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetNegativeTenBillionWithOperationResponseAsync(longQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.GetNegativeTenBillionWithHttpMessagesAsync(longQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -286,7 +286,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task GetLongNullAsync( this IQueries operations, long? longQuery = default(long?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetLongNullWithOperationResponseAsync(longQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.GetLongNullWithHttpMessagesAsync(longQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -317,7 +317,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task FloatScientificPositiveAsync( this IQueries operations, double? floatQuery = default(double?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.FloatScientificPositiveWithOperationResponseAsync(floatQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.FloatScientificPositiveWithHttpMessagesAsync(floatQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -348,7 +348,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task FloatScientificNegativeAsync( this IQueries operations, double? floatQuery = default(double?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.FloatScientificNegativeWithOperationResponseAsync(floatQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.FloatScientificNegativeWithHttpMessagesAsync(floatQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -379,7 +379,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task FloatNullAsync( this IQueries operations, double? floatQuery = default(double?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.FloatNullWithOperationResponseAsync(floatQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.FloatNullWithHttpMessagesAsync(floatQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -410,7 +410,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task DoubleDecimalPositiveAsync( this IQueries operations, double? doubleQuery = default(double?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.DoubleDecimalPositiveWithOperationResponseAsync(doubleQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.DoubleDecimalPositiveWithHttpMessagesAsync(doubleQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -441,7 +441,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task DoubleDecimalNegativeAsync( this IQueries operations, double? doubleQuery = default(double?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.DoubleDecimalNegativeWithOperationResponseAsync(doubleQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.DoubleDecimalNegativeWithHttpMessagesAsync(doubleQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -472,7 +472,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task DoubleNullAsync( this IQueries operations, double? doubleQuery = default(double?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.DoubleNullWithOperationResponseAsync(doubleQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.DoubleNullWithHttpMessagesAsync(doubleQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -505,7 +505,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task StringUnicodeAsync( this IQueries operations, string stringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.StringUnicodeWithOperationResponseAsync(stringQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.StringUnicodeWithHttpMessagesAsync(stringQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -538,7 +538,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task StringUrlEncodedAsync( this IQueries operations, string stringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.StringUrlEncodedWithOperationResponseAsync(stringQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.StringUrlEncodedWithHttpMessagesAsync(stringQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -569,7 +569,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task StringEmptyAsync( this IQueries operations, string stringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.StringEmptyWithOperationResponseAsync(stringQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.StringEmptyWithHttpMessagesAsync(stringQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -600,7 +600,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task StringNullAsync( this IQueries operations, string stringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.StringNullWithOperationResponseAsync(stringQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.StringNullWithHttpMessagesAsync(stringQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -633,7 +633,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task EnumValidAsync( this IQueries operations, UriColor? enumQuery = default(UriColor?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.EnumValidWithOperationResponseAsync(enumQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.EnumValidWithHttpMessagesAsync(enumQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -666,7 +666,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task EnumNullAsync( this IQueries operations, UriColor? enumQuery = default(UriColor?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.EnumNullWithOperationResponseAsync(enumQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.EnumNullWithHttpMessagesAsync(enumQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -697,7 +697,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task ByteMultiByteAsync( this IQueries operations, byte[] byteQuery = default(byte[]), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ByteMultiByteWithOperationResponseAsync(byteQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.ByteMultiByteWithHttpMessagesAsync(byteQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -728,7 +728,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task ByteEmptyAsync( this IQueries operations, byte[] byteQuery = default(byte[]), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ByteEmptyWithOperationResponseAsync(byteQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.ByteEmptyWithHttpMessagesAsync(byteQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -759,7 +759,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task ByteNullAsync( this IQueries operations, byte[] byteQuery = default(byte[]), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ByteNullWithOperationResponseAsync(byteQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.ByteNullWithHttpMessagesAsync(byteQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -790,7 +790,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task DateValidAsync( this IQueries operations, DateTime? dateQuery = default(DateTime?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.DateValidWithOperationResponseAsync(dateQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.DateValidWithHttpMessagesAsync(dateQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -821,7 +821,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task DateNullAsync( this IQueries operations, DateTime? dateQuery = default(DateTime?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.DateNullWithOperationResponseAsync(dateQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.DateNullWithHttpMessagesAsync(dateQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -852,7 +852,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task DateTimeValidAsync( this IQueries operations, DateTime? dateTimeQuery = default(DateTime?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.DateTimeValidWithOperationResponseAsync(dateTimeQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.DateTimeValidWithHttpMessagesAsync(dateTimeQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -883,7 +883,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task DateTimeNullAsync( this IQueries operations, DateTime? dateTimeQuery = default(DateTime?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.DateTimeNullWithOperationResponseAsync(dateTimeQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.DateTimeNullWithHttpMessagesAsync(dateTimeQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -918,7 +918,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task ArrayStringCsvValidAsync( this IQueries operations, IList<string> arrayQuery = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ArrayStringCsvValidWithOperationResponseAsync(arrayQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.ArrayStringCsvValidWithHttpMessagesAsync(arrayQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -949,7 +949,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task ArrayStringCsvNullAsync( this IQueries operations, IList<string> arrayQuery = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ArrayStringCsvNullWithOperationResponseAsync(arrayQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.ArrayStringCsvNullWithHttpMessagesAsync(arrayQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -980,7 +980,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task ArrayStringCsvEmptyAsync( this IQueries operations, IList<string> arrayQuery = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ArrayStringCsvEmptyWithOperationResponseAsync(arrayQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.ArrayStringCsvEmptyWithHttpMessagesAsync(arrayQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -1015,7 +1015,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task ArrayStringSsvValidAsync( this IQueries operations, IList<string> arrayQuery = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ArrayStringSsvValidWithOperationResponseAsync(arrayQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.ArrayStringSsvValidWithHttpMessagesAsync(arrayQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -1050,7 +1050,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task ArrayStringTsvValidAsync( this IQueries operations, IList<string> arrayQuery = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ArrayStringTsvValidWithOperationResponseAsync(arrayQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.ArrayStringTsvValidWithHttpMessagesAsync(arrayQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -1085,7 +1085,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task ArrayStringPipesValidAsync( this IQueries operations, IList<string> arrayQuery = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ArrayStringPipesValidWithOperationResponseAsync(arrayQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.ArrayStringPipesValidWithHttpMessagesAsync(arrayQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
     }

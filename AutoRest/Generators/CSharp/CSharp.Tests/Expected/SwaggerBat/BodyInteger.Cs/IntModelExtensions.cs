@@ -32,7 +32,7 @@ namespace Fixtures.SwaggerBatBodyInteger
             /// </param>
             public static async Task<int?> GetNullAsync( this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<int?> result = await operations.GetNullWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<int?> result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -58,7 +58,7 @@ namespace Fixtures.SwaggerBatBodyInteger
             /// </param>
             public static async Task<int?> GetInvalidAsync( this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<int?> result = await operations.GetInvalidWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<int?> result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -84,7 +84,7 @@ namespace Fixtures.SwaggerBatBodyInteger
             /// </param>
             public static async Task<int?> GetOverflowInt32Async( this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<int?> result = await operations.GetOverflowInt32WithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<int?> result = await operations.GetOverflowInt32WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -110,7 +110,7 @@ namespace Fixtures.SwaggerBatBodyInteger
             /// </param>
             public static async Task<int?> GetUnderflowInt32Async( this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<int?> result = await operations.GetUnderflowInt32WithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<int?> result = await operations.GetUnderflowInt32WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -136,7 +136,7 @@ namespace Fixtures.SwaggerBatBodyInteger
             /// </param>
             public static async Task<long?> GetOverflowInt64Async( this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<long?> result = await operations.GetOverflowInt64WithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<long?> result = await operations.GetOverflowInt64WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -162,7 +162,7 @@ namespace Fixtures.SwaggerBatBodyInteger
             /// </param>
             public static async Task<long?> GetUnderflowInt64Async( this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<long?> result = await operations.GetUnderflowInt64WithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<long?> result = await operations.GetUnderflowInt64WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -192,7 +192,7 @@ namespace Fixtures.SwaggerBatBodyInteger
             /// </param>
             public static async Task PutMax32Async( this IIntModel operations, int? intBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutMax32WithOperationResponseAsync(intBody, null, cancellationToken).ConfigureAwait(false);
+                await operations.PutMax32WithHttpMessagesAsync(intBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -221,7 +221,7 @@ namespace Fixtures.SwaggerBatBodyInteger
             /// </param>
             public static async Task PutMax64Async( this IIntModel operations, long? intBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutMax64WithOperationResponseAsync(intBody, null, cancellationToken).ConfigureAwait(false);
+                await operations.PutMax64WithHttpMessagesAsync(intBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -250,7 +250,7 @@ namespace Fixtures.SwaggerBatBodyInteger
             /// </param>
             public static async Task PutMin32Async( this IIntModel operations, int? intBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutMin32WithOperationResponseAsync(intBody, null, cancellationToken).ConfigureAwait(false);
+                await operations.PutMin32WithHttpMessagesAsync(intBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -279,7 +279,7 @@ namespace Fixtures.SwaggerBatBodyInteger
             /// </param>
             public static async Task PutMin64Async( this IIntModel operations, long? intBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutMin64WithOperationResponseAsync(intBody, null, cancellationToken).ConfigureAwait(false);
+                await operations.PutMin64WithHttpMessagesAsync(intBody, null, cancellationToken).ConfigureAwait(false);
             }
 
     }

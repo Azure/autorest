@@ -32,7 +32,7 @@ namespace Fixtures.SwaggerBatBodyString
             /// </param>
             public static async Task<string> GetNullAsync( this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<string> result = await operations.GetNullWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<string> result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -64,7 +64,7 @@ namespace Fixtures.SwaggerBatBodyString
             /// </param>
             public static async Task PutNullAsync( this IStringModel operations, string stringBody = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutNullWithOperationResponseAsync(stringBody, null, cancellationToken).ConfigureAwait(false);
+                await operations.PutNullWithHttpMessagesAsync(stringBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -89,7 +89,7 @@ namespace Fixtures.SwaggerBatBodyString
             /// </param>
             public static async Task<string> GetEmptyAsync( this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<string> result = await operations.GetEmptyWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<string> result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -121,7 +121,7 @@ namespace Fixtures.SwaggerBatBodyString
             /// </param>
             public static async Task PutEmptyAsync( this IStringModel operations, string stringBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutEmptyWithOperationResponseAsync(stringBody, null, cancellationToken).ConfigureAwait(false);
+                await operations.PutEmptyWithHttpMessagesAsync(stringBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -148,7 +148,7 @@ namespace Fixtures.SwaggerBatBodyString
             /// </param>
             public static async Task<string> GetMbcsAsync( this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<string> result = await operations.GetMbcsWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<string> result = await operations.GetMbcsWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -184,7 +184,7 @@ namespace Fixtures.SwaggerBatBodyString
             /// </param>
             public static async Task PutMbcsAsync( this IStringModel operations, string stringBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutMbcsWithOperationResponseAsync(stringBody, null, cancellationToken).ConfigureAwait(false);
+                await operations.PutMbcsWithHttpMessagesAsync(stringBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -213,7 +213,7 @@ namespace Fixtures.SwaggerBatBodyString
             /// </param>
             public static async Task<string> GetWhitespaceAsync( this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<string> result = await operations.GetWhitespaceWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<string> result = await operations.GetWhitespaceWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -251,7 +251,7 @@ namespace Fixtures.SwaggerBatBodyString
             /// </param>
             public static async Task PutWhitespaceAsync( this IStringModel operations, string stringBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutWhitespaceWithOperationResponseAsync(stringBody, null, cancellationToken).ConfigureAwait(false);
+                await operations.PutWhitespaceWithHttpMessagesAsync(stringBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -276,7 +276,7 @@ namespace Fixtures.SwaggerBatBodyString
             /// </param>
             public static async Task<string> GetNotProvidedAsync( this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<string> result = await operations.GetNotProvidedWithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<string> result = await operations.GetNotProvidedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

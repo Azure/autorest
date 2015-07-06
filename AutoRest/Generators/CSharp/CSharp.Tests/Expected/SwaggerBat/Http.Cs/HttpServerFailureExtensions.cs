@@ -32,7 +32,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task<Error> Head501Async( this IHttpServerFailure operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<Error> result = await operations.Head501WithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<Error> result = await operations.Head501WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -58,7 +58,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task<Error> Get501Async( this IHttpServerFailure operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<Error> result = await operations.Get501WithOperationResponseAsync(null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<Error> result = await operations.Get501WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -90,7 +90,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task<Error> Post505Async( this IHttpServerFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<Error> result = await operations.Post505WithOperationResponseAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<Error> result = await operations.Post505WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -122,7 +122,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task<Error> Delete505Async( this IHttpServerFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<Error> result = await operations.Delete505WithOperationResponseAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<Error> result = await operations.Delete505WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

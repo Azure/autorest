@@ -172,16 +172,16 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                     }
                 };
 
-                Assert.NotNull(client.LROsCustomHeader.PutAsyncRetrySucceededWithOperationResponseAsync(
+                Assert.NotNull(client.LROsCustomHeader.PutAsyncRetrySucceededWithHttpMessagesAsync(
                                     new Product { Location = "West US" }, customHeaders).Result);
 
-                Assert.NotNull(client.LROsCustomHeader.PostAsyncRetrySucceededWithOperationResponseAsync(
+                Assert.NotNull(client.LROsCustomHeader.PostAsyncRetrySucceededWithHttpMessagesAsync(
                                     new Product { Location = "West US" }, customHeaders).Result);
                 
-                Assert.NotNull(client.LROsCustomHeader.Put201CreatingSucceeded200WithOperationResponseAsync(
+                Assert.NotNull(client.LROsCustomHeader.Put201CreatingSucceeded200WithHttpMessagesAsync(
                                     new Product { Location = "West US" }, customHeaders).Result);
 
-                Assert.NotNull(client.LROsCustomHeader.Post202Retry200WithOperationResponseAsync(
+                Assert.NotNull(client.LROsCustomHeader.Post202Retry200WithHttpMessagesAsync(
                                     new Product { Location = "West US" }, customHeaders).Result);
             }
         }

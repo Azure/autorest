@@ -96,9 +96,9 @@ Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("WithOperationResponseAsync(");
+            WriteLiteral("WithHttpMessagesAsync(");
 #line 22 "MethodTemplate.cshtml"
-                                                                                                  Write(Model.GetAsyncMethodParameterDeclaration(true));
+                                                                                             Write(Model.GetAsyncMethodParameterDeclaration(true));
 
 #line default
 #line hidden
