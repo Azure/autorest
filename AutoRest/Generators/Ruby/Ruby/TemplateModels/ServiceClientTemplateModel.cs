@@ -31,23 +31,5 @@ namespace Microsoft.Rest.Generator.Ruby
                 return "ClientRuntime::ServiceClient";
             }
         }
-
-        public virtual string BaseClassParams
-        {
-            get { return ""; }
-        }
-
-        public string RequiredContructorParametersWithSeparator
-        {
-            get
-            {
-                List<string> requireParams = new List<string>();
-
-                this.Properties.Where(p => p.IsRequired)
-                    .ForEach(p => requireParams.Add(string.Format("{0}", p.Name)));
-
-                return requireParams.Any() ? ", " + string.Join(", ", requireParams) : string.Empty;
-            }
-        }
     }
 }

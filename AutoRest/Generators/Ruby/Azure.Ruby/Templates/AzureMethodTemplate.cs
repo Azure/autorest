@@ -220,7 +220,7 @@ Write(WrapComment("# ", string.Format("@return [{0}] TODO: add text", "TODO: add
 
 #line default
 #line hidden
-            WriteLiteral(".get_put_operation_result_async(response, get_method).value!\r\n    end\r\n    \r\n");
+            WriteLiteral(".get_put_operation_result(response, get_method)\r\n    end\r\n    \r\n");
 #line 51 "AzureMethodTemplate.cshtml"
 }
 

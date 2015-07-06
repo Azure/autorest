@@ -62,13 +62,8 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n  #\r\n  ");
-#line 11 "ServiceClientTemplate.cshtml"
-Write(WrapComment("# ", Model.Documentation));
-
-#line default
-#line hidden
-            WriteLiteral("\r\n  #\r\n  class ");
+            WriteLiteral("\r\n  #\r\n  # A service client - single point of access to the REST API.\r\n  #\r\n  cla" +
+"ss ");
 #line 13 "ServiceClientTemplate.cshtml"
    Write(Model.Name);
 
@@ -169,79 +164,46 @@ Write(EmptyLine);
 #line default
 #line hidden
 
-            WriteLiteral("\r\n");
-#line 32 "ServiceClientTemplate.cshtml"
-  var parameters = Model.Properties.Where(p => p.IsRequired);
+            WriteLiteral("\r\n    #\r\n    # Creates initializes a new instance of the ");
+#line 33 "ServiceClientTemplate.cshtml"
+                                           Write(Model.Name);
 
 #line default
 #line hidden
-
-            WriteLiteral("\r\n\r\n    #\r\n    # Creates and initializes a new instance of the ");
-#line 35 "ServiceClientTemplate.cshtml"
-                                               Write(Model.Name);
-
-#line default
-#line hidden
-            WriteLiteral(" class.\r\n    # @param base_url [String] base url for accessing current service.\r\n" +
-"");
-#line 37 "ServiceClientTemplate.cshtml"
-    
-
-#line default
-#line hidden
-
-#line 37 "ServiceClientTemplate.cshtml"
-     foreach (var param in parameters)
-    {
-    
-
-#line default
-#line hidden
-
-#line 39 "ServiceClientTemplate.cshtml"
-Write(WrapComment("# ", string.Format("@param {0} {1}{2}", param.Name, param.Type.GetYardDocumentation(), param.Documentation)));
-
-#line default
-#line hidden
-#line 39 "ServiceClientTemplate.cshtml"
-                                                                                                                              
-
-#line default
-#line hidden
-
-            WriteLiteral("    \r\n");
-#line 41 "ServiceClientTemplate.cshtml"
-    }
-
-#line default
-#line hidden
-
-            WriteLiteral("    #\r\n    def initialize(base_url = nil");
-#line 43 "ServiceClientTemplate.cshtml"
-                             Write(Model.RequiredContructorParametersWithSeparator);
-
-#line default
-#line hidden
-            WriteLiteral(")\r\n      super(");
-#line 44 "ServiceClientTemplate.cshtml"
-        Write(Model.BaseClassParams);
-
-#line default
-#line hidden
-            WriteLiteral(")\r\n      @base_url = base_url || \'");
-#line 45 "ServiceClientTemplate.cshtml"
+            WriteLiteral(@" class.
+    # @param credentials [ClientRuntime::ServiceClientCredentials] credentials to authorize HTTP requests made by the service client.
+    # @param base_url [String] the base URI of the service.
+    # @param options [Array] filters to be applied to the HTTP requests.
+    #
+    def initialize(credentials, base_url = nil, options = nil)
+      super(credentials, options)
+      @base_url = base_url || '");
+#line 40 "ServiceClientTemplate.cshtml"
                            Write(Model.BaseUrl);
 
 #line default
 #line hidden
-            WriteLiteral("\'\r\n");
-#line 46 "ServiceClientTemplate.cshtml"
+            WriteLiteral("\'\r\n      ");
+#line 41 "ServiceClientTemplate.cshtml"
+ Write(EmptyLine);
+
+#line default
+#line hidden
+            WriteLiteral("\r\n      fail ArgumentError, \'credentials is nil\' if credentials.nil?\r\n      @cred" +
+"entials = credentials\r\n      ");
+#line 44 "ServiceClientTemplate.cshtml"
+ Write(EmptyLine);
+
+#line default
+#line hidden
+            WriteLiteral("\r\n");
+#line 45 "ServiceClientTemplate.cshtml"
       
 
 #line default
 #line hidden
 
-#line 46 "ServiceClientTemplate.cshtml"
+#line 45 "ServiceClientTemplate.cshtml"
        foreach (var operation in Model.MethodGroups) 
       {
 
@@ -249,92 +211,38 @@ Write(WrapComment("# ", string.Format("@param {0} {1}{2}", param.Name, param.Typ
 #line hidden
 
             WriteLiteral("      @");
-#line 48 "ServiceClientTemplate.cshtml"
+#line 47 "ServiceClientTemplate.cshtml"
       Write(RubyCodeNamer.UnderscoreCase(operation));
 
 #line default
 #line hidden
             WriteLiteral(" = ");
-#line 48 "ServiceClientTemplate.cshtml"
+#line 47 "ServiceClientTemplate.cshtml"
                                                    Write(operation);
 
 #line default
 #line hidden
             WriteLiteral(".new(self)\r\n");
-#line 49 "ServiceClientTemplate.cshtml"
+#line 48 "ServiceClientTemplate.cshtml"
       }
 
 #line default
 #line hidden
 
-            WriteLiteral("      ");
-#line 50 "ServiceClientTemplate.cshtml"
-       foreach (var param in parameters)
-      {
-
-#line default
-#line hidden
-
-            WriteLiteral("      fail ArgumentError, \'");
-#line 52 "ServiceClientTemplate.cshtml"
-                        Write(param.Name);
-
-#line default
-#line hidden
-            WriteLiteral(" is nil\' if ");
-#line 52 "ServiceClientTemplate.cshtml"
-                                                Write(param.Name);
-
-#line default
-#line hidden
-            WriteLiteral(".nil?\r\n");
-#line 53 "ServiceClientTemplate.cshtml"
-      }
-
-#line default
-#line hidden
-
-            WriteLiteral("      ");
-#line 54 "ServiceClientTemplate.cshtml"
-       foreach (var param in parameters)
-      {
-
-#line default
-#line hidden
-
-            WriteLiteral("      @");
-#line 56 "ServiceClientTemplate.cshtml"
-     Write(param.Name);
-
-#line default
-#line hidden
-            WriteLiteral(" = ");
-#line 56 "ServiceClientTemplate.cshtml"
-                   Write(param.Name);
-
-#line default
-#line hidden
-            WriteLiteral(";\r\n");
-#line 57 "ServiceClientTemplate.cshtml"
-      }
-
-#line default
-#line hidden
-
-            WriteLiteral("\r\n    end\r\n\r\n    ");
-#line 61 "ServiceClientTemplate.cshtml"
+            WriteLiteral("    end\r\n\r\n    ");
+#line 51 "ServiceClientTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
             WriteLiteral("\r\n");
-#line 62 "ServiceClientTemplate.cshtml"
+#line 52 "ServiceClientTemplate.cshtml"
     
 
 #line default
 #line hidden
 
-#line 62 "ServiceClientTemplate.cshtml"
+#line 52 "ServiceClientTemplate.cshtml"
      foreach (var method in Model.MethodTemplateModels)
     {
 
@@ -342,31 +250,31 @@ Write(EmptyLine);
 #line hidden
 
             WriteLiteral("    ");
-#line 64 "ServiceClientTemplate.cshtml"
+#line 54 "ServiceClientTemplate.cshtml"
   Write(Include(new MethodTemplate(), method));
 
 #line default
 #line hidden
             WriteLiteral("\r\n");
-#line 65 "ServiceClientTemplate.cshtml"
+#line 55 "ServiceClientTemplate.cshtml"
     
 
 #line default
 #line hidden
 
-#line 65 "ServiceClientTemplate.cshtml"
+#line 55 "ServiceClientTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-#line 65 "ServiceClientTemplate.cshtml"
+#line 55 "ServiceClientTemplate.cshtml"
               
 
 #line default
 #line hidden
 
             WriteLiteral("    \r\n");
-#line 67 "ServiceClientTemplate.cshtml"
+#line 57 "ServiceClientTemplate.cshtml"
     }
 
 #line default

@@ -9,7 +9,7 @@ using Microsoft.Rest.Generator.Ruby.Templates;
 
 namespace Microsoft.Rest.Generator.Azure.Ruby
 {
-    public class AzureRubyCodeGenerator : AzureCodeGenerator
+    public class AzureRubyCodeGenerator : RubyCodeGenerator
     {
         private readonly RubyCodeNamingFramework _namingFramework;
 
@@ -44,10 +44,21 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
+            //base.NormalizeClientModel(serviceClient);
+            //_namingFramework.NormalizeClientModel(serviceClient);
+            //_namingFramework.ResolveNameCollisions(serviceClient, Settings.Namespace,
+            //    Settings.Namespace + ".Models");
+
+            Settings.AddCredentials = true;
+            AzureCodeGenerator.UpdateHeadMethods(serviceClient);
+            AzureCodeGenerator.ParseODataExtension(serviceClient);
+            AzureCodeGenerator.AddPageableMethod(serviceClient);
+            AzureCodeGenerator.RemoveCommonPropertiesFromMethods(serviceClient);
+            AzureCodeGenerator.AddLongRunningOperations(serviceClient);
+            AzureCodeGenerator.AddAzureProperties(serviceClient);
+            AzureCodeGenerator.SetDefaultResponses(serviceClient);
+            // NormalizeApiVersion(serviceClient);
             base.NormalizeClientModel(serviceClient);
-            _namingFramework.NormalizeClientModel(serviceClient);
-            _namingFramework.ResolveNameCollisions(serviceClient, Settings.Namespace,
-                Settings.Namespace + ".Models");
         }
 
         /// <summary>
@@ -106,7 +117,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             // Models
             foreach (var model in serviceClient.ModelTypes)
             {
-                if (model.Extensions.ContainsKey(ExternalExtension))
+                if (model.Extensions.ContainsKey("x-ms-external"))
                 {
                     continue;
                 }

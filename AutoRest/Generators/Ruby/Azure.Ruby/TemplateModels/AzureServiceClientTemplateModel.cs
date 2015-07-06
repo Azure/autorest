@@ -13,7 +13,6 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         public AzureServiceClientTemplateModel(ServiceClient serviceClient)
             : base(serviceClient)
         {
-            // TODO: Initialized in the base constructor. Why Clear it?
             MethodTemplateModels.Clear();
             Methods.Where(m => m.Group == null)
                 .ForEach(m => MethodTemplateModels.Add(new AzureMethodTemplateModel(m, serviceClient)));
@@ -25,11 +24,6 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             {
                 return "ClientRuntimeAzure::AzureServiceClient";
             }
-        }
-
-        public override string BaseClassParams
-        {
-            get { return "credentials, nil"; }
         }
     }
 }

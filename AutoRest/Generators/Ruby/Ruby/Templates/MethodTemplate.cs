@@ -360,21 +360,21 @@ Write(EmptyLine);
 #line hidden
             WriteLiteral("\r\n      rescue Exception => e\r\n        fail ClientRuntime::DeserializationError.n" +
 "ew(\"Error occured in deserializing the response\", e.message, e.backtrace, respon" +
-"se_content)\r\n      end\r\n\r\n      result\r\n    end\r\n    \r\n");
-#line 94 "MethodTemplate.cshtml"
+"se_content)\r\n      end\r\n    end\r\n    \r\n");
+#line 92 "MethodTemplate.cshtml"
     }
 
 #line default
 #line hidden
 
             WriteLiteral("\r\n");
-#line 96 "MethodTemplate.cshtml"
+#line 94 "MethodTemplate.cshtml"
     
 
 #line default
 #line hidden
 
-#line 96 "MethodTemplate.cshtml"
+#line 94 "MethodTemplate.cshtml"
      if (Model.ReturnType != null && Model.DefaultResponse != null && !Model.Responses.Any() && Model.DefaultResponse.IsSerializable())
     {
 
@@ -382,22 +382,28 @@ Write(EmptyLine);
 #line hidden
 
             WriteLiteral("    \r\n    begin\r\n      ");
-#line 100 "MethodTemplate.cshtml"
+#line 98 "MethodTemplate.cshtml"
   Write(Model.CreateDeserializationString("response_content", Model.ReturnType, "result.body", Settings.Namespace));
 
 #line default
 #line hidden
             WriteLiteral("\r\n    rescue Exception => e\r\n      fail ClientRuntime::DeserializationError.new(\"" +
 "Error occured in deserializing the response\", e.message, e.backtrace, response_c" +
-"ontent)\r\n       end\r\n \r\n    result\r\n    \r\n");
-#line 107 "MethodTemplate.cshtml"
+"ontent)\r\n    end\r\n    \r\n");
+#line 103 "MethodTemplate.cshtml"
     }
 
 #line default
 #line hidden
 
-            WriteLiteral("  end\r\n\r\n  ");
-#line 110 "MethodTemplate.cshtml"
+            WriteLiteral("\r\n    ");
+#line 105 "MethodTemplate.cshtml"
+Write(EmptyLine);
+
+#line default
+#line hidden
+            WriteLiteral("\r\n    result\r\n  end\r\n\r\n  ");
+#line 109 "MethodTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
