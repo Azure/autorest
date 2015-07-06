@@ -44,15 +44,14 @@ Write(Header("/// "));
 
 #line default
 #line hidden
-            WriteLiteral("\r\nnamespace ");
+            WriteLiteral("\nnamespace ");
 #line 7 "ModelTemplate.cshtml"
       Write(Settings.Namespace);
 
 #line default
 #line hidden
-            WriteLiteral(".Models\r\n{\r\n    using System;\r\n    using System.Collections.Generic;\r\n    using N" +
-"ewtonsoft.Json;\r\n    using Microsoft.Rest;\r\n    using Microsoft.Rest.Serializati" +
-"on;\r\n");
+            WriteLiteral(".Models\n{\n    using System;\n    using System.Collections.Generic;\n    using Newto" +
+"nsoft.Json;\n    using Microsoft.Rest;\n    using Microsoft.Rest.Serialization;\n");
 #line 14 "ModelTemplate.cshtml"
  foreach (var usingString in Model.Usings) {
 
@@ -65,7 +64,7 @@ Write(Header("/// "));
 
 #line default
 #line hidden
-            WriteLiteral(";\r\n");
+            WriteLiteral(";\n");
 #line 16 "ModelTemplate.cshtml"
 }
 
@@ -77,13 +76,13 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    /// <summary>\r\n    ");
+            WriteLiteral("\n    /// <summary>\n    ");
 #line 19 "ModelTemplate.cshtml"
 Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    /// </summary>\r\n");
+            WriteLiteral("\n    /// </summary>\n");
 #line 21 "ModelTemplate.cshtml"
     
 
@@ -103,7 +102,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\")]    \r\n");
+            WriteLiteral("\")]    \n");
 #line 24 "ModelTemplate.cshtml"
     }
 
@@ -121,7 +120,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    {\r\n");
+            WriteLiteral("\n    {\n");
 #line 27 "ModelTemplate.cshtml"
         
 
@@ -135,13 +134,13 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line default
 #line hidden
 
-            WriteLiteral("        /// <summary>\r\n        ");
+            WriteLiteral("        /// <summary>\n        ");
 #line 30 "ModelTemplate.cshtml"
      Write(WrapComment("/// ", property.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n        /// </summary>\r\n");
+            WriteLiteral("\n        /// </summary>\n");
 #line 32 "ModelTemplate.cshtml"
             if (property.Type == PrimaryType.Date)
             {
@@ -149,7 +148,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line default
 #line hidden
 
-            WriteLiteral("        [JsonConverter(typeof(DateJsonConverter))]\r\n");
+            WriteLiteral("        [JsonConverter(typeof(DateJsonConverter))]\n");
 #line 35 "ModelTemplate.cshtml"
             }
 
@@ -162,7 +161,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\")]\r\n        public ");
+            WriteLiteral("\")]\n        public ");
 #line 37 "ModelTemplate.cshtml"
             Write(property.Type.Name);
 
@@ -180,7 +179,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("set; }\r\n");
+            WriteLiteral("set; }\n");
 #line 38 "ModelTemplate.cshtml"
         
 
@@ -198,7 +197,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line default
 #line hidden
 
-            WriteLiteral("        \r\n");
+            WriteLiteral("        \n");
 #line 40 "ModelTemplate.cshtml"
         }
 
@@ -212,15 +211,15 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line default
 #line hidden
 
-            WriteLiteral("        /// <summary>\r\n        /// Validate the object. Throws ArgumentException " +
-"or ArgumentNullException if validation fails.\r\n        /// </summary>\r\n        p" +
-"ublic ");
+            WriteLiteral("        /// <summary>\n        /// Validate the object. Throws ArgumentException o" +
+"r ArgumentNullException if validation fails.\n        /// </summary>\n        publ" +
+"ic ");
 #line 46 "ModelTemplate.cshtml"
             Write(Model.MethodQualifier);
 
 #line default
 #line hidden
-            WriteLiteral(" void Validate()\r\n        {\r\n");
+            WriteLiteral(" void Validate()\n        {\n");
 #line 48 "ModelTemplate.cshtml"
             bool anythingToValidate = false;
 
@@ -231,7 +230,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line default
 #line hidden
 
-            WriteLiteral("            base.Validate();\r\n");
+            WriteLiteral("            base.Validate();\n");
 #line 54 "ModelTemplate.cshtml"
             }
             
@@ -248,14 +247,14 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral(" == null)\r\n            {\r\n                throw new ValidationException(Validatio" +
-"nRules.CannotBeNull, \"");
+            WriteLiteral(" == null)\n            {\n                throw new ValidationException(ValidationR" +
+"ules.CannotBeNull, \"");
 #line 61 "ModelTemplate.cshtml"
                                                                           Write(property.Name);
 
 #line default
 #line hidden
-            WriteLiteral("\");\r\n            }\r\n            \r\n");
+            WriteLiteral("\");\n            }\n            \n");
 #line 64 "ModelTemplate.cshtml"
             }
             foreach (var property in Model.Properties.Where(p => !(p.Type is PrimaryType)))
@@ -271,7 +270,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n            \r\n");
+            WriteLiteral("\n            \n");
 #line 70 "ModelTemplate.cshtml"
             }
             if (!anythingToValidate)
@@ -280,21 +279,21 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line default
 #line hidden
 
-            WriteLiteral("            //Nothing to validate\r\n");
+            WriteLiteral("            //Nothing to validate\n");
 #line 74 "ModelTemplate.cshtml"
             }
 
 #line default
 #line hidden
 
-            WriteLiteral("        }\r\n");
+            WriteLiteral("        }\n");
 #line 76 "ModelTemplate.cshtml"
         }
 
 #line default
 #line hidden
 
-            WriteLiteral("    }\r\n}\r\n");
+            WriteLiteral("    }\n}\n");
         }
         #pragma warning restore 1998
     }

@@ -33,62 +33,62 @@ using Microsoft.Rest.Generator.NodeJS.TemplateModels
         #pragma warning disable 1998
         public override async Task ExecuteAsync()
         {
-            WriteLiteral("\'use strict\';\r\n");
+            WriteLiteral("\'use strict\';\n");
 #line 6 "ModelTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\nvar util = require(\'util\');\r\n");
+            WriteLiteral("\nvar util = require(\'util\');\n");
 #line 8 "ModelTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\nvar models = require(\'./index\');\r\n");
+            WriteLiteral("\nvar models = require(\'./index\');\n");
 #line 10 "ModelTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n/**\r\n * @class\r\n * Initializes a new instance of the ");
+            WriteLiteral("\n/**\n * @class\n * Initializes a new instance of the ");
 #line 13 "ModelTemplate.cshtml"
                                  Write(Model.Name);
 
 #line default
 #line hidden
-            WriteLiteral(" class.\r\n * @constructor\r\n */\r\nfunction ");
+            WriteLiteral(" class.\n * @constructor\n */\nfunction ");
 #line 16 "ModelTemplate.cshtml"
      Write(Model.Name);
 
 #line default
 #line hidden
-            WriteLiteral("() { }\r\n");
+            WriteLiteral("() { }\n");
 #line 17 "ModelTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n/**\r\n * Validate the payload against the ");
+            WriteLiteral("\n/**\n * Validate the payload against the ");
 #line 19 "ModelTemplate.cshtml"
                                Write(Model.Name);
 
 #line default
 #line hidden
-            WriteLiteral(" schema\r\n *\r\n * @param {JSON} payload\r\n *\r\n */\r\n");
+            WriteLiteral(" schema\n *\n * @param {JSON} payload\n *\n */\n");
 #line 24 "ModelTemplate.cshtml"
 Write(Model.Name);
 
 #line default
 #line hidden
-            WriteLiteral(".prototype.validate = function (payload) {\r\n  if (!payload) {\r\n    throw new Erro" +
-"r(\'");
+            WriteLiteral(".prototype.validate = function (payload) {\n  if (!payload) {\n    throw new Error(" +
+"\'");
 #line 26 "ModelTemplate.cshtml"
                  Write(Model.Name);
 
 #line default
 #line hidden
-            WriteLiteral(" cannot be null.\');\r\n  }\r\n");
+            WriteLiteral(" cannot be null.\');\n  }\n");
 #line 28 "ModelTemplate.cshtml"
   
 
@@ -108,7 +108,7 @@ Write(Model.ValidateProperty("payload", property));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 31 "ModelTemplate.cshtml"
   
 
@@ -127,25 +127,25 @@ Write(EmptyLine);
 #line default
 #line hidden
 
-            WriteLiteral("};\r\n");
+            WriteLiteral("};\n");
 #line 34 "ModelTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n/**\r\n * Deserialize the instance to ");
+            WriteLiteral("\n/**\n * Deserialize the instance to ");
 #line 36 "ModelTemplate.cshtml"
                           Write(Model.Name);
 
 #line default
 #line hidden
-            WriteLiteral(" schema\r\n *\r\n * @param {JSON} instance\r\n *\r\n */\r\n");
+            WriteLiteral(" schema\n *\n * @param {JSON} instance\n *\n */\n");
 #line 41 "ModelTemplate.cshtml"
 Write(Model.Name);
 
 #line default
 #line hidden
-            WriteLiteral(".prototype.deserialize = function (instance) {\r\n");
+            WriteLiteral(".prototype.deserialize = function (instance) {\n");
 #line 42 "ModelTemplate.cshtml"
   
 
@@ -161,7 +161,7 @@ Write(Model.Name);
 #line default
 #line hidden
 
-            WriteLiteral("  if (instance) {\r\n");
+            WriteLiteral("  if (instance) {\n");
 #line 47 "ModelTemplate.cshtml"
     foreach (var property in Model.SpecialProperties)
     {
@@ -175,7 +175,7 @@ Write(Model.Name);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 50 "ModelTemplate.cshtml"
     
 
@@ -194,27 +194,27 @@ Write(EmptyLine);
 #line default
 #line hidden
 
-            WriteLiteral("  }\r\n");
+            WriteLiteral("  }\n");
 #line 53 "ModelTemplate.cshtml"
   }
 
 #line default
 #line hidden
 
-            WriteLiteral("  return instance;\r\n");
+            WriteLiteral("  return instance;\n");
 #line 55 "ModelTemplate.cshtml"
   
 
 #line default
 #line hidden
 
-            WriteLiteral("\r\n};\r\n");
+            WriteLiteral("\n};\n");
 #line 57 "ModelTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\nmodule.exports = new ");
+            WriteLiteral("\nmodule.exports = new ");
 #line 58 "ModelTemplate.cshtml"
                  Write(Model.Name);
 

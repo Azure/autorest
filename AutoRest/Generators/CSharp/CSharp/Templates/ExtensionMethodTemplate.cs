@@ -51,14 +51,14 @@ using Microsoft.Rest.Generator.Utilities
 #line default
 #line hidden
 
-            WriteLiteral("/// <summary>\r\n");
+            WriteLiteral("/// <summary>\n");
 #line 10 "ExtensionMethodTemplate.cshtml"
 Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n/// </summary>\r\n/// <param name=\'operations\'>\r\n/// The operations group for thi" +
-"s extension method\r\n/// </param>\r\n");
+            WriteLiteral("\n/// </summary>\n/// <param name=\'operations\'>\n/// The operations group for this e" +
+"xtension method\n/// </param>\n");
 #line 15 "ExtensionMethodTemplate.cshtml"
 foreach (var parameter in Model.Parameters)
 {
@@ -72,13 +72,13 @@ foreach (var parameter in Model.Parameters)
 
 #line default
 #line hidden
-            WriteLiteral("\'>\r\n");
+            WriteLiteral("\'>\n");
 #line 18 "ExtensionMethodTemplate.cshtml"
 Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n/// </param>\r\n");
+            WriteLiteral("\n/// </param>\n");
 #line 20 "ExtensionMethodTemplate.cshtml"
 }
 
@@ -103,7 +103,7 @@ Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral(")\r\n{\r\n");
+            WriteLiteral(")\n{\n");
 #line 23 "ExtensionMethodTemplate.cshtml"
     if (Model.ReturnType != null)
     {
@@ -130,7 +130,7 @@ Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 #line default
 #line hidden
             WriteLiteral("), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.De" +
-"fault).Unwrap().GetAwaiter().GetResult();\r\n");
+"fault).Unwrap().GetAwaiter().GetResult();\n");
 #line 26 "ExtensionMethodTemplate.cshtml"
     }
     else
@@ -158,14 +158,14 @@ Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 #line default
 #line hidden
             WriteLiteral("), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.De" +
-"fault).Unwrap().GetAwaiter().GetResult();\r\n");
+"fault).Unwrap().GetAwaiter().GetResult();\n");
 #line 30 "ExtensionMethodTemplate.cshtml"
     }
 
 #line default
 #line hidden
 
-            WriteLiteral("}\r\n");
+            WriteLiteral("}\n");
 #line 32 "ExtensionMethodTemplate.cshtml"
 
 #line default
@@ -182,14 +182,14 @@ Write(EmptyLine);
 #line default
 #line hidden
 
-            WriteLiteral("/// <summary>\r\n");
+            WriteLiteral("/// <summary>\n");
 #line 34 "ExtensionMethodTemplate.cshtml"
 Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n/// </summary>\r\n/// <param name=\'operations\'>\r\n/// The operations group for thi" +
-"s extension method\r\n/// </param>\r\n");
+            WriteLiteral("\n/// </summary>\n/// <param name=\'operations\'>\n/// The operations group for this e" +
+"xtension method\n/// </param>\n");
 #line 39 "ExtensionMethodTemplate.cshtml"
 foreach (var parameter in Model.Parameters)
 {
@@ -203,21 +203,21 @@ foreach (var parameter in Model.Parameters)
 
 #line default
 #line hidden
-            WriteLiteral("\'>\r\n");
+            WriteLiteral("\'>\n");
 #line 42 "ExtensionMethodTemplate.cshtml"
 Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n/// </param>\r\n");
+            WriteLiteral("\n/// </param>\n");
 #line 44 "ExtensionMethodTemplate.cshtml"
 }
 
 #line default
 #line hidden
 
-            WriteLiteral("/// <param name=\'cancellationToken\'>\r\n/// Cancellation token.\r\n/// </param>\r\npubl" +
-"ic static async ");
+            WriteLiteral("/// <param name=\'cancellationToken\'>\n/// Cancellation token.\n/// </param>\npublic " +
+"static async ");
 #line 48 "ExtensionMethodTemplate.cshtml"
                  Write(Model.TaskExtensionReturnTypeString);
 
@@ -235,7 +235,7 @@ Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral(")\r\n{\r\n");
+            WriteLiteral(")\n{\n");
 #line 50 "ExtensionMethodTemplate.cshtml"
     if (Model.ReturnType != null)
     {
@@ -261,7 +261,7 @@ Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral(").ConfigureAwait(false);\r\n    return result.Body;\r\n");
+            WriteLiteral(").ConfigureAwait(false);\n    return result.Body;\n");
 #line 54 "ExtensionMethodTemplate.cshtml"
     }
     else
@@ -282,14 +282,14 @@ Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral(").ConfigureAwait(false);\r\n");
+            WriteLiteral(").ConfigureAwait(false);\n");
 #line 58 "ExtensionMethodTemplate.cshtml"
     }
 
 #line default
 #line hidden
 
-            WriteLiteral("}\r\n\r\n");
+            WriteLiteral("}\n\n");
 #line 61 "ExtensionMethodTemplate.cshtml"
 
 #line default

@@ -6,7 +6,6 @@
 using System;
 using System.Globalization;
 using System.Net;
-using System.Net.PeerToPeer;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Fixtures.Azure.SwaggerBatAzureSpecials;
@@ -177,7 +176,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
 
                 Assert.NotNull(client.LROsCustomHeader.PostAsyncRetrySucceededWithOperationResponseAsync(
                                     new Product { Location = "West US" }, customHeaders).Result);
-                
+
                 Assert.NotNull(client.LROsCustomHeader.Put201CreatingSucceeded200WithOperationResponseAsync(
                                     new Product { Location = "West US" }, customHeaders).Result);
 
@@ -345,7 +344,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         }
 
         /// <summary>
-        /// This test should not be run standalone. It calculates test coverage and will fail if not executed after entire test suite. 
+        /// This test should not be run standalone. It calculates test coverage and will fail if not executed after entire test suite.
         /// </summary>
         [Trait("Report", "true")]
         [Fact]

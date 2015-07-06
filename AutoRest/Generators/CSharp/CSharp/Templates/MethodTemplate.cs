@@ -44,13 +44,13 @@ using Microsoft.Rest.Generator.Utilities
         #pragma warning disable 1998
         public override async Task ExecuteAsync()
         {
-            WriteLiteral("/// <summary>\r\n");
+            WriteLiteral("/// <summary>\n");
 #line 8 "MethodTemplate.cshtml"
 Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n/// </summary>\r\n");
+            WriteLiteral("\n/// </summary>\n");
 #line 10 "MethodTemplate.cshtml"
  foreach (var parameter in Model.LocalParameters)
 {
@@ -64,7 +64,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\'>\r\n");
+            WriteLiteral("\'>\n");
 #line 13 "MethodTemplate.cshtml"
 
 #line default
@@ -75,16 +75,16 @@ Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n/// </param>    \r\n");
+            WriteLiteral("\n/// </param>    \n");
 #line 15 "MethodTemplate.cshtml"
 }
 
 #line default
 #line hidden
 
-            WriteLiteral("/// <param name=\'customHeaders\'>\r\n/// Headers that will be added to request.\r\n///" +
-" </param>\r\n/// <param name=\'cancellationToken\'>\r\n/// Cancellation token.\r\n/// </" +
-"param>\r\npublic async Task<");
+            WriteLiteral("/// <param name=\'customHeaders\'>\n/// Headers that will be added to request.\n/// <" +
+"/param>\n/// <param name=\'cancellationToken\'>\n/// Cancellation token.\n/// </param" +
+">\npublic async Task<");
 #line 22 "MethodTemplate.cshtml"
               Write(Model.OperationResponseReturnTypeString);
 
@@ -102,7 +102,7 @@ Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral(")\r\n{\r\n");
+            WriteLiteral(")\n{\n");
 #line 24 "MethodTemplate.cshtml"
     
 
@@ -124,14 +124,14 @@ Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral(" == null)\r\n    {\r\n        throw new ValidationException(ValidationRules.CannotBeN" +
-"ull, \"");
+            WriteLiteral(" == null)\n    {\n        throw new ValidationException(ValidationRules.CannotBeNul" +
+"l, \"");
 #line 30 "MethodTemplate.cshtml"
                                                                    Write(parameter.Name);
 
 #line default
 #line hidden
-            WriteLiteral("\");\r\n    }\r\n\r\n");
+            WriteLiteral("\");\n    }\n\n");
 #line 33 "MethodTemplate.cshtml"
         }
         if(parameter.Location != ParameterLocation.Query &&
@@ -147,7 +147,7 @@ Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 38 "MethodTemplate.cshtml"
         }
     }
@@ -188,21 +188,21 @@ Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral(");\r\n");
+            WriteLiteral(");\n");
 #line 50 "MethodTemplate.cshtml"
     }
 
 #line default
 #line hidden
 
-            WriteLiteral("        tracingParameters.Add(\"cancellationToken\", cancellationToken);\r\n        S" +
-"erviceClientTracing.Enter(invocationId, this, \"");
+            WriteLiteral("        tracingParameters.Add(\"cancellationToken\", cancellationToken);\n        Se" +
+"rviceClientTracing.Enter(invocationId, this, \"");
 #line 52 "MethodTemplate.cshtml"
                                                     Write(Model.Name);
 
 #line default
 #line hidden
-            WriteLiteral("\", tracingParameters);\r\n    }\r\n\r\n    // Construct URL\r\n");
+            WriteLiteral("\", tracingParameters);\n    }\n\n    // Construct URL\n");
 #line 56 "MethodTemplate.cshtml"
     
 
@@ -222,7 +222,7 @@ Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\";       \r\n");
+            WriteLiteral("\";       \n");
 #line 59 "MethodTemplate.cshtml"
     } 
     else 
@@ -237,13 +237,13 @@ Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral(".BaseUri.AbsoluteUri + \r\n                 \"/");
+            WriteLiteral(".BaseUri.AbsoluteUri + \n                 \"/");
 #line 63 "MethodTemplate.cshtml"
                  Write(Model.Url);
 
 #line default
 #line hidden
-            WriteLiteral("\";\r\n");
+            WriteLiteral("\";\n");
 #line 64 "MethodTemplate.cshtml"
     }
 
@@ -256,20 +256,20 @@ Write(Model.BuildUrl("url"));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    ");
+            WriteLiteral("\n    ");
 #line 66 "MethodTemplate.cshtml"
 Write(Model.RemoveDuplicateForwardSlashes("url"));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    // Create HTTP transport objects\r\n    HttpRequestMessage httpRequest = new " +
-"HttpRequestMessage();\r\n    httpRequest.Method = new HttpMethod(\"");
+            WriteLiteral("\n    // Create HTTP transport objects\n    HttpRequestMessage httpRequest = new Ht" +
+"tpRequestMessage();\n    httpRequest.Method = new HttpMethod(\"");
 #line 69 "MethodTemplate.cshtml"
                                      Write(Model.HttpMethod.ToString().ToUpper());
 
 #line default
 #line hidden
-            WriteLiteral("\");\r\n    httpRequest.RequestUri = new Uri(url);\r\n    // Set Headers\r\n");
+            WriteLiteral("\");\n    httpRequest.RequestUri = new Uri(url);\n    // Set Headers\n");
 #line 72 "MethodTemplate.cshtml"
     
 
@@ -289,7 +289,7 @@ Write(Model.RemoveDuplicateForwardSlashes("url"));
 
 #line default
 #line hidden
-            WriteLiteral(" != null)\r\n    {\r\n        httpRequest.Headers.Add(\"");
+            WriteLiteral(" != null)\n    {\n        httpRequest.Headers.Add(\"");
 #line 76 "MethodTemplate.cshtml"
                                Write(parameter.SerializedName);
 
@@ -301,22 +301,22 @@ Write(Model.RemoveDuplicateForwardSlashes("url"));
 
 #line default
 #line hidden
-            WriteLiteral(");\r\n    }\r\n");
+            WriteLiteral(");\n    }\n");
 #line 78 "MethodTemplate.cshtml"
     }
 
 #line default
 #line hidden
 
-            WriteLiteral("    if (customHeaders != null)\r\n    {\r\n        foreach(var header in customHeader" +
-"s)\r\n        {\r\n            httpRequest.Headers.Add(header.Key, header.Value);\r\n " +
-"       }\r\n    }\r\n    ");
+            WriteLiteral("    if (customHeaders != null)\n    {\n        foreach(var header in customHeaders)" +
+"\n        {\n            httpRequest.Headers.Add(header.Key, header.Value);\n      " +
+"  }\n    }\n    ");
 #line 86 "MethodTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 87 "MethodTemplate.cshtml"
     
 
@@ -330,22 +330,22 @@ Write(EmptyLine);
 #line default
 #line hidden
 
-            WriteLiteral("        \r\n    // Set Credentials\r\n    cancellationToken.ThrowIfCancellationReques" +
-"ted();\r\n    await ");
+            WriteLiteral("        \n    // Set Credentials\n    cancellationToken.ThrowIfCancellationRequeste" +
+"d();\n    await ");
 #line 92 "MethodTemplate.cshtml"
       Write(Model.ClientReference);
 
 #line default
 #line hidden
             WriteLiteral(".Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwa" +
-"it(false);\r\n        \r\n");
+"it(false);\n        \n");
 #line 94 "MethodTemplate.cshtml"
     }
 
 #line default
 #line hidden
 
-            WriteLiteral("\r\n\r\n");
+            WriteLiteral("\n\n");
 #line 97 "MethodTemplate.cshtml"
     
 
@@ -359,8 +359,8 @@ Write(EmptyLine);
 #line default
 #line hidden
 
-            WriteLiteral("        \r\n    // Serialize Request  \r\n    string requestContent = JsonConvert.Ser" +
-"ializeObject(");
+            WriteLiteral("        \n    // Serialize Request  \n    string requestContent = JsonConvert.Seria" +
+"lizeObject(");
 #line 101 "MethodTemplate.cshtml"
                                                     Write(Model.RequestBody.Name);
 
@@ -372,18 +372,18 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral(");\r\n    httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);\r\n" +
-"    httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse(\"applic" +
-"ation/json; charset=utf-8\");\r\n                \r\n");
+            WriteLiteral(");\n    httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);\n  " +
+"  httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse(\"applicat" +
+"ion/json; charset=utf-8\");\n                \n");
 #line 105 "MethodTemplate.cshtml"
     }
 
 #line default
 #line hidden
 
-            WriteLiteral("    // Send Request\r\n    if (shouldTrace)\r\n    {\r\n        ServiceClientTracing.Se" +
-"ndRequest(invocationId, httpRequest);\r\n    }\r\n\r\n    cancellationToken.ThrowIfCan" +
-"cellationRequested();\r\n    HttpResponseMessage httpResponse = await ");
+            WriteLiteral("    // Send Request\n    if (shouldTrace)\n    {\n        ServiceClientTracing.SendR" +
+"equest(invocationId, httpRequest);\n    }\n\n    cancellationToken.ThrowIfCancellat" +
+"ionRequested();\n    HttpResponseMessage httpResponse = await ");
 #line 113 "MethodTemplate.cshtml"
                                          Write(Model.ClientReference);
 
@@ -404,14 +404,13 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("))\r\n    {\r\n        var ex = new ");
+            WriteLiteral("))\n    {\n        var ex = new ");
 #line 124 "MethodTemplate.cshtml"
                  Write(Model.OperationExceptionTypeString);
 
 #line default
 #line hidden
-            WriteLiteral("(string.Format(\"Operation returned an invalid status code \'{0}\'\", statusCode));\r\n" +
-"");
+            WriteLiteral("(string.Format(\"Operation returned an invalid status code \'{0}\'\", statusCode));\n");
 #line 125 "MethodTemplate.cshtml"
     
 
@@ -443,36 +442,35 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral(");\r\n        if (errorBody != null)\r\n        {\r\n            ");
+            WriteLiteral(");\n        if (errorBody != null)\n        {\n            ");
 #line 130 "MethodTemplate.cshtml"
           Write(Model.InitializeExceptionWithMessage);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n            ex.Body = errorBody;\r\n        }\r\n");
+            WriteLiteral("\n            ex.Body = errorBody;\n        }\n");
 #line 133 "MethodTemplate.cshtml"
     }
 
 #line default
 #line hidden
 
-            WriteLiteral("        ex.Request = httpRequest;\r\n        ex.Response = httpResponse;\r\n        i" +
-"f (shouldTrace)\r\n        {\r\n            ServiceClientTracing.Error(invocationId," +
-" ex);\r\n        }\r\n\r\n        throw ex;\r\n    }\r\n\r\n    // Create Result\r\n    var re" +
-"sult = new ");
+            WriteLiteral("        ex.Request = httpRequest;\n        ex.Response = httpResponse;\n        if " +
+"(shouldTrace)\n        {\n            ServiceClientTracing.Error(invocationId, ex)" +
+";\n        }\n\n        throw ex;\n    }\n\n    // Create Result\n    var result = new " +
+"");
 #line 145 "MethodTemplate.cshtml"
                  Write(Model.OperationResponseReturnTypeString);
 
 #line default
 #line hidden
-            WriteLiteral("();\r\n    result.Request = httpRequest;\r\n    result.Response = httpResponse;\r\n    " +
-"");
+            WriteLiteral("();\n    result.Request = httpRequest;\n    result.Response = httpResponse;\n    ");
 #line 148 "MethodTemplate.cshtml"
 Write(Model.InitializeResponseBody);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n\r\n");
+            WriteLiteral("\n\n");
 #line 150 "MethodTemplate.cshtml"
     
 
@@ -486,13 +484,13 @@ Write(Model.InitializeResponseBody);
 #line default
 #line hidden
 
-            WriteLiteral("    \r\n    // Deserialize Response\r\n    if (statusCode == ");
+            WriteLiteral("    \n    // Deserialize Response\n    if (statusCode == ");
 #line 154 "MethodTemplate.cshtml"
                  Write(MethodTemplateModel.GetStatusCodeReference(responsePair.Key));
 
 #line default
 #line hidden
-            WriteLiteral(")\r\n    {\r\n        result.Body = JsonConvert.DeserializeObject<");
+            WriteLiteral(")\n    {\n        result.Body = JsonConvert.DeserializeObject<");
 #line 156 "MethodTemplate.cshtml"
                                                 Write(responsePair.Value.Name);
 
@@ -504,7 +502,7 @@ Write(Model.InitializeResponseBody);
 
 #line default
 #line hidden
-            WriteLiteral(");\r\n    }\r\n            \r\n");
+            WriteLiteral(");\n    }\n            \n");
 #line 159 "MethodTemplate.cshtml"
     }
 
@@ -531,15 +529,15 @@ Write(Model.InitializeResponseBody);
 
 #line default
 #line hidden
-            WriteLiteral(");\r\n");
+            WriteLiteral(");\n");
 #line 163 "MethodTemplate.cshtml"
     }
 
 #line default
 #line hidden
 
-            WriteLiteral("    \r\n    if (shouldTrace)\r\n    {\r\n        ServiceClientTracing.Exit(invocationId" +
-", result);\r\n    }\r\n\r\n    return result;\r\n}");
+            WriteLiteral("    \n    if (shouldTrace)\n    {\n        ServiceClientTracing.Exit(invocationId, r" +
+"esult);\n    }\n\n    return result;\n}");
         }
         #pragma warning restore 1998
     }

@@ -44,26 +44,25 @@ Write(Header("/// "));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 7 "MethodGroupIndexTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n/* jshint latedef:false */\r\n/* jshint forin:false */\r\n/* jshint noempty:false *" +
-"/\r\n");
+            WriteLiteral("\n/* jshint latedef:false */\n/* jshint forin:false */\n/* jshint noempty:false */\n");
 #line 11 "MethodGroupIndexTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n\'use strict\';\r\n");
+            WriteLiteral("\n\'use strict\';\n");
 #line 13 "MethodGroupIndexTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 14 "MethodGroupIndexTemplate.cshtml"
  foreach (var methodGroup in Model.MethodGroupModels)
 {
@@ -83,7 +82,7 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\');\r\n");
+            WriteLiteral("\');\n");
 #line 17 "MethodGroupIndexTemplate.cshtml"
 }
 

@@ -38,33 +38,33 @@ Write(Header("/// "));
 
 #line default
 #line hidden
-            WriteLiteral("\r\nnamespace ");
+            WriteLiteral("\nnamespace ");
 #line 6 "EnumTemplate.cshtml"
       Write(Settings.Namespace);
 
 #line default
 #line hidden
-            WriteLiteral(".Models\r\n{\r\n    using Newtonsoft.Json;\r\n    using Newtonsoft.Json.Converters;\r\n  " +
-"  using System.Runtime.Serialization;\r\n");
+            WriteLiteral(".Models\n{\n    using Newtonsoft.Json;\n    using Newtonsoft.Json.Converters;\n    us" +
+"ing System.Runtime.Serialization;\n");
 #line 11 "EnumTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    /// <summary>\r\n    ");
+            WriteLiteral("\n    /// <summary>\n    ");
 #line 13 "EnumTemplate.cshtml"
 Write(WrapComment("/// ", "Defines values for " + Model.TypeDefinitionName));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    /// </summary>\r\n    [JsonConverter(typeof(StringEnumConverter))]\r\n    publi" +
-"c enum ");
+            WriteLiteral("\n    /// </summary>\n    [JsonConverter(typeof(StringEnumConverter))]\n    public e" +
+"num ");
 #line 16 "EnumTemplate.cshtml"
            Write(Model.TypeDefinitionName);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    {\r\n");
+            WriteLiteral("\n    {\n");
 #line 18 "EnumTemplate.cshtml"
         
 
@@ -84,13 +84,13 @@ Write(WrapComment("/// ", "Defines values for " + Model.TypeDefinitionName));
 
 #line default
 #line hidden
-            WriteLiteral("\")]\r\n        ");
+            WriteLiteral("\")]\n        ");
 #line 21 "EnumTemplate.cshtml"
       Write(Model.Values[i].Name);
 
 #line default
 #line hidden
-            WriteLiteral(",\r\n");
+            WriteLiteral(",\n");
 #line 22 "EnumTemplate.cshtml"
         }
 
@@ -103,13 +103,13 @@ Write(WrapComment("/// ", "Defines values for " + Model.TypeDefinitionName));
 
 #line default
 #line hidden
-            WriteLiteral("\")]\r\n        ");
+            WriteLiteral("\")]\n        ");
 #line 24 "EnumTemplate.cshtml"
     Write(Model.Values.Last().Name);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    }\r\n}\r\n");
+            WriteLiteral("\n    }\n}\n");
         }
         #pragma warning restore 1998
     }

@@ -44,7 +44,7 @@ Write(Header("/// "));
 
 #line default
 #line hidden
-            WriteLiteral("\r\nnamespace ");
+            WriteLiteral("\nnamespace ");
 #line 7 "ServiceClientTemplate.cshtml"
      Write(Settings.Namespace);
 
@@ -77,7 +77,7 @@ Write(Header("/// "));
 
 #line default
 #line hidden
-            WriteLiteral(";\r\n");
+            WriteLiteral(";\n");
 #line 23 "ServiceClientTemplate.cshtml"
 }
 
@@ -89,13 +89,13 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    /// <summary>\r\n    ");
+            WriteLiteral("\n    /// <summary>\n    ");
 #line 26 "ServiceClientTemplate.cshtml"
 Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    /// </summary>\r\n    public partial class ");
+            WriteLiteral("\n    /// </summary>\n    public partial class ");
 #line 28 "ServiceClientTemplate.cshtml"
                     Write(Model.Name);
 
@@ -113,30 +113,30 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    {\r\n        /// <summary>\r\n        /// The base URI of the service.\r\n       " +
-" /// </summary>\r\n        public Uri BaseUri { get; set; }\r\n        ");
+            WriteLiteral("\n    {\n        /// <summary>\n        /// The base URI of the service.\n        ///" +
+" </summary>\n        public Uri BaseUri { get; set; }\n        ");
 #line 34 "ServiceClientTemplate.cshtml"
    Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n\r\n        /// <summary>\r\n        /// Gets or sets json serialization settings.\r" +
-"\n        /// </summary>\r\n        public JsonSerializerSettings SerializationSett" +
-"ings { get; private set; }\r\n        ");
+            WriteLiteral("\n\n        /// <summary>\n        /// Gets or sets json serialization settings.\n   " +
+"     /// </summary>\n        public JsonSerializerSettings SerializationSettings " +
+"{ get; private set; }\n        ");
 #line 40 "ServiceClientTemplate.cshtml"
    Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n\r\n        /// <summary>\r\n        /// Gets or sets json deserialization settings" +
-".\r\n        /// </summary>\r\n        public JsonSerializerSettings Deserialization" +
-"Settings { get; private set; }        \r\n        ");
+            WriteLiteral("\n\n        /// <summary>\n        /// Gets or sets json deserialization settings.\n " +
+"       /// </summary>\n        public JsonSerializerSettings DeserializationSetti" +
+"ngs { get; private set; }        \n        ");
 #line 46 "ServiceClientTemplate.cshtml"
    Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n        \r\n");
+            WriteLiteral("\n        \n");
 #line 48 "ServiceClientTemplate.cshtml"
         
 
@@ -150,13 +150,13 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line default
 #line hidden
 
-            WriteLiteral("        /// <summary>\r\n        ");
+            WriteLiteral("        /// <summary>\n        ");
 #line 51 "ServiceClientTemplate.cshtml"
      Write(WrapComment("/// ", property.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n        /// </summary>\r\n        public ");
+            WriteLiteral("\n        /// </summary>\n        public ");
 #line 53 "ServiceClientTemplate.cshtml"
             Write(property.Type);
 
@@ -174,7 +174,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("set; }\r\n");
+            WriteLiteral("set; }\n");
 #line 54 "ServiceClientTemplate.cshtml"
         
 
@@ -193,7 +193,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line default
 #line hidden
 
-            WriteLiteral("        \r\n");
+            WriteLiteral("        \n");
 #line 57 "ServiceClientTemplate.cshtml"
         
 
@@ -219,7 +219,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral(" { get; private set; }\r\n");
+            WriteLiteral(" { get; private set; }\n");
 #line 60 "ServiceClientTemplate.cshtml"
         
 
@@ -238,46 +238,46 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line default
 #line hidden
 
-            WriteLiteral("\r\n        /// <summary>\r\n        /// Initializes a new instance of the ");
+            WriteLiteral("\n        /// <summary>\n        /// Initializes a new instance of the ");
 #line 64 "ServiceClientTemplate.cshtml"
                                          Write(Model.Name);
 
 #line default
 #line hidden
-            WriteLiteral(" class.\r\n        /// </summary>\r\n        public ");
+            WriteLiteral(" class.\n        /// </summary>\n        public ");
 #line 66 "ServiceClientTemplate.cshtml"
            Write(Model.Name);
 
 #line default
 #line hidden
-            WriteLiteral("() : base()\r\n        {\r\n            this.Initialize();\r\n        }\r\n        ");
+            WriteLiteral("() : base()\n        {\n            this.Initialize();\n        }\n        ");
 #line 70 "ServiceClientTemplate.cshtml"
    Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n        /// <summary>\r\n        /// Initializes a new instance of the ");
+            WriteLiteral("\n        /// <summary>\n        /// Initializes a new instance of the ");
 #line 72 "ServiceClientTemplate.cshtml"
                                          Write(Model.Name);
 
 #line default
 #line hidden
-            WriteLiteral(" class.\r\n        /// </summary>\r\n        /// <param name=\'handlers\'>\r\n        ///" +
-" Optional. The delegating handlers to add to the http client pipeline.\r\n        " +
-"/// </param>\r\n        public ");
+            WriteLiteral(" class.\n        /// </summary>\n        /// <param name=\'handlers\'>\n        /// Op" +
+"tional. The delegating handlers to add to the http client pipeline.\n        /// " +
+"</param>\n        public ");
 #line 77 "ServiceClientTemplate.cshtml"
            Write(Model.Name);
 
 #line default
 #line hidden
-            WriteLiteral("(params DelegatingHandler[] handlers) : base(handlers)\r\n        {\r\n            th" +
-"is.Initialize();\r\n        }\r\n        ");
+            WriteLiteral("(params DelegatingHandler[] handlers) : base(handlers)\n        {\n            this" +
+".Initialize();\n        }\n        ");
 #line 81 "ServiceClientTemplate.cshtml"
    Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n\r\n        /// <summary>\r\n        /// Initializes a new instance of the ");
+            WriteLiteral("\n\n        /// <summary>\n        /// Initializes a new instance of the ");
 #line 84 "ServiceClientTemplate.cshtml"
                                          Write(Model.Name);
 
@@ -298,14 +298,13 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line default
 #line hidden
             WriteLiteral("(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootH" +
-"andler, handlers)\r\n        {\r\n            this.Initialize();\r\n        }\r\n       " +
-" ");
+"andler, handlers)\n        {\n            this.Initialize();\n        }\n        ");
 #line 96 "ServiceClientTemplate.cshtml"
    Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n\r\n        /// <summary>\r\n        /// Initializes a new instance of the ");
+            WriteLiteral("\n\n        /// <summary>\n        /// Initializes a new instance of the ");
 #line 99 "ServiceClientTemplate.cshtml"
                                          Write(Model.Name);
 
@@ -340,7 +339,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n\r\n");
+            WriteLiteral("\n\n");
 #line 118 "ServiceClientTemplate.cshtml"
         
 
@@ -353,7 +352,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line default
 #line hidden
 
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 119 "ServiceClientTemplate.cshtml"
         
 
@@ -367,13 +366,13 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line default
 #line hidden
 
-            WriteLiteral("        /// <summary>\r\n        /// Initializes a new instance of the ");
+            WriteLiteral("        /// <summary>\n        /// Initializes a new instance of the ");
 #line 122 "ServiceClientTemplate.cshtml"
                                            Write(Model.Name);
 
 #line default
 #line hidden
-            WriteLiteral(" class.\r\n        /// </summary>\r\n");
+            WriteLiteral(" class.\n        /// </summary>\n");
 #line 124 "ServiceClientTemplate.cshtml"
         foreach (var param in parameters)
         {
@@ -387,21 +386,21 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\'>\r\n        /// Required. ");
+            WriteLiteral("\'>\n        /// Required. ");
 #line 127 "ServiceClientTemplate.cshtml"
                     Write(param.Documentation);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n        /// </param>\r\n");
+            WriteLiteral("\n        /// </param>\n");
 #line 129 "ServiceClientTemplate.cshtml"
         }
 
 #line default
 #line hidden
 
-            WriteLiteral("        /// <param name=\'handlers\'>\r\n        /// Optional. The delegating handler" +
-"s to add to the http client pipeline.\r\n        /// </param>\r\n        public ");
+            WriteLiteral("        /// <param name=\'handlers\'>\n        /// Optional. The delegating handlers" +
+" to add to the http client pipeline.\n        /// </param>\n        public ");
 #line 133 "ServiceClientTemplate.cshtml"
              Write(Model.Name);
 
@@ -413,7 +412,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral(", params DelegatingHandler[] handlers) : this(handlers)\r\n        {\r\n");
+            WriteLiteral(", params DelegatingHandler[] handlers) : this(handlers)\n        {\n");
 #line 135 "ServiceClientTemplate.cshtml"
         foreach (var param in parameters)
         {
@@ -427,13 +426,13 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral(" == null)\r\n            {\r\n                throw new ArgumentNullException(\"");
+            WriteLiteral(" == null)\n            {\n                throw new ArgumentNullException(\"");
 #line 139 "ServiceClientTemplate.cshtml"
                                                Write(param.Name.ToCamelCase());
 
 #line default
 #line hidden
-            WriteLiteral("\");\r\n            }\r\n");
+            WriteLiteral("\");\n            }\n");
 #line 141 "ServiceClientTemplate.cshtml"
         }
         foreach (var param in parameters)
@@ -454,34 +453,34 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral(";\r\n");
+            WriteLiteral(";\n");
 #line 145 "ServiceClientTemplate.cshtml"
         }
 
 #line default
 #line hidden
 
-            WriteLiteral("            this.Initialize();\r\n        }\r\n        ");
+            WriteLiteral("            this.Initialize();\n        }\n        ");
 #line 148 "ServiceClientTemplate.cshtml"
      Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 149 "ServiceClientTemplate.cshtml"
 
 
 #line default
 #line hidden
 
-            WriteLiteral("        /// <summary>\r\n        /// Initializes a new instance of the ");
+            WriteLiteral("        /// <summary>\n        /// Initializes a new instance of the ");
 #line 151 "ServiceClientTemplate.cshtml"
                                            Write(Model.Name);
 
 #line default
 #line hidden
-            WriteLiteral(" class.\r\n        /// </summary>\r\n        /// <param name=\'baseUri\'>\r\n        /// " +
-"Optional. The base URI of the service.\r\n        /// </param>\r\n");
+            WriteLiteral(" class.\n        /// </summary>\n        /// <param name=\'baseUri\'>\n        /// Opt" +
+"ional. The base URI of the service.\n        /// </param>\n");
 #line 156 "ServiceClientTemplate.cshtml"
         foreach (var param in parameters)
         {
@@ -495,21 +494,21 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\'>\r\n        /// Required. ");
+            WriteLiteral("\'>\n        /// Required. ");
 #line 159 "ServiceClientTemplate.cshtml"
                     Write(param.Documentation);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n        /// </param>\r\n");
+            WriteLiteral("\n        /// </param>\n");
 #line 161 "ServiceClientTemplate.cshtml"
         }
 
 #line default
 #line hidden
 
-            WriteLiteral("        /// <param name=\'handlers\'>\r\n        /// Optional. The delegating handler" +
-"s to add to the http client pipeline.\r\n        /// </param>\r\n        public ");
+            WriteLiteral("        /// <param name=\'handlers\'>\n        /// Optional. The delegating handlers" +
+" to add to the http client pipeline.\n        /// </param>\n        public ");
 #line 165 "ServiceClientTemplate.cshtml"
              Write(Model.Name);
 
@@ -521,9 +520,9 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral(", params DelegatingHandler[] handlers) : this(handlers)\r\n        {\r\n            i" +
-"f (baseUri == null)\r\n            {\r\n                throw new ArgumentNullExcept" +
-"ion(\"baseUri\");\r\n            }\r\n");
+            WriteLiteral(", params DelegatingHandler[] handlers) : this(handlers)\n        {\n            if " +
+"(baseUri == null)\n            {\n                throw new ArgumentNullException(" +
+"\"baseUri\");\n            }\n");
 #line 171 "ServiceClientTemplate.cshtml"
         foreach (var param in parameters)
         {
@@ -537,20 +536,20 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral(" == null)\r\n            {\r\n                throw new ArgumentNullException(\"");
+            WriteLiteral(" == null)\n            {\n                throw new ArgumentNullException(\"");
 #line 175 "ServiceClientTemplate.cshtml"
                                                Write(param.Name.ToCamelCase());
 
 #line default
 #line hidden
-            WriteLiteral("\");\r\n            }\r\n");
+            WriteLiteral("\");\n            }\n");
 #line 177 "ServiceClientTemplate.cshtml"
         }
 
 #line default
 #line hidden
 
-            WriteLiteral("            this.BaseUri = baseUri;\r\n");
+            WriteLiteral("            this.BaseUri = baseUri;\n");
 #line 179 "ServiceClientTemplate.cshtml"
         foreach (var param in parameters)
         {
@@ -570,28 +569,28 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral(";\r\n");
+            WriteLiteral(";\n");
 #line 182 "ServiceClientTemplate.cshtml"
         }
 
 #line default
 #line hidden
 
-            WriteLiteral("        }\r\n        ");
+            WriteLiteral("        }\n        ");
 #line 184 "ServiceClientTemplate.cshtml"
      Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 185 "ServiceClientTemplate.cshtml"
         }
 
 #line default
 #line hidden
 
-            WriteLiteral("    \r\n        /// <summary>\r\n        /// Initializes client properties.\r\n        " +
-"/// </summary>\r\n        private void Initialize()\r\n        {\r\n");
+            WriteLiteral("    \n        /// <summary>\n        /// Initializes client properties.\n        ///" +
+" </summary>\n        private void Initialize()\n        {\n");
 #line 192 "ServiceClientTemplate.cshtml"
         
 
@@ -617,7 +616,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("(this);\r\n");
+            WriteLiteral("(this);\n");
 #line 195 "ServiceClientTemplate.cshtml"
         }
 
@@ -630,7 +629,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\");\r\n");
+            WriteLiteral("\");\n");
 #line 197 "ServiceClientTemplate.cshtml"
         
 
@@ -656,7 +655,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral(";\r\n");
+            WriteLiteral(";\n");
 #line 200 "ServiceClientTemplate.cshtml"
         }
 
@@ -706,8 +705,8 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\"));\r\n            DeserializationSettings.Converters.Add(new PolymorphicDeseriali" +
-"zeJsonConverter<");
+            WriteLiteral("\"));\n            DeserializationSettings.Converters.Add(new PolymorphicDeserializ" +
+"eJsonConverter<");
 #line 220 "ServiceClientTemplate.cshtml"
                                                                                          Write(polymorphicType.Name);
 
@@ -719,14 +718,14 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\"));\r\n");
+            WriteLiteral("\"));\n");
 #line 221 "ServiceClientTemplate.cshtml"
             } 
 
 #line default
 #line hidden
 
-            WriteLiteral("        }    \r\n    \r\n");
+            WriteLiteral("        }    \n    \n");
 #line 224 "ServiceClientTemplate.cshtml"
         
 
@@ -746,7 +745,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 227 "ServiceClientTemplate.cshtml"
         
 
@@ -764,14 +763,14 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line default
 #line hidden
 
-            WriteLiteral("        \r\n");
+            WriteLiteral("        \n");
 #line 229 "ServiceClientTemplate.cshtml"
         }
 
 #line default
 #line hidden
 
-            WriteLiteral("    }\r\n}\r\n");
+            WriteLiteral("    }\n}\n");
         }
         #pragma warning restore 1998
     }

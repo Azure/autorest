@@ -25,7 +25,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             fakeClient.RedisOperations.CreateOrUpdate("rg", "redis", new RedisCreateOrUpdateParameters(), "1234");
 
             Assert.Equal(HttpMethod.Put, handler.Requests[0].Method);
-            Assert.Equal("https://management.azure.com/subscriptions/1234/resourceGroups/rg/providers/Microsoft.Cache/Redis/redis", 
+            Assert.Equal("https://management.azure.com/subscriptions/1234/resourceGroups/rg/providers/Microsoft.Cache/Redis/redis",
                 handler.Requests[0].RequestUri.ToString());
             Assert.Equal(HttpMethod.Get, handler.Requests[1].Method);
             Assert.Equal("http://custom/status",
@@ -64,7 +64,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             var handler = new PlaybackTestHandler(MockAsyncOperaionWithNoBody());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
-            var error = Assert.Throws<CloudException>(() => 
+            var error = Assert.Throws<CloudException>(() =>
                 fakeClient.RedisOperations.CreateOrUpdate("rg", "redis", new RedisCreateOrUpdateParameters(), "1234"));
             Assert.Equal("The response from long running operation does not contain a body.", error.Message);
         }
@@ -190,7 +190,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             var handler = new PlaybackTestHandler(MockOperaionWithImmediateSuccessNoContentStatus());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
-            var sku = fakeClient.RedisOperations.Post("rg", "redis", "1234");
+            fakeClient.RedisOperations.Post("rg", "redis", "1234");
             Assert.Equal(1, handler.Requests.Count);
         }
 
@@ -278,7 +278,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             Assert.Equal(HttpMethod.Get, handler.Requests[2].Method);
             Assert.Equal("http://custom/locationstatus", handler.Requests[2].RequestUri.ToString());
             Assert.Equal(HttpMethod.Get, handler.Requests[3].Method);
-            Assert.Equal("https://management.azure.com/subscriptions/1234/resourceGroups/rg/providers/Microsoft.Cache/Redis/redis", 
+            Assert.Equal("https://management.azure.com/subscriptions/1234/resourceGroups/rg/providers/Microsoft.Cache/Redis/redis",
                 handler.Requests[3].RequestUri.ToString());
         }
 
@@ -317,7 +317,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             Assert.Equal(HttpMethod.Get, handler.Requests[1].Method);
             Assert.Equal("http://custom/status", handler.Requests[1].RequestUri.ToString());
             Assert.Equal(HttpMethod.Get, handler.Requests[2].Method);
-            Assert.Equal("https://management.azure.com/subscriptions/1234/resourceGroups/rg/providers/Microsoft.Cache/Redis/redis", 
+            Assert.Equal("https://management.azure.com/subscriptions/1234/resourceGroups/rg/providers/Microsoft.Cache/Redis/redis",
                 handler.Requests[2].RequestUri.ToString());
             Assert.Equal("Succeeded", resource.ProvisioningState);
         }
@@ -353,7 +353,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             Assert.Equal(HttpMethod.Put, handler.Requests[0].Method);
             Assert.Equal("https://management.azure.com/subscriptions/1234/resourceGroups/rg/providers/Microsoft.Cache/Redis/redis",
                 handler.Requests[0].RequestUri.ToString());
-            
+
             Assert.Equal(HttpMethod.Get, handler.Requests[1].Method);
             Assert.Equal("https://management.azure.com/subscriptions/1234/resourceGroups/rg/providers/Microsoft.Cache/Redis/redis",
                 handler.Requests[1].RequestUri.ToString());
@@ -506,7 +506,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             var now = DateTime.Now;
             fakeClient.RedisOperations.Delete("rg", "redis", "1234");
-            
+
             Assert.True(DateTime.Now - now >= TimeSpan.FromSeconds(2));
         }
 
@@ -521,8 +521,8 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                         ""key1"": ""value 1"",
                         ""key2"": ""value 2""
                         },
-    
-                    ""properties"": { 
+
+                    ""properties"": {
                         ""provisioningState"": ""InProgress"",
                         ""comment"": ""Resource defined structure""
                     }
@@ -536,10 +536,10 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             {
                 Content = new StringContent(@"
                 {
-                    ""status"" : ""Succeeded"", 
+                    ""status"" : ""Succeeded"",
                     ""error"" : {
-                        ""code"": ""BadArgument"",  
-                        ""message"": ""The provided database ‘foo’ has an invalid username."" 
+                        ""code"": ""BadArgument"",
+                        ""message"": ""The provided database ‘foo’ has an invalid username.""
                     }
                 }")
             };
@@ -555,8 +555,8 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                         ""key1"": ""value 1"",
                         ""key2"": ""value 2""
                         },
-    
-                    ""properties"": { 
+
+                    ""properties"": {
                         ""provisioningState"": ""Succeeded"",
                         ""comment"": ""Resource defined structure""
                     }
@@ -577,8 +577,8 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                         ""key1"": ""value 1"",
                         ""key2"": ""value 2""
                         },
-    
-                    ""properties"": { 
+
+                    ""properties"": {
                         ""provisioningState"": ""InProgress"",
                         ""comment"": ""Resource defined structure""
                     }
@@ -592,10 +592,10 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             {
                 Content = new StringContent(@"
                 {
-                    ""status"" : ""InProgress"", 
+                    ""status"" : ""InProgress"",
                     ""error"" : {
-                        ""code"": ""BadArgument"",  
-                        ""message"": ""The provided database ‘foo’ has an invalid username."" 
+                        ""code"": ""BadArgument"",
+                        ""message"": ""The provided database ‘foo’ has an invalid username.""
                     }
                 }")
             };
@@ -606,10 +606,10 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             {
                 Content = new StringContent(@"
                 {
-                    ""status"" : ""Succeeded"", 
+                    ""status"" : ""Succeeded"",
                     ""error"" : {
-                        ""code"": ""BadArgument"",  
-                        ""message"": ""The provided database ‘foo’ has an invalid username."" 
+                        ""code"": ""BadArgument"",
+                        ""message"": ""The provided database ‘foo’ has an invalid username.""
                     }
                 }")
             };
@@ -625,8 +625,8 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                         ""key1"": ""value 1"",
                         ""key2"": ""value 2""
                         },
-    
-                    ""properties"": { 
+
+                    ""properties"": {
                         ""provisioningState"": ""Succeeded"",
                         ""comment"": ""Resource defined structure""
                     }
@@ -647,8 +647,8 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                         ""key1"": ""value 1"",
                         ""key2"": ""value 2""
                         },
-    
-                    ""properties"": { 
+
+                    ""properties"": {
                         ""provisioningState"": ""InProgress"",
                         ""comment"": ""Resource defined structure""
                     }
@@ -760,10 +760,10 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             {
                 Content = new StringContent(@"
                 {
-                    ""status"" : ""Succeeded"", 
+                    ""status"" : ""Succeeded"",
                     ""error"" : {
-                        ""code"": ""BadArgument"",  
-                        ""message"": ""The provided database ‘foo’ has an invalid username."" 
+                        ""code"": ""BadArgument"",
+                        ""message"": ""The provided database ‘foo’ has an invalid username.""
                     }
                 }")
             };
@@ -896,10 +896,10 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             {
                 Content = new StringContent(@"
                 {
-                    ""status"" : ""InProgress"", 
+                    ""status"" : ""InProgress"",
                     ""error"" : {
-                        ""code"": ""BadArgument"",  
-                        ""message"": ""The provided database ‘foo’ has an invalid username."" 
+                        ""code"": ""BadArgument"",
+                        ""message"": ""The provided database ‘foo’ has an invalid username.""
                     }
                 }")
             };
@@ -909,10 +909,10 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             {
                 Content = new StringContent(@"
                 {
-                    ""status"" : ""Succeeded"", 
+                    ""status"" : ""Succeeded"",
                     ""error"" : {
-                        ""code"": ""BadArgument"",  
-                        ""message"": ""The provided database ‘foo’ has an invalid username."" 
+                        ""code"": ""BadArgument"",
+                        ""message"": ""The provided database ‘foo’ has an invalid username.""
                     }
                 }")
             };
@@ -976,8 +976,8 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                         ""key1"": ""value 1"",
                         ""key2"": ""value 2""
                         },
-    
-                    ""properties"": { 
+
+                    ""properties"": {
                         ""provisioningState"": ""Succeeded"",
                         ""comment"": ""Resource defined structure""
                     }
@@ -1001,10 +1001,10 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             {
                 Content = new StringContent(@"
                 {
-                    ""status"" : ""Succeeded"", 
+                    ""status"" : ""Succeeded"",
                     ""error"" : {
-                        ""code"": ""BadArgument"",  
-                        ""message"": ""The provided database ‘foo’ has an invalid username."" 
+                        ""code"": ""BadArgument"",
+                        ""message"": ""The provided database ‘foo’ has an invalid username.""
                     }
                 }")
             };
@@ -1020,8 +1020,8 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                         ""key1"": ""value 1"",
                         ""key2"": ""value 2""
                         },
-    
-                    ""properties"": { 
+
+                    ""properties"": {
                         ""provisioningState"": ""InProgress"",
                         ""comment"": ""Resource defined structure""
                     }
@@ -1045,10 +1045,10 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             {
                 Content = new StringContent(@"
                 {
-                    ""status"" : ""Succeeded"", 
+                    ""status"" : ""Succeeded"",
                     ""error"" : {
-                        ""code"": ""BadArgument"",  
-                        ""message"": ""The provided database ‘foo’ has an invalid username."" 
+                        ""code"": ""BadArgument"",
+                        ""message"": ""The provided database ‘foo’ has an invalid username.""
                     }
                 }")
             };
@@ -1064,8 +1064,8 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                         ""key1"": ""value 1"",
                         ""key2"": ""value 2""
                         },
-    
-                    ""properties"": { 
+
+                    ""properties"": {
                         ""provisioningState"": ""Succeeded"",
                         ""comment"": ""Resource defined structure""
                     }
@@ -1108,8 +1108,8 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                         ""key1"": ""value 1"",
                         ""key2"": ""value 2""
                         },
-    
-                    ""properties"": { 
+
+                    ""properties"": {
                         ""provisioningState"": ""InProgress"",
                         ""comment"": ""Resource defined structure""
                     }
@@ -1127,8 +1127,8 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                         ""key1"": ""value 1"",
                         ""key2"": ""value 2""
                         },
-    
-                    ""properties"": { 
+
+                    ""properties"": {
                         ""provisioningState"": ""Anything other than Succeeded"",
                         ""comment"": ""Resource defined structure""
                     }
@@ -1146,8 +1146,8 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                         ""key1"": ""value 1"",
                         ""key2"": ""value 2""
                         },
-    
-                    ""properties"": { 
+
+                    ""properties"": {
                         ""provisioningState"": ""Succeeded"",
                         ""comment"": ""Resource defined structure""
                     }
@@ -1168,8 +1168,8 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                         ""key1"": ""value 1"",
                         ""key2"": ""value 2""
                         },
-    
-                    ""properties"": { 
+
+                    ""properties"": {
                         ""provisioningState"": ""InProgress"",
                         ""comment"": ""Resource defined structure""
                     }
@@ -1187,8 +1187,8 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                         ""key1"": ""value 1"",
                         ""key2"": ""value 2""
                         },
-    
-                    ""properties"": { 
+
+                    ""properties"": {
                         ""provisioningState"": ""Anything other than Succeeded"",
                         ""comment"": ""Resource defined structure""
                     }
@@ -1206,8 +1206,8 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                         ""key1"": ""value 1"",
                         ""key2"": ""value 2""
                         },
-    
-                    ""properties"": { 
+
+                    ""properties"": {
                         ""provisioningState"": ""Failed"",
                         ""comment"": ""Resource defined structure""
                     }
@@ -1264,8 +1264,8 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                         ""key1"": ""value 1"",
                         ""key2"": ""value 2""
                         },
-    
-                    ""properties"": { 
+
+                    ""properties"": {
                         ""provisioningState"": ""InProgress"",
                         ""comment"": ""Resource defined structure""
                     }
@@ -1280,10 +1280,10 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             {
                 Content = new StringContent(@"
                 {
-                    ""status"" : ""Succeeded"", 
+                    ""status"" : ""Succeeded"",
                     ""error"" : {
-                        ""code"": ""BadArgument"",  
-                        ""message"": ""The provided database ‘foo’ has an invalid username."" 
+                        ""code"": ""BadArgument"",
+                        ""message"": ""The provided database ‘foo’ has an invalid username.""
                     }
                 }")
             };
@@ -1299,8 +1299,8 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                         ""key1"": ""value 1"",
                         ""key2"": ""value 2""
                         },
-    
-                    ""properties"": { 
+
+                    ""properties"": {
                         ""provisioningState"": ""Succeeded"",
                         ""comment"": ""Resource defined structure""
                     }
@@ -1324,10 +1324,10 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             {
                 Content = new StringContent(@"
                 {
-                    ""status"" : ""Succeeded"", 
+                    ""status"" : ""Succeeded"",
                     ""error"" : {
-                        ""code"": ""BadArgument"",  
-                        ""message"": ""The provided database ‘foo’ has an invalid username."" 
+                        ""code"": ""BadArgument"",
+                        ""message"": ""The provided database ‘foo’ has an invalid username.""
                     }
                 }")
             };

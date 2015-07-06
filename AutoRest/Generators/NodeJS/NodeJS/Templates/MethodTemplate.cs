@@ -32,13 +32,13 @@ using Microsoft.Rest.Generator.NodeJS.TemplateModels
         #pragma warning disable 1998
         public override async Task ExecuteAsync()
         {
-            WriteLiteral("/**\r\n");
+            WriteLiteral("/**\n");
 #line 7 "MethodTemplate.cshtml"
 Write(WrapComment(" * ", Model.Documentation));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 8 "MethodTemplate.cshtml"
  foreach (var parameter in Model.DocumentationParameters)
 {
@@ -64,7 +64,7 @@ Write(WrapComment(" * ", Model.Documentation));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n *\r\n");
+            WriteLiteral("\n *\n");
 #line 12 "MethodTemplate.cshtml"
 }
 
@@ -76,13 +76,13 @@ Write(WrapComment(" * ",  " @param {function} callback"));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n *\r\n");
+            WriteLiteral("\n *\n");
 #line 15 "MethodTemplate.cshtml"
 Write(WrapComment(" * ",  " @returns {Stream} The Response stream"));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n */\r\n");
+            WriteLiteral("\n */\n");
 #line 17 "MethodTemplate.cshtml"
 Write(Model.OperationName);
 
@@ -100,13 +100,13 @@ Write(Model.OperationName);
 
 #line default
 #line hidden
-            WriteLiteral(") {\r\n  var client = ");
+            WriteLiteral(") {\n  var client = ");
 #line 18 "MethodTemplate.cshtml"
            Write(Model.ClientReference);
 
 #line default
 #line hidden
-            WriteLiteral(";\r\n  if (!callback) {\r\n    throw new Error(\'callback cannot be null.\');\r\n  }\r\n");
+            WriteLiteral(";\n  if (!callback) {\n    throw new Error(\'callback cannot be null.\');\n  }\n");
 #line 22 "MethodTemplate.cshtml"
   
 
@@ -120,7 +120,7 @@ Write(Model.OperationName);
 #line default
 #line hidden
 
-            WriteLiteral("  // Validate\r\n  try {\r\n");
+            WriteLiteral("  // Validate\n  try {\n");
 #line 26 "MethodTemplate.cshtml"
   
 
@@ -148,13 +148,13 @@ Write(Model.OperationName);
 
 #line default
 #line hidden
-            WriteLiteral(" === undefined) {\r\n      throw new Error(\'\\\'");
+            WriteLiteral(" === undefined) {\n      throw new Error(\'\\\'");
 #line 31 "MethodTemplate.cshtml"
                        Write(parameter.Name);
 
 #line default
 #line hidden
-            WriteLiteral("\\\' cannot be null\');\r\n    }\r\n   \r\n");
+            WriteLiteral("\\\' cannot be null\');\n    }\n   \n");
 #line 34 "MethodTemplate.cshtml"
     }
       if (!(Model.HttpMethod == HttpMethod.Patch  && parameter.Type is CompositeType))
@@ -169,7 +169,7 @@ Write(Model.OperationName);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 38 "MethodTemplate.cshtml"
     }
   }
@@ -183,7 +183,7 @@ Write(Model.OperationName);
 #line default
 #line hidden
 
-            WriteLiteral("  } catch (error) {\r\n    return callback(error);\r\n  }\r\n");
+            WriteLiteral("  } catch (error) {\n    return callback(error);\n  }\n");
 #line 43 "MethodTemplate.cshtml"
   }
 
@@ -196,7 +196,7 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n  // Construct URL\r\n");
+            WriteLiteral("\n  // Construct URL\n");
 #line 46 "MethodTemplate.cshtml"
   
 
@@ -216,7 +216,7 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\';\r\n");
+            WriteLiteral("\';\n");
 #line 49 "MethodTemplate.cshtml"
   }
   else
@@ -231,13 +231,13 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral(".baseUri + \r\n                   \'/");
+            WriteLiteral(".baseUri + \n                   \'/");
 #line 53 "MethodTemplate.cshtml"
                    Write(Model.Url);
 
 #line default
 #line hidden
-            WriteLiteral("\';\r\n");
+            WriteLiteral("\';\n");
 #line 54 "MethodTemplate.cshtml"
   }
 
@@ -250,27 +250,27 @@ Write(Model.BuildUrl("requestUrl"));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n  ");
+            WriteLiteral("\n  ");
 #line 56 "MethodTemplate.cshtml"
 Write(Model.RemoveDuplicateForwardSlashes("requestUrl"));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n  ");
+            WriteLiteral("\n  ");
 #line 57 "MethodTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n  // Create HTTP transport objects\r\n  var httpRequest = new WebResource();\r\n  h" +
-"ttpRequest.method = \'");
+            WriteLiteral("\n  // Create HTTP transport objects\n  var httpRequest = new WebResource();\n  http" +
+"Request.method = \'");
 #line 60 "MethodTemplate.cshtml"
                     Write(Model.HttpMethod.ToString().ToUpper());
 
 #line default
 #line hidden
-            WriteLiteral("\';\r\n  httpRequest.headers = {};\r\n  httpRequest.url = requestUrl;\r\n\r\n  // Set Head" +
-"ers\r\n");
+            WriteLiteral("\';\n  httpRequest.headers = {};\n  httpRequest.url = requestUrl;\n\n  // Set Headers\n" +
+"");
 #line 65 "MethodTemplate.cshtml"
   
 
@@ -290,7 +290,7 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral(" !== null) {\r\n    httpRequest.headers[\'");
+            WriteLiteral(" !== null) {\n    httpRequest.headers[\'");
 #line 68 "MethodTemplate.cshtml"
                        Write(parameter.SerializedName);
 
@@ -302,14 +302,14 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral(";\r\n  }\r\n");
+            WriteLiteral(";\n  }\n");
 #line 70 "MethodTemplate.cshtml"
   }
 
 #line default
 #line hidden
 
-            WriteLiteral("  httpRequest.headers[\'Content-Type\'] = \'application/json; charset=utf-8\';\r\n\r\n");
+            WriteLiteral("  httpRequest.headers[\'Content-Type\'] = \'application/json; charset=utf-8\';\n\n");
 #line 73 "MethodTemplate.cshtml"
   
 
@@ -323,16 +323,16 @@ Write(EmptyLine);
 #line default
 #line hidden
 
-            WriteLiteral("  \r\n  // Serialize Request\r\n  var requestContent = null;\r\n  requestContent = JSON" +
-".stringify(msRest.serializeObject(");
+            WriteLiteral("  \n  // Serialize Request\n  var requestContent = null;\n  requestContent = JSON.st" +
+"ringify(msRest.serializeObject(");
 #line 78 "MethodTemplate.cshtml"
                                                      Write(Model.RequestBody.Name);
 
 #line default
 #line hidden
-            WriteLiteral("));\r\n  httpRequest.body = requestContent;\r\n  httpRequest.headers[\'Content-Length\'" +
-"] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(" +
-"requestContent, \'UTF8\');\r\n  \r\n");
+            WriteLiteral("));\n  httpRequest.body = requestContent;\n  httpRequest.headers[\'Content-Length\'] " +
+"= Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(re" +
+"questContent, \'UTF8\');\n  \n");
 #line 82 "MethodTemplate.cshtml"
   }
   else
@@ -341,17 +341,16 @@ Write(EmptyLine);
 #line default
 #line hidden
 
-            WriteLiteral("  \r\n  httpRequest.body = null;\r\n  httpRequest.headers[\'Content-Length\'] = 0;\r\n  \r" +
-"\n");
+            WriteLiteral("  \n  httpRequest.body = null;\n  httpRequest.headers[\'Content-Length\'] = 0;\n  \n");
 #line 89 "MethodTemplate.cshtml"
   }
 
 #line default
 #line hidden
 
-            WriteLiteral("  // Send Request\r\n  return client.pipeline(httpRequest, function (err, response," +
-" responseBody) {\r\n    if (err) {\r\n      return callback(err);\r\n    }\r\n    var st" +
-"atusCode = response.statusCode;\r\n    if (");
+            WriteLiteral("  // Send Request\n  return client.pipeline(httpRequest, function (err, response, " +
+"responseBody) {\n    if (err) {\n      return callback(err);\n    }\n    var statusC" +
+"ode = response.statusCode;\n    if (");
 #line 96 "MethodTemplate.cshtml"
     Write(Model.FailureStatusCodePredicate);
 
@@ -383,13 +382,13 @@ Write(EmptyLine);
 #line default
 #line hidden
 
-            WriteLiteral("          if (error.body !== null && error.body !== undefined) {\r\n            ");
+            WriteLiteral("          if (error.body !== null && error.body !== undefined) {\n            ");
 #line 111 "MethodTemplate.cshtml"
           Write(deserializeErrorBody);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n          }\r\n");
+            WriteLiteral("\n          }\n");
 #line 113 "MethodTemplate.cshtml"
             }
             }
@@ -415,7 +414,7 @@ Write(Model.InitializeResponseBody);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n\r\n");
+            WriteLiteral("\n\n");
 #line 129 "MethodTemplate.cshtml"
     
 
@@ -429,14 +428,14 @@ Write(Model.InitializeResponseBody);
 #line default
 #line hidden
 
-            WriteLiteral("     \r\n    // Deserialize Response\r\n    if (statusCode === ");
+            WriteLiteral("     \n    // Deserialize Response\n    if (statusCode === ");
 #line 133 "MethodTemplate.cshtml"
                   Write(MethodTemplateModel.GetStatusCodeReference(responsePair.Key));
 
 #line default
 #line hidden
-            WriteLiteral(") {\r\n      var parsedResponse;\r\n      try {\r\n        parsedResponse = JSON.parse(" +
-"responseBody);\r\n        result.body = parsedResponse;\r\n");
+            WriteLiteral(") {\n      var parsedResponse;\n      try {\n        parsedResponse = JSON.parse(res" +
+"ponseBody);\n        result.body = parsedResponse;\n");
 #line 138 "MethodTemplate.cshtml"
         
 
@@ -452,13 +451,13 @@ Write(Model.InitializeResponseBody);
 #line default
 #line hidden
 
-            WriteLiteral("        if (result.body !== null && result.body !== undefined) {\r\n          ");
+            WriteLiteral("        if (result.body !== null && result.body !== undefined) {\n          ");
 #line 143 "MethodTemplate.cshtml"
         Write(deserializeBody);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n        }\r\n");
+            WriteLiteral("\n        }\n");
 #line 145 "MethodTemplate.cshtml"
           }
         
@@ -466,13 +465,13 @@ Write(Model.InitializeResponseBody);
 #line default
 #line hidden
 
-            WriteLiteral("\r\n      } catch (error) {\r\n        ");
+            WriteLiteral("\n      } catch (error) {\n        ");
 #line 148 "MethodTemplate.cshtml"
     Write(Model.DeserializationError);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n      }\r\n    }\r\n    \r\n");
+            WriteLiteral("\n      }\n    }\n    \n");
 #line 152 "MethodTemplate.cshtml"
     }
 
@@ -487,8 +486,8 @@ Write(Model.InitializeResponseBody);
 #line default
 #line hidden
 
-            WriteLiteral("      var parsedResponse;\r\n      try {\r\n        parsedResponse = JSON.parse(respo" +
-"nseBody);\r\n        result.body = parsedResponse;\r\n");
+            WriteLiteral("      var parsedResponse;\n      try {\n        parsedResponse = JSON.parse(respons" +
+"eBody);\n        result.body = parsedResponse;\n");
 #line 159 "MethodTemplate.cshtml"
         var deserializeBody = Model.GetDeserializationString(Model.DefaultResponse);
         if (!string.IsNullOrWhiteSpace(deserializeBody))
@@ -497,26 +496,26 @@ Write(Model.InitializeResponseBody);
 #line default
 #line hidden
 
-            WriteLiteral("        if (result.body !== null && result.body !== undefined) {\r\n          ");
+            WriteLiteral("        if (result.body !== null && result.body !== undefined) {\n          ");
 #line 163 "MethodTemplate.cshtml"
         Write(deserializeBody);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n        }\r\n");
+            WriteLiteral("\n        }\n");
 #line 165 "MethodTemplate.cshtml"
         }
 
 #line default
 #line hidden
 
-            WriteLiteral("      } catch (error) {\r\n        ");
+            WriteLiteral("      } catch (error) {\n        ");
 #line 167 "MethodTemplate.cshtml"
       Write(Model.DeserializationError);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n      }\r\n");
+            WriteLiteral("\n      }\n");
 #line 169 "MethodTemplate.cshtml"
     }
 
@@ -528,7 +527,7 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    return callback(null, result);\r\n  });\r\n};\r\n");
+            WriteLiteral("\n    return callback(null, result);\n  });\n};\n");
         }
         #pragma warning restore 1998
     }

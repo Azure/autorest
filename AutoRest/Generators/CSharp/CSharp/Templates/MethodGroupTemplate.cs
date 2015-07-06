@@ -32,7 +32,7 @@ Write(Header("/// "));
 
 #line default
 #line hidden
-            WriteLiteral("\r\nnamespace ");
+            WriteLiteral("\nnamespace ");
 #line 5 "MethodGroupTemplate.cshtml"
      Write(Settings.Namespace);
 
@@ -65,7 +65,7 @@ Write(Header("/// "));
 
 #line default
 #line hidden
-            WriteLiteral(";\r\n");
+            WriteLiteral(";\n");
 #line 21 "MethodGroupTemplate.cshtml"
 }
 
@@ -77,7 +77,7 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    internal partial class ");
+            WriteLiteral("\n    internal partial class ");
 #line 23 "MethodGroupTemplate.cshtml"
                        Write(Model.MethodGroupType);
 
@@ -95,14 +95,14 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    {\r\n        /// <summary>\r\n        /// Initializes a new instance of the ");
+            WriteLiteral("\n    {\n        /// <summary>\n        /// Initializes a new instance of the ");
 #line 26 "MethodGroupTemplate.cshtml"
                                           Write(Model.MethodGroupType);
 
 #line default
 #line hidden
-            WriteLiteral(" class.\r\n        /// </summary>\r\n        /// <param name=\'client\'>\r\n        /// R" +
-"eference to the service client.\r\n        /// </param>\r\n        internal ");
+            WriteLiteral(" class.\n        /// </summary>\n        /// <param name=\'client\'>\n        /// Refe" +
+"rence to the service client.\n        /// </param>\n        internal ");
 #line 31 "MethodGroupTemplate.cshtml"
              Write(Model.MethodGroupType);
 
@@ -114,31 +114,31 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral(" client)\r\n        {\r\n            this.Client = client;\r\n        }\r\n        ");
+            WriteLiteral(" client)\n        {\n            this.Client = client;\n        }\n        ");
 #line 35 "MethodGroupTemplate.cshtml"
    Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n        /// <summary>\r\n        /// Gets a reference to the ");
+            WriteLiteral("\n        /// <summary>\n        /// Gets a reference to the ");
 #line 37 "MethodGroupTemplate.cshtml"
                                 Write(Model.Name);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n        /// </summary>\r\n        public ");
+            WriteLiteral("\n        /// </summary>\n        public ");
 #line 39 "MethodGroupTemplate.cshtml"
            Write(Model.Name);
 
 #line default
 #line hidden
-            WriteLiteral(" Client { get; private set; }\r\n        ");
+            WriteLiteral(" Client { get; private set; }\n        ");
 #line 40 "MethodGroupTemplate.cshtml"
    Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 41 "MethodGroupTemplate.cshtml"
         
 
@@ -158,7 +158,7 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 44 "MethodGroupTemplate.cshtml"
         
 
@@ -177,7 +177,7 @@ Write(EmptyLine);
 #line default
 #line hidden
 
-            WriteLiteral("    }\r\n}\r\n");
+            WriteLiteral("    }\n}\n");
         }
         #pragma warning restore 1998
     }

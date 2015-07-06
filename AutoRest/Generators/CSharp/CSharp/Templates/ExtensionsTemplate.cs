@@ -44,15 +44,15 @@ Write(Header("/// "));
 
 #line default
 #line hidden
-            WriteLiteral("\r\nnamespace ");
+            WriteLiteral("\nnamespace ");
 #line 7 "ExtensionsTemplate.cshtml"
      Write(Settings.Namespace);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n{\r\n    using System;\r\n    using System.Collections;\r\n    using System.Collectio" +
-"ns.Generic;\r\n    using System.Threading;\r\n    using System.Threading.Tasks;\r\n   " +
-" using Microsoft.Rest;\r\n");
+            WriteLiteral("\n{\n    using System;\n    using System.Collections;\n    using System.Collections.G" +
+"eneric;\n    using System.Threading;\n    using System.Threading.Tasks;\n    using " +
+"Microsoft.Rest;\n");
 #line 15 "ExtensionsTemplate.cshtml"
  foreach (var usingString in Model.Usings) {
 
@@ -65,7 +65,7 @@ Write(Header("/// "));
 
 #line default
 #line hidden
-            WriteLiteral(";\r\n");
+            WriteLiteral(";\n");
 #line 17 "ExtensionsTemplate.cshtml"
 }
 
@@ -77,13 +77,13 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    public static partial class ");
+            WriteLiteral("\n    public static partial class ");
 #line 19 "ExtensionsTemplate.cshtml"
                             Write(Model.ExtensionName);
 
 #line default
 #line hidden
-            WriteLiteral("Extensions\r\n    {\r\n");
+            WriteLiteral("Extensions\n    {\n");
 #line 21 "ExtensionsTemplate.cshtml"
         
 
@@ -103,7 +103,7 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 24 "ExtensionsTemplate.cshtml"
             
 
@@ -122,7 +122,7 @@ Write(EmptyLine);
 #line default
 #line hidden
 
-            WriteLiteral("    }\r\n}\r\n");
+            WriteLiteral("    }\n}\n");
         }
         #pragma warning restore 1998
     }

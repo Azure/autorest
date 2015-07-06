@@ -36,10 +36,10 @@ namespace Microsoft.Rest.Tracing.Etw
         /// Logs information message.
         /// </summary>
         /// <param name="Message">Message</param>
-        [Event(1, Level = EventLevel.Informational)]
+        //[Event(1, Level = EventLevel.Informational)]
         public void Information(string Message)
         {
-            WriteEvent(1, Message);
+            //WriteEvent(1, Message);
         }
 
         /// <summary>
@@ -48,10 +48,10 @@ namespace Microsoft.Rest.Tracing.Etw
         /// <param name="Source">Event source.</param>
         /// <param name="Name">Configuration name.</param>
         /// <param name="Value">Configuration value.</param>
-        [Event(2, Level = EventLevel.Informational)]
+        //[Event(2, Level = EventLevel.Informational)]
         public void Configuration(string Source, string Name, string Value)
         {
-            WriteEvent(2, Source, Name, Value);
+            //WriteEvent(2, Source, Name, Value);
         }
 
         /// <summary>
@@ -61,10 +61,10 @@ namespace Microsoft.Rest.Tracing.Etw
         /// <param name="Instance">Instance of the method.</param>
         /// <param name="Method">Method name.</param>
         /// <param name="Parameters">Method parameters passed to the method.</param>
-        [Event(3, Level = EventLevel.Informational)]
+        //[Event(3, Level = EventLevel.Informational)]
         public void Enter(string InvocationId, string Instance, string Method, string Parameters)
         {
-            WriteEvent(3, InvocationId, Instance, Method, Parameters);
+            //WriteEvent(3, InvocationId, Instance, Method, Parameters);
         }
 
         /// <summary>
@@ -72,10 +72,10 @@ namespace Microsoft.Rest.Tracing.Etw
         /// </summary>
         /// <param name="InvocationId">Correlation ID for a series of events.</param>
         /// <param name="Request">The request about to be sent.</param>
-        [Event(4, Level = EventLevel.Informational)]
+        //[Event(4, Level = EventLevel.Informational)]
         public void SendRequest(string InvocationId, string Request)
         {
-            WriteEvent(4, InvocationId, Request);
+            //WriteEvent(4, InvocationId, Request);
         }
 
         /// <summary>
@@ -83,10 +83,10 @@ namespace Microsoft.Rest.Tracing.Etw
         /// </summary>
         /// <param name="InvocationId">Correlation ID for a series of events.</param>
         /// <param name="Response">The response instance.</param>
-        [Event(5, Level = EventLevel.Informational)]
+        //[Event(5, Level = EventLevel.Informational)]
         public void ReceiveResponse(string InvocationId, string Response)
         {
-            WriteEvent(5, InvocationId, Response);
+            //WriteEvent(5, InvocationId, Response);
         }
 
         /// <summary>
@@ -94,10 +94,10 @@ namespace Microsoft.Rest.Tracing.Etw
         /// </summary>
         /// <param name="InvocationId">Correlation ID for a series of events.</param>
         /// <param name="Exception">Exception.</param>
-        [Event(6, Level = EventLevel.Error)]
+        //[Event(6, Level = EventLevel.Error)]
         public void Error(string InvocationId, string Exception)
         {
-            WriteEvent(6, InvocationId, Exception);
+            //WriteEvent(6, InvocationId, Exception);
         }
 
         /// <summary>
@@ -105,10 +105,10 @@ namespace Microsoft.Rest.Tracing.Etw
         /// </summary>
         /// <param name="InvocationId">Correlation ID for a series of events.</param>
         /// <param name="ReturnValue">Return value.</param>
-        [Event(7, Level = EventLevel.Informational)]
+        //[Event(7, Level = EventLevel.Informational)]
         public void Exit(string InvocationId, string ReturnValue)
         {
-            WriteEvent(7, InvocationId, ReturnValue);
+            //WriteEvent(7, InvocationId, ReturnValue);
         }
     }
 }

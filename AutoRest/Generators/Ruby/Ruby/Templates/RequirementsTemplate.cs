@@ -32,43 +32,43 @@ Write(Header("# "));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 5 "RequirementsTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 6 "RequirementsTemplate.cshtml"
 Write(Model.GetDependencyGems());
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 7 "RequirementsTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 8 "RequirementsTemplate.cshtml"
 Write(Model.GetModelsRequiredFiles());
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 9 "RequirementsTemplate.cshtml"
 Write(Model.GetOperationsRequiredFiles());
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 10 "RequirementsTemplate.cshtml"
 Write(Model.GetClientRequiredFile());
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
         }
         #pragma warning restore 1998
     }

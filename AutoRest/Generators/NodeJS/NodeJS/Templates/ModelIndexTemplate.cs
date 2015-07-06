@@ -44,26 +44,25 @@ Write(Header("/// "));
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 7 "ModelIndexTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n/* jshint latedef:false */\r\n/* jshint forin:false */\r\n/* jshint noempty:false *" +
-"/\r\n");
+            WriteLiteral("\n/* jshint latedef:false */\n/* jshint forin:false */\n/* jshint noempty:false */\n");
 #line 11 "ModelIndexTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n\'use strict\';\r\n");
+            WriteLiteral("\n\'use strict\';\n");
 #line 13 "ModelIndexTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n");
+            WriteLiteral("\n");
 #line 14 "ModelIndexTemplate.cshtml"
  foreach (var model in Model.ModelTemplateModels)
 {
@@ -83,7 +82,7 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\');\r\n");
+            WriteLiteral("\');\n");
 #line 17 "ModelIndexTemplate.cshtml"
 }
 
@@ -97,13 +96,13 @@ Write(EmptyLine);
 #line default
 #line hidden
 
-            WriteLiteral("exports.discriminators = {\r\n  ");
+            WriteLiteral("exports.discriminators = {\n  ");
 #line 21 "ModelIndexTemplate.cshtml"
 Write(Model.PolymorphicDictionary);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n};\r\n");
+            WriteLiteral("\n};\n");
 #line 23 "ModelIndexTemplate.cshtml"
 }
 
