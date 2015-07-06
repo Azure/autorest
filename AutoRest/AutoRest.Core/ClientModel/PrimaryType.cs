@@ -138,22 +138,6 @@ namespace Microsoft.Rest.Generator.ClientModel
         }
 
         /// <summary>
-        /// extensibility point for languages to create multiple mappings for a known type
-        /// </summary>
-        /// <param name="type">The type to duplicate</param>
-        /// <param name="name">The name of the new type</param>
-        /// <returns></returns>
-        public static PrimaryType Create(PrimaryType type, string name)
-        {
-            if (type == null)
-            {
-                throw new ArgumentNullException("type");
-            }
-
-            return new PrimaryType {Name = name, Type = type.Type, SerializedName = name};
-        }
-
-        /// <summary>
         /// Available known model types.
         /// </summary>
         private enum SupportedPrimaryType

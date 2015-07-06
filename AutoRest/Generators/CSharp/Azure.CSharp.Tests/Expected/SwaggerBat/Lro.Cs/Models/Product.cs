@@ -16,7 +16,7 @@ namespace Fixtures.Azure.SwaggerBatLro.Models
         /// 'canceled', 'Accepted', 'Creating', 'Created', 'Updating',
         /// 'Updated', 'Deleting', 'Deleted', 'OK'
         /// </summary>
-        [JsonProperty(PropertyName = "provisioningStateValues")]
+        [JsonProperty(PropertyName = "properties.provisioningStateValues")]
         public string ProvisioningStateValues { get; private set; }
 
     }

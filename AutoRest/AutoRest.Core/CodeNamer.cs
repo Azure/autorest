@@ -82,7 +82,6 @@ namespace Microsoft.Rest.Generator
             client.Namespace = GetNamespaceName(client.Namespace);
             foreach (var property in client.Properties)
             {
-                property.SerializedName = property.Name;
                 property.Name = GetPropertyName(property.Name);
                 property.Type = NormalizeType(property.Type);
             }
@@ -126,7 +125,6 @@ namespace Microsoft.Rest.Generator
                 }
                 foreach (var parameter in method.Parameters)
                 {
-                    parameter.SerializedName = parameter.Name;
                     parameter.Name = GetParameterName(parameter.Name);
                     parameter.Type = NormalizeType(parameter.Type);
                 }

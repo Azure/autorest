@@ -200,12 +200,10 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         private IType NormalizeCompositeType(CompositeType compositeType)
         {
-            compositeType.SerializedName = compositeType.Name;
             compositeType.Name = GetTypeName(compositeType.Name);
 
             foreach (var property in compositeType.Properties)
             {
-                property.SerializedName = property.Name;
                 property.Name = GetPropertyName(property.Name);
                 property.Type = NormalizeType(property.Type);
             }

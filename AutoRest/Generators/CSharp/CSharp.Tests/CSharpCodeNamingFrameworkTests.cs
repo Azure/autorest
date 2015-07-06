@@ -29,6 +29,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
             var customObjectType = new CompositeType();
             customObjectType.Name = "!@#$%^&*()abc";
+            customObjectType.SerializedName = "!@#$%^&*()abc";
             customObjectType.Properties.Add(new Property
             {
                 Name = "boolean-property",
@@ -45,6 +46,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
             var baseType = new CompositeType();
             baseType.Name = "baseType";
+            baseType.SerializedName = "baseType";
             baseType.Properties.Add(new Property
             {
                 Name = "boolean-property",

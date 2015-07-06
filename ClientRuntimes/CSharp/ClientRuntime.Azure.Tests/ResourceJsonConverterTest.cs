@@ -184,6 +184,51 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         }
 
         [Fact]
+        public void TestDeserializationOfResourceWithConflictingProperties()
+        {
+            var expected = @"{
+                ""id"": ""123"",
+                ""location"": ""EastUS"",
+                ""tags"": {
+                ""tag1"": ""value1""
+                },
+                ""properties"": {
+                   ""size"": ""3"",
+                   ""provisioningState"": ""some string"",
+                   ""location"": ""Special Location"",
+                   ""id"": ""Special Id""
+                }
+            }";
+
+            var deserializeSettings = new JsonSerializerSettings()
+            {
+                Formatting = Formatting.Indented,
+                NullValueHandling = NullValueHandling.Ignore,
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                ContractResolver = new ReadOnlyJsonContractResolver()
+            };
+            deserializeSettings.Converters.Add(new ResourceJsonConverter());
+            var deserializedResource = JsonConvert.DeserializeObject<SampleResourceWithConflict>(expected, deserializeSettings);
+
+            Assert.Equal("Special Location", deserializedResource.SampleResourceWithConflictLocation);
+            Assert.Equal("Special Id", deserializedResource.SampleResourceWithConflictId);
+            Assert.Equal("123", deserializedResource.Id);
+
+            var expectedSerializedJson = @"{
+  ""location"": ""EastUS"",
+  ""tags"": {
+    ""tag1"": ""value1""
+  },
+  ""properties"": {
+    ""location"": ""Special Location"",
+    ""id"": ""Special Id""
+  }
+}";
+            var newJson = JsonConvert.SerializeObject(deserializedResource, deserializeSettings);
+            Assert.Equal(expectedSerializedJson, newJson);
+        }
+
+        [Fact]
         public void TestGenericResourceDeserialization()
         {
             var expected = @"{

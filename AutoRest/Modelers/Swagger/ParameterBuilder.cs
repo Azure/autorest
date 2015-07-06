@@ -37,6 +37,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             var parameter = new Parameter
             {
                 Name = _swaggerParameter.Name,
+                SerializedName = _swaggerParameter.Name,
                 Type = parameterType,
                 IsRequired = _swaggerParameter.IsRequired,
                 Location = (Generator.ClientModel.ParameterLocation) Enum.Parse(typeof (Generator.ClientModel.ParameterLocation), _swaggerParameter.In.ToString())
