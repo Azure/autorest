@@ -293,7 +293,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             else if (enumType != null && !string.IsNullOrEmpty(enumType.Name))
             {
                 return builder.AppendLine(
-                    "fail ClientRuntime::DeserializationError.new('Error occured in deserializing the enum', nil, nil, nil) if (!{2}.nil? && !{2}.empty? && !{0}::{1}.constants.any? {{ |enum| enum.to_s == {2} }})",
+                    "fail ClientRuntime::DeserializationError.new('Error occured in deserializing the enum', nil, nil, nil) if (!{2}.nil? && !{2}.empty? && !{0}::{1}.constants.any? {{ |e| {0}::{1}.const_get(e) == {2} }})",
                     defaultNamespace, enumType.Name, valueReference).ToString();
             }
             else if (sequence != null)
