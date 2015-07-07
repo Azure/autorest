@@ -6,6 +6,7 @@
     "url": "https://github.com/Azure/AutoRest"
   },
   "version": "0.1.1",
+  "private": true, 
   "description": "Tests for Autorest Azure nodejs codegen",
   "engines": {
     "node": ">= 0.8.26"
