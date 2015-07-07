@@ -189,21 +189,23 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n      fail ArgumentError, \'credentials is nil\' if credentials.nil?\r\n      @cred" +
-"entials = credentials\r\n      ");
-#line 44 "ServiceClientTemplate.cshtml"
+            WriteLiteral("\r\n      fail ArgumentError, \'credentials is nil\' if credentials.nil?\r\n      fail " +
+"ArgumentError, \'invalid type of credentials input parameter\' unless credentials." +
+"is_a?(ClientRuntime::ServiceClientCredentials)\r\n      @credentials = credentials" +
+"\r\n      ");
+#line 45 "ServiceClientTemplate.cshtml"
  Write(EmptyLine);
 
 #line default
 #line hidden
             WriteLiteral("\r\n");
-#line 45 "ServiceClientTemplate.cshtml"
+#line 46 "ServiceClientTemplate.cshtml"
       
 
 #line default
 #line hidden
 
-#line 45 "ServiceClientTemplate.cshtml"
+#line 46 "ServiceClientTemplate.cshtml"
        foreach (var operation in Model.MethodGroups) 
       {
 
@@ -211,38 +213,38 @@ Write(EmptyLine);
 #line hidden
 
             WriteLiteral("      @");
-#line 47 "ServiceClientTemplate.cshtml"
+#line 48 "ServiceClientTemplate.cshtml"
       Write(RubyCodeNamer.UnderscoreCase(operation));
 
 #line default
 #line hidden
             WriteLiteral(" = ");
-#line 47 "ServiceClientTemplate.cshtml"
+#line 48 "ServiceClientTemplate.cshtml"
                                                    Write(operation);
 
 #line default
 #line hidden
             WriteLiteral(".new(self)\r\n");
-#line 48 "ServiceClientTemplate.cshtml"
+#line 49 "ServiceClientTemplate.cshtml"
       }
 
 #line default
 #line hidden
 
             WriteLiteral("    end\r\n\r\n    ");
-#line 51 "ServiceClientTemplate.cshtml"
+#line 52 "ServiceClientTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
             WriteLiteral("\r\n");
-#line 52 "ServiceClientTemplate.cshtml"
+#line 53 "ServiceClientTemplate.cshtml"
     
 
 #line default
 #line hidden
 
-#line 52 "ServiceClientTemplate.cshtml"
+#line 53 "ServiceClientTemplate.cshtml"
      foreach (var method in Model.MethodTemplateModels)
     {
 
@@ -250,31 +252,31 @@ Write(EmptyLine);
 #line hidden
 
             WriteLiteral("    ");
-#line 54 "ServiceClientTemplate.cshtml"
+#line 55 "ServiceClientTemplate.cshtml"
   Write(Include(new MethodTemplate(), method));
 
 #line default
 #line hidden
             WriteLiteral("\r\n");
-#line 55 "ServiceClientTemplate.cshtml"
+#line 56 "ServiceClientTemplate.cshtml"
     
 
 #line default
 #line hidden
 
-#line 55 "ServiceClientTemplate.cshtml"
+#line 56 "ServiceClientTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-#line 55 "ServiceClientTemplate.cshtml"
+#line 56 "ServiceClientTemplate.cshtml"
               
 
 #line default
 #line hidden
 
             WriteLiteral("    \r\n");
-#line 57 "ServiceClientTemplate.cshtml"
+#line 58 "ServiceClientTemplate.cshtml"
     }
 
 #line default
