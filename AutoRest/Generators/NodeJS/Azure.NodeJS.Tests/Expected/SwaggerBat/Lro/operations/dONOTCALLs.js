@@ -26,12 +26,21 @@ function DONOTCALLs(client) {
 /**
  * Long running put request poller, service returns a ‘200’ with
  * ProvisioningState=’Succeeded’
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-DONOTCALLs.prototype.getProvisioning202Accepted200Succeeded = function (callback) {
+DONOTCALLs.prototype.getProvisioning202Accepted200Succeeded = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -57,6 +66,13 @@ DONOTCALLs.prototype.getProvisioning202Accepted200Succeeded = function (callback
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -111,12 +127,21 @@ DONOTCALLs.prototype.getProvisioning202Accepted200Succeeded = function (callback
 /**
  * Long running put request poller, service returns a ‘200’ with
  * ProvisioningState=’Failed’
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-DONOTCALLs.prototype.getProvisioning202Deleting200Failed = function (callback) {
+DONOTCALLs.prototype.getProvisioning202Deleting200Failed = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -142,6 +167,13 @@ DONOTCALLs.prototype.getProvisioning202Deleting200Failed = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -196,12 +228,21 @@ DONOTCALLs.prototype.getProvisioning202Deleting200Failed = function (callback) {
 /**
  * Long running put request poller, service returns a ‘200’ with
  * ProvisioningState=’Canceled’
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-DONOTCALLs.prototype.getProvisioning202Deleting200canceled = function (callback) {
+DONOTCALLs.prototype.getProvisioning202Deleting200canceled = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -227,6 +268,13 @@ DONOTCALLs.prototype.getProvisioning202Deleting200canceled = function (callback)
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -281,12 +329,21 @@ DONOTCALLs.prototype.getProvisioning202Deleting200canceled = function (callback)
 /**
  * Long running put request poller, service returns a ‘200’ with no location
  * header
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-DONOTCALLs.prototype.getDelete202Retry200 = function (callback) {
+DONOTCALLs.prototype.getDelete202Retry200 = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -312,6 +369,13 @@ DONOTCALLs.prototype.getDelete202Retry200 = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -350,12 +414,21 @@ DONOTCALLs.prototype.getDelete202Retry200 = function (callback) {
 /**
  * Long running put request poller, service returns a ‘200’ with no location
  * header
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-DONOTCALLs.prototype.get202NoRetry204 = function (callback) {
+DONOTCALLs.prototype.get202NoRetry204 = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -381,6 +454,13 @@ DONOTCALLs.prototype.get202NoRetry204 = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -419,12 +499,21 @@ DONOTCALLs.prototype.get202NoRetry204 = function (callback) {
 /**
  * Long running post request poller, service returns a ‘200’ with a Product.
  * Client should return with success from long-running operation
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-DONOTCALLs.prototype.post202Retry200Polling = function (callback) {
+DONOTCALLs.prototype.post202Retry200Polling = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -450,6 +539,13 @@ DONOTCALLs.prototype.post202Retry200Polling = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -504,12 +600,21 @@ DONOTCALLs.prototype.post202Retry200Polling = function (callback) {
 /**
  * Long running post request poller, service returns a ‘204' with no enetity
  * body.  Client should return with success from long-running operation
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-DONOTCALLs.prototype.post202NoRetry204Polling = function (callback) {
+DONOTCALLs.prototype.post202NoRetry204Polling = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -535,6 +640,13 @@ DONOTCALLs.prototype.post202NoRetry204Polling = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -573,12 +685,21 @@ DONOTCALLs.prototype.post202NoRetry204Polling = function (callback) {
 /**
  * Long running put request poller, service returns a 500, then a  ‘200’ with
  * ProvisioningState=’Succeeded’
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-DONOTCALLs.prototype.getRetryProvisioning202Accepted200Succeeded = function (callback) {
+DONOTCALLs.prototype.getRetryProvisioning202Accepted200Succeeded = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -604,6 +725,13 @@ DONOTCALLs.prototype.getRetryProvisioning202Accepted200Succeeded = function (cal
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -658,12 +786,21 @@ DONOTCALLs.prototype.getRetryProvisioning202Accepted200Succeeded = function (cal
 /**
  * Long running put request poller, service returns a 500, then a  ‘200’ with
  * no location header
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-DONOTCALLs.prototype.getRetry202Retry200 = function (callback) {
+DONOTCALLs.prototype.getRetry202Retry200 = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -689,6 +826,13 @@ DONOTCALLs.prototype.getRetry202Retry200 = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -727,12 +871,21 @@ DONOTCALLs.prototype.getRetry202Retry200 = function (callback) {
 /**
  * Long running post request poller, service returns a 500, then a  ‘200’ with
  * a Product.  Client should return with success from long-running operation
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-DONOTCALLs.prototype.postRetry202Retry200Polling = function (callback) {
+DONOTCALLs.prototype.postRetry202Retry200Polling = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -758,6 +911,13 @@ DONOTCALLs.prototype.postRetry202Retry200Polling = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -811,12 +971,21 @@ DONOTCALLs.prototype.postRetry202Retry200Polling = function (callback) {
 
 /**
  * DO NOT CALL THIS METHOD. For completion only
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-DONOTCALLs.prototype.getNonRetry400 = function (callback) {
+DONOTCALLs.prototype.getNonRetry400 = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -842,6 +1011,13 @@ DONOTCALLs.prototype.getNonRetry400 = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -879,12 +1055,21 @@ DONOTCALLs.prototype.getNonRetry400 = function (callback) {
 
 /**
  * Long running put request poller, service returns a 400 with an error body
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-DONOTCALLs.prototype.getRetry202NonRetry400 = function (callback) {
+DONOTCALLs.prototype.getRetry202NonRetry400 = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -910,6 +1095,13 @@ DONOTCALLs.prototype.getRetry202NonRetry400 = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -948,12 +1140,21 @@ DONOTCALLs.prototype.getRetry202NonRetry400 = function (callback) {
 /**
  * Long running post request poller, service returns a 500, then a  ‘200’ with
  * a Product.  Client should return with success from long-running operation
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-DONOTCALLs.prototype.postRetry202Retry400Polling = function (callback) {
+DONOTCALLs.prototype.postRetry202Retry400Polling = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -979,6 +1180,13 @@ DONOTCALLs.prototype.postRetry202Retry400Polling = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1032,12 +1240,21 @@ DONOTCALLs.prototype.postRetry202Retry400Polling = function (callback) {
 
 /**
  * Long running post request poller, service returns a 400 with an error body
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-DONOTCALLs.prototype.postRetry202NonRetry400Polling = function (callback) {
+DONOTCALLs.prototype.postRetry202NonRetry400Polling = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1063,6 +1280,13 @@ DONOTCALLs.prototype.postRetry202NonRetry400Polling = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1117,12 +1341,21 @@ DONOTCALLs.prototype.postRetry202NonRetry400Polling = function (callback) {
 /**
  * Long running post request poller, service returns a ‘200’ with a Product.
  * Client should return with success from long-running operation
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-DONOTCALLs.prototype.post202Retry200PollingCustomHeader = function (callback) {
+DONOTCALLs.prototype.post202Retry200PollingCustomHeader = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1148,6 +1381,13 @@ DONOTCALLs.prototype.post202Retry200PollingCustomHeader = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

@@ -24,12 +24,21 @@ function Primitive(client) {
 
 /**
  * Get complex types with integer properties
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Primitive.prototype.getInt = function (callback) {
+Primitive.prototype.getInt = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -50,6 +59,13 @@ Primitive.prototype.getInt = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -109,12 +125,21 @@ Primitive.prototype.getInt = function (callback) {
  *
  * @param {Number} [complexBody.field2] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Primitive.prototype.putInt = function (complexBody, callback) {
+Primitive.prototype.putInt = function (complexBody, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -149,6 +174,13 @@ Primitive.prototype.putInt = function (complexBody, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(complexBody));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -186,12 +218,21 @@ Primitive.prototype.putInt = function (complexBody, callback) {
 
 /**
  * Get complex types with long properties
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Primitive.prototype.getLong = function (callback) {
+Primitive.prototype.getLong = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -212,6 +253,13 @@ Primitive.prototype.getLong = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -271,12 +319,21 @@ Primitive.prototype.getLong = function (callback) {
  *
  * @param {Number} [complexBody.field2] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Primitive.prototype.putLong = function (complexBody, callback) {
+Primitive.prototype.putLong = function (complexBody, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -311,6 +368,13 @@ Primitive.prototype.putLong = function (complexBody, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(complexBody));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -348,12 +412,21 @@ Primitive.prototype.putLong = function (complexBody, callback) {
 
 /**
  * Get complex types with float properties
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Primitive.prototype.getFloat = function (callback) {
+Primitive.prototype.getFloat = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -374,6 +447,13 @@ Primitive.prototype.getFloat = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -433,12 +513,21 @@ Primitive.prototype.getFloat = function (callback) {
  *
  * @param {Number} [complexBody.field2] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Primitive.prototype.putFloat = function (complexBody, callback) {
+Primitive.prototype.putFloat = function (complexBody, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -473,6 +562,13 @@ Primitive.prototype.putFloat = function (complexBody, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(complexBody));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -510,12 +606,21 @@ Primitive.prototype.putFloat = function (complexBody, callback) {
 
 /**
  * Get complex types with double properties
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Primitive.prototype.getDouble = function (callback) {
+Primitive.prototype.getDouble = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -536,6 +641,13 @@ Primitive.prototype.getDouble = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -595,12 +707,21 @@ Primitive.prototype.getDouble = function (callback) {
  *
  * @param {Number} [complexBody.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Primitive.prototype.putDouble = function (complexBody, callback) {
+Primitive.prototype.putDouble = function (complexBody, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -635,6 +756,13 @@ Primitive.prototype.putDouble = function (complexBody, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(complexBody));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -672,12 +800,21 @@ Primitive.prototype.putDouble = function (complexBody, callback) {
 
 /**
  * Get complex types with bool properties
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Primitive.prototype.getBool = function (callback) {
+Primitive.prototype.getBool = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -698,6 +835,13 @@ Primitive.prototype.getBool = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -757,12 +901,21 @@ Primitive.prototype.getBool = function (callback) {
  *
  * @param {Boolean} [complexBody.fieldTrue] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Primitive.prototype.putBool = function (complexBody, callback) {
+Primitive.prototype.putBool = function (complexBody, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -797,6 +950,13 @@ Primitive.prototype.putBool = function (complexBody, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(complexBody));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -834,12 +994,21 @@ Primitive.prototype.putBool = function (complexBody, callback) {
 
 /**
  * Get complex types with string properties
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Primitive.prototype.getString = function (callback) {
+Primitive.prototype.getString = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -860,6 +1029,13 @@ Primitive.prototype.getString = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -921,12 +1097,21 @@ Primitive.prototype.getString = function (callback) {
  *
  * @param {String} [complexBody.null] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Primitive.prototype.putString = function (complexBody, callback) {
+Primitive.prototype.putString = function (complexBody, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -961,6 +1146,13 @@ Primitive.prototype.putString = function (complexBody, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(complexBody));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -998,12 +1190,21 @@ Primitive.prototype.putString = function (complexBody, callback) {
 
 /**
  * Get complex types with date properties
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Primitive.prototype.getDate = function (callback) {
+Primitive.prototype.getDate = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1024,6 +1225,13 @@ Primitive.prototype.getDate = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1083,12 +1291,21 @@ Primitive.prototype.getDate = function (callback) {
  *
  * @param {Date} [complexBody.leap] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Primitive.prototype.putDate = function (complexBody, callback) {
+Primitive.prototype.putDate = function (complexBody, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1123,6 +1340,13 @@ Primitive.prototype.putDate = function (complexBody, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(complexBody));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1160,12 +1384,21 @@ Primitive.prototype.putDate = function (complexBody, callback) {
 
 /**
  * Get complex types with datetime properties
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Primitive.prototype.getDateTime = function (callback) {
+Primitive.prototype.getDateTime = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1186,6 +1419,13 @@ Primitive.prototype.getDateTime = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1245,12 +1485,21 @@ Primitive.prototype.getDateTime = function (callback) {
  *
  * @param {Date} [complexBody.now] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Primitive.prototype.putDateTime = function (complexBody, callback) {
+Primitive.prototype.putDateTime = function (complexBody, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1285,6 +1534,13 @@ Primitive.prototype.putDateTime = function (complexBody, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(complexBody));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1322,12 +1578,21 @@ Primitive.prototype.putDateTime = function (complexBody, callback) {
 
 /**
  * Get complex types with byte properties
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Primitive.prototype.getByte = function (callback) {
+Primitive.prototype.getByte = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1348,6 +1613,13 @@ Primitive.prototype.getByte = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1405,12 +1677,21 @@ Primitive.prototype.getByte = function (callback) {
  *
  * @param {Buffer} [complexBody.field] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Primitive.prototype.putByte = function (complexBody, callback) {
+Primitive.prototype.putByte = function (complexBody, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1445,6 +1726,13 @@ Primitive.prototype.putByte = function (complexBody, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(complexBody));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

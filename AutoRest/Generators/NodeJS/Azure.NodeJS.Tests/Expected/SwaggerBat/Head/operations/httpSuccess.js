@@ -25,12 +25,21 @@ function HttpSuccess(client) {
 
 /**
  * Return 204 status code if successful
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpSuccess.prototype.head204 = function (callback) {
+HttpSuccess.prototype.head204 = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -56,6 +65,13 @@ HttpSuccess.prototype.head204 = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -94,12 +110,21 @@ HttpSuccess.prototype.head204 = function (callback) {
 
 /**
  * Return 404 status code if successful
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpSuccess.prototype.head404 = function (callback) {
+HttpSuccess.prototype.head404 = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -125,6 +150,13 @@ HttpSuccess.prototype.head404 = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

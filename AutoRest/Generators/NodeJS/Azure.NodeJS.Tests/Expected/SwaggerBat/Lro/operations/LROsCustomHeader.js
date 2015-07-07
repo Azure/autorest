@@ -36,23 +36,35 @@ function LROsCustomHeader(client) {
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROsCustomHeader.prototype.putAsyncRetrySucceeded = function (product, callback) {
+LROsCustomHeader.prototype.putAsyncRetrySucceeded = function (product, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
   var self = this;
   function getMethod() {
     var cb = function (callback) {
-      return self.getAsyncRetrySucceeded(callback);
+      return self.getAsyncRetrySucceeded(options, callback);
     };
     return cb;
   }
   // Send request
-  self.beginPutAsyncRetrySucceeded(product, function (err, result){
+  self.beginPutAsyncRetrySucceeded(product, options, function (err, result){
     if (err) return callback(err);
-    client.getPutOperationResult(result, getMethod(), callback);
+    client.getPutOperationResult(result, getMethod(), options, callback);
   });
 };
 
@@ -68,12 +80,21 @@ LROsCustomHeader.prototype.putAsyncRetrySucceeded = function (product, callback)
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (product, callback) {
+LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (product, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -110,6 +131,13 @@ LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (product, call
   requestContent = JSON.stringify(msRest.serializeObject(product));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -167,12 +195,21 @@ LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (product, call
  * a 200 to the initial request, with an entity that contains
  * ProvisioningState=’Creating’. Poll the endpoint indicated in the
  * Azure-AsyncOperation header for operation status
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROsCustomHeader.prototype.getAsyncRetrySucceeded = function (callback) {
+LROsCustomHeader.prototype.getAsyncRetrySucceeded = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -198,6 +235,13 @@ LROsCustomHeader.prototype.getAsyncRetrySucceeded = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -262,23 +306,35 @@ LROsCustomHeader.prototype.getAsyncRetrySucceeded = function (callback) {
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROsCustomHeader.prototype.put201CreatingSucceeded200 = function (product, callback) {
+LROsCustomHeader.prototype.put201CreatingSucceeded200 = function (product, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
   var self = this;
   function getMethod() {
     var cb = function (callback) {
-      return self.get201CreatingSucceeded200Polling(callback);
+      return self.get201CreatingSucceeded200Polling(options, callback);
     };
     return cb;
   }
   // Send request
-  self.beginPut201CreatingSucceeded200(product, function (err, result){
+  self.beginPut201CreatingSucceeded200(product, options, function (err, result){
     if (err) return callback(err);
-    client.getPutOperationResult(result, getMethod(), callback);
+    client.getPutOperationResult(result, getMethod(), options, callback);
   });
 };
 
@@ -294,12 +350,21 @@ LROsCustomHeader.prototype.put201CreatingSucceeded200 = function (product, callb
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (product, callback) {
+LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (product, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -336,6 +401,13 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (product, 
   requestContent = JSON.stringify(msRest.serializeObject(product));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -407,12 +479,21 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (product, 
  * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
  * message header for all requests. Long running put request poller, service
  * returns a ‘200’ with ProvisioningState=’Succeeded’
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROsCustomHeader.prototype.get201CreatingSucceeded200Polling = function (callback) {
+LROsCustomHeader.prototype.get201CreatingSucceeded200Polling = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -438,6 +519,13 @@ LROsCustomHeader.prototype.get201CreatingSucceeded200Polling = function (callbac
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -501,16 +589,25 @@ LROsCustomHeader.prototype.get201CreatingSucceeded200Polling = function (callbac
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROsCustomHeader.prototype.post202Retry200 = function (product, callback) {
+LROsCustomHeader.prototype.post202Retry200 = function (product, options, callback) {
   var self = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   // Send request
-  this.beginPost202Retry200(product, function (err, result){
+  this.beginPost202Retry200(product, options, function (err, result){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, callback);
+    self.getPostOrDeleteOperationResult(result, options, callback);
   });
 };
 
@@ -525,12 +622,21 @@ LROsCustomHeader.prototype.post202Retry200 = function (product, callback) {
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROsCustomHeader.prototype.beginPost202Retry200 = function (product, callback) {
+LROsCustomHeader.prototype.beginPost202Retry200 = function (product, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -567,6 +673,13 @@ LROsCustomHeader.prototype.beginPost202Retry200 = function (product, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(product));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -615,16 +728,25 @@ LROsCustomHeader.prototype.beginPost202Retry200 = function (product, callback) {
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROsCustomHeader.prototype.postAsyncRetrySucceeded = function (product, callback) {
+LROsCustomHeader.prototype.postAsyncRetrySucceeded = function (product, options, callback) {
   var self = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   // Send request
-  this.beginPostAsyncRetrySucceeded(product, function (err, result){
+  this.beginPostAsyncRetrySucceeded(product, options, function (err, result){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, callback);
+    self.getPostOrDeleteOperationResult(result, options, callback);
   });
 };
 
@@ -640,12 +762,21 @@ LROsCustomHeader.prototype.postAsyncRetrySucceeded = function (product, callback
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROsCustomHeader.prototype.beginPostAsyncRetrySucceeded = function (product, callback) {
+LROsCustomHeader.prototype.beginPostAsyncRetrySucceeded = function (product, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -682,6 +813,13 @@ LROsCustomHeader.prototype.beginPostAsyncRetrySucceeded = function (product, cal
   requestContent = JSON.stringify(msRest.serializeObject(product));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

@@ -28,12 +28,21 @@ function SubscriptionInMethod(client) {
  * subscription id = '1234-5678-9012-3456' to succeed
  * @param {String} [subscriptionId] This should appear as a method parameter, use value '1234-5678-9012-3456'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-SubscriptionInMethod.prototype.postMethodLocalValid = function (subscriptionId, callback) {
+SubscriptionInMethod.prototype.postMethodLocalValid = function (subscriptionId, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -71,6 +80,13 @@ SubscriptionInMethod.prototype.postMethodLocalValid = function (subscriptionId, 
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -112,12 +128,21 @@ SubscriptionInMethod.prototype.postMethodLocalValid = function (subscriptionId, 
  * making this call
  * @param {String} [subscriptionId] This should appear as a method parameter, use value null, client-side validation should prvenet the call
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-SubscriptionInMethod.prototype.postMethodLocalNull = function (subscriptionId, callback) {
+SubscriptionInMethod.prototype.postMethodLocalNull = function (subscriptionId, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -155,6 +180,13 @@ SubscriptionInMethod.prototype.postMethodLocalNull = function (subscriptionId, c
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -195,12 +227,21 @@ SubscriptionInMethod.prototype.postMethodLocalNull = function (subscriptionId, c
  * subscription id = '1234-5678-9012-3456' to succeed
  * @param {String} [subscriptionId] Should appear as a method parameter -use value '1234-5678-9012-3456'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-SubscriptionInMethod.prototype.postPathLocalValid = function (subscriptionId, callback) {
+SubscriptionInMethod.prototype.postPathLocalValid = function (subscriptionId, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -238,6 +279,13 @@ SubscriptionInMethod.prototype.postPathLocalValid = function (subscriptionId, ca
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -278,12 +326,21 @@ SubscriptionInMethod.prototype.postPathLocalValid = function (subscriptionId, ca
  * subscription id = '1234-5678-9012-3456' to succeed
  * @param {String} [subscriptionId] The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-SubscriptionInMethod.prototype.postSwaggerLocalValid = function (subscriptionId, callback) {
+SubscriptionInMethod.prototype.postSwaggerLocalValid = function (subscriptionId, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -321,6 +378,13 @@ SubscriptionInMethod.prototype.postSwaggerLocalValid = function (subscriptionId,
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

@@ -27,12 +27,21 @@ function Group(client) {
  * Provides a resouce group with name 'testgroup101' and location 'West US'.
  * @param {String} [resourceGroupName] Resource Group name 'testgroup101'.
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Group.prototype.getSampleResourceGroup = function (resourceGroupName, callback) {
+Group.prototype.getSampleResourceGroup = function (resourceGroupName, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -71,6 +80,13 @@ Group.prototype.getSampleResourceGroup = function (resourceGroupName, callback) 
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

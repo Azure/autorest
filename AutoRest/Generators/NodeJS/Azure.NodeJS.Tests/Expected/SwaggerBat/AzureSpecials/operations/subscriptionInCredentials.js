@@ -26,12 +26,21 @@ function SubscriptionInCredentials(client) {
 /**
  * POST method with subscriptionId modeled in credentials.  Set the credential
  * subscriptionId to '1234-5678-9012-3456' to succeed
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-SubscriptionInCredentials.prototype.postMethodGlobalValid = function (callback) {
+SubscriptionInCredentials.prototype.postMethodGlobalValid = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -58,6 +67,13 @@ SubscriptionInCredentials.prototype.postMethodGlobalValid = function (callback) 
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -97,12 +113,21 @@ SubscriptionInCredentials.prototype.postMethodGlobalValid = function (callback) 
  * POST method with subscriptionId modeled in credentials.  Set the credential
  * subscriptionId to null, and client-side validation should prevent you from
  * making this call
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-SubscriptionInCredentials.prototype.postMethodGlobalNull = function (callback) {
+SubscriptionInCredentials.prototype.postMethodGlobalNull = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -129,6 +154,13 @@ SubscriptionInCredentials.prototype.postMethodGlobalNull = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -167,12 +199,21 @@ SubscriptionInCredentials.prototype.postMethodGlobalNull = function (callback) {
 /**
  * POST method with subscriptionId modeled in credentials.  Set the credential
  * subscriptionId to '1234-5678-9012-3456' to succeed
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-SubscriptionInCredentials.prototype.postMethodGlobalNotProvidedValid = function (callback) {
+SubscriptionInCredentials.prototype.postMethodGlobalNotProvidedValid = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -199,6 +240,13 @@ SubscriptionInCredentials.prototype.postMethodGlobalNotProvidedValid = function 
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -237,12 +285,21 @@ SubscriptionInCredentials.prototype.postMethodGlobalNotProvidedValid = function 
 /**
  * POST method with subscriptionId modeled in credentials.  Set the credential
  * subscriptionId to '1234-5678-9012-3456' to succeed
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-SubscriptionInCredentials.prototype.postPathGlobalValid = function (callback) {
+SubscriptionInCredentials.prototype.postPathGlobalValid = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -269,6 +326,13 @@ SubscriptionInCredentials.prototype.postPathGlobalValid = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -307,12 +371,21 @@ SubscriptionInCredentials.prototype.postPathGlobalValid = function (callback) {
 /**
  * POST method with subscriptionId modeled in credentials.  Set the credential
  * subscriptionId to '1234-5678-9012-3456' to succeed
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-SubscriptionInCredentials.prototype.postSwaggerGlobalValid = function (callback) {
+SubscriptionInCredentials.prototype.postSwaggerGlobalValid = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -339,6 +412,13 @@ SubscriptionInCredentials.prototype.postSwaggerGlobalValid = function (callback)
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

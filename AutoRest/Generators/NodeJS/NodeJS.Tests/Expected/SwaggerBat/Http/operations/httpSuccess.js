@@ -24,12 +24,21 @@ function HttpSuccess(client) {
 
 /**
  * Return 200 status code if successful
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpSuccess.prototype.head200 = function (callback) {
+HttpSuccess.prototype.head200 = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -50,6 +59,13 @@ HttpSuccess.prototype.head200 = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -87,12 +103,21 @@ HttpSuccess.prototype.head200 = function (callback) {
 
 /**
  * Get 200 success
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpSuccess.prototype.get200 = function (callback) {
+HttpSuccess.prototype.get200 = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -113,6 +138,13 @@ HttpSuccess.prototype.get200 = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -165,12 +197,21 @@ HttpSuccess.prototype.get200 = function (callback) {
  * Put boolean value true returning 200 success
  * @param {Boolean} [booleanValue] Simple boolean value true
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpSuccess.prototype.put200 = function (booleanValue, callback) {
+HttpSuccess.prototype.put200 = function (booleanValue, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -202,6 +243,13 @@ HttpSuccess.prototype.put200 = function (booleanValue, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -241,12 +289,21 @@ HttpSuccess.prototype.put200 = function (booleanValue, callback) {
  * Patch true Boolean value in request returning 200
  * @param {Boolean} [booleanValue] Simple boolean value true
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpSuccess.prototype.patch200 = function (booleanValue, callback) {
+HttpSuccess.prototype.patch200 = function (booleanValue, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -278,6 +335,13 @@ HttpSuccess.prototype.patch200 = function (booleanValue, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -317,12 +381,21 @@ HttpSuccess.prototype.patch200 = function (booleanValue, callback) {
  * Post bollean value true in request that returns a 200
  * @param {Boolean} [booleanValue] Simple boolean value true
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpSuccess.prototype.post200 = function (booleanValue, callback) {
+HttpSuccess.prototype.post200 = function (booleanValue, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -354,6 +427,13 @@ HttpSuccess.prototype.post200 = function (booleanValue, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -393,12 +473,21 @@ HttpSuccess.prototype.post200 = function (booleanValue, callback) {
  * Delete simple boolean value true returns 200
  * @param {Boolean} [booleanValue] Simple boolean value true
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpSuccess.prototype.delete200 = function (booleanValue, callback) {
+HttpSuccess.prototype.delete200 = function (booleanValue, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -430,6 +519,13 @@ HttpSuccess.prototype.delete200 = function (booleanValue, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -469,12 +565,21 @@ HttpSuccess.prototype.delete200 = function (booleanValue, callback) {
  * Put true Boolean value in request returns 201
  * @param {Boolean} [booleanValue] Simple boolean value true
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpSuccess.prototype.put201 = function (booleanValue, callback) {
+HttpSuccess.prototype.put201 = function (booleanValue, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -506,6 +611,13 @@ HttpSuccess.prototype.put201 = function (booleanValue, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -545,12 +657,21 @@ HttpSuccess.prototype.put201 = function (booleanValue, callback) {
  * Post true Boolean value in request returns 201 (Created)
  * @param {Boolean} [booleanValue] Simple boolean value true
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpSuccess.prototype.post201 = function (booleanValue, callback) {
+HttpSuccess.prototype.post201 = function (booleanValue, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -582,6 +703,13 @@ HttpSuccess.prototype.post201 = function (booleanValue, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -621,12 +749,21 @@ HttpSuccess.prototype.post201 = function (booleanValue, callback) {
  * Put true Boolean value in request returns 202 (Accepted)
  * @param {Boolean} [booleanValue] Simple boolean value true
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpSuccess.prototype.put202 = function (booleanValue, callback) {
+HttpSuccess.prototype.put202 = function (booleanValue, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -658,6 +795,13 @@ HttpSuccess.prototype.put202 = function (booleanValue, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -697,12 +841,21 @@ HttpSuccess.prototype.put202 = function (booleanValue, callback) {
  * Patch true Boolean value in request returns 202
  * @param {Boolean} [booleanValue] Simple boolean value true
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpSuccess.prototype.patch202 = function (booleanValue, callback) {
+HttpSuccess.prototype.patch202 = function (booleanValue, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -734,6 +887,13 @@ HttpSuccess.prototype.patch202 = function (booleanValue, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -773,12 +933,21 @@ HttpSuccess.prototype.patch202 = function (booleanValue, callback) {
  * Post true Boolean value in request returns 202 (Accepted)
  * @param {Boolean} [booleanValue] Simple boolean value true
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpSuccess.prototype.post202 = function (booleanValue, callback) {
+HttpSuccess.prototype.post202 = function (booleanValue, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -810,6 +979,13 @@ HttpSuccess.prototype.post202 = function (booleanValue, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -849,12 +1025,21 @@ HttpSuccess.prototype.post202 = function (booleanValue, callback) {
  * Delete true Boolean value in request returns 202 (accepted)
  * @param {Boolean} [booleanValue] Simple boolean value true
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpSuccess.prototype.delete202 = function (booleanValue, callback) {
+HttpSuccess.prototype.delete202 = function (booleanValue, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -886,6 +1071,13 @@ HttpSuccess.prototype.delete202 = function (booleanValue, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -923,12 +1115,21 @@ HttpSuccess.prototype.delete202 = function (booleanValue, callback) {
 
 /**
  * Return 204 status code if successful
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpSuccess.prototype.head204 = function (callback) {
+HttpSuccess.prototype.head204 = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -949,6 +1150,13 @@ HttpSuccess.prototype.head204 = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -988,12 +1196,21 @@ HttpSuccess.prototype.head204 = function (callback) {
  * Put true Boolean value in request returns 204 (no content)
  * @param {Boolean} [booleanValue] Simple boolean value true
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpSuccess.prototype.put204 = function (booleanValue, callback) {
+HttpSuccess.prototype.put204 = function (booleanValue, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1025,6 +1242,13 @@ HttpSuccess.prototype.put204 = function (booleanValue, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1064,12 +1288,21 @@ HttpSuccess.prototype.put204 = function (booleanValue, callback) {
  * Patch true Boolean value in request returns 204 (no content)
  * @param {Boolean} [booleanValue] Simple boolean value true
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpSuccess.prototype.patch204 = function (booleanValue, callback) {
+HttpSuccess.prototype.patch204 = function (booleanValue, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1101,6 +1334,13 @@ HttpSuccess.prototype.patch204 = function (booleanValue, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1140,12 +1380,21 @@ HttpSuccess.prototype.patch204 = function (booleanValue, callback) {
  * Post true Boolean value in request returns 204 (no content)
  * @param {Boolean} [booleanValue] Simple boolean value true
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpSuccess.prototype.post204 = function (booleanValue, callback) {
+HttpSuccess.prototype.post204 = function (booleanValue, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1177,6 +1426,13 @@ HttpSuccess.prototype.post204 = function (booleanValue, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1216,12 +1472,21 @@ HttpSuccess.prototype.post204 = function (booleanValue, callback) {
  * Delete true Boolean value in request returns 204 (no content)
  * @param {Boolean} [booleanValue] Simple boolean value true
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpSuccess.prototype.delete204 = function (booleanValue, callback) {
+HttpSuccess.prototype.delete204 = function (booleanValue, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1253,6 +1518,13 @@ HttpSuccess.prototype.delete204 = function (booleanValue, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1290,12 +1562,21 @@ HttpSuccess.prototype.delete204 = function (booleanValue, callback) {
 
 /**
  * Return 404 status code
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpSuccess.prototype.head404 = function (callback) {
+HttpSuccess.prototype.head404 = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1316,6 +1597,13 @@ HttpSuccess.prototype.head404 = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

@@ -26,12 +26,21 @@ function Queries(client) {
  * Get true Boolean value on path
  * @param {Boolean} [boolQuery] true boolean value
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.getBooleanTrue = function (boolQuery, callback) {
+Queries.prototype.getBooleanTrue = function (boolQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -67,6 +76,13 @@ Queries.prototype.getBooleanTrue = function (boolQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -106,12 +122,21 @@ Queries.prototype.getBooleanTrue = function (boolQuery, callback) {
  * Get false Boolean value on path
  * @param {Boolean} [boolQuery] false boolean value
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.getBooleanFalse = function (boolQuery, callback) {
+Queries.prototype.getBooleanFalse = function (boolQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -147,6 +172,13 @@ Queries.prototype.getBooleanFalse = function (boolQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -186,12 +218,21 @@ Queries.prototype.getBooleanFalse = function (boolQuery, callback) {
  * Get null Boolean value on query (query string should be absent)
  * @param {Boolean} [boolQuery] null boolean value
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.getBooleanNull = function (boolQuery, callback) {
+Queries.prototype.getBooleanNull = function (boolQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -227,6 +268,13 @@ Queries.prototype.getBooleanNull = function (boolQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -266,12 +314,21 @@ Queries.prototype.getBooleanNull = function (boolQuery, callback) {
  * Get '1000000' integer value
  * @param {Number} [intQuery] '1000000' integer value
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.getIntOneMillion = function (intQuery, callback) {
+Queries.prototype.getIntOneMillion = function (intQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -307,6 +364,13 @@ Queries.prototype.getIntOneMillion = function (intQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -346,12 +410,21 @@ Queries.prototype.getIntOneMillion = function (intQuery, callback) {
  * Get '-1000000' integer value
  * @param {Number} [intQuery] '-1000000' integer value
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.getIntNegativeOneMillion = function (intQuery, callback) {
+Queries.prototype.getIntNegativeOneMillion = function (intQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -387,6 +460,13 @@ Queries.prototype.getIntNegativeOneMillion = function (intQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -426,12 +506,21 @@ Queries.prototype.getIntNegativeOneMillion = function (intQuery, callback) {
  * Get null integer value (no query parameter)
  * @param {Number} [intQuery] null integer value
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.getIntNull = function (intQuery, callback) {
+Queries.prototype.getIntNull = function (intQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -467,6 +556,13 @@ Queries.prototype.getIntNull = function (intQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -506,12 +602,21 @@ Queries.prototype.getIntNull = function (intQuery, callback) {
  * Get '10000000000' 64 bit integer value
  * @param {Number} [longQuery] '10000000000' 64 bit integer value
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.getTenBillion = function (longQuery, callback) {
+Queries.prototype.getTenBillion = function (longQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -547,6 +652,13 @@ Queries.prototype.getTenBillion = function (longQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -586,12 +698,21 @@ Queries.prototype.getTenBillion = function (longQuery, callback) {
  * Get '-10000000000' 64 bit integer value
  * @param {Number} [longQuery] '-10000000000' 64 bit integer value
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.getNegativeTenBillion = function (longQuery, callback) {
+Queries.prototype.getNegativeTenBillion = function (longQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -627,6 +748,13 @@ Queries.prototype.getNegativeTenBillion = function (longQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -666,12 +794,21 @@ Queries.prototype.getNegativeTenBillion = function (longQuery, callback) {
  * Get 'null 64 bit integer value (no query param in uri)
  * @param {Number} [longQuery] null 64 bit integer value
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.getLongNull = function (longQuery, callback) {
+Queries.prototype.getLongNull = function (longQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -707,6 +844,13 @@ Queries.prototype.getLongNull = function (longQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -746,12 +890,21 @@ Queries.prototype.getLongNull = function (longQuery, callback) {
  * Get '1.034E+20' numeric value
  * @param {Number} [floatQuery] '1.034E+20'numeric value
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.floatScientificPositive = function (floatQuery, callback) {
+Queries.prototype.floatScientificPositive = function (floatQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -787,6 +940,13 @@ Queries.prototype.floatScientificPositive = function (floatQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -826,12 +986,21 @@ Queries.prototype.floatScientificPositive = function (floatQuery, callback) {
  * Get '-1.034E-20' numeric value
  * @param {Number} [floatQuery] '-1.034E-20'numeric value
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.floatScientificNegative = function (floatQuery, callback) {
+Queries.prototype.floatScientificNegative = function (floatQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -867,6 +1036,13 @@ Queries.prototype.floatScientificNegative = function (floatQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -906,12 +1082,21 @@ Queries.prototype.floatScientificNegative = function (floatQuery, callback) {
  * Get null numeric value (no query parameter)
  * @param {Number} [floatQuery] null numeric value
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.floatNull = function (floatQuery, callback) {
+Queries.prototype.floatNull = function (floatQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -947,6 +1132,13 @@ Queries.prototype.floatNull = function (floatQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -986,12 +1178,21 @@ Queries.prototype.floatNull = function (floatQuery, callback) {
  * Get '9999999.999' numeric value
  * @param {Number} [doubleQuery] '9999999.999'numeric value
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.doubleDecimalPositive = function (doubleQuery, callback) {
+Queries.prototype.doubleDecimalPositive = function (doubleQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1027,6 +1228,13 @@ Queries.prototype.doubleDecimalPositive = function (doubleQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1066,12 +1274,21 @@ Queries.prototype.doubleDecimalPositive = function (doubleQuery, callback) {
  * Get '-9999999.999' numeric value
  * @param {Number} [doubleQuery] '-9999999.999'numeric value
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.doubleDecimalNegative = function (doubleQuery, callback) {
+Queries.prototype.doubleDecimalNegative = function (doubleQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1107,6 +1324,13 @@ Queries.prototype.doubleDecimalNegative = function (doubleQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1146,12 +1370,21 @@ Queries.prototype.doubleDecimalNegative = function (doubleQuery, callback) {
  * Get null numeric value (no query parameter)
  * @param {Number} [doubleQuery] null numeric value
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.doubleNull = function (doubleQuery, callback) {
+Queries.prototype.doubleNull = function (doubleQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1187,6 +1420,13 @@ Queries.prototype.doubleNull = function (doubleQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1226,12 +1466,21 @@ Queries.prototype.doubleNull = function (doubleQuery, callback) {
  * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
  * @param {String} [stringQuery] '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.stringUnicode = function (stringQuery, callback) {
+Queries.prototype.stringUnicode = function (stringQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1267,6 +1516,13 @@ Queries.prototype.stringUnicode = function (stringQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1306,12 +1562,21 @@ Queries.prototype.stringUnicode = function (stringQuery, callback) {
  * Get 'begin!*'();:@ &=+$,/?#[]end
  * @param {String} [stringQuery] 'begin!*'();:@ &=+$,/?#[]end' url encoded string value. Possible values for this parameter include: 'begin!*'();:@ &=+$,/?#[]end'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.stringUrlEncoded = function (stringQuery, callback) {
+Queries.prototype.stringUrlEncoded = function (stringQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1347,6 +1612,13 @@ Queries.prototype.stringUrlEncoded = function (stringQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1386,12 +1658,21 @@ Queries.prototype.stringUrlEncoded = function (stringQuery, callback) {
  * Get ''
  * @param {String} [stringQuery] '' string value. Possible values for this parameter include: ''
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.stringEmpty = function (stringQuery, callback) {
+Queries.prototype.stringEmpty = function (stringQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1427,6 +1708,13 @@ Queries.prototype.stringEmpty = function (stringQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1466,12 +1754,21 @@ Queries.prototype.stringEmpty = function (stringQuery, callback) {
  * Get null (no query parameter in url)
  * @param {String} [stringQuery] null string value
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.stringNull = function (stringQuery, callback) {
+Queries.prototype.stringNull = function (stringQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1507,6 +1804,13 @@ Queries.prototype.stringNull = function (stringQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1546,12 +1850,21 @@ Queries.prototype.stringNull = function (stringQuery, callback) {
  * Get using uri with query parameter 'green color'
  * @param {UriColor} [enumQuery] 'green color' enum value. Possible values for this parameter include: 'red color', 'green color', 'blue color'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.enumValid = function (enumQuery, callback) {
+Queries.prototype.enumValid = function (enumQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1590,6 +1903,13 @@ Queries.prototype.enumValid = function (enumQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1629,12 +1949,21 @@ Queries.prototype.enumValid = function (enumQuery, callback) {
  * Get null (no query parameter in url)
  * @param {UriColor} [enumQuery] null string value. Possible values for this parameter include: 'red color', 'green color', 'blue color'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.enumNull = function (enumQuery, callback) {
+Queries.prototype.enumNull = function (enumQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1673,6 +2002,13 @@ Queries.prototype.enumNull = function (enumQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1712,12 +2048,21 @@ Queries.prototype.enumNull = function (enumQuery, callback) {
  * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
  * @param {Buffer} [byteQuery] '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.byteMultiByte = function (byteQuery, callback) {
+Queries.prototype.byteMultiByte = function (byteQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1753,6 +2098,13 @@ Queries.prototype.byteMultiByte = function (byteQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1792,12 +2144,21 @@ Queries.prototype.byteMultiByte = function (byteQuery, callback) {
  * Get '' as byte array
  * @param {Buffer} [byteQuery] '' as byte array
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.byteEmpty = function (byteQuery, callback) {
+Queries.prototype.byteEmpty = function (byteQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1833,6 +2194,13 @@ Queries.prototype.byteEmpty = function (byteQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1872,12 +2240,21 @@ Queries.prototype.byteEmpty = function (byteQuery, callback) {
  * Get null as byte array (no query parameters in uri)
  * @param {Buffer} [byteQuery] null as byte array (no query parameters in uri)
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.byteNull = function (byteQuery, callback) {
+Queries.prototype.byteNull = function (byteQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1913,6 +2290,13 @@ Queries.prototype.byteNull = function (byteQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1952,12 +2336,21 @@ Queries.prototype.byteNull = function (byteQuery, callback) {
  * Get '2012-01-01' as date
  * @param {Date} [dateQuery] '2012-01-01' as date
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.dateValid = function (dateQuery, callback) {
+Queries.prototype.dateValid = function (dateQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1995,6 +2388,13 @@ Queries.prototype.dateValid = function (dateQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2034,12 +2434,21 @@ Queries.prototype.dateValid = function (dateQuery, callback) {
  * Get null as date - this should result in no query parameters in uri
  * @param {Date} [dateQuery] null as date (no query parameters in uri)
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.dateNull = function (dateQuery, callback) {
+Queries.prototype.dateNull = function (dateQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -2077,6 +2486,13 @@ Queries.prototype.dateNull = function (dateQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2116,12 +2532,21 @@ Queries.prototype.dateNull = function (dateQuery, callback) {
  * Get '2012-01-01T01:01:01Z' as date-time
  * @param {Date} [dateTimeQuery] '2012-01-01T01:01:01Z' as date-time
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.dateTimeValid = function (dateTimeQuery, callback) {
+Queries.prototype.dateTimeValid = function (dateTimeQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -2159,6 +2584,13 @@ Queries.prototype.dateTimeValid = function (dateTimeQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2198,12 +2630,21 @@ Queries.prototype.dateTimeValid = function (dateTimeQuery, callback) {
  * Get null as date-time, should result in no query parameters in uri
  * @param {Date} [dateTimeQuery] null as date-time (no query parameters)
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.dateTimeNull = function (dateTimeQuery, callback) {
+Queries.prototype.dateTimeNull = function (dateTimeQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -2241,6 +2682,13 @@ Queries.prototype.dateTimeNull = function (dateTimeQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2281,12 +2729,21 @@ Queries.prototype.dateTimeNull = function (dateTimeQuery, callback) {
  * null, ''] using the csv-array format
  * @param {Array} [arrayQuery] an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the csv-array format
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.arrayStringCsvValid = function (arrayQuery, callback) {
+Queries.prototype.arrayStringCsvValid = function (arrayQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -2326,6 +2783,13 @@ Queries.prototype.arrayStringCsvValid = function (arrayQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2365,12 +2829,21 @@ Queries.prototype.arrayStringCsvValid = function (arrayQuery, callback) {
  * Get a null array of string using the csv-array format
  * @param {Array} [arrayQuery] a null array of string using the csv-array format
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.arrayStringCsvNull = function (arrayQuery, callback) {
+Queries.prototype.arrayStringCsvNull = function (arrayQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -2410,6 +2883,13 @@ Queries.prototype.arrayStringCsvNull = function (arrayQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2449,12 +2929,21 @@ Queries.prototype.arrayStringCsvNull = function (arrayQuery, callback) {
  * Get an empty array [] of string using the csv-array format
  * @param {Array} [arrayQuery] an empty array [] of string using the csv-array format
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.arrayStringCsvEmpty = function (arrayQuery, callback) {
+Queries.prototype.arrayStringCsvEmpty = function (arrayQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -2494,6 +2983,13 @@ Queries.prototype.arrayStringCsvEmpty = function (arrayQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2534,12 +3030,21 @@ Queries.prototype.arrayStringCsvEmpty = function (arrayQuery, callback) {
  * null, ''] using the ssv-array format
  * @param {Array} [arrayQuery] an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the ssv-array format
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.arrayStringSsvValid = function (arrayQuery, callback) {
+Queries.prototype.arrayStringSsvValid = function (arrayQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -2579,6 +3084,13 @@ Queries.prototype.arrayStringSsvValid = function (arrayQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2619,12 +3131,21 @@ Queries.prototype.arrayStringSsvValid = function (arrayQuery, callback) {
  * null, ''] using the tsv-array format
  * @param {Array} [arrayQuery] an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the tsv-array format
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.arrayStringTsvValid = function (arrayQuery, callback) {
+Queries.prototype.arrayStringTsvValid = function (arrayQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -2664,6 +3185,13 @@ Queries.prototype.arrayStringTsvValid = function (arrayQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2704,12 +3232,21 @@ Queries.prototype.arrayStringTsvValid = function (arrayQuery, callback) {
  * null, ''] using the pipes-array format
  * @param {Array} [arrayQuery] an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the pipes-array format
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Queries.prototype.arrayStringPipesValid = function (arrayQuery, callback) {
+Queries.prototype.arrayStringPipesValid = function (arrayQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -2749,6 +3286,13 @@ Queries.prototype.arrayStringPipesValid = function (arrayQuery, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

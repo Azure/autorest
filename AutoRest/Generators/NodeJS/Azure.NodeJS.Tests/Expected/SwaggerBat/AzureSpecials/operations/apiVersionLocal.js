@@ -28,12 +28,21 @@ function ApiVersionLocal(client) {
  * '2.0' to succeed
  * @param {String} [apiVersion] This should appear as a method parameter, use value '2.0'. Possible values for this parameter include: '2.0'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-ApiVersionLocal.prototype.getMethodLocalValid = function (apiVersion, callback) {
+ApiVersionLocal.prototype.getMethodLocalValid = function (apiVersion, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -70,6 +79,13 @@ ApiVersionLocal.prototype.getMethodLocalValid = function (apiVersion, callback) 
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -110,12 +126,21 @@ ApiVersionLocal.prototype.getMethodLocalValid = function (apiVersion, callback) 
  * null to succeed
  * @param {String} [apiVersion] This should appear as a method parameter, use value null, this should result in no serialized parameter
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-ApiVersionLocal.prototype.getMethodLocalNull = function (apiVersion, callback) {
+ApiVersionLocal.prototype.getMethodLocalNull = function (apiVersion, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -151,6 +176,13 @@ ApiVersionLocal.prototype.getMethodLocalNull = function (apiVersion, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -191,12 +223,21 @@ ApiVersionLocal.prototype.getMethodLocalNull = function (apiVersion, callback) {
  * '2.0' to succeed
  * @param {String} [apiVersion] This should appear as a method parameter, use value '2.0'. Possible values for this parameter include: '2.0'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-ApiVersionLocal.prototype.getPathLocalValid = function (apiVersion, callback) {
+ApiVersionLocal.prototype.getPathLocalValid = function (apiVersion, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -233,6 +274,13 @@ ApiVersionLocal.prototype.getPathLocalValid = function (apiVersion, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -273,12 +321,21 @@ ApiVersionLocal.prototype.getPathLocalValid = function (apiVersion, callback) {
  * '2.0' to succeed
  * @param {String} [apiVersion] The api version, which appears in the query, the value is always '2.0'. Possible values for this parameter include: '2.0'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-ApiVersionLocal.prototype.getSwaggerLocalValid = function (apiVersion, callback) {
+ApiVersionLocal.prototype.getSwaggerLocalValid = function (apiVersion, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -315,6 +372,13 @@ ApiVersionLocal.prototype.getSwaggerLocalValid = function (apiVersion, callback)
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

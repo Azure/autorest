@@ -81,11 +81,9 @@ namespace Microsoft.Rest.Generator.NodeJS
                     declarations.Add(parameter.Name);
                 }
 
+                declarations.Add("options");
                 var declaration = string.Join(", ", declarations);
-                if (!string.IsNullOrEmpty(declaration))
-                {
-                    declaration += ", ";
-                }
+                declaration += ", ";
                 return declaration;
             }
         }
