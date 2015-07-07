@@ -29,6 +29,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
             var customObjectType = new CompositeType();
             customObjectType.Name = "!@#$%^&*()abc";
+            customObjectType.SerializedName = "!@#$%^&*()abc";
             customObjectType.Properties.Add(new Property
             {
                 Name = "boolean-property",
@@ -45,15 +46,18 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
             var baseType = new CompositeType();
             baseType.Name = "baseType";
+            baseType.SerializedName = "baseType";
             baseType.Properties.Add(new Property
             {
                 Name = "boolean-property",
+                SerializedName = "boolean-property",
                 Type = PrimaryType.Boolean
             });
             baseType.BaseModelType = baseType;
             baseType.Properties.Add(new Property
             {
                 Name = "self-property",
+                SerializedName = "self-property",
                 Type = baseType
             });
 
