@@ -28,10 +28,6 @@ describe('nodejs', function () {
     it('should have 100% coverage for Azure', function (done) {
       testClient.getReport(function (error, result) {
         should.not.exist(error);
-        result.body['CustomHeaderPutAsyncSucceded'] = 1;
-        result.body['CustomHeaderPostAsyncSucceded'] = 1;
-        result.body['CustomHeaderPutSucceeded'] = 1;
-        result.body['CustomHeaderPostSucceeded'] = 1;
         //console.log('The test coverage for azure is ' + util.inspect(result.body));
         var total = _.keys(result.body).length;
         var passed = 0;
