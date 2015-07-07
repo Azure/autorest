@@ -4,12 +4,16 @@ include MyNamespace
 describe Int do
   before(:all) do
     @base_url = ENV['StubServerURI']
-    client = MyNamespace::AutoRestIntegerTestService.new(@base_url)
+
+	dummyToken = 'dummy12321343423'
+	@credentials = ClientRuntime::TokenCredentials.new(dummyToken)
+
+    client = MyNamespace::AutoRestIntegerTestService.new(@credentials, @base_url)
     @int_client = MyNamespace::Int.new(client)
   end
 
   it 'should create test service' do
-    expect{MyNamespace::AutoRestIntegerTestService.new(@base_url)}.not_to raise_error
+    expect{MyNamespace::AutoRestIntegerTestService.new(@credentials, @base_url)}.not_to raise_error
   end
 
   it 'should get overflow int32' do

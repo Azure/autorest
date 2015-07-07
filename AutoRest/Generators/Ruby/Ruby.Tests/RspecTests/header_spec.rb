@@ -5,7 +5,11 @@ include MyNamespace
 describe Header do
   before(:all) do
     @base_url = ENV['StubServerURI']
-    client = MyNamespace::AutoRestSwaggerBATHeaderService.new(@base_url)
+
+	dummyToken = 'dummy12321343423'
+	@credentials = ClientRuntime::TokenCredentials.new(dummyToken)
+
+    client = MyNamespace::AutoRestSwaggerBATHeaderService.new(@credentials, @base_url)
     @header_client = MyNamespace::Header.new(client)
   end
   def to_bool(str)
@@ -15,7 +19,7 @@ describe Header do
   end
 
   it 'should create test service' do
-    expect{MyNamespace::AutoRestSwaggerBATHeaderService.new(@base_url)}.not_to raise_error
+    expect { MyNamespace::AutoRestSwaggerBATHeaderService.new(@credentials, @base_url) }.not_to raise_error
   end
   it 'should post param existing key' do
     result = @header_client.param_existing_key('overwrite').value!

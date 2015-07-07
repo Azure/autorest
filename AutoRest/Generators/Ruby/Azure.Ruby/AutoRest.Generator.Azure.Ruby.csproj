@@ -32,7 +32,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="AzureRubyCodeGenerator.cs" />
-    <Compile Include="AzureRubyCodeNamingFramework.cs" />
     <Compile Include="TemplateModels\AzureMethodGroupTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureMethodTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureModelTemplateModel.cs" />

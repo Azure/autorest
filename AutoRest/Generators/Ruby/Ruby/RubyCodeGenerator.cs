@@ -9,11 +9,11 @@ namespace Microsoft.Rest.Generator.Ruby
 {
     public class RubyCodeGenerator : CodeGenerator
     {
-        private readonly RubyCodeNamer namingFramework;
+        private readonly RubyCodeNamer codeNamer;
 
         public RubyCodeGenerator(Settings settings) : base(settings)
         {
-            namingFramework = new RubyCodeNamer();
+            codeNamer = new RubyCodeNamer();
         }
 
         public override string Name
@@ -43,8 +43,8 @@ namespace Microsoft.Rest.Generator.Ruby
         public override void NormalizeClientModel(ServiceClient serviceClientModel)
         {
             PopulateAdditionalProperties(serviceClientModel);
-            namingFramework.NormalizeClientModel(serviceClientModel);
-            namingFramework.ResolveNameCollisions(serviceClientModel, Settings.Namespace,
+            codeNamer.NormalizeClientModel(serviceClientModel);
+            codeNamer.ResolveNameCollisions(serviceClientModel, Settings.Namespace,
                 Settings.Namespace + "::Models");
         }
 
@@ -87,7 +87,7 @@ namespace Microsoft.Rest.Generator.Ruby
                 {
                     Model = new MethodGroupTemplateModel(serviceClient, group),
                 };
-                await Write(groupTemplate, 
+                await Write(groupTemplate,
                     RubyCodeNamer.UnderscoreCase(group) + ImplementationFileExtension);
             }
 
@@ -98,7 +98,7 @@ namespace Microsoft.Rest.Generator.Ruby
                 {
                     Model = new ModelTemplateModel(model, serviceClient),
                 };
-                await Write(modelTemplate, "Models\\" + 
+                await Write(modelTemplate, "Models\\" +
                     RubyCodeNamer.UnderscoreCase(model.Name) + ImplementationFileExtension);
             }
 

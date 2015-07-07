@@ -167,13 +167,13 @@ namespace Microsoft.Rest.Generator.Ruby
         }
 
         private IType NormalizeEnumType(EnumType enumType)
-        {   
+        {
             for (int i = 0; i < enumType.Values.Count; i++)
             {
                 if (enumType.Values[i].Name != null)
                 {
                     enumType.Values[i].Name = GetEnumMemberName(RubyRemoveInvalidCharacters(enumType.Values[i].Name));
-                }              
+                }
                 
             }
 

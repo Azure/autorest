@@ -8,7 +8,11 @@ describe Array do
 
   before(:all) do
     @base_url = ENV['StubServerURI']
-    client = AutoRestSwaggerBATArrayService.new(@base_url)
+
+	dummyToken = 'dummy12321343423'
+	@credentials = ClientRuntime::TokenCredentials.new(dummyToken)
+
+    client = AutoRestSwaggerBATArrayService.new(@credentials, @base_url)
     @array_client = MyNamespace::Array.new(client)
     @arr_bool = [true, false, false, true]
     @arr_string = ["foo1", "foo2", "foo3"]
@@ -41,7 +45,7 @@ describe Array do
   end
 
   it 'should create test service' do
-    expect{AutoRestSwaggerBATArrayService.new(@base_url)}.not_to raise_error
+    expect { AutoRestSwaggerBATArrayService.new(@credentials, @base_url) }.not_to raise_error
   end
 
   it 'should get null' do

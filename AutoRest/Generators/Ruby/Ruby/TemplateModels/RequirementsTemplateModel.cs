@@ -25,7 +25,7 @@ namespace Microsoft.Rest.Generator.Ruby
         public string GetOperationsRequiredFiles()
         {
             var sb = new IndentedStringBuilder();
-            this.MethodGroups.ForEach(method => sb.AppendLine("{0}", 
+            this.MethodGroups.ForEach(method => sb.AppendLine("{0}",
                 this.GetRequiredFormat(RubyCodeNamer.UnderscoreCase(method) + ".rb")));
             return sb.ToString();
         }

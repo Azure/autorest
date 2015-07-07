@@ -4,12 +4,16 @@ include MyNamespace
 describe Paths do
   before(:all) do
     @base_url = ENV['StubServerURI']
-    client = MyNamespace::AutoRestUrlTestService.new(@base_url)
+
+	dummyToken = 'dummy12321343423'
+	@credentials = ClientRuntime::TokenCredentials.new(dummyToken)
+
+    client = MyNamespace::AutoRestUrlTestService.new(@credentials, @base_url)
     @paths_items_client = MyNamespace::PathItems.new(client)
   end
 
   it 'should create test service' do
-    expect{MyNamespace::AutoRestUrlTestService.new(@base_url)}.not_to raise_error
+    expect { MyNamespace::AutoRestUrlTestService.new(@credentials, @base_url) }.not_to raise_error
   end
 
   it 'should get all with values' do

@@ -7,12 +7,16 @@ describe Date do
 
   before(:all) do
     @base_url = ENV['StubServerURI']
-    client = AutoRestDateTimeTestService.new(@base_url)
+
+	dummyToken = 'dummy12321343423'
+	@credentials = ClientRuntime::TokenCredentials.new(dummyToken)
+
+    client = AutoRestDateTimeTestService.new(@credentials, @base_url)
     @date_client = MyNamespace::Datetime.new(client)
   end
 
   it 'should create test service' do
-    expect { AutoRestDateTimeTestService.new(@base_url) }.not_to raise_error
+    expect { AutoRestDateTimeTestService.new(@credentials, @base_url) }.not_to raise_error
   end
 
   it 'should get null' do

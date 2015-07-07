@@ -4,15 +4,20 @@ include MyNamespace
 describe AutoRestRequiredOptionalTestService do
   before(:all) do
     @base_url = ENV['StubServerURI']
-    client = MyNamespace::AutoRestRequiredOptionalTestService.new(@base_url)
+
+	dummyToken = 'dummy12321343423'
+	@credentials = ClientRuntime::TokenCredentials.new(dummyToken)
+
+    client = MyNamespace::AutoRestRequiredOptionalTestService.new(@credentials, @base_url)
     @explicit_client = MyNamespace::Explicit.new(client)
     @implicit_client = MyNamespace::Implicit.new(client)
   end
 
 # Negative tests
   it 'should create test service' do
-    expect{MyNamespace::AutoRestRequiredOptionalTestService.new(@base_url)}.not_to raise_error
+    expect { MyNamespace::AutoRestRequiredOptionalTestService.new(@credentials, @base_url) }.not_to raise_error
   end
+
   it 'should throw error for implicitly required parameter' do
     expect{@implicit_client.get_required_path(nil)}.to raise_error(ArgumentError)
   end

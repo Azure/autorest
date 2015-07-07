@@ -11,11 +11,11 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
 {
     public class AzureRubyCodeGenerator : RubyCodeGenerator
     {
-        private readonly RubyCodeNamingFramework _namingFramework;
+        private readonly RubyCodeNamer codeNamer;
 
         public AzureRubyCodeGenerator(Settings settings) : base(settings)
         {
-            _namingFramework = new RubyCodeNamingFramework();
+            codeNamer = new RubyCodeNamer();
         }
 
         public override string Name
@@ -73,21 +73,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             {
                 Model = new AzureServiceClientTemplateModel(serviceClient),
             };
-            await Write(serviceClientTemplate, RubyCodeNamingFramework.UnderscoreCase(serviceClient.Name) + ImplementationFileExtension);
-
-            //// Service client extensions
-            //var extensionsTemplate = new ExtensionsTemplate
-            //{
-            //    Model = new AzureExtensionsTemplateModel(serviceClient, null),
-            //};
-            //await Write(extensionsTemplate, serviceClient.Name + "Extensions.cs");
-
-            //// Service client interface
-            //var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate
-            //{
-            //    Model = new AzureServiceClientTemplateModel(serviceClient),
-            //};
-            //await Write(serviceClientInterfaceTemplate, "I" + serviceClient.Name + ".rb");
+            await Write(serviceClientTemplate, RubyCodeNamer.UnderscoreCase(serviceClient.Name) + ImplementationFileExtension);
 
             // Operations
             foreach (var group in serviceClient.MethodGroups)
@@ -97,21 +83,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                 {
                     Model = new AzureMethodGroupTemplateModel(serviceClient, group),
                 };
-                await Write(operationsTemplate, RubyCodeNamingFramework.UnderscoreCase(operationsTemplate.Model.MethodGroupName) + ImplementationFileExtension);
-
-                //// Service client extensions
-                //var operationExtensionsTemplate = new ExtensionsTemplate
-                //{
-                //    Model = new AzureExtensionsTemplateModel(serviceClient, group),
-                //};
-                //await Write(operationExtensionsTemplate, operationExtensionsTemplate.Model.ExtensionName + "Extensions.rb");
-
-                //// Operation interface
-                //var operationsInterfaceTemplate = new MethodGroupInterfaceTemplate
-                //{
-                //    Model = new AzureMethodGroupTemplateModel(serviceClient, group),
-                //};
-                //await Write(operationsInterfaceTemplate, "I" + operationsInterfaceTemplate.Model.MethodGroupType + ".rb");
+                await Write(operationsTemplate, RubyCodeNamer.UnderscoreCase(operationsTemplate.Model.MethodGroupName) + ImplementationFileExtension);
             }
 
             // Models
@@ -127,7 +99,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                     Model = new AzureModelTemplateModel(model, serviceClient),
                 };
 
-                await Write(modelTemplate, "Models\\" + RubyCodeNamingFramework.UnderscoreCase(model.Name) + ImplementationFileExtension);
+                await Write(modelTemplate, "Models\\" + RubyCodeNamer.UnderscoreCase(model.Name) + ImplementationFileExtension);
             }
 
             // Enums
@@ -137,7 +109,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                 {
                     Model = new EnumTemplateModel(enumType),
                 };
-                await Write(enumTemplate, "Models\\" + RubyCodeNamingFramework.UnderscoreCase(enumTemplate.Model.TypeDefinitionName) + ImplementationFileExtension);
+                await Write(enumTemplate, "Models\\" + RubyCodeNamer.UnderscoreCase(enumTemplate.Model.TypeDefinitionName) + ImplementationFileExtension);
             }
 
             // Requirements
@@ -146,7 +118,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                 Model = new AzureRequirementsTemplateModel(serviceClient),
             };
             await Write(requirementsTemplate,
-                RubyCodeNamingFramework.UnderscoreCase("sdk_requirements") + ImplementationFileExtension);
+                RubyCodeNamer.UnderscoreCase("sdk_requirements") + ImplementationFileExtension);
         }
     }
 }

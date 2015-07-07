@@ -7,7 +7,11 @@ describe Dictionary do
 
   before(:all) do
     @base_url = ENV['StubServerURI']
-    client = AutoRestSwaggerBATdictionaryService.new(@base_url)
+
+	dummyToken = 'dummy12321343423'
+	@credentials = ClientRuntime::TokenCredentials.new(dummyToken)
+
+    client = AutoRestSwaggerBATdictionaryService.new(@credentials, @base_url)
     @dictionary_client = MyNamespace::Dictionary.new(client)
     @dict_bool = { "0" => true, "1" => false, "2" => false, "3" => true}
     @dict_string = {"0"=> "foo1", "1"=> "foo2", "2"=> "foo3"}
@@ -31,7 +35,7 @@ describe Dictionary do
   end
 
   it 'should create test service' do
-    expect{AutoRestSwaggerBATdictionaryService.new(@base_url)}.not_to raise_error
+    expect { AutoRestSwaggerBATdictionaryService.new(@credentials, @base_url) }.not_to raise_error
   end
 
   it 'should get null' do

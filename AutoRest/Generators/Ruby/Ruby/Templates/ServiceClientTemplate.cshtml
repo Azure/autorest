@@ -40,6 +40,7 @@ module @Settings.Namespace
       @@base_url = base_url || '@Model.BaseUrl'
       @EmptyLine
       fail ArgumentError, 'credentials is nil' if credentials.nil?
+      fail ArgumentError, 'invalid type of credentials input parameter' unless credentials.is_a?(ClientRuntime::ServiceClientCredentials)
       @@credentials = credentials
       @EmptyLine
       @foreach (var operation in Model.MethodGroups) 

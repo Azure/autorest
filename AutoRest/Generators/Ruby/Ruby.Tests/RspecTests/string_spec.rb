@@ -4,13 +4,18 @@ include MyNamespace
 describe String do
   before(:all) do
     @base_url = ENV['StubServerURI']
-    client = MyNamespace::AutoRestSwaggerBATService.new(@base_url)
+
+	dummyToken = 'dummy12321343423'
+	@credentials = ClientRuntime::TokenCredentials.new(dummyToken)
+
+    client = MyNamespace::AutoRestSwaggerBATService.new(@credentials, @base_url)
     @string_client = MyNamespace::String.new(client)
   end
 
   it 'should create test service' do
-    expect{MyNamespace::AutoRestSwaggerBATService.new(@base_url)}.not_to raise_error
+    expect { MyNamespace::AutoRestSwaggerBATService.new(@credentials, @base_url) }.not_to raise_error
   end
+
   it 'should get null' do
     result = @string_client.get_null().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)

@@ -4,12 +4,16 @@ include MyNamespace
 describe Number do
   before(:all) do
     @base_url = ENV['StubServerURI']
-    client = MyNamespace::AutoRestNumberTestService.new(@base_url)
+
+	dummyToken = 'dummy12321343423'
+	@credentials = ClientRuntime::TokenCredentials.new(dummyToken)
+
+    client = MyNamespace::AutoRestNumberTestService.new(@credentials, @base_url)
     @number_client = MyNamespace::Number.new(client)
   end
 
   it 'should create test service' do
-    expect{MyNamespace::AutoRestNumberTestService.new(@base_url)}.not_to raise_error
+    expect { MyNamespace::AutoRestNumberTestService.new(@credentials, @base_url) }.not_to raise_error
   end
 
   it 'should get null' do

@@ -6,7 +6,11 @@ describe 'Complex tests' do
 
   before(:all) do
     @base_url = ENV['StubServerURI']
-    @client = AutoRestComplexTestService.new(@base_url)
+
+    dummyToken = 'dummy12321343423'
+	@credentials = ClientRuntime::TokenCredentials.new(dummyToken)
+
+    @client = AutoRestComplexTestService.new(@credentials, @base_url)
     @arrayValue = [
         "1, 2, 3, 4",
         "",
@@ -26,7 +30,7 @@ describe 'Complex tests' do
   end
 
   it 'should create test service' do
-    expect{AutoRestComplexTestService.new(@base_url)}.not_to raise_error
+    expect { AutoRestComplexTestService.new(@credentials, @base_url) }.not_to raise_error
   end
 
   # Array tests
