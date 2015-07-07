@@ -43,11 +43,12 @@ namespace Microsoft.Rest.Modeler.Swagger
             if (SwaggerObject.Enum != null && SwaggerObject.Enum.Any() && type == PrimaryType.String)
             {
                 var enumType = new EnumType();
-                SwaggerObject.Enum.ForEach(v => enumType.Values.Add(new EnumValue { Name = v }));
+                SwaggerObject.Enum.ForEach(v => enumType.Values.Add(new EnumValue { Name = v, SerializedName = v }));
                 if (SwaggerObject.Extensions.ContainsKey("x-ms-enum"))
                 {
                     enumType.IsExpandable = false;
                     enumType.Name = SwaggerObject.Extensions["x-ms-enum"] as string;
+                    enumType.SerializedName = enumType.Name;
                     if (string.IsNullOrEmpty(enumType.Name))
                     {
                         throw new InvalidOperationException("x-ms-enum extension needs to specify an enum name.");
@@ -74,6 +75,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 {
                     enumType.IsExpandable = true;
                     enumType.Name = string.Empty;
+                    enumType.SerializedName = string.Empty;
                 }
                 return enumType;
             }

@@ -4,7 +4,7 @@ var util = require('util');
 var _ = require('underscore');
 var utils = require('../util/utils');
 
-var resourceFlatten = function(coverage){
+var resourceFlatten = function (coverage) {
   coverage['getResourceFlattenArray'] = 0;
   coverage['putResourceFlattenArray'] = 0;
   coverage['getResourceFlattenDictionary'] = 0;
@@ -19,13 +19,14 @@ var resourceFlatten = function(coverage){
           id: '1',
           location: 'Building 44',
           name: 'Resource1',
-          provisioningState: 'Succeeded',
           properties: {
+            provisioningState: 'Succeeded',
             provisioningStateValues: 'OK',
-            pname: 'Product1' 
-          ,
-          tags: {tag1: 'value1', tag2: 'value3'},
-          type: 'Microsoft.Web/sites'}
+            pname: 'Product1',
+            type: 'Flat'
+          },
+          tags: { tag1: 'value1', tag2: 'value3' },
+          type: 'Microsoft.Web/sites'
         }, 
         {
           id: '2', 
@@ -45,13 +46,14 @@ var resourceFlatten = function(coverage){
           id: '1',
           location: 'Building 44',
           name: 'Resource1',
-          provisioningState: 'Succeeded',
           properties: {
+            provisioningState: 'Succeeded',
             provisioningStateValues: 'OK',
-            pname: 'Product1' 
-          ,
-          tags: {tag1: 'value1', tag2: 'value3'},
-          type: 'Microsoft.Web/sites'}
+            pname: 'Product1',
+            type: 'Flat'
+          },
+          tags: { tag1: 'value1', tag2: 'value3' },
+          type: 'Microsoft.Web/sites'
         }, 
         Product2: {
           id: '2', 
@@ -72,13 +74,14 @@ var resourceFlatten = function(coverage){
             id: '1',
             location: 'Building 44',
             name: 'Resource1',
-            provisioningState: 'Succeeded',
             properties: {
+              provisioningState: 'Succeeded',
               provisioningStateValues: 'OK',
-              pname: 'Product1' 
-            ,
-            tags: {tag1: 'value1', tag2: 'value3'},
-            type: 'Microsoft.Web/sites'}
+              pname: 'Product1',
+              type: 'Flat'
+            },
+            tags: { tag1: 'value1', tag2: 'value3' },
+            type: 'Microsoft.Web/sites'
           }, 
           Product2: {
             id: '2', 
@@ -95,13 +98,14 @@ var resourceFlatten = function(coverage){
             id: '4',
             location: 'Building 44',
             name: 'Resource4',
-            provisioningState: 'Succeeded',
             properties: {
+              provisioningState: 'Succeeded',
               provisioningStateValues: 'OK',
-              pname: 'Product4' 
-            ,
-            tags: {tag1: 'value1', tag2: 'value3'},
-            type: 'Microsoft.Web/sites'}
+              pname: 'Product4',
+              type: 'Flat'
+            },
+            tags: { tag1: 'value1', tag2: 'value3' },
+            type: 'Microsoft.Web/sites'
           }, 
           {
             id: '5', 
@@ -124,40 +128,40 @@ var resourceFlatten = function(coverage){
       utils.send400(res, next, "Request path must contain 'array', 'dictionary' or 'resourcecollection'");
     }
   });
-
-  var arrayBody = '[{"location":"West US","tags":{"tag1":"value1","tag2":"value3"},"properties":{"pname":"Product1"}},' + 
+  
+  var arrayBody = '[{"location":"West US","tags":{"tag1":"value1","tag2":"value3"},"properties":{"pname":"Product1","type":"Flat"}},' + 
                    '{"location":"Building 44","properties":{"pname":"Product2"}}]';
-
-  var dictionaryBody = '{"Resource1":{"location":"West US", "tags":{"tag1":"value1", "tag2":"value3"},"properties":{"pname":"Product1"}},' + 
-                        '"Resource2":{"location":"Building 44", "properties":{"pname":"Product2"}}}';
-
+  
+  var dictionaryBody = '{"Resource1":{"location":"West US", "tags":{"tag1":"value1", "tag2":"value3"},"properties":{"pname":"Product1","type":"Flat"}},' + 
+                        '"Resource2":{"location":"Building 44", "properties":{"pname":"Product2","type":"Flat"}}}';
+  
   var resourceCollectionBody = '{"arrayofresources":[' + 
-                            '{"location":"West US", "tags":{"tag1":"value1", "tag2":"value3"}, "properties":{"pname":"Product1"}},' +
-                            '{"location":"East US", "properties":{"pname":"Product2"}}],' +
+                            '{"location":"West US", "tags":{"tag1":"value1", "tag2":"value3"}, "properties":{"pname":"Product1","type":"Flat"}},' +
+                            '{"location":"East US", "properties":{"pname":"Product2","type":"Flat"}}],' +
                             '"dictionaryofresources":' + dictionaryBody + ',' + 
-                            '"productresource":{"location":"India", "properties":{"pname":"Azure"}}}';
+                            '"productresource":{"location":"India", "properties":{"pname":"Azure","type":"Flat"}}}';
   router.put('/:type', function (req, res, next) {
-  	if (req.body) {
-      if(req.params.type === 'array') {
+    if (req.body) {
+      if (req.params.type === 'array') {
         coverage['putResourceFlattenArray']++;
         if (_.isEqual(req.body, JSON.parse(arrayBody))) {
           res.status(200).end();
         } else {
-          utils.send400(res, next, "The received body '" + JSON.stringify(req.body) + "' did not match the expected body '" + arrayBody +"'.");
+          utils.send400(res, next, "The received body '" + JSON.stringify(req.body) + "' did not match the expected body '" + arrayBody + "'.");
         }
       } else if (req.params.type === 'dictionary') {
         coverage['putResourceFlattenDictionary']++;
         if (_.isEqual(req.body, JSON.parse(dictionaryBody))) {
           res.status(200).end();
         } else {
-          utils.send400(res, next, "The received body '" + JSON.stringify(req.body) + "' did not match the expected body '" + dictionaryBody +"'.");
+          utils.send400(res, next, "The received body '" + JSON.stringify(req.body) + "' did not match the expected body '" + dictionaryBody + "'.");
         }
       } else if (req.params.type === 'resourcecollection') {
         coverage['putResourceFlattenResourceCollection']++;
         if (_.isEqual(req.body, JSON.parse(resourceCollectionBody))) {
           res.status(200).end();
         } else {
-          utils.send400(res, next, "The received body '" + JSON.stringify(req.body) + "' did not match the expected body '" + resourceCollectionBody +"'.");
+          utils.send400(res, next, "The received body '" + JSON.stringify(req.body) + "' did not match the expected body '" + resourceCollectionBody + "'.");
         }
       }
     } else {

@@ -36,14 +36,14 @@ describe('nodejs', function () {
             id: '1',
             location: 'Building 44',
             name: 'Resource1',
-            provisioningState: 'Succeeded',
             properties: {
+              provisioningState: 'Succeeded',
               provisioningStateValues: 'OK',
-              pname: 'Product1'
-              ,
-              tags: { tag1: 'value1', tag2: 'value3' },
-              type: 'Microsoft.Web/sites'
-            }
+              pname: 'Product1',
+              type: 'Flat'
+            },
+            tags: { tag1: 'value1', tag2: 'value3' },
+            type: 'Microsoft.Web/sites'
           }, 
           {
             id: '2', 
@@ -64,7 +64,7 @@ describe('nodejs', function () {
       
       it('should put external resource as an array', function (done) {
         var resourceBody = [
-          { "location": "West US", "tags": { "tag1": "value1", "tag2": "value3" }, "properties": { "pname": "Product1" } },
+          { "location": "West US", "tags": { "tag1": "value1", "tag2": "value3" }, "properties": { "pname": "Product1", "type": "Flat" } },
           { "location": "Building 44", "properties": { "pname": "Product2" } }
         ];
         testClient.putArray(resourceBody, function (error, result) {
@@ -79,14 +79,14 @@ describe('nodejs', function () {
             id: '1',
             location: 'Building 44',
             name: 'Resource1',
-            provisioningState: 'Succeeded',
             properties: {
+              provisioningState: 'Succeeded',
               provisioningStateValues: 'OK',
-              pname: 'Product1'
-              ,
-              tags: { tag1: 'value1', tag2: 'value3' },
-              type: 'Microsoft.Web/sites'
-            }
+              pname: 'Product1',
+              type: 'Flat'
+            },
+            tags: { tag1: 'value1', tag2: 'value3' },
+            type: 'Microsoft.Web/sites'
           }, 
           Product2: {
             id: '2', 
@@ -107,8 +107,8 @@ describe('nodejs', function () {
       
       it('should put external resource as a dictionary', function (done) {
         var resourceBody = {
-          "Resource1": { "location": "West US", "tags": { "tag1": "value1", "tag2": "value3" }, "properties": { "pname": "Product1" } }, 
-          "Resource2": { "location": "Building 44", "properties": { "pname": "Product2" } }
+          "Resource1": { "location": "West US", "tags": { "tag1": "value1", "tag2": "value3" }, "properties": { "pname": "Product1", "type": "Flat" } }, 
+          "Resource2": { "location": "Building 44", "properties": { "pname": "Product2", "type": "Flat" } }
         };
         testClient.putDictionary(resourceBody, function (error, result) {
           should.not.exist(error);
@@ -123,14 +123,14 @@ describe('nodejs', function () {
               id: '1',
               location: 'Building 44',
               name: 'Resource1',
-              provisioningState: 'Succeeded',
               properties: {
+                provisioningState: 'Succeeded',
                 provisioningStateValues: 'OK',
-                pname: 'Product1'
-                ,
-                tags: { tag1: 'value1', tag2: 'value3' },
-                type: 'Microsoft.Web/sites'
-              }
+                pname: 'Product1',
+                type: 'Flat'
+              },
+              tags: { tag1: 'value1', tag2: 'value3' },
+              type: 'Microsoft.Web/sites'
             }, 
             Product2: {
               id: '2', 
@@ -147,14 +147,14 @@ describe('nodejs', function () {
               id: '4',
               location: 'Building 44',
               name: 'Resource4',
-              provisioningState: 'Succeeded',
               properties: {
+                provisioningState: 'Succeeded',
                 provisioningStateValues: 'OK',
-                pname: 'Product4'
-                ,
-                tags: { tag1: 'value1', tag2: 'value3' },
-                type: 'Microsoft.Web/sites'
-              }
+                pname: 'Product4',
+                type: 'Flat'
+              },
+              tags: { tag1: 'value1', tag2: 'value3' },
+              type: 'Microsoft.Web/sites'
             }, 
             {
               id: '5', 
@@ -182,14 +182,14 @@ describe('nodejs', function () {
       it('should put external resource as a complex type', function (done) {
         var resourceBody = {
           "arrayofresources": [
-            {"location":"West US", "tags":{"tag1":"value1", "tag2":"value3"}, "properties":{"pname":"Product1"}},
-            { "location": "East US", "properties": { "pname": "Product2" } }
+            {"location":"West US", "tags":{"tag1":"value1", "tag2":"value3"}, "properties":{"pname":"Product1", "type": "Flat" } },
+            { "location": "East US", "properties": { "pname": "Product2", "type": "Flat" } }
           ],
           "dictionaryofresources": {
-            "Resource1": { "location": "West US", "tags": { "tag1": "value1", "tag2": "value3" }, "properties": { "pname": "Product1" } }, 
-            "Resource2": { "location": "Building 44", "properties": { "pname": "Product2" } }
+            "Resource1": { "location": "West US", "tags": { "tag1": "value1", "tag2": "value3" }, "properties": { "pname": "Product1", "type": "Flat" } }, 
+            "Resource2": { "location": "Building 44", "properties": { "pname": "Product2", "type": "Flat" } }
           },
-          "productresource": { "location": "India", "properties": { "pname": "Azure" } }
+          "productresource": { "location": "India", "properties": { "pname": "Azure", "type": "Flat" } }
         };
         testClient.putResourceCollection(resourceBody, function (error, result) {
           should.not.exist(error);

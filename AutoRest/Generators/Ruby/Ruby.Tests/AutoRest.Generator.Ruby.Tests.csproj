@@ -70,8 +70,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="RegenerateExpectedClasses.ps1" />
     <None Include="rspec">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

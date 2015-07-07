@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -70,6 +71,10 @@ namespace Microsoft.Rest.Serialization
                 if (!property.Ignored && property.Readable &&
                     (property.ShouldSerialize == null || property.ShouldSerialize(memberValue)))
                 {
+                    if (property.PropertyName.StartsWith("properties.", StringComparison.OrdinalIgnoreCase))
+                    {
+                        property.PropertyName = property.PropertyName.Substring("properties.".Length);
+                    }
                     writer.WritePropertyName(property.PropertyName);
                     serializer.Serialize(writer, memberValue);
                 }

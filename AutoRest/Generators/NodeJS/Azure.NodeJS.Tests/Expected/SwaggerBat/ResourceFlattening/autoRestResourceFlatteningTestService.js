@@ -478,6 +478,8 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
  *
  * @param {String} [resourceComplexObject.productresource.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {String} [resourceComplexObject.productresource.properties.type] 
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to

@@ -20,7 +20,7 @@ namespace Microsoft.Azure
         /// <summary>
         /// Gets the provisioning state of the resource.
         /// </summary>
-        [JsonProperty("provisioningState")]
+        [JsonProperty("properties.provisioningState")]
         public string ProvisioningState { get; private set; }
 
         /// <summary>

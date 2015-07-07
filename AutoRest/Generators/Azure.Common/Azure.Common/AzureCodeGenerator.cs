@@ -109,7 +109,8 @@ namespace Microsoft.Rest.Generator.Azure
             {
                 cloudError = new CompositeType
                 {
-                    Name = "cloudError"
+                    Name = "cloudError",
+                    SerializedName = "cloudError"
                 };
                 cloudError.Extensions[ExternalExtension] = true;
                 serviceClient.ModelTypes.Add(cloudError);
@@ -246,6 +247,7 @@ namespace Microsoft.Rest.Generator.Azure
             serviceClient.Properties.Add(new Property
             {
                 Name = "Credentials",
+                SerializedName = "credentials",
                 Type = new CompositeType
                 {
                     Name = "SubscriptionCloudCredentials"
@@ -256,6 +258,7 @@ namespace Microsoft.Rest.Generator.Azure
             serviceClient.Properties.Add(new Property
             {
                 Name = "LongRunningOperationRetryTimeout",
+                SerializedName = "longRunningOperationRetryTimeout",
                 Type = PrimaryType.Int,
                 Documentation = "The retry timeout for Long Running Operations."
             });
@@ -296,8 +299,16 @@ namespace Microsoft.Rest.Generator.Azure
                     // Recursively parsing the "properties" object hierarchy  
                     while (propertiesModel != null)
                     {
-                        // Adding "properties" properties to the compositeType
-                        propertiesModel.Properties.ForEach(p => compositeType.Properties.Add(p));
+                        foreach (Property pp in propertiesModel.Properties)
+                        {
+                            if (ResourcePropertyNames.Any(rp => rp.Equals(pp.Name, StringComparison.OrdinalIgnoreCase)))
+                            {
+                                pp.Name = compositeType.Name + CodeNamer.PascalCase(pp.Name);
+                            }
+                            pp.SerializedName = "properties." + pp.SerializedName;
+                            compositeType.Properties.Add(pp);
+                        }
+                        
                         compositeType.Properties.Remove(propertiesProperty);
                         if (!typesToDelete.Contains(propertiesModel.Name))
                         {
@@ -390,6 +401,7 @@ namespace Microsoft.Rest.Generator.Azure
                     var nextLinkParameter = new Parameter
                     {
                         Name = "nextLink",
+                        SerializedName = "nextLink",
                         Type = PrimaryType.String,
                         Documentation = "NextLink from the previous successful call to List operation.",
                         IsRequired = true,

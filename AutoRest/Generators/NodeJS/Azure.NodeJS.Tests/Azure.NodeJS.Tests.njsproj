@@ -18,16 +18,24 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
     <Content Include="package.json" />
-    <Compile Include="AcceptanceTests\coverage.js" />
+    <Compile Include="AcceptanceTests\coverage.js">
+      <TestFramework>Mocha</TestFramework>
+    </Compile>
     <Compile Include="AcceptanceTests\azureSpecialProperties.js">
       <TestFramework>Mocha</TestFramework>
     </Compile>
     <Compile Include="AcceptanceTests\subscriptionIdApiVersion.js">
       <TestFramework>Mocha</TestFramework>
     </Compile>
-    <Compile Include="AcceptanceTests\head.js" />
-    <Compile Include="AcceptanceTests\paging.js" />
-    <Compile Include="AcceptanceTests\resourceFlattening.js" />
+    <Compile Include="AcceptanceTests\head.js">
+      <TestFramework>Mocha</TestFramework>
+    </Compile>
+    <Compile Include="AcceptanceTests\paging.js">
+      <TestFramework>Mocha</TestFramework>
+    </Compile>
+    <Compile Include="AcceptanceTests\resourceFlattening.js">
+      <TestFramework>Mocha</TestFramework>
+    </Compile>
     <Compile Include="Expected\SwaggerBat\AzureSpecials\AutoRestAzureSpecialParametersTestClient.js" />
     <Compile Include="Expected\SwaggerBat\AzureSpecials\models\ErrorModel.js" />
     <Compile Include="Expected\SwaggerBat\AzureSpecials\models\index.js" />
