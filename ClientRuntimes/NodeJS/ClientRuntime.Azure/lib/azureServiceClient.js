@@ -41,9 +41,16 @@ util.inherits(AzureServiceClient, msrest.ServiceClient);
  * Poll Azure long running PUT operation.
  * @param {object} [resultOfInitialRequest] - Response of the initial request for the long running operation.
  * @param {function} [poller] - Poller function used to poll operation result.
+ * @param {object} [options]
+ * @param {object} [options.customHeaders] headers that will be added to request
  */
-AzureServiceClient.prototype.getPutOperationResult = function (resultOfInitialRequest, poller, callback) {
+AzureServiceClient.prototype.getPutOperationResult = function (resultOfInitialRequest, poller, options, callback) {
   var self = this;
+
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('Missing callback');
   }
@@ -64,6 +71,7 @@ AzureServiceClient.prototype.getPutOperationResult = function (resultOfInitialRe
   }
   
   var pollingState = new PollingState(resultOfInitialRequest, this.longRunningOperationRetryTimeoutInSeconds);
+  this._options = options;
   
   async.whilst(
     //while condition
@@ -111,9 +119,16 @@ AzureServiceClient.prototype.getPutOperationResult = function (resultOfInitialRe
 /**
  * Poll Azure long running POST or DELETE operations.
  * @param {object} [resultOfInitialRequest] - result of the initial request.
+ * @param {object} [options]
+ * @param {object} [options.customHeaders] headers that will be added to request
  */
-AzureServiceClient.prototype.getPostOrDeleteOperationResult = function (resultOfInitialRequest, callback) {
+AzureServiceClient.prototype.getPostOrDeleteOperationResult = function (resultOfInitialRequest, options, callback) {
   var self = this;
+  
+  if (!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('Missing callback');
   }
@@ -134,7 +149,8 @@ AzureServiceClient.prototype.getPostOrDeleteOperationResult = function (resultOf
   }
   
   var pollingState = new PollingState(resultOfInitialRequest, this.longRunningOperationRetryTimeoutInSeconds);
-  
+  this._options = options;
+
   async.whilst(
     function () {
       var finished = [LroStates.Succeeded, LroStates.Failed, LroStates.Canceled].some(function (e) {
@@ -305,7 +321,13 @@ AzureServiceClient.prototype._getStatus = function (operationUrl, callback) {
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
-
+  if(this._options) {
+    for (var headerName in this._options['customHeaders']) {
+      if (this._options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = this._options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return self.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

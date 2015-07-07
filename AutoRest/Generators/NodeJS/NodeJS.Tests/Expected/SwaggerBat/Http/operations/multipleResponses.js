@@ -24,12 +24,21 @@ function MultipleResponses(client) {
 
 /**
  * Send a 200 response with valid payload: {'statusCode': '200'}
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.get200Model204NoModelDefaultError200Valid = function (callback) {
+MultipleResponses.prototype.get200Model204NoModelDefaultError200Valid = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -50,6 +59,13 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError200Valid = function
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -103,12 +119,21 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError200Valid = function
 
 /**
  * Send a 204 response with no payload
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.get200Model204NoModelDefaultError204Valid = function (callback) {
+MultipleResponses.prototype.get200Model204NoModelDefaultError204Valid = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -129,6 +154,13 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError204Valid = function
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -182,12 +214,21 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError204Valid = function
 
 /**
  * Send a 201 response with valid payload: {'statusCode': '201'}
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.get200Model204NoModelDefaultError201Invalid = function (callback) {
+MultipleResponses.prototype.get200Model204NoModelDefaultError201Invalid = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -208,6 +249,13 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError201Invalid = functi
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -261,12 +309,21 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError201Invalid = functi
 
 /**
  * Send a 202 response with no payload:
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.get200Model204NoModelDefaultError202None = function (callback) {
+MultipleResponses.prototype.get200Model204NoModelDefaultError202None = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -287,6 +344,13 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError202None = function 
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -341,12 +405,21 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError202None = function 
 /**
  * Send a 400 response with valid error payload: {'status': 400, 'message':
  * 'client error'}
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.get200Model204NoModelDefaultError400Valid = function (callback) {
+MultipleResponses.prototype.get200Model204NoModelDefaultError400Valid = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -367,6 +440,13 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError400Valid = function
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -420,12 +500,21 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError400Valid = function
 
 /**
  * Send a 200 response with valid payload: {'statusCode': '200'}
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.get200Model201ModelDefaultError200Valid = function (callback) {
+MultipleResponses.prototype.get200Model201ModelDefaultError200Valid = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -446,6 +535,13 @@ MultipleResponses.prototype.get200Model201ModelDefaultError200Valid = function (
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -516,12 +612,21 @@ MultipleResponses.prototype.get200Model201ModelDefaultError200Valid = function (
 /**
  * Send a 201 response with valid payload: {'statusCode': '201',
  * 'textStatusCode': 'Created'}
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.get200Model201ModelDefaultError201Valid = function (callback) {
+MultipleResponses.prototype.get200Model201ModelDefaultError201Valid = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -542,6 +647,13 @@ MultipleResponses.prototype.get200Model201ModelDefaultError201Valid = function (
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -612,12 +724,21 @@ MultipleResponses.prototype.get200Model201ModelDefaultError201Valid = function (
 /**
  * Send a 400 response with valid payload: {'code': '400', 'message': 'client
  * error'}
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.get200Model201ModelDefaultError400Valid = function (callback) {
+MultipleResponses.prototype.get200Model201ModelDefaultError400Valid = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -638,6 +759,13 @@ MultipleResponses.prototype.get200Model201ModelDefaultError400Valid = function (
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -707,12 +835,21 @@ MultipleResponses.prototype.get200Model201ModelDefaultError400Valid = function (
 
 /**
  * Send a 200 response with valid payload: {'statusCode': '200'}
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError200Valid = function (callback) {
+MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError200Valid = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -733,6 +870,13 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError200Valid =
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -809,12 +953,21 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError200Valid =
 
 /**
  * Send a 200 response with valid payload: {'httpCode': '201'}
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError201Valid = function (callback) {
+MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError201Valid = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -835,6 +988,13 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError201Valid =
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -911,12 +1071,21 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError201Valid =
 
 /**
  * Send a 200 response with valid payload: {'httpStatusCode': '404'}
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError404Valid = function (callback) {
+MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError404Valid = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -937,6 +1106,13 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError404Valid =
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1014,12 +1190,21 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError404Valid =
 /**
  * Send a 400 response with valid payload: {'code': '400', 'message': 'client
  * error'}
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError400Valid = function (callback) {
+MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError400Valid = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1040,6 +1225,13 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError400Valid =
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1116,12 +1308,21 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError400Valid =
 
 /**
  * Send a 202 response with no payload
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.get202None204NoneDefaultError202None = function (callback) {
+MultipleResponses.prototype.get202None204NoneDefaultError202None = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1142,6 +1343,13 @@ MultipleResponses.prototype.get202None204NoneDefaultError202None = function (cal
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1179,12 +1387,21 @@ MultipleResponses.prototype.get202None204NoneDefaultError202None = function (cal
 
 /**
  * Send a 204 response with no payload
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.get202None204NoneDefaultError204None = function (callback) {
+MultipleResponses.prototype.get202None204NoneDefaultError204None = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1205,6 +1422,13 @@ MultipleResponses.prototype.get202None204NoneDefaultError204None = function (cal
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1243,12 +1467,21 @@ MultipleResponses.prototype.get202None204NoneDefaultError204None = function (cal
 /**
  * Send a 400 response with valid payload: {'code': '400', 'message': 'client
  * error'}
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.get202None204NoneDefaultError400Valid = function (callback) {
+MultipleResponses.prototype.get202None204NoneDefaultError400Valid = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1269,6 +1502,13 @@ MultipleResponses.prototype.get202None204NoneDefaultError400Valid = function (ca
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1306,12 +1546,21 @@ MultipleResponses.prototype.get202None204NoneDefaultError400Valid = function (ca
 
 /**
  * Send a 202 response with an unexpected payload {'property': 'value'}
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.get202None204NoneDefaultNone202Invalid = function (callback) {
+MultipleResponses.prototype.get202None204NoneDefaultNone202Invalid = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1332,6 +1581,13 @@ MultipleResponses.prototype.get202None204NoneDefaultNone202Invalid = function (c
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1366,12 +1622,21 @@ MultipleResponses.prototype.get202None204NoneDefaultNone202Invalid = function (c
 
 /**
  * Send a 204 response with no payload
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.get202None204NoneDefaultNone204None = function (callback) {
+MultipleResponses.prototype.get202None204NoneDefaultNone204None = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1392,6 +1657,13 @@ MultipleResponses.prototype.get202None204NoneDefaultNone204None = function (call
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1426,12 +1698,21 @@ MultipleResponses.prototype.get202None204NoneDefaultNone204None = function (call
 
 /**
  * Send a 400 response with no payload
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.get202None204NoneDefaultNone400None = function (callback) {
+MultipleResponses.prototype.get202None204NoneDefaultNone400None = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1452,6 +1733,13 @@ MultipleResponses.prototype.get202None204NoneDefaultNone400None = function (call
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1486,12 +1774,21 @@ MultipleResponses.prototype.get202None204NoneDefaultNone400None = function (call
 
 /**
  * Send a 400 response with an unexpected payload {'property': 'value'}
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.get202None204NoneDefaultNone400Invalid = function (callback) {
+MultipleResponses.prototype.get202None204NoneDefaultNone400Invalid = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1512,6 +1809,13 @@ MultipleResponses.prototype.get202None204NoneDefaultNone400Invalid = function (c
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1546,12 +1850,21 @@ MultipleResponses.prototype.get202None204NoneDefaultNone400Invalid = function (c
 
 /**
  * Send a 200 response with valid payload: {'statusCode': '200'}
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.getDefaultModelA200Valid = function (callback) {
+MultipleResponses.prototype.getDefaultModelA200Valid = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1572,6 +1885,13 @@ MultipleResponses.prototype.getDefaultModelA200Valid = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1622,12 +1942,21 @@ MultipleResponses.prototype.getDefaultModelA200Valid = function (callback) {
 
 /**
  * Send a 200 response with no payload
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.getDefaultModelA200None = function (callback) {
+MultipleResponses.prototype.getDefaultModelA200None = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1648,6 +1977,13 @@ MultipleResponses.prototype.getDefaultModelA200None = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1698,12 +2034,21 @@ MultipleResponses.prototype.getDefaultModelA200None = function (callback) {
 
 /**
  * Send a 400 response with valid payload: {'statusCode': '400'}
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.getDefaultModelA400Valid = function (callback) {
+MultipleResponses.prototype.getDefaultModelA400Valid = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1724,6 +2069,13 @@ MultipleResponses.prototype.getDefaultModelA400Valid = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1774,12 +2126,21 @@ MultipleResponses.prototype.getDefaultModelA400Valid = function (callback) {
 
 /**
  * Send a 400 response with no payload
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.getDefaultModelA400None = function (callback) {
+MultipleResponses.prototype.getDefaultModelA400None = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1800,6 +2161,13 @@ MultipleResponses.prototype.getDefaultModelA400None = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1850,12 +2218,21 @@ MultipleResponses.prototype.getDefaultModelA400None = function (callback) {
 
 /**
  * Send a 200 response with invalid payload: {'statusCode': '200'}
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.getDefaultNone200Invalid = function (callback) {
+MultipleResponses.prototype.getDefaultNone200Invalid = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1876,6 +2253,13 @@ MultipleResponses.prototype.getDefaultNone200Invalid = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1910,12 +2294,21 @@ MultipleResponses.prototype.getDefaultNone200Invalid = function (callback) {
 
 /**
  * Send a 200 response with no payload
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.getDefaultNone200None = function (callback) {
+MultipleResponses.prototype.getDefaultNone200None = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1936,6 +2329,13 @@ MultipleResponses.prototype.getDefaultNone200None = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1970,12 +2370,21 @@ MultipleResponses.prototype.getDefaultNone200None = function (callback) {
 
 /**
  * Send a 400 response with valid payload: {'statusCode': '400'}
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.getDefaultNone400Invalid = function (callback) {
+MultipleResponses.prototype.getDefaultNone400Invalid = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1996,6 +2405,13 @@ MultipleResponses.prototype.getDefaultNone400Invalid = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2030,12 +2446,21 @@ MultipleResponses.prototype.getDefaultNone400Invalid = function (callback) {
 
 /**
  * Send a 400 response with no payload
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.getDefaultNone400None = function (callback) {
+MultipleResponses.prototype.getDefaultNone400None = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -2056,6 +2481,13 @@ MultipleResponses.prototype.getDefaultNone400None = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2091,12 +2523,21 @@ MultipleResponses.prototype.getDefaultNone400None = function (callback) {
 /**
  * Send a 200 response with no payload, when a payload is expected - client
  * should return a null object of thde type for model A
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.get200ModelA200None = function (callback) {
+MultipleResponses.prototype.get200ModelA200None = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -2117,6 +2558,13 @@ MultipleResponses.prototype.get200ModelA200None = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2167,12 +2615,21 @@ MultipleResponses.prototype.get200ModelA200None = function (callback) {
 
 /**
  * Send a 200 response with payload {'statusCode': '200'}
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.get200ModelA200Valid = function (callback) {
+MultipleResponses.prototype.get200ModelA200Valid = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -2193,6 +2650,13 @@ MultipleResponses.prototype.get200ModelA200Valid = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2243,12 +2707,21 @@ MultipleResponses.prototype.get200ModelA200Valid = function (callback) {
 
 /**
  * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.get200ModelA200Invalid = function (callback) {
+MultipleResponses.prototype.get200ModelA200Invalid = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -2269,6 +2742,13 @@ MultipleResponses.prototype.get200ModelA200Invalid = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2320,12 +2800,21 @@ MultipleResponses.prototype.get200ModelA200Invalid = function (callback) {
 /**
  * Send a 400 response with no payload client should treat as an http error
  * with no error model
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.get200ModelA400None = function (callback) {
+MultipleResponses.prototype.get200ModelA400None = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -2346,6 +2835,13 @@ MultipleResponses.prototype.get200ModelA400None = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2396,12 +2892,21 @@ MultipleResponses.prototype.get200ModelA400None = function (callback) {
 
 /**
  * Send a 200 response with payload {'statusCode': '400'}
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.get200ModelA400Valid = function (callback) {
+MultipleResponses.prototype.get200ModelA400Valid = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -2422,6 +2927,13 @@ MultipleResponses.prototype.get200ModelA400Valid = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2472,12 +2984,21 @@ MultipleResponses.prototype.get200ModelA400Valid = function (callback) {
 
 /**
  * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.get200ModelA400Invalid = function (callback) {
+MultipleResponses.prototype.get200ModelA400Invalid = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -2498,6 +3019,13 @@ MultipleResponses.prototype.get200ModelA400Invalid = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2548,12 +3076,21 @@ MultipleResponses.prototype.get200ModelA400Invalid = function (callback) {
 
 /**
  * Send a 202 response with payload {'statusCode': '202'}
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-MultipleResponses.prototype.get200ModelA202Valid = function (callback) {
+MultipleResponses.prototype.get200ModelA202Valid = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -2574,6 +3111,13 @@ MultipleResponses.prototype.get200ModelA202Valid = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

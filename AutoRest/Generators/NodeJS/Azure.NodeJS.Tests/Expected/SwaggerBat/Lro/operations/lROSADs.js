@@ -32,23 +32,35 @@ function LROSADs(client) {
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.putNonRetry400 = function (product, callback) {
+LROSADs.prototype.putNonRetry400 = function (product, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
   var self = this;
   function getMethod() {
     var cb = function (callback) {
-      return self.getNonRetry400(callback);
+      return self.getNonRetry400(options, callback);
     };
     return cb;
   }
   // Send request
-  self.beginPutNonRetry400(product, function (err, result){
+  self.beginPutNonRetry400(product, options, function (err, result){
     if (err) return callback(err);
-    client.getPutOperationResult(result, getMethod(), callback);
+    client.getPutOperationResult(result, getMethod(), options, callback);
   });
 };
 
@@ -60,12 +72,21 @@ LROSADs.prototype.putNonRetry400 = function (product, callback) {
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.beginPutNonRetry400 = function (product, callback) {
+LROSADs.prototype.beginPutNonRetry400 = function (product, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -102,6 +123,13 @@ LROSADs.prototype.beginPutNonRetry400 = function (product, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(product));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -171,12 +199,21 @@ LROSADs.prototype.beginPutNonRetry400 = function (product, callback) {
 
 /**
  * DO NOT CALL THIS METHOD. For completion only
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.getNonRetry400 = function (callback) {
+LROSADs.prototype.getNonRetry400 = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -202,6 +239,13 @@ LROSADs.prototype.getNonRetry400 = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -263,23 +307,35 @@ LROSADs.prototype.getNonRetry400 = function (callback) {
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.putNonRetry201Creating400 = function (product, callback) {
+LROSADs.prototype.putNonRetry201Creating400 = function (product, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
   var self = this;
   function getMethod() {
     var cb = function (callback) {
-      return self.getNonRetry201Creating400(callback);
+      return self.getNonRetry201Creating400(options, callback);
     };
     return cb;
   }
   // Send request
-  self.beginPutNonRetry201Creating400(product, function (err, result){
+  self.beginPutNonRetry201Creating400(product, options, function (err, result){
     if (err) return callback(err);
-    client.getPutOperationResult(result, getMethod(), callback);
+    client.getPutOperationResult(result, getMethod(), options, callback);
   });
 };
 
@@ -292,12 +348,21 @@ LROSADs.prototype.putNonRetry201Creating400 = function (product, callback) {
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.beginPutNonRetry201Creating400 = function (product, callback) {
+LROSADs.prototype.beginPutNonRetry201Creating400 = function (product, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -334,6 +399,13 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (product, callback) 
   requestContent = JSON.stringify(msRest.serializeObject(product));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -403,12 +475,21 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (product, callback) 
 
 /**
  * Long running opeartion polling returns a 400 with no error body
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.getNonRetry201Creating400 = function (callback) {
+LROSADs.prototype.getNonRetry201Creating400 = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -434,6 +515,13 @@ LROSADs.prototype.getNonRetry201Creating400 = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -496,23 +584,35 @@ LROSADs.prototype.getNonRetry201Creating400 = function (callback) {
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.putAsyncRelativeRetry400 = function (product, callback) {
+LROSADs.prototype.putAsyncRelativeRetry400 = function (product, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
   var self = this;
   function getMethod() {
     var cb = function (callback) {
-      return self.getAsyncRelativeRetry400(callback);
+      return self.getAsyncRelativeRetry400(options, callback);
     };
     return cb;
   }
   // Send request
-  self.beginPutAsyncRelativeRetry400(product, function (err, result){
+  self.beginPutAsyncRelativeRetry400(product, options, function (err, result){
     if (err) return callback(err);
-    client.getPutOperationResult(result, getMethod(), callback);
+    client.getPutOperationResult(result, getMethod(), options, callback);
   });
 };
 
@@ -526,12 +626,21 @@ LROSADs.prototype.putAsyncRelativeRetry400 = function (product, callback) {
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.beginPutAsyncRelativeRetry400 = function (product, callback) {
+LROSADs.prototype.beginPutAsyncRelativeRetry400 = function (product, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -568,6 +677,13 @@ LROSADs.prototype.beginPutAsyncRelativeRetry400 = function (product, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(product));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -621,12 +737,21 @@ LROSADs.prototype.beginPutAsyncRelativeRetry400 = function (product, callback) {
 
 /**
  * DO NOT CALL THIS METHOD. For completion only
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.getAsyncRelativeRetry400 = function (callback) {
+LROSADs.prototype.getAsyncRelativeRetry400 = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -652,6 +777,13 @@ LROSADs.prototype.getAsyncRelativeRetry400 = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -706,27 +838,45 @@ LROSADs.prototype.getAsyncRelativeRetry400 = function (callback) {
 /**
  *
  * Long running delete request, service returns a 400 with an error body
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.deleteNonRetry400 = function (callback) {
+LROSADs.prototype.deleteNonRetry400 = function (options, callback) {
   var self = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   // Send request
-  this.beginDeleteNonRetry400(function (err, result){
+  this.beginDeleteNonRetry400(options, function (err, result){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, callback);
+    self.getPostOrDeleteOperationResult(result, options, callback);
   });
 };
 
 /**
  * Long running delete request, service returns a 400 with an error body
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.beginDeleteNonRetry400 = function (callback) {
+LROSADs.prototype.beginDeleteNonRetry400 = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -752,6 +902,13 @@ LROSADs.prototype.beginDeleteNonRetry400 = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -790,27 +947,45 @@ LROSADs.prototype.beginDeleteNonRetry400 = function (callback) {
 /**
  *
  * Long running delete request, service returns a 202 with a location header
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.delete202NonRetry400 = function (callback) {
+LROSADs.prototype.delete202NonRetry400 = function (options, callback) {
   var self = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   // Send request
-  this.beginDelete202NonRetry400(function (err, result){
+  this.beginDelete202NonRetry400(options, function (err, result){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, callback);
+    self.getPostOrDeleteOperationResult(result, options, callback);
   });
 };
 
 /**
  * Long running delete request, service returns a 202 with a location header
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.beginDelete202NonRetry400 = function (callback) {
+LROSADs.prototype.beginDelete202NonRetry400 = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -836,6 +1011,13 @@ LROSADs.prototype.beginDelete202NonRetry400 = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -876,16 +1058,25 @@ LROSADs.prototype.beginDelete202NonRetry400 = function (callback) {
  * Long running delete request, service returns a 202 to the initial request.
  * Poll the endpoint indicated in the Azure-AsyncOperation header for
  * operation status
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.deleteAsyncRelativeRetry400 = function (callback) {
+LROSADs.prototype.deleteAsyncRelativeRetry400 = function (options, callback) {
   var self = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   // Send request
-  this.beginDeleteAsyncRelativeRetry400(function (err, result){
+  this.beginDeleteAsyncRelativeRetry400(options, function (err, result){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, callback);
+    self.getPostOrDeleteOperationResult(result, options, callback);
   });
 };
 
@@ -893,12 +1084,21 @@ LROSADs.prototype.deleteAsyncRelativeRetry400 = function (callback) {
  * Long running delete request, service returns a 202 to the initial request.
  * Poll the endpoint indicated in the Azure-AsyncOperation header for
  * operation status
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.beginDeleteAsyncRelativeRetry400 = function (callback) {
+LROSADs.prototype.beginDeleteAsyncRelativeRetry400 = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -924,6 +1124,13 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetry400 = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -968,16 +1175,25 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetry400 = function (callback) {
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.postNonRetry400 = function (product, callback) {
+LROSADs.prototype.postNonRetry400 = function (product, options, callback) {
   var self = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   // Send request
-  this.beginPostNonRetry400(product, function (err, result){
+  this.beginPostNonRetry400(product, options, function (err, result){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, callback);
+    self.getPostOrDeleteOperationResult(result, options, callback);
   });
 };
 
@@ -989,12 +1205,21 @@ LROSADs.prototype.postNonRetry400 = function (product, callback) {
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.beginPostNonRetry400 = function (product, callback) {
+LROSADs.prototype.beginPostNonRetry400 = function (product, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1031,6 +1256,13 @@ LROSADs.prototype.beginPostNonRetry400 = function (product, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(product));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1075,16 +1307,25 @@ LROSADs.prototype.beginPostNonRetry400 = function (product, callback) {
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.post202NonRetry400 = function (product, callback) {
+LROSADs.prototype.post202NonRetry400 = function (product, options, callback) {
   var self = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   // Send request
-  this.beginPost202NonRetry400(product, function (err, result){
+  this.beginPost202NonRetry400(product, options, function (err, result){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, callback);
+    self.getPostOrDeleteOperationResult(result, options, callback);
   });
 };
 
@@ -1096,12 +1337,21 @@ LROSADs.prototype.post202NonRetry400 = function (product, callback) {
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.beginPost202NonRetry400 = function (product, callback) {
+LROSADs.prototype.beginPost202NonRetry400 = function (product, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1138,6 +1388,13 @@ LROSADs.prototype.beginPost202NonRetry400 = function (product, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(product));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1184,16 +1441,25 @@ LROSADs.prototype.beginPost202NonRetry400 = function (product, callback) {
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.postAsyncRelativeRetry400 = function (product, callback) {
+LROSADs.prototype.postAsyncRelativeRetry400 = function (product, options, callback) {
   var self = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   // Send request
-  this.beginPostAsyncRelativeRetry400(product, function (err, result){
+  this.beginPostAsyncRelativeRetry400(product, options, function (err, result){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, callback);
+    self.getPostOrDeleteOperationResult(result, options, callback);
   });
 };
 
@@ -1207,12 +1473,21 @@ LROSADs.prototype.postAsyncRelativeRetry400 = function (product, callback) {
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.beginPostAsyncRelativeRetry400 = function (product, callback) {
+LROSADs.prototype.beginPostAsyncRelativeRetry400 = function (product, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1249,6 +1524,13 @@ LROSADs.prototype.beginPostAsyncRelativeRetry400 = function (product, callback) 
   requestContent = JSON.stringify(msRest.serializeObject(product));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1294,23 +1576,35 @@ LROSADs.prototype.beginPostAsyncRelativeRetry400 = function (product, callback) 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.putError201NoProvisioningStatePayload = function (product, callback) {
+LROSADs.prototype.putError201NoProvisioningStatePayload = function (product, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
   var self = this;
   function getMethod() {
     var cb = function (callback) {
-      return self.getError201NoProvisioningStatePayload(callback);
+      return self.getError201NoProvisioningStatePayload(options, callback);
     };
     return cb;
   }
   // Send request
-  self.beginPutError201NoProvisioningStatePayload(product, function (err, result){
+  self.beginPutError201NoProvisioningStatePayload(product, options, function (err, result){
     if (err) return callback(err);
-    client.getPutOperationResult(result, getMethod(), callback);
+    client.getPutOperationResult(result, getMethod(), options, callback);
   });
 };
 
@@ -1323,12 +1617,21 @@ LROSADs.prototype.putError201NoProvisioningStatePayload = function (product, cal
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (product, callback) {
+LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (product, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1365,6 +1668,13 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (product
   requestContent = JSON.stringify(msRest.serializeObject(product));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1434,12 +1744,21 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (product
 
 /**
  * DO NOT CALL THIS METHOD. For completion only
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.getError201NoProvisioningStatePayload = function (callback) {
+LROSADs.prototype.getError201NoProvisioningStatePayload = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1465,6 +1784,13 @@ LROSADs.prototype.getError201NoProvisioningStatePayload = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1527,23 +1853,35 @@ LROSADs.prototype.getError201NoProvisioningStatePayload = function (callback) {
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.putAsyncRelativeRetryNoStatus = function (product, callback) {
+LROSADs.prototype.putAsyncRelativeRetryNoStatus = function (product, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
   var self = this;
   function getMethod() {
     var cb = function (callback) {
-      return self.getAsyncRelativeRetryNoStatus(callback);
+      return self.getAsyncRelativeRetryNoStatus(options, callback);
     };
     return cb;
   }
   // Send request
-  self.beginPutAsyncRelativeRetryNoStatus(product, function (err, result){
+  self.beginPutAsyncRelativeRetryNoStatus(product, options, function (err, result){
     if (err) return callback(err);
-    client.getPutOperationResult(result, getMethod(), callback);
+    client.getPutOperationResult(result, getMethod(), options, callback);
   });
 };
 
@@ -1557,12 +1895,21 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatus = function (product, callback) {
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (product, callback) {
+LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (product, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1599,6 +1946,13 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (product, callba
   requestContent = JSON.stringify(msRest.serializeObject(product));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1654,12 +2008,21 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (product, callba
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.getAsyncRelativeRetryNoStatus = function (callback) {
+LROSADs.prototype.getAsyncRelativeRetryNoStatus = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1685,6 +2048,13 @@ LROSADs.prototype.getAsyncRelativeRetryNoStatus = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1747,23 +2117,35 @@ LROSADs.prototype.getAsyncRelativeRetryNoStatus = function (callback) {
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.putAsyncRelativeRetryNoStatusPayload = function (product, callback) {
+LROSADs.prototype.putAsyncRelativeRetryNoStatusPayload = function (product, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
   var self = this;
   function getMethod() {
     var cb = function (callback) {
-      return self.getAsyncRelativeRetryNoStatusPayload(callback);
+      return self.getAsyncRelativeRetryNoStatusPayload(options, callback);
     };
     return cb;
   }
   // Send request
-  self.beginPutAsyncRelativeRetryNoStatusPayload(product, function (err, result){
+  self.beginPutAsyncRelativeRetryNoStatusPayload(product, options, function (err, result){
     if (err) return callback(err);
-    client.getPutOperationResult(result, getMethod(), callback);
+    client.getPutOperationResult(result, getMethod(), options, callback);
   });
 };
 
@@ -1777,12 +2159,21 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatusPayload = function (product, call
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.beginPutAsyncRelativeRetryNoStatusPayload = function (product, callback) {
+LROSADs.prototype.beginPutAsyncRelativeRetryNoStatusPayload = function (product, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1819,6 +2210,13 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatusPayload = function (product,
   requestContent = JSON.stringify(msRest.serializeObject(product));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1874,12 +2272,21 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatusPayload = function (product,
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.getAsyncRelativeRetryNoStatusPayload = function (callback) {
+LROSADs.prototype.getAsyncRelativeRetryNoStatusPayload = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1905,6 +2312,13 @@ LROSADs.prototype.getAsyncRelativeRetryNoStatusPayload = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1960,28 +2374,46 @@ LROSADs.prototype.getAsyncRelativeRetryNoStatusPayload = function (callback) {
  *
  * Long running delete request, service returns a 204 to the initial request,
  * indicating success.
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.delete204Succeeded = function (callback) {
+LROSADs.prototype.delete204Succeeded = function (options, callback) {
   var self = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   // Send request
-  this.beginDelete204Succeeded(function (err, result){
+  this.beginDelete204Succeeded(options, function (err, result){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, callback);
+    self.getPostOrDeleteOperationResult(result, options, callback);
   });
 };
 
 /**
  * Long running delete request, service returns a 204 to the initial request,
  * indicating success.
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.beginDelete204Succeeded = function (callback) {
+LROSADs.prototype.beginDelete204Succeeded = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -2007,6 +2439,13 @@ LROSADs.prototype.beginDelete204Succeeded = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2047,16 +2486,25 @@ LROSADs.prototype.beginDelete204Succeeded = function (callback) {
  * Long running delete request, service returns a 202 to the initial request.
  * Poll the endpoint indicated in the Azure-AsyncOperation header for
  * operation status
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.deleteAsyncRelativeRetryNoStatus = function (callback) {
+LROSADs.prototype.deleteAsyncRelativeRetryNoStatus = function (options, callback) {
   var self = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   // Send request
-  this.beginDeleteAsyncRelativeRetryNoStatus(function (err, result){
+  this.beginDeleteAsyncRelativeRetryNoStatus(options, function (err, result){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, callback);
+    self.getPostOrDeleteOperationResult(result, options, callback);
   });
 };
 
@@ -2064,12 +2512,21 @@ LROSADs.prototype.deleteAsyncRelativeRetryNoStatus = function (callback) {
  * Long running delete request, service returns a 202 to the initial request.
  * Poll the endpoint indicated in the Azure-AsyncOperation header for
  * operation status
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.beginDeleteAsyncRelativeRetryNoStatus = function (callback) {
+LROSADs.prototype.beginDeleteAsyncRelativeRetryNoStatus = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -2095,6 +2552,13 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryNoStatus = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2140,16 +2604,25 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryNoStatus = function (callback) {
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.post202NoLocation = function (product, callback) {
+LROSADs.prototype.post202NoLocation = function (product, options, callback) {
   var self = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   // Send request
-  this.beginPost202NoLocation(product, function (err, result){
+  this.beginPost202NoLocation(product, options, function (err, result){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, callback);
+    self.getPostOrDeleteOperationResult(result, options, callback);
   });
 };
 
@@ -2162,12 +2635,21 @@ LROSADs.prototype.post202NoLocation = function (product, callback) {
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.beginPost202NoLocation = function (product, callback) {
+LROSADs.prototype.beginPost202NoLocation = function (product, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -2204,6 +2686,13 @@ LROSADs.prototype.beginPost202NoLocation = function (product, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(product));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2250,16 +2739,25 @@ LROSADs.prototype.beginPost202NoLocation = function (product, callback) {
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.postAsyncRelativeRetryNoPayload = function (product, callback) {
+LROSADs.prototype.postAsyncRelativeRetryNoPayload = function (product, options, callback) {
   var self = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   // Send request
-  this.beginPostAsyncRelativeRetryNoPayload(product, function (err, result){
+  this.beginPostAsyncRelativeRetryNoPayload(product, options, function (err, result){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, callback);
+    self.getPostOrDeleteOperationResult(result, options, callback);
   });
 };
 
@@ -2273,12 +2771,21 @@ LROSADs.prototype.postAsyncRelativeRetryNoPayload = function (product, callback)
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.beginPostAsyncRelativeRetryNoPayload = function (product, callback) {
+LROSADs.prototype.beginPostAsyncRelativeRetryNoPayload = function (product, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -2315,6 +2822,13 @@ LROSADs.prototype.beginPostAsyncRelativeRetryNoPayload = function (product, call
   requestContent = JSON.stringify(msRest.serializeObject(product));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2360,23 +2874,35 @@ LROSADs.prototype.beginPostAsyncRelativeRetryNoPayload = function (product, call
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.put200InvalidJson = function (product, callback) {
+LROSADs.prototype.put200InvalidJson = function (product, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
   var self = this;
   function getMethod() {
     var cb = function (callback) {
-      return self.get200Succeeded(callback);
+      return self.get200Succeeded(options, callback);
     };
     return cb;
   }
   // Send request
-  self.beginPut200InvalidJson(product, function (err, result){
+  self.beginPut200InvalidJson(product, options, function (err, result){
     if (err) return callback(err);
-    client.getPutOperationResult(result, getMethod(), callback);
+    client.getPutOperationResult(result, getMethod(), options, callback);
   });
 };
 
@@ -2389,12 +2915,21 @@ LROSADs.prototype.put200InvalidJson = function (product, callback) {
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.beginPut200InvalidJson = function (product, callback) {
+LROSADs.prototype.beginPut200InvalidJson = function (product, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -2431,6 +2966,13 @@ LROSADs.prototype.beginPut200InvalidJson = function (product, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(product));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2484,12 +3026,21 @@ LROSADs.prototype.beginPut200InvalidJson = function (product, callback) {
 
 /**
  * SHOUD NOT BE CALLED
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.get200Succeeded = function (callback) {
+LROSADs.prototype.get200Succeeded = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -2515,6 +3066,13 @@ LROSADs.prototype.get200Succeeded = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2577,23 +3135,35 @@ LROSADs.prototype.get200Succeeded = function (callback) {
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.putAsyncRelativeRetryInvalidHeader = function (product, callback) {
+LROSADs.prototype.putAsyncRelativeRetryInvalidHeader = function (product, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
   var self = this;
   function getMethod() {
     var cb = function (callback) {
-      return self.getAsyncRelativeRetryInvalidHeader(callback);
+      return self.getAsyncRelativeRetryInvalidHeader(options, callback);
     };
     return cb;
   }
   // Send request
-  self.beginPutAsyncRelativeRetryInvalidHeader(product, function (err, result){
+  self.beginPutAsyncRelativeRetryInvalidHeader(product, options, function (err, result){
     if (err) return callback(err);
-    client.getPutOperationResult(result, getMethod(), callback);
+    client.getPutOperationResult(result, getMethod(), options, callback);
   });
 };
 
@@ -2607,12 +3177,21 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidHeader = function (product, callba
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (product, callback) {
+LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (product, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -2649,6 +3228,13 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (product, c
   requestContent = JSON.stringify(msRest.serializeObject(product));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2702,12 +3288,21 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (product, c
 
 /**
  * SHOULD NOT BE CALLED
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.getAsyncRelativeRetryInvalidHeader = function (callback) {
+LROSADs.prototype.getAsyncRelativeRetryInvalidHeader = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -2733,6 +3328,13 @@ LROSADs.prototype.getAsyncRelativeRetryInvalidHeader = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2795,23 +3397,35 @@ LROSADs.prototype.getAsyncRelativeRetryInvalidHeader = function (callback) {
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.putAsyncRelativeRetryInvalidJsonPolling = function (product, callback) {
+LROSADs.prototype.putAsyncRelativeRetryInvalidJsonPolling = function (product, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
   var self = this;
   function getMethod() {
     var cb = function (callback) {
-      return self.getAsyncRelativeRetryInvalidJsonPolling(callback);
+      return self.getAsyncRelativeRetryInvalidJsonPolling(options, callback);
     };
     return cb;
   }
   // Send request
-  self.beginPutAsyncRelativeRetryInvalidJsonPolling(product, function (err, result){
+  self.beginPutAsyncRelativeRetryInvalidJsonPolling(product, options, function (err, result){
     if (err) return callback(err);
-    client.getPutOperationResult(result, getMethod(), callback);
+    client.getPutOperationResult(result, getMethod(), options, callback);
   });
 };
 
@@ -2825,12 +3439,21 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidJsonPolling = function (product, c
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.beginPutAsyncRelativeRetryInvalidJsonPolling = function (product, callback) {
+LROSADs.prototype.beginPutAsyncRelativeRetryInvalidJsonPolling = function (product, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -2867,6 +3490,13 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidJsonPolling = function (produ
   requestContent = JSON.stringify(msRest.serializeObject(product));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2922,12 +3552,21 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidJsonPolling = function (produ
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.getAsyncRelativeRetryInvalidJsonPolling = function (callback) {
+LROSADs.prototype.getAsyncRelativeRetryInvalidJsonPolling = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -2953,6 +3592,13 @@ LROSADs.prototype.getAsyncRelativeRetryInvalidJsonPolling = function (callback) 
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -3008,28 +3654,46 @@ LROSADs.prototype.getAsyncRelativeRetryInvalidJsonPolling = function (callback) 
  *
  * Long running delete request, service returns a 202 to the initial request
  * receing a reponse with an invalid 'Location' and 'Retry-After' headers
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.delete202RetryInvalidHeader = function (callback) {
+LROSADs.prototype.delete202RetryInvalidHeader = function (options, callback) {
   var self = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   // Send request
-  this.beginDelete202RetryInvalidHeader(function (err, result){
+  this.beginDelete202RetryInvalidHeader(options, function (err, result){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, callback);
+    self.getPostOrDeleteOperationResult(result, options, callback);
   });
 };
 
 /**
  * Long running delete request, service returns a 202 to the initial request
  * receing a reponse with an invalid 'Location' and 'Retry-After' headers
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.beginDelete202RetryInvalidHeader = function (callback) {
+LROSADs.prototype.beginDelete202RetryInvalidHeader = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -3055,6 +3719,13 @@ LROSADs.prototype.beginDelete202RetryInvalidHeader = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -3094,28 +3765,46 @@ LROSADs.prototype.beginDelete202RetryInvalidHeader = function (callback) {
  *
  * Long running delete request, service returns a 202 to the initial request.
  * The endpoint indicated in the Azure-AsyncOperation header is invalid
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.deleteAsyncRelativeRetryInvalidHeader = function (callback) {
+LROSADs.prototype.deleteAsyncRelativeRetryInvalidHeader = function (options, callback) {
   var self = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   // Send request
-  this.beginDeleteAsyncRelativeRetryInvalidHeader(function (err, result){
+  this.beginDeleteAsyncRelativeRetryInvalidHeader(options, function (err, result){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, callback);
+    self.getPostOrDeleteOperationResult(result, options, callback);
   });
 };
 
 /**
  * Long running delete request, service returns a 202 to the initial request.
  * The endpoint indicated in the Azure-AsyncOperation header is invalid
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidHeader = function (callback) {
+LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidHeader = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -3141,6 +3830,13 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidHeader = function (callbac
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -3181,16 +3877,25 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidHeader = function (callbac
  * Long running delete request, service returns a 202 to the initial request.
  * Poll the endpoint indicated in the Azure-AsyncOperation header for
  * operation status
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.deleteAsyncRelativeRetryInvalidJsonPolling = function (callback) {
+LROSADs.prototype.deleteAsyncRelativeRetryInvalidJsonPolling = function (options, callback) {
   var self = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   // Send request
-  this.beginDeleteAsyncRelativeRetryInvalidJsonPolling(function (err, result){
+  this.beginDeleteAsyncRelativeRetryInvalidJsonPolling(options, function (err, result){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, callback);
+    self.getPostOrDeleteOperationResult(result, options, callback);
   });
 };
 
@@ -3198,12 +3903,21 @@ LROSADs.prototype.deleteAsyncRelativeRetryInvalidJsonPolling = function (callbac
  * Long running delete request, service returns a 202 to the initial request.
  * Poll the endpoint indicated in the Azure-AsyncOperation header for
  * operation status
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidJsonPolling = function (callback) {
+LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidJsonPolling = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -3229,6 +3943,13 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidJsonPolling = function (ca
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -3274,16 +3995,25 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidJsonPolling = function (ca
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.post202RetryInvalidHeader = function (product, callback) {
+LROSADs.prototype.post202RetryInvalidHeader = function (product, options, callback) {
   var self = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   // Send request
-  this.beginPost202RetryInvalidHeader(product, function (err, result){
+  this.beginPost202RetryInvalidHeader(product, options, function (err, result){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, callback);
+    self.getPostOrDeleteOperationResult(result, options, callback);
   });
 };
 
@@ -3296,12 +4026,21 @@ LROSADs.prototype.post202RetryInvalidHeader = function (product, callback) {
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.beginPost202RetryInvalidHeader = function (product, callback) {
+LROSADs.prototype.beginPost202RetryInvalidHeader = function (product, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -3338,6 +4077,13 @@ LROSADs.prototype.beginPost202RetryInvalidHeader = function (product, callback) 
   requestContent = JSON.stringify(msRest.serializeObject(product));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -3384,16 +4130,25 @@ LROSADs.prototype.beginPost202RetryInvalidHeader = function (product, callback) 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.postAsyncRelativeRetryInvalidHeader = function (product, callback) {
+LROSADs.prototype.postAsyncRelativeRetryInvalidHeader = function (product, options, callback) {
   var self = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   // Send request
-  this.beginPostAsyncRelativeRetryInvalidHeader(product, function (err, result){
+  this.beginPostAsyncRelativeRetryInvalidHeader(product, options, function (err, result){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, callback);
+    self.getPostOrDeleteOperationResult(result, options, callback);
   });
 };
 
@@ -3407,12 +4162,21 @@ LROSADs.prototype.postAsyncRelativeRetryInvalidHeader = function (product, callb
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.beginPostAsyncRelativeRetryInvalidHeader = function (product, callback) {
+LROSADs.prototype.beginPostAsyncRelativeRetryInvalidHeader = function (product, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -3449,6 +4213,13 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidHeader = function (product, 
   requestContent = JSON.stringify(msRest.serializeObject(product));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -3495,16 +4266,25 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidHeader = function (product, 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.postAsyncRelativeRetryInvalidJsonPolling = function (product, callback) {
+LROSADs.prototype.postAsyncRelativeRetryInvalidJsonPolling = function (product, options, callback) {
   var self = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   // Send request
-  this.beginPostAsyncRelativeRetryInvalidJsonPolling(product, function (err, result){
+  this.beginPostAsyncRelativeRetryInvalidJsonPolling(product, options, function (err, result){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, callback);
+    self.getPostOrDeleteOperationResult(result, options, callback);
   });
 };
 
@@ -3518,12 +4298,21 @@ LROSADs.prototype.postAsyncRelativeRetryInvalidJsonPolling = function (product, 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-LROSADs.prototype.beginPostAsyncRelativeRetryInvalidJsonPolling = function (product, callback) {
+LROSADs.prototype.beginPostAsyncRelativeRetryInvalidJsonPolling = function (product, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -3560,6 +4349,13 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidJsonPolling = function (prod
   requestContent = JSON.stringify(msRest.serializeObject(product));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

@@ -26,12 +26,21 @@ function Implicit(client) {
  * Test implicitly required path parameter
  * @param {String} [pathParameter] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Implicit.prototype.getRequiredPath = function (pathParameter, callback) {
+Implicit.prototype.getRequiredPath = function (pathParameter, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -64,6 +73,13 @@ Implicit.prototype.getRequiredPath = function (pathParameter, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -116,12 +132,21 @@ Implicit.prototype.getRequiredPath = function (pathParameter, callback) {
  * Test implicitly optional query parameter
  * @param {String} [queryParameter] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Implicit.prototype.putOptionalQuery = function (queryParameter, callback) {
+Implicit.prototype.putOptionalQuery = function (queryParameter, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -157,6 +182,13 @@ Implicit.prototype.putOptionalQuery = function (queryParameter, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -196,12 +228,21 @@ Implicit.prototype.putOptionalQuery = function (queryParameter, callback) {
  * Test implicitly optional header parameter
  * @param {String} [queryParameter] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Implicit.prototype.putOptionalHeader = function (queryParameter, callback) {
+Implicit.prototype.putOptionalHeader = function (queryParameter, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -233,6 +274,13 @@ Implicit.prototype.putOptionalHeader = function (queryParameter, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -272,12 +320,21 @@ Implicit.prototype.putOptionalHeader = function (queryParameter, callback) {
  * Test implicitly optional body parameter
  * @param {String} [bodyParameter] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Implicit.prototype.putOptionalBody = function (bodyParameter, callback) {
+Implicit.prototype.putOptionalBody = function (bodyParameter, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -309,6 +366,13 @@ Implicit.prototype.putOptionalBody = function (bodyParameter, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -348,12 +412,21 @@ Implicit.prototype.putOptionalBody = function (bodyParameter, callback) {
  * Test implicitly required path parameter
  * @param {String} [requiredGlobalPath] number of items to skip
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Implicit.prototype.getRequiredGlobalPath = function (requiredGlobalPath, callback) {
+Implicit.prototype.getRequiredGlobalPath = function (requiredGlobalPath, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -386,6 +459,13 @@ Implicit.prototype.getRequiredGlobalPath = function (requiredGlobalPath, callbac
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -438,12 +518,21 @@ Implicit.prototype.getRequiredGlobalPath = function (requiredGlobalPath, callbac
  * Test implicitly required query parameter
  * @param {String} [requiredGlobalQuery] number of items to skip
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Implicit.prototype.getRequiredGlobalQuery = function (requiredGlobalQuery, callback) {
+Implicit.prototype.getRequiredGlobalQuery = function (requiredGlobalQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -480,6 +569,13 @@ Implicit.prototype.getRequiredGlobalQuery = function (requiredGlobalQuery, callb
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -532,12 +628,21 @@ Implicit.prototype.getRequiredGlobalQuery = function (requiredGlobalQuery, callb
  * Test implicitly optional query parameter
  * @param {Number} [optionalGlobalQuery] number of items to skip
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Implicit.prototype.getOptionalGlobalQuery = function (optionalGlobalQuery, callback) {
+Implicit.prototype.getOptionalGlobalQuery = function (optionalGlobalQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -573,6 +678,13 @@ Implicit.prototype.getOptionalGlobalQuery = function (optionalGlobalQuery, callb
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

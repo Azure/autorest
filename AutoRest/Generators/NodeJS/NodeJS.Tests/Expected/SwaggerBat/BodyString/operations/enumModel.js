@@ -25,12 +25,21 @@ function EnumModel(client) {
 /**
  * Get enum value 'red color' from enumeration of 'red color', 'green-color',
  * 'blue_color'.
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-EnumModel.prototype.getNotExpandable = function (callback) {
+EnumModel.prototype.getNotExpandable = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -51,6 +60,13 @@ EnumModel.prototype.getNotExpandable = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -104,12 +120,21 @@ EnumModel.prototype.getNotExpandable = function (callback) {
  * 'blue_color'
  * @param {Colors} [stringBody] Possible values for this parameter include: 'red color', 'green-color', 'blue_color'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-EnumModel.prototype.putNotExpandable = function (stringBody, callback) {
+EnumModel.prototype.putNotExpandable = function (stringBody, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -147,6 +172,13 @@ EnumModel.prototype.putNotExpandable = function (stringBody, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(stringBody));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

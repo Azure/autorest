@@ -27,12 +27,21 @@ function Explicit(client) {
  * should throw before the request is sent.
  * @param {Number} [bodyParameter] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, callback) {
+Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -67,6 +76,13 @@ Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, callb
   requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -119,12 +135,21 @@ Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, callb
  * Test explicitly optional integer. Please put null.
  * @param {Number} [bodyParameter] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Explicit.prototype.postOptionalIntegerParameter = function (bodyParameter, callback) {
+Explicit.prototype.postOptionalIntegerParameter = function (bodyParameter, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -156,6 +181,13 @@ Explicit.prototype.postOptionalIntegerParameter = function (bodyParameter, callb
   requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -199,12 +231,21 @@ Explicit.prototype.postOptionalIntegerParameter = function (bodyParameter, callb
  *
  * @param {Number} [bodyParameter.value] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Explicit.prototype.postRequiredIntegerProperty = function (bodyParameter, callback) {
+Explicit.prototype.postRequiredIntegerProperty = function (bodyParameter, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -239,6 +280,13 @@ Explicit.prototype.postRequiredIntegerProperty = function (bodyParameter, callba
   requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -294,12 +342,21 @@ Explicit.prototype.postRequiredIntegerProperty = function (bodyParameter, callba
  *
  * @param {Number} [bodyParameter.value] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Explicit.prototype.postOptionalIntegerProperty = function (bodyParameter, callback) {
+Explicit.prototype.postOptionalIntegerProperty = function (bodyParameter, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -331,6 +388,13 @@ Explicit.prototype.postOptionalIntegerProperty = function (bodyParameter, callba
   requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -371,12 +435,21 @@ Explicit.prototype.postOptionalIntegerProperty = function (bodyParameter, callba
  * null and the client library should throw before the request is sent.
  * @param {Number} [headerParameter] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Explicit.prototype.postRequiredIntegerHeader = function (headerParameter, callback) {
+Explicit.prototype.postRequiredIntegerHeader = function (headerParameter, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -411,6 +484,13 @@ Explicit.prototype.postRequiredIntegerHeader = function (headerParameter, callba
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -464,12 +544,21 @@ Explicit.prototype.postRequiredIntegerHeader = function (headerParameter, callba
  * null.
  * @param {Number} [headerParameter] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Explicit.prototype.postOptionalIntegerHeader = function (headerParameter, callback) {
+Explicit.prototype.postOptionalIntegerHeader = function (headerParameter, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -501,6 +590,13 @@ Explicit.prototype.postOptionalIntegerHeader = function (headerParameter, callba
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -541,12 +637,21 @@ Explicit.prototype.postOptionalIntegerHeader = function (headerParameter, callba
  * should throw before the request is sent.
  * @param {String} [bodyParameter] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Explicit.prototype.postRequiredStringParameter = function (bodyParameter, callback) {
+Explicit.prototype.postRequiredStringParameter = function (bodyParameter, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -581,6 +686,13 @@ Explicit.prototype.postRequiredStringParameter = function (bodyParameter, callba
   requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -633,12 +745,21 @@ Explicit.prototype.postRequiredStringParameter = function (bodyParameter, callba
  * Test explicitly optional string. Please put null.
  * @param {String} [bodyParameter] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Explicit.prototype.postOptionalStringParameter = function (bodyParameter, callback) {
+Explicit.prototype.postOptionalStringParameter = function (bodyParameter, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -670,6 +791,13 @@ Explicit.prototype.postOptionalStringParameter = function (bodyParameter, callba
   requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -713,12 +841,21 @@ Explicit.prototype.postOptionalStringParameter = function (bodyParameter, callba
  *
  * @param {String} [bodyParameter.value] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Explicit.prototype.postRequiredStringProperty = function (bodyParameter, callback) {
+Explicit.prototype.postRequiredStringProperty = function (bodyParameter, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -753,6 +890,13 @@ Explicit.prototype.postRequiredStringProperty = function (bodyParameter, callbac
   requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -808,12 +952,21 @@ Explicit.prototype.postRequiredStringProperty = function (bodyParameter, callbac
  *
  * @param {String} [bodyParameter.value] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Explicit.prototype.postOptionalStringProperty = function (bodyParameter, callback) {
+Explicit.prototype.postOptionalStringProperty = function (bodyParameter, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -845,6 +998,13 @@ Explicit.prototype.postOptionalStringProperty = function (bodyParameter, callbac
   requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -885,12 +1045,21 @@ Explicit.prototype.postOptionalStringProperty = function (bodyParameter, callbac
  * null and the client library should throw before the request is sent.
  * @param {String} [headerParameter] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Explicit.prototype.postRequiredStringHeader = function (headerParameter, callback) {
+Explicit.prototype.postRequiredStringHeader = function (headerParameter, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -925,6 +1094,13 @@ Explicit.prototype.postRequiredStringHeader = function (headerParameter, callbac
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -978,12 +1154,21 @@ Explicit.prototype.postRequiredStringHeader = function (headerParameter, callbac
  * null.
  * @param {String} [bodyParameter] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Explicit.prototype.postOptionalStringHeader = function (bodyParameter, callback) {
+Explicit.prototype.postOptionalStringHeader = function (bodyParameter, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1015,6 +1200,13 @@ Explicit.prototype.postOptionalStringHeader = function (bodyParameter, callback)
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1059,12 +1251,21 @@ Explicit.prototype.postOptionalStringHeader = function (bodyParameter, callback)
  *
  * @param {String} [bodyParameter.name] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Explicit.prototype.postRequiredClassParameter = function (bodyParameter, callback) {
+Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1099,6 +1300,13 @@ Explicit.prototype.postRequiredClassParameter = function (bodyParameter, callbac
   requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1155,12 +1363,21 @@ Explicit.prototype.postRequiredClassParameter = function (bodyParameter, callbac
  *
  * @param {String} [bodyParameter.name] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Explicit.prototype.postOptionalClassParameter = function (bodyParameter, callback) {
+Explicit.prototype.postOptionalClassParameter = function (bodyParameter, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1192,6 +1409,13 @@ Explicit.prototype.postOptionalClassParameter = function (bodyParameter, callbac
   requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1239,12 +1463,21 @@ Explicit.prototype.postOptionalClassParameter = function (bodyParameter, callbac
  *
  * @param {String} [bodyParameter.value.name] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Explicit.prototype.postRequiredClassProperty = function (bodyParameter, callback) {
+Explicit.prototype.postRequiredClassProperty = function (bodyParameter, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1279,6 +1512,13 @@ Explicit.prototype.postRequiredClassProperty = function (bodyParameter, callback
   requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1338,12 +1578,21 @@ Explicit.prototype.postRequiredClassProperty = function (bodyParameter, callback
  *
  * @param {String} [bodyParameter.value.name] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Explicit.prototype.postOptionalClassProperty = function (bodyParameter, callback) {
+Explicit.prototype.postOptionalClassProperty = function (bodyParameter, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1375,6 +1624,13 @@ Explicit.prototype.postOptionalClassProperty = function (bodyParameter, callback
   requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1415,12 +1671,21 @@ Explicit.prototype.postOptionalClassProperty = function (bodyParameter, callback
  * should throw before the request is sent.
  * @param {Array} [bodyParameter] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, callback) {
+Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1459,6 +1724,13 @@ Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, callbac
   requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1511,12 +1783,21 @@ Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, callbac
  * Test explicitly optional array. Please put null.
  * @param {Array} [bodyParameter] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Explicit.prototype.postOptionalArrayParameter = function (bodyParameter, callback) {
+Explicit.prototype.postOptionalArrayParameter = function (bodyParameter, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1552,6 +1833,13 @@ Explicit.prototype.postOptionalArrayParameter = function (bodyParameter, callbac
   requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1595,12 +1883,21 @@ Explicit.prototype.postOptionalArrayParameter = function (bodyParameter, callbac
  *
  * @param {Array} [bodyParameter.value] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Explicit.prototype.postRequiredArrayProperty = function (bodyParameter, callback) {
+Explicit.prototype.postRequiredArrayProperty = function (bodyParameter, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1635,6 +1932,13 @@ Explicit.prototype.postRequiredArrayProperty = function (bodyParameter, callback
   requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1690,12 +1994,21 @@ Explicit.prototype.postRequiredArrayProperty = function (bodyParameter, callback
  *
  * @param {Array} [bodyParameter.value] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Explicit.prototype.postOptionalArrayProperty = function (bodyParameter, callback) {
+Explicit.prototype.postOptionalArrayProperty = function (bodyParameter, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1727,6 +2040,13 @@ Explicit.prototype.postOptionalArrayProperty = function (bodyParameter, callback
   requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1767,12 +2087,21 @@ Explicit.prototype.postOptionalArrayProperty = function (bodyParameter, callback
  * null and the client library should throw before the request is sent.
  * @param {Array} [headerParameter] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Explicit.prototype.postRequiredArrayHeader = function (headerParameter, callback) {
+Explicit.prototype.postRequiredArrayHeader = function (headerParameter, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1811,6 +2140,13 @@ Explicit.prototype.postRequiredArrayHeader = function (headerParameter, callback
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1864,12 +2200,21 @@ Explicit.prototype.postRequiredArrayHeader = function (headerParameter, callback
  * null.
  * @param {Array} [headerParameter] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Explicit.prototype.postOptionalArrayHeader = function (headerParameter, callback) {
+Explicit.prototype.postOptionalArrayHeader = function (headerParameter, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1905,6 +2250,13 @@ Explicit.prototype.postOptionalArrayHeader = function (headerParameter, callback
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

@@ -42,6 +42,7 @@ describe('AzureServiceClient', function () {
     
     var testResourceName = 'foo';
     var testError = 'Lro error for you';
+    var testCustomFieldValue = 'CustomField123';
     var urlFromAzureAsyncOPHeader_Return200 = 'http://dummyurlFromAzureAsyncOPHeader_Return200';
     var urlFromLocationHeader_Return200 = 'http://dummyurlurlFromLocationHeader_Return200';
     var url_ReturnError = 'http://dummyurl_ReturnError';
@@ -60,14 +61,17 @@ describe('AzureServiceClient', function () {
     var mockedGetStatus = function (url, callback) {
       if (url === urlFromAzureAsyncOPHeader_Return200) {
         return callback(null, {
-          response: { randomFieldFromPollAsyncOpHeader: ''},
+          response: {
+            randomFieldFromPollAsyncOpHeader: ''
+          },
           body: { status: 'Succeeded' }
         });
       } if (url === urlFromLocationHeader_Return200) {
         return callback(null, {
           response: {
             statusCode: 200,
-            randomFieldFromPollLocationHeader: ''
+            randomFieldFromPollLocationHeader: '',
+            testCustomField: this._options ? this._options.customHeaders['testCustomField'] : null
           },
           body: {
             status : LroStates.Succeeded,
@@ -163,6 +167,22 @@ describe('AzureServiceClient', function () {
         client.getPutOperationResult(resultOfInitialRequest, pollerProvidedByClient, function (err, result) {
           should.not.exist(err);
           result.body.name.should.equal(testResourceName);
+          done();
+        });
+      });
+      
+      it('works by accepting custom headers', function (done) {
+        resultOfInitialRequest.response.headers['azure-asyncoperation'] = '';
+        resultOfInitialRequest.response.headers['location'] = urlFromLocationHeader_Return200;
+        var options = {
+          customHeaders : {
+            'testCustomField': testCustomFieldValue
+          }
+        };
+        client.getPutOperationResult(resultOfInitialRequest, pollerProvidedByClient, options, function (err, result) {
+          should.not.exist(err);
+          result.body.name.should.equal(testResourceName);
+          result.response.testCustomField.should.equal(testCustomFieldValue);
           done();
         });
       });

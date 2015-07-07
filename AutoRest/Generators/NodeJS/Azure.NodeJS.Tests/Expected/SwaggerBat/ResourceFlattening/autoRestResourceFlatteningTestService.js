@@ -54,12 +54,21 @@ util.inherits(AutoRestResourceFlatteningTestService, ServiceClient);
  * Put External Resource as an Array
  * @param {Array} [resourceArray] External Resource as an Array to put
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-AutoRestResourceFlatteningTestService.prototype.putArray = function (resourceArray, callback) {
+AutoRestResourceFlatteningTestService.prototype.putArray = function (resourceArray, options, callback) {
   var client = this;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -100,6 +109,13 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (resourceArr
   requestContent = JSON.stringify(msRest.serializeObject(resourceArray));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -137,12 +153,21 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (resourceArr
 
 /**
  * Get External Resource as an Array
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-AutoRestResourceFlatteningTestService.prototype.getArray = function (callback) {
+AutoRestResourceFlatteningTestService.prototype.getArray = function (options, callback) {
   var client = this;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -168,6 +193,13 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -227,12 +259,21 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (callback) {
  * Put External Resource as a Dictionary
  * @param {Object} [resourceDictionary] External Resource as a Dictionary to put
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resourceDictionary, callback) {
+AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resourceDictionary, options, callback) {
   var client = this;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -273,6 +314,13 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resour
   requestContent = JSON.stringify(msRest.serializeObject(resourceDictionary));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -310,12 +358,21 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resour
 
 /**
  * Get External Resource as a Dictionary
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-AutoRestResourceFlatteningTestService.prototype.getDictionary = function (callback) {
+AutoRestResourceFlatteningTestService.prototype.getDictionary = function (options, callback) {
   var client = this;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -341,6 +398,13 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (callba
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -416,12 +480,21 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (callba
  *
  * @param {String} [resourceComplexObject.productresource.properties.type] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function (resourceComplexObject, callback) {
+AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function (resourceComplexObject, options, callback) {
   var client = this;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -458,6 +531,13 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
   requestContent = JSON.stringify(msRest.serializeObject(resourceComplexObject));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -495,12 +575,21 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
 
 /**
  * Get External Resource as a ResourceCollection
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function (callback) {
+AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function (options, callback) {
   var client = this;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -526,6 +615,13 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

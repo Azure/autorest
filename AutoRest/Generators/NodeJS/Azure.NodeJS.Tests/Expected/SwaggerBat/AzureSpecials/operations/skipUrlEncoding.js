@@ -27,12 +27,21 @@ function SkipUrlEncoding(client) {
  * Get method with unencoded path parameter with value 'path1/path2/path3'
  * @param {String} [unencodedPathParam] Unencoded path parameter with value 'path1/path2/path3'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-SkipUrlEncoding.prototype.getMethodPathValid = function (unencodedPathParam, callback) {
+SkipUrlEncoding.prototype.getMethodPathValid = function (unencodedPathParam, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -70,6 +79,13 @@ SkipUrlEncoding.prototype.getMethodPathValid = function (unencodedPathParam, cal
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -109,12 +125,21 @@ SkipUrlEncoding.prototype.getMethodPathValid = function (unencodedPathParam, cal
  * Get method with unencoded path parameter with value 'path1/path2/path3'
  * @param {String} [unencodedPathParam] Unencoded path parameter with value 'path1/path2/path3'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-SkipUrlEncoding.prototype.getPathPathValid = function (unencodedPathParam, callback) {
+SkipUrlEncoding.prototype.getPathPathValid = function (unencodedPathParam, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -152,6 +177,13 @@ SkipUrlEncoding.prototype.getPathPathValid = function (unencodedPathParam, callb
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -191,12 +223,21 @@ SkipUrlEncoding.prototype.getPathPathValid = function (unencodedPathParam, callb
  * Get method with unencoded path parameter with value 'path1/path2/path3'
  * @param {String} [unencodedPathParam] An unencoded path parameter with value 'path1/path2/path3'. Possible values for this parameter include: 'path1/path2/path3'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-SkipUrlEncoding.prototype.getSwaggerPathValid = function (unencodedPathParam, callback) {
+SkipUrlEncoding.prototype.getSwaggerPathValid = function (unencodedPathParam, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -234,6 +275,13 @@ SkipUrlEncoding.prototype.getSwaggerPathValid = function (unencodedPathParam, ca
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -274,12 +322,21 @@ SkipUrlEncoding.prototype.getSwaggerPathValid = function (unencodedPathParam, ca
  * 'value1&q2=value2&q3=value3'
  * @param {String} [q1] Unencoded query parameter with value 'value1&q2=value2&q3=value3'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-SkipUrlEncoding.prototype.getMethodQueryValid = function (q1, callback) {
+SkipUrlEncoding.prototype.getMethodQueryValid = function (q1, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -317,6 +374,13 @@ SkipUrlEncoding.prototype.getMethodQueryValid = function (q1, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -356,12 +420,21 @@ SkipUrlEncoding.prototype.getMethodQueryValid = function (q1, callback) {
  * Get method with unencoded query parameter with value null
  * @param {String} [q1] Unencoded query parameter with value null
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-SkipUrlEncoding.prototype.getMethodQueryNull = function (q1, callback) {
+SkipUrlEncoding.prototype.getMethodQueryNull = function (q1, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -398,6 +471,13 @@ SkipUrlEncoding.prototype.getMethodQueryNull = function (q1, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -438,12 +518,21 @@ SkipUrlEncoding.prototype.getMethodQueryNull = function (q1, callback) {
  * 'value1&q2=value2&q3=value3'
  * @param {String} [q1] Unencoded query parameter with value 'value1&q2=value2&q3=value3'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-SkipUrlEncoding.prototype.getPathQueryValid = function (q1, callback) {
+SkipUrlEncoding.prototype.getPathQueryValid = function (q1, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -481,6 +570,13 @@ SkipUrlEncoding.prototype.getPathQueryValid = function (q1, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -521,12 +617,21 @@ SkipUrlEncoding.prototype.getPathQueryValid = function (q1, callback) {
  * 'value1&q2=value2&q3=value3'
  * @param {String} [q1] An unencoded query parameter with value 'value1&q2=value2&q3=value3'. Possible values for this parameter include: 'value1&q2=value2&q3=value3'
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-SkipUrlEncoding.prototype.getSwaggerQueryValid = function (q1, callback) {
+SkipUrlEncoding.prototype.getSwaggerQueryValid = function (q1, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -563,6 +668,13 @@ SkipUrlEncoding.prototype.getSwaggerQueryValid = function (q1, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

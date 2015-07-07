@@ -24,12 +24,21 @@ function Datetime(client) {
 
 /**
  * Get null datetime value
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Datetime.prototype.getNull = function (callback) {
+Datetime.prototype.getNull = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -50,6 +59,13 @@ Datetime.prototype.getNull = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -103,12 +119,21 @@ Datetime.prototype.getNull = function (callback) {
 
 /**
  * Get invalid datetime value
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Datetime.prototype.getInvalid = function (callback) {
+Datetime.prototype.getInvalid = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -129,6 +154,13 @@ Datetime.prototype.getInvalid = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -182,12 +214,21 @@ Datetime.prototype.getInvalid = function (callback) {
 
 /**
  * Get overflow datetime value
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Datetime.prototype.getOverflow = function (callback) {
+Datetime.prototype.getOverflow = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -208,6 +249,13 @@ Datetime.prototype.getOverflow = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -261,12 +309,21 @@ Datetime.prototype.getOverflow = function (callback) {
 
 /**
  * Get underflow datetime value
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Datetime.prototype.getUnderflow = function (callback) {
+Datetime.prototype.getUnderflow = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -287,6 +344,13 @@ Datetime.prototype.getUnderflow = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -342,12 +406,21 @@ Datetime.prototype.getUnderflow = function (callback) {
  * Put max datetime value 9999-12-31T23:59:59.9999999Z
  * @param {Date} [datetimeBody] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Datetime.prototype.putUtcMaxDateTime = function (datetimeBody, callback) {
+Datetime.prototype.putUtcMaxDateTime = function (datetimeBody, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -384,6 +457,13 @@ Datetime.prototype.putUtcMaxDateTime = function (datetimeBody, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(datetimeBody));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -421,12 +501,21 @@ Datetime.prototype.putUtcMaxDateTime = function (datetimeBody, callback) {
 
 /**
  * Get max datetime value 9999-12-31t23:59:59.9999999z
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Datetime.prototype.getUtcLowercaseMaxDateTime = function (callback) {
+Datetime.prototype.getUtcLowercaseMaxDateTime = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -447,6 +536,13 @@ Datetime.prototype.getUtcLowercaseMaxDateTime = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -500,12 +596,21 @@ Datetime.prototype.getUtcLowercaseMaxDateTime = function (callback) {
 
 /**
  * Get max datetime value 9999-12-31T23:59:59.9999999Z
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Datetime.prototype.getUtcUppercaseMaxDateTime = function (callback) {
+Datetime.prototype.getUtcUppercaseMaxDateTime = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -526,6 +631,13 @@ Datetime.prototype.getUtcUppercaseMaxDateTime = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -582,12 +694,21 @@ Datetime.prototype.getUtcUppercaseMaxDateTime = function (callback) {
  * 9999-12-31t23:59:59.9999999+14:00
  * @param {Date} [datetimeBody] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Datetime.prototype.putLocalPositiveOffsetMaxDateTime = function (datetimeBody, callback) {
+Datetime.prototype.putLocalPositiveOffsetMaxDateTime = function (datetimeBody, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -624,6 +745,13 @@ Datetime.prototype.putLocalPositiveOffsetMaxDateTime = function (datetimeBody, c
   requestContent = JSON.stringify(msRest.serializeObject(datetimeBody));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -662,12 +790,21 @@ Datetime.prototype.putLocalPositiveOffsetMaxDateTime = function (datetimeBody, c
 /**
  * Get max datetime value with positive num offset
  * 9999-12-31t23:59:59.9999999+14:00
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Datetime.prototype.getLocalPositiveOffsetLowercaseMaxDateTime = function (callback) {
+Datetime.prototype.getLocalPositiveOffsetLowercaseMaxDateTime = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -688,6 +825,13 @@ Datetime.prototype.getLocalPositiveOffsetLowercaseMaxDateTime = function (callba
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -742,12 +886,21 @@ Datetime.prototype.getLocalPositiveOffsetLowercaseMaxDateTime = function (callba
 /**
  * Get max datetime value with positive num offset
  * 9999-12-31T23:59:59.9999999+14:00
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Datetime.prototype.getLocalPositiveOffsetUppercaseMaxDateTime = function (callback) {
+Datetime.prototype.getLocalPositiveOffsetUppercaseMaxDateTime = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -768,6 +921,13 @@ Datetime.prototype.getLocalPositiveOffsetUppercaseMaxDateTime = function (callba
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -824,12 +984,21 @@ Datetime.prototype.getLocalPositiveOffsetUppercaseMaxDateTime = function (callba
  * 9999-12-31t23:59:59.9999999-14:00
  * @param {Date} [datetimeBody] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Datetime.prototype.putLocalNegativeOffsetMaxDateTime = function (datetimeBody, callback) {
+Datetime.prototype.putLocalNegativeOffsetMaxDateTime = function (datetimeBody, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -866,6 +1035,13 @@ Datetime.prototype.putLocalNegativeOffsetMaxDateTime = function (datetimeBody, c
   requestContent = JSON.stringify(msRest.serializeObject(datetimeBody));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -904,12 +1080,21 @@ Datetime.prototype.putLocalNegativeOffsetMaxDateTime = function (datetimeBody, c
 /**
  * Get max datetime value with positive num offset
  * 9999-12-31T23:59:59.9999999-14:00
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Datetime.prototype.getLocalNegativeOffsetUppercaseMaxDateTime = function (callback) {
+Datetime.prototype.getLocalNegativeOffsetUppercaseMaxDateTime = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -930,6 +1115,13 @@ Datetime.prototype.getLocalNegativeOffsetUppercaseMaxDateTime = function (callba
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -984,12 +1176,21 @@ Datetime.prototype.getLocalNegativeOffsetUppercaseMaxDateTime = function (callba
 /**
  * Get max datetime value with positive num offset
  * 9999-12-31t23:59:59.9999999-14:00
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Datetime.prototype.getLocalNegativeOffsetLowercaseMaxDateTime = function (callback) {
+Datetime.prototype.getLocalNegativeOffsetLowercaseMaxDateTime = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1010,6 +1211,13 @@ Datetime.prototype.getLocalNegativeOffsetLowercaseMaxDateTime = function (callba
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1065,12 +1273,21 @@ Datetime.prototype.getLocalNegativeOffsetLowercaseMaxDateTime = function (callba
  * Put min datetime value 0001-01-01T00:00:00Z
  * @param {Date} [datetimeBody] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Datetime.prototype.putUtcMinDateTime = function (datetimeBody, callback) {
+Datetime.prototype.putUtcMinDateTime = function (datetimeBody, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1107,6 +1324,13 @@ Datetime.prototype.putUtcMinDateTime = function (datetimeBody, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(datetimeBody));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1144,12 +1368,21 @@ Datetime.prototype.putUtcMinDateTime = function (datetimeBody, callback) {
 
 /**
  * Get min datetime value 0001-01-01T00:00:00Z
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Datetime.prototype.getUtcMinDateTime = function (callback) {
+Datetime.prototype.getUtcMinDateTime = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1170,6 +1403,13 @@ Datetime.prototype.getUtcMinDateTime = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1225,12 +1465,21 @@ Datetime.prototype.getUtcMinDateTime = function (callback) {
  * Put min datetime value 0001-01-01T00:00:00+14:00
  * @param {Date} [datetimeBody] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Datetime.prototype.putLocalPositiveOffsetMinDateTime = function (datetimeBody, callback) {
+Datetime.prototype.putLocalPositiveOffsetMinDateTime = function (datetimeBody, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1267,6 +1516,13 @@ Datetime.prototype.putLocalPositiveOffsetMinDateTime = function (datetimeBody, c
   requestContent = JSON.stringify(msRest.serializeObject(datetimeBody));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1304,12 +1560,21 @@ Datetime.prototype.putLocalPositiveOffsetMinDateTime = function (datetimeBody, c
 
 /**
  * Get min datetime value 0001-01-01T00:00:00+14:00
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Datetime.prototype.getLocalPositiveOffsetMinDateTime = function (callback) {
+Datetime.prototype.getLocalPositiveOffsetMinDateTime = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1330,6 +1595,13 @@ Datetime.prototype.getLocalPositiveOffsetMinDateTime = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1385,12 +1657,21 @@ Datetime.prototype.getLocalPositiveOffsetMinDateTime = function (callback) {
  * Put min datetime value 0001-01-01T00:00:00-14:00
  * @param {Date} [datetimeBody] 
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Datetime.prototype.putLocalNegativeOffsetMinDateTime = function (datetimeBody, callback) {
+Datetime.prototype.putLocalNegativeOffsetMinDateTime = function (datetimeBody, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1427,6 +1708,13 @@ Datetime.prototype.putLocalNegativeOffsetMinDateTime = function (datetimeBody, c
   requestContent = JSON.stringify(msRest.serializeObject(datetimeBody));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1464,12 +1752,21 @@ Datetime.prototype.putLocalNegativeOffsetMinDateTime = function (datetimeBody, c
 
 /**
  * Get min datetime value 0001-01-01T00:00:00-14:00
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-Datetime.prototype.getLocalNegativeOffsetMinDateTime = function (callback) {
+Datetime.prototype.getLocalNegativeOffsetMinDateTime = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1490,6 +1787,13 @@ Datetime.prototype.getLocalNegativeOffsetMinDateTime = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

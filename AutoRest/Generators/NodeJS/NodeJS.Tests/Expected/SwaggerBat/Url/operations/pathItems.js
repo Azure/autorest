@@ -40,12 +40,21 @@ function PathItems(client) {
  *
  * @param {String} [pathItemStringQuery] A string value 'pathItemStringQuery' that appears as a query parameter
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-PathItems.prototype.getAllWithValues = function (localStringPath, pathItemStringPath, globalStringPath, localStringQuery, pathItemStringQuery, globalStringQuery, callback) {
+PathItems.prototype.getAllWithValues = function (localStringPath, pathItemStringPath, globalStringPath, localStringQuery, pathItemStringQuery, globalStringQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -114,6 +123,13 @@ PathItems.prototype.getAllWithValues = function (localStringPath, pathItemString
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -167,12 +183,21 @@ PathItems.prototype.getAllWithValues = function (localStringPath, pathItemString
  *
  * @param {String} [pathItemStringQuery] A string value 'pathItemStringQuery' that appears as a query parameter
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-PathItems.prototype.getGlobalQueryNull = function (localStringPath, pathItemStringPath, globalStringPath, localStringQuery, pathItemStringQuery, globalStringQuery, callback) {
+PathItems.prototype.getGlobalQueryNull = function (localStringPath, pathItemStringPath, globalStringPath, localStringQuery, pathItemStringQuery, globalStringQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -241,6 +266,13 @@ PathItems.prototype.getGlobalQueryNull = function (localStringPath, pathItemStri
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -293,12 +325,21 @@ PathItems.prototype.getGlobalQueryNull = function (localStringPath, pathItemStri
  *
  * @param {String} [pathItemStringQuery] A string value 'pathItemStringQuery' that appears as a query parameter
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-PathItems.prototype.getGlobalAndLocalQueryNull = function (localStringPath, pathItemStringPath, globalStringPath, localStringQuery, pathItemStringQuery, globalStringQuery, callback) {
+PathItems.prototype.getGlobalAndLocalQueryNull = function (localStringPath, pathItemStringPath, globalStringPath, localStringQuery, pathItemStringQuery, globalStringQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -367,6 +408,13 @@ PathItems.prototype.getGlobalAndLocalQueryNull = function (localStringPath, path
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -419,12 +467,21 @@ PathItems.prototype.getGlobalAndLocalQueryNull = function (localStringPath, path
  *
  * @param {String} [pathItemStringQuery] should contain value null
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-PathItems.prototype.getLocalPathItemQueryNull = function (localStringPath, pathItemStringPath, globalStringPath, localStringQuery, pathItemStringQuery, globalStringQuery, callback) {
+PathItems.prototype.getLocalPathItemQueryNull = function (localStringPath, pathItemStringPath, globalStringPath, localStringQuery, pathItemStringQuery, globalStringQuery, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -493,6 +550,13 @@ PathItems.prototype.getLocalPathItemQueryNull = function (localStringPath, pathI
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

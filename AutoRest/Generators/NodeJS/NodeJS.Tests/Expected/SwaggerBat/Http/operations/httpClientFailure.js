@@ -24,12 +24,21 @@ function HttpClientFailure(client) {
 
 /**
  * Return 400 status code - should be represented in the client as an error
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpClientFailure.prototype.head400 = function (callback) {
+HttpClientFailure.prototype.head400 = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -50,6 +59,13 @@ HttpClientFailure.prototype.head400 = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -100,12 +116,21 @@ HttpClientFailure.prototype.head400 = function (callback) {
 
 /**
  * Return 400 status code - should be represented in the client as an error
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpClientFailure.prototype.get400 = function (callback) {
+HttpClientFailure.prototype.get400 = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -126,6 +151,13 @@ HttpClientFailure.prototype.get400 = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -178,12 +210,21 @@ HttpClientFailure.prototype.get400 = function (callback) {
  * Return 400 status code - should be represented in the client as an error
  * @param {Boolean} [booleanValue] Simple boolean value true
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpClientFailure.prototype.put400 = function (booleanValue, callback) {
+HttpClientFailure.prototype.put400 = function (booleanValue, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -215,6 +256,13 @@ HttpClientFailure.prototype.put400 = function (booleanValue, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -267,12 +315,21 @@ HttpClientFailure.prototype.put400 = function (booleanValue, callback) {
  * Return 400 status code - should be represented in the client as an error
  * @param {Boolean} [booleanValue] Simple boolean value true
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpClientFailure.prototype.patch400 = function (booleanValue, callback) {
+HttpClientFailure.prototype.patch400 = function (booleanValue, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -304,6 +361,13 @@ HttpClientFailure.prototype.patch400 = function (booleanValue, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -356,12 +420,21 @@ HttpClientFailure.prototype.patch400 = function (booleanValue, callback) {
  * Return 400 status code - should be represented in the client as an error
  * @param {Boolean} [booleanValue] Simple boolean value true
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpClientFailure.prototype.post400 = function (booleanValue, callback) {
+HttpClientFailure.prototype.post400 = function (booleanValue, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -393,6 +466,13 @@ HttpClientFailure.prototype.post400 = function (booleanValue, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -445,12 +525,21 @@ HttpClientFailure.prototype.post400 = function (booleanValue, callback) {
  * Return 400 status code - should be represented in the client as an error
  * @param {Boolean} [booleanValue] Simple boolean value true
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpClientFailure.prototype.delete400 = function (booleanValue, callback) {
+HttpClientFailure.prototype.delete400 = function (booleanValue, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -482,6 +571,13 @@ HttpClientFailure.prototype.delete400 = function (booleanValue, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -532,12 +628,21 @@ HttpClientFailure.prototype.delete400 = function (booleanValue, callback) {
 
 /**
  * Return 401 status code - should be represented in the client as an error
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpClientFailure.prototype.head401 = function (callback) {
+HttpClientFailure.prototype.head401 = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -558,6 +663,13 @@ HttpClientFailure.prototype.head401 = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -608,12 +720,21 @@ HttpClientFailure.prototype.head401 = function (callback) {
 
 /**
  * Return 402 status code - should be represented in the client as an error
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpClientFailure.prototype.get402 = function (callback) {
+HttpClientFailure.prototype.get402 = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -634,6 +755,13 @@ HttpClientFailure.prototype.get402 = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -684,12 +812,21 @@ HttpClientFailure.prototype.get402 = function (callback) {
 
 /**
  * Return 403 status code - should be represented in the client as an error
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpClientFailure.prototype.get403 = function (callback) {
+HttpClientFailure.prototype.get403 = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -710,6 +847,13 @@ HttpClientFailure.prototype.get403 = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -762,12 +906,21 @@ HttpClientFailure.prototype.get403 = function (callback) {
  * Return 404 status code - should be represented in the client as an error
  * @param {Boolean} [booleanValue] Simple boolean value true
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpClientFailure.prototype.put404 = function (booleanValue, callback) {
+HttpClientFailure.prototype.put404 = function (booleanValue, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -799,6 +952,13 @@ HttpClientFailure.prototype.put404 = function (booleanValue, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -851,12 +1011,21 @@ HttpClientFailure.prototype.put404 = function (booleanValue, callback) {
  * Return 405 status code - should be represented in the client as an error
  * @param {Boolean} [booleanValue] Simple boolean value true
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpClientFailure.prototype.patch405 = function (booleanValue, callback) {
+HttpClientFailure.prototype.patch405 = function (booleanValue, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -888,6 +1057,13 @@ HttpClientFailure.prototype.patch405 = function (booleanValue, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -940,12 +1116,21 @@ HttpClientFailure.prototype.patch405 = function (booleanValue, callback) {
  * Return 406 status code - should be represented in the client as an error
  * @param {Boolean} [booleanValue] Simple boolean value true
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpClientFailure.prototype.post406 = function (booleanValue, callback) {
+HttpClientFailure.prototype.post406 = function (booleanValue, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -977,6 +1162,13 @@ HttpClientFailure.prototype.post406 = function (booleanValue, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1029,12 +1221,21 @@ HttpClientFailure.prototype.post406 = function (booleanValue, callback) {
  * Return 407 status code - should be represented in the client as an error
  * @param {Boolean} [booleanValue] Simple boolean value true
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpClientFailure.prototype.delete407 = function (booleanValue, callback) {
+HttpClientFailure.prototype.delete407 = function (booleanValue, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1066,6 +1267,13 @@ HttpClientFailure.prototype.delete407 = function (booleanValue, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1118,12 +1326,21 @@ HttpClientFailure.prototype.delete407 = function (booleanValue, callback) {
  * Return 409 status code - should be represented in the client as an error
  * @param {Boolean} [booleanValue] Simple boolean value true
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpClientFailure.prototype.put409 = function (booleanValue, callback) {
+HttpClientFailure.prototype.put409 = function (booleanValue, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1155,6 +1372,13 @@ HttpClientFailure.prototype.put409 = function (booleanValue, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1205,12 +1429,21 @@ HttpClientFailure.prototype.put409 = function (booleanValue, callback) {
 
 /**
  * Return 410 status code - should be represented in the client as an error
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpClientFailure.prototype.head410 = function (callback) {
+HttpClientFailure.prototype.head410 = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1231,6 +1464,13 @@ HttpClientFailure.prototype.head410 = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1281,12 +1521,21 @@ HttpClientFailure.prototype.head410 = function (callback) {
 
 /**
  * Return 411 status code - should be represented in the client as an error
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpClientFailure.prototype.get411 = function (callback) {
+HttpClientFailure.prototype.get411 = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1307,6 +1556,13 @@ HttpClientFailure.prototype.get411 = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1357,12 +1613,21 @@ HttpClientFailure.prototype.get411 = function (callback) {
 
 /**
  * Return 412 status code - should be represented in the client as an error
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpClientFailure.prototype.get412 = function (callback) {
+HttpClientFailure.prototype.get412 = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1383,6 +1648,13 @@ HttpClientFailure.prototype.get412 = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1435,12 +1707,21 @@ HttpClientFailure.prototype.get412 = function (callback) {
  * Return 413 status code - should be represented in the client as an error
  * @param {Boolean} [booleanValue] Simple boolean value true
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpClientFailure.prototype.put413 = function (booleanValue, callback) {
+HttpClientFailure.prototype.put413 = function (booleanValue, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1472,6 +1753,13 @@ HttpClientFailure.prototype.put413 = function (booleanValue, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1524,12 +1812,21 @@ HttpClientFailure.prototype.put413 = function (booleanValue, callback) {
  * Return 414 status code - should be represented in the client as an error
  * @param {Boolean} [booleanValue] Simple boolean value true
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpClientFailure.prototype.patch414 = function (booleanValue, callback) {
+HttpClientFailure.prototype.patch414 = function (booleanValue, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1561,6 +1858,13 @@ HttpClientFailure.prototype.patch414 = function (booleanValue, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1613,12 +1917,21 @@ HttpClientFailure.prototype.patch414 = function (booleanValue, callback) {
  * Return 415 status code - should be represented in the client as an error
  * @param {Boolean} [booleanValue] Simple boolean value true
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpClientFailure.prototype.post415 = function (booleanValue, callback) {
+HttpClientFailure.prototype.post415 = function (booleanValue, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1650,6 +1963,13 @@ HttpClientFailure.prototype.post415 = function (booleanValue, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1700,12 +2020,21 @@ HttpClientFailure.prototype.post415 = function (booleanValue, callback) {
 
 /**
  * Return 416 status code - should be represented in the client as an error
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpClientFailure.prototype.get416 = function (callback) {
+HttpClientFailure.prototype.get416 = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1726,6 +2055,13 @@ HttpClientFailure.prototype.get416 = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1778,12 +2114,21 @@ HttpClientFailure.prototype.get416 = function (callback) {
  * Return 417 status code - should be represented in the client as an error
  * @param {Boolean} [booleanValue] Simple boolean value true
  *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpClientFailure.prototype.delete417 = function (booleanValue, callback) {
+HttpClientFailure.prototype.delete417 = function (booleanValue, options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1815,6 +2160,13 @@ HttpClientFailure.prototype.delete417 = function (booleanValue, callback) {
   requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1865,12 +2217,21 @@ HttpClientFailure.prototype.delete417 = function (booleanValue, callback) {
 
 /**
  * Return 429 status code - should be represented in the client as an error
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
  * @param {function} callback
  *
  * @returns {Stream} The Response stream
  */
-HttpClientFailure.prototype.head429 = function (callback) {
+HttpClientFailure.prototype.head429 = function (options, callback) {
   var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
@@ -1891,6 +2252,13 @@ HttpClientFailure.prototype.head429 = function (callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
