@@ -53,6 +53,10 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             ScrubAndWriteValue("SERVICE ERROR", data.Data);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", 
+            "CA1801:ReviewUnusedParameters", 
+            MessageId = "prefix",
+            Justification = "To avoid the warning when build under Release")]
         private static  void ScrubAndWriteValue(string prefix, string data)
         {
             if (!string.IsNullOrEmpty(data))
