@@ -36,6 +36,18 @@ namespace Microsoft.Rest.Generator.Azure.Ruby.Tests
             Test("lro_spec.rb", "lro.json", "Lro");
         }
 
+        [Fact(Skip = "not implemented")]
+        public void AzureURLTests()
+        {
+            Test("azure_url_spec.rb", "subscriptionId-apiVersion.json", "AzureURL");
+        }
+
+        [Fact(Skip = "not implemented")]
+        public void AzureSpecialPropertiesTests()
+        {
+            Test("azure_special_properties_spec.rb", "azure-special-properties.json", "AzureSpecialProperties");
+        }
+
         [Trait("Report", "true")]
         [Fact(Skip = "not all tests are ready so test coverage is too low")]
         public void EnsureTestCoverage()
