@@ -145,7 +145,7 @@ namespace Microsoft.Rest.Generator.Utilities
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "U", Justification = "Common naming for generics.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "V", Justification = "Common naming for generics.")]
         public static void LoadFrom<TU, TV>(this TU destination, TV source)
-            where TU : TV
+            where TU : class
             where TV : class
         {
             if (destination == null)
@@ -158,10 +158,15 @@ namespace Microsoft.Rest.Generator.Utilities
                 throw new ArgumentNullException("source");
             }
 
-            PropertyInfo[] properties = typeof(TV).GetProperties();
-            foreach (var property in properties.Where(p => p.SetMethod != null))
+            PropertyInfo[] destinationProperties = typeof(TU).GetProperties();
+            foreach (var destinationProperty in destinationProperties.Where(d => d.GetSetMethod(true) != null))
             {
-                property.SetValue(destination, property.GetValue(source, null), null);
+                var sourceProperty = typeof(TV).GetProperty(destinationProperty.Name);
+                if(sourceProperty != null &&
+                   sourceProperty.PropertyType == destinationProperty.PropertyType)
+                {
+                    destinationProperty.SetValue(destination, sourceProperty.GetValue(source, null), null);
+                }
             }
         }
 

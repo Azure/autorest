@@ -17,6 +17,7 @@ namespace Microsoft.Rest.Generator.ClientModel
         public Property()
         {
             Constraints = new Dictionary<Constraint, string>();
+            Extensions = new Dictionary<string, object>();
         }
 
         /// <summary>
@@ -58,6 +59,11 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// Gets or sets the documentation.
         /// </summary>
         public string Documentation { get; set; }
+
+        /// <summary>
+        /// Gets vendor extensions dictionary.
+        /// </summary>
+        public Dictionary<string, object> Extensions { get; private set; }
 
         /// <summary>
         /// Returns a string representation of the Property object.

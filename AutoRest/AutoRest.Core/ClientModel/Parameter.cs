@@ -12,6 +12,9 @@ namespace Microsoft.Rest.Generator.ClientModel
     /// </summary>
     public class Parameter
     {
+        /// <summary>
+        /// Creates a new instance of Parameter class.
+        /// </summary>
         public Parameter()
         {
             Constraints = new Dictionary<Constraint, string>();
@@ -28,6 +31,11 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// </summary>
         public string SerializedName { get; set; }
 
+        /// <summary>
+        /// Gets or sets the default value.
+        /// </summary>
+        public string DefaultValue { get; set; }
+		
         // TODO: disambiguate Type and System.Type, rename IType to IModelType and Type to ModelType
         /// <summary>
         /// Gets or sets the model type.
@@ -42,7 +50,7 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <summary>
         /// Reference to the global Property that provides value for the parameter.
         /// </summary>
-        public Property GlobalProperty { get; set; }
+        public Property ClientProperty { get; set; }
 
         /// <summary>
         /// Gets or sets the constraints.
