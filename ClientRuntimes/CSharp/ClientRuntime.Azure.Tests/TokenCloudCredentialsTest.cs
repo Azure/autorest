@@ -13,7 +13,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TokenCloudCredentialAddsHeader()
         {
-            var tokenCredentials = new TokenCloudCredentials("123","abc");
+            var tokenCredentials = new TokenCredentials("123","abc");
             var handler = new RecordedDelegatingHandler { StatusCodeToReturn = HttpStatusCode.OK };
             var fakeClient = new FakeServiceClientWithCredentials(tokenCredentials);
             fakeClient = new FakeServiceClientWithCredentials(tokenCredentials, handler);
@@ -26,7 +26,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TokenCloudCredentialWithoutSubscriptionAddsHeader()
         {
-            var tokenCredentials = new TokenCloudCredentials("abc");
+            var tokenCredentials = new TokenCredentials("abc");
             var handler = new RecordedDelegatingHandler { StatusCodeToReturn = HttpStatusCode.OK };
             var fakeClient = new FakeServiceClientWithCredentials(tokenCredentials);
             fakeClient = new FakeServiceClientWithCredentials(tokenCredentials, handler);
@@ -40,7 +40,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TokenCloudCredentialUpdatesHeader()
         {
-            var credentials = new TokenCloudCredentials("123", "abc");
+            var credentials = new TokenCredentials("123", "abc");
             var handler = new RecordedDelegatingHandler { StatusCodeToReturn = HttpStatusCode.OK };
             var fakeClient = new FakeServiceClientWithCredentials(credentials);
             fakeClient = new FakeServiceClientWithCredentials(credentials, handler);

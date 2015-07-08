@@ -38,21 +38,27 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActiveDirectoryTokenProvider.cs" />
+    <Compile Include="Credentials.cs" />
+    <Compile Include="CredentialsFactory.cs" />
+    <Compile Include="AzureEnvironment.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IAzureClient.cs" />
     <Compile Include="AzureClientExtensions.cs" />
     <Compile Include="CloudError.cs" />
     <Compile Include="CloudException.cs" />
+    <Compile Include="ITokenProvider.cs" />
     <Compile Include="JsonSerializerExtensions.cs" />
     <Compile Include="OData\FilterString.cs" />
     <Compile Include="OData\UrlExpressionVisitor.cs" />
     <Compile Include="PollingState.cs" />
     <Compile Include="IResource.cs" />
+    <Compile Include="StringTokenProvider.cs" />
     <Compile Include="SubResource.cs" />
     <Compile Include="Resource.cs" />
     <Compile Include="CloudErrorJsonConverter.cs" />
     <Compile Include="ResourceJsonConverter.cs" />
-    <Compile Include="TokenCloudCredentials.cs" />
+    <Compile Include="AccessTokenCredentials.cs" />
     <Compile Include="SubscriptionCloudCredentials.cs" />
     <Compile Include="AzureOperationResponse.cs" />
     <Compile Include="AzureAsyncOperation.cs" />
