@@ -78,7 +78,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <CodeAnalysisDictionary Include="$(SolutionDir)tools\CustomDictionary.xml">
+    <CodeAnalysisDictionary Include="$(SolutionDir)Tools\CustomDictionary.xml">
       <Link>CustomDictionary.xml</Link>
       <SubType>Designer</SubType>
     </CodeAnalysisDictionary>
