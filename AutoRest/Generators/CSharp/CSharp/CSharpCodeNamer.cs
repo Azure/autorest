@@ -59,7 +59,8 @@ namespace Microsoft.Rest.Generator.CSharp
                 {
                     if (parameter.ClientProperty != null)
                     {
-                        parameter.Name = string.Format("{0}.{1}", 
+                        parameter.Name = string.Format(CultureInfo.InvariantCulture,
+                            "{0}.{1}", 
                             method.Group == null ? "this" : "this.Client", 
                             parameter.ClientProperty.Name);
                     }
