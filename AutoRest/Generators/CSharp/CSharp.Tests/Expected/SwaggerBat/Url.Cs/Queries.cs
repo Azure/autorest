@@ -1459,7 +1459,7 @@ namespace Fixtures.SwaggerBatUrl
             List<string> queryParameters = new List<string>();
             if (stringQuery != null)
             {
-                queryParameters.Add(string.Format("stringQuery={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(stringQuery, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("stringQuery={0}", Uri.EscapeDataString(stringQuery)));
             }
             if (queryParameters.Count > 0)
             {
@@ -1553,7 +1553,7 @@ namespace Fixtures.SwaggerBatUrl
             List<string> queryParameters = new List<string>();
             if (stringQuery != null)
             {
-                queryParameters.Add(string.Format("stringQuery={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(stringQuery, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("stringQuery={0}", Uri.EscapeDataString(stringQuery)));
             }
             if (queryParameters.Count > 0)
             {
@@ -1646,7 +1646,7 @@ namespace Fixtures.SwaggerBatUrl
             List<string> queryParameters = new List<string>();
             if (stringQuery != null)
             {
-                queryParameters.Add(string.Format("stringQuery={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(stringQuery, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("stringQuery={0}", Uri.EscapeDataString(stringQuery)));
             }
             if (queryParameters.Count > 0)
             {

@@ -398,6 +398,10 @@ namespace Fixtures.SwaggerBatRequiredOptional
         /// </param>
         public async Task<HttpOperationResponse<Error>> GetRequiredGlobalPathWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
+            if (this.Client.RequiredGlobalPath == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.RequiredGlobalPath");
+            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -411,7 +415,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             // Construct URL
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//reqopt/global/required/path/{required-global-path}";
-            url = url.Replace("{this.Client.RequiredGlobalPath}", Uri.EscapeDataString(this.Client.RequiredGlobalPath));
+            url = url.Replace("{required_global_path}", Uri.EscapeDataString(this.Client.RequiredGlobalPath));
             // trim all duplicate forward slashes in the url
             url = Regex.Replace(url, "([^:]/)/+", "$1");
             // Create HTTP transport objects
@@ -480,6 +484,10 @@ namespace Fixtures.SwaggerBatRequiredOptional
         /// </param>
         public async Task<HttpOperationResponse<Error>> GetRequiredGlobalQueryWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
+            if (this.Client.RequiredGlobalQuery == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.RequiredGlobalQuery");
+            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;

@@ -44,7 +44,6 @@ function AutoRestResourceFlatteningTestService(credentials, baseUri, options) {
     this.baseUri = 'http://localhost';
   }
 
-  this.apiVersion = '1.0.0';
   this._models = models;
 }
 
@@ -89,7 +88,6 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (resourceArr
   var requestUrl = this.baseUri + 
                    '//azure/resource-flatten/array';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -176,7 +174,6 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
   var requestUrl = this.baseUri + 
                    '//azure/resource-flatten/array';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -294,7 +291,6 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resour
   var requestUrl = this.baseUri + 
                    '//azure/resource-flatten/dictionary';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -381,7 +377,6 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
   var requestUrl = this.baseUri + 
                    '//azure/resource-flatten/dictionary';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -511,7 +506,6 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
   var requestUrl = this.baseUri + 
                    '//azure/resource-flatten/resourcecollection';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -598,7 +592,6 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
   var requestUrl = this.baseUri + 
                    '//azure/resource-flatten/resourcecollection';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }

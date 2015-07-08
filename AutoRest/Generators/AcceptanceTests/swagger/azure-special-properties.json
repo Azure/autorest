@@ -72,6 +72,9 @@
         "parameters": [
           {
             "$ref": "globalSubscriptionId"
+          },
+          {
+            "$ref": "globalApiVersion"
           }
         ],
         "responses": {

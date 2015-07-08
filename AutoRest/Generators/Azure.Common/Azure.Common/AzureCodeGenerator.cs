@@ -217,7 +217,7 @@ namespace Microsoft.Rest.Generator.Azure
                 apiVersion.IsRequired = false;
             }
 
-            serviceClient.Properties.Add(new Property
+            serviceClient.Properties.Insert(0, new Property
             {
                 Name = "Credentials",
                 SerializedName = "credentials",

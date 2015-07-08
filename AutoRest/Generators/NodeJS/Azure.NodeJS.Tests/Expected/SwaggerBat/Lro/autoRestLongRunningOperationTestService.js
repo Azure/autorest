@@ -45,7 +45,6 @@ function AutoRestLongRunningOperationTestService(credentials, baseUri, options) 
     this.baseUri = 'http://localhost';
   }
 
-  this.apiVersion = '1.0.0';
   this.lROs = new operations.LROs(this);
   this.dONOTCALLs = new operations.DONOTCALLs(this);
   this.lRORetrys = new operations.LRORetrys(this);

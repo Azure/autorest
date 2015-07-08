@@ -48,9 +48,8 @@ SubscriptionInCredentials.prototype.postMethodGlobalValid = function (options, c
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//azurespecials/subscriptionId/method/string/none/path/global/1234-5678-9012-3456/{subscriptionId}';
-  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.credentials.subscriptionId));
+  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(subscriptionId));
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -135,9 +134,8 @@ SubscriptionInCredentials.prototype.postMethodGlobalNull = function (options, ca
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//azurespecials/subscriptionId/method/string/none/path/global/null/{subscriptionId}';
-  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.credentials.subscriptionId));
+  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(subscriptionId));
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -221,9 +219,9 @@ SubscriptionInCredentials.prototype.postMethodGlobalNotProvidedValid = function 
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//azurespecials/subscriptionId/method/string/none/path/globalNotProvided/1234-5678-9012-3456/{subscriptionId}';
-  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.credentials.subscriptionId));
+  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(subscriptionId));
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+  queryParameters.push('api-version=' + encodeURIComponent(apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -307,9 +305,8 @@ SubscriptionInCredentials.prototype.postPathGlobalValid = function (options, cal
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//azurespecials/subscriptionId/path/string/none/path/global/1234-5678-9012-3456/{subscriptionId}';
-  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.credentials.subscriptionId));
+  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(subscriptionId));
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -393,9 +390,8 @@ SubscriptionInCredentials.prototype.postSwaggerGlobalValid = function (options, 
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//azurespecials/subscriptionId/swagger/string/none/path/global/1234-5678-9012-3456/{subscriptionId}';
-  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.credentials.subscriptionId));
+  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(subscriptionId));
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }

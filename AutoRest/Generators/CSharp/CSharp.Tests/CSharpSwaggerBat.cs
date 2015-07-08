@@ -1195,10 +1195,12 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 client.GlobalStringQuery = "globalStringQuery";
                 client.PathItems.GetAllWithValues("localStringPath", "pathItemStringPath",
                      "localStringQuery", "pathItemStringQuery");
+                client.GlobalStringQuery = null;
                 client.PathItems.GetGlobalAndLocalQueryNull("localStringPath", "pathItemStringPath",
                     null, "pathItemStringQuery");
                 client.PathItems.GetGlobalQueryNull("localStringPath", "pathItemStringPath",
                     "localStringQuery", "pathItemStringQuery");
+                client.GlobalStringQuery = "globalStringQuery";
                 client.PathItems.GetLocalPathItemQueryNull("localStringPath", "pathItemStringPath",
                     null, null);
             }

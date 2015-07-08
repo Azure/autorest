@@ -48,7 +48,7 @@ ApiVersionDefault.prototype.getMethodGlobalValid = function (options, callback) 
   var requestUrl = this.client.baseUri + 
                    '//azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+  queryParameters.push('api-version=' + encodeURIComponent(apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -132,7 +132,7 @@ ApiVersionDefault.prototype.getMethodGlobalNotProvidedValid = function (options,
   var requestUrl = this.client.baseUri + 
                    '//azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+  queryParameters.push('api-version=' + encodeURIComponent(apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -216,7 +216,7 @@ ApiVersionDefault.prototype.getPathGlobalValid = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+  queryParameters.push('api-version=' + encodeURIComponent(apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -300,7 +300,7 @@ ApiVersionDefault.prototype.getSwaggerGlobalValid = function (options, callback)
   var requestUrl = this.client.baseUri + 
                    '//azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+  queryParameters.push('api-version=' + encodeURIComponent(apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }

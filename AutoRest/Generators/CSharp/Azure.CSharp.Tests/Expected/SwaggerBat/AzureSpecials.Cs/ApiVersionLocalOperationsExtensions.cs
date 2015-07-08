@@ -123,9 +123,13 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
-            public static void GetSwaggerLocalValid(this IApiVersionLocalOperations operations)
+            /// <param name='apiVersion'>
+            /// The api version, which appears in the query, the value is always '2.0'.
+            /// Possible values for this parameter include: '2.0'
+            /// </param>
+            public static void GetSwaggerLocalValid(this IApiVersionLocalOperations operations, string apiVersion)
             {
-                Task.Factory.StartNew(s => ((IApiVersionLocalOperations)s).GetSwaggerLocalValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IApiVersionLocalOperations)s).GetSwaggerLocalValidAsync(apiVersion), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -135,12 +139,16 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
+            /// <param name='apiVersion'>
+            /// The api version, which appears in the query, the value is always '2.0'.
+            /// Possible values for this parameter include: '2.0'
+            /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
             /// </param>
-            public static async Task GetSwaggerLocalValidAsync( this IApiVersionLocalOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetSwaggerLocalValidAsync( this IApiVersionLocalOperations operations, string apiVersion, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetSwaggerLocalValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                await operations.GetSwaggerLocalValidWithHttpMessagesAsync(apiVersion, null, cancellationToken).ConfigureAwait(false);
             }
 
     }

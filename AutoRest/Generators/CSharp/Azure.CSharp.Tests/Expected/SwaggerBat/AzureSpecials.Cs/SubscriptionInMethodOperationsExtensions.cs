@@ -121,9 +121,13 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
-            public static void PostSwaggerLocalValid(this ISubscriptionInMethodOperations operations)
+            /// <param name='subscriptionId'>
+            /// The subscriptionId, which appears in the path, the value is always
+            /// '1234-5678-9012-3456'
+            /// </param>
+            public static void PostSwaggerLocalValid(this ISubscriptionInMethodOperations operations, string subscriptionId)
             {
-                Task.Factory.StartNew(s => ((ISubscriptionInMethodOperations)s).PostSwaggerLocalValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((ISubscriptionInMethodOperations)s).PostSwaggerLocalValidAsync(subscriptionId), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -133,12 +137,16 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscriptionId, which appears in the path, the value is always
+            /// '1234-5678-9012-3456'
+            /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
             /// </param>
-            public static async Task PostSwaggerLocalValidAsync( this ISubscriptionInMethodOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PostSwaggerLocalValidAsync( this ISubscriptionInMethodOperations operations, string subscriptionId, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostSwaggerLocalValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                await operations.PostSwaggerLocalValidWithHttpMessagesAsync(subscriptionId, null, cancellationToken).ConfigureAwait(false);
             }
 
     }

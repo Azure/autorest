@@ -48,7 +48,6 @@ Paging.prototype.getSinglePages = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//paging/single';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -148,7 +147,6 @@ Paging.prototype.getMultiplePages = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//paging/multiple';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -249,7 +247,6 @@ Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//paging/multiple/retryfirst';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -351,7 +348,6 @@ Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//paging/multiple/retrysecond';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -451,7 +447,6 @@ Paging.prototype.getSinglePagesFailure = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//paging/single/failure';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -551,7 +546,6 @@ Paging.prototype.getMultiplePagesFailure = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//paging/multiple/failure';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -651,7 +645,6 @@ Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//paging/multiple/failureuri';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }

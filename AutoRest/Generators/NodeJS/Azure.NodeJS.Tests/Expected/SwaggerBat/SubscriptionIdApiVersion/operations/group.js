@@ -60,10 +60,10 @@ Group.prototype.getSampleResourceGroup = function (resourceGroupName, options, c
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}';
-  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.credentials.subscriptionId));
+  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(subscriptionId));
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+  queryParameters.push('api-version=' + encodeURIComponent(apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }

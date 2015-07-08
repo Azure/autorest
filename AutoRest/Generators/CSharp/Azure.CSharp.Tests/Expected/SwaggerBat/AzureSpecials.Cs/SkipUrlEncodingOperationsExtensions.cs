@@ -79,9 +79,13 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
-            public static void GetSwaggerPathValid(this ISkipUrlEncodingOperations operations)
+            /// <param name='unencodedPathParam'>
+            /// An unencoded path parameter with value 'path1/path2/path3'. Possible
+            /// values for this parameter include: 'path1/path2/path3'
+            /// </param>
+            public static void GetSwaggerPathValid(this ISkipUrlEncodingOperations operations, string unencodedPathParam)
             {
-                Task.Factory.StartNew(s => ((ISkipUrlEncodingOperations)s).GetSwaggerPathValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((ISkipUrlEncodingOperations)s).GetSwaggerPathValidAsync(unencodedPathParam), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -90,12 +94,16 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
+            /// <param name='unencodedPathParam'>
+            /// An unencoded path parameter with value 'path1/path2/path3'. Possible
+            /// values for this parameter include: 'path1/path2/path3'
+            /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
             /// </param>
-            public static async Task GetSwaggerPathValidAsync( this ISkipUrlEncodingOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetSwaggerPathValidAsync( this ISkipUrlEncodingOperations operations, string unencodedPathParam, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetSwaggerPathValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                await operations.GetSwaggerPathValidWithHttpMessagesAsync(unencodedPathParam, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -202,9 +210,14 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
-            public static void GetSwaggerQueryValid(this ISkipUrlEncodingOperations operations)
+            /// <param name='q1'>
+            /// An unencoded query parameter with value
+            /// 'value1&amp;q2=value2&amp;q3=value3'. Possible values for this parameter
+            /// include: 'value1&amp;q2=value2&amp;q3=value3'
+            /// </param>
+            public static void GetSwaggerQueryValid(this ISkipUrlEncodingOperations operations, string q1 = default(string))
             {
-                Task.Factory.StartNew(s => ((ISkipUrlEncodingOperations)s).GetSwaggerQueryValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((ISkipUrlEncodingOperations)s).GetSwaggerQueryValidAsync(q1), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -214,12 +227,17 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
+            /// <param name='q1'>
+            /// An unencoded query parameter with value
+            /// 'value1&amp;q2=value2&amp;q3=value3'. Possible values for this parameter
+            /// include: 'value1&amp;q2=value2&amp;q3=value3'
+            /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
             /// </param>
-            public static async Task GetSwaggerQueryValidAsync( this ISkipUrlEncodingOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetSwaggerQueryValidAsync( this ISkipUrlEncodingOperations operations, string q1 = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetSwaggerQueryValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                await operations.GetSwaggerQueryValidWithHttpMessagesAsync(q1, null, cancellationToken).ConfigureAwait(false);
             }
 
     }

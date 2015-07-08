@@ -110,7 +110,7 @@ Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 #line hidden
 
 #line 24 "MethodTemplate.cshtml"
-     foreach (var parameter in Model.LocalParameters)
+     foreach (var parameter in Model.ParameterTemplateModels)
     {
         if (parameter.IsRequired)
         {

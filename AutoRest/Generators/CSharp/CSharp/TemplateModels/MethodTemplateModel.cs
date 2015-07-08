@@ -311,7 +311,7 @@ namespace Microsoft.Rest.Generator.CSharp
             {
                 builder.AppendLine("{0} = {0}.Replace(\"{{{1}}}\", Uri.EscapeDataString({2}));",
                     variableName,
-                    pathParameter.Name,
+                    pathParameter.SerializedName,
                     pathParameter.Type.ToString(ClientReference, pathParameter.Name));
             }
             if (ParameterTemplateModels.Any(p => p.Location == ParameterLocation.Query))

@@ -229,14 +229,22 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// <summary>
         /// Get method with unencoded path parameter with value 'path1/path2/path3'
         /// </summary>
+        /// <param name='unencodedPathParam'>
+        /// An unencoded path parameter with value 'path1/path2/path3'. Possible
+        /// values for this parameter include: 'path1/path2/path3'
+        /// </param>    
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> GetSwaggerPathValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> GetSwaggerPathValidWithHttpMessagesAsync(string unencodedPathParam, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
+            if (unencodedPathParam == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "unencodedPathParam");
+            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -244,13 +252,14 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             {
                 invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("unencodedPathParam", unencodedPathParam);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(invocationId, this, "GetSwaggerPathValid", tracingParameters);
             }
             // Construct URL
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}";
-            url = url.Replace("{unencodedPathParam}", JsonConvert.SerializeObject(unencodedPathParam, this.Client.SerializationSettings).Trim('"'));
+            url = url.Replace("{unencodedPathParam}", unencodedPathParam);
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -617,13 +626,18 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// Get method with unencoded query parameter with value
         /// 'value1&amp;q2=value2&amp;q3=value3'
         /// </summary>
+        /// <param name='q1'>
+        /// An unencoded query parameter with value
+        /// 'value1&amp;q2=value2&amp;q3=value3'. Possible values for this parameter
+        /// include: 'value1&amp;q2=value2&amp;q3=value3'
+        /// </param>    
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> GetSwaggerQueryValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> GetSwaggerQueryValidWithHttpMessagesAsync(string q1 = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -632,6 +646,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             {
                 invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("q1", q1);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(invocationId, this, "GetSwaggerQueryValid", tracingParameters);
             }
@@ -639,9 +654,9 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//azurespecials/skipUrlEncoding/swagger/query/valid";
             List<string> queryParameters = new List<string>();
-            if (this.Client.Q1 != null)
+            if (q1 != null)
             {
-                queryParameters.Add(string.Format("q1={0}", JsonConvert.SerializeObject(this.Client.Q1, this.Client.SerializationSettings).Trim('"')));
+                queryParameters.Add(string.Format("q1={0}", q1));
             }
             if (queryParameters.Count > 0)
             {

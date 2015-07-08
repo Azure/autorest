@@ -109,7 +109,6 @@ LRORetrys.prototype.beginPut201CreatingSucceeded200 = function (product, options
   var requestUrl = this.client.baseUri + 
                    '//lro/retryerror/put/201/creating/succeeded/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -229,7 +228,6 @@ LRORetrys.prototype.getRetry201CreatingSucceeded200Polling = function (options, 
   var requestUrl = this.client.baseUri + 
                    '//lro/retryerror/put/201/creating/succeeded/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -390,7 +388,6 @@ LRORetrys.prototype.beginPutAsyncRelativeRetrySucceeded = function (product, opt
   var requestUrl = this.client.baseUri + 
                    '//lro/retryerror/putasync/retry/succeeded';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -496,7 +493,6 @@ LRORetrys.prototype.getAsyncRelativeRetrySucceeded = function (options, callback
   var requestUrl = this.client.baseUri + 
                    '//lro/retryerror/putasync/retry/succeeded';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -627,7 +623,6 @@ LRORetrys.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (o
   var requestUrl = this.client.baseUri + 
                    '//lro/retryerror/delete/provisioning/202/accepted/200/succeeded';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -772,7 +767,6 @@ LRORetrys.prototype.beginDelete202Retry200 = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/retryerror/delete/202/retry/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -885,7 +879,6 @@ LRORetrys.prototype.beginDeleteAsyncRelativeRetrySucceeded = function (options, 
   var requestUrl = this.client.baseUri + 
                    '//lro/retryerror/deleteasync/retry/succeeded';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1018,7 +1011,6 @@ LRORetrys.prototype.beginPost202Retry200 = function (product, options, callback)
   var requestUrl = this.client.baseUri + 
                    '//lro/retryerror/post/202/retry/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1156,7 +1148,6 @@ LRORetrys.prototype.beginPostAsyncRelativeRetrySucceeded = function (product, op
   var requestUrl = this.client.baseUri + 
                    '//lro/retryerror/postasync/retry/succeeded';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }

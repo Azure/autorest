@@ -103,7 +103,6 @@ LROSADs.prototype.beginPutNonRetry400 = function (product, options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/nonretryerror/put/400';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -222,7 +221,6 @@ LROSADs.prototype.getNonRetry400 = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/nonretryerror/put/400';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -379,7 +377,6 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (product, options, c
   var requestUrl = this.client.baseUri + 
                    '//lro/nonretryerror/put/201/creating/400';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -498,7 +495,6 @@ LROSADs.prototype.getNonRetry201Creating400 = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/nonretryerror/put/201/creating/400';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -657,7 +653,6 @@ LROSADs.prototype.beginPutAsyncRelativeRetry400 = function (product, options, ca
   var requestUrl = this.client.baseUri + 
                    '//lro/nonretryerror/putasync/retry/400';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -760,7 +755,6 @@ LROSADs.prototype.getAsyncRelativeRetry400 = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/nonretryerror/putasync/retry/400';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -885,7 +879,6 @@ LROSADs.prototype.beginDeleteNonRetry400 = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/nonretryerror/delete/400';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -994,7 +987,6 @@ LROSADs.prototype.beginDelete202NonRetry400 = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/nonretryerror/delete/202/retry/400';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1107,7 +1099,6 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetry400 = function (options, callback
   var requestUrl = this.client.baseUri + 
                    '//lro/nonretryerror/deleteasync/retry/400';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1236,7 +1227,6 @@ LROSADs.prototype.beginPostNonRetry400 = function (product, options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/nonretryerror/post/400';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1368,7 +1358,6 @@ LROSADs.prototype.beginPost202NonRetry400 = function (product, options, callback
   var requestUrl = this.client.baseUri + 
                    '//lro/nonretryerror/post/202/retry/400';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1504,7 +1493,6 @@ LROSADs.prototype.beginPostAsyncRelativeRetry400 = function (product, options, c
   var requestUrl = this.client.baseUri + 
                    '//lro/nonretryerror/postasync/retry/400';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1648,7 +1636,6 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (product
   var requestUrl = this.client.baseUri + 
                    '//lro/error/put/201/noprovisioningstatepayload';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1767,7 +1754,6 @@ LROSADs.prototype.getError201NoProvisioningStatePayload = function (options, cal
   var requestUrl = this.client.baseUri + 
                    '//lro/error/put/201/noprovisioningstatepayload';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1926,7 +1912,6 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (product, option
   var requestUrl = this.client.baseUri + 
                    '//lro/error/putasync/retry/nostatus';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -2031,7 +2016,6 @@ LROSADs.prototype.getAsyncRelativeRetryNoStatus = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/error/putasync/retry/nostatus';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -2190,7 +2174,6 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatusPayload = function (product,
   var requestUrl = this.client.baseUri + 
                    '//lro/error/putasync/retry/nostatuspayload';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -2295,7 +2278,6 @@ LROSADs.prototype.getAsyncRelativeRetryNoStatusPayload = function (options, call
   var requestUrl = this.client.baseUri + 
                    '//lro/error/putasync/retry/nostatuspayload';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -2422,7 +2404,6 @@ LROSADs.prototype.beginDelete204Succeeded = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/error/delete/204/nolocation';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -2535,7 +2516,6 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryNoStatus = function (options, cal
   var requestUrl = this.client.baseUri + 
                    '//lro/error/deleteasync/retry/nostatus';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -2666,7 +2646,6 @@ LROSADs.prototype.beginPost202NoLocation = function (product, options, callback)
   var requestUrl = this.client.baseUri + 
                    '//lro/error/post/202/nolocation';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -2802,7 +2781,6 @@ LROSADs.prototype.beginPostAsyncRelativeRetryNoPayload = function (product, opti
   var requestUrl = this.client.baseUri + 
                    '//lro/error/postasync/retry/nopayload';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -2946,7 +2924,6 @@ LROSADs.prototype.beginPut200InvalidJson = function (product, options, callback)
   var requestUrl = this.client.baseUri + 
                    '//lro/error/put/200/invalidjson';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -3049,7 +3026,6 @@ LROSADs.prototype.get200Succeeded = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/error/put/200/invalidjson';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -3208,7 +3184,6 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (product, o
   var requestUrl = this.client.baseUri + 
                    '//lro/error/putasync/retry/invalidheader';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -3311,7 +3286,6 @@ LROSADs.prototype.getAsyncRelativeRetryInvalidHeader = function (options, callba
   var requestUrl = this.client.baseUri + 
                    '//lro/error/putasync/retry/invalidheader';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -3470,7 +3444,6 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidJsonPolling = function (produ
   var requestUrl = this.client.baseUri + 
                    '//lro/error/putasync/retry/invalidjsonpolling';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -3575,7 +3548,6 @@ LROSADs.prototype.getAsyncRelativeRetryInvalidJsonPolling = function (options, c
   var requestUrl = this.client.baseUri + 
                    '//lro/error/putasync/retry/invalidjsonpolling';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -3702,7 +3674,6 @@ LROSADs.prototype.beginDelete202RetryInvalidHeader = function (options, callback
   var requestUrl = this.client.baseUri + 
                    '//lro/error/delete/202/retry/invalidheader';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -3813,7 +3784,6 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidHeader = function (options
   var requestUrl = this.client.baseUri + 
                    '//lro/error/deleteasync/retry/invalidheader';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -3926,7 +3896,6 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidJsonPolling = function (op
   var requestUrl = this.client.baseUri + 
                    '//lro/error/deleteasync/retry/invalidjsonpolling';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -4057,7 +4026,6 @@ LROSADs.prototype.beginPost202RetryInvalidHeader = function (product, options, c
   var requestUrl = this.client.baseUri + 
                    '//lro/error/post/202/retry/invalidheader';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -4193,7 +4161,6 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidHeader = function (product, 
   var requestUrl = this.client.baseUri + 
                    '//lro/error/postasync/retry/invalidheader';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -4329,7 +4296,6 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidJsonPolling = function (prod
   var requestUrl = this.client.baseUri + 
                    '//lro/error/postasync/retry/invalidjsonpolling';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }

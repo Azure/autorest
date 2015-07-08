@@ -44,7 +44,6 @@ function AutoRestReportServiceForAzure(credentials, baseUri, options) {
     this.baseUri = 'http://localhost';
   }
 
-  this.apiVersion = '1.0.0';
   this._models = models;
 }
 
@@ -75,7 +74,6 @@ AutoRestReportServiceForAzure.prototype.getReport = function (options, callback)
   var requestUrl = this.baseUri + 
                    '//report/azure';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }

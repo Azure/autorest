@@ -37,14 +37,14 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
         /// <summary>
-        /// The subscription id, which appears in the path, always modeled in
-        /// credentials. The value is always '1234-5678-9012-3456'
+        /// Subscription credentials which uniquely identify Microsoft Azure
+        /// subscription.
         /// </summary>
-        public string SubscriptionId { get; set; }
+        public SubscriptionCloudCredentials Credentials { get; set; }
 
         /// <summary>
-        /// The subscriptionId, which appears in the path, the value is always
-        /// '1234-5678-9012-3456'
+        /// The subscription id, which appears in the path, always modeled in
+        /// credentials. The value is always '1234-5678-9012-3456'
         /// </summary>
         public string SubscriptionId { get; set; }
 
@@ -52,37 +52,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// The api version, which appears in the query, the value is always
         /// '2015-07-01-preview'
         /// </summary>
-        public string ApiVersion { get; set; }
-
-        /// <summary>
-        /// The api version, which appears in the query, the value is always
-        /// '2.0'. Possible values for this parameter include: '2.0'
-        /// </summary>
-        public string ApiVersion { get; set; }
-
-        /// <summary>
-        /// An unencoded path parameter with value 'path1/path2/path3'.
-        /// Possible values for this parameter include: 'path1/path2/path3'
-        /// </summary>
-        public string UnencodedPathParam { get; set; }
-
-        /// <summary>
-        /// An unencoded query parameter with value
-        /// 'value1&amp;q2=value2&amp;q3=value3'. Possible values for this
-        /// parameter include: 'value1&amp;q2=value2&amp;q3=value3'
-        /// </summary>
-        public string Q1 { get; set; }
-
-        /// <summary>
-        /// The Api Version.
-        /// </summary>
         public string ApiVersion { get; private set; }
-
-        /// <summary>
-        /// Subscription credentials which uniquely identify Microsoft Azure
-        /// subscription.
-        /// </summary>
-        public SubscriptionCloudCredentials Credentials { get; set; }
 
         /// <summary>
         /// The retry timeout for Long Running Operations.
@@ -156,60 +126,28 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// <summary>
         /// Initializes a new instance of the AutoRestAzureSpecialParametersTestClient class.
         /// </summary>
-        /// <param name='subscriptionId'>
-        /// Required. The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'
-        /// </param>
-        /// <param name='subscriptionId'>
-        /// Required. The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
-        /// </param>
-        /// <param name='apiVersion'>
-        /// Required. The api version, which appears in the query, the value is always '2015-07-01-preview'
-        /// </param>
-        /// <param name='apiVersion'>
-        /// Required. The api version, which appears in the query, the value is always '2.0'. Possible values for this parameter include: '2.0'
-        /// </param>
-        /// <param name='unencodedPathParam'>
-        /// Required. An unencoded path parameter with value 'path1/path2/path3'. Possible values for this parameter include: 'path1/path2/path3'
-        /// </param>
         /// <param name='credentials'>
         /// Required. Subscription credentials which uniquely identify Microsoft Azure subscription.
+        /// </param>
+        /// <param name='subscriptionId'>
+        /// Required. The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'
         /// </param>
         /// <param name='handlers'>
         /// Optional. The set of delegating handlers to insert in the http
         /// client pipeline.
         /// </param>
-        public AutoRestAzureSpecialParametersTestClient(string subscriptionId, string subscriptionId, string apiVersion, string apiVersion, string unencodedPathParam, SubscriptionCloudCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        public AutoRestAzureSpecialParametersTestClient(SubscriptionCloudCredentials credentials, string subscriptionId, params DelegatingHandler[] handlers) : this(handlers)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException("subscriptionId");
-            }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException("subscriptionId");
-            }
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException("apiVersion");
-            }
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException("apiVersion");
-            }
-            if (unencodedPathParam == null)
-            {
-                throw new ArgumentNullException("unencodedPathParam");
-            }
             if (credentials == null)
             {
                 throw new ArgumentNullException("credentials");
             }
-            this.SubscriptionId = subscriptionId;
-            this.SubscriptionId = subscriptionId;
-            this.ApiVersion = apiVersion;
-            this.ApiVersion = apiVersion;
-            this.UnencodedPathParam = unencodedPathParam;
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException("subscriptionId");
+            }
             this.Credentials = credentials;
+            this.SubscriptionId = subscriptionId;
         }
 
         /// <summary>
@@ -218,65 +156,33 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// <param name='baseUri'>
         /// Optional. The base URI of the service.
         /// </param>
-        /// <param name='subscriptionId'>
-        /// Required. The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'
-        /// </param>
-        /// <param name='subscriptionId'>
-        /// Required. The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
-        /// </param>
-        /// <param name='apiVersion'>
-        /// Required. The api version, which appears in the query, the value is always '2015-07-01-preview'
-        /// </param>
-        /// <param name='apiVersion'>
-        /// Required. The api version, which appears in the query, the value is always '2.0'. Possible values for this parameter include: '2.0'
-        /// </param>
-        /// <param name='unencodedPathParam'>
-        /// Required. An unencoded path parameter with value 'path1/path2/path3'. Possible values for this parameter include: 'path1/path2/path3'
-        /// </param>
         /// <param name='credentials'>
         /// Required. Subscription credentials which uniquely identify Microsoft Azure subscription.
+        /// </param>
+        /// <param name='subscriptionId'>
+        /// Required. The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'
         /// </param>
         /// <param name='handlers'>
         /// Optional. The set of delegating handlers to insert in the http
         /// client pipeline.
         /// </param>
-        public AutoRestAzureSpecialParametersTestClient(Uri baseUri, string subscriptionId, string subscriptionId, string apiVersion, string apiVersion, string unencodedPathParam, SubscriptionCloudCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        public AutoRestAzureSpecialParametersTestClient(Uri baseUri, SubscriptionCloudCredentials credentials, string subscriptionId, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
             {
                 throw new ArgumentNullException("baseUri");
             }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException("subscriptionId");
-            }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException("subscriptionId");
-            }
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException("apiVersion");
-            }
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException("apiVersion");
-            }
-            if (unencodedPathParam == null)
-            {
-                throw new ArgumentNullException("unencodedPathParam");
-            }
             if (credentials == null)
             {
                 throw new ArgumentNullException("credentials");
             }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException("subscriptionId");
+            }
             this.BaseUri = baseUri;
-            this.SubscriptionId = subscriptionId;
-            this.SubscriptionId = subscriptionId;
-            this.ApiVersion = apiVersion;
-            this.ApiVersion = apiVersion;
-            this.UnencodedPathParam = unencodedPathParam;
             this.Credentials = credentials;
+            this.SubscriptionId = subscriptionId;
         }
 
         /// <summary>

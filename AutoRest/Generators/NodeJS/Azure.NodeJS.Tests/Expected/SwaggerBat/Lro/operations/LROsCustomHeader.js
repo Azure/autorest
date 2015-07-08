@@ -111,7 +111,6 @@ LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (product, opti
   var requestUrl = this.client.baseUri + 
                    '//lro/customheader/putasync/retry/succeeded';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -218,7 +217,6 @@ LROsCustomHeader.prototype.getAsyncRetrySucceeded = function (options, callback)
   var requestUrl = this.client.baseUri + 
                    '//lro/customheader/putasync/retry/succeeded';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -381,7 +379,6 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (product, 
   var requestUrl = this.client.baseUri + 
                    '//lro/customheader/put/201/creating/succeeded/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -502,7 +499,6 @@ LROsCustomHeader.prototype.get201CreatingSucceeded200Polling = function (options
   var requestUrl = this.client.baseUri + 
                    '//lro/customheader/put/201/creating/succeeded/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -653,7 +649,6 @@ LROsCustomHeader.prototype.beginPost202Retry200 = function (product, options, ca
   var requestUrl = this.client.baseUri + 
                    '//lro/customheader/post/202/retry/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -793,7 +788,6 @@ LROsCustomHeader.prototype.beginPostAsyncRetrySucceeded = function (product, opt
   var requestUrl = this.client.baseUri + 
                    '//lro/customheader/postasync/retry/succeeded';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }

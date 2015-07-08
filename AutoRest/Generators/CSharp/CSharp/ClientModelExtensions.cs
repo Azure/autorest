@@ -153,7 +153,7 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
         /// <returns></returns>
         public static string ToString(this IType type, string clientReference, string reference)
         {
-            if (type == PrimaryType.String)
+            if (type.Name == PrimaryType.String.Name)
             {
                 return reference;
             }
