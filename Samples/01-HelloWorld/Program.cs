@@ -1,5 +1,5 @@
 ﻿using System;
-using AutoRest01;
+using Sample01;
 
 namespace SampleApp
 {
