@@ -158,16 +158,40 @@ namespace Microsoft.Rest.Generator.Utilities
                 throw new ArgumentNullException("source");
             }
 
-            PropertyInfo[] destinationProperties = typeof(TU).GetProperties();
-            foreach (var destinationProperty in destinationProperties.Where(d => d.GetSetMethod(true) != null))
+            var propertyNames = typeof(TU).GetProperties().Select(p => p.Name);
+            foreach (var propertyName in propertyNames)
             {
-                var sourceProperty = typeof(TV).GetProperty(destinationProperty.Name);
-                if(sourceProperty != null &&
-                   sourceProperty.PropertyType == destinationProperty.PropertyType)
+                var destinationProperty = typeof(TU).GetBaseProperty(propertyName);
+                var sourceProperty = typeof(TV).GetBaseProperty(propertyName);
+                if (destinationProperty != null &&
+                    sourceProperty != null &&
+                    sourceProperty.PropertyType == destinationProperty.PropertyType &&
+                    sourceProperty.SetMethod != null)
                 {
                     destinationProperty.SetValue(destination, sourceProperty.GetValue(source, null), null);
                 }
             }
+        }
+
+        private static PropertyInfo GetBaseProperty(this Type type, string propertyName)
+        {
+            if (type != null)
+            {
+                PropertyInfo propertyInfo = type.GetProperty(propertyName);
+                if (propertyInfo != null)
+                {
+                    if (propertyInfo.SetMethod != null)
+                    {
+                        return propertyInfo;
+                    }
+                    if (type.BaseType != null)
+                    {
+                        return type.BaseType.GetBaseProperty(propertyName);
+                    }
+                }
+            }
+
+            return null;
         }
 
         /// <summary>
