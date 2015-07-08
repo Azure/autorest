@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata minClientVersion="2.5">
     <id>Microsoft.Rest.ClientRuntime</id>
@@ -15,43 +15,43 @@
 
       Supported Platforms:
       -   Portable Class Libraries
-      -   .NET Framework 4.5 
+      -   .NET Framework 4.5
       -   Windows 8
       -   Windows Phone 8.1</description>
     <copyright>Copyright © Microsoft Corporation</copyright>
     <tags>Microsoft AutoRest ClientRuntime REST</tags>
     <references>
       <group targetFramework="portable-net45+win8+wpa81">
-        <reference file="Microsoft.Rest.ClientRuntime.dll" />
+        <reference file="Microsoft.Rest.ClientRuntime.dll"/>
       </group>
       <group targetFramework="net45">
-        <reference file="Microsoft.Rest.ClientRuntime.dll" />
+        <reference file="Microsoft.Rest.ClientRuntime.dll"/>
       </group>
     </references>
     <dependencies>
       <group targetFramework="portable-net45+win8+wpa81">
-        <dependency id="Microsoft.Bcl" version="1.1.9" />
-        <dependency id="Microsoft.Bcl.Async" version="1.0.168" />
-        <dependency id="Microsoft.Bcl.Build" version="1.0.14" />
-        <dependency id="Microsoft.Net.Http" version="2.2.22" />
-        <dependency id="Newtonsoft.Json" version="6.0.4" />
+        <dependency id="Microsoft.Bcl" version="1.1.9"/>
+        <dependency id="Microsoft.Bcl.Async" version="1.0.168"/>
+        <dependency id="Microsoft.Bcl.Build" version="1.0.14"/>
+        <dependency id="Microsoft.Net.Http" version="2.2.22"/>
+        <dependency id="Newtonsoft.Json" version="6.0.4"/>
       </group>
       <group targetFramework="net45">
-        <dependency id="Newtonsoft.Json" version="6.0.4" />
+        <dependency id="Newtonsoft.Json" version="6.0.4"/>
       </group>
     </dependencies>
     <frameworkAssemblies>
-      <frameworkAssembly assemblyName="System.Net.Http" targetFramework="net45" />
+      <frameworkAssembly assemblyName="System.Net.Http" targetFramework="net45"/>
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="ClientRuntime\**\*.cs" target="src\Common" />
-    <file src="ClientRuntime\Properties\*.resx" target="src\Common\Properties" />
-    <file src="..\..\binaries\portable\Microsoft.Rest.ClientRuntime.dll" target="lib\portable-net45+win8+wpa81" />
-    <file src="..\..\binaries\portable\Microsoft.Rest.ClientRuntime.pdb" target="lib\portable-net45+win8+wpa81" />
-    <file src="..\..\binaries\portable\Microsoft.Rest.ClientRuntime.xml" target="lib\portable-net45+win8+wpa81" />
-    <file src="..\..\binaries\net45\Microsoft.Rest.ClientRuntime.dll" target="lib\net45" />
-    <file src="..\..\binaries\net45\Microsoft.Rest.ClientRuntime.pdb" target="lib\net45" />
-    <file src="..\..\binaries\net45\Microsoft.Rest.ClientRuntime.xml" target="lib\net45" />
+    <file src="ClientRuntime\**\*.cs" target="src\Common"/>
+    <file src="ClientRuntime\Properties\*.resx" target="src\Common\Properties"/>
+    <file src="..\..\binaries\portable\Microsoft.Rest.ClientRuntime.dll" target="lib\portable-net45+win8+wpa81"/>
+    <file src="..\..\binaries\portable\Microsoft.Rest.ClientRuntime.pdb" target="lib\portable-net45+win8+wpa81"/>
+    <file src="..\..\binaries\portable\Microsoft.Rest.ClientRuntime.xml" target="lib\portable-net45+win8+wpa81"/>
+    <file src="..\..\binaries\net45\Microsoft.Rest.ClientRuntime.dll" target="lib\net45"/>
+    <file src="..\..\binaries\net45\Microsoft.Rest.ClientRuntime.pdb" target="lib\net45"/>
+    <file src="..\..\binaries\net45\Microsoft.Rest.ClientRuntime.xml" target="lib\net45"/>
   </files>
 </package>
