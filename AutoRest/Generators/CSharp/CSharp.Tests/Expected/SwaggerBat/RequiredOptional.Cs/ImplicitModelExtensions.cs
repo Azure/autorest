@@ -133,12 +133,9 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
-            /// <param name='requiredGlobalPath'>
-            /// number of items to skip
-            /// </param>
-            public static Error GetRequiredGlobalPath(this IImplicitModel operations, string requiredGlobalPath)
+            public static Error GetRequiredGlobalPath(this IImplicitModel operations)
             {
-                return Task.Factory.StartNew(s => ((IImplicitModel)s).GetRequiredGlobalPathAsync(requiredGlobalPath), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IImplicitModel)s).GetRequiredGlobalPathAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -147,15 +144,12 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
-            /// <param name='requiredGlobalPath'>
-            /// number of items to skip
-            /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
             /// </param>
-            public static async Task<Error> GetRequiredGlobalPathAsync( this IImplicitModel operations, string requiredGlobalPath, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Error> GetRequiredGlobalPathAsync( this IImplicitModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<Error> result = await operations.GetRequiredGlobalPathWithHttpMessagesAsync(requiredGlobalPath, null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<Error> result = await operations.GetRequiredGlobalPathWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -165,12 +159,9 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
-            /// <param name='requiredGlobalQuery'>
-            /// number of items to skip
-            /// </param>
-            public static Error GetRequiredGlobalQuery(this IImplicitModel operations, string requiredGlobalQuery)
+            public static Error GetRequiredGlobalQuery(this IImplicitModel operations)
             {
-                return Task.Factory.StartNew(s => ((IImplicitModel)s).GetRequiredGlobalQueryAsync(requiredGlobalQuery), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IImplicitModel)s).GetRequiredGlobalQueryAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -179,15 +170,12 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
-            /// <param name='requiredGlobalQuery'>
-            /// number of items to skip
-            /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
             /// </param>
-            public static async Task<Error> GetRequiredGlobalQueryAsync( this IImplicitModel operations, string requiredGlobalQuery, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Error> GetRequiredGlobalQueryAsync( this IImplicitModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<Error> result = await operations.GetRequiredGlobalQueryWithHttpMessagesAsync(requiredGlobalQuery, null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<Error> result = await operations.GetRequiredGlobalQueryWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -197,12 +185,9 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
-            /// <param name='optionalGlobalQuery'>
-            /// number of items to skip
-            /// </param>
-            public static Error GetOptionalGlobalQuery(this IImplicitModel operations, int? optionalGlobalQuery = default(int?))
+            public static Error GetOptionalGlobalQuery(this IImplicitModel operations)
             {
-                return Task.Factory.StartNew(s => ((IImplicitModel)s).GetOptionalGlobalQueryAsync(optionalGlobalQuery), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IImplicitModel)s).GetOptionalGlobalQueryAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -211,15 +196,12 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
-            /// <param name='optionalGlobalQuery'>
-            /// number of items to skip
-            /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
             /// </param>
-            public static async Task<Error> GetOptionalGlobalQueryAsync( this IImplicitModel operations, int? optionalGlobalQuery = default(int?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Error> GetOptionalGlobalQueryAsync( this IImplicitModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<Error> result = await operations.GetOptionalGlobalQueryWithHttpMessagesAsync(optionalGlobalQuery, null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<Error> result = await operations.GetOptionalGlobalQueryWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

@@ -410,8 +410,6 @@ Implicit.prototype.putOptionalBody = function (bodyParameter, options, callback)
 
 /**
  * Test implicitly required path parameter
- * @param {String} [requiredGlobalPath] number of items to skip
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -421,7 +419,7 @@ Implicit.prototype.putOptionalBody = function (bodyParameter, options, callback)
  *
  * @returns {Stream} The Response stream
  */
-Implicit.prototype.getRequiredGlobalPath = function (requiredGlobalPath, options, callback) {
+Implicit.prototype.getRequiredGlobalPath = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -429,17 +427,6 @@ Implicit.prototype.getRequiredGlobalPath = function (requiredGlobalPath, options
   }
   if (!callback) {
     throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (requiredGlobalPath === null || requiredGlobalPath === undefined) {
-      throw new Error('\'requiredGlobalPath\' cannot be null');
-    }
-    if (requiredGlobalPath !== null && requiredGlobalPath !== undefined && typeof requiredGlobalPath !== 'string') {
-      throw new Error('requiredGlobalPath must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
   }
 
   // Construct URL
@@ -516,8 +503,6 @@ Implicit.prototype.getRequiredGlobalPath = function (requiredGlobalPath, options
 
 /**
  * Test implicitly required query parameter
- * @param {String} [requiredGlobalQuery] number of items to skip
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -527,7 +512,7 @@ Implicit.prototype.getRequiredGlobalPath = function (requiredGlobalPath, options
  *
  * @returns {Stream} The Response stream
  */
-Implicit.prototype.getRequiredGlobalQuery = function (requiredGlobalQuery, options, callback) {
+Implicit.prototype.getRequiredGlobalQuery = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -535,17 +520,6 @@ Implicit.prototype.getRequiredGlobalQuery = function (requiredGlobalQuery, optio
   }
   if (!callback) {
     throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (requiredGlobalQuery === null || requiredGlobalQuery === undefined) {
-      throw new Error('\'requiredGlobalQuery\' cannot be null');
-    }
-    if (requiredGlobalQuery !== null && requiredGlobalQuery !== undefined && typeof requiredGlobalQuery !== 'string') {
-      throw new Error('requiredGlobalQuery must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
   }
 
   // Construct URL
@@ -626,8 +600,6 @@ Implicit.prototype.getRequiredGlobalQuery = function (requiredGlobalQuery, optio
 
 /**
  * Test implicitly optional query parameter
- * @param {Number} [optionalGlobalQuery] number of items to skip
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -637,7 +609,7 @@ Implicit.prototype.getRequiredGlobalQuery = function (requiredGlobalQuery, optio
  *
  * @returns {Stream} The Response stream
  */
-Implicit.prototype.getOptionalGlobalQuery = function (optionalGlobalQuery, options, callback) {
+Implicit.prototype.getOptionalGlobalQuery = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -645,14 +617,6 @@ Implicit.prototype.getOptionalGlobalQuery = function (optionalGlobalQuery, optio
   }
   if (!callback) {
     throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (optionalGlobalQuery !== null && optionalGlobalQuery !== undefined && typeof optionalGlobalQuery !== 'number') {
-      throw new Error('optionalGlobalQuery must be of type number.');
-    }
-  } catch (error) {
-    return callback(error);
   }
 
   // Construct URL

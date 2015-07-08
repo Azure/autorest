@@ -221,8 +221,6 @@ SkipUrlEncoding.prototype.getPathPathValid = function (unencodedPathParam, optio
 
 /**
  * Get method with unencoded path parameter with value 'path1/path2/path3'
- * @param {String} [unencodedPathParam] An unencoded path parameter with value 'path1/path2/path3'. Possible values for this parameter include: 'path1/path2/path3'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -232,7 +230,7 @@ SkipUrlEncoding.prototype.getPathPathValid = function (unencodedPathParam, optio
  *
  * @returns {Stream} The Response stream
  */
-SkipUrlEncoding.prototype.getSwaggerPathValid = function (unencodedPathParam, options, callback) {
+SkipUrlEncoding.prototype.getSwaggerPathValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -240,17 +238,6 @@ SkipUrlEncoding.prototype.getSwaggerPathValid = function (unencodedPathParam, op
   }
   if (!callback) {
     throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (unencodedPathParam === null || unencodedPathParam === undefined) {
-      throw new Error('\'unencodedPathParam\' cannot be null');
-    }
-    if (unencodedPathParam !== null && unencodedPathParam !== undefined && typeof unencodedPathParam !== 'string') {
-      throw new Error('unencodedPathParam must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
   }
 
   // Construct URL
@@ -615,8 +602,6 @@ SkipUrlEncoding.prototype.getPathQueryValid = function (q1, options, callback) {
 /**
  * Get method with unencoded query parameter with value
  * 'value1&q2=value2&q3=value3'
- * @param {String} [q1] An unencoded query parameter with value 'value1&q2=value2&q3=value3'. Possible values for this parameter include: 'value1&q2=value2&q3=value3'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -626,7 +611,7 @@ SkipUrlEncoding.prototype.getPathQueryValid = function (q1, options, callback) {
  *
  * @returns {Stream} The Response stream
  */
-SkipUrlEncoding.prototype.getSwaggerQueryValid = function (q1, options, callback) {
+SkipUrlEncoding.prototype.getSwaggerQueryValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -634,14 +619,6 @@ SkipUrlEncoding.prototype.getSwaggerQueryValid = function (q1, options, callback
   }
   if (!callback) {
     throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (q1 !== null && q1 !== undefined && typeof q1 !== 'string') {
-      throw new Error('q1 must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
   }
 
   // Construct URL

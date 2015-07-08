@@ -57,7 +57,6 @@ namespace Fixtures.Azure.SwaggerBatPaging
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//paging/single";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -152,7 +151,6 @@ namespace Fixtures.Azure.SwaggerBatPaging
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//paging/multiple";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -248,7 +246,6 @@ namespace Fixtures.Azure.SwaggerBatPaging
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//paging/multiple/retryfirst";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -345,7 +342,6 @@ namespace Fixtures.Azure.SwaggerBatPaging
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//paging/multiple/retrysecond";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -440,7 +436,6 @@ namespace Fixtures.Azure.SwaggerBatPaging
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//paging/single/failure";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -535,7 +530,6 @@ namespace Fixtures.Azure.SwaggerBatPaging
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//paging/multiple/failure";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -630,7 +624,6 @@ namespace Fixtures.Azure.SwaggerBatPaging
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//paging/multiple/failureuri";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);

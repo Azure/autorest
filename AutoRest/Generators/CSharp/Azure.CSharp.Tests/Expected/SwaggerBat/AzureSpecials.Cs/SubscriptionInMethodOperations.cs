@@ -67,7 +67,6 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
                          "//azurespecials/subscriptionId/method/string/none/path/local/1234-5678-9012-3456/{subscriptionId}";
             url = url.Replace("{subscriptionId}", Uri.EscapeDataString(subscriptionId));
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -168,7 +167,6 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
                          "//azurespecials/subscriptionId/method/string/none/path/local/null/{subscriptionId}";
             url = url.Replace("{subscriptionId}", Uri.EscapeDataString(subscriptionId));
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -267,7 +265,6 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
                          "//azurespecials/subscriptionId/path/string/none/path/local/1234-5678-9012-3456/{subscriptionId}";
             url = url.Replace("{subscriptionId}", Uri.EscapeDataString(subscriptionId));
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -335,22 +332,14 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// POST method with subscriptionId modeled in the method.  pass in
         /// subscription id = '1234-5678-9012-3456' to succeed
         /// </summary>
-        /// <param name='subscriptionId'>
-        /// The subscriptionId, which appears in the path, the value is always
-        /// '1234-5678-9012-3456'
-        /// </param>    
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> PostSwaggerLocalValidWithHttpMessagesAsync(string subscriptionId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> PostSwaggerLocalValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (subscriptionId == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "subscriptionId");
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -358,7 +347,6 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             {
                 invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("subscriptionId", subscriptionId);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(invocationId, this, "PostSwaggerLocalValid", tracingParameters);
             }
@@ -367,7 +355,6 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
                          "//azurespecials/subscriptionId/swagger/string/none/path/local/1234-5678-9012-3456/{subscriptionId}";
             url = url.Replace("{subscriptionId}", Uri.EscapeDataString(subscriptionId));
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);

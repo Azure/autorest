@@ -1191,14 +1191,16 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 @"Swagger\url.json", @"Expected\SwaggerBat\Url.Cs");
             using (var client = new AutoRestUrlTestService(Fixture.Uri))
             {
+                client.GlobalStringPath = "globalStringPath";
+                client.GlobalStringQuery = "globalStringQuery";
                 client.PathItems.GetAllWithValues("localStringPath", "pathItemStringPath",
-                    "globalStringPath", "localStringQuery", "pathItemStringQuery", "globalStringQuery");
+                     "localStringQuery", "pathItemStringQuery");
                 client.PathItems.GetGlobalAndLocalQueryNull("localStringPath", "pathItemStringPath",
-                    "globalStringPath", null, "pathItemStringQuery", null);
+                    null, "pathItemStringQuery");
                 client.PathItems.GetGlobalQueryNull("localStringPath", "pathItemStringPath",
-                    "globalStringPath", "localStringQuery", "pathItemStringQuery", null);
+                    "localStringQuery", "pathItemStringQuery");
                 client.PathItems.GetLocalPathItemQueryNull("localStringPath", "pathItemStringPath",
-                    "globalStringPath", null, null, "globalStringQuery");
+                    null, null);
             }
         }
 
@@ -1407,9 +1409,9 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                     client.ExplicitModel.PostRequiredClassProperty(
                         new Fixtures.SwaggerBatRequiredOptional.Models.ClassWrapper {Value = null}));
                 Assert.Throws<ValidationException>(() =>
-                    client.ImplicitModel.GetRequiredGlobalPath(null));
+                    client.ImplicitModel.GetRequiredGlobalPath());
                 Assert.Throws<ValidationException>(() =>
-                    client.ImplicitModel.GetRequiredGlobalQuery(null));
+                    client.ImplicitModel.GetRequiredGlobalQuery());
             }
         }
 

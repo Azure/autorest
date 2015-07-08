@@ -12,7 +12,7 @@
 @:/// <param name='operations'>
 @:/// The operations group for this extension method
 @:/// </param>
-foreach (var parameter in Model.Parameters)
+foreach (var parameter in Model.LocalParameters)
 {
 @:/// <param name='@parameter.Name'>
 @:@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())
@@ -36,7 +36,7 @@ foreach (var parameter in Model.Parameters)
 @:/// <param name='operations'>
 @:/// The operations group for this extension method
 @:/// </param>
-foreach (var parameter in Model.Parameters)
+foreach (var parameter in Model.LocalParameters)
 {
 @:/// <param name='@parameter.Name'>
 @:@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())

@@ -324,8 +324,6 @@ SubscriptionInMethod.prototype.postPathLocalValid = function (subscriptionId, op
 /**
  * POST method with subscriptionId modeled in the method.  pass in
  * subscription id = '1234-5678-9012-3456' to succeed
- * @param {String} [subscriptionId] The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -335,7 +333,7 @@ SubscriptionInMethod.prototype.postPathLocalValid = function (subscriptionId, op
  *
  * @returns {Stream} The Response stream
  */
-SubscriptionInMethod.prototype.postSwaggerLocalValid = function (subscriptionId, options, callback) {
+SubscriptionInMethod.prototype.postSwaggerLocalValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -343,17 +341,6 @@ SubscriptionInMethod.prototype.postSwaggerLocalValid = function (subscriptionId,
   }
   if (!callback) {
     throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (subscriptionId === null || subscriptionId === undefined) {
-      throw new Error('\'subscriptionId\' cannot be null');
-    }
-    if (subscriptionId !== null && subscriptionId !== undefined && typeof subscriptionId !== 'string') {
-      throw new Error('subscriptionId must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
   }
 
   // Construct URL

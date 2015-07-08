@@ -338,22 +338,14 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// Get method with api-version modeled in the method.  pass in api-version =
         /// '2.0' to succeed
         /// </summary>
-        /// <param name='apiVersion'>
-        /// The api version, which appears in the query, the value is always '2.0'.
-        /// Possible values for this parameter include: '2.0'
-        /// </param>    
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> GetSwaggerLocalValidWithHttpMessagesAsync(string apiVersion, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> GetSwaggerLocalValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (apiVersion == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "apiVersion");
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -361,7 +353,6 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             {
                 invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("apiVersion", apiVersion);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(invocationId, this, "GetSwaggerLocalValid", tracingParameters);
             }
@@ -369,9 +360,9 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//azurespecials/apiVersion/swagger/string/none/query/local/2.0";
             List<string> queryParameters = new List<string>();
-            if (apiVersion != null)
+            if (this.Client.ApiVersion != null)
             {
-                queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(apiVersion, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(this.Client.ApiVersion, this.Client.SerializationSettings).Trim('"'))));
             }
             if (queryParameters.Count > 0)
             {

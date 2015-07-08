@@ -311,8 +311,8 @@ namespace Microsoft.Rest.Generator.CSharp
             {
                 builder.AppendLine("{0} = {0}.Replace(\"{{{1}}}\", Uri.EscapeDataString({2}));",
                     variableName,
-                    pathParameter.Name,
-                    pathParameter.Type.ToString(ClientReference, pathParameter.Name));
+                    pathParameter.SerializedName,
+                    pathParameter.Type.ToString(ClientReference, pathParameter.GetSelfOrGlobalReference(ClientReference)));
             }
             if (ParameterTemplateModels.Any(p => p.Location == ParameterLocation.Query))
             {
@@ -320,7 +320,7 @@ namespace Microsoft.Rest.Generator.CSharp
                 foreach (var queryParameter in ParameterTemplateModels
                     .Where(p => p.Location == ParameterLocation.Query))
                 {
-                    builder.AppendLine("if ({0} != null)", queryParameter.Name)
+                    builder.AppendLine("if ({0} != null)", queryParameter.GetSelfOrGlobalReference(ClientReference))
                         .AppendLine("{").Indent()
                         .AppendLine("queryParameters.Add(string.Format(\"{0}={{0}}\", Uri.EscapeDataString({1})));",
                             queryParameter.SerializedName, queryParameter.GetFormattedReferenceValue(ClientReference)).Outdent()

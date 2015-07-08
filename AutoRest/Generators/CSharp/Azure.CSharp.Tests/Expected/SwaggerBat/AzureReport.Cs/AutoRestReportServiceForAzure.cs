@@ -204,7 +204,6 @@ namespace Fixtures.Azure.SwaggerBatAzureReport
             string url = this.BaseUri.AbsoluteUri + 
                          "//report/azure";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);

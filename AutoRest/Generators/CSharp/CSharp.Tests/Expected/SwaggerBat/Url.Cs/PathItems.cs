@@ -45,17 +45,11 @@ namespace Fixtures.SwaggerBatUrl
         /// <param name='pathItemStringPath'>
         /// A string value 'pathItemStringPath' that appears in the path
         /// </param>    
-        /// <param name='globalStringPath'>
-        /// A string value 'globalItemStringPath' that appears in the path
-        /// </param>    
         /// <param name='localStringQuery'>
         /// should contain value 'localStringQuery'
         /// </param>    
         /// <param name='pathItemStringQuery'>
         /// A string value 'pathItemStringQuery' that appears as a query parameter
-        /// </param>    
-        /// <param name='globalStringQuery'>
-        /// should contain value null
         /// </param>    
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -63,7 +57,7 @@ namespace Fixtures.SwaggerBatUrl
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> GetAllWithValuesWithHttpMessagesAsync(string localStringPath, string pathItemStringPath, string globalStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), string globalStringQuery = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> GetAllWithValuesWithHttpMessagesAsync(string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (localStringPath == null)
             {
@@ -72,10 +66,6 @@ namespace Fixtures.SwaggerBatUrl
             if (pathItemStringPath == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "pathItemStringPath");
-            }
-            if (globalStringPath == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "globalStringPath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -86,10 +76,8 @@ namespace Fixtures.SwaggerBatUrl
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("localStringPath", localStringPath);
                 tracingParameters.Add("pathItemStringPath", pathItemStringPath);
-                tracingParameters.Add("globalStringPath", globalStringPath);
                 tracingParameters.Add("localStringQuery", localStringQuery);
                 tracingParameters.Add("pathItemStringQuery", pathItemStringQuery);
-                tracingParameters.Add("globalStringQuery", globalStringQuery);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(invocationId, this, "GetAllWithValues", tracingParameters);
             }
@@ -98,7 +86,7 @@ namespace Fixtures.SwaggerBatUrl
                          "//pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery";
             url = url.Replace("{localStringPath}", Uri.EscapeDataString(localStringPath));
             url = url.Replace("{pathItemStringPath}", Uri.EscapeDataString(pathItemStringPath));
-            url = url.Replace("{globalStringPath}", Uri.EscapeDataString(globalStringPath));
+            url = url.Replace("{globalStringPath}", Uri.EscapeDataString(this.Client.GlobalStringPath));
             List<string> queryParameters = new List<string>();
             if (localStringQuery != null)
             {
@@ -108,9 +96,9 @@ namespace Fixtures.SwaggerBatUrl
             {
                 queryParameters.Add(string.Format("pathItemStringQuery={0}", Uri.EscapeDataString(pathItemStringQuery)));
             }
-            if (globalStringQuery != null)
+            if (this.Client.GlobalStringQuery != null)
             {
-                queryParameters.Add(string.Format("globalStringQuery={0}", Uri.EscapeDataString(globalStringQuery)));
+                queryParameters.Add(string.Format("globalStringQuery={0}", Uri.EscapeDataString(this.Client.GlobalStringQuery)));
             }
             if (queryParameters.Count > 0)
             {
@@ -185,17 +173,11 @@ namespace Fixtures.SwaggerBatUrl
         /// <param name='pathItemStringPath'>
         /// A string value 'pathItemStringPath' that appears in the path
         /// </param>    
-        /// <param name='globalStringPath'>
-        /// A string value 'globalItemStringPath' that appears in the path
-        /// </param>    
         /// <param name='localStringQuery'>
         /// should contain value 'localStringQuery'
         /// </param>    
         /// <param name='pathItemStringQuery'>
         /// A string value 'pathItemStringQuery' that appears as a query parameter
-        /// </param>    
-        /// <param name='globalStringQuery'>
-        /// should contain value null
         /// </param>    
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -203,7 +185,7 @@ namespace Fixtures.SwaggerBatUrl
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> GetGlobalQueryNullWithHttpMessagesAsync(string localStringPath, string pathItemStringPath, string globalStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), string globalStringQuery = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> GetGlobalQueryNullWithHttpMessagesAsync(string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (localStringPath == null)
             {
@@ -212,10 +194,6 @@ namespace Fixtures.SwaggerBatUrl
             if (pathItemStringPath == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "pathItemStringPath");
-            }
-            if (globalStringPath == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "globalStringPath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -226,10 +204,8 @@ namespace Fixtures.SwaggerBatUrl
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("localStringPath", localStringPath);
                 tracingParameters.Add("pathItemStringPath", pathItemStringPath);
-                tracingParameters.Add("globalStringPath", globalStringPath);
                 tracingParameters.Add("localStringQuery", localStringQuery);
                 tracingParameters.Add("pathItemStringQuery", pathItemStringQuery);
-                tracingParameters.Add("globalStringQuery", globalStringQuery);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(invocationId, this, "GetGlobalQueryNull", tracingParameters);
             }
@@ -238,7 +214,7 @@ namespace Fixtures.SwaggerBatUrl
                          "//pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery";
             url = url.Replace("{localStringPath}", Uri.EscapeDataString(localStringPath));
             url = url.Replace("{pathItemStringPath}", Uri.EscapeDataString(pathItemStringPath));
-            url = url.Replace("{globalStringPath}", Uri.EscapeDataString(globalStringPath));
+            url = url.Replace("{globalStringPath}", Uri.EscapeDataString(this.Client.GlobalStringPath));
             List<string> queryParameters = new List<string>();
             if (localStringQuery != null)
             {
@@ -248,9 +224,9 @@ namespace Fixtures.SwaggerBatUrl
             {
                 queryParameters.Add(string.Format("pathItemStringQuery={0}", Uri.EscapeDataString(pathItemStringQuery)));
             }
-            if (globalStringQuery != null)
+            if (this.Client.GlobalStringQuery != null)
             {
-                queryParameters.Add(string.Format("globalStringQuery={0}", Uri.EscapeDataString(globalStringQuery)));
+                queryParameters.Add(string.Format("globalStringQuery={0}", Uri.EscapeDataString(this.Client.GlobalStringQuery)));
             }
             if (queryParameters.Count > 0)
             {
@@ -324,17 +300,11 @@ namespace Fixtures.SwaggerBatUrl
         /// <param name='pathItemStringPath'>
         /// A string value 'pathItemStringPath' that appears in the path
         /// </param>    
-        /// <param name='globalStringPath'>
-        /// A string value 'globalItemStringPath' that appears in the path
-        /// </param>    
         /// <param name='localStringQuery'>
         /// should contain null value
         /// </param>    
         /// <param name='pathItemStringQuery'>
         /// A string value 'pathItemStringQuery' that appears as a query parameter
-        /// </param>    
-        /// <param name='globalStringQuery'>
-        /// should contain value null
         /// </param>    
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -342,7 +312,7 @@ namespace Fixtures.SwaggerBatUrl
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> GetGlobalAndLocalQueryNullWithHttpMessagesAsync(string localStringPath, string pathItemStringPath, string globalStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), string globalStringQuery = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> GetGlobalAndLocalQueryNullWithHttpMessagesAsync(string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (localStringPath == null)
             {
@@ -351,10 +321,6 @@ namespace Fixtures.SwaggerBatUrl
             if (pathItemStringPath == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "pathItemStringPath");
-            }
-            if (globalStringPath == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "globalStringPath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -365,10 +331,8 @@ namespace Fixtures.SwaggerBatUrl
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("localStringPath", localStringPath);
                 tracingParameters.Add("pathItemStringPath", pathItemStringPath);
-                tracingParameters.Add("globalStringPath", globalStringPath);
                 tracingParameters.Add("localStringQuery", localStringQuery);
                 tracingParameters.Add("pathItemStringQuery", pathItemStringQuery);
-                tracingParameters.Add("globalStringQuery", globalStringQuery);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(invocationId, this, "GetGlobalAndLocalQueryNull", tracingParameters);
             }
@@ -377,7 +341,7 @@ namespace Fixtures.SwaggerBatUrl
                          "//pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null";
             url = url.Replace("{localStringPath}", Uri.EscapeDataString(localStringPath));
             url = url.Replace("{pathItemStringPath}", Uri.EscapeDataString(pathItemStringPath));
-            url = url.Replace("{globalStringPath}", Uri.EscapeDataString(globalStringPath));
+            url = url.Replace("{globalStringPath}", Uri.EscapeDataString(this.Client.GlobalStringPath));
             List<string> queryParameters = new List<string>();
             if (localStringQuery != null)
             {
@@ -387,9 +351,9 @@ namespace Fixtures.SwaggerBatUrl
             {
                 queryParameters.Add(string.Format("pathItemStringQuery={0}", Uri.EscapeDataString(pathItemStringQuery)));
             }
-            if (globalStringQuery != null)
+            if (this.Client.GlobalStringQuery != null)
             {
-                queryParameters.Add(string.Format("globalStringQuery={0}", Uri.EscapeDataString(globalStringQuery)));
+                queryParameters.Add(string.Format("globalStringQuery={0}", Uri.EscapeDataString(this.Client.GlobalStringQuery)));
             }
             if (queryParameters.Count > 0)
             {
@@ -463,16 +427,10 @@ namespace Fixtures.SwaggerBatUrl
         /// <param name='pathItemStringPath'>
         /// A string value 'pathItemStringPath' that appears in the path
         /// </param>    
-        /// <param name='globalStringPath'>
-        /// A string value 'globalItemStringPath' that appears in the path
-        /// </param>    
         /// <param name='localStringQuery'>
         /// should contain value null
         /// </param>    
         /// <param name='pathItemStringQuery'>
-        /// should contain value null
-        /// </param>    
-        /// <param name='globalStringQuery'>
         /// should contain value null
         /// </param>    
         /// <param name='customHeaders'>
@@ -481,7 +439,7 @@ namespace Fixtures.SwaggerBatUrl
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> GetLocalPathItemQueryNullWithHttpMessagesAsync(string localStringPath, string pathItemStringPath, string globalStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), string globalStringQuery = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> GetLocalPathItemQueryNullWithHttpMessagesAsync(string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (localStringPath == null)
             {
@@ -490,10 +448,6 @@ namespace Fixtures.SwaggerBatUrl
             if (pathItemStringPath == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "pathItemStringPath");
-            }
-            if (globalStringPath == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "globalStringPath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -504,10 +458,8 @@ namespace Fixtures.SwaggerBatUrl
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("localStringPath", localStringPath);
                 tracingParameters.Add("pathItemStringPath", pathItemStringPath);
-                tracingParameters.Add("globalStringPath", globalStringPath);
                 tracingParameters.Add("localStringQuery", localStringQuery);
                 tracingParameters.Add("pathItemStringQuery", pathItemStringQuery);
-                tracingParameters.Add("globalStringQuery", globalStringQuery);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(invocationId, this, "GetLocalPathItemQueryNull", tracingParameters);
             }
@@ -516,7 +468,7 @@ namespace Fixtures.SwaggerBatUrl
                          "//pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null";
             url = url.Replace("{localStringPath}", Uri.EscapeDataString(localStringPath));
             url = url.Replace("{pathItemStringPath}", Uri.EscapeDataString(pathItemStringPath));
-            url = url.Replace("{globalStringPath}", Uri.EscapeDataString(globalStringPath));
+            url = url.Replace("{globalStringPath}", Uri.EscapeDataString(this.Client.GlobalStringPath));
             List<string> queryParameters = new List<string>();
             if (localStringQuery != null)
             {
@@ -526,9 +478,9 @@ namespace Fixtures.SwaggerBatUrl
             {
                 queryParameters.Add(string.Format("pathItemStringQuery={0}", Uri.EscapeDataString(pathItemStringQuery)));
             }
-            if (globalStringQuery != null)
+            if (this.Client.GlobalStringQuery != null)
             {
-                queryParameters.Add(string.Format("globalStringQuery={0}", Uri.EscapeDataString(globalStringQuery)));
+                queryParameters.Add(string.Format("globalStringQuery={0}", Uri.EscapeDataString(this.Client.GlobalStringQuery)));
             }
             if (queryParameters.Count > 0)
             {

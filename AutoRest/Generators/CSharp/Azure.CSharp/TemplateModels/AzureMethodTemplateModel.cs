@@ -182,21 +182,13 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                         queryParametersAddString = "queryParameters.Add(string.Format(\"{0}={{0}}\", {1}));";
                     }
 
-                    builder.AppendLine("if ({0} != null)", queryParameter.Name)
+                    builder.AppendLine("if ({0} != null)", queryParameter.GetSelfOrGlobalReference(ClientReference))
                         .AppendLine("{").Indent()
                         .AppendLine(queryParametersAddString,
                             queryParameter.SerializedName, queryParameter.GetFormattedReferenceValue(ClientReference))
                         .Outdent()
                         .AppendLine("}");
                 }
-            }
-
-            if (!Parameters.Any(p => p.Name.Equals("apiVersion", StringComparison.OrdinalIgnoreCase)) &&
-                !IsAbsoluteUrl)
-            {
-                builder.AppendLine(
-                    "queryParameters.Add(string.Format(\"api-version={{0}}\", Uri.EscapeDataString({0}.ApiVersion)));",
-                    ClientReference);
             }
 
             builder.AppendLine("if (queryParameters.Count > 0)")

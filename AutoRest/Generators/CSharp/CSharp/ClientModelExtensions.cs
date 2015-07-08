@@ -83,6 +83,32 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
         }
 
         /// <summary>
+        /// Returns reference to self or global client.parameter
+        /// </summary>
+        /// <param name="parameter">The parameter to format</param>
+        /// <param name="clientReference">The reference to the client</param>
+        /// <returns>A reference to self or global parameter</returns>
+        public static string GetSelfOrGlobalReference(this Parameter parameter, string clientReference)
+        {
+            if (parameter == null)
+            {
+                throw new ArgumentNullException("parameter");
+            }
+            if (clientReference == null)
+            {
+                throw new ArgumentNullException("clientReference");
+            }
+
+            string parameterName = parameter.Name;
+            if (parameter.ClientProperty != null)
+            {
+                parameterName = string.Format("{0}.{1}", clientReference, parameter.ClientProperty.Name);
+            }
+
+            return parameterName;
+        }
+
+        /// <summary>
         /// Format the value of a sequence given the modeled element format.  Note that only sequences of strings are supported
         /// </summary>
         /// <param name="parameter">The parameter to format</param>
@@ -98,7 +124,7 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
             SequenceType sequence = parameter.Type as SequenceType;
             if (sequence == null)
             {
-                return parameter.Type.ToString(clientReference, parameter.Name);
+                return parameter.Type.ToString(clientReference, parameter.GetSelfOrGlobalReference(clientReference));
             }
 
             PrimaryType primaryType = sequence.ElementType as PrimaryType;
@@ -116,8 +142,8 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
                                   "non-string List parameter {0}", parameter));
             }
 
-            return string.Format(CultureInfo.InvariantCulture, 
-                "string.Join(\"{0}\", {1})", parameter.CollectionFormat.GetSeparator(), parameter.Name);
+            return string.Format(CultureInfo.InvariantCulture,
+                "string.Join(\"{0}\", {1})", parameter.CollectionFormat.GetSeparator(), parameter.GetSelfOrGlobalReference(clientReference));
         }
 
         /// <summary>

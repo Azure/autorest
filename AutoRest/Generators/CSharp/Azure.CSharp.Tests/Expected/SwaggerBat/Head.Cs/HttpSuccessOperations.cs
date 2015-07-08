@@ -56,7 +56,6 @@ namespace Fixtures.Azure.SwaggerBatHead
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//http/success/204";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -147,7 +146,6 @@ namespace Fixtures.Azure.SwaggerBatHead
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//http/success/404";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);

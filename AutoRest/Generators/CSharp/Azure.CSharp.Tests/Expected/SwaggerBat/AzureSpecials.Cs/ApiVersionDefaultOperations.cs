@@ -57,7 +57,6 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -146,7 +145,6 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -235,7 +233,6 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -324,7 +321,6 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);

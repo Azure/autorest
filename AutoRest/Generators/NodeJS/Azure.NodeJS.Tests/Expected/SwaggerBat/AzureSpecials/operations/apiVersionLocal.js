@@ -319,8 +319,6 @@ ApiVersionLocal.prototype.getPathLocalValid = function (apiVersion, options, cal
 /**
  * Get method with api-version modeled in the method.  pass in api-version =
  * '2.0' to succeed
- * @param {String} [apiVersion] The api version, which appears in the query, the value is always '2.0'. Possible values for this parameter include: '2.0'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -330,7 +328,7 @@ ApiVersionLocal.prototype.getPathLocalValid = function (apiVersion, options, cal
  *
  * @returns {Stream} The Response stream
  */
-ApiVersionLocal.prototype.getSwaggerLocalValid = function (apiVersion, options, callback) {
+ApiVersionLocal.prototype.getSwaggerLocalValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -338,17 +336,6 @@ ApiVersionLocal.prototype.getSwaggerLocalValid = function (apiVersion, options, 
   }
   if (!callback) {
     throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (apiVersion === null || apiVersion === undefined) {
-      throw new Error('\'apiVersion\' cannot be null');
-    }
-    if (apiVersion !== null && apiVersion !== undefined && typeof apiVersion !== 'string') {
-      throw new Error('apiVersion must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
   }
 
   // Construct URL

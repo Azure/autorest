@@ -93,7 +93,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line hidden
             WriteLiteral("\r\n        /// </summary>\r\n");
 #line 26 "MethodGroupInterfaceTemplate.cshtml"
-        foreach (var parameter in method.Parameters)
+        foreach (var parameter in method.LocalParameters)
         {
 
 #line default
