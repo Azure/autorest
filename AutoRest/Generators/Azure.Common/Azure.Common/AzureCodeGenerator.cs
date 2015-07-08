@@ -23,7 +23,6 @@ namespace Microsoft.Rest.Generator.Azure
         public const string PageableExtension = "x-ms-pageable";
         public const string ExternalExtension = "x-ms-external";
         public const string ODataExtension = "x-ms-odata";
-        public const string GlobalParameter = "x-ms-global-parameter";
         public const string ApiVersion = "ApiVersion";
         private const string ResourceType = "Resource";
         private const string SubResourceType = "SubResource";
@@ -56,7 +55,6 @@ namespace Microsoft.Rest.Generator.Azure
             ParseODataExtension(serviceClient);
             FlattenResourceProperties(serviceClient);
             AddPageableMethod(serviceClient);
-            RemoveCommonPropertiesFromMethods(serviceClient);
             AddLongRunningOperations(serviceClient);
             AddAzureProperties(serviceClient);
             SetDefaultResponses(serviceClient);
@@ -122,30 +120,6 @@ namespace Microsoft.Rest.Generator.Azure
                 {
                     method.DefaultResponse = cloudError;
                 }
-            }
-        }
-
-        /// <summary>
-        /// Removes common properties including subscriptionId and apiVersion from method signatures.
-        /// </summary>
-        /// <param name="serviceClient"></param>
-        public static void RemoveCommonPropertiesFromMethods(ServiceClient serviceClient)
-        {
-            if (serviceClient == null)
-            {
-                throw new ArgumentNullException("serviceClient");
-            }
-
-            foreach (var method in serviceClient.Methods)
-            {
-                method.Parameters.RemoveAll(
-                    p => (!p.Extensions.ContainsKey(GlobalParameter) ||
-                         (bool)p.Extensions[GlobalParameter]) 
-                         &&
-                        ((p.Location == ParameterLocation.Path &&
-                         p.Name.Equals("subscriptionId", StringComparison.OrdinalIgnoreCase)) ||
-                        (p.Location == ParameterLocation.Query &&
-                         p.Name.Replace("-", "").Equals("apiversion", StringComparison.OrdinalIgnoreCase))));
             }
         }
 
@@ -235,15 +209,14 @@ namespace Microsoft.Rest.Generator.Azure
                 throw new ArgumentNullException("serviceClient");
             }
 
-            serviceClient.Properties.Add(new Property
+            var apiVersion = serviceClient.Properties.FirstOrDefault(p => p.Name == "api-version");
+            if (apiVersion != null)
             {
-                Name = ApiVersion,
-                SerializedName = "api-version",
-                Type = PrimaryType.String,
-                Documentation = "The Api Version.",
-                IsReadOnly = true,
-                DefaultValue = "\"" + serviceClient.ApiVersion + "\""
-            });
+                apiVersion.DefaultValue = "\"" + serviceClient.ApiVersion + "\"";
+                apiVersion.IsReadOnly = true;
+                apiVersion.IsRequired = false;
+            }
+
             serviceClient.Properties.Add(new Property
             {
                 Name = "Credentials",

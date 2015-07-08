@@ -411,7 +411,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             // Construct URL
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//reqopt/global/required/path/{required-global-path}";
-            url = url.Replace("{required_global_path}", Uri.EscapeDataString(this.Client.RequiredGlobalPath));
+            url = url.Replace("{this.Client.RequiredGlobalPath}", Uri.EscapeDataString(this.Client.RequiredGlobalPath));
             // trim all duplicate forward slashes in the url
             url = Regex.Replace(url, "([^:]/)/+", "$1");
             // Create HTTP transport objects

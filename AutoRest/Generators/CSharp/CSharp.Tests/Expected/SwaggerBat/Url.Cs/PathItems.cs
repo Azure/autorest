@@ -86,7 +86,7 @@ namespace Fixtures.SwaggerBatUrl
                          "//pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery";
             url = url.Replace("{localStringPath}", Uri.EscapeDataString(localStringPath));
             url = url.Replace("{pathItemStringPath}", Uri.EscapeDataString(pathItemStringPath));
-            url = url.Replace("{globalStringPath}", Uri.EscapeDataString(this.Client.GlobalStringPath));
+            url = url.Replace("{this.Client.GlobalStringPath}", Uri.EscapeDataString(this.Client.GlobalStringPath));
             List<string> queryParameters = new List<string>();
             if (localStringQuery != null)
             {
@@ -214,7 +214,7 @@ namespace Fixtures.SwaggerBatUrl
                          "//pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery";
             url = url.Replace("{localStringPath}", Uri.EscapeDataString(localStringPath));
             url = url.Replace("{pathItemStringPath}", Uri.EscapeDataString(pathItemStringPath));
-            url = url.Replace("{globalStringPath}", Uri.EscapeDataString(this.Client.GlobalStringPath));
+            url = url.Replace("{this.Client.GlobalStringPath}", Uri.EscapeDataString(this.Client.GlobalStringPath));
             List<string> queryParameters = new List<string>();
             if (localStringQuery != null)
             {
@@ -341,7 +341,7 @@ namespace Fixtures.SwaggerBatUrl
                          "//pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null";
             url = url.Replace("{localStringPath}", Uri.EscapeDataString(localStringPath));
             url = url.Replace("{pathItemStringPath}", Uri.EscapeDataString(pathItemStringPath));
-            url = url.Replace("{globalStringPath}", Uri.EscapeDataString(this.Client.GlobalStringPath));
+            url = url.Replace("{this.Client.GlobalStringPath}", Uri.EscapeDataString(this.Client.GlobalStringPath));
             List<string> queryParameters = new List<string>();
             if (localStringQuery != null)
             {
@@ -468,7 +468,7 @@ namespace Fixtures.SwaggerBatUrl
                          "//pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null";
             url = url.Replace("{localStringPath}", Uri.EscapeDataString(localStringPath));
             url = url.Replace("{pathItemStringPath}", Uri.EscapeDataString(pathItemStringPath));
-            url = url.Replace("{globalStringPath}", Uri.EscapeDataString(this.Client.GlobalStringPath));
+            url = url.Replace("{this.Client.GlobalStringPath}", Uri.EscapeDataString(this.Client.GlobalStringPath));
             List<string> queryParameters = new List<string>();
             if (localStringQuery != null)
             {

@@ -57,6 +57,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
             using (
                 var client =
                     new MicrosoftAzureTestUrl(Fixture.Uri,
+                        Guid.NewGuid().ToString(),
                         new TokenCloudCredentials(Guid.NewGuid().ToString(), Guid.NewGuid().ToString())))
             {
                 var group = client.Group.GetSampleResourceGroup("testgroup101");
@@ -603,6 +604,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 @"Swagger\azure-special-properties.json", @"Expected\SwaggerBat\AzureSpecials.Cs");
             using (
                 var client = new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
+                    Guid.NewGuid().ToString(),
                     new TokenCloudCredentials(validSubscription, Guid.NewGuid().ToString())))
             {
                 client.SubscriptionInCredentials.PostMethodGlobalNotProvidedValid();
@@ -612,6 +614,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 Assert.Throws<ArgumentNullException>(
                     () =>
                         new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
+                            Guid.NewGuid().ToString(),
                             new TokenCloudCredentials(null, Guid.NewGuid().ToString())));
                 client.SubscriptionInMethod.PostMethodLocalValid(validSubscription);
                 client.SubscriptionInMethod.PostPathLocalValid(validSubscription);

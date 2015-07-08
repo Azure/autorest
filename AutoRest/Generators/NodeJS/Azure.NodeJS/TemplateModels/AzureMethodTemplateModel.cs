@@ -51,27 +51,6 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         }
 
         /// <summary>
-        /// Add the global api-version to the query parameters, as appropriate
-        /// </summary>
-        /// <param name="builder">The string builder for uri construction</param>
-        protected override void BuildQueryParameterArray(IndentedStringBuilder builder)
-        {
-            if (builder == null)
-            {
-                throw new ArgumentNullException("builder");
-            }
-
-            base.BuildQueryParameterArray(builder);
-            if (!Parameters.Any(p => p.Name.Equals("apiVersion", StringComparison.OrdinalIgnoreCase)) &&
-                !IsAbsoluteUrl)
-            {
-                builder.AppendLine(
-                    "queryParameters.push('api-version=' + encodeURIComponent({0}.apiVersion));",
-                    ClientReference);
-            }
-        }
-
-        /// <summary>
         /// If this is a relative uri, we will add api-version query, so add this condition to the check
         /// </summary>
         /// <returns>true if there are any query parameters in the uri, otherwise false</returns>

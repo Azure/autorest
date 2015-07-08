@@ -182,7 +182,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                         queryParametersAddString = "queryParameters.Add(string.Format(\"{0}={{0}}\", {1}));";
                     }
 
-                    builder.AppendLine("if ({0} != null)", queryParameter.GetSelfOrGlobalReference(ClientReference))
+                    builder.AppendLine("if ({0} != null)", queryParameter.Name)
                         .AppendLine("{").Indent()
                         .AppendLine(queryParametersAddString,
                             queryParameter.SerializedName, queryParameter.GetFormattedReferenceValue(ClientReference))

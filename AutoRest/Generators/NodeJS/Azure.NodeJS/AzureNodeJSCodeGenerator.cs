@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using Microsoft.Rest.Generator.Azure.NodeJS.Templates;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.NodeJS;
@@ -50,17 +51,17 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
             AzureCodeGenerator.UpdateHeadMethods(serviceClient);
             AzureCodeGenerator.ParseODataExtension(serviceClient);
             AzureCodeGenerator.AddPageableMethod(serviceClient);
-            AzureCodeGenerator.RemoveCommonPropertiesFromMethods(serviceClient);
             AzureCodeGenerator.AddLongRunningOperations(serviceClient);
             AzureCodeGenerator.AddAzureProperties(serviceClient);
             AzureCodeGenerator.SetDefaultResponses(serviceClient);
-            NormalizeApiVersion(serviceClient);
             base.NormalizeClientModel(serviceClient);
+            NormalizeApiVersion(serviceClient);
         }
 
         private static void NormalizeApiVersion(ServiceClient serviceClient)
         {
-            var property = serviceClient.Properties.First(p => p.Name == AzureCodeGenerator.ApiVersion);
+            var property = serviceClient.Properties.FirstOrDefault(
+                p => p.Name.Equals(AzureCodeGenerator.ApiVersion, StringComparison.OrdinalIgnoreCase));
             if (property != null)
             {
                 property.DefaultValue = property.DefaultValue.Replace('"', '\'');
