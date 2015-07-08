@@ -23,7 +23,7 @@
     <_DiagnosticsTracingPackageName>Microsoft.Diagnostics.Tracing.TraceEvent.1.0.5</_DiagnosticsTracingPackageName>
     <_DiagnosticsTracingTargets>$(SolutionDir)packages\$(_DiagnosticsTracingPackageName)\tools\Microsoft.Diagnostics.Tracing.TraceEvent.targets</_DiagnosticsTracingTargets>
   </PropertyGroup>
-  <Import Project="$(SolutionDir)\tools\AutoRest.Settings.targets" />
+  <Import Project="$(SolutionDir)\Tools\AutoRest.Settings.targets" />
   <ItemGroup>
     <Reference Include="Microsoft.Diagnostics.Tracing.TraceEvent, Version=1.0.11.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

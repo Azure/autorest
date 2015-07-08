@@ -14,6 +14,25 @@
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\tools\AutoRest.Settings.targets" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Net45-Debug'">
+    <DocumentationFile>bin\Net45-Debug\Microsoft.Rest.ClientRuntime.Azure.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Net45-Release'">
+    <DocumentationFile>bin\Net45-Release\Microsoft.Rest.ClientRuntime.Azure.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Net40-Debug'">
+    <DocumentationFile>bin\Net40-Debug\Microsoft.Rest.ClientRuntime.Azure.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Net40-Release'">
+    <DocumentationFile>bin\Net40-Release\Microsoft.Rest.ClientRuntime.Azure.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Portable-Debug'">
+    <DocumentationFile>bin\Portable-Debug\Microsoft.Rest.ClientRuntime.Azure.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Portable-Release'">
+    <DocumentationFile>bin\Portable-Release\Microsoft.Rest.ClientRuntime.Azure.xml</DocumentationFile>
+  </PropertyGroup>
+  <Import Project="$(SolutionDir)\Tools\AutoRest.Settings.targets" />
   <ItemGroup>
     <None Include="Microsoft.Rest.ClientRuntime.Azure.nuget.proj" />
     <None Include="Microsoft.Rest.ClientRuntime.Azure.nuspec" />
