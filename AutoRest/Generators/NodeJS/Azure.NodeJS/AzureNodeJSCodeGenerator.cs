@@ -59,7 +59,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
             NormalizeCredentials(serviceClient);
         }
 
-        private void NormalizeCredentials(ServiceClient serviceClient)
+        private static void NormalizeCredentials(ServiceClient serviceClient)
         {
             var property = serviceClient.Properties.FirstOrDefault(
                 p => p.Name.Equals("credentials", StringComparison.OrdinalIgnoreCase));
