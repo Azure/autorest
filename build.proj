@@ -184,7 +184,7 @@
     <!--install autorest and client runtime packages-->
     <Exec Command="$(NuGetCommand) restore $(TestProjectDir)\NugetPackageTest.sln -source &quot;$(PackageOutputDir);https://www.nuget.org/api/v2/&quot;"/>
     <ItemGroup>
-      <AutoRestExeFiles Include="$(TestProjectDir)\packages\autorest.*\lib\portable-net45+sl50+wp80+win\autorest.exe" />
+      <AutoRestExeFiles Include="$(TestProjectDir)\packages\autorest.*\tools\autorest.exe" />
     </ItemGroup>
     <PropertyGroup>
       <AutoRestExe>@(AutoRestExeFiles->'%(FullPath)')</AutoRestExe>
