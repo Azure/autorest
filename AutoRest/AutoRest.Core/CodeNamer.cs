@@ -298,7 +298,7 @@ namespace Microsoft.Rest.Generator
         /// <returns>Name with invalid characters removed.</returns>
         public static string RemoveInvalidCharacters(string name)
         {
-            return RemoveInvalidCharacters(name, '_', '-');
+            return GetValidName(name, '_', '-');
         }
 
         /// <summary>
@@ -309,37 +309,58 @@ namespace Microsoft.Rest.Generator
         /// <returns>Namespace with invalid characters removed.</returns>
         protected virtual string RemoveInvalidCharactersNamespace(string name)
         {
-            return RemoveInvalidCharacters(name, '_', '-', '.');
+            return GetValidName(name, '_', '-', '.');
+        }
+
+        /// <summary>
+        /// Gets valid name for the identifier.
+        /// </summary>
+        /// <param name="name">String to parse.</param>
+        /// <param name="allowerCharacters">Allowed characters.</param>
+        /// <returns>Name with invalid characters removed.</returns>
+        private static string GetValidName(string name, params char[] allowerCharacters)
+        {
+            var correctName = RemoveInvalidCharacters(name, allowerCharacters);
+
+            // here we have only letters and digits or an empty string
+            if (string.IsNullOrEmpty(correctName) || 
+                basicLaticCharacters.ContainsKey(correctName[0]))
+            {
+                var sb = new StringBuilder();
+                foreach (char symbol in name)
+                {
+                    if (basicLaticCharacters.ContainsKey(symbol))
+                    {
+                        sb.Append(basicLaticCharacters[symbol]);
+                    }
+                    else
+                    {
+                        sb.Append(symbol);
+                    }
+                }
+                correctName = RemoveInvalidCharacters(sb.ToString(), allowerCharacters);
+            }
+
+            // if it is still empty string, throw
+            if (correctName.IsNullOrEmpty())
+            {
+                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, Resources.InvalidIdentifierName, name));
+            }
+
+            return correctName;
         }
 
         /// <summary>
         /// Removes invalid characters from the name.
         /// </summary>
         /// <param name="name">String to parse.</param>
-        /// <param name="allowerCharacters">Allower characters.</param>
+        /// <param name="allowerCharacters">Allowed characters.</param>
         /// <returns>Name with invalid characters removed.</returns>
         private static string RemoveInvalidCharacters(string name, params char[] allowerCharacters)
         {
-            var correctName = new string(name.Replace("[]", "Sequence")
-                .Where(c => char.IsLetterOrDigit(c) || allowerCharacters.Contains(c))
-                .ToArray());
-
-            if (correctName.IsNullOrEmpty())
-            {
-                var sb = new StringBuilder();
-                foreach (char symbol in name.Where(symbol => basicLaticCharacters.ContainsKey(symbol)))
-                {
-                    sb.Append(basicLaticCharacters[symbol]);
-                }
-                correctName = sb.ToString();
-
-                if (correctName.IsNullOrEmpty())
-                {
-                    throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, Resources.InvalidIdentifierName, name));
-                }
-            }
-
-            return correctName;
+            return new string(name.Replace("[]", "Sequence")
+                   .Where(c => char.IsLetterOrDigit(c) || allowerCharacters.Contains(c))
+                   .ToArray());
         }
 
         /// <summary>
