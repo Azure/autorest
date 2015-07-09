@@ -17,7 +17,7 @@ else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.D
 @:/// <summary>
 @WrapComment("/// ", Model.Documentation.EscapeXmlComment())@:
 @:/// </summary>
-@foreach (var parameter in Model.Parameters)
+@foreach (var parameter in Model.LocalParameters)
 {
 @:/// <param name='@parameter.Name'>
 @WrapComment("/// ", parameter.Documentation.EscapeXmlComment())@:
@@ -45,7 +45,7 @@ else if (Model.HttpMethod == HttpMethod.Put)
 @:/// <summary>
 @WrapComment("/// ", Model.Documentation.EscapeXmlComment())@:
 @:/// </summary>
-@foreach (var parameter in Model.Parameters)
+@foreach (var parameter in Model.LocalParameters)
 {
 @:/// <param name='@parameter.Name'>
 @WrapComment("/// ", parameter.Documentation.EscapeXmlComment())@:

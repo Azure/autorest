@@ -145,7 +145,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line hidden
             WriteLiteral("\r\n        /// </summary>\r\n            \r\n");
 #line 39 "ServiceClientInterfaceTemplate.cshtml"
-        foreach (var parameter in method.Parameters)
+        foreach (var parameter in method.LocalParameters)
         {
 
 #line default
