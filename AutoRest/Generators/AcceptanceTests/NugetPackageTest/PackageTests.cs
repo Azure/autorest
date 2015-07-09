@@ -25,6 +25,9 @@ namespace NugetPackageTest
         [Fact]
         public void TestClientRuntimeWorks()
         {
+            //we random port over a C# acceptance test so to verify in sanity 
+            //that the freshly built out nuget packages (runtime and generator) works.
+
             var client = new AutoRestNumberTestService(Fixture.Uri);
             client.Number.PutBigFloat(3.402823e+20);
             client.Number.PutSmallFloat(3.402823e-20);
