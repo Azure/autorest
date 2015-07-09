@@ -143,11 +143,12 @@
   <Target Name="Test">
     <CallTarget Targets="TestClientRuntime" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />
     <CallTarget Targets="TestCodeGenerator" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
+    <CallTarget Targets="TestNuGetPackages" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
   </Target>
 
   <Target Name="TestClientRuntime">
     <ItemGroup>
-      <TestDlls Include=".\AutoRest\ClientRuntimes\*.Tests\bin\*\*Tests.dll" />
+      <TestDlls Include="$(LibraryRoot)\AutoRest\ClientRuntimes\*.Tests\bin\*\*Tests.dll" />
     </ItemGroup>
     
     <Message Text="@(TestDlls)" />
@@ -159,20 +160,45 @@
 
   <Target Name="TestCodeGenerator">
     <ItemGroup>
-      <TestDlls Include=".\AutoRest\Generators\Azure.Common\Azure.Common.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.Azure.Common.Tests.dll" />
-      <TestDlls Include=".\AutoRest\Generators\CSharp\CSharp.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.CSharp.Tests.dll" />
-      <TestDlls Include=".\AutoRest\Generators\CSharp\Azure.CSharp.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.Azure.CSharp.Tests.dll" />
-      <TestDlls Include=".\AutoRest\AutoRest.Core.Tests\bin\Net45-$(Configuration)\AutoRest.Core.Tests.dll" />
-      <TestDlls Include=".\AutoRest\Modelers\Swagger.Tests\bin\Net45-$(Configuration)\AutoRest.Modeler.Swagger.Tests.dll" />
-      <TestDlls Include=".\AutoRest\Generators\Ruby\Ruby.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.Ruby.Tests.dll" />
+      <TestDlls Include="$(LibraryRoot)\AutoRest\Generators\Azure.Common\Azure.Common.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.Azure.Common.Tests.dll" />
+      <TestDlls Include="$(LibraryRoot)\AutoRest\Generators\CSharp\CSharp.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.CSharp.Tests.dll" />
+      <TestDlls Include="$(LibraryRoot)\AutoRest\Generators\CSharp\Azure.CSharp.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.Azure.CSharp.Tests.dll" />
+      <TestDlls Include="$(LibraryRoot)\AutoRest\AutoRest.Core.Tests\bin\Net45-$(Configuration)\AutoRest.Core.Tests.dll" />
+      <TestDlls Include="$(LibraryRoot)\AutoRest\Modelers\Swagger.Tests\bin\Net45-$(Configuration)\AutoRest.Modeler.Swagger.Tests.dll" />
+      <TestDlls Include="$(LibraryRoot)\AutoRest\Generators\Ruby\Ruby.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.Ruby.Tests.dll" />
     </ItemGroup>
     
     <Message Text="@(TestDlls)" />
     <MakeDir Directories="$(LibraryRoot)TestResults"/>
     <Exec WorkingDirectory=".\ClientRuntimes\Ruby\" Command="UpdateRuntime"/>
     <xunit Assemblies="@(TestDlls)" Html="$(MSBuildProjectDirectory)\TestResults\xunit.results.html" ContinueOnError="false" />
-    <Exec WorkingDirectory=".\AutoRest\Generators\NodeJS\NodeJS.Tests\" Command="npm test"/>
-    <Exec WorkingDirectory=".\AutoRest\Generators\NodeJS\Azure.NodeJS.Tests\" Command="npm test"/>
+    <Exec WorkingDirectory="$(LibraryRoot)\AutoRest\Generators\NodeJS\NodeJS.Tests\" Command="npm test"/>
+    <Exec WorkingDirectory="$(LibraryRoot)\AutoRest\Generators\NodeJS\Azure.NodeJS.Tests\" Command="npm test"/>
+  </Target>
+
+  <Target Name="TestNuGetPackages">
+    <PropertyGroup>
+      <TestProjectDir>$(LibraryRoot)\AutoRest\Generators\AcceptanceTests\NugetPackageTest</TestProjectDir>
+    </PropertyGroup>
+    
+    <!--install autorest and client runtime packages-->
+    <Exec Command="$(NuGetCommand) restore $(TestProjectDir)\NugetPackageTest.sln -source &quot;$(PackageOutputDir);https://www.nuget.org/api/v2/&quot;"/>
+    <ItemGroup>
+      <AutoRestExeFiles Include="$(TestProjectDir)\packages\autorest.*\lib\portable-net45+sl50+wp80+win\autorest.exe" />
+    </ItemGroup>
+    <PropertyGroup>
+      <AutoRestExe>@(AutoRestExeFiles->'%(FullPath)')</AutoRestExe>
+    </PropertyGroup>
+    
+    <!--Invoke code-gen-->
+    <Exec WorkingDirectory="$(TestProjectDir)" Command="$(AutoRestExe) -Modeler Swagger -CodeGenerator CSharp -OutputDirectory $(TestProjectDir)\Expected -Namespace &quot;Fixtures.Bodynumber&quot; -Input &quot;$(LibraryRoot)\AutoRest\Generators\AcceptanceTests\swagger\body-number.json&quot; -Header NONE"/>
+    
+    <!--Build and run tests-->
+    <MSBuild Projects="$(TestProjectDir)\NugetPackageTest.sln" Targets="rebuild" />
+    <ItemGroup>
+      <TestDlls Include="$(TestProjectDir)\bin\$(Configuration)\NuGetPackageTest.dll" />
+    </ItemGroup>    
+    <xunit Assemblies="@(TestDlls)" />
   </Target>
   
   <PropertyGroup>
