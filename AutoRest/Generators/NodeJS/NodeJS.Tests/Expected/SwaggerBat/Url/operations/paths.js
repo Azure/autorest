@@ -1364,7 +1364,7 @@ Paths.prototype.enumValid = function (enumPath, options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//paths/enum/green%20color/{enumPath}';
-  requestUrl = requestUrl.replace('{enumPath}', encodeURIComponent(enumPath.toString()));
+  requestUrl = requestUrl.replace('{enumPath}', encodeURIComponent(enumPath));
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');

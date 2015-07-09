@@ -20,7 +20,7 @@ var baseUri = 'http://localhost:3000';
 describe('nodejs', function () {
   
   describe('Azure Special Properties', function () {
-    var testClient = new specialsClient(credentials, baseUri, clientOptions);
+    var testClient = new specialsClient(credentials, dummySubscriptionId, baseUri, clientOptions);
     it('should use the default api-version when no api-version parameter is present', function (done) {
       testClient.apiVersionDefault.getMethodGlobalValid(function (error, result) {
         should.not.exist(error);

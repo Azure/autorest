@@ -128,7 +128,7 @@ Write(Model.OperationName);
 #line hidden
 
 #line 30 "MethodTemplate.cshtml"
-   if (Model.LocalParameters.Any())
+   if (Model.ParameterTemplateModels.Any())
   {
 
 #line default
@@ -142,7 +142,7 @@ Write(Model.OperationName);
 #line hidden
 
 #line 34 "MethodTemplate.cshtml"
-   foreach (var parameter in Model.LocalParameters)
+   foreach (var parameter in Model.ParameterTemplateModels)
   {
     if (parameter.IsRequired)
     {

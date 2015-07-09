@@ -17,9 +17,6 @@ var operations = require('./operations');
  * Initializes a new instance of the AutoRestSwaggerBATdictionaryService class.
  * @constructor
  *
- * @param {ServiceClientCredentials} credentials - Credentials for
- * authenticating with the service.
- *
  * @param {string} [baseUri] - The base URI of the service.
  *
  * @param {object} [options] - The parameter options
@@ -31,16 +28,12 @@ var operations = require('./operations');
  *
  * @param {bool} [options.noRetryPolicy] - If set to true, turn off default retry policy
  */
-function AutoRestSwaggerBATdictionaryService(credentials, baseUri, options) {
-  if (!credentials) {
-    throw new Error('credentials cannot be null.');
-  }
+function AutoRestSwaggerBATdictionaryService(baseUri, options) {
 
   if (!options) options = {};
 
-  AutoRestSwaggerBATdictionaryService['super_'].call(this, credentials, options);
+  AutoRestSwaggerBATdictionaryService['super_'].call(this, null, options);
   this.baseUri = baseUri;
-  this.credentials = credentials;
   if (!this.baseUri) {
     this.baseUri = 'http://localhost';
   }

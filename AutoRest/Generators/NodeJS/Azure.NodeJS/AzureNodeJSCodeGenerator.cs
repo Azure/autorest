@@ -56,6 +56,17 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
             AzureCodeGenerator.SetDefaultResponses(serviceClient);
             base.NormalizeClientModel(serviceClient);
             NormalizeApiVersion(serviceClient);
+            NormalizeCredentials(serviceClient);
+        }
+
+        private void NormalizeCredentials(ServiceClient serviceClient)
+        {
+            var property = serviceClient.Properties.FirstOrDefault(
+                p => p.Name.Equals("credentials", StringComparison.OrdinalIgnoreCase));
+            if (property != null)
+            {
+                ((CompositeType) property.Type).Name = "ServiceClientCredentials";
+            }
         }
 
         private static void NormalizeApiVersion(ServiceClient serviceClient)

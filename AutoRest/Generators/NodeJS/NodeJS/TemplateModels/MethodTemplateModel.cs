@@ -464,7 +464,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                 {
                     pathReplaceFormat = "{0} = {0}.replace('{{{1}}}', {2});";
                 }
-                builder.AppendLine(pathReplaceFormat, variableName, pathParameter.Name,
+                builder.AppendLine(pathReplaceFormat, variableName, pathParameter.SerializedName,
                     pathParameter.Type.ToString(pathParameter.Name));
             }
         }

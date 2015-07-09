@@ -428,11 +428,22 @@ Implicit.prototype.getRequiredGlobalPath = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.requiredGlobalPath === null || this.client.requiredGlobalPath === undefined) {
+      throw new Error('\'this.client.requiredGlobalPath\' cannot be null');
+    }
+    if (this.client.requiredGlobalPath !== null && this.client.requiredGlobalPath !== undefined && typeof this.client.requiredGlobalPath !== 'string') {
+      throw new Error('this.client.requiredGlobalPath must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//reqopt/global/required/path/{required-global-path}';
-  requestUrl = requestUrl.replace('{requiredGlobalPath}', encodeURIComponent(requiredGlobalPath));
+  requestUrl = requestUrl.replace('{required-global-path}', encodeURIComponent(this.client.requiredGlobalPath));
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -521,12 +532,23 @@ Implicit.prototype.getRequiredGlobalQuery = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.requiredGlobalQuery === null || this.client.requiredGlobalQuery === undefined) {
+      throw new Error('\'this.client.requiredGlobalQuery\' cannot be null');
+    }
+    if (this.client.requiredGlobalQuery !== null && this.client.requiredGlobalQuery !== undefined && typeof this.client.requiredGlobalQuery !== 'string') {
+      throw new Error('this.client.requiredGlobalQuery must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//reqopt/global/required/query';
   var queryParameters = [];
-  queryParameters.push('required_global_query=' + encodeURIComponent(requiredGlobalQuery));
+  queryParameters.push('required-global-query=' + encodeURIComponent(this.client.requiredGlobalQuery));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -618,13 +640,21 @@ Implicit.prototype.getOptionalGlobalQuery = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.optionalGlobalQuery !== null && this.client.optionalGlobalQuery !== undefined && typeof this.client.optionalGlobalQuery !== 'number') {
+      throw new Error('this.client.optionalGlobalQuery must be of type number.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//reqopt/global/optional/query';
   var queryParameters = [];
-  if (optionalGlobalQuery !== null && optionalGlobalQuery !== undefined) {
-    queryParameters.push('optional_global_query=' + encodeURIComponent(optionalGlobalQuery.toString()));
+  if (this.client.optionalGlobalQuery !== null && this.client.optionalGlobalQuery !== undefined) {
+    queryParameters.push('optional-global-query=' + encodeURIComponent(this.client.optionalGlobalQuery.toString()));
   }
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');

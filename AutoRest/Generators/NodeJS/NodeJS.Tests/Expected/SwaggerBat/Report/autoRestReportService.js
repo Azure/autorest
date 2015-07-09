@@ -16,9 +16,6 @@ var models = require('./models');
  * Initializes a new instance of the AutoRestReportService class.
  * @constructor
  *
- * @param {ServiceClientCredentials} credentials - Credentials for
- * authenticating with the service.
- *
  * @param {string} [baseUri] - The base URI of the service.
  *
  * @param {object} [options] - The parameter options
@@ -30,16 +27,12 @@ var models = require('./models');
  *
  * @param {bool} [options.noRetryPolicy] - If set to true, turn off default retry policy
  */
-function AutoRestReportService(credentials, baseUri, options) {
-  if (!credentials) {
-    throw new Error('credentials cannot be null.');
-  }
+function AutoRestReportService(baseUri, options) {
 
   if (!options) options = {};
 
-  AutoRestReportService['super_'].call(this, credentials, options);
+  AutoRestReportService['super_'].call(this, null, options);
   this.baseUri = baseUri;
-  this.credentials = credentials;
   if (!this.baseUri) {
     this.baseUri = 'http://localhost';
   }

@@ -2253,7 +2253,7 @@ Header.prototype.paramEnum = function (scenario, value, options, callback) {
     httpRequest.headers['scenario'] = scenario;
   }
   if (value !== null) {
-    httpRequest.headers['value'] = value.toString();
+    httpRequest.headers['value'] = value;
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;

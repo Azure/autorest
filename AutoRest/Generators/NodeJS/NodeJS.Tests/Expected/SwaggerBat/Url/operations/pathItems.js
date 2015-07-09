@@ -62,17 +62,26 @@ PathItems.prototype.getAllWithValues = function (localStringPath, pathItemString
     if (localStringPath !== null && localStringPath !== undefined && typeof localStringPath !== 'string') {
       throw new Error('localStringPath must be of type string.');
     }
+    if (localStringQuery !== null && localStringQuery !== undefined && typeof localStringQuery !== 'string') {
+      throw new Error('localStringQuery must be of type string.');
+    }
     if (pathItemStringPath === null || pathItemStringPath === undefined) {
       throw new Error('\'pathItemStringPath\' cannot be null');
     }
     if (pathItemStringPath !== null && pathItemStringPath !== undefined && typeof pathItemStringPath !== 'string') {
       throw new Error('pathItemStringPath must be of type string.');
     }
-    if (localStringQuery !== null && localStringQuery !== undefined && typeof localStringQuery !== 'string') {
-      throw new Error('localStringQuery must be of type string.');
-    }
     if (pathItemStringQuery !== null && pathItemStringQuery !== undefined && typeof pathItemStringQuery !== 'string') {
       throw new Error('pathItemStringQuery must be of type string.');
+    }
+    if (this.client.globalStringPath === null || this.client.globalStringPath === undefined) {
+      throw new Error('\'this.client.globalStringPath\' cannot be null');
+    }
+    if (this.client.globalStringPath !== null && this.client.globalStringPath !== undefined && typeof this.client.globalStringPath !== 'string') {
+      throw new Error('this.client.globalStringPath must be of type string.');
+    }
+    if (this.client.globalStringQuery !== null && this.client.globalStringQuery !== undefined && typeof this.client.globalStringQuery !== 'string') {
+      throw new Error('this.client.globalStringQuery must be of type string.');
     }
   } catch (error) {
     return callback(error);
@@ -83,7 +92,7 @@ PathItems.prototype.getAllWithValues = function (localStringPath, pathItemString
                    '//pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery';
   requestUrl = requestUrl.replace('{localStringPath}', encodeURIComponent(localStringPath));
   requestUrl = requestUrl.replace('{pathItemStringPath}', encodeURIComponent(pathItemStringPath));
-  requestUrl = requestUrl.replace('{globalStringPath}', encodeURIComponent(globalStringPath));
+  requestUrl = requestUrl.replace('{globalStringPath}', encodeURIComponent(this.client.globalStringPath));
   var queryParameters = [];
   if (localStringQuery !== null && localStringQuery !== undefined) {
     queryParameters.push('localStringQuery=' + encodeURIComponent(localStringQuery));
@@ -91,8 +100,8 @@ PathItems.prototype.getAllWithValues = function (localStringPath, pathItemString
   if (pathItemStringQuery !== null && pathItemStringQuery !== undefined) {
     queryParameters.push('pathItemStringQuery=' + encodeURIComponent(pathItemStringQuery));
   }
-  if (globalStringQuery !== null && globalStringQuery !== undefined) {
-    queryParameters.push('globalStringQuery=' + encodeURIComponent(globalStringQuery));
+  if (this.client.globalStringQuery !== null && this.client.globalStringQuery !== undefined) {
+    queryParameters.push('globalStringQuery=' + encodeURIComponent(this.client.globalStringQuery));
   }
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
@@ -192,17 +201,26 @@ PathItems.prototype.getGlobalQueryNull = function (localStringPath, pathItemStri
     if (localStringPath !== null && localStringPath !== undefined && typeof localStringPath !== 'string') {
       throw new Error('localStringPath must be of type string.');
     }
+    if (localStringQuery !== null && localStringQuery !== undefined && typeof localStringQuery !== 'string') {
+      throw new Error('localStringQuery must be of type string.');
+    }
     if (pathItemStringPath === null || pathItemStringPath === undefined) {
       throw new Error('\'pathItemStringPath\' cannot be null');
     }
     if (pathItemStringPath !== null && pathItemStringPath !== undefined && typeof pathItemStringPath !== 'string') {
       throw new Error('pathItemStringPath must be of type string.');
     }
-    if (localStringQuery !== null && localStringQuery !== undefined && typeof localStringQuery !== 'string') {
-      throw new Error('localStringQuery must be of type string.');
-    }
     if (pathItemStringQuery !== null && pathItemStringQuery !== undefined && typeof pathItemStringQuery !== 'string') {
       throw new Error('pathItemStringQuery must be of type string.');
+    }
+    if (this.client.globalStringPath === null || this.client.globalStringPath === undefined) {
+      throw new Error('\'this.client.globalStringPath\' cannot be null');
+    }
+    if (this.client.globalStringPath !== null && this.client.globalStringPath !== undefined && typeof this.client.globalStringPath !== 'string') {
+      throw new Error('this.client.globalStringPath must be of type string.');
+    }
+    if (this.client.globalStringQuery !== null && this.client.globalStringQuery !== undefined && typeof this.client.globalStringQuery !== 'string') {
+      throw new Error('this.client.globalStringQuery must be of type string.');
     }
   } catch (error) {
     return callback(error);
@@ -213,7 +231,7 @@ PathItems.prototype.getGlobalQueryNull = function (localStringPath, pathItemStri
                    '//pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery';
   requestUrl = requestUrl.replace('{localStringPath}', encodeURIComponent(localStringPath));
   requestUrl = requestUrl.replace('{pathItemStringPath}', encodeURIComponent(pathItemStringPath));
-  requestUrl = requestUrl.replace('{globalStringPath}', encodeURIComponent(globalStringPath));
+  requestUrl = requestUrl.replace('{globalStringPath}', encodeURIComponent(this.client.globalStringPath));
   var queryParameters = [];
   if (localStringQuery !== null && localStringQuery !== undefined) {
     queryParameters.push('localStringQuery=' + encodeURIComponent(localStringQuery));
@@ -221,8 +239,8 @@ PathItems.prototype.getGlobalQueryNull = function (localStringPath, pathItemStri
   if (pathItemStringQuery !== null && pathItemStringQuery !== undefined) {
     queryParameters.push('pathItemStringQuery=' + encodeURIComponent(pathItemStringQuery));
   }
-  if (globalStringQuery !== null && globalStringQuery !== undefined) {
-    queryParameters.push('globalStringQuery=' + encodeURIComponent(globalStringQuery));
+  if (this.client.globalStringQuery !== null && this.client.globalStringQuery !== undefined) {
+    queryParameters.push('globalStringQuery=' + encodeURIComponent(this.client.globalStringQuery));
   }
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
@@ -321,17 +339,26 @@ PathItems.prototype.getGlobalAndLocalQueryNull = function (localStringPath, path
     if (localStringPath !== null && localStringPath !== undefined && typeof localStringPath !== 'string') {
       throw new Error('localStringPath must be of type string.');
     }
+    if (localStringQuery !== null && localStringQuery !== undefined && typeof localStringQuery !== 'string') {
+      throw new Error('localStringQuery must be of type string.');
+    }
     if (pathItemStringPath === null || pathItemStringPath === undefined) {
       throw new Error('\'pathItemStringPath\' cannot be null');
     }
     if (pathItemStringPath !== null && pathItemStringPath !== undefined && typeof pathItemStringPath !== 'string') {
       throw new Error('pathItemStringPath must be of type string.');
     }
-    if (localStringQuery !== null && localStringQuery !== undefined && typeof localStringQuery !== 'string') {
-      throw new Error('localStringQuery must be of type string.');
-    }
     if (pathItemStringQuery !== null && pathItemStringQuery !== undefined && typeof pathItemStringQuery !== 'string') {
       throw new Error('pathItemStringQuery must be of type string.');
+    }
+    if (this.client.globalStringPath === null || this.client.globalStringPath === undefined) {
+      throw new Error('\'this.client.globalStringPath\' cannot be null');
+    }
+    if (this.client.globalStringPath !== null && this.client.globalStringPath !== undefined && typeof this.client.globalStringPath !== 'string') {
+      throw new Error('this.client.globalStringPath must be of type string.');
+    }
+    if (this.client.globalStringQuery !== null && this.client.globalStringQuery !== undefined && typeof this.client.globalStringQuery !== 'string') {
+      throw new Error('this.client.globalStringQuery must be of type string.');
     }
   } catch (error) {
     return callback(error);
@@ -342,7 +369,7 @@ PathItems.prototype.getGlobalAndLocalQueryNull = function (localStringPath, path
                    '//pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null';
   requestUrl = requestUrl.replace('{localStringPath}', encodeURIComponent(localStringPath));
   requestUrl = requestUrl.replace('{pathItemStringPath}', encodeURIComponent(pathItemStringPath));
-  requestUrl = requestUrl.replace('{globalStringPath}', encodeURIComponent(globalStringPath));
+  requestUrl = requestUrl.replace('{globalStringPath}', encodeURIComponent(this.client.globalStringPath));
   var queryParameters = [];
   if (localStringQuery !== null && localStringQuery !== undefined) {
     queryParameters.push('localStringQuery=' + encodeURIComponent(localStringQuery));
@@ -350,8 +377,8 @@ PathItems.prototype.getGlobalAndLocalQueryNull = function (localStringPath, path
   if (pathItemStringQuery !== null && pathItemStringQuery !== undefined) {
     queryParameters.push('pathItemStringQuery=' + encodeURIComponent(pathItemStringQuery));
   }
-  if (globalStringQuery !== null && globalStringQuery !== undefined) {
-    queryParameters.push('globalStringQuery=' + encodeURIComponent(globalStringQuery));
+  if (this.client.globalStringQuery !== null && this.client.globalStringQuery !== undefined) {
+    queryParameters.push('globalStringQuery=' + encodeURIComponent(this.client.globalStringQuery));
   }
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
@@ -450,17 +477,26 @@ PathItems.prototype.getLocalPathItemQueryNull = function (localStringPath, pathI
     if (localStringPath !== null && localStringPath !== undefined && typeof localStringPath !== 'string') {
       throw new Error('localStringPath must be of type string.');
     }
+    if (localStringQuery !== null && localStringQuery !== undefined && typeof localStringQuery !== 'string') {
+      throw new Error('localStringQuery must be of type string.');
+    }
     if (pathItemStringPath === null || pathItemStringPath === undefined) {
       throw new Error('\'pathItemStringPath\' cannot be null');
     }
     if (pathItemStringPath !== null && pathItemStringPath !== undefined && typeof pathItemStringPath !== 'string') {
       throw new Error('pathItemStringPath must be of type string.');
     }
-    if (localStringQuery !== null && localStringQuery !== undefined && typeof localStringQuery !== 'string') {
-      throw new Error('localStringQuery must be of type string.');
-    }
     if (pathItemStringQuery !== null && pathItemStringQuery !== undefined && typeof pathItemStringQuery !== 'string') {
       throw new Error('pathItemStringQuery must be of type string.');
+    }
+    if (this.client.globalStringPath === null || this.client.globalStringPath === undefined) {
+      throw new Error('\'this.client.globalStringPath\' cannot be null');
+    }
+    if (this.client.globalStringPath !== null && this.client.globalStringPath !== undefined && typeof this.client.globalStringPath !== 'string') {
+      throw new Error('this.client.globalStringPath must be of type string.');
+    }
+    if (this.client.globalStringQuery !== null && this.client.globalStringQuery !== undefined && typeof this.client.globalStringQuery !== 'string') {
+      throw new Error('this.client.globalStringQuery must be of type string.');
     }
   } catch (error) {
     return callback(error);
@@ -471,7 +507,7 @@ PathItems.prototype.getLocalPathItemQueryNull = function (localStringPath, pathI
                    '//pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null';
   requestUrl = requestUrl.replace('{localStringPath}', encodeURIComponent(localStringPath));
   requestUrl = requestUrl.replace('{pathItemStringPath}', encodeURIComponent(pathItemStringPath));
-  requestUrl = requestUrl.replace('{globalStringPath}', encodeURIComponent(globalStringPath));
+  requestUrl = requestUrl.replace('{globalStringPath}', encodeURIComponent(this.client.globalStringPath));
   var queryParameters = [];
   if (localStringQuery !== null && localStringQuery !== undefined) {
     queryParameters.push('localStringQuery=' + encodeURIComponent(localStringQuery));
@@ -479,8 +515,8 @@ PathItems.prototype.getLocalPathItemQueryNull = function (localStringPath, pathI
   if (pathItemStringQuery !== null && pathItemStringQuery !== undefined) {
     queryParameters.push('pathItemStringQuery=' + encodeURIComponent(pathItemStringQuery));
   }
-  if (globalStringQuery !== null && globalStringQuery !== undefined) {
-    queryParameters.push('globalStringQuery=' + encodeURIComponent(globalStringQuery));
+  if (this.client.globalStringQuery !== null && this.client.globalStringQuery !== undefined) {
+    queryParameters.push('globalStringQuery=' + encodeURIComponent(this.client.globalStringQuery));
   }
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');

@@ -415,7 +415,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             // Construct URL
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//reqopt/global/required/path/{required-global-path}";
-            url = url.Replace("{required_global_path}", Uri.EscapeDataString(this.Client.RequiredGlobalPath));
+            url = url.Replace("{required-global-path}", Uri.EscapeDataString(this.Client.RequiredGlobalPath));
             // trim all duplicate forward slashes in the url
             url = Regex.Replace(url, "([^:]/)/+", "$1");
             // Create HTTP transport objects
@@ -504,7 +504,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             List<string> queryParameters = new List<string>();
             if (this.Client.RequiredGlobalQuery != null)
             {
-                queryParameters.Add(string.Format("required_global_query={0}", Uri.EscapeDataString(this.Client.RequiredGlobalQuery)));
+                queryParameters.Add(string.Format("required-global-query={0}", Uri.EscapeDataString(this.Client.RequiredGlobalQuery)));
             }
             if (queryParameters.Count > 0)
             {
@@ -594,7 +594,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             List<string> queryParameters = new List<string>();
             if (this.Client.OptionalGlobalQuery != null)
             {
-                queryParameters.Add(string.Format("optional_global_query={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(this.Client.OptionalGlobalQuery, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("optional-global-query={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(this.Client.OptionalGlobalQuery, this.Client.SerializationSettings).Trim('"'))));
             }
             if (queryParameters.Count > 0)
             {

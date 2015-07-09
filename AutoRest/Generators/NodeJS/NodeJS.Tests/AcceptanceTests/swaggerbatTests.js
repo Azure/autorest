@@ -31,7 +31,7 @@ describe('nodejs', function () {
   describe('Swagger BAT', function () {
     
     describe('Bool Client', function () {
-      var testClient = new boolClient(credentials, baseUri, clientOptions);
+      var testClient = new boolClient(baseUri, clientOptions);
       it('should get valid boolean values', function (done) {
         testClient.bool.getTrue(function (error, result) {
           should.not.exist(error);
@@ -67,7 +67,7 @@ describe('nodejs', function () {
     });
     
     describe('Integer Client', function () {
-      var testClient = new integerClient(credentials, baseUri, clientOptions);
+      var testClient = new integerClient(baseUri, clientOptions);
       it('should put max value for 32 and 64 bit Integers', function (done) {
         testClient.intModel.putMax32((Math.pow(2, 32 - 1) - 1), function (error, result) {
           should.not.exist(error);
@@ -125,7 +125,7 @@ describe('nodejs', function () {
     });
     
     describe('Number Client', function () {
-      var testClient = new numberClient(credentials, baseUri, clientOptions);
+      var testClient = new numberClient(baseUri, clientOptions);
       it('should put big float and double values', function (done) {
         testClient.number.putBigFloat(3.402823e+20, function (error, result) {
           should.not.exist(error);
@@ -209,7 +209,7 @@ describe('nodejs', function () {
     });
     
     describe('String Client', function () {
-      var testClient = new stringClient(credentials, baseUri, clientOptions);
+      var testClient = new stringClient(baseUri, clientOptions);
       it('should support valid null value', function (done) {
         testClient.string.getNull(function (error, result) {
           should.not.exist(result.body);
@@ -279,7 +279,7 @@ describe('nodejs', function () {
     });
     
     describe('Byte Client', function () {
-      var testClient = new byteClient(credentials, baseUri, clientOptions);
+      var testClient = new byteClient(baseUri, clientOptions);
       var bytes = new Buffer([255, 254, 253, 252, 251, 250, 249, 248, 247, 246]);
       it('should support valid null and empty value', function (done) {
         testClient.byteModel.getNull(function (error, result) {
@@ -315,7 +315,7 @@ describe('nodejs', function () {
     });
     
     describe('Date Client', function () {
-      var testClient = new dateClient(credentials, baseUri, clientOptions);
+      var testClient = new dateClient(baseUri, clientOptions);
       it('should get min and max date', function (done) {
         testClient.dateModel.getMinDate(function (error, result) {
           should.not.exist(error);
@@ -386,7 +386,7 @@ describe('nodejs', function () {
     });
     
     describe('DateTime Client', function () {
-      var testClient = new dateTimeClient(credentials, baseUri, clientOptions);
+      var testClient = new dateTimeClient(baseUri, clientOptions);
       it('should properly handle null value for DateTime', function (done) {
         testClient.datetime.getNull(function (error, result) {
           should.not.exist(result.body);
@@ -590,7 +590,7 @@ describe('nodejs', function () {
     describe('Array Client', function () {
       
       describe('for primitive types', function () {
-        var testClient = new arrayClient(credentials, baseUri, clientOptions);
+        var testClient = new arrayClient(baseUri, clientOptions);
         it('should get and put empty arrays', function (done) {
           testClient.arrayModel.getEmpty(function (error, result) {
             should.not.exist(error);
@@ -794,7 +794,7 @@ describe('nodejs', function () {
       });
       
       describe('for complex types', function () {
-        var testClient = new arrayClient(credentials, baseUri, clientOptions);
+        var testClient = new arrayClient(baseUri, clientOptions);
         it('should get null and empty complex types in array', function (done) {
           testClient.arrayModel.getComplexEmpty(function (error, result) {
             should.not.exist(error);
@@ -835,7 +835,7 @@ describe('nodejs', function () {
       });
       
       describe('for array of arrays', function () {
-        var testClient = new arrayClient(credentials, baseUri, clientOptions);
+        var testClient = new arrayClient(baseUri, clientOptions);
         it('should get null and empty array in an array', function (done) {
           testClient.arrayModel.getArrayNull(function (error, result) {
             should.not.exist(error);
@@ -876,7 +876,7 @@ describe('nodejs', function () {
       });
       
       describe('for array of dictionaries', function () {
-        var testClient = new arrayClient(credentials, baseUri, clientOptions);
+        var testClient = new arrayClient(baseUri, clientOptions);
         it('should get null and empty dictionary in an array', function (done) {
           testClient.arrayModel.getDictionaryNull(function (error, result) {
             should.not.exist(error);
@@ -920,7 +920,7 @@ describe('nodejs', function () {
     describe('Dictionary Client', function () {
       
       describe('for primitive types', function () {
-        var testClient = new dictionaryClient(credentials, baseUri, clientOptions);
+        var testClient = new dictionaryClient(baseUri, clientOptions);
         it('should get and put empty dictionaries', function (done) {
           testClient.dictionary.getEmpty(function (error, result) {
             should.not.exist(error);
@@ -1227,7 +1227,7 @@ describe('nodejs', function () {
       });
       
       describe('for complex types', function () {
-        var testClient = new dictionaryClient(credentials, baseUri, clientOptions);
+        var testClient = new dictionaryClient(baseUri, clientOptions);
         it('should get null and empty complex types in dictionary', function (done) {
           testClient.dictionary.getComplexEmpty(function (error, result) {
             should.not.exist(error);
@@ -1268,7 +1268,7 @@ describe('nodejs', function () {
       });
       
       describe('for dictionary of arrays', function () {
-        var testClient = new dictionaryClient(credentials, baseUri, clientOptions);
+        var testClient = new dictionaryClient(baseUri, clientOptions);
         it('should get null and empty array in dictionary', function (done) {
           testClient.dictionary.getArrayNull(function (error, result) {
             should.not.exist(error);
@@ -1309,7 +1309,7 @@ describe('nodejs', function () {
       });
       
       describe('for dictionary of dictionaries', function () {
-        var testClient = new dictionaryClient(credentials, baseUri, clientOptions);
+        var testClient = new dictionaryClient(baseUri, clientOptions);
         it('should get null and empty dictionary in dictionary', function (done) {
           testClient.dictionary.getDictionaryNull(function (error, result) {
             should.not.exist(error);
@@ -1351,7 +1351,8 @@ describe('nodejs', function () {
     });
     
     describe('Url Client', function () {
-      var testClient = new urlClient(credentials, baseUri, clientOptions);
+      var testClient = new urlClient('globalStringPath', baseUri, clientOptions);
+      testClient.globalStringQuery = 'globalStringQuery';
       it('should work when path has null, empty, and multi-byte byte values', function (done) {
         testClient.paths.byteNull(null, function (error, result) {
           should.exist(error);
@@ -1455,22 +1456,22 @@ describe('nodejs', function () {
       
       it('should work when use values in different portion of url', function (done) {
         testClient.pathItems.getAllWithValues('localStringPath', 'pathItemStringPath',
-                'globalStringPath', 'localStringQuery',
-                'pathItemStringQuery', 'globalStringQuery', function (error, result) {
+                'localStringQuery', 'pathItemStringQuery', function (error, result) {
           should.not.exist(error);
           done();
         });
       });
       
       it('should work when use null values in different portion of url', function (done) {
+        testClient.globalStringQuery = null;
         testClient.pathItems.getGlobalAndLocalQueryNull('localStringPath', 'pathItemStringPath',
-                'globalStringPath', null, 'pathItemStringQuery', null, function (error, result) {
+                null, 'pathItemStringQuery', function (error, result) {
           should.not.exist(error);
           testClient.pathItems.getGlobalQueryNull('localStringPath', 'pathItemStringPath',
-                                'globalStringPath', 'localStringQuery', 'pathItemStringQuery', null, function (error, result) {
+                                'localStringQuery', 'pathItemStringQuery', function (error, result) {
             should.not.exist(error);
-            testClient.pathItems.getLocalPathItemQueryNull('localStringPath', 'pathItemStringPath',
-                                                    'globalStringPath', null, null, 'globalStringQuery', function (error, result) {
+            testClient.globalStringQuery = 'globalStringQuery';
+            testClient.pathItems.getLocalPathItemQueryNull('localStringPath', 'pathItemStringPath', null, null, function (error, result) {
               should.not.exist(error);
               done();
             });
@@ -1629,7 +1630,7 @@ describe('nodejs', function () {
       testOptions.requestOptions = { jar: true };
       testOptions.filters = [new msRest.ExponentialRetryPolicyFilter(3, 0, 0, 0)];
       testOptions.noRetryPolicy = true
-      var testClient = new httpClient(credentials, baseUri, testOptions);
+      var testClient = new httpClient(baseUri, testOptions);
       it('should work for all http success status codes with different verbs', function (done) {
         testClient.httpSuccess.head200(function (error, result) {
           should.not.exist(error);

@@ -17,8 +17,7 @@ var models = require('./models');
  * Initializes a new instance of the AutoRestReportServiceForAzure class.
  * @constructor
  *
- * @param {ServiceClientCredentials} credentials - Credentials for
- * authenticating with the service.
+ * @param {ServiceClientCredentials} [credentials] Subscription credentials which uniquely identify Microsoft Azure subscription.
  *
  * @param {string} [baseUri] - The base URI of the service.
  *
@@ -32,17 +31,18 @@ var models = require('./models');
  * @param {bool} [options.noRetryPolicy] - If set to true, turn off default retry policy
  */
 function AutoRestReportServiceForAzure(credentials, baseUri, options) {
-  if (!credentials) {
-    throw new Error('credentials cannot be null.');
+  if (credentials === null || credentials === undefined) {
+    throw new Error('\'credentials\' cannot be null.');
   }
 
   if (!options) options = {};
+
   AutoRestReportServiceForAzure['super_'].call(this, credentials, options);
   this.baseUri = baseUri;
-  this.credentials = credentials;
   if (!this.baseUri) {
     this.baseUri = 'http://localhost';
   }
+  this.credentials = credentials;
 
   this._models = models;
 }
