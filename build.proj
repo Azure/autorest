@@ -180,17 +180,24 @@
     <PropertyGroup>
       <TestProjectDir>$(LibraryRoot)\AutoRest\Generators\AcceptanceTests\NugetPackageTest</TestProjectDir>
     </PropertyGroup>
+    
+    <!--install autorest and client runtime packages-->
+    <Exec Command="$(NuGetCommand) restore $(TestProjectDir)\NugetPackageTest.sln -source &quot;$(PackageOutputDir);https://www.nuget.org/api/v2/&quot;"/>
     <ItemGroup>
-      <TestDlls Include="$(TestProjectDir)\bin\$(Configuration)\NuGetPackageTest.dll" />
       <AutoRestExeFiles Include="$(TestProjectDir)\packages\autorest.*\lib\portable-net45+sl50+wp80+win\autorest.exe" />
     </ItemGroup>
     <PropertyGroup>
       <AutoRestExe>@(AutoRestExeFiles->'%(FullPath)')</AutoRestExe>
     </PropertyGroup>
     
+    <!--Invoke code-gen-->
     <Exec WorkingDirectory="$(TestProjectDir)" Command="$(AutoRestExe) -Modeler Swagger -CodeGenerator CSharp -OutputDirectory $(TestProjectDir)\Expected -Namespace &quot;Fixtures.Bodynumber&quot; -Input &quot;$(LibraryRoot)\AutoRest\Generators\AcceptanceTests\swagger\body-number.json&quot; -Header NONE"/>
-    <Exec Command="$(NuGetCommand) restore $(TestProjectDir)\NugetPackageTest.sln -source &quot;$(PackageOutputDir);https://www.nuget.org/api/v2/&quot;"/>
+    
+    <!--Build and run tests-->
     <MSBuild Projects="$(TestProjectDir)\NugetPackageTest.sln" Targets="rebuild" />
+    <ItemGroup>
+      <TestDlls Include="$(TestProjectDir)\bin\$(Configuration)\NuGetPackageTest.dll" />
+    </ItemGroup>    
     <xunit Assemblies="@(TestDlls)" />
   </Target>
   
