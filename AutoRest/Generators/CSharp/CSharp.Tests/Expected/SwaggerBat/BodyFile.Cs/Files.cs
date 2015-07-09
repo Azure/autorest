@@ -1,4 +1,4 @@
-namespace Fixtures.SwaggerBatBodyString
+namespace Fixtures.SwaggerBatBodyFile
 {
     using System;
     using System.Collections.Generic;
@@ -14,27 +14,26 @@ namespace Fixtures.SwaggerBatBodyString
     using Newtonsoft.Json;
     using Models;
 
-    internal partial class EnumModel : IServiceOperations<AutoRestSwaggerBATService>, IEnumModel
+    internal partial class Files : IServiceOperations<AutoRestSwaggerBATFileService>, IFiles
     {
         /// <summary>
-        /// Initializes a new instance of the EnumModel class.
+        /// Initializes a new instance of the Files class.
         /// </summary>
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        internal EnumModel(AutoRestSwaggerBATService client)
+        internal Files(AutoRestSwaggerBATFileService client)
         {
             this.Client = client;
         }
 
         /// <summary>
-        /// Gets a reference to the AutoRestSwaggerBATService
+        /// Gets a reference to the AutoRestSwaggerBATFileService
         /// </summary>
-        public AutoRestSwaggerBATService Client { get; private set; }
+        public AutoRestSwaggerBATFileService Client { get; private set; }
 
         /// <summary>
-        /// Get enum value 'red color' from enumeration of 'red color', 'green-color',
-        /// 'blue_color'.
+        /// Get file
         /// </summary>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -42,7 +41,7 @@ namespace Fixtures.SwaggerBatBodyString
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<Colors?>> GetNotExpandableWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<System.IO.Stream>> GetFileWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -52,11 +51,11 @@ namespace Fixtures.SwaggerBatBodyString
                 invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(invocationId, this, "GetNotExpandable", tracingParameters);
+                ServiceClientTracing.Enter(invocationId, this, "GetFile", tracingParameters);
             }
             // Construct URL
             string url = this.Client.BaseUri.AbsoluteUri + 
-                         "//string/enum/notExpandable";
+                         "//files/stream/nonempty";
             // trim all duplicate forward slashes in the url
             url = Regex.Replace(url, "([^:]/)/+", "$1");
             // Create HTTP transport objects
@@ -103,14 +102,13 @@ namespace Fixtures.SwaggerBatBodyString
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse<Colors?>();
+            var result = new HttpOperationResponse<System.IO.Stream>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Colors?>(responseContent, this.Client.DeserializationSettings);
+                result.Body = await httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
             }
             if (shouldTrace)
             {
@@ -120,25 +118,16 @@ namespace Fixtures.SwaggerBatBodyString
         }
 
         /// <summary>
-        /// Sends value 'red color' from enumeration of 'red color', 'green-color',
-        /// 'blue_color'
+        /// Get empty file
         /// </summary>
-        /// <param name='stringBody'>
-        /// Possible values for this parameter include: 'red color', 'green-color',
-        /// 'blue_color'
-        /// </param>    
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> PutNotExpandableWithHttpMessagesAsync(Colors? stringBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<System.IO.Stream>> GetEmptyFileWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (stringBody == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "stringBody");
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -146,18 +135,17 @@ namespace Fixtures.SwaggerBatBodyString
             {
                 invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("stringBody", stringBody);
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(invocationId, this, "PutNotExpandable", tracingParameters);
+                ServiceClientTracing.Enter(invocationId, this, "GetEmptyFile", tracingParameters);
             }
             // Construct URL
             string url = this.Client.BaseUri.AbsoluteUri + 
-                         "//string/enum/notExpandable";
+                         "//files/stream/empty";
             // trim all duplicate forward slashes in the url
             url = Regex.Replace(url, "([^:]/)/+", "$1");
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
-            httpRequest.Method = new HttpMethod("PUT");
+            httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             if (customHeaders != null)
@@ -168,10 +156,6 @@ namespace Fixtures.SwaggerBatBodyString
                 }
             }
 
-            // Serialize Request  
-            string requestContent = JsonConvert.SerializeObject(stringBody, this.Client.SerializationSettings);
-            httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
-            httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
             if (shouldTrace)
             {
@@ -203,9 +187,14 @@ namespace Fixtures.SwaggerBatBodyString
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse();
+            var result = new HttpOperationResponse<System.IO.Stream>();
             result.Request = httpRequest;
             result.Response = httpResponse;
+            // Deserialize Response
+            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
+            {
+                result.Body = await httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            }
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);

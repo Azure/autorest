@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Diagnostics;
 using System.Net;
@@ -17,6 +18,7 @@ using Fixtures.SwaggerBatBodyDate;
 using Fixtures.SwaggerBatBodyDateTime;
 using Fixtures.SwaggerBatBodyDictionary;
 using Fixtures.SwaggerBatBodyDictionary.Models;
+using Fixtures.SwaggerBatBodyFile;
 using Fixtures.SwaggerBatBodyInteger;
 using Fixtures.SwaggerBatBodyNumber;
 using Fixtures.SwaggerBatBodyString;
@@ -144,6 +146,31 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 Assert.Null(client.ByteModel.GetNull());
                 Assert.Empty(client.ByteModel.GetEmpty());
                 Assert.Throws<System.FormatException>(() => client.ByteModel.GetInvalid());
+            }
+        }
+
+        [Fact]
+        public void FileTests()
+        {
+            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+                @"Swagger\body-file.json", @"Expected\SwaggerBat\BodyFile.Cs");
+            using (var client = new AutoRestSwaggerBATFileService(Fixture.Uri))
+            {
+                var stream = client.Files.GetFile();
+                Assert.NotEqual(0, stream.Length);
+                byte[] buffer = new byte[16 * 1024];
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    int read;
+                    while ((read = stream.Read(buffer, 0, buffer.Length)) > 0)
+                    {
+                        ms.Write(buffer, 0, read);
+                    }
+                    Assert.Equal(File.ReadAllBytes("sample.png"), ms.ToArray());
+                }
+
+                var emptyStream = client.Files.GetEmptyFile();
+                Assert.Equal(0, emptyStream.Length);
             }
         }
 

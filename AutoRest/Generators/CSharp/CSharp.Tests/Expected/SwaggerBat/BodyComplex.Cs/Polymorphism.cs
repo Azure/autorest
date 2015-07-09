@@ -84,10 +84,10 @@ namespace Fixtures.SwaggerBatBodyComplex
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -108,6 +108,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Fish>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
@@ -210,10 +211,10 @@ namespace Fixtures.SwaggerBatBodyComplex
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -333,10 +334,10 @@ namespace Fixtures.SwaggerBatBodyComplex
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {

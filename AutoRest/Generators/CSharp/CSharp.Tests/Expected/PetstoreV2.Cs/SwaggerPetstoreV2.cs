@@ -180,7 +180,6 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "MethodNotAllowed") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
@@ -199,6 +198,7 @@ namespace Fixtures.PetstoreV2
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Pet>(responseContent, this.DeserializationSettings);
             }
             if (shouldTrace)
@@ -275,7 +275,6 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "BadRequest") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "NotFound") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "MethodNotAllowed")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
@@ -367,7 +366,6 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "BadRequest")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
@@ -386,6 +384,7 @@ namespace Fixtures.PetstoreV2
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<IList<Pet>>(responseContent, this.DeserializationSettings);
             }
             if (shouldTrace)
@@ -465,7 +464,6 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "BadRequest")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
@@ -484,6 +482,7 @@ namespace Fixtures.PetstoreV2
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<IList<Pet>>(responseContent, this.DeserializationSettings);
             }
             if (shouldTrace)
@@ -554,7 +553,6 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "BadRequest") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "NotFound")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
@@ -573,6 +571,7 @@ namespace Fixtures.PetstoreV2
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Pet>(responseContent, this.DeserializationSettings);
             }
             if (shouldTrace)
@@ -650,7 +649,6 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "MethodNotAllowed")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
@@ -740,7 +738,6 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "BadRequest")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
@@ -815,7 +812,6 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
@@ -834,6 +830,7 @@ namespace Fixtures.PetstoreV2
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<IDictionary<string, int?>>(responseContent, this.DeserializationSettings);
             }
             if (shouldTrace)
@@ -906,7 +903,6 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "BadRequest")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
@@ -925,6 +921,7 @@ namespace Fixtures.PetstoreV2
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Order>(responseContent, this.DeserializationSettings);
             }
             if (shouldTrace)
@@ -996,7 +993,6 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "BadRequest") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "NotFound")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
@@ -1015,6 +1011,7 @@ namespace Fixtures.PetstoreV2
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Order>(responseContent, this.DeserializationSettings);
             }
             if (shouldTrace)
@@ -1086,7 +1083,6 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "BadRequest") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "NotFound")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
@@ -1173,7 +1169,6 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(httpResponse.IsSuccessStatusCode))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
@@ -1259,7 +1254,6 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(httpResponse.IsSuccessStatusCode))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
@@ -1345,7 +1339,6 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(httpResponse.IsSuccessStatusCode))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
@@ -1448,7 +1441,6 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "BadRequest")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
@@ -1467,6 +1459,7 @@ namespace Fixtures.PetstoreV2
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<string>(responseContent, this.DeserializationSettings);
             }
             if (shouldTrace)
@@ -1527,7 +1520,6 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(httpResponse.IsSuccessStatusCode))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
@@ -1610,7 +1602,6 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "BadRequest") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "NotFound")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
@@ -1629,6 +1620,7 @@ namespace Fixtures.PetstoreV2
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<User>(responseContent, this.DeserializationSettings);
             }
             if (shouldTrace)
@@ -1711,7 +1703,6 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "BadRequest") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "NotFound")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
@@ -1795,7 +1786,6 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "BadRequest") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "NotFound")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));

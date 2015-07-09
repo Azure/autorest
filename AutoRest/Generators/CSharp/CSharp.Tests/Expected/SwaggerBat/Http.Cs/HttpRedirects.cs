@@ -84,10 +84,10 @@ namespace Fixtures.SwaggerBatHttp
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "MultipleChoices")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -164,10 +164,10 @@ namespace Fixtures.SwaggerBatHttp
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "MultipleChoices")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -188,6 +188,7 @@ namespace Fixtures.SwaggerBatHttp
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "MultipleChoices"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<IList<string>>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
@@ -249,10 +250,10 @@ namespace Fixtures.SwaggerBatHttp
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "MovedPermanently")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -329,10 +330,10 @@ namespace Fixtures.SwaggerBatHttp
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "MovedPermanently")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -419,10 +420,10 @@ namespace Fixtures.SwaggerBatHttp
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "MovedPermanently")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -499,10 +500,10 @@ namespace Fixtures.SwaggerBatHttp
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Redirect")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -579,10 +580,10 @@ namespace Fixtures.SwaggerBatHttp
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Redirect")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -669,10 +670,10 @@ namespace Fixtures.SwaggerBatHttp
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Redirect")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -759,10 +760,10 @@ namespace Fixtures.SwaggerBatHttp
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "SeeOther")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -839,10 +840,10 @@ namespace Fixtures.SwaggerBatHttp
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "TemporaryRedirect")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -919,10 +920,10 @@ namespace Fixtures.SwaggerBatHttp
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "TemporaryRedirect")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -1007,10 +1008,10 @@ namespace Fixtures.SwaggerBatHttp
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "TemporaryRedirect")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -1095,10 +1096,10 @@ namespace Fixtures.SwaggerBatHttp
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "TemporaryRedirect")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -1183,10 +1184,10 @@ namespace Fixtures.SwaggerBatHttp
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "TemporaryRedirect")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -1271,10 +1272,10 @@ namespace Fixtures.SwaggerBatHttp
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "TemporaryRedirect")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
