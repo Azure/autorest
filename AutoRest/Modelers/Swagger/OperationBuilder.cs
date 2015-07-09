@@ -204,19 +204,22 @@ namespace Microsoft.Rest.Modeler.Swagger
             Method method, List<Stack<IType>> types)
         {
             bool handled = false;
-            if (SwaggerOperationProducesOctetStream(_operation))
+            if (SwaggerOperationProducesNonNull(_operation))
             {
                 if (response.Schema != null)
                 {
-                    CompositeType serviceType = response.Schema.GetBuilder(_swaggerModeler)
-                        .BuildServiceType(response.Schema.Reference.StripDefinitionPath()) as CompositeType;
+                    IType serviceType = response.Schema.GetBuilder(_swaggerModeler)
+                        .BuildServiceType(response.Schema.Reference.StripDefinitionPath());
 
                     Debug.Assert(serviceType != null);
 
                     BuildMethodReturnTypeStack(serviceType, types);
 
-                    VerifyFirstPropertyIsByteArray(serviceType);
-                    method.Responses[responseStatusCode] = PrimaryType.Stream;
+                    if (serviceType is CompositeType)
+                    {
+                        VerifyFirstPropertyIsByteArray(serviceType as CompositeType);
+                    }
+                    method.Responses[responseStatusCode] = serviceType;
                     handled = true;
                 }
             }
@@ -331,10 +334,9 @@ namespace Microsoft.Rest.Modeler.Swagger
                    _effectiveProduces.Contains("application/json", StringComparer.OrdinalIgnoreCase);
         }
 
-        private bool SwaggerOperationProducesOctetStream(Operation operation)
+        private bool SwaggerOperationProducesNonNull(Operation operation)
         {
-            return _effectiveProduces != null &&
-                   _effectiveProduces.Contains("application/octet-stream", StringComparer.OrdinalIgnoreCase);
+            return _effectiveProduces != null;
         }
 
         private void EnsureUniqueMethodName(string methodName, string methodGroup)
