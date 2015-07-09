@@ -23,7 +23,7 @@ describe('nodejs', function () {
   describe('Swagger Required Optional BAT', function () {
 
     describe('Basic Required Optional Operations', function () {
-      var testClient = new reqOptClient(credentials, baseUri, clientOptions);
+      var testClient = new reqOptClient('', '', baseUri, clientOptions);
       
       it('should throw error on null path parameter', function (done) {
         testClient.implicit.getRequiredPath(null, function (error, result) {
@@ -240,17 +240,19 @@ describe('nodejs', function () {
       });
 
       it('should throw error on null global property in path', function (done) {
-        testClient.implicit.getRequiredGlobalPath(null, function (error, result) {
+        testClient.requiredGlobalPath = null;
+        testClient.implicit.getRequiredGlobalPath(function (error, result) {
           should.exist(error);
-          error.message.should.containEql('\'requiredGlobalPath\' cannot be null');
+          error.message.should.containEql('\'this.client.requiredGlobalPath\' cannot be null');
           done();
         });
       });
 
       it('should throw error on null global property in query', function (done) {
-        testClient.implicit.getRequiredGlobalQuery(null, function (error, result) {
+        testClient.requiredGlobalQuery = null;
+        testClient.implicit.getRequiredGlobalQuery(function (error, result) {
           should.exist(error);
-          error.message.should.containEql('\'requiredGlobalQuery\' cannot be null');
+          error.message.should.containEql('\'this.client.requiredGlobalQuery\' cannot be null');
           done();
         });
       });

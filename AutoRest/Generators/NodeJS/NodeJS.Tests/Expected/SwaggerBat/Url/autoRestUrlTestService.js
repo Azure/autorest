@@ -17,8 +17,7 @@ var operations = require('./operations');
  * Initializes a new instance of the AutoRestUrlTestService class.
  * @constructor
  *
- * @param {ServiceClientCredentials} credentials - Credentials for
- * authenticating with the service.
+ * @param {String} [globalStringPath] A string value 'globalItemStringPath' that appears in the path
  *
  * @param {string} [baseUri] - The base URI of the service.
  *
@@ -31,19 +30,19 @@ var operations = require('./operations');
  *
  * @param {bool} [options.noRetryPolicy] - If set to true, turn off default retry policy
  */
-function AutoRestUrlTestService(credentials, baseUri, options) {
-  if (!credentials) {
-    throw new Error('credentials cannot be null.');
+function AutoRestUrlTestService(globalStringPath, baseUri, options) {
+  if (globalStringPath === null || globalStringPath === undefined) {
+    throw new Error('\'globalStringPath\' cannot be null.');
   }
 
   if (!options) options = {};
 
-  AutoRestUrlTestService['super_'].call(this, credentials, options);
+  AutoRestUrlTestService['super_'].call(this, null, options);
   this.baseUri = baseUri;
-  this.credentials = credentials;
   if (!this.baseUri) {
     this.baseUri = 'http://localhost';
   }
+  this.globalStringPath = globalStringPath;
 
   this.paths = new operations.Paths(this);
   this.queries = new operations.Queries(this);

@@ -105,7 +105,6 @@ LROs.prototype.beginPut200Succeeded = function (product, options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/put/200/succeeded';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -209,7 +208,6 @@ LROs.prototype.get200Succeeded = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/put/200/succeeded';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -366,7 +364,6 @@ LROs.prototype.beginPut200SucceededNoState = function (product, options, callbac
   var requestUrl = this.client.baseUri + 
                    '//lro/put/200/succeeded/nostate';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -470,7 +467,6 @@ LROs.prototype.get200SucceededNoState = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/put/200/succeeded/nostate';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -629,7 +625,6 @@ LROs.prototype.beginPut202Retry200 = function (product, options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/put/202/retry/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -733,7 +728,6 @@ LROs.prototype.getPut202Retry200 = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/put/202/retry/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -894,7 +888,6 @@ LROs.prototype.beginPut201CreatingSucceeded200 = function (product, options, cal
   var requestUrl = this.client.baseUri + 
                    '//lro/put/201/creating/succeeded/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1014,7 +1007,6 @@ LROs.prototype.get201CreatingSucceeded200Polling = function (options, callback) 
   var requestUrl = this.client.baseUri + 
                    '//lro/put/201/creating/succeeded/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1175,7 +1167,6 @@ LROs.prototype.beginPut200UpdatingSucceeded204 = function (product, options, cal
   var requestUrl = this.client.baseUri + 
                    '//lro/put/200/updating/succeeded/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1278,7 +1269,6 @@ LROs.prototype.get200CreatingSucceeded200Poll = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/put/200/updating/succeeded/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1439,7 +1429,6 @@ LROs.prototype.beginPut201CreatingFailed200 = function (product, options, callba
   var requestUrl = this.client.baseUri + 
                    '//lro/put/201/created/failed/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1559,7 +1548,6 @@ LROs.prototype.get201CreatingFailed200Polling = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/put/201/created/failed/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1720,7 +1708,6 @@ LROs.prototype.beginPut200Acceptedcanceled200 = function (product, options, call
   var requestUrl = this.client.baseUri + 
                    '//lro/put/200/accepted/canceled/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1823,7 +1810,6 @@ LROs.prototype.get200Acceptedcanceled200Poll = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/put/200/accepted/canceled/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1982,7 +1968,6 @@ LROs.prototype.beginPutNoHeaderInRetry = function (product, options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/put/noheader/202/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -2086,7 +2071,6 @@ LROs.prototype.getPutNoHeaderInRetry = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/put/noheader/202/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -2245,7 +2229,6 @@ LROs.prototype.beginPutAsyncRetrySucceeded = function (product, options, callbac
   var requestUrl = this.client.baseUri + 
                    '//lro/putasync/retry/succeeded';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -2350,7 +2333,6 @@ LROs.prototype.getAsyncRetrySucceeded = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/putasync/retry/succeeded';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -2509,7 +2491,6 @@ LROs.prototype.beginPutAsyncNoRetrySucceeded = function (product, options, callb
   var requestUrl = this.client.baseUri + 
                    '//lro/putasync/noretry/succeeded';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -2614,7 +2595,6 @@ LROs.prototype.getAsyncNoRetrySucceeded = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/putasync/noretry/succeeded';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -2773,7 +2753,6 @@ LROs.prototype.beginPutAsyncRetryFailed = function (product, options, callback) 
   var requestUrl = this.client.baseUri + 
                    '//lro/putasync/retry/failed';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -2878,7 +2857,6 @@ LROs.prototype.getAsyncRetryFailed = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/putasync/retry/failed';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -3037,7 +3015,6 @@ LROs.prototype.beginPutAsyncNoRetrycanceled = function (product, options, callba
   var requestUrl = this.client.baseUri + 
                    '//lro/putasync/noretry/canceled';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -3142,7 +3119,6 @@ LROs.prototype.getAsyncNoRetrycanceled = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/putasync/noretry/canceled';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -3301,7 +3277,6 @@ LROs.prototype.beginPutAsyncNoHeaderInRetry = function (product, options, callba
   var requestUrl = this.client.baseUri + 
                    '//lro/putasync/noheader/201/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -3404,7 +3379,6 @@ LROs.prototype.getPutAsyncNoHeaderInRetry = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/putasync/noheader/201/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -3559,7 +3533,6 @@ LROs.prototype.beginPutNonResource = function (sku, options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/putnonresource/202/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -3662,7 +3635,6 @@ LROs.prototype.getNonResource = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/putnonresource/202/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -3817,7 +3789,6 @@ LROs.prototype.beginPutAsyncNonResource = function (sku, options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/putnonresourceasync/202/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -3920,7 +3891,6 @@ LROs.prototype.getAsyncNonResource = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/putnonresourceasync/202/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -4075,7 +4045,6 @@ LROs.prototype.beginPutSubResource = function (product, options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/putsubresource/202/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -4178,7 +4147,6 @@ LROs.prototype.getSubResource = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/putsubresource/202/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -4333,7 +4301,6 @@ LROs.prototype.beginPutAsyncSubResource = function (product, options, callback) 
   var requestUrl = this.client.baseUri + 
                    '//lro/putsubresourceasync/202/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -4436,7 +4403,6 @@ LROs.prototype.getAsyncSubResource = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/putsubresourceasync/202/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -4567,7 +4533,6 @@ LROs.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (option
   var requestUrl = this.client.baseUri + 
                    '//lro/delete/provisioning/202/accepted/200/succeeded';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -4714,7 +4679,6 @@ LROs.prototype.beginDeleteProvisioning202DeletingFailed200 = function (options, 
   var requestUrl = this.client.baseUri + 
                    '//lro/delete/provisioning/202/deleting/200/failed';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -4861,7 +4825,6 @@ LROs.prototype.beginDeleteProvisioning202Deletingcanceled200 = function (options
   var requestUrl = this.client.baseUri + 
                    '//lro/delete/provisioning/202/deleting/200/canceled';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -5002,7 +4965,6 @@ LROs.prototype.beginDelete204Succeeded = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/delete/204/succeeded';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -5115,7 +5077,6 @@ LROs.prototype.beginDelete202Retry200 = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/delete/202/retry/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -5244,7 +5205,6 @@ LROs.prototype.beginDelete202NoRetry204 = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/delete/202/noretry/204';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -5373,7 +5333,6 @@ LROs.prototype.beginDeleteNoHeaderInRetry = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/delete/noheader';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -5486,7 +5445,6 @@ LROs.prototype.beginDeleteAsyncNoHeaderInRetry = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/deleteasync/noheader/202/204';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -5599,7 +5557,6 @@ LROs.prototype.beginDeleteAsyncRetrySucceeded = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/deleteasync/retry/succeeded';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -5712,7 +5669,6 @@ LROs.prototype.beginDeleteAsyncNoRetrySucceeded = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/deleteasync/noretry/succeeded';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -5825,7 +5781,6 @@ LROs.prototype.beginDeleteAsyncRetryFailed = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/deleteasync/retry/failed';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -5938,7 +5893,6 @@ LROs.prototype.beginDeleteAsyncRetrycanceled = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/deleteasync/retry/canceled';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -6051,7 +6005,6 @@ LROs.prototype.beginPost200WithPayload = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/post/payload/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -6216,7 +6169,6 @@ LROs.prototype.beginPost202Retry200 = function (product, options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/post/202/retry/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -6350,7 +6302,6 @@ LROs.prototype.beginPost202NoRetry204 = function (product, options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/post/202/noretry/204';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -6502,7 +6453,6 @@ LROs.prototype.beginPostAsyncRetrySucceeded = function (product, options, callba
   var requestUrl = this.client.baseUri + 
                    '//lro/postasync/retry/succeeded';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -6638,7 +6588,6 @@ LROs.prototype.beginPostAsyncNoRetrySucceeded = function (product, options, call
   var requestUrl = this.client.baseUri + 
                    '//lro/postasync/noretry/succeeded';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -6774,7 +6723,6 @@ LROs.prototype.beginPostAsyncRetryFailed = function (product, options, callback)
   var requestUrl = this.client.baseUri + 
                    '//lro/postasync/retry/failed';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -6910,7 +6858,6 @@ LROs.prototype.beginPostAsyncRetrycanceled = function (product, options, callbac
   var requestUrl = this.client.baseUri + 
                    '//lro/postasync/retry/canceled';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }

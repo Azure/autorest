@@ -67,7 +67,6 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
                          "//azurespecials/subscriptionId/method/string/none/path/local/1234-5678-9012-3456/{subscriptionId}";
             url = url.Replace("{subscriptionId}", Uri.EscapeDataString(subscriptionId));
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -168,7 +167,6 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
                          "//azurespecials/subscriptionId/method/string/none/path/local/null/{subscriptionId}";
             url = url.Replace("{subscriptionId}", Uri.EscapeDataString(subscriptionId));
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -267,7 +265,6 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
                          "//azurespecials/subscriptionId/path/string/none/path/local/1234-5678-9012-3456/{subscriptionId}";
             url = url.Replace("{subscriptionId}", Uri.EscapeDataString(subscriptionId));
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -367,7 +364,6 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
                          "//azurespecials/subscriptionId/swagger/string/none/path/local/1234-5678-9012-3456/{subscriptionId}";
             url = url.Replace("{subscriptionId}", Uri.EscapeDataString(subscriptionId));
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);

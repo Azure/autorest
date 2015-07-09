@@ -18,8 +18,7 @@ var operations = require('./operations');
  * Initializes a new instance of the AutoRestPagingTestService class.
  * @constructor
  *
- * @param {ServiceClientCredentials} credentials - Credentials for
- * authenticating with the service.
+ * @param {ServiceClientCredentials} [credentials] Subscription credentials which uniquely identify Microsoft Azure subscription.
  *
  * @param {string} [baseUri] - The base URI of the service.
  *
@@ -33,19 +32,19 @@ var operations = require('./operations');
  * @param {bool} [options.noRetryPolicy] - If set to true, turn off default retry policy
  */
 function AutoRestPagingTestService(credentials, baseUri, options) {
-  if (!credentials) {
-    throw new Error('credentials cannot be null.');
+  if (credentials === null || credentials === undefined) {
+    throw new Error('\'credentials\' cannot be null.');
   }
 
   if (!options) options = {};
+
   AutoRestPagingTestService['super_'].call(this, credentials, options);
   this.baseUri = baseUri;
-  this.credentials = credentials;
   if (!this.baseUri) {
     this.baseUri = 'http://localhost';
   }
+  this.credentials = credentials;
 
-  this.apiVersion = '1.0.0';
   this.paging = new operations.Paging(this);
   this._models = models;
 }

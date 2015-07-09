@@ -37,11 +37,6 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
         /// <summary>
-        /// The Api Version.
-        /// </summary>
-        public string ApiVersion { get; private set; }
-
-        /// <summary>
         /// Subscription credentials which uniquely identify Microsoft Azure
         /// subscription.
         /// </summary>
@@ -158,7 +153,6 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
         private void Initialize()
         {
             this.BaseUri = new Uri("http://localhost");
-            this.ApiVersion = "1.0.0";
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,
@@ -208,7 +202,6 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             string url = this.BaseUri.AbsoluteUri + 
                          "//azure/resource-flatten/array";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -301,7 +294,6 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             string url = this.BaseUri.AbsoluteUri + 
                          "//azure/resource-flatten/array";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -399,7 +391,6 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             string url = this.BaseUri.AbsoluteUri + 
                          "//azure/resource-flatten/dictionary";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -492,7 +483,6 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             string url = this.BaseUri.AbsoluteUri + 
                          "//azure/resource-flatten/dictionary";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -594,7 +584,6 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             string url = this.BaseUri.AbsoluteUri + 
                          "//azure/resource-flatten/resourcecollection";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -687,7 +676,6 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             string url = this.BaseUri.AbsoluteUri + 
                          "//azure/resource-flatten/resourcecollection";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);

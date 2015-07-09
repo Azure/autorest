@@ -57,7 +57,17 @@ namespace Microsoft.Rest.Generator.CSharp
                 var scope = new ScopeProvider();
                 foreach (var parameter in method.Parameters)
                 {
-                    parameter.Name = scope.GetVariableName(parameter.Name);
+                    if (parameter.ClientProperty != null)
+                    {
+                        parameter.Name = string.Format(CultureInfo.InvariantCulture,
+                            "{0}.{1}", 
+                            method.Group == null ? "this" : "this.Client", 
+                            parameter.ClientProperty.Name);
+                    }
+                    else
+                    {
+                        parameter.Name = scope.GetVariableName(parameter.Name);   
+                    }
                 }
             }
         }

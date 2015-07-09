@@ -28,7 +28,6 @@
     <Compile Include="ParameterBuilder.cs" />
     <Compile Include="JsonConverters\PathLevelParameterConverter.cs" />
     <Compile Include="JsonConverters\SwaggerJsonConverter.cs" />
-    <Compile Include="JsonConverters\ParameterRefConverter.cs" />
     <Compile Include="JsonConverters\PathItemRefConverter.cs" />
     <Compile Include="JsonConverters\SchemaRequiredItemConverter.cs" />
     <Compile Include="SwaggerModeler.cs" />

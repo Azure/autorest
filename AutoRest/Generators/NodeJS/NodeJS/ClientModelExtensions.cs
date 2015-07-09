@@ -93,25 +93,26 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
         public static string ToString(this IType type, string reference)
         {
             var known = type as PrimaryType;
-            if (known == PrimaryType.String)
+            var enumType = type as EnumType;
+            if (enumType != null || known == PrimaryType.String)
             {
                 return reference;
             }
-            else if (known == PrimaryType.Date)
+            
+            if (known == PrimaryType.Date)
             {
                 return string.Format(CultureInfo.InvariantCulture, 
                     "msRest.serializeObject({0}).replace(/[Tt].*[Zz]/, '')", reference);
             }
-            else if (known == PrimaryType.DateTime
+            
+            if (known == PrimaryType.DateTime
                 || known == PrimaryType.ByteArray)
             {
                 return string.Format(CultureInfo.InvariantCulture, 
                     "msRest.serializeObject({0})", reference);
             }
-            else
-            {
-                return string.Format(CultureInfo.InvariantCulture, "{0}.toString()", reference);
-            }
+
+            return string.Format(CultureInfo.InvariantCulture, "{0}.toString()", reference);
         }
         
         /// <summary>

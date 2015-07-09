@@ -18,8 +18,9 @@ var operations = require('./operations');
  * Initializes a new instance of the AutoRestAzureSpecialParametersTestClient class.
  * @constructor
  *
- * @param {ServiceClientCredentials} credentials - Credentials for
- * authenticating with the service.
+ * @param {ServiceClientCredentials} [credentials] Subscription credentials which uniquely identify Microsoft Azure subscription.
+ *
+ * @param {String} [subscriptionId] The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'
  *
  * @param {string} [baseUri] - The base URI of the service.
  *
@@ -32,20 +33,27 @@ var operations = require('./operations');
  *
  * @param {bool} [options.noRetryPolicy] - If set to true, turn off default retry policy
  */
-function AutoRestAzureSpecialParametersTestClient(credentials, baseUri, options) {
-  if (!credentials) {
-    throw new Error('credentials cannot be null.');
+function AutoRestAzureSpecialParametersTestClient(credentials, subscriptionId, baseUri, options) {
+  if (credentials === null || credentials === undefined) {
+    throw new Error('\'credentials\' cannot be null.');
+  }
+  if (subscriptionId === null || subscriptionId === undefined) {
+    throw new Error('\'subscriptionId\' cannot be null.');
   }
 
   if (!options) options = {};
+
   AutoRestAzureSpecialParametersTestClient['super_'].call(this, credentials, options);
   this.baseUri = baseUri;
-  this.credentials = credentials;
   if (!this.baseUri) {
     this.baseUri = 'http://localhost';
   }
+  this.credentials = credentials;
+  this.subscriptionId = subscriptionId;
 
-  this.apiVersion = '2015-07-01-preview';
+  if(!this.apiVersion) {
+    this.apiVersion = '2015-07-01-preview';
+  }
   this.subscriptionInCredentials = new operations.SubscriptionInCredentials(this);
   this.subscriptionInMethod = new operations.SubscriptionInMethod(this);
   this.apiVersionDefault = new operations.ApiVersionDefault(this);

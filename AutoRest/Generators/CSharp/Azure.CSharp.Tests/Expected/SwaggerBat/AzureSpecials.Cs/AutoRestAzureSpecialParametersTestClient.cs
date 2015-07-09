@@ -37,15 +37,22 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
         /// <summary>
-        /// The Api Version.
-        /// </summary>
-        public string ApiVersion { get; private set; }
-
-        /// <summary>
         /// Subscription credentials which uniquely identify Microsoft Azure
         /// subscription.
         /// </summary>
         public SubscriptionCloudCredentials Credentials { get; set; }
+
+        /// <summary>
+        /// The subscription id, which appears in the path, always modeled in
+        /// credentials. The value is always '1234-5678-9012-3456'
+        /// </summary>
+        public string SubscriptionId { get; set; }
+
+        /// <summary>
+        /// The api version, which appears in the query, the value is always
+        /// '2015-07-01-preview'
+        /// </summary>
+        public string ApiVersion { get; private set; }
 
         /// <summary>
         /// The retry timeout for Long Running Operations.
@@ -122,17 +129,25 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// <param name='credentials'>
         /// Required. Subscription credentials which uniquely identify Microsoft Azure subscription.
         /// </param>
+        /// <param name='subscriptionId'>
+        /// Required. The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'
+        /// </param>
         /// <param name='handlers'>
         /// Optional. The set of delegating handlers to insert in the http
         /// client pipeline.
         /// </param>
-        public AutoRestAzureSpecialParametersTestClient(SubscriptionCloudCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        public AutoRestAzureSpecialParametersTestClient(SubscriptionCloudCredentials credentials, string subscriptionId, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (credentials == null)
             {
                 throw new ArgumentNullException("credentials");
             }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException("subscriptionId");
+            }
             this.Credentials = credentials;
+            this.SubscriptionId = subscriptionId;
         }
 
         /// <summary>
@@ -144,11 +159,14 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// <param name='credentials'>
         /// Required. Subscription credentials which uniquely identify Microsoft Azure subscription.
         /// </param>
+        /// <param name='subscriptionId'>
+        /// Required. The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'
+        /// </param>
         /// <param name='handlers'>
         /// Optional. The set of delegating handlers to insert in the http
         /// client pipeline.
         /// </param>
-        public AutoRestAzureSpecialParametersTestClient(Uri baseUri, SubscriptionCloudCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        public AutoRestAzureSpecialParametersTestClient(Uri baseUri, SubscriptionCloudCredentials credentials, string subscriptionId, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
             {
@@ -158,8 +176,13 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             {
                 throw new ArgumentNullException("credentials");
             }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException("subscriptionId");
+            }
             this.BaseUri = baseUri;
             this.Credentials = credentials;
+            this.SubscriptionId = subscriptionId;
         }
 
         /// <summary>

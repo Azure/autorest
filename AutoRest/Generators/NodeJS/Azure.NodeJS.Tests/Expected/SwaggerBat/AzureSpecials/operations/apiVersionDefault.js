@@ -43,6 +43,17 @@ ApiVersionDefault.prototype.getMethodGlobalValid = function (options, callback) 
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.apiVersion === null || this.client.apiVersion === undefined) {
+      throw new Error('\'this.client.apiVersion\' cannot be null');
+    }
+    if (this.client.apiVersion !== null && this.client.apiVersion !== undefined && typeof this.client.apiVersion !== 'string') {
+      throw new Error('this.client.apiVersion must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
@@ -126,6 +137,17 @@ ApiVersionDefault.prototype.getMethodGlobalNotProvidedValid = function (options,
   }
   if (!callback) {
     throw new Error('callback cannot be null.');
+  }
+  // Validate
+  try {
+    if (this.client.apiVersion === null || this.client.apiVersion === undefined) {
+      throw new Error('\'this.client.apiVersion\' cannot be null');
+    }
+    if (this.client.apiVersion !== null && this.client.apiVersion !== undefined && typeof this.client.apiVersion !== 'string') {
+      throw new Error('this.client.apiVersion must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
   }
 
   // Construct URL
@@ -211,6 +233,17 @@ ApiVersionDefault.prototype.getPathGlobalValid = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.apiVersion === null || this.client.apiVersion === undefined) {
+      throw new Error('\'this.client.apiVersion\' cannot be null');
+    }
+    if (this.client.apiVersion !== null && this.client.apiVersion !== undefined && typeof this.client.apiVersion !== 'string') {
+      throw new Error('this.client.apiVersion must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
@@ -294,6 +327,17 @@ ApiVersionDefault.prototype.getSwaggerGlobalValid = function (options, callback)
   }
   if (!callback) {
     throw new Error('callback cannot be null.');
+  }
+  // Validate
+  try {
+    if (this.client.apiVersion === null || this.client.apiVersion === undefined) {
+      throw new Error('\'this.client.apiVersion\' cannot be null');
+    }
+    if (this.client.apiVersion !== null && this.client.apiVersion !== undefined && typeof this.client.apiVersion !== 'string') {
+      throw new Error('this.client.apiVersion must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
   }
 
   // Construct URL

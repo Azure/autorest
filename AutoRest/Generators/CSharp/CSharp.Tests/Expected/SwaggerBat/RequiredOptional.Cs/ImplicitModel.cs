@@ -390,20 +390,17 @@ namespace Fixtures.SwaggerBatRequiredOptional
         /// <summary>
         /// Test implicitly required path parameter
         /// </summary>
-        /// <param name='requiredGlobalPath'>
-        /// number of items to skip
-        /// </param>    
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<Error>> GetRequiredGlobalPathWithHttpMessagesAsync(string requiredGlobalPath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<Error>> GetRequiredGlobalPathWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (requiredGlobalPath == null)
+            if (this.Client.RequiredGlobalPath == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "requiredGlobalPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.RequiredGlobalPath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -412,14 +409,13 @@ namespace Fixtures.SwaggerBatRequiredOptional
             {
                 invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("requiredGlobalPath", requiredGlobalPath);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(invocationId, this, "GetRequiredGlobalPath", tracingParameters);
             }
             // Construct URL
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//reqopt/global/required/path/{required-global-path}";
-            url = url.Replace("{requiredGlobalPath}", Uri.EscapeDataString(requiredGlobalPath));
+            url = url.Replace("{required-global-path}", Uri.EscapeDataString(this.Client.RequiredGlobalPath));
             // trim all duplicate forward slashes in the url
             url = Regex.Replace(url, "([^:]/)/+", "$1");
             // Create HTTP transport objects
@@ -480,20 +476,17 @@ namespace Fixtures.SwaggerBatRequiredOptional
         /// <summary>
         /// Test implicitly required query parameter
         /// </summary>
-        /// <param name='requiredGlobalQuery'>
-        /// number of items to skip
-        /// </param>    
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<Error>> GetRequiredGlobalQueryWithHttpMessagesAsync(string requiredGlobalQuery, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<Error>> GetRequiredGlobalQueryWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (requiredGlobalQuery == null)
+            if (this.Client.RequiredGlobalQuery == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "requiredGlobalQuery");
+                throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.RequiredGlobalQuery");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -502,7 +495,6 @@ namespace Fixtures.SwaggerBatRequiredOptional
             {
                 invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("requiredGlobalQuery", requiredGlobalQuery);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(invocationId, this, "GetRequiredGlobalQuery", tracingParameters);
             }
@@ -510,9 +502,9 @@ namespace Fixtures.SwaggerBatRequiredOptional
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//reqopt/global/required/query";
             List<string> queryParameters = new List<string>();
-            if (requiredGlobalQuery != null)
+            if (this.Client.RequiredGlobalQuery != null)
             {
-                queryParameters.Add(string.Format("required_global_query={0}", Uri.EscapeDataString(requiredGlobalQuery)));
+                queryParameters.Add(string.Format("required-global-query={0}", Uri.EscapeDataString(this.Client.RequiredGlobalQuery)));
             }
             if (queryParameters.Count > 0)
             {
@@ -578,16 +570,13 @@ namespace Fixtures.SwaggerBatRequiredOptional
         /// <summary>
         /// Test implicitly optional query parameter
         /// </summary>
-        /// <param name='optionalGlobalQuery'>
-        /// number of items to skip
-        /// </param>    
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<Error>> GetOptionalGlobalQueryWithHttpMessagesAsync(int? optionalGlobalQuery = default(int?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<Error>> GetOptionalGlobalQueryWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -596,7 +585,6 @@ namespace Fixtures.SwaggerBatRequiredOptional
             {
                 invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("optionalGlobalQuery", optionalGlobalQuery);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(invocationId, this, "GetOptionalGlobalQuery", tracingParameters);
             }
@@ -604,9 +592,9 @@ namespace Fixtures.SwaggerBatRequiredOptional
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//reqopt/global/optional/query";
             List<string> queryParameters = new List<string>();
-            if (optionalGlobalQuery != null)
+            if (this.Client.OptionalGlobalQuery != null)
             {
-                queryParameters.Add(string.Format("optional_global_query={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(optionalGlobalQuery, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("optional-global-query={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(this.Client.OptionalGlobalQuery, this.Client.SerializationSettings).Trim('"'))));
             }
             if (queryParameters.Count > 0)
             {

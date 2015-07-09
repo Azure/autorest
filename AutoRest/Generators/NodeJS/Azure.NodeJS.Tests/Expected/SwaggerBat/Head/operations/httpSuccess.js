@@ -48,7 +48,6 @@ HttpSuccess.prototype.head204 = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//http/success/204';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -133,7 +132,6 @@ HttpSuccess.prototype.head404 = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//http/success/404';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }

@@ -27,11 +27,11 @@
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  @if (Model.LocalParameters.Any())
+  @if (Model.ParameterTemplateModels.Any())
   {
   @:// Validate
   @:try {
-  @foreach (var parameter in Model.LocalParameters)
+  @foreach (var parameter in Model.ParameterTemplateModels)
   {
     if (parameter.IsRequired)
     {

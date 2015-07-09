@@ -64,41 +64,32 @@ namespace Fixtures.SwaggerBatRequiredOptional
         /// <summary>
         /// Test implicitly required path parameter
         /// </summary>
-        /// <param name='requiredGlobalPath'>
-        /// number of items to skip
-        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<Error>> GetRequiredGlobalPathWithHttpMessagesAsync(string requiredGlobalPath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<Error>> GetRequiredGlobalPathWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test implicitly required query parameter
         /// </summary>
-        /// <param name='requiredGlobalQuery'>
-        /// number of items to skip
-        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<Error>> GetRequiredGlobalQueryWithHttpMessagesAsync(string requiredGlobalQuery, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<Error>> GetRequiredGlobalQueryWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test implicitly optional query parameter
         /// </summary>
-        /// <param name='optionalGlobalQuery'>
-        /// number of items to skip
-        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<Error>> GetOptionalGlobalQueryWithHttpMessagesAsync(int? optionalGlobalQuery = default(int?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<Error>> GetOptionalGlobalQueryWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

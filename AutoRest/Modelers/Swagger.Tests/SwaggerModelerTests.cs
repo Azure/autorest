@@ -25,6 +25,9 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             var clientModel = modeler.Build();
 
             Assert.NotNull(clientModel);
+            Assert.Equal(2, clientModel.Properties.Count);
+            Assert.True(clientModel.Properties.Any(p => p.Name.Equals("subscriptionId", StringComparison.OrdinalIgnoreCase)));
+            Assert.True(clientModel.Properties.Any(p => p.Name.Equals("apiVersion", StringComparison.OrdinalIgnoreCase)));
             Assert.Equal("2014-04-01-preview", clientModel.ApiVersion);
             Assert.Equal("https://management.azure.com/", clientModel.BaseUrl);
             Assert.Equal("Some cool documentation.", clientModel.Documentation);
@@ -35,8 +38,10 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal(HttpMethod.Get, clientModel.Methods[0].HttpMethod);
             Assert.Equal(3, clientModel.Methods[0].Parameters.Count);
             Assert.Equal("subscriptionId", clientModel.Methods[0].Parameters[0].Name);
-            Assert.Equal("subscriptionId", clientModel.Methods[0].Parameters[0].SerializedName);
-            Assert.Equal("Subscription ID.", clientModel.Methods[0].Parameters[0].Documentation);
+            Assert.NotNull(clientModel.Methods[0].Parameters[0].ClientProperty);
+            Assert.Equal("resourceGroupName", clientModel.Methods[0].Parameters[1].Name);
+            Assert.Equal("resourceGroupName", clientModel.Methods[0].Parameters[1].SerializedName);
+            Assert.Equal("Resource Group ID.", clientModel.Methods[0].Parameters[1].Documentation);
             Assert.Equal(true, clientModel.Methods[0].Parameters[0].IsRequired);
             Assert.Equal(ParameterLocation.Path, clientModel.Methods[0].Parameters[0].Location);
             Assert.Equal("String", clientModel.Methods[0].Parameters[0].Type.ToString());
@@ -47,6 +52,11 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal("product_id", clientModel.ModelTypes[0].Properties[0].SerializedName);
             Assert.Null(clientModel.Methods[1].ReturnType);
             Assert.Null(clientModel.Methods[1].Responses[HttpStatusCode.NoContent]);
+            Assert.Equal(3, clientModel.Methods[1].Parameters.Count);
+            Assert.Equal("subscriptionId", clientModel.Methods[1].Parameters[0].Name);
+            Assert.Null(clientModel.Methods[1].Parameters[0].ClientProperty);
+            Assert.Equal("resourceGroupName", clientModel.Methods[1].Parameters[1].Name);
+            Assert.Equal("apiVersion", clientModel.Methods[1].Parameters[2].Name);
         }
 
         [Fact]

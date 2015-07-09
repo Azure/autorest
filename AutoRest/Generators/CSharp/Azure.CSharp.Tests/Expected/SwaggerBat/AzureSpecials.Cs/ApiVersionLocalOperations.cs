@@ -69,7 +69,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             List<string> queryParameters = new List<string>();
             if (apiVersion != null)
             {
-                queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(apiVersion, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(apiVersion)));
             }
             if (queryParameters.Count > 0)
             {
@@ -269,7 +269,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             List<string> queryParameters = new List<string>();
             if (apiVersion != null)
             {
-                queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(apiVersion, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(apiVersion)));
             }
             if (queryParameters.Count > 0)
             {
@@ -371,7 +371,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             List<string> queryParameters = new List<string>();
             if (apiVersion != null)
             {
-                queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(apiVersion, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(apiVersion)));
             }
             if (queryParameters.Count > 0)
             {

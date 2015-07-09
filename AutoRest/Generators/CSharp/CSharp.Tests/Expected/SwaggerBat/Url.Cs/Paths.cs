@@ -955,7 +955,7 @@ namespace Fixtures.SwaggerBatUrl
             // Construct URL
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//paths/string/unicode/{stringPath}";
-            url = url.Replace("{stringPath}", Uri.EscapeDataString(JsonConvert.SerializeObject(stringPath, this.Client.SerializationSettings).Trim('"')));
+            url = url.Replace("{stringPath}", Uri.EscapeDataString(stringPath));
             // trim all duplicate forward slashes in the url
             url = Regex.Replace(url, "([^:]/)/+", "$1");
             // Create HTTP transport objects
@@ -1045,7 +1045,7 @@ namespace Fixtures.SwaggerBatUrl
             // Construct URL
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}";
-            url = url.Replace("{stringPath}", Uri.EscapeDataString(JsonConvert.SerializeObject(stringPath, this.Client.SerializationSettings).Trim('"')));
+            url = url.Replace("{stringPath}", Uri.EscapeDataString(stringPath));
             // trim all duplicate forward slashes in the url
             url = Regex.Replace(url, "([^:]/)/+", "$1");
             // Create HTTP transport objects
@@ -1134,7 +1134,7 @@ namespace Fixtures.SwaggerBatUrl
             // Construct URL
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//paths/string/empty/{stringPath}";
-            url = url.Replace("{stringPath}", Uri.EscapeDataString(JsonConvert.SerializeObject(stringPath, this.Client.SerializationSettings).Trim('"')));
+            url = url.Replace("{stringPath}", Uri.EscapeDataString(stringPath));
             // trim all duplicate forward slashes in the url
             url = Regex.Replace(url, "([^:]/)/+", "$1");
             // Create HTTP transport objects

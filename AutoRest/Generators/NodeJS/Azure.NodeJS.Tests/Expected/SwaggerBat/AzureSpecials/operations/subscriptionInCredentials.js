@@ -44,13 +44,23 @@ SubscriptionInCredentials.prototype.postMethodGlobalValid = function (options, c
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.subscriptionId === null || this.client.subscriptionId === undefined) {
+      throw new Error('\'this.client.subscriptionId\' cannot be null');
+    }
+    if (this.client.subscriptionId !== null && this.client.subscriptionId !== undefined && typeof this.client.subscriptionId !== 'string') {
+      throw new Error('this.client.subscriptionId must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//azurespecials/subscriptionId/method/string/none/path/global/1234-5678-9012-3456/{subscriptionId}';
-  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.credentials.subscriptionId));
+  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -131,13 +141,23 @@ SubscriptionInCredentials.prototype.postMethodGlobalNull = function (options, ca
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.subscriptionId === null || this.client.subscriptionId === undefined) {
+      throw new Error('\'this.client.subscriptionId\' cannot be null');
+    }
+    if (this.client.subscriptionId !== null && this.client.subscriptionId !== undefined && typeof this.client.subscriptionId !== 'string') {
+      throw new Error('this.client.subscriptionId must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//azurespecials/subscriptionId/method/string/none/path/global/null/{subscriptionId}';
-  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.credentials.subscriptionId));
+  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -217,11 +237,28 @@ SubscriptionInCredentials.prototype.postMethodGlobalNotProvidedValid = function 
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.subscriptionId === null || this.client.subscriptionId === undefined) {
+      throw new Error('\'this.client.subscriptionId\' cannot be null');
+    }
+    if (this.client.subscriptionId !== null && this.client.subscriptionId !== undefined && typeof this.client.subscriptionId !== 'string') {
+      throw new Error('this.client.subscriptionId must be of type string.');
+    }
+    if (this.client.apiVersion === null || this.client.apiVersion === undefined) {
+      throw new Error('\'this.client.apiVersion\' cannot be null');
+    }
+    if (this.client.apiVersion !== null && this.client.apiVersion !== undefined && typeof this.client.apiVersion !== 'string') {
+      throw new Error('this.client.apiVersion must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//azurespecials/subscriptionId/method/string/none/path/globalNotProvided/1234-5678-9012-3456/{subscriptionId}';
-  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.credentials.subscriptionId));
+  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
@@ -303,13 +340,23 @@ SubscriptionInCredentials.prototype.postPathGlobalValid = function (options, cal
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.subscriptionId === null || this.client.subscriptionId === undefined) {
+      throw new Error('\'this.client.subscriptionId\' cannot be null');
+    }
+    if (this.client.subscriptionId !== null && this.client.subscriptionId !== undefined && typeof this.client.subscriptionId !== 'string') {
+      throw new Error('this.client.subscriptionId must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//azurespecials/subscriptionId/path/string/none/path/global/1234-5678-9012-3456/{subscriptionId}';
-  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.credentials.subscriptionId));
+  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -389,13 +436,23 @@ SubscriptionInCredentials.prototype.postSwaggerGlobalValid = function (options, 
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.subscriptionId === null || this.client.subscriptionId === undefined) {
+      throw new Error('\'this.client.subscriptionId\' cannot be null');
+    }
+    if (this.client.subscriptionId !== null && this.client.subscriptionId !== undefined && typeof this.client.subscriptionId !== 'string') {
+      throw new Error('this.client.subscriptionId must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//azurespecials/subscriptionId/swagger/string/none/path/global/1234-5678-9012-3456/{subscriptionId}';
-  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.credentials.subscriptionId));
+  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }

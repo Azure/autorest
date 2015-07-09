@@ -1885,7 +1885,7 @@ Queries.prototype.enumValid = function (enumQuery, options, callback) {
                    '//queries/enum/green%20color';
   var queryParameters = [];
   if (enumQuery !== null && enumQuery !== undefined) {
-    queryParameters.push('enumQuery=' + encodeURIComponent(enumQuery.toString()));
+    queryParameters.push('enumQuery=' + encodeURIComponent(enumQuery));
   }
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
@@ -1984,7 +1984,7 @@ Queries.prototype.enumNull = function (enumQuery, options, callback) {
                    '//queries/enum/null';
   var queryParameters = [];
   if (enumQuery !== null && enumQuery !== undefined) {
-    queryParameters.push('enumQuery=' + encodeURIComponent(enumQuery.toString()));
+    queryParameters.push('enumQuery=' + encodeURIComponent(enumQuery));
   }
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');

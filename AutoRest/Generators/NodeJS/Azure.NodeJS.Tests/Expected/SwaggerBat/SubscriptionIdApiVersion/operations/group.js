@@ -47,11 +47,23 @@ Group.prototype.getSampleResourceGroup = function (resourceGroupName, options, c
   }
   // Validate
   try {
+    if (this.client.subscriptionId === null || this.client.subscriptionId === undefined) {
+      throw new Error('\'this.client.subscriptionId\' cannot be null');
+    }
+    if (this.client.subscriptionId !== null && this.client.subscriptionId !== undefined && typeof this.client.subscriptionId !== 'string') {
+      throw new Error('this.client.subscriptionId must be of type string.');
+    }
     if (resourceGroupName === null || resourceGroupName === undefined) {
       throw new Error('\'resourceGroupName\' cannot be null');
     }
     if (resourceGroupName !== null && resourceGroupName !== undefined && typeof resourceGroupName !== 'string') {
       throw new Error('resourceGroupName must be of type string.');
+    }
+    if (this.client.apiVersion === null || this.client.apiVersion === undefined) {
+      throw new Error('\'this.client.apiVersion\' cannot be null');
+    }
+    if (this.client.apiVersion !== null && this.client.apiVersion !== undefined && typeof this.client.apiVersion !== 'string') {
+      throw new Error('this.client.apiVersion must be of type string.');
     }
   } catch (error) {
     return callback(error);
@@ -60,7 +72,7 @@ Group.prototype.getSampleResourceGroup = function (resourceGroupName, options, c
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}';
-  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.credentials.subscriptionId));
+  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));

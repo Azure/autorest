@@ -62,7 +62,6 @@ SkipUrlEncoding.prototype.getMethodPathValid = function (unencodedPathParam, opt
                    '//azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}';
   requestUrl = requestUrl.replace('{unencodedPathParam}', unencodedPathParam);
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -160,7 +159,6 @@ SkipUrlEncoding.prototype.getPathPathValid = function (unencodedPathParam, optio
                    '//azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}';
   requestUrl = requestUrl.replace('{unencodedPathParam}', unencodedPathParam);
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -258,7 +256,6 @@ SkipUrlEncoding.prototype.getSwaggerPathValid = function (unencodedPathParam, op
                    '//azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}';
   requestUrl = requestUrl.replace('{unencodedPathParam}', unencodedPathParam);
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -357,7 +354,6 @@ SkipUrlEncoding.prototype.getMethodQueryValid = function (q1, options, callback)
                    '//azurespecials/skipUrlEncoding/method/query/valid';
   var queryParameters = [];
   queryParameters.push('q1=' + q1);
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -454,7 +450,6 @@ SkipUrlEncoding.prototype.getMethodQueryNull = function (q1, options, callback) 
   if (q1 !== null && q1 !== undefined) {
     queryParameters.push('q1=' + q1);
   }
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -553,7 +548,6 @@ SkipUrlEncoding.prototype.getPathQueryValid = function (q1, options, callback) {
                    '//azurespecials/skipUrlEncoding/path/query/valid';
   var queryParameters = [];
   queryParameters.push('q1=' + q1);
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -651,7 +645,6 @@ SkipUrlEncoding.prototype.getSwaggerQueryValid = function (q1, options, callback
   if (q1 !== null && q1 !== undefined) {
     queryParameters.push('q1=' + q1);
   }
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }

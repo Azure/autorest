@@ -66,7 +66,6 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
                          "//azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}";
             url = url.Replace("{unencodedPathParam}", unencodedPathParam);
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -164,7 +163,6 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
                          "//azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}";
             url = url.Replace("{unencodedPathParam}", unencodedPathParam);
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -261,9 +259,8 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             // Construct URL
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}";
-            url = url.Replace("{unencodedPathParam}", JsonConvert.SerializeObject(unencodedPathParam, this.Client.SerializationSettings).Trim('"'));
+            url = url.Replace("{unencodedPathParam}", unencodedPathParam);
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -365,7 +362,6 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             {
                 queryParameters.Add(string.Format("q1={0}", q1));
             }
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -462,7 +458,6 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             {
                 queryParameters.Add(string.Format("q1={0}", q1));
             }
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -564,7 +559,6 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             {
                 queryParameters.Add(string.Format("q1={0}", q1));
             }
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -662,9 +656,8 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             List<string> queryParameters = new List<string>();
             if (q1 != null)
             {
-                queryParameters.Add(string.Format("q1={0}", JsonConvert.SerializeObject(q1, this.Client.SerializationSettings).Trim('"')));
+                queryParameters.Add(string.Format("q1={0}", q1));
             }
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);

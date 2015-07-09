@@ -121,7 +121,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             get
             {
                 return ParameterTemplateModels.Where(
-                    p => p != null && p.GlobalProperty == null && !string.IsNullOrWhiteSpace(p.Name))
+                    p => p != null && p.ClientProperty == null && !string.IsNullOrWhiteSpace(p.Name))
                     .OrderBy(item => !item.IsRequired);
             }
         }
@@ -464,7 +464,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                 {
                     pathReplaceFormat = "{0} = {0}.replace('{{{1}}}', {2});";
                 }
-                builder.AppendLine(pathReplaceFormat, variableName, pathParameter.Name,
+                builder.AppendLine(pathReplaceFormat, variableName, pathParameter.SerializedName,
                     pathParameter.Type.ToString(pathParameter.Name));
             }
         }

@@ -21,7 +21,7 @@
 /// </param>
 public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
-    @foreach (var parameter in Model.LocalParameters)
+    @foreach (var parameter in Model.ParameterTemplateModels)
     {
         if (parameter.IsRequired)
         {

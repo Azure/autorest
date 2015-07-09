@@ -84,7 +84,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/nonretryerror/put/400";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -188,7 +187,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/nonretryerror/put/400";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -312,7 +310,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/nonretryerror/put/201/creating/400";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -416,7 +413,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/nonretryerror/put/201/creating/400";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -542,7 +538,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/nonretryerror/putasync/retry/400";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -641,7 +636,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/nonretryerror/putasync/retry/400";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -753,7 +747,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/nonretryerror/delete/400";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -860,7 +853,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/nonretryerror/delete/202/retry/400";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -971,7 +963,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/nonretryerror/deleteasync/retry/400";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -1085,7 +1076,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/nonretryerror/post/400";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -1203,7 +1193,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/nonretryerror/post/202/retry/400";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -1325,7 +1314,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/nonretryerror/postasync/retry/400";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -1448,7 +1436,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/put/201/noprovisioningstatepayload";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -1552,7 +1539,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/put/201/noprovisioningstatepayload";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -1678,7 +1664,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/putasync/retry/nostatus";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -1779,7 +1764,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/putasync/retry/nostatus";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -1905,7 +1889,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/putasync/retry/nostatuspayload";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -2006,7 +1989,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/putasync/retry/nostatuspayload";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -2120,7 +2102,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/delete/204/nolocation";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -2231,7 +2212,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/deleteasync/retry/nostatus";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -2347,7 +2327,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/post/202/nolocation";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -2469,7 +2448,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/postasync/retry/nopayload";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -2592,7 +2570,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/put/200/invalidjson";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -2691,7 +2668,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/put/200/invalidjson";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -2817,7 +2793,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/putasync/retry/invalidheader";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -2916,7 +2891,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/putasync/retry/invalidheader";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -3042,7 +3016,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/putasync/retry/invalidjsonpolling";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -3143,7 +3116,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/putasync/retry/invalidjsonpolling";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -3257,7 +3229,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/delete/202/retry/invalidheader";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -3366,7 +3337,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/deleteasync/retry/invalidheader";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -3477,7 +3447,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/deleteasync/retry/invalidjsonpolling";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -3593,7 +3562,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/post/202/retry/invalidheader";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -3715,7 +3683,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/postasync/retry/invalidheader";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -3837,7 +3804,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/postasync/retry/invalidjsonpolling";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);

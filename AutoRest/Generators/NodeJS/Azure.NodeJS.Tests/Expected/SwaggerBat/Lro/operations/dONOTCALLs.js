@@ -49,7 +49,6 @@ DONOTCALLs.prototype.getProvisioning202Accepted200Succeeded = function (options,
   var requestUrl = this.client.baseUri + 
                    '//lro/delete/provisioning/202/accepted/200/succeeded';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -150,7 +149,6 @@ DONOTCALLs.prototype.getProvisioning202Deleting200Failed = function (options, ca
   var requestUrl = this.client.baseUri + 
                    '//lro/delete/provisioning/202/deleting/200/failed';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -251,7 +249,6 @@ DONOTCALLs.prototype.getProvisioning202Deleting200canceled = function (options, 
   var requestUrl = this.client.baseUri + 
                    '//lro/delete/provisioning/202/deleting/200/canceled';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -352,7 +349,6 @@ DONOTCALLs.prototype.getDelete202Retry200 = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/delete/202/retry/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -437,7 +433,6 @@ DONOTCALLs.prototype.get202NoRetry204 = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/delete/202/noretry/204';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -522,7 +517,6 @@ DONOTCALLs.prototype.post202Retry200Polling = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/post/202/retry/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -623,7 +617,6 @@ DONOTCALLs.prototype.post202NoRetry204Polling = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/post/202/noretry/204';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -708,7 +701,6 @@ DONOTCALLs.prototype.getRetryProvisioning202Accepted200Succeeded = function (opt
   var requestUrl = this.client.baseUri + 
                    '//lro/retryerror/delete/provisioning/202/accepted/200/succeeded';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -809,7 +801,6 @@ DONOTCALLs.prototype.getRetry202Retry200 = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/retryerror/delete/202/retry/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -894,7 +885,6 @@ DONOTCALLs.prototype.postRetry202Retry200Polling = function (options, callback) 
   var requestUrl = this.client.baseUri + 
                    '//lro/retryerror/post/202/retry/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -994,7 +984,6 @@ DONOTCALLs.prototype.getNonRetry400 = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/nonretryerror/delete/400';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1078,7 +1067,6 @@ DONOTCALLs.prototype.getRetry202NonRetry400 = function (options, callback) {
   var requestUrl = this.client.baseUri + 
                    '//lro/nonretryerror/delete/202/retry/400';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1163,7 +1151,6 @@ DONOTCALLs.prototype.postRetry202Retry400Polling = function (options, callback) 
   var requestUrl = this.client.baseUri + 
                    '//lro/nonretryerror/post/400';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1263,7 +1250,6 @@ DONOTCALLs.prototype.postRetry202NonRetry400Polling = function (options, callbac
   var requestUrl = this.client.baseUri + 
                    '//lro/nonretryerror/post/202/retry/400';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1364,7 +1350,6 @@ DONOTCALLs.prototype.post202Retry200PollingCustomHeader = function (options, cal
   var requestUrl = this.client.baseUri + 
                    '//lro/customheader/post/202/retry/200';
   var queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }

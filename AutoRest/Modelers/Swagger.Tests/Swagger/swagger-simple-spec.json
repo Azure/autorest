@@ -20,11 +20,7 @@
         "description": "The Products endpoint returns information about the Uber products offered at a given location. The response includes the display name and other details about each product, and lists the products in the proper display order.",
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "Subscription ID.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SubscriptionIdParamterer"
           },
           {
             "name": "resourceGroupName",
@@ -33,12 +29,8 @@
             "required": true,
             "type": "string"
           },
-          {
-            "name": "apiVersion",
-            "in": "path",
-            "description": "API ID.",
-            "required": true,
-            "type": "string"
+          { 
+            "$ref" :  "ApiVersionParameter"
           }
         ],
         "tags": [
@@ -91,7 +83,7 @@
         ],
         "responses": {
           "204": {
-            "description": "A list of caches",
+            "description": "A list of caches"
           },
           "default": {
             "description": "Unexpected error",
@@ -141,6 +133,22 @@
           "type": "string"
         }
       }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParamterer": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "ApiVersionParameter": {
+      "name": "apiVersion",
+      "in": "path",
+      "description": "API ID.",
+      "required": true,
+      "type": "string"
     }
   }
 }

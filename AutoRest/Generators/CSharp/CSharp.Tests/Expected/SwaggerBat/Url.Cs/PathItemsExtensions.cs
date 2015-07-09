@@ -23,24 +23,18 @@ namespace Fixtures.SwaggerBatUrl
             /// <param name='localStringPath'>
             /// should contain value 'localStringPath'
             /// </param>
-            /// <param name='localStringQuery'>
-            /// should contain value 'localStringQuery'
-            /// </param>
             /// <param name='pathItemStringPath'>
             /// A string value 'pathItemStringPath' that appears in the path
+            /// </param>
+            /// <param name='localStringQuery'>
+            /// should contain value 'localStringQuery'
             /// </param>
             /// <param name='pathItemStringQuery'>
             /// A string value 'pathItemStringQuery' that appears as a query parameter
             /// </param>
-            /// <param name='globalStringPath'>
-            /// A string value 'globalItemStringPath' that appears in the path
-            /// </param>
-            /// <param name='globalStringQuery'>
-            /// should contain value null
-            /// </param>
-            public static void GetAllWithValues(this IPathItems operations, string localStringPath, string pathItemStringPath, string globalStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), string globalStringQuery = default(string))
+            public static void GetAllWithValues(this IPathItems operations, string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string))
             {
-                Task.Factory.StartNew(s => ((IPathItems)s).GetAllWithValuesAsync(localStringPath, pathItemStringPath, globalStringPath, localStringQuery, pathItemStringQuery, globalStringQuery), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IPathItems)s).GetAllWithValuesAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -56,27 +50,21 @@ namespace Fixtures.SwaggerBatUrl
             /// <param name='localStringPath'>
             /// should contain value 'localStringPath'
             /// </param>
-            /// <param name='localStringQuery'>
-            /// should contain value 'localStringQuery'
-            /// </param>
             /// <param name='pathItemStringPath'>
             /// A string value 'pathItemStringPath' that appears in the path
+            /// </param>
+            /// <param name='localStringQuery'>
+            /// should contain value 'localStringQuery'
             /// </param>
             /// <param name='pathItemStringQuery'>
             /// A string value 'pathItemStringQuery' that appears as a query parameter
             /// </param>
-            /// <param name='globalStringPath'>
-            /// A string value 'globalItemStringPath' that appears in the path
-            /// </param>
-            /// <param name='globalStringQuery'>
-            /// should contain value null
-            /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
             /// </param>
-            public static async Task GetAllWithValuesAsync( this IPathItems operations, string localStringPath, string pathItemStringPath, string globalStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), string globalStringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetAllWithValuesAsync( this IPathItems operations, string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetAllWithValuesWithHttpMessagesAsync(localStringPath, pathItemStringPath, globalStringPath, localStringQuery, pathItemStringQuery, globalStringQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.GetAllWithValuesWithHttpMessagesAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -92,24 +80,18 @@ namespace Fixtures.SwaggerBatUrl
             /// <param name='localStringPath'>
             /// should contain value 'localStringPath'
             /// </param>
-            /// <param name='localStringQuery'>
-            /// should contain value 'localStringQuery'
-            /// </param>
             /// <param name='pathItemStringPath'>
             /// A string value 'pathItemStringPath' that appears in the path
+            /// </param>
+            /// <param name='localStringQuery'>
+            /// should contain value 'localStringQuery'
             /// </param>
             /// <param name='pathItemStringQuery'>
             /// A string value 'pathItemStringQuery' that appears as a query parameter
             /// </param>
-            /// <param name='globalStringPath'>
-            /// A string value 'globalItemStringPath' that appears in the path
-            /// </param>
-            /// <param name='globalStringQuery'>
-            /// should contain value null
-            /// </param>
-            public static void GetGlobalQueryNull(this IPathItems operations, string localStringPath, string pathItemStringPath, string globalStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), string globalStringQuery = default(string))
+            public static void GetGlobalQueryNull(this IPathItems operations, string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string))
             {
-                Task.Factory.StartNew(s => ((IPathItems)s).GetGlobalQueryNullAsync(localStringPath, pathItemStringPath, globalStringPath, localStringQuery, pathItemStringQuery, globalStringQuery), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IPathItems)s).GetGlobalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -125,27 +107,21 @@ namespace Fixtures.SwaggerBatUrl
             /// <param name='localStringPath'>
             /// should contain value 'localStringPath'
             /// </param>
-            /// <param name='localStringQuery'>
-            /// should contain value 'localStringQuery'
-            /// </param>
             /// <param name='pathItemStringPath'>
             /// A string value 'pathItemStringPath' that appears in the path
+            /// </param>
+            /// <param name='localStringQuery'>
+            /// should contain value 'localStringQuery'
             /// </param>
             /// <param name='pathItemStringQuery'>
             /// A string value 'pathItemStringQuery' that appears as a query parameter
             /// </param>
-            /// <param name='globalStringPath'>
-            /// A string value 'globalItemStringPath' that appears in the path
-            /// </param>
-            /// <param name='globalStringQuery'>
-            /// should contain value null
-            /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
             /// </param>
-            public static async Task GetGlobalQueryNullAsync( this IPathItems operations, string localStringPath, string pathItemStringPath, string globalStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), string globalStringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetGlobalQueryNullAsync( this IPathItems operations, string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetGlobalQueryNullWithHttpMessagesAsync(localStringPath, pathItemStringPath, globalStringPath, localStringQuery, pathItemStringQuery, globalStringQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.GetGlobalQueryNullWithHttpMessagesAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -160,24 +136,18 @@ namespace Fixtures.SwaggerBatUrl
             /// <param name='localStringPath'>
             /// should contain value 'localStringPath'
             /// </param>
-            /// <param name='localStringQuery'>
-            /// should contain null value
-            /// </param>
             /// <param name='pathItemStringPath'>
             /// A string value 'pathItemStringPath' that appears in the path
+            /// </param>
+            /// <param name='localStringQuery'>
+            /// should contain null value
             /// </param>
             /// <param name='pathItemStringQuery'>
             /// A string value 'pathItemStringQuery' that appears as a query parameter
             /// </param>
-            /// <param name='globalStringPath'>
-            /// A string value 'globalItemStringPath' that appears in the path
-            /// </param>
-            /// <param name='globalStringQuery'>
-            /// should contain value null
-            /// </param>
-            public static void GetGlobalAndLocalQueryNull(this IPathItems operations, string localStringPath, string pathItemStringPath, string globalStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), string globalStringQuery = default(string))
+            public static void GetGlobalAndLocalQueryNull(this IPathItems operations, string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string))
             {
-                Task.Factory.StartNew(s => ((IPathItems)s).GetGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath, globalStringPath, localStringQuery, pathItemStringQuery, globalStringQuery), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IPathItems)s).GetGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -192,27 +162,21 @@ namespace Fixtures.SwaggerBatUrl
             /// <param name='localStringPath'>
             /// should contain value 'localStringPath'
             /// </param>
-            /// <param name='localStringQuery'>
-            /// should contain null value
-            /// </param>
             /// <param name='pathItemStringPath'>
             /// A string value 'pathItemStringPath' that appears in the path
+            /// </param>
+            /// <param name='localStringQuery'>
+            /// should contain null value
             /// </param>
             /// <param name='pathItemStringQuery'>
             /// A string value 'pathItemStringQuery' that appears as a query parameter
             /// </param>
-            /// <param name='globalStringPath'>
-            /// A string value 'globalItemStringPath' that appears in the path
-            /// </param>
-            /// <param name='globalStringQuery'>
-            /// should contain value null
-            /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
             /// </param>
-            public static async Task GetGlobalAndLocalQueryNullAsync( this IPathItems operations, string localStringPath, string pathItemStringPath, string globalStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), string globalStringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetGlobalAndLocalQueryNullAsync( this IPathItems operations, string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetGlobalAndLocalQueryNullWithHttpMessagesAsync(localStringPath, pathItemStringPath, globalStringPath, localStringQuery, pathItemStringQuery, globalStringQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.GetGlobalAndLocalQueryNullWithHttpMessagesAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -227,24 +191,18 @@ namespace Fixtures.SwaggerBatUrl
             /// <param name='localStringPath'>
             /// should contain value 'localStringPath'
             /// </param>
-            /// <param name='localStringQuery'>
-            /// should contain value null
-            /// </param>
             /// <param name='pathItemStringPath'>
             /// A string value 'pathItemStringPath' that appears in the path
+            /// </param>
+            /// <param name='localStringQuery'>
+            /// should contain value null
             /// </param>
             /// <param name='pathItemStringQuery'>
             /// should contain value null
             /// </param>
-            /// <param name='globalStringPath'>
-            /// A string value 'globalItemStringPath' that appears in the path
-            /// </param>
-            /// <param name='globalStringQuery'>
-            /// should contain value null
-            /// </param>
-            public static void GetLocalPathItemQueryNull(this IPathItems operations, string localStringPath, string pathItemStringPath, string globalStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), string globalStringQuery = default(string))
+            public static void GetLocalPathItemQueryNull(this IPathItems operations, string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string))
             {
-                Task.Factory.StartNew(s => ((IPathItems)s).GetLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath, globalStringPath, localStringQuery, pathItemStringQuery, globalStringQuery), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IPathItems)s).GetLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -259,27 +217,21 @@ namespace Fixtures.SwaggerBatUrl
             /// <param name='localStringPath'>
             /// should contain value 'localStringPath'
             /// </param>
-            /// <param name='localStringQuery'>
-            /// should contain value null
-            /// </param>
             /// <param name='pathItemStringPath'>
             /// A string value 'pathItemStringPath' that appears in the path
             /// </param>
-            /// <param name='pathItemStringQuery'>
+            /// <param name='localStringQuery'>
             /// should contain value null
             /// </param>
-            /// <param name='globalStringPath'>
-            /// A string value 'globalItemStringPath' that appears in the path
-            /// </param>
-            /// <param name='globalStringQuery'>
+            /// <param name='pathItemStringQuery'>
             /// should contain value null
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
             /// </param>
-            public static async Task GetLocalPathItemQueryNullAsync( this IPathItems operations, string localStringPath, string pathItemStringPath, string globalStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), string globalStringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetLocalPathItemQueryNullAsync( this IPathItems operations, string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetLocalPathItemQueryNullWithHttpMessagesAsync(localStringPath, pathItemStringPath, globalStringPath, localStringQuery, pathItemStringQuery, globalStringQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.GetLocalPathItemQueryNullWithHttpMessagesAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
     }

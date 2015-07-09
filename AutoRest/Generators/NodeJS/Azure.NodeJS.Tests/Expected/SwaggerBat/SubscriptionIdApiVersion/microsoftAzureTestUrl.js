@@ -18,8 +18,9 @@ var operations = require('./operations');
  * Initializes a new instance of the MicrosoftAzureTestUrl class.
  * @constructor
  *
- * @param {ServiceClientCredentials} credentials - Credentials for
- * authenticating with the service.
+ * @param {ServiceClientCredentials} [credentials] Subscription credentials which uniquely identify Microsoft Azure subscription.
+ *
+ * @param {String} [subscriptionId] Subscription Id.
  *
  * @param {string} [baseUri] - The base URI of the service.
  *
@@ -32,20 +33,27 @@ var operations = require('./operations');
  *
  * @param {bool} [options.noRetryPolicy] - If set to true, turn off default retry policy
  */
-function MicrosoftAzureTestUrl(credentials, baseUri, options) {
-  if (!credentials) {
-    throw new Error('credentials cannot be null.');
+function MicrosoftAzureTestUrl(credentials, subscriptionId, baseUri, options) {
+  if (credentials === null || credentials === undefined) {
+    throw new Error('\'credentials\' cannot be null.');
+  }
+  if (subscriptionId === null || subscriptionId === undefined) {
+    throw new Error('\'subscriptionId\' cannot be null.');
   }
 
   if (!options) options = {};
+
   MicrosoftAzureTestUrl['super_'].call(this, credentials, options);
   this.baseUri = baseUri;
-  this.credentials = credentials;
   if (!this.baseUri) {
     this.baseUri = 'https://management.azure.com/';
   }
+  this.credentials = credentials;
+  this.subscriptionId = subscriptionId;
 
-  this.apiVersion = '2014-04-01-preview';
+  if(!this.apiVersion) {
+    this.apiVersion = '2014-04-01-preview';
+  }
   this.group = new operations.Group(this);
   this._models = models;
 }

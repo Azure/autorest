@@ -213,10 +213,10 @@ namespace Fixtures.PetstoreV2
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
-            /// <param name='apiKey'>
-            /// </param>
             /// <param name='petId'>
             /// Pet id to delete
+            /// </param>
+            /// <param name='apiKey'>
             /// </param>
             public static void DeletePet(this ISwaggerPetstoreV2 operations, long? petId, string apiKey = default(string))
             {
@@ -228,10 +228,10 @@ namespace Fixtures.PetstoreV2
             /// <param name='operations'>
             /// The operations group for this extension method
             /// </param>
-            /// <param name='apiKey'>
-            /// </param>
             /// <param name='petId'>
             /// Pet id to delete
+            /// </param>
+            /// <param name='apiKey'>
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
