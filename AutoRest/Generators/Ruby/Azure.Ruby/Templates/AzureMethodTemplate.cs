@@ -112,15 +112,15 @@ Write(WrapComment("# ", string.Format("@return [{0}] TODO: add text", "TODO: add
 
 #line default
 #line hidden
-            WriteLiteral(")\r\n      // Send request\r\n      response = begin");
+            WriteLiteral(")\r\n      # Send request\r\n      response = begin_");
 #line 24 "AzureMethodTemplate.cshtml"
-                  Write(Model.Name);
+                   Write(Model.Name);
 
 #line default
 #line hidden
             WriteLiteral("(");
 #line 24 "AzureMethodTemplate.cshtml"
-                                Write(Model.MethodParameterDeclaration);
+                                 Write(Model.MethodParameterDeclaration);
 
 #line default
 #line hidden
@@ -130,7 +130,7 @@ Write(WrapComment("# ", string.Format("@return [{0}] TODO: add text", "TODO: add
 
 #line default
 #line hidden
-            WriteLiteral(".get_post_or_delete_operation_result_async(response).value!\r\n    end\r\n    \r\n");
+            WriteLiteral(".get_post_or_delete_operation_result(response, nil)\r\n    end\r\n    \r\n");
 #line 28 "AzureMethodTemplate.cshtml"
 }
 else
@@ -220,7 +220,7 @@ Write(WrapComment("# ", string.Format("@return [{0}] TODO: add text", "TODO: add
 
 #line default
 #line hidden
-            WriteLiteral(".get_put_operation_result(response, get_method)\r\n    end\r\n    \r\n");
+            WriteLiteral(".get_put_operation_result(response, get_method, nil)\r\n    end\r\n    \r\n");
 #line 51 "AzureMethodTemplate.cshtml"
 }
 

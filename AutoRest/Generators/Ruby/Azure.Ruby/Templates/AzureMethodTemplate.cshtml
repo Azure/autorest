@@ -20,9 +20,9 @@ else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.D
     @WrapComment("# ", string.Format("@return [{0}] TODO: add text", "TODO: add type"))
     #
     def @(Model.Name)(@(Model.MethodParameterDeclaration))
-      // Send request
-      response = begin@(Model.Name)(@(Model.MethodParameterDeclaration)).value!
-      return @(Model.ClientReference).get_post_or_delete_operation_result_async(response).value!
+      # Send request
+      response = begin_@(Model.Name)(@(Model.MethodParameterDeclaration)).value!
+      return @(Model.ClientReference).get_post_or_delete_operation_result(response, nil)
     end
     </text>
 }
@@ -45,7 +45,7 @@ else
       get_method = lambda { self.@(Model.GetMethod.Name)(@(Model.GetMethod.MethodParameterDeclaration)) }
 
       # Waiting for response.
-      return @(Model.ClientReference).get_put_operation_result(response, get_method)
+      return @(Model.ClientReference).get_put_operation_result(response, get_method, nil)
     end
     </text>
 }

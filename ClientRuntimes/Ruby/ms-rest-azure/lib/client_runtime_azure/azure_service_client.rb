@@ -20,12 +20,14 @@ module ClientRuntimeAzure
 
     #
     # Retrieves the result of 'PUT' operation result. Includes polling of required.
-    # @param request [] TODO
-    # @param uri [] TODO
+    # @param azure_response [] TODO
+    # @param get_operation_block [] TODO
+    # @param custom_headers [] [description]
     #
     # @return [] TODO.
-    def get_put_operation_result(azure_response, get_operation_block)
+    def get_put_operation_result(azure_response, get_operation_block, custom_headers)
       fail ArgumentError if azure_response.nil?
+      fail ArgumentError if get_operation_block.nil?
 
       if (azure_response.response.code != "200" &&
           azure_response.response.code != "201" &&
@@ -37,17 +39,12 @@ module ClientRuntimeAzure
 
       if (!AsyncOperationStatus.is_terminal_status(polling_state.status))
         task = Concurrent::TimerTask.new do
-
-          p polling_state.status
-          # p polling_state.response
-          # p polling_state.request
-
           if !polling_state.azure_async_operation_header_link.nil?
             p 'update_state_from_azure_async_operation_header'
-            update_state_from_azure_async_operation_header(polling_state)
+            update_state_from_azure_async_operation_header(polling_state, custom_headers)
           elsif !polling_state.location_header_link.nil?
             p 'update_state_from_location_header_on_put'
-            update_state_from_location_header_on_put(polling_state)
+            update_state_from_location_header_on_put(polling_state, custom_headers)
           else
             p 'update_state_from_get_resource_operation'
             update_state_from_get_resource_operation(get_operation_block, polling_state)
@@ -58,43 +55,80 @@ module ClientRuntimeAzure
           end
         end
 
-        task.execution_interval = polling_state.get_timeout()
+        task.execution_interval = polling_state.get_delay_in_milliseconds()
         task.execute
         task.wait_for_termination
       end
 
-      if (AsyncOperationStatus.is_successful_status(polling_state.status))
-        update_state_from_get_resource_operation(get_operation_block, polling_state)
+      promise = Concurrent::Promise.new do
+        if (AsyncOperationStatus.is_successful_status(polling_state.status))
+          update_state_from_get_resource_operation(get_operation_block, polling_state)
+        end
+
+        if (AsyncOperationStatus.is_failed_status(polling_state.status))
+          fail CloudError # TODO: proper error
+        end
+
+        polling_state.get_operation_response
       end
 
-      if (AsyncOperationStatus.is_failed_status(polling_state.status))
-        fail ArgumentError # TODO: proper error
+      promise.execute
+    end
+
+    def get_post_or_delete_operation_result(azure_response, custom_headers)
+      fail ArgumentError if azure_response.nil?
+      fail ArgumentError if azure_response.response.nil?
+
+      if (azure_response.response.code != "200" &&
+          azure_response.response.code != "201" &&
+          azure_response.response.code != "202")
+        fail ArgumentError
       end
 
-      # TODO: change to AzureOperationResponse
-      polling_state.response
+      polling_state = PollingState.new(azure_response, 1) # TODO: add timeout
+
+      if (!AsyncOperationStatus.is_terminal_status(polling_state.status))
+        task = Concurrent::TimerTask.new do
+          if !polling_state.azure_async_operation_header_link.nil?
+            p 'update_state_from_azure_async_operation_header'
+            update_state_from_azure_async_operation_header(polling_state, custom_headers)
+          elsif !polling_state.location_header_link.nil?
+            p 'update_state_from_location_header_on_post_or_delete'
+            update_state_from_location_header_on_post_or_delete(polling_state, custom_headers)
+          else
+            task.shutdown
+            fail CloudError
+          end
+
+          if (AsyncOperationStatus.is_terminal_status(polling_state.status))
+            task.shutdown
+          end
+        end
+
+        task.execution_interval = polling_state.get_delay_in_milliseconds()
+        task.execute
+        task.wait_for_termination
+      end
+
+      promise = Concurrent::Promise.new do
+        if (AsyncOperationStatus.is_failed_status(polling_state.status))
+          fail ArgumentError # TODO: proper error
+        end
+
+        polling_state.get_operation_response
+      end
+
+      promise.execute
     end
 
     def update_state_from_get_resource_operation(get_operation_block, polling_state)
       result = get_operation_block.call().value!
 
-      p 'from update_state_from_get_resource_operation'
-      p result
-
-      begin
-        # if (defined? result.body.provisioning_state && !result.body.provisioning_state.nil?)
-        #   p result.body.provisioning_state
-        #   p 'within pro state'
-        #   polling_state.status = result.body.provisioning_state
-        # else
-          p 'within suc state'
-          polling_state.status = AsyncOperationStatus::SUCCESS_STATUS
-        # end
-      rescue Exception => e
-        p e
+      if (result.body.respond_to?(:properties) && result.body.properties.respond_to?(:provisioning_state) && !result.body.properties.provisioning_state.nil?)
+        polling_state.status = result.body.properties.provisioning_state
+      else
+        polling_state.status = AsyncOperationStatus::SUCCESS_STATUS
       end
-
-      p polling_state.status
 
       # TODO: fill the polling_state.error
 
@@ -103,8 +137,8 @@ module ClientRuntimeAzure
       polling_state.resource = result.body
     end
 
-    def update_state_from_location_header_on_put(polling_state)
-      result = get_async(polling_state.location_header_link).value!
+    def update_state_from_location_header_on_put(polling_state, custom_headers)
+      result = get_async(polling_state.location_header_link, custom_headers).value!
 
       polling_state.update_response(result.response)
       polling_state.request = result.request
@@ -114,39 +148,37 @@ module ClientRuntimeAzure
       if (status_code == "202")
         polling_state.status = AsyncOperationStatus::IN_PROGRESS_STATUS
       elsif (status_code == "200" || status_code == "201")
-        if (result.body.nil?)
+        fail ArgumentError if (result.body.nil?)
           # TODO elaborate error
-          fail ArgumentError
 
-          if (!result.body.properties.nil? && !result.body.properties.provisioning_state.nil?)
-            polling_state.status = result.body.properties.provisioning_state
-          else
-            polling_state.status_code = AsyncOperationStatus::SUCCESS_STATUS
-          end
-
-          # TODO add filling of the polling_state.error
-
-          polling_state.resource = result.body
+      if (result.body.respond_to?(:properties) && result.body.properties.respond_to?(:provisioning_state) && !result.body.properties.provisioning_state.nil?)
+          polling_state.status = result.body.properties.provisioning_state
+        else
+          polling_state.status = AsyncOperationStatus::SUCCESS_STATUS
         end
+
+        # TODO add filling of the polling_state.error
+
+        polling_state.resource = result.body
       end
     end
 
-    def update_state_from_azure_async_operation_header(polling_state)
-      result = get_async(polling_state.azure_async_operation_header_link).value!
+    def update_state_from_azure_async_operation_header(polling_state, custom_headers)
+      result = get_async(polling_state.azure_async_operation_header_link, custom_headers).value!
 
       # TODO elaborate error
-      fail ArgumentError if (!result.body.nil? || !result.body.status.nil?)
+      fail ArgumentError if (result.body.nil? || result.body.status.nil?)
 
       polling_state.status = result.body.status
       # TODO: fill the error
-      polling_state.error = nil
+      # polling_state.error = nil
       polling_state.response = result.response
       polling_state.request = result.request
       polling_state.resource = nil
     end
 
-    def update_state_from_location_header_on_post_or_delete(polling_state)
-      result = get_async(polling_state.location_header_link).value!
+    def update_state_from_location_header_on_post_or_delete(polling_state, custom_headers)
+      result = get_async(polling_state.location_header_link, custom_headers).value!
 
       polling_state.update_response(result.response)
       polling_state.request = result.request
@@ -161,17 +193,22 @@ module ClientRuntimeAzure
       end
     end
 
-    def get_async(operation_url)
+    #
+    # [get_async description]
+    # @param operation_url [type] [description]
+    #
+    # @return [type] [description]
+    def get_async(operation_url, custom_headers)
       fail ArgumentError if operation_url.nil?
 
       # TODO: add url encoding.
-      url = operation_url
+      url = URI(operation_url)
 
       # Create HTTP transport objects
       http_request = Net::HTTP::Get.new(url.request_uri)
       http_request.add_field('Content-Type', 'application/json')
 
-      # TODO: mb we need set credentials here.s
+      # TODO: add custom headers
 
       # Send Request
       promise = Concurrent::Promise.new { self.make_http_request(http_request, url) }
@@ -179,21 +216,15 @@ module ClientRuntimeAzure
       promise = promise.then do |http_response|
         status_code = http_response.code.to_i
 
-        if (status_code != 200 && status_code != 201
-            status_code != 201 && status_code != 204)
-          fail HttpOperationException
+        if (status_code != 200 && status_code != 201 && status_code != 202 && status_code != 204)
+          fail CloudError
         end
 
         # TODO deserialize
-        result = ClientRuntime::HttpOperationResponse.new(http_request, http_response, http_response.body)
-
-        p result
-
-        result
+        ClientRuntime::HttpOperationResponse.new(http_request, http_response, http_response.body)
       end
 
-      result = promise.execute().value!
-      result
+      promise.execute
     end
   end
 

@@ -6,26 +6,32 @@ module ClientRuntimeAzure
   # Class which represents a state of Azure long running operation.
   #
   class PollingState
-  	attr_accessor :response
-
+    # @return [Net::HTTPRequest] the HTTP request.
   	attr_accessor :request
 
+    # @return the resource
   	attr_accessor :resource
 
-  	attr_accessor :status
+    # @return [Net::HTTPResponse] the HTTP response.
+    attr_accessor :response
 
+    # @return [String] the latest value captured from Azure-AsyncOperation header.
     attr_accessor :azure_async_operation_header_link
 
+    # @return [String] the latest value captured from Location header.
     attr_accessor :location_header_link
 
+    # @return [String] status of the long running operation.
+    attr_accessor :status
+
   	def initialize(azure_response, retry_timeout)
-  	  @timeout = retry_timeout
+  	  @retry_timeout = retry_timeout
   	  @request = azure_response.request
-  	  @response = azure_response.response
+  	  update_response(azure_response.response)
   	  @resource = azure_response.body
 
-  	  if (!@resource.nil? && !@resource.provisioning_state.nil?)
-  	  	@status = @resource.provisioning_state
+  	  if (!@resource.nil? && @resource.respond_to?(:properties) && @resource.properties.respond_to?(:provisioning_state) && !@resource.properties.provisioning_state.nil?)
+  	  	@status = @resource.properties.provisioning_state
   	  else
   	  	case @response.code
   	  	  when "202"
@@ -38,9 +44,18 @@ module ClientRuntimeAzure
   	  end
   	end
 
-    def get_timeout()
-      # TODO
-      return 1
+    #
+    # Returns the amount of time in milliseconds for long running operation polling dealy.
+    #
+    # @return [Integer] Amount of time in milliseconds for long running operation polling dealy.
+    def get_delay_in_milliseconds
+      return @retry_timeout unless @retry_timeout.nil?
+
+      if (!response.nil? && !response['Retry-After'].nil?)
+        return response['Retry-After'].to_i * 1000
+      end
+
+      return ClientRuntimeAzure::AzureAsyncOperation.DEFAULT_DELAY
     end
 
     #
@@ -50,15 +65,24 @@ module ClientRuntimeAzure
       @response = response
 
       if (!response.nil?)
-        @azure_async_operation_header_link = response['azure-asyncoperation']
-        @location_header_link = response['location']
+        @azure_async_operation_header_link = response['Azure-AsyncOperation'] unless response['Azure-AsyncOperation'].nil?
+        @location_header_link = response['Location'] unless response['Location'].nil?
       end
     end
 
-   private
+    #
+    # returns the Azure's response.
+    #
+    # @return [ClientRuntimeAzure::AzureOperationResponse] Azure's response.
+    def get_operation_response
+      azure_response = AzureOperationResponse.new(@request, @response, @resource)
+      azure_response
+    end
 
-   attr_accessor :timeout
+    private
 
+    # @return [Integer] retry timeout.
+    attr_accessor :retry_timeout
   end
 
 end

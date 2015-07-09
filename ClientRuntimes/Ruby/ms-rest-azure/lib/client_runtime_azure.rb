@@ -6,7 +6,10 @@ require 'client_runtime'
 require 'client_runtime_azure/version'
 
 require 'client_runtime_azure/resource.rb'
+require 'client_runtime_azure/sub_resource.rb'
 require 'client_runtime_azure/cloud_error.rb'
+
+require 'client_runtime_azure/azure_operation_response.rb'
 
 require 'client_runtime_azure/async_operation_status.rb'
 require 'client_runtime_azure/polling_state.rb'

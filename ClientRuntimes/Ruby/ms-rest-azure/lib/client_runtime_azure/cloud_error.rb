@@ -5,7 +5,7 @@ module ClientRuntimeAzure
   #
   # Class which represents an Azure error.
   #
-  class CloudError
+  class CloudError < StandardError
 
     # @return [String] the id of the resource.
     attr_accessor :code
