@@ -1,15 +1,17 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
-using Fixtures.Bodynumber;
-using Microsoft.Rest.Generator.CSharp.Tests;
-using Newtonsoft.Json;
 using System;
+using Newtonsoft.Json;
 using Xunit;
 using Xunit.Abstractions;
+using Fixtures.Bodynumber;
+using Microsoft.Rest.Generator.CSharp.Tests;
 
 namespace NugetPackageTest
 {
+    //we random port over a C# acceptance test so to verify in sanity 
+    //that the freshly built out nuget packages (runtime and generator) works.
     public class PackageTests : IClassFixture<ServiceController>
     {
         private readonly ITestOutputHelper _output;
@@ -25,8 +27,6 @@ namespace NugetPackageTest
         [Fact]
         public void TestClientRuntimeWorks()
         {
-            //we random port over a C# acceptance test so to verify in sanity 
-            //that the freshly built out nuget packages (runtime and generator) works.
 
             var client = new AutoRestNumberTestService(Fixture.Uri);
             client.Number.PutBigFloat(3.402823e+20);
