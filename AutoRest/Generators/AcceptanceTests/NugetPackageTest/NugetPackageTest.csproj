@@ -33,23 +33,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoRest">
-      <HintPath>packages\autorest.0.10.0\lib\portable-net45+sl50+wp80+win\AutoRest.exe</HintPath>
-    </Reference>
-    <Reference Include="AutoRest.Core">
-      <HintPath>packages\autorest.0.10.0\lib\portable-net45+sl50+wp80+win\AutoRest.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="AutoRest.Generator.CSharp">
-      <HintPath>packages\autorest.0.10.0\lib\portable-net45+sl50+wp80+win\AutoRest.Generator.CSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="AutoRest.Modeler.Swagger">
-      <HintPath>packages\autorest.0.10.0\lib\portable-net45+sl50+wp80+win\AutoRest.Modeler.Swagger.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Rest.ClientRuntime">
       <HintPath>packages\Microsoft.Rest.ClientRuntime.1.0.2\lib\net45\Microsoft.Rest.ClientRuntime.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>packages\autorest.0.10.0\lib\portable-net45+sl50+wp80+win\Newtonsoft.Json.dll</HintPath>
+      <HintPath>packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Net.Http" />
