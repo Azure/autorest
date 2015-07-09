@@ -180,6 +180,7 @@
          Do not remove without first updating the CI job. Also due to a known limitation, 
          make sure pathes do not end with a backslash -->
     <CorporateScanPaths>$(LibrarySourceFolder)ClientRuntimes;$(LibrarySourceFolder)AutoRest</CorporateScanPaths>
+    <BinscopeScanPath>$(BinariesFolder)</BinscopeScanPath>
   </PropertyGroup>
   <Target Name="SignBinariesForAFxTarget">
     <PropertyGroup>
@@ -253,6 +254,7 @@
   <Target Name="ValidateCorporateCompliance">
     <Error Text="This target must be run in an on-premise build server." Condition=" '$(OnPremiseBuild)'=='false' " />
     <CallTarget Targets="CorporateValidation" />
+    <CallTarget Targets="RunBinscope" />
   </Target>
 
   <!-- Build server tasks.  -->
