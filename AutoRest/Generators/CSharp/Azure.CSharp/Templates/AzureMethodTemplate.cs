@@ -102,7 +102,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line hidden
 
 #line 20 "AzureMethodTemplate.cshtml"
- foreach (var parameter in Model.Parameters)
+ foreach (var parameter in Model.LocalParameters)
 {
 
 #line default
@@ -210,7 +210,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line hidden
 
 #line 48 "AzureMethodTemplate.cshtml"
- foreach (var parameter in Model.Parameters)
+ foreach (var parameter in Model.LocalParameters)
 {
 
 #line default

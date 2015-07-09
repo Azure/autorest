@@ -112,10 +112,10 @@ namespace Fixtures.PetstoreV2
 
         /// <summary>
         /// </summary>
-        /// <param name='apiKey'>
-        /// </param>
         /// <param name='petId'>
         /// Pet id to delete
+        /// </param>
+        /// <param name='apiKey'>
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
