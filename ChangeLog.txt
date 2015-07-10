@@ -1,0 +1,8 @@
+2015.07.10 Version 1.0.0
+* Initial Release
+    * Generic client runtime for
+        * C#
+        * NodeJS
+    * Generic code generator for 
+        * C#
+        * NodeJS  
