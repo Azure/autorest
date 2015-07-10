@@ -191,14 +191,16 @@
     </PropertyGroup>
     
     <!--Invoke code-gen-->
-    <Exec WorkingDirectory="$(TestProjectDir)" Command="$(AutoRestExe) -Modeler Swagger -CodeGenerator CSharp -OutputDirectory $(TestProjectDir)\Expected -Namespace &quot;Fixtures.Bodynumber&quot; -Input &quot;$(LibraryRoot)\AutoRest\Generators\AcceptanceTests\swagger\body-number.json&quot; -Header NONE"/>
+    <Exec WorkingDirectory="$(TestProjectDir)" Command="$(AutoRestExe) -Modeler Swagger -CodeGenerator CSharp -OutputDirectory $(TestProjectDir)\Generated\CSharp -Namespace &quot;Fixtures.Bodynumber&quot; -Input &quot;$(LibraryRoot)\AutoRest\Generators\AcceptanceTests\swagger\body-number.json&quot; -Header NONE"/>
+    <Exec WorkingDirectory="$(TestProjectDir)" Command="$(AutoRestExe) -Modeler Swagger -CodeGenerator NodeJS -OutputDirectory $(TestProjectDir)\Generated\NodeJS -Input &quot;$(LibraryRoot)\AutoRest\Generators\AcceptanceTests\swagger\body-number.json&quot; -Header NONE"/>
     
     <!--Build and run tests-->
-    <MSBuild Projects="$(TestProjectDir)\NugetPackageTest.sln" Targets="rebuild" />
+    <MSBuild Projects="$(TestProjectDir)\NugetPackageCsharpTest.csproj" Targets="rebuild" />
     <ItemGroup>
-      <TestDlls Include="$(TestProjectDir)\bin\$(Configuration)\NuGetPackageTest.dll" />
+      <TestDlls Include="$(TestProjectDir)\bin\$(Configuration)\NuGetPackageCSharpTest.dll" />
     </ItemGroup>    
     <xunit Assemblies="@(TestDlls)" />
+    <Exec WorkingDirectory="$(TestProjectDir)" Command="npm test"/>
   </Target>
   
   <PropertyGroup>
