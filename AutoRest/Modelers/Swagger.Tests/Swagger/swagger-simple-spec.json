@@ -29,8 +29,8 @@
             "required": true,
             "type": "string"
           },
-          { 
-            "$ref" :  "ApiVersionParameter"
+          {
+            "$ref": "ApiVersionParameter"
           }
         ],
         "tags": [
@@ -83,7 +83,22 @@
         ],
         "responses": {
           "204": {
-            "description": "A list of caches"
+            "description": "A list of caches",
+            "examples": {
+              "application/json": {
+                "id": 9,
+                "category": {
+                  "name": "domestic"
+                },
+                "name": "monster",
+                "tags": [
+                  {
+                    "name": "for sale"
+                  }
+                ],
+                "status": "alive"
+              }
+            }
           },
           "default": {
             "description": "Unexpected error",
@@ -118,6 +133,10 @@
           "type": "string",
           "description": "Image URL representing the product."
         }
+      },
+      "example": {
+        "name": "Puma",
+        "id": 1
       }
     },
     "Error": {
