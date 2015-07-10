@@ -268,7 +268,7 @@ namespace Microsoft.Azure.Management.Redis
             set;
         }
 
-        SubscriptionCloudCredentials Credentials
+        ServiceClientCredentials Credentials
         {
             get;
             set;
@@ -323,9 +323,9 @@ namespace Microsoft.Azure.Management.Redis
         /// </summary>
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
-        private SubscriptionCloudCredentials _credentials;
+        private ServiceClientCredentials _credentials;
 
-        public SubscriptionCloudCredentials Credentials
+        public ServiceClientCredentials Credentials
         {
             get { return this._credentials; }
             set { this._credentials = value; }
@@ -434,7 +434,7 @@ namespace Microsoft.Azure.Management.Redis
         /// Optional. The set of delegating handlers to insert in the http
         /// client pipeline.
         /// </param>
-        public RedisManagementClient(SubscriptionCloudCredentials credentials, params DelegatingHandler[] handlers)
+        public RedisManagementClient(ServiceClientCredentials credentials, params DelegatingHandler[] handlers)
             : this(handlers)
         {
             if (credentials == null)
@@ -462,7 +462,7 @@ namespace Microsoft.Azure.Management.Redis
         /// Optional. The set of delegating handlers to insert in the http
         /// client pipeline.
         /// </param>
-        public RedisManagementClient(Uri baseUri, SubscriptionCloudCredentials credentials, params DelegatingHandler[] handlers)
+        public RedisManagementClient(Uri baseUri, ServiceClientCredentials credentials, params DelegatingHandler[] handlers)
             : this(handlers)
         {
             if (baseUri == null)

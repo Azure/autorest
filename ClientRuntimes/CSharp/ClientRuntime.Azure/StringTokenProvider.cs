@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Microsoft.Azure
@@ -14,9 +15,9 @@ namespace Microsoft.Azure
         }
 
         private string _accessToken;
-        public string AccessToken
+        public Task<string> GetAccessTokenAsync(CancellationToken cancellationToken)
         {
-            get { return _accessToken; }
+            return Task.FromResult(_accessToken);
         }
     }
 }

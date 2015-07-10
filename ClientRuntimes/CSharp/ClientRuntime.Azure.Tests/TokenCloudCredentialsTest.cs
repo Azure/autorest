@@ -32,7 +32,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             fakeClient = new FakeServiceClientWithCredentials(tokenCredentials, handler);
             fakeClient.DoStuff().Wait();
 
-            Assert.Null(fakeClient.Credentials.SubscriptionId);
+            //Assert.Null(fakeClient.Credentials.SubscriptionId);
             Assert.Equal("Bearer", handler.RequestHeaders.Authorization.Scheme);
             Assert.Equal("abc", handler.RequestHeaders.Authorization.Parameter);
         }

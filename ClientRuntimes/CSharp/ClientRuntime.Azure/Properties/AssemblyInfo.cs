@@ -4,6 +4,7 @@
 using System;
 using System.Reflection;
 using System.Resources;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Microsoft Rest Azure Client Runtime")]
@@ -20,3 +21,4 @@ using System.Runtime.InteropServices;
 [assembly: NeutralResourcesLanguage("en")]
 [assembly: CLSCompliant(false)]
 [assembly: ComVisible(false)]
+[assembly: InternalsVisibleTo("Microsoft.Rest.ClientRuntime.Azure.Tests")]

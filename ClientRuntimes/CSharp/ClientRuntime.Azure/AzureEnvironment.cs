@@ -12,15 +12,15 @@ namespace Microsoft.Azure
     {
         private static readonly AzureEnvironment AzureSettings = new AzureEnvironment
         {
-            AuthenticationEndpoint= new Uri("https://login.windows.net"), 
-            TokenAudience = new Uri("https://manage.windowsazure.com"),
+            AuthenticationEndpoint= new Uri("https://login.windows.net/"), 
+            TokenAudience = new Uri("https://management.core.windows.net/"),
             ValidateAuthority = true
         };
 
         private static readonly AzureEnvironment AzureChinaSettings = new AzureEnvironment
         {
-            AuthenticationEndpoint= new Uri("https://login.windows.cn"), 
-            TokenAudience = new Uri("https://manage.windowsazure.cn"),
+            AuthenticationEndpoint= new Uri("https://login.chinacloudapi.cn/"), 
+            TokenAudience = new Uri("https://management.core.chinacloudapi.cn/"),
             ValidateAuthority = true
         };
 

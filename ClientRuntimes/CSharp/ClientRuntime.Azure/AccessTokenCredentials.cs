@@ -1,14 +1,13 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using Microsoft.Azure.Properties;
+using Microsoft.Rest;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Azure.Properties;
-using Microsoft.Rest;
 
 namespace Microsoft.Azure
 {
@@ -21,7 +20,7 @@ namespace Microsoft.Azure
         /// Gets or sets secure token used to authenticate against Microsoft Azure API. 
         /// No anonymous requests are allowed.
         /// </summary>
-        internal ITokenProvider TokenProvider { get; set; }
+        private ITokenProvider TokenProvider { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TokenCredentials"/>
@@ -40,7 +39,7 @@ namespace Microsoft.Azure
         /// Create an access token credentials object.
         /// </summary>
         /// <param name="tokenProvider">The access token provider to use</param>
-        internal AccessTokenCredentials(ITokenProvider tokenProvider)
+        public AccessTokenCredentials(ITokenProvider tokenProvider)
         {
             if (tokenProvider == null)
             {
@@ -58,7 +57,7 @@ namespace Microsoft.Azure
         /// <returns>
         /// Task that will complete when processing has completed.
         /// </returns>
-        public override Task ProcessHttpRequestAsync(HttpRequestMessage request, 
+        public async override Task ProcessHttpRequestAsync(HttpRequestMessage request, 
             CancellationToken cancellationToken)
         {
             if (request == null)
@@ -71,8 +70,8 @@ namespace Microsoft.Azure
                 throw new InvalidOperationException(Resources.TokenProviderCannotBeNull);
             }
 
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenProvider.AccessToken);
-            return base.ProcessHttpRequestAsync(request, cancellationToken);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", await TokenProvider.GetAccessTokenAsync(cancellationToken).ConfigureAwait(false));
+            await Task.Run(() => base.ProcessHttpRequestAsync(request, cancellationToken), cancellationToken);
         }
     }
 }
