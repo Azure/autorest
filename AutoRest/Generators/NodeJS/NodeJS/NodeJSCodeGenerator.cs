@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using Microsoft.Rest.Generator.ClientModel;
+using Microsoft.Rest.Generator.NodeJS.Properties;
 using Microsoft.Rest.Generator.NodeJS.Templates;
 using Microsoft.Rest.Generator.Utilities;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace Microsoft.Rest.Generator.NodeJS
         public override string UsageInstructions
         {
             // TODO: resource string with correct usage message.
-            get { return string.Empty; }
+            get { return Resources.UsageInstructions; }
         }
 
         public override string ImplementationFileExtension
