@@ -53,7 +53,6 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             AzureCodeGenerator.UpdateHeadMethods(serviceClient);
             AzureCodeGenerator.ParseODataExtension(serviceClient);
             AzureCodeGenerator.AddPageableMethod(serviceClient);
-            AzureCodeGenerator.RemoveCommonPropertiesFromMethods(serviceClient);
             AzureCodeGenerator.AddLongRunningOperations(serviceClient);
             AzureCodeGenerator.AddAzureProperties(serviceClient);
             AzureCodeGenerator.SetDefaultResponses(serviceClient);

@@ -95,12 +95,6 @@ namespace Microsoft.Rest.Generator.ClientModel
         public object Clone()
         {
             Parameter param = (Parameter)this.MemberwiseClone();
-
-            if (param.GlobalProperty != null)
-            {
-                param.GlobalProperty = (Property)this.GlobalProperty.Clone();    
-            }            
-
             return param;
         }
     }
