@@ -35,7 +35,7 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// Gets or sets the default value.
         /// </summary>
         public string DefaultValue { get; set; }
-		
+        
         // TODO: disambiguate Type and System.Type, rename IType to IModelType and Type to ModelType
         /// <summary>
         /// Gets or sets the model type.
