@@ -35,11 +35,15 @@
     <Compile Include="TemplateModels\ParameterTemplateModel.cs" />
     <Compile Include="Templates\MethodGroupIndexTemplate.cs" />
     <Compile Include="Templates\MethodGroupTemplate.cs" />
+    <Compile Include="Templates\MethodJsonPipelineTemplate.cs" />
+    <Compile Include="Templates\MethodStreamPipelineTemplate.cs" />
     <Compile Include="Templates\MethodTemplate.cs" />
     <Compile Include="Templates\ModelIndexTemplate.cs" />
     <Compile Include="Templates\ModelTemplate.cs" />
     <Compile Include="Templates\ServiceClientTemplate.cs" />
     <None Include="Templates\MethodGroupTemplate.cshtml" />
+    <None Include="Templates\MethodJsonPipelineTemplate.cshtml" />
+    <None Include="Templates\MethodStreamPipelineTemplate.cshtml" />
     <None Include="Templates\ModelTemplate.cshtml" />
     <None Include="Templates\ModelIndexTemplate.cshtml" />
     <None Include="Templates\MethodGroupIndexTemplate.cshtml" />

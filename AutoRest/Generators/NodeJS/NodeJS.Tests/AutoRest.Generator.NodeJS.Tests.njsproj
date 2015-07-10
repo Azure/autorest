@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{189f9cfc-764a-48db-aea8-638cbba5b5aa}</ProjectGuid>
     <ProjectHome />
-    <ProjectView>ProjectFiles</ProjectView>
+    <ProjectView>ShowAllFiles</ProjectView>
     <StartupFile>unit.js</StartupFile>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -16,6 +16,7 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
+    <Content Include="AcceptanceTests\sample.png" />
     <Content Include="package.json" />
     <Content Include="RegenerateExpectedClasses.ps1" />
     <Content Include="xunit.xml" />
@@ -328,6 +329,11 @@
     <Compile Include="Expected\SwaggerBat\BodyDictionary\models\Widget.js" />
     <Compile Include="Expected\SwaggerBat\BodyDictionary\operations\Dictionary.js" />
     <Compile Include="Expected\SwaggerBat\BodyDictionary\operations\index.js" />
+    <Compile Include="Expected\SwaggerBat\BodyFile\autoRestSwaggerBATFileService.js" />
+    <Compile Include="Expected\SwaggerBat\BodyFile\models\errorModel.js" />
+    <Compile Include="Expected\SwaggerBat\BodyFile\models\index.js" />
+    <Compile Include="Expected\SwaggerBat\BodyFile\operations\files.js" />
+    <Compile Include="Expected\SwaggerBat\BodyFile\operations\index.js" />
     <Compile Include="Expected\SwaggerBat\BodyInteger\AutoRestIntegerTestService.js" />
     <Compile Include="Expected\SwaggerBat\BodyInteger\models\ErrorModel.js" />
     <Compile Include="Expected\SwaggerBat\BodyInteger\models\index.js" />
@@ -583,6 +589,9 @@
     <Folder Include="Expected\SwaggerBat\BodyDictionary\" />
     <Folder Include="Expected\SwaggerBat\BodyDictionary\models\" />
     <Folder Include="Expected\SwaggerBat\BodyDictionary\operations\" />
+    <Folder Include="Expected\SwaggerBat\BodyFile\" />
+    <Folder Include="Expected\SwaggerBat\BodyFile\models\" />
+    <Folder Include="Expected\SwaggerBat\BodyFile\operations\" />
     <Folder Include="Expected\SwaggerBat\BodyInteger\" />
     <Folder Include="Expected\SwaggerBat\BodyInteger\models\" />
     <Folder Include="Expected\SwaggerBat\BodyInteger\operations\" />

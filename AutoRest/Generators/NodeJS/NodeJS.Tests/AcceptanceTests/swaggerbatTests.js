@@ -8,6 +8,7 @@ var http = require('http');
 var util = require('util');
 var assert = require('assert');
 var msRest = require('ms-rest');
+var fs = require('fs');
 
 var boolClient = require('../Expected/SwaggerBat/BodyBoolean/AutoRestBoolTestService');
 var stringClient = require('../Expected/SwaggerBat/BodyString/AutoRestSwaggerBATService');
@@ -17,12 +18,23 @@ var byteClient = require('../Expected/SwaggerBat/BodyByte/AutoRestSwaggerBATByte
 var dateClient = require('../Expected/SwaggerBat/BodyDate/AutoRestDateTestService');
 var dateTimeClient = require('../Expected/SwaggerBat/BodyDateTime/AutoRestDateTimeTestService');
 var urlClient = require('../Expected/SwaggerBat/Url/AutoRestUrlTestService');
+var fileClient = require('../Expected/SwaggerBat/BodyFile/AutoRestSwaggerBATFileService');
 var arrayClient = require('../Expected/SwaggerBat/BodyArray/AutoRestSwaggerBATArrayService');
 var dictionaryClient = require('../Expected/SwaggerBat/BodyDictionary/AutoRestSwaggerBATdictionaryService');
 var httpClient = require('../Expected/SwaggerBat/Http/AutoRestHttpInfrastructureTestService');
 
 var dummyToken = 'dummy12321343423';
 var credentials = new msRest.TokenCredentials(dummyToken);
+
+var readStreamToBuffer = function(strm, callback) {
+  var bufs = [];
+  strm.on('data', function(d) {
+     bufs.push(d);
+  });
+  strm.on('end', function () {
+    callback(null, Buffer.concat(bufs));
+  });
+};
 
 var clientOptions = {};
 var baseUri = 'http://localhost:3000';
@@ -1345,6 +1357,33 @@ describe('nodejs', function () {
               should.not.exist(error);
               done();
             });
+          });
+        });
+      });
+    });
+
+    describe('Files Client', function() {
+      var testClient = new fileClient(baseUri, clientOptions);
+      it('should correctly deserialize binary streams', function(done) {
+        testClient.files.getFile(function(error, result) {
+          should.not.exist(error);
+          should.exist(result.body);
+          readStreamToBuffer(result.body, function(err, buff) {
+            should.not.exist(err);
+            assert.deepEqual(buff, fs.readFileSync(__dirname + '/sample.png'));
+            done();
+          });
+        });
+      });
+
+      it('should correctly deserialize empty streams', function (done) {
+        testClient.files.getEmptyFile(function (error, result) {
+          should.not.exist(error);
+          should.exist(result.body);
+          readStreamToBuffer(result.body, function (err, buff) {
+            should.not.exist(err);
+            buff.length.should.equal(0);
+            done();
           });
         });
       });

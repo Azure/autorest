@@ -99,9 +99,9 @@ Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, optio
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -113,19 +113,19 @@ Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, optio
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -204,9 +204,9 @@ Explicit.prototype.postOptionalIntegerParameter = function (bodyParameter, optio
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -303,9 +303,9 @@ Explicit.prototype.postRequiredIntegerProperty = function (bodyParameter, option
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -317,19 +317,19 @@ Explicit.prototype.postRequiredIntegerProperty = function (bodyParameter, option
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -411,9 +411,9 @@ Explicit.prototype.postOptionalIntegerProperty = function (bodyParameter, option
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -507,9 +507,9 @@ Explicit.prototype.postRequiredIntegerHeader = function (headerParameter, option
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -521,19 +521,19 @@ Explicit.prototype.postRequiredIntegerHeader = function (headerParameter, option
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -613,9 +613,9 @@ Explicit.prototype.postOptionalIntegerHeader = function (headerParameter, option
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -709,9 +709,9 @@ Explicit.prototype.postRequiredStringParameter = function (bodyParameter, option
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -723,19 +723,19 @@ Explicit.prototype.postRequiredStringParameter = function (bodyParameter, option
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -814,9 +814,9 @@ Explicit.prototype.postOptionalStringParameter = function (bodyParameter, option
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -913,9 +913,9 @@ Explicit.prototype.postRequiredStringProperty = function (bodyParameter, options
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -927,19 +927,19 @@ Explicit.prototype.postRequiredStringProperty = function (bodyParameter, options
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -1021,9 +1021,9 @@ Explicit.prototype.postOptionalStringProperty = function (bodyParameter, options
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -1117,9 +1117,9 @@ Explicit.prototype.postRequiredStringHeader = function (headerParameter, options
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -1131,19 +1131,19 @@ Explicit.prototype.postRequiredStringHeader = function (headerParameter, options
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -1223,9 +1223,9 @@ Explicit.prototype.postOptionalStringHeader = function (bodyParameter, options, 
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -1323,9 +1323,9 @@ Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -1337,19 +1337,19 @@ Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -1432,9 +1432,9 @@ Explicit.prototype.postOptionalClassParameter = function (bodyParameter, options
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -1535,9 +1535,9 @@ Explicit.prototype.postRequiredClassProperty = function (bodyParameter, options,
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -1549,19 +1549,19 @@ Explicit.prototype.postRequiredClassProperty = function (bodyParameter, options,
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -1647,9 +1647,9 @@ Explicit.prototype.postOptionalClassProperty = function (bodyParameter, options,
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -1747,9 +1747,9 @@ Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, options
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -1761,19 +1761,19 @@ Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, options
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -1856,9 +1856,9 @@ Explicit.prototype.postOptionalArrayParameter = function (bodyParameter, options
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -1955,9 +1955,9 @@ Explicit.prototype.postRequiredArrayProperty = function (bodyParameter, options,
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -1969,19 +1969,19 @@ Explicit.prototype.postRequiredArrayProperty = function (bodyParameter, options,
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -2063,9 +2063,9 @@ Explicit.prototype.postOptionalArrayProperty = function (bodyParameter, options,
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -2163,9 +2163,9 @@ Explicit.prototype.postRequiredArrayHeader = function (headerParameter, options,
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -2177,19 +2177,19 @@ Explicit.prototype.postRequiredArrayHeader = function (headerParameter, options,
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -2273,9 +2273,9 @@ Explicit.prototype.postOptionalArrayHeader = function (headerParameter, options,
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);

@@ -86,17 +86,24 @@ exports.requestLibrarySink = function (requestOptions) {
   return function (options, callback) {
     request = request.defaults(requestOptions);
     if (options.headersOnly) {
+      var requestHeaderStream = request(options);
+      requestHeaderStream.on('error', function (err) {
+        return callback(err);
+      });
+      requestHeaderStream.on('response', function (response) {
+        requestHeaderStream.on('end', function () {
+          return callback(null, response);
+        });
+      });      
+      return requestHeaderStream;
+    } else if (options.streamedResponse) {
       var requestStream = request(options);
       requestStream.on('error', function (err) {
         return callback(err);
       });
-      
       requestStream.on('response', function (response) {
-        requestStream.on('end', function () {
-          return callback(null, response);
-        });
+        return callback(null, response);
       });
-      
       return requestStream;
     } else {
       return request(options, function (err, response, body) {

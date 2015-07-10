@@ -204,7 +204,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             Method method, List<Stack<IType>> types)
         {
             bool handled = false;
-            if (SwaggerOperationProducesNonNull(_operation))
+            if (SwaggerOperationProducesNotEmpty(_operation))
             {
                 if (response.Schema != null)
                 {
@@ -334,9 +334,10 @@ namespace Microsoft.Rest.Modeler.Swagger
                    _effectiveProduces.Contains("application/json", StringComparer.OrdinalIgnoreCase);
         }
 
-        private bool SwaggerOperationProducesNonNull(Operation operation)
+        private bool SwaggerOperationProducesNotEmpty(Operation operation)
         {
-            return _effectiveProduces != null;
+            return _effectiveProduces != null 
+                && _effectiveProduces.Any();
         }
 
         private void EnsureUniqueMethodName(string methodName, string methodGroup)
