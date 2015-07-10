@@ -1,0 +1,113 @@
+﻿@using System.Linq;
+@using Microsoft.Rest.Generator.ClientModel
+@using Microsoft.Rest.Generator.NodeJS.TemplateModels
+@using Microsoft.Rest.Generator.NodeJS.Templates
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.NodeJS.MethodTemplateModel>
+
+/**
+@WrapComment(" * ", Model.Documentation)
+@foreach (var parameter in Model.DocumentationParameters)
+{
+ @:* @@param {@parameter.Type.Name} [@parameter.Name] @parameter.Documentation
+ @:*
+}
+@WrapComment(" * ", " @param {object} [options]")
+ *
+@WrapComment(" * ", " @param {object} [options.customHeaders] headers that will be added to request")
+ *
+@WrapComment(" * ",  " @param {function} callback")
+ *
+@WrapComment(" * ",  " @returns {Stream} The Response stream")
+ */
+@(Model.OperationName).prototype.@(Model.Name) = function (@(Model.MethodParameterDeclarationWithCallback)) {
+  var client = @(Model.ClientReference);
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+  @if (Model.ParameterTemplateModels.Any())
+  {
+  @:// Validate
+  @:try {
+  @foreach (var parameter in Model.ParameterTemplateModels)
+  {
+    if (parameter.IsRequired)
+    {
+    @:if (@(parameter.Name) === null || @(parameter.Name) === undefined) {
+      @:throw new Error('\'@(parameter.Name)\' cannot be null');
+    @:}
+   @:
+    }
+      if (!(Model.HttpMethod == HttpMethod.Patch  && parameter.Type is CompositeType))
+    {
+    @:@(parameter.Type.ValidateType(Model.Scope, parameter.Name))
+    }
+  }
+  @:} catch (error) {
+    @:return callback(error);
+  @:}
+  }
+  @EmptyLine
+  // Construct URL
+  @if (Model.IsAbsoluteUrl)
+  {
+  @:var requestUrl = '@(Model.Url)';
+  }
+  else
+  {
+  @:var requestUrl = @(Model.ClientReference).baseUri + 
+  @:                 '/@(Model.Url)';
+  }
+  @(Model.BuildUrl("requestUrl"))
+  @(Model.RemoveDuplicateForwardSlashes("requestUrl"))
+  @EmptyLine
+  // Create HTTP transport objects
+  var httpRequest = new WebResource();
+  httpRequest.method = '@(Model.HttpMethod.ToString().ToUpper())';
+  httpRequest.headers = {};
+  httpRequest.url = requestUrl;
+
+  // Set Headers
+  @foreach (var parameter in Model.Parameters.Where(p => p.Location == ParameterLocation.Header))
+  {
+  @:if (@(parameter.Name) !== null) {
+  @:  httpRequest.headers['@(parameter.SerializedName)'] = @parameter.Type.ToString(parameter.Name);
+  @:}
+  }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  @if (Model.RequestBody != null)
+  {
+  <text>
+  // Serialize Request
+  var requestContent = null;
+  requestContent = JSON.stringify(msRest.serializeObject(@(Model.RequestBody.Name)));
+  httpRequest.body = requestContent;
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  </text>
+  }
+  else
+  {
+  <text>
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
+  </text>
+  }
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
+  @if (Model.Responses.Any(r => r.Value == PrimaryType.Stream))
+  {
+@:  @Include(new MethodStreamPipelineTemplate(), Model)
+  }
+  else
+  {
+@:  @Include(new MethodJsonPipelineTemplate(), Model)
+  }
+};

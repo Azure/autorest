@@ -1,0 +1,895 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(SolutionDir)\packages\xunit.runner.visualstudio.2.0.0\build\net20\xunit.runner.visualstudio.props" Condition="Exists('$(SolutionDir)\packages\xunit.runner.visualstudio.2.0.0\build\net20\xunit.runner.visualstudio.props')" />
+  <Import Project="$(SolutionDir)\packages\xunit.core.2.0.0\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.props" Condition="Exists('$(SolutionDir)\packages\xunit.core.2.0.0\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.props')" />
+  <PropertyGroup>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\..\</SolutionDir>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <LibraryFxTarget Condition="'$(LibraryFxTarget)' == ''">net45</LibraryFxTarget>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{84211169-9441-44F9-B626-10BF75FF25A6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Microsoft.Rest.Generator.CSharp.Tests</RootNamespace>
+    <AssemblyName>AutoRest.Generator.CSharp.Tests</AssemblyName>
+    <RestorePackages>true</RestorePackages>
+    <AutoRestTest>true</AutoRestTest>
+    <NuGetPackageImportStamp>c999b926</NuGetPackageImportStamp>
+  </PropertyGroup>
+  <Import Project="$(SolutionDir)\Tools\AutoRest.Settings.targets" />
+  <PropertyGroup>
+    <NoWarn>1570;1591</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>$(SolutionDir)\packages\xunit.abstractions.2.0.0\lib\net35\xunit.abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.assert">
+      <HintPath>$(SolutionDir)\packages\xunit.assert.2.0.0\lib\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.assert.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.core">
+      <HintPath>$(SolutionDir)\packages\xunit.extensibility.core.2.0.0\lib\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\ClientRuntimes\CSharp\ClientRuntime\ClientRuntime.csproj">
+      <Project>{7f524559-93f9-4f3f-9e2c-af41a0c2e6f4}</Project>
+      <Name>ClientRuntime</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\AutoRest.Core\AutoRest.Core.csproj">
+      <Project>{c876085f-9dc3-41f0-b7b4-17022cd84684}</Project>
+      <Name>AutoRest.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Modelers\Swagger.Tests\AutoRest.Modeler.Swagger.Tests.csproj">
+      <Project>{c6c4e139-d7af-486c-95ba-2b879f58f18d}</Project>
+      <Name>AutoRest.Modeler.Swagger.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSharp\AutoRest.Generator.CSharp.csproj">
+      <Project>{cc1eec95-41ef-44b6-8761-00fa3e647248}</Project>
+      <Name>AutoRest.Generator.CSharp</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(SolutionDir)\AutoRest\AutoRest\AutoRest.json">
+      <Link>AutoRest.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\AcceptanceTests\swagger\azure-report.json">
+      <Link>Swagger\azure-report.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\AcceptanceTests\swagger\azure-special-properties.json">
+      <Link>Swagger\azure-special-properties.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\AcceptanceTests\swagger\body-array.json">
+      <Link>Swagger\body-array.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\AcceptanceTests\swagger\body-boolean.json">
+      <Link>Swagger\body-boolean.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\AcceptanceTests\swagger\body-byte.json">
+      <Link>Swagger\body-byte.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\AcceptanceTests\swagger\body-complex.json">
+      <Link>Swagger\body-complex.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\AcceptanceTests\swagger\body-date.json">
+      <Link>Swagger\body-date.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\AcceptanceTests\swagger\body-datetime.json">
+      <Link>Swagger\body-datetime.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\AcceptanceTests\swagger\body-dictionary.json">
+      <Link>Swagger\body-dictionary.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\AcceptanceTests\swagger\body-file.json">
+      <Link>Swagger\body-file.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\AcceptanceTests\swagger\body-integer.json">
+      <Link>Swagger\body-integer.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\AcceptanceTests\swagger\body-number.json">
+      <Link>Swagger\body-number.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\AcceptanceTests\swagger\body-string.json">
+      <Link>Swagger\body-string.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\AcceptanceTests\swagger\head.json">
+      <Link>Swagger\head.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\AcceptanceTests\swagger\header.json">
+      <Link>Swagger\header.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\AcceptanceTests\swagger\httpInfrastructure.json">
+      <Link>Swagger\httpInfrastructure.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\AcceptanceTests\swagger\lro.json">
+      <Link>Swagger\lro.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\AcceptanceTests\swagger\paging.json">
+      <Link>Swagger\paging.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\AcceptanceTests\swagger\report.json">
+      <Link>Swagger\report.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\AcceptanceTests\swagger\required-optional.json">
+      <Link>Swagger\required-optional.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\AcceptanceTests\swagger\resource-flattening-reference.json">
+      <Link>Swagger\resource-flattening-reference.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\AcceptanceTests\swagger\resource-flattening.json">
+      <Link>Swagger\resource-flattening.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\AcceptanceTests\swagger\subscriptionId-apiVersion.json">
+      <Link>Swagger\subscriptionId-apiVersion.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\AcceptanceTests\swagger\url.json">
+      <Link>Swagger\url.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="app.config" />
+    <None Include="RegenerateExpectedClasses.ps1" />
+    <None Include="Swagger\swagger-mirror-polymorphic.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Swagger\swagger-mirror-primitives.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Swagger\swagger-mirror-recursive-type.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Swagger\swagger-mirror-sequences.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Swagger\swagger.2.0.example.v2.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Expected\SwaggerBat\BodyFile.Cs\AutoRestSwaggerBATFileService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyFile.Cs\AutoRestSwaggerBATFileServiceExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyFile.Cs\Files.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyFile.Cs\FilesExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyFile.Cs\IAutoRestSwaggerBATFileService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyFile.Cs\IFiles.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyFile.Cs\Models\Error.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CSharpSwaggerBat.cs" />
+    <Compile Include="Expected\Mirror.RecursiveTypes.Cs\IRecursiveTypesAPI.cs" />
+    <Compile Include="Expected\Mirror.RecursiveTypes.Cs\Models\Error.cs" />
+    <Compile Include="Expected\Mirror.RecursiveTypes.Cs\Models\Product.cs" />
+    <Compile Include="Expected\Mirror.RecursiveTypes.Cs\RecursiveTypesAPI.cs" />
+    <Compile Include="Expected\Mirror.RecursiveTypes.Cs\RecursiveTypesAPIExtensions.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Utilities\Comparers.cs" />
+    <Compile Include="CSharpCodeNamingFrameworkTests.cs" />
+    <Compile Include="Expected\Mirror.Polymorphic.Cs\IPolymorphicAnimalStore.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\Mirror.Polymorphic.Cs\Models\Animal.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\Mirror.Polymorphic.Cs\Models\BaseCat.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\Mirror.Polymorphic.Cs\Models\BurmeseCat.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\Mirror.Polymorphic.Cs\Models\Doggy.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\Mirror.Polymorphic.Cs\Models\Error2.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\Mirror.Polymorphic.Cs\Models\HimalayanCat.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\Mirror.Polymorphic.Cs\Models\Horsey.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\Mirror.Polymorphic.Cs\Models\PersianCat.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\Mirror.Polymorphic.Cs\Models\SiameseCat.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\Mirror.Polymorphic.Cs\PolymorphicAnimalStore.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\Mirror.Polymorphic.Cs\PolymorphicAnimalStoreExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\Mirror.Primitives.Cs\ISwaggerDataTypesClient.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\Mirror.Primitives.Cs\Models\Error.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\Mirror.Primitives.Cs\Models\Product.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\Mirror.Primitives.Cs\SwaggerDataTypesClient.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\Mirror.Primitives.Cs\SwaggerDataTypesClientExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\Mirror.Sequences.Cs\ISequenceRequestResponseTest.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\Mirror.Sequences.Cs\Models\ErrorModel.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\Mirror.Sequences.Cs\Models\Pet.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\Mirror.Sequences.Cs\Models\PetStyle.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\Mirror.Sequences.Cs\SequenceRequestResponseTest.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\Mirror.Sequences.Cs\SequenceRequestResponseTestExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\PetstoreV2.Cs\ISwaggerPetstoreV2.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\PetstoreV2.Cs\Models\ApiResponse.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\PetstoreV2.Cs\Models\Category.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\PetstoreV2.Cs\Models\Order.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\PetstoreV2.Cs\Models\Pet.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\PetstoreV2.Cs\Models\Tag.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\PetstoreV2.Cs\Models\User.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\PetstoreV2.Cs\SwaggerPetstoreV2.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\PetstoreV2.Cs\SwaggerPetstoreV2Extensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyArray.Cs\Array.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyArray.Cs\ArrayExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyArray.Cs\AutoRestSwaggerBATArrayService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyArray.Cs\AutoRestSwaggerBATArrayServiceExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyArray.Cs\IArray.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyArray.Cs\IAutoRestSwaggerBATArrayService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyArray.Cs\Models\Error.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyArray.Cs\Models\Product.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyBoolean.cs\AutoRestBoolTestService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyBoolean.cs\AutoRestBoolTestServiceExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyBoolean.cs\BoolModel.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyBoolean.cs\BoolModelExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyBoolean.cs\IAutoRestBoolTestService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyBoolean.cs\IBoolModel.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyBoolean.cs\Models\Error.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyByte.Cs\AutoRestSwaggerBATByteService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyByte.Cs\AutoRestSwaggerBATByteServiceExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyByte.Cs\ByteModel.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyByte.Cs\ByteModelExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyByte.Cs\IAutoRestSwaggerBATByteService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyByte.Cs\IByteModel.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyByte.Cs\Models\Error.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\Array.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\ArrayExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\AutoRestComplexTestService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\AutoRestComplexTestServiceExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\BasicOperations.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\BasicOperationsExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\Dictionary.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\DictionaryExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\IArray.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\IAutoRestComplexTestService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\IBasicOperations.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\IDictionary.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\IInheritance.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\Inheritance.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\InheritanceExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\IPolymorphicrecursive.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\IPolymorphism.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\IPrimitive.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\Models\ArrayWrapper.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\Models\Basic.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\Models\BooleanWrapper.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\Models\ByteWrapper.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\Models\Cat.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\Models\CMYKColors.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\Models\DatetimeWrapper.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\Models\DateWrapper.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\Models\DictionaryWrapper.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\Models\Dog.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\Models\DoubleWrapper.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\Models\Error.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\Models\Fish.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\Models\FloatWrapper.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\Models\IntWrapper.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\Models\LongWrapper.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\Models\Pet.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\Models\Salmon.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\Models\Sawshark.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\Models\Shark.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\Models\Siamese.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\Models\StringWrapper.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\Polymorphicrecursive.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\PolymorphicrecursiveExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\Polymorphism.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\PolymorphismExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\Primitive.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyComplex.Cs\PrimitiveExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyDate.Cs\AutoRestDateTestService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyDate.Cs\AutoRestDateTestServiceExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyDate.Cs\Date.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyDate.Cs\DateExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyDate.Cs\IAutoRestDateTestService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyDate.Cs\IDate.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyDate.Cs\Models\Error.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyDateTime.Cs\AutoRestDateTimeTestService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyDateTime.Cs\AutoRestDateTimeTestServiceExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyDateTime.Cs\Datetime.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyDateTime.Cs\DatetimeExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyDateTime.Cs\IAutoRestDateTimeTestService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyDateTime.Cs\IDatetime.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyDateTime.Cs\Models\Error.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyDictionary.Cs\AutoRestSwaggerBATdictionaryService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyDictionary.Cs\AutoRestSwaggerBATdictionaryServiceExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyDictionary.Cs\Dictionary.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyDictionary.Cs\DictionaryExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyDictionary.Cs\IAutoRestSwaggerBATdictionaryService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyDictionary.Cs\IDictionary.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyDictionary.Cs\Models\Error.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyDictionary.Cs\Models\Widget.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyInteger.Cs\AutoRestIntegerTestService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyInteger.Cs\AutoRestIntegerTestServiceExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyInteger.Cs\IAutoRestIntegerTestService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyInteger.Cs\IIntModel.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyInteger.Cs\IntModel.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyInteger.Cs\IntModelExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyInteger.Cs\Models\Error.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyNumber.Cs\AutoRestNumberTestService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyNumber.Cs\AutoRestNumberTestServiceExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyNumber.Cs\IAutoRestNumberTestService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyNumber.Cs\INumber.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyNumber.Cs\Models\Error.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyNumber.Cs\Number.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyNumber.Cs\NumberExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyString.Cs\AutoRestSwaggerBATService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyString.Cs\AutoRestSwaggerBATServiceExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyString.Cs\EnumModel.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyString.Cs\EnumModelExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyString.Cs\IAutoRestSwaggerBATService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyString.Cs\IEnumModel.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyString.Cs\IStringModel.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyString.Cs\Models\Colors.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyString.Cs\Models\Error.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyString.Cs\StringModel.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyString.Cs\StringModelExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Header.Cs\AutoRestSwaggerBATHeaderService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Header.Cs\AutoRestSwaggerBATHeaderServiceExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Header.Cs\Header.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Header.Cs\HeaderExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Header.Cs\IAutoRestSwaggerBATHeaderService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Header.Cs\IHeader.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Header.Cs\Models\Error.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Header.Cs\Models\GreyscaleColors.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Http.Cs\AutoRestHttpInfrastructureTestService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Http.Cs\AutoRestHttpInfrastructureTestServiceExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Http.Cs\HttpClientFailure.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Http.Cs\HttpClientFailureExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Http.Cs\HttpFailure.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Http.Cs\HttpFailureExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Http.Cs\HttpRedirects.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Http.Cs\HttpRedirectsExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Http.Cs\HttpRetry.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Http.Cs\HttpRetryExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Http.Cs\HttpServerFailure.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Http.Cs\HttpServerFailureExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Http.Cs\HttpSuccess.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Http.Cs\HttpSuccessExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Http.Cs\IAutoRestHttpInfrastructureTestService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Http.Cs\IHttpClientFailure.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Http.Cs\IHttpFailure.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Http.Cs\IHttpRedirects.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Http.Cs\IHttpRetry.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Http.Cs\IHttpServerFailure.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Http.Cs\IHttpSuccess.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Http.Cs\IMultipleResponses.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Http.Cs\Models\A.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Http.Cs\Models\B.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Http.Cs\Models\C.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Http.Cs\Models\D.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Http.Cs\Models\Error.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Http.Cs\MultipleResponses.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Http.Cs\MultipleResponsesExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Report.Cs\AutoRestReportService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Report.Cs\AutoRestReportServiceExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Report.Cs\IAutoRestReportService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Report.Cs\Models\Error.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\RequiredOptional.Cs\AutoRestRequiredOptionalTestService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\RequiredOptional.Cs\AutoRestRequiredOptionalTestServiceExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\RequiredOptional.Cs\ExplicitModel.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\RequiredOptional.Cs\ExplicitModelExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\RequiredOptional.Cs\IAutoRestRequiredOptionalTestService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\RequiredOptional.Cs\IExplicitModel.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\RequiredOptional.Cs\IImplicitModel.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\RequiredOptional.Cs\ImplicitModel.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\RequiredOptional.Cs\ImplicitModelExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\RequiredOptional.Cs\Models\ArrayOptionalWrapper.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\RequiredOptional.Cs\Models\ArrayWrapper.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\RequiredOptional.Cs\Models\ClassOptionalWrapper.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\RequiredOptional.Cs\Models\ClassWrapper.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\RequiredOptional.Cs\Models\Error.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\RequiredOptional.Cs\Models\IntOptionalWrapper.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\RequiredOptional.Cs\Models\IntWrapper.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\RequiredOptional.Cs\Models\Product.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\RequiredOptional.Cs\Models\StringOptionalWrapper.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\RequiredOptional.Cs\Models\StringWrapper.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Url.Cs\AutoRestUrlTestService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Url.Cs\AutoRestUrlTestServiceExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Url.Cs\IAutoRestUrlTestService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Url.Cs\IPathItems.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Url.Cs\IPaths.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Url.Cs\IQueries.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Url.Cs\Models\Error.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Url.Cs\Models\UriColor.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Url.Cs\PathItems.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Url.Cs\PathItemsExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Url.Cs\Paths.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Url.Cs\PathsExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Url.Cs\Queries.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Url.Cs\QueriesExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Utilities\MirroringHandler.cs" />
+    <Compile Include="Utilities\MirrorTestHelpers.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Utilities\ProcessOutputListener.cs" />
+    <Compile Include="Utilities\RecordedDelegatingHandler.cs" />
+    <Compile Include="SerializationTests.cs" />
+    <Compile Include="Utilities\ServiceController.cs" />
+    <Compile Include="SwaggerBatTestOrderer.cs" />
+    <Compile Include="Utilities\TestExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\AcceptanceTests\server\routes\sample.png">
+      <Link>sample.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>

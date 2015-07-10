@@ -1,0 +1,21 @@
+﻿#AutoRest Command Line Interface Documentation
+
+##Syntax
+```bash
+$syntax$
+```
+
+##Parameters
+$parameters-start$
+**-$parameter$** $parameter-desc$
+
+$parameters-end$
+
+##Examples
+$examples-start$
+- $example-desc$
+```bash
+$example$
+```
+
+$examples-end$

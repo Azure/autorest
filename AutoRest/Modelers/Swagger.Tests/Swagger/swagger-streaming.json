@@ -1,0 +1,114 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.13",
+    "title": "Swagger Stream Store"
+  },
+  "host": "http://autorestresourcesproxysite.azurewebsites.net/Autorest.HelloWorld",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/values/formDate": {
+      "post": {
+        "tags": [
+          "Values"
+        ],
+        "operationId": "GetWithStreamFormData",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "image/jpeg"
+        ],
+        "parameters": [
+          {
+            "name": "fileContent",
+            "description": "file to upload",
+            "required": true,
+            "type": "file",
+            "in": "formData"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Values"
+        ],
+        "operationId": "PostWithByteArrayFormData",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "image/jpeg"
+        ],
+        "parameters": [
+          {
+            "name": "fileContent",
+            "description": "file to upload",
+            "required": true,
+            "type": "string",
+            "format": "byte",
+            "in": "formData"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string",
+              "format": "byte"
+            }
+          }
+        }
+      }
+    },
+    "/values": {
+      "post": {
+        "tags": [
+          "Values"
+        ],
+        "operationId": "GetWithStream",
+        "consumes": [],
+        "produces": [
+          "image/jpeg"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Values"
+        ],
+        "operationId": "PostWithByteArray",
+        "consumes": [],
+        "produces": [
+          "image/jpeg"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string",
+              "format": "byte"
+            }
+          }
+        }
+      }
+    }
+  }
+}

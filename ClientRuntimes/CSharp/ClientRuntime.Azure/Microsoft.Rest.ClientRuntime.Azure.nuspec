@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata minClientVersion="2.5">
+    <id>Microsoft.Rest.ClientRuntime.Azure</id>
+    <title>Client Runtime for Microsoft Azure Libraries</title>
+    <version>$version$</version>
+    <authors>Microsoft</authors>
+    <owners>azure-sdk, Microsoft</owners>
+    <licenseUrl>https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/Azure/AutoRest</projectUrl>
+    <iconUrl>http://go.microsoft.com/fwlink/?LinkID=288890</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <summary>Client infrastructure for Azure client libraries.</summary>
+    <description>Provides common error handling, tracing, and HTTP/REST-based pipeline manipulation.
+
+      Supported Platforms:
+      -   Portable Class Libraries
+      -   .NET Framework 4.5
+      -   .NET Framework 4.0
+      -   Windows 8
+      -   Windows Phone 8.1
+    </description>
+    <copyright>Copyright © Microsoft Corporation</copyright>
+    <tags>Microsoft "Microsoft Azure" Azure REST azureofficial</tags>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.Runtime.Serialization" targetFramework="net40, net45" />
+    </frameworkAssemblies>
+    <references>
+      <group targetFramework="portable-net403+win+wpa81">
+        <reference file="Microsoft.Rest.ClientRuntime.Azure.dll" />
+      </group>
+      <group targetFramework="net45">
+        <reference file="Microsoft.Rest.ClientRuntime.Azure.dll" />
+      </group>
+      <group targetFramework="net40">
+        <reference file="Microsoft.Rest.ClientRuntime.Azure.dll" />
+      </group>
+    </references>
+    <dependencies>
+      <dependency id="Microsoft.Rest.ClientRuntime" version="[__VERSION_Microsoft.Rest.ClientRuntime__,2)" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="ClientRuntime.Azure\**\*.cs" target="src\Common" />
+    <file src="ClientRuntime.Azure\Properties\*.resx" target="src\Common\Properties" />
+    <file src="..\..\binaries\portable\Microsoft.Rest.ClientRuntime.Azure.dll" target="lib\portable-net403+win+wpa81" />
+    <file src="..\..\binaries\portable\Microsoft.Rest.ClientRuntime.Azure.pdb" target="lib\portable-net403+win+wpa81" />
+    <file src="..\..\binaries\portable\Microsoft.Rest.ClientRuntime.Azure.xml" target="lib\portable-net403+win+wpa81" />
+    <file src="..\..\binaries\net45\Microsoft.Rest.ClientRuntime.Azure.dll" target="lib\net45" />
+    <file src="..\..\binaries\net45\Microsoft.Rest.ClientRuntime.Azure.pdb" target="lib\net45" />
+    <file src="..\..\binaries\net45\Microsoft.Rest.ClientRuntime.Azure.xml" target="lib\net45" />
+    <file src="..\..\binaries\net40\Microsoft.Rest.ClientRuntime.Azure.dll" target="lib\net40" />
+    <file src="..\..\binaries\net40\Microsoft.Rest.ClientRuntime.Azure.pdb" target="lib\net40" />
+    <file src="..\..\binaries\net40\Microsoft.Rest.ClientRuntime.Azure.xml" target="lib\net40" />
+  </files>
+</package>

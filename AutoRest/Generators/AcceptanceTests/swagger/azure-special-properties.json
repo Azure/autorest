@@ -1,0 +1,717 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutoRest Azure Special Parameters Test Client",
+    "description": "Test Infrastructure for AutoRest",
+    "version": "2015-07-01-preview"
+  },
+  "host": "localhost",
+  "schemes": [
+    "http"
+  ],
+  "produces": [ "application/json" ],
+  "consumes": [ "application/json" ],
+  "paths": {
+    "/azurespecials/subscriptionId/method/string/none/path/global/1234-5678-9012-3456/{subscriptionId}": {
+      "post": {
+        "operationId": "subscriptionInCredentials_postMethodGlobalValid",
+        "description": "POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed",
+        "tags": [
+          "SubscriptionInCredentials Operations"
+        ],
+        "parameters": [
+          {
+            "$ref": "globalSubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the '1234-5678-9012-3456' credential value from credentials"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/azurespecials/subscriptionId/method/string/none/path/global/null/{subscriptionId}": {
+      "post": {
+        "operationId": "subscriptionInCredentials_postMethodGlobalNull",
+        "description": "POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call",
+        "tags": [
+          "SubscriptionInCredentials Operations"
+        ],
+        "parameters": [
+          {
+            "$ref": "globalSubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This should never occur - you should be prevented from calling this method with null subscription Id in credentials"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/azurespecials/subscriptionId/method/string/none/path/globalNotProvided/1234-5678-9012-3456/{subscriptionId}": {
+      "post": {
+        "operationId": "subscriptionInCredentials_postMethodGlobalNotProvidedValid",
+        "description": "POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed",
+        "tags": [
+          "SubscriptionInCredentials Operations"
+        ],
+        "parameters": [
+          {
+            "$ref": "globalSubscriptionId"
+          },
+          {
+            "$ref": "globalApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the '1234-5678-9012-3456' credential value from credentials"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/azurespecials/subscriptionId/method/string/none/path/local/1234-5678-9012-3456/{subscriptionId}": {
+      "post": {
+        "operationId": "subscriptionInMethod_postMethodLocalValid",
+        "description": "POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed",
+        "tags": [
+          "SubscriptionInMethod Operations"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "This should appear as a method parameter, use value '1234-5678-9012-3456'",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the '1234-5678-9012-3456' credential value from the local parameter"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/azurespecials/subscriptionId/method/string/none/path/local/null/{subscriptionId}": {
+      "post": {
+        "operationId": "subscriptionInMethod_postMethodLocalNull",
+        "description": "POST method with subscriptionId modeled in the method.  pass in subscription id = null, client-side validation should prevent you from making this call",
+        "tags": [
+          "SubscriptionInMethod Operations"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "This should appear as a method parameter, use value null, client-side validation should prvenet the call",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "You should not reach this response - client side validation should prevent yopu from sending a null subscriptionId"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/azurespecials/subscriptionId/path/string/none/path/global/1234-5678-9012-3456/{subscriptionId}": {
+      "parameters": [
+        {
+            "$ref": "globalSubscriptionId"
+        }
+      ],
+      "post": {
+        "operationId": "subscriptionInCredentials_postPathGlobalValid",
+        "description": "POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed",
+        "tags": [
+          "SubscriptionInCredentials Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the '1234-5678-9012-3456' credential value from credentials"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/azurespecials/subscriptionId/path/string/none/path/local/1234-5678-9012-3456/{subscriptionId}": {
+      "parameters": [
+        {
+          "name": "subscriptionId",
+          "in": "path",
+          "description": "Should appear as a method parameter -use value '1234-5678-9012-3456'",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "post": {
+        "operationId": "subscriptionInMethod_postPathLocalValid",
+        "description": "POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed",
+        "tags": [
+          "SubscriptionInMethod Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the '1234-5678-9012-3456' credential value from the local parameter"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/azurespecials/subscriptionId/swagger/string/none/path/global/1234-5678-9012-3456/{subscriptionId}": {
+      "post": {
+        "operationId": "subscriptionInCredentials_postSwaggerGlobalValid",
+        "description": "POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed",
+        "tags": [
+          "SubscriptionInCredentials Operations"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/globalSubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the '1234-5678-9012-3456' credential value from credentials"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/azurespecials/subscriptionId/swagger/string/none/path/local/1234-5678-9012-3456/{subscriptionId}": {
+      "post": {
+        "operationId": "subscriptionInMethod_postSwaggerLocalValid",
+        "description": "POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed",
+        "tags": [
+          "SubscriptionInMethod Operations"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the '1234-5678-9012-3456' credential value from the local parameter"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview": {
+      "get": {
+        "operationId": "apiVersionDefault_getMethodGlobalValid",
+        "description": "GET method with api-version modeled in global settings.",
+        "tags": [
+          "ApiVersionDefault Operations"
+        ],
+        "parameters": [
+          {
+            "$ref" : "globalApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the '2015-07-01-preview' api-version value from global client settings"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview": {
+      "get": {
+        "operationId": "apiVersionDefault_getMethodGlobalNotProvidedValid",
+        "description": "GET method with api-version modeled in global settings.",
+        "tags": [
+          "ApiVersionDefault Operations"
+        ],
+        "parameters": [
+          {
+            "$ref" : "globalApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the '2015-07-01-preview' credential value from global client settings"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/azurespecials/apiVersion/method/string/none/query/local/2.0": {
+      "get": {
+        "operationId": "apiVersionLocal_getMethodLocalValid",
+        "description": "Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed",
+        "tags": [
+          "ApiVersionLocal Operations"
+        ],
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "This should appear as a method parameter, use value '2.0'",
+            "type": "string",
+            "required": true,
+            "enum": [ "2.0" ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the '2.0' api-version value from the local parameter"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/azurespecials/apiVersion/method/string/none/query/local/null": {
+      "get": {
+        "operationId": "apiVersionLocal_getMethodLocalNull",
+        "description": "Get method with api-version modeled in the method.  pass in api-version = null to succeed",
+        "tags": [
+          "ApiVersionLocal Operations"
+        ],
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "This should appear as a method parameter, use value null, this should result in no serialized parameter",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received no api-version value from the local parameter"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview": {
+      "parameters": [
+        {
+          "$ref": "globalApiVersion"
+        }
+      ],
+      "get": {
+        "operationId": "apiVersionDefault_getPathGlobalValid",
+        "description": "GET method with api-version modeled in global settings.",
+        "tags": [
+          "ApiVersionDefault Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the '2015-07-01-preview' api-version value from global client settings"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/azurespecials/apiVersion/path/string/none/query/local/2.0": {
+      "parameters": [
+        {
+          "name": "api-version",
+          "in": "query",
+          "description": "This should appear as a method parameter, use value '2.0'",
+          "type": "string",
+          "required": true,
+          "enum": [ "2.0" ]
+        }
+      ],
+      "get": {
+        "operationId": "apiVersionLocal_getPathLocalValid",
+        "description": "Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed",
+        "tags": [
+          "ApiVersionLocal Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the '2.0' api-version value from the local parameter"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview": {
+      "get": {
+        "operationId": "apiVersionDefault_getSwaggerGlobalValid",
+        "description": "GET method with api-version modeled in global settings.",
+        "tags": [
+          "ApiVersionDefault Operations"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/globalApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the '2015-07-01-preview' api-version value from global client settings"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/azurespecials/apiVersion/swagger/string/none/query/local/2.0": {
+      "get": {
+        "operationId": "apiVersionLocal_getSwaggerLocalValid",
+        "description": "Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed",
+        "tags": [
+          "ApiVersionLocal Operations"
+        ],
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The api version, which appears in the query, the value is always '2.0'",
+            "type": "string",
+            "required": true,
+            "enum": [ "2.0" ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the '2.0' api-version value from the local parameter"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}": {
+      "get": {
+        "operationId": "skipUrlEncoding_getMethodPathValid",
+        "description": "Get method with unencoded path parameter with value 'path1/path2/path3'",
+        "tags": [
+          "SkipUrlEncoding Operations"
+        ],
+        "parameters": [
+          {
+            "name": "unencodedPathParam",
+            "in": "path",
+            "description": "Unencoded path parameter with value 'path1/path2/path3'",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the path parameter with value 'path1/path2/path3'"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}": {
+      "parameters": [
+        {
+          "name": "unencodedPathParam",
+          "in": "path",
+          "description": "Unencoded path parameter with value 'path1/path2/path3'",
+          "type": "string",
+          "required": true,
+          "x-ms-skip-url-encoding": true
+        }
+      ],
+      "get": {
+        "operationId": "skipUrlEncoding_getPathPathValid",
+        "description": "Get method with unencoded path parameter with value 'path1/path2/path3'",
+        "tags": [
+          "SkipUrlEncoding Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the path parameter with value 'path1/path2/path3'"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}": {
+      "get": {
+        "operationId": "skipUrlEncoding_getSwaggerPathValid",
+        "description": "Get method with unencoded path parameter with value 'path1/path2/path3'",
+        "tags": [
+          "SkipUrlEncoding Operations"
+        ],
+        "parameters": [
+          {
+            "name": "unencodedPathParam",
+            "in": "path",
+            "description": "An unencoded path parameter with value 'path1/path2/path3'",
+            "type": "string",
+            "required": true,
+            "enum": [ "path1/path2/path3" ],
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the path parameter with value 'path1/path2/path3'"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/azurespecials/skipUrlEncoding/method/query/valid": {
+      "get": {
+        "operationId": "skipUrlEncoding_getMethodQueryValid",
+        "description": "Get method with unencoded query parameter with value 'value1&q2=value2&q3=value3'",
+        "tags": [
+          "SkipUrlEncoding Operations"
+        ],
+        "parameters": [
+          {
+            "name": "q1",
+            "in": "query",
+            "description": "Unencoded query parameter with value 'value1&q2=value2&q3=value3'",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the unencoded query parameter with value 'value1&q2=value2&q3=value3'"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/azurespecials/skipUrlEncoding/method/query/null": {
+      "get": {
+        "operationId": "skipUrlEncoding_getMethodQueryNull",
+        "description": "Get method with unencoded query parameter with value null",
+        "tags": [
+          "SkipUrlEncoding Operations"
+        ],
+        "parameters": [
+          {
+            "name": "q1",
+            "in": "query",
+            "description": "Unencoded query parameter with value null",
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received no query parameter"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/azurespecials/skipUrlEncoding/path/query/valid": {
+      "parameters": [
+        {
+          "name": "q1",
+          "in": "query",
+          "description": "Unencoded query parameter with value 'value1&q2=value2&q3=value3'",
+          "type": "string",
+          "required": true,
+          "x-ms-skip-url-encoding": true
+        }
+      ],
+      "get": {
+        "operationId": "skipUrlEncoding_getPathQueryValid",
+        "description": "Get method with unencoded query parameter with value 'value1&q2=value2&q3=value3'",
+        "tags": [
+          "SkipUrlEncoding Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the unencoded query parameter with value 'value1&q2=value2&q3=value3'"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/azurespecials/skipUrlEncoding/swagger/query/valid": {
+      "get": {
+        "operationId": "skipUrlEncoding_getSwaggerQueryValid",
+        "description": "Get method with unencoded query parameter with value 'value1&q2=value2&q3=value3'",
+        "tags": [
+          "SkipUrlEncoding Operations"
+        ],
+        "parameters": [
+          {
+            "name": "q1",
+            "in": "query",
+            "description": "An unencoded query parameter with value 'value1&q2=value2&q3=value3'",
+            "type": "string",
+            "enum": [ "value1&q2=value2&q3=value3" ],
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the unencoded query parameter with value 'value1&q2=value2&q3=value3'"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "globalSubscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'",
+      "type": "string",
+      "required": true
+    },
+    "globalApiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The api version, which appears in the query, the value is always '2015-07-01-preview'",
+      "type": "string",
+      "required": true
+    }
+  },
+  "definitions": {
+    "Error": {
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

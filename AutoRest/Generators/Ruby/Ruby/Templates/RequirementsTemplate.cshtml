@@ -1,0 +1,10 @@
+﻿@using Microsoft.Rest.Generator.Ruby
+@using Microsoft.Rest.Generator.Ruby.Templates
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Ruby.RequirementsTemplateModel>
+@Header("# ")
+@EmptyLine
+@Model.GetDependencyGems()
+@EmptyLine
+@Model.GetModelsRequiredFiles()
+@Model.GetOperationsRequiredFiles()
+@Model.GetClientRequiredFile()

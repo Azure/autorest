@@ -1,0 +1,47 @@
+﻿@using Microsoft.Rest.Generator.CSharp
+@using Microsoft.Rest.Generator.CSharp.Templates
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.MethodGroupTemplateModel>
+@Header("/// ")
+namespace @Settings.Namespace
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Net;
+    using System.Net.Http;
+    using System.Net.Http.Headers;
+    using System.Text;
+    using System.Text.RegularExpressions;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
+    using Newtonsoft.Json;
+@foreach (var usingString in Model.Usings) {
+@:    using @usingString;
+}
+@EmptyLine
+    internal partial class @(Model.MethodGroupType) : IServiceOperations<@(Model.Name)>, I@(Model.MethodGroupType)
+    {
+        /// <summary>
+        /// Initializes a new instance of the @(Model.MethodGroupType) class.
+        /// </summary>
+        /// <param name='client'>
+        /// Reference to the service client.
+        /// </param>
+        internal @(Model.MethodGroupType)(@(Model.Name) client)
+        {
+            this.Client = client;
+        }
+        @EmptyLine
+        /// <summary>
+        /// Gets a reference to the @(Model.Name)
+        /// </summary>
+        public @(Model.Name) Client { get; private set; }
+        @EmptyLine
+        @foreach (var method in Model.MethodTemplateModels)
+        {
+        @:@(Include(new MethodTemplate(), method))
+        @EmptyLine
+        }
+    }
+}

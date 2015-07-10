@@ -1,0 +1,16 @@
+﻿Microsoft (R) AutoRest $version$
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Usage: $syntax$
+
+Parameters:
+$parameters-start$
+  -$parameter$: $parameter-desc$
+$parameters-end$
+
+Examples:
+$examples-start$
+  $example-desc$
+  >$example$
+
+$examples-end$

@@ -1,0 +1,9 @@
+2015.07.10 Version 0.10.0
+* Improved C# Client Runtime and Code Generator
+    * Changed serialization implementation to use Newtonsoft.Json.Net library
+    * Fixed bugs
+* Added NodeJS Client Runtime and Code Generator
+
+2015.03.27 Version 0.9.7
+* Initial release of the C# Client Runtime 
+* Initial release of the code generator with support for C# 

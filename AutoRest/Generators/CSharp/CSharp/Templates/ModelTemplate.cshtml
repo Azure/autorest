@@ -1,0 +1,78 @@
+﻿@using System.Linq
+@using Microsoft.Rest.Generator.ClientModel
+@using Microsoft.Rest.Generator.CSharp.TemplateModels
+@using Microsoft.Rest.Generator.Utilities
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.ModelTemplateModel>
+@Header("/// ")
+namespace @(Settings.Namespace).Models
+{
+    using System;
+    using System.Collections.Generic;
+    using Newtonsoft.Json;
+    using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
+@foreach (var usingString in Model.Usings) {
+@:    using @usingString;
+}
+@EmptyLine
+    /// <summary>
+    @WrapComment("/// ", Model.Documentation.EscapeXmlComment())
+    /// </summary>
+    @if (Model.NeedsPolymorphicConverter)
+    {
+    @:[JsonObject("@Model.SerializedName")]    
+    }
+    public partial class @Model.Name@(Model.BaseModelType != null ? " : " + Model.BaseModelType.Name : "")
+    {
+        @foreach (var property in Model.PropertyTemplateModels)
+        {
+        @:/// <summary>
+        @:@WrapComment("/// ", property.Documentation.EscapeXmlComment())
+        @:/// </summary>
+            if (property.Type == PrimaryType.Date)
+            {
+        @:[JsonConverter(typeof(DateJsonConverter))]
+            }
+        @:[JsonProperty(PropertyName = "@property.SerializedName")]
+        @:public @property.Type.Name @property.Name { get; @(property.IsReadOnly ? "private " : "")set; }
+        @EmptyLine
+        @:
+        }
+@if(@Model.ShouldValidate()) 
+{   
+        @:/// <summary>
+        @:/// Validate the object. Throws ArgumentException or ArgumentNullException if validation fails.
+        @:/// </summary>
+        @:public @Model.MethodQualifier void Validate()
+        @:{
+            bool anythingToValidate = false;
+
+            if (Model.BaseModelType != null)
+            {
+                anythingToValidate = true;
+            @:base.Validate();
+            }
+            
+            foreach (var property in Model.Properties.Where(p => p.IsRequired && !p.IsReadOnly))
+            {
+                anythingToValidate = true;
+            @:if (@property.Name == null)
+            @:{
+                @:throw new ValidationException(ValidationRules.CannotBeNull, "@property.Name");
+            @:}
+            @:
+            }
+            foreach (var property in Model.Properties.Where(p => !(p.Type is PrimaryType)))
+            {
+                anythingToValidate = true;
+            @:@property.Type.ValidateType(Model.Scope, string.Format("this.{0}", property.Name))
+            @:
+            }
+            if (!anythingToValidate)
+            {
+            @://Nothing to validate
+            }
+        @:}
+        }
+    }
+}

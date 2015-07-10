@@ -1,0 +1,90 @@
+﻿@using Microsoft.Rest.Generator.NodeJS
+@using Microsoft.Rest.Generator.NodeJS.Templates
+@using Microsoft.Rest.Generator.NodeJS.TemplateModels
+@using Microsoft.Rest.Generator.Azure.NodeJS
+@using Microsoft.Rest.Generator.Azure.NodeJS.Templates
+@using Microsoft.Rest.Generator.Utilities
+@using Microsoft.Rest.Generator.ClientModel
+@using System.Linq
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Azure.NodeJS.AzureMethodTemplateModel>
+
+@if (!Model.IsLongRunningOperation)
+{
+@:@(Include( new MethodTemplate(), Model as MethodTemplateModel))
+}
+else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.Delete)
+{
+<text>
+/**
+ *
+@WrapComment(" * ", Model.Documentation)
+@foreach (var parameter in Model.DocumentationParameters)
+{
+ @:* @@param {@parameter.Type.Name} [@parameter.Name] @parameter.Documentation
+ @:*
+}
+@WrapComment(" * ", " @param {object} [options]")
+ *
+@WrapComment(" * ", " @param {object} [options.customHeaders] headers that will be added to request")
+ *
+@WrapComment(" * ", " @param {function} callback")
+ *
+@WrapComment(" * ", " @returns {Stream} The Response stream")
+ */
+@(Model.OperationName).prototype.@(Model.Name) = function (@(Model.MethodParameterDeclarationWithCallback)) {
+  var self = @(Model.ClientReference);
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  // Send request
+  this.begin@(Model.Name.ToPascalCase())(@(Model.MethodParameterDeclaration)function (err, result){
+    if (err) return callback(err);
+    self.getPostOrDeleteOperationResult(result, options, callback);
+  });
+};
+</text>
+}
+else if (Model.HttpMethod == HttpMethod.Put)
+{
+<text>
+/**
+ *
+@WrapComment(" * ", Model.Documentation)
+@foreach (var parameter in Model.DocumentationParameters)
+{
+ @:* @@param {@parameter.Type.Name} [@parameter.Name] @parameter.Documentation
+ @:*
+}
+@WrapComment(" * ", " @param {object} [options]")
+ *
+@WrapComment(" * ", " @param {object} [options.customHeaders] headers that will be added to request")
+ *
+@WrapComment(" * ", " @param {function} callback")
+ *
+@WrapComment(" * ", " @returns {Stream} The Response stream")
+ */
+@(Model.OperationName).prototype.@(Model.Name) = function (@(Model.MethodParameterDeclarationWithCallback)) {
+  var client = @(Model.ClientReference);
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+  var self = this;
+  function getMethod() {
+    var cb = function (callback) {
+      return self.@(Model.GetMethod.Name)(@(Model.GetMethod.MethodParameterDeclaration)callback);
+    };
+    return cb;
+  }
+  // Send request
+  self.begin@(Model.Name.ToPascalCase())(@(Model.MethodParameterDeclaration)function (err, result){
+    if (err) return callback(err);
+    client.getPutOperationResult(result, getMethod(), options, callback);
+  });
+};
+</text>
+}

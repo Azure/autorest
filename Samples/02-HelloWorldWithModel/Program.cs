@@ -1,6 +1,7 @@
 ﻿using System;
-using AutoRest02;
+using Sample02;
 using Microsoft.Rest;
+using Sample02.Models;
 
 namespace SampleApp
 {
@@ -11,7 +12,8 @@ namespace SampleApp
             var client02 = new Client02();
             try
             {
-                client02.GetGreeting();
+                Greeting greeting = client02.GetGreeting();
+                Console.WriteLine(greeting.Salutation);
             }
             catch (HttpOperationException e)
             {

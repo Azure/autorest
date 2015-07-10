@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>autorest</id>
+    <title>AutoRest</title>
+    <version>$version$</version>
+    <authors>Microsoft</authors>
+    <owners>azure-sdk, Microsoft</owners>
+    <licenseUrl>https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/Azure/AutoRest</projectUrl>
+    <iconUrl>https://cdn.rawgit.com/Azure/AutoRest/7c1576dfb56974176223545cfac5762d168ded5f/Documentation/images/autorest-small-flat.png</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <summary>AutoRest code generation of REST API client libraries.</summary>
+    <description>The AutoRest tool generates client libraries for accessing REST APIs that are described using the Swagger format.</description>
+    <copyright>Copyright © Microsoft Corporation</copyright>
+    <tags>Microsoft AutoRest</tags>
+  </metadata>
+  <files>
+    <file src="..\binaries\net45\AutoRest.Core.*" target="tools" />
+    <file src="..\binaries\net45\AutoRest.exe" target="tools" />
+    <file src="..\binaries\net45\AutoRest.ToRelease.json" target="tools\AutoRest.json" />
+    <file src="..\binaries\net45\AutoRest.Generator.CSharp.*" target="tools" />
+    <file src="..\binaries\net45\AutoRest.Generator.NodeJS.*" target="tools" />
+    <file src="..\binaries\net45\AutoRest.Modeler.Swagger.*" target="tools" />    
+    <file src="..\binaries\net45\Newtonsoft.Json.*" target="tools" />
+  </files>
+</package>

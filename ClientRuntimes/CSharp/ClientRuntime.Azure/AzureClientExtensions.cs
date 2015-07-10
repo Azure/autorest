@@ -1,0 +1,447 @@
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.Azure.Properties;
+using Microsoft.Rest;
+using Newtonsoft.Json;
+
+namespace Microsoft.Azure
+{
+    public static class AzureClientExtensions
+    {
+        /// <summary>
+        /// Gets operation result for PUT operations.
+        /// </summary>
+        /// <typeparam name="T">Type of the resource</typeparam>
+        /// <param name="client">IAzureClient</param>
+        /// <param name="response">Response from the begin operation</param>
+        /// <param name="getOperationAction">Delegate for the get operation</param>
+        /// <param name="customHeaders">Headers that will be added to request</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Response with created resource</returns>
+        public static async Task<AzureOperationResponse<T>> GetPutOperationResultAsync<T>(
+            this IAzureClient client, 
+            AzureOperationResponse<T> response,
+            Func<Task<AzureOperationResponse<T>>> getOperationAction,
+            Dictionary<string, List<string>> customHeaders, 
+            CancellationToken cancellationToken) where T : class
+        {
+            if (response == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "response");
+            }
+            if (getOperationAction == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "getOperationAction");
+            }
+            if (response.Response.StatusCode != HttpStatusCode.OK &&
+                response.Response.StatusCode != HttpStatusCode.Accepted &&
+                response.Response.StatusCode != HttpStatusCode.Created)
+            {
+                throw new CloudException(string.Format(Resources.UnexpectedPollingStatus, response.Response.StatusCode));
+            }
+
+            var pollingState = new PollingState<T>(response, client.LongRunningOperationRetryTimeout);
+
+            // Check provisioning state
+            while (!AzureAsyncOperation.TerminalStatuses.Any(s => s.Equals(pollingState.Status,
+                StringComparison.OrdinalIgnoreCase)))
+            {
+                await PlatformTask.Delay(pollingState.DelayInMilliseconds, cancellationToken).ConfigureAwait(false);
+
+                if (!string.IsNullOrEmpty(pollingState.AzureAsyncOperationHeaderLink))
+                {
+                    await UpdateStateFromAzureAsyncOperationHeader(client, pollingState, customHeaders, cancellationToken);
+                }
+                else if (!string.IsNullOrEmpty(pollingState.LocationHeaderLink))
+                {
+                    await UpdateStateFromLocationHeaderOnPut(client, pollingState, customHeaders, cancellationToken);
+                }
+                else
+                {
+                    await UpdateStateFromGetResourceOperation(getOperationAction, pollingState);
+                }
+            }
+
+            if (AzureAsyncOperation.SuccessStatus.Equals(pollingState.Status, StringComparison.OrdinalIgnoreCase) &&
+                pollingState.Resource == null)
+            {
+                await UpdateStateFromGetResourceOperation(getOperationAction, pollingState);
+            }
+
+            // Check if operation failed
+            if (AzureAsyncOperation.FailedStatuses.Any(
+                        s => s.Equals(pollingState.Status, StringComparison.OrdinalIgnoreCase)))
+            {
+                throw pollingState.CloudException;
+            }
+
+            return pollingState.AzureOperationResponse;
+        }
+
+        /// <summary>
+        /// Gets operation result for DELETE and POST operations.
+        /// </summary>
+        /// <typeparam name="T">Type of the resource</typeparam>
+        /// <param name="client">IAzureClient</param>
+        /// <param name="response">Response from the begin operation</param>
+        /// <param name="customHeaders">Headers that will be added to request</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Operation response</returns>
+        public static async Task<AzureOperationResponse<T>> GetPostOrDeleteOperationResultAsync<T>(
+            this IAzureClient client,
+            AzureOperationResponse<T> response,
+            Dictionary<string, List<string>> customHeaders, 
+            CancellationToken cancellationToken) where T : class
+        {
+            if (response == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "response");
+            }
+
+            if (response.Response == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "response.Response");
+            }
+
+            if (response.Response.StatusCode != HttpStatusCode.OK &&
+                response.Response.StatusCode != HttpStatusCode.Accepted &&
+                response.Response.StatusCode != HttpStatusCode.NoContent)
+            {
+                throw new CloudException(string.Format(Resources.UnexpectedPollingStatus, response.Response.StatusCode));
+            }
+
+            var pollingState = new PollingState<T>(response, client.LongRunningOperationRetryTimeout);
+
+            // Check provisioning state
+            while (!AzureAsyncOperation.TerminalStatuses.Any(s => s.Equals(pollingState.Status,
+                StringComparison.OrdinalIgnoreCase)))
+            {
+                await PlatformTask.Delay(pollingState.DelayInMilliseconds, cancellationToken).ConfigureAwait(false);
+
+                if (!string.IsNullOrEmpty(pollingState.AzureAsyncOperationHeaderLink))
+                {
+                    await UpdateStateFromAzureAsyncOperationHeader(client, pollingState, customHeaders, cancellationToken);
+                }
+                else if (!string.IsNullOrEmpty(pollingState.LocationHeaderLink))
+                {
+                    await UpdateStateFromLocationHeaderOnPostOrDelete(client, pollingState, customHeaders, cancellationToken);
+                }
+                else
+                {
+                    throw new CloudException(Resources.NoHeader);
+                }
+            }
+
+            // Check if operation failed
+            if (AzureAsyncOperation.FailedStatuses.Any(
+                    s => s.Equals(pollingState.Status, StringComparison.OrdinalIgnoreCase)))
+            {
+                throw pollingState.CloudException;
+            }
+
+            return pollingState.AzureOperationResponse;
+        }
+
+        /// <summary>
+        /// Gets operation result for DELETE and POST operations.
+        /// </summary>
+        /// <param name="client">IAzureClient</param>
+        /// <param name="response">Response from the begin operation</param>
+        /// <param name="customHeaders">Headers that will be added to request</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Operation response</returns>
+        public static async Task<AzureOperationResponse> GetPostOrDeleteOperationResultAsync(
+            this IAzureClient client,
+            AzureOperationResponse response,
+            Dictionary<string, List<string>> customHeaders, 
+            CancellationToken cancellationToken)
+        {
+            var newResponse = new AzureOperationResponse<object>
+            {
+                Request = response.Request,
+                Response = response.Response,
+                RequestId = response.RequestId
+            };
+
+            var azureOperationResponse = await client.GetPostOrDeleteOperationResultAsync<object>(newResponse, customHeaders, cancellationToken);
+            return new AzureOperationResponse
+            {
+                Request = azureOperationResponse.Request,
+                Response = azureOperationResponse.Response,
+                RequestId = azureOperationResponse.RequestId
+            };
+        }
+
+        /// <summary>
+        /// Updates PollingState from Get resource operation.
+        /// </summary>
+        /// <typeparam name="T">Type of the resource.</typeparam>
+        /// <param name="getOperationAction">Delegate for the get operation.</param>
+        /// <param name="pollingState">Current polling state.</param>
+        /// <returns>Task.</returns>
+        private static async Task UpdateStateFromGetResourceOperation<T>(
+            Func<Task<AzureOperationResponse<T>>> getOperationAction, 
+            PollingState<T> pollingState)
+            where T : class
+        {
+            // use get getOperationAction if Azure-AsyncOperation header is not present
+            AzureOperationResponse<T> responseWithResource = await getOperationAction().ConfigureAwait(false);
+            if (responseWithResource.Body == null)
+            {
+                throw new CloudException(Resources.NoBody);
+            }
+
+            // In 202 pattern on PUT ProvisioningState may not be present in 
+            // the response. In that case the assumption is the status is Succeeded.
+            var resource = responseWithResource.Body as IResource;
+            if (resource != null && resource.ProvisioningState != null)
+            {
+                pollingState.Status = resource.ProvisioningState;
+            }
+            else
+            {
+                pollingState.Status = AzureAsyncOperation.SuccessStatus;
+            }
+
+            pollingState.Error = new CloudError()
+            {
+                Code = pollingState.Status,
+                Message = string.Format(Resources.LongRunningOperationFailed, pollingState.Status)
+            };
+            pollingState.Response = responseWithResource.Response;
+            pollingState.Request = responseWithResource.Request;
+            pollingState.Resource = responseWithResource.Body;
+        }
+
+        /// <summary>
+        /// Updates PollingState from Location header on Put operations.
+        /// </summary>
+        /// <typeparam name="T">Type of the resource.</typeparam>
+        /// <param name="client">IAzureClient</param>
+        /// <param name="pollingState">Current polling state.</param>
+        /// <param name="customHeaders">Headers that will be added to request</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Task.</returns>
+        private static async Task UpdateStateFromLocationHeaderOnPut<T>(
+            IAzureClient client,
+            PollingState<T> pollingState,
+            Dictionary<string, List<string>> customHeaders, 
+            CancellationToken cancellationToken) 
+            where T : class
+        {
+            AzureOperationResponse<T> responseWithResource = await client.GetAsync<T>(
+                pollingState.LocationHeaderLink,
+                customHeaders,
+                cancellationToken).ConfigureAwait(false);
+
+            pollingState.Response = responseWithResource.Response;
+            pollingState.Request = responseWithResource.Request;
+
+            var statusCode = responseWithResource.Response.StatusCode;
+            if (statusCode == HttpStatusCode.Accepted)
+            {
+                pollingState.Status = AzureAsyncOperation.InProgressStatus;
+            }
+            else if (statusCode == HttpStatusCode.OK ||
+                     statusCode == HttpStatusCode.Created)
+            {
+                if (responseWithResource.Body == null)
+                {
+                    throw new CloudException(Resources.NoBody);
+                }
+
+                // In 202 pattern on PUT ProvisioningState may not be present in 
+                // the response. In that case the assumption is the status is Succeeded.
+                var resource = responseWithResource.Body as IResource;
+                if (resource != null && resource.ProvisioningState != null)
+                {
+                    pollingState.Status = resource.ProvisioningState;
+                }
+                else
+                {
+                    pollingState.Status = AzureAsyncOperation.SuccessStatus;
+                }
+
+                pollingState.Error = new CloudError()
+                {
+                    Code = pollingState.Status,
+                    Message = string.Format(Resources.LongRunningOperationFailed, pollingState.Status)
+                };
+                pollingState.Resource = responseWithResource.Body;
+            }
+        }
+
+        /// <summary>
+        /// Updates PollingState from Location header on Post or Delete operations.
+        /// </summary>
+        /// <typeparam name="T">Type of the resource.</typeparam>
+        /// <param name="client">IAzureClient</param>
+        /// <param name="pollingState">Current polling state.</param>
+        /// <param name="customHeaders">Headers that will be added to request</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Task.</returns>
+        private static async Task UpdateStateFromLocationHeaderOnPostOrDelete<T>(
+            IAzureClient client,
+            PollingState<T> pollingState,
+            Dictionary<string, List<string>> customHeaders, 
+            CancellationToken cancellationToken) 
+            where T : class
+        {
+            AzureOperationResponse<T> responseWithResource = await client.GetAsync<T>(
+                pollingState.LocationHeaderLink,
+                customHeaders,
+                cancellationToken).ConfigureAwait(false);
+
+            pollingState.Response = responseWithResource.Response;
+            pollingState.Request = responseWithResource.Request;
+
+            var statusCode = responseWithResource.Response.StatusCode;
+            if (statusCode == HttpStatusCode.Accepted)
+            {
+                pollingState.Status = AzureAsyncOperation.InProgressStatus;
+            }
+            else if (statusCode == HttpStatusCode.OK ||
+                     statusCode == HttpStatusCode.Created ||
+                     statusCode == HttpStatusCode.NoContent)
+            {
+                pollingState.Status = AzureAsyncOperation.SuccessStatus;
+                pollingState.Resource = responseWithResource.Body;
+            }
+        }
+
+        /// <summary>
+        /// Updates PollingState from Azure-AsyncOperation header.
+        /// </summary>
+        /// <typeparam name="T">Type of the resource.</typeparam>
+        /// <param name="client">IAzureClient</param>
+        /// <param name="pollingState">Current polling state.</param>
+        /// <param name="customHeaders">Headers that will be added to request</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Task.</returns>
+        private static async Task  UpdateStateFromAzureAsyncOperationHeader<T>(
+            IAzureClient client,
+            PollingState<T> pollingState,
+            Dictionary<string, List<string>> customHeaders, 
+            CancellationToken cancellationToken) 
+            where T : class
+        {
+            var asyncOperationResponse = await client.GetAsync<AzureAsyncOperation>(
+                pollingState.AzureAsyncOperationHeaderLink,
+                customHeaders,
+                cancellationToken).ConfigureAwait(false);
+
+            if (asyncOperationResponse.Body == null || asyncOperationResponse.Body.Status == null)
+            {
+                throw new CloudException(Resources.NoBody);
+            }
+
+            pollingState.Status = asyncOperationResponse.Body.Status;
+            pollingState.Error = asyncOperationResponse.Body.Error;
+            pollingState.Response = asyncOperationResponse.Response;
+            pollingState.Request = asyncOperationResponse.Request;
+            pollingState.Resource = null;
+        }
+
+        /// <summary>
+        /// Gets a resource from the specified URL.
+        /// </summary>
+        /// <param name="client">IAzureClient</param>
+        /// <param name="operationUrl">URL of the resource.</param>
+        /// <param name="customHeaders">Headers that will be added to request</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns></returns>
+        private static async Task<AzureOperationResponse<T>> GetAsync<T>(
+            this IAzureClient client,
+            string operationUrl,
+            Dictionary<string, List<string>> customHeaders, 
+            CancellationToken cancellationToken) where T : class
+        {
+            // Validate
+            if (operationUrl == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "operationUrl");
+            }
+
+            // Tracing
+            bool shouldTrace = ServiceClientTracing.IsEnabled;
+            string invocationId = null;
+            if (shouldTrace)
+            {
+                invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("operationUrl", operationUrl);
+                ServiceClientTracing.Enter(invocationId, client, "GetAsync", tracingParameters);
+            }
+
+            // Construct URL
+            string url = operationUrl.Replace(" ", "%20");
+
+            // Create HTTP transport objects
+            HttpRequestMessage httpRequest = new HttpRequestMessage();
+            httpRequest.Method = HttpMethod.Get;
+            httpRequest.RequestUri = new Uri(url);
+            
+            // Set Headers
+            if (customHeaders != null)
+            {
+                foreach (var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
+            // Set Credentials
+            if (client.Credentials != null)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                await client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            }
+
+            // Send Request
+            if (shouldTrace)
+            {
+                ServiceClientTracing.SendRequest(invocationId, httpRequest);
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            HttpResponseMessage httpResponse = await client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            if (shouldTrace)
+            {
+                ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);           
+            HttpStatusCode statusCode = httpResponse.StatusCode;
+
+            if (statusCode != HttpStatusCode.OK &&
+                statusCode != HttpStatusCode.Accepted &&
+                statusCode != HttpStatusCode.Created &&
+                statusCode != HttpStatusCode.NoContent)
+            {
+                throw new CloudException(string.Format(CultureInfo.InvariantCulture, Resources.LongRunningOperationFailed, statusCode));
+            }
+
+            T body = null;
+            if (!string.IsNullOrWhiteSpace(responseContent))
+            {
+                body = JsonConvert.DeserializeObject<T>(responseContent, client.DeserializationSettings);
+            }
+
+            return new AzureOperationResponse<T>
+            {
+                Request = httpRequest,
+                Response = httpResponse,
+                Body = body
+            };
+        }
+    }
+}

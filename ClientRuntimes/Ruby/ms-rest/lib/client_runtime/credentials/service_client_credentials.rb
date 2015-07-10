@@ -1,0 +1,22 @@
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# Licensed under the MIT License. See License.txt in the project root for license information.
+
+module ClientRuntime
+  #
+  # Class that serves as a base for all authentications classes.
+  #
+  class ServiceClientCredentials
+
+    AUTHORIZATION = 'authorization'
+
+    #
+    # Base method for performing authentication of HTTP requests.
+    # @param request [Net::HTTPRequest] HTTP request to authenticate
+    #
+    # @return [Net::HTTPRequest] authenticated HTTP request
+    def sign_request(request)
+      fail ArgumentError, 'request is nil.' if request.nil?
+      fail ArgumentError, 'request is not valid.' unless request.is_a?(Net::HTTPRequest)
+    end
+  end
+end

@@ -2,25 +2,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microsoft.Rest", "Microsoft.Rest", "{868850B4-1073-41A1-ABA8-A3B465880148}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime", "ClientRuntimes\CSharp\ClientRuntime\ClientRuntime.csproj", "{7F524559-93F9-4F3F-9E2C-AF41A0C2E6F4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7C044DD1-F76B-49A7-A8DF-A5DEEE748EBB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime.Etw", "ClientRuntimes\CSharp\ClientRuntime.Etw\ClientRuntime.Etw.csproj", "{50B0A8CE-D290-4EB7-8C6C-16EAAB75225E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "git", "git", "{EAC2DE24-42C6-4B7F-ACAB-73C0E113FC40}"
-	ProjectSection(SolutionItems) = preProject
-		.gitignore = .gitignore
-		README.md = README.md
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime.Log4Net", "ClientRuntimes\CSharp\ClientRuntime.Log4Net\ClientRuntime.Log4Net.csproj", "{2EFD6648-39B4-476A-B302-8BC236F5F1B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime", "Microsoft.Rest\ClientRuntime\ClientRuntime.csproj", "{7F524559-93F9-4F3F-9E2C-AF41A0C2E6F4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime.Tracing.Tests", "ClientRuntimes\CSharp\ClientRuntime.Tracing.Tests\ClientRuntime.Tracing.Tests.csproj", "{B2FAA0E6-2643-4011-8CFE-BA28BDFFC7E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime.Etw", "Microsoft.Rest\ClientRuntime.Etw\ClientRuntime.Etw.csproj", "{50B0A8CE-D290-4EB7-8C6C-16EAAB75225E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime.Tests", "ClientRuntimes\CSharp\ClientRuntime.Tests\ClientRuntime.Tests.csproj", "{CB18ACEB-2825-4884-91FA-05C31AC779FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime.Log4Net", "Microsoft.Rest\ClientRuntime.Log4Net\ClientRuntime.Log4Net.csproj", "{2EFD6648-39B4-476A-B302-8BC236F5F1B8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime.Azure", "ClientRuntimes\CSharp\ClientRuntime.Azure\ClientRuntime.Azure.csproj", "{856A1D19-C3BF-439A-BEBF-E822A332BC12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime.Tracing.Tests", "Microsoft.Rest\ClientRuntime.Tracing.Tests\ClientRuntime.Tracing.Tests.csproj", "{B2FAA0E6-2643-4011-8CFE-BA28BDFFC7E7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime.Tests", "Microsoft.Rest\ClientRuntime.Tests\ClientRuntime.Tests.csproj", "{CB18ACEB-2825-4884-91FA-05C31AC779FE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime.Azure.Tests", "ClientRuntimes\CSharp\ClientRuntime.Azure.Tests\ClientRuntime.Azure.Tests.csproj", "{8B10D480-4A8A-47B5-9574-AA8E79F431DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,24 +65,35 @@ Global
 		{B2FAA0E6-2643-4011-8CFE-BA28BDFFC7E7}.Portable-Debug|Any CPU.ActiveCfg = Portable-Debug|Any CPU
 		{B2FAA0E6-2643-4011-8CFE-BA28BDFFC7E7}.Portable-Release|Any CPU.ActiveCfg = Portable-Release|Any CPU
 		{CB18ACEB-2825-4884-91FA-05C31AC779FE}.Net40-Debug|Any CPU.ActiveCfg = Net40-Debug|Any CPU
-		{CB18ACEB-2825-4884-91FA-05C31AC779FE}.Net40-Debug|Any CPU.Build.0 = Net40-Debug|Any CPU
 		{CB18ACEB-2825-4884-91FA-05C31AC779FE}.Net40-Release|Any CPU.ActiveCfg = Net40-Release|Any CPU
-		{CB18ACEB-2825-4884-91FA-05C31AC779FE}.Net40-Release|Any CPU.Build.0 = Net40-Release|Any CPU
 		{CB18ACEB-2825-4884-91FA-05C31AC779FE}.Net45-Debug|Any CPU.ActiveCfg = Net45-Debug|Any CPU
 		{CB18ACEB-2825-4884-91FA-05C31AC779FE}.Net45-Debug|Any CPU.Build.0 = Net45-Debug|Any CPU
 		{CB18ACEB-2825-4884-91FA-05C31AC779FE}.Net45-Release|Any CPU.ActiveCfg = Net45-Release|Any CPU
 		{CB18ACEB-2825-4884-91FA-05C31AC779FE}.Net45-Release|Any CPU.Build.0 = Net45-Release|Any CPU
 		{CB18ACEB-2825-4884-91FA-05C31AC779FE}.Portable-Debug|Any CPU.ActiveCfg = Portable-Debug|Any CPU
 		{CB18ACEB-2825-4884-91FA-05C31AC779FE}.Portable-Release|Any CPU.ActiveCfg = Portable-Release|Any CPU
+		{856A1D19-C3BF-439A-BEBF-E822A332BC12}.Net40-Debug|Any CPU.ActiveCfg = Net40-Debug|Any CPU
+		{856A1D19-C3BF-439A-BEBF-E822A332BC12}.Net40-Debug|Any CPU.Build.0 = Net40-Debug|Any CPU
+		{856A1D19-C3BF-439A-BEBF-E822A332BC12}.Net40-Release|Any CPU.ActiveCfg = Net40-Release|Any CPU
+		{856A1D19-C3BF-439A-BEBF-E822A332BC12}.Net40-Release|Any CPU.Build.0 = Net40-Release|Any CPU
+		{856A1D19-C3BF-439A-BEBF-E822A332BC12}.Net45-Debug|Any CPU.ActiveCfg = Net45-Debug|Any CPU
+		{856A1D19-C3BF-439A-BEBF-E822A332BC12}.Net45-Debug|Any CPU.Build.0 = Net45-Debug|Any CPU
+		{856A1D19-C3BF-439A-BEBF-E822A332BC12}.Net45-Release|Any CPU.ActiveCfg = Net45-Release|Any CPU
+		{856A1D19-C3BF-439A-BEBF-E822A332BC12}.Net45-Release|Any CPU.Build.0 = Net45-Release|Any CPU
+		{856A1D19-C3BF-439A-BEBF-E822A332BC12}.Portable-Debug|Any CPU.ActiveCfg = Portable-Debug|Any CPU
+		{856A1D19-C3BF-439A-BEBF-E822A332BC12}.Portable-Debug|Any CPU.Build.0 = Portable-Debug|Any CPU
+		{856A1D19-C3BF-439A-BEBF-E822A332BC12}.Portable-Release|Any CPU.ActiveCfg = Portable-Release|Any CPU
+		{856A1D19-C3BF-439A-BEBF-E822A332BC12}.Portable-Release|Any CPU.Build.0 = Portable-Release|Any CPU
+		{8B10D480-4A8A-47B5-9574-AA8E79F431DB}.Net40-Debug|Any CPU.ActiveCfg = Net40-Debug|Any CPU
+		{8B10D480-4A8A-47B5-9574-AA8E79F431DB}.Net40-Release|Any CPU.ActiveCfg = Net40-Release|Any CPU
+		{8B10D480-4A8A-47B5-9574-AA8E79F431DB}.Net45-Debug|Any CPU.ActiveCfg = Net45-Debug|Any CPU
+		{8B10D480-4A8A-47B5-9574-AA8E79F431DB}.Net45-Debug|Any CPU.Build.0 = Net45-Debug|Any CPU
+		{8B10D480-4A8A-47B5-9574-AA8E79F431DB}.Net45-Release|Any CPU.ActiveCfg = Net45-Release|Any CPU
+		{8B10D480-4A8A-47B5-9574-AA8E79F431DB}.Net45-Release|Any CPU.Build.0 = Net45-Release|Any CPU
+		{8B10D480-4A8A-47B5-9574-AA8E79F431DB}.Portable-Debug|Any CPU.ActiveCfg = Portable-Debug|Any CPU
+		{8B10D480-4A8A-47B5-9574-AA8E79F431DB}.Portable-Release|Any CPU.ActiveCfg = Portable-Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{7F524559-93F9-4F3F-9E2C-AF41A0C2E6F4} = {868850B4-1073-41A1-ABA8-A3B465880148}
-		{50B0A8CE-D290-4EB7-8C6C-16EAAB75225E} = {868850B4-1073-41A1-ABA8-A3B465880148}
-		{2EFD6648-39B4-476A-B302-8BC236F5F1B8} = {868850B4-1073-41A1-ABA8-A3B465880148}
-		{B2FAA0E6-2643-4011-8CFE-BA28BDFFC7E7} = {7C044DD1-F76B-49A7-A8DF-A5DEEE748EBB}
-		{CB18ACEB-2825-4884-91FA-05C31AC779FE} = {7C044DD1-F76B-49A7-A8DF-A5DEEE748EBB}
 	EndGlobalSection
 EndGlobal
