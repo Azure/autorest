@@ -96,9 +96,9 @@ Paths.prototype.getBooleanTrue = function (boolPath, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -189,9 +189,9 @@ Paths.prototype.getBooleanFalse = function (boolPath, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -282,9 +282,9 @@ Paths.prototype.getIntOneMillion = function (intPath, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -375,9 +375,9 @@ Paths.prototype.getIntNegativeOneMillion = function (intPath, options, callback)
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -468,9 +468,9 @@ Paths.prototype.getTenBillion = function (longPath, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -561,9 +561,9 @@ Paths.prototype.getNegativeTenBillion = function (longPath, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -654,9 +654,9 @@ Paths.prototype.floatScientificPositive = function (floatPath, options, callback
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -747,9 +747,9 @@ Paths.prototype.floatScientificNegative = function (floatPath, options, callback
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -840,9 +840,9 @@ Paths.prototype.doubleDecimalPositive = function (doublePath, options, callback)
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -933,9 +933,9 @@ Paths.prototype.doubleDecimalNegative = function (doublePath, options, callback)
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -1026,9 +1026,9 @@ Paths.prototype.stringUnicode = function (stringPath, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -1119,9 +1119,9 @@ Paths.prototype.stringUrlEncoded = function (stringPath, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -1212,9 +1212,9 @@ Paths.prototype.stringEmpty = function (stringPath, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -1305,9 +1305,9 @@ Paths.prototype.stringNull = function (stringPath, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -1401,9 +1401,9 @@ Paths.prototype.enumValid = function (enumPath, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -1496,9 +1496,9 @@ Paths.prototype.enumNull = function (enumPath, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -1589,9 +1589,9 @@ Paths.prototype.byteMultiByte = function (bytePath, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -1682,9 +1682,9 @@ Paths.prototype.byteEmpty = function (bytePath, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -1775,9 +1775,9 @@ Paths.prototype.byteNull = function (bytePath, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -1870,9 +1870,9 @@ Paths.prototype.dateValid = function (datePath, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -1966,9 +1966,9 @@ Paths.prototype.dateNull = function (datePath, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -2061,9 +2061,9 @@ Paths.prototype.dateTimeValid = function (dateTimePath, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -2157,9 +2157,9 @@ Paths.prototype.dateTimeNull = function (dateTimePath, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);

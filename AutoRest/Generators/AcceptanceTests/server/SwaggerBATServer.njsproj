@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{249b077c-f1ac-4eda-9ddb-51f153eeb655}</ProjectGuid>
     <ProjectHome />
-    <ProjectView>ProjectFiles</ProjectView>
+    <ProjectView>ShowAllFiles</ProjectView>
     <StartupFile>startup\www.js</StartupFile>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -20,6 +20,7 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
     <Compile Include="routes\azureUrl.js" />
+    <Compile Include="routes\files.js" />
     <Compile Include="util\constants.js" />
     <Compile Include="util\utils.js" />
     <Content Include="package.json" />

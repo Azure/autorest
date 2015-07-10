@@ -272,13 +272,23 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             var clientModel = modeler.Build();
 
             Assert.NotNull(clientModel);
-            Assert.Equal("GetWithStream", clientModel.Methods[0].Name);
+            Assert.Equal("GetWithStreamFormData", clientModel.Methods[0].Name);
+            Assert.Equal("Stream", clientModel.Methods[0].Parameters[0].Type.Name);
             Assert.Equal("Stream", clientModel.Methods[0].ReturnType.ToString());
             Assert.Equal("Stream", clientModel.Methods[0].Responses[HttpStatusCode.OK].ToString());
 
-            Assert.Equal("PostWithByteArray", clientModel.Methods[1].Name);
+            Assert.Equal("PostWithByteArrayFormData", clientModel.Methods[1].Name);
+            Assert.Equal("ByteArray", clientModel.Methods[1].Parameters[0].Type.Name);
             Assert.Equal("ByteArray", clientModel.Methods[1].ReturnType.ToString());
             Assert.Equal("ByteArray", clientModel.Methods[1].Responses[HttpStatusCode.OK].ToString());
+
+            Assert.Equal("GetWithStream", clientModel.Methods[2].Name);
+            Assert.Equal("Stream", clientModel.Methods[2].ReturnType.ToString());
+            Assert.Equal("Stream", clientModel.Methods[2].Responses[HttpStatusCode.OK].ToString());
+
+            Assert.Equal("PostWithByteArray", clientModel.Methods[3].Name);
+            Assert.Equal("ByteArray", clientModel.Methods[3].ReturnType.ToString());
+            Assert.Equal("ByteArray", clientModel.Methods[3].Responses[HttpStatusCode.OK].ToString());
         }
 
         [Fact]

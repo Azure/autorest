@@ -204,19 +204,23 @@ namespace Microsoft.Rest.Modeler.Swagger
             Method method, List<Stack<IType>> types)
         {
             bool handled = false;
-            if (SwaggerOperationProducesOctetStream(_operation))
+            if (SwaggerOperationProducesNotEmpty())
             {
                 if (response.Schema != null)
                 {
-                    CompositeType serviceType = response.Schema.GetBuilder(_swaggerModeler)
-                        .BuildServiceType(response.Schema.Reference.StripDefinitionPath()) as CompositeType;
+                    IType serviceType = response.Schema.GetBuilder(_swaggerModeler)
+                        .BuildServiceType(response.Schema.Reference.StripDefinitionPath());
 
                     Debug.Assert(serviceType != null);
 
                     BuildMethodReturnTypeStack(serviceType, types);
 
-                    VerifyFirstPropertyIsByteArray(serviceType);
-                    method.Responses[responseStatusCode] = PrimaryType.Stream;
+                    var compositeType = serviceType as CompositeType;
+                    if (compositeType != null)
+                    {
+                        VerifyFirstPropertyIsByteArray(compositeType);
+                    }
+                    method.Responses[responseStatusCode] = serviceType;
                     handled = true;
                 }
             }
@@ -240,7 +244,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         {
             bool handled = false;
             IType serviceType;
-            if (SwaggerOperationProducesJson(_operation))
+            if (SwaggerOperationProducesJson())
             {
                 if (TryBuildResponseBody(methodName, response,
                     s => GenerateResponseObjectName(s, responseStatusCode), out serviceType))
@@ -288,7 +292,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         private void TryBuildDefaultResponse(string methodName, Response response, Method method)
         {
             IType errorModel = null;
-            if (SwaggerOperationProducesJson(_operation))
+            if (SwaggerOperationProducesJson())
             {
                 if (TryBuildResponseBody(methodName, response, s => GenerateErrorModelName(s), out errorModel))
                 {
@@ -302,7 +306,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         {
             bool handled = false;
             responseType = null;
-            if (SwaggerOperationProducesJson(_operation))
+            if (SwaggerOperationProducesJson())
             {
                 if (response.Schema != null)
                 {
@@ -325,16 +329,16 @@ namespace Microsoft.Rest.Modeler.Swagger
             return handled;
         }
 
-        private bool SwaggerOperationProducesJson(Operation operation)
+        private bool SwaggerOperationProducesJson()
         {
             return _effectiveProduces != null &&
                    _effectiveProduces.Contains("application/json", StringComparer.OrdinalIgnoreCase);
         }
 
-        private bool SwaggerOperationProducesOctetStream(Operation operation)
+        private bool SwaggerOperationProducesNotEmpty()
         {
-            return _effectiveProduces != null &&
-                   _effectiveProduces.Contains("application/octet-stream", StringComparer.OrdinalIgnoreCase);
+            return _effectiveProduces != null 
+                && _effectiveProduces.Any();
         }
 
         private void EnsureUniqueMethodName(string methodName, string methodGroup)

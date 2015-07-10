@@ -82,9 +82,9 @@ HttpClientFailure.prototype.head400 = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -96,19 +96,19 @@ HttpClientFailure.prototype.head400 = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -174,9 +174,9 @@ HttpClientFailure.prototype.get400 = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -188,19 +188,19 @@ HttpClientFailure.prototype.get400 = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -279,9 +279,9 @@ HttpClientFailure.prototype.put400 = function (booleanValue, options, callback) 
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -293,19 +293,19 @@ HttpClientFailure.prototype.put400 = function (booleanValue, options, callback) 
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -384,9 +384,9 @@ HttpClientFailure.prototype.patch400 = function (booleanValue, options, callback
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -398,19 +398,19 @@ HttpClientFailure.prototype.patch400 = function (booleanValue, options, callback
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -489,9 +489,9 @@ HttpClientFailure.prototype.post400 = function (booleanValue, options, callback)
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -503,19 +503,19 @@ HttpClientFailure.prototype.post400 = function (booleanValue, options, callback)
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -594,9 +594,9 @@ HttpClientFailure.prototype.delete400 = function (booleanValue, options, callbac
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -608,19 +608,19 @@ HttpClientFailure.prototype.delete400 = function (booleanValue, options, callbac
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -686,9 +686,9 @@ HttpClientFailure.prototype.head401 = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -700,19 +700,19 @@ HttpClientFailure.prototype.head401 = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -778,9 +778,9 @@ HttpClientFailure.prototype.get402 = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -792,19 +792,19 @@ HttpClientFailure.prototype.get402 = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -870,9 +870,9 @@ HttpClientFailure.prototype.get403 = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -884,19 +884,19 @@ HttpClientFailure.prototype.get403 = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -975,9 +975,9 @@ HttpClientFailure.prototype.put404 = function (booleanValue, options, callback) 
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -989,19 +989,19 @@ HttpClientFailure.prototype.put404 = function (booleanValue, options, callback) 
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -1080,9 +1080,9 @@ HttpClientFailure.prototype.patch405 = function (booleanValue, options, callback
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -1094,19 +1094,19 @@ HttpClientFailure.prototype.patch405 = function (booleanValue, options, callback
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -1185,9 +1185,9 @@ HttpClientFailure.prototype.post406 = function (booleanValue, options, callback)
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -1199,19 +1199,19 @@ HttpClientFailure.prototype.post406 = function (booleanValue, options, callback)
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -1290,9 +1290,9 @@ HttpClientFailure.prototype.delete407 = function (booleanValue, options, callbac
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -1304,19 +1304,19 @@ HttpClientFailure.prototype.delete407 = function (booleanValue, options, callbac
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -1395,9 +1395,9 @@ HttpClientFailure.prototype.put409 = function (booleanValue, options, callback) 
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -1409,19 +1409,19 @@ HttpClientFailure.prototype.put409 = function (booleanValue, options, callback) 
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -1487,9 +1487,9 @@ HttpClientFailure.prototype.head410 = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -1501,19 +1501,19 @@ HttpClientFailure.prototype.head410 = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -1579,9 +1579,9 @@ HttpClientFailure.prototype.get411 = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -1593,19 +1593,19 @@ HttpClientFailure.prototype.get411 = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -1671,9 +1671,9 @@ HttpClientFailure.prototype.get412 = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -1685,19 +1685,19 @@ HttpClientFailure.prototype.get412 = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -1776,9 +1776,9 @@ HttpClientFailure.prototype.put413 = function (booleanValue, options, callback) 
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -1790,19 +1790,19 @@ HttpClientFailure.prototype.put413 = function (booleanValue, options, callback) 
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -1881,9 +1881,9 @@ HttpClientFailure.prototype.patch414 = function (booleanValue, options, callback
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -1895,19 +1895,19 @@ HttpClientFailure.prototype.patch414 = function (booleanValue, options, callback
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -1986,9 +1986,9 @@ HttpClientFailure.prototype.post415 = function (booleanValue, options, callback)
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -2000,19 +2000,19 @@ HttpClientFailure.prototype.post415 = function (booleanValue, options, callback)
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -2078,9 +2078,9 @@ HttpClientFailure.prototype.get416 = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -2092,19 +2092,19 @@ HttpClientFailure.prototype.get416 = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -2183,9 +2183,9 @@ HttpClientFailure.prototype.delete417 = function (booleanValue, options, callbac
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -2197,19 +2197,19 @@ HttpClientFailure.prototype.delete417 = function (booleanValue, options, callbac
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
@@ -2275,9 +2275,9 @@ HttpClientFailure.prototype.head429 = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
-          if (error.body !== null && error.body !== undefined) {
-            error.body = client._models['ErrorModel'].deserialize(error.body);
-          }
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -2289,19 +2289,19 @@ HttpClientFailure.prototype.head429 = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-          var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ErrorModel'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
+      var parsedResponse;
+    try {
+      parsedResponse = JSON.parse(responseBody);
+      result.body = parsedResponse;
+      if (result.body !== null && result.body !== undefined) {
+        result.body = client._models['ErrorModel'].deserialize(result.body);
       }
+    } catch (error) {
+  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+  deserializationError.request = httpRequest;
+  deserializationError.response = response;
+  return callback(deserializationError);
+  }
 
     return callback(null, result);
   });
