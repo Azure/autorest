@@ -61,7 +61,7 @@ module ClientRuntimeAzure
       end
 
       promise = Concurrent::Promise.new do
-        if (AsyncOperationStatus.is_successful_status(polling_state.status))
+        if (AsyncOperationStatus.is_successful_status(polling_state.status) && polling_state.resource.nil?)
           update_state_from_get_resource_operation(get_operation_block, polling_state)
         end
 

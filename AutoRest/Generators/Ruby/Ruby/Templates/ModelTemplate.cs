@@ -292,7 +292,7 @@ Write(WrapComment("# ", string.IsNullOrEmpty(Model.Documentation) ? "Model objec
 #line hidden
 
 #line 73 "ModelTemplate.cshtml"
-         foreach (var property in Model.ComposedProperties.Where(x => !x.IsReadOnly).OrderByDescending(x => x.IsRequired))
+         foreach (var property in Model.ComposedProperties.OrderByDescending(x => x.IsRequired))
         {
         
 
@@ -368,7 +368,7 @@ Write(WrapComment("# ", string.IsNullOrEmpty(Model.Documentation) ? "Model objec
 #line hidden
 
 #line 94 "ModelTemplate.cshtml"
-         foreach (var property in Model.ComposedProperties.Where(x => !x.IsReadOnly).OrderByDescending(x => x.IsRequired))
+         foreach (var property in Model.ComposedProperties.OrderByDescending(x => x.IsRequired))
         {
         
 

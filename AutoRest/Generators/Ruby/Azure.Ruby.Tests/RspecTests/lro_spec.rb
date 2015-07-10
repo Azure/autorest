@@ -42,19 +42,21 @@ describe 'LongRunningOperation' do
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
   end
 
-  # it 'should serve success responce on initial PUT request' do
-  #   result = @client.lros.put200succeeded(@product).value!
-  #   expect(result.body.properies.provisioning_state).to eq("Succeeded")
-  # end
-  #
-  # it 'should serve success responce on initial request without provision state' do
-  #   result = @client.lros.put200succeeded_no_state(@product).value!.body
-  #   expect(body.id).to eq(100)
-  # end
+  it 'should serve success responce on initial PUT request' do
+    result = @client.lros.put200succeeded(@product).value!
+    expect(result.body.properies.provisioning_state).to eq("Succeeded")
+  end
+
+  it 'should serve success responce on initial request without provision state' do
+    result = @client.lros.put200succeeded_no_state(@product).value!
+    expect(result.body.id).to eq("100")
+  end
+
   # it 'should serve 202 on initial responce and status responce without provision state' do
   #   result = @client.lros.put202retry200(@product).value!.body
   #   expect(body.id).to eq(100)
   # end
+
   # it 'should retry on 500 server responce in PUT request' do
   #   result = @client.lros.put_async_relative_retry_succeeded(@product).value!.body
   #   expect(body.provisioningState).to eq("Succeeded")
