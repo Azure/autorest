@@ -204,7 +204,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             Method method, List<Stack<IType>> types)
         {
             bool handled = false;
-            if (SwaggerOperationProducesNotEmpty(_operation))
+            if (SwaggerOperationProducesNotEmpty())
             {
                 if (response.Schema != null)
                 {
@@ -215,9 +215,10 @@ namespace Microsoft.Rest.Modeler.Swagger
 
                     BuildMethodReturnTypeStack(serviceType, types);
 
-                    if (serviceType is CompositeType)
+                    var compositeType = serviceType as CompositeType;
+                    if (compositeType != null)
                     {
-                        VerifyFirstPropertyIsByteArray(serviceType as CompositeType);
+                        VerifyFirstPropertyIsByteArray(compositeType);
                     }
                     method.Responses[responseStatusCode] = serviceType;
                     handled = true;
@@ -243,7 +244,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         {
             bool handled = false;
             IType serviceType;
-            if (SwaggerOperationProducesJson(_operation))
+            if (SwaggerOperationProducesJson())
             {
                 if (TryBuildResponseBody(methodName, response,
                     s => GenerateResponseObjectName(s, responseStatusCode), out serviceType))
@@ -291,7 +292,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         private void TryBuildDefaultResponse(string methodName, Response response, Method method)
         {
             IType errorModel = null;
-            if (SwaggerOperationProducesJson(_operation))
+            if (SwaggerOperationProducesJson())
             {
                 if (TryBuildResponseBody(methodName, response, s => GenerateErrorModelName(s), out errorModel))
                 {
@@ -305,7 +306,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         {
             bool handled = false;
             responseType = null;
-            if (SwaggerOperationProducesJson(_operation))
+            if (SwaggerOperationProducesJson())
             {
                 if (response.Schema != null)
                 {
@@ -328,13 +329,13 @@ namespace Microsoft.Rest.Modeler.Swagger
             return handled;
         }
 
-        private bool SwaggerOperationProducesJson(Operation operation)
+        private bool SwaggerOperationProducesJson()
         {
             return _effectiveProduces != null &&
                    _effectiveProduces.Contains("application/json", StringComparer.OrdinalIgnoreCase);
         }
 
-        private bool SwaggerOperationProducesNotEmpty(Operation operation)
+        private bool SwaggerOperationProducesNotEmpty()
         {
             return _effectiveProduces != null 
                 && _effectiveProduces.Any();
