@@ -187,7 +187,7 @@ Write(Model.OperationName);
 "leteOperationResult(result, options, callback);\r\n  });\r\n};\r\n\r\n");
 #line 47 "AzureMethodTemplate.cshtml"
 }
-else if (Model.HttpMethod == HttpMethod.Put)
+else if (Model.HttpMethod == HttpMethod.Put || Model.HttpMethod == HttpMethod.Patch)
 {
 
 #line default

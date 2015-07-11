@@ -151,15 +151,18 @@ namespace Microsoft.Azure
             }
                       
             // Go over each property that is in resource and write to stream
-            JsonConverterHelper.SerializeProperties(writer, value, serializer, p => !p.PropertyName.StartsWith("properties."));
+            JsonConverterHelper.SerializeProperties(writer, value, serializer, 
+                p => !p.PropertyName.StartsWith("properties.", StringComparison.OrdinalIgnoreCase));
 
             // If there is a need to add properties element - add it
             var contract = (JsonObjectContract)serializer.ContractResolver.ResolveContract(value.GetType());
-            if (contract.Properties.Any(p => p.PropertyName.StartsWith("properties.")))
+            if (contract.Properties.Any(p =>
+                p.PropertyName.StartsWith("properties.", StringComparison.OrdinalIgnoreCase)))
             {
                 writer.WritePropertyName(PropertiesNode);
                 writer.WriteStartObject();
-                JsonConverterHelper.SerializeProperties(writer, value, serializer, p => p.PropertyName.StartsWith("properties."));
+                JsonConverterHelper.SerializeProperties(writer, value, serializer,
+                    p => p.PropertyName.StartsWith("properties.", StringComparison.OrdinalIgnoreCase));
                 writer.WriteEndObject();
             }
 

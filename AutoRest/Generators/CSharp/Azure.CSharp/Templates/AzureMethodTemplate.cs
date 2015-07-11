@@ -186,7 +186,7 @@ Write(Model.OperationResponseReturnTypeString);
 "\r\n}\r\n\r\n");
 #line 42 "AzureMethodTemplate.cshtml"
 }
-else if (Model.HttpMethod == HttpMethod.Put)
+else if (Model.HttpMethod == HttpMethod.Put || Model.HttpMethod == HttpMethod.Patch)
 {
 
 #line default
