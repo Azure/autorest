@@ -69,14 +69,15 @@ describe 'LongRunningOperation' do
   #   expect(body.provisioningState).to eq("Succeeded")
   # end
 
-  # it 'should serve async PUT operation failed' do
-  #   expect{ @client.lrosads.put_async_relative_retry400(@product).value! }.to raise_exception(CloudError)
-  # end
+  it 'should serve async PUT operation failed' do
+    expect{ @client.lrosads.put_async_relative_retry400(@product).value! }.to raise_exception(ClientRuntimeAzure::CloudError)
+  end
 
-  # it 'should serve success responce on initial DELETE request' do
-  #   result = @client.lros.delete_204_suceeded().value!.response
-  #   expect(result).to be_an_instance_of(Net::HTTPOK)
-  # end
+  it 'should serve success responce on initial DELETE request' do
+    result = @client.lros.delete204succeeded().value!
+    expect(result.response).to be_an_instance_of(Net::HTTPNoContent)
+  end
+
   # it 'should serve async DELETE operation' do
   #   result = @client.lros.delete_async_absolute_no_retry_succeeded().value!.response
   #   expect(result).to be_an_instance_of(Net::HTTPOK)
@@ -101,10 +102,12 @@ describe 'LongRunningOperation' do
   #   result = @client.lros.post_async_relative_retry_succeeded().value!.response
   #   expect(result).to be_an_instance_of(Net::HTTPOK)
   # end
-  # it 'should return payload on POST async request' do
-  #   result = @client.lros.post_200_with_payload().value!.body
-  #   expect(result.id).to eq(1)
-  # end
+
+  it 'should return payload on POST async request' do
+    result = @client.lros.post200with_payload().value!
+    expect(result.body.id).to eq(1)
+  end
+
   # # Retryable errors
   # it 'should retry PUT request on 500 responce' do
   #   result = @client.lro_retrys.put_201_creating_succeeded_200(@product).value!.body

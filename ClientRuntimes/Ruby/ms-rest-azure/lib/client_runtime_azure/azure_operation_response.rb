@@ -5,7 +5,7 @@ module ClientRuntimeAzure
   #
   # Class which represents the data received and deserialized from Azure service.
   #
-  class AzureOperationResponse < ClientRuntime::HttpOperationException
+  class AzureOperationResponse < ClientRuntime::HttpOperationResponse
 
     # @return [String] identificator of the request.
     attr_accessor :request_id

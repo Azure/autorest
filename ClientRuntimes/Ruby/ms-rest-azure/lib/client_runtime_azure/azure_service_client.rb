@@ -39,25 +39,34 @@ module ClientRuntimeAzure
 
       if (!AsyncOperationStatus.is_terminal_status(polling_state.status))
         task = Concurrent::TimerTask.new do
-          if !polling_state.azure_async_operation_header_link.nil?
-            p 'update_state_from_azure_async_operation_header'
-            update_state_from_azure_async_operation_header(polling_state, custom_headers, custom_deserialization_block)
-          elsif !polling_state.location_header_link.nil?
-            p 'update_state_from_location_header_on_put'
-            update_state_from_location_header_on_put(polling_state, custom_headers, custom_deserialization_block)
-          else
-            p 'update_state_from_get_resource_operation'
-            update_state_from_get_resource_operation(get_operation_block, polling_state)
-          end
+          begin
+            if !polling_state.azure_async_operation_header_link.nil?
+              p 'update_state_from_azure_async_operation_header'
+              update_state_from_azure_async_operation_header(polling_state, custom_headers, custom_deserialization_block)
+            elsif !polling_state.location_header_link.nil?
+              p 'update_state_from_location_header_on_put'
+              update_state_from_location_header_on_put(polling_state, custom_headers, custom_deserialization_block)
+            else
+              p 'update_state_from_get_resource_operation'
+              update_state_from_get_resource_operation(get_operation_block, polling_state)
+            end
 
-          if (AsyncOperationStatus.is_terminal_status(polling_state.status))
+            if (AsyncOperationStatus.is_terminal_status(polling_state.status))
+              task.shutdown
+            end
+          rescue Exception => e
             task.shutdown
+            e
           end
         end
 
         task.execution_interval = polling_state.get_delay_in_milliseconds()
         task.execute
         task.wait_for_termination
+
+        polling_error = task.value
+
+        fail polling_error if polling_error.is_a?(Exception)
       end
 
       promise = Concurrent::Promise.new do
@@ -80,8 +89,8 @@ module ClientRuntimeAzure
       fail ArgumentError if azure_response.response.nil?
 
       if (azure_response.response.code != "200" &&
-          azure_response.response.code != "201" &&
-          azure_response.response.code != "202")
+          azure_response.response.code != "202" &&
+          azure_response.response.code != "204")
         fail ArgumentError
       end
 
@@ -97,7 +106,7 @@ module ClientRuntimeAzure
             update_state_from_location_header_on_post_or_delete(polling_state, custom_headers, custom_deserialization_block)
           else
             task.shutdown
-            fail CloudError
+            CloudError.new
           end
 
           if (AsyncOperationStatus.is_terminal_status(polling_state.status))
@@ -189,7 +198,7 @@ module ClientRuntimeAzure
         polling_state.status = AsyncOperationStatus::IN_PROGRESS_STATUS
       elsif (status_code == "200" || status_code == "201" || status_code == "204")
         polling_state.status = AsyncOperationStatus::SUCCESS_STATUS
-        polling_state.resource = result.response.body
+        polling_state.resource = result.body
       end
     end
 

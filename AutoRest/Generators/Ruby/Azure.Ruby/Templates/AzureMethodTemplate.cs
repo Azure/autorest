@@ -124,14 +124,34 @@ Write(WrapComment("# ", string.Format("@return [{0}] TODO: add text", "TODO: add
 
 #line default
 #line hidden
-            WriteLiteral(").value!\r\n      return ");
+            WriteLiteral(").value!\r\n      ");
 #line 25 "AzureMethodTemplate.cshtml"
+ Write(EmptyLine);
+
+#line default
+#line hidden
+            WriteLiteral("\r\n      # Defining deserialization method.\r\n      deserialize_method = lambda do " +
+"|parsed_response|\r\n        ");
+#line 28 "AzureMethodTemplate.cshtml"
+    Write(Model.DeserializePollingResponse("parsed_response", Model.ReturnType, false, Settings.Namespace));
+
+#line default
+#line hidden
+            WriteLiteral("\r\n      end\r\n      ");
+#line 30 "AzureMethodTemplate.cshtml"
+ Write(EmptyLine);
+
+#line default
+#line hidden
+            WriteLiteral("\r\n      # Waiting for response.\r\n      return ");
+#line 32 "AzureMethodTemplate.cshtml"
          Write(Model.ClientReference);
 
 #line default
 #line hidden
-            WriteLiteral(".get_post_or_delete_operation_result(response, nil, nil)\r\n    end\r\n    \r\n");
-#line 28 "AzureMethodTemplate.cshtml"
+            WriteLiteral(".get_post_or_delete_operation_result(response, nil, deserialize_method)\r\n    end\r" +
+"\n    \r\n");
+#line 35 "AzureMethodTemplate.cshtml"
 }
 else
 {
@@ -140,19 +160,19 @@ else
 #line hidden
 
             WriteLiteral("    \r\n    #\r\n    # ");
-#line 33 "AzureMethodTemplate.cshtml"
+#line 40 "AzureMethodTemplate.cshtml"
  Write(WrapComment("# ", Model.Documentation));
 
 #line default
 #line hidden
             WriteLiteral("\r\n");
-#line 34 "AzureMethodTemplate.cshtml"
+#line 41 "AzureMethodTemplate.cshtml"
     
 
 #line default
 #line hidden
 
-#line 34 "AzureMethodTemplate.cshtml"
+#line 41 "AzureMethodTemplate.cshtml"
      foreach (var parameter in Model.Parameters)
     {
 
@@ -160,94 +180,94 @@ else
 #line hidden
 
             WriteLiteral("      ");
-#line 36 "AzureMethodTemplate.cshtml"
+#line 43 "AzureMethodTemplate.cshtml"
    Write(WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation)));
 
 #line default
 #line hidden
             WriteLiteral("\r\n");
-#line 37 "AzureMethodTemplate.cshtml"
+#line 44 "AzureMethodTemplate.cshtml"
     }
 
 #line default
 #line hidden
 
             WriteLiteral("    ");
-#line 38 "AzureMethodTemplate.cshtml"
+#line 45 "AzureMethodTemplate.cshtml"
 Write(WrapComment("# ", string.Format("@return [{0}] TODO: add text", "TODO: add type")));
 
 #line default
 #line hidden
             WriteLiteral("\r\n    #\r\n    def ");
-#line 40 "AzureMethodTemplate.cshtml"
+#line 47 "AzureMethodTemplate.cshtml"
     Write(Model.Name);
 
 #line default
 #line hidden
             WriteLiteral("(");
-#line 40 "AzureMethodTemplate.cshtml"
+#line 47 "AzureMethodTemplate.cshtml"
                   Write(Model.MethodParameterDeclaration);
 
 #line default
 #line hidden
             WriteLiteral(")\r\n      # Send request\r\n      response = begin_");
-#line 42 "AzureMethodTemplate.cshtml"
+#line 49 "AzureMethodTemplate.cshtml"
                    Write(Model.Name);
 
 #line default
 #line hidden
             WriteLiteral("(");
-#line 42 "AzureMethodTemplate.cshtml"
+#line 49 "AzureMethodTemplate.cshtml"
                                  Write(Model.MethodParameterDeclaration);
 
 #line default
 #line hidden
             WriteLiteral(").value!\r\n      ");
-#line 43 "AzureMethodTemplate.cshtml"
+#line 50 "AzureMethodTemplate.cshtml"
  Write(EmptyLine);
 
 #line default
 #line hidden
             WriteLiteral("\r\n      # Defining polling method.\r\n      get_method = lambda { self.");
-#line 45 "AzureMethodTemplate.cshtml"
+#line 52 "AzureMethodTemplate.cshtml"
                              Write(Model.GetMethod.Name);
 
 #line default
 #line hidden
             WriteLiteral("(");
-#line 45 "AzureMethodTemplate.cshtml"
+#line 52 "AzureMethodTemplate.cshtml"
                                                      Write(Model.GetMethod.MethodParameterDeclaration);
 
 #line default
 #line hidden
             WriteLiteral(") }\r\n      ");
-#line 46 "AzureMethodTemplate.cshtml"
+#line 53 "AzureMethodTemplate.cshtml"
  Write(EmptyLine);
 
 #line default
 #line hidden
             WriteLiteral("\r\n      # Defining deserialization method.\r\n      deserialize_method = lambda do " +
 "|parsed_response|\r\n        ");
-#line 49 "AzureMethodTemplate.cshtml"
+#line 56 "AzureMethodTemplate.cshtml"
     Write(Model.DeserializePollingResponse("parsed_response", Model.ReturnType, false, Settings.Namespace));
 
 #line default
 #line hidden
             WriteLiteral("\r\n      end\r\n      ");
-#line 51 "AzureMethodTemplate.cshtml"
+#line 58 "AzureMethodTemplate.cshtml"
  Write(EmptyLine);
 
 #line default
 #line hidden
             WriteLiteral("\r\n      # Waiting for response.\r\n      return ");
-#line 53 "AzureMethodTemplate.cshtml"
+#line 60 "AzureMethodTemplate.cshtml"
          Write(Model.ClientReference);
 
 #line default
 #line hidden
             WriteLiteral(".get_put_operation_result(response, get_method, nil, deserialize_method)\r\n    end" +
 "\r\n    \r\n");
-#line 56 "AzureMethodTemplate.cshtml"
+#line 63 "AzureMethodTemplate.cshtml"
 }
 
 #line default

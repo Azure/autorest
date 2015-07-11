@@ -22,7 +22,14 @@ else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.D
     def @(Model.Name)(@(Model.MethodParameterDeclaration))
       # Send request
       response = begin_@(Model.Name)(@(Model.MethodParameterDeclaration)).value!
-      return @(Model.ClientReference).get_post_or_delete_operation_result(response, nil, nil)
+      @EmptyLine
+      # Defining deserialization method.
+      deserialize_method = lambda do |parsed_response|
+        @(Model.DeserializePollingResponse("parsed_response", Model.ReturnType, false, Settings.Namespace))
+      end
+      @EmptyLine
+      # Waiting for response.
+      return @(Model.ClientReference).get_post_or_delete_operation_result(response, nil, deserialize_method)
     end
     </text>
 }
