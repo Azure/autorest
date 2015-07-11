@@ -149,23 +149,17 @@ namespace Microsoft.Azure
                 }
                 writer.WriteValue(typeName);
             }
-            
-            // Getting all properties that do NOT exist in the Resource object
-            PropertyInfo[] propertiesToConsolidate = value.GetType().GetProperties()
-                .Where(p => typeof(Resource).GetProperty(p.Name) == null).ToArray();
-
-            // Getting all properties that do NOT exist in the Resource object
-            string[] resourceProperties = typeof (Resource).GetProperties().Select(p => p.Name).ToArray();
-
+                      
             // Go over each property that is in resource and write to stream
-            JsonConverterHelper.SerializeProperties(writer, value, serializer, resourceProperties);
+            JsonConverterHelper.SerializeProperties(writer, value, serializer, p => !p.PropertyName.StartsWith("properties."));
 
             // If there is a need to add properties element - add it
-            if (propertiesToConsolidate.Any())
+            var contract = (JsonObjectContract)serializer.ContractResolver.ResolveContract(value.GetType());
+            if (contract.Properties.Any(p => p.PropertyName.StartsWith("properties.")))
             {
                 writer.WritePropertyName(PropertiesNode);
                 writer.WriteStartObject();
-                JsonConverterHelper.SerializeProperties(writer, value, serializer, propertiesToConsolidate.Select(p => p.Name));
+                JsonConverterHelper.SerializeProperties(writer, value, serializer, p => p.PropertyName.StartsWith("properties."));
                 writer.WriteEndObject();
             }
 

@@ -22,7 +22,8 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                 {
                     ChildName1 = "name1"
                 },
-                Location = "EastUS"
+                Location = "EastUS",
+                Plan = "testPlan",
             };
             sampleResource.Tags = new Dictionary<string, string>();
             sampleResource.Tags["tag1"] = "value1";
@@ -37,6 +38,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             serializeSettings.Converters.Add(new PolymorphicSerializeJsonConverter<SampleResourceChild>("dType"));
             string json = JsonConvert.SerializeObject(sampleResource, serializeSettings);
             Assert.Equal(@"{
+  ""plan"": ""testPlan"",
   ""location"": ""EastUS"",
   ""tags"": {
     ""tag1"": ""value1""
