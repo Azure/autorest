@@ -140,6 +140,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             getMethod.Parameters
                 .Where(p => LocalParameters.Any(lp => lp.Name == p.Name))
                 .ForEach(p => invocationParams.Add(string.Format(CultureInfo.InvariantCulture,"{0}: {0}", p.Name)));
+            invocationParams.Add("customHeaders: customHeaders");
             invocationParams.Add("cancellationToken: cancellationToken");
             return string.Join(", ", invocationParams);
         }
@@ -152,7 +153,6 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
         public override string BuildUrl(string variableName)
         {
             var builder = new IndentedStringBuilder(IndentedStringBuilder.FourSpaces);
-            ReplaceSubscriptionIdInUri(variableName, builder);
             ReplacePathParametersInUri(variableName, builder);
             AddQueryParametersToUri(variableName, builder);
             return builder.ToString();
@@ -190,14 +190,6 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                 }
             }
 
-            if (!Parameters.Any(p => p.Name.Equals("apiVersion", StringComparison.OrdinalIgnoreCase)) &&
-                !IsAbsoluteUrl)
-            {
-                builder.AppendLine(
-                    "queryParameters.Add(string.Format(\"api-version={{0}}\", Uri.EscapeDataString({0}.ApiVersion)));",
-                    ClientReference);
-            }
-
             builder.AppendLine("if (queryParameters.Count > 0)")
                 .AppendLine("{").Indent()
                 .AppendLine("{0} += \"?\" + string.Join(\"&\", queryParameters);", variableName).Outdent()
@@ -216,28 +208,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
 
                 builder.AppendLine(replaceString,
                     variableName,
-                    pathParameter.Name,
+                    pathParameter.SerializedName,
                     pathParameter.Type.ToString(ClientReference, pathParameter.Name));
-            }
-        }
-
-        private void ReplaceSubscriptionIdInUri(string variableName, IndentedStringBuilder builder)
-        {
-            if (this.Url != null && this.Url.Contains("{subscriptionId}") &&
-                !ParameterTemplateModels.Any(p => p.SerializedName.Equals("subscriptionId", StringComparison.OrdinalIgnoreCase)))
-            {
-                builder
-                    .AppendLine("if ({0}.Credentials == null)", ClientReference)
-                    .AppendLine("{")
-                    .Indent()
-                    .AppendLine(
-                        "throw new ArgumentNullException(\"Credentials\", \"SubscriptionCloudCredentials are missing from the client.\");")
-                    .Outdent()
-                    .AppendLine("}")
-                    .AppendLine(
-                        "{0} = {0}.Replace(\"{{subscriptionId}}\", Uri.EscapeDataString({1}.Credentials.SubscriptionId));",
-                        variableName,
-                        ClientReference);
             }
         }
     }

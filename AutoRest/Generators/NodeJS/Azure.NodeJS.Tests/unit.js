@@ -2,13 +2,12 @@
 // Licensed under the MIT License. See License.txt in the project root for license information. 
 
 var fs = require('fs');
-var reporter = 'xunit-file';
+var reporter = 'list';
 var args = (process.ARGV || process.argv);
 if (args.length > 3) {
   reporter = args.pop();
 }
 var testList = args.pop();
-
 
 var fileContent;
 

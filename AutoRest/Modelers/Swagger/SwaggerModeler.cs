@@ -13,6 +13,7 @@ using Microsoft.Rest.Modeler.Swagger.Model;
 using ParameterLocation = Microsoft.Rest.Modeler.Swagger.Model.ParameterLocation;
 using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
 using System.Globalization;
+using System.Text;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
@@ -66,6 +67,17 @@ namespace Microsoft.Rest.Modeler.Swagger
             Logger.LogInfo(Resources.GeneratingClient);
             InitializeClientModel();
             BuildCompositeTypes();
+
+            // Build client parameters methods
+            foreach (var swaggerParameter in ServiceDefinition.Parameters.Values)
+            {
+                var parameter = ((ParameterBuilder)swaggerParameter.GetBuilder(this)).Build();
+
+                var clientProperty = new Property();
+                clientProperty.LoadFrom(parameter);
+
+                ServiceClient.Properties.Add(clientProperty);
+            }
 
             // Build methods
             foreach (var path in ServiceDefinition.Paths)

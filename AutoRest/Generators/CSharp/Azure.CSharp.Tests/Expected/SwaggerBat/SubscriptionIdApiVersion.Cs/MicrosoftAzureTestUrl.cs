@@ -37,15 +37,20 @@ namespace Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
         /// <summary>
-        /// The Api Version.
-        /// </summary>
-        public string ApiVersion { get; private set; }
-
-        /// <summary>
         /// Subscription credentials which uniquely identify Microsoft Azure
         /// subscription.
         /// </summary>
         public SubscriptionCloudCredentials Credentials { get; set; }
+
+        /// <summary>
+        /// Subscription Id.
+        /// </summary>
+        public string SubscriptionId { get; set; }
+
+        /// <summary>
+        /// API Version with value '2014-04-01-preview'.
+        /// </summary>
+        public string ApiVersion { get; private set; }
 
         /// <summary>
         /// The retry timeout for Long Running Operations.
@@ -114,17 +119,25 @@ namespace Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion
         /// <param name='credentials'>
         /// Required. Subscription credentials which uniquely identify Microsoft Azure subscription.
         /// </param>
+        /// <param name='subscriptionId'>
+        /// Required. Subscription Id.
+        /// </param>
         /// <param name='handlers'>
         /// Optional. The set of delegating handlers to insert in the http
         /// client pipeline.
         /// </param>
-        public MicrosoftAzureTestUrl(SubscriptionCloudCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        public MicrosoftAzureTestUrl(SubscriptionCloudCredentials credentials, string subscriptionId, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (credentials == null)
             {
                 throw new ArgumentNullException("credentials");
             }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException("subscriptionId");
+            }
             this.Credentials = credentials;
+            this.SubscriptionId = subscriptionId;
         }
 
         /// <summary>
@@ -136,11 +149,14 @@ namespace Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion
         /// <param name='credentials'>
         /// Required. Subscription credentials which uniquely identify Microsoft Azure subscription.
         /// </param>
+        /// <param name='subscriptionId'>
+        /// Required. Subscription Id.
+        /// </param>
         /// <param name='handlers'>
         /// Optional. The set of delegating handlers to insert in the http
         /// client pipeline.
         /// </param>
-        public MicrosoftAzureTestUrl(Uri baseUri, SubscriptionCloudCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        public MicrosoftAzureTestUrl(Uri baseUri, SubscriptionCloudCredentials credentials, string subscriptionId, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
             {
@@ -150,8 +166,13 @@ namespace Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion
             {
                 throw new ArgumentNullException("credentials");
             }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException("subscriptionId");
+            }
             this.BaseUri = baseUri;
             this.Credentials = credentials;
+            this.SubscriptionId = subscriptionId;
         }
 
         /// <summary>

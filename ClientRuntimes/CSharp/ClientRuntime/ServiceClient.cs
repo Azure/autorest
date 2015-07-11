@@ -132,7 +132,7 @@ namespace Microsoft.Rest
         {
             if (retryPolicy == null)
             {
-                throw new ArgumentNullException("retryPolicy");
+                retryPolicy = new RetryPolicy<TransientErrorIgnoreStrategy>(0);
             }
 
             RetryDelegatingHandler delegatingHandler =

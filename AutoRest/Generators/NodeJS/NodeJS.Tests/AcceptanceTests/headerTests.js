@@ -23,7 +23,7 @@ describe('nodejs', function () {
   describe('Swagger Header BAT', function () {
 
     describe('Basic Header Operations', function () {
-      var testClient = new headerClient(credentials, baseUri, clientOptions);
+      var testClient = new headerClient(baseUri, clientOptions);
       it('should override existing headers', function (done) {
         testClient.header.paramExistingKey('overwrite', function (error, result) {
           should.not.exist(error);

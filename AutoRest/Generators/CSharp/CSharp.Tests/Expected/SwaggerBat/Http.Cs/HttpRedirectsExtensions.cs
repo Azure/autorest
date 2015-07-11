@@ -32,7 +32,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Head300Async( this IHttpRedirects operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Head300WithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                await operations.Head300WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -57,7 +57,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task<IList<string>> Get300Async( this IHttpRedirects operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<string>> result = await operations.Get300WithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<string>> result = await operations.Get300WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -83,7 +83,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Head301Async( this IHttpRedirects operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Head301WithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                await operations.Head301WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -108,7 +108,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Get301Async( this IHttpRedirects operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Get301WithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                await operations.Get301WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -143,7 +143,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Put301Async( this IHttpRedirects operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Put301WithOperationResponseAsync(booleanValue, cancellationToken).ConfigureAwait(false);
+                await operations.Put301WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -168,7 +168,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Head302Async( this IHttpRedirects operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Head302WithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                await operations.Head302WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -193,7 +193,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Get302Async( this IHttpRedirects operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Get302WithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                await operations.Get302WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -228,7 +228,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Patch302Async( this IHttpRedirects operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Patch302WithOperationResponseAsync(booleanValue, cancellationToken).ConfigureAwait(false);
+                await operations.Patch302WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -263,7 +263,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Post303Async( this IHttpRedirects operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Post303WithOperationResponseAsync(booleanValue, cancellationToken).ConfigureAwait(false);
+                await operations.Post303WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -288,7 +288,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Head307Async( this IHttpRedirects operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Head307WithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                await operations.Head307WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -313,7 +313,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Get307Async( this IHttpRedirects operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Get307WithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                await operations.Get307WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -344,7 +344,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Put307Async( this IHttpRedirects operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Put307WithOperationResponseAsync(booleanValue, cancellationToken).ConfigureAwait(false);
+                await operations.Put307WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -375,7 +375,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Patch307Async( this IHttpRedirects operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Patch307WithOperationResponseAsync(booleanValue, cancellationToken).ConfigureAwait(false);
+                await operations.Patch307WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -406,7 +406,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Post307Async( this IHttpRedirects operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Post307WithOperationResponseAsync(booleanValue, cancellationToken).ConfigureAwait(false);
+                await operations.Post307WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -437,7 +437,7 @@ namespace Fixtures.SwaggerBatHttp
             /// </param>
             public static async Task Delete307Async( this IHttpRedirects operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Delete307WithOperationResponseAsync(booleanValue, cancellationToken).ConfigureAwait(false);
+                await operations.Delete307WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
 
     }

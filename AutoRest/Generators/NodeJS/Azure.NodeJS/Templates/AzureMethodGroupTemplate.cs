@@ -68,7 +68,6 @@ Write(EmptyLine);
 #line 17 "AzureMethodGroupTemplate.cshtml"
  if (Model.ModelTypes.Any())
 {
-    
 
 #line default
 #line hidden
@@ -79,12 +78,12 @@ Write(EmptyLine);
 #line default
 #line hidden
 #line 19 "AzureMethodGroupTemplate.cshtml"
-              
+          
 
 #line default
 #line hidden
 
-            WriteLiteral("    var models = require(\'../models\');\r\n");
+            WriteLiteral("var models = require(\'../models\');\r\n");
 #line 21 "AzureMethodGroupTemplate.cshtml"
 }
 
@@ -141,15 +140,13 @@ Write(EmptyLine);
 #line default
 #line hidden
 
-            WriteLiteral("    ");
 #line 40 "AzureMethodGroupTemplate.cshtml"
-  Write(Include(new AzureMethodTemplate(), method as AzureMethodTemplateModel));
+Write(Include(new AzureMethodTemplate(), method as AzureMethodTemplateModel));
 
 #line default
 #line hidden
             WriteLiteral("\r\n");
 #line 41 "AzureMethodGroupTemplate.cshtml"
-    
 
 #line default
 #line hidden
@@ -160,7 +157,7 @@ Write(EmptyLine);
 #line default
 #line hidden
 #line 41 "AzureMethodGroupTemplate.cshtml"
-              
+          
 }
 
 #line default

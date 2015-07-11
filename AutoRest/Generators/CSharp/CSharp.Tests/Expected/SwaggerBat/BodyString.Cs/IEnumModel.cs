@@ -17,10 +17,13 @@ namespace Fixtures.SwaggerBatBodyString
         /// Get enum value 'red color' from enumeration of 'red color',
         /// 'green-color', 'blue_color'.
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<Colors?>> GetNotExpandableWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<Colors?>> GetNotExpandableWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Sends value 'red color' from enumeration of 'red color',
         /// 'green-color', 'blue_color'
@@ -29,9 +32,12 @@ namespace Fixtures.SwaggerBatBodyString
         /// Possible values for this parameter include: 'red color',
         /// 'green-color', 'blue_color'
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> PutNotExpandableWithOperationResponseAsync(Colors? stringBody, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutNotExpandableWithHttpMessagesAsync(Colors? stringBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

@@ -21,7 +21,7 @@ var baseUri = 'http://localhost:3000';
 describe('nodejs', function () {
   
   describe('Swagger BAT coverage report', function () {
-    var testClient = new reportClient(credentials, baseUri, clientOptions);
+    var testClient = new reportClient(baseUri, clientOptions);
     it('should have 100% coverage', function (done) {
       testClient.getReport(function (error, result) {
         should.not.exist(error);

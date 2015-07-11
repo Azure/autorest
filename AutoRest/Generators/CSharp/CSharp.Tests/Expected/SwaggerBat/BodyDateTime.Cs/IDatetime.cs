@@ -16,153 +16,210 @@ namespace Fixtures.SwaggerBatBodyDateTime
         /// <summary>
         /// Get null datetime value
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<DateTime?>> GetNullWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<DateTime?>> GetNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get invalid datetime value
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<DateTime?>> GetInvalidWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<DateTime?>> GetInvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get overflow datetime value
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<DateTime?>> GetOverflowWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<DateTime?>> GetOverflowWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get underflow datetime value
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<DateTime?>> GetUnderflowWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<DateTime?>> GetUnderflowWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put max datetime value 9999-12-31T23:59:59.9999999Z
         /// </summary>
         /// <param name='datetimeBody'>
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> PutUtcMaxDateTimeWithOperationResponseAsync(DateTime? datetimeBody, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutUtcMaxDateTimeWithHttpMessagesAsync(DateTime? datetimeBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get max datetime value 9999-12-31t23:59:59.9999999z
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<DateTime?>> GetUtcLowercaseMaxDateTimeWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<DateTime?>> GetUtcLowercaseMaxDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get max datetime value 9999-12-31T23:59:59.9999999Z
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<DateTime?>> GetUtcUppercaseMaxDateTimeWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<DateTime?>> GetUtcUppercaseMaxDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put max datetime value with positive numoffset
         /// 9999-12-31t23:59:59.9999999+14:00
         /// </summary>
         /// <param name='datetimeBody'>
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> PutLocalPositiveOffsetMaxDateTimeWithOperationResponseAsync(DateTime? datetimeBody, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutLocalPositiveOffsetMaxDateTimeWithHttpMessagesAsync(DateTime? datetimeBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get max datetime value with positive num offset
         /// 9999-12-31t23:59:59.9999999+14:00
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<DateTime?>> GetLocalPositiveOffsetLowercaseMaxDateTimeWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<DateTime?>> GetLocalPositiveOffsetLowercaseMaxDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get max datetime value with positive num offset
         /// 9999-12-31T23:59:59.9999999+14:00
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<DateTime?>> GetLocalPositiveOffsetUppercaseMaxDateTimeWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<DateTime?>> GetLocalPositiveOffsetUppercaseMaxDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put max datetime value with positive numoffset
         /// 9999-12-31t23:59:59.9999999-14:00
         /// </summary>
         /// <param name='datetimeBody'>
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> PutLocalNegativeOffsetMaxDateTimeWithOperationResponseAsync(DateTime? datetimeBody, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutLocalNegativeOffsetMaxDateTimeWithHttpMessagesAsync(DateTime? datetimeBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get max datetime value with positive num offset
         /// 9999-12-31T23:59:59.9999999-14:00
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<DateTime?>> GetLocalNegativeOffsetUppercaseMaxDateTimeWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<DateTime?>> GetLocalNegativeOffsetUppercaseMaxDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get max datetime value with positive num offset
         /// 9999-12-31t23:59:59.9999999-14:00
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<DateTime?>> GetLocalNegativeOffsetLowercaseMaxDateTimeWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<DateTime?>> GetLocalNegativeOffsetLowercaseMaxDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put min datetime value 0001-01-01T00:00:00Z
         /// </summary>
         /// <param name='datetimeBody'>
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> PutUtcMinDateTimeWithOperationResponseAsync(DateTime? datetimeBody, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutUtcMinDateTimeWithHttpMessagesAsync(DateTime? datetimeBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get min datetime value 0001-01-01T00:00:00Z
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<DateTime?>> GetUtcMinDateTimeWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<DateTime?>> GetUtcMinDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put min datetime value 0001-01-01T00:00:00+14:00
         /// </summary>
         /// <param name='datetimeBody'>
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> PutLocalPositiveOffsetMinDateTimeWithOperationResponseAsync(DateTime? datetimeBody, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutLocalPositiveOffsetMinDateTimeWithHttpMessagesAsync(DateTime? datetimeBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get min datetime value 0001-01-01T00:00:00+14:00
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<DateTime?>> GetLocalPositiveOffsetMinDateTimeWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<DateTime?>> GetLocalPositiveOffsetMinDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put min datetime value 0001-01-01T00:00:00-14:00
         /// </summary>
         /// <param name='datetimeBody'>
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> PutLocalNegativeOffsetMinDateTimeWithOperationResponseAsync(DateTime? datetimeBody, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutLocalNegativeOffsetMinDateTimeWithHttpMessagesAsync(DateTime? datetimeBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get min datetime value 0001-01-01T00:00:00-14:00
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<DateTime?>> GetLocalNegativeOffsetMinDateTimeWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<DateTime?>> GetLocalNegativeOffsetMinDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

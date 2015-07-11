@@ -1,3 +1,6 @@
+## Ignore generated code
+AutoRest/Generators/AcceptanceTests/NugetPackageTest/Generated
+
 ## Ignore user-specific files, temporary files, build results, etc. 
 
 # User-specific files
@@ -93,7 +96,7 @@ ClientBin
 *.dbmdl
 
 # Build tasks
-tools/*.dll
+[Tt]ools/*.dll
 *.class
 
 # Mobile Tools for Java (J2ME)

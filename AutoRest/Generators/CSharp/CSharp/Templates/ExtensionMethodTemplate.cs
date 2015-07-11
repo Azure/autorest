@@ -60,7 +60,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
             WriteLiteral("\r\n/// </summary>\r\n/// <param name=\'operations\'>\r\n/// The operations group for thi" +
 "s extension method\r\n/// </param>\r\n");
 #line 15 "ExtensionMethodTemplate.cshtml"
-foreach (var parameter in Model.Parameters)
+foreach (var parameter in Model.LocalParameters)
 {
 
 #line default
@@ -191,7 +191,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
             WriteLiteral("\r\n/// </summary>\r\n/// <param name=\'operations\'>\r\n/// The operations group for thi" +
 "s extension method\r\n/// </param>\r\n");
 #line 39 "ExtensionMethodTemplate.cshtml"
-foreach (var parameter in Model.Parameters)
+foreach (var parameter in Model.LocalParameters)
 {
 
 #line default
@@ -231,7 +231,7 @@ Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 #line hidden
             WriteLiteral("Async( ");
 #line 48 "ExtensionMethodTemplate.cshtml"
-                                                                          Write(Model.GetExtensionParameters(Model.AsyncMethodParameterDeclaration));
+                                                                          Write(Model.GetExtensionParameters(Model.GetAsyncMethodParameterDeclaration()));
 
 #line default
 #line hidden
@@ -255,9 +255,9 @@ Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("WithOperationResponseAsync(");
+            WriteLiteral("WithHttpMessagesAsync(");
 #line 52 "ExtensionMethodTemplate.cshtml"
-                                                                                                             Write(Model.AsyncMethodInvocationArgs);
+                                                                                                        Write(Model.GetAsyncMethodInvocationArgs("null"));
 
 #line default
 #line hidden
@@ -276,9 +276,9 @@ Write(WrapComment("/// ", parameter.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral("WithOperationResponseAsync(");
+            WriteLiteral("WithHttpMessagesAsync(");
 #line 57 "ExtensionMethodTemplate.cshtml"
-                                                           Write(Model.AsyncMethodInvocationArgs);
+                                                      Write(Model.GetAsyncMethodInvocationArgs("null"));
 
 #line default
 #line hidden

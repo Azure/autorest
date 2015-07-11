@@ -9,20 +9,17 @@
     "http"
   ],
   "paths": {
-    "/values": {
+    "/values/formDate": {
       "post": {
         "tags": [
           "Values"
         ],
-        "operationId": "GetWithStream",
+        "operationId": "GetWithStreamFormData",
         "consumes": [
           "multipart/form-data"
         ],
         "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "image/jpeg"
         ],
         "parameters": [
           {
@@ -46,15 +43,12 @@
         "tags": [
           "Values"
         ],
-        "operationId": "PostWithByteArray",
+        "operationId": "PostWithByteArrayFormData",
         "consumes": [
           "multipart/form-data"
         ],
         "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "image/jpeg"
         ],
         "parameters": [
           {
@@ -65,6 +59,45 @@
             "format": "byte",
             "in": "formData"
           }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string",
+              "format": "byte"
+            }
+          }
+        }
+      }
+    },
+    "/values": {
+      "post": {
+        "tags": [
+          "Values"
+        ],
+        "operationId": "GetWithStream",
+        "consumes": [],
+        "produces": [
+          "image/jpeg"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Values"
+        ],
+        "operationId": "PostWithByteArray",
+        "consumes": [],
+        "produces": [
+          "image/jpeg"
         ],
         "responses": {
           "200": {

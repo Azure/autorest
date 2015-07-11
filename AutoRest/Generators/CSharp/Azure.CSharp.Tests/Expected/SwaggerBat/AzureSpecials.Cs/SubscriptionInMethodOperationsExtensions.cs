@@ -41,7 +41,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// </param>
             public static async Task PostMethodLocalValidAsync( this ISubscriptionInMethodOperations operations, string subscriptionId, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostMethodLocalValidWithOperationResponseAsync(subscriptionId, cancellationToken).ConfigureAwait(false);
+                await operations.PostMethodLocalValidWithHttpMessagesAsync(subscriptionId, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -78,7 +78,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// </param>
             public static async Task PostMethodLocalNullAsync( this ISubscriptionInMethodOperations operations, string subscriptionId, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostMethodLocalNullWithOperationResponseAsync(subscriptionId, cancellationToken).ConfigureAwait(false);
+                await operations.PostMethodLocalNullWithHttpMessagesAsync(subscriptionId, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -111,7 +111,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// </param>
             public static async Task PostPathLocalValidAsync( this ISubscriptionInMethodOperations operations, string subscriptionId, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostPathLocalValidWithOperationResponseAsync(subscriptionId, cancellationToken).ConfigureAwait(false);
+                await operations.PostPathLocalValidWithHttpMessagesAsync(subscriptionId, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -146,7 +146,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// </param>
             public static async Task PostSwaggerLocalValidAsync( this ISubscriptionInMethodOperations operations, string subscriptionId, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostSwaggerLocalValidWithOperationResponseAsync(subscriptionId, cancellationToken).ConfigureAwait(false);
+                await operations.PostSwaggerLocalValidWithHttpMessagesAsync(subscriptionId, null, cancellationToken).ConfigureAwait(false);
             }
 
     }

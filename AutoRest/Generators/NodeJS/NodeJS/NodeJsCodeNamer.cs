@@ -143,7 +143,17 @@ namespace Microsoft.Rest.Generator.NodeJS
                 var scope = new ScopeProvider();
                 foreach (var parameter in method.Parameters)
                 {
-                    parameter.Name = scope.GetVariableName(parameter.Name);
+                    if (parameter.ClientProperty != null)
+                    {
+                        parameter.Name = string.Format(CultureInfo.InvariantCulture,
+                            "{0}.{1}",
+                            method.Group == null ? "this" : "this.client",
+                            parameter.ClientProperty.Name);
+                    }
+                    else
+                    {
+                        parameter.Name = scope.GetVariableName(parameter.Name);
+                    }
                 }
             }
         }
@@ -200,12 +210,10 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         private IType NormalizeCompositeType(CompositeType compositeType)
         {
-            compositeType.SerializedName = compositeType.Name;
             compositeType.Name = GetTypeName(compositeType.Name);
 
             foreach (var property in compositeType.Properties)
             {
-                property.SerializedName = property.Name;
                 property.Name = GetPropertyName(property.Name);
                 property.Type = NormalizeType(property.Type);
             }

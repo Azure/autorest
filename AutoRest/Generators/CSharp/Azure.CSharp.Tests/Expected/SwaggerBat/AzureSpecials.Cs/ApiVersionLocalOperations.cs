@@ -40,10 +40,13 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// This should appear as a method parameter, use value '2.0'. Possible values
         /// for this parameter include: '2.0'
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> GetMethodLocalValidWithOperationResponseAsync(string apiVersion, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> GetMethodLocalValidWithHttpMessagesAsync(string apiVersion, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (apiVersion == null)
             {
@@ -66,7 +69,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             List<string> queryParameters = new List<string>();
             if (apiVersion != null)
             {
-                queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(apiVersion, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(apiVersion)));
             }
             if (queryParameters.Count > 0)
             {
@@ -79,6 +82,14 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -95,10 +106,10 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -131,10 +142,13 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// This should appear as a method parameter, use value null, this should
         /// result in no serialized parameter
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> GetMethodLocalNullWithOperationResponseAsync(string apiVersion = default(string), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> GetMethodLocalNullWithHttpMessagesAsync(string apiVersion = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -166,6 +180,14 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -182,10 +204,10 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -218,10 +240,13 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// This should appear as a method parameter, use value '2.0'. Possible values
         /// for this parameter include: '2.0'
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> GetPathLocalValidWithOperationResponseAsync(string apiVersion, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> GetPathLocalValidWithHttpMessagesAsync(string apiVersion, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (apiVersion == null)
             {
@@ -244,7 +269,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             List<string> queryParameters = new List<string>();
             if (apiVersion != null)
             {
-                queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(apiVersion, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(apiVersion)));
             }
             if (queryParameters.Count > 0)
             {
@@ -257,6 +282,14 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -273,10 +306,10 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -309,10 +342,13 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// The api version, which appears in the query, the value is always '2.0'.
         /// Possible values for this parameter include: '2.0'
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> GetSwaggerLocalValidWithOperationResponseAsync(string apiVersion, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> GetSwaggerLocalValidWithHttpMessagesAsync(string apiVersion, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (apiVersion == null)
             {
@@ -335,7 +371,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             List<string> queryParameters = new List<string>();
             if (apiVersion != null)
             {
-                queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(apiVersion, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(apiVersion)));
             }
             if (queryParameters.Count > 0)
             {
@@ -348,6 +384,14 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -364,10 +408,10 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {

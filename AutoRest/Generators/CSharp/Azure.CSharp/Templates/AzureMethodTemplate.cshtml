@@ -17,23 +17,26 @@ else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.D
 @:/// <summary>
 @WrapComment("/// ", Model.Documentation.EscapeXmlComment())@:
 @:/// </summary>
-@foreach (var parameter in Model.Parameters)
+@foreach (var parameter in Model.LocalParameters)
 {
 @:/// <param name='@parameter.Name'>
 @WrapComment("/// ", parameter.Documentation.EscapeXmlComment())@:
 @:/// </param>    
 }
+@:/// <param name='customHeaders'>
+@:/// Headers that will be added to request.
+@:/// </param>
 @:/// <param name='cancellationToken'>
 @:/// Cancellation token.
 @:/// </param>
 <text>
-public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithOperationResponseAsync(@(Model.AsyncMethodParameterDeclaration))
+public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
     // Send request
-    @(Model.OperationResponseReturnTypeString) response = await Begin@(Model.Name)WithOperationResponseAsync(
-        @(Model.AsyncMethodInvocationArgs));
+    @(Model.OperationResponseReturnTypeString) response = await Begin@(Model.Name)WithHttpMessagesAsync(
+        @(Model.GetAsyncMethodInvocationArgs("customHeaders")));
 
-    return await @(Model.ClientReference).GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+    return await @(Model.ClientReference).GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
 }
 </text>
 }
@@ -42,24 +45,28 @@ else if (Model.HttpMethod == HttpMethod.Put)
 @:/// <summary>
 @WrapComment("/// ", Model.Documentation.EscapeXmlComment())@:
 @:/// </summary>
-@foreach (var parameter in Model.Parameters)
+@foreach (var parameter in Model.LocalParameters)
 {
 @:/// <param name='@parameter.Name'>
 @WrapComment("/// ", parameter.Documentation.EscapeXmlComment())@:
 @:/// </param>    
 }
+@:/// <param name='customHeaders'>
+@:/// Headers that will be added to request.
+@:/// </param>    
 @:/// <param name='cancellationToken'>
 @:/// Cancellation token.
 @:/// </param>
 <text>
-public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithOperationResponseAsync(@(Model.AsyncMethodParameterDeclaration))
+public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
     // Send Request
-    @(Model.OperationResponseReturnTypeString) response = await Begin@(Model.Name)WithOperationResponseAsync(
-        @(Model.AsyncMethodInvocationArgs));
+    @(Model.OperationResponseReturnTypeString) response = await Begin@(Model.Name)WithHttpMessagesAsync(
+        @(Model.GetAsyncMethodInvocationArgs("customHeaders")));
 
     return await @(Model.ClientReference).GetPutOperationResultAsync<@(Model.ReturnType.Name)>(response, 
-        () => @(Model.GetMethod.Name)WithOperationResponseAsync(@(Model.GetMethodInvocationArgs(Model.GetMethod))),
+        () => @(Model.GetMethod.Name)WithHttpMessagesAsync(@(Model.GetMethodInvocationArgs(Model.GetMethod))),
+        customHeaders, 
         cancellationToken);
 }
 </text>

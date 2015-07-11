@@ -9,3 +9,4 @@ exports.LROs = require('./LROs');
 exports.DONOTCALLs = require('./DONOTCALLs');
 exports.LRORetrys = require('./LRORetrys');
 exports.LROSADs = require('./LROSADs');
+exports.LROsCustomHeader = require('./LROsCustomHeader');

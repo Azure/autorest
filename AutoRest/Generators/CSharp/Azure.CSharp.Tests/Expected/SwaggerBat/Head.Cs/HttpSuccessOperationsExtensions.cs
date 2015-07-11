@@ -32,7 +32,7 @@ namespace Fixtures.Azure.SwaggerBatHead
             /// </param>
             public static async Task<bool?> Head204Async( this IHttpSuccessOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<bool?> result = await operations.Head204WithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<bool?> result = await operations.Head204WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -58,7 +58,7 @@ namespace Fixtures.Azure.SwaggerBatHead
             /// </param>
             public static async Task<bool?> Head404Async( this IHttpSuccessOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<bool?> result = await operations.Head404WithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<bool?> result = await operations.Head404WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

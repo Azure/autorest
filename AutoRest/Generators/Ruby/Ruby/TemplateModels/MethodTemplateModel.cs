@@ -96,7 +96,7 @@ namespace Microsoft.Rest.Generator.Ruby
             {
                 return
                     ParameterTemplateModels.Where(
-                        p => p != null && p.GlobalProperty == null && !string.IsNullOrWhiteSpace(p.Name))
+                        p => p != null && p.ClientProperty == null && !string.IsNullOrWhiteSpace(p.Name))
                         .OrderBy(item => !item.IsRequired);
             }
         }

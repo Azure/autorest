@@ -128,11 +128,11 @@ namespace Microsoft.Rest
                 return "{}";
             }
 
-            return "{" + string.Join(",", 
-                                    dictionary.Select(kv => kv.Key.ToString() +
-                                                      "=" +
-                                                      (kv.Value == null ? string.Empty : kv.Value.ToString()))
-                .ToArray()) + "}";
+            return "{" + string.Join(",",
+                dictionary.Select(kv => kv.Key.ToString() +
+                                        "=" +
+                                        (kv.Value == null ? string.Empty : kv.Value.ToString()))
+                    .ToArray()) + "}";
         }
     }
 }

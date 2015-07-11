@@ -28,23 +28,38 @@ namespace Microsoft.Rest.Modeler.Swagger
         public Parameter Build()
         {
             string parameterName = _swaggerParameter.Name;
-            if (_swaggerParameter.Schema != null && _swaggerParameter.Schema.Reference != null)
+            SwaggerParameter unwrappedParameter = _swaggerParameter;
+            
+            if (_swaggerParameter.Reference != null)
             {
-                parameterName = _swaggerParameter.Schema.Reference.StripDefinitionPath();
+                unwrappedParameter = Modeler.Unwrap(_swaggerParameter);
+            }
+
+            if (unwrappedParameter.Schema != null && unwrappedParameter.Schema.Reference != null)
+            {
+                parameterName = unwrappedParameter.Schema.Reference.StripDefinitionPath();
             }
 
             IType parameterType = BuildServiceType(parameterName);
             var parameter = new Parameter
             {
-                Name = _swaggerParameter.Name,
+                Name = unwrappedParameter.Name,
+                SerializedName = unwrappedParameter.Name,
                 Type = parameterType,
-                IsRequired = _swaggerParameter.IsRequired,
-                Location = (Generator.ClientModel.ParameterLocation) Enum.Parse(typeof (Generator.ClientModel.ParameterLocation), _swaggerParameter.In.ToString())
+                IsRequired = unwrappedParameter.IsRequired,
+                Location = (Generator.ClientModel.ParameterLocation)Enum.Parse(typeof(Generator.ClientModel.ParameterLocation), unwrappedParameter.In.ToString())
             };
             parameter.IsRequired = parameter.IsRequired || parameter.Location == Generator.ClientModel.ParameterLocation.Path;
 
-            parameter.CollectionFormat = _swaggerParameter.CollectionFormat;
-            parameter.Documentation = _swaggerParameter.Description;
+            parameter.CollectionFormat = unwrappedParameter.CollectionFormat;
+            parameter.Documentation = unwrappedParameter.Description;
+
+            if(_swaggerParameter.Reference != null)
+            {
+                var clientProperty = Modeler.ServiceClient.Properties.First(p => p.Name == unwrappedParameter.Name);
+                parameter.ClientProperty = clientProperty;
+            }
+
             var enumType = parameterType as EnumType;
             if (enumType != null)
             {
@@ -61,7 +76,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                                                string.Format(CultureInfo.InvariantCulture, 
                                                "'{0}'", v.Name)));
             }
-            _swaggerParameter.Extensions.ForEach(e => parameter.Extensions[e.Key] = e.Value);
+            unwrappedParameter.Extensions.ForEach(e => parameter.Extensions[e.Key] = e.Value);
 
             return parameter;
         }
@@ -82,7 +97,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 return swaggerParameter.GetBuilder(Modeler).ParentBuildServiceType(serviceTypeName);
             }
 
-                // Contains a complex type schema
+            // Contains a complex type schema
             return swaggerParameter.Schema.GetBuilder(Modeler).BuildServiceType(serviceTypeName);
         }
 

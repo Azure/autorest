@@ -38,7 +38,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task GetBooleanTrueAsync( this IPaths operations, bool? boolPath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetBooleanTrueWithOperationResponseAsync(boolPath, cancellationToken).ConfigureAwait(false);
+                await operations.GetBooleanTrueWithHttpMessagesAsync(boolPath, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -69,7 +69,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task GetBooleanFalseAsync( this IPaths operations, bool? boolPath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetBooleanFalseWithOperationResponseAsync(boolPath, cancellationToken).ConfigureAwait(false);
+                await operations.GetBooleanFalseWithHttpMessagesAsync(boolPath, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -100,7 +100,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task GetIntOneMillionAsync( this IPaths operations, int? intPath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetIntOneMillionWithOperationResponseAsync(intPath, cancellationToken).ConfigureAwait(false);
+                await operations.GetIntOneMillionWithHttpMessagesAsync(intPath, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -131,7 +131,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task GetIntNegativeOneMillionAsync( this IPaths operations, int? intPath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetIntNegativeOneMillionWithOperationResponseAsync(intPath, cancellationToken).ConfigureAwait(false);
+                await operations.GetIntNegativeOneMillionWithHttpMessagesAsync(intPath, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -162,7 +162,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task GetTenBillionAsync( this IPaths operations, long? longPath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetTenBillionWithOperationResponseAsync(longPath, cancellationToken).ConfigureAwait(false);
+                await operations.GetTenBillionWithHttpMessagesAsync(longPath, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -193,7 +193,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task GetNegativeTenBillionAsync( this IPaths operations, long? longPath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetNegativeTenBillionWithOperationResponseAsync(longPath, cancellationToken).ConfigureAwait(false);
+                await operations.GetNegativeTenBillionWithHttpMessagesAsync(longPath, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -224,7 +224,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task FloatScientificPositiveAsync( this IPaths operations, double? floatPath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.FloatScientificPositiveWithOperationResponseAsync(floatPath, cancellationToken).ConfigureAwait(false);
+                await operations.FloatScientificPositiveWithHttpMessagesAsync(floatPath, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -255,7 +255,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task FloatScientificNegativeAsync( this IPaths operations, double? floatPath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.FloatScientificNegativeWithOperationResponseAsync(floatPath, cancellationToken).ConfigureAwait(false);
+                await operations.FloatScientificNegativeWithHttpMessagesAsync(floatPath, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -286,7 +286,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task DoubleDecimalPositiveAsync( this IPaths operations, double? doublePath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.DoubleDecimalPositiveWithOperationResponseAsync(doublePath, cancellationToken).ConfigureAwait(false);
+                await operations.DoubleDecimalPositiveWithHttpMessagesAsync(doublePath, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -317,7 +317,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task DoubleDecimalNegativeAsync( this IPaths operations, double? doublePath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.DoubleDecimalNegativeWithOperationResponseAsync(doublePath, cancellationToken).ConfigureAwait(false);
+                await operations.DoubleDecimalNegativeWithHttpMessagesAsync(doublePath, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -350,7 +350,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task StringUnicodeAsync( this IPaths operations, string stringPath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.StringUnicodeWithOperationResponseAsync(stringPath, cancellationToken).ConfigureAwait(false);
+                await operations.StringUnicodeWithHttpMessagesAsync(stringPath, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -383,7 +383,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task StringUrlEncodedAsync( this IPaths operations, string stringPath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.StringUrlEncodedWithOperationResponseAsync(stringPath, cancellationToken).ConfigureAwait(false);
+                await operations.StringUrlEncodedWithHttpMessagesAsync(stringPath, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -414,7 +414,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task StringEmptyAsync( this IPaths operations, string stringPath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.StringEmptyWithOperationResponseAsync(stringPath, cancellationToken).ConfigureAwait(false);
+                await operations.StringEmptyWithHttpMessagesAsync(stringPath, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -445,7 +445,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task StringNullAsync( this IPaths operations, string stringPath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.StringNullWithOperationResponseAsync(stringPath, cancellationToken).ConfigureAwait(false);
+                await operations.StringNullWithHttpMessagesAsync(stringPath, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -478,7 +478,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task EnumValidAsync( this IPaths operations, UriColor? enumPath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.EnumValidWithOperationResponseAsync(enumPath, cancellationToken).ConfigureAwait(false);
+                await operations.EnumValidWithHttpMessagesAsync(enumPath, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -511,7 +511,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task EnumNullAsync( this IPaths operations, UriColor? enumPath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.EnumNullWithOperationResponseAsync(enumPath, cancellationToken).ConfigureAwait(false);
+                await operations.EnumNullWithHttpMessagesAsync(enumPath, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -542,7 +542,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task ByteMultiByteAsync( this IPaths operations, byte[] bytePath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ByteMultiByteWithOperationResponseAsync(bytePath, cancellationToken).ConfigureAwait(false);
+                await operations.ByteMultiByteWithHttpMessagesAsync(bytePath, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -573,7 +573,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task ByteEmptyAsync( this IPaths operations, byte[] bytePath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ByteEmptyWithOperationResponseAsync(bytePath, cancellationToken).ConfigureAwait(false);
+                await operations.ByteEmptyWithHttpMessagesAsync(bytePath, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -604,7 +604,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task ByteNullAsync( this IPaths operations, byte[] bytePath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ByteNullWithOperationResponseAsync(bytePath, cancellationToken).ConfigureAwait(false);
+                await operations.ByteNullWithHttpMessagesAsync(bytePath, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -635,7 +635,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task DateValidAsync( this IPaths operations, DateTime? datePath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.DateValidWithOperationResponseAsync(datePath, cancellationToken).ConfigureAwait(false);
+                await operations.DateValidWithHttpMessagesAsync(datePath, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -668,7 +668,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task DateNullAsync( this IPaths operations, DateTime? datePath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.DateNullWithOperationResponseAsync(datePath, cancellationToken).ConfigureAwait(false);
+                await operations.DateNullWithHttpMessagesAsync(datePath, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -699,7 +699,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task DateTimeValidAsync( this IPaths operations, DateTime? dateTimePath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.DateTimeValidWithOperationResponseAsync(dateTimePath, cancellationToken).ConfigureAwait(false);
+                await operations.DateTimeValidWithHttpMessagesAsync(dateTimePath, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -732,7 +732,7 @@ namespace Fixtures.SwaggerBatUrl
             /// </param>
             public static async Task DateTimeNullAsync( this IPaths operations, DateTime? dateTimePath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.DateTimeNullWithOperationResponseAsync(dateTimePath, cancellationToken).ConfigureAwait(false);
+                await operations.DateTimeNullWithHttpMessagesAsync(dateTimePath, null, cancellationToken).ConfigureAwait(false);
             }
 
     }

@@ -3,10 +3,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
-using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+#if!NET45
+using System.Reflection;
+#endif
+
 
 namespace Microsoft.Rest.Serialization
 {
@@ -49,7 +53,7 @@ namespace Microsoft.Rest.Serialization
                 throw new ArgumentNullException("serializer");
             }
 
-            var contract = (JsonObjectContract)serializer.ContractResolver.ResolveContract(value.GetType());
+            var contract = (JsonObjectContract) serializer.ContractResolver.ResolveContract(value.GetType());
             foreach (JsonProperty property in contract.Properties
                 .Where(p => filter == null || filter.Contains(p.UnderlyingName)))
             {
@@ -67,6 +71,10 @@ namespace Microsoft.Rest.Serialization
                 if (!property.Ignored && property.Readable &&
                     (property.ShouldSerialize == null || property.ShouldSerialize(memberValue)))
                 {
+                    if (property.PropertyName.StartsWith("properties.", StringComparison.OrdinalIgnoreCase))
+                    {
+                        property.PropertyName = property.PropertyName.Substring("properties.".Length);
+                    }
                     writer.WritePropertyName(property.PropertyName);
                     serializer.Serialize(writer, memberValue);
                 }

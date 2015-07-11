@@ -85,6 +85,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Expected\SwaggerBat\Lro.Cs\ILROsCustomHeaderOperations.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Lro.Cs\LROsCustomHeaderOperations.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\Lro.Cs\LROsCustomHeaderOperationsExtensions.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CSharpAzureSwaggerBat.cs" />
     <Compile Include="Expected\SwaggerBat\AzureSpecials.Cs\ApiVersionDefaultOperations.cs">

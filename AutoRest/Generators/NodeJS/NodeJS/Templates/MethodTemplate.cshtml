@@ -1,6 +1,7 @@
 ﻿@using System.Linq;
 @using Microsoft.Rest.Generator.ClientModel
 @using Microsoft.Rest.Generator.NodeJS.TemplateModels
+@using Microsoft.Rest.Generator.NodeJS.Templates
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.NodeJS.MethodTemplateModel>
 
 /**
@@ -10,20 +11,28 @@
  @:* @@param {@parameter.Type.Name} [@parameter.Name] @parameter.Documentation
  @:*
 }
+@WrapComment(" * ", " @param {object} [options]")
+ *
+@WrapComment(" * ", " @param {object} [options.customHeaders] headers that will be added to request")
+ *
 @WrapComment(" * ",  " @param {function} callback")
  *
 @WrapComment(" * ",  " @returns {Stream} The Response stream")
  */
 @(Model.OperationName).prototype.@(Model.Name) = function (@(Model.MethodParameterDeclarationWithCallback)) {
   var client = @(Model.ClientReference);
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  @if (Model.LocalParameters.Any())
+  @if (Model.ParameterTemplateModels.Any())
   {
   @:// Validate
   @:try {
-  @foreach (var parameter in Model.LocalParameters)
+  @foreach (var parameter in Model.ParameterTemplateModels)
   {
     if (parameter.IsRequired)
     {
@@ -69,7 +78,6 @@
   @:}
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-
   @if (Model.RequestBody != null)
   {
   <text>
@@ -87,87 +95,19 @@
   httpRequest.headers['Content-Length'] = 0;
   </text>
   }
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (@(Model.FailureStatusCodePredicate)) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-            @if (Model.DefaultResponse != null) {
-            var deserializeErrorBody = Model.GetDeserializationString(Model.DefaultResponse, "error.body");
-            if (!string.IsNullOrWhiteSpace(deserializeErrorBody))
-            {
-    @:      if (error.body !== null && error.body !== undefined) {
-    @:        @(deserializeErrorBody)
-    @:      }
-            }
-            }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-
-    // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
-    if (responseBody === '') responseBody = null;
-    @Model.InitializeResponseBody
-
-    @foreach (var responsePair in Model.Responses.Where(r => r.Value != null))
-    {
-     <text>
-    // Deserialize Response
-    if (statusCode === @MethodTemplateModel.GetStatusCodeReference(responsePair.Key)) {
-      var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        @{
-          var deserializeBody = Model.GetDeserializationString(Model.ReturnType);
-          if (!string.IsNullOrWhiteSpace(deserializeBody))
-          {
-@:        if (result.body !== null && result.body !== undefined) {
-@:          @(deserializeBody)
-@:        }
-          }
-        }
-      } catch (error) {
-        @(Model.DeserializationError)
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
     }
-    </text>
-    }
-    @if (Model.ReturnType != null && Model.DefaultResponse != null && !Model.Responses.Any())
-    {
-      @:var parsedResponse;
-      @:try {
-        @:parsedResponse = JSON.parse(responseBody);
-        @:result.body = parsedResponse;
-        var deserializeBody = Model.GetDeserializationString(Model.DefaultResponse);
-        if (!string.IsNullOrWhiteSpace(deserializeBody))
-        {
-@:        if (result.body !== null && result.body !== undefined) {
-@:          @(deserializeBody)
-@:        }
-        }
-      @:} catch (error) {
-        @:@(Model.DeserializationError)
-      @:}
-    }
-@EmptyLine
-    return callback(null, result);
-  });
+  }
+  @if (Model.Responses.Any(r => r.Value == PrimaryType.Stream))
+  {
+@:  @Include(new MethodStreamPipelineTemplate(), Model)
+  }
+  else
+  {
+@:  @Include(new MethodJsonPipelineTemplate(), Model)
+  }
 };

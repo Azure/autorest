@@ -21,10 +21,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<Product>> PutNonRetry400WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<Product>> PutNonRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running put request, service returns a 400 to the initial
         /// request
@@ -32,17 +35,23 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<Product>> BeginPutNonRetry400WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<Product>> BeginPutNonRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// DO NOT CALL THIS METHOD. For completion only
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<Product>> GetNonRetry400WithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<Product>> GetNonRetry400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running put request, service returns a Product with
         /// 'ProvisioningState' = 'Creating' and 201 response code
@@ -50,10 +59,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<Product>> PutNonRetry201Creating400WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<Product>> PutNonRetry201Creating400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running put request, service returns a Product with
         /// 'ProvisioningState' = 'Creating' and 201 response code
@@ -61,17 +73,23 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<Product>> BeginPutNonRetry201Creating400WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<Product>> BeginPutNonRetry201Creating400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running opeartion polling returns a 400 with no error body
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<Product>> GetNonRetry201Creating400WithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<Product>> GetNonRetry201Creating400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running put request, service returns a 200 with
         /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
@@ -80,10 +98,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<Product>> PutAsyncRelativeRetry400WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<Product>> PutAsyncRelativeRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running put request, service returns a 200 with
         /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
@@ -92,87 +113,117 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetry400WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// DO NOT CALL THIS METHOD. For completion only
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<Product>> GetAsyncRelativeRetry400WithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<Product>> GetAsyncRelativeRetry400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running delete request, service returns a 400 with an error
         /// body
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> DeleteNonRetry400WithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> DeleteNonRetry400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running delete request, service returns a 400 with an error
         /// body
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> BeginDeleteNonRetry400WithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> BeginDeleteNonRetry400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running delete request, service returns a 202 with a location
         /// header
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> Delete202NonRetry400WithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> Delete202NonRetry400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running delete request, service returns a 202 with a location
         /// header
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> BeginDelete202NonRetry400WithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> BeginDelete202NonRetry400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running delete request, service returns a 202 to the initial
         /// request. Poll the endpoint indicated in the Azure-AsyncOperation
         /// header for operation status
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> DeleteAsyncRelativeRetry400WithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> DeleteAsyncRelativeRetry400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running delete request, service returns a 202 to the initial
         /// request. Poll the endpoint indicated in the Azure-AsyncOperation
         /// header for operation status
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> BeginDeleteAsyncRelativeRetry400WithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> BeginDeleteAsyncRelativeRetry400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 400 with no error body
         /// </summary>
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> PostNonRetry400WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> PostNonRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 400 with no error body
         /// </summary>
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> BeginPostNonRetry400WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> BeginPostNonRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 202 with a location
         /// header
@@ -180,10 +231,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> Post202NonRetry400WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> Post202NonRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 202 with a location
         /// header
@@ -191,10 +245,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> BeginPost202NonRetry400WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> BeginPost202NonRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 202 to the initial
         /// request Poll the endpoint indicated in the Azure-AsyncOperation
@@ -203,10 +260,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> PostAsyncRelativeRetry400WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> PostAsyncRelativeRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 202 to the initial
         /// request Poll the endpoint indicated in the Azure-AsyncOperation
@@ -215,10 +275,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> BeginPostAsyncRelativeRetry400WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> BeginPostAsyncRelativeRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running put request, service returns a 201 to the initial
         /// request with no payload
@@ -226,10 +289,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<Product>> PutError201NoProvisioningStatePayloadWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<Product>> PutError201NoProvisioningStatePayloadWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running put request, service returns a 201 to the initial
         /// request with no payload
@@ -237,17 +303,23 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<Product>> BeginPutError201NoProvisioningStatePayloadWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<Product>> BeginPutError201NoProvisioningStatePayloadWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// DO NOT CALL THIS METHOD. For completion only
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<Product>> GetError201NoProvisioningStatePayloadWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<Product>> GetError201NoProvisioningStatePayloadWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running put request, service returns a 200 to the initial
         /// request, with an entity that contains
@@ -257,10 +329,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<Product>> PutAsyncRelativeRetryNoStatusWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<Product>> PutAsyncRelativeRetryNoStatusWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running put request, service returns a 200 to the initial
         /// request, with an entity that contains
@@ -270,33 +345,26 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryNoStatusWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryNoStatusWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running put request, service returns a 200 to the initial
         /// request, with an entity that contains
         /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
         /// Azure-AsyncOperation header for operation status
         /// </summary>
-        /// <param name='cancellationToken'>
-        /// Cancellation token.
-        /// </param>
-        Task<AzureOperationResponse<Product>> GetAsyncRelativeRetryNoStatusWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Long running put request, service returns a 200 to the initial
-        /// request, with an entity that contains
-        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
-        /// Azure-AsyncOperation header for operation status
-        /// </summary>
-        /// <param name='product'>
-        /// Product to put
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<Product>> PutAsyncRelativeRetryNoStatusPayloadWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<Product>> GetAsyncRelativeRetryNoStatusWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running put request, service returns a 200 to the initial
         /// request, with an entity that contains
@@ -306,54 +374,88 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryNoStatusPayloadWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<Product>> PutAsyncRelativeRetryNoStatusPayloadWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running put request, service returns a 200 to the initial
         /// request, with an entity that contains
         /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
         /// Azure-AsyncOperation header for operation status
         /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<Product>> GetAsyncRelativeRetryNoStatusPayloadWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryNoStatusPayloadWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running put request, service returns a 200 to the initial
+        /// request, with an entity that contains
+        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
+        /// Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        Task<AzureOperationResponse<Product>> GetAsyncRelativeRetryNoStatusPayloadWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running delete request, service returns a 204 to the initial
         /// request, indicating success.
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> Delete204SucceededWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> Delete204SucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running delete request, service returns a 204 to the initial
         /// request, indicating success.
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> BeginDelete204SucceededWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> BeginDelete204SucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running delete request, service returns a 202 to the initial
         /// request. Poll the endpoint indicated in the Azure-AsyncOperation
         /// header for operation status
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> DeleteAsyncRelativeRetryNoStatusWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> DeleteAsyncRelativeRetryNoStatusWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running delete request, service returns a 202 to the initial
         /// request. Poll the endpoint indicated in the Azure-AsyncOperation
         /// header for operation status
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> BeginDeleteAsyncRelativeRetryNoStatusWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> BeginDeleteAsyncRelativeRetryNoStatusWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 202 to the initial
         /// request, without a location header.
@@ -361,10 +463,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> Post202NoLocationWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> Post202NoLocationWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 202 to the initial
         /// request, without a location header.
@@ -372,10 +477,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> BeginPost202NoLocationWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> BeginPost202NoLocationWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 202 to the initial
         /// request, with an entity that contains
@@ -385,10 +493,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> PostAsyncRelativeRetryNoPayloadWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> PostAsyncRelativeRetryNoPayloadWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 202 to the initial
         /// request, with an entity that contains
@@ -398,10 +509,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> BeginPostAsyncRelativeRetryNoPayloadWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> BeginPostAsyncRelativeRetryNoPayloadWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running put request, service returns a 200 to the initial
         /// request, with an entity that is not a valid json
@@ -409,10 +523,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<Product>> Put200InvalidJsonWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<Product>> Put200InvalidJsonWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running put request, service returns a 200 to the initial
         /// request, with an entity that is not a valid json
@@ -420,17 +537,23 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<Product>> BeginPut200InvalidJsonWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<Product>> BeginPut200InvalidJsonWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// SHOUD NOT BE CALLED
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<Product>> Get200SucceededWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<Product>> Get200SucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running put request, service returns a 200 to the initial
         /// request, with an entity that contains
@@ -440,10 +563,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<Product>> PutAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<Product>> PutAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running put request, service returns a 200 to the initial
         /// request, with an entity that contains
@@ -453,17 +579,23 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// SHOULD NOT BE CALLED
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<Product>> GetAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<Product>> GetAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running put request, service returns a 200 to the initial
         /// request, with an entity that contains
@@ -473,10 +605,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<Product>> PutAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<Product>> PutAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running put request, service returns a 200 to the initial
         /// request, with an entity that contains
@@ -486,74 +621,98 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running put request, service returns a 200 to the initial
         /// request, with an entity that contains
         /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
         /// Azure-AsyncOperation header for operation status
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<Product>> GetAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<Product>> GetAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running delete request, service returns a 202 to the initial
         /// request receing a reponse with an invalid 'Location' and
         /// 'Retry-After' headers
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> Delete202RetryInvalidHeaderWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> Delete202RetryInvalidHeaderWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running delete request, service returns a 202 to the initial
         /// request receing a reponse with an invalid 'Location' and
         /// 'Retry-After' headers
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> BeginDelete202RetryInvalidHeaderWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> BeginDelete202RetryInvalidHeaderWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running delete request, service returns a 202 to the initial
         /// request. The endpoint indicated in the Azure-AsyncOperation
         /// header is invalid
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> DeleteAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> DeleteAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running delete request, service returns a 202 to the initial
         /// request. The endpoint indicated in the Azure-AsyncOperation
         /// header is invalid
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> BeginDeleteAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> BeginDeleteAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running delete request, service returns a 202 to the initial
         /// request. Poll the endpoint indicated in the Azure-AsyncOperation
         /// header for operation status
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> DeleteAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> DeleteAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running delete request, service returns a 202 to the initial
         /// request. Poll the endpoint indicated in the Azure-AsyncOperation
         /// header for operation status
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> BeginDeleteAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> BeginDeleteAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 202 to the initial
         /// request, with invalid 'Location' and 'Retry-After' headers.
@@ -561,10 +720,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> Post202RetryInvalidHeaderWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> Post202RetryInvalidHeaderWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 202 to the initial
         /// request, with invalid 'Location' and 'Retry-After' headers.
@@ -572,10 +734,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> BeginPost202RetryInvalidHeaderWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> BeginPost202RetryInvalidHeaderWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 202 to the initial
         /// request, with an entity that contains
@@ -585,10 +750,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> PostAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> PostAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 202 to the initial
         /// request, with an entity that contains
@@ -598,10 +766,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> BeginPostAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> BeginPostAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 202 to the initial
         /// request, with an entity that contains
@@ -611,10 +782,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> PostAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> PostAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 202 to the initial
         /// request, with an entity that contains
@@ -624,9 +798,12 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> BeginPostAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> BeginPostAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

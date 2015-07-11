@@ -60,13 +60,13 @@ Write(WrapComment("# ", "Defines values for " + Model.TypeDefinitionName));
 
             WriteLiteral("    ");
 #line 11 "EnumTemplate.cshtml"
-  Write(Model.Values[i].SerializedName);
+  Write(Model.Values[i].Name);
 
 #line default
 #line hidden
             WriteLiteral(" = \"");
 #line 11 "EnumTemplate.cshtml"
-                                       Write(Model.Values[i].Name);
+                             Write(Model.Values[i].SerializedName);
 
 #line default
 #line hidden

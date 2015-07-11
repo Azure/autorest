@@ -20,11 +20,7 @@
         "description": "The Products endpoint returns information about the Uber products offered at a given location. The response includes the display name and other details about each product, and lists the products in the proper display order.",
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "Subscription ID.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SubscriptionIdParamterer"
           },
           {
             "name": "resourceGroupName",
@@ -34,11 +30,7 @@
             "type": "string"
           },
           {
-            "name": "apiVersion",
-            "in": "path",
-            "description": "API ID.",
-            "required": true,
-            "type": "string"
+            "$ref": "ApiVersionParameter"
           }
         ],
         "tags": [
@@ -92,6 +84,21 @@
         "responses": {
           "204": {
             "description": "A list of caches",
+            "examples": {
+              "application/json": {
+                "id": 9,
+                "category": {
+                  "name": "domestic"
+                },
+                "name": "monster",
+                "tags": [
+                  {
+                    "name": "for sale"
+                  }
+                ],
+                "status": "alive"
+              }
+            }
           },
           "default": {
             "description": "Unexpected error",
@@ -126,6 +133,10 @@
           "type": "string",
           "description": "Image URL representing the product."
         }
+      },
+      "example": {
+        "name": "Puma",
+        "id": 1
       }
     },
     "Error": {
@@ -141,6 +152,22 @@
           "type": "string"
         }
       }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParamterer": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "ApiVersionParameter": {
+      "name": "apiVersion",
+      "in": "path",
+      "description": "API ID.",
+      "required": true,
+      "type": "string"
     }
   }
 }

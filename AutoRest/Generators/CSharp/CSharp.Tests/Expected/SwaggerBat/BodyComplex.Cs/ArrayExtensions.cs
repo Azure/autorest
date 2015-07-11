@@ -32,7 +32,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// </param>
             public static async Task<ArrayWrapper> GetValidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<ArrayWrapper> result = await operations.GetValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<ArrayWrapper> result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -66,7 +66,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// </param>
             public static async Task PutValidAsync( this IArray operations, ArrayWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutValidWithOperationResponseAsync(complexBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutValidWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -91,7 +91,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// </param>
             public static async Task<ArrayWrapper> GetEmptyAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<ArrayWrapper> result = await operations.GetEmptyWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<ArrayWrapper> result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -123,7 +123,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// </param>
             public static async Task PutEmptyAsync( this IArray operations, ArrayWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutEmptyWithOperationResponseAsync(complexBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutEmptyWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -150,7 +150,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// </param>
             public static async Task<ArrayWrapper> GetNotProvidedAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<ArrayWrapper> result = await operations.GetNotProvidedWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<ArrayWrapper> result = await operations.GetNotProvidedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
