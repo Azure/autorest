@@ -40,7 +40,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
 }
 </text>
 }
-else if (Model.HttpMethod == HttpMethod.Put)
+else if (Model.HttpMethod == HttpMethod.Put || Model.HttpMethod == HttpMethod.Patch)
 {
 @:/// <summary>
 @WrapComment("/// ", Model.Documentation.EscapeXmlComment())@:
