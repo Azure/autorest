@@ -44,33 +44,35 @@ describe 'LongRunningOperation' do
 
   it 'should serve success responce on initial PUT request' do
     result = @client.lros.put200succeeded(@product).value!
-    expect(result.body.properies.provisioning_state).to eq("Succeeded")
+    expect(result.body.properties.provisioning_state).to eq("Succeeded")
   end
 
   it 'should serve success responce on initial request without provision state' do
     result = @client.lros.put200succeeded_no_state(@product).value!
     expect(result.body.id).to eq("100")
+    expect(result.body.properties).to eq(nil)
   end
 
-  # it 'should serve 202 on initial responce and status responce without provision state' do
-  #   result = @client.lros.put202retry200(@product).value!.body
-  #   expect(body.id).to eq(100)
-  # end
+  it 'should serve 202 on initial responce and status responce without provision state' do
+    result = @client.lros.put202retry200(@product).value!
+    expect(result.body.id).to eq("100")
+    expect(result.body.properties).to eq(nil)
+  end
 
   # it 'should retry on 500 server responce in PUT request' do
-  #   result = @client.lros.put_async_relative_retry_succeeded(@product).value!.body
+  #   result = @client.lroretrys.put_async_relative_retry_succeeded(@product).value!.body
   #   expect(body.provisioningState).to eq("Succeeded")
   # end
+
   # it 'should serve async PUT operation' do
   #   result = @client.lros.put_async_absolute_no_retry_succeeded(@product).value!.body
   #   expect(body.provisioningState).to eq("Succeeded")
   # end
+
   # it 'should serve async PUT operation failed' do
-  #   expect{ @client.lros.put_async_relative_retry_failed(@product).value! }.to raise_exception(CloudException, /Long running operation failed/)
+  #   expect{ @client.lrosads.put_async_relative_retry400(@product).value! }.to raise_exception(CloudError)
   # end
-  # it 'should serve async PUT operation canceled' do
-  #   expect{ @client.lros.put_async_absolute_no_retry_canceled(@product).value! }.to raise_exception(CloudException, /Long running operation failed/)
-  # end
+
   # it 'should serve success responce on initial DELETE request' do
   #   result = @client.lros.delete_204_suceeded().value!.response
   #   expect(result).to be_an_instance_of(Net::HTTPOK)

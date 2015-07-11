@@ -14,7 +14,8 @@ module @(Settings.Namespace)
     @foreach (var property in Model.PropertyTemplateModels)
     {
       @:@WrapComment("# ", string.Format("@return {0}{1}", property.Type.GetYardDocumentation(), property.Documentation))
-      @:@(property.IsReadOnly ? "attr_reader" : "attr_accessor") :@property.Name
+      // @:@(property.IsReadOnly ? "attr_reader" : "attr_accessor") :@property.Name
+      @:attr_accessor :@property.Name
       @EmptyLine
       @:
     }

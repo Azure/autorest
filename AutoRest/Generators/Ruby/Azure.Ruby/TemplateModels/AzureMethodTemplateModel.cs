@@ -113,6 +113,16 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             return builder.ToString();
         }
 
+        public string DeserializePollingResponse(string variableName, IType type, bool isRequired, string defaultNamespace)
+        {
+            // TODO: handle required property via "unless deserialized_property.nil?"
+
+            var builder = new IndentedStringBuilder("  ");
+
+            string serializationLogic = type.DeserializeType(this.Scope, variableName, defaultNamespace);
+            return builder.AppendLine(serializationLogic).ToString();
+        }
+
         ///// <summary>
         ///// Returns AzureOperationResponse generic type declaration.
         ///// </summary>

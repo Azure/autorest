@@ -25,7 +25,7 @@ module ClientRuntimeAzure
     # @param custom_headers [] [description]
     #
     # @return [] TODO.
-    def get_put_operation_result(azure_response, get_operation_block, custom_headers)
+    def get_put_operation_result(azure_response, get_operation_block, custom_headers, custom_deserialization_block)
       fail ArgumentError if azure_response.nil?
       fail ArgumentError if get_operation_block.nil?
 
@@ -41,10 +41,10 @@ module ClientRuntimeAzure
         task = Concurrent::TimerTask.new do
           if !polling_state.azure_async_operation_header_link.nil?
             p 'update_state_from_azure_async_operation_header'
-            update_state_from_azure_async_operation_header(polling_state, custom_headers)
+            update_state_from_azure_async_operation_header(polling_state, custom_headers, custom_deserialization_block)
           elsif !polling_state.location_header_link.nil?
             p 'update_state_from_location_header_on_put'
-            update_state_from_location_header_on_put(polling_state, custom_headers)
+            update_state_from_location_header_on_put(polling_state, custom_headers, custom_deserialization_block)
           else
             p 'update_state_from_get_resource_operation'
             update_state_from_get_resource_operation(get_operation_block, polling_state)
@@ -75,7 +75,7 @@ module ClientRuntimeAzure
       promise.execute
     end
 
-    def get_post_or_delete_operation_result(azure_response, custom_headers)
+    def get_post_or_delete_operation_result(azure_response, custom_headers, custom_deserialization_block)
       fail ArgumentError if azure_response.nil?
       fail ArgumentError if azure_response.response.nil?
 
@@ -91,10 +91,10 @@ module ClientRuntimeAzure
         task = Concurrent::TimerTask.new do
           if !polling_state.azure_async_operation_header_link.nil?
             p 'update_state_from_azure_async_operation_header'
-            update_state_from_azure_async_operation_header(polling_state, custom_headers)
+            update_state_from_azure_async_operation_header(polling_state, custom_headers, custom_deserialization_block)
           elsif !polling_state.location_header_link.nil?
             p 'update_state_from_location_header_on_post_or_delete'
-            update_state_from_location_header_on_post_or_delete(polling_state, custom_headers)
+            update_state_from_location_header_on_post_or_delete(polling_state, custom_headers, custom_deserialization_block)
           else
             task.shutdown
             fail CloudError
@@ -137,8 +137,8 @@ module ClientRuntimeAzure
       polling_state.resource = result.body
     end
 
-    def update_state_from_location_header_on_put(polling_state, custom_headers)
-      result = get_async(polling_state.location_header_link, custom_headers).value!
+    def update_state_from_location_header_on_put(polling_state, custom_headers, custom_deserialization_block)
+      result = get_async(polling_state.location_header_link, custom_headers, custom_deserialization_block).value!
 
       polling_state.update_response(result.response)
       polling_state.request = result.request
@@ -163,8 +163,8 @@ module ClientRuntimeAzure
       end
     end
 
-    def update_state_from_azure_async_operation_header(polling_state, custom_headers)
-      result = get_async(polling_state.azure_async_operation_header_link, custom_headers).value!
+    def update_state_from_azure_async_operation_header(polling_state, custom_headers, custom_deserialization_block)
+      result = get_async(polling_state.azure_async_operation_header_link, custom_headers, custom_deserialization_block).value!
 
       # TODO elaborate error
       fail ArgumentError if (result.body.nil? || result.body.status.nil?)
@@ -177,8 +177,8 @@ module ClientRuntimeAzure
       polling_state.resource = nil
     end
 
-    def update_state_from_location_header_on_post_or_delete(polling_state, custom_headers)
-      result = get_async(polling_state.location_header_link, custom_headers).value!
+    def update_state_from_location_header_on_post_or_delete(polling_state, custom_headers, custom_deserialization_block)
+      result = get_async(polling_state.location_header_link, custom_headers, custom_deserialization_block).value!
 
       polling_state.update_response(result.response)
       polling_state.request = result.request
@@ -194,11 +194,13 @@ module ClientRuntimeAzure
     end
 
     #
-    # [get_async description]
-    # @param operation_url [type] [description]
+    # Retrives data by given URL.
+    # @param operation_url [String] the URL.
+    # @param custom_headers [String] headers to apply to the HTTP request.
+    # @param custom_deserialization_block [Proc] function to perform deserialization of the HTTP response.
     #
     # @return [type] [description]
-    def get_async(operation_url, custom_headers)
+    def get_async(operation_url, custom_headers, custom_deserialization_block)
       fail ArgumentError if operation_url.nil?
 
       # TODO: add url encoding.
@@ -215,13 +217,22 @@ module ClientRuntimeAzure
 
       promise = promise.then do |http_response|
         status_code = http_response.code.to_i
+        response_content = http_response.body
 
         if (status_code != 200 && status_code != 201 && status_code != 202 && status_code != 204)
           fail CloudError
         end
 
-        # TODO deserialize
-        ClientRuntime::HttpOperationResponse.new(http_request, http_response, http_response.body)
+        result = ClientRuntime::HttpOperationResponse.new(http_request, http_response, http_response.body)
+
+        parsed_response = JSON.load(response_content) unless response_content.to_s.empty?
+        if (parsed_response && !custom_deserialization_block.nil?)
+          parsed_response = custom_deserialization_block.call(parsed_response)
+        end
+
+        result.body = parsed_response
+
+        result
       end
 
       promise.execute

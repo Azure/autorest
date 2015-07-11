@@ -3996,10 +3996,6 @@
           "type": "string",
           "description": "Resource Name",
           "readOnly": true
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "Provisioning state"
         }
       }
     },
@@ -4042,6 +4038,10 @@
                 "OK"
               ],
               "readOnly": true
+            },
+            "provisioningState": {
+              "type": "string",
+              "description": "Provisioning state"
             }
           }
         }

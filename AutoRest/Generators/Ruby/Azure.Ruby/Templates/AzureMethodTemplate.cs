@@ -130,7 +130,7 @@ Write(WrapComment("# ", string.Format("@return [{0}] TODO: add text", "TODO: add
 
 #line default
 #line hidden
-            WriteLiteral(".get_post_or_delete_operation_result(response, nil)\r\n    end\r\n    \r\n");
+            WriteLiteral(".get_post_or_delete_operation_result(response, nil, nil)\r\n    end\r\n    \r\n");
 #line 28 "AzureMethodTemplate.cshtml"
 }
 else
@@ -202,7 +202,13 @@ Write(WrapComment("# ", string.Format("@return [{0}] TODO: add text", "TODO: add
 
 #line default
 #line hidden
-            WriteLiteral(").value!\r\n\r\n      # Defining polling method.\r\n      get_method = lambda { self.");
+            WriteLiteral(").value!\r\n      ");
+#line 43 "AzureMethodTemplate.cshtml"
+ Write(EmptyLine);
+
+#line default
+#line hidden
+            WriteLiteral("\r\n      # Defining polling method.\r\n      get_method = lambda { self.");
 #line 45 "AzureMethodTemplate.cshtml"
                              Write(Model.GetMethod.Name);
 
@@ -214,14 +220,34 @@ Write(WrapComment("# ", string.Format("@return [{0}] TODO: add text", "TODO: add
 
 #line default
 #line hidden
-            WriteLiteral(") }\r\n\r\n      # Waiting for response.\r\n      return ");
-#line 48 "AzureMethodTemplate.cshtml"
+            WriteLiteral(") }\r\n      ");
+#line 46 "AzureMethodTemplate.cshtml"
+ Write(EmptyLine);
+
+#line default
+#line hidden
+            WriteLiteral("\r\n      # Defining deserialization method.\r\n      deserialize_method = lambda do " +
+"|parsed_response|\r\n        ");
+#line 49 "AzureMethodTemplate.cshtml"
+    Write(Model.DeserializePollingResponse("parsed_response", Model.ReturnType, false, Settings.Namespace));
+
+#line default
+#line hidden
+            WriteLiteral("\r\n      end\r\n      ");
+#line 51 "AzureMethodTemplate.cshtml"
+ Write(EmptyLine);
+
+#line default
+#line hidden
+            WriteLiteral("\r\n      # Waiting for response.\r\n      return ");
+#line 53 "AzureMethodTemplate.cshtml"
          Write(Model.ClientReference);
 
 #line default
 #line hidden
-            WriteLiteral(".get_put_operation_result(response, get_method, nil)\r\n    end\r\n    \r\n");
-#line 51 "AzureMethodTemplate.cshtml"
+            WriteLiteral(".get_put_operation_result(response, get_method, nil, deserialize_method)\r\n    end" +
+"\r\n    \r\n");
+#line 56 "AzureMethodTemplate.cshtml"
 }
 
 #line default

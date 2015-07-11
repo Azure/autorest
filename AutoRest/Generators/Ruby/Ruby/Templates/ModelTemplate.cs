@@ -93,51 +93,52 @@ Write(WrapComment("# ", string.IsNullOrEmpty(Model.Documentation) ? "Model objec
 
 #line default
 #line hidden
-            WriteLiteral("\r\n      ");
+            WriteLiteral("\r\n");
 #line 17 "ModelTemplate.cshtml"
-    Write(property.IsReadOnly ? "attr_reader" : "attr_accessor");
+      // @:@(property.IsReadOnly ? "attr_reader" : "attr_accessor") :@property.Name
 
 #line default
 #line hidden
-            WriteLiteral(" :");
-#line 17 "ModelTemplate.cshtml"
-                                                             Write(property.Name);
+
+            WriteLiteral("      attr_accessor :");
+#line 18 "ModelTemplate.cshtml"
+                  Write(property.Name);
 
 #line default
 #line hidden
             WriteLiteral("\r\n");
-#line 18 "ModelTemplate.cshtml"
+#line 19 "ModelTemplate.cshtml"
       
 
 #line default
 #line hidden
 
-#line 18 "ModelTemplate.cshtml"
+#line 19 "ModelTemplate.cshtml"
  Write(EmptyLine);
 
 #line default
 #line hidden
-#line 18 "ModelTemplate.cshtml"
+#line 19 "ModelTemplate.cshtml"
                 
 
 #line default
 #line hidden
 
             WriteLiteral("      \r\n");
-#line 20 "ModelTemplate.cshtml"
+#line 21 "ModelTemplate.cshtml"
     }
 
 #line default
 #line hidden
 
             WriteLiteral("\r\n");
-#line 22 "ModelTemplate.cshtml"
+#line 23 "ModelTemplate.cshtml"
     
 
 #line default
 #line hidden
 
-#line 22 "ModelTemplate.cshtml"
+#line 23 "ModelTemplate.cshtml"
      if (Model.Properties.Any(p => p.Type is SequenceType || p.Type is DictionaryType))
     {
 
@@ -145,7 +146,7 @@ Write(WrapComment("# ", string.IsNullOrEmpty(Model.Documentation) ? "Model objec
 #line hidden
 
             WriteLiteral("      def initialize\r\n");
-#line 25 "ModelTemplate.cshtml"
+#line 26 "ModelTemplate.cshtml"
         foreach (var property in Model.PropertyTemplateModels)
         {
             if (property.Type is SequenceType)
@@ -155,13 +156,13 @@ Write(WrapComment("# ", string.IsNullOrEmpty(Model.Documentation) ? "Model objec
 #line hidden
 
             WriteLiteral("        @");
-#line 29 "ModelTemplate.cshtml"
+#line 30 "ModelTemplate.cshtml"
        Write(property.Name);
 
 #line default
 #line hidden
             WriteLiteral(" = [];\r\n");
-#line 30 "ModelTemplate.cshtml"
+#line 31 "ModelTemplate.cshtml"
             }
             else if (property.Type is DictionaryType)
             {
@@ -170,13 +171,13 @@ Write(WrapComment("# ", string.IsNullOrEmpty(Model.Documentation) ? "Model objec
 #line hidden
 
             WriteLiteral("        @");
-#line 33 "ModelTemplate.cshtml"
+#line 34 "ModelTemplate.cshtml"
        Write(property.Name);
 
 #line default
 #line hidden
             WriteLiteral(" = {};\r\n");
-#line 34 "ModelTemplate.cshtml"
+#line 35 "ModelTemplate.cshtml"
             }
         }
 
@@ -184,18 +185,18 @@ Write(WrapComment("# ", string.IsNullOrEmpty(Model.Documentation) ? "Model objec
 #line hidden
 
             WriteLiteral("      end\r\n");
-#line 37 "ModelTemplate.cshtml"
+#line 38 "ModelTemplate.cshtml"
       
 
 #line default
 #line hidden
 
-#line 37 "ModelTemplate.cshtml"
+#line 38 "ModelTemplate.cshtml"
  Write(EmptyLine);
 
 #line default
 #line hidden
-#line 37 "ModelTemplate.cshtml"
+#line 38 "ModelTemplate.cshtml"
                 
     }
 
@@ -204,13 +205,13 @@ Write(WrapComment("# ", string.IsNullOrEmpty(Model.Documentation) ? "Model objec
 
             WriteLiteral("\r\n      #\r\n      # Validate the object. Throws ArgumentError if validation fails." +
 "\r\n      #\r\n      def validate\r\n");
-#line 44 "ModelTemplate.cshtml"
+#line 45 "ModelTemplate.cshtml"
         
 
 #line default
 #line hidden
 
-#line 44 "ModelTemplate.cshtml"
+#line 45 "ModelTemplate.cshtml"
           
             bool anythingToValidate = false;
             foreach (var property in Model.Properties.Where(p => p.IsRequired && !p.IsReadOnly && p.Type.IsNullable()))
@@ -221,19 +222,19 @@ Write(WrapComment("# ", string.IsNullOrEmpty(Model.Documentation) ? "Model objec
 #line hidden
 
             WriteLiteral("        fail ArgumentError, \'");
-#line 49 "ModelTemplate.cshtml"
+#line 50 "ModelTemplate.cshtml"
                           Write(property.Name);
 
 #line default
 #line hidden
             WriteLiteral(" is nil\' if @");
-#line 49 "ModelTemplate.cshtml"
+#line 50 "ModelTemplate.cshtml"
                                                        Write(property.Name);
 
 #line default
 #line hidden
             WriteLiteral(".nil?\r\n");
-#line 50 "ModelTemplate.cshtml"
+#line 51 "ModelTemplate.cshtml"
             }
             foreach (var property in Model.Properties.Where(p => !(p.Type is PrimaryType)))
             {
@@ -243,13 +244,13 @@ Write(WrapComment("# ", string.IsNullOrEmpty(Model.Documentation) ? "Model objec
 #line hidden
 
             WriteLiteral("        ");
-#line 54 "ModelTemplate.cshtml"
+#line 55 "ModelTemplate.cshtml"
      Write(property.Type.ValidateType(Model.Scope, string.Format("@{0}", property.Name)));
 
 #line default
 #line hidden
             WriteLiteral("\r\n        \r\n");
-#line 56 "ModelTemplate.cshtml"
+#line 57 "ModelTemplate.cshtml"
             }
             if (!anythingToValidate)
             {
@@ -258,7 +259,7 @@ Write(WrapComment("# ", string.IsNullOrEmpty(Model.Documentation) ? "Model objec
 #line hidden
 
             WriteLiteral("        # Nothing to validate\r\n");
-#line 60 "ModelTemplate.cshtml"
+#line 61 "ModelTemplate.cshtml"
             }
         
 
@@ -266,32 +267,32 @@ Write(WrapComment("# ", string.IsNullOrEmpty(Model.Documentation) ? "Model objec
 #line hidden
 
             WriteLiteral("\r\n      end\r\n\r\n      ");
-#line 64 "ModelTemplate.cshtml"
+#line 65 "ModelTemplate.cshtml"
  Write(EmptyLine);
 
 #line default
 #line hidden
             WriteLiteral("\r\n      #\r\n      # Serializes given Model object into Ruby Hash.\r\n      ");
-#line 67 "ModelTemplate.cshtml"
+#line 68 "ModelTemplate.cshtml"
  Write(WrapComment("# ", string.Format("@param {0} {1}", "object", "Model object to serialize.")));
 
 #line default
 #line hidden
             WriteLiteral("\r\n      ");
-#line 68 "ModelTemplate.cshtml"
+#line 69 "ModelTemplate.cshtml"
  Write(WrapComment("# ", string.Format("@return [Hash] {0}", "Serialized object in form of Ruby Hash.")));
 
 #line default
 #line hidden
             WriteLiteral("\r\n      #\r\n      def self.serialize_object(object)\r\n        object.validate\r\n    " +
 "    output_object = {}\r\n");
-#line 73 "ModelTemplate.cshtml"
+#line 74 "ModelTemplate.cshtml"
         
 
 #line default
 #line hidden
 
-#line 73 "ModelTemplate.cshtml"
+#line 74 "ModelTemplate.cshtml"
          foreach (var property in Model.ComposedProperties.OrderByDescending(x => x.IsRequired))
         {
         
@@ -299,75 +300,75 @@ Write(WrapComment("# ", string.IsNullOrEmpty(Model.Documentation) ? "Model objec
 #line default
 #line hidden
 
-#line 75 "ModelTemplate.cshtml"
+#line 76 "ModelTemplate.cshtml"
    Write(EmptyLine);
 
 #line default
 #line hidden
-#line 75 "ModelTemplate.cshtml"
+#line 76 "ModelTemplate.cshtml"
                   
 
 #line default
 #line hidden
 
             WriteLiteral("        serialized_property = ");
-#line 76 "ModelTemplate.cshtml"
+#line 77 "ModelTemplate.cshtml"
                             Write("object." + property.Name);
 
 #line default
 #line hidden
             WriteLiteral("\r\n        ");
-#line 77 "ModelTemplate.cshtml"
+#line 78 "ModelTemplate.cshtml"
      Write(Model.SerializeProperty("serialized_property", property.Type, property.IsRequired, Settings.Namespace));
 
 #line default
 #line hidden
             WriteLiteral("\r\n        output_object[\'");
-#line 78 "ModelTemplate.cshtml"
+#line 79 "ModelTemplate.cshtml"
                      Write(property.SerializedName);
 
 #line default
 #line hidden
             WriteLiteral("\'] = serialized_property\r\n");
-#line 79 "ModelTemplate.cshtml"
+#line 80 "ModelTemplate.cshtml"
         }
 
 #line default
 #line hidden
 
             WriteLiteral("        output_object\r\n      end\r\n\r\n      ");
-#line 83 "ModelTemplate.cshtml"
+#line 84 "ModelTemplate.cshtml"
  Write(EmptyLine);
 
 #line default
 #line hidden
             WriteLiteral("\r\n      #\r\n      # Deserializes given Ruby Hash into Model object.\r\n      ");
-#line 86 "ModelTemplate.cshtml"
+#line 87 "ModelTemplate.cshtml"
  Write(WrapComment("# ", string.Format("@param {0} [Hash] {1}", "object", "Ruby Hash object to deserialize.")));
 
 #line default
 #line hidden
             WriteLiteral("\r\n      ");
-#line 87 "ModelTemplate.cshtml"
+#line 88 "ModelTemplate.cshtml"
  Write(WrapComment("# ", string.Format("@return [{0}] {1}", Model.Name, "Deserialized object.")));
 
 #line default
 #line hidden
             WriteLiteral("\r\n      #\r\n      def self.deserialize_object(object)\r\n        return if object.ni" +
 "l?\r\n\r\n        output_object = ");
-#line 92 "ModelTemplate.cshtml"
+#line 93 "ModelTemplate.cshtml"
                     Write(Model.Name);
 
 #line default
 #line hidden
             WriteLiteral(".new\r\n        \r\n");
-#line 94 "ModelTemplate.cshtml"
+#line 95 "ModelTemplate.cshtml"
         
 
 #line default
 #line hidden
 
-#line 94 "ModelTemplate.cshtml"
+#line 95 "ModelTemplate.cshtml"
          foreach (var property in Model.ComposedProperties.OrderByDescending(x => x.IsRequired))
         {
         
@@ -375,37 +376,37 @@ Write(WrapComment("# ", string.IsNullOrEmpty(Model.Documentation) ? "Model objec
 #line default
 #line hidden
 
-#line 96 "ModelTemplate.cshtml"
+#line 97 "ModelTemplate.cshtml"
    Write(EmptyLine);
 
 #line default
 #line hidden
-#line 96 "ModelTemplate.cshtml"
+#line 97 "ModelTemplate.cshtml"
                       
 
 #line default
 #line hidden
 
             WriteLiteral("        deserialized_property = ");
-#line 97 "ModelTemplate.cshtml"
+#line 98 "ModelTemplate.cshtml"
                               Write(string.Format("object['{0}']", property.SerializedName));
 
 #line default
 #line hidden
             WriteLiteral("\r\n        ");
-#line 98 "ModelTemplate.cshtml"
+#line 99 "ModelTemplate.cshtml"
      Write(Model.DeserializeProperty("deserialized_property", property.Type, property.IsRequired, Settings.Namespace));
 
 #line default
 #line hidden
             WriteLiteral("\r\n        output_object.");
-#line 99 "ModelTemplate.cshtml"
+#line 100 "ModelTemplate.cshtml"
                     Write(property.Name);
 
 #line default
 #line hidden
             WriteLiteral(" = deserialized_property\r\n");
-#line 100 "ModelTemplate.cshtml"
+#line 101 "ModelTemplate.cshtml"
         }
 
 #line default
