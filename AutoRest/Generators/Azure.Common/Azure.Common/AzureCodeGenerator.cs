@@ -27,7 +27,6 @@ namespace Microsoft.Rest.Generator.Azure
         private const string ResourceType = "Resource";
         private const string SubResourceType = "SubResource";
         private const string ResourceProperties = "Properties";
-        private const string ProvisioningState = "ProvisioningState";
 
         private static IEnumerable<string> ResourcePropertyNames;
 
@@ -288,17 +287,6 @@ namespace Microsoft.Rest.Generator.Azure
                             typesToDelete.Add(propertiesModel.Name);
                         }
                         propertiesModel = propertiesModel.BaseModelType;
-                    }
-
-                    // If provisioning-state exist in type that is derived from resources - remove it
-                    foreach(var propertyToRemove in compositeType.Properties
-                        .Where(p => p.Name
-                                    .Equals(
-                                        ProvisioningState, 
-                                        StringComparison.OrdinalIgnoreCase))
-                        .ToArray())
-                    {
-                        compositeType.Properties.Remove(propertyToRemove);
                     }
                 }
             }

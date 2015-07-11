@@ -290,26 +290,14 @@ Write(Model.OperationResponseReturnTypeString);
 
 #line default
 #line hidden
-            WriteLiteral(".GetPutOperationResultAsync<");
+            WriteLiteral(".GetPutOrPatchOperationResultAsync<");
 #line 67 "AzureMethodTemplate.cshtml"
-                                                                 Write(Model.ReturnType.Name);
+                                                                        Write(Model.ReturnType.Name);
 
 #line default
 #line hidden
-            WriteLiteral(">(response, \r\n        () => ");
-#line 68 "AzureMethodTemplate.cshtml"
-          Write(Model.GetMethod.Name);
-
-#line default
-#line hidden
-            WriteLiteral("WithHttpMessagesAsync(");
-#line 68 "AzureMethodTemplate.cshtml"
-                                                       Write(Model.GetMethodInvocationArgs(Model.GetMethod));
-
-#line default
-#line hidden
-            WriteLiteral("),\r\n        customHeaders, \r\n        cancellationToken);\r\n}\r\n\r\n");
-#line 73 "AzureMethodTemplate.cshtml"
+            WriteLiteral(">(response, \r\n        customHeaders, \r\n        cancellationToken);\r\n}\r\n\r\n");
+#line 72 "AzureMethodTemplate.cshtml"
 }
 
 #line default

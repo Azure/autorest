@@ -31,6 +31,8 @@ function LROs(client) {
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -71,6 +73,8 @@ LROs.prototype.put200Succeeded = function (product, options, callback) {
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -290,6 +294,8 @@ LROs.prototype.get200Succeeded = function (options, callback) {
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -330,6 +336,8 @@ LROs.prototype.put200SucceededNoState = function (product, options, callback) {
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -550,6 +558,8 @@ LROs.prototype.get200SucceededNoState = function (options, callback) {
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -591,6 +601,8 @@ LROs.prototype.put202Retry200 = function (product, options, callback) {
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -812,6 +824,8 @@ LROs.prototype.getPut202Retry200 = function (options, callback) {
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -854,6 +868,8 @@ LROs.prototype.put201CreatingSucceeded200 = function (product, options, callback
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -1091,6 +1107,8 @@ LROs.prototype.get201CreatingSucceeded200Polling = function (options, callback) 
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -1133,6 +1151,8 @@ LROs.prototype.put200UpdatingSucceeded204 = function (product, options, callback
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -1353,6 +1373,8 @@ LROs.prototype.get200CreatingSucceeded200Poll = function (options, callback) {
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -1395,6 +1417,8 @@ LROs.prototype.put201CreatingFailed200 = function (product, options, callback) {
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -1632,6 +1656,8 @@ LROs.prototype.get201CreatingFailed200Polling = function (options, callback) {
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -1674,6 +1700,8 @@ LROs.prototype.put200Acceptedcanceled200 = function (product, options, callback)
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -1893,6 +1921,8 @@ LROs.prototype.get200Acceptedcanceled200Poll = function (options, callback) {
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -1934,6 +1964,8 @@ LROs.prototype.putNoHeaderInRetry = function (product, options, callback) {
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -2154,6 +2186,8 @@ LROs.prototype.getPutNoHeaderInRetry = function (options, callback) {
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -2195,6 +2229,8 @@ LROs.prototype.putAsyncRetrySucceeded = function (product, options, callback) {
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -2416,6 +2452,8 @@ LROs.prototype.getAsyncRetrySucceeded = function (options, callback) {
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -2457,6 +2495,8 @@ LROs.prototype.putAsyncNoRetrySucceeded = function (product, options, callback) 
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -2678,6 +2718,8 @@ LROs.prototype.getAsyncNoRetrySucceeded = function (options, callback) {
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -2719,6 +2761,8 @@ LROs.prototype.putAsyncRetryFailed = function (product, options, callback) {
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -2940,6 +2984,8 @@ LROs.prototype.getAsyncRetryFailed = function (options, callback) {
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -2981,6 +3027,8 @@ LROs.prototype.putAsyncNoRetrycanceled = function (product, options, callback) {
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -3202,6 +3250,8 @@ LROs.prototype.getAsyncNoRetrycanceled = function (options, callback) {
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -3243,6 +3293,8 @@ LROs.prototype.putAsyncNoHeaderInRetry = function (product, options, callback) {
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -3972,6 +4024,8 @@ LROs.prototype.getAsyncNonResource = function (options, callback) {
  *
  * @param {SubProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -4011,6 +4065,8 @@ LROs.prototype.putSubResource = function (product, options, callback) {
  * @param {SubProduct} [product] Sub Product to put
  *
  * @param {SubProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -4228,6 +4284,8 @@ LROs.prototype.getSubResource = function (options, callback) {
  *
  * @param {SubProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -4267,6 +4325,8 @@ LROs.prototype.putAsyncSubResource = function (product, options, callback) {
  * @param {SubProduct} [product] Sub Product to put
  *
  * @param {SubProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -6104,6 +6164,8 @@ LROs.prototype.beginPost200WithPayload = function (options, callback) {
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -6135,6 +6197,8 @@ LROs.prototype.post202Retry200 = function (product, options, callback) {
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -6238,6 +6302,8 @@ LROs.prototype.beginPost202Retry200 = function (product, options, callback) {
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -6268,6 +6334,8 @@ LROs.prototype.post202NoRetry204 = function (product, options, callback) {
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -6388,6 +6456,8 @@ LROs.prototype.beginPost202NoRetry204 = function (product, options, callback) {
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -6419,6 +6489,8 @@ LROs.prototype.postAsyncRetrySucceeded = function (product, options, callback) {
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -6523,6 +6595,8 @@ LROs.prototype.beginPostAsyncRetrySucceeded = function (product, options, callba
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -6554,6 +6628,8 @@ LROs.prototype.postAsyncNoRetrySucceeded = function (product, options, callback)
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -6658,6 +6734,8 @@ LROs.prototype.beginPostAsyncNoRetrySucceeded = function (product, options, call
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -6689,6 +6767,8 @@ LROs.prototype.postAsyncRetryFailed = function (product, options, callback) {
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -6793,6 +6873,8 @@ LROs.prototype.beginPostAsyncRetryFailed = function (product, options, callback)
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -6824,6 +6906,8 @@ LROs.prototype.postAsyncRetrycanceled = function (product, options, callback) {
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *

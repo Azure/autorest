@@ -30,6 +30,8 @@ function LROSADs(client) {
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -69,6 +71,8 @@ LROSADs.prototype.putNonRetry400 = function (product, options, callback) {
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -303,6 +307,8 @@ LROSADs.prototype.getNonRetry400 = function (options, callback) {
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -343,6 +349,8 @@ LROSADs.prototype.putNonRetry201Creating400 = function (product, options, callba
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -578,6 +586,8 @@ LROSADs.prototype.getNonRetry201Creating400 = function (options, callback) {
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -619,6 +629,8 @@ LROSADs.prototype.putAsyncRelativeRetry400 = function (product, options, callbac
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -1164,6 +1176,8 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetry400 = function (options, callback
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -1193,6 +1207,8 @@ LROSADs.prototype.postNonRetry400 = function (product, options, callback) {
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -1295,6 +1311,8 @@ LROSADs.prototype.beginPostNonRetry400 = function (product, options, callback) {
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -1324,6 +1342,8 @@ LROSADs.prototype.post202NonRetry400 = function (product, options, callback) {
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -1428,6 +1448,8 @@ LROSADs.prototype.beginPost202NonRetry400 = function (product, options, callback
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -1459,6 +1481,8 @@ LROSADs.prototype.postAsyncRelativeRetry400 = function (product, options, callba
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -1562,6 +1586,8 @@ LROSADs.prototype.beginPostAsyncRelativeRetry400 = function (product, options, c
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -1602,6 +1628,8 @@ LROSADs.prototype.putError201NoProvisioningStatePayload = function (product, opt
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -1837,6 +1865,8 @@ LROSADs.prototype.getError201NoProvisioningStatePayload = function (options, cal
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -1878,6 +1908,8 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatus = function (product, options, ca
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -2099,6 +2131,8 @@ LROSADs.prototype.getAsyncRelativeRetryNoStatus = function (options, callback) {
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -2140,6 +2174,8 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatusPayload = function (product, opti
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -2582,6 +2618,8 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryNoStatus = function (options, cal
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -2612,6 +2650,8 @@ LROSADs.prototype.post202NoLocation = function (product, options, callback) {
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -2716,6 +2756,8 @@ LROSADs.prototype.beginPost202NoLocation = function (product, options, callback)
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -2747,6 +2789,8 @@ LROSADs.prototype.postAsyncRelativeRetryNoPayload = function (product, options, 
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -2850,6 +2894,8 @@ LROSADs.prototype.beginPostAsyncRelativeRetryNoPayload = function (product, opti
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -2890,6 +2936,8 @@ LROSADs.prototype.put200InvalidJson = function (product, options, callback) {
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -3109,6 +3157,8 @@ LROSADs.prototype.get200Succeeded = function (options, callback) {
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -3150,6 +3200,8 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidHeader = function (product, option
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -3369,6 +3421,8 @@ LROSADs.prototype.getAsyncRelativeRetryInvalidHeader = function (options, callba
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -3410,6 +3464,8 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidJsonPolling = function (product, o
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -3962,6 +4018,8 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidJsonPolling = function (op
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -3992,6 +4050,8 @@ LROSADs.prototype.post202RetryInvalidHeader = function (product, options, callba
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -4096,6 +4156,8 @@ LROSADs.prototype.beginPost202RetryInvalidHeader = function (product, options, c
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -4127,6 +4189,8 @@ LROSADs.prototype.postAsyncRelativeRetryInvalidHeader = function (product, optio
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -4231,6 +4295,8 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidHeader = function (product, 
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -4262,6 +4328,8 @@ LROSADs.prototype.postAsyncRelativeRetryInvalidJsonPolling = function (product, 
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
