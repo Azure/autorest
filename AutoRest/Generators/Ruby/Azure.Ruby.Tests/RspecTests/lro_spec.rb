@@ -82,6 +82,7 @@ describe 'LongRunningOperation' do
   #   result = @client.lros.delete_async_absolute_no_retry_succeeded().value!.response
   #   expect(result).to be_an_instance_of(Net::HTTPOK)
   # end
+
   # it 'should serve async DELETE operation canceled' do
   #   expect{ @client.lros.delete_async_relative_retry_canceled().value! }.to raise_exception(CloudException, /Long running operation failed/)
   # end
@@ -117,10 +118,12 @@ describe 'LongRunningOperation' do
   #   result = @client.lro_retrys.put_async_relative_retry_succeeded(@product).value!.body
   #   expect(body.provisioningState).to eq("Succeeded")
   # end
+
   # it 'should retry DELETE request for provisioning status' do
-  #   result = @client.lros_retrys.delete_provisioning_202_accepted_200_succeeded().value!.response
+  #   result = @client.lroretrys.delete_provisioning_202_accepted_200_succeeded().value!.response
   #   expect(result).to be_an_instance_of(Net::HTTPOK)
   # end
+
   # it 'should retry DELETE request on 500 responce' do
   #   result = @client.lros_retrys.delete_202_retry_200().value!.response
   #   expect(result).to be_an_instance_of(Net::HTTPOK)
@@ -138,25 +141,31 @@ describe 'LongRunningOperation' do
   #   expect(result).to be_an_instance_of(Net::HTTPOK)
   # end
 
-  # #Sad path tests
-  # it 'should rise error on responce 400 for PUT request' do
-  #   expect{@client.lro_sads.put_non_retry_400(@product).value! }.to raise_exception(ClientRuntime::CloudException, /Expected/)
-  # end
-  # it 'should rise error if 400 responce comes in the middle of PUT operation' do
-  #   expect{@client.lro_sads.put_non_retry_201_creating_400(@product).value!}.to raise_error(ClientRuntime::CloudException, "Error from the server")
-  # end
-  # it 'should rise error if 400 responce comes in the middle of async PUT operation' do
-  #   expect{@client.lro_sads.put_async_relative_retry_400(@product).value! }.to raise_exception(ClientRuntime::CloudException, "Long running operation failed with status 'BadRequest'.")
-  # end
-  # it 'should rise error on responce 400 for DELETE request' do
-  #   expect{ @client.lro_sads.delete_non_retry_400().value! }.to raise_exception(ClientRuntime::CloudException, /Expected/)
-  # end
-  # it 'should rise error if 400 responce comes in the middle of DELETE operation' do
-  #   expect{ @client.lro_sads.delete_async_relative_retry_400().value! }.to raise_exception(ClientRuntime::CloudException, "Long running operation failed with status 'BadRequest'.")
-  # end
-  # it 'should rise error if 400 responce comes in the middle of async DELETE operation' do
-  #   expect{ @client.lro_sads.post_non_retry_400(@product).value! }.to raise_exception(ClientRuntime::CloudException, "Expected bad request message")
-  # end
+  # Sad path tests
+  it 'should rise error on responce 400 for PUT request' do
+    expect { @client.lrosads.put_non_retry400(@product).value! }.to raise_exception(ClientRuntime::HttpOperationException)
+  end
+
+  it 'should rise error if 400 responce comes in the middle of PUT operation' do
+    expect { @client.lrosads.put_non_retry201creating400(@product).value! }.to raise_error(ClientRuntime::HttpOperationException)
+  end
+
+  it 'should rise error if 400 responce comes in the middle of async PUT operation' do
+    expect { @client.lrosads.put_async_relative_retry400(@product).value! }.to raise_exception(ClientRuntimeAzure::CloudError)
+  end
+
+  it 'should rise error on responce 400 for DELETE request' do
+    expect { @client.lrosads.delete_non_retry400().value! }.to raise_exception(ClientRuntime::HttpOperationException)
+  end
+
+  it 'should rise error if 400 responce comes in the middle of DELETE operation' do
+    expect{ @client.lrosads.delete_async_relative_retry_400().value! }.to raise_exception(ClientRuntimeAzure::CloudError)
+  end
+
+  it 'should rise error if 400 responce comes from POST request' do
+    expect{ @client.lrosads.post_non_retry400(@product).value! }.to raise_exception(ClientRuntimeAzure::CloudError)
+  end
+
   # it 'should rise error on responce 400 for POST request' do
   #   expect{ @client.lro_sads.post_202_non_retry_400(@product).value! }.to raise_exception(ClientRuntime::CloudException, "Long running operation failed with status 'BadRequest'.")
   # end

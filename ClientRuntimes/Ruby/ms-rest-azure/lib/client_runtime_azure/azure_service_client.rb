@@ -65,7 +65,6 @@ module ClientRuntimeAzure
         task.wait_for_termination
 
         polling_error = task.value
-
         fail polling_error if polling_error.is_a?(Exception)
       end
 
@@ -98,25 +97,33 @@ module ClientRuntimeAzure
 
       if (!AsyncOperationStatus.is_terminal_status(polling_state.status))
         task = Concurrent::TimerTask.new do
-          if !polling_state.azure_async_operation_header_link.nil?
-            p 'update_state_from_azure_async_operation_header'
-            update_state_from_azure_async_operation_header(polling_state, custom_headers, custom_deserialization_block)
-          elsif !polling_state.location_header_link.nil?
-            p 'update_state_from_location_header_on_post_or_delete'
-            update_state_from_location_header_on_post_or_delete(polling_state, custom_headers, custom_deserialization_block)
-          else
-            task.shutdown
-            CloudError.new
-          end
+          begin
+            if !polling_state.azure_async_operation_header_link.nil?
+              p 'update_state_from_azure_async_operation_header'
+              update_state_from_azure_async_operation_header(polling_state, custom_headers, custom_deserialization_block)
+            elsif !polling_state.location_header_link.nil?
+              p 'update_state_from_location_header_on_post_or_delete'
+              update_state_from_location_header_on_post_or_delete(polling_state, custom_headers, custom_deserialization_block)
+            else
+              task.shutdown
+              CloudError.new
+            end
 
-          if (AsyncOperationStatus.is_terminal_status(polling_state.status))
+            if (AsyncOperationStatus.is_terminal_status(polling_state.status))
+              task.shutdown
+            end
+          rescue Exception => e
             task.shutdown
+            e
           end
         end
 
         task.execution_interval = polling_state.get_delay_in_milliseconds()
         task.execute
         task.wait_for_termination
+
+        polling_error = task.value
+        fail polling_error if polling_error.is_a?(Exception)
       end
 
       promise = Concurrent::Promise.new do
