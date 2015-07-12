@@ -1,5 +1,4 @@
 require 'rspec'
-require 'securerandom'
 require_relative 'Lro/sdk_requirements'
 include MyNamespace
 
@@ -8,9 +7,9 @@ describe 'LongRunningOperation' do
   before(:all) do
     @base_url = ENV['StubServerURI']
 
-	dummyToken = 'dummy12321343423'
-	dummySubscription = '1-1-1-1'
-	@credentials = ClientRuntimeAzure::TokenCloudCredentials.new(dummySubscription, dummyToken)
+    dummyToken = 'dummy12321343423'
+    dummySubscription = '1-1-1-1'
+    @credentials = ClientRuntimeAzure::TokenCloudCredentials.new(dummySubscription, dummyToken)
 
     @client = AutoRestLongRunningOperationTestService.new(@credentials, @base_url)
     @client.long_running_operation_retry_timeout = 0
@@ -159,11 +158,11 @@ describe 'LongRunningOperation' do
   end
 
   it 'should rise error if 400 responce comes in the middle of DELETE operation' do
-    expect{ @client.lrosads.delete_async_relative_retry_400().value! }.to raise_exception(ClientRuntimeAzure::CloudError)
+    expect{ @client.lrosads.delete_async_relative_retry400().value! }.to raise_exception(ClientRuntimeAzure::CloudError)
   end
 
   it 'should rise error if 400 responce comes from POST request' do
-    expect{ @client.lrosads.post_non_retry400(@product).value! }.to raise_exception(ClientRuntimeAzure::CloudError)
+    expect{ @client.lrosads.post_non_retry400(@product).value! }.to raise_exception(ClientRuntime::HttpOperationException)
   end
 
   # it 'should rise error on responce 400 for POST request' do

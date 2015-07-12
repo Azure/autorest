@@ -76,16 +76,30 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             // Filling path parameters (which are directly in the url body).
             foreach (var pathParameter in ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
             {
-                builder.AppendLine("{0}['{{{1}}}'] = CGI.escape({2})",
+                string addPathParameterString = String.Format("{0}['{{{1}}}'] = CGI.escape({2})",
                     inputVariableName,
                     pathParameter.SerializedName,
                     pathParameter.Type.ToString(pathParameter.Name));
+
+                if (pathParameter.Extensions.ContainsKey(AzureCodeGenerator.SkipUrlEncodingExtension))
+                {
+                    addPathParameterString = String.Format("{0}['{{{1}}}'] = {2}",
+                        inputVariableName,
+                        pathParameter.SerializedName,
+                        pathParameter.Type.ToString(pathParameter.Name));
+                }
+
+                builder.AppendLine(addPathParameterString);
             }
 
             // Adding prefix in case of not absolute url.
             if (!this.IsAbsoluteUrl)
             {
                 builder.AppendLine("{0} = URI.join({1}.base_url, {2})", outputVariableName, ClientReference, inputVariableName);
+            }
+            else
+            {
+                builder.AppendLine("{0} = URI.parse({1})", outputVariableName, inputVariableName);
             }
 
             // Filling query parameters (which are directly in the url query part). 
@@ -108,7 +122,9 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             builder.AppendLine("properties.reject!{ |key, value| value.nil? }");
             builder.AppendLine("{0}.query = properties.map{{ |key, value| \"#{{key}}=#{{CGI.escape(value.to_s)}}\" }}.compact.join('&')", outputVariableName);
 
-             // TODO: maybe more specific azure stuff is required.
+            builder.AppendLine(@"fail URI::Error unless {0}.to_s =~ /\A#{{URI::regexp}}\z/", outputVariableName);
+
+            // TODO: maybe more specific azure stuff is required.
 
             return builder.ToString();
         }

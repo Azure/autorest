@@ -235,6 +235,8 @@ namespace Microsoft.Rest.Generator.Ruby
                 builder.AppendLine("{0}.query = properties.map{{ |key, value| \"#{{key}}=#{{CGI.escape(value.to_s)}}\" }}.compact.join('&')", outputVariableName);
             }
 
+            builder.AppendLine(@"fail URI::Error unless {0}.to_s =~ /\A#{{URI::regexp}}\z/", outputVariableName);
+
             return builder.ToString();
         }
 
