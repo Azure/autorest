@@ -69,7 +69,7 @@
           
     <Message Text="Unlisting %(SdkNuGetPackage.Identity) as Hidden is set to 'true' for the component."
              Condition=" '%(SdkNuGetPackage.Hidden)' == 'true' " />             
-    <Exec Command="$(NuGetCommand) delete %(SdkNuGetPackage.Identity) %(SdkNuGetPackage.PackageVersion) -ApiKey $(NuGetKey) -Source $(ActualSource) -NoPrompt" 
+    <Exec Command="$(NuGetCommand) delete &quot;$(PackageOutputDir)\%(SdkNuGetPackage.Identity).%(SdkNuGetPackage.PackageVersion).nupkg&quot; $(NuGetKey)$(ActualSource) -NoPrompt" 
              IgnoreExitCode="true" Condition=" '%(SdkNuGetPackage.Hidden)' == 'true' " />
 
     <Message Importance="high" Text="Publishing NuGet symbol &amp; source packages to the cloud at $(NuGetSymbolPublishingSource)"
