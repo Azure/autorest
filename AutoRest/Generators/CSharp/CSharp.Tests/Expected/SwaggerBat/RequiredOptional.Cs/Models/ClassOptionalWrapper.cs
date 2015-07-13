@@ -15,5 +15,15 @@ namespace Fixtures.SwaggerBatRequiredOptional.Models
         [JsonProperty(PropertyName = "value")]
         public Product Value { get; set; }
 
+        /// <summary>
+        /// Validate the object. Throws ArgumentException or ArgumentNullException if validation fails.
+        /// </summary>
+        public virtual void Validate()
+        {
+            if (this.Value != null)
+            {
+                this.Value.Validate();
+            }
+        }
     }
 }

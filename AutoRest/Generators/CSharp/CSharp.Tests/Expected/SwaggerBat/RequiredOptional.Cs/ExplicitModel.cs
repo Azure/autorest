@@ -1434,6 +1434,10 @@ namespace Fixtures.SwaggerBatRequiredOptional
         /// </param>
         public async Task<HttpOperationResponse> PostOptionalClassPropertyWithHttpMessagesAsync(ClassOptionalWrapper bodyParameter = default(ClassOptionalWrapper), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
+            if (bodyParameter != null)
+            {
+                bodyParameter.Validate();
+            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;

@@ -45,9 +45,9 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
                 }
                 validatedTypes.Add(modelToValidate);
 
-                var sequence = model as SequenceType;
-                var dictionary = model as DictionaryType;
-                var composite = model as CompositeType;
+                var sequence = modelToValidate as SequenceType;
+                var dictionary = modelToValidate as DictionaryType;
+                var composite = modelToValidate as CompositeType;
                 if (sequence != null)
                 {
                     typesToValidate.Push(sequence.ElementType);
@@ -88,9 +88,9 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
                 }
                 validatedTypes.Add(modelToValidate);
 
-                var sequence = model as SequenceType;
-                var dictionary = model as DictionaryType;
-                var composite = model as CompositeType;
+                var sequence = modelToValidate as SequenceType;
+                var dictionary = modelToValidate as DictionaryType;
+                var composite = modelToValidate as CompositeType;
                 if (sequence != null)
                 {
                     typesToValidate.Push(sequence.ElementType);
@@ -215,8 +215,12 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
 
         public static string CheckNull(string valueReference, string executionBlock)
         {
-            return string.Format(CultureInfo.InvariantCulture, 
-                "if ({0} != null)\r\n{{\r\n    {1}\r\n}}", valueReference, executionBlock);
+            var sb = new IndentedStringBuilder();
+            sb.AppendLine("if ({0} != null)", valueReference)
+                .AppendLine("{").Indent()
+                    .AppendLine(executionBlock).Outdent()
+                .AppendLine("}");
+            return sb.ToString();
         }
 
         /// <summary>
@@ -247,12 +251,12 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
                 var innerValidation = sequence.ElementType.ValidateType(scope, elementVar);
                 if (!string.IsNullOrEmpty(innerValidation))
                 {
-                    var sequenceBuilder = string.Format(CultureInfo.InvariantCulture, 
-                        "foreach ( var {0} in {1})\r\n{{\r\n", elementVar,
-                        valueReference);
-                    sequenceBuilder += string.Format(CultureInfo.InvariantCulture, 
-                        "    {0}\r\n}}", innerValidation);
-                    return CheckNull(valueReference, sequenceBuilder);
+                    var sb = new IndentedStringBuilder();
+                    sb.AppendLine("foreach (var {0} in {1})", elementVar, valueReference)
+                        .AppendLine("{").Indent()
+                            .AppendLine(innerValidation).Outdent()
+                        .AppendLine("}");
+                    return CheckNull(valueReference, sb.ToString());
                 }
             }
             else if (dictionary != null && dictionary.ShouldValidateChain())
@@ -261,14 +265,16 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
                 var innerValidation = dictionary.ValueType.ValidateType(scope, valueVar);
                 if (!string.IsNullOrEmpty(innerValidation))
                 {
-                    var sequenceBuilder = string.Format(CultureInfo.InvariantCulture, 
-                        "if ( {0} != null)\r\n{{\r\n", valueReference);
-                    sequenceBuilder += string.Format(CultureInfo.InvariantCulture, 
-                        "    foreach ( var {0} in {1}.Values)\r\n    {{\r\n", valueVar,
-                        valueReference);
-                    sequenceBuilder += string.Format(CultureInfo.InvariantCulture, 
-                        "        {0}\r\n    }}\r\n}}", innerValidation);
-                    return CheckNull(valueReference, sequenceBuilder);
+                    var sb = new IndentedStringBuilder();
+                    sb.AppendLine("if ({0} != null)", valueReference)
+                        .AppendLine("{").Indent()
+                            .AppendLine("foreach (var {0} in {1}.Values)",valueVar,valueReference)
+                            .AppendLine("{").Indent()
+                                .AppendLine(innerValidation).Outdent()
+                            .AppendLine("}").Outdent()
+                        .AppendLine("}");
+
+                    return CheckNull(valueReference, sb.ToString());
                 }
             }
 

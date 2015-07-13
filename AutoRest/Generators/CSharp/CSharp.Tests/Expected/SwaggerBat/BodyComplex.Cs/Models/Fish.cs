@@ -35,6 +35,16 @@ namespace Fixtures.SwaggerBatBodyComplex.Models
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "Length");
             }
+            if (this.Siblings != null)
+            {
+                foreach (var element in this.Siblings)
+                {
+                    if (element != null)
+                    {
+                        element.Validate();
+                    }
+                }
+            }
         }
     }
 }
