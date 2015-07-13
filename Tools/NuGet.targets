@@ -42,14 +42,18 @@
   Build NuGet packages
   -->
   <Target Name="Package" DependsOnTargets="BuildDynamicNuSpecs">
-    
+    <PropertyGroup>
+      <!--Don't warn for putting dlls under tools folder.
+       parameterize it when the repo starts to produce more than 1 package -->
+      <NoWarnOnPack>-NoPackageAnalysis</NoWarnOnPack>
+    </PropertyGroup>
     <Message Text="Generating NuGet library &amp; symbols + source packages" Importance="high" />
     <Exec Condition=" '%(SdkNuGetPackage.SkipSymbolSourcePackage)' != 'true' "
-          Command="$(NuGetCommand) pack -BasePath &quot;%(SdkNuGetPackage.Folder)..&quot; -Verbosity $(NuGetVerbosity) &quot;binaries\packages\specs\%(SdkNuGetPackage.Identity).nuspec&quot; -Version %(SdkNuGetPackage.PackageVersion) -OutputDirectory &quot;$(PackageOutputDir)&quot; -Symbols" />
+          Command="$(NuGetCommand) pack -BasePath &quot;%(SdkNuGetPackage.Folder)..&quot; -Verbosity $(NuGetVerbosity) &quot;binaries\packages\specs\%(SdkNuGetPackage.Identity).nuspec&quot; -Version %(SdkNuGetPackage.PackageVersion) -OutputDirectory &quot;$(PackageOutputDir)&quot; -Symbols $(NoWarnOnPack)" />
 
     <Message Text="Generating NuGet packages without symbol + source packages into $(PackageOutputDir)" Importance="high" />
     <Exec Condition=" '%(SdkNuGetPackage.SkipSymbolSourcePackage)' == 'true' "
-          Command="$(NuGetCommand) pack -BasePath &quot;%(SdkNuGetPackage.Folder)..&quot; -Verbosity $(NuGetVerbosity) &quot;binaries\packages\specs\%(SdkNuGetPackage.Identity).nuspec&quot; -Version %(SdkNuGetPackage.PackageVersion) -OutputDirectory &quot;$(PackageOutputDir)&quot;" />
+          Command="$(NuGetCommand) pack -BasePath &quot;%(SdkNuGetPackage.Folder)..&quot; -Verbosity $(NuGetVerbosity) &quot;binaries\packages\specs\%(SdkNuGetPackage.Identity).nuspec&quot; -Version %(SdkNuGetPackage.PackageVersion) -OutputDirectory &quot;$(PackageOutputDir)&quot; -NoPackageAnalysis" />
   </Target>
 
   <!--
