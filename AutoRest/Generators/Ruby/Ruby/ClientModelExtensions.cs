@@ -340,9 +340,18 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             }
             else if (composite != null)
             {
+                string deserializeTypeString = string.Format("{0} = {1}::{2}.deserialize_object({0})",
+                    valueReference, defaultNamespace + "::Models", composite.Name);
+
+                if (composite.Extensions.ContainsKey("-ms-external"))
+                {
+                    deserializeTypeString = string.Format("{0} = {1}::{2}.deserialize_object({0})",
+                        valueReference, "ClientRuntimeAzure", composite.Name);
+                }
+
                 return builder.AppendLine("if ({0})", valueReference)
                     .Indent()
-                        .AppendLine("{0} = {1}::Models::{2}.deserialize_object({0})", valueReference, defaultNamespace, composite.Name)
+                        .AppendLine(deserializeTypeString)
                     .Outdent()
                     .AppendLine("end").ToString();
             }
@@ -427,9 +436,18 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             }
             else if (composite != null)
             {
+                string serializeTypeString = string.Format("{0} = {1}::{2}.serialize_object({0})",
+                    valueReference, defaultNamespace + "::Models", composite.Name);
+
+                if (composite.Extensions.ContainsKey("x-ms-external"))
+                {
+                    serializeTypeString = string.Format("{0} = {1}::{2}.serialize_object({0})",
+                        valueReference, "ClientRuntimeAzure", composite.Name);
+                }
+
                 return builder.AppendLine("if ({0})", valueReference)
                     .Indent()
-                        .AppendLine("{0} = {1}::Models::{2}.serialize_object({0})", valueReference, defaultNamespace, composite.Name)
+                        .AppendLine(serializeTypeString)
                     .Outdent()
                     .AppendLine("end").ToString();
             }
