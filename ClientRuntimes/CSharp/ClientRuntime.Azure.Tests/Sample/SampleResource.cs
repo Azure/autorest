@@ -33,6 +33,12 @@ namespace Microsoft.Azure
         /// </summary>
         [JsonProperty("plan")]
         public string Plan { get; set; }
+
+        /// <summary>
+        /// Optional. Gets or sets the provisioning state.
+        /// </summary>
+        [JsonProperty("properties.provisioningState")]
+        public string ProvisioningState { get; set; }
     }
 
     /// <summary>

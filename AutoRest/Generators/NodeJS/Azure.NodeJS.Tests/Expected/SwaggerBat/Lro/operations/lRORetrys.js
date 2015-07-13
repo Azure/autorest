@@ -33,6 +33,8 @@ function LRORetrys(client) {
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -75,6 +77,8 @@ LRORetrys.prototype.put201CreatingSucceeded200 = function (product, options, cal
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -312,6 +316,8 @@ LRORetrys.prototype.getRetry201CreatingSucceeded200Polling = function (options, 
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -354,6 +360,8 @@ LRORetrys.prototype.putAsyncRelativeRetrySucceeded = function (product, options,
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -946,6 +954,8 @@ LRORetrys.prototype.beginDeleteAsyncRelativeRetrySucceeded = function (options, 
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -977,6 +987,8 @@ LRORetrys.prototype.post202Retry200 = function (product, options, callback) {
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
@@ -1082,6 +1094,8 @@ LRORetrys.prototype.beginPost202Retry200 = function (product, options, callback)
  *
  * @param {ProductProperties} [product.properties] 
  *
+ * @param {String} [product.properties.provisioningState] 
+ *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
@@ -1114,6 +1128,8 @@ LRORetrys.prototype.postAsyncRelativeRetrySucceeded = function (product, options
  * @param {Product} [product] Product to put
  *
  * @param {ProductProperties} [product.properties] 
+ *
+ * @param {String} [product.properties.provisioningState] 
  *
  * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *

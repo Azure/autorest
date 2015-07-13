@@ -53,8 +53,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPutAsyncRetrySucceededWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetAsyncRetrySucceededWithHttpMessagesAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response, 
                 customHeaders, 
                 cancellationToken);
         }
@@ -286,8 +285,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPut201CreatingSucceeded200WithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => Get201CreatingSucceeded200PollingWithHttpMessagesAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response, 
                 customHeaders, 
                 cancellationToken);
         }

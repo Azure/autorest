@@ -12,6 +12,11 @@ namespace Fixtures.Azure.SwaggerBatLro.Models
     public partial class Product : Resource
     {
         /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "properties.provisioningState")]
+        public string ProvisioningState { get; set; }
+
+        /// <summary>
         /// Possible values for this property include: 'Succeeded', 'Failed',
         /// 'canceled', 'Accepted', 'Creating', 'Created', 'Updating',
         /// 'Updated', 'Deleting', 'Deleted', 'OK'

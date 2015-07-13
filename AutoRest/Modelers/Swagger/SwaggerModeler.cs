@@ -68,7 +68,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             InitializeClientModel();
             BuildCompositeTypes();
 
-            // Build client parameters methods
+            // Build client parameters
             foreach (var swaggerParameter in ServiceDefinition.Parameters.Values)
             {
                 var parameter = ((ParameterBuilder)swaggerParameter.GetBuilder(this)).Build();

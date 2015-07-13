@@ -260,7 +260,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             deserializeSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<SampleResourceChild>("dType"));
             var deserializedResource = JsonConvert.DeserializeObject<GenericResource>(expected, deserializeSettings);
 
-            Assert.Equal("some string", deserializedResource.ProvisioningState);
+            Assert.Equal("some string", ((JObject)deserializedResource.Properties)["provisioningState"]);
             Assert.Equal("EastUS", deserializedResource.Location);
             Assert.Equal("value1", deserializedResource.Tags["tag1"]);
             Assert.Equal("3", ((JObject)deserializedResource.Properties)["size"]);
