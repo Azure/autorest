@@ -139,6 +139,19 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             return builder.AppendLine(serializationLogic).ToString();
         }
 
+        public override string InitializeResponseBody
+        {
+            get
+            {
+                if (this.HttpMethod == HttpMethod.Head && this.ReturnType != null)
+                {
+                    return "result.body = (status_code == 204)";
+                }
+
+                return base.InitializeResponseBody;
+            }
+        }
+
         ///// <summary>
         ///// Returns AzureOperationResponse generic type declaration.
         ///// </summary>

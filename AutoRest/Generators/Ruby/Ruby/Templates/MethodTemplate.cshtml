@@ -76,6 +76,7 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
     @EmptyLine
     # Create Result
     result = ClientRuntime::HttpOperationResponse.new(http_request, http_response)
+    @Model.InitializeResponseBody
 
     @foreach (var responsePair in Model.Responses.Where(r => r.Value != null && r.Value.IsSerializable()))
     {

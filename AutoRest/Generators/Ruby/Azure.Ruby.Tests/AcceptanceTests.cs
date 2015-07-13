@@ -12,7 +12,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby.Tests
     {
         public AcceptanceTests(ServiceController data, ITestOutputHelper output) : base(data, output, "Azure.Ruby") { }
 
-        [Fact(Skip = "not implemented")]
+        [Fact]
         public void HeadTests()
         {
             Test("head_spec.rb", "head.json", "Head");

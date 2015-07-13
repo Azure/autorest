@@ -123,6 +123,11 @@ namespace Microsoft.Rest.Generator.Ruby
             }
         }
 
+        public virtual string InitializeResponseBody 
+        {
+            get { return string.Empty; }
+        }
+
         /// <summary>
         /// Get the method's request body (or null if there is no request body)
         /// </summary>
