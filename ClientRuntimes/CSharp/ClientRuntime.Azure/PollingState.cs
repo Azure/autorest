@@ -40,7 +40,7 @@ namespace Microsoft.Azure
                 {
                     resource = JObject.Parse(raw);
                 }
-                catch
+                catch (JsonException)
                 {
                     // failed to deserialize, return empty body
                 }
