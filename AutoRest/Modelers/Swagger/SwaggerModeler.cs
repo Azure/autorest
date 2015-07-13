@@ -21,7 +21,6 @@ namespace Microsoft.Rest.Modeler.Swagger
     {
         private const string BaseUriParameterName = "BaseUri";
 
-        protected bool AddCredentials { get; set; }
         internal Dictionary<string, string> ExtendedTypes = new Dictionary<string, string>();
         internal Dictionary<string, CompositeType> GeneratedTypes = new Dictionary<string, CompositeType>();
 
@@ -32,7 +31,6 @@ namespace Microsoft.Rest.Modeler.Swagger
                 throw new ArgumentNullException("settings");
             }
 
-            AddCredentials = settings.AddCredentials;
             DefaultProtocol = TransferProtocolScheme.Http;
         }
 

@@ -225,6 +225,7 @@ namespace Microsoft.Rest.Generator.Azure
                     Name = "SubscriptionCloudCredentials"
                 },
                 IsRequired = true,
+                IsReadOnly = true,
                 Documentation = "Subscription credentials which uniquely identify Microsoft Azure subscription."
             });
             serviceClient.Properties.Add(new Property
@@ -260,33 +261,41 @@ namespace Microsoft.Rest.Generator.Azure
                     // First find "properties" property
                     var propertiesProperty = compositeType.Properties.FirstOrDefault(
                         p => p.Name.Equals(ResourceProperties, StringComparison.OrdinalIgnoreCase));
-                    if (propertiesProperty == null)
+                    if (propertiesProperty == null &&
+                        compositeType.BaseModelType.Name.Equals(ResourceType, StringComparison.OrdinalIgnoreCase))
                     {
                         throw new InvalidOperationException(
                             string.Format(CultureInfo.InvariantCulture, 
                             Resources.MissingProperties,
                             compositeType.Name));
                     }
-                    var propertiesModel = propertiesProperty.Type as CompositeType;
-                    // Recursively parsing the "properties" object hierarchy  
-                    while (propertiesModel != null)
+
+                    // Sub resource does not need to have properties
+                    if (propertiesProperty != null)
                     {
-                        foreach (Property pp in propertiesModel.Properties)
+                        var propertiesModel = propertiesProperty.Type as CompositeType;
+                        // Recursively parsing the "properties" object hierarchy  
+                        while (propertiesModel != null)
                         {
-                            if (ResourcePropertyNames.Any(rp => rp.Equals(pp.Name, StringComparison.OrdinalIgnoreCase)))
+                            foreach (Property pp in propertiesModel.Properties)
                             {
-                                pp.Name = compositeType.Name + CodeNamer.PascalCase(pp.Name);
+                                if (
+                                    ResourcePropertyNames.Any(
+                                        rp => rp.Equals(pp.Name, StringComparison.OrdinalIgnoreCase)))
+                                {
+                                    pp.Name = compositeType.Name + CodeNamer.PascalCase(pp.Name);
+                                }
+                                pp.SerializedName = "properties." + pp.SerializedName;
+                                compositeType.Properties.Add(pp);
                             }
-                            pp.SerializedName = "properties." + pp.SerializedName;
-                            compositeType.Properties.Add(pp);
+
+                            compositeType.Properties.Remove(propertiesProperty);
+                            if (!typesToDelete.Contains(propertiesModel.Name))
+                            {
+                                typesToDelete.Add(propertiesModel.Name);
+                            }
+                            propertiesModel = propertiesModel.BaseModelType;
                         }
-                        
-                        compositeType.Properties.Remove(propertiesProperty);
-                        if (!typesToDelete.Contains(propertiesModel.Name))
-                        {
-                            typesToDelete.Add(propertiesModel.Name);
-                        }
-                        propertiesModel = propertiesModel.BaseModelType;
                     }
                 }
             }
