@@ -65,8 +65,12 @@
 
     <Message Importance="high" Text="Publishing NuGet packages to the cloud at $(NuGetPublishingSource)" />
     <Exec Command="$(NuGetCommand) push &quot;$(PackageOutputDir)\%(SdkNuGetPackage.Identity).%(SdkNuGetPackage.PackageVersion).nupkg&quot; $(NuGetKey)$(ActualSource)"
-          IgnoreExitCode="true"
-          Condition=" '%(SdkNuGetPackage.Publish)' != 'false' " />
+          IgnoreExitCode="true" />
+          
+    <Message Text="Unlisting %(SdkNuGetPackage.Identity) as Hidden is set to 'true' for the component."
+             Condition=" '%(SdkNuGetPackage.Hidden)' == 'true' " />             
+    <Exec Command="$(NuGetCommand) delete %(SdkNuGetPackage.Identity) %(SdkNuGetPackage.PackageVersion) -ApiKey $(NuGetKey) -Source $(ActualSource) -NoPrompt" 
+             IgnoreExitCode="true" Condition=" '%(SdkNuGetPackage.Hidden)' == 'true' " />
 
     <Message Importance="high" Text="Publishing NuGet symbol &amp; source packages to the cloud at $(NuGetSymbolPublishingSource)"
              Condition=" $(NuGetSymbolPublishingSource) != '' "/>
@@ -74,9 +78,6 @@
           Condition=" $(NuGetSymbolPublishingSource) != '' And '%(SdkNuGetPackage.Publish)' != 'false' And '%(SdkNuGetPackage.SkipSymbolSourcePackage)' != 'true' And '$(PublishSymbolSourcePackages)' == 'true' "
           IgnoreExitCode="true"
           ContinueOnError="true" />
-
-    <Message Text="Not publishing package %(SdkNuGetPackage.Identity) as Publish is set to 'false' for the component."
-             Condition=" '%(SdkNuGetPackage.Publish)' == 'false' " />
 
     <Warning Text="Symbol/source packages are not being pushed. The PublishSymbolSourcePackages property is not set to true."
              Condition=" '$(PublishSymbolSourcePackages)' != 'true' " />
