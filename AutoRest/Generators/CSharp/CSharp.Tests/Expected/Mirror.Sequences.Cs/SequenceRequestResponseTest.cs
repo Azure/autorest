@@ -128,16 +128,6 @@ namespace Fixtures.MirrorSequences
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "pets");
             }
-            if (pets != null)
-            {
-                foreach ( var element in pets)
-            {
-                if (element != null)
-            {
-                element.Validate();
-            }
-            }
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;

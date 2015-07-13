@@ -43,16 +43,6 @@ namespace Fixtures.MirrorSequences.Models
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "Name");
             }
-            if (this.Styles != null)
-            {
-                foreach ( var element in this.Styles)
-            {
-                if (element != null)
-            {
-                element.Validate();
-            }
-            }
-            }
         }
     }
 }

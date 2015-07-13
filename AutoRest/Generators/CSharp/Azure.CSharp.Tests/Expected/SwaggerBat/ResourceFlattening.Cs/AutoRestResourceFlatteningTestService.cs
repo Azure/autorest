@@ -567,10 +567,6 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
         /// </param>
         public async Task<AzureOperationResponse> PutResourceCollectionWithHttpMessagesAsync(ResourceCollection resourceComplexObject = default(ResourceCollection), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (resourceComplexObject != null)
-            {
-                resourceComplexObject.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;

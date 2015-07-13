@@ -147,10 +147,6 @@ namespace Fixtures.MirrorRecursiveTypes
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "apiVersion");
             }
-            if (body != null)
-            {
-                body.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
