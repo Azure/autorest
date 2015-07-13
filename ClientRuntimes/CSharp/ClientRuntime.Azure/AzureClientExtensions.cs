@@ -466,7 +466,14 @@ namespace Microsoft.Azure
                 statusCode != HttpStatusCode.Created &&
                 statusCode != HttpStatusCode.NoContent)
             {
-                throw new CloudException(string.Format(CultureInfo.InvariantCulture, Resources.LongRunningOperationFailed, statusCode));
+                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, client.DeserializationSettings);
+                throw new CloudException(string.Format(CultureInfo.InvariantCulture,
+                    Resources.LongRunningOperationFailed, statusCode))
+                {
+                    Body = errorBody,
+                    Request = httpRequest,
+                    Response = httpResponse
+                };
             }
 
             JObject body = null;
