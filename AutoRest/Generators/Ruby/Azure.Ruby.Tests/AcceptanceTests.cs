@@ -24,7 +24,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby.Tests
             Test("paging_spec.rb", "paging.json", "Paging");
         }
 
-        [Fact(Skip = "not implemented")]
+        [Fact]
         public void ResourceFlatteningTests()
         {
             Test("resource_flattening_spec.rb", "resource-flattening.json", "ResourceFlattening");
