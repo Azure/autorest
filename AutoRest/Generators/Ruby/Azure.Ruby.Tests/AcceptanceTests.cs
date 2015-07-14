@@ -49,7 +49,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby.Tests
         }
 
         [Trait("Report", "true")]
-        [Fact(Skip = "not all tests are ready so test coverage is too low")]
+        [Fact]
         public void EnsureTestCoverage()
         {
             Test("azure_report_spec.rb", "azure-report.json", "AzureReport");
