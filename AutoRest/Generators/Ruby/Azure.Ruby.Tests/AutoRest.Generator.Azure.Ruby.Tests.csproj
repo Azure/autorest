@@ -63,6 +63,8 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="RspecTests\azure_report_spec.rb" />
+    <None Include="RspecTests\azure_special_properties_spec.rb" />
+    <None Include="RspecTests\azure_url_spec.rb" />
     <None Include="RspecTests\head_spec.rb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

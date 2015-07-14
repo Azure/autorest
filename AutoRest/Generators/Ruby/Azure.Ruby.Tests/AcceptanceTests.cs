@@ -18,7 +18,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby.Tests
             Test("head_spec.rb", "head.json", "Head");
         }
 
-        [Fact(Skip = "not implemented")]
+        [Fact]
         public void PagingTests()
         {
             Test("paging_spec.rb", "paging.json", "Paging");
@@ -30,7 +30,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby.Tests
             Test("resource_flattening_spec.rb", "resource-flattening.json", "ResourceFlattening");
         }
 
-        [Fact(Skip = "not implemented")]
+        [Fact]
         public void LroTests()
         {
             Test("lro_spec.rb", "lro.json", "Lro");

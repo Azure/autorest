@@ -30,22 +30,22 @@ module ClientRuntimeAzure
       output_object = {}
 
       serialized_property = object.id
-      output_object['id'] = serialized_property
+      output_object['id'] = serialized_property unless serialized_property.nil?
 
       serialized_property = object.name
-      output_object['name'] = serialized_property
+      output_object['name'] = serialized_property unless serialized_property.nil?
 
       serialized_property = object.type
-      output_object['type'] = serialized_property
+      output_object['type'] = serialized_property unless serialized_property.nil?
 
       serialized_property = object.provisioning_state
-      output_object['provisioning_state'] = serialized_property
+      output_object['provisioning_state'] = serialized_property unless serialized_property.nil?
 
       serialized_property = object.location
-      output_object['location'] = serialized_property
+      output_object['location'] = serialized_property unless serialized_property.nil?
 
       serialized_property = object.tags
-      output_object['tags'] = serialized_property
+      output_object['tags'] = serialized_property unless serialized_property.nil?
 
       output_object
     end

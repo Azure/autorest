@@ -22,6 +22,9 @@ module ClientRuntimeAzure
     # @return [ClientRuntimeAzure::CloudError] error information about async operation.
     attr_accessor :cloud_error
 
+    # @return [Stirng] status of polling.
+    attr_accessor :status
+
     #
     # Checks if given status is terminal one.
     # @param status [String] status to verify
@@ -47,6 +50,18 @@ module ClientRuntimeAzure
     # @return [Boolean] True if given status is successful one, false otherwise.
     def self.is_successful_status(status)
       return status == SUCCESS_STATUS
+    end
+
+    def self.deserialize_object(object)
+      return if object.nil?
+      output_object = AsyncOperationStatus.new
+
+      deserialized_property = object['status']
+
+      # TODO: Check that valid enum value is provided.
+      output_object.status = deserialized_property
+
+      output_object
     end
   end
 

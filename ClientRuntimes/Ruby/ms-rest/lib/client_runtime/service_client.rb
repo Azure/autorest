@@ -16,6 +16,8 @@ module ClientRuntime
     # @return [Array] filters to be applied to the HTTP requests.
     attr_accessor :options
 
+    attr_accessor :cookies
+
     #
     # Creates and initialize new instance of the ServiceClient class.
     #
@@ -51,7 +53,28 @@ module ClientRuntime
       # sign in
       @credentials.sign_request(request) unless @credentials.nil?
 
-      http.request(request)
+      # TODO: add proper retry policy.
+      retry_count = 5
+      response = nil
+
+      retry_count.times do
+        response = http.request(request)
+
+        unless response['set-cookie'].nil?
+          cookies = response['set-cookie']
+        end
+
+        unless cookies.nil?
+          request['cookie'] = cookies
+        end
+
+        if not (response.code.to_i == 408 ||
+               (response.code.to_i >= 500 && response.code.to_i != 501 && response.code.to_i != 505))
+          return response
+        end
+      end
+
+      return response
     end
   end
 
