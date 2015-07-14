@@ -40,7 +40,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
         /// Subscription credentials which uniquely identify Microsoft Azure
         /// subscription.
         /// </summary>
-        public SubscriptionCloudCredentials Credentials { get; set; }
+        public SubscriptionCloudCredentials Credentials { get; private set; }
 
         /// <summary>
         /// The retry timeout for Long Running Operations.
@@ -156,6 +156,10 @@ namespace Fixtures.Azure.SwaggerBatPaging
         {
             this.Paging = new PagingOperations(this);
             this.BaseUri = new Uri("http://localhost");
+            if (this.Credentials != null)
+            {
+                this.Credentials.InitializeServiceClient(this);
+            }
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,

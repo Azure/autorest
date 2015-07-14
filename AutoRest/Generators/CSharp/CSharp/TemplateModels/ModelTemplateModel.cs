@@ -33,7 +33,7 @@ namespace Microsoft.Rest.Generator.CSharp
 
         public string MethodQualifier
         {
-            get { return (BaseModelType.ShouldValidate()) ? "override" : "virtual"; }
+            get { return (BaseModelType.ShouldValidateChain()) ? "override" : "virtual"; }
         }
 
         public List<PropertyTemplateModel> PropertyTemplateModels { get; private set; }

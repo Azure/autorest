@@ -38,7 +38,7 @@ namespace @(Settings.Namespace).Models
         @EmptyLine
         @:
         }
-@if(@Model.ShouldValidate()) 
+@if(@Model.ShouldValidateChain()) 
 {   
         @:/// <summary>
         @:/// Validate the object. Throws ArgumentException or ArgumentNullException if validation fails.
@@ -47,7 +47,7 @@ namespace @(Settings.Namespace).Models
         @:{
             bool anythingToValidate = false;
 
-            if (Model.BaseModelType != null)
+            if (Model.BaseModelType != null && Model.BaseModelType.ShouldValidateChain())
             {
                 anythingToValidate = true;
             @:base.Validate();

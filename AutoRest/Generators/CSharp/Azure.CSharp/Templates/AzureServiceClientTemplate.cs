@@ -4,36 +4,42 @@
 namespace Microsoft.Rest.Generator.CSharp.Azure.Templates
 {
 #line 1 "AzureServiceClientTemplate.cshtml"
-using Microsoft.Rest.Generator.CSharp
+using System
 
 #line default
 #line hidden
     ;
 #line 2 "AzureServiceClientTemplate.cshtml"
-using Microsoft.Rest.Generator.CSharp.Templates
+using Microsoft.Rest.Generator.CSharp
 
 #line default
 #line hidden
     ;
 #line 3 "AzureServiceClientTemplate.cshtml"
-using Microsoft.Rest.Generator.CSharp.Azure
+using Microsoft.Rest.Generator.CSharp.Templates
 
 #line default
 #line hidden
     ;
 #line 4 "AzureServiceClientTemplate.cshtml"
-using Microsoft.Rest.Generator.CSharp.Azure.Templates
+using Microsoft.Rest.Generator.CSharp.Azure
 
 #line default
 #line hidden
     ;
 #line 5 "AzureServiceClientTemplate.cshtml"
-using Microsoft.Rest.Generator.Utilities
+using Microsoft.Rest.Generator.CSharp.Azure.Templates
 
 #line default
 #line hidden
     ;
 #line 6 "AzureServiceClientTemplate.cshtml"
+using Microsoft.Rest.Generator.Utilities
+
+#line default
+#line hidden
+    ;
+#line 7 "AzureServiceClientTemplate.cshtml"
 using System.Linq
 
 #line default
@@ -51,13 +57,13 @@ using System.Linq
         #pragma warning disable 1998
         public override async Task ExecuteAsync()
         {
-#line 8 "AzureServiceClientTemplate.cshtml"
+#line 9 "AzureServiceClientTemplate.cshtml"
 Write(Header("/// "));
 
 #line default
 #line hidden
             WriteLiteral("\r\nnamespace ");
-#line 9 "AzureServiceClientTemplate.cshtml"
+#line 10 "AzureServiceClientTemplate.cshtml"
      Write(Settings.Namespace);
 
 #line default
@@ -78,50 +84,50 @@ Write(Header("/// "));
     using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
 ");
-#line 24 "AzureServiceClientTemplate.cshtml"
+#line 25 "AzureServiceClientTemplate.cshtml"
  foreach (var usingString in Model.Usings) {
 
 #line default
 #line hidden
 
             WriteLiteral("    using ");
-#line 25 "AzureServiceClientTemplate.cshtml"
+#line 26 "AzureServiceClientTemplate.cshtml"
        Write(usingString);
 
 #line default
 #line hidden
             WriteLiteral(";\r\n");
-#line 26 "AzureServiceClientTemplate.cshtml"
+#line 27 "AzureServiceClientTemplate.cshtml"
 }
 
 #line default
 #line hidden
 
-#line 27 "AzureServiceClientTemplate.cshtml"
+#line 28 "AzureServiceClientTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
             WriteLiteral("\r\n    /// <summary>\r\n    ");
-#line 29 "AzureServiceClientTemplate.cshtml"
+#line 30 "AzureServiceClientTemplate.cshtml"
 Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
             WriteLiteral("\r\n    /// </summary>\r\n    public partial class ");
-#line 31 "AzureServiceClientTemplate.cshtml"
+#line 32 "AzureServiceClientTemplate.cshtml"
                     Write(Model.Name);
 
 #line default
 #line hidden
             WriteLiteral(" : ServiceClient<");
-#line 31 "AzureServiceClientTemplate.cshtml"
+#line 32 "AzureServiceClientTemplate.cshtml"
                                                 Write(Model.Name);
 
 #line default
 #line hidden
             WriteLiteral(">, I");
-#line 31 "AzureServiceClientTemplate.cshtml"
+#line 32 "AzureServiceClientTemplate.cshtml"
                                                                 Write(Model.Name);
 
 #line default
@@ -129,7 +135,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
             WriteLiteral(", IAzureClient\r\n    {\r\n        /// <summary>\r\n        /// The base URI of the ser" +
 "vice.\r\n        /// </summary>\r\n        public Uri BaseUri { get; set; }\r\n       " +
 " ");
-#line 37 "AzureServiceClientTemplate.cshtml"
+#line 38 "AzureServiceClientTemplate.cshtml"
    Write(EmptyLine);
 
 #line default
@@ -137,7 +143,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
             WriteLiteral("\r\n\r\n        /// <summary>\r\n        /// Gets or sets json serialization settings.\r" +
 "\n        /// </summary>\r\n        public JsonSerializerSettings SerializationSett" +
 "ings { get; private set; }\r\n        ");
-#line 43 "AzureServiceClientTemplate.cshtml"
+#line 44 "AzureServiceClientTemplate.cshtml"
    Write(EmptyLine);
 
 #line default
@@ -145,19 +151,19 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
             WriteLiteral("\r\n\r\n        /// <summary>\r\n        /// Gets or sets json deserialization settings" +
 ".\r\n        /// </summary>\r\n        public JsonSerializerSettings Deserialization" +
 "Settings { get; private set; }        \r\n        ");
-#line 49 "AzureServiceClientTemplate.cshtml"
+#line 50 "AzureServiceClientTemplate.cshtml"
    Write(EmptyLine);
 
 #line default
 #line hidden
             WriteLiteral("\r\n        \r\n");
-#line 51 "AzureServiceClientTemplate.cshtml"
+#line 52 "AzureServiceClientTemplate.cshtml"
         
 
 #line default
 #line hidden
 
-#line 51 "AzureServiceClientTemplate.cshtml"
+#line 52 "AzureServiceClientTemplate.cshtml"
          foreach (var property in Model.Properties)
         {
 
@@ -165,42 +171,42 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line hidden
 
             WriteLiteral("        /// <summary>\r\n        ");
-#line 54 "AzureServiceClientTemplate.cshtml"
+#line 55 "AzureServiceClientTemplate.cshtml"
      Write(WrapComment("/// ", property.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
             WriteLiteral("\r\n        /// </summary>\r\n        public ");
-#line 56 "AzureServiceClientTemplate.cshtml"
+#line 57 "AzureServiceClientTemplate.cshtml"
             Write(property.Type);
 
 #line default
 #line hidden
             WriteLiteral(" ");
-#line 56 "AzureServiceClientTemplate.cshtml"
+#line 57 "AzureServiceClientTemplate.cshtml"
                            Write(property.Name);
 
 #line default
 #line hidden
             WriteLiteral(" { get; ");
-#line 56 "AzureServiceClientTemplate.cshtml"
+#line 57 "AzureServiceClientTemplate.cshtml"
                                                   Write(property.IsReadOnly ? "private " : "");
 
 #line default
 #line hidden
             WriteLiteral("set; }\r\n");
-#line 57 "AzureServiceClientTemplate.cshtml"
+#line 58 "AzureServiceClientTemplate.cshtml"
         
 
 #line default
 #line hidden
 
-#line 57 "AzureServiceClientTemplate.cshtml"
+#line 58 "AzureServiceClientTemplate.cshtml"
    Write(EmptyLine);
 
 #line default
 #line hidden
-#line 57 "AzureServiceClientTemplate.cshtml"
+#line 58 "AzureServiceClientTemplate.cshtml"
                   
         }
 
@@ -208,13 +214,13 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line hidden
 
             WriteLiteral("        \r\n");
-#line 60 "AzureServiceClientTemplate.cshtml"
+#line 61 "AzureServiceClientTemplate.cshtml"
         
 
 #line default
 #line hidden
 
-#line 60 "AzureServiceClientTemplate.cshtml"
+#line 61 "AzureServiceClientTemplate.cshtml"
          foreach (var operation in Model.Operations) 
         {
 
@@ -222,30 +228,30 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line hidden
 
             WriteLiteral("        public virtual I");
-#line 62 "AzureServiceClientTemplate.cshtml"
+#line 63 "AzureServiceClientTemplate.cshtml"
                       Write(operation.MethodGroupType);
 
 #line default
 #line hidden
             WriteLiteral(" ");
-#line 62 "AzureServiceClientTemplate.cshtml"
+#line 63 "AzureServiceClientTemplate.cshtml"
                                                    Write(operation.MethodGroupName);
 
 #line default
 #line hidden
             WriteLiteral(" { get; private set; }\r\n");
-#line 63 "AzureServiceClientTemplate.cshtml"
+#line 64 "AzureServiceClientTemplate.cshtml"
         
 
 #line default
 #line hidden
 
-#line 63 "AzureServiceClientTemplate.cshtml"
+#line 64 "AzureServiceClientTemplate.cshtml"
    Write(EmptyLine);
 
 #line default
 #line hidden
-#line 63 "AzureServiceClientTemplate.cshtml"
+#line 64 "AzureServiceClientTemplate.cshtml"
                   
         }
 
@@ -253,25 +259,25 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line hidden
 
             WriteLiteral("\r\n        /// <summary>\r\n        /// Initializes a new instance of the ");
-#line 67 "AzureServiceClientTemplate.cshtml"
+#line 68 "AzureServiceClientTemplate.cshtml"
                                          Write(Model.Name);
 
 #line default
 #line hidden
             WriteLiteral(" class.\r\n        /// </summary>\r\n        public ");
-#line 69 "AzureServiceClientTemplate.cshtml"
+#line 70 "AzureServiceClientTemplate.cshtml"
            Write(Model.Name);
 
 #line default
 #line hidden
             WriteLiteral("() : base()\r\n        {\r\n            this.Initialize();\r\n        }\r\n        ");
-#line 73 "AzureServiceClientTemplate.cshtml"
+#line 74 "AzureServiceClientTemplate.cshtml"
    Write(EmptyLine);
 
 #line default
 #line hidden
             WriteLiteral("\r\n        /// <summary>\r\n        /// Initializes a new instance of the ");
-#line 75 "AzureServiceClientTemplate.cshtml"
+#line 76 "AzureServiceClientTemplate.cshtml"
                                          Write(Model.Name);
 
 #line default
@@ -279,20 +285,20 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
             WriteLiteral(" class.\r\n        /// </summary>\r\n        /// <param name=\'handlers\'>\r\n        ///" +
 " Optional. The set of delegating handlers to insert in the http\r\n        /// cli" +
 "ent pipeline.\r\n        /// </param>\r\n        public ");
-#line 81 "AzureServiceClientTemplate.cshtml"
+#line 82 "AzureServiceClientTemplate.cshtml"
            Write(Model.Name);
 
 #line default
 #line hidden
             WriteLiteral("(params DelegatingHandler[] handlers) : base(handlers)\r\n        {\r\n            th" +
 "is.Initialize();\r\n        }\r\n        ");
-#line 85 "AzureServiceClientTemplate.cshtml"
+#line 86 "AzureServiceClientTemplate.cshtml"
    Write(EmptyLine);
 
 #line default
 #line hidden
             WriteLiteral("\r\n\r\n        /// <summary>\r\n        /// Initializes a new instance of the ");
-#line 88 "AzureServiceClientTemplate.cshtml"
+#line 89 "AzureServiceClientTemplate.cshtml"
                                          Write(Model.Name);
 
 #line default
@@ -307,7 +313,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
         /// client pipeline.
         /// </param>
         public ");
-#line 97 "AzureServiceClientTemplate.cshtml"
+#line 98 "AzureServiceClientTemplate.cshtml"
            Write(Model.Name);
 
 #line default
@@ -315,13 +321,13 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
             WriteLiteral("(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootH" +
 "andler, handlers)\r\n        {\r\n            this.Initialize();\r\n        }\r\n       " +
 " ");
-#line 101 "AzureServiceClientTemplate.cshtml"
+#line 102 "AzureServiceClientTemplate.cshtml"
    Write(EmptyLine);
 
 #line default
 #line hidden
             WriteLiteral("\r\n\r\n        /// <summary>\r\n        /// Initializes a new instance of the ");
-#line 104 "AzureServiceClientTemplate.cshtml"
+#line 105 "AzureServiceClientTemplate.cshtml"
                                          Write(Model.Name);
 
 #line default
@@ -336,7 +342,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
         /// client pipeline.
         /// </param>
         public ");
-#line 113 "AzureServiceClientTemplate.cshtml"
+#line 114 "AzureServiceClientTemplate.cshtml"
            Write(Model.Name);
 
 #line default
@@ -350,32 +356,32 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
             this.BaseUri = baseUri;
         }
         ");
-#line 121 "AzureServiceClientTemplate.cshtml"
+#line 122 "AzureServiceClientTemplate.cshtml"
    Write(EmptyLine);
 
 #line default
 #line hidden
             WriteLiteral("\r\n\r\n");
-#line 123 "AzureServiceClientTemplate.cshtml"
+#line 124 "AzureServiceClientTemplate.cshtml"
         
 
 #line default
 #line hidden
 
-#line 123 "AzureServiceClientTemplate.cshtml"
-          var parameters = Model.Properties.Where(p => p.IsRequired);
+#line 124 "AzureServiceClientTemplate.cshtml"
+          var parameters = Model.Properties.Where(p => p.IsRequired && p.IsReadOnly);
 
 #line default
 #line hidden
 
             WriteLiteral("\r\n");
-#line 124 "AzureServiceClientTemplate.cshtml"
+#line 125 "AzureServiceClientTemplate.cshtml"
         
 
 #line default
 #line hidden
 
-#line 124 "AzureServiceClientTemplate.cshtml"
+#line 125 "AzureServiceClientTemplate.cshtml"
          if (parameters.Any())
         {
 
@@ -383,13 +389,13 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line hidden
 
             WriteLiteral("        /// <summary>\r\n        /// Initializes a new instance of the ");
-#line 127 "AzureServiceClientTemplate.cshtml"
+#line 128 "AzureServiceClientTemplate.cshtml"
                                            Write(Model.Name);
 
 #line default
 #line hidden
             WriteLiteral(" class.\r\n        /// </summary>\r\n");
-#line 129 "AzureServiceClientTemplate.cshtml"
+#line 130 "AzureServiceClientTemplate.cshtml"
         foreach (var param in parameters)
         {
 
@@ -397,19 +403,19 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line hidden
 
             WriteLiteral("        /// <param name=\'");
-#line 131 "AzureServiceClientTemplate.cshtml"
+#line 132 "AzureServiceClientTemplate.cshtml"
                        Write(param.Name.ToCamelCase());
 
 #line default
 #line hidden
             WriteLiteral("\'>\r\n        /// Required. ");
-#line 132 "AzureServiceClientTemplate.cshtml"
+#line 133 "AzureServiceClientTemplate.cshtml"
                     Write(param.Documentation);
 
 #line default
 #line hidden
             WriteLiteral("\r\n        /// </param>\r\n");
-#line 134 "AzureServiceClientTemplate.cshtml"
+#line 135 "AzureServiceClientTemplate.cshtml"
         }
 
 #line default
@@ -418,19 +424,19 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
             WriteLiteral("        /// <param name=\'handlers\'>\r\n        /// Optional. The set of delegating " +
 "handlers to insert in the http\r\n        /// client pipeline.\r\n        /// </para" +
 "m>\r\n        public ");
-#line 139 "AzureServiceClientTemplate.cshtml"
+#line 140 "AzureServiceClientTemplate.cshtml"
              Write(Model.Name);
 
 #line default
 #line hidden
             WriteLiteral("(");
-#line 139 "AzureServiceClientTemplate.cshtml"
+#line 140 "AzureServiceClientTemplate.cshtml"
                            Write(Model.RequiredConstructorParameters);
 
 #line default
 #line hidden
             WriteLiteral(", params DelegatingHandler[] handlers) : this(handlers)\r\n        {\r\n");
-#line 141 "AzureServiceClientTemplate.cshtml"
+#line 142 "AzureServiceClientTemplate.cshtml"
         foreach (var param in parameters)
         {
 
@@ -438,19 +444,19 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line hidden
 
             WriteLiteral("            if (");
-#line 143 "AzureServiceClientTemplate.cshtml"
+#line 144 "AzureServiceClientTemplate.cshtml"
               Write(param.Name.ToCamelCase());
 
 #line default
 #line hidden
             WriteLiteral(" == null)\r\n            {\r\n                throw new ArgumentNullException(\"");
-#line 145 "AzureServiceClientTemplate.cshtml"
+#line 146 "AzureServiceClientTemplate.cshtml"
                                                Write(param.Name.ToCamelCase());
 
 #line default
 #line hidden
             WriteLiteral("\");\r\n            }\r\n");
-#line 147 "AzureServiceClientTemplate.cshtml"
+#line 148 "AzureServiceClientTemplate.cshtml"
         }
         foreach (var param in parameters)
         {
@@ -459,46 +465,46 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line hidden
 
             WriteLiteral("            this.");
-#line 150 "AzureServiceClientTemplate.cshtml"
+#line 151 "AzureServiceClientTemplate.cshtml"
                Write(param.Name);
 
 #line default
 #line hidden
             WriteLiteral(" = ");
-#line 150 "AzureServiceClientTemplate.cshtml"
+#line 151 "AzureServiceClientTemplate.cshtml"
                                Write(param.Name.ToCamelCase());
 
 #line default
 #line hidden
             WriteLiteral(";\r\n");
-#line 151 "AzureServiceClientTemplate.cshtml"
+#line 152 "AzureServiceClientTemplate.cshtml"
         }
 
 #line default
 #line hidden
 
             WriteLiteral("        }\r\n        ");
-#line 153 "AzureServiceClientTemplate.cshtml"
+#line 154 "AzureServiceClientTemplate.cshtml"
      Write(EmptyLine);
 
 #line default
 #line hidden
             WriteLiteral("\r\n");
-#line 154 "AzureServiceClientTemplate.cshtml"
+#line 155 "AzureServiceClientTemplate.cshtml"
 
 
 #line default
 #line hidden
 
             WriteLiteral("        /// <summary>\r\n        /// Initializes a new instance of the ");
-#line 156 "AzureServiceClientTemplate.cshtml"
+#line 157 "AzureServiceClientTemplate.cshtml"
                                            Write(Model.Name);
 
 #line default
 #line hidden
             WriteLiteral(" class.\r\n        /// </summary>\r\n        /// <param name=\'baseUri\'>\r\n        /// " +
 "Optional. The base URI of the service.\r\n        /// </param>\r\n");
-#line 161 "AzureServiceClientTemplate.cshtml"
+#line 162 "AzureServiceClientTemplate.cshtml"
         foreach (var param in parameters)
         {
 
@@ -506,19 +512,19 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line hidden
 
             WriteLiteral("        /// <param name=\'");
-#line 163 "AzureServiceClientTemplate.cshtml"
+#line 164 "AzureServiceClientTemplate.cshtml"
                        Write(param.Name.ToCamelCase());
 
 #line default
 #line hidden
             WriteLiteral("\'>\r\n        /// Required. ");
-#line 164 "AzureServiceClientTemplate.cshtml"
+#line 165 "AzureServiceClientTemplate.cshtml"
                     Write(param.Documentation);
 
 #line default
 #line hidden
             WriteLiteral("\r\n        /// </param>\r\n");
-#line 166 "AzureServiceClientTemplate.cshtml"
+#line 167 "AzureServiceClientTemplate.cshtml"
         }
 
 #line default
@@ -527,13 +533,13 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
             WriteLiteral("        /// <param name=\'handlers\'>\r\n        /// Optional. The set of delegating " +
 "handlers to insert in the http\r\n        /// client pipeline.\r\n        /// </para" +
 "m>\r\n        public ");
-#line 171 "AzureServiceClientTemplate.cshtml"
+#line 172 "AzureServiceClientTemplate.cshtml"
              Write(Model.Name);
 
 #line default
 #line hidden
             WriteLiteral("(Uri baseUri, ");
-#line 171 "AzureServiceClientTemplate.cshtml"
+#line 172 "AzureServiceClientTemplate.cshtml"
                                         Write(Model.RequiredConstructorParameters);
 
 #line default
@@ -541,7 +547,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
             WriteLiteral(", params DelegatingHandler[] handlers) : this(handlers)\r\n        {\r\n            i" +
 "f (baseUri == null)\r\n            {\r\n                throw new ArgumentNullExcept" +
 "ion(\"baseUri\");\r\n            }\r\n");
-#line 177 "AzureServiceClientTemplate.cshtml"
+#line 178 "AzureServiceClientTemplate.cshtml"
         foreach (var param in parameters)
         {
 
@@ -549,26 +555,26 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line hidden
 
             WriteLiteral("            if (");
-#line 179 "AzureServiceClientTemplate.cshtml"
+#line 180 "AzureServiceClientTemplate.cshtml"
               Write(param.Name.ToCamelCase());
 
 #line default
 #line hidden
             WriteLiteral(" == null)\r\n            {\r\n                throw new ArgumentNullException(\"");
-#line 181 "AzureServiceClientTemplate.cshtml"
+#line 182 "AzureServiceClientTemplate.cshtml"
                                                Write(param.Name.ToCamelCase());
 
 #line default
 #line hidden
             WriteLiteral("\");\r\n            }\r\n");
-#line 183 "AzureServiceClientTemplate.cshtml"
+#line 184 "AzureServiceClientTemplate.cshtml"
         }
 
 #line default
 #line hidden
 
             WriteLiteral("            this.BaseUri = baseUri;\r\n");
-#line 185 "AzureServiceClientTemplate.cshtml"
+#line 186 "AzureServiceClientTemplate.cshtml"
         foreach (var param in parameters)
         {
 
@@ -576,32 +582,32 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line hidden
 
             WriteLiteral("            this.");
-#line 187 "AzureServiceClientTemplate.cshtml"
+#line 188 "AzureServiceClientTemplate.cshtml"
                Write(param.Name);
 
 #line default
 #line hidden
             WriteLiteral(" = ");
-#line 187 "AzureServiceClientTemplate.cshtml"
+#line 188 "AzureServiceClientTemplate.cshtml"
                                Write(param.Name.ToCamelCase());
 
 #line default
 #line hidden
             WriteLiteral(";\r\n");
-#line 188 "AzureServiceClientTemplate.cshtml"
+#line 189 "AzureServiceClientTemplate.cshtml"
         }
 
 #line default
 #line hidden
 
             WriteLiteral("        }\r\n        ");
-#line 190 "AzureServiceClientTemplate.cshtml"
+#line 191 "AzureServiceClientTemplate.cshtml"
      Write(EmptyLine);
 
 #line default
 #line hidden
             WriteLiteral("\r\n");
-#line 191 "AzureServiceClientTemplate.cshtml"
+#line 192 "AzureServiceClientTemplate.cshtml"
         }
 
 #line default
@@ -609,13 +615,13 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
             WriteLiteral("    \r\n        /// <summary>\r\n        /// Initializes client properties.\r\n        " +
 "/// </summary>\r\n        private void Initialize()\r\n        {\r\n");
-#line 198 "AzureServiceClientTemplate.cshtml"
+#line 199 "AzureServiceClientTemplate.cshtml"
         
 
 #line default
 #line hidden
 
-#line 198 "AzureServiceClientTemplate.cshtml"
+#line 199 "AzureServiceClientTemplate.cshtml"
          foreach (var operation in Model.Operations) 
         {
 
@@ -623,38 +629,38 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line hidden
 
             WriteLiteral("            this.");
-#line 200 "AzureServiceClientTemplate.cshtml"
+#line 201 "AzureServiceClientTemplate.cshtml"
                Write(operation.MethodGroupName);
 
 #line default
 #line hidden
             WriteLiteral(" = new ");
-#line 200 "AzureServiceClientTemplate.cshtml"
+#line 201 "AzureServiceClientTemplate.cshtml"
                                                   Write(operation.MethodGroupType);
 
 #line default
 #line hidden
             WriteLiteral("(this);\r\n");
-#line 201 "AzureServiceClientTemplate.cshtml"
+#line 202 "AzureServiceClientTemplate.cshtml"
         }
 
 #line default
 #line hidden
 
             WriteLiteral("            this.BaseUri = new Uri(\"");
-#line 202 "AzureServiceClientTemplate.cshtml"
+#line 203 "AzureServiceClientTemplate.cshtml"
                                Write(Model.BaseUrl);
 
 #line default
 #line hidden
             WriteLiteral("\");\r\n");
-#line 203 "AzureServiceClientTemplate.cshtml"
+#line 204 "AzureServiceClientTemplate.cshtml"
         
 
 #line default
 #line hidden
 
-#line 203 "AzureServiceClientTemplate.cshtml"
+#line 204 "AzureServiceClientTemplate.cshtml"
          foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
         {
 
@@ -662,19 +668,42 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line hidden
 
             WriteLiteral("            this.");
-#line 205 "AzureServiceClientTemplate.cshtml"
+#line 206 "AzureServiceClientTemplate.cshtml"
                Write(property.Name);
 
 #line default
 #line hidden
             WriteLiteral(" = ");
-#line 205 "AzureServiceClientTemplate.cshtml"
+#line 206 "AzureServiceClientTemplate.cshtml"
                                   Write(property.DefaultValue);
 
 #line default
 #line hidden
             WriteLiteral(";\r\n");
-#line 206 "AzureServiceClientTemplate.cshtml"
+#line 207 "AzureServiceClientTemplate.cshtml"
+        }
+
+#line default
+#line hidden
+
+            WriteLiteral("\r\n");
+#line 209 "AzureServiceClientTemplate.cshtml"
+        
+
+#line default
+#line hidden
+
+#line 209 "AzureServiceClientTemplate.cshtml"
+         if (Model.Properties.Any(p => "Credentials".Equals(p.Name, StringComparison.OrdinalIgnoreCase) &&
+            "SubscriptionCloudCredentials".Equals(p.Type.Name, StringComparison.OrdinalIgnoreCase)))
+        {
+
+#line default
+#line hidden
+
+            WriteLiteral("            if (this.Credentials != null)\r\n            {\r\n                this.Cr" +
+"edentials.InitializeServiceClient(this);\r\n            }\r\n");
+#line 216 "AzureServiceClientTemplate.cshtml"
         }
 
 #line default
@@ -698,13 +727,13 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
                 ContractResolver = new ReadOnlyJsonContractResolver()
             };
 ");
-#line 224 "AzureServiceClientTemplate.cshtml"
+#line 234 "AzureServiceClientTemplate.cshtml"
             
 
 #line default
 #line hidden
 
-#line 224 "AzureServiceClientTemplate.cshtml"
+#line 234 "AzureServiceClientTemplate.cshtml"
              foreach (var polymorphicType in Model.ModelTypes.Where(t => t.PolymorphicDiscriminator != null))
             {
 
@@ -713,32 +742,32 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
             WriteLiteral("            SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConv" +
 "erter<");
-#line 226 "AzureServiceClientTemplate.cshtml"
+#line 236 "AzureServiceClientTemplate.cshtml"
                                                                                      Write(polymorphicType.Name);
 
 #line default
 #line hidden
             WriteLiteral(">(\"");
-#line 226 "AzureServiceClientTemplate.cshtml"
+#line 236 "AzureServiceClientTemplate.cshtml"
                                                                                                                Write(polymorphicType.PolymorphicDiscriminator);
 
 #line default
 #line hidden
             WriteLiteral("\"));\r\n            DeserializationSettings.Converters.Add(new PolymorphicDeseriali" +
 "zeJsonConverter<");
-#line 227 "AzureServiceClientTemplate.cshtml"
+#line 237 "AzureServiceClientTemplate.cshtml"
                                                                                          Write(polymorphicType.Name);
 
 #line default
 #line hidden
             WriteLiteral(">(\"");
-#line 227 "AzureServiceClientTemplate.cshtml"
+#line 237 "AzureServiceClientTemplate.cshtml"
                                                                                                                    Write(polymorphicType.PolymorphicDiscriminator);
 
 #line default
 #line hidden
             WriteLiteral("\"));\r\n");
-#line 228 "AzureServiceClientTemplate.cshtml"
+#line 238 "AzureServiceClientTemplate.cshtml"
             }
 
 #line default
@@ -747,13 +776,13 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
             WriteLiteral("            DeserializationSettings.Converters.Add(new ResourceJsonConverter()); " +
 "\r\n            DeserializationSettings.Converters.Add(new CloudErrorJsonConverter" +
 "()); \r\n        }    \r\n    \r\n");
-#line 233 "AzureServiceClientTemplate.cshtml"
+#line 243 "AzureServiceClientTemplate.cshtml"
         
 
 #line default
 #line hidden
 
-#line 233 "AzureServiceClientTemplate.cshtml"
+#line 243 "AzureServiceClientTemplate.cshtml"
          foreach (var method in Model.MethodTemplateModels)
         {
 
@@ -761,31 +790,31 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line hidden
 
             WriteLiteral("        ");
-#line 235 "AzureServiceClientTemplate.cshtml"
+#line 245 "AzureServiceClientTemplate.cshtml"
       Write(Include(new AzureMethodTemplate(), (AzureMethodTemplateModel)method));
 
 #line default
 #line hidden
             WriteLiteral("\r\n");
-#line 236 "AzureServiceClientTemplate.cshtml"
+#line 246 "AzureServiceClientTemplate.cshtml"
         
 
 #line default
 #line hidden
 
-#line 236 "AzureServiceClientTemplate.cshtml"
+#line 246 "AzureServiceClientTemplate.cshtml"
    Write(EmptyLine);
 
 #line default
 #line hidden
-#line 236 "AzureServiceClientTemplate.cshtml"
+#line 246 "AzureServiceClientTemplate.cshtml"
                   
 
 #line default
 #line hidden
 
             WriteLiteral("        \r\n");
-#line 238 "AzureServiceClientTemplate.cshtml"
+#line 248 "AzureServiceClientTemplate.cshtml"
         }
 
 #line default
