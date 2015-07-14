@@ -5,6 +5,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
     using System.Net.Http;
     using System.Threading;
     using System.Threading.Tasks;
+    using Newtonsoft.Json;
     using Microsoft.Rest;
     using Microsoft.Azure;
     using Models;
@@ -19,7 +20,29 @@ namespace Fixtures.Azure.SwaggerBatPaging
         /// </summary>
         Uri BaseUri { get; set; }
 
+        /// <summary>
+        /// Gets or sets json serialization settings.
+        /// </summary>
+        JsonSerializerSettings SerializationSettings { get; }
+
+        /// <summary>
+        /// Gets or sets json deserialization settings.
+        /// </summary>
+        JsonSerializerSettings DeserializationSettings { get; }        
+
+        /// <summary>
+        /// Subscription credentials which uniquely identify Microsoft Azure
+        /// subscription.
+        /// </summary>
+        SubscriptionCloudCredentials Credentials { get; }
+
+        /// <summary>
+        /// The retry timeout for Long Running Operations.
+        /// </summary>
+        int? LongRunningOperationRetryTimeout { get; set; }
+
+
         IPagingOperations Paging { get; }
 
-        }
+    }
 }

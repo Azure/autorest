@@ -8,7 +8,9 @@ namespace @Settings.Namespace
     using System.Net.Http;
     using System.Threading;
     using System.Threading.Tasks;
+    using Newtonsoft.Json;
     using Microsoft.Rest;
+
 @foreach (var usingString in Model.Usings) {
 @:    using @usingString;
 }
@@ -22,6 +24,29 @@ namespace @Settings.Namespace
         /// The base URI of the service.
         /// </summary>
         Uri BaseUri { get; set; }
+        @EmptyLine
+
+        /// <summary>
+        /// Gets or sets json serialization settings.
+        /// </summary>
+        JsonSerializerSettings SerializationSettings { get; }
+        @EmptyLine
+
+        /// <summary>
+        /// Gets or sets json deserialization settings.
+        /// </summary>
+        JsonSerializerSettings DeserializationSettings { get; }        
+        @EmptyLine
+        
+        @foreach (var property in Model.Properties)
+        {
+        @:/// <summary>
+        @:@WrapComment("/// ", property.Documentation.EscapeXmlComment())
+        @:/// </summary>
+        @:@property.Type @property.Name { get;@(property.IsReadOnly ? "" : " set;") }
+        @EmptyLine
+        }
+
         @EmptyLine
     @foreach(var operation in Model.Operations)
     {
@@ -52,5 +77,6 @@ namespace @Settings.Namespace
         @EmptyLine
         @:
     }
+
     }
 }
