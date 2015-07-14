@@ -106,7 +106,7 @@ module ClientRuntimeAzure
               update_state_from_location_header_on_post_or_delete(polling_state, custom_headers, custom_deserialization_block)
             else
               task.shutdown
-              CloudError.new
+              fail CloudError
             end
 
             if (AsyncOperationStatus.is_terminal_status(polling_state.status))
