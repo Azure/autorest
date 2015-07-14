@@ -11,7 +11,10 @@ describe 'Azure Special properties behaviour' do
     @validApiVersion = "2.0"
     @unencodedPath = "path1/path2/path3"
     @unencodedQuery = "value1&q2=value2&q3=value3"
-    @client = AutoRestAzureSpecialParametersTestClient.new(@base_url, TokenCloudCredentials.new(@validSubscription, SecureRandom.uuid))
+    @dummyToken = 'dummy12321343423'
+
+    credentials = ClientRuntimeAzure::TokenCloudCredentials.new(@validSubscription, @dummyToken)
+    @client = AutoRestAzureSpecialParametersTestClient.new(credentials, @base_url)
   end
   # Subscription Tests
   it 'should use post parameter from credentials if ms-global not provided' do
@@ -31,7 +34,8 @@ describe 'Azure Special properties behaviour' do
     expect(result).to be_an_instance_of(Net::HTTPOK)
   end
   it 'should throw exception if ms-global parameter is nil' do
-    expect{ AutoRestAzureSpecialParametersTestClient.new(@base_url, TokenCloudCredentials.new(nil, SecureRandom.uuid)) }.to raise_exception(ArgumentError)
+    credentials = ClientRuntimeAzure::TokenCloudCredentials.new(nil, @dummyToken)
+    expect{ AutoRestAzureSpecialParametersTestClient.new(credentials, @base_url) }.to raise_exception(ArgumentError)
   end
   it 'should use post parameter from path for method parameter if ms-global false' do
     result = @client.subscription_in_method.post_method_local_valid(@validSubscription).value!.response
@@ -46,8 +50,9 @@ describe 'Azure Special properties behaviour' do
     expect(result).to be_an_instance_of(Net::HTTPOK)
   end
   it 'should throw an exception if no post parameter if ms-global false' do
-    expect{ @client.subscription_in_method.post_method_local_null(nil).value!.response }.to raise_exception(ValidationException)
-    expect(result).to be_an_instance_of(Net::HTTPOK)
+    expect{
+      @client.subscription_in_method.post_method_local_null(nil).value!.response
+    }.to raise_exception(ClientRuntimeAzure::ValidationException)
   end
   # ApiVersion Tests
   it 'should use get parameter from credentials if ms-global not provided' do

@@ -42,7 +42,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby.Tests
             Test("azure_url_spec.rb", "subscriptionId-apiVersion.json", "AzureURL");
         }
 
-        [Fact(Skip = "not implemented")]
+        [Fact]
         public void AzureSpecialPropertiesTests()
         {
             Test("azure_special_properties_spec.rb", "azure-special-properties.json", "AzureSpecialProperties");
