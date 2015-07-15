@@ -643,11 +643,12 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         [Fact]
         public void XmsRequestClientIdTest()
         {
+            var validSubscription = "1234-5678-9012-3456";
             var validClientId = "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0";
             using (
                 var client = new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
-                    new TokenCloudCredentials(Guid.NewGuid().ToString(), Guid.NewGuid().ToString())) 
-                    { SubscriptionId = Guid.NewGuid().ToString() })
+                    new TokenCloudCredentials(validSubscription, Guid.NewGuid().ToString())) 
+                    { SubscriptionId = validSubscription })
             {
                 Dictionary<string, List<string>> customHeaders = new Dictionary<string, List<string>>();
                 customHeaders["x-ms-client-request-id"] = new List<string> { validClientId };
