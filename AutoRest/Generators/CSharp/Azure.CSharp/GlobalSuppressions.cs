@@ -27,3 +27,5 @@
     MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)", Scope = "member", 
     Target = "Microsoft.Rest.Generator.CSharp.Azure.AzureMethodTemplateModel.#ReplaceSubscriptionIdInUri(System.String,Microsoft.Rest.Generator.Utilities.IndentedStringBuilder)", 
     Justification="Literal string is generated code.")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)", Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.Azure.AzureMethodTemplateModel.#SetDefaultHeaders",
+    Justification = "Required for Azure customization.")]

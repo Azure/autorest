@@ -159,7 +159,11 @@ namespace Fixtures.PetstoreV2
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -254,7 +258,11 @@ namespace Fixtures.PetstoreV2
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -349,7 +357,11 @@ namespace Fixtures.PetstoreV2
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -447,7 +459,11 @@ namespace Fixtures.PetstoreV2
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -536,7 +552,11 @@ namespace Fixtures.PetstoreV2
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -632,7 +652,11 @@ namespace Fixtures.PetstoreV2
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -715,13 +739,21 @@ namespace Fixtures.PetstoreV2
             // Set Headers
             if (apiKey != null)
             {
-                httpRequest.Headers.Add("api_key", apiKey);
+                if (httpRequest.Headers.Contains("api_key"))
+                {
+                    httpRequest.Headers.Remove("api_key");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("api_key", apiKey);
             }
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -795,7 +827,11 @@ namespace Fixtures.PetstoreV2
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -882,7 +918,11 @@ namespace Fixtures.PetstoreV2
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -976,7 +1016,11 @@ namespace Fixtures.PetstoreV2
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -1066,7 +1110,11 @@ namespace Fixtures.PetstoreV2
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -1148,7 +1196,11 @@ namespace Fixtures.PetstoreV2
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -1233,7 +1285,11 @@ namespace Fixtures.PetstoreV2
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -1318,7 +1374,11 @@ namespace Fixtures.PetstoreV2
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -1424,7 +1484,11 @@ namespace Fixtures.PetstoreV2
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -1503,7 +1567,11 @@ namespace Fixtures.PetstoreV2
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -1585,7 +1653,11 @@ namespace Fixtures.PetstoreV2
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -1682,7 +1754,11 @@ namespace Fixtures.PetstoreV2
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -1769,7 +1845,11 @@ namespace Fixtures.PetstoreV2
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 

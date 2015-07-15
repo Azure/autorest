@@ -11,20 +11,21 @@ var models = require('../models');
 
 /**
  * @class
- * HttpSuccess
+ * XMsClientRequestId
  * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestHeadTestService.
- * Initializes a new instance of the HttpSuccess class.
+ * instance of the AutoRestAzureSpecialParametersTestClient.
+ * Initializes a new instance of the XMsClientRequestId class.
  * @constructor
  *
- * @param {AutoRestHeadTestService} client Reference to the service client.
+ * @param {AutoRestAzureSpecialParametersTestClient} client Reference to the service client.
  */
-function HttpSuccess(client) {
+function XMsClientRequestId(client) {
   this.client = client;
 }
 
 /**
- * Return 204 status code if successful
+ * Get method that overwrites x-ms-client-request header with value
+ * 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -34,7 +35,7 @@ function HttpSuccess(client) {
  *
  * @returns {Stream} The Response stream
  */
-HttpSuccess.prototype.head204 = function (options, callback) {
+XMsClientRequestId.prototype.get = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -46,7 +47,7 @@ HttpSuccess.prototype.head204 = function (options, callback) {
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//http/success/204';
+                   '//azurespecials/overwrite/x-ms-client-request-id/method/';
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
@@ -57,7 +58,7 @@ HttpSuccess.prototype.head204 = function (options, callback) {
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
-  httpRequest.method = 'HEAD';
+  httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
@@ -78,7 +79,7 @@ HttpSuccess.prototype.head204 = function (options, callback) {
       return callback(err);
     }
     var statusCode = response.statusCode;
-    if (statusCode !== 204 && statusCode !== 404) {
+    if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = httpRequest;
@@ -89,7 +90,7 @@ HttpSuccess.prototype.head204 = function (options, callback) {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
         if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+          error.body = client._models['ErrorModel'].deserialize(error.body);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -102,14 +103,16 @@ HttpSuccess.prototype.head204 = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.body = (statusCode === 204);
 
     return callback(null, result);
   });
 };
 
 /**
- * Return 404 status code if successful
+ * Get method that overwrites x-ms-client-request header with value
+ * 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+ * @param {String} [xMsClientRequestId] This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -119,7 +122,7 @@ HttpSuccess.prototype.head204 = function (options, callback) {
  *
  * @returns {Stream} The Response stream
  */
-HttpSuccess.prototype.head404 = function (options, callback) {
+XMsClientRequestId.prototype.paramGet = function (xMsClientRequestId, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -128,10 +131,21 @@ HttpSuccess.prototype.head404 = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (xMsClientRequestId === null || xMsClientRequestId === undefined) {
+      throw new Error('\'xMsClientRequestId\' cannot be null');
+    }
+    if (xMsClientRequestId !== null && xMsClientRequestId !== undefined && typeof xMsClientRequestId !== 'string') {
+      throw new Error('xMsClientRequestId must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//http/success/404';
+                   '//azurespecials/overwrite/x-ms-client-request-id/via-param/method/';
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
@@ -142,11 +156,14 @@ HttpSuccess.prototype.head404 = function (options, callback) {
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
-  httpRequest.method = 'HEAD';
+  httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (xMsClientRequestId !== null) {
+    httpRequest.headers['x-ms-client-request-id'] = xMsClientRequestId;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -163,7 +180,7 @@ HttpSuccess.prototype.head404 = function (options, callback) {
       return callback(err);
     }
     var statusCode = response.statusCode;
-    if (statusCode !== 204 && statusCode !== 404) {
+    if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = httpRequest;
@@ -174,7 +191,7 @@ HttpSuccess.prototype.head404 = function (options, callback) {
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
         if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+          error.body = client._models['ErrorModel'].deserialize(error.body);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -187,11 +204,10 @@ HttpSuccess.prototype.head404 = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.body = (statusCode === 204);
 
     return callback(null, result);
   });
 };
 
 
-module.exports = HttpSuccess;
+module.exports = XMsClientRequestId;

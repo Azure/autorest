@@ -126,12 +126,7 @@ LRORetrys.prototype.beginPut201CreatingSucceeded200 = function (product, options
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  // Serialize Request
-  var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(product));
-  httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -139,6 +134,12 @@ LRORetrys.prototype.beginPut201CreatingSucceeded200 = function (product, options
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  // Serialize Request
+  var requestContent = null;
+  requestContent = JSON.stringify(msRest.serializeObject(product));
+  httpRequest.body = requestContent;
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -245,9 +246,7 @@ LRORetrys.prototype.getRetry201CreatingSucceeded200Polling = function (options, 
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -255,6 +254,9 @@ LRORetrys.prototype.getRetry201CreatingSucceeded200Polling = function (options, 
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -409,12 +411,7 @@ LRORetrys.prototype.beginPutAsyncRelativeRetrySucceeded = function (product, opt
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  // Serialize Request
-  var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(product));
-  httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -422,6 +419,12 @@ LRORetrys.prototype.beginPutAsyncRelativeRetrySucceeded = function (product, opt
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  // Serialize Request
+  var requestContent = null;
+  requestContent = JSON.stringify(msRest.serializeObject(product));
+  httpRequest.body = requestContent;
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -514,9 +517,7 @@ LRORetrys.prototype.getAsyncRelativeRetrySucceeded = function (options, callback
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -524,6 +525,9 @@ LRORetrys.prototype.getAsyncRelativeRetrySucceeded = function (options, callback
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -644,9 +648,7 @@ LRORetrys.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (o
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -654,6 +656,9 @@ LRORetrys.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (o
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -788,9 +793,7 @@ LRORetrys.prototype.beginDelete202Retry200 = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -798,6 +801,9 @@ LRORetrys.prototype.beginDelete202Retry200 = function (options, callback) {
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -900,9 +906,7 @@ LRORetrys.prototype.beginDeleteAsyncRelativeRetrySucceeded = function (options, 
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -910,6 +914,9 @@ LRORetrys.prototype.beginDeleteAsyncRelativeRetrySucceeded = function (options, 
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1036,12 +1043,7 @@ LRORetrys.prototype.beginPost202Retry200 = function (product, options, callback)
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  // Serialize Request
-  var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(product));
-  httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -1049,6 +1051,12 @@ LRORetrys.prototype.beginPost202Retry200 = function (product, options, callback)
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  // Serialize Request
+  var requestContent = null;
+  requestContent = JSON.stringify(msRest.serializeObject(product));
+  httpRequest.body = requestContent;
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1177,12 +1185,7 @@ LRORetrys.prototype.beginPostAsyncRelativeRetrySucceeded = function (product, op
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  // Serialize Request
-  var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(product));
-  httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -1190,6 +1193,12 @@ LRORetrys.prototype.beginPostAsyncRelativeRetrySucceeded = function (product, op
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  // Serialize Request
+  var requestContent = null;
+  requestContent = JSON.stringify(msRest.serializeObject(product));
+  httpRequest.body = requestContent;
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

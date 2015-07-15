@@ -145,5 +145,23 @@ describe('nodejs', function () {
       });
     });
 
+    it('should overwrite x-ms-client-request-id', function (done) {
+      var validClientId = '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0';
+      testClient.xMsClientRequestId.paramGet(validClientId, function (error, result) {
+        should.not.exist(error);
+        result.response.statusCode.should.equal(200);
+        var options = {
+          customHeaders: {
+            'x-ms-client-request-id': validClientId
+          }
+        }; 
+        testClient.xMsClientRequestId.get(options, function (error, result) {
+          should.not.exist(error);
+          result.response.statusCode.should.equal(200);
+          done();
+        });
+      });
+    });
+
   });
 });

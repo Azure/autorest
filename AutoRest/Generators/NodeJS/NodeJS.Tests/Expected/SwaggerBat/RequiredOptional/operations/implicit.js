@@ -70,9 +70,6 @@ Implicit.prototype.getRequiredPath = function (pathParameter, options, callback)
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -80,6 +77,9 @@ Implicit.prototype.getRequiredPath = function (pathParameter, options, callback)
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -179,9 +179,6 @@ Implicit.prototype.putOptionalQuery = function (queryParameter, options, callbac
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -189,6 +186,9 @@ Implicit.prototype.putOptionalQuery = function (queryParameter, options, callbac
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -271,9 +271,6 @@ Implicit.prototype.putOptionalHeader = function (queryParameter, options, callba
   if (queryParameter !== null) {
     httpRequest.headers['queryParameter'] = queryParameter;
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -281,6 +278,9 @@ Implicit.prototype.putOptionalHeader = function (queryParameter, options, callba
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -360,12 +360,6 @@ Implicit.prototype.putOptionalBody = function (bodyParameter, options, callback)
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  // Serialize Request
-  var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
-  httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -373,6 +367,12 @@ Implicit.prototype.putOptionalBody = function (bodyParameter, options, callback)
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  // Serialize Request
+  var requestContent = null;
+  requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
+  httpRequest.body = requestContent;
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -454,9 +454,6 @@ Implicit.prototype.getRequiredGlobalPath = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -464,6 +461,9 @@ Implicit.prototype.getRequiredGlobalPath = function (options, callback) {
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -562,9 +562,6 @@ Implicit.prototype.getRequiredGlobalQuery = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -572,6 +569,9 @@ Implicit.prototype.getRequiredGlobalQuery = function (options, callback) {
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -669,9 +669,6 @@ Implicit.prototype.getOptionalGlobalQuery = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -679,6 +676,9 @@ Implicit.prototype.getOptionalGlobalQuery = function (options, callback) {
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

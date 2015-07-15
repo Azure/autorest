@@ -90,11 +90,16 @@ namespace Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 

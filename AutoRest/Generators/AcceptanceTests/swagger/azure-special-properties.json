@@ -12,6 +12,55 @@
   "produces": [ "application/json" ],
   "consumes": [ "application/json" ],
   "paths": {
+    "/azurespecials/overwrite/x-ms-client-request-id/method/": {
+      "get": {
+        "operationId": "x-ms-client-request-id_Get",
+        "description": "Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+        "tags": [
+          "SubscriptionInCredentials Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0' x-ms-client-request header"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/azurespecials/overwrite/x-ms-client-request-id/via-param/method/": {
+      "get": {
+        "operationId": "x-ms-client-request-id_ParamGet",
+        "description": "Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+        "tags": [
+          "SubscriptionInCredentials Operations"
+        ],
+        "parameters": [
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0' x-ms-client-request header"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/azurespecials/subscriptionId/method/string/none/path/global/1234-5678-9012-3456/{subscriptionId}": {
       "post": {
         "operationId": "subscriptionInCredentials_postMethodGlobalValid",

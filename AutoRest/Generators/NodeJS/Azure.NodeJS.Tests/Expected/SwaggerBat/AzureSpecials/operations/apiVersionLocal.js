@@ -76,9 +76,7 @@ ApiVersionLocal.prototype.getMethodLocalValid = function (apiVersion, options, c
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -86,6 +84,9 @@ ApiVersionLocal.prototype.getMethodLocalValid = function (apiVersion, options, c
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -173,9 +174,7 @@ ApiVersionLocal.prototype.getMethodLocalNull = function (apiVersion, options, ca
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -183,6 +182,9 @@ ApiVersionLocal.prototype.getMethodLocalNull = function (apiVersion, options, ca
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -271,9 +273,7 @@ ApiVersionLocal.prototype.getPathLocalValid = function (apiVersion, options, cal
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -281,6 +281,9 @@ ApiVersionLocal.prototype.getPathLocalValid = function (apiVersion, options, cal
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -369,9 +372,7 @@ ApiVersionLocal.prototype.getSwaggerLocalValid = function (apiVersion, options, 
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -379,6 +380,9 @@ ApiVersionLocal.prototype.getSwaggerLocalValid = function (apiVersion, options, 
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

@@ -56,9 +56,6 @@ Datetime.prototype.getNull = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -66,6 +63,9 @@ Datetime.prototype.getNull = function (options, callback) {
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -151,9 +151,6 @@ Datetime.prototype.getInvalid = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -161,6 +158,9 @@ Datetime.prototype.getInvalid = function (options, callback) {
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -246,9 +246,6 @@ Datetime.prototype.getOverflow = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -256,6 +253,9 @@ Datetime.prototype.getOverflow = function (options, callback) {
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -341,9 +341,6 @@ Datetime.prototype.getUnderflow = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -351,6 +348,9 @@ Datetime.prototype.getUnderflow = function (options, callback) {
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -451,12 +451,6 @@ Datetime.prototype.putUtcMaxDateTime = function (datetimeBody, options, callback
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  // Serialize Request
-  var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(datetimeBody));
-  httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -464,6 +458,12 @@ Datetime.prototype.putUtcMaxDateTime = function (datetimeBody, options, callback
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  // Serialize Request
+  var requestContent = null;
+  requestContent = JSON.stringify(msRest.serializeObject(datetimeBody));
+  httpRequest.body = requestContent;
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -533,9 +533,6 @@ Datetime.prototype.getUtcLowercaseMaxDateTime = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -543,6 +540,9 @@ Datetime.prototype.getUtcLowercaseMaxDateTime = function (options, callback) {
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -628,9 +628,6 @@ Datetime.prototype.getUtcUppercaseMaxDateTime = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -638,6 +635,9 @@ Datetime.prototype.getUtcUppercaseMaxDateTime = function (options, callback) {
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -739,12 +739,6 @@ Datetime.prototype.putLocalPositiveOffsetMaxDateTime = function (datetimeBody, o
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  // Serialize Request
-  var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(datetimeBody));
-  httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -752,6 +746,12 @@ Datetime.prototype.putLocalPositiveOffsetMaxDateTime = function (datetimeBody, o
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  // Serialize Request
+  var requestContent = null;
+  requestContent = JSON.stringify(msRest.serializeObject(datetimeBody));
+  httpRequest.body = requestContent;
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -822,9 +822,6 @@ Datetime.prototype.getLocalPositiveOffsetLowercaseMaxDateTime = function (option
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -832,6 +829,9 @@ Datetime.prototype.getLocalPositiveOffsetLowercaseMaxDateTime = function (option
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -918,9 +918,6 @@ Datetime.prototype.getLocalPositiveOffsetUppercaseMaxDateTime = function (option
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -928,6 +925,9 @@ Datetime.prototype.getLocalPositiveOffsetUppercaseMaxDateTime = function (option
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1029,12 +1029,6 @@ Datetime.prototype.putLocalNegativeOffsetMaxDateTime = function (datetimeBody, o
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  // Serialize Request
-  var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(datetimeBody));
-  httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -1042,6 +1036,12 @@ Datetime.prototype.putLocalNegativeOffsetMaxDateTime = function (datetimeBody, o
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  // Serialize Request
+  var requestContent = null;
+  requestContent = JSON.stringify(msRest.serializeObject(datetimeBody));
+  httpRequest.body = requestContent;
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1112,9 +1112,6 @@ Datetime.prototype.getLocalNegativeOffsetUppercaseMaxDateTime = function (option
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -1122,6 +1119,9 @@ Datetime.prototype.getLocalNegativeOffsetUppercaseMaxDateTime = function (option
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1208,9 +1208,6 @@ Datetime.prototype.getLocalNegativeOffsetLowercaseMaxDateTime = function (option
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -1218,6 +1215,9 @@ Datetime.prototype.getLocalNegativeOffsetLowercaseMaxDateTime = function (option
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1318,12 +1318,6 @@ Datetime.prototype.putUtcMinDateTime = function (datetimeBody, options, callback
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  // Serialize Request
-  var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(datetimeBody));
-  httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -1331,6 +1325,12 @@ Datetime.prototype.putUtcMinDateTime = function (datetimeBody, options, callback
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  // Serialize Request
+  var requestContent = null;
+  requestContent = JSON.stringify(msRest.serializeObject(datetimeBody));
+  httpRequest.body = requestContent;
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1400,9 +1400,6 @@ Datetime.prototype.getUtcMinDateTime = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -1410,6 +1407,9 @@ Datetime.prototype.getUtcMinDateTime = function (options, callback) {
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1510,12 +1510,6 @@ Datetime.prototype.putLocalPositiveOffsetMinDateTime = function (datetimeBody, o
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  // Serialize Request
-  var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(datetimeBody));
-  httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -1523,6 +1517,12 @@ Datetime.prototype.putLocalPositiveOffsetMinDateTime = function (datetimeBody, o
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  // Serialize Request
+  var requestContent = null;
+  requestContent = JSON.stringify(msRest.serializeObject(datetimeBody));
+  httpRequest.body = requestContent;
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1592,9 +1592,6 @@ Datetime.prototype.getLocalPositiveOffsetMinDateTime = function (options, callba
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -1602,6 +1599,9 @@ Datetime.prototype.getLocalPositiveOffsetMinDateTime = function (options, callba
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1702,12 +1702,6 @@ Datetime.prototype.putLocalNegativeOffsetMinDateTime = function (datetimeBody, o
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  // Serialize Request
-  var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(datetimeBody));
-  httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -1715,6 +1709,12 @@ Datetime.prototype.putLocalNegativeOffsetMinDateTime = function (datetimeBody, o
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  // Serialize Request
+  var requestContent = null;
+  requestContent = JSON.stringify(msRest.serializeObject(datetimeBody));
+  httpRequest.body = requestContent;
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1784,9 +1784,6 @@ Datetime.prototype.getLocalNegativeOffsetMinDateTime = function (options, callba
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -1794,6 +1791,9 @@ Datetime.prototype.getLocalNegativeOffsetMinDateTime = function (options, callba
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

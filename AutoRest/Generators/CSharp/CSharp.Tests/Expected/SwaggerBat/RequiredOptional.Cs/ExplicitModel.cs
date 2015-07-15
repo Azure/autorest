@@ -75,7 +75,11 @@ namespace Fixtures.SwaggerBatRequiredOptional
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -164,7 +168,11 @@ namespace Fixtures.SwaggerBatRequiredOptional
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -261,7 +269,11 @@ namespace Fixtures.SwaggerBatRequiredOptional
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -351,7 +363,11 @@ namespace Fixtures.SwaggerBatRequiredOptional
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -441,13 +457,21 @@ namespace Fixtures.SwaggerBatRequiredOptional
             // Set Headers
             if (headerParameter != null)
             {
-                httpRequest.Headers.Add("headerParameter", JsonConvert.SerializeObject(headerParameter, this.Client.SerializationSettings).Trim('"'));
+                if (httpRequest.Headers.Contains("headerParameter"))
+                {
+                    httpRequest.Headers.Remove("headerParameter");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("headerParameter", JsonConvert.SerializeObject(headerParameter, this.Client.SerializationSettings).Trim('"'));
             }
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -531,13 +555,21 @@ namespace Fixtures.SwaggerBatRequiredOptional
             // Set Headers
             if (headerParameter != null)
             {
-                httpRequest.Headers.Add("headerParameter", JsonConvert.SerializeObject(headerParameter, this.Client.SerializationSettings).Trim('"'));
+                if (httpRequest.Headers.Contains("headerParameter"))
+                {
+                    httpRequest.Headers.Remove("headerParameter");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("headerParameter", JsonConvert.SerializeObject(headerParameter, this.Client.SerializationSettings).Trim('"'));
             }
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -625,7 +657,11 @@ namespace Fixtures.SwaggerBatRequiredOptional
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -714,7 +750,11 @@ namespace Fixtures.SwaggerBatRequiredOptional
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -811,7 +851,11 @@ namespace Fixtures.SwaggerBatRequiredOptional
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -901,7 +945,11 @@ namespace Fixtures.SwaggerBatRequiredOptional
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -991,13 +1039,21 @@ namespace Fixtures.SwaggerBatRequiredOptional
             // Set Headers
             if (headerParameter != null)
             {
-                httpRequest.Headers.Add("headerParameter", headerParameter);
+                if (httpRequest.Headers.Contains("headerParameter"))
+                {
+                    httpRequest.Headers.Remove("headerParameter");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("headerParameter", headerParameter);
             }
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -1081,13 +1137,21 @@ namespace Fixtures.SwaggerBatRequiredOptional
             // Set Headers
             if (bodyParameter != null)
             {
-                httpRequest.Headers.Add("bodyParameter", bodyParameter);
+                if (httpRequest.Headers.Contains("bodyParameter"))
+                {
+                    httpRequest.Headers.Remove("bodyParameter");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("bodyParameter", bodyParameter);
             }
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -1179,7 +1243,11 @@ namespace Fixtures.SwaggerBatRequiredOptional
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -1272,7 +1340,11 @@ namespace Fixtures.SwaggerBatRequiredOptional
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -1369,7 +1441,11 @@ namespace Fixtures.SwaggerBatRequiredOptional
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -1463,7 +1539,11 @@ namespace Fixtures.SwaggerBatRequiredOptional
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -1555,7 +1635,11 @@ namespace Fixtures.SwaggerBatRequiredOptional
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -1644,7 +1728,11 @@ namespace Fixtures.SwaggerBatRequiredOptional
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -1741,7 +1829,11 @@ namespace Fixtures.SwaggerBatRequiredOptional
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -1831,7 +1923,11 @@ namespace Fixtures.SwaggerBatRequiredOptional
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -1921,13 +2017,21 @@ namespace Fixtures.SwaggerBatRequiredOptional
             // Set Headers
             if (headerParameter != null)
             {
-                httpRequest.Headers.Add("headerParameter", JsonConvert.SerializeObject(headerParameter, this.Client.SerializationSettings).Trim('"'));
+                if (httpRequest.Headers.Contains("headerParameter"))
+                {
+                    httpRequest.Headers.Remove("headerParameter");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("headerParameter", JsonConvert.SerializeObject(headerParameter, this.Client.SerializationSettings).Trim('"'));
             }
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -2011,13 +2115,21 @@ namespace Fixtures.SwaggerBatRequiredOptional
             // Set Headers
             if (headerParameter != null)
             {
-                httpRequest.Headers.Add("headerParameter", JsonConvert.SerializeObject(headerParameter, this.Client.SerializationSettings).Trim('"'));
+                if (httpRequest.Headers.Contains("headerParameter"))
+                {
+                    httpRequest.Headers.Remove("headerParameter");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("headerParameter", JsonConvert.SerializeObject(headerParameter, this.Client.SerializationSettings).Trim('"'));
             }
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
