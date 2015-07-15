@@ -16,5 +16,12 @@ namespace Fixtures.SwaggerBatBodyComplex.Models
         [JsonProperty(PropertyName = "picture")]
         public byte[] Picture { get; set; }
 
+        /// <summary>
+        /// Validate the object. Throws ArgumentException or ArgumentNullException if validation fails.
+        /// </summary>
+        public override void Validate()
+        {
+            base.Validate();
+        }
     }
 }

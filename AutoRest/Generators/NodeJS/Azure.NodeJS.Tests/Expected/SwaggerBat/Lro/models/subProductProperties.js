@@ -21,6 +21,10 @@ SubProductProperties.prototype.validate = function (payload) {
   if (!payload) {
     throw new Error('SubProductProperties cannot be null.');
   }
+  if (payload['provisioningState'] !== null && payload['provisioningState'] !== undefined && typeof payload['provisioningState'] !== 'string') {
+    throw new Error('payload[\'provisioningState\'] must be of type string.');
+  }
+
   if (payload['provisioningStateValues'] !== null && payload['provisioningStateValues'] !== undefined && typeof payload['provisioningStateValues'] !== 'string') {
     throw new Error('payload[\'provisioningStateValues\'] must be of type string.');
   }

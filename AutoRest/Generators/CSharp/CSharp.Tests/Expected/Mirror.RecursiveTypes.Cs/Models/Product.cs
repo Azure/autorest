@@ -28,25 +28,5 @@ namespace Fixtures.MirrorRecursiveTypes.Models
         [JsonProperty(PropertyName = "innerProducts")]
         public IList<Product> InnerProducts { get; set; }
 
-        /// <summary>
-        /// Validate the object. Throws ArgumentException or ArgumentNullException if validation fails.
-        /// </summary>
-        public virtual void Validate()
-        {
-            if (this.ParentProduct != null)
-            {
-                this.ParentProduct.Validate();
-            }
-            if (this.InnerProducts != null)
-            {
-                foreach ( var element in this.InnerProducts)
-            {
-                if (element != null)
-            {
-                element.Validate();
-            }
-            }
-            }
-        }
     }
 }

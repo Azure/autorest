@@ -287,6 +287,15 @@ namespace Microsoft.Azure.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must specify a token provider or raw access token before using token credentials..
+        /// </summary>
+        internal static string TokenProviderCannotBeNull {
+            get {
+                return ResourceManager.GetString("TokenProviderCannotBeNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unexpected polling status code from long running operation &apos;{0}&apos;..
         /// </summary>
         internal static string UnexpectedPollingStatus {

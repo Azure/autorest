@@ -26,11 +26,5 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening.Models
         [JsonProperty(PropertyName = "dictionaryofresources")]
         public IDictionary<string, FlattenedProduct> Dictionaryofresources { get; set; }
 
-        /// <summary>
-        /// Validate the object. Throws ArgumentException or ArgumentNullException if validation fails.
-        /// </summary>
-        public virtual void Validate()
-        {
-        }
     }
 }

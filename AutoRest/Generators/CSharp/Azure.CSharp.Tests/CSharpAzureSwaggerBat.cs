@@ -14,6 +14,7 @@ using Fixtures.Azure.SwaggerBatLro.Models;
 using Fixtures.Azure.SwaggerBatLro;
 using Fixtures.Azure.SwaggerBatPaging;
 using Microsoft.Azure;
+using Microsoft.Azure.Authentication;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.CSharp.Azure.Tests.Properties;
 using Microsoft.Rest.Generator.CSharp.Tests;
@@ -57,9 +58,9 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
             using (
                 var client =
                     new MicrosoftAzureTestUrl(Fixture.Uri,
-                        new TokenCloudCredentials(Guid.NewGuid().ToString(), Guid.NewGuid().ToString()),
-                        Guid.NewGuid().ToString()))
+                        new AccessTokenCredentials(Guid.NewGuid().ToString())))
             {
+                client.SubscriptionId = Guid.NewGuid().ToString();
                 var group = client.Group.GetSampleResourceGroup("testgroup101");
                 Assert.Equal("testgroup101", group.Name);
                 Assert.Equal("West US", group.Location);
@@ -74,7 +75,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
 
             using (
                 var client = new AutoRestHeadTestService(Fixture.Uri,
-                    new TokenCloudCredentials(Guid.NewGuid().ToString(), Guid.NewGuid().ToString())))
+                    new AccessTokenCredentials(Guid.NewGuid().ToString())))
             {
                 Assert.True(client.HttpSuccess.Head204());
                 Assert.False(client.HttpSuccess.Head404());
@@ -88,7 +89,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 @"Swagger\lro.json", @"Expected\SwaggerBat\Lro.cs");
             using (
                 var client = new AutoRestLongRunningOperationTestService(Fixture.Uri,
-                    new TokenCloudCredentials(Guid.NewGuid().ToString(), Guid.NewGuid().ToString())))
+                    new AccessTokenCredentials(Guid.NewGuid().ToString())))
             {
                 client.LongRunningOperationRetryTimeout = 0;
 
@@ -193,7 +194,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         {
             using (
                 var client = new AutoRestLongRunningOperationTestService(Fixture.Uri,
-                    new TokenCloudCredentials(Guid.NewGuid().ToString(), Guid.NewGuid().ToString())))
+                    new AccessTokenCredentials(Guid.NewGuid().ToString())))
             {
                 client.LongRunningOperationRetryTimeout = 0;
                 var exception =
@@ -203,7 +204,9 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 exception =
                     Assert.Throws<CloudException>(
                         () => client.LROSADs.PutNonRetry201Creating400(new Product {Location = "West US"}));
-                Assert.Equal("Error from the server", exception.Message);
+                Assert.Equal("Error from the server", exception.Body.Message);
+                Assert.NotNull(exception.Request);
+                Assert.NotNull(exception.Response);
                 exception =
                     Assert.Throws<CloudException>(
                         () => client.LROSADs.PutAsyncRelativeRetry400(new Product {Location = "West US"}));
@@ -243,8 +246,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 // TODO: 4103936 Fix exception type
                 Assert.Throws<UriFormatException>(
                     () => client.LROSADs.PutAsyncRelativeRetryInvalidHeader(new Product {Location = "West US"}));
-                // TODO: 4103936 Fix exception type
-                Assert.Throws<JsonSerializationException>(
+                Assert.Throws<CloudException>(
                     () => client.LROSADs.PutAsyncRelativeRetryInvalidJsonPolling(new Product {Location = "West US"}));
                 // TODO: 4103936 Fix exception type
                 var invalidHeader = Assert.Throws<UriFormatException>(() => client.LROSADs.Delete202RetryInvalidHeader());
@@ -253,9 +255,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 var invalidAsyncHeader =
                     Assert.Throws<UriFormatException>(() => client.LROSADs.DeleteAsyncRelativeRetryInvalidHeader());
                 Assert.NotNull(invalidAsyncHeader.Message);
-                // TODO: 4103936 Fix exception type
                 var invalidPollingBody =
-                    Assert.Throws<JsonSerializationException>(
+                    Assert.Throws<CloudException>(
                         () => client.LROSADs.DeleteAsyncRelativeRetryInvalidJsonPolling());
                 Assert.NotNull(invalidPollingBody.Message);
                 // TODO: 4103936 Fix exception type
@@ -265,9 +266,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 invalidAsyncHeader =
                     Assert.Throws<UriFormatException>(() => client.LROSADs.PostAsyncRelativeRetryInvalidHeader());
                 Assert.NotNull(invalidAsyncHeader.Message);
-                // TODO: 4103936 Fix exception type
                 invalidPollingBody =
-                    Assert.Throws<JsonSerializationException>(
+                    Assert.Throws<CloudException>(
                         () => client.LROSADs.PostAsyncRelativeRetryInvalidJsonPolling());
                 Assert.NotNull(invalidPollingBody.Message);
 
@@ -292,7 +292,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 @"Swagger\paging.json", @"Expected\SwaggerBat\Paging.cs");
             using (
                 var client = new AutoRestPagingTestService(Fixture.Uri,
-                    new TokenCloudCredentials(Guid.NewGuid().ToString(), Guid.NewGuid().ToString())))
+                    new AccessTokenCredentials(Guid.NewGuid().ToString())))
             {
                 Assert.Null(client.Paging.GetSinglePages().NextLink);
 
@@ -333,7 +333,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         {
             using (
                 var client = new AutoRestPagingTestService(Fixture.Uri,
-                    new TokenCloudCredentials(Guid.NewGuid().ToString(), Guid.NewGuid().ToString())))
+                    new AccessTokenCredentials(Guid.NewGuid().ToString())))
             {
                 Assert.Throws<CloudException>(() => client.Paging.GetSinglePagesFailure());
 
@@ -357,7 +357,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 @"Swagger\azure-report.json", @"Expected\SwaggerBat\AzureReport.Cs");
             using (var client =
                 new AutoRestReportServiceForAzure(Fixture.Uri,
-                    new TokenCloudCredentials(Guid.NewGuid().ToString(), Guid.NewGuid().ToString())))
+                    new AccessTokenCredentials(Guid.NewGuid().ToString())))
             {
                 var report = client.GetReport();
                 float totalTests = report.Count;
@@ -386,7 +386,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         {
             using (
                 var client = new AutoRestResourceFlatteningTestService(Fixture.Uri,
-                    new TokenCloudCredentials(Guid.NewGuid().ToString(), Guid.NewGuid().ToString())))
+                    new AccessTokenCredentials(Guid.NewGuid().ToString())))
             {
                 //Array
                 var result = client.GetArray();
@@ -437,7 +437,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         {
             using (
                 var client = new AutoRestResourceFlatteningTestService(Fixture.Uri,
-                    new TokenCloudCredentials(Guid.NewGuid().ToString(), Guid.NewGuid().ToString())))
+                    new AccessTokenCredentials(Guid.NewGuid().ToString())))
             {
                 //Dictionary
                 var resultDictionary = client.GetDictionary();
@@ -489,7 +489,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         {
             using (
                 var client = new AutoRestResourceFlatteningTestService(Fixture.Uri,
-                    new TokenCloudCredentials(Guid.NewGuid().ToString(), Guid.NewGuid().ToString())))
+                    new AccessTokenCredentials(Guid.NewGuid().ToString())))
             {
                 //ResourceCollection
                 var resultResource = client.GetResourceCollection();
@@ -604,18 +604,13 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 @"Swagger\azure-special-properties.json", @"Expected\SwaggerBat\AzureSpecials.Cs");
             using (
                 var client = new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
-                    new TokenCloudCredentials(validSubscription, Guid.NewGuid().ToString()),
-                    validSubscription))
+                    new AccessTokenCredentials(Guid.NewGuid().ToString()))
+                    { SubscriptionId = validSubscription })
             {
                 client.SubscriptionInCredentials.PostMethodGlobalNotProvidedValid();
                 client.SubscriptionInCredentials.PostMethodGlobalValid();
                 client.SubscriptionInCredentials.PostPathGlobalValid();
                 client.SubscriptionInCredentials.PostSwaggerGlobalValid();
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                        new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
-                            new TokenCloudCredentials(null, Guid.NewGuid().ToString()),
-                            validSubscription));
                 client.SubscriptionInMethod.PostMethodLocalValid(validSubscription);
                 client.SubscriptionInMethod.PostPathLocalValid(validSubscription);
                 client.SubscriptionInMethod.PostSwaggerLocalValid(validSubscription);

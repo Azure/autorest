@@ -37,10 +37,9 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
         /// <summary>
-        /// Subscription credentials which uniquely identify Microsoft Azure
-        /// subscription.
+        /// Management credentials for Azure.
         /// </summary>
-        public SubscriptionCloudCredentials Credentials { get; set; }
+        public ServiceClientCredentials Credentials { get; private set; }
 
         /// <summary>
         /// The retry timeout for Long Running Operations.
@@ -105,13 +104,13 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
         /// Initializes a new instance of the AutoRestResourceFlatteningTestService class.
         /// </summary>
         /// <param name='credentials'>
-        /// Required. Subscription credentials which uniquely identify Microsoft Azure subscription.
+        /// Required. Management credentials for Azure.
         /// </param>
         /// <param name='handlers'>
         /// Optional. The set of delegating handlers to insert in the http
         /// client pipeline.
         /// </param>
-        public AutoRestResourceFlatteningTestService(SubscriptionCloudCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        public AutoRestResourceFlatteningTestService(ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (credentials == null)
             {
@@ -127,13 +126,13 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='credentials'>
-        /// Required. Subscription credentials which uniquely identify Microsoft Azure subscription.
+        /// Required. Management credentials for Azure.
         /// </param>
         /// <param name='handlers'>
         /// Optional. The set of delegating handlers to insert in the http
         /// client pipeline.
         /// </param>
-        public AutoRestResourceFlatteningTestService(Uri baseUri, SubscriptionCloudCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        public AutoRestResourceFlatteningTestService(Uri baseUri, ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
             {
@@ -567,10 +566,6 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
         /// </param>
         public async Task<AzureOperationResponse> PutResourceCollectionWithHttpMessagesAsync(ResourceCollection resourceComplexObject = default(ResourceCollection), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (resourceComplexObject != null)
-            {
-                resourceComplexObject.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
