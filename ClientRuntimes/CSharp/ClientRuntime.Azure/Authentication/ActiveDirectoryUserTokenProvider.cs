@@ -7,19 +7,32 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 
-namespace Microsoft.Azure
+namespace Microsoft.Azure.Authentication
 {
     /// <summary>
-    /// Provides tokens for Azure Active Directory Microsoft Id, Organization Id, and Service Principal users
+    /// Provides tokens for Azure Active Directory Microsoft Id and Organization Id users
     /// </summary>
-    internal class ActiveDirectoryTokenProvider : ITokenProvider
+    internal class ActiveDirectoryUserTokenProvider : ITokenProvider
     {
+        /// <summary>
+        /// Uri parameters used in the credential prompt.  Allows recalling previous logins in the login dialog.
+        /// </summary>
         private const string EnableEbdMagicCookie = "site_id=501358&display=popup";
         private string _userId;
         private AuthenticationContext _authenticationContext;
         private string _tokenAudience;
         private string _clientId;
-        public ActiveDirectoryTokenProvider(string clientId, string domain, AzureEnvironment environment, Uri clientRedirectUri)
+        private string _type;
+
+        /// <summary>
+        /// Create a token provider using Active Directory user credentials (UPN). 
+        /// This token provider will prompt the user for username and password.
+        /// </summary>
+        /// <param name="clientId">The client id for thsi application.</param>
+        /// <param name="domain">The domain or tenant id contianing the resources to manage.</param>
+        /// <param name="environment">The azure environment to manage resources in.</param>
+        /// <param name="clientRedirectUri">The redirect URI for authentication requests for this client application.</param>
+        public ActiveDirectoryUserTokenProvider(string clientId, string domain, AzureEnvironment environment, Uri clientRedirectUri)
         {
             ValidateCommonParameters(clientId, domain, environment);
             if (clientRedirectUri == null)
@@ -36,23 +49,16 @@ namespace Microsoft.Azure
             Initialize(authenticatioResult);
         }
 
-        private static void ValidateCommonParameters(string clientId, string domain, AzureEnvironment environment)
-        {
-            if (string.IsNullOrWhiteSpace(clientId))
-            {
-                throw new ArgumentOutOfRangeException("clientId");
-            }
-            if (string.IsNullOrWhiteSpace(domain))
-            {
-                throw new ArgumentOutOfRangeException("domain");
-            }
-            if (environment == null || environment.AuthenticationEndpoint == null || environment.TokenAudience == null)
-            {
-                throw new ArgumentOutOfRangeException("environment");
-            }
-        }
-
-        public ActiveDirectoryTokenProvider(string clientId, string domain, string username, string password, AzureEnvironment environment)
+        /// <summary>
+        /// Create a token provider using Active Directory user credentials (UPN). 
+        /// Authentication occurs using the given username and password, with no user prompt.
+        /// </summary>
+        /// <param name="clientId">The client id for thsi application.</param>
+        /// <param name="domain">The domain or tenant id contianing the resources to manage.</param>
+        /// <param name="username">The username to use for authentication.</param>
+        /// <param name="password">The secret password associated with thsi user.</param>
+        /// <param name="environment">The azure environment to manage resources in.</param>
+        public ActiveDirectoryUserTokenProvider(string clientId, string domain, string username, string password, AzureEnvironment environment)
         {
             ValidateCommonParameters(clientId, domain, environment);
             if (string.IsNullOrWhiteSpace(username))
@@ -73,7 +79,17 @@ namespace Microsoft.Azure
             Initialize(authenticationResult);
         }
 
-        internal ActiveDirectoryTokenProvider(string clientId, string domain, string username, string password, AzureEnvironment environment, TokenCache cache)
+        /// <summary>
+        /// Create a token provider using Active Directory user credentials (UPN). 
+        /// Authentication occurs using the given username and password, with no user prompt.
+        /// </summary>
+        /// <param name="clientId">The client id for thsi application.</param>
+        /// <param name="domain">The domain or tenant id contianing the resources to manage.</param>
+        /// <param name="username">The username to use for authentication.</param>
+        /// <param name="password">The secret password associated with thsi user.</param>
+        /// <param name="environment">The azure environment to manage resources in.</param>
+        /// <param name="cache">The token cache to use during authentication.</param>
+        internal ActiveDirectoryUserTokenProvider(string clientId, string domain, string username, string password, AzureEnvironment environment, TokenCache cache)
         {
             ValidateCommonParameters(clientId, domain, environment);
             if (string.IsNullOrWhiteSpace(username))
@@ -109,8 +125,16 @@ namespace Microsoft.Azure
             }
 
             this._userId = authenticationResult.UserInfo.DisplayableId;
+            this._type = authenticationResult.AccessTokenType;
         }
 
+        /// <summary>
+        /// The type of token this provider returns.  Options include Beaere and SAML tokens.
+        /// </summary>
+        public string TokenType
+        {
+            get { return _type; }
+        }
         /// <summary>
         /// Gets an access token from the token cache or from AD authentication endpoint.  Will attempt to 
         /// refresh the access token if it has expired.
@@ -123,6 +147,22 @@ namespace Microsoft.Azure
                 new UserIdentifier(this._userId,
                     UserIdentifierType.OptionalDisplayableId)).ConfigureAwait(false);
             return authenticationResult.AccessToken;
+        }
+
+        private static void ValidateCommonParameters(string clientId, string domain, AzureEnvironment environment)
+        {
+            if (string.IsNullOrWhiteSpace(clientId))
+            {
+                throw new ArgumentOutOfRangeException("clientId");
+            }
+            if (string.IsNullOrWhiteSpace(domain))
+            {
+                throw new ArgumentOutOfRangeException("domain");
+            }
+            if (environment == null || environment.AuthenticationEndpoint == null || environment.TokenAudience == null)
+            {
+                throw new ArgumentOutOfRangeException("environment");
+            }
         }
     }
 }

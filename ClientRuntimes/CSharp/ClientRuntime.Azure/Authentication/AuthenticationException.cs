@@ -2,17 +2,16 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Globalization;
 using System.Runtime.Serialization;
 using Microsoft.Rest;
 #if !PORTABLE
 using System.Security.Permissions;
 #endif
 
-namespace Microsoft.Azure
+namespace Microsoft.Azure.Authentication
 {
     /// <summary>
-    /// Validation exception for Microsoft Rest Client. 
+    /// Authentication exception for Microsoft Rest Client for Azure. 
     /// </summary>
 #if !PORTABLE
     [Serializable]
@@ -21,7 +20,7 @@ namespace Microsoft.Azure
     {
 
         /// <summary>
-        /// Initializes a new instance of the ValidationException class.
+        /// Initializes a new instance of the AuthenticationException class.
         /// </summary>
         public AuthenticationException()
             : base()
@@ -29,7 +28,7 @@ namespace Microsoft.Azure
         }
 
         /// <summary>
-        /// Initializes a new instance of the ValidationException class.
+        /// Initializes a new instance of the AuthenticationException class.
         /// </summary>
         /// <param name="message">Exception message.</param>
         public AuthenticationException(string message)
@@ -39,7 +38,7 @@ namespace Microsoft.Azure
 
 #if !PORTABLE
         /// <summary>
-        /// Initializes a new instance of the ValidationException class.
+        /// Initializes a new instance of the AuthenticationException class.
         /// </summary>
         /// <param name="info">Serialization info.</param>
         /// <param name="context">Streaming context.</param>

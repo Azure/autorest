@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
 
-namespace Microsoft.Azure
+using System;
+
+namespace Microsoft.Azure.Authentication
 {
     /// <summary>
-    /// Credentials class for authenticating using a Micrsooft ID or Organizational Id
+    /// Credentials class for authenticating using a Microsoft ID or Organizational Id
     /// </summary>
     public class UserAccessTokenCredentials : AccessTokenCredentials
     {
@@ -48,7 +47,7 @@ namespace Microsoft.Azure
         /// <param name="environment">The azure environment to authenticate with. </param>
         /// <param name="clientRedirectUri">The Uri where the user will be redirected after authenticating with AD.</param>
         public UserAccessTokenCredentials(string clientId, string domain, AzureEnvironment environment, Uri clientRedirectUri) :
-            base(new ActiveDirectoryTokenProvider(clientId, domain, environment, clientRedirectUri))
+            base(new ActiveDirectoryUserTokenProvider(clientId, domain, environment, clientRedirectUri))
         {
         }
 
@@ -77,7 +76,7 @@ namespace Microsoft.Azure
         /// <param name="password">The password for the Organization Id account.</param>
         /// <param name="environment">The azure environment to authenticate with. </param>
         public UserAccessTokenCredentials(string clientId, string domain, string username, string password, AzureEnvironment environment) : 
-            base(new ActiveDirectoryTokenProvider(clientId, domain, username, password, environment))
+            base(new ActiveDirectoryUserTokenProvider(clientId, domain, username, password, environment))
         {
             
         }

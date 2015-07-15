@@ -3,7 +3,7 @@
 
 using System;
 
-namespace Microsoft.Azure
+namespace Microsoft.Azure.Authentication
 {
     /// <summary>
     /// Settings for authentication with an Azure or Azure Stack service

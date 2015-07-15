@@ -38,28 +38,27 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActiveDirectorySettings.cs" />
-    <Compile Include="ActiveDirectoryTokenProvider.cs" />
-    <Compile Include="ApplicationAccessTokenCredentials.cs" />
-    <Compile Include="AzureEnvironment.cs" />
+    <Compile Include="Authentication\ActiveDirectoryApplicationTokenProvider.cs" />
+    <Compile Include="Authentication\ActiveDirectoryUserTokenProvider.cs" />
+    <Compile Include="Authentication\ApplicationAccessTokenCredentials.cs" />
+    <Compile Include="Authentication\AzureEnvironment.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IAzureClient.cs" />
     <Compile Include="AzureClientExtensions.cs" />
     <Compile Include="CloudError.cs" />
     <Compile Include="CloudException.cs" />
-    <Compile Include="ITokenProvider.cs" />
+    <Compile Include="Authentication\ITokenProvider.cs" />
     <Compile Include="JsonSerializerExtensions.cs" />
     <Compile Include="OData\FilterString.cs" />
     <Compile Include="OData\UrlExpressionVisitor.cs" />
     <Compile Include="PollingState.cs" />
     <Compile Include="IResource.cs" />
-    <Compile Include="StringTokenProvider.cs" />
+    <Compile Include="Authentication\StringTokenProvider.cs" />
     <Compile Include="SubResource.cs" />
     <Compile Include="Resource.cs" />
     <Compile Include="CloudErrorJsonConverter.cs" />
     <Compile Include="ResourceJsonConverter.cs" />
-    <Compile Include="AccessTokenCredentials.cs" />
-    <Compile Include="SubscriptionCloudCredentials.cs" />
+    <Compile Include="Authentication\AccessTokenCredentials.cs" />
     <Compile Include="AzureOperationResponse.cs" />
     <Compile Include="AzureAsyncOperation.cs" />
     <Compile Include="ClientRequestTrackingHandler.cs" />
@@ -69,8 +68,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="UserAccessTokenCredentials.cs" />
-    <Compile Include="AuthenticationException.cs" />
+    <Compile Include="Authentication\UserAccessTokenCredentials.cs" />
+    <Compile Include="Authentication\AuthenticationException.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -97,6 +96,7 @@
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" Condition=" '$(LibraryFxTarget)' == 'portable' " />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" Condition=" '$(LibraryFxTarget)' != 'portable' " />
   <Import Project="$(CommonNugetPackageFolder)\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition=" '$(LibraryFxTarget)' != 'net45' " />

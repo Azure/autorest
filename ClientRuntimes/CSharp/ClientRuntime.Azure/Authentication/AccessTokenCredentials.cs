@@ -1,18 +1,18 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using Microsoft.Azure.Properties;
-using Microsoft.Rest;
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Azure.Properties;
+using Microsoft.Rest;
 
-namespace Microsoft.Azure
+namespace Microsoft.Azure.Authentication
 {
     /// <summary>
-    /// Class for token based credentials.
+    /// Extensible class for bearer token based credentials.
     /// </summary>
     public class AccessTokenCredentials : ServiceClientCredentials
     {
@@ -20,7 +20,7 @@ namespace Microsoft.Azure
         /// Gets or sets secure token used to authenticate against Microsoft Azure API. 
         /// No anonymous requests are allowed.
         /// </summary>
-        private ITokenProvider TokenProvider { get; set; }
+        protected ITokenProvider TokenProvider { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TokenCredentials"/>
@@ -70,7 +70,7 @@ namespace Microsoft.Azure
                 throw new InvalidOperationException(Resources.TokenProviderCannotBeNull);
             }
 
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", await TokenProvider.GetAccessTokenAsync(cancellationToken).ConfigureAwait(false));
+            request.Headers.Authorization = new AuthenticationHeaderValue(TokenProvider.TokenType, await TokenProvider.GetAccessTokenAsync(cancellationToken).ConfigureAwait(false));
             await Task.Run(() => base.ProcessHttpRequestAsync(request, cancellationToken), cancellationToken);
         }
     }
