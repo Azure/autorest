@@ -1,57 +1,31 @@
-/* jshint latedef:false */
-/* jshint forin:false */
-/* jshint noempty:false */
 
 'use strict';
 
 var util = require('util');
 var msRest = require('ms-rest');
 var msRestAzure = require('ms-rest-azure');
-var ServiceClient = msRestAzure.AzureServiceClient;
+var ServiceClient = msRest.ServiceClient;
 var WebResource = msRest.WebResource;
 
-var models = require('./models');
+var models = require('../models');
 
 /**
  * @class
- * Initializes a new instance of the AutoRestResourceFlatteningTestService class.
+ * SkipUrlEncoding
+ * __NOTE__: An instance of this class is automatically created for an
+ * instance of the AutoRestAzureSpecialParametersTestClient.
+ * Initializes a new instance of the SkipUrlEncoding class.
  * @constructor
  *
- * @param {ServiceClientCredentials} [credentials] Management credentials for Azure.
- *
- * @param {string} [baseUri] - The base URI of the service.
- *
- * @param {object} [options] - The parameter options
- *
- * @param {Array} [options.filters] - Filters to be added to the request pipeline
- *
- * @param {object} [options.requestOptions] - Options for the underlying request object
- * {@link https://github.com/request/request#requestoptions-callback Options doc}
- *
- * @param {bool} [options.noRetryPolicy] - If set to true, turn off default retry policy
+ * @param {AutoRestAzureSpecialParametersTestClient} client Reference to the service client.
  */
-function AutoRestResourceFlatteningTestService(credentials, baseUri, options) {
-  if (credentials === null || credentials === undefined) {
-    throw new Error('\'credentials\' cannot be null.');
-  }
-
-  if (!options) options = {};
-
-  AutoRestResourceFlatteningTestService['super_'].call(this, credentials, options);
-  this.baseUri = baseUri;
-  if (!this.baseUri) {
-    this.baseUri = 'http://localhost';
-  }
-  this.credentials = credentials;
-
-  this._models = models;
+function SkipUrlEncoding(client) {
+  this.client = client;
 }
 
-util.inherits(AutoRestResourceFlatteningTestService, ServiceClient);
-
 /**
- * Put External Resource as an Array
- * @param {Array} [resourceArray] External Resource as an Array to put
+ * Get method with unencoded path parameter with value 'path1/path2/path3'
+ * @param {String} [unencodedPathParam] Unencoded path parameter with value 'path1/path2/path3'
  *
  * @param {object} [options]
  *
@@ -62,8 +36,8 @@ util.inherits(AutoRestResourceFlatteningTestService, ServiceClient);
  *
  * @returns {Stream} The Response stream
  */
-AutoRestResourceFlatteningTestService.prototype.putArray = function (resourceArray, options, callback) {
-  var client = this;
+SkipUrlEncoding.prototype.getMethodPathValid = function (unencodedPathParam, options, callback) {
+  var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -73,106 +47,20 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (resourceArr
   }
   // Validate
   try {
-    if (resourceArray !== null && resourceArray !== undefined && util.isArray(resourceArray)) {
-      for (var i = 0; i < resourceArray.length; i++) {
-        if (resourceArray[i] !== null && resourceArray[i] !== undefined) {
-          client._models['Resource'].validate(resourceArray[i]);
-        }
-      }
+    if (unencodedPathParam === null || unencodedPathParam === undefined) {
+      throw new Error('\'unencodedPathParam\' cannot be null');
+    }
+    if (unencodedPathParam !== null && unencodedPathParam !== undefined && typeof unencodedPathParam !== 'string') {
+      throw new Error('unencodedPathParam must be of type string.');
     }
   } catch (error) {
     return callback(error);
   }
 
   // Construct URL
-  var requestUrl = this.baseUri + 
-                   '//azure/resource-flatten/array';
-  var queryParameters = [];
-  if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
-  }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'PUT';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  // Serialize Request
-  var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(resourceArray));
-  httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
-    if (responseBody === '') responseBody = null;
-
-    return callback(null, result);
-  });
-};
-
-/**
- * Get External Resource as an Array
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
- * request
- *
- * @param {function} callback
- *
- * @returns {Stream} The Response stream
- */
-AutoRestResourceFlatteningTestService.prototype.getArray = function (options, callback) {
-  var client = this;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-
-  // Construct URL
-  var requestUrl = this.baseUri + 
-                   '//azure/resource-flatten/array';
+  var requestUrl = this.client.baseUri + 
+                   '//azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}';
+  requestUrl = requestUrl.replace('{unencodedPathParam}', unencodedPathParam);
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
@@ -227,34 +115,14 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    // Deserialize Response
-    if (statusCode === 200) {
-      var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-              result.body[i] = client._models['FlattenedProduct'].deserialize(result.body[i]);
-            }
-          }
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
-      }
-    }
 
     return callback(null, result);
   });
 };
 
 /**
- * Put External Resource as a Dictionary
- * @param {Object} [resourceDictionary] External Resource as a Dictionary to put
+ * Get method with unencoded path parameter with value 'path1/path2/path3'
+ * @param {String} [unencodedPathParam] Unencoded path parameter with value 'path1/path2/path3'
  *
  * @param {object} [options]
  *
@@ -265,8 +133,8 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
  *
  * @returns {Stream} The Response stream
  */
-AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resourceDictionary, options, callback) {
-  var client = this;
+SkipUrlEncoding.prototype.getPathPathValid = function (unencodedPathParam, options, callback) {
+  var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -276,106 +144,20 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resour
   }
   // Validate
   try {
-    if (resourceDictionary !== null && resourceDictionary !== undefined && typeof resourceDictionary === 'object') {
-      for(var valueElement in resourceDictionary) {
-        if (resourceDictionary[valueElement] !== null && resourceDictionary[valueElement] !== undefined) {
-          client._models['FlattenedProduct'].validate(resourceDictionary[valueElement]);
-        }
-      }
+    if (unencodedPathParam === null || unencodedPathParam === undefined) {
+      throw new Error('\'unencodedPathParam\' cannot be null');
+    }
+    if (unencodedPathParam !== null && unencodedPathParam !== undefined && typeof unencodedPathParam !== 'string') {
+      throw new Error('unencodedPathParam must be of type string.');
     }
   } catch (error) {
     return callback(error);
   }
 
   // Construct URL
-  var requestUrl = this.baseUri + 
-                   '//azure/resource-flatten/dictionary';
-  var queryParameters = [];
-  if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
-  }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'PUT';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  // Serialize Request
-  var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(resourceDictionary));
-  httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
-    if (responseBody === '') responseBody = null;
-
-    return callback(null, result);
-  });
-};
-
-/**
- * Get External Resource as a Dictionary
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
- * request
- *
- * @param {function} callback
- *
- * @returns {Stream} The Response stream
- */
-AutoRestResourceFlatteningTestService.prototype.getDictionary = function (options, callback) {
-  var client = this;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-
-  // Construct URL
-  var requestUrl = this.baseUri + 
-                   '//azure/resource-flatten/dictionary';
+  var requestUrl = this.client.baseUri + 
+                   '//azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}';
+  requestUrl = requestUrl.replace('{unencodedPathParam}', unencodedPathParam);
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
@@ -430,50 +212,14 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    // Deserialize Response
-    if (statusCode === 200) {
-      var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var property in result.body) {
-            if (result.body[property] !== null && result.body[property] !== undefined) {
-              result.body[property] = client._models['FlattenedProduct'].deserialize(result.body[property]);
-            }
-          }
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
-      }
-    }
 
     return callback(null, result);
   });
 };
 
 /**
- * Put External Resource as a ResourceCollection
- * @param {ResourceCollection} [resourceComplexObject] External Resource as a ResourceCollection to put
- *
- * @param {Array} [resourceComplexObject.arrayofresources] 
- *
- * @param {Object} [resourceComplexObject.dictionaryofresources] 
- *
- * @param {FlattenedProduct} [resourceComplexObject.productresource] 
- *
- * @param {FlattenedProductProperties} [resourceComplexObject.productresource.properties] 
- *
- * @param {String} [resourceComplexObject.productresource.properties.pname] 
- *
- * @param {String} [resourceComplexObject.productresource.properties.provisioningState] 
- *
- * @param {String} [resourceComplexObject.productresource.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
- * @param {String} [resourceComplexObject.productresource.properties.type] 
+ * Get method with unencoded path parameter with value 'path1/path2/path3'
+ * @param {String} [unencodedPathParam] An unencoded path parameter with value 'path1/path2/path3'. Possible values for this parameter include: 'path1/path2/path3'
  *
  * @param {object} [options]
  *
@@ -484,8 +230,8 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
  *
  * @returns {Stream} The Response stream
  */
-AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function (resourceComplexObject, options, callback) {
-  var client = this;
+SkipUrlEncoding.prototype.getSwaggerPathValid = function (unencodedPathParam, options, callback) {
+  var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -495,16 +241,20 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
   }
   // Validate
   try {
-    if (resourceComplexObject !== null && resourceComplexObject !== undefined) {
-      client._models['ResourceCollection'].validate(resourceComplexObject);
+    if (unencodedPathParam === null || unencodedPathParam === undefined) {
+      throw new Error('\'unencodedPathParam\' cannot be null');
+    }
+    if (unencodedPathParam !== null && unencodedPathParam !== undefined && typeof unencodedPathParam !== 'string') {
+      throw new Error('unencodedPathParam must be of type string.');
     }
   } catch (error) {
     return callback(error);
   }
 
   // Construct URL
-  var requestUrl = this.baseUri + 
-                   '//azure/resource-flatten/resourcecollection';
+  var requestUrl = this.client.baseUri + 
+                   '//azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}';
+  requestUrl = requestUrl.replace('{unencodedPathParam}', unencodedPathParam);
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
@@ -515,16 +265,13 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
-  httpRequest.method = 'PUT';
+  httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  // Serialize Request
-  var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(resourceComplexObject));
-  httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -568,7 +315,10 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
 };
 
 /**
- * Get External Resource as a ResourceCollection
+ * Get method with unencoded query parameter with value
+ * 'value1&q2=value2&q3=value3'
+ * @param {String} [q1] Unencoded query parameter with value 'value1&q2=value2&q3=value3'
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -578,8 +328,8 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
  *
  * @returns {Stream} The Response stream
  */
-AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function (options, callback) {
-  var client = this;
+SkipUrlEncoding.prototype.getMethodQueryValid = function (q1, options, callback) {
+  var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -587,11 +337,23 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (q1 === null || q1 === undefined) {
+      throw new Error('\'q1\' cannot be null');
+    }
+    if (q1 !== null && q1 !== undefined && typeof q1 !== 'string') {
+      throw new Error('q1 must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
-  var requestUrl = this.baseUri + 
-                   '//azure/resource-flatten/resourcecollection';
+  var requestUrl = this.client.baseUri + 
+                   '//azurespecials/skipUrlEncoding/method/query/valid';
   var queryParameters = [];
+  queryParameters.push('q1=' + q1);
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -632,7 +394,7 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
         if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+          error.body = client._models['ErrorModel'].deserialize(error.body);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -645,25 +407,301 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    // Deserialize Response
-    if (statusCode === 200) {
-      var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ResourceCollection'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
-      }
-    }
 
     return callback(null, result);
   });
 };
 
-module.exports = AutoRestResourceFlatteningTestService;
+/**
+ * Get method with unencoded query parameter with value null
+ * @param {String} [q1] Unencoded query parameter with value null
+ *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
+ * @param {function} callback
+ *
+ * @returns {Stream} The Response stream
+ */
+SkipUrlEncoding.prototype.getMethodQueryNull = function (q1, options, callback) {
+  var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+  // Validate
+  try {
+    if (q1 !== null && q1 !== undefined && typeof q1 !== 'string') {
+      throw new Error('q1 must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
+
+  // Construct URL
+  var requestUrl = this.client.baseUri + 
+                   '//azurespecials/skipUrlEncoding/method/query/null';
+  var queryParameters = [];
+  if (q1 !== null && q1 !== undefined) {
+    queryParameters.push('q1=' + q1);
+  }
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
+
+  // Create HTTP transport objects
+  var httpRequest = new WebResource();
+  httpRequest.method = 'GET';
+  httpRequest.headers = {};
+  httpRequest.url = requestUrl;
+  // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
+  // Send Request
+  return client.pipeline(httpRequest, function (err, response, responseBody) {
+    if (err) {
+      return callback(err);
+    }
+    var statusCode = response.statusCode;
+    if (statusCode !== 200) {
+      var error = new Error(responseBody);
+      error.statusCode = response.statusCode;
+      error.request = httpRequest;
+      error.response = response;
+      if (responseBody === '') responseBody = null;
+      var parsedErrorResponse;
+      try {
+        parsedErrorResponse = JSON.parse(responseBody);
+        error.body = parsedErrorResponse;
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
+      } catch (defaultError) {
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        return callback(error);
+      }
+      return callback(error);
+    }
+    // Create Result
+    var result = new msRest.HttpOperationResponse();
+    result.request = httpRequest;
+    result.response = response;
+    if (responseBody === '') responseBody = null;
+
+    return callback(null, result);
+  });
+};
+
+/**
+ * Get method with unencoded query parameter with value
+ * 'value1&q2=value2&q3=value3'
+ * @param {String} [q1] Unencoded query parameter with value 'value1&q2=value2&q3=value3'
+ *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
+ * @param {function} callback
+ *
+ * @returns {Stream} The Response stream
+ */
+SkipUrlEncoding.prototype.getPathQueryValid = function (q1, options, callback) {
+  var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+  // Validate
+  try {
+    if (q1 === null || q1 === undefined) {
+      throw new Error('\'q1\' cannot be null');
+    }
+    if (q1 !== null && q1 !== undefined && typeof q1 !== 'string') {
+      throw new Error('q1 must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
+
+  // Construct URL
+  var requestUrl = this.client.baseUri + 
+                   '//azurespecials/skipUrlEncoding/path/query/valid';
+  var queryParameters = [];
+  queryParameters.push('q1=' + q1);
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
+
+  // Create HTTP transport objects
+  var httpRequest = new WebResource();
+  httpRequest.method = 'GET';
+  httpRequest.headers = {};
+  httpRequest.url = requestUrl;
+  // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
+  // Send Request
+  return client.pipeline(httpRequest, function (err, response, responseBody) {
+    if (err) {
+      return callback(err);
+    }
+    var statusCode = response.statusCode;
+    if (statusCode !== 200) {
+      var error = new Error(responseBody);
+      error.statusCode = response.statusCode;
+      error.request = httpRequest;
+      error.response = response;
+      if (responseBody === '') responseBody = null;
+      var parsedErrorResponse;
+      try {
+        parsedErrorResponse = JSON.parse(responseBody);
+        error.body = parsedErrorResponse;
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
+      } catch (defaultError) {
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        return callback(error);
+      }
+      return callback(error);
+    }
+    // Create Result
+    var result = new msRest.HttpOperationResponse();
+    result.request = httpRequest;
+    result.response = response;
+    if (responseBody === '') responseBody = null;
+
+    return callback(null, result);
+  });
+};
+
+/**
+ * Get method with unencoded query parameter with value
+ * 'value1&q2=value2&q3=value3'
+ * @param {String} [q1] An unencoded query parameter with value 'value1&q2=value2&q3=value3'. Possible values for this parameter include: 'value1&q2=value2&q3=value3'
+ *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
+ * @param {function} callback
+ *
+ * @returns {Stream} The Response stream
+ */
+SkipUrlEncoding.prototype.getSwaggerQueryValid = function (q1, options, callback) {
+  var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+  // Validate
+  try {
+    if (q1 !== null && q1 !== undefined && typeof q1 !== 'string') {
+      throw new Error('q1 must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
+
+  // Construct URL
+  var requestUrl = this.client.baseUri + 
+                   '//azurespecials/skipUrlEncoding/swagger/query/valid';
+  var queryParameters = [];
+  if (q1 !== null && q1 !== undefined) {
+    queryParameters.push('q1=' + q1);
+  }
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
+
+  // Create HTTP transport objects
+  var httpRequest = new WebResource();
+  httpRequest.method = 'GET';
+  httpRequest.headers = {};
+  httpRequest.url = requestUrl;
+  // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
+  // Send Request
+  return client.pipeline(httpRequest, function (err, response, responseBody) {
+    if (err) {
+      return callback(err);
+    }
+    var statusCode = response.statusCode;
+    if (statusCode !== 200) {
+      var error = new Error(responseBody);
+      error.statusCode = response.statusCode;
+      error.request = httpRequest;
+      error.response = response;
+      if (responseBody === '') responseBody = null;
+      var parsedErrorResponse;
+      try {
+        parsedErrorResponse = JSON.parse(responseBody);
+        error.body = parsedErrorResponse;
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
+      } catch (defaultError) {
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        return callback(error);
+      }
+      return callback(error);
+    }
+    // Create Result
+    var result = new msRest.HttpOperationResponse();
+    result.request = httpRequest;
+    result.response = response;
+    if (responseBody === '') responseBody = null;
+
+    return callback(null, result);
+  });
+};
+
+
+module.exports = SkipUrlEncoding;

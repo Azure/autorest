@@ -1,58 +1,31 @@
-/* jshint latedef:false */
-/* jshint forin:false */
-/* jshint noempty:false */
 
 'use strict';
 
 var util = require('util');
 var msRest = require('ms-rest');
 var msRestAzure = require('ms-rest-azure');
-var ServiceClient = msRestAzure.AzureServiceClient;
+var ServiceClient = msRest.ServiceClient;
 var WebResource = msRest.WebResource;
 
-var models = require('./models');
+var models = require('../models');
 
 /**
  * @class
- * Initializes a new instance of the AutoRestResourceFlatteningTestService class.
+ * SubscriptionInCredentials
+ * __NOTE__: An instance of this class is automatically created for an
+ * instance of the AutoRestAzureSpecialParametersTestClient.
+ * Initializes a new instance of the SubscriptionInCredentials class.
  * @constructor
  *
- * @param {ServiceClientCredentials} [credentials] Management credentials for Azure.
- *
- * @param {string} [baseUri] - The base URI of the service.
- *
- * @param {object} [options] - The parameter options
- *
- * @param {Array} [options.filters] - Filters to be added to the request pipeline
- *
- * @param {object} [options.requestOptions] - Options for the underlying request object
- * {@link https://github.com/request/request#requestoptions-callback Options doc}
- *
- * @param {bool} [options.noRetryPolicy] - If set to true, turn off default retry policy
+ * @param {AutoRestAzureSpecialParametersTestClient} client Reference to the service client.
  */
-function AutoRestResourceFlatteningTestService(credentials, baseUri, options) {
-  if (credentials === null || credentials === undefined) {
-    throw new Error('\'credentials\' cannot be null.');
-  }
-
-  if (!options) options = {};
-
-  AutoRestResourceFlatteningTestService['super_'].call(this, credentials, options);
-  this.baseUri = baseUri;
-  if (!this.baseUri) {
-    this.baseUri = 'http://localhost';
-  }
-  this.credentials = credentials;
-
-  this._models = models;
+function SubscriptionInCredentials(client) {
+  this.client = client;
 }
 
-util.inherits(AutoRestResourceFlatteningTestService, ServiceClient);
-
 /**
- * Put External Resource as an Array
- * @param {Array} [resourceArray] External Resource as an Array to put
- *
+ * POST method with subscriptionId modeled in credentials.  Set the credential
+ * subscriptionId to '1234-5678-9012-3456' to succeed
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -62,8 +35,8 @@ util.inherits(AutoRestResourceFlatteningTestService, ServiceClient);
  *
  * @returns {Stream} The Response stream
  */
-AutoRestResourceFlatteningTestService.prototype.putArray = function (resourceArray, options, callback) {
-  var client = this;
+SubscriptionInCredentials.prototype.postMethodGlobalValid = function (options, callback) {
+  var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -73,20 +46,20 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (resourceArr
   }
   // Validate
   try {
-    if (resourceArray !== null && resourceArray !== undefined && util.isArray(resourceArray)) {
-      for (var i = 0; i < resourceArray.length; i++) {
-        if (resourceArray[i] !== null && resourceArray[i] !== undefined) {
-          client._models['Resource'].validate(resourceArray[i]);
-        }
-      }
+    if (this.client.subscriptionId === null || this.client.subscriptionId === undefined) {
+      throw new Error('\'this.client.subscriptionId\' cannot be null');
+    }
+    if (this.client.subscriptionId !== null && this.client.subscriptionId !== undefined && typeof this.client.subscriptionId !== 'string') {
+      throw new Error('this.client.subscriptionId must be of type string.');
     }
   } catch (error) {
     return callback(error);
   }
 
   // Construct URL
-  var requestUrl = this.baseUri + 
-                   '//azure/resource-flatten/array';
+  var requestUrl = this.client.baseUri + 
+                   '//azurespecials/subscriptionId/method/string/none/path/global/1234-5678-9012-3456/{subscriptionId}';
+  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
@@ -97,93 +70,7 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (resourceArr
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
-  httpRequest.method = 'PUT';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  // Serialize Request
-  var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(resourceArray));
-  httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
-    if (responseBody === '') responseBody = null;
-
-    return callback(null, result);
-  });
-};
-
-/**
- * Get External Resource as an Array
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
- * request
- *
- * @param {function} callback
- *
- * @returns {Stream} The Response stream
- */
-AutoRestResourceFlatteningTestService.prototype.getArray = function (options, callback) {
-  var client = this;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-
-  // Construct URL
-  var requestUrl = this.baseUri + 
-                   '//azure/resource-flatten/array';
-  var queryParameters = [];
-  if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
-  }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'GET';
+  httpRequest.method = 'POST';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
@@ -227,35 +114,15 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    // Deserialize Response
-    if (statusCode === 200) {
-      var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var i = 0; i < result.body.length; i++) {
-            if (result.body[i] !== null && result.body[i] !== undefined) {
-              result.body[i] = client._models['FlattenedProduct'].deserialize(result.body[i]);
-            }
-          }
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
-      }
-    }
 
     return callback(null, result);
   });
 };
 
 /**
- * Put External Resource as a Dictionary
- * @param {Object} [resourceDictionary] External Resource as a Dictionary to put
- *
+ * POST method with subscriptionId modeled in credentials.  Set the credential
+ * subscriptionId to null, and client-side validation should prevent you from
+ * making this call
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -265,8 +132,8 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
  *
  * @returns {Stream} The Response stream
  */
-AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resourceDictionary, options, callback) {
-  var client = this;
+SubscriptionInCredentials.prototype.postMethodGlobalNull = function (options, callback) {
+  var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -276,20 +143,20 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resour
   }
   // Validate
   try {
-    if (resourceDictionary !== null && resourceDictionary !== undefined && typeof resourceDictionary === 'object') {
-      for(var valueElement in resourceDictionary) {
-        if (resourceDictionary[valueElement] !== null && resourceDictionary[valueElement] !== undefined) {
-          client._models['FlattenedProduct'].validate(resourceDictionary[valueElement]);
-        }
-      }
+    if (this.client.subscriptionId === null || this.client.subscriptionId === undefined) {
+      throw new Error('\'this.client.subscriptionId\' cannot be null');
+    }
+    if (this.client.subscriptionId !== null && this.client.subscriptionId !== undefined && typeof this.client.subscriptionId !== 'string') {
+      throw new Error('this.client.subscriptionId must be of type string.');
     }
   } catch (error) {
     return callback(error);
   }
 
   // Construct URL
-  var requestUrl = this.baseUri + 
-                   '//azure/resource-flatten/dictionary';
+  var requestUrl = this.client.baseUri + 
+                   '//azurespecials/subscriptionId/method/string/none/path/global/null/{subscriptionId}';
+  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
@@ -300,93 +167,7 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resour
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
-  httpRequest.method = 'PUT';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  // Serialize Request
-  var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(resourceDictionary));
-  httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
-    if (responseBody === '') responseBody = null;
-
-    return callback(null, result);
-  });
-};
-
-/**
- * Get External Resource as a Dictionary
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
- * request
- *
- * @param {function} callback
- *
- * @returns {Stream} The Response stream
- */
-AutoRestResourceFlatteningTestService.prototype.getDictionary = function (options, callback) {
-  var client = this;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-
-  // Construct URL
-  var requestUrl = this.baseUri + 
-                   '//azure/resource-flatten/dictionary';
-  var queryParameters = [];
-  if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
-  }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'GET';
+  httpRequest.method = 'POST';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
@@ -430,51 +211,14 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    // Deserialize Response
-    if (statusCode === 200) {
-      var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          for (var property in result.body) {
-            if (result.body[property] !== null && result.body[property] !== undefined) {
-              result.body[property] = client._models['FlattenedProduct'].deserialize(result.body[property]);
-            }
-          }
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
-      }
-    }
 
     return callback(null, result);
   });
 };
 
 /**
- * Put External Resource as a ResourceCollection
- * @param {ResourceCollection} [resourceComplexObject] External Resource as a ResourceCollection to put
- *
- * @param {Array} [resourceComplexObject.arrayofresources] 
- *
- * @param {Object} [resourceComplexObject.dictionaryofresources] 
- *
- * @param {FlattenedProduct} [resourceComplexObject.productresource] 
- *
- * @param {FlattenedProductProperties} [resourceComplexObject.productresource.properties] 
- *
- * @param {String} [resourceComplexObject.productresource.properties.pname] 
- *
- * @param {String} [resourceComplexObject.productresource.properties.provisioningState] 
- *
- * @param {String} [resourceComplexObject.productresource.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
- * @param {String} [resourceComplexObject.productresource.properties.type] 
- *
+ * POST method with subscriptionId modeled in credentials.  Set the credential
+ * subscriptionId to '1234-5678-9012-3456' to succeed
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -484,8 +228,8 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
  *
  * @returns {Stream} The Response stream
  */
-AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function (resourceComplexObject, options, callback) {
-  var client = this;
+SubscriptionInCredentials.prototype.postMethodGlobalNotProvidedValid = function (options, callback) {
+  var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -495,17 +239,28 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
   }
   // Validate
   try {
-    if (resourceComplexObject !== null && resourceComplexObject !== undefined) {
-      client._models['ResourceCollection'].validate(resourceComplexObject);
+    if (this.client.subscriptionId === null || this.client.subscriptionId === undefined) {
+      throw new Error('\'this.client.subscriptionId\' cannot be null');
+    }
+    if (this.client.subscriptionId !== null && this.client.subscriptionId !== undefined && typeof this.client.subscriptionId !== 'string') {
+      throw new Error('this.client.subscriptionId must be of type string.');
+    }
+    if (this.client.apiVersion === null || this.client.apiVersion === undefined) {
+      throw new Error('\'this.client.apiVersion\' cannot be null');
+    }
+    if (this.client.apiVersion !== null && this.client.apiVersion !== undefined && typeof this.client.apiVersion !== 'string') {
+      throw new Error('this.client.apiVersion must be of type string.');
     }
   } catch (error) {
     return callback(error);
   }
 
   // Construct URL
-  var requestUrl = this.baseUri + 
-                   '//azure/resource-flatten/resourcecollection';
+  var requestUrl = this.client.baseUri + 
+                   '//azurespecials/subscriptionId/method/string/none/path/globalNotProvided/1234-5678-9012-3456/{subscriptionId}';
+  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
   var queryParameters = [];
+  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -515,16 +270,13 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
-  httpRequest.method = 'PUT';
+  httpRequest.method = 'POST';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  // Serialize Request
-  var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(resourceComplexObject));
-  httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -568,7 +320,8 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
 };
 
 /**
- * Get External Resource as a ResourceCollection
+ * POST method with subscriptionId modeled in credentials.  Set the credential
+ * subscriptionId to '1234-5678-9012-3456' to succeed
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -578,8 +331,8 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
  *
  * @returns {Stream} The Response stream
  */
-AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function (options, callback) {
-  var client = this;
+SubscriptionInCredentials.prototype.postPathGlobalValid = function (options, callback) {
+  var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -587,10 +340,22 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.subscriptionId === null || this.client.subscriptionId === undefined) {
+      throw new Error('\'this.client.subscriptionId\' cannot be null');
+    }
+    if (this.client.subscriptionId !== null && this.client.subscriptionId !== undefined && typeof this.client.subscriptionId !== 'string') {
+      throw new Error('this.client.subscriptionId must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
-  var requestUrl = this.baseUri + 
-                   '//azure/resource-flatten/resourcecollection';
+  var requestUrl = this.client.baseUri + 
+                   '//azurespecials/subscriptionId/path/string/none/path/global/1234-5678-9012-3456/{subscriptionId}';
+  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
@@ -601,7 +366,7 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
-  httpRequest.method = 'GET';
+  httpRequest.method = 'POST';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
@@ -632,7 +397,7 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
         parsedErrorResponse = JSON.parse(responseBody);
         error.body = parsedErrorResponse;
         if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+          error.body = client._models['ErrorModel'].deserialize(error.body);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -645,25 +410,106 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    // Deserialize Response
-    if (statusCode === 200) {
-      var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ResourceCollection'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
-      }
-    }
 
     return callback(null, result);
   });
 };
 
-module.exports = AutoRestResourceFlatteningTestService;
+/**
+ * POST method with subscriptionId modeled in credentials.  Set the credential
+ * subscriptionId to '1234-5678-9012-3456' to succeed
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
+ * @param {function} callback
+ *
+ * @returns {Stream} The Response stream
+ */
+SubscriptionInCredentials.prototype.postSwaggerGlobalValid = function (options, callback) {
+  var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+  // Validate
+  try {
+    if (this.client.subscriptionId === null || this.client.subscriptionId === undefined) {
+      throw new Error('\'this.client.subscriptionId\' cannot be null');
+    }
+    if (this.client.subscriptionId !== null && this.client.subscriptionId !== undefined && typeof this.client.subscriptionId !== 'string') {
+      throw new Error('this.client.subscriptionId must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
+
+  // Construct URL
+  var requestUrl = this.client.baseUri + 
+                   '//azurespecials/subscriptionId/swagger/string/none/path/global/1234-5678-9012-3456/{subscriptionId}';
+  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
+
+  // Create HTTP transport objects
+  var httpRequest = new WebResource();
+  httpRequest.method = 'POST';
+  httpRequest.headers = {};
+  httpRequest.url = requestUrl;
+  // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
+  // Send Request
+  return client.pipeline(httpRequest, function (err, response, responseBody) {
+    if (err) {
+      return callback(err);
+    }
+    var statusCode = response.statusCode;
+    if (statusCode !== 200) {
+      var error = new Error(responseBody);
+      error.statusCode = response.statusCode;
+      error.request = httpRequest;
+      error.response = response;
+      if (responseBody === '') responseBody = null;
+      var parsedErrorResponse;
+      try {
+        parsedErrorResponse = JSON.parse(responseBody);
+        error.body = parsedErrorResponse;
+        if (error.body !== null && error.body !== undefined) {
+          error.body = client._models['ErrorModel'].deserialize(error.body);
+        }
+      } catch (defaultError) {
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        return callback(error);
+      }
+      return callback(error);
+    }
+    // Create Result
+    var result = new msRest.HttpOperationResponse();
+    result.request = httpRequest;
+    result.response = response;
+    if (responseBody === '') responseBody = null;
+
+    return callback(null, result);
+  });
+};
+
+
+module.exports = SubscriptionInCredentials;

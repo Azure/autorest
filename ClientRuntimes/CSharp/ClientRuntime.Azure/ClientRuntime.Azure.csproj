@@ -52,7 +52,6 @@
     <Compile Include="OData\FilterString.cs" />
     <Compile Include="OData\UrlExpressionVisitor.cs" />
     <Compile Include="PollingState.cs" />
-    <Compile Include="IResource.cs" />
     <Compile Include="Authentication\StringTokenProvider.cs" />
     <Compile Include="SubResource.cs" />
     <Compile Include="Resource.cs" />

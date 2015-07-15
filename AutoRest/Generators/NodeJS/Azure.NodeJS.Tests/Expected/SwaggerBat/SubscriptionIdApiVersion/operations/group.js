@@ -1,56 +1,32 @@
-/* jshint latedef:false */
-/* jshint forin:false */
-/* jshint noempty:false */
 
 'use strict';
 
 var util = require('util');
 var msRest = require('ms-rest');
 var msRestAzure = require('ms-rest-azure');
-var ServiceClient = msRestAzure.AzureServiceClient;
+var ServiceClient = msRest.ServiceClient;
 var WebResource = msRest.WebResource;
 
-var models = require('./models');
+var models = require('../models');
 
 /**
  * @class
- * Initializes a new instance of the AutoRestReportServiceForAzure class.
+ * Group
+ * __NOTE__: An instance of this class is automatically created for an
+ * instance of the MicrosoftAzureTestUrl.
+ * Initializes a new instance of the Group class.
  * @constructor
  *
- * @param {ServiceClientCredentials} [credentials] Management credentials for Azure.
- *
- * @param {string} [baseUri] - The base URI of the service.
- *
- * @param {object} [options] - The parameter options
- *
- * @param {Array} [options.filters] - Filters to be added to the request pipeline
- *
- * @param {object} [options.requestOptions] - Options for the underlying request object
- * {@link https://github.com/request/request#requestoptions-callback Options doc}
- *
- * @param {bool} [options.noRetryPolicy] - If set to true, turn off default retry policy
+ * @param {MicrosoftAzureTestUrl} client Reference to the service client.
  */
-function AutoRestReportServiceForAzure(credentials, baseUri, options) {
-  if (credentials === null || credentials === undefined) {
-    throw new Error('\'credentials\' cannot be null.');
-  }
-
-  if (!options) options = {};
-
-  AutoRestReportServiceForAzure['super_'].call(this, credentials, options);
-  this.baseUri = baseUri;
-  if (!this.baseUri) {
-    this.baseUri = 'http://localhost';
-  }
-  this.credentials = credentials;
-
-  this._models = models;
+function Group(client) {
+  this.client = client;
 }
 
-util.inherits(AutoRestReportServiceForAzure, ServiceClient);
-
 /**
- * Get test coverage report
+ * Provides a resouce group with name 'testgroup101' and location 'West US'.
+ * @param {String} [resourceGroupName] Resource Group name 'testgroup101'.
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -60,8 +36,8 @@ util.inherits(AutoRestReportServiceForAzure, ServiceClient);
  *
  * @returns {Stream} The Response stream
  */
-AutoRestReportServiceForAzure.prototype.getReport = function (options, callback) {
-  var client = this;
+Group.prototype.getSampleResourceGroup = function (resourceGroupName, options, callback) {
+  var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -69,11 +45,37 @@ AutoRestReportServiceForAzure.prototype.getReport = function (options, callback)
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.subscriptionId === null || this.client.subscriptionId === undefined) {
+      throw new Error('\'this.client.subscriptionId\' cannot be null');
+    }
+    if (this.client.subscriptionId !== null && this.client.subscriptionId !== undefined && typeof this.client.subscriptionId !== 'string') {
+      throw new Error('this.client.subscriptionId must be of type string.');
+    }
+    if (resourceGroupName === null || resourceGroupName === undefined) {
+      throw new Error('\'resourceGroupName\' cannot be null');
+    }
+    if (resourceGroupName !== null && resourceGroupName !== undefined && typeof resourceGroupName !== 'string') {
+      throw new Error('resourceGroupName must be of type string.');
+    }
+    if (this.client.apiVersion === null || this.client.apiVersion === undefined) {
+      throw new Error('\'this.client.apiVersion\' cannot be null');
+    }
+    if (this.client.apiVersion !== null && this.client.apiVersion !== undefined && typeof this.client.apiVersion !== 'string') {
+      throw new Error('this.client.apiVersion must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
-  var requestUrl = this.baseUri + 
-                   '//report/azure';
+  var requestUrl = this.client.baseUri + 
+                   '//subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}';
+  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
+  requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   var queryParameters = [];
+  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -133,6 +135,9 @@ AutoRestReportServiceForAzure.prototype.getReport = function (options, callback)
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
+        if (result.body !== null && result.body !== undefined) {
+          result.body = client._models['SampleResourceGroup'].deserialize(result.body);
+        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -145,4 +150,5 @@ AutoRestReportServiceForAzure.prototype.getReport = function (options, callback)
   });
 };
 
-module.exports = AutoRestReportServiceForAzure;
+
+module.exports = Group;
