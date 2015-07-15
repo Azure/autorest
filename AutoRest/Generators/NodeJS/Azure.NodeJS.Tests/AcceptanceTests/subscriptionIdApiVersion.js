@@ -20,7 +20,7 @@ var baseUri = 'http://localhost:3000';
 describe('nodejs', function () {
   
   describe('Azure Swagger Url', function () {
-    var testClient = new azureUrlClient(credentials, baseUri, clientOptions);
+    var testClient = new azureUrlClient(credentials, dummySubscriptionId, baseUri, clientOptions);
     
     it('should correctly send the subscriptionId as path parameter and api-version ' + 
       'as a query parameter in the request url', function (done) {

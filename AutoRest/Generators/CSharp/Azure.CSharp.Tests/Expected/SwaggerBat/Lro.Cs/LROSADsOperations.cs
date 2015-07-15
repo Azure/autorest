@@ -38,16 +38,20 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> PutNonRetry400WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> PutNonRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product> response = await BeginPutNonRetry400WithOperationResponseAsync(
-                product, cancellationToken);
+            AzureOperationResponse<Product> response = await BeginPutNonRetry400WithHttpMessagesAsync(
+                product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetNonRetry400WithOperationResponseAsync(cancellationToken),
+                () => GetNonRetry400WithHttpMessagesAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                customHeaders, 
                 cancellationToken);
         }
 
@@ -57,15 +61,14 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPutNonRetry400WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> BeginPutNonRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -81,7 +84,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/nonretryerror/put/400";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -93,6 +95,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("PUT");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -113,10 +123,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Created")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -138,11 +148,13 @@ namespace Fixtures.Azure.SwaggerBatLro
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Created"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
@@ -155,10 +167,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <summary>
         /// DO NOT CALL THIS METHOD. For completion only
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> GetNonRetry400WithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> GetNonRetry400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -174,7 +189,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/nonretryerror/put/400";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -186,6 +200,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -202,10 +224,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -227,6 +249,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
@@ -243,16 +266,20 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> PutNonRetry201Creating400WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> PutNonRetry201Creating400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product> response = await BeginPutNonRetry201Creating400WithOperationResponseAsync(
-                product, cancellationToken);
+            AzureOperationResponse<Product> response = await BeginPutNonRetry201Creating400WithHttpMessagesAsync(
+                product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetNonRetry201Creating400WithOperationResponseAsync(cancellationToken),
+                () => GetNonRetry201Creating400WithHttpMessagesAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                customHeaders, 
                 cancellationToken);
         }
 
@@ -263,15 +290,14 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPutNonRetry201Creating400WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> BeginPutNonRetry201Creating400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -287,7 +313,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/nonretryerror/put/201/creating/400";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -299,6 +324,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("PUT");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -319,10 +352,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Created")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -344,11 +377,13 @@ namespace Fixtures.Azure.SwaggerBatLro
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Created"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
@@ -361,10 +396,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <summary>
         /// Long running opeartion polling returns a 400 with no error body
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> GetNonRetry201Creating400WithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> GetNonRetry201Creating400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -380,7 +418,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/nonretryerror/put/201/creating/400";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -392,6 +429,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -408,10 +453,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -433,6 +478,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
@@ -450,16 +496,20 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> PutAsyncRelativeRetry400WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> PutAsyncRelativeRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetry400WithOperationResponseAsync(
-                product, cancellationToken);
+            AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetry400WithHttpMessagesAsync(
+                product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetAsyncRelativeRetry400WithOperationResponseAsync(cancellationToken),
+                () => GetAsyncRelativeRetry400WithHttpMessagesAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                customHeaders, 
                 cancellationToken);
         }
 
@@ -471,15 +521,14 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetry400WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -495,7 +544,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/nonretryerror/putasync/retry/400";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -507,6 +555,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("PUT");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -527,10 +583,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -552,6 +608,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
@@ -564,10 +621,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <summary>
         /// DO NOT CALL THIS METHOD. For completion only
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> GetAsyncRelativeRetry400WithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> GetAsyncRelativeRetry400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -583,7 +643,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/nonretryerror/putasync/retry/400";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -595,6 +654,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -611,10 +678,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -636,6 +703,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
@@ -648,24 +716,30 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <summary>
         /// Long running delete request, service returns a 400 with an error body
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> DeleteNonRetry400WithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> DeleteNonRetry400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginDeleteNonRetry400WithOperationResponseAsync(
-                cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+            AzureOperationResponse response = await BeginDeleteNonRetry400WithHttpMessagesAsync(
+                customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
         /// Long running delete request, service returns a 400 with an error body
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginDeleteNonRetry400WithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginDeleteNonRetry400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -681,7 +755,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/nonretryerror/delete/400";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -693,6 +766,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("DELETE");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -709,10 +790,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -741,24 +822,30 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <summary>
         /// Long running delete request, service returns a 202 with a location header
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> Delete202NonRetry400WithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> Delete202NonRetry400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginDelete202NonRetry400WithOperationResponseAsync(
-                cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+            AzureOperationResponse response = await BeginDelete202NonRetry400WithHttpMessagesAsync(
+                customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
         /// Long running delete request, service returns a 202 with a location header
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginDelete202NonRetry400WithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginDelete202NonRetry400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -774,7 +861,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/nonretryerror/delete/202/retry/400";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -786,6 +872,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("DELETE");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -802,10 +896,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -836,15 +930,18 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Poll the endpoint indicated in the Azure-AsyncOperation header for
         /// operation status
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> DeleteAsyncRelativeRetry400WithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> DeleteAsyncRelativeRetry400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginDeleteAsyncRelativeRetry400WithOperationResponseAsync(
-                cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+            AzureOperationResponse response = await BeginDeleteAsyncRelativeRetry400WithHttpMessagesAsync(
+                customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -852,10 +949,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Poll the endpoint indicated in the Azure-AsyncOperation header for
         /// operation status
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginDeleteAsyncRelativeRetry400WithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginDeleteAsyncRelativeRetry400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -871,7 +971,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/nonretryerror/deleteasync/retry/400";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -883,6 +982,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("DELETE");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -899,10 +1006,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -934,15 +1041,18 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> PostNonRetry400WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> PostNonRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginPostNonRetry400WithOperationResponseAsync(
-                product, cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+            AzureOperationResponse response = await BeginPostNonRetry400WithHttpMessagesAsync(
+                product, customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -951,15 +1061,14 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginPostNonRetry400WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginPostNonRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -975,7 +1084,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/nonretryerror/post/400";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -987,6 +1095,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("POST");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -1007,10 +1123,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -1042,15 +1158,18 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> Post202NonRetry400WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> Post202NonRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginPost202NonRetry400WithOperationResponseAsync(
-                product, cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+            AzureOperationResponse response = await BeginPost202NonRetry400WithHttpMessagesAsync(
+                product, customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -1059,15 +1178,14 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginPost202NonRetry400WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginPost202NonRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -1083,7 +1201,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/nonretryerror/post/202/retry/400";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -1095,6 +1212,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("POST");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -1115,10 +1240,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -1152,15 +1277,18 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> PostAsyncRelativeRetry400WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> PostAsyncRelativeRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginPostAsyncRelativeRetry400WithOperationResponseAsync(
-                product, cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+            AzureOperationResponse response = await BeginPostAsyncRelativeRetry400WithHttpMessagesAsync(
+                product, customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -1171,15 +1299,14 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginPostAsyncRelativeRetry400WithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginPostAsyncRelativeRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -1195,7 +1322,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/nonretryerror/postasync/retry/400";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -1207,6 +1333,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("POST");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -1227,10 +1361,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -1263,16 +1397,20 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> PutError201NoProvisioningStatePayloadWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> PutError201NoProvisioningStatePayloadWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product> response = await BeginPutError201NoProvisioningStatePayloadWithOperationResponseAsync(
-                product, cancellationToken);
+            AzureOperationResponse<Product> response = await BeginPutError201NoProvisioningStatePayloadWithHttpMessagesAsync(
+                product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetError201NoProvisioningStatePayloadWithOperationResponseAsync(cancellationToken),
+                () => GetError201NoProvisioningStatePayloadWithHttpMessagesAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                customHeaders, 
                 cancellationToken);
         }
 
@@ -1283,15 +1421,14 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPutError201NoProvisioningStatePayloadWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> BeginPutError201NoProvisioningStatePayloadWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -1307,7 +1444,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/put/201/noprovisioningstatepayload";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -1319,6 +1455,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("PUT");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -1339,10 +1483,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Created")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -1364,11 +1508,13 @@ namespace Fixtures.Azure.SwaggerBatLro
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Created"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
@@ -1381,10 +1527,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <summary>
         /// DO NOT CALL THIS METHOD. For completion only
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> GetError201NoProvisioningStatePayloadWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> GetError201NoProvisioningStatePayloadWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1400,7 +1549,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/put/201/noprovisioningstatepayload";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -1412,6 +1560,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -1428,10 +1584,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -1453,6 +1609,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
@@ -1470,16 +1627,20 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> PutAsyncRelativeRetryNoStatusWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> PutAsyncRelativeRetryNoStatusWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetryNoStatusWithOperationResponseAsync(
-                product, cancellationToken);
+            AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetryNoStatusWithHttpMessagesAsync(
+                product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetAsyncRelativeRetryNoStatusWithOperationResponseAsync(cancellationToken),
+                () => GetAsyncRelativeRetryNoStatusWithHttpMessagesAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                customHeaders, 
                 cancellationToken);
         }
 
@@ -1491,15 +1652,14 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryNoStatusWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryNoStatusWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -1515,7 +1675,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/putasync/retry/nostatus";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -1527,6 +1686,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("PUT");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -1547,10 +1714,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -1572,6 +1739,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
@@ -1586,10 +1754,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// with an entity that contains ProvisioningState=’Creating’. Poll the
         /// endpoint indicated in the Azure-AsyncOperation header for operation status
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> GetAsyncRelativeRetryNoStatusWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> GetAsyncRelativeRetryNoStatusWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1605,7 +1776,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/putasync/retry/nostatus";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -1617,6 +1787,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -1633,10 +1811,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -1658,6 +1836,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
@@ -1675,16 +1854,20 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> PutAsyncRelativeRetryNoStatusPayloadWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> PutAsyncRelativeRetryNoStatusPayloadWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetryNoStatusPayloadWithOperationResponseAsync(
-                product, cancellationToken);
+            AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetryNoStatusPayloadWithHttpMessagesAsync(
+                product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetAsyncRelativeRetryNoStatusPayloadWithOperationResponseAsync(cancellationToken),
+                () => GetAsyncRelativeRetryNoStatusPayloadWithHttpMessagesAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                customHeaders, 
                 cancellationToken);
         }
 
@@ -1696,15 +1879,14 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryNoStatusPayloadWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryNoStatusPayloadWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -1720,7 +1902,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/putasync/retry/nostatuspayload";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -1732,6 +1913,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("PUT");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -1752,10 +1941,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -1777,6 +1966,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
@@ -1791,10 +1981,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// with an entity that contains ProvisioningState=’Creating’. Poll the
         /// endpoint indicated in the Azure-AsyncOperation header for operation status
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> GetAsyncRelativeRetryNoStatusPayloadWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> GetAsyncRelativeRetryNoStatusPayloadWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1810,7 +2003,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/putasync/retry/nostatuspayload";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -1822,6 +2014,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -1838,10 +2038,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -1863,6 +2063,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
@@ -1876,25 +2077,31 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Long running delete request, service returns a 204 to the initial request,
         /// indicating success.
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> Delete204SucceededWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> Delete204SucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginDelete204SucceededWithOperationResponseAsync(
-                cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+            AzureOperationResponse response = await BeginDelete204SucceededWithHttpMessagesAsync(
+                customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
         /// Long running delete request, service returns a 204 to the initial request,
         /// indicating success.
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginDelete204SucceededWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginDelete204SucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1910,7 +2117,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/delete/204/nolocation";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -1922,6 +2128,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("DELETE");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -1938,10 +2152,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "NoContent")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -1972,15 +2186,18 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Poll the endpoint indicated in the Azure-AsyncOperation header for
         /// operation status
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> DeleteAsyncRelativeRetryNoStatusWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> DeleteAsyncRelativeRetryNoStatusWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginDeleteAsyncRelativeRetryNoStatusWithOperationResponseAsync(
-                cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+            AzureOperationResponse response = await BeginDeleteAsyncRelativeRetryNoStatusWithHttpMessagesAsync(
+                customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -1988,10 +2205,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Poll the endpoint indicated in the Azure-AsyncOperation header for
         /// operation status
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginDeleteAsyncRelativeRetryNoStatusWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginDeleteAsyncRelativeRetryNoStatusWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2007,7 +2227,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/deleteasync/retry/nostatus";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -2019,6 +2238,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("DELETE");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -2035,10 +2262,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -2071,15 +2298,18 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> Post202NoLocationWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> Post202NoLocationWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginPost202NoLocationWithOperationResponseAsync(
-                product, cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+            AzureOperationResponse response = await BeginPost202NoLocationWithHttpMessagesAsync(
+                product, customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -2089,15 +2319,14 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginPost202NoLocationWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginPost202NoLocationWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -2113,7 +2342,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/post/202/nolocation";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -2125,6 +2353,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("POST");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -2145,10 +2381,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -2182,15 +2418,18 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> PostAsyncRelativeRetryNoPayloadWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> PostAsyncRelativeRetryNoPayloadWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginPostAsyncRelativeRetryNoPayloadWithOperationResponseAsync(
-                product, cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+            AzureOperationResponse response = await BeginPostAsyncRelativeRetryNoPayloadWithHttpMessagesAsync(
+                product, customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -2201,15 +2440,14 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginPostAsyncRelativeRetryNoPayloadWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginPostAsyncRelativeRetryNoPayloadWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -2225,7 +2463,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/postasync/retry/nopayload";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -2237,6 +2474,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("POST");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -2257,10 +2502,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -2293,16 +2538,20 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> Put200InvalidJsonWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> Put200InvalidJsonWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product> response = await BeginPut200InvalidJsonWithOperationResponseAsync(
-                product, cancellationToken);
+            AzureOperationResponse<Product> response = await BeginPut200InvalidJsonWithHttpMessagesAsync(
+                product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => Get200SucceededWithOperationResponseAsync(cancellationToken),
+                () => Get200SucceededWithHttpMessagesAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                customHeaders, 
                 cancellationToken);
         }
 
@@ -2313,15 +2562,14 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPut200InvalidJsonWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> BeginPut200InvalidJsonWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -2337,7 +2585,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/put/200/invalidjson";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -2349,6 +2596,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("PUT");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -2369,10 +2624,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "NoContent")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -2394,6 +2649,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
@@ -2406,10 +2662,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <summary>
         /// SHOUD NOT BE CALLED
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> Get200SucceededWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> Get200SucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2425,7 +2684,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/put/200/invalidjson";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -2437,6 +2695,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -2453,10 +2719,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -2478,6 +2744,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
@@ -2495,16 +2762,20 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> PutAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> PutAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(
-                product, cancellationToken);
+            AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(
+                product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(cancellationToken),
+                () => GetAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                customHeaders, 
                 cancellationToken);
         }
 
@@ -2516,15 +2787,14 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -2540,7 +2810,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/putasync/retry/invalidheader";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -2552,6 +2821,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("PUT");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -2572,10 +2849,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -2597,6 +2874,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
@@ -2609,10 +2887,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <summary>
         /// SHOULD NOT BE CALLED
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> GetAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> GetAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2628,7 +2909,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/putasync/retry/invalidheader";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -2640,6 +2920,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -2656,10 +2944,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -2681,6 +2969,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
@@ -2698,16 +2987,20 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>    
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> PutAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> PutAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(
-                product, cancellationToken);
+            AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(
+                product, customHeaders, cancellationToken);
             return await this.Client.GetPutOperationResultAsync<Product>(response, 
-                () => GetAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(cancellationToken),
+                () => GetAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(customHeaders: customHeaders, cancellationToken: cancellationToken),
+                customHeaders, 
                 cancellationToken);
         }
 
@@ -2719,15 +3012,14 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -2743,7 +3035,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/putasync/retry/invalidjsonpolling";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -2755,6 +3046,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("PUT");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -2775,10 +3074,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -2800,6 +3099,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
@@ -2814,10 +3114,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// with an entity that contains ProvisioningState=’Creating’. Poll the
         /// endpoint indicated in the Azure-AsyncOperation header for operation status
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> GetAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> GetAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2833,7 +3136,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/putasync/retry/invalidjsonpolling";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -2845,6 +3147,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -2861,10 +3171,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -2886,6 +3196,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
@@ -2899,25 +3210,31 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Long running delete request, service returns a 202 to the initial request
         /// receing a reponse with an invalid 'Location' and 'Retry-After' headers
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> Delete202RetryInvalidHeaderWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> Delete202RetryInvalidHeaderWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginDelete202RetryInvalidHeaderWithOperationResponseAsync(
-                cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+            AzureOperationResponse response = await BeginDelete202RetryInvalidHeaderWithHttpMessagesAsync(
+                customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
         /// Long running delete request, service returns a 202 to the initial request
         /// receing a reponse with an invalid 'Location' and 'Retry-After' headers
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginDelete202RetryInvalidHeaderWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginDelete202RetryInvalidHeaderWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2933,7 +3250,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/delete/202/retry/invalidheader";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -2945,6 +3261,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("DELETE");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -2961,10 +3285,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -2994,25 +3318,31 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Long running delete request, service returns a 202 to the initial request.
         /// The endpoint indicated in the Azure-AsyncOperation header is invalid
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> DeleteAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> DeleteAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginDeleteAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(
-                cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+            AzureOperationResponse response = await BeginDeleteAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(
+                customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
         /// Long running delete request, service returns a 202 to the initial request.
         /// The endpoint indicated in the Azure-AsyncOperation header is invalid
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginDeleteAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginDeleteAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -3028,7 +3358,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/deleteasync/retry/invalidheader";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -3040,6 +3369,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("DELETE");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -3056,10 +3393,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -3090,15 +3427,18 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Poll the endpoint indicated in the Azure-AsyncOperation header for
         /// operation status
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> DeleteAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> DeleteAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginDeleteAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(
-                cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+            AzureOperationResponse response = await BeginDeleteAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(
+                customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -3106,10 +3446,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Poll the endpoint indicated in the Azure-AsyncOperation header for
         /// operation status
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginDeleteAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginDeleteAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -3125,7 +3468,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/deleteasync/retry/invalidjsonpolling";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -3137,6 +3479,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("DELETE");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -3153,10 +3503,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -3189,15 +3539,18 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> Post202RetryInvalidHeaderWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> Post202RetryInvalidHeaderWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginPost202RetryInvalidHeaderWithOperationResponseAsync(
-                product, cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+            AzureOperationResponse response = await BeginPost202RetryInvalidHeaderWithHttpMessagesAsync(
+                product, customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -3207,15 +3560,14 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginPost202RetryInvalidHeaderWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginPost202RetryInvalidHeaderWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -3231,7 +3583,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/post/202/retry/invalidheader";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -3243,6 +3594,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("POST");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -3263,10 +3622,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -3300,15 +3659,18 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> PostAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> PostAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginPostAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(
-                product, cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+            AzureOperationResponse response = await BeginPostAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(
+                product, customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -3319,15 +3681,14 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginPostAsyncRelativeRetryInvalidHeaderWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginPostAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -3343,7 +3704,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/postasync/retry/invalidheader";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -3355,6 +3715,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("POST");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -3375,10 +3743,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -3412,15 +3780,18 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> PostAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> PostAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginPostAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(
-                product, cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, cancellationToken);
+            AzureOperationResponse response = await BeginPostAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(
+                product, customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -3431,15 +3802,14 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// <param name='product'>
         /// Product to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginPostAsyncRelativeRetryInvalidJsonPollingWithOperationResponseAsync(Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginPostAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (product != null)
-            {
-                product.Validate();
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -3455,7 +3825,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//lro/error/postasync/retry/invalidjsonpolling";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -3467,6 +3836,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.Method = new HttpMethod("POST");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -3487,10 +3864,10 @@ namespace Fixtures.Azure.SwaggerBatLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {

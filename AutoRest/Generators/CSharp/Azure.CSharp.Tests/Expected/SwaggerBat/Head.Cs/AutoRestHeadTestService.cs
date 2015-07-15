@@ -36,11 +36,6 @@ namespace Fixtures.Azure.SwaggerBatHead
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
         /// <summary>
-        /// The Api Version.
-        /// </summary>
-        public string ApiVersion { get; private set; }
-
-        /// <summary>
         /// Subscription credentials which uniquely identify Microsoft Azure
         /// subscription.
         /// </summary>
@@ -160,7 +155,6 @@ namespace Fixtures.Azure.SwaggerBatHead
         {
             this.HttpSuccess = new HttpSuccessOperations(this);
             this.BaseUri = new Uri("http://localhost");
-            this.ApiVersion = "1.0.0";
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,

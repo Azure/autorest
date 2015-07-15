@@ -33,27 +33,27 @@ namespace Microsoft.Rest.TransientFaultHandling
             bool fastFirstRetry,
             CancellationToken cancellationToken)
         {
-            this._taskFunc = taskFunc;
-            this._shouldRetryHandler = shouldRetryHandler;
-            this._isTransient = isTransient;
-            this._onRetrying = onRetrying;
-            this._fastFirstRetry = fastFirstRetry;
-            this._cancellationToken = cancellationToken;
+            _taskFunc = taskFunc;
+            _shouldRetryHandler = shouldRetryHandler;
+            _isTransient = isTransient;
+            _onRetrying = onRetrying;
+            _fastFirstRetry = fastFirstRetry;
+            _cancellationToken = cancellationToken;
         }
 
         internal Task<TResult> ExecuteAsync()
         {
-            return this.ExecuteAsyncImpl(null);
+            return ExecuteAsyncImpl(null);
         }
 
         private Task<TResult> ExecuteAsyncImpl(Task ignore)
         {
-            if (this._cancellationToken.IsCancellationRequested)
+            if (_cancellationToken.IsCancellationRequested)
             {
                 // if retry was canceled before retrying after a failure, return the failed task.
-                if (this._previousTask != null)
+                if (_previousTask != null)
                 {
-                    return this._previousTask;
+                    return _previousTask;
                 }
                 else
                 {
@@ -74,11 +74,11 @@ namespace Microsoft.Rest.TransientFaultHandling
             Task<TResult> task;
             try
             {
-                task = this._taskFunc.Invoke();
+                task = _taskFunc.Invoke();
             }
             catch (Exception ex)
             {
-                if (this._isTransient(ex))
+                if (_isTransient(ex))
                 {
                     var tcs = new TaskCompletionSource<TResult>();
                     tcs.TrySetException(ex);
@@ -103,34 +103,32 @@ namespace Microsoft.Rest.TransientFaultHandling
             }
 
             return task
-                .ContinueWith<Task<TResult>>(this.ExecuteAsyncContinueWith, CancellationToken.None,
+                .ContinueWith<Task<TResult>>(ExecuteAsyncContinueWith, CancellationToken.None,
                     TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default)
                 .Unwrap();
         }
 
         private Task<TResult> ExecuteAsyncContinueWith(Task<TResult> runningTask)
         {
-            if (!runningTask.IsFaulted || this._cancellationToken.IsCancellationRequested)
+            if (!runningTask.IsFaulted || _cancellationToken.IsCancellationRequested)
             {
                 return runningTask;
             }
 
-            TimeSpan delay = TimeSpan.Zero;
-
             Exception lastError = runningTask.Exception.InnerException;
 
-            if (!(this._isTransient(lastError)))
+            if (!(_isTransient(lastError)))
             {
                 // if not transient, return the faulted running task.
                 return runningTask;
             }
 
-            RetryCondition condition = this._shouldRetryHandler(this._retryCount++, lastError);
+            RetryCondition condition = _shouldRetryHandler(_retryCount++, lastError);
             if (!condition.RetryAllowed)
             {
                 return runningTask;
             }
-            delay = condition.DelayBeforeRetry;
+            TimeSpan delay = condition.DelayBeforeRetry;
 
             // Perform an extra check in the delay interval.
             if (delay < TimeSpan.Zero)
@@ -138,18 +136,18 @@ namespace Microsoft.Rest.TransientFaultHandling
                 delay = TimeSpan.Zero;
             }
 
-            this._onRetrying(this._retryCount, lastError, delay);
+            _onRetrying(_retryCount, lastError, delay);
 
-            this._previousTask = runningTask;
-            if (delay > TimeSpan.Zero && (this._retryCount > 1 || !this._fastFirstRetry))
+            _previousTask = runningTask;
+            if (delay > TimeSpan.Zero && (_retryCount > 1 || !_fastFirstRetry))
             {
                 return PlatformTask.Delay(delay)
-                    .ContinueWith<Task<TResult>>(this.ExecuteAsyncImpl, CancellationToken.None,
+                    .ContinueWith<Task<TResult>>(ExecuteAsyncImpl, CancellationToken.None,
                         TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default)
                     .Unwrap();
             }
 
-            return this.ExecuteAsyncImpl(null);
+            return ExecuteAsyncImpl(null);
         }
     }
 
@@ -159,7 +157,7 @@ namespace Microsoft.Rest.TransientFaultHandling
     /// </summary>
     internal class AsyncExecution : AsyncExecution<bool>
     {
-        private static Task<bool> cachedBoolTask;
+        private static Task<bool> _cachedBoolTask;
 
         public AsyncExecution(
             Func<Task> taskAction,
@@ -169,9 +167,25 @@ namespace Microsoft.Rest.TransientFaultHandling
             bool fastFirstRetry,
             CancellationToken cancellationToken)
             : base(
-                () => StartAsGenericTask(taskAction), shouldRetryHandler, isTransient, onRetrying, fastFirstRetry,
+                () => StartAsGenericTask(taskAction), 
+                shouldRetryHandler, 
+                isTransient, 
+                onRetrying, 
+                fastFirstRetry,
                 cancellationToken)
         {
+        }
+
+        private static Task<bool> GetCachedTask()
+        {
+            if (_cachedBoolTask == null)
+            {
+                var tcs = new TaskCompletionSource<bool>();
+                tcs.TrySetResult(true);
+                _cachedBoolTask = tcs.Task;
+            }
+
+            return _cachedBoolTask;
         }
 
         /// <summary>
@@ -221,16 +235,5 @@ namespace Microsoft.Rest.TransientFaultHandling
             return tcs.Task;
         }
 
-        private static Task<bool> GetCachedTask()
-        {
-            if (cachedBoolTask == null)
-            {
-                var tcs = new TaskCompletionSource<bool>();
-                tcs.TrySetResult(true);
-                cachedBoolTask = tcs.Task;
-            }
-
-            return cachedBoolTask;
-        }
     }
 }

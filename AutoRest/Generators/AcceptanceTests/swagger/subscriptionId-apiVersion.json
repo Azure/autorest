@@ -12,6 +12,22 @@
   "basePath": "/",
   "produces": [ "application/json" ],
   "consumes": [ "application/json" ],
+  "parameters": {
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Subscription Id.",
+      "required": true,
+      "type": "string"
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "API Version with value '2014-04-01-preview'.",
+      "required": true,
+      "type": "string"
+    }
+  },
   "paths": {
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}": {
       "get": {
@@ -19,11 +35,7 @@
         "description": "Provides a resouce group with name 'testgroup101' and location 'West US'.",
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "Subscription Id.",
-            "required": true,
-            "type": "string"
+            "$ref": "subscriptionIdParameter"
           },
           {
             "name": "resourceGroupName",
@@ -33,11 +45,7 @@
             "type": "string"
           },
           {
-            "name": "apiVersion",
-            "in": "query",
-            "description": "API Version with value '2014-04-01-preview'.",
-            "required": true,
-            "type": "string"
+            "$ref" : "apiVersionParameter"
           }
         ],
         "responses": {

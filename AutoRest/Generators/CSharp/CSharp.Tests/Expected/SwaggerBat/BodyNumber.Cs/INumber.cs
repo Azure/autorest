@@ -16,119 +16,164 @@ namespace Fixtures.SwaggerBatBodyNumber
         /// <summary>
         /// Get null Number value
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<double?>> GetNullWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<double?>> GetNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get invalid float Number value
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<double?>> GetInvalidFloatWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<double?>> GetInvalidFloatWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get invalid double Number value
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<double?>> GetInvalidDoubleWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<double?>> GetInvalidDoubleWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put big float value 3.402823e+20
         /// </summary>
         /// <param name='numberBody'>
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> PutBigFloatWithOperationResponseAsync(double? numberBody, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutBigFloatWithHttpMessagesAsync(double? numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get big float value 3.402823e+20
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<double?>> GetBigFloatWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<double?>> GetBigFloatWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put big double value 2.5976931e+101
         /// </summary>
         /// <param name='numberBody'>
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> PutBigDoubleWithOperationResponseAsync(double? numberBody, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutBigDoubleWithHttpMessagesAsync(double? numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get big double value 2.5976931e+101
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<double?>> GetBigDoubleWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<double?>> GetBigDoubleWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put big double value 99999999.99
         /// </summary>
         /// <param name='numberBody'>
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> PutBigDoublePositiveDecimalWithOperationResponseAsync(double? numberBody, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutBigDoublePositiveDecimalWithHttpMessagesAsync(double? numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get big double value 99999999.99
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<double?>> GetBigDoublePositiveDecimalWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<double?>> GetBigDoublePositiveDecimalWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put big double value -99999999.99
         /// </summary>
         /// <param name='numberBody'>
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> PutBigDoubleNegativeDecimalWithOperationResponseAsync(double? numberBody, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutBigDoubleNegativeDecimalWithHttpMessagesAsync(double? numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get big double value -99999999.99
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<double?>> GetBigDoubleNegativeDecimalWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<double?>> GetBigDoubleNegativeDecimalWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put small float value 3.402823e-20
         /// </summary>
         /// <param name='numberBody'>
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> PutSmallFloatWithOperationResponseAsync(double? numberBody, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutSmallFloatWithHttpMessagesAsync(double? numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get big double value 3.402823e-20
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<double?>> GetSmallFloatWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<double?>> GetSmallFloatWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put small double value 2.5976931e-101
         /// </summary>
         /// <param name='numberBody'>
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> PutSmallDoubleWithOperationResponseAsync(double? numberBody, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutSmallDoubleWithHttpMessagesAsync(double? numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get big double value 2.5976931e-101
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<double?>> GetSmallDoubleWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<double?>> GetSmallDoubleWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

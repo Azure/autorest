@@ -15,11 +15,5 @@ namespace Fixtures.SwaggerBatBodyComplex.Models
         [JsonProperty(PropertyName = "array")]
         public IList<string> Array { get; set; }
 
-        /// <summary>
-        /// Validate the object. Throws ArgumentException or ArgumentNullException if validation fails.
-        /// </summary>
-        public virtual void Validate()
-        {
-        }
     }
 }

@@ -35,10 +35,13 @@ namespace Fixtures.SwaggerBatBodyComplex
         /// <summary>
         /// Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<Basic>> GetValidWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<Basic>> GetValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -60,6 +63,14 @@ namespace Fixtures.SwaggerBatBodyComplex
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -73,10 +84,10 @@ namespace Fixtures.SwaggerBatBodyComplex
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -97,6 +108,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Basic>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
@@ -112,18 +124,17 @@ namespace Fixtures.SwaggerBatBodyComplex
         /// <param name='complexBody'>
         /// Please put {id: 2, name: 'abc', color: 'Magenta'}
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> PutValidWithOperationResponseAsync(Basic complexBody, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutValidWithHttpMessagesAsync(Basic complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (complexBody == null)
             {
-                throw new ArgumentNullException("complexBody");
-            }
-            if (complexBody != null)
-            {
-                complexBody.Validate();
+                throw new ValidationException(ValidationRules.CannotBeNull, "complexBody");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -146,6 +157,14 @@ namespace Fixtures.SwaggerBatBodyComplex
             httpRequest.Method = new HttpMethod("PUT");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Serialize Request  
             string requestContent = JsonConvert.SerializeObject(complexBody, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
@@ -163,10 +182,10 @@ namespace Fixtures.SwaggerBatBodyComplex
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -194,10 +213,13 @@ namespace Fixtures.SwaggerBatBodyComplex
         /// <summary>
         /// Get a basic complex type that is invalid for the local strong type
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<Basic>> GetInvalidWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<Basic>> GetInvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -219,6 +241,14 @@ namespace Fixtures.SwaggerBatBodyComplex
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -232,10 +262,10 @@ namespace Fixtures.SwaggerBatBodyComplex
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -256,6 +286,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Basic>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
@@ -268,10 +299,13 @@ namespace Fixtures.SwaggerBatBodyComplex
         /// <summary>
         /// Get a basic complex type that is empty
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<Basic>> GetEmptyWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<Basic>> GetEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -293,6 +327,14 @@ namespace Fixtures.SwaggerBatBodyComplex
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -306,10 +348,10 @@ namespace Fixtures.SwaggerBatBodyComplex
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -330,6 +372,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Basic>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
@@ -342,10 +385,13 @@ namespace Fixtures.SwaggerBatBodyComplex
         /// <summary>
         /// Get a basic complex type whose properties are null
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<Basic>> GetNullWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<Basic>> GetNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -367,6 +413,14 @@ namespace Fixtures.SwaggerBatBodyComplex
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -380,10 +434,10 @@ namespace Fixtures.SwaggerBatBodyComplex
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -404,6 +458,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Basic>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
@@ -417,10 +472,13 @@ namespace Fixtures.SwaggerBatBodyComplex
         /// Get a basic complex type while the server doesn't provide a response
         /// payload
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<Basic>> GetNotProvidedWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<Basic>> GetNotProvidedWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -442,6 +500,14 @@ namespace Fixtures.SwaggerBatBodyComplex
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -455,10 +521,10 @@ namespace Fixtures.SwaggerBatBodyComplex
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -479,6 +545,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Basic>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)

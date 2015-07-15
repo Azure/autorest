@@ -34,6 +34,16 @@ namespace Fixtures.SwaggerBatUrl
         /// </summary>
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
+        /// <summary>
+        /// A string value 'globalItemStringPath' that appears in the path
+        /// </summary>
+        public string GlobalStringPath { get; set; }
+
+        /// <summary>
+        /// should contain value null
+        /// </summary>
+        public string GlobalStringQuery { get; set; }
+
         public virtual IPaths Paths { get; private set; }
 
         public virtual IQueries Queries { get; private set; }
@@ -90,6 +100,51 @@ namespace Fixtures.SwaggerBatUrl
             }
             this.Initialize();
             this.BaseUri = baseUri;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the AutoRestUrlTestService class.
+        /// </summary>
+        /// <param name='globalStringPath'>
+        /// Required. A string value 'globalItemStringPath' that appears in the path
+        /// </param>
+        /// <param name='handlers'>
+        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// </param>
+        public AutoRestUrlTestService(string globalStringPath, params DelegatingHandler[] handlers) : this(handlers)
+        {
+            if (globalStringPath == null)
+            {
+                throw new ArgumentNullException("globalStringPath");
+            }
+            this.GlobalStringPath = globalStringPath;
+            this.Initialize();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the AutoRestUrlTestService class.
+        /// </summary>
+        /// <param name='baseUri'>
+        /// Optional. The base URI of the service.
+        /// </param>
+        /// <param name='globalStringPath'>
+        /// Required. A string value 'globalItemStringPath' that appears in the path
+        /// </param>
+        /// <param name='handlers'>
+        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// </param>
+        public AutoRestUrlTestService(Uri baseUri, string globalStringPath, params DelegatingHandler[] handlers) : this(handlers)
+        {
+            if (baseUri == null)
+            {
+                throw new ArgumentNullException("baseUri");
+            }
+            if (globalStringPath == null)
+            {
+                throw new ArgumentNullException("globalStringPath");
+            }
+            this.BaseUri = baseUri;
+            this.GlobalStringPath = globalStringPath;
         }
 
         /// <summary>

@@ -34,6 +34,21 @@ namespace Fixtures.SwaggerBatRequiredOptional
         /// </summary>
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
+        /// <summary>
+        /// number of items to skip
+        /// </summary>
+        public string RequiredGlobalPath { get; set; }
+
+        /// <summary>
+        /// number of items to skip
+        /// </summary>
+        public string RequiredGlobalQuery { get; set; }
+
+        /// <summary>
+        /// number of items to skip
+        /// </summary>
+        public int? OptionalGlobalQuery { get; set; }
+
         public virtual IImplicitModel ImplicitModel { get; private set; }
 
         public virtual IExplicitModel ExplicitModel { get; private set; }
@@ -88,6 +103,67 @@ namespace Fixtures.SwaggerBatRequiredOptional
             }
             this.Initialize();
             this.BaseUri = baseUri;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the AutoRestRequiredOptionalTestService class.
+        /// </summary>
+        /// <param name='requiredGlobalPath'>
+        /// Required. number of items to skip
+        /// </param>
+        /// <param name='requiredGlobalQuery'>
+        /// Required. number of items to skip
+        /// </param>
+        /// <param name='handlers'>
+        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// </param>
+        public AutoRestRequiredOptionalTestService(string requiredGlobalPath, string requiredGlobalQuery, params DelegatingHandler[] handlers) : this(handlers)
+        {
+            if (requiredGlobalPath == null)
+            {
+                throw new ArgumentNullException("requiredGlobalPath");
+            }
+            if (requiredGlobalQuery == null)
+            {
+                throw new ArgumentNullException("requiredGlobalQuery");
+            }
+            this.RequiredGlobalPath = requiredGlobalPath;
+            this.RequiredGlobalQuery = requiredGlobalQuery;
+            this.Initialize();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the AutoRestRequiredOptionalTestService class.
+        /// </summary>
+        /// <param name='baseUri'>
+        /// Optional. The base URI of the service.
+        /// </param>
+        /// <param name='requiredGlobalPath'>
+        /// Required. number of items to skip
+        /// </param>
+        /// <param name='requiredGlobalQuery'>
+        /// Required. number of items to skip
+        /// </param>
+        /// <param name='handlers'>
+        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// </param>
+        public AutoRestRequiredOptionalTestService(Uri baseUri, string requiredGlobalPath, string requiredGlobalQuery, params DelegatingHandler[] handlers) : this(handlers)
+        {
+            if (baseUri == null)
+            {
+                throw new ArgumentNullException("baseUri");
+            }
+            if (requiredGlobalPath == null)
+            {
+                throw new ArgumentNullException("requiredGlobalPath");
+            }
+            if (requiredGlobalQuery == null)
+            {
+                throw new ArgumentNullException("requiredGlobalQuery");
+            }
+            this.BaseUri = baseUri;
+            this.RequiredGlobalPath = requiredGlobalPath;
+            this.RequiredGlobalQuery = requiredGlobalQuery;
         }
 
         /// <summary>

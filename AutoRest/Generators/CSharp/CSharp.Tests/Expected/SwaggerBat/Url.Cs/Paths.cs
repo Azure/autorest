@@ -38,14 +38,17 @@ namespace Fixtures.SwaggerBatUrl
         /// <param name='boolPath'>
         /// true boolean value
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> GetBooleanTrueWithOperationResponseAsync(bool? boolPath, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> GetBooleanTrueWithHttpMessagesAsync(bool? boolPath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (boolPath == null)
             {
-                throw new ArgumentNullException("boolPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "boolPath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -69,6 +72,14 @@ namespace Fixtures.SwaggerBatUrl
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -82,10 +93,10 @@ namespace Fixtures.SwaggerBatUrl
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -116,14 +127,17 @@ namespace Fixtures.SwaggerBatUrl
         /// <param name='boolPath'>
         /// false boolean value
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> GetBooleanFalseWithOperationResponseAsync(bool? boolPath, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> GetBooleanFalseWithHttpMessagesAsync(bool? boolPath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (boolPath == null)
             {
-                throw new ArgumentNullException("boolPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "boolPath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -147,6 +161,14 @@ namespace Fixtures.SwaggerBatUrl
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -160,10 +182,10 @@ namespace Fixtures.SwaggerBatUrl
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -194,14 +216,17 @@ namespace Fixtures.SwaggerBatUrl
         /// <param name='intPath'>
         /// '1000000' integer value
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> GetIntOneMillionWithOperationResponseAsync(int? intPath, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> GetIntOneMillionWithHttpMessagesAsync(int? intPath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (intPath == null)
             {
-                throw new ArgumentNullException("intPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "intPath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -225,6 +250,14 @@ namespace Fixtures.SwaggerBatUrl
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -238,10 +271,10 @@ namespace Fixtures.SwaggerBatUrl
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -272,14 +305,17 @@ namespace Fixtures.SwaggerBatUrl
         /// <param name='intPath'>
         /// '-1000000' integer value
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> GetIntNegativeOneMillionWithOperationResponseAsync(int? intPath, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> GetIntNegativeOneMillionWithHttpMessagesAsync(int? intPath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (intPath == null)
             {
-                throw new ArgumentNullException("intPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "intPath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -303,6 +339,14 @@ namespace Fixtures.SwaggerBatUrl
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -316,10 +360,10 @@ namespace Fixtures.SwaggerBatUrl
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -350,14 +394,17 @@ namespace Fixtures.SwaggerBatUrl
         /// <param name='longPath'>
         /// '10000000000' 64 bit integer value
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> GetTenBillionWithOperationResponseAsync(long? longPath, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> GetTenBillionWithHttpMessagesAsync(long? longPath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (longPath == null)
             {
-                throw new ArgumentNullException("longPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "longPath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -381,6 +428,14 @@ namespace Fixtures.SwaggerBatUrl
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -394,10 +449,10 @@ namespace Fixtures.SwaggerBatUrl
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -428,14 +483,17 @@ namespace Fixtures.SwaggerBatUrl
         /// <param name='longPath'>
         /// '-10000000000' 64 bit integer value
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> GetNegativeTenBillionWithOperationResponseAsync(long? longPath, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> GetNegativeTenBillionWithHttpMessagesAsync(long? longPath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (longPath == null)
             {
-                throw new ArgumentNullException("longPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "longPath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -459,6 +517,14 @@ namespace Fixtures.SwaggerBatUrl
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -472,10 +538,10 @@ namespace Fixtures.SwaggerBatUrl
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -506,14 +572,17 @@ namespace Fixtures.SwaggerBatUrl
         /// <param name='floatPath'>
         /// '1.034E+20'numeric value
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> FloatScientificPositiveWithOperationResponseAsync(double? floatPath, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> FloatScientificPositiveWithHttpMessagesAsync(double? floatPath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (floatPath == null)
             {
-                throw new ArgumentNullException("floatPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "floatPath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -537,6 +606,14 @@ namespace Fixtures.SwaggerBatUrl
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -550,10 +627,10 @@ namespace Fixtures.SwaggerBatUrl
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -584,14 +661,17 @@ namespace Fixtures.SwaggerBatUrl
         /// <param name='floatPath'>
         /// '-1.034E-20'numeric value
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> FloatScientificNegativeWithOperationResponseAsync(double? floatPath, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> FloatScientificNegativeWithHttpMessagesAsync(double? floatPath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (floatPath == null)
             {
-                throw new ArgumentNullException("floatPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "floatPath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -615,6 +695,14 @@ namespace Fixtures.SwaggerBatUrl
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -628,10 +716,10 @@ namespace Fixtures.SwaggerBatUrl
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -662,14 +750,17 @@ namespace Fixtures.SwaggerBatUrl
         /// <param name='doublePath'>
         /// '9999999.999'numeric value
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> DoubleDecimalPositiveWithOperationResponseAsync(double? doublePath, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> DoubleDecimalPositiveWithHttpMessagesAsync(double? doublePath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (doublePath == null)
             {
-                throw new ArgumentNullException("doublePath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "doublePath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -693,6 +784,14 @@ namespace Fixtures.SwaggerBatUrl
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -706,10 +805,10 @@ namespace Fixtures.SwaggerBatUrl
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -740,14 +839,17 @@ namespace Fixtures.SwaggerBatUrl
         /// <param name='doublePath'>
         /// '-9999999.999'numeric value
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> DoubleDecimalNegativeWithOperationResponseAsync(double? doublePath, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> DoubleDecimalNegativeWithHttpMessagesAsync(double? doublePath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (doublePath == null)
             {
-                throw new ArgumentNullException("doublePath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "doublePath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -771,6 +873,14 @@ namespace Fixtures.SwaggerBatUrl
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -784,10 +894,10 @@ namespace Fixtures.SwaggerBatUrl
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -819,14 +929,17 @@ namespace Fixtures.SwaggerBatUrl
         /// '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter
         /// include: '啊齄丂狛狜隣郎隣兀﨩'
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> StringUnicodeWithOperationResponseAsync(string stringPath, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> StringUnicodeWithHttpMessagesAsync(string stringPath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (stringPath == null)
             {
-                throw new ArgumentNullException("stringPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "stringPath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -842,7 +955,7 @@ namespace Fixtures.SwaggerBatUrl
             // Construct URL
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//paths/string/unicode/{stringPath}";
-            url = url.Replace("{stringPath}", Uri.EscapeDataString(JsonConvert.SerializeObject(stringPath, this.Client.SerializationSettings).Trim('"')));
+            url = url.Replace("{stringPath}", Uri.EscapeDataString(stringPath));
             // trim all duplicate forward slashes in the url
             url = Regex.Replace(url, "([^:]/)/+", "$1");
             // Create HTTP transport objects
@@ -850,6 +963,14 @@ namespace Fixtures.SwaggerBatUrl
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -863,10 +984,10 @@ namespace Fixtures.SwaggerBatUrl
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -898,14 +1019,17 @@ namespace Fixtures.SwaggerBatUrl
         /// 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible
         /// values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> StringUrlEncodedWithOperationResponseAsync(string stringPath, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> StringUrlEncodedWithHttpMessagesAsync(string stringPath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (stringPath == null)
             {
-                throw new ArgumentNullException("stringPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "stringPath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -921,7 +1045,7 @@ namespace Fixtures.SwaggerBatUrl
             // Construct URL
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}";
-            url = url.Replace("{stringPath}", Uri.EscapeDataString(JsonConvert.SerializeObject(stringPath, this.Client.SerializationSettings).Trim('"')));
+            url = url.Replace("{stringPath}", Uri.EscapeDataString(stringPath));
             // trim all duplicate forward slashes in the url
             url = Regex.Replace(url, "([^:]/)/+", "$1");
             // Create HTTP transport objects
@@ -929,6 +1053,14 @@ namespace Fixtures.SwaggerBatUrl
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -942,10 +1074,10 @@ namespace Fixtures.SwaggerBatUrl
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -976,14 +1108,17 @@ namespace Fixtures.SwaggerBatUrl
         /// <param name='stringPath'>
         /// '' string value. Possible values for this parameter include: ''
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> StringEmptyWithOperationResponseAsync(string stringPath, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> StringEmptyWithHttpMessagesAsync(string stringPath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (stringPath == null)
             {
-                throw new ArgumentNullException("stringPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "stringPath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -999,7 +1134,7 @@ namespace Fixtures.SwaggerBatUrl
             // Construct URL
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//paths/string/empty/{stringPath}";
-            url = url.Replace("{stringPath}", Uri.EscapeDataString(JsonConvert.SerializeObject(stringPath, this.Client.SerializationSettings).Trim('"')));
+            url = url.Replace("{stringPath}", Uri.EscapeDataString(stringPath));
             // trim all duplicate forward slashes in the url
             url = Regex.Replace(url, "([^:]/)/+", "$1");
             // Create HTTP transport objects
@@ -1007,6 +1142,14 @@ namespace Fixtures.SwaggerBatUrl
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -1020,10 +1163,10 @@ namespace Fixtures.SwaggerBatUrl
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -1054,14 +1197,17 @@ namespace Fixtures.SwaggerBatUrl
         /// <param name='stringPath'>
         /// null string value
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> StringNullWithOperationResponseAsync(string stringPath, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> StringNullWithHttpMessagesAsync(string stringPath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (stringPath == null)
             {
-                throw new ArgumentNullException("stringPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "stringPath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1085,6 +1231,14 @@ namespace Fixtures.SwaggerBatUrl
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -1098,10 +1252,10 @@ namespace Fixtures.SwaggerBatUrl
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "BadRequest")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -1133,14 +1287,17 @@ namespace Fixtures.SwaggerBatUrl
         /// send the value green. Possible values for this parameter include: 'red
         /// color', 'green color', 'blue color'
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> EnumValidWithOperationResponseAsync(UriColor? enumPath, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> EnumValidWithHttpMessagesAsync(UriColor? enumPath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (enumPath == null)
             {
-                throw new ArgumentNullException("enumPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "enumPath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1164,6 +1321,14 @@ namespace Fixtures.SwaggerBatUrl
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -1177,10 +1342,10 @@ namespace Fixtures.SwaggerBatUrl
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -1212,14 +1377,17 @@ namespace Fixtures.SwaggerBatUrl
         /// send null should throw. Possible values for this parameter include: 'red
         /// color', 'green color', 'blue color'
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> EnumNullWithOperationResponseAsync(UriColor? enumPath, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> EnumNullWithHttpMessagesAsync(UriColor? enumPath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (enumPath == null)
             {
-                throw new ArgumentNullException("enumPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "enumPath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1242,6 +1410,14 @@ namespace Fixtures.SwaggerBatUrl
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -1255,10 +1431,10 @@ namespace Fixtures.SwaggerBatUrl
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "BadRequest")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -1289,14 +1465,17 @@ namespace Fixtures.SwaggerBatUrl
         /// <param name='bytePath'>
         /// '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ByteMultiByteWithOperationResponseAsync(byte[] bytePath, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ByteMultiByteWithHttpMessagesAsync(byte[] bytePath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (bytePath == null)
             {
-                throw new ArgumentNullException("bytePath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "bytePath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1320,6 +1499,14 @@ namespace Fixtures.SwaggerBatUrl
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -1333,10 +1520,10 @@ namespace Fixtures.SwaggerBatUrl
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -1367,14 +1554,17 @@ namespace Fixtures.SwaggerBatUrl
         /// <param name='bytePath'>
         /// '' as byte array
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ByteEmptyWithOperationResponseAsync(byte[] bytePath, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ByteEmptyWithHttpMessagesAsync(byte[] bytePath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (bytePath == null)
             {
-                throw new ArgumentNullException("bytePath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "bytePath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1398,6 +1588,14 @@ namespace Fixtures.SwaggerBatUrl
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -1411,10 +1609,10 @@ namespace Fixtures.SwaggerBatUrl
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -1445,14 +1643,17 @@ namespace Fixtures.SwaggerBatUrl
         /// <param name='bytePath'>
         /// null as byte array (should throw)
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ByteNullWithOperationResponseAsync(byte[] bytePath, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ByteNullWithHttpMessagesAsync(byte[] bytePath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (bytePath == null)
             {
-                throw new ArgumentNullException("bytePath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "bytePath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1476,6 +1677,14 @@ namespace Fixtures.SwaggerBatUrl
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -1489,10 +1698,10 @@ namespace Fixtures.SwaggerBatUrl
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "BadRequest")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -1523,14 +1732,17 @@ namespace Fixtures.SwaggerBatUrl
         /// <param name='datePath'>
         /// '2012-01-01' as date
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> DateValidWithOperationResponseAsync(DateTime? datePath, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> DateValidWithHttpMessagesAsync(DateTime? datePath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (datePath == null)
             {
-                throw new ArgumentNullException("datePath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "datePath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1554,6 +1766,14 @@ namespace Fixtures.SwaggerBatUrl
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -1567,10 +1787,10 @@ namespace Fixtures.SwaggerBatUrl
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -1602,14 +1822,17 @@ namespace Fixtures.SwaggerBatUrl
         /// <param name='datePath'>
         /// null as date (should throw)
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> DateNullWithOperationResponseAsync(DateTime? datePath, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> DateNullWithHttpMessagesAsync(DateTime? datePath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (datePath == null)
             {
-                throw new ArgumentNullException("datePath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "datePath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1633,6 +1856,14 @@ namespace Fixtures.SwaggerBatUrl
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -1646,10 +1877,10 @@ namespace Fixtures.SwaggerBatUrl
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "BadRequest")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -1680,14 +1911,17 @@ namespace Fixtures.SwaggerBatUrl
         /// <param name='dateTimePath'>
         /// '2012-01-01T01:01:01Z' as date-time
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> DateTimeValidWithOperationResponseAsync(DateTime? dateTimePath, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> DateTimeValidWithHttpMessagesAsync(DateTime? dateTimePath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (dateTimePath == null)
             {
-                throw new ArgumentNullException("dateTimePath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "dateTimePath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1711,6 +1945,14 @@ namespace Fixtures.SwaggerBatUrl
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -1724,10 +1966,10 @@ namespace Fixtures.SwaggerBatUrl
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -1759,14 +2001,17 @@ namespace Fixtures.SwaggerBatUrl
         /// <param name='dateTimePath'>
         /// null as date-time
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> DateTimeNullWithOperationResponseAsync(DateTime? dateTimePath, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> DateTimeNullWithHttpMessagesAsync(DateTime? dateTimePath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (dateTimePath == null)
             {
-                throw new ArgumentNullException("dateTimePath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "dateTimePath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1790,6 +2035,14 @@ namespace Fixtures.SwaggerBatUrl
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -1803,10 +2056,10 @@ namespace Fixtures.SwaggerBatUrl
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "BadRequest")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {

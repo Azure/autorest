@@ -11,7 +11,7 @@ namespace Fixtures.MirrorPrimitives
     /// <summary>
     /// Some cool documentation.
     /// </summary>
-    public partial interface ISwaggerDataTypesClient : IDisposable
+    public partial interface ISwaggerDataTypesClient
     {
         /// <summary>
         /// The base URI of the service.
@@ -26,10 +26,13 @@ namespace Fixtures.MirrorPrimitives
         /// <param name='product'>
         /// The only parameter
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>        
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<Product>> GetProductWithOperationResponseAsync(string responseCode = default(string), Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<Product>> GetProductWithHttpMessagesAsync(string responseCode = default(string), Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// </summary>
@@ -39,10 +42,13 @@ namespace Fixtures.MirrorPrimitives
         /// <param name='product'>
         /// The only parameter
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>        
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<Product>> PutProductWithOperationResponseAsync(string responseCode = default(string), Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<Product>> PutProductWithHttpMessagesAsync(string responseCode = default(string), Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// </summary>
@@ -52,10 +58,13 @@ namespace Fixtures.MirrorPrimitives
         /// <param name='product'>
         /// The only parameter
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>        
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<Product>> PostProductWithOperationResponseAsync(string responseCode = default(string), Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<Product>> PostProductWithHttpMessagesAsync(string responseCode = default(string), Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// </summary>
@@ -65,10 +74,13 @@ namespace Fixtures.MirrorPrimitives
         /// <param name='product'>
         /// The only parameter
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>        
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<Product>> PatchProductWithOperationResponseAsync(string responseCode = default(string), Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<Product>> PatchProductWithHttpMessagesAsync(string responseCode = default(string), Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
     }
 }

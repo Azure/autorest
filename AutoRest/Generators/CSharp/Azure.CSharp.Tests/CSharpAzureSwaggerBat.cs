@@ -14,6 +14,7 @@ using Fixtures.Azure.SwaggerBatLro.Models;
 using Fixtures.Azure.SwaggerBatLro;
 using Fixtures.Azure.SwaggerBatPaging;
 using Microsoft.Azure;
+using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.CSharp.Azure.Tests.Properties;
 using Microsoft.Rest.Generator.CSharp.Tests;
 using Microsoft.Rest.Generator.Utilities;
@@ -56,7 +57,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
             using (
                 var client =
                     new MicrosoftAzureTestUrl(Fixture.Uri,
-                        new TokenCloudCredentials(Guid.NewGuid().ToString(), Guid.NewGuid().ToString())))
+                        new TokenCloudCredentials(Guid.NewGuid().ToString(), Guid.NewGuid().ToString()),
+                        Guid.NewGuid().ToString()))
             {
                 var group = client.Group.GetSampleResourceGroup("testgroup101");
                 Assert.Equal("testgroup101", group.Name);
@@ -89,6 +91,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                     new TokenCloudCredentials(Guid.NewGuid().ToString(), Guid.NewGuid().ToString())))
             {
                 client.LongRunningOperationRetryTimeout = 0;
+
                 Assert.Equal("Succeeded",
                     client.LROs.Put201CreatingSucceeded200(new Product { Location = "West US" }).ProvisioningState);
                 var exception =
@@ -102,6 +105,12 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                     Assert.Throws<CloudException>(
                         () => client.LROs.Put200Acceptedcanceled200(new Product { Location = "West US" }).ProvisioningState);
                 Assert.Contains("Long running operation failed", exception.Message, StringComparison.Ordinal);
+                Assert.Equal("Succeeded", client.LROs.PutNoHeaderInRetry(new Product { Location = "West US" }).ProvisioningState);
+                Assert.Equal("Succeeded", client.LROs.PutAsyncNoHeaderInRetry(new Product { Location = "West US" }).ProvisioningState);
+                Assert.Equal("Succeeded", client.LROs.PutSubResource(new SubProduct()).ProvisioningState);
+                Assert.Equal("Succeeded", client.LROs.PutAsyncSubResource(new SubProduct()).ProvisioningState);
+                Assert.Equal("100", client.LROs.PutNonResource(new Sku()).Id);
+                Assert.Equal("100", client.LROs.PutAsyncNonResource(new Sku()).Id);
                 client.LROs.Post202Retry200(new Product { Location = "West US" });
                 Assert.Equal("Succeeded", client.LROs.Put200Succeeded(new Product { Location = "West US" }).ProvisioningState);
                 Assert.Equal("100", client.LROs.Put200SucceededNoState(new Product { Location = "West US" }).Id);
@@ -121,6 +130,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 client.LROs.Delete202Retry200();
                 client.LROs.Delete202NoRetry204();
                 client.LROs.DeleteAsyncNoRetrySucceeded();
+                client.LROs.DeleteNoHeaderInRetry();
+                client.LROs.DeleteAsyncNoHeaderInRetry();
                 exception = Assert.Throws<CloudException>(() => client.LROs.DeleteAsyncRetrycanceled());
                 Assert.Contains("Long running operation failed", exception.Message, StringComparison.Ordinal);
                 exception = Assert.Throws<CloudException>(() => client.LROs.DeleteAsyncRetryFailed());
@@ -155,6 +166,25 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 client.LRORetrys.DeleteAsyncRelativeRetrySucceeded();
                 client.LRORetrys.Post202Retry200(new Product { Location = "West US" });
                 client.LRORetrys.PostAsyncRelativeRetrySucceeded(new Product { Location = "West US" });
+
+                var customHeaders = new Dictionary<string, List<string>>
+                {
+                    {
+                    "x-ms-client-request-id", new List<string> {"9C4D50EE-2D56-4CD3-8152-34347DC9F2B0"}
+                    }
+                };
+
+                Assert.NotNull(client.LROsCustomHeader.PutAsyncRetrySucceededWithHttpMessagesAsync(
+                                    new Product { Location = "West US" }, customHeaders).Result);
+
+                Assert.NotNull(client.LROsCustomHeader.PostAsyncRetrySucceededWithHttpMessagesAsync(
+                                    new Product { Location = "West US" }, customHeaders).Result);
+                
+                Assert.NotNull(client.LROsCustomHeader.Put201CreatingSucceeded200WithHttpMessagesAsync(
+                                    new Product { Location = "West US" }, customHeaders).Result);
+
+                Assert.NotNull(client.LROsCustomHeader.Post202Retry200WithHttpMessagesAsync(
+                                    new Product { Location = "West US" }, customHeaders).Result);
             }
         }
 
@@ -365,6 +395,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 Assert.Equal("1", result[0].Id);
                 Assert.Equal("OK", result[0].ProvisioningStateValues);
                 Assert.Equal("Product1", result[0].Pname);
+                Assert.Equal("Flat", result[0].FlattenedProductType);
                 Assert.Equal("Building 44", result[0].Location);
                 Assert.Equal("Resource1", result[0].Name);
                 Assert.Equal("Succeeded", result[0].ProvisioningState);
@@ -388,7 +419,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                         {"tag1", "value1"},
                         {"tag2", "value3"}
                     },
-                    Pname = "Product1"
+                    Pname = "Product1",
+                    FlattenedProductType = "Flat"
                 });
                 resourceArray.Add(new FlattenedProduct
                 {
@@ -414,6 +446,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 Assert.Equal("1", resultDictionary["Product1"].Id);
                 Assert.Equal("OK", resultDictionary["Product1"].ProvisioningStateValues);
                 Assert.Equal("Product1", resultDictionary["Product1"].Pname);
+                Assert.Equal("Flat", resultDictionary["Product1"].FlattenedProductType);
                 Assert.Equal("Building 44", resultDictionary["Product1"].Location);
                 Assert.Equal("Resource1", resultDictionary["Product1"].Name);
                 Assert.Equal("Succeeded", resultDictionary["Product1"].ProvisioningState);
@@ -437,12 +470,14 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                         {"tag1", "value1"},
                         {"tag2", "value3"}
                     },
-                    Pname = "Product1"
+                    Pname = "Product1",
+                    FlattenedProductType = "Flat"
                 });
                 resourceDictionary.Add("Resource2", new FlattenedProduct
                 {
                     Location = "Building 44",
-                    Pname = "Product2"
+                    Pname = "Product2",
+                    FlattenedProductType = "Flat"
                 });
 
                 client.PutDictionary(resourceDictionary);
@@ -465,6 +500,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 Assert.Equal("1", resultResource.Dictionaryofresources["Product1"].Id);
                 Assert.Equal("OK", resultResource.Dictionaryofresources["Product1"].ProvisioningStateValues);
                 Assert.Equal("Product1", resultResource.Dictionaryofresources["Product1"].Pname);
+                Assert.Equal("Flat", resultResource.Dictionaryofresources["Product1"].FlattenedProductType);
                 Assert.Equal("Building 44", resultResource.Dictionaryofresources["Product1"].Location);
                 Assert.Equal("Resource1", resultResource.Dictionaryofresources["Product1"].Name);
                 Assert.Equal("Succeeded", resultResource.Dictionaryofresources["Product1"].ProvisioningState);
@@ -485,6 +521,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 Assert.Equal("4", resultResource.Arrayofresources[0].Id);
                 Assert.Equal("OK", resultResource.Arrayofresources[0].ProvisioningStateValues);
                 Assert.Equal("Product4", resultResource.Arrayofresources[0].Pname);
+                Assert.Equal("Flat", resultResource.Arrayofresources[0].FlattenedProductType);
                 Assert.Equal("Building 44", resultResource.Arrayofresources[0].Location);
                 Assert.Equal("Resource4", resultResource.Arrayofresources[0].Name);
                 Assert.Equal("Succeeded", resultResource.Arrayofresources[0].ProvisioningState);
@@ -512,12 +549,14 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                         {"tag1", "value1"},
                         {"tag2", "value3"}
                     },
-                    Pname = "Product1"
+                    Pname = "Product1",
+                    FlattenedProductType = "Flat"
                 });
                 resourceDictionary.Add("Resource2", new FlattenedProduct
                 {
                     Location = "Building 44",
-                    Pname = "Product2"
+                    Pname = "Product2",
+                    FlattenedProductType = "Flat"
                 });
 
                 var resourceComplexObject = new ResourceCollection()
@@ -533,18 +572,21 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                                 {"tag1", "value1"},
                                 {"tag2", "value3"}
                             },
-                            Pname = "Product1"
+                            Pname = "Product1",
+                            FlattenedProductType = "Flat"
                         },
                         new FlattenedProduct()
                         {
                             Location = "East US",
-                            Pname = "Product2"
+                            Pname = "Product2",
+                            FlattenedProductType = "Flat"
                         }
                     },
                     Productresource = new FlattenedProduct()
                     {
                         Location = "India",
-                        Pname = "Azure"
+                        Pname = "Azure",
+                        FlattenedProductType = "Flat"
                     }
                 };
                 client.PutResourceCollection(resourceComplexObject);
@@ -562,7 +604,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 @"Swagger\azure-special-properties.json", @"Expected\SwaggerBat\AzureSpecials.Cs");
             using (
                 var client = new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
-                    new TokenCloudCredentials(validSubscription, Guid.NewGuid().ToString())))
+                    new TokenCloudCredentials(validSubscription, Guid.NewGuid().ToString()),
+                    validSubscription))
             {
                 client.SubscriptionInCredentials.PostMethodGlobalNotProvidedValid();
                 client.SubscriptionInCredentials.PostMethodGlobalValid();
@@ -571,11 +614,12 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 Assert.Throws<ArgumentNullException>(
                     () =>
                         new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
-                            new TokenCloudCredentials(null, Guid.NewGuid().ToString())));
+                            new TokenCloudCredentials(null, Guid.NewGuid().ToString()),
+                            validSubscription));
                 client.SubscriptionInMethod.PostMethodLocalValid(validSubscription);
                 client.SubscriptionInMethod.PostPathLocalValid(validSubscription);
                 client.SubscriptionInMethod.PostSwaggerLocalValid(validSubscription);
-                Assert.Throws<ArgumentNullException>(() => client.SubscriptionInMethod.PostMethodLocalNull(null));
+                Assert.Throws<ValidationException>(() => client.SubscriptionInMethod.PostMethodLocalNull(null));
 
                 client.ApiVersionDefault.GetMethodGlobalNotProvidedValid();
                 client.ApiVersionDefault.GetMethodGlobalValid();

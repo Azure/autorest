@@ -27,17 +27,9 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
   }
 
   # Construct URL
-  @if (Model.UrlWithPath)
-  {
-  @:path = '/@(Model.UrlWithoutParameters.TrimStart('/'))'
-  @:@(Model.BuildUrlPath("path"))
-  @:url = URI.join(@(Model.UrlReference), path)
-  }
-  else
-  {
-  @:url = URI.join(@(Model.UrlReference), '/@(Model.UrlWithoutParameters.TrimStart('/'))')
-  }
-  @(Model.BuildUrlParametres("url"))
+  path = "@Model.Url"
+  @(Model.BuildUrl("path", "url"))
+  @(Model.RemoveDuplicateForwardSlashes("url"))
 
   @EmptyLine
   # Create HTTP transport objects

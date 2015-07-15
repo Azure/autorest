@@ -93,25 +93,26 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
         public static string ToString(this IType type, string reference)
         {
             var known = type as PrimaryType;
-            if (known == PrimaryType.String)
+            var enumType = type as EnumType;
+            if (enumType != null || known == PrimaryType.String)
             {
                 return reference;
             }
-            else if (known == PrimaryType.Date)
+            
+            if (known == PrimaryType.Date)
             {
                 return string.Format(CultureInfo.InvariantCulture, 
                     "msRest.serializeObject({0}).replace(/[Tt].*[Zz]/, '')", reference);
             }
-            else if (known == PrimaryType.DateTime
+            
+            if (known == PrimaryType.DateTime
                 || known == PrimaryType.ByteArray)
             {
                 return string.Format(CultureInfo.InvariantCulture, 
                     "msRest.serializeObject({0})", reference);
             }
-            else
-            {
-                return string.Format(CultureInfo.InvariantCulture, "{0}.toString()", reference);
-            }
+
+            return string.Format(CultureInfo.InvariantCulture, "{0}.toString()", reference);
         }
         
         /// <summary>
@@ -157,7 +158,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 throw new ArgumentNullException("valueReference");
             }
 
-            return valueReference.Replace('\'', '"');
+            return valueReference.Replace("'", "\\'");
         }
 
         /// <summary>
@@ -235,7 +236,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                                 .AppendLine("var {0} = {1};", allowedValues, enumType.GetEnumValuesArray())
                                 .AppendLine("if (!{0}.some( function(item) {{ return item === {1}; }})) {{", allowedValues, valueReference)
                                 .Indent()
-                                   .AppendLine("throw new Error({0} + ' is not a valid value. The valid values are: ' + {1});", escapedValueReference, allowedValues)
+                                   .AppendLine("throw new Error({0} + ' is not a valid value. The valid values are: ' + {1});", valueReference, allowedValues)
                                 .Outdent()
                                 .AppendLine("}")
                            .Outdent()
@@ -259,7 +260,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                         .Indent()
                             .AppendLine("throw new Error('No discriminator field \"{0}\" was found in parameter \"{1}\".');",
                                         composite.PolymorphicDiscriminator,
-                                        valueReference)
+                                        escapedValueReference)
                         .Outdent()
                         .AppendLine("}");
                 }
@@ -273,17 +274,17 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             }
             else if (sequence != null)
             {
-                var elementVar = scope.GetVariableName("element");
-                var innerValidation = sequence.ElementType.ValidateType(scope, elementVar, modelReference);
+                var indexVar = scope.GetVariableName("i");
+                var innerValidation = sequence.ElementType.ValidateType(scope, valueReference + "["+indexVar+"]", modelReference);
                 if (!string.IsNullOrEmpty(innerValidation))
                 {
                     return builder.AppendLine("if ({0} !== null && {0} !== undefined && util.isArray({0})) {{", valueReference)
                             .Indent()
-                              .AppendLine("{0}.forEach(function({1}) {{", valueReference, elementVar)
+                              .AppendLine("for (var {1} = 0; {1} < {0}.length; {1}++) {{", valueReference, indexVar)
                                 .Indent()
                                   .AppendLine(innerValidation)
                                 .Outdent()
-                              .AppendLine("});")
+                              .AppendLine("}")
                             .Outdent()
                           .AppendLine("}").ToString();
                 }

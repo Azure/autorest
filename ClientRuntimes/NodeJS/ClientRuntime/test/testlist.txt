@@ -1,6 +1,6 @@
-serviceTests.js
+serializationTests
 credentialTests.js
 retryPolicyTests.js
-proxyfilterTests.js
-logfilterTests.js
-redirectfilterTests.js
+proxyFilterTests.js
+logFilterTests.js
+redirectFilterTests.js

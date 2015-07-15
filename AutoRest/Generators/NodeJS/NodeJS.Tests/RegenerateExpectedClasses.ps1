@@ -10,6 +10,7 @@ $tests =
     "SwaggerBat\BodyDate"="..\..\AcceptanceTests\swagger\body-date.json";
     "SwaggerBat\BodyDateTime"="..\..\AcceptanceTests\swagger\body-datetime.json";
     "SwaggerBat\BodyComplex"="..\..\AcceptanceTests\swagger\body-complex.json";
+    "SwaggerBat\BodyFile"="..\..\AcceptanceTests\swagger\body-file.json";
     "SwaggerBat\Url"="..\..\AcceptanceTests\swagger\url.json";
     "SwaggerBat\Header"="..\..\AcceptanceTests\swagger\header.json";
     "SwaggerBat\Http"="..\..\AcceptanceTests\swagger\httpInfrastructure.json";

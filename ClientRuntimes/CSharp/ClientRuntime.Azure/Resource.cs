@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using Microsoft.Rest;
 using Newtonsoft.Json;
 
 namespace Microsoft.Azure
@@ -33,7 +34,7 @@ namespace Microsoft.Azure
         /// <summary>
         /// Gets the provisioning state of the resource.
         /// </summary>
-        [JsonProperty("provisioningState")]
+        [JsonProperty("properties.provisioningState")]
         public string ProvisioningState { get; private set; }
 
         /// <summary>
@@ -55,7 +56,7 @@ namespace Microsoft.Azure
         {
             if (Location == null)
             {
-                throw new ArgumentNullException("Location");
+                throw new ValidationException(ValidationRules.CannotBeNull, "Location");
             }
         }
     }

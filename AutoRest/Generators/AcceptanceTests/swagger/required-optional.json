@@ -17,20 +17,20 @@
   ],
   "parameters": {
     "required-global-path": {
-      "name": "required_global_path",
+      "name": "required-global-path",
       "in": "path",
       "description": "number of items to skip",
       "type": "string"
     },
     "required-global-query": {
-      "name": "required_global_query",
+      "name": "required-global-query",
       "in": "query",
       "description": "number of items to skip",
       "required": true,
       "type": "string"
     },
     "optional-global-query": {
-      "name": "optional_global_query",
+      "name": "optional-global-query",
       "in": "query",
       "description": "number of items to skip",
       "required": false,

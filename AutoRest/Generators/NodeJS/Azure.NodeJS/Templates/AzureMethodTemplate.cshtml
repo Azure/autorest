@@ -20,22 +20,29 @@ else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.D
 @WrapComment(" * ", Model.Documentation)
 @foreach (var parameter in Model.DocumentationParameters)
 {
-    @:* @@param {@parameter.Type.Name} [@parameter.Name] @parameter.Documentation
-    @:*
+ @:* @@param {@parameter.Type.Name} [@parameter.Name] @parameter.Documentation
+ @:*
 }
+@WrapComment(" * ", " @param {object} [options]")
+ *
+@WrapComment(" * ", " @param {object} [options.customHeaders] headers that will be added to request")
+ *
 @WrapComment(" * ", " @param {function} callback")
  *
 @WrapComment(" * ", " @returns {Stream} The Response stream")
  */
 @(Model.OperationName).prototype.@(Model.Name) = function (@(Model.MethodParameterDeclarationWithCallback)) {
   var self = @(Model.ClientReference);
-
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   // Send request
   this.begin@(Model.Name.ToPascalCase())(@(Model.MethodParameterDeclaration)function (err, result){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, callback);
+    self.getPostOrDeleteOperationResult(result, options, callback);
   });
-}
+};
 </text>
 }
 else if (Model.HttpMethod == HttpMethod.Put)
@@ -46,27 +53,38 @@ else if (Model.HttpMethod == HttpMethod.Put)
 @WrapComment(" * ", Model.Documentation)
 @foreach (var parameter in Model.DocumentationParameters)
 {
-    @:* @@param {@parameter.Type.Name} [@parameter.Name] @parameter.Documentation
-    @:*
+ @:* @@param {@parameter.Type.Name} [@parameter.Name] @parameter.Documentation
+ @:*
 }
+@WrapComment(" * ", " @param {object} [options]")
+ *
+@WrapComment(" * ", " @param {object} [options.customHeaders] headers that will be added to request")
+ *
 @WrapComment(" * ", " @param {function} callback")
  *
 @WrapComment(" * ", " @returns {Stream} The Response stream")
  */
 @(Model.OperationName).prototype.@(Model.Name) = function (@(Model.MethodParameterDeclarationWithCallback)) {
   var client = @(Model.ClientReference);
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
   var self = this;
   function getMethod() {
     var cb = function (callback) {
       return self.@(Model.GetMethod.Name)(@(Model.GetMethod.MethodParameterDeclaration)callback);
-    }
+    };
     return cb;
-  };
+  }
   // Send request
   self.begin@(Model.Name.ToPascalCase())(@(Model.MethodParameterDeclaration)function (err, result){
     if (err) return callback(err);
-    client.getPutOperationResult(result, getMethod(), callback);
+    client.getPutOperationResult(result, getMethod(), options, callback);
   });
-}
+};
 </text>
 }

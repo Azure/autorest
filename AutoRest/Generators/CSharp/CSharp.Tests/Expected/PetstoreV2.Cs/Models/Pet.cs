@@ -64,38 +64,11 @@ namespace Fixtures.PetstoreV2.Models
         {
             if (Name == null)
             {
-                throw new ArgumentNullException("Name");
+                throw new ValidationException(ValidationRules.CannotBeNull, "Name");
             }
             if (PhotoUrls == null)
             {
-                throw new ArgumentNullException("PhotoUrls");
-            }
-            if (this.Category != null)
-            {
-                this.Category.Validate();
-            }
-            if (this.Tags != null)
-            {
-                foreach ( var element1 in this.Tags)
-            {
-                if (element1 != null)
-            {
-                element1.Validate();
-            }
-            }
-            }
-            if (this.Dictionary != null)
-            {
-                if ( this.Dictionary != null)
-            {
-                foreach ( var valueElement in this.Dictionary.Values)
-                {
-                    if (valueElement != null)
-            {
-                valueElement.Validate();
-            }
-                }
-            }
+                throw new ValidationException(ValidationRules.CannotBeNull, "PhotoUrls");
             }
         }
     }

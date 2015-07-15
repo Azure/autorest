@@ -11,7 +11,7 @@ namespace Fixtures.MirrorPolymorphic
     /// <summary>
     /// Some cool documentation.
     /// </summary>
-    public partial interface IPolymorphicAnimalStore : IDisposable
+    public partial interface IPolymorphicAnimalStore
     {
         /// <summary>
         /// The base URI of the service.
@@ -27,10 +27,13 @@ namespace Fixtures.MirrorPolymorphic
         /// <param name='animalCreateOrUpdateParameter'>
         /// An Animal
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>        
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<Animal>> CreateOrUpdatePolymorphicAnimalsWithOperationResponseAsync(Animal animalCreateOrUpdateParameter = default(Animal), CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<Animal>> CreateOrUpdatePolymorphicAnimalsWithHttpMessagesAsync(Animal animalCreateOrUpdateParameter = default(Animal), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
     }
 }

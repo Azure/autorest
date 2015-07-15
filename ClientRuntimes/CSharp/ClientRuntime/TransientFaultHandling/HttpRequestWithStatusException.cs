@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-
 using System;
 using System.Net;
 using System.Net.Http;
@@ -23,7 +22,7 @@ namespace Microsoft.Rest.TransientFaultHandling
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpRequestWithStatusException"/> class.
         /// </summary>
-        public HttpRequestWithStatusException() : base()
+        public HttpRequestWithStatusException()
         {
         }
 

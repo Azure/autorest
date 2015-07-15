@@ -116,14 +116,17 @@ namespace Fixtures.MirrorSequences
         /// <param name='pets'>
         /// Pets to add to the store
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IList<Pet>>> AddPetWithOperationResponseAsync(IList<Pet> pets, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IList<Pet>>> AddPetWithHttpMessagesAsync(IList<Pet> pets, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (pets == null)
             {
-                throw new ArgumentNullException("pets");
+                throw new ValidationException(ValidationRules.CannotBeNull, "pets");
             }
             if (pets != null)
             {
@@ -156,6 +159,14 @@ namespace Fixtures.MirrorSequences
             httpRequest.Method = new HttpMethod("POST");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Serialize Request  
             string requestContent = JsonConvert.SerializeObject(pets, this.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
@@ -173,10 +184,10 @@ namespace Fixtures.MirrorSequences
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 ErrorModel errorBody = JsonConvert.DeserializeObject<ErrorModel>(responseContent, this.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -197,6 +208,7 @@ namespace Fixtures.MirrorSequences
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<IList<Pet>>(responseContent, this.DeserializationSettings);
             }
             if (shouldTrace)
@@ -212,14 +224,17 @@ namespace Fixtures.MirrorSequences
         /// <param name='petStyle'>
         /// Pet style to add to the store
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IList<int?>>> AddPetStylesWithOperationResponseAsync(IList<int?> petStyle, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IList<int?>>> AddPetStylesWithHttpMessagesAsync(IList<int?> petStyle, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (petStyle == null)
             {
-                throw new ArgumentNullException("petStyle");
+                throw new ValidationException(ValidationRules.CannotBeNull, "petStyle");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -242,6 +257,14 @@ namespace Fixtures.MirrorSequences
             httpRequest.Method = new HttpMethod("POST");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Serialize Request  
             string requestContent = JsonConvert.SerializeObject(petStyle, this.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
@@ -259,10 +282,10 @@ namespace Fixtures.MirrorSequences
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 IList<ErrorModel> errorBody = JsonConvert.DeserializeObject<IList<ErrorModel>>(responseContent, this.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -283,6 +306,7 @@ namespace Fixtures.MirrorSequences
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<IList<int?>>(responseContent, this.DeserializationSettings);
             }
             if (shouldTrace)
@@ -298,14 +322,17 @@ namespace Fixtures.MirrorSequences
         /// <param name='petStyle'>
         /// Pet style to add to the store
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IList<int?>>> UpdatePetStylesWithOperationResponseAsync(IList<int?> petStyle, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IList<int?>>> UpdatePetStylesWithHttpMessagesAsync(IList<int?> petStyle, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (petStyle == null)
             {
-                throw new ArgumentNullException("petStyle");
+                throw new ValidationException(ValidationRules.CannotBeNull, "petStyle");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -328,6 +355,14 @@ namespace Fixtures.MirrorSequences
             httpRequest.Method = new HttpMethod("PUT");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Serialize Request  
             string requestContent = JsonConvert.SerializeObject(petStyle, this.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
@@ -345,10 +380,10 @@ namespace Fixtures.MirrorSequences
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 IList<ErrorModel> errorBody = JsonConvert.DeserializeObject<IList<ErrorModel>>(responseContent, this.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -369,6 +404,7 @@ namespace Fixtures.MirrorSequences
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<IList<int?>>(responseContent, this.DeserializationSettings);
             }
             if (shouldTrace)

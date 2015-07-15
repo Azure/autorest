@@ -38,13 +38,13 @@ namespace @(Settings.Namespace).Models
         @EmptyLine
         @:
         }
-       
-        /// <summary>
-        /// Validate the object. Throws ArgumentException or ArgumentNullException if validation fails.
-        /// </summary>
-        public @Model.MethodQualifier void Validate()
-        {
-        @{
+@if(@Model.ShouldValidate()) 
+{   
+        @:/// <summary>
+        @:/// Validate the object. Throws ArgumentException or ArgumentNullException if validation fails.
+        @:/// </summary>
+        @:public @Model.MethodQualifier void Validate()
+        @:{
             bool anythingToValidate = false;
 
             if (Model.BaseModelType != null)
@@ -58,7 +58,7 @@ namespace @(Settings.Namespace).Models
                 anythingToValidate = true;
             @:if (@property.Name == null)
             @:{
-                @:throw new ArgumentNullException("@property.Name");
+                @:throw new ValidationException(ValidationRules.CannotBeNull, "@property.Name");
             @:}
             @:
             }
@@ -72,7 +72,7 @@ namespace @(Settings.Namespace).Models
             {
             @://Nothing to validate
             }
-        }
+        @:}
         }
     }
 }

@@ -23,7 +23,7 @@ describe('nodejs', function () {
   
   describe('Swagger LRO Happy BAT', function () {
     clientOptions.requestOptions = { jar: true };
-    clientOptions.filters = [new msRest.ExponentialRetryPolicyFilter(3, 0.0001, 0.0001, 0.0001)];
+    clientOptions.filters = [new msRest.ExponentialRetryPolicyFilter(3, 0, 0, 0)];
     clientOptions.noRetryPolicy = true;
     clientOptions.longRunningOperationRetryTimeoutInSeconds = 0;
     
@@ -65,6 +65,80 @@ describe('nodejs', function () {
         done();
       });
     });
+    
+    it('should work with PutNoHeaderInRetry', function (done) {
+      testClient.lROs.putNoHeaderInRetry(product, function (error, result) {
+        should.not.exist(error);
+        result.body.properties.provisioningState.should.be.exactly('Succeeded');
+        done();
+      });
+    });
+    
+    it('should work with PutAsyncNoHeaderInRetry', function (done) {
+      testClient.lROs.putAsyncNoHeaderInRetry(product, function (error, result) {
+        should.not.exist(error);
+        result.body.properties.provisioningState.should.be.exactly('Succeeded');
+        done();
+      });
+    });
+    
+    it('should work with PutSubResource', function (done) {
+      testClient.lROs.putSubResource(product, function (error, result) {
+        should.not.exist(error);
+        result.body.properties.provisioningState.should.be.exactly('Succeeded');
+        done();
+      });
+    });
+
+    it('should work with PutAsyncSubResource', function (done) {
+      testClient.lROs.putAsyncSubResource(product, function (error, result) {
+        should.not.exist(error);
+        result.body.properties.provisioningState.should.be.exactly('Succeeded');
+        done();
+      });
+    });
+    
+    it('should work with PutNonResource', function (done) {
+      testClient.lROs.putNonResource({
+        'name': 'doesNotMatter', //server will return a fixed faked value anyway
+        'id': 'doesNotMatter'
+      }, function (error, result) {
+        should.not.exist(error);
+        result.body.id.should.be.exactly('100');
+        result.body.name.should.be.exactly('sku');
+        done();
+      });
+    });
+    
+    it('should work with PutAsyncNonResource', function (done) {
+      testClient.lROs.putAsyncNonResource({
+        'name': 'doesNotMatter', //server will return a fixed faked value anyway
+        'id': 'doesNotMatter'
+      }, function (error, result) {
+        should.not.exist(error);
+        result.body.id.should.be.exactly('100');
+        result.body.name.should.be.exactly('sku');
+        done();
+      });
+    });
+    
+    it('should work with DeleteNoHeaderInRetry', function (done) {
+      //a little odd, but the server side will fake to have something to delete
+      //hence, no need to pass in an argument 
+      testClient.lROs.deleteNoHeaderInRetry(function (error, result) {
+        should.not.exist(error);
+        done();
+      });
+    });
+    
+    it('should work with DeleteAsyncNoHeaderInRetry', function (done) {
+      //a little odd, but the server side will fake to have something to delete
+      //hence, no need to pass in an argument 
+      testClient.lROs.deleteAsyncNoHeaderInRetry(function (error, result) {
+        should.not.exist(error);
+        done();
+      });
+    });
 
     it('should work with put202Retry200', function (done) {
       testClient.lROs.put202Retry200(product, function (error, result) {
@@ -73,7 +147,6 @@ describe('nodejs', function () {
         done();
       });
     });
-
 
     it('should work with Put200Succeeded', function (done) {
       testClient.lROs.put200Succeeded(product, function (error, result) {
@@ -291,11 +364,32 @@ describe('nodejs', function () {
         done();
       });
     });
+
+    it('should work with Custom Headers', function (done) {
+      var options = {
+        customHeaders: {
+          'x-ms-client-request-id': '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
+        }
+      }; 
+      testClient.lROsCustomHeader.putAsyncRetrySucceeded(product, options, function (error, result) {
+        should.not.exist(error);
+        testClient.lROsCustomHeader.postAsyncRetrySucceeded(product, options, function (error, result) {
+          should.not.exist(error);
+          testClient.lROsCustomHeader.put201CreatingSucceeded200(product, options, function (error, result) {
+            should.not.exist(error);
+            testClient.lROsCustomHeader.post202Retry200(product, options, function (error, result) {
+              should.not.exist(error);
+              done();
+            });
+          });
+        });
+      });
+    });
   });
 
   describe('Swagger LRO Sad BAT', function () {
     clientOptions.requestOptions = { jar: true };
-    clientOptions.filters = [new msRest.ExponentialRetryPolicyFilter(3, 0.0001, 0.0001, 0.0001)];
+    clientOptions.filters = [new msRest.ExponentialRetryPolicyFilter(3, 0, 0, 0)];
     clientOptions.noRetryPolicy = true;
     
     var testClient = new lroClient(credentials, baseUri, clientOptions);

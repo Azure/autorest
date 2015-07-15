@@ -26,6 +26,11 @@
     <Compile Include="NodeJSCodeGenerator.cs" />
     <Compile Include="NodeJsCodeNamer.cs" />
     <Compile Include="IScopeProvider.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="ScopeProvider.cs" />
     <Compile Include="TemplateModels\MethodGroupTemplateModel.cs" />
     <Compile Include="TemplateModels\ModelTemplateModel.cs" />
@@ -35,11 +40,15 @@
     <Compile Include="TemplateModels\ParameterTemplateModel.cs" />
     <Compile Include="Templates\MethodGroupIndexTemplate.cs" />
     <Compile Include="Templates\MethodGroupTemplate.cs" />
+    <Compile Include="Templates\MethodJsonPipelineTemplate.cs" />
+    <Compile Include="Templates\MethodStreamPipelineTemplate.cs" />
     <Compile Include="Templates\MethodTemplate.cs" />
     <Compile Include="Templates\ModelIndexTemplate.cs" />
     <Compile Include="Templates\ModelTemplate.cs" />
     <Compile Include="Templates\ServiceClientTemplate.cs" />
     <None Include="Templates\MethodGroupTemplate.cshtml" />
+    <None Include="Templates\MethodJsonPipelineTemplate.cshtml" />
+    <None Include="Templates\MethodStreamPipelineTemplate.cshtml" />
     <None Include="Templates\ModelTemplate.cshtml" />
     <None Include="Templates\ModelIndexTemplate.cshtml" />
     <None Include="Templates\MethodGroupIndexTemplate.cshtml" />
@@ -56,6 +65,12 @@
     <CodeAnalysisDictionary Include="..\..\..\..\tools\CustomDictionary.xml">
       <Link>CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

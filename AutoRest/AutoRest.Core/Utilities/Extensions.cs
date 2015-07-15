@@ -145,18 +145,53 @@ namespace Microsoft.Rest.Generator.Utilities
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "U", Justification = "Common naming for generics.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "V", Justification = "Common naming for generics.")]
         public static void LoadFrom<TU, TV>(this TU destination, TV source)
-            where TU : TV
+            where TU : class
             where TV : class
         {
+            if (destination == null)
+            {
+                throw new ArgumentNullException("destination");
+            }
+
             if (source == null)
             {
                 throw new ArgumentNullException("source");
             }
-            PropertyInfo[] properties = typeof(TV).GetProperties();
-            foreach (var property in properties.Where(p => p.SetMethod != null))
+
+            var propertyNames = typeof(TU).GetProperties().Select(p => p.Name);
+            foreach (var propertyName in propertyNames)
             {
-                property.SetValue(destination, property.GetValue(source, null), null);
+                var destinationProperty = typeof(TU).GetBaseProperty(propertyName);
+                var sourceProperty = typeof(TV).GetBaseProperty(propertyName);
+                if (destinationProperty != null &&
+                    sourceProperty != null &&
+                    sourceProperty.PropertyType == destinationProperty.PropertyType &&
+                    sourceProperty.SetMethod != null)
+                {
+                    destinationProperty.SetValue(destination, sourceProperty.GetValue(source, null), null);
+                }
             }
+        }
+
+        private static PropertyInfo GetBaseProperty(this Type type, string propertyName)
+        {
+            if (type != null)
+            {
+                PropertyInfo propertyInfo = type.GetProperty(propertyName);
+                if (propertyInfo != null)
+                {
+                    if (propertyInfo.SetMethod != null)
+                    {
+                        return propertyInfo;
+                    }
+                    if (type.BaseType != null)
+                    {
+                        return type.BaseType.GetBaseProperty(propertyName);
+                    }
+                }
+            }
+
+            return null;
         }
 
         /// <summary>

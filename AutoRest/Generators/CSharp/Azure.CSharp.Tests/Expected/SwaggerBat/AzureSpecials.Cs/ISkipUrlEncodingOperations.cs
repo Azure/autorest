@@ -21,10 +21,13 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// <param name='unencodedPathParam'>
         /// Unencoded path parameter with value 'path1/path2/path3'
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> GetMethodPathValidWithOperationResponseAsync(string unencodedPathParam, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> GetMethodPathValidWithHttpMessagesAsync(string unencodedPathParam, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get method with unencoded path parameter with value
         /// 'path1/path2/path3'
@@ -32,10 +35,13 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// <param name='unencodedPathParam'>
         /// Unencoded path parameter with value 'path1/path2/path3'
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> GetPathPathValidWithOperationResponseAsync(string unencodedPathParam, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> GetPathPathValidWithHttpMessagesAsync(string unencodedPathParam, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get method with unencoded path parameter with value
         /// 'path1/path2/path3'
@@ -44,10 +50,13 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// An unencoded path parameter with value 'path1/path2/path3'.
         /// Possible values for this parameter include: 'path1/path2/path3'
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> GetSwaggerPathValidWithOperationResponseAsync(string unencodedPathParam, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> GetSwaggerPathValidWithHttpMessagesAsync(string unencodedPathParam, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get method with unencoded query parameter with value
         /// 'value1&amp;q2=value2&amp;q3=value3'
@@ -56,20 +65,26 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// Unencoded query parameter with value
         /// 'value1&amp;q2=value2&amp;q3=value3'
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> GetMethodQueryValidWithOperationResponseAsync(string q1, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> GetMethodQueryValidWithHttpMessagesAsync(string q1, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get method with unencoded query parameter with value null
         /// </summary>
         /// <param name='q1'>
         /// Unencoded query parameter with value null
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> GetMethodQueryNullWithOperationResponseAsync(string q1 = default(string), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> GetMethodQueryNullWithHttpMessagesAsync(string q1 = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get method with unencoded query parameter with value
         /// 'value1&amp;q2=value2&amp;q3=value3'
@@ -78,10 +93,13 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// Unencoded query parameter with value
         /// 'value1&amp;q2=value2&amp;q3=value3'
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> GetPathQueryValidWithOperationResponseAsync(string q1, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> GetPathQueryValidWithHttpMessagesAsync(string q1, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get method with unencoded query parameter with value
         /// 'value1&amp;q2=value2&amp;q3=value3'
@@ -91,9 +109,12 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// 'value1&amp;q2=value2&amp;q3=value3'. Possible values for this
         /// parameter include: 'value1&amp;q2=value2&amp;q3=value3'
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse> GetSwaggerQueryValidWithOperationResponseAsync(string q1 = default(string), CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> GetSwaggerQueryValidWithHttpMessagesAsync(string q1 = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

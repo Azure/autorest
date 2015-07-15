@@ -21,10 +21,6 @@
     <NoWarn>1570;1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Rest.ClientRuntime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\packages\Microsoft.Rest.ClientRuntime.1.0.0\lib\net45\Microsoft.Rest.ClientRuntime.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -43,6 +39,10 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\ClientRuntimes\CSharp\ClientRuntime\ClientRuntime.csproj">
+      <Project>{7f524559-93f9-4f3f-9e2c-af41a0c2e6f4}</Project>
+      <Name>ClientRuntime</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\AutoRest.Core\AutoRest.Core.csproj">
       <Project>{c876085f-9dc3-41f0-b7b4-17022cd84684}</Project>
       <Name>AutoRest.Core</Name>
@@ -95,6 +95,10 @@
     </None>
     <None Include="..\..\AcceptanceTests\swagger\body-dictionary.json">
       <Link>Swagger\body-dictionary.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\AcceptanceTests\swagger\body-file.json">
+      <Link>Swagger\body-file.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\..\AcceptanceTests\swagger\body-integer.json">
@@ -177,7 +181,28 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs"/>
+    <Compile Include="Expected\SwaggerBat\BodyFile.Cs\AutoRestSwaggerBATFileService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyFile.Cs\AutoRestSwaggerBATFileServiceExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyFile.Cs\Files.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyFile.Cs\FilesExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyFile.Cs\IAutoRestSwaggerBATFileService.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyFile.Cs\IFiles.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\BodyFile.Cs\Models\Error.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CSharpSwaggerBat.cs" />
     <Compile Include="Expected\Mirror.RecursiveTypes.Cs\IRecursiveTypesAPI.cs" />
     <Compile Include="Expected\Mirror.RecursiveTypes.Cs\Models\Error.cs" />
@@ -861,5 +886,10 @@
     <Compile Include="SwaggerBatTestOrderer.cs" />
     <Compile Include="Utilities\TestExtensions.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="..\..\AcceptanceTests\server\routes\sample.png">
+      <Link>sample.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

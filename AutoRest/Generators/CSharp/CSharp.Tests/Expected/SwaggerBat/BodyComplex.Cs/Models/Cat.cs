@@ -20,22 +20,5 @@ namespace Fixtures.SwaggerBatBodyComplex.Models
         [JsonProperty(PropertyName = "hates")]
         public IList<Dog> Hates { get; set; }
 
-        /// <summary>
-        /// Validate the object. Throws ArgumentException or ArgumentNullException if validation fails.
-        /// </summary>
-        public override void Validate()
-        {
-            base.Validate();
-            if (this.Hates != null)
-            {
-                foreach ( var element in this.Hates)
-            {
-                if (element != null)
-            {
-                element.Validate();
-            }
-            }
-            }
-        }
     }
 }

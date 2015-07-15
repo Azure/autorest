@@ -32,7 +32,7 @@ namespace Fixtures.SwaggerBatBodyBoolean
             /// </param>
             public static async Task<bool?> GetTrueAsync( this IBoolModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<bool?> result = await operations.GetTrueWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<bool?> result = await operations.GetTrueWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -62,7 +62,7 @@ namespace Fixtures.SwaggerBatBodyBoolean
             /// </param>
             public static async Task PutTrueAsync( this IBoolModel operations, bool? boolBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutTrueWithOperationResponseAsync(boolBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutTrueWithHttpMessagesAsync(boolBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -87,7 +87,7 @@ namespace Fixtures.SwaggerBatBodyBoolean
             /// </param>
             public static async Task<bool?> GetFalseAsync( this IBoolModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<bool?> result = await operations.GetFalseWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<bool?> result = await operations.GetFalseWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -117,7 +117,7 @@ namespace Fixtures.SwaggerBatBodyBoolean
             /// </param>
             public static async Task PutFalseAsync( this IBoolModel operations, bool? boolBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutFalseWithOperationResponseAsync(boolBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutFalseWithHttpMessagesAsync(boolBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -142,7 +142,7 @@ namespace Fixtures.SwaggerBatBodyBoolean
             /// </param>
             public static async Task<bool?> GetNullAsync( this IBoolModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<bool?> result = await operations.GetNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<bool?> result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -168,7 +168,7 @@ namespace Fixtures.SwaggerBatBodyBoolean
             /// </param>
             public static async Task<bool?> GetInvalidAsync( this IBoolModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<bool?> result = await operations.GetInvalidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<bool?> result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

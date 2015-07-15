@@ -50,6 +50,10 @@ namespace Microsoft.Rest.Generator.Test
                 codeNameing.GetEnumMemberName("** **%^ ^^$ ##$"));
 
             Assert.Equal("_asterisk", codeNameing.GetFieldName("*"));
+
+            Assert.Equal(
+                "OneTwoThreeProperty",
+                codeNameing.GetPropertyName("123Property"));
         }
     }
 }

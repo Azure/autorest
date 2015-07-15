@@ -15,12 +15,5 @@ namespace Fixtures.SwaggerBatHttp.Models
         [JsonProperty(PropertyName = "statusCode")]
         public string StatusCode { get; set; }
 
-        /// <summary>
-        /// Validate the object. Throws ArgumentException or ArgumentNullException if validation fails.
-        /// </summary>
-        public virtual void Validate()
-        {
-            //Nothing to validate
-        }
     }
 }

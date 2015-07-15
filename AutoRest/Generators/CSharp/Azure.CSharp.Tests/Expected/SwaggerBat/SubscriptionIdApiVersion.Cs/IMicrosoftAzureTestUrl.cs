@@ -12,7 +12,7 @@ namespace Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion
     /// <summary>
     /// Some cool documentation.
     /// </summary>
-    public partial interface IMicrosoftAzureTestUrl : IDisposable
+    public partial interface IMicrosoftAzureTestUrl
     {
         /// <summary>
         /// The base URI of the service.

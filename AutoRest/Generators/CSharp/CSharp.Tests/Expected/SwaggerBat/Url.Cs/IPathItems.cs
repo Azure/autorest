@@ -24,26 +24,23 @@ namespace Fixtures.SwaggerBatUrl
         /// <param name='localStringPath'>
         /// should contain value 'localStringPath'
         /// </param>
-        /// <param name='localStringQuery'>
-        /// should contain value 'localStringQuery'
-        /// </param>
         /// <param name='pathItemStringPath'>
         /// A string value 'pathItemStringPath' that appears in the path
+        /// </param>
+        /// <param name='localStringQuery'>
+        /// should contain value 'localStringQuery'
         /// </param>
         /// <param name='pathItemStringQuery'>
         /// A string value 'pathItemStringQuery' that appears as a query
         /// parameter
         /// </param>
-        /// <param name='globalStringPath'>
-        /// A string value 'globalItemStringPath' that appears in the path
-        /// </param>
-        /// <param name='globalStringQuery'>
-        /// should contain value null
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> GetAllWithValuesWithOperationResponseAsync(string localStringPath, string pathItemStringPath, string globalStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), string globalStringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> GetAllWithValuesWithHttpMessagesAsync(string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// send globalStringPath='globalStringPath',
         /// pathItemStringPath='pathItemStringPath',
@@ -54,26 +51,23 @@ namespace Fixtures.SwaggerBatUrl
         /// <param name='localStringPath'>
         /// should contain value 'localStringPath'
         /// </param>
-        /// <param name='localStringQuery'>
-        /// should contain value 'localStringQuery'
-        /// </param>
         /// <param name='pathItemStringPath'>
         /// A string value 'pathItemStringPath' that appears in the path
+        /// </param>
+        /// <param name='localStringQuery'>
+        /// should contain value 'localStringQuery'
         /// </param>
         /// <param name='pathItemStringQuery'>
         /// A string value 'pathItemStringQuery' that appears as a query
         /// parameter
         /// </param>
-        /// <param name='globalStringPath'>
-        /// A string value 'globalItemStringPath' that appears in the path
-        /// </param>
-        /// <param name='globalStringQuery'>
-        /// should contain value null
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> GetGlobalQueryNullWithOperationResponseAsync(string localStringPath, string pathItemStringPath, string globalStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), string globalStringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> GetGlobalQueryNullWithHttpMessagesAsync(string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// send globalStringPath=globalStringPath,
         /// pathItemStringPath='pathItemStringPath',
@@ -83,26 +77,23 @@ namespace Fixtures.SwaggerBatUrl
         /// <param name='localStringPath'>
         /// should contain value 'localStringPath'
         /// </param>
-        /// <param name='localStringQuery'>
-        /// should contain null value
-        /// </param>
         /// <param name='pathItemStringPath'>
         /// A string value 'pathItemStringPath' that appears in the path
+        /// </param>
+        /// <param name='localStringQuery'>
+        /// should contain null value
         /// </param>
         /// <param name='pathItemStringQuery'>
         /// A string value 'pathItemStringQuery' that appears as a query
         /// parameter
         /// </param>
-        /// <param name='globalStringPath'>
-        /// A string value 'globalItemStringPath' that appears in the path
-        /// </param>
-        /// <param name='globalStringQuery'>
-        /// should contain value null
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> GetGlobalAndLocalQueryNullWithOperationResponseAsync(string localStringPath, string pathItemStringPath, string globalStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), string globalStringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> GetGlobalAndLocalQueryNullWithHttpMessagesAsync(string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// send globalStringPath='globalStringPath',
         /// pathItemStringPath='pathItemStringPath',
@@ -113,24 +104,21 @@ namespace Fixtures.SwaggerBatUrl
         /// <param name='localStringPath'>
         /// should contain value 'localStringPath'
         /// </param>
-        /// <param name='localStringQuery'>
-        /// should contain value null
-        /// </param>
         /// <param name='pathItemStringPath'>
         /// A string value 'pathItemStringPath' that appears in the path
+        /// </param>
+        /// <param name='localStringQuery'>
+        /// should contain value null
         /// </param>
         /// <param name='pathItemStringQuery'>
         /// should contain value null
         /// </param>
-        /// <param name='globalStringPath'>
-        /// A string value 'globalItemStringPath' that appears in the path
-        /// </param>
-        /// <param name='globalStringQuery'>
-        /// should contain value null
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> GetLocalPathItemQueryNullWithOperationResponseAsync(string localStringPath, string pathItemStringPath, string globalStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), string globalStringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> GetLocalPathItemQueryNullWithHttpMessagesAsync(string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

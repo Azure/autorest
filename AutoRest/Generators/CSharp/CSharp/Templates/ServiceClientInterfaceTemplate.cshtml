@@ -16,7 +16,7 @@ namespace @Settings.Namespace
     /// <summary>
     @WrapComment("/// ", Model.Documentation.EscapeXmlComment())
     /// </summary>
-    public partial interface I@(Model.Name) : IDisposable
+    public partial interface I@(Model.Name)
     {
         /// <summary>
         /// The base URI of the service.
@@ -36,16 +36,19 @@ namespace @Settings.Namespace
         @WrapComment("/// ", method.Documentation.EscapeXmlComment())
         /// </summary>
         </text>    
-        foreach (var parameter in method.Parameters)
+        foreach (var parameter in method.LocalParameters)
         {
         @:/// <param name='@parameter.Name'>
         @:@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())
         @:/// </param>
         }
+        @:/// <param name='customHeaders'>
+        @:/// Headers that will be added to request.
+        @:/// </param>        
         @:/// <param name='cancellationToken'>
         @:/// Cancellation token.
         @:/// </param>
-        @:Task<@(method.OperationResponseReturnTypeString)> @(method.Name)WithOperationResponseAsync(@method.AsyncMethodParameterDeclaration);
+        @:Task<@(method.OperationResponseReturnTypeString)> @(method.Name)WithHttpMessagesAsync(@(method.GetAsyncMethodParameterDeclaration(true)));
         @EmptyLine
         @:
     }

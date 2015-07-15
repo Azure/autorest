@@ -3,6 +3,10 @@
 
 using System;
 using System.Net.Http;
+using System.Runtime.Serialization;
+#if !PORTABLE
+using System.Security.Permissions;
+#endif
 using Microsoft.Rest;
 
 namespace Microsoft.Azure
@@ -10,14 +14,10 @@ namespace Microsoft.Azure
     /// <summary>
     /// An exception generated from an http response returned from a Microsoft Azure service
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage(
-        "Microsoft.Design",
-        "CA1032:ImplementStandardExceptionConstructors"),
-     System.Diagnostics.CodeAnalysis.SuppressMessage(
-         "Microsoft.Usage",
-         "CA2237:MarkISerializableTypesWithSerializable",
-         Justification = "CloudException hides the constructor needed for serialization.")]
-    public class CloudException : HttpRequestException
+#if !PORTABLE
+    [Serializable]
+#endif
+    public class CloudException : RestException
     {
         /// <summary>
         /// Gets information about the associated HTTP request.
@@ -57,5 +57,36 @@ namespace Microsoft.Azure
         public CloudException(string message, Exception innerException) : base(message, innerException)
         {
         }
+
+#if !PORTABLE        
+        /// <summary>
+        /// Initializes a new instance of the CloudException class.
+        /// </summary>
+        /// <param name="info">Serialization info.</param>
+        /// <param name="context">Streaming context.</param>
+        protected CloudException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+        }
+
+        /// <summary>
+        /// Serializes content of the exception.
+        /// </summary>
+        /// <param name="info">Serialization info.</param>
+        /// <param name="context">Streaming context.</param>
+        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+            if (info == null)
+            {
+                throw new ArgumentNullException("info");
+            }
+
+            info.AddValue("Request", Request);
+            info.AddValue("Response", Response);
+            info.AddValue("Body", Body);
+        }
+#endif
     }
 }

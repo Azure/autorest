@@ -16,10 +16,13 @@ namespace Fixtures.SwaggerBatBodyComplex
         /// <summary>
         /// Get complex types with dictionary property
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<DictionaryWrapper>> GetValidWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<DictionaryWrapper>> GetValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put complex types with dictionary property
         /// </summary>
@@ -27,41 +30,56 @@ namespace Fixtures.SwaggerBatBodyComplex
         /// Please put a dictionary with 5 key-value pairs: "txt":"notepad",
         /// "bmp":"mspaint", "xls":"excel", "exe":"", "":null
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> PutValidWithOperationResponseAsync(DictionaryWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutValidWithHttpMessagesAsync(DictionaryWrapper complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get complex types with dictionary property which is empty
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<DictionaryWrapper>> GetEmptyWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<DictionaryWrapper>> GetEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put complex types with dictionary property which is empty
         /// </summary>
         /// <param name='complexBody'>
         /// Please put an empty dictionary
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse> PutEmptyWithOperationResponseAsync(DictionaryWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutEmptyWithHttpMessagesAsync(DictionaryWrapper complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get complex types with dictionary property which is null
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<DictionaryWrapper>> GetNullWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<DictionaryWrapper>> GetNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get complex types with dictionary property while server doesn't
         /// provide a response payload
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<DictionaryWrapper>> GetNotProvidedWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<DictionaryWrapper>> GetNotProvidedWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

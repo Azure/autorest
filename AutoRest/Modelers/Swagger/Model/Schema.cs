@@ -36,7 +36,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
         public ExternalDoc ExternalDocs { get; set; }
 
-        public string Example { get; set; }
+        public object Example { get; set; }
 
         /// <summary>
         /// The value of this property MUST be another schema which will provide 

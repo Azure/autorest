@@ -23,8 +23,7 @@ namespace Microsoft.Rest.Generator.Azure
         public const string PageableExtension = "x-ms-pageable";
         public const string ExternalExtension = "x-ms-external";
         public const string ODataExtension = "x-ms-odata";
-        public const string GlobalParameter = "x-ms-global-parameter";
-
+        public const string ApiVersion = "ApiVersion";
         private const string ResourceType = "Resource";
         private const string SubResourceType = "SubResource";
         private const string ResourceProperties = "Properties";
@@ -56,7 +55,6 @@ namespace Microsoft.Rest.Generator.Azure
             ParseODataExtension(serviceClient);
             FlattenResourceProperties(serviceClient);
             AddPageableMethod(serviceClient);
-            RemoveCommonPropertiesFromMethods(serviceClient);
             AddLongRunningOperations(serviceClient);
             AddAzureProperties(serviceClient);
             SetDefaultResponses(serviceClient);
@@ -109,7 +107,8 @@ namespace Microsoft.Rest.Generator.Azure
             {
                 cloudError = new CompositeType
                 {
-                    Name = "cloudError"
+                    Name = "cloudError",
+                    SerializedName = "cloudError"
                 };
                 cloudError.Extensions[ExternalExtension] = true;
                 serviceClient.ModelTypes.Add(cloudError);
@@ -121,30 +120,6 @@ namespace Microsoft.Rest.Generator.Azure
                 {
                     method.DefaultResponse = cloudError;
                 }
-            }
-        }
-
-        /// <summary>
-        /// Removes common properties including subscriptionId and apiVersion from method signatures.
-        /// </summary>
-        /// <param name="serviceClient"></param>
-        public static void RemoveCommonPropertiesFromMethods(ServiceClient serviceClient)
-        {
-            if (serviceClient == null)
-            {
-                throw new ArgumentNullException("serviceClient");
-            }
-
-            foreach (var method in serviceClient.Methods)
-            {
-                method.Parameters.RemoveAll(
-                    p => (!p.Extensions.ContainsKey(GlobalParameter) ||
-                         (bool)p.Extensions[GlobalParameter]) 
-                         &&
-                        ((p.Location == ParameterLocation.Path &&
-                         p.Name.Equals("subscriptionId", StringComparison.OrdinalIgnoreCase)) ||
-                        (p.Location == ParameterLocation.Query &&
-                         p.Name.Replace("-", "").Equals("apiversion", StringComparison.OrdinalIgnoreCase))));
             }
         }
 
@@ -234,18 +209,18 @@ namespace Microsoft.Rest.Generator.Azure
                 throw new ArgumentNullException("serviceClient");
             }
 
-            serviceClient.Properties.Add(new Property
+            var apiVersion = serviceClient.Properties.FirstOrDefault(p => p.Name == "api-version");
+            if (apiVersion != null)
             {
-                Name = "ApiVersion",
-                SerializedName = "api-version",
-                Type = PrimaryType.String,
-                Documentation = "The Api Version.",
-                IsReadOnly = true,
-                DefaultValue = "\"" + serviceClient.ApiVersion + "\""
-            });
-            serviceClient.Properties.Add(new Property
+                apiVersion.DefaultValue = "\"" + serviceClient.ApiVersion + "\"";
+                apiVersion.IsReadOnly = true;
+                apiVersion.IsRequired = false;
+            }
+
+            serviceClient.Properties.Insert(0, new Property
             {
                 Name = "Credentials",
+                SerializedName = "credentials",
                 Type = new CompositeType
                 {
                     Name = "SubscriptionCloudCredentials"
@@ -256,6 +231,7 @@ namespace Microsoft.Rest.Generator.Azure
             serviceClient.Properties.Add(new Property
             {
                 Name = "LongRunningOperationRetryTimeout",
+                SerializedName = "longRunningOperationRetryTimeout",
                 Type = PrimaryType.Int,
                 Documentation = "The retry timeout for Long Running Operations."
             });
@@ -296,8 +272,16 @@ namespace Microsoft.Rest.Generator.Azure
                     // Recursively parsing the "properties" object hierarchy  
                     while (propertiesModel != null)
                     {
-                        // Adding "properties" properties to the compositeType
-                        propertiesModel.Properties.ForEach(p => compositeType.Properties.Add(p));
+                        foreach (Property pp in propertiesModel.Properties)
+                        {
+                            if (ResourcePropertyNames.Any(rp => rp.Equals(pp.Name, StringComparison.OrdinalIgnoreCase)))
+                            {
+                                pp.Name = compositeType.Name + CodeNamer.PascalCase(pp.Name);
+                            }
+                            pp.SerializedName = "properties." + pp.SerializedName;
+                            compositeType.Properties.Add(pp);
+                        }
+                        
                         compositeType.Properties.Remove(propertiesProperty);
                         if (!typesToDelete.Contains(propertiesModel.Name))
                         {
@@ -332,11 +316,16 @@ namespace Microsoft.Rest.Generator.Azure
                 return false;
             }
 
-            return compositeType.BaseModelType != null &&
-                   (compositeType.BaseModelType.Name.Equals(ResourceType, StringComparison.OrdinalIgnoreCase) ||
-                    compositeType.BaseModelType.Name.Equals(SubResourceType, StringComparison.OrdinalIgnoreCase)) &&
-                   compositeType.BaseModelType.Extensions.ContainsKey(ExternalExtension) &&
-                   (bool)compositeType.BaseModelType.Extensions[ExternalExtension];
+            if (compositeType.BaseModelType != null &&
+                (compositeType.BaseModelType.Name.Equals(ResourceType, StringComparison.OrdinalIgnoreCase) ||
+                 compositeType.BaseModelType.Name.Equals(SubResourceType, StringComparison.OrdinalIgnoreCase)) &&
+                compositeType.BaseModelType.Extensions.ContainsKey(ExternalExtension))
+            {
+                var external = compositeType.BaseModelType.Extensions[ExternalExtension] as bool?;
+                return (external == null || external.Value);
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -352,9 +341,14 @@ namespace Microsoft.Rest.Generator.Azure
                 return false;
             }
 
-            return (compositeType.Extensions.ContainsKey(ExternalExtension) &&
-                                (bool)compositeType.Extensions[ExternalExtension] &&
-                                compositeType.Name.Equals(ResourceType));
+            if (compositeType.Extensions.ContainsKey(ExternalExtension) && 
+                compositeType.Name.Equals(ResourceType, StringComparison.OrdinalIgnoreCase))
+            {
+                var external = compositeType.Extensions[ExternalExtension] as bool?;
+                return (external == null || external.Value);
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -380,6 +374,7 @@ namespace Microsoft.Rest.Generator.Azure
                     var nextLinkParameter = new Parameter
                     {
                         Name = "nextLink",
+                        SerializedName = "nextLink",
                         Type = PrimaryType.String,
                         Documentation = "NextLink from the previous successful call to List operation.",
                         IsRequired = true,

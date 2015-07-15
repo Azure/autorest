@@ -37,14 +37,17 @@ namespace Fixtures.SwaggerBatRequiredOptional
         /// </summary>
         /// <param name='pathParameter'>
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<Error>> GetRequiredPathWithOperationResponseAsync(string pathParameter, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<Error>> GetRequiredPathWithHttpMessagesAsync(string pathParameter, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (pathParameter == null)
             {
-                throw new ArgumentNullException("pathParameter");
+                throw new ValidationException(ValidationRules.CannotBeNull, "pathParameter");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -68,6 +71,14 @@ namespace Fixtures.SwaggerBatRequiredOptional
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -81,10 +92,10 @@ namespace Fixtures.SwaggerBatRequiredOptional
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(httpResponse.IsSuccessStatusCode))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -102,7 +113,8 @@ namespace Fixtures.SwaggerBatRequiredOptional
             var result = new HttpOperationResponse<Error>();
             result.Request = httpRequest;
             result.Response = httpResponse;
-            result.Body = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                        string defaultResponseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Error>(defaultResponseContent, this.Client.DeserializationSettings);
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -115,10 +127,13 @@ namespace Fixtures.SwaggerBatRequiredOptional
         /// </summary>
         /// <param name='queryParameter'>
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> PutOptionalQueryWithOperationResponseAsync(string queryParameter = default(string), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutOptionalQueryWithHttpMessagesAsync(string queryParameter = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -150,6 +165,14 @@ namespace Fixtures.SwaggerBatRequiredOptional
             httpRequest.Method = new HttpMethod("PUT");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -163,10 +186,10 @@ namespace Fixtures.SwaggerBatRequiredOptional
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -196,10 +219,13 @@ namespace Fixtures.SwaggerBatRequiredOptional
         /// </summary>
         /// <param name='queryParameter'>
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> PutOptionalHeaderWithOperationResponseAsync(string queryParameter = default(string), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutOptionalHeaderWithHttpMessagesAsync(string queryParameter = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -226,6 +252,14 @@ namespace Fixtures.SwaggerBatRequiredOptional
             {
                 httpRequest.Headers.Add("queryParameter", queryParameter);
             }
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -239,10 +273,10 @@ namespace Fixtures.SwaggerBatRequiredOptional
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -272,10 +306,13 @@ namespace Fixtures.SwaggerBatRequiredOptional
         /// </summary>
         /// <param name='bodyParameter'>
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> PutOptionalBodyWithOperationResponseAsync(string bodyParameter = default(string), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutOptionalBodyWithHttpMessagesAsync(string bodyParameter = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -298,6 +335,14 @@ namespace Fixtures.SwaggerBatRequiredOptional
             httpRequest.Method = new HttpMethod("PUT");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Serialize Request  
             string requestContent = JsonConvert.SerializeObject(bodyParameter, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
@@ -315,10 +360,10 @@ namespace Fixtures.SwaggerBatRequiredOptional
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -346,17 +391,17 @@ namespace Fixtures.SwaggerBatRequiredOptional
         /// <summary>
         /// Test implicitly required path parameter
         /// </summary>
-        /// <param name='requiredGlobalPath'>
-        /// number of items to skip
-        /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<Error>> GetRequiredGlobalPathWithOperationResponseAsync(string requiredGlobalPath, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<Error>> GetRequiredGlobalPathWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (requiredGlobalPath == null)
+            if (this.Client.RequiredGlobalPath == null)
             {
-                throw new ArgumentNullException("requiredGlobalPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.RequiredGlobalPath");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -365,14 +410,13 @@ namespace Fixtures.SwaggerBatRequiredOptional
             {
                 invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("requiredGlobalPath", requiredGlobalPath);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(invocationId, this, "GetRequiredGlobalPath", tracingParameters);
             }
             // Construct URL
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//reqopt/global/required/path/{required-global-path}";
-            url = url.Replace("{requiredGlobalPath}", Uri.EscapeDataString(requiredGlobalPath));
+            url = url.Replace("{required-global-path}", Uri.EscapeDataString(this.Client.RequiredGlobalPath));
             // trim all duplicate forward slashes in the url
             url = Regex.Replace(url, "([^:]/)/+", "$1");
             // Create HTTP transport objects
@@ -380,6 +424,14 @@ namespace Fixtures.SwaggerBatRequiredOptional
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -393,10 +445,10 @@ namespace Fixtures.SwaggerBatRequiredOptional
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(httpResponse.IsSuccessStatusCode))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -414,7 +466,8 @@ namespace Fixtures.SwaggerBatRequiredOptional
             var result = new HttpOperationResponse<Error>();
             result.Request = httpRequest;
             result.Response = httpResponse;
-            result.Body = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                        string defaultResponseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Error>(defaultResponseContent, this.Client.DeserializationSettings);
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -425,17 +478,17 @@ namespace Fixtures.SwaggerBatRequiredOptional
         /// <summary>
         /// Test implicitly required query parameter
         /// </summary>
-        /// <param name='requiredGlobalQuery'>
-        /// number of items to skip
-        /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<Error>> GetRequiredGlobalQueryWithOperationResponseAsync(string requiredGlobalQuery, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<Error>> GetRequiredGlobalQueryWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (requiredGlobalQuery == null)
+            if (this.Client.RequiredGlobalQuery == null)
             {
-                throw new ArgumentNullException("requiredGlobalQuery");
+                throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.RequiredGlobalQuery");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -444,7 +497,6 @@ namespace Fixtures.SwaggerBatRequiredOptional
             {
                 invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("requiredGlobalQuery", requiredGlobalQuery);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(invocationId, this, "GetRequiredGlobalQuery", tracingParameters);
             }
@@ -452,9 +504,9 @@ namespace Fixtures.SwaggerBatRequiredOptional
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//reqopt/global/required/query";
             List<string> queryParameters = new List<string>();
-            if (requiredGlobalQuery != null)
+            if (this.Client.RequiredGlobalQuery != null)
             {
-                queryParameters.Add(string.Format("required_global_query={0}", Uri.EscapeDataString(requiredGlobalQuery)));
+                queryParameters.Add(string.Format("required-global-query={0}", Uri.EscapeDataString(this.Client.RequiredGlobalQuery)));
             }
             if (queryParameters.Count > 0)
             {
@@ -467,6 +519,14 @@ namespace Fixtures.SwaggerBatRequiredOptional
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -480,10 +540,10 @@ namespace Fixtures.SwaggerBatRequiredOptional
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(httpResponse.IsSuccessStatusCode))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -501,7 +561,8 @@ namespace Fixtures.SwaggerBatRequiredOptional
             var result = new HttpOperationResponse<Error>();
             result.Request = httpRequest;
             result.Response = httpResponse;
-            result.Body = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                        string defaultResponseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Error>(defaultResponseContent, this.Client.DeserializationSettings);
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -512,13 +573,13 @@ namespace Fixtures.SwaggerBatRequiredOptional
         /// <summary>
         /// Test implicitly optional query parameter
         /// </summary>
-        /// <param name='optionalGlobalQuery'>
-        /// number of items to skip
-        /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<Error>> GetOptionalGlobalQueryWithOperationResponseAsync(int? optionalGlobalQuery = default(int?), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<Error>> GetOptionalGlobalQueryWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -527,7 +588,6 @@ namespace Fixtures.SwaggerBatRequiredOptional
             {
                 invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("optionalGlobalQuery", optionalGlobalQuery);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(invocationId, this, "GetOptionalGlobalQuery", tracingParameters);
             }
@@ -535,9 +595,9 @@ namespace Fixtures.SwaggerBatRequiredOptional
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//reqopt/global/optional/query";
             List<string> queryParameters = new List<string>();
-            if (optionalGlobalQuery != null)
+            if (this.Client.OptionalGlobalQuery != null)
             {
-                queryParameters.Add(string.Format("optional_global_query={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(optionalGlobalQuery, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("optional-global-query={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(this.Client.OptionalGlobalQuery, this.Client.SerializationSettings).Trim('"'))));
             }
             if (queryParameters.Count > 0)
             {
@@ -550,6 +610,14 @@ namespace Fixtures.SwaggerBatRequiredOptional
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Send Request
             if (shouldTrace)
             {
@@ -563,10 +631,10 @@ namespace Fixtures.SwaggerBatRequiredOptional
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(httpResponse.IsSuccessStatusCode))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -584,7 +652,8 @@ namespace Fixtures.SwaggerBatRequiredOptional
             var result = new HttpOperationResponse<Error>();
             result.Request = httpRequest;
             result.Response = httpResponse;
-            result.Body = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                        string defaultResponseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Error>(defaultResponseContent, this.Client.DeserializationSettings);
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);

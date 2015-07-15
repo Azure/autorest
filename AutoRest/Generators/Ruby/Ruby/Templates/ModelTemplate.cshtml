@@ -10,7 +10,7 @@ module @(Settings.Namespace)
     #
     @WrapComment("# ", string.IsNullOrEmpty(Model.Documentation) ? "Model object." : Model.Documentation)
     #
-    class @Model.Name@(Model.BaseModelType != null ? " < " + Model.BaseModelType.Name : "")
+    class @Model.Name@(Model.GetBaseTypeName())
     @foreach (var property in Model.PropertyTemplateModels)
     {
       @:@WrapComment("# ", string.Format("@return {0}{1}", property.Type.GetYardDocumentation(), property.Documentation))
@@ -70,7 +70,7 @@ module @(Settings.Namespace)
       def self.serialize_object(object)
         object.validate
         output_object = {}
-        @foreach (var property in Model.PropertyTemplateModels.Where(x => !x.IsReadOnly).OrderByDescending(x => x.IsRequired))
+        @foreach (var property in Model.ComposedProperties.Where(x => !x.IsReadOnly).OrderByDescending(x => x.IsRequired))
         {
         @EmptyLine
         @:serialized_property = @("object." + property.Name)
@@ -91,7 +91,7 @@ module @(Settings.Namespace)
 
         output_object = @(Model.Name).new
         
-        @foreach (var property in Model.PropertyTemplateModels.Where(x => !x.IsReadOnly).OrderByDescending(x => x.IsRequired))
+        @foreach (var property in Model.ComposedProperties.Where(x => !x.IsReadOnly).OrderByDescending(x => x.IsRequired))
         {
         @EmptyLine    
         @:deserialized_property = @(string.Format("object['{0}']", property.SerializedName))

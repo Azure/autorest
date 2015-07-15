@@ -11,7 +11,7 @@ namespace Fixtures.MirrorRecursiveTypes
     /// <summary>
     /// Some cool documentation.
     /// </summary>
-    public partial interface IRecursiveTypesAPI : IDisposable
+    public partial interface IRecursiveTypesAPI
     {
         /// <summary>
         /// The base URI of the service.
@@ -36,10 +36,13 @@ namespace Fixtures.MirrorRecursiveTypes
         /// <param name='body'>
         /// API body mody.
         /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>        
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<Product>> PostWithOperationResponseAsync(string subscriptionId, string resourceGroupName, string apiVersion, Product body = default(Product), CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<Product>> PostWithHttpMessagesAsync(string subscriptionId, string resourceGroupName, string apiVersion, Product body = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
     }
 }

@@ -163,7 +163,12 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
         public static void SendAndComparePolymorphicObjects(Animal expected)
         {
-            using (var client = new PolymorphicAnimalStore(new Uri("http://localhost:3000"), new MirroringHandler()))
+             if (expected == null)
+            {
+                throw new ArgumentNullException("expected");
+            }
+
+           using (var client = new PolymorphicAnimalStore(new Uri("http://localhost:3000"), new MirroringHandler()))
             {
                 var createdPet = client.CreateOrUpdatePolymorphicAnimals(expected);
                 Assert.NotNull(expected);
@@ -201,9 +206,21 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         public override void WriteJson(JsonWriter writer,
             object value, JsonSerializer serializer)
         {
-            Assert.NotNull(value);
-            Assert.NotNull(writer);
-            Assert.NotNull(serializer);
+            if (value == null)
+            {
+                throw new ArgumentNullException("value");
+            }
+
+            if (writer == null)
+            {
+                throw new ArgumentNullException("writer");
+            }
+
+            if (serializer == null)
+            {
+                throw new ArgumentNullException("serializer");
+            }
+
             string typeName = value.GetType().Name;
             if (value.GetType().GetCustomAttributes<JsonObjectAttribute>().Any())
             {

@@ -8,25 +8,22 @@
 // "In Suppression File".
 // You do not need to add suppressions to this file manually.
 
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", 
-    "CA2210:AssembliesShouldHaveValidStrongNames")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1020:AvoidNamespacesWithFewTypes", 
-    Scope = "namespace", Target = "Microsoft.Rest.Generator.CSharp.Azure.Templates")]
+    Scope = "namespace", Target = "Microsoft.Rest.Generator.CSharp.Azure.Templates", Justification="Parallel with other generators.")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1020:AvoidNamespacesWithFewTypes", 
-    Scope = "namespace", Target = "Microsoft.Rest.Generator.CSharp")]
+    Scope = "namespace", Target = "Microsoft.Rest.Generator.CSharp", Justification="Parallel with other generators.")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", 
     "CA1303:Do not pass literals as localized parameters", 
     MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)", Scope = "member", 
-    Target = "Microsoft.Rest.Generator.CSharp.Azure.AzureMethodTemplateModel.#BuildUrl(System.String)")]
+    Target = "Microsoft.Rest.Generator.CSharp.Azure.AzureMethodTemplateModel.#BuildUrl(System.String)", 
+    Justification="Literal string is generated code.")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", 
     "CA1303:Do not pass literals as localized parameters", 
     MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)", Scope = "member", 
-    Target = "Microsoft.Rest.Generator.CSharp.Azure.AzureMethodTemplateModel.#AddQueryParametersToUri(System.String,Microsoft.Rest.Generator.Utilities.IndentedStringBuilder)")]
+    Target = "Microsoft.Rest.Generator.CSharp.Azure.AzureMethodTemplateModel.#AddQueryParametersToUri(System.String,Microsoft.Rest.Generator.Utilities.IndentedStringBuilder)", 
+    Justification="Literal string is generated code.")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", 
     "CA1303:Do not pass literals as localized parameters", 
     MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)", Scope = "member", 
-    Target = "Microsoft.Rest.Generator.CSharp.Azure.AzureMethodTemplateModel.#ReplaceSubscriptionIdInUri(System.String,Microsoft.Rest.Generator.Utilities.IndentedStringBuilder)")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", 
-    MessageId = "Namer", Scope = "type", Target = "Microsoft.Rest.Generator.CSharp.AzureCSharpCodeNamer")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1703:ResourceStringsShouldBeSpelledCorrectly", 
-    MessageId = "nuget", Scope = "resource", Target = "Microsoft.Rest.Generator.CSharp.Azure.Properties.Resources.resources")]
+    Target = "Microsoft.Rest.Generator.CSharp.Azure.AzureMethodTemplateModel.#ReplaceSubscriptionIdInUri(System.String,Microsoft.Rest.Generator.Utilities.IndentedStringBuilder)", 
+    Justification="Literal string is generated code.")]

@@ -37,11 +37,6 @@ namespace Fixtures.Azure.SwaggerBatLro
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
         /// <summary>
-        /// The Api Version.
-        /// </summary>
-        public string ApiVersion { get; private set; }
-
-        /// <summary>
         /// Subscription credentials which uniquely identify Microsoft Azure
         /// subscription.
         /// </summary>
@@ -59,6 +54,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         public virtual ILRORetrysOperations LRORetrys { get; private set; }
 
         public virtual ILROSADsOperations LROSADs { get; private set; }
+
+        public virtual ILROsCustomHeaderOperations LROsCustomHeader { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the AutoRestLongRunningOperationTestService class.
@@ -169,8 +166,8 @@ namespace Fixtures.Azure.SwaggerBatLro
             this.DONOTCALLs = new DONOTCALLsOperations(this);
             this.LRORetrys = new LRORetrysOperations(this);
             this.LROSADs = new LROSADsOperations(this);
+            this.LROsCustomHeader = new LROsCustomHeaderOperations(this);
             this.BaseUri = new Uri("http://localhost");
-            this.ApiVersion = "1.0.0";
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,

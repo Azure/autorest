@@ -11,7 +11,7 @@ namespace Fixtures.SwaggerBatReport
     /// <summary>
     /// Test Infrastructure for AutoRest
     /// </summary>
-    public partial interface IAutoRestReportService : IDisposable
+    public partial interface IAutoRestReportService
     {
         /// <summary>
         /// The base URI of the service.
@@ -21,10 +21,13 @@ namespace Fixtures.SwaggerBatReport
         /// <summary>
         /// Get test coverage report
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>        
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<IDictionary<string, int?>>> GetReportWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<IDictionary<string, int?>>> GetReportWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
     }
 }

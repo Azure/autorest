@@ -34,10 +34,13 @@ namespace Fixtures.Azure.SwaggerBatHead
         /// <summary>
         /// Return 204 status code if successful
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<bool?>> Head204WithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<bool?>> Head204WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -53,7 +56,6 @@ namespace Fixtures.Azure.SwaggerBatHead
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//http/success/204";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -65,6 +67,14 @@ namespace Fixtures.Azure.SwaggerBatHead
             httpRequest.Method = new HttpMethod("HEAD");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -81,10 +91,10 @@ namespace Fixtures.Azure.SwaggerBatHead
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "NoContent") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "NotFound")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -114,10 +124,13 @@ namespace Fixtures.Azure.SwaggerBatHead
         /// <summary>
         /// Return 404 status code if successful
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<bool?>> Head404WithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<bool?>> Head404WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -133,7 +146,6 @@ namespace Fixtures.Azure.SwaggerBatHead
             string url = this.Client.BaseUri.AbsoluteUri + 
                          "//http/success/404";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.Client.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -145,6 +157,14 @@ namespace Fixtures.Azure.SwaggerBatHead
             httpRequest.Method = new HttpMethod("HEAD");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -161,10 +181,10 @@ namespace Fixtures.Azure.SwaggerBatHead
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "NoContent") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "NotFound")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {

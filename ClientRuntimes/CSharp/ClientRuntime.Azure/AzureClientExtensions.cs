@@ -25,21 +25,23 @@ namespace Microsoft.Azure
         /// <param name="client">IAzureClient</param>
         /// <param name="response">Response from the begin operation</param>
         /// <param name="getOperationAction">Delegate for the get operation</param>
+        /// <param name="customHeaders">Headers that will be added to request</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Response with created resource</returns>
         public static async Task<AzureOperationResponse<T>> GetPutOperationResultAsync<T>(
             this IAzureClient client, 
             AzureOperationResponse<T> response,
             Func<Task<AzureOperationResponse<T>>> getOperationAction,
+            Dictionary<string, List<string>> customHeaders, 
             CancellationToken cancellationToken) where T : class
         {
             if (response == null)
             {
-                throw new ArgumentNullException("response");
+                throw new ValidationException(ValidationRules.CannotBeNull, "response");
             }
             if (getOperationAction == null)
             {
-                throw new ArgumentNullException("getOperationAction");
+                throw new ValidationException(ValidationRules.CannotBeNull, "getOperationAction");
             }
             if (response.Response.StatusCode != HttpStatusCode.OK &&
                 response.Response.StatusCode != HttpStatusCode.Accepted &&
@@ -58,11 +60,11 @@ namespace Microsoft.Azure
 
                 if (!string.IsNullOrEmpty(pollingState.AzureAsyncOperationHeaderLink))
                 {
-                    await UpdateStateFromAzureAsyncOperationHeader(client, pollingState, cancellationToken);
+                    await UpdateStateFromAzureAsyncOperationHeader(client, pollingState, customHeaders, cancellationToken);
                 }
                 else if (!string.IsNullOrEmpty(pollingState.LocationHeaderLink))
                 {
-                    await UpdateStateFromLocationHeaderOnPut(client, pollingState, cancellationToken);
+                    await UpdateStateFromLocationHeaderOnPut(client, pollingState, customHeaders, cancellationToken);
                 }
                 else
                 {
@@ -92,21 +94,23 @@ namespace Microsoft.Azure
         /// <typeparam name="T">Type of the resource</typeparam>
         /// <param name="client">IAzureClient</param>
         /// <param name="response">Response from the begin operation</param>
+        /// <param name="customHeaders">Headers that will be added to request</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Operation response</returns>
         public static async Task<AzureOperationResponse<T>> GetPostOrDeleteOperationResultAsync<T>(
             this IAzureClient client,
             AzureOperationResponse<T> response,
+            Dictionary<string, List<string>> customHeaders, 
             CancellationToken cancellationToken) where T : class
         {
             if (response == null)
             {
-                throw new ArgumentNullException("response");
+                throw new ValidationException(ValidationRules.CannotBeNull, "response");
             }
 
             if (response.Response == null)
             {
-                throw new ArgumentNullException("response.Response");
+                throw new ValidationException(ValidationRules.CannotBeNull, "response.Response");
             }
 
             if (response.Response.StatusCode != HttpStatusCode.OK &&
@@ -126,11 +130,11 @@ namespace Microsoft.Azure
 
                 if (!string.IsNullOrEmpty(pollingState.AzureAsyncOperationHeaderLink))
                 {
-                    await UpdateStateFromAzureAsyncOperationHeader(client, pollingState, cancellationToken);
+                    await UpdateStateFromAzureAsyncOperationHeader(client, pollingState, customHeaders, cancellationToken);
                 }
                 else if (!string.IsNullOrEmpty(pollingState.LocationHeaderLink))
                 {
-                    await UpdateStateFromLocationHeaderOnPostOrDelete(client, cancellationToken, pollingState);
+                    await UpdateStateFromLocationHeaderOnPostOrDelete(client, pollingState, customHeaders, cancellationToken);
                 }
                 else
                 {
@@ -153,11 +157,13 @@ namespace Microsoft.Azure
         /// </summary>
         /// <param name="client">IAzureClient</param>
         /// <param name="response">Response from the begin operation</param>
+        /// <param name="customHeaders">Headers that will be added to request</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Operation response</returns>
         public static async Task<AzureOperationResponse> GetPostOrDeleteOperationResultAsync(
             this IAzureClient client,
             AzureOperationResponse response,
+            Dictionary<string, List<string>> customHeaders, 
             CancellationToken cancellationToken)
         {
             var newResponse = new AzureOperationResponse<object>
@@ -167,7 +173,7 @@ namespace Microsoft.Azure
                 RequestId = response.RequestId
             };
 
-            var azureOperationResponse = await client.GetPostOrDeleteOperationResultAsync<object>(newResponse, cancellationToken);
+            var azureOperationResponse = await client.GetPostOrDeleteOperationResultAsync<object>(newResponse, customHeaders, cancellationToken);
             return new AzureOperationResponse
             {
                 Request = azureOperationResponse.Request,
@@ -223,16 +229,19 @@ namespace Microsoft.Azure
         /// <typeparam name="T">Type of the resource.</typeparam>
         /// <param name="client">IAzureClient</param>
         /// <param name="pollingState">Current polling state.</param>
+        /// <param name="customHeaders">Headers that will be added to request</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task.</returns>
         private static async Task UpdateStateFromLocationHeaderOnPut<T>(
             IAzureClient client,
             PollingState<T> pollingState,
+            Dictionary<string, List<string>> customHeaders, 
             CancellationToken cancellationToken) 
             where T : class
         {
             AzureOperationResponse<T> responseWithResource = await client.GetAsync<T>(
                 pollingState.LocationHeaderLink,
+                customHeaders,
                 cancellationToken).ConfigureAwait(false);
 
             pollingState.Response = responseWithResource.Response;
@@ -278,16 +287,19 @@ namespace Microsoft.Azure
         /// <typeparam name="T">Type of the resource.</typeparam>
         /// <param name="client">IAzureClient</param>
         /// <param name="pollingState">Current polling state.</param>
+        /// <param name="customHeaders">Headers that will be added to request</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task.</returns>
         private static async Task UpdateStateFromLocationHeaderOnPostOrDelete<T>(
             IAzureClient client,
-            CancellationToken cancellationToken, 
-            PollingState<T> pollingState) 
+            PollingState<T> pollingState,
+            Dictionary<string, List<string>> customHeaders, 
+            CancellationToken cancellationToken) 
             where T : class
         {
             AzureOperationResponse<T> responseWithResource = await client.GetAsync<T>(
                 pollingState.LocationHeaderLink,
+                customHeaders,
                 cancellationToken).ConfigureAwait(false);
 
             pollingState.Response = responseWithResource.Response;
@@ -313,16 +325,19 @@ namespace Microsoft.Azure
         /// <typeparam name="T">Type of the resource.</typeparam>
         /// <param name="client">IAzureClient</param>
         /// <param name="pollingState">Current polling state.</param>
+        /// <param name="customHeaders">Headers that will be added to request</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task.</returns>
         private static async Task  UpdateStateFromAzureAsyncOperationHeader<T>(
-            IAzureClient client, 
+            IAzureClient client,
             PollingState<T> pollingState,
+            Dictionary<string, List<string>> customHeaders, 
             CancellationToken cancellationToken) 
             where T : class
         {
             var asyncOperationResponse = await client.GetAsync<AzureAsyncOperation>(
                 pollingState.AzureAsyncOperationHeaderLink,
+                customHeaders,
                 cancellationToken).ConfigureAwait(false);
 
             if (asyncOperationResponse.Body == null || asyncOperationResponse.Body.Status == null)
@@ -342,17 +357,19 @@ namespace Microsoft.Azure
         /// </summary>
         /// <param name="client">IAzureClient</param>
         /// <param name="operationUrl">URL of the resource.</param>
+        /// <param name="customHeaders">Headers that will be added to request</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns></returns>
         private static async Task<AzureOperationResponse<T>> GetAsync<T>(
             this IAzureClient client,
             string operationUrl,
+            Dictionary<string, List<string>> customHeaders, 
             CancellationToken cancellationToken) where T : class
         {
             // Validate
             if (operationUrl == null)
             {
-                throw new ArgumentNullException("operationUrl");
+                throw new ValidationException(ValidationRules.CannotBeNull, "operationUrl");
             }
 
             // Tracing
@@ -373,6 +390,15 @@ namespace Microsoft.Azure
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = HttpMethod.Get;
             httpRequest.RequestUri = new Uri(url);
+            
+            // Set Headers
+            if (customHeaders != null)
+            {
+                foreach (var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
 
             // Set Credentials
             if (client.Credentials != null)

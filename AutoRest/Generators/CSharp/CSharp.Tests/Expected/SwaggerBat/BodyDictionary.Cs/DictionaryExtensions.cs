@@ -32,7 +32,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, int?>> GetNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, int?>> result = await operations.GetNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, int?>> result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -58,7 +58,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, int?>> GetEmptyAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, int?>> result = await operations.GetEmptyWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, int?>> result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -88,7 +88,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task PutEmptyAsync( this IDictionary operations, IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutEmptyWithOperationResponseAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutEmptyWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -113,7 +113,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, string>> GetNullValueAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, string>> result = await operations.GetNullValueWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, string>> result = await operations.GetNullValueWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -139,7 +139,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, string>> GetNullKeyAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, string>> result = await operations.GetNullKeyWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, string>> result = await operations.GetNullKeyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -165,7 +165,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, string>> GetEmptyStringKeyAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, string>> result = await operations.GetEmptyStringKeyWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, string>> result = await operations.GetEmptyStringKeyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -191,7 +191,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, string>> GetInvalidAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, string>> result = await operations.GetInvalidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, string>> result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -219,7 +219,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, bool?>> GetBooleanTfftAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, bool?>> result = await operations.GetBooleanTfftWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, bool?>> result = await operations.GetBooleanTfftWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -249,7 +249,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task PutBooleanTfftAsync( this IDictionary operations, IDictionary<string, bool?> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutBooleanTfftWithOperationResponseAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutBooleanTfftWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -274,7 +274,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, bool?>> GetBooleanInvalidNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, bool?>> result = await operations.GetBooleanInvalidNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, bool?>> result = await operations.GetBooleanInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -300,7 +300,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, bool?>> GetBooleanInvalidStringAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, bool?>> result = await operations.GetBooleanInvalidStringWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, bool?>> result = await operations.GetBooleanInvalidStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -326,7 +326,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, int?>> GetIntegerValidAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, int?>> result = await operations.GetIntegerValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, int?>> result = await operations.GetIntegerValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -356,7 +356,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task PutIntegerValidAsync( this IDictionary operations, IDictionary<string, int?> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutIntegerValidWithOperationResponseAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutIntegerValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -381,7 +381,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, int?>> GetIntInvalidNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, int?>> result = await operations.GetIntInvalidNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, int?>> result = await operations.GetIntInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -407,7 +407,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, int?>> GetIntInvalidStringAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, int?>> result = await operations.GetIntInvalidStringWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, int?>> result = await operations.GetIntInvalidStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -433,7 +433,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, long?>> GetLongValidAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, long?>> result = await operations.GetLongValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, long?>> result = await operations.GetLongValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -463,7 +463,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task PutLongValidAsync( this IDictionary operations, IDictionary<string, long?> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutLongValidWithOperationResponseAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutLongValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -488,7 +488,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, long?>> GetLongInvalidNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, long?>> result = await operations.GetLongInvalidNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, long?>> result = await operations.GetLongInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -514,7 +514,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, long?>> GetLongInvalidStringAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, long?>> result = await operations.GetLongInvalidStringWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, long?>> result = await operations.GetLongInvalidStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -540,7 +540,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, double?>> GetFloatValidAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, double?>> result = await operations.GetFloatValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, double?>> result = await operations.GetFloatValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -570,7 +570,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task PutFloatValidAsync( this IDictionary operations, IDictionary<string, double?> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutFloatValidWithOperationResponseAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutFloatValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -595,7 +595,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, double?>> GetFloatInvalidNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, double?>> result = await operations.GetFloatInvalidNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, double?>> result = await operations.GetFloatInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -621,7 +621,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, double?>> GetFloatInvalidStringAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, double?>> result = await operations.GetFloatInvalidStringWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, double?>> result = await operations.GetFloatInvalidStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -647,7 +647,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, double?>> GetDoubleValidAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, double?>> result = await operations.GetDoubleValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, double?>> result = await operations.GetDoubleValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -677,7 +677,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task PutDoubleValidAsync( this IDictionary operations, IDictionary<string, double?> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutDoubleValidWithOperationResponseAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutDoubleValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -702,7 +702,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, double?>> GetDoubleInvalidNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, double?>> result = await operations.GetDoubleInvalidNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, double?>> result = await operations.GetDoubleInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -728,7 +728,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, double?>> GetDoubleInvalidStringAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, double?>> result = await operations.GetDoubleInvalidStringWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, double?>> result = await operations.GetDoubleInvalidStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -754,7 +754,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, string>> GetStringValidAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, string>> result = await operations.GetStringValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, string>> result = await operations.GetStringValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -784,7 +784,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task PutStringValidAsync( this IDictionary operations, IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutStringValidWithOperationResponseAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutStringValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -809,7 +809,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, string>> GetStringWithNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, string>> result = await operations.GetStringWithNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, string>> result = await operations.GetStringWithNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -835,7 +835,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, string>> GetStringWithInvalidAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, string>> result = await operations.GetStringWithInvalidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, string>> result = await operations.GetStringWithInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -863,7 +863,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, DateTime?>> GetDateValidAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, DateTime?>> result = await operations.GetDateValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, DateTime?>> result = await operations.GetDateValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -895,7 +895,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task PutDateValidAsync( this IDictionary operations, IDictionary<string, DateTime?> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutDateValidWithOperationResponseAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutDateValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -920,7 +920,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, DateTime?>> GetDateInvalidNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, DateTime?>> result = await operations.GetDateInvalidNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, DateTime?>> result = await operations.GetDateInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -946,7 +946,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, DateTime?>> GetDateInvalidCharsAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, DateTime?>> result = await operations.GetDateInvalidCharsWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, DateTime?>> result = await operations.GetDateInvalidCharsWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -974,7 +974,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, DateTime?>> GetDateTimeValidAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, DateTime?>> result = await operations.GetDateTimeValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, DateTime?>> result = await operations.GetDateTimeValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1006,7 +1006,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task PutDateTimeValidAsync( this IDictionary operations, IDictionary<string, DateTime?> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutDateTimeValidWithOperationResponseAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutDateTimeValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -1031,7 +1031,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, DateTime?>> GetDateTimeInvalidNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, DateTime?>> result = await operations.GetDateTimeInvalidNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, DateTime?>> result = await operations.GetDateTimeInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1057,7 +1057,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, DateTime?>> GetDateTimeInvalidCharsAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, DateTime?>> result = await operations.GetDateTimeInvalidCharsWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, DateTime?>> result = await operations.GetDateTimeInvalidCharsWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1085,7 +1085,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, byte[]>> GetByteValidAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, byte[]>> result = await operations.GetByteValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, byte[]>> result = await operations.GetByteValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1117,7 +1117,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task PutByteValidAsync( this IDictionary operations, IDictionary<string, byte[]> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutByteValidWithOperationResponseAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutByteValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -1144,7 +1144,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, byte[]>> GetByteInvalidNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, byte[]>> result = await operations.GetByteInvalidNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, byte[]>> result = await operations.GetByteInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1170,7 +1170,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, Widget>> GetComplexNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, Widget>> result = await operations.GetComplexNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, Widget>> result = await operations.GetComplexNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1196,7 +1196,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, Widget>> GetComplexEmptyAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, Widget>> result = await operations.GetComplexEmptyWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, Widget>> result = await operations.GetComplexEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1224,7 +1224,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, Widget>> GetComplexItemNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, Widget>> result = await operations.GetComplexItemNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, Widget>> result = await operations.GetComplexItemNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1252,7 +1252,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, Widget>> GetComplexItemEmptyAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, Widget>> result = await operations.GetComplexItemEmptyWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, Widget>> result = await operations.GetComplexItemEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1280,7 +1280,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, Widget>> GetComplexValidAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, Widget>> result = await operations.GetComplexValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, Widget>> result = await operations.GetComplexValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1314,7 +1314,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task PutComplexValidAsync( this IDictionary operations, IDictionary<string, Widget> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutComplexValidWithOperationResponseAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutComplexValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -1339,7 +1339,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, IList<string>>> GetArrayNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, IList<string>>> result = await operations.GetArrayNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, IList<string>>> result = await operations.GetArrayNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1365,7 +1365,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, IList<string>>> GetArrayEmptyAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, IList<string>>> result = await operations.GetArrayEmptyWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, IList<string>>> result = await operations.GetArrayEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1393,7 +1393,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, IList<string>>> GetArrayItemNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, IList<string>>> result = await operations.GetArrayItemNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, IList<string>>> result = await operations.GetArrayItemNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1421,7 +1421,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, IList<string>>> GetArrayItemEmptyAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, IList<string>>> result = await operations.GetArrayItemEmptyWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, IList<string>>> result = await operations.GetArrayItemEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1449,7 +1449,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, IList<string>>> GetArrayValidAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, IList<string>>> result = await operations.GetArrayValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, IList<string>>> result = await operations.GetArrayValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1481,7 +1481,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task PutArrayValidAsync( this IDictionary operations, IDictionary<string, IList<string>> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutArrayValidWithOperationResponseAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutArrayValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -1506,7 +1506,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, IDictionary<string, string>>> GetDictionaryNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, IDictionary<string, string>>> result = await operations.GetDictionaryNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, IDictionary<string, string>>> result = await operations.GetDictionaryNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1534,7 +1534,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, IDictionary<string, string>>> GetDictionaryEmptyAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, IDictionary<string, string>>> result = await operations.GetDictionaryEmptyWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, IDictionary<string, string>>> result = await operations.GetDictionaryEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1564,7 +1564,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, IDictionary<string, string>>> GetDictionaryItemNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, IDictionary<string, string>>> result = await operations.GetDictionaryItemNullWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, IDictionary<string, string>>> result = await operations.GetDictionaryItemNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1594,7 +1594,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, IDictionary<string, string>>> GetDictionaryItemEmptyAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, IDictionary<string, string>>> result = await operations.GetDictionaryItemEmptyWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, IDictionary<string, string>>> result = await operations.GetDictionaryItemEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1624,7 +1624,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, IDictionary<string, string>>> GetDictionaryValidAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IDictionary<string, IDictionary<string, string>>> result = await operations.GetDictionaryValidWithOperationResponseAsync(cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IDictionary<string, IDictionary<string, string>>> result = await operations.GetDictionaryValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1658,7 +1658,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// </param>
             public static async Task PutDictionaryValidAsync( this IDictionary operations, IDictionary<string, IDictionary<string, string>> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutDictionaryValidWithOperationResponseAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+                await operations.PutDictionaryValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
 
     }

@@ -205,23 +205,23 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line default
 #line hidden
 
-            WriteLiteral("       \r\n        /// <summary>\r\n        /// Validate the object. Throws ArgumentE" +
-"xception or ArgumentNullException if validation fails.\r\n        /// </summary>\r\n" +
-"        public ");
-#line 45 "ModelTemplate.cshtml"
-          Write(Model.MethodQualifier);
+#line 41 "ModelTemplate.cshtml"
+ if(@Model.ShouldValidate()) 
+{   
+
+#line default
+#line hidden
+
+            WriteLiteral("        /// <summary>\r\n        /// Validate the object. Throws ArgumentException " +
+"or ArgumentNullException if validation fails.\r\n        /// </summary>\r\n        p" +
+"ublic ");
+#line 46 "ModelTemplate.cshtml"
+            Write(Model.MethodQualifier);
 
 #line default
 #line hidden
             WriteLiteral(" void Validate()\r\n        {\r\n");
-#line 47 "ModelTemplate.cshtml"
-        
-
-#line default
-#line hidden
-
-#line 47 "ModelTemplate.cshtml"
-          
+#line 48 "ModelTemplate.cshtml"
             bool anythingToValidate = false;
 
             if (Model.BaseModelType != null)
@@ -248,9 +248,10 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 
 #line default
 #line hidden
-            WriteLiteral(" == null)\r\n            {\r\n                throw new ArgumentNullException(\"");
+            WriteLiteral(" == null)\r\n            {\r\n                throw new ValidationException(Validatio" +
+"nRules.CannotBeNull, \"");
 #line 61 "ModelTemplate.cshtml"
-                                              Write(property.Name);
+                                                                          Write(property.Name);
 
 #line default
 #line hidden
@@ -282,12 +283,18 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
             WriteLiteral("            //Nothing to validate\r\n");
 #line 74 "ModelTemplate.cshtml"
             }
-        
 
 #line default
 #line hidden
 
-            WriteLiteral("\r\n        }\r\n    }\r\n}\r\n");
+            WriteLiteral("        }\r\n");
+#line 76 "ModelTemplate.cshtml"
+        }
+
+#line default
+#line hidden
+
+            WriteLiteral("    }\r\n}\r\n");
         }
         #pragma warning restore 1998
     }

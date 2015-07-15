@@ -37,11 +37,6 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
         /// <summary>
-        /// The Api Version.
-        /// </summary>
-        public string ApiVersion { get; private set; }
-
-        /// <summary>
         /// Subscription credentials which uniquely identify Microsoft Azure
         /// subscription.
         /// </summary>
@@ -158,7 +153,6 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
         private void Initialize()
         {
             this.BaseUri = new Uri("http://localhost");
-            this.ApiVersion = "1.0.0";
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,
@@ -185,21 +179,14 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
         /// <param name='resourceArray'>
         /// External Resource as an Array to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> PutArrayWithOperationResponseAsync(IList<Resource> resourceArray = default(IList<Resource>), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> PutArrayWithHttpMessagesAsync(IList<Resource> resourceArray = default(IList<Resource>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (resourceArray != null)
-            {
-                foreach ( var element in resourceArray)
-            {
-                if (element != null)
-            {
-                element.Validate();
-            }
-            }
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -215,7 +202,6 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             string url = this.BaseUri.AbsoluteUri + 
                          "//azure/resource-flatten/array";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -227,6 +213,14 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             httpRequest.Method = new HttpMethod("PUT");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -247,10 +241,10 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -278,10 +272,13 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
         /// <summary>
         /// Get External Resource as an Array
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<IList<FlattenedProduct>>> GetArrayWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<IList<FlattenedProduct>>> GetArrayWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -297,7 +294,6 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             string url = this.BaseUri.AbsoluteUri + 
                          "//azure/resource-flatten/array";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -309,6 +305,14 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -325,10 +329,10 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -349,6 +353,7 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<IList<FlattenedProduct>>(responseContent, this.DeserializationSettings);
             }
             if (shouldTrace)
@@ -364,24 +369,14 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
         /// <param name='resourceDictionary'>
         /// External Resource as a Dictionary to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> PutDictionaryWithOperationResponseAsync(IDictionary<string, FlattenedProduct> resourceDictionary = default(IDictionary<string, FlattenedProduct>), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> PutDictionaryWithHttpMessagesAsync(IDictionary<string, FlattenedProduct> resourceDictionary = default(IDictionary<string, FlattenedProduct>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (resourceDictionary != null)
-            {
-                if ( resourceDictionary != null)
-            {
-                foreach ( var valueElement in resourceDictionary.Values)
-                {
-                    if (valueElement != null)
-            {
-                valueElement.Validate();
-            }
-                }
-            }
-            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -397,7 +392,6 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             string url = this.BaseUri.AbsoluteUri + 
                          "//azure/resource-flatten/dictionary";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -409,6 +403,14 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             httpRequest.Method = new HttpMethod("PUT");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -429,10 +431,10 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -460,10 +462,13 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
         /// <summary>
         /// Get External Resource as a Dictionary
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<IDictionary<string, FlattenedProduct>>> GetDictionaryWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<IDictionary<string, FlattenedProduct>>> GetDictionaryWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -479,7 +484,6 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             string url = this.BaseUri.AbsoluteUri + 
                          "//azure/resource-flatten/dictionary";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -491,6 +495,14 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -507,10 +519,10 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -531,6 +543,7 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<IDictionary<string, FlattenedProduct>>(responseContent, this.DeserializationSettings);
             }
             if (shouldTrace)
@@ -546,10 +559,13 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
         /// <param name='resourceComplexObject'>
         /// External Resource as a ResourceCollection to put
         /// </param>    
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> PutResourceCollectionWithOperationResponseAsync(ResourceCollection resourceComplexObject = default(ResourceCollection), CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> PutResourceCollectionWithHttpMessagesAsync(ResourceCollection resourceComplexObject = default(ResourceCollection), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (resourceComplexObject != null)
             {
@@ -570,7 +586,6 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             string url = this.BaseUri.AbsoluteUri + 
                          "//azure/resource-flatten/resourcecollection";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -582,6 +597,14 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             httpRequest.Method = new HttpMethod("PUT");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -602,10 +625,10 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -633,10 +656,13 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
         /// <summary>
         /// Get External Resource as a ResourceCollection
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<ResourceCollection>> GetResourceCollectionWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<ResourceCollection>> GetResourceCollectionWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -652,7 +678,6 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             string url = this.BaseUri.AbsoluteUri + 
                          "//azure/resource-flatten/resourcecollection";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(this.ApiVersion)));
             if (queryParameters.Count > 0)
             {
                 url += "?" + string.Join("&", queryParameters);
@@ -664,6 +689,14 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
+            }
+
             // Set Credentials
             cancellationToken.ThrowIfCancellationRequested();
             await this.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -680,10 +713,10 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.DeserializationSettings);
                 if (errorBody != null)
                 {
@@ -705,6 +738,7 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<ResourceCollection>(responseContent, this.DeserializationSettings);
             }
             if (shouldTrace)

@@ -93,7 +93,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line hidden
             WriteLiteral("\r\n        /// </summary>\r\n");
 #line 26 "MethodGroupInterfaceTemplate.cshtml"
-        foreach (var parameter in method.Parameters)
+        foreach (var parameter in method.LocalParameters)
         {
 
 #line default
@@ -118,27 +118,28 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line default
 #line hidden
 
-            WriteLiteral("        /// <param name=\'cancellationToken\'>\r\n        /// Cancellation token.\r\n  " +
-"      /// </param>\r\n        Task<");
-#line 35 "MethodGroupInterfaceTemplate.cshtml"
+            WriteLiteral("        /// <param name=\'customHeaders\'>\r\n        /// Headers that will be added " +
+"to request.\r\n        /// </param>\r\n        /// <param name=\'cancellationToken\'>\r" +
+"\n        /// Cancellation token.\r\n        /// </param>\r\n        Task<");
+#line 38 "MethodGroupInterfaceTemplate.cshtml"
           Write(method.OperationResponseReturnTypeString);
 
 #line default
 #line hidden
             WriteLiteral("> ");
-#line 35 "MethodGroupInterfaceTemplate.cshtml"
+#line 38 "MethodGroupInterfaceTemplate.cshtml"
                                                       Write(method.Name);
 
 #line default
 #line hidden
-            WriteLiteral("WithOperationResponseAsync(");
-#line 35 "MethodGroupInterfaceTemplate.cshtml"
-                                                                                              Write(method.AsyncMethodParameterDeclaration);
+            WriteLiteral("WithHttpMessagesAsync(");
+#line 38 "MethodGroupInterfaceTemplate.cshtml"
+                                                                                          Write(method.GetAsyncMethodParameterDeclaration(true));
 
 #line default
 #line hidden
             WriteLiteral(");\r\n");
-#line 36 "MethodGroupInterfaceTemplate.cshtml"
+#line 39 "MethodGroupInterfaceTemplate.cshtml"
     }
 
 #line default

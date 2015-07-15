@@ -63,5 +63,16 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
         }
 
+        public string RequiredConstructorParameters
+        {
+            get
+            {
+                var requireParams = new List<string>();
+                this.Properties.Where(p => p.IsRequired)
+                    .ForEach(p => requireParams.Add(p.Name.ToCamelCase()));
+                requireParams.Add("baseUri");
+                return string.Join(", ", requireParams);
+            }
+        }
     }
 }

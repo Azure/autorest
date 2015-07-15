@@ -98,25 +98,25 @@ Write(WrapComment(" * ", Model.Documentation));
 #line default
 #line hidden
 
-            WriteLiteral("    * @param {");
+            WriteLiteral(" * @param {");
 #line 23 "AzureMethodTemplate.cshtml"
-            Write(parameter.Type.Name);
+         Write(parameter.Type.Name);
 
 #line default
 #line hidden
             WriteLiteral("} [");
 #line 23 "AzureMethodTemplate.cshtml"
-                                   Write(parameter.Name);
+                                Write(parameter.Name);
 
 #line default
 #line hidden
             WriteLiteral("] ");
 #line 23 "AzureMethodTemplate.cshtml"
-                                                    Write(parameter.Documentation);
+                                                 Write(parameter.Documentation);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    *\r\n");
+            WriteLiteral("\r\n *\r\n");
 #line 25 "AzureMethodTemplate.cshtml"
 }
 
@@ -124,55 +124,68 @@ Write(WrapComment(" * ", Model.Documentation));
 #line hidden
 
 #line 26 "AzureMethodTemplate.cshtml"
-Write(WrapComment(" * ", " @param {function} callback"));
+Write(WrapComment(" * ", " @param {object} [options]"));
 
 #line default
 #line hidden
             WriteLiteral("\r\n *\r\n");
 #line 28 "AzureMethodTemplate.cshtml"
+Write(WrapComment(" * ", " @param {object} [options.customHeaders] headers that will be added to request"));
+
+#line default
+#line hidden
+            WriteLiteral("\r\n *\r\n");
+#line 30 "AzureMethodTemplate.cshtml"
+Write(WrapComment(" * ", " @param {function} callback"));
+
+#line default
+#line hidden
+            WriteLiteral("\r\n *\r\n");
+#line 32 "AzureMethodTemplate.cshtml"
 Write(WrapComment(" * ", " @returns {Stream} The Response stream"));
 
 #line default
 #line hidden
             WriteLiteral("\r\n */\r\n");
-#line 30 "AzureMethodTemplate.cshtml"
+#line 34 "AzureMethodTemplate.cshtml"
 Write(Model.OperationName);
 
 #line default
 #line hidden
             WriteLiteral(".prototype.");
-#line 30 "AzureMethodTemplate.cshtml"
+#line 34 "AzureMethodTemplate.cshtml"
                              Write(Model.Name);
 
 #line default
 #line hidden
             WriteLiteral(" = function (");
-#line 30 "AzureMethodTemplate.cshtml"
+#line 34 "AzureMethodTemplate.cshtml"
                                                        Write(Model.MethodParameterDeclarationWithCallback);
 
 #line default
 #line hidden
             WriteLiteral(") {\r\n  var self = ");
-#line 31 "AzureMethodTemplate.cshtml"
+#line 35 "AzureMethodTemplate.cshtml"
          Write(Model.ClientReference);
 
 #line default
 #line hidden
-            WriteLiteral(";\r\n\r\n  // Send request\r\n  this.begin");
-#line 34 "AzureMethodTemplate.cshtml"
+            WriteLiteral(";\r\n  if(!callback && typeof options === \'function\') {\r\n    callback = options;\r\n " +
+"   options = null;\r\n  }\r\n  // Send request\r\n  this.begin");
+#line 41 "AzureMethodTemplate.cshtml"
         Write(Model.Name.ToPascalCase());
 
 #line default
 #line hidden
             WriteLiteral("(");
-#line 34 "AzureMethodTemplate.cshtml"
+#line 41 "AzureMethodTemplate.cshtml"
                                      Write(Model.MethodParameterDeclaration);
 
 #line default
 #line hidden
             WriteLiteral("function (err, result){\r\n    if (err) return callback(err);\r\n    self.getPostOrDe" +
-"leteOperationResult(result, callback);\r\n  });\r\n}\r\n\r\n");
-#line 40 "AzureMethodTemplate.cshtml"
+"leteOperationResult(result, options, callback);\r\n  });\r\n};\r\n\r\n");
+#line 47 "AzureMethodTemplate.cshtml"
 }
 else if (Model.HttpMethod == HttpMethod.Put)
 {
@@ -181,107 +194,129 @@ else if (Model.HttpMethod == HttpMethod.Put)
 #line hidden
 
             WriteLiteral("\r\n/**\r\n *\r\n");
-#line 46 "AzureMethodTemplate.cshtml"
+#line 53 "AzureMethodTemplate.cshtml"
 Write(WrapComment(" * ", Model.Documentation));
 
 #line default
 #line hidden
             WriteLiteral("\r\n");
-#line 47 "AzureMethodTemplate.cshtml"
+#line 54 "AzureMethodTemplate.cshtml"
  foreach (var parameter in Model.DocumentationParameters)
 {
 
 #line default
 #line hidden
 
-            WriteLiteral("    * @param {");
-#line 49 "AzureMethodTemplate.cshtml"
-            Write(parameter.Type.Name);
+            WriteLiteral(" * @param {");
+#line 56 "AzureMethodTemplate.cshtml"
+         Write(parameter.Type.Name);
 
 #line default
 #line hidden
             WriteLiteral("} [");
-#line 49 "AzureMethodTemplate.cshtml"
-                                   Write(parameter.Name);
+#line 56 "AzureMethodTemplate.cshtml"
+                                Write(parameter.Name);
 
 #line default
 #line hidden
             WriteLiteral("] ");
-#line 49 "AzureMethodTemplate.cshtml"
-                                                    Write(parameter.Documentation);
+#line 56 "AzureMethodTemplate.cshtml"
+                                                 Write(parameter.Documentation);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    *\r\n");
-#line 51 "AzureMethodTemplate.cshtml"
+            WriteLiteral("\r\n *\r\n");
+#line 58 "AzureMethodTemplate.cshtml"
 }
 
 #line default
 #line hidden
 
-#line 52 "AzureMethodTemplate.cshtml"
+#line 59 "AzureMethodTemplate.cshtml"
+Write(WrapComment(" * ", " @param {object} [options]"));
+
+#line default
+#line hidden
+            WriteLiteral("\r\n *\r\n");
+#line 61 "AzureMethodTemplate.cshtml"
+Write(WrapComment(" * ", " @param {object} [options.customHeaders] headers that will be added to request"));
+
+#line default
+#line hidden
+            WriteLiteral("\r\n *\r\n");
+#line 63 "AzureMethodTemplate.cshtml"
 Write(WrapComment(" * ", " @param {function} callback"));
 
 #line default
 #line hidden
             WriteLiteral("\r\n *\r\n");
-#line 54 "AzureMethodTemplate.cshtml"
+#line 65 "AzureMethodTemplate.cshtml"
 Write(WrapComment(" * ", " @returns {Stream} The Response stream"));
 
 #line default
 #line hidden
             WriteLiteral("\r\n */\r\n");
-#line 56 "AzureMethodTemplate.cshtml"
+#line 67 "AzureMethodTemplate.cshtml"
 Write(Model.OperationName);
 
 #line default
 #line hidden
             WriteLiteral(".prototype.");
-#line 56 "AzureMethodTemplate.cshtml"
+#line 67 "AzureMethodTemplate.cshtml"
                              Write(Model.Name);
 
 #line default
 #line hidden
             WriteLiteral(" = function (");
-#line 56 "AzureMethodTemplate.cshtml"
+#line 67 "AzureMethodTemplate.cshtml"
                                                        Write(Model.MethodParameterDeclarationWithCallback);
 
 #line default
 #line hidden
             WriteLiteral(") {\r\n  var client = ");
-#line 57 "AzureMethodTemplate.cshtml"
+#line 68 "AzureMethodTemplate.cshtml"
            Write(Model.ClientReference);
 
 #line default
 #line hidden
-            WriteLiteral(";\r\n  var self = this;\r\n  function getMethod() {\r\n    var cb = function (callback)" +
-" {\r\n      return self.");
-#line 61 "AzureMethodTemplate.cshtml"
+            WriteLiteral(@";
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+  var self = this;
+  function getMethod() {
+    var cb = function (callback) {
+      return self.");
+#line 79 "AzureMethodTemplate.cshtml"
               Write(Model.GetMethod.Name);
 
 #line default
 #line hidden
             WriteLiteral("(");
-#line 61 "AzureMethodTemplate.cshtml"
+#line 79 "AzureMethodTemplate.cshtml"
                                       Write(Model.GetMethod.MethodParameterDeclaration);
 
 #line default
 #line hidden
-            WriteLiteral("callback);\r\n    }\r\n    return cb;\r\n  };\r\n  // Send request\r\n  self.begin");
-#line 66 "AzureMethodTemplate.cshtml"
+            WriteLiteral("callback);\r\n    };\r\n    return cb;\r\n  }\r\n  // Send request\r\n  self.begin");
+#line 84 "AzureMethodTemplate.cshtml"
         Write(Model.Name.ToPascalCase());
 
 #line default
 #line hidden
             WriteLiteral("(");
-#line 66 "AzureMethodTemplate.cshtml"
+#line 84 "AzureMethodTemplate.cshtml"
                                      Write(Model.MethodParameterDeclaration);
 
 #line default
 #line hidden
             WriteLiteral("function (err, result){\r\n    if (err) return callback(err);\r\n    client.getPutOpe" +
-"rationResult(result, getMethod(), callback);\r\n  });\r\n}\r\n\r\n");
-#line 72 "AzureMethodTemplate.cshtml"
+"rationResult(result, getMethod(), options, callback);\r\n  });\r\n};\r\n\r\n");
+#line 90 "AzureMethodTemplate.cshtml"
 }
 
 #line default

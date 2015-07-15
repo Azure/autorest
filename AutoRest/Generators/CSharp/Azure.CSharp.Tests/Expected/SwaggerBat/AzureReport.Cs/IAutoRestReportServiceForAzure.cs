@@ -12,7 +12,7 @@ namespace Fixtures.Azure.SwaggerBatAzureReport
     /// <summary>
     /// Test Infrastructure for AutoRest
     /// </summary>
-    public partial interface IAutoRestReportServiceForAzure : IDisposable
+    public partial interface IAutoRestReportServiceForAzure
     {
         /// <summary>
         /// The base URI of the service.
@@ -22,10 +22,13 @@ namespace Fixtures.Azure.SwaggerBatAzureReport
         /// <summary>
         /// Get test coverage report
         /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>        
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<AzureOperationResponse<IDictionary<string, int?>>> GetReportWithOperationResponseAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<IDictionary<string, int?>>> GetReportWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
     }
 }

@@ -16,6 +16,7 @@ $tests =
     "SwaggerBat\BodyDate.Cs"="..\..\AcceptanceTests\swagger\body-date.json";
     "SwaggerBat\BodyDateTime.Cs"="..\..\AcceptanceTests\swagger\body-datetime.json";
     "SwaggerBat\BodyComplex.Cs"="..\..\AcceptanceTests\swagger\body-complex.json";
+    "SwaggerBat\BodyFile.Cs"="..\..\AcceptanceTests\swagger\body-file.json";
     "SwaggerBat\Url.Cs"="..\..\AcceptanceTests\swagger\url.json";
     "SwaggerBat\Header.Cs"="..\..\AcceptanceTests\swagger\header.json";
     "SwaggerBat\Http.Cs"="..\..\AcceptanceTests\swagger\httpInfrastructure.json";

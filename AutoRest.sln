@@ -45,6 +45,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Generator.Ruby", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Generator.Ruby.Tests", "AutoRest\Generators\Ruby\Ruby.Tests\AutoRest.Generator.Ruby.Tests.csproj", "{CD930EB5-A0C1-49BF-A320-1C2AEB028E7E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ClientRuntime", "ClientRuntime", "{235139C9-79DE-4242-8F12-327C62377C23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime", "ClientRuntimes\CSharp\ClientRuntime\ClientRuntime.csproj", "{7F524559-93F9-4F3F-9E2C-AF41A0C2E6F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime.Azure", "ClientRuntimes\CSharp\ClientRuntime.Azure\ClientRuntime.Azure.csproj", "{856A1D19-C3BF-439A-BEBF-E822A332BC12}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Net45-Debug|Any CPU = Net45-Debug|Any CPU
@@ -111,6 +117,14 @@ Global
 		{CD930EB5-A0C1-49BF-A320-1C2AEB028E7E}.Net45-Debug|Any CPU.Build.0 = Net45-Debug|Any CPU
 		{CD930EB5-A0C1-49BF-A320-1C2AEB028E7E}.Net45-Release|Any CPU.ActiveCfg = Net45-Release|Any CPU
 		{CD930EB5-A0C1-49BF-A320-1C2AEB028E7E}.Net45-Release|Any CPU.Build.0 = Net45-Release|Any CPU
+		{7F524559-93F9-4F3F-9E2C-AF41A0C2E6F4}.Net45-Debug|Any CPU.ActiveCfg = Net45-Debug|Any CPU
+		{7F524559-93F9-4F3F-9E2C-AF41A0C2E6F4}.Net45-Debug|Any CPU.Build.0 = Net45-Debug|Any CPU
+		{7F524559-93F9-4F3F-9E2C-AF41A0C2E6F4}.Net45-Release|Any CPU.ActiveCfg = Net45-Release|Any CPU
+		{7F524559-93F9-4F3F-9E2C-AF41A0C2E6F4}.Net45-Release|Any CPU.Build.0 = Net45-Release|Any CPU
+		{856A1D19-C3BF-439A-BEBF-E822A332BC12}.Net45-Debug|Any CPU.ActiveCfg = Net45-Debug|Any CPU
+		{856A1D19-C3BF-439A-BEBF-E822A332BC12}.Net45-Debug|Any CPU.Build.0 = Net45-Debug|Any CPU
+		{856A1D19-C3BF-439A-BEBF-E822A332BC12}.Net45-Release|Any CPU.ActiveCfg = Net45-Release|Any CPU
+		{856A1D19-C3BF-439A-BEBF-E822A332BC12}.Net45-Release|Any CPU.Build.0 = Net45-Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -132,5 +146,7 @@ Global
 		{DE95444A-F6FD-46DC-BBDC-A1A6886A6F2D} = {EF9E346D-70C6-45F5-8FF9-9B734F4A1298}
 		{A7780698-3072-486E-A105-81EDDF552598} = {DE95444A-F6FD-46DC-BBDC-A1A6886A6F2D}
 		{CD930EB5-A0C1-49BF-A320-1C2AEB028E7E} = {DE95444A-F6FD-46DC-BBDC-A1A6886A6F2D}
+		{7F524559-93F9-4F3F-9E2C-AF41A0C2E6F4} = {235139C9-79DE-4242-8F12-327C62377C23}
+		{856A1D19-C3BF-439A-BEBF-E822A332BC12} = {235139C9-79DE-4242-8F12-327C62377C23}
 	EndGlobalSection
 EndGlobal

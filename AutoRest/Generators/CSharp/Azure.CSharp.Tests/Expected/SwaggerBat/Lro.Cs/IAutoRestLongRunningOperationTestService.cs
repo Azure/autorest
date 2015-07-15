@@ -12,7 +12,7 @@ namespace Fixtures.Azure.SwaggerBatLro
     /// <summary>
     /// Long-running Operation for AutoRest
     /// </summary>
-    public partial interface IAutoRestLongRunningOperationTestService : IDisposable
+    public partial interface IAutoRestLongRunningOperationTestService
     {
         /// <summary>
         /// The base URI of the service.
@@ -26,6 +26,8 @@ namespace Fixtures.Azure.SwaggerBatLro
         ILRORetrysOperations LRORetrys { get; }
 
         ILROSADsOperations LROSADs { get; }
+
+        ILROsCustomHeaderOperations LROsCustomHeader { get; }
 
         }
 }

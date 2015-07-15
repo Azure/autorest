@@ -78,21 +78,35 @@ namespace Microsoft.Rest.Generator.CSharp
             }
         }
 
+
         /// <summary>
         /// Generate the method parameter declaration for async methods and extensions
         /// </summary>
-        public virtual string AsyncMethodParameterDeclaration
+        public virtual string GetAsyncMethodParameterDeclaration()
         {
-            get
+            return this.GetAsyncMethodParameterDeclaration(false);
+        }
+
+        /// <summary>
+        /// Generate the method parameter declaration for async methods and extensions
+        /// </summary>
+        /// <param name="addCustomHeaderParameters">If true add the customHeader to the parameters</param>
+        /// <returns>Generated string of parameters</returns>
+        public virtual string GetAsyncMethodParameterDeclaration(bool addCustomHeaderParameters)
+        {
+            var declarations = this.SyncMethodParameterDeclaration;
+            
+            if (!string.IsNullOrEmpty(declarations))
             {
-                var declarations = this.SyncMethodParameterDeclaration;
-                if (!string.IsNullOrEmpty(declarations))
-                {
-                    declarations += ", ";
-                }
-                declarations += "CancellationToken cancellationToken = default(CancellationToken)";
-                return declarations;
+                declarations += ", ";
             }
+            if (addCustomHeaderParameters)
+            {
+                declarations += "Dictionary<string, List<string>> customHeaders = null, ";
+            }
+            declarations += "CancellationToken cancellationToken = default(CancellationToken)";
+
+            return declarations;
         }
 
         /// <summary>
@@ -111,15 +125,13 @@ namespace Microsoft.Rest.Generator.CSharp
         /// <summary>
         /// Get the invocation args for an invocation with an async method
         /// </summary>
-        public string AsyncMethodInvocationArgs
+        public string GetAsyncMethodInvocationArgs (string customHeaderReference)
         {
-            get
-            {
-                List<string> invocationParams = new List<string>();
-                LocalParameters.ForEach(p => invocationParams.Add(p.Name));
-                invocationParams.Add("cancellationToken");
-                return string.Join(", ", invocationParams);
-            }
+            List<string> invocationParams = new List<string>();
+            LocalParameters.ForEach(p => invocationParams.Add(p.Name));
+            invocationParams.Add(customHeaderReference);
+            invocationParams.Add("cancellationToken");
+            return string.Join(", ", invocationParams);
         }
 
         /// <summary>
@@ -132,7 +144,7 @@ namespace Microsoft.Rest.Generator.CSharp
             {
                 return
                     ParameterTemplateModels.Where(
-                        p => p != null && p.GlobalProperty == null && !string.IsNullOrWhiteSpace(p.Name))
+                        p => p != null && p.ClientProperty == null && !string.IsNullOrWhiteSpace(p.Name))
                         .OrderBy(item => !item.IsRequired);
             }
         }
@@ -280,7 +292,7 @@ namespace Microsoft.Rest.Generator.CSharp
                 : operationsParameter + ", " + methodParameters;
         }
 
-        public string GetStatusCodeReference(HttpStatusCode code)
+        public static string GetStatusCodeReference(HttpStatusCode code)
         {
             return string.Format(CultureInfo.InvariantCulture, 
                 "(HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), \"{0}\")", code);
@@ -299,7 +311,7 @@ namespace Microsoft.Rest.Generator.CSharp
             {
                 builder.AppendLine("{0} = {0}.Replace(\"{{{1}}}\", Uri.EscapeDataString({2}));",
                     variableName,
-                    pathParameter.Name,
+                    pathParameter.SerializedName,
                     pathParameter.Type.ToString(ClientReference, pathParameter.Name));
             }
             if (ParameterTemplateModels.Any(p => p.Location == ParameterLocation.Query))

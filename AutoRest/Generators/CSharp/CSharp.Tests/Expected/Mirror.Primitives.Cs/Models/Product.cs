@@ -127,11 +127,5 @@ namespace Fixtures.MirrorPrimitives.Models
         [JsonProperty(PropertyName = "dateTimeArray")]
         public IList<DateTime?> DateTimeArray { get; set; }
 
-        /// <summary>
-        /// Validate the object. Throws ArgumentException or ArgumentNullException if validation fails.
-        /// </summary>
-        public virtual void Validate()
-        {
-        }
     }
 }

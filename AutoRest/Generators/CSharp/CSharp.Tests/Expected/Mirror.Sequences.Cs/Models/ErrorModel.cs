@@ -27,11 +27,11 @@ namespace Fixtures.MirrorSequences.Models
         {
             if (Code == null)
             {
-                throw new ArgumentNullException("Code");
+                throw new ValidationException(ValidationRules.CannotBeNull, "Code");
             }
             if (Message == null)
             {
-                throw new ArgumentNullException("Message");
+                throw new ValidationException(ValidationRules.CannotBeNull, "Message");
             }
         }
     }

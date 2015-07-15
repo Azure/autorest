@@ -41,9 +41,16 @@ util.inherits(AzureServiceClient, msrest.ServiceClient);
  * Poll Azure long running PUT operation.
  * @param {object} [resultOfInitialRequest] - Response of the initial request for the long running operation.
  * @param {function} [poller] - Poller function used to poll operation result.
+ * @param {object} [options]
+ * @param {object} [options.customHeaders] headers that will be added to request
  */
-AzureServiceClient.prototype.getPutOperationResult = function (resultOfInitialRequest, poller, callback) {
+AzureServiceClient.prototype.getPutOperationResult = function (resultOfInitialRequest, poller, options, callback) {
   var self = this;
+
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('Missing callback');
   }
@@ -64,6 +71,7 @@ AzureServiceClient.prototype.getPutOperationResult = function (resultOfInitialRe
   }
   
   var pollingState = new PollingState(resultOfInitialRequest, this.longRunningOperationRetryTimeoutInSeconds);
+  this._options = options;
   
   async.whilst(
     //while condition
@@ -75,22 +83,21 @@ AzureServiceClient.prototype.getPutOperationResult = function (resultOfInitialRe
     },
     //while loop body
     function (callback) {
-      if (pollingState.response.headers['azure-asyncoperation']) {
-        self._updateStateFromAzureAsyncOperationHeader(pollingState, function (err) {
-          if (err) return callback(err);
-          setTimeout(callback, pollingState.getTimeout());
-        });
-      } else if (pollingState.response.headers['location']) {
-        self._updateStateFromLocationHeaderOnPut(pollingState, function (err) {
-          if (err) return callback(err);
-          setTimeout(callback, pollingState.getTimeout());
-        });
-      } else {
-        self._updateStateFromGetResourceOperation(poller, pollingState, function (err) {
-          if (err) return callback(err);
-          setTimeout(callback, pollingState.getTimeout());
-        });
-      }
+      setTimeout(function () {
+        if (pollingState.azureAsyncOperationHeaderLink) {
+          self._updateStateFromAzureAsyncOperationHeader(pollingState, function (err) {
+            return callback(err);
+          });
+        } else if (pollingState.locationHeaderLink) {
+          self._updateStateFromLocationHeaderOnPut(pollingState, function (err) {
+            return callback(err);
+          });
+        } else {
+          self._updateStateFromGetResourceOperation(poller, pollingState, function (err) {
+            return callback(err);
+          });
+        }
+      }, pollingState.getTimeout());
     },
     //when done
     function (err) {
@@ -108,12 +115,20 @@ AzureServiceClient.prototype.getPutOperationResult = function (resultOfInitialRe
     });
 };
 
+
 /**
  * Poll Azure long running POST or DELETE operations.
  * @param {object} [resultOfInitialRequest] - result of the initial request.
+ * @param {object} [options]
+ * @param {object} [options.customHeaders] headers that will be added to request
  */
-AzureServiceClient.prototype.getPostOrDeleteOperationResult = function (resultOfInitialRequest, callback) {
+AzureServiceClient.prototype.getPostOrDeleteOperationResult = function (resultOfInitialRequest, options, callback) {
   var self = this;
+  
+  if (!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
   if (!callback) {
     throw new Error('Missing callback');
   }
@@ -134,7 +149,8 @@ AzureServiceClient.prototype.getPostOrDeleteOperationResult = function (resultOf
   }
   
   var pollingState = new PollingState(resultOfInitialRequest, this.longRunningOperationRetryTimeoutInSeconds);
-  
+  this._options = options;
+
   async.whilst(
     function () {
       var finished = [LroStates.Succeeded, LroStates.Failed, LroStates.Canceled].some(function (e) {
@@ -143,19 +159,19 @@ AzureServiceClient.prototype.getPostOrDeleteOperationResult = function (resultOf
       return !finished;
     },
     function (callback) {
-      if (pollingState.response.headers['azure-asyncoperation']) {
-        self._updateStateFromAzureAsyncOperationHeader(pollingState, function (err) {
-          if (err) return callback(err);
-          setTimeout(callback, pollingState.getTimeout());
-        });
-      } else if (pollingState.response.headers['location']) {
-        self._updateStateFromLocationHeaderOnPostOrDelete(pollingState, function (err) {
-          if (err) return callback(err);
-          setTimeout(callback, pollingState.getTimeout());
-        });
-      } else {
-        return callback(new Error('Location header is missing from long running operation.'));
-      }
+      setTimeout(function () {
+        if (pollingState.azureAsyncOperationHeaderLink) {
+          self._updateStateFromAzureAsyncOperationHeader(pollingState, function (err) {
+            return callback(err);
+          });
+        } else if (pollingState.locationHeaderLink) {
+          self._updateStateFromLocationHeaderOnPostOrDelete(pollingState, function (err) {
+            return callback(err);
+          });
+        } else {
+          return callback(new Error('Location header is missing from long running operation.'));
+        }
+      }, pollingState.getTimeout());
     },
     function (err) {
       if (pollingState.status === LroStates.Succeeded ) {
@@ -171,7 +187,7 @@ AzureServiceClient.prototype.getPostOrDeleteOperationResult = function (resultOf
  * @param {object} [pollingState] - The object to persist current operation state.
  */
 AzureServiceClient.prototype._updateStateFromAzureAsyncOperationHeader = function (pollingState, callback) {
-  this._getStatus(pollingState.response.headers['azure-asyncoperation'], function (err, result) {
+  this._getStatus(pollingState.azureAsyncOperationHeaderLink, function (err, result) {
     if (err) return callback(err);
     
     if (!result.body || !result.body.status) {
@@ -182,7 +198,7 @@ AzureServiceClient.prototype._updateStateFromAzureAsyncOperationHeader = functio
     pollingState.error = result.body.error;
     pollingState.response = result.response;
     pollingState.request = result.request;
-    pollingState.resource = null;//TODO: confirm we do want to clear.
+    pollingState.resource = null;
     callback(null);
   });
 };
@@ -192,10 +208,10 @@ AzureServiceClient.prototype._updateStateFromAzureAsyncOperationHeader = functio
  * @param {object} [pollingState] - The object to persist current operation state.
  */
 AzureServiceClient.prototype._updateStateFromLocationHeaderOnPut = function (pollingState, callback) {
-  this._getStatus(pollingState.response.headers['location'], function (err, result) {
+  this._getStatus(pollingState.locationHeaderLink, function (err, result) {
     if (err) return callback(err);
     
-    pollingState.response = result.response;
+    pollingState.updateResponse(result.response);
     pollingState.request = result.request;
     
     var statusCode = result.response.statusCode;
@@ -233,10 +249,10 @@ AzureServiceClient.prototype._updateStateFromLocationHeaderOnPut = function (pol
  * @param {object} [pollingState] - The object to persist current operation state.
  */
 AzureServiceClient.prototype._updateStateFromLocationHeaderOnPostOrDelete = function (pollingState, callback) {
-  this._getStatus(pollingState.response.headers['location'], function (err, result) {
+  this._getStatus(pollingState.locationHeaderLink, function (err, result) {
     if (err) return callback(err);
     
-    pollingState.response = result.response;
+    pollingState.updateResponse(result.response);
     pollingState.request = result.request;
     
     var statusCode = result.response.statusCode;
@@ -265,7 +281,7 @@ AzureServiceClient.prototype._updateStateFromGetResourceOperation = function (po
       return callback(new Error('The response from long running operation does not contain a body.'));
     }
     
-    if (result.body.properties.provisioningState) {
+    if (result.body.properties && result.body.properties.provisioningState) {
       pollingState.status = result.body.properties.provisioningState;
     } else {
       pollingState.status = LroStates.Succeeded;
@@ -277,7 +293,7 @@ AzureServiceClient.prototype._updateStateFromGetResourceOperation = function (po
       message: util.format('Long running operation failed with status \'%s\'.', pollingState.status)
     };
     
-    pollingState.response = result.response;
+    pollingState.updateResponse(result.response);
     pollingState.request = result.request;
     pollingState.resource = result.body;
     
@@ -305,7 +321,13 @@ AzureServiceClient.prototype._getStatus = function (operationUrl, callback) {
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
-
+  if(this._options) {
+    for (var headerName in this._options['customHeaders']) {
+      if (this._options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = this._options['customHeaders'][headerName];
+      }
+    }
+  }
   // Send Request
   return self.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -334,17 +356,18 @@ AzureServiceClient.prototype._getStatus = function (operationUrl, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    try {
-      result.body = JSON.parse(responseBody);
-    } catch (deserializationError) {
-      var parseError = new Error(util.format('Error "%s" occurred in deserializing the response body - "%s" -' + 
+    if (statusCode === 200 || statusCode === 201 || statusCode === 202) {
+      try {
+        result.body = JSON.parse(responseBody);
+      } catch (deserializationError) {
+        var parseError = new Error(util.format('Error "%s" occurred in deserializing the response body - "%s" -' + 
         ' when polling for operation status.', deserializationError, responseBody));
-      parseError.request = httpRequest;
-      parseError.response = response;
-      parseError.body = responseBody;
-      return callback(parseError);
+        parseError.request = httpRequest;
+        parseError.response = response;
+        parseError.body = responseBody;
+        return callback(parseError);
+      }
     }
-
     return callback(null, result);
   });
 };
