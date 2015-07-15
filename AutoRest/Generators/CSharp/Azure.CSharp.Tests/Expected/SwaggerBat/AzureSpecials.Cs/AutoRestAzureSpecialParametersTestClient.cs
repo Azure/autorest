@@ -59,6 +59,8 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// </summary>
         public int? LongRunningOperationRetryTimeout { get; set; }
 
+        public virtual IXMsClientRequestIdOperations XMsClientRequestId { get; private set; }
+
         public virtual ISubscriptionInCredentialsOperations SubscriptionInCredentials { get; private set; }
 
         public virtual ISubscriptionInMethodOperations SubscriptionInMethod { get; private set; }
@@ -174,6 +176,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// </summary>
         private void Initialize()
         {
+            this.XMsClientRequestId = new XMsClientRequestIdOperations(this);
             this.SubscriptionInCredentials = new SubscriptionInCredentialsOperations(this);
             this.SubscriptionInMethod = new SubscriptionInMethodOperations(this);
             this.ApiVersionDefault = new ApiVersionDefaultOperations(this);

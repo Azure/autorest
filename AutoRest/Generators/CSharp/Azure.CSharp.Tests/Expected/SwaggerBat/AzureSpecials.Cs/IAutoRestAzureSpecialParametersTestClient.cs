@@ -54,6 +54,8 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         int? LongRunningOperationRetryTimeout { get; set; }
 
 
+        IXMsClientRequestIdOperations XMsClientRequestId { get; }
+
         ISubscriptionInCredentialsOperations SubscriptionInCredentials { get; }
 
         ISubscriptionInMethodOperations SubscriptionInMethod { get; }
