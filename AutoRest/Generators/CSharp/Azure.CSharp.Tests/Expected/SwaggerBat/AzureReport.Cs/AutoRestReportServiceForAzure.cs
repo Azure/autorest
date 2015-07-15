@@ -37,10 +37,9 @@ namespace Fixtures.Azure.SwaggerBatAzureReport
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
         /// <summary>
-        /// Subscription credentials which uniquely identify Microsoft Azure
-        /// subscription.
+        /// Management credentials for Azure.
         /// </summary>
-        public SubscriptionCloudCredentials Credentials { get; private set; }
+        public ServiceClientCredentials Credentials { get; private set; }
 
         /// <summary>
         /// The retry timeout for Long Running Operations.
@@ -105,13 +104,13 @@ namespace Fixtures.Azure.SwaggerBatAzureReport
         /// Initializes a new instance of the AutoRestReportServiceForAzure class.
         /// </summary>
         /// <param name='credentials'>
-        /// Required. Subscription credentials which uniquely identify Microsoft Azure subscription.
+        /// Required. Management credentials for Azure.
         /// </param>
         /// <param name='handlers'>
         /// Optional. The set of delegating handlers to insert in the http
         /// client pipeline.
         /// </param>
-        public AutoRestReportServiceForAzure(SubscriptionCloudCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        public AutoRestReportServiceForAzure(ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (credentials == null)
             {
@@ -127,13 +126,13 @@ namespace Fixtures.Azure.SwaggerBatAzureReport
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='credentials'>
-        /// Required. Subscription credentials which uniquely identify Microsoft Azure subscription.
+        /// Required. Management credentials for Azure.
         /// </param>
         /// <param name='handlers'>
         /// Optional. The set of delegating handlers to insert in the http
         /// client pipeline.
         /// </param>
-        public AutoRestReportServiceForAzure(Uri baseUri, SubscriptionCloudCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        public AutoRestReportServiceForAzure(Uri baseUri, ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
             {
@@ -153,10 +152,6 @@ namespace Fixtures.Azure.SwaggerBatAzureReport
         private void Initialize()
         {
             this.BaseUri = new Uri("http://localhost");
-            if (this.Credentials != null)
-            {
-                this.Credentials.InitializeServiceClient(this);
-            }
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,

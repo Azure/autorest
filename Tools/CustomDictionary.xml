@@ -16,7 +16,7 @@
       <Word>OAuth</Word>
       <Word>OAuthFlow</Word>
       <Word>Backoff</Word>
-      <Word>SubscriptionCloudCredentials</Word>
+      <Word>ServiceClientCredentials</Word>
       <Word>ArgumentNullException</Word>
     </Recognized>
   </Words>
