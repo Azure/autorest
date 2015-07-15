@@ -361,7 +361,7 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
             codeGen.NormalizeClientModel(serviceClient);
 
             Assert.NotNull(serviceClient);
-            Assert.Equal(4, serviceClient.Methods[0].Parameters.Count);
+            Assert.Equal(5, serviceClient.Methods[0].Parameters.Count);
             Assert.Equal("$filter", serviceClient.Methods[0].Parameters[2].Name);
             Assert.Equal("Product", serviceClient.Methods[0].Parameters[2].Type.Name);
         }
@@ -408,13 +408,14 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
 
             Assert.NotNull(serviceClient);
             Assert.Equal(3, serviceClient.Methods.Count);
-            Assert.Equal(4, serviceClient.Methods[0].Parameters.Count);
+            Assert.Equal(5, serviceClient.Methods[0].Parameters.Count);
             Assert.Equal("list", serviceClient.Methods[0].Name);
-            Assert.Equal(3, serviceClient.Methods[1].Parameters.Count);
+            Assert.Equal(4, serviceClient.Methods[1].Parameters.Count);
             Assert.Equal("reset", serviceClient.Methods[1].Name);
             Assert.Equal("subscriptionId", serviceClient.Methods[0].Parameters[0].Name);
             Assert.Equal("resourceGroupName", serviceClient.Methods[0].Parameters[1].Name);
             Assert.Equal("$filter", serviceClient.Methods[0].Parameters[2].Name);
+            Assert.Equal("accept-language", serviceClient.Methods[0].Parameters[4].Name);
             Assert.Equal("resourceGroupName", serviceClient.Methods[1].Parameters[1].Name);
             Assert.Equal("apiVersion", serviceClient.Methods[1].Parameters[2].Name);
         }
@@ -438,9 +439,10 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
             Assert.Equal(3, serviceClient.Methods.Count);
             Assert.Equal("list", serviceClient.Methods[0].Name);
             Assert.Equal("listNext", serviceClient.Methods[2].Name);
-            Assert.Equal(1, serviceClient.Methods[2].Parameters.Count);
+            Assert.Equal(2, serviceClient.Methods[2].Parameters.Count);
             Assert.Equal("{nextLink}", serviceClient.Methods[2].Url);
             Assert.Equal("nextLink", serviceClient.Methods[2].Parameters[0].Name);
+            Assert.Equal("accept-language", serviceClient.Methods[2].Parameters[1].Name);
             Assert.Equal(true, serviceClient.Methods[2].IsAbsoluteUrl);
             Assert.Equal(false, serviceClient.Methods[1].IsAbsoluteUrl);
         }

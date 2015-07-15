@@ -44,6 +44,14 @@ XMsClientRequestId.prototype.get = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
@@ -63,6 +71,9 @@ XMsClientRequestId.prototype.get = function (options, callback) {
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -139,6 +150,9 @@ XMsClientRequestId.prototype.paramGet = function (xMsClientRequestId, options, c
     if (xMsClientRequestId !== null && xMsClientRequestId !== undefined && typeof xMsClientRequestId !== 'string') {
       throw new Error('xMsClientRequestId must be of type string.');
     }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
   } catch (error) {
     return callback(error);
   }
@@ -163,6 +177,9 @@ XMsClientRequestId.prototype.paramGet = function (xMsClientRequestId, options, c
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   if (xMsClientRequestId !== null) {
     httpRequest.headers['x-ms-client-request-id'] = xMsClientRequestId;
+  }
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {
     for(var headerName in options['customHeaders']) {

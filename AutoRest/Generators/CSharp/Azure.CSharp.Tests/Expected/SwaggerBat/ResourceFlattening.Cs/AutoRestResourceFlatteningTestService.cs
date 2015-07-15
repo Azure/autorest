@@ -43,6 +43,10 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
         public SubscriptionCloudCredentials Credentials { get; private set; }
 
         /// <summary>
+        /// </summary>
+        public string AcceptLanguage { get; private set; }
+
+        /// <summary>
         /// The retry timeout for Long Running Operations.
         /// </summary>
         public int? LongRunningOperationRetryTimeout { get; set; }
@@ -153,6 +157,7 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
         private void Initialize()
         {
             this.BaseUri = new Uri("http://localhost");
+            this.AcceptLanguage = "en-US";
             if (this.Credentials != null)
             {
                 this.Credentials.InitializeServiceClient(this);
@@ -218,6 +223,14 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            if (this.AcceptLanguage != null)
+            {
+                if (httpRequest.Headers.Contains("accept-language"))
+                {
+                    httpRequest.Headers.Remove("accept-language");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("accept-language", this.AcceptLanguage);
+            }
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)
@@ -315,6 +328,14 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            if (this.AcceptLanguage != null)
+            {
+                if (httpRequest.Headers.Contains("accept-language"))
+                {
+                    httpRequest.Headers.Remove("accept-language");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("accept-language", this.AcceptLanguage);
+            }
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)
@@ -418,6 +439,14 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            if (this.AcceptLanguage != null)
+            {
+                if (httpRequest.Headers.Contains("accept-language"))
+                {
+                    httpRequest.Headers.Remove("accept-language");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("accept-language", this.AcceptLanguage);
+            }
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)
@@ -515,6 +544,14 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            if (this.AcceptLanguage != null)
+            {
+                if (httpRequest.Headers.Contains("accept-language"))
+                {
+                    httpRequest.Headers.Remove("accept-language");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("accept-language", this.AcceptLanguage);
+            }
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)
@@ -618,6 +655,14 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            if (this.AcceptLanguage != null)
+            {
+                if (httpRequest.Headers.Contains("accept-language"))
+                {
+                    httpRequest.Headers.Remove("accept-language");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("accept-language", this.AcceptLanguage);
+            }
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)
@@ -715,6 +760,14 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            if (this.AcceptLanguage != null)
+            {
+                if (httpRequest.Headers.Contains("accept-language"))
+                {
+                    httpRequest.Headers.Remove("accept-language");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("accept-language", this.AcceptLanguage);
+            }
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)

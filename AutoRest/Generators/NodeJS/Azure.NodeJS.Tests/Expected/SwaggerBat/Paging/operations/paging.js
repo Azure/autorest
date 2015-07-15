@@ -43,6 +43,14 @@ Paging.prototype.getSinglePages = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
@@ -62,6 +70,9 @@ Paging.prototype.getSinglePages = function (options, callback) {
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -143,6 +154,14 @@ Paging.prototype.getMultiplePages = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
@@ -162,6 +181,9 @@ Paging.prototype.getMultiplePages = function (options, callback) {
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -244,6 +266,14 @@ Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
@@ -263,6 +293,9 @@ Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -346,6 +379,14 @@ Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
@@ -365,6 +406,9 @@ Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -446,6 +490,14 @@ Paging.prototype.getSinglePagesFailure = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
@@ -465,6 +517,9 @@ Paging.prototype.getSinglePagesFailure = function (options, callback) {
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -546,6 +601,14 @@ Paging.prototype.getMultiplePagesFailure = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
@@ -565,6 +628,9 @@ Paging.prototype.getMultiplePagesFailure = function (options, callback) {
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -646,6 +712,14 @@ Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
@@ -665,6 +739,9 @@ Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -756,6 +833,9 @@ Paging.prototype.getSinglePagesNext = function (nextLink, options, callback) {
     if (nextLink !== null && nextLink !== undefined && typeof nextLink !== 'string') {
       throw new Error('nextLink must be of type string.');
     }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
   } catch (error) {
     return callback(error);
   }
@@ -774,6 +854,9 @@ Paging.prototype.getSinglePagesNext = function (nextLink, options, callback) {
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -865,6 +948,9 @@ Paging.prototype.getMultiplePagesNext = function (nextLink, options, callback) {
     if (nextLink !== null && nextLink !== undefined && typeof nextLink !== 'string') {
       throw new Error('nextLink must be of type string.');
     }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
   } catch (error) {
     return callback(error);
   }
@@ -883,6 +969,9 @@ Paging.prototype.getMultiplePagesNext = function (nextLink, options, callback) {
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -975,6 +1064,9 @@ Paging.prototype.getMultiplePagesRetryFirstNext = function (nextLink, options, c
     if (nextLink !== null && nextLink !== undefined && typeof nextLink !== 'string') {
       throw new Error('nextLink must be of type string.');
     }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
   } catch (error) {
     return callback(error);
   }
@@ -993,6 +1085,9 @@ Paging.prototype.getMultiplePagesRetryFirstNext = function (nextLink, options, c
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -1086,6 +1181,9 @@ Paging.prototype.getMultiplePagesRetrySecondNext = function (nextLink, options, 
     if (nextLink !== null && nextLink !== undefined && typeof nextLink !== 'string') {
       throw new Error('nextLink must be of type string.');
     }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
   } catch (error) {
     return callback(error);
   }
@@ -1104,6 +1202,9 @@ Paging.prototype.getMultiplePagesRetrySecondNext = function (nextLink, options, 
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -1195,6 +1296,9 @@ Paging.prototype.getSinglePagesFailureNext = function (nextLink, options, callba
     if (nextLink !== null && nextLink !== undefined && typeof nextLink !== 'string') {
       throw new Error('nextLink must be of type string.');
     }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
   } catch (error) {
     return callback(error);
   }
@@ -1213,6 +1317,9 @@ Paging.prototype.getSinglePagesFailureNext = function (nextLink, options, callba
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -1304,6 +1411,9 @@ Paging.prototype.getMultiplePagesFailureNext = function (nextLink, options, call
     if (nextLink !== null && nextLink !== undefined && typeof nextLink !== 'string') {
       throw new Error('nextLink must be of type string.');
     }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
   } catch (error) {
     return callback(error);
   }
@@ -1322,6 +1432,9 @@ Paging.prototype.getMultiplePagesFailureNext = function (nextLink, options, call
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -1413,6 +1526,9 @@ Paging.prototype.getMultiplePagesFailureUriNext = function (nextLink, options, c
     if (nextLink !== null && nextLink !== undefined && typeof nextLink !== 'string') {
       throw new Error('nextLink must be of type string.');
     }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
   } catch (error) {
     return callback(error);
   }
@@ -1431,6 +1547,9 @@ Paging.prototype.getMultiplePagesFailureUriNext = function (nextLink, options, c
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {

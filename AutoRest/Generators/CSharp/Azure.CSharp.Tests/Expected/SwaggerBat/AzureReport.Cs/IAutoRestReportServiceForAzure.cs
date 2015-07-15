@@ -37,6 +37,10 @@ namespace Fixtures.Azure.SwaggerBatAzureReport
         SubscriptionCloudCredentials Credentials { get; }
 
         /// <summary>
+        /// </summary>
+        string AcceptLanguage { get; }
+
+        /// <summary>
         /// The retry timeout for Long Running Operations.
         /// </summary>
         int? LongRunningOperationRetryTimeout { get; set; }

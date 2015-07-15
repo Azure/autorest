@@ -49,6 +49,10 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         string ApiVersion { get; }
 
         /// <summary>
+        /// </summary>
+        string AcceptLanguage { get; }
+
+        /// <summary>
         /// The retry timeout for Long Running Operations.
         /// </summary>
         int? LongRunningOperationRetryTimeout { get; set; }

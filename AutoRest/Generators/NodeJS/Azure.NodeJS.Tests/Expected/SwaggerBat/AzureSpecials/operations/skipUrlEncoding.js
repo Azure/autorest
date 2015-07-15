@@ -53,6 +53,9 @@ SkipUrlEncoding.prototype.getMethodPathValid = function (unencodedPathParam, opt
     if (unencodedPathParam !== null && unencodedPathParam !== undefined && typeof unencodedPathParam !== 'string') {
       throw new Error('unencodedPathParam must be of type string.');
     }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
   } catch (error) {
     return callback(error);
   }
@@ -76,6 +79,9 @@ SkipUrlEncoding.prototype.getMethodPathValid = function (unencodedPathParam, opt
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -151,6 +157,9 @@ SkipUrlEncoding.prototype.getPathPathValid = function (unencodedPathParam, optio
     if (unencodedPathParam !== null && unencodedPathParam !== undefined && typeof unencodedPathParam !== 'string') {
       throw new Error('unencodedPathParam must be of type string.');
     }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
   } catch (error) {
     return callback(error);
   }
@@ -174,6 +183,9 @@ SkipUrlEncoding.prototype.getPathPathValid = function (unencodedPathParam, optio
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -249,6 +261,9 @@ SkipUrlEncoding.prototype.getSwaggerPathValid = function (unencodedPathParam, op
     if (unencodedPathParam !== null && unencodedPathParam !== undefined && typeof unencodedPathParam !== 'string') {
       throw new Error('unencodedPathParam must be of type string.');
     }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
   } catch (error) {
     return callback(error);
   }
@@ -272,6 +287,9 @@ SkipUrlEncoding.prototype.getSwaggerPathValid = function (unencodedPathParam, op
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -348,6 +366,9 @@ SkipUrlEncoding.prototype.getMethodQueryValid = function (q1, options, callback)
     if (q1 !== null && q1 !== undefined && typeof q1 !== 'string') {
       throw new Error('q1 must be of type string.');
     }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
   } catch (error) {
     return callback(error);
   }
@@ -371,6 +392,9 @@ SkipUrlEncoding.prototype.getMethodQueryValid = function (q1, options, callback)
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -443,6 +467,9 @@ SkipUrlEncoding.prototype.getMethodQueryNull = function (q1, options, callback) 
     if (q1 !== null && q1 !== undefined && typeof q1 !== 'string') {
       throw new Error('q1 must be of type string.');
     }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
   } catch (error) {
     return callback(error);
   }
@@ -468,6 +495,9 @@ SkipUrlEncoding.prototype.getMethodQueryNull = function (q1, options, callback) 
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -544,6 +574,9 @@ SkipUrlEncoding.prototype.getPathQueryValid = function (q1, options, callback) {
     if (q1 !== null && q1 !== undefined && typeof q1 !== 'string') {
       throw new Error('q1 must be of type string.');
     }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
   } catch (error) {
     return callback(error);
   }
@@ -567,6 +600,9 @@ SkipUrlEncoding.prototype.getPathQueryValid = function (q1, options, callback) {
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -640,6 +676,9 @@ SkipUrlEncoding.prototype.getSwaggerQueryValid = function (q1, options, callback
     if (q1 !== null && q1 !== undefined && typeof q1 !== 'string') {
       throw new Error('q1 must be of type string.');
     }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
   } catch (error) {
     return callback(error);
   }
@@ -665,6 +704,9 @@ SkipUrlEncoding.prototype.getSwaggerQueryValid = function (q1, options, callback
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {

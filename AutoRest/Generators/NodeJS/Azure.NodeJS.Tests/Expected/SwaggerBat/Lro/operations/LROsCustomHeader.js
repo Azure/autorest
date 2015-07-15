@@ -107,6 +107,9 @@ LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (product, opti
     if (product !== null && product !== undefined) {
       client._models['Product'].validate(product);
     }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
   } catch (error) {
     return callback(error);
   }
@@ -129,6 +132,9 @@ LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (product, opti
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -217,6 +223,14 @@ LROsCustomHeader.prototype.getAsyncRetrySucceeded = function (options, callback)
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
@@ -236,6 +250,9 @@ LROsCustomHeader.prototype.getAsyncRetrySucceeded = function (options, callback)
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -381,6 +398,9 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (product, 
     if (product !== null && product !== undefined) {
       client._models['Product'].validate(product);
     }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
   } catch (error) {
     return callback(error);
   }
@@ -403,6 +423,9 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (product, 
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -505,6 +528,14 @@ LROsCustomHeader.prototype.get201CreatingSucceeded200Polling = function (options
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
@@ -524,6 +555,9 @@ LROsCustomHeader.prototype.get201CreatingSucceeded200Polling = function (options
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -657,6 +691,9 @@ LROsCustomHeader.prototype.beginPost202Retry200 = function (product, options, ca
     if (product !== null && product !== undefined) {
       client._models['Product'].validate(product);
     }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
   } catch (error) {
     return callback(error);
   }
@@ -679,6 +716,9 @@ LROsCustomHeader.prototype.beginPost202Retry200 = function (product, options, ca
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -801,6 +841,9 @@ LROsCustomHeader.prototype.beginPostAsyncRetrySucceeded = function (product, opt
     if (product !== null && product !== undefined) {
       client._models['Product'].validate(product);
     }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
   } catch (error) {
     return callback(error);
   }
@@ -823,6 +866,9 @@ LROsCustomHeader.prototype.beginPostAsyncRetrySucceeded = function (product, opt
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {

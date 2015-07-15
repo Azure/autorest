@@ -65,6 +65,9 @@ Group.prototype.getSampleResourceGroup = function (resourceGroupName, options, c
     if (this.client.apiVersion !== null && this.client.apiVersion !== undefined && typeof this.client.apiVersion !== 'string') {
       throw new Error('this.client.apiVersion must be of type string.');
     }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
   } catch (error) {
     return callback(error);
   }
@@ -90,6 +93,9 @@ Group.prototype.getSampleResourceGroup = function (resourceGroupName, options, c
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {

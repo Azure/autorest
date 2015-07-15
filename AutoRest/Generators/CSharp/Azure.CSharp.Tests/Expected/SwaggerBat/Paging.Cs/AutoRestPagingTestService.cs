@@ -43,6 +43,10 @@ namespace Fixtures.Azure.SwaggerBatPaging
         public SubscriptionCloudCredentials Credentials { get; private set; }
 
         /// <summary>
+        /// </summary>
+        public string AcceptLanguage { get; private set; }
+
+        /// <summary>
         /// The retry timeout for Long Running Operations.
         /// </summary>
         public int? LongRunningOperationRetryTimeout { get; set; }
@@ -156,6 +160,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
         {
             this.Paging = new PagingOperations(this);
             this.BaseUri = new Uri("http://localhost");
+            this.AcceptLanguage = "en-US";
             if (this.Credentials != null)
             {
                 this.Credentials.InitializeServiceClient(this);
