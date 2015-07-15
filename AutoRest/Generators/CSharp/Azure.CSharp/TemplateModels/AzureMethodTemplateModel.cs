@@ -125,6 +125,20 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
         }
 
         /// <summary>
+        /// Gets the expression for default header setting. 
+        /// </summary>
+        public override string SetDefaultHeaders
+        {
+            get
+            {
+                IndentedStringBuilder sb= new IndentedStringBuilder();
+                sb.AppendLine("httpRequest.Headers.TryAddWithoutValidation(\"x-ms-client-request-id\", Guid.NewGuid().ToString());")
+                  .AppendLine(base.SetDefaultHeaders);
+                return sb.ToString();
+            }
+        }
+
+        /// <summary>
         /// Gets Get method invocation arguments for Long Running Operations.
         /// </summary>
         /// <param name="getMethod">Get method.</param>

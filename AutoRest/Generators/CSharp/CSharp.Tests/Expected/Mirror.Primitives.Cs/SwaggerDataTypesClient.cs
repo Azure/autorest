@@ -149,13 +149,21 @@ namespace Fixtures.MirrorPrimitives
             // Set Headers
             if (responseCode != null)
             {
-                httpRequest.Headers.Add("response-code", responseCode);
+                if (httpRequest.Headers.Contains("response-code"))
+                {
+                    httpRequest.Headers.Remove("response-code");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("response-code", responseCode);
             }
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -250,13 +258,21 @@ namespace Fixtures.MirrorPrimitives
             // Set Headers
             if (responseCode != null)
             {
-                httpRequest.Headers.Add("response-code", responseCode);
+                if (httpRequest.Headers.Contains("response-code"))
+                {
+                    httpRequest.Headers.Remove("response-code");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("response-code", responseCode);
             }
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -351,13 +367,21 @@ namespace Fixtures.MirrorPrimitives
             // Set Headers
             if (responseCode != null)
             {
-                httpRequest.Headers.Add("response-code", responseCode);
+                if (httpRequest.Headers.Contains("response-code"))
+                {
+                    httpRequest.Headers.Remove("response-code");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("response-code", responseCode);
             }
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
@@ -452,13 +476,21 @@ namespace Fixtures.MirrorPrimitives
             // Set Headers
             if (responseCode != null)
             {
-                httpRequest.Headers.Add("response-code", responseCode);
+                if (httpRequest.Headers.Contains("response-code"))
+                {
+                    httpRequest.Headers.Remove("response-code");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("response-code", responseCode);
             }
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)
                 {
-                    httpRequest.Headers.Add(header.Key, header.Value);
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
 
