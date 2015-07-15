@@ -41,13 +41,10 @@ module ClientRuntimeAzure
         task = Concurrent::TimerTask.new do
           begin
             if !polling_state.azure_async_operation_header_link.nil?
-              p 'update_state_from_azure_async_operation_header'
               update_state_from_azure_async_operation_header(polling_state, custom_headers)
             elsif !polling_state.location_header_link.nil?
-              p 'update_state_from_location_header_on_put'
               update_state_from_location_header_on_put(polling_state, custom_headers, custom_deserialization_block)
             else
-              p 'update_state_from_get_resource_operation'
               update_state_from_get_resource_operation(get_operation_block, polling_state)
             end
 
@@ -99,10 +96,8 @@ module ClientRuntimeAzure
         task = Concurrent::TimerTask.new do
           begin
             if !polling_state.azure_async_operation_header_link.nil?
-              p 'update_state_from_azure_async_operation_header'
               update_state_from_azure_async_operation_header(polling_state, custom_headers)
             elsif !polling_state.location_header_link.nil?
-              p 'update_state_from_location_header_on_post_or_delete'
               update_state_from_location_header_on_post_or_delete(polling_state, custom_headers, custom_deserialization_block)
             else
               task.shutdown

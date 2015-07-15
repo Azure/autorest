@@ -47,6 +47,11 @@ module @Settings.Namespace
       {
       @:@@@(RubyCodeNamer.UnderscoreCase(operation)) = @(operation).new(self)
       }
+
+      @foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
+      {
+      @:@@@(property.Name) = @(property.DefaultValue)
+      }
     end
 
     @EmptyLine

@@ -231,20 +231,53 @@ Write(EmptyLine);
 #line default
 #line hidden
 
+            WriteLiteral("\r\n");
+#line 51 "ServiceClientTemplate.cshtml"
+      
+
+#line default
+#line hidden
+
+#line 51 "ServiceClientTemplate.cshtml"
+       foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
+      {
+
+#line default
+#line hidden
+
+            WriteLiteral("      @");
+#line 53 "ServiceClientTemplate.cshtml"
+      Write(property.Name);
+
+#line default
+#line hidden
+            WriteLiteral(" = ");
+#line 53 "ServiceClientTemplate.cshtml"
+                         Write(property.DefaultValue);
+
+#line default
+#line hidden
+            WriteLiteral("\r\n");
+#line 54 "ServiceClientTemplate.cshtml"
+      }
+
+#line default
+#line hidden
+
             WriteLiteral("    end\r\n\r\n    ");
-#line 52 "ServiceClientTemplate.cshtml"
+#line 57 "ServiceClientTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
             WriteLiteral("\r\n");
-#line 53 "ServiceClientTemplate.cshtml"
+#line 58 "ServiceClientTemplate.cshtml"
     
 
 #line default
 #line hidden
 
-#line 53 "ServiceClientTemplate.cshtml"
+#line 58 "ServiceClientTemplate.cshtml"
      foreach (var method in Model.MethodTemplateModels)
     {
 
@@ -252,31 +285,31 @@ Write(EmptyLine);
 #line hidden
 
             WriteLiteral("    ");
-#line 55 "ServiceClientTemplate.cshtml"
+#line 60 "ServiceClientTemplate.cshtml"
   Write(Include(new MethodTemplate(), method));
 
 #line default
 #line hidden
             WriteLiteral("\r\n");
-#line 56 "ServiceClientTemplate.cshtml"
+#line 61 "ServiceClientTemplate.cshtml"
     
 
 #line default
 #line hidden
 
-#line 56 "ServiceClientTemplate.cshtml"
+#line 61 "ServiceClientTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-#line 56 "ServiceClientTemplate.cshtml"
+#line 61 "ServiceClientTemplate.cshtml"
               
 
 #line default
 #line hidden
 
             WriteLiteral("    \r\n");
-#line 58 "ServiceClientTemplate.cshtml"
+#line 63 "ServiceClientTemplate.cshtml"
     }
 
 #line default

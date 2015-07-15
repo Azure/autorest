@@ -36,7 +36,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby.Tests
             Test("lro_spec.rb", "lro.json", "Lro");
         }
 
-        [Fact(Skip = "not implemented")]
+        [Fact]
         public void AzureURLTests()
         {
             Test("azure_url_spec.rb", "subscriptionId-apiVersion.json", "AzureURL");
