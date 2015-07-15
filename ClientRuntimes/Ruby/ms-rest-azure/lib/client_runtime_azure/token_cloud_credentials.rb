@@ -16,8 +16,11 @@ module ClientRuntimeAzure
     attr_accessor :token
 
     def initialize(subscriptionId, token)
-        @subscriptionId = subscriptionId
-        @token = token
+      fail ArgumentError if subscriptionId.nil?
+      fail ArgumentError if token.nil?
+
+      @subscriptionId = subscriptionId
+      @token = token
     end
 
     #

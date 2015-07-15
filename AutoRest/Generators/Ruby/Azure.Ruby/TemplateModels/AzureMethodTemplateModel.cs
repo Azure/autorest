@@ -113,13 +113,20 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                     name = "@client.api_version";
                 }
 
-                queryParamsList.Add(string.Format("properties['{0}'] = {1}", param.SerializedName, name));
+                if (param.Extensions.ContainsKey(AzureCodeGenerator.SkipUrlEncodingExtension))
+                {
+                    queryParamsList.Add(string.Format("properties['{0}'] = {1}", param.SerializedName, name));    
+                }
+                else
+                {
+                    queryParamsList.Add(string.Format("properties['{0}'] = CGI.escape({1}.to_s)", param.SerializedName, name));
+                }
             }
 
             builder.AppendLine(string.Join(", ", queryParamsList));
 
             builder.AppendLine("properties.reject!{ |key, value| value.nil? }");
-            builder.AppendLine("{0}.query = properties.map{{ |key, value| \"#{{key}}=#{{CGI.escape(value.to_s)}}\" }}.compact.join('&')", outputVariableName);
+            builder.AppendLine("{0}.query = properties.map{{ |key, value| \"#{{key}}=#{{value}}\" }}.compact.join('&')", outputVariableName);
 
             builder.AppendLine(@"fail URI::Error unless {0}.to_s =~ /\A#{{URI::regexp}}\z/", outputVariableName);
 
