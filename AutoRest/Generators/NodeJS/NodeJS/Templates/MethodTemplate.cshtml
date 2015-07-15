@@ -71,13 +71,22 @@
   httpRequest.url = requestUrl;
 
   // Set Headers
+  @(Model.SetDefaultHeaders)
   @foreach (var parameter in Model.Parameters.Where(p => p.Location == ParameterLocation.Header))
   {
   @:if (@(parameter.Name) !== null) {
   @:  httpRequest.headers['@(parameter.SerializedName)'] = @parameter.Type.ToString(parameter.Name);
   @:}
   }
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+
   @if (Model.RequestBody != null)
   {
   <text>
@@ -95,13 +104,7 @@
   httpRequest.headers['Content-Length'] = 0;
   </text>
   }
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
+
   @if (Model.Responses.Any(r => r.Value == PrimaryType.Stream))
   {
 @:  @Include(new MethodStreamPipelineTemplate(), Model)

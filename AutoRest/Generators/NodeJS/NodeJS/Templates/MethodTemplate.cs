@@ -290,14 +290,20 @@ Write(EmptyLine);
 #line default
 #line hidden
             WriteLiteral("\';\r\n  httpRequest.headers = {};\r\n  httpRequest.url = requestUrl;\r\n\r\n  // Set Head" +
-"ers\r\n");
+"ers\r\n  ");
 #line 74 "MethodTemplate.cshtml"
+Write(Model.SetDefaultHeaders);
+
+#line default
+#line hidden
+            WriteLiteral("\r\n");
+#line 75 "MethodTemplate.cshtml"
   
 
 #line default
 #line hidden
 
-#line 74 "MethodTemplate.cshtml"
+#line 75 "MethodTemplate.cshtml"
    foreach (var parameter in Model.Parameters.Where(p => p.Location == ParameterLocation.Header))
   {
 
@@ -305,38 +311,47 @@ Write(EmptyLine);
 #line hidden
 
             WriteLiteral("  if (");
-#line 76 "MethodTemplate.cshtml"
+#line 77 "MethodTemplate.cshtml"
     Write(parameter.Name);
 
 #line default
 #line hidden
             WriteLiteral(" !== null) {\r\n    httpRequest.headers[\'");
-#line 77 "MethodTemplate.cshtml"
+#line 78 "MethodTemplate.cshtml"
                        Write(parameter.SerializedName);
 
 #line default
 #line hidden
             WriteLiteral("\'] = ");
-#line 77 "MethodTemplate.cshtml"
+#line 78 "MethodTemplate.cshtml"
                                                       Write(parameter.Type.ToString(parameter.Name));
 
 #line default
 #line hidden
             WriteLiteral(";\r\n  }\r\n");
-#line 79 "MethodTemplate.cshtml"
+#line 80 "MethodTemplate.cshtml"
   }
 
 #line default
 #line hidden
 
-            WriteLiteral("  httpRequest.headers[\'Content-Type\'] = \'application/json; charset=utf-8\';\r\n");
-#line 81 "MethodTemplate.cshtml"
+            WriteLiteral(@"  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+
+");
+#line 90 "MethodTemplate.cshtml"
   
 
 #line default
 #line hidden
 
-#line 81 "MethodTemplate.cshtml"
+#line 90 "MethodTemplate.cshtml"
    if (Model.RequestBody != null)
   {
 
@@ -345,7 +360,7 @@ Write(EmptyLine);
 
             WriteLiteral("  \r\n  // Serialize Request\r\n  var requestContent = null;\r\n  requestContent = JSON" +
 ".stringify(msRest.serializeObject(");
-#line 86 "MethodTemplate.cshtml"
+#line 95 "MethodTemplate.cshtml"
                                                      Write(Model.RequestBody.Name);
 
 #line default
@@ -353,7 +368,7 @@ Write(EmptyLine);
             WriteLiteral("));\r\n  httpRequest.body = requestContent;\r\n  httpRequest.headers[\'Content-Length\'" +
 "] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(" +
 "requestContent, \'UTF8\');\r\n  \r\n");
-#line 90 "MethodTemplate.cshtml"
+#line 99 "MethodTemplate.cshtml"
   }
   else
   {
@@ -363,22 +378,20 @@ Write(EmptyLine);
 
             WriteLiteral("  \r\n  httpRequest.body = null;\r\n  httpRequest.headers[\'Content-Length\'] = 0;\r\n  \r" +
 "\n");
-#line 97 "MethodTemplate.cshtml"
+#line 106 "MethodTemplate.cshtml"
   }
 
 #line default
 #line hidden
 
-            WriteLiteral("  if(options) {\r\n    for(var headerName in options[\'customHeaders\']) {\r\n      if " +
-"(options[\'customHeaders\'].hasOwnProperty(headerName)) {\r\n        httpRequest.hea" +
-"ders[headerName] = options[\'customHeaders\'][headerName];\r\n      }\r\n    }\r\n  }\r\n");
-#line 105 "MethodTemplate.cshtml"
+            WriteLiteral("\r\n");
+#line 108 "MethodTemplate.cshtml"
   
 
 #line default
 #line hidden
 
-#line 105 "MethodTemplate.cshtml"
+#line 108 "MethodTemplate.cshtml"
    if (Model.Responses.Any(r => r.Value == PrimaryType.Stream))
   {
 
@@ -386,13 +399,13 @@ Write(EmptyLine);
 #line hidden
 
             WriteLiteral("  ");
-#line 107 "MethodTemplate.cshtml"
+#line 110 "MethodTemplate.cshtml"
 Write(Include(new MethodStreamPipelineTemplate(), Model));
 
 #line default
 #line hidden
             WriteLiteral("\r\n");
-#line 108 "MethodTemplate.cshtml"
+#line 111 "MethodTemplate.cshtml"
   }
   else
   {
@@ -401,13 +414,13 @@ Write(Include(new MethodStreamPipelineTemplate(), Model));
 #line hidden
 
             WriteLiteral("  ");
-#line 111 "MethodTemplate.cshtml"
+#line 114 "MethodTemplate.cshtml"
 Write(Include(new MethodJsonPipelineTemplate(), Model));
 
 #line default
 #line hidden
             WriteLiteral("\r\n");
-#line 112 "MethodTemplate.cshtml"
+#line 115 "MethodTemplate.cshtml"
   }
 
 #line default
