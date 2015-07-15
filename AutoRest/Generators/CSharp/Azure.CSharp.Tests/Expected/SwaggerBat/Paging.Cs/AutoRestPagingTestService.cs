@@ -45,7 +45,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
         /// <summary>
         /// Gets or sets the preferred language for the response.
         /// </summary>
-        public string AcceptLanguage { get; private set; }
+        public string AcceptLanguage { get; set; }
 
         /// <summary>
         /// The retry timeout for Long Running Operations.

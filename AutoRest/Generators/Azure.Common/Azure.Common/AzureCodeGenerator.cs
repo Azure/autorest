@@ -231,7 +231,7 @@ namespace Microsoft.Rest.Generator.Azure
                 };
                 serviceClient.Properties.Add(acceptLanguage);
             }
-            acceptLanguage.IsReadOnly = true;
+            acceptLanguage.IsReadOnly = false;
             acceptLanguage.IsRequired = false;
             acceptLanguage.Type = PrimaryType.String;
             serviceClient.Methods
