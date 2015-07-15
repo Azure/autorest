@@ -40,7 +40,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         public string Secret { get; private set; }
         public string Domain { get; private set; }
 
-        [Fact]
+        [Fact(Skip="Test should only run with user interaction")]
         public void UserCredentialsPopsDialog()
         {
             var credentials = new UserAccessTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
