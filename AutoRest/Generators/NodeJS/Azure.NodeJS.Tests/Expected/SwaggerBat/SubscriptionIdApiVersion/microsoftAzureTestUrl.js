@@ -54,6 +54,9 @@ function MicrosoftAzureTestUrl(credentials, subscriptionId, baseUri, options) {
   if(!this.apiVersion) {
     this.apiVersion = '2014-04-01-preview';
   }
+  if(!this.acceptLanguage) {
+    this.acceptLanguage = 'en-US';
+  }
   this.group = new operations.Group(this);
   this._models = models;
 }

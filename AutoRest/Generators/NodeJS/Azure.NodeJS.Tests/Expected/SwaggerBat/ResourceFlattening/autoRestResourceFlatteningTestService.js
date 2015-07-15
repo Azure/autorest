@@ -44,6 +44,9 @@ function AutoRestResourceFlatteningTestService(credentials, baseUri, options) {
   }
   this.credentials = credentials;
 
+  if(!this.acceptLanguage) {
+    this.acceptLanguage = 'en-US';
+  }
   this._models = models;
 }
 
@@ -80,6 +83,9 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (resourceArr
         }
       }
     }
+    if (this.acceptLanguage !== null && this.acceptLanguage !== undefined && typeof this.acceptLanguage !== 'string') {
+      throw new Error('this.acceptLanguage must be of type string.');
+    }
   } catch (error) {
     return callback(error);
   }
@@ -102,6 +108,9 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (resourceArr
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -170,6 +179,14 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.acceptLanguage !== null && this.acceptLanguage !== undefined && typeof this.acceptLanguage !== 'string') {
+      throw new Error('this.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.baseUri + 
@@ -189,6 +206,9 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -285,6 +305,9 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resour
         }
       }
     }
+    if (this.acceptLanguage !== null && this.acceptLanguage !== undefined && typeof this.acceptLanguage !== 'string') {
+      throw new Error('this.acceptLanguage must be of type string.');
+    }
   } catch (error) {
     return callback(error);
   }
@@ -307,6 +330,9 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resour
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -375,6 +401,14 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.acceptLanguage !== null && this.acceptLanguage !== undefined && typeof this.acceptLanguage !== 'string') {
+      throw new Error('this.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.baseUri + 
@@ -394,6 +428,9 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -502,6 +539,9 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
     if (resourceComplexObject !== null && resourceComplexObject !== undefined) {
       client._models['ResourceCollection'].validate(resourceComplexObject);
     }
+    if (this.acceptLanguage !== null && this.acceptLanguage !== undefined && typeof this.acceptLanguage !== 'string') {
+      throw new Error('this.acceptLanguage must be of type string.');
+    }
   } catch (error) {
     return callback(error);
   }
@@ -524,6 +564,9 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -592,6 +635,14 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.acceptLanguage !== null && this.acceptLanguage !== undefined && typeof this.acceptLanguage !== 'string') {
+      throw new Error('this.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.baseUri + 
@@ -611,6 +662,9 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {

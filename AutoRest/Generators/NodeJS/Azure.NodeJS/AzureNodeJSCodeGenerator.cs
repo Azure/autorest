@@ -71,12 +71,13 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
 
         private static void NormalizeApiVersion(ServiceClient serviceClient)
         {
-            var property = serviceClient.Properties.FirstOrDefault(
-                p => p.Name.Equals(AzureCodeGenerator.ApiVersion, StringComparison.OrdinalIgnoreCase));
-            if (property != null)
-            {
-                property.DefaultValue = property.DefaultValue.Replace('"', '\'');
-            }
+            serviceClient.Properties.Where(
+                p => p.SerializedName.Equals(AzureCodeGenerator.ApiVersion, StringComparison.OrdinalIgnoreCase))
+                .ForEach(p => p.DefaultValue = p.DefaultValue.Replace("\"", "'"));
+
+            serviceClient.Properties.Where(
+                p => p.SerializedName.Equals(AzureCodeGenerator.AcceptLanguage, StringComparison.OrdinalIgnoreCase))
+                .ForEach(p => p.DefaultValue = p.DefaultValue.Replace("\"", "'"));
         }
 
         /// <summary>

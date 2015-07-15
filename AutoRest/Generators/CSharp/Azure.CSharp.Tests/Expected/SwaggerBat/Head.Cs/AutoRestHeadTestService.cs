@@ -42,6 +42,11 @@ namespace Fixtures.Azure.SwaggerBatHead
         public SubscriptionCloudCredentials Credentials { get; private set; }
 
         /// <summary>
+        /// Gets or sets the preferred language for the response.
+        /// </summary>
+        public string AcceptLanguage { get; set; }
+
+        /// <summary>
         /// The retry timeout for Long Running Operations.
         /// </summary>
         public int? LongRunningOperationRetryTimeout { get; set; }
@@ -155,6 +160,7 @@ namespace Fixtures.Azure.SwaggerBatHead
         {
             this.HttpSuccess = new HttpSuccessOperations(this);
             this.BaseUri = new Uri("http://localhost");
+            this.AcceptLanguage = "en-US";
             if (this.Credentials != null)
             {
                 this.Credentials.InitializeServiceClient(this);
