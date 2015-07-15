@@ -42,14 +42,18 @@
   Build NuGet packages
   -->
   <Target Name="Package" DependsOnTargets="BuildDynamicNuSpecs">
-    
+    <PropertyGroup>
+      <!--Don't warn for putting dlls under tools folder.
+       parameterize it when the repo starts to produce more than 1 package -->
+      <NoWarnOnPack>-NoPackageAnalysis</NoWarnOnPack>
+    </PropertyGroup>
     <Message Text="Generating NuGet library &amp; symbols + source packages" Importance="high" />
     <Exec Condition=" '%(SdkNuGetPackage.SkipSymbolSourcePackage)' != 'true' "
-          Command="$(NuGetCommand) pack -BasePath &quot;%(SdkNuGetPackage.Folder)..&quot; -Verbosity $(NuGetVerbosity) &quot;binaries\packages\specs\%(SdkNuGetPackage.Identity).nuspec&quot; -Version %(SdkNuGetPackage.PackageVersion) -OutputDirectory &quot;$(PackageOutputDir)&quot; -Symbols" />
+          Command="$(NuGetCommand) pack -BasePath &quot;%(SdkNuGetPackage.Folder)..&quot; -Verbosity $(NuGetVerbosity) &quot;binaries\packages\specs\%(SdkNuGetPackage.Identity).nuspec&quot; -Version %(SdkNuGetPackage.PackageVersion) -OutputDirectory &quot;$(PackageOutputDir)&quot; -Symbols $(NoWarnOnPack)" />
 
     <Message Text="Generating NuGet packages without symbol + source packages into $(PackageOutputDir)" Importance="high" />
     <Exec Condition=" '%(SdkNuGetPackage.SkipSymbolSourcePackage)' == 'true' "
-          Command="$(NuGetCommand) pack -BasePath &quot;%(SdkNuGetPackage.Folder)..&quot; -Verbosity $(NuGetVerbosity) &quot;binaries\packages\specs\%(SdkNuGetPackage.Identity).nuspec&quot; -Version %(SdkNuGetPackage.PackageVersion) -OutputDirectory &quot;$(PackageOutputDir)&quot;" />
+          Command="$(NuGetCommand) pack -BasePath &quot;%(SdkNuGetPackage.Folder)..&quot; -Verbosity $(NuGetVerbosity) &quot;binaries\packages\specs\%(SdkNuGetPackage.Identity).nuspec&quot; -Version %(SdkNuGetPackage.PackageVersion) -OutputDirectory &quot;$(PackageOutputDir)&quot; $(NoWarnOnPack)" />
   </Target>
 
   <!--
@@ -65,8 +69,12 @@
 
     <Message Importance="high" Text="Publishing NuGet packages to the cloud at $(NuGetPublishingSource)" />
     <Exec Command="$(NuGetCommand) push &quot;$(PackageOutputDir)\%(SdkNuGetPackage.Identity).%(SdkNuGetPackage.PackageVersion).nupkg&quot; $(NuGetKey)$(ActualSource)"
-          IgnoreExitCode="true"
-          Condition=" '%(SdkNuGetPackage.Publish)' != 'false' " />
+          IgnoreExitCode="true" />
+          
+    <Message Text="Unlisting %(SdkNuGetPackage.Identity) as Hidden is set to 'true' for the component."
+             Condition=" '%(SdkNuGetPackage.Hidden)' == 'true' " />             
+    <Exec Command="$(NuGetCommand) delete &quot;$(PackageOutputDir)\%(SdkNuGetPackage.Identity).%(SdkNuGetPackage.PackageVersion).nupkg&quot; $(NuGetKey)$(ActualSource) -NoPrompt" 
+             IgnoreExitCode="true" Condition=" '%(SdkNuGetPackage.Hidden)' == 'true' " />
 
     <Message Importance="high" Text="Publishing NuGet symbol &amp; source packages to the cloud at $(NuGetSymbolPublishingSource)"
              Condition=" $(NuGetSymbolPublishingSource) != '' "/>
@@ -74,9 +82,6 @@
           Condition=" $(NuGetSymbolPublishingSource) != '' And '%(SdkNuGetPackage.Publish)' != 'false' And '%(SdkNuGetPackage.SkipSymbolSourcePackage)' != 'true' And '$(PublishSymbolSourcePackages)' == 'true' "
           IgnoreExitCode="true"
           ContinueOnError="true" />
-
-    <Message Text="Not publishing package %(SdkNuGetPackage.Identity) as Publish is set to 'false' for the component."
-             Condition=" '%(SdkNuGetPackage.Publish)' == 'false' " />
 
     <Warning Text="Symbol/source packages are not being pushed. The PublishSymbolSourcePackages property is not set to true."
              Condition=" '$(PublishSymbolSourcePackages)' != 'true' " />

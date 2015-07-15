@@ -206,7 +206,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line hidden
 
 #line 41 "ModelTemplate.cshtml"
- if(@Model.ShouldValidate()) 
+ if(@Model.ShouldValidateChain()) 
 {   
 
 #line default
@@ -224,7 +224,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line 48 "ModelTemplate.cshtml"
             bool anythingToValidate = false;
 
-            if (Model.BaseModelType != null)
+            if (Model.BaseModelType != null && Model.BaseModelType.ShouldValidateChain())
             {
                 anythingToValidate = true;
 

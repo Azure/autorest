@@ -7,6 +7,8 @@ using System.Net;
 using System.Net.Http;
 using Microsoft.Azure.Properties;
 using Microsoft.Rest;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Microsoft.Azure
 {
@@ -27,11 +29,27 @@ namespace Microsoft.Azure
             Response = response.Response;
             Request = response.Request;
             Resource = response.Body;
-            
-            var resource = response.Body as IResource;
-            if (resource != null && resource.ProvisioningState != null)
+
+            string raw = response.Response.Content.ReadAsStringAsync().ConfigureAwait(false)
+                .GetAwaiter().GetResult();
+
+            JObject resource = null;
+            if (!string.IsNullOrEmpty(raw))
             {
-                Status = resource.ProvisioningState;
+                try
+                {
+                    resource = JObject.Parse(raw);
+                }
+                catch (JsonException)
+                {
+                    // failed to deserialize, return empty body
+                }
+            }
+
+            if (resource != null && resource["properties"] != null && 
+                resource["properties"]["provisioningState"] != null)
+            {
+                Status = (string)resource["properties"]["provisioningState"];
             }
             else
             {

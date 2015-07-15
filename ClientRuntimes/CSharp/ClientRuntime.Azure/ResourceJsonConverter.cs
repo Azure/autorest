@@ -26,7 +26,8 @@ namespace Microsoft.Azure
         /// <returns>True if the object being serialized is assignable from the base type. False otherwise.</returns>
         public override bool CanConvert(Type objectType)
         {
-            return typeof(IResource).IsAssignableFrom(objectType);
+            return typeof(Resource).IsAssignableFrom(objectType) ||
+                   typeof(SubResource).IsAssignableFrom(objectType);
         }
 
         /// <summary>
@@ -149,23 +150,20 @@ namespace Microsoft.Azure
                 }
                 writer.WriteValue(typeName);
             }
-            
-            // Getting all properties that do NOT exist in the Resource object
-            PropertyInfo[] propertiesToConsolidate = value.GetType().GetProperties()
-                .Where(p => typeof(Resource).GetProperty(p.Name) == null).ToArray();
-
-            // Getting all properties that do NOT exist in the Resource object
-            string[] resourceProperties = typeof (Resource).GetProperties().Select(p => p.Name).ToArray();
-
+                      
             // Go over each property that is in resource and write to stream
-            JsonConverterHelper.SerializeProperties(writer, value, serializer, resourceProperties);
+            JsonConverterHelper.SerializeProperties(writer, value, serializer, 
+                p => !p.PropertyName.StartsWith("properties.", StringComparison.OrdinalIgnoreCase));
 
             // If there is a need to add properties element - add it
-            if (propertiesToConsolidate.Any())
+            var contract = (JsonObjectContract)serializer.ContractResolver.ResolveContract(value.GetType());
+            if (contract.Properties.Any(p =>
+                p.PropertyName.StartsWith("properties.", StringComparison.OrdinalIgnoreCase)))
             {
                 writer.WritePropertyName(PropertiesNode);
                 writer.WriteStartObject();
-                JsonConverterHelper.SerializeProperties(writer, value, serializer, propertiesToConsolidate.Select(p => p.Name));
+                JsonConverterHelper.SerializeProperties(writer, value, serializer,
+                    p => p.PropertyName.StartsWith("properties.", StringComparison.OrdinalIgnoreCase));
                 writer.WriteEndObject();
             }
 

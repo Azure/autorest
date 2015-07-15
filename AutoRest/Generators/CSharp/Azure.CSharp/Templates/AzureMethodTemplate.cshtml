@@ -40,7 +40,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
 }
 </text>
 }
-else if (Model.HttpMethod == HttpMethod.Put)
+else if (Model.HttpMethod == HttpMethod.Put || Model.HttpMethod == HttpMethod.Patch)
 {
 @:/// <summary>
 @WrapComment("/// ", Model.Documentation.EscapeXmlComment())@:
@@ -64,8 +64,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     @(Model.OperationResponseReturnTypeString) response = await Begin@(Model.Name)WithHttpMessagesAsync(
         @(Model.GetAsyncMethodInvocationArgs("customHeaders")));
 
-    return await @(Model.ClientReference).GetPutOperationResultAsync<@(Model.ReturnType.Name)>(response, 
-        () => @(Model.GetMethod.Name)WithHttpMessagesAsync(@(Model.GetMethodInvocationArgs(Model.GetMethod))),
+    return await @(Model.ClientReference).GetPutOrPatchOperationResultAsync<@(Model.ReturnType.Name)>(response, 
         customHeaders, 
         cancellationToken);
 }

@@ -27,7 +27,6 @@ namespace Microsoft.Rest.Generator.Azure
         private const string ResourceType = "Resource";
         private const string SubResourceType = "SubResource";
         private const string ResourceProperties = "Properties";
-        private const string ProvisioningState = "ProvisioningState";
 
         private static IEnumerable<string> ResourcePropertyNames;
 
@@ -226,6 +225,7 @@ namespace Microsoft.Rest.Generator.Azure
                     Name = "SubscriptionCloudCredentials"
                 },
                 IsRequired = true,
+                IsReadOnly = true,
                 Documentation = "Subscription credentials which uniquely identify Microsoft Azure subscription."
             });
             serviceClient.Properties.Add(new Property
@@ -261,44 +261,41 @@ namespace Microsoft.Rest.Generator.Azure
                     // First find "properties" property
                     var propertiesProperty = compositeType.Properties.FirstOrDefault(
                         p => p.Name.Equals(ResourceProperties, StringComparison.OrdinalIgnoreCase));
-                    if (propertiesProperty == null)
+                    if (propertiesProperty == null &&
+                        compositeType.BaseModelType.Name.Equals(ResourceType, StringComparison.OrdinalIgnoreCase))
                     {
                         throw new InvalidOperationException(
                             string.Format(CultureInfo.InvariantCulture, 
                             Resources.MissingProperties,
                             compositeType.Name));
                     }
-                    var propertiesModel = propertiesProperty.Type as CompositeType;
-                    // Recursively parsing the "properties" object hierarchy  
-                    while (propertiesModel != null)
-                    {
-                        foreach (Property pp in propertiesModel.Properties)
-                        {
-                            if (ResourcePropertyNames.Any(rp => rp.Equals(pp.Name, StringComparison.OrdinalIgnoreCase)))
-                            {
-                                pp.Name = compositeType.Name + CodeNamer.PascalCase(pp.Name);
-                            }
-                            pp.SerializedName = "properties." + pp.SerializedName;
-                            compositeType.Properties.Add(pp);
-                        }
-                        
-                        compositeType.Properties.Remove(propertiesProperty);
-                        if (!typesToDelete.Contains(propertiesModel.Name))
-                        {
-                            typesToDelete.Add(propertiesModel.Name);
-                        }
-                        propertiesModel = propertiesModel.BaseModelType;
-                    }
 
-                    // If provisioning-state exist in type that is derived from resources - remove it
-                    foreach(var propertyToRemove in compositeType.Properties
-                        .Where(p => p.Name
-                                    .Equals(
-                                        ProvisioningState, 
-                                        StringComparison.OrdinalIgnoreCase))
-                        .ToArray())
+                    // Sub resource does not need to have properties
+                    if (propertiesProperty != null)
                     {
-                        compositeType.Properties.Remove(propertyToRemove);
+                        var propertiesModel = propertiesProperty.Type as CompositeType;
+                        // Recursively parsing the "properties" object hierarchy  
+                        while (propertiesModel != null)
+                        {
+                            foreach (Property pp in propertiesModel.Properties)
+                            {
+                                if (
+                                    ResourcePropertyNames.Any(
+                                        rp => rp.Equals(pp.Name, StringComparison.OrdinalIgnoreCase)))
+                                {
+                                    pp.Name = compositeType.Name + CodeNamer.PascalCase(pp.Name);
+                                }
+                                pp.SerializedName = "properties." + pp.SerializedName;
+                                compositeType.Properties.Add(pp);
+                            }
+
+                            compositeType.Properties.Remove(propertiesProperty);
+                            if (!typesToDelete.Contains(propertiesModel.Name))
+                            {
+                                typesToDelete.Add(propertiesModel.Name);
+                            }
+                            propertiesModel = propertiesModel.BaseModelType;
+                        }
                     }
                 }
             }

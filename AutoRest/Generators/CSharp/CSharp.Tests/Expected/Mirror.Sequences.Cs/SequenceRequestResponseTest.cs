@@ -130,13 +130,13 @@ namespace Fixtures.MirrorSequences
             }
             if (pets != null)
             {
-                foreach ( var element in pets)
-            {
-                if (element != null)
-            {
-                element.Validate();
-            }
-            }
+                foreach (var element in pets)
+                {
+                    if (element != null)
+                    {
+                        element.Validate();
+                    }
+                }
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;

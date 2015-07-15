@@ -29,5 +29,10 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening.Models
         [JsonProperty(PropertyName = "properties.provisioningStateValues")]
         public string ProvisioningStateValues { get; private set; }
 
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "properties.provisioningState")]
+        public string ProvisioningState { get; set; }
+
     }
 }

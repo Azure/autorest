@@ -40,6 +40,11 @@ namespace Microsoft.Rest.Modeler.Swagger
                 parameterName = unwrappedParameter.Schema.Reference.StripDefinitionPath();
             }
 
+            if (parameterName == null)
+            {
+                parameterName = unwrappedParameter.Name;
+            }
+
             IType parameterType = BuildServiceType(parameterName);
             var parameter = new Parameter
             {

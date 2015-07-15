@@ -40,7 +40,7 @@ namespace Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion
         /// Subscription credentials which uniquely identify Microsoft Azure
         /// subscription.
         /// </summary>
-        public SubscriptionCloudCredentials Credentials { get; set; }
+        public SubscriptionCloudCredentials Credentials { get; private set; }
 
         /// <summary>
         /// Subscription Id.
@@ -119,25 +119,17 @@ namespace Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion
         /// <param name='credentials'>
         /// Required. Subscription credentials which uniquely identify Microsoft Azure subscription.
         /// </param>
-        /// <param name='subscriptionId'>
-        /// Required. Subscription Id.
-        /// </param>
         /// <param name='handlers'>
         /// Optional. The set of delegating handlers to insert in the http
         /// client pipeline.
         /// </param>
-        public MicrosoftAzureTestUrl(SubscriptionCloudCredentials credentials, string subscriptionId, params DelegatingHandler[] handlers) : this(handlers)
+        public MicrosoftAzureTestUrl(SubscriptionCloudCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (credentials == null)
             {
                 throw new ArgumentNullException("credentials");
             }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException("subscriptionId");
-            }
             this.Credentials = credentials;
-            this.SubscriptionId = subscriptionId;
         }
 
         /// <summary>
@@ -149,14 +141,11 @@ namespace Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion
         /// <param name='credentials'>
         /// Required. Subscription credentials which uniquely identify Microsoft Azure subscription.
         /// </param>
-        /// <param name='subscriptionId'>
-        /// Required. Subscription Id.
-        /// </param>
         /// <param name='handlers'>
         /// Optional. The set of delegating handlers to insert in the http
         /// client pipeline.
         /// </param>
-        public MicrosoftAzureTestUrl(Uri baseUri, SubscriptionCloudCredentials credentials, string subscriptionId, params DelegatingHandler[] handlers) : this(handlers)
+        public MicrosoftAzureTestUrl(Uri baseUri, SubscriptionCloudCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
             {
@@ -166,13 +155,8 @@ namespace Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion
             {
                 throw new ArgumentNullException("credentials");
             }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException("subscriptionId");
-            }
             this.BaseUri = baseUri;
             this.Credentials = credentials;
-            this.SubscriptionId = subscriptionId;
         }
 
         /// <summary>
@@ -183,6 +167,10 @@ namespace Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion
             this.Group = new GroupOperations(this);
             this.BaseUri = new Uri("https://management.azure.com/");
             this.ApiVersion = "2014-04-01-preview";
+            if (this.Credentials != null)
+            {
+                this.Credentials.InitializeServiceClient(this);
+            }
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,

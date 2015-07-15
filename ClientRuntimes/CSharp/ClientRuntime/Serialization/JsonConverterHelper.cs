@@ -36,9 +36,9 @@ namespace Microsoft.Rest.Serialization
         /// <param name="writer">The JSON writer.</param>
         /// <param name="value">The value to serialize.</param>
         /// <param name="serializer">The JSON serializer.</param>
-        /// <param name="filter">If specified identifies properties that should be serialized.</param>
+        /// <param name="filter">If specified filters JsonProperties to be serialized.</param>
         public static void SerializeProperties(JsonWriter writer, object value, JsonSerializer serializer,
-            IEnumerable<string> filter)
+            Predicate<JsonProperty> filter)
         {
             if (writer == null)
             {
@@ -55,7 +55,7 @@ namespace Microsoft.Rest.Serialization
 
             var contract = (JsonObjectContract) serializer.ContractResolver.ResolveContract(value.GetType());
             foreach (JsonProperty property in contract.Properties
-                .Where(p => filter == null || filter.Contains(p.UnderlyingName)))
+                .Where(p => filter == null || filter(p)))
             {
                 object memberValue = property.ValueProvider.GetValue(value);
 
@@ -71,11 +71,12 @@ namespace Microsoft.Rest.Serialization
                 if (!property.Ignored && property.Readable &&
                     (property.ShouldSerialize == null || property.ShouldSerialize(memberValue)))
                 {
+                    string propertyName = property.PropertyName;
                     if (property.PropertyName.StartsWith("properties.", StringComparison.OrdinalIgnoreCase))
                     {
-                        property.PropertyName = property.PropertyName.Substring("properties.".Length);
+                        propertyName = property.PropertyName.Substring("properties.".Length);
                     }
-                    writer.WritePropertyName(property.PropertyName);
+                    writer.WritePropertyName(propertyName);
                     serializer.Serialize(writer, memberValue);
                 }
             }

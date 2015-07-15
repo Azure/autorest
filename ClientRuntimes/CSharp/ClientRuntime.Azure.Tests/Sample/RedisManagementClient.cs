@@ -76,6 +76,12 @@ namespace Microsoft.Azure.Management.Redis.Models
             get { return this._sslPort; }
             set { this._sslPort = value; }
         }
+
+        /// <summary>
+        /// Optional.
+        /// </summary>
+        [JsonProperty("properties.provisioningState")]
+        public string ProvisioningState { get; set; }
     }
 
     public partial class RedisSubResource : SubResource
@@ -1276,8 +1282,7 @@ namespace Microsoft.Azure.Management.Redis
                          response.Response.StatusCode == HttpStatusCode.Created ||
                          response.Response.StatusCode == HttpStatusCode.Accepted);
 
-            return await this.Client.GetPutOperationResultAsync(response, 
-                () => GetWithHttpMessagesAsync(resourceGroupName, name, subscriptionId, cancellationToken),
+            return await this.Client.GetPutOrPatchOperationResultAsync(response, 
                 null,
                 cancellationToken);
         }
@@ -1440,8 +1445,7 @@ namespace Microsoft.Azure.Management.Redis
                          response.Response.StatusCode == HttpStatusCode.Created ||
                          response.Response.StatusCode == HttpStatusCode.Accepted);
 
-            return await this.Client.GetPutOperationResultAsync(response,
-                () => GetSkuWithHttpMessagesAsync(resourceGroupName, name, subscriptionId, cancellationToken),
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 null,
                 cancellationToken);
         }
@@ -1604,8 +1608,7 @@ namespace Microsoft.Azure.Management.Redis
                          response.Response.StatusCode == HttpStatusCode.Created ||
                          response.Response.StatusCode == HttpStatusCode.Accepted);
 
-            return await this.Client.GetPutOperationResultAsync(response,
-                () => GetSubResourceWithHttpMessagesAsync(resourceGroupName, name, subscriptionId, cancellationToken),
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 null,
                 cancellationToken);
         }

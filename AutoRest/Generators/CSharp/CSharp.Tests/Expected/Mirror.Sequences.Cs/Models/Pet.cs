@@ -45,13 +45,13 @@ namespace Fixtures.MirrorSequences.Models
             }
             if (this.Styles != null)
             {
-                foreach ( var element in this.Styles)
-            {
-                if (element != null)
-            {
-                element.Validate();
-            }
-            }
+                foreach (var element in this.Styles)
+                {
+                    if (element != null)
+                    {
+                        element.Validate();
+                    }
+                }
             }
         }
     }

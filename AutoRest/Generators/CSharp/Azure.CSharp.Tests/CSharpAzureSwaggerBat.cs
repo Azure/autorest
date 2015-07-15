@@ -57,9 +57,9 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
             using (
                 var client =
                     new MicrosoftAzureTestUrl(Fixture.Uri,
-                        new TokenCloudCredentials(Guid.NewGuid().ToString(), Guid.NewGuid().ToString()),
-                        Guid.NewGuid().ToString()))
+                        new TokenCloudCredentials(Guid.NewGuid().ToString(), Guid.NewGuid().ToString())))
             {
+                client.SubscriptionId = Guid.NewGuid().ToString();
                 var group = client.Group.GetSampleResourceGroup("testgroup101");
                 Assert.Equal("testgroup101", group.Name);
                 Assert.Equal("West US", group.Location);
@@ -203,7 +203,9 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 exception =
                     Assert.Throws<CloudException>(
                         () => client.LROSADs.PutNonRetry201Creating400(new Product {Location = "West US"}));
-                Assert.Equal("Error from the server", exception.Message);
+                Assert.Equal("Error from the server", exception.Body.Message);
+                Assert.NotNull(exception.Request);
+                Assert.NotNull(exception.Response);
                 exception =
                     Assert.Throws<CloudException>(
                         () => client.LROSADs.PutAsyncRelativeRetry400(new Product {Location = "West US"}));
@@ -243,8 +245,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 // TODO: 4103936 Fix exception type
                 Assert.Throws<UriFormatException>(
                     () => client.LROSADs.PutAsyncRelativeRetryInvalidHeader(new Product {Location = "West US"}));
-                // TODO: 4103936 Fix exception type
-                Assert.Throws<JsonSerializationException>(
+                Assert.Throws<CloudException>(
                     () => client.LROSADs.PutAsyncRelativeRetryInvalidJsonPolling(new Product {Location = "West US"}));
                 // TODO: 4103936 Fix exception type
                 var invalidHeader = Assert.Throws<UriFormatException>(() => client.LROSADs.Delete202RetryInvalidHeader());
@@ -253,9 +254,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 var invalidAsyncHeader =
                     Assert.Throws<UriFormatException>(() => client.LROSADs.DeleteAsyncRelativeRetryInvalidHeader());
                 Assert.NotNull(invalidAsyncHeader.Message);
-                // TODO: 4103936 Fix exception type
                 var invalidPollingBody =
-                    Assert.Throws<JsonSerializationException>(
+                    Assert.Throws<CloudException>(
                         () => client.LROSADs.DeleteAsyncRelativeRetryInvalidJsonPolling());
                 Assert.NotNull(invalidPollingBody.Message);
                 // TODO: 4103936 Fix exception type
@@ -265,9 +265,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 invalidAsyncHeader =
                     Assert.Throws<UriFormatException>(() => client.LROSADs.PostAsyncRelativeRetryInvalidHeader());
                 Assert.NotNull(invalidAsyncHeader.Message);
-                // TODO: 4103936 Fix exception type
                 invalidPollingBody =
-                    Assert.Throws<JsonSerializationException>(
+                    Assert.Throws<CloudException>(
                         () => client.LROSADs.PostAsyncRelativeRetryInvalidJsonPolling());
                 Assert.NotNull(invalidPollingBody.Message);
 
@@ -604,8 +603,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 @"Swagger\azure-special-properties.json", @"Expected\SwaggerBat\AzureSpecials.Cs");
             using (
                 var client = new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
-                    new TokenCloudCredentials(validSubscription, Guid.NewGuid().ToString()),
-                    validSubscription))
+                    new TokenCloudCredentials(validSubscription, Guid.NewGuid().ToString()))
+                    { SubscriptionId = validSubscription })
             {
                 client.SubscriptionInCredentials.PostMethodGlobalNotProvidedValid();
                 client.SubscriptionInCredentials.PostMethodGlobalValid();
@@ -614,8 +613,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 Assert.Throws<ArgumentNullException>(
                     () =>
                         new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
-                            new TokenCloudCredentials(null, Guid.NewGuid().ToString()),
-                            validSubscription));
+                            new TokenCloudCredentials(null, Guid.NewGuid().ToString())) 
+                            { SubscriptionId = validSubscription });
                 client.SubscriptionInMethod.PostMethodLocalValid(validSubscription);
                 client.SubscriptionInMethod.PostPathLocalValid(validSubscription);
                 client.SubscriptionInMethod.PostSwaggerLocalValid(validSubscription);

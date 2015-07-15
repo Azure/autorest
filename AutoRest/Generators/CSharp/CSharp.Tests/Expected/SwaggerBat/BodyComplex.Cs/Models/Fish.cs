@@ -37,13 +37,13 @@ namespace Fixtures.SwaggerBatBodyComplex.Models
             }
             if (this.Siblings != null)
             {
-                foreach ( var element in this.Siblings)
-            {
-                if (element != null)
-            {
-                element.Validate();
-            }
-            }
+                foreach (var element in this.Siblings)
+                {
+                    if (element != null)
+                    {
+                        element.Validate();
+                    }
+                }
             }
         }
     }

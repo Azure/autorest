@@ -70,7 +70,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Microsoft.Rest.ClientRuntime.Azure.1.0.10 nuget package is required to compile the generated code..
+        ///   Looks up a localized string similar to The Microsoft.Rest.ClientRuntime.Azure.1.0.12 nuget package is required to compile the generated code..
         /// </summary>
         internal static string UsageInformation {
             get {

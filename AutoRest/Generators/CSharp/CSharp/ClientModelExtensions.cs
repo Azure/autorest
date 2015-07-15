@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using System.Globalization;
@@ -25,34 +26,6 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
             return string.Format(CultureInfo.InvariantCulture, "HttpMethod.{0}", method);
         }
 
-        public static bool ShouldValidate(this IType model)
-        {
-            if (model == null)
-            {
-                return false;
-            }
-
-            var sequence = model as SequenceType;
-            var dictionary = model as DictionaryType;
-            var composite = model as CompositeType;
-            if (sequence != null && sequence.ElementType  is CompositeType)
-            {
-                return true;
-            }
-            
-            if (dictionary != null && dictionary.ValueType is CompositeType)
-            {
-                return true;
-            }
-
-            if (composite != null && composite.Properties.Any((p) => p.IsRequired || p.Type is CompositeType))
-            {
-                return true;
-            }
-
-            return false;
-        }
-
         public static bool ShouldValidateChain(this IType model)
         {
             if (model == null)
@@ -60,23 +33,83 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
                 return false;
             }
 
-            var sequence = model as SequenceType;
-            var dictionary = model as DictionaryType;
-            var composite = model as CompositeType;
-            if (sequence != null)
+            var typesToValidate = new Stack<IType>();
+            typesToValidate.Push(model);
+            var validatedTypes = new HashSet<IType>();
+            while (typesToValidate.Count > 0)
             {
-                return sequence.ElementType.ShouldValidateChain();
-            }
-            
-            if (dictionary != null)
-            {
-                return dictionary.ValueType.ShouldValidateChain();
+                IType modelToValidate = typesToValidate.Pop();
+                if (validatedTypes.Contains(modelToValidate))
+                {
+                    continue;
+                }
+                validatedTypes.Add(modelToValidate);
+
+                var sequence = modelToValidate as SequenceType;
+                var dictionary = modelToValidate as DictionaryType;
+                var composite = modelToValidate as CompositeType;
+                if (sequence != null)
+                {
+                    typesToValidate.Push(sequence.ElementType);
+                }
+                else if (dictionary != null)
+                {
+                    typesToValidate.Push(dictionary.ValueType);
+                } 
+                else if (composite != null)
+                {
+                    if (composite.ShouldValidate())
+                    {
+                        return true;
+                    }
+                    typesToValidate.Push(composite.BaseModelType);
+                }
             }
 
-            if (composite != null)
+            return false;
+        }
+
+        private static bool ShouldValidate(this IType model)
+        {
+            if (model == null)
             {
-                return composite.BaseModelType.ShouldValidateChain() || 
-                    composite.ShouldValidate();
+                return false;
+            }
+
+            var typesToValidate = new Stack<IType>();
+            typesToValidate.Push(model);
+            var validatedTypes = new HashSet<IType>();
+            while (typesToValidate.Count > 0)
+            {
+                IType modelToValidate = typesToValidate.Pop();
+                if (validatedTypes.Contains(modelToValidate))
+                {
+                    continue;
+                }
+                validatedTypes.Add(modelToValidate);
+
+                var sequence = modelToValidate as SequenceType;
+                var dictionary = modelToValidate as DictionaryType;
+                var composite = modelToValidate as CompositeType;
+                if (sequence != null)
+                {
+                    typesToValidate.Push(sequence.ElementType);
+                } 
+                else if (dictionary != null)
+                {
+                    typesToValidate.Push(dictionary.ValueType);
+                } 
+                else if (composite != null)
+                {
+                    composite.Properties
+                        .Where(p => p.Type is CompositeType)
+                        .ForEach(cp => typesToValidate.Push(cp.Type));
+
+                    if (composite.Properties.Any(p => p.IsRequired))
+                    {
+                        return true;
+                    }
+                }
             }
 
             return false;
@@ -182,8 +215,12 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
 
         public static string CheckNull(string valueReference, string executionBlock)
         {
-            return string.Format(CultureInfo.InvariantCulture, 
-                "if ({0} != null)\r\n{{\r\n    {1}\r\n}}", valueReference, executionBlock);
+            var sb = new IndentedStringBuilder();
+            sb.AppendLine("if ({0} != null)", valueReference)
+                .AppendLine("{").Indent()
+                    .AppendLine(executionBlock).Outdent()
+                .AppendLine("}");
+            return sb.ToString();
         }
 
         /// <summary>
@@ -214,12 +251,12 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
                 var innerValidation = sequence.ElementType.ValidateType(scope, elementVar);
                 if (!string.IsNullOrEmpty(innerValidation))
                 {
-                    var sequenceBuilder = string.Format(CultureInfo.InvariantCulture, 
-                        "foreach ( var {0} in {1})\r\n{{\r\n", elementVar,
-                        valueReference);
-                    sequenceBuilder += string.Format(CultureInfo.InvariantCulture, 
-                        "    {0}\r\n}}", innerValidation);
-                    return CheckNull(valueReference, sequenceBuilder);
+                    var sb = new IndentedStringBuilder();
+                    sb.AppendLine("foreach (var {0} in {1})", elementVar, valueReference)
+                        .AppendLine("{").Indent()
+                            .AppendLine(innerValidation).Outdent()
+                        .AppendLine("}");
+                    return CheckNull(valueReference, sb.ToString());
                 }
             }
             else if (dictionary != null && dictionary.ShouldValidateChain())
@@ -228,14 +265,16 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
                 var innerValidation = dictionary.ValueType.ValidateType(scope, valueVar);
                 if (!string.IsNullOrEmpty(innerValidation))
                 {
-                    var sequenceBuilder = string.Format(CultureInfo.InvariantCulture, 
-                        "if ( {0} != null)\r\n{{\r\n", valueReference);
-                    sequenceBuilder += string.Format(CultureInfo.InvariantCulture, 
-                        "    foreach ( var {0} in {1}.Values)\r\n    {{\r\n", valueVar,
-                        valueReference);
-                    sequenceBuilder += string.Format(CultureInfo.InvariantCulture, 
-                        "        {0}\r\n    }}\r\n}}", innerValidation);
-                    return CheckNull(valueReference, sequenceBuilder);
+                    var sb = new IndentedStringBuilder();
+                    sb.AppendLine("if ({0} != null)", valueReference)
+                        .AppendLine("{").Indent()
+                            .AppendLine("foreach (var {0} in {1}.Values)",valueVar,valueReference)
+                            .AppendLine("{").Indent()
+                                .AppendLine(innerValidation).Outdent()
+                            .AppendLine("}").Outdent()
+                        .AppendLine("}");
+
+                    return CheckNull(valueReference, sb.ToString());
                 }
             }
 
