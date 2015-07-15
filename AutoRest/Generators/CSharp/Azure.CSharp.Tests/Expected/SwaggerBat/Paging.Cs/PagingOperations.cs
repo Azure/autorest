@@ -41,7 +41,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<ProductResult>> GetSinglePagesWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Page<Product>>> GetSinglePagesWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -111,14 +111,14 @@ namespace Fixtures.Azure.SwaggerBatPaging
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<ProductResult>();
+            var result = new AzureOperationResponse<Page<Product>>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<ProductResult>(responseContent, this.Client.DeserializationSettings);
+                result.Body = JsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
             {
@@ -136,7 +136,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<ProductResult>> GetMultiplePagesWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Page<Product>>> GetMultiplePagesWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -206,14 +206,14 @@ namespace Fixtures.Azure.SwaggerBatPaging
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<ProductResult>();
+            var result = new AzureOperationResponse<Page<Product>>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<ProductResult>(responseContent, this.Client.DeserializationSettings);
+                result.Body = JsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
             {
@@ -232,7 +232,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<ProductResult>> GetMultiplePagesRetryFirstWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Page<Product>>> GetMultiplePagesRetryFirstWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -302,14 +302,14 @@ namespace Fixtures.Azure.SwaggerBatPaging
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<ProductResult>();
+            var result = new AzureOperationResponse<Page<Product>>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<ProductResult>(responseContent, this.Client.DeserializationSettings);
+                result.Body = JsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
             {
@@ -329,7 +329,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<ProductResult>> GetMultiplePagesRetrySecondWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Page<Product>>> GetMultiplePagesRetrySecondWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -399,14 +399,14 @@ namespace Fixtures.Azure.SwaggerBatPaging
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<ProductResult>();
+            var result = new AzureOperationResponse<Page<Product>>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<ProductResult>(responseContent, this.Client.DeserializationSettings);
+                result.Body = JsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
             {
@@ -424,7 +424,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<ProductResult>> GetSinglePagesFailureWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Page<Product>>> GetSinglePagesFailureWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -494,14 +494,14 @@ namespace Fixtures.Azure.SwaggerBatPaging
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<ProductResult>();
+            var result = new AzureOperationResponse<Page<Product>>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<ProductResult>(responseContent, this.Client.DeserializationSettings);
+                result.Body = JsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
             {
@@ -519,7 +519,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<ProductResult>> GetMultiplePagesFailureWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Page<Product>>> GetMultiplePagesFailureWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -589,14 +589,14 @@ namespace Fixtures.Azure.SwaggerBatPaging
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<ProductResult>();
+            var result = new AzureOperationResponse<Page<Product>>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<ProductResult>(responseContent, this.Client.DeserializationSettings);
+                result.Body = JsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
             {
@@ -614,7 +614,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<ProductResult>> GetMultiplePagesFailureUriWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Page<Product>>> GetMultiplePagesFailureUriWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -684,14 +684,14 @@ namespace Fixtures.Azure.SwaggerBatPaging
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<ProductResult>();
+            var result = new AzureOperationResponse<Page<Product>>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<ProductResult>(responseContent, this.Client.DeserializationSettings);
+                result.Body = JsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
             {
@@ -712,7 +712,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<ProductResult>> GetSinglePagesNextWithHttpMessagesAsync(string nextLink, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Page<Product>>> GetSinglePagesNextWithHttpMessagesAsync(string nextLink, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (nextLink == null)
             {
@@ -787,14 +787,14 @@ namespace Fixtures.Azure.SwaggerBatPaging
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<ProductResult>();
+            var result = new AzureOperationResponse<Page<Product>>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<ProductResult>(responseContent, this.Client.DeserializationSettings);
+                result.Body = JsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
             {
@@ -815,7 +815,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<ProductResult>> GetMultiplePagesNextWithHttpMessagesAsync(string nextLink, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Page<Product>>> GetMultiplePagesNextWithHttpMessagesAsync(string nextLink, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (nextLink == null)
             {
@@ -890,14 +890,14 @@ namespace Fixtures.Azure.SwaggerBatPaging
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<ProductResult>();
+            var result = new AzureOperationResponse<Page<Product>>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<ProductResult>(responseContent, this.Client.DeserializationSettings);
+                result.Body = JsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
             {
@@ -919,7 +919,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<ProductResult>> GetMultiplePagesRetryFirstNextWithHttpMessagesAsync(string nextLink, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Page<Product>>> GetMultiplePagesRetryFirstNextWithHttpMessagesAsync(string nextLink, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (nextLink == null)
             {
@@ -994,14 +994,14 @@ namespace Fixtures.Azure.SwaggerBatPaging
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<ProductResult>();
+            var result = new AzureOperationResponse<Page<Product>>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<ProductResult>(responseContent, this.Client.DeserializationSettings);
+                result.Body = JsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
             {
@@ -1024,7 +1024,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<ProductResult>> GetMultiplePagesRetrySecondNextWithHttpMessagesAsync(string nextLink, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Page<Product>>> GetMultiplePagesRetrySecondNextWithHttpMessagesAsync(string nextLink, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (nextLink == null)
             {
@@ -1099,14 +1099,14 @@ namespace Fixtures.Azure.SwaggerBatPaging
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<ProductResult>();
+            var result = new AzureOperationResponse<Page<Product>>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<ProductResult>(responseContent, this.Client.DeserializationSettings);
+                result.Body = JsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
             {
@@ -1127,7 +1127,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<ProductResult>> GetSinglePagesFailureNextWithHttpMessagesAsync(string nextLink, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Page<Product>>> GetSinglePagesFailureNextWithHttpMessagesAsync(string nextLink, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (nextLink == null)
             {
@@ -1202,14 +1202,14 @@ namespace Fixtures.Azure.SwaggerBatPaging
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<ProductResult>();
+            var result = new AzureOperationResponse<Page<Product>>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<ProductResult>(responseContent, this.Client.DeserializationSettings);
+                result.Body = JsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
             {
@@ -1230,7 +1230,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<ProductResult>> GetMultiplePagesFailureNextWithHttpMessagesAsync(string nextLink, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Page<Product>>> GetMultiplePagesFailureNextWithHttpMessagesAsync(string nextLink, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (nextLink == null)
             {
@@ -1305,14 +1305,14 @@ namespace Fixtures.Azure.SwaggerBatPaging
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<ProductResult>();
+            var result = new AzureOperationResponse<Page<Product>>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<ProductResult>(responseContent, this.Client.DeserializationSettings);
+                result.Body = JsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
             {
@@ -1333,7 +1333,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<ProductResult>> GetMultiplePagesFailureUriNextWithHttpMessagesAsync(string nextLink, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Page<Product>>> GetMultiplePagesFailureUriNextWithHttpMessagesAsync(string nextLink, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (nextLink == null)
             {
@@ -1408,14 +1408,14 @@ namespace Fixtures.Azure.SwaggerBatPaging
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<ProductResult>();
+            var result = new AzureOperationResponse<Page<Product>>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<ProductResult>(responseContent, this.Client.DeserializationSettings);
+                result.Body = JsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
             {

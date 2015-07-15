@@ -12,7 +12,7 @@ namespace Microsoft.Azure
     /// </summary>
     /// <typeparam name="T">Type of the page content items</typeparam>
     [JsonObject]
-    public class PageCollection<T> : IEnumerable<T>
+    public class Page<T> : IEnumerable<T>
     {
         [JsonProperty("nextLink")]
         private string NextLink { get; set; }
@@ -20,11 +20,8 @@ namespace Microsoft.Azure
         [JsonProperty("@odata.nextLink")]
         private string NextOdataLink { get; set; }
 
-        /// <summary>
-        /// Gets the page items collection.
-        /// </summary>
         [JsonProperty("value")]
-        public IList<T> Items { get; private set; }
+        private IList<T> Items { get; set; }
 
         /// <summary>
         /// Gets the link to the next page.

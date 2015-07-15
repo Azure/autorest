@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Linq;
 using System.Collections.Generic;
 using Microsoft.Rest.Serialization;
 using Newtonsoft.Json;
@@ -51,9 +52,9 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             };
             deserializeSettings.Converters.Add(new ResourceJsonConverter());
             deserializeSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<Product>("dType"));
-            var deserializedProduct = JsonConvert.DeserializeObject<PageCollection<Product>>(responseBody, deserializeSettings);
+            var deserializedProduct = JsonConvert.DeserializeObject<Page<Product>>(responseBody, deserializeSettings);
             
-            Assert.Equal(2, deserializedProduct.Items.Count);
+            Assert.Equal(2, deserializedProduct.Count());
             Assert.Equal("https://sdktestvault7826.vault.azure.net:443/keys?api-version=2015-06-01", deserializedProduct.NextPage);
         }
 
@@ -79,9 +80,9 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             };
             deserializeSettings.Converters.Add(new ResourceJsonConverter());
             deserializeSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<Product>("dType"));
-            var deserializedProduct = JsonConvert.DeserializeObject<PageCollection<Product>>(responseBody, deserializeSettings);
+            var deserializedProduct = JsonConvert.DeserializeObject<Page<Product>>(responseBody, deserializeSettings);
 
-            Assert.Equal(1, deserializedProduct.Items.Count);
+            Assert.Equal(1, deserializedProduct.Count());
             Assert.Equal("https://ODataLink.vault.azure.net:443/keys?api-version=2015-06-01", deserializedProduct.NextPage);
         }
     }
