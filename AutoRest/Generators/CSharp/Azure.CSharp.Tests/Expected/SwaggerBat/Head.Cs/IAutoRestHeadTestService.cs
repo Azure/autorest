@@ -36,6 +36,7 @@ namespace Fixtures.Azure.SwaggerBatHead
         SubscriptionCloudCredentials Credentials { get; }
 
         /// <summary>
+        /// Gets or sets the preferred language for the response.
         /// </summary>
         string AcceptLanguage { get; }
 

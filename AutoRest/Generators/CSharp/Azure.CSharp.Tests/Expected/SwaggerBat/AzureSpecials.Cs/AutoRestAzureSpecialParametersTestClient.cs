@@ -55,6 +55,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         public string ApiVersion { get; private set; }
 
         /// <summary>
+        /// Gets or sets the preferred language for the response.
         /// </summary>
         public string AcceptLanguage { get; private set; }
 

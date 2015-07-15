@@ -225,6 +225,7 @@ namespace Microsoft.Rest.Generator.Azure
                 acceptLanguage = new Property
                 {
                     Name = AcceptLanguage,
+                    Documentation = "Gets or sets the preferred language for the response.",
                     SerializedName = AcceptLanguage,
                     DefaultValue = "\"en-US\""
                 };
