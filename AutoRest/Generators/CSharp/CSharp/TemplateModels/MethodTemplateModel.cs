@@ -204,9 +204,20 @@ namespace Microsoft.Rest.Generator.CSharp
         }
 
         /// <summary>
-        /// Gets the expression for response body initialization 
+        /// Gets the expression for response body initialization.
         /// </summary>
         public virtual string InitializeResponseBody
+        {
+            get
+            {
+                return string.Empty;
+            }
+        }
+
+        /// <summary>
+        /// Gets the expression for default header setting. 
+        /// </summary>
+        public virtual string SetDefaultHeaders
         {
             get
             {

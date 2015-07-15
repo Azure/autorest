@@ -54,6 +54,7 @@ function AutoRestAzureSpecialParametersTestClient(credentials, subscriptionId, b
   if(!this.apiVersion) {
     this.apiVersion = '2015-07-01-preview';
   }
+  this.xMsClientRequestId = new operations.XMsClientRequestId(this);
   this.subscriptionInCredentials = new operations.SubscriptionInCredentials(this);
   this.subscriptionInMethod = new operations.SubscriptionInMethod(this);
   this.apiVersionDefault = new operations.ApiVersionDefault(this);

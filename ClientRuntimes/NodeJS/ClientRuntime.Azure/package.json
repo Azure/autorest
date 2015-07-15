@@ -21,6 +21,7 @@
   ],
   "dependencies": {
     "async": "0.2.7",
+    "uuid": "2.0.1",
     "ms-rest": "file:../ClientRuntime"
   },
   "devDependencies": {

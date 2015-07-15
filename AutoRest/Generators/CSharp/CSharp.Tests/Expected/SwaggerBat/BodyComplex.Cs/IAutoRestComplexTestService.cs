@@ -5,6 +5,7 @@ namespace Fixtures.SwaggerBatBodyComplex
     using System.Net.Http;
     using System.Threading;
     using System.Threading.Tasks;
+    using Newtonsoft.Json;
     using Microsoft.Rest;
     using Models;
 
@@ -17,6 +18,17 @@ namespace Fixtures.SwaggerBatBodyComplex
         /// The base URI of the service.
         /// </summary>
         Uri BaseUri { get; set; }
+
+        /// <summary>
+        /// Gets or sets json serialization settings.
+        /// </summary>
+        JsonSerializerSettings SerializationSettings { get; }
+
+        /// <summary>
+        /// Gets or sets json deserialization settings.
+        /// </summary>
+        JsonSerializerSettings DeserializationSettings { get; }        
+
 
         IBasicOperations BasicOperations { get; }
 
@@ -32,5 +44,5 @@ namespace Fixtures.SwaggerBatBodyComplex
 
         IPolymorphicrecursive Polymorphicrecursive { get; }
 
-        }
+    }
 }

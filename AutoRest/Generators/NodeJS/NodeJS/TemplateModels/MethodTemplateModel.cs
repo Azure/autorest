@@ -483,5 +483,16 @@ namespace Microsoft.Rest.Generator.NodeJS
             builder.AppendLine("{0} = {0}.replace(regex, '$1');", urlVariableName);
             return builder.ToString();
         }
+
+        /// <summary>
+        /// Gets the expression for default header setting. 
+        /// </summary>
+        public virtual string SetDefaultHeaders
+        {
+            get
+            {
+                return string.Empty;
+            }
+        }
     }
 }

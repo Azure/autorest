@@ -85,6 +85,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Expected\SwaggerBat\AzureSpecials.Cs\IXMsClientRequestIdOperations.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\AzureSpecials.Cs\XMsClientRequestIdOperations.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Expected\SwaggerBat\AzureSpecials.Cs\XMsClientRequestIdOperationsExtensions.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Expected\SwaggerBat\Lro.Cs\ILROsCustomHeaderOperations.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>

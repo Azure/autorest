@@ -7,4 +7,6 @@ exports.SubscriptionCredentials = require('./subscriptionCredentials');
 exports.Resource = require('./resource');
 exports.CloudError = require('./cloudError');
 
+exports.generateUuid = require('./utils').generateUuid;
+
 exports = module.exports;
