@@ -45,6 +45,9 @@ function AutoRestLongRunningOperationTestService(credentials, baseUri, options) 
   }
   this.credentials = credentials;
 
+  if(!this.acceptLanguage) {
+    this.acceptLanguage = 'en-US';
+  }
   this.lROs = new operations.LROs(this);
   this.dONOTCALLs = new operations.DONOTCALLs(this);
   this.lRORetrys = new operations.LRORetrys(this);

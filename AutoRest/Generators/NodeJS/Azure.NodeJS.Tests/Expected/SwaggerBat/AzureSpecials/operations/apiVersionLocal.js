@@ -54,6 +54,9 @@ ApiVersionLocal.prototype.getMethodLocalValid = function (apiVersion, options, c
     if (apiVersion !== null && apiVersion !== undefined && typeof apiVersion !== 'string') {
       throw new Error('apiVersion must be of type string.');
     }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
   } catch (error) {
     return callback(error);
   }
@@ -77,6 +80,9 @@ ApiVersionLocal.prototype.getMethodLocalValid = function (apiVersion, options, c
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -150,6 +156,9 @@ ApiVersionLocal.prototype.getMethodLocalNull = function (apiVersion, options, ca
     if (apiVersion !== null && apiVersion !== undefined && typeof apiVersion !== 'string') {
       throw new Error('apiVersion must be of type string.');
     }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
   } catch (error) {
     return callback(error);
   }
@@ -175,6 +184,9 @@ ApiVersionLocal.prototype.getMethodLocalNull = function (apiVersion, options, ca
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -251,6 +263,9 @@ ApiVersionLocal.prototype.getPathLocalValid = function (apiVersion, options, cal
     if (apiVersion !== null && apiVersion !== undefined && typeof apiVersion !== 'string') {
       throw new Error('apiVersion must be of type string.');
     }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
   } catch (error) {
     return callback(error);
   }
@@ -274,6 +289,9 @@ ApiVersionLocal.prototype.getPathLocalValid = function (apiVersion, options, cal
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -350,6 +368,9 @@ ApiVersionLocal.prototype.getSwaggerLocalValid = function (apiVersion, options, 
     if (apiVersion !== null && apiVersion !== undefined && typeof apiVersion !== 'string') {
       throw new Error('apiVersion must be of type string.');
     }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
   } catch (error) {
     return callback(error);
   }
@@ -373,6 +394,9 @@ ApiVersionLocal.prototype.getSwaggerLocalValid = function (apiVersion, options, 
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {

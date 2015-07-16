@@ -45,6 +45,9 @@ function AutoRestPagingTestService(credentials, baseUri, options) {
   }
   this.credentials = credentials;
 
+  if(!this.acceptLanguage) {
+    this.acceptLanguage = 'en-US';
+  }
   this.paging = new operations.Paging(this);
   this._models = models;
 }

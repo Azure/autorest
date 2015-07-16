@@ -23,7 +23,8 @@ namespace Microsoft.Rest.Generator.Azure
         public const string PageableExtension = "x-ms-pageable";
         public const string ExternalExtension = "x-ms-external";
         public const string ODataExtension = "x-ms-odata";
-        public const string ApiVersion = "ApiVersion";
+        public const string ApiVersion = "api-version";
+        public const string AcceptLanguage = "accept-language";
         private const string ResourceType = "Resource";
         private const string SubResourceType = "SubResource";
         private const string ResourceProperties = "Properties";
@@ -208,13 +209,38 @@ namespace Microsoft.Rest.Generator.Azure
                 throw new ArgumentNullException("serviceClient");
             }
 
-            var apiVersion = serviceClient.Properties.FirstOrDefault(p => p.Name == "api-version");
+            var apiVersion = serviceClient.Properties
+                .FirstOrDefault(p => ApiVersion.Equals(p.SerializedName, StringComparison.OrdinalIgnoreCase));
             if (apiVersion != null)
             {
                 apiVersion.DefaultValue = "\"" + serviceClient.ApiVersion + "\"";
                 apiVersion.IsReadOnly = true;
                 apiVersion.IsRequired = false;
             }
+
+            var acceptLanguage = serviceClient.Properties
+                .FirstOrDefault(p => AcceptLanguage.Equals(p.SerializedName, StringComparison.OrdinalIgnoreCase));
+            if (acceptLanguage == null)
+            {
+                acceptLanguage = new Property
+                {
+                    Name = AcceptLanguage,
+                    Documentation = "Gets or sets the preferred language for the response.",
+                    SerializedName = AcceptLanguage,
+                    DefaultValue = "\"en-US\""
+                };
+                serviceClient.Properties.Add(acceptLanguage);
+            }
+            acceptLanguage.IsReadOnly = false;
+            acceptLanguage.IsRequired = false;
+            acceptLanguage.Type = PrimaryType.String;
+            serviceClient.Methods
+                .Where(m => !m.Parameters.Any(p => AcceptLanguage.Equals(p.SerializedName, StringComparison.OrdinalIgnoreCase)))
+                .ForEach(m2 => m2.Parameters.Add(new Parameter
+                    {
+                        ClientProperty = acceptLanguage,
+                        Location = ParameterLocation.Header
+                    }.LoadFrom(acceptLanguage)));
 
             serviceClient.Properties.Insert(0, new Property
             {

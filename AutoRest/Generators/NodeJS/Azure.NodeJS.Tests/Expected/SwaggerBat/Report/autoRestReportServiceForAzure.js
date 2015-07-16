@@ -44,6 +44,9 @@ function AutoRestReportServiceForAzure(credentials, baseUri, options) {
   }
   this.credentials = credentials;
 
+  if(!this.acceptLanguage) {
+    this.acceptLanguage = 'en-US';
+  }
   this._models = models;
 }
 
@@ -69,6 +72,14 @@ AutoRestReportServiceForAzure.prototype.getReport = function (options, callback)
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.acceptLanguage !== null && this.acceptLanguage !== undefined && typeof this.acceptLanguage !== 'string') {
+      throw new Error('this.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.baseUri + 
@@ -88,6 +99,9 @@ AutoRestReportServiceForAzure.prototype.getReport = function (options, callback)
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {

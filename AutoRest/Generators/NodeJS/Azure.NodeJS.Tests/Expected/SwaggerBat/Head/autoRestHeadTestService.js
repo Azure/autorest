@@ -45,6 +45,9 @@ function AutoRestHeadTestService(credentials, baseUri, options) {
   }
   this.credentials = credentials;
 
+  if(!this.acceptLanguage) {
+    this.acceptLanguage = 'en-US';
+  }
   this.httpSuccess = new operations.HttpSuccess(this);
   this._models = models;
 }

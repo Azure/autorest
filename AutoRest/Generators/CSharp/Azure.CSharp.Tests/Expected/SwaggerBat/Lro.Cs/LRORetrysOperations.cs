@@ -101,6 +101,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            if (this.Client.AcceptLanguage != null)
+            {
+                if (httpRequest.Headers.Contains("accept-language"))
+                {
+                    httpRequest.Headers.Remove("accept-language");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("accept-language", this.Client.AcceptLanguage);
+            }
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)
@@ -212,6 +220,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            if (this.Client.AcceptLanguage != null)
+            {
+                if (httpRequest.Headers.Contains("accept-language"))
+                {
+                    httpRequest.Headers.Remove("accept-language");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("accept-language", this.Client.AcceptLanguage);
+            }
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)
@@ -344,6 +360,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            if (this.Client.AcceptLanguage != null)
+            {
+                if (httpRequest.Headers.Contains("accept-language"))
+                {
+                    httpRequest.Headers.Remove("accept-language");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("accept-language", this.Client.AcceptLanguage);
+            }
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)
@@ -451,6 +475,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            if (this.Client.AcceptLanguage != null)
+            {
+                if (httpRequest.Headers.Contains("accept-language"))
+                {
+                    httpRequest.Headers.Remove("accept-language");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("accept-language", this.Client.AcceptLanguage);
+            }
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)
@@ -574,6 +606,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            if (this.Client.AcceptLanguage != null)
+            {
+                if (httpRequest.Headers.Contains("accept-language"))
+                {
+                    httpRequest.Headers.Remove("accept-language");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("accept-language", this.Client.AcceptLanguage);
+            }
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)
@@ -701,6 +741,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            if (this.Client.AcceptLanguage != null)
+            {
+                if (httpRequest.Headers.Contains("accept-language"))
+                {
+                    httpRequest.Headers.Remove("accept-language");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("accept-language", this.Client.AcceptLanguage);
+            }
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)
@@ -816,6 +864,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            if (this.Client.AcceptLanguage != null)
+            {
+                if (httpRequest.Headers.Contains("accept-language"))
+                {
+                    httpRequest.Headers.Remove("accept-language");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("accept-language", this.Client.AcceptLanguage);
+            }
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)
@@ -938,6 +994,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            if (this.Client.AcceptLanguage != null)
+            {
+                if (httpRequest.Headers.Contains("accept-language"))
+                {
+                    httpRequest.Headers.Remove("accept-language");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("accept-language", this.Client.AcceptLanguage);
+            }
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)
@@ -1066,6 +1130,14 @@ namespace Fixtures.Azure.SwaggerBatLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            if (this.Client.AcceptLanguage != null)
+            {
+                if (httpRequest.Headers.Contains("accept-language"))
+                {
+                    httpRequest.Headers.Remove("accept-language");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("accept-language", this.Client.AcceptLanguage);
+            }
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)

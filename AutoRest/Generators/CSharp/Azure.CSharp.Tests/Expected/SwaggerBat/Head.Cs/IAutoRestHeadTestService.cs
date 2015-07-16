@@ -36,6 +36,11 @@ namespace Fixtures.Azure.SwaggerBatHead
         SubscriptionCloudCredentials Credentials { get; }
 
         /// <summary>
+        /// Gets or sets the preferred language for the response.
+        /// </summary>
+        string AcceptLanguage { get; set; }
+
+        /// <summary>
         /// The retry timeout for Long Running Operations.
         /// </summary>
         int? LongRunningOperationRetryTimeout { get; set; }
