@@ -20,10 +20,10 @@ namespace Fixtures.SwaggerBatUrl
         /// true boolean value
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> GetBooleanTrueWithHttpMessagesAsync(bool? boolQuery = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -33,10 +33,10 @@ namespace Fixtures.SwaggerBatUrl
         /// false boolean value
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> GetBooleanFalseWithHttpMessagesAsync(bool? boolQuery = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -46,10 +46,10 @@ namespace Fixtures.SwaggerBatUrl
         /// null boolean value
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> GetBooleanNullWithHttpMessagesAsync(bool? boolQuery = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -59,10 +59,10 @@ namespace Fixtures.SwaggerBatUrl
         /// '1000000' integer value
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> GetIntOneMillionWithHttpMessagesAsync(int? intQuery = default(int?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -72,10 +72,10 @@ namespace Fixtures.SwaggerBatUrl
         /// '-1000000' integer value
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> GetIntNegativeOneMillionWithHttpMessagesAsync(int? intQuery = default(int?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -85,10 +85,10 @@ namespace Fixtures.SwaggerBatUrl
         /// null integer value
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> GetIntNullWithHttpMessagesAsync(int? intQuery = default(int?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -98,10 +98,10 @@ namespace Fixtures.SwaggerBatUrl
         /// '10000000000' 64 bit integer value
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> GetTenBillionWithHttpMessagesAsync(long? longQuery = default(long?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -111,10 +111,10 @@ namespace Fixtures.SwaggerBatUrl
         /// '-10000000000' 64 bit integer value
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> GetNegativeTenBillionWithHttpMessagesAsync(long? longQuery = default(long?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -124,10 +124,10 @@ namespace Fixtures.SwaggerBatUrl
         /// null 64 bit integer value
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> GetLongNullWithHttpMessagesAsync(long? longQuery = default(long?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -137,10 +137,10 @@ namespace Fixtures.SwaggerBatUrl
         /// '1.034E+20'numeric value
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> FloatScientificPositiveWithHttpMessagesAsync(double? floatQuery = default(double?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -150,10 +150,10 @@ namespace Fixtures.SwaggerBatUrl
         /// '-1.034E-20'numeric value
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> FloatScientificNegativeWithHttpMessagesAsync(double? floatQuery = default(double?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -163,10 +163,10 @@ namespace Fixtures.SwaggerBatUrl
         /// null numeric value
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> FloatNullWithHttpMessagesAsync(double? floatQuery = default(double?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -176,10 +176,10 @@ namespace Fixtures.SwaggerBatUrl
         /// '9999999.999'numeric value
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> DoubleDecimalPositiveWithHttpMessagesAsync(double? doubleQuery = default(double?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -189,10 +189,10 @@ namespace Fixtures.SwaggerBatUrl
         /// '-9999999.999'numeric value
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> DoubleDecimalNegativeWithHttpMessagesAsync(double? doubleQuery = default(double?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -202,10 +202,10 @@ namespace Fixtures.SwaggerBatUrl
         /// null numeric value
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> DoubleNullWithHttpMessagesAsync(double? doubleQuery = default(double?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -216,10 +216,10 @@ namespace Fixtures.SwaggerBatUrl
         /// parameter include: '啊齄丂狛狜隣郎隣兀﨩'
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> StringUnicodeWithHttpMessagesAsync(string stringQuery = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -231,10 +231,10 @@ namespace Fixtures.SwaggerBatUrl
         /// &amp;=+$,/?#[]end'
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> StringUrlEncodedWithHttpMessagesAsync(string stringQuery = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -244,10 +244,10 @@ namespace Fixtures.SwaggerBatUrl
         /// '' string value. Possible values for this parameter include: ''
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> StringEmptyWithHttpMessagesAsync(string stringQuery = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -257,10 +257,10 @@ namespace Fixtures.SwaggerBatUrl
         /// null string value
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> StringNullWithHttpMessagesAsync(string stringQuery = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -271,10 +271,10 @@ namespace Fixtures.SwaggerBatUrl
         /// include: 'red color', 'green color', 'blue color'
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> EnumValidWithHttpMessagesAsync(UriColor? enumQuery = default(UriColor?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -285,10 +285,10 @@ namespace Fixtures.SwaggerBatUrl
         /// 'red color', 'green color', 'blue color'
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> EnumNullWithHttpMessagesAsync(UriColor? enumQuery = default(UriColor?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -298,10 +298,10 @@ namespace Fixtures.SwaggerBatUrl
         /// '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> ByteMultiByteWithHttpMessagesAsync(byte[] byteQuery = default(byte[]), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -311,10 +311,10 @@ namespace Fixtures.SwaggerBatUrl
         /// '' as byte array
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> ByteEmptyWithHttpMessagesAsync(byte[] byteQuery = default(byte[]), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -324,10 +324,10 @@ namespace Fixtures.SwaggerBatUrl
         /// null as byte array (no query parameters in uri)
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> ByteNullWithHttpMessagesAsync(byte[] byteQuery = default(byte[]), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -337,10 +337,10 @@ namespace Fixtures.SwaggerBatUrl
         /// '2012-01-01' as date
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> DateValidWithHttpMessagesAsync(DateTime? dateQuery = default(DateTime?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -350,10 +350,10 @@ namespace Fixtures.SwaggerBatUrl
         /// null as date (no query parameters in uri)
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> DateNullWithHttpMessagesAsync(DateTime? dateQuery = default(DateTime?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -363,10 +363,10 @@ namespace Fixtures.SwaggerBatUrl
         /// '2012-01-01T01:01:01Z' as date-time
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> DateTimeValidWithHttpMessagesAsync(DateTime? dateTimeQuery = default(DateTime?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -376,10 +376,10 @@ namespace Fixtures.SwaggerBatUrl
         /// null as date-time (no query parameters)
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> DateTimeNullWithHttpMessagesAsync(DateTime? dateTimeQuery = default(DateTime?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -391,10 +391,10 @@ namespace Fixtures.SwaggerBatUrl
         /// &amp;=+$,/?#[]end' , null, ''] using the csv-array format
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> ArrayStringCsvValidWithHttpMessagesAsync(IList<string> arrayQuery = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -404,10 +404,10 @@ namespace Fixtures.SwaggerBatUrl
         /// a null array of string using the csv-array format
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> ArrayStringCsvNullWithHttpMessagesAsync(IList<string> arrayQuery = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -417,10 +417,10 @@ namespace Fixtures.SwaggerBatUrl
         /// an empty array [] of string using the csv-array format
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> ArrayStringCsvEmptyWithHttpMessagesAsync(IList<string> arrayQuery = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -432,10 +432,10 @@ namespace Fixtures.SwaggerBatUrl
         /// &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> ArrayStringSsvValidWithHttpMessagesAsync(IList<string> arrayQuery = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -447,10 +447,10 @@ namespace Fixtures.SwaggerBatUrl
         /// &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> ArrayStringTsvValidWithHttpMessagesAsync(IList<string> arrayQuery = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -462,10 +462,10 @@ namespace Fixtures.SwaggerBatUrl
         /// &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> ArrayStringPipesValidWithHttpMessagesAsync(IList<string> arrayQuery = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }

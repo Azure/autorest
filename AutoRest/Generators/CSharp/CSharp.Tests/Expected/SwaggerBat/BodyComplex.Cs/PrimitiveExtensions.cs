@@ -14,7 +14,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex types with integer properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IntWrapper GetInt(this IPrimitive operations)
             {
@@ -25,7 +25,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex types with integer properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -40,7 +40,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Put complex types with integer properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please put -1 and 2
@@ -54,7 +54,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Put complex types with integer properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please put -1 and 2
@@ -71,7 +71,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex types with long properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static LongWrapper GetLong(this IPrimitive operations)
             {
@@ -82,7 +82,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex types with long properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -97,7 +97,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Put complex types with long properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please put 1099511627775 and -999511627788
@@ -111,7 +111,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Put complex types with long properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please put 1099511627775 and -999511627788
@@ -128,7 +128,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex types with float properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static FloatWrapper GetFloat(this IPrimitive operations)
             {
@@ -139,7 +139,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex types with float properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -154,7 +154,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Put complex types with float properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please put 1.05 and -0.003
@@ -168,7 +168,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Put complex types with float properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please put 1.05 and -0.003
@@ -185,7 +185,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex types with double properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static DoubleWrapper GetDouble(this IPrimitive operations)
             {
@@ -196,7 +196,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex types with double properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -211,7 +211,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Put complex types with double properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please put 3e-100 and
@@ -226,7 +226,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Put complex types with double properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please put 3e-100 and
@@ -244,7 +244,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex types with bool properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static BooleanWrapper GetBool(this IPrimitive operations)
             {
@@ -255,7 +255,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex types with bool properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -270,7 +270,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Put complex types with bool properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please put true and false
@@ -284,7 +284,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Put complex types with bool properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please put true and false
@@ -301,7 +301,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex types with string properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static StringWrapper GetString(this IPrimitive operations)
             {
@@ -312,7 +312,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex types with string properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -327,7 +327,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Put complex types with string properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please put 'goodrequest', '', and null
@@ -341,7 +341,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Put complex types with string properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please put 'goodrequest', '', and null
@@ -358,7 +358,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex types with date properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static DateWrapper GetDate(this IPrimitive operations)
             {
@@ -369,7 +369,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex types with date properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -384,7 +384,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Put complex types with date properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please put '0001-01-01' and '2016-02-29'
@@ -398,7 +398,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Put complex types with date properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please put '0001-01-01' and '2016-02-29'
@@ -415,7 +415,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex types with datetime properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static DatetimeWrapper GetDateTime(this IPrimitive operations)
             {
@@ -426,7 +426,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex types with datetime properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -441,7 +441,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Put complex types with datetime properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
@@ -455,7 +455,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Put complex types with datetime properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
@@ -472,7 +472,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex types with byte properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static ByteWrapper GetByte(this IPrimitive operations)
             {
@@ -483,7 +483,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex types with byte properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -498,7 +498,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Put complex types with byte properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
@@ -512,7 +512,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Put complex types with byte properties
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)

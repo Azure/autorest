@@ -35,10 +35,10 @@ namespace Fixtures.SwaggerBatUrl
         /// parameter
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> GetAllWithValuesWithHttpMessagesAsync(string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -62,10 +62,10 @@ namespace Fixtures.SwaggerBatUrl
         /// parameter
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> GetGlobalQueryNullWithHttpMessagesAsync(string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -88,10 +88,10 @@ namespace Fixtures.SwaggerBatUrl
         /// parameter
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> GetGlobalAndLocalQueryNullWithHttpMessagesAsync(string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -114,10 +114,10 @@ namespace Fixtures.SwaggerBatUrl
         /// should contain value null
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> GetLocalPathItemQueryNullWithHttpMessagesAsync(string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }

@@ -14,7 +14,7 @@ namespace Fixtures.SwaggerBatBodyByte
             /// Get null byte value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static byte[] GetNull(this IByteModel operations)
             {
@@ -25,7 +25,7 @@ namespace Fixtures.SwaggerBatBodyByte
             /// Get null byte value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -40,7 +40,7 @@ namespace Fixtures.SwaggerBatBodyByte
             /// Get empty byte value ''
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static byte[] GetEmpty(this IByteModel operations)
             {
@@ -51,7 +51,7 @@ namespace Fixtures.SwaggerBatBodyByte
             /// Get empty byte value ''
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -66,7 +66,7 @@ namespace Fixtures.SwaggerBatBodyByte
             /// Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static byte[] GetNonAscii(this IByteModel operations)
             {
@@ -77,7 +77,7 @@ namespace Fixtures.SwaggerBatBodyByte
             /// Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -92,7 +92,7 @@ namespace Fixtures.SwaggerBatBodyByte
             /// Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='byteBody'>
             /// Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
@@ -106,7 +106,7 @@ namespace Fixtures.SwaggerBatBodyByte
             /// Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='byteBody'>
             /// Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
@@ -123,7 +123,7 @@ namespace Fixtures.SwaggerBatBodyByte
             /// Get invalid byte value ':::SWAGGER::::'
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static byte[] GetInvalid(this IByteModel operations)
             {
@@ -134,7 +134,7 @@ namespace Fixtures.SwaggerBatBodyByte
             /// Get invalid byte value ':::SWAGGER::::'
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.

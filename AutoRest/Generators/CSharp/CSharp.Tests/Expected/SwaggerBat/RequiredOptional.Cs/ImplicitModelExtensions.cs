@@ -14,7 +14,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// Test implicitly required path parameter
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='pathParameter'>
             /// </param>
@@ -27,7 +27,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// Test implicitly required path parameter
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='pathParameter'>
             /// </param>
@@ -44,7 +44,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// Test implicitly optional query parameter
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='queryParameter'>
             /// </param>
@@ -57,7 +57,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// Test implicitly optional query parameter
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='queryParameter'>
             /// </param>
@@ -73,7 +73,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// Test implicitly optional header parameter
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='queryParameter'>
             /// </param>
@@ -86,7 +86,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// Test implicitly optional header parameter
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='queryParameter'>
             /// </param>
@@ -102,7 +102,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// Test implicitly optional body parameter
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -115,7 +115,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// Test implicitly optional body parameter
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -131,7 +131,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// Test implicitly required path parameter
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Error GetRequiredGlobalPath(this IImplicitModel operations)
             {
@@ -142,7 +142,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// Test implicitly required path parameter
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -157,7 +157,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// Test implicitly required query parameter
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Error GetRequiredGlobalQuery(this IImplicitModel operations)
             {
@@ -168,7 +168,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// Test implicitly required query parameter
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -183,7 +183,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// Test implicitly optional query parameter
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Error GetOptionalGlobalQuery(this IImplicitModel operations)
             {
@@ -194,7 +194,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// Test implicitly optional query parameter
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.

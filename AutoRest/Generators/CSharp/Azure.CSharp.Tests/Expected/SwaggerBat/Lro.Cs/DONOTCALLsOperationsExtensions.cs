@@ -16,7 +16,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Succeeded’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Product GetProvisioning202Accepted200Succeeded(this IDONOTCALLsOperations operations)
             {
@@ -28,7 +28,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Succeeded’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -44,7 +44,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Failed’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Product GetProvisioning202Deleting200Failed(this IDONOTCALLsOperations operations)
             {
@@ -56,7 +56,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Failed’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -72,7 +72,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Canceled’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Product GetProvisioning202Deleting200canceled(this IDONOTCALLsOperations operations)
             {
@@ -84,7 +84,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Canceled’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -100,7 +100,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// header
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void GetDelete202Retry200(this IDONOTCALLsOperations operations)
             {
@@ -112,7 +112,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// header
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -127,7 +127,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// header
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void Get202NoRetry204(this IDONOTCALLsOperations operations)
             {
@@ -139,7 +139,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// header
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -154,7 +154,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Client should return with success from long-running operation
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Product Post202Retry200Polling(this IDONOTCALLsOperations operations)
             {
@@ -166,7 +166,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Client should return with success from long-running operation
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -182,7 +182,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// body.  Client should return with success from long-running operation
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void Post202NoRetry204Polling(this IDONOTCALLsOperations operations)
             {
@@ -194,7 +194,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// body.  Client should return with success from long-running operation
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -209,7 +209,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Succeeded’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Product GetRetryProvisioning202Accepted200Succeeded(this IDONOTCALLsOperations operations)
             {
@@ -221,7 +221,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Succeeded’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -237,7 +237,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// no location header
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void GetRetry202Retry200(this IDONOTCALLsOperations operations)
             {
@@ -249,7 +249,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// no location header
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -265,7 +265,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// operation
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Product PostRetry202Retry200Polling(this IDONOTCALLsOperations operations)
             {
@@ -278,7 +278,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// operation
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -293,7 +293,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// DO NOT CALL THIS METHOD. For completion only
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void GetNonRetry400(this IDONOTCALLsOperations operations)
             {
@@ -304,7 +304,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// DO NOT CALL THIS METHOD. For completion only
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -318,7 +318,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running put request poller, service returns a 400 with an error body
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void GetRetry202NonRetry400(this IDONOTCALLsOperations operations)
             {
@@ -329,7 +329,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running put request poller, service returns a 400 with an error body
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -345,7 +345,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// operation
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Product PostRetry202Retry400Polling(this IDONOTCALLsOperations operations)
             {
@@ -358,7 +358,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// operation
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -373,7 +373,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running post request poller, service returns a 400 with an error body
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Product PostRetry202NonRetry400Polling(this IDONOTCALLsOperations operations)
             {
@@ -384,7 +384,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running post request poller, service returns a 400 with an error body
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -400,7 +400,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Client should return with success from long-running operation
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Product Post202Retry200PollingCustomHeader(this IDONOTCALLsOperations operations)
             {
@@ -412,7 +412,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Client should return with success from long-running operation
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.

@@ -14,7 +14,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// Get null datetime value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static DateTime? GetNull(this IDatetime operations)
             {
@@ -25,7 +25,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// Get null datetime value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -40,7 +40,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// Get invalid datetime value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static DateTime? GetInvalid(this IDatetime operations)
             {
@@ -51,7 +51,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// Get invalid datetime value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -66,7 +66,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// Get overflow datetime value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static DateTime? GetOverflow(this IDatetime operations)
             {
@@ -77,7 +77,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// Get overflow datetime value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -92,7 +92,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// Get underflow datetime value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static DateTime? GetUnderflow(this IDatetime operations)
             {
@@ -103,7 +103,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// Get underflow datetime value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -118,7 +118,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// Put max datetime value 9999-12-31T23:59:59.9999999Z
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='datetimeBody'>
             /// </param>
@@ -131,7 +131,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// Put max datetime value 9999-12-31T23:59:59.9999999Z
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='datetimeBody'>
             /// </param>
@@ -147,7 +147,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// Get max datetime value 9999-12-31t23:59:59.9999999z
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static DateTime? GetUtcLowercaseMaxDateTime(this IDatetime operations)
             {
@@ -158,7 +158,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// Get max datetime value 9999-12-31t23:59:59.9999999z
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -173,7 +173,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// Get max datetime value 9999-12-31T23:59:59.9999999Z
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static DateTime? GetUtcUppercaseMaxDateTime(this IDatetime operations)
             {
@@ -184,7 +184,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// Get max datetime value 9999-12-31T23:59:59.9999999Z
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -200,7 +200,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// 9999-12-31t23:59:59.9999999+14:00
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='datetimeBody'>
             /// </param>
@@ -214,7 +214,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// 9999-12-31t23:59:59.9999999+14:00
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='datetimeBody'>
             /// </param>
@@ -231,7 +231,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// 9999-12-31t23:59:59.9999999+14:00
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static DateTime? GetLocalPositiveOffsetLowercaseMaxDateTime(this IDatetime operations)
             {
@@ -243,7 +243,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// 9999-12-31t23:59:59.9999999+14:00
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -259,7 +259,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// 9999-12-31T23:59:59.9999999+14:00
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static DateTime? GetLocalPositiveOffsetUppercaseMaxDateTime(this IDatetime operations)
             {
@@ -271,7 +271,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// 9999-12-31T23:59:59.9999999+14:00
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -287,7 +287,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// 9999-12-31t23:59:59.9999999-14:00
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='datetimeBody'>
             /// </param>
@@ -301,7 +301,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// 9999-12-31t23:59:59.9999999-14:00
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='datetimeBody'>
             /// </param>
@@ -318,7 +318,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// 9999-12-31T23:59:59.9999999-14:00
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static DateTime? GetLocalNegativeOffsetUppercaseMaxDateTime(this IDatetime operations)
             {
@@ -330,7 +330,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// 9999-12-31T23:59:59.9999999-14:00
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -346,7 +346,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// 9999-12-31t23:59:59.9999999-14:00
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static DateTime? GetLocalNegativeOffsetLowercaseMaxDateTime(this IDatetime operations)
             {
@@ -358,7 +358,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// 9999-12-31t23:59:59.9999999-14:00
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -373,7 +373,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// Put min datetime value 0001-01-01T00:00:00Z
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='datetimeBody'>
             /// </param>
@@ -386,7 +386,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// Put min datetime value 0001-01-01T00:00:00Z
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='datetimeBody'>
             /// </param>
@@ -402,7 +402,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// Get min datetime value 0001-01-01T00:00:00Z
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static DateTime? GetUtcMinDateTime(this IDatetime operations)
             {
@@ -413,7 +413,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// Get min datetime value 0001-01-01T00:00:00Z
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -428,7 +428,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// Put min datetime value 0001-01-01T00:00:00+14:00
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='datetimeBody'>
             /// </param>
@@ -441,7 +441,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// Put min datetime value 0001-01-01T00:00:00+14:00
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='datetimeBody'>
             /// </param>
@@ -457,7 +457,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// Get min datetime value 0001-01-01T00:00:00+14:00
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static DateTime? GetLocalPositiveOffsetMinDateTime(this IDatetime operations)
             {
@@ -468,7 +468,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// Get min datetime value 0001-01-01T00:00:00+14:00
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -483,7 +483,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// Put min datetime value 0001-01-01T00:00:00-14:00
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='datetimeBody'>
             /// </param>
@@ -496,7 +496,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// Put min datetime value 0001-01-01T00:00:00-14:00
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='datetimeBody'>
             /// </param>
@@ -512,7 +512,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// Get min datetime value 0001-01-01T00:00:00-14:00
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static DateTime? GetLocalNegativeOffsetMinDateTime(this IDatetime operations)
             {
@@ -523,7 +523,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
             /// Get min datetime value 0001-01-01T00:00:00-14:00
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.

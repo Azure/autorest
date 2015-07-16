@@ -18,10 +18,10 @@ namespace Fixtures.SwaggerBatBodyString
         /// 'green-color', 'blue_color'.
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse<Colors?>> GetNotExpandableWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -33,10 +33,10 @@ namespace Fixtures.SwaggerBatBodyString
         /// 'green-color', 'blue_color'
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> PutNotExpandableWithHttpMessagesAsync(Colors? stringBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }

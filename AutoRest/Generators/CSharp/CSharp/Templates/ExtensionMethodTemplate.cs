@@ -58,7 +58,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line default
 #line hidden
             WriteLiteral("\r\n/// </summary>\r\n/// <param name=\'operations\'>\r\n/// The operations group for thi" +
-"s extension method\r\n/// </param>\r\n");
+"s extension method.\r\n/// </param>\r\n");
 #line 15 "ExtensionMethodTemplate.cshtml"
 foreach (var parameter in Model.LocalParameters)
 {
@@ -189,7 +189,7 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line default
 #line hidden
             WriteLiteral("\r\n/// </summary>\r\n/// <param name=\'operations\'>\r\n/// The operations group for thi" +
-"s extension method\r\n/// </param>\r\n");
+"s extension method.\r\n/// </param>\r\n");
 #line 39 "ExtensionMethodTemplate.cshtml"
 foreach (var parameter in Model.LocalParameters)
 {

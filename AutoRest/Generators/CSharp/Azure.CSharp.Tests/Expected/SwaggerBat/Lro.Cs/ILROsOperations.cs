@@ -23,10 +23,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> Put200SucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -38,10 +38,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> BeginPut200SucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -50,10 +50,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// ProvisioningState=’Succeeded’.
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> Get200SucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -65,10 +65,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> Put200SucceededNoStateWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -80,10 +80,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> BeginPut200SucceededNoStateWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -92,10 +92,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// ProvisioningState=’Succeeded’.
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> Get200SucceededNoStateWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -108,10 +108,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> Put202Retry200WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -124,10 +124,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> BeginPut202Retry200WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -136,10 +136,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// ProvisioningState=’Succeeded’.
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> GetPut202Retry200WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -152,10 +152,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> Put201CreatingSucceeded200WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -168,10 +168,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> BeginPut201CreatingSucceeded200WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -179,10 +179,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// ProvisioningState=’Succeeded’
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> Get201CreatingSucceeded200PollingWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -195,10 +195,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> Put200UpdatingSucceeded204WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -211,10 +211,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> BeginPut200UpdatingSucceeded204WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -222,10 +222,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// 200
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> Get200CreatingSucceeded200PollWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -238,10 +238,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> Put201CreatingFailed200WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -254,10 +254,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> BeginPut201CreatingFailed200WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -265,10 +265,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// ProvisioningState=’Succeeded’
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> Get201CreatingFailed200PollingWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -281,10 +281,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> Put200Acceptedcanceled200WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -297,10 +297,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> BeginPut200Acceptedcanceled200WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -308,10 +308,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// 200
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> Get200Acceptedcanceled200PollWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -323,10 +323,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> PutNoHeaderInRetryWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -338,10 +338,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> BeginPutNoHeaderInRetryWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -349,10 +349,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// method should not be invoked
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> GetPutNoHeaderInRetryWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -365,10 +365,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> PutAsyncRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -381,10 +381,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> BeginPutAsyncRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -394,10 +394,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Azure-AsyncOperation header for operation status
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> GetAsyncRetrySucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -410,10 +410,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> PutAsyncNoRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -426,10 +426,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> BeginPutAsyncNoRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -439,10 +439,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Azure-AsyncOperation header for operation status
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> GetAsyncNoRetrySucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -455,10 +455,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> PutAsyncRetryFailedWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -471,10 +471,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> BeginPutAsyncRetryFailedWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -484,10 +484,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Azure-AsyncOperation header for operation status
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> GetAsyncRetryFailedWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -500,10 +500,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> PutAsyncNoRetrycanceledWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -516,10 +516,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> BeginPutAsyncNoRetrycanceledWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -529,10 +529,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Azure-AsyncOperation header for operation status
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> GetAsyncNoRetrycanceledWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -544,10 +544,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> PutAsyncNoHeaderInRetryWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -559,20 +559,20 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> BeginPutAsyncNoHeaderInRetryWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running get request for you to retrieve create resource
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> GetPutAsyncNoHeaderInRetryWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -582,10 +582,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// sku to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Sku>> PutNonResourceWithHttpMessagesAsync(Sku sku = default(Sku), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -595,20 +595,20 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// sku to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Sku>> BeginPutNonResourceWithHttpMessagesAsync(Sku sku = default(Sku), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running get request for you to retrieve created non resource
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Sku>> GetNonResourceWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -618,10 +618,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Sku to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Sku>> PutAsyncNonResourceWithHttpMessagesAsync(Sku sku = default(Sku), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -631,20 +631,20 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Sku to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Sku>> BeginPutAsyncNonResourceWithHttpMessagesAsync(Sku sku = default(Sku), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running get request for you to retrieve created non resource
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Sku>> GetAsyncNonResourceWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -654,10 +654,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Sub Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<SubProduct>> PutSubResourceWithHttpMessagesAsync(SubProduct product = default(SubProduct), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -667,20 +667,20 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Sub Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<SubProduct>> BeginPutSubResourceWithHttpMessagesAsync(SubProduct product = default(SubProduct), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running get request for you to retrieve created sub resource
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<SubProduct>> GetSubResourceWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -690,10 +690,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Sub Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<SubProduct>> PutAsyncSubResourceWithHttpMessagesAsync(SubProduct product = default(SubProduct), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -703,20 +703,20 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Sub Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<SubProduct>> BeginPutAsyncSubResourceWithHttpMessagesAsync(SubProduct product = default(SubProduct), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running get request for you to retrieve created sub resource
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<SubProduct>> GetAsyncSubResourceWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -726,10 +726,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// last poll returns a ‘200’ with ProvisioningState=’Succeeded’
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> DeleteProvisioning202Accepted200SucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -739,10 +739,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// last poll returns a ‘200’ with ProvisioningState=’Succeeded’
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> BeginDeleteProvisioning202Accepted200SucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -752,10 +752,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// last poll returns a ‘200’ with ProvisioningState=’Failed’
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> DeleteProvisioning202DeletingFailed200WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -765,10 +765,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// last poll returns a ‘200’ with ProvisioningState=’Failed’
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> BeginDeleteProvisioning202DeletingFailed200WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -778,10 +778,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// last poll returns a ‘200’ with ProvisioningState=’Canceled’
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> DeleteProvisioning202Deletingcanceled200WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -791,30 +791,30 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// last poll returns a ‘200’ with ProvisioningState=’Canceled’
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> BeginDeleteProvisioning202Deletingcanceled200WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running delete succeeds and returns right away
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse> Delete204SucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running delete succeeds and returns right away
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse> BeginDelete204SucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -823,10 +823,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// ‘200’ with ProvisioningState=’Succeeded’
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> Delete202Retry200WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -835,10 +835,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// ‘200’ with ProvisioningState=’Succeeded’
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> BeginDelete202Retry200WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -847,10 +847,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// ‘200’ with ProvisioningState=’Succeeded’
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> Delete202NoRetry204WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -859,10 +859,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// ‘200’ with ProvisioningState=’Succeeded’
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> BeginDelete202NoRetry204WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -871,10 +871,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// contain location header.
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse> DeleteNoHeaderInRetryWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -883,10 +883,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// contain location header.
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse> BeginDeleteNoHeaderInRetryWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -896,10 +896,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// header.
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse> DeleteAsyncNoHeaderInRetryWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -909,10 +909,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// header.
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse> BeginDeleteAsyncNoHeaderInRetryWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -921,10 +921,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// header for operation status
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse> DeleteAsyncRetrySucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -933,10 +933,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// header for operation status
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse> BeginDeleteAsyncRetrySucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -945,10 +945,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// header for operation status
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse> DeleteAsyncNoRetrySucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -957,10 +957,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// header for operation status
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse> BeginDeleteAsyncNoRetrySucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -969,10 +969,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// header for operation status
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse> DeleteAsyncRetryFailedWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -981,10 +981,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// header for operation status
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse> BeginDeleteAsyncRetryFailedWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -993,10 +993,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// header for operation status
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse> DeleteAsyncRetrycanceledWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -1005,10 +1005,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// header for operation status
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse> BeginDeleteAsyncRetrycanceledWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -1017,10 +1017,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// response body after success.
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Sku>> Post200WithPayloadWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -1029,10 +1029,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// response body after success.
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Sku>> BeginPost200WithPayloadWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -1044,10 +1044,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse> Post202Retry200WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -1059,10 +1059,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse> BeginPost202Retry200WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -1074,10 +1074,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> Post202NoRetry204WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -1089,10 +1089,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> BeginPost202NoRetry204WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -1105,10 +1105,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse> PostAsyncRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -1121,10 +1121,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse> BeginPostAsyncRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -1137,10 +1137,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse> PostAsyncNoRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -1153,10 +1153,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse> BeginPostAsyncNoRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -1169,10 +1169,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse> PostAsyncRetryFailedWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -1185,10 +1185,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse> BeginPostAsyncRetryFailedWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -1201,10 +1201,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse> PostAsyncRetrycanceledWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -1217,10 +1217,10 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse> BeginPostAsyncRetrycanceledWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }

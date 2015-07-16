@@ -17,10 +17,10 @@ namespace Fixtures.SwaggerBatBodyComplex
         /// Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse<Basic>> GetValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -30,40 +30,40 @@ namespace Fixtures.SwaggerBatBodyComplex
         /// Please put {id: 2, name: 'abc', color: 'Magenta'}
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> PutValidWithHttpMessagesAsync(Basic complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get a basic complex type that is invalid for the local strong type
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse<Basic>> GetInvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get a basic complex type that is empty
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse<Basic>> GetEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get a basic complex type whose properties are null
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse<Basic>> GetNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
@@ -71,10 +71,10 @@ namespace Fixtures.SwaggerBatBodyComplex
         /// response payload
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse<Basic>> GetNotProvidedWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }

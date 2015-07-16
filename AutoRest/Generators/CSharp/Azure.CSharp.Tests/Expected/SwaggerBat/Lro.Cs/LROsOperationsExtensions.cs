@@ -16,7 +16,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// with an entity that contains ProvisioningState=’Succeeded’.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -31,7 +31,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// with an entity that contains ProvisioningState=’Succeeded’.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -50,7 +50,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// with an entity that contains ProvisioningState=’Succeeded’.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -65,7 +65,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// with an entity that contains ProvisioningState=’Succeeded’.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -84,7 +84,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// with an entity that contains ProvisioningState=’Succeeded’.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Product Get200Succeeded(this ILROsOperations operations)
             {
@@ -96,7 +96,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// with an entity that contains ProvisioningState=’Succeeded’.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -112,7 +112,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// with an entity that does not contain ProvisioningState=’Succeeded’.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -127,7 +127,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// with an entity that does not contain ProvisioningState=’Succeeded’.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -146,7 +146,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// with an entity that does not contain ProvisioningState=’Succeeded’.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -161,7 +161,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// with an entity that does not contain ProvisioningState=’Succeeded’.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -180,7 +180,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// with an entity that contains ProvisioningState=’Succeeded’.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Product Get200SucceededNoState(this ILROsOperations operations)
             {
@@ -192,7 +192,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// with an entity that contains ProvisioningState=’Succeeded’.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -209,7 +209,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// and an entity that doesn't contains ProvisioningState
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -225,7 +225,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// and an entity that doesn't contains ProvisioningState
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -245,7 +245,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// and an entity that doesn't contains ProvisioningState
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -261,7 +261,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// and an entity that doesn't contains ProvisioningState
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -280,7 +280,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// with an entity that contains ProvisioningState=’Succeeded’.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Product GetPut202Retry200(this ILROsOperations operations)
             {
@@ -292,7 +292,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// with an entity that contains ProvisioningState=’Succeeded’.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -310,7 +310,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Succeeded’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -327,7 +327,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Succeeded’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -348,7 +348,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Succeeded’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -365,7 +365,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Succeeded’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -384,7 +384,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Succeeded’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Product Get201CreatingSucceeded200Polling(this ILROsOperations operations)
             {
@@ -396,7 +396,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Succeeded’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -414,7 +414,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Succeeded’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -431,7 +431,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Succeeded’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -452,7 +452,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Succeeded’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -469,7 +469,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Succeeded’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -487,7 +487,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Polling endpoinnt for Long running put request, service returns a 200
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Product Get200CreatingSucceeded200Poll(this ILROsOperations operations)
             {
@@ -498,7 +498,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Polling endpoinnt for Long running put request, service returns a 200
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -516,7 +516,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Failed’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -533,7 +533,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Failed’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -554,7 +554,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Failed’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -571,7 +571,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Failed’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -590,7 +590,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Succeeded’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Product Get201CreatingFailed200Polling(this ILROsOperations operations)
             {
@@ -602,7 +602,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Succeeded’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -620,7 +620,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Canceled’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -637,7 +637,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Canceled’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -658,7 +658,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Canceled’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -675,7 +675,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Canceled’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -693,7 +693,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Polling endpoinnt for Long running put request, service returns a 200
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Product Get200Acceptedcanceled200Poll(this ILROsOperations operations)
             {
@@ -704,7 +704,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Polling endpoinnt for Long running put request, service returns a 200
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -721,7 +721,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// location header.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -737,7 +737,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// location header.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -757,7 +757,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// location header.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -773,7 +773,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// location header.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -792,7 +792,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// should not be invoked
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Product GetPutNoHeaderInRetry(this ILROsOperations operations)
             {
@@ -804,7 +804,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// should not be invoked
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -821,7 +821,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -837,7 +837,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -857,7 +857,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -873,7 +873,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -893,7 +893,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Product GetAsyncRetrySucceeded(this ILROsOperations operations)
             {
@@ -906,7 +906,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -923,7 +923,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -939,7 +939,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -959,7 +959,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -975,7 +975,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -995,7 +995,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Product GetAsyncNoRetrySucceeded(this ILROsOperations operations)
             {
@@ -1008,7 +1008,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1025,7 +1025,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -1041,7 +1041,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -1061,7 +1061,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -1077,7 +1077,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -1097,7 +1097,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Product GetAsyncRetryFailed(this ILROsOperations operations)
             {
@@ -1110,7 +1110,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1127,7 +1127,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -1143,7 +1143,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -1163,7 +1163,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -1179,7 +1179,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -1199,7 +1199,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Product GetAsyncNoRetrycanceled(this ILROsOperations operations)
             {
@@ -1212,7 +1212,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1229,7 +1229,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// not contain Azure-AsyncOperation header.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -1245,7 +1245,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// not contain Azure-AsyncOperation header.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -1265,7 +1265,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// not contain Azure-AsyncOperation header.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -1281,7 +1281,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// not contain Azure-AsyncOperation header.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -1299,7 +1299,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running get request for you to retrieve create resource
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Product GetPutAsyncNoHeaderInRetry(this ILROsOperations operations)
             {
@@ -1310,7 +1310,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running get request for you to retrieve create resource
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1325,7 +1325,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running put request with non resource.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='sku'>
             /// sku to put
@@ -1339,7 +1339,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running put request with non resource.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='sku'>
             /// sku to put
@@ -1357,7 +1357,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running put request with non resource.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='sku'>
             /// sku to put
@@ -1371,7 +1371,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running put request with non resource.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='sku'>
             /// sku to put
@@ -1389,7 +1389,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running get request for you to retrieve created non resource
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Sku GetNonResource(this ILROsOperations operations)
             {
@@ -1400,7 +1400,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running get request for you to retrieve created non resource
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1415,7 +1415,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running put request with non resource.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='sku'>
             /// Sku to put
@@ -1429,7 +1429,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running put request with non resource.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='sku'>
             /// Sku to put
@@ -1447,7 +1447,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running put request with non resource.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='sku'>
             /// Sku to put
@@ -1461,7 +1461,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running put request with non resource.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='sku'>
             /// Sku to put
@@ -1479,7 +1479,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running get request for you to retrieve created non resource
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Sku GetAsyncNonResource(this ILROsOperations operations)
             {
@@ -1490,7 +1490,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running get request for you to retrieve created non resource
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1505,7 +1505,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running put request with sub resource.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Sub Product to put
@@ -1519,7 +1519,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running put request with sub resource.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Sub Product to put
@@ -1537,7 +1537,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running put request with sub resource.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Sub Product to put
@@ -1551,7 +1551,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running put request with sub resource.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Sub Product to put
@@ -1569,7 +1569,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running get request for you to retrieve created sub resource
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static SubProduct GetSubResource(this ILROsOperations operations)
             {
@@ -1580,7 +1580,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running get request for you to retrieve created sub resource
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1595,7 +1595,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running put request with sub resource.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Sub Product to put
@@ -1609,7 +1609,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running put request with sub resource.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Sub Product to put
@@ -1627,7 +1627,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running put request with sub resource.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Sub Product to put
@@ -1641,7 +1641,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running put request with sub resource.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Sub Product to put
@@ -1659,7 +1659,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running get request for you to retrieve created sub resource
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static SubProduct GetAsyncSubResource(this ILROsOperations operations)
             {
@@ -1670,7 +1670,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running get request for you to retrieve created sub resource
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1688,7 +1688,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Succeeded’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Product DeleteProvisioning202Accepted200Succeeded(this ILROsOperations operations)
             {
@@ -1702,7 +1702,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Succeeded’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1720,7 +1720,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Succeeded’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Product BeginDeleteProvisioning202Accepted200Succeeded(this ILROsOperations operations)
             {
@@ -1734,7 +1734,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Succeeded’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1752,7 +1752,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Failed’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Product DeleteProvisioning202DeletingFailed200(this ILROsOperations operations)
             {
@@ -1766,7 +1766,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Failed’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1784,7 +1784,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Failed’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Product BeginDeleteProvisioning202DeletingFailed200(this ILROsOperations operations)
             {
@@ -1798,7 +1798,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Failed’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1816,7 +1816,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Canceled’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Product DeleteProvisioning202Deletingcanceled200(this ILROsOperations operations)
             {
@@ -1830,7 +1830,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Canceled’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1848,7 +1848,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Canceled’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Product BeginDeleteProvisioning202Deletingcanceled200(this ILROsOperations operations)
             {
@@ -1862,7 +1862,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Canceled’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1877,7 +1877,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running delete succeeds and returns right away
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void Delete204Succeeded(this ILROsOperations operations)
             {
@@ -1888,7 +1888,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running delete succeeds and returns right away
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1902,7 +1902,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running delete succeeds and returns right away
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void BeginDelete204Succeeded(this ILROsOperations operations)
             {
@@ -1913,7 +1913,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// Long running delete succeeds and returns right away
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1929,7 +1929,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Succeeded’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Product Delete202Retry200(this ILROsOperations operations)
             {
@@ -1942,7 +1942,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Succeeded’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1959,7 +1959,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Succeeded’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Product BeginDelete202Retry200(this ILROsOperations operations)
             {
@@ -1972,7 +1972,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Succeeded’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1989,7 +1989,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Succeeded’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Product Delete202NoRetry204(this ILROsOperations operations)
             {
@@ -2002,7 +2002,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Succeeded’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -2019,7 +2019,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Succeeded’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Product BeginDelete202NoRetry204(this ILROsOperations operations)
             {
@@ -2032,7 +2032,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// ProvisioningState=’Succeeded’
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -2049,7 +2049,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// location header.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void DeleteNoHeaderInRetry(this ILROsOperations operations)
             {
@@ -2062,7 +2062,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// location header.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -2078,7 +2078,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// location header.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void BeginDeleteNoHeaderInRetry(this ILROsOperations operations)
             {
@@ -2091,7 +2091,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// location header.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -2107,7 +2107,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// not contain Azure-AsyncOperation header.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void DeleteAsyncNoHeaderInRetry(this ILROsOperations operations)
             {
@@ -2120,7 +2120,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// not contain Azure-AsyncOperation header.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -2136,7 +2136,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// not contain Azure-AsyncOperation header.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void BeginDeleteAsyncNoHeaderInRetry(this ILROsOperations operations)
             {
@@ -2149,7 +2149,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// not contain Azure-AsyncOperation header.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -2165,7 +2165,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void DeleteAsyncRetrySucceeded(this ILROsOperations operations)
             {
@@ -2178,7 +2178,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -2194,7 +2194,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void BeginDeleteAsyncRetrySucceeded(this ILROsOperations operations)
             {
@@ -2207,7 +2207,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -2223,7 +2223,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void DeleteAsyncNoRetrySucceeded(this ILROsOperations operations)
             {
@@ -2236,7 +2236,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -2252,7 +2252,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void BeginDeleteAsyncNoRetrySucceeded(this ILROsOperations operations)
             {
@@ -2265,7 +2265,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -2281,7 +2281,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void DeleteAsyncRetryFailed(this ILROsOperations operations)
             {
@@ -2294,7 +2294,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -2310,7 +2310,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void BeginDeleteAsyncRetryFailed(this ILROsOperations operations)
             {
@@ -2323,7 +2323,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -2339,7 +2339,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void DeleteAsyncRetrycanceled(this ILROsOperations operations)
             {
@@ -2352,7 +2352,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -2368,7 +2368,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void BeginDeleteAsyncRetrycanceled(this ILROsOperations operations)
             {
@@ -2381,7 +2381,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -2397,7 +2397,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// success.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Sku Post200WithPayload(this ILROsOperations operations)
             {
@@ -2410,7 +2410,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// success.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -2427,7 +2427,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// success.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Sku BeginPost200WithPayload(this ILROsOperations operations)
             {
@@ -2440,7 +2440,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// success.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -2457,7 +2457,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// response body after success
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -2473,7 +2473,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// response body after success
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -2492,7 +2492,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// response body after success
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -2508,7 +2508,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// response body after success
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -2526,7 +2526,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// with 'Location' header, 204 with noresponse body after success
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -2541,7 +2541,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// with 'Location' header, 204 with noresponse body after success
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -2560,7 +2560,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// with 'Location' header, 204 with noresponse body after success
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -2575,7 +2575,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// with 'Location' header, 204 with noresponse body after success
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -2595,7 +2595,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -2611,7 +2611,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -2630,7 +2630,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -2646,7 +2646,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -2665,7 +2665,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -2681,7 +2681,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -2700,7 +2700,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -2716,7 +2716,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -2735,7 +2735,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -2751,7 +2751,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -2770,7 +2770,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -2786,7 +2786,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -2805,7 +2805,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -2821,7 +2821,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -2840,7 +2840,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put
@@ -2856,7 +2856,7 @@ namespace Fixtures.Azure.SwaggerBatLro
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='product'>
             /// Product to put

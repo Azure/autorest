@@ -15,7 +15,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// Get method with unencoded path parameter with value 'path1/path2/path3'
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='unencodedPathParam'>
             /// Unencoded path parameter with value 'path1/path2/path3'
@@ -29,7 +29,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// Get method with unencoded path parameter with value 'path1/path2/path3'
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='unencodedPathParam'>
             /// Unencoded path parameter with value 'path1/path2/path3'
@@ -46,7 +46,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// Get method with unencoded path parameter with value 'path1/path2/path3'
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='unencodedPathParam'>
             /// Unencoded path parameter with value 'path1/path2/path3'
@@ -60,7 +60,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// Get method with unencoded path parameter with value 'path1/path2/path3'
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='unencodedPathParam'>
             /// Unencoded path parameter with value 'path1/path2/path3'
@@ -77,7 +77,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// Get method with unencoded path parameter with value 'path1/path2/path3'
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='unencodedPathParam'>
             /// An unencoded path parameter with value 'path1/path2/path3'. Possible
@@ -92,7 +92,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// Get method with unencoded path parameter with value 'path1/path2/path3'
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='unencodedPathParam'>
             /// An unencoded path parameter with value 'path1/path2/path3'. Possible
@@ -111,7 +111,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// 'value1&amp;q2=value2&amp;q3=value3'
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='q1'>
             /// Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
@@ -126,7 +126,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// 'value1&amp;q2=value2&amp;q3=value3'
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='q1'>
             /// Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
@@ -143,7 +143,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// Get method with unencoded query parameter with value null
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='q1'>
             /// Unencoded query parameter with value null
@@ -157,7 +157,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// Get method with unencoded query parameter with value null
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='q1'>
             /// Unencoded query parameter with value null
@@ -175,7 +175,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// 'value1&amp;q2=value2&amp;q3=value3'
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='q1'>
             /// Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
@@ -190,7 +190,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// 'value1&amp;q2=value2&amp;q3=value3'
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='q1'>
             /// Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
@@ -208,7 +208,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// 'value1&amp;q2=value2&amp;q3=value3'
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='q1'>
             /// An unencoded query parameter with value
@@ -225,7 +225,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// 'value1&amp;q2=value2&amp;q3=value3'
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='q1'>
             /// An unencoded query parameter with value

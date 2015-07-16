@@ -15,7 +15,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// should throw before the request is sent.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -29,7 +29,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// should throw before the request is sent.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -46,7 +46,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// Test explicitly optional integer. Please put null.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -59,7 +59,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// Test explicitly optional integer. Please put null.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -77,7 +77,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// sent.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -92,7 +92,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// sent.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -110,7 +110,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// 'value' = null.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -124,7 +124,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// 'value' = null.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -141,7 +141,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// =&gt; null and the client library should throw before the request is sent.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='headerParameter'>
             /// </param>
@@ -155,7 +155,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// =&gt; null and the client library should throw before the request is sent.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='headerParameter'>
             /// </param>
@@ -173,7 +173,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// =&gt; null.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='headerParameter'>
             /// </param>
@@ -187,7 +187,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// =&gt; null.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='headerParameter'>
             /// </param>
@@ -204,7 +204,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// should throw before the request is sent.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -218,7 +218,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// should throw before the request is sent.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -235,7 +235,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// Test explicitly optional string. Please put null.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -248,7 +248,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// Test explicitly optional string. Please put null.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -266,7 +266,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// sent.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -281,7 +281,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// sent.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -299,7 +299,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// 'value' = null.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -313,7 +313,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// 'value' = null.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -330,7 +330,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// =&gt; null and the client library should throw before the request is sent.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='headerParameter'>
             /// </param>
@@ -344,7 +344,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// =&gt; null and the client library should throw before the request is sent.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='headerParameter'>
             /// </param>
@@ -362,7 +362,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// =&gt; null.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -376,7 +376,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// =&gt; null.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -393,7 +393,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// library should throw before the request is sent.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -407,7 +407,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// library should throw before the request is sent.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -424,7 +424,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// Test explicitly optional complex object. Please put null.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -437,7 +437,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// Test explicitly optional complex object. Please put null.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -455,7 +455,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// request is sent.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -470,7 +470,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// request is sent.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -488,7 +488,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// with 'value' = null.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -502,7 +502,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// with 'value' = null.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -519,7 +519,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// should throw before the request is sent.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -533,7 +533,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// should throw before the request is sent.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -550,7 +550,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// Test explicitly optional array. Please put null.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -563,7 +563,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// Test explicitly optional array. Please put null.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -581,7 +581,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// sent.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -596,7 +596,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// sent.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -614,7 +614,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// 'value' = null.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -628,7 +628,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// 'value' = null.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
@@ -645,7 +645,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// =&gt; null and the client library should throw before the request is sent.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='headerParameter'>
             /// </param>
@@ -659,7 +659,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// =&gt; null and the client library should throw before the request is sent.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='headerParameter'>
             /// </param>
@@ -677,7 +677,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// =&gt; null.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='headerParameter'>
             /// </param>
@@ -691,7 +691,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
             /// =&gt; null.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='headerParameter'>
             /// </param>

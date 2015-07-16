@@ -24,10 +24,10 @@ else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.D
 @:/// </param>    
 }
 @:/// <param name='customHeaders'>
-@:/// Headers that will be added to request.
+@:/// The headers that will be added to request.
 @:/// </param>
 @:/// <param name='cancellationToken'>
-@:/// Cancellation token.
+@:/// The cancellation token.
 @:/// </param>
 <text>
 public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
@@ -52,10 +52,10 @@ else if (Model.HttpMethod == HttpMethod.Put || Model.HttpMethod == HttpMethod.Pa
 @:/// </param>    
 }
 @:/// <param name='customHeaders'>
-@:/// Headers that will be added to request.
+@:/// The headers that will be added to request.
 @:/// </param>    
 @:/// <param name='cancellationToken'>
-@:/// Cancellation token.
+@:/// The cancellation token.
 @:/// </param>
 <text>
 public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))

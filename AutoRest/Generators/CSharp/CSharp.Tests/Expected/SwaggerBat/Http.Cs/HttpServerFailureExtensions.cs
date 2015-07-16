@@ -14,7 +14,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 501 status code - should be represented in the client as an error
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Error Head501(this IHttpServerFailure operations)
             {
@@ -25,7 +25,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 501 status code - should be represented in the client as an error
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -40,7 +40,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 501 status code - should be represented in the client as an error
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Error Get501(this IHttpServerFailure operations)
             {
@@ -51,7 +51,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 501 status code - should be represented in the client as an error
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -66,7 +66,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 505 status code - should be represented in the client as an error
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -80,7 +80,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 505 status code - should be represented in the client as an error
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -98,7 +98,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 505 status code - should be represented in the client as an error
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -112,7 +112,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 505 status code - should be represented in the client as an error
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true

@@ -13,7 +13,7 @@ namespace Fixtures.MirrorPrimitives
             /// <summary>
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='responseCode'>
             /// The desired returned status code
@@ -29,7 +29,7 @@ namespace Fixtures.MirrorPrimitives
             /// <summary>
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='responseCode'>
             /// The desired returned status code
@@ -49,7 +49,7 @@ namespace Fixtures.MirrorPrimitives
             /// <summary>
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='responseCode'>
             /// The desired returned status code
@@ -65,7 +65,7 @@ namespace Fixtures.MirrorPrimitives
             /// <summary>
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='responseCode'>
             /// The desired returned status code
@@ -85,7 +85,7 @@ namespace Fixtures.MirrorPrimitives
             /// <summary>
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='responseCode'>
             /// The desired returned status code
@@ -101,7 +101,7 @@ namespace Fixtures.MirrorPrimitives
             /// <summary>
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='responseCode'>
             /// The desired returned status code
@@ -121,7 +121,7 @@ namespace Fixtures.MirrorPrimitives
             /// <summary>
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='responseCode'>
             /// The desired returned status code
@@ -137,7 +137,7 @@ namespace Fixtures.MirrorPrimitives
             /// <summary>
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='responseCode'>
             /// The desired returned status code

@@ -14,7 +14,7 @@ namespace Fixtures.MirrorSequences
             /// Creates a new pet in the store.  Duplicates are allowed
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='pets'>
             /// Pets to add to the store
@@ -28,7 +28,7 @@ namespace Fixtures.MirrorSequences
             /// Creates a new pet in the store.  Duplicates are allowed
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='pets'>
             /// Pets to add to the store
@@ -46,7 +46,7 @@ namespace Fixtures.MirrorSequences
             /// Adds new pet stylesin the store.  Duplicates are allowed
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='petStyle'>
             /// Pet style to add to the store
@@ -60,7 +60,7 @@ namespace Fixtures.MirrorSequences
             /// Adds new pet stylesin the store.  Duplicates are allowed
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='petStyle'>
             /// Pet style to add to the store
@@ -78,7 +78,7 @@ namespace Fixtures.MirrorSequences
             /// Updates new pet stylesin the store.  Duplicates are allowed
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='petStyle'>
             /// Pet style to add to the store
@@ -92,7 +92,7 @@ namespace Fixtures.MirrorSequences
             /// Updates new pet stylesin the store.  Duplicates are allowed
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='petStyle'>
             /// Pet style to add to the store

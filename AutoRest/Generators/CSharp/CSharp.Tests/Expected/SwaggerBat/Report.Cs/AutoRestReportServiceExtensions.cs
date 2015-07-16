@@ -14,7 +14,7 @@ namespace Fixtures.SwaggerBatReport
             /// Get test coverage report
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, int?> GetReport(this IAutoRestReportService operations)
             {
@@ -25,7 +25,7 @@ namespace Fixtures.SwaggerBatReport
             /// Get test coverage report
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.

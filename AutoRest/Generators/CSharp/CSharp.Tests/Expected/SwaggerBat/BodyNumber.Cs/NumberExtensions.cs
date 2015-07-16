@@ -14,7 +14,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// Get null Number value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static double? GetNull(this INumber operations)
             {
@@ -25,7 +25,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// Get null Number value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -40,7 +40,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// Get invalid float Number value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static double? GetInvalidFloat(this INumber operations)
             {
@@ -51,7 +51,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// Get invalid float Number value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -66,7 +66,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// Get invalid double Number value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static double? GetInvalidDouble(this INumber operations)
             {
@@ -77,7 +77,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// Get invalid double Number value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -92,7 +92,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// Put big float value 3.402823e+20
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='numberBody'>
             /// </param>
@@ -105,7 +105,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// Put big float value 3.402823e+20
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='numberBody'>
             /// </param>
@@ -121,7 +121,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// Get big float value 3.402823e+20
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static double? GetBigFloat(this INumber operations)
             {
@@ -132,7 +132,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// Get big float value 3.402823e+20
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -147,7 +147,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// Put big double value 2.5976931e+101
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='numberBody'>
             /// </param>
@@ -160,7 +160,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// Put big double value 2.5976931e+101
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='numberBody'>
             /// </param>
@@ -176,7 +176,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// Get big double value 2.5976931e+101
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static double? GetBigDouble(this INumber operations)
             {
@@ -187,7 +187,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// Get big double value 2.5976931e+101
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -202,7 +202,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// Put big double value 99999999.99
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='numberBody'>
             /// </param>
@@ -215,7 +215,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// Put big double value 99999999.99
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='numberBody'>
             /// </param>
@@ -231,7 +231,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// Get big double value 99999999.99
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static double? GetBigDoublePositiveDecimal(this INumber operations)
             {
@@ -242,7 +242,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// Get big double value 99999999.99
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -257,7 +257,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// Put big double value -99999999.99
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='numberBody'>
             /// </param>
@@ -270,7 +270,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// Put big double value -99999999.99
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='numberBody'>
             /// </param>
@@ -286,7 +286,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// Get big double value -99999999.99
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static double? GetBigDoubleNegativeDecimal(this INumber operations)
             {
@@ -297,7 +297,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// Get big double value -99999999.99
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -312,7 +312,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// Put small float value 3.402823e-20
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='numberBody'>
             /// </param>
@@ -325,7 +325,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// Put small float value 3.402823e-20
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='numberBody'>
             /// </param>
@@ -341,7 +341,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// Get big double value 3.402823e-20
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static double? GetSmallFloat(this INumber operations)
             {
@@ -352,7 +352,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// Get big double value 3.402823e-20
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -367,7 +367,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// Put small double value 2.5976931e-101
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='numberBody'>
             /// </param>
@@ -380,7 +380,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// Put small double value 2.5976931e-101
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='numberBody'>
             /// </param>
@@ -396,7 +396,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// Get big double value 2.5976931e-101
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static double? GetSmallDouble(this INumber operations)
             {
@@ -407,7 +407,7 @@ namespace Fixtures.SwaggerBatBodyNumber
             /// Get big double value 2.5976931e-101
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.

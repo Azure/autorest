@@ -14,7 +14,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get true Boolean value on path
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='boolQuery'>
             /// true boolean value
@@ -28,7 +28,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get true Boolean value on path
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='boolQuery'>
             /// true boolean value
@@ -45,7 +45,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get false Boolean value on path
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='boolQuery'>
             /// false boolean value
@@ -59,7 +59,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get false Boolean value on path
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='boolQuery'>
             /// false boolean value
@@ -76,7 +76,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get null Boolean value on query (query string should be absent)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='boolQuery'>
             /// null boolean value
@@ -90,7 +90,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get null Boolean value on query (query string should be absent)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='boolQuery'>
             /// null boolean value
@@ -107,7 +107,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '1000000' integer value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='intQuery'>
             /// '1000000' integer value
@@ -121,7 +121,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '1000000' integer value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='intQuery'>
             /// '1000000' integer value
@@ -138,7 +138,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '-1000000' integer value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='intQuery'>
             /// '-1000000' integer value
@@ -152,7 +152,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '-1000000' integer value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='intQuery'>
             /// '-1000000' integer value
@@ -169,7 +169,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get null integer value (no query parameter)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='intQuery'>
             /// null integer value
@@ -183,7 +183,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get null integer value (no query parameter)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='intQuery'>
             /// null integer value
@@ -200,7 +200,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '10000000000' 64 bit integer value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='longQuery'>
             /// '10000000000' 64 bit integer value
@@ -214,7 +214,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '10000000000' 64 bit integer value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='longQuery'>
             /// '10000000000' 64 bit integer value
@@ -231,7 +231,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '-10000000000' 64 bit integer value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='longQuery'>
             /// '-10000000000' 64 bit integer value
@@ -245,7 +245,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '-10000000000' 64 bit integer value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='longQuery'>
             /// '-10000000000' 64 bit integer value
@@ -262,7 +262,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get 'null 64 bit integer value (no query param in uri)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='longQuery'>
             /// null 64 bit integer value
@@ -276,7 +276,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get 'null 64 bit integer value (no query param in uri)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='longQuery'>
             /// null 64 bit integer value
@@ -293,7 +293,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '1.034E+20' numeric value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='floatQuery'>
             /// '1.034E+20'numeric value
@@ -307,7 +307,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '1.034E+20' numeric value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='floatQuery'>
             /// '1.034E+20'numeric value
@@ -324,7 +324,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '-1.034E-20' numeric value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='floatQuery'>
             /// '-1.034E-20'numeric value
@@ -338,7 +338,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '-1.034E-20' numeric value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='floatQuery'>
             /// '-1.034E-20'numeric value
@@ -355,7 +355,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get null numeric value (no query parameter)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='floatQuery'>
             /// null numeric value
@@ -369,7 +369,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get null numeric value (no query parameter)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='floatQuery'>
             /// null numeric value
@@ -386,7 +386,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '9999999.999' numeric value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='doubleQuery'>
             /// '9999999.999'numeric value
@@ -400,7 +400,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '9999999.999' numeric value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='doubleQuery'>
             /// '9999999.999'numeric value
@@ -417,7 +417,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '-9999999.999' numeric value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='doubleQuery'>
             /// '-9999999.999'numeric value
@@ -431,7 +431,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '-9999999.999' numeric value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='doubleQuery'>
             /// '-9999999.999'numeric value
@@ -448,7 +448,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get null numeric value (no query parameter)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='doubleQuery'>
             /// null numeric value
@@ -462,7 +462,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get null numeric value (no query parameter)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='doubleQuery'>
             /// null numeric value
@@ -479,7 +479,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='stringQuery'>
             /// '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter
@@ -494,7 +494,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='stringQuery'>
             /// '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter
@@ -512,7 +512,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get 'begin!*'();:@ &amp;=+$,/?#[]end
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='stringQuery'>
             /// 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible
@@ -527,7 +527,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get 'begin!*'();:@ &amp;=+$,/?#[]end
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='stringQuery'>
             /// 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible
@@ -545,7 +545,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get ''
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='stringQuery'>
             /// '' string value. Possible values for this parameter include: ''
@@ -559,7 +559,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get ''
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='stringQuery'>
             /// '' string value. Possible values for this parameter include: ''
@@ -576,7 +576,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get null (no query parameter in url)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='stringQuery'>
             /// null string value
@@ -590,7 +590,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get null (no query parameter in url)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='stringQuery'>
             /// null string value
@@ -607,7 +607,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get using uri with query parameter 'green color'
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='enumQuery'>
             /// 'green color' enum value. Possible values for this parameter include: 'red
@@ -622,7 +622,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get using uri with query parameter 'green color'
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='enumQuery'>
             /// 'green color' enum value. Possible values for this parameter include: 'red
@@ -640,7 +640,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get null (no query parameter in url)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='enumQuery'>
             /// null string value. Possible values for this parameter include: 'red
@@ -655,7 +655,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get null (no query parameter in url)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='enumQuery'>
             /// null string value. Possible values for this parameter include: 'red
@@ -673,7 +673,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='byteQuery'>
             /// '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
@@ -687,7 +687,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='byteQuery'>
             /// '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
@@ -704,7 +704,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '' as byte array
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='byteQuery'>
             /// '' as byte array
@@ -718,7 +718,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '' as byte array
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='byteQuery'>
             /// '' as byte array
@@ -735,7 +735,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get null as byte array (no query parameters in uri)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='byteQuery'>
             /// null as byte array (no query parameters in uri)
@@ -749,7 +749,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get null as byte array (no query parameters in uri)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='byteQuery'>
             /// null as byte array (no query parameters in uri)
@@ -766,7 +766,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '2012-01-01' as date
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='dateQuery'>
             /// '2012-01-01' as date
@@ -780,7 +780,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '2012-01-01' as date
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='dateQuery'>
             /// '2012-01-01' as date
@@ -797,7 +797,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get null as date - this should result in no query parameters in uri
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='dateQuery'>
             /// null as date (no query parameters in uri)
@@ -811,7 +811,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get null as date - this should result in no query parameters in uri
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='dateQuery'>
             /// null as date (no query parameters in uri)
@@ -828,7 +828,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '2012-01-01T01:01:01Z' as date-time
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='dateTimeQuery'>
             /// '2012-01-01T01:01:01Z' as date-time
@@ -842,7 +842,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '2012-01-01T01:01:01Z' as date-time
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='dateTimeQuery'>
             /// '2012-01-01T01:01:01Z' as date-time
@@ -859,7 +859,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get null as date-time, should result in no query parameters in uri
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='dateTimeQuery'>
             /// null as date-time (no query parameters)
@@ -873,7 +873,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get null as date-time, should result in no query parameters in uri
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='dateTimeQuery'>
             /// null as date-time (no query parameters)
@@ -891,7 +891,7 @@ namespace Fixtures.SwaggerBatUrl
             /// null, ''] using the csv-array format
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayQuery'>
             /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
@@ -907,7 +907,7 @@ namespace Fixtures.SwaggerBatUrl
             /// null, ''] using the csv-array format
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayQuery'>
             /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
@@ -925,7 +925,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get a null array of string using the csv-array format
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayQuery'>
             /// a null array of string using the csv-array format
@@ -939,7 +939,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get a null array of string using the csv-array format
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayQuery'>
             /// a null array of string using the csv-array format
@@ -956,7 +956,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get an empty array [] of string using the csv-array format
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayQuery'>
             /// an empty array [] of string using the csv-array format
@@ -970,7 +970,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get an empty array [] of string using the csv-array format
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayQuery'>
             /// an empty array [] of string using the csv-array format
@@ -988,7 +988,7 @@ namespace Fixtures.SwaggerBatUrl
             /// null, ''] using the ssv-array format
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayQuery'>
             /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
@@ -1004,7 +1004,7 @@ namespace Fixtures.SwaggerBatUrl
             /// null, ''] using the ssv-array format
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayQuery'>
             /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
@@ -1023,7 +1023,7 @@ namespace Fixtures.SwaggerBatUrl
             /// null, ''] using the tsv-array format
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayQuery'>
             /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
@@ -1039,7 +1039,7 @@ namespace Fixtures.SwaggerBatUrl
             /// null, ''] using the tsv-array format
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayQuery'>
             /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
@@ -1058,7 +1058,7 @@ namespace Fixtures.SwaggerBatUrl
             /// null, ''] using the pipes-array format
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayQuery'>
             /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
@@ -1074,7 +1074,7 @@ namespace Fixtures.SwaggerBatUrl
             /// null, ''] using the pipes-array format
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayQuery'>
             /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,

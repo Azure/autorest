@@ -17,7 +17,7 @@ namespace Fixtures.MirrorRecursiveTypes
             /// order.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='subscriptionId'>
             /// Subscription Id.
@@ -43,7 +43,7 @@ namespace Fixtures.MirrorRecursiveTypes
             /// order.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='subscriptionId'>
             /// Subscription Id.
