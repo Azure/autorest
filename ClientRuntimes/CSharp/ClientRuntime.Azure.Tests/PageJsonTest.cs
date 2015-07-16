@@ -55,7 +55,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             var deserializedProduct = JsonConvert.DeserializeObject<Page<Product>>(responseBody, deserializeSettings);
             
             Assert.Equal(2, deserializedProduct.Count());
-            Assert.Equal("https://sdktestvault7826.vault.azure.net:443/keys?api-version=2015-06-01", deserializedProduct.NextPage);
+            Assert.Equal("https://sdktestvault7826.vault.azure.net:443/keys?api-version=2015-06-01", deserializedProduct.NextPageLink);
         }
 
         [Fact]
@@ -83,7 +83,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             var deserializedProduct = JsonConvert.DeserializeObject<Page<Product>>(responseBody, deserializeSettings);
 
             Assert.Equal(1, deserializedProduct.Count());
-            Assert.Equal("https://ODataLink.vault.azure.net:443/keys?api-version=2015-06-01", deserializedProduct.NextPage);
+            Assert.Equal("https://ODataLink.vault.azure.net:443/keys?api-version=2015-06-01", deserializedProduct.NextPageLink);
         }
     }
 }
