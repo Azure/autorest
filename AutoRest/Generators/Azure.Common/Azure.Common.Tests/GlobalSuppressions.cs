@@ -32,3 +32,4 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", 
     Target = "Microsoft.Rest.Generator.Azure.Common.Tests.AzureServiceClientNormalizerTests.#ResourceIsFlattenedForConflictingResource()",
     Justification = "Test methods must not be static to allow suite-level fixtures")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "Microsoft.Rest.Generator.Azure.Common.Tests.AzureServiceClientNormalizerTests.#FlatteningTest()")]

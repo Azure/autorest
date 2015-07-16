@@ -46,7 +46,7 @@ namespace Microsoft.Rest.Generator.CSharp
                     var compositType = (CompositeType) method.Responses[responseStatus];
                     var sequenceType = compositType.Properties.Select(p => p.Type).FirstOrDefault(t => t is SequenceType) as SequenceType;
 
-                    // if the type is a wrapper over pageable response
+                    // if the type is a wrapper over page-able response
                     if(sequenceType != null &&
                        compositType.Properties.Count == 2 && 
                        compositType.Properties.Any(p => p.SerializedName.Equals("nextLink", StringComparison.OrdinalIgnoreCase)))
@@ -70,10 +70,7 @@ namespace Microsoft.Rest.Generator.CSharp
                 }
             }
 
-            foreach (var typeToRemove in convertedTypes.Keys.Cast<CompositeType>())
-            {
-                serviceClient.ModelTypes.Remove(typeToRemove);
-            }
+            AzureCodeGenerator.RemoveUnreferencedTypes(serviceClient, convertedTypes.Keys.Cast<CompositeType>().Select(t => t.Name));
         }
     }
 }

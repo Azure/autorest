@@ -10,6 +10,7 @@ using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger;
 using System.Globalization;
+using System.Collections;
 
 namespace Microsoft.Rest.Generator.Azure
 {
@@ -326,9 +327,43 @@ namespace Microsoft.Rest.Generator.Azure
                 }
             }
 
-            foreach (var typeName in typesToDelete)
+            AzureCodeGenerator.RemoveUnreferencedTypes(serviceClient, typesToDelete);
+        }
+
+        /// <summary>
+        /// Cleans all model types that are not used
+        /// </summary>
+        /// <param name="serviceClient"></param>
+        /// <param name="typeNames"></param>
+        public static void RemoveUnreferencedTypes(ServiceClient serviceClient, IEnumerable<string> typeNames)
+        {
+            if (serviceClient == null)
             {
-                serviceClient.ModelTypes.Remove(serviceClient.ModelTypes.First(t => t.Name == typeName));
+                throw new ArgumentNullException("serviceClient");
+            }
+
+            if (typeNames == null)
+            {
+                throw new ArgumentNullException("typeNames");
+            }
+
+            foreach (var typeName in typeNames)
+            {
+                var typeToDelete = serviceClient.ModelTypes.First(t => t.Name == typeName);
+
+                var isUsedInResponses = serviceClient.Methods.Any(m => m.Responses.Any(r => r.Value == typeToDelete));
+                var isUsedInParameters = serviceClient.Methods.Any(m => m.Parameters.Any(p => p.Type == typeToDelete));
+                var isBaseType = serviceClient.ModelTypes.Any(t => t.BaseModelType == typeToDelete);
+                var isUsedInProperties = serviceClient.ModelTypes.Any(t => t.Properties
+                                            .Any(p => p.Type == typeToDelete && 
+                                                 !"properties".Equals(p.SerializedName, StringComparison.OrdinalIgnoreCase)));
+                if (!isUsedInResponses &&
+                    !isUsedInParameters &&
+                    !isBaseType &&
+                    !isUsedInProperties)
+                {
+                    serviceClient.ModelTypes.Remove(typeToDelete);
+                }
             }
         }
 
