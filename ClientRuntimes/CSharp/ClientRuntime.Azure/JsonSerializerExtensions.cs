@@ -25,7 +25,7 @@ namespace Microsoft.Azure
             }
             JsonSerializer newSerializer = new JsonSerializer();
             var properties = typeof(JsonSerializer).GetTypeInfo().DeclaredProperties;
-            foreach (var property in properties.Where(p => p.SetMethod != null))
+            foreach (var property in properties.Where(p => p.SetMethod != null && !p.SetMethod.IsPrivate))
             {
                 property.SetValue(newSerializer, property.GetValue(serializer, null), null);
             }
