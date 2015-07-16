@@ -396,7 +396,7 @@ namespace Microsoft.Rest.Generator.Azure
                     newMethod.IsAbsoluteUrl = true;
                     var nextLinkParameter = new Parameter
                     {
-                        Name = "nextLink",
+                        Name = "nextPageLink",
                         SerializedName = "nextLink",
                         Type = PrimaryType.String,
                         Documentation = "NextLink from the previous successful call to List operation.",

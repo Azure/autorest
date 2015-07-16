@@ -441,7 +441,7 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
             Assert.Equal("listNext", serviceClient.Methods[2].Name);
             Assert.Equal(2, serviceClient.Methods[2].Parameters.Count);
             Assert.Equal("{nextLink}", serviceClient.Methods[2].Url);
-            Assert.Equal("nextLink", serviceClient.Methods[2].Parameters[0].Name);
+            Assert.Equal("nextPageLink", serviceClient.Methods[2].Parameters[0].Name);
             Assert.Equal("accept-language", serviceClient.Methods[2].Parameters[1].Name);
             Assert.Equal(true, serviceClient.Methods[2].IsAbsoluteUrl);
             Assert.Equal(false, serviceClient.Methods[1].IsAbsoluteUrl);

@@ -15,10 +15,22 @@ namespace Microsoft.Azure
     public class Page<T> : IEnumerable<T>
     {
         [JsonProperty("nextLink")]
-        private string NextLink { get; set; }
+        private string NextLink 
+        {
+            set
+            {
+                NextPageLink = value;
+            }
+        }
 
         [JsonProperty("@odata.nextLink")]
-        private string NextOdataLink { get; set; }
+        private string NextOdataLink 
+        { 
+            set
+            {
+                NextPageLink = value;
+            }
+        }
 
         [JsonProperty("value")]
         private IList<T> Items { get; set; }
@@ -26,18 +38,7 @@ namespace Microsoft.Azure
         /// <summary>
         /// Gets the link to the next page.
         /// </summary>
-        public string NextPage
-        {
-            get
-            {
-                if(NextLink != null)
-                {
-                    return NextLink;
-                }
-
-                return NextOdataLink;
-            }
-        }
+        public string NextPageLink { get; private set; }
 
         /// <summary>
         /// Returns an enumerator that iterates through the collection.
