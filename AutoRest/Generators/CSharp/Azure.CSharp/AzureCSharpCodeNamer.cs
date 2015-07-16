@@ -69,6 +69,11 @@ namespace Microsoft.Rest.Generator.CSharp
                     method.ReturnType = convertedTypes[method.ReturnType];
                 }
             }
+
+            foreach (var typeToRemove in convertedTypes.Keys.Cast<CompositeType>())
+            {
+                serviceClient.ModelTypes.Remove(typeToRemove);
+            }
         }
     }
 }
