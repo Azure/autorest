@@ -15,7 +15,7 @@ describe 'Azure Special properties behaviour' do
 
     credentials = ClientRuntimeAzure::TokenCloudCredentials.new(@validSubscription, @dummyToken)
     @client = AutoRestAzureSpecialParametersTestClient.new(credentials, @base_url)
-	@client.subscription_id = @validSubscription
+	  @client.subscription_id = @validSubscription
   end
 
   # Subscription Tests
@@ -58,9 +58,9 @@ describe 'Azure Special properties behaviour' do
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
   end
 
-  # it 'should throw an exception if no post parameter if ms-global false' do
-  #   expect { @client.subscription_in_method.post_method_local_null(nil).value! }.to raise_exception(ClientRuntimeAzure::ValidationException)
-  # end
+  it 'should throw an exception if no post parameter if ms-global false' do
+    expect { @client.subscription_in_method.post_method_local_null(nil).value! }.to raise_exception(ArgumentError)
+  end
 
   # ApiVersion Tests
   it 'should use get parameter from credentials if ms-global not provided' do
@@ -83,25 +83,25 @@ describe 'Azure Special properties behaviour' do
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
   end
 
-  # it 'should use get parameter from path for method parameter if ms-global false' do
-  #   result = @client.api_version_local.get_method_local_valid(@validApiVersion).value!
-  #   expect(result.response).to be_an_instance_of(Net::HTTPOK)
-  # end
+  it 'should use get parameter from path for method parameter if ms-global false' do
+    result = @client.api_version_local.get_method_local_valid(@validApiVersion).value!
+    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+  end
 
-  # it 'should successfully get nil value if ms-global false' do
-  #   result = @client.api_version_local.get_method_local_null(nil).value!.response
-  #   expect(result).to be_an_instance_of(Net::HTTPOK)
-  # end
+  it 'should successfully get nil value if ms-global false' do
+    result = @client.api_version_local.get_method_local_null(nil).value!
+    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+  end
 
-  # it 'should use get parameter from path for path parameter if ms-global false' do
-  #   result = @client.api_version_local.get_path_local_valid(@validApiVersion).value!.response
-  #   expect(result).to be_an_instance_of(Net::HTTPOK)
-  # end
+  it 'should use get parameter from path for path parameter if ms-global false' do
+    result = @client.api_version_local.get_path_local_valid(@validApiVersion).value!
+    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+  end
 
-  # it 'should use get parameter from path for referenced parameter if ms-global false' do
-  #   result = @client.api_version_local.get_swagger_local_valid(@validApiVersion).value!.response
-  #   expect(result).to be_an_instance_of(Net::HTTPOK)
-  # end
+  it 'should use get parameter from path for referenced parameter if ms-global false' do
+    result = @client.api_version_local.get_swagger_local_valid(@validApiVersion).value!
+    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+  end
 
   # URL Encoding Tests
   it 'should encode method parameters in path' do

@@ -15,7 +15,6 @@ module ClientRuntimeAzure
     #
     def initialize(credentials, options)
       super(credentials, options)
-      @api_version = '2015-05-01-preview'
     end
 
     #

@@ -76,11 +76,6 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             {
                 string variableName = pathParameter.Type.ToString(pathParameter.Name);
 
-                if (pathParameter.SerializedName.Equals("subscriptionId", StringComparison.OrdinalIgnoreCase))
-                {
-                    variableName = "@client.subscription_id";
-                }
-
                 string addPathParameterString = String.Format(CultureInfo.InvariantCulture, "{0}['{{{1}}}'] = CGI.escape({2})",
                     inputVariableName,
                     pathParameter.SerializedName,
@@ -116,20 +111,13 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
 
             foreach (var param in queryParametres)
             {
-                string name = param.Name;
-
-                if (param.SerializedName.Equals("api-version", StringComparison.OrdinalIgnoreCase))
-                {
-                    name = "@client.api_version";
-                }
-
                 if (param.Extensions.ContainsKey(AzureCodeGenerator.SkipUrlEncodingExtension))
                 {
-                    queryParamsList.Add(string.Format(CultureInfo.InvariantCulture, "properties['{0}'] = {1}", param.SerializedName, name));    
+                    queryParamsList.Add(string.Format(CultureInfo.InvariantCulture, "properties['{0}'] = {1} unless {1}.nil?", param.SerializedName, param.Name));    
                 }
                 else
                 {
-                    queryParamsList.Add(string.Format(CultureInfo.InvariantCulture, "properties['{0}'] = CGI.escape({1}.to_s)", param.SerializedName, name));
+                    queryParamsList.Add(string.Format(CultureInfo.InvariantCulture, "properties['{0}'] = CGI.escape({1}.to_s) unless {1}.nil?", param.SerializedName, param.Name));
                 }
             }
 
@@ -174,6 +162,20 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                 }
 
                 return base.InitializeResponseBody;
+            }
+        }
+
+        /// <summary>
+        /// Gets the expression for default header setting. 
+        /// </summary>
+        public override string SetDefaultHeaders
+        {
+            get
+            {
+                IndentedStringBuilder sb = new IndentedStringBuilder();
+                sb.AppendLine("http_request['x-ms-client-request-id'] = SecureRandom.uuid")
+                  .AppendLine(base.SetDefaultHeaders);
+                return sb.ToString();
             }
         }
 

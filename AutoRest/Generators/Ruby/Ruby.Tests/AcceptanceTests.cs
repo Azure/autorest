@@ -108,7 +108,7 @@ namespace Microsoft.Rest.Generator.Ruby.Tests
         }
 
         [Trait("Report", "true")]
-        [Fact]
+        [Fact(Skip = "quality bar isn't high enough")]
         public void EnsureTestCoverage()
         {
             Test("report_spec.rb", "report.json", "Report");

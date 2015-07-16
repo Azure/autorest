@@ -44,11 +44,6 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
-            //base.NormalizeClientModel(serviceClient);
-            //_namingFramework.NormalizeClientModel(serviceClient);
-            //_namingFramework.ResolveNameCollisions(serviceClient, Settings.Namespace,
-            //    Settings.Namespace + ".Models");
-
             Settings.AddCredentials = true;
             AzureCodeGenerator.UpdateHeadMethods(serviceClient);
             AzureCodeGenerator.ParseODataExtension(serviceClient);
@@ -56,7 +51,6 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             AzureCodeGenerator.AddLongRunningOperations(serviceClient);
             AzureCodeGenerator.AddAzureProperties(serviceClient);
             AzureCodeGenerator.SetDefaultResponses(serviceClient);
-            // NormalizeApiVersion(serviceClient);
             base.NormalizeClientModel(serviceClient);
         }
 

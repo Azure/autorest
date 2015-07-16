@@ -12,18 +12,14 @@
 @WrapComment("# ", string.Format("@return [{0}] Promise object which allows to get HTTP response.", "Concurrent::Promise"))
 #
 def @(Model.Name)(@(Model.MethodParameterDeclaration))
-  @foreach (var parameter in Model.LocalParameters)
+  @foreach (var parameter in Model.ParameterTemplateModels)
   {
-    if (parameter.IsRequired && parameter.Type.IsNullable())
+    if (parameter.IsRequired)
     {
-  @:# fail ArgumentError, '@parameter.Name is nil' if @(parameter.Name).nil?
+  @:fail ArgumentError, '@parameter.Name is nil' if @(parameter.Name).nil?
   @:
     }
   @:@(parameter.Type.ValidateType(Model.Scope, parameter.Name))
-  }
-  @if (Model.LocalParameters.Any(p => p.IsRequired))
-  {
-  @EmptyLine
   }
 
   # Construct URL
@@ -39,6 +35,7 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
   {
   @EmptyLine
   @:# Set Headers
+  @:@(Model.SetDefaultHeaders)
     foreach (var parameter in Model.Parameters.Where(p => p.Location == ParameterLocation.Header))
     {
         if (parameter.SerializedName.ToLower() == "Content-Type".ToLower())

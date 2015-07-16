@@ -245,11 +245,6 @@ namespace Microsoft.Rest.Generator.Ruby
             return builder.ToString();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="urlVariableName"></param>
-        /// <returns></returns>
         public virtual string RemoveDuplicateForwardSlashes(string urlVariableName)
         {
             var builder = new IndentedStringBuilder("  ");
@@ -260,6 +255,17 @@ namespace Microsoft.Rest.Generator.Ruby
             //builder.AppendLine("{0} = {0}.replace(regex, '$1');", urlVariableName);
             
             return builder.ToString();
+        }
+
+        /// <summary>
+        /// Gets the expression for default header setting. 
+        /// </summary>
+        public virtual string SetDefaultHeaders
+        {
+            get
+            {
+                return string.Empty;
+            }
         }
     }
 }
