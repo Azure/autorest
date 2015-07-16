@@ -75,7 +75,6 @@ require 'base64'
 require 'securerandom'
 require 'time'
 require 'timeliness'
-require 'duration'
 require 'concurrent'
 require 'client_runtime'";
         }

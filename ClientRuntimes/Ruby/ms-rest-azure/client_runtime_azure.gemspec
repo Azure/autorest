@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
     raise "RubyGems 2.0 or newer is required to protect against public gem pushes."
   end
 
-  spec.files         = Dir['**/*.rb']
+  spec.files         = 'git ls-files -z'.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = 'bin'
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
@@ -32,6 +32,5 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "json", "~> 1.8.3"
   spec.add_runtime_dependency "timeliness", "~> 0.3.7"
-  spec.add_runtime_dependency "duration", "~> 0.1.0"
   spec.add_runtime_dependency "concurrent-ruby-ext", "~> 0.8.0"
 end
