@@ -35,7 +35,7 @@ namespace Microsoft.Rest.Serialization
         /// <returns>True if the object being serialized is assignable from the base type. False otherwise.</returns>
         public override bool CanConvert(Type objectType)
         {
-            return typeof(T).IsAssignableFrom(objectType);
+            return typeof(T).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
         }
 
         /// <summary>
@@ -84,9 +84,9 @@ namespace Microsoft.Rest.Serialization
             }
 
             string typeName = value.GetType().Name;
-            if (value.GetType().GetCustomAttributes<JsonObjectAttribute>().Any())
+            if (value.GetType().GetTypeInfo().GetCustomAttributes<JsonObjectAttribute>().Any())
             {
-                typeName = value.GetType().GetCustomAttribute<JsonObjectAttribute>().Id;
+                typeName = value.GetType().GetTypeInfo().GetCustomAttribute<JsonObjectAttribute>().Id;
             }
 
             // Add discriminator field

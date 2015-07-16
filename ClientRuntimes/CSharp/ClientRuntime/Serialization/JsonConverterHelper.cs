@@ -82,27 +82,4 @@ namespace Microsoft.Rest.Serialization
             }
         }
     }
-
-#if !NET45
-    public static class AttributeExtensions
-    {
-        public static IEnumerable<T> GetCustomAttributes<T>(this MemberInfo memberInfo) where T : class
-        {
-            if (memberInfo == null)
-            {
-                return Enumerable.Empty<T>();
-            }
-            return memberInfo.GetCustomAttributes(typeof(T), true).Select(a => a as T);
-        }
-
-        public static T GetCustomAttribute<T>(this MemberInfo memberInfo) where T : class
-        {
-            if (memberInfo == null)
-            {
-                return null;
-            }
-            return memberInfo.GetCustomAttributes(typeof(T), true).First() as T;
-        }
-    }
-#endif
 }

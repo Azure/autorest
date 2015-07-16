@@ -27,7 +27,7 @@ namespace Microsoft.Rest.Serialization
 
             if (propertyInfo != null)
             {
-                jsonProperty.ShouldSerialize = t => propertyInfo.GetSetMethod() != null;
+                jsonProperty.ShouldSerialize = t => propertyInfo.SetMethod != null;
             }
 
             return jsonProperty;
