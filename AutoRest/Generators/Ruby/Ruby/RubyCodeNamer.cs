@@ -12,8 +12,14 @@ namespace Microsoft.Rest.Generator.Ruby
 {
     using System.Text.RegularExpressions;
 
+    /// <summary>
+    /// A class which keeps all naming related functionality.
+    /// </summary>
     public class RubyCodeNamer : CodeNamer
     {
+        /// <summary>
+        /// The set of already normalized types.
+        /// </summary>
         private readonly HashSet<IType> normalizedTypes;
 
         /// <summary>
@@ -62,12 +68,18 @@ namespace Microsoft.Rest.Generator.Ruby
             return RemoveInvalidCharacters(name).Replace('-', '_');
         }
 
+        /// <summary>
+        /// Returns the correct method name.
+        /// </summary>
+        /// <param name="name">The name of method.</param>
+        /// <returns>Corrected method name.</returns>
         public override string GetMethodName(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
                 return name;
             }
+
             return UnderscoreCase(RubyRemoveInvalidCharacters(GetEscapedReservedName(name, "Operation")));
         }
 
@@ -112,6 +124,11 @@ namespace Microsoft.Rest.Generator.Ruby
             }
         }
 
+        /// <summary>
+        /// Normalizes given type.
+        /// </summary>
+        /// <param name="type">Type to normalize.</param>
+        /// <returns>Normalized type.</returns>
         protected override IType NormalizeType(IType type)
         {
             if (type == null)
@@ -153,6 +170,11 @@ namespace Microsoft.Rest.Generator.Ruby
             throw new NotSupportedException(string.Format("Type {0} is not supported.", type.GetType()));
         }
 
+        /// <summary>
+        /// Normalizes composite type.
+        /// </summary>
+        /// <param name="compositeType">Type to normalize.</param>
+        /// <returns>Normalized type.</returns>
         private IType NormalizeCompositeType(CompositeType compositeType)
         {
             compositeType.Name = GetTypeName(compositeType.Name);
@@ -166,6 +188,11 @@ namespace Microsoft.Rest.Generator.Ruby
             return compositeType;
         }
 
+        /// <summary>
+        /// Normalizes enum type.
+        /// </summary>
+        /// <param name="enumType">The enum type.</param>
+        /// <returns>Normalized enum type.</returns>
         private IType NormalizeEnumType(EnumType enumType)
         {
             for (int i = 0; i < enumType.Values.Count; i++)
@@ -180,6 +207,11 @@ namespace Microsoft.Rest.Generator.Ruby
             return enumType;
         }
 
+        /// <summary>
+        /// Normalizes primary type.
+        /// </summary>
+        /// <param name="primaryType">Primary type to normalize.</param>
+        /// <returns>Normalized primary type.</returns>
         private IType NormalizePrimaryType(PrimaryType primaryType)
         {
             if (primaryType == PrimaryType.Boolean)
@@ -227,6 +259,11 @@ namespace Microsoft.Rest.Generator.Ruby
             return primaryType;
         }
 
+        /// <summary>
+        /// Normalizes sequence type.
+        /// </summary>
+        /// <param name="sequenceType">The sequence type.</param>
+        /// <returns>Normalized sequence type.</returns>
         private IType NormalizeSequenceType(SequenceType sequenceType)
         {
             sequenceType.ElementType = NormalizeType(sequenceType.ElementType);
@@ -234,6 +271,11 @@ namespace Microsoft.Rest.Generator.Ruby
             return sequenceType;
         }
 
+        /// <summary>
+        /// Normalizes dictionary type.
+        /// </summary>
+        /// <param name="dictionaryType">The dictionary type.</param>
+        /// <returns>Normalized dictionary type.</returns>
         private IType NormalizeDictionaryType(DictionaryType dictionaryType)
         {
             dictionaryType.ValueType = NormalizeType(dictionaryType.ValueType);

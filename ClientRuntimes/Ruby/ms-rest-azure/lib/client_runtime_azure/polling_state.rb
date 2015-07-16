@@ -6,6 +6,7 @@ module ClientRuntimeAzure
   # Class which represents a state of Azure long running operation.
   #
   class PollingState
+
     # @return [Net::HTTPRequest] the HTTP request.
   	attr_accessor :request
 

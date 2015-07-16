@@ -3,6 +3,9 @@
 
 namespace Microsoft.Rest.Generator.Ruby
 {
+    /// <summary>
+    /// The base interface for objects with scope.
+    /// </summary>
     public interface IScopeProvider
     {
         string GetVariableName(string prefix, int suffix = 0);

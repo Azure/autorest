@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Microsoft.Rest.Generator.Azure.NodeJS.Properties;
 using Microsoft.Rest.Generator.ClientModel;
@@ -22,6 +23,11 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         public AzureMethodTemplateModel(Method source, ServiceClient serviceClient)
             : base(source, serviceClient)
         {
+            if (source == null)
+            {
+                throw new ArgumentNullException("source");
+            }
+
             ParameterTemplateModels.Clear();
             source.Parameters.ForEach(p => ParameterTemplateModels.Add(new AzureParameterTemplateModel(p)));
         }
@@ -33,7 +39,10 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         {
             get { return Extensions.ContainsKey(AzureCodeGenerator.LongRunningExtension); }
         }
-
+        
+        /// <summary>
+        /// Gets the Get method model.
+        /// </summary>
         public AzureMethodTemplateModel GetMethod
         {
             get
@@ -44,9 +53,10 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                 if (getMethod == null)
                 {
                     throw new InvalidOperationException(
-                        string.Format(Resources.InvalidLongRunningOperationForCreateOrUpdate,
+                        string.Format(CultureInfo.InvariantCulture, Resources.InvalidLongRunningOperationForCreateOrUpdate,
                             Name, Group));
                 }
+
                 return new AzureMethodTemplateModel(getMethod, ServiceClient);
             }
         }
@@ -71,14 +81,14 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                     variableName = "@client.subscription_id";
                 }
 
-                string addPathParameterString = String.Format("{0}['{{{1}}}'] = CGI.escape({2})",
+                string addPathParameterString = String.Format(CultureInfo.InvariantCulture, "{0}['{{{1}}}'] = CGI.escape({2})",
                     inputVariableName,
                     pathParameter.SerializedName,
                     variableName);
 
                 if (pathParameter.Extensions.ContainsKey(AzureCodeGenerator.SkipUrlEncodingExtension))
                 {
-                    addPathParameterString = String.Format("{0}['{{{1}}}'] = {2}",
+                    addPathParameterString = String.Format(CultureInfo.InvariantCulture, "{0}['{{{1}}}'] = {2}",
                         inputVariableName,
                         pathParameter.SerializedName,
                         variableName);
@@ -115,11 +125,11 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
 
                 if (param.Extensions.ContainsKey(AzureCodeGenerator.SkipUrlEncodingExtension))
                 {
-                    queryParamsList.Add(string.Format("properties['{0}'] = {1}", param.SerializedName, name));    
+                    queryParamsList.Add(string.Format(CultureInfo.InvariantCulture, "properties['{0}'] = {1}", param.SerializedName, name));    
                 }
                 else
                 {
-                    queryParamsList.Add(string.Format("properties['{0}'] = CGI.escape({1}.to_s)", param.SerializedName, name));
+                    queryParamsList.Add(string.Format(CultureInfo.InvariantCulture, "properties['{0}'] = CGI.escape({1}.to_s)", param.SerializedName, name));
                 }
             }
 
@@ -133,6 +143,14 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             return builder.ToString();
         }
 
+        /// <summary>
+        /// Generates Ruby code in form of string for deserializing polling response.
+        /// </summary>
+        /// <param name="variableName">Variable name which keeps the response.</param>
+        /// <param name="type">Type of response.</param>
+        /// <param name="isRequired">If the property required.</param>
+        /// <param name="defaultNamespace">The namespace.</param>
+        /// <returns>Ruby code in form of string for deserializing polling response.</returns>
         public string DeserializePollingResponse(string variableName, IType type, bool isRequired, string defaultNamespace)
         {
             // TODO: handle required property via "unless deserialized_property.nil?"
@@ -143,6 +161,9 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             return builder.AppendLine(serializationLogic).ToString();
         }
 
+        /// <summary>
+        /// Gets the logic required to preprocess response body when required.
+        /// </summary>
         public override string InitializeResponseBody
         {
             get

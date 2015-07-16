@@ -10,6 +10,11 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
 {
     public class AzureMethodGroupTemplateModel : MethodGroupTemplateModel
     {
+        /// <summary>
+        /// Initializes a new instance 
+        /// </summary>
+        /// <param name="serviceClient">The service client instance.</param>
+        /// <param name="methodGroupName">The name of the method group.</param>
         public AzureMethodGroupTemplateModel(ServiceClient serviceClient, string methodGroupName)
             : base(serviceClient, methodGroupName)
         {
@@ -19,30 +24,5 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             Methods.Where(m => m.Group == methodGroupName)
                 .ForEach(m => MethodTemplateModels.Add(new AzureMethodTemplateModel(m, serviceClient)));
         }
-
-        ///// <summary>
-        ///// Returns the using statements for the Operations.
-        ///// </summary>
-        //public override IEnumerable<string> Usings
-        //{
-        //    get
-        //    {
-        //        if (Methods.Any(m =>
-        //            m.Parameters.Any(p =>
-        //                p.SerializedName.Equals("$filter", StringComparison.OrdinalIgnoreCase) &&
-        //                p.Type is CompositeType &&
-        //                p.Location == ParameterLocation.Query)))
-        //        {
-        //            yield return "Microsoft.Azure.OData";
-        //            yield return "System.Linq.Expressions";
-        //        }
-        //        yield return "Microsoft.Azure";
-
-        //        if (this.ModelTypes.Any(m => !m.Extensions.ContainsKey(AzureCodeGenerator.ExternalExtension)))
-        //        {
-        //            yield return "Models";
-        //        }
-        //    }
-        //}
     }
 }

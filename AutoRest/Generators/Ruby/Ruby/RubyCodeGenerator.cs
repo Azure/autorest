@@ -7,30 +7,52 @@ using Microsoft.Rest.Generator.Ruby.Templates;
 
 namespace Microsoft.Rest.Generator.Ruby
 {
+    /// <summary>
+    /// A class with main code generation logic for Ruby.
+    /// </summary>
     public class RubyCodeGenerator : CodeGenerator
     {
+        /// <summary>
+        /// A code namer instance (object which is responsible for correct files/variables naming).
+        /// </summary>
         private readonly RubyCodeNamer codeNamer;
 
+        /// <summary>
+        /// Initializes a new instance of the class RubyCodeGenerator.
+        /// </summary>
+        /// <param name="settings">The settings.</param>
         public RubyCodeGenerator(Settings settings) : base(settings)
         {
             codeNamer = new RubyCodeNamer();
         }
 
+        /// <summary>
+        /// Gets the name of code generator.
+        /// </summary>
         public override string Name
         {
             get { return "Ruby"; }
         }
 
+        /// <summary>
+        /// Gets the brief description of the code generator.
+        /// </summary>
         public override string Description
         {
             get { return "Ruby for Http Client Libraries"; }
         }
 
+        /// <summary>
+        /// Gets the brief instructions required to complete before using the code generator.
+        /// </summary>
         public override string UsageInstructions
         {
-            get { return "Require to install ClientRuntime gem"; }
+            get { return "Require to install ms-rest gem"; }
         }
 
+        /// <summary>
+        /// Gets the file extension of the generated code files.
+        /// </summary>
         public override string ImplementationFileExtension
         {
             get { return ".rb"; }
@@ -48,6 +70,10 @@ namespace Microsoft.Rest.Generator.Ruby
                 Settings.Namespace + "::Models");
         }
 
+        /// <summary>
+        /// Adds special properties to the service client (e.g. credentials).
+        /// </summary>
+        /// <param name="serviceClientModel">The service client.</param>
         private void PopulateAdditionalProperties(ServiceClient serviceClientModel)
         {
             if (Settings.AddCredentials)

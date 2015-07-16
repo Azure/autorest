@@ -10,6 +10,10 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
 {
     public class AzureServiceClientTemplateModel : ServiceClientTemplateModel
     {
+        /// <summary>
+        /// Initializes a new instance of the AzureServiceClientTemplateModel class.
+        /// </summary>
+        /// <param name="serviceClient">The service client instance.</param>
         public AzureServiceClientTemplateModel(ServiceClient serviceClient)
             : base(serviceClient)
         {
@@ -18,6 +22,9 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                 .ForEach(m => MethodTemplateModels.Add(new AzureMethodTemplateModel(m, serviceClient)));
         }
 
+        /// <summary>
+        /// Gets the base type of the service client.
+        /// </summary>
         public override string BaseType
         {
             get

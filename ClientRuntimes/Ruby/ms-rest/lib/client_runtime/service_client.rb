@@ -16,6 +16,7 @@ module ClientRuntime
     # @return [Array] filters to be applied to the HTTP requests.
     attr_accessor :options
 
+    # @return [String] value of cookies.
     attr_accessor :cookies
 
     #
@@ -53,7 +54,8 @@ module ClientRuntime
       # sign in
       @credentials.sign_request(request) unless @credentials.nil?
 
-      # TODO: add proper retry policy.
+      # TODO: add proper retry policy.
+
       retry_count = 5
       response = nil
 

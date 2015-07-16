@@ -8,26 +8,12 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
 {
     public class AzureParameterTemplateModel : ParameterTemplateModel
     {
+        /// <summary>
+        /// Initializes a new instance of the AzureParameterTemplateModel class.
+        /// </summary>
+        /// <param name="source">The source.</param>
         public AzureParameterTemplateModel(Parameter source) : base(source)
         {
         }
-
-        ///// <summary>
-        ///// Gets declaration for the parameter.
-        ///// </summary>
-        //public override string DeclarationExpression
-        //{
-        //    get
-        //    {
-        //        if (SerializedName.Equals("$filter", StringComparison.OrdinalIgnoreCase) &&
-        //            Location == ParameterLocation.Query &&
-        //            Type is CompositeType)
-        //        {
-        //            return string.Format("Expression<Func<{0}, bool>>", Type.Name);
-        //        }
-
-        //        return base.DeclarationExpression;
-        //    }
-        //}
     }
 }

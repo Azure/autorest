@@ -19,12 +19,12 @@ module ClientRuntimeAzure
     end
 
     #
-    # Retrieves the result of 'PUT' operation result. Includes polling of required.
-    # @param azure_response [] TODO
-    # @param get_operation_block [] TODO
-    # @param custom_headers [] [description]
+    # Retrieves the result of 'PUT' operation. Perfroms polling of required.
+    # @param azure_response [ClientRuntimeAzure::AzureOperationResponse] response from Azure service.
+    # @param get_operation_block [Proc] custom method for polling.
+    # @param custom_headers [Hash] custom HTTP headers to apply to HTTP requests.
     #
-    # @return [] TODO.
+    # @return [Concurrent::Promise] promise to return response from Azure service.
     def get_put_operation_result(azure_response, get_operation_block, custom_headers, custom_deserialization_block)
       fail CloudError if azure_response.nil?
       fail CloudError if get_operation_block.nil?
@@ -80,6 +80,13 @@ module ClientRuntimeAzure
       promise.execute
     end
 
+    #
+    # Retrieves the result of 'POST' or 'DELETE' operations. Perfroms polling of required.
+    # @param azure_response [ClientRuntimeAzure::AzureOperationResponse] response from Azure service.
+    # @param custom_headers [Proc] custom method for polling.
+    # @param custom_deserialization_block [Proc] custom logic for response deserialization.
+    #
+    # @return [Concurrent::Promise] promise to return response from Azure service.
     def get_post_or_delete_operation_result(azure_response, custom_headers, custom_deserialization_block)
       fail CloudError if azure_response.nil?
       fail CloudError if azure_response.response.nil?
@@ -132,6 +139,10 @@ module ClientRuntimeAzure
       promise.execute
     end
 
+    #
+    # Updates polling state based on location header for PUT HTTP requests.
+    # @param get_operation_block [Proc] custom method for polling.
+    # @param polling_state [ClientRuntimeAzure::PollingState] polling state to update.
     def update_state_from_get_resource_operation(get_operation_block, polling_state)
       result = get_operation_block.call().value!
 
@@ -150,6 +161,11 @@ module ClientRuntimeAzure
       polling_state.resource = result.body
     end
 
+    #
+    # Updates polling state based on location header for PUT HTTP requests.
+    # @param polling_state [ClientRuntimeAzure::PollingState] polling state to update.
+    # @param custom_headers [Hash] custom headers to apply to HTTP request.
+    # @param custom_deserialization_block [Proc] custom deserialization method for parsing response.
     def update_state_from_location_header_on_put(polling_state, custom_headers, custom_deserialization_block)
       result = get_async_common(polling_state.location_header_link, custom_headers, custom_deserialization_block).value!
 
@@ -176,6 +192,10 @@ module ClientRuntimeAzure
       end
     end
 
+    #
+    # Updates polling state from Azure async operation header.
+    # @param polling_state [ClientRuntimeAzure::PollingState] polling state.
+    # @param custom_headers [Hash] custom headers to apply to HTTP request.
     def update_state_from_azure_async_operation_header(polling_state, custom_headers)
       result = get_async(polling_state.azure_async_operation_header_link, custom_headers).value!
 
@@ -190,6 +210,11 @@ module ClientRuntimeAzure
       polling_state.resource = nil
     end
 
+    #
+    # Updates polling state based on location header for POST and DELETE HTTP requests.
+    # @param polling_state [ClientRuntimeAzure::PollingState] [description]
+    # @param custom_headers [Hash] custom headers to apply to HTTP requests.
+    # @param custom_deserialization_block [Proc] custom deserialization method for parsing response.
     def update_state_from_location_header_on_post_or_delete(polling_state, custom_headers, custom_deserialization_block)
       result = get_async_common(polling_state.location_header_link, custom_headers, custom_deserialization_block).value!
 
@@ -211,7 +236,7 @@ module ClientRuntimeAzure
     # @param operation_url [String] the URL.
     # @param custom_headers [String] headers to apply to the HTTP request.
     #
-    # @return [type] [description]
+    # @return [ClientRuntimeAzure::AsyncOperationStatus] Deserialized response wrapped by AsyncOperationStatus.
     def get_async(operation_url, custom_headers)
       fail CloudError if operation_url.nil?
 
@@ -258,7 +283,7 @@ module ClientRuntimeAzure
     # @param custom_headers [String] headers to apply to the HTTP request.
     # @param custom_deserialization_block [Proc] function to perform deserialization of the HTTP response.
     #
-    # @return [type] [description]
+    # @return deserialized response (return type may differ depending on response)
     def get_async_common(operation_url, custom_headers, custom_deserialization_block)
       fail CloudError if operation_url.nil?
 

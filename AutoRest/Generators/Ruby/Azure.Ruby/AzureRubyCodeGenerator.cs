@@ -11,11 +11,8 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
 {
     public class AzureRubyCodeGenerator : RubyCodeGenerator
     {
-        private readonly RubyCodeNamer codeNamer;
-
         public AzureRubyCodeGenerator(Settings settings) : base(settings)
         {
-            codeNamer = new RubyCodeNamer();
         }
 
         public override string Name
@@ -33,6 +30,9 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             get { return "TODO"; }
         }
 
+        /// <summary>
+        /// Gets the exte
+        /// </summary>
         public override string ImplementationFileExtension
         {
             get { return ".rb"; }
