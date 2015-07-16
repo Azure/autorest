@@ -23,3 +23,4 @@ Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.Azure.Tests.CSharpAz
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", 
     Target = "Fixtures.Azure.SwaggerBatLro.Models.SubProduct.#ProvisioningStateValues", Justification="Necessary for read-only properties in serialization types")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.Azure.Tests.CSharpAzureSwaggerBat.#XmsRequestClientIdTest()")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.Azure.Tests.CSharpAzureCodeNamingFrameworkTests.#ConvertsPageResultsToPageTypeTest()")]

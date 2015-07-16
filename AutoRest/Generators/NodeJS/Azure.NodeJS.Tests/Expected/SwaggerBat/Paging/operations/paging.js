@@ -805,7 +805,7 @@ Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
 
 /**
  * A paging operation that finishes on the first call without a nextlink
- * @param {String} [nextLink] NextLink from the previous successful call to List operation.
+ * @param {String} [nextPageLink] NextLink from the previous successful call to List operation.
  *
  * @param {object} [options]
  *
@@ -816,7 +816,7 @@ Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
  *
  * @returns {Stream} The Response stream
  */
-Paging.prototype.getSinglePagesNext = function (nextLink, options, callback) {
+Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -827,11 +827,11 @@ Paging.prototype.getSinglePagesNext = function (nextLink, options, callback) {
   }
   // Validate
   try {
-    if (nextLink === null || nextLink === undefined) {
-      throw new Error('\'nextLink\' cannot be null');
+    if (nextPageLink === null || nextPageLink === undefined) {
+      throw new Error('\'nextPageLink\' cannot be null');
     }
-    if (nextLink !== null && nextLink !== undefined && typeof nextLink !== 'string') {
-      throw new Error('nextLink must be of type string.');
+    if (nextPageLink !== null && nextPageLink !== undefined && typeof nextPageLink !== 'string') {
+      throw new Error('nextPageLink must be of type string.');
     }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
@@ -842,7 +842,7 @@ Paging.prototype.getSinglePagesNext = function (nextLink, options, callback) {
 
   // Construct URL
   var requestUrl = '{nextLink}';
-  requestUrl = requestUrl.replace('{nextLink}', nextLink);
+  requestUrl = requestUrl.replace('{nextLink}', nextPageLink);
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -920,7 +920,7 @@ Paging.prototype.getSinglePagesNext = function (nextLink, options, callback) {
 
 /**
  * A paging operation that includes a nextLink that has 10 pages
- * @param {String} [nextLink] NextLink from the previous successful call to List operation.
+ * @param {String} [nextPageLink] NextLink from the previous successful call to List operation.
  *
  * @param {object} [options]
  *
@@ -931,7 +931,7 @@ Paging.prototype.getSinglePagesNext = function (nextLink, options, callback) {
  *
  * @returns {Stream} The Response stream
  */
-Paging.prototype.getMultiplePagesNext = function (nextLink, options, callback) {
+Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -942,11 +942,11 @@ Paging.prototype.getMultiplePagesNext = function (nextLink, options, callback) {
   }
   // Validate
   try {
-    if (nextLink === null || nextLink === undefined) {
-      throw new Error('\'nextLink\' cannot be null');
+    if (nextPageLink === null || nextPageLink === undefined) {
+      throw new Error('\'nextPageLink\' cannot be null');
     }
-    if (nextLink !== null && nextLink !== undefined && typeof nextLink !== 'string') {
-      throw new Error('nextLink must be of type string.');
+    if (nextPageLink !== null && nextPageLink !== undefined && typeof nextPageLink !== 'string') {
+      throw new Error('nextPageLink must be of type string.');
     }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
@@ -957,7 +957,7 @@ Paging.prototype.getMultiplePagesNext = function (nextLink, options, callback) {
 
   // Construct URL
   var requestUrl = '{nextLink}';
-  requestUrl = requestUrl.replace('{nextLink}', nextLink);
+  requestUrl = requestUrl.replace('{nextLink}', nextPageLink);
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -1036,7 +1036,7 @@ Paging.prototype.getMultiplePagesNext = function (nextLink, options, callback) {
 /**
  * A paging operation that fails on the first call with 500 and then retries
  * and then get a response including a nextLink that has 10 pages
- * @param {String} [nextLink] NextLink from the previous successful call to List operation.
+ * @param {String} [nextPageLink] NextLink from the previous successful call to List operation.
  *
  * @param {object} [options]
  *
@@ -1047,7 +1047,7 @@ Paging.prototype.getMultiplePagesNext = function (nextLink, options, callback) {
  *
  * @returns {Stream} The Response stream
  */
-Paging.prototype.getMultiplePagesRetryFirstNext = function (nextLink, options, callback) {
+Paging.prototype.getMultiplePagesRetryFirstNext = function (nextPageLink, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1058,11 +1058,11 @@ Paging.prototype.getMultiplePagesRetryFirstNext = function (nextLink, options, c
   }
   // Validate
   try {
-    if (nextLink === null || nextLink === undefined) {
-      throw new Error('\'nextLink\' cannot be null');
+    if (nextPageLink === null || nextPageLink === undefined) {
+      throw new Error('\'nextPageLink\' cannot be null');
     }
-    if (nextLink !== null && nextLink !== undefined && typeof nextLink !== 'string') {
-      throw new Error('nextLink must be of type string.');
+    if (nextPageLink !== null && nextPageLink !== undefined && typeof nextPageLink !== 'string') {
+      throw new Error('nextPageLink must be of type string.');
     }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
@@ -1073,7 +1073,7 @@ Paging.prototype.getMultiplePagesRetryFirstNext = function (nextLink, options, c
 
   // Construct URL
   var requestUrl = '{nextLink}';
-  requestUrl = requestUrl.replace('{nextLink}', nextLink);
+  requestUrl = requestUrl.replace('{nextLink}', nextPageLink);
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -1153,7 +1153,7 @@ Paging.prototype.getMultiplePagesRetryFirstNext = function (nextLink, options, c
  * A paging operation that includes a nextLink that has 10 pages, of which the
  * 2nd call fails first with 500. The client should retry and finish all 10
  * pages eventually.
- * @param {String} [nextLink] NextLink from the previous successful call to List operation.
+ * @param {String} [nextPageLink] NextLink from the previous successful call to List operation.
  *
  * @param {object} [options]
  *
@@ -1164,7 +1164,7 @@ Paging.prototype.getMultiplePagesRetryFirstNext = function (nextLink, options, c
  *
  * @returns {Stream} The Response stream
  */
-Paging.prototype.getMultiplePagesRetrySecondNext = function (nextLink, options, callback) {
+Paging.prototype.getMultiplePagesRetrySecondNext = function (nextPageLink, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1175,11 +1175,11 @@ Paging.prototype.getMultiplePagesRetrySecondNext = function (nextLink, options, 
   }
   // Validate
   try {
-    if (nextLink === null || nextLink === undefined) {
-      throw new Error('\'nextLink\' cannot be null');
+    if (nextPageLink === null || nextPageLink === undefined) {
+      throw new Error('\'nextPageLink\' cannot be null');
     }
-    if (nextLink !== null && nextLink !== undefined && typeof nextLink !== 'string') {
-      throw new Error('nextLink must be of type string.');
+    if (nextPageLink !== null && nextPageLink !== undefined && typeof nextPageLink !== 'string') {
+      throw new Error('nextPageLink must be of type string.');
     }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
@@ -1190,7 +1190,7 @@ Paging.prototype.getMultiplePagesRetrySecondNext = function (nextLink, options, 
 
   // Construct URL
   var requestUrl = '{nextLink}';
-  requestUrl = requestUrl.replace('{nextLink}', nextLink);
+  requestUrl = requestUrl.replace('{nextLink}', nextPageLink);
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -1268,7 +1268,7 @@ Paging.prototype.getMultiplePagesRetrySecondNext = function (nextLink, options, 
 
 /**
  * A paging operation that receives a 400 on the first call
- * @param {String} [nextLink] NextLink from the previous successful call to List operation.
+ * @param {String} [nextPageLink] NextLink from the previous successful call to List operation.
  *
  * @param {object} [options]
  *
@@ -1279,7 +1279,7 @@ Paging.prototype.getMultiplePagesRetrySecondNext = function (nextLink, options, 
  *
  * @returns {Stream} The Response stream
  */
-Paging.prototype.getSinglePagesFailureNext = function (nextLink, options, callback) {
+Paging.prototype.getSinglePagesFailureNext = function (nextPageLink, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1290,11 +1290,11 @@ Paging.prototype.getSinglePagesFailureNext = function (nextLink, options, callba
   }
   // Validate
   try {
-    if (nextLink === null || nextLink === undefined) {
-      throw new Error('\'nextLink\' cannot be null');
+    if (nextPageLink === null || nextPageLink === undefined) {
+      throw new Error('\'nextPageLink\' cannot be null');
     }
-    if (nextLink !== null && nextLink !== undefined && typeof nextLink !== 'string') {
-      throw new Error('nextLink must be of type string.');
+    if (nextPageLink !== null && nextPageLink !== undefined && typeof nextPageLink !== 'string') {
+      throw new Error('nextPageLink must be of type string.');
     }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
@@ -1305,7 +1305,7 @@ Paging.prototype.getSinglePagesFailureNext = function (nextLink, options, callba
 
   // Construct URL
   var requestUrl = '{nextLink}';
-  requestUrl = requestUrl.replace('{nextLink}', nextLink);
+  requestUrl = requestUrl.replace('{nextLink}', nextPageLink);
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -1383,7 +1383,7 @@ Paging.prototype.getSinglePagesFailureNext = function (nextLink, options, callba
 
 /**
  * A paging operation that receives a 400 on the second call
- * @param {String} [nextLink] NextLink from the previous successful call to List operation.
+ * @param {String} [nextPageLink] NextLink from the previous successful call to List operation.
  *
  * @param {object} [options]
  *
@@ -1394,7 +1394,7 @@ Paging.prototype.getSinglePagesFailureNext = function (nextLink, options, callba
  *
  * @returns {Stream} The Response stream
  */
-Paging.prototype.getMultiplePagesFailureNext = function (nextLink, options, callback) {
+Paging.prototype.getMultiplePagesFailureNext = function (nextPageLink, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1405,11 +1405,11 @@ Paging.prototype.getMultiplePagesFailureNext = function (nextLink, options, call
   }
   // Validate
   try {
-    if (nextLink === null || nextLink === undefined) {
-      throw new Error('\'nextLink\' cannot be null');
+    if (nextPageLink === null || nextPageLink === undefined) {
+      throw new Error('\'nextPageLink\' cannot be null');
     }
-    if (nextLink !== null && nextLink !== undefined && typeof nextLink !== 'string') {
-      throw new Error('nextLink must be of type string.');
+    if (nextPageLink !== null && nextPageLink !== undefined && typeof nextPageLink !== 'string') {
+      throw new Error('nextPageLink must be of type string.');
     }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
@@ -1420,7 +1420,7 @@ Paging.prototype.getMultiplePagesFailureNext = function (nextLink, options, call
 
   // Construct URL
   var requestUrl = '{nextLink}';
-  requestUrl = requestUrl.replace('{nextLink}', nextLink);
+  requestUrl = requestUrl.replace('{nextLink}', nextPageLink);
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -1498,7 +1498,7 @@ Paging.prototype.getMultiplePagesFailureNext = function (nextLink, options, call
 
 /**
  * A paging operation that receives an invalid nextLink
- * @param {String} [nextLink] NextLink from the previous successful call to List operation.
+ * @param {String} [nextPageLink] NextLink from the previous successful call to List operation.
  *
  * @param {object} [options]
  *
@@ -1509,7 +1509,7 @@ Paging.prototype.getMultiplePagesFailureNext = function (nextLink, options, call
  *
  * @returns {Stream} The Response stream
  */
-Paging.prototype.getMultiplePagesFailureUriNext = function (nextLink, options, callback) {
+Paging.prototype.getMultiplePagesFailureUriNext = function (nextPageLink, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1520,11 +1520,11 @@ Paging.prototype.getMultiplePagesFailureUriNext = function (nextLink, options, c
   }
   // Validate
   try {
-    if (nextLink === null || nextLink === undefined) {
-      throw new Error('\'nextLink\' cannot be null');
+    if (nextPageLink === null || nextPageLink === undefined) {
+      throw new Error('\'nextPageLink\' cannot be null');
     }
-    if (nextLink !== null && nextLink !== undefined && typeof nextLink !== 'string') {
-      throw new Error('nextLink must be of type string.');
+    if (nextPageLink !== null && nextPageLink !== undefined && typeof nextPageLink !== 'string') {
+      throw new Error('nextPageLink must be of type string.');
     }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
@@ -1535,7 +1535,7 @@ Paging.prototype.getMultiplePagesFailureUriNext = function (nextLink, options, c
 
   // Construct URL
   var requestUrl = '{nextLink}';
-  requestUrl = requestUrl.replace('{nextLink}', nextLink);
+  requestUrl = requestUrl.replace('{nextLink}', nextPageLink);
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');

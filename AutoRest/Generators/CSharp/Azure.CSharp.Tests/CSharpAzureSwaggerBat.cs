@@ -293,34 +293,34 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 var client = new AutoRestPagingTestService(Fixture.Uri,
                     new TokenCloudCredentials(Guid.NewGuid().ToString(), Guid.NewGuid().ToString())))
             {
-                Assert.Null(client.Paging.GetSinglePages().NextLink);
+                Assert.Null(client.Paging.GetSinglePages().NextPageLink);
 
                 var result = client.Paging.GetMultiplePages();
-                Assert.NotNull(result.NextLink);
+                Assert.NotNull(result.NextPageLink);
                 int count = 1;
-                while (result.NextLink != null)
+                while (result.NextPageLink != null)
                 {
-                    result = client.Paging.GetMultiplePagesNext(result.NextLink);
+                    result = client.Paging.GetMultiplePagesNext(result.NextPageLink);
                     count++;
                 }
                 Assert.Equal(10, count);
 
                 result = client.Paging.GetMultiplePagesRetryFirst();
-                Assert.NotNull(result.NextLink);
+                Assert.NotNull(result.NextPageLink);
                 count = 1;
-                while (result.NextLink != null)
+                while (result.NextPageLink != null)
                 {
-                    result = client.Paging.GetMultiplePagesRetryFirstNext(result.NextLink);
+                    result = client.Paging.GetMultiplePagesRetryFirstNext(result.NextPageLink);
                     count++;
                 }
                 Assert.Equal(10, count);
 
                 result = client.Paging.GetMultiplePagesRetrySecond();
-                Assert.NotNull(result.NextLink);
+                Assert.NotNull(result.NextPageLink);
                 count = 1;
-                while (result.NextLink != null)
+                while (result.NextPageLink != null)
                 {
-                    result = client.Paging.GetMultiplePagesRetrySecondNext(result.NextLink);
+                    result = client.Paging.GetMultiplePagesRetrySecondNext(result.NextPageLink);
                     count++;
                 }
                 Assert.Equal(10, count);
@@ -337,11 +337,11 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 Assert.Throws<CloudException>(() => client.Paging.GetSinglePagesFailure());
 
                 var result = client.Paging.GetMultiplePagesFailure();
-                Assert.NotNull(result.NextLink);
-                Assert.Throws<CloudException>(() => client.Paging.GetMultiplePagesFailureNext(result.NextLink));
+                Assert.NotNull(result.NextPageLink);
+                Assert.Throws<CloudException>(() => client.Paging.GetMultiplePagesFailureNext(result.NextPageLink));
 
                 result = client.Paging.GetMultiplePagesFailureUri();
-                Assert.Throws<UriFormatException>(() => client.Paging.GetMultiplePagesFailureUriNext(result.NextLink));
+                Assert.Throws<UriFormatException>(() => client.Paging.GetMultiplePagesFailureUriNext(result.NextPageLink));
             }
         }
 

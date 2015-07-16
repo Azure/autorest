@@ -85,6 +85,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CSharpAzureCodeNamingFrameworkTests.cs" />
     <Compile Include="Expected\SwaggerBat\AzureSpecials.Cs\IXMsClientRequestIdOperations.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
@@ -283,9 +284,6 @@
     <Compile Include="Expected\SwaggerBat\Paging.Cs\Models\ProductProperties.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Expected\SwaggerBat\Paging.Cs\Models\ProductResult.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
     <Compile Include="Expected\SwaggerBat\Paging.Cs\PagingOperations.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
@@ -352,6 +350,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Swagger\azure-paging.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
