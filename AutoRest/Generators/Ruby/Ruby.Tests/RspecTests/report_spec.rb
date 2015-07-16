@@ -6,7 +6,7 @@ describe AutoRestReportService do
     @base_url = ENV['StubServerURI']
 
 	dummyToken = 'dummy12321343423'
-	@credentials = ClientRuntime::TokenCredentials.new(dummyToken)
+	@credentials = ClientRuntime::TokenCredentials.new('Bearer', dummyToken)
     @client = AutoRestReportService.new(@credentials, @base_url)
   end
 
@@ -21,6 +21,6 @@ describe AutoRestReportService do
       end
     end
     puts "Test Coverage is #{count_of_calls}/#{count_of_methods}"
-    expect(count_of_calls/count_of_methods > 0.7).to be_truthy
+    expect(count_of_calls/count_of_methods.to_f > 0.7).to be_truthy
   end
 end

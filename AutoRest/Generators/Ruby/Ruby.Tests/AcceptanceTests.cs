@@ -71,7 +71,7 @@ namespace Microsoft.Rest.Generator.Ruby.Tests
             Test("path_items_spec.rb", "url.json", "UrlItems");
         }
 
-        [Fact(Skip = "not completely implemented yet")]
+        [Fact]
         public void DateTimeTests()
         {
             Test("datetime_spec.rb", "body-datetime.json", "DateTime");
@@ -89,7 +89,7 @@ namespace Microsoft.Rest.Generator.Ruby.Tests
             Test("array_spec.rb", "body-array.json", "Array");
         }
 
-        [Fact(Skip = "not completely implemented yet")]
+        [Fact]
         public void HeaderTests()
         {
             Test("header_spec.rb", "header.json", "Header");
@@ -108,7 +108,7 @@ namespace Microsoft.Rest.Generator.Ruby.Tests
         }
 
         [Trait("Report", "true")]
-        [Fact(Skip = "not all tests are ready so test coverage is too low")]
+        [Fact]
         public void EnsureTestCoverage()
         {
             Test("report_spec.rb", "report.json", "Report");
