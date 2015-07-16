@@ -18,7 +18,7 @@ namespace Fixtures.SwaggerBatUrl
             /// localStringQuery='localStringQuery'
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='localStringPath'>
             /// should contain value 'localStringPath'
@@ -45,7 +45,7 @@ namespace Fixtures.SwaggerBatUrl
             /// localStringQuery='localStringQuery'
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='localStringPath'>
             /// should contain value 'localStringPath'
@@ -75,7 +75,7 @@ namespace Fixtures.SwaggerBatUrl
             /// localStringQuery='localStringQuery'
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='localStringPath'>
             /// should contain value 'localStringPath'
@@ -102,7 +102,7 @@ namespace Fixtures.SwaggerBatUrl
             /// localStringQuery='localStringQuery'
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='localStringPath'>
             /// should contain value 'localStringPath'
@@ -131,7 +131,7 @@ namespace Fixtures.SwaggerBatUrl
             /// pathItemStringQuery='pathItemStringQuery', localStringQuery=null
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='localStringPath'>
             /// should contain value 'localStringPath'
@@ -157,7 +157,7 @@ namespace Fixtures.SwaggerBatUrl
             /// pathItemStringQuery='pathItemStringQuery', localStringQuery=null
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='localStringPath'>
             /// should contain value 'localStringPath'
@@ -186,7 +186,7 @@ namespace Fixtures.SwaggerBatUrl
             /// pathItemStringQuery=null, localStringQuery=null
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='localStringPath'>
             /// should contain value 'localStringPath'
@@ -212,7 +212,7 @@ namespace Fixtures.SwaggerBatUrl
             /// pathItemStringQuery=null, localStringQuery=null
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='localStringPath'>
             /// should contain value 'localStringPath'

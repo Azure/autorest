@@ -14,7 +14,7 @@ namespace Fixtures.SwaggerBatBodyInteger
             /// Get null Int value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static int? GetNull(this IIntModel operations)
             {
@@ -25,7 +25,7 @@ namespace Fixtures.SwaggerBatBodyInteger
             /// Get null Int value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -40,7 +40,7 @@ namespace Fixtures.SwaggerBatBodyInteger
             /// Get invalid Int value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static int? GetInvalid(this IIntModel operations)
             {
@@ -51,7 +51,7 @@ namespace Fixtures.SwaggerBatBodyInteger
             /// Get invalid Int value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -66,7 +66,7 @@ namespace Fixtures.SwaggerBatBodyInteger
             /// Get overflow Int32 value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static int? GetOverflowInt32(this IIntModel operations)
             {
@@ -77,7 +77,7 @@ namespace Fixtures.SwaggerBatBodyInteger
             /// Get overflow Int32 value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -92,7 +92,7 @@ namespace Fixtures.SwaggerBatBodyInteger
             /// Get underflow Int32 value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static int? GetUnderflowInt32(this IIntModel operations)
             {
@@ -103,7 +103,7 @@ namespace Fixtures.SwaggerBatBodyInteger
             /// Get underflow Int32 value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -118,7 +118,7 @@ namespace Fixtures.SwaggerBatBodyInteger
             /// Get overflow Int64 value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static long? GetOverflowInt64(this IIntModel operations)
             {
@@ -129,7 +129,7 @@ namespace Fixtures.SwaggerBatBodyInteger
             /// Get overflow Int64 value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -144,7 +144,7 @@ namespace Fixtures.SwaggerBatBodyInteger
             /// Get underflow Int64 value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static long? GetUnderflowInt64(this IIntModel operations)
             {
@@ -155,7 +155,7 @@ namespace Fixtures.SwaggerBatBodyInteger
             /// Get underflow Int64 value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -170,7 +170,7 @@ namespace Fixtures.SwaggerBatBodyInteger
             /// Put max int32 value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='intBody'>
             /// </param>
@@ -183,7 +183,7 @@ namespace Fixtures.SwaggerBatBodyInteger
             /// Put max int32 value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='intBody'>
             /// </param>
@@ -199,7 +199,7 @@ namespace Fixtures.SwaggerBatBodyInteger
             /// Put max int64 value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='intBody'>
             /// </param>
@@ -212,7 +212,7 @@ namespace Fixtures.SwaggerBatBodyInteger
             /// Put max int64 value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='intBody'>
             /// </param>
@@ -228,7 +228,7 @@ namespace Fixtures.SwaggerBatBodyInteger
             /// Put min int32 value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='intBody'>
             /// </param>
@@ -241,7 +241,7 @@ namespace Fixtures.SwaggerBatBodyInteger
             /// Put min int32 value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='intBody'>
             /// </param>
@@ -257,7 +257,7 @@ namespace Fixtures.SwaggerBatBodyInteger
             /// Put min int64 value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='intBody'>
             /// </param>
@@ -270,7 +270,7 @@ namespace Fixtures.SwaggerBatBodyInteger
             /// Put min int64 value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='intBody'>
             /// </param>

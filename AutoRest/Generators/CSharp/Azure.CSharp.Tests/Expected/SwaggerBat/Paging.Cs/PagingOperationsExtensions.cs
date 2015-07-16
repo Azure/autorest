@@ -15,7 +15,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// A paging operation that finishes on the first call without a nextlink
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Page<Product> GetSinglePages(this IPagingOperations operations)
             {
@@ -26,7 +26,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// A paging operation that finishes on the first call without a nextlink
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -41,7 +41,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// A paging operation that includes a nextLink that has 10 pages
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Page<Product> GetMultiplePages(this IPagingOperations operations)
             {
@@ -52,7 +52,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// A paging operation that includes a nextLink that has 10 pages
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -68,7 +68,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// and then get a response including a nextLink that has 10 pages
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Page<Product> GetMultiplePagesRetryFirst(this IPagingOperations operations)
             {
@@ -80,7 +80,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// and then get a response including a nextLink that has 10 pages
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -97,7 +97,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// 10 pages eventually.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Page<Product> GetMultiplePagesRetrySecond(this IPagingOperations operations)
             {
@@ -110,7 +110,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// 10 pages eventually.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -125,7 +125,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// A paging operation that receives a 400 on the first call
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Page<Product> GetSinglePagesFailure(this IPagingOperations operations)
             {
@@ -136,7 +136,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// A paging operation that receives a 400 on the first call
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -151,7 +151,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// A paging operation that receives a 400 on the second call
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Page<Product> GetMultiplePagesFailure(this IPagingOperations operations)
             {
@@ -162,7 +162,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// A paging operation that receives a 400 on the second call
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -177,7 +177,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// A paging operation that receives an invalid nextLink
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Page<Product> GetMultiplePagesFailureUri(this IPagingOperations operations)
             {
@@ -188,7 +188,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// A paging operation that receives an invalid nextLink
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -203,7 +203,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// A paging operation that finishes on the first call without a nextlink
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='nextPageLink'>
             /// NextLink from the previous successful call to List operation.
@@ -217,7 +217,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// A paging operation that finishes on the first call without a nextlink
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='nextPageLink'>
             /// NextLink from the previous successful call to List operation.
@@ -235,7 +235,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// A paging operation that includes a nextLink that has 10 pages
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='nextPageLink'>
             /// NextLink from the previous successful call to List operation.
@@ -249,7 +249,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// A paging operation that includes a nextLink that has 10 pages
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='nextPageLink'>
             /// NextLink from the previous successful call to List operation.
@@ -268,7 +268,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// and then get a response including a nextLink that has 10 pages
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='nextPageLink'>
             /// NextLink from the previous successful call to List operation.
@@ -283,7 +283,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// and then get a response including a nextLink that has 10 pages
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='nextPageLink'>
             /// NextLink from the previous successful call to List operation.
@@ -303,7 +303,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// 10 pages eventually.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='nextPageLink'>
             /// NextLink from the previous successful call to List operation.
@@ -319,7 +319,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// 10 pages eventually.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='nextPageLink'>
             /// NextLink from the previous successful call to List operation.
@@ -337,7 +337,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// A paging operation that receives a 400 on the first call
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='nextPageLink'>
             /// NextLink from the previous successful call to List operation.
@@ -351,7 +351,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// A paging operation that receives a 400 on the first call
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='nextPageLink'>
             /// NextLink from the previous successful call to List operation.
@@ -369,7 +369,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// A paging operation that receives a 400 on the second call
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='nextPageLink'>
             /// NextLink from the previous successful call to List operation.
@@ -383,7 +383,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// A paging operation that receives a 400 on the second call
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='nextPageLink'>
             /// NextLink from the previous successful call to List operation.
@@ -401,7 +401,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// A paging operation that receives an invalid nextLink
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='nextPageLink'>
             /// NextLink from the previous successful call to List operation.
@@ -415,7 +415,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
             /// A paging operation that receives an invalid nextLink
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='nextPageLink'>
             /// NextLink from the previous successful call to List operation.

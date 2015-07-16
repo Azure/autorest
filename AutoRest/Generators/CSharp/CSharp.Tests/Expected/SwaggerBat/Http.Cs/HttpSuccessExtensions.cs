@@ -14,7 +14,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 200 status code if successful
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void Head200(this IHttpSuccess operations)
             {
@@ -25,7 +25,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 200 status code if successful
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -39,7 +39,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Get 200 success
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static bool? Get200(this IHttpSuccess operations)
             {
@@ -50,7 +50,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Get 200 success
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -65,7 +65,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Put boolean value true returning 200 success
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -79,7 +79,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Put boolean value true returning 200 success
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -96,7 +96,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Patch true Boolean value in request returning 200
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -110,7 +110,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Patch true Boolean value in request returning 200
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -127,7 +127,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Post bollean value true in request that returns a 200
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -141,7 +141,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Post bollean value true in request that returns a 200
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -158,7 +158,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Delete simple boolean value true returns 200
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -172,7 +172,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Delete simple boolean value true returns 200
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -189,7 +189,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Put true Boolean value in request returns 201
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -203,7 +203,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Put true Boolean value in request returns 201
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -220,7 +220,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Post true Boolean value in request returns 201 (Created)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -234,7 +234,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Post true Boolean value in request returns 201 (Created)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -251,7 +251,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Put true Boolean value in request returns 202 (Accepted)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -265,7 +265,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Put true Boolean value in request returns 202 (Accepted)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -282,7 +282,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Patch true Boolean value in request returns 202
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -296,7 +296,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Patch true Boolean value in request returns 202
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -313,7 +313,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Post true Boolean value in request returns 202 (Accepted)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -327,7 +327,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Post true Boolean value in request returns 202 (Accepted)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -344,7 +344,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Delete true Boolean value in request returns 202 (accepted)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -358,7 +358,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Delete true Boolean value in request returns 202 (accepted)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -375,7 +375,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 204 status code if successful
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void Head204(this IHttpSuccess operations)
             {
@@ -386,7 +386,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 204 status code if successful
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -400,7 +400,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Put true Boolean value in request returns 204 (no content)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -414,7 +414,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Put true Boolean value in request returns 204 (no content)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -431,7 +431,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Patch true Boolean value in request returns 204 (no content)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -445,7 +445,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Patch true Boolean value in request returns 204 (no content)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -462,7 +462,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Post true Boolean value in request returns 204 (no content)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -476,7 +476,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Post true Boolean value in request returns 204 (no content)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -493,7 +493,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Delete true Boolean value in request returns 204 (no content)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -507,7 +507,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Delete true Boolean value in request returns 204 (no content)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -524,7 +524,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 404 status code
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void Head404(this IHttpSuccess operations)
             {
@@ -535,7 +535,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 404 status code
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.

@@ -14,7 +14,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get null dictionary value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, int?> GetNull(this IDictionary operations)
             {
@@ -25,7 +25,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get null dictionary value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -40,7 +40,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get empty dictionary value {}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, int?> GetEmpty(this IDictionary operations)
             {
@@ -51,7 +51,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get empty dictionary value {}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -66,7 +66,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Set dictionary value empty {}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -79,7 +79,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Set dictionary value empty {}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -95,7 +95,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get Dictionary with null value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, string> GetNullValue(this IDictionary operations)
             {
@@ -106,7 +106,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get Dictionary with null value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -121,7 +121,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get Dictionary with null key
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, string> GetNullKey(this IDictionary operations)
             {
@@ -132,7 +132,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get Dictionary with null key
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -147,7 +147,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get Dictionary with key as empty string
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, string> GetEmptyStringKey(this IDictionary operations)
             {
@@ -158,7 +158,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get Dictionary with key as empty string
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -173,7 +173,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get invalid Dictionary value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, string> GetInvalid(this IDictionary operations)
             {
@@ -184,7 +184,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get invalid Dictionary value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -200,7 +200,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// }
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, bool?> GetBooleanTfft(this IDictionary operations)
             {
@@ -212,7 +212,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// }
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -227,7 +227,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -240,7 +240,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -256,7 +256,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get boolean dictionary value {"0": true, "1": null, "2": false }
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, bool?> GetBooleanInvalidNull(this IDictionary operations)
             {
@@ -267,7 +267,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get boolean dictionary value {"0": true, "1": null, "2": false }
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -282,7 +282,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, bool?> GetBooleanInvalidString(this IDictionary operations)
             {
@@ -293,7 +293,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -308,7 +308,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, int?> GetIntegerValid(this IDictionary operations)
             {
@@ -319,7 +319,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -334,7 +334,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -347,7 +347,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -363,7 +363,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get integer dictionary value {"0": 1, "1": null, "2": 0}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, int?> GetIntInvalidNull(this IDictionary operations)
             {
@@ -374,7 +374,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get integer dictionary value {"0": 1, "1": null, "2": 0}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -389,7 +389,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get integer dictionary value {"0": 1, "1": "integer", "2": 0}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, int?> GetIntInvalidString(this IDictionary operations)
             {
@@ -400,7 +400,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get integer dictionary value {"0": 1, "1": "integer", "2": 0}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -415,7 +415,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, long?> GetLongValid(this IDictionary operations)
             {
@@ -426,7 +426,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -441,7 +441,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -454,7 +454,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -470,7 +470,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get long dictionary value {"0": 1, "1": null, "2": 0}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, long?> GetLongInvalidNull(this IDictionary operations)
             {
@@ -481,7 +481,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get long dictionary value {"0": 1, "1": null, "2": 0}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -496,7 +496,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get long dictionary value {"0": 1, "1": "integer", "2": 0}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, long?> GetLongInvalidString(this IDictionary operations)
             {
@@ -507,7 +507,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get long dictionary value {"0": 1, "1": "integer", "2": 0}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -522,7 +522,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, double?> GetFloatValid(this IDictionary operations)
             {
@@ -533,7 +533,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -548,7 +548,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -561,7 +561,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -577,7 +577,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, double?> GetFloatInvalidNull(this IDictionary operations)
             {
@@ -588,7 +588,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -603,7 +603,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, double?> GetFloatInvalidString(this IDictionary operations)
             {
@@ -614,7 +614,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -629,7 +629,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, double?> GetDoubleValid(this IDictionary operations)
             {
@@ -640,7 +640,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -655,7 +655,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -668,7 +668,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -684,7 +684,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, double?> GetDoubleInvalidNull(this IDictionary operations)
             {
@@ -695,7 +695,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -710,7 +710,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, double?> GetDoubleInvalidString(this IDictionary operations)
             {
@@ -721,7 +721,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -736,7 +736,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, string> GetStringValid(this IDictionary operations)
             {
@@ -747,7 +747,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -762,7 +762,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -775,7 +775,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -791,7 +791,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, string> GetStringWithNull(this IDictionary operations)
             {
@@ -802,7 +802,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -817,7 +817,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, string> GetStringWithInvalid(this IDictionary operations)
             {
@@ -828,7 +828,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -844,7 +844,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// "1492-10-12"}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, DateTime?> GetDateValid(this IDictionary operations)
             {
@@ -856,7 +856,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// "1492-10-12"}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -872,7 +872,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// "1492-10-12"}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -886,7 +886,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// "1492-10-12"}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -902,7 +902,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, DateTime?> GetDateInvalidNull(this IDictionary operations)
             {
@@ -913,7 +913,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -928,7 +928,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get date dictionary value {"0": "2011-03-22", "1": "date"}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, DateTime?> GetDateInvalidChars(this IDictionary operations)
             {
@@ -939,7 +939,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get date dictionary value {"0": "2011-03-22", "1": "date"}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -955,7 +955,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, DateTime?> GetDateTimeValid(this IDictionary operations)
             {
@@ -967,7 +967,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -983,7 +983,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -997,7 +997,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -1013,7 +1013,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, DateTime?> GetDateTimeInvalidNull(this IDictionary operations)
             {
@@ -1024,7 +1024,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1039,7 +1039,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, DateTime?> GetDateTimeInvalidChars(this IDictionary operations)
             {
@@ -1050,7 +1050,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1066,7 +1066,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// hex (25, 29, 43)} with each item encoded in base64
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, byte[]> GetByteValid(this IDictionary operations)
             {
@@ -1078,7 +1078,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// hex (25, 29, 43)} with each item encoded in base64
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1094,7 +1094,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// hex (25, 29, 43)} with each elementencoded in base 64
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -1108,7 +1108,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// hex (25, 29, 43)} with each elementencoded in base 64
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -1125,7 +1125,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// first item base64 encoded
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, byte[]> GetByteInvalidNull(this IDictionary operations)
             {
@@ -1137,7 +1137,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// first item base64 encoded
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1152,7 +1152,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get dictionary of complex type null value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, Widget> GetComplexNull(this IDictionary operations)
             {
@@ -1163,7 +1163,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get dictionary of complex type null value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1178,7 +1178,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get empty dictionary of complex type {}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, Widget> GetComplexEmpty(this IDictionary operations)
             {
@@ -1189,7 +1189,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get empty dictionary of complex type {}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1205,7 +1205,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, Widget> GetComplexItemNull(this IDictionary operations)
             {
@@ -1217,7 +1217,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1233,7 +1233,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, Widget> GetComplexItemEmpty(this IDictionary operations)
             {
@@ -1245,7 +1245,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1261,7 +1261,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, Widget> GetComplexValid(this IDictionary operations)
             {
@@ -1273,7 +1273,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1290,7 +1290,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// "string": "6"}}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -1305,7 +1305,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// "string": "6"}}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -1321,7 +1321,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get a null array
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, IList<string>> GetArrayNull(this IDictionary operations)
             {
@@ -1332,7 +1332,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get a null array
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1347,7 +1347,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get an empty dictionary {}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, IList<string>> GetArrayEmpty(this IDictionary operations)
             {
@@ -1358,7 +1358,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get an empty dictionary {}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1374,7 +1374,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// "2": ["7", "8", "9"]}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, IList<string>> GetArrayItemNull(this IDictionary operations)
             {
@@ -1386,7 +1386,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// "2": ["7", "8", "9"]}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1402,7 +1402,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// ["7", "8", "9"]}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, IList<string>> GetArrayItemEmpty(this IDictionary operations)
             {
@@ -1414,7 +1414,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// ["7", "8", "9"]}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1430,7 +1430,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// "6"], "2": ["7", "8", "9"]}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, IList<string>> GetArrayValid(this IDictionary operations)
             {
@@ -1442,7 +1442,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// "6"], "2": ["7", "8", "9"]}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1458,7 +1458,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// "6"], "2": ["7", "8", "9"]}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -1472,7 +1472,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// "6"], "2": ["7", "8", "9"]}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -1488,7 +1488,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get an dictionaries of dictionaries with value null
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, IDictionary<string, string>> GetDictionaryNull(this IDictionary operations)
             {
@@ -1499,7 +1499,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// Get an dictionaries of dictionaries with value null
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1515,7 +1515,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// value {}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, IDictionary<string, string>> GetDictionaryEmpty(this IDictionary operations)
             {
@@ -1527,7 +1527,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// value {}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1544,7 +1544,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// "seven", "8": "eight", "9": "nine"}}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, IDictionary<string, string>> GetDictionaryItemNull(this IDictionary operations)
             {
@@ -1557,7 +1557,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// "seven", "8": "eight", "9": "nine"}}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1574,7 +1574,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// "seven", "8": "eight", "9": "nine"}}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, IDictionary<string, string>> GetDictionaryItemEmpty(this IDictionary operations)
             {
@@ -1587,7 +1587,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// "seven", "8": "eight", "9": "nine"}}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1604,7 +1604,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, IDictionary<string, string>> GetDictionaryValid(this IDictionary operations)
             {
@@ -1617,7 +1617,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1634,7 +1634,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -1649,7 +1649,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
             /// "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>

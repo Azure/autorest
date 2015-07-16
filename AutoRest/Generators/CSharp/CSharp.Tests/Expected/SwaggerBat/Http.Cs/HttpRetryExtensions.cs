@@ -14,7 +14,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 408 status code, then 200 after retry
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void Head408(this IHttpRetry operations)
             {
@@ -25,7 +25,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 408 status code, then 200 after retry
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -39,7 +39,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 500 status code, then 200 after retry
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -53,7 +53,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 500 status code, then 200 after retry
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -70,7 +70,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 500 status code, then 200 after retry
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -84,7 +84,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 500 status code, then 200 after retry
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -101,7 +101,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 502 status code, then 200 after retry
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void Get502(this IHttpRetry operations)
             {
@@ -112,7 +112,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 502 status code, then 200 after retry
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -126,7 +126,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 503 status code, then 200 after retry
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -140,7 +140,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 503 status code, then 200 after retry
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -157,7 +157,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 503 status code, then 200 after retry
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -171,7 +171,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 503 status code, then 200 after retry
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -188,7 +188,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 504 status code, then 200 after retry
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -202,7 +202,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 504 status code, then 200 after retry
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -219,7 +219,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 504 status code, then 200 after retry
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -233,7 +233,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 504 status code, then 200 after retry
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true

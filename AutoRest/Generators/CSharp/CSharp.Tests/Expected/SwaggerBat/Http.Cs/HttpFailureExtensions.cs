@@ -14,7 +14,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Get empty error form server
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static bool? GetEmptyError(this IHttpFailure operations)
             {
@@ -25,7 +25,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Get empty error form server
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.

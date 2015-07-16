@@ -446,5 +446,28 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
             Assert.Equal(true, serviceClient.Methods[2].IsAbsoluteUrl);
             Assert.Equal(false, serviceClient.Methods[1].IsAbsoluteUrl);
         }
+
+        [Fact]
+        public void FlatteningTest()
+        {
+            var settings = new Settings
+            {
+                Namespace = "Test",
+                Input = @"Swagger\swagger-resource-flattening.json"
+            };
+
+
+            var modeler = new SwaggerModeler(settings);
+            var serviceClient = modeler.Build();
+            var codeGen = new SampleAzureCodeGenerator(settings);
+            codeGen.NormalizeClientModel(serviceClient);
+
+            Assert.NotNull(serviceClient);
+            Assert.True(serviceClient.ModelTypes.Any(t => t.Name == "Product"));
+            // ProductProperties type is not removed because it is referenced in response of one of the methods
+            Assert.True(serviceClient.ModelTypes.Any(t => t.Name == "ProductProperties"));
+            Assert.Equal(serviceClient.ModelTypes.First(t => t.Name == "ProductProperties").Properties.Count, 
+                serviceClient.ModelTypes.First(t => t.Name == "Product").Properties.Count);
+        }
     }
 }

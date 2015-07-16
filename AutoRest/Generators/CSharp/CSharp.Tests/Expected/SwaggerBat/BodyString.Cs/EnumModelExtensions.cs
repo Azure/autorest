@@ -15,7 +15,7 @@ namespace Fixtures.SwaggerBatBodyString
             /// 'blue_color'.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Colors? GetNotExpandable(this IEnumModel operations)
             {
@@ -27,7 +27,7 @@ namespace Fixtures.SwaggerBatBodyString
             /// 'blue_color'.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -43,7 +43,7 @@ namespace Fixtures.SwaggerBatBodyString
             /// 'blue_color'
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='stringBody'>
             /// Possible values for this parameter include: 'red color', 'green-color',
@@ -59,7 +59,7 @@ namespace Fixtures.SwaggerBatBodyString
             /// 'blue_color'
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='stringBody'>
             /// Possible values for this parameter include: 'red color', 'green-color',

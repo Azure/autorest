@@ -14,7 +14,7 @@ namespace Fixtures.SwaggerBatBodyBoolean
             /// Get true Boolean value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static bool? GetTrue(this IBoolModel operations)
             {
@@ -25,7 +25,7 @@ namespace Fixtures.SwaggerBatBodyBoolean
             /// Get true Boolean value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -40,7 +40,7 @@ namespace Fixtures.SwaggerBatBodyBoolean
             /// Set Boolean value true
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='boolBody'>
             /// </param>
@@ -53,7 +53,7 @@ namespace Fixtures.SwaggerBatBodyBoolean
             /// Set Boolean value true
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='boolBody'>
             /// </param>
@@ -69,7 +69,7 @@ namespace Fixtures.SwaggerBatBodyBoolean
             /// Get false Boolean value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static bool? GetFalse(this IBoolModel operations)
             {
@@ -80,7 +80,7 @@ namespace Fixtures.SwaggerBatBodyBoolean
             /// Get false Boolean value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -95,7 +95,7 @@ namespace Fixtures.SwaggerBatBodyBoolean
             /// Set Boolean value false
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='boolBody'>
             /// </param>
@@ -108,7 +108,7 @@ namespace Fixtures.SwaggerBatBodyBoolean
             /// Set Boolean value false
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='boolBody'>
             /// </param>
@@ -124,7 +124,7 @@ namespace Fixtures.SwaggerBatBodyBoolean
             /// Get null Boolean value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static bool? GetNull(this IBoolModel operations)
             {
@@ -135,7 +135,7 @@ namespace Fixtures.SwaggerBatBodyBoolean
             /// Get null Boolean value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -150,7 +150,7 @@ namespace Fixtures.SwaggerBatBodyBoolean
             /// Get invalid Boolean value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static bool? GetInvalid(this IBoolModel operations)
             {
@@ -161,7 +161,7 @@ namespace Fixtures.SwaggerBatBodyBoolean
             /// Get invalid Boolean value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.

@@ -5,7 +5,7 @@ namespace Fixtures.SwaggerBatBodyString.Models
     using System.Runtime.Serialization;
 
     /// <summary>
-    /// Defines values for Colors
+    /// Defines values for Colors.
     /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum Colors

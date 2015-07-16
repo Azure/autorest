@@ -14,7 +14,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get true Boolean value on path
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='boolPath'>
             /// true boolean value
@@ -28,7 +28,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get true Boolean value on path
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='boolPath'>
             /// true boolean value
@@ -45,7 +45,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get false Boolean value on path
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='boolPath'>
             /// false boolean value
@@ -59,7 +59,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get false Boolean value on path
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='boolPath'>
             /// false boolean value
@@ -76,7 +76,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '1000000' integer value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='intPath'>
             /// '1000000' integer value
@@ -90,7 +90,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '1000000' integer value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='intPath'>
             /// '1000000' integer value
@@ -107,7 +107,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '-1000000' integer value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='intPath'>
             /// '-1000000' integer value
@@ -121,7 +121,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '-1000000' integer value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='intPath'>
             /// '-1000000' integer value
@@ -138,7 +138,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '10000000000' 64 bit integer value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='longPath'>
             /// '10000000000' 64 bit integer value
@@ -152,7 +152,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '10000000000' 64 bit integer value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='longPath'>
             /// '10000000000' 64 bit integer value
@@ -169,7 +169,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '-10000000000' 64 bit integer value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='longPath'>
             /// '-10000000000' 64 bit integer value
@@ -183,7 +183,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '-10000000000' 64 bit integer value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='longPath'>
             /// '-10000000000' 64 bit integer value
@@ -200,7 +200,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '1.034E+20' numeric value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='floatPath'>
             /// '1.034E+20'numeric value
@@ -214,7 +214,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '1.034E+20' numeric value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='floatPath'>
             /// '1.034E+20'numeric value
@@ -231,7 +231,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '-1.034E-20' numeric value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='floatPath'>
             /// '-1.034E-20'numeric value
@@ -245,7 +245,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '-1.034E-20' numeric value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='floatPath'>
             /// '-1.034E-20'numeric value
@@ -262,7 +262,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '9999999.999' numeric value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='doublePath'>
             /// '9999999.999'numeric value
@@ -276,7 +276,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '9999999.999' numeric value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='doublePath'>
             /// '9999999.999'numeric value
@@ -293,7 +293,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '-9999999.999' numeric value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='doublePath'>
             /// '-9999999.999'numeric value
@@ -307,7 +307,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '-9999999.999' numeric value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='doublePath'>
             /// '-9999999.999'numeric value
@@ -324,7 +324,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='stringPath'>
             /// '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter
@@ -339,7 +339,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='stringPath'>
             /// '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter
@@ -357,7 +357,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get 'begin!*'();:@ &amp;=+$,/?#[]end
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='stringPath'>
             /// 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible
@@ -372,7 +372,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get 'begin!*'();:@ &amp;=+$,/?#[]end
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='stringPath'>
             /// 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible
@@ -390,7 +390,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get ''
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='stringPath'>
             /// '' string value. Possible values for this parameter include: ''
@@ -404,7 +404,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get ''
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='stringPath'>
             /// '' string value. Possible values for this parameter include: ''
@@ -421,7 +421,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get null (should throw)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='stringPath'>
             /// null string value
@@ -435,7 +435,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get null (should throw)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='stringPath'>
             /// null string value
@@ -452,7 +452,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get using uri with 'green color' in path parameter
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='enumPath'>
             /// send the value green. Possible values for this parameter include: 'red
@@ -467,7 +467,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get using uri with 'green color' in path parameter
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='enumPath'>
             /// send the value green. Possible values for this parameter include: 'red
@@ -485,7 +485,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get null (should throw on the client before the request is sent on wire)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='enumPath'>
             /// send null should throw. Possible values for this parameter include: 'red
@@ -500,7 +500,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get null (should throw on the client before the request is sent on wire)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='enumPath'>
             /// send null should throw. Possible values for this parameter include: 'red
@@ -518,7 +518,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bytePath'>
             /// '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
@@ -532,7 +532,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bytePath'>
             /// '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
@@ -549,7 +549,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '' as byte array
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bytePath'>
             /// '' as byte array
@@ -563,7 +563,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '' as byte array
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bytePath'>
             /// '' as byte array
@@ -580,7 +580,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get null as byte array (should throw)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bytePath'>
             /// null as byte array (should throw)
@@ -594,7 +594,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get null as byte array (should throw)
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='bytePath'>
             /// null as byte array (should throw)
@@ -611,7 +611,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '2012-01-01' as date
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='datePath'>
             /// '2012-01-01' as date
@@ -625,7 +625,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '2012-01-01' as date
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='datePath'>
             /// '2012-01-01' as date
@@ -643,7 +643,7 @@ namespace Fixtures.SwaggerBatUrl
             /// depending on date representation
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='datePath'>
             /// null as date (should throw)
@@ -658,7 +658,7 @@ namespace Fixtures.SwaggerBatUrl
             /// depending on date representation
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='datePath'>
             /// null as date (should throw)
@@ -675,7 +675,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '2012-01-01T01:01:01Z' as date-time
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='dateTimePath'>
             /// '2012-01-01T01:01:01Z' as date-time
@@ -689,7 +689,7 @@ namespace Fixtures.SwaggerBatUrl
             /// Get '2012-01-01T01:01:01Z' as date-time
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='dateTimePath'>
             /// '2012-01-01T01:01:01Z' as date-time
@@ -707,7 +707,7 @@ namespace Fixtures.SwaggerBatUrl
             /// representation of date-time
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='dateTimePath'>
             /// null as date-time
@@ -722,7 +722,7 @@ namespace Fixtures.SwaggerBatUrl
             /// representation of date-time
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='dateTimePath'>
             /// null as date-time

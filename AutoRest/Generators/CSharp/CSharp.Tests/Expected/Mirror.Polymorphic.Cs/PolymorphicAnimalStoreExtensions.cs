@@ -17,7 +17,7 @@ namespace Fixtures.MirrorPolymorphic
             /// order.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='animalCreateOrUpdateParameter'>
             /// An Animal
@@ -34,7 +34,7 @@ namespace Fixtures.MirrorPolymorphic
             /// order.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='animalCreateOrUpdateParameter'>
             /// An Animal

@@ -16,7 +16,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// '2.0' to succeed
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='apiVersion'>
             /// This should appear as a method parameter, use value '2.0'. Possible values
@@ -32,7 +32,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// '2.0' to succeed
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='apiVersion'>
             /// This should appear as a method parameter, use value '2.0'. Possible values
@@ -51,7 +51,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// null to succeed
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='apiVersion'>
             /// This should appear as a method parameter, use value null, this should
@@ -67,7 +67,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// null to succeed
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='apiVersion'>
             /// This should appear as a method parameter, use value null, this should
@@ -86,7 +86,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// '2.0' to succeed
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='apiVersion'>
             /// This should appear as a method parameter, use value '2.0'. Possible values
@@ -102,7 +102,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// '2.0' to succeed
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='apiVersion'>
             /// This should appear as a method parameter, use value '2.0'. Possible values
@@ -121,7 +121,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// '2.0' to succeed
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='apiVersion'>
             /// The api version, which appears in the query, the value is always '2.0'.
@@ -137,7 +137,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// '2.0' to succeed
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='apiVersion'>
             /// The api version, which appears in the query, the value is always '2.0'.

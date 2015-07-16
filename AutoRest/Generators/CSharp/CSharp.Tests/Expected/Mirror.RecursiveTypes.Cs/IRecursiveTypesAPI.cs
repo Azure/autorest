@@ -49,10 +49,10 @@ namespace Fixtures.MirrorRecursiveTypes
         /// API body mody.
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// The headers that will be added to request.
         /// </param>        
         /// <param name='cancellationToken'>
-        /// Cancellation token.
+        /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse<Product>> PostWithHttpMessagesAsync(string subscriptionId, string resourceGroupName, string apiVersion, Product body = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 

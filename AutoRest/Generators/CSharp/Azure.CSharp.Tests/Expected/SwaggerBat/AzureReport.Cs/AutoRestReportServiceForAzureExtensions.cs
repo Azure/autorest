@@ -15,7 +15,7 @@ namespace Fixtures.Azure.SwaggerBatAzureReport
             /// Get test coverage report
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, int?> GetReport(this IAutoRestReportServiceForAzure operations)
             {
@@ -26,7 +26,7 @@ namespace Fixtures.Azure.SwaggerBatAzureReport
             /// Get test coverage report
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.

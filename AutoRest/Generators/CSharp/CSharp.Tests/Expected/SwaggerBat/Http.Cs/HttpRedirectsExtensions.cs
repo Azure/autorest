@@ -14,7 +14,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 300 status code and redirect to /http/success/200
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void Head300(this IHttpRedirects operations)
             {
@@ -25,7 +25,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 300 status code and redirect to /http/success/200
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -39,7 +39,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 300 status code and redirect to /http/success/200
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<string> Get300(this IHttpRedirects operations)
             {
@@ -50,7 +50,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 300 status code and redirect to /http/success/200
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -65,7 +65,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 301 status code and redirect to /http/success/200
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void Head301(this IHttpRedirects operations)
             {
@@ -76,7 +76,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 301 status code and redirect to /http/success/200
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -90,7 +90,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 301 status code and redirect to /http/success/200
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void Get301(this IHttpRedirects operations)
             {
@@ -101,7 +101,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 301 status code and redirect to /http/success/200
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -117,7 +117,7 @@ namespace Fixtures.SwaggerBatHttp
             /// caller for evaluation
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -133,7 +133,7 @@ namespace Fixtures.SwaggerBatHttp
             /// caller for evaluation
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -150,7 +150,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 302 status code and redirect to /http/success/200
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void Head302(this IHttpRedirects operations)
             {
@@ -161,7 +161,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 302 status code and redirect to /http/success/200
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -175,7 +175,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 302 status code and redirect to /http/success/200
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void Get302(this IHttpRedirects operations)
             {
@@ -186,7 +186,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Return 302 status code and redirect to /http/success/200
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -202,7 +202,7 @@ namespace Fixtures.SwaggerBatHttp
             /// caller for evaluation
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -218,7 +218,7 @@ namespace Fixtures.SwaggerBatHttp
             /// caller for evaluation
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -237,7 +237,7 @@ namespace Fixtures.SwaggerBatHttp
             /// code
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -253,7 +253,7 @@ namespace Fixtures.SwaggerBatHttp
             /// code
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -270,7 +270,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Redirect with 307, resulting in a 200 success
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void Head307(this IHttpRedirects operations)
             {
@@ -281,7 +281,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Redirect with 307, resulting in a 200 success
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -295,7 +295,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Redirect get with 307, resulting in a 200 success
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void Get307(this IHttpRedirects operations)
             {
@@ -306,7 +306,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Redirect get with 307, resulting in a 200 success
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -320,7 +320,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Put redirected with 307, resulting in a 200 after redirect
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -334,7 +334,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Put redirected with 307, resulting in a 200 after redirect
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -351,7 +351,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Patch redirected with 307, resulting in a 200 after redirect
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -365,7 +365,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Patch redirected with 307, resulting in a 200 after redirect
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -382,7 +382,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Post redirected with 307, resulting in a 200 after redirect
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -396,7 +396,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Post redirected with 307, resulting in a 200 after redirect
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -413,7 +413,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Delete redirected with 307, resulting in a 200 after redirect
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true
@@ -427,7 +427,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Delete redirected with 307, resulting in a 200 after redirect
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='booleanValue'>
             /// Simple boolean value true

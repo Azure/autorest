@@ -16,7 +16,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// subscription id = '1234-5678-9012-3456' to succeed
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='subscriptionId'>
             /// This should appear as a method parameter, use value '1234-5678-9012-3456'
@@ -31,7 +31,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// subscription id = '1234-5678-9012-3456' to succeed
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='subscriptionId'>
             /// This should appear as a method parameter, use value '1234-5678-9012-3456'
@@ -50,7 +50,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// making this call
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='subscriptionId'>
             /// This should appear as a method parameter, use value null, client-side
@@ -67,7 +67,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// making this call
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='subscriptionId'>
             /// This should appear as a method parameter, use value null, client-side
@@ -86,7 +86,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// subscription id = '1234-5678-9012-3456' to succeed
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='subscriptionId'>
             /// Should appear as a method parameter -use value '1234-5678-9012-3456'
@@ -101,7 +101,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// subscription id = '1234-5678-9012-3456' to succeed
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='subscriptionId'>
             /// Should appear as a method parameter -use value '1234-5678-9012-3456'
@@ -119,7 +119,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// subscription id = '1234-5678-9012-3456' to succeed
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='subscriptionId'>
             /// The subscriptionId, which appears in the path, the value is always
@@ -135,7 +135,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// subscription id = '1234-5678-9012-3456' to succeed
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='subscriptionId'>
             /// The subscriptionId, which appears in the path, the value is always
