@@ -22,7 +22,7 @@ using Microsoft.Rest.Generator.Utilities
         public override async Task ExecuteAsync()
         {
 #line 3 "ServiceClientInterfaceTemplate.cshtml"
-Write(Header("/// "));
+Write(Header("// "));
 
 #line default
 #line hidden

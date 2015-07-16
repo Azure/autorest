@@ -40,7 +40,7 @@ using Microsoft.Rest.Generator.CSharp.Azure.Templates
         public override async Task ExecuteAsync()
         {
 #line 6 "AzureMethodGroupTemplate.cshtml"
-Write(Header("/// "));
+Write(Header("// "));
 
 #line default
 #line hidden

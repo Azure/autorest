@@ -40,7 +40,7 @@ using Microsoft.Rest.Generator.Utilities
         public override async Task ExecuteAsync()
         {
 #line 6 "ModelTemplate.cshtml"
-Write(Header("/// "));
+Write(Header("// "));
 
 #line default
 #line hidden
