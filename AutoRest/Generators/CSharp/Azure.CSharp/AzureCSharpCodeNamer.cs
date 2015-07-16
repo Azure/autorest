@@ -36,48 +36,38 @@ namespace Microsoft.Rest.Generator.CSharp
             }
 
             var pageTypeFormat = "Page<{0}>";
-            var pagableMethods = serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureCodeGenerator.PageableExtension));
 
-            var exclusionSet = new HashSet<CompositeType>();
+            var convertedTypes = new Dictionary<IType, CompositeType>();
 
-            foreach (var method in pagableMethods)
+            foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureCodeGenerator.PageableExtension)))
             {
-                // get underlying type of the sequence
-                var underlyingType = ((SequenceType)((CompositeType)method.ReturnType).Properties
-                                             .First(p => !p.Name.Equals("nextLink", StringComparison.OrdinalIgnoreCase)).Type).ElementType;
-
-
-                var pagableTypeName = string.Format(CultureInfo.InvariantCulture, pageTypeFormat, underlyingType.Name);
-
-                CompositeType pagedResult = serviceClient.ModelTypes.FirstOrDefault(c =>
-                    c.Name.Equals(pagableTypeName, StringComparison.OrdinalIgnoreCase));
-                if (pagedResult == null)
+                foreach (var responseStatus in method.Responses.Where(r => r.Value is CompositeType).Select(s => s.Key).ToArray())
                 {
-                    pagedResult = new CompositeType
-                    {
-                        Name = pagableTypeName
-                    };
-                    pagedResult.Extensions[AzureCodeGenerator.ExternalExtension] = true;
-                    serviceClient.ModelTypes.Add(pagedResult);
-                }
+                    var compositType = (CompositeType) method.Responses[responseStatus];
+                    var sequenceType = compositType.Properties.Select(p => p.Type).FirstOrDefault(t => t is SequenceType) as SequenceType;
 
-                if (serviceClient.ModelTypes.Contains(method.ReturnType))
-                {
-                    exclusionSet.Add((CompositeType)method.ReturnType);
-                    for (int i = 0; i < method.Responses.Count; i++)
+                    // if the type is a wrapper over pageable response
+                    if(sequenceType != null &&
+                       compositType.Properties.Count == 2 && 
+                       compositType.Properties.Any(p => p.SerializedName.Equals("nextLink", StringComparison.OrdinalIgnoreCase)))
                     {
-                        if (method.Responses.ElementAt(i).Value == method.ReturnType)
+                        var pagableTypeName = string.Format(CultureInfo.InvariantCulture, pageTypeFormat, sequenceType.ElementType.Name);
+                        
+                        CompositeType pagedResult = new CompositeType
                         {
-                            method.Responses[method.Responses.ElementAt(i).Key] = pagedResult;
-                        }
+                            Name = pagableTypeName
+                        };
+                        pagedResult.Extensions[AzureCodeGenerator.ExternalExtension] = true;
+
+                        convertedTypes[method.Responses[responseStatus]] = pagedResult;
+                        method.Responses[responseStatus] = pagedResult;
                     }
                 }
-                method.ReturnType = pagedResult;
-            }
 
-            foreach (var typeToExclude in exclusionSet)
-            {
-                serviceClient.ModelTypes.Remove(typeToExclude);
+                if (convertedTypes.ContainsKey(method.ReturnType))
+                {
+                    method.ReturnType = convertedTypes[method.ReturnType];
+                }
             }
         }
     }
