@@ -110,6 +110,10 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                     }
                     return PrimaryType.String;
                 case DataType.Number:
+                    if (string.Equals("decimal", Format, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return PrimaryType.Decimal;
+                    }
                     return PrimaryType.Double;
                 case DataType.Integer:
                     if (string.Equals("int64", Format, StringComparison.OrdinalIgnoreCase))

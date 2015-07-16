@@ -63,6 +63,11 @@ namespace Microsoft.Rest.Generator.ClientModel
             get { return KnownTypes[SupportedPrimaryType.Double]; }
         }
 
+        public static PrimaryType Decimal
+        {
+            get { return KnownTypes[SupportedPrimaryType.Decimal]; }
+        }
+
         public static PrimaryType String
         {
             get { return KnownTypes[SupportedPrimaryType.String]; }
@@ -152,6 +157,7 @@ namespace Microsoft.Rest.Generator.ClientModel
             Int,
             Long,
             Double,
+            Decimal,
             String,
             Stream,
             ByteArray,
