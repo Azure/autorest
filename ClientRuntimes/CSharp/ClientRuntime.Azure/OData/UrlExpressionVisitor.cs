@@ -193,7 +193,7 @@ namespace Microsoft.Azure.OData
                 Visit(leftSide);
                 _generatedUrl.Append(", ");
                 Visit(rightSide);
-                _generatedUrl.Append(") eq true");
+                _generatedUrl.Append(")");
                 return node;
             }
 
@@ -213,7 +213,7 @@ namespace Microsoft.Azure.OData
                 Visit(leftSide);
                 _generatedUrl.Append(", ");
                 Visit(rightSide);
-                _generatedUrl.Append(") eq true");
+                _generatedUrl.Append(")");
                 return node;
             }
 
