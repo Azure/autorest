@@ -3,6 +3,7 @@
 
 var util = require('util');
 var msRest = require('ms-rest');
+var msRestAzure = require('ms-rest-azure');
 var ServiceClient = msRest.ServiceClient;
 var WebResource = msRest.WebResource;
 
@@ -10,21 +11,21 @@ var models = require('../models');
 
 /**
  * @class
- * EnumModel
+ * XMsClientRequestId
  * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestSwaggerBATService.
- * Initializes a new instance of the EnumModel class.
+ * instance of the AutoRestAzureSpecialParametersTestClient.
+ * Initializes a new instance of the XMsClientRequestId class.
  * @constructor
  *
- * @param {AutoRestSwaggerBATService} client Reference to the service client.
+ * @param {AutoRestAzureSpecialParametersTestClient} client Reference to the service client.
  */
-function EnumModel(client) {
+function XMsClientRequestId(client) {
   this.client = client;
 }
 
 /**
- * Get enum value 'red color' from enumeration of 'red color', 'green-color',
- * 'blue_color'.
+ * Get method that overwrites x-ms-client-request header with value
+ * 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -34,7 +35,7 @@ function EnumModel(client) {
  *
  * @returns {Stream} The Response stream
  */
-EnumModel.prototype.getNotExpandable = function (options, callback) {
+XMsClientRequestId.prototype.get = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -43,10 +44,22 @@ EnumModel.prototype.getNotExpandable = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//string/enum/notExpandable';
+                   '//azurespecials/overwrite/x-ms-client-request-id/method/';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -57,6 +70,10 @@ EnumModel.prototype.getNotExpandable = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -97,28 +114,15 @@ EnumModel.prototype.getNotExpandable = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    // Deserialize Response
-    if (statusCode === 200) {
-      var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
-      }
-    }
 
     return callback(null, result);
   });
 };
 
 /**
- * Sends value 'red color' from enumeration of 'red color', 'green-color',
- * 'blue_color'
- * @param {Colors} [stringBody] Possible values for this parameter include: 'red color', 'green-color', 'blue_color'
+ * Get method that overwrites x-ms-client-request header with value
+ * 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+ * @param {String} [xMsClientRequestId] This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
  *
  * @param {object} [options]
  *
@@ -129,7 +133,7 @@ EnumModel.prototype.getNotExpandable = function (options, callback) {
  *
  * @returns {Stream} The Response stream
  */
-EnumModel.prototype.putNotExpandable = function (stringBody, options, callback) {
+XMsClientRequestId.prototype.paramGet = function (xMsClientRequestId, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -140,14 +144,14 @@ EnumModel.prototype.putNotExpandable = function (stringBody, options, callback) 
   }
   // Validate
   try {
-    if (stringBody === null || stringBody === undefined) {
-      throw new Error('\'stringBody\' cannot be null');
+    if (xMsClientRequestId === null || xMsClientRequestId === undefined) {
+      throw new Error('\'xMsClientRequestId\' cannot be null');
     }
-    if (stringBody !== null && stringBody !== undefined) {
-      var allowedValues = [ 'red color', 'green-color', 'blue_color' ];
-      if (!allowedValues.some( function(item) { return item === stringBody; })) {
-        throw new Error(stringBody + ' is not a valid value. The valid values are: ' + allowedValues);
-      }
+    if (xMsClientRequestId !== null && xMsClientRequestId !== undefined && typeof xMsClientRequestId !== 'string') {
+      throw new Error('xMsClientRequestId must be of type string.');
+    }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
     }
   } catch (error) {
     return callback(error);
@@ -155,17 +159,28 @@ EnumModel.prototype.putNotExpandable = function (stringBody, options, callback) 
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//string/enum/notExpandable';
+                   '//azurespecials/overwrite/x-ms-client-request-id/via-param/method/';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
-  httpRequest.method = 'PUT';
+  httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (xMsClientRequestId !== null) {
+    httpRequest.headers['x-ms-client-request-id'] = xMsClientRequestId;
+  }
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -174,11 +189,8 @@ EnumModel.prototype.putNotExpandable = function (stringBody, options, callback) 
     }
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  // Serialize Request
-  var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(stringBody));
-  httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -215,4 +227,4 @@ EnumModel.prototype.putNotExpandable = function (stringBody, options, callback) 
 };
 
 
-module.exports = EnumModel;
+module.exports = XMsClientRequestId;

@@ -10,9 +10,6 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Net45-Debug' or '$(Configuration)' == 'Net45-Release'">
     <LibraryFxTarget>net45</LibraryFxTarget>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Net40-Debug' or '$(Configuration)' == 'Net40-Release'">
-    <LibraryFxTarget>net40</LibraryFxTarget>
-  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Portable-Debug' or '$(Configuration)' == 'Portable-Release' ">
     <LibraryFxTarget>portable</LibraryFxTarget>
   </PropertyGroup>
@@ -45,7 +42,7 @@
     <RestCustomConstants>PORTABLE</RestCustomConstants>
   </PropertyGroup>
   
-  <PropertyGroup Condition=" '$(Configuration)' == 'Net45-Debug' or '$(Configuration)' == 'Net40-Debug' or '$(Configuration)' == 'Portable-Debug' ">
+  <PropertyGroup Condition=" '$(Configuration)' == 'Net45-Debug' or '$(Configuration)' == 'Portable-Debug' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -53,7 +50,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Net45-Release' or '$(Configuration)' == 'Net40-Release' or '$(Configuration)' == 'Portable-Release' ">
+  <PropertyGroup Condition=" '$(Configuration)' == 'Net45-Release' or '$(Configuration)' == 'Portable-Release' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <DefineConstants>TRACE;$(RestCustomConstants)</DefineConstants>
@@ -65,12 +62,6 @@
     <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(LibraryFxTarget)' == 'net40' ">
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(LibraryFxTarget)' == 'net45' ">
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>

@@ -17,7 +17,12 @@
       <Word>OAuthFlow</Word>
       <Word>Backoff</Word>
       <Word>ServiceClientCredentials</Word>
-      <Word>ArgumentNullException</Word>
+      <Word>ToString</Word>
+      <Word>TryAddWithoutValidation</Word>
+      <Word>NewGuid</Word>
+      <Word>httpRequest</Word>
+      <Word>msRestAzure</Word>
+      <Word>generateUuid</Word>
     </Recognized>
   </Words>
 </Dictionary>

@@ -144,7 +144,7 @@ namespace Microsoft.Rest.Generator.Utilities
         /// <param name="source">Source object.</param>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "U", Justification = "Common naming for generics.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "V", Justification = "Common naming for generics.")]
-        public static void LoadFrom<TU, TV>(this TU destination, TV source)
+        public static TU LoadFrom<TU, TV>(this TU destination, TV source)
             where TU : class
             where TV : class
         {
@@ -171,6 +171,7 @@ namespace Microsoft.Rest.Generator.Utilities
                     destinationProperty.SetValue(destination, sourceProperty.GetValue(source, null), null);
                 }
             }
+            return destination;
         }
 
         private static PropertyInfo GetBaseProperty(this Type type, string propertyName)

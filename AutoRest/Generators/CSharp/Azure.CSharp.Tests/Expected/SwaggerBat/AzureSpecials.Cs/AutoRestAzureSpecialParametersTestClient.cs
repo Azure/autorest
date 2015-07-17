@@ -37,9 +37,10 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
         /// <summary>
-        /// Management credentials for Azure.
+        /// Subscription credentials which uniquely identify Microsoft Azure
+        /// subscription.
         /// </summary>
-        public ServiceClientCredentials Credentials { get; private set; }
+        public SubscriptionCloudCredentials Credentials { get; private set; }
 
         /// <summary>
         /// The subscription id, which appears in the path, always modeled in
@@ -54,9 +55,16 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         public string ApiVersion { get; private set; }
 
         /// <summary>
+        /// Gets or sets the preferred language for the response.
+        /// </summary>
+        public string AcceptLanguage { get; set; }
+
+        /// <summary>
         /// The retry timeout for Long Running Operations.
         /// </summary>
         public int? LongRunningOperationRetryTimeout { get; set; }
+
+        public virtual IXMsClientRequestIdOperations XMsClientRequestId { get; private set; }
 
         public virtual ISubscriptionInCredentialsOperations SubscriptionInCredentials { get; private set; }
 
@@ -126,13 +134,13 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// Initializes a new instance of the AutoRestAzureSpecialParametersTestClient class.
         /// </summary>
         /// <param name='credentials'>
-        /// Required. Management credentials for Azure.
+        /// Required. Subscription credentials which uniquely identify Microsoft Azure subscription.
         /// </param>
         /// <param name='handlers'>
         /// Optional. The set of delegating handlers to insert in the http
         /// client pipeline.
         /// </param>
-        public AutoRestAzureSpecialParametersTestClient(ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        public AutoRestAzureSpecialParametersTestClient(SubscriptionCloudCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (credentials == null)
             {
@@ -148,13 +156,13 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='credentials'>
-        /// Required. Management credentials for Azure.
+        /// Required. Subscription credentials which uniquely identify Microsoft Azure subscription.
         /// </param>
         /// <param name='handlers'>
         /// Optional. The set of delegating handlers to insert in the http
         /// client pipeline.
         /// </param>
-        public AutoRestAzureSpecialParametersTestClient(Uri baseUri, ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        public AutoRestAzureSpecialParametersTestClient(Uri baseUri, SubscriptionCloudCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
             {
@@ -173,6 +181,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         /// </summary>
         private void Initialize()
         {
+            this.XMsClientRequestId = new XMsClientRequestIdOperations(this);
             this.SubscriptionInCredentials = new SubscriptionInCredentialsOperations(this);
             this.SubscriptionInMethod = new SubscriptionInMethodOperations(this);
             this.ApiVersionDefault = new ApiVersionDefaultOperations(this);
@@ -180,6 +189,11 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             this.SkipUrlEncoding = new SkipUrlEncodingOperations(this);
             this.BaseUri = new Uri("http://localhost");
             this.ApiVersion = "2015-07-01-preview";
+            this.AcceptLanguage = "en-US";
+            if (this.Credentials != null)
+            {
+                this.Credentials.InitializeServiceClient(this);
+            }
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,

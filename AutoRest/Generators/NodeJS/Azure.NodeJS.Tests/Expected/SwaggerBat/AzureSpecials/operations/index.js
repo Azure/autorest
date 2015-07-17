@@ -5,6 +5,7 @@
 
 'use strict';
 
+exports.XMsClientRequestId = require('./XMsClientRequestId');
 exports.SubscriptionInCredentials = require('./SubscriptionInCredentials');
 exports.SubscriptionInMethod = require('./SubscriptionInMethod');
 exports.ApiVersionDefault = require('./ApiVersionDefault');

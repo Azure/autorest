@@ -5,6 +5,7 @@ namespace Fixtures.SwaggerBatUrl
     using System.Net.Http;
     using System.Threading;
     using System.Threading.Tasks;
+    using Newtonsoft.Json;
     using Microsoft.Rest;
     using Models;
 
@@ -18,11 +19,32 @@ namespace Fixtures.SwaggerBatUrl
         /// </summary>
         Uri BaseUri { get; set; }
 
+        /// <summary>
+        /// Gets or sets json serialization settings.
+        /// </summary>
+        JsonSerializerSettings SerializationSettings { get; }
+
+        /// <summary>
+        /// Gets or sets json deserialization settings.
+        /// </summary>
+        JsonSerializerSettings DeserializationSettings { get; }        
+
+        /// <summary>
+        /// A string value 'globalItemStringPath' that appears in the path
+        /// </summary>
+        string GlobalStringPath { get; set; }
+
+        /// <summary>
+        /// should contain value null
+        /// </summary>
+        string GlobalStringQuery { get; set; }
+
+
         IPaths Paths { get; }
 
         IQueries Queries { get; }
 
         IPathItems PathItems { get; }
 
-        }
+    }
 }

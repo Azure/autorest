@@ -68,5 +68,19 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
                 return base.InitializeResponseBody;
             }
         }
+
+        /// <summary>
+        /// Gets the expression for default header setting. 
+        /// </summary>
+        public override string SetDefaultHeaders
+        {
+            get
+            {
+                IndentedStringBuilder sb = new IndentedStringBuilder();
+                sb.AppendLine("httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();")
+                  .AppendLine(base.SetDefaultHeaders);
+                return sb.ToString();
+            }
+        }
     }
 }

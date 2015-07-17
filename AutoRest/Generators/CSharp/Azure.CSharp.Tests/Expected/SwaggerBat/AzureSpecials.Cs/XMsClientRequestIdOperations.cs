@@ -1,4 +1,4 @@
-namespace Fixtures.SwaggerBatBodyComplex
+namespace Fixtures.Azure.SwaggerBatAzureSpecials
 {
     using System;
     using System.Collections.Generic;
@@ -10,30 +10,31 @@ namespace Fixtures.SwaggerBatBodyComplex
     using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
+    using Microsoft.Azure;
     using Models;
 
-    internal partial class Polymorphicrecursive : IServiceOperations<AutoRestComplexTestService>, IPolymorphicrecursive
+    internal partial class XMsClientRequestIdOperations : IServiceOperations<AutoRestAzureSpecialParametersTestClient>, IXMsClientRequestIdOperations
     {
         /// <summary>
-        /// Initializes a new instance of the Polymorphicrecursive class.
+        /// Initializes a new instance of the XMsClientRequestIdOperations class.
         /// </summary>
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        internal Polymorphicrecursive(AutoRestComplexTestService client)
+        internal XMsClientRequestIdOperations(AutoRestAzureSpecialParametersTestClient client)
         {
             this.Client = client;
         }
 
         /// <summary>
-        /// Gets a reference to the AutoRestComplexTestService
+        /// Gets a reference to the AutoRestAzureSpecialParametersTestClient
         /// </summary>
-        public AutoRestComplexTestService Client { get; private set; }
+        public AutoRestAzureSpecialParametersTestClient Client { get; private set; }
 
         /// <summary>
-        /// Get complex types that are polymorphic and have recursive references
+        /// Get method that overwrites x-ms-client-request header with value
+        /// 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
         /// </summary>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -41,7 +42,7 @@ namespace Fixtures.SwaggerBatBodyComplex
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<Fish>> GetValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> GetWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -51,11 +52,16 @@ namespace Fixtures.SwaggerBatBodyComplex
                 invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(invocationId, this, "GetValid", tracingParameters);
+                ServiceClientTracing.Enter(invocationId, this, "Get", tracingParameters);
             }
             // Construct URL
             string url = this.Client.BaseUri.AbsoluteUri + 
-                         "//complex/polymorphicrecursive/valid";
+                         "//azurespecials/overwrite/x-ms-client-request-id/method/";
+            List<string> queryParameters = new List<string>();
+            if (queryParameters.Count > 0)
+            {
+                url += "?" + string.Join("&", queryParameters);
+            }
             // trim all duplicate forward slashes in the url
             url = Regex.Replace(url, "([^:]/)/+", "$1");
             // Create HTTP transport objects
@@ -63,6 +69,15 @@ namespace Fixtures.SwaggerBatBodyComplex
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            if (this.Client.AcceptLanguage != null)
+            {
+                if (httpRequest.Headers.Contains("accept-language"))
+                {
+                    httpRequest.Headers.Remove("accept-language");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("accept-language", this.Client.AcceptLanguage);
+            }
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)
@@ -75,6 +90,9 @@ namespace Fixtures.SwaggerBatBodyComplex
                 }
             }
 
+            // Set Credentials
+            cancellationToken.ThrowIfCancellationRequested();
+            await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
             // Send Request
             if (shouldTrace)
             {
@@ -106,15 +124,9 @@ namespace Fixtures.SwaggerBatBodyComplex
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse<Fish>();
+            var result = new AzureOperationResponse();
             result.Request = httpRequest;
             result.Response = httpResponse;
-            // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
-            {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Fish>(responseContent, this.Client.DeserializationSettings);
-            }
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -123,62 +135,12 @@ namespace Fixtures.SwaggerBatBodyComplex
         }
 
         /// <summary>
-        /// Put complex types that are polymorphic and have recursive references
+        /// Get method that overwrites x-ms-client-request header with value
+        /// 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
         /// </summary>
-        /// <param name='complexBody'>
-        /// Please put a salmon that looks like this:
-        /// {
-        /// "dtype": "salmon",
-        /// "species": "king",
-        /// "length": 1,
-        /// "age": 1,
-        /// "location": "alaska",
-        /// "iswild": true,
-        /// "siblings": [
-        /// {
-        /// "dtype": "shark",
-        /// "species": "predator",
-        /// "length": 20,
-        /// "age": 6,
-        /// "siblings": [
-        /// {
-        /// "dtype": "salmon",
-        /// "species": "coho",
-        /// "length": 2,
-        /// "age": 2,
-        /// "location": "atlantic",
-        /// "iswild": true,
-        /// "siblings": [
-        /// {
-        /// "dtype": "shark",
-        /// "species": "predator",
-        /// "length": 20,
-        /// "age": 6
-        /// },
-        /// {
-        /// "dtype": "sawshark",
-        /// "species": "dangerous",
-        /// "length": 10,
-        /// "age": 105
-        /// }
-        /// ]
-        /// },
-        /// {
-        /// "dtype": "sawshark",
-        /// "species": "dangerous",
-        /// "length": 10,
-        /// "age": 105
-        /// }
-        /// ]
-        /// },
-        /// {
-        /// "dtype": "sawshark",
-        /// "species": "dangerous",
-        /// "length": 10,
-        /// "age": 105
-        /// }
-        /// ]
-        /// }
+        /// <param name='xMsClientRequestId'>
+        /// This should appear as a method parameter, use value
+        /// '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
         /// </param>    
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -186,15 +148,11 @@ namespace Fixtures.SwaggerBatBodyComplex
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> PutValidWithHttpMessagesAsync(Fish complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> ParamGetWithHttpMessagesAsync(string xMsClientRequestId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (complexBody == null)
+            if (xMsClientRequestId == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "complexBody");
-            }
-            if (complexBody != null)
-            {
-                complexBody.Validate();
+                throw new ValidationException(ValidationRules.CannotBeNull, "xMsClientRequestId");
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -203,20 +161,42 @@ namespace Fixtures.SwaggerBatBodyComplex
             {
                 invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("complexBody", complexBody);
+                tracingParameters.Add("xMsClientRequestId", xMsClientRequestId);
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(invocationId, this, "PutValid", tracingParameters);
+                ServiceClientTracing.Enter(invocationId, this, "ParamGet", tracingParameters);
             }
             // Construct URL
             string url = this.Client.BaseUri.AbsoluteUri + 
-                         "//complex/polymorphicrecursive/valid";
+                         "//azurespecials/overwrite/x-ms-client-request-id/via-param/method/";
+            List<string> queryParameters = new List<string>();
+            if (queryParameters.Count > 0)
+            {
+                url += "?" + string.Join("&", queryParameters);
+            }
             // trim all duplicate forward slashes in the url
             url = Regex.Replace(url, "([^:]/)/+", "$1");
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
-            httpRequest.Method = new HttpMethod("PUT");
+            httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
+            httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            if (xMsClientRequestId != null)
+            {
+                if (httpRequest.Headers.Contains("x-ms-client-request-id"))
+                {
+                    httpRequest.Headers.Remove("x-ms-client-request-id");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", xMsClientRequestId);
+            }
+            if (this.Client.AcceptLanguage != null)
+            {
+                if (httpRequest.Headers.Contains("accept-language"))
+                {
+                    httpRequest.Headers.Remove("accept-language");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("accept-language", this.Client.AcceptLanguage);
+            }
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)
@@ -229,10 +209,9 @@ namespace Fixtures.SwaggerBatBodyComplex
                 }
             }
 
-            // Serialize Request  
-            string requestContent = JsonConvert.SerializeObject(complexBody, this.Client.SerializationSettings);
-            httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
-            httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+            // Set Credentials
+            cancellationToken.ThrowIfCancellationRequested();
+            await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
             // Send Request
             if (shouldTrace)
             {
@@ -264,7 +243,7 @@ namespace Fixtures.SwaggerBatBodyComplex
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse();
+            var result = new AzureOperationResponse();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (shouldTrace)

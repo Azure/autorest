@@ -44,6 +44,9 @@ function AutoRestResourceFlatteningTestService(credentials, baseUri, options) {
   }
   this.credentials = credentials;
 
+  if(!this.acceptLanguage) {
+    this.acceptLanguage = 'en-US';
+  }
   this._models = models;
 }
 
@@ -80,6 +83,9 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (resourceArr
         }
       }
     }
+    if (this.acceptLanguage !== null && this.acceptLanguage !== undefined && typeof this.acceptLanguage !== 'string') {
+      throw new Error('this.acceptLanguage must be of type string.');
+    }
   } catch (error) {
     return callback(error);
   }
@@ -101,12 +107,10 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (resourceArr
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  // Serialize Request
-  var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(resourceArray));
-  httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -114,6 +118,12 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (resourceArr
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  // Serialize Request
+  var requestContent = null;
+  requestContent = JSON.stringify(msRest.serializeObject(resourceArray));
+  httpRequest.body = requestContent;
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -169,6 +179,14 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.acceptLanguage !== null && this.acceptLanguage !== undefined && typeof this.acceptLanguage !== 'string') {
+      throw new Error('this.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.baseUri + 
@@ -187,9 +205,10 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -197,6 +216,9 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -283,6 +305,9 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resour
         }
       }
     }
+    if (this.acceptLanguage !== null && this.acceptLanguage !== undefined && typeof this.acceptLanguage !== 'string') {
+      throw new Error('this.acceptLanguage must be of type string.');
+    }
   } catch (error) {
     return callback(error);
   }
@@ -304,12 +329,10 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resour
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  // Serialize Request
-  var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(resourceDictionary));
-  httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -317,6 +340,12 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resour
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  // Serialize Request
+  var requestContent = null;
+  requestContent = JSON.stringify(msRest.serializeObject(resourceDictionary));
+  httpRequest.body = requestContent;
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -372,6 +401,14 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.acceptLanguage !== null && this.acceptLanguage !== undefined && typeof this.acceptLanguage !== 'string') {
+      throw new Error('this.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.baseUri + 
@@ -390,9 +427,10 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -400,6 +438,9 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -498,6 +539,9 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
     if (resourceComplexObject !== null && resourceComplexObject !== undefined) {
       client._models['ResourceCollection'].validate(resourceComplexObject);
     }
+    if (this.acceptLanguage !== null && this.acceptLanguage !== undefined && typeof this.acceptLanguage !== 'string') {
+      throw new Error('this.acceptLanguage must be of type string.');
+    }
   } catch (error) {
     return callback(error);
   }
@@ -519,12 +563,10 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  // Serialize Request
-  var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(resourceComplexObject));
-  httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -532,6 +574,12 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  // Serialize Request
+  var requestContent = null;
+  requestContent = JSON.stringify(msRest.serializeObject(resourceComplexObject));
+  httpRequest.body = requestContent;
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -587,6 +635,14 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.acceptLanguage !== null && this.acceptLanguage !== undefined && typeof this.acceptLanguage !== 'string') {
+      throw new Error('this.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.baseUri + 
@@ -605,9 +661,10 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -615,6 +672,9 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
       }
     }
   }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
