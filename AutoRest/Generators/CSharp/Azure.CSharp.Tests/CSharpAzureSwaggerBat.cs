@@ -652,9 +652,13 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
             {
                 Dictionary<string, List<string>> customHeaders = new Dictionary<string, List<string>>();
                 customHeaders["x-ms-client-request-id"] = new List<string> { validClientId };
-                client.XMsClientRequestId.GetWithHttpMessagesAsync(customHeaders)
+                var result1 = client.XMsClientRequestId.GetWithHttpMessagesAsync(customHeaders)
                     .ConfigureAwait(true).GetAwaiter().GetResult();
-                client.XMsClientRequestId.ParamGet(validClientId);
+                Assert.Equal("123", result1.RequestId);
+
+                var result2 = client.XMsClientRequestId.ParamGetWithHttpMessagesAsync(validClientId)
+                    .ConfigureAwait(false).GetAwaiter().GetResult();
+                Assert.Equal("123", result2.RequestId);
             }
         }
     }

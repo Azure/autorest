@@ -122,6 +122,7 @@ SkipUrlEncoding.prototype.getMethodPathValid = function (unencodedPathParam, opt
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = response.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -226,6 +227,7 @@ SkipUrlEncoding.prototype.getPathPathValid = function (unencodedPathParam, optio
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = response.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -330,6 +332,7 @@ SkipUrlEncoding.prototype.getSwaggerPathValid = function (unencodedPathParam, op
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = response.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -435,6 +438,7 @@ SkipUrlEncoding.prototype.getMethodQueryValid = function (q1, options, callback)
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = response.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -538,6 +542,7 @@ SkipUrlEncoding.prototype.getMethodQueryNull = function (q1, options, callback) 
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = response.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -643,6 +648,7 @@ SkipUrlEncoding.prototype.getPathQueryValid = function (q1, options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = response.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -747,6 +753,7 @@ SkipUrlEncoding.prototype.getSwaggerQueryValid = function (q1, options, callback
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = response.headers['x-ms-request-id'];
 
     return callback(null, result);
   });

@@ -61,8 +61,13 @@ Write(EmptyLine);
 #line default
 #line hidden
             WriteLiteral("\r\n\r\n  // Create Result\r\n  var result = new msRest.HttpOperationResponse();\r\n  res" +
-"ult.request = httpRequest;\r\n  result.response = response;\r\n  result.body = respo" +
-"nse;\r\n  return callback(null, result);\r\n});");
+"ult.request = httpRequest;\r\n  result.response = response;\r\n  ");
+#line 28 "MethodStreamPipelineTemplate.cshtml"
+Write(Model.InitializeResponseBody);
+
+#line default
+#line hidden
+            WriteLiteral("\r\n  result.body = response;\r\n  return callback(null, result);\r\n});");
         }
         #pragma warning restore 1998
     }

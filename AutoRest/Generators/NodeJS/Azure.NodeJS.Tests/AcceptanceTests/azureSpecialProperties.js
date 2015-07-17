@@ -150,6 +150,7 @@ describe('nodejs', function () {
       testClient.xMsClientRequestId.paramGet(validClientId, function (error, result) {
         should.not.exist(error);
         result.response.statusCode.should.equal(200);
+        result.requestId.should.equal('123');
         var options = {
           customHeaders: {
             'x-ms-client-request-id': validClientId
@@ -158,6 +159,7 @@ describe('nodejs', function () {
         testClient.xMsClientRequestId.get(options, function (error, result) {
           should.not.exist(error);
           result.response.statusCode.should.equal(200);
+          result.requestId.should.equal('123');
           done();
         });
       });

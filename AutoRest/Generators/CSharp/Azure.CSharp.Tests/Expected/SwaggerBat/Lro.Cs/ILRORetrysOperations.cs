@@ -6,6 +6,7 @@ namespace Fixtures.Azure.SwaggerBatLro
     using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.Rest;
+    using System.Linq;
     using Microsoft.Azure;
     using Models;
 

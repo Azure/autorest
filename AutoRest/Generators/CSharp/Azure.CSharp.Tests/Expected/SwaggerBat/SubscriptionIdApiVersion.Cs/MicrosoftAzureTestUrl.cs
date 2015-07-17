@@ -13,6 +13,7 @@ namespace Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
+    using System.Linq;
     using Microsoft.Azure;
     using Models;
 
