@@ -127,6 +127,12 @@ Parameter name: {0}</value>
   <data name="ArgumentCannotBeNegative" xml:space="preserve">
     <value>The specified argument {0} cannot be initialized with a negative value.</value>
   </data>
+  <data name="AuthenticationEndpointContainsQuery" xml:space="preserve">
+    <value>The AuthenticationEndpoint must not contain a query string.</value>
+  </data>
+  <data name="AuthenticationValidationFailed" xml:space="preserve">
+    <value>Authentication with Azure Active Directory Failed using clientId: {0}</value>
+  </data>
   <data name="CertificateCloudCredentials_InitializeServiceClient_NoWebRequestHandler" xml:space="preserve">
     <value>{0} requires a {1} in its HTTP pipeline to work with client certificates.</value>
   </data>
@@ -153,6 +159,15 @@ Parameter name: {0}</value>
   </data>
   <data name="DefaultRetryStrategyNotFound" xml:space="preserve">
     <value>Default retry strategy for technology {0} was not not defined, and there is no overall default strategy.</value>
+  </data>
+  <data name="ErrorAcquiringToken" xml:space="preserve">
+    <value>Authentication error while acquiring token: '{0}'.</value>
+  </data>
+  <data name="ErrorCreatingAuthenticationContext" xml:space="preserve">
+    <value>Authentication error while configuring active directory: '{0}'.</value>
+  </data>
+  <data name="ErrorRenewingToken" xml:space="preserve">
+    <value>Authentication error while renewing token: '{0}'.</value>
   </data>
   <data name="ExceptionRetryHandlerMissing" xml:space="preserve">
     <value>Retry handler is not present in the HttpClient handler stack.</value>

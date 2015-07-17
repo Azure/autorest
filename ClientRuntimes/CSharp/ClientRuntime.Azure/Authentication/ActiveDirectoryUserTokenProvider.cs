@@ -5,6 +5,7 @@ using System;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Azure.Properties;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Rest;
 
@@ -35,7 +36,7 @@ namespace Microsoft.Azure.Authentication
         /// <param name="environment">The azure environment to manage resources in.</param>
         /// <param name="clientRedirectUri">The redirect URI for authentication requests for 
         /// this client application.</param>
-        public ActiveDirectoryUserTokenProvider(string clientId, string domain, 
+        public ActiveDirectoryUserTokenProvider(string clientId, string domain,
             AzureEnvironment environment, Uri clientRedirectUri)
         {
             ValidateCommonParameters(clientId, domain, environment);
@@ -47,13 +48,20 @@ namespace Microsoft.Azure.Authentication
             this._clientId = clientId;
             this._tokenAudience = environment.TokenAudience.ToString();
             string authority = environment.AuthenticationEndpoint + domain;
-            this._authenticationContext = new AuthenticationContext(authority, 
-                environment.ValidateAuthority);
-            var authenticatioResult = this._authenticationContext.AcquireTokenAsync(
-                environment.TokenAudience.ToString(), clientId, clientRedirectUri, 
-                new PlatformParameters(PromptBehavior.Always, null), UserIdentifier.AnyUser, 
-                EnableEbdMagicCookie).Result;
-            Initialize(authenticatioResult);
+            try
+            {
+                this._authenticationContext = new AuthenticationContext(authority,
+                    environment.ValidateAuthority);
+                var authenticatioResult = this._authenticationContext.AcquireTokenAsync(
+                    environment.TokenAudience.ToString(), clientId, clientRedirectUri,
+                    GetPlatformParameters(), UserIdentifier.AnyUser,
+                    EnableEbdMagicCookie).Result;
+                Initialize(authenticatioResult);
+            }
+            catch (AdalException authenticationException)
+            {
+                throw new AuthenticationException(Resources.ErrorAcquiringToken, authenticationException);
+            }
         }
 
         /// <summary>
@@ -65,25 +73,9 @@ namespace Microsoft.Azure.Authentication
         /// <param name="username">The username to use for authentication.</param>
         /// <param name="password">The secret password associated with thsi user.</param>
         /// <param name="environment">The azure environment to manage resources in.</param>
-        public ActiveDirectoryUserTokenProvider(string clientId, string domain, string username, string password, AzureEnvironment environment)
+        public ActiveDirectoryUserTokenProvider(string clientId, string domain, string username, string password, AzureEnvironment environment) :
+            this(clientId, domain, username, password, environment, null)
         {
-            ValidateCommonParameters(clientId, domain, environment);
-            if (string.IsNullOrWhiteSpace(username))
-            {
-                throw new ArgumentOutOfRangeException("username");
-            }
-
-            if (string.IsNullOrWhiteSpace(password))
-            {
-                throw new ArgumentOutOfRangeException("password");
-            }
-
-            this._clientId = clientId;
-            this._tokenAudience = environment.TokenAudience.ToString();
-            this._authenticationContext = new AuthenticationContext(environment.AuthenticationEndpoint + domain, environment.ValidateAuthority);
-            var authenticationResult = this._authenticationContext.AcquireTokenAsync(environment.TokenAudience.ToString(), clientId,
-                    new UserCredential(username, password)).Result;
-            Initialize(authenticationResult);
         }
 
         /// <summary>
@@ -111,10 +103,20 @@ namespace Microsoft.Azure.Authentication
 
             this._clientId = clientId;
             this._tokenAudience = environment.TokenAudience.ToString();
-            this._authenticationContext = new AuthenticationContext(environment.AuthenticationEndpoint + domain, environment.ValidateAuthority, cache);
-            var authenticationResult = this._authenticationContext.AcquireTokenAsync(environment.TokenAudience.ToString(), clientId,
-                    new UserCredential(username, password)).Result;
-            Initialize(authenticationResult);
+            try
+            {
+                this._authenticationContext = cache == null ? 
+                    new AuthenticationContext(environment.AuthenticationEndpoint + domain, environment.ValidateAuthority) :
+                    new AuthenticationContext(environment.AuthenticationEndpoint + domain, environment.ValidateAuthority, cache);
+                var authenticationResult = this._authenticationContext.AcquireTokenAsync(environment.TokenAudience.ToString(), clientId,
+                        new UserCredential(username, password)).Result;
+                Initialize(authenticationResult);
+            }
+            catch (AdalException authenticationException)
+            {
+                throw new AuthenticationException(Resources.ErrorAcquiringToken, authenticationException);
+            }
+
         }
 
         /// <summary>
@@ -127,7 +129,7 @@ namespace Microsoft.Azure.Authentication
                 string.IsNullOrWhiteSpace(authenticationResult.UserInfo.DisplayableId))
             {
                 throw new AuthenticationException(string.Format(CultureInfo.CurrentCulture,
-                    "Authentication with Azure Active Directory Failed using clientId; {0}",
+                    Resources.AuthenticationValidationFailed,
                     this._clientId));
             }
 
@@ -149,11 +151,20 @@ namespace Microsoft.Azure.Authentication
         public virtual async Task<string> GetAccessTokenAsync(CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
-            var authenticationResult = await this._authenticationContext.AcquireTokenSilentAsync(this._tokenAudience,
-                this._clientId,
-                new UserIdentifier(this._userId,
-                    UserIdentifierType.OptionalDisplayableId)).ConfigureAwait(false);
-            return authenticationResult.AccessToken;
+            try
+            {
+                var authenticationResult =
+                    await this._authenticationContext.AcquireTokenSilentAsync(this._tokenAudience,
+                        this._clientId,
+                        new UserIdentifier(this._userId,
+                            UserIdentifierType.OptionalDisplayableId)).ConfigureAwait(false);
+                return authenticationResult.AccessToken;
+            }
+            catch (AdalException authenticationException)
+            {
+                throw new AuthenticationException(Resources.ErrorRenewingToken, authenticationException);
+            }
+
         }
 
         private static void ValidateCommonParameters(string clientId, string domain, AzureEnvironment environment)
@@ -170,6 +181,15 @@ namespace Microsoft.Azure.Authentication
             {
                 throw new ArgumentOutOfRangeException("environment");
             }
+        }
+
+        private static PlatformParameters GetPlatformParameters()
+        {
+#if PORTABLE
+            return new PlatformParameters();
+#else
+            return new PlatformParameters(PromptBehavior.Always, null);
+#endif
         }
     }
 }

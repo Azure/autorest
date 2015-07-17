@@ -85,12 +85,7 @@ namespace Microsoft.Rest
             }
 
             request.Headers.Authorization = new AuthenticationHeaderValue(TokenProvider.TokenType, await TokenProvider.GetAccessTokenAsync(cancellationToken).ConfigureAwait(false));
-#if PORTABLE
-            await Task.Run(() => base.ProcessHttpRequestAsync(request, cancellationToken), cancellationToken);
-#else
-            
-            await new Task(() => base.ProcessHttpRequestAsync(request, cancellationToken), cancellationToken);
-#endif
+            await Task.Run(() => base.ProcessHttpRequestAsync(request, cancellationToken), cancellationToken).ConfigureAwait(false);
         }
     }
 }

@@ -73,9 +73,9 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         public void OrgIdCredentialsThrowsForInvalidCredentials()
         {
             var exception = Assert.Throws<AggregateException>(() => new UserAccessTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
-                this.Domain, this.Username, "This is not a valid password"));
+                this.Domain, "unuseduser@thisdomain.com", "This is not a valid password"));
             Assert.NotNull(exception.InnerException);
-            Assert.Equal(typeof(AdalServiceException), exception.InnerException.GetType());
+            Assert.Equal(typeof(AdalException), exception.InnerException.GetType());
             exception = Assert.Throws<AggregateException>(() => new UserAccessTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
                 this.Domain, "bad_user@bad_domain.com", this.Password));
             Assert.NotNull(exception.InnerException);

@@ -90,6 +90,24 @@ namespace Microsoft.Azure.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The AuthenticationEndpoint must not contain a query string..
+        /// </summary>
+        internal static string AuthenticationEndpointContainsQuery {
+            get {
+                return ResourceManager.GetString("AuthenticationEndpointContainsQuery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Authentication with Azure Active Directory Failed using clientId: {0}.
+        /// </summary>
+        internal static string AuthenticationValidationFailed {
+            get {
+                return ResourceManager.GetString("AuthenticationValidationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} requires a {1} in its HTTP pipeline to work with client certificates..
         /// </summary>
         internal static string CertificateCloudCredentials_InitializeServiceClient_NoWebRequestHandler {
@@ -167,6 +185,33 @@ namespace Microsoft.Azure.Properties {
         internal static string DefaultRetryStrategyNotFound {
             get {
                 return ResourceManager.GetString("DefaultRetryStrategyNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Authentication error while acquiring token: &apos;{0}&apos;..
+        /// </summary>
+        internal static string ErrorAcquiringToken {
+            get {
+                return ResourceManager.GetString("ErrorAcquiringToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Authentication error while configuring active directory: &apos;{0}&apos;..
+        /// </summary>
+        internal static string ErrorCreatingAuthenticationContext {
+            get {
+                return ResourceManager.GetString("ErrorCreatingAuthenticationContext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Authentication error while renewing token: &apos;{0}&apos;..
+        /// </summary>
+        internal static string ErrorRenewingToken {
+            get {
+                return ResourceManager.GetString("ErrorRenewingToken", resourceCulture);
             }
         }
         

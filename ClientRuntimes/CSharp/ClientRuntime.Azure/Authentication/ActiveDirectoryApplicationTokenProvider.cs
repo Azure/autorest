@@ -5,6 +5,7 @@ using System;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Azure.Properties;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Rest;
 
@@ -67,7 +68,7 @@ namespace Microsoft.Azure.Authentication
         /// </summary>
         public virtual async Task<string> GetAccessTokenAsync(CancellationToken cancellationToken)
         {
-            var result = await this.Authenticate();
+            var result = await this.Authenticate().ConfigureAwait(false);
             ValidateAuthenticationResult(result);
             return result.AccessToken;
         }
@@ -85,10 +86,19 @@ namespace Microsoft.Azure.Authentication
             ValidateCommonParameters(clientId, domain, environment);
             this._clientId = clientId;
             this._tokenAudience = environment.TokenAudience.ToString();
-            this._authenticationContext = (cache == null)
-                ? new AuthenticationContext(environment.AuthenticationEndpoint + domain, environment.ValidateAuthority)
-                : new AuthenticationContext(environment.AuthenticationEndpoint + domain, environment.ValidateAuthority,
-                    cache);
+            try
+            {
+                this._authenticationContext = (cache == null)
+                    ? new AuthenticationContext(environment.AuthenticationEndpoint + domain,
+                        environment.ValidateAuthority)
+                    : new AuthenticationContext(environment.AuthenticationEndpoint + domain,
+                        environment.ValidateAuthority,
+                        cache);
+            }
+            catch (AdalException authenticationException)
+            {
+                throw new AuthenticationException(Resources.ErrorCreatingAuthenticationContext, authenticationException);
+            }
         }
         /// <summary>
         /// Set the ActiveDirectory authentication properties for this user
@@ -99,7 +109,7 @@ namespace Microsoft.Azure.Authentication
             if (authenticationResult == null || authenticationResult.AccessToken == null )
             {
                 throw new AuthenticationException(string.Format(CultureInfo.CurrentCulture,
-                    "Authentication with Azure Active Directory Failed using clientId; {0}",
+                    Resources.AuthenticationValidationFailed,
                     this._clientId));
             }
 
@@ -108,7 +118,14 @@ namespace Microsoft.Azure.Authentication
 
         private async Task<AuthenticationResult> Authenticate()
         {
-            return await this._authenticationContext.AcquireTokenAsync(this._tokenAudience, this._credential);
+            try
+            {
+                return await this._authenticationContext.AcquireTokenAsync(this._tokenAudience, this._credential).ConfigureAwait(false);
+            }
+            catch (AdalException authenticationException)
+            {
+                throw new AuthenticationException(Resources.ErrorAcquiringToken, authenticationException);
+            }
         }
 
         /// <summary>

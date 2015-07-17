@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using Microsoft.Azure.Properties;
 
 namespace Microsoft.Azure.Authentication
 {
@@ -10,6 +11,8 @@ namespace Microsoft.Azure.Authentication
     /// </summary>
     public sealed class AzureEnvironment
     {
+        private Uri _authenticationEndpoint;
+
         private static readonly AzureEnvironment AzureSettings = new AzureEnvironment
         {
             AuthenticationEndpoint= new Uri("https://login.windows.net/"), 
@@ -37,7 +40,11 @@ namespace Microsoft.Azure.Authentication
         /// <summary>
         /// Gets or sets the ActiveDirectory Endpoint for the Azure Environment
         /// </summary>
-        public Uri AuthenticationEndpoint { get; set; }
+        public Uri AuthenticationEndpoint 
+        {
+            get { return _authenticationEndpoint; }
+            set { _authenticationEndpoint = EnsureTrailingSlash(value); } 
+        }
 
         /// <summary>
         /// Gets or sets the Token audience for an endpoint
@@ -48,5 +55,32 @@ namespace Microsoft.Azure.Authentication
         /// Gets or sets a value that determines whether the authentication endpoint should be validated with Azure AD
         /// </summary>
         public bool ValidateAuthority { get; set; }
+
+        private static Uri EnsureTrailingSlash(Uri authenticationEndpoint)
+        {
+            if (authenticationEndpoint == null)
+            {
+                throw new ArgumentNullException("authenticationEndpoint");
+            }
+
+            UriBuilder builder = new UriBuilder(authenticationEndpoint);
+            if (!string.IsNullOrEmpty(builder.Query))
+            {
+                throw new ArgumentOutOfRangeException(Resources.AuthenticationEndpointContainsQuery);
+            }
+
+            var path = builder.Path;
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                path = "/";
+            }
+            else if (!path.EndsWith("/", StringComparison.Ordinal))
+            {
+                path = path + "/";
+            }
+
+            builder.Path = path;
+            return builder.Uri;
+        }
     }
 }

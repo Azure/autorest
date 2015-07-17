@@ -13,7 +13,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TokenCloudCredentialAddsHeader()
         {
-            var tokenCredentials = new TokenCredentials("123","abc");
+            var tokenCredentials = new TokenCredentials("abc");
             var handler = new RecordedDelegatingHandler { StatusCodeToReturn = HttpStatusCode.OK };
             var fakeClient = new FakeServiceClientWithCredentials(tokenCredentials);
             fakeClient = new FakeServiceClientWithCredentials(tokenCredentials, handler);
@@ -50,6 +50,8 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             Assert.Equal("abc", handler.RequestHeaders.Authorization.Parameter);
 
             credentials= new TokenCredentials("xyz");
+            fakeClient = new FakeServiceClientWithCredentials(credentials, handler);
+
             fakeClient.DoStuff().Wait();
 
             Assert.Equal("Bearer", handler.RequestHeaders.Authorization.Scheme);
