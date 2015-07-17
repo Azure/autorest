@@ -222,27 +222,28 @@ Write(Model.SetDefaultHeaders);
 #line default
 #line hidden
 
-            WriteLiteral("\r\n");
-#line 49 "MethodTemplate.cshtml"
-  
+            WriteLiteral("  ");
+#line 48 "MethodTemplate.cshtml"
+Write(EmptyLine);
 
 #line default
 #line hidden
-
-#line 49 "MethodTemplate.cshtml"
-   if (Model.RequestBody != null)
+            WriteLiteral("\r\n  unless custom_headers.nil?\r\n    custom_headers.each do |key, value|\r\n      ht" +
+"tp_request[key] = value\r\n    end\r\n  end\r\n\r\n");
+#line 55 "MethodTemplate.cshtml"
+ if (Model.RequestBody != null)
   {
   
 
 #line default
 #line hidden
 
-#line 51 "MethodTemplate.cshtml"
+#line 57 "MethodTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-#line 51 "MethodTemplate.cshtml"
+#line 57 "MethodTemplate.cshtml"
             
 
 #line default
@@ -250,60 +251,65 @@ Write(EmptyLine);
 
             WriteLiteral("  # Serialize Request\r\n  http_request.add_field(\'Content-Type\', \'application/json" +
 "\')\r\n  ");
-#line 54 "MethodTemplate.cshtml"
+#line 60 "MethodTemplate.cshtml"
 Write(Model.CreateSerializationString(Model.RequestBody.Name, Model.RequestBody.Type, "http_request.body", Settings.Namespace));
 
 #line default
 #line hidden
             WriteLiteral("\r\n");
-#line 55 "MethodTemplate.cshtml"
+#line 61 "MethodTemplate.cshtml"
   }
 
 #line default
 #line hidden
 
             WriteLiteral("\r\n  ");
-#line 57 "MethodTemplate.cshtml"
+#line 63 "MethodTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
             WriteLiteral("\r\n  # Send Request\r\n  promise = Concurrent::Promise.new { ");
-#line 59 "MethodTemplate.cshtml"
+#line 65 "MethodTemplate.cshtml"
                                   Write(Model.MakeRequestMethodReference);
 
 #line default
 #line hidden
             WriteLiteral("(http_request, url) }\r\n\r\n  ");
-#line 61 "MethodTemplate.cshtml"
+#line 67 "MethodTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
             WriteLiteral("\r\n  promise = promise.then do |http_response|\r\n    status_code = http_response.co" +
 "de.to_i\r\n    response_content = http_response.body\r\n    unless (");
-#line 65 "MethodTemplate.cshtml"
+#line 71 "MethodTemplate.cshtml"
        Write(Model.SuccessStatusCodePredicate);
 
 #line default
 #line hidden
             WriteLiteral(")\r\n");
-#line 66 "MethodTemplate.cshtml"
+#line 72 "MethodTemplate.cshtml"
       
 
 #line default
 #line hidden
 
-#line 66 "MethodTemplate.cshtml"
+#line 72 "MethodTemplate.cshtml"
        if (Model.DefaultResponse != null)
       {
 
 #line default
 #line hidden
 
-            WriteLiteral("      error_model = JSON.parse(response_content)\r\n      fail ClientRuntime::HttpO" +
-"perationException.new(http_request, http_response, error_model)\r\n");
-#line 70 "MethodTemplate.cshtml"
+            WriteLiteral("      error_model = JSON.parse(response_content)\r\n      fail ");
+#line 75 "MethodTemplate.cshtml"
+         Write(Model.OperationExceptionTypeString);
+
+#line default
+#line hidden
+            WriteLiteral(".new(http_request, http_response, error_model)\r\n");
+#line 76 "MethodTemplate.cshtml"
       }
       else
       {
@@ -311,35 +317,45 @@ Write(EmptyLine);
 #line default
 #line hidden
 
-            WriteLiteral("      fail ClientRuntime::HttpOperationException.new(http_request, http_response)" +
-"\r\n");
-#line 74 "MethodTemplate.cshtml"
+            WriteLiteral("      fail ");
+#line 79 "MethodTemplate.cshtml"
+         Write(Model.OperationExceptionTypeString);
+
+#line default
+#line hidden
+            WriteLiteral(".new(http_request, http_response)\r\n");
+#line 80 "MethodTemplate.cshtml"
       }
 
 #line default
 #line hidden
 
             WriteLiteral("    end\r\n\r\n    ");
-#line 77 "MethodTemplate.cshtml"
+#line 83 "MethodTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    # Create Result\r\n    result = ClientRuntime::HttpOperationResponse.new(http" +
-"_request, http_response)\r\n    ");
-#line 80 "MethodTemplate.cshtml"
+            WriteLiteral("\r\n    # Create Result\r\n    result = ");
+#line 85 "MethodTemplate.cshtml"
+         Write(Model.OperationResponseReturnTypeString);
+
+#line default
+#line hidden
+            WriteLiteral(".new(http_request, http_response)\r\n    ");
+#line 86 "MethodTemplate.cshtml"
 Write(Model.InitializeResponseBody);
 
 #line default
 #line hidden
             WriteLiteral("\r\n\r\n");
-#line 82 "MethodTemplate.cshtml"
+#line 88 "MethodTemplate.cshtml"
     
 
 #line default
 #line hidden
 
-#line 82 "MethodTemplate.cshtml"
+#line 88 "MethodTemplate.cshtml"
      foreach (var responsePair in Model.Responses.Where(r => r.Value != null && r.Value.IsSerializable()))
     {
 
@@ -347,13 +363,13 @@ Write(Model.InitializeResponseBody);
 #line hidden
 
             WriteLiteral("    \r\n    # Deserialize Response\r\n    if status_code == ");
-#line 86 "MethodTemplate.cshtml"
+#line 92 "MethodTemplate.cshtml"
                  Write(Model.GetStatusCodeReference(responsePair.Key));
 
 #line default
 #line hidden
             WriteLiteral("\r\n      begin\r\n        ");
-#line 88 "MethodTemplate.cshtml"
+#line 94 "MethodTemplate.cshtml"
     Write(Model.CreateDeserializationString("response_content", Model.ReturnType, "result.body", Settings.Namespace));
 
 #line default
@@ -361,20 +377,20 @@ Write(Model.InitializeResponseBody);
             WriteLiteral("\r\n      rescue Exception => e\r\n        fail ClientRuntime::DeserializationError.n" +
 "ew(\"Error occured in deserializing the response\", e.message, e.backtrace, respon" +
 "se_content)\r\n      end\r\n    end\r\n    \r\n");
-#line 94 "MethodTemplate.cshtml"
+#line 100 "MethodTemplate.cshtml"
     }
 
 #line default
 #line hidden
 
             WriteLiteral("\r\n");
-#line 96 "MethodTemplate.cshtml"
+#line 102 "MethodTemplate.cshtml"
     
 
 #line default
 #line hidden
 
-#line 96 "MethodTemplate.cshtml"
+#line 102 "MethodTemplate.cshtml"
      if (Model.ReturnType != null && Model.DefaultResponse != null && !Model.Responses.Any() && Model.DefaultResponse.IsSerializable())
     {
 
@@ -382,7 +398,7 @@ Write(Model.InitializeResponseBody);
 #line hidden
 
             WriteLiteral("    \r\n    begin\r\n      ");
-#line 100 "MethodTemplate.cshtml"
+#line 106 "MethodTemplate.cshtml"
   Write(Model.CreateDeserializationString("response_content", Model.ReturnType, "result.body", Settings.Namespace));
 
 #line default
@@ -390,20 +406,20 @@ Write(Model.InitializeResponseBody);
             WriteLiteral("\r\n    rescue Exception => e\r\n      fail ClientRuntime::DeserializationError.new(\"" +
 "Error occured in deserializing the response\", e.message, e.backtrace, response_c" +
 "ontent)\r\n    end\r\n    \r\n");
-#line 105 "MethodTemplate.cshtml"
+#line 111 "MethodTemplate.cshtml"
     }
 
 #line default
 #line hidden
 
             WriteLiteral("\r\n    ");
-#line 107 "MethodTemplate.cshtml"
+#line 113 "MethodTemplate.cshtml"
 Write(EmptyLine);
 
 #line default
 #line hidden
             WriteLiteral("\r\n    result\r\n  end\r\n\r\n  ");
-#line 111 "MethodTemplate.cshtml"
+#line 117 "MethodTemplate.cshtml"
 Write(EmptyLine);
 
 #line default

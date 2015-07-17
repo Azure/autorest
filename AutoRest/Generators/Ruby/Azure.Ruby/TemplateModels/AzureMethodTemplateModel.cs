@@ -156,12 +156,19 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         {
             get
             {
+                var sb = new IndentedStringBuilder();
+
                 if (this.HttpMethod == HttpMethod.Head && this.ReturnType != null)
                 {
-                    return "result.body = (status_code == 204)";
+                    sb.AppendLine("result.body = (status_code == 204)");
                 }
 
-                return base.InitializeResponseBody;
+                sb.AppendLine(
+                    "result.request_id = http_response['x-ms-request-id'] unless http_response['x-ms-request-id'].nil?");
+
+                sb.AppendLine(base.InitializeResponseBody);
+
+                return sb.ToString();
             }
         }
 
@@ -179,19 +186,30 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             }
         }
 
-        ///// <summary>
-        ///// Get the type for operation exception.
-        ///// </summary>
-        //public override string OperationExceptionTypeString
-        //{
-        //    get
-        //    {
-        //        if (DefaultResponse == null || DefaultResponse.Name == "CloudError")
-        //        {
-        //            return "CloudException";
-        //        }
-        //        return base.OperationExceptionTypeString;
-        //    }
-        //}
+        /// <summary>
+        /// Returns AzureOperationResponse generic type declaration.
+        /// </summary>
+        public override string OperationResponseReturnTypeString
+        {
+            get
+            {
+                return "ClientRuntimeAzure::AzureOperationResponse";
+            }
+        }
+
+        /// <summary>
+        /// Get the type for operation exception.
+        /// </summary>
+        public override string OperationExceptionTypeString
+        {
+            get
+            {
+                //if (DefaultResponse == null || DefaultResponse.Name == "CloudError")
+                //{
+                //    return "CloudException";
+                //}
+                return base.OperationExceptionTypeString;
+            }
+        }
     }
 }

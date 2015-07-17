@@ -82,6 +82,8 @@ namespace Microsoft.Rest.Generator.Ruby
                     declarations.Add(string.Format(format, parameter.Name));
                 }
 
+                declarations.Add("custom_headers = nil");
+
                 return string.Join(", ", declarations);
             }
         }

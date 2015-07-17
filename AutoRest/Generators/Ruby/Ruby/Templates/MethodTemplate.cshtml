@@ -45,8 +45,14 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
   @:http_request["@(parameter.SerializedName)"] = @parameter.Type.ToString(parameter.Name)
     }
   }
+  @EmptyLine
+  unless custom_headers.nil?
+    custom_headers.each do |key, value|
+      http_request[key] = value
+    end
+  end
 
-  @if (Model.RequestBody != null)
+@if (Model.RequestBody != null)
   {
   @EmptyLine
   @:# Serialize Request
@@ -66,17 +72,17 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
       @if (Model.DefaultResponse != null)
       {
       @:error_model = JSON.parse(response_content)
-      @:fail ClientRuntime::HttpOperationException.new(http_request, http_response, error_model)
+      @:fail @(Model.OperationExceptionTypeString).new(http_request, http_response, error_model)
       }
       else
       {
-      @:fail ClientRuntime::HttpOperationException.new(http_request, http_response)
+      @:fail @(Model.OperationExceptionTypeString).new(http_request, http_response)
       }
     end
 
     @EmptyLine
     # Create Result
-    result = ClientRuntime::HttpOperationResponse.new(http_request, http_response)
+    result = @(Model.OperationResponseReturnTypeString).new(http_request, http_response)
     @Model.InitializeResponseBody
 
     @foreach (var responsePair in Model.Responses.Where(r => r.Value != null && r.Value.IsSerializable()))
