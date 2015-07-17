@@ -1,5 +1,4 @@
 require 'rspec'
-require 'client_runtime'
 require 'securerandom'
 require_relative 'AzureURL/sdk_requirements'
 include MyNamespace

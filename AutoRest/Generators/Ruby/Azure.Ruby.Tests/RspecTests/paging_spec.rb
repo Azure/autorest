@@ -1,5 +1,4 @@
 require 'rspec'
-require 'client_runtime'
 require_relative 'Paging/sdk_requirements'
 include MyNamespace
 

@@ -1,4 +1,3 @@
-require 'client_runtime'
 require 'securerandom'
 require_relative 'ResourceFlattening/sdk_requirements'
 

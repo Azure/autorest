@@ -1,5 +1,4 @@
 require 'rspec'
-require 'client_runtime'
 require 'securerandom'
 require_relative 'AzureSpecialProperties/sdk_requirements'
 include MyNamespace
@@ -12,6 +11,7 @@ describe 'Azure Special properties behaviour' do
     @unencodedPath = "path1/path2/path3"
     @unencodedQuery = "value1&q2=value2&q3=value3"
     @dummyToken = 'dummy12321343423'
+    @validClientId = "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0"
 
     credentials = ClientRuntimeAzure::TokenCloudCredentials.new(@validSubscription, @dummyToken)
     @client = AutoRestAzureSpecialParametersTestClient.new(credentials, @base_url)
@@ -143,4 +143,18 @@ describe 'Azure Special properties behaviour' do
     result = @client.skip_url_encoding.get_method_query_null().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
   end
+
+  # XMS Client Request Id Tests
+  it 'should overwrite hard coded headers with custom headers from code' do
+    headers = Hash.new
+    headers['x-ms-client-request-id'] = @validClientId
+    result = @client.xms_client_request_id.get(headers).value!
+    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+  end
+
+  it 'should overwrite hard coded headers with custom headers from parameters' do
+    result = @client.xms_client_request_id.param_get(@validClientId).value!
+    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+  end
+
 end
