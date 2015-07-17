@@ -38,10 +38,9 @@ namespace Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
         /// <summary>
-        /// Subscription credentials which uniquely identify Microsoft Azure
-        /// subscription.
+        /// Management credentials for Azure.
         /// </summary>
-        public SubscriptionCloudCredentials Credentials { get; private set; }
+        public ServiceClientCredentials Credentials { get; private set; }
 
         /// <summary>
         /// Subscription Id.
@@ -123,13 +122,13 @@ namespace Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion
         /// Initializes a new instance of the MicrosoftAzureTestUrl class.
         /// </summary>
         /// <param name='credentials'>
-        /// Required. Subscription credentials which uniquely identify Microsoft Azure subscription.
+        /// Required. Management credentials for Azure.
         /// </param>
         /// <param name='handlers'>
         /// Optional. The set of delegating handlers to insert in the http
         /// client pipeline.
         /// </param>
-        public MicrosoftAzureTestUrl(SubscriptionCloudCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        public MicrosoftAzureTestUrl(ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (credentials == null)
             {
@@ -145,13 +144,13 @@ namespace Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='credentials'>
-        /// Required. Subscription credentials which uniquely identify Microsoft Azure subscription.
+        /// Required. Management credentials for Azure.
         /// </param>
         /// <param name='handlers'>
         /// Optional. The set of delegating handlers to insert in the http
         /// client pipeline.
         /// </param>
-        public MicrosoftAzureTestUrl(Uri baseUri, SubscriptionCloudCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        public MicrosoftAzureTestUrl(Uri baseUri, ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
             {
@@ -174,10 +173,6 @@ namespace Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion
             this.BaseUri = new Uri("https://management.azure.com/");
             this.ApiVersion = "2014-04-01-preview";
             this.AcceptLanguage = "en-US";
-            if (this.Credentials != null)
-            {
-                this.Credentials.InitializeServiceClient(this);
-            }
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,
