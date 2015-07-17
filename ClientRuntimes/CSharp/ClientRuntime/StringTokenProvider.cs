@@ -15,15 +15,6 @@ namespace Microsoft.Rest
         private string _type;
 
         /// <summary>
-        /// Create a token provider for bearer tokens that always returns the given 
-        /// access token.
-        /// </summary>
-        /// <param name="accessToken">The access token for this token provider to return.</param>
-        public StringTokenProvider(string accessToken) : this(accessToken, "Bearer")
-        {
-        }
-
-        /// <summary>
         /// Create a token provider for the given token type that returns the given 
         /// access token.
         /// </summary>

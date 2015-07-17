@@ -15,7 +15,12 @@ namespace Microsoft.Rest
     /// </summary>
     public class TokenCredentials : ServiceClientCredentials
     {
-        /// <summary>
+         /// <summary>
+        /// The bearer token type, as serialized in an http Authentication header.
+        /// </summary>
+        private const string BearerTokenType = "Bearer";
+
+       /// <summary>
         /// Gets or sets secure token used to authenticate against Microsoft Azure API. 
         /// No anonymous requests are allowed.
         /// </summary>
@@ -27,7 +32,7 @@ namespace Microsoft.Rest
         /// </summary>
         /// <param name="token">Valid JSON Web Token (JWT).</param>
         public TokenCredentials(string token)
-            : this(token, "Bearer")
+            : this(token, BearerTokenType)
         {
         }
 
