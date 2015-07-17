@@ -14,7 +14,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 200 response with valid payload: {'statusCode': '200'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static A Get200Model204NoModelDefaultError200Valid(this IMultipleResponses operations)
             {
@@ -25,7 +25,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 200 response with valid payload: {'statusCode': '200'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -40,7 +40,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 204 response with no payload
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static A Get200Model204NoModelDefaultError204Valid(this IMultipleResponses operations)
             {
@@ -51,7 +51,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 204 response with no payload
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -66,7 +66,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 201 response with valid payload: {'statusCode': '201'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static A Get200Model204NoModelDefaultError201Invalid(this IMultipleResponses operations)
             {
@@ -77,7 +77,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 201 response with valid payload: {'statusCode': '201'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -92,7 +92,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 202 response with no payload:
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static A Get200Model204NoModelDefaultError202None(this IMultipleResponses operations)
             {
@@ -103,7 +103,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 202 response with no payload:
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -119,7 +119,7 @@ namespace Fixtures.SwaggerBatHttp
             /// 'client error'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static A Get200Model204NoModelDefaultError400Valid(this IMultipleResponses operations)
             {
@@ -131,7 +131,7 @@ namespace Fixtures.SwaggerBatHttp
             /// 'client error'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -146,7 +146,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 200 response with valid payload: {'statusCode': '200'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static A Get200Model201ModelDefaultError200Valid(this IMultipleResponses operations)
             {
@@ -157,7 +157,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 200 response with valid payload: {'statusCode': '200'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -173,7 +173,7 @@ namespace Fixtures.SwaggerBatHttp
             /// 'textStatusCode': 'Created'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static A Get200Model201ModelDefaultError201Valid(this IMultipleResponses operations)
             {
@@ -185,7 +185,7 @@ namespace Fixtures.SwaggerBatHttp
             /// 'textStatusCode': 'Created'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -201,7 +201,7 @@ namespace Fixtures.SwaggerBatHttp
             /// error'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static A Get200Model201ModelDefaultError400Valid(this IMultipleResponses operations)
             {
@@ -213,7 +213,7 @@ namespace Fixtures.SwaggerBatHttp
             /// error'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -228,7 +228,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 200 response with valid payload: {'statusCode': '200'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static object Get200ModelA201ModelC404ModelDDefaultError200Valid(this IMultipleResponses operations)
             {
@@ -239,7 +239,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 200 response with valid payload: {'statusCode': '200'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -254,7 +254,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 200 response with valid payload: {'httpCode': '201'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static object Get200ModelA201ModelC404ModelDDefaultError201Valid(this IMultipleResponses operations)
             {
@@ -265,7 +265,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 200 response with valid payload: {'httpCode': '201'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -280,7 +280,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 200 response with valid payload: {'httpStatusCode': '404'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static object Get200ModelA201ModelC404ModelDDefaultError404Valid(this IMultipleResponses operations)
             {
@@ -291,7 +291,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 200 response with valid payload: {'httpStatusCode': '404'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -307,7 +307,7 @@ namespace Fixtures.SwaggerBatHttp
             /// error'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static object Get200ModelA201ModelC404ModelDDefaultError400Valid(this IMultipleResponses operations)
             {
@@ -319,7 +319,7 @@ namespace Fixtures.SwaggerBatHttp
             /// error'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -334,7 +334,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 202 response with no payload
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void Get202None204NoneDefaultError202None(this IMultipleResponses operations)
             {
@@ -345,7 +345,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 202 response with no payload
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -359,7 +359,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 204 response with no payload
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void Get202None204NoneDefaultError204None(this IMultipleResponses operations)
             {
@@ -370,7 +370,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 204 response with no payload
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -385,7 +385,7 @@ namespace Fixtures.SwaggerBatHttp
             /// error'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void Get202None204NoneDefaultError400Valid(this IMultipleResponses operations)
             {
@@ -397,7 +397,7 @@ namespace Fixtures.SwaggerBatHttp
             /// error'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -411,7 +411,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 202 response with an unexpected payload {'property': 'value'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void Get202None204NoneDefaultNone202Invalid(this IMultipleResponses operations)
             {
@@ -422,7 +422,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 202 response with an unexpected payload {'property': 'value'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -436,7 +436,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 204 response with no payload
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void Get202None204NoneDefaultNone204None(this IMultipleResponses operations)
             {
@@ -447,7 +447,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 204 response with no payload
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -461,7 +461,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 400 response with no payload
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void Get202None204NoneDefaultNone400None(this IMultipleResponses operations)
             {
@@ -472,7 +472,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 400 response with no payload
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -486,7 +486,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 400 response with an unexpected payload {'property': 'value'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void Get202None204NoneDefaultNone400Invalid(this IMultipleResponses operations)
             {
@@ -497,7 +497,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 400 response with an unexpected payload {'property': 'value'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -511,7 +511,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 200 response with valid payload: {'statusCode': '200'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static A GetDefaultModelA200Valid(this IMultipleResponses operations)
             {
@@ -522,7 +522,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 200 response with valid payload: {'statusCode': '200'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -537,7 +537,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 200 response with no payload
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static A GetDefaultModelA200None(this IMultipleResponses operations)
             {
@@ -548,7 +548,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 200 response with no payload
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -563,7 +563,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 400 response with valid payload: {'statusCode': '400'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static A GetDefaultModelA400Valid(this IMultipleResponses operations)
             {
@@ -574,7 +574,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 400 response with valid payload: {'statusCode': '400'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -589,7 +589,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 400 response with no payload
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static A GetDefaultModelA400None(this IMultipleResponses operations)
             {
@@ -600,7 +600,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 400 response with no payload
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -615,7 +615,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 200 response with invalid payload: {'statusCode': '200'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void GetDefaultNone200Invalid(this IMultipleResponses operations)
             {
@@ -626,7 +626,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 200 response with invalid payload: {'statusCode': '200'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -640,7 +640,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 200 response with no payload
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void GetDefaultNone200None(this IMultipleResponses operations)
             {
@@ -651,7 +651,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 200 response with no payload
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -665,7 +665,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 400 response with valid payload: {'statusCode': '400'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void GetDefaultNone400Invalid(this IMultipleResponses operations)
             {
@@ -676,7 +676,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 400 response with valid payload: {'statusCode': '400'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -690,7 +690,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 400 response with no payload
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void GetDefaultNone400None(this IMultipleResponses operations)
             {
@@ -701,7 +701,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 400 response with no payload
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -716,7 +716,7 @@ namespace Fixtures.SwaggerBatHttp
             /// should return a null object of thde type for model A
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static A Get200ModelA200None(this IMultipleResponses operations)
             {
@@ -728,7 +728,7 @@ namespace Fixtures.SwaggerBatHttp
             /// should return a null object of thde type for model A
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -743,7 +743,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 200 response with payload {'statusCode': '200'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static A Get200ModelA200Valid(this IMultipleResponses operations)
             {
@@ -754,7 +754,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 200 response with payload {'statusCode': '200'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -769,7 +769,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 200 response with invalid payload {'statusCodeInvalid': '200'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static A Get200ModelA200Invalid(this IMultipleResponses operations)
             {
@@ -780,7 +780,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 200 response with invalid payload {'statusCodeInvalid': '200'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -796,7 +796,7 @@ namespace Fixtures.SwaggerBatHttp
             /// with no error model
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static A Get200ModelA400None(this IMultipleResponses operations)
             {
@@ -808,7 +808,7 @@ namespace Fixtures.SwaggerBatHttp
             /// with no error model
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -823,7 +823,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 200 response with payload {'statusCode': '400'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static A Get200ModelA400Valid(this IMultipleResponses operations)
             {
@@ -834,7 +834,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 200 response with payload {'statusCode': '400'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -849,7 +849,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 200 response with invalid payload {'statusCodeInvalid': '400'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static A Get200ModelA400Invalid(this IMultipleResponses operations)
             {
@@ -860,7 +860,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 200 response with invalid payload {'statusCodeInvalid': '400'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -875,7 +875,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 202 response with payload {'statusCode': '202'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static A Get200ModelA202Valid(this IMultipleResponses operations)
             {
@@ -886,7 +886,7 @@ namespace Fixtures.SwaggerBatHttp
             /// Send a 202 response with payload {'statusCode': '202'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.

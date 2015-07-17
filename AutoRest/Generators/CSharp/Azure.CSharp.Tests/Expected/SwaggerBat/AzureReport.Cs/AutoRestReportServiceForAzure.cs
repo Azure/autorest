@@ -13,6 +13,7 @@ namespace Fixtures.Azure.SwaggerBatAzureReport
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
+    using System.Linq;
     using Microsoft.Azure;
     using Models;
 
@@ -277,6 +278,10 @@ namespace Fixtures.Azure.SwaggerBatAzureReport
             var result = new AzureOperationResponse<IDictionary<string, int?>>();
             result.Request = httpRequest;
             result.Response = httpResponse;
+            if (httpResponse.Headers.Contains("x-ms-request-id"))
+            {
+                result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+            }
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {

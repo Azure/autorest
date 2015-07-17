@@ -31,7 +31,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             {
                 var settings = new JsonSerializerSettings
                 {
-                    TypeNameHandling = TypeNameHandling.All,
+                    TypeNameHandling = TypeNameHandling.None,
                     MetadataPropertyHandling = MetadataPropertyHandling.Ignore
                 };
                 settings.Converters.Add(new ResponseRefConverter(swaggerDocument));

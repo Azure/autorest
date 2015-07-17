@@ -249,9 +249,10 @@ Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
 #line default
 #line hidden
 
-            WriteLiteral("        /// <param name=\'customHeaders\'>\r\n        /// Headers that will be added " +
-"to request.\r\n        /// </param>        \r\n        /// <param name=\'cancellation" +
-"Token\'>\r\n        /// Cancellation token.\r\n        /// </param>\r\n        Task<");
+            WriteLiteral("        /// <param name=\'customHeaders\'>\r\n        /// The headers that will be ad" +
+"ded to request.\r\n        /// </param>        \r\n        /// <param name=\'cancella" +
+"tionToken\'>\r\n        /// The cancellation token.\r\n        /// </param>\r\n        " +
+"Task<");
 #line 76 "ServiceClientInterfaceTemplate.cshtml"
            Write(method.OperationResponseReturnTypeString);
 

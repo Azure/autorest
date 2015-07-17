@@ -14,7 +14,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex types with dictionary property
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static DictionaryWrapper GetValid(this IDictionary operations)
             {
@@ -25,7 +25,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex types with dictionary property
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -40,7 +40,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Put complex types with dictionary property
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please put a dictionary with 5 key-value pairs: "txt":"notepad",
@@ -55,7 +55,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Put complex types with dictionary property
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please put a dictionary with 5 key-value pairs: "txt":"notepad",
@@ -73,7 +73,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex types with dictionary property which is empty
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static DictionaryWrapper GetEmpty(this IDictionary operations)
             {
@@ -84,7 +84,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex types with dictionary property which is empty
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -99,7 +99,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Put complex types with dictionary property which is empty
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please put an empty dictionary
@@ -113,7 +113,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Put complex types with dictionary property which is empty
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please put an empty dictionary
@@ -130,7 +130,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex types with dictionary property which is null
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static DictionaryWrapper GetNull(this IDictionary operations)
             {
@@ -141,7 +141,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex types with dictionary property which is null
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -157,7 +157,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// response payload
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static DictionaryWrapper GetNotProvided(this IDictionary operations)
             {
@@ -169,7 +169,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// response payload
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.

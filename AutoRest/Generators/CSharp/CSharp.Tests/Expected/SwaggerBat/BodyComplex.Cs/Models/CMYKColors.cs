@@ -5,7 +5,7 @@ namespace Fixtures.SwaggerBatBodyComplex.Models
     using System.Runtime.Serialization;
 
     /// <summary>
-    /// Defines values for CMYKColors
+    /// Defines values for CMYKColors.
     /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum CMYKColors

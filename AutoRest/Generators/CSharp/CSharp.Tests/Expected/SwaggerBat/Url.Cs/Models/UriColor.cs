@@ -5,7 +5,7 @@ namespace Fixtures.SwaggerBatUrl.Models
     using System.Runtime.Serialization;
 
     /// <summary>
-    /// Defines values for UriColor
+    /// Defines values for UriColor.
     /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum UriColor

@@ -16,7 +16,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// credential subscriptionId to '1234-5678-9012-3456' to succeed
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void PostMethodGlobalValid(this ISubscriptionInCredentialsOperations operations)
             {
@@ -28,7 +28,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// credential subscriptionId to '1234-5678-9012-3456' to succeed
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -44,7 +44,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// prevent you from making this call
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void PostMethodGlobalNull(this ISubscriptionInCredentialsOperations operations)
             {
@@ -57,7 +57,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// prevent you from making this call
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -72,7 +72,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// credential subscriptionId to '1234-5678-9012-3456' to succeed
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void PostMethodGlobalNotProvidedValid(this ISubscriptionInCredentialsOperations operations)
             {
@@ -84,7 +84,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// credential subscriptionId to '1234-5678-9012-3456' to succeed
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -99,7 +99,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// credential subscriptionId to '1234-5678-9012-3456' to succeed
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void PostPathGlobalValid(this ISubscriptionInCredentialsOperations operations)
             {
@@ -111,7 +111,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// credential subscriptionId to '1234-5678-9012-3456' to succeed
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -126,7 +126,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// credential subscriptionId to '1234-5678-9012-3456' to succeed
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void PostSwaggerGlobalValid(this ISubscriptionInCredentialsOperations operations)
             {
@@ -138,7 +138,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// credential subscriptionId to '1234-5678-9012-3456' to succeed
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.

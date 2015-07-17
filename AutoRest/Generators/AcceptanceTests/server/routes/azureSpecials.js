@@ -173,22 +173,26 @@ var specials = function (coverage) {
   });  
 
   router.get('/overwrite/x-ms-client-request-id/method/', function (req, res, next) {
-      
+        var headers = {
+          'x-ms-request-id': '123'
+        };
         if (req.get("x-ms-client-request-id") !== '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0') {
           utils.send400(res, next, "Header x-ms-client-request-id must be set to 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.");
         } else {
           coverage['AzureXmsRequestClientOverwrite']++;
-          res.status(200).end();
+          res.set(headers).status(200).end();
         }
   });
 
   router.get('/overwrite/x-ms-client-request-id/via-param/method/', function (req, res, next) {
-      
+        var headers = {
+          'x-ms-request-id': '123'
+        };
         if (req.get("x-ms-client-request-id") !== '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0') {
           utils.send400(res, next, "Header x-ms-client-request-id must be set to 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.");
         } else {
           coverage['AzureXmsRequestClientOverwriteViaParameter']++;
-          res.status(200).end();
+          res.set(headers).status(200).end();
         }
   });
 }

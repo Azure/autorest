@@ -4,6 +4,8 @@
   <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
     <!-- Rules CA1006: Irrelevant-->
     <Rule Id="CA1006" Action="None" />
+    <!-- Rules CA1710: Irrelevant-->
+    <Rule Id="CA1710" Action="None" />
     <!-- Rules CA1702: Irrelevant-->
     <Rule Id="CA1702" Action="None" />
     <!--Assemblies are signed after the code analysis process-->

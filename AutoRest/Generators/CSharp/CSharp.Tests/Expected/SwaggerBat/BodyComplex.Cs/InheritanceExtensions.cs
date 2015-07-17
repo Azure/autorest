@@ -14,7 +14,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex types that extend others
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Siamese GetValid(this IInheritance operations)
             {
@@ -25,7 +25,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex types that extend others
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -40,7 +40,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Put complex types that extend others
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please put a siamese with id=2, name="Siameee", color=green,
@@ -57,7 +57,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Put complex types that extend others
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please put a siamese with id=2, name="Siameee", color=green,

@@ -5,7 +5,7 @@ namespace Fixtures.SwaggerBatHeader.Models
     using System.Runtime.Serialization;
 
     /// <summary>
-    /// Defines values for GreyscaleColors
+    /// Defines values for GreyscaleColors.
     /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum GreyscaleColors

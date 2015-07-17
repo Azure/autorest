@@ -53,7 +53,7 @@ Write(EmptyLine);
 #line hidden
             WriteLiteral("\r\n    /// <summary>\r\n    ");
 #line 13 "EnumTemplate.cshtml"
-Write(WrapComment("/// ", "Defines values for " + Model.TypeDefinitionName));
+Write(WrapComment("/// ", "Defines values for " + Model.TypeDefinitionName + "."));
 
 #line default
 #line hidden

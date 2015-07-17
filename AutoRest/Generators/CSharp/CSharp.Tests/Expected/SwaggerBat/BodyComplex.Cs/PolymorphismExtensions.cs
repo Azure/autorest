@@ -14,7 +14,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex types that are polymorphic
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Fish GetValid(this IPolymorphism operations)
             {
@@ -25,7 +25,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex types that are polymorphic
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -40,7 +40,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Put complex types that are polymorphic
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please put a salmon that looks like this:
@@ -79,7 +79,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Put complex types that are polymorphic
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please put a salmon that looks like this:
@@ -122,7 +122,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// 'birthday' field - the request should not be allowed from the client
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please attempt put a sawshark that looks like this, the client should not
@@ -163,7 +163,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// 'birthday' field - the request should not be allowed from the client
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please attempt put a sawshark that looks like this, the client should not

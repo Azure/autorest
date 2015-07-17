@@ -23,6 +23,14 @@
       <Word>httpRequest</Word>
       <Word>msRestAzure</Word>
       <Word>generateUuid</Word>
+      <Word>HttpStatusCode</Word>
+      <Word>NoContent</Word>
+      <Word>statusCode</Word>
+      <Word>httpResponse</Word>
+      <Word>RequestId</Word>
+      <Word>GetValues</Word>
+      <Word>FirstOrDefault</Word>
+      <Word>requestId</Word>
     </Recognized>
   </Words>
 </Dictionary>

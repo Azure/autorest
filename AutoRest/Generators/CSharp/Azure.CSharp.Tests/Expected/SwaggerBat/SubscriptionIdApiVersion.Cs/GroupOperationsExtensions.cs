@@ -15,7 +15,7 @@ namespace Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion
             /// Provides a resouce group with name 'testgroup101' and location 'West US'.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='resourceGroupName'>
             /// Resource Group name 'testgroup101'.
@@ -29,7 +29,7 @@ namespace Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion
             /// Provides a resouce group with name 'testgroup101' and location 'West US'.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='resourceGroupName'>
             /// Resource Group name 'testgroup101'.

@@ -14,7 +14,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex types with array property
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static ArrayWrapper GetValid(this IArray operations)
             {
@@ -25,7 +25,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex types with array property
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -40,7 +40,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Put complex types with array property
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y",
@@ -55,7 +55,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Put complex types with array property
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y",
@@ -73,7 +73,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex types with array property which is empty
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static ArrayWrapper GetEmpty(this IArray operations)
             {
@@ -84,7 +84,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex types with array property which is empty
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -99,7 +99,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Put complex types with array property which is empty
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please put an empty array
@@ -113,7 +113,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Put complex types with array property which is empty
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please put an empty array
@@ -131,7 +131,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// response payload
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static ArrayWrapper GetNotProvided(this IArray operations)
             {
@@ -143,7 +143,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// response payload
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.

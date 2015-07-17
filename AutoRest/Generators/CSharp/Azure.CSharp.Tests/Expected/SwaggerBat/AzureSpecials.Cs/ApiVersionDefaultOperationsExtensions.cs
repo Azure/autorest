@@ -15,7 +15,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// GET method with api-version modeled in global settings.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void GetMethodGlobalValid(this IApiVersionDefaultOperations operations)
             {
@@ -26,7 +26,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// GET method with api-version modeled in global settings.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -40,7 +40,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// GET method with api-version modeled in global settings.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void GetMethodGlobalNotProvidedValid(this IApiVersionDefaultOperations operations)
             {
@@ -51,7 +51,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// GET method with api-version modeled in global settings.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -65,7 +65,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// GET method with api-version modeled in global settings.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void GetPathGlobalValid(this IApiVersionDefaultOperations operations)
             {
@@ -76,7 +76,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// GET method with api-version modeled in global settings.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -90,7 +90,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// GET method with api-version modeled in global settings.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void GetSwaggerGlobalValid(this IApiVersionDefaultOperations operations)
             {
@@ -101,7 +101,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// GET method with api-version modeled in global settings.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.

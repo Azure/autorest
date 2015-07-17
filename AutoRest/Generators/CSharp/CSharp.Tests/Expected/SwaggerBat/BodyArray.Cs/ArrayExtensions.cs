@@ -14,7 +14,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get null array value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<int?> GetNull(this IArray operations)
             {
@@ -25,7 +25,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get null array value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -40,7 +40,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get invalid array [1, 2, 3
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<int?> GetInvalid(this IArray operations)
             {
@@ -51,7 +51,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get invalid array [1, 2, 3
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -66,7 +66,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get empty array value []
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<int?> GetEmpty(this IArray operations)
             {
@@ -77,7 +77,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get empty array value []
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -92,7 +92,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Set array value empty []
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -105,7 +105,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Set array value empty []
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -121,7 +121,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get boolean array value [true, false, false, true]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<bool?> GetBooleanTfft(this IArray operations)
             {
@@ -132,7 +132,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get boolean array value [true, false, false, true]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -147,7 +147,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Set array value empty [true, false, false, true]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -160,7 +160,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Set array value empty [true, false, false, true]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -176,7 +176,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get boolean array value [true, null, false]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<bool?> GetBooleanInvalidNull(this IArray operations)
             {
@@ -187,7 +187,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get boolean array value [true, null, false]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -202,7 +202,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get boolean array value [true, 'boolean', false]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<bool?> GetBooleanInvalidString(this IArray operations)
             {
@@ -213,7 +213,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get boolean array value [true, 'boolean', false]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -228,7 +228,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get integer array value [1, -1, 3, 300]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<int?> GetIntegerValid(this IArray operations)
             {
@@ -239,7 +239,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get integer array value [1, -1, 3, 300]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -254,7 +254,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Set array value empty [1, -1, 3, 300]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -267,7 +267,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Set array value empty [1, -1, 3, 300]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -283,7 +283,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get integer array value [1, null, 0]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<int?> GetIntInvalidNull(this IArray operations)
             {
@@ -294,7 +294,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get integer array value [1, null, 0]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -309,7 +309,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get integer array value [1, 'integer', 0]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<int?> GetIntInvalidString(this IArray operations)
             {
@@ -320,7 +320,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get integer array value [1, 'integer', 0]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -335,7 +335,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get integer array value [1, -1, 3, 300]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<long?> GetLongValid(this IArray operations)
             {
@@ -346,7 +346,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get integer array value [1, -1, 3, 300]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -361,7 +361,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Set array value empty [1, -1, 3, 300]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -374,7 +374,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Set array value empty [1, -1, 3, 300]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -390,7 +390,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get long array value [1, null, 0]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<long?> GetLongInvalidNull(this IArray operations)
             {
@@ -401,7 +401,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get long array value [1, null, 0]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -416,7 +416,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get long array value [1, 'integer', 0]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<long?> GetLongInvalidString(this IArray operations)
             {
@@ -427,7 +427,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get long array value [1, 'integer', 0]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -442,7 +442,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get float array value [0, -0.01, 1.2e20]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<double?> GetFloatValid(this IArray operations)
             {
@@ -453,7 +453,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get float array value [0, -0.01, 1.2e20]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -468,7 +468,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Set array value [0, -0.01, 1.2e20]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -481,7 +481,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Set array value [0, -0.01, 1.2e20]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -497,7 +497,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get float array value [0.0, null, -1.2e20]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<double?> GetFloatInvalidNull(this IArray operations)
             {
@@ -508,7 +508,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get float array value [0.0, null, -1.2e20]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -523,7 +523,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get boolean array value [1.0, 'number', 0.0]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<double?> GetFloatInvalidString(this IArray operations)
             {
@@ -534,7 +534,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get boolean array value [1.0, 'number', 0.0]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -549,7 +549,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get float array value [0, -0.01, 1.2e20]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<double?> GetDoubleValid(this IArray operations)
             {
@@ -560,7 +560,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get float array value [0, -0.01, 1.2e20]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -575,7 +575,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Set array value [0, -0.01, 1.2e20]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -588,7 +588,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Set array value [0, -0.01, 1.2e20]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -604,7 +604,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get float array value [0.0, null, -1.2e20]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<double?> GetDoubleInvalidNull(this IArray operations)
             {
@@ -615,7 +615,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get float array value [0.0, null, -1.2e20]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -630,7 +630,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get boolean array value [1.0, 'number', 0.0]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<double?> GetDoubleInvalidString(this IArray operations)
             {
@@ -641,7 +641,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get boolean array value [1.0, 'number', 0.0]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -656,7 +656,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get string array value ['foo1', 'foo2', 'foo3']
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<string> GetStringValid(this IArray operations)
             {
@@ -667,7 +667,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get string array value ['foo1', 'foo2', 'foo3']
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -682,7 +682,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Set array value ['foo1', 'foo2', 'foo3']
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -695,7 +695,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Set array value ['foo1', 'foo2', 'foo3']
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -711,7 +711,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get string array value ['foo', null, 'foo2']
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<string> GetStringWithNull(this IArray operations)
             {
@@ -722,7 +722,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get string array value ['foo', null, 'foo2']
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -737,7 +737,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get string array value ['foo', 123, 'foo2']
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<string> GetStringWithInvalid(this IArray operations)
             {
@@ -748,7 +748,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get string array value ['foo', 123, 'foo2']
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -763,7 +763,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12']
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<DateTime?> GetDateValid(this IArray operations)
             {
@@ -774,7 +774,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12']
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -789,7 +789,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -802,7 +802,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -818,7 +818,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get date array value ['2012-01-01', null, '1776-07-04']
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<DateTime?> GetDateInvalidNull(this IArray operations)
             {
@@ -829,7 +829,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get date array value ['2012-01-01', null, '1776-07-04']
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -844,7 +844,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get date array value ['2011-03-22', 'date']
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<DateTime?> GetDateInvalidChars(this IArray operations)
             {
@@ -855,7 +855,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get date array value ['2011-03-22', 'date']
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -871,7 +871,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<DateTime?> GetDateTimeValid(this IArray operations)
             {
@@ -883,7 +883,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -899,7 +899,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// '1492-10-12T10:15:01-08:00']
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -913,7 +913,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// '1492-10-12T10:15:01-08:00']
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -929,7 +929,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get date array value ['2000-12-01t00:00:01z', null]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<DateTime?> GetDateTimeInvalidNull(this IArray operations)
             {
@@ -940,7 +940,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get date array value ['2000-12-01t00:00:01z', null]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -955,7 +955,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get date array value ['2000-12-01t00:00:01z', 'date-time']
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<DateTime?> GetDateTimeInvalidChars(this IArray operations)
             {
@@ -966,7 +966,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get date array value ['2000-12-01t00:00:01z', 'date-time']
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -982,7 +982,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// with each item encoded in base64
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<byte[]> GetByteValid(this IArray operations)
             {
@@ -994,7 +994,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// with each item encoded in base64
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1010,7 +1010,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// with each elementencoded in base 64
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -1024,7 +1024,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// with each elementencoded in base 64
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -1041,7 +1041,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// encoded
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<byte[]> GetByteInvalidNull(this IArray operations)
             {
@@ -1053,7 +1053,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// encoded
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1068,7 +1068,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get array of complex type null value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<Product> GetComplexNull(this IArray operations)
             {
@@ -1079,7 +1079,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get array of complex type null value
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1094,7 +1094,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get empty array of complex type []
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<Product> GetComplexEmpty(this IArray operations)
             {
@@ -1105,7 +1105,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get empty array of complex type []
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1121,7 +1121,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// null, {'integer': 5, 'string': '6'}]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<Product> GetComplexItemNull(this IArray operations)
             {
@@ -1133,7 +1133,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// null, {'integer': 5, 'string': '6'}]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1149,7 +1149,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// {}, {'integer': 5, 'string': '6'}]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<Product> GetComplexItemEmpty(this IArray operations)
             {
@@ -1161,7 +1161,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// {}, {'integer': 5, 'string': '6'}]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1177,7 +1177,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<Product> GetComplexValid(this IArray operations)
             {
@@ -1189,7 +1189,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1205,7 +1205,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -1219,7 +1219,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -1235,7 +1235,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get a null array
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<IList<string>> GetArrayNull(this IArray operations)
             {
@@ -1246,7 +1246,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get a null array
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1261,7 +1261,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get an empty array []
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<IList<string>> GetArrayEmpty(this IArray operations)
             {
@@ -1272,7 +1272,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get an empty array []
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1287,7 +1287,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<IList<string>> GetArrayItemNull(this IArray operations)
             {
@@ -1298,7 +1298,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1313,7 +1313,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<IList<string>> GetArrayItemEmpty(this IArray operations)
             {
@@ -1324,7 +1324,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1340,7 +1340,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// '8', '9']]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<IList<string>> GetArrayValid(this IArray operations)
             {
@@ -1352,7 +1352,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// '8', '9']]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1368,7 +1368,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// '8', '9']]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -1382,7 +1382,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// '8', '9']]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -1398,7 +1398,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get an array of Dictionaries with value null
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<IDictionary<string, string>> GetDictionaryNull(this IArray operations)
             {
@@ -1409,7 +1409,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get an array of Dictionaries with value null
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1424,7 +1424,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get an array of Dictionaries of type &lt;string, string&gt; with value []
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<IDictionary<string, string>> GetDictionaryEmpty(this IArray operations)
             {
@@ -1435,7 +1435,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// Get an array of Dictionaries of type &lt;string, string&gt; with value []
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1452,7 +1452,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// 'eight', '9': 'nine'}]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<IDictionary<string, string>> GetDictionaryItemNull(this IArray operations)
             {
@@ -1465,7 +1465,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// 'eight', '9': 'nine'}]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1482,7 +1482,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// '9': 'nine'}]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<IDictionary<string, string>> GetDictionaryItemEmpty(this IArray operations)
             {
@@ -1495,7 +1495,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// '9': 'nine'}]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1512,7 +1512,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<IDictionary<string, string>> GetDictionaryValid(this IArray operations)
             {
@@ -1525,7 +1525,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -1542,7 +1542,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
@@ -1557,7 +1557,7 @@ namespace Fixtures.SwaggerBatBodyArray
             /// 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayBody'>
             /// </param>

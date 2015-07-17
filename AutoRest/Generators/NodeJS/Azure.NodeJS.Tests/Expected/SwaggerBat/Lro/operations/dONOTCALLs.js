@@ -114,6 +114,7 @@ DONOTCALLs.prototype.getProvisioning202Accepted200Succeeded = function (options,
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -226,6 +227,7 @@ DONOTCALLs.prototype.getProvisioning202Deleting200Failed = function (options, ca
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -338,6 +340,7 @@ DONOTCALLs.prototype.getProvisioning202Deleting200canceled = function (options, 
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -450,6 +453,7 @@ DONOTCALLs.prototype.getDelete202Retry200 = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = response.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -546,6 +550,7 @@ DONOTCALLs.prototype.get202NoRetry204 = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = response.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -642,6 +647,7 @@ DONOTCALLs.prototype.post202Retry200Polling = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -754,6 +760,7 @@ DONOTCALLs.prototype.post202NoRetry204Polling = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = response.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -850,6 +857,7 @@ DONOTCALLs.prototype.getRetryProvisioning202Accepted200Succeeded = function (opt
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -962,6 +970,7 @@ DONOTCALLs.prototype.getRetry202Retry200 = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = response.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -1058,6 +1067,7 @@ DONOTCALLs.prototype.postRetry202Retry200Polling = function (options, callback) 
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -1169,6 +1179,7 @@ DONOTCALLs.prototype.getNonRetry400 = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = response.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -1264,6 +1275,7 @@ DONOTCALLs.prototype.getRetry202NonRetry400 = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = response.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -1360,6 +1372,7 @@ DONOTCALLs.prototype.postRetry202Retry400Polling = function (options, callback) 
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -1471,6 +1484,7 @@ DONOTCALLs.prototype.postRetry202NonRetry400Polling = function (options, callbac
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -1583,6 +1597,7 @@ DONOTCALLs.prototype.post202Retry200PollingCustomHeader = function (options, cal
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;

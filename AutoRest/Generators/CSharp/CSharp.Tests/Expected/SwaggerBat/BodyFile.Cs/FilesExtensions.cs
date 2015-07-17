@@ -14,7 +14,7 @@ namespace Fixtures.SwaggerBatBodyFile
             /// Get file
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static System.IO.Stream GetFile(this IFiles operations)
             {
@@ -25,7 +25,7 @@ namespace Fixtures.SwaggerBatBodyFile
             /// Get file
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -40,7 +40,7 @@ namespace Fixtures.SwaggerBatBodyFile
             /// Get empty file
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static System.IO.Stream GetEmptyFile(this IFiles operations)
             {
@@ -51,7 +51,7 @@ namespace Fixtures.SwaggerBatBodyFile
             /// Get empty file
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.

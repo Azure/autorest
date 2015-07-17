@@ -14,7 +14,7 @@ namespace Fixtures.Azure.SwaggerBatHead
             /// Return 204 status code if successful
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static bool? Head204(this IHttpSuccessOperations operations)
             {
@@ -25,7 +25,7 @@ namespace Fixtures.Azure.SwaggerBatHead
             /// Return 204 status code if successful
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -40,7 +40,7 @@ namespace Fixtures.Azure.SwaggerBatHead
             /// Return 404 status code if successful
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static bool? Head404(this IHttpSuccessOperations operations)
             {
@@ -51,7 +51,7 @@ namespace Fixtures.Azure.SwaggerBatHead
             /// Return 404 status code if successful
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.

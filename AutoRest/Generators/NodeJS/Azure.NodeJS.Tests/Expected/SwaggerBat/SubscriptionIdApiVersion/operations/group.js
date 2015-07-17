@@ -136,6 +136,7 @@ Group.prototype.getSampleResourceGroup = function (resourceGroupName, options, c
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;

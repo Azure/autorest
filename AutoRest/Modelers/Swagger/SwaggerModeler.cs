@@ -85,7 +85,11 @@ namespace Microsoft.Rest.Modeler.Swagger
                     var operation = path.Value[verb];
                     if (string.IsNullOrWhiteSpace(operation.OperationId))
                     {
-                        throw ErrorManager.CreateError(Resources.OperationIdMissing);
+                        throw ErrorManager.CreateError(
+                            string.Format(CultureInfo.InvariantCulture, 
+                                Resources.OperationIdMissing,
+                                verb,
+                                path.Key));
                     }
                     var methodName = GetMethodName(operation);
                     var methodGroup = GetMethodGroup(operation);

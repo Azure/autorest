@@ -264,6 +264,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             Assert.Equal("EastUS", deserializedResource.Location);
             Assert.Equal("value1", deserializedResource.Tags["tag1"]);
             Assert.Equal("3", ((JObject)deserializedResource.Properties)["size"]);
+            Assert.Equal("some string", ((JObject)deserializedResource.Properties)["provisioningState"]);
             Assert.Equal("name1", ((JObject)deserializedResource.Properties)["child"]["name1"]);
         }
 

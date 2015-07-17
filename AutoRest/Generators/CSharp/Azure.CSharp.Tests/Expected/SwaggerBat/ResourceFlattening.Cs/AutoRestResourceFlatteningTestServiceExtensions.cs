@@ -15,7 +15,7 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             /// Put External Resource as an Array
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='resourceArray'>
             /// External Resource as an Array to put
@@ -29,7 +29,7 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             /// Put External Resource as an Array
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='resourceArray'>
             /// External Resource as an Array to put
@@ -46,7 +46,7 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             /// Get External Resource as an Array
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IList<FlattenedProduct> GetArray(this IAutoRestResourceFlatteningTestService operations)
             {
@@ -57,7 +57,7 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             /// Get External Resource as an Array
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -72,7 +72,7 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             /// Put External Resource as a Dictionary
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='resourceDictionary'>
             /// External Resource as a Dictionary to put
@@ -86,7 +86,7 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             /// Put External Resource as a Dictionary
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='resourceDictionary'>
             /// External Resource as a Dictionary to put
@@ -103,7 +103,7 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             /// Get External Resource as a Dictionary
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static IDictionary<string, FlattenedProduct> GetDictionary(this IAutoRestResourceFlatteningTestService operations)
             {
@@ -114,7 +114,7 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             /// Get External Resource as a Dictionary
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -129,7 +129,7 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             /// Put External Resource as a ResourceCollection
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='resourceComplexObject'>
             /// External Resource as a ResourceCollection to put
@@ -143,7 +143,7 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             /// Put External Resource as a ResourceCollection
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='resourceComplexObject'>
             /// External Resource as a ResourceCollection to put
@@ -160,7 +160,7 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             /// Get External Resource as a ResourceCollection
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static ResourceCollection GetResourceCollection(this IAutoRestResourceFlatteningTestService operations)
             {
@@ -171,7 +171,7 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             /// Get External Resource as a ResourceCollection
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.

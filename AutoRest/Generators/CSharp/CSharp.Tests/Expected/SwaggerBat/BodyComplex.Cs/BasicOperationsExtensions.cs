@@ -14,7 +14,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Basic GetValid(this IBasicOperations operations)
             {
@@ -25,7 +25,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -40,7 +40,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Please put {id: 2, name: 'abc', color: 'Magenta'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please put {id: 2, name: 'abc', color: 'Magenta'}
@@ -54,7 +54,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Please put {id: 2, name: 'abc', color: 'Magenta'}
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
             /// Please put {id: 2, name: 'abc', color: 'Magenta'}
@@ -71,7 +71,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get a basic complex type that is invalid for the local strong type
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Basic GetInvalid(this IBasicOperations operations)
             {
@@ -82,7 +82,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get a basic complex type that is invalid for the local strong type
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -97,7 +97,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get a basic complex type that is empty
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Basic GetEmpty(this IBasicOperations operations)
             {
@@ -108,7 +108,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get a basic complex type that is empty
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -123,7 +123,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get a basic complex type whose properties are null
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Basic GetNull(this IBasicOperations operations)
             {
@@ -134,7 +134,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// Get a basic complex type whose properties are null
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -150,7 +150,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// payload
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static Basic GetNotProvided(this IBasicOperations operations)
             {
@@ -162,7 +162,7 @@ namespace Fixtures.SwaggerBatBodyComplex
             /// payload
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.

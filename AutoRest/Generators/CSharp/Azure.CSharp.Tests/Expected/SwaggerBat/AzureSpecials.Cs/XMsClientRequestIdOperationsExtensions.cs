@@ -16,7 +16,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             public static void Get(this IXMsClientRequestIdOperations operations)
             {
@@ -28,7 +28,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// Cancellation token.
@@ -43,7 +43,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='xMsClientRequestId'>
             /// This should appear as a method parameter, use value
@@ -59,7 +59,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             /// 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
             /// </summary>
             /// <param name='operations'>
-            /// The operations group for this extension method
+            /// The operations group for this extension method.
             /// </param>
             /// <param name='xMsClientRequestId'>
             /// This should appear as a method parameter, use value
