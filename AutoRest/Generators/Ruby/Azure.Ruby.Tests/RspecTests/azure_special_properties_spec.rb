@@ -150,11 +150,13 @@ describe 'Azure Special properties behaviour' do
     headers['x-ms-client-request-id'] = @validClientId
     result = @client.xms_client_request_id.get(headers).value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.request_id).to eq("123")
   end
 
   it 'should overwrite hard coded headers with custom headers from parameters' do
     result = @client.xms_client_request_id.param_get(@validClientId).value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.request_id).to eq("123")
   end
 
 end
