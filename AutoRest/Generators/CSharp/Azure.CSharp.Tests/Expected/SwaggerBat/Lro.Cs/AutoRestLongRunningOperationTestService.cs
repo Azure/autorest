@@ -38,10 +38,9 @@ namespace Fixtures.Azure.SwaggerBatLro
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
         /// <summary>
-        /// Subscription credentials which uniquely identify Microsoft Azure
-        /// subscription.
+        /// Management credentials for Azure.
         /// </summary>
-        public SubscriptionCloudCredentials Credentials { get; private set; }
+        public ServiceClientCredentials Credentials { get; private set; }
 
         /// <summary>
         /// Gets or sets the preferred language for the response.
@@ -121,13 +120,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Initializes a new instance of the AutoRestLongRunningOperationTestService class.
         /// </summary>
         /// <param name='credentials'>
-        /// Required. Subscription credentials which uniquely identify Microsoft Azure subscription.
+        /// Required. Management credentials for Azure.
         /// </param>
         /// <param name='handlers'>
         /// Optional. The set of delegating handlers to insert in the http
         /// client pipeline.
         /// </param>
-        public AutoRestLongRunningOperationTestService(SubscriptionCloudCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        public AutoRestLongRunningOperationTestService(ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (credentials == null)
             {
@@ -143,13 +142,13 @@ namespace Fixtures.Azure.SwaggerBatLro
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='credentials'>
-        /// Required. Subscription credentials which uniquely identify Microsoft Azure subscription.
+        /// Required. Management credentials for Azure.
         /// </param>
         /// <param name='handlers'>
         /// Optional. The set of delegating handlers to insert in the http
         /// client pipeline.
         /// </param>
-        public AutoRestLongRunningOperationTestService(Uri baseUri, SubscriptionCloudCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        public AutoRestLongRunningOperationTestService(Uri baseUri, ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
             {
@@ -175,10 +174,6 @@ namespace Fixtures.Azure.SwaggerBatLro
             this.LROsCustomHeader = new LROsCustomHeaderOperations(this);
             this.BaseUri = new Uri("http://localhost");
             this.AcceptLanguage = "en-US";
-            if (this.Credentials != null)
-            {
-                this.Credentials.InitializeServiceClient(this);
-            }
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,

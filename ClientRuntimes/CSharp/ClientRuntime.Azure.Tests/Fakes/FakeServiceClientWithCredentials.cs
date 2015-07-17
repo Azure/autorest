@@ -13,7 +13,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test.Fakes
     public class FakeServiceClientWithCredentials : ServiceClient<FakeServiceClientWithCredentials>
     {
         private Uri _baseUri;
-        private SubscriptionCloudCredentials _credentials;
+        private ServiceClientCredentials _credentials;
 
         /// <summary>
         /// Initializes a new instance of the FakeServiceClientWithCredentials class.
@@ -26,7 +26,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test.Fakes
         /// <summary>
         /// Initializes a new instance of the FakeServiceClientWithCredentials class.
         /// </summary>
-        public FakeServiceClientWithCredentials(SubscriptionCloudCredentials credentials, Uri baseUri)
+        public FakeServiceClientWithCredentials(ServiceClientCredentials credentials, Uri baseUri)
             : base()
         {
             if (credentials == null)
@@ -46,7 +46,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test.Fakes
         /// <summary>
         /// Initializes a new instance of the FakeServiceClientWithCredentials class.
         /// </summary>
-        public FakeServiceClientWithCredentials(SubscriptionCloudCredentials credentials, Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers)
+        public FakeServiceClientWithCredentials( ServiceClientCredentials credentials, Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers)
             : base(rootHandler, handlers)
         {
             if (credentials == null)
@@ -66,7 +66,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test.Fakes
          /// <summary>
         /// Initializes a new instance of the FakeServiceClientWithCredentials class.
         /// </summary>
-        public FakeServiceClientWithCredentials(SubscriptionCloudCredentials credentials, Uri baseUri, params DelegatingHandler[] handlers)
+        public FakeServiceClientWithCredentials(ServiceClientCredentials credentials, Uri baseUri, params DelegatingHandler[] handlers)
             : base(handlers)
         {
             if (credentials == null)
@@ -86,7 +86,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test.Fakes
         /// <summary>
         /// Initializes a new instance of the FakeServiceClientWithCredentials class.
         /// </summary>
-        public FakeServiceClientWithCredentials(SubscriptionCloudCredentials credentials, params DelegatingHandler[] handlers)
+        public FakeServiceClientWithCredentials(ServiceClientCredentials credentials, params DelegatingHandler[] handlers)
             : base(handlers)
         {
             if (credentials == null)
@@ -102,7 +102,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test.Fakes
                 /// <summary>
         /// Initializes a new instance of the FakeServiceClientWithCredentials class.
         /// </summary>
-        public FakeServiceClientWithCredentials(SubscriptionCloudCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers)
+        public FakeServiceClientWithCredentials(ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers)
             : base(rootHandler, handlers)
         {
             if (credentials == null)
@@ -120,7 +120,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test.Fakes
             get { return _baseUri; }
         }
 
-        public SubscriptionCloudCredentials Credentials
+        public ServiceClientCredentials Credentials
         {
             get { return _credentials; }
         }

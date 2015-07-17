@@ -4,7 +4,7 @@
   <PropertyGroup>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <LibraryFxTarget Condition="'$(LibraryFxTarget)' == ''">net45</LibraryFxTarget>
+    <LibraryFxTarget Condition="'$(LibraryFxTarget)' == ''">portable</LibraryFxTarget>
     <ProjectGuid>{856A1D19-C3BF-439A-BEBF-E822A332BC12}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -12,24 +12,6 @@
     <AssemblyName>Microsoft.Rest.ClientRuntime.Azure</AssemblyName>
     <OutputType>Library</OutputType>
     <RestorePackages>true</RestorePackages>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Net45-Debug'">
-    <DocumentationFile>bin\Net45-Debug\Microsoft.Rest.ClientRuntime.Azure.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Net45-Release'">
-    <DocumentationFile>bin\Net45-Release\Microsoft.Rest.ClientRuntime.Azure.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Net40-Debug'">
-    <DocumentationFile>bin\Net40-Debug\Microsoft.Rest.ClientRuntime.Azure.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Net40-Release'">
-    <DocumentationFile>bin\Net40-Release\Microsoft.Rest.ClientRuntime.Azure.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Portable-Debug'">
-    <DocumentationFile>bin\Portable-Debug\Microsoft.Rest.ClientRuntime.Azure.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Portable-Release'">
-    <DocumentationFile>bin\Portable-Release\Microsoft.Rest.ClientRuntime.Azure.xml</DocumentationFile>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\tools\AutoRest.Settings.targets" />
   <ItemGroup>
@@ -52,11 +34,15 @@
     <Compile Include="Resource.cs" />
     <Compile Include="CloudErrorJsonConverter.cs" />
     <Compile Include="ResourceJsonConverter.cs" />
-    <Compile Include="TokenCloudCredentials.cs" />
-    <Compile Include="SubscriptionCloudCredentials.cs" />
     <Compile Include="AzureOperationResponse.cs" />
     <Compile Include="AzureAsyncOperation.cs" />
     <Compile Include="ClientRequestTrackingHandler.cs" />
+    <Compile Include="Authentication\ActiveDirectoryApplicationTokenProvider.cs" />
+    <Compile Include="Authentication\ActiveDirectoryUserTokenProvider.cs" />
+    <Compile Include="Authentication\ApplicationTokenCredentials.cs" />
+    <Compile Include="Authentication\AzureEnvironment.cs" />
+    <Compile Include="Authentication\UserTokenCredentials.cs" />
+    <Compile Include="Authentication\AuthenticationException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -75,6 +61,25 @@
       <Project>{7f524559-93f9-4f3f-9e2c-af41a0c2e6f4}</Project>
       <Name>ClientRuntime</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(LibraryFxTarget)' == 'portable' ">
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory">
+      <HintPath>$(CommonNugetPackageFolder)\Microsoft.IdentityModel.Clients.ActiveDirectory.3.5.207081303-alpha\lib\wpa\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory.Platform">
+      <HintPath>$(CommonNugetPackageFolder)\Microsoft.IdentityModel.Clients.ActiveDirectory.3.5.207081303-alpha\lib\wpa\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(LibraryFxTarget)' == 'net45' ">
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory">
+      <HintPath>$(CommonNugetPackageFolder)\Microsoft.IdentityModel.Clients.ActiveDirectory.3.5.207081303-alpha\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory.Platform">
+      <HintPath>$(CommonNugetPackageFolder)\Microsoft.IdentityModel.Clients.ActiveDirectory.3.5.207081303-alpha\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" Condition=" '$(LibraryFxTarget)' == 'portable' " />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" Condition=" '$(LibraryFxTarget)' != 'portable' " />

@@ -219,6 +219,14 @@ namespace Microsoft.Rest.Generator.Azure
                 apiVersion.IsRequired = false;
             }
 
+            var subscriptionId =
+                serviceClient.Properties.FirstOrDefault(
+                    p => string.Equals(p.Name, "subscriptionId", StringComparison.OrdinalIgnoreCase));
+            if (subscriptionId != null)
+            {
+                subscriptionId.IsRequired = true;
+            }
+
             var acceptLanguage = serviceClient.Properties
                 .FirstOrDefault(p => AcceptLanguage.Equals(p.SerializedName, StringComparison.OrdinalIgnoreCase));
             if (acceptLanguage == null)
@@ -249,12 +257,13 @@ namespace Microsoft.Rest.Generator.Azure
                 SerializedName = "credentials",
                 Type = new CompositeType
                 {
-                    Name = "SubscriptionCloudCredentials"
+                    Name = "ServiceClientCredentials"
                 },
                 IsRequired = true,
                 IsReadOnly = true,
-                Documentation = "Subscription credentials which uniquely identify Microsoft Azure subscription."
+                Documentation = "Management credentials for Azure."
             });
+
             serviceClient.Properties.Add(new Property
             {
                 Name = "LongRunningOperationRetryTimeout",

@@ -32,10 +32,9 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
         JsonSerializerSettings DeserializationSettings { get; }        
 
         /// <summary>
-        /// Subscription credentials which uniquely identify Microsoft Azure
-        /// subscription.
+        /// Management credentials for Azure.
         /// </summary>
-        SubscriptionCloudCredentials Credentials { get; }
+        ServiceClientCredentials Credentials { get; }
 
         /// <summary>
         /// The subscription id, which appears in the path, always modeled in

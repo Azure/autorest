@@ -10,6 +10,7 @@
 
 namespace Microsoft.Azure.Properties {
     using System;
+    using System.Reflection;
     
     
     /// <summary>
@@ -39,7 +40,7 @@ namespace Microsoft.Azure.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Microsoft.Azure.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Microsoft.Azure.Properties.Resources", typeof(Resources).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -85,6 +86,24 @@ namespace Microsoft.Azure.Properties {
         internal static string ArgumentCannotBeNegative {
             get {
                 return ResourceManager.GetString("ArgumentCannotBeNegative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The authentication endpoint must not contain a query string..
+        /// </summary>
+        internal static string AuthenticationEndpointContainsQuery {
+            get {
+                return ResourceManager.GetString("AuthenticationEndpointContainsQuery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Authentication with Azure Active Directory Failed using clientId: {0}.
+        /// </summary>
+        internal static string AuthenticationValidationFailed {
+            get {
+                return ResourceManager.GetString("AuthenticationValidationFailed", resourceCulture);
             }
         }
         
@@ -166,6 +185,33 @@ namespace Microsoft.Azure.Properties {
         internal static string DefaultRetryStrategyNotFound {
             get {
                 return ResourceManager.GetString("DefaultRetryStrategyNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Authentication error while acquiring token: &apos;{0}&apos;..
+        /// </summary>
+        internal static string ErrorAcquiringToken {
+            get {
+                return ResourceManager.GetString("ErrorAcquiringToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Authentication error while configuring active directory: &apos;{0}&apos;..
+        /// </summary>
+        internal static string ErrorCreatingAuthenticationContext {
+            get {
+                return ResourceManager.GetString("ErrorCreatingAuthenticationContext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Authentication error while renewing token: &apos;{0}&apos;..
+        /// </summary>
+        internal static string ErrorRenewingToken {
+            get {
+                return ResourceManager.GetString("ErrorRenewingToken", resourceCulture);
             }
         }
         

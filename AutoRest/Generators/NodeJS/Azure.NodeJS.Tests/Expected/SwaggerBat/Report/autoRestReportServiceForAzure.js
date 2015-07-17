@@ -17,7 +17,7 @@ var models = require('./models');
  * Initializes a new instance of the AutoRestReportServiceForAzure class.
  * @constructor
  *
- * @param {ServiceClientCredentials} [credentials] Subscription credentials which uniquely identify Microsoft Azure subscription.
+ * @param {ServiceClientCredentials} [credentials] Management credentials for Azure.
  *
  * @param {string} [baseUri] - The base URI of the service.
  *
