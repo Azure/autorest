@@ -121,6 +121,7 @@ SubscriptionInCredentials.prototype.postMethodGlobalValid = function (options, c
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -225,6 +226,7 @@ SubscriptionInCredentials.prototype.postMethodGlobalNull = function (options, ca
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -335,6 +337,7 @@ SubscriptionInCredentials.prototype.postMethodGlobalNotProvidedValid = function 
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -438,6 +441,7 @@ SubscriptionInCredentials.prototype.postPathGlobalValid = function (options, cal
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -541,6 +545,7 @@ SubscriptionInCredentials.prototype.postSwaggerGlobalValid = function (options, 
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
 
     return callback(null, result);
   });

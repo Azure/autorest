@@ -172,6 +172,7 @@ LROs.prototype.beginPut200Succeeded = function (product, options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -284,6 +285,7 @@ LROs.prototype.get200Succeeded = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -454,6 +456,7 @@ LROs.prototype.beginPut200SucceededNoState = function (product, options, callbac
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -566,6 +569,7 @@ LROs.prototype.get200SucceededNoState = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -738,6 +742,7 @@ LROs.prototype.beginPut202Retry200 = function (product, options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 202) {
       var parsedResponse;
@@ -850,6 +855,7 @@ LROs.prototype.getPut202Retry200 = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -1024,6 +1030,7 @@ LROs.prototype.beginPut201CreatingSucceeded200 = function (product, options, cal
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -1152,6 +1159,7 @@ LROs.prototype.get201CreatingSucceeded200Polling = function (options, callback) 
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -1326,6 +1334,7 @@ LROs.prototype.beginPut200UpdatingSucceeded204 = function (product, options, cal
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -1437,6 +1446,7 @@ LROs.prototype.get200CreatingSucceeded200Poll = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -1611,6 +1621,7 @@ LROs.prototype.beginPut201CreatingFailed200 = function (product, options, callba
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -1739,6 +1750,7 @@ LROs.prototype.get201CreatingFailed200Polling = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -1913,6 +1925,7 @@ LROs.prototype.beginPut200Acceptedcanceled200 = function (product, options, call
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -2024,6 +2037,7 @@ LROs.prototype.get200Acceptedcanceled200Poll = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -2196,6 +2210,7 @@ LROs.prototype.beginPutNoHeaderInRetry = function (product, options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 202) {
       var parsedResponse;
@@ -2308,6 +2323,7 @@ LROs.prototype.getPutNoHeaderInRetry = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -2480,6 +2496,7 @@ LROs.prototype.beginPutAsyncRetrySucceeded = function (product, options, callbac
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -2593,6 +2610,7 @@ LROs.prototype.getAsyncRetrySucceeded = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -2765,6 +2783,7 @@ LROs.prototype.beginPutAsyncNoRetrySucceeded = function (product, options, callb
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -2878,6 +2897,7 @@ LROs.prototype.getAsyncNoRetrySucceeded = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -3050,6 +3070,7 @@ LROs.prototype.beginPutAsyncRetryFailed = function (product, options, callback) 
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -3163,6 +3184,7 @@ LROs.prototype.getAsyncRetryFailed = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -3335,6 +3357,7 @@ LROs.prototype.beginPutAsyncNoRetrycanceled = function (product, options, callba
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -3448,6 +3471,7 @@ LROs.prototype.getAsyncNoRetrycanceled = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -3620,6 +3644,7 @@ LROs.prototype.beginPutAsyncNoHeaderInRetry = function (product, options, callba
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 201) {
       var parsedResponse;
@@ -3731,6 +3756,7 @@ LROs.prototype.getPutAsyncNoHeaderInRetry = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -3895,6 +3921,7 @@ LROs.prototype.beginPutNonResource = function (sku, options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 202) {
       var parsedResponse;
@@ -4006,6 +4033,7 @@ LROs.prototype.getNonResource = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -4170,6 +4198,7 @@ LROs.prototype.beginPutAsyncNonResource = function (sku, options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 202) {
       var parsedResponse;
@@ -4281,6 +4310,7 @@ LROs.prototype.getAsyncNonResource = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -4449,6 +4479,7 @@ LROs.prototype.beginPutSubResource = function (product, options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 202) {
       var parsedResponse;
@@ -4560,6 +4591,7 @@ LROs.prototype.getSubResource = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -4728,6 +4760,7 @@ LROs.prototype.beginPutAsyncSubResource = function (product, options, callback) 
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 202) {
       var parsedResponse;
@@ -4839,6 +4872,7 @@ LROs.prototype.getAsyncSubResource = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -4981,6 +5015,7 @@ LROs.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (option
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -5139,6 +5174,7 @@ LROs.prototype.beginDeleteProvisioning202DeletingFailed200 = function (options, 
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -5297,6 +5333,7 @@ LROs.prototype.beginDeleteProvisioning202Deletingcanceled200 = function (options
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -5449,6 +5486,7 @@ LROs.prototype.beginDelete204Succeeded = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -5573,6 +5611,7 @@ LROs.prototype.beginDelete202Retry200 = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -5713,6 +5752,7 @@ LROs.prototype.beginDelete202NoRetry204 = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -5853,6 +5893,7 @@ LROs.prototype.beginDeleteNoHeaderInRetry = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -5977,6 +6018,7 @@ LROs.prototype.beginDeleteAsyncNoHeaderInRetry = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -6101,6 +6143,7 @@ LROs.prototype.beginDeleteAsyncRetrySucceeded = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -6225,6 +6268,7 @@ LROs.prototype.beginDeleteAsyncNoRetrySucceeded = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -6349,6 +6393,7 @@ LROs.prototype.beginDeleteAsyncRetryFailed = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -6473,6 +6518,7 @@ LROs.prototype.beginDeleteAsyncRetrycanceled = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -6597,6 +6643,7 @@ LROs.prototype.beginPost200WithPayload = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 202) {
       var parsedResponse;
@@ -6775,6 +6822,7 @@ LROs.prototype.beginPost202Retry200 = function (product, options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -6919,6 +6967,7 @@ LROs.prototype.beginPost202NoRetry204 = function (product, options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 202) {
       var parsedResponse;
@@ -7081,6 +7130,7 @@ LROs.prototype.beginPostAsyncRetrySucceeded = function (product, options, callba
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -7227,6 +7277,7 @@ LROs.prototype.beginPostAsyncNoRetrySucceeded = function (product, options, call
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -7373,6 +7424,7 @@ LROs.prototype.beginPostAsyncRetryFailed = function (product, options, callback)
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -7519,6 +7571,7 @@ LROs.prototype.beginPostAsyncRetrycanceled = function (product, options, callbac
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
 
     return callback(null, result);
   });

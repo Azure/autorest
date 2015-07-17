@@ -114,6 +114,7 @@ HttpSuccess.prototype.head204 = function (options, callback) {
     result.response = response;
     if (responseBody === '') responseBody = null;
     result.body = (statusCode === 204);
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -210,6 +211,7 @@ HttpSuccess.prototype.head404 = function (options, callback) {
     result.response = response;
     if (responseBody === '') responseBody = null;
     result.body = (statusCode === 204);
+    result.requestId = result.httpRequest.headers['x-ms-request-id'];
 
     return callback(null, result);
   });

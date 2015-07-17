@@ -11,6 +11,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
     using System.Threading.Tasks;
     using Microsoft.Rest;
     using Newtonsoft.Json;
+    using System.Linq;
     using Microsoft.Azure;
     using Models;
 
@@ -136,6 +137,10 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             var result = new AzureOperationResponse();
             result.Request = httpRequest;
             result.Response = httpResponse;
+            if (httpResponse.Headers.Contains("x-ms-request-id"))
+            {
+                result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+            }
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -249,6 +254,10 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             var result = new AzureOperationResponse();
             result.Request = httpRequest;
             result.Response = httpResponse;
+            if (httpResponse.Headers.Contains("x-ms-request-id"))
+            {
+                result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+            }
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -360,6 +369,10 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             var result = new AzureOperationResponse();
             result.Request = httpRequest;
             result.Response = httpResponse;
+            if (httpResponse.Headers.Contains("x-ms-request-id"))
+            {
+                result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+            }
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -472,6 +485,10 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
             var result = new AzureOperationResponse();
             result.Request = httpRequest;
             result.Response = httpResponse;
+            if (httpResponse.Headers.Contains("x-ms-request-id"))
+            {
+                result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+            }
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);

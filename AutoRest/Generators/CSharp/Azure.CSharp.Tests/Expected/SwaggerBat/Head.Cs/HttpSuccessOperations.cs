@@ -11,6 +11,7 @@ namespace Fixtures.Azure.SwaggerBatHead
     using System.Threading.Tasks;
     using Microsoft.Rest;
     using Newtonsoft.Json;
+    using System.Linq;
     using Microsoft.Azure;
 
     internal partial class HttpSuccessOperations : IServiceOperations<AutoRestHeadTestService>, IHttpSuccessOperations
@@ -127,6 +128,10 @@ namespace Fixtures.Azure.SwaggerBatHead
             result.Request = httpRequest;
             result.Response = httpResponse;
             result.Body = (statusCode == HttpStatusCode.NoContent);
+            if (httpResponse.Headers.Contains("x-ms-request-id"))
+            {
+                result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+            }
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -230,6 +235,10 @@ namespace Fixtures.Azure.SwaggerBatHead
             result.Request = httpRequest;
             result.Response = httpResponse;
             result.Body = (statusCode == HttpStatusCode.NoContent);
+            if (httpResponse.Headers.Contains("x-ms-request-id"))
+            {
+                result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+            }
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);

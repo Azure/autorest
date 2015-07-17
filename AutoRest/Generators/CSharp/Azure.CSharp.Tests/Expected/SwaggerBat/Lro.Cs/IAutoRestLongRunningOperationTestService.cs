@@ -7,6 +7,7 @@ namespace Fixtures.Azure.SwaggerBatLro
     using System.Threading.Tasks;
     using Newtonsoft.Json;
     using Microsoft.Rest;
+    using System.Linq;
     using Microsoft.Azure;
     using Models;
 

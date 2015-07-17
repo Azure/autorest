@@ -60,12 +60,16 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         {
             get
             {
+                //result.requestId = result.httpRequest.headers['x-ms-request-id'];
+                var sb = new IndentedStringBuilder();
                 if (this.HttpMethod == HttpMethod.Head &&
                     this.ReturnType != null)
                 {
-                    return "result.body = (statusCode === 204);";
+                    sb.AppendLine("result.body = (statusCode === 204);");
                 }
-                return base.InitializeResponseBody;
+                sb.AppendLine("result.requestId = result.httpRequest.headers['x-ms-request-id'];")
+                    .AppendLine(base.InitializeResponseBody);
+                return sb.ToString();
             }
         }
 
@@ -76,7 +80,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         {
             get
             {
-                IndentedStringBuilder sb = new IndentedStringBuilder();
+                var sb = new IndentedStringBuilder();
                 sb.AppendLine("httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();")
                   .AppendLine(base.SetDefaultHeaders);
                 return sb.ToString();
