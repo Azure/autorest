@@ -90,7 +90,7 @@ namespace Microsoft.Azure.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The AuthenticationEndpoint must not contain a query string..
+        ///   Looks up a localized string similar to The authentication endpoint must not contain a query string..
         /// </summary>
         internal static string AuthenticationEndpointContainsQuery {
             get {

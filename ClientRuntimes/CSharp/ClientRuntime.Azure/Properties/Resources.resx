@@ -128,7 +128,7 @@ Parameter name: {0}</value>
     <value>The specified argument {0} cannot be initialized with a negative value.</value>
   </data>
   <data name="AuthenticationEndpointContainsQuery" xml:space="preserve">
-    <value>The AuthenticationEndpoint must not contain a query string.</value>
+    <value>The authentication endpoint must not contain a query string.</value>
   </data>
   <data name="AuthenticationValidationFailed" xml:space="preserve">
     <value>Authentication with Azure Active Directory Failed using clientId: {0}</value>

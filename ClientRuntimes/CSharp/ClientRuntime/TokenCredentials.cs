@@ -26,7 +26,8 @@ namespace Microsoft.Rest
         /// class with the given 'Bearer' token.
         /// </summary>
         /// <param name="token">Valid JSON Web Token (JWT).</param>
-        public TokenCredentials(string token) : this(token, "Bearer")
+        public TokenCredentials(string token)
+            : this(token, "Bearer")
         {
         }
 
@@ -36,18 +37,18 @@ namespace Microsoft.Rest
         /// </summary>
         /// <param name="token">Valid JSON Web Token (JWT).</param>
         /// <param name="tokenType">The token type of the given token.</param>
-        public TokenCredentials(string token, string tokenType) : 
-            this(new StringTokenProvider(token, tokenType))
+        public TokenCredentials(string token, string tokenType) 
+            : this(new StringTokenProvider(token, tokenType))
         {
-             if (string.IsNullOrEmpty(token))
+            if (string.IsNullOrEmpty(token))
             {
                 throw new ArgumentNullException("token");
             }
-              if (string.IsNullOrEmpty(tokenType))
+            if (string.IsNullOrEmpty(tokenType))
             {
                 throw new ArgumentNullException("tokenType");
             }
-      }
+        }
 
         /// <summary>
         /// Create an access token credentials object, given an interface to a token source.
@@ -71,7 +72,7 @@ namespace Microsoft.Rest
         /// <returns>
         /// Task that will complete when processing has completed.
         /// </returns>
-        public async override Task ProcessHttpRequestAsync(HttpRequestMessage request, 
+        public async override Task ProcessHttpRequestAsync(HttpRequestMessage request,
             CancellationToken cancellationToken)
         {
             if (request == null)

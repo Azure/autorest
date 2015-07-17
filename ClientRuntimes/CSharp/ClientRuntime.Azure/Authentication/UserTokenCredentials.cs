@@ -9,7 +9,7 @@ namespace Microsoft.Azure.Authentication
     /// <summary>
     /// Credentials class for authenticating using a Microsoft ID or Organizational Id
     /// </summary>
-    public class UserAccessTokenCredentials : TokenCredentials
+    public class UserTokenCredentials : TokenCredentials
     {
         private static readonly Uri DefaultRedirectUri = new Uri("urn:ietf:wg:oauth:2.0:oob");
 
@@ -18,10 +18,10 @@ namespace Microsoft.Azure.Authentication
         /// This method will display a dialog for providing username and password.
         /// </summary>
         /// <param name="clientId">The active directory identity of this application.  
-        /// See https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/ for an example </param>
+        /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">Active Directory Quickstart for .Net</see> for an example. </param>
         /// <param name="domain">The domain name or tenant id containing the subscription or resources to manage.</param>
-        public UserAccessTokenCredentials(string clientId, string domain) : 
-            this(clientId, domain, AzureEnvironment.Azure)
+        public UserTokenCredentials(string clientId, string domain) 
+            : this(clientId, domain, AzureEnvironment.Azure)
         {
         }
 
@@ -30,11 +30,11 @@ namespace Microsoft.Azure.Authentication
         /// This method will display a dialog for providing username and password.
         /// </summary>
         /// <param name="clientId">The active directory identity of this application.  
-        /// See https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/ for an example </param>
+        /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">Active Directory Quickstart for .Net</see> for an example. </param>
         /// <param name="domain">The domain name or tenant id containing the subscription or resources to manage.</param>
         /// <param name="environment">The azure environment to authenticate with. </param>
-        public UserAccessTokenCredentials(string clientId, string domain, AzureEnvironment environment) : 
-            this(clientId, domain, environment, DefaultRedirectUri)
+        public UserTokenCredentials(string clientId, string domain, AzureEnvironment environment) 
+            :  this(clientId, domain, environment, DefaultRedirectUri)
         {
         }
 
@@ -43,12 +43,12 @@ namespace Microsoft.Azure.Authentication
         /// This method will display a dialog for providing username and password.
         /// </summary>
         /// <param name="clientId">The active directory identity of this application.  
-        /// See https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/ for an example </param>
+        /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">Active Directory Quickstart for .Net</see> for an example. </param>
         /// <param name="domain">The domain name or tenant id containing the subscription or resources to manage.</param>
         /// <param name="environment">The azure environment to authenticate with. </param>
         /// <param name="clientRedirectUri">The Uri where the user will be redirected after authenticating with AD.</param>
-        public UserAccessTokenCredentials(string clientId, string domain, AzureEnvironment environment, Uri clientRedirectUri) :
-            base(new ActiveDirectoryUserTokenProvider(clientId, domain, environment, clientRedirectUri))
+        public UserTokenCredentials(string clientId, string domain, AzureEnvironment environment, Uri clientRedirectUri) 
+            : base(new ActiveDirectoryUserTokenProvider(clientId, domain, environment, clientRedirectUri))
         {
         }
 
@@ -57,12 +57,12 @@ namespace Microsoft.Azure.Authentication
         /// This method will not display a dialog.
         /// </summary>
         /// <param name="clientId">The active directory identity of this application.  
-        /// See https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/ for an example </param>
+        /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">Active Directory Quickstart for .Net</see> for an example. </param>
         /// <param name="domain">The domain name or tenant id containing the subscription or resources to manage.</param>
         /// <param name="username">The user name for the Organization Id account.</param>
         /// <param name="password">The password for the Organization Id account.</param>
-        public UserAccessTokenCredentials(string clientId, string domain, string username, string password) : 
-            this(clientId, domain, username, password, AzureEnvironment.Azure)
+        public UserTokenCredentials(string clientId, string domain, string username, string password) 
+            : this(clientId, domain, username, password, AzureEnvironment.Azure)
         {
         }
 
@@ -71,13 +71,13 @@ namespace Microsoft.Azure.Authentication
         /// This method will not display a dialog.
         /// </summary>
         /// <param name="clientId">The active directory identity of this application.  
-        /// See https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/ for an example </param>
+        /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">Active Directory Quickstart for .Net</see> for an example. </param>
         /// <param name="domain">The domain name or tenant id containing the subscription or resources to manage.</param>
         /// <param name="username">The user name for the Organization Id account.</param>
         /// <param name="password">The password for the Organization Id account.</param>
         /// <param name="environment">The azure environment to authenticate with. </param>
-        public UserAccessTokenCredentials(string clientId, string domain, string username, string password, AzureEnvironment environment) : 
-            base(new ActiveDirectoryUserTokenProvider(clientId, domain, username, password, environment))
+        public UserTokenCredentials(string clientId, string domain, string username, string password, AzureEnvironment environment) 
+            : base(new ActiveDirectoryUserTokenProvider(clientId, domain, username, password, environment))
         {
             
         }

@@ -14,7 +14,7 @@ namespace Microsoft.Azure.Authentication
     /// <summary>
     /// Provides tokens for Azure Active Directory Microsoft Id and Organization Id users.
     /// </summary>
-    internal class ActiveDirectoryUserTokenProvider : ITokenProvider
+    public class ActiveDirectoryUserTokenProvider : ITokenProvider
     {
         /// <summary>
         /// Uri parameters used in the credential prompt.  Allows recalling previous 
@@ -37,7 +37,23 @@ namespace Microsoft.Azure.Authentication
         /// <param name="clientRedirectUri">The redirect URI for authentication requests for 
         /// this client application.</param>
         public ActiveDirectoryUserTokenProvider(string clientId, string domain,
-            AzureEnvironment environment, Uri clientRedirectUri)
+            AzureEnvironment environment, Uri clientRedirectUri) 
+            : this(clientId, domain, environment, clientRedirectUri, null)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a token provider using Active Directory user credentials (UPN). 
+        /// This token provider will prompt the user for username and password.
+        /// </summary>
+        /// <param name="clientId">The client id for this application.</param>
+        /// <param name="domain">The domain or tenant id contianing the resources to manage.</param>
+        /// <param name="environment">The azure environment to manage resources in.</param>
+        /// <param name="clientRedirectUri">The redirect URI for authentication requests for 
+        /// this client application.</param>
+        /// <param name="cache">The token cache to use during authentication.</param>
+        internal ActiveDirectoryUserTokenProvider(string clientId, string domain,
+            AzureEnvironment environment, Uri clientRedirectUri, TokenCache cache)
         {
             ValidateCommonParameters(clientId, domain, environment);
             if (clientRedirectUri == null)
@@ -50,8 +66,9 @@ namespace Microsoft.Azure.Authentication
             string authority = environment.AuthenticationEndpoint + domain;
             try
             {
-                this._authenticationContext = new AuthenticationContext(authority,
-                    environment.ValidateAuthority);
+                this._authenticationContext = cache == null
+                    ? new AuthenticationContext(authority, environment.ValidateAuthority)
+                    : new AuthenticationContext(authority, environment.ValidateAuthority, cache);
                 var authenticatioResult = this._authenticationContext.AcquireTokenAsync(
                     environment.TokenAudience.ToString(), clientId, clientRedirectUri,
                     GetPlatformParameters(), UserIdentifier.AnyUser,
@@ -63,7 +80,6 @@ namespace Microsoft.Azure.Authentication
                 throw new AuthenticationException(Resources.ErrorAcquiringToken, authenticationException);
             }
         }
-
         /// <summary>
         /// Create a token provider using Active Directory user credentials (UPN). 
         /// Authentication occurs using the given username and password, with no user prompt.
@@ -73,8 +89,8 @@ namespace Microsoft.Azure.Authentication
         /// <param name="username">The username to use for authentication.</param>
         /// <param name="password">The secret password associated with thsi user.</param>
         /// <param name="environment">The azure environment to manage resources in.</param>
-        public ActiveDirectoryUserTokenProvider(string clientId, string domain, string username, string password, AzureEnvironment environment) :
-            this(clientId, domain, username, password, environment, null)
+        public ActiveDirectoryUserTokenProvider(string clientId, string domain, string username, string password, AzureEnvironment environment) 
+            : this(clientId, domain, username, password, environment, null)
         {
         }
 

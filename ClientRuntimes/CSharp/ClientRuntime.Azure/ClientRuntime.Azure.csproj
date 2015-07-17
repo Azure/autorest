@@ -13,18 +13,6 @@
     <OutputType>Library</OutputType>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Net45-Debug'">
-    <DocumentationFile>bin\Net45-Debug\Microsoft.Rest.ClientRuntime.Azure.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Net45-Release'">
-    <DocumentationFile>bin\Net45-Release\Microsoft.Rest.ClientRuntime.Azure.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Portable-Debug'">
-    <DocumentationFile>bin\Portable-Debug\Microsoft.Rest.ClientRuntime.Azure.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Portable-Release'">
-    <DocumentationFile>bin\Portable-Release\Microsoft.Rest.ClientRuntime.Azure.xml</DocumentationFile>
-  </PropertyGroup>
   <Import Project="$(SolutionDir)\tools\AutoRest.Settings.targets" />
   <ItemGroup>
     <None Include="Microsoft.Rest.ClientRuntime.Azure.nuget.proj" />
@@ -49,20 +37,18 @@
     <Compile Include="AzureOperationResponse.cs" />
     <Compile Include="AzureAsyncOperation.cs" />
     <Compile Include="ClientRequestTrackingHandler.cs" />
+    <Compile Include="Authentication\ActiveDirectoryApplicationTokenProvider.cs" />
+    <Compile Include="Authentication\ActiveDirectoryUserTokenProvider.cs" />
+    <Compile Include="Authentication\ApplicationTokenCredentials.cs" />
+    <Compile Include="Authentication\AzureEnvironment.cs" />
+    <Compile Include="Authentication\UserTokenCredentials.cs" />
+    <Compile Include="Authentication\AuthenticationException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup Condition=" '$(LibraryFxTarget)' == 'portable' or'$(LibraryFxTarget)' == 'net45' ">
-    <Compile Include="Authentication\ActiveDirectoryApplicationTokenProvider.cs" />
-    <Compile Include="Authentication\ActiveDirectoryUserTokenProvider.cs" />
-    <Compile Include="Authentication\ApplicationTokenCredentials.cs" />
-    <Compile Include="Authentication\AzureEnvironment.cs" />
-    <Compile Include="Authentication\UserAccessTokenCredentials.cs" />
-    <Compile Include="Authentication\AuthenticationException.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

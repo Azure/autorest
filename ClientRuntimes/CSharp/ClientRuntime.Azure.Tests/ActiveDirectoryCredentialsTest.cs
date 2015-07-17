@@ -43,7 +43,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact(Skip="Test should only run with user interaction")]
         public void UserCredentialsPopsDialog()
         {
-            var credentials = new UserAccessTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
+            var credentials = new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
                 this.Domain);
             var client = new HttpClient();
 
@@ -58,7 +58,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void OrgIdCredentialWorksWithoutDialog()
         {
-            var credentials = new UserAccessTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
+            var credentials = new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
                 this.Domain, this.Username, this.Password);
             var client = new HttpClient();
             var request = new HttpRequestMessage(HttpMethod.Get,
@@ -72,19 +72,19 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void OrgIdCredentialsThrowsForInvalidCredentials()
         {
-            var exception = Assert.Throws<AggregateException>(() => new UserAccessTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
+            var exception = Assert.Throws<AggregateException>(() => new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
                 this.Domain, "unuseduser@thisdomain.com", "This is not a valid password"));
             Assert.NotNull(exception.InnerException);
             Assert.Equal(typeof(AdalException), exception.InnerException.GetType());
-            exception = Assert.Throws<AggregateException>(() => new UserAccessTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
+            exception = Assert.Throws<AggregateException>(() => new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
                 this.Domain, "bad_user@bad_domain.com", this.Password));
             Assert.NotNull(exception.InnerException);
             Assert.Equal(typeof(AdalException), exception.InnerException.GetType());
-            exception = Assert.Throws<AggregateException>(() => new UserAccessTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
+            exception = Assert.Throws<AggregateException>(() => new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
                 "not-a-valid-domain", this.Username, this.Password));
             Assert.NotNull(exception.InnerException);
             Assert.Equal(typeof(AdalServiceException), exception.InnerException.GetType());
-            exception = Assert.Throws<AggregateException>(() => new UserAccessTokenCredentials("not-a-valid-client-id",
+            exception = Assert.Throws<AggregateException>(() => new UserTokenCredentials("not-a-valid-client-id",
                 this.Domain, this.Username, this.Password));
             Assert.NotNull(exception.InnerException);
             Assert.Equal(typeof(AdalServiceException), exception.InnerException.GetType());
@@ -93,29 +93,29 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void CredentialsConstructorThrowsForInvalidValues()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new UserAccessTokenCredentials(null,
+            Assert.Throws<ArgumentOutOfRangeException>(() => new UserTokenCredentials(null,
                 "microsoft.onmicrosoft.com"));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new UserAccessTokenCredentials(string.Empty,
+            Assert.Throws<ArgumentOutOfRangeException>(() => new UserTokenCredentials(string.Empty,
                  "microsoft.onmicrosoft.com"));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new UserAccessTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
+            Assert.Throws<ArgumentOutOfRangeException>(() => new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
                  null));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new UserAccessTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
+            Assert.Throws<ArgumentOutOfRangeException>(() => new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
                 string.Empty));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new UserAccessTokenCredentials(null,
+            Assert.Throws<ArgumentOutOfRangeException>(() => new UserTokenCredentials(null,
                "rbactest.onmicrosoft.com", this.Username, this.Password));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new UserAccessTokenCredentials(string.Empty,
+            Assert.Throws<ArgumentOutOfRangeException>(() => new UserTokenCredentials(string.Empty,
                "rbactest.onmicrosoft.com", this.Username, this.Password));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new UserAccessTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
+            Assert.Throws<ArgumentOutOfRangeException>(() => new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
                null, this.Username, this.Password));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new UserAccessTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
+            Assert.Throws<ArgumentOutOfRangeException>(() => new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
                string.Empty, this.Username, this.Password));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new UserAccessTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
+            Assert.Throws<ArgumentOutOfRangeException>(() => new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
                "rbactest.onmicrosoft.com", null, this.Password));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new UserAccessTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
+            Assert.Throws<ArgumentOutOfRangeException>(() => new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
                "rbactest.onmicrosoft.com", string.Empty, this.Password));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new UserAccessTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
+            Assert.Throws<ArgumentOutOfRangeException>(() => new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
                "rbactest.onmicrosoft.com", this.Username, null));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new UserAccessTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
+            Assert.Throws<ArgumentOutOfRangeException>(() => new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
                "rbactest.onmicrosoft.com", this.Username, string.Empty));
         }
         [Fact]

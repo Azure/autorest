@@ -14,7 +14,7 @@ namespace Microsoft.Azure.Authentication
     /// <summary>
     /// Provides tokens for Azure Active Directory applications. 
     /// </summary>
-    internal class ActiveDirectoryApplicationTokenProvider : ITokenProvider
+    public class ActiveDirectoryApplicationTokenProvider : ITokenProvider
     {
         private AuthenticationContext _authenticationContext;
         private string _tokenAudience;
@@ -24,6 +24,8 @@ namespace Microsoft.Azure.Authentication
 
         /// <summary>
         /// Initializes a token provider for application credentials.
+        /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">Active Directory Quickstart for .Net</see> 
+        /// for detailed instructions on creating an Azure Active Directory application.
         /// </summary>
         /// <param name="domain">The domain or tenant id for the application.</param>
         /// <param name="clientId">The client Id of the application in Active Directory.</param>
@@ -81,7 +83,7 @@ namespace Microsoft.Azure.Authentication
         /// <param name="environment">The Azure environment to manage resources in.</param>
         /// <param name="cache">The TokenCache to use while authenticating.</param>
         protected void InitializeAuthenticationContext(string domain, string clientId,
-            AzureEnvironment environment, TokenCache cache = null)
+            AzureEnvironment environment, TokenCache cache)
         {
             ValidateCommonParameters(clientId, domain, environment);
             this._clientId = clientId;
@@ -101,7 +103,7 @@ namespace Microsoft.Azure.Authentication
             }
         }
         /// <summary>
-        /// Set the ActiveDirectory authentication properties for this user
+        /// Validate ActiveDirectory authentication properties for this application
         /// </summary>
         /// <param name="authenticationResult">The authentication result</param>
         protected void ValidateAuthenticationResult(AuthenticationResult authenticationResult)
