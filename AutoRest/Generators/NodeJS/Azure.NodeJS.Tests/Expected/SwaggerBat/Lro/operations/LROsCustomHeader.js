@@ -178,7 +178,7 @@ LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (product, opti
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -294,7 +294,7 @@ LROsCustomHeader.prototype.getAsyncRetrySucceeded = function (options, callback)
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -471,7 +471,7 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (product, 
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -601,7 +601,7 @@ LROsCustomHeader.prototype.get201CreatingSucceeded200Polling = function (options
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -766,7 +766,7 @@ LROsCustomHeader.prototype.beginPost202Retry200 = function (product, options, ca
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -917,7 +917,7 @@ LROsCustomHeader.prototype.beginPostAsyncRetrySucceeded = function (product, opt
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
 
     return callback(null, result);
   });

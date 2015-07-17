@@ -154,7 +154,7 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (resourceArr
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -250,7 +250,7 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -378,7 +378,7 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resour
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -474,7 +474,7 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -614,7 +614,7 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -710,7 +710,7 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;

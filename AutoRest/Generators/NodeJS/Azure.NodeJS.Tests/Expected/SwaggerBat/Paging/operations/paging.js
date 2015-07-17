@@ -113,7 +113,7 @@ Paging.prototype.getSinglePages = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -225,7 +225,7 @@ Paging.prototype.getMultiplePages = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -338,7 +338,7 @@ Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -452,7 +452,7 @@ Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -564,7 +564,7 @@ Paging.prototype.getSinglePagesFailure = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -676,7 +676,7 @@ Paging.prototype.getMultiplePagesFailure = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -788,7 +788,7 @@ Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -904,7 +904,7 @@ Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback)
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -1020,7 +1020,7 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -1137,7 +1137,7 @@ Paging.prototype.getMultiplePagesRetryFirstNext = function (nextPageLink, option
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -1255,7 +1255,7 @@ Paging.prototype.getMultiplePagesRetrySecondNext = function (nextPageLink, optio
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -1371,7 +1371,7 @@ Paging.prototype.getSinglePagesFailureNext = function (nextPageLink, options, ca
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -1487,7 +1487,7 @@ Paging.prototype.getMultiplePagesFailureNext = function (nextPageLink, options, 
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;
@@ -1603,7 +1603,7 @@ Paging.prototype.getMultiplePagesFailureUriNext = function (nextPageLink, option
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
       var parsedResponse;

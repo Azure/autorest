@@ -123,7 +123,7 @@ ApiVersionLocal.prototype.getMethodLocalValid = function (apiVersion, options, c
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -228,7 +228,7 @@ ApiVersionLocal.prototype.getMethodLocalNull = function (apiVersion, options, ca
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -334,7 +334,7 @@ ApiVersionLocal.prototype.getPathLocalValid = function (apiVersion, options, cal
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -440,7 +440,7 @@ ApiVersionLocal.prototype.getSwaggerLocalValid = function (apiVersion, options, 
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
 
     return callback(null, result);
   });

@@ -114,7 +114,7 @@ XMsClientRequestId.prototype.get = function (options, callback) {
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -222,7 +222,7 @@ XMsClientRequestId.prototype.paramGet = function (xMsClientRequestId, options, c
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
 
     return callback(null, result);
   });

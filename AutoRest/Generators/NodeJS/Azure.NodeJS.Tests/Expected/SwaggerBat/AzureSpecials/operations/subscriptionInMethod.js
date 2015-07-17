@@ -123,7 +123,7 @@ SubscriptionInMethod.prototype.postMethodLocalValid = function (subscriptionId, 
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -230,7 +230,7 @@ SubscriptionInMethod.prototype.postMethodLocalNull = function (subscriptionId, o
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -336,7 +336,7 @@ SubscriptionInMethod.prototype.postPathLocalValid = function (subscriptionId, op
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
 
     return callback(null, result);
   });
@@ -442,7 +442,7 @@ SubscriptionInMethod.prototype.postSwaggerLocalValid = function (subscriptionId,
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
-    result.requestId = result.httpRequest.headers['x-ms-request-id'];
+    result.requestId = response.headers['x-ms-request-id'];
 
     return callback(null, result);
   });

@@ -67,7 +67,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
                 {
                     sb.AppendLine("result.body = (statusCode === 204);");
                 }
-                sb.AppendLine("result.requestId = result.httpRequest.headers['x-ms-request-id'];")
+                sb.AppendLine("result.requestId = response.headers['x-ms-request-id'];")
                     .AppendLine(base.InitializeResponseBody);
                 return sb.ToString();
             }
