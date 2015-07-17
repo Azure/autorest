@@ -6,16 +6,18 @@ using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
+using Microsoft.Rest;
 
 namespace Microsoft.Azure.Authentication
 {
     /// <summary>
-    /// Provides tokens for Azure Active Directory Microsoft Id and Organization Id users
+    /// Provides tokens for Azure Active Directory Microsoft Id and Organization Id users.
     /// </summary>
     internal class ActiveDirectoryUserTokenProvider : ITokenProvider
     {
         /// <summary>
-        /// Uri parameters used in the credential prompt.  Allows recalling previous logins in the login dialog.
+        /// Uri parameters used in the credential prompt.  Allows recalling previous 
+        /// logins in the login dialog.
         /// </summary>
         private const string EnableEbdMagicCookie = "site_id=501358&display=popup";
         private string _userId;
@@ -25,14 +27,16 @@ namespace Microsoft.Azure.Authentication
         private string _type;
 
         /// <summary>
-        /// Create a token provider using Active Directory user credentials (UPN). 
+        /// Initializes a token provider using Active Directory user credentials (UPN). 
         /// This token provider will prompt the user for username and password.
         /// </summary>
-        /// <param name="clientId">The client id for thsi application.</param>
+        /// <param name="clientId">The client id for this application.</param>
         /// <param name="domain">The domain or tenant id contianing the resources to manage.</param>
         /// <param name="environment">The azure environment to manage resources in.</param>
-        /// <param name="clientRedirectUri">The redirect URI for authentication requests for this client application.</param>
-        public ActiveDirectoryUserTokenProvider(string clientId, string domain, AzureEnvironment environment, Uri clientRedirectUri)
+        /// <param name="clientRedirectUri">The redirect URI for authentication requests for 
+        /// this client application.</param>
+        public ActiveDirectoryUserTokenProvider(string clientId, string domain, 
+            AzureEnvironment environment, Uri clientRedirectUri)
         {
             ValidateCommonParameters(clientId, domain, environment);
             if (clientRedirectUri == null)
@@ -43,9 +47,12 @@ namespace Microsoft.Azure.Authentication
             this._clientId = clientId;
             this._tokenAudience = environment.TokenAudience.ToString();
             string authority = environment.AuthenticationEndpoint + domain;
-            this._authenticationContext = new AuthenticationContext(authority, environment.ValidateAuthority);
-            var authenticatioResult = this._authenticationContext.AcquireTokenAsync(environment.TokenAudience.ToString(),
-                clientId, clientRedirectUri, new PlatformParameters(PromptBehavior.Always, null), UserIdentifier.AnyUser, EnableEbdMagicCookie).Result;
+            this._authenticationContext = new AuthenticationContext(authority, 
+                environment.ValidateAuthority);
+            var authenticatioResult = this._authenticationContext.AcquireTokenAsync(
+                environment.TokenAudience.ToString(), clientId, clientRedirectUri, 
+                new PlatformParameters(PromptBehavior.Always, null), UserIdentifier.AnyUser, 
+                EnableEbdMagicCookie).Result;
             Initialize(authenticatioResult);
         }
 

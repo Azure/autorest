@@ -4,10 +4,10 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Microsoft.Azure.Authentication
+namespace Microsoft.Rest
 {
     /// <summary>
-    /// Interface to a provider of access tokens
+    /// Interface to a source of access tokens.
     /// </summary>
     public interface ITokenProvider
     {
@@ -17,7 +17,8 @@ namespace Microsoft.Azure.Authentication
         Task<string> GetAccessTokenAsync(CancellationToken cancellationToken);
         
         /// <summary>
-        /// Gets the type of the tokens returned by the token provider.  Possible velues include 'Bearer' and 'SAML'.
+        /// Gets the type of the tokens returned by the token provider.  
+        /// Possible values include 'Bearer' and 'SAML'.
         /// </summary>
         string TokenType { get; }
     }

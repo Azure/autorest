@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
 using Microsoft.Rest.TransientFaultHandling;
 
 namespace Microsoft.Rest
@@ -222,6 +223,7 @@ namespace Microsoft.Rest
             Type type = this.GetType();
             string version =
                 type
+                    .GetTypeInfo()
                     .Assembly
                     .FullName
                     .Split(',')

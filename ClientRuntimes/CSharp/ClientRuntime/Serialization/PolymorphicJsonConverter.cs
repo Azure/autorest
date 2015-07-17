@@ -30,8 +30,8 @@ namespace Microsoft.Rest.Serialization
             {
                 throw new ArgumentNullException("baseType");
             }
-            foreach (Type type in baseType.Assembly.GetTypes()
-                .Where(t => t.Namespace == baseType.Namespace && t != baseType))
+            foreach (TypeInfo type in baseType.GetTypeInfo().Assembly.DefinedTypes
+                .Where(t => t.Namespace == baseType.Namespace && t != baseType.GetTypeInfo()))
             {
                 string typeName = type.Name;
                 if (type.GetCustomAttributes<JsonObjectAttribute>().Any())
@@ -40,7 +40,7 @@ namespace Microsoft.Rest.Serialization
                 }
                 if (typeName.Equals(name, StringComparison.OrdinalIgnoreCase))
                 {
-                    return type;
+                    return type.AsType();
                 }
             }
 

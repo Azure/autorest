@@ -6,11 +6,12 @@ using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
+using Microsoft.Rest;
 
 namespace Microsoft.Azure.Authentication
 {
     /// <summary>
-    /// Provides tokens for Azure Active Directory Microsoft Id, Organization Id, and Service Principal users
+    /// Provides tokens for Azure Active Directory applications. 
     /// </summary>
     internal class ActiveDirectoryApplicationTokenProvider : ITokenProvider
     {
@@ -21,9 +22,9 @@ namespace Microsoft.Azure.Authentication
         private string _type;
 
         /// <summary>
-        /// Create a token provider for service principal credentials
+        /// Initializes a token provider for application credentials.
         /// </summary>
-        /// <param name="domain">The domain or tenant id for the service principal.</param>
+        /// <param name="domain">The domain or tenant id for the application.</param>
         /// <param name="clientId">The client Id of the application in Active Directory.</param>
         /// <param name="secret">The application secret, used for authentication.</param>
         /// <param name="environment">The Azure environment to manage resources in.</param>
@@ -33,13 +34,13 @@ namespace Microsoft.Azure.Authentication
         }
 
         /// <summary>
-        /// Create a token provider for service principal credentials
+        /// Initializes a token provider for application credentials.
         /// </summary>
-        /// <param name="domain">The domain or tenant id for the service principal.</param>
+        /// <param name="domain">The domain or tenant id for the application.</param>
         /// <param name="clientId">The client Id of the application in Active Directory.</param>
         /// <param name="secret">The application secret, used for authentication.</param>
         /// <param name="environment">The Azure environment to manage resources in.</param>
-        /// <param name="cache">The TokenCache to use during authentication</param>
+        /// <param name="cache">The TokenCache to use during authentication.</param>
         internal ActiveDirectoryApplicationTokenProvider(string domain, string clientId, string secret, AzureEnvironment environment, TokenCache cache)
         {
              if (string.IsNullOrWhiteSpace(secret))
@@ -53,15 +54,16 @@ namespace Microsoft.Azure.Authentication
        }
 
         /// <summary>
-        /// Return the token type of the returned token
+        /// Returns the token type of the returned token.
         /// </summary>
         public string TokenType
         {
             get { return _type; }
         }
+
         /// <summary>
-        /// Gets an access token from the token cache or from AD authentication endpoint.  Will attempt to 
-        /// refresh the access token if it has expired.
+        /// Gets an access token from the token cache or from AD authentication endpoint. 
+        /// Attempts to refresh the access token if it has expired.
         /// </summary>
         public virtual async Task<string> GetAccessTokenAsync(CancellationToken cancellationToken)
         {
@@ -73,10 +75,10 @@ namespace Microsoft.Azure.Authentication
         /// <summary>
         /// Initialize private fields in the token provider.
         /// </summary>
-        /// <param name="domain">The domain or tenant id for the service principal.</param>
+        /// <param name="domain">The domain or tenant id for the application.</param>
         /// <param name="clientId">The client Id of the application in Active Directory.</param>
         /// <param name="environment">The Azure environment to manage resources in.</param>
-        /// <param name="cache">The TokenCache to use while authenticating</param>
+        /// <param name="cache">The TokenCache to use while authenticating.</param>
         protected void InitializeAuthenticationContext(string domain, string clientId,
             AzureEnvironment environment, TokenCache cache = null)
         {
@@ -110,7 +112,7 @@ namespace Microsoft.Azure.Authentication
         }
 
         /// <summary>
-        /// Validate the parameters used by every method.
+        /// Validate the parameters used by every constructor.
         /// </summary>
         /// <param name="clientId">The client Id of the application in Active Directory.</param>
         /// <param name="domain">The domain or tenant id for the service principal.</param>

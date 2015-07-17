@@ -2,13 +2,14 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using Microsoft.Rest;
 
 namespace Microsoft.Azure.Authentication
 {
     /// <summary>
     /// Credentials class for authenticating using a Microsoft ID or Organizational Id
     /// </summary>
-    public class UserAccessTokenCredentials : AccessTokenCredentials
+    public class UserAccessTokenCredentials : TokenCredentials
     {
         private static readonly Uri DefaultRedirectUri = new Uri("urn:ietf:wg:oauth:2.0:oob");
 

@@ -24,7 +24,7 @@ namespace Microsoft.Azure
                 throw new ArgumentNullException("serializer");
             }
             JsonSerializer newSerializer = new JsonSerializer();
-            PropertyInfo[] properties = typeof(JsonSerializer).GetProperties();
+            PropertyInfo[] properties = typeof(JsonSerializer).GetTypeInfo().GetProperties();
             foreach (var property in properties.Where(p => p.GetSetMethod() != null))
             {
                 property.SetValue(newSerializer, property.GetValue(serializer, null), null);

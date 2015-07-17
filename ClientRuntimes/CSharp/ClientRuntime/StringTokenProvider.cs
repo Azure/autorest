@@ -4,15 +4,19 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Microsoft.Azure.Authentication
+namespace Microsoft.Rest
 {
     /// <summary>
     /// A simple token provider that always provides a static access token.
     /// </summary>
     public sealed class StringTokenProvider : ITokenProvider
     {
+        private string _accessToken;
+        private string _type;
+
         /// <summary>
-        /// Create a token provider for bearer tokens that always returns the given access token.
+        /// Create a token provider for bearer tokens that always returns the given 
+        /// access token.
         /// </summary>
         /// <param name="accessToken">The access token for this token provider to return.</param>
         public StringTokenProvider(string accessToken) : this(accessToken, "Bearer")
@@ -20,7 +24,8 @@ namespace Microsoft.Azure.Authentication
         }
 
         /// <summary>
-        /// Create a token provider for the given token type that returns the given access token.
+        /// Create a token provider for the given token type that returns the given 
+        /// access token.
         /// </summary>
         /// <param name="accessToken">The access token to return.</param>
         /// <param name="tokenType">The token type of the given access token.</param>
@@ -29,9 +34,6 @@ namespace Microsoft.Azure.Authentication
             _accessToken = accessToken;
             _type = tokenType;
         }
-
-        private string _accessToken;
-        private string _type;
 
         /// <summary>
         /// Gets the token type of this access token.
@@ -42,14 +44,19 @@ namespace Microsoft.Azure.Authentication
         }
 
         /// <summary>
-        /// Returns the access token.
+        /// Returns the static access token.
         /// </summary>
         /// <param name="cancellationToken">The cancellation token for this action.  
         /// This will not be used since the returned token is static.</param>
         /// <returns>The access token.</returns>
         public Task<string> GetAccessTokenAsync(CancellationToken cancellationToken)
         {
+#if PORTABLE
+            return new Task<string>(() => _accessToken);
+#else
             return Task.FromResult(_accessToken);
+#endif
+
         }
     }
 }

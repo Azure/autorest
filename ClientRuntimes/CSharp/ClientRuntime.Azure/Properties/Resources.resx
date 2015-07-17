@@ -193,9 +193,6 @@ Parameter name: {0}</value>
   <data name="TaskMustBeScheduled" xml:space="preserve">
     <value>The specified argument '{0}' must return a scheduled task (also known as "hot" task) when invoked.</value>
   </data>
-  <data name="TokenProviderCannotBeNull" xml:space="preserve">
-    <value>You must specify a token provider or raw access token before using token credentials.</value>
-  </data>
   <data name="UnexpectedPollingStatus" xml:space="preserve">
     <value>Unexpected polling status code from long running operation '{0}'.</value>
   </data>

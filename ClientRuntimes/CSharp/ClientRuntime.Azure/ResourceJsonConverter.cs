@@ -26,8 +26,8 @@ namespace Microsoft.Azure
         /// <returns>True if the object being serialized is assignable from the base type. False otherwise.</returns>
         public override bool CanConvert(Type objectType)
         {
-            return typeof(Resource).IsAssignableFrom(objectType) ||
-                   typeof(SubResource).IsAssignableFrom(objectType);
+            return typeof(Resource).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo()) ||
+                   typeof(SubResource).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
         }
 
         /// <summary>

@@ -126,7 +126,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                 this.Domain, this.Username, this.Password, AzureEnvironment.Azure, cache);
             cache.ForceTokenExpiry();
             Assert.NotNull(provider.GetAccessTokenAsync(CancellationToken.None).Result);
-            var credentials = new AccessTokenCredentials(provider);
+            var credentials = new TokenCredentials(provider);
             var client = new HttpClient();
             var request = new HttpRequestMessage(HttpMethod.Get,
                 new Uri("https://management.azure.com/subscriptions?api-version=2014-04-01-preview"));
@@ -139,7 +139,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void ValidApplicationCredentialsAuthenticateCorrectly()
         {
-            var credentials = new ApplicationAccessTokenCredentials(
+            var credentials = new ApplicationTokenCredentials(
                 this.Domain, this.ApplicationId, this.Secret);
             var client = new HttpClient();
             var request = new HttpRequestMessage(HttpMethod.Get,
@@ -157,7 +157,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             var provider = new ActiveDirectoryApplicationTokenProvider(this.Domain,
                  this.ApplicationId, this.Secret, AzureEnvironment.Azure, cache);
             cache.ForceTokenExpiry();
-            var credentials = new AccessTokenCredentials(provider);
+            var credentials = new TokenCredentials(provider);
             Assert.NotNull(provider.GetAccessTokenAsync(CancellationToken.None).Result);
             var client = new HttpClient();
             var request = new HttpRequestMessage(HttpMethod.Get,

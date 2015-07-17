@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Rest.Properties;
 
 namespace Microsoft.Rest
 {
@@ -15,41 +16,52 @@ namespace Microsoft.Rest
     public class TokenCredentials : ServiceClientCredentials
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TokenCredentials"/>
-        /// class with scheme.
+        /// Gets or sets secure token used to authenticate against Microsoft Azure API. 
+        /// No anonymous requests are allowed.
         /// </summary>
-        /// <param name="scheme">Scheme to use. If null, defaults to Bearer.</param>
-        /// <param name="token">Valid token.</param>
-        public TokenCredentials(string scheme, string token)
+        protected ITokenProvider TokenProvider { get; private set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TokenCredentials"/>
+        /// class with the given 'Bearer' token.
+        /// </summary>
+        /// <param name="token">Valid JSON Web Token (JWT).</param>
+        public TokenCredentials(string token) : this(token, "Bearer")
         {
-            if (string.IsNullOrEmpty(scheme))
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TokenCredentials"/>
+        /// class with the given token and token type.
+        /// </summary>
+        /// <param name="token">Valid JSON Web Token (JWT).</param>
+        /// <param name="tokenType">The token type of the given token.</param>
+        public TokenCredentials(string token, string tokenType) : 
+            this(new StringTokenProvider(token, tokenType))
+        {
+             if (string.IsNullOrEmpty(token))
             {
-                scheme = "Bearer";
+                throw new ArgumentNullException("token");
+            }
+              if (string.IsNullOrEmpty(tokenType))
+            {
+                throw new ArgumentNullException("tokenType");
+            }
+      }
+
+        /// <summary>
+        /// Create an access token credentials object, given an interface to a token source.
+        /// </summary>
+        /// <param name="tokenProvider">The source of tokens for these credentials.</param>
+        public TokenCredentials(ITokenProvider tokenProvider)
+        {
+            if (tokenProvider == null)
+            {
+                throw new ArgumentNullException("tokenProvider");
             }
 
-            Scheme = scheme;
-            Token = token;
+            this.TokenProvider = tokenProvider;
         }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TokenCredentials"/>
-        /// and defaults to Bearer scheme.
-        /// </summary>
-        /// <param name="token">Valid token.</param>
-        public TokenCredentials(string token) : this(null, token)
-        {
-        }
-
-        /// <summary>
-        /// Gets or sets secure token. 
-        /// </summary>
-        public string Token { get; set; }
-
-        /// <summary>
-        /// Gets or sets authentication scheme. 
-        /// Default is Bearer.
-        /// </summary>
-        public string Scheme { get; set; }
 
         /// <summary>
         /// Apply the credentials to the HTTP request.
@@ -59,7 +71,7 @@ namespace Microsoft.Rest
         /// <returns>
         /// Task that will complete when processing has completed.
         /// </returns>
-        public override Task ProcessHttpRequestAsync(HttpRequestMessage request,
+        public async override Task ProcessHttpRequestAsync(HttpRequestMessage request, 
             CancellationToken cancellationToken)
         {
             if (request == null)
@@ -67,8 +79,18 @@ namespace Microsoft.Rest
                 throw new ArgumentNullException("request");
             }
 
-            request.Headers.Authorization = new AuthenticationHeaderValue(Scheme, Token);
-            return base.ProcessHttpRequestAsync(request, cancellationToken);
+            if (TokenProvider == null)
+            {
+                throw new InvalidOperationException(Resources.TokenProviderCannotBeNull);
+            }
+
+            request.Headers.Authorization = new AuthenticationHeaderValue(TokenProvider.TokenType, await TokenProvider.GetAccessTokenAsync(cancellationToken).ConfigureAwait(false));
+#if PORTABLE
+            await Task.Run(() => base.ProcessHttpRequestAsync(request, cancellationToken), cancellationToken);
+#else
+            
+            await new Task(() => base.ProcessHttpRequestAsync(request, cancellationToken), cancellationToken);
+#endif
         }
     }
 }
