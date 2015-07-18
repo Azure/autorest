@@ -168,6 +168,44 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
+        [Fact]
+        public void CanAuthenticateApplicationWithTokenStore()
+        {
+            var store = new InMemoryTokenStore();
+            var provider = new ActiveDirectoryApplicationTokenProvider(this.Domain, this.ApplicationId, this.Secret,
+                AzureEnvironment.Azure, store);
+            var credentials = new TokenCredentials(provider);
+            var client = new HttpClient();
+            var request = new HttpRequestMessage(HttpMethod.Get,
+                new Uri("https://management.azure.com/subscriptions?api-version=2014-04-01-preview"));
+            credentials.ProcessHttpRequestAsync(request, CancellationToken.None).Wait();
+            Assert.NotNull(request.Headers.Authorization);
+            var response = client.SendAsync(request).Result;
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Equal(2, store.BeginAccessNotifications.Count);
+            Assert.Equal(2, store.EndAccessNotifications.Count);
+            Assert.Equal(1, store.BeginWriteNotifications.Count);
+        }
+
+        [Fact]
+        public void CanAuthenticateUserWithTokenStore()
+        {
+            var store = new InMemoryTokenStore();
+            var provider = new ActiveDirectoryUserTokenProvider("1950a258-227b-4e31-a9cf-717495945fc2",
+                this.Domain, this.Username, this.Password, AzureEnvironment.Azure, store);
+            var credentials = new TokenCredentials(provider);
+            var client = new HttpClient();
+            var request = new HttpRequestMessage(HttpMethod.Get,
+                new Uri("https://management.azure.com/subscriptions?api-version=2014-04-01-preview"));
+            credentials.ProcessHttpRequestAsync(request, CancellationToken.None).Wait();
+            Assert.NotNull(request.Headers.Authorization);
+            var response = client.SendAsync(request).Result;
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Equal(2, store.BeginAccessNotifications.Count);
+            Assert.Equal(2, store.EndAccessNotifications.Count);
+            Assert.Equal(1, store.BeginWriteNotifications.Count);
+       }
+
         
         private static IDictionary<string, string> ParseConnectionString(string connectionString)
         {
@@ -185,6 +223,38 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             return result;
         }
 
+        class InMemoryTokenStore : ActiveDirectoryTokenStore
+        {
+            private List<Tuple<string, string, string, string>> _beginAccess =
+                new List<Tuple<string, string, string, string>>();
+            private List<Tuple<string, string, string, string>> _endAccess =
+                new List<Tuple<string, string, string, string>>();
+            private List<Tuple<string, string, string, string>> _beginWrite =
+                new List<Tuple<string, string, string, string>>();
+            public List<Tuple<string, string, string, string>> BeginAccessNotifications { get { return _beginAccess; } }
+            public List<Tuple<string, string, string, string>> EndAccessNotifications { get { return _endAccess; } }
+            public List<Tuple<string, string, string, string>> BeginWriteNotifications { get { return _beginWrite; } }
+            protected override void BeginAccessToken(string clientId, string audience, string uniqueId, string userId)
+            {
+                BeginAccessNotifications.Add(
+                    new Tuple<string,string,string,string>(clientId, audience, uniqueId, userId)
+                );
+            }
+
+            protected override void EndAccessToken(string clientId, string audience, string uniqueId, string userId)
+            {
+                EndAccessNotifications.Add(
+                    new Tuple<string,string,string,string>(clientId, audience, uniqueId, userId)
+                );
+            }
+
+            protected override void BeginWriteToken(string clientId, string audience, string uniqueId, string userId)
+            {
+                BeginWriteNotifications.Add(
+                    new Tuple<string,string,string,string>(clientId, audience, uniqueId, userId)
+                );
+            }
+        }
         class TestTokenCache : TokenCache
         {
 
