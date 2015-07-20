@@ -7,7 +7,11 @@ describe 'HttpInfrastructure' do
 
   before(:all) do
     @base_url = ENV['StubServerURI']
-    client = AutoRestHttpInfrastructureTestService.new(@base_url)
+
+	dummyToken = 'dummy12321343423'
+	@credentials = MsRest::TokenCredentials.new(dummyToken)
+
+    client = AutoRestHttpInfrastructureTestService.new(@credentials, @base_url)
     @failure_client = MyNamespace::HttpClientFailure.new(client)
     @redirect_client = MyNamespace::HttpRedirects.new(client)
     @retry_client = MyNamespace::HttpRetry.new(client)
@@ -16,7 +20,7 @@ describe 'HttpInfrastructure' do
     @multiple_resp_client = MyNamespace::MultipleResponses.new(client)
   end
   it 'should create test service' do
-    expect{AutoRestHttpInfrastructureTestService.new(@base_url)}.not_to raise_error
+    expect { AutoRestHttpInfrastructureTestService.new(@credentials, @base_url) }.not_to raise_error
   end
   context HttpClientFailure do
     it 'should send head 400' do

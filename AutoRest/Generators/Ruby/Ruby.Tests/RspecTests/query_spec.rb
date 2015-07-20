@@ -6,12 +6,16 @@ describe Queries do
 
   before(:all) do
     @base_url = ENV['StubServerURI']
-    client = AutoRestUrlTestService.new(@base_url)
+
+	dummyToken = 'dummy12321343423'
+	@credentials = MsRest::TokenCredentials.new(dummyToken)
+
+    client = AutoRestUrlTestService.new(@credentials, @base_url)
     @queries_client = MyNamespace::Queries.new(client)
   end
 
   it 'should create test service' do
-    expect{AutoRestUrlTestService.new(@base_url)}.not_to raise_error
+    expect { AutoRestUrlTestService.new(@credentials, @base_url) }.not_to raise_error
   end
   it 'should get boolean true' do
     result = @queries_client.get_boolean_true(true).value!

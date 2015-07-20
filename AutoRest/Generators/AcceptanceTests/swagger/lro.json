@@ -3996,7 +3996,7 @@
           "type": "string",
           "description": "Resource Name",
           "readOnly": true
-        },
+        }
       }
     },
     "Sku": {

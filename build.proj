@@ -166,6 +166,7 @@
       <TestDlls Include="$(LibraryRoot)\AutoRest\AutoRest.Core.Tests\bin\Net45-$(Configuration)\AutoRest.Core.Tests.dll" />
       <TestDlls Include="$(LibraryRoot)\AutoRest\Modelers\Swagger.Tests\bin\Net45-$(Configuration)\AutoRest.Modeler.Swagger.Tests.dll" />
       <TestDlls Include="$(LibraryRoot)\AutoRest\Generators\Ruby\Ruby.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.Ruby.Tests.dll" />
+      <TestDlls Include="$(LibraryRoot)\AutoRest\Generators\Ruby\Azure.Ruby.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.Azure.Ruby.Tests.dll" />
     </ItemGroup>
     
     <Message Text="@(TestDlls)" />

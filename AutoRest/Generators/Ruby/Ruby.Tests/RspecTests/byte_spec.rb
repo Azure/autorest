@@ -4,14 +4,19 @@ include MyNamespace
 describe Byte do
   before(:all) do
     @base_url = ENV['StubServerURI']
-    client = MyNamespace::AutoRestSwaggerBATByteService.new(@base_url)
+
+    dummyToken = 'dummy12321343423'
+	@credentials = MsRest::TokenCredentials.new(dummyToken)
+
+    client = MyNamespace::AutoRestSwaggerBATByteService.new(@credentials, @base_url)
     @byte_spec = MyNamespace::Byte.new(client)
     @non_ascii_bytes = [0xFF, 0xFE, 0xFD, 0xFC, 0xFB, 0xFA, 0xF9, 0xF8, 0xF7, 0xF6]
   end
 
   it 'should create test service' do
-    expect{MyNamespace::AutoRestSwaggerBATByteService.new(@base_url)}.not_to raise_error
+    expect { MyNamespace::AutoRestSwaggerBATByteService.new(@credentials, @base_url) }.not_to raise_error
   end
+
   it 'should put non-ASCII bytes' do
     result = @byte_spec.put_non_ascii(@non_ascii_bytes).value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
@@ -32,6 +37,6 @@ describe Byte do
     expect(result.body).to eq('')
   end
   it 'should get invalid' do
-    expect { @byte_spec.get_invalid().value! }.to raise_exception(ClientRuntime::DeserializationError)
+    expect { @byte_spec.get_invalid().value! }.to raise_exception(MsRest::DeserializationError)
   end
 end

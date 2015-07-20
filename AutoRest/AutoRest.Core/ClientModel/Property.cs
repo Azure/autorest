@@ -75,5 +75,15 @@ namespace Microsoft.Rest.Generator.ClientModel
         {
             return string.Format(CultureInfo.InvariantCulture, "{0} {1} {{get;{2}}}", Type, Name, IsReadOnly ? "" : "set;");
         }
+
+        /// <summary>
+        /// Performs a deep clone of a property.
+        /// </summary>
+        /// <returns>A deep clone of current object.</returns>
+        public object Clone()
+        {
+            var property = (Property) this.MemberwiseClone();
+            return property;
+        }
     }
 }

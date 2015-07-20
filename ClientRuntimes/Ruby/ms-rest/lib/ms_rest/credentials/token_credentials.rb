@@ -1,7 +1,7 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See License.txt in the project root for license information.
 
-module ClientRuntime
+module MsRest
   #
   # Class which keeps functionality and date for performing OAuth (token based) authentication.
   #
@@ -20,7 +20,7 @@ module ClientRuntime
     # @param scheme = DEFAULT_SCHEME [String] scheme the scheme for arranging token in the HTTP header.
     # @param token [String] token the token for authentication.
     #
-    # @return [ClientRuntime::TokenCredentials] A new instance of credentials object.
+    # @return [MsRest::TokenCredentials] A new instance of credentials object.
     def initialize(scheme = DEFAULT_SCHEME, token)
       @scheme = scheme
       @token = token
