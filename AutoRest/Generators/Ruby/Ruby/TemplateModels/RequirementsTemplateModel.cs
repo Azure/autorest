@@ -76,7 +76,7 @@ require 'securerandom'
 require 'time'
 require 'timeliness'
 require 'concurrent'
-require 'client_runtime'";
+require 'ms_rest'";
         }
 
         private IEnumerable<CompositeType> GetDependencyTypes(CompositeType type)

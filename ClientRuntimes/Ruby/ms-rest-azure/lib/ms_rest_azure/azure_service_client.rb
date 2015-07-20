@@ -1,11 +1,11 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See License.txt in the project root for license information.
 
-module ClientRuntimeAzure
+module MsRestAzure
   #
   # Class which represents a point of access to the REST API.
   #
-  class AzureServiceClient < ClientRuntime::ServiceClient
+  class AzureServiceClient < MsRest::ServiceClient
 
     # @return [String] api version of the Azure in string format.
     attr_accessor :api_version
@@ -19,7 +19,7 @@ module ClientRuntimeAzure
 
     #
     # Retrieves the result of 'PUT' operation. Perfroms polling of required.
-    # @param azure_response [ClientRuntimeAzure::AzureOperationResponse] response from Azure service.
+    # @param azure_response [MsRestAzure::AzureOperationResponse] response from Azure service.
     # @param get_operation_block [Proc] custom method for polling.
     # @param custom_headers [Hash] custom HTTP headers to apply to HTTP requests.
     #
@@ -81,7 +81,7 @@ module ClientRuntimeAzure
 
     #
     # Retrieves the result of 'POST' or 'DELETE' operations. Perfroms polling of required.
-    # @param azure_response [ClientRuntimeAzure::AzureOperationResponse] response from Azure service.
+    # @param azure_response [MsRestAzure::AzureOperationResponse] response from Azure service.
     # @param custom_headers [Proc] custom method for polling.
     # @param custom_deserialization_block [Proc] custom logic for response deserialization.
     #
@@ -141,7 +141,7 @@ module ClientRuntimeAzure
     #
     # Updates polling state based on location header for PUT HTTP requests.
     # @param get_operation_block [Proc] custom method for polling.
-    # @param polling_state [ClientRuntimeAzure::PollingState] polling state to update.
+    # @param polling_state [MsRestAzure::PollingState] polling state to update.
     def update_state_from_get_resource_operation(get_operation_block, polling_state)
       result = get_operation_block.call().value!
 
@@ -162,7 +162,7 @@ module ClientRuntimeAzure
 
     #
     # Updates polling state based on location header for PUT HTTP requests.
-    # @param polling_state [ClientRuntimeAzure::PollingState] polling state to update.
+    # @param polling_state [MsRestAzure::PollingState] polling state to update.
     # @param custom_headers [Hash] custom headers to apply to HTTP request.
     # @param custom_deserialization_block [Proc] custom deserialization method for parsing response.
     def update_state_from_location_header_on_put(polling_state, custom_headers, custom_deserialization_block)
@@ -193,7 +193,7 @@ module ClientRuntimeAzure
 
     #
     # Updates polling state from Azure async operation header.
-    # @param polling_state [ClientRuntimeAzure::PollingState] polling state.
+    # @param polling_state [MsRestAzure::PollingState] polling state.
     # @param custom_headers [Hash] custom headers to apply to HTTP request.
     def update_state_from_azure_async_operation_header(polling_state, custom_headers)
       result = get_async(polling_state.azure_async_operation_header_link, custom_headers).value!
@@ -211,7 +211,7 @@ module ClientRuntimeAzure
 
     #
     # Updates polling state based on location header for POST and DELETE HTTP requests.
-    # @param polling_state [ClientRuntimeAzure::PollingState] [description]
+    # @param polling_state [MsRestAzure::PollingState] [description]
     # @param custom_headers [Hash] custom headers to apply to HTTP requests.
     # @param custom_deserialization_block [Proc] custom deserialization method for parsing response.
     def update_state_from_location_header_on_post_or_delete(polling_state, custom_headers, custom_deserialization_block)
@@ -235,7 +235,7 @@ module ClientRuntimeAzure
     # @param operation_url [String] the URL.
     # @param custom_headers [String] headers to apply to the HTTP request.
     #
-    # @return [ClientRuntimeAzure::AsyncOperationStatus] Deserialized response wrapped by AsyncOperationStatus.
+    # @return [MsRestAzure::AsyncOperationStatus] Deserialized response wrapped by AsyncOperationStatus.
     def get_async(operation_url, custom_headers)
       fail CloudError if operation_url.nil?
 
@@ -261,13 +261,13 @@ module ClientRuntimeAzure
           fail CloudError
         end
 
-        result = ClientRuntime::HttpOperationResponse.new(http_request, http_response, http_response.body)
+        result = MsRest::HttpOperationResponse.new(http_request, http_response, http_response.body)
 
         begin
           parsed_response = JSON.load(response_content) unless response_content.to_s.empty?
           result.body = AsyncOperationStatus.deserialize_object(parsed_response)
         rescue Exception => e
-          fail ClientRuntime::DeserializationError.new("Error occured in deserializing the response", e.message, e.backtrace, response_content)
+          fail MsRest::DeserializationError.new("Error occured in deserializing the response", e.message, e.backtrace, response_content)
         end
 
         result
@@ -308,7 +308,7 @@ module ClientRuntimeAzure
           fail CloudError
         end
 
-        result = ClientRuntime::HttpOperationResponse.new(http_request, http_response, http_response.body)
+        result = MsRest::HttpOperationResponse.new(http_request, http_response, http_response.body)
 
         begin
           parsed_response = JSON.load(response_content) unless response_content.to_s.empty?
@@ -316,7 +316,7 @@ module ClientRuntimeAzure
             parsed_response = custom_deserialization_block.call(parsed_response)
           end
         rescue Exception => e
-          fail ClientRuntime::DeserializationError.new("Error occured in deserializing the response", e.message, e.backtrace, response_content)
+          fail MsRest::DeserializationError.new("Error occured in deserializing the response", e.message, e.backtrace, response_content)
         end
 
         result.body = parsed_response

@@ -23,7 +23,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// <returns>List of all dependency gems in form of string.</returns>
         public override string GetDependencyGems()
         {
-            return base.GetDependencyGems() + Environment.NewLine + "require 'client_runtime_azure'";
+            return base.GetDependencyGems() + Environment.NewLine + "require 'ms_rest_azure'";
         }
     }
 }

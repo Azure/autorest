@@ -1,7 +1,7 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See License.txt in the project root for license information.
 
-module ClientRuntimeAzure
+module MsRestAzure
   #
   # Class which represents a state of Azure long running operation.
   #
@@ -56,7 +56,7 @@ module ClientRuntimeAzure
         return response['Retry-After'].to_i * 1000
       end
 
-      return ClientRuntimeAzure::AzureAsyncOperation.DEFAULT_DELAY
+      return MsRestAzure::AzureAsyncOperation.DEFAULT_DELAY
     end
 
     #
@@ -74,7 +74,7 @@ module ClientRuntimeAzure
     #
     # returns the Azure's response.
     #
-    # @return [ClientRuntimeAzure::AzureOperationResponse] Azure's response.
+    # @return [MsRestAzure::AzureOperationResponse] Azure's response.
     def get_operation_response
       azure_response = AzureOperationResponse.new(@request, @response, @resource)
       azure_response

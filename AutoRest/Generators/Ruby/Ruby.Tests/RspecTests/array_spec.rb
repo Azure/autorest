@@ -1,5 +1,4 @@
 require 'rspec'
-require 'client_runtime'
 require_relative 'Array/sdk_requirements'
 require_relative './helper'
 include MyNamespace

@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'client_runtime_azure/version'
+require 'ms_rest_azure/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "client_runtime_azure"
-  spec.version       = ClientRuntimeAzure::VERSION
+  spec.name          = "ms_rest_azure"
+  spec.version       = MsRestAzure::VERSION
   spec.authors       = [""]
   spec.email         = [""]
 

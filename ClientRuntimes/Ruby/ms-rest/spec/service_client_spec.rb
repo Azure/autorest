@@ -1,5 +1,5 @@
-require 'client_runtime'
-include ClientRuntime
+require 'ms_rest'
+include MsRest
 
 describe ServiceClient do
   let(:header_name) { 'name' }

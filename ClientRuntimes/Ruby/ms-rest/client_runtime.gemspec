@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'client_runtime/version'
+require 'ms_rest/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "client_runtime"
-  spec.version       = ClientRuntime::VERSION
+  spec.name          = "ms_rest"
+  spec.version       = MsRest::VERSION
   spec.authors       = [""]
   spec.email         = [""]
 
