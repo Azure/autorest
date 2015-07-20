@@ -3,6 +3,13 @@
     "Ruby": {
       "type": "RubyCodeGenerator, AutoRest.Generator.Ruby"
     },
+    "Azure.Ruby":  {
+      "type": "AzureRubyCodeGenerator, AutoRest.Generator.Azure.Ruby",
+      "settings": {
+        "includeCredentials": "true",
+        "requireOperationId": "true"
+      }
+    },
     "CSharp": {
       "type": "CSharpCodeGenerator, AutoRest.Generator.CSharp"
     },

@@ -32,8 +32,28 @@ namespace Microsoft.Azure.Authentication
         /// <param name="secret">The application secret, used for authentication.</param>
         /// <param name="environment">The Azure environment to manage resources in.</param>
         public ActiveDirectoryApplicationTokenProvider(string domain, string clientId, string secret, AzureEnvironment environment) 
-            : this(domain, clientId, secret, environment, null)
+            : this(domain, clientId, secret, environment, cache: null)
         {
+        }
+
+        /// <summary>
+        /// Initializes a token provider for application credentials.
+        /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">Active Directory Quickstart for .Net</see> 
+        /// for detailed instructions on creating an Azure Active Directory application.
+        /// </summary>
+        /// <param name="domain">The domain or tenant id for the application.</param>
+        /// <param name="clientId">The client Id of the application in Active Directory.</param>
+        /// <param name="secret">The application secret, used for authentication.</param>
+        /// <param name="environment">The Azure environment to manage resources in.</param>
+        /// <param name="store">The active directory token store to use during authentication.</param>
+        public ActiveDirectoryApplicationTokenProvider(string domain, string clientId, string secret, AzureEnvironment environment, ActiveDirectoryTokenStore store) 
+        {
+            if (store == null)
+            {
+                throw new ArgumentNullException("store");
+            }
+
+            Initialize(domain, clientId, secret, environment, store.TokenCache);
         }
 
         /// <summary>
@@ -46,15 +66,8 @@ namespace Microsoft.Azure.Authentication
         /// <param name="cache">The TokenCache to use during authentication.</param>
         internal ActiveDirectoryApplicationTokenProvider(string domain, string clientId, string secret, AzureEnvironment environment, TokenCache cache)
         {
-             if (string.IsNullOrWhiteSpace(secret))
-            {
-                throw new ArgumentOutOfRangeException("secret");
-            }
-
-            InitializeAuthenticationContext(domain, clientId, environment, cache);
-            this._credential = new ClientCredential(clientId, secret);
-            ValidateAuthenticationResult(Authenticate().Result);
-       }
+            Initialize(domain, clientId, secret, environment, cache);
+        }
 
         /// <summary>
         /// Returns the token type of the returned token.
@@ -128,6 +141,19 @@ namespace Microsoft.Azure.Authentication
             {
                 throw new AuthenticationException(Resources.ErrorAcquiringToken, authenticationException);
             }
+        }
+
+        private void Initialize(string domain, string clientId, string secret, AzureEnvironment environment, 
+            TokenCache cache)
+        {
+            if (string.IsNullOrWhiteSpace(secret))
+            {
+                throw new ArgumentOutOfRangeException("secret");
+            }
+
+            InitializeAuthenticationContext(domain, clientId, environment, cache);
+            this._credential = new ClientCredential(clientId, secret);
+            ValidateAuthenticationResult(Authenticate().Result);
         }
 
         /// <summary>

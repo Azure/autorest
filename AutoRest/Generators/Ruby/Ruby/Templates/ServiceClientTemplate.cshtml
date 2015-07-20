@@ -8,7 +8,7 @@
 @EmptyLine
 module @Settings.Namespace
   #
-  @WrapComment("# ", Model.Documentation)
+  # A service client - single point of access to the REST API.
   #
   class @Model.Name < @Model.BaseType
     # @@return [String] the base URI of the service.
@@ -29,33 +29,29 @@ module @Settings.Namespace
 @EmptyLine
 }
 
-@{var parameters = Model.Properties.Where(p => p.IsRequired);}
-
     #
-    # Creates and initializes a new instance of the @Model.Name class.
-    # @@param base_url [String] base url for accessing current service.
-    @foreach (var param in parameters)
-    {
-    @WrapComment("# ", string.Format("@param {0} {1}{2}", param.Name, param.Type.GetYardDocumentation(), param.Documentation))
-    @:
-    }
+    # Creates initializes a new instance of the @Model.Name class.
+    # @@param credentials [MsRest::ServiceClientCredentials] credentials to authorize HTTP requests made by the service client.
+    # @@param base_url [String] the base URI of the service.
+    # @@param options [Array] filters to be applied to the HTTP requests.
     #
-    def initialize(base_url = nil@(Model.RequiredContructorParametersWithSeparator))
-      super()
+    def initialize(credentials, base_url = nil, options = nil)
+      super(credentials, options)
       @@base_url = base_url || '@Model.BaseUrl'
+      @EmptyLine
+      fail ArgumentError, 'credentials is nil' if credentials.nil?
+      fail ArgumentError, 'invalid type of credentials input parameter' unless credentials.is_a?(MsRest::ServiceClientCredentials)
+      @@credentials = credentials
+      @EmptyLine
       @foreach (var operation in Model.MethodGroups) 
       {
       @:@@@(RubyCodeNamer.UnderscoreCase(operation)) = @(operation).new(self)
       }
-      @foreach (var param in parameters)
-      {
-      @:fail ArgumentError, '@param.Name is nil' if @(param.Name).nil?
-      }
-      @foreach (var param in parameters)
-      {
-      @:@@@param.Name = @param.Name;
-      }
 
+      @foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
+      {
+      @:@@@(property.Name) = @(property.DefaultValue)
+      }
     end
 
     @EmptyLine

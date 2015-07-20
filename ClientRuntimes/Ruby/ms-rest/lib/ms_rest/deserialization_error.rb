@@ -1,7 +1,7 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See License.txt in the project root for license information.
 
-module ClientRuntime
+module MsRest
   #
   # Class which represents an error happening during deserialization of server response.
   #

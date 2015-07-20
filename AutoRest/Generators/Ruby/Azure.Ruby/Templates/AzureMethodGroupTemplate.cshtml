@@ -1,0 +1,31 @@
+﻿@using Microsoft.Rest.Generator.Azure.Ruby.Templates
+@using Microsoft.Rest.Generator.Azure.Ruby
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Azure.Ruby.AzureMethodGroupTemplateModel>
+@Header("# ")
+@EmptyLine
+module @Settings.Namespace
+  #
+@WrapComment("# ", string.IsNullOrEmpty(Model.Documentation) ? Model.MethodGroupName : Model.Documentation)
+  #
+  class @(Model.MethodGroupName)
+
+    #
+    # Creates and initializes a new instance of the @Model.MethodGroupName class.
+    # @@param client service class for accessing basic functionality.
+    #
+    def initialize(client)
+    @@client = client
+    end
+
+    @EmptyLine
+    # @@return reference to the @(Model.Name)
+    attr_reader :client
+
+    @EmptyLine
+    @foreach (var method in Model.MethodTemplateModels)
+    {
+        @:@(Include(new AzureMethodTemplate(), method as AzureMethodTemplateModel))
+        @EmptyLine
+    }
+    end
+    end

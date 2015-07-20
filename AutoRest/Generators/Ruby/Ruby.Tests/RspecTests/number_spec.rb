@@ -4,12 +4,16 @@ include MyNamespace
 describe Number do
   before(:all) do
     @base_url = ENV['StubServerURI']
-    client = MyNamespace::AutoRestNumberTestService.new(@base_url)
+
+	dummyToken = 'dummy12321343423'
+	@credentials = MsRest::TokenCredentials.new(dummyToken)
+
+    client = MyNamespace::AutoRestNumberTestService.new(@credentials, @base_url)
     @number_client = MyNamespace::Number.new(client)
   end
 
   it 'should create test service' do
-    expect{MyNamespace::AutoRestNumberTestService.new(@base_url)}.not_to raise_error
+    expect { MyNamespace::AutoRestNumberTestService.new(@credentials, @base_url) }.not_to raise_error
   end
 
   it 'should get null' do
@@ -19,11 +23,11 @@ describe Number do
   end
 
   it 'should get invalid float' do
-    expect { @number_client.get_invalid_float().value! }.to raise_error(ClientRuntime::DeserializationError)
+    expect { @number_client.get_invalid_float().value! }.to raise_error(MsRest::DeserializationError)
   end
 
   it 'should get invalid double' do
-    expect { @number_client.get_invalid_double().value! }.to raise_error(ClientRuntime::DeserializationError)
+    expect { @number_client.get_invalid_double().value! }.to raise_error(MsRest::DeserializationError)
   end
 
   it 'should put big float' do

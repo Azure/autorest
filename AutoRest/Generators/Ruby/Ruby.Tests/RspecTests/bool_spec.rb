@@ -4,7 +4,11 @@ include MyNamespace
 describe Bool do
   before(:all) do
     @base_url = ENV['StubServerURI']
-    client = MyNamespace::AutoRestBoolTestService.new(@base_url)
+
+    dummyToken = 'dummy12321343423'
+	@credentials = MsRest::TokenCredentials.new(dummyToken)
+
+    client = MyNamespace::AutoRestBoolTestService.new(@credentials, @base_url)
     @bool_client = MyNamespace::Bool.new(client)
   end
   def to_bool(str)
@@ -14,7 +18,7 @@ describe Bool do
   end
 
   it 'should create test service' do
-    expect{MyNamespace::AutoRestBoolTestService.new(@base_url)}.not_to raise_error
+    expect { MyNamespace::AutoRestBoolTestService.new(@credentials, @base_url) }.not_to raise_error
   end
   it 'should get true' do
     result = @bool_client.get_true().value!
@@ -40,6 +44,6 @@ describe Bool do
 	expect(result.body).to eq(nil)
   end
    it 'should get invalid' do
-    expect { result = @bool_client.get_invalid().value! }.to raise_error(ClientRuntime::DeserializationError)
+    expect { result = @bool_client.get_invalid().value! }.to raise_error(MsRest::DeserializationError)
   end
 end
