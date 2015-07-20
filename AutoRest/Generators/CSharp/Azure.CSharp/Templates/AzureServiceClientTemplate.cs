@@ -58,7 +58,7 @@ using System.Linq
         public override async Task ExecuteAsync()
         {
 #line 9 "AzureServiceClientTemplate.cshtml"
-Write(Header("/// "));
+Write(Header("// "));
 
 #line default
 #line hidden
