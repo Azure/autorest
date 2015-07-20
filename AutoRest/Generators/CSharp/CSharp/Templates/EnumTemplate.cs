@@ -34,7 +34,7 @@ using Microsoft.Rest.Generator.CSharp.TemplateModels
         public override async Task ExecuteAsync()
         {
 #line 5 "EnumTemplate.cshtml"
-Write(Header("/// "));
+Write(Header("// "));
 
 #line default
 #line hidden

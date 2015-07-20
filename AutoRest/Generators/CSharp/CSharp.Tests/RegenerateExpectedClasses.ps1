@@ -35,7 +35,7 @@ foreach ($test in $tests.GetEnumerator())
     $settings.Modeler = "Swagger"
     $settings.OutputDirectory = "$PSScriptRoot\Expected\$($test.Key)"
     $settings.Input = "$PSScriptRoot\$($test.Value)"
-    $settings.Header = "NONE"
+    $settings.Header = "MICROSOFT_MIT"
     if (Test-Path "$($settings.OutputDirectory)") 
     {
         Remove-Item "$($settings.OutputDirectory)" -Recurse -Force

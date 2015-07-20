@@ -40,7 +40,7 @@ using Microsoft.Rest.Generator.CSharp.TemplateModels
         public override async Task ExecuteAsync()
         {
 #line 6 "ExtensionsTemplate.cshtml"
-Write(Header("/// "));
+Write(Header("// "));
 
 #line default
 #line hidden

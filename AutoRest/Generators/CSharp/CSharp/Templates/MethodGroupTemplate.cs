@@ -28,7 +28,7 @@ using Microsoft.Rest.Generator.CSharp.Templates
         public override async Task ExecuteAsync()
         {
 #line 4 "MethodGroupTemplate.cshtml"
-Write(Header("/// "));
+Write(Header("// "));
 
 #line default
 #line hidden

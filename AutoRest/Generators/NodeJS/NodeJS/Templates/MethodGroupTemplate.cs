@@ -33,7 +33,7 @@ using System.Linq;
         public override async Task ExecuteAsync()
         {
 #line 5 "MethodGroupTemplate.cshtml"
-Write(Header("/// "));
+Write(Header("// "));
 
 #line default
 #line hidden

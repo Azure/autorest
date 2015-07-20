@@ -40,7 +40,7 @@ using System.Linq
         public override async Task ExecuteAsync()
         {
 #line 6 "AzureModelIndexTemplate.cshtml"
-Write(Header("/// "));
+Write(Header("// "));
 
 #line default
 #line hidden
