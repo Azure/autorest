@@ -36,7 +36,7 @@ namespace Microsoft.Azure.Authentication
         /// Initializes an active directory token store with the given backing token cache.
         /// </summary>
         /// <param name="cache"></param>
-        private ActiveDirectoryTokenStore(TokenCache cache)
+        protected ActiveDirectoryTokenStore(TokenCache cache)
         {
             cache.BeforeAccess =
                 (args) => BeginAccessToken(args.ClientId, args.Resource, args.UniqueId, args.DisplayableId);

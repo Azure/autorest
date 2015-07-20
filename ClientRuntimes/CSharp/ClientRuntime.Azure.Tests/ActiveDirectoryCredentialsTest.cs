@@ -11,40 +11,38 @@ using System.Threading;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Xunit;
 using Microsoft.Azure.Authentication;
+using Microsoft.Rest.ClientRuntime.Azure.Test.Fakes;
 
 namespace Microsoft.Rest.ClientRuntime.Azure.Test
 {
     public class ActiveDirectoryCredentialsTest
     {
+        private string _username;
+        private string _password;
+        private string _applicationId;
+        private string _secret;
+        private string _domain;
+
         public ActiveDirectoryCredentialsTest()
         {
             IDictionary<string, string> connectionProperties =
-                ParseConnectionString(Environment.GetEnvironmentVariable("ARM_Connection_String"));
-            if (!(connectionProperties.ContainsKey("username") && connectionProperties.ContainsKey("password") &&
-                connectionProperties.ContainsKey("applicationid") && connectionProperties.ContainsKey("secret")
-                && connectionProperties.ContainsKey("domain")))
-            {
-                throw new InvalidOperationException("An environment variable: ARM_Connection_String=username=<username>;password=<password>;applicationid=<applicationId>;secret=<secret>;domain=<domain> is required to run this test");
-            }
+                EnvironmentDependentFactAttribute.ParseConnectionString(Environment.GetEnvironmentVariable("ARM_Connection_String"));
 
-            this.Username = connectionProperties["username"];
-            this.Password = connectionProperties["password"];
-            this.ApplicationId = connectionProperties["applicationid"];
-            this.Secret = connectionProperties["secret"];
-            this.Domain = connectionProperties["domain"];
+            if (connectionProperties != null)
+            {
+                connectionProperties.TryGetValue("username", out this._username);
+                connectionProperties.TryGetValue("password", out this._password);
+                connectionProperties.TryGetValue("applicationid", out this._applicationId);
+                connectionProperties.TryGetValue("secret", out this._secret);
+                connectionProperties.TryGetValue("domain", out this._domain);
+            }
         }
 
-        public string Username { get; private set; }
-        public string Password { get; private set; }
-        public string ApplicationId { get; private set; }
-        public string Secret { get; private set; }
-        public string Domain { get; private set; }
-
-        [Fact(Skip="Test should only run with user interaction")]
+        [EnvironmentDependentFact(Skip = "Test should only run with user interaction")]
         public void UserCredentialsPopsDialog()
         {
             var credentials = new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
-                this.Domain);
+                this._domain);
             var client = new HttpClient();
 
             var request = new HttpRequestMessage(HttpMethod.Get,
@@ -55,11 +53,11 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
-        [Fact]
+        [EnvironmentDependentFact]
         public void OrgIdCredentialWorksWithoutDialog()
         {
             var credentials = new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
-                this.Domain, this.Username, this.Password);
+                this._domain, this._username, this._password);
             var client = new HttpClient();
             var request = new HttpRequestMessage(HttpMethod.Get,
                 new Uri("https://management.azure.com/subscriptions?api-version=2014-04-01-preview"));
@@ -69,28 +67,28 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
-        [Fact]
+        [EnvironmentDependentFact]
         public void OrgIdCredentialsThrowsForInvalidCredentials()
         {
             var exception = Assert.Throws<AggregateException>(() => new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
-                this.Domain, "unuseduser@thisdomain.com", "This is not a valid password"));
+                this._domain, "unuseduser@thisdomain.com", "This is not a valid password"));
             Assert.NotNull(exception.InnerException);
             Assert.Equal(typeof(AdalException), exception.InnerException.GetType());
             exception = Assert.Throws<AggregateException>(() => new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
-                this.Domain, "bad_user@bad_domain.com", this.Password));
+                this._domain, "bad_user@bad_domain.com", this._password));
             Assert.NotNull(exception.InnerException);
             Assert.Equal(typeof(AdalException), exception.InnerException.GetType());
             exception = Assert.Throws<AggregateException>(() => new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
-                "not-a-valid-domain", this.Username, this.Password));
+                "not-a-valid-domain", this._username, this._password));
             Assert.NotNull(exception.InnerException);
             Assert.Equal(typeof(AdalServiceException), exception.InnerException.GetType());
             exception = Assert.Throws<AggregateException>(() => new UserTokenCredentials("not-a-valid-client-id",
-                this.Domain, this.Username, this.Password));
+                this._domain, this._username, this._password));
             Assert.NotNull(exception.InnerException);
             Assert.Equal(typeof(AdalServiceException), exception.InnerException.GetType());
         }
 
-        [Fact]
+        [EnvironmentDependentFact]
         public void CredentialsConstructorThrowsForInvalidValues()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => new UserTokenCredentials(null,
@@ -102,28 +100,30 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             Assert.Throws<ArgumentOutOfRangeException>(() => new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
                 string.Empty));
             Assert.Throws<ArgumentOutOfRangeException>(() => new UserTokenCredentials(null,
-               "rbactest.onmicrosoft.com", this.Username, this.Password));
+               "rbactest.onmicrosoft.com", this._username, this._password));
             Assert.Throws<ArgumentOutOfRangeException>(() => new UserTokenCredentials(string.Empty,
-               "rbactest.onmicrosoft.com", this.Username, this.Password));
+               "rbactest.onmicrosoft.com", this._username, this._password));
             Assert.Throws<ArgumentOutOfRangeException>(() => new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
-               null, this.Username, this.Password));
+               null, this._username, this._password));
             Assert.Throws<ArgumentOutOfRangeException>(() => new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
-               string.Empty, this.Username, this.Password));
+               string.Empty, this._username, this._password));
             Assert.Throws<ArgumentOutOfRangeException>(() => new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
-               "rbactest.onmicrosoft.com", null, this.Password));
+               "rbactest.onmicrosoft.com", null, this._password));
             Assert.Throws<ArgumentOutOfRangeException>(() => new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
-               "rbactest.onmicrosoft.com", string.Empty, this.Password));
+               "rbactest.onmicrosoft.com", string.Empty, this._password));
             Assert.Throws<ArgumentOutOfRangeException>(() => new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
-               "rbactest.onmicrosoft.com", this.Username, null));
+               "rbactest.onmicrosoft.com", this._username, null));
             Assert.Throws<ArgumentOutOfRangeException>(() => new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
-               "rbactest.onmicrosoft.com", this.Username, string.Empty));
+               "rbactest.onmicrosoft.com", this._username, string.Empty));
         }
-        [Fact]
+
+        [EnvironmentDependentFact]
         public void UserTokenProviderRefreshWorks()
         {
             var cache = new TestTokenCache();
+            var tokenStore = new InMemoryTokenStore(cache);
             var provider = new ActiveDirectoryUserTokenProvider("1950a258-227b-4e31-a9cf-717495945fc2",
-                this.Domain, this.Username, this.Password, AzureEnvironment.Azure, cache);
+                this._domain, this._username, this._password, AzureEnvironment.Azure, tokenStore);
             cache.ForceTokenExpiry();
             Assert.NotNull(provider.GetAccessTokenAsync(CancellationToken.None).Result);
             var credentials = new TokenCredentials(provider);
@@ -136,11 +136,11 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
-        [Fact]
+        [EnvironmentDependentFact]
         public void ValidApplicationCredentialsAuthenticateCorrectly()
         {
             var credentials = new ApplicationTokenCredentials(
-                this.Domain, this.ApplicationId, this.Secret);
+                this._domain, this._applicationId, this._secret);
             var client = new HttpClient();
             var request = new HttpRequestMessage(HttpMethod.Get,
                 new Uri("https://management.azure.com/subscriptions?api-version=2014-04-01-preview"));
@@ -150,12 +150,13 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
-        [Fact]
+        [EnvironmentDependentFact]
         public void ApplicationCredentialsCanBeRenewed()
         {
             var cache = new TestTokenCache();
-            var provider = new ActiveDirectoryApplicationTokenProvider(this.Domain,
-                 this.ApplicationId, this.Secret, AzureEnvironment.Azure, cache);
+            var tokenStore = new InMemoryTokenStore(cache);
+            var provider = new ActiveDirectoryApplicationTokenProvider(this._domain,
+                 this._applicationId, this._secret, AzureEnvironment.Azure, tokenStore);
             cache.ForceTokenExpiry();
             var credentials = new TokenCredentials(provider);
             Assert.NotNull(provider.GetAccessTokenAsync(CancellationToken.None).Result);
@@ -168,11 +169,11 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
-        [Fact]
+        [EnvironmentDependentFact]
         public void CanAuthenticateApplicationWithTokenStore()
         {
             var store = new InMemoryTokenStore();
-            var provider = new ActiveDirectoryApplicationTokenProvider(this.Domain, this.ApplicationId, this.Secret,
+            var provider = new ActiveDirectoryApplicationTokenProvider(this._domain, this._applicationId, this._secret,
                 AzureEnvironment.Azure, store);
             var credentials = new TokenCredentials(provider);
             var client = new HttpClient();
@@ -187,12 +188,12 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             Assert.Equal(1, store.BeginWriteNotifications.Count);
         }
 
-        [Fact]
+        [EnvironmentDependentFact]
         public void CanAuthenticateUserWithTokenStore()
         {
             var store = new InMemoryTokenStore();
             var provider = new ActiveDirectoryUserTokenProvider("1950a258-227b-4e31-a9cf-717495945fc2",
-                this.Domain, this.Username, this.Password, AzureEnvironment.Azure, store);
+                this._domain, this._username, this._password, AzureEnvironment.Azure, store);
             var credentials = new TokenCredentials(provider);
             var client = new HttpClient();
             var request = new HttpRequestMessage(HttpMethod.Get,
@@ -206,58 +207,8 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             Assert.Equal(1, store.BeginWriteNotifications.Count);
        }
 
-        
-        private static IDictionary<string, string> ParseConnectionString(string connectionString)
-        {
-            if (string.IsNullOrWhiteSpace(connectionString))
-            {
-                throw new InvalidOperationException("An environment variable: ARM_Connection_String=username=<username>;password=<password>;applicationid=<applicationId>;secret=<secret>;domain=<domain> is required to run this test");
-            }
-            Dictionary<string, string> result = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-            foreach (var pairString in connectionString.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
-            {
-                var pair = pairString.Split(new[] { '=' }, 2, StringSplitOptions.RemoveEmptyEntries);
-                result[pair[0]] = pair[1];
-            }
-
-            return result;
-        }
-
-        class InMemoryTokenStore : ActiveDirectoryTokenStore
-        {
-            private List<Tuple<string, string, string, string>> _beginAccess =
-                new List<Tuple<string, string, string, string>>();
-            private List<Tuple<string, string, string, string>> _endAccess =
-                new List<Tuple<string, string, string, string>>();
-            private List<Tuple<string, string, string, string>> _beginWrite =
-                new List<Tuple<string, string, string, string>>();
-            public List<Tuple<string, string, string, string>> BeginAccessNotifications { get { return _beginAccess; } }
-            public List<Tuple<string, string, string, string>> EndAccessNotifications { get { return _endAccess; } }
-            public List<Tuple<string, string, string, string>> BeginWriteNotifications { get { return _beginWrite; } }
-            protected override void BeginAccessToken(string clientId, string audience, string uniqueId, string userId)
-            {
-                BeginAccessNotifications.Add(
-                    new Tuple<string,string,string,string>(clientId, audience, uniqueId, userId)
-                );
-            }
-
-            protected override void EndAccessToken(string clientId, string audience, string uniqueId, string userId)
-            {
-                EndAccessNotifications.Add(
-                    new Tuple<string,string,string,string>(clientId, audience, uniqueId, userId)
-                );
-            }
-
-            protected override void BeginWriteToken(string clientId, string audience, string uniqueId, string userId)
-            {
-                BeginWriteNotifications.Add(
-                    new Tuple<string,string,string,string>(clientId, audience, uniqueId, userId)
-                );
-            }
-        }
         class TestTokenCache : TokenCache
         {
-
             public void ForceTokenExpiry()
             {
                 var internalDictionaryProperty = typeof(TokenCache).GetField("tokenCacheDictionary", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -277,6 +228,39 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                 var expiresOnSet = expiresOnProperty.GetSetMethod(true);
                 expiresOnSet.Invoke(item, new object[] { newDate });
             }
+        }
+    }
+    public class EnvironmentDependentFactAttribute : FactAttribute
+    {
+        public EnvironmentDependentFactAttribute(params string[] scenarios)
+        {
+            IDictionary<string, string> connectionProperties =
+                ParseConnectionString(Environment.GetEnvironmentVariable("ARM_Connection_String"));
+
+            if (connectionProperties == null ||
+                (!(connectionProperties.ContainsKey("username") && connectionProperties.ContainsKey("password") &&
+                connectionProperties.ContainsKey("applicationid") && connectionProperties.ContainsKey("secret")
+                && connectionProperties.ContainsKey("domain"))))
+            {
+                Skip = "An environment variable: ARM_Connection_String=username=<username>;password=<password>;applicationid=<applicationId>;secret=<secret>;domain=<domain> is required to run this test";
+            }
+
+        }
+
+        internal static IDictionary<string, string> ParseConnectionString(string connectionString)
+        {
+            if (string.IsNullOrWhiteSpace(connectionString))
+            {
+                return null;
+            }
+            Dictionary<string, string> result = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var pairString in connectionString.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                var pair = pairString.Split(new[] { '=' }, 2, StringSplitOptions.RemoveEmptyEntries);
+                result[pair[0]] = pair[1];
+            }
+
+            return result;
         }
     }
 }

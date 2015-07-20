@@ -32,7 +32,7 @@ namespace Microsoft.Azure.Authentication
         /// This token provider will prompt the user for username and password.
         /// </summary>
         /// <param name="clientId">The client id for this application.</param>
-        /// <param name="domain">The domain or tenant id contianing the resources to manage.</param>
+        /// <param name="domain">The domain or tenant id containing the resources to manage.</param>
         /// <param name="environment">The azure environment to manage resources in.</param>
         /// <param name="clientRedirectUri">The redirect URI for authentication requests for 
         /// this client application.</param>
@@ -47,7 +47,7 @@ namespace Microsoft.Azure.Authentication
         /// This token provider will prompt the user for username and password.
         /// </summary>
         /// <param name="clientId">The client id for this application.</param>
-        /// <param name="domain">The domain or tenant id contianing the resources to manage.</param>
+        /// <param name="domain">The domain or tenant id containing the resources to manage.</param>
         /// <param name="environment">The azure environment to manage resources in.</param>
         /// <param name="clientRedirectUri">The redirect URI for authentication requests for 
         /// this client application.</param>
@@ -68,7 +68,7 @@ namespace Microsoft.Azure.Authentication
         /// This token provider will prompt the user for username and password.
         /// </summary>
         /// <param name="clientId">The client id for this application.</param>
-        /// <param name="domain">The domain or tenant id contianing the resources to manage.</param>
+        /// <param name="domain">The domain or tenant id containing the resources to manage.</param>
         /// <param name="environment">The azure environment to manage resources in.</param>
         /// <param name="clientRedirectUri">The redirect URI for authentication requests for 
         /// this client application.</param>
@@ -83,14 +83,14 @@ namespace Microsoft.Azure.Authentication
         /// Create a token provider using Active Directory user credentials (UPN). 
         /// Authentication occurs using the given username and password, with no user prompt.
         /// </summary>
-        /// <param name="clientId">The client id for thsi application.</param>
-        /// <param name="domain">The domain or tenant id contianing the resources to manage.</param>
+        /// <param name="clientId">The client id for this application.</param>
+        /// <param name="domain">The domain or tenant id containing the resources to manage.</param>
         /// <param name="username">The username to use for authentication.</param>
-        /// <param name="password">The secret password associated with thsi user.</param>
+        /// <param name="password">The secret password associated with this user.</param>
         /// <param name="environment">The azure environment to manage resources in.</param>
         public ActiveDirectoryUserTokenProvider(string clientId, string domain, string username, string password, 
-            AzureEnvironment environment) 
-            : this(clientId, domain, username, password, environment, cache: null)
+            AzureEnvironment environment)
+            : this(clientId, domain, username, password, environment, store: null)
         {
         }
 
@@ -98,36 +98,18 @@ namespace Microsoft.Azure.Authentication
         /// Create a token provider using Active Directory user credentials (UPN). 
         /// Authentication occurs using the given username and password, with no user prompt.
         /// </summary>
-        /// <param name="clientId">The client id for thsi application.</param>
-        /// <param name="domain">The domain or tenant id contianing the resources to manage.</param>
+        /// <param name="clientId">The client id for this application.</param>
+        /// <param name="domain">The domain or tenant id containing the resources to manage.</param>
         /// <param name="username">The username to use for authentication.</param>
-        /// <param name="password">The secret password associated with thsi user.</param>
+        /// <param name="password">The secret password associated with this user.</param>
         /// <param name="environment">The azure environment to manage resources in.</param>
         /// <param name="store">The token store to use during authentication.</param>
         public ActiveDirectoryUserTokenProvider(string clientId, string domain, string username, string password, 
             AzureEnvironment environment, ActiveDirectoryTokenStore store)
         {
-            if (store == null)
-            {
-                throw new ArgumentNullException("store");
-            }
+            TokenCache tokenCache = (store == null) ? null : store.TokenCache;
 
-            Initialize(clientId, domain, username, password, environment, store.TokenCache);
-        }
-        /// <summary>
-        /// Create a token provider using Active Directory user credentials (UPN). 
-        /// Authentication occurs using the given username and password, with no user prompt.
-        /// </summary>
-        /// <param name="clientId">The client id for thsi application.</param>
-        /// <param name="domain">The domain or tenant id contianing the resources to manage.</param>
-        /// <param name="username">The username to use for authentication.</param>
-        /// <param name="password">The secret password associated with thsi user.</param>
-        /// <param name="environment">The azure environment to manage resources in.</param>
-        /// <param name="cache">The token cache to use during authentication.</param>
-        internal ActiveDirectoryUserTokenProvider(string clientId, string domain, string username, string password, 
-            AzureEnvironment environment, TokenCache cache)
-        {
-            Initialize(clientId, domain, username, password, environment, cache);
+            Initialize(clientId, domain, username, password, environment, tokenCache);
         }
 
         /// <summary>
@@ -149,7 +131,7 @@ namespace Microsoft.Azure.Authentication
         }
 
         /// <summary>
-        /// The type of token this provider returns.  Options include Beaere and SAML tokens.
+        /// The type of token this provider returns.  Options include Bearer and SAML tokens.
         /// </summary>
         public string TokenType
         {
