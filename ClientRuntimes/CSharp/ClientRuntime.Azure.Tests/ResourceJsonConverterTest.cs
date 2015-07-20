@@ -100,8 +100,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
   ""properties"": {
     ""size"": ""3"",
     ""child"": {
-      ""dType"": ""SampleResourceChild1"",
-      ""properties"": {}
+      ""dType"": ""SampleResourceChild1""
     }
   }
 }", json);
@@ -147,6 +146,88 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             deserializeSettings.Converters.Add(new ResourceJsonConverter());
             deserializeSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<SampleResourceChild>("dType"));
             var deserializedResource = JsonConvert.DeserializeObject<GenericResource>(json, deserializeSettings);
+            var jsonoverProcessed = JsonConvert.SerializeObject(deserializedResource, serializeSettings);
+
+            Assert.Equal(json, jsonoverProcessed);
+        }
+
+        [Fact]
+        public void TestGenericResourceWithNullPropertiesSerialization()
+        {
+            var sampleResource = new GenericResource()
+            {
+                Location = "EastUS"
+            };
+            sampleResource.Tags = new Dictionary<string, string>();
+            sampleResource.Tags["tag1"] = "value1";
+            var serializeSettings = new JsonSerializerSettings()
+            {
+                Formatting = Formatting.Indented,
+                NullValueHandling = NullValueHandling.Ignore,
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                ContractResolver = new ReadOnlyJsonContractResolver()
+            };
+            serializeSettings.Converters.Add(new ResourceJsonConverter());
+            serializeSettings.Converters.Add(new PolymorphicSerializeJsonConverter<SampleResourceChild>("dType"));
+            string json = JsonConvert.SerializeObject(sampleResource, serializeSettings);
+            Assert.Equal(@"{
+  ""location"": ""EastUS"",
+  ""tags"": {
+    ""tag1"": ""value1""
+  }
+}", json);
+
+            var deserializeSettings = new JsonSerializerSettings()
+            {
+                Formatting = Formatting.Indented,
+                NullValueHandling = NullValueHandling.Ignore,
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                ContractResolver = new ReadOnlyJsonContractResolver()
+            };
+            deserializeSettings.Converters.Add(new ResourceJsonConverter());
+            deserializeSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<SampleResourceChild>("dType"));
+            var deserializedResource = JsonConvert.DeserializeObject<GenericResource>(json, deserializeSettings);
+            var jsonoverProcessed = JsonConvert.SerializeObject(deserializedResource, serializeSettings);
+
+            Assert.Equal(json, jsonoverProcessed);
+        }
+        
+        [Fact]
+        public void TestResourceWithNullPropertiesSerialization()
+        {
+            var sampleResource = new SampleResource()
+            {
+                Location = "EastUS"
+            };
+            sampleResource.Tags = new Dictionary<string, string>();
+            sampleResource.Tags["tag1"] = "value1";
+            var serializeSettings = new JsonSerializerSettings()
+            {
+                Formatting = Formatting.Indented,
+                NullValueHandling = NullValueHandling.Ignore,
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                ContractResolver = new ReadOnlyJsonContractResolver()
+            };
+            serializeSettings.Converters.Add(new ResourceJsonConverter());
+            serializeSettings.Converters.Add(new PolymorphicSerializeJsonConverter<SampleResourceChild>("dType"));
+            string json = JsonConvert.SerializeObject(sampleResource, serializeSettings);
+            Assert.Equal(@"{
+  ""location"": ""EastUS"",
+  ""tags"": {
+    ""tag1"": ""value1""
+  }
+}", json);
+
+            var deserializeSettings = new JsonSerializerSettings()
+            {
+                Formatting = Formatting.Indented,
+                NullValueHandling = NullValueHandling.Ignore,
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                ContractResolver = new ReadOnlyJsonContractResolver()
+            };
+            deserializeSettings.Converters.Add(new ResourceJsonConverter());
+            deserializeSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<SampleResourceChild>("dType"));
+            var deserializedResource = JsonConvert.DeserializeObject<SampleResource>(json, deserializeSettings);
             var jsonoverProcessed = JsonConvert.SerializeObject(deserializedResource, serializeSettings);
 
             Assert.Equal(json, jsonoverProcessed);

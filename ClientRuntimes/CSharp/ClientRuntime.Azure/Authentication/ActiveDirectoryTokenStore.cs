@@ -3,6 +3,7 @@
 
 using System.Runtime.InteropServices.WindowsRuntime;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
+using System;
 
 namespace Microsoft.Azure.Authentication
 {
@@ -36,8 +37,12 @@ namespace Microsoft.Azure.Authentication
         /// Initializes an active directory token store with the given backing token cache.
         /// </summary>
         /// <param name="cache"></param>
-        private ActiveDirectoryTokenStore(TokenCache cache)
+        protected ActiveDirectoryTokenStore(TokenCache cache)
         {
+            if(cache == null)
+            {
+                throw new ArgumentNullException("cache");
+            }
             cache.BeforeAccess =
                 (args) => BeginAccessToken(args.ClientId, args.Resource, args.UniqueId, args.DisplayableId);
             cache.AfterAccess = 
@@ -53,7 +58,7 @@ namespace Microsoft.Azure.Authentication
         /// store, like a database or file system.
         /// </summary>
         /// <param name="clientId">The client Id associated with the token to be accessed.</param>
-        /// <param name="audience">The audience of the token to be acessed.</param>
+        /// <param name="audience">The audience of the token to be accessed.</param>
         /// <param name="uniqueId">The active directory unique id of the principal associated with the token to be accessed.</param>
         /// <param name="userId">The display user id (if any) associated with the token to be accessed.</param>
         protected abstract void BeginAccessToken(string clientId, string audience, string uniqueId, string userId);
