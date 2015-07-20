@@ -38,9 +38,30 @@ namespace Microsoft.Azure.Authentication
         /// this client application.</param>
         public ActiveDirectoryUserTokenProvider(string clientId, string domain,
             AzureEnvironment environment, Uri clientRedirectUri) 
-            : this(clientId, domain, environment, clientRedirectUri, null)
+            : this(clientId, domain, environment, clientRedirectUri, cache: null)
         {
         }
+
+        /// <summary>
+        /// Initializes a token provider using Active Directory user credentials (UPN). 
+        /// This token provider will prompt the user for username and password.
+        /// </summary>
+        /// <param name="clientId">The client id for this application.</param>
+        /// <param name="domain">The domain or tenant id contianing the resources to manage.</param>
+        /// <param name="environment">The azure environment to manage resources in.</param>
+        /// <param name="clientRedirectUri">The redirect URI for authentication requests for 
+        /// this client application.</param>
+        /// <param name="store">The active directory token store to use during authentication.</param>
+        public ActiveDirectoryUserTokenProvider(string clientId, string domain,
+            AzureEnvironment environment, Uri clientRedirectUri, ActiveDirectoryTokenStore store)
+        {
+            if (store == null)
+            {
+                throw new ArgumentNullException("store");
+            }
+
+            Initialize(clientId, domain, environment, clientRedirectUri, store.TokenCache);
+       }
 
         /// <summary>
         /// Initializes a token provider using Active Directory user credentials (UPN). 
@@ -55,31 +76,9 @@ namespace Microsoft.Azure.Authentication
         internal ActiveDirectoryUserTokenProvider(string clientId, string domain,
             AzureEnvironment environment, Uri clientRedirectUri, TokenCache cache)
         {
-            ValidateCommonParameters(clientId, domain, environment);
-            if (clientRedirectUri == null)
-            {
-                throw new ArgumentNullException("clientRedirectUri");
-            }
-
-            this._clientId = clientId;
-            this._tokenAudience = environment.TokenAudience.ToString();
-            string authority = environment.AuthenticationEndpoint + domain;
-            try
-            {
-                this._authenticationContext = cache == null
-                    ? new AuthenticationContext(authority, environment.ValidateAuthority)
-                    : new AuthenticationContext(authority, environment.ValidateAuthority, cache);
-                var authenticatioResult = this._authenticationContext.AcquireTokenAsync(
-                    environment.TokenAudience.ToString(), clientId, clientRedirectUri,
-                    GetPlatformParameters(), UserIdentifier.AnyUser,
-                    EnableEbdMagicCookie).Result;
-                Initialize(authenticatioResult);
-            }
-            catch (AdalException authenticationException)
-            {
-                throw new AuthenticationException(Resources.ErrorAcquiringToken, authenticationException);
-            }
+            Initialize(clientId, domain, environment, clientRedirectUri, cache);
         }
+
         /// <summary>
         /// Create a token provider using Active Directory user credentials (UPN). 
         /// Authentication occurs using the given username and password, with no user prompt.
@@ -89,11 +88,32 @@ namespace Microsoft.Azure.Authentication
         /// <param name="username">The username to use for authentication.</param>
         /// <param name="password">The secret password associated with thsi user.</param>
         /// <param name="environment">The azure environment to manage resources in.</param>
-        public ActiveDirectoryUserTokenProvider(string clientId, string domain, string username, string password, AzureEnvironment environment) 
-            : this(clientId, domain, username, password, environment, null)
+        public ActiveDirectoryUserTokenProvider(string clientId, string domain, string username, string password, 
+            AzureEnvironment environment) 
+            : this(clientId, domain, username, password, environment, cache: null)
         {
         }
 
+        /// <summary>
+        /// Create a token provider using Active Directory user credentials (UPN). 
+        /// Authentication occurs using the given username and password, with no user prompt.
+        /// </summary>
+        /// <param name="clientId">The client id for thsi application.</param>
+        /// <param name="domain">The domain or tenant id contianing the resources to manage.</param>
+        /// <param name="username">The username to use for authentication.</param>
+        /// <param name="password">The secret password associated with thsi user.</param>
+        /// <param name="environment">The azure environment to manage resources in.</param>
+        /// <param name="store">The token store to use during authentication.</param>
+        public ActiveDirectoryUserTokenProvider(string clientId, string domain, string username, string password, 
+            AzureEnvironment environment, ActiveDirectoryTokenStore store)
+        {
+            if (store == null)
+            {
+                throw new ArgumentNullException("store");
+            }
+
+            Initialize(clientId, domain, username, password, environment, store.TokenCache);
+        }
         /// <summary>
         /// Create a token provider using Active Directory user credentials (UPN). 
         /// Authentication occurs using the given username and password, with no user prompt.
@@ -104,42 +124,17 @@ namespace Microsoft.Azure.Authentication
         /// <param name="password">The secret password associated with thsi user.</param>
         /// <param name="environment">The azure environment to manage resources in.</param>
         /// <param name="cache">The token cache to use during authentication.</param>
-        internal ActiveDirectoryUserTokenProvider(string clientId, string domain, string username, string password, AzureEnvironment environment, TokenCache cache)
+        internal ActiveDirectoryUserTokenProvider(string clientId, string domain, string username, string password, 
+            AzureEnvironment environment, TokenCache cache)
         {
-            ValidateCommonParameters(clientId, domain, environment);
-            if (string.IsNullOrWhiteSpace(username))
-            {
-                throw new ArgumentOutOfRangeException("username");
-            }
-
-            if (string.IsNullOrWhiteSpace(password))
-            {
-                throw new ArgumentOutOfRangeException("password");
-            }
-
-            this._clientId = clientId;
-            this._tokenAudience = environment.TokenAudience.ToString();
-            try
-            {
-                this._authenticationContext = cache == null ? 
-                    new AuthenticationContext(environment.AuthenticationEndpoint + domain, environment.ValidateAuthority) :
-                    new AuthenticationContext(environment.AuthenticationEndpoint + domain, environment.ValidateAuthority, cache);
-                var authenticationResult = this._authenticationContext.AcquireTokenAsync(environment.TokenAudience.ToString(), clientId,
-                        new UserCredential(username, password)).Result;
-                Initialize(authenticationResult);
-            }
-            catch (AdalException authenticationException)
-            {
-                throw new AuthenticationException(Resources.ErrorAcquiringToken, authenticationException);
-            }
-
+            Initialize(clientId, domain, username, password, environment, cache);
         }
 
         /// <summary>
         /// Set the ActiveDirectory authentication properties for this user
         /// </summary>
         /// <param name="authenticationResult"></param>
-        protected void Initialize(AuthenticationResult authenticationResult)
+        protected void ProcessAuthenticationResult(AuthenticationResult authenticationResult)
         {
             if (authenticationResult == null || authenticationResult.AccessToken == null || authenticationResult.UserInfo == null ||
                 string.IsNullOrWhiteSpace(authenticationResult.UserInfo.DisplayableId))
@@ -183,6 +178,74 @@ namespace Microsoft.Azure.Authentication
 
         }
 
+        private void Initialize(string clientId, string domain,
+            AzureEnvironment environment, Uri clientRedirectUri, TokenCache cache)
+        {
+            if (clientRedirectUri == null)
+            {
+                throw new ArgumentNullException("clientRedirectUri");
+            }
+
+            Initialize(clientId, domain, environment, cache, () => Authenticate(environment, clientRedirectUri));
+        }
+
+        private void Initialize(string clientId, string domain, string username, string password, 
+            AzureEnvironment environment, TokenCache cache)
+        {
+            if (string.IsNullOrWhiteSpace(username))
+            {
+                throw new ArgumentOutOfRangeException("username");
+            }
+
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                throw new ArgumentOutOfRangeException("password");
+            }
+
+            Initialize(clientId, domain, environment, cache, () => Authenticate(username, password, environment));
+        }
+
+        private void Initialize(string clientId, string domain, AzureEnvironment environment, TokenCache cache,
+            Func<AuthenticationResult> authenticator)
+        {
+            ValidateCommonParameters(clientId, domain, environment);
+            this._clientId = clientId;
+            this._tokenAudience = environment.TokenAudience.ToString();
+            try
+            {
+                this._authenticationContext = GetAuthenticationContext(domain, environment, cache);
+                ProcessAuthenticationResult(authenticator());
+            }
+            catch (AdalException authenticationException)
+            {
+                throw new AuthenticationException(Resources.ErrorAcquiringToken, authenticationException);
+            }
+        }
+
+        private AuthenticationResult Authenticate(string username, string password, AzureEnvironment environment)
+        {
+            return this._authenticationContext.AcquireTokenAsync(environment.TokenAudience.ToString(), this._clientId,
+                new UserCredential(username, password)).Result;
+        }
+
+        private AuthenticationResult Authenticate(AzureEnvironment environment, Uri clientRedirectUri)
+        {
+            return this._authenticationContext.AcquireTokenAsync(
+                    environment.TokenAudience.ToString(), this._clientId, clientRedirectUri,
+                    GetPlatformParameters(), UserIdentifier.AnyUser,
+                    EnableEbdMagicCookie).Result;
+        }
+
+        private static AuthenticationContext GetAuthenticationContext(string domain, AzureEnvironment environment, TokenCache cache)
+        {
+            return cache == null
+                ? new AuthenticationContext(environment.AuthenticationEndpoint + domain, 
+                    environment.ValidateAuthority) 
+                : new AuthenticationContext(environment.AuthenticationEndpoint + domain, 
+                    environment.ValidateAuthority, cache);
+
+        }
+     
         private static void ValidateCommonParameters(string clientId, string domain, AzureEnvironment environment)
         {
             if (string.IsNullOrWhiteSpace(clientId))
