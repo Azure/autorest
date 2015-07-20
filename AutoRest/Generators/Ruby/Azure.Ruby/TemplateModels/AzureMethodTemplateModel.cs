@@ -107,21 +107,17 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
 
             builder.AppendLine("properties = {}");
 
-            var queryParamsList = new List<string>();
-
             foreach (var param in queryParametres)
             {
                 if (param.Extensions.ContainsKey(AzureCodeGenerator.SkipUrlEncodingExtension))
                 {
-                    queryParamsList.Add(string.Format(CultureInfo.InvariantCulture, "properties['{0}'] = {1} unless {1}.nil?", param.SerializedName, param.Name));    
+                    builder.AppendLine("properties['{0}'] = {1} unless {1}.nil?", param.SerializedName, param.Name);
                 }
                 else
                 {
-                    queryParamsList.Add(string.Format(CultureInfo.InvariantCulture, "properties['{0}'] = CGI.escape({1}.to_s) unless {1}.nil?", param.SerializedName, param.Name));
+                    builder.AppendLine("properties['{0}'] = CGI.escape({1}.to_s) unless {1}.nil?", param.SerializedName, param.Name);
                 }
             }
-
-            builder.AppendLine(string.Join(", ", queryParamsList));
 
             builder.AppendLine("properties.reject!{ |key, value| value.nil? }");
             builder.AppendLine("{0}.query = properties.map{{ |key, value| \"#{{key}}=#{{value}}\" }}.compact.join('&')", outputVariableName);
