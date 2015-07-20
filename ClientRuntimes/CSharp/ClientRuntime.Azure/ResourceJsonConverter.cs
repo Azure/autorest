@@ -158,7 +158,9 @@ namespace Microsoft.Azure
             // If there is a need to add properties element - add it
             var contract = (JsonObjectContract)serializer.ContractResolver.ResolveContract(value.GetType());
             if (contract.Properties.Any(p =>
-                p.PropertyName.StartsWith("properties.", StringComparison.OrdinalIgnoreCase)))
+                p.PropertyName.StartsWith("properties.", StringComparison.OrdinalIgnoreCase) &&
+                  (p.ValueProvider.GetValue(value) != null || 
+                  serializer.NullValueHandling == NullValueHandling.Include)))
             {
                 writer.WritePropertyName(PropertiesNode);
                 writer.WriteStartObject();
