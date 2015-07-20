@@ -8,7 +8,7 @@ describe 'Complex tests' do
     @base_url = ENV['StubServerURI']
 
     dummyToken = 'dummy12321343423'
-	@credentials = ClientRuntime::TokenCredentials.new(dummyToken)
+	@credentials = MsRest::TokenCredentials.new(dummyToken)
 
     @client = AutoRestComplexTestService.new(@credentials, @base_url)
     @arrayValue = [
@@ -47,7 +47,7 @@ describe 'Complex tests' do
       array_wrapper = Models::ArrayWrapper.new
       array_wrapper.array = @arrayValue
       result = @client.array.put_valid(array_wrapper).value!.response
-    rescue e => ClientRuntime::HttpOperationException
+    rescue e => MsRest::HttpOperationException
       p e
     end
     expect(result).to be_an_instance_of(Net::HTTPOK)
@@ -95,7 +95,7 @@ describe 'Complex tests' do
   end
 
   it 'should get basic invalid' do
-    expect { result = @client.basic_operations.get_invalid().value! }.to raise_error(ClientRuntime::DeserializationError)
+    expect { result = @client.basic_operations.get_invalid().value! }.to raise_error(MsRest::DeserializationError)
   end
 
   it 'should get basic empty' do

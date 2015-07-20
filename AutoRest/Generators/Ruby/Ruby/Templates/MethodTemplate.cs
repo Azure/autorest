@@ -374,9 +374,9 @@ Write(Model.InitializeResponseBody);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n      rescue Exception => e\r\n        fail ClientRuntime::DeserializationError.n" +
-"ew(\"Error occured in deserializing the response\", e.message, e.backtrace, respon" +
-"se_content)\r\n      end\r\n    end\r\n    \r\n");
+            WriteLiteral("\r\n      rescue Exception => e\r\n        fail MsRest::DeserializationError.new(\"Err" +
+"or occured in deserializing the response\", e.message, e.backtrace, response_cont" +
+"ent)\r\n      end\r\n    end\r\n    \r\n");
 #line 100 "MethodTemplate.cshtml"
     }
 
@@ -403,9 +403,9 @@ Write(Model.InitializeResponseBody);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    rescue Exception => e\r\n      fail ClientRuntime::DeserializationError.new(\"" +
-"Error occured in deserializing the response\", e.message, e.backtrace, response_c" +
-"ontent)\r\n    end\r\n    \r\n");
+            WriteLiteral("\r\n    rescue Exception => e\r\n      fail MsRest::DeserializationError.new(\"Error o" +
+"ccured in deserializing the response\", e.message, e.backtrace, response_content)" +
+"\r\n    end\r\n    \r\n");
 #line 111 "MethodTemplate.cshtml"
     }
 

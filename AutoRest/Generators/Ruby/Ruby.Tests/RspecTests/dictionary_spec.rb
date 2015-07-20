@@ -9,7 +9,7 @@ describe Dictionary do
     @base_url = ENV['StubServerURI']
 
 	dummyToken = 'dummy12321343423'
-	@credentials = ClientRuntime::TokenCredentials.new(dummyToken)
+	@credentials = MsRest::TokenCredentials.new(dummyToken)
 
     client = AutoRestSwaggerBATdictionaryService.new(@credentials, @base_url)
     @dictionary_client = MyNamespace::Dictionary.new(client)
@@ -62,7 +62,7 @@ describe Dictionary do
   end
 
   it 'should get null key' do
-    expect{@dictionary_client.get_null_key().value!}.to raise_error(ClientRuntime::DeserializationError)
+    expect{@dictionary_client.get_null_key().value!}.to raise_error(MsRest::DeserializationError)
   end
 
   it 'should get empty string key' do
@@ -72,7 +72,7 @@ describe Dictionary do
   end
 
   it 'should get invalid' do
-    expect{@dictionary_client.get_invalid().value!}.to raise_error(ClientRuntime::DeserializationError)
+    expect{@dictionary_client.get_invalid().value!}.to raise_error(MsRest::DeserializationError)
   end
 
   # Boolean tests
@@ -118,7 +118,7 @@ describe Dictionary do
   end
 
   it 'should get int invalid string' do
-    expect { result = @dictionary_client.get_int_invalid_string().value! }.to raise_error(ClientRuntime::DeserializationError)
+    expect { result = @dictionary_client.get_int_invalid_string().value! }.to raise_error(MsRest::DeserializationError)
   end
 
   #Long integer tests. Ruby automtically converts int to long int, so there is no
@@ -141,7 +141,7 @@ describe Dictionary do
   end
 
   it 'should get long invalid string' do
-    expect { result = @dictionary_client.get_long_invalid_string().value! }.to raise_error(ClientRuntime::DeserializationError)
+    expect { result = @dictionary_client.get_long_invalid_string().value! }.to raise_error(MsRest::DeserializationError)
   end
 
   #Float tests
@@ -163,7 +163,7 @@ describe Dictionary do
   end
 
   it 'should get float invalid string' do
-    expect { result = @dictionary_client.get_float_invalid_string().value! }.to raise_error(ClientRuntime::DeserializationError)
+    expect { result = @dictionary_client.get_float_invalid_string().value! }.to raise_error(MsRest::DeserializationError)
   end
 
   #Double tests
@@ -185,7 +185,7 @@ describe Dictionary do
   end
 
   it 'should get double invalid string' do
-    expect { result = @dictionary_client.get_double_invalid_string().value! }.to raise_error(ClientRuntime::DeserializationError)
+    expect { result = @dictionary_client.get_double_invalid_string().value! }.to raise_error(MsRest::DeserializationError)
   end
 
   #String tests
@@ -231,7 +231,7 @@ describe Dictionary do
   end
 
   it 'should get date invalid chars' do
-    expect { @dictionary_client.get_date_invalid_chars().value! }.to raise_error(ClientRuntime::DeserializationError)
+    expect { @dictionary_client.get_date_invalid_chars().value! }.to raise_error(MsRest::DeserializationError)
   end
 
   #DateTime tests
@@ -253,7 +253,7 @@ describe Dictionary do
   end
 
   it 'should get dateTime invalid chars' do
-    expect { @dictionary_client.get_date_time_invalid_chars().value! }.to raise_error(ClientRuntime::DeserializationError)
+    expect { @dictionary_client.get_date_time_invalid_chars().value! }.to raise_error(MsRest::DeserializationError)
   end
 
   #Byte tests

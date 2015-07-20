@@ -282,7 +282,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
 
                 if (primary == PrimaryType.Date)
                 {
-                    return builder.AppendLine("{0} = ClientRuntime::Serialization.deserialize_date({0}) unless {0}.to_s.empty?", valueReference).ToString();
+                    return builder.AppendLine("{0} = MsRest::Serialization.deserialize_date({0}) unless {0}.to_s.empty?", valueReference).ToString();
                 }
 
                 if (primary == PrimaryType.DateTime)
@@ -293,7 +293,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             else if (enumType != null && !string.IsNullOrEmpty(enumType.Name))
             {
                 return builder.AppendLine(
-                    "fail ClientRuntime::DeserializationError.new('Error occured in deserializing the enum', nil, nil, nil) if (!{2}.nil? && !{2}.empty? && !{0}::{1}.constants.any? {{ |e| {0}::{1}.const_get(e) == {2} }})",
+                    "fail MsRest::DeserializationError.new('Error occured in deserializing the enum', nil, nil, nil) if (!{2}.nil? && !{2}.empty? && !{0}::{1}.constants.any? {{ |e| {0}::{1}.const_get(e) == {2} }})",
                     defaultNamespace, enumType.Name, valueReference).ToString();
             }
             else if (sequence != null)
@@ -346,7 +346,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
                 if (composite.Extensions.ContainsKey("-ms-external"))
                 {
                     deserializeTypeString = string.Format("{0} = {1}::{2}.deserialize_object({0})",
-                        valueReference, "ClientRuntimeAzure", composite.Name);
+                        valueReference, "MsRestAzure", composite.Name);
                 }
 
                 return builder.AppendLine("if ({0})", valueReference)
@@ -442,7 +442,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
                 if (composite.Extensions.ContainsKey("x-ms-external"))
                 {
                     serializeTypeString = string.Format("{0} = {1}::{2}.serialize_object({0})",
-                        valueReference, "ClientRuntimeAzure", composite.Name);
+                        valueReference, "MsRestAzure", composite.Name);
                 }
 
                 return builder.AppendLine("if ({0})", valueReference)

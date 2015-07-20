@@ -9,7 +9,7 @@ describe Group do
 
     dummyToken = 'dummy12321343423'
     dummySubscription = '1-1-1-1'
-    @credentials = ClientRuntimeAzure::TokenCloudCredentials.new(dummySubscription, dummyToken)
+    @credentials = MsRestAzure::TokenCloudCredentials.new(dummySubscription, dummyToken)
 
     @client = MicrosoftAzureTestUrl.new(@credentials, @base_url)
 	@client.subscription_id = SecureRandom.uuid

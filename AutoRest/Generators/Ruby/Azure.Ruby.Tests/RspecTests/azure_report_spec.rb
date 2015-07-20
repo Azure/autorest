@@ -5,7 +5,7 @@ describe 'AutoRestReportService' do
   before(:all) do
     dummyToken = 'dummy12321343423'
     dummySubscription = '1-1-1-1'
-    @credentials = ClientRuntimeAzure::TokenCloudCredentials.new(dummySubscription, dummyToken)
+    @credentials = MsRestAzure::TokenCloudCredentials.new(dummySubscription, dummyToken)
 
     @base_url = ENV['StubServerURI']
 

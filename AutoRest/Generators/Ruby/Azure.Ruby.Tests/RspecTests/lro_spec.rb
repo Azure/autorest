@@ -9,7 +9,7 @@ describe 'LongRunningOperation' do
 
     dummyToken = 'dummy12321343423'
     dummySubscription = '1-1-1-1'
-    @credentials = ClientRuntimeAzure::TokenCloudCredentials.new(dummySubscription, dummyToken)
+    @credentials = MsRestAzure::TokenCloudCredentials.new(dummySubscription, dummyToken)
 
     @client = AutoRestLongRunningOperationTestService.new(@credentials, @base_url)
     @client.long_running_operation_retry_timeout = 0
@@ -24,7 +24,7 @@ describe 'LongRunningOperation' do
   end
 
   it 'should rise error on "failed" operation result' do
-    expect { @client.lros.put201creating_failed200(@product).value! }.to raise_error(ClientRuntimeAzure::CloudError)
+    expect { @client.lros.put201creating_failed200(@product).value! }.to raise_error(MsRestAzure::CloudError)
   end
 
   it 'should wait for succeeded status for update operation' do
@@ -33,7 +33,7 @@ describe 'LongRunningOperation' do
   end
 
   it 'should rise error on "canceled" operation result' do
-    expect { @client.lros.put200acceptedcanceled200(@product).value! }.to raise_error(ClientRuntimeAzure::CloudError)
+    expect { @client.lros.put200acceptedcanceled200(@product).value! }.to raise_error(MsRestAzure::CloudError)
   end
 
   it 'should retry on 200 server responce in POST request' do
@@ -64,7 +64,7 @@ describe 'LongRunningOperation' do
   end
 
   it 'should serve async PUT operation failed' do
-    expect { @client.lrosads.put_async_relative_retry400(@product).value! }.to raise_exception(ClientRuntimeAzure::CloudError)
+    expect { @client.lrosads.put_async_relative_retry400(@product).value! }.to raise_exception(MsRestAzure::CloudError)
   end
 
   it 'should serve success responce on initial DELETE request' do
@@ -119,51 +119,51 @@ describe 'LongRunningOperation' do
 
   # Sad path tests
   it 'should rise error on responce 400 for PUT request' do
-    expect { @client.lrosads.put_non_retry400(@product).value! }.to raise_exception(ClientRuntime::HttpOperationException)
+    expect { @client.lrosads.put_non_retry400(@product).value! }.to raise_exception(MsRest::HttpOperationException)
   end
 
   it 'should rise error if 400 responce comes in the middle of PUT operation' do
-    expect { @client.lrosads.put_non_retry201creating400(@product).value! }.to raise_error(ClientRuntime::HttpOperationException)
+    expect { @client.lrosads.put_non_retry201creating400(@product).value! }.to raise_error(MsRest::HttpOperationException)
   end
 
   it 'should rise error if 400 responce comes in the middle of async PUT operation' do
-    expect { @client.lrosads.put_async_relative_retry400(@product).value! }.to raise_exception(ClientRuntimeAzure::CloudError)
+    expect { @client.lrosads.put_async_relative_retry400(@product).value! }.to raise_exception(MsRestAzure::CloudError)
   end
 
   it 'should rise error on responce 400 for DELETE request' do
-    expect { @client.lrosads.delete_non_retry400().value! }.to raise_exception(ClientRuntime::HttpOperationException)
+    expect { @client.lrosads.delete_non_retry400().value! }.to raise_exception(MsRest::HttpOperationException)
   end
 
   it 'should rise error if 400 responce comes in the middle of DELETE operation' do
-    expect{ @client.lrosads.delete_async_relative_retry400().value! }.to raise_exception(ClientRuntimeAzure::CloudError)
+    expect{ @client.lrosads.delete_async_relative_retry400().value! }.to raise_exception(MsRestAzure::CloudError)
   end
 
   it 'should rise error if 400 responce comes from POST request' do
-    expect{ @client.lrosads.post_non_retry400(@product).value! }.to raise_exception(ClientRuntime::HttpOperationException)
+    expect{ @client.lrosads.post_non_retry400(@product).value! }.to raise_exception(MsRest::HttpOperationException)
   end
 
   it 'should rise error on responce 400 for POST request' do
-    expect{ @client.lrosads.post202non_retry400(@product).value! }.to raise_exception(ClientRuntimeAzure::CloudError)
+    expect{ @client.lrosads.post202non_retry400(@product).value! }.to raise_exception(MsRestAzure::CloudError)
   end
 
   it 'should rise error if 400 responce comes in the middle of async POST operation' do
-    expect{ @client.lrosads.post_async_relative_retry400(@product).value! }.to raise_exception(ClientRuntimeAzure::CloudError)
+    expect{ @client.lrosads.post_async_relative_retry400(@product).value! }.to raise_exception(MsRestAzure::CloudError)
   end
 
   it 'should rise error if no provisioning state in payload provided on PUT request' do
-    expect{ @client.lrosads.put_error201no_provisioning_state_payload(@product).value! }.to raise_exception(ClientRuntimeAzure::CloudError)
+    expect{ @client.lrosads.put_error201no_provisioning_state_payload(@product).value! }.to raise_exception(MsRestAzure::CloudError)
   end
 
   it 'should rise error if no state provided on PUT request' do
-    expect{ @client.lrosads.put_async_relative_retry_no_status(@product).value! }.to raise_exception(ClientRuntimeAzure::CloudError)
+    expect{ @client.lrosads.put_async_relative_retry_no_status(@product).value! }.to raise_exception(MsRestAzure::CloudError)
   end
 
   it 'should rise error if no provisioning state in payload provided on async PUT request' do
-    expect{ @client.lrosads.put_async_relative_retry_no_status_payload(@product).value! }.to raise_exception(ClientRuntimeAzure::CloudError)
+    expect{ @client.lrosads.put_async_relative_retry_no_status_payload(@product).value! }.to raise_exception(MsRestAzure::CloudError)
   end
 
   it 'should rise error on invalid JSON responce on initial request' do
-    expect{ @client.lrosads.put200invalid_json(@product).value! }.to raise_exception(ClientRuntime::DeserializationError)
+    expect{ @client.lrosads.put200invalid_json(@product).value! }.to raise_exception(MsRest::DeserializationError)
   end
 
   it 'should rise error on invalid endpoint received in initial PUT request' do
@@ -171,7 +171,7 @@ describe 'LongRunningOperation' do
   end
 
   it 'should rise error on invalid JSON responce in status polling request during PUT operation' do
-    expect{ @client.lrosads.put_async_relative_retry_invalid_json_polling(@product).value! }.to raise_exception(ClientRuntime::DeserializationError)
+    expect{ @client.lrosads.put_async_relative_retry_invalid_json_polling(@product).value! }.to raise_exception(MsRest::DeserializationError)
   end
 
   it 'should rise error on invalid Location and Retry-After headers during DELETE operation' do
@@ -183,7 +183,7 @@ describe 'LongRunningOperation' do
   end
 
   it 'should rise error on invalid JSON responce in status polling request during DELETE operation' do
-    expect{ @client.lrosads.delete_async_relative_retry_invalid_json_polling().value! }.to raise_exception(ClientRuntime::DeserializationError)
+    expect{ @client.lrosads.delete_async_relative_retry_invalid_json_polling().value! }.to raise_exception(MsRest::DeserializationError)
   end
 
   it 'should rise error on invalid Location and Retry-After headers during POST operation' do
@@ -195,7 +195,7 @@ describe 'LongRunningOperation' do
   end
 
   it 'should rise error on invalid JSON responce in status polling request during POST operation' do
-    expect{ @client.lrosads.post_async_relative_retry_invalid_json_polling(@product).value! }.to raise_exception(ClientRuntime::DeserializationError)
+    expect{ @client.lrosads.post_async_relative_retry_invalid_json_polling(@product).value! }.to raise_exception(MsRest::DeserializationError)
   end
 
   it 'should not rise error on DELETE operation with 204 responce without location provided' do
@@ -204,14 +204,14 @@ describe 'LongRunningOperation' do
   end
 
   it 'should rise error on no status provided for DELETE async operation' do
-    expect{ @client.lrosads.delete_async_relative_retry_no_status().value! }.to raise_exception(ClientRuntimeAzure::CloudError)
+    expect{ @client.lrosads.delete_async_relative_retry_no_status().value! }.to raise_exception(MsRestAzure::CloudError)
   end
 
   it 'should rise error if no location provided' do
-    expect { @client.lrosads.post202no_location(@product).value! }.to raise_exception(ClientRuntimeAzure::CloudError)
+    expect { @client.lrosads.post202no_location(@product).value! }.to raise_exception(MsRestAzure::CloudError)
   end
 
   it 'should rise error if no payload provided on POST async retry request' do
-    expect{ @client.lrosads.post_async_relative_retry_no_payload(@product).value! }.to raise_exception(ClientRuntimeAzure::CloudError)
+    expect{ @client.lrosads.post_async_relative_retry_no_payload(@product).value! }.to raise_exception(MsRestAzure::CloudError)
   end
 end

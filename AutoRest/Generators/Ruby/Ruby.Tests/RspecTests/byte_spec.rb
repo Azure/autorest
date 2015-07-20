@@ -6,7 +6,7 @@ describe Byte do
     @base_url = ENV['StubServerURI']
 
     dummyToken = 'dummy12321343423'
-	@credentials = ClientRuntime::TokenCredentials.new(dummyToken)
+	@credentials = MsRest::TokenCredentials.new(dummyToken)
 
     client = MyNamespace::AutoRestSwaggerBATByteService.new(@credentials, @base_url)
     @byte_spec = MyNamespace::Byte.new(client)
@@ -37,6 +37,6 @@ describe Byte do
     expect(result.body).to eq('')
   end
   it 'should get invalid' do
-    expect { @byte_spec.get_invalid().value! }.to raise_exception(ClientRuntime::DeserializationError)
+    expect { @byte_spec.get_invalid().value! }.to raise_exception(MsRest::DeserializationError)
   end
 end

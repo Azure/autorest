@@ -31,7 +31,7 @@ module @Settings.Namespace
 
     #
     # Creates initializes a new instance of the @Model.Name class.
-    # @@param credentials [ClientRuntime::ServiceClientCredentials] credentials to authorize HTTP requests made by the service client.
+    # @@param credentials [MsRest::ServiceClientCredentials] credentials to authorize HTTP requests made by the service client.
     # @@param base_url [String] the base URI of the service.
     # @@param options [Array] filters to be applied to the HTTP requests.
     #
@@ -40,7 +40,7 @@ module @Settings.Namespace
       @@base_url = base_url || '@Model.BaseUrl'
       @EmptyLine
       fail ArgumentError, 'credentials is nil' if credentials.nil?
-      fail ArgumentError, 'invalid type of credentials input parameter' unless credentials.is_a?(ClientRuntime::ServiceClientCredentials)
+      fail ArgumentError, 'invalid type of credentials input parameter' unless credentials.is_a?(MsRest::ServiceClientCredentials)
       @@credentials = credentials
       @EmptyLine
       @foreach (var operation in Model.MethodGroups) 

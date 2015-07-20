@@ -171,7 +171,7 @@ Write(EmptyLine);
 #line default
 #line hidden
             WriteLiteral(@" class.
-    # @param credentials [ClientRuntime::ServiceClientCredentials] credentials to authorize HTTP requests made by the service client.
+    # @param credentials [MsRest::ServiceClientCredentials] credentials to authorize HTTP requests made by the service client.
     # @param base_url [String] the base URI of the service.
     # @param options [Array] filters to be applied to the HTTP requests.
     #
@@ -191,8 +191,8 @@ Write(EmptyLine);
 #line hidden
             WriteLiteral("\r\n      fail ArgumentError, \'credentials is nil\' if credentials.nil?\r\n      fail " +
 "ArgumentError, \'invalid type of credentials input parameter\' unless credentials." +
-"is_a?(ClientRuntime::ServiceClientCredentials)\r\n      @credentials = credentials" +
-"\r\n      ");
+"is_a?(MsRest::ServiceClientCredentials)\r\n      @credentials = credentials\r\n     " +
+" ");
 #line 45 "ServiceClientTemplate.cshtml"
  Write(EmptyLine);
 

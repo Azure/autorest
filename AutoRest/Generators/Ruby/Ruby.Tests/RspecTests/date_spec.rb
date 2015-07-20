@@ -8,7 +8,7 @@ describe Date do
     @base_url = ENV['StubServerURI']
 
 	dummyToken = 'dummy12321343423'
-	@credentials = ClientRuntime::TokenCredentials.new(dummyToken)
+	@credentials = MsRest::TokenCredentials.new(dummyToken)
 
     client = AutoRestDateTestService.new(@credentials, @base_url)
     @date_client = MyNamespace::Date.new(client)
@@ -29,11 +29,11 @@ describe Date do
   end
 
   it 'should get overflow date' do
-    expect { @date_client.get_overflow_date().value! }.to raise_error(ClientRuntime::DeserializationError)
+    expect { @date_client.get_overflow_date().value! }.to raise_error(MsRest::DeserializationError)
   end
 
   it 'should get underflow date' do
-    expect { @date_client.get_underflow_date().value! }.to raise_error(ClientRuntime::DeserializationError)
+    expect { @date_client.get_underflow_date().value! }.to raise_error(MsRest::DeserializationError)
   end
 
   it 'should put max date' do

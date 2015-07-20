@@ -29,7 +29,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         {
             get
             {
-                return "ClientRuntimeAzure::AzureServiceClient";
+                return "MsRestAzure::AzureServiceClient";
             }
         }
     }

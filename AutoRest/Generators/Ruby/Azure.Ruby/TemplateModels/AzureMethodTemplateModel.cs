@@ -193,7 +193,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         {
             get
             {
-                return "ClientRuntimeAzure::AzureOperationResponse";
+                return "MsRestAzure::AzureOperationResponse";
             }
         }
 

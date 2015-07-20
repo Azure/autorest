@@ -28,7 +28,7 @@ namespace Microsoft.Rest.Generator.Ruby
         {
             get
             {
-                return "ClientRuntime::ServiceClient";
+                return "MsRest::ServiceClient";
             }
         }
     }

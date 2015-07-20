@@ -9,7 +9,7 @@ describe Array do
     @base_url = ENV['StubServerURI']
 
 	dummyToken = 'dummy12321343423'
-	@credentials = ClientRuntime::TokenCredentials.new(dummyToken)
+	@credentials = MsRest::TokenCredentials.new(dummyToken)
 
     client = AutoRestSwaggerBATArrayService.new(@credentials, @base_url)
     @array_client = MyNamespace::Array.new(client)
@@ -107,7 +107,7 @@ describe Array do
   end
 
   it 'should get int invalid string' do
-    expect { result = @array_client.get_int_invalid_string().value! }.to raise_error(ClientRuntime::DeserializationError)
+    expect { result = @array_client.get_int_invalid_string().value! }.to raise_error(MsRest::DeserializationError)
   end
 
   #Long integer tests. Ruby automtically converts int to long int, so there is no
@@ -130,7 +130,7 @@ describe Array do
   end
 
   it 'should get long invalid string' do
-    expect { result = @array_client.get_long_invalid_string().value! }.to raise_error(ClientRuntime::DeserializationError)
+    expect { result = @array_client.get_long_invalid_string().value! }.to raise_error(MsRest::DeserializationError)
   end
 
   #Float tests
@@ -152,7 +152,7 @@ describe Array do
   end
 
   it 'should get float invalid string' do
-    expect { result = @array_client.get_float_invalid_string().value! }.to raise_error(ClientRuntime::DeserializationError)
+    expect { result = @array_client.get_float_invalid_string().value! }.to raise_error(MsRest::DeserializationError)
   end
 
   #Double tests
@@ -174,7 +174,7 @@ describe Array do
   end
 
   it 'should get double invalid string' do
-    expect { result = @array_client.get_double_invalid_string().value! }.to raise_error(ClientRuntime::DeserializationError)
+    expect { result = @array_client.get_double_invalid_string().value! }.to raise_error(MsRest::DeserializationError)
   end
 
   #String tests
@@ -220,7 +220,7 @@ describe Array do
   end
 
   it 'should get date invalid chars' do
-    expect { @array_client.get_date_invalid_chars().value! }.to raise_exception(ClientRuntime::DeserializationError)
+    expect { @array_client.get_date_invalid_chars().value! }.to raise_exception(MsRest::DeserializationError)
   end
 
   #DateTime tests
@@ -242,7 +242,7 @@ describe Array do
   end
 
   it 'should get dateTime invalid string' do
-    expect { @array_client.get_date_time_invalid_chars().value! }.to raise_exception(ClientRuntime::DeserializationError)
+    expect { @array_client.get_date_time_invalid_chars().value! }.to raise_exception(MsRest::DeserializationError)
   end
 
   #Byte tests

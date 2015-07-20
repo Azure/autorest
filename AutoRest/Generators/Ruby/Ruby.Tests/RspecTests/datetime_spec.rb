@@ -9,7 +9,7 @@ describe Date do
     @base_url = ENV['StubServerURI']
 
 	dummyToken = 'dummy12321343423'
-	@credentials = ClientRuntime::TokenCredentials.new(dummyToken)
+	@credentials = MsRest::TokenCredentials.new(dummyToken)
 
     client = AutoRestDateTimeTestService.new(@credentials, @base_url)
     @date_client = MyNamespace::Datetime.new(client)
@@ -26,7 +26,7 @@ describe Date do
   end
 
   it 'should get invalid' do
-    expect { @date_client.get_invalid().value! }.to raise_error(ClientRuntime::DeserializationError)
+    expect { @date_client.get_invalid().value! }.to raise_error(MsRest::DeserializationError)
   end
 
   it 'should get overflow' do
@@ -72,7 +72,7 @@ describe Date do
   end
 
   it 'should get underflow' do
-    expect{@date_client.get_underflow().value!}.to raise_error(ClientRuntime::DeserializationError)
+    expect{@date_client.get_underflow().value!}.to raise_error(MsRest::DeserializationError)
   end
 
   # it 'should put utc max date' do

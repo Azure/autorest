@@ -110,7 +110,7 @@ namespace Microsoft.Rest.Generator.Ruby
         {
             get
             {
-                return "ClientRuntime::HttpOperationResponse";
+                return "MsRest::HttpOperationResponse";
             }
         }
 
@@ -121,7 +121,7 @@ namespace Microsoft.Rest.Generator.Ruby
         {
             get
             {
-                return "ClientRuntime::HttpOperationException";
+                return "MsRest::HttpOperationException";
             }
         }
 

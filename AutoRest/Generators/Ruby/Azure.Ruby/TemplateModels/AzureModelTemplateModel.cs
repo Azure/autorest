@@ -32,7 +32,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
 
                 if (this.BaseModelType.Extensions.ContainsKey(AzureCodeGenerator.ExternalExtension))
                 {
-                    typeName = "ClientRuntimeAzure::" + typeName;
+                    typeName = "MsRestAzure::" + typeName;
                 }
 
                 return " < " + typeName;

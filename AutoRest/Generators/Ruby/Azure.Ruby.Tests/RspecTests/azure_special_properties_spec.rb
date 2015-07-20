@@ -13,7 +13,7 @@ describe 'Azure Special properties behaviour' do
     @dummyToken = 'dummy12321343423'
     @validClientId = "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0"
 
-    credentials = ClientRuntimeAzure::TokenCloudCredentials.new(@validSubscription, @dummyToken)
+    credentials = MsRestAzure::TokenCloudCredentials.new(@validSubscription, @dummyToken)
     @client = AutoRestAzureSpecialParametersTestClient.new(credentials, @base_url)
 	  @client.subscription_id = @validSubscription
   end
@@ -40,7 +40,7 @@ describe 'Azure Special properties behaviour' do
   end
 
   it 'should throw exception if ms-global parameter is nil' do
-    expect { credentials = ClientRuntimeAzure::TokenCloudCredentials.new(nil, @dummyToken) }.to raise_exception(ArgumentError)
+    expect { credentials = MsRestAzure::TokenCloudCredentials.new(nil, @dummyToken) }.to raise_exception(ArgumentError)
   end
 
   it 'should use post parameter from path for method parameter if ms-global false' do

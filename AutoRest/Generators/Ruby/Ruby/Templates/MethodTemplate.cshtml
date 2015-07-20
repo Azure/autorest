@@ -93,7 +93,7 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
       begin
         @(Model.CreateDeserializationString("response_content", Model.ReturnType, "result.body", Settings.Namespace))
       rescue Exception => e
-        fail ClientRuntime::DeserializationError.new("Error occured in deserializing the response", e.message, e.backtrace, response_content)
+        fail MsRest::DeserializationError.new("Error occured in deserializing the response", e.message, e.backtrace, response_content)
       end
     end
     </text>
@@ -105,7 +105,7 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
     begin
       @(Model.CreateDeserializationString("response_content", Model.ReturnType, "result.body", Settings.Namespace))
     rescue Exception => e
-      fail ClientRuntime::DeserializationError.new("Error occured in deserializing the response", e.message, e.backtrace, response_content)
+      fail MsRest::DeserializationError.new("Error occured in deserializing the response", e.message, e.backtrace, response_content)
     end
     </text>
     }

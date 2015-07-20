@@ -8,7 +8,7 @@ describe Queries do
     @base_url = ENV['StubServerURI']
 
 	dummyToken = 'dummy12321343423'
-	@credentials = ClientRuntime::TokenCredentials.new(dummyToken)
+	@credentials = MsRest::TokenCredentials.new(dummyToken)
 
     client = AutoRestUrlTestService.new(@credentials, @base_url)
     @queries_client = MyNamespace::Queries.new(client)

@@ -6,7 +6,7 @@ describe Number do
     @base_url = ENV['StubServerURI']
 
 	dummyToken = 'dummy12321343423'
-	@credentials = ClientRuntime::TokenCredentials.new(dummyToken)
+	@credentials = MsRest::TokenCredentials.new(dummyToken)
 
     client = MyNamespace::AutoRestNumberTestService.new(@credentials, @base_url)
     @number_client = MyNamespace::Number.new(client)
@@ -23,11 +23,11 @@ describe Number do
   end
 
   it 'should get invalid float' do
-    expect { @number_client.get_invalid_float().value! }.to raise_error(ClientRuntime::DeserializationError)
+    expect { @number_client.get_invalid_float().value! }.to raise_error(MsRest::DeserializationError)
   end
 
   it 'should get invalid double' do
-    expect { @number_client.get_invalid_double().value! }.to raise_error(ClientRuntime::DeserializationError)
+    expect { @number_client.get_invalid_double().value! }.to raise_error(MsRest::DeserializationError)
   end
 
   it 'should put big float' do

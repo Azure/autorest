@@ -6,7 +6,7 @@ describe Int do
     @base_url = ENV['StubServerURI']
 
 	dummyToken = 'dummy12321343423'
-	@credentials = ClientRuntime::TokenCredentials.new(dummyToken)
+	@credentials = MsRest::TokenCredentials.new(dummyToken)
 
     client = MyNamespace::AutoRestIntegerTestService.new(@credentials, @base_url)
     @int_client = MyNamespace::Int.new(client)
@@ -67,6 +67,6 @@ describe Int do
   end
 
   it 'should get invalid' do
-    expect{ @int_client.get_invalid().value! }.to raise_error(ClientRuntime::DeserializationError)
+    expect{ @int_client.get_invalid().value! }.to raise_error(MsRest::DeserializationError)
   end
 end

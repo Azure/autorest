@@ -52,7 +52,7 @@ RSpec::Matchers.define :raise_exception_with_code do |exception_class|
   match do |block|
     begin
       block.call
-    rescue ClientRuntime::HttpOperationException => exception
+    rescue MsRest::HttpOperationException => exception
       exception.response.is_a?(exception_class)
     end
   end

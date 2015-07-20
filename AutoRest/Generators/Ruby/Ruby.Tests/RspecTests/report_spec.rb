@@ -6,7 +6,7 @@ describe AutoRestReportService do
     @base_url = ENV['StubServerURI']
 
 	dummyToken = 'dummy12321343423'
-	@credentials = ClientRuntime::TokenCredentials.new('Bearer', dummyToken)
+	@credentials = MsRest::TokenCredentials.new('Bearer', dummyToken)
     @client = AutoRestReportService.new(@credentials, @base_url)
   end
 
