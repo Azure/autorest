@@ -112,7 +112,7 @@
           DestinationFolder="$(_CodeSignDirectory)"/>
   </Target>
 
-  <Target Name="SyncPackageVersions" BeforeTargets="BeforeBuild">
+  <Target Name="SyncPackageVersions" DependsOnTargets="BeforeBuild">
     <!-- Update all explicit references to dependent versions. -->
     <Exec Command="gulp syncDotNetDependencies --basePath &quot;$(MSBuildProjectDirectory)&quot;" />
   </Target>

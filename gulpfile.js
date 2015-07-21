@@ -21,23 +21,12 @@ function basePathOrThrow() {
   return gutil.env.basePath;
 }
 
-function handleProcess(child, cb){
-  var stdout = '';
-  var stderr = '';
+function runProcess(name, args, options, cb){
+  if (typeof(options) == 'function') {
+    cb = options;
+  }
 
-  // child.stdout.setEncoding('utf8');
-  //
-  // child.stdout.on('data', function(data) {
-  //   stdout += data;
-  //   gutil.log(data);
-  // });
-  //
-  // child.stderr.setEncoding('utf8');
-  // child.stderr.on('data', function(data) {
-  //   stderr += data;
-  //   gutil.log(gutil.colors.red(data));
-  //   gutil.beep();
-  // });
+  var child = spawn(name, args, { stdio: ['pipe', process.stdout, process.stderr] });
 
   child.on('close', function(code) {
     gutil.log("Done with exit code", code);
@@ -45,18 +34,25 @@ function handleProcess(child, cb){
   });
 }
 
-gulp.task('clean', function(cb) {
-  var child = spawn(csharpBuild,
-    ['build.proj', '/t:clean'],
-    { stdio: ['pipe', process.stdout, process.stderr] });
-  handleProcess(child, cb);
+// Clean related tasks
+
+gulp.task('cleanBuild', function(cb) {
+  runProcess(csharpBuild, ['build.proj', '/t:clean'], cb);
 });
 
+gulp.task('cleanTemplates', function(cb) {
+  glob('./AutoRest/**/Templates/*.cs', function(files){
+    (files || []).forEach(function(file) { fs.unlink(file) });
+    cb();
+  });
+});
+
+gulp.task('clean', ['cleanBuild', 'cleanTemplates']);
+
+// Build related tasks
+
 gulp.task('build', function(cb) {
-  var child = spawn(csharpBuild,
-    ['build.proj', '/p:WarningsNotAsErrors=0219'],
-    { stdio: ['pipe', process.stdout, process.stderr] });
-  handleProcess(child, cb);
+  runProcess(csharpBuild, ['build.proj', '/p:WarningsNotAsErrors=0219'], cb);
 });
 
 gulp.task('syncNugetProjs', function() {
