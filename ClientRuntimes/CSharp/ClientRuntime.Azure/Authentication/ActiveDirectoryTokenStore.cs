@@ -69,7 +69,7 @@ namespace Microsoft.Azure.Authentication
         /// external store, like a database or file system.
         /// </summary>
         /// <param name="clientId">The client Id associated with the token that was accessed.</param>
-        /// <param name="audience">The audience of the token that was acessed.</param>
+        /// <param name="audience">The audience of the token that was accessed.</param>
         /// <param name="uniqueId">The active directory unique id of the principal associated with the token that was accessed.</param>
         /// <param name="userId">The display user id (if any) associated with the token that was accessed.</param>
         protected abstract void EndAccessToken(string clientId, string audience, string uniqueId, string userId);
