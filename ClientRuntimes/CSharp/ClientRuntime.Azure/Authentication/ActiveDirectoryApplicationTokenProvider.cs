@@ -27,12 +27,12 @@ namespace Microsoft.Azure.Authentication
         /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">Active Directory Quickstart for .Net</see> 
         /// for detailed instructions on creating an Azure Active Directory application.
         /// </summary>
-        /// <param name="domain">The domain or tenant id for the application.</param>
         /// <param name="clientId">The client Id of the application in Active Directory.</param>
+        /// <param name="domain">The domain or tenant id for the application.</param>
         /// <param name="secret">The application secret, used for authentication.</param>
         /// <param name="environment">The Azure environment to manage resources in.</param>
-        public ActiveDirectoryApplicationTokenProvider(string domain, string clientId, string secret, AzureEnvironment environment) 
-            : this(domain, clientId, secret, environment, cache: null)
+        public ActiveDirectoryApplicationTokenProvider(string clientId, string domain, string secret, AzureEnvironment environment)
+            : this(clientId, domain, secret, environment, cache: null)
         {
         }
 
@@ -41,32 +41,32 @@ namespace Microsoft.Azure.Authentication
         /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">Active Directory Quickstart for .Net</see> 
         /// for detailed instructions on creating an Azure Active Directory application.
         /// </summary>
-        /// <param name="domain">The domain or tenant id for the application.</param>
         /// <param name="clientId">The client Id of the application in Active Directory.</param>
+        /// <param name="domain">The domain or tenant id for the application.</param>
         /// <param name="secret">The application secret, used for authentication.</param>
         /// <param name="environment">The Azure environment to manage resources in.</param>
         /// <param name="store">The active directory token store to use during authentication.</param>
-        public ActiveDirectoryApplicationTokenProvider(string domain, string clientId, string secret, AzureEnvironment environment, ActiveDirectoryTokenStore store) 
+        public ActiveDirectoryApplicationTokenProvider(string clientId, string domain, string secret, AzureEnvironment environment, ActiveDirectoryTokenStore store) 
         {
             if (store == null)
             {
                 throw new ArgumentNullException("store");
             }
 
-            Initialize(domain, clientId, secret, environment, store.TokenCache);
+            Initialize(clientId, domain, secret, environment, store.TokenCache);
         }
 
         /// <summary>
         /// Initializes a token provider for application credentials.
         /// </summary>
-        /// <param name="domain">The domain or tenant id for the application.</param>
         /// <param name="clientId">The client Id of the application in Active Directory.</param>
+        /// <param name="domain">The domain or tenant id for the application.</param>
         /// <param name="secret">The application secret, used for authentication.</param>
         /// <param name="environment">The Azure environment to manage resources in.</param>
         /// <param name="cache">The TokenCache to use during authentication.</param>
-        internal ActiveDirectoryApplicationTokenProvider(string domain, string clientId, string secret, AzureEnvironment environment, TokenCache cache)
+        internal ActiveDirectoryApplicationTokenProvider(string clientId, string domain, string secret, AzureEnvironment environment, TokenCache cache)
         {
-            Initialize(domain, clientId, secret, environment, cache);
+            Initialize(clientId, domain, secret, environment, cache);
         }
 
         /// <summary>
@@ -91,11 +91,11 @@ namespace Microsoft.Azure.Authentication
         /// <summary>
         /// Initialize private fields in the token provider.
         /// </summary>
-        /// <param name="domain">The domain or tenant id for the application.</param>
         /// <param name="clientId">The client Id of the application in Active Directory.</param>
+        /// <param name="domain">The domain or tenant id for the application.</param>
         /// <param name="environment">The Azure environment to manage resources in.</param>
         /// <param name="cache">The TokenCache to use while authenticating.</param>
-        protected void InitializeAuthenticationContext(string domain, string clientId,
+        protected void InitializeAuthenticationContext(string clientId, string domain,
             AzureEnvironment environment, TokenCache cache)
         {
             ValidateCommonParameters(clientId, domain, environment);
@@ -143,7 +143,7 @@ namespace Microsoft.Azure.Authentication
             }
         }
 
-        private void Initialize(string domain, string clientId, string secret, AzureEnvironment environment, 
+        private void Initialize(string clientId, string domain, string secret, AzureEnvironment environment, 
             TokenCache cache)
         {
             if (string.IsNullOrWhiteSpace(secret))
@@ -151,7 +151,7 @@ namespace Microsoft.Azure.Authentication
                 throw new ArgumentOutOfRangeException("secret");
             }
 
-            InitializeAuthenticationContext(domain, clientId, environment, cache);
+            InitializeAuthenticationContext(clientId, domain, environment, cache);
             this._credential = new ClientCredential(clientId, secret);
             ValidateAuthenticationResult(Authenticate().Result);
         }
