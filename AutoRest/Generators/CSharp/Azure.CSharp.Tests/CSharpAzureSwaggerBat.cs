@@ -3,6 +3,11 @@
 
 // TODO: file length is getting excessive.
 using Fixtures.Azure.SwaggerBatAzureReport;
+using System;
+using System.Globalization;
+using System.Net;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 using Fixtures.Azure.SwaggerBatAzureSpecials;
 using Fixtures.Azure.SwaggerBatHead;
 using Fixtures.Azure.SwaggerBatLro;
@@ -171,7 +176,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
 
                 Assert.NotNull(client.LROsCustomHeader.PostAsyncRetrySucceededWithHttpMessagesAsync(
                                     new Product { Location = "West US" }, customHeaders).Result);
-                
+
                 Assert.NotNull(client.LROsCustomHeader.Put201CreatingSucceeded200WithHttpMessagesAsync(
                                     new Product { Location = "West US" }, customHeaders).Result);
 
@@ -338,7 +343,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         }
 
         /// <summary>
-        /// This test should not be run standalone. It calculates test coverage and will fail if not executed after entire test suite. 
+        /// This test should not be run standalone. It calculates test coverage and will fail if not executed after entire test suite.
         /// </summary>
         [Trait("Report", "true")]
         [Fact]
@@ -634,7 +639,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
             var validClientId = "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0";
             using (
                 var client = new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
-                    new TokenCredentials(validSubscription, Guid.NewGuid().ToString())) 
+                    new TokenCredentials(validSubscription, Guid.NewGuid().ToString()))
                     { SubscriptionId = validSubscription })
             {
                 Dictionary<string, List<string>> customHeaders = new Dictionary<string, List<string>>();
