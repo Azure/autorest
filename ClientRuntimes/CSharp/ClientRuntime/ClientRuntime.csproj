@@ -6,12 +6,17 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <LibraryFxTarget Condition="'$(LibraryFxTarget)' == ''">portable</LibraryFxTarget>
     <ProjectGuid>{7F524559-93F9-4F3F-9E2C-AF41A0C2E6F4}</ProjectGuid>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Configuration Condition=" '$(Configuration)' == '' ">mono</Configuration>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Microsoft.Rest</RootNamespace>
-    <AssemblyName>Microsoft.Rest.ClientRuntime</AssemblyName>
+    <AssemblyName>ClientRuntime</AssemblyName>
     <OutputType>Library</OutputType>
     <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'mono|AnyCPU' ">
+    <Optimize>false</Optimize>
+    <OutputPath>bin\mono</OutputPath>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\Tools\AutoRest.Settings.targets" />
   <ItemGroup>
@@ -78,9 +83,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <CodeAnalysisDictionary Include="$(SolutionDir)Tools\CustomDictionary.xml">
-      <Link>CustomDictionary.xml</Link>
+    <CodeAnalysisDictionary Include="%24%28SolutionDir%29Tools\CustomDictionary.xml">
       <SubType>Designer</SubType>
+      <Link>CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" Condition=" '$(LibraryFxTarget)' == 'portable' " />
