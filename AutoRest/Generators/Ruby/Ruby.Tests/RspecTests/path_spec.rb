@@ -101,19 +101,22 @@ describe Paths do
   end
 
   # Appropriately disallowed together with CSharp
-  # it 'should get date null' do
-  #   expect { @paths_client.date_null('null').value! }.to raise_error(ArgumentError)
-  # end
+  it 'should get date null' do
+    pending('Appropriately disallowed together with CSharp')
+    expect { @paths_client.date_null('null').value! }.to raise_error(ArgumentError)
+  end
 
-  # it 'should get dateTime valid' do
-  #   result = @paths_client.date_time_valid(DateTime.new(2012, 1, 1, 1, 1, 1, 'Z')).value!
-  #   expect(result.response).to be_an_instance_of(Net::HTTPOK)
-  #   expect(result.response.body).to eq("Valid")
-  # end
+  it 'should get dateTime valid' do
+    pending('Appropriately disallowed together with CSharp')
+    result = @paths_client.date_time_valid(DateTime.new(2012, 1, 1, 1, 1, 1, 'Z')).value!
+    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.body).to eq("Valid")
+  end
 
   # Appropriately disallowed together with CSharp
-  # it 'should get dateTime null' do
-  #   result = @paths_client.date_time_null('null').value!
-  #   expect(result.response).to be_an_instance_of(Net::HTTPOK)
-  # end
+  it 'should get dateTime null' do
+    pending('Appropriately disallowed together with CSharp')
+    result = @paths_client.date_time_null('null').value!
+    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+  end
 end

@@ -198,42 +198,56 @@ describe Header do
     expect(Date.parse(result.response['value'])).to eq(Date.parse('2010-01-01'))
   end
 
-  # it 'should get response min date' do
-  #   result = @header_client.response_date("min").value!
-  #   expect(result.response).to be_an_instance_of(Net::HTTPOK)
-  #   expect(Date.parse(result.response['value'])).to eq(Date.parse('0001-01-01'))
-  # end
+  it 'should get response min date' do
+    pending('proper working with datetime isnt implemented yet')
+    fail
+    # result = @header_client.response_date("min").value!
+    # expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    # expect(Date.parse(result.response['value'])).to eq(Date.parse('0001-01-01'))
+  end
 
-  # it 'should post valid param dateTime' do
-  #   result = @header_client.param_datetime("valid", DateTime.new(2010, 1, 1, 12, 34, 56)).value!
-  #   expect(result.response).to be_an_instance_of(Net::HTTPOK)
-  # end
+  it 'should post valid param dateTime' do
+    pending('proper working with datetime isnt implemented yet')
+    fail
+    # result = @header_client.param_datetime("valid", DateTime.new(2010, 1, 1, 12, 34, 56)).value!
+    # expect(result.response).to be_an_instance_of(Net::HTTPOK)
+  end
 
-  # it 'should post min param dateTime' do
-  #   result = @header_client.param_datetime("min", DateTime.new(1, 1, 1, 0, 0, 0)).value!
-  #   expect(result.response).to be_an_instance_of(Net::HTTPOK)
-  # end
+  it 'should post min param dateTime' do
+    pending('proper working with datetime isnt implemented yet')
+    fail
+    # result = @header_client.param_datetime("min", DateTime.new(1, 1, 1, 0, 0, 0)).value!
+    # expect(result.response).to be_an_instance_of(Net::HTTPOK)
+  end
 
-  # it 'should get response valid dateTime' do
-  #   result = @header_client.response_datetime("valid").value!
-  #   expect(result.response).to be_an_instance_of(Net::HTTPOK)
-  #   expect(Date.parse(result.response['value'])).to eq(Date.parse('2010-01-01T12:34:56Z'))
-  # end
+  it 'should get response valid dateTime' do
+    pending('proper working with datetime isnt implemented yet')
+    fail
+    # result = @header_client.response_datetime("valid").value!
+    # expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    # expect(Date.parse(result.response['value'])).to eq(Date.parse('2010-01-01T12:34:56Z'))
+  end
 
-  # it 'should get response min dateTime' do
-  #   result = @header_client.response_datetime("min").value!
-  #   expect(result.response).to be_an_instance_of(Net::HTTPOK)
-  #   expect(Date.parse(result.response['value'])).to eq(Date.parse('0001-01-01T00:00:00Z'))
-  # end
+  it 'should get response min dateTime' do
+    pending('proper working with datetime isnt implemented yet')
+    fail
+    # result = @header_client.response_datetime("min").value!
+    # expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    # expect(Date.parse(result.response['value'])).to eq(Date.parse('0001-01-01T00:00:00Z'))
+  end
 
-  # it 'should post valid byte' do
-  #   result = @header_client.param_byte("valid", "??????????".bytes).value!
-  #   expect(result.response).to be_an_instance_of(Net::HTTPOK)
-  # end
+  it 'should post valid byte' do
+    pending('proper working with unicode isnt implemented yet')
+    fail
+    # result = @header_client.param_byte("valid", "??????????".bytes).value!
+    # expect(result.response).to be_an_instance_of(Net::HTTPOK)
+  end
 
-  # it 'should get response valid byte' do
-  #   result = @header_client.response_byte("valid").value!
-  #   expect(result.response).to be_an_instance_of(Net::HTTPOK)
-  #   expect(Base64.strict_decode64(result.response['value']).unpack('C*')).to eq("啊齄丂狛狜隣郎隣兀﨩".bytes.pack('U*'))
-  # end
+  it 'should get response valid byte' do
+    pending('proper working with unicode isnt implemented yet')
+    fail
+    # result = @header_client.response_byte("valid").value!
+    # expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    # expect(Base64.strict_decode64(result.response['value']).unpack('C*')).to eq("啊齄丂狛狜隣郎隣兀﨩".bytes.pack('U*'))
+  end
 end

@@ -23,7 +23,7 @@ namespace Microsoft.Rest.Generator.Ruby.Tests
             Test("dictionary_spec.rb", "body-dictionary.json", "Dictionary");
         }
 
-        [Fact(Skip = "Inheritance isn't completely implemented yet")]
+        [Fact]
         public void ComplexTests()
         {
             Test("complex_spec.rb", "body-complex.json", "Complex");
@@ -101,7 +101,7 @@ namespace Microsoft.Rest.Generator.Ruby.Tests
             Test("http_infrastructure_spec.rb", "httpInfrastructure.json", "HttpInfrastructure");
         }
 
-        [Fact(Skip = "not completely implemented yet")]
+        [Fact]
         public void RequiredOptionalTests()
         {
             Test("required_optional_spec.rb", "required-optional.json", "RequiredOptional");
