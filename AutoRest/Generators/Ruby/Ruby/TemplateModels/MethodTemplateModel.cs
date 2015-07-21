@@ -218,7 +218,7 @@ namespace Microsoft.Rest.Generator.Ruby
             // Filling path parameters (which are directly in the url body).
             foreach (var pathParameter in ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
             {
-                builder.AppendLine("{0}['{{{1}}}'] = CGI.escape({2})",
+                builder.AppendLine("{0}['{{{1}}}'] = ERB::Util.url_encode({2})",
                     inputVariableName,
                     pathParameter.SerializedName,
                     pathParameter.Type.ToString(pathParameter.Name));
@@ -239,7 +239,7 @@ namespace Microsoft.Rest.Generator.Ruby
                     string.Join(", ", queryParametres.Select(x => string.Format("'{0}' => {1}", x.SerializedName, x.Name))));
 
                 builder.AppendLine("properties.reject!{ |key, value| value.nil? }");
-                builder.AppendLine("{0}.query = properties.map{{ |key, value| \"#{{key}}=#{{CGI.escape(value.to_s)}}\" }}.compact.join('&')", outputVariableName);
+                builder.AppendLine("{0}.query = properties.map{{ |key, value| \"#{{key}}=#{{ERB::Util.url_encode(value.to_s)}}\" }}.compact.join('&')", outputVariableName);
             }
 
             builder.AppendLine(@"fail URI::Error unless {0}.to_s =~ /\A#{{URI::regexp}}\z/", outputVariableName);

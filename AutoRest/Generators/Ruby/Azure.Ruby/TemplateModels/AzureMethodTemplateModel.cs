@@ -76,7 +76,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             {
                 string variableName = pathParameter.Type.ToString(pathParameter.Name);
 
-                string addPathParameterString = String.Format(CultureInfo.InvariantCulture, "{0}['{{{1}}}'] = CGI.escape({2})",
+                string addPathParameterString = String.Format(CultureInfo.InvariantCulture, "{0}['{{{1}}}'] = ERB::Util.url_encode({2})",
                     inputVariableName,
                     pathParameter.SerializedName,
                     variableName);
@@ -115,7 +115,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                 }
                 else
                 {
-                    builder.AppendLine("properties['{0}'] = CGI.escape({1}.to_s) unless {1}.nil?", param.SerializedName, param.Name);
+                    builder.AppendLine("properties['{0}'] = ERB::Util.url_encode({1}.to_s) unless {1}.nil?", param.SerializedName, param.Name);
                 }
             }
 

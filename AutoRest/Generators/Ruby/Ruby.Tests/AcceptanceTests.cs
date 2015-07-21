@@ -53,13 +53,13 @@ namespace Microsoft.Rest.Generator.Ruby.Tests
             Test("byte_spec.rb", "body-byte.json", "Byte");
         }
 
-        [Fact(Skip = "not completely implemented yet")]
+        [Fact]
         public void UrlPathTests()
         {
             Test("path_spec.rb", "url.json", "Url");
         }
 
-        [Fact(Skip = "not completely implemented yet")]
+        [Fact]
         public void UrlQeruiesTests()
         {
             Test("query_spec.rb", "url.json", "UrlQuery");
