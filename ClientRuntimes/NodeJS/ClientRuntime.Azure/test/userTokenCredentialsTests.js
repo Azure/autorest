@@ -9,7 +9,7 @@ var dummySubscriptionId = 'dummySubscriptionId';
 var dummyToken = 'dummy12321343423';
 var dummyScheme = 'dummyScheme';
 
-describe('Subscription credentials', function () {
+describe('UserToken credentials', function () {
   describe('construction', function () {
     
     it('should succeed with subscription id', function () {
