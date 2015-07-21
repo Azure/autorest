@@ -25,19 +25,19 @@ function handleProcess(child, cb){
   var stdout = '';
   var stderr = '';
 
-  child.stdout.setEncoding('utf8');
-
-  child.stdout.on('data', function(data) {
-    stdout += data;
-    gutil.log(data);
-  });
-
-  child.stderr.setEncoding('utf8');
-  child.stderr.on('data', function(data) {
-    stderr += data;
-    gutil.log(gutil.colors.red(data));
-    gutil.beep();
-  });
+  // child.stdout.setEncoding('utf8');
+  //
+  // child.stdout.on('data', function(data) {
+  //   stdout += data;
+  //   gutil.log(data);
+  // });
+  //
+  // child.stderr.setEncoding('utf8');
+  // child.stderr.on('data', function(data) {
+  //   stderr += data;
+  //   gutil.log(gutil.colors.red(data));
+  //   gutil.beep();
+  // });
 
   child.on('close', function(code) {
     gutil.log("Done with exit code", code);
@@ -46,12 +46,16 @@ function handleProcess(child, cb){
 }
 
 gulp.task('clean', function(cb) {
-  var child = spawn(csharpBuild, ['build.proj', '/t:clean']);
+  var child = spawn(csharpBuild,
+    ['build.proj', '/t:clean'],
+    { stdio: ['pipe', process.stdout, process.stderr] });
   handleProcess(child, cb);
 });
 
 gulp.task('build', function(cb) {
-  var child = spawn(csharpBuild, ['build.proj', '/p:WarningsNotAsErrors=0219']);
+  var child = spawn(csharpBuild,
+    ['build.proj', '/p:WarningsNotAsErrors=0219'],
+    { stdio: ['pipe', process.stdout, process.stderr] });
   handleProcess(child, cb);
 });
 
