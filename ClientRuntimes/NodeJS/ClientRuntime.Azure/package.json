@@ -29,7 +29,8 @@
     "xunit-file": "0.0.5",
     "mocha": "2.2.5",
     "should": "5.2.0",
-    "underscore": "*"
+    "underscore": "*",
+    "adal-node": "0.1.13"
   },
   "homepage": "https://github.com/Azure/AutoRest",
   "repository": {
