@@ -98,13 +98,13 @@ namespace Microsoft.Rest.Generator.Ruby.Tests
         [Fact]
         public void HttpInfrastructureTests()
         {
-            Test("header_spec.rb", "httpInfrastructure.json", "HttpInfrastructure");
+            Test("http_infrastructure_spec.rb", "httpInfrastructure.json", "HttpInfrastructure");
         }
 
         [Fact(Skip = "not completely implemented yet")]
         public void RequiredOptionalTests()
         {
-            Test("header_spec.rb", "required-optional.json", "RequiredOptional");
+            Test("required_optional_spec.rb", "required-optional.json", "RequiredOptional");
         }
 
         [Trait("Report", "true")]
