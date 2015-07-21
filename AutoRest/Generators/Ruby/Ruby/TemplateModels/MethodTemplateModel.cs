@@ -64,7 +64,8 @@ namespace Microsoft.Rest.Generator.Ruby
 
                     return string.Join(" || ", predicates);
                 }
-                return "httpResponse.IsSuccessStatusCode";
+
+                return "status_code >= 200 && status_code < 300";
             }
         }
 

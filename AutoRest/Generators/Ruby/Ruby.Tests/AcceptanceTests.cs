@@ -65,7 +65,7 @@ namespace Microsoft.Rest.Generator.Ruby.Tests
             Test("query_spec.rb", "url.json", "UrlQuery");
         }
 
-        [Fact(Skip = "not completely implemented yet")]
+        [Fact]
         public void UrlItemsTests()
         {
             Test("path_items_spec.rb", "url.json", "UrlItems");
@@ -95,7 +95,7 @@ namespace Microsoft.Rest.Generator.Ruby.Tests
             Test("header_spec.rb", "header.json", "Header");
         }
 
-        [Fact(Skip = "not completely implemented yet")]
+        [Fact]
         public void HttpInfrastructureTests()
         {
             Test("header_spec.rb", "httpInfrastructure.json", "HttpInfrastructure");
@@ -108,7 +108,7 @@ namespace Microsoft.Rest.Generator.Ruby.Tests
         }
 
         [Trait("Report", "true")]
-        [Fact(Skip = "quality bar isn't high enough")]
+        [Fact]
         public void EnsureTestCoverage()
         {
             Test("report_spec.rb", "report.json", "Report");

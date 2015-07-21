@@ -71,7 +71,7 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
     unless (@Model.SuccessStatusCodePredicate)
       @if (Model.DefaultResponse != null)
       {
-      @:error_model = JSON.parse(response_content)
+      @:error_model = JSON.load(response_content)
       @:fail @(Model.OperationExceptionTypeString).new(http_request, http_response, error_model)
       }
       else
