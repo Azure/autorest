@@ -140,7 +140,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         public void ValidApplicationCredentialsAuthenticateCorrectly()
         {
             var credentials = new ApplicationTokenCredentials(
-                this._domain, this._applicationId, this._secret);
+                this._applicationId, this._domain, this._secret);
             var client = new HttpClient();
             var request = new HttpRequestMessage(HttpMethod.Get,
                 new Uri("https://management.azure.com/subscriptions?api-version=2014-04-01-preview"));
@@ -155,8 +155,8 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         {
             var cache = new TestTokenCache();
             var tokenStore = new InMemoryTokenStore(cache);
-            var provider = new ActiveDirectoryApplicationTokenProvider(this._domain,
-                 this._applicationId, this._secret, AzureEnvironment.Azure, tokenStore);
+            var provider = new ActiveDirectoryApplicationTokenProvider(this._applicationId, 
+                 this._domain, this._secret, AzureEnvironment.Azure, tokenStore);
             cache.ForceTokenExpiry();
             var credentials = new TokenCredentials(provider);
             Assert.NotNull(provider.GetAccessTokenAsync(CancellationToken.None).Result);
@@ -173,7 +173,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         public void CanAuthenticateApplicationWithTokenStore()
         {
             var store = new InMemoryTokenStore();
-            var provider = new ActiveDirectoryApplicationTokenProvider(this._domain, this._applicationId, this._secret,
+            var provider = new ActiveDirectoryApplicationTokenProvider(this._applicationId, this._domain, this._secret,
                 AzureEnvironment.Azure, store);
             var credentials = new TokenCredentials(provider);
             var client = new HttpClient();
