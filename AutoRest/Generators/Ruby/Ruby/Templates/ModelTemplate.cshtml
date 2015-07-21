@@ -76,7 +76,7 @@ module @(Settings.Namespace)
         @EmptyLine
         @:serialized_property = @("object." + property.Name)
         @:@Model.SerializeProperty("serialized_property", property.Type, property.IsRequired, Settings.Namespace)
-        @:output_object['@(property.SerializedName)'] = serialized_property
+        @:output_object['@(property.SerializedName)'] = serialized_property unless serialized_property.nil?
         }
         output_object
       end

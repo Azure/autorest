@@ -329,7 +329,7 @@ Write(WrapComment("# ", string.IsNullOrEmpty(Model.Documentation) ? "Model objec
 
 #line default
 #line hidden
-            WriteLiteral("\'] = serialized_property\r\n");
+            WriteLiteral("\'] = serialized_property unless serialized_property.nil?\r\n");
 #line 80 "ModelTemplate.cshtml"
         }
 
