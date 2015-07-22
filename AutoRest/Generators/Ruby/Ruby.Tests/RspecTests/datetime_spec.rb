@@ -75,36 +75,39 @@ describe Date do
     expect{@date_client.get_underflow().value!}.to raise_error(MsRest::DeserializationError)
   end
 
-  # it 'should put utc max date' do
-  #   # pending("Test pended because DateTime sends local time, i.e. '+00:00', not 'Z'")
-  #   result = @date_client.put_utc_max_date_time(DateTime.new(9999, 12, 31, 23, 59, 59.9999999)).value!
-  #   expect(result.response).to be_an_instance_of(Net::HTTPOK)
-  # end
+  it 'should put utc max date' do
+    pending('proper working with datetime isnt implemented yet')
+    result = @date_client.put_utc_max_date_time(DateTime.new(9999, 12, 31, 23, 59, 59.9999999)).value!
+    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+  end
 
   it 'should put utc min date' do
     result = @date_client.put_utc_min_date_time(DateTime.new(0001, 01, 01, 00, 00, 00)).value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
   end
 
-  # it 'should put local positive offset min date time' do
-  #   result = @date_client.put_local_positive_offset_min_date_time(DateTime.new(0001, 01, 01, 00, 00, 00, '+14')).value!
-  #   expect(result.response).to be_an_instance_of(Net::HTTPOK)
-  # end
+  it 'should put local positive offset min date time' do
+    pending('proper working with datetime isnt implemented yet')
+    result = @date_client.put_local_positive_offset_min_date_time(DateTime.new(0001, 01, 01, 00, 00, 00, '+14')).value!
+    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+  end
 
   it 'should put local negative offset min date time' do
     result = @date_client.put_local_negative_offset_min_date_time(DateTime.new(0001, 01, 01, 00, 00, 00, '-14')).value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
   end
 
-  # it 'should put local positive offset max date time' do
-  #   result = @date_client.put_local_positive_offset_max_date_time(DateTime.new(9999, 12, 31, 23, 59, 59.9999999, '+14:00')).value!
-  #   expect(result.response).to be_an_instance_of(Net::HTTPOK)
-  # end
+  it 'should put local positive offset max date time' do
+    pending('proper working with datetime isnt implemented yet')
+    result = @date_client.put_local_positive_offset_max_date_time(DateTime.new(9999, 12, 31, 23, 59, 59.9999999, '+14:00')).value!
+    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+  end
 
-  # it 'should put local negative offset max date time' do
-  #   result = @date_client.put_local_negative_offset_max_date_time(DateTime.new(9999, 12, 31, 23, 59, 59.9999999, '-14:00')).value!
-  #   expect(result.response).to be_an_instance_of(Net::HTTPOK)
-  # end
+  it 'should put local negative offset max date time' do
+    pending('proper working with datetime isnt implemented yet')
+    result = @date_client.put_local_negative_offset_max_date_time(DateTime.new(9999, 12, 31, 23, 59, 59.9999999, '-14:00')).value!
+    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+  end
 
   it 'should get utc min date time' do
     result = @date_client.get_utc_min_date_time().value!

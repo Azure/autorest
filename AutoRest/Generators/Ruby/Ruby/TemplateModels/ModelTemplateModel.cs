@@ -54,6 +54,27 @@ namespace Microsoft.Rest.Generator.Ruby
         }
 
         /// <summary>
+        /// Gets the value indicating whether current object is polymorhic.
+        /// </summary>
+        public bool IsPolymorphic
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(this.PolymorphicDiscriminator))
+                {
+                    return true;
+                }
+
+                if (this.parent != null)
+                {
+                    return parent.IsPolymorphic;
+                }
+
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Initializes a new instance of the ModelTemplateModel class.
         /// </summary>
         /// <param name="source">The object to create model from.</param>
