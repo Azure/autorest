@@ -85,5 +85,5 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" Condition=" '$(LibraryFxTarget)' == 'portable' " />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" Condition=" '$(LibraryFxTarget)' != 'portable' " />
-  <Import Project="$(CommonNugetPackageFolder)\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition=" '$(LibraryFxTarget)' != 'net45' " />
+  <Import Project="$(CommonNugetPackageFolder)\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition=" Exists('$(CommonNugetPackageFolder)\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets') AND '$(LibraryFxTarget)' != 'net45' " />
 </Project>
