@@ -27,7 +27,8 @@ namespace Microsoft.Azure.Authentication
         private string _clientId;
         private string _type;
 
-#if NET45
+        //Use preprocessor below to expose the "IPlatformParameters" only on portable platform
+#if !PORTABLE
         /// <summary>
         /// Initializes a token provider using Active Directory user credentials (UPN). 
         /// This token provider will prompt the user for username and password.

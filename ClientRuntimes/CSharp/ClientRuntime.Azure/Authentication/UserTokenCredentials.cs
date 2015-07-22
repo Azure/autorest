@@ -12,9 +12,9 @@ namespace Microsoft.Azure.Authentication
     /// </summary>
     public class UserTokenCredentials : TokenCredentials
     {
+        //Use preprocessor to expose the "IPlatformParameters" only on portable
+#if !PORTABLE
         private static readonly Uri DefaultRedirectUri = new Uri("urn:ietf:wg:oauth:2.0:oob");
-
-#if NET45
         /// <summary>
         /// Creates a new UserAccessTokenCredentials object for Microsoft accounts or Organization Id accounts.  
         /// This method will display a dialog for providing username and password.
