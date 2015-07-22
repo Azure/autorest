@@ -336,39 +336,72 @@ Write(WrapComment("# ", string.IsNullOrEmpty(Model.Documentation) ? "Model objec
 #line default
 #line hidden
 
-            WriteLiteral("        output_object\r\n      end\r\n\r\n      ");
+            WriteLiteral("\r\n");
+#line 82 "ModelTemplate.cshtml"
+        
+
+#line default
+#line hidden
+
+#line 82 "ModelTemplate.cshtml"
+         if (Model.IsPolymorphic)
+        {
+        
+
+#line default
+#line hidden
+
 #line 84 "ModelTemplate.cshtml"
+   Write(EmptyLine);
+
+#line default
+#line hidden
+#line 84 "ModelTemplate.cshtml"
+                  
+
+#line default
+#line hidden
+
+            WriteLiteral("        output_object[\'dtype\'] = object.dtype\r\n");
+#line 86 "ModelTemplate.cshtml"
+        }    
+
+#line default
+#line hidden
+
+            WriteLiteral("        output_object\r\n      end\r\n\r\n      ");
+#line 90 "ModelTemplate.cshtml"
  Write(EmptyLine);
 
 #line default
 #line hidden
             WriteLiteral("\r\n      #\r\n      # Deserializes given Ruby Hash into Model object.\r\n      ");
-#line 87 "ModelTemplate.cshtml"
+#line 93 "ModelTemplate.cshtml"
  Write(WrapComment("# ", string.Format("@param {0} [Hash] {1}", "object", "Ruby Hash object to deserialize.")));
 
 #line default
 #line hidden
             WriteLiteral("\r\n      ");
-#line 88 "ModelTemplate.cshtml"
+#line 94 "ModelTemplate.cshtml"
  Write(WrapComment("# ", string.Format("@return [{0}] {1}", Model.Name, "Deserialized object.")));
 
 #line default
 #line hidden
             WriteLiteral("\r\n      #\r\n      def self.deserialize_object(object)\r\n        return if object.ni" +
 "l?\r\n\r\n        output_object = ");
-#line 93 "ModelTemplate.cshtml"
+#line 99 "ModelTemplate.cshtml"
                     Write(Model.Name);
 
 #line default
 #line hidden
             WriteLiteral(".new\r\n        \r\n");
-#line 95 "ModelTemplate.cshtml"
+#line 101 "ModelTemplate.cshtml"
         
 
 #line default
 #line hidden
 
-#line 95 "ModelTemplate.cshtml"
+#line 101 "ModelTemplate.cshtml"
          foreach (var property in Model.ComposedProperties.OrderByDescending(x => x.IsRequired))
         {
         
@@ -376,44 +409,133 @@ Write(WrapComment("# ", string.IsNullOrEmpty(Model.Documentation) ? "Model objec
 #line default
 #line hidden
 
-#line 97 "ModelTemplate.cshtml"
+#line 103 "ModelTemplate.cshtml"
    Write(EmptyLine);
 
 #line default
 #line hidden
-#line 97 "ModelTemplate.cshtml"
+#line 103 "ModelTemplate.cshtml"
                       
 
 #line default
 #line hidden
 
             WriteLiteral("        deserialized_property = ");
-#line 98 "ModelTemplate.cshtml"
+#line 104 "ModelTemplate.cshtml"
                               Write(string.Format("object['{0}']", property.SerializedName));
 
 #line default
 #line hidden
             WriteLiteral("\r\n        ");
-#line 99 "ModelTemplate.cshtml"
+#line 105 "ModelTemplate.cshtml"
      Write(Model.DeserializeProperty("deserialized_property", property.Type, property.IsRequired, Settings.Namespace));
 
 #line default
 #line hidden
             WriteLiteral("\r\n        output_object.");
-#line 100 "ModelTemplate.cshtml"
+#line 106 "ModelTemplate.cshtml"
                     Write(property.Name);
 
 #line default
 #line hidden
             WriteLiteral(" = deserialized_property\r\n");
-#line 101 "ModelTemplate.cshtml"
+#line 107 "ModelTemplate.cshtml"
         }
 
 #line default
 #line hidden
 
-            WriteLiteral("        output_object.validate\r\n        output_object\r\n      end\r\n    end\r\n  end\r" +
-"\nend\r\n");
+            WriteLiteral("\r\n");
+#line 109 "ModelTemplate.cshtml"
+        
+
+#line default
+#line hidden
+
+#line 109 "ModelTemplate.cshtml"
+         if (Model.IsPolymorphic)
+        {
+        
+
+#line default
+#line hidden
+
+#line 111 "ModelTemplate.cshtml"
+   Write(EmptyLine);
+
+#line default
+#line hidden
+#line 111 "ModelTemplate.cshtml"
+                  
+
+#line default
+#line hidden
+
+            WriteLiteral("        output_object.dtype = object[\'dtype\']\r\n");
+#line 113 "ModelTemplate.cshtml"
+        }
+
+#line default
+#line hidden
+
+            WriteLiteral("    \r\n        output_object.validate\r\n        output_object\r\n      end\r\n\r\n");
+#line 119 "ModelTemplate.cshtml"
+      
+
+#line default
+#line hidden
+
+#line 119 "ModelTemplate.cshtml"
+       if (Model.IsPolymorphic)
+      {
+      
+
+#line default
+#line hidden
+
+#line 121 "ModelTemplate.cshtml"
+ Write(EmptyLine);
+
+#line default
+#line hidden
+#line 121 "ModelTemplate.cshtml"
+                
+
+#line default
+#line hidden
+
+            WriteLiteral("      def initialize\r\n        @dtype = \"");
+#line 123 "ModelTemplate.cshtml"
+                Write(Model.Name.ToLower());
+
+#line default
+#line hidden
+            WriteLiteral("\"\r\n      end\r\n");
+#line 125 "ModelTemplate.cshtml"
+      
+
+#line default
+#line hidden
+
+#line 125 "ModelTemplate.cshtml"
+ Write(EmptyLine);
+
+#line default
+#line hidden
+#line 125 "ModelTemplate.cshtml"
+                
+
+#line default
+#line hidden
+
+            WriteLiteral("      attr_accessor :dtype\r\n");
+#line 127 "ModelTemplate.cshtml"
+      }
+
+#line default
+#line hidden
+
+            WriteLiteral("    end\r\n  end\r\nend\r\n");
         }
         #pragma warning restore 1998
     }
