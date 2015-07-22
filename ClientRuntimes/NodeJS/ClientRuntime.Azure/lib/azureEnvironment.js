@@ -3,6 +3,8 @@
 
 'use strict';
 
+var _ = require('underscore');
+
 /**
  * @class
  * Initializes a new instance of the AzureEnvironment class.
@@ -21,15 +23,19 @@ function AzureEnvironment(authenticationEndpoint, tokenAudience, validateAuthori
 /**
  * Provides the settings for authentication with Azure
  */
-exports.Azure = new AzureEnvironment("https://login.windows.net/",
-                                     "https://management.core.windows.net/",
-                                     true);
+var Azure = new AzureEnvironment("https://login.windows.net/",
+                                 "https://management.core.windows.net/",
+                                  true);
 
 /**
  * Provides the settings for authentication with Azure China
  */
-exports.AzureChina = new AzureEnvironment("https://login.chinacloudapi.cn/",
-                                          "https://management.core.chinacloudapi.cn/",
-                                          true);
+var AzureChina = new AzureEnvironment("https://login.chinacloudapi.cn/",
+                                      "https://management.core.chinacloudapi.cn/",
+                                       true);
 
-module.exports = AzureEnvironment;
+_.extend(module.exports, {
+  Azure: Azure,
+  AzureChina: AzureChina,
+  AzureEnvironment: AzureEnvironment
+});

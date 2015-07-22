@@ -3,7 +3,8 @@
 'use strict';
 
 exports.AzureServiceClient = require('./azureServiceClient');
-exports.UserTokenCredentials = require('./userTokenCredentials');
+exports.UserTokenCredentials = require('./credentials/userTokenCredentials');
+exports.ApplicationTokenCredentials = require('./credentials/applicationTokenCredentials');
 exports.Resource = require('./resource');
 exports.CloudError = require('./cloudError');
 
