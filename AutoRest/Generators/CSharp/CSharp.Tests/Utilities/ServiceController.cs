@@ -13,9 +13,9 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
     /// </summary>
     public class ServiceController : IDisposable
     {
-        private const string NpmCommand = "npm.cmd";
+        private const string NpmCommand = "npm";
         private const string NpmArgument = "install";
-        private const string NodeCommand = "node.exe";
+        private const string NodeCommand = "node";
         private const string NodeArgument = "./startup/www";
 
         private ProcessOutputListener _listener;
@@ -61,7 +61,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             {
                 EndServiceProcess(ServiceProcess);
                 ServiceProcess = null;
-            }   
+            }
         }
 
         /// <summary>

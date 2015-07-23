@@ -38,13 +38,13 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="ClientRuntime.Azure\**\*.cs" target="src\Common"/>
-    <file src="ClientRuntime.Azure\Properties\*.resx" target="src\Common\Properties"/>
-    <file src="..\..\binaries\portable\Microsoft.Rest.ClientRuntime.Azure.dll" target="lib\portable-net45+win8+wpa81"/>
-    <file src="..\..\binaries\portable\Microsoft.Rest.ClientRuntime.Azure.pdb" target="lib\portable-net45+win8+wpa81"/>
-    <file src="..\..\binaries\portable\Microsoft.Rest.ClientRuntime.Azure.xml" target="lib\portable-net45+win8+wpa81"/>
-    <file src="..\..\binaries\net45\Microsoft.Rest.ClientRuntime.Azure.dll" target="lib\net45"/>
-    <file src="..\..\binaries\net45\Microsoft.Rest.ClientRuntime.Azure.pdb" target="lib\net45"/>
-    <file src="..\..\binaries\net45\Microsoft.Rest.ClientRuntime.Azure.xml" target="lib\net45"/>
+    <file src="ClientRuntimes/CSharp/ClientRuntime.Azure/**/*.cs" target="src/Common"/>
+    <file src="ClientRuntimes/CSharp/ClientRuntime.Azure/Properties/*.resx" target="src/Common/Properties"/>
+    <file src="binaries/portable/Microsoft.Rest.ClientRuntime.Azure.dll" target="lib/portable-net45+win8+wpa81"/>
+    <file src="binaries/portable/Microsoft.Rest.ClientRuntime.Azure.pdb" target="lib/portable-net45+win8+wpa81"/>
+    <file src="binaries/portable/Microsoft.Rest.ClientRuntime.Azure.xml" target="lib/portable-net45+win8+wpa81"/>
+    <file src="binaries/net45/Microsoft.Rest.ClientRuntime.Azure.dll" target="lib/net45"/>
+    <file src="binaries/net45/Microsoft.Rest.ClientRuntime.Azure.pdb" target="lib/net45"/>
+    <file src="binaries/net45/Microsoft.Rest.ClientRuntime.Azure.xml" target="lib/net45"/>
   </files>
 </package>

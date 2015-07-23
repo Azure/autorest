@@ -88,3 +88,14 @@ gulp.task('syncNuspecs', function() {
 });
 
 gulp.task('syncDotNetDependencies', ['syncNugetProjs', 'syncNuspecs']);
+
+
+// Test related tasks
+
+gulp.task('package', function(cb) {
+  runProcess(csharpBuild, ['build.proj', '/t:package'], cb);
+});
+
+gulp.task('test', function(cb) {
+  runProcess(csharpBuild, ['build.proj', '/t:test'], cb);
+});

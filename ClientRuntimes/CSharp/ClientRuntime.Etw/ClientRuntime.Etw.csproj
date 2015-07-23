@@ -6,18 +6,13 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <LibraryFxTarget Condition="'$(LibraryFxTarget)' == ''">net45</LibraryFxTarget>
     <ProjectGuid>{50B0A8CE-D290-4EB7-8C6C-16EAAB75225E}</ProjectGuid>
-    <Configuration Condition=" '$(Configuration)' == '' ">mono</Configuration>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Microsoft.Rest.Tracing.Etw</RootNamespace>
     <AssemblyName>ClientRuntime.Etw</AssemblyName>
     <OutputType>Library</OutputType>
     <RestorePackages>true</RestorePackages>
     <NuGetPackageImportStamp>644881db</NuGetPackageImportStamp>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'mono|AnyCPU' ">
-    <Optimize>false</Optimize>
-    <OutputPath>bin\mono</OutputPath>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\Tools\AutoRest.Settings.targets" />
   <ItemGroup>

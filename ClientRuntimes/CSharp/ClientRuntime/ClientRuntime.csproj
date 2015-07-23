@@ -6,17 +6,12 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <LibraryFxTarget Condition="'$(LibraryFxTarget)' == ''">portable</LibraryFxTarget>
     <ProjectGuid>{7F524559-93F9-4F3F-9E2C-AF41A0C2E6F4}</ProjectGuid>
-    <Configuration Condition=" '$(Configuration)' == '' ">mono</Configuration>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Microsoft.Rest</RootNamespace>
-    <AssemblyName>ClientRuntime</AssemblyName>
+    <AssemblyName>Microsoft.Rest.ClientRuntime</AssemblyName>
     <OutputType>Library</OutputType>
     <RestorePackages>true</RestorePackages>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'mono|AnyCPU' ">
-    <Optimize>false</Optimize>
-    <OutputPath>bin\mono</OutputPath>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\Tools\AutoRest.Settings.targets" />
   <ItemGroup>
@@ -91,4 +86,6 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" Condition=" '$(LibraryFxTarget)' == 'portable' " />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" Condition=" '$(LibraryFxTarget)' != 'portable' " />
   <Import Project="$(CommonNugetPackageFolder)\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition=" Exists('$(CommonNugetPackageFolder)\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets') AND '$(LibraryFxTarget)' != 'net45' " />
+</Project>
+  <Import Project="$(CommonNugetPackageFolder)\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition=" '$(LibraryFxTarget)' != 'net45' " />
 </Project>
