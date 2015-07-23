@@ -466,8 +466,10 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
             Assert.True(serviceClient.ModelTypes.Any(t => t.Name == "Product"));
             // ProductProperties type is not removed because it is referenced in response of one of the methods
             Assert.True(serviceClient.ModelTypes.Any(t => t.Name == "ProductProperties"));
-            Assert.Equal(serviceClient.ModelTypes.First(t => t.Name == "ProductProperties").Properties.Count, 
+            Assert.Equal(serviceClient.ModelTypes.First(t => t.Name == "ProductProperties").Properties.Count,
                 serviceClient.ModelTypes.First(t => t.Name == "Product").Properties.Count);
+            Assert.Equal("product_id", serviceClient.ModelTypes.First(t => t.Name == "ProductProperties").Properties[0].SerializedName);
+            Assert.Equal("properties.product_id", serviceClient.ModelTypes.First(t => t.Name == "Product").Properties[0].SerializedName);
         }
     }
 }
