@@ -172,7 +172,7 @@ namespace Microsoft.Rest.Azure.Authentication
             return await this._authenticationContext.AcquireTokenAsync(
                 environment.TokenAudience.ToString(), 
                 this._clientId,
-                new UserCredential(username, password));
+                new UserCredential(username, password)).ConfigureAwait(false);
         }
 
         private async Task<AuthenticationResult> Authenticate(AzureEnvironment environment,  
@@ -184,7 +184,7 @@ namespace Microsoft.Rest.Azure.Authentication
                     clientRedirectUri,
                     platformParameters, 
                     UserIdentifier.AnyUser,
-                    EnableEbdMagicCookie);
+                    EnableEbdMagicCookie).ConfigureAwait(false);
         }
 
         private static AuthenticationContext GetAuthenticationContext(string domain, AzureEnvironment environment, TokenCache cache)

@@ -70,7 +70,7 @@ namespace Microsoft.Rest.Azure.Authentication
         {
             try
             {
-                return await this._authenticationContext.AcquireTokenAsync(this._tokenAudience, this._credential);
+                return await this._authenticationContext.AcquireTokenAsync(this._tokenAudience, this._credential).ConfigureAwait(false);
             }
             catch (AdalException authenticationException)
             {
