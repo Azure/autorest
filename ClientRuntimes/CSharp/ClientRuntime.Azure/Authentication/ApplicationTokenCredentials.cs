@@ -3,7 +3,7 @@
 
 using Microsoft.Rest;
 
-namespace Microsoft.Azure.Authentication
+namespace Microsoft.Rest.Azure.Authentication
 {
     /// <summary>
     /// Credential object for authenticating as an Active Directory application.

@@ -3,7 +3,7 @@
 
 using Microsoft.Rest;
 
-namespace Microsoft.Azure
+namespace Microsoft.Rest.Azure
 {
     /// <summary>
     /// A standard service response including request ID.

@@ -3,7 +3,7 @@
 
 using System;
 using Xunit;
-using Microsoft.Azure.Authentication;
+using Microsoft.Rest.Azure.Authentication;
 
 namespace Microsoft.Rest.ClientRuntime.Azure.Test
 {

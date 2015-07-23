@@ -5,11 +5,11 @@ using System;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Azure.Properties;
+using Microsoft.Rest.Azure.Properties;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Rest;
 
-namespace Microsoft.Azure.Authentication
+namespace Microsoft.Rest.Azure.Authentication
 {
     /// <summary>
     /// Provides tokens for Azure Active Directory applications. 

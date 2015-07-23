@@ -10,6 +10,7 @@ using Microsoft.Azure.Management.Redis;
 using Microsoft.Azure.Management.Redis.Models;
 using Xunit;
 using Microsoft.Azure;
+using Microsoft.Rest.Azure;
 
 namespace Microsoft.Rest.ClientRuntime.Azure.Test
 {

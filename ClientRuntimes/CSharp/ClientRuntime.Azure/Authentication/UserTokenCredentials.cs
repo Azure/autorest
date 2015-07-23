@@ -5,7 +5,7 @@ using System;
 using Microsoft.Rest;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 
-namespace Microsoft.Azure.Authentication
+namespace Microsoft.Rest.Azure.Authentication
 {
     /// <summary>
     /// Credentials class for authenticating using a Microsoft ID or Organizational Id

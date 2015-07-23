@@ -1,36 +1,27 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-
 // TODO: file length is getting excessive.
-using System;
-using System.Globalization;
-using System.Net;
-using System.Net.PeerToPeer;
-using System.Threading.Tasks;
-using System.Collections.Generic;
+using Fixtures.Azure.SwaggerBatAzureReport;
 using Fixtures.Azure.SwaggerBatAzureSpecials;
-using Fixtures.Azure.SwaggerBatLro.Models;
+using Fixtures.Azure.SwaggerBatHead;
 using Fixtures.Azure.SwaggerBatLro;
+using Fixtures.Azure.SwaggerBatLro.Models;
 using Fixtures.Azure.SwaggerBatPaging;
-using Microsoft.Azure;
-using Microsoft.Azure.Authentication;
-using Microsoft.Rest.Generator.ClientModel;
+using Fixtures.Azure.SwaggerBatResourceFlattening;
+using Fixtures.Azure.SwaggerBatResourceFlattening.Models;
+using Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion;
+using Microsoft.Rest.Azure;
 using Microsoft.Rest.Generator.CSharp.Azure.Tests.Properties;
 using Microsoft.Rest.Generator.CSharp.Tests;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger.Tests;
-using Newtonsoft.Json;
-using System.Diagnostics;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Xunit;
 using Xunit.Abstractions;
-using Error = Fixtures.SwaggerBatHttp.Models.Error;
-using Fixtures.Azure.SwaggerBatResourceFlattening;
-using Fixtures.Azure.SwaggerBatResourceFlattening.Models;
-using Fixtures.Azure.SwaggerBatHead;
-using Fixtures.Azure.SwaggerBatAzureReport;
-using Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion;
 
 namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
 {

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using Microsoft.Rest;
 using Newtonsoft.Json;
 
-namespace Microsoft.Azure
+namespace Microsoft.Rest.Azure
 {
     /// <summary>
     /// Defines Azure resource.

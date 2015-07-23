@@ -4,7 +4,7 @@
 using Newtonsoft.Json;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Microsoft.Azure
+namespace Microsoft.Rest.Azure
 {
     /// <summary>
     /// Defines Azure sub-resource.

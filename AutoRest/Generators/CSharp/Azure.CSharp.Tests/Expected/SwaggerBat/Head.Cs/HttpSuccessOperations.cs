@@ -19,7 +19,7 @@ namespace Fixtures.Azure.SwaggerBatHead
     using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Linq;
-    using Microsoft.Azure;
+    using Microsoft.Rest.Azure;
 
     internal partial class HttpSuccessOperations : IServiceOperations<AutoRestHeadTestService>, IHttpSuccessOperations
     {

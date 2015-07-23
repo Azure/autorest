@@ -9,7 +9,7 @@ using System.Security.Permissions;
 #endif
 using Microsoft.Rest;
 
-namespace Microsoft.Azure
+namespace Microsoft.Rest.Azure
 {
     /// <summary>
     /// An exception generated from an http response returned from a Microsoft Azure service

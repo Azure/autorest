@@ -10,7 +10,7 @@ using System.Reflection;
 using System.Threading;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Xunit;
-using Microsoft.Azure.Authentication;
+using Microsoft.Rest.Azure.Authentication;
 using Microsoft.Rest.ClientRuntime.Azure.Test.Fakes;
 
 namespace Microsoft.Rest.ClientRuntime.Azure.Test

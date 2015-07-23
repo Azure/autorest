@@ -14,6 +14,7 @@ using Microsoft.Azure.Management.Redis.Models;
 using Microsoft.Rest;
 using Microsoft.Rest.Serialization;
 using Newtonsoft.Json;
+using Microsoft.Rest.Azure;
 
 namespace Microsoft.Azure.Management.Redis.Models
 {
