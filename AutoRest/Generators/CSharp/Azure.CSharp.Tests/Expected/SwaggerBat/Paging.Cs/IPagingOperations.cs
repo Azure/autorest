@@ -18,7 +18,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
     using Models;
 
     /// <summary>
-    /// Long-running Operation for AutoRest
+    /// PagingOperations operations.
     /// </summary>
     public partial interface IPagingOperations
     {

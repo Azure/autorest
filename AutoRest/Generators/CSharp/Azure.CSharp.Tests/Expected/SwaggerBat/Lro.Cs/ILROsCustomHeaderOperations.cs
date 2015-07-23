@@ -18,7 +18,7 @@ namespace Fixtures.Azure.SwaggerBatLro
     using Models;
 
     /// <summary>
-    /// Long-running Operation for AutoRest
+    /// LROsCustomHeaderOperations operations.
     /// </summary>
     public partial interface ILROsCustomHeaderOperations
     {

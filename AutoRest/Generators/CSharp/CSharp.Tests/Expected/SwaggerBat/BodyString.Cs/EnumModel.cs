@@ -21,6 +21,9 @@ namespace Fixtures.SwaggerBatBodyString
     using Newtonsoft.Json;
     using Models;
 
+    /// <summary>
+    /// EnumModel operations.
+    /// </summary>
     internal partial class EnumModel : IServiceOperations<AutoRestSwaggerBATService>, IEnumModel
     {
         /// <summary>

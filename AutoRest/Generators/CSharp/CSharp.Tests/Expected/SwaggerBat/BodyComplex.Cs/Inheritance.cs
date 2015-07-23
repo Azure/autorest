@@ -21,6 +21,9 @@ namespace Fixtures.SwaggerBatBodyComplex
     using Newtonsoft.Json;
     using Models;
 
+    /// <summary>
+    /// Inheritance operations.
+    /// </summary>
     internal partial class Inheritance : IServiceOperations<AutoRestComplexTestService>, IInheritance
     {
         /// <summary>

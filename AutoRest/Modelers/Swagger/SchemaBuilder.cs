@@ -47,7 +47,12 @@ namespace Microsoft.Rest.Modeler.Swagger
             }
 
             // Otherwise create new object type
-            var objectType = new CompositeType { Name = serviceTypeName, SerializedName = serviceTypeName };
+            var objectType = new CompositeType 
+                            { 
+                                Name = serviceTypeName, 
+                                SerializedName = serviceTypeName, 
+                                Documentation = _schema.Description 
+                            };
             // Put this in already generated types serializationProperty
             Modeler.GeneratedTypes[serviceTypeName] = objectType;
 

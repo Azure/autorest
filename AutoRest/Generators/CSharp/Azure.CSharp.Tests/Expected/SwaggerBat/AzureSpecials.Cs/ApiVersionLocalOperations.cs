@@ -22,6 +22,9 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
     using Microsoft.Rest.Azure;
     using Models;
 
+    /// <summary>
+    /// ApiVersionLocalOperations operations.
+    /// </summary>
     internal partial class ApiVersionLocalOperations : IServiceOperations<AutoRestAzureSpecialParametersTestClient>, IApiVersionLocalOperations
     {
         /// <summary>

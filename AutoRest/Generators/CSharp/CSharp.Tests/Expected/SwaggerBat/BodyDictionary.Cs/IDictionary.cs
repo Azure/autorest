@@ -16,7 +16,7 @@ namespace Fixtures.SwaggerBatBodyDictionary
     using Models;
 
     /// <summary>
-    /// Test Infrastructure for AutoRest Swagger BAT
+    /// Dictionary operations.
     /// </summary>
     public partial interface IDictionary
     {

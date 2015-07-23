@@ -16,7 +16,7 @@ namespace Fixtures.SwaggerBatBodyComplex
     using Models;
 
     /// <summary>
-    /// Test Infrastructure for AutoRest
+    /// Polymorphicrecursive operations.
     /// </summary>
     public partial interface IPolymorphicrecursive
     {

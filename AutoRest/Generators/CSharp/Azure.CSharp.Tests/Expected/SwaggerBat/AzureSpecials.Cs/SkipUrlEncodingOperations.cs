@@ -22,6 +22,9 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
     using Microsoft.Rest.Azure;
     using Models;
 
+    /// <summary>
+    /// SkipUrlEncodingOperations operations.
+    /// </summary>
     internal partial class SkipUrlEncodingOperations : IServiceOperations<AutoRestAzureSpecialParametersTestClient>, ISkipUrlEncodingOperations
     {
         /// <summary>

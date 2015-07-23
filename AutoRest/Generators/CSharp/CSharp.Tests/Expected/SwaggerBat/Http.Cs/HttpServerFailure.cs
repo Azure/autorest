@@ -21,6 +21,9 @@ namespace Fixtures.SwaggerBatHttp
     using Newtonsoft.Json;
     using Models;
 
+    /// <summary>
+    /// HttpServerFailure operations.
+    /// </summary>
     internal partial class HttpServerFailure : IServiceOperations<AutoRestHttpInfrastructureTestService>, IHttpServerFailure
     {
         /// <summary>

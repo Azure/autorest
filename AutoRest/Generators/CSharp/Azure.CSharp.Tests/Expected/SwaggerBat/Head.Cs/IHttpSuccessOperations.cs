@@ -17,7 +17,7 @@ namespace Fixtures.Azure.SwaggerBatHead
     using Microsoft.Rest.Azure;
 
     /// <summary>
-    /// Test Infrastructure for AutoRest
+    /// HttpSuccessOperations operations.
     /// </summary>
     public partial interface IHttpSuccessOperations
     {

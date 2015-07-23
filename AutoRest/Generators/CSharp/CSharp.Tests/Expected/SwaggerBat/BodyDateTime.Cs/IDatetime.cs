@@ -16,7 +16,7 @@ namespace Fixtures.SwaggerBatBodyDateTime
     using Models;
 
     /// <summary>
-    /// Test Infrastructure for AutoRest
+    /// Datetime operations.
     /// </summary>
     public partial interface IDatetime
     {

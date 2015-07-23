@@ -21,6 +21,9 @@ namespace Fixtures.SwaggerBatHttp
     using Newtonsoft.Json;
     using Models;
 
+    /// <summary>
+    /// HttpRedirects operations.
+    /// </summary>
     internal partial class HttpRedirects : IServiceOperations<AutoRestHttpInfrastructureTestService>, IHttpRedirects
     {
         /// <summary>

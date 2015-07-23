@@ -16,7 +16,7 @@ namespace Fixtures.SwaggerBatUrl
     using Models;
 
     /// <summary>
-    /// Test Infrastructure for AutoRest
+    /// Paths operations.
     /// </summary>
     public partial interface IPaths
     {

@@ -22,6 +22,9 @@ namespace Fixtures.Azure.SwaggerBatLro
     using Microsoft.Rest.Azure;
     using Models;
 
+    /// <summary>
+    /// DONOTCALLsOperations operations.
+    /// </summary>
     internal partial class DONOTCALLsOperations : IServiceOperations<AutoRestLongRunningOperationTestService>, IDONOTCALLsOperations
     {
         /// <summary>

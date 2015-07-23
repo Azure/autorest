@@ -22,6 +22,9 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
     using Microsoft.Rest.Azure;
     using Models;
 
+    /// <summary>
+    /// SubscriptionInCredentialsOperations operations.
+    /// </summary>
     internal partial class SubscriptionInCredentialsOperations : IServiceOperations<AutoRestAzureSpecialParametersTestClient>, ISubscriptionInCredentialsOperations
     {
         /// <summary>

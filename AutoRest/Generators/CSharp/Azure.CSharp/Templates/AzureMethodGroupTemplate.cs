@@ -88,75 +88,81 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    internal partial class ");
-#line 24 "AzureMethodGroupTemplate.cshtml"
+            WriteLiteral("\r\n    /// <summary>\r\n    /// ");
+#line 25 "AzureMethodGroupTemplate.cshtml"
+    Write(Model.MethodGroupType);
+
+#line default
+#line hidden
+            WriteLiteral(" operations.\r\n    /// </summary>\r\n    internal partial class ");
+#line 27 "AzureMethodGroupTemplate.cshtml"
                        Write(Model.MethodGroupType);
 
 #line default
 #line hidden
             WriteLiteral(" : IServiceOperations<");
-#line 24 "AzureMethodGroupTemplate.cshtml"
+#line 27 "AzureMethodGroupTemplate.cshtml"
                                                                      Write(Model.Name);
 
 #line default
 #line hidden
             WriteLiteral(">, I");
-#line 24 "AzureMethodGroupTemplate.cshtml"
+#line 27 "AzureMethodGroupTemplate.cshtml"
                                                                                       Write(Model.MethodGroupType);
 
 #line default
 #line hidden
             WriteLiteral("\r\n    {\r\n        /// <summary>\r\n        /// Initializes a new instance of the ");
-#line 27 "AzureMethodGroupTemplate.cshtml"
+#line 30 "AzureMethodGroupTemplate.cshtml"
                                           Write(Model.MethodGroupType);
 
 #line default
 #line hidden
             WriteLiteral(" class.\r\n        /// </summary>\r\n        /// <param name=\'client\'>\r\n        /// R" +
 "eference to the service client.\r\n        /// </param>\r\n        internal ");
-#line 32 "AzureMethodGroupTemplate.cshtml"
+#line 35 "AzureMethodGroupTemplate.cshtml"
              Write(Model.MethodGroupType);
 
 #line default
 #line hidden
             WriteLiteral("(");
-#line 32 "AzureMethodGroupTemplate.cshtml"
+#line 35 "AzureMethodGroupTemplate.cshtml"
                                       Write(Model.Name);
 
 #line default
 #line hidden
             WriteLiteral(" client)\r\n        {\r\n            this.Client = client;\r\n        }\r\n        ");
-#line 36 "AzureMethodGroupTemplate.cshtml"
+#line 39 "AzureMethodGroupTemplate.cshtml"
    Write(EmptyLine);
 
 #line default
 #line hidden
             WriteLiteral("\r\n        /// <summary>\r\n        /// Gets a reference to the ");
-#line 38 "AzureMethodGroupTemplate.cshtml"
+#line 41 "AzureMethodGroupTemplate.cshtml"
                                 Write(Model.Name);
 
 #line default
 #line hidden
             WriteLiteral("\r\n        /// </summary>\r\n        public ");
-#line 40 "AzureMethodGroupTemplate.cshtml"
+#line 43 "AzureMethodGroupTemplate.cshtml"
            Write(Model.Name);
 
 #line default
 #line hidden
             WriteLiteral(" Client { get; private set; }\r\n        ");
-#line 41 "AzureMethodGroupTemplate.cshtml"
+#line 44 "AzureMethodGroupTemplate.cshtml"
    Write(EmptyLine);
 
 #line default
 #line hidden
             WriteLiteral("\r\n");
-#line 42 "AzureMethodGroupTemplate.cshtml"
+#line 45 "AzureMethodGroupTemplate.cshtml"
         
 
 #line default
 #line hidden
 
-#line 42 "AzureMethodGroupTemplate.cshtml"
+#line 45 "AzureMethodGroupTemplate.cshtml"
          foreach (var method in Model.MethodTemplateModels)
         {
 
@@ -164,24 +170,24 @@ Write(EmptyLine);
 #line hidden
 
             WriteLiteral("        ");
-#line 44 "AzureMethodGroupTemplate.cshtml"
+#line 47 "AzureMethodGroupTemplate.cshtml"
       Write(Include(new AzureMethodTemplate(), (AzureMethodTemplateModel)method));
 
 #line default
 #line hidden
             WriteLiteral("\r\n");
-#line 45 "AzureMethodGroupTemplate.cshtml"
+#line 48 "AzureMethodGroupTemplate.cshtml"
         
 
 #line default
 #line hidden
 
-#line 45 "AzureMethodGroupTemplate.cshtml"
+#line 48 "AzureMethodGroupTemplate.cshtml"
    Write(EmptyLine);
 
 #line default
 #line hidden
-#line 45 "AzureMethodGroupTemplate.cshtml"
+#line 48 "AzureMethodGroupTemplate.cshtml"
                   
         }
 

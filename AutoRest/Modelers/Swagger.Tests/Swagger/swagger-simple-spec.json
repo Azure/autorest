@@ -112,6 +112,7 @@
   },
   "definitions": {
     "Product": {
+      "description": "The product documentation.",
       "properties": {
         "product_id": {
           "type": "string",

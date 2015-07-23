@@ -22,6 +22,9 @@ namespace Fixtures.Azure.SwaggerBatLro
     using Microsoft.Rest.Azure;
     using Models;
 
+    /// <summary>
+    /// LROsOperations operations.
+    /// </summary>
     internal partial class LROsOperations : IServiceOperations<AutoRestLongRunningOperationTestService>, ILROsOperations
     {
         /// <summary>

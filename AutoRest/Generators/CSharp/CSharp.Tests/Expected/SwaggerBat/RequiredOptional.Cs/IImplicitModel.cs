@@ -16,7 +16,7 @@ namespace Fixtures.SwaggerBatRequiredOptional
     using Models;
 
     /// <summary>
-    /// Test Infrastructure for AutoRest
+    /// ImplicitModel operations.
     /// </summary>
     public partial interface IImplicitModel
     {

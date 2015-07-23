@@ -18,7 +18,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
     using Models;
 
     /// <summary>
-    /// Test Infrastructure for AutoRest
+    /// XMsClientRequestIdOperations operations.
     /// </summary>
     public partial interface IXMsClientRequestIdOperations
     {

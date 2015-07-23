@@ -21,6 +21,9 @@ namespace Fixtures.SwaggerBatHttp
     using Newtonsoft.Json;
     using Models;
 
+    /// <summary>
+    /// MultipleResponses operations.
+    /// </summary>
     internal partial class MultipleResponses : IServiceOperations<AutoRestHttpInfrastructureTestService>, IMultipleResponses
     {
         /// <summary>

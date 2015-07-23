@@ -16,7 +16,7 @@ namespace Fixtures.SwaggerBatBodyInteger
     using Models;
 
     /// <summary>
-    /// Test Infrastructure for AutoRest
+    /// IntModel operations.
     /// </summary>
     public partial interface IIntModel
     {

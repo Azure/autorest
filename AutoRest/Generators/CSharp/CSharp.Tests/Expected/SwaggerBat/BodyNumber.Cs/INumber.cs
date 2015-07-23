@@ -16,7 +16,7 @@ namespace Fixtures.SwaggerBatBodyNumber
     using Models;
 
     /// <summary>
-    /// Test Infrastructure for AutoRest
+    /// Number operations.
     /// </summary>
     public partial interface INumber
     {

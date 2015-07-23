@@ -21,6 +21,9 @@ namespace Fixtures.SwaggerBatBodyFile
     using Newtonsoft.Json;
     using Models;
 
+    /// <summary>
+    /// Files operations.
+    /// </summary>
     internal partial class Files : IServiceOperations<AutoRestSwaggerBATFileService>, IFiles
     {
         /// <summary>

@@ -22,6 +22,9 @@ namespace Fixtures.Azure.SwaggerBatPaging
     using Microsoft.Rest.Azure;
     using Models;
 
+    /// <summary>
+    /// PagingOperations operations.
+    /// </summary>
     internal partial class PagingOperations : IServiceOperations<AutoRestPagingTestService>, IPagingOperations
     {
         /// <summary>

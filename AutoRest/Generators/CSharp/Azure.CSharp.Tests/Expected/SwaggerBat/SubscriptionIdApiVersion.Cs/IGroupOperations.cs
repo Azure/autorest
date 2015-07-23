@@ -18,7 +18,7 @@ namespace Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion
     using Models;
 
     /// <summary>
-    /// Some cool documentation.
+    /// GroupOperations operations.
     /// </summary>
     public partial interface IGroupOperations
     {

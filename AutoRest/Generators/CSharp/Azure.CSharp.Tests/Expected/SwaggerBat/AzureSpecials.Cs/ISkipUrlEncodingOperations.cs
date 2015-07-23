@@ -18,7 +18,7 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
     using Models;
 
     /// <summary>
-    /// Test Infrastructure for AutoRest
+    /// SkipUrlEncodingOperations operations.
     /// </summary>
     public partial interface ISkipUrlEncodingOperations
     {

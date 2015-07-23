@@ -22,6 +22,9 @@ namespace Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion
     using Microsoft.Rest.Azure;
     using Models;
 
+    /// <summary>
+    /// GroupOperations operations.
+    /// </summary>
     internal partial class GroupOperations : IServiceOperations<MicrosoftAzureTestUrl>, IGroupOperations
     {
         /// <summary>

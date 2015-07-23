@@ -21,6 +21,9 @@ namespace Fixtures.SwaggerBatBodyByte
     using Newtonsoft.Json;
     using Models;
 
+    /// <summary>
+    /// ByteModel operations.
+    /// </summary>
     internal partial class ByteModel : IServiceOperations<AutoRestSwaggerBATByteService>, IByteModel
     {
         /// <summary>
