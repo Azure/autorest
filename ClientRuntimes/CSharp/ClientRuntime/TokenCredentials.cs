@@ -90,7 +90,7 @@ namespace Microsoft.Rest
                 throw new InvalidOperationException(Resources.TokenProviderCannotBeNull);
             }
 
-            request.Headers.Authorization = new AuthenticationHeaderValue(TokenProvider.TokenType, await TokenProvider.GetAccessTokenAsync(cancellationToken).ConfigureAwait(false));
+            request.Headers.Authorization = await TokenProvider.GetAuthenticationHeaderAsync(cancellationToken);
             await Task.Run(() => base.ProcessHttpRequestAsync(request, cancellationToken), cancellationToken).ConfigureAwait(false);
         }
     }

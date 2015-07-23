@@ -24,7 +24,6 @@
     <Compile Include="AzureEnvironmentTest.cs" />
     <Compile Include="Fakes\FakeServiceClientWithCredentials.cs" />
     <Compile Include="Fakes\FakeServiceClient.cs" />
-    <Compile Include="Fakes\InMemoryTokenStore.cs" />
     <Compile Include="Fakes\PlaybackTestHandler.cs" />
     <Compile Include="Fakes\RecordedDelegatingHandler.cs" />
     <Compile Include="ODataTests.cs" />

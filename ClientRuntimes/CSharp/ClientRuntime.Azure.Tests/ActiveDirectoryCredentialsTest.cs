@@ -42,18 +42,18 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         public void UserCredentialsPopsDialog()
         {
             var credentials = new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
-                this._domain);
+                this._domain, new Uri("urn:ietf:wg:oauth:2.0:oob"));
             var client = new HttpClient();
 
             var request = new HttpRequestMessage(HttpMethod.Get,
                 new Uri("https://management.azure.com/subscriptions?api-version=2014-04-01-preview"));
             credentials.ProcessHttpRequestAsync(request, CancellationToken.None).Wait();
             Assert.NotNull(request.Headers.Authorization);
-            var response = client.SendAsync(request).Result;
+            var response = client.SendAsync(request).ConfigureAwait(false).GetAwaiter().GetResult();
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
-        [EnvironmentDependentFact(Skip = "Test hangs on CI server. Please fix it.")]
+        [EnvironmentDependentFact]
         public void OrgIdCredentialWorksWithoutDialog()
         {
             var credentials = new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
@@ -63,11 +63,11 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                 new Uri("https://management.azure.com/subscriptions?api-version=2014-04-01-preview"));
             credentials.ProcessHttpRequestAsync(request, CancellationToken.None).Wait();
             Assert.NotNull(request.Headers.Authorization);
-            var response = client.SendAsync(request).Result;
+            var response = client.SendAsync(request).ConfigureAwait(false).GetAwaiter().GetResult();
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
-        [EnvironmentDependentFact(Skip = "Test hangs on CI server. Please fix it.")]
+        [EnvironmentDependentFact]
         public void OrgIdCredentialsThrowsForInvalidCredentials()
         {
             var exception = Assert.Throws<AggregateException>(() => new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
@@ -92,13 +92,13 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         public void CredentialsConstructorThrowsForInvalidValues()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => new UserTokenCredentials(null,
-                "microsoft.onmicrosoft.com"));
+                "microsoft.onmicrosoft.com", new Uri("urn:ietf:wg:oauth:2.0:oob")));
             Assert.Throws<ArgumentOutOfRangeException>(() => new UserTokenCredentials(string.Empty,
-                 "microsoft.onmicrosoft.com"));
+                 "microsoft.onmicrosoft.com", new Uri("urn:ietf:wg:oauth:2.0:oob")));
             Assert.Throws<ArgumentOutOfRangeException>(() => new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
-                 null));
+                 null, new Uri("urn:ietf:wg:oauth:2.0:oob")));
             Assert.Throws<ArgumentOutOfRangeException>(() => new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
-                string.Empty));
+                string.Empty, new Uri("urn:ietf:wg:oauth:2.0:oob")));
             Assert.Throws<ArgumentOutOfRangeException>(() => new UserTokenCredentials(null,
                "rbactest.onmicrosoft.com", this._username, this._password));
             Assert.Throws<ArgumentOutOfRangeException>(() => new UserTokenCredentials(string.Empty,
@@ -117,26 +117,25 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                "rbactest.onmicrosoft.com", this._username, string.Empty));
         }
 
-        [EnvironmentDependentFact(Skip = "Test hangs on CI server. Please fix it.")]
+        [EnvironmentDependentFact]
         public void UserTokenProviderRefreshWorks()
         {
             var cache = new TestTokenCache();
-            var tokenStore = new InMemoryTokenStore(cache);
             var provider = new ActiveDirectoryUserTokenProvider("1950a258-227b-4e31-a9cf-717495945fc2",
-                this._domain, this._username, this._password, AzureEnvironment.Azure, tokenStore);
+                this._domain, this._username, this._password, AzureEnvironment.Azure, cache);
             cache.ForceTokenExpiry();
-            Assert.NotNull(provider.GetAccessTokenAsync(CancellationToken.None).Result);
+            Assert.NotNull(provider.GetAuthenticationHeaderAsync(CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult());
             var credentials = new TokenCredentials(provider);
             var client = new HttpClient();
             var request = new HttpRequestMessage(HttpMethod.Get,
                 new Uri("https://management.azure.com/subscriptions?api-version=2014-04-01-preview"));
             credentials.ProcessHttpRequestAsync(request, CancellationToken.None).Wait();
             Assert.NotNull(request.Headers.Authorization);
-            var response = client.SendAsync(request).Result;
+            var response = client.SendAsync(request).ConfigureAwait(false).GetAwaiter().GetResult();
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
-        [EnvironmentDependentFact(Skip = "Test hangs on CI server. Please fix it.")]
+        [EnvironmentDependentFact]
         public void ValidApplicationCredentialsAuthenticateCorrectly()
         {
             var credentials = new ApplicationTokenCredentials(
@@ -146,65 +145,43 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                 new Uri("https://management.azure.com/subscriptions?api-version=2014-04-01-preview"));
             credentials.ProcessHttpRequestAsync(request, CancellationToken.None).Wait();
             Assert.NotNull(request.Headers.Authorization);
-            var response = client.SendAsync(request).Result;
+            var response = client.SendAsync(request).ConfigureAwait(false).GetAwaiter().GetResult();
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
-        [EnvironmentDependentFact(Skip = "Test hangs on CI server. Please fix it.")]
+        [EnvironmentDependentFact]
         public void ApplicationCredentialsCanBeRenewed()
         {
             var cache = new TestTokenCache();
-            var tokenStore = new InMemoryTokenStore(cache);
             var provider = new ActiveDirectoryApplicationTokenProvider(this._applicationId, 
-                 this._domain, this._secret, AzureEnvironment.Azure, tokenStore);
+                 this._domain, this._secret, AzureEnvironment.Azure, cache);
             cache.ForceTokenExpiry();
             var credentials = new TokenCredentials(provider);
-            Assert.NotNull(provider.GetAccessTokenAsync(CancellationToken.None).Result);
+            Assert.NotNull(provider.GetAuthenticationHeaderAsync(CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult());
             var client = new HttpClient();
             var request = new HttpRequestMessage(HttpMethod.Get,
                 new Uri("https://management.azure.com/subscriptions?api-version=2014-04-01-preview"));
             credentials.ProcessHttpRequestAsync(request, CancellationToken.None).Wait();
             Assert.NotNull(request.Headers.Authorization);
-            var response = client.SendAsync(request).Result;
+            var response = client.SendAsync(request).ConfigureAwait(false).GetAwaiter().GetResult();
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
-        [EnvironmentDependentFact(Skip = "Test hangs on CI server. Please fix it.")]
-        public void CanAuthenticateApplicationWithTokenStore()
-        {
-            var store = new InMemoryTokenStore();
-            var provider = new ActiveDirectoryApplicationTokenProvider(this._applicationId, this._domain, this._secret,
-                AzureEnvironment.Azure, store);
-            var credentials = new TokenCredentials(provider);
-            var client = new HttpClient();
-            var request = new HttpRequestMessage(HttpMethod.Get,
-                new Uri("https://management.azure.com/subscriptions?api-version=2014-04-01-preview"));
-            credentials.ProcessHttpRequestAsync(request, CancellationToken.None).Wait();
-            Assert.NotNull(request.Headers.Authorization);
-            var response = client.SendAsync(request).Result;
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.Equal(2, store.BeginAccessNotifications.Count);
-            Assert.Equal(2, store.EndAccessNotifications.Count);
-            Assert.Equal(1, store.BeginWriteNotifications.Count);
-        }
-
-        [EnvironmentDependentFact(Skip = "Test hangs on CI server. Please fix it.")]
+        [EnvironmentDependentFact]
         public void CanAuthenticateUserWithTokenStore()
         {
-            var store = new InMemoryTokenStore();
+            var cache = new TokenCache();
             var provider = new ActiveDirectoryUserTokenProvider("1950a258-227b-4e31-a9cf-717495945fc2",
-                this._domain, this._username, this._password, AzureEnvironment.Azure, store);
+                this._domain, this._username, this._password, AzureEnvironment.Azure, cache);
             var credentials = new TokenCredentials(provider);
             var client = new HttpClient();
             var request = new HttpRequestMessage(HttpMethod.Get,
                 new Uri("https://management.azure.com/subscriptions?api-version=2014-04-01-preview"));
             credentials.ProcessHttpRequestAsync(request, CancellationToken.None).Wait();
             Assert.NotNull(request.Headers.Authorization);
-            var response = client.SendAsync(request).Result;
+            var response = client.SendAsync(request).ConfigureAwait(false).GetAwaiter().GetResult();
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.Equal(2, store.BeginAccessNotifications.Count);
-            Assert.Equal(2, store.EndAccessNotifications.Count);
-            Assert.Equal(1, store.BeginWriteNotifications.Count);
+            Assert.Equal(2, cache.Count);
        }
 
         class TestTokenCache : TokenCache
