@@ -77,10 +77,12 @@
   <PropertyGroup>
     <NuGetCommand Condition=" '$(OS)' == 'Windows_NT'">&quot;$(LibraryToolsFolder)\nuget.exe&quot;</NuGetCommand>
     <NuGetCommand Condition=" '$(OS)' != 'Windows_NT'">mono &quot;$(LibraryToolsFolder)\nuget.exe&quot;</NuGetCommand>
+    <NuGetSources>https://www.myget.org/F/xunit;https://www.nuget.org/api/v2/</NuGetSources>
    </PropertyGroup>
 
   <UsingTask AssemblyFile="tools\AutoRest.Build.Tasks.dll" TaskName="ValidateStrongNameSignatureTask" />
   <UsingTask AssemblyFile="tools\AutoRest.Build.Tasks.dll" TaskName="RegexReplaceTask" />
+  <UsingTask AssemblyFile="tools\AutoRest.Build.Tasks.dll" TaskName="SetEnvVar" />
 
   <!-- CI build related. -->
   <PropertyGroup>
@@ -114,7 +116,7 @@
 
   <!-- Project files import some targets coming from nuget packages, so need to restore them first to avoid errors
       such as "The imported project ....build\Microsoft.Bcl.Build.targets was not found. " -->
-  <Target Name="Clean" DependsOnTargets="RestoreNugetPackages">
+  <Target Name="Clean">
     <MSBuild Projects="$(ClientRuntimeSolution)"
              Properties="Configuration=%(LibraryFxTargetList.Identity)-$(Configuration);Platform=Any CPU"
              Targets="Clean"
@@ -141,9 +143,9 @@
 
   <!-- Run tests. -->
   <UsingTask TaskName="Xunit.Runner.MSBuild.xunit" AssemblyFile="packages\xunit.runner.msbuild.2.1.0-beta4-build3050\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.runner.msbuild.dll" />
-  <Target Name="Test">
+  <Target Name="Test" DependsOnTargets="RestoreNugetPackages">
     <CallTarget Targets="TestClientRuntime" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />
-    <CallTarget Targets="TestCodeGenerator" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
+    <!-- <CallTarget Targets="TestCodeGenerator" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" /> -->
     <CallTarget Targets="TestNuGetPackages" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
   </Target>
 
@@ -180,16 +182,17 @@
 
   <Target Name="TestNuGetPackages">
     <PropertyGroup>
-      <TestProjectDir>$(LibraryRoot)\AutoRest\Generators\AcceptanceTests\NugetPackageTest</TestProjectDir>
+      <TestProjectDir>$(LibraryRoot)AutoRest\Generators\AcceptanceTests\NugetPackageTest</TestProjectDir>
     </PropertyGroup>
 
     <!--install autorest and client runtime packages-->
-    <Exec Command="$(NuGetCommand) restore $(TestProjectDir)\NugetPackageTest.sln -source &quot;$(PackageOutputDir);https://www.nuget.org/api/v2/&quot;"/>
+    <Exec Command="$(NuGetCommand) restore $(TestProjectDir)\NugetPackageTest.sln -source &quot;$(PackageOutputDir);$(NuGetSources)&quot;"/>
     <ItemGroup>
-      <AutoRestExeFiles Include="$(TestProjectDir)\packages\autorest.*\tools\autorest.exe" />
+      <AutoRestExeFiles Include="$(TestProjectDir)\packages\autorest.*\tools\AutoRest.exe" />
     </ItemGroup>
     <PropertyGroup>
-      <AutoRestExe>@(AutoRestExeFiles->'%(FullPath)')</AutoRestExe>
+      <AutoRestExe Condition=" '$(OS)' == 'Windows_NT'">@(AutoRestExeFiles->'%(FullPath)')</AutoRestExe>
+      <AutoRestExe Condition=" '$(OS)' != 'Windows_NT'">mono @(AutoRestExeFiles->'%(FullPath)')</AutoRestExe>
     </PropertyGroup>
 
     <!--Invoke code-gen-->
@@ -276,8 +279,8 @@
   </Target>
 
   <Target Name="RestoreNugetPackages">
-    <Exec Command="$(NuGetCommand) restore $(ClientRuntimeSolution)" ContinueOnError="false" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />
-    <Exec Command="$(NuGetCommand) restore $(CodeGeneratorSolution)" ContinueOnError="false" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
+    <Exec Command="$(NuGetCommand) restore $(ClientRuntimeSolution) -source &quot;$(NuGetSources)&quot;" ContinueOnError="false" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />
+    <Exec Command="$(NuGetCommand) restore $(CodeGeneratorSolution) -source &quot;$(NuGetSources)&quot;" ContinueOnError="false" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
   </Target>
 
   <!-- Official releases require tools only available on corp network. -->

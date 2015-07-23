@@ -13,9 +13,9 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
     /// </summary>
     public class ServiceController : IDisposable
     {
-        private const string NpmCommand = "npm";
+        private const string NpmCommand = "npm.exe";
         private const string NpmArgument = "install";
-        private const string NodeCommand = "node";
+        private const string NodeCommand = "node.exe";
         private const string NodeArgument = "./startup/www";
 
         private ProcessOutputListener _listener;
@@ -79,9 +79,19 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         private static string GetPathToExecutable(string executableName)
         {
             var paths = Environment.GetEnvironmentVariable("PATH");
-            foreach (var path in paths.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries))
+            foreach (var path in paths.Split(new[] {Path.PathSeparator}, StringSplitOptions.RemoveEmptyEntries))
             {
-                var fullPath = Path.Combine(path, executableName);
+                var fullPath = "";
+                if(ServiceController.IsUnix)
+                {
+                    var exec = Path.GetExtension(executableName) == ".exe" ? Path.GetFileNameWithoutExtension(executableName) : executableName;
+                    fullPath = Path.Combine(path, exec);
+                }
+                else
+                {
+                    fullPath = Path.Combine(path, Path.GetFileName(executableName));
+                }
+
                 if (File.Exists(fullPath))
                 {
                     return fullPath;
@@ -89,6 +99,20 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             }
 
             return null;
+        }
+
+        private static bool IsUnix
+        {
+          get
+          {
+            int p = (int) Environment.OSVersion.Platform;
+            if ((p == 4) || (p == 128))
+            {
+                return true;
+            }
+
+            return false;
+          }
         }
 
         private static int GetRandomPortNumber()

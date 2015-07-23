@@ -41,7 +41,7 @@
     <Compile Include="TemplateModels\ParameterTemplateModel.cs" />
     <Compile Include="TemplateModels\PropertyTemplateModel.cs" />
     <Compile Include="TemplateModels\ModelTemplateModel.cs" />
-    <Compile Include="Templates\*.cs" />
+    <Compile Include="Templates\*.cs"/>
     <None Include="Templates\ExtensionMethodTemplate.cshtml" />
     <None Include="Templates\ExtensionsTemplate.cshtml" />
     <None Include="Templates\EnumTemplate.cshtml" />

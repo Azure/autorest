@@ -112,12 +112,13 @@
           DestinationFolder="$(_CodeSignDirectory)"/>
   </Target>
 
-  <Target Name="SyncPackageVersions" DependsOnTargets="BeforeBuild">
+  <Target Name="SyncPackageVersions" DependsOnTargets="CompileRazorTemplates">
     <!-- Update all explicit references to dependent versions. -->
     <Exec Command="gulp syncDotNetDependencies --basePath &quot;$(MSBuildProjectDirectory)&quot;" />
   </Target>
 
   <Target Name="CompileRazorTemplates" BeforeTargets="BeforeBuild">
+    <Message Text="Compiling Razor templates for project $(MSBuildProjectDirectory)" />
     <PropertyGroup>
       <RazorCommand Condition=" '$(OS)' == 'Windows_NT'">&quot;$(CommonRoot)\Tools\rzc.exe&quot;</RazorCommand>
       <RazorCommand Condition=" '$(OS)' != 'Windows_NT'">mono &quot;$(CommonRoot)\Tools\rzc.exe&quot;</RazorCommand>
@@ -125,6 +126,9 @@
     <Message Text="Compiling Razor templates for project $(MSBuildProjectDirectory)" />
     <!-- Compile razor template. -->
     <Exec Command="$(RazorCommand) &quot;$(MSBuildProjectDirectory)\Templates&quot; $(RootNamespace).Templates" />
+    <ItemGroup>
+      <Compile Include="$(MSBuildProjectDirectory)\Templates\*.cs"/>
+    </ItemGroup>
   </Target>
 
   <Target Name="TurnOffCodeAnalysis">

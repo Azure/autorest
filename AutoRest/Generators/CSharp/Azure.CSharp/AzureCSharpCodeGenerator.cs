@@ -6,6 +6,7 @@ using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.CSharp.Azure.Templates;
 using Microsoft.Rest.Generator.CSharp.Templates;
+using System.IO;
 
 namespace Microsoft.Rest.Generator.CSharp.Azure
 {
@@ -117,7 +118,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                     Model = new AzureModelTemplateModel(model),
                 };
 
-                await Write(modelTemplate, "Models\\" + model.Name + ".cs");
+                await Write(modelTemplate, Path.Combine("Models", model.Name + ".cs"));
             }
 
 
@@ -128,7 +129,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                 {
                     Model = new EnumTemplateModel(enumType),
                 };
-                await Write(enumTemplate, "Models\\" + enumTemplate.Model.TypeDefinitionName + ".cs");
+                await Write(enumTemplate, Path.Combine("Models", enumTemplate.Model.TypeDefinitionName + ".cs"));
             }
         }
     }
