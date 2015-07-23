@@ -5,7 +5,7 @@
 @EmptyLine
 module @Settings.Namespace
   #
-@WrapComment("# ", string.IsNullOrEmpty(Model.Documentation) ? Model.MethodGroupName : Model.Documentation)
+  @WrapComment("# ", string.IsNullOrEmpty(Model.Documentation) ? Model.MethodGroupName : Model.Documentation)
   #
   class @(Model.MethodGroupName)
 
@@ -14,7 +14,7 @@ module @Settings.Namespace
     # @@param client service class for accessing basic functionality.
     #
     def initialize(client)
-    @@client = client
+      @@client = client
     end
 
     @EmptyLine
@@ -24,8 +24,8 @@ module @Settings.Namespace
     @EmptyLine
     @foreach (var method in Model.MethodTemplateModels)
     {
-        @:@(Include(new AzureMethodTemplate(), method as AzureMethodTemplateModel))
-        @EmptyLine
+    @:@(Include(new AzureMethodTemplate(), method as AzureMethodTemplateModel))
+    @EmptyLine
     }
-    end
-    end
+  end
+end

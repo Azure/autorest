@@ -83,7 +83,9 @@ module @(Settings.Namespace)
         {
         @EmptyLine
         @:output_object['dtype'] = object.dtype
-        }    
+        }
+
+        @EmptyLine
         output_object
       end
 
@@ -97,10 +99,10 @@ module @(Settings.Namespace)
         return if object.nil?
 
         output_object = @(Model.Name).new
-        
+
         @foreach (var property in Model.ComposedProperties.OrderByDescending(x => x.IsRequired))
         {
-        @EmptyLine    
+        @EmptyLine
         @:deserialized_property = @(string.Format("object['{0}']", property.SerializedName))
         @:@Model.DeserializeProperty("deserialized_property", property.Type, property.IsRequired, Settings.Namespace)
         @:output_object.@(property.Name) = deserialized_property
@@ -111,8 +113,11 @@ module @(Settings.Namespace)
         @EmptyLine
         @:output_object.dtype = object['dtype']
         }
-    
+
+        @EmptyLine
         output_object.validate
+
+        @EmptyLine
         output_object
       end
 
