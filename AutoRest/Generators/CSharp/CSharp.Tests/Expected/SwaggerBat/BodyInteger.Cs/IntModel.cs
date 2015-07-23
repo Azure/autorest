@@ -21,6 +21,9 @@ namespace Fixtures.SwaggerBatBodyInteger
     using Newtonsoft.Json;
     using Models;
 
+    /// <summary>
+    /// IntModel operations.
+    /// </summary>
     internal partial class IntModel : IServiceOperations<AutoRestIntegerTestService>, IIntModel
     {
         /// <summary>

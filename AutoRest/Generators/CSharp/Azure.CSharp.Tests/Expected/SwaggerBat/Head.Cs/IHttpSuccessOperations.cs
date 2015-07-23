@@ -14,10 +14,10 @@ namespace Fixtures.Azure.SwaggerBatHead
     using System.Threading.Tasks;
     using Microsoft.Rest;
     using System.Linq;
-    using Microsoft.Azure;
+    using Microsoft.Rest.Azure;
 
     /// <summary>
-    /// Test Infrastructure for AutoRest
+    /// HttpSuccessOperations operations.
     /// </summary>
     public partial interface IHttpSuccessOperations
     {

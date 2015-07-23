@@ -21,6 +21,9 @@ namespace Fixtures.SwaggerBatBodyComplex
     using Newtonsoft.Json;
     using Models;
 
+    /// <summary>
+    /// Polymorphicrecursive operations.
+    /// </summary>
     internal partial class Polymorphicrecursive : IServiceOperations<AutoRestComplexTestService>, IPolymorphicrecursive
     {
         /// <summary>

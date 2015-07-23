@@ -21,6 +21,9 @@ namespace Fixtures.SwaggerBatUrl
     using Newtonsoft.Json;
     using Models;
 
+    /// <summary>
+    /// PathItems operations.
+    /// </summary>
     internal partial class PathItems : IServiceOperations<AutoRestUrlTestService>, IPathItems
     {
         /// <summary>

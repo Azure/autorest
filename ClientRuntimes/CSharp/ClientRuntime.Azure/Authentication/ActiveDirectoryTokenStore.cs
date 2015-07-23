@@ -5,7 +5,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using System;
 
-namespace Microsoft.Azure.Authentication
+namespace Microsoft.Rest.Azure.Authentication
 {
     /// <summary>
     /// An abstract store for active directory token data.  Can be used to persist token metadata across 

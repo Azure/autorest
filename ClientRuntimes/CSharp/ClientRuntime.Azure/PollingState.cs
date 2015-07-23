@@ -5,12 +5,12 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using Microsoft.Azure.Properties;
+using Microsoft.Rest.Azure.Properties;
 using Microsoft.Rest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Microsoft.Azure
+namespace Microsoft.Rest.Azure
 {
     /// <summary>
     /// Defines long running operation polling state.

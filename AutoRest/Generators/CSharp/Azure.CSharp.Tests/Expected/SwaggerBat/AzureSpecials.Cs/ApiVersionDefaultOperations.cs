@@ -19,9 +19,12 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
     using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Linq;
-    using Microsoft.Azure;
+    using Microsoft.Rest.Azure;
     using Models;
 
+    /// <summary>
+    /// ApiVersionDefaultOperations operations.
+    /// </summary>
     internal partial class ApiVersionDefaultOperations : IServiceOperations<AutoRestAzureSpecialParametersTestClient>, IApiVersionDefaultOperations
     {
         /// <summary>

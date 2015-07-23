@@ -16,7 +16,7 @@ namespace Fixtures.SwaggerBatBodyString
     using Models;
 
     /// <summary>
-    /// Test Infrastructure for AutoRest Swagger BAT
+    /// EnumModel operations.
     /// </summary>
     public partial interface IEnumModel
     {

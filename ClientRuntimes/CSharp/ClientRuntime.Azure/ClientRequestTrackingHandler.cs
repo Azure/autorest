@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Threading;
 
-namespace Microsoft.Azure
+namespace Microsoft.Rest.Azure
 {
     /// <summary>
     /// Enables adding a correlation id to messages so that messages that are part of a long-running

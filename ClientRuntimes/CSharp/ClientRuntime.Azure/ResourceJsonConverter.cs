@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 
-namespace Microsoft.Azure
+namespace Microsoft.Rest.Azure
 {
     /// <summary>
     /// JsonConverter that provides custom serialization for resource-based objects.

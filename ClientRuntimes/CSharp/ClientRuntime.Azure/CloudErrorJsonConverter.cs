@@ -5,7 +5,7 @@ using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Microsoft.Azure
+namespace Microsoft.Rest.Azure
 {
     /// <summary>
     /// JsonConverter that provides custom deserialization for CloudError objects.

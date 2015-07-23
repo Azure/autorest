@@ -5,7 +5,7 @@
     Microsoft.Rest.ClientRuntime.Azure
     -->
     <SdkNuGetPackage Include="Microsoft.Rest.ClientRuntime.Azure">
-      <PackageVersion>1.0.16-preview</PackageVersion>
+      <PackageVersion>1.0.17-preview</PackageVersion>
       <Folder>$(MSBuildThisFileDirectory)</Folder>
       <Hidden>true</Hidden>
     </SdkNuGetPackage>

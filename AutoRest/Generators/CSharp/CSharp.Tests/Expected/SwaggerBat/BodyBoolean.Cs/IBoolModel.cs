@@ -16,7 +16,7 @@ namespace Fixtures.SwaggerBatBodyBoolean
     using Models;
 
     /// <summary>
-    /// Test Infrastructure for AutoRest
+    /// BoolModel operations.
     /// </summary>
     public partial interface IBoolModel
     {

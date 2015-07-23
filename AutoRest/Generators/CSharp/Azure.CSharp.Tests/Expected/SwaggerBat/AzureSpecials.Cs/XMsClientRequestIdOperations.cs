@@ -19,9 +19,12 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
     using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Linq;
-    using Microsoft.Azure;
+    using Microsoft.Rest.Azure;
     using Models;
 
+    /// <summary>
+    /// XMsClientRequestIdOperations operations.
+    /// </summary>
     internal partial class XMsClientRequestIdOperations : IServiceOperations<AutoRestAzureSpecialParametersTestClient>, IXMsClientRequestIdOperations
     {
         /// <summary>

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
 
-namespace Microsoft.Azure
+namespace Microsoft.Rest.Azure
 {
     public static class JsonSerializerExtensions
     {

@@ -16,7 +16,7 @@ namespace Fixtures.SwaggerBatBodyComplex
     using Models;
 
     /// <summary>
-    /// Test Infrastructure for AutoRest
+    /// BasicOperations operations.
     /// </summary>
     public partial interface IBasicOperations
     {

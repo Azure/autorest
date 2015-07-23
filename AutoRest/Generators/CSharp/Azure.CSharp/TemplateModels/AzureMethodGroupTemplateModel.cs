@@ -38,9 +38,9 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                         p.Location == ParameterLocation.Query)))
                 {
                     yield return "System.Linq.Expressions";
-                    yield return "Microsoft.Azure.OData";
+                    yield return "Microsoft.Rest.Azure.OData";
                 }
-                yield return "Microsoft.Azure";
+                yield return "Microsoft.Rest.Azure";
 
                 if (this.ModelTypes.Any(m => !m.Extensions.ContainsKey(AzureCodeGenerator.ExternalExtension)))
                 {

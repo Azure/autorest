@@ -16,7 +16,7 @@ namespace Fixtures.SwaggerBatBodyByte
     using Models;
 
     /// <summary>
-    /// Test Infrastructure for AutoRest Swagger BAT
+    /// ByteModel operations.
     /// </summary>
     public partial interface IByteModel
     {

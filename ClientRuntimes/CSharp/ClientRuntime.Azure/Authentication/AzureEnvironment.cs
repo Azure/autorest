@@ -2,9 +2,9 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using Microsoft.Azure.Properties;
+using Microsoft.Rest.Azure.Properties;
 
-namespace Microsoft.Azure.Authentication
+namespace Microsoft.Rest.Azure.Authentication
 {
     /// <summary>
     /// Settings for authentication with an Azure or Azure Stack service

@@ -16,7 +16,7 @@ namespace Fixtures.SwaggerBatHttp
     using Models;
 
     /// <summary>
-    /// Test Infrastructure for AutoRest
+    /// HttpRetry operations.
     /// </summary>
     public partial interface IHttpRetry
     {

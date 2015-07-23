@@ -21,6 +21,9 @@ namespace Fixtures.SwaggerBatBodyArray
     using Newtonsoft.Json;
     using Models;
 
+    /// <summary>
+    /// Array operations.
+    /// </summary>
     internal partial class Array : IServiceOperations<AutoRestSwaggerBATArrayService>, IArray
     {
         /// <summary>

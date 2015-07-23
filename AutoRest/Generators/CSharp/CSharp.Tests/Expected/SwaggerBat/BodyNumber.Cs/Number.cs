@@ -21,6 +21,9 @@ namespace Fixtures.SwaggerBatBodyNumber
     using Newtonsoft.Json;
     using Models;
 
+    /// <summary>
+    /// Number operations.
+    /// </summary>
     internal partial class Number : IServiceOperations<AutoRestNumberTestService>, INumber
     {
         /// <summary>

@@ -14,11 +14,11 @@ namespace Fixtures.Azure.SwaggerBatAzureSpecials
     using System.Threading.Tasks;
     using Microsoft.Rest;
     using System.Linq;
-    using Microsoft.Azure;
+    using Microsoft.Rest.Azure;
     using Models;
 
     /// <summary>
-    /// Test Infrastructure for AutoRest
+    /// SkipUrlEncodingOperations operations.
     /// </summary>
     public partial interface ISkipUrlEncodingOperations
     {

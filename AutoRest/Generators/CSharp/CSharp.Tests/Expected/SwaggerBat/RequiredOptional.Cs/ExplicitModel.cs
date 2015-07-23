@@ -21,6 +21,9 @@ namespace Fixtures.SwaggerBatRequiredOptional
     using Newtonsoft.Json;
     using Models;
 
+    /// <summary>
+    /// ExplicitModel operations.
+    /// </summary>
     internal partial class ExplicitModel : IServiceOperations<AutoRestRequiredOptionalTestService>, IExplicitModel
     {
         /// <summary>

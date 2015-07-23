@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Rest;
 using Microsoft.Azure;
-using Microsoft.Azure.Authentication;
+using Microsoft.Rest.Azure.Authentication;
 using System.Collections.Generic;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 
