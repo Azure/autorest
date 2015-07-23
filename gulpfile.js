@@ -1,12 +1,15 @@
 var gulp = require('gulp');
 var path = require('path');
+var fs = require('fs');
 var debug = require('gulp-debug');
 var glob = require('glob');
 var spawn = require('child_process').spawn;
 var assemblyInfo = require('gulp-dotnet-assembly-info');
 var nuspecSync = require('./Tools/gulp/gulp-nuspec-sync');
 var nugetProjSync = require('./Tools/gulp/gulp-nuget-proj-sync');
+var del = require('del');
 var gutil = require('gulp-util');
+var runSequence = require('run-sequence');
 
 var isWin = /^win/.test(process.platform);
 
@@ -28,26 +31,42 @@ function runProcess(name, args, options, cb){
 
   var child = spawn(name, args, { stdio: ['pipe', process.stdout, process.stderr] });
 
+  child.on('error', function(err){
+    cb(err);
+  });
+
   child.on('close', function(code) {
-    gutil.log("Done with exit code", code);
-    cb();
+    var message = "Done with exit code " + code;
+    gutil.log(message);
+    if(code != 0){
+      cb(message)
+    } else {
+      cb();
+    }
   });
 }
 
 // Clean related tasks
 
-gulp.task('cleanBuild', function(cb) {
+gulp.task('clean:build', function(cb) {
   runProcess(csharpBuild, ['build.proj', '/t:clean'], cb);
 });
 
-gulp.task('cleanTemplates', function(cb) {
-  glob('./AutoRest/**/Templates/*.cs', function(files){
-    (files || []).forEach(function(file) { fs.unlink(file) });
-    cb();
-  });
+gulp.task('clean:templates', function(cb) {
+  del([
+    './AutoRest/**/Templates/*.cs',
+  ], cb);
 });
 
-gulp.task('clean', ['cleanBuild', 'cleanTemplates']);
+gulp.task('clean:generatedTest', function(cb) {
+  var basePath = './AutoRest/Generators/AcceptanceTests/NugetPackageTest';
+  del([
+    path.join(basePath, 'Generated/**/*'),
+    path.join(basePath, 'packages/**/*'),
+  ], cb);
+});
+
+gulp.task('clean', ['clean:build', 'clean:templates', 'clean:generatedTest']);
 
 // Build related tasks
 
@@ -98,4 +117,9 @@ gulp.task('package', function(cb) {
 
 gulp.task('test', function(cb) {
   runProcess(csharpBuild, ['build.proj', '/t:test'], cb);
+});
+
+
+gulp.task('default', function(cb){
+  runSequence('clean', 'build', ['package', 'test'], cb);
 });

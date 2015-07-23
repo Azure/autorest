@@ -20,12 +20,14 @@
   },
   "homepage": "https://github.com/Azure/autorest#readme",
   "devDependencies": {
+    "del": "^1.2.0",
     "glob": "^5.0.13",
     "gulp": "^3.9.0",
     "gulp-debug": "^2.0.1",
     "gulp-dotnet-assembly-info": "^0.1.10",
     "gulp-spawn": "^0.3.0",
     "gulp-util": "^3.0.6",
+    "run-sequence": "^1.1.2",
     "through2": "^2.0.0",
     "xml2js": "^0.4.9"
   }
