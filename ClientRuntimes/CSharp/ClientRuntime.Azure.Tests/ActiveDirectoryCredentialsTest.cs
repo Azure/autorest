@@ -16,6 +16,7 @@ using Microsoft.Rest.ClientRuntime.Azure.Test.Fakes;
 
 namespace Microsoft.Rest.ClientRuntime.Azure.Test
 {
+    [Collection("ADAL Test Collection")]
     public class ActiveDirectoryCredentialsTest
     {
         private string _username;

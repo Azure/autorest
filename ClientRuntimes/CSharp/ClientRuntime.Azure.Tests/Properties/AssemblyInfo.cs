@@ -17,4 +17,4 @@ using Xunit;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: NeutralResourcesLanguage("en")]
-[assembly: CollectionBehavior(DisableTestParallelization = true, MaxParallelThreads = 1)]
+[assembly: CollectionBehavior(DisableTestParallelization = true)]
