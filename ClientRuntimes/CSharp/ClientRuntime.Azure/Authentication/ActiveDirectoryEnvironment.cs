@@ -9,18 +9,18 @@ namespace Microsoft.Rest.Azure.Authentication
     /// <summary>
     /// Settings for authentication with an Azure or Azure Stack service
     /// </summary>
-    public sealed class AzureEnvironment
+    public sealed class ActiveDirectoryEnvironment
     {
         private Uri _authenticationEndpoint;
 
-        private static readonly AzureEnvironment AzureSettings = new AzureEnvironment
+        private static readonly ActiveDirectoryEnvironment AzureSettings = new ActiveDirectoryEnvironment
         {
             AuthenticationEndpoint= new Uri("https://login.windows.net/"), 
             TokenAudience = new Uri("https://management.core.windows.net/"),
             ValidateAuthority = true
         };
 
-        private static readonly AzureEnvironment AzureChinaSettings = new AzureEnvironment
+        private static readonly ActiveDirectoryEnvironment AzureChinaSettings = new ActiveDirectoryEnvironment
         {
             AuthenticationEndpoint= new Uri("https://login.chinacloudapi.cn/"), 
             TokenAudience = new Uri("https://management.core.chinacloudapi.cn/"),
@@ -30,12 +30,12 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <summary>
         /// Gets the settings for authentication with Azure
         /// </summary>
-        public static AzureEnvironment Azure { get { return AzureSettings; } }
+        public static ActiveDirectoryEnvironment Azure { get { return AzureSettings; } }
 
         /// <summary>
         /// Gets the settings for authentication with Azure China
         /// </summary>
-        public static AzureEnvironment AzureChina { get { return AzureChinaSettings; } }
+        public static ActiveDirectoryEnvironment AzureChina { get { return AzureChinaSettings; } }
 
         /// <summary>
         /// Gets or sets the ActiveDirectory Endpoint for the Azure Environment

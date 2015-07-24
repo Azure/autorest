@@ -40,7 +40,7 @@
     <Compile Include="Authentication\ActiveDirectoryApplicationTokenProvider.cs" />
     <Compile Include="Authentication\ActiveDirectoryUserTokenProvider.cs" />
     <Compile Include="Authentication\ApplicationTokenCredentials.cs" />
-    <Compile Include="Authentication\AzureEnvironment.cs" />
+    <Compile Include="Authentication\ActiveDirectoryEnvironment.cs" />
     <Compile Include="Authentication\UserTokenCredentials.cs" />
     <Compile Include="Authentication\AuthenticationException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
