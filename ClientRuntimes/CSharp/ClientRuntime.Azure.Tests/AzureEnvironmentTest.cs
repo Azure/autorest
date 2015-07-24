@@ -18,7 +18,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [InlineData("https://www.contoso.com:8080/widgets")]
        public void AzureEnvironmentAddsSlashToEndpoints(string inputUri)
         {
-            var testEnvironment = new AzureEnvironment
+            var testEnvironment = new ActiveDirectoryEnvironment
             {
                 ValidateAuthority = true,
                 TokenAudience = new Uri("https://contoso.com/widgets/"),
@@ -35,7 +35,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [InlineData("https://www.contoso.com:8080/widgets/")]
        public void AzureEnvironmentDoesNotDuplicateSlash(string inputUri)
         {
-            var testEnvironment = new AzureEnvironment
+            var testEnvironment = new ActiveDirectoryEnvironment
             {
                 ValidateAuthority = true,
                 TokenAudience = new Uri("https://contoso.com/widgets/"),
@@ -49,7 +49,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [InlineData("https://www.contoso.com/widgets/?widget=blue&color=yellow")]
         public void AzureEnvironmentRejectsInvalidUris(string inputUri)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new AzureEnvironment
+            Assert.Throws<ArgumentOutOfRangeException>(() => new ActiveDirectoryEnvironment
             {
                 ValidateAuthority = true,
                 TokenAudience = new Uri("https://contoso.com/widgets/"),
@@ -60,7 +60,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void AzureEnvironmenThrowsOnNullUri()
         {
-            Assert.Throws<ArgumentNullException>(() => new AzureEnvironment
+            Assert.Throws<ArgumentNullException>(() => new ActiveDirectoryEnvironment
             {
                 ValidateAuthority = true,
                 TokenAudience = new Uri("https://contoso.com/widgets/"),

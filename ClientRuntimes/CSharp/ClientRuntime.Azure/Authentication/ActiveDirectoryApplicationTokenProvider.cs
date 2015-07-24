@@ -30,7 +30,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="domain">The domain or tenant id for the application.</param>
         /// <param name="secret">The application secret, used for authentication.</param>
         /// <param name="environment">The Azure environment to manage resources in.</param>
-        public ActiveDirectoryApplicationTokenProvider(string clientId, string domain, string secret, AzureEnvironment environment)
+        public ActiveDirectoryApplicationTokenProvider(string clientId, string domain, string secret, ActiveDirectoryEnvironment environment)
             : this(clientId, domain, secret, environment, cache: null)
         {
         }
@@ -45,7 +45,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="secret">The application secret, used for authentication.</param>
         /// <param name="environment">The Azure environment to manage resources in.</param>
         /// <param name="cache">The ADAL token cache to use during authentication.</param>
-        public ActiveDirectoryApplicationTokenProvider(string clientId, string domain, string secret, AzureEnvironment environment, TokenCache cache) 
+        public ActiveDirectoryApplicationTokenProvider(string clientId, string domain, string secret, ActiveDirectoryEnvironment environment, TokenCache cache) 
         {
             Initialize(clientId, domain, secret, environment, cache);
         }
@@ -78,7 +78,7 @@ namespace Microsoft.Rest.Azure.Authentication
             }
         }
 
-        private void Initialize(string clientId, string domain, string secret, AzureEnvironment environment, 
+        private void Initialize(string clientId, string domain, string secret, ActiveDirectoryEnvironment environment, 
             TokenCache cache)
         {
             if (string.IsNullOrWhiteSpace(secret))

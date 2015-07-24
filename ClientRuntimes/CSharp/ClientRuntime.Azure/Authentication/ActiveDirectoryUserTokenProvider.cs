@@ -24,7 +24,7 @@ namespace Microsoft.Rest.Azure.Authentication
         private const string EnableEbdMagicCookie = "site_id=501358&display=popup";
         private string _userId;
         private string _password;
-        private AzureEnvironment _environment;
+        private ActiveDirectoryEnvironment _environment;
         private AuthenticationContext _authenticationContext;
         private IPlatformParameters _platformParameters;
         private Uri _clientRedirectUri;
@@ -39,7 +39,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="clientRedirectUri">The redirect URI for authentication requests for 
         /// this client application.</param>
         public ActiveDirectoryUserTokenProvider(string clientId, string domain, Uri clientRedirectUri)
-            : this(clientId, domain, AzureEnvironment.Azure, clientRedirectUri, null, null)
+            : this(clientId, domain, ActiveDirectoryEnvironment.Azure, clientRedirectUri, null, null)
         {
         }
 
@@ -55,7 +55,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="platformParameters">The ADAL platform parameter.</param>
         /// <param name="cache">The ADAL token cache to use during authentication.</param>
         public ActiveDirectoryUserTokenProvider(string clientId, string domain,
-            AzureEnvironment environment, Uri clientRedirectUri, 
+            ActiveDirectoryEnvironment environment, Uri clientRedirectUri, 
             IPlatformParameters platformParameters, TokenCache cache)
         {
             Initialize(clientId:clientId, 
@@ -78,7 +78,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="username">The username to use for authentication.</param>
         /// <param name="password">The secret password associated with this user.</param>
         public ActiveDirectoryUserTokenProvider(string clientId, string domain, string username, string password)
-            : this(clientId, domain, username, password, environment: AzureEnvironment.Azure, cache: null)
+            : this(clientId, domain, username, password, environment: ActiveDirectoryEnvironment.Azure, cache: null)
         {
         }
 
@@ -93,7 +93,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="environment">The azure environment to manage resources in.</param>
         /// <param name="cache">The ADAL token cache to use during authentication.</param>
         public ActiveDirectoryUserTokenProvider(string clientId, string domain, string username, string password,
-            AzureEnvironment environment, TokenCache cache)
+            ActiveDirectoryEnvironment environment, TokenCache cache)
         {
             Initialize(clientId: clientId,
                 username: username,
@@ -133,7 +133,7 @@ namespace Microsoft.Rest.Azure.Authentication
         }
 
         private void Initialize(string clientId, string domain, string username, string password,
-            AzureEnvironment environment, TokenCache cache, IPlatformParameters platformParameters, 
+            ActiveDirectoryEnvironment environment, TokenCache cache, IPlatformParameters platformParameters, 
             Uri clientRedirectUri)
         {
             if (string.IsNullOrWhiteSpace(clientId))
@@ -167,7 +167,7 @@ namespace Microsoft.Rest.Azure.Authentication
             this._clientRedirectUri = clientRedirectUri;
         }
 
-        private async Task<AuthenticationResult> Authenticate(string username, string password, AzureEnvironment environment)
+        private async Task<AuthenticationResult> Authenticate(string username, string password, ActiveDirectoryEnvironment environment)
         {
             return await this._authenticationContext.AcquireTokenAsync(
                 environment.TokenAudience.ToString(), 
@@ -175,7 +175,7 @@ namespace Microsoft.Rest.Azure.Authentication
                 new UserCredential(username, password)).ConfigureAwait(false);
         }
 
-        private async Task<AuthenticationResult> Authenticate(AzureEnvironment environment,  
+        private async Task<AuthenticationResult> Authenticate(ActiveDirectoryEnvironment environment,  
             IPlatformParameters platformParameters, Uri clientRedirectUri)
         {
             return await this._authenticationContext.AcquireTokenAsync(
@@ -187,7 +187,7 @@ namespace Microsoft.Rest.Azure.Authentication
                     EnableEbdMagicCookie).ConfigureAwait(false);
         }
 
-        private static AuthenticationContext GetAuthenticationContext(string domain, AzureEnvironment environment, TokenCache cache)
+        private static AuthenticationContext GetAuthenticationContext(string domain, ActiveDirectoryEnvironment environment, TokenCache cache)
         {
             return cache == null
                 ? new AuthenticationContext(environment.AuthenticationEndpoint + domain,

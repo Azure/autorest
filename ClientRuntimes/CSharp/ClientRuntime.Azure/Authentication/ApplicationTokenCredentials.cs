@@ -20,7 +20,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="domain">The domain or tenant id containing this application.</param>
         /// <param name="secret">The authentication secret for the application.</param>
         public ApplicationTokenCredentials(string clientId, string domain, string secret)
-            : this(clientId, domain, secret, AzureEnvironment.Azure)
+            : this(clientId, domain, secret, ActiveDirectoryEnvironment.Azure)
         {
         }
 
@@ -30,9 +30,9 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="clientId">The active directory application client id.</param>
         /// <param name="domain">The domain or tenant id containing this application.</param>
         /// <param name="secret">The authentication secret for the application.</param>
-        /// <param name="azureEnvironment">The azure environment to authenticate with.</param>
-        public ApplicationTokenCredentials(string clientId, string domain, string secret, AzureEnvironment azureEnvironment)
-            : base(new ActiveDirectoryApplicationTokenProvider(clientId, domain, secret, azureEnvironment))
+        /// <param name="activeDirectoryEnvironment">The azure environment to authenticate with.</param>
+        public ApplicationTokenCredentials(string clientId, string domain, string secret, ActiveDirectoryEnvironment activeDirectoryEnvironment)
+            : base(new ActiveDirectoryApplicationTokenProvider(clientId, domain, secret, activeDirectoryEnvironment))
         {
         }
     }
