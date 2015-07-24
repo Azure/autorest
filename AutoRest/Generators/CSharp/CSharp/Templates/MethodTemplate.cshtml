@@ -97,8 +97,11 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     {
         <text>
     // Set Credentials
-    cancellationToken.ThrowIfCancellationRequested();
-    await @(Model.ClientReference).Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+    if (@(Model.ClientReference).Credentials != null)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        await @(Model.ClientReference).Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+    }
         </text>
     }
 
