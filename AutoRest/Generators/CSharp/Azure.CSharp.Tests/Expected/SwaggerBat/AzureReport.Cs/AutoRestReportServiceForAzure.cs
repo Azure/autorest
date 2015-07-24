@@ -244,8 +244,11 @@ namespace Fixtures.Azure.SwaggerBatAzureReport
             }
 
             // Set Credentials
-            cancellationToken.ThrowIfCancellationRequested();
-            await this.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            if (this.Credentials != null)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                await this.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            }
             // Send Request
             if (shouldTrace)
             {
