@@ -22,6 +22,7 @@ var AzureEnvironment = require('../azureEnvironment');
 * @param {object} [options] Object representing optional parameters.
 * @param {AzureEnvironment} [options.environment] The azure environment to authenticate with.
 * @param {string} [options.authorizationScheme] The authorization scheme. Default value is 'bearer'.
+* @param {object} [options.tokenCache] The token cache. Default value is null.
 */
 function UserTokenCredentials(clientId, domain, username, password, clientRedirectUri, options) {
   if (!Boolean(clientId) || typeof clientId !== 'string') {
@@ -43,19 +44,24 @@ function UserTokenCredentials(clientId, domain, username, password, clientRedire
   if (!Boolean(clientRedirectUri) || typeof clientRedirectUri !== 'string') {
     throw new Error('clientRedirectUri cannot be null.');
   }
-  
-  if (!(options && options.environment)) {
+
+  if (!options) {
+    options = {};
+  }
+
+  if (!options.environment) {
     this.environment = AzureEnvironment.Azure;
   } else {
     this.environment = options.environment;
   }
   
-  if (!(options && options.authorizationScheme)) {
+  if (!options.authorizationScheme) {
     this.authorizationScheme = 'Bearer';
   } else {
     this.authorizationScheme = options.authorizationScheme;
   }
   
+  this.tokenCache = options.tokenCache;
   this.clientId = clientId;
   this.domain = domain;
   this.username = username;
@@ -73,9 +79,9 @@ util.inherits(UserTokenCredentials, msrest.TokenCredentials);
 * @return {undefined}
 */
 UserTokenCredentials.prototype.signRequest = function (webResource, callback) {
-  var self = this; 
+  var self = this;
   var authorityUrl = self.environment.authenticationEndpoint + self.domain;
-  var context = new adal.AuthenticationContext(authorityUrl, self.environment.validateAuthority /*,exports.tokenCache*/);
+  var context = new adal.AuthenticationContext(authorityUrl, self.environment.validateAuthority, self.tokenCache);
   
   context.acquireTokenWithUsernamePassword(self.environment.tokenAudience, self.username, self.password, self.clientId, function (err, result) {
     if (err) {

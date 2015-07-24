@@ -19,6 +19,7 @@ var AzureEnvironment = require('../azureEnvironment');
 * @param {object} [options] Object representing optional parameters.
 * @param {AzureEnvironment} [options.environment] The azure environment to authenticate with.
 * @param {string} [options.authorizationScheme] The authorization scheme. Default value is 'bearer'.
+* @param {object} [options.tokenCache] The token cache. Default value is null.
 */
 function ApplicationTokenCredentials(clientId, domain, secret, options) {
   if (!Boolean(clientId) || typeof clientId !== 'string') {
@@ -33,18 +34,23 @@ function ApplicationTokenCredentials(clientId, domain, secret, options) {
     throw new Error('secret must be a non empty string.');
   }
   
-  if (!(options && options.environment)) {
+  if (!options) {
+    options = {};
+  }
+  
+  if (!options.environment) {
     this.environment = AzureEnvironment.Azure;
   } else {
     this.environment = options.environment;
   }
   
-  if (!(options && options.authorizationScheme)) {
+  if (!options.authorizationScheme) {
     this.authorizationScheme = 'Bearer';
   } else {
     this.authorizationScheme = options.authorizationScheme;
   }
   
+  this.tokenCache = options.tokenCache;
   this.clientId = clientId;
   this.domain = domain;
   this.secret = secret;
@@ -61,9 +67,9 @@ util.inherits(ApplicationTokenCredentials, msrest.TokenCredentials);
 * @return {undefined}
 */
 ApplicationTokenCredentials.prototype.signRequest = function (webResource, callback) {
-  var self = this; 
+  var self = this;
   var authorityUrl = self.environment.authenticationEndpoint + self.domain;
-  var context = new adal.AuthenticationContext(authorityUrl, self.environment.validateAuthority /*,exports.tokenCache*/);
+  var context = new adal.AuthenticationContext(authorityUrl, self.environment.validateAuthority, self.tokenCache);
   
   context.acquireTokenWithClientCredentials(self.environment.tokenAudience, self.clientId, self.secret, function (err, result) {
     if (err) {
