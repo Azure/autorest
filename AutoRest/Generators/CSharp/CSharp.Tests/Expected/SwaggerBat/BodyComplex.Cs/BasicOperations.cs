@@ -21,6 +21,9 @@ namespace Fixtures.SwaggerBatBodyComplex
     using Newtonsoft.Json;
     using Models;
 
+    /// <summary>
+    /// BasicOperations operations.
+    /// </summary>
     internal partial class BasicOperations : IServiceOperations<AutoRestComplexTestService>, IBasicOperations
     {
         /// <summary>

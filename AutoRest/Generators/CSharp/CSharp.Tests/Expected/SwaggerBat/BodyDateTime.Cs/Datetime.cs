@@ -21,6 +21,9 @@ namespace Fixtures.SwaggerBatBodyDateTime
     using Newtonsoft.Json;
     using Models;
 
+    /// <summary>
+    /// Datetime operations.
+    /// </summary>
     internal partial class Datetime : IServiceOperations<AutoRestDateTimeTestService>, IDatetime
     {
         /// <summary>

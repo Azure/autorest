@@ -59,13 +59,13 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    /// <summary>\r\n    ");
+            WriteLiteral("\r\n    /// <summary>\r\n    /// ");
 #line 17 "MethodGroupInterfaceTemplate.cshtml"
-Write(WrapComment("/// ", Model.Documentation.EscapeXmlComment()));
+    Write(Model.MethodGroupType);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    /// </summary>\r\n    public partial interface I");
+            WriteLiteral(" operations.\r\n    /// </summary>\r\n    public partial interface I");
 #line 19 "MethodGroupInterfaceTemplate.cshtml"
                           Write(Model.MethodGroupType);
 

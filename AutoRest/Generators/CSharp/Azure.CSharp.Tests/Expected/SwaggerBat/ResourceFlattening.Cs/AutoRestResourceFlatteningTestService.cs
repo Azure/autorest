@@ -21,7 +21,7 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
     using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
     using System.Linq;
-    using Microsoft.Azure;
+    using Microsoft.Rest.Azure;
     using Models;
 
     /// <summary>
@@ -248,8 +248,11 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             }
 
             // Set Credentials
-            cancellationToken.ThrowIfCancellationRequested();
-            await this.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            if (this.Credentials != null)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                await this.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            }
             // Serialize Request  
             string requestContent = JsonConvert.SerializeObject(resourceArray, this.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
@@ -357,8 +360,11 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             }
 
             // Set Credentials
-            cancellationToken.ThrowIfCancellationRequested();
-            await this.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            if (this.Credentials != null)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                await this.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            }
             // Send Request
             if (shouldTrace)
             {
@@ -472,8 +478,11 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             }
 
             // Set Credentials
-            cancellationToken.ThrowIfCancellationRequested();
-            await this.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            if (this.Credentials != null)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                await this.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            }
             // Serialize Request  
             string requestContent = JsonConvert.SerializeObject(resourceDictionary, this.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
@@ -581,8 +590,11 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             }
 
             // Set Credentials
-            cancellationToken.ThrowIfCancellationRequested();
-            await this.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            if (this.Credentials != null)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                await this.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            }
             // Send Request
             if (shouldTrace)
             {
@@ -696,8 +708,11 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             }
 
             // Set Credentials
-            cancellationToken.ThrowIfCancellationRequested();
-            await this.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            if (this.Credentials != null)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                await this.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            }
             // Serialize Request  
             string requestContent = JsonConvert.SerializeObject(resourceComplexObject, this.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
@@ -805,8 +820,11 @@ namespace Fixtures.Azure.SwaggerBatResourceFlattening
             }
 
             // Set Credentials
-            cancellationToken.ThrowIfCancellationRequested();
-            await this.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            if (this.Credentials != null)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                await this.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            }
             // Send Request
             if (shouldTrace)
             {

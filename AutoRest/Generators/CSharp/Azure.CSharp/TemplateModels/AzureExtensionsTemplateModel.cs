@@ -36,7 +36,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                 {
                     yield return "System.Linq.Expressions";
                 }
-                yield return "Microsoft.Azure";
+                yield return "Microsoft.Rest.Azure";
                 if (this.ModelTypes.Any(m => !m.Extensions.ContainsKey(AzureCodeGenerator.ExternalExtension)))
                 {
                     yield return "Models";

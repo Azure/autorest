@@ -4,6 +4,9 @@
     <SdkNuGetPackage Include="AutoRest">
       <PackageVersion>0.11.0</PackageVersion>
       <Folder>$(MSBuildThisFileDirectory)</Folder>
+      <!--Want to prevent NuGet from reporting warnings
+      like we are not putting assemblies under the \lib folder-->
+      <NoPackageAnalysis>true</NoPackageAnalysis>
     </SdkNuGetPackage>
   </ItemGroup>
 </Project>

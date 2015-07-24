@@ -19,7 +19,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
         {
             get
             {
-                yield return "Microsoft.Azure";
+                yield return "Microsoft.Rest.Azure";
                 foreach (string usingString in base.Usings)
                 {
                     yield return usingString;

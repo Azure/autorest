@@ -21,6 +21,9 @@ namespace Fixtures.SwaggerBatBodyString
     using Newtonsoft.Json;
     using Models;
 
+    /// <summary>
+    /// StringModel operations.
+    /// </summary>
     internal partial class StringModel : IServiceOperations<AutoRestSwaggerBATService>, IStringModel
     {
         /// <summary>

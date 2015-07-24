@@ -10,6 +10,7 @@ using Microsoft.Azure.Management.Redis;
 using Microsoft.Azure.Management.Redis.Models;
 using Xunit;
 using Microsoft.Azure;
+using Microsoft.Rest.Azure;
 
 namespace Microsoft.Rest.ClientRuntime.Azure.Test
 {
@@ -378,7 +379,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             catch (CloudException ex)
             {
                 Assert.Equal("Long running operation failed with status 'Failed'.", ex.Message);
-                Assert.Contains(AzureAsyncOperation.FailedStatus, ex.Response.Content.ReadAsStringAsync().Result);
+                Assert.Contains(AzureAsyncOperation.FailedStatus, ex.Response.Content.ReadAsStringAsync().ConfigureAwait(false).GetAwaiter().GetResult());
             }
 
         }

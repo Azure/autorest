@@ -16,7 +16,7 @@ namespace Fixtures.SwaggerBatBodyArray
     using Models;
 
     /// <summary>
-    /// Test Infrastructure for AutoRest Swagger BAT
+    /// Array operations.
     /// </summary>
     public partial interface IArray
     {

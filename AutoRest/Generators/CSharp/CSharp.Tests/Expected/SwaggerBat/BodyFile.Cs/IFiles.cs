@@ -16,7 +16,7 @@ namespace Fixtures.SwaggerBatBodyFile
     using Models;
 
     /// <summary>
-    /// Test Infrastructure for AutoRest Swagger BAT
+    /// Files operations.
     /// </summary>
     public partial interface IFiles
     {

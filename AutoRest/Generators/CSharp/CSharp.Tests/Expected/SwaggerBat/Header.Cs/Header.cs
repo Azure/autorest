@@ -21,6 +21,9 @@ namespace Fixtures.SwaggerBatHeader
     using Newtonsoft.Json;
     using Models;
 
+    /// <summary>
+    /// Header operations.
+    /// </summary>
     internal partial class Header : IServiceOperations<AutoRestSwaggerBATHeaderService>, IHeader
     {
         /// <summary>

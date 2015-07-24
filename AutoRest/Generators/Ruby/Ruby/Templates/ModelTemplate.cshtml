@@ -76,8 +76,14 @@ module @(Settings.Namespace)
         @EmptyLine
         @:serialized_property = @("object." + property.Name)
         @:@Model.SerializeProperty("serialized_property", property.Type, property.IsRequired, Settings.Namespace)
-        @:output_object['@(property.SerializedName)'] = serialized_property
+        @:output_object['@(property.SerializedName)'] = serialized_property unless serialized_property.nil?
         }
+
+        @if (Model.IsPolymorphic)
+        {
+        @EmptyLine
+        @:output_object['dtype'] = object.dtype
+        }    
         output_object
       end
 
@@ -99,9 +105,26 @@ module @(Settings.Namespace)
         @:@Model.DeserializeProperty("deserialized_property", property.Type, property.IsRequired, Settings.Namespace)
         @:output_object.@(property.Name) = deserialized_property
         }
+
+        @if (Model.IsPolymorphic)
+        {
+        @EmptyLine
+        @:output_object.dtype = object['dtype']
+        }
+    
         output_object.validate
         output_object
       end
+
+      @if (Model.IsPolymorphic)
+      {
+      @EmptyLine
+      @:def initialize
+      @:  @@dtype = "@Model.Name.ToLower()"
+      @:end
+      @EmptyLine
+      @:attr_accessor :dtype
+      }
     end
   end
 end

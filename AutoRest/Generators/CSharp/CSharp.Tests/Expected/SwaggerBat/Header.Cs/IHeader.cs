@@ -16,7 +16,7 @@ namespace Fixtures.SwaggerBatHeader
     using Models;
 
     /// <summary>
-    /// Test Infrastructure for AutoRest
+    /// Header operations.
     /// </summary>
     public partial interface IHeader
     {

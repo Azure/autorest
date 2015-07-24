@@ -148,7 +148,7 @@
 
   <Target Name="TestClientRuntime">
     <ItemGroup>
-      <TestDlls Include="$(LibraryRoot)\AutoRest\ClientRuntimes\*.Tests\bin\*\*Tests.dll" />
+      <TestDlls Include="$(LibraryRoot)\ClientRuntimes\CSharp\*.Tests\bin\*\*Tests.dll" />
     </ItemGroup>
     
     <Message Text="@(TestDlls)" />

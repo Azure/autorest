@@ -19,9 +19,12 @@ namespace Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion
     using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Linq;
-    using Microsoft.Azure;
+    using Microsoft.Rest.Azure;
     using Models;
 
+    /// <summary>
+    /// GroupOperations operations.
+    /// </summary>
     internal partial class GroupOperations : IServiceOperations<MicrosoftAzureTestUrl>, IGroupOperations
     {
         /// <summary>
@@ -120,8 +123,11 @@ namespace Fixtures.Azure.SwaggerBatSubscriptionIdApiVersion
             }
 
             // Set Credentials
-            cancellationToken.ThrowIfCancellationRequested();
-            await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            if (this.Client.Credentials != null)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            }
             // Send Request
             if (shouldTrace)
             {

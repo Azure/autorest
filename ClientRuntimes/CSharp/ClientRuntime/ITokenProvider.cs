@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,14 +13,8 @@ namespace Microsoft.Rest
     public interface ITokenProvider
     {
         /// <summary>
-        /// Gets the text of the access token.
+        /// Gets the authentication header with token.
         /// </summary>
-        Task<string> GetAccessTokenAsync(CancellationToken cancellationToken);
-        
-        /// <summary>
-        /// Gets the type of the tokens returned by the token provider.  
-        /// Possible values include 'Bearer' and 'SAML'.
-        /// </summary>
-        string TokenType { get; }
+        Task<AuthenticationHeaderValue> GetAuthenticationHeaderAsync(CancellationToken cancellationToken);
     }
 }

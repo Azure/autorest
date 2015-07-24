@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit;
 using Microsoft.Azure;
+using Microsoft.Rest.Azure;
 
 namespace Microsoft.Rest.ClientRuntime.Azure.Test
 {
@@ -26,6 +27,27 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
 
     public class PageJsonTest
     {
+        [Fact]
+        public void TestNullPageDeSerialization()
+        {
+            var responseBody = @"{
+  ""nextLink"": ""https://sdktestvault7826.vault.azure.net:443/keys?api-version=2015-06-01""
+}";
+
+            var deserializeSettings = new JsonSerializerSettings()
+            {
+                Formatting = Formatting.Indented,
+                NullValueHandling = NullValueHandling.Ignore,
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                ContractResolver = new ReadOnlyJsonContractResolver()
+            };
+            deserializeSettings.Converters.Add(new ResourceJsonConverter());
+            deserializeSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<Product>("dType"));
+            var deserializedProduct = JsonConvert.DeserializeObject<Page<Product>>(responseBody, deserializeSettings);
+
+            Assert.Equal(0, deserializedProduct.Count());
+        }
+
         [Fact]
         public void TestNextLinkDeSerialization()
         {

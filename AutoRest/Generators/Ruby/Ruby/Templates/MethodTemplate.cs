@@ -302,7 +302,7 @@ Write(EmptyLine);
 #line default
 #line hidden
 
-            WriteLiteral("      error_model = JSON.parse(response_content)\r\n      fail ");
+            WriteLiteral("      error_model = JSON.load(response_content)\r\n      fail ");
 #line 75 "MethodTemplate.cshtml"
          Write(Model.OperationExceptionTypeString);
 

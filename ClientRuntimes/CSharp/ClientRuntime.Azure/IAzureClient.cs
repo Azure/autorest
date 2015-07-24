@@ -5,7 +5,7 @@ using System.Net.Http;
 using Microsoft.Rest;
 using Newtonsoft.Json;
 
-namespace Microsoft.Azure
+namespace Microsoft.Rest.Azure
 {
     /// <summary>
     /// Interface for all Microsoft Azure clients.

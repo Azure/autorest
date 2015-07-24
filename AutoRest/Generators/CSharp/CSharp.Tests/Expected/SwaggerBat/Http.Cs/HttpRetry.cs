@@ -21,6 +21,9 @@ namespace Fixtures.SwaggerBatHttp
     using Newtonsoft.Json;
     using Models;
 
+    /// <summary>
+    /// HttpRetry operations.
+    /// </summary>
     internal partial class HttpRetry : IServiceOperations<AutoRestHttpInfrastructureTestService>, IHttpRetry
     {
         /// <summary>

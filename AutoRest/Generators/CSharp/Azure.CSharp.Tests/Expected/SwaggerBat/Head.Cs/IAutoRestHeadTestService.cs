@@ -15,7 +15,7 @@ namespace Fixtures.Azure.SwaggerBatHead
     using Newtonsoft.Json;
     using Microsoft.Rest;
     using System.Linq;
-    using Microsoft.Azure;
+    using Microsoft.Rest.Azure;
 
     /// <summary>
     /// Test Infrastructure for AutoRest

@@ -313,8 +313,9 @@ namespace Microsoft.Rest.Generator.Azure
                         // Recursively parsing the "properties" object hierarchy  
                         while (propertiesModel != null)
                         {
-                            foreach (Property pp in propertiesModel.Properties)
+                            foreach (Property originalProperty in propertiesModel.Properties)
                             {
+                                var pp = (Property) originalProperty.Clone();
                                 if (
                                     ResourcePropertyNames.Any(
                                         rp => rp.Equals(pp.Name, StringComparison.OrdinalIgnoreCase)))

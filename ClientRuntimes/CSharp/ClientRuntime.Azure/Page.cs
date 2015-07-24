@@ -4,8 +4,9 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace Microsoft.Azure
+namespace Microsoft.Rest.Azure
 {
     /// <summary>
     /// Defines a page in Azure responses.
@@ -46,7 +47,8 @@ namespace Microsoft.Azure
         /// <returns>A an enumerator that can be used to iterate through the collection.</returns>
         public IEnumerator<T> GetEnumerator()
         {
-            return Items.GetEnumerator();
+
+            return (Items == null) ? Enumerable.Empty<T>().GetEnumerator() : Items.GetEnumerator();
         }
 
         /// <summary>

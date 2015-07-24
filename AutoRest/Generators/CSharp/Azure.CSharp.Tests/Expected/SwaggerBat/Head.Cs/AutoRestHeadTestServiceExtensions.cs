@@ -13,7 +13,7 @@ namespace Fixtures.Azure.SwaggerBatHead
     using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.Rest;
-    using Microsoft.Azure;
+    using Microsoft.Rest.Azure;
 
     public static partial class AutoRestHeadTestServiceExtensions
     {

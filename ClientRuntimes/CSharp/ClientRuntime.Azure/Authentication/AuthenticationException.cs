@@ -10,7 +10,7 @@ using Microsoft.Rest;
 using System.Security.Permissions;
 #endif
 
-namespace Microsoft.Azure.Authentication
+namespace Microsoft.Rest.Azure.Authentication
 {
     /// <summary>
     /// Authentication exception for Microsoft Rest Client for Azure. 

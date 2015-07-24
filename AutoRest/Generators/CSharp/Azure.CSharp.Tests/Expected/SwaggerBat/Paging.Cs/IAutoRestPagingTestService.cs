@@ -15,7 +15,7 @@ namespace Fixtures.Azure.SwaggerBatPaging
     using Newtonsoft.Json;
     using Microsoft.Rest;
     using System.Linq;
-    using Microsoft.Azure;
+    using Microsoft.Rest.Azure;
     using Models;
 
     /// <summary>

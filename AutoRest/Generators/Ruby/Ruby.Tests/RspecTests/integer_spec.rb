@@ -62,8 +62,8 @@ describe Int do
 
   it 'should get null' do
     result = @int_client.get_null().value!
-	expect(result.response).to be_an_instance_of(Net::HTTPOK)
-	expect(result.body).to eq(nil)
+	  expect(result.response).to be_an_instance_of(Net::HTTPOK)
+	  expect(result.body).to eq(nil)
   end
 
   it 'should get invalid' do

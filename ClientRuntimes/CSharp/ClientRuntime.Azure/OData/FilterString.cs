@@ -4,7 +4,7 @@
 using System;
 using System.Linq.Expressions;
 
-namespace Microsoft.Azure.OData
+namespace Microsoft.Rest.Azure.OData
 {
     /// <summary>
     /// Handles OData filter generation.

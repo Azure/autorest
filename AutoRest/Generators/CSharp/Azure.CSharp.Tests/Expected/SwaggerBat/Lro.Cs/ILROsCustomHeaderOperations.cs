@@ -14,11 +14,11 @@ namespace Fixtures.Azure.SwaggerBatLro
     using System.Threading.Tasks;
     using Microsoft.Rest;
     using System.Linq;
-    using Microsoft.Azure;
+    using Microsoft.Rest.Azure;
     using Models;
 
     /// <summary>
-    /// Long-running Operation for AutoRest
+    /// LROsCustomHeaderOperations operations.
     /// </summary>
     public partial interface ILROsCustomHeaderOperations
     {

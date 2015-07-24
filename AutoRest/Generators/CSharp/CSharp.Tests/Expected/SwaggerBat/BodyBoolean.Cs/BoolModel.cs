@@ -21,6 +21,9 @@ namespace Fixtures.SwaggerBatBodyBoolean
     using Newtonsoft.Json;
     using Models;
 
+    /// <summary>
+    /// BoolModel operations.
+    /// </summary>
     internal partial class BoolModel : IServiceOperations<AutoRestBoolTestService>, IBoolModel
     {
         /// <summary>

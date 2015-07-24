@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit;
 using Microsoft.Azure;
+using Microsoft.Rest.Azure;
 
 namespace Microsoft.Rest.ClientRuntime.Azure.Test
 {

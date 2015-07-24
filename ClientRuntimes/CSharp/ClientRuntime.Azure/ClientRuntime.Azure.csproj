@@ -8,7 +8,7 @@
     <ProjectGuid>{856A1D19-C3BF-439A-BEBF-E822A332BC12}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Microsoft.Azure</RootNamespace>
+    <RootNamespace>Microsoft.Rest.Azure</RootNamespace>
     <AssemblyName>Microsoft.Rest.ClientRuntime.Azure</AssemblyName>
     <OutputType>Library</OutputType>
     <RestorePackages>true</RestorePackages>
@@ -20,7 +20,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Authentication\ActiveDirectoryTokenStore.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IAzureClient.cs" />
     <Compile Include="AzureClientExtensions.cs" />
@@ -41,7 +40,7 @@
     <Compile Include="Authentication\ActiveDirectoryApplicationTokenProvider.cs" />
     <Compile Include="Authentication\ActiveDirectoryUserTokenProvider.cs" />
     <Compile Include="Authentication\ApplicationTokenCredentials.cs" />
-    <Compile Include="Authentication\AzureEnvironment.cs" />
+    <Compile Include="Authentication\ActiveDirectoryEnvironment.cs" />
     <Compile Include="Authentication\UserTokenCredentials.cs" />
     <Compile Include="Authentication\AuthenticationException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -65,10 +64,7 @@
   </ItemGroup>
   <ItemGroup Condition=" '$(LibraryFxTarget)' == 'portable' ">
     <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory">
-      <HintPath>$(CommonNugetPackageFolder)\Microsoft.IdentityModel.Clients.ActiveDirectory.3.5.207081303-alpha\lib\wpa\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory.Platform">
-      <HintPath>$(CommonNugetPackageFolder)\Microsoft.IdentityModel.Clients.ActiveDirectory.3.5.207081303-alpha\lib\wpa\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll</HintPath>
+      <HintPath>$(CommonNugetPackageFolder)\Microsoft.IdentityModel.Clients.ActiveDirectory.3.5.207081303-alpha\lib\portable-net45+win+wpa81+wp80\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup Condition=" '$(LibraryFxTarget)' == 'net45' ">
@@ -87,5 +83,5 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" Condition=" '$(LibraryFxTarget)' == 'portable' " />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" Condition=" '$(LibraryFxTarget)' != 'portable' " />
-  <Import Project="$(CommonNugetPackageFolder)\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition=" '$(LibraryFxTarget)' != 'net45' " />
+  <Import Project="$(CommonNugetPackageFolder)\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition=" Exists('$(CommonNugetPackageFolder)\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets') AND '$(LibraryFxTarget)' != 'net45' " />
 </Project>

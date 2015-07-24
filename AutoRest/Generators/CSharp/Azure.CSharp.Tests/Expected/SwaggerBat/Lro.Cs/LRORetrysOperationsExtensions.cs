@@ -13,7 +13,7 @@ namespace Fixtures.Azure.SwaggerBatLro
     using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.Rest;
-    using Microsoft.Azure;
+    using Microsoft.Rest.Azure;
     using Models;
 
     public static partial class LRORetrysOperationsExtensions

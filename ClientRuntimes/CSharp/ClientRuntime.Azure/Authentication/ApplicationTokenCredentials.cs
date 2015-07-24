@@ -3,37 +3,36 @@
 
 using Microsoft.Rest;
 
-namespace Microsoft.Azure.Authentication
+namespace Microsoft.Rest.Azure.Authentication
 {
     /// <summary>
     /// Credential object for authenticating as an Active Directory application.
+    /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">
+    /// Active Directory Quickstart for .Net</see> 
+    /// for detailed instructions on creating an Azure Active Directory application.
     /// </summary>
     public class ApplicationTokenCredentials : TokenCredentials
     {
         /// <summary>
         /// Create credentials for authenticating as an Azure Active Directory application.
-        /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">Active Directory Quickstart for .Net</see> 
-        /// for detailed instructions on creating an Azure Active Directory application.
         /// </summary>
         /// <param name="clientId">The active directory application client id.</param>
         /// <param name="domain">The domain or tenant id containing this application.</param>
         /// <param name="secret">The authentication secret for the application.</param>
         public ApplicationTokenCredentials(string clientId, string domain, string secret)
-            : this(clientId, domain, secret, AzureEnvironment.Azure)
+            : this(clientId, domain, secret, ActiveDirectoryEnvironment.Azure)
         {
         }
 
         /// <summary>
         /// Create credentials for authenticating as an Azure Active Directory application.
-        /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">Active Directory Quickstart for .Net</see> 
-        /// for detailed instructions on creating an Azure Active Directory application.
         /// </summary>
         /// <param name="clientId">The active directory application client id.</param>
         /// <param name="domain">The domain or tenant id containing this application.</param>
         /// <param name="secret">The authentication secret for the application.</param>
-        /// <param name="azureEnvironment">The azure environment to authenticate with.</param>
-        public ApplicationTokenCredentials(string clientId, string domain, string secret, AzureEnvironment azureEnvironment)
-            : base(new ActiveDirectoryApplicationTokenProvider(clientId, domain, secret, azureEnvironment))
+        /// <param name="activeDirectoryEnvironment">The azure environment to authenticate with.</param>
+        public ApplicationTokenCredentials(string clientId, string domain, string secret, ActiveDirectoryEnvironment activeDirectoryEnvironment)
+            : base(new ActiveDirectoryApplicationTokenProvider(clientId, domain, secret, activeDirectoryEnvironment))
         {
         }
     }

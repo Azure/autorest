@@ -199,7 +199,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             {
                 return string.Format("{0}.validate unless {0}.nil?", valueReference);
             }
-            
+
             if (sequence != null || dictionary != null)
             {
                 return string.Format("{0}.each{{ |e| e.validate if e.respond_to?(:validate) }} unless {0}.nil?\r\n", valueReference);
@@ -340,18 +340,25 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             }
             else if (composite != null)
             {
-                string deserializeTypeString = string.Format("{0} = {1}::{2}.deserialize_object({0})",
-                    valueReference, defaultNamespace + "::Models", composite.Name);
-
-                if (composite.Extensions.ContainsKey("-ms-external"))
+                if (!string.IsNullOrEmpty(composite.PolymorphicDiscriminator))
                 {
-                    deserializeTypeString = string.Format("{0} = {1}::{2}.deserialize_object({0})",
-                        valueReference, "MsRestAzure", composite.Name);
+                    builder
+                        .AppendLine("unless {0}['dtype'].nil?", valueReference)
+                        .Indent()
+                            .AppendLine("{0} = Class::const_get({0}['dtype'].capitalize).deserialize_object({0})", valueReference)
+                        .Outdent()
+                        .AppendLine("else")
+                        .Indent()
+                            .AppendLine("{0} = {1}::{2}.deserialize_object({0})", valueReference, defaultNamespace + "::Models", composite.Name)
+                        .Outdent()
+                        .AppendLine("end");
+
+                    return builder.ToString();
                 }
 
                 return builder.AppendLine("if ({0})", valueReference)
                     .Indent()
-                        .AppendLine(deserializeTypeString)
+                        .AppendLine("{0} = {1}::{2}.deserialize_object({0})", valueReference, defaultNamespace + "::Models", composite.Name)
                     .Outdent()
                     .AppendLine("end").ToString();
             }
@@ -436,18 +443,26 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             }
             else if (composite != null)
             {
-                string serializeTypeString = string.Format("{0} = {1}::{2}.serialize_object({0})",
-                    valueReference, defaultNamespace + "::Models", composite.Name);
-
-                if (composite.Extensions.ContainsKey("x-ms-external"))
+                if (!string.IsNullOrEmpty(composite.PolymorphicDiscriminator))
                 {
-                    serializeTypeString = string.Format("{0} = {1}::{2}.serialize_object({0})",
-                        valueReference, "MsRestAzure", composite.Name);
+                    builder
+                        .AppendLine("unless {0}.dtype.nil?", valueReference)
+                        .Indent()
+                        .AppendLine("{0} = Class::const_get({0}.dtype.capitalize).serialize_object({0})", valueReference)
+                        .Outdent()
+                        .AppendLine("else")
+                        .Indent()
+                        .AppendLine("{0} = {1}::{2}.serialize_object({0})", valueReference,
+                            defaultNamespace + "::Models", composite.Name)
+                        .Outdent()
+                        .AppendLine("end");
+
+                    return builder.ToString();
                 }
 
                 return builder.AppendLine("if ({0})", valueReference)
                     .Indent()
-                        .AppendLine(serializeTypeString)
+                        .AppendLine("{0} = {1}::{2}.serialize_object({0})", valueReference, defaultNamespace + "::Models", composite.Name)
                     .Outdent()
                     .AppendLine("end").ToString();
             }

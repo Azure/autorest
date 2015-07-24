@@ -21,6 +21,9 @@ namespace Fixtures.SwaggerBatBodyComplex
     using Newtonsoft.Json;
     using Models;
 
+    /// <summary>
+    /// Polymorphism operations.
+    /// </summary>
     internal partial class Polymorphism : IServiceOperations<AutoRestComplexTestService>, IPolymorphism
     {
         /// <summary>

@@ -10,7 +10,7 @@ using System.Text;
 using Microsoft.Rest.Serialization;
 using Newtonsoft.Json;
 
-namespace Microsoft.Azure.OData
+namespace Microsoft.Rest.Azure.OData
 {
     /// <summary>
     /// Expression visitor class that generates OData style $filter parameter.
