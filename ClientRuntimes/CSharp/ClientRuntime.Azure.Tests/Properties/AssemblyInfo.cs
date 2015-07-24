@@ -3,6 +3,7 @@
 
 using System.Reflection;
 using System.Resources;
+using Xunit;
 
 [assembly: AssemblyTitle("Microsoft Rest Azure Client Runtime Tests")]
 [assembly: AssemblyDescription("Tests for the Azure Client Runtime.")]
@@ -16,3 +17,4 @@ using System.Resources;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: NeutralResourcesLanguage("en")]
+[assembly: CollectionBehavior(DisableTestParallelization = true)]

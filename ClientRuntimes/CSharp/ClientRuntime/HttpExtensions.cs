@@ -84,7 +84,7 @@ namespace Microsoft.Rest
                 stringBuilder.AppendLine();
                 stringBuilder.AppendLine("Body:");
                 stringBuilder.AppendLine("{");
-                stringBuilder.AppendLine(httpRequest.Content.ReadAsStringAsync().Result);
+                stringBuilder.AppendLine(httpRequest.Content.ReadAsStringAsync().ConfigureAwait(false).GetAwaiter().GetResult());
                 stringBuilder.AppendLine("}");
             }
             return stringBuilder.ToString();
@@ -108,7 +108,7 @@ namespace Microsoft.Rest
                 stringBuilder.AppendLine();
                 stringBuilder.AppendLine("Body:");
                 stringBuilder.AppendLine("{");
-                stringBuilder.AppendLine(httpResponse.Content.ReadAsStringAsync().Result);
+                stringBuilder.AppendLine(httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false).GetAwaiter().GetResult());
                 stringBuilder.AppendLine("}");
             }
             return stringBuilder.ToString();

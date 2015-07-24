@@ -55,7 +55,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests
                 handlerA, handlerB, handlerC,
                 new MirrorDelegatingHandler());
 
-            var response = fakeClient.DoStuffSync("Text").Content.ReadAsStringAsync().Result;
+            var response = fakeClient.DoStuffSync("Text").Content.ReadAsStringAsync().ConfigureAwait(false).GetAwaiter().GetResult();
             Assert.Equal("Text+A+B+C", response);
         }
 
@@ -76,7 +76,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests
                 handlerA, handlerD,
                 new MirrorDelegatingHandler());
 
-            var response = fakeClient.DoStuffSync("Text").Content.ReadAsStringAsync().Result;
+            var response = fakeClient.DoStuffSync("Text").Content.ReadAsStringAsync().ConfigureAwait(false).GetAwaiter().GetResult();
             Assert.Equal("Text+A+B+C+D+E", response);
         }
 
@@ -86,7 +86,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests
             var fakeClient = new FakeServiceClient(new WebRequestHandler(),
                 new MirrorDelegatingHandler());
 
-            var response = fakeClient.DoStuffSync("Text").Content.ReadAsStringAsync().Result;
+            var response = fakeClient.DoStuffSync("Text").Content.ReadAsStringAsync().ConfigureAwait(false).GetAwaiter().GetResult();
             Assert.Equal("Text", response);
         }
 

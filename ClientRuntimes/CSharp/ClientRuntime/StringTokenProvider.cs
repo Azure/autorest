@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -40,14 +41,9 @@ namespace Microsoft.Rest
         /// <param name="cancellationToken">The cancellation token for this action.  
         /// This will not be used since the returned token is static.</param>
         /// <returns>The access token.</returns>
-        public Task<string> GetAccessTokenAsync(CancellationToken cancellationToken)
+        public Task<AuthenticationHeaderValue> GetAuthenticationHeaderAsync(CancellationToken cancellationToken)
         {
-#if PORTABLE
-            return new Task<string>(() => _accessToken);
-#else
-            return Task.FromResult(_accessToken);
-#endif
-
+            return PlatformTask.FromResult(new AuthenticationHeaderValue(_type, _accessToken));
         }
     }
 }

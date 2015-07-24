@@ -8,6 +8,7 @@ using Microsoft.Azure;
 
 namespace Microsoft.Rest.ClientRuntime.Azure.Test
 {
+    [Collection("ADAL Test Collection")]
     public class TokenCloudCredentialsTest
     {
         [Fact]

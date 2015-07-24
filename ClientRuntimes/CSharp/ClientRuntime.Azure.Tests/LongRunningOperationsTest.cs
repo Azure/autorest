@@ -379,7 +379,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             catch (CloudException ex)
             {
                 Assert.Equal("Long running operation failed with status 'Failed'.", ex.Message);
-                Assert.Contains(AzureAsyncOperation.FailedStatus, ex.Response.Content.ReadAsStringAsync().Result);
+                Assert.Contains(AzureAsyncOperation.FailedStatus, ex.Response.Content.ReadAsStringAsync().ConfigureAwait(false).GetAwaiter().GetResult());
             }
 
         }

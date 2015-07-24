@@ -20,7 +20,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Authentication\ActiveDirectoryTokenStore.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IAzureClient.cs" />
     <Compile Include="AzureClientExtensions.cs" />
