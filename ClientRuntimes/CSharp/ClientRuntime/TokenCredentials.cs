@@ -91,7 +91,7 @@ namespace Microsoft.Rest
             }
 
             request.Headers.Authorization = await TokenProvider.GetAuthenticationHeaderAsync(cancellationToken);
-            await Task.Run(() => base.ProcessHttpRequestAsync(request, cancellationToken), cancellationToken).ConfigureAwait(false);
+            await base.ProcessHttpRequestAsync(request, cancellationToken);
         }
     }
 }

@@ -41,9 +41,9 @@ namespace Microsoft.Rest
         /// <param name="cancellationToken">The cancellation token for this action.  
         /// This will not be used since the returned token is static.</param>
         /// <returns>The access token.</returns>
-        public async Task<AuthenticationHeaderValue> GetAuthenticationHeaderAsync(CancellationToken cancellationToken)
+        public Task<AuthenticationHeaderValue> GetAuthenticationHeaderAsync(CancellationToken cancellationToken)
         {
-            return await Task.Run(()=> new AuthenticationHeaderValue(_type, _accessToken)).ConfigureAwait(true);
+            return PlatformTask.FromResult(new AuthenticationHeaderValue(_type, _accessToken));
         }
     }
 }

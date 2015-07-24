@@ -33,7 +33,7 @@ namespace Microsoft.Rest
         public virtual Task ProcessHttpRequestAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             // Return an empty task by default
-            return PlatformTask.FromResult(null);
+            return PlatformTask.FromResult<object>(null);
         }
     }
 }
