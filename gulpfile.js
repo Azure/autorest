@@ -68,12 +68,6 @@ gulp.task('clean:generatedTest', function(cb) {
 
 gulp.task('clean', ['clean:build', 'clean:templates', 'clean:generatedTest']);
 
-// Build related tasks
-
-gulp.task('build', function(cb) {
-  runProcess(csharpBuild, ['build.proj', '/p:WarningsNotAsErrors=0219'], cb);
-});
-
 gulp.task('syncNugetProjs', function() {
   var dirs = glob.sync(path.join(basePathOrThrow(), '/**/*.nuget.proj'))
     .map(function(filePath) {
@@ -108,8 +102,9 @@ gulp.task('syncNuspecs', function() {
 
 gulp.task('syncDotNetDependencies', ['syncNugetProjs', 'syncNuspecs']);
 
-
-// Test related tasks
+gulp.task('build', function(cb) {
+  runProcess(csharpBuild, ['build.proj', '/t:build', '/p:WarningsNotAsErrors=0219'], cb);
+});
 
 gulp.task('package', function(cb) {
   runProcess(csharpBuild, ['build.proj', '/t:package'], cb);
@@ -119,7 +114,11 @@ gulp.task('test', function(cb) {
   runProcess(csharpBuild, ['build.proj', '/t:test'], cb);
 });
 
+gulp.task('analysis', function(cb) {
+  runProcess(csharpBuild, ['build.proj', '/t:codeanalysis', '/p:WarningsNotAsErrors=0219'], cb);
+});
+
 
 gulp.task('default', function(cb){
-  runSequence('clean', 'build', ['package', 'test'], cb);
+  runSequence('clean', 'build', 'analysis', 'package', 'test', cb);
 });

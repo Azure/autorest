@@ -36,9 +36,6 @@
     <Compile Include="TemplateModels\AzureServiceClientTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureModelTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureParameterTemplateModel.cs" />
-    <Compile Include="Templates\AzureMethodTemplate.cs" />
-    <Compile Include="Templates\AzureMethodGroupTemplate.cs" />
-    <Compile Include="Templates\AzureServiceClientTemplate.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
