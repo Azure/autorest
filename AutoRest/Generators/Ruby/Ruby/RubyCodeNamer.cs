@@ -269,6 +269,10 @@ namespace Microsoft.Rest.Generator.Ruby
             {
                 primaryType.Name = "Float";
             }
+            else if (primaryType == PrimaryType.Decimal)
+            {
+                primaryType.Name = "Float";
+            }
             else if (primaryType == PrimaryType.Int)
             {
                 primaryType.Name = "Number";
