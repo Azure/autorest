@@ -6,6 +6,7 @@ using Microsoft.Rest.Generator.Azure.Ruby.Templates;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Ruby;
 using Microsoft.Rest.Generator.Ruby.Templates;
+using System.IO;
 
 namespace Microsoft.Rest.Generator.Azure.Ruby
 {
@@ -92,7 +93,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                     Model = new AzureModelTemplateModel(model, serviceClient),
                 };
 
-                await Write(modelTemplate, "Models\\" + RubyCodeNamer.UnderscoreCase(model.Name) + ImplementationFileExtension);
+                await Write(modelTemplate, Path.Combine("models", RubyCodeNamer.UnderscoreCase(model.Name) + ImplementationFileExtension));
             }
 
             // Enums
@@ -102,7 +103,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                 {
                     Model = new EnumTemplateModel(enumType),
                 };
-                await Write(enumTemplate, "Models\\" + RubyCodeNamer.UnderscoreCase(enumTemplate.Model.TypeDefinitionName) + ImplementationFileExtension);
+                await Write(enumTemplate, Path.Combine("models", RubyCodeNamer.UnderscoreCase(enumTemplate.Model.TypeDefinitionName) + ImplementationFileExtension));
             }
 
             // Requirements

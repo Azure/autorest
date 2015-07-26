@@ -9,7 +9,7 @@ var util = require('util');
 var assert = require('assert');
 var msRest = require('ms-rest');
 
-var reqOptClient = require('../Expected/SwaggerBat/RequiredOptional/AutoRestRequiredOptionalTestService');
+var reqOptClient = require('../Expected/AcceptanceTests/RequiredOptional/AutoRestRequiredOptionalTestService');
 
 var dummyToken = 'dummy12321343423';
 var credentials = new msRest.TokenCredentials(dummyToken);
@@ -24,7 +24,7 @@ describe('nodejs', function () {
 
     describe('Basic Required Optional Operations', function () {
       var testClient = new reqOptClient('', '', baseUri, clientOptions);
-      
+
       it('should throw error on null path parameter', function (done) {
         testClient.implicit.getRequiredPath(null, function (error, result) {
           should.exist(error);
@@ -264,7 +264,7 @@ describe('nodejs', function () {
           done();
         });
       });
-      
+
     });
   });
 });

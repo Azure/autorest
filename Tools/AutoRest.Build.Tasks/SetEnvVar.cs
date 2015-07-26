@@ -12,30 +12,20 @@ using Microsoft.Build.Utilities;
 namespace Microsoft.Rest.Common.Build.Tasks
 {
     /// <summary>
-    /// Build task to apply RegularExpression to file[s].
+    /// Build task to set environment vars in the build.
     /// </summary>
     public class SetEnvVar : Task
     {
-        private string _variable;
-        private string _value;
 
         [Required]
-        public string Variable
-        {
-            get { return _variable; }
-            set { _variable = value; }
-        }
+        public string Variable { get; set; }
 
         [Required]
-        public string Value
-        {
-            get { return _value; }
-            set { _value = value; }
-        }
+        public string Value { get; set; }
 
         public override bool Execute()
         {
-            Environment.SetEnvironmentVariable(_variable, _value);
+            Environment.SetEnvironmentVariable(Variable, Value);
             return true;
         }
     }

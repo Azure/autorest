@@ -13,7 +13,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
     /// </summary>
     public class ServiceController : IDisposable
     {
-        private const string NpmCommand = "npm.exe";
+        private const string NpmCommand = "npm.cmd";
         private const string NpmArgument = "install";
         private const string NodeCommand = "node.exe";
         private const string NodeArgument = "./startup/www";
@@ -41,7 +41,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
         public Uri Uri
         {
-            get { return new Uri(string.Format(CultureInfo.InvariantCulture, "http://localhost.:{0}", Port)); }
+            get { return new Uri(string.Format(CultureInfo.InvariantCulture, "http://localhost:{0}", Port)); }
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             }
         }
 
-        private static string GetPathToExecutable(string executableName)
+        public static string GetPathToExecutable(string executableName)
         {
             var paths = Environment.GetEnvironmentVariable("PATH");
             foreach (var path in paths.Split(new[] {Path.PathSeparator}, StringSplitOptions.RemoveEmptyEntries))
@@ -84,7 +84,8 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 var fullPath = "";
                 if(ServiceController.IsUnix)
                 {
-                    var exec = Path.GetExtension(executableName) == ".exe" ? Path.GetFileNameWithoutExtension(executableName) : executableName;
+                    var ext = Path.GetExtension(executableName);
+                    var exec = (ext == ".cmd" || ext == ".exe") ? Path.GetFileNameWithoutExtension(executableName) : executableName;
                     fullPath = Path.Combine(path, exec);
                 }
                 else

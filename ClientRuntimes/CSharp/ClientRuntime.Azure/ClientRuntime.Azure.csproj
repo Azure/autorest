@@ -10,7 +10,6 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Microsoft.Rest.Azure</RootNamespace>
     <AssemblyName>Microsoft.Rest.ClientRuntime.Azure</AssemblyName>
-    <RootNamespace>Microsoft.Azure</RootNamespace>
     <OutputType>Library</OutputType>
     <RestorePackages>true</RestorePackages>
     <AssemblyName>Microsoft.Rest.ClientRuntime.Azure</AssemblyName>
@@ -21,12 +20,6 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Net45-Release'">
     <DocumentationFile>bin\Net45-Release\Microsoft.Rest.ClientRuntime.Azure.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Net40-Debug'">
-    <DocumentationFile>bin\Net40-Debug\Microsoft.Rest.ClientRuntime.Azure.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Net40-Release'">
-    <DocumentationFile>bin\Net40-Release\Microsoft.Rest.ClientRuntime.Azure.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Portable-Debug'">
     <DocumentationFile>bin\Portable-Debug\Microsoft.Rest.ClientRuntime.Azure.xml</DocumentationFile>
@@ -42,16 +35,6 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Net45-Release|AnyCPU' ">
     <Optimize>false</Optimize>
     <OutputPath>bin\Net45-Release</OutputPath>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Net40-Debug|AnyCPU' ">
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Net40-Debug</OutputPath>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Net40-Release|AnyCPU' ">
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Net40-Release</OutputPath>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Portable-Debug|AnyCPU' ">
@@ -100,8 +83,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

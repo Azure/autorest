@@ -8,11 +8,16 @@ var child_process = require('child_process');
 var child;
 
 before(function (done) {
+  var isWin = /^win/.test(process.platform);
+  var nodeCmd = 'node.exe';
+  if(!isWin){
+    nodeCmd = 'node'
+  }
   var started = false;
   var out = fs.openSync('./server.log', 'w');
   fs.writeSync(out, 'Test run started at ' + new Date().toISOString() + '\n');
-  child = child_process.spawn('node.exe', [__dirname + '/../../../AcceptanceTests/server/startup/www']);
-  
+  child = child_process.spawn(nodeCmd, [__dirname + '/../../../AcceptanceTests/server/startup/www']);
+
   child.stdout.on('data', function (data) {
     fs.writeSync(out, data.toString('UTF-8'));
     if (data.toString().indexOf('started') > 0) {
@@ -20,14 +25,14 @@ before(function (done) {
       done();
     }
   });
-  
+
   child.on('close', function (code) {
     if (!started) {
       done();
     }
   });
 });
-  
+
 after(function (done) {
   child.kill();
   done();

@@ -41,10 +41,8 @@
     <Compile Include="Resource\SamplePropertyModel.cs" />
     <Compile Include="Resource\SampleServiceClientTemplateModel.cs" />
     <Compile Include="Resource\SampleViewModel.cs" />
-    <Compile Include="Templates\*.cs" />
     <Compile Include="XUnitExtensions.cs" />
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\AutoRest.Core\AutoRest.Core.csproj">
       <Project>{c876085f-9dc3-41f0-b7b4-17022cd84684}</Project>
@@ -82,4 +80,5 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\xunit.runner.msbuild.2.1.0-beta4-build3050\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.runner.msbuild.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\xunit.runner.msbuild.2.1.0-beta4-build3050\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.runner.msbuild.props'))" />
   </Target>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

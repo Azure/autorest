@@ -208,6 +208,7 @@ describe 'LongRunningOperation' do
   end
 
   it 'should rise error if no location provided' do
+    skip
     expect { @client.lrosads.post202no_location(@product).value! }.to raise_exception(MsRestAzure::CloudError)
   end
 

@@ -26,8 +26,8 @@ namespace Microsoft.Rest.Generator.Test
 
         private void SetupMock()
         {
-            _fileSystem.WriteFile("AutoRest.json", File.ReadAllText("Resource\\AutoRest.json"));
-            _fileSystem.WriteFile("RedisResource.json", File.ReadAllText("Resource\\RedisResource.json"));
+            _fileSystem.WriteFile("AutoRest.json", File.ReadAllText(Path.Combine("Resource", "AutoRest.json")));
+            _fileSystem.WriteFile("RedisResource.json", File.ReadAllText(Path.Combine("Resource", "RedisResource.json")));
         }
 
         [Fact]
@@ -117,7 +117,7 @@ namespace Microsoft.Rest.Generator.Test
         [Fact]
         public void InvalidTypeThrowsException()
         {
-            _fileSystem.WriteFile("AutoRest.json", File.ReadAllText("Resource\\AutoRestWithInvalidType.json"));
+            _fileSystem.WriteFile("AutoRest.json", File.ReadAllText(Path.Combine("Resource", "AutoRestWithInvalidType.json")));
 
             AssertThrows<CodeGenerationException>(() => ExtensionsLoader.GetCodeGenerator
                 (new Settings {CodeGenerator = "CSharp", FileSystem = _fileSystem}),

@@ -162,3 +162,5 @@ Thumbs.db
 # Mono
 *dll.mdb
 *exe.mdb
+
+AutoRest/Generators/Ruby/*Tests/Gemfile.lock

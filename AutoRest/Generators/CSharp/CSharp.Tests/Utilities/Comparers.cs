@@ -4,8 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Fixtures.SwaggerBatBodyArray.Models;
-using Fixtures.SwaggerBatBodyDictionary.Models;
+using Fixtures.AcceptanceTestsBodyArray.Models;
+using Fixtures.AcceptanceTestsBodyDictionary.Models;
 
 namespace Microsoft.Rest.Generator.CSharp.Tests
 {

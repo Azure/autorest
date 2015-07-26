@@ -1,4 +1,4 @@
-// through2 is a thin wrapper around node transform streams
+// through is a thin wrapper around node transform streams
 var through = require('through2');
 var gutil = require('gulp-util');
 var xml2js = require('xml2js');
@@ -16,7 +16,7 @@ function gulpNugetProjSync(opts) {
     var nuprojPathes = glob.sync(path.join(baseDir, '../*.nuget.proj'));
 
     var nuprojPath = null;
-    if (!nuprojPathes || nuprojPathes < 1) {
+    if (!nuprojPathes || nuprojPathes.length === 0) {
       throw new PluginError({
         plugin: PLUGIN_NAME,
         message: 'There was no nuget.proj path found in: ' + baseDir
@@ -36,7 +36,7 @@ function gulpNugetProjSync(opts) {
 
       var tokens = packageVersion.split('.')
       var assemblyFileVersion = packageVersion;
-      if (tokens.Length == 3) {
+      if (tokens.Length === 3) {
         assemblyFileVersion = packageVersion + '.0';
       }
 
@@ -47,13 +47,13 @@ function gulpNugetProjSync(opts) {
       if (tokens[0] == 0) {
         assemblyVersion = opts.default_version || '0.0.1.0';
       }
-      var versionRegex = '\[assembly\:\s*AssemblyVersion\s*\(\s*"[\d\.\s]+';
-      var versionContent = '[assembly: AssemblyVersion("' + assemblyVersion;
+      var assemblyVersionRegex = '\[assembly\:\s*AssemblyVersion\s*\(\s*"[\d\.\s]+';
+      var assemblyVersionContent = '[assembly: AssemblyVersion("' + assemblyVersion;
 
       gutil.log("Updating AssemblyInfo.cs with path: " + file.path + 'with file version: ' +
         assemblyFileVersion + ' and version: ' + assemblyVersion);
       assemblyInfoContents.replace(fileVersionRegex, fileVersionContent);
-      assemblyInfoContents.replace(versionRegex, versionContent);
+      assemblyInfoContents.replace(assemblyVersionRegex, assemblyVersionContent);
 
       file.contents = new Buffer(assemblyInfoContents);
       cb(null, file);

@@ -125,7 +125,7 @@ namespace Microsoft.Rest.Generator.Ruby
                 {
                     Model = new ModelTemplateModel(model, serviceClient),
                 };
-                await Write(modelTemplate, Path.Combine("Models",
+                await Write(modelTemplate, Path.Combine("models",
                     RubyCodeNamer.UnderscoreCase(model.Name) + ImplementationFileExtension));
             }
 
@@ -136,7 +136,7 @@ namespace Microsoft.Rest.Generator.Ruby
                 {
                     Model = new EnumTemplateModel(enumType),
                 };
-                await Write(enumTemplate, Path.Combine("Models", RubyCodeNamer.UnderscoreCase(enumTemplate.Model.TypeDefinitionName) + ImplementationFileExtension));
+                await Write(enumTemplate, Path.Combine("models", RubyCodeNamer.UnderscoreCase(enumTemplate.Model.TypeDefinitionName) + ImplementationFileExtension));
             }
 
             // Requirements

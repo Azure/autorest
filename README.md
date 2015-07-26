@@ -1,32 +1,31 @@
 # <img align="center" src="Documentation/images/autorest-small-flat.png">  AutoRest
 
-The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to *AutoRest* is a spec that describes the REST API using the [Swagger](http://github.com/swagger-api/swagger-spec) format. 
+The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to *AutoRest* is a spec that describes the REST API using the [Swagger](http://github.com/swagger-api/swagger-spec) format.
 
 ##Getting AutoRest##
 The AutoRest tools can be installed with Nuget for use in a Visual Studio project.
 
     nuget.exe install AutoRest
-    
+
 Alternatively it can be installed from [Chocolatey](https://chocolatey.org/) by running:
 
     choco install autorest
 
-##Build Prerequisites
+## Build Prerequisites
 AutoRest is developed primarily in C# but generates code for multiple languages. To build and test AutoRest requires a few things be installed locally.
- 
-###.Net
+
+### .Net
 Install the [Microsoft Build Tools](http://go.microsoft.com/?linkid=9832060) or get them with [Visual Studio](https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx).
 Ensure that msbuild is in your path by running vcvarsall.bat
 >C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat
 
-Mono
->TODO: mono
+### Mono
+Install Mono 4.3.0 (MonoFramework-MDK-4.3.0.372.macos10.xamarin.x86.pkg)
 
-###Node.js
-Install the latest from [nodejs.org](https://nodejs.org/).
+### Node.js
+Install the latest from [nodejs.org](https://nodejs.org/). Then from the project root run `npm install`.
 
-###Java
-####Java Development Kit
+### Java / Java Development Kit
 Install the latest Java SE Development Kit from [Java SE Downloads](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
 Ensure that the JDK binaries are in your `PATH`.
 >set PATH=PATH;C:\Program Files\java\jdk1.8.0_45\bin
@@ -34,7 +33,7 @@ Ensure that the JDK binaries are in your `PATH`.
 Ensure that your environment includes the `JAVA_HOME`.
 >set JAVA_HOME=C:\Program Files\java\jdk1.8.0_45
 
-####Maven
+#### Maven
 Install the `Maven Project Management tool` from [Apache downloads](http://maven.apache.org/download.cgi).
 Ensure Maven is in your `PATH`.
 >set PATH=PATH;C:\Maven\bin
@@ -42,16 +41,16 @@ Ensure Maven is in your `PATH`.
 Ensure that your environment includes the `MAVEN_HOME`.
 >set MAVEN_HOME=C:\Maven
 
-####Java IDE
+#### Java IDE
 You may want a Java IDE.
 - Install Jetbrains IntelliJ IDEA from [JetBrains downloads](https://www.jetbrains.com/idea/download/.)
  OR
-- Install `Eclipse IDE for Java EE Developer` from [Eclipse downloads](http://eclipse.org/downloads/) and 
+- Install `Eclipse IDE for Java EE Developer` from [Eclipse downloads](http://eclipse.org/downloads/) and
 - Install the `Maven Eclipse Integration` from [Eclipse m2e downloads](http://www.eclipse.org/m2e/m2e-downloads.html).
 
-###Ruby
-[RubyInstaller](http://rubyinstaller.org/downloads/) 2.1.6 - 32-bit version.  
-By default, Ruby installs to C:\Ruby21. Ensure that C:\Ruby21\bin is in your `PATH`.
+### Ruby
+[RubyInstaller](http://rubyinstaller.org/downloads/) version 2+ - 32-bit version.
+By default, Ruby installs to C:\Ruby21 or Ruby22, etc. Ensure that C:\Ruby21\bin is in your `PATH`.
 >set PATH=PATH;C:\Ruby21\bin
 
 [RubyDevKit](http://rubyinstaller.org/downloads/) 32-bit version for use with Ruby 2.0 and above
@@ -59,8 +58,46 @@ The DevKit installer just unpacks files. Navigate to the directory and run the f
 >ruby dk.rb init
 >ruby dk.rb install
 
-##Hello World
-For this version  of Hello World, we will use **AutoRest** to generate a client library and use it to call a web service. The trivial web service that just returns a string is defined as follows: 
+## Build the Code
+We use [gulp](http://gulpjs.com) and msbuild / xbuild to handle the builds. If you would like to see what commands are
+available to you, run `gulp -T`. That will list all of the gulp tasks you can run. By default, just running `gulp` will
+run a build that will execute clean, build, code analysis, package and test.
+
+### Output from gulp -T
+```bash
+[13:54:21] Using gulpfile ./autorest/gulpfile.js
+[13:54:21] Tasks for ./autorest/gulpfile.js
+[13:54:21] ├── regenerate:expected
+[13:54:21] ├── regenerate:delete
+[13:54:21] ├── regenerate:expected:csazure
+[13:54:21] ├── regenerate:expected:cs
+[13:54:21] ├── clean:build
+[13:54:21] ├── clean:templates
+[13:54:21] ├── clean:generatedTest
+[13:54:21] ├─┬ clean
+[13:54:21] │ ├── clean:build
+[13:54:21] │ ├── clean:templates
+[13:54:21] │ └── clean:generatedTest
+[13:54:21] ├── syncNugetProjs
+[13:54:21] ├── syncNuspecs
+[13:54:21] ├─┬ syncDotNetDependencies
+[13:54:21] │ ├── syncNugetProjs
+[13:54:21] │ └── syncNuspecs
+[13:54:21] ├── build
+[13:54:21] ├── package
+[13:54:21] ├── test
+[13:54:21] ├── analysis
+[13:54:21] └── default
+```
+
+### Running the tests
+Prior to executing `gulp build test` to build and then test the code. Make sure that the latest tools are setup for your
+build environment.
+
+- run `bundle install` from the root directory
+
+## Hello World
+For this version  of Hello World, we will use **AutoRest** to generate a client library and use it to call a web service. The trivial web service that just returns a string is defined as follows:
 ```
 public class HelloWorldController : ApiController
 {
@@ -101,7 +138,7 @@ By convention, Swagger documents are exposed by web services with the name `swag
   }
 }
 ```
-Next, we invoke **AutoRest.exe** with this swagger document to generate client library code (see [Command Line Interface documentation](Documentation/cli.md) for details). 
+Next, we invoke **AutoRest.exe** with this swagger document to generate client library code (see [Command Line Interface documentation](Documentation/cli.md) for details).
 
 **AutoRest** is extensible and can support multiple types of input and output. *AutoRest.exe* comes with the *AutoRest.json* configuration file that defines the available inputs (*Modelers*) and outputs (*CodeGenerators*). When invoking *AutoRest.exe*, if you don't specify the `-Modeler` then Swagger is assumed and if you don't specify `-CodeGenerator` then CSharp is used.
 

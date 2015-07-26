@@ -46,7 +46,7 @@
                           Replacement=".dll.mdb"
                           LogTask="false"
                           Condition=" '$(OS)' != 'Windows_NT'"/>
-    <Message Text="Created dynamic nuspec %(NuspecFilesToUpdate2.Name)" />
+    <Message Text="Created dynamic nuspec %(NuspecFilesToUpdate.Name)" />
   </Target>
 
   <!--
@@ -55,10 +55,10 @@
   <Target Name="Package" DependsOnTargets="BuildDynamicNuSpecs">
     <Message Text="Generating NuGet library &amp; symbols + source packages" Importance="high" />
     <Exec Condition=" '%(SdkNuGetPackage.NoPackageAnalysis)' != 'true' "
-      Command="$(NuGetCommand) pack -BasePath &quot;$(LibraryRoot)&quot; -Verbosity $(NuGetVerbosity) &quot;binaries\packages\specs\%(SdkNuGetPackage.Name).nuspec&quot; -Version %(SdkNuGetPackage.PackageVersion) -OutputDirectory &quot;$(PackageOutputDir)&quot; -Symbols $(NoWarnOnPack)" />
+      Command="$(NuGetCommand) pack binaries\packages\specs\%(SdkNuGetPackage.Name).nuspec -BasePath $(LibraryRoot) -Verbosity $(NuGetVerbosity) -Version %(SdkNuGetPackage.PackageVersion) -OutputDirectory $(PackageOutputDir) -Symbols $(NoWarnOnPack)" />
 
     <Exec Condition=" '%(SdkNuGetPackage.NoPackageAnalysis)' == 'true' "
-      Command="$(NuGetCommand) pack -BasePath &quot;$(LibraryRoot)&quot; -NoPackageAnalysis -Verbosity $(NuGetVerbosity) &quot;binaries\packages\specs\%(SdkNuGetPackage.Name).nuspec&quot; -Version %(SdkNuGetPackage.PackageVersion) -OutputDirectory &quot;$(PackageOutputDir)&quot; -Symbols $(NoWarnOnPack)" />
+      Command="$(NuGetCommand) pack binaries\packages\specs\%(SdkNuGetPackage.Name).nuspec -BasePath $(LibraryRoot) -NoPackageAnalysis -Verbosity $(NuGetVerbosity) -Version %(SdkNuGetPackage.PackageVersion) -OutputDirectory $(PackageOutputDir) -Symbols $(NoWarnOnPack)" />
   </Target>
 
   <!--

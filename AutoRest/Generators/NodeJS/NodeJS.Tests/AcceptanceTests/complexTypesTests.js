@@ -9,7 +9,7 @@ var util = require('util');
 var assert = require('assert');
 var msRest = require('ms-rest');
 
-var complexClient = require('../Expected/SwaggerBat/BodyComplex/AutoRestComplexTestService');
+var complexClient = require('../Expected/AcceptanceTests/BodyComplex/AutoRestComplexTestService');
 
 var dummyToken = 'dummy12321343423';
 var credentials = new msRest.TokenCredentials(dummyToken);
@@ -18,9 +18,9 @@ var clientOptions = {};
 var baseUri = 'http://localhost:3000';
 
 describe('nodejs', function () {
-  
+
   describe('Swagger Complex Type BAT', function () {
-    
+
     describe('Basic Types Operations', function () {
       var testClient = new complexClient(baseUri, clientOptions);
       it('should get and put valid basic type properties', function (done) {
@@ -35,7 +35,7 @@ describe('nodejs', function () {
           });
         });
       });
-      
+
       it('should handle invalid enum value in a complex type', function (done) {
         testClient.basicOperations.putValid({ 'id': 2, 'name': 'abc', color: 'Blue' }, function (error, result) {
           should.exist(error);
@@ -52,7 +52,7 @@ describe('nodejs', function () {
           done();
         });
       });
-      
+
       it('should get empty basic type properties', function (done) {
         testClient.basicOperations.getEmpty(function (error, result) {
           should.not.exist(error);
@@ -61,7 +61,7 @@ describe('nodejs', function () {
           done();
         });
       });
-      
+
       it('should get basic type properties when the payload is empty', function (done) {
         testClient.basicOperations.getNotProvided(function (error, result) {
           should.not.exist(error);
@@ -69,7 +69,7 @@ describe('nodejs', function () {
           done();
         });
       });
-      
+
       it('should deserialize invalid basic types without throwing', function (done) {
         testClient.basicOperations.getInvalid(function (error, result) {
           should.not.exist(error);
@@ -79,7 +79,7 @@ describe('nodejs', function () {
       });
 
     });
-    
+
     describe('Primitive Types Operations', function () {
       var testClient = new complexClient(baseUri, clientOptions);
       it('should get and put valid int properties', function (done) {
@@ -93,7 +93,7 @@ describe('nodejs', function () {
           });
         });
       });
-      
+
       it('should get and put valid long properties', function (done) {
         testClient.primitive.getLong(function (error, result) {
           should.not.exist(error);
@@ -105,7 +105,7 @@ describe('nodejs', function () {
           });
         });
       });
-      
+
       it('should get and put valid float properties', function (done) {
         testClient.primitive.getFloat(function (error, result) {
           should.not.exist(error);
@@ -117,7 +117,7 @@ describe('nodejs', function () {
           });
         });
       });
-      
+
       it('should get and put valid double properties', function (done) {
         testClient.primitive.getDouble(function (error, result) {
           should.not.exist(error);
@@ -129,7 +129,7 @@ describe('nodejs', function () {
           });
         });
       });
-      
+
       it('should get and put valid bool properties', function (done) {
         testClient.primitive.getBool(function (error, result) {
           should.not.exist(error);
@@ -141,7 +141,7 @@ describe('nodejs', function () {
           });
         });
       });
-      
+
       it('should get and put valid string properties', function (done) {
         testClient.primitive.getString(function (error, result) {
           should.not.exist(error);
@@ -154,7 +154,7 @@ describe('nodejs', function () {
           });
         });
       });
-      
+
       it('should get and put valid date properties', function (done) {
         testClient.primitive.getDate(function (error, result) {
           should.not.exist(error);
@@ -190,7 +190,7 @@ describe('nodejs', function () {
       });
 
     });
-    
+
     describe('Array Types Operations', function () {
       var testClient = new complexClient(baseUri, clientOptions);
       it('should get valid array type properties', function (done) {
@@ -204,8 +204,8 @@ describe('nodejs', function () {
           });
         });
       });
-      
-      
+
+
       it('should get and put empty array type properties', function (done) {
         testClient.arrayModel.getEmpty(function (error, result) {
           should.not.exist(error);
@@ -216,7 +216,7 @@ describe('nodejs', function () {
           });
         });
       });
-      
+
       it('should get array type properties when the payload is empty', function (done) {
         testClient.arrayModel.getNotProvided(function (error, result) {
           should.not.exist(error);
@@ -226,7 +226,7 @@ describe('nodejs', function () {
       });
 
     });
-    
+
     describe('Dictionary Types Operations', function () {
       var testClient = new complexClient(baseUri, clientOptions);
       it('should get valid dictionary type properties', function (done) {
@@ -240,7 +240,7 @@ describe('nodejs', function () {
           });
         });
       });
-      
+
       it('should get and put empty dictionary type properties', function (done) {
         testClient.dictionary.getEmpty(function (error, result) {
           should.not.exist(error);
@@ -251,7 +251,7 @@ describe('nodejs', function () {
           });
         });
       });
-      
+
       it('should get null dictionary type properties', function (done) {
         testClient.dictionary.getNull(function (error, result) {
           should.not.exist(error);
@@ -259,7 +259,7 @@ describe('nodejs', function () {
           done();
         });
       });
-      
+
       it('should get dictionary type properties when the payload is empty', function (done) {
         testClient.dictionary.getNotProvided(function (error, result) {
           should.not.exist(error);
@@ -269,7 +269,7 @@ describe('nodejs', function () {
       });
 
     });
-    
+
     describe('Complex Types with Inheritance Operations', function () {
       var siamese = { "breed": "persian", "color": "green", "hates": [{ "food": "tomato", "id": 1, "name": "Potato" }, { "food": "french fries", "id": -1, "name": "Tomato" }], "id": 2, "name": "Siameeee" };
       var testClient = new complexClient(baseUri, clientOptions);
@@ -285,7 +285,7 @@ describe('nodejs', function () {
       });
 
     });
-    
+
     describe('Complex Types with Polymorphism Operations', function () {
       var fish = {
         'dtype': 'salmon',
@@ -356,7 +356,7 @@ describe('nodejs', function () {
         });
       });
     });
-    
+
     describe('Complex Types with recursive definitions', function () {
       var bigfish = {
         'dtype': 'salmon',
