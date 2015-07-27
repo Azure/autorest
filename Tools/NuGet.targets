@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-
+  
+  <PropertyGroup>
+    <NightlyBuildVersion Condition=" $(NightlyBuild) == 'true' ">$([System.DateTime]::Now.ToString("yyyyMMdd"))</NightlyBuildVersion>
+    <NightlyBuildVersion Condition=" $(NightlyBuild) == 'true' ">-Nightly$(NightlyBuildVersion)</NightlyBuildVersion>
+  </PropertyGroup>
+  
   <Import Project="$(LibrarySourceFolder)\ClientRuntimes\**\*.nuget.proj"
           Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'"/>
 
@@ -61,23 +66,13 @@
       <ActualSource Condition=" '$(NuGetPublishingSource)' != '' "> -Source $(NuGetPublishingSource)</ActualSource>
     </PropertyGroup>
 
-    <Message Importance="high" Text="Publishing NuGet packages to the cloud at $(NuGetPublishingSource)" />
+    <Message Importance="high" Text="Publishing main and symbols packages to the cloud at $(NuGetPublishingSource)" />
     <Exec Command="$(NuGetCommand) push &quot;$(PackageOutputDir)\%(SdkNuGetPackage.Identity).%(SdkNuGetPackage.PackageVersion).nupkg&quot; $(NuGetKey)$(ActualSource)"
           IgnoreExitCode="true" />
           
-    <Message Text="Unlisting %(SdkNuGetPackage.Identity) as Hidden is set to 'true' for the component."
+    <Message Importance="high" Text="Unlisting %(SdkNuGetPackage.Identity) as Hidden is set to 'true' for the component."
              Condition=" '%(SdkNuGetPackage.Hidden)' == 'true' " />             
     <Exec Command="$(NuGetCommand) delete %(SdkNuGetPackage.Identity) %(SdkNuGetPackage.PackageVersion) $(NuGetKey)$(ActualSource) -NonInteractive" 
              IgnoreExitCode="true" Condition=" '%(SdkNuGetPackage.Hidden)' == 'true' " />
-
-    <Message Importance="high" Text="Publishing NuGet symbol &amp; source packages to the cloud at $(NuGetSymbolPublishingSource)"
-             Condition=" $(NuGetSymbolPublishingSource) != '' "/>
-    <Exec Command="$(NuGetCommand) push &quot;$(PackageOutputDir)\%(SdkNuGetPackage.Identity).%(SdkNuGetPackage.PackageVersion).Symbols.nupkg&quot; $(NuGetKey) -Source $(NuGetSymbolPublishingSource)"
-          Condition=" $(NuGetSymbolPublishingSource) != '' And '%(SdkNuGetPackage.Publish)' != 'false' And '%(SdkNuGetPackage.SkipSymbolSourcePackage)' != 'true' And '$(PublishSymbolSourcePackages)' == 'true' "
-          IgnoreExitCode="true"
-          ContinueOnError="true" />
-
-    <Warning Text="Symbol/source packages are not being pushed. The PublishSymbolSourcePackages property is not set to true."
-             Condition=" '$(PublishSymbolSourcePackages)' != 'true' " />
   </Target>
 </Project>
