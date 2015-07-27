@@ -4,8 +4,7 @@ include MyNamespace
 describe 'AutoRestReportService' do
   before(:all) do
     dummyToken = 'dummy12321343423'
-    dummySubscription = '1-1-1-1'
-    @credentials = MsRestAzure::TokenCloudCredentials.new(dummySubscription, dummyToken)
+	@credentials = MsRest::TokenCredentials.new(dummyToken)
 
     @base_url = ENV['StubServerURI']
 

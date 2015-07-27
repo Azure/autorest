@@ -10,12 +10,13 @@ describe 'Azure Special properties behaviour' do
     @validApiVersion = "2.0"
     @unencodedPath = "path1/path2/path3"
     @unencodedQuery = "value1&q2=value2&q3=value3"
-    @dummyToken = 'dummy12321343423'
+
+	dummyToken = 'dummy12321343423'
+	@credentials = MsRest::TokenCredentials.new(dummyToken)
     @validClientId = "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0"
 
-    credentials = MsRestAzure::TokenCloudCredentials.new(@validSubscription, @dummyToken)
-    @client = AutoRestAzureSpecialParametersTestClient.new(credentials, @base_url)
-	  @client.subscription_id = @validSubscription
+    @client = AutoRestAzureSpecialParametersTestClient.new(@credentials, @base_url)
+	@client.subscription_id = @validSubscription
   end
 
   # Subscription Tests
@@ -37,10 +38,6 @@ describe 'Azure Special properties behaviour' do
   it 'should use post parameter from credentials for referenced parameter if ms-global true' do
     result = @client.subscription_in_credentials.post_swagger_global_valid().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
-  end
-
-  it 'should throw exception if ms-global parameter is nil' do
-    expect { credentials = MsRestAzure::TokenCloudCredentials.new(nil, @dummyToken) }.to raise_exception(ArgumentError)
   end
 
   it 'should use post parameter from path for method parameter if ms-global false' do

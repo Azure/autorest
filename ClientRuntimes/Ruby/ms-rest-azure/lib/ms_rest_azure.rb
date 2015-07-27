@@ -14,8 +14,7 @@ require 'ms_rest_azure/azure_operation_response.rb'
 require 'ms_rest_azure/async_operation_status.rb'
 require 'ms_rest_azure/polling_state.rb'
 
-require 'ms_rest_azure/subscription_cloud_credentials.rb'
-require 'ms_rest_azure/token_cloud_credentials.rb'
+require 'ms_rest_azure/azure_application_credentials.rb'
 
 require 'ms_rest_azure/azure_service_client.rb'
 

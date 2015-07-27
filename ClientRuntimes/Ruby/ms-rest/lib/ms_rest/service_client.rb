@@ -33,6 +33,25 @@ module MsRest
     end
 
     #
+    # Verifies whether given response is about authentication token expiration.
+    # @param response [Net::HTTPResponse] http response to verify.
+    #
+    # @return [Bool] true if response is about authentication token expiration, false otherwise.
+    def is_token_expired_response(response)
+      return false unless response.is_a?(Net::HTTPUnauthorized)
+
+      begin
+        response_body = JSON.load(response.body)
+        error_code = response_body['error']['code']
+        error_message = response_body['error']['message']
+      rescue Exception => e
+        return false
+      end
+
+      return (error_code == 'AuthenticationFailed' && (error_message.start_with?('The access token expiry') || (error_message.start_with?('The access token is missing or invalid'))))
+    end
+
+    #
     # Makes the HTTP request by the given uri.
     # @param request [Net::HTTPRequest] the HTTP request to perform.
     # @param uri [URI::HTTP] the URI for HTTP request.
@@ -61,6 +80,12 @@ module MsRest
 
       retry_count.times do
         response = http.request(request)
+
+        if (is_token_expired_response(response) && @credentials.respond_to?(:acquire_token))
+          @credentials.acquire_token()
+          @credentials.sign_request(request)
+          redo
+        end
 
         unless response['set-cookie'].nil?
           cookies = response['set-cookie']

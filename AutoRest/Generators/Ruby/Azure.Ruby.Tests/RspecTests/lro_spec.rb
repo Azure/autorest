@@ -8,8 +8,7 @@ describe 'LongRunningOperation' do
     @base_url = ENV['StubServerURI']
 
     dummyToken = 'dummy12321343423'
-    dummySubscription = '1-1-1-1'
-    @credentials = MsRestAzure::TokenCloudCredentials.new(dummySubscription, dummyToken)
+    @credentials = MsRest::TokenCredentials.new(dummyToken)
 
     @client = AutoRestLongRunningOperationTestService.new(@credentials, @base_url)
     @client.long_running_operation_retry_timeout = 0
