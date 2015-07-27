@@ -18,9 +18,12 @@
   <files>
     <file src="..\binaries\net45\AutoRest.Core.*" target="tools" />
     <file src="..\binaries\net45\AutoRest.exe" target="tools" />
-    <file src="..\binaries\net45\AutoRest.ToRelease.json" target="tools\AutoRest.json" />
+    <file src="..\binaries\net45\AutoRest.json" target="tools\AutoRest.json" />
     <file src="..\binaries\net45\AutoRest.Generator.CSharp.*" target="tools" />
+    <file src="..\binaries\net45\AutoRest.Generator.Azure.CSharp.*" target="tools" />
+    <file src="..\binaries\net45\AutoRest.Generator.Azure.Common.*" target="tools" />
     <file src="..\binaries\net45\AutoRest.Generator.NodeJS.*" target="tools" />
+    <file src="..\binaries\net45\AutoRest.Generator.Azure.NodeJS.*" target="tools" />
     <file src="..\binaries\net45\AutoRest.Modeler.Swagger.*" target="tools" />    
     <file src="..\binaries\net45\Newtonsoft.Json.*" target="tools" />
   </files>
