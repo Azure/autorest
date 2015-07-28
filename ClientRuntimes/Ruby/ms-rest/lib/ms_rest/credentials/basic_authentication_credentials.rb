@@ -39,7 +39,7 @@ module MsRest
       super(request)
       encodeCredentials = Base64.encode64("#{user_name}:#{password}").chomp
       credentials = "#{scheme} #{encodeCredentials}"
-      request.add_field(AUTHORIZATION, credentials)
+      request.request_headers[AUTHORIZATION] = credentials
     end
 
   end

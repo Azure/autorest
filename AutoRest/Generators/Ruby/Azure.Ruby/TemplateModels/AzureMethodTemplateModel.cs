@@ -39,7 +39,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         {
             get { return Extensions.ContainsKey(AzureCodeGenerator.LongRunningExtension); }
         }
-        
+
         /// <summary>
         /// Gets the Get method model.
         /// </summary>
@@ -102,7 +102,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                 builder.AppendLine("{0} = URI.parse({1})", outputVariableName, inputVariableName);
             }
 
-            // Filling query parameters (which are directly in the url query part). 
+            // Filling query parameters (which are directly in the url query part).
             var queryParametres = ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query).ToList();
 
             builder.AppendLine("properties = {}");
@@ -169,14 +169,14 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         }
 
         /// <summary>
-        /// Gets the expression for default header setting. 
+        /// Gets the expression for default header setting.
         /// </summary>
         public override string SetDefaultHeaders
         {
             get
             {
                 IndentedStringBuilder sb = new IndentedStringBuilder();
-                sb.AppendLine("http_request['x-ms-client-request-id'] = SecureRandom.uuid")
+                sb.AppendLine("request_headers['x-ms-client-request-id'] = SecureRandom.uuid")
                   .AppendLine(base.SetDefaultHeaders);
                 return sb.ToString();
             }

@@ -34,7 +34,7 @@ module MsRest
     def sign_request(request)
       super(request)
       credentials = "#{scheme} #{token}"
-      request[AUTHORIZATION] = credentials
+      request.request_headers[AUTHORIZATION] = credentials
     end
 
   end

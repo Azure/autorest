@@ -16,7 +16,6 @@ module MsRest
     # @return [Net::HTTPRequest] authenticated HTTP request
     def sign_request(request)
       fail ArgumentError, 'request is nil.' if request.nil?
-      fail ArgumentError, 'request is not valid.' unless request.is_a?(Net::HTTPRequest)
     end
   end
 end

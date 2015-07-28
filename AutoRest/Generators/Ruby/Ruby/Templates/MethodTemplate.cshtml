@@ -28,13 +28,16 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
   @(Model.RemoveDuplicateForwardSlashes("url"))
 
   @EmptyLine
-  # Create HTTP transport objects
-  http_request = Net::HTTP::@(Model.HttpMethod.ToString()).new(url.request_uri)
+  connection = Faraday.new(:url => url) do |faraday|
+    faraday.use RetryPolicyMiddleware, times: 3, retry: 0.02, credentials: @(Model.ClientReference).credentials
+    faraday.adapter Faraday.default_adapter
+  end
 
   @if (Model.Parameters.Any(p => p.Location == ParameterLocation.Header))
   {
   @EmptyLine
   @:# Set Headers
+  @:request_headers = Hash.new
   @:@(Model.SetDefaultHeaders)
     foreach (var parameter in Model.Parameters.Where(p => p.Location == ParameterLocation.Header))
     {
@@ -42,13 +45,13 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
         {
   @:fail RuntimeError, 'Header Content-Type is forbidden to change'
         }
-  @:http_request["@(parameter.SerializedName)"] = @parameter.Type.ToString(parameter.Name)
+  @:request_headers["@(parameter.SerializedName)"] = @parameter.Type.ToString(parameter.Name)
     }
   }
   @EmptyLine
   unless custom_headers.nil?
     custom_headers.each do |key, value|
-      http_request[key] = value
+      request_headers[key] = value
     end
   end
 
@@ -56,33 +59,38 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
   {
   @EmptyLine
   @:# Serialize Request
-  @:http_request.add_field('Content-Type', 'application/json')
-  @:@Model.CreateSerializationString(Model.RequestBody.Name, Model.RequestBody.Type, "http_request.body", Settings.Namespace)
+  @:request_headers['Content-Type'] = 'application/json'
+  @:@Model.CreateSerializationString(Model.RequestBody.Name, Model.RequestBody.Type, "request_content", Settings.Namespace)
   }
 
   @EmptyLine
   # Send Request
-  promise = Concurrent::Promise.new { @(Model.MakeRequestMethodReference)(http_request, url) }
+  promise = Concurrent::Promise.new do
+    connection.put do |request|
+      request.headers = request_headers
+      request.body = request_content
+    end
+  end
 
   @EmptyLine
   promise = promise.then do |http_response|
-    status_code = http_response.code.to_i
+    status_code = http_response.status
     response_content = http_response.body
     unless (@Model.SuccessStatusCodePredicate)
       @if (Model.DefaultResponse != null)
       {
       @:error_model = JSON.load(response_content)
-      @:fail @(Model.OperationExceptionTypeString).new(http_request, http_response, error_model)
+      @:fail @(Model.OperationExceptionTypeString).new(request_content, http_response, error_model)
       }
       else
       {
-      @:fail @(Model.OperationExceptionTypeString).new(http_request, http_response)
+      @:fail @(Model.OperationExceptionTypeString).new(request_content, http_response)
       }
     end
 
     @EmptyLine
     # Create Result
-    result = @(Model.OperationResponseReturnTypeString).new(http_request, http_response)
+    result = @(Model.OperationResponseReturnTypeString).new(request_content, http_response)
     @Model.InitializeResponseBody
 
     @foreach (var responsePair in Model.Responses.Where(r => r.Value != null && r.Value.IsSerializable()))
