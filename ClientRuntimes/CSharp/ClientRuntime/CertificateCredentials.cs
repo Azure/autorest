@@ -47,6 +47,11 @@ namespace Microsoft.Rest
         /// </remarks>
         public override void InitializeServiceClient<T>(ServiceClient<T> client)
         {
+            if (client == null)
+            {
+                throw new ArgumentNullException("client");
+            }
+
             WebRequestHandler handler = client.HttpMessageHandlers.FirstOrDefault(h => h is WebRequestHandler) as WebRequestHandler;
             if (handler == null)
             {
