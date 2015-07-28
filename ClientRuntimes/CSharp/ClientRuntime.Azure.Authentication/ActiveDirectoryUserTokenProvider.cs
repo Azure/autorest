@@ -25,7 +25,6 @@ namespace Microsoft.Rest.Azure.Authentication
         private UserIdentifier _userId;
         private ActiveDirectoryEnvironment _environment;
         private AuthenticationContext _authenticationContext;
-        private Uri _clientRedirectUri;
         private string _clientId;
 
         /// <summary>
@@ -141,7 +140,6 @@ namespace Microsoft.Rest.Azure.Authentication
             this._clientId = clientId;
             this._environment = environment;
             this._authenticationContext = GetAuthenticationContext(domain, environment, cache, ownerWindow);
-            this._clientRedirectUri = clientRedirectUri;
             AuthenticationResult authenticationResult = null;
             if (username != null && password != null)
             {
@@ -167,6 +165,7 @@ namespace Microsoft.Rest.Azure.Authentication
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         private AuthenticationResult Authenticate(ActiveDirectoryEnvironment environment, Uri clientRedirectUri)
         {
             Exception exception = null;
