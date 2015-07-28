@@ -6,7 +6,8 @@
     -->
     <SdkNuGetPackage Include="Microsoft.Rest.ClientRuntime.Azure">
       <PackageVersion>1.0.18-preview</PackageVersion>
-      <Folder>$(MSBuildThisFileDirectory)</Folder>
+      <Folder>ClientRuntimes/CSharp/ClientRuntime.Azure/</Folder>
+      <Name>Microsoft.Rest.ClientRuntime.Azure</Name>
       <Hidden>true</Hidden>
     </SdkNuGetPackage>
   </ItemGroup>

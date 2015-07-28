@@ -3,10 +3,11 @@
   <ItemGroup>
     <SdkNuGetPackage Include="AutoRest">
       <PackageVersion>0.11.0$(NightlyBuildVersion)</PackageVersion>
-      <Folder>$(MSBuildThisFileDirectory)</Folder>
       <!--Want to prevent NuGet from reporting warnings
       like we are not putting assemblies under the \lib folder-->
       <NoPackageAnalysis>true</NoPackageAnalysis>
+      <Folder>AutoRest/AutoRest.Core</Folder>
+      <Name>AutoRest</Name>
     </SdkNuGetPackage>
   </ItemGroup>
 </Project>

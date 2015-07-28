@@ -9,7 +9,7 @@ var util = require('util');
 var assert = require('assert');
 var msRestAzure = require('ms-rest-Azure');
 
-var azureUrlClient = require('../Expected/SwaggerBat/SubscriptionIdApiVersion/MicrosoftAzureTestUrl');
+var azureUrlClient = require('../Expected/AcceptanceTests/SubscriptionIdApiVersion/MicrosoftAzureTestUrl');
 var dummySubscriptionId = 'a878ae02-6106-429z-9397-58091ee45g98';
 var dummyToken = 'dummy12321343423';
 var credentials = new msRestAzure.SubscriptionCredentials(dummyToken, dummySubscriptionId);
@@ -18,11 +18,11 @@ var clientOptions = {};
 var baseUri = 'http://localhost:3000';
 
 describe('nodejs', function () {
-  
+
   describe('Azure Swagger Url', function () {
     var testClient = new azureUrlClient(credentials, dummySubscriptionId, baseUri, clientOptions);
-    
-    it('should correctly send the subscriptionId as path parameter and api-version ' + 
+
+    it('should correctly send the subscriptionId as path parameter and api-version ' +
       'as a query parameter in the request url', function (done) {
       testClient.group.getSampleResourceGroup('testgroup101', function (error, result) {
         should.not.exist(error);

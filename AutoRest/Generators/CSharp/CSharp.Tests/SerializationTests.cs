@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using Fixtures.MirrorRecursiveTypes;
@@ -21,12 +22,23 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
     [Collection("AutoRest Tests")]
     public class MirrorTests
     {
+
+        private static string ExpectedPath(string file)
+        {
+            return Path.Combine("Expected", file);
+        }
+
+        private static string SwaggerPath(string file)
+        {
+            return Path.Combine("Swagger", file);
+        }
+
         [Fact]
         public void CanSerializeAndDeserializePrimitiveTypes()
         {
             // first regen the spec
             SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
-                @"Swagger\swagger-mirror-primitives.json", @"Expected\Mirror.Primitives.cs");
+                SwaggerPath("swagger-mirror-primitives.json"), ExpectedPath("Mirror.Primitives"));
 
             //Now run mocked tests using the client
             var product = MirrorTestHelpers.GenerateProduct();
@@ -41,7 +53,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         public void CanRoundTripSequences()
         {
             SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
-                @"Swagger\swagger-mirror-sequences.json", @"Expected\Mirror.Sequences.cs");
+                SwaggerPath("swagger-mirror-sequences.json"), ExpectedPath("Mirror.Sequences"));
             using (var sequenceClient = MirrorTestHelpers.CreateSequenceClient())
             {
                 var testList = new List<int?> {1, 1, 2, 3, 5, 8, 13, 21};
@@ -81,7 +93,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         [Fact]
         public void CanRoundtripPolymorphicTypes()
         {
-            //SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(@"Swagger\Mirror\swagger-mirror-polymorphic.json", @"Expected\Mirror.Polymorphic.cs");
+            //SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(SwaggerPath("Mirror\swagger-mirror-polymorphic.json",ExpectedPath("Mirror.Polymorphic.cs");
             var pets = new[]
             {
                 new Animal {Description = "Pet Only", Id = "1"},

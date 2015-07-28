@@ -6,18 +6,15 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <LibraryFxTarget Condition="'$(LibraryFxTarget)' == ''">net45</LibraryFxTarget>
     <ProjectGuid>{2EFD6648-39B4-476A-B302-8BC236F5F1B8}</ProjectGuid>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Configuration Condition=" '$(Configuration)' == '' ">Net40-Debug</Configuration>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Microsoft.Rest.Tracing.Log4Net</RootNamespace>
-    <AssemblyName>Microsoft.Rest.ClientRuntime.Log4Net</AssemblyName>
     <OutputType>Library</OutputType>
     <RestorePackages>true</RestorePackages>
     <NuGetPackageImportStamp>e31a3ee2</NuGetPackageImportStamp>
+    <AssemblyName>Microsoft.Rest.ClientRuntime.Log4Net</AssemblyName>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Net40-Debug'">
-    <DocumentationFile>bin\Net40-Debug\Microsoft.Rest.ClientRuntime.Log4Net.xml</DocumentationFile>
-  </PropertyGroup>
-  <Import Project="$(SolutionDir)\tools\AutoRest.Settings.targets" />
+  <Import Project="$(SolutionDir)\Tools\AutoRest.Settings.targets" />
   <ItemGroup>
     <Compile Include="Log4NetTracingInterceptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -35,12 +32,12 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ClientRuntime\ClientRuntime.csproj">
-      <Project>{7f524559-93f9-4f3f-9e2c-af41a0c2e6f4}</Project>
+      <Project>{7F524559-93F9-4F3F-9E2C-AF41A0C2E6F4}</Project>
       <Name>ClientRuntime</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <CodeAnalysisDictionary Include="..\..\..\tools\CustomDictionary.xml">
+    <CodeAnalysisDictionary Include="..\..\..\Tools\CustomDictionary.xml">
       <Link>CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>
   </ItemGroup>

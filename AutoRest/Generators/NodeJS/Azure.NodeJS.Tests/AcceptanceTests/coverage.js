@@ -12,7 +12,7 @@ var _ = require('underscore')
 var msRest = require('ms-rest');
 var msRestAzure = require('ms-rest-azure');
 
-var reportClient = require('../Expected/SwaggerBat/Report/AutoRestReportServiceForAzure');
+var reportClient = require('../Expected/AcceptanceTests/AzureReport/AutoRestReportServiceForAzure');
 
 var dummySubscriptionId = 'a878ae02-6106-429z-9397-58091ee45g98';
 var dummyToken = 'dummy12321343423';
@@ -22,7 +22,7 @@ var clientOptions = {};
 var baseUri = 'http://localhost:3000';
 
 describe('nodejs', function () {
-  
+
   describe('Swagger BAT coverage report', function () {
     var testClient = new reportClient(credentials, baseUri, clientOptions);
     it('should have 100% coverage for Azure', function (done) {

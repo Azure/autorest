@@ -10,7 +10,7 @@ var assert = require('assert');
 var msRest = require('ms-rest');
 var _ = require('underscore')
 
-var reportClient = require('../Expected/SwaggerBat/Report/AutoRestReportService');
+var reportClient = require('../Expected/AcceptanceTests/Report/AutoRestReportService');
 
 var dummyToken = 'dummy12321343423';
 var credentials = new msRest.TokenCredentials(dummyToken);
@@ -19,7 +19,7 @@ var clientOptions = {};
 var baseUri = 'http://localhost:3000';
 
 describe('nodejs', function () {
-  
+
   describe('Swagger BAT coverage report', function () {
     var testClient = new reportClient(baseUri, clientOptions);
     it('should have 100% coverage', function (done) {
@@ -34,7 +34,7 @@ describe('nodejs', function () {
         result.body['putDictionaryDateValid'] = 1;
         result.body['putArrayDateValid'] = 1;
         result.body['UrlQueriesDateValid'] = 1;
-        
+
         var total = _.keys(result.body).length;
         var passed = 0;
         _.keys(result.body).forEach(function(item) {
