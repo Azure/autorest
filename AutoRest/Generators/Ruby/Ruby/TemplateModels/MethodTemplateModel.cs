@@ -126,7 +126,7 @@ namespace Microsoft.Rest.Generator.Ruby
             }
         }
 
-        public virtual string InitializeResponseBody 
+        public virtual string InitializeResponseBody
         {
             get { return string.Empty; }
         }
@@ -231,7 +231,7 @@ namespace Microsoft.Rest.Generator.Ruby
                 builder.AppendLine("{0} = URI.join({1}.base_url, {2})", outputVariableName, ClientReference, inputVariableName);
             }
 
-            // Filling query parameters (which are directly in the url query part). 
+            // Filling query parameters (which are directly in the url query part).
             var queryParametres = ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query).ToList();
 
             if (queryParametres.Any())
@@ -256,12 +256,12 @@ namespace Microsoft.Rest.Generator.Ruby
             //builder.AppendLine("# trim all duplicate forward slashes in the url");
             //builder.AppendLine("var regex = /([^:]\\/)\\/+/gi;");
             //builder.AppendLine("{0} = {0}.replace(regex, '$1');", urlVariableName);
-            
+
             return builder.ToString();
         }
 
         /// <summary>
-        /// Gets the expression for default header setting. 
+        /// Gets the expression for default header setting.
         /// </summary>
         public virtual string SetDefaultHeaders
         {

@@ -52,8 +52,8 @@ module MsRestAzure
     def get_delay_in_milliseconds
       return @retry_timeout unless @retry_timeout.nil?
 
-      if (!response.nil? && !response['Retry-After'].nil?)
-        return response['Retry-After'].to_i * 1000
+      if (!response.nil? && !response.headers['Retry-After'].nil?)
+        return response.headers['Retry-After'].to_i * 1000
       end
 
       return MsRestAzure::AzureAsyncOperation.DEFAULT_DELAY
@@ -66,8 +66,8 @@ module MsRestAzure
       @response = response
 
       if (!response.nil?)
-        @azure_async_operation_header_link = response['Azure-AsyncOperation'] unless response['Azure-AsyncOperation'].nil?
-        @location_header_link = response['Location'] unless response['Location'].nil?
+        @azure_async_operation_header_link = response.headers['Azure-AsyncOperation'] unless response.headers['Azure-AsyncOperation'].nil?
+        @location_header_link = response.headers['Location'] unless response.headers['Location'].nil?
       end
     end
 
