@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Microsoft.Rest.Generator.CSharp.Azure.Properties {
+namespace Microsoft.Rest.Azure.Authentication.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Microsoft.Rest.Generator.CSharp.Azure.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Microsoft.Rest.Azure.Authentication.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,29 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Long running operations for &apos;{0}&apos; requires a GET operation under the same path and same operation group &apos;{1}&apos;..
+        ///   Looks up a localized string similar to The authentication endpoint must not contain a query string..
         /// </summary>
-        internal static string InvalidLongRunningOperationForCreateOrUpdate {
+        internal static string AuthenticationEndpointContainsQuery {
             get {
-                return ResourceManager.GetString("InvalidLongRunningOperationForCreateOrUpdate", resourceCulture);
+                return ResourceManager.GetString("AuthenticationEndpointContainsQuery", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Microsoft.Rest.ClientRuntime.Azure.1.0.18-preview nuget package is required to compile the generated code..
+        ///   Looks up a localized string similar to Authentication error while acquiring token: &apos;{0}&apos;..
         /// </summary>
-        internal static string UsageInformation {
+        internal static string ErrorAcquiringToken {
             get {
-                return ResourceManager.GetString("UsageInformation", resourceCulture);
+                return ResourceManager.GetString("ErrorAcquiringToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Authentication error while renewing token: &apos;{0}&apos;..
+        /// </summary>
+        internal static string ErrorRenewingToken {
+            get {
+                return ResourceManager.GetString("ErrorRenewingToken", resourceCulture);
             }
         }
     }

@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using Microsoft.Rest.Azure.Properties;
+using Microsoft.Rest.Azure.Authentication.Properties;
 
 namespace Microsoft.Rest.Azure.Authentication
 {

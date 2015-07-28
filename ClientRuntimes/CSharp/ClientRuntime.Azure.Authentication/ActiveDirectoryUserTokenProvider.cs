@@ -6,7 +6,7 @@ using System.Globalization;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Rest.Azure.Properties;
+using Microsoft.Rest.Azure.Authentication.Properties;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Rest;
 
@@ -22,12 +22,9 @@ namespace Microsoft.Rest.Azure.Authentication
         /// logins in the login dialog.
         /// </summary>
         private const string EnableEbdMagicCookie = "site_id=501358&display=popup";
-        private string _userId;
-        private string _password;
+        private UserIdentifier _userId;
         private ActiveDirectoryEnvironment _environment;
         private AuthenticationContext _authenticationContext;
-        private IPlatformParameters _platformParameters;
-        private Uri _clientRedirectUri;
         private string _clientId;
 
         /// <summary>
@@ -52,20 +49,19 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="environment">The azure environment to manage resources in.</param>
         /// <param name="clientRedirectUri">The redirect URI for authentication requests for 
         /// this client application.</param>
-        /// <param name="platformParameters">The ADAL platform parameter.</param>
+        /// <param name="ownerWindow">The ADAL dialog owner window.</param>
         /// <param name="cache">The ADAL token cache to use during authentication.</param>
         public ActiveDirectoryUserTokenProvider(string clientId, string domain,
-            ActiveDirectoryEnvironment environment, Uri clientRedirectUri, 
-            IPlatformParameters platformParameters, TokenCache cache)
+            ActiveDirectoryEnvironment environment, Uri clientRedirectUri, object ownerWindow, TokenCache cache)
         {
-            Initialize(clientId:clientId, 
-                username:null, 
-                password:null, 
-                domain:domain, 
-                environment:environment,
-                cache:cache,
-                platformParameters: platformParameters,
-                clientRedirectUri:clientRedirectUri);
+            Initialize(clientId,
+                username: null,
+                password: null,
+                domain: domain,
+                environment: environment,
+                cache: cache,
+                clientRedirectUri: clientRedirectUri,
+                ownerWindow: ownerWindow);
         }
 
 
@@ -95,14 +91,14 @@ namespace Microsoft.Rest.Azure.Authentication
         public ActiveDirectoryUserTokenProvider(string clientId, string domain, string username, string password,
             ActiveDirectoryEnvironment environment, TokenCache cache)
         {
-            Initialize(clientId: clientId,
+            Initialize(clientId,
                 username: username,
                 password: password,
                 domain: domain,
                 environment: environment,
                 cache: cache,
-                platformParameters: null,
-                clientRedirectUri: null);
+                clientRedirectUri: null,
+                ownerWindow: null);
         }
 
         /// <summary>
@@ -114,16 +110,8 @@ namespace Microsoft.Rest.Azure.Authentication
             cancellationToken.ThrowIfCancellationRequested();
             try
             {
-                AuthenticationResult result;
-                if (_userId == null)
-                {
-                    result = await Authenticate(_environment, _platformParameters, _clientRedirectUri);
-                }
-                else
-                {
-                    result = await Authenticate(_userId, _password, _environment);
-                }
-                this._userId = result.UserInfo.DisplayableId;
+                AuthenticationResult result = await this._authenticationContext.AcquireTokenSilentAsync(this._environment.TokenAudience.ToString(), 
+                    this._clientId, this._userId).ConfigureAwait(false);
                 return new AuthenticationHeaderValue(result.AccessTokenType, result.AccessToken);
             }
             catch (AdalException authenticationException)
@@ -133,8 +121,8 @@ namespace Microsoft.Rest.Azure.Authentication
         }
 
         private void Initialize(string clientId, string domain, string username, string password,
-            ActiveDirectoryEnvironment environment, TokenCache cache, IPlatformParameters platformParameters, 
-            Uri clientRedirectUri)
+            ActiveDirectoryEnvironment environment, TokenCache cache,
+            Uri clientRedirectUri, object ownerWindow)
         {
             if (string.IsNullOrWhiteSpace(clientId))
             {
@@ -149,52 +137,77 @@ namespace Microsoft.Rest.Azure.Authentication
                 throw new ArgumentOutOfRangeException("environment");
             }
 
-            this._userId = username;
-            this._password = password;
             this._clientId = clientId;
             this._environment = environment;
-            this._authenticationContext = GetAuthenticationContext(domain, environment, cache);
-            if (platformParameters == null)
+            this._authenticationContext = GetAuthenticationContext(domain, environment, cache, ownerWindow);
+            AuthenticationResult authenticationResult = null;
+            if (username != null && password != null)
             {
-#if !PORTABLE
-                platformParameters = new PlatformParameters(PromptBehavior.Always, null);
-#else
-                throw new ArgumentNullException("platformParameters");
-#endif
+                authenticationResult = Authenticate(new UserCredential(username, password), this._environment);
             }
-            this._platformParameters = platformParameters;
-
-            this._clientRedirectUri = clientRedirectUri;
+            else
+            {
+                authenticationResult = Authenticate(this._environment, clientRedirectUri);
+            }
+            this._userId = new UserIdentifier(authenticationResult.UserInfo.DisplayableId, UserIdentifierType.OptionalDisplayableId);
         }
 
-        private async Task<AuthenticationResult> Authenticate(string username, string password, ActiveDirectoryEnvironment environment)
+
+        private AuthenticationResult Authenticate(UserCredential credential, ActiveDirectoryEnvironment environment)
         {
-            return await this._authenticationContext.AcquireTokenAsync(
-                environment.TokenAudience.ToString(), 
-                this._clientId,
-                new UserCredential(username, password)).ConfigureAwait(false);
+            try
+            {
+                return this._authenticationContext.AcquireToken(environment.TokenAudience.ToString(), this._clientId, credential);
+            }
+            catch (AdalException ex)
+            {
+                throw new AuthenticationException(Resources.ErrorAcquiringToken, ex);
+            }
         }
 
-        private async Task<AuthenticationResult> Authenticate(ActiveDirectoryEnvironment environment,  
-            IPlatformParameters platformParameters, Uri clientRedirectUri)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
+        private AuthenticationResult Authenticate(ActiveDirectoryEnvironment environment, Uri clientRedirectUri)
         {
-            return await this._authenticationContext.AcquireTokenAsync(
-                    environment.TokenAudience.ToString(), 
-                    this._clientId, 
-                    clientRedirectUri,
-                    platformParameters, 
-                    UserIdentifier.AnyUser,
-                    EnableEbdMagicCookie).ConfigureAwait(false);
+            Exception exception = null;
+            AuthenticationResult result = null;
+            var thread = new Thread(() =>
+            {
+                try
+                {
+                    result = this._authenticationContext.AcquireToken(
+                        environment.TokenAudience.ToString(),
+                        this._clientId,
+                        clientRedirectUri,
+                        PromptBehavior.Always,
+                        UserIdentifier.AnyUser,
+                        EnableEbdMagicCookie);
+                }
+                catch (Exception e)
+                {
+                    exception = e;
+                }
+            });
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Name = "AcquireTokenThread";
+            thread.Start();
+            thread.Join();
+            if (exception != null)
+            {
+                throw new AuthenticationException(Resources.ErrorAcquiringToken, exception);
+            }
+
+            return result;
         }
 
-        private static AuthenticationContext GetAuthenticationContext(string domain, ActiveDirectoryEnvironment environment, TokenCache cache)
+        private static AuthenticationContext GetAuthenticationContext(string domain, ActiveDirectoryEnvironment environment, TokenCache cache, object ownerWindow)
         {
-            return cache == null
+            var context = (cache == null
                 ? new AuthenticationContext(environment.AuthenticationEndpoint + domain,
                     environment.ValidateAuthority)
                 : new AuthenticationContext(environment.AuthenticationEndpoint + domain,
-                    environment.ValidateAuthority, cache);
-
+                    environment.ValidateAuthority, cache));
+            context.OwnerWindow = ownerWindow;
+            return context;
         }
     }
 }
