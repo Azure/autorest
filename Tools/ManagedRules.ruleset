@@ -423,5 +423,12 @@
     <Rule Id="C6993" Action="None" />
     <Rule Id="C6995" Action="None" />
     <Rule Id="C6997" Action="None" />
+    <Rule Id="RECS0145" Action="None" />
+    <Rule Id="RECS0163" Action="None" />
+    <Rule Id="RECS0070" Action="None" />
+    <Rule Id="RECS0017" Action="None" />
+    <Rule Id="RECS0129" Action="None" />
+    <Rule Id="RECS0022" Action="None" />
+    <Rule Id="RECS0145" Action="None" />
   </Rules>
 </RuleSet>

@@ -6,9 +6,9 @@ using System.Globalization;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Rest.Azure.Properties;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Rest;
+using Microsoft.Rest.Azure.Authentication.Properties;
 
 namespace Microsoft.Rest.Azure.Authentication
 {
@@ -61,21 +61,16 @@ namespace Microsoft.Rest.Azure.Authentication
         /// </summary>
         public virtual async Task<AuthenticationHeaderValue> GetAuthenticationHeaderAsync(CancellationToken cancellationToken)
         {
-            var result = await this.Authenticate();
-            this.TokenType = result.AccessTokenType;
-            return new AuthenticationHeaderValue(result.AccessTokenType, result.AccessToken);
-        }
-        
-        private async Task<AuthenticationResult> Authenticate()
-        {
             try
             {
-                return await this._authenticationContext.AcquireTokenAsync(this._tokenAudience, this._credential).ConfigureAwait(false);
+                var result = await this._authenticationContext.AcquireTokenAsync(this._tokenAudience, this._credential).ConfigureAwait(false);
+                this.TokenType = result.AccessTokenType;
+                return new AuthenticationHeaderValue(result.AccessTokenType, result.AccessToken);
             }
             catch (AdalException authenticationException)
             {
                 throw new AuthenticationException(Resources.ErrorAcquiringToken, authenticationException);
-            }
+            }            
         }
 
         private void Initialize(string clientId, string domain, string secret, ActiveDirectoryEnvironment environment, 

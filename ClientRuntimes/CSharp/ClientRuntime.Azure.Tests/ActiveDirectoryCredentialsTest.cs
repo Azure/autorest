@@ -72,10 +72,8 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [EnvironmentDependentFact]
         public void OrgIdCredentialsThrowsForInvalidCredentials()
         {
-            var credential = new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
-                this._domain, "unuseduser@thisdomain.com", "This is not a valid password");
-            var exception = Assert.Throws<AuthenticationException>(() => 
-                credential.ProcessHttpRequestAsync(new HttpRequestMessage(), CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult());
+            var exception = Assert.Throws<AuthenticationException>(() => new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
+                this._domain, "unuseduser@thisdomain.com", "This is not a valid password"));
             Assert.NotNull(exception.InnerException);
             Assert.Equal(typeof(AdalException), exception.InnerException.GetType());
             exception = Assert.Throws<AuthenticationException>(() => new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",

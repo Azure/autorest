@@ -25,6 +25,7 @@
     <Compile Include="Serialization\JsonConverterHelper.cs" />
     <Compile Include="Serialization\PolymorphicSerializeJsonConverter.cs" />
     <Compile Include="Serialization\ReadOnlyJsonContractResolver.cs" />
+    <Compile Include="CertificateCredentials.cs" />
     <Compile Include="TransientFaultHandling\TransientErrorIgnoreStrategy.cs" />
     <Compile Include="TransientFaultHandling\RetryCondition.cs" />
     <Compile Include="TypeConversion.cs" />

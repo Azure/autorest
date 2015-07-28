@@ -5,17 +5,17 @@
   <Import Project="..\..\..\packages\xunit.core.2.1.0-beta4-build3050\build\portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.props" Condition="Exists('..\..\..\packages\xunit.core.2.1.0-beta4-build3050\build\portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+   <LibraryFxTarget Condition="'$(LibraryFxTarget)' == ''">net45</LibraryFxTarget>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{B2FAA0E6-2643-4011-8CFE-BA28BDFFC7E7}</ProjectGuid>
-    <LibraryFxTarget Condition="'$(LibraryFxTarget)' == ''">net45</LibraryFxTarget>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Microsoft.Rest.ClientRuntime.Tracing.Tests</RootNamespace>
     <AssemblyName>ClientRuntime.Tracing.Tests</AssemblyName>
     <AutoRestTest>true</AutoRestTest>
     <FileAlignment>512</FileAlignment>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <NuGetPackageImportStamp>64eb18b7</NuGetPackageImportStamp>
   </PropertyGroup>
@@ -42,10 +42,10 @@
       <HintPath>..\..\..\packages\xunit.abstractions.2.0.0\lib\net35\xunit.abstractions.dll</HintPath>
     </Reference>
     <Reference Include="xunit.assert">
-      <HintPath>..\..\..\packages\xunit.assert.2.1.0-beta4-build3050\lib\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.assert.dll</HintPath>
+      <HintPath>..\..\..\packages\xunit.assert.2.1.0-beta4-build3050\lib\portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.assert.dll</HintPath>
     </Reference>
     <Reference Include="xunit.core">
-      <HintPath>..\..\..\packages\xunit.extensibility.core.2.1.0-beta4-build3050\lib\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.dll</HintPath>
+      <HintPath>..\..\..\packages\xunit.extensibility.core.2.1.0-beta4-build3050/lib/portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

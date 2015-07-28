@@ -201,4 +201,7 @@
   <data name="ValidationUniqueItems" xml:space="preserve">
     <value>collection contains duplicate items</value>
   </data>
+  <data name="WebRequestHandlerNotFound" xml:space="preserve">
+    <value>The service client '{0}' did not contain an implementation of '{1}'.</value>
+  </data>
 </root>
