@@ -128,7 +128,7 @@
     <RemoveDir Directories="$(BinariesFolder)" />
   </Target>
 
-  <Target Name="CodeAnalysis">
+  <Target Name="CodeAnalysis" DependsOnTargets="RestoreNugetPackages">
     <!--Note, we use "Rebuild" rather "Build", because code analysis happens during the build, and this ensures the build is not skipped-->
     <MSBuild Projects="$(ClientRuntimeSolution)"
              Properties="Configuration=%(LibraryFxTargetList.Identity)-$(Configuration);Platform=Any CPU;RunCodeAnalysis=true;CodeAnalysisTreatWarningsAsErrors=true"
