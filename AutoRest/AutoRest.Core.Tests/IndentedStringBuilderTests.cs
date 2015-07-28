@@ -3,6 +3,7 @@
 
 using Microsoft.Rest.Generator.Utilities;
 using Xunit;
+using System;
 
 namespace Microsoft.Rest.Generator.Test
 {
@@ -43,19 +44,19 @@ namespace Microsoft.Rest.Generator.Test
         public void AppendMultilinePreservesIndentation()
         {
             IndentedStringBuilder sb = new IndentedStringBuilder();
-            var expected = "start\r\n    line2\r\n        line31\n        line32\r\n";
+            var expected = string.Format("start{0}    line2{0}        line31{0}        line32{0}", Environment.NewLine);
             var result = sb
                 .AppendLine("start").Indent()
                     .AppendLine("line2").Indent()
-                    .AppendLine("line31\nline32");
+                    .AppendLine(string.Format("line31{0}line32", Environment.NewLine));
             Assert.Equal(expected, result.ToString());
 
             sb = new IndentedStringBuilder();
-            expected = "start\r\n    line2\r\n        line31\r\n        line32\r\n";
+            expected = string.Format("start{0}    line2{0}        line31{0}        line32{0}", Environment.NewLine);
             result = sb
                 .AppendLine("start").Indent()
                     .AppendLine("line2").Indent()
-                    .AppendLine("line31\r\nline32");
+                    .AppendLine(string.Format("line31{0}line32", Environment.NewLine));
             Assert.Equal(expected, result.ToString());
         }
     }

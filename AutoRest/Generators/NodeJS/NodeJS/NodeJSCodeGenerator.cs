@@ -7,6 +7,7 @@ using Microsoft.Rest.Generator.NodeJS.Templates;
 using Microsoft.Rest.Generator.Utilities;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Microsoft.Rest.Generator.NodeJS
 {
@@ -74,14 +75,14 @@ namespace Microsoft.Rest.Generator.NodeJS
                 {
                     Model = serviceClientTemplateModel
                 };
-                await Write(modelIndexTemplate, "models\\index.js");
+                await Write(modelIndexTemplate, Path.Combine("models", "index.js"));
                 foreach (var modelType in serviceClientTemplateModel.ModelTemplateModels)
                 {
                     var modelTemplate = new ModelTemplate
                     {
                         Model = modelType
                     };
-                    await Write(modelTemplate, "models\\" + modelType.Name.ToCamelCase() + ".js");
+                    await Write(modelTemplate, Path.Combine("models", modelType.Name.ToCamelCase() + ".js"));
                 }
             }
 
@@ -92,14 +93,14 @@ namespace Microsoft.Rest.Generator.NodeJS
                 {
                     Model = serviceClientTemplateModel
                 };
-                await Write(methodGroupIndexTemplate, "operations\\index.js");
+                await Write(methodGroupIndexTemplate, Path.Combine("operations", "index.js"));
                 foreach (var methodGroupModel in serviceClientTemplateModel.MethodGroupModels)
                 {
                     var methodGroupTemplate = new MethodGroupTemplate
                     {
                         Model = methodGroupModel
                     };
-                    await Write(methodGroupTemplate, "operations\\" + methodGroupModel.MethodGroupType.ToCamelCase() + ".js");
+                    await Write(methodGroupTemplate, Path.Combine("operations", methodGroupModel.MethodGroupType.ToCamelCase() + ".js"));
                 }
             }
         }

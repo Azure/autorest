@@ -41,7 +41,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
         public Uri Uri
         {
-            get { return new Uri(string.Format(CultureInfo.InvariantCulture, "http://localhost.:{0}", Port)); }
+            get { return new Uri(string.Format(CultureInfo.InvariantCulture, "http://localhost:{0}", Port)); }
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             {
                 EndServiceProcess(ServiceProcess);
                 ServiceProcess = null;
-            }   
+            }
         }
 
         /// <summary>
@@ -76,12 +76,23 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             }
         }
 
-        private static string GetPathToExecutable(string executableName)
+        public static string GetPathToExecutable(string executableName)
         {
             var paths = Environment.GetEnvironmentVariable("PATH");
-            foreach (var path in paths.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries))
+            foreach (var path in paths.Split(new[] {Path.PathSeparator}, StringSplitOptions.RemoveEmptyEntries))
             {
-                var fullPath = Path.Combine(path, executableName);
+                var fullPath = "";
+                if(ServiceController.IsUnix)
+                {
+                    var ext = Path.GetExtension(executableName);
+                    var exec = (ext == ".cmd" || ext == ".exe") ? Path.GetFileNameWithoutExtension(executableName) : executableName;
+                    fullPath = Path.Combine(path, exec);
+                }
+                else
+                {
+                    fullPath = Path.Combine(path, Path.GetFileName(executableName));
+                }
+
                 if (File.Exists(fullPath))
                 {
                     return fullPath;
@@ -89,6 +100,20 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             }
 
             return null;
+        }
+
+        private static bool IsUnix
+        {
+          get
+          {
+            int p = (int) Environment.OSVersion.Platform;
+            if ((p == 4) || (p == 128))
+            {
+                return true;
+            }
+
+            return false;
+          }
         }
 
         private static int GetRandomPortNumber()

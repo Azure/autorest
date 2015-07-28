@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition=" '$(LibraryFxTarget)' == 'portable' ">
+    <Configuration Condition=" '$(Configuration)' == '' ">Portable-Debug</Configuration>
+  </PropertyGroup>
   <ItemGroup Condition=" '$(LibraryFxTarget)' == 'portable' ">
     <Reference Include="Newtonsoft.Json">
       <HintPath>$(CommonNugetPackageFolder)\Newtonsoft.Json.6.0.4\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    
+
+    <Reference Include="System.Security" />
+
     <Reference Include="Microsoft.Threading.Tasks">
       <HintPath>$(CommonNugetPackageFolder)\Microsoft.Bcl.Async.1.0.168\lib\portable-net45+win8+wp8+wpa81\Microsoft.Threading.Tasks.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Threading.Tasks.Extensions">
       <HintPath>$(CommonNugetPackageFolder)\Microsoft.Bcl.Async.1.0.168\lib\portable-net45+win8+wp8+wpa81\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
-   
+
     <Reference Include="System.Net.Http.Extensions">
       <HintPath>$(CommonNugetPackageFolder)\Microsoft.Net.Http.2.2.22\lib\portable-net45+win8+wpa81\System.Net.Http.Extensions.dll</HintPath>
     </Reference>

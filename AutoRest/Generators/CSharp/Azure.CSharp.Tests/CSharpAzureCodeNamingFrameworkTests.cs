@@ -18,7 +18,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         {
             var settings = new Settings
             {
-                Input = @"Swagger\azure-paging.json",
+                Input = Path.Combine("Swagger", "azure-paging.json"),
                 Header = "NONE",
                 Modeler = "Swagger"
             };

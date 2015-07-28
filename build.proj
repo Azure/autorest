@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <!-- 
+  <!--
   Targets:
 
   /t:Clean
     Removes temporary build outputs.
-    
+
   /t:Build
     Builds assemblies.
 
   /t:Test
     Run unit tests.
 
-  /t:Package 
+  /t:Package
     Builds NuGet packages using the binaries folder contents.
     The packages will drop to .\binaries\packages.
 
   /t:Publish
     Publishes the built packages. You will need to include your
     publishing key when running. Include: /p:NuGetKey=YOUR_PUBLISHING_KEY
-    
+
   /t:CodeAnalysis
-    Run Code analysis. 
+    Run Code analysis.
 
   Properties of interest:
-  /p:Scope 
+  /p:Scope
     'All' : builds ClientRuntime and CodeGenerator solutions
     'CodeGenerator': builds CodeGenerator solution only
     'ClientRuntime': builds ClientRuntime solution only
     By default, it builds all.
 
   /P:CodeSign=True
-    Code sign binaries, mainly for official release 
+    Code sign binaries, mainly for official release
 
   /p:CodeSign=True;DelaySign=True
     Test the code sign workflow locally
@@ -51,13 +51,13 @@
   /p:NuGetSymbolPublishingSource=Uri
     The NuGet Server to push symbol + source packages to.
   -->
-  
+
   <PropertyGroup>
     <ClientRuntimeSolution>ClientRuntime.sln</ClientRuntimeSolution>
     <CodeGeneratorSolution>AutoRest.sln</CodeGeneratorSolution>
     <LibraryRoot>$(MSBuildThisFileDirectory)</LibraryRoot>
     <LibrarySourceFolder>$(LibraryRoot)</LibrarySourceFolder>
-    <LibraryToolsFolder>$(LibraryRoot)tools</LibraryToolsFolder>
+    <LibraryToolsFolder>$(LibraryRoot)Tools</LibraryToolsFolder>
     <BinariesFolder>$(LibraryRoot)binaries</BinariesFolder>
     <PackageOutputDir>$(BinariesFolder)\packages</PackageOutputDir>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -66,28 +66,31 @@
     <DelaySign Condition =" '$(DelaySign)' == '' ">false</DelaySign>
     <Scope Condition=" '$(Scope)' == '' ">all</Scope>
   </PropertyGroup>
- 
+
   <ItemGroup>
     <LibraryFxTargetList Condition=" '$(FxTargetList)' == '' and '$(Scope)' == 'ClientRuntime' " Include="portable;net45" />
     <LibraryFxTargetList Condition=" '$(FxTargetList)' == '' and '$(Scope)' == 'all' " Include="portable;net45" />
     <LibraryFxTargetList Condition=" '$(FxTargetList)' == '' and '$(Scope)' == 'CodeGenerator' " Include="net45" />
     <LibraryFxTargetList Condition=" '$(FxTargetList)' != '' " Include="$(FxTargetList)" />
   </ItemGroup>
-  
+
   <PropertyGroup>
-    <NuGetCommand>&quot;$(LibraryToolsFolder)\nuget.exe&quot;</NuGetCommand>
-  </PropertyGroup>
+    <NuGetCommand Condition=" '$(OS)' == 'Windows_NT'">&quot;$(LibraryToolsFolder)\nuget.exe&quot;</NuGetCommand>
+    <NuGetCommand Condition=" '$(OS)' != 'Windows_NT'">mono &quot;$(LibraryToolsFolder)\nuget.exe&quot;</NuGetCommand>
+    <NuGetSources>https://www.myget.org/F/xunit;https://www.nuget.org/api/v2/</NuGetSources>
+   </PropertyGroup>
 
   <UsingTask AssemblyFile="tools\AutoRest.Build.Tasks.dll" TaskName="ValidateStrongNameSignatureTask" />
   <UsingTask AssemblyFile="tools\AutoRest.Build.Tasks.dll" TaskName="RegexReplaceTask" />
+  <UsingTask AssemblyFile="tools\AutoRest.Build.Tasks.dll" TaskName="SetEnvVar" />
 
   <!-- CI build related. -->
   <PropertyGroup>
     <ContinueOnPoliCheckError>false</ContinueOnPoliCheckError>
     <!--OnPremiseBuildTasks is not a good name, but CI server is using that, will update across soon-->
     <CIToolsPath>$(OnPremiseBuildTasks)</CIToolsPath>
-    <OnPremiseBuild Condition=" Exists($(OnPremiseBuildTasks)) ">true</OnPremiseBuild>
-    <OnPremiseBuild Condition=" ! Exists($(OnPremiseBuildTasks)) ">false</OnPremiseBuild>
+    <OnPremiseBuild Condition=" Exists('$(OnPremiseBuildTasks)') ">true</OnPremiseBuild>
+    <OnPremiseBuild Condition=" ! Exists('$(OnPremiseBuildTasks)') ">false</OnPremiseBuild>
   </PropertyGroup>
   <UsingTask Condition=" $(OnPremiseBuild) " TaskName="CodeSigningTask" AssemblyFile="$(CIToolsPath)\Microsoft.WindowsAzure.Tools.Build.Tasks.OnPremise.dll" />
   <UsingTask Condition=" $(OnPremiseBuild) " TaskName="CorporateValidation" AssemblyFile="$(CIToolsPath)\Microsoft.WindowsAzure.Tools.Build.Tasks.OnPremise.dll" />
@@ -113,7 +116,7 @@
 
   <!-- Project files import some targets coming from nuget packages, so need to restore them first to avoid errors
       such as "The imported project ....build\Microsoft.Bcl.Build.targets was not found. " -->
-  <Target Name="Clean" DependsOnTargets="RestoreNugetPackages">
+  <Target Name="Clean">
     <MSBuild Projects="$(ClientRuntimeSolution)"
              Properties="Configuration=%(LibraryFxTargetList.Identity)-$(Configuration);Platform=Any CPU"
              Targets="Clean"
@@ -131,16 +134,16 @@
              Properties="Configuration=%(LibraryFxTargetList.Identity)-$(Configuration);Platform=Any CPU;RunCodeAnalysis=true;CodeAnalysisTreatWarningsAsErrors=true"
              Targets="Rebuild"
              Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />
-             
+
     <MSBuild Projects="$(CodeGeneratorSolution)"
              Properties="Configuration=Net45-$(Configuration);Platform=Any CPU;RunCodeAnalysis=true;CodeAnalysisTreatWarningsAsErrors=true"
              Targets="Rebuild"
              Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
   </Target>
-  
+
   <!-- Run tests. -->
-  <UsingTask TaskName="Xunit.Runner.msbuild.xunit" AssemblyFile="packages\xunit.runner.msbuild.2.0.0\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.runner.msbuild.dll" />
-  <Target Name="Test">
+  <UsingTask TaskName="Xunit.Runner.MSBuild.xunit" AssemblyFile="packages\xunit.runner.msbuild.2.1.0-beta4-build3050\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.runner.msbuild.dll" />
+  <Target Name="Test" DependsOnTargets="RestoreNugetPackages">
     <CallTarget Targets="TestClientRuntime" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />
     <CallTarget Targets="TestCodeGenerator" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
     <CallTarget Targets="TestNuGetPackages" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
@@ -150,7 +153,7 @@
     <ItemGroup>
       <TestDlls Include="$(LibraryRoot)\ClientRuntimes\CSharp\*.Tests\bin\*\*Tests.dll" />
     </ItemGroup>
-    
+
     <Message Text="@(TestDlls)" />
     <MakeDir Directories="$(LibraryRoot)TestResults"/>
     <xunit Assemblies="@(TestDlls)" Html="$(MSBuildProjectDirectory)\TestResults\xunit.results.html" ContinueOnError="false" />
@@ -168,10 +171,10 @@
       <TestDlls Include="$(LibraryRoot)\AutoRest\Generators\Ruby\Ruby.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.Ruby.Tests.dll" />
       <TestDlls Include="$(LibraryRoot)\AutoRest\Generators\Ruby\Azure.Ruby.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.Azure.Ruby.Tests.dll" />
     </ItemGroup>
-    
+
     <Message Text="@(TestDlls)" />
     <MakeDir Directories="$(LibraryRoot)TestResults"/>
-    <Exec WorkingDirectory=".\ClientRuntimes\Ruby\" Command="UpdateRuntime"/>
+    <!-- <Exec WorkingDirectory=".\ClientRuntimes\Ruby\" Command="UpdateRuntime"/> -->
     <xunit Assemblies="@(TestDlls)" Html="$(MSBuildProjectDirectory)\TestResults\xunit.results.html" ContinueOnError="false" />
     <Exec WorkingDirectory="$(LibraryRoot)\AutoRest\Generators\NodeJS\NodeJS.Tests\" Command="npm test"/>
     <Exec WorkingDirectory="$(LibraryRoot)\AutoRest\Generators\NodeJS\Azure.NodeJS.Tests\" Command="npm test"/>
@@ -179,34 +182,35 @@
 
   <Target Name="TestNuGetPackages">
     <PropertyGroup>
-      <TestProjectDir>$(LibraryRoot)\AutoRest\Generators\AcceptanceTests\NugetPackageTest</TestProjectDir>
+      <TestProjectDir>$(LibraryRoot)AutoRest\Generators\AcceptanceTests\NugetPackageTest</TestProjectDir>
     </PropertyGroup>
-    
+
     <!--install autorest and client runtime packages-->
-    <Exec Command="$(NuGetCommand) restore $(TestProjectDir)\NugetPackageTest.sln -source &quot;$(PackageOutputDir);https://www.nuget.org/api/v2/&quot;"/>
+    <Exec Command="$(NuGetCommand) restore $(TestProjectDir)\NugetPackageTest.sln -source &quot;$(PackageOutputDir);$(NuGetSources)&quot;"/>
     <ItemGroup>
-      <AutoRestExeFiles Include="$(TestProjectDir)\packages\autorest.*\tools\autorest.exe" />
+      <AutoRestExeFiles Include="$(TestProjectDir)\packages\autorest.*\tools\AutoRest.exe" />
     </ItemGroup>
     <PropertyGroup>
-      <AutoRestExe>@(AutoRestExeFiles->'%(FullPath)')</AutoRestExe>
+      <AutoRestExe Condition=" '$(OS)' == 'Windows_NT'">@(AutoRestExeFiles->'%(FullPath)')</AutoRestExe>
+      <AutoRestExe Condition=" '$(OS)' != 'Windows_NT'">mono @(AutoRestExeFiles->'%(FullPath)')</AutoRestExe>
     </PropertyGroup>
-    
+
     <!--Invoke code-gen-->
     <Exec WorkingDirectory="$(TestProjectDir)" Command="$(AutoRestExe) -Modeler Swagger -CodeGenerator CSharp -OutputDirectory $(TestProjectDir)\Generated\CSharp -Namespace &quot;Fixtures.Bodynumber&quot; -Input &quot;$(LibraryRoot)\AutoRest\Generators\AcceptanceTests\swagger\body-number.json&quot; -Header NONE"/>
     <Exec WorkingDirectory="$(TestProjectDir)" Command="$(AutoRestExe) -Modeler Swagger -CodeGenerator NodeJS -OutputDirectory $(TestProjectDir)\Generated\NodeJS -Input &quot;$(LibraryRoot)\AutoRest\Generators\AcceptanceTests\swagger\body-number.json&quot; -Header NONE"/>
-    
+
     <!--Build and run tests-->
     <MSBuild Projects="$(TestProjectDir)\NugetPackageCsharpTest.csproj" Targets="rebuild" />
     <ItemGroup>
       <TestDlls Include="$(TestProjectDir)\bin\$(Configuration)\NuGetPackageCSharpTest.dll" />
-    </ItemGroup>    
+    </ItemGroup>
     <xunit Assemblies="@(TestDlls)" />
     <Exec WorkingDirectory="$(TestProjectDir)" Command="npm test"/>
   </Target>
-  
+
   <PropertyGroup>
-    <!-- This property is used by the continuous intergration job. 
-         Do not remove without first updating the CI job. Also due to a known limitation, 
+    <!-- This property is used by the continuous intergration job.
+         Do not remove without first updating the CI job. Also due to a known limitation,
          make sure pathes do not end with a backslash -->
     <CorporateScanPaths>$(LibrarySourceFolder)ClientRuntimes;$(LibrarySourceFolder)AutoRest</CorporateScanPaths>
     <BinscopeScanPath>$(BinariesFolder)</BinscopeScanPath>
@@ -237,9 +241,9 @@
         ToolsPath="$(CIToolsPath)"
         Condition="!$(DelaySign)"/>
     <!-- DelaySigned binaries copied locally for testing and not submitted to codesign service. -->
-    <Copy SourceFiles="@(DelaySignedAssembliesToValidate)" DestinationFolder="binaries\$(LibraryFxTarget)" Condition="$(DelaySign)" />  
+    <Copy SourceFiles="@(DelaySignedAssembliesToValidate)" DestinationFolder="binaries\$(LibraryFxTarget)" Condition="$(DelaySign)" />
     <ItemGroup>
-      <AfterSignedAssembliesToValidate Include="binaries\$(LibraryFxTarget)\*.dll;binaries\$(LibraryFxTarget)\*.exe" 
+      <AfterSignedAssembliesToValidate Include="binaries\$(LibraryFxTarget)\*.dll;binaries\$(LibraryFxTarget)\*.exe"
         Exclude="binaries\$(LibraryFxTarget)\Newtonsoft.*.dll" />
     </ItemGroup>
     <ValidateStrongNameSignatureTask
@@ -247,17 +251,17 @@
         Assembly="%(AfterSignedAssembliesToValidate.Identity)"
         ExpectedTokenSignature="$(StrongNameToken)"
         ExpectedDelaySigned="false"
-        ContinueOnError="false" 
+        ContinueOnError="false"
         Condition="!$(DelaySign)"/>
     <RemoveDir Directories="binaries\$(LibraryFxTarget)\unsigned;" ContinueOnError="true" />
   </Target>
-   
+
   <Target Name="CodeSignBinaries">
     <Error Condition=" !$(OnPremiseBuild) and !$(DelaySign) " Text="No CI tools path available, the code sign will be unable to continue. $(CIToolsPath)" />
     <Message Text="Code signing" Importance="high" />
     <MSBuild Projects="$(MSBuildProjectFullPath)"
              Targets="SignBinariesForAFxTarget"
-             Properties="LibraryFxTarget=%(LibraryFxTargetList.Identity);StrongNameToken=$(StrongNameToken)">    
+             Properties="LibraryFxTarget=%(LibraryFxTargetList.Identity);StrongNameToken=$(StrongNameToken)">
     </MSBuild>
     <CallTarget Targets="ValidateCorporateCompliance" Condition="!$(DelaySign)"/>
   </Target>
@@ -275,10 +279,10 @@
   </Target>
 
   <Target Name="RestoreNugetPackages">
-    <Exec Command="$(NuGetCommand) restore $(ClientRuntimeSolution)" ContinueOnError="false" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />
-    <Exec Command="$(NuGetCommand) restore $(CodeGeneratorSolution)" ContinueOnError="false" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
+    <Exec Command="$(NuGetCommand) restore $(ClientRuntimeSolution) -source &quot;$(NuGetSources)&quot;" ContinueOnError="false" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />
+    <Exec Command="$(NuGetCommand) restore $(CodeGeneratorSolution) -source &quot;$(NuGetSources)&quot;" ContinueOnError="false" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
   </Target>
-  
+
   <!-- Official releases require tools only available on corp network. -->
   <Target Name="ValidateCorporateCompliance">
     <Error Text="This target must be run in an on-premise build server." Condition=" '$(OnPremiseBuild)'=='false' " />
@@ -300,6 +304,6 @@
     <Message Text="Source folder           : $(LibrarySourceFolder)" />
   </Target>
 
-  <Import Project="$(LibraryToolsFolder)\nuget.targets" />
+  <Import Project="$(LibraryToolsFolder)\nuget.targets"/>
 
 </Project>

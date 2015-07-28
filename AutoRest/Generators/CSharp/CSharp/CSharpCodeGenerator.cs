@@ -4,6 +4,7 @@
 using System.Threading.Tasks;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.CSharp.Templates;
+using System.IO;
 
 namespace Microsoft.Rest.Generator.CSharp
 {
@@ -126,7 +127,7 @@ namespace Microsoft.Rest.Generator.CSharp
                 {
                     Model = new ModelTemplateModel(model),
                 };
-                await Write(modelTemplate, "Models\\" + model.Name + ".cs");
+                await Write(modelTemplate, Path.Combine("Models", model.Name + ".cs"));
             }
 
             // Enums
@@ -136,7 +137,7 @@ namespace Microsoft.Rest.Generator.CSharp
                 {
                     Model = new EnumTemplateModel(enumType),
                 };
-                await Write(enumTemplate, "Models\\" + enumTemplate.Model.TypeDefinitionName + ".cs");
+                await Write(enumTemplate, Path.Combine("Models", enumTemplate.Model.TypeDefinitionName + ".cs"));
             }
         }
     }

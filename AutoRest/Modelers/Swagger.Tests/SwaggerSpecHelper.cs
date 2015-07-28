@@ -50,14 +50,15 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
                 (CodeGenerator)typeof(T).GetConstructor(new[] { typeof(Settings) }).Invoke(new object[] { settings });
             settings.CodeGenerator = flavor.Name;
 
-            var specFileName = resultFolder.StartsWith("Expected\\", StringComparison.Ordinal)
-                ? resultFolder.Substring("Expected\\".Length)
+            var expectedWithSeparator = "Expected" + Path.DirectorySeparatorChar;
+            var specFileName = resultFolder.StartsWith(expectedWithSeparator, StringComparison.Ordinal)
+                ? resultFolder.Substring(expectedWithSeparator.Length)
                 : resultFolder;
             settings.Namespace = string.IsNullOrEmpty(settings.Namespace)
                 ? "Fixtures." + (flavor.Name.Contains("Azure") ? "Azure." : "") + specFileName.
                     Replace(".cs", "").Replace(".Cs", "").Replace(".java", "").
                     Replace(".js", "").Replace(".", "").
-                    Replace("\\", "").Replace("-", "")
+                    Replace(Path.DirectorySeparatorChar.ToString(), "").Replace("-", "")
                 : settings.Namespace;
 
             AutoRest.Generate(settings);

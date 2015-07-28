@@ -4,6 +4,7 @@
 var util = require('util');
 var fs = require('fs');
 var child_process = require('child_process');
+require('shelljs/global');
 
 var child;
 
@@ -11,8 +12,11 @@ before(function (done) {
   var started = false;
   var out = fs.openSync('./server.log', 'w');
   fs.writeSync(out, 'Test run started at ' + new Date().toISOString() + '\n');
-  child = child_process.spawn('node.exe', [__dirname + '/../server/startup/www']);
-  
+
+  var nodePath = which('node') || which('node.exe');
+
+  child = child_process.spawn(nodePath, [__dirname + '/../server/startup/www']);
+
   child.stdout.on('data', function (data) {
     fs.writeSync(out, data.toString('UTF-8'));
     if (data.toString().indexOf('started') > 0) {
@@ -20,14 +24,14 @@ before(function (done) {
       done();
     }
   });
-  
+
   child.on('close', function (code) {
     if (!started) {
       done();
     }
   });
 });
-  
+
 after(function (done) {
   child.kill();
   done();

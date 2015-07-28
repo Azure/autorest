@@ -10,7 +10,7 @@ var assert = require('assert');
 var msRestAzure = require('ms-rest-azure');
 var msRest = require('ms-rest');
 
-var flatteningClient = require('../Expected/SwaggerBat/ResourceFlattening/AutoRestResourceFlatteningTestService');
+var flatteningClient = require('../Expected/AcceptanceTests/ResourceFlattening/AutoRestResourceFlatteningTestService');
 
 var dummySubscriptionId = 'a878ae02-6106-429z-9397-58091ee45g98';
 var dummyToken = 'dummy12321343423';
@@ -20,16 +20,16 @@ var clientOptions = {};
 var baseUri = 'http://localhost:3000';
 
 describe('nodejs', function () {
-  
+
   describe('Swagger ResourceFlattening BAT', function () {
-    
+
     describe('Resource Flattening Operations', function () {
       var testOptions = clientOptions;
       testOptions.requestOptions = { jar: true };
       testOptions.filters = [new msRest.ExponentialRetryPolicyFilter(3, 0, 0, 0)];
       testOptions.noRetryPolicy = true;
       var testClient = new flatteningClient(credentials, baseUri, clientOptions);
-      
+
       it('should get external resource as an array', function (done) {
         var expectedResult = [
           {
@@ -44,12 +44,12 @@ describe('nodejs', function () {
             },
             tags: { tag1: 'value1', tag2: 'value3' },
             type: 'Microsoft.Web/sites'
-          }, 
+          },
           {
-            id: '2', 
-            name: 'Resource2', 
+            id: '2',
+            name: 'Resource2',
             location: 'Building 44'
-          }, 
+          },
           {
             id: '3',
             name: 'Resource3'
@@ -61,7 +61,7 @@ describe('nodejs', function () {
           done();
         });
       });
-      
+
       it('should put external resource as an array', function (done) {
         var resourceBody = [
           { "location": "West US", "tags": { "tag1": "value1", "tag2": "value3" }, "properties": { "pname": "Product1", "type": "Flat" } },
@@ -72,7 +72,7 @@ describe('nodejs', function () {
           done();
         });
       });
-      
+
       it('should get and put external resource as a dictionary', function (done) {
         var expectedResult = {
           Product1: {
@@ -87,12 +87,12 @@ describe('nodejs', function () {
             },
             tags: { tag1: 'value1', tag2: 'value3' },
             type: 'Microsoft.Web/sites'
-          }, 
+          },
           Product2: {
-            id: '2', 
-            name: 'Resource2', 
+            id: '2',
+            name: 'Resource2',
             location: 'Building 44'
-          }, 
+          },
           Product3: {
             id: '3',
             name: 'Resource3'
@@ -104,10 +104,10 @@ describe('nodejs', function () {
           done();
         });
       });
-      
+
       it('should put external resource as a dictionary', function (done) {
         var resourceBody = {
-          "Resource1": { "location": "West US", "tags": { "tag1": "value1", "tag2": "value3" }, "properties": { "pname": "Product1", "type": "Flat" } }, 
+          "Resource1": { "location": "West US", "tags": { "tag1": "value1", "tag2": "value3" }, "properties": { "pname": "Product1", "type": "Flat" } },
           "Resource2": { "location": "Building 44", "properties": { "pname": "Product2", "type": "Flat" } }
         };
         testClient.putDictionary(resourceBody, function (error, result) {
@@ -115,7 +115,7 @@ describe('nodejs', function () {
           done();
         });
       });
-      
+
       it('should get and put external resource as a complex type', function (done) {
         var expectedResult = {
           dictionaryofresources: {
@@ -131,12 +131,12 @@ describe('nodejs', function () {
               },
               tags: { tag1: 'value1', tag2: 'value3' },
               type: 'Microsoft.Web/sites'
-            }, 
+            },
             Product2: {
-              id: '2', 
-              name: 'Resource2', 
+              id: '2',
+              name: 'Resource2',
               location: 'Building 44'
-            }, 
+            },
             Product3: {
               id: '3',
               name: 'Resource3'
@@ -155,12 +155,12 @@ describe('nodejs', function () {
               },
               tags: { tag1: 'value1', tag2: 'value3' },
               type: 'Microsoft.Web/sites'
-            }, 
+            },
             {
-              id: '5', 
-              name: 'Resource5', 
+              id: '5',
+              name: 'Resource5',
               location: 'Building 44'
-            }, 
+            },
             {
               id: '6',
               name: 'Resource6'
@@ -186,7 +186,7 @@ describe('nodejs', function () {
             { "location": "East US", "properties": { "pname": "Product2", "type": "Flat" } }
           ],
           "dictionaryofresources": {
-            "Resource1": { "location": "West US", "tags": { "tag1": "value1", "tag2": "value3" }, "properties": { "pname": "Product1", "type": "Flat" } }, 
+            "Resource1": { "location": "West US", "tags": { "tag1": "value1", "tag2": "value3" }, "properties": { "pname": "Product1", "type": "Flat" } },
             "Resource2": { "location": "Building 44", "properties": { "pname": "Product2", "type": "Flat" } }
           },
           "productresource": { "location": "India", "properties": { "pname": "Azure", "type": "Flat" } }
