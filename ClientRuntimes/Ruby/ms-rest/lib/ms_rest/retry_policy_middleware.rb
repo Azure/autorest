@@ -3,7 +3,7 @@
 
 module MsRest
   #
-  # Class whcih handles retry and token renewal stuff.
+  # Class which handles retry policy.
   #
   class RetryPolicyMiddleware < Faraday::Response::Middleware
     #
@@ -20,25 +20,6 @@ module MsRest
     end
 
     #
-    # Verifies whether given response is about authentication token expiration.
-    # @param response [Net::HTTPResponse] http response to verify.
-    #
-    # @return [Bool] true if response is about authentication token expiration, false otherwise.
-    def is_token_expired_response(response)
-      return false unless response.status == 401
-
-      begin
-        response_body = JSON.load(response.body)
-        error_code = response_body['error']['code']
-        error_message = response_body['error']['message']
-      rescue Exception => e
-        return false
-      end
-
-      return (error_code == 'AuthenticationFailed' && (error_message.start_with?('The access token expiry') || (error_message.start_with?('The access token is missing or invalid'))))
-    end
-
-    #
     # Performs request and response processing.
     #
     def call(request_env)
@@ -49,17 +30,9 @@ module MsRest
         request_env[:body] = request_body
 
         @app.call(request_env).on_complete do |response_env|
-          if (is_token_expired_response(response_env))
-            @credentials.acquire_token()
-            @credentials.sign_request(request_env)
-
-            sleep @delay
-            fail
-          end
-
           status_code = response_env.status
 
-          if (status_code == 408 || (status_code >= 500 && status_code != 501 && status_code != 505))
+          if (status_code == 408 || status_code == 401 || (status_code >= 500 && status_code != 501 && status_code != 505))
             sleep @delay
             fail
           end

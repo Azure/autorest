@@ -28,9 +28,9 @@ module MsRestAzure
       fail CloudError if azure_response.nil?
       fail CloudError if get_operation_block.nil?
 
-      if (azure_response.response.code != "200" &&
-          azure_response.response.code != "201" &&
-          azure_response.response.code != "202")
+      status_code = azure_response.response.status
+
+      if (status_code != 200 && status_code != 201 && status_code != 202)
         fail CloudError
       end
 
