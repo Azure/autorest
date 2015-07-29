@@ -49,7 +49,7 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
         {
   @:fail RuntimeError, 'Header Content-Type is forbidden to change'
         }
-  @:request_headers["@(parameter.SerializedName)"] = @parameter.Type.ToString(parameter.Name)
+  @:request_headers["@(parameter.SerializedName)"] = @(parameter.Type.ToString(parameter.Name)) unless @(parameter.Type.ToString(parameter.Name)).nil?
     }
   }
   @EmptyLine

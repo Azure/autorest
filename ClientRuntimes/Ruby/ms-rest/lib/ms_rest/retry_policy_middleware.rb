@@ -32,14 +32,14 @@ module MsRest
         @app.call(request_env).on_complete do |response_env|
           status_code = response_env.status
 
-          if (status_code == 408 || status_code == 401 || (status_code >= 500 && status_code != 501 && status_code != 505))
+          if @times > 0 && (status_code == 408 || status_code == 401 || (status_code >= 500 && status_code != 501 && status_code != 505))
             sleep @delay
             fail
           end
         end
       rescue Exception => e
         @times = @times - 1
-        retry if @times > 0
+        retry
       end
     end
   end

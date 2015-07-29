@@ -19,21 +19,21 @@ describe Byte do
 
   it 'should put non-ASCII bytes' do
     result = @byte_spec.put_non_ascii(@non_ascii_bytes).value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
   end
   it 'should get non-ASCII bytes' do
     result = @byte_spec.get_non_ascii().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to eq(@non_ascii_bytes)
   end
    it 'should get null' do
     result = @byte_spec.get_null().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to be_nil
   end
   it 'should get empty' do
     result = @byte_spec.get_empty().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to eq('')
   end
   it 'should get invalid' do
