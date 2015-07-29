@@ -109,9 +109,5 @@
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <ProjectExtensions>
-    <VisualStudio>
-      <UserProperties JsonModels_2swagger-allOf_1json__JSONSchema="https://raw.githubusercontent.com/swagger-api/swagger-spec/master/schemas/v2.0/schema.json" />
-    </VisualStudio>
-  </ProjectExtensions>
+  <ProjectExtensions />
 </Project>
