@@ -19,9 +19,6 @@
     <Compile Include="lib\azureEnvironment.js" />
     <Compile Include="lib\credentials\applicationTokenCredentials.js" />
     <Compile Include="lib\credentials\userTokenCredentials.js" />
-    <Compile Include="test\userTokenCredentialsTests.js">
-      <TestFramework>Mocha</TestFramework>
-    </Compile>
     <Compile Include="test\azureServiceClientTests.js">
       <TestFramework>Mocha</TestFramework>
     </Compile>

@@ -13,8 +13,8 @@ var WebResource = msrest.WebResource;
  * @class
  * Initializes a new instance of the AzureServiceClient class.
  * @constructor
- * @param {object} [credentials] - BasicAuthenticationCredentials or 
- * TokenCredentials object used for authentication.  
+ * @param {object} credentials - ApplicationTokenCredentials or 
+ * UserTokenCredentials object used for authentication.  
  * 
  * @param {object} options - The parameter options used by ServiceClient
  * 
