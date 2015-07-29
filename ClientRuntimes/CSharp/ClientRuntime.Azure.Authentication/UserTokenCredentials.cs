@@ -23,7 +23,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="clientRedirectUri">The Uri where the user will be redirected after authenticating with AD.</param>
         public UserTokenCredentials(string clientId, string domain, Uri clientRedirectUri)
             : this(clientId, domain, clientRedirectUri: clientRedirectUri, 
-                  environment: ActiveDirectoryEnvironment.Azure, adParameters: null)
+                  environment: ActiveDirectoryEnvironment.Azure)
         {
         }
 
@@ -35,7 +35,8 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="domain">The domain name or tenant id containing the subscription or resources to manage.</param>
         /// <param name="environment">The azure environment to authenticate with. </param>
         /// <param name="clientRedirectUri">The Uri where the user will be redirected after authenticating with AD.</param>
-        public UserTokenCredentials(string clientId, string domain, Uri clientRedirectUri, ActiveDirectoryEnvironment environment)
+        public UserTokenCredentials(string clientId, string domain, Uri clientRedirectUri, 
+            ActiveDirectoryEnvironment environment)
             : this(clientId, domain, clientRedirectUri, environment, adParameters: null)
         {
         }
@@ -78,11 +79,11 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="username">The user name for the Organization Id account.</param>
         /// <param name="password">The password for the Organization Id account.</param>
         /// <param name="environment">The azure environment to authenticate with. </param>
-        /// <param name="cache">The ADAL token cache to use during authentication.</param>
+        /// <param name="adParameters">The ADAL parameters.</param>
         public UserTokenCredentials(string clientId, string domain, string username, string password, 
-            ActiveDirectoryEnvironment environment, TokenCache cache) 
+            ActiveDirectoryEnvironment environment, ActiveDirectoryParameters adParameters) 
             : base(new ActiveDirectoryUserTokenProvider(clientId:clientId, domain: domain, 
-                username: username, password: password, environment: environment, cache: cache))
+                username: username, password: password, environment: environment, adParameters: adParameters))
         {
             
         }

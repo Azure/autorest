@@ -71,7 +71,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="username">The username to use for authentication.</param>
         /// <param name="password">The secret password associated with this user.</param>
         public ActiveDirectoryUserTokenProvider(string clientId, string domain, string username, string password)
-            : this(clientId, domain, username, password, environment: ActiveDirectoryEnvironment.Azure, cache: null)
+            : this(clientId, domain, username, password, ActiveDirectoryEnvironment.Azure, null)
         {
         }
 
@@ -84,9 +84,9 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="username">The username to use for authentication.</param>
         /// <param name="password">The secret password associated with this user.</param>
         /// <param name="environment">The azure environment to manage resources in.</param>
-        /// <param name="cache">The ADAL token cache to use during authentication.</param>
+        /// <param name="adParameters">The ADAL parameters.</param>
         public ActiveDirectoryUserTokenProvider(string clientId, string domain, string username, string password,
-            ActiveDirectoryEnvironment environment, TokenCache cache)
+            ActiveDirectoryEnvironment environment, ActiveDirectoryParameters adParameters)
         {
             Initialize(clientId,
                 username: username,
@@ -94,7 +94,7 @@ namespace Microsoft.Rest.Azure.Authentication
                 domain: domain,
                 environment: environment,
                 clientRedirectUri: null,
-                adParameters: null);
+                adParameters: adParameters);
         }
 
         /// <summary>
