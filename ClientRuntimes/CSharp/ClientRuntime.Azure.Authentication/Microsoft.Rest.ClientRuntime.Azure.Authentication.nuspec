@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata minClientVersion="2.5">
     <id>Microsoft.Rest.ClientRuntime.Azure.Authentication</id>
-    <title>Authentication for Microsoft Azure Libraries</title>
+    <title>Authentication for Azure Management Clients</title>
     <version>$version$</version>
     <authors>Microsoft</authors>
     <owners>azure-sdk, Microsoft</owners>
@@ -10,8 +10,8 @@
     <projectUrl>https://github.com/Azure/AutoRest</projectUrl>
     <iconUrl>http://go.microsoft.com/fwlink/?LinkID=288890</iconUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
-    <summary>Authentication for Azure client libraries.</summary>
-    <description>Provides ADAL based authentication for Azure client libraries
+    <summary>Authentication for Azure Management Clients.</summary>
+    <description>Provides ADAL based authentication for Azure management client libraries
 
       Supported Platforms:
       -   .NET Framework 4.5
