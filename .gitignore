@@ -8,6 +8,7 @@ AutoRest/**/Templates/*.cs
 *.suo
 *.user
 *.sln.docstates
+.vs
 developer/
 
 # Build results

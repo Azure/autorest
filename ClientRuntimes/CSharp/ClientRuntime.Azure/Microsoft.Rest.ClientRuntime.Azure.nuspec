@@ -33,8 +33,12 @@
       </group>
     </references>
     <dependencies>
-      <dependency id="Microsoft.Rest.ClientRuntime" version="[__VERSION_Microsoft.Rest.ClientRuntime__,2)"/>
-      <dependency id="Microsoft.IdentityModel.Clients.ActiveDirectory" version="3.5.207081303-alpha"/>
+      <group>
+        <dependency id="Microsoft.Rest.ClientRuntime" version="[__VERSION_Microsoft.Rest.ClientRuntime__,2)"/>
+      </group>
+      <group targetFramework="net45">
+        <dependency id="Microsoft.Rest.ClientRuntime.Azure.Authentication" version="__VERSION_Microsoft.Rest.ClientRuntime.Azure.Authentication__"/>
+      </group>
     </dependencies>
   </metadata>
   <files>
