@@ -13,6 +13,7 @@ namespace Microsoft.Rest.Generator.Test.Resource
         public SampleCodeGenerator(Settings settings)
             : base(settings)
         {
+            settings.IsSingleFileGenerationSupported = true;
         }
 
         public override string Name

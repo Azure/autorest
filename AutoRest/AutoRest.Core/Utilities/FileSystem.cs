@@ -25,7 +25,7 @@ namespace Microsoft.Rest.Generator.Utilities
         {
             if (File.Exists(path))
             {
-                File.Delete(path);
+                return File.AppendText(path);
             }
             return File.CreateText(path);
         }

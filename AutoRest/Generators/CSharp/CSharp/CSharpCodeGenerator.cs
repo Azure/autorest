@@ -15,6 +15,7 @@ namespace Microsoft.Rest.Generator.CSharp
         public CSharpCodeGenerator(Settings settings) : base(settings)
         {
             _namer = new CSharpCodeNamer();
+            settings.IsSingleFileGenerationSupported = true;
         }
 
         public override string Name
