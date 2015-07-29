@@ -80,16 +80,16 @@ describe 'Complex tests' do
     expect(result.body).to be_an_instance_of(Models::Basic)
     expect(result.body.id).to eq(2)
     expect(result.body.name).to eq("abc")
-    expect(result.body.color).to eq(MyNamespace::CMYKColors::YELLOW)
+    expect(result.body.color).to eq(MyNamespace::Models::CMYKColors::YELLOW)
   end
 
   it 'should put basic valid' do
     basic_request = Models::Basic.new
     basic_request.id = 2
     basic_request.name = "abc"
-    basic_request.color = MyNamespace::CMYKColors::Magenta
+    basic_request.color = MyNamespace::Models::CMYKColors::Magenta
     result = @client.basic_operations.put_valid(basic_request).value!
-    expect(result.response.status).to eq(200)
+    expect(result.response).to eq(200)
   end
 
   it 'should get basic invalid' do

@@ -349,7 +349,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
                         .Outdent()
                         .AppendLine("else")
                         .Indent()
-                            .AppendLine("{0} = {1}::{2}.deserialize_object({0})", valueReference, defaultNamespace + "::Models", composite.Name)
+                            .AppendLine("{0} = {1}::{2}.deserialize_object({0})", valueReference, defaultNamespace, composite.Name)
                         .Outdent()
                         .AppendLine("end");
 
@@ -358,7 +358,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
 
                 return builder.AppendLine("if ({0})", valueReference)
                     .Indent()
-                        .AppendLine("{0} = {1}::{2}.deserialize_object({0})", valueReference, defaultNamespace + "::Models", composite.Name)
+                        .AppendLine("{0} = {1}::{2}.deserialize_object({0})", valueReference, defaultNamespace, composite.Name)
                     .Outdent()
                     .AppendLine("end").ToString();
             }
@@ -453,7 +453,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
                         .AppendLine("else")
                         .Indent()
                         .AppendLine("{0} = {1}::{2}.serialize_object({0})", valueReference,
-                            defaultNamespace + "::Models", composite.Name)
+                            defaultNamespace, composite.Name)
                         .Outdent()
                         .AppendLine("end");
 
@@ -462,7 +462,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
 
                 return builder.AppendLine("if ({0})", valueReference)
                     .Indent()
-                        .AppendLine("{0} = {1}::{2}.serialize_object({0})", valueReference, defaultNamespace + "::Models", composite.Name)
+                        .AppendLine("{0} = {1}::{2}.serialize_object({0})", valueReference, defaultNamespace, composite.Name)
                     .Outdent()
                     .AppendLine("end").ToString();
             }

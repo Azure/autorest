@@ -25,7 +25,7 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
   @EmptyLine
   # Defining deserialization method.
   deserialize_method = lambda do |parsed_response|
-    @(Model.DeserializePollingResponse("parsed_response", Model.ReturnType, false, Settings.Namespace))
+    @(Model.DeserializePollingResponse("parsed_response", Model.ReturnType, false, Settings.Namespace + "::Models"))
   end
   @EmptyLine
   # Waiting for response.
@@ -53,7 +53,7 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
   @EmptyLine
   # Defining deserialization method.
   deserialize_method = lambda do |parsed_response|
-    @(Model.DeserializePollingResponse("parsed_response", Model.ReturnType, false, Settings.Namespace))
+    @(Model.DeserializePollingResponse("parsed_response", Model.ReturnType, false, Settings.Namespace + "::Models"))
   end
   @EmptyLine
   # Waiting for response.

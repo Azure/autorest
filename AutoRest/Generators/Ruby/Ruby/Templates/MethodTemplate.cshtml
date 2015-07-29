@@ -65,7 +65,7 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
   @EmptyLine
   @:# Serialize Request
   @:request_headers['Content-Type'] = 'application/json'
-  @:@Model.CreateSerializationString(Model.RequestBody.Name, Model.RequestBody.Type, "request_content", Settings.Namespace)
+  @:@Model.CreateSerializationString(Model.RequestBody.Name, Model.RequestBody.Type, "http_request.body", Settings.Namespace + "::Models")  
   }
 
   @EmptyLine
@@ -109,7 +109,7 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
     # Deserialize Response
     if status_code == @Model.GetStatusCodeReference(responsePair.Key)
       begin
-        @(Model.CreateDeserializationString("response_content", Model.ReturnType, "result.body", Settings.Namespace))
+        @(Model.CreateDeserializationString("response_content", Model.ReturnType, "result.body", Settings.Namespace + "::Models"))
       rescue Exception => e
         fail MsRest::DeserializationError.new("Error occured in deserializing the response", e.message, e.backtrace, response_content)
       end
@@ -121,7 +121,7 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
     {
     <text>
     begin
-      @(Model.CreateDeserializationString("response_content", Model.ReturnType, "result.body", Settings.Namespace))
+      @(Model.CreateDeserializationString("response_content", Model.ReturnType, "result.body", Settings.Namespace + "::Models"))
     rescue Exception => e
       fail MsRest::DeserializationError.new("Error occured in deserializing the response", e.message, e.backtrace, response_content)
     end

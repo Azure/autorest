@@ -144,6 +144,13 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
 
             var builder = new IndentedStringBuilder("  ");
 
+            var composite = type as CompositeType;
+
+            if (composite != null && composite.Extensions.ContainsKey(AzureCodeGenerator.ExternalExtension))
+            {
+                defaultNamespace = "MsRestAzure";
+            }
+
             string serializationLogic = type.DeserializeType(this.Scope, variableName, defaultNamespace);
             return builder.AppendLine(serializationLogic).ToString();
         }
@@ -225,6 +232,30 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                 //}
                 return base.OperationExceptionTypeString;
             }
+        }
+
+        public override string CreateDeserializationString(string inputVariable, IType type, string outputVariable, string defaultNamespace)
+        {
+            var composite = type as CompositeType;
+
+            if (composite != null && composite.Extensions.ContainsKey(AzureCodeGenerator.ExternalExtension))
+            {
+                defaultNamespace = "MsRestAzure";
+            }
+
+            return base.CreateDeserializationString(inputVariable, type, outputVariable, defaultNamespace);
+        }
+
+        public override string CreateSerializationString(string inputVariable, IType type, string outputVariable, string defaultNamespace)
+        {
+            var composite = type as CompositeType;
+
+            if (composite != null && composite.Extensions.ContainsKey(AzureCodeGenerator.ExternalExtension))
+            {
+                defaultNamespace = "MsRestAzure";
+            }
+
+            return base.CreateSerializationString(inputVariable, type, outputVariable, defaultNamespace);
         }
     }
 }

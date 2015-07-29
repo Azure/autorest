@@ -99,7 +99,7 @@ namespace Microsoft.Rest.Generator.Ruby
         /// <param name="isRequired">Is property required.</param>
         /// <param name="defaultNamespace">The namespace.</param>
         /// <returns>The code for serialization in string format.</returns>
-        public string SerializeProperty(string variableName, IType type, bool isRequired, string defaultNamespace)
+        public virtual string SerializeProperty(string variableName, IType type, bool isRequired, string defaultNamespace)
         {
             // TODO: handle if property required via "unless serialized_property.nil?"
 
@@ -110,7 +110,6 @@ namespace Microsoft.Rest.Generator.Ruby
             builder.AppendLine(serializationLogic);
 
             return builder.ToString();
-            // return builder.AppendLine("{0} = JSON.generate({0}, quirks_mode: true)", variableName).ToString();
         }
 
         /// <summary>
@@ -121,13 +120,11 @@ namespace Microsoft.Rest.Generator.Ruby
         /// <param name="isRequired">Is property required.</param>
         /// <param name="defaultNamespace">The namespace.</param>
         /// <returns>The code for вуserialization in string format.</returns>
-        public string DeserializeProperty(string variableName, IType type, bool isRequired, string defaultNamespace)
+        public virtual string DeserializeProperty(string variableName, IType type, bool isRequired, string defaultNamespace)
         {
             // TODO: handle required property via "unless deserialized_property.nil?"
 
             var builder = new IndentedStringBuilder("  ");
-
-            // builder.AppendLine("{0} = JSON.load({0}) unless {0}.to_s.empty?", variableName);
 
             string serializationLogic = type.DeserializeType(this.Scope, variableName, defaultNamespace);
             return builder.AppendLine(serializationLogic).ToString();

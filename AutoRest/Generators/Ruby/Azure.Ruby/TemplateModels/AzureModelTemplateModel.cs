@@ -40,5 +40,29 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
 
             return string.Empty;
         }
+
+        public override string SerializeProperty(string variableName, IType type, bool isRequired, string defaultNamespace)
+        {
+            var composite = type as CompositeType;
+
+            if (composite != null && composite.Extensions.ContainsKey(AzureCodeGenerator.ExternalExtension))
+            {
+                defaultNamespace = "MsRestAzure";
+            }
+
+            return base.SerializeProperty(variableName, type, isRequired, defaultNamespace);
+        }
+
+        public override string DeserializeProperty(string variableName, IType type, bool isRequired, string defaultNamespace)
+        {
+            var composite = type as CompositeType;
+
+            if (composite != null && composite.Extensions.ContainsKey(AzureCodeGenerator.ExternalExtension))
+            {
+                defaultNamespace = "MsRestAzure";
+            }
+
+            return base.DeserializeProperty(variableName, type, isRequired, defaultNamespace);
+        }
     }
 }

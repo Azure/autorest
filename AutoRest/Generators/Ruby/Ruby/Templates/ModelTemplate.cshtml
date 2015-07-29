@@ -75,7 +75,7 @@ module @(Settings.Namespace)
         {
         @EmptyLine
         @:serialized_property = @("object." + property.Name)
-        @:@Model.SerializeProperty("serialized_property", property.Type, property.IsRequired, Settings.Namespace)
+        @:@Model.SerializeProperty("serialized_property", property.Type, property.IsRequired, Settings.Namespace + "::Models")
         @:output_object['@(property.SerializedName)'] = serialized_property unless serialized_property.nil?
         }
 
@@ -104,7 +104,7 @@ module @(Settings.Namespace)
         {
         @EmptyLine
         @:deserialized_property = @(string.Format("object['{0}']", property.SerializedName))
-        @:@Model.DeserializeProperty("deserialized_property", property.Type, property.IsRequired, Settings.Namespace)
+        @:@Model.DeserializeProperty("deserialized_property", property.Type, property.IsRequired, Settings.Namespace + "::Models")
         @:output_object.@(property.Name) = deserialized_property
         }
 
