@@ -57,8 +57,6 @@ function ApplicationTokenCredentials(clientId, domain, secret, options) {
   this.clientRedirectUri = clientRedirectUri;
 }
 
-util.inherits(ApplicationTokenCredentials, msrest.TokenCredentials);
-
 /**
 * Signs a request with the Authentication header.
 *

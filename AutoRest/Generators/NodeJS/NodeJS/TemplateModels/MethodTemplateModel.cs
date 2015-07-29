@@ -207,15 +207,26 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
         }
 
-        public string GetParameterDocumentationName (ParameterTemplateModel parameter)
+        /// <summary>
+        /// Provides the parameter name in the correct jsdoc notation depending on 
+        /// whether it is required or optional
+        /// </summary>
+        /// <param name="parameter">Parameter to be documented</param>
+        /// <returns>Parameter name in the correct jsdoc notation</returns>
+        public static string GetParameterDocumentationName (Parameter parameter)
         {
+            if (parameter == null)
+            {
+                throw new ArgumentNullException("parameter");
+            }
+
             if (parameter.IsRequired)
             {
                 return parameter.Name;
             }
             else
             {
-                return string.Format("[{0}]", parameter.Name);
+                return string.Format(CultureInfo.InvariantCulture, "[{0}]", parameter.Name);
             }
         }
 

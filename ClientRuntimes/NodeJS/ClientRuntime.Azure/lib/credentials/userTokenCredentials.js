@@ -69,8 +69,6 @@ function UserTokenCredentials(clientId, domain, username, password, clientRedire
   this.clientRedirectUri = clientRedirectUri;
 }
 
-util.inherits(UserTokenCredentials, msrest.TokenCredentials);
-
 /**
 * Signs a request with the Authentication header.
 *

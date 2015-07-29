@@ -51,7 +51,7 @@ function @(Model.Name)() { }
   if (specialProperties.Count() > 0)
   {
   @:if (instance) {
-    var specialPropertyList = new List<Property>(Model.ComposedProperties);
+    var specialPropertyList = new List<Property>(Model.SpecialProperties);
     for (int i = 0; i < specialPropertyList.Count; i++)
     {
     @:@(Model.DeserializeProperty("instance", specialPropertyList[i]))
