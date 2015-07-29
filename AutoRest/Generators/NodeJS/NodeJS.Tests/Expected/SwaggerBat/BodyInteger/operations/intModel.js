@@ -576,7 +576,7 @@ IntModel.prototype.getUnderflowInt64 = function (options, callback) {
 
 /**
  * Put max int32 value
- * @param {Number} [intBody] 
+ * @param {Number} intBody 
  *
  * @param {object} [options]
  *
@@ -671,7 +671,7 @@ IntModel.prototype.putMax32 = function (intBody, options, callback) {
 
 /**
  * Put max int64 value
- * @param {Number} [intBody] 
+ * @param {Number} intBody 
  *
  * @param {object} [options]
  *
@@ -766,7 +766,7 @@ IntModel.prototype.putMax64 = function (intBody, options, callback) {
 
 /**
  * Put min int32 value
- * @param {Number} [intBody] 
+ * @param {Number} intBody 
  *
  * @param {object} [options]
  *
@@ -861,7 +861,7 @@ IntModel.prototype.putMin32 = function (intBody, options, callback) {
 
 /**
  * Put min int64 value
- * @param {Number} [intBody] 
+ * @param {Number} intBody 
  *
  * @param {object} [options]
  *

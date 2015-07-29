@@ -31,7 +31,6 @@ ArrayWrapper.prototype.validate = function (payload) {
       }
     }
   }
-
 };
 
 /**

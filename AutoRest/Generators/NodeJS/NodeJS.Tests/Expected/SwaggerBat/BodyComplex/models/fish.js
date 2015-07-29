@@ -43,7 +43,6 @@ Fish.prototype.validate = function (payload) {
       }
     }
   }
-
 };
 
 /**
@@ -54,6 +53,8 @@ Fish.prototype.validate = function (payload) {
  */
 Fish.prototype.deserialize = function (instance) {
   if (instance) {
+
+
     if (instance.siblings !== null && instance.siblings !== undefined) {
       var deserializedArray = [];
       instance.siblings.forEach(function(element) {
@@ -68,7 +69,6 @@ Fish.prototype.deserialize = function (instance) {
       });
       instance.siblings = deserializedArray;
     }
-
   }
   return instance;
 };

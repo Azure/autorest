@@ -27,7 +27,6 @@ StringWrapper.prototype.validate = function (payload) {
   if (payload['value'] !== null && payload['value'] !== undefined && typeof payload['value'] !== 'string') {
     throw new Error('payload[\'value\'] must be of type string.');
   }
-
 };
 
 /**

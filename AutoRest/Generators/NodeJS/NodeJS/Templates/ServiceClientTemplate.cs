@@ -125,15 +125,15 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("} [");
+            WriteLiteral("} ");
 #line 36 "ServiceClientTemplate.cshtml"
-                            Write(param.Name);
+                           Write(param.Name);
 
 #line default
 #line hidden
-            WriteLiteral("] ");
+            WriteLiteral(" ");
 #line 36 "ServiceClientTemplate.cshtml"
-                                         Write(param.Documentation);
+                                       Write(param.Documentation);
 
 #line default
 #line hidden

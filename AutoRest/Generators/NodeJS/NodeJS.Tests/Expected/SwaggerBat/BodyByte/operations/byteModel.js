@@ -309,7 +309,7 @@ ByteModel.prototype.getNonAscii = function (options, callback) {
 
 /**
  * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
- * @param {Buffer} [byteBody] Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
+ * @param {Buffer} byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
  *
  * @param {object} [options]
  *

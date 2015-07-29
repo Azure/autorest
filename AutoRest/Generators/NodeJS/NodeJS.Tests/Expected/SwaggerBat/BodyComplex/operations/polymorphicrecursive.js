@@ -123,59 +123,59 @@ Polymorphicrecursive.prototype.getValid = function (options, callback) {
 
 /**
  * Put complex types that are polymorphic and have recursive references
- * @param {Fish} [complexBody] Please put a salmon that looks like this:
-] {
-]     "dtype": "salmon",
-]     "species": "king",
-]     "length": 1,
-]     "age": 1,
-]     "location": "alaska",
-]     "iswild": true,
-]     "siblings": [
-]         {
-]             "dtype": "shark",
-]             "species": "predator",
-]             "length": 20,
-]             "age": 6,
-]             "siblings": [
-]                 {
-]                     "dtype": "salmon",
-]                     "species": "coho",
-]                     "length": 2,
-]                     "age": 2,
-]                     "location": "atlantic",
-]                     "iswild": true,
-]                     "siblings": [
-]                         {
-]                             "dtype": "shark",
-]                             "species": "predator",
-]                             "length": 20,
-]                             "age": 6
-]                         },
-]                         {
-]                             "dtype": "sawshark",
-]                             "species": "dangerous",
-]                             "length": 10,
-]                             "age": 105
-]                         }
-]                     ]
-]                 },
-]                 {
-]                     "dtype": "sawshark",
-]                     "species": "dangerous",
-]                     "length": 10,
-]                     "age": 105
-]                 }
-]             ]
-]         },
-]         {
-]             "dtype": "sawshark",
-]             "species": "dangerous",
-]             "length": 10,
-]             "age": 105
-]         }
-]     ]
-] }
+ * @param {Fish} complexBody Please put a salmon that looks like this:
+ {
+     "dtype": "salmon",
+     "species": "king",
+     "length": 1,
+     "age": 1,
+     "location": "alaska",
+     "iswild": true,
+     "siblings": [
+         {
+             "dtype": "shark",
+             "species": "predator",
+             "length": 20,
+             "age": 6,
+             "siblings": [
+                 {
+                     "dtype": "salmon",
+                     "species": "coho",
+                     "length": 2,
+                     "age": 2,
+                     "location": "atlantic",
+                     "iswild": true,
+                     "siblings": [
+                         {
+                             "dtype": "shark",
+                             "species": "predator",
+                             "length": 20,
+                             "age": 6
+                         },
+                         {
+                             "dtype": "sawshark",
+                             "species": "dangerous",
+                             "length": 10,
+                             "age": 105
+                         }
+                     ]
+                 },
+                 {
+                     "dtype": "sawshark",
+                     "species": "dangerous",
+                     "length": 10,
+                     "age": 105
+                 }
+             ]
+         },
+         {
+             "dtype": "sawshark",
+             "species": "dangerous",
+             "length": 10,
+             "age": 105
+         }
+     ]
+ }
  *
  * @param {Number} [complexBody.length] 
  *

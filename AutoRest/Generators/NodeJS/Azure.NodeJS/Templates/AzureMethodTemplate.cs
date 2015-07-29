@@ -104,15 +104,15 @@ Write(WrapComment(" * ", Model.Documentation));
 
 #line default
 #line hidden
-            WriteLiteral("} [");
+            WriteLiteral("} ");
 #line 23 "AzureMethodTemplate.cshtml"
-                                Write(parameter.Name);
+                               Write(Model.GetParameterDocumentationName(parameter));
 
 #line default
 #line hidden
-            WriteLiteral("] ");
+            WriteLiteral(" ");
 #line 23 "AzureMethodTemplate.cshtml"
-                                                 Write(parameter.Documentation);
+                                                                               Write(parameter.Documentation);
 
 #line default
 #line hidden

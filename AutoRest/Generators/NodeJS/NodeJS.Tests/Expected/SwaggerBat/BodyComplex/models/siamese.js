@@ -44,7 +44,6 @@ Siamese.prototype.validate = function (payload) {
   if (payload['breed'] !== null && payload['breed'] !== undefined && typeof payload['breed'] !== 'string') {
     throw new Error('payload[\'breed\'] must be of type string.');
   }
-
 };
 
 /**
@@ -55,6 +54,9 @@ Siamese.prototype.validate = function (payload) {
  */
 Siamese.prototype.deserialize = function (instance) {
   if (instance) {
+
+
+
     if (instance.hates !== null && instance.hates !== undefined) {
       var deserializedArray = [];
       instance.hates.forEach(function(element) {

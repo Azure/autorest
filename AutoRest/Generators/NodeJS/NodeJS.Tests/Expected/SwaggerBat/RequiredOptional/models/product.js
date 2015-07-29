@@ -31,7 +31,6 @@ Product.prototype.validate = function (payload) {
   if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'] !== 'string') {
     throw new Error('payload[\'name\'] must be of type string.');
   }
-
 };
 
 /**

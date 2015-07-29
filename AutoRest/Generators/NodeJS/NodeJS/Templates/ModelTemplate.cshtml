@@ -1,4 +1,5 @@
 ﻿@using System.Linq
+@using System.Collections.Generic
 @using Microsoft.Rest.Generator.ClientModel
 @using Microsoft.Rest.Generator.NodeJS.TemplateModels
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.NodeJS.ModelTemplateModel>
@@ -25,11 +26,17 @@ function @(Model.Name)() { }
   if (!payload) {
     throw new Error('@(Model.Name) cannot be null.');
   }
-  @foreach (var property in Model.ComposedProperties)
+  @{
+  var propertyList = new List<Property>(Model.ComposedProperties);
+  for (int i = 0; i < propertyList.Count; i++)
   {
-  @:@(Model.ValidateProperty("payload", property))
+  @:@(Model.ValidateProperty("payload", propertyList[i]))
+  if (i != propertyList.Count-1)
+  {
   @EmptyLine
   }
+  }
+}
 };
 @EmptyLine
 /**
@@ -44,10 +51,14 @@ function @(Model.Name)() { }
   if (specialProperties.Count() > 0)
   {
   @:if (instance) {
-    foreach (var property in Model.SpecialProperties)
+    var specialPropertyList = new List<Property>(Model.ComposedProperties);
+    for (int i = 0; i < specialPropertyList.Count; i++)
     {
-    @:@(Model.DeserializeProperty("instance", property))
+    @:@(Model.DeserializeProperty("instance", specialPropertyList[i]))
+    if (i != specialPropertyList.Count - 1)
+    {
     @EmptyLine
+    }
     }
   @:}
   }

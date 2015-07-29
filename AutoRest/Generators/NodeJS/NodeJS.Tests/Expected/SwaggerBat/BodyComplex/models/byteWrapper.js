@@ -24,7 +24,6 @@ ByteWrapper.prototype.validate = function (payload) {
   if (payload['field'] !== null && payload['field'] !== undefined && !Buffer.isBuffer(payload['field'])) {
     throw new Error('payload[\'field\'] must be of type buffer.');
   }
-
 };
 
 /**
@@ -38,7 +37,6 @@ ByteWrapper.prototype.deserialize = function (instance) {
     if (instance.field !== null && instance.field !== undefined && typeof instance.field === 'string') {
       instance.field = new Buffer(instance.field, 'base64');
     }
-
   }
   return instance;
 };

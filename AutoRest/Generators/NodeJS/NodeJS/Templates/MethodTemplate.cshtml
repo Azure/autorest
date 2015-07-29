@@ -8,7 +8,7 @@
 @WrapComment(" * ", Model.Documentation)
 @foreach (var parameter in Model.DocumentationParameters)
 {
- @:* @@param {@parameter.Type.Name} [@parameter.Name] @parameter.Documentation
+ @:* @@param {@parameter.Type.Name} @Model.GetParameterDocumentationName(parameter) @parameter.Documentation
  @:*
 }
 @WrapComment(" * ", " @param {object} [options]")

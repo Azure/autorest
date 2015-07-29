@@ -61,6 +61,11 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
         }
 
+        public List<T> ConvertIEnumerableToList<T>(IEnumerable<T> enumerable)
+        {
+            return new List<T>(enumerable);
+        }
+
         public bool IsPolymorphic
         {
             get

@@ -24,7 +24,7 @@ function Header(client) {
 
 /**
  * Send a post request with header value "User-Agent": "overwrite"
- * @param {String} [userAgent] Send a post request with header value "User-Agent": "overwrite"
+ * @param {String} userAgent Send a post request with header value "User-Agent": "overwrite"
  *
  * @param {object} [options]
  *
@@ -198,7 +198,7 @@ Header.prototype.responseExistingKey = function (options, callback) {
 
 /**
  * Send a post request with header value "Content-Type": "text/html"
- * @param {String} [contentType] Send a post request with header value "Content-Type": "text/html"
+ * @param {String} contentType Send a post request with header value "Content-Type": "text/html"
  *
  * @param {object} [options]
  *
@@ -373,9 +373,9 @@ Header.prototype.responseProtectedKey = function (options, callback) {
 /**
  * Send a post request with header values "scenario": "positive", "value": 1
  * or "scenario": "negative", "value": -2
- * @param {String} [scenario] Send a post request with header values "scenario": "positive" or "negative"
+ * @param {String} scenario Send a post request with header values "scenario": "positive" or "negative"
  *
- * @param {Number} [value] Send a post request with header values 1 or -2
+ * @param {Number} value Send a post request with header values 1 or -2
  *
  * @param {object} [options]
  *
@@ -479,7 +479,7 @@ Header.prototype.paramInteger = function (scenario, value, options, callback) {
 
 /**
  * Get a response with header value "value": 1 or -2
- * @param {String} [scenario] Send a post request with header values "scenario": "positive" or "negative"
+ * @param {String} scenario Send a post request with header values "scenario": "positive" or "negative"
  *
  * @param {object} [options]
  *
@@ -575,9 +575,9 @@ Header.prototype.responseInteger = function (scenario, options, callback) {
 /**
  * Send a post request with header values "scenario": "positive", "value": 105
  * or "scenario": "negative", "value": -2
- * @param {String} [scenario] Send a post request with header values "scenario": "positive" or "negative"
+ * @param {String} scenario Send a post request with header values "scenario": "positive" or "negative"
  *
- * @param {Number} [value] Send a post request with header values 105 or -2
+ * @param {Number} value Send a post request with header values 105 or -2
  *
  * @param {object} [options]
  *
@@ -681,7 +681,7 @@ Header.prototype.paramLong = function (scenario, value, options, callback) {
 
 /**
  * Get a response with header value "value": 105 or -2
- * @param {String} [scenario] Send a post request with header values "scenario": "positive" or "negative"
+ * @param {String} scenario Send a post request with header values "scenario": "positive" or "negative"
  *
  * @param {object} [options]
  *
@@ -777,9 +777,9 @@ Header.prototype.responseLong = function (scenario, options, callback) {
 /**
  * Send a post request with header values "scenario": "positive", "value":
  * 0.07 or "scenario": "negative", "value": -3.0
- * @param {String} [scenario] Send a post request with header values "scenario": "positive" or "negative"
+ * @param {String} scenario Send a post request with header values "scenario": "positive" or "negative"
  *
- * @param {Number} [value] Send a post request with header values 0.07 or -3.0
+ * @param {Number} value Send a post request with header values 0.07 or -3.0
  *
  * @param {object} [options]
  *
@@ -883,7 +883,7 @@ Header.prototype.paramFloat = function (scenario, value, options, callback) {
 
 /**
  * Get a response with header value "value": 0.07 or -3.0
- * @param {String} [scenario] Send a post request with header values "scenario": "positive" or "negative"
+ * @param {String} scenario Send a post request with header values "scenario": "positive" or "negative"
  *
  * @param {object} [options]
  *
@@ -979,9 +979,9 @@ Header.prototype.responseFloat = function (scenario, options, callback) {
 /**
  * Send a post request with header values "scenario": "positive", "value":
  * 7e120 or "scenario": "negative", "value": -3.0
- * @param {String} [scenario] Send a post request with header values "scenario": "positive" or "negative"
+ * @param {String} scenario Send a post request with header values "scenario": "positive" or "negative"
  *
- * @param {Number} [value] Send a post request with header values 7e120 or -3.0
+ * @param {Number} value Send a post request with header values 7e120 or -3.0
  *
  * @param {object} [options]
  *
@@ -1085,7 +1085,7 @@ Header.prototype.paramDouble = function (scenario, value, options, callback) {
 
 /**
  * Get a response with header value "value": 7e120 or -3.0
- * @param {String} [scenario] Send a post request with header values "scenario": "positive" or "negative"
+ * @param {String} scenario Send a post request with header values "scenario": "positive" or "negative"
  *
  * @param {object} [options]
  *
@@ -1181,9 +1181,9 @@ Header.prototype.responseDouble = function (scenario, options, callback) {
 /**
  * Send a post request with header values "scenario": "true", "value": true or
  * "scenario": "false", "value": false
- * @param {String} [scenario] Send a post request with header values "scenario": "true" or "false"
+ * @param {String} scenario Send a post request with header values "scenario": "true" or "false"
  *
- * @param {Boolean} [value] Send a post request with header values true or false
+ * @param {Boolean} value Send a post request with header values true or false
  *
  * @param {object} [options]
  *
@@ -1287,7 +1287,7 @@ Header.prototype.paramBool = function (scenario, value, options, callback) {
 
 /**
  * Get a response with header value "value": true or false
- * @param {String} [scenario] Send a post request with header values "scenario": "true" or "false"
+ * @param {String} scenario Send a post request with header values "scenario": "true" or "false"
  *
  * @param {object} [options]
  *
@@ -1384,7 +1384,7 @@ Header.prototype.responseBool = function (scenario, options, callback) {
  * Send a post request with header values "scenario": "valid", "value": "The
  * quick brown fox jumps over the lazy dog" or "scenario": "null", "value":
  * null or "scenario": "empty", "value": ""
- * @param {String} [scenario] Send a post request with header values "scenario": "valid" or "null" or "empty"
+ * @param {String} scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
  *
  * @param {String} [value] Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""
  *
@@ -1488,7 +1488,7 @@ Header.prototype.paramString = function (scenario, value, options, callback) {
 /**
  * Get a response with header values "The quick brown fox jumps over the lazy
  * dog" or null or ""
- * @param {String} [scenario] Send a post request with header values "scenario": "valid" or "null" or "empty"
+ * @param {String} scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
  *
  * @param {object} [options]
  *
@@ -1584,9 +1584,9 @@ Header.prototype.responseString = function (scenario, options, callback) {
 /**
  * Send a post request with header values "scenario": "valid", "value":
  * "2010-01-01" or "scenario": "min", "value": "0001-01-01"
- * @param {String} [scenario] Send a post request with header values "scenario": "valid" or "min"
+ * @param {String} scenario Send a post request with header values "scenario": "valid" or "min"
  *
- * @param {Date} [value] Send a post request with header values "2010-01-01" or "0001-01-01"
+ * @param {Date} value Send a post request with header values "2010-01-01" or "0001-01-01"
  *
  * @param {object} [options]
  *
@@ -1692,7 +1692,7 @@ Header.prototype.paramDate = function (scenario, value, options, callback) {
 
 /**
  * Get a response with header values "2010-01-01" or "0001-01-01"
- * @param {String} [scenario] Send a post request with header values "scenario": "valid" or "min"
+ * @param {String} scenario Send a post request with header values "scenario": "valid" or "min"
  *
  * @param {object} [options]
  *
@@ -1789,9 +1789,9 @@ Header.prototype.responseDate = function (scenario, options, callback) {
  * Send a post request with header values "scenario": "valid", "value":
  * "2010-01-01T12:34:56Z" or "scenario": "min", "value":
  * "0001-01-01T00:00:00Z"
- * @param {String} [scenario] Send a post request with header values "scenario": "valid" or "min"
+ * @param {String} scenario Send a post request with header values "scenario": "valid" or "min"
  *
- * @param {Date} [value] Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
+ * @param {Date} value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
  *
  * @param {object} [options]
  *
@@ -1898,7 +1898,7 @@ Header.prototype.paramDatetime = function (scenario, value, options, callback) {
 /**
  * Get a response with header values "2010-01-01T12:34:56Z" or
  * "0001-01-01T00:00:00Z"
- * @param {String} [scenario] Send a post request with header values "scenario": "valid" or "min"
+ * @param {String} scenario Send a post request with header values "scenario": "valid" or "min"
  *
  * @param {object} [options]
  *
@@ -1994,9 +1994,9 @@ Header.prototype.responseDatetime = function (scenario, options, callback) {
 /**
  * Send a post request with header values "scenario": "valid", "value":
  * "啊齄丂狛狜隣郎隣兀﨩"
- * @param {String} [scenario] Send a post request with header values "scenario": "valid"
+ * @param {String} scenario Send a post request with header values "scenario": "valid"
  *
- * @param {Buffer} [value] Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
+ * @param {Buffer} value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
  *
  * @param {object} [options]
  *
@@ -2100,7 +2100,7 @@ Header.prototype.paramByte = function (scenario, value, options, callback) {
 
 /**
  * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩"
- * @param {String} [scenario] Send a post request with header values "scenario": "valid"
+ * @param {String} scenario Send a post request with header values "scenario": "valid"
  *
  * @param {object} [options]
  *
@@ -2196,7 +2196,7 @@ Header.prototype.responseByte = function (scenario, options, callback) {
 /**
  * Send a post request with header values "scenario": "valid", "value": "GREY"
  * or "scenario": "null", "value": null
- * @param {String} [scenario] Send a post request with header values "scenario": "valid" or "null" or "empty"
+ * @param {String} scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
  *
  * @param {GreyscaleColors} [value] Send a post request with header values 'GREY' . Possible values for this parameter include: 'White', 'black', 'GREY'
  *
@@ -2302,7 +2302,7 @@ Header.prototype.paramEnum = function (scenario, value, options, callback) {
 
 /**
  * Get a response with header values "GREY" or null
- * @param {String} [scenario] Send a post request with header values "scenario": "valid" or "null" or "empty"
+ * @param {String} scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
  *
  * @param {object} [options]
  *

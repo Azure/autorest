@@ -27,7 +27,6 @@ ClassWrapper.prototype.validate = function (payload) {
   if (payload['value'] !== null && payload['value'] !== undefined) {
     models['Product'].validate(payload['value']);
   }
-
 };
 
 /**
@@ -41,7 +40,6 @@ ClassWrapper.prototype.deserialize = function (instance) {
     if (instance.value !== null && instance.value !== undefined) {
       instance.value = models['Product'].deserialize(instance.value);
     }
-
   }
   return instance;
 };

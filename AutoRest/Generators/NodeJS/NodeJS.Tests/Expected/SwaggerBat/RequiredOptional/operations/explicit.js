@@ -25,7 +25,7 @@ function Explicit(client) {
 /**
  * Test explicitly required integer. Please put null and the client library
  * should throw before the request is sent.
- * @param {Number} [bodyParameter] 
+ * @param {Number} bodyParameter 
  *
  * @param {object} [options]
  *
@@ -227,7 +227,7 @@ Explicit.prototype.postOptionalIntegerParameter = function (bodyParameter, optio
  * Test explicitly required integer. Please put a valid int-wrapper with
  * 'value' = null and the client library should throw before the request is
  * sent.
- * @param {IntWrapper} [bodyParameter] 
+ * @param {IntWrapper} bodyParameter 
  *
  * @param {Number} [bodyParameter.value] 
  *
@@ -433,7 +433,7 @@ Explicit.prototype.postOptionalIntegerProperty = function (bodyParameter, option
 /**
  * Test explicitly required integer. Please put a header 'headerParameter' =>
  * null and the client library should throw before the request is sent.
- * @param {Number} [headerParameter] 
+ * @param {Number} headerParameter 
  *
  * @param {object} [options]
  *
@@ -635,7 +635,7 @@ Explicit.prototype.postOptionalIntegerHeader = function (headerParameter, option
 /**
  * Test explicitly required string. Please put null and the client library
  * should throw before the request is sent.
- * @param {String} [bodyParameter] 
+ * @param {String} bodyParameter 
  *
  * @param {object} [options]
  *
@@ -837,7 +837,7 @@ Explicit.prototype.postOptionalStringParameter = function (bodyParameter, option
  * Test explicitly required string. Please put a valid string-wrapper with
  * 'value' = null and the client library should throw before the request is
  * sent.
- * @param {StringWrapper} [bodyParameter] 
+ * @param {StringWrapper} bodyParameter 
  *
  * @param {String} [bodyParameter.value] 
  *
@@ -1043,7 +1043,7 @@ Explicit.prototype.postOptionalStringProperty = function (bodyParameter, options
 /**
  * Test explicitly required string. Please put a header 'headerParameter' =>
  * null and the client library should throw before the request is sent.
- * @param {String} [headerParameter] 
+ * @param {String} headerParameter 
  *
  * @param {object} [options]
  *
@@ -1245,7 +1245,7 @@ Explicit.prototype.postOptionalStringHeader = function (bodyParameter, options, 
 /**
  * Test explicitly required complex object. Please put null and the client
  * library should throw before the request is sent.
- * @param {Product} [bodyParameter] 
+ * @param {Product} bodyParameter 
  *
  * @param {Number} [bodyParameter.id] 
  *
@@ -1455,7 +1455,7 @@ Explicit.prototype.postOptionalClassParameter = function (bodyParameter, options
  * Test explicitly required complex object. Please put a valid class-wrapper
  * with 'value' = null and the client library should throw before the request
  * is sent.
- * @param {ClassWrapper} [bodyParameter] 
+ * @param {ClassWrapper} bodyParameter 
  *
  * @param {Product} [bodyParameter.value] 
  *
@@ -1669,7 +1669,7 @@ Explicit.prototype.postOptionalClassProperty = function (bodyParameter, options,
 /**
  * Test explicitly required array. Please put null and the client library
  * should throw before the request is sent.
- * @param {Array} [bodyParameter] 
+ * @param {Array} bodyParameter 
  *
  * @param {object} [options]
  *
@@ -1879,7 +1879,7 @@ Explicit.prototype.postOptionalArrayParameter = function (bodyParameter, options
  * Test explicitly required array. Please put a valid array-wrapper with
  * 'value' = null and the client library should throw before the request is
  * sent.
- * @param {ArrayWrapper} [bodyParameter] 
+ * @param {ArrayWrapper} bodyParameter 
  *
  * @param {Array} [bodyParameter.value] 
  *
@@ -2085,7 +2085,7 @@ Explicit.prototype.postOptionalArrayProperty = function (bodyParameter, options,
 /**
  * Test explicitly required array. Please put a header 'headerParameter' =>
  * null and the client library should throw before the request is sent.
- * @param {Array} [headerParameter] 
+ * @param {Array} headerParameter 
  *
  * @param {object} [options]
  *

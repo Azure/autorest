@@ -404,7 +404,7 @@ DateModel.prototype.getUnderflowDate = function (options, callback) {
 
 /**
  * Put max date value 9999-12-31
- * @param {Date} [dateBody] 
+ * @param {Date} dateBody 
  *
  * @param {object} [options]
  *
@@ -596,7 +596,7 @@ DateModel.prototype.getMaxDate = function (options, callback) {
 
 /**
  * Put min date value 0000-01-01
- * @param {Date} [dateBody] 
+ * @param {Date} dateBody 
  *
  * @param {object} [options]
  *

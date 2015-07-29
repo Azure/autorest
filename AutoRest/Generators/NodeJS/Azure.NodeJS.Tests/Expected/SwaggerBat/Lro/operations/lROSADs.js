@@ -32,8 +32,6 @@ function LROSADs(client) {
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -73,8 +71,6 @@ LROSADs.prototype.putNonRetry400 = function (product, options, callback) {
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -330,8 +326,6 @@ LROSADs.prototype.getNonRetry400 = function (options, callback) {
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -372,8 +366,6 @@ LROSADs.prototype.putNonRetry201Creating400 = function (product, options, callba
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -630,8 +622,6 @@ LROSADs.prototype.getNonRetry201Creating400 = function (options, callback) {
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -673,8 +663,6 @@ LROSADs.prototype.putAsyncRelativeRetry400 = function (product, options, callbac
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -1280,8 +1268,6 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetry400 = function (options, callback
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1311,8 +1297,6 @@ LROSADs.prototype.postNonRetry400 = function (product, options, callback) {
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -1423,8 +1407,6 @@ LROSADs.prototype.beginPostNonRetry400 = function (product, options, callback) {
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1454,8 +1436,6 @@ LROSADs.prototype.post202NonRetry400 = function (product, options, callback) {
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -1568,8 +1548,6 @@ LROSADs.prototype.beginPost202NonRetry400 = function (product, options, callback
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1601,8 +1579,6 @@ LROSADs.prototype.postAsyncRelativeRetry400 = function (product, options, callba
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -1714,8 +1690,6 @@ LROSADs.prototype.beginPostAsyncRelativeRetry400 = function (product, options, c
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1756,8 +1730,6 @@ LROSADs.prototype.putError201NoProvisioningStatePayload = function (product, opt
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -2014,8 +1986,6 @@ LROSADs.prototype.getError201NoProvisioningStatePayload = function (options, cal
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2057,8 +2027,6 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatus = function (product, options, ca
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -2301,8 +2269,6 @@ LROSADs.prototype.getAsyncRelativeRetryNoStatus = function (options, callback) {
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2344,8 +2310,6 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatusPayload = function (product, opti
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -2835,8 +2799,6 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryNoStatus = function (options, cal
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2867,8 +2829,6 @@ LROSADs.prototype.post202NoLocation = function (product, options, callback) {
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -2981,8 +2941,6 @@ LROSADs.prototype.beginPost202NoLocation = function (product, options, callback)
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3014,8 +2972,6 @@ LROSADs.prototype.postAsyncRelativeRetryNoPayload = function (product, options, 
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -3127,8 +3083,6 @@ LROSADs.prototype.beginPostAsyncRelativeRetryNoPayload = function (product, opti
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3169,8 +3123,6 @@ LROSADs.prototype.put200InvalidJson = function (product, options, callback) {
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -3411,8 +3363,6 @@ LROSADs.prototype.get200Succeeded = function (options, callback) {
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3454,8 +3404,6 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidHeader = function (product, option
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -3696,8 +3644,6 @@ LROSADs.prototype.getAsyncRelativeRetryInvalidHeader = function (options, callba
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3739,8 +3685,6 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidJsonPolling = function (product, o
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -4353,8 +4297,6 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidJsonPolling = function (op
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4385,8 +4327,6 @@ LROSADs.prototype.post202RetryInvalidHeader = function (product, options, callba
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -4499,8 +4439,6 @@ LROSADs.prototype.beginPost202RetryInvalidHeader = function (product, options, c
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4532,8 +4470,6 @@ LROSADs.prototype.postAsyncRelativeRetryInvalidHeader = function (product, optio
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -4646,8 +4582,6 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidHeader = function (product, 
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4679,8 +4613,6 @@ LROSADs.prototype.postAsyncRelativeRetryInvalidJsonPolling = function (product, 
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *

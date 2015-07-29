@@ -17,7 +17,7 @@ var operations = require('./operations');
  * Initializes a new instance of the AutoRestUrlTestService class.
  * @constructor
  *
- * @param {String} [globalStringPath] A string value 'globalItemStringPath' that appears in the path
+ * @param {String} globalStringPath A string value 'globalItemStringPath' that appears in the path
  *
  * @param {string} [baseUri] - The base URI of the service.
  *

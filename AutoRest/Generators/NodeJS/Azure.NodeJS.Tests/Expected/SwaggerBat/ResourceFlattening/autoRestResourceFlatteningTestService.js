@@ -17,7 +17,7 @@ var models = require('./models');
  * Initializes a new instance of the AutoRestResourceFlatteningTestService class.
  * @constructor
  *
- * @param {ServiceClientCredentials} [credentials] Management credentials for Azure.
+ * @param {ServiceClientCredentials} credentials Management credentials for Azure.
  *
  * @param {string} [baseUri] - The base URI of the service.
  *
@@ -515,8 +515,6 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
  * @param {String} [resourceComplexObject.productresource.properties.pname] 
  *
  * @param {String} [resourceComplexObject.productresource.properties.provisioningState] 
- *
- * @param {String} [resourceComplexObject.productresource.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {String} [resourceComplexObject.productresource.properties.type] 
  *

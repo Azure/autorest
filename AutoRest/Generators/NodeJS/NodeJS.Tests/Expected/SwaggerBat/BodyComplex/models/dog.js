@@ -32,7 +32,6 @@ Dog.prototype.validate = function (payload) {
   if (payload['food'] !== null && payload['food'] !== undefined && typeof payload['food'] !== 'string') {
     throw new Error('payload[\'food\'] must be of type string.');
   }
-
 };
 
 /**

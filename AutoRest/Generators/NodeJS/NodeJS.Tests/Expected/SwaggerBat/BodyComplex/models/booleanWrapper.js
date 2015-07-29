@@ -28,7 +28,6 @@ BooleanWrapper.prototype.validate = function (payload) {
   if (payload['fieldFalse'] !== null && payload['fieldFalse'] !== undefined && typeof payload['fieldFalse'] !== 'boolean') {
     throw new Error('payload[\'fieldFalse\'] must be of type boolean.');
   }
-
 };
 
 /**

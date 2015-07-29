@@ -40,7 +40,6 @@ ResourceCollection.prototype.validate = function (payload) {
       }
     }
   }
-
 };
 
 /**
@@ -73,7 +72,6 @@ ResourceCollection.prototype.deserialize = function (instance) {
         }
       }
     }
-
   }
   return instance;
 };

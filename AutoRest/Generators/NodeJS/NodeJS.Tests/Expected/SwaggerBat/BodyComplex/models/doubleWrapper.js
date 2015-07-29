@@ -28,7 +28,6 @@ DoubleWrapper.prototype.validate = function (payload) {
   if (payload['field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose'] !== null && payload['field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose'] !== undefined && typeof payload['field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose'] !== 'number') {
     throw new Error('payload[\'field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose\'] must be of type number.');
   }
-
 };
 
 /**

@@ -28,7 +28,6 @@ ProductProperties.prototype.validate = function (payload) {
   if (payload['provisioningStateValues'] !== null && payload['provisioningStateValues'] !== undefined && typeof payload['provisioningStateValues'] !== 'string') {
     throw new Error('payload[\'provisioningStateValues\'] must be of type string.');
   }
-
 };
 
 /**

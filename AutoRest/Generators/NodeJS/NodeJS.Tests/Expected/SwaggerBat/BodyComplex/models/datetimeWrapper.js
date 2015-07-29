@@ -32,7 +32,6 @@ DatetimeWrapper.prototype.validate = function (payload) {
         (typeof payload['now'] === 'string' && !isNaN(Date.parse(payload['now']))))) {
     throw new Error('payload[\'now\'] must be of type date.');
   }
-
 };
 
 /**
@@ -50,7 +49,6 @@ DatetimeWrapper.prototype.deserialize = function (instance) {
     if (instance.now !== null && instance.now !== undefined) {
       instance.now = new Date(instance.now);
     }
-
   }
   return instance;
 };

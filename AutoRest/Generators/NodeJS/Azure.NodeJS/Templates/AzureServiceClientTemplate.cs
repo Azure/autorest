@@ -138,15 +138,15 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("} [");
+            WriteLiteral("} ");
 #line 39 "AzureServiceClientTemplate.cshtml"
-                            Write(param.Name);
+                           Write(param.Name);
 
 #line default
 #line hidden
-            WriteLiteral("] ");
+            WriteLiteral(" ");
 #line 39 "AzureServiceClientTemplate.cshtml"
-                                         Write(param.Documentation);
+                                       Write(param.Documentation);
 
 #line default
 #line hidden
