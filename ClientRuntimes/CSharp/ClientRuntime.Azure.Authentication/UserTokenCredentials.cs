@@ -22,7 +22,8 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="domain">The domain name or tenant id containing the subscription or resources to manage.</param>
         /// <param name="clientRedirectUri">The Uri where the user will be redirected after authenticating with AD.</param>
         public UserTokenCredentials(string clientId, string domain, Uri clientRedirectUri)
-            : this(clientId, domain, clientRedirectUri: clientRedirectUri, environment: ActiveDirectoryEnvironment.Azure, ownerWindow: null, cache: null)
+            : this(clientId, domain, clientRedirectUri: clientRedirectUri, 
+                  environment: ActiveDirectoryEnvironment.Azure, adParameters: null)
         {
         }
 
@@ -35,7 +36,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="environment">The azure environment to authenticate with. </param>
         /// <param name="clientRedirectUri">The Uri where the user will be redirected after authenticating with AD.</param>
         public UserTokenCredentials(string clientId, string domain, Uri clientRedirectUri, ActiveDirectoryEnvironment environment)
-            : this(clientId, domain, clientRedirectUri, environment, ownerWindow: null, cache: null)
+            : this(clientId, domain, clientRedirectUri, environment, adParameters: null)
         {
         }
 
@@ -45,14 +46,13 @@ namespace Microsoft.Rest.Azure.Authentication
         /// </summary>
         /// <param name="clientId">The active directory identity of this application.</param>
         /// <param name="domain">The domain name or tenant id containing the subscription or resources to manage.</param>
-        /// <param name="ownerWindow">The window for displaying the user credential prompt.</param>
-        /// <param name="environment">The azure environment to authenticate with. </param>
         /// <param name="clientRedirectUri">The Uri where the user will be redirected after authenticating with AD.</param>
-        /// <param name="cache">The ADAL token cache to use during authentication.</param>
+        /// <param name="environment">The azure environment to authenticate with. </param>
+        /// <param name="adParameters">The ADAL parameters.</param>
         public UserTokenCredentials(string clientId, string domain, Uri clientRedirectUri, 
-            ActiveDirectoryEnvironment environment, object ownerWindow, TokenCache cache)
-            : base(new ActiveDirectoryUserTokenProvider(clientId: clientId, domain: domain, ownerWindow: ownerWindow, 
-                environment: environment, clientRedirectUri: clientRedirectUri, cache: cache))
+            ActiveDirectoryEnvironment environment, ActiveDirectoryParameters adParameters)
+            : base(new ActiveDirectoryUserTokenProvider(clientId: clientId, domain: domain, 
+                adParameters: adParameters, environment: environment, clientRedirectUri: clientRedirectUri))
         {
         }
 
