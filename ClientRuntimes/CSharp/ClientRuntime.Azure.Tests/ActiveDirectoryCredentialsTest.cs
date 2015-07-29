@@ -127,7 +127,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         {
             var cache = new TestTokenCache();
             var provider = new ActiveDirectoryUserTokenProvider("1950a258-227b-4e31-a9cf-717495945fc2",
-                this._domain, this._username, this._password, ActiveDirectoryEnvironment.Azure, cache);
+                this._domain, this._username, this._password, ActiveDirectoryEnvironment.Azure, new ActiveDirectoryParameters { TokenCache = cache });
             cache.ForceTokenExpiry();
             Assert.NotNull(provider.GetAuthenticationHeaderAsync(CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult());
             var credentials = new TokenCredentials(provider);
@@ -177,7 +177,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         {
             var cache = new TokenCache();
             var provider = new ActiveDirectoryUserTokenProvider("1950a258-227b-4e31-a9cf-717495945fc2",
-                this._domain, this._username, this._password, ActiveDirectoryEnvironment.Azure, cache);
+                this._domain, this._username, this._password, ActiveDirectoryEnvironment.Azure, new ActiveDirectoryParameters { TokenCache = cache });
             var credentials = new TokenCredentials(provider);
             var client = new HttpClient();
             var request = new HttpRequestMessage(HttpMethod.Get,

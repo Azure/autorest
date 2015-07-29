@@ -2,13 +2,11 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Globalization;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Rest.Azure.Authentication.Properties;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
-using Microsoft.Rest;
 
 namespace Microsoft.Rest.Azure.Authentication
 {
@@ -25,6 +23,7 @@ namespace Microsoft.Rest.Azure.Authentication
         private UserIdentifier _userId;
         private ActiveDirectoryEnvironment _environment;
         private AuthenticationContext _authenticationContext;
+        private PromptBehavior _promptBehavior;
         private string _clientId;
 
         /// <summary>
@@ -36,7 +35,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="clientRedirectUri">The redirect URI for authentication requests for 
         /// this client application.</param>
         public ActiveDirectoryUserTokenProvider(string clientId, string domain, Uri clientRedirectUri)
-            : this(clientId, domain, ActiveDirectoryEnvironment.Azure, clientRedirectUri, null, null)
+            : this(clientId, domain, ActiveDirectoryEnvironment.Azure, clientRedirectUri, null)
         {
         }
 
@@ -49,19 +48,17 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="environment">The azure environment to manage resources in.</param>
         /// <param name="clientRedirectUri">The redirect URI for authentication requests for 
         /// this client application.</param>
-        /// <param name="ownerWindow">The ADAL dialog owner window.</param>
-        /// <param name="cache">The ADAL token cache to use during authentication.</param>
+        /// <param name="adParameters">The ADAL parameters.</param>
         public ActiveDirectoryUserTokenProvider(string clientId, string domain,
-            ActiveDirectoryEnvironment environment, Uri clientRedirectUri, object ownerWindow, TokenCache cache)
+            ActiveDirectoryEnvironment environment, Uri clientRedirectUri, ActiveDirectoryParameters adParameters)
         {
             Initialize(clientId,
                 username: null,
                 password: null,
                 domain: domain,
                 environment: environment,
-                cache: cache,
-                clientRedirectUri: clientRedirectUri,
-                ownerWindow: ownerWindow);
+                adParameters: adParameters,
+                clientRedirectUri: clientRedirectUri);
         }
 
 
@@ -74,7 +71,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="username">The username to use for authentication.</param>
         /// <param name="password">The secret password associated with this user.</param>
         public ActiveDirectoryUserTokenProvider(string clientId, string domain, string username, string password)
-            : this(clientId, domain, username, password, environment: ActiveDirectoryEnvironment.Azure, cache: null)
+            : this(clientId, domain, username, password, ActiveDirectoryEnvironment.Azure, null)
         {
         }
 
@@ -87,18 +84,17 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="username">The username to use for authentication.</param>
         /// <param name="password">The secret password associated with this user.</param>
         /// <param name="environment">The azure environment to manage resources in.</param>
-        /// <param name="cache">The ADAL token cache to use during authentication.</param>
+        /// <param name="adParameters">The ADAL parameters.</param>
         public ActiveDirectoryUserTokenProvider(string clientId, string domain, string username, string password,
-            ActiveDirectoryEnvironment environment, TokenCache cache)
+            ActiveDirectoryEnvironment environment, ActiveDirectoryParameters adParameters)
         {
             Initialize(clientId,
                 username: username,
                 password: password,
                 domain: domain,
                 environment: environment,
-                cache: cache,
                 clientRedirectUri: null,
-                ownerWindow: null);
+                adParameters: adParameters);
         }
 
         /// <summary>
@@ -121,8 +117,7 @@ namespace Microsoft.Rest.Azure.Authentication
         }
 
         private void Initialize(string clientId, string domain, string username, string password,
-            ActiveDirectoryEnvironment environment, TokenCache cache,
-            Uri clientRedirectUri, object ownerWindow)
+            ActiveDirectoryEnvironment environment, Uri clientRedirectUri, ActiveDirectoryParameters adParameters)
         {
             if (string.IsNullOrWhiteSpace(clientId))
             {
@@ -136,10 +131,16 @@ namespace Microsoft.Rest.Azure.Authentication
             {
                 throw new ArgumentOutOfRangeException("environment");
             }
+            if (adParameters == null)
+            {
+                adParameters = new ActiveDirectoryParameters();
+            }
 
             this._clientId = clientId;
             this._environment = environment;
-            this._authenticationContext = GetAuthenticationContext(domain, environment, cache, ownerWindow);
+            this._promptBehavior = adParameters.PromptBehavior;
+            this._authenticationContext = GetAuthenticationContext(domain, environment, adParameters.TokenCache, 
+                adParameters.OwnerWindow);
             AuthenticationResult authenticationResult = null;
             if (username != null && password != null)
             {
@@ -178,7 +179,7 @@ namespace Microsoft.Rest.Azure.Authentication
                         environment.TokenAudience.ToString(),
                         this._clientId,
                         clientRedirectUri,
-                        PromptBehavior.Always,
+                        this._promptBehavior,
                         UserIdentifier.AnyUser,
                         EnableEbdMagicCookie);
                 }
