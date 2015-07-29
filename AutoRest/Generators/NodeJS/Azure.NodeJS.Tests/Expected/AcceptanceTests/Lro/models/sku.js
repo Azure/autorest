@@ -28,7 +28,6 @@ Sku.prototype.validate = function (payload) {
   if (payload['id'] !== null && payload['id'] !== undefined && typeof payload['id'] !== 'string') {
     throw new Error('payload[\'id\'] must be of type string.');
   }
-
 };
 
 /**

@@ -1,14 +1,15 @@
 ﻿@using System.Linq;
 @using Microsoft.Rest.Generator.ClientModel
+@using Microsoft.Rest.Generator.NodeJS
 @using Microsoft.Rest.Generator.NodeJS.TemplateModels
 @using Microsoft.Rest.Generator.NodeJS.Templates
-@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.NodeJS.MethodTemplateModel>
+@inherits Microsoft.Rest.Generator.Template<MethodTemplateModel>
 
 /**
 @WrapComment(" * ", Model.Documentation)
 @foreach (var parameter in Model.DocumentationParameters)
 {
- @:* @@param {@parameter.Type.Name} [@parameter.Name] @parameter.Documentation
+ @:* @@param {@parameter.Type.Name} @MethodTemplateModel.GetParameterDocumentationName(parameter) @parameter.Documentation
  @:*
 }
 @WrapComment(" * ", " @param {object} [options]")

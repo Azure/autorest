@@ -12,7 +12,7 @@ var msRestAzure = require('ms-rest-Azure');
 var specialsClient = require('../Expected/AcceptanceTests/AzureSpecials/AutoRestAzureSpecialParametersTestClient');
 var dummySubscriptionId = '1234-5678-9012-3456';
 var dummyToken = 'dummy12321343423';
-var credentials = new msRestAzure.SubscriptionCredentials(dummyToken, dummySubscriptionId);
+var credentials = new msRestAzure.TokenCredentials(dummyToken);
 
 var clientOptions = {};
 var baseUri = 'http://localhost:3000';
@@ -79,12 +79,6 @@ describe('nodejs', function () {
           });
         });
       });
-    });
-
-    it('should thrown when creating a client with null subscription', function (done) {
-      (function () { new msRestAzure.SubscriptionCredentials(dummyToken, null); }).should.throw(/subscriptionId cannot be null/);
-      (function () { new specialsClient({}, baseUri, clientOptions); }).should.throw(/Azure clients require credentials with a valid subscriptionId/);
-      done();
     });
 
     it('should use the subscriptionId parameter when it is present', function (done) {

@@ -1,5 +1,6 @@
 {
   "name": "autorest-test",
+  "private": true,
   "author": {
     "name": "Microsoft Corporation",
     "email": "azsdkteam@microsoft.com",

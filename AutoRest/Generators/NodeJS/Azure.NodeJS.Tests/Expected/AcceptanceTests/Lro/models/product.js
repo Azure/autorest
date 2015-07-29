@@ -48,7 +48,6 @@ Product.prototype.validate = function (payload) {
   if (payload['properties'] !== null && payload['properties'] !== undefined) {
     models['ProductProperties'].validate(payload['properties']);
   }
-
 };
 
 /**
@@ -59,10 +58,14 @@ Product.prototype.validate = function (payload) {
  */
 Product.prototype.deserialize = function (instance) {
   if (instance) {
+
+
+
+
+
     if (instance.properties !== null && instance.properties !== undefined) {
       instance.properties = models['ProductProperties'].deserialize(instance.properties);
     }
-
   }
   return instance;
 };

@@ -32,7 +32,6 @@ DateWrapper.prototype.validate = function (payload) {
         (typeof payload['leap'] === 'string' && !isNaN(Date.parse(payload['leap']))))) {
     throw new Error('payload[\'leap\'] must be of type date.');
   }
-
 };
 
 /**
@@ -50,7 +49,6 @@ DateWrapper.prototype.deserialize = function (instance) {
     if (instance.leap !== null && instance.leap !== undefined) {
       instance.leap = new Date(instance.leap);
     }
-
   }
   return instance;
 };

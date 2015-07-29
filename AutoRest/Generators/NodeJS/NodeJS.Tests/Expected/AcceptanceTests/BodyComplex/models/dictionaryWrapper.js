@@ -28,7 +28,6 @@ DictionaryWrapper.prototype.validate = function (payload) {
       }
     }
   }
-
 };
 
 /**

@@ -126,7 +126,7 @@ ArrayModel.prototype.getValid = function (options, callback) {
 
 /**
  * Put complex types with array property
- * @param {ArrayWrapper} [complexBody] Please put an array with 4 items: "1, 2, 3, 4", "", null, "&S#$(*Y", "The quick brown fox jumps over the lazy dog"
+ * @param {ArrayWrapper} complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&S#$(*Y", "The quick brown fox jumps over the lazy dog"
  *
  * @param {Array} [complexBody.array] 
  *
@@ -318,7 +318,7 @@ ArrayModel.prototype.getEmpty = function (options, callback) {
 
 /**
  * Put complex types with array property which is empty
- * @param {ArrayWrapper} [complexBody] Please put an empty array
+ * @param {ArrayWrapper} complexBody Please put an empty array
  *
  * @param {Array} [complexBody.array] 
  *

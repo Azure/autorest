@@ -56,7 +56,6 @@ Shark.prototype.validate = function (payload) {
         (typeof payload['birthday'] === 'string' && !isNaN(Date.parse(payload['birthday']))))) {
     throw new Error('payload[\'birthday\'] must be of type date.');
   }
-
 };
 
 /**
@@ -67,6 +66,8 @@ Shark.prototype.validate = function (payload) {
  */
 Shark.prototype.deserialize = function (instance) {
   if (instance) {
+
+
     if (instance.siblings !== null && instance.siblings !== undefined) {
       var deserializedArray = [];
       instance.siblings.forEach(function(element) {
@@ -82,10 +83,10 @@ Shark.prototype.deserialize = function (instance) {
       instance.siblings = deserializedArray;
     }
 
+
     if (instance.birthday !== null && instance.birthday !== undefined) {
       instance.birthday = new Date(instance.birthday);
     }
-
   }
   return instance;
 };

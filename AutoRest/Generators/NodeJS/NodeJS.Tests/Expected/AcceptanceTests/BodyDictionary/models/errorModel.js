@@ -28,7 +28,6 @@ ErrorModel.prototype.validate = function (payload) {
   if (payload['message'] !== null && payload['message'] !== undefined && typeof payload['message'] !== 'string') {
     throw new Error('payload[\'message\'] must be of type string.');
   }
-
 };
 
 /**

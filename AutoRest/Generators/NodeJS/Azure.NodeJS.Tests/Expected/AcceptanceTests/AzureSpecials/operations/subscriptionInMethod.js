@@ -33,7 +33,7 @@ function SubscriptionInMethod(client) {
 /**
  * POST method with subscriptionId modeled in the method.  pass in
  * subscription id = '1234-5678-9012-3456' to succeed
- * @param {String} [subscriptionId] This should appear as a method parameter, use value '1234-5678-9012-3456'
+ * @param {String} subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'
  *
  * @param {object} [options]
  *
@@ -140,7 +140,7 @@ SubscriptionInMethod.prototype.postMethodLocalValid = function (subscriptionId, 
  * POST method with subscriptionId modeled in the method.  pass in
  * subscription id = null, client-side validation should prevent you from
  * making this call
- * @param {String} [subscriptionId] This should appear as a method parameter, use value null, client-side validation should prvenet the call
+ * @param {String} subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call
  *
  * @param {object} [options]
  *
@@ -246,7 +246,7 @@ SubscriptionInMethod.prototype.postMethodLocalNull = function (subscriptionId, o
 /**
  * POST method with subscriptionId modeled in the method.  pass in
  * subscription id = '1234-5678-9012-3456' to succeed
- * @param {String} [subscriptionId] Should appear as a method parameter -use value '1234-5678-9012-3456'
+ * @param {String} subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'
  *
  * @param {object} [options]
  *
@@ -352,7 +352,7 @@ SubscriptionInMethod.prototype.postPathLocalValid = function (subscriptionId, op
 /**
  * POST method with subscriptionId modeled in the method.  pass in
  * subscription id = '1234-5678-9012-3456' to succeed
- * @param {String} [subscriptionId] The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
+ * @param {String} subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
  *
  * @param {object} [options]
  *

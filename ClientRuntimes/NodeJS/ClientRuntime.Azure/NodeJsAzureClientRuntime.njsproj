@@ -16,10 +16,9 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
-    <Compile Include="lib\subscriptionCredentials.js" />
-    <Compile Include="test\subscriptionCredentialsTests.js">
-      <TestFramework>Mocha</TestFramework>
-    </Compile>
+    <Compile Include="lib\azureEnvironment.js" />
+    <Compile Include="lib\credentials\applicationTokenCredentials.js" />
+    <Compile Include="lib\credentials\userTokenCredentials.js" />
     <Compile Include="test\azureServiceClientTests.js">
       <TestFramework>Mocha</TestFramework>
     </Compile>
@@ -36,6 +35,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="lib" />
+    <Folder Include="lib\credentials\" />
     <Folder Include="test\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />

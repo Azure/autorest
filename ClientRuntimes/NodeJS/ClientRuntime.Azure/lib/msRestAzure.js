@@ -3,10 +3,11 @@
 'use strict';
 
 exports.AzureServiceClient = require('./azureServiceClient');
-exports.SubscriptionCredentials = require('./subscriptionCredentials');
+exports.UserTokenCredentials = require('./credentials/userTokenCredentials');
+exports.ApplicationTokenCredentials = require('./credentials/applicationTokenCredentials');
 exports.Resource = require('./resource');
 exports.CloudError = require('./cloudError');
-
+exports.TokenCredentials = require('ms-rest').TokenCredentials;
 exports.generateUuid = require('./utils').generateUuid;
 
 exports = module.exports;

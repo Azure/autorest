@@ -9,20 +9,11 @@ var dump = util.inspect;
 var AzureServiceClient = require('../lib/azureServiceClient');
 var LroStates = require('../lib/constants').LongRunningOperationStates;
 var msRest = require('ms-rest');
-var credentials = new msRest.TokenCredentials({
-  authorizationScheme: 'Bearer',
-  token: '<your token here>'
-});
-
-credentials.subscriptionId = '1234-5678-9012-3456';
+var UserTokenCredentials = require('../lib/credentials/userTokenCredentials');
+var credentials = new UserTokenCredentials('clientId', 'domain', 'username', 'password', 'clientredirecturi');
 
 describe('AzureServiceClient', function () {
-  describe('Constructor intialization', function () {
-    it('should intialize with no parameters', function (done) {
-      (new AzureServiceClient()).should.not.throw();
-      done();
-    });
-    
+  describe('Constructor intialization', function () {  
     it('should intialize with credentials only', function (done) {
       (new AzureServiceClient(credentials)).should.not.throw();
       done();
@@ -85,7 +76,7 @@ describe('AzureServiceClient', function () {
       }
     };
 
-    var client = new AzureServiceClient(null, { longRunningOperationRetryTimeoutInSeconds : 0 });
+    var client = new AzureServiceClient(credentials, { longRunningOperationRetryTimeoutInSeconds : 0 });
     client._getStatus = mockedGetStatus;
 
     describe('Negative tests for status deserialization', function() {
@@ -97,7 +88,7 @@ describe('AzureServiceClient', function () {
       
       it('lro put does not throw if invalid json is received on polling', function (done) {
         var badResponseBody = '{';
-        var negativeClient = new AzureServiceClient(null, { longRunningOperationRetryTimeoutInSeconds : 0 });
+        var negativeClient = new AzureServiceClient(credentials, { longRunningOperationRetryTimeoutInSeconds : 0 });
         negativeClient.addFilter(mockFilter({ statusCode: 200, body: badResponseBody }, badResponseBody));
         resultOfInitialRequest.response.headers['azure-asyncoperation'] = '';
         resultOfInitialRequest.response.headers['location'] = urlFromLocationHeader_Return200;
@@ -112,7 +103,7 @@ describe('AzureServiceClient', function () {
       
       it('lro put does not throw if invalid json with single quote is received on polling', function (done) {
         var badResponseBody = '{\'"}';
-        var negativeClient = new AzureServiceClient(null, { longRunningOperationRetryTimeoutInSeconds : 0 });
+        var negativeClient = new AzureServiceClient(credentials, { longRunningOperationRetryTimeoutInSeconds : 0 });
         negativeClient.addFilter(mockFilter({ statusCode: 200, body: badResponseBody }, badResponseBody));
         resultOfInitialRequest.response.headers['azure-asyncoperation'] = '';
         resultOfInitialRequest.response.headers['location'] = urlFromLocationHeader_Return200;
@@ -127,7 +118,7 @@ describe('AzureServiceClient', function () {
 
       it('lro put does not throw if invalid json is received with invalid status code on polling', function (done) {
         var badResponseBody = '{';
-        var negativeClient = new AzureServiceClient(null, { longRunningOperationRetryTimeoutInSeconds : 0 });
+        var negativeClient = new AzureServiceClient(credentials, { longRunningOperationRetryTimeoutInSeconds : 0 });
         negativeClient.addFilter(mockFilter({ statusCode: 203, body: badResponseBody }, badResponseBody));
         resultOfInitialRequest.response.headers['azure-asyncoperation'] = '';
         resultOfInitialRequest.response.headers['location'] = urlFromLocationHeader_Return200;

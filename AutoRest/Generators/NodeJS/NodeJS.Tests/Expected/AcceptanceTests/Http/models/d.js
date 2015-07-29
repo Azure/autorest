@@ -24,7 +24,6 @@ D.prototype.validate = function (payload) {
   if (payload['httpStatusCode'] !== null && payload['httpStatusCode'] !== undefined && typeof payload['httpStatusCode'] !== 'string') {
     throw new Error('payload[\'httpStatusCode\'] must be of type string.');
   }
-
 };
 
 /**

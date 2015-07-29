@@ -43,8 +43,6 @@ function LROsCustomHeader(client) {
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -88,8 +86,6 @@ LROsCustomHeader.prototype.putAsyncRetrySucceeded = function (product, options, 
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -336,8 +332,6 @@ LROsCustomHeader.prototype.getAsyncRetrySucceeded = function (options, callback)
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -381,8 +375,6 @@ LROsCustomHeader.prototype.put201CreatingSucceeded200 = function (product, optio
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -642,8 +634,6 @@ LROsCustomHeader.prototype.get201CreatingSucceeded200Polling = function (options
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -676,8 +666,6 @@ LROsCustomHeader.prototype.post202Retry200 = function (product, options, callbac
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -792,8 +780,6 @@ LROsCustomHeader.prototype.beginPost202Retry200 = function (product, options, ca
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -827,8 +813,6 @@ LROsCustomHeader.prototype.postAsyncRetrySucceeded = function (product, options,
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *

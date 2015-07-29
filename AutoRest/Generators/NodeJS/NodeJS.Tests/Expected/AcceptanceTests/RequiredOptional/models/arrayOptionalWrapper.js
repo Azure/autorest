@@ -28,7 +28,6 @@ ArrayOptionalWrapper.prototype.validate = function (payload) {
       }
     }
   }
-
 };
 
 /**

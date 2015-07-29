@@ -28,7 +28,6 @@ SampleResourceGroup.prototype.validate = function (payload) {
   if (payload['location'] !== null && payload['location'] !== undefined && typeof payload['location'] !== 'string') {
     throw new Error('payload[\'location\'] must be of type string.');
   }
-
 };
 
 /**

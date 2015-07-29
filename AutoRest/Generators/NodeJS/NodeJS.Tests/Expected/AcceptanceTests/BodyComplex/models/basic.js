@@ -35,7 +35,6 @@ Basic.prototype.validate = function (payload) {
       throw new Error(payload['color'] + ' is not a valid value. The valid values are: ' + allowedValues);
     }
   }
-
 };
 
 /**

@@ -28,7 +28,6 @@ LongWrapper.prototype.validate = function (payload) {
   if (payload['field2'] !== null && payload['field2'] !== undefined && typeof payload['field2'] !== 'number') {
     throw new Error('payload[\'field2\'] must be of type number.');
   }
-
 };
 
 /**

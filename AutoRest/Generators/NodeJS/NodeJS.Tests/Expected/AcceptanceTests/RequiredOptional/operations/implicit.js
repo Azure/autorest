@@ -31,7 +31,7 @@ function Implicit(client) {
 
 /**
  * Test implicitly required path parameter
- * @param {String} [pathParameter] 
+ * @param {String} pathParameter 
  *
  * @param {object} [options]
  *

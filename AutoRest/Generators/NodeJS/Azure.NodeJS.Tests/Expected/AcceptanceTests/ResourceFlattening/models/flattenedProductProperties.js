@@ -36,7 +36,6 @@ FlattenedProductProperties.prototype.validate = function (payload) {
   if (payload['provisioningState'] !== null && payload['provisioningState'] !== undefined && typeof payload['provisioningState'] !== 'string') {
     throw new Error('payload[\'provisioningState\'] must be of type string.');
   }
-
 };
 
 /**

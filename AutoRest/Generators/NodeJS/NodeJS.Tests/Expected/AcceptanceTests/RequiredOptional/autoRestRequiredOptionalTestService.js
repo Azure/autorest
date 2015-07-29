@@ -24,9 +24,9 @@ var operations = require('./operations');
  * Initializes a new instance of the AutoRestRequiredOptionalTestService class.
  * @constructor
  *
- * @param {String} [requiredGlobalPath] number of items to skip
+ * @param {String} requiredGlobalPath number of items to skip
  *
- * @param {String} [requiredGlobalQuery] number of items to skip
+ * @param {String} requiredGlobalQuery number of items to skip
  *
  * @param {string} [baseUri] - The base URI of the service.
  *

@@ -28,7 +28,6 @@ B.prototype.validate = function (payload) {
   if (payload['textStatusCode'] !== null && payload['textStatusCode'] !== undefined && typeof payload['textStatusCode'] !== 'string') {
     throw new Error('payload[\'textStatusCode\'] must be of type string.');
   }
-
 };
 
 /**

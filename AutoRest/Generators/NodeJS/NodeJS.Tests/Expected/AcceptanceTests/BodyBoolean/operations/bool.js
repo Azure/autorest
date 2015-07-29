@@ -123,7 +123,7 @@ Bool.prototype.getTrue = function (options, callback) {
 
 /**
  * Set Boolean value true
- * @param {Boolean} [boolBody] 
+ * @param {Boolean} boolBody 
  *
  * @param {object} [options]
  *
@@ -310,7 +310,7 @@ Bool.prototype.getFalse = function (options, callback) {
 
 /**
  * Set Boolean value false
- * @param {Boolean} [boolBody] 
+ * @param {Boolean} boolBody 
  *
  * @param {object} [options]
  *

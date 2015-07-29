@@ -25,9 +25,9 @@ var operations = require('./operations');
  * Initializes a new instance of the AutoRestAzureSpecialParametersTestClient class.
  * @constructor
  *
- * @param {ServiceClientCredentials} [credentials] Management credentials for Azure.
+ * @param {ServiceClientCredentials} credentials Management credentials for Azure.
  *
- * @param {String} [subscriptionId] The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'
+ * @param {String} subscriptionId The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'
  *
  * @param {string} [baseUri] - The base URI of the service.
  *

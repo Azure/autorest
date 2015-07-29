@@ -12,7 +12,7 @@ var msRestAzure = require('ms-rest-Azure');
 var azureUrlClient = require('../Expected/AcceptanceTests/SubscriptionIdApiVersion/MicrosoftAzureTestUrl');
 var dummySubscriptionId = 'a878ae02-6106-429z-9397-58091ee45g98';
 var dummyToken = 'dummy12321343423';
-var credentials = new msRestAzure.SubscriptionCredentials(dummyToken, dummySubscriptionId);
+var credentials = new msRestAzure.TokenCredentials(dummyToken);
 
 var clientOptions = {};
 var baseUri = 'http://localhost:3000';

@@ -40,8 +40,6 @@ function LROs(client) {
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -82,8 +80,6 @@ LROs.prototype.put200Succeeded = function (product, options, callback) {
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -324,8 +320,6 @@ LROs.prototype.get200Succeeded = function (options, callback) {
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -366,8 +360,6 @@ LROs.prototype.put200SucceededNoState = function (product, options, callback) {
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -609,8 +601,6 @@ LROs.prototype.get200SucceededNoState = function (options, callback) {
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -652,8 +642,6 @@ LROs.prototype.put202Retry200 = function (product, options, callback) {
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -896,8 +884,6 @@ LROs.prototype.getPut202Retry200 = function (options, callback) {
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -940,8 +926,6 @@ LROs.prototype.put201CreatingSucceeded200 = function (product, options, callback
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -1200,8 +1184,6 @@ LROs.prototype.get201CreatingSucceeded200Polling = function (options, callback) 
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1244,8 +1226,6 @@ LROs.prototype.put200UpdatingSucceeded204 = function (product, options, callback
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -1487,8 +1467,6 @@ LROs.prototype.get200CreatingSucceeded200Poll = function (options, callback) {
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1531,8 +1509,6 @@ LROs.prototype.put201CreatingFailed200 = function (product, options, callback) {
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -1791,8 +1767,6 @@ LROs.prototype.get201CreatingFailed200Polling = function (options, callback) {
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1835,8 +1809,6 @@ LROs.prototype.put200Acceptedcanceled200 = function (product, options, callback)
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -2077,8 +2049,6 @@ LROs.prototype.get200Acceptedcanceled200Poll = function (options, callback) {
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2120,8 +2090,6 @@ LROs.prototype.putNoHeaderInRetry = function (product, options, callback) {
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -2363,8 +2331,6 @@ LROs.prototype.getPutNoHeaderInRetry = function (options, callback) {
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2406,8 +2372,6 @@ LROs.prototype.putAsyncRetrySucceeded = function (product, options, callback) {
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -2650,8 +2614,6 @@ LROs.prototype.getAsyncRetrySucceeded = function (options, callback) {
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2693,8 +2655,6 @@ LROs.prototype.putAsyncNoRetrySucceeded = function (product, options, callback) 
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -2937,8 +2897,6 @@ LROs.prototype.getAsyncNoRetrySucceeded = function (options, callback) {
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2980,8 +2938,6 @@ LROs.prototype.putAsyncRetryFailed = function (product, options, callback) {
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -3224,8 +3180,6 @@ LROs.prototype.getAsyncRetryFailed = function (options, callback) {
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3267,8 +3221,6 @@ LROs.prototype.putAsyncNoRetrycanceled = function (product, options, callback) {
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -3511,8 +3463,6 @@ LROs.prototype.getAsyncNoRetrycanceled = function (options, callback) {
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3554,8 +3504,6 @@ LROs.prototype.putAsyncNoHeaderInRetry = function (product, options, callback) {
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -4348,8 +4296,6 @@ LROs.prototype.getAsyncNonResource = function (options, callback) {
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4389,8 +4335,6 @@ LROs.prototype.putSubResource = function (product, options, callback) {
  * @param {SubProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -4629,8 +4573,6 @@ LROs.prototype.getSubResource = function (options, callback) {
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4670,8 +4612,6 @@ LROs.prototype.putAsyncSubResource = function (product, options, callback) {
  * @param {SubProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -6699,8 +6639,6 @@ LROs.prototype.beginPost200WithPayload = function (options, callback) {
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -6732,8 +6670,6 @@ LROs.prototype.post202Retry200 = function (product, options, callback) {
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -6845,8 +6781,6 @@ LROs.prototype.beginPost202Retry200 = function (product, options, callback) {
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -6877,8 +6811,6 @@ LROs.prototype.post202NoRetry204 = function (product, options, callback) {
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -7007,8 +6939,6 @@ LROs.prototype.beginPost202NoRetry204 = function (product, options, callback) {
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -7040,8 +6970,6 @@ LROs.prototype.postAsyncRetrySucceeded = function (product, options, callback) {
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -7154,8 +7082,6 @@ LROs.prototype.beginPostAsyncRetrySucceeded = function (product, options, callba
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -7187,8 +7113,6 @@ LROs.prototype.postAsyncNoRetrySucceeded = function (product, options, callback)
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -7301,8 +7225,6 @@ LROs.prototype.beginPostAsyncNoRetrySucceeded = function (product, options, call
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -7334,8 +7256,6 @@ LROs.prototype.postAsyncRetryFailed = function (product, options, callback) {
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *
@@ -7448,8 +7368,6 @@ LROs.prototype.beginPostAsyncRetryFailed = function (product, options, callback)
  *
  * @param {String} [product.properties.provisioningState] 
  *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -7481,8 +7399,6 @@ LROs.prototype.postAsyncRetrycanceled = function (product, options, callback) {
  * @param {ProductProperties} [product.properties] 
  *
  * @param {String} [product.properties.provisioningState] 
- *
- * @param {String} [product.properties.provisioningStateValues] Possible values for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  * @param {object} [options]
  *

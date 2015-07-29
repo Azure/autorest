@@ -20,7 +20,7 @@ else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.D
 @WrapComment(" * ", Model.Documentation)
 @foreach (var parameter in Model.DocumentationParameters)
 {
- @:* @@param {@parameter.Type.Name} [@parameter.Name] @parameter.Documentation
+ @:* @@param {@parameter.Type.Name} @MethodTemplateModel.GetParameterDocumentationName(parameter) @parameter.Documentation
  @:*
 }
 @WrapComment(" * ", " @param {object} [options]")

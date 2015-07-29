@@ -411,7 +411,7 @@ Datetime.prototype.getUnderflow = function (options, callback) {
 
 /**
  * Put max datetime value 9999-12-31T23:59:59.9999999Z
- * @param {Date} [datetimeBody] 
+ * @param {Date} datetimeBody 
  *
  * @param {object} [options]
  *
@@ -699,7 +699,7 @@ Datetime.prototype.getUtcUppercaseMaxDateTime = function (options, callback) {
 /**
  * Put max datetime value with positive numoffset
  * 9999-12-31t23:59:59.9999999+14:00
- * @param {Date} [datetimeBody] 
+ * @param {Date} datetimeBody 
  *
  * @param {object} [options]
  *
@@ -989,7 +989,7 @@ Datetime.prototype.getLocalPositiveOffsetUppercaseMaxDateTime = function (option
 /**
  * Put max datetime value with positive numoffset
  * 9999-12-31t23:59:59.9999999-14:00
- * @param {Date} [datetimeBody] 
+ * @param {Date} datetimeBody 
  *
  * @param {object} [options]
  *
@@ -1278,7 +1278,7 @@ Datetime.prototype.getLocalNegativeOffsetLowercaseMaxDateTime = function (option
 
 /**
  * Put min datetime value 0001-01-01T00:00:00Z
- * @param {Date} [datetimeBody] 
+ * @param {Date} datetimeBody 
  *
  * @param {object} [options]
  *
@@ -1470,7 +1470,7 @@ Datetime.prototype.getUtcMinDateTime = function (options, callback) {
 
 /**
  * Put min datetime value 0001-01-01T00:00:00+14:00
- * @param {Date} [datetimeBody] 
+ * @param {Date} datetimeBody 
  *
  * @param {object} [options]
  *
@@ -1662,7 +1662,7 @@ Datetime.prototype.getLocalPositiveOffsetMinDateTime = function (options, callba
 
 /**
  * Put min datetime value 0001-01-01T00:00:00-14:00
- * @param {Date} [datetimeBody] 
+ * @param {Date} datetimeBody 
  *
  * @param {object} [options]
  *

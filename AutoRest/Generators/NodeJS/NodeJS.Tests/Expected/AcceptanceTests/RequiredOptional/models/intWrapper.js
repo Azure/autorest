@@ -27,7 +27,6 @@ IntWrapper.prototype.validate = function (payload) {
   if (payload['value'] !== null && payload['value'] !== undefined && typeof payload['value'] !== 'number') {
     throw new Error('payload[\'value\'] must be of type number.');
   }
-
 };
 
 /**
