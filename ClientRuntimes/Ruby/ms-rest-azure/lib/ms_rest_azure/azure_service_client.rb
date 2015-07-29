@@ -169,13 +169,13 @@ module MsRestAzure
       result = get_async_common(polling_state.location_header_link, custom_headers, custom_deserialization_block).value!
 
       polling_state.update_response(result.response)
-      polling_state.request = result.request
+      polling_state.request = result.response
 
-      status_code = result.response.code
+      status_code = result.response.status
 
-      if (status_code == "202")
+      if (status_code == 202)
         polling_state.status = AsyncOperationStatus::IN_PROGRESS_STATUS
-      elsif (status_code == "200" || status_code == "201")
+      elsif (status_code == 200 || status_code == 201)
         fail CloudError if (result.body.nil?)
           # TODO elaborate error
 
@@ -218,13 +218,14 @@ module MsRestAzure
       result = get_async_common(polling_state.location_header_link, custom_headers, custom_deserialization_block).value!
 
       polling_state.update_response(result.response)
-      polling_state.request = result.request
+      # TODO: adding response instead of request since Faraday doesn't provide request object.
+      polling_state.request = result.response
 
-      status_code = result.response.code
+      status_code = result.response.status
 
-      if (status_code == "202")
+      if (status_code == 202)
         polling_state.status = AsyncOperationStatus::IN_PROGRESS_STATUS
-      elsif (status_code == "200" || status_code == "201" || status_code == "204")
+      elsif (status_code == 200 || status_code == 201 || status_code == 204)
         polling_state.status = AsyncOperationStatus::SUCCESS_STATUS
         polling_state.resource = result.body
       end
@@ -244,30 +245,45 @@ module MsRestAzure
 
       fail URI::Error unless url.to_s =~ /\A#{URI::regexp}\z/
 
-      # Create HTTP transport objects
-      http_request = Net::HTTP::Get.new(url.request_uri)
-      http_request.add_field('Content-Type', 'application/json')
+      # Create HTTP transport object
+      connection = Faraday.new(:url => url) do |faraday|
+        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02, credentials: @credentials
+        faraday.use MsRest::TokenRefreshMiddleware, credentials: @credentials
+        faraday.use :cookie_jar
+        faraday.adapter Faraday.default_adapter
+      end
 
-      # TODO: add custom headers
+      request_headers = Hash.new
+      request_headers['x-ms-client-request-id'] = SecureRandom.uuid
+      request_headers['Content-Type'] = 'application/json'
+
+      unless custom_headers.nil?
+        custom_headers.each do |key, value|
+          request_headers[key] = value
+        end
+      end
 
       # Send Request
-      promise = Concurrent::Promise.new { self.make_http_request(http_request, url) }
+      promise = Concurrent::Promise.new do
+        connection.get do |request|
+          request.headers = request_headers
+        end
+      end
 
       promise = promise.then do |http_response|
-        status_code = http_response.code.to_i
-        response_content = http_response.body
+        status_code = http_response.status
 
         if (status_code != 200 && status_code != 201 && status_code != 202 && status_code != 204)
           fail CloudError
         end
 
-        result = MsRest::HttpOperationResponse.new(http_request, http_response, http_response.body)
+        result = MsRest::HttpOperationResponse.new(http_response, http_response, http_response.body)
 
         begin
-          parsed_response = JSON.load(response_content) unless response_content.to_s.empty?
+          parsed_response = JSON.load(http_response.body) unless http_response.body.to_s.empty?
           result.body = AsyncOperationStatus.deserialize_object(parsed_response)
         rescue Exception => e
-          fail MsRest::DeserializationError.new("Error occured in deserializing the response", e.message, e.backtrace, response_content)
+          fail MsRest::DeserializationError.new("Error occured in deserializing the response", e.message, e.backtrace, http_response.body)
         end
 
         result
@@ -291,32 +307,47 @@ module MsRestAzure
 
       fail URI::Error unless url.to_s =~ /\A#{URI::regexp}\z/
 
-      # Create HTTP transport objects
-      http_request = Net::HTTP::Get.new(url.request_uri)
-      http_request.add_field('Content-Type', 'application/json')
+      # Create HTTP transport object
+      connection = Faraday.new(:url => url) do |faraday|
+        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02, credentials: @credentials
+        faraday.use MsRest::TokenRefreshMiddleware, credentials: @credentials
+        faraday.use :cookie_jar
+        faraday.adapter Faraday.default_adapter
+      end
 
-      # TODO: add custom headers
+      request_headers = Hash.new
+      request_headers['x-ms-client-request-id'] = SecureRandom.uuid
+      request_headers['Content-Type'] = 'application/json'
+
+      unless custom_headers.nil?
+        custom_headers.each do |key, value|
+          request_headers[key] = value
+        end
+      end
 
       # Send Request
-      promise = Concurrent::Promise.new { self.make_http_request(http_request, url) }
+      promise = Concurrent::Promise.new do
+        connection.get do |request|
+          request.headers = request_headers
+        end
+      end
 
       promise = promise.then do |http_response|
-        status_code = http_response.code.to_i
-        response_content = http_response.body
+        status_code = http_response.status
 
         if (status_code != 200 && status_code != 201 && status_code != 202 && status_code != 204)
           fail CloudError
         end
 
-        result = MsRest::HttpOperationResponse.new(http_request, http_response, http_response.body)
+        result = MsRest::HttpOperationResponse.new(http_response, http_response, http_response.body)
 
         begin
-          parsed_response = JSON.load(response_content) unless response_content.to_s.empty?
+          parsed_response = JSON.load(http_response.body) unless http_response.body.to_s.empty?
           if (parsed_response && !custom_deserialization_block.nil?)
             parsed_response = custom_deserialization_block.call(parsed_response)
           end
         rescue Exception => e
-          fail MsRest::DeserializationError.new("Error occured in deserializing the response", e.message, e.backtrace, response_content)
+          fail MsRest::DeserializationError.new("Error occured in deserializing the response", e.message, e.backtrace, http_response.body)
         end
 
         result.body = parsed_response

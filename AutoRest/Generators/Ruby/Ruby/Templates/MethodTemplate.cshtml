@@ -31,17 +31,17 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
   @EmptyLine
   @* TODO: add proper references to @client *@
   connection = Faraday.new(:url => url) do |faraday|
-    faraday.use RetryPolicyMiddleware, times: 3, retry: 0.02, credentials: @(Model.ClientReference).credentials
-    faraday.use TokenRefreshMiddleware, credentials: @(Model.ClientReference).credentials
+    faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02, credentials: @(Model.ClientReference).credentials
+    faraday.use MsRest::TokenRefreshMiddleware, credentials: @(Model.ClientReference).credentials
     faraday.use :cookie_jar
     faraday.adapter Faraday.default_adapter
   end
 
+  request_headers = Hash.new
   @if (Model.Parameters.Any(p => p.Location == ParameterLocation.Header))
   {
   @EmptyLine
   @:# Set Headers
-  @:request_headers = Hash.new
   @:@(Model.SetDefaultHeaders)
     foreach (var parameter in Model.Parameters.Where(p => p.Location == ParameterLocation.Header))
     {

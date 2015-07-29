@@ -37,7 +37,7 @@ describe 'LongRunningOperation' do
 
   it 'should retry on 200 server responce in POST request' do
     result = @client.lros.post202retry200(@product).value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
   end
 
   it 'should serve success responce on initial PUT request' do
@@ -68,17 +68,17 @@ describe 'LongRunningOperation' do
 
   it 'should serve success responce on initial DELETE request' do
     result = @client.lros.delete204succeeded().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPNoContent)
+    expect(result.response.status).to eq(204)
   end
 
   it 'should retry on 500 server responce in DELETE request' do
     result = @client.lroretrys.delete_async_relative_retry_succeeded().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
   end
 
   it 'should serve async POST operation' do
     result = @client.lroretrys.post_async_relative_retry_succeeded(@product).value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
   end
 
   it 'should return payload on POST async request' do
@@ -99,21 +99,22 @@ describe 'LongRunningOperation' do
 
   it 'should retry DELETE request for provisioning status' do
     result = @client.lroretrys.delete_provisioning202accepted200succeeded().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
   end
 
   it 'should retry DELETE request on 500 responce' do
     result = @client.lroretrys.delete202retry200().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
   end
 
   it 'should retry POST request on 500 responce' do
     result = @client.lroretrys.post202retry200(@product).value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
   end
+
   it 'should retry POST request on 500 responce for async operation' do
     result = @client.lroretrys.post_async_relative_retry_succeeded(@product).value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
   end
 
   # Sad path tests
@@ -199,7 +200,7 @@ describe 'LongRunningOperation' do
 
   it 'should not rise error on DELETE operation with 204 responce without location provided' do
     result = @client.lrosads.delete204succeeded().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPNoContent)
+    expect(result.response.status).to eq(204)
   end
 
   it 'should rise error on no status provided for DELETE async operation' do
