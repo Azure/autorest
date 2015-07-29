@@ -1,46 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  
+
   <PropertyGroup>
     <NightlyBuildVersion Condition=" $(NightlyBuild) == 'true' ">$([System.DateTime]::Now.ToString("yyyyMMdd"))</NightlyBuildVersion>
     <NightlyBuildVersion Condition=" $(NightlyBuild) == 'true' ">-Nightly$(NightlyBuildVersion)</NightlyBuildVersion>
   </PropertyGroup>
-  
+
   <Import Project="$(LibrarySourceFolder)\ClientRuntimes\**\*.nuget.proj"
-          Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'"/>
+      Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime' "/>
 
   <Import Project="$(LibrarySourceFolder)\AutoRest\**\*.nuget.proj"
-          Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'"/>
+      Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator' "/>
 
   <PropertyGroup>
     <NuGetVerbosity>normal</NuGetVerbosity>
     <PublishSymbolSourcePackages>true</PublishSymbolSourcePackages>
   </PropertyGroup>
 
-  <UsingTask AssemblyFile="Microsoft.Rest.Common.Build.Tasks.dll" TaskName="RegexReplaceTask" />
+  <UsingTask AssemblyFile="AutoRest.Build.Tasks.dll" TaskName="RegexReplaceTask" />
   <Target Name="EnsureBinariesFolderExists">
     <MakeDir Directories="binaries" Condition="!Exists('binaries')" />
     <MakeDir Directories="binaries\packages" Condition="!Exists('binaries\packages')" />
     <MakeDir Directories="binaries\packages\specs" Condition="!Exists('binaries\packages\specs')" />
   </Target>
-  
+
   <!-- Replacing version token dependency. -->
   <Target Name="BuildDynamicNuSpecs" DependsOnTargets="EnsureBinariesFolderExists">
     <!-- Copy nuspec files to binaries folder. -->
     <ItemGroup>
-      <NuspecFilesToCopy Include="%(SdkNuGetPackage.Folder)%(SdkNuGetPackage.Identity).nuspec" />
-    </ItemGroup>    
+      <NuspecFilesToCopy Include="%(SdkNuGetPackage.Folder)\%(SdkNuGetPackage.Name).nuspec" />
+    </ItemGroup>
     <Copy SourceFiles="@(NuspecFilesToCopy)" DestinationFolder="binaries\packages\specs"/>
     <!-- Update version string. -->
     <ItemGroup>
       <NuspecFilesToUpdate Include="binaries\packages\specs\*.nuspec" />
-    </ItemGroup>   
+    </ItemGroup>
     <RegexReplaceTask Files="@(NuspecFilesToUpdate)"
                           OutputDirectory="binaries\packages\specs\"
-                          Pattern="__VERSION_%(SdkNuGetPackage.Identity)__"
+                          Pattern="__VERSION_%(SdkNuGetPackage.Name)__"
                           Replacement="%(SdkNuGetPackage.PackageVersion)"
                           LogTask="false" />
-    <Message Text="Created dynamic nuspec %(NuspecFilesToUpdate2.Identity)" />
+    <RegexReplaceTask Files="@(NuspecFilesToUpdate)"
+                          OutputDirectory="binaries\packages\specs\"
+                          Pattern=".pdb"
+                          Replacement=".dll.mdb"
+                          LogTask="false"
+                          Condition=" '$(OS)' != 'Windows_NT'"/>
+    <Message Text="Created dynamic nuspec %(NuspecFilesToUpdate.Name)" />
   </Target>
 
   <!--
@@ -49,10 +55,10 @@
   <Target Name="Package" DependsOnTargets="BuildDynamicNuSpecs">
     <Message Text="Generating NuGet library &amp; symbols + source packages" Importance="high" />
     <Exec Condition=" '%(SdkNuGetPackage.NoPackageAnalysis)' != 'true' "
-          Command="$(NuGetCommand) pack -BasePath &quot;%(SdkNuGetPackage.Folder)..&quot; -Verbosity $(NuGetVerbosity) &quot;binaries\packages\specs\%(SdkNuGetPackage.Identity).nuspec&quot; -Version %(SdkNuGetPackage.PackageVersion) -OutputDirectory &quot;$(PackageOutputDir)&quot; -Symbols" />
+      Command="$(NuGetCommand) pack binaries\packages\specs\%(SdkNuGetPackage.Name).nuspec -BasePath $(LibraryRoot) -Verbosity $(NuGetVerbosity) -Version %(SdkNuGetPackage.PackageVersion) -OutputDirectory $(PackageOutputDir) -Symbols $(NoWarnOnPack)" />
 
     <Exec Condition=" '%(SdkNuGetPackage.NoPackageAnalysis)' == 'true' "
-        Command="$(NuGetCommand) pack -BasePath &quot;%(SdkNuGetPackage.Folder)..&quot; -NoPackageAnalysis -Verbosity $(NuGetVerbosity) &quot;binaries\packages\specs\%(SdkNuGetPackage.Identity).nuspec&quot; -Version %(SdkNuGetPackage.PackageVersion) -OutputDirectory &quot;$(PackageOutputDir)&quot; -Symbols" />
+      Command="$(NuGetCommand) pack binaries\packages\specs\%(SdkNuGetPackage.Name).nuspec -BasePath $(LibraryRoot) -NoPackageAnalysis -Verbosity $(NuGetVerbosity) -Version %(SdkNuGetPackage.PackageVersion) -OutputDirectory $(PackageOutputDir) -Symbols $(NoWarnOnPack)" />
   </Target>
 
   <!--
@@ -65,14 +71,13 @@
       <ActualSource Condition=" '$(NuGetPublishingSource)' == '' "></ActualSource>
       <ActualSource Condition=" '$(NuGetPublishingSource)' != '' "> -Source $(NuGetPublishingSource)</ActualSource>
     </PropertyGroup>
-
     <Message Importance="high" Text="Publishing main and symbols packages to the cloud at $(NuGetPublishingSource)" />
     <Exec Command="$(NuGetCommand) push &quot;$(PackageOutputDir)\%(SdkNuGetPackage.Identity).%(SdkNuGetPackage.PackageVersion).nupkg&quot; $(NuGetKey)$(ActualSource)"
           IgnoreExitCode="true" />
-          
+
     <Message Importance="high" Text="Unlisting %(SdkNuGetPackage.Identity) as Hidden is set to 'true' for the component."
-             Condition=" '%(SdkNuGetPackage.Hidden)' == 'true' " />             
-    <Exec Command="$(NuGetCommand) delete %(SdkNuGetPackage.Identity) %(SdkNuGetPackage.PackageVersion) $(NuGetKey)$(ActualSource) -NonInteractive" 
+             Condition=" '%(SdkNuGetPackage.Hidden)' == 'true' " />
+    <Exec Command="$(NuGetCommand) delete %(SdkNuGetPackage.Identity) %(SdkNuGetPackage.PackageVersion) $(NuGetKey)$(ActualSource) -NonInteractive"
              IgnoreExitCode="true" Condition=" '%(SdkNuGetPackage.Hidden)' == 'true' " />
   </Target>
 </Project>

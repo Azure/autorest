@@ -6,14 +6,13 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <LibraryFxTarget Condition="'$(LibraryFxTarget)' == ''">portable</LibraryFxTarget>
     <ProjectGuid>{7F524559-93F9-4F3F-9E2C-AF41A0C2E6F4}</ProjectGuid>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Microsoft.Rest</RootNamespace>
     <AssemblyName>Microsoft.Rest.ClientRuntime</AssemblyName>
     <OutputType>Library</OutputType>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
-  <Import Project="$(SolutionDir)\tools\AutoRest.Settings.targets" />
+  <Import Project="$(SolutionDir)\Tools\AutoRest.Settings.targets" />
   <ItemGroup>
     <Compile Include="BasicAuthenticationCredentials.cs" />
     <Compile Include="GlobalSuppressions.cs" />
@@ -26,6 +25,7 @@
     <Compile Include="Serialization\JsonConverterHelper.cs" />
     <Compile Include="Serialization\PolymorphicSerializeJsonConverter.cs" />
     <Compile Include="Serialization\ReadOnlyJsonContractResolver.cs" />
+    <Compile Include="CertificateCredentials.cs" />
     <Compile Include="TransientFaultHandling\TransientErrorIgnoreStrategy.cs" />
     <Compile Include="TransientFaultHandling\RetryCondition.cs" />
     <Compile Include="TypeConversion.cs" />
@@ -78,9 +78,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <CodeAnalysisDictionary Include="$(SolutionDir)tools\CustomDictionary.xml">
-      <Link>CustomDictionary.xml</Link>
+    <CodeAnalysisDictionary Include="$(SolutionDir)Tools\CustomDictionary.xml">
       <SubType>Designer</SubType>
+      <Link>CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" Condition=" '$(LibraryFxTarget)' == 'portable' " />

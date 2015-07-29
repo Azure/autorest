@@ -40,12 +40,6 @@
     <Compile Include="TemplateModels\ParameterTemplateModel.cs" />
     <Compile Include="TemplateModels\PropertyTemplateModel.cs" />
     <Compile Include="TemplateModels\ModelTemplateModel.cs" />
-    <Compile Include="Templates\EnumTemplate.cs" />
-    <Compile Include="Templates\MethodGroupTemplate.cs" />
-    <Compile Include="Templates\MethodTemplate.cs" />
-    <Compile Include="Templates\ModelTemplate.cs" />
-    <Compile Include="Templates\RequirementsTemplate.cs" />
-    <Compile Include="Templates\ServiceClientTemplate.cs" />
     <None Include="Templates\EnumTemplate.cshtml" />
     <None Include="Templates\MethodGroupTemplate.cshtml" />
     <None Include="Templates\RequirementsTemplate.cshtml" />

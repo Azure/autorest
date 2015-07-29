@@ -1,6 +1,7 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime", "ClientRuntimes\CSharp\ClientRuntime\ClientRuntime.csproj", "{7F524559-93F9-4F3F-9E2C-AF41A0C2E6F4}"
 EndProject
@@ -15,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime.Azure", "ClientRuntimes\CSharp\ClientRuntime.Azure\ClientRuntime.Azure.csproj", "{856A1D19-C3BF-439A-BEBF-E822A332BC12}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime.Azure.Tests", "ClientRuntimes\CSharp\ClientRuntime.Azure.Tests\ClientRuntime.Azure.Tests.csproj", "{8B10D480-4A8A-47B5-9574-AA8E79F431DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime.Azure.Authentication", "ClientRuntimes\CSharp\ClientRuntime.Azure.Authentication\ClientRuntime.Azure.Authentication.csproj", "{70F45D72-01FC-4540-AD48-44973A7E855B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -70,6 +73,12 @@ Global
 		{8B10D480-4A8A-47B5-9574-AA8E79F431DB}.Net45-Release|Any CPU.Build.0 = Net45-Release|Any CPU
 		{8B10D480-4A8A-47B5-9574-AA8E79F431DB}.Portable-Debug|Any CPU.ActiveCfg = Portable-Debug|Any CPU
 		{8B10D480-4A8A-47B5-9574-AA8E79F431DB}.Portable-Release|Any CPU.ActiveCfg = Portable-Release|Any CPU
+		{70F45D72-01FC-4540-AD48-44973A7E855B}.Net45-Debug|Any CPU.ActiveCfg = Net45-Debug|Any CPU
+		{70F45D72-01FC-4540-AD48-44973A7E855B}.Net45-Debug|Any CPU.Build.0 = Net45-Debug|Any CPU
+		{70F45D72-01FC-4540-AD48-44973A7E855B}.Net45-Release|Any CPU.ActiveCfg = Net45-Release|Any CPU
+		{70F45D72-01FC-4540-AD48-44973A7E855B}.Net45-Release|Any CPU.Build.0 = Net45-Release|Any CPU
+		{70F45D72-01FC-4540-AD48-44973A7E855B}.Portable-Debug|Any CPU.ActiveCfg = Portable-Debug|Any CPU
+		{70F45D72-01FC-4540-AD48-44973A7E855B}.Portable-Release|Any CPU.ActiveCfg = Portable-Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

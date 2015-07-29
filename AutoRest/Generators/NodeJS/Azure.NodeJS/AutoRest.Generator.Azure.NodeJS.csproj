@@ -32,10 +32,6 @@
     <Compile Include="TemplateModels\AzureMethodTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureServiceClientTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureMethodGroupTemplateModel.cs" />
-    <Compile Include="Templates\AzureMethodGroupTemplate.cs" />
-    <Compile Include="Templates\AzureMethodTemplate.cs" />
-    <Compile Include="Templates\AzureModelIndexTemplate.cs" />
-    <Compile Include="Templates\AzureServiceClientTemplate.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\AutoRest.Core\AutoRest.Core.csproj">
@@ -64,7 +60,7 @@
     <None Include="Templates\AzureModelIndexTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <CodeAnalysisDictionary Include="..\..\..\..\tools\CustomDictionary.xml">
+    <CodeAnalysisDictionary Include="..\..\..\..\Tools\CustomDictionary.xml">
       <Link>CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>
   </ItemGroup>

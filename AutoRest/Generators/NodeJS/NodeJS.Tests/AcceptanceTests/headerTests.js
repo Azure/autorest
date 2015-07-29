@@ -10,7 +10,7 @@ var assert = require('assert');
 var msRest = require('ms-rest');
 var _ = require('underscore')
 
-var headerClient = require('../Expected/SwaggerBat/Header/AutoRestSwaggerBATHeaderService');
+var headerClient = require('../Expected/AcceptanceTests/Header/AutoRestSwaggerBATHeaderService');
 
 var dummyToken = 'dummy12321343423';
 var credentials = new msRest.TokenCredentials(dummyToken);
@@ -33,7 +33,7 @@ describe('nodejs', function () {
           });
         });
       });
-      
+
       it('should throw on changing protected headers', function(done) {
         testClient.header.paramProtectedKey('text/html', function (error, result) {
           should.not.exist(error);
@@ -43,7 +43,7 @@ describe('nodejs', function () {
           });
         });
       });
-      
+
       it('should send and receive integer type headers', function(done) {
         testClient.header.paramInteger('positive', 1, function(error, result) {
           should.not.exist(error);
@@ -61,7 +61,7 @@ describe('nodejs', function () {
           });
         });
       });
-      
+
       it('should send and receive long type headers', function(done) {
         testClient.header.paramLong('positive', 105, function(error, result) {
           should.not.exist(error);
@@ -79,7 +79,7 @@ describe('nodejs', function () {
           });
         });
       });
-      
+
       it('should send and receive float type headers', function(done) {
         testClient.header.paramFloat('positive', 0.07, function(error, result) {
           should.not.exist(error);
@@ -97,7 +97,7 @@ describe('nodejs', function () {
           });
         });
       });
-      
+
       it('should send and receive double type headers', function(done) {
         testClient.header.paramDouble('positive', 7e120, function(error, result) {
           should.not.exist(error);
@@ -115,7 +115,7 @@ describe('nodejs', function () {
           });
         });
       });
-      
+
       it('should send and receive boolean type headers', function(done) {
         testClient.header.paramBool('true', true, function(error, result) {
           should.not.exist(error);
@@ -133,7 +133,7 @@ describe('nodejs', function () {
           });
         });
       });
-      
+
       it('should send and receive string type headers', function(done) {
         testClient.header.paramString('valid', 'The quick brown fox jumps over the lazy dog', function(error, result) {
           should.not.exist(error);
@@ -158,7 +158,7 @@ describe('nodejs', function () {
           });
         });
       });
-      
+
       it('should send and receive enum type headers', function(done) {
         testClient.header.paramEnum('valid', 'GREY', function(error, result) {
           should.not.exist(error);
@@ -176,7 +176,7 @@ describe('nodejs', function () {
           });
         });
       });
-      
+
       it('should send and receive date type headers', function(done) {
         testClient.header.paramDate('valid', new Date('2010-01-01'), function(error, result) {
           should.not.exist(error);
@@ -194,7 +194,7 @@ describe('nodejs', function () {
           });
         });
       });
-      
+
       it('should send and receive datetime type headers', function(done) {
         testClient.header.paramDatetime('valid', new Date('2010-01-01T12:34:56Z'), function(error, result) {
           should.not.exist(error);
@@ -212,7 +212,7 @@ describe('nodejs', function () {
           });
         });
       });
-      
+
       it('should send and receive byte array type headers', function(done) {
         var bytes = new Buffer('啊齄丂狛狜隣郎隣兀﨩');
         testClient.header.paramByte('valid', bytes, function(error, result) {

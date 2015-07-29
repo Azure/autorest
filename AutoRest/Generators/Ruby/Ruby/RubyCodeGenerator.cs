@@ -4,6 +4,7 @@
 using System.Threading.Tasks;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Ruby.Templates;
+using System.IO;
 
 namespace Microsoft.Rest.Generator.Ruby
 {
@@ -103,7 +104,7 @@ namespace Microsoft.Rest.Generator.Ruby
             {
                 Model = new ServiceClientTemplateModel(serviceClient),
             };
-            await Write(serviceClientTemplate, 
+            await Write(serviceClientTemplate,
                 RubyCodeNamer.UnderscoreCase(serviceClient.Name) + ImplementationFileExtension);
 
             // Method groups
@@ -124,8 +125,8 @@ namespace Microsoft.Rest.Generator.Ruby
                 {
                     Model = new ModelTemplateModel(model, serviceClient),
                 };
-                await Write(modelTemplate, "Models\\" +
-                    RubyCodeNamer.UnderscoreCase(model.Name) + ImplementationFileExtension);
+                await Write(modelTemplate, Path.Combine("models",
+                    RubyCodeNamer.UnderscoreCase(model.Name) + ImplementationFileExtension));
             }
 
             // Enums
@@ -135,7 +136,7 @@ namespace Microsoft.Rest.Generator.Ruby
                 {
                     Model = new EnumTemplateModel(enumType),
                 };
-                await Write(enumTemplate, "Models\\" + RubyCodeNamer.UnderscoreCase(enumTemplate.Model.TypeDefinitionName) + ImplementationFileExtension);
+                await Write(enumTemplate, Path.Combine("models", RubyCodeNamer.UnderscoreCase(enumTemplate.Model.TypeDefinitionName) + ImplementationFileExtension));
             }
 
             // Requirements

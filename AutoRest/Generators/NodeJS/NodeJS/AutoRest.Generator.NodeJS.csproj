@@ -38,14 +38,6 @@
     <Compile Include="TemplateModels\MethodTemplateModel.cs" />
     <Compile Include="ClientModelExtensions.cs" />
     <Compile Include="TemplateModels\ParameterTemplateModel.cs" />
-    <Compile Include="Templates\MethodGroupIndexTemplate.cs" />
-    <Compile Include="Templates\MethodGroupTemplate.cs" />
-    <Compile Include="Templates\MethodJsonPipelineTemplate.cs" />
-    <Compile Include="Templates\MethodStreamPipelineTemplate.cs" />
-    <Compile Include="Templates\MethodTemplate.cs" />
-    <Compile Include="Templates\ModelIndexTemplate.cs" />
-    <Compile Include="Templates\ModelTemplate.cs" />
-    <Compile Include="Templates\ServiceClientTemplate.cs" />
     <None Include="Templates\MethodGroupTemplate.cshtml" />
     <None Include="Templates\MethodJsonPipelineTemplate.cshtml" />
     <None Include="Templates\MethodStreamPipelineTemplate.cshtml" />
@@ -62,7 +54,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <CodeAnalysisDictionary Include="..\..\..\..\tools\CustomDictionary.xml">
+    <CodeAnalysisDictionary Include="..\..\..\..\Tools\CustomDictionary.xml">
       <Link>CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>
   </ItemGroup>

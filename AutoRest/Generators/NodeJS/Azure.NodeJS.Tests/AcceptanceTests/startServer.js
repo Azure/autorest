@@ -9,11 +9,16 @@ var child;
 
 before(function (done) {
   var started = false;
+  var isWin = /^win/.test(process.platform);
+  var nodeCmd = 'node.exe';
+  if(!isWin){
+    nodeCmd = 'node'
+  }
   var out = fs.openSync('./server.log', 'w');
   fs.writeSync(out, 'Test run started at ' + new Date().toISOString() + '\n');
   process.env.PORT = 3000;
-  child = child_process.spawn('node.exe', [__dirname + '/../../../AcceptanceTests/server/startup/www.js']);
-  
+  child = child_process.spawn(nodeCmd, [__dirname + '/../../../AcceptanceTests/server/startup/www.js']);
+
   child.stdout.on('data', function (data) {
     fs.writeSync(out, data.toString('UTF-8'));
     if (data.toString().indexOf('started') > 0) {
@@ -21,14 +26,14 @@ before(function (done) {
       done();
     }
   });
-  
+
   child.on('close', function (code) {
     if (!started) {
       done();
     }
   });
 });
-  
+
 after(function (done) {
   child.kill();
   done();
