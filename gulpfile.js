@@ -1,4 +1,4 @@
-/// <binding AfterBuild='syncDotNetDependencies' />
+/// <binding BeforeBuild='syncDotNetDependencies' />
 var gulp = require('gulp');
 var path = require('path');
 var fs = require('fs');
