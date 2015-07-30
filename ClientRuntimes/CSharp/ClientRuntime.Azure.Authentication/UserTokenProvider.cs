@@ -90,7 +90,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// Log in to Azure active directory using a background thread.  This call may  display a user log in 
         /// dialog, depending on the settings in ActiveDirectoryDialogParameters.
         /// </summary>
-        public async Task LoginAsync()
+        public async Task LogOnAsync()
         {
             var completion = new TaskCompletionSource<AuthenticationResult>();
             await Task.Run(() =>
@@ -125,7 +125,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="username">The organization id user name.</param>
         /// <param name="password">The password associated with this organization id.</param>
         /// <returns>A task which completes when the authentication terminates.</returns>
-        public async Task LoginSilentAsync(string username, string password)
+        public async Task LogOnSilentAsync(string username, string password)
         {
             var credentials = new UserCredential(username, password);
             try
@@ -147,7 +147,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// </summary>
         /// <param name="username">The user name of the previously logged in user.</param>
         /// <returns>A task which completes when the authentication terminates.</returns>
-        public async Task LoginSilentAsync(string username)
+        public async Task LogOnSilentAsync(string username)
         {
             this._settings.UserIdentifier  = new UserIdentifier(username, UserIdentifierType.RequiredDisplayableId);
             try

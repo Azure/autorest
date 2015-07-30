@@ -23,6 +23,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationTokenProvider.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="UserTokenProvider.cs" />
     <Compile Include="ApplicationTokenCredentials.cs" />
     <Compile Include="ActiveDirectorySettings.cs" />

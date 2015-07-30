@@ -48,7 +48,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             settings.UserIdentifier = new UserIdentifier(this._username, UserIdentifierType.RequiredDisplayableId);
             var credentials = new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
                 this._domain, new Uri("urn:ietf:wg:oauth:2.0:oob"), settings, cache);
-            credentials.LoginAsync().GetAwaiter().GetResult();
+            credentials.LogOnAsync().GetAwaiter().GetResult();
             var client = new HttpClient();
 
             var request = new HttpRequestMessage(HttpMethod.Get,
@@ -61,7 +61,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             settings.PromptBehavior = PromptBehavior.Never;
              credentials = new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
                 this._domain, new Uri("urn:ietf:wg:oauth:2.0:oob"), settings, cache);
-            credentials.LoginAsync().GetAwaiter().GetResult();
+            credentials.LogOnAsync().GetAwaiter().GetResult();
             request = new HttpRequestMessage(HttpMethod.Get,
                 new Uri("https://management.azure.com/subscriptions?api-version=2014-04-01-preview"));
             credentials.ProcessHttpRequestAsync(request, CancellationToken.None).Wait();
@@ -120,7 +120,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         {
             var credentials = new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
                 this._domain, new Uri("urn:ietf:wg:oauth:2.0:oob"));
-             credentials.LoginSilentAsync(this._username, this._password).GetAwaiter().GetResult();
+             credentials.LogOnSilentAsync(this._username, this._password).GetAwaiter().GetResult();
             var client = new HttpClient();
             var request = new HttpRequestMessage(HttpMethod.Get,
                 new Uri("https://management.azure.com/subscriptions?api-version=2014-04-01-preview"));
@@ -136,18 +136,18 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             var credentials = new
             UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
                 this._domain, null);
-            var exception = Assert.Throws<AuthenticationException>(() => credentials.LoginSilentAsync("unuseduser@thisdomain.com", "This is not a valid password").GetAwaiter().GetResult());
+            var exception = Assert.Throws<AuthenticationException>(() => credentials.LogOnSilentAsync("unuseduser@thisdomain.com", "This is not a valid password").GetAwaiter().GetResult());
             Assert.NotNull(exception.InnerException);
             Assert.Equal(typeof(AdalException), exception.InnerException.GetType());
-            exception = Assert.Throws<AuthenticationException>(() => credentials.LoginSilentAsync("bad_user@bad_domain.com", this._password).ConfigureAwait(false).GetAwaiter().GetResult());
+            exception = Assert.Throws<AuthenticationException>(() => credentials.LogOnSilentAsync("bad_user@bad_domain.com", this._password).ConfigureAwait(false).GetAwaiter().GetResult());
             Assert.NotNull(exception.InnerException);
             Assert.Equal(typeof(AdalException), exception.InnerException.GetType());
             var badCredential = new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2", "not-a-valid-domain", null);
-            exception = Assert.Throws<AuthenticationException>(() => badCredential.LoginSilentAsync(this._username, this._password).ConfigureAwait(false).GetAwaiter().GetResult());
+            exception = Assert.Throws<AuthenticationException>(() => badCredential.LogOnSilentAsync(this._username, this._password).ConfigureAwait(false).GetAwaiter().GetResult());
             Assert.NotNull(exception.InnerException);
             Assert.Equal(typeof(AdalServiceException), exception.InnerException.GetType());
             badCredential = new UserTokenCredentials("not-a-valid-client-id", this._domain, null);
-            exception = Assert.Throws<AuthenticationException>(() => badCredential.LoginSilentAsync(this._username, this._password)
+            exception = Assert.Throws<AuthenticationException>(() => badCredential.LogOnSilentAsync(this._username, this._password)
                 .ConfigureAwait(false).GetAwaiter().GetResult());
             Assert.NotNull(exception.InnerException);
             Assert.Equal(typeof(AdalServiceException), exception.InnerException.GetType());
@@ -168,10 +168,10 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                 string.Empty, new Uri("urn:ietf:wg:oauth:2.0:oob"), settings, cache));
             var credential = new UserTokenCredentials("1950a258-227b-4e31-a9cf-717495945fc2",
                 "rbactest.onmicrosoft.com", new Uri("urn:ietf:wg:oauth:2.0:oob"), settings, cache);
-            Assert.Throws<AuthenticationException>(() => credential.LoginSilentAsync(null, this._password).ConfigureAwait(false).GetAwaiter().GetResult());
-            Assert.Throws<AuthenticationException>(() => credential.LoginSilentAsync(string.Empty, this._password).ConfigureAwait(false).GetAwaiter().GetResult());
-            Assert.Throws<AuthenticationException>(() => credential.LoginSilentAsync(this._username, null).ConfigureAwait(false).GetAwaiter().GetResult());
-            Assert.Throws<AuthenticationException>(() => credential.LoginSilentAsync(this._username, string.Empty).ConfigureAwait(false).GetAwaiter().GetResult());
+            Assert.Throws<AuthenticationException>(() => credential.LogOnSilentAsync(null, this._password).ConfigureAwait(false).GetAwaiter().GetResult());
+            Assert.Throws<AuthenticationException>(() => credential.LogOnSilentAsync(string.Empty, this._password).ConfigureAwait(false).GetAwaiter().GetResult());
+            Assert.Throws<AuthenticationException>(() => credential.LogOnSilentAsync(this._username, null).ConfigureAwait(false).GetAwaiter().GetResult());
+            Assert.Throws<AuthenticationException>(() => credential.LogOnSilentAsync(this._username, string.Empty).ConfigureAwait(false).GetAwaiter().GetResult());
         }
 
         [EnvironmentDependentFact]
@@ -180,7 +180,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             var cache = new TestTokenCache();
             var provider = new UserTokenProvider("1950a258-227b-4e31-a9cf-717495945fc2",
                 this._domain, ActiveDirectorySettings.Azure, new Uri("urn:ietf:wg:oauth:2.0:oob"), cache);
-            provider.LoginSilentAsync(this._username, this._password).ConfigureAwait(false).GetAwaiter().GetResult();
+            provider.LogOnSilentAsync(this._username, this._password).ConfigureAwait(false).GetAwaiter().GetResult();
             cache.ForceTokenExpiry();
             Assert.NotNull(provider.GetAuthenticationHeaderAsync(CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult());
             var credentials = new TokenCredentials(provider);

@@ -84,7 +84,7 @@ namespace Microsoft.Rest.Azure.Authentication
             Uri clientRedirectUri, ActiveDirectorySettings settings, TokenCache cache)
         {
             var provider = new UserTokenProvider(clientId, domain, settings, clientRedirectUri, cache);
-            await provider.LoginAsync().ConfigureAwait(false);
+            await provider.LogOnAsync().ConfigureAwait(false);
             return new TokenCredentials(provider);
         }
 
@@ -130,7 +130,7 @@ namespace Microsoft.Rest.Azure.Authentication
             string username, string password, Uri clientRedirectUri, ActiveDirectorySettings settings, TokenCache cache)
         {
             var provider = new UserTokenProvider(clientId, domain, settings, clientRedirectUri, cache);
-            await provider.LoginSilentAsync(username, password).ConfigureAwait(false);
+            await provider.LogOnSilentAsync(username, password).ConfigureAwait(false);
             return new TokenCredentials(provider);
         }
 
@@ -168,7 +168,7 @@ namespace Microsoft.Rest.Azure.Authentication
             string domain, string username, Uri clientRedirectUri, ActiveDirectorySettings settings, TokenCache cache)
         {
              var provider = new UserTokenProvider(clientId, domain, settings, clientRedirectUri, cache);
-             await provider.LoginSilentAsync(username).ConfigureAwait(false);
+             await provider.LogOnSilentAsync(username).ConfigureAwait(false);
             return new TokenCredentials(provider);
         }
 

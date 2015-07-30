@@ -57,10 +57,10 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <summary>
         /// Log in to Azure active directory, prompting the user for credentials.
         /// </summary>
-        public async Task LoginAsync()
+        public async Task LogOnAsync()
         {
             var provider = TokenProvider as UserTokenProvider;
-            await provider.LoginAsync().ConfigureAwait(false);
+            await provider.LogOnAsync().ConfigureAwait(false);
         }
 
         /// <summary>
@@ -69,10 +69,10 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="username">The organization is user name.</param>
         /// <param name="password">The password for the given organizational id.</param>
         /// <returns>A Task which completes when log in is complete.</returns>
-        public async Task LoginSilentAsync(string username, string password)
+        public async Task LogOnSilentAsync(string username, string password)
         {
             var provider = TokenProvider as UserTokenProvider;
-            await provider.LoginSilentAsync(username, password).ConfigureAwait(false);
+            await provider.LogOnSilentAsync(username, password).ConfigureAwait(false);
         }
     }
 }
