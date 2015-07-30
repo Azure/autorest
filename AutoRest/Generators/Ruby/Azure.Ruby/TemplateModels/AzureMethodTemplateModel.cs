@@ -144,12 +144,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
 
             var builder = new IndentedStringBuilder("  ");
 
-            var composite = type as CompositeType;
-
-            if (composite != null && composite.Extensions.ContainsKey(AzureCodeGenerator.ExternalExtension))
-            {
-                defaultNamespace = "MsRestAzure";
-            }
+            AzureClientModelExtensions.UpdateNamespaceIfRequired(type, ref defaultNamespace);
 
             string serializationLogic = type.DeserializeType(this.Scope, variableName, defaultNamespace);
             return builder.AppendLine(serializationLogic).ToString();
@@ -234,27 +229,31 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             }
         }
 
+        /// <summary>
+        /// Creates deserialization string for parsing method's response.
+        /// </summary>
+        /// <param name="inputVariable">Response value to deserialize.</param>
+        /// <param name="type">Type of response.</param>
+        /// <param name="outputVariable">Variable to put deserialized response.</param>
+        /// <param name="defaultNamespace">The namespace.</param>
+        /// <returns>Code of deserialization in form of string.</returns>
         public override string CreateDeserializationString(string inputVariable, IType type, string outputVariable, string defaultNamespace)
         {
-            var composite = type as CompositeType;
-
-            if (composite != null && composite.Extensions.ContainsKey(AzureCodeGenerator.ExternalExtension))
-            {
-                defaultNamespace = "MsRestAzure";
-            }
-
+            AzureClientModelExtensions.UpdateNamespaceIfRequired(type, ref defaultNamespace);
             return base.CreateDeserializationString(inputVariable, type, outputVariable, defaultNamespace);
         }
 
+        /// <summary>
+        /// Creates serialization string for parsing method's response.
+        /// </summary>
+        /// <param name="inputVariable">Response value to serialize.</param>
+        /// <param name="type">Type of response.</param>
+        /// <param name="outputVariable">Variable to put serialization response.</param>
+        /// <param name="defaultNamespace">The namespace.</param>
+        /// <returns>Code of serialization in form of string.</returns>
         public override string CreateSerializationString(string inputVariable, IType type, string outputVariable, string defaultNamespace)
         {
-            var composite = type as CompositeType;
-
-            if (composite != null && composite.Extensions.ContainsKey(AzureCodeGenerator.ExternalExtension))
-            {
-                defaultNamespace = "MsRestAzure";
-            }
-
+            AzureClientModelExtensions.UpdateNamespaceIfRequired(type, ref defaultNamespace);
             return base.CreateSerializationString(inputVariable, type, outputVariable, defaultNamespace);
         }
     }

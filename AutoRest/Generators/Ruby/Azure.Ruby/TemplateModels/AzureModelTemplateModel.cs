@@ -41,27 +41,31 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             return string.Empty;
         }
 
+        /// <summary>
+        /// Serializes given property.
+        /// </summary>
+        /// <param name="variableName">Variable name that keeps the property.</param>
+        /// <param name="type">Type of property.</param>
+        /// <param name="isRequired">Is required or not (affects whether null check is performed).</param>
+        /// <param name="defaultNamespace">The namespace.</param>
+        /// <returns>Code for serialization.</returns>
         public override string SerializeProperty(string variableName, IType type, bool isRequired, string defaultNamespace)
         {
-            var composite = type as CompositeType;
-
-            if (composite != null && composite.Extensions.ContainsKey(AzureCodeGenerator.ExternalExtension))
-            {
-                defaultNamespace = "MsRestAzure";
-            }
-
+            AzureClientModelExtensions.UpdateNamespaceIfRequired(type, ref defaultNamespace);
             return base.SerializeProperty(variableName, type, isRequired, defaultNamespace);
         }
 
+        /// <summary>
+        /// Deserializes given property.
+        /// </summary>
+        /// <param name="variableName">Variable name that keeps the property.</param>
+        /// <param name="type">Type of property.</param>
+        /// <param name="isRequired">Is required or not (affects whether null check is performed).</param>
+        /// <param name="defaultNamespace">The namespace.</param>
+        /// <returns>Code for deserialization.</returns>
         public override string DeserializeProperty(string variableName, IType type, bool isRequired, string defaultNamespace)
         {
-            var composite = type as CompositeType;
-
-            if (composite != null && composite.Extensions.ContainsKey(AzureCodeGenerator.ExternalExtension))
-            {
-                defaultNamespace = "MsRestAzure";
-            }
-
+            AzureClientModelExtensions.UpdateNamespaceIfRequired(type, ref defaultNamespace);
             return base.DeserializeProperty(variableName, type, isRequired, defaultNamespace);
         }
     }
