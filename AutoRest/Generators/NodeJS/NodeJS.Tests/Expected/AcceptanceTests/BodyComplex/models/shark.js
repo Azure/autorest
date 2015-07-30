@@ -66,8 +66,6 @@ Shark.prototype.validate = function (payload) {
  */
 Shark.prototype.deserialize = function (instance) {
   if (instance) {
-
-
     if (instance.siblings !== null && instance.siblings !== undefined) {
       var deserializedArray = [];
       instance.siblings.forEach(function(element) {
@@ -82,7 +80,6 @@ Shark.prototype.deserialize = function (instance) {
       });
       instance.siblings = deserializedArray;
     }
-
 
     if (instance.birthday !== null && instance.birthday !== undefined) {
       instance.birthday = new Date(instance.birthday);
