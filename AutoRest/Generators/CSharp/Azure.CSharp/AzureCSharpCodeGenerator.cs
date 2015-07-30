@@ -17,7 +17,10 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
         public AzureCSharpCodeGenerator(Settings settings) : base(settings)
         {
             _namer = new AzureCSharpCodeNamer();
-            settings.IsSingleFileGenerationSupported = true;
+            if (settings != null)
+            {
+                settings.IsSingleFileGenerationSupported = true;
+            }
         }
 
         public override string Name
