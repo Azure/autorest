@@ -16,7 +16,7 @@
       Supported Platforms:
       -   .NET Framework 4.5
     </description>
-    <copyright>Copyright © Microsoft Corporation</copyright>
+    <copyright>Copyright (c) Microsoft Corporation</copyright>
     <tags>Microsoft "Microsoft Azure" Azure REST azureofficial adal</tags>
     <references>
       <group targetFramework="net45">

@@ -18,7 +18,7 @@
       -   .NET Framework 4.5
       -   Windows 8
       -   Windows Phone 8.1</description>
-    <copyright>Copyright © Microsoft Corporation</copyright>
+    <copyright>Copyright (c) Microsoft Corporation</copyright>
     <tags>Microsoft AutoRest ClientRuntime REST</tags>
     <references>
       <group targetFramework="portable-net45+win8+wpa81">
