@@ -92,7 +92,6 @@ namespace Microsoft.Rest.Generator.Test
             Assert.True(_fileSystem.VirtualStore.ContainsKey(path));
             Assert.True(_fileSystem.VirtualStore.ContainsKey("AutoRest.json"));
             Assert.True(_fileSystem.VirtualStore.ContainsKey("RedisResource.json"));
-            Assert.True(_fileSystem.VirtualStore.ContainsKey(@"C:\Users\hovsepm\AppData\Local\Temp"));
         }
     }
 }
