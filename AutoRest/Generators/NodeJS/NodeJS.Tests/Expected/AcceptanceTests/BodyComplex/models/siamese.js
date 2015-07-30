@@ -54,9 +54,6 @@ Siamese.prototype.validate = function (payload) {
  */
 Siamese.prototype.deserialize = function (instance) {
   if (instance) {
-
-
-
     if (instance.hates !== null && instance.hates !== undefined) {
       var deserializedArray = [];
       instance.hates.forEach(function(element) {
@@ -67,7 +64,6 @@ Siamese.prototype.deserialize = function (instance) {
       });
       instance.hates = deserializedArray;
     }
-
   }
   return instance;
 };

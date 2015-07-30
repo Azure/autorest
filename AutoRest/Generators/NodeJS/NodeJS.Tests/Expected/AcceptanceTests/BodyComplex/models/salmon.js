@@ -61,8 +61,6 @@ Salmon.prototype.validate = function (payload) {
  */
 Salmon.prototype.deserialize = function (instance) {
   if (instance) {
-
-
     if (instance.siblings !== null && instance.siblings !== undefined) {
       var deserializedArray = [];
       instance.siblings.forEach(function(element) {
@@ -77,8 +75,6 @@ Salmon.prototype.deserialize = function (instance) {
       });
       instance.siblings = deserializedArray;
     }
-
-
   }
   return instance;
 };

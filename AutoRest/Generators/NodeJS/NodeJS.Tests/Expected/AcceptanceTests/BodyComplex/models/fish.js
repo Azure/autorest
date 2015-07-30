@@ -53,8 +53,6 @@ Fish.prototype.validate = function (payload) {
  */
 Fish.prototype.deserialize = function (instance) {
   if (instance) {
-
-
     if (instance.siblings !== null && instance.siblings !== undefined) {
       var deserializedArray = [];
       instance.siblings.forEach(function(element) {

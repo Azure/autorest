@@ -52,7 +52,6 @@ ProductResult.prototype.deserialize = function (instance) {
       });
       instance.values = deserializedArray;
     }
-
   }
   return instance;
 };

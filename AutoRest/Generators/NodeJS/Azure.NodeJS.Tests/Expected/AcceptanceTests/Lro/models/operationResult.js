@@ -38,7 +38,6 @@ OperationResult.prototype.validate = function (payload) {
  */
 OperationResult.prototype.deserialize = function (instance) {
   if (instance) {
-
     if (instance.error !== null && instance.error !== undefined) {
       instance.error = models['OperationResultError'].deserialize(instance.error);
     }

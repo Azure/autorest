@@ -50,9 +50,6 @@ Cat.prototype.validate = function (payload) {
  */
 Cat.prototype.deserialize = function (instance) {
   if (instance) {
-
-
-
     if (instance.hates !== null && instance.hates !== undefined) {
       var deserializedArray = [];
       instance.hates.forEach(function(element) {

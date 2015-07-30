@@ -58,11 +58,6 @@ Product.prototype.validate = function (payload) {
  */
 Product.prototype.deserialize = function (instance) {
   if (instance) {
-
-
-
-
-
     if (instance.properties !== null && instance.properties !== undefined) {
       instance.properties = models['ProductProperties'].deserialize(instance.properties);
     }
