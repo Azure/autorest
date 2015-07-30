@@ -21,11 +21,13 @@ DateWrapper.prototype.validate = function (payload) {
   if (!payload) {
     throw new Error('DateWrapper cannot be null.');
   }
-  if (payload['field'] && !(payload['field'] instanceof Date || (typeof payload['field'].valueOf() === 'string' && !isNaN(Date.parse(payload['field']))))) {
+  if (payload['field'] && !(payload['field'] instanceof Date || 
+      (typeof payload['field'].valueOf() === 'string' && !isNaN(Date.parse(payload['field']))))) {
     throw new Error('payload[\'field\'] must be of type date.');
   }
 
-  if (payload['leap'] && !(payload['leap'] instanceof Date || (typeof payload['leap'].valueOf() === 'string' && !isNaN(Date.parse(payload['leap']))))) {
+  if (payload['leap'] && !(payload['leap'] instanceof Date || 
+      (typeof payload['leap'].valueOf() === 'string' && !isNaN(Date.parse(payload['leap']))))) {
     throw new Error('payload[\'leap\'] must be of type date.');
   }
 };

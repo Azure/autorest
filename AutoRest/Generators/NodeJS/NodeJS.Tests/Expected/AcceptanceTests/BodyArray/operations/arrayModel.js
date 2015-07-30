@@ -2767,7 +2767,8 @@ ArrayModel.prototype.putDateValid = function (arrayBody, options, callback) {
       throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
     for (var i = 0; i < arrayBody.length; i++) {
-      if (arrayBody[i] && !(arrayBody[i] instanceof Date || (typeof arrayBody[i].valueOf() === 'string' && !isNaN(Date.parse(arrayBody[i]))))) {
+      if (arrayBody[i] && !(arrayBody[i] instanceof Date || 
+          (typeof arrayBody[i].valueOf() === 'string' && !isNaN(Date.parse(arrayBody[i]))))) {
         throw new Error('arrayBody[i] must be of type date.');
       }
     }
@@ -3163,7 +3164,8 @@ ArrayModel.prototype.putDateTimeValid = function (arrayBody, options, callback) 
       throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
     for (var i = 0; i < arrayBody.length; i++) {
-      if (arrayBody[i] && !(arrayBody[i] instanceof Date || (typeof arrayBody[i].valueOf() === 'string' && !isNaN(Date.parse(arrayBody[i]))))) {
+      if (arrayBody[i] && !(arrayBody[i] instanceof Date || 
+          (typeof arrayBody[i].valueOf() === 'string' && !isNaN(Date.parse(arrayBody[i]))))) {
         throw new Error('arrayBody[i] must be of type date.');
       }
     }

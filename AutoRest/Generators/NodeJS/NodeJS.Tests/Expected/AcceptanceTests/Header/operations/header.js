@@ -1561,7 +1561,8 @@ Header.prototype.paramDate = function (scenario, value, options, callback) {
     if (scenario === null || scenario === undefined || typeof scenario.valueOf() !== 'string') {
       throw new Error('scenario cannot be null or undefined and it must be of type string.');
     }
-    if(!value || !(value instanceof Date || (typeof value.valueOf() === 'string' && !isNaN(Date.parse(value))))) {
+    if(!value || !(value instanceof Date || 
+        (typeof value.valueOf() === 'string' && !isNaN(Date.parse(value))))) {
       throw new Error('value cannot be null or undefined and it must be of type date.');
     }
   } catch (error) {
@@ -1755,7 +1756,8 @@ Header.prototype.paramDatetime = function (scenario, value, options, callback) {
     if (scenario === null || scenario === undefined || typeof scenario.valueOf() !== 'string') {
       throw new Error('scenario cannot be null or undefined and it must be of type string.');
     }
-    if(!value || !(value instanceof Date || (typeof value.valueOf() === 'string' && !isNaN(Date.parse(value))))) {
+    if(!value || !(value instanceof Date || 
+        (typeof value.valueOf() === 'string' && !isNaN(Date.parse(value))))) {
       throw new Error('value cannot be null or undefined and it must be of type date.');
     }
   } catch (error) {

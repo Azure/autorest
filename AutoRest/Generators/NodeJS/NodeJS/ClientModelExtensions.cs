@@ -142,7 +142,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             return valueReference.Replace("'", "\\'");
         }
 
-        public static string ConstructValidationCheck(string condition, string errorMessage, string valueReference, string typeName)
+        private static string ConstructValidationCheck(string condition, string errorMessage, string valueReference, string typeName)
         {
             var builder = new IndentedStringBuilder("  ");
             var escapedValueReference = valueReference.EscapeSingleQuotes();
@@ -155,7 +155,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                           .AppendLine("}").ToString();
         }
 
-        public static string ValidatePrimaryType(this PrimaryType primary, IScopeProvider scope, string valueReference, bool isRequired, string modelReference = "client._models")
+        private static string ValidatePrimaryType(this PrimaryType primary, IScopeProvider scope, string valueReference, bool isRequired)
         {
             if (scope == null)
             {
@@ -163,6 +163,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             }
 
             var builder = new IndentedStringBuilder("  ");
+            var conditionBuilder = new IndentedStringBuilder("  ");
             var requiredTypeErrorMessage = "throw new Error('{0} cannot be null or undefined and it must be of type {1}.');";
             var typeErrorMessage = "throw new Error('{0} must be of type {1}.');";
 
@@ -203,14 +204,21 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             }
             else if (primary == PrimaryType.DateTime || primary == PrimaryType.Date)
             {
+                string condition = "";
                 if (isRequired)
                 {
-                    return ConstructValidationCheck("if(!{0} || !({0} instanceof Date || (typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{",
-                                                    requiredTypeErrorMessage, valueReference, primary.Name);
+                    condition = conditionBuilder.AppendLine("if(!{0} || !({0} instanceof Date || ")
+                                                  .Indent()
+                                                  .Indent()
+                                                  .AppendLine("(typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{").ToString();
+                    return ConstructValidationCheck(condition, requiredTypeErrorMessage, valueReference, primary.Name);
                 }
 
-                return ConstructValidationCheck("if ({0} && !({0} instanceof Date || (typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{",
-                                                typeErrorMessage, valueReference, primary.Name);
+                condition = conditionBuilder.AppendLine("if ({0} && !({0} instanceof Date || ")
+                                              .Indent()
+                                              .Indent()
+                                              .AppendLine("(typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{").ToString();
+                return ConstructValidationCheck(condition, typeErrorMessage, valueReference, primary.Name);
             }
             else if (primary == PrimaryType.Object)
             {
@@ -229,7 +237,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             }
         }
 
-        public static string ValidateEnumType(this EnumType enumType, IScopeProvider scope, string valueReference, bool isRequired, string modelReference = "client._models")
+        private static string ValidateEnumType(this EnumType enumType, IScopeProvider scope, string valueReference, bool isRequired)
         {
             if (scope == null)
             {
@@ -262,7 +270,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
         }
 
 
-        public static string ValidateCompositeType(this CompositeType composite, IScopeProvider scope, string valueReference, bool isRequired, string modelReference = "client._models")
+        private static string ValidateCompositeType(this CompositeType composite, IScopeProvider scope, string valueReference, bool isRequired, string modelReference = "client._models")
         {
             if (scope == null)
             {
@@ -309,7 +317,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             return builder.ToString();
         }
 
-        public static string ValidateSequenceType(this SequenceType sequence, IScopeProvider scope, string valueReference, bool isRequired, string modelReference = "client._models")
+        private static string ValidateSequenceType(this SequenceType sequence, IScopeProvider scope, string valueReference, bool isRequired, string modelReference = "client._models")
         {
             if (scope == null)
             {
@@ -352,7 +360,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             return null;
         }
 
-        public static string ValidateDictionaryType(this DictionaryType dictionary, IScopeProvider scope, string valueReference, bool isRequired, string modelReference = "client._models")
+        private static string ValidateDictionaryType(this DictionaryType dictionary, IScopeProvider scope, string valueReference, bool isRequired, string modelReference = "client._models")
         {
             if (scope == null)
             {
@@ -417,11 +425,11 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             EnumType enumType = type as EnumType;
             if (primary != null)
             {
-                return primary.ValidatePrimaryType(scope, valueReference, isRequired, modelReference);
+                return primary.ValidatePrimaryType(scope, valueReference, isRequired);
             }
             else if (enumType != null && enumType.Values.Any())
             {
-                return enumType.ValidateEnumType(scope, valueReference, isRequired, modelReference);
+                return enumType.ValidateEnumType(scope, valueReference, isRequired);
             }
             else if (composite != null && composite.Properties.Any())
             {
@@ -463,7 +471,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             {
                 if (primary == PrimaryType.ByteArray)
                 {
-                    return builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0} === 'string') {{", valueReference)
+                    return builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0}.valueOf() === 'string') {{", valueReference)
                             .Indent()
                                 .AppendLine("{0} = new Buffer({0}, 'base64');", valueReference)
                             .Outdent()

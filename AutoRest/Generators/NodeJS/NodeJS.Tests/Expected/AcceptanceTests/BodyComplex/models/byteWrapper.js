@@ -34,7 +34,7 @@ ByteWrapper.prototype.validate = function (payload) {
  */
 ByteWrapper.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance.field !== null && instance.field !== undefined && typeof instance.field === 'string') {
+    if (instance.field !== null && instance.field !== undefined && typeof instance.field.valueOf() === 'string') {
       instance.field = new Buffer(instance.field, 'base64');
     }
   }
