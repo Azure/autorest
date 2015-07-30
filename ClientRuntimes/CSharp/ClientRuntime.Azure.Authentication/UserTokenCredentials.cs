@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Threading.Tasks;
 using Microsoft.Rest;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 
@@ -15,77 +16,63 @@ namespace Microsoft.Rest.Azure.Authentication
     public class UserTokenCredentials : TokenCredentials
     {
         /// <summary>
-        /// Creates a new UserAccessTokenCredentials object for Microsoft accounts or Organization Id accounts.  
-        /// This method will display a dialog for providing username and password.
+        /// Creates a new UserTokenCredentials object for Microsoft accounts or Organization Id accounts.  
         /// </summary>
         /// <param name="clientId">The active directory identity of this application.</param> 
         /// <param name="domain">The domain name or tenant id containing the subscription or resources to manage.</param>
         /// <param name="clientRedirectUri">The Uri where the user will be redirected after authenticating with AD.</param>
         public UserTokenCredentials(string clientId, string domain, Uri clientRedirectUri)
-            : this(clientId, domain, clientRedirectUri: clientRedirectUri, 
-                  environment: ActiveDirectoryEnvironment.Azure)
+            : this(clientId, domain, clientRedirectUri, ActiveDirectorySettings.Azure)
+        {
+        }
+
+
+        /// <summary>
+        /// Creates a new UserAccessTokenCredentials object for Microsoft accounts or Organization Id accounts.  
+        /// </summary>
+        /// <param name="clientId">The active directory identity of this application.</param>
+        /// <param name="domain">The domain name or tenant id containing the subscription or resources to manage.</param>
+        /// <param name="clientRedirectUri">The Uri where the user will be redirected after authenticating with AD.</param>
+        /// <param name="settings">The azure active directory settings to use for authentication.</param>
+        public UserTokenCredentials(string clientId, string domain, Uri clientRedirectUri, 
+            ActiveDirectorySettings settings)
+            : this(clientId, domain, clientRedirectUri, settings, null)
         {
         }
 
         /// <summary>
         /// Creates a new UserAccessTokenCredentials object for Microsoft accounts or Organization Id accounts.  
-        /// This method will display a dialog for providing username and password.
-        /// </summary>
-        /// <param name="clientId">The active directory identity of this application.</param> 
-        /// <param name="domain">The domain name or tenant id containing the subscription or resources to manage.</param>
-        /// <param name="environment">The azure environment to authenticate with. </param>
-        /// <param name="clientRedirectUri">The Uri where the user will be redirected after authenticating with AD.</param>
-        public UserTokenCredentials(string clientId, string domain, Uri clientRedirectUri, 
-            ActiveDirectoryEnvironment environment)
-            : this(clientId, domain, clientRedirectUri, environment, adParameters: null)
-        {
-        }
-
-        /// <summary>
-        /// Creates a new UserAccessTokenCredentials object for Microsoft accounts or Organization Id accounts.  
-        /// This method will display a dialog for providing username and password.
         /// </summary>
         /// <param name="clientId">The active directory identity of this application.</param>
         /// <param name="domain">The domain name or tenant id containing the subscription or resources to manage.</param>
         /// <param name="clientRedirectUri">The Uri where the user will be redirected after authenticating with AD.</param>
-        /// <param name="environment">The azure environment to authenticate with. </param>
-        /// <param name="adParameters">The ADAL parameters.</param>
+        /// <param name="settings">The azure active directory settings to use for authentication.</param>
+        /// <param name="cache">The token cache to target durign authentication.</param>
         public UserTokenCredentials(string clientId, string domain, Uri clientRedirectUri, 
-            ActiveDirectoryEnvironment environment, ActiveDirectoryParameters adParameters)
-            : base(new ActiveDirectoryUserTokenProvider(clientId: clientId, domain: domain, 
-                adParameters: adParameters, environment: environment, clientRedirectUri: clientRedirectUri))
+            ActiveDirectorySettings settings, TokenCache cache)
+            : base(new UserTokenProvider(clientId, domain, settings, clientRedirectUri, cache))
         {
         }
 
         /// <summary>
-        /// Creates a new UserAccessTokenCredentials object for Organization Id accounts only.  
-        /// This method will not display a dialog.
+        /// Log in to Azure active directory, prompting the user for credentials.
         /// </summary>
-        /// <param name="clientId">The active directory identity of this application.</param>
-        /// <param name="domain">The domain name or tenant id containing the subscription or resources to manage.</param>
-        /// <param name="username">The user name for the Organization Id account.</param>
-        /// <param name="password">The password for the Organization Id account.</param>
-        public UserTokenCredentials(string clientId, string domain, string username, string password) 
-            : this(clientId, domain, username, password, ActiveDirectoryEnvironment.Azure, null)
+        public async Task LoginAsync()
         {
+            var provider = TokenProvider as UserTokenProvider;
+            await provider.LoginAsync().ConfigureAwait(false);
         }
 
         /// <summary>
-        /// Creates a new UserAccessTokenCredentials object for Organization Id accounts only.  
-        /// This method will not display a dialog.
+        /// Log in to Azure active directory using the given credentials. This requires use of Organization id credentials.
         /// </summary>
-        /// <param name="clientId">The active directory identity of this application.</param> 
-        /// <param name="domain">The domain name or tenant id containing the subscription or resources to manage.</param>
-        /// <param name="username">The user name for the Organization Id account.</param>
-        /// <param name="password">The password for the Organization Id account.</param>
-        /// <param name="environment">The azure environment to authenticate with. </param>
-        /// <param name="adParameters">The ADAL parameters.</param>
-        public UserTokenCredentials(string clientId, string domain, string username, string password, 
-            ActiveDirectoryEnvironment environment, ActiveDirectoryParameters adParameters) 
-            : base(new ActiveDirectoryUserTokenProvider(clientId:clientId, domain: domain, 
-                username: username, password: password, environment: environment, adParameters: adParameters))
+        /// <param name="username">The organization is user name.</param>
+        /// <param name="password">The password for the given organizational id.</param>
+        /// <returns>A Task which completes when log in is complete.</returns>
+        public async Task LoginSilentAsync(string username, string password)
         {
-            
+            var provider = TokenProvider as UserTokenProvider;
+            await provider.LoginSilentAsync(username, password).ConfigureAwait(false);
         }
     }
 }

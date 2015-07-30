@@ -15,7 +15,7 @@ namespace Microsoft.Rest.Azure.Authentication
     /// <summary>
     /// Provides tokens for Azure Active Directory applications. 
     /// </summary>
-    public class ActiveDirectoryApplicationTokenProvider : ITokenProvider
+    public class ApplicationTokenProvider : ITokenProvider
     {
         private AuthenticationContext _authenticationContext;
         private string _tokenAudience;
@@ -29,9 +29,9 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="clientId">The client Id of the application in Active Directory.</param>
         /// <param name="domain">The domain or tenant id for the application.</param>
         /// <param name="secret">The application secret, used for authentication.</param>
-        /// <param name="environment">The Azure environment to manage resources in.</param>
-        public ActiveDirectoryApplicationTokenProvider(string clientId, string domain, string secret, ActiveDirectoryEnvironment environment)
-            : this(clientId, domain, secret, environment, cache: null)
+        /// <param name="settings">The Azure environment to manage resources in.</param>
+        public ApplicationTokenProvider(string clientId, string domain, string secret, ActiveDirectorySettings settings)
+            : this(clientId, domain, secret, settings, cache: null)
         {
         }
 
@@ -43,38 +43,9 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="clientId">The client Id of the application in Active Directory.</param>
         /// <param name="domain">The domain or tenant id for the application.</param>
         /// <param name="secret">The application secret, used for authentication.</param>
-        /// <param name="environment">The Azure environment to manage resources in.</param>
+        /// <param name="settings">The Azure environment to manage resources in.</param>
         /// <param name="cache">The ADAL token cache to use during authentication.</param>
-        public ActiveDirectoryApplicationTokenProvider(string clientId, string domain, string secret, ActiveDirectoryEnvironment environment, TokenCache cache) 
-        {
-            Initialize(clientId, domain, secret, environment, cache);
-        }
-
-        /// <summary>
-        /// Returns the token type of the returned token.
-        /// </summary>
-        public string TokenType { get; private set; }
-
-        /// <summary>
-        /// Gets an access token from the token cache or from AD authentication endpoint. 
-        /// Attempts to refresh the access token if it has expired.
-        /// </summary>
-        public virtual async Task<AuthenticationHeaderValue> GetAuthenticationHeaderAsync(CancellationToken cancellationToken)
-        {
-            try
-            {
-                var result = await this._authenticationContext.AcquireTokenAsync(this._tokenAudience, this._credential).ConfigureAwait(false);
-                this.TokenType = result.AccessTokenType;
-                return new AuthenticationHeaderValue(result.AccessTokenType, result.AccessToken);
-            }
-            catch (AdalException authenticationException)
-            {
-                throw new AuthenticationException(Resources.ErrorAcquiringToken, authenticationException);
-            }            
-        }
-
-        private void Initialize(string clientId, string domain, string secret, ActiveDirectoryEnvironment environment, 
-            TokenCache cache)
+        public ApplicationTokenProvider(string clientId, string domain, string secret, ActiveDirectorySettings settings, TokenCache cache) 
         {
             if (string.IsNullOrWhiteSpace(secret))
             {
@@ -88,19 +59,36 @@ namespace Microsoft.Rest.Azure.Authentication
             {
                 throw new ArgumentOutOfRangeException("domain");
             }
-            if (environment == null || environment.AuthenticationEndpoint == null || environment.TokenAudience == null)
+            if (settings == null || settings.AuthenticationEndpoint == null || settings.TokenAudience == null)
             {
-                throw new ArgumentOutOfRangeException("environment");
+                throw new ArgumentOutOfRangeException("settings");
             }
 
-            this._tokenAudience = environment.TokenAudience.ToString();
+            this._tokenAudience = settings.TokenAudience.ToString();
             this._authenticationContext = (cache == null)
-                    ? new AuthenticationContext(environment.AuthenticationEndpoint + domain,
-                        environment.ValidateAuthority)
-                    : new AuthenticationContext(environment.AuthenticationEndpoint + domain,
-                        environment.ValidateAuthority,
+                    ? new AuthenticationContext(settings.AuthenticationEndpoint + domain,
+                        settings.ValidateAuthority)
+                    : new AuthenticationContext(settings.AuthenticationEndpoint + domain,
+                        settings.ValidateAuthority,
                         cache);
             this._credential = new ClientCredential(clientId, secret);
+        }
+
+        /// <summary>
+        /// Gets an access token from the token cache or from AD authentication endpoint. 
+        /// Attempts to refresh the access token if it has expired.
+        /// </summary>
+        public virtual async Task<AuthenticationHeaderValue> GetAuthenticationHeaderAsync(CancellationToken cancellationToken)
+        {
+            try
+            {
+                var result = await this._authenticationContext.AcquireTokenAsync(this._tokenAudience, this._credential).ConfigureAwait(false);
+                return new AuthenticationHeaderValue(result.AccessTokenType, result.AccessToken);
+            }
+            catch (AdalException authenticationException)
+            {
+                throw new AuthenticationException(Resources.ErrorAcquiringToken, authenticationException);
+            }            
         }
     }
 }

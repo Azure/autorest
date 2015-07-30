@@ -16,36 +16,17 @@
     <TargetFrameworkProfile />
   </PropertyGroup>
   <Import Project="$(SolutionDir)\tools\AutoRest.Settings.targets" />
-  <PropertyGroup Condition="'$(Configuration)' == 'Net45-Debug'">
-    <DocumentationFile>bin\Net45-Debug\Microsoft.Rest.ClientRuntime.Azure.Authentication.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Net45-Release'">
-    <DocumentationFile>bin\Net45-Release\Microsoft.Rest.ClientRuntime.Azure.Authentication.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Net45-Debug|AnyCPU' ">
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Net45-Debug</OutputPath>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>..\..\..\Tools\ManagedRules.ruleset</CodeAnalysisRuleSet>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Net45-Release|AnyCPU' ">
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Net45-Release</OutputPath>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <Import Project="$(SolutionDir)\Tools\AutoRest.Settings.targets" />
   <ItemGroup>
     <None Include="Microsoft.Rest.ClientRuntime.Azure.Authentication.nuget.proj" />
     <None Include="Microsoft.Rest.ClientRuntime.Azure.Authentication.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActiveDirectoryApplicationTokenProvider.cs" />
-    <Compile Include="ActiveDirectoryParameters.cs" />
-    <Compile Include="ActiveDirectoryUserTokenProvider.cs" />
+    <Compile Include="ApplicationTokenProvider.cs" />
+    <Compile Include="UserTokenProvider.cs" />
     <Compile Include="ApplicationTokenCredentials.cs" />
-    <Compile Include="ActiveDirectoryEnvironment.cs" />
+    <Compile Include="ActiveDirectorySettings.cs" />
+    <Compile Include="CredentialsFactory.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -65,9 +46,10 @@
     <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory">
       <HintPath>$(CommonNugetPackageFolder)\Microsoft.IdentityModel.Clients.ActiveDirectory.2.18.206251556\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
     </Reference>
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.IdentityModel" />
-    <Reference Include="System.Windows.Forms" />
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory.WindowsForms">
+      <HintPath>$(CommonNugetPackageFolder)\Microsoft.IdentityModel.Clients.ActiveDirectory.2.18.206251556\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.WindowsForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
