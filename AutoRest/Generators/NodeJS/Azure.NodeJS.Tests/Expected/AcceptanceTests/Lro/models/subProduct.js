@@ -38,7 +38,6 @@ SubProduct.prototype.validate = function (payload) {
  */
 SubProduct.prototype.deserialize = function (instance) {
   if (instance) {
-
     if (instance.properties !== null && instance.properties !== undefined) {
       instance.properties = models['SubProductProperties'].deserialize(instance.properties);
     }

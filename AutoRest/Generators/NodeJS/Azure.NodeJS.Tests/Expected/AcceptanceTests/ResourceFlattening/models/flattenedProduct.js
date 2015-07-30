@@ -58,11 +58,6 @@ FlattenedProduct.prototype.validate = function (payload) {
  */
 FlattenedProduct.prototype.deserialize = function (instance) {
   if (instance) {
-
-
-
-
-
     if (instance.properties !== null && instance.properties !== undefined) {
       instance.properties = models['FlattenedProductProperties'].deserialize(instance.properties);
     }
