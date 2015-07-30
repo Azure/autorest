@@ -194,6 +194,7 @@
       <AutoRestExe Condition=" '$(OS)' != 'Windows_NT'">mono @(AutoRestExeFiles->'%(FullPath)')</AutoRestExe>
     </PropertyGroup>
 
+    <RemoveDir Directories="$(TestProjectDir)\Generated\" />
     <!--Invoke code-gen-->
     <Exec WorkingDirectory="$(TestProjectDir)" Command="$(AutoRestExe) -Modeler Swagger -CodeGenerator CSharp -OutputDirectory $(TestProjectDir)\Generated\CSharp -Namespace &quot;Fixtures.Bodynumber&quot; -Input &quot;$(LibraryRoot)\AutoRest\Generators\AcceptanceTests\swagger\body-number.json&quot; -Header NONE"/>
     <Exec WorkingDirectory="$(TestProjectDir)" Command="$(AutoRestExe) -Modeler Swagger -CodeGenerator NodeJS -OutputDirectory $(TestProjectDir)\Generated\NodeJS -Input &quot;$(LibraryRoot)\AutoRest\Generators\AcceptanceTests\swagger\body-number.json&quot; -Header NONE"/>
