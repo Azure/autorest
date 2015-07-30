@@ -1,3 +1,4 @@
+/// <binding AfterBuild='syncDotNetDependencies' />
 var gulp = require('gulp');
 var path = require('path');
 var fs = require('fs');
@@ -20,7 +21,7 @@ var csharpBuild = isWin ? 'msbuild' : 'xbuild';
 
 function basePathOrThrow() {
   if (!gutil.env.basePath) {
-    throw new Error('Must provide a --basePath argument upon execution');
+    return __dirname;
   }
   return gutil.env.basePath;
 }

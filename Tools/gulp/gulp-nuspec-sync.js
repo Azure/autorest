@@ -13,48 +13,18 @@ function gulpNuspecSync(opts) {
   return through.obj(function(file, enc, cb) {
     var pkgConfigPath = path.join(path.dirname(file.path), 'packages.config');
     var pkgConfigString = fs.readFileSync(pkgConfigPath).toString();
+    var pkgNuspecString = file.contents.toString();
     xml2js.parseString(pkgConfigString, function(err, pkgConfigXml) {
-      xml2js.parseString(file.contents.toString(), function(err, nuspecXml) {
+      gutil.log('Syncing .nuspec and packages.config for: ' + file.path + ' and ' + pkgConfigPath);
 
-        gutil.log('Syncing .nuspec and packages.config for: ' + file.path + ' and ' + pkgConfigPath);
-
-        var pkgVersions = {};
-        var packages = pkgConfigXml['packages']['package'];
-        packages.forEach(function(package) {
-          pkgVersions[package.$.id] = package.$.version;
-        });
-
-        nuspecXml['package']['metadata'][0]['dependencies'].forEach(function(dependencies) {
-          var updateDep = function(depend) {
-            depend.forEach(function(dep) {
-              if (dep.$.id in pkgVersions) {
-                if(pkgVersions[dep.$.id] != dep.$.version){
-                  gutil.log('Updating dependency: ' + dep.$.id + ' from: ' + pkgVersions[dep.$.id] + ' to: ' + dep.$.version)
-                  dep.$.version = pkgVersions[dep.$.id]
-                } else {
-                  gutil.log('Skipping dependency: ' + dep.$.id + ' at: ' + pkgVersions[dep.$.id]);
-                }
-              }
-            });
-          };
-
-          dependency = dependencies['dependency'];
-
-          if (dependency) {
-            updateDep(dependency);
-          } else {
-            var groupDependencies = dependencies['group'][0]['dependency'];
-            if (groupDependencies) {
-              updateDep(groupDependencies);
-            }
-          }
-        });
-
-        var builder = new xml2js.Builder();
-        var xml = builder.buildObject(nuspecXml);
-        file.contents = new Buffer(xml);
-        cb(null, file);
+      var packages = pkgConfigXml['packages']['package'];
+      packages.forEach(function(pkg) {
+        var re = new RegExp('(<dependency\\s+id="' + pkg.$.id + '"\\s+version="\\[?\\(?)((?:\\d+\\.?){1,4}[-\\w]+)((?:\\s?,[\\d\\.]+)?\\)?\\]?")');
+        pkgNuspecString = pkgNuspecString.replace(re, '$1' + pkg.$.version + '$3')
       });
+
+      file.contents = new Buffer(pkgNuspecString);
+      cb(null, file);
     });
   });
 }
