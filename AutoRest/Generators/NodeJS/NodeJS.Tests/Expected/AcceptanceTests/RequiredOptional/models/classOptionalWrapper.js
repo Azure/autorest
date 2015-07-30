@@ -21,7 +21,7 @@ ClassOptionalWrapper.prototype.validate = function (payload) {
   if (!payload) {
     throw new Error('ClassOptionalWrapper cannot be null.');
   }
-  if (payload['value'] !== null && payload['value'] !== undefined) {
+  if (payload['value']) {
     models['Product'].validate(payload['value']);
   }
 };

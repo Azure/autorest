@@ -21,21 +21,21 @@ ResourceCollection.prototype.validate = function (payload) {
   if (!payload) {
     throw new Error('ResourceCollection cannot be null.');
   }
-  if (payload['productresource'] !== null && payload['productresource'] !== undefined) {
+  if (payload['productresource']) {
     models['FlattenedProduct'].validate(payload['productresource']);
   }
 
-  if (payload['arrayofresources'] !== null && payload['arrayofresources'] !== undefined && util.isArray(payload['arrayofresources'])) {
+  if (util.isArray(payload['arrayofresources'])) {
     for (var i = 0; i < payload['arrayofresources'].length; i++) {
-      if (payload['arrayofresources'][i] !== null && payload['arrayofresources'][i] !== undefined) {
+      if (payload['arrayofresources'][i]) {
         models['FlattenedProduct'].validate(payload['arrayofresources'][i]);
       }
     }
   }
 
-  if (payload['dictionaryofresources'] !== null && payload['dictionaryofresources'] !== undefined && typeof payload['dictionaryofresources'] === 'object') {
+  if (payload['dictionaryofresources'] && typeof payload['dictionaryofresources'] === 'object') {
     for(var valueElement in payload['dictionaryofresources']) {
-      if (payload['dictionaryofresources'][valueElement] !== null && payload['dictionaryofresources'][valueElement] !== undefined) {
+      if (payload['dictionaryofresources'][valueElement]) {
         models['FlattenedProduct'].validate(payload['dictionaryofresources'][valueElement]);
       }
     }

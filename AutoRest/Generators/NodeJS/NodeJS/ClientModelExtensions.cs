@@ -114,25 +114,6 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 
             return string.Format(CultureInfo.InvariantCulture, "{0}.toString()", reference);
         }
-        
-        /// <summary>
-        /// Generate code to perform validation on a required parameter or property
-        /// </summary>
-        /// <param name="type">The type to validate</param>
-        /// <param name="scope">A scope provider for generating variable names as necessary</param>
-        /// <param name="valueReference">A reference to the value being validated</param>
-        /// <param name="modelReference">A reference to the models classes</param>
-        /// <returns>The code to validate the reference of the given type</returns>
-        public static string ValidateRequiredType(this IType type, IScopeProvider scope, string valueReference, string modelReference)
-        {
-            var builder = new IndentedStringBuilder("  ");
-            return builder.AppendLine("if ({0} === null || {0} === undefined) {{", valueReference)
-                   .Indent()
-                     .AppendLine("throw new Error('{0} cannot be null or undefined.');", valueReference.EscapeSingleQuotes())
-                   .Outdent()
-                   .AppendLine("}")
-                   .AppendLine(ValidateType(type, scope, valueReference, modelReference)).ToString();
-        }
 
         /// <summary>
         /// Returns a Javascript Array containing the values in a string enum type
@@ -167,9 +148,10 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
         /// <param name="type">The type to validate</param>
         /// <param name="scope">A scope provider for generating variable names as necessary</param>
         /// <param name="valueReference">A reference to the value being validated</param>
+        /// <param name="isRequired">True if the parameter is required.</param>
         /// <param name="modelReference">A reference to the models array</param>
         /// <returns>The code to validate the reference of the given type</returns>
-        public static string ValidateType(this IType type, IScopeProvider scope, string valueReference, string modelReference = "client._models")
+        public static string ValidateType(this IType type, IScopeProvider scope, string valueReference, bool isRequired, string modelReference = "client._models")
         {
             if (scope == null)
             {
@@ -185,13 +167,39 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             var escapedValueReference = valueReference.EscapeSingleQuotes();
             if(primary != null)
             {
-                if (primary == PrimaryType.String ||
-                    primary == PrimaryType.Boolean ||
+                if (primary == PrimaryType.Boolean ||
                     primary == PrimaryType.Double ||
                     primary == PrimaryType.Int ||
                     primary == PrimaryType.Long)
                 {
+                    if (isRequired)
+                    {
+                        return builder.AppendLine("if ({0} === null || {0} === undefined || typeof {0} !== '{1}') {{", valueReference, primary.Name.ToLower(CultureInfo.InvariantCulture))
+                            .Indent()
+                                .AppendLine("throw new Error('{0} cannot be null or undefined and it must be of type {1}.');", escapedValueReference, primary.Name.ToLower(CultureInfo.InvariantCulture))
+                            .Outdent()
+                          .AppendLine("}").ToString();
+                    }
+
                     return builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0} !== '{1}') {{", valueReference, primary.Name.ToLower(CultureInfo.InvariantCulture))
+                        .Indent()
+                            .AppendLine("throw new Error('{0} must be of type {1}.');", escapedValueReference, primary.Name.ToLower(CultureInfo.InvariantCulture))
+                        .Outdent()
+                        .AppendLine("}").ToString();
+                }
+                else if (primary == PrimaryType.String)
+                {
+                    if (isRequired)
+                    {
+                        //empty string can be a valid value hence we cannot implement the simple check if (!{0})
+                        return builder.AppendLine("if ({0} === null || {0} === undefined || typeof {0}.valueOf() !== '{1}') {{", valueReference, primary.Name.ToLower(CultureInfo.InvariantCulture))
+                           .Indent()
+                               .AppendLine("throw new Error('{0} cannot be null or undefined and it must be of type {1}.');", escapedValueReference, primary.Name.ToLower(CultureInfo.InvariantCulture))
+                           .Outdent()
+                         .AppendLine("}").ToString();
+                    }
+
+                    return builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0}.valueOf() !== '{1}') {{", valueReference, primary.Name.ToLower(CultureInfo.InvariantCulture))
                             .Indent()
                                 .AppendLine("throw new Error('{0} must be of type {1}.');", escapedValueReference, primary.Name.ToLower(CultureInfo.InvariantCulture))
                             .Outdent()
@@ -199,7 +207,16 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 }
                 else if (primary == PrimaryType.ByteArray)
                 {
-                    return builder.AppendLine("if ({0} !== null && {0} !== undefined && !Buffer.isBuffer({0})) {{", valueReference)
+                    if (isRequired)
+                    {
+                        return builder.AppendLine("if (!Buffer.isBuffer({0})) {{", valueReference)
+                            .Indent()
+                                .AppendLine("throw new Error('{0} cannot be null or undefined and it must be of type {1}.');", escapedValueReference, primary.Name.ToLower(CultureInfo.InvariantCulture))
+                            .Outdent()
+                          .AppendLine("}").ToString();
+                    }
+
+                    return builder.AppendLine("if ({0} && !Buffer.isBuffer({0})) {{", valueReference)
                             .Indent()
                                 .AppendLine("throw new Error('{0} must be of type {1}.');", escapedValueReference, primary.Name.ToLower(CultureInfo.InvariantCulture))
                             .Outdent()
@@ -207,7 +224,19 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 }
                 else if (primary == PrimaryType.DateTime || primary == PrimaryType.Date)
                 {
-                    return builder.AppendLine("if ({0} !== null && {0} !== undefined && ", valueReference)
+                    if (isRequired)
+                    {
+                        return builder.AppendLine("if(!{0} || !({0} instanceof Date || ", valueReference)
+                            .Indent()
+                                .AppendLine("(typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{", valueReference)
+                           .Outdent()
+                           .Outdent()
+                       .AppendLine("throw new Error('{0} cannot be null or undefined and it must be of type {1}.');", escapedValueReference, primary.Name.ToLower(CultureInfo.InvariantCulture))
+                           .Outdent()
+                           .AppendLine("}").ToString();
+                    }
+
+                    return builder.AppendLine("if ({0} && ", valueReference)
                     .Indent()
                     .Indent()
                         .AppendLine("!({0} instanceof Date || ", valueReference)
@@ -221,6 +250,15 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 }
                 else if (primary == PrimaryType.Object)
                 {
+                    if (isRequired)
+                    {
+                        return builder.AppendLine("if ({0} !== null || {0} !== undefined) {", valueReference)
+                            .Indent()
+                               .AppendLine("throw new Error('{0} cannot be null or undefined.');")
+                               .Outdent()
+                            .AppendLine("}").ToString();
+                    }
+
                     return builder.ToString();
                 }
                 else
@@ -231,7 +269,8 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             }
             else if (enumType != null && enumType.Values.Any()) {
                 var allowedValues = scope.GetVariableName("allowedValues");
-                return builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
+
+                builder.AppendLine("if ({0}) {{", valueReference)
                            .Indent()
                                 .AppendLine("var {0} = {1};", allowedValues, enumType.GetEnumValuesArray())
                                 .AppendLine("if (!{0}.some( function(item) {{ return item === {1}; }})) {{", allowedValues, valueReference)
@@ -240,11 +279,21 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                                 .Outdent()
                                 .AppendLine("}")
                            .Outdent()
-                           .AppendLine("}").ToString();
+                           .AppendLine("}");
+                if (isRequired)
+                {
+                    builder.Append(" else {")
+                        .Indent()
+                          .AppendLine("throw new Error('{0} cannot be null or undefined.');", valueReference)
+                        .Outdent()
+                      .AppendLine("}");
+                }
+
+                return builder.ToString();
             }
             else if (composite != null && composite.Properties.Any())
             {
-                builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference).Indent();
+                builder.AppendLine("if ({0}) {{", valueReference).Indent();
 
                 if (!string.IsNullOrEmpty(composite.PolymorphicDiscriminator))
                 {
@@ -270,15 +319,39 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 }
                 builder.Outdent().AppendLine("}");
 
+                if (isRequired)
+                {
+                    builder.Append(" else {")
+                        .Indent()
+                          .AppendLine("throw new Error('{0} cannot be null or undefined.');", escapedValueReference)
+                        .Outdent()
+                      .AppendLine("}");
+                }
                 return builder.ToString();
             }
             else if (sequence != null)
             {
                 var indexVar = scope.GetVariableName("i");
-                var innerValidation = sequence.ElementType.ValidateType(scope, valueReference + "["+indexVar+"]", modelReference);
+                var innerValidation = sequence.ElementType.ValidateType(scope, valueReference + "["+indexVar+"]", false, modelReference);
                 if (!string.IsNullOrEmpty(innerValidation))
                 {
-                    return builder.AppendLine("if ({0} !== null && {0} !== undefined && util.isArray({0})) {{", valueReference)
+                    if (isRequired)
+                    {
+                        return builder.AppendLine("if (!util.isArray({0})) {{", valueReference)
+                            .Indent()
+                              .AppendLine("throw new Error('{0} cannot be null or undefined and it must be of type {1}.');",
+                              escapedValueReference, sequence.Name.ToLower(CultureInfo.InvariantCulture))
+                            .Outdent()
+                          .AppendLine("}")
+                          .AppendLine("\n")
+                          .AppendLine("for (var {1} = 0; {1} < {0}.length; {1}++) {{", valueReference, indexVar)
+                                .Indent()
+                                  .AppendLine(innerValidation)
+                                .Outdent()
+                              .AppendLine("}").ToString();
+                    }
+
+                    return builder.AppendLine("if (util.isArray({0})) {{", valueReference)
                             .Indent()
                               .AppendLine("for (var {1} = 0; {1} < {0}.length; {1}++) {{", valueReference, indexVar)
                                 .Indent()
@@ -293,10 +366,25 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             {
                 var valueVar = scope.GetVariableName("valueElement");
                 var innerValidation = dictionary.ValueType.ValidateType(scope, 
-                    valueReference + "[" + valueVar + "]", modelReference);
+                    valueReference + "[" + valueVar + "]", false, modelReference);
                 if (!string.IsNullOrEmpty(innerValidation))
                 {
-                    return builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0} === 'object') {{", valueReference)
+                    if (isRequired)
+                    {
+                        return builder.AppendLine("if ({0} === null || {0} === undefined || typeof {0} !== 'object') {{", valueReference)
+                            .Indent()
+                              .AppendLine("throw new Error('{0} cannot be null or undefined and it must be of type {1}.');",
+                                escapedValueReference, dictionary.Name.ToLower(CultureInfo.InvariantCulture))
+                            .Outdent()
+                          .AppendLine("}")
+                          .AppendLine("\n")
+                          .AppendLine("for(var {0} in {1}) {{", valueVar, valueReference)
+                            .Indent()
+                              .AppendLine(innerValidation)
+                            .Outdent()
+                          .AppendLine("}").ToString();
+                    }
+                    return builder.AppendLine("if ({0} && typeof {0} === 'object') {{", valueReference)
                             .Indent()
                               .AppendLine("for(var {0} in {1}) {{", valueVar, valueReference)
                                 .Indent()
@@ -307,7 +395,6 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                           .AppendLine("}").ToString();
                 }
             }
-
             return null;
         }
 

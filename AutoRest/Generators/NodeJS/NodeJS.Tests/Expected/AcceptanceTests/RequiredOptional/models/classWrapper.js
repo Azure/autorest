@@ -21,11 +21,10 @@ ClassWrapper.prototype.validate = function (payload) {
   if (!payload) {
     throw new Error('ClassWrapper cannot be null.');
   }
-  if (payload['value'] === null || payload['value'] === undefined) {
-    throw new Error('payload[\'value\'] cannot be null or undefined.');
-  }
-  if (payload['value'] !== null && payload['value'] !== undefined) {
+  if (payload['value']) {
     models['Product'].validate(payload['value']);
+  }
+   else {  throw new Error('payload[\'value\'] cannot be null or undefined.');
   }
 };
 

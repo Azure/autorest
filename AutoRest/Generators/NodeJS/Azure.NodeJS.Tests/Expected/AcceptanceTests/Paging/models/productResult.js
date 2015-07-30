@@ -21,15 +21,15 @@ ProductResult.prototype.validate = function (payload) {
   if (!payload) {
     throw new Error('ProductResult cannot be null.');
   }
-  if (payload['values'] !== null && payload['values'] !== undefined && util.isArray(payload['values'])) {
+  if (util.isArray(payload['values'])) {
     for (var i = 0; i < payload['values'].length; i++) {
-      if (payload['values'][i] !== null && payload['values'][i] !== undefined) {
+      if (payload['values'][i]) {
         models['Product'].validate(payload['values'][i]);
       }
     }
   }
 
-  if (payload['nextLink'] !== null && payload['nextLink'] !== undefined && typeof payload['nextLink'] !== 'string') {
+  if (payload['nextLink'] !== null && payload['nextLink'] !== undefined && typeof payload['nextLink'].valueOf() !== 'string') {
     throw new Error('payload[\'nextLink\'] must be of type string.');
   }
 };
@@ -52,7 +52,6 @@ ProductResult.prototype.deserialize = function (instance) {
       });
       instance.values = deserializedArray;
     }
-
   }
   return instance;
 };

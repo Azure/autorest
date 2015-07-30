@@ -21,9 +21,9 @@ DictionaryWrapper.prototype.validate = function (payload) {
   if (!payload) {
     throw new Error('DictionaryWrapper cannot be null.');
   }
-  if (payload['defaultProgram'] !== null && payload['defaultProgram'] !== undefined && typeof payload['defaultProgram'] === 'object') {
+  if (payload['defaultProgram'] && typeof payload['defaultProgram'] === 'object') {
     for(var valueElement in payload['defaultProgram']) {
-      if (payload['defaultProgram'][valueElement] !== null && payload['defaultProgram'][valueElement] !== undefined && typeof payload['defaultProgram'][valueElement] !== 'string') {
+      if (payload['defaultProgram'][valueElement] !== null && payload['defaultProgram'][valueElement] !== undefined && typeof payload['defaultProgram'][valueElement].valueOf() !== 'string') {
         throw new Error('payload[\'defaultProgram\'][valueElement] must be of type string.');
       }
     }

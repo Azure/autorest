@@ -1432,7 +1432,7 @@ describe('nodejs', function () {
       it('should work when path has enum', function (done) {
         testClient.paths.enumValid('', function (error, result) {
           should.exist(error);
-          error.message.should.match(/.*is not a valid value.*/ig);
+          error.message.should.match(/.*cannot be null or undefined.*/ig);
           testClient.paths.enumNull(null, function (error, result) {
             should.exist(error);
             testClient.paths.enumValid('green color', function (error, result) {
@@ -1598,7 +1598,6 @@ describe('nodejs', function () {
       it('should work when query has enum values', function (done) {
         testClient.queries.enumValid('', function (error, result) {
           should.exist(error);
-          error.message.should.match(/.*is not a valid value.*/ig);
           testClient.queries.enumNull(null, function (error, result) {
             should.not.exist(error);
             testClient.queries.enumValid('green color', function (error, result) {

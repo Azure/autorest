@@ -21,19 +21,19 @@ FlattenedProductProperties.prototype.validate = function (payload) {
   if (!payload) {
     throw new Error('FlattenedProductProperties cannot be null.');
   }
-  if (payload['pname'] !== null && payload['pname'] !== undefined && typeof payload['pname'] !== 'string') {
+  if (payload['pname'] !== null && payload['pname'] !== undefined && typeof payload['pname'].valueOf() !== 'string') {
     throw new Error('payload[\'pname\'] must be of type string.');
   }
 
-  if (payload['type'] !== null && payload['type'] !== undefined && typeof payload['type'] !== 'string') {
+  if (payload['type'] !== null && payload['type'] !== undefined && typeof payload['type'].valueOf() !== 'string') {
     throw new Error('payload[\'type\'] must be of type string.');
   }
 
-  if (payload['provisioningStateValues'] !== null && payload['provisioningStateValues'] !== undefined && typeof payload['provisioningStateValues'] !== 'string') {
+  if (payload['provisioningStateValues'] !== null && payload['provisioningStateValues'] !== undefined && typeof payload['provisioningStateValues'].valueOf() !== 'string') {
     throw new Error('payload[\'provisioningStateValues\'] must be of type string.');
   }
 
-  if (payload['provisioningState'] !== null && payload['provisioningState'] !== undefined && typeof payload['provisioningState'] !== 'string') {
+  if (payload['provisioningState'] !== null && payload['provisioningState'] !== undefined && typeof payload['provisioningState'].valueOf() !== 'string') {
     throw new Error('payload[\'provisioningState\'] must be of type string.');
   }
 };

@@ -21,11 +21,11 @@ SampleResourceGroup.prototype.validate = function (payload) {
   if (!payload) {
     throw new Error('SampleResourceGroup cannot be null.');
   }
-  if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'] !== 'string') {
+  if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'].valueOf() !== 'string') {
     throw new Error('payload[\'name\'] must be of type string.');
   }
 
-  if (payload['location'] !== null && payload['location'] !== undefined && typeof payload['location'] !== 'string') {
+  if (payload['location'] !== null && payload['location'] !== undefined && typeof payload['location'].valueOf() !== 'string') {
     throw new Error('payload[\'location\'] must be of type string.');
   }
 };

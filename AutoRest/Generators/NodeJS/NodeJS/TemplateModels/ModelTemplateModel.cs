@@ -88,14 +88,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             var propertyName = string.Format(CultureInfo.InvariantCulture, 
                 "{0}['{1}']", objectName, property.Name);
 
-            if (property.IsRequired)
-            {
-                return property.Type.ValidateRequiredType(_scope, propertyName, "models");
-            }
-            else
-            {
-                return property.Type.ValidateType(_scope, propertyName, "models");
-            }
+            return property.Type.ValidateType(_scope, propertyName, property.IsRequired, "models");
         }
 
         /// <summary>

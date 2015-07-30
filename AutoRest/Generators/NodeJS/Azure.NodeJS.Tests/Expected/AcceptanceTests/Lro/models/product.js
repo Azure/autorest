@@ -21,31 +21,31 @@ Product.prototype.validate = function (payload) {
   if (!payload) {
     throw new Error('Product cannot be null.');
   }
-  if (payload['id'] !== null && payload['id'] !== undefined && typeof payload['id'] !== 'string') {
+  if (payload['id'] !== null && payload['id'] !== undefined && typeof payload['id'].valueOf() !== 'string') {
     throw new Error('payload[\'id\'] must be of type string.');
   }
 
-  if (payload['type'] !== null && payload['type'] !== undefined && typeof payload['type'] !== 'string') {
+  if (payload['type'] !== null && payload['type'] !== undefined && typeof payload['type'].valueOf() !== 'string') {
     throw new Error('payload[\'type\'] must be of type string.');
   }
 
-  if (payload['tags'] !== null && payload['tags'] !== undefined && typeof payload['tags'] === 'object') {
+  if (payload['tags'] && typeof payload['tags'] === 'object') {
     for(var valueElement in payload['tags']) {
-      if (payload['tags'][valueElement] !== null && payload['tags'][valueElement] !== undefined && typeof payload['tags'][valueElement] !== 'string') {
+      if (payload['tags'][valueElement] !== null && payload['tags'][valueElement] !== undefined && typeof payload['tags'][valueElement].valueOf() !== 'string') {
         throw new Error('payload[\'tags\'][valueElement] must be of type string.');
       }
     }
   }
 
-  if (payload['location'] !== null && payload['location'] !== undefined && typeof payload['location'] !== 'string') {
+  if (payload['location'] !== null && payload['location'] !== undefined && typeof payload['location'].valueOf() !== 'string') {
     throw new Error('payload[\'location\'] must be of type string.');
   }
 
-  if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'] !== 'string') {
+  if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'].valueOf() !== 'string') {
     throw new Error('payload[\'name\'] must be of type string.');
   }
 
-  if (payload['properties'] !== null && payload['properties'] !== undefined) {
+  if (payload['properties']) {
     models['ProductProperties'].validate(payload['properties']);
   }
 };
@@ -58,11 +58,6 @@ Product.prototype.validate = function (payload) {
  */
 Product.prototype.deserialize = function (instance) {
   if (instance) {
-
-
-
-
-
     if (instance.properties !== null && instance.properties !== undefined) {
       instance.properties = models['ProductProperties'].deserialize(instance.properties);
     }

@@ -25,11 +25,11 @@ Dog.prototype.validate = function (payload) {
     throw new Error('payload[\'id\'] must be of type number.');
   }
 
-  if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'] !== 'string') {
+  if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'].valueOf() !== 'string') {
     throw new Error('payload[\'name\'] must be of type string.');
   }
 
-  if (payload['food'] !== null && payload['food'] !== undefined && typeof payload['food'] !== 'string') {
+  if (payload['food'] !== null && payload['food'] !== undefined && typeof payload['food'].valueOf() !== 'string') {
     throw new Error('payload[\'food\'] must be of type string.');
   }
 };

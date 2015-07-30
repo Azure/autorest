@@ -12,7 +12,7 @@
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <summary>Provides Log4Net logging for AutoRest generated client libraries.</summary>
     <description>Enables logging of event messages for AutoRest generated client libraries via Log4Net.</description>
-    <copyright>Copyright © Microsoft Corporation</copyright>
+    <copyright>Copyright (c) Microsoft Corporation</copyright>
     <tags>Microsoft AutoRest ClientRuntime Log4Net</tags>
     <references>
       <group targetFramework="net40">

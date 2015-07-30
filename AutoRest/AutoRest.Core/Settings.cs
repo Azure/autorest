@@ -96,6 +96,8 @@ Licensed under the MIT License. See License.txt in the project root for license 
         [SettingsInfo("The Modeler to use on the input. If not specified, defaults to Swagger.")]
         public string Modeler { get; set; }
 
+        #endregion
+
         /// <summary>
         /// Gets or sets a name of the generated client type. If not specified, will use 
         /// a value from the specification. For Swagger specifications, 
@@ -103,10 +105,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// </summary>
         [SettingsInfo("Name to use for the generated client type. By default, uses " +
                       "the value of the 'Title' field from the Swagger input.")]
-
-        #endregion
-
-            public string ClientName { get; set; }
+        public string ClientName { get; set; }
 
         /// <summary>
         /// Gets or sets a comment header to include in each generated file.
@@ -144,6 +143,13 @@ Licensed under the MIT License. See License.txt in the project root for license 
             "If true, the generated client includes a ServiceClientCredentials property and constructor parameter. " +
             "Authentication behaviors are implemented by extending the ServiceClientCredentials type.")]
         public bool AddCredentials { get; set; }
+
+        /// <summary>
+        /// If set to true, generate client with a ServiceClientCredentials property and optional constructor parameter. 
+        /// </summary>
+        [SettingsInfo(
+            "If set to a file name all the code will be generated to a single file. Otherwise generated cod")]
+        public string OutputFileName { get; set; }
 
         /// <summary>
         /// Factory method to generate CodeGenerationSettings from command line arguments.

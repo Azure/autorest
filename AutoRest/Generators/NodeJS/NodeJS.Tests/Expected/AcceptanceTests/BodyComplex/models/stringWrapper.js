@@ -21,15 +21,15 @@ StringWrapper.prototype.validate = function (payload) {
   if (!payload) {
     throw new Error('StringWrapper cannot be null.');
   }
-  if (payload['field'] !== null && payload['field'] !== undefined && typeof payload['field'] !== 'string') {
+  if (payload['field'] !== null && payload['field'] !== undefined && typeof payload['field'].valueOf() !== 'string') {
     throw new Error('payload[\'field\'] must be of type string.');
   }
 
-  if (payload['empty'] !== null && payload['empty'] !== undefined && typeof payload['empty'] !== 'string') {
+  if (payload['empty'] !== null && payload['empty'] !== undefined && typeof payload['empty'].valueOf() !== 'string') {
     throw new Error('payload[\'empty\'] must be of type string.');
   }
 
-  if (payload['null'] !== null && payload['null'] !== undefined && typeof payload['null'] !== 'string') {
+  if (payload['null'] !== null && payload['null'] !== undefined && typeof payload['null'].valueOf() !== 'string') {
     throw new Error('payload[\'null\'] must be of type string.');
   }
 };

@@ -12,7 +12,7 @@
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <summary>AutoRest code generation of REST API client libraries.</summary>
     <description>The AutoRest tool generates client libraries for accessing REST APIs that are described using the Swagger format.</description>
-    <copyright>Copyright © Microsoft Corporation</copyright>
+    <copyright>Copyright (c) Microsoft Corporation</copyright>
     <tags>Microsoft AutoRest</tags>
   </metadata>
   <files>
