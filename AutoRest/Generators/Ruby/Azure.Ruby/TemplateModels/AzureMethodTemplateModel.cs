@@ -205,7 +205,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             {
                 return new List<string>()
                 {
-                    string.Format("MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02, credentials: {0}.{1}", ClientReference, "credentials"),
+                    "MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02",
                     string.Format("MsRestAzure::TokenRefreshMiddleware, credentials: {0}.{1}", ClientReference, "credentials"),
                     ":cookie_jar"
                 };

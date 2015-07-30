@@ -153,14 +153,6 @@ namespace Microsoft.Rest.Generator.Ruby
         /// <summary>
         /// Generate a reference to the ServiceClient
         /// </summary>
-        public string MakeRequestMethodReference
-        {
-            get { return Group == null ? "make_http_request" : "@client.make_http_request"; }
-        }
-
-        /// <summary>
-        /// Generate a reference to the ServiceClient
-        /// </summary>
         public string ClientReference
         {
             get { return Group == null ? "self" : "@client"; }
@@ -272,7 +264,7 @@ namespace Microsoft.Rest.Generator.Ruby
             {
                 return new List<string>()
                 {
-                    string.Format("MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02, credentials: {0}.{1}", ClientReference, "credentials"),
+                    "MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02",
                     ":cookie_jar"
                 };
             }

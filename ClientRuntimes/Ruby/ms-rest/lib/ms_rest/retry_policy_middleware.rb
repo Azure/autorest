@@ -10,11 +10,10 @@ module MsRest
     # Initializes a new instance of the RetryPolicyMiddleware class.
     #
     def initialize(app, options = nil)
-      fail ArgumentError, 'options can\'t be nil' if options.nil?
-      fail ArgumentError, 'options must contain credentials object' if options[:credentials].nil?
-      @times = options[:times] || 5
-      @delay = options[:delay] || 0.01
-      @credentials = options[:credentials]
+      unless options.nil?
+        @times = options[:times] || 5
+        @delay = options[:delay] || 0.01
+      end
 
       super(app)
     end
@@ -26,7 +25,6 @@ module MsRest
       request_body = request_env[:body]
 
       begin
-        # @credentials.sign_request(request_env)
         request_env[:body] = request_body
 
         @app.call(request_env).on_complete do |response_env|

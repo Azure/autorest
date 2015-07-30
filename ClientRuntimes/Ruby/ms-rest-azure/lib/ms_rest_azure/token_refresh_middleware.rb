@@ -52,12 +52,6 @@ module MsRestAzure
         @credentials.sign_request(request_env)
         retry
       end
-      # @app.call(request_env).on_complete do |response_env|
-      #   if (is_token_expired_response(response_env))
-      #     @credentials.acquire_token()
-      #     @credentials.sign_request(request_env)
-      #   end
-      # end
     end
   end
 end
