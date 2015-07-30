@@ -19,6 +19,10 @@ Install the [Microsoft Build Tools](http://go.microsoft.com/?linkid=9832060) or 
 Ensure that msbuild is in your path by running vcvarsall.bat
 >C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat
 
+If you are using Visual Studio 2013, 
+- Ensure "Nuget Package Manager For Visual Studio" is updated to the latest, which is needed to install xunit. 
+- Install [Task Runner Explorer](https://visualstudiogallery.msdn.microsoft.com/8e1b4368-4afb-467a-bc13-9650572db708) to run gulp tasks such as synchonize nuget version, assembly info, etc.
+
 ### Mono
 Install Mono 4.3.0 (MonoFramework-MDK-4.3.0.372.macos10.xamarin.x86.pkg)
 

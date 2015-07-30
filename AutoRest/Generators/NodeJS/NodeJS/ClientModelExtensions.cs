@@ -269,7 +269,6 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             return builder.ToString();
         }
 
-
         private static string ValidateCompositeType(this CompositeType composite, IScopeProvider scope, string valueReference, bool isRequired, string modelReference = "client._models")
         {
             if (scope == null)
