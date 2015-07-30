@@ -77,7 +77,6 @@
   <PropertyGroup>
     <NuGetCommand Condition=" '$(OS)' == 'Windows_NT'">&quot;$(LibraryToolsFolder)\nuget.exe&quot;</NuGetCommand>
     <NuGetCommand Condition=" '$(OS)' != 'Windows_NT'">mono &quot;$(LibraryToolsFolder)\nuget.exe&quot;</NuGetCommand>
-    <NuGetSources>https://www.myget.org/F/xunit;https://www.nuget.org/api/v2/</NuGetSources>
    </PropertyGroup>
 
   <UsingTask AssemblyFile="tools\AutoRest.Build.Tasks.dll" TaskName="ValidateStrongNameSignatureTask" />
@@ -186,7 +185,7 @@
     </PropertyGroup>
 
     <!--install autorest and client runtime packages-->
-    <Exec Command="$(NuGetCommand) restore $(TestProjectDir)\NugetPackageTest.sln -source &quot;$(PackageOutputDir);$(NuGetSources)&quot;"/>
+    <Exec Command="$(NuGetCommand) restore $(TestProjectDir)\NugetPackageTest.sln -source &quot;$(PackageOutputDir)&quot;"/>
     <ItemGroup>
       <AutoRestExeFiles Include="$(TestProjectDir)\packages\autorest.*\tools\AutoRest.exe" />
     </ItemGroup>
@@ -195,6 +194,7 @@
       <AutoRestExe Condition=" '$(OS)' != 'Windows_NT'">mono @(AutoRestExeFiles->'%(FullPath)')</AutoRestExe>
     </PropertyGroup>
 
+    <RemoveDir Directories="$(TestProjectDir)\Generated\" />
     <!--Invoke code-gen-->
     <Exec WorkingDirectory="$(TestProjectDir)" Command="$(AutoRestExe) -Modeler Swagger -CodeGenerator CSharp -OutputDirectory $(TestProjectDir)\Generated\CSharp -Namespace &quot;Fixtures.Bodynumber&quot; -Input &quot;$(LibraryRoot)\AutoRest\Generators\AcceptanceTests\swagger\body-number.json&quot; -Header NONE"/>
     <Exec WorkingDirectory="$(TestProjectDir)" Command="$(AutoRestExe) -Modeler Swagger -CodeGenerator NodeJS -OutputDirectory $(TestProjectDir)\Generated\NodeJS -Input &quot;$(LibraryRoot)\AutoRest\Generators\AcceptanceTests\swagger\body-number.json&quot; -Header NONE"/>
@@ -279,8 +279,8 @@
   </Target>
 
   <Target Name="RestoreNugetPackages">
-    <Exec Command="$(NuGetCommand) restore $(ClientRuntimeSolution) -source &quot;$(NuGetSources)&quot;" ContinueOnError="false" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />
-    <Exec Command="$(NuGetCommand) restore $(CodeGeneratorSolution) -source &quot;$(NuGetSources)&quot;" ContinueOnError="false" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
+    <Exec Command="$(NuGetCommand) restore $(ClientRuntimeSolution)" ContinueOnError="false" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />
+    <Exec Command="$(NuGetCommand) restore $(CodeGeneratorSolution)" ContinueOnError="false" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
   </Target>
 
   <!-- Official releases require tools only available on corp network. -->

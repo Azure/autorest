@@ -164,4 +164,6 @@ Thumbs.db
 *dll.mdb
 *exe.mdb
 
+#old nuget restore folder
+.nuget/
 AutoRest/Generators/Ruby/*Tests/Gemfile.lock

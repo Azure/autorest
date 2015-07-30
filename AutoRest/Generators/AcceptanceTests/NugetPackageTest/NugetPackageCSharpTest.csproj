@@ -35,7 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Rest.ClientRuntime">
-      <HintPath>packages\Microsoft.Rest.ClientRuntime.1.0.2\lib\net45\Microsoft.Rest.ClientRuntime.dll</HintPath>
+      <HintPath>packages\Microsoft.Rest.ClientRuntime.1.2.0\lib\net45\Microsoft.Rest.ClientRuntime.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -54,13 +54,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include=".\Generated\CSharp\**\*.cs"></Compile>
     <Compile Include="..\..\CSharp\CSharp.Tests\Utilities\ProcessOutputListener.cs">
       <Link>ProcessOutputListener.cs</Link>
     </Compile>
     <Compile Include="..\..\CSharp\CSharp.Tests\Utilities\ServiceController.cs">
       <Link>ServiceController.cs</Link>
     </Compile>
-    <Compile Include="Generated\CSharp\**\*.cs" />
     <Compile Include="PackageTests.cs" />
   </ItemGroup>
   <ItemGroup>
