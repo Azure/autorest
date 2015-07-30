@@ -74,10 +74,6 @@ namespace Microsoft.Rest.Generator.Utilities
             {
                 VirtualStore.Remove(path);
             }
-            else
-            {
-                throw new IOException("File not found: " + path);
-            }
         }
 
         public void DeleteDirectory(string directory)
