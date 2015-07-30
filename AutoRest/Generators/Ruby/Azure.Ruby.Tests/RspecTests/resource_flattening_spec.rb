@@ -9,7 +9,7 @@ describe 'ResourceFlattening' do
     @base_url = ENV['StubServerURI']
 
     dummyToken = 'dummy12321343423'
-	@credentials = MsRest::TokenCredentials.new(dummyToken)
+    @credentials = MsRest::TokenCredentials.new(dummyToken)
 
     @client = AutoRestResourceFlatteningTestService.new(@credentials, @base_url)
 

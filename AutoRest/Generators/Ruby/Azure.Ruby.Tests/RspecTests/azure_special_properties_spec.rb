@@ -11,12 +11,12 @@ describe 'Azure Special properties behaviour' do
     @unencodedPath = "path1/path2/path3"
     @unencodedQuery = "value1&q2=value2&q3=value3"
 
-	dummyToken = 'dummy12321343423'
-	@credentials = MsRest::TokenCredentials.new(dummyToken)
+    dummyToken = 'dummy12321343423'
+    @credentials = MsRest::TokenCredentials.new(dummyToken)
     @validClientId = "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0"
 
     @client = AutoRestAzureSpecialParametersTestClient.new(@credentials, @base_url)
-	@client.subscription_id = @validSubscription
+    @client.subscription_id = @validSubscription
   end
 
   # Subscription Tests
