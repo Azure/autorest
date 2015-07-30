@@ -10,6 +10,9 @@ using Microsoft.Rest.Generator.Utilities;
 
 namespace Microsoft.Rest.Generator.Ruby
 {
+    /// <summary>
+    /// The model object for regular Ruby methods.
+    /// </summary>
     public class MethodTemplateModel : Method
     {
         private readonly IScopeProvider scopeProvider = new ScopeProvider();
@@ -258,6 +261,21 @@ namespace Microsoft.Rest.Generator.Ruby
             //builder.AppendLine("{0} = {0}.replace(regex, '$1');", urlVariableName);
 
             return builder.ToString();
+        }
+
+        /// <summary>
+        /// Gets the list of middelwares required for HTTP requests.
+        /// </summary>
+        public virtual List<string> FaradeyMiddlewares
+        {
+            get
+            {
+                return new List<string>()
+                {
+                    string.Format("MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02, credentials: {0}.{1}", ClientReference, "credentials"),
+                    ":cookie_jar"
+                };
+            }
         }
 
         /// <summary>

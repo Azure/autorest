@@ -15,7 +15,6 @@ require 'ms_rest/serialization.rb'
 require 'ms_rest/http_operation_response'
 require 'ms_rest/http_operation_exception'
 require 'ms_rest/retry_policy_middleware'
-require 'ms_rest/token_refresh_middleware'
 require 'ms_rest/service_client'
 
 module MsRest; end

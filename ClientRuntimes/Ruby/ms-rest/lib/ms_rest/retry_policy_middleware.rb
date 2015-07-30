@@ -26,13 +26,13 @@ module MsRest
       request_body = request_env[:body]
 
       begin
-        @credentials.sign_request(request_env)
+        # @credentials.sign_request(request_env)
         request_env[:body] = request_body
 
         @app.call(request_env).on_complete do |response_env|
           status_code = response_env.status
 
-          if @times > 0 && (status_code == 408 || status_code == 401 || (status_code >= 500 && status_code != 501 && status_code != 505))
+          if @times > 0 && (status_code == 408 || (status_code >= 500 && status_code != 501 && status_code != 505))
             sleep @delay
             fail
           end

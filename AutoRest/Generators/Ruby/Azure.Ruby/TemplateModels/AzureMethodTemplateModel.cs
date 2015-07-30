@@ -13,6 +13,9 @@ using Microsoft.Rest.Generator.Utilities;
 
 namespace Microsoft.Rest.Generator.Azure.Ruby
 {
+    /// <summary>
+    /// The model object for Azure methods.
+    /// </summary>
     public class AzureMethodTemplateModel : MethodTemplateModel
     {
         /// <summary>
@@ -190,6 +193,22 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             get
             {
                 return "MsRestAzure::AzureOperationResponse";
+            }
+        }
+
+        /// <summary>
+        /// Gets the list of middelwares required for HTTP requests.
+        /// </summary>
+        public override List<string> FaradeyMiddlewares
+        {
+            get
+            {
+                return new List<string>()
+                {
+                    string.Format("MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02, credentials: {0}.{1}", ClientReference, "credentials"),
+                    string.Format("MsRestAzure::TokenRefreshMiddleware, credentials: {0}.{1}", ClientReference, "credentials"),
+                    ":cookie_jar"
+                };
             }
         }
 

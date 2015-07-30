@@ -1,7 +1,7 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See License.txt in the project root for license information.
 
-module MsRest
+module MsRestAzure
   #
   # Class which handles token renewal.
   #
@@ -40,12 +40,24 @@ module MsRest
     # Performs request and response processing.
     #
     def call(request_env)
-      @app.call(request_env).on_complete do |response_env|
-        if (is_token_expired_response(response_env))
-          @credentials.acquire_token()
-          @credentials.sign_request(request_env)
+      request_body = request_env[:body]
+
+      begin
+        request_env[:body] = request_body
+        @app.call(request_env).on_complete do |response_env|
+          fail if is_token_expired_response(response_env)
         end
+      rescue Exception => e
+        @credentials.acquire_token()
+        @credentials.sign_request(request_env)
+        retry
       end
+      # @app.call(request_env).on_complete do |response_env|
+      #   if (is_token_expired_response(response_env))
+      #     @credentials.acquire_token()
+      #     @credentials.sign_request(request_env)
+      #   end
+      # end
     end
   end
 end

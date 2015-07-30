@@ -166,7 +166,7 @@ module MsRestAzure
     # @param custom_headers [Hash] custom headers to apply to HTTP request.
     # @param custom_deserialization_block [Proc] custom deserialization method for parsing response.
     def update_state_from_location_header_on_put(polling_state, custom_headers, custom_deserialization_block)
-      result = get_async_common(polling_state.location_header_link, custom_headers, custom_deserialization_block).value!
+      result = get_async_with_custom_deserialization(polling_state.location_header_link, custom_headers, custom_deserialization_block).value!
 
       polling_state.update_response(result.response)
       polling_state.request = result.response
@@ -196,7 +196,7 @@ module MsRestAzure
     # @param polling_state [MsRestAzure::PollingState] polling state.
     # @param custom_headers [Hash] custom headers to apply to HTTP request.
     def update_state_from_azure_async_operation_header(polling_state, custom_headers)
-      result = get_async(polling_state.azure_async_operation_header_link, custom_headers).value!
+      result = get_async_with_async_operation_deserialization(polling_state.azure_async_operation_header_link, custom_headers).value!
 
       # TODO elaborate error
       fail CloudError if (result.body.nil? || result.body.status.nil?)
@@ -215,7 +215,7 @@ module MsRestAzure
     # @param custom_headers [Hash] custom headers to apply to HTTP requests.
     # @param custom_deserialization_block [Proc] custom deserialization method for parsing response.
     def update_state_from_location_header_on_post_or_delete(polling_state, custom_headers, custom_deserialization_block)
-      result = get_async_common(polling_state.location_header_link, custom_headers, custom_deserialization_block).value!
+      result = get_async_with_custom_deserialization(polling_state.location_header_link, custom_headers, custom_deserialization_block).value!
 
       polling_state.update_response(result.response)
       # TODO: adding response instead of request since Faraday doesn't provide request object.
@@ -235,55 +235,19 @@ module MsRestAzure
     # Retrives data by given URL.
     # @param operation_url [String] the URL.
     # @param custom_headers [String] headers to apply to the HTTP request.
+    # @param custom_deserialization_block [Proc] function to perform deserialization of the HTTP response.
     #
-    # @return [MsRestAzure::AsyncOperationStatus] Deserialized response wrapped by AsyncOperationStatus.
-    def get_async(operation_url, custom_headers)
-      fail CloudError if operation_url.nil?
+    # @return [MsRest::HttpOperationResponse] the response.
+    def get_async_with_custom_deserialization(operation_url, custom_headers, custom_deserialization_block)
+      promise = get_async_common(operation_url, custom_headers)
 
-      # TODO: add url encoding.
-      url = URI(operation_url)
-
-      fail URI::Error unless url.to_s =~ /\A#{URI::regexp}\z/
-
-      # Create HTTP transport object
-      connection = Faraday.new(:url => url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02, credentials: @credentials
-        faraday.use MsRest::TokenRefreshMiddleware, credentials: @credentials
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-      end
-
-      request_headers = Hash.new
-      request_headers['x-ms-client-request-id'] = SecureRandom.uuid
-      request_headers['Content-Type'] = 'application/json'
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
-
-      # Send Request
-      promise = Concurrent::Promise.new do
-        connection.get do |request|
-          request.headers = request_headers
-        end
-      end
-
-      promise = promise.then do |http_response|
-        status_code = http_response.status
-
-        if (status_code != 200 && status_code != 201 && status_code != 202 && status_code != 204)
-          fail CloudError
-        end
-
-        result = MsRest::HttpOperationResponse.new(http_response, http_response, http_response.body)
-
-        begin
-          parsed_response = JSON.load(http_response.body) unless http_response.body.to_s.empty?
-          result.body = AsyncOperationStatus.deserialize_object(parsed_response)
-        rescue Exception => e
-          fail MsRest::DeserializationError.new("Error occured in deserializing the response", e.message, e.backtrace, http_response.body)
+      promise = promise.then do |result|
+        if (!result.body.nil? && !custom_deserialization_block.nil?)
+          begin
+            result.body = custom_deserialization_block.call(result.body)
+          rescue Exception => e
+            fail MsRest::DeserializationError.new("Error occured in deserializing the response", e.message, e.backtrace, http_response.body)
+          end
         end
 
         result
@@ -296,10 +260,26 @@ module MsRestAzure
     # Retrives data by given URL.
     # @param operation_url [String] the URL.
     # @param custom_headers [String] headers to apply to the HTTP request.
-    # @param custom_deserialization_block [Proc] function to perform deserialization of the HTTP response.
     #
-    # @return deserialized response (return type may differ depending on response)
-    def get_async_common(operation_url, custom_headers, custom_deserialization_block)
+    # @return [MsRest::HttpOperationResponse] the response.
+    def get_async_with_async_operation_deserialization(operation_url, custom_headers)
+      promise = get_async_common(operation_url, custom_headers)
+
+      promise = promise.then do |result|
+        result.body = AsyncOperationStatus.deserialize_object(result.body)
+        result
+      end
+
+      promise.execute
+    end
+
+    #
+    # Retrives data by given URL.
+    # @param operation_url [String] the URL.
+    # @param custom_headers [String] headers to apply to the HTTP request.
+    #
+    # @return [MsRest::HttpOperationResponse] the response.
+    def get_async_common(operation_url, custom_headers)
       fail CloudError if operation_url.nil?
 
       # TODO: add url encoding.
@@ -310,7 +290,7 @@ module MsRestAzure
       # Create HTTP transport object
       connection = Faraday.new(:url => url) do |faraday|
         faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02, credentials: @credentials
-        faraday.use MsRest::TokenRefreshMiddleware, credentials: @credentials
+        faraday.use MsRestAzure::TokenRefreshMiddleware, credentials: @credentials
         faraday.use :cookie_jar
         faraday.adapter Faraday.default_adapter
       end
@@ -342,20 +322,15 @@ module MsRestAzure
         result = MsRest::HttpOperationResponse.new(http_response, http_response, http_response.body)
 
         begin
-          parsed_response = JSON.load(http_response.body) unless http_response.body.to_s.empty?
-          if (parsed_response && !custom_deserialization_block.nil?)
-            parsed_response = custom_deserialization_block.call(parsed_response)
-          end
+          result.body = JSON.load(http_response.body) unless http_response.body.to_s.empty?
         rescue Exception => e
           fail MsRest::DeserializationError.new("Error occured in deserializing the response", e.message, e.backtrace, http_response.body)
         end
 
-        result.body = parsed_response
-
         result
       end
 
-      promise.execute
+      promise
     end
   end
 

@@ -31,9 +31,10 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
   @EmptyLine
   @* TODO: add proper references to @client *@
   connection = Faraday.new(:url => url) do |faraday|
-    faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02, credentials: @(Model.ClientReference).credentials
-    faraday.use MsRest::TokenRefreshMiddleware, credentials: @(Model.ClientReference).credentials
-    faraday.use :cookie_jar
+  @foreach (var middelware in Model.FaradeyMiddlewares)
+  {
+    @:faraday.use @middelware
+  }
     faraday.adapter Faraday.default_adapter
   end
 
@@ -76,6 +77,7 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
 {
       @:request.body = request_content
 }
+      @(Model.ClientReference).credentials.sign_request(request) unless @(Model.ClientReference).credentials.nil?
     end
   end
 

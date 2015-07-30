@@ -80,7 +80,14 @@ module MsRestAzure
     def sign_request(request)
       super(request)
       credentials = "#{DEFAULT_SCHEME} #{token}"
-      request.request_headers[AUTHORIZATION] = credentials
+
+      if (request.respond_to?(:request_headers))
+        request.request_headers[AUTHORIZATION] = credentials
+      elsif request.respond_to?(:headers)
+        request.headers[AUTHORIZATION] = credentials
+      else
+        fail ArgumentError, 'Incorrect request object was provided'
+      end
     end
   end
 end
