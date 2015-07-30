@@ -12,7 +12,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// </summary>
         /// <param name="type">The type namespace should be checked for.</param>
         /// <param name="namespaceName">The namespace to check.</param>
-        public static void UpdateNamespaceIfRequired(IType type, ref string namespaceName)
+        public static string UpdateNamespaceIfRequired(IType type, string namespaceName)
         {
             var composite = type as CompositeType;
 
@@ -20,6 +20,8 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             {
                 namespaceName = "MsRestAzure";
             }
+
+	        return namespaceName;
         }
     }
 }

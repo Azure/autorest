@@ -51,7 +51,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// <returns>Code for serialization.</returns>
         public override string SerializeProperty(string variableName, IType type, bool isRequired, string defaultNamespace)
         {
-            AzureClientModelExtensions.UpdateNamespaceIfRequired(type, ref defaultNamespace);
+			defaultNamespace = AzureClientModelExtensions.UpdateNamespaceIfRequired(type, defaultNamespace);
             return base.SerializeProperty(variableName, type, isRequired, defaultNamespace);
         }
 
@@ -65,7 +65,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// <returns>Code for deserialization.</returns>
         public override string DeserializeProperty(string variableName, IType type, bool isRequired, string defaultNamespace)
         {
-            AzureClientModelExtensions.UpdateNamespaceIfRequired(type, ref defaultNamespace);
+			defaultNamespace = AzureClientModelExtensions.UpdateNamespaceIfRequired(type, defaultNamespace);
             return base.DeserializeProperty(variableName, type, isRequired, defaultNamespace);
         }
     }

@@ -144,7 +144,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
 
             var builder = new IndentedStringBuilder("  ");
 
-            AzureClientModelExtensions.UpdateNamespaceIfRequired(type, ref defaultNamespace);
+			defaultNamespace = AzureClientModelExtensions.UpdateNamespaceIfRequired(type, defaultNamespace);
 
             string serializationLogic = type.DeserializeType(this.Scope, variableName, defaultNamespace);
             return builder.AppendLine(serializationLogic).ToString();
@@ -208,7 +208,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                 return new List<string>()
                 {
                     "MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02",
-                    string.Format("MsRestAzure::TokenRefreshMiddleware, credentials: {0}.{1}", ClientReference, "credentials"),
+                    string.Format(CultureInfo.InvariantCulture, "MsRestAzure::TokenRefreshMiddleware, credentials: {0}.{1}", ClientReference, "credentials"),
                     ":cookie_jar"
                 };
             }
@@ -239,7 +239,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// <returns>Code of deserialization in form of string.</returns>
         public override string CreateDeserializationString(string inputVariable, IType type, string outputVariable, string defaultNamespace)
         {
-            AzureClientModelExtensions.UpdateNamespaceIfRequired(type, ref defaultNamespace);
+			defaultNamespace = AzureClientModelExtensions.UpdateNamespaceIfRequired(type, defaultNamespace);
             return base.CreateDeserializationString(inputVariable, type, outputVariable, defaultNamespace);
         }
 
@@ -253,7 +253,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// <returns>Code of serialization in form of string.</returns>
         public override string CreateSerializationString(string inputVariable, IType type, string outputVariable, string defaultNamespace)
         {
-            AzureClientModelExtensions.UpdateNamespaceIfRequired(type, ref defaultNamespace);
+			defaultNamespace = AzureClientModelExtensions.UpdateNamespaceIfRequired(type, defaultNamespace);
             return base.CreateSerializationString(inputVariable, type, outputVariable, defaultNamespace);
         }
     }
