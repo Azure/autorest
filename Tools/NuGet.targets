@@ -9,7 +9,7 @@
   <Import Project="$(LibrarySourceFolder)\ClientRuntimes\**\*.nuget.proj"
       Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime' "/>
 
-  <Import Project="D:\sdk\AutoRest\AutoRest\AutoRest.Core\AutoRest.nuget.proj"
+  <Import Project="$(LibrarySourceFolder)\AutoRest\**\*.nuget.proj"
       Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator' "/>
 
   <PropertyGroup>
