@@ -21,11 +21,11 @@ Sku.prototype.validate = function (payload) {
   if (!payload) {
     throw new Error('Sku cannot be null.');
   }
-  if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'] !== 'string') {
+  if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'].valueOf() !== 'string') {
     throw new Error('payload[\'name\'] must be of type string.');
   }
 
-  if (payload['id'] !== null && payload['id'] !== undefined && typeof payload['id'] !== 'string') {
+  if (payload['id'] !== null && payload['id'] !== undefined && typeof payload['id'].valueOf() !== 'string') {
     throw new Error('payload[\'id\'] must be of type string.');
   }
 };

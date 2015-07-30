@@ -21,7 +21,7 @@ Product.prototype.validate = function (payload) {
   if (!payload) {
     throw new Error('Product cannot be null.');
   }
-  if (payload['properties'] !== null && payload['properties'] !== undefined) {
+  if (payload['properties']) {
     models['ProductProperties'].validate(payload['properties']);
   }
 };

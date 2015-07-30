@@ -20,6 +20,7 @@
     <Content Include="package.json" />
     <Content Include="RegenerateExpectedClasses.ps1" />
     <Content Include="xunit.xml" />
+    <Compile Include="AcceptanceTests\acceptanceTests.js" />
     <Compile Include="AcceptanceTests\coverageTest.js">
       <TestFramework>Mocha</TestFramework>
     </Compile>
@@ -404,9 +405,6 @@
     <Compile Include="unit.js" />
     <Content Include="AcceptanceTests\testlist.txt" />
     <Compile Include="AcceptanceTests\complexTypesTests.js">
-      <TestFramework>Mocha</TestFramework>
-    </Compile>
-    <Compile Include="AcceptanceTests\swaggerbatTests.js">
       <TestFramework>Mocha</TestFramework>
     </Compile>
     <Content Include="bin\Net45-Debug\AutoRest.json" />

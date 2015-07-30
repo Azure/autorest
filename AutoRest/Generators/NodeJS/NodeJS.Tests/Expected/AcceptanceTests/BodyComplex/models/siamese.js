@@ -25,23 +25,23 @@ Siamese.prototype.validate = function (payload) {
     throw new Error('payload[\'id\'] must be of type number.');
   }
 
-  if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'] !== 'string') {
+  if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'].valueOf() !== 'string') {
     throw new Error('payload[\'name\'] must be of type string.');
   }
 
-  if (payload['color'] !== null && payload['color'] !== undefined && typeof payload['color'] !== 'string') {
+  if (payload['color'] !== null && payload['color'] !== undefined && typeof payload['color'].valueOf() !== 'string') {
     throw new Error('payload[\'color\'] must be of type string.');
   }
 
-  if (payload['hates'] !== null && payload['hates'] !== undefined && util.isArray(payload['hates'])) {
+  if (util.isArray(payload['hates'])) {
     for (var i = 0; i < payload['hates'].length; i++) {
-      if (payload['hates'][i] !== null && payload['hates'][i] !== undefined) {
+      if (payload['hates'][i]) {
         models['Dog'].validate(payload['hates'][i]);
       }
     }
   }
 
-  if (payload['breed'] !== null && payload['breed'] !== undefined && typeof payload['breed'] !== 'string') {
+  if (payload['breed'] !== null && payload['breed'] !== undefined && typeof payload['breed'].valueOf() !== 'string') {
     throw new Error('payload[\'breed\'] must be of type string.');
   }
 };
@@ -54,9 +54,6 @@ Siamese.prototype.validate = function (payload) {
  */
 Siamese.prototype.deserialize = function (instance) {
   if (instance) {
-
-
-
     if (instance.hates !== null && instance.hates !== undefined) {
       var deserializedArray = [];
       instance.hates.forEach(function(element) {
@@ -67,7 +64,6 @@ Siamese.prototype.deserialize = function (instance) {
       });
       instance.hates = deserializedArray;
     }
-
   }
   return instance;
 };

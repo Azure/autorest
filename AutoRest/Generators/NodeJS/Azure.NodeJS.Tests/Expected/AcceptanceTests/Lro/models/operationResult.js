@@ -21,11 +21,11 @@ OperationResult.prototype.validate = function (payload) {
   if (!payload) {
     throw new Error('OperationResult cannot be null.');
   }
-  if (payload['status'] !== null && payload['status'] !== undefined && typeof payload['status'] !== 'string') {
+  if (payload['status'] !== null && payload['status'] !== undefined && typeof payload['status'].valueOf() !== 'string') {
     throw new Error('payload[\'status\'] must be of type string.');
   }
 
-  if (payload['error'] !== null && payload['error'] !== undefined) {
+  if (payload['error']) {
     models['OperationResultError'].validate(payload['error']);
   }
 };
@@ -38,7 +38,6 @@ OperationResult.prototype.validate = function (payload) {
  */
 OperationResult.prototype.deserialize = function (instance) {
   if (instance) {
-
     if (instance.error !== null && instance.error !== undefined) {
       instance.error = models['OperationResultError'].deserialize(instance.error);
     }

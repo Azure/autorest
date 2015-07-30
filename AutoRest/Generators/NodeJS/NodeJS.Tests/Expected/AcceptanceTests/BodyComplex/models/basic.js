@@ -25,11 +25,11 @@ Basic.prototype.validate = function (payload) {
     throw new Error('payload[\'id\'] must be of type number.');
   }
 
-  if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'] !== 'string') {
+  if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'].valueOf() !== 'string') {
     throw new Error('payload[\'name\'] must be of type string.');
   }
 
-  if (payload['color'] !== null && payload['color'] !== undefined) {
+  if (payload['color']) {
     var allowedValues = [ 'cyan', 'Magenta', 'YELLOW', 'blacK' ];
     if (!allowedValues.some( function(item) { return item === payload['color']; })) {
       throw new Error(payload['color'] + ' is not a valid value. The valid values are: ' + allowedValues);

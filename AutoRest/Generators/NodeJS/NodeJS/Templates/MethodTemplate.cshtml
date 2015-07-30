@@ -35,16 +35,19 @@
   @:try {
   @foreach (var parameter in Model.ParameterTemplateModels)
   {
+    if ((Model.HttpMethod == HttpMethod.Patch && parameter.Type is CompositeType))
+    {
     if (parameter.IsRequired)
     {
     @:if (@(parameter.Name) === null || @(parameter.Name) === undefined) {
-      @:throw new Error('\'@(parameter.Name)\' cannot be null');
+    @:throw new Error('\'@(parameter.Name)\' cannot be null');
     @:}
-   @:
+    @:
     }
-      if (!(Model.HttpMethod == HttpMethod.Patch  && parameter.Type is CompositeType))
+    }
+    else
     {
-    @:@(parameter.Type.ValidateType(Model.Scope, parameter.Name))
+    @:@(parameter.Type.ValidateType(Model.Scope, parameter.Name, parameter.IsRequired))
     }
   }
   @:} catch (error) {

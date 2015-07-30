@@ -25,7 +25,7 @@ ProductProperties.prototype.validate = function (payload) {
     throw new Error('payload[\'id\'] must be of type number.');
   }
 
-  if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'] !== 'string') {
+  if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'].valueOf() !== 'string') {
     throw new Error('payload[\'name\'] must be of type string.');
   }
 };
