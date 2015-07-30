@@ -89,7 +89,7 @@ describe 'Complex tests' do
     basic_request.name = "abc"
     basic_request.color = MyNamespace::Models::CMYKColors::Magenta
     result = @client.basic_operations.put_valid(basic_request).value!
-    expect(result.response).to eq(200)
+    expect(result.response.status).to eq(200)
   end
 
   it 'should get basic invalid' do

@@ -65,7 +65,7 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
   @EmptyLine
   @:# Serialize Request
   @:request_headers['Content-Type'] = 'application/json'
-  @:@Model.CreateSerializationString(Model.RequestBody.Name, Model.RequestBody.Type, "http_request.body", Settings.Namespace + "::Models")  
+  @:@Model.CreateSerializationString(Model.RequestBody.Name, Model.RequestBody.Type, "request_content", Settings.Namespace + "::Models")
   }
 
   @EmptyLine
