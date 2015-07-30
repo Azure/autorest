@@ -1,5 +1,6 @@
 /// <binding BeforeBuild='syncDotNetDependencies' />
 var gulp = require('gulp');
+var msbuild = require('gulp-msbuild');
 var path = require('path');
 var fs = require('fs');
 var debug = require('gulp-debug');
@@ -13,11 +14,8 @@ var del = require('del');
 var gutil = require('gulp-util');
 var runSequence = require('run-sequence');
 
-var isWin = /^win/.test(process.platform);
-
-const DEFAULT_ASSEMBLY_VERSION = '0.9.0.0'
-
-var csharpBuild = isWin ? 'msbuild' : 'xbuild';
+const DEFAULT_ASSEMBLY_VERSION = '0.9.0.0';
+const MAX_BUFFER = 1024 * 1024;
 
 function basePathOrThrow() {
   if (!gutil.env.basePath) {
@@ -155,8 +153,13 @@ gulp.task('regenerate:expected:cs', function(cb){
   }, cb);
 });
 
-gulp.task('clean:build', function(cb) {
-  runProcess(csharpBuild, ['build.proj', '/t:clean'], cb);
+gulp.task('clean:build', function (cb) {
+  return gulp.src('build.proj').pipe(msbuild({
+    targets: ['clean'],
+    stdout: process.stdout,
+    stderr: process.stderr,
+    maxBuffer: MAX_BUFFER
+  }));
 });
 
 gulp.task('clean:templates', function(cb) {
@@ -211,21 +214,42 @@ gulp.task('syncDotNetDependencies', ['syncNugetProjs', 'syncNuspecs']);
 
 gulp.task('build', function(cb) {
   // warning 0219 is for unused variables, which causes the build to fail on xbuild
-  runProcess(csharpBuild, ['build.proj', '/t:build', '/p:WarningsNotAsErrors=0219'], cb);
+  return gulp.src('build.proj').pipe(msbuild({
+    targets: ['build'],
+    stdout: process.stdout, 
+    stderr: process.stderr,
+    maxBuffer: MAX_BUFFER,
+    properties: { WarningsNotAsErrors: 0219 }
+  }));
 });
 
 gulp.task('package', function(cb) {
-  runProcess(csharpBuild, ['build.proj', '/t:package'], cb);
+  return gulp.src('build.proj').pipe(msbuild({
+    targets: ['package'],
+    stdout: process.stdout,
+    stderr: process.stderr,
+    maxBuffer: MAX_BUFFER
+  }));
 });
 
-gulp.task('test', function(cb) {
-  runProcess(csharpBuild, ['build.proj', '/t:test'], cb);
+gulp.task('test', function (cb) {
+  return gulp.src('build.proj').pipe(msbuild({
+    targets: ['test'],
+    stdout: process.stdout,
+    stderr: process.stderr,
+    maxBuffer: MAX_BUFFER
+  }));
 });
 
 gulp.task('analysis', function(cb) {
-  runProcess(csharpBuild, ['build.proj', '/t:codeanalysis', '/p:WarningsNotAsErrors=0219'], cb);
+  return gulp.src('build.proj').pipe(msbuild({
+    targets: ['codeanalysis'],
+    stdout: process.stdout,
+    stderr: process.stderr,
+    maxBuffer: MAX_BUFFER,
+    properties: { WarningsNotAsErrors: 0219 }
+  }));
 });
-
 
 gulp.task('default', function(cb){
   // build is not called here because analysis causes a rebuild of the solutions
