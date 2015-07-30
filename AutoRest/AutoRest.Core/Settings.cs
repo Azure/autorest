@@ -152,11 +152,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
         public string OutputFileName { get; set; }
 
         /// <summary>
-        /// Gets or sets boolean value indicating if code generation language supports all the code to be generated in a single file.
-        /// </summary>
-        public bool IsSingleFileGenerationSupported { get; set; }
-
-        /// <summary>
         /// Factory method to generate CodeGenerationSettings from command line arguments.
         /// Matches dictionary keys to the settings properties.
         /// </summary>

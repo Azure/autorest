@@ -46,6 +46,11 @@ namespace Microsoft.Rest.Generator
         public Settings Settings { get; private set; }
 
         /// <summary>
+        /// Gets or sets boolean value indicating if code generation language supports all the code to be generated in a single file.
+        /// </summary>
+        public bool IsSingleFileGenerationSupported { get; set; }
+
+        /// <summary>
         /// Normalizes service model by updating names and types to be language specific.
         /// </summary>
         /// <param name="serviceClient"></param>
@@ -88,7 +93,7 @@ namespace Microsoft.Rest.Generator
 
             if (Settings.OutputFileName != null)
             {
-                if(!Settings.IsSingleFileGenerationSupported)
+                if(!IsSingleFileGenerationSupported)
                 {
                     Logger.LogError(new ArgumentException(Settings.OutputFileName),
                         Resources.LanguageDoesNotSupportSingleFileGeneration, Settings.CodeGenerator);
@@ -101,13 +106,11 @@ namespace Microsoft.Rest.Generator
             {
                 relativeFilePath = fileName;
             }
-            //Settings.OutputFileName ?? fileName;
             string filePath = Path.Combine(Settings.OutputDirectory, relativeFilePath);
 
-            //Settings.IsSingleFileGenerationSupported
             // cleans file before writing 
             if (Settings.OutputFileName != null ||
-                !Settings.IsSingleFileGenerationSupported)
+                !IsSingleFileGenerationSupported)
             {
                 Settings.FileSystem.DeleteFile(filePath);
             }
