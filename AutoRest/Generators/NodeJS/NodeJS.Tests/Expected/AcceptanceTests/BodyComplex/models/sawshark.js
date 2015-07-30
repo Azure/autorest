@@ -45,9 +45,8 @@ Sawshark.prototype.validate = function (payload) {
     throw new Error('payload[\'age\'] must be of type number.');
   }
 
-  if(!payload['birthday'] || !(payload['birthday'] instanceof Date || 
-    (typeof payload['birthday'].valueOf() === 'string' && !isNaN(Date.parse(payload['birthday']))))) {
-  throw new Error('payload[\'birthday\'] cannot be null or undefined and it must be of type date.');
+  if(!payload['birthday'] || !(payload['birthday'] instanceof Date || (typeof payload['birthday'].valueOf() === 'string' && !isNaN(Date.parse(payload['birthday']))))) {
+    throw new Error('payload[\'birthday\'] cannot be null or undefined and it must be of type date.');
   }
 
   if (payload['picture'] && !Buffer.isBuffer(payload['picture'])) {

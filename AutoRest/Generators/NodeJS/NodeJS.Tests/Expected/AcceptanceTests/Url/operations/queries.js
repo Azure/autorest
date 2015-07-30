@@ -2363,9 +2363,7 @@ Queries.prototype.dateValid = function (dateQuery, options, callback) {
   }
   // Validate
   try {
-    if (dateQuery && 
-        !(dateQuery instanceof Date || 
-          (typeof dateQuery === 'string' && !isNaN(Date.parse(dateQuery))))) {
+    if (dateQuery && !(dateQuery instanceof Date || (typeof dateQuery.valueOf() === 'string' && !isNaN(Date.parse(dateQuery))))) {
       throw new Error('dateQuery must be of type date.');
     }
   } catch (error) {
@@ -2461,9 +2459,7 @@ Queries.prototype.dateNull = function (dateQuery, options, callback) {
   }
   // Validate
   try {
-    if (dateQuery && 
-        !(dateQuery instanceof Date || 
-          (typeof dateQuery === 'string' && !isNaN(Date.parse(dateQuery))))) {
+    if (dateQuery && !(dateQuery instanceof Date || (typeof dateQuery.valueOf() === 'string' && !isNaN(Date.parse(dateQuery))))) {
       throw new Error('dateQuery must be of type date.');
     }
   } catch (error) {
@@ -2559,9 +2555,7 @@ Queries.prototype.dateTimeValid = function (dateTimeQuery, options, callback) {
   }
   // Validate
   try {
-    if (dateTimeQuery && 
-        !(dateTimeQuery instanceof Date || 
-          (typeof dateTimeQuery === 'string' && !isNaN(Date.parse(dateTimeQuery))))) {
+    if (dateTimeQuery && !(dateTimeQuery instanceof Date || (typeof dateTimeQuery.valueOf() === 'string' && !isNaN(Date.parse(dateTimeQuery))))) {
       throw new Error('dateTimeQuery must be of type date.');
     }
   } catch (error) {
@@ -2657,9 +2651,7 @@ Queries.prototype.dateTimeNull = function (dateTimeQuery, options, callback) {
   }
   // Validate
   try {
-    if (dateTimeQuery && 
-        !(dateTimeQuery instanceof Date || 
-          (typeof dateTimeQuery === 'string' && !isNaN(Date.parse(dateTimeQuery))))) {
+    if (dateTimeQuery && !(dateTimeQuery instanceof Date || (typeof dateTimeQuery.valueOf() === 'string' && !isNaN(Date.parse(dateTimeQuery))))) {
       throw new Error('dateTimeQuery must be of type date.');
     }
   } catch (error) {

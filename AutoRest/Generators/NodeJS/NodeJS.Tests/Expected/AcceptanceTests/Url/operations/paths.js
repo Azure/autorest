@@ -1772,9 +1772,8 @@ Paths.prototype.dateValid = function (datePath, options, callback) {
   }
   // Validate
   try {
-    if(!datePath || !(datePath instanceof Date || 
-      (typeof datePath.valueOf() === 'string' && !isNaN(Date.parse(datePath))))) {
-    throw new Error('datePath cannot be null or undefined and it must be of type date.');
+    if(!datePath || !(datePath instanceof Date || (typeof datePath.valueOf() === 'string' && !isNaN(Date.parse(datePath))))) {
+      throw new Error('datePath cannot be null or undefined and it must be of type date.');
     }
   } catch (error) {
     return callback(error);
@@ -1864,9 +1863,8 @@ Paths.prototype.dateNull = function (datePath, options, callback) {
   }
   // Validate
   try {
-    if(!datePath || !(datePath instanceof Date || 
-      (typeof datePath.valueOf() === 'string' && !isNaN(Date.parse(datePath))))) {
-    throw new Error('datePath cannot be null or undefined and it must be of type date.');
+    if(!datePath || !(datePath instanceof Date || (typeof datePath.valueOf() === 'string' && !isNaN(Date.parse(datePath))))) {
+      throw new Error('datePath cannot be null or undefined and it must be of type date.');
     }
   } catch (error) {
     return callback(error);
@@ -1955,9 +1953,8 @@ Paths.prototype.dateTimeValid = function (dateTimePath, options, callback) {
   }
   // Validate
   try {
-    if(!dateTimePath || !(dateTimePath instanceof Date || 
-      (typeof dateTimePath.valueOf() === 'string' && !isNaN(Date.parse(dateTimePath))))) {
-    throw new Error('dateTimePath cannot be null or undefined and it must be of type date.');
+    if(!dateTimePath || !(dateTimePath instanceof Date || (typeof dateTimePath.valueOf() === 'string' && !isNaN(Date.parse(dateTimePath))))) {
+      throw new Error('dateTimePath cannot be null or undefined and it must be of type date.');
     }
   } catch (error) {
     return callback(error);
@@ -2047,9 +2044,8 @@ Paths.prototype.dateTimeNull = function (dateTimePath, options, callback) {
   }
   // Validate
   try {
-    if(!dateTimePath || !(dateTimePath instanceof Date || 
-      (typeof dateTimePath.valueOf() === 'string' && !isNaN(Date.parse(dateTimePath))))) {
-    throw new Error('dateTimePath cannot be null or undefined and it must be of type date.');
+    if(!dateTimePath || !(dateTimePath instanceof Date || (typeof dateTimePath.valueOf() === 'string' && !isNaN(Date.parse(dateTimePath))))) {
+      throw new Error('dateTimePath cannot be null or undefined and it must be of type date.');
     }
   } catch (error) {
     return callback(error);

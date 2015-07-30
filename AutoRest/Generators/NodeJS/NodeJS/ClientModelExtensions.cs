@@ -23,7 +23,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 return string.Format(CultureInfo.InvariantCulture, "HttpMethod.{0}", method);
             }
         }
-        
+
         /// <summary>
         /// Format the value of a sequence given the modeled element format.  Note that only sequences of strings are supported
         /// </summary>
@@ -52,12 +52,12 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             if (primaryType != PrimaryType.String)
             {
                 throw new InvalidOperationException(
-                    string.Format(CultureInfo.InvariantCulture, 
+                    string.Format(CultureInfo.InvariantCulture,
                     "Cannot generate a formatted sequence from a " +
                                   "non-string array parameter {0}", parameter));
             }
 
-            return string.Format(CultureInfo.InvariantCulture, 
+            return string.Format(CultureInfo.InvariantCulture,
                 "{0}.join('{1}')", parameter.Name, parameter.CollectionFormat.GetSeparator());
         }
 
@@ -79,7 +79,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 case CollectionFormat.Tsv:
                     return "\t";
                 default:
-                    throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture, 
+                    throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture,
                         "Collection format {0} is not supported.", format));
             }
         }
@@ -98,17 +98,17 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             {
                 return reference;
             }
-            
+
             if (known == PrimaryType.Date)
             {
-                return string.Format(CultureInfo.InvariantCulture, 
+                return string.Format(CultureInfo.InvariantCulture,
                     "msRest.serializeObject({0}).replace(/[Tt].*[Zz]/, '')", reference);
             }
-            
+
             if (known == PrimaryType.DateTime
                 || known == PrimaryType.ByteArray)
             {
-                return string.Format(CultureInfo.InvariantCulture, 
+                return string.Format(CultureInfo.InvariantCulture,
                     "msRest.serializeObject({0})", reference);
             }
 
@@ -127,7 +127,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 throw new ArgumentNullException("type");
             }
 
-            return string.Format(CultureInfo.InvariantCulture, 
+            return string.Format(CultureInfo.InvariantCulture,
                 "[ {0} ]", string.Join(", ",
                 type.Values.Select(p => string.Format(CultureInfo.InvariantCulture, "'{0}'", p.Name))));
         }
@@ -140,6 +140,258 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             }
 
             return valueReference.Replace("'", "\\'");
+        }
+
+        public static string ConstructValidationCheck(string condition, string errorMessage, string valueReference, string typeName)
+        {
+            var builder = new IndentedStringBuilder("  ");
+            var escapedValueReference = valueReference.EscapeSingleQuotes();
+            var lowercaseTypeName = typeName.ToLower(CultureInfo.InvariantCulture);
+
+            return builder.AppendLine(condition, valueReference, lowercaseTypeName)
+                            .Indent()
+                                .AppendLine(errorMessage, escapedValueReference, lowercaseTypeName)
+                            .Outdent()
+                          .AppendLine("}").ToString();
+        }
+
+        public static string ValidatePrimaryType(this PrimaryType primary, IScopeProvider scope, string valueReference, bool isRequired, string modelReference = "client._models")
+        {
+            if (scope == null)
+            {
+                throw new ArgumentNullException("scope");
+            }
+
+            var builder = new IndentedStringBuilder("  ");
+            var requiredTypeErrorMessage = "throw new Error('{0} cannot be null or undefined and it must be of type {1}.');";
+            var typeErrorMessage = "throw new Error('{0} must be of type {1}.');";
+
+            if (primary == PrimaryType.Boolean ||
+                primary == PrimaryType.Double ||
+                primary == PrimaryType.Int ||
+                primary == PrimaryType.Long)
+            {
+                if (isRequired)
+                {
+                    return ConstructValidationCheck("if ({0} === null || {0} === undefined || typeof {0} !== '{1}') {{",
+                                                    requiredTypeErrorMessage, valueReference, primary.Name);
+                }
+
+                return ConstructValidationCheck("if ({0} !== null && {0} !== undefined && typeof {0} !== '{1}') {{",
+                                                typeErrorMessage, valueReference, primary.Name);
+            }
+            else if (primary == PrimaryType.String)
+            {
+                if (isRequired)
+                {
+                    //empty string can be a valid value hence we cannot implement the simple check if (!{0})
+                    return ConstructValidationCheck("if ({0} === null || {0} === undefined || typeof {0}.valueOf() !== '{1}') {{",
+                                                    requiredTypeErrorMessage, valueReference, primary.Name);
+                }
+
+                return ConstructValidationCheck("if ({0} !== null && {0} !== undefined && typeof {0}.valueOf() !== '{1}') {{",
+                                                typeErrorMessage, valueReference, primary.Name);
+            }
+            else if (primary == PrimaryType.ByteArray)
+            {
+                if (isRequired)
+                {
+                    return ConstructValidationCheck("if (!Buffer.isBuffer({0})) {{", requiredTypeErrorMessage, valueReference, primary.Name);
+                }
+
+                return ConstructValidationCheck("if ({0} && !Buffer.isBuffer({0})) {{", typeErrorMessage, valueReference, primary.Name);
+            }
+            else if (primary == PrimaryType.DateTime || primary == PrimaryType.Date)
+            {
+                if (isRequired)
+                {
+                    return ConstructValidationCheck("if(!{0} || !({0} instanceof Date || (typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{",
+                                                    requiredTypeErrorMessage, valueReference, primary.Name);
+                }
+
+                return ConstructValidationCheck("if ({0} && !({0} instanceof Date || (typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{",
+                                                typeErrorMessage, valueReference, primary.Name);
+            }
+            else if (primary == PrimaryType.Object)
+            {
+                if (isRequired)
+                {
+                    return ConstructValidationCheck("if ({0} !== null || {0} !== undefined || typeof {0} !== '{1}') {{",
+                                                    requiredTypeErrorMessage, valueReference, primary.Name);
+                }
+
+                return builder.ToString();
+            }
+            else
+            {
+                throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture,
+                    "'{0}' not implemented", valueReference));
+            }
+        }
+
+        public static string ValidateEnumType(this EnumType enumType, IScopeProvider scope, string valueReference, bool isRequired, string modelReference = "client._models")
+        {
+            if (scope == null)
+            {
+                throw new ArgumentNullException("scope");
+            }
+
+            var builder = new IndentedStringBuilder("  ");
+            var allowedValues = scope.GetVariableName("allowedValues");
+
+            builder.AppendLine("if ({0}) {{", valueReference)
+                        .Indent()
+                            .AppendLine("var {0} = {1};", allowedValues, enumType.GetEnumValuesArray())
+                            .AppendLine("if (!{0}.some( function(item) {{ return item === {1}; }})) {{", allowedValues, valueReference)
+                            .Indent()
+                                .AppendLine("throw new Error({0} + ' is not a valid value. The valid values are: ' + {1});", valueReference, allowedValues)
+                            .Outdent()
+                            .AppendLine("}")
+                        .Outdent()
+                        .AppendLine("}");
+            if (isRequired)
+            {
+                builder.Append(" else {")
+                    .Indent()
+                        .AppendLine("throw new Error('{0} cannot be null or undefined.');", valueReference)
+                    .Outdent()
+                    .AppendLine("}");
+            }
+
+            return builder.ToString();
+        }
+
+
+        public static string ValidateCompositeType(this CompositeType composite, IScopeProvider scope, string valueReference, bool isRequired, string modelReference = "client._models")
+        {
+            if (scope == null)
+            {
+                throw new ArgumentNullException("scope");
+            }
+
+            var builder = new IndentedStringBuilder("  ");
+            var escapedValueReference = valueReference.EscapeSingleQuotes();
+
+            builder.AppendLine("if ({0}) {{", valueReference).Indent();
+
+            if (!string.IsNullOrEmpty(composite.PolymorphicDiscriminator))
+            {
+                builder.AppendLine("if({0}['{1}'] !== null && {0}['{1}'] !== undefined && {2}.discriminators[{0}['{1}']]) {{",
+                                    valueReference,
+                                    composite.PolymorphicDiscriminator, modelReference)
+                    .Indent()
+                        .AppendLine("{2}.discriminators[{0}['{1}']].validate({0});",
+                            valueReference,
+                            composite.PolymorphicDiscriminator, modelReference)
+                    .Outdent()
+                    .AppendLine("}} else {{", valueReference)
+                    .Indent()
+                        .AppendLine("throw new Error('No discriminator field \"{0}\" was found in parameter \"{1}\".');",
+                                    composite.PolymorphicDiscriminator,
+                                    escapedValueReference)
+                    .Outdent()
+                    .AppendLine("}");
+            }
+            else
+            {
+                builder.AppendLine("{2}['{0}'].validate({1});", composite.Name, valueReference, modelReference);
+            }
+            builder.Outdent().AppendLine("}");
+
+            if (isRequired)
+            {
+                builder.Append(" else {")
+                    .Indent()
+                        .AppendLine("throw new Error('{0} cannot be null or undefined.');", escapedValueReference)
+                    .Outdent()
+                    .AppendLine("}");
+            }
+            return builder.ToString();
+        }
+
+        public static string ValidateSequenceType(this SequenceType sequence, IScopeProvider scope, string valueReference, bool isRequired, string modelReference = "client._models")
+        {
+            if (scope == null)
+            {
+                throw new ArgumentNullException("scope");
+            }
+
+            var builder = new IndentedStringBuilder("  ");
+            var escapedValueReference = valueReference.EscapeSingleQuotes();
+
+            var indexVar = scope.GetVariableName("i");
+            var innerValidation = sequence.ElementType.ValidateType(scope, valueReference + "[" + indexVar + "]", false, modelReference);
+            if (!string.IsNullOrEmpty(innerValidation))
+            {
+                if (isRequired)
+                {
+                    return builder.AppendLine("if (!util.isArray({0})) {{", valueReference)
+                        .Indent()
+                          .AppendLine("throw new Error('{0} cannot be null or undefined and it must be of type {1}.');",
+                          escapedValueReference, sequence.Name.ToLower(CultureInfo.InvariantCulture))
+                        .Outdent()
+                      .AppendLine("}")
+                      .AppendLine("for (var {1} = 0; {1} < {0}.length; {1}++) {{", valueReference, indexVar)
+                            .Indent()
+                              .AppendLine(innerValidation)
+                            .Outdent()
+                          .AppendLine("}").ToString();
+                }
+
+                return builder.AppendLine("if (util.isArray({0})) {{", valueReference)
+                        .Indent()
+                          .AppendLine("for (var {1} = 0; {1} < {0}.length; {1}++) {{", valueReference, indexVar)
+                            .Indent()
+                              .AppendLine(innerValidation)
+                            .Outdent()
+                          .AppendLine("}")
+                        .Outdent()
+                      .AppendLine("}").ToString();
+            }
+
+            return null;
+        }
+
+        public static string ValidateDictionaryType(this DictionaryType dictionary, IScopeProvider scope, string valueReference, bool isRequired, string modelReference = "client._models")
+        {
+            if (scope == null)
+            {
+                throw new ArgumentNullException("scope");
+            }
+
+            var builder = new IndentedStringBuilder("  ");
+            var escapedValueReference = valueReference.EscapeSingleQuotes();
+            var valueVar = scope.GetVariableName("valueElement");
+            var innerValidation = dictionary.ValueType.ValidateType(scope, valueReference + "[" + valueVar + "]", false, modelReference);
+            if (!string.IsNullOrEmpty(innerValidation))
+            {
+                if (isRequired)
+                {
+                    return builder.AppendLine("if ({0} === null || {0} === undefined || typeof {0} !== 'object') {{", valueReference)
+                        .Indent()
+                          .AppendLine("throw new Error('{0} cannot be null or undefined and it must be of type {1}.');",
+                            escapedValueReference, dictionary.Name.ToLower(CultureInfo.InvariantCulture))
+                        .Outdent()
+                      .AppendLine("}")
+                      .AppendLine("for(var {0} in {1}) {{", valueVar, valueReference)
+                        .Indent()
+                          .AppendLine(innerValidation)
+                        .Outdent()
+                      .AppendLine("}").ToString();
+                }
+
+                return builder.AppendLine("if ({0} && typeof {0} === 'object') {{", valueReference)
+                        .Indent()
+                          .AppendLine("for(var {0} in {1}) {{", valueVar, valueReference)
+                            .Indent()
+                              .AppendLine(innerValidation)
+                            .Outdent()
+                          .AppendLine("}")
+                        .Outdent()
+                      .AppendLine("}").ToString();
+            }
+
+            return null;
         }
 
         /// <summary>
@@ -163,238 +415,27 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             DictionaryType dictionary = type as DictionaryType;
             PrimaryType primary = type as PrimaryType;
             EnumType enumType = type as EnumType;
-            var builder = new IndentedStringBuilder("  ");
-            var escapedValueReference = valueReference.EscapeSingleQuotes();
-            if(primary != null)
+            if (primary != null)
             {
-                if (primary == PrimaryType.Boolean ||
-                    primary == PrimaryType.Double ||
-                    primary == PrimaryType.Int ||
-                    primary == PrimaryType.Long)
-                {
-                    if (isRequired)
-                    {
-                        return builder.AppendLine("if ({0} === null || {0} === undefined || typeof {0} !== '{1}') {{", valueReference, primary.Name.ToLower(CultureInfo.InvariantCulture))
-                            .Indent()
-                                .AppendLine("throw new Error('{0} cannot be null or undefined and it must be of type {1}.');", escapedValueReference, primary.Name.ToLower(CultureInfo.InvariantCulture))
-                            .Outdent()
-                          .AppendLine("}").ToString();
-                    }
-
-                    return builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0} !== '{1}') {{", valueReference, primary.Name.ToLower(CultureInfo.InvariantCulture))
-                        .Indent()
-                            .AppendLine("throw new Error('{0} must be of type {1}.');", escapedValueReference, primary.Name.ToLower(CultureInfo.InvariantCulture))
-                        .Outdent()
-                        .AppendLine("}").ToString();
-                }
-                else if (primary == PrimaryType.String)
-                {
-                    if (isRequired)
-                    {
-                        //empty string can be a valid value hence we cannot implement the simple check if (!{0})
-                        return builder.AppendLine("if ({0} === null || {0} === undefined || typeof {0}.valueOf() !== '{1}') {{", valueReference, primary.Name.ToLower(CultureInfo.InvariantCulture))
-                           .Indent()
-                               .AppendLine("throw new Error('{0} cannot be null or undefined and it must be of type {1}.');", escapedValueReference, primary.Name.ToLower(CultureInfo.InvariantCulture))
-                           .Outdent()
-                         .AppendLine("}").ToString();
-                    }
-
-                    return builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0}.valueOf() !== '{1}') {{", valueReference, primary.Name.ToLower(CultureInfo.InvariantCulture))
-                            .Indent()
-                                .AppendLine("throw new Error('{0} must be of type {1}.');", escapedValueReference, primary.Name.ToLower(CultureInfo.InvariantCulture))
-                            .Outdent()
-                          .AppendLine("}").ToString();
-                }
-                else if (primary == PrimaryType.ByteArray)
-                {
-                    if (isRequired)
-                    {
-                        return builder.AppendLine("if (!Buffer.isBuffer({0})) {{", valueReference)
-                            .Indent()
-                                .AppendLine("throw new Error('{0} cannot be null or undefined and it must be of type {1}.');", escapedValueReference, primary.Name.ToLower(CultureInfo.InvariantCulture))
-                            .Outdent()
-                          .AppendLine("}").ToString();
-                    }
-
-                    return builder.AppendLine("if ({0} && !Buffer.isBuffer({0})) {{", valueReference)
-                            .Indent()
-                                .AppendLine("throw new Error('{0} must be of type {1}.');", escapedValueReference, primary.Name.ToLower(CultureInfo.InvariantCulture))
-                            .Outdent()
-                          .AppendLine("}").ToString();
-                }
-                else if (primary == PrimaryType.DateTime || primary == PrimaryType.Date)
-                {
-                    if (isRequired)
-                    {
-                        return builder.AppendLine("if(!{0} || !({0} instanceof Date || ", valueReference)
-                            .Indent()
-                                .AppendLine("(typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{", valueReference)
-                           .Outdent()
-                           .Outdent()
-                       .AppendLine("throw new Error('{0} cannot be null or undefined and it must be of type {1}.');", escapedValueReference, primary.Name.ToLower(CultureInfo.InvariantCulture))
-                           .Outdent()
-                           .AppendLine("}").ToString();
-                    }
-
-                    return builder.AppendLine("if ({0} && ", valueReference)
-                    .Indent()
-                    .Indent()
-                        .AppendLine("!({0} instanceof Date || ", valueReference)
-                            .Indent()
-                                .AppendLine("(typeof {0} === 'string' && !isNaN(Date.parse({0}))))) {{", valueReference)
-                           .Outdent()
-                           .Outdent()
-                    .AppendLine("throw new Error('{0} must be of type {1}.');", escapedValueReference, primary.Name.ToLower(CultureInfo.InvariantCulture))
-                           .Outdent()
-                           .AppendLine("}").ToString();
-                }
-                else if (primary == PrimaryType.Object)
-                {
-                    if (isRequired)
-                    {
-                        return builder.AppendLine("if ({0} !== null || {0} !== undefined) {", valueReference)
-                            .Indent()
-                               .AppendLine("throw new Error('{0} cannot be null or undefined.');")
-                               .Outdent()
-                            .AppendLine("}").ToString();
-                    }
-
-                    return builder.ToString();
-                }
-                else
-                {
-                    throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture, 
-                        "'{0}' not implemented", valueReference));
-                }
+                return primary.ValidatePrimaryType(scope, valueReference, isRequired, modelReference);
             }
-            else if (enumType != null && enumType.Values.Any()) {
-                var allowedValues = scope.GetVariableName("allowedValues");
-
-                builder.AppendLine("if ({0}) {{", valueReference)
-                           .Indent()
-                                .AppendLine("var {0} = {1};", allowedValues, enumType.GetEnumValuesArray())
-                                .AppendLine("if (!{0}.some( function(item) {{ return item === {1}; }})) {{", allowedValues, valueReference)
-                                .Indent()
-                                   .AppendLine("throw new Error({0} + ' is not a valid value. The valid values are: ' + {1});", valueReference, allowedValues)
-                                .Outdent()
-                                .AppendLine("}")
-                           .Outdent()
-                           .AppendLine("}");
-                if (isRequired)
-                {
-                    builder.Append(" else {")
-                        .Indent()
-                          .AppendLine("throw new Error('{0} cannot be null or undefined.');", valueReference)
-                        .Outdent()
-                      .AppendLine("}");
-                }
-
-                return builder.ToString();
+            else if (enumType != null && enumType.Values.Any())
+            {
+                return enumType.ValidateEnumType(scope, valueReference, isRequired, modelReference);
             }
             else if (composite != null && composite.Properties.Any())
             {
-                builder.AppendLine("if ({0}) {{", valueReference).Indent();
-
-                if (!string.IsNullOrEmpty(composite.PolymorphicDiscriminator))
-                {
-                    builder.AppendLine("if({0}['{1}'] !== null && {0}['{1}'] !== undefined && {2}.discriminators[{0}['{1}']]) {{",
-                                        valueReference,
-                                        composite.PolymorphicDiscriminator, modelReference)
-                        .Indent()
-                            .AppendLine("{2}.discriminators[{0}['{1}']].validate({0});",
-                                valueReference,
-                                composite.PolymorphicDiscriminator, modelReference) 
-                        .Outdent()
-                        .AppendLine("}} else {{", valueReference)
-                        .Indent()
-                            .AppendLine("throw new Error('No discriminator field \"{0}\" was found in parameter \"{1}\".');",
-                                        composite.PolymorphicDiscriminator,
-                                        escapedValueReference)
-                        .Outdent()
-                        .AppendLine("}");
-                }
-                else
-                {
-                    builder.AppendLine("{2}['{0}'].validate({1});", composite.Name, valueReference, modelReference);
-                }
-                builder.Outdent().AppendLine("}");
-
-                if (isRequired)
-                {
-                    builder.Append(" else {")
-                        .Indent()
-                          .AppendLine("throw new Error('{0} cannot be null or undefined.');", escapedValueReference)
-                        .Outdent()
-                      .AppendLine("}");
-                }
-                return builder.ToString();
+                return composite.ValidateCompositeType(scope, valueReference, isRequired, modelReference);
             }
             else if (sequence != null)
             {
-                var indexVar = scope.GetVariableName("i");
-                var innerValidation = sequence.ElementType.ValidateType(scope, valueReference + "["+indexVar+"]", false, modelReference);
-                if (!string.IsNullOrEmpty(innerValidation))
-                {
-                    if (isRequired)
-                    {
-                        return builder.AppendLine("if (!util.isArray({0})) {{", valueReference)
-                            .Indent()
-                              .AppendLine("throw new Error('{0} cannot be null or undefined and it must be of type {1}.');",
-                              escapedValueReference, sequence.Name.ToLower(CultureInfo.InvariantCulture))
-                            .Outdent()
-                          .AppendLine("}")
-                          .AppendLine("\n")
-                          .AppendLine("for (var {1} = 0; {1} < {0}.length; {1}++) {{", valueReference, indexVar)
-                                .Indent()
-                                  .AppendLine(innerValidation)
-                                .Outdent()
-                              .AppendLine("}").ToString();
-                    }
-
-                    return builder.AppendLine("if (util.isArray({0})) {{", valueReference)
-                            .Indent()
-                              .AppendLine("for (var {1} = 0; {1} < {0}.length; {1}++) {{", valueReference, indexVar)
-                                .Indent()
-                                  .AppendLine(innerValidation)
-                                .Outdent()
-                              .AppendLine("}")
-                            .Outdent()
-                          .AppendLine("}").ToString();
-                }
+                return sequence.ValidateSequenceType(scope, valueReference, isRequired, modelReference);
             }
             else if (dictionary != null)
             {
-                var valueVar = scope.GetVariableName("valueElement");
-                var innerValidation = dictionary.ValueType.ValidateType(scope, 
-                    valueReference + "[" + valueVar + "]", false, modelReference);
-                if (!string.IsNullOrEmpty(innerValidation))
-                {
-                    if (isRequired)
-                    {
-                        return builder.AppendLine("if ({0} === null || {0} === undefined || typeof {0} !== 'object') {{", valueReference)
-                            .Indent()
-                              .AppendLine("throw new Error('{0} cannot be null or undefined and it must be of type {1}.');",
-                                escapedValueReference, dictionary.Name.ToLower(CultureInfo.InvariantCulture))
-                            .Outdent()
-                          .AppendLine("}")
-                          .AppendLine("\n")
-                          .AppendLine("for(var {0} in {1}) {{", valueVar, valueReference)
-                            .Indent()
-                              .AppendLine(innerValidation)
-                            .Outdent()
-                          .AppendLine("}").ToString();
-                    }
-                    return builder.AppendLine("if ({0} && typeof {0} === 'object') {{", valueReference)
-                            .Indent()
-                              .AppendLine("for(var {0} in {1}) {{", valueVar, valueReference)
-                                .Indent()
-                                  .AppendLine(innerValidation)
-                                .Outdent()
-                              .AppendLine("}")
-                            .Outdent()
-                          .AppendLine("}").ToString();
-                }
+                return dictionary.ValidateDictionaryType(scope, valueReference, isRequired, modelReference);
             }
+
             return null;
         }
 
@@ -449,7 +490,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                         .Indent()
                             .AppendLine("{0} = {2}.discriminators[{0}['{1}']].deserialize({0});",
                                 valueReference,
-                                composite.PolymorphicDiscriminator, modelReference) 
+                                composite.PolymorphicDiscriminator, modelReference)
                         .Outdent()
                         .AppendLine("}} else {{", valueReference)
                         .Indent()
@@ -521,7 +562,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             }
 
             return parameter.Extensions.ContainsKey(CodeGenerator.SkipUrlEncodingExtension) &&
-                   (bool) parameter.Extensions[CodeGenerator.SkipUrlEncodingExtension];
+                   (bool)parameter.Extensions[CodeGenerator.SkipUrlEncodingExtension];
         }
     }
 }

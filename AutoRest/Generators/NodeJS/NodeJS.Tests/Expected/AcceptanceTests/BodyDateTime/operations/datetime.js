@@ -433,9 +433,8 @@ Datetime.prototype.putUtcMaxDateTime = function (datetimeBody, options, callback
   }
   // Validate
   try {
-    if(!datetimeBody || !(datetimeBody instanceof Date || 
-      (typeof datetimeBody.valueOf() === 'string' && !isNaN(Date.parse(datetimeBody))))) {
-    throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
+    if(!datetimeBody || !(datetimeBody instanceof Date || (typeof datetimeBody.valueOf() === 'string' && !isNaN(Date.parse(datetimeBody))))) {
+      throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
     }
   } catch (error) {
     return callback(error);
@@ -717,9 +716,8 @@ Datetime.prototype.putLocalPositiveOffsetMaxDateTime = function (datetimeBody, o
   }
   // Validate
   try {
-    if(!datetimeBody || !(datetimeBody instanceof Date || 
-      (typeof datetimeBody.valueOf() === 'string' && !isNaN(Date.parse(datetimeBody))))) {
-    throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
+    if(!datetimeBody || !(datetimeBody instanceof Date || (typeof datetimeBody.valueOf() === 'string' && !isNaN(Date.parse(datetimeBody))))) {
+      throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
     }
   } catch (error) {
     return callback(error);
@@ -1003,9 +1001,8 @@ Datetime.prototype.putLocalNegativeOffsetMaxDateTime = function (datetimeBody, o
   }
   // Validate
   try {
-    if(!datetimeBody || !(datetimeBody instanceof Date || 
-      (typeof datetimeBody.valueOf() === 'string' && !isNaN(Date.parse(datetimeBody))))) {
-    throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
+    if(!datetimeBody || !(datetimeBody instanceof Date || (typeof datetimeBody.valueOf() === 'string' && !isNaN(Date.parse(datetimeBody))))) {
+      throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
     }
   } catch (error) {
     return callback(error);
@@ -1288,9 +1285,8 @@ Datetime.prototype.putUtcMinDateTime = function (datetimeBody, options, callback
   }
   // Validate
   try {
-    if(!datetimeBody || !(datetimeBody instanceof Date || 
-      (typeof datetimeBody.valueOf() === 'string' && !isNaN(Date.parse(datetimeBody))))) {
-    throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
+    if(!datetimeBody || !(datetimeBody instanceof Date || (typeof datetimeBody.valueOf() === 'string' && !isNaN(Date.parse(datetimeBody))))) {
+      throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
     }
   } catch (error) {
     return callback(error);
@@ -1476,9 +1472,8 @@ Datetime.prototype.putLocalPositiveOffsetMinDateTime = function (datetimeBody, o
   }
   // Validate
   try {
-    if(!datetimeBody || !(datetimeBody instanceof Date || 
-      (typeof datetimeBody.valueOf() === 'string' && !isNaN(Date.parse(datetimeBody))))) {
-    throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
+    if(!datetimeBody || !(datetimeBody instanceof Date || (typeof datetimeBody.valueOf() === 'string' && !isNaN(Date.parse(datetimeBody))))) {
+      throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
     }
   } catch (error) {
     return callback(error);
@@ -1664,9 +1659,8 @@ Datetime.prototype.putLocalNegativeOffsetMinDateTime = function (datetimeBody, o
   }
   // Validate
   try {
-    if(!datetimeBody || !(datetimeBody instanceof Date || 
-      (typeof datetimeBody.valueOf() === 'string' && !isNaN(Date.parse(datetimeBody))))) {
-    throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
+    if(!datetimeBody || !(datetimeBody instanceof Date || (typeof datetimeBody.valueOf() === 'string' && !isNaN(Date.parse(datetimeBody))))) {
+      throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
     }
   } catch (error) {
     return callback(error);

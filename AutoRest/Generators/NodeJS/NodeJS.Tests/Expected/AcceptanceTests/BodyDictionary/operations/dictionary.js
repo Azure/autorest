@@ -3045,9 +3045,7 @@ Dictionary.prototype.putDateValid = function (arrayBody, options, callback) {
       throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
     }
     for(var valueElement in arrayBody) {
-      if (arrayBody[valueElement] && 
-          !(arrayBody[valueElement] instanceof Date || 
-            (typeof arrayBody[valueElement] === 'string' && !isNaN(Date.parse(arrayBody[valueElement]))))) {
+      if (arrayBody[valueElement] && !(arrayBody[valueElement] instanceof Date || (typeof arrayBody[valueElement].valueOf() === 'string' && !isNaN(Date.parse(arrayBody[valueElement]))))) {
         throw new Error('arrayBody[valueElement] must be of type date.');
       }
     }
@@ -3443,9 +3441,7 @@ Dictionary.prototype.putDateTimeValid = function (arrayBody, options, callback) 
       throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
     }
     for(var valueElement in arrayBody) {
-      if (arrayBody[valueElement] && 
-          !(arrayBody[valueElement] instanceof Date || 
-            (typeof arrayBody[valueElement] === 'string' && !isNaN(Date.parse(arrayBody[valueElement]))))) {
+      if (arrayBody[valueElement] && !(arrayBody[valueElement] instanceof Date || (typeof arrayBody[valueElement].valueOf() === 'string' && !isNaN(Date.parse(arrayBody[valueElement]))))) {
         throw new Error('arrayBody[valueElement] must be of type date.');
       }
     }
