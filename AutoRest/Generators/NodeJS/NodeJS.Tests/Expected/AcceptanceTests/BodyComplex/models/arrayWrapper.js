@@ -21,9 +21,9 @@ ArrayWrapper.prototype.validate = function (payload) {
   if (!payload) {
     throw new Error('ArrayWrapper cannot be null.');
   }
-  if (payload['array'] !== null && payload['array'] !== undefined && util.isArray(payload['array'])) {
+  if (util.isArray(payload['array'])) {
     for (var i = 0; i < payload['array'].length; i++) {
-      if (payload['array'][i] !== null && payload['array'][i] !== undefined && typeof payload['array'][i] !== 'string') {
+      if (payload['array'][i] !== null && payload['array'][i] !== undefined && typeof payload['array'][i].valueOf() !== 'string') {
         throw new Error('payload[\'array\'][i] must be of type string.');
       }
     }

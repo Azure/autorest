@@ -1,12 +1,12 @@
 $tests = 
 @{
-    "SwaggerBat\Lro"="..\..\AcceptanceTests\swagger\lro.json";
-    "SwaggerBat\Paging"="..\..\AcceptanceTests\swagger\paging.json";
-    "SwaggerBat\ResourceFlattening"="..\..\AcceptanceTests\swagger\resource-flattening.json";
-    "SwaggerBat\Head"="..\..\AcceptanceTests\swagger\head.json";
-    "SwaggerBat\Report"="..\..\AcceptanceTests\swagger\azure-report.json";
-    "SwaggerBat\SubscriptionIdApiVersion"="..\..\AcceptanceTests\swagger\subscriptionId-apiVersion.json";
-    "SwaggerBat\AzureSpecials"="..\..\AcceptanceTests\swagger\azure-special-properties.json";
+    "AcceptanceTests\Lro"="..\..\AcceptanceTests\swagger\lro.json";
+    "AcceptanceTests\Paging"="..\..\AcceptanceTests\swagger\paging.json";
+    "AcceptanceTests\ResourceFlattening"="..\..\AcceptanceTests\swagger\resource-flattening.json";
+    "AcceptanceTests\Head"="..\..\AcceptanceTests\swagger\head.json";
+    "AcceptanceTests\AzureReport"="..\..\AcceptanceTests\swagger\azure-report.json";
+    "AcceptanceTests\SubscriptionIdApiVersion"="..\..\AcceptanceTests\swagger\subscriptionId-apiVersion.json";
+    "AcceptanceTests\AzureSpecials"="..\..\AcceptanceTests\swagger\azure-special-properties.json";
 }
 
 Import-Module "$PSScriptRoot\..\..\..\..\binaries\net45\AutoRest.Core.dll"

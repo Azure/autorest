@@ -21,11 +21,11 @@ SubProduct.prototype.validate = function (payload) {
   if (!payload) {
     throw new Error('SubProduct cannot be null.');
   }
-  if (payload['id'] !== null && payload['id'] !== undefined && typeof payload['id'] !== 'string') {
+  if (payload['id'] !== null && payload['id'] !== undefined && typeof payload['id'].valueOf() !== 'string') {
     throw new Error('payload[\'id\'] must be of type string.');
   }
 
-  if (payload['properties'] !== null && payload['properties'] !== undefined) {
+  if (payload['properties']) {
     models['SubProductProperties'].validate(payload['properties']);
   }
 };

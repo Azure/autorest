@@ -1,21 +1,21 @@
 $tests = 
 @{
-    "SwaggerBat\BodyBoolean"="..\..\AcceptanceTests\swagger\body-boolean.json";
-    "SwaggerBat\BodyInteger"="..\..\AcceptanceTests\swagger\body-integer.json";
-    "SwaggerBat\BodyNumber"="..\..\AcceptanceTests\swagger\body-number.json";
-    "SwaggerBat\BodyString"="..\..\AcceptanceTests\swagger\body-string.json";
-    "SwaggerBat\BodyByte"="..\..\AcceptanceTests\swagger\body-byte.json";
-    "SwaggerBat\BodyArray"="..\..\AcceptanceTests\swagger\body-array.json";
-    "SwaggerBat\BodyDictionary"="..\..\AcceptanceTests\swagger\body-dictionary.json";
-    "SwaggerBat\BodyDate"="..\..\AcceptanceTests\swagger\body-date.json";
-    "SwaggerBat\BodyDateTime"="..\..\AcceptanceTests\swagger\body-datetime.json";
-    "SwaggerBat\BodyComplex"="..\..\AcceptanceTests\swagger\body-complex.json";
-    "SwaggerBat\BodyFile"="..\..\AcceptanceTests\swagger\body-file.json";
-    "SwaggerBat\Url"="..\..\AcceptanceTests\swagger\url.json";
-    "SwaggerBat\Header"="..\..\AcceptanceTests\swagger\header.json";
-    "SwaggerBat\Http"="..\..\AcceptanceTests\swagger\httpInfrastructure.json";
-    "SwaggerBat\RequiredOptional"="..\..\AcceptanceTests\swagger\required-optional.json";
-    "SwaggerBat\Report"="..\..\AcceptanceTests\swagger\report.json";
+    "AcceptanceTests\BodyBoolean"="..\..\AcceptanceTests\swagger\body-boolean.json";
+    "AcceptanceTests\BodyInteger"="..\..\AcceptanceTests\swagger\body-integer.json";
+    "AcceptanceTests\BodyNumber"="..\..\AcceptanceTests\swagger\body-number.json";
+    "AcceptanceTests\BodyString"="..\..\AcceptanceTests\swagger\body-string.json";
+    "AcceptanceTests\BodyByte"="..\..\AcceptanceTests\swagger\body-byte.json";
+    "AcceptanceTests\BodyArray"="..\..\AcceptanceTests\swagger\body-array.json";
+    "AcceptanceTests\BodyDictionary"="..\..\AcceptanceTests\swagger\body-dictionary.json";
+    "AcceptanceTests\BodyDate"="..\..\AcceptanceTests\swagger\body-date.json";
+    "AcceptanceTests\BodyDateTime"="..\..\AcceptanceTests\swagger\body-datetime.json";
+    "AcceptanceTests\BodyComplex"="..\..\AcceptanceTests\swagger\body-complex.json";
+    "AcceptanceTests\BodyFile"="..\..\AcceptanceTests\swagger\body-file.json";
+    "AcceptanceTests\Url"="..\..\AcceptanceTests\swagger\url.json";
+    "AcceptanceTests\Header"="..\..\AcceptanceTests\swagger\header.json";
+    "AcceptanceTests\Http"="..\..\AcceptanceTests\swagger\httpInfrastructure.json";
+    "AcceptanceTests\RequiredOptional"="..\..\AcceptanceTests\swagger\required-optional.json";
+    "AcceptanceTests\Report"="..\..\AcceptanceTests\swagger\report.json";
 }
 
 Import-Module "$PSScriptRoot\..\..\..\..\binaries\net45\AutoRest.Core.dll"

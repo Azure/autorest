@@ -21,7 +21,7 @@ C.prototype.validate = function (payload) {
   if (!payload) {
     throw new Error('C cannot be null.');
   }
-  if (payload['httpCode'] !== null && payload['httpCode'] !== undefined && typeof payload['httpCode'] !== 'string') {
+  if (payload['httpCode'] !== null && payload['httpCode'] !== undefined && typeof payload['httpCode'].valueOf() !== 'string') {
     throw new Error('payload[\'httpCode\'] must be of type string.');
   }
 };

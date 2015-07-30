@@ -21,11 +21,8 @@ StringWrapper.prototype.validate = function (payload) {
   if (!payload) {
     throw new Error('StringWrapper cannot be null.');
   }
-  if (payload['value'] === null || payload['value'] === undefined) {
-    throw new Error('payload[\'value\'] cannot be null or undefined.');
-  }
-  if (payload['value'] !== null && payload['value'] !== undefined && typeof payload['value'] !== 'string') {
-    throw new Error('payload[\'value\'] must be of type string.');
+  if (payload['value'] === null || payload['value'] === undefined || typeof payload['value'].valueOf() !== 'string') {
+    throw new Error('payload[\'value\'] cannot be null or undefined and it must be of type string.');
   }
 };
 

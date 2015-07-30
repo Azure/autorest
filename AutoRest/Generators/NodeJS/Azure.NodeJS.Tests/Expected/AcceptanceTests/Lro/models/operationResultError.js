@@ -25,7 +25,7 @@ OperationResultError.prototype.validate = function (payload) {
     throw new Error('payload[\'code\'] must be of type number.');
   }
 
-  if (payload['message'] !== null && payload['message'] !== undefined && typeof payload['message'] !== 'string') {
+  if (payload['message'] !== null && payload['message'] !== undefined && typeof payload['message'].valueOf() !== 'string') {
     throw new Error('payload[\'message\'] must be of type string.');
   }
 };
