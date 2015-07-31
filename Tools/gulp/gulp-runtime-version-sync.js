@@ -17,6 +17,11 @@ gulp.task('syncDependencies:runtime:cs', function () {
     gulp.src(codeGeneratorPath, { base: './' })
       .pipe(replace(/string ClientRuntimePackage = "(.+)"/, 'string ClientRuntimePackage = "' + name + '.' + version + '"'))
       .pipe(gulp.dest('.'));
+
+    var pkgTestConfig = './AutoRest/Generators/AcceptanceTests/NugetPackageTest/packages.config';
+    gulp.src(pkgTestConfig, { base: './' })
+      .pipe(replace(/<package id="Microsoft.Rest.ClientRuntime" version="([\.\d]+)"/, '<package id="Microsoft.Rest.ClientRuntime" version="' + version + '"'))
+      .pipe(gulp.dest('.'));
   });
 });
 
