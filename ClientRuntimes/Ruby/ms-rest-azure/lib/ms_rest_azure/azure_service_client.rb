@@ -289,7 +289,7 @@ module MsRestAzure
 
       # Create HTTP transport object
       connection = Faraday.new(:url => url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02, credentials: @credentials
+        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
         faraday.use MsRestAzure::TokenRefreshMiddleware, credentials: @credentials
         faraday.use :cookie_jar
         faraday.adapter Faraday.default_adapter
@@ -309,6 +309,7 @@ module MsRestAzure
       promise = Concurrent::Promise.new do
         connection.get do |request|
           request.headers = request_headers
+          @credentials.sign_request(request) unless @credentials.nil?
         end
       end
 
