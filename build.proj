@@ -202,9 +202,9 @@
     <!--Build and run tests-->
     <MSBuild Projects="$(TestProjectDir)\NugetPackageCsharpTest.csproj" Targets="rebuild" />
     <ItemGroup>
-      <TestDlls Include="$(TestProjectDir)\bin\$(Configuration)\NuGetPackageCSharpTest.dll" />
+      <NuGetPackageCSharpTestDlls Include="$(TestProjectDir)\bin\$(Configuration)\NuGetPackageCSharpTest.dll" />
     </ItemGroup>
-    <xunit Assemblies="@(TestDlls)" />
+    <xunit Assemblies="@(NuGetPackageCSharpTestDlls)" />
     <Exec WorkingDirectory="$(TestProjectDir)" Command="npm test"/>
   </Target>
 
