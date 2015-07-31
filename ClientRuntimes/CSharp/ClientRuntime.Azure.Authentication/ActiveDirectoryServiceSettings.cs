@@ -10,32 +10,18 @@ namespace Microsoft.Rest.Azure.Authentication
     /// <summary>
     /// Settings for authentication with an Azure or Azure Stack service using Active Directory.
     /// </summary>
-    public sealed class ActiveDirectorySettings : ICloneable
+    public sealed class ActiveDirectoryServiceSettings
     {
         private Uri _authenticationEndpoint;
-        /// <summary>
-        /// Query string allowing use of cookies in user login dialog
-        /// </summary>
-        public const string EnableEbdMagicCookie = "site_id=501358&display=popup";
 
-        /// <summary>
-        /// Initializes default active directory dialog parameters.
-        /// </summary>
-        public ActiveDirectorySettings()
-        {
-            this.PromptBehavior = PromptBehavior.Auto;
-            this.UserIdentifier = UserIdentifier.AnyUser;
-            this.AdditionalQueryParameters = EnableEbdMagicCookie;
-        }
-
-        private static readonly ActiveDirectorySettings AzureSettings = new ActiveDirectorySettings
+        private static readonly ActiveDirectoryServiceSettings AzureSettings = new ActiveDirectoryServiceSettings
         {
             AuthenticationEndpoint= new Uri("https://login.windows.net/"), 
             TokenAudience = new Uri("https://management.core.windows.net/"),
             ValidateAuthority = true
         };
 
-        private static readonly ActiveDirectorySettings AzureChinaSettings = new ActiveDirectorySettings
+        private static readonly ActiveDirectoryServiceSettings AzureChinaSettings = new ActiveDirectoryServiceSettings
         {
             AuthenticationEndpoint= new Uri("https://login.chinacloudapi.cn/"), 
             TokenAudience = new Uri("https://management.core.chinacloudapi.cn/"),
@@ -43,14 +29,14 @@ namespace Microsoft.Rest.Azure.Authentication
         };
 
         /// <summary>
-        /// Gets the settings for authentication with Azure
+        /// Gets the serviceSettings for authentication with Azure
         /// </summary>
-        public static ActiveDirectorySettings Azure { get { return AzureSettings; } }
+        public static ActiveDirectoryServiceSettings Azure { get { return AzureSettings; } }
 
         /// <summary>
-        /// Gets the settings for authentication with Azure China
+        /// Gets the serviceSettings for authentication with Azure China
         /// </summary>
-        public static ActiveDirectorySettings AzureChina { get { return AzureChinaSettings; } }
+        public static ActiveDirectoryServiceSettings AzureChina { get { return AzureChinaSettings; } }
 
         /// <summary>
         /// Gets or sets the ActiveDirectory Endpoint for the Azure Environment
@@ -70,26 +56,6 @@ namespace Microsoft.Rest.Azure.Authentication
         /// Gets or sets a value that determines whether the authentication endpoint should be validated with Azure AD
         /// </summary>
         public bool ValidateAuthority { get; set; }
-
-                /// <summary>
-        /// Gets or sets prompt behavior.
-        /// </summary>
-        public PromptBehavior PromptBehavior { get; set; }
-
-        /// <summary>
-        /// Gets or sets owner window.
-        /// </summary>
-        public object OwnerWindow { get; set; }
-
-        /// <summary>
-        /// The user identifier to be diaplayed in the dialog
-        /// </summary>
-        public UserIdentifier UserIdentifier { get; set; }
-
-        /// <summary>
-        /// Additional query parameters sent with the AD request
-        /// </summary>
-        public string AdditionalQueryParameters { get; set; }
 
         private static Uri EnsureTrailingSlash(Uri authenticationEndpoint)
         {
@@ -116,20 +82,6 @@ namespace Microsoft.Rest.Azure.Authentication
 
             builder.Path = path;
             return builder.Uri;
-        }
-
-        public object Clone()
-        {
-            return new ActiveDirectorySettings
-            {
-                AdditionalQueryParameters = this.AdditionalQueryParameters,
-                AuthenticationEndpoint = this.AuthenticationEndpoint,
-                OwnerWindow = this.OwnerWindow,
-                PromptBehavior = this.PromptBehavior,
-                TokenAudience = this.TokenAudience,
-                UserIdentifier = this.UserIdentifier,
-                ValidateAuthority = this.ValidateAuthority
-            };
         }
     }
 }

@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Configuration;
 using System.Globalization;
 using System.Net.Http.Headers;
 using System.Threading;
@@ -17,122 +18,348 @@ namespace Microsoft.Rest.Azure.Authentication
     public class UserTokenProvider : ITokenProvider
     {
         /// <summary>
+        /// The id of the active directory common tenant.
+        /// </summary>
+        public const string CommonTenantId = "common";
+        /// <summary>
         /// Uri parameters used in the credential prompt.  Allows recalling previous 
         /// logins in the login dialog.
         /// </summary>
-        private ActiveDirectorySettings _settings;
+        private string _tokenAudience;
         private AuthenticationContext _authenticationContext;
         private string _clientId;
-        private Uri _clientRedirectUri;
+        private UserIdentifier _userid;
 
         /// <summary>
-        /// Initializes a token provider using Active Directory user credentials (UPN). 
-        /// Use Login or LoginSilent methods to log in using the token provider before using the tokens.
+        /// Create a token provider which can provide user tokens in the given context.  The user must have previously authenticated in the given context. 
+        /// Tokens are retrieved from the token cache.
         /// </summary>
-        /// <param name="clientId">The client id for this application.</param>
-        /// <param name="domain">The domain or tenant id containing the resources to manage.</param>
-        /// <param name="clientRedirectUri">The redirect URI for authentication requests for 
-        /// this client application.</param>
-        public UserTokenProvider(string clientId, string domain, Uri clientRedirectUri)
-            : this(clientId, domain, ActiveDirectorySettings.Azure, clientRedirectUri)
+        /// <param name="context">The active directory authentication context to use for retrieving tokens.</param>
+        /// <param name="clientId">The active directory client Id to match when retieving tokens.</param>
+        /// <param name="tokenAudience">The audience to match when retrieving tokens.</param>
+        /// <param name="userId">The user id to match when retrieving tokens.</param>
+        public UserTokenProvider(AuthenticationContext context, string clientId, Uri tokenAudience,
+            UserIdentifier userId)
         {
-        }
-
-        /// <summary>
-        /// Initializes a token provider using Active Directory user credentials (UPN). 
-        /// Use Login or LoginSilent methods to log in using the token provider before using the tokens.
-        /// </summary>
-        /// <param name="clientId">The client id for this application.</param>
-        /// <param name="domain">The domain or tenant id containing the resources to manage.</param>
-        /// <param name="settings">The azure active directory settings to use for authentication.</param>
-        /// <param name="clientRedirectUri">The redirect URI for authentication requests for 
-        /// this client application.</param>
-        public UserTokenProvider(string clientId, string domain,
-            ActiveDirectorySettings settings, Uri clientRedirectUri)
-            : this(clientId, domain, settings, clientRedirectUri, null)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a token provider using Active Directory user credentials (UPN). 
-        /// Use Login or LoginSilent methods to log in using the token provider before using the tokens.
-        /// </summary>
-        /// <param name="clientId">The client id for this application.</param>
-        /// <param name="domain">The domain or tenant id containing the resources to manage.</param>
-        /// <param name="settings">The azure active directory settings to use for authentication.</param>
-        /// <param name="clientRedirectUri">The redirect URI for authentication requests for 
-        /// this client application.</param>
-        /// <param name="cache">The token cache to target during authentication.</param>
-        public UserTokenProvider(string clientId, string domain,
-            ActiveDirectorySettings settings, Uri clientRedirectUri,TokenCache cache)
-        {
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
             if (string.IsNullOrWhiteSpace(clientId))
             {
-                throw new ArgumentOutOfRangeException("clientId");
+                throw new ArgumentNullException("clientId");
             }
-            if (string.IsNullOrWhiteSpace(domain))
+            if (tokenAudience == null)
             {
-                throw new ArgumentOutOfRangeException("domain");
+                throw new ArgumentNullException("tokenAudience");
             }
-            if (settings == null || settings.AuthenticationEndpoint == null || settings.TokenAudience == null)
+            if (userId == null)
             {
-                throw new ArgumentOutOfRangeException("settings");
+                throw new ArgumentNullException("userId");
             }
 
+            this._authenticationContext = context;
             this._clientId = clientId;
-            this._settings = settings;
-            this._clientRedirectUri = clientRedirectUri;
-            this._authenticationContext = GetAuthenticationContext(domain, settings, cache,
-                settings.OwnerWindow);
+            this._tokenAudience = tokenAudience.ToString();
+            this._userid = userId;
         }
 
         /// <summary>
-        /// Log in to Azure active directory using a background thread.  This call may  display a user log in 
-        /// dialog, depending on the settings in ActiveDirectoryDialogParameters.
+        /// Log in to Azure active directory common tenant with user account and authentication provided by the user.  Authentication is automatically scoped to the default azure management endpoint. 
+        /// This call may display a credentials dialog, depending on the supplied client settings and the state of the token cache and user cookies.
         /// </summary>
-        public async Task LogOnAsync()
+        /// <param name="clientSettings">The client settings to use for authentication. These determien when a dialog will be displayed.</param>
+        /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
+        public static async Task<ServiceClientCredentials> LoginWithPromptAsync(
+            ActiveDirectoryClientSettings clientSettings)
         {
-            var completion = new TaskCompletionSource<AuthenticationResult>();
-            await Task.Run(() =>
+            return await LoginWithPromptAsync(CommonTenantId, clientSettings, ActiveDirectoryServiceSettings.Azure,
+               UserIdentifier.AnyUser, TokenCache.DefaultShared);
+        }
+
+        /// <summary>
+        /// Log in to Azure active directory common tenant using the given username, with authentication provided by the user.  Authentication is automatically scoped to the default azure management endpoint. 
+        /// This call may display a credentials dialog, depending on the supplied client settings and the state of the token cache and user cookies.
+        /// </summary>
+        /// <param name="clientSettings">The client settings to use for authentication. These determien when a dialog will be displayed.</param>
+        /// <param name="username">The username to use for authentication.</param>
+        /// <param name="cache">The token cache to target during authentication.</param>
+        /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
+        public static async Task<ServiceClientCredentials> LoginWithPromptAsync(
+            ActiveDirectoryClientSettings clientSettings, string username, TokenCache cache)
+        {
+            return await LoginWithPromptAsync(CommonTenantId, clientSettings, ActiveDirectoryServiceSettings.Azure,
+               new UserIdentifier(username, UserIdentifierType.RequiredDisplayableId), cache);
+        }
+
+        /// <summary>
+        /// Log in to Azure active directory common tenant using the given username, with authentication provided by the user.  Authentication is automatically scoped to the default azure management endpoint. 
+        /// This call may display a credentials dialog, depending on the supplied client settings and the state of the token cache and user cookies.
+        /// </summary>
+        /// <param name="clientSettings">The client settings to use for authentication. These determien when a dialog will be displayed.</param>
+        /// <param name="username">The username to use for authentication.</param>
+        /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
+        public static async Task<ServiceClientCredentials> LoginWithPromptAsync(
+            ActiveDirectoryClientSettings clientSettings, string username)
+        {
+            return await LoginWithPromptAsync(CommonTenantId, clientSettings, ActiveDirectoryServiceSettings.Azure,
+               new UserIdentifier(username, UserIdentifierType.RequiredDisplayableId), TokenCache.DefaultShared);
+        }
+
+        /// <summary>
+        /// Log in to Azure active directory common tenant with user account and authentication provided by the user.  Authentication is automatically scoped to the default azure management endpoint. 
+        /// This call may display a credentials dialog, depending on the supplied client settings and the state of the token cache and user cookies.
+        /// </summary>
+        /// <param name="clientSettings">The client settings to use for authentication. These determien when a dialog will be displayed.</param>
+        /// <param name="cache">The token cache to target during authentication.</param>
+        /// <returns>ServiceClientCredentials object for the common tenant that match provided authentication credentials.</returns>
+        public static async Task<ServiceClientCredentials> LoginWithPromptAsync(
+            ActiveDirectoryClientSettings clientSettings, TokenCache cache)
+        {
+            return await LoginWithPromptAsync(CommonTenantId, clientSettings, ActiveDirectoryServiceSettings.Azure,
+               UserIdentifier.AnyUser, cache);
+        }
+
+        /// <summary>
+        /// Log in to Azure active directory with user account and authentication provided by the user.  Authentication is automatically scoped to the default azure management endpoint. 
+        /// This call may display a credentials dialog, depending on the supplied client settings and the state of the token cache and user cookies.
+        /// </summary>
+        /// <param name="domain">The domain to authenticate against.</param>
+        /// <param name="clientSettings">The client settings to use for authentication. These determien when a dialog will be displayed.</param>
+        /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
+        public static async Task<ServiceClientCredentials> LoginWithPromptAsync(string domain,
+            ActiveDirectoryClientSettings clientSettings)
+        {
+            return await LoginWithPromptAsync(domain, clientSettings, ActiveDirectoryServiceSettings.Azure,
+               UserIdentifier.AnyUser, TokenCache.DefaultShared);
+        }
+
+        /// <summary>
+        /// Log in to Azure active directory using the given username with authentication provided by the user.  Authentication is automatically scoped to the default azure management endpoint. 
+        /// This call may display a credentials dialog, depending on the supplied client settings and the state of the token cache and user cookies.
+        /// </summary>
+        /// <param name="domain">The domain to authenticate against.</param>
+        /// <param name="clientSettings">The client settings to use for authentication. These determien when a dialog will be displayed.</param>
+        /// <param name="username">The username to use for authentication.</param>
+        /// <param name="cache">The token cache to target during authentication.</param>
+        /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
+        public static async Task<ServiceClientCredentials> LoginWithPromptAsync(string domain,
+            ActiveDirectoryClientSettings clientSettings, string username, TokenCache cache)
+        {
+            return await LoginWithPromptAsync(domain, clientSettings, ActiveDirectoryServiceSettings.Azure,
+               new UserIdentifier(username, UserIdentifierType.RequiredDisplayableId), cache);
+        }
+
+        /// <summary>
+        /// Log in to Azure active directory using the given username with authentication provided by the user.  Authentication is automatically scoped to the default azure management endpoint. 
+        /// This call may display a credentials dialog, depending on the supplied client settings and the state of the token cache and user cookies.
+        /// </summary>
+        /// <param name="domain">The domain to authenticate against.</param>
+        /// <param name="clientSettings">The client settings to use for authentication. These determien when a dialog will be displayed.</param>
+        /// <param name="username">The username to use for authentication.</param>
+        /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
+        public static async Task<ServiceClientCredentials> LoginWithPromptAsync(string domain,
+            ActiveDirectoryClientSettings clientSettings, string username)
+        {
+            return await LoginWithPromptAsync(domain, clientSettings, ActiveDirectoryServiceSettings.Azure,
+               new UserIdentifier(username, UserIdentifierType.RequiredDisplayableId), TokenCache.DefaultShared);
+        }
+
+        /// <summary>
+        /// Log in to Azure active directory with both user account and authentication credentials provided by the user.  This call may display a 
+        /// credentials dialog, depending on the supplied client settings and the state of the token cache and user cookies.
+        /// </summary>
+        /// <param name="domain">The domain to authenticate against.</param>
+        /// <param name="clientSettings">The client settings to use for authentication. These determien when a dialog will be displayed.</param>
+        /// <param name="cache">The token cache to target during authentication.</param>
+        /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
+        public static async Task<ServiceClientCredentials> LoginWithPromptAsync(string domain,
+            ActiveDirectoryClientSettings clientSettings, TokenCache cache)
+        {
+            return await LoginWithPromptAsync(domain, clientSettings, ActiveDirectoryServiceSettings.Azure,
+               UserIdentifier.AnyUser, cache);
+        }
+
+        /// <summary>
+        /// Log in to Azure active directory with both user account and authentication credentials provided by the user.  This call may display a 
+        /// credentials dialog, depending on the supplied client settings and the state of the token cache and user cookies.
+        /// </summary>
+        /// <param name="domain">The domain to authenticate against.</param>
+        /// <param name="clientSettings">The client settings to use for authentication. These determien when a dialog will be displayed.</param>
+        /// <param name="serviceSettings">The settings for ad service, including endpoint and token audience</param>
+        /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
+        public static async Task<ServiceClientCredentials> LoginWithPromptAsync(string domain,
+            ActiveDirectoryClientSettings clientSettings,
+            ActiveDirectoryServiceSettings serviceSettings)
+        {
+            return await LoginWithPromptAsync(domain, clientSettings, serviceSettings,
+               UserIdentifier.AnyUser, TokenCache.DefaultShared);
+        }
+
+        /// <summary>
+        /// Log in to Azure active directory with both user account and authentication credentials provided by the user.  This call may display a 
+        /// credentials dialog, depending on the supplied client settings and the state of the token cache and user cookies.
+        /// </summary>
+        /// <param name="domain">The domain to authenticate against.</param>
+        /// <param name="clientSettings">The client settings to use for authentication. These determien when a dialog will be displayed.</param>
+        /// <param name="serviceSettings">The settings for ad service, including endpoint and token audience</param>
+        /// <param name="cache">The token cache to target during authentication.</param>
+        /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
+        public static async Task<ServiceClientCredentials> LoginWithPromptAsync(string domain,
+            ActiveDirectoryClientSettings clientSettings,
+            ActiveDirectoryServiceSettings serviceSettings, TokenCache cache)
+        {
+            return await LoginWithPromptAsync(domain, clientSettings, serviceSettings,
+               UserIdentifier.AnyUser, cache);
+        }
+
+        /// <summary>
+        /// Log in to Azure active directory using the given username with authentication provided by the user.  This call may display a credentials 
+        /// dialog, depending on the supplied client settings and the state of the token cache and user cookies.
+        /// </summary>
+        /// <param name="domain">The domain to authenticate against.</param>
+        /// <param name="clientSettings">The client settings to use for authentication. These determien when a dialog will be displayed.</param>
+        /// <param name="serviceSettings">The settings for ad service, including endpoint and token audience</param>
+        /// <param name="username">The username to use for authentication.</param>
+        /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
+        public static async Task<ServiceClientCredentials> LoginWithPromptAsync(string domain,
+            ActiveDirectoryClientSettings clientSettings,
+            ActiveDirectoryServiceSettings serviceSettings, string username)
+        {
+            return await LoginWithPromptAsync(domain, clientSettings, serviceSettings,
+               new UserIdentifier(username, UserIdentifierType.RequiredDisplayableId), TokenCache.DefaultShared);
+        }
+
+        /// <summary>
+        /// Log in to Azure active directory using the given username with authentication provided by the user.  This call may display a credentials 
+        /// dialog, depending on the supplied client settings and the state of the token cache and user cookies.
+        /// </summary>
+        /// <param name="domain">The domain to authenticate against.</param>
+        /// <param name="clientSettings">The client settings to use for authentication. These determien when a dialog will be displayed.</param>
+        /// <param name="serviceSettings">The settings for ad service, including endpoint and token audience</param>
+        /// <param name="username">The username to use for authentication.</param>
+        /// <param name="cache">The token cache to target during authentication.</param>
+        /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
+        public static async Task<ServiceClientCredentials> LoginWithPromptAsync(string domain,
+            ActiveDirectoryClientSettings clientSettings,
+            ActiveDirectoryServiceSettings serviceSettings, string username, TokenCache cache)
+        {
+            return await LoginWithPromptAsync(domain, clientSettings, serviceSettings,
+               new UserIdentifier(username, UserIdentifierType.RequiredDisplayableId), cache);
+        }
+
+        /// <summary>
+        /// Log in to Azure active directory with credentials provided by the user.  This call may display a credentials 
+        /// dialog, depending on the supplied client settings and the state of the token cache and user cookies.
+        /// </summary>
+        /// <param name="domain">The domain to authenticate against.</param>
+        /// <param name="clientSettings">The client settings to use for authentication. These determien when a dialog will be displayed.</param>
+        /// <param name="serviceSettings">The settings for ad service, including endpoint and token audience</param>
+        /// <param name="userId">The userid of the desired credentials</param>
+        /// <param name="cache">The token cache to target during authentication.</param>
+        /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
+        public static async Task<ServiceClientCredentials> LoginWithPromptAsync(string domain, ActiveDirectoryClientSettings clientSettings, 
+            ActiveDirectoryServiceSettings serviceSettings, UserIdentifier userId, TokenCache cache)
+        {
+            var authenticationContext = GetAuthenticationContext(domain, serviceSettings, cache,
+                clientSettings.OwnerWindow);
+            TaskScheduler scheduler = TaskScheduler.FromCurrentSynchronizationContext();
+            var task = new Task<AuthenticationResult>(() =>
             {
                 try
                 {
-                    var result = this._authenticationContext.AcquireToken(
-                        this._settings.TokenAudience.ToString(),
-                        this._clientId,
-                        this._clientRedirectUri,
-                        this._settings.PromptBehavior,
-                        this._settings.UserIdentifier,
-                        this._settings.AdditionalQueryParameters);
-                    this._settings.UserIdentifier = new UserIdentifier(result.UserInfo.DisplayableId,
-                        UserIdentifierType.RequiredDisplayableId);
-                    completion.SetResult(result);
+                    var result = authenticationContext.AcquireToken(
+                        serviceSettings.TokenAudience.ToString(),
+                        clientSettings.ClientId,
+                        clientSettings.ClientRedirectUri,
+                        clientSettings.PromptBehavior,
+                        userId,
+                        clientSettings.AdditionalQueryParameters);
+                    return result;
                 }
                 catch (Exception e)
                 {
-                    completion.SetException(new AuthenticationException(
-                        string.Format(CultureInfo.CurrentCulture,Resources.ErrorAcquiringToken, 
-                        e.Message), e));
+                    throw new AuthenticationException(
+                        string.Format(CultureInfo.CurrentCulture, Resources.ErrorAcquiringToken,
+                            e.Message), e);
                 }
             });
-            await completion.Task.ConfigureAwait(false);
+            
+            task.Start(scheduler);
+            var authResult = await task.ConfigureAwait(false);
+            var newUserId = new UserIdentifier(authResult.UserInfo.DisplayableId,
+                UserIdentifierType.RequiredDisplayableId);
+            return new TokenCredentials(new UserTokenProvider(authenticationContext, clientSettings.ClientId,
+                serviceSettings.TokenAudience, newUserId));
         }
 
         /// <summary>
-        /// Log in to Azure Active Directory using the given username and password credential. 
-        /// No user log in dialog will be displayed.  This method requires the use of Organization credentials.
+        /// Log in to azure active directory in non-interactive mode using organizational id credentials and the default token cache. Default service 
+        /// settings (authority, audience) for logging in to azure resource manager are used.
         /// </summary>
-        /// <param name="username">The organization id user name.</param>
-        /// <param name="password">The password associated with this organization id.</param>
-        /// <returns>A task which completes when the authentication terminates.</returns>
-        public async Task LogOnSilentAsync(string username, string password)
+        /// <param name="clientId">The active directory client id for this application.</param>
+        /// <param name="domain">The active directory domain or tenant id to authenticate with.</param>
+        /// <param name="username">The organizational account user name, given in the form of a user principal name (e.g. user1@contoso.org).</param>
+        /// <param name="password">The organziational account password.</param>
+        /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
+        public static async Task<ServiceClientCredentials> LoginSilentAsync(string clientId, string domain, string username, string password)
+        {
+            return await LoginSilentAsync(clientId, domain, username, password, ActiveDirectoryServiceSettings.Azure, TokenCache.DefaultShared);
+        }
+
+        /// <summary>
+        /// Log in to azure active directory in non-interactive mode using organizational id credentials. Default service settings (autheority, audience) 
+        /// for logging in to azure resource manager are used.
+        /// </summary>
+        /// <param name="clientId">The active directory client id for this application.</param>
+        /// <param name="domain">The active directory domain or tenant id to authenticate with.</param>
+        /// <param name="username">The organizational account user name, given in the form of a user principal name (e.g. user1@contoso.org).</param>
+        /// <param name="password">The organziational account password.</param>
+        /// <param name="cache">The token cahe to target during authentication.</param>
+        /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
+        public static async Task<ServiceClientCredentials> LoginSilentAsync(string clientId, string domain, string username,
+            string password, TokenCache cache)
+        {
+            return await LoginSilentAsync(clientId, domain, username, password, ActiveDirectoryServiceSettings.Azure, cache);
+        }
+
+        /// <summary>
+        /// Log in to azure active directory in non-interactive mode using organizational id credentials and the defautl token cache.
+        /// </summary>
+        /// <param name="clientId">The active directory client id for this application.</param>
+        /// <param name="domain">The active directory domain or tenant id to authenticate with.</param>
+        /// <param name="username">The organizational account user name, given in the form of a user principal name (e.g. user1@contoso.org).</param>
+        /// <param name="password">The organziational account password.</param>
+        /// <param name="serviceSettings">The active directory service details, including authentication endpoints and the intended token audience.</param>
+        /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
+        public static async Task<ServiceClientCredentials> LoginSilentAsync(string clientId, string domain, string username,
+            string password, ActiveDirectoryServiceSettings serviceSettings)
+        {
+            return await LoginSilentAsync(clientId, domain, username, password, serviceSettings, TokenCache.DefaultShared);
+        }
+
+        /// <summary>
+        /// Log in to azure active directory in non-interactive mode using organizational id credentials.
+        /// </summary>
+        /// <param name="clientId">The active directory client id for this application.</param>
+        /// <param name="domain">The active directory domain or tenant id to authenticate with.</param>
+        /// <param name="username">The organizational account user name, given in the form of a user principal name (e.g. user1@contoso.org).</param>
+        /// <param name="password">The organziational account password.</param>
+        /// <param name="serviceSettings">The active directory service details, including authentication endpoints and the intended token audience.</param>
+        /// <param name="cache">The token cahe to target during authentication.</param>
+        /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
+        public static async Task<ServiceClientCredentials> LoginSilentAsync(string clientId, string domain, string username, string password, 
+            ActiveDirectoryServiceSettings serviceSettings, TokenCache cache)
         {
             var credentials = new UserCredential(username, password);
+            var authenticationContext = GetAuthenticationContext(domain, serviceSettings, cache, null);
             try
             {
-                await this._authenticationContext.AcquireTokenAsync(this._settings.TokenAudience.ToString(),
-                      this._clientId, credentials).ConfigureAwait(false);
-                this._settings.UserIdentifier = new UserIdentifier(username, UserIdentifierType.RequiredDisplayableId);
+                await authenticationContext.AcquireTokenAsync(serviceSettings.TokenAudience.ToString(),
+                      clientId, credentials).ConfigureAwait(false);
+                return
+                    new TokenCredentials(new UserTokenProvider(authenticationContext, clientId,
+                        serviceSettings.TokenAudience, new UserIdentifier(username, UserIdentifierType.RequiredDisplayableId)));
             }
             catch (AdalException ex)
             {
@@ -141,19 +368,74 @@ namespace Microsoft.Rest.Azure.Authentication
         }
 
         /// <summary>
-        /// Log in to Azure Active Directory using the given username and password credential. 
-        /// No user log in dialog will be displayed.  This method requires a previous log in with credentials stored
-        /// in the token cache.
+        /// Create service client credentials using information cached from a previous login to azure resource manager using the default token cache. 
+        /// Parameters are used to match existing tokens.
         /// </summary>
-        /// <param name="username">The user name of the previously logged in user.</param>
-        /// <returns>A task which completes when the authentication terminates.</returns>
-        public async Task LogOnSilentAsync(string username)
+        /// <param name="clientId">The clientId to matchg when retrieving authentication tokens.</param>
+        /// <param name="domain">The active directory domain or tenant id to match when retrieving authentication tokens.</param>
+        /// <param name="username">The account username to match when retrieving authentication tokens.</param>
+        /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the retrieved credentials. If no 
+        /// credentials can be retrieved, an authentication exception is thrown.</returns>
+        public static async Task<ServiceClientCredentials> CreateCredentialsFromCache(string clientId, string domain,
+            string username)
         {
-            this._settings.UserIdentifier  = new UserIdentifier(username, UserIdentifierType.RequiredDisplayableId);
+            return await CreateCredentialsFromCache(clientId, domain, username, ActiveDirectoryServiceSettings.Azure, TokenCache.DefaultShared);
+        }
+
+        /// <summary>
+        /// Create service client credentials using information cached from a previous login to azure resource manager. Parameters are used to match 
+        /// existing tokens.
+        /// </summary>
+        /// <param name="clientId">The clientId to matchg when retrieving authentication tokens.</param>
+        /// <param name="domain">The active directory domain or tenant id to match when retrieving authentication tokens.</param>
+        /// <param name="username">The account username to match when retrieving authentication tokens.</param>
+        /// <param name="cache">The token cache to target when retrieving tokens.</param>
+        /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the retrieved credentials. If no 
+        /// credentials can be retrieved, an authentication exception is thrown.</returns>
+        public static async Task<ServiceClientCredentials> CreateCredentialsFromCache(string clientId, string domain,
+            string username, TokenCache cache)
+        {
+            return await CreateCredentialsFromCache(clientId, domain, username, ActiveDirectoryServiceSettings.Azure, cache);
+        }
+
+        /// <summary>
+        /// Create service client credentials using information cached from a previous login in the default token cache. Parameters are used to match 
+        /// existing tokens.
+        /// </summary>
+        /// <param name="clientId">The clientId to matchg when retrieving authentication tokens.</param>
+        /// <param name="domain">The active directory domain or tenant id to match when retrieving authentication tokens.</param>
+        /// <param name="username">The account username to match when retrieving authentication tokens.</param>
+        /// <param name="serviceSettings">The active directory service settings, including token authoroity and audience to match when retrieving tokens.</param>
+        /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the retrieved credentials. If no 
+        /// credentials can be retrieved, an authentication exception is thrown.</returns>
+        public static async Task<ServiceClientCredentials> CreateCredentialsFromCache(string clientId, string domain,
+            string username, ActiveDirectoryServiceSettings serviceSettings)
+        {
+            return await CreateCredentialsFromCache(clientId, domain, username, serviceSettings, TokenCache.DefaultShared);
+        }
+
+        /// <summary>
+        /// Create service client credentials using information cached from a previous login. Parameters are used to match existing tokens.
+        /// </summary>
+        /// <param name="clientId">The clientId to matchg when retrieving authentication tokens.</param>
+        /// <param name="domain">The active directory domain or tenant id to match when retrieving authentication tokens.</param>
+        /// <param name="username">The account username to match when retrieving authentication tokens.</param>
+        /// <param name="serviceSettings">The active directory service settings, including token authoroity and audience to match when retrieving tokens.</param>
+        /// <param name="cache">The token cache to target when retrieving tokens.</param>
+        /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the retrieved credentials. If no 
+        /// credentials can be retrieved, an authentication exception is thrown.</returns>
+        public static async Task<ServiceClientCredentials> CreateCredentialsFromCache(string clientId, string domain, string username, 
+            ActiveDirectoryServiceSettings serviceSettings, TokenCache cache)
+        {
+            var userId = new UserIdentifier(username, UserIdentifierType.RequiredDisplayableId);
+            var authenticationContext = GetAuthenticationContext(domain, serviceSettings, cache, null);
             try
             {
-                await this._authenticationContext.AcquireTokenSilentAsync(this._settings.TokenAudience.ToString(), 
-                    this._clientId, this._settings.UserIdentifier ).ConfigureAwait(false);
+                await authenticationContext.AcquireTokenSilentAsync(serviceSettings.TokenAudience.ToString(),
+                      clientId, userId).ConfigureAwait(false);
+                return
+                    new TokenCredentials(new UserTokenProvider(authenticationContext, clientId,
+                        serviceSettings.TokenAudience, userId));
             }
             catch (AdalException ex)
             {
@@ -170,8 +452,8 @@ namespace Microsoft.Rest.Azure.Authentication
             cancellationToken.ThrowIfCancellationRequested();
             try
             {
-                AuthenticationResult result = await this._authenticationContext.AcquireTokenSilentAsync(this._settings.TokenAudience.ToString(),
-                    this._clientId, this._settings.UserIdentifier).ConfigureAwait(false);
+                AuthenticationResult result = await this._authenticationContext.AcquireTokenSilentAsync(this._tokenAudience,
+                    this._clientId, this._userid).ConfigureAwait(false);
                 return new AuthenticationHeaderValue(result.AccessTokenType, result.AccessToken);
             }
             catch (AdalException authenticationException)
@@ -180,14 +462,18 @@ namespace Microsoft.Rest.Azure.Authentication
             }
         }
 
-        private static AuthenticationContext GetAuthenticationContext(string domain, ActiveDirectorySettings settings, TokenCache cache, object ownerWindow)
+        private static AuthenticationContext GetAuthenticationContext(string domain, ActiveDirectoryServiceSettings serviceSettings, TokenCache cache, object ownerWindow)
         {
             var context = (cache == null
-                ? new AuthenticationContext(settings.AuthenticationEndpoint + domain,
-                    settings.ValidateAuthority)
-                : new AuthenticationContext(settings.AuthenticationEndpoint + domain,
-                    settings.ValidateAuthority, cache));
-            context.OwnerWindow = ownerWindow;
+                ? new AuthenticationContext(serviceSettings.AuthenticationEndpoint + domain,
+                    serviceSettings.ValidateAuthority)
+                : new AuthenticationContext(serviceSettings.AuthenticationEndpoint + domain,
+                    serviceSettings.ValidateAuthority, cache));
+            if (ownerWindow != null)
+            {
+                context.OwnerWindow = ownerWindow;
+            }
+
             return context;
         }
     }

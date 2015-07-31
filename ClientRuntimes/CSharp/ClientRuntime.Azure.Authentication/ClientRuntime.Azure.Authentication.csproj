@@ -22,18 +22,19 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActiveDirectoryClientSettings.cs" />
     <Compile Include="ApplicationTokenProvider.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="IUserCredentialProvider.cs" />
+    <Compile Include="IApplicationCredentialProvider.cs" />
+    <Compile Include="MemoryApplicationCredentialProvider.cs" />
     <Compile Include="UserTokenProvider.cs" />
-    <Compile Include="ApplicationTokenCredentials.cs" />
-    <Compile Include="ActiveDirectorySettings.cs" />
-    <Compile Include="CredentialsFactory.cs" />
+    <Compile Include="ActiveDirectoryServiceSettings.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="UserTokenCredentials.cs" />
     <Compile Include="AuthenticationException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

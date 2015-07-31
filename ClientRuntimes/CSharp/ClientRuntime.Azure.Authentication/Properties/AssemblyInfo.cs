@@ -21,3 +21,4 @@ using System.Runtime.InteropServices;
 [assembly: NeutralResourcesLanguage("en")]
 [assembly: CLSCompliant(false)]
 [assembly: ComVisible(false)]
+[assembly: InternalsVisibleTo("ClientRuntime.Azure.Tests", AllInternalsVisible =true)]
