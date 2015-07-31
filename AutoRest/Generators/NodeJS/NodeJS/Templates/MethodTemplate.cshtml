@@ -1,5 +1,6 @@
 ﻿@using System.Linq;
 @using Microsoft.Rest.Generator.ClientModel
+@using Microsoft.Rest.Generator.Utilities
 @using Microsoft.Rest.Generator.NodeJS
 @using Microsoft.Rest.Generator.NodeJS.TemplateModels
 @using Microsoft.Rest.Generator.NodeJS.Templates
@@ -20,7 +21,7 @@
  *
 @WrapComment(" * ",  " @returns {Stream} The Response stream")
  */
-@(Model.OperationName).prototype.@(Model.Name) = function (@(Model.MethodParameterDeclarationWithCallback)) {
+@(Model.OperationName).prototype.@(Model.Name.ToCamelCase()) = function (@(Model.MethodParameterDeclarationWithCallback)) {
   var client = @(Model.ClientReference);
   if(!callback && typeof options === 'function') {
     callback = options;

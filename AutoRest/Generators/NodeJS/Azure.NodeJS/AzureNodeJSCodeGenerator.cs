@@ -18,6 +18,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
     public class AzureNodeJSCodeGenerator : NodeJSCodeGenerator
     {
         private const string ClientRuntimePackage = "ms-rest-azure version 0.1.0";
+        public const string LongRunningExtension = "x-ms-long-running-operation";
 
         public AzureNodeJSCodeGenerator(Settings settings)
             : base(settings)
@@ -55,16 +56,46 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
+            //please do not change the following sequence as it may have undesirable results.
             Settings.AddCredentials = true;
             AzureCodeGenerator.UpdateHeadMethods(serviceClient);
             AzureCodeGenerator.ParseODataExtension(serviceClient);
             AzureCodeGenerator.AddPageableMethod(serviceClient);
-            AzureCodeGenerator.AddLongRunningOperations(serviceClient);
             AzureCodeGenerator.AddAzureProperties(serviceClient);
             AzureCodeGenerator.SetDefaultResponses(serviceClient);
             base.NormalizeClientModel(serviceClient);
+            AzureCodeGenerator.AddLongRunningOperations(serviceClient);
             NormalizeApiVersion(serviceClient);
             NormalizeCredentials(serviceClient);
+        }
+
+        /// <summary>
+        /// Creates long running operation methods.
+        /// </summary>
+        /// <param name="serviceClient"></param>
+        public void AddLongRunningOperations(ServiceClient serviceClient)
+        {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
+            for (int i = 0; i < serviceClient.Methods.Count; i++)
+            {
+                var method = serviceClient.Methods[i];
+                if (method.Extensions.ContainsKey(LongRunningExtension))
+                {
+                    var isLongRunning = method.Extensions[LongRunningExtension];
+                    if (isLongRunning is bool && (bool)isLongRunning)
+                    {
+                        serviceClient.Methods.Insert(i, (Method)method.Clone());
+                        method.Name = "begin" + Namer.GetMethodName(method.Name.ToPascalCase());
+                        i++;
+                    }
+
+                    method.Extensions.Remove(LongRunningExtension);
+                }
+            }
         }
 
         private static void NormalizeCredentials(ServiceClient serviceClient)
