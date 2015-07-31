@@ -34,6 +34,10 @@ namespace @Settings.Namespace
         /// </param>
         internal @(Model.MethodGroupType)(@(Model.Name) client)
         {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
             this.Client = client;
         }
         @EmptyLine
