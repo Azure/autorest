@@ -8,7 +8,6 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: 'eclipse'
 apply plugin: 'com.bmuschko.nexus'
 
 group = 'com.microsoft.rest'
@@ -28,6 +27,7 @@ dependencies {
 }
 
 modifyPom {
+    setArtifactId 'client-runtime'
     project {
         name 'Microsoft AutoRest Runtime for Java'
         description 'This is the client runtime for AutoRest generated Java clients.'
