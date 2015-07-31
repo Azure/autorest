@@ -168,6 +168,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
+#if DEBUG
         [EnvironmentDependentFact]
         public void ApplicationCredentialsCanBeRenewed()
         {
@@ -182,7 +183,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             var response = client.SendAsync(request).ConfigureAwait(false).GetAwaiter().GetResult();
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
-
+#endif
         class TestTokenCache : TokenCache
         {
             public void ForceTokenExpiry()
