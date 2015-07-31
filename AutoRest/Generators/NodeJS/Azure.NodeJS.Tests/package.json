@@ -20,14 +20,12 @@
   "dependencies": {
     "ms-rest": "file:../../../../ClientRuntimes/NodeJS/ClientRuntime",
     "ms-rest-azure": "file:../../../../ClientRuntimes/NodeJS/ClientRuntime.Azure",
-    "adal-node": "0.1.13",
     "jshint": "2.8.0",
     "xunit-file": "0.0.5",
     "mocha": "2.2.5",
     "should": "5.2.0",
-    "underscore": "*"
-  },
-  "devDependencies": {
+    "underscore": "*",
+    "adal-node": "0.1.13"
   },
   "homepage": "https://github.com/Azure/AutoRest",
   "repository": {
