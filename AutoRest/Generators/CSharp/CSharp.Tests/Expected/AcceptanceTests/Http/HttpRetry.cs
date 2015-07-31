@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsHttp
     /// <summary>
     /// HttpRetry operations.
     /// </summary>
-    internal partial class HttpRetry : IServiceOperations<AutoRestHttpInfrastructureTestService>, IHttpRetry
+    public partial class HttpRetry : IServiceOperations<AutoRestHttpInfrastructureTestService>, IHttpRetry
     {
         /// <summary>
         /// Initializes a new instance of the HttpRetry class.
@@ -33,8 +33,12 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        internal HttpRetry(AutoRestHttpInfrastructureTestService client)
+        public HttpRetry(AutoRestHttpInfrastructureTestService client)
         {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
             this.Client = client;
         }
 

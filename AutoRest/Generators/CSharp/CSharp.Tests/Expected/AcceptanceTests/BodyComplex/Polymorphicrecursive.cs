@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
     /// <summary>
     /// Polymorphicrecursive operations.
     /// </summary>
-    internal partial class Polymorphicrecursive : IServiceOperations<AutoRestComplexTestService>, IPolymorphicrecursive
+    public partial class Polymorphicrecursive : IServiceOperations<AutoRestComplexTestService>, IPolymorphicrecursive
     {
         /// <summary>
         /// Initializes a new instance of the Polymorphicrecursive class.
@@ -33,8 +33,12 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        internal Polymorphicrecursive(AutoRestComplexTestService client)
+        public Polymorphicrecursive(AutoRestComplexTestService client)
         {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
             this.Client = client;
         }
 

@@ -35,6 +35,10 @@ namespace Fixtures.Azure.AcceptanceTestsHead
         /// </param>
         internal HttpSuccessOperations(AutoRestHeadTestService client)
         {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
             this.Client = client;
         }
 

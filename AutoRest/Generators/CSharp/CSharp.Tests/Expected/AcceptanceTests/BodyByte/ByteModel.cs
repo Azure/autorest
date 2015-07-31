@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
     /// <summary>
     /// ByteModel operations.
     /// </summary>
-    internal partial class ByteModel : IServiceOperations<AutoRestSwaggerBATByteService>, IByteModel
+    public partial class ByteModel : IServiceOperations<AutoRestSwaggerBATByteService>, IByteModel
     {
         /// <summary>
         /// Initializes a new instance of the ByteModel class.
@@ -33,8 +33,12 @@ namespace Fixtures.AcceptanceTestsBodyByte
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        internal ByteModel(AutoRestSwaggerBATByteService client)
+        public ByteModel(AutoRestSwaggerBATByteService client)
         {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
             this.Client = client;
         }
 

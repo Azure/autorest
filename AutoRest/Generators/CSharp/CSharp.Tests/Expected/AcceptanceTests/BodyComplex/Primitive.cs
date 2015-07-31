@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
     /// <summary>
     /// Primitive operations.
     /// </summary>
-    internal partial class Primitive : IServiceOperations<AutoRestComplexTestService>, IPrimitive
+    public partial class Primitive : IServiceOperations<AutoRestComplexTestService>, IPrimitive
     {
         /// <summary>
         /// Initializes a new instance of the Primitive class.
@@ -33,8 +33,12 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        internal Primitive(AutoRestComplexTestService client)
+        public Primitive(AutoRestComplexTestService client)
         {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
             this.Client = client;
         }
 

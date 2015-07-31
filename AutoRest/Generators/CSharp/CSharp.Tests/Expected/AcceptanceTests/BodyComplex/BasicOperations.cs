@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
     /// <summary>
     /// BasicOperations operations.
     /// </summary>
-    internal partial class BasicOperations : IServiceOperations<AutoRestComplexTestService>, IBasicOperations
+    public partial class BasicOperations : IServiceOperations<AutoRestComplexTestService>, IBasicOperations
     {
         /// <summary>
         /// Initializes a new instance of the BasicOperations class.
@@ -33,8 +33,12 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        internal BasicOperations(AutoRestComplexTestService client)
+        public BasicOperations(AutoRestComplexTestService client)
         {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
             this.Client = client;
         }
 

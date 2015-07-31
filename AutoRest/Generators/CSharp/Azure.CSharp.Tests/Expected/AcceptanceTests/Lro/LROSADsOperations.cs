@@ -36,6 +36,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </param>
         internal LROSADsOperations(AutoRestLongRunningOperationTestService client)
         {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
             this.Client = client;
         }
 

@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
     /// <summary>
     /// Array operations.
     /// </summary>
-    internal partial class Array : IServiceOperations<AutoRestComplexTestService>, IArray
+    public partial class Array : IServiceOperations<AutoRestComplexTestService>, IArray
     {
         /// <summary>
         /// Initializes a new instance of the Array class.
@@ -33,8 +33,12 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        internal Array(AutoRestComplexTestService client)
+        public Array(AutoRestComplexTestService client)
         {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
             this.Client = client;
         }
 

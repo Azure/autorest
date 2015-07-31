@@ -36,6 +36,10 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         /// </param>
         internal GroupOperations(MicrosoftAzureTestUrl client)
         {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
             this.Client = client;
         }
 

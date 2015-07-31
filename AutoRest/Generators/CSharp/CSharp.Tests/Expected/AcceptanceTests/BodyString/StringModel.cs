@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyString
     /// <summary>
     /// StringModel operations.
     /// </summary>
-    internal partial class StringModel : IServiceOperations<AutoRestSwaggerBATService>, IStringModel
+    public partial class StringModel : IServiceOperations<AutoRestSwaggerBATService>, IStringModel
     {
         /// <summary>
         /// Initializes a new instance of the StringModel class.
@@ -33,8 +33,12 @@ namespace Fixtures.AcceptanceTestsBodyString
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        internal StringModel(AutoRestSwaggerBATService client)
+        public StringModel(AutoRestSwaggerBATService client)
         {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
             this.Client = client;
         }
 

@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
     /// <summary>
     /// Polymorphism operations.
     /// </summary>
-    internal partial class Polymorphism : IServiceOperations<AutoRestComplexTestService>, IPolymorphism
+    public partial class Polymorphism : IServiceOperations<AutoRestComplexTestService>, IPolymorphism
     {
         /// <summary>
         /// Initializes a new instance of the Polymorphism class.
@@ -33,8 +33,12 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        internal Polymorphism(AutoRestComplexTestService client)
+        public Polymorphism(AutoRestComplexTestService client)
         {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
             this.Client = client;
         }
 

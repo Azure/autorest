@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
     /// <summary>
     /// Array operations.
     /// </summary>
-    internal partial class Array : IServiceOperations<AutoRestSwaggerBATArrayService>, IArray
+    public partial class Array : IServiceOperations<AutoRestSwaggerBATArrayService>, IArray
     {
         /// <summary>
         /// Initializes a new instance of the Array class.
@@ -33,8 +33,12 @@ namespace Fixtures.AcceptanceTestsBodyArray
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        internal Array(AutoRestSwaggerBATArrayService client)
+        public Array(AutoRestSwaggerBATArrayService client)
         {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
             this.Client = client;
         }
 

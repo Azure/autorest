@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
     /// <summary>
     /// IntModel operations.
     /// </summary>
-    internal partial class IntModel : IServiceOperations<AutoRestIntegerTestService>, IIntModel
+    public partial class IntModel : IServiceOperations<AutoRestIntegerTestService>, IIntModel
     {
         /// <summary>
         /// Initializes a new instance of the IntModel class.
@@ -33,8 +33,12 @@ namespace Fixtures.AcceptanceTestsBodyInteger
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        internal IntModel(AutoRestIntegerTestService client)
+        public IntModel(AutoRestIntegerTestService client)
         {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
             this.Client = client;
         }
 

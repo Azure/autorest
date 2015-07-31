@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsHttp
     /// <summary>
     /// HttpClientFailure operations.
     /// </summary>
-    internal partial class HttpClientFailure : IServiceOperations<AutoRestHttpInfrastructureTestService>, IHttpClientFailure
+    public partial class HttpClientFailure : IServiceOperations<AutoRestHttpInfrastructureTestService>, IHttpClientFailure
     {
         /// <summary>
         /// Initializes a new instance of the HttpClientFailure class.
@@ -33,8 +33,12 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        internal HttpClientFailure(AutoRestHttpInfrastructureTestService client)
+        public HttpClientFailure(AutoRestHttpInfrastructureTestService client)
         {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
             this.Client = client;
         }
 

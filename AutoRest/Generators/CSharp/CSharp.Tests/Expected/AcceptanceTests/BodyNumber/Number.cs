@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
     /// <summary>
     /// Number operations.
     /// </summary>
-    internal partial class Number : IServiceOperations<AutoRestNumberTestService>, INumber
+    public partial class Number : IServiceOperations<AutoRestNumberTestService>, INumber
     {
         /// <summary>
         /// Initializes a new instance of the Number class.
@@ -33,8 +33,12 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        internal Number(AutoRestNumberTestService client)
+        public Number(AutoRestNumberTestService client)
         {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
             this.Client = client;
         }
 

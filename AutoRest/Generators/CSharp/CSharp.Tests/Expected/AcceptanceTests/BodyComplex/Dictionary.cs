@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
     /// <summary>
     /// Dictionary operations.
     /// </summary>
-    internal partial class Dictionary : IServiceOperations<AutoRestComplexTestService>, IDictionary
+    public partial class Dictionary : IServiceOperations<AutoRestComplexTestService>, IDictionary
     {
         /// <summary>
         /// Initializes a new instance of the Dictionary class.
@@ -33,8 +33,12 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        internal Dictionary(AutoRestComplexTestService client)
+        public Dictionary(AutoRestComplexTestService client)
         {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
             this.Client = client;
         }
 

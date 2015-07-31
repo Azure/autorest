@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyString
     /// <summary>
     /// EnumModel operations.
     /// </summary>
-    internal partial class EnumModel : IServiceOperations<AutoRestSwaggerBATService>, IEnumModel
+    public partial class EnumModel : IServiceOperations<AutoRestSwaggerBATService>, IEnumModel
     {
         /// <summary>
         /// Initializes a new instance of the EnumModel class.
@@ -33,8 +33,12 @@ namespace Fixtures.AcceptanceTestsBodyString
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        internal EnumModel(AutoRestSwaggerBATService client)
+        public EnumModel(AutoRestSwaggerBATService client)
         {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
             this.Client = client;
         }
 

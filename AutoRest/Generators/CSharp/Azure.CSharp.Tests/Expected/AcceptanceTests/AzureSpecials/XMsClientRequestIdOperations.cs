@@ -36,6 +36,10 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// </param>
         internal XMsClientRequestIdOperations(AutoRestAzureSpecialParametersTestClient client)
         {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
             this.Client = client;
         }
 

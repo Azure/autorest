@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
     /// <summary>
     /// ImplicitModel operations.
     /// </summary>
-    internal partial class ImplicitModel : IServiceOperations<AutoRestRequiredOptionalTestService>, IImplicitModel
+    public partial class ImplicitModel : IServiceOperations<AutoRestRequiredOptionalTestService>, IImplicitModel
     {
         /// <summary>
         /// Initializes a new instance of the ImplicitModel class.
@@ -33,8 +33,12 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        internal ImplicitModel(AutoRestRequiredOptionalTestService client)
+        public ImplicitModel(AutoRestRequiredOptionalTestService client)
         {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
             this.Client = client;
         }
 

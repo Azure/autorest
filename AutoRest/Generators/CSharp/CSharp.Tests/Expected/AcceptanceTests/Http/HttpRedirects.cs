@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsHttp
     /// <summary>
     /// HttpRedirects operations.
     /// </summary>
-    internal partial class HttpRedirects : IServiceOperations<AutoRestHttpInfrastructureTestService>, IHttpRedirects
+    public partial class HttpRedirects : IServiceOperations<AutoRestHttpInfrastructureTestService>, IHttpRedirects
     {
         /// <summary>
         /// Initializes a new instance of the HttpRedirects class.
@@ -33,8 +33,12 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        internal HttpRedirects(AutoRestHttpInfrastructureTestService client)
+        public HttpRedirects(AutoRestHttpInfrastructureTestService client)
         {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
             this.Client = client;
         }
 

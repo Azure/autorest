@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
     /// <summary>
     /// Datetime operations.
     /// </summary>
-    internal partial class Datetime : IServiceOperations<AutoRestDateTimeTestService>, IDatetime
+    public partial class Datetime : IServiceOperations<AutoRestDateTimeTestService>, IDatetime
     {
         /// <summary>
         /// Initializes a new instance of the Datetime class.
@@ -33,8 +33,12 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        internal Datetime(AutoRestDateTimeTestService client)
+        public Datetime(AutoRestDateTimeTestService client)
         {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
             this.Client = client;
         }
 

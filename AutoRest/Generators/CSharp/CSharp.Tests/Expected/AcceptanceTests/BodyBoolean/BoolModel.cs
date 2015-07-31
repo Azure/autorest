@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
     /// <summary>
     /// BoolModel operations.
     /// </summary>
-    internal partial class BoolModel : IServiceOperations<AutoRestBoolTestService>, IBoolModel
+    public partial class BoolModel : IServiceOperations<AutoRestBoolTestService>, IBoolModel
     {
         /// <summary>
         /// Initializes a new instance of the BoolModel class.
@@ -33,8 +33,12 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        internal BoolModel(AutoRestBoolTestService client)
+        public BoolModel(AutoRestBoolTestService client)
         {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
             this.Client = client;
         }
 

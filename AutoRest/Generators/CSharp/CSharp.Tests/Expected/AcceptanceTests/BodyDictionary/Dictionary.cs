@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
     /// <summary>
     /// Dictionary operations.
     /// </summary>
-    internal partial class Dictionary : IServiceOperations<AutoRestSwaggerBATdictionaryService>, IDictionary
+    public partial class Dictionary : IServiceOperations<AutoRestSwaggerBATdictionaryService>, IDictionary
     {
         /// <summary>
         /// Initializes a new instance of the Dictionary class.
@@ -33,8 +33,12 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        internal Dictionary(AutoRestSwaggerBATdictionaryService client)
+        public Dictionary(AutoRestSwaggerBATdictionaryService client)
         {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
             this.Client = client;
         }
 

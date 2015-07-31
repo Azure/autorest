@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsHttp
     /// <summary>
     /// HttpSuccess operations.
     /// </summary>
-    internal partial class HttpSuccess : IServiceOperations<AutoRestHttpInfrastructureTestService>, IHttpSuccess
+    public partial class HttpSuccess : IServiceOperations<AutoRestHttpInfrastructureTestService>, IHttpSuccess
     {
         /// <summary>
         /// Initializes a new instance of the HttpSuccess class.
@@ -33,8 +33,12 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        internal HttpSuccess(AutoRestHttpInfrastructureTestService client)
+        public HttpSuccess(AutoRestHttpInfrastructureTestService client)
         {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
             this.Client = client;
         }
 

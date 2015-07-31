@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsUrl
     /// <summary>
     /// Paths operations.
     /// </summary>
-    internal partial class Paths : IServiceOperations<AutoRestUrlTestService>, IPaths
+    public partial class Paths : IServiceOperations<AutoRestUrlTestService>, IPaths
     {
         /// <summary>
         /// Initializes a new instance of the Paths class.
@@ -33,8 +33,12 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        internal Paths(AutoRestUrlTestService client)
+        public Paths(AutoRestUrlTestService client)
         {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
             this.Client = client;
         }
 

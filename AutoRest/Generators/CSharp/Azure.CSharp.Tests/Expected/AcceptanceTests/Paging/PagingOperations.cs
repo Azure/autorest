@@ -36,6 +36,10 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </param>
         internal PagingOperations(AutoRestPagingTestService client)
         {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
             this.Client = client;
         }
 

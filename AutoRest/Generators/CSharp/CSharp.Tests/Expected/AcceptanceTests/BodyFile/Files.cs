@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyFile
     /// <summary>
     /// Files operations.
     /// </summary>
-    internal partial class Files : IServiceOperations<AutoRestSwaggerBATFileService>, IFiles
+    public partial class Files : IServiceOperations<AutoRestSwaggerBATFileService>, IFiles
     {
         /// <summary>
         /// Initializes a new instance of the Files class.
@@ -33,8 +33,12 @@ namespace Fixtures.AcceptanceTestsBodyFile
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        internal Files(AutoRestSwaggerBATFileService client)
+        public Files(AutoRestSwaggerBATFileService client)
         {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
             this.Client = client;
         }
 

@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
     /// <summary>
     /// Inheritance operations.
     /// </summary>
-    internal partial class Inheritance : IServiceOperations<AutoRestComplexTestService>, IInheritance
+    public partial class Inheritance : IServiceOperations<AutoRestComplexTestService>, IInheritance
     {
         /// <summary>
         /// Initializes a new instance of the Inheritance class.
@@ -33,8 +33,12 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        internal Inheritance(AutoRestComplexTestService client)
+        public Inheritance(AutoRestComplexTestService client)
         {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
             this.Client = client;
         }
 

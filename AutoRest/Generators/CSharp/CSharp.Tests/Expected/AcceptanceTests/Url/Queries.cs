@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsUrl
     /// <summary>
     /// Queries operations.
     /// </summary>
-    internal partial class Queries : IServiceOperations<AutoRestUrlTestService>, IQueries
+    public partial class Queries : IServiceOperations<AutoRestUrlTestService>, IQueries
     {
         /// <summary>
         /// Initializes a new instance of the Queries class.
@@ -33,8 +33,12 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        internal Queries(AutoRestUrlTestService client)
+        public Queries(AutoRestUrlTestService client)
         {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
             this.Client = client;
         }
 

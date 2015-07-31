@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsHttp
     /// <summary>
     /// MultipleResponses operations.
     /// </summary>
-    internal partial class MultipleResponses : IServiceOperations<AutoRestHttpInfrastructureTestService>, IMultipleResponses
+    public partial class MultipleResponses : IServiceOperations<AutoRestHttpInfrastructureTestService>, IMultipleResponses
     {
         /// <summary>
         /// Initializes a new instance of the MultipleResponses class.
@@ -33,8 +33,12 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        internal MultipleResponses(AutoRestHttpInfrastructureTestService client)
+        public MultipleResponses(AutoRestHttpInfrastructureTestService client)
         {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
             this.Client = client;
         }
 
