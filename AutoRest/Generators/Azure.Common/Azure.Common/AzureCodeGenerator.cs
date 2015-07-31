@@ -261,7 +261,7 @@ namespace Microsoft.Rest.Generator.Azure
                 },
                 IsRequired = true,
                 IsReadOnly = true,
-                Documentation = "Management credentials for Azure."
+                Documentation = "The management credentials for Azure."
             });
 
             serviceClient.Properties.Add(new Property
@@ -444,7 +444,7 @@ namespace Microsoft.Rest.Generator.Azure
                         Name = "nextPageLink",
                         SerializedName = "nextLink",
                         Type = PrimaryType.String,
-                        Documentation = "NextLink from the previous successful call to List operation.",
+                        Documentation = "The NextLink from the previous successful call to List operation.",
                         IsRequired = true,
                         Location = ParameterLocation.Path
                     };
