@@ -198,6 +198,10 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             this.BaseUri = new Uri("http://localhost");
             this.ApiVersion = "2015-07-01-preview";
             this.AcceptLanguage = "en-US";
+            if (this.Credentials != null)
+            {
+                this.Credentials.InitializeServiceClient(this);
+            }
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,
