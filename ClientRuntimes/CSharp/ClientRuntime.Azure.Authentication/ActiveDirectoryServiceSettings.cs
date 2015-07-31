@@ -2,25 +2,26 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Rest.Azure.Authentication.Properties;
 
 namespace Microsoft.Rest.Azure.Authentication
 {
     /// <summary>
-    /// Settings for authentication with an Azure or Azure Stack service
+    /// Settings for authentication with an Azure or Azure Stack service using Active Directory.
     /// </summary>
-    public sealed class ActiveDirectoryEnvironment
+    public sealed class ActiveDirectoryServiceSettings
     {
         private Uri _authenticationEndpoint;
 
-        private static readonly ActiveDirectoryEnvironment AzureSettings = new ActiveDirectoryEnvironment
+        private static readonly ActiveDirectoryServiceSettings AzureSettings = new ActiveDirectoryServiceSettings
         {
             AuthenticationEndpoint= new Uri("https://login.windows.net/"), 
             TokenAudience = new Uri("https://management.core.windows.net/"),
             ValidateAuthority = true
         };
 
-        private static readonly ActiveDirectoryEnvironment AzureChinaSettings = new ActiveDirectoryEnvironment
+        private static readonly ActiveDirectoryServiceSettings AzureChinaSettings = new ActiveDirectoryServiceSettings
         {
             AuthenticationEndpoint= new Uri("https://login.chinacloudapi.cn/"), 
             TokenAudience = new Uri("https://management.core.chinacloudapi.cn/"),
@@ -28,14 +29,14 @@ namespace Microsoft.Rest.Azure.Authentication
         };
 
         /// <summary>
-        /// Gets the settings for authentication with Azure
+        /// Gets the serviceSettings for authentication with Azure
         /// </summary>
-        public static ActiveDirectoryEnvironment Azure { get { return AzureSettings; } }
+        public static ActiveDirectoryServiceSettings Azure { get { return AzureSettings; } }
 
         /// <summary>
-        /// Gets the settings for authentication with Azure China
+        /// Gets the serviceSettings for authentication with Azure China
         /// </summary>
-        public static ActiveDirectoryEnvironment AzureChina { get { return AzureChinaSettings; } }
+        public static ActiveDirectoryServiceSettings AzureChina { get { return AzureChinaSettings; } }
 
         /// <summary>
         /// Gets or sets the ActiveDirectory Endpoint for the Azure Environment

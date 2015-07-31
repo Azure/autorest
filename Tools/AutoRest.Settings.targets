@@ -38,11 +38,21 @@
     <SignAssembly>$(CodeSign)</SignAssembly>
     <DelaySign>$(CodeSign)</DelaySign>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(LibraryFxTarget)' == 'net45'" >
-    <RestCustomConstants>NET45</RestCustomConstants>
-  </PropertyGroup>
   <PropertyGroup Condition=" '$(LibraryFxTarget)' == 'portable'" >
     <RestCustomConstants>PORTABLE</RestCustomConstants>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <DefineConstants>$(RestCustomConstants);$(PlatformConstants)</DefineConstants>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(LibraryFxTarget)' == 'net45' ">
+    <RestCustomConstants>NET45</RestCustomConstants>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids />
+    <DefineConstants>$(RestCustomConstants);$(PlatformConstants)</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Net45-Debug' or '$(Configuration)' == 'Portable-Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -59,20 +69,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(LibraryFxTarget)' == 'portable' ">
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
-    <FileAlignment>512</FileAlignment>
-    <DefineConstants>$(RestCustomConstants);$(PlatformConstants)</DefineConstants>
-    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(LibraryFxTarget)' == 'net45' ">
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids />
-    <DefineConstants>$(RestCustomConstants);$(PlatformConstants)</DefineConstants>
-  </PropertyGroup>
+
 
   <Target Name="InformationAboutThisBuild" BeforeTargets="BeforeBuild">
     <Error Text="The current build type has not been defined." Condition=" '$(LibraryFxTarget)' == '' " />

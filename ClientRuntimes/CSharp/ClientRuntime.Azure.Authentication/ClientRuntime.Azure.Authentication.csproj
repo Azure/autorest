@@ -22,17 +22,19 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActiveDirectoryApplicationTokenProvider.cs" />
-    <Compile Include="ActiveDirectoryParameters.cs" />
-    <Compile Include="ActiveDirectoryUserTokenProvider.cs" />
-    <Compile Include="ApplicationTokenCredentials.cs" />
-    <Compile Include="ActiveDirectoryEnvironment.cs" />
+    <Compile Include="ActiveDirectoryClientSettings.cs" />
+    <Compile Include="ApplicationTokenProvider.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="IUserCredentialProvider.cs" />
+    <Compile Include="IApplicationCredentialProvider.cs" />
+    <Compile Include="MemoryApplicationCredentialProvider.cs" />
+    <Compile Include="UserTokenProvider.cs" />
+    <Compile Include="ActiveDirectoryServiceSettings.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="UserTokenCredentials.cs" />
     <Compile Include="AuthenticationException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -46,9 +48,10 @@
     <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory">
       <HintPath>$(CommonNugetPackageFolder)\Microsoft.IdentityModel.Clients.ActiveDirectory.2.18.206251556\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
     </Reference>
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.IdentityModel" />
-    <Reference Include="System.Windows.Forms" />
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory.WindowsForms">
+      <HintPath>$(CommonNugetPackageFolder)\Microsoft.IdentityModel.Clients.ActiveDirectory.2.18.206251556\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.WindowsForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
