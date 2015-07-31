@@ -32,6 +32,18 @@
     <Compile Include="TemplateModels\AzureMethodTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureServiceClientTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureMethodGroupTemplateModel.cs" />
+    <Compile Include="Templates\AzureMethodGroupTemplate.cs">
+      <DependentUpon>AzureMethodGroupTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\AzureMethodTemplate.cs">
+      <DependentUpon>AzureMethodTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\AzureModelIndexTemplate.cs">
+      <DependentUpon>AzureModelIndexTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\AzureServiceClientTemplate.cs">
+      <DependentUpon>AzureServiceClientTemplate.cshtml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\AutoRest.Core\AutoRest.Core.csproj">

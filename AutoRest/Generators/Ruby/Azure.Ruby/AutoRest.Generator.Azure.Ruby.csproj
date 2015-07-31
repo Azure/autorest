@@ -40,6 +40,12 @@
     <Compile Include="TemplateModels\AzureParameterTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureRequirementsTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureServiceClientTemplateModel.cs" />
+    <Compile Include="Templates\AzureMethodGroupTemplate.cs">
+      <DependentUpon>AzureMethodGroupTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\AzureMethodTemplate.cs">
+      <DependentUpon>AzureMethodTemplate.cshtml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
