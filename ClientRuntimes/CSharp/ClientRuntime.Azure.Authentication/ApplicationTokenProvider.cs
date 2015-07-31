@@ -28,8 +28,10 @@ namespace Microsoft.Rest.Azure.Authentication
         private static readonly TimeSpan ExpirationThreshold = TimeSpan.FromMinutes(5);
 
         /// <summary>
-        /// Create an application token providere that can retrieve tokens for the given application from the given context, using the given audience 
+        /// Create an application token provider that can retrieve tokens for the given application from the given context, using the given audience 
         /// and credential.
+        /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">Active Directory Quickstart for .Net</see> 
+        /// for detailed instructions on creating an Azure Active Directory application.
         /// </summary>
         /// <param name="context">The authentication context to use when retrieving tokens.</param>
         /// <param name="tokenAudience">The token audience to use when retrieving tokens.</param>
@@ -51,9 +53,11 @@ namespace Microsoft.Rest.Azure.Authentication
         }
 
         /// <summary>
-        /// Create an application token providere that can retrieve tokens for the given application from the given context, using the given audience 
+        /// Create an application token provider that can retrieve tokens for the given application from the given context, using the given audience 
         /// and credential store.
-        /// </summary>
+         /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">Active Directory Quickstart for .Net</see> 
+        /// for detailed instructions on creating an Azure Active Directory application.
+       /// </summary>
         /// <param name="context">The authentication context to use when retrieving tokens.</param>
         /// <param name="tokenAudience">The token audience to use when retrieving tokens</param>
         /// <param name="clientId">The client Id for this active directory application</param>
@@ -71,8 +75,10 @@ namespace Microsoft.Rest.Azure.Authentication
         }
 
         /// <summary>
-        /// Create an application token providere that can retrieve tokens for the given application from the given context, using the given audience 
+        /// Create an application token provider that can retrieve tokens for the given application from the given context, using the given audience 
         /// and credential store.
+        /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">Active Directory Quickstart for .Net</see> 
+        /// for detailed instructions on creating an Azure Active Directory application.
         /// </summary>
         /// <param name="context">The authentication context to use when retrieving tokens.</param>
         /// <param name="tokenAudience">The token audience to use when retrieving tokens</param>

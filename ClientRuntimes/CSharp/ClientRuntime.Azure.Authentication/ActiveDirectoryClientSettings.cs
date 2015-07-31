@@ -26,6 +26,14 @@ namespace Microsoft.Rest.Azure.Authentication
             this.AdditionalQueryParameters = EnableEbdMagicCookie;
         }
 
+        /// <summary>
+        /// Initializes active directory client settings with the application specific properties
+        /// for client id and client redirect uri.
+        /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">Active Directory Quickstart for .Net</see> 
+        /// for detailed instructions on creating an Azure Active Directory application.
+        /// </summary>
+        /// <param name="clientId">The active directory client id.</param>
+        /// <param name="clientRedirectUri">The client redirect uri defined for this application in active directory.</param>
         public ActiveDirectoryClientSettings(string clientId, Uri clientRedirectUri) : this()
         {
             this.ClientId = clientId;
@@ -58,7 +66,7 @@ namespace Microsoft.Rest.Azure.Authentication
         public Uri ClientRedirectUri { get; set; }
 
         /// <summary>
-        /// Returns active directory cient settings that suppresses user credential prompts. Authentication 
+        /// Returns active directory cient settings that suppress user credential prompts. Authentication 
         /// will succeed if and only if previous authentication results are cached in the TokenCache or 
         /// client cookies. 
         /// </summary>
