@@ -121,6 +121,6 @@
     <value>Long running operations for '{0}' requires a GET operation under the same path and same operation group '{1}'.</value>
   </data>
   <data name="UsageInformation" xml:space="preserve">
-    <value>The Microsoft.Rest.ClientRuntime.Azure.1.0.20 nuget package is required to compile the generated code.</value>
+    <value>The {0} nuget package is required to compile the generated code.</value>
   </data>
 </root>

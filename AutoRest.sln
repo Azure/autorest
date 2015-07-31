@@ -78,6 +78,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gulp", "gulp", "{9750C692-C
 		Tools\gulp\gulp-nuget-proj-sync.js = Tools\gulp\gulp-nuget-proj-sync.js
 		Tools\gulp\gulp-nuspec-sync.js = Tools\gulp\gulp-nuspec-sync.js
 		Tools\gulp\gulp-regenerate-expected.js = Tools\gulp\gulp-regenerate-expected.js
+		Tools\gulp\gulp-runtime-version-sync.js = Tools\gulp\gulp-runtime-version-sync.js
 	EndProjectSection
 EndProject
 Global
