@@ -7,10 +7,10 @@ using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Microsoft Rest Azure Client Runtime")]
-[assembly: AssemblyDescription("Client infrastructure for Azure client libraries.")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.18.0")]
+[assembly: AssemblyTitle("Microsoft Rest Azure Client Runtime Authentication")]
+[assembly: AssemblyDescription("Client authentication infrastructure for Azure client libraries.")]
+[assembly: AssemblyVersion("0.9.0.0")]
+[assembly: AssemblyFileVersion("0.9.3.0")]
 
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft Corporation")]
@@ -21,3 +21,6 @@ using System.Runtime.InteropServices;
 [assembly: NeutralResourcesLanguage("en")]
 [assembly: CLSCompliant(false)]
 [assembly: ComVisible(false)]
+#if DEBUG
+[assembly: InternalsVisibleTo("ClientRuntime.Azure.Tests", AllInternalsVisible =true)]
+#endif

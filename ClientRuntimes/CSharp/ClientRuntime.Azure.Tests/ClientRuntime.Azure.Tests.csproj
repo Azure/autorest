@@ -21,7 +21,7 @@
   </PropertyGroup>
   <Import Project="$(SolutionDir)\Tools\AutoRest.Settings.targets" />
   <ItemGroup>
-    <Compile Include="AzureEnvironmentTest.cs" />
+    <Compile Include="ActiveDirectorySettingsTest.cs" />
     <Compile Include="Fakes\FakeServiceClientWithCredentials.cs" />
     <Compile Include="Fakes\FakeServiceClient.cs" />
     <Compile Include="Fakes\PlaybackTestHandler.cs" />

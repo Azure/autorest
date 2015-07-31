@@ -1,21 +1,25 @@
-/// <binding BeforeBuild='syncDotNetDependencies' />
+/// <binding AfterBuild='syncDependencies' />
 var gulp = require('gulp');
 var msbuild = require('gulp-msbuild');
+var debug = require('gulp-debug');
+var env = require('gulp-env');
 var path = require('path');
 var fs = require('fs');
-var debug = require('gulp-debug');
 var glob = require('glob');
 var spawn = require('child_process').spawn;
 var assemblyInfo = require('gulp-dotnet-assembly-info');
 var nuspecSync = require('./Tools/gulp/gulp-nuspec-sync');
+var runtimeVersionSync = require('./Tools/gulp/gulp-runtime-version-sync');
 var nugetProjSync = require('./Tools/gulp/gulp-nuget-proj-sync');
 var regenExpected = require('./Tools/gulp/gulp-regenerate-expected');
 var del = require('del');
 var gutil = require('gulp-util');
 var runSequence = require('run-sequence');
+var requireDir = require('require-dir')('./Tools/gulp');
 
 const DEFAULT_ASSEMBLY_VERSION = '0.9.0.0';
 const MAX_BUFFER = 1024 * 1024;
+process.env.MSBUILDDISABLENODEREUSE = 1;
 
 function basePathOrThrow() {
   if (!gutil.env.basePath) {
@@ -178,7 +182,7 @@ gulp.task('clean:generatedTest', function(cb) {
 
 gulp.task('clean', ['clean:build', 'clean:templates', 'clean:generatedTest']);
 
-gulp.task('syncNugetProjs', function() {
+gulp.task('syncDependencies:nugetProj', function() {
   var dirs = glob.sync(path.join(basePathOrThrow(), '/**/*.nuget.proj'))
     .map(function(filePath) {
       return path.dirname(filePath);
@@ -195,7 +199,7 @@ gulp.task('syncNugetProjs', function() {
     .pipe(gulp.dest('.'))
 })
 
-gulp.task('syncNuspecs', function() {
+gulp.task('syncDependencies:nuspec', function() {
   var dirs = glob.sync(path.join(basePathOrThrow(), '/**/packages.config'))
     .map(function(filePath) {
       return path.dirname(filePath);
@@ -210,7 +214,9 @@ gulp.task('syncNuspecs', function() {
     .pipe(gulp.dest('.'))
 });
 
-gulp.task('syncDotNetDependencies', ['syncNugetProjs', 'syncNuspecs']);
+gulp.task('syncDependencies:runtime', ['syncDependencies:runtime:cs', 'syncDependencies:runtime:csazure', 'syncDependencies:runtime:node', 'syncDependencies:runtime:nodeazure']);
+
+gulp.task('syncDependencies', ['syncDependencies:nugetProj', 'syncDependencies:nuspec', 'syncDependencies:runtime']);
 
 gulp.task('build', function(cb) {
   // warning 0219 is for unused variables, which causes the build to fail on xbuild
