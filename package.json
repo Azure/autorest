@@ -23,6 +23,7 @@
     "del": "^1.2.0",
     "glob": "^5.0.13",
     "gulp": "^3.9.0",
+    "gulp-env": "^0.2.0",
     "gulp-msbuild": "^0.2.12",
     "gulp-replace": "^0.5.3",
     "gulp-debug": "^2.0.1",

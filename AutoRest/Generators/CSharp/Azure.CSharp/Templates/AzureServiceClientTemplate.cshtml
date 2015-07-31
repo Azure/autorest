@@ -207,7 +207,7 @@ namespace @Settings.Namespace
         }
 
         @if (Model.Properties.Any(p => "Credentials".Equals(p.Name, StringComparison.OrdinalIgnoreCase) &&
-            "SubscriptionCloudCredentials".Equals(p.Type.Name, StringComparison.OrdinalIgnoreCase)))
+            "ServiceClientCredentials".Equals(p.Type.Name, StringComparison.OrdinalIgnoreCase)))
         {
             @:if (this.Credentials != null)
             @:{

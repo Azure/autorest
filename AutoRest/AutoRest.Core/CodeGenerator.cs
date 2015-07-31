@@ -68,9 +68,9 @@ namespace Microsoft.Rest.Generator
         /// Writes a template into the specified relative path.
         /// </summary>
         /// <param name="template"></param>
-        /// <param name="relativeFilePath"></param>
+        /// <param name="fileName"></param>
         /// <returns></returns>
-        public async Task Write(ITemplate template, string relativeFilePath)
+        public async Task Write(ITemplate template, string fileName)
         {
             template.Settings = Settings;
             var stringBuilder = new StringBuilder();
@@ -78,7 +78,7 @@ namespace Microsoft.Rest.Generator
             {
                 await template.ExecuteAsync().ConfigureAwait(false);
             }
-            await Write(stringBuilder.ToString(), relativeFilePath);
+            await Write(stringBuilder.ToString(), fileName);
         }
 
         /// <summary>
@@ -108,9 +108,8 @@ namespace Microsoft.Rest.Generator
             }
             string filePath = Path.Combine(Settings.OutputDirectory, relativeFilePath);
 
-            // cleans file before writing 
-            if (Settings.OutputFileName != null ||
-                !IsSingleFileGenerationSupported)
+            // cleans file before writing unless single file
+            if (!(Settings.OutputFileName != null && IsSingleFileGenerationSupported))
             {
                 Settings.FileSystem.DeleteFile(filePath);
             }

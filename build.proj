@@ -155,7 +155,7 @@
 
     <Message Text="@(TestDlls)" />
     <MakeDir Directories="$(LibraryRoot)TestResults"/>
-    <xunit Assemblies="@(TestDlls)" Html="$(MSBuildProjectDirectory)\TestResults\xunit.results.html" ContinueOnError="false" />
+    <xunit Assemblies="@(TestDlls)" Html="$(MSBuildProjectDirectory)\TestResults\xunit.clientruntime.html" ContinueOnError="false" />
     <Exec WorkingDirectory=".\ClientRuntimes\NodeJS\ms-rest\" Command="npm test"/>
     <Exec WorkingDirectory=".\ClientRuntimes\NodeJS\ms-rest-azure\" Command="npm test"/>
   </Target>
@@ -174,7 +174,7 @@
     <Message Text="@(TestDlls)" />
     <MakeDir Directories="$(LibraryRoot)TestResults"/>
     <!-- <Exec WorkingDirectory=".\ClientRuntimes\Ruby\" Command="UpdateRuntime"/> -->
-    <xunit Assemblies="@(TestDlls)" Html="$(MSBuildProjectDirectory)\TestResults\xunit.results.html" ContinueOnError="false" />
+    <xunit Assemblies="@(TestDlls)" Html="$(MSBuildProjectDirectory)\TestResults\xunit.codegen.html" ContinueOnError="false" />
     <Exec WorkingDirectory="$(LibraryRoot)\AutoRest\Generators\NodeJS\NodeJS.Tests\" Command="npm test"/>
     <Exec WorkingDirectory="$(LibraryRoot)\AutoRest\Generators\NodeJS\Azure.NodeJS.Tests\" Command="npm test"/>
   </Target>
@@ -202,9 +202,9 @@
     <!--Build and run tests-->
     <MSBuild Projects="$(TestProjectDir)\NugetPackageCsharpTest.csproj" Targets="rebuild" />
     <ItemGroup>
-      <TestDlls Include="$(TestProjectDir)\bin\$(Configuration)\NuGetPackageCSharpTest.dll" />
+      <NuGetPackageCSharpTestDlls Include="$(TestProjectDir)\bin\$(Configuration)\NuGetPackageCSharpTest.dll" />
     </ItemGroup>
-    <xunit Assemblies="@(TestDlls)" />
+    <xunit Assemblies="@(NuGetPackageCSharpTestDlls)" />
     <Exec WorkingDirectory="$(TestProjectDir)" Command="npm test"/>
   </Target>
 
