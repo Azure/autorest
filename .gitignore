@@ -135,6 +135,8 @@ local.properties
 .classpath
 .project
 target
+build
+.gradle
 .idea
 *.iml
 

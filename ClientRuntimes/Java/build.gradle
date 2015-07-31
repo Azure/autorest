@@ -1,0 +1,42 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "file://$buildDir/repo")
+            pom.setGroupId 'com.microsoft.rest'
+	    	pom.setArtifactId 'client-runtime'
+	    	pom.setVersion '0.0.1'
+	    	pom.setPackaging 'jar'
+	    	pom.project {
+	            licenses {
+	                license {
+	                    name 'The MIT License (MIT)'
+	                    url 'http://opensource.org/licenses/MIT'
+	                    distribution 'repo'
+	                }
+	            }
+	        }
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.3.6'
+    compile group: 'org.apache.commons', name: 'commons-io', version: '1.3.2'
+    compile group: 'commons-codec', name: 'commons-codec', version: '1.10'
+    compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile group: 'junit', name: 'junit-dep', version: '4.11'
+}
