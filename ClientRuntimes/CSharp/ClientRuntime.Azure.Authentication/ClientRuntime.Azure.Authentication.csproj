@@ -22,11 +22,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActiveDirectoryApplicationTokenProvider.cs" />
-    <Compile Include="ActiveDirectoryParameters.cs" />
-    <Compile Include="ActiveDirectoryUserTokenProvider.cs" />
+    <Compile Include="ApplicationTokenProvider.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="UserTokenProvider.cs" />
     <Compile Include="ApplicationTokenCredentials.cs" />
-    <Compile Include="ActiveDirectoryEnvironment.cs" />
+    <Compile Include="ActiveDirectorySettings.cs" />
+    <Compile Include="CredentialsFactory.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -46,9 +47,10 @@
     <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory">
       <HintPath>$(CommonNugetPackageFolder)\Microsoft.IdentityModel.Clients.ActiveDirectory.2.18.206251556\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
     </Reference>
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.IdentityModel" />
-    <Reference Include="System.Windows.Forms" />
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory.WindowsForms">
+      <HintPath>$(CommonNugetPackageFolder)\Microsoft.IdentityModel.Clients.ActiveDirectory.2.18.206251556\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.WindowsForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
