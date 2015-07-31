@@ -29,9 +29,9 @@ public class ServiceException extends Exception {
     private HttpResponse response;
 
     /**
-     * The HTTP response object, wrapped in a ServiceExceptionModel.
+     * The HTTP response object.
      */
-    private ServiceExceptionModel errorModel;
+    private Object errorModel;
 
     /**
      * Initializes a new instance of the ServiceException class.
@@ -87,11 +87,11 @@ public class ServiceException extends Exception {
     }
 
     /**
-     * Gets the HTTP response object, wrapped in a ServiceExceptionModel.
+     * Gets the HTTP response object.
      *
      * @return the response object
      */
-    public ServiceExceptionModel getErrorModel() {
+    public Object getErrorModel() {
         return errorModel;
     }
 
@@ -114,11 +114,11 @@ public class ServiceException extends Exception {
     }
 
     /**
-     * Sets the HTTP response object, wrapped in a ServiceExceptionModel.
+     * Sets the HTTP response object.
      *
      * @param errorModel the response object
      */
-    public void setErrorModel(ServiceExceptionModel errorModel) {
+    public void setErrorModel(Object errorModel) {
         this.errorModel = errorModel;
     }
 }
