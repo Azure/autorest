@@ -1,16 +1,18 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Threading.Tasks;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.CSharp.Templates;
 using System.IO;
+using System.Globalization;
 
 namespace Microsoft.Rest.Generator.CSharp
 {
     public class CSharpCodeGenerator : CodeGenerator
     {
         private readonly CSharpCodeNamer _namer;
+        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.1.2.0";
 
         public CSharpCodeGenerator(Settings settings) : base(settings)
         {
@@ -31,7 +33,10 @@ namespace Microsoft.Rest.Generator.CSharp
 
         public override string UsageInstructions
         {
-            get { return Properties.Resources.UsageInformation; }
+            get {
+                return string.Format(CultureInfo.InvariantCulture,
+                    Properties.Resources.UsageInformation, ClientRuntimePackage);
+            }
         }
 
         public override string ImplementationFileExtension

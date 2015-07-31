@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using Microsoft.Rest.Generator.ClientModel;
@@ -8,11 +8,14 @@ using Microsoft.Rest.Generator.Utilities;
 using System.Linq;
 using System.Threading.Tasks;
 using System.IO;
+using System.Globalization;
 
 namespace Microsoft.Rest.Generator.NodeJS
 {
     public class NodeJSCodeGenerator : CodeGenerator
     {
+        private const string ClientRuntimePackage = "ms-rest version 1.0.0";
+
         public NodeJsCodeNamer Namer { get; private set; }
 
         public NodeJSCodeGenerator(Settings settings) : base(settings)
@@ -33,8 +36,11 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         public override string UsageInstructions
         {
-            // TODO: resource string with correct usage message.
-            get { return Resources.UsageInstructions; }
+            get
+            {
+                return string.Format(CultureInfo.InvariantCulture,
+                    Resources.UsageInformation, ClientRuntimePackage);
+            }
         }
 
         public override string ImplementationFileExtension
