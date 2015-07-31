@@ -134,9 +134,6 @@
     <Message Text="Compiling Razor templates for project $(MSBuildProjectDirectory)" />
     <!-- Compile razor template. -->
     <Exec Command="$(RazorCommand) &quot;$(MSBuildProjectDirectory)\Templates&quot; $(RootNamespace).Templates" />
-    <ItemGroup>
-      <Compile Include="$(MSBuildProjectDirectory)\Templates\*.cs"/>
-    </ItemGroup>
   </Target>
 
   <Target Name="TurnOffCodeAnalysis">
