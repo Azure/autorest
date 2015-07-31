@@ -289,6 +289,7 @@ namespace Microsoft.Rest.Azure.Authentication
                     credentialProvider, authResult));
         }
 
+#if DEBUG
         /// <summary>
         /// For testing purposes only: allows testing token expiration.
         /// </summary>
@@ -309,7 +310,7 @@ namespace Microsoft.Rest.Azure.Authentication
             return new TokenCredentials(new ApplicationTokenProvider(context, audience, clientId,
                     credentialProvider, authResult, expiration));
         }
-
+#endif
         /// <summary>
         /// Gets an access token from the token cache or from AD authentication endpoint. 
         /// Attempts to refresh the access token if it has expired.
