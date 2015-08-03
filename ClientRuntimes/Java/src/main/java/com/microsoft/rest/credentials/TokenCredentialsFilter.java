@@ -7,13 +7,13 @@
 
 package com.microsoft.rest.credentials;
 
-import com.microsoft.rest.pipeline.ServiceRequestFilter;
-import org.apache.http.HttpRequest;
+import javax.ws.rs.client.ClientRequestContext;
+import javax.ws.rs.client.ClientRequestFilter;
 
 /**
  * Token credentials filter for placing a token credentials into Apache pipeline.
  */
-public class TokenCredentialsFilter implements ServiceRequestFilter {
+public class TokenCredentialsFilter implements ClientRequestFilter {
     private TokenCredentials credentials;
 
     /**
@@ -30,7 +30,7 @@ public class TokenCredentialsFilter implements ServiceRequestFilter {
      * @see com.microsoft.rest.pipeline.ServiceRequestFilter#filter(org.apache.http.HttpRequest)
      */
     @Override
-    public void filter(HttpRequest request) {
-        request.setHeader("Authorization", credentials.getScheme() + " " + credentials.getToken());
+    public void filter(ClientRequestContext clientRequestContext) {
+        clientRequestContext.getHeaders().add("Authorization", credentials.getScheme() + " " + credentials.getToken());
     }
 }

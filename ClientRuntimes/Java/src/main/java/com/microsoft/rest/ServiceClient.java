@@ -7,20 +7,14 @@
 
 package com.microsoft.rest;
 
-import com.microsoft.rest.pipeline.HttpRequestInterceptorBackAdapter;
-import com.microsoft.rest.pipeline.HttpRequestInterceptorFrontAdapter;
-import com.microsoft.rest.pipeline.HttpResponseInterceptorBackAdapter;
-import com.microsoft.rest.pipeline.HttpResponseInterceptorFrontAdapter;
-import com.microsoft.rest.pipeline.ServiceRequestFilter;
-import com.microsoft.rest.pipeline.ServiceResponseFilter;
-import org.apache.http.HttpHost;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
+import org.glassfish.jersey.client.ClientConfig;
 
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.ClientRequestFilter;
+import javax.ws.rs.client.ClientResponseFilter;
 import java.io.Closeable;
 import java.io.IOException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * ServiceClient is the abstraction for accessing REST operations and their payload data types.
@@ -28,140 +22,58 @@ import java.util.concurrent.Executors;
  * @param <T> type of the ServiceClient
  */
 public abstract class ServiceClient<T> implements Closeable {
-    private final ExecutorService executorService;
-    private CloseableHttpClient httpClient;
-    private HttpRequestInterceptorFrontAdapter httpRequestInterceptorFrontAdapter;
-    private HttpRequestInterceptorBackAdapter httpRequestInterceptorBackAdapter;
-    private HttpResponseInterceptorFrontAdapter httpResponseInterceptorFrontAdapter;
-    private HttpResponseInterceptorBackAdapter httpResponseInterceptorBackAdapter;
-    private final HttpClientBuilder httpClientBuilder;
+    private Client client;
 
     /**
      * Initializes a new instance of the ServiceClient class.
      */
     public ServiceClient() {
-        this(HttpClientBuilder.create(), Executors.newCachedThreadPool());
+        this(new ClientConfig());
     }
 
     /**
      * Initializes a new instance of the ServiceClient class.
      *
-     * @param httpClientBuilder the apache HttpClientBuilder for creating Http clients
-     * @param executorService   the ExecutorService for asynchronous operations
+     * @param clientConfig the Jersey client configuration for building the client
      */
-    public ServiceClient(HttpClientBuilder httpClientBuilder,
-            ExecutorService executorService) {
-        this.httpClientBuilder = httpClientBuilder;
-        this.executorService = executorService;
+    public ServiceClient(ClientConfig clientConfig) {
+        client = ClientBuilder.newClient(clientConfig);
     }
 
     /**
-     * Get the ExecutorService.
-     *
-     * @return the ExecutorService
+     * Get the client instance.
+     * @return the client instance.
      */
-    public ExecutorService getExecutorService() {
-        return this.executorService;
+    public Client getClient() {
+        return client;
     }
 
     /**
-     * Get the HttpClientBuilder.
+     * Add a ServiceRequestFilter to the Jersey client
      *
-     * @return the HttpClientBuilder
+     * @param clientRequestFilter the filter to be added
      */
-    public HttpClientBuilder getHttpClientBuilder() {
-        return this.httpClientBuilder;
+    public ServiceClient addRequestFilter(ClientRequestFilter clientRequestFilter) {
+        client.register(clientRequestFilter);
+        return this;
     }
 
     /**
-     * Get the HttpClient. A new HttpClient will be built from the HttpClientBuilder
-     * if one is not built yet.
+     * Add a ServiceResponseFilter to the Jersey client
      *
-     * @return the HttpClient instance
+     * @param clientResponseFilter the filter to be added
      */
-    public CloseableHttpClient getHttpClient() {
-        if (this.httpClient == null) {
-            String proxyHost = System.getProperty("http.proxyHost");
-            String proxyPort = System.getProperty("http.proxyPort");
-            if ((proxyHost != null) && (proxyPort != null)) {
-                HttpHost proxy = new HttpHost(proxyHost, Integer.parseInt(proxyPort));
-                if (proxy != null) {
-                    httpClientBuilder.setProxy(proxy);
-                }
-            }
-
-            this.httpClient = httpClientBuilder.build();
-        }
-
-        return this.httpClient;
-    }
-
-    /**
-     * Add a ServiceRequestFilter to the beginning of all the request filters in
-     * Apache pipeline.
-     *
-     * @param serviceRequestFilter the filter to be added
-     */
-    public void addRequestFilterFirst(
-            ServiceRequestFilter serviceRequestFilter) {
-        if (httpRequestInterceptorFrontAdapter == null) {
-            httpRequestInterceptorFrontAdapter = new HttpRequestInterceptorFrontAdapter();
-            httpClientBuilder.addInterceptorFirst(httpRequestInterceptorFrontAdapter);
-        }
-        httpRequestInterceptorFrontAdapter.addFront(serviceRequestFilter);
-    }
-
-    /**
-     * Add a ServiceRequestFilter to the end of all the request filters in
-     * Apache pipeline.
-     *
-     * @param serviceRequestFilter the filter to be added
-     */
-    public void addRequestFilterLast(
-            ServiceRequestFilter serviceRequestFilter) {
-        if (httpRequestInterceptorBackAdapter == null) {
-            httpRequestInterceptorBackAdapter = new HttpRequestInterceptorBackAdapter();
-            httpClientBuilder.addInterceptorLast(httpRequestInterceptorBackAdapter);
-        }
-        httpRequestInterceptorBackAdapter.addBack(serviceRequestFilter);
-    }
-
-    /**
-     * Add a ServiceResponseFilter to the beginning of all the response filters in
-     * Apache pipeline.
-     *
-     * @param serviceResponseFilter the filter to be added
-     */
-    public void addResponseFilterFirst(
-            ServiceResponseFilter serviceResponseFilter) {
-        if (httpResponseInterceptorFrontAdapter == null) {
-            httpResponseInterceptorFrontAdapter = new HttpResponseInterceptorFrontAdapter();
-            httpClientBuilder.addInterceptorFirst(httpResponseInterceptorFrontAdapter);
-        }
-        httpResponseInterceptorFrontAdapter.addFront(serviceResponseFilter);
-    }
-
-    /**
-     * Add a ServiceResponseFilter to the end of all the response filters in
-     * Apache pipeline.
-     *
-     * @param serviceResponseFilter the filter to be added
-     */
-    public void addResponseFilterLast(
-            ServiceResponseFilter serviceResponseFilter) {
-        if (httpResponseInterceptorBackAdapter == null) {
-            httpResponseInterceptorBackAdapter = new HttpResponseInterceptorBackAdapter();
-            httpClientBuilder.addInterceptorLast(httpResponseInterceptorBackAdapter);
-        }
-        httpResponseInterceptorBackAdapter.addBack(serviceResponseFilter);
+    public ServiceClient addResponseFilter(ClientResponseFilter clientResponseFilter) {
+        client.register(clientResponseFilter);
+        return this;
     }
 
     /* (non-Javadoc)
      * @see java.io.Closeable#close()
      */
     public void close() throws IOException {
-        if (httpClient != null) {
-            httpClient.close();
+        if (client != null) {
+            client.close();
         }
     }
 }

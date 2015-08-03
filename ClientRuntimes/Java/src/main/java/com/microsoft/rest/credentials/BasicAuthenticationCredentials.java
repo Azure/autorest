@@ -59,6 +59,6 @@ public class BasicAuthenticationCredentials extends ServiceClientCredentials {
      */
     @Override
     public void applyCredentialsFilter(ServiceClient client) {
-        client.addRequestFilterFirst(new BasicAuthenticationCredentialsFilter(this));
+        client.addRequestFilter(new BasicAuthenticationCredentialsFilter(this));
     }
 }
