@@ -46,8 +46,8 @@ Shark.prototype.validate = function (payload) {
   }
 
   if(!payload['birthday'] || !(payload['birthday'] instanceof Date || 
-    (typeof payload['birthday'].valueOf() === 'string' && !isNaN(Date.parse(payload['birthday']))))) {
-  throw new Error('payload[\'birthday\'] cannot be null or undefined and it must be of type date.');
+      (typeof payload['birthday'].valueOf() === 'string' && !isNaN(Date.parse(payload['birthday']))))) {
+    throw new Error('payload[\'birthday\'] cannot be null or undefined and it must be of type date.');
   }
 };
 

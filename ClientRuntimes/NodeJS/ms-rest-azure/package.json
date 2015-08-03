@@ -23,7 +23,7 @@
     "async": "0.2.7",
     "uuid": "2.0.1",
     "adal-node": "0.1.13",
-    "ms-rest": "file:../ClientRuntime"
+    "ms-rest": "file:../ms-rest"
   },
   "devDependencies": {
     "jshint": "2.6.3",

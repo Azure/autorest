@@ -46,8 +46,8 @@ Sawshark.prototype.validate = function (payload) {
   }
 
   if(!payload['birthday'] || !(payload['birthday'] instanceof Date || 
-    (typeof payload['birthday'].valueOf() === 'string' && !isNaN(Date.parse(payload['birthday']))))) {
-  throw new Error('payload[\'birthday\'] cannot be null or undefined and it must be of type date.');
+      (typeof payload['birthday'].valueOf() === 'string' && !isNaN(Date.parse(payload['birthday']))))) {
+    throw new Error('payload[\'birthday\'] cannot be null or undefined and it must be of type date.');
   }
 
   if (payload['picture'] && !Buffer.isBuffer(payload['picture'])) {
@@ -82,7 +82,7 @@ Sawshark.prototype.deserialize = function (instance) {
       instance.birthday = new Date(instance.birthday);
     }
 
-    if (instance.picture !== null && instance.picture !== undefined && typeof instance.picture === 'string') {
+    if (instance.picture !== null && instance.picture !== undefined && typeof instance.picture.valueOf() === 'string') {
       instance.picture = new Buffer(instance.picture, 'base64');
     }
   }

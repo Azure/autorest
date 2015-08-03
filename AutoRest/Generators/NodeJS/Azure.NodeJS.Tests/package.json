@@ -18,8 +18,8 @@
     }
   ],
   "dependencies": {
-    "ms-rest": "file:../../../../ClientRuntimes/NodeJS/ClientRuntime",
-    "ms-rest-azure": "file:../../../../ClientRuntimes/NodeJS/ClientRuntime.Azure",
+    "ms-rest": "file:../../../../ClientRuntimes/NodeJS/ms-rest",
+    "ms-rest-azure": "file:../../../../ClientRuntimes/NodeJS/ms-rest-azure",
     "jshint": "2.8.0",
     "xunit-file": "0.0.5",
     "mocha": "2.2.5",
