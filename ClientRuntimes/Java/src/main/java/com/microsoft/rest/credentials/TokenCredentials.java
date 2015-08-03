@@ -59,6 +59,6 @@ public class TokenCredentials extends ServiceClientCredentials {
      */
     @Override
     public void applyCredentialsFilter(ServiceClient client) {
-        client.addRequestFilterFirst(new TokenCredentialsFilter(this));
+        client.addRequestFilter(new TokenCredentialsFilter(this));
     }
 }

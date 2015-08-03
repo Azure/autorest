@@ -7,16 +7,16 @@
 
 package com.microsoft.rest.credentials;
 
-import com.microsoft.rest.pipeline.ServiceRequestFilter;
 import org.apache.commons.codec.binary.Base64;
-import org.apache.http.HttpRequest;
 
+import javax.ws.rs.client.ClientRequestContext;
+import javax.ws.rs.client.ClientRequestFilter;
 import java.io.UnsupportedEncodingException;
 
 /**
  * Basic Auth credentials filter for placing a basic auth credentials into Apache pipeline.
  */
-public class BasicAuthenticationCredentialsFilter implements ServiceRequestFilter {
+public class BasicAuthenticationCredentialsFilter implements ClientRequestFilter {
     private BasicAuthenticationCredentials credentials;
 
     /**
@@ -33,11 +33,11 @@ public class BasicAuthenticationCredentialsFilter implements ServiceRequestFilte
      * @see com.microsoft.rest.pipeline.ServiceRequestFilter#filter(org.apache.http.HttpRequest)
      */
     @Override
-    public void filter(HttpRequest request) {
+    public void filter(ClientRequestContext clientRequestContext) {
         try {
             String auth = credentials.getUserName() + ":" + credentials.getPassword();
             auth = Base64.encodeBase64String(auth.getBytes("UTF8"));
-            request.setHeader("Authorization", "Basic " + auth);
+            clientRequestContext.getHeaders().add("Authorization", "Basic " + auth);
         } catch (UnsupportedEncodingException e) {
             // silently fail
         }
