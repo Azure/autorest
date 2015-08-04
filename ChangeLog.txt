@@ -1,3 +1,8 @@
+2015.08.05 Version 0.11.0
+* Added Azure C# and Azure NodeJS client runtimes and code generators
+* Bug fixes for C# and NodeJS code generators (#272, #260, #229, #246, #245, #239, #237, #230, #229, #217, #209, #206, #195, #194)
+* Added NodeJS Client Runtime and Code Generator
+
 2015.07.10 Version 0.10.0
 * Improved C# Client Runtime and Code Generator
     * Changed serialization implementation to use Newtonsoft.Json.Net library
