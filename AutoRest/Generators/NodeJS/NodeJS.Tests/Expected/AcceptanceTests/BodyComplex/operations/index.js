@@ -13,10 +13,10 @@
 
 'use strict';
 
-exports.BasicOperations = require('./BasicOperations');
-exports.Primitive = require('./Primitive');
-exports.ArrayModel = require('./ArrayModel');
-exports.Dictionary = require('./Dictionary');
-exports.Inheritance = require('./Inheritance');
-exports.Polymorphism = require('./Polymorphism');
-exports.Polymorphicrecursive = require('./Polymorphicrecursive');
+exports.BasicOperations = require('./basicOperations');
+exports.Primitive = require('./primitive');
+exports.ArrayModel = require('./arrayModel');
+exports.Dictionary = require('./dictionary');
+exports.Inheritance = require('./inheritance');
+exports.Polymorphism = require('./polymorphism');
+exports.Polymorphicrecursive = require('./polymorphicrecursive');

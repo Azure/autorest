@@ -17,10 +17,10 @@ var msRestAzure = require('ms-rest-azure');
 
 exports.Resource = msRestAzure.Resource;
 exports.CloudError = msRestAzure.CloudError;
-exports.Sku = require('./Sku');
-exports.Product = require('./Product');
-exports.ProductProperties = require('./ProductProperties');
-exports.SubProduct = require('./SubProduct');
-exports.SubProductProperties = require('./SubProductProperties');
-exports.OperationResult = require('./OperationResult');
-exports.OperationResultError = require('./OperationResultError');
+exports.Sku = require('./sku');
+exports.Product = require('./product');
+exports.ProductProperties = require('./productProperties');
+exports.SubProduct = require('./subProduct');
+exports.SubProductProperties = require('./subProductProperties');
+exports.OperationResult = require('./operationResult');
+exports.OperationResultError = require('./operationResultError');

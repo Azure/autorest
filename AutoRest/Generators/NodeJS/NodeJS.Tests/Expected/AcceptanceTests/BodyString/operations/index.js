@@ -13,5 +13,5 @@
 
 'use strict';
 
-exports.String = require('./String');
-exports.EnumModel = require('./EnumModel');
+exports.String = require('./string');
+exports.EnumModel = require('./enumModel');

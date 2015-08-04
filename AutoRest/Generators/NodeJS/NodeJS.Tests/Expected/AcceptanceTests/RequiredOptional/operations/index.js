@@ -13,5 +13,5 @@
 
 'use strict';
 
-exports.Implicit = require('./Implicit');
-exports.Explicit = require('./Explicit');
+exports.Implicit = require('./implicit');
+exports.Explicit = require('./explicit');

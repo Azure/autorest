@@ -13,4 +13,4 @@
 
 'use strict';
 
-exports.DateModel = require('./DateModel');
+exports.DateModel = require('./dateModel');

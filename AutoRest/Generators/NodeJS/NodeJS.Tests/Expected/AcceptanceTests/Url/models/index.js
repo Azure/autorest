@@ -13,4 +13,4 @@
 
 'use strict';
 
-exports.ErrorModel = require('./ErrorModel');
+exports.ErrorModel = require('./errorModel');

@@ -13,4 +13,4 @@
 
 'use strict';
 
-exports.Datetime = require('./Datetime');
+exports.Datetime = require('./datetime');

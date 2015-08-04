@@ -13,5 +13,5 @@
 
 'use strict';
 
-exports.Product = require('./Product');
-exports.ErrorModel = require('./ErrorModel');
+exports.Product = require('./product');
+exports.ErrorModel = require('./errorModel');
