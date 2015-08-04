@@ -7,19 +7,12 @@
 
 package com.microsoft.rest;
 
-import static org.junit.Assert.assertEquals;
-
-import com.microsoft.rest.pipeline.ServiceRequestFilter;
 import junit.framework.Assert;
-import org.apache.http.Header;
-import org.apache.http.HttpRequest;
-import org.apache.http.client.methods.HttpGet;
 import org.glassfish.jersey.apache.connector.ApacheConnectorProvider;
 import org.glassfish.jersey.client.ClientConfig;
 import org.junit.Test;
 
 import javax.annotation.Priority;
-import javax.ws.rs.Priorities;
 import javax.ws.rs.client.ClientRequestContext;
 import javax.ws.rs.client.ClientRequestFilter;
 import javax.ws.rs.client.WebTarget;
