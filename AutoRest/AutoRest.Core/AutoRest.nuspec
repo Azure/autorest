@@ -18,7 +18,7 @@
   <files>
     <file src="binaries/net45/AutoRest.Core.dll" target="tools" />
     <file src="binaries/net45/AutoRest.exe" target="tools" />
-    <file src="binaries/net45/AutoRest.json" target="tools/AutoRest.json" />
+    <file src="binaries/net45/AutoRest.Release.json" target="tools/AutoRest.json" />
     <file src="binaries/net45/AutoRest.Generator.CSharp.dll" target="tools" />
     <file src="binaries/net45/AutoRest.Generator.Azure.CSharp.dll" target="tools" />
     <file src="binaries/net45/AutoRest.Generator.Azure.Common.dll" target="tools" />
