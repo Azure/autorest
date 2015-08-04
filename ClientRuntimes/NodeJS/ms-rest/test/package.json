@@ -1,17 +1,18 @@
 {
-  "name": "ms-rest-azure",
+  "name": "ms-rest-test",
+  "private": true,
   "author": {
     "name": "Microsoft Corporation",
     "email": "azsdkteam@microsoft.com",
     "url": "https://github.com/Azure/AutoRest"
   },
   "version": "1.0.0",
-  "description": "Client Runtime for nodeJS Azure client libraries generated using AutoRest",
-  "tags": [ "node", "microsoft", "autorest", "azure", "clientruntime" ],
-  "keywords": [ "node", "microsoft", "autorest", "azure", "clientruntime" ],
-  "main": "./lib/msRestAzure.js",
+  "description": "Client Runtime for nodeJS client libraries generated using AutoRest",
+  "tags": ["node", "microsoft", "autorest", "clientruntime"],
+  "keywords": ["node", "microsoft", "autorest", "clientruntime"],
+  "main": "../lib/msRest.js",
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">= 0.6.15"
   },
   "licenses": [
     {
@@ -20,17 +21,19 @@
     }
   ],
   "dependencies": {
-    "async": "0.2.7",
-    "uuid": "2.0.1",
-    "adal-node": "0.1.13",
-    "ms-rest": "1.1.0"
+    "underscore": "1.4.x",
+    "tunnel": "~0.0.2",
+    "request": "2.45.0",
+    "validator": "~3.1.0",
+    "duplexer": "~0.1.1",
+    "through": "~2.3.4",
+    "tough-cookie": "*"
   },
   "devDependencies": {
     "jshint": "2.6.3",
     "xunit-file": "0.0.5",
     "mocha": "2.2.5",
-    "should": "5.2.0",
-    "underscore": "*"
+    "should": "5.2.0"
   },
   "homepage": "https://github.com/Azure/AutoRest",
   "repository": {
@@ -42,7 +45,7 @@
   },
   "scripts": {
     "test": "npm install && npm -s run-script jshint && npm -s run-script unit",
-    "unit": "node test/unit.js testlist.txt",
+    "unit": "node unit.js testlist.txt",
     "jshint": "jshint lib --reporter=jslint"
   }
 }
