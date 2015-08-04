@@ -58,8 +58,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{04E8E124-852C-4B5D-83EB-0B8ADDE825CB}"
 	ProjectSection(SolutionItems) = preProject
 		build.proj = build.proj
+		ChangeLog.txt = ChangeLog.txt
 		gulpfile.js = gulpfile.js
 		package.json = package.json
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{5989E210-AE15-4DF4-8CEE-DEE609740FD2}"

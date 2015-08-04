@@ -145,10 +145,10 @@ Licensed under the MIT License. See License.txt in the project root for license 
         public bool AddCredentials { get; set; }
 
         /// <summary>
-        /// If set to true, generate client with a ServiceClientCredentials property and optional constructor parameter. 
+        /// If set, will cause generated code to be output to a single file. Not supported by all code generators. 
         /// </summary>
         [SettingsInfo(
-            "If set to a file name all the code will be generated to a single file. Otherwise generated cod")]
+            "If set, will cause generated code to be output to a single file. Not supported by all code generators.")]
         public string OutputFileName { get; set; }
 
         /// <summary>
