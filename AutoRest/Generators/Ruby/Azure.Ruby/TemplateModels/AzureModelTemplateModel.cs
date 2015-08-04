@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using System.Collections.Generic;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Ruby;
 
@@ -16,7 +17,8 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// </summary>
         /// <param name="source">The object to create model from.</param>
         /// <param name="serviceClient">The service client.</param>
-        public AzureModelTemplateModel(CompositeType source, ServiceClient serviceClient) : base(source, serviceClient)
+        public AzureModelTemplateModel(CompositeType source, ServiceClient serviceClient)
+            : base(source, serviceClient)
         {
         }
 
@@ -42,31 +44,17 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         }
 
         /// <summary>
-        /// Serializes given property.
+        /// Gets the list of modules/classes which need to be included.
         /// </summary>
-        /// <param name="variableName">Variable name that keeps the property.</param>
-        /// <param name="type">Type of property.</param>
-        /// <param name="isRequired">Is required or not (affects whether null check is performed).</param>
-        /// <param name="defaultNamespace">The namespace.</param>
-        /// <returns>Code for serialization.</returns>
-        public override string SerializeProperty(string variableName, IType type, bool isRequired, string defaultNamespace)
+        public override List<string> Includes
         {
-			defaultNamespace = AzureClientModelExtensions.UpdateNamespaceIfRequired(type, defaultNamespace);
-            return base.SerializeProperty(variableName, type, isRequired, defaultNamespace);
-        }
-
-        /// <summary>
-        /// Deserializes given property.
-        /// </summary>
-        /// <param name="variableName">Variable name that keeps the property.</param>
-        /// <param name="type">Type of property.</param>
-        /// <param name="isRequired">Is required or not (affects whether null check is performed).</param>
-        /// <param name="defaultNamespace">The namespace.</param>
-        /// <returns>Code for deserialization.</returns>
-        public override string DeserializeProperty(string variableName, IType type, bool isRequired, string defaultNamespace)
-        {
-			defaultNamespace = AzureClientModelExtensions.UpdateNamespaceIfRequired(type, defaultNamespace);
-            return base.DeserializeProperty(variableName, type, isRequired, defaultNamespace);
+            get
+            {
+                return new List<string>
+				{
+					"MsRestAzure"
+				};
+            }
         }
     }
 }

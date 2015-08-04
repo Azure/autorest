@@ -31,15 +31,12 @@ namespace Microsoft.Rest.Generator.Ruby
 
         public string MethodGroupName { get; set; }
 
-        public virtual IEnumerable<string> Usings
+        /// <summary>
+        /// Gets the list of modules/classes which need to be included.
+        /// </summary>
+        public virtual List<string> Includes
         {
-            get
-            {
-                if (HasModelTypes)
-                {
-                    yield return Namespace + ".Models";
-                }
-            }
+            get { return new List<string>(); }
         }
     }
 }

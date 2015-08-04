@@ -38,6 +38,17 @@ namespace Microsoft.Rest.Generator.Ruby
         }
 
         /// <summary>
+        /// Gets the list of modules/classes which need to be included.
+        /// </summary>
+        public virtual List<string> Includes
+        {
+            get
+            {
+                return new List<string>();
+            }
+        }
+
+        /// <summary>
         /// Gets the list of properties of object including inherted ones.
         /// </summary>
         public IEnumerable<Property> ComposedProperties

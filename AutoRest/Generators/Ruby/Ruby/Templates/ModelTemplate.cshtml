@@ -11,6 +11,16 @@ module @(Settings.Namespace)
     @WrapComment("# ", string.IsNullOrEmpty(Model.Documentation) ? "Model object." : Model.Documentation)
     #
     class @Model.Name@(Model.GetBaseTypeName())
+    @if (Model.Includes.Any())
+    {
+      @EmptyLine
+        foreach (var include in Model.Includes)
+        {
+      @:include @include
+        }
+      @EmptyLine
+    }
+
     @foreach (var property in Model.PropertyTemplateModels)
     {
       @:@WrapComment("# ", string.Format("@return {0}{1}", property.Type.GetYardDocumentation(), property.Documentation))

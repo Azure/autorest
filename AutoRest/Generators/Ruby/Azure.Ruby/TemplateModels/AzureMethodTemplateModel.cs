@@ -144,8 +144,6 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
 
             var builder = new IndentedStringBuilder("  ");
 
-            defaultNamespace = AzureClientModelExtensions.UpdateNamespaceIfRequired(type, defaultNamespace);
-
             string serializationLogic = type.DeserializeType(this.Scope, variableName, defaultNamespace);
             return builder.AppendLine(serializationLogic).ToString();
         }
@@ -227,34 +225,6 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                 //}
                 return base.OperationExceptionTypeString;
             }
-        }
-
-        /// <summary>
-        /// Creates deserialization string for parsing method's response.
-        /// </summary>
-        /// <param name="inputVariable">Response value to deserialize.</param>
-        /// <param name="type">Type of response.</param>
-        /// <param name="outputVariable">Variable to put deserialized response.</param>
-        /// <param name="defaultNamespace">The namespace.</param>
-        /// <returns>Code of deserialization in form of string.</returns>
-        public override string CreateDeserializationString(string inputVariable, IType type, string outputVariable, string defaultNamespace)
-        {
-            defaultNamespace = AzureClientModelExtensions.UpdateNamespaceIfRequired(type, defaultNamespace);
-            return base.CreateDeserializationString(inputVariable, type, outputVariable, defaultNamespace);
-        }
-
-        /// <summary>
-        /// Creates serialization string for parsing method's response.
-        /// </summary>
-        /// <param name="inputVariable">Response value to serialize.</param>
-        /// <param name="type">Type of response.</param>
-        /// <param name="outputVariable">Variable to put serialization response.</param>
-        /// <param name="defaultNamespace">The namespace.</param>
-        /// <returns>Code of serialization in form of string.</returns>
-        public override string CreateSerializationString(string inputVariable, IType type, string outputVariable, string defaultNamespace)
-        {
-            defaultNamespace = AzureClientModelExtensions.UpdateNamespaceIfRequired(type, defaultNamespace);
-            return base.CreateSerializationString(inputVariable, type, outputVariable, defaultNamespace);
         }
     }
 }

@@ -225,20 +225,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
         /// <returns>True if client contain Model types, false otherwise.</returns>
         public static bool HasModelTypes(this ServiceClient client)
         {
-            return client.ModelTypes.Any() || client.Properties.Any(p => p.Type is CompositeType) ||
-                   client.Methods.Any(m => m.HasModelTypes());
-        }
-
-        /// <summary>
-        /// Verifies whether method includes Model types.
-        /// </summary>
-        /// <param name="method">The method.</param>
-        /// <returns>True if method contain Model types, false otherwise.</returns>
-        public static bool HasModelTypes(this Method method)
-        {
-            return method.Parameters.Any(p => p.Type is CompositeType) ||
-                   method.Responses.Any(r => r.Value is CompositeType) || method.ReturnType is CompositeType ||
-                   method.DefaultResponse is CompositeType;
+            return client.ModelTypes.Any(mt => mt.Extensions.Count == 0);
         }
 
         /// <summary>
@@ -293,8 +280,8 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             else if (enumType != null && !string.IsNullOrEmpty(enumType.Name))
             {
                 return builder.AppendLine(
-                    "fail MsRest::DeserializationError.new('Error occured in deserializing the enum', nil, nil, nil) if (!{2}.nil? && !{2}.empty? && !{0}::{1}.constants.any? {{ |e| {0}::{1}.const_get(e) == {2} }})",
-                    defaultNamespace, enumType.Name, valueReference).ToString();
+                    "fail MsRest::DeserializationError.new('Error occured in deserializing the enum', nil, nil, nil) if (!{1}.nil? && !{1}.empty? && !{0}.constants.any? {{ |e| {0}.const_get(e).to_s.downcase == {1}.downcase }})",
+                    enumType.Name, valueReference).ToString();
             }
             else if (sequence != null)
             {
@@ -349,7 +336,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
                         .Outdent()
                         .AppendLine("else")
                         .Indent()
-                            .AppendLine("{0} = {1}::{2}.deserialize_object({0})", valueReference, defaultNamespace, composite.Name)
+                            .AppendLine("{0} = {1}.deserialize_object({0})", valueReference, composite.Name)
                         .Outdent()
                         .AppendLine("end");
 
@@ -358,7 +345,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
 
                 return builder.AppendLine("if ({0})", valueReference)
                     .Indent()
-                        .AppendLine("{0} = {1}::{2}.deserialize_object({0})", valueReference, defaultNamespace, composite.Name)
+                        .AppendLine("{0} = {1}.deserialize_object({0})", valueReference, composite.Name)
                     .Outdent()
                     .AppendLine("end").ToString();
             }
@@ -452,8 +439,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
                         .Outdent()
                         .AppendLine("else")
                         .Indent()
-                        .AppendLine("{0} = {1}::{2}.serialize_object({0})", valueReference,
-                            defaultNamespace, composite.Name)
+                        .AppendLine("{0} = {1}.serialize_object({0})", valueReference, composite.Name)
                         .Outdent()
                         .AppendLine("end");
 
@@ -462,7 +448,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
 
                 return builder.AppendLine("if ({0})", valueReference)
                     .Indent()
-                        .AppendLine("{0} = {1}::{2}.serialize_object({0})", valueReference, defaultNamespace, composite.Name)
+                        .AppendLine("{0} = {1}.serialize_object({0})", valueReference, composite.Name)
                     .Outdent()
                     .AppendLine("end").ToString();
             }
