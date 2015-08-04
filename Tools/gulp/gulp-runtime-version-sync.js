@@ -42,7 +42,7 @@ gulp.task('syncDependencies:runtime:csazure', function () {
 
 gulp.task('syncDependencies:runtime:node', function () {
   gutil.log('Syncing NodeJS client runtime version');
-  var runtimePkgPath = './ClientRuntimes/NodeJS/ClientRuntime/package.json';
+  var runtimePkgPath = './ClientRuntimes/NodeJS/ms-rest/package.json';
   var runtimePkgString = fs.readFileSync(runtimePkgPath).toString();
   pkgConfig = JSON.parse(runtimePkgString);
   var name = pkgConfig['name'];
@@ -56,7 +56,7 @@ gulp.task('syncDependencies:runtime:node', function () {
 
 gulp.task('syncDependencies:runtime:nodeazure', function () {
   gutil.log('Syncing NodeJS client runtime version');
-  var runtimePkgPath = './ClientRuntimes/NodeJS/ClientRuntime.Azure/package.json';
+  var runtimePkgPath = './ClientRuntimes/NodeJS/ms-rest-azure/package.json';
   var runtimePkgString = fs.readFileSync(runtimePkgPath).toString();
   pkgConfig = JSON.parse(runtimePkgString);
   var name = pkgConfig['name'];
