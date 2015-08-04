@@ -79,14 +79,14 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             {
                 string variableName = pathParameter.Type.ToString(pathParameter.Name);
 
-                string addPathParameterString = String.Format(CultureInfo.InvariantCulture, "{0}['{{{1}}}'] = ERB::Util.url_encode({2})",
+                string addPathParameterString = String.Format(CultureInfo.InvariantCulture, "{0}['{{{1}}}'] = ERB::Util.url_encode({2}) if {0}.include?('{{{1}}}')",
                     inputVariableName,
                     pathParameter.SerializedName,
                     variableName);
 
                 if (pathParameter.Extensions.ContainsKey(AzureCodeGenerator.SkipUrlEncodingExtension))
                 {
-                    addPathParameterString = String.Format(CultureInfo.InvariantCulture, "{0}['{{{1}}}'] = {2}",
+                    addPathParameterString = String.Format(CultureInfo.InvariantCulture, "{0}['{{{1}}}'] = {2} if {0}.include?('{{{1}}}')",
                         inputVariableName,
                         pathParameter.SerializedName,
                         variableName);
@@ -144,7 +144,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
 
             var builder = new IndentedStringBuilder("  ");
 
-			defaultNamespace = AzureClientModelExtensions.UpdateNamespaceIfRequired(type, defaultNamespace);
+            defaultNamespace = AzureClientModelExtensions.UpdateNamespaceIfRequired(type, defaultNamespace);
 
             string serializationLogic = type.DeserializeType(this.Scope, variableName, defaultNamespace);
             return builder.AppendLine(serializationLogic).ToString();
@@ -239,7 +239,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// <returns>Code of deserialization in form of string.</returns>
         public override string CreateDeserializationString(string inputVariable, IType type, string outputVariable, string defaultNamespace)
         {
-			defaultNamespace = AzureClientModelExtensions.UpdateNamespaceIfRequired(type, defaultNamespace);
+            defaultNamespace = AzureClientModelExtensions.UpdateNamespaceIfRequired(type, defaultNamespace);
             return base.CreateDeserializationString(inputVariable, type, outputVariable, defaultNamespace);
         }
 
@@ -253,7 +253,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// <returns>Code of serialization in form of string.</returns>
         public override string CreateSerializationString(string inputVariable, IType type, string outputVariable, string defaultNamespace)
         {
-			defaultNamespace = AzureClientModelExtensions.UpdateNamespaceIfRequired(type, defaultNamespace);
+            defaultNamespace = AzureClientModelExtensions.UpdateNamespaceIfRequired(type, defaultNamespace);
             return base.CreateSerializationString(inputVariable, type, outputVariable, defaultNamespace);
         }
     }

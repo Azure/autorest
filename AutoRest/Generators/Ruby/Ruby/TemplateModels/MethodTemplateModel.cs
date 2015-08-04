@@ -80,7 +80,7 @@ namespace Microsoft.Rest.Generator.Ruby
             get
             {
                 List<string> declarations = new List<string>();
-                foreach (var parameter in  LocalParameters)
+                foreach (var parameter in LocalParameters)
                 {
                     string format = (parameter.IsRequired ? "{0}" : "{0} = nil");
                     declarations.Add(string.Format(format, parameter.Name));
@@ -214,7 +214,7 @@ namespace Microsoft.Rest.Generator.Ruby
             // Filling path parameters (which are directly in the url body).
             foreach (var pathParameter in ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
             {
-                builder.AppendLine("{0}['{{{1}}}'] = ERB::Util.url_encode({2})",
+                builder.AppendLine("{0}['{{{1}}}'] = ERB::Util.url_encode({2}) if {0}.include?('{{{1}}}')",
                     inputVariableName,
                     pathParameter.SerializedName,
                     pathParameter.Type.ToString(pathParameter.Name));
