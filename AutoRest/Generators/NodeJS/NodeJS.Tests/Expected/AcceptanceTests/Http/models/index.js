@@ -13,8 +13,8 @@
 
 'use strict';
 
-exports.ErrorModel = require('./ErrorModel');
-exports.A = require('./A');
-exports.B = require('./B');
-exports.C = require('./C');
-exports.D = require('./D');
+exports.ErrorModel = require('./errorModel');
+exports.A = require('./a');
+exports.B = require('./b');
+exports.C = require('./c');
+exports.D = require('./d');

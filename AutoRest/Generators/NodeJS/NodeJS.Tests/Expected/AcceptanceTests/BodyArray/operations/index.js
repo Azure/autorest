@@ -13,4 +13,4 @@
 
 'use strict';
 
-exports.ArrayModel = require('./ArrayModel');
+exports.ArrayModel = require('./arrayModel');

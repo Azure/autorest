@@ -13,6 +13,6 @@
 
 'use strict';
 
-exports.Paths = require('./Paths');
-exports.Queries = require('./Queries');
-exports.PathItems = require('./PathItems');
+exports.Paths = require('./paths');
+exports.Queries = require('./queries');
+exports.PathItems = require('./pathItems');

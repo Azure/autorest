@@ -13,5 +13,5 @@
 
 'use strict';
 
-exports.Widget = require('./Widget');
-exports.ErrorModel = require('./ErrorModel');
+exports.Widget = require('./widget');
+exports.ErrorModel = require('./errorModel');

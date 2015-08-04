@@ -13,4 +13,4 @@
 
 'use strict';
 
-exports.Dictionary = require('./Dictionary');
+exports.Dictionary = require('./dictionary');

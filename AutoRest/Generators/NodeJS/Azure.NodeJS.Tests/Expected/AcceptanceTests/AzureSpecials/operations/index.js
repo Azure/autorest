@@ -13,9 +13,9 @@
 
 'use strict';
 
-exports.XMsClientRequestId = require('./XMsClientRequestId');
-exports.SubscriptionInCredentials = require('./SubscriptionInCredentials');
-exports.SubscriptionInMethod = require('./SubscriptionInMethod');
-exports.ApiVersionDefault = require('./ApiVersionDefault');
-exports.ApiVersionLocal = require('./ApiVersionLocal');
-exports.SkipUrlEncoding = require('./SkipUrlEncoding');
+exports.XMsClientRequestId = require('./xMsClientRequestId');
+exports.SubscriptionInCredentials = require('./subscriptionInCredentials');
+exports.SubscriptionInMethod = require('./subscriptionInMethod');
+exports.ApiVersionDefault = require('./apiVersionDefault');
+exports.ApiVersionLocal = require('./apiVersionLocal');
+exports.SkipUrlEncoding = require('./skipUrlEncoding');

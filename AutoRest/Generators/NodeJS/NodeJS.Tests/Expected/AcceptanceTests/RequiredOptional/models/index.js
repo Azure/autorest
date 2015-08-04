@@ -13,13 +13,13 @@
 
 'use strict';
 
-exports.ErrorModel = require('./ErrorModel');
-exports.IntWrapper = require('./IntWrapper');
-exports.IntOptionalWrapper = require('./IntOptionalWrapper');
-exports.StringWrapper = require('./StringWrapper');
-exports.StringOptionalWrapper = require('./StringOptionalWrapper');
-exports.ArrayWrapper = require('./ArrayWrapper');
-exports.ArrayOptionalWrapper = require('./ArrayOptionalWrapper');
-exports.ClassWrapper = require('./ClassWrapper');
-exports.Product = require('./Product');
-exports.ClassOptionalWrapper = require('./ClassOptionalWrapper');
+exports.ErrorModel = require('./errorModel');
+exports.IntWrapper = require('./intWrapper');
+exports.IntOptionalWrapper = require('./intOptionalWrapper');
+exports.StringWrapper = require('./stringWrapper');
+exports.StringOptionalWrapper = require('./stringOptionalWrapper');
+exports.ArrayWrapper = require('./arrayWrapper');
+exports.ArrayOptionalWrapper = require('./arrayOptionalWrapper');
+exports.ClassWrapper = require('./classWrapper');
+exports.Product = require('./product');
+exports.ClassOptionalWrapper = require('./classOptionalWrapper');

@@ -13,4 +13,4 @@
 
 'use strict';
 
-exports.Number = require('./Number');
+exports.Number = require('./number');

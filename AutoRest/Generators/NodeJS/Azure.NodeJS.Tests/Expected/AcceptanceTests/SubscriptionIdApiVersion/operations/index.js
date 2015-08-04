@@ -13,4 +13,4 @@
 
 'use strict';
 
-exports.Group = require('./Group');
+exports.Group = require('./group');

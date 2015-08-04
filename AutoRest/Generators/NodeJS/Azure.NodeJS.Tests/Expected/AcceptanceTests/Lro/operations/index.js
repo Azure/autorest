@@ -13,8 +13,8 @@
 
 'use strict';
 
-exports.LROs = require('./LROs');
-exports.DONOTCALLs = require('./DONOTCALLs');
-exports.LRORetrys = require('./LRORetrys');
-exports.LROSADs = require('./LROSADs');
-exports.LROsCustomHeader = require('./LROsCustomHeader');
+exports.LROs = require('./lROs');
+exports.DONOTCALLs = require('./dONOTCALLs');
+exports.LRORetrys = require('./lRORetrys');
+exports.LROSADs = require('./lROSADs');
+exports.LROsCustomHeader = require('./lROsCustomHeader');

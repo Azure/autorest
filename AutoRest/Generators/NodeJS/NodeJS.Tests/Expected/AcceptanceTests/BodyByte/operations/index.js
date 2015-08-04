@@ -13,4 +13,4 @@
 
 'use strict';
 
-exports.ByteModel = require('./ByteModel');
+exports.ByteModel = require('./byteModel');

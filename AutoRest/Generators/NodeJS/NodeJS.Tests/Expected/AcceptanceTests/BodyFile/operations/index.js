@@ -13,4 +13,4 @@
 
 'use strict';
 
-exports.Files = require('./Files');
+exports.Files = require('./files');

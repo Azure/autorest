@@ -13,4 +13,4 @@
 
 'use strict';
 
-exports.Bool = require('./Bool');
+exports.Bool = require('./bool');

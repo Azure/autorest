@@ -17,7 +17,7 @@ var msRestAzure = require('ms-rest-azure');
 
 exports.Resource = msRestAzure.Resource;
 exports.CloudError = msRestAzure.CloudError;
-exports.ProductResult = require('./ProductResult');
-exports.Product = require('./Product');
-exports.ProductProperties = require('./ProductProperties');
-exports.OperationResult = require('./OperationResult');
+exports.ProductResult = require('./productResult');
+exports.Product = require('./product');
+exports.ProductProperties = require('./productProperties');
+exports.OperationResult = require('./operationResult');

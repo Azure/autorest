@@ -13,4 +13,4 @@
 
 'use strict';
 
-exports.HttpSuccess = require('./HttpSuccess');
+exports.HttpSuccess = require('./httpSuccess');

@@ -13,4 +13,4 @@
 
 'use strict';
 
-exports.IntModel = require('./IntModel');
+exports.IntModel = require('./intModel');
