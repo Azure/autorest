@@ -8,7 +8,7 @@ Infrastructure for error handling, tracing, and http client pipeline configurati
 ## How to Install
 
 ```bash
-npm install ms-rest
+npm install ms-rest-azure
 ```
 
 ## Related Projects
