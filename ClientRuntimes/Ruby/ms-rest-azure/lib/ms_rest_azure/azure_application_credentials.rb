@@ -7,10 +7,12 @@ module MsRestAzure
   #
   class AzureApplicationCredentials < MsRest::ServiceClientCredentials
 
-    TOKEN_ACQUIRE_URL = 'https://login.windows.net/{tenant_id}/oauth2/token'
+    TOKEN_ACQUIRE_URL = '{authentication_endpoint}{tenant_id}/oauth2/token'
     REQUEST_BODY_PATTERN = 'resource={resource_uri}&client_id={client_id}&client_secret={client_secret}&grant_type=client_credentials'
-    RESOURCE_URI = 'https://management.core.windows.net/'
   	DEFAULT_SCHEME = 'Bearer'
+
+    # @return [ActiveDirectoryServiceSettings] settings.
+    attr_accessor :settings
 
     # @return [String] auth token.
     attr_accessor :token
@@ -26,17 +28,20 @@ module MsRestAzure
 
     #
     # Creates and initialize new instance of the ServiceClient class.
-    # @param token [tenant_id] tenant id (also known as domain).
-    # @param token [client_id] client id.
-    # @param token [client_secret] client secret.
-    def initialize(tenant_id, client_id, client_secret)
+    # @param tenant_id [String] tenant id (also known as domain).
+    # @param client_id [String] client id.
+    # @param client_secret [String] client secret.
+    # @param settings [ActiveDirectoryServiceSettings] client secret.
+    def initialize(tenant_id, client_id, client_secret, settings)
       fail ArgumentError, 'Tenant id cannot be nil' if tenant_id.nil?
       fail ArgumentError, 'Client id cannot be nil' if client_id.nil?
       fail ArgumentError, 'Client secret key cannot be nil' if client_secret.nil?
+      fail ArgumentError, 'Azure AD settings cannot be nil' if settings.nil?
 
       @tenant_id = tenant_id
       @client_id = client_id
       @client_secret = client_secret
+      @settings = settings
     end
 
     #
@@ -45,6 +50,7 @@ module MsRestAzure
     # @return [String] new authentication token.
     def acquire_token
       token_acquire_url = TOKEN_ACQUIRE_URL
+      token_acquire_url['{authentication_endpoint}'] = @settings.authentication_endpoint
       token_acquire_url['{tenant_id}'] = @tenant_id
 
       url = URI.parse(token_acquire_url)
@@ -53,7 +59,7 @@ module MsRestAzure
       request['content-type'] = 'application/x-www-form-urlencoded'
 
       request_body = REQUEST_BODY_PATTERN
-      request_body['{resource_uri}'] = ERB::Util.url_encode(RESOURCE_URI)
+      request_body['{resource_uri}'] = ERB::Util.url_encode(@settings.token_audience)
       request_body['{client_id}'] = ERB::Util.url_encode(@client_id)
       request_body['{client_secret}'] = ERB::Util.url_encode(@client_secret)
 

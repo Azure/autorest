@@ -10,7 +10,7 @@ module MsRestAzure
     # Initializes a new instance of the TokenRefreshMiddleware class.
     #
     def initialize(app, options = nil)
-      fail ArgumentError, 'options can\'t be nil' if options.nil?
+      fail ArgumentError, 'options cannot be nil' if options.nil?
       fail ArgumentError, 'options must contain credentials object' if options[:credentials].nil?
       @credentials = options[:credentials]
 
