@@ -176,7 +176,12 @@ namespace Microsoft.Rest.Generator
         /// <returns></returns>
         protected virtual string Header(string prefix)
         {
-            return WrapComment(prefix, Settings.Header) + "\r\n";
+            var comment = WrapComment(prefix, Settings.Header);
+            if(!string.IsNullOrEmpty(comment))
+            {
+                return comment + Environment.NewLine + EmptyLine;
+            }
+            return comment;
         }
 
         /// <summary>

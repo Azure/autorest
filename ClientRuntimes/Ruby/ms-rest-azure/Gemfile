@@ -1,0 +1,12 @@
+source 'https://rubygems.org'
+
+# Specify your gem's dependencies in ms_rest_azure.gemspec
+gemspec
+
+group :development, :local, :test do
+  gem 'rspec'
+  gem 'json'
+  gem 'timeliness'
+  gem 'concurrent-ruby-ext'
+  gem 'ms_rest'
+end

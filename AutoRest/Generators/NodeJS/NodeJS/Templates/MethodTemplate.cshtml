@@ -1,14 +1,16 @@
 ﻿@using System.Linq;
 @using Microsoft.Rest.Generator.ClientModel
+@using Microsoft.Rest.Generator.Utilities
+@using Microsoft.Rest.Generator.NodeJS
 @using Microsoft.Rest.Generator.NodeJS.TemplateModels
 @using Microsoft.Rest.Generator.NodeJS.Templates
-@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.NodeJS.MethodTemplateModel>
+@inherits Microsoft.Rest.Generator.Template<MethodTemplateModel>
 
 /**
 @WrapComment(" * ", Model.Documentation)
 @foreach (var parameter in Model.DocumentationParameters)
 {
- @:* @@param {@parameter.Type.Name} [@parameter.Name] @parameter.Documentation
+ @:* @@param {@parameter.Type.Name} @MethodTemplateModel.GetParameterDocumentationName(parameter) @parameter.Documentation
  @:*
 }
 @WrapComment(" * ", " @param {object} [options]")
@@ -19,7 +21,7 @@
  *
 @WrapComment(" * ",  " @returns {Stream} The Response stream")
  */
-@(Model.OperationName).prototype.@(Model.Name) = function (@(Model.MethodParameterDeclarationWithCallback)) {
+@(Model.OperationName).prototype.@(Model.Name.ToCamelCase()) = function (@(Model.MethodParameterDeclarationWithCallback)) {
   var client = @(Model.ClientReference);
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -34,16 +36,19 @@
   @:try {
   @foreach (var parameter in Model.ParameterTemplateModels)
   {
+    if ((Model.HttpMethod == HttpMethod.Patch && parameter.Type is CompositeType))
+    {
     if (parameter.IsRequired)
     {
     @:if (@(parameter.Name) === null || @(parameter.Name) === undefined) {
-      @:throw new Error('\'@(parameter.Name)\' cannot be null');
+    @:throw new Error('\'@(parameter.Name)\' cannot be null');
     @:}
-   @:
+    @:
     }
-      if (!(Model.HttpMethod == HttpMethod.Patch  && parameter.Type is CompositeType))
+    }
+    else
     {
-    @:@(parameter.Type.ValidateType(Model.Scope, parameter.Name))
+    @:@(parameter.Type.ValidateType(Model.Scope, parameter.Name, parameter.IsRequired))
     }
   }
   @:} catch (error) {
@@ -71,13 +76,22 @@
   httpRequest.url = requestUrl;
 
   // Set Headers
+  @(Model.SetDefaultHeaders)
   @foreach (var parameter in Model.Parameters.Where(p => p.Location == ParameterLocation.Header))
   {
   @:if (@(parameter.Name) !== null) {
   @:  httpRequest.headers['@(parameter.SerializedName)'] = @parameter.Type.ToString(parameter.Name);
   @:}
   }
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+
   @if (Model.RequestBody != null)
   {
   <text>
@@ -95,13 +109,7 @@
   httpRequest.headers['Content-Length'] = 0;
   </text>
   }
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
+
   @if (Model.Responses.Any(r => r.Value == PrimaryType.Stream))
   {
 @:  @Include(new MethodStreamPipelineTemplate(), Model)

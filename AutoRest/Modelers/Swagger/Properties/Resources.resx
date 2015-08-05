@@ -163,7 +163,7 @@
     <value>Method '{0}' does not declare any MIME type for the return body. Generated code will not deserialize the content.</value>
   </data>
   <data name="OperationIdMissing" xml:space="preserve">
-    <value>OperationId is required for all operations.</value>
+    <value>OperationId is required for all operations. Please add it for '{0}' operation of '{1}' path. </value>
   </data>
   <data name="OptionsNotSupported" xml:space="preserve">
     <value>Options HTTP verb is not supported.</value>

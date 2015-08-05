@@ -10,10 +10,10 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Client code generation for HTTP RESTful APIs.")]
 [assembly: AssemblyCompany("Microsoft Corporation")]
 [assembly: AssemblyProduct("Microsoft AutoRest")]
-[assembly: AssemblyCopyright("Copyright ©  Microsoft Corporation")]
+[assembly: AssemblyCopyright("Copyright (c) Microsoft Corporation")]
 
-// Setting ComVisible to false makes the types in this assembly not visible 
-// to COM components.  If you need to access a type in this assembly from 
+// Setting ComVisible to false makes the types in this assembly not visible
+// to COM components.  If you need to access a type in this assembly from
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
 

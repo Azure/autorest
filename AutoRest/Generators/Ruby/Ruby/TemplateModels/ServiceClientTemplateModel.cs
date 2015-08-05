@@ -24,24 +24,11 @@ namespace Microsoft.Rest.Generator.Ruby
 
         public List<MethodTemplateModel> MethodTemplateModels { get; set; }
 
-        public string BaseType
+        public virtual string BaseType
         {
             get
             {
-                return "ClientRuntime::ServiceClient";
-            }
-        }
-
-        public string RequiredContructorParametersWithSeparator
-        {
-            get
-            {
-                List<string> requireParams = new List<string>();
-
-                this.Properties.Where(p => p.IsRequired)
-                    .ForEach(p => requireParams.Add(string.Format("{0}", p.Name)));
-
-                return requireParams.Any() ? ", " + string.Join(", ", requireParams) : string.Empty;
+                return "MsRest::ServiceClient";
             }
         }
     }

@@ -41,7 +41,33 @@
     <Compile Include="TemplateModels\ParameterTemplateModel.cs" />
     <Compile Include="TemplateModels\PropertyTemplateModel.cs" />
     <Compile Include="TemplateModels\ModelTemplateModel.cs" />
-    <Compile Include="Templates\*.cs" />
+    <Compile Include="Templates\EnumTemplate.cs">
+      <DependentUpon>EnumTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ExtensionMethodTemplate.cs">
+      <DependentUpon>ExtensionMethodTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ExtensionsTemplate.cs">
+      <DependentUpon>ExtensionsTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\MethodGroupInterfaceTemplate.cs">
+      <DependentUpon>MethodGroupInterfaceTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\MethodGroupTemplate.cs">
+      <DependentUpon>MethodGroupTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\MethodTemplate.cs">
+      <DependentUpon>MethodTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ModelTemplate.cs">
+      <DependentUpon>ModelTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ServiceClientInterfaceTemplate.cs">
+      <DependentUpon>ServiceClientInterfaceTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ServiceClientTemplate.cs">
+      <DependentUpon>ServiceClientTemplate.cshtml</DependentUpon>
+    </Compile>
     <None Include="Templates\ExtensionMethodTemplate.cshtml" />
     <None Include="Templates\ExtensionsTemplate.cshtml" />
     <None Include="Templates\EnumTemplate.cshtml" />
@@ -65,7 +91,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <CodeAnalysisDictionary Include="..\..\..\..\tools\CustomDictionary.xml">
+    <CodeAnalysisDictionary Include="..\..\..\..\Tools\CustomDictionary.xml">
       <Link>CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>
   </ItemGroup>

@@ -1,5 +1,5 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information. 
+// Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
 using System.Reflection;
@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("AutoRest Swagger Modeler Tests")]
 [assembly: AssemblyCompany("Microsoft Corporation")]
 [assembly: AssemblyProduct("Microsoft AutoRest")]
-[assembly: AssemblyCopyright("Copyright ©  Microsoft Corporation")]
+[assembly: AssemblyCopyright("Copyright (c) Microsoft Corporation")]
 
 [assembly: ComVisible(false)]
 [assembly: CLSCompliant(false)]

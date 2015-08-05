@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using Microsoft.Rest.Generator;
@@ -20,7 +21,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Generator.Modeler modeler = new SwaggerModeler(new Settings
             {
                 Namespace = "Test",
-                Input = @"Swagger\swagger-simple-spec.json"
+                Input = Path.Combine("Swagger", "swagger-simple-spec.json")
             });
             var clientModel = modeler.Build();
 
@@ -48,6 +49,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal("reset", clientModel.Methods[1].Name);
             Assert.Equal("Product", clientModel.ModelTypes[0].Name);
             Assert.Equal("Product", clientModel.ModelTypes[0].SerializedName);
+            Assert.Equal("The product documentation.", clientModel.ModelTypes[0].Documentation);
             Assert.Equal("product_id", clientModel.ModelTypes[0].Properties[0].Name);
             Assert.Equal("product_id", clientModel.ModelTypes[0].Properties[0].SerializedName);
             Assert.Null(clientModel.Methods[1].ReturnType);
@@ -65,7 +67,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Generator.Modeler modeler = new SwaggerModeler(new Settings
             {
                 Namespace = "Test",
-                Input = @"Swagger\swagger-external-ref-no-definitions.json"
+                Input = Path.Combine("Swagger", "swagger-external-ref-no-definitions.json")
             });
             var clientModel = modeler.Build();
 
@@ -79,7 +81,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Generator.Modeler modeler = new SwaggerModeler(new Settings
             {
                 Namespace = "Test",
-                Input = @"Swagger\swagger-external-ref.json"
+                Input = Path.Combine("Swagger", "swagger-external-ref.json")
             });
             var clientModel = modeler.Build();
 
@@ -95,7 +97,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Generator.Modeler modeler = new SwaggerModeler(new Settings
             {
                 Namespace = "Test",
-                Input = @"Swagger\swagger-external-ref.json"
+                Input = Path.Combine("Swagger", "swagger-external-ref.json")
             });
             var clientModel = modeler.Build();
 
@@ -111,7 +113,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Generator.Modeler modeler = new SwaggerModeler(new Settings
             {
                 Namespace = "Test",
-                Input = @"Swagger\swagger-external-ref-no-definitions.json"
+                Input = Path.Combine("Swagger", "swagger-external-ref-no-definitions.json")
             });
             var clientModel = modeler.Build();
 
@@ -125,7 +127,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             var modeler = new SwaggerModeler(new Settings
             {
                 Namespace = "Test",
-                Input = @"Swagger\swagger-allOf.json"
+                Input = Path.Combine("Swagger", "swagger-allOf.json")
             });
             var clientModel = modeler.Build();
 
@@ -146,7 +148,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             var modeler = new SwaggerModeler(new Settings
             {
                 Namespace = "Test",
-                Input = @"Swagger\swagger-polymorphism.json"
+                Input = Path.Combine("Swagger", "swagger-polymorphism.json")
             });
             var clientModel = modeler.Build();
 
@@ -167,7 +169,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             var modeler = new SwaggerModeler(new Settings
             {
                 Namespace = "Test",
-                Input = @"Swagger\swagger-allOf-circular.json"
+                Input = Path.Combine("Swagger", "swagger-allOf-circular.json")
             });
             Assert.Throws<ArgumentException>(() => modeler.Build());
         }
@@ -178,7 +180,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             var modeler = new SwaggerModeler(new Settings
             {
                 Namespace = "Test",
-                Input = @"Swagger\swagger-recursive-type.json"
+                Input = Path.Combine("Swagger", "swagger-recursive-type.json")
             });
             var clientModel = modeler.Build();
 
@@ -210,7 +212,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             var modeler = new SwaggerModeler(new Settings
             {
                 Namespace = "Test",
-                Input = @"Swagger\swagger-multiple-response-schemas.json"
+                Input = Path.Combine("Swagger", "swagger-multiple-response-schemas.json")
             });
             var clientModel = modeler.Build();
 
@@ -238,7 +240,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             var modeler = new SwaggerModeler(new Settings
             {
                 Namespace = "Test",
-                Input = @"Swagger\swagger-multiple-response-schemas.json"
+                Input = Path.Combine("Swagger", "swagger-multiple-response-schemas.json")
             });
             var clientModel = modeler.Build();
 
@@ -253,7 +255,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             var modeler = new SwaggerModeler(new Settings
             {
                 Namespace = "Test",
-                Input = @"Swagger\swagger-global-responses.json"
+                Input = Path.Combine("Swagger", "swagger-global-responses.json")
             });
             var clientModel = modeler.Build();
 
@@ -267,7 +269,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             var modeler = new SwaggerModeler(new Settings
             {
                 Namespace = "Test",
-                Input = @"Swagger\swagger-streaming.json"
+                Input = Path.Combine("Swagger", "swagger-streaming.json")
             });
             var clientModel = modeler.Build();
 
@@ -313,7 +315,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             var modeler = new SwaggerModeler(new Settings
             {
                 Namespace = "Test",
-                Input = @"Swagger\swagger-data-types.json"
+                Input = Path.Combine("Swagger", "swagger-data-types.json")
             });
             var clientModel = modeler.Build();
 
@@ -335,7 +337,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             var variableEnumInPath =
                 clientModel.Methods.First(m => m.Name == "list" && m.Group == null).Parameters.First(p => p.Name == "color" && p.Location == ParameterLocation.Path).Type as EnumType;
             Assert.NotNull(variableEnumInPath);
-            Assert.Equal(variableEnumInPath.Values, 
+            Assert.Equal(variableEnumInPath.Values,
                 new[] { new EnumValue { Name = "red" }, new EnumValue { Name = "blue"}, new EnumValue { Name = "green"} }.ToList());
             Assert.True(variableEnumInPath.IsExpandable);
             Assert.Empty(variableEnumInPath.Name);

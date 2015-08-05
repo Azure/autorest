@@ -10,6 +10,7 @@ using Microsoft.Azure.Management.Redis;
 using Microsoft.Azure.Management.Redis.Models;
 using Xunit;
 using Microsoft.Azure;
+using Microsoft.Rest.Azure;
 
 namespace Microsoft.Rest.ClientRuntime.Azure.Test
 {
@@ -18,7 +19,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TestCreateOrUpdateWithAsyncHeader()
         {
-            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var tokenCredentials = new TokenCredentials("123", "abc");
             var handler = new PlaybackTestHandler(MockCreateOrUpdateWithTwoTries());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
@@ -38,7 +39,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TestCreateOrUpdateWithoutHeaderInResponses()
         {
-            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var tokenCredentials = new TokenCredentials("123", "abc");
             var handler = new PlaybackTestHandler(MockCreateOrUpdateWithoutHeaderInResponses());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
@@ -60,7 +61,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TestAsyncOperationWithNoPayload()
         {
-            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var tokenCredentials = new TokenCredentials("123", "abc");
             var handler = new PlaybackTestHandler(MockAsyncOperaionWithNoBody());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
@@ -72,7 +73,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TestAsyncOperationWithEmptyPayload()
         {
-            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var tokenCredentials = new TokenCredentials("123", "abc");
             var handler = new PlaybackTestHandler(MockAsyncOperaionWithEmptyBody());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
@@ -84,7 +85,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TestAsyncOperationWithBadPayload()
         {
-            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var tokenCredentials = new TokenCredentials("123", "abc");
             var handler = new PlaybackTestHandler(MockAsyncOperaionWithBadPayload());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
@@ -95,7 +96,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TestAsyncOperationWithMissingProvisioningState()
         {
-            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var tokenCredentials = new TokenCredentials("123", "abc");
             var handler = new PlaybackTestHandler(MockAsyncOperaionWithMissingProvisioningState());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
@@ -106,7 +107,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TestPutOperationWithoutProvisioningState()
         {
-            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var tokenCredentials = new TokenCredentials("123", "abc");
             var handler = new PlaybackTestHandler(MockPutOperaionWithoutProvisioningStateInResponse());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
@@ -117,7 +118,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TestPutOperationWithNonResource()
         {
-            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var tokenCredentials = new TokenCredentials("123", "abc");
             var handler = new PlaybackTestHandler(MockPutOperaionWitNonResource());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
@@ -129,7 +130,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TestPutOperationWithSubResource()
         {
-            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var tokenCredentials = new TokenCredentials("123", "abc");
             var handler = new PlaybackTestHandler(MockPutOperaionWitSubResource());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
@@ -141,7 +142,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TestPutOperationWithImmediateSuccess()
         {
-            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var tokenCredentials = new TokenCredentials("123", "abc");
             var handler = new PlaybackTestHandler(MockPutOperaionWithImmediateSuccess());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
@@ -152,7 +153,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TestDeleteOperationWithImmediateSuccessAndOkStatus()
         {
-            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var tokenCredentials = new TokenCredentials("123", "abc");
             var handler = new PlaybackTestHandler(MockOperaionWithImmediateSuccessOKStatus());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
@@ -163,7 +164,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TestDeleteOperationWithImmediateSuccessAndNoContentStatus()
         {
-            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var tokenCredentials = new TokenCredentials("123", "abc");
             var handler = new PlaybackTestHandler(MockOperaionWithImmediateSuccessNoContentStatus());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
@@ -174,7 +175,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TestPostOperationWithImmediateSuccessAndOkStatus()
         {
-            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var tokenCredentials = new TokenCredentials("123", "abc");
             var handler = new PlaybackTestHandler(MockPostOperaionWithImmediateSuccessOKStatus());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
@@ -186,7 +187,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TestPostOperationWithImmediateSuccessAndNoContentStatus()
         {
-            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var tokenCredentials = new TokenCredentials("123", "abc");
             var handler = new PlaybackTestHandler(MockOperaionWithImmediateSuccessNoContentStatus());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
@@ -197,7 +198,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TestPostOperationWithBody()
         {
-            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var tokenCredentials = new TokenCredentials("123", "abc");
             var handler = new PlaybackTestHandler(MockPostOperaionWithBody());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
@@ -213,7 +214,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TestDeleteOperationWithNonRetryableErrorInResponse()
         {
-            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var tokenCredentials = new TokenCredentials("123", "abc");
             var handler = new PlaybackTestHandler(MockDeleteOperaionWithNoRetryableErrorInResponse());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
@@ -229,7 +230,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TestDeleteOperationWithoutHeaderInResponse()
         {
-            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var tokenCredentials = new TokenCredentials("123", "abc");
             var handler = new PlaybackTestHandler(MockDeleteOperaionWithoutHeaderInResponse());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
@@ -246,7 +247,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TestDeleteOperationWithoutLocationHeaderInResponse()
         {
-            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var tokenCredentials = new TokenCredentials("123", "abc");
             var handler = new PlaybackTestHandler(MockDeleteOperaionWithoutLocationHeaderInResponse());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
@@ -263,7 +264,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TestCreateOrUpdateWithLocationHeaderWith202()
         {
-            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var tokenCredentials = new TokenCredentials("123", "abc");
             var handler = new PlaybackTestHandler(MockCreateOrUpdateWithLocationHeaderAnd202());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
@@ -285,7 +286,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TestCreateOrUpdateWithAsyncHeaderWith202()
         {
-            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var tokenCredentials = new TokenCredentials("123", "abc");
             var handler = new PlaybackTestHandler(MockCreateOrUpdateWithAsyncHeaderAnd202());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
@@ -304,7 +305,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TestCreateOrUpdateWithWith202AndResource()
         {
-            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var tokenCredentials = new TokenCredentials("123", "abc");
             var handler = new PlaybackTestHandler(MockCreateOrUpdateWithWith202AndResource());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
@@ -325,7 +326,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TestPostWithResponse()
         {
-            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var tokenCredentials = new TokenCredentials("123", "abc");
             var handler = new PlaybackTestHandler(MockPostWithResourceSku());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
@@ -344,7 +345,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TestCreateOrUpdateNoAsyncHeader()
         {
-            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var tokenCredentials = new TokenCredentials("123", "abc");
             var handler = new PlaybackTestHandler(MockCreateOrUpdateWithNoAsyncHeader());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
@@ -366,7 +367,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TestCreateOrUpdateFailedStatus()
         {
-            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var tokenCredentials = new TokenCredentials("123", "abc");
             var handler = new PlaybackTestHandler(MockCreateOrUpdateWithFailedStatus());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
@@ -378,7 +379,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             catch (CloudException ex)
             {
                 Assert.Equal("Long running operation failed with status 'Failed'.", ex.Message);
-                Assert.Contains(AzureAsyncOperation.FailedStatus, ex.Response.Content.ReadAsStringAsync().Result);
+                Assert.Contains(AzureAsyncOperation.FailedStatus, ex.Response.Content.ReadAsStringAsync().ConfigureAwait(false).GetAwaiter().GetResult());
             }
 
         }
@@ -386,7 +387,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TestCreateOrUpdateErrorHandling()
         {
-            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var tokenCredentials = new TokenCredentials("123", "abc");
             var handler = new PlaybackTestHandler(MockCreateOrUpdateWithImmediateServerError());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
@@ -404,7 +405,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TestCreateOrUpdateNoErrorBody()
         {
-            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var tokenCredentials = new TokenCredentials("123", "abc");
             var handler = new PlaybackTestHandler(MockCreateOrUpdateWithNoErrorBody());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
@@ -422,7 +423,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TestCreateOrUpdateWithRetryAfter()
         {
-            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var tokenCredentials = new TokenCredentials("123", "abc");
             var handler = new PlaybackTestHandler(MockCreateOrUpdateWithRetryAfterTwoTries());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             var now = DateTime.Now;
@@ -434,7 +435,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TestDeleteWithAsyncHeader()
         {
-            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var tokenCredentials = new TokenCredentials("123", "abc");
             var handler = new PlaybackTestHandler(MockDeleteWithAsyncHeaderTwoTries());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
@@ -452,7 +453,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TestDeleteWithLocationHeader()
         {
-            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var tokenCredentials = new TokenCredentials("123", "abc");
             var handler = new PlaybackTestHandler(MockDeleteWithLocationHeaderTwoTries());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
@@ -470,7 +471,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TestDeleteWithLocationHeaderErrorHandling()
         {
-            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var tokenCredentials = new TokenCredentials("123", "abc");
             var handler = new PlaybackTestHandler(MockDeleteWithLocationHeaderError());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
@@ -489,7 +490,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TestDeleteWithLocationHeaderErrorHandlingSecondTime()
         {
-            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var tokenCredentials = new TokenCredentials("123", "abc");
             var handler = new PlaybackTestHandler(MockDeleteWithLocationHeaderErrorInSecondCall());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
@@ -501,7 +502,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void TestDeleteWithRetryAfter()
         {
-            var tokenCredentials = new TokenCloudCredentials("123", "abc");
+            var tokenCredentials = new TokenCredentials("123", "abc");
             var handler = new PlaybackTestHandler(MockDeleteWithRetryAfterTwoTries());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             var now = DateTime.Now;

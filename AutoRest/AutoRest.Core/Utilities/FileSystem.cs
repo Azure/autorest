@@ -25,7 +25,7 @@ namespace Microsoft.Rest.Generator.Utilities
         {
             if (File.Exists(path))
             {
-                File.Delete(path);
+                return File.AppendText(path);
             }
             return File.CreateText(path);
         }
@@ -37,7 +37,10 @@ namespace Microsoft.Rest.Generator.Utilities
 
         public void DeleteFile(string path)
         {
-            File.Delete(path);
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
         }
 
         public void DeleteDirectory(string directory)

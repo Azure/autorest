@@ -14,7 +14,8 @@ module @(Settings.Namespace)
     @foreach (var property in Model.PropertyTemplateModels)
     {
       @:@WrapComment("# ", string.Format("@return {0}{1}", property.Type.GetYardDocumentation(), property.Documentation))
-      @:@(property.IsReadOnly ? "attr_reader" : "attr_accessor") :@property.Name
+      // @:@(property.IsReadOnly ? "attr_reader" : "attr_accessor") :@property.Name
+      @:attr_accessor :@property.Name
       @EmptyLine
       @:
     }
@@ -70,13 +71,19 @@ module @(Settings.Namespace)
       def self.serialize_object(object)
         object.validate
         output_object = {}
-        @foreach (var property in Model.ComposedProperties.Where(x => !x.IsReadOnly).OrderByDescending(x => x.IsRequired))
+        @foreach (var property in Model.ComposedProperties.OrderByDescending(x => x.IsRequired))
         {
         @EmptyLine
         @:serialized_property = @("object." + property.Name)
         @:@Model.SerializeProperty("serialized_property", property.Type, property.IsRequired, Settings.Namespace)
-        @:output_object['@(property.SerializedName)'] = serialized_property
+        @:output_object['@(property.SerializedName)'] = serialized_property unless serialized_property.nil?
         }
+
+        @if (Model.IsPolymorphic)
+        {
+        @EmptyLine
+        @:output_object['dtype'] = object.dtype
+        }    
         output_object
       end
 
@@ -91,16 +98,33 @@ module @(Settings.Namespace)
 
         output_object = @(Model.Name).new
         
-        @foreach (var property in Model.ComposedProperties.Where(x => !x.IsReadOnly).OrderByDescending(x => x.IsRequired))
+        @foreach (var property in Model.ComposedProperties.OrderByDescending(x => x.IsRequired))
         {
         @EmptyLine    
         @:deserialized_property = @(string.Format("object['{0}']", property.SerializedName))
         @:@Model.DeserializeProperty("deserialized_property", property.Type, property.IsRequired, Settings.Namespace)
         @:output_object.@(property.Name) = deserialized_property
         }
+
+        @if (Model.IsPolymorphic)
+        {
+        @EmptyLine
+        @:output_object.dtype = object['dtype']
+        }
+    
         output_object.validate
         output_object
       end
+
+      @if (Model.IsPolymorphic)
+      {
+      @EmptyLine
+      @:def initialize
+      @:  @@dtype = "@Model.Name.ToLower()"
+      @:end
+      @EmptyLine
+      @:attr_accessor :dtype
+      }
     end
   end
 end

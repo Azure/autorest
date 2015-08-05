@@ -3,7 +3,7 @@
 
 using Newtonsoft.Json;
 
-namespace Microsoft.Azure
+namespace Microsoft.Rest.Azure
 {
     /// <summary>
     /// Information for resource.
@@ -27,6 +27,18 @@ namespace Microsoft.Azure
         /// </summary>
         [JsonProperty("properties.name")]
         public dynamic Details { get; set; }
+
+        /// <summary>
+        /// Optional. Gets or sets the plan.
+        /// </summary>
+        [JsonProperty("plan")]
+        public string Plan { get; set; }
+
+        /// <summary>
+        /// Optional. Gets or sets the provisioning state.
+        /// </summary>
+        [JsonProperty("properties.provisioningState")]
+        public string ProvisioningState { get; set; }
     }
 
     /// <summary>

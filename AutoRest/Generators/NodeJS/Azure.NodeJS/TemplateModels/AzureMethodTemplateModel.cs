@@ -60,12 +60,30 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         {
             get
             {
+                //result.requestId = result.httpRequest.headers['x-ms-request-id'];
+                var sb = new IndentedStringBuilder();
                 if (this.HttpMethod == HttpMethod.Head &&
                     this.ReturnType != null)
                 {
-                    return "result.body = (statusCode === 204);";
+                    sb.AppendLine("result.body = (statusCode === 204);");
                 }
-                return base.InitializeResponseBody;
+                sb.AppendLine("result.requestId = response.headers['x-ms-request-id'];")
+                    .AppendLine(base.InitializeResponseBody);
+                return sb.ToString();
+            }
+        }
+
+        /// <summary>
+        /// Gets the expression for default header setting. 
+        /// </summary>
+        public override string SetDefaultHeaders
+        {
+            get
+            {
+                var sb = new IndentedStringBuilder();
+                sb.AppendLine("httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();")
+                  .AppendLine(base.SetDefaultHeaders);
+                return sb.ToString();
             }
         }
     }

@@ -2,7 +2,7 @@
 @using Microsoft.Rest.Generator.ClientModel
 @using Microsoft.Rest.Generator.CSharp.TemplateModels
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.EnumTemplateModel>
-@Header("/// ")
+@Header("// ")
 namespace @(Settings.Namespace).Models
 {
     using Newtonsoft.Json;
@@ -10,7 +10,7 @@ namespace @(Settings.Namespace).Models
     using System.Runtime.Serialization;
 @EmptyLine
     /// <summary>
-    @WrapComment("/// ", "Defines values for " + Model.TypeDefinitionName)
+    @WrapComment("/// ", "Defines values for " + Model.TypeDefinitionName + ".")
     /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum @Model.TypeDefinitionName

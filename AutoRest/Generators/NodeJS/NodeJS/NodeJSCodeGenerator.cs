@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using Microsoft.Rest.Generator.ClientModel;
@@ -7,11 +7,15 @@ using Microsoft.Rest.Generator.NodeJS.Templates;
 using Microsoft.Rest.Generator.Utilities;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO;
+using System.Globalization;
 
 namespace Microsoft.Rest.Generator.NodeJS
 {
     public class NodeJSCodeGenerator : CodeGenerator
     {
+        private const string ClientRuntimePackage = "ms-rest version 1.1.0";
+
         public NodeJsCodeNamer Namer { get; private set; }
 
         public NodeJSCodeGenerator(Settings settings) : base(settings)
@@ -32,8 +36,11 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         public override string UsageInstructions
         {
-            // TODO: resource string with correct usage message.
-            get { return Resources.UsageInstructions; }
+            get
+            {
+                return string.Format(CultureInfo.InvariantCulture,
+                    Resources.UsageInformation, ClientRuntimePackage);
+            }
         }
 
         public override string ImplementationFileExtension
@@ -74,14 +81,14 @@ namespace Microsoft.Rest.Generator.NodeJS
                 {
                     Model = serviceClientTemplateModel
                 };
-                await Write(modelIndexTemplate, "models\\index.js");
+                await Write(modelIndexTemplate, Path.Combine("models", "index.js"));
                 foreach (var modelType in serviceClientTemplateModel.ModelTemplateModels)
                 {
                     var modelTemplate = new ModelTemplate
                     {
                         Model = modelType
                     };
-                    await Write(modelTemplate, "models\\" + modelType.Name.ToCamelCase() + ".js");
+                    await Write(modelTemplate, Path.Combine("models", modelType.Name.ToCamelCase() + ".js"));
                 }
             }
 
@@ -92,14 +99,14 @@ namespace Microsoft.Rest.Generator.NodeJS
                 {
                     Model = serviceClientTemplateModel
                 };
-                await Write(methodGroupIndexTemplate, "operations\\index.js");
+                await Write(methodGroupIndexTemplate, Path.Combine("operations", "index.js"));
                 foreach (var methodGroupModel in serviceClientTemplateModel.MethodGroupModels)
                 {
                     var methodGroupTemplate = new MethodGroupTemplate
                     {
                         Model = methodGroupModel
                     };
-                    await Write(methodGroupTemplate, "operations\\" + methodGroupModel.MethodGroupType.ToCamelCase() + ".js");
+                    await Write(methodGroupTemplate, Path.Combine("operations", methodGroupModel.MethodGroupType.ToCamelCase() + ".js"));
                 }
             }
         }

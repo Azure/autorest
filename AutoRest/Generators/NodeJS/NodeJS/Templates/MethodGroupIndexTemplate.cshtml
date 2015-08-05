@@ -3,7 +3,7 @@
 @using Microsoft.Rest.Generator.Utilities
 @using System.Linq
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.NodeJS.ServiceClientTemplateModel>
-@Header("/// ")
+@Header("// ")
 @EmptyLine
 /* jshint latedef:false */
 /* jshint forin:false */
@@ -13,5 +13,5 @@
 @EmptyLine
 @foreach (var methodGroup in Model.MethodGroupModels)
 {
-@:exports.@(methodGroup.MethodGroupType) = require('./@(methodGroup.MethodGroupType)');
+@:exports.@(methodGroup.MethodGroupType) = require('./@(methodGroup.MethodGroupType.ToCamelCase())');
 }

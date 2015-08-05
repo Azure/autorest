@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace Microsoft.Rest.Generator.Ruby
 {
+    /// <summary>
+    /// The scope provider.
+    /// </summary>
     public class ScopeProvider : IScopeProvider
     {
         /// <summary>

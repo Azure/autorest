@@ -25,7 +25,7 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
 
             var settings = new JsonSerializerSettings
             {
-                TypeNameHandling = TypeNameHandling.All,
+                TypeNameHandling = TypeNameHandling.None,
                 MetadataPropertyHandling = MetadataPropertyHandling.Ignore
             };
             foreach (var converter in serializer.Converters)

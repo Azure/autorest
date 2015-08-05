@@ -10,6 +10,7 @@
 
 namespace Microsoft.Rest.Properties {
     using System;
+    using System.Reflection;
     
     
     /// <summary>
@@ -39,7 +40,7 @@ namespace Microsoft.Rest.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Microsoft.Rest.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Microsoft.Rest.Properties.Resources", typeof(Resources).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -187,6 +188,15 @@ namespace Microsoft.Rest.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must specify a token provider or raw access token before using token credentials..
+        /// </summary>
+        internal static string TokenProviderCannotBeNull {
+            get {
+                return ResourceManager.GetString("TokenProviderCannotBeNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to cannot be null.
         /// </summary>
         internal static string ValidationCannotBeNull {
@@ -300,6 +310,15 @@ namespace Microsoft.Rest.Properties {
         internal static string ValidationUniqueItems {
             get {
                 return ResourceManager.GetString("ValidationUniqueItems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The service client &apos;{0}&apos; did not contain an implementation of &apos;{1}&apos;..
+        /// </summary>
+        internal static string WebRequestHandlerNotFound {
+            get {
+                return ResourceManager.GetString("WebRequestHandlerNotFound", resourceCulture);
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
@@ -9,12 +9,18 @@ using Microsoft.Rest.Generator.NodeJS.Templates;
 using Microsoft.Rest.Generator.Utilities;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO;
+using System.Globalization;
+using Microsoft.Rest.Generator.Azure.NodeJS.Properties;
 
 namespace Microsoft.Rest.Generator.Azure.NodeJS
 {
     public class AzureNodeJSCodeGenerator : NodeJSCodeGenerator
     {
-        public AzureNodeJSCodeGenerator(Settings settings) 
+        private const string ClientRuntimePackage = "ms-rest-azure version 1.0.0";
+        public const string LongRunningExtension = "x-ms-long-running-operation";
+
+        public AzureNodeJSCodeGenerator(Settings settings)
             : base(settings)
         {
         }
@@ -32,8 +38,11 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
 
         public override string UsageInstructions
         {
-            // TODO: resource string with correct usage message.
-            get { return string.Empty; }
+            get
+            {
+                return string.Format(CultureInfo.InvariantCulture,
+                    Resources.UsageInformation, ClientRuntimePackage);
+            }
         }
 
         public override string ImplementationFileExtension
@@ -47,16 +56,46 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
+            //please do not change the following sequence as it may have undesirable results.
             Settings.AddCredentials = true;
             AzureCodeGenerator.UpdateHeadMethods(serviceClient);
             AzureCodeGenerator.ParseODataExtension(serviceClient);
             AzureCodeGenerator.AddPageableMethod(serviceClient);
-            AzureCodeGenerator.AddLongRunningOperations(serviceClient);
             AzureCodeGenerator.AddAzureProperties(serviceClient);
             AzureCodeGenerator.SetDefaultResponses(serviceClient);
             base.NormalizeClientModel(serviceClient);
+            AzureCodeGenerator.AddLongRunningOperations(serviceClient);
             NormalizeApiVersion(serviceClient);
             NormalizeCredentials(serviceClient);
+        }
+
+        /// <summary>
+        /// Creates long running operation methods.
+        /// </summary>
+        /// <param name="serviceClient"></param>
+        public void AddLongRunningOperations(ServiceClient serviceClient)
+        {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
+            for (int i = 0; i < serviceClient.Methods.Count; i++)
+            {
+                var method = serviceClient.Methods[i];
+                if (method.Extensions.ContainsKey(LongRunningExtension))
+                {
+                    var isLongRunning = method.Extensions[LongRunningExtension];
+                    if (isLongRunning is bool && (bool)isLongRunning)
+                    {
+                        serviceClient.Methods.Insert(i, (Method)method.Clone());
+                        method.Name = "begin" + Namer.GetMethodName(method.Name.ToPascalCase());
+                        i++;
+                    }
+
+                    method.Extensions.Remove(LongRunningExtension);
+                }
+            }
         }
 
         private static void NormalizeCredentials(ServiceClient serviceClient)
@@ -71,12 +110,13 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
 
         private static void NormalizeApiVersion(ServiceClient serviceClient)
         {
-            var property = serviceClient.Properties.FirstOrDefault(
-                p => p.Name.Equals(AzureCodeGenerator.ApiVersion, StringComparison.OrdinalIgnoreCase));
-            if (property != null)
-            {
-                property.DefaultValue = property.DefaultValue.Replace('"', '\'');
-            }
+            serviceClient.Properties.Where(
+                p => p.SerializedName.Equals(AzureCodeGenerator.ApiVersion, StringComparison.OrdinalIgnoreCase))
+                .ForEach(p => p.DefaultValue = p.DefaultValue.Replace("\"", "'"));
+
+            serviceClient.Properties.Where(
+                p => p.SerializedName.Equals(AzureCodeGenerator.AcceptLanguage, StringComparison.OrdinalIgnoreCase))
+                .ForEach(p => p.DefaultValue = p.DefaultValue.Replace("\"", "'"));
         }
 
         /// <summary>
@@ -101,14 +141,14 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
                 {
                     Model = serviceClientTemplateModel
                 };
-                await Write(modelIndexTemplate, "models\\index.js");
+                await Write(modelIndexTemplate, Path.Combine("models", "index.js"));
                 foreach (var modelType in serviceClientTemplateModel.ModelTemplateModels)
                 {
                     var modelTemplate = new ModelTemplate
                     {
                         Model = modelType
                     };
-                    await Write(modelTemplate, "models\\" + modelType.Name.ToCamelCase() + ".js");
+                    await Write(modelTemplate, Path.Combine("models", modelType.Name.ToCamelCase() + ".js"));
                 }
             }
 
@@ -119,14 +159,14 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
                 {
                     Model = serviceClientTemplateModel
                 };
-                await Write(methodGroupIndexTemplate, "operations\\index.js");
+                await Write(methodGroupIndexTemplate, Path.Combine("operations", "index.js"));
                 foreach (var methodGroupModel in serviceClientTemplateModel.MethodGroupModels)
                 {
                     var methodGroupTemplate = new AzureMethodGroupTemplate
                     {
                         Model = methodGroupModel as AzureMethodGroupTemplateModel
                     };
-                    await Write(methodGroupTemplate, "operations\\" + methodGroupModel.MethodGroupType.ToCamelCase() + ".js");
+                    await Write(methodGroupTemplate, Path.Combine("operations", methodGroupModel.MethodGroupType.ToCamelCase() + ".js"));
                 }
             }
         }

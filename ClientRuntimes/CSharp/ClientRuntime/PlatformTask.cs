@@ -46,12 +46,12 @@ namespace Microsoft.Rest
         /// </summary>
         /// <param name="result">The result from which to create the completed task.</param>
         /// <returns>The completed Task.</returns>
-        public static Task FromResult(object result)
+        public static Task<T> FromResult<T>(T result)
         {
 #if NET45
-            return Task.FromResult<object>(result);
+            return Task.FromResult<T>(result);
 #else
-            return TaskEx.FromResult<object>(result);
+            return TaskEx.FromResult<T>(result);
 #endif
         }
 

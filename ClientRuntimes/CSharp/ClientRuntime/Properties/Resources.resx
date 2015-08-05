@@ -159,6 +159,9 @@
   <data name="TaskMustBeScheduled" xml:space="preserve">
     <value>The specified argument '{0}' must return a scheduled task (also known as "hot" task) when invoked.</value>
   </data>
+  <data name="TokenProviderCannotBeNull" xml:space="preserve">
+    <value>You must specify a token provider or raw access token before using token credentials.</value>
+  </data>
   <data name="ValidationCannotBeNull" xml:space="preserve">
     <value>cannot be null</value>
   </data>
@@ -197,5 +200,8 @@
   </data>
   <data name="ValidationUniqueItems" xml:space="preserve">
     <value>collection contains duplicate items</value>
+  </data>
+  <data name="WebRequestHandlerNotFound" xml:space="preserve">
+    <value>The service client '{0}' did not contain an implementation of '{1}'.</value>
   </data>
 </root>

@@ -1,5 +1,6 @@
 {
   "name": "autorest-test",
+  "private": true,
   "author": {
     "name": "Microsoft Corporation",
     "email": "azsdkteam@microsoft.com",
@@ -17,14 +18,15 @@
     }
   ],
   "dependencies": {
-    "ms-rest": "file:../../../../ClientRuntimes/NodeJS/ClientRuntime"
-  },
-  "devDependencies": {
+    "ms-rest": "file:../../../../ClientRuntimes/NodeJS/ms-rest",
     "jshint": "2.8.0",
     "xunit-file": "0.0.5",
     "mocha": "2.2.5",
     "should": "5.2.0",
     "underscore": "*"
+
+  },
+  "devDependencies": {
   },
   "homepage": "https://github.com/Azure/AutoRest",
   "repository": {

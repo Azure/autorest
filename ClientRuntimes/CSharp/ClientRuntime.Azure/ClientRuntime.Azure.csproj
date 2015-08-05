@@ -6,30 +6,12 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <LibraryFxTarget Condition="'$(LibraryFxTarget)' == ''">net45</LibraryFxTarget>
     <ProjectGuid>{856A1D19-C3BF-439A-BEBF-E822A332BC12}</ProjectGuid>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Microsoft.Azure</RootNamespace>
+    <RootNamespace>Microsoft.Rest.Azure</RootNamespace>
     <AssemblyName>Microsoft.Rest.ClientRuntime.Azure</AssemblyName>
     <OutputType>Library</OutputType>
     <RestorePackages>true</RestorePackages>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Net45-Debug'">
-    <DocumentationFile>bin\Net45-Debug\Microsoft.Rest.ClientRuntime.Azure.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Net45-Release'">
-    <DocumentationFile>bin\Net45-Release\Microsoft.Rest.ClientRuntime.Azure.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Net40-Debug'">
-    <DocumentationFile>bin\Net40-Debug\Microsoft.Rest.ClientRuntime.Azure.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Net40-Release'">
-    <DocumentationFile>bin\Net40-Release\Microsoft.Rest.ClientRuntime.Azure.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Portable-Debug'">
-    <DocumentationFile>bin\Portable-Debug\Microsoft.Rest.ClientRuntime.Azure.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Portable-Release'">
-    <DocumentationFile>bin\Portable-Release\Microsoft.Rest.ClientRuntime.Azure.xml</DocumentationFile>
+    <AssemblyName>Microsoft.Rest.ClientRuntime.Azure</AssemblyName>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\tools\AutoRest.Settings.targets" />
   <ItemGroup>
@@ -46,14 +28,12 @@
     <Compile Include="JsonSerializerExtensions.cs" />
     <Compile Include="OData\FilterString.cs" />
     <Compile Include="OData\UrlExpressionVisitor.cs" />
+    <Compile Include="Page.cs" />
     <Compile Include="PollingState.cs" />
-    <Compile Include="IResource.cs" />
     <Compile Include="SubResource.cs" />
     <Compile Include="Resource.cs" />
     <Compile Include="CloudErrorJsonConverter.cs" />
     <Compile Include="ResourceJsonConverter.cs" />
-    <Compile Include="TokenCloudCredentials.cs" />
-    <Compile Include="SubscriptionCloudCredentials.cs" />
     <Compile Include="AzureOperationResponse.cs" />
     <Compile Include="AzureAsyncOperation.cs" />
     <Compile Include="ClientRequestTrackingHandler.cs" />
@@ -63,8 +43,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -72,11 +50,19 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ClientRuntime\ClientRuntime.csproj">
-      <Project>{7f524559-93f9-4f3f-9e2c-af41a0c2e6f4}</Project>
+      <Project>{7F524559-93F9-4F3F-9E2C-AF41A0C2E6F4}</Project>
       <Name>ClientRuntime</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="$(SolutionDir)\Tools\CustomDictionary.xml">
+      <Link>CustomDictionary.xml</Link>
+    </CodeAnalysisDictionary>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" Condition=" '$(LibraryFxTarget)' == 'portable' " />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" Condition=" '$(LibraryFxTarget)' != 'portable' " />
-  <Import Project="$(CommonNugetPackageFolder)\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition=" '$(LibraryFxTarget)' != 'net45' " />
+  <Import Project="$(CommonNugetPackageFolder)\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition=" Exists('$(CommonNugetPackageFolder)\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets') AND '$(LibraryFxTarget)' != 'net45' " />
 </Project>

@@ -6,6 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
+using Microsoft.Rest.Generator.Logging;
+using System;
+using Microsoft.Rest.Generator.Properties;
 
 namespace Microsoft.Rest.Generator
 {
@@ -43,6 +46,11 @@ namespace Microsoft.Rest.Generator
         public Settings Settings { get; private set; }
 
         /// <summary>
+        /// Gets or sets boolean value indicating if code generation language supports all the code to be generated in a single file.
+        /// </summary>
+        public bool IsSingleFileGenerationSupported { get; set; }
+
+        /// <summary>
         /// Normalizes service model by updating names and types to be language specific.
         /// </summary>
         /// <param name="serviceClient"></param>
@@ -60,9 +68,9 @@ namespace Microsoft.Rest.Generator
         /// Writes a template into the specified relative path.
         /// </summary>
         /// <param name="template"></param>
-        /// <param name="relativeFilePath"></param>
+        /// <param name="fileName"></param>
         /// <returns></returns>
-        public async Task Write(ITemplate template, string relativeFilePath)
+        public async Task Write(ITemplate template, string fileName)
         {
             template.Settings = Settings;
             var stringBuilder = new StringBuilder();
@@ -70,18 +78,41 @@ namespace Microsoft.Rest.Generator
             {
                 await template.ExecuteAsync().ConfigureAwait(false);
             }
-            await Write(stringBuilder.ToString(), relativeFilePath);
+            await Write(stringBuilder.ToString(), fileName);
         }
 
         /// <summary>
         /// Writes a template string into the specified relative path.
         /// </summary>
         /// <param name="template"></param>
-        /// <param name="relativeFilePath"></param>
+        /// <param name="fileName"></param>
         /// <returns></returns>
-        public async Task Write(string template, string relativeFilePath)
+        public async Task Write(string template, string fileName)
         {
+            string relativeFilePath = null;
+
+            if (Settings.OutputFileName != null)
+            {
+                if(!IsSingleFileGenerationSupported)
+                {
+                    Logger.LogError(new ArgumentException(Settings.OutputFileName),
+                        Resources.LanguageDoesNotSupportSingleFileGeneration, Settings.CodeGenerator);
+                    ErrorManager.ThrowErrors();
+                }
+                
+                relativeFilePath = Settings.OutputFileName;  
+            }
+            else
+            {
+                relativeFilePath = fileName;
+            }
             string filePath = Path.Combine(Settings.OutputDirectory, relativeFilePath);
+
+            // cleans file before writing unless single file
+            if (!(Settings.OutputFileName != null && IsSingleFileGenerationSupported))
+            {
+                Settings.FileSystem.DeleteFile(filePath);
+            }
             // Make sure the directory exist
             Settings.FileSystem.CreateDirectory(Path.GetDirectoryName(filePath));
 

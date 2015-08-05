@@ -1,9 +1,10 @@
-﻿@using Microsoft.Rest.Generator.CSharp
+﻿@using System
+@using Microsoft.Rest.Generator.CSharp
 @using Microsoft.Rest.Generator.CSharp.Templates
 @using Microsoft.Rest.Generator.Utilities
 @using System.Linq
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.ServiceClientTemplateModel>
-@Header("/// ")
+@Header("// ")
 namespace @Settings.Namespace
 {
     using System;
@@ -115,7 +116,7 @@ namespace @Settings.Namespace
         }
         @EmptyLine
 
-        @{var parameters = Model.Properties.Where(p => p.IsRequired);}
+        @{var parameters = Model.Properties.Where(p => p.IsRequired && p.IsReadOnly);}
         @if (parameters.Any())
         {
         @:/// <summary>
@@ -197,6 +198,15 @@ namespace @Settings.Namespace
         @foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
         {
             @:this.@(property.Name) = @(property.DefaultValue);
+        }
+
+        @if (Model.Properties.Any(p => "Credentials".Equals(p.Name, StringComparison.OrdinalIgnoreCase) &&
+            "ServiceClientCredentials".Equals(p.Type.Name, StringComparison.OrdinalIgnoreCase)))
+        {
+            @:if (this.Credentials != null) 
+            @:{
+            @:    this.Credentials.InitializeServiceClient(this);
+            @:}
         }
             SerializationSettings = new JsonSerializerSettings
             {

@@ -17,3 +17,7 @@
     Justification="The literal string is generated code, there are no globalization concerns")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1020:AvoidNamespacesWithFewTypes", Scope = "namespace", 
     Target = "Microsoft.Rest.Generator.Azure.NodeJS", Justification ="Parallelism with other generators")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)", Scope = "member", Target = "Microsoft.Rest.Generator.Azure.NodeJS.AzureMethodTemplateModel.#SetDefaultHeaders",
+    Justification = "Required for Azure customization.")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)", Scope = "member", Target = "Microsoft.Rest.Generator.Azure.NodeJS.AzureMethodTemplateModel.#InitializeResponseBody",
+    Justification = "Required for Azure customization.")]

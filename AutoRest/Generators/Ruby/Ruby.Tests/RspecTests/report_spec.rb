@@ -4,8 +4,12 @@ include MyNamespace
 describe AutoRestReportService do
   before(:all) do
     @base_url = ENV['StubServerURI']
-    @client = AutoRestReportService.new(@base_url)
+
+	dummyToken = 'dummy12321343423'
+	@credentials = MsRest::TokenCredentials.new('Bearer', dummyToken)
+    @client = AutoRestReportService.new(@credentials, @base_url)
   end
+
   it 'should send a report' do
     result = @client.get_report().value!.body
     count_of_methods = 0
@@ -17,6 +21,6 @@ describe AutoRestReportService do
       end
     end
     puts "Test Coverage is #{count_of_calls}/#{count_of_methods}"
-    expect(count_of_calls/count_of_methods > 0.7).to be_truthy
+    expect(count_of_calls/count_of_methods.to_f > 0.5).to be_truthy
   end
 end

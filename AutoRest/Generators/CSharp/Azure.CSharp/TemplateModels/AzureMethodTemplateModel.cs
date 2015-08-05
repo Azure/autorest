@@ -115,12 +115,32 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
         {
             get
             {
+                var sb = new IndentedStringBuilder();
                 if (this.HttpMethod == HttpMethod.Head &&
                     this.ReturnType != null)
                 {
-                    return "result.Body = (statusCode == HttpStatusCode.NoContent);";
+                     sb.AppendLine("result.Body = (statusCode == HttpStatusCode.NoContent);");
                 }
-                return base.InitializeResponseBody;
+                sb.AppendLine("if (httpResponse.Headers.Contains(\"x-ms-request-id\"))")
+                    .AppendLine("{").Indent()
+                        .AppendLine("result.RequestId = httpResponse.Headers.GetValues(\"x-ms-request-id\").FirstOrDefault();").Outdent()
+                    .AppendLine("}")
+                    .AppendLine(base.InitializeResponseBody);
+                return sb.ToString();
+            }
+        }
+
+        /// <summary>
+        /// Gets the expression for default header setting. 
+        /// </summary>
+        public override string SetDefaultHeaders
+        {
+            get
+            {
+                var sb= new IndentedStringBuilder();
+                sb.AppendLine("httpRequest.Headers.TryAddWithoutValidation(\"x-ms-client-request-id\", Guid.NewGuid().ToString());")
+                  .AppendLine(base.SetDefaultHeaders);
+                return sb.ToString();
             }
         }
 

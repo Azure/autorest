@@ -6,12 +6,12 @@ using System.Collections.Generic;
 using Microsoft.Rest;
 using Newtonsoft.Json;
 
-namespace Microsoft.Azure
+namespace Microsoft.Rest.Azure
 {
     /// <summary>
     /// Defines Azure resource.
     /// </summary>
-    public abstract class Resource : IResource
+    public abstract class Resource
     {
         /// <summary>
         /// Gets the ID of the resource.
@@ -30,12 +30,6 @@ namespace Microsoft.Azure
         /// </summary>
         [JsonProperty("type")]
         public string Type { get; private set; }
-
-        /// <summary>
-        /// Gets the provisioning state of the resource.
-        /// </summary>
-        [JsonProperty("properties.provisioningState")]
-        public string ProvisioningState { get; private set; }
 
         /// <summary>
         /// Required. Gets or sets the location of the resource.

@@ -257,9 +257,10 @@ var complex = function(coverage) {
      * Put and get for inhertiance.
      */
     var siamese = '{"breed":"persian","color":"green","hates":[{"food":"tomato","id":1,"name":"Potato"},{"food":"french fries","id":-1,"name":"Tomato"}],"id":2,"name":"Siameeee"}';
+
     router.put('/inheritance/:scenario', function(req, res, next) {
         if (req.params.scenario === 'valid') {
-            if (JSON.stringify(req.body) === siamese) {
+            if (_.isEqual(req.body, JSON.parse(siamese))) {
                 coverage['putComplexInheritanceValid']++;
                 res.status(200).end();
             } else {

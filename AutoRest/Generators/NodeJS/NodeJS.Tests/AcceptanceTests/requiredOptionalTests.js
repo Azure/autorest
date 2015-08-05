@@ -9,7 +9,7 @@ var util = require('util');
 var assert = require('assert');
 var msRest = require('ms-rest');
 
-var reqOptClient = require('../Expected/SwaggerBat/RequiredOptional/AutoRestRequiredOptionalTestService');
+var reqOptClient = require('../Expected/AcceptanceTests/RequiredOptional/AutoRestRequiredOptionalTestService');
 
 var dummyToken = 'dummy12321343423';
 var credentials = new msRest.TokenCredentials(dummyToken);
@@ -24,11 +24,11 @@ describe('nodejs', function () {
 
     describe('Basic Required Optional Operations', function () {
       var testClient = new reqOptClient('', '', baseUri, clientOptions);
-      
+
       it('should throw error on null path parameter', function (done) {
         testClient.implicit.getRequiredPath(null, function (error, result) {
           should.exist(error);
-          error.message.should.containEql('\'pathParameter\' cannot be null');
+          error.message.should.containEql('pathParameter cannot be null or undefined and it must be of type string.');
           done();
         });
       });
@@ -60,7 +60,7 @@ describe('nodejs', function () {
       it('should throw error on null values for required integer parameters', function (done) {
         testClient.explicit.postRequiredIntegerParameter(null, function (error, result) {
           should.exist(error);
-          error.message.should.containEql('\'bodyParameter\' cannot be null');
+          error.message.should.containEql('bodyParameter cannot be null or undefined and it must be of type number.');
           done();
         });
       });
@@ -93,7 +93,7 @@ describe('nodejs', function () {
       it('should throw error on null values for required integer header', function (done) {
         testClient.explicit.postRequiredIntegerHeader(null, function (error, result) {
           should.exist(error);
-          error.message.should.containEql('\'headerParameter\' cannot be null');
+          error.message.should.containEql('headerParameter cannot be null or undefined and it must be of type number.');
           done();
         });
       });
@@ -109,7 +109,7 @@ describe('nodejs', function () {
       it('should throw error on null values for required string parameters', function (done) {
         testClient.explicit.postRequiredStringParameter(null, function (error, result) {
           should.exist(error);
-          error.message.should.containEql('\'bodyParameter\' cannot be null');
+          error.message.should.containEql('bodyParameter cannot be null or undefined and it must be of type string.');
           done();
         });
       });
@@ -142,7 +142,7 @@ describe('nodejs', function () {
       it('should throw error on null values for required string header', function (done) {
         testClient.explicit.postRequiredStringHeader(null, function (error, result) {
           should.exist(error);
-          error.message.should.containEql('\'headerParameter\' cannot be null');
+          error.message.should.containEql('headerParameter cannot be null or undefined and it must be of type string.');
           done();
         });
       });
@@ -159,7 +159,7 @@ describe('nodejs', function () {
       it('should throw error on null values for required class parameters', function (done) {
         testClient.explicit.postRequiredClassParameter(null, function (error, result) {
           should.exist(error);
-          error.message.should.containEql('\'bodyParameter\' cannot be null');
+          error.message.should.containEql('bodyParameter cannot be null or undefined.');
           done();
         });
       });
@@ -193,7 +193,7 @@ describe('nodejs', function () {
       it('should throw error on null values for required array parameters', function (done) {
         testClient.explicit.postRequiredArrayParameter(null, function (error, result) {
           should.exist(error);
-          error.message.should.containEql('\'bodyParameter\' cannot be null');
+          error.message.should.containEql('bodyParameter cannot be null or undefined and it must be of type array.');
           done();
         });
       });
@@ -226,7 +226,7 @@ describe('nodejs', function () {
       it('should throw error on null values for required array header', function (done) {
         testClient.explicit.postRequiredArrayHeader(null, function (error, result) {
           should.exist(error);
-          error.message.should.containEql('\'headerParameter\' cannot be null');
+          error.message.should.containEql('headerParameter cannot be null or undefined and it must be of type array.');
           done();
         });
       });
@@ -243,7 +243,7 @@ describe('nodejs', function () {
         testClient.requiredGlobalPath = null;
         testClient.implicit.getRequiredGlobalPath(function (error, result) {
           should.exist(error);
-          error.message.should.containEql('\'this.client.requiredGlobalPath\' cannot be null');
+          error.message.should.containEql('this.client.requiredGlobalPath cannot be null or undefined and it must be of type string.');
           done();
         });
       });
@@ -252,7 +252,7 @@ describe('nodejs', function () {
         testClient.requiredGlobalQuery = null;
         testClient.implicit.getRequiredGlobalQuery(function (error, result) {
           should.exist(error);
-          error.message.should.containEql('\'this.client.requiredGlobalQuery\' cannot be null');
+          error.message.should.containEql('this.client.requiredGlobalQuery cannot be null or undefined and it must be of type string.');
           done();
         });
       });
@@ -264,7 +264,7 @@ describe('nodejs', function () {
           done();
         });
       });
-      
+
     });
   });
 });

@@ -3,7 +3,7 @@
 @using Microsoft.Rest.Generator.Utilities
 @using System.Linq
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.NodeJS.ServiceClientTemplateModel>
-@Header("/// ")
+@Header("// ")
 /* jshint latedef:false */
 /* jshint forin:false */
 /* jshint noempty:false */
@@ -33,7 +33,7 @@ var WebResource = msRest.WebResource;
  *
 @foreach (var param in parameters)
 {
-@: * @@param {@param.Type.Name} [@param.Name] @param.Documentation
+@: * @@param {@param.Type.Name} @param.Name @param.Documentation
 @: *
 }
  * @@param {string} [baseUri] - The base URI of the service.

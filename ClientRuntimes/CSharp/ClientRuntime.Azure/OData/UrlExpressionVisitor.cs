@@ -10,7 +10,7 @@ using System.Text;
 using Microsoft.Rest.Serialization;
 using Newtonsoft.Json;
 
-namespace Microsoft.Azure.OData
+namespace Microsoft.Rest.Azure.OData
 {
     /// <summary>
     /// Expression visitor class that generates OData style $filter parameter.
@@ -193,7 +193,7 @@ namespace Microsoft.Azure.OData
                 Visit(leftSide);
                 _generatedUrl.Append(", ");
                 Visit(rightSide);
-                _generatedUrl.Append(") eq true");
+                _generatedUrl.Append(")");
                 return node;
             }
 
@@ -213,7 +213,7 @@ namespace Microsoft.Azure.OData
                 Visit(leftSide);
                 _generatedUrl.Append(", ");
                 Visit(rightSide);
-                _generatedUrl.Append(") eq true");
+                _generatedUrl.Append(")");
                 return node;
             }
 

@@ -57,7 +57,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                     List<string> predicates = new List<string>();
                     foreach (var responseStatus in Responses.Keys)
                     {
-                        predicates.Add(string.Format(CultureInfo.InvariantCulture, 
+                        predicates.Add(string.Format(CultureInfo.InvariantCulture,
                             "statusCode !== {0}", GetStatusCodeReference(responseStatus)));
                     }
 
@@ -153,6 +153,11 @@ namespace Microsoft.Rest.Generator.NodeJS
                         {
                             foreach (var property in ((CompositeType)param.Type).Properties)
                             {
+                                if (property.IsReadOnly)
+                                {
+                                    continue;
+                                }
+
                                 var propertyParameter = new Parameter();
                                 propertyParameter.Type = property.Type;
                                 propertyParameter.Name = param.Name + "." + property.Name;
@@ -199,6 +204,29 @@ namespace Microsoft.Rest.Generator.NodeJS
                     .AppendLine("{0}.request = httpRequest;", errorVariable)
                     .AppendLine("{0}.response = response;", errorVariable)
                     .AppendLine("return callback({0});", errorVariable).ToString();
+            }
+        }
+
+        /// <summary>
+        /// Provides the parameter name in the correct jsdoc notation depending on 
+        /// whether it is required or optional
+        /// </summary>
+        /// <param name="parameter">Parameter to be documented</param>
+        /// <returns>Parameter name in the correct jsdoc notation</returns>
+        public static string GetParameterDocumentationName (Parameter parameter)
+        {
+            if (parameter == null)
+            {
+                throw new ArgumentNullException("parameter");
+            }
+
+            if (parameter.IsRequired)
+            {
+                return parameter.Name;
+            }
+            else
+            {
+                return string.Format(CultureInfo.InvariantCulture, "[{0}]", parameter.Name);
             }
         }
 
@@ -320,16 +348,16 @@ namespace Microsoft.Rest.Generator.NodeJS
         /// <returns>True if special deserialization is required. False, otherwise.</returns>
         private static bool IsSpecialDeserializationRequired(IType type)
         {
-            PrimaryType[] validTypes = new PrimaryType[] {PrimaryType.DateTime, PrimaryType.Date, PrimaryType.ByteArray};
+            PrimaryType[] validTypes = new PrimaryType[] { PrimaryType.DateTime, PrimaryType.Date, PrimaryType.ByteArray };
             SequenceType sequence = type as SequenceType;
             DictionaryType dictionary = type as DictionaryType;
             bool result = false;
-            if (sequence != null && 
+            if (sequence != null &&
                 (validTypes.Any(t => t == sequence.ElementType) || sequence.ElementType is CompositeType))
             {
                 result = true;
             }
-            else if (dictionary != null && 
+            else if (dictionary != null &&
                 (validTypes.Any(t => t == dictionary.ValueType) || dictionary.ValueType is CompositeType))
             {
                 result = true;
@@ -482,6 +510,17 @@ namespace Microsoft.Rest.Generator.NodeJS
             builder.AppendLine("var regex = /([^:]\\/)\\/+/gi;");
             builder.AppendLine("{0} = {0}.replace(regex, '$1');", urlVariableName);
             return builder.ToString();
+        }
+
+        /// <summary>
+        /// Gets the expression for default header setting. 
+        /// </summary>
+        public virtual string SetDefaultHeaders
+        {
+            get
+            {
+                return string.Empty;
+            }
         }
     }
 }

@@ -64,7 +64,8 @@ namespace Microsoft.Rest.Generator.Ruby
 
                     return string.Join(" || ", predicates);
                 }
-                return "httpResponse.IsSuccessStatusCode";
+
+                return "status_code >= 200 && status_code < 300";
             }
         }
 
@@ -81,6 +82,8 @@ namespace Microsoft.Rest.Generator.Ruby
                     string format = (parameter.IsRequired ? "{0}" : "{0} = nil");
                     declarations.Add(string.Format(format, parameter.Name));
                 }
+
+                declarations.Add("custom_headers = nil");
 
                 return string.Join(", ", declarations);
             }
@@ -108,7 +111,7 @@ namespace Microsoft.Rest.Generator.Ruby
         {
             get
             {
-                return "ClientRuntime::HttpOperationResponse";
+                return "MsRest::HttpOperationResponse";
             }
         }
 
@@ -119,8 +122,13 @@ namespace Microsoft.Rest.Generator.Ruby
         {
             get
             {
-                return "ClientRuntime::HttpOperationException";
+                return "MsRest::HttpOperationException";
             }
+        }
+
+        public virtual string InitializeResponseBody 
+        {
+            get { return string.Empty; }
         }
 
         /// <summary>
@@ -211,7 +219,7 @@ namespace Microsoft.Rest.Generator.Ruby
             // Filling path parameters (which are directly in the url body).
             foreach (var pathParameter in ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
             {
-                builder.AppendLine("{0}['{{{1}}}'] = CGI.escape({2})",
+                builder.AppendLine("{0}['{{{1}}}'] = ERB::Util.url_encode({2})",
                     inputVariableName,
                     pathParameter.SerializedName,
                     pathParameter.Type.ToString(pathParameter.Name));
@@ -232,17 +240,14 @@ namespace Microsoft.Rest.Generator.Ruby
                     string.Join(", ", queryParametres.Select(x => string.Format("'{0}' => {1}", x.SerializedName, x.Name))));
 
                 builder.AppendLine("properties.reject!{ |key, value| value.nil? }");
-                builder.AppendLine("{0}.query = properties.map{{ |key, value| \"#{{key}}=#{{CGI.escape(value.to_s)}}\" }}.compact.join('&')", outputVariableName);
+                builder.AppendLine("{0}.query = properties.map{{ |key, value| \"#{{key}}=#{{ERB::Util.url_encode(value.to_s)}}\" }}.compact.join('&')", outputVariableName);
             }
+
+            builder.AppendLine(@"fail URI::Error unless {0}.to_s =~ /\A#{{URI::regexp}}\z/", outputVariableName);
 
             return builder.ToString();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="urlVariableName"></param>
-        /// <returns></returns>
         public virtual string RemoveDuplicateForwardSlashes(string urlVariableName)
         {
             var builder = new IndentedStringBuilder("  ");
@@ -253,6 +258,17 @@ namespace Microsoft.Rest.Generator.Ruby
             //builder.AppendLine("{0} = {0}.replace(regex, '$1');", urlVariableName);
             
             return builder.ToString();
+        }
+
+        /// <summary>
+        /// Gets the expression for default header setting. 
+        /// </summary>
+        public virtual string SetDefaultHeaders
+        {
+            get
+            {
+                return string.Empty;
+            }
         }
     }
 }

@@ -159,6 +159,9 @@
   <data name="InvalidIdentifierName" xml:space="preserve">
     <value>Property name {0} cannot be used as an Identifier, as it contains only invalid characters.</value>
   </data>
+  <data name="LanguageDoesNotSupportSingleFileGeneration" xml:space="preserve">
+    <value>'{0}' code generator does not support code generation to a single file.</value>
+  </data>
   <data name="ModelerInitialized" xml:space="preserve">
     <value>Initializing modeler.</value>
   </data>

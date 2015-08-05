@@ -17,7 +17,7 @@ namespace Microsoft.Rest.Generator.Utilities
         private const string FolderKey = "Folder";
 
         private Dictionary<string, StringBuilder> _virtualStore =
-            new Dictionary<string, StringBuilder>(StringComparer.OrdinalIgnoreCase);
+            new Dictionary<string, StringBuilder>();
 
         public Dictionary<string, StringBuilder> VirtualStore
         {
@@ -74,17 +74,13 @@ namespace Microsoft.Rest.Generator.Utilities
             {
                 VirtualStore.Remove(path);
             }
-            else
-            {
-                throw new IOException("File not found: " + path);
-            }
         }
 
         public void DeleteDirectory(string directory)
         {
             foreach (var key in VirtualStore.Keys.ToArray())
             {
-                if (key.StartsWith(directory, StringComparison.OrdinalIgnoreCase))
+                if (key.StartsWith(directory, StringComparison.Ordinal))
                 {
                     VirtualStore.Remove(key);
                 }
@@ -95,7 +91,7 @@ namespace Microsoft.Rest.Generator.Utilities
         {
             foreach (var key in VirtualStore.Keys.ToArray())
             {
-                if (key.StartsWith(directory, StringComparison.OrdinalIgnoreCase))
+                if (key.StartsWith(directory, StringComparison.Ordinal))
                 {
                     VirtualStore.Remove(key);
                 }
@@ -106,7 +102,7 @@ namespace Microsoft.Rest.Generator.Utilities
         {
             foreach (var key in VirtualStore.Keys.ToArray())
             {
-                if (key.StartsWith(path, StringComparison.OrdinalIgnoreCase))
+                if (key.StartsWith(path, StringComparison.Ordinal))
                 {
                     return true;
                 }
@@ -124,8 +120,8 @@ namespace Microsoft.Rest.Generator.Utilities
             HashSet<string> dirs = new HashSet<string>();
             foreach (var key in VirtualStore.Keys.ToArray())
             {
-                if (key.StartsWith(startDirectory, StringComparison.OrdinalIgnoreCase) &&
-                    Regex.IsMatch(key, WildcardToRegex(filePattern), RegexOptions.IgnoreCase))
+                if (key.StartsWith(startDirectory, StringComparison.Ordinal) &&
+                    Regex.IsMatch(key, WildcardToRegex(filePattern)))
                 {
                     var directoryName = Path.GetDirectoryName(key);
                     if (!dirs.Contains(directoryName))
@@ -142,9 +138,9 @@ namespace Microsoft.Rest.Generator.Utilities
             HashSet<string> files = new HashSet<string>();
             foreach (var key in VirtualStore.Keys.ToArray())
             {
-                if (key.StartsWith(startDirectory, StringComparison.OrdinalIgnoreCase) && 
+                if (key.StartsWith(startDirectory, StringComparison.Ordinal) &&
                     VirtualStore[key].ToString() != FolderKey &&
-                    Regex.IsMatch(key, WildcardToRegex(filePattern), RegexOptions.IgnoreCase))
+                    Regex.IsMatch(key, WildcardToRegex(filePattern)))
                 {
                     if (!files.Contains(key))
                     {

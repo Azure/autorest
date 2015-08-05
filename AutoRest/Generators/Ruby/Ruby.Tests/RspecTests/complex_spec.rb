@@ -1,12 +1,18 @@
 require'base64'
 require_relative 'Complex/sdk_requirements'
+
 include MyNamespace
+include MyNamespace::Models
 
 describe 'Complex tests' do
 
   before(:all) do
     @base_url = ENV['StubServerURI']
-    @client = AutoRestComplexTestService.new(@base_url)
+
+    dummyToken = 'dummy12321343423'
+    @credentials = MsRest::TokenCredentials.new(dummyToken)
+
+    @client = AutoRestComplexTestService.new(@credentials, @base_url)
     @arrayValue = [
         "1, 2, 3, 4",
         "",
@@ -26,7 +32,7 @@ describe 'Complex tests' do
   end
 
   it 'should create test service' do
-    expect{AutoRestComplexTestService.new(@base_url)}.not_to raise_error
+    expect { AutoRestComplexTestService.new(@credentials, @base_url) }.not_to raise_error
   end
 
   # Array tests
@@ -43,7 +49,7 @@ describe 'Complex tests' do
       array_wrapper = Models::ArrayWrapper.new
       array_wrapper.array = @arrayValue
       result = @client.array.put_valid(array_wrapper).value!.response
-    rescue e => ClientRuntime::HttpOperationException
+    rescue e => MsRest::HttpOperationException
       p e
     end
     expect(result).to be_an_instance_of(Net::HTTPOK)
@@ -91,7 +97,7 @@ describe 'Complex tests' do
   end
 
   it 'should get basic invalid' do
-    expect { result = @client.basic_operations.get_invalid().value! }.to raise_error(ClientRuntime::DeserializationError)
+    expect { result = @client.basic_operations.get_invalid().value! }.to raise_error(MsRest::DeserializationError)
   end
 
   it 'should get basic empty' do
@@ -171,6 +177,7 @@ describe 'Complex tests' do
 
   it 'should put inheritance valid' do
     inheritance_request = Models::Siamese.new
+
     dog1 = Models::Dog.new
     dog2 = Models::Dog.new
     dog1.id = 1
@@ -179,95 +186,122 @@ describe 'Complex tests' do
     dog2.id = -1
     dog2.name = "Tomato"
     dog2.food = "french fries"
+
     inheritance_request.id = 2
     inheritance_request.name = "Siameeee"
     inheritance_request.color = "green"
     inheritance_request.breed = "persian"
     inheritance_request.hates = [dog1, dog2]
-    result = @client.inheritance.put_valid(inheritance_request).value!.response
-    expect(result).to be_an_instance_of(Net::HTTPOK)
+
+    result = @client.inheritance.put_valid(inheritance_request).value!
+    expect(result.response).to be_an_instance_of(Net::HTTPOK)
   end
 
   # Polymorphicrecursive tests
   it 'should get inheritance valid' do
     result = @client.polymorphicrecursive.get_valid().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
-    expect(result.body.siblings[0].is_a?Models::Shark).to be_truthy
-    expect(result.body.siblings[0].siblings[0].is_a?Models::Salmon).to be_truthy
+    expect(result.body.is_a?Salmon).to be_truthy
+    expect(result.body.siblings[0].is_a?Shark).to be_truthy
+    expect(result.body.siblings[0].siblings[0].is_a?Salmon).to be_truthy
     expect(result.body.siblings[0].siblings[0].location).to eq("atlantic")
   end
 
   it 'should put inheritance valid' do
-    recursive_request = Models::Salmon.new
-    shark = Models::Shark.new
-    sawshark = Models::Sawshark.new
-    salmon = Models::Salmon.new
-    sawshark1 = Models::Sawshark.new
     shark1 = Models::Shark.new
-
-    shark.age = 6
-    shark.length = 20
-    shark.species = "predator"
     shark1.age = 6
     shark1.length = 20
     shark1.species = "predator"
+    shark1.birthday = DateTime.new(2012, 1, 5, 1, 0, 0, 'Z')
 
+    # doesn't have children.
+    sawshark = Models::Sawshark.new
     sawshark.age = 105
     sawshark.length = 10
     sawshark.species = "dangerous"
+    sawshark.birthday = DateTime.new(1900, 1, 5, 1, 0, 0, 'Z')
+    sawshark.picture = [255, 255, 255, 255, 254]
+
+    # doesn't have children but has empty array of siblings.
+    sawshark1 = Models::Sawshark.new
     sawshark1.age = 105
     sawshark1.length = 10
     sawshark1.species = "dangerous"
     sawshark1.siblings = []
-    shark1.siblings = [salmon, sawshark]
+    sawshark1.birthday = DateTime.new(1900, 1, 5, 1, 0, 0, 'Z')
+    sawshark1.picture = [255, 255, 255, 255, 254]
 
+    # has two children: shark1 and sawshark.
+    salmon = Models::Salmon.new
     salmon.iswild = true
     salmon.length = 2
     salmon.location = "atlantic"
     salmon.species = "coho"
-    salmon.siblings = [shark1, sawshark1]
+    salmon.siblings = [shark1, sawshark]
 
+    # has two children: salmon and sawshark1
+    shark = Models::Shark.new
+    shark.age = 6
+    shark.length = 20
+    shark.species = "predator"
+    shark.birthday = DateTime.new(2012, 1, 5, 1, 0, 0, 'Z')
+    shark.siblings = [salmon, sawshark1]
+
+    # doesn't have children but has empty array of siblings.
+    sawshark2 = Models::Sawshark.new
+    sawshark2.age = 105
+    sawshark2.length = 10
+    sawshark2.species = "dangerous"
+    sawshark2.siblings = []
+    sawshark2.birthday = DateTime.new(1900, 1, 5, 1, 0, 0, 'Z')
+    sawshark2.picture = [255, 255, 255, 255, 254]
+
+    # has two children: shark and sawshark2.
+    recursive_request = Models::Salmon.new
     recursive_request.iswild = true
     recursive_request.length = 1
     recursive_request.species = "king"
     recursive_request.location = "alaska"
-    recursive_request.siblings = [shark, sawshark]
-    result = @client.polymorphicrecursive.put_valid(recursive_request).value!.response
-    expect(result).to be_an_instance_of(Net::HTTPOK)
+    recursive_request.siblings = [shark, sawshark2]
+
+    result = @client.polymorphicrecursive.put_valid(recursive_request).value!
+    expect(result.response).to be_an_instance_of(Net::HTTPOK)
   end
 
   # Polymorphism tests
   it 'should get polymorphism valid' do
     result = @client.polymorphism.get_valid().value!
     expect(result.response).to be_an_instance_of(Net::HTTPOK)
-    expect(result.body.siblings[0].is_a?Models::Salmon).to be_truthy
+
     expect(result.body.location).to eq("alaska")
-    expect(result.body.siblings[0].is_a?Models::Shark).to be_truthy
-    expect(result.body.siblings[1].is_a?Models::Sawhark).to be_truthy
+
+    expect(result.body.siblings[0].is_a? Shark).to be_truthy
+    expect(result.body.siblings[1].is_a? Sawshark).to be_truthy
+
     expect(result.body.siblings[0].age).to eq(6)
     expect(result.body.siblings[1].age).to eq(105)
   end
 
   it 'should put polymorphism valid' do
-    polymorphism_request = Models::Salmon.new
     shark = Models::Shark.new
-    sawshark = Models::Sawshark.new
     shark.age = 6
     shark.length = 20
     shark.species = "predator"
+    shark.birthday = DateTime.new(2012, 1, 5, 1, 0, 0, 'Z')
 
+    sawshark = Models::Sawshark.new
     sawshark.age = 105
     sawshark.length = 10
     sawshark.species = "dangerous"
+    sawshark.birthday = DateTime.new(1900, 1, 5, 1, 0, 0, 'Z')
+    sawshark.picture = [255, 255, 255, 255, 254]
 
+    polymorphism_request = Models::Salmon.new
     polymorphism_request.iswild = true
     polymorphism_request.length = 1
     polymorphism_request.species = "king"
     polymorphism_request.location = "alaska"
     polymorphism_request.siblings = [shark, sawshark]
-
-    result = result = @client.polymorphism.put_valid(polymorphism_request).value!.response
-    expect(result).to be_an_instance_of(Net::HTTPOK)
   end
 
   # Primitive tests

@@ -36,9 +36,15 @@
     <Compile Include="TemplateModels\AzureServiceClientTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureModelTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureParameterTemplateModel.cs" />
-    <Compile Include="Templates\AzureMethodTemplate.cs" />
-    <Compile Include="Templates\AzureMethodGroupTemplate.cs" />
-    <Compile Include="Templates\AzureServiceClientTemplate.cs" />
+    <Compile Include="Templates\AzureMethodGroupTemplate.cs">
+      <DependentUpon>AzureMethodGroupTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\AzureMethodTemplate.cs">
+      <DependentUpon>AzureMethodTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\AzureServiceClientTemplate.cs">
+      <DependentUpon>AzureServiceClientTemplate.cshtml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -61,12 +67,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Templates\AzureMethodGroupTemplate.cshtml" />
     <None Include="Templates\AzureMethodTemplate.cshtml" />
     <None Include="Templates\AzureServiceClientTemplate.cshtml" />
-    <None Include="Templates\AzureMethodGroupTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <CodeAnalysisDictionary Include="..\..\..\..\tools\CustomDictionary.xml">
+    <CodeAnalysisDictionary Include="..\..\..\..\Tools\CustomDictionary.xml">
       <Link>CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>
   </ItemGroup>

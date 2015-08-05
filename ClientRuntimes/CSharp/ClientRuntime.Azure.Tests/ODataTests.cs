@@ -3,7 +3,7 @@
 
 using System;
 using System.Linq;
-using Microsoft.Azure.OData;
+using Microsoft.Rest.Azure.OData;
 using Newtonsoft.Json;
 using Xunit;
 
@@ -95,7 +95,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                 }
             };
             var result = FilterString.Generate<Param1>(p => p.Foo.StartsWith(param.Param.Value));
-            Assert.Equal("startswith(foo, 'foo') eq true", result);
+            Assert.Equal("startswith(foo, 'foo')", result);
         }
 
         [Fact]
@@ -109,7 +109,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                 }
             };
             var result = FilterString.Generate<Param1>(p => p.Foo.EndsWith(param.Param.Value));
-            Assert.Equal("endswith(foo, 'foo') eq true", result);
+            Assert.Equal("endswith(foo, 'foo')", result);
         }
 
         [Fact]

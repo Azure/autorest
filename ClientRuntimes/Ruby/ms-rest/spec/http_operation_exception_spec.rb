@@ -1,5 +1,5 @@
-require 'client_runtime'
-include ClientRuntime
+require 'ms_rest'
+include MsRest
 
 describe HttpOperationException do
   let(:request) { Net::HTTP::Get.new('http://localhost:8080/') }

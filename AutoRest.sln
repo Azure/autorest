@@ -51,6 +51,38 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime", "ClientRunt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientRuntime.Azure", "ClientRuntimes\CSharp\ClientRuntime.Azure\ClientRuntime.Azure.csproj", "{856A1D19-C3BF-439A-BEBF-E822A332BC12}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Generator.Azure.Ruby.Tests", "AutoRest\Generators\Ruby\Azure.Ruby.Tests\AutoRest.Generator.Azure.Ruby.Tests.csproj", "{D30EE4A3-366A-473B-9DB5-0E5F6516A4AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Generator.Azure.Ruby", "AutoRest\Generators\Ruby\Azure.Ruby\AutoRest.Generator.Azure.Ruby.csproj", "{31931998-7543-41DA-9E58-D9670D810352}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{04E8E124-852C-4B5D-83EB-0B8ADDE825CB}"
+	ProjectSection(SolutionItems) = preProject
+		build.proj = build.proj
+		ChangeLog.txt = ChangeLog.txt
+		gulpfile.js = gulpfile.js
+		package.json = package.json
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{5989E210-AE15-4DF4-8CEE-DEE609740FD2}"
+	ProjectSection(SolutionItems) = preProject
+		Tools\AutoRest.Settings.targets = Tools\AutoRest.Settings.targets
+		Tools\CustomDictionary.xml = Tools\CustomDictionary.xml
+		Tools\ManagedRules.ruleset = Tools\ManagedRules.ruleset
+		Tools\NuGet.targets = Tools\NuGet.targets
+		Tools\references.net45.props = Tools\references.net45.props
+		Tools\references.portable.props = Tools\references.portable.props
+		Tools\TestRules.ruleset = Tools\TestRules.ruleset
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gulp", "gulp", "{9750C692-C2D0-4D0F-9F73-D45DB9E906CE}"
+	ProjectSection(SolutionItems) = preProject
+		Tools\gulp\gulp-nuget-proj-sync.js = Tools\gulp\gulp-nuget-proj-sync.js
+		Tools\gulp\gulp-nuspec-sync.js = Tools\gulp\gulp-nuspec-sync.js
+		Tools\gulp\gulp-regenerate-expected.js = Tools\gulp\gulp-regenerate-expected.js
+		Tools\gulp\gulp-runtime-version-sync.js = Tools\gulp\gulp-runtime-version-sync.js
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Net45-Debug|Any CPU = Net45-Debug|Any CPU
@@ -125,6 +157,14 @@ Global
 		{856A1D19-C3BF-439A-BEBF-E822A332BC12}.Net45-Debug|Any CPU.Build.0 = Net45-Debug|Any CPU
 		{856A1D19-C3BF-439A-BEBF-E822A332BC12}.Net45-Release|Any CPU.ActiveCfg = Net45-Release|Any CPU
 		{856A1D19-C3BF-439A-BEBF-E822A332BC12}.Net45-Release|Any CPU.Build.0 = Net45-Release|Any CPU
+		{D30EE4A3-366A-473B-9DB5-0E5F6516A4AD}.Net45-Debug|Any CPU.ActiveCfg = Net45-Debug|Any CPU
+		{D30EE4A3-366A-473B-9DB5-0E5F6516A4AD}.Net45-Debug|Any CPU.Build.0 = Net45-Debug|Any CPU
+		{D30EE4A3-366A-473B-9DB5-0E5F6516A4AD}.Net45-Release|Any CPU.ActiveCfg = Net45-Release|Any CPU
+		{D30EE4A3-366A-473B-9DB5-0E5F6516A4AD}.Net45-Release|Any CPU.Build.0 = Net45-Release|Any CPU
+		{31931998-7543-41DA-9E58-D9670D810352}.Net45-Debug|Any CPU.ActiveCfg = Net45-Debug|Any CPU
+		{31931998-7543-41DA-9E58-D9670D810352}.Net45-Debug|Any CPU.Build.0 = Net45-Debug|Any CPU
+		{31931998-7543-41DA-9E58-D9670D810352}.Net45-Release|Any CPU.ActiveCfg = Net45-Release|Any CPU
+		{31931998-7543-41DA-9E58-D9670D810352}.Net45-Release|Any CPU.Build.0 = Net45-Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -148,5 +188,9 @@ Global
 		{CD930EB5-A0C1-49BF-A320-1C2AEB028E7E} = {DE95444A-F6FD-46DC-BBDC-A1A6886A6F2D}
 		{7F524559-93F9-4F3F-9E2C-AF41A0C2E6F4} = {235139C9-79DE-4242-8F12-327C62377C23}
 		{856A1D19-C3BF-439A-BEBF-E822A332BC12} = {235139C9-79DE-4242-8F12-327C62377C23}
+		{D30EE4A3-366A-473B-9DB5-0E5F6516A4AD} = {DE95444A-F6FD-46DC-BBDC-A1A6886A6F2D}
+		{31931998-7543-41DA-9E58-D9670D810352} = {DE95444A-F6FD-46DC-BBDC-A1A6886A6F2D}
+		{5989E210-AE15-4DF4-8CEE-DEE609740FD2} = {04E8E124-852C-4B5D-83EB-0B8ADDE825CB}
+		{9750C692-C2D0-4D0F-9F73-D45DB9E906CE} = {5989E210-AE15-4DF4-8CEE-DEE609740FD2}
 	EndGlobalSection
 EndGlobal

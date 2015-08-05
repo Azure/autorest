@@ -23,7 +23,7 @@ namespace Microsoft.Rest.Generator.Ruby.Tests
             Test("dictionary_spec.rb", "body-dictionary.json", "Dictionary");
         }
 
-        [Fact(Skip = "Inheritance isn't completely implemented yet")]
+        [Fact]
         public void ComplexTests()
         {
             Test("complex_spec.rb", "body-complex.json", "Complex");
@@ -53,25 +53,25 @@ namespace Microsoft.Rest.Generator.Ruby.Tests
             Test("byte_spec.rb", "body-byte.json", "Byte");
         }
 
-        [Fact(Skip = "not completely implemented yet")]
+        [Fact]
         public void UrlPathTests()
         {
             Test("path_spec.rb", "url.json", "Url");
         }
 
-        [Fact(Skip = "not completely implemented yet")]
+        [Fact]
         public void UrlQeruiesTests()
         {
             Test("query_spec.rb", "url.json", "UrlQuery");
         }
 
-        [Fact(Skip = "not completely implemented yet")]
+        [Fact]
         public void UrlItemsTests()
         {
             Test("path_items_spec.rb", "url.json", "UrlItems");
         }
 
-        [Fact(Skip = "not completely implemented yet")]
+        [Fact]
         public void DateTimeTests()
         {
             Test("datetime_spec.rb", "body-datetime.json", "DateTime");
@@ -89,26 +89,26 @@ namespace Microsoft.Rest.Generator.Ruby.Tests
             Test("array_spec.rb", "body-array.json", "Array");
         }
 
-        [Fact(Skip = "not completely implemented yet")]
+        [Fact]
         public void HeaderTests()
         {
             Test("header_spec.rb", "header.json", "Header");
         }
 
-        [Fact(Skip = "not completely implemented yet")]
+        [Fact]
         public void HttpInfrastructureTests()
         {
-            Test("header_spec.rb", "httpInfrastructure.json", "HttpInfrastructure");
+            Test("http_infrastructure_spec.rb", "httpInfrastructure.json", "HttpInfrastructure");
         }
 
-        [Fact(Skip = "not completely implemented yet")]
+        [Fact]
         public void RequiredOptionalTests()
         {
-            Test("header_spec.rb", "required-optional.json", "RequiredOptional");
+            Test("required_optional_spec.rb", "required-optional.json", "RequiredOptional");
         }
 
         [Trait("Report", "true")]
-        [Fact(Skip = "not all tests are ready so test coverage is too low")]
+        [Fact]
         public void EnsureTestCoverage()
         {
             Test("report_spec.rb", "report.json", "Report");

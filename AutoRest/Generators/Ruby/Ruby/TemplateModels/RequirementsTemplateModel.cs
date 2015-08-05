@@ -25,7 +25,7 @@ namespace Microsoft.Rest.Generator.Ruby
         public string GetOperationsRequiredFiles()
         {
             var sb = new IndentedStringBuilder();
-            this.MethodGroups.ForEach(method => sb.AppendLine("{0}", 
+            this.MethodGroups.ForEach(method => sb.AppendLine("{0}",
                 this.GetRequiredFormat(RubyCodeNamer.UnderscoreCase(method) + ".rb")));
             return sb.ToString();
         }
@@ -72,12 +72,12 @@ require 'cgi'
 require 'date'
 require 'json'
 require 'base64'
+require 'ERB'
 require 'securerandom'
 require 'time'
 require 'timeliness'
-require 'duration'
 require 'concurrent'
-require 'client_runtime'";
+require 'ms_rest'";
         }
 
         private IEnumerable<CompositeType> GetDependencyTypes(CompositeType type)

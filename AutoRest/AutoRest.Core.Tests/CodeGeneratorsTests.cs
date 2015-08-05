@@ -25,8 +25,8 @@ namespace Microsoft.Rest.Generator.Test
 
         private void SetupMock()
         {
-            _fileSystem.WriteFile("AutoRest.json", File.ReadAllText("Resource\\AutoRest.json"));
-            _fileSystem.WriteFile("RedisResource.json", File.ReadAllText("Resource\\RedisResource.json"));
+            _fileSystem.WriteFile("AutoRest.json", File.ReadAllText(Path.Combine("Resource", "AutoRest.json")));
+            _fileSystem.WriteFile("RedisResource.json", File.ReadAllText(Path.Combine("Resource", "RedisResource.json")));
         }
 
         [Fact]
@@ -36,11 +36,11 @@ namespace Microsoft.Rest.Generator.Test
             {
                 CodeGenerator = "CSharp",
                 FileSystem = _fileSystem,
-                OutputDirectory = "X:\\Output"
+                OutputDirectory = Path.GetTempPath()
             };
             SampleCodeGenerator codeGenerator = new SampleCodeGenerator(settings);
             codeGenerator.Generate(new ServiceClient()).GetAwaiter().GetResult();
-            Assert.Contains(settings.OutputDirectory + "\\Models", _fileSystem.VirtualStore.Keys);
+            Assert.Contains(Path.Combine(settings.OutputDirectory, "Models"), _fileSystem.VirtualStore.Keys);
         }
 
         [Fact]
@@ -62,7 +62,7 @@ namespace Microsoft.Rest.Generator.Test
             {
                 CodeGenerator = "CSharp",
                 FileSystem = _fileSystem,
-                OutputDirectory = "X:\\Output"
+                OutputDirectory = Path.GetTempPath()
             };
             string existingContents = "this is dummy";
             string path = Path.Combine(settings.OutputDirectory, "Models", "Pet.cs");
@@ -70,6 +70,28 @@ namespace Microsoft.Rest.Generator.Test
             var codeGenerator = new SampleCodeGenerator(settings);
             codeGenerator.Generate(new ServiceClient()).GetAwaiter().GetResult();
             Assert.NotEqual(existingContents, _fileSystem.VirtualStore[path].ToString());
+        }
+
+        [Fact]
+        public void OutputToSingleFile()
+        {
+            var settings = new Settings
+            {
+                Modeler = "Swagger",
+                CodeGenerator = "CSharp",
+                Input = "RedisResource.json",
+                FileSystem = _fileSystem,
+                OutputDirectory = Path.GetTempPath(),
+                OutputFileName = "test.file.cs"
+            };
+
+            string path = Path.Combine(settings.OutputDirectory, "test.file.cs");
+            var codeGenerator = new SampleCodeGenerator(settings);
+            codeGenerator.Generate(new ServiceClient()).GetAwaiter().GetResult();
+            Assert.Equal(4, _fileSystem.VirtualStore.Count);
+            Assert.True(_fileSystem.VirtualStore.ContainsKey(path));
+            Assert.True(_fileSystem.VirtualStore.ContainsKey("AutoRest.json"));
+            Assert.True(_fileSystem.VirtualStore.ContainsKey("RedisResource.json"));
         }
     }
 }

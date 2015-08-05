@@ -197,9 +197,9 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
 
             if (model != null && model.Properties.Any())
             {
-                return string.Format("{0}.validate", valueReference);
+                return string.Format("{0}.validate unless {0}.nil?", valueReference);
             }
-            
+
             if (sequence != null || dictionary != null)
             {
                 return string.Format("{0}.each{{ |e| e.validate if e.respond_to?(:validate) }} unless {0}.nil?\r\n", valueReference);
@@ -282,7 +282,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
 
                 if (primary == PrimaryType.Date)
                 {
-                    return builder.AppendLine("{0} = ClientRuntime::Serialization.deserialize_date({0}) unless {0}.to_s.empty?", valueReference).ToString();
+                    return builder.AppendLine("{0} = MsRest::Serialization.deserialize_date({0}) unless {0}.to_s.empty?", valueReference).ToString();
                 }
 
                 if (primary == PrimaryType.DateTime)
@@ -293,7 +293,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             else if (enumType != null && !string.IsNullOrEmpty(enumType.Name))
             {
                 return builder.AppendLine(
-                    "fail ClientRuntime::DeserializationError.new('Error occured in deserializing the enum', nil, nil, nil) if (!{2}.nil? && !{2}.empty? && !{0}::{1}.constants.any? {{ |enum| enum.to_s == {2} }})",
+                    "fail MsRest::DeserializationError.new('Error occured in deserializing the enum', nil, nil, nil) if (!{2}.nil? && !{2}.empty? && !{0}::{1}.constants.any? {{ |e| {0}::{1}.const_get(e) == {2} }})",
                     defaultNamespace, enumType.Name, valueReference).ToString();
             }
             else if (sequence != null)
@@ -340,9 +340,25 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             }
             else if (composite != null)
             {
+                if (!string.IsNullOrEmpty(composite.PolymorphicDiscriminator))
+                {
+                    builder
+                        .AppendLine("unless {0}['dtype'].nil?", valueReference)
+                        .Indent()
+                            .AppendLine("{0} = Class::const_get({0}['dtype'].capitalize).deserialize_object({0})", valueReference)
+                        .Outdent()
+                        .AppendLine("else")
+                        .Indent()
+                            .AppendLine("{0} = {1}::{2}.deserialize_object({0})", valueReference, defaultNamespace + "::Models", composite.Name)
+                        .Outdent()
+                        .AppendLine("end");
+
+                    return builder.ToString();
+                }
+
                 return builder.AppendLine("if ({0})", valueReference)
                     .Indent()
-                        .AppendLine("{0} = {1}::Models::{2}.deserialize_object({0})", valueReference, defaultNamespace, composite.Name)
+                        .AppendLine("{0} = {1}::{2}.deserialize_object({0})", valueReference, defaultNamespace + "::Models", composite.Name)
                     .Outdent()
                     .AppendLine("end").ToString();
             }
@@ -427,9 +443,26 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             }
             else if (composite != null)
             {
+                if (!string.IsNullOrEmpty(composite.PolymorphicDiscriminator))
+                {
+                    builder
+                        .AppendLine("unless {0}.dtype.nil?", valueReference)
+                        .Indent()
+                        .AppendLine("{0} = Class::const_get({0}.dtype.capitalize).serialize_object({0})", valueReference)
+                        .Outdent()
+                        .AppendLine("else")
+                        .Indent()
+                        .AppendLine("{0} = {1}::{2}.serialize_object({0})", valueReference,
+                            defaultNamespace + "::Models", composite.Name)
+                        .Outdent()
+                        .AppendLine("end");
+
+                    return builder.ToString();
+                }
+
                 return builder.AppendLine("if ({0})", valueReference)
                     .Indent()
-                        .AppendLine("{0} = {1}::Models::{2}.serialize_object({0})", valueReference, defaultNamespace, composite.Name)
+                        .AppendLine("{0} = {1}::{2}.serialize_object({0})", valueReference, defaultNamespace + "::Models", composite.Name)
                     .Outdent()
                     .AppendLine("end").ToString();
             }

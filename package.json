@@ -1,0 +1,39 @@
+{
+  "name": "autorest-build",
+  "version": "0.0.1",
+  "description": "Tools for AutoRest build processes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Azure/autorest.git"
+  },
+  "keywords": [
+    "autorest"
+  ],
+  "author": "Microsoft Corporation",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Azure/autorest/issues"
+  },
+  "homepage": "https://github.com/Azure/autorest#readme",
+  "devDependencies": {
+    "del": "^1.2.0",
+    "glob": "^5.0.13",
+    "gulp": "^3.9.0",
+    "gulp-env": "^0.2.0",
+    "gulp-msbuild": "^0.2.12",
+    "gulp-replace": "^0.5.3",
+    "gulp-debug": "^2.0.1",
+    "gulp-dotnet-assembly-info": "^0.1.10",
+    "gulp-spawn": "^0.3.0",
+    "gulp-util": "^3.0.6",
+    "require-dir": "^0.3.0",
+    "q": "^1.4.1",
+    "run-sequence": "^1.1.2",
+    "through2": "^2.0.0",
+    "xml2js": "^0.4.9"
+  }
+}

@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 
-namespace Microsoft.Azure
+namespace Microsoft.Rest.Azure
 {
     /// <summary>
     /// JsonConverter that provides custom serialization for resource-based objects.
@@ -26,7 +26,8 @@ namespace Microsoft.Azure
         /// <returns>True if the object being serialized is assignable from the base type. False otherwise.</returns>
         public override bool CanConvert(Type objectType)
         {
-            return typeof(IResource).IsAssignableFrom(objectType);
+            return typeof(Resource).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo()) ||
+                   typeof(SubResource).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
         }
 
         /// <summary>
@@ -62,7 +63,7 @@ namespace Microsoft.Azure
                 // Update type if there is a polymorphism
                 var polymorphicDeserializer = serializer.Converters
                     .FirstOrDefault(c =>
-                        c.GetType().IsGenericType &&
+                        c.GetType().GetTypeInfo().IsGenericType &&
                         c.GetType().GetGenericTypeDefinition() == typeof(PolymorphicDeserializeJsonConverter<>) &&
                         c.CanConvert(objectType)) as PolymorphicJsonConverter;
                 if (polymorphicDeserializer != null)
@@ -123,7 +124,7 @@ namespace Microsoft.Azure
             }
 
             // If generic resource - serialize as-is
-            if (value.GetType().GetProperties().Any(p => p.Name == "Properties" && p.PropertyType == typeof(object)))
+            if (value.GetType().GetTypeInfo().DeclaredProperties.Any(p => p.Name == "Properties" && p.PropertyType == typeof(object)))
             {
                 GetSerializerWithoutCurrentConverter(serializer).Serialize(writer, value);
                 return;
@@ -135,7 +136,7 @@ namespace Microsoft.Azure
             // If there is polymorphism - add polymorphic property
             var polymorphicSerializer = serializer.Converters
                 .FirstOrDefault(c =>
-                    c.GetType().IsGenericType && 
+                    c.GetType().GetTypeInfo().IsGenericType && 
                     c.GetType().GetGenericTypeDefinition() == typeof(PolymorphicSerializeJsonConverter<>) &&
                     c.CanConvert(value.GetType())) as PolymorphicJsonConverter;
 
@@ -143,29 +144,28 @@ namespace Microsoft.Azure
             {
                 writer.WritePropertyName(polymorphicSerializer.Discriminator);
                 string typeName = value.GetType().Name;
-                if (value.GetType().GetCustomAttributes<JsonObjectAttribute>().Any())
+                if (value.GetType().GetTypeInfo().GetCustomAttributes<JsonObjectAttribute>().Any())
                 {
-                    typeName = value.GetType().GetCustomAttribute<JsonObjectAttribute>().Id;
+                    typeName = value.GetType().GetTypeInfo().GetCustomAttribute<JsonObjectAttribute>().Id;
                 }
                 writer.WriteValue(typeName);
             }
-            
-            // Getting all properties that do NOT exist in the Resource object
-            PropertyInfo[] propertiesToConsolidate = value.GetType().GetProperties()
-                .Where(p => typeof(Resource).GetProperty(p.Name) == null).ToArray();
-
-            // Getting all properties that do NOT exist in the Resource object
-            string[] resourceProperties = typeof (Resource).GetProperties().Select(p => p.Name).ToArray();
-
+                      
             // Go over each property that is in resource and write to stream
-            JsonConverterHelper.SerializeProperties(writer, value, serializer, resourceProperties);
+            JsonConverterHelper.SerializeProperties(writer, value, serializer, 
+                p => !p.PropertyName.StartsWith("properties.", StringComparison.OrdinalIgnoreCase));
 
             // If there is a need to add properties element - add it
-            if (propertiesToConsolidate.Any())
+            var contract = (JsonObjectContract)serializer.ContractResolver.ResolveContract(value.GetType());
+            if (contract.Properties.Any(p =>
+                p.PropertyName.StartsWith("properties.", StringComparison.OrdinalIgnoreCase) &&
+                  (p.ValueProvider.GetValue(value) != null || 
+                  serializer.NullValueHandling == NullValueHandling.Include)))
             {
                 writer.WritePropertyName(PropertiesNode);
                 writer.WriteStartObject();
-                JsonConverterHelper.SerializeProperties(writer, value, serializer, propertiesToConsolidate.Select(p => p.Name));
+                JsonConverterHelper.SerializeProperties(writer, value, serializer,
+                    p => p.PropertyName.StartsWith("properties.", StringComparison.OrdinalIgnoreCase));
                 writer.WriteEndObject();
             }
 
@@ -184,8 +184,8 @@ namespace Microsoft.Azure
                 throw new ArgumentNullException("serializer");
             }
             JsonSerializer newSerializer = new JsonSerializer();
-            PropertyInfo[] properties = typeof(JsonSerializer).GetProperties();
-            foreach (var property in properties.Where(p => p.GetSetMethod() != null))
+            var properties = typeof(JsonSerializer).GetTypeInfo().DeclaredProperties;
+            foreach (var property in properties.Where(p => p.SetMethod != null && !p.SetMethod.IsPrivate))
             {
                 property.SetValue(newSerializer, property.GetValue(serializer, null), null);
             }

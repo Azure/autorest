@@ -10,23 +10,23 @@ var assert = require('assert');
 var msRest = require('ms-rest');
 var msRestAzure = require('ms-rest-azure');
 
-var lroClient = require('../Expected/SwaggerBat/Lro/AutoRestLongRunningOperationTestService');
+var lroClient = require('../Expected/AcceptanceTests/Lro/AutoRestLongRunningOperationTestService');
 
 var dummySubscriptionId = 'a878ae02-6106-429z-9397-58091ee45g98';
 var dummyToken = 'dummy12321343423';
-var credentials = new msRestAzure.SubscriptionCredentials(dummyToken, dummySubscriptionId);
+var credentials = new msRestAzure.TokenCredentials(dummyToken);
 
 var clientOptions = {};
 var baseUri = 'http://localhost.:3000';
 
 describe('nodejs', function () {
-  
+
   describe('Swagger LRO Happy BAT', function () {
     clientOptions.requestOptions = { jar: true };
     clientOptions.filters = [new msRest.ExponentialRetryPolicyFilter(3, 0, 0, 0)];
     clientOptions.noRetryPolicy = true;
     clientOptions.longRunningOperationRetryTimeoutInSeconds = 0;
-    
+
     var testClient = new lroClient(credentials, baseUri, clientOptions);
     var product = { Location: 'West US' };
     it('should work with Put201CreatingSucceeded200', function (done) {
@@ -35,7 +35,7 @@ describe('nodejs', function () {
         done();
       });
     });
-    
+
     it('should work with Put201CreatingFailed200', function (done) {
       testClient.lROs.put201CreatingFailed200(product, function (error, result) {
         should.exist(error);
@@ -65,7 +65,7 @@ describe('nodejs', function () {
         done();
       });
     });
-    
+
     it('should work with PutNoHeaderInRetry', function (done) {
       testClient.lROs.putNoHeaderInRetry(product, function (error, result) {
         should.not.exist(error);
@@ -73,7 +73,7 @@ describe('nodejs', function () {
         done();
       });
     });
-    
+
     it('should work with PutAsyncNoHeaderInRetry', function (done) {
       testClient.lROs.putAsyncNoHeaderInRetry(product, function (error, result) {
         should.not.exist(error);
@@ -81,7 +81,7 @@ describe('nodejs', function () {
         done();
       });
     });
-    
+
     it('should work with PutSubResource', function (done) {
       testClient.lROs.putSubResource(product, function (error, result) {
         should.not.exist(error);
@@ -97,7 +97,7 @@ describe('nodejs', function () {
         done();
       });
     });
-    
+
     it('should work with PutNonResource', function (done) {
       testClient.lROs.putNonResource({
         'name': 'doesNotMatter', //server will return a fixed faked value anyway
@@ -109,7 +109,7 @@ describe('nodejs', function () {
         done();
       });
     });
-    
+
     it('should work with PutAsyncNonResource', function (done) {
       testClient.lROs.putAsyncNonResource({
         'name': 'doesNotMatter', //server will return a fixed faked value anyway
@@ -121,19 +121,19 @@ describe('nodejs', function () {
         done();
       });
     });
-    
+
     it('should work with DeleteNoHeaderInRetry', function (done) {
       //a little odd, but the server side will fake to have something to delete
-      //hence, no need to pass in an argument 
+      //hence, no need to pass in an argument
       testClient.lROs.deleteNoHeaderInRetry(function (error, result) {
         should.not.exist(error);
         done();
       });
     });
-    
+
     it('should work with DeleteAsyncNoHeaderInRetry', function (done) {
       //a little odd, but the server side will fake to have something to delete
-      //hence, no need to pass in an argument 
+      //hence, no need to pass in an argument
       testClient.lROs.deleteAsyncNoHeaderInRetry(function (error, result) {
         should.not.exist(error);
         done();
@@ -329,28 +329,28 @@ describe('nodejs', function () {
         done();
       });
     });
-    
+
     it('should work with DeleteProvisioning202Accepted200Succeeded', function (done) {
       testClient.lRORetrys.deleteProvisioning202Accepted200Succeeded(function (error, result) {
         should.not.exist(error);
         done();
       });
     });
-    
+
     it('should work with Delete202Retry200', function (done) {
       testClient.lRORetrys.delete202Retry200(function (error, result) {
         should.not.exist(error);
         done();
       });
     });
-    
+
     it('should work with DeleteAsyncRelativeRetrySucceeded', function (done) {
       testClient.lRORetrys.deleteAsyncRelativeRetrySucceeded(function (error, result) {
         should.not.exist(error);
         done();
       });
     });
-    
+
     it('should work with Post202Retry200', function (done) {
       testClient.lRORetrys.post202Retry200(product, function (error, result) {
         should.not.exist(error);
@@ -370,7 +370,7 @@ describe('nodejs', function () {
         customHeaders: {
           'x-ms-client-request-id': '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
         }
-      }; 
+      };
       testClient.lROsCustomHeader.putAsyncRetrySucceeded(product, options, function (error, result) {
         should.not.exist(error);
         testClient.lROsCustomHeader.postAsyncRetrySucceeded(product, options, function (error, result) {
@@ -391,7 +391,7 @@ describe('nodejs', function () {
     clientOptions.requestOptions = { jar: true };
     clientOptions.filters = [new msRest.ExponentialRetryPolicyFilter(3, 0, 0, 0)];
     clientOptions.noRetryPolicy = true;
-    
+
     var testClient = new lroClient(credentials, baseUri, clientOptions);
     testClient.longRunningOperationRetryTimeout = 0.0001;
     var product = { Location: 'West US' };
@@ -405,7 +405,7 @@ describe('nodejs', function () {
         done();
       });
     });
-    
+
     it('should throw on PutNonRetry201Creating400', function (done) {
       testClient.lROSADs.putNonRetry201Creating400(product, function (error, result) {
         should.exist(error);
@@ -413,7 +413,7 @@ describe('nodejs', function () {
         done();
       });
     });
-    
+
     it('should throw on PutAsyncRelativeRetry400', function (done) {
       testClient.lROSADs.putAsyncRelativeRetry400(product, function (error, result) {
         should.exist(error);
@@ -423,7 +423,7 @@ describe('nodejs', function () {
         done();
       });
     });
-    
+
     it('should throw on DeleteNonRetry400', function (done) {
       testClient.lROSADs.deleteNonRetry400(function (error, result) {
         should.exist(error);
@@ -438,7 +438,7 @@ describe('nodejs', function () {
         done();
       });
     });
-    
+
     it('should throw on DeleteAsyncRelativeRetry400', function (done) {
       testClient.lROSADs.deleteAsyncRelativeRetry400(function (error, result) {
         should.exist(error);
@@ -446,7 +446,7 @@ describe('nodejs', function () {
         done();
       });
     });
-    
+
     it('should throw on PostNonRetry400', function (done) {
       testClient.lROSADs.postNonRetry400(product, function (error, result) {
         should.exist(error);
@@ -470,7 +470,7 @@ describe('nodejs', function () {
         done();
       });
     });
-    
+
     it('should throw on PutError201NoProvisioningStatePayload', function (done) {
       testClient.lROSADs.putError201NoProvisioningStatePayload(product, function (error, result) {
         should.exist(error);
@@ -478,7 +478,7 @@ describe('nodejs', function () {
         done();
       });
     });
-    
+
     it('should throw on PutAsyncRelativeRetryNoStatusPayload', function (done) {
       testClient.lROSADs.putAsyncRelativeRetryNoStatusPayload(product, function (error, result) {
         should.exist(error);
@@ -494,7 +494,7 @@ describe('nodejs', function () {
         done();
       });
     });
-    
+
     it('should throw on PutAsyncRelativeRetryNoStatusPayload', function (done) {
       testClient.lROSADs.putAsyncRelativeRetryNoStatusPayload(product, function (error, result) {
         should.exist(error);
@@ -502,7 +502,7 @@ describe('nodejs', function () {
         done();
       });
     });
-    
+
     it('should throw on Delete204Succeeded', function (done) {
       testClient.lROSADs.delete204Succeeded(function (error, result) {
         should.not.exist(error);
@@ -549,7 +549,7 @@ describe('nodejs', function () {
         done();
       });
     });
-    
+
     it('should throw on PutAsyncRelativeRetryInvalidJsonPolling', function (done) {
       testClient.lROSADs.putAsyncRelativeRetryInvalidJsonPolling(product, function (error, result) {
         should.exist(error);
@@ -573,7 +573,7 @@ describe('nodejs', function () {
         done();
       });
     });
-    
+
     it('should throw on DeleteAsyncRelativeRetryInvalidJsonPolling', function (done) {
       testClient.lROSADs.deleteAsyncRelativeRetryInvalidJsonPolling(function (error, result) {
         should.exist(error);

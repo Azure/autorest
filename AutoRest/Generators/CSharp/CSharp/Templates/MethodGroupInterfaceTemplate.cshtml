@@ -1,6 +1,6 @@
 ﻿@using Microsoft.Rest.Generator.Utilities
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.MethodGroupTemplateModel>
-@Header("/// ")
+@Header("// ")
 namespace @Settings.Namespace
 {
     using System;
@@ -14,7 +14,7 @@ namespace @Settings.Namespace
 }
 @EmptyLine
     /// <summary>
-    @WrapComment("/// ", Model.Documentation.EscapeXmlComment())
+    /// @(Model.MethodGroupType) operations.
     /// </summary>
     public partial interface I@(Model.MethodGroupType)
     {
@@ -30,10 +30,10 @@ namespace @Settings.Namespace
         @:/// </param>
         }
         @:/// <param name='customHeaders'>
-        @:/// Headers that will be added to request.
+        @:/// The headers that will be added to request.
         @:/// </param>
         @:/// <param name='cancellationToken'>
-        @:/// Cancellation token.
+        @:/// The cancellation token.
         @:/// </param>
         @:Task<@method.OperationResponseReturnTypeString> @(method.Name)WithHttpMessagesAsync(@(method.GetAsyncMethodParameterDeclaration(true)));
     }

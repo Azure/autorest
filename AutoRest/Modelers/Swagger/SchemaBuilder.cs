@@ -47,7 +47,12 @@ namespace Microsoft.Rest.Modeler.Swagger
             }
 
             // Otherwise create new object type
-            var objectType = new CompositeType { Name = serviceTypeName, SerializedName = serviceTypeName };
+            var objectType = new CompositeType 
+                            { 
+                                Name = serviceTypeName, 
+                                SerializedName = serviceTypeName, 
+                                Documentation = _schema.Description 
+                            };
             // Put this in already generated types serializationProperty
             Modeler.GeneratedTypes[serviceTypeName] = objectType;
 
@@ -95,7 +100,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                             propertyObj.Documentation += "Possible values for this property include: " +
                                                        string.Join(", ", enumType.Values.Select(v =>
                                                            string.Format(CultureInfo.InvariantCulture, 
-                                                           "'{0}'", v.Name)));
+                                                           "'{0}'", v.Name))) + ".";
                         }
                         propertyObj.IsReadOnly = property.Value.ReadOnly;
                         objectType.Properties.Add(propertyObj);

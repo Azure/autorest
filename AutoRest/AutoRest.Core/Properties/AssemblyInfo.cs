@@ -10,9 +10,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("AutoRest client code generation for HTTP RESTful APIs.")]
 [assembly: AssemblyCompany("Microsoft Corporation")]
 [assembly: AssemblyProduct("Microsoft AutoRest")]
-[assembly: AssemblyCopyright("Copyright ©  Microsoft Corporation")]
+[assembly: AssemblyCopyright("Copyright (c) Microsoft Corporation")]
 [assembly: AssemblyVersion("0.9.0.0")]
-[assembly: AssemblyFileVersion("0.10.0.0")]
+[assembly: AssemblyFileVersion("0.11.0.0")]
 
 [assembly: NeutralResourcesLanguage("en")]
 [assembly: CLSCompliant(true)]

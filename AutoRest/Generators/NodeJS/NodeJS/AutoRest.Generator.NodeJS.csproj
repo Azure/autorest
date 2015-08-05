@@ -38,14 +38,30 @@
     <Compile Include="TemplateModels\MethodTemplateModel.cs" />
     <Compile Include="ClientModelExtensions.cs" />
     <Compile Include="TemplateModels\ParameterTemplateModel.cs" />
-    <Compile Include="Templates\MethodGroupIndexTemplate.cs" />
-    <Compile Include="Templates\MethodGroupTemplate.cs" />
-    <Compile Include="Templates\MethodJsonPipelineTemplate.cs" />
-    <Compile Include="Templates\MethodStreamPipelineTemplate.cs" />
-    <Compile Include="Templates\MethodTemplate.cs" />
-    <Compile Include="Templates\ModelIndexTemplate.cs" />
-    <Compile Include="Templates\ModelTemplate.cs" />
-    <Compile Include="Templates\ServiceClientTemplate.cs" />
+    <Compile Include="Templates\MethodGroupIndexTemplate.cs">
+      <DependentUpon>MethodGroupIndexTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\MethodGroupTemplate.cs">
+      <DependentUpon>MethodGroupTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\MethodJsonPipelineTemplate.cs">
+      <DependentUpon>MethodJsonPipelineTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\MethodStreamPipelineTemplate.cs">
+      <DependentUpon>MethodStreamPipelineTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\MethodTemplate.cs">
+      <DependentUpon>MethodTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ModelIndexTemplate.cs">
+      <DependentUpon>ModelIndexTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ModelTemplate.cs">
+      <DependentUpon>ModelTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ServiceClientTemplate.cs">
+      <DependentUpon>ServiceClientTemplate.cshtml</DependentUpon>
+    </Compile>
     <None Include="Templates\MethodGroupTemplate.cshtml" />
     <None Include="Templates\MethodJsonPipelineTemplate.cshtml" />
     <None Include="Templates\MethodStreamPipelineTemplate.cshtml" />
@@ -62,7 +78,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <CodeAnalysisDictionary Include="..\..\..\..\tools\CustomDictionary.xml">
+    <CodeAnalysisDictionary Include="..\..\..\..\Tools\CustomDictionary.xml">
       <Link>CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>
   </ItemGroup>

@@ -24,6 +24,7 @@
     <Compile Include="RubyCodeGenerator.cs" />
     <Compile Include="RubyCodeNamer.cs" />
     <Compile Include="IScopeProvider.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -39,12 +40,24 @@
     <Compile Include="TemplateModels\ParameterTemplateModel.cs" />
     <Compile Include="TemplateModels\PropertyTemplateModel.cs" />
     <Compile Include="TemplateModels\ModelTemplateModel.cs" />
-    <Compile Include="Templates\EnumTemplate.cs" />
-    <Compile Include="Templates\MethodGroupTemplate.cs" />
-    <Compile Include="Templates\MethodTemplate.cs" />
-    <Compile Include="Templates\ModelTemplate.cs" />
-    <Compile Include="Templates\RequirementsTemplate.cs" />
-    <Compile Include="Templates\ServiceClientTemplate.cs" />
+    <Compile Include="Templates\EnumTemplate.cs">
+      <DependentUpon>EnumTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\MethodGroupTemplate.cs">
+      <DependentUpon>MethodGroupTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\MethodTemplate.cs">
+      <DependentUpon>MethodTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ModelTemplate.cs">
+      <DependentUpon>ModelTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\RequirementsTemplate.cs">
+      <DependentUpon>RequirementsTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ServiceClientTemplate.cs">
+      <DependentUpon>ServiceClientTemplate.cshtml</DependentUpon>
+    </Compile>
     <None Include="Templates\EnumTemplate.cshtml" />
     <None Include="Templates\MethodGroupTemplate.cshtml" />
     <None Include="Templates\RequirementsTemplate.cshtml" />

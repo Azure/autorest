@@ -4,23 +4,17 @@
 using Newtonsoft.Json;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Microsoft.Azure
+namespace Microsoft.Rest.Azure
 {
     /// <summary>
     /// Defines Azure sub-resource.
     /// </summary>
-    public class SubResource : IResource
+    public class SubResource
     {
         /// <summary>
         /// Gets the ID of the sub-resource.
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; }
-
-        /// <summary>
-        /// Gets the provisioning state of the resource.
-        /// </summary>
-        [JsonProperty("properties.provisioningState")]
-        public string ProvisioningState { get; private set; }
     }
 }

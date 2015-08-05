@@ -30,16 +30,17 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
         {
             get
             {
+                yield return "System.Linq";
                 if (Methods.Any(m =>
                     m.Parameters.Any(p =>
                         p.SerializedName.Equals("$filter", StringComparison.OrdinalIgnoreCase) &&
                         p.Type is CompositeType &&
                         p.Location == ParameterLocation.Query)))
                 {
-                    yield return "Microsoft.Azure.OData";
                     yield return "System.Linq.Expressions";
+                    yield return "Microsoft.Rest.Azure.OData";
                 }
-                yield return "Microsoft.Azure";
+                yield return "Microsoft.Rest.Azure";
 
                 if (this.ModelTypes.Any(m => !m.Extensions.ContainsKey(AzureCodeGenerator.ExternalExtension)))
                 {

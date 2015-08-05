@@ -10,6 +10,7 @@ using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger;
 using System.Globalization;
+using System.Collections;
 
 namespace Microsoft.Rest.Generator.Azure
 {
@@ -23,11 +24,11 @@ namespace Microsoft.Rest.Generator.Azure
         public const string PageableExtension = "x-ms-pageable";
         public const string ExternalExtension = "x-ms-external";
         public const string ODataExtension = "x-ms-odata";
-        public const string ApiVersion = "ApiVersion";
+        public const string ApiVersion = "api-version";
+        public const string AcceptLanguage = "accept-language";
         private const string ResourceType = "Resource";
         private const string SubResourceType = "SubResource";
         private const string ResourceProperties = "Properties";
-        private const string ProvisioningState = "ProvisioningState";
 
         private static IEnumerable<string> ResourcePropertyNames;
 
@@ -209,7 +210,8 @@ namespace Microsoft.Rest.Generator.Azure
                 throw new ArgumentNullException("serviceClient");
             }
 
-            var apiVersion = serviceClient.Properties.FirstOrDefault(p => p.Name == "api-version");
+            var apiVersion = serviceClient.Properties
+                .FirstOrDefault(p => ApiVersion.Equals(p.SerializedName, StringComparison.OrdinalIgnoreCase));
             if (apiVersion != null)
             {
                 apiVersion.DefaultValue = "\"" + serviceClient.ApiVersion + "\"";
@@ -217,17 +219,51 @@ namespace Microsoft.Rest.Generator.Azure
                 apiVersion.IsRequired = false;
             }
 
+            var subscriptionId =
+                serviceClient.Properties.FirstOrDefault(
+                    p => string.Equals(p.Name, "subscriptionId", StringComparison.OrdinalIgnoreCase));
+            if (subscriptionId != null)
+            {
+                subscriptionId.IsRequired = true;
+            }
+
+            var acceptLanguage = serviceClient.Properties
+                .FirstOrDefault(p => AcceptLanguage.Equals(p.SerializedName, StringComparison.OrdinalIgnoreCase));
+            if (acceptLanguage == null)
+            {
+                acceptLanguage = new Property
+                {
+                    Name = AcceptLanguage,
+                    Documentation = "Gets or sets the preferred language for the response.",
+                    SerializedName = AcceptLanguage,
+                    DefaultValue = "\"en-US\""
+                };
+                serviceClient.Properties.Add(acceptLanguage);
+            }
+            acceptLanguage.IsReadOnly = false;
+            acceptLanguage.IsRequired = false;
+            acceptLanguage.Type = PrimaryType.String;
+            serviceClient.Methods
+                .Where(m => !m.Parameters.Any(p => AcceptLanguage.Equals(p.SerializedName, StringComparison.OrdinalIgnoreCase)))
+                .ForEach(m2 => m2.Parameters.Add(new Parameter
+                    {
+                        ClientProperty = acceptLanguage,
+                        Location = ParameterLocation.Header
+                    }.LoadFrom(acceptLanguage)));
+
             serviceClient.Properties.Insert(0, new Property
             {
                 Name = "Credentials",
                 SerializedName = "credentials",
                 Type = new CompositeType
                 {
-                    Name = "SubscriptionCloudCredentials"
+                    Name = "ServiceClientCredentials"
                 },
                 IsRequired = true,
-                Documentation = "Subscription credentials which uniquely identify Microsoft Azure subscription."
+                IsReadOnly = true,
+                Documentation = "The management credentials for Azure."
             });
+
             serviceClient.Properties.Add(new Property
             {
                 Name = "LongRunningOperationRetryTimeout",
@@ -261,51 +297,83 @@ namespace Microsoft.Rest.Generator.Azure
                     // First find "properties" property
                     var propertiesProperty = compositeType.Properties.FirstOrDefault(
                         p => p.Name.Equals(ResourceProperties, StringComparison.OrdinalIgnoreCase));
-                    if (propertiesProperty == null)
+                    if (propertiesProperty == null &&
+                        compositeType.BaseModelType.Name.Equals(ResourceType, StringComparison.OrdinalIgnoreCase))
                     {
                         throw new InvalidOperationException(
                             string.Format(CultureInfo.InvariantCulture, 
                             Resources.MissingProperties,
                             compositeType.Name));
                     }
-                    var propertiesModel = propertiesProperty.Type as CompositeType;
-                    // Recursively parsing the "properties" object hierarchy  
-                    while (propertiesModel != null)
-                    {
-                        foreach (Property pp in propertiesModel.Properties)
-                        {
-                            if (ResourcePropertyNames.Any(rp => rp.Equals(pp.Name, StringComparison.OrdinalIgnoreCase)))
-                            {
-                                pp.Name = compositeType.Name + CodeNamer.PascalCase(pp.Name);
-                            }
-                            pp.SerializedName = "properties." + pp.SerializedName;
-                            compositeType.Properties.Add(pp);
-                        }
-                        
-                        compositeType.Properties.Remove(propertiesProperty);
-                        if (!typesToDelete.Contains(propertiesModel.Name))
-                        {
-                            typesToDelete.Add(propertiesModel.Name);
-                        }
-                        propertiesModel = propertiesModel.BaseModelType;
-                    }
 
-                    // If provisioning-state exist in type that is derived from resources - remove it
-                    foreach(var propertyToRemove in compositeType.Properties
-                        .Where(p => p.Name
-                                    .Equals(
-                                        ProvisioningState, 
-                                        StringComparison.OrdinalIgnoreCase))
-                        .ToArray())
+                    // Sub resource does not need to have properties
+                    if (propertiesProperty != null)
                     {
-                        compositeType.Properties.Remove(propertyToRemove);
+                        var propertiesModel = propertiesProperty.Type as CompositeType;
+                        // Recursively parsing the "properties" object hierarchy  
+                        while (propertiesModel != null)
+                        {
+                            foreach (Property originalProperty in propertiesModel.Properties)
+                            {
+                                var pp = (Property) originalProperty.Clone();
+                                if (
+                                    ResourcePropertyNames.Any(
+                                        rp => rp.Equals(pp.Name, StringComparison.OrdinalIgnoreCase)))
+                                {
+                                    pp.Name = compositeType.Name + CodeNamer.PascalCase(pp.Name);
+                                }
+                                pp.SerializedName = "properties." + pp.SerializedName;
+                                compositeType.Properties.Add(pp);
+                            }
+
+                            compositeType.Properties.Remove(propertiesProperty);
+                            if (!typesToDelete.Contains(propertiesModel.Name))
+                            {
+                                typesToDelete.Add(propertiesModel.Name);
+                            }
+                            propertiesModel = propertiesModel.BaseModelType;
+                        }
                     }
                 }
             }
 
-            foreach (var typeName in typesToDelete)
+            AzureCodeGenerator.RemoveUnreferencedTypes(serviceClient, typesToDelete);
+        }
+
+        /// <summary>
+        /// Cleans all model types that are not used
+        /// </summary>
+        /// <param name="serviceClient"></param>
+        /// <param name="typeNames"></param>
+        public static void RemoveUnreferencedTypes(ServiceClient serviceClient, IEnumerable<string> typeNames)
+        {
+            if (serviceClient == null)
             {
-                serviceClient.ModelTypes.Remove(serviceClient.ModelTypes.First(t => t.Name == typeName));
+                throw new ArgumentNullException("serviceClient");
+            }
+
+            if (typeNames == null)
+            {
+                throw new ArgumentNullException("typeNames");
+            }
+
+            foreach (var typeName in typeNames)
+            {
+                var typeToDelete = serviceClient.ModelTypes.First(t => t.Name == typeName);
+
+                var isUsedInResponses = serviceClient.Methods.Any(m => m.Responses.Any(r => r.Value == typeToDelete));
+                var isUsedInParameters = serviceClient.Methods.Any(m => m.Parameters.Any(p => p.Type == typeToDelete));
+                var isBaseType = serviceClient.ModelTypes.Any(t => t.BaseModelType == typeToDelete);
+                var isUsedInProperties = serviceClient.ModelTypes.Any(t => t.Properties
+                                            .Any(p => p.Type == typeToDelete && 
+                                                 !"properties".Equals(p.SerializedName, StringComparison.OrdinalIgnoreCase)));
+                if (!isUsedInResponses &&
+                    !isUsedInParameters &&
+                    !isBaseType &&
+                    !isUsedInProperties)
+                {
+                    serviceClient.ModelTypes.Remove(typeToDelete);
+                }
             }
         }
 
@@ -373,10 +441,10 @@ namespace Microsoft.Rest.Generator.Azure
                     newMethod.IsAbsoluteUrl = true;
                     var nextLinkParameter = new Parameter
                     {
-                        Name = "nextLink",
+                        Name = "nextPageLink",
                         SerializedName = "nextLink",
                         Type = PrimaryType.String,
-                        Documentation = "NextLink from the previous successful call to List operation.",
+                        Documentation = "The NextLink from the previous successful call to List operation.",
                         IsRequired = true,
                         Location = ParameterLocation.Path
                     };

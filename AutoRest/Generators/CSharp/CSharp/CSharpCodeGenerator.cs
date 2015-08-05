@@ -1,19 +1,23 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Threading.Tasks;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.CSharp.Templates;
+using System.IO;
+using System.Globalization;
 
 namespace Microsoft.Rest.Generator.CSharp
 {
     public class CSharpCodeGenerator : CodeGenerator
     {
         private readonly CSharpCodeNamer _namer;
+        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.1.2.0";
 
         public CSharpCodeGenerator(Settings settings) : base(settings)
         {
             _namer = new CSharpCodeNamer();
+            IsSingleFileGenerationSupported = true;
         }
 
         public override string Name
@@ -29,7 +33,10 @@ namespace Microsoft.Rest.Generator.CSharp
 
         public override string UsageInstructions
         {
-            get { return Properties.Resources.UsageInformation; }
+            get {
+                return string.Format(CultureInfo.InvariantCulture,
+                    Properties.Resources.UsageInformation, ClientRuntimePackage);
+            }
         }
 
         public override string ImplementationFileExtension
@@ -126,7 +133,7 @@ namespace Microsoft.Rest.Generator.CSharp
                 {
                     Model = new ModelTemplateModel(model),
                 };
-                await Write(modelTemplate, "Models\\" + model.Name + ".cs");
+                await Write(modelTemplate, Path.Combine("Models", model.Name + ".cs"));
             }
 
             // Enums
@@ -136,7 +143,7 @@ namespace Microsoft.Rest.Generator.CSharp
                 {
                     Model = new EnumTemplateModel(enumType),
                 };
-                await Write(enumTemplate, "Models\\" + enumTemplate.Model.TypeDefinitionName + ".cs");
+                await Write(enumTemplate, Path.Combine("Models", enumTemplate.Model.TypeDefinitionName + ".cs"));
             }
         }
     }

@@ -1,7 +1,7 @@
 ﻿@using Microsoft.Rest.Generator.CSharp
 @using Microsoft.Rest.Generator.CSharp.Templates
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.MethodGroupTemplateModel>
-@Header("/// ")
+@Header("// ")
 namespace @Settings.Namespace
 {
     using System;
@@ -20,7 +20,10 @@ namespace @Settings.Namespace
 @:    using @usingString;
 }
 @EmptyLine
-    internal partial class @(Model.MethodGroupType) : IServiceOperations<@(Model.Name)>, I@(Model.MethodGroupType)
+    /// <summary>
+    /// @(Model.MethodGroupType) operations.
+    /// </summary>
+    public partial class @(Model.MethodGroupType) : IServiceOperations<@(Model.Name)>, I@(Model.MethodGroupType)
     {
         /// <summary>
         /// Initializes a new instance of the @(Model.MethodGroupType) class.
@@ -28,8 +31,12 @@ namespace @Settings.Namespace
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        internal @(Model.MethodGroupType)(@(Model.Name) client)
+        public @(Model.MethodGroupType)(@(Model.Name) client)
         {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
             this.Client = client;
         }
         @EmptyLine

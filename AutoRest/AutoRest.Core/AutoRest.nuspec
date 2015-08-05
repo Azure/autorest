@@ -12,16 +12,19 @@
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <summary>AutoRest code generation of REST API client libraries.</summary>
     <description>The AutoRest tool generates client libraries for accessing REST APIs that are described using the Swagger format.</description>
-    <copyright>Copyright © Microsoft Corporation</copyright>
+    <copyright>Copyright (c) Microsoft Corporation</copyright>
     <tags>Microsoft AutoRest</tags>
   </metadata>
   <files>
-    <file src="..\binaries\net45\AutoRest.Core.*" target="tools" />
-    <file src="..\binaries\net45\AutoRest.exe" target="tools" />
-    <file src="..\binaries\net45\AutoRest.ToRelease.json" target="tools\AutoRest.json" />
-    <file src="..\binaries\net45\AutoRest.Generator.CSharp.*" target="tools" />
-    <file src="..\binaries\net45\AutoRest.Generator.NodeJS.*" target="tools" />
-    <file src="..\binaries\net45\AutoRest.Modeler.Swagger.*" target="tools" />    
-    <file src="..\binaries\net45\Newtonsoft.Json.*" target="tools" />
+    <file src="binaries/net45/AutoRest.Core.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.exe" target="tools" />
+    <file src="binaries/net45/AutoRest.Release.json" target="tools/AutoRest.json" />
+    <file src="binaries/net45/AutoRest.Generator.CSharp.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Generator.Azure.CSharp.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Generator.Azure.Common.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Generator.NodeJS.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Generator.Azure.NodeJS.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Modeler.Swagger.dll" target="tools" />
+    <file src="binaries/net45/Newtonsoft.Json.dll" target="tools" />
   </files>
 </package>

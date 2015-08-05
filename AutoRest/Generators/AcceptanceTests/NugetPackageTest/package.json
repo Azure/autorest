@@ -7,11 +7,12 @@
     "node": ">= 0.8.26"
   },
   "dependencies": {
-    "ms-rest": "file:../../../../ClientRuntimes/NodeJS/ClientRuntime"
+    "ms-rest": "file:../../../../ClientRuntimes/NodeJS/ms-rest"
   },
   "devDependencies":{
     "mocha": "2.2.5",
-    "should": "5.2.0"
+    "should": "5.2.0",
+    "shelljs": "~0.5"
   },
   "scripts": {
     "pretest": "npm install --prefix ../server && npm install",
