@@ -7,6 +7,9 @@
 
 package com.microsoft.rest;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.glassfish.jersey.apache.connector.ApacheConnectorProvider;
 import org.glassfish.jersey.client.ClientConfig;
 
 import javax.ws.rs.client.Client;
@@ -23,6 +26,7 @@ import java.io.IOException;
  */
 public abstract class ServiceClient<T> implements Closeable {
     private Client client;
+    private HttpClient httpClient;
 
     /**
      * Initializes a new instance of the ServiceClient class.
@@ -37,7 +41,9 @@ public abstract class ServiceClient<T> implements Closeable {
      * @param clientConfig the Jersey client configuration for building the client
      */
     public ServiceClient(ClientConfig clientConfig) {
-        client = ClientBuilder.newClient(clientConfig);
+        clientConfig.connectorProvider(new ApacheConnectorProvider());
+        this.client = ClientBuilder.newClient(clientConfig);
+        this.httpClient = ApacheConnectorProvider.getHttpClient(this.client);
     }
 
     /**
@@ -46,6 +52,10 @@ public abstract class ServiceClient<T> implements Closeable {
      */
     public Client getClient() {
         return client;
+    }
+
+    public HttpClient getHttpClient() {
+        return httpClient;
     }
 
     /**

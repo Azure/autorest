@@ -7,6 +7,8 @@
 
 package com.microsoft.rest.retry;
 
+import java.io.IOException;
+
 public class ExponentialBackoffRetryStrategy extends RetryStrategy {
     public static final int DEFAULT_CLIENT_BACKOFF = 1000 * 10;
     public static final int DEFAULT_MAX_BACKOFF = 1000 * 30;
@@ -32,5 +34,10 @@ public class ExponentialBackoffRetryStrategy extends RetryStrategy {
         this.minBackoff = minBackoff;
         this.maxBackoff = maxBackoff;
         this.deltaBackoff = deltaBackoff;
+    }
+
+    @Override
+    public boolean shouldRetry(int retryCount, IOException ex) {
+        return retryCount < this.retryCount;
     }
 }

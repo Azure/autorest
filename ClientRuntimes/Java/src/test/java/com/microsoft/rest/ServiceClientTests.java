@@ -7,9 +7,15 @@
 
 package com.microsoft.rest;
 
+import com.microsoft.rest.retry.ExponentialBackoffRetryStrategy;
+import com.microsoft.rest.retry.RetryHandler;
+import com.microsoft.rest.retry.RetryStrategy;
 import junit.framework.Assert;
+import org.apache.http.impl.client.AbstractHttpClient;
+import org.glassfish.jersey.apache.connector.ApacheClientProperties;
 import org.glassfish.jersey.apache.connector.ApacheConnectorProvider;
 import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.client.ClientProperties;
 import org.junit.Test;
 
 import javax.annotation.Priority;
@@ -37,21 +43,10 @@ public class ServiceClientTests {
     }
 
     @Test
-    public void ApacheFilterTests() throws Exception {
+    public void RetryTests() throws Exception {
         ClientConfig config = new ClientConfig();
-        config.connectorProvider(new ApacheConnectorProvider());
-        ServiceClient serviceClient = new ServiceClient(config) {};
-        serviceClient.addRequestFilter(new FirstFilter());
-        serviceClient.addRequestFilter(new SecondFilter());
-        serviceClient.addRequestFilter(new ClientRequestFilter() {
-            @Override
-            public void filter(ClientRequestContext requestContext) throws IOException {
-                Assert.assertEquals("1", requestContext.getHeaderString("filter1"));
-                Assert.assertEquals("2", requestContext.getHeaderString("filter2"));
-            }
-        });
-        WebTarget target = serviceClient.getClient().target("http://www.microsoft.com");
-        String response = target.request().get(String.class);
+        ServiceClient serviceClient = new ServiceClient() {};
+        WebTarget target = serviceClient.getClient().target("http://www.microsoft.com/thispagedoesnotexist.htm");
     }
 
     @Priority(1)
