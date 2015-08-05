@@ -143,7 +143,9 @@ describe 'Complex tests' do
   end
 
   it 'should put dictionary empty' do
-    result = @client.dictionary.put_empty(Models::DictionaryWrapper.new).value!
+    dict = Models::DictionaryWrapper.new
+	dict.default_program = {}
+    result = @client.dictionary.put_empty(dict).value!
     expect(result.response.status).to eq(200)
   end
 

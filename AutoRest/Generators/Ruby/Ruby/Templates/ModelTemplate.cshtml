@@ -30,26 +30,8 @@ module @(Settings.Namespace)
       @:
     }
 
-    @if (Model.Properties.Any(p => p.Type is SequenceType || p.Type is DictionaryType))
-    {
-      @:def initialize
-        foreach (var property in Model.PropertyTemplateModels)
-        {
-            if (property.Type is SequenceType)
-            {
-        @:@@@property.Name = [];
-            }
-            else if (property.Type is DictionaryType)
-            {
-        @:@@@property.Name = {};
-            }
-        }
-      @:end
-      @EmptyLine
-    }
-
       #
-      # Validate the object. Throws ArgumentError if validation fails.
+      # Validate the object. Throws ValidationError if validation fails.
       #
       def validate
         @{
@@ -57,7 +39,7 @@ module @(Settings.Namespace)
             foreach (var property in Model.Properties.Where(p => p.IsRequired && !p.IsReadOnly && p.Type.IsNullable()))
             {
                 anythingToValidate = true;
-        @:fail ArgumentError, '@property.Name is nil' if @@@(property.Name).nil?
+        @:fail MsRest::ValidationError, 'property @property.Name is nil' if @@@(property.Name).nil?
             }
             foreach (var property in Model.Properties.Where(p => !(p.Type is PrimaryType)))
             {
@@ -85,7 +67,11 @@ module @(Settings.Namespace)
         {
         @EmptyLine
         @:serialized_property = @("object." + property.Name)
-        @:@Model.SerializeProperty("serialized_property", property.Type, property.IsRequired, Settings.Namespace + "::Models")
+        if (property.IsRequired)
+        {
+        @:fail ArgumentError, 'property @property.Name is nil' if serialized_property.nil?
+        }
+        @:@Model.SerializeProperty("serialized_property", property.Type)
         @:output_object['@(property.SerializedName)'] = serialized_property unless serialized_property.nil?
         }
 
@@ -114,7 +100,7 @@ module @(Settings.Namespace)
         {
         @EmptyLine
         @:deserialized_property = @(string.Format("object['{0}']", property.SerializedName))
-        @:@Model.DeserializeProperty("deserialized_property", property.Type, property.IsRequired, Settings.Namespace + "::Models")
+        @:@Model.DeserializeProperty("deserialized_property", property.Type)
         @:output_object.@(property.Name) = deserialized_property
         }
 

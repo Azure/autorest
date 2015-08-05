@@ -135,16 +135,12 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// </summary>
         /// <param name="variableName">Variable name which keeps the response.</param>
         /// <param name="type">Type of response.</param>
-        /// <param name="isRequired">If the property required.</param>
-        /// <param name="defaultNamespace">The namespace.</param>
         /// <returns>Ruby code in form of string for deserializing polling response.</returns>
-        public string DeserializePollingResponse(string variableName, IType type, bool isRequired, string defaultNamespace)
+        public string DeserializePollingResponse(string variableName, IType type)
         {
-            // TODO: handle required property via "unless deserialized_property.nil?"
-
             var builder = new IndentedStringBuilder("  ");
 
-            string serializationLogic = type.DeserializeType(this.Scope, variableName, defaultNamespace);
+            string serializationLogic = type.DeserializeType(this.Scope, variableName);
             return builder.AppendLine(serializationLogic).ToString();
         }
 

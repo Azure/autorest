@@ -234,13 +234,11 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
         /// <param name="type">Type of object needs to be deserialized.</param>
         /// <param name="scope">Current scope.</param>
         /// <param name="valueReference">Reference to object which needs to be deserialized.</param>
-        /// <param name="defaultNamespace">Current namespace.</param>
         /// <returns>Generated Ruby code in form of string.</returns>
         public static string DeserializeType(
             this IType type,
             IScopeProvider scope,
-            string valueReference,
-            string defaultNamespace)
+            string valueReference)
         {
             var composite = type as CompositeType;
             var sequence = type as SequenceType;
@@ -292,7 +290,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             else if (sequence != null)
             {
                 var elementVar = scope.GetVariableName("element");
-                var innerSerialization = sequence.ElementType.DeserializeType(scope, elementVar, defaultNamespace);
+                var innerSerialization = sequence.ElementType.DeserializeType(scope, elementVar);
 
                 if (!string.IsNullOrEmpty(innerSerialization))
                 {
@@ -316,7 +314,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             else if (dictionary != null)
             {
                 var valueVar = scope.GetVariableName("valueElement");
-                var innerSerialization = dictionary.ValueType.DeserializeType(scope, valueVar, defaultNamespace);
+                var innerSerialization = dictionary.ValueType.DeserializeType(scope, valueVar);
                 if (!string.IsNullOrEmpty(innerSerialization))
                 {
                     return builder.AppendLine("unless {0}.nil?", valueReference)
@@ -365,13 +363,11 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
         /// <param name="type">Type of object needs to be serialized.</param>
         /// <param name="scope">Current scope.</param>
         /// <param name="valueReference">Reference to object which needs to serialized.</param>
-        /// <param name="defaultNamespace">Current namespace.</param>
         /// <returns>Generated Ruby code in form of string.</returns>
         public static string SerializeType(
             this IType type,
             IScopeProvider scope,
-            string valueReference,
-            string defaultNamespace)
+            string valueReference)
         {
             var composite = type as CompositeType;
             var sequence = type as SequenceType;
@@ -395,7 +391,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             else if (sequence != null)
             {
                 var elementVar = scope.GetVariableName("element");
-                var innerSerialization = sequence.ElementType.SerializeType(scope, elementVar, defaultNamespace);
+                var innerSerialization = sequence.ElementType.SerializeType(scope, elementVar);
 
                 if (!string.IsNullOrEmpty(innerSerialization))
                 {
@@ -419,7 +415,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             else if (dictionary != null)
             {
                 var valueVar = scope.GetVariableName("valueElement");
-                var innerSerialization = dictionary.ValueType.SerializeType(scope, valueVar, defaultNamespace);
+                var innerSerialization = dictionary.ValueType.SerializeType(scope, valueVar);
                 if (!string.IsNullOrEmpty(innerSerialization))
                 {
                     return builder.AppendLine("unless {0}.nil?", valueReference)

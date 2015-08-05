@@ -33,7 +33,7 @@ describe AutoRestRequiredOptionalTestService do
   it 'should throw error for explicitly required string-wrapper parameter' do
     input = MyNamespace::Models::StringWrapper.new
     input.value = nil
-    expect { @explicit_client.post_required_string_property(input) }.to raise_error(ArgumentError)
+    expect { @explicit_client.post_required_string_property(input) }.to raise_error(MsRest::ValidationError)
   end
 
   it 'should throw error for explicitly required header array parameter' do
@@ -47,7 +47,7 @@ describe AutoRestRequiredOptionalTestService do
   it 'should throw error for explicitly required array-wrapper parameter' do
     input = MyNamespace::Models::ArrayWrapper.new
     input.value = nil
-    expect { @explicit_client.post_required_array_property(input) }.to raise_error(ArgumentError)
+    expect { @explicit_client.post_required_array_property(input) }.to raise_error(MsRest::ValidationError)
   end
 
   it 'should throw error for explicitly required body class parameter' do
@@ -57,7 +57,7 @@ describe AutoRestRequiredOptionalTestService do
   it 'should throw error for explicitly required class-wrapper parameter' do
     input = MyNamespace::Models::ClassWrapper.new
     input.value = nil
-    expect { @explicit_client.post_required_class_property(input) }.to raise_error(ArgumentError)
+    expect { @explicit_client.post_required_class_property(input) }.to raise_error(MsRest::ValidationError)
   end
 
   it 'should throw error for implicitly required global path parameter' do
