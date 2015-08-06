@@ -81,8 +81,7 @@ module MsRestAzure
     # Validates the resource. Throws error if there is any property is incorrect.
     #
     def validate
-      # TODO: add proper error (ValidationError)
-      fail RuntimeError if @location.nil?
+      fail MsRest::ValidationError, 'Location cannot be nil in the Resource object' if @location.nil?
     end
 
   end
