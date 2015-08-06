@@ -7,10 +7,17 @@
 
 package com.microsoft.rest;
 
+import com.microsoft.rest.retry.RetryHandler;
+import com.squareup.okhttp.Interceptor;
+import com.squareup.okhttp.OkHttpClient;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.glassfish.jersey.apache.connector.ApacheConnectorProvider;
 import org.glassfish.jersey.client.ClientConfig;
+import retrofit.ErrorHandler;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.OkClient;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -18,6 +25,7 @@ import javax.ws.rs.client.ClientRequestFilter;
 import javax.ws.rs.client.ClientResponseFilter;
 import java.io.Closeable;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * ServiceClient is the abstraction for accessing REST operations and their payload data types.
@@ -25,65 +33,27 @@ import java.io.IOException;
  * @param <T> type of the ServiceClient
  */
 public abstract class ServiceClient<T> implements Closeable {
-    private Client client;
-    private HttpClient httpClient;
-
+    protected OkHttpClient client;
+    protected RestAdapter.Builder restAdapterBuilder;
     /**
      * Initializes a new instance of the ServiceClient class.
      */
     public ServiceClient() {
-        this(new ClientConfig());
+        this(new OkHttpClient(), new RestAdapter.Builder());
     }
 
-    /**
-     * Initializes a new instance of the ServiceClient class.
-     *
-     * @param clientConfig the Jersey client configuration for building the client
-     */
-    public ServiceClient(ClientConfig clientConfig) {
-        clientConfig.connectorProvider(new ApacheConnectorProvider());
-        this.client = ClientBuilder.newClient(clientConfig);
-        this.httpClient = ApacheConnectorProvider.getHttpClient(this.client);
+    public ServiceClient(OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
+        this.client = client;
+        this.client.interceptors().add(new RetryHandler());
+
+        this.restAdapterBuilder = restAdapterBuilder.setClient(new OkClient(this.client));
     }
 
-    /**
-     * Get the client instance.
-     * @return the client instance.
-     */
-    public Client getClient() {
-        return client;
+    public List<Interceptor> getClientInterceptors() {
+        return this.client.interceptors();
     }
 
-    public HttpClient getHttpClient() {
-        return httpClient;
-    }
-
-    /**
-     * Add a ServiceRequestFilter to the Jersey client
-     *
-     * @param clientRequestFilter the filter to be added
-     */
-    public ServiceClient addRequestFilter(ClientRequestFilter clientRequestFilter) {
-        client.register(clientRequestFilter);
-        return this;
-    }
-
-    /**
-     * Add a ServiceResponseFilter to the Jersey client
-     *
-     * @param clientResponseFilter the filter to be added
-     */
-    public ServiceClient addResponseFilter(ClientResponseFilter clientResponseFilter) {
-        client.register(clientResponseFilter);
-        return this;
-    }
-
-    /* (non-Javadoc)
-     * @see java.io.Closeable#close()
-     */
-    public void close() throws IOException {
-        if (client != null) {
-            client.close();
-        }
+    @Override
+    public void close() {
     }
 }

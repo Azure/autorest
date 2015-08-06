@@ -7,13 +7,19 @@
 
 package com.microsoft.rest.credentials;
 
+import com.squareup.okhttp.Interceptor;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+import org.apache.commons.codec.binary.Base64;
+
 import javax.ws.rs.client.ClientRequestContext;
 import javax.ws.rs.client.ClientRequestFilter;
+import java.io.IOException;
 
 /**
  * Token credentials filter for placing a token credentials into Apache pipeline.
  */
-public class TokenCredentialsFilter implements ClientRequestFilter {
+public class TokenCredentialsInterceptor implements Interceptor {
     private TokenCredentials credentials;
 
     /**
@@ -22,15 +28,15 @@ public class TokenCredentialsFilter implements ClientRequestFilter {
      *
      * @param credentials a TokenCredentials instance
      */
-    public TokenCredentialsFilter(TokenCredentials credentials) {
+    public TokenCredentialsInterceptor(TokenCredentials credentials) {
         this.credentials = credentials;
     }
 
-    /* (non-Javadoc)
-     * @see com.microsoft.rest.pipeline.ServiceRequestFilter#filter(org.apache.http.HttpRequest)
-     */
     @Override
-    public void filter(ClientRequestContext clientRequestContext) {
-        clientRequestContext.getHeaders().add("Authorization", credentials.getScheme() + " " + credentials.getToken());
+    public Response intercept(Chain chain) throws IOException {
+        Request newRequest = chain.request().newBuilder()
+                .header("Authorization", credentials.getScheme() + " " + credentials.getToken())
+                .build();
+        return chain.proceed(newRequest);
     }
 }

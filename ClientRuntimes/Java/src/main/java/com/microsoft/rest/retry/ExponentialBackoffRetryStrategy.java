@@ -7,6 +7,8 @@
 
 package com.microsoft.rest.retry;
 
+import com.squareup.okhttp.Response;
+
 import java.io.IOException;
 
 public class ExponentialBackoffRetryStrategy extends RetryStrategy {
@@ -37,7 +39,7 @@ public class ExponentialBackoffRetryStrategy extends RetryStrategy {
     }
 
     @Override
-    public boolean shouldRetry(int retryCount, IOException ex) {
+    public boolean shouldRetry(int retryCount, Response response) {
         return retryCount < this.retryCount;
     }
 }

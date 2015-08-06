@@ -7,18 +7,12 @@
 
 package com.microsoft.rest;
 
-import com.microsoft.rest.retry.ExponentialBackoffRetryStrategy;
-import com.microsoft.rest.retry.RetryHandler;
-import com.microsoft.rest.retry.RetryStrategy;
+import com.squareup.okhttp.Interceptor;
+import com.squareup.okhttp.Response;
 import junit.framework.Assert;
-import org.apache.http.impl.client.AbstractHttpClient;
-import org.glassfish.jersey.apache.connector.ApacheClientProperties;
-import org.glassfish.jersey.apache.connector.ApacheConnectorProvider;
 import org.glassfish.jersey.client.ClientConfig;
-import org.glassfish.jersey.client.ClientProperties;
 import org.junit.Test;
 
-import javax.annotation.Priority;
 import javax.ws.rs.client.ClientRequestContext;
 import javax.ws.rs.client.ClientRequestFilter;
 import javax.ws.rs.client.WebTarget;
@@ -29,39 +23,29 @@ public class ServiceClientTests {
     @Test
     public void FilterTests() throws Exception {
         ServiceClient serviceClient = new ServiceClient() {};
-        serviceClient.addRequestFilter(new FirstFilter());
-        serviceClient.addRequestFilter(new SecondFilter());
-        serviceClient.addRequestFilter(new ClientRequestFilter() {
+        serviceClient.getClientInterceptors().add(0, new FirstFilter());
+        serviceClient.getClientInterceptors().add(1, new SecondFilter());
+        serviceClient.getClientInterceptors().add(new Interceptor() {
             @Override
-            public void filter(ClientRequestContext requestContext) throws IOException {
-                Assert.assertEquals("1", requestContext.getHeaderString("filter1"));
-                Assert.assertEquals("2", requestContext.getHeaderString("filter2"));
+            public Response intercept(Chain chain) throws IOException {
+                Assert.assertEquals("1", chain.request().header("filter1"));
+                Assert.assertEquals("2", chain.request().header("filter2"));
+                return chain.proceed(chain.request());
             }
         });
-        WebTarget target = serviceClient.getClient().target("http://www.microsoft.com");
-        String response = target.request().get(String.class);
     }
 
-    @Test
-    public void RetryTests() throws Exception {
-        ClientConfig config = new ClientConfig();
-        ServiceClient serviceClient = new ServiceClient() {};
-        WebTarget target = serviceClient.getClient().target("http://www.microsoft.com/thispagedoesnotexist.htm");
-    }
-
-    @Priority(1)
-    public class FirstFilter implements ClientRequestFilter {
+    public class FirstFilter implements Interceptor {
         @Override
-        public void filter(ClientRequestContext requestContext) throws IOException {
-            requestContext.getHeaders().add("filter1", "1");
+        public Response intercept(Chain chain) throws IOException {
+            return chain.proceed(chain.request().newBuilder().header("filter1", "1").build());
         }
     }
 
-    @Priority(2)
-    public class SecondFilter implements ClientRequestFilter {
+    public class SecondFilter implements Interceptor {
         @Override
-        public void filter(ClientRequestContext requestContext) throws IOException {
-            requestContext.getHeaders().add("filter2", "2");
+        public Response intercept(Chain chain) throws IOException {
+            return chain.proceed(chain.request().newBuilder().header("filter2", "2").build());
         }
     }
 }

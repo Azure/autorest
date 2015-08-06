@@ -9,39 +9,30 @@ package com.microsoft.rest.bat;
 
 import com.microsoft.rest.HttpOperationResponse;
 import com.microsoft.rest.ServiceException;
+import retrofit.Callback;
+import retrofit.client.Response;
+import retrofit.http.Body;
+import retrofit.http.GET;
+import retrofit.http.PUT;
 
 import java.util.concurrent.Future;
 
 public interface IntOperations {
-    HttpOperationResponse<Integer> getNullWithHttpMessages() throws ServiceException;
+    @GET("/int/null")
+    int getNull();
 
-    Future<HttpOperationResponse<Integer>> getNullWithHttpMessagesAsync();
+    @GET("/int/null")
+    void getNullAsync(Callback<Integer> cb);
 
-    Integer getInvalidWithHttpMessages();
+    @GET("/int/invalid")
+    int getInvalid();
 
-    Future<HttpOperationResponse<Integer>> getInvalidWithHttpMessagesAsync();
+    @GET("/int/invalid")
+    void getInvalidAsync(Callback<Integer> cb);
 
-    Integer getOverflowInt32WithHttpMessages();
+    @PUT("/int/max/32")
+    Response putMax32(@Body int intBody) throws ServiceException;
 
-    Future<HttpOperationResponse<Integer>> getOverflowInt32WithHttpMessagesAsync();
-
-    Integer getUnderflowInt64WithHttpMessages();
-
-    Future<HttpOperationResponse<Long>> getUnderflowInt64WithHttpMessagesAsync();
-
-    void putMax32WithHttpMessages();
-
-    Future<HttpOperationResponse> putMax32WithHttpMessagesAsync(int intBody);
-
-    void putMax64WithHttpMessages();
-
-    Future<HttpOperationResponse> putMax64WithHttpMessagesAsync(long intBody);
-
-    void putMin32WithHttpMessages();
-
-    Future<HttpOperationResponse> putMin32WithHttpMessagesAsync(int intBody);
-
-    void putMin64WithHttpMessages();
-
-    Future<HttpOperationResponse> putMin64WithHttpMessagesAsync(long intBody);
+    @PUT("/int/max/32")
+    void putMax32Async(Callback<Void> cb) throws ServiceException;
 }

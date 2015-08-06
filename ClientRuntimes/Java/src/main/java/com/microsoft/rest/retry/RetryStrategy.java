@@ -7,6 +7,8 @@
 
 package com.microsoft.rest.retry;
 
+import com.squareup.okhttp.Response;
+
 import javax.ws.rs.client.ClientResponseContext;
 import java.io.IOException;
 
@@ -23,5 +25,5 @@ public abstract class RetryStrategy {
         this.fastFirstRetry = firstFastRetry;
     }
 
-    public abstract boolean shouldRetry(int retryCount, IOException exception);
+    public abstract boolean shouldRetry(int retryCount, Response response);
 }

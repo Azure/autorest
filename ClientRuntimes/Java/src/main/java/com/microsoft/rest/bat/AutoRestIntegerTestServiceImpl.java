@@ -8,17 +8,19 @@
 package com.microsoft.rest.bat;
 
 import com.microsoft.rest.ServiceClient;
-import org.glassfish.jersey.client.ClientConfig;
-
-import java.net.URI;
+import com.microsoft.rest.ServiceException;
+import com.squareup.okhttp.OkHttpClient;
+import retrofit.ErrorHandler;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
 
 /**
  *
  */
 public class AutoRestIntegerTestServiceImpl extends ServiceClient<AutoRestIntegerTestService> implements AutoRestIntegerTestService {
-    private URI baseUri;
+    private String baseUri;
 
-    public URI getBaseUri() {
+    public String getBaseUri() {
         return this.baseUri;
     }
 
@@ -29,16 +31,23 @@ public class AutoRestIntegerTestServiceImpl extends ServiceClient<AutoRestIntege
     }
 
     public AutoRestIntegerTestServiceImpl() {
+        this("http://localhost:3000");
+    }
+
+    public AutoRestIntegerTestServiceImpl(String baseUri) {
         super();
+        this.baseUri = baseUri;
         initialize();
     }
 
-    public AutoRestIntegerTestServiceImpl(ClientConfig clientConfig) {
-        super(clientConfig);
+    public AutoRestIntegerTestServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
+        super(client, restAdapterBuilder);
+        this.baseUri = baseUri;
         initialize();
     }
 
-    private void initialize() {
-        this.intOperations = new IntOperationsImpl(this);
+    protected void initialize() {
+        RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
+        this.intOperations = restAdapter.create(IntOperations.class);
     }
 }
