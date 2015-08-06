@@ -8,12 +8,11 @@
 package com.microsoft.rest.credentials;
 
 import com.microsoft.rest.ServiceClient;
-import org.apache.http.impl.client.HttpClientBuilder;
 
 /**
  * Basic Auth credentials for use with a REST Service Client.
  */
-public class BasicAuthenticationCredentials extends ServiceClientCredentials {
+public class BasicAuthenticationCredentials implements ServiceClientCredentials {
 
     /**
      * Basic auth UserName.
@@ -54,11 +53,7 @@ public class BasicAuthenticationCredentials extends ServiceClientCredentials {
         return password;
     }
 
-    /* (non-Javadoc)
-     * @see com.microsoft.rest.credentials.ServiceClientCredentials#applyCredentialsFilter(com.microsoft.rest.ServiceClient)
-     */
-    @Override
     public void applyCredentialsFilter(ServiceClient client) {
-        client.addRequestFilter(new BasicAuthenticationCredentialsFilter(this));
+        client.getClientInterceptors().add(new BasicAuthenticationCredentialsInterceptor(this));
     }
 }

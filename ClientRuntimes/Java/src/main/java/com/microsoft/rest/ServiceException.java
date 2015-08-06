@@ -10,6 +10,8 @@ package com.microsoft.rest;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
+import retrofit.client.Request;
+import retrofit.client.Response;
 
 import java.io.IOException;
 
@@ -21,12 +23,12 @@ public class ServiceException extends Exception {
     /**
      * Information about the associated HTTP request.
      */
-    private HttpRequest request;
+    private Request request;
 
     /**
      * Information about the associated HTTP response.
      */
-    private HttpResponse response;
+    private Response response;
 
     /**
      * The HTTP response object.
@@ -73,7 +75,7 @@ public class ServiceException extends Exception {
      *
      * @return the HTTP request
      */
-    public HttpRequest getRequest() {
+    public Request getRequest() {
         return request;
     }
 
@@ -82,7 +84,7 @@ public class ServiceException extends Exception {
      *
      * @return the HTTP response
      */
-    public HttpResponse getResponse() {
+    public Response getResponse() {
         return response;
     }
 
@@ -100,7 +102,7 @@ public class ServiceException extends Exception {
      *
      * @param request the HTTP request
      */
-    public void setRequest(HttpRequest request) {
+    public void setRequest(Request request) {
         this.request = request;
     }
 
@@ -109,7 +111,7 @@ public class ServiceException extends Exception {
      *
      * @param response the HTTP response
      */
-    public void setResponse(HttpResponse response) {
+    public void setResponse(Response response) {
         this.response = response;
     }
 

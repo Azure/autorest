@@ -15,7 +15,7 @@ import java.net.URI;
  *
  */
 public interface AutoRestIntegerTestService {
-    URI getBaseUri();
+    String getBaseUri();
 
     IntOperations getIntOperations();
 }

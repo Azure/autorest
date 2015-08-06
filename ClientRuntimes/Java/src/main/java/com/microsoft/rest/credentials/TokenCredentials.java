@@ -8,12 +8,11 @@
 package com.microsoft.rest.credentials;
 
 import com.microsoft.rest.ServiceClient;
-import org.apache.http.impl.client.HttpClientBuilder;
 
 /**
  * Token based credentials for use with a REST Service Client.
  */
-public class TokenCredentials extends ServiceClientCredentials {
+public class TokenCredentials implements ServiceClientCredentials {
 
     /** The authentication scheme. */
     private String scheme;
@@ -54,11 +53,7 @@ public class TokenCredentials extends ServiceClientCredentials {
         return scheme;
     }
 
-    /* (non-Javadoc)
-     * @see com.microsoft.rest.credentials.ServiceClientCredentials#applyCredentialsFilter(com.microsoft.rest.ServiceClient)
-     */
-    @Override
     public void applyCredentialsFilter(ServiceClient client) {
-        client.addRequestFilter(new TokenCredentialsFilter(this));
+        client.getClientInterceptors().add(new TokenCredentialsInterceptor(this));
     }
 }

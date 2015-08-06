@@ -7,16 +7,20 @@
 
 package com.microsoft.rest.credentials;
 
+import com.squareup.okhttp.Interceptor;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 import org.apache.commons.codec.binary.Base64;
 
 import javax.ws.rs.client.ClientRequestContext;
 import javax.ws.rs.client.ClientRequestFilter;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 /**
  * Basic Auth credentials filter for placing a basic auth credentials into Apache pipeline.
  */
-public class BasicAuthenticationCredentialsFilter implements ClientRequestFilter {
+public class BasicAuthenticationCredentialsInterceptor implements Interceptor {
     private BasicAuthenticationCredentials credentials;
 
     /**
@@ -25,21 +29,17 @@ public class BasicAuthenticationCredentialsFilter implements ClientRequestFilter
      *
      * @param credentials a BasicAuthenticationCredentials instance
      */
-    public BasicAuthenticationCredentialsFilter(BasicAuthenticationCredentials credentials) {
+    public BasicAuthenticationCredentialsInterceptor(BasicAuthenticationCredentials credentials) {
         this.credentials = credentials;
     }
 
-    /* (non-Javadoc)
-     * @see com.microsoft.rest.pipeline.ServiceRequestFilter#filter(org.apache.http.HttpRequest)
-     */
     @Override
-    public void filter(ClientRequestContext clientRequestContext) {
-        try {
-            String auth = credentials.getUserName() + ":" + credentials.getPassword();
-            auth = Base64.encodeBase64String(auth.getBytes("UTF8"));
-            clientRequestContext.getHeaders().add("Authorization", "Basic " + auth);
-        } catch (UnsupportedEncodingException e) {
-            // silently fail
-        }
+    public Response intercept(Chain chain) throws IOException {
+        String auth = credentials.getUserName() + ":" + credentials.getPassword();
+        auth = Base64.encodeBase64String(auth.getBytes("UTF8"));
+        Request newRequest = chain.request().newBuilder()
+                .header("Authorization", "Basic " + auth)
+                .build();
+        return chain.proceed(newRequest);
     }
 }
