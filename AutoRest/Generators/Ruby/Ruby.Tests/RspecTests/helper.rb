@@ -52,7 +52,7 @@ RSpec::Matchers.define :raise_exception_with_code do |http_error_code|
   match do |block|
     begin
       block.call
-    rescue MsRest::HttpOperationException => exception
+    rescue MsRest::HttpOperationError => exception
       exception.response.status == http_error_code
     end
   end

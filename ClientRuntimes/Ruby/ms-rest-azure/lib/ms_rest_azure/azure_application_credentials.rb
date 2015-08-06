@@ -32,7 +32,7 @@ module MsRestAzure
     # @param client_id [String] client id.
     # @param client_secret [String] client secret.
     # @param settings [ActiveDirectoryServiceSettings] client secret.
-    def initialize(tenant_id, client_id, client_secret, settings)
+    def initialize(tenant_id, client_id, client_secret, settings = ActiveDirectoryServiceSettings.get_azure_settings)
       fail ArgumentError, 'Tenant id cannot be nil' if tenant_id.nil?
       fail ArgumentError, 'Client id cannot be nil' if client_id.nil?
       fail ArgumentError, 'Client secret key cannot be nil' if client_secret.nil?
@@ -73,7 +73,7 @@ module MsRestAzure
       end
 
       response = http.request(request)
-      fail CloudError, 'Could login to Azure, please verify your tenant id, client id and client secret' unless response.is_a?(Net::HTTPOK)
+      fail AzureOperationError, 'Could login to Azure, please verify your tenant id, client id and client secret' unless response.is_a?(Net::HTTPOK)
 
       @token = JSON.load(response.body)['access_token']
     end

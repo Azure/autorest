@@ -16,6 +16,9 @@ module MsRestAzure
     # @return [Net::HTTPResponse] the HTTP response.
     attr_accessor :response
 
+    # @return [AzureOperationError] the azure error data.
+    attr_accessor :error_data
+
     # @return [String] the latest value captured from Azure-AsyncOperation header.
     attr_accessor :azure_async_operation_header_link
 
@@ -78,6 +81,14 @@ module MsRestAzure
     def get_operation_response
       azure_response = AzureOperationResponse.new(@request, @response, @resource)
       azure_response
+    end
+
+    #
+    # Composes and returns cloud error.
+    #
+    # @return [AzureOperationError] the cloud error.
+    def get_operation_error
+      fail AzureOperationError.new @request, @response, @error_data, "Long running operation failed with status #{@status}"
     end
 
     private

@@ -3,8 +3,8 @@
 
 module MsRest
   #
-  # Class which represents an error meaning that invalid Model object was created by user or provided from server.
+  # Class which represents an general exception for REST client.
   #
-  class ValidationError < RestError
+  class RestError < StandardError
   end
 end

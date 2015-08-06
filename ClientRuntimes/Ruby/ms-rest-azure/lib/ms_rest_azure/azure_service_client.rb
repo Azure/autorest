@@ -25,12 +25,12 @@ module MsRestAzure
     #
     # @return [MsRest::HttpOperationResponse] the response.
     def get_put_operation_result(azure_response, custom_headers, custom_deserialization_block)
-      fail CloudError if azure_response.nil?
+      fail MsRest::ValidationError, 'Azure response cannot be nil' if azure_response.nil?
 
       status_code = azure_response.response.status
 
       if (status_code != 200 && status_code != 201 && status_code != 202)
-        fail CloudError
+        fail AzureOperationError, "Unexpected polling status code from long running operation #{status_code}"
       end
 
       polling_state = PollingState.new(azure_response, 1) # TODO: add timeout
@@ -69,7 +69,7 @@ module MsRestAzure
       end
 
       if (AsyncOperationStatus.is_failed_status(polling_state.status))
-        fail CloudError # TODO: proper error
+        fail polling_state.get_operation_error
       end
 
       return polling_state.get_operation_response
@@ -83,13 +83,13 @@ module MsRestAzure
     #
     # @return [MsRest::HttpOperationResponse] the response.
     def get_post_or_delete_operation_result(azure_response, custom_headers, custom_deserialization_block)
-      fail CloudError if azure_response.nil?
-      fail CloudError if azure_response.response.nil?
+      fail MsRest::ValidationError, 'Azure response cannot be nil' if azure_response.nil?
+      fail MsRest::ValidationError, 'Azure response cannot have empty response object' if azure_response.response.nil?
 
       status_code = azure_response.response.status
 
       if (status_code != 200 && status_code != 202 && status_code != 204)
-        fail CloudError
+        fail AzureOperationError, "Unexpected polling status code from long running operation #{status_code}"
       end
 
       polling_state = PollingState.new(azure_response, 1) # TODO: add timeout
@@ -103,7 +103,7 @@ module MsRestAzure
               update_state_from_location_header_on_post_or_delete(polling_state, custom_headers, custom_deserialization_block)
             else
               task.shutdown
-              fail CloudError
+              fail AzureOperationError, 'Location header is missing from long running operation'
             end
 
             if (AsyncOperationStatus.is_terminal_status(polling_state.status))
@@ -124,7 +124,7 @@ module MsRestAzure
       end
 
       if (AsyncOperationStatus.is_failed_status(polling_state.status))
-        fail CloudError # TODO: proper error
+        fail polling_state.get_operation_error
       end
 
       return polling_state.get_operation_response
@@ -140,7 +140,7 @@ module MsRestAzure
     def update_state_from_get_resource_operation(operation_url, polling_state, custom_headers, custom_deserialization_block)
       result = get_async_with_custom_deserialization(operation_url, custom_headers, custom_deserialization_block)
 
-      fail CloudError if result.response.body.nil? || result.response.body.empty?
+      fail AzureOperationError, 'The response from long running operation does not contain a body' if result.response.body.nil? || result.response.body.empty?
 
       if (result.body.respond_to?(:properties) && result.body.properties.respond_to?(:provisioning_state) && !result.body.properties.provisioning_state.nil?)
         polling_state.status = result.body.properties.provisioning_state
@@ -148,8 +148,11 @@ module MsRestAzure
         polling_state.status = AsyncOperationStatus::SUCCESS_STATUS
       end
 
-      # TODO: fill the polling_state.error
+      error_data = CloudErrorData.new
+      error_data.code = polling_state.status
+      error_data.message = "Long running operation failed with status #{polling_state.status}"
 
+      polling_state.error_data = error_data
       polling_state.update_response(result.response)
       polling_state.request = result.request
       polling_state.resource = result.body
@@ -171,17 +174,18 @@ module MsRestAzure
       if (status_code == 202)
         polling_state.status = AsyncOperationStatus::IN_PROGRESS_STATUS
       elsif (status_code == 200 || status_code == 201)
-        fail CloudError if (result.body.nil?)
-          # TODO elaborate error
-
+        fail AzureOperationError, 'The response from long running operation does not contain a body' if (result.body.nil?)
       if (result.body.respond_to?(:properties) && result.body.properties.respond_to?(:provisioning_state) && !result.body.properties.provisioning_state.nil?)
           polling_state.status = result.body.properties.provisioning_state
         else
           polling_state.status = AsyncOperationStatus::SUCCESS_STATUS
         end
 
-        # TODO add filling of the polling_state.error
+        error_data = CloudErrorData.new
+        error_data.code = polling_state.status
+        error_data.message = "Long running operation failed with status #{polling_state.status}"
 
+        polling_state.error_data = error_data
         polling_state.resource = result.body
       end
     end
@@ -193,12 +197,10 @@ module MsRestAzure
     def update_state_from_azure_async_operation_header(polling_state, custom_headers)
       result = get_async_with_async_operation_deserialization(polling_state.azure_async_operation_header_link, custom_headers)
 
-      # TODO elaborate error
-      fail CloudError if (result.body.nil? || result.body.status.nil?)
+      fail AzureOperationError, 'The response from long running operation does not contain a body' if result.body.nil? || result.body.status.nil?
 
       polling_state.status = result.body.status
-      # TODO: fill the error
-      # polling_state.error = nil
+      polling_state.error_data = result.body.error
       polling_state.response = result.response
       polling_state.request = result.request
       polling_state.resource = nil
@@ -213,9 +215,7 @@ module MsRestAzure
       result = get_async_with_custom_deserialization(polling_state.location_header_link, custom_headers, custom_deserialization_block)
 
       polling_state.update_response(result.response)
-      # TODO: adding response instead of request since Faraday doesn't provide request object.
-      polling_state.request = result.response
-
+      polling_state.request = result.request
       status_code = result.response.status
 
       if (status_code == 202)
@@ -267,7 +267,7 @@ module MsRestAzure
     #
     # @return [MsRest::HttpOperationResponse] the response.
     def get_async_common(operation_url, custom_headers)
-      fail CloudError if operation_url.nil?
+      fail ValidationError, 'Operation url cannot be nil' if operation_url.nil?
 
       # TODO: add url encoding.
       url = URI(operation_url)
@@ -301,7 +301,10 @@ module MsRestAzure
       status_code = http_response.status
 
       if (status_code != 200 && status_code != 201 && status_code != 202 && status_code != 204)
-        fail CloudError
+        json_error_data = JSON.load(http_response.body)
+        error_data = CloudErrorData.deserialize_object(json_error_data)
+
+        fail AzureOperationError.new connection, http_response, error_data, "Long running operation failed with status #{status_code}"
       end
 
       result = MsRest::HttpOperationResponse.new(connection, http_response, http_response.body)

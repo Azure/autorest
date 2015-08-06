@@ -63,7 +63,7 @@ describe 'Paging' do
 
   # Paging sad path tests
   it 'should get single pages failure' do
-    expect { @client.paging.get_single_pages_failure().value! }.to raise_exception(MsRest::HttpOperationException)
+    expect { @client.paging.get_single_pages_failure().value! }.to raise_exception(MsRest::HttpOperationError)
   end
 
   it 'should get multiple pages failure' do
@@ -71,7 +71,7 @@ describe 'Paging' do
     expect(result.response.status).to eq(200)
     expect(result.body.next_link).not_to be_nil
 
-    expect { @client.paging.get_multiple_pages_failure_next(result.body.next_link).value! }.to raise_exception(MsRest::HttpOperationException)
+    expect { @client.paging.get_multiple_pages_failure_next(result.body.next_link).value! }.to raise_exception(MsRest::HttpOperationError)
   end
 
   it 'should get multiple pages failure URI' do

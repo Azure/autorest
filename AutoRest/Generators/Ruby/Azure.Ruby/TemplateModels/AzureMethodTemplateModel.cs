@@ -215,10 +215,11 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         {
             get
             {
-                //if (DefaultResponse == null || DefaultResponse.Name == "CloudError")
-                //{
-                //    return "CloudException";
-                //}
+                if (DefaultResponse == null || DefaultResponse.Name == "CloudError")
+                {
+                    return "MsRestAzure::AzureOperationError";
+                }
+
                 return base.OperationExceptionTypeString;
             }
         }

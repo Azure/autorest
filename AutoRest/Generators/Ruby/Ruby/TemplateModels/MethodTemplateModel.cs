@@ -139,7 +139,7 @@ namespace Microsoft.Rest.Generator.Ruby
         {
             get
             {
-                return "MsRest::HttpOperationException";
+                return "MsRest::HttpOperationError";
             }
         }
 
