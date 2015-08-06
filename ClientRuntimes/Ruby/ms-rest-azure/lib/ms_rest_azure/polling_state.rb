@@ -28,25 +28,25 @@ module MsRestAzure
     # @return [String] status of the long running operation.
     attr_accessor :status
 
-  	def initialize(azure_response, retry_timeout)
-  	  @retry_timeout = retry_timeout
-  	  @request = azure_response.request
-  	  update_response(azure_response.response)
-  	  @resource = azure_response.body
+    def initialize(azure_response, retry_timeout)
+      @retry_timeout = retry_timeout
+      @request = azure_response.request
+      update_response(azure_response.response)
+      @resource = azure_response.body
 
-  	  if (!@resource.nil? && @resource.respond_to?(:properties) && @resource.properties.respond_to?(:provisioning_state) && !@resource.properties.provisioning_state.nil?)
-  	  	@status = @resource.properties.provisioning_state
-  	  else
-  	  	case @response.status
-  	  	  when 202
-  	  	    @status = AsyncOperationStatus::IN_PROGRESS_STATUS
-  	  	  when 200, 201, 204
-  	  	    @status = AsyncOperationStatus::SUCCESS_STATUS
-  	  	  else
-  	  	  	@status = AsyncOperationStatus::FAILED_STATUS
-  	  	  end
-  	  end
-  	end
+      if (!@resource.nil? && @resource.respond_to?(:properties) && @resource.properties.respond_to?(:provisioning_state) && !@resource.properties.provisioning_state.nil?)
+        @status = @resource.properties.provisioning_state
+      else
+        case @response.status
+          when 202
+            @status = AsyncOperationStatus::IN_PROGRESS_STATUS
+          when 200, 201, 204
+            @status = AsyncOperationStatus::SUCCESS_STATUS
+          else
+            @status = AsyncOperationStatus::FAILED_STATUS
+          end
+      end
+    end
 
     #
     # Returns the amount of time in milliseconds for long running operation polling dealy.
