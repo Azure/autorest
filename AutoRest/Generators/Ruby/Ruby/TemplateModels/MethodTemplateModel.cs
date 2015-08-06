@@ -73,7 +73,7 @@ namespace Microsoft.Rest.Generator.Ruby
         }
 
         /// <summary>
-        /// Generate the method parameter declaration
+        /// Gets the method parameter declaration parameters list.
         /// </summary>
         public string MethodParameterDeclaration
         {
@@ -89,6 +89,20 @@ namespace Microsoft.Rest.Generator.Ruby
                 declarations.Add("custom_headers = nil");
 
                 return string.Join(", ", declarations);
+            }
+        }
+
+        /// <summary>
+        /// Gets the method parameter invocation parameters list.
+        /// </summary>
+        public string MethodParameterInvocation
+        {
+            get
+            {
+                var invocationParams = LocalParameters.Select(p => p.Name).ToList();
+                invocationParams.Add("custom_headers");
+
+                return string.Join(", ", invocationParams);
             }
         }
 

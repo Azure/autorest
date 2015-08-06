@@ -20,13 +20,12 @@ module MsRestAzure
     #
     # Retrieves the result of 'PUT' operation. Perfroms polling of required.
     # @param azure_response [MsRestAzure::AzureOperationResponse] response from Azure service.
-    # @param get_operation_block [Proc] custom method for polling.
     # @param custom_headers [Hash] custom HTTP headers to apply to HTTP requests.
+    # @param custom_deserialization_block [Proc] custom logic for response deserialization.
     #
     # @return [MsRest::HttpOperationResponse] the response.
-    def get_put_operation_result(azure_response, get_operation_block, custom_headers, custom_deserialization_block)
+    def get_put_operation_result(azure_response, custom_headers, custom_deserialization_block)
       fail CloudError if azure_response.nil?
-      fail CloudError if get_operation_block.nil?
 
       status_code = azure_response.response.status
 
@@ -35,6 +34,7 @@ module MsRestAzure
       end
 
       polling_state = PollingState.new(azure_response, 1) # TODO: add timeout
+      operation_url = azure_response.request.url_prefix.to_s
 
       if (!AsyncOperationStatus.is_terminal_status(polling_state.status))
         task = Concurrent::TimerTask.new do
@@ -44,7 +44,7 @@ module MsRestAzure
             elsif !polling_state.location_header_link.nil?
               update_state_from_location_header_on_put(polling_state, custom_headers, custom_deserialization_block)
             else
-              update_state_from_get_resource_operation(get_operation_block, polling_state)
+              update_state_from_get_resource_operation(operation_url, polling_state, custom_headers, custom_deserialization_block)
             end
 
             if (AsyncOperationStatus.is_terminal_status(polling_state.status))
@@ -65,7 +65,7 @@ module MsRestAzure
       end
 
       if (AsyncOperationStatus.is_successful_status(polling_state.status) && polling_state.resource.nil?)
-        update_state_from_get_resource_operation(get_operation_block, polling_state)
+        update_state_from_get_resource_operation(operation_url, polling_state, custom_headers, custom_deserialization_block)
       end
 
       if (AsyncOperationStatus.is_failed_status(polling_state.status))
@@ -132,12 +132,15 @@ module MsRestAzure
 
     #
     # Updates polling state based on location header for PUT HTTP requests.
-    # @param get_operation_block [Proc] custom method for polling.
+    # @param operation_url [String] The url retrieve data from.
     # @param polling_state [MsRestAzure::PollingState] polling state to update.
-    def update_state_from_get_resource_operation(get_operation_block, polling_state)
-      result = get_operation_block.call().value!
+    # @param custom_headers [Hash] custom headers to apply to HTTP request.
+    # @param custom_deserialization_block [Proc] custom deserialization method for parsing response.
+    #
+    def update_state_from_get_resource_operation(operation_url, polling_state, custom_headers, custom_deserialization_block)
+      result = get_async_with_custom_deserialization(operation_url, custom_headers, custom_deserialization_block)
 
-      fail CloudError if (result.body.nil?)
+      fail CloudError if result.response.body.nil? || result.response.body.empty?
 
       if (result.body.respond_to?(:properties) && result.body.properties.respond_to?(:provisioning_state) && !result.body.properties.provisioning_state.nil?)
         polling_state.status = result.body.properties.provisioning_state
@@ -301,7 +304,7 @@ module MsRestAzure
         fail CloudError
       end
 
-      result = MsRest::HttpOperationResponse.new(http_response, http_response, http_response.body)
+      result = MsRest::HttpOperationResponse.new(connection, http_response, http_response.body)
 
       begin
         result.body = JSON.load(http_response.body) unless http_response.body.to_s.empty?

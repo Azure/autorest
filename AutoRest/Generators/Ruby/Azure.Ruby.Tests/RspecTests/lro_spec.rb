@@ -123,7 +123,7 @@ describe 'LongRunningOperation' do
   end
 
   it 'should rise error if 400 responce comes in the middle of PUT operation' do
-    expect { @client.lrosads.put_non_retry201creating400(@product).value! }.to raise_error(MsRest::HttpOperationException)
+    expect { @client.lrosads.put_non_retry201creating400(@product).value! }.to raise_error(MsRestAzure::CloudError)
   end
 
   it 'should rise error if 400 responce comes in the middle of async PUT operation' do

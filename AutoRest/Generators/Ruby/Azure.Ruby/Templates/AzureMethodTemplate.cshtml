@@ -21,7 +21,7 @@ else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.D
 #
 def @(Model.Name)(@(Model.MethodParameterDeclaration))
   # Send request
-  promise = begin_@(Model.Name)(@(Model.MethodParameterDeclaration))
+  promise = begin_@(Model.Name)(@(Model.MethodParameterInvocation))
   @EmptyLine
 
   promise = promise.then do |response|
@@ -54,14 +54,10 @@ else
 #
 def @(Model.Name)(@(Model.MethodParameterDeclaration))
   # Send request
-  promise = begin_@(Model.Name)(@(Model.MethodParameterDeclaration))
+  promise = begin_@(Model.Name)(@(Model.MethodParameterInvocation))
   @EmptyLine
 
   promise = promise.then do |response|
-    # Defining polling method.
-    get_method = lambda { self.@(Model.GetMethod.Name)(@(Model.GetMethod.MethodParameterDeclaration)) }
-    @EmptyLine
-
     # Defining deserialization method.
     deserialize_method = lambda do |parsed_response|
       @(Model.DeserializePollingResponse("parsed_response", Model.ReturnType))
@@ -69,7 +65,7 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
 
     @EmptyLine
     # Waiting for response.
-    @(Model.ClientReference).get_put_operation_result(response, get_method, nil, deserialize_method)
+    @(Model.ClientReference).get_put_operation_result(response, custom_headers, deserialize_method)
   end
 
   @EmptyLine

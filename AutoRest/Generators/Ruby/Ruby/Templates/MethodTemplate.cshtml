@@ -88,18 +88,18 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
       @if (Model.DefaultResponse != null)
       {
       @:error_model = JSON.load(response_content)
-      @:fail @(Model.OperationExceptionTypeString).new(http_response, http_response, error_model)
+      @:fail @(Model.OperationExceptionTypeString).new(connection, http_response, error_model)
       }
       else
       {
-      @:fail @(Model.OperationExceptionTypeString).new(http_response, http_response)
+      @:fail @(Model.OperationExceptionTypeString).new(connection, http_response)
       }
     end
 
     @EmptyLine
     @* TODO: add propert request object into HttpOperationResponse and HttpOperationException *@
     # Create Result
-    result = @(Model.OperationResponseReturnTypeString).new(http_response, http_response)
+    result = @(Model.OperationResponseReturnTypeString).new(connection, http_response)
     @Model.InitializeResponseBody
 
     @foreach (var responsePair in Model.Responses.Where(r => r.Value != null && r.Value.IsSerializable()))
