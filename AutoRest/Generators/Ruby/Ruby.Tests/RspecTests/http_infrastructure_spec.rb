@@ -375,12 +375,10 @@ describe 'HttpInfrastructure' do
     end
 
     it 'should get 200->201->201 valid' do
-      pending("TODO")
-      fail
-      # result = @multiple_resp_client.get200model201model_default_error201valid().value!
-      # expect(result.response).to be_an_instance_of(Net::HTTPCreated)
-      # expect(result.body).to be_an_instance_of(Models::B)
-      # expect(result.body.text_status_code).to eq("Created")
+      result = @multiple_resp_client.get200model201model_default_error201valid().value!
+      expect(result.response.status).to eq(201)
+      expect(result.body).to be_an_instance_of(Models::B)
+      expect(result.body.text_status_code).to eq("Created")
     end
 
     it 'should get 200->201->400 valid' do
@@ -388,18 +386,14 @@ describe 'HttpInfrastructure' do
     end
 
     it 'should get 200->201->404->201 valid' do
-      pending("TODO")
-      fail
-      # result = @multiple_resp_client.get200model_a201model_c404model_ddefault_error201valid().value!
-      # expect(result.response).to be_an_instance_of(Net::HTTPCreated)
-      # expect(result.body).to be_an_instance_of(Models::C)
-      # expect(result.body.http_code.to_i).to eq(201)
+      result = @multiple_resp_client.get200model_a201model_c404model_ddefault_error201valid().value!
+      expect(result.response.status).to eq(201)
+      expect(result.body).to be_an_instance_of(Models::C)
+      expect(result.body.http_code.to_i).to eq(201)
     end
 
     it 'should get 200->201->404->404 valid' do
-      pending("TODO")
-      fail
-      # expect{@multiple_resp_client.get200model_a201model_c404model_ddefault_error404valid().value!}.to raise_exception_with_code(Net::HTTPNotFound)
+      expect { @multiple_resp_client.get200model_a201model_c404model_ddefault_error404valid().value! }.to raise_exception_with_code(404)
     end
 
     it 'should get 200->201->404->400 valid' do

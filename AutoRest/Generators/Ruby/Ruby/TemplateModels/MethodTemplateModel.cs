@@ -171,23 +171,24 @@ namespace Microsoft.Rest.Generator.Ruby
             return string.Format("{0}", (int)code);
         }
 
-        public virtual string CreateDeserializationString(string inputVariable, IType type, string outputVariable, string defaultNamespace)
+        public virtual string CreateDeserializationString(string inputVariable, IType type, string outputVariable)
         {
             var builder = new IndentedStringBuilder("  ");
+            var tempVariable = "parsed_response";
 
             // Firstly parsing the input json file into temporay variable.
-            builder.AppendLine("{0} = JSON.load({1}) unless {1}.to_s.empty?", "parsed_response", inputVariable);
+            builder.AppendLine("{0} = JSON.load({1}) unless {1}.to_s.empty?", tempVariable, inputVariable);
 
             // Secondly parse each js object into appropriate Ruby type (DateTime, Byte array, etc.)
             // and overwrite temporary variable variable value.
-            string deserializationLogic = type.DeserializeType(this.Scope, "parsed_response");
+            string deserializationLogic = type.DeserializeType(this.Scope, tempVariable);
             builder.AppendLine(deserializationLogic);
 
             // Assigning value of temporary variable to the output variable.
-            return builder.AppendLine("{0} = {1}", outputVariable, "parsed_response").ToString();
+            return builder.AppendLine("{0} = {1}", outputVariable, tempVariable).ToString();
         }
 
-        public virtual string CreateSerializationString(string inputVariable, IType type, string outputVariable, string defaultNamespace)
+        public virtual string CreateSerializationString(string inputVariable, IType type, string outputVariable)
         {
             var builder = new IndentedStringBuilder("  ");
 
@@ -195,10 +196,9 @@ namespace Microsoft.Rest.Generator.Ruby
             string serializationLogic = type.SerializeType(this.Scope, inputVariable);
 
             builder.AppendLine(serializationLogic);
-            builder.AppendLine("request_content = {0}", inputVariable);
 
             // After that - generate JSON object after serializing each component.
-            return builder.AppendLine("{0} = JSON.generate(request_content, quirks_mode: true)", outputVariable).ToString();
+            return builder.AppendLine("{0} = JSON.generate({1}, quirks_mode: true)", outputVariable, inputVariable).ToString();
         }
 
         /// <summary>

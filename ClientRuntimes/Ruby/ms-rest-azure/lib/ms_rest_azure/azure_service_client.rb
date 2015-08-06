@@ -23,7 +23,7 @@ module MsRestAzure
     # @param get_operation_block [Proc] custom method for polling.
     # @param custom_headers [Hash] custom HTTP headers to apply to HTTP requests.
     #
-    # @return [Concurrent::Promise] promise to return response from Azure service.
+    # @return [MsRest::HttpOperationResponse] the response.
     def get_put_operation_result(azure_response, get_operation_block, custom_headers, custom_deserialization_block)
       fail CloudError if azure_response.nil?
       fail CloudError if get_operation_block.nil?
@@ -64,19 +64,15 @@ module MsRestAzure
         fail polling_error if polling_error.is_a?(Exception)
       end
 
-      promise = Concurrent::Promise.new do
-        if (AsyncOperationStatus.is_successful_status(polling_state.status) && polling_state.resource.nil?)
-          update_state_from_get_resource_operation(get_operation_block, polling_state)
-        end
-
-        if (AsyncOperationStatus.is_failed_status(polling_state.status))
-          fail CloudError # TODO: proper error
-        end
-
-        polling_state.get_operation_response
+      if (AsyncOperationStatus.is_successful_status(polling_state.status) && polling_state.resource.nil?)
+        update_state_from_get_resource_operation(get_operation_block, polling_state)
       end
 
-      promise.execute
+      if (AsyncOperationStatus.is_failed_status(polling_state.status))
+        fail CloudError # TODO: proper error
+      end
+
+      return polling_state.get_operation_response
     end
 
     #
@@ -85,7 +81,7 @@ module MsRestAzure
     # @param custom_headers [Proc] custom method for polling.
     # @param custom_deserialization_block [Proc] custom logic for response deserialization.
     #
-    # @return [Concurrent::Promise] promise to return response from Azure service.
+    # @return [MsRest::HttpOperationResponse] the response.
     def get_post_or_delete_operation_result(azure_response, custom_headers, custom_deserialization_block)
       fail CloudError if azure_response.nil?
       fail CloudError if azure_response.response.nil?
@@ -127,15 +123,11 @@ module MsRestAzure
         fail polling_error if polling_error.is_a?(Exception)
       end
 
-      promise = Concurrent::Promise.new do
-        if (AsyncOperationStatus.is_failed_status(polling_state.status))
-          fail CloudError # TODO: proper error
-        end
-
-        polling_state.get_operation_response
+      if (AsyncOperationStatus.is_failed_status(polling_state.status))
+        fail CloudError # TODO: proper error
       end
 
-      promise.execute
+      return polling_state.get_operation_response
     end
 
     #
@@ -166,7 +158,7 @@ module MsRestAzure
     # @param custom_headers [Hash] custom headers to apply to HTTP request.
     # @param custom_deserialization_block [Proc] custom deserialization method for parsing response.
     def update_state_from_location_header_on_put(polling_state, custom_headers, custom_deserialization_block)
-      result = get_async_with_custom_deserialization(polling_state.location_header_link, custom_headers, custom_deserialization_block).value!
+      result = get_async_with_custom_deserialization(polling_state.location_header_link, custom_headers, custom_deserialization_block)
 
       polling_state.update_response(result.response)
       polling_state.request = result.response
@@ -196,7 +188,7 @@ module MsRestAzure
     # @param polling_state [MsRestAzure::PollingState] polling state.
     # @param custom_headers [Hash] custom headers to apply to HTTP request.
     def update_state_from_azure_async_operation_header(polling_state, custom_headers)
-      result = get_async_with_async_operation_deserialization(polling_state.azure_async_operation_header_link, custom_headers).value!
+      result = get_async_with_async_operation_deserialization(polling_state.azure_async_operation_header_link, custom_headers)
 
       # TODO elaborate error
       fail CloudError if (result.body.nil? || result.body.status.nil?)
@@ -215,7 +207,7 @@ module MsRestAzure
     # @param custom_headers [Hash] custom headers to apply to HTTP requests.
     # @param custom_deserialization_block [Proc] custom deserialization method for parsing response.
     def update_state_from_location_header_on_post_or_delete(polling_state, custom_headers, custom_deserialization_block)
-      result = get_async_with_custom_deserialization(polling_state.location_header_link, custom_headers, custom_deserialization_block).value!
+      result = get_async_with_custom_deserialization(polling_state.location_header_link, custom_headers, custom_deserialization_block)
 
       polling_state.update_response(result.response)
       # TODO: adding response instead of request since Faraday doesn't provide request object.
@@ -239,21 +231,17 @@ module MsRestAzure
     #
     # @return [MsRest::HttpOperationResponse] the response.
     def get_async_with_custom_deserialization(operation_url, custom_headers, custom_deserialization_block)
-      promise = get_async_common(operation_url, custom_headers)
+      result = get_async_common(operation_url, custom_headers)
 
-      promise = promise.then do |result|
-        if (!result.body.nil? && !custom_deserialization_block.nil?)
-          begin
-            result.body = custom_deserialization_block.call(result.body)
-          rescue Exception => e
-            fail MsRest::DeserializationError.new("Error occured in deserializing the response", e.message, e.backtrace, http_response.body)
-          end
+      if (!result.body.nil? && !custom_deserialization_block.nil?)
+        begin
+          result.body = custom_deserialization_block.call(result.body)
+        rescue Exception => e
+          fail MsRest::DeserializationError.new("Error occured in deserializing the response", e.message, e.backtrace, http_response.body)
         end
-
-        result
       end
 
-      promise.execute
+      result
     end
 
     #
@@ -263,14 +251,10 @@ module MsRestAzure
     #
     # @return [MsRest::HttpOperationResponse] the response.
     def get_async_with_async_operation_deserialization(operation_url, custom_headers)
-      promise = get_async_common(operation_url, custom_headers)
+      result = get_async_common(operation_url, custom_headers)
 
-      promise = promise.then do |result|
-        result.body = AsyncOperationStatus.deserialize_object(result.body)
-        result
-      end
-
-      promise.execute
+      result.body = AsyncOperationStatus.deserialize_object(result.body)
+      result
     end
 
     #
@@ -306,32 +290,26 @@ module MsRestAzure
       end
 
       # Send Request
-      promise = Concurrent::Promise.new do
-        connection.get do |request|
-          request.headers = request_headers
-          @credentials.sign_request(request) unless @credentials.nil?
-        end
+      http_response = connection.get do |request|
+        request.headers = request_headers
+        @credentials.sign_request(request) unless @credentials.nil?
       end
 
-      promise = promise.then do |http_response|
-        status_code = http_response.status
+      status_code = http_response.status
 
-        if (status_code != 200 && status_code != 201 && status_code != 202 && status_code != 204)
-          fail CloudError
-        end
-
-        result = MsRest::HttpOperationResponse.new(http_response, http_response, http_response.body)
-
-        begin
-          result.body = JSON.load(http_response.body) unless http_response.body.to_s.empty?
-        rescue Exception => e
-          fail MsRest::DeserializationError.new("Error occured in deserializing the response", e.message, e.backtrace, http_response.body)
-        end
-
-        result
+      if (status_code != 200 && status_code != 201 && status_code != 202 && status_code != 204)
+        fail CloudError
       end
 
-      promise
+      result = MsRest::HttpOperationResponse.new(http_response, http_response, http_response.body)
+
+      begin
+        result.body = JSON.load(http_response.body) unless http_response.body.to_s.empty?
+      rescue Exception => e
+        fail MsRest::DeserializationError.new("Error occured in deserializing the response", e.message, e.backtrace, http_response.body)
+      end
+
+      result
     end
   end
 

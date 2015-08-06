@@ -17,19 +17,26 @@ else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.D
 {
 @:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
 }
-@WrapComment("# ", string.Format("@return [{0}] TODO: add text", "TODO: add type"))
+@WrapComment("# ", "@return [Concurrent::Promise] promise which provides async access to http response.")
 #
 def @(Model.Name)(@(Model.MethodParameterDeclaration))
   # Send request
-  response = begin_@(Model.Name)(@(Model.MethodParameterDeclaration)).value!
+  promise = begin_@(Model.Name)(@(Model.MethodParameterDeclaration))
   @EmptyLine
-  # Defining deserialization method.
-  deserialize_method = lambda do |parsed_response|
-    @(Model.DeserializePollingResponse("parsed_response", Model.ReturnType))
+
+  promise = promise.then do |response|
+    # Defining deserialization method.
+    deserialize_method = lambda do |parsed_response|
+      @(Model.DeserializePollingResponse("parsed_response", Model.ReturnType))
+    end
+
+   @EmptyLine
+   # Waiting for response.
+   @(Model.ClientReference).get_post_or_delete_operation_result(response, nil, deserialize_method)
   end
+
   @EmptyLine
-  # Waiting for response.
-  return @(Model.ClientReference).get_post_or_delete_operation_result(response, nil, deserialize_method)
+  promise
 end
 </text>
 }
@@ -42,22 +49,31 @@ else
 {
 @:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
 }
-@WrapComment("# ", string.Format("@return [{0}] TODO: add text", "TODO: add type"))
+#
+@WrapComment("# ", "@return [Concurrent::Promise] promise which provides async access to http response.")
 #
 def @(Model.Name)(@(Model.MethodParameterDeclaration))
   # Send request
-  response = begin_@(Model.Name)(@(Model.MethodParameterDeclaration)).value!
+  promise = begin_@(Model.Name)(@(Model.MethodParameterDeclaration))
   @EmptyLine
-  # Defining polling method.
-  get_method = lambda { self.@(Model.GetMethod.Name)(@(Model.GetMethod.MethodParameterDeclaration)) }
-  @EmptyLine
-  # Defining deserialization method.
-  deserialize_method = lambda do |parsed_response|
-    @(Model.DeserializePollingResponse("parsed_response", Model.ReturnType))
+
+  promise = promise.then do |response|
+    # Defining polling method.
+    get_method = lambda { self.@(Model.GetMethod.Name)(@(Model.GetMethod.MethodParameterDeclaration)) }
+    @EmptyLine
+
+    # Defining deserialization method.
+    deserialize_method = lambda do |parsed_response|
+      @(Model.DeserializePollingResponse("parsed_response", Model.ReturnType))
+    end
+
+    @EmptyLine
+    # Waiting for response.
+    @(Model.ClientReference).get_put_operation_result(response, get_method, nil, deserialize_method)
   end
+
   @EmptyLine
-  # Waiting for response.
-  return @(Model.ClientReference).get_put_operation_result(response, get_method, nil, deserialize_method)
+  promise
 end
 </text>
 }
