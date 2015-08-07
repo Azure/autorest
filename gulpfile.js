@@ -188,7 +188,7 @@ gulp.task('syncDependencies:nugetProj', function() {
       return path.dirname(filePath);
     });
 
-  gulp.src(dirs.map(function(dir) {
+  return gulp.src(dirs.map(function (dir) {
       return path.join(dir, '/**/AssemblyInfo.cs');
     }), {
       base: './'
@@ -196,7 +196,7 @@ gulp.task('syncDependencies:nugetProj', function() {
     .pipe(nugetProjSync({
       default_version: DEFAULT_ASSEMBLY_VERSION
     }))
-    .pipe(gulp.dest('.'))
+    .pipe(gulp.dest('.'));
 })
 
 gulp.task('syncDependencies:nuspec', function() {
@@ -205,13 +205,13 @@ gulp.task('syncDependencies:nuspec', function() {
       return path.dirname(filePath);
     });
 
-  gulp.src(dirs.map(function(dir) {
+  return gulp.src(dirs.map(function (dir) {
       return path.join(dir, '/**/*.nuspec');
     }), {
       base: './'
     })
     .pipe(nuspecSync())
-    .pipe(gulp.dest('.'))
+    .pipe(gulp.dest('.'));
 });
 
 gulp.task('syncDependencies:runtime', ['syncDependencies:runtime:cs', 'syncDependencies:runtime:csazure', 'syncDependencies:runtime:node', 'syncDependencies:runtime:nodeazure']);
