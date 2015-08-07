@@ -1,0 +1,69 @@
+﻿@using System.Linq
+@using System.Collections.Generic
+@using Microsoft.Rest.Generator.ClientModel
+@using Microsoft.Rest.Generator.Java.TemplateModels
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.ModelTemplateModel>
+'use strict';
+@EmptyLine
+var util = require('util');
+@EmptyLine
+var models = require('./index');
+@EmptyLine
+/**
+ * @@class
+ * Initializes a new instance of the @(Model.Name) class.
+ * @@constructor
+ */
+function @(Model.Name)() { }
+@EmptyLine
+/**
+ * Validate the payload against the @Model.Name schema
+ *
+ * @@param {JSON} payload
+ *
+ */
+@(Model.Name).prototype.validate = function (payload) {
+  if (!payload) {
+    throw new Error('@(Model.Name) cannot be null.');
+  }
+  @{
+  var propertyList = new List<Property>(Model.ComposedProperties);
+  for (int i = 0; i < propertyList.Count; i++)
+  {
+  @:@(Model.ValidateProperty("payload", propertyList[i]))
+  if (i != propertyList.Count-1)
+  {
+  @EmptyLine
+  }
+  }
+}
+};
+@EmptyLine
+/**
+ * Deserialize the instance to @Model.Name schema
+ *
+ * @@param {JSON} instance
+ *
+ */
+@(Model.Name).prototype.deserialize = function (instance) {
+  @{
+  var specialProperties = Model.SpecialProperties;
+  if (specialProperties.Count() > 0)
+  {
+  @:if (instance) {
+    var specialPropertyList = new List<Property>(Model.SpecialProperties);
+    for (int i = 0; i < specialPropertyList.Count; i++)
+    {
+    @:@(Model.DeserializeProperty("instance", specialPropertyList[i]))
+    if (i != specialPropertyList.Count - 1)
+    {
+    @EmptyLine
+    }
+    }
+  @:}
+  }
+  @:return instance;
+  }
+};
+@EmptyLine
+module.exports = new @(Model.Name)();

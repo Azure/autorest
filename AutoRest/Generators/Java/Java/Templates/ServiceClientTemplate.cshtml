@@ -1,0 +1,95 @@
+﻿@using Microsoft.Rest.Generator.Java
+@using Microsoft.Rest.Generator.Java.Templates
+@using Microsoft.Rest.Generator.Utilities
+@using System.Linq
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.ServiceClientTemplateModel>
+@Header("// ")
+/* jshint latedef:false */
+/* jshint forin:false */
+/* jshint noempty:false */
+@EmptyLine
+'use strict';
+@EmptyLine
+var util = require('util');
+var msRest = require('ms-rest');
+var ServiceClient = msRest.ServiceClient;
+var WebResource = msRest.WebResource;
+
+@EmptyLine
+@if (Model.ModelTypes.Any())
+{
+@:var models = require('./models');
+}
+@if (Model.MethodGroups.Any())
+{
+@:var operations = require('./operations');
+}
+@EmptyLine
+@{var parameters = Model.Properties.Where(p => p.IsRequired);}
+/**
+ * @@class
+ * Initializes a new instance of the @Model.Name class.
+ * @@constructor
+ *
+@foreach (var param in parameters)
+{
+@: * @@param {@param.Type.Name} @param.Name @param.Documentation
+@: *
+}
+ * @@param {string} [baseUri] - The base URI of the service.
+ *
+ * @@param {object} [options] - The parameter options
+ *
+ * @@param {Array} [options.filters] - Filters to be added to the request pipeline
+ *
+ * @@param {object} [options.requestOptions] - Options for the underlying request object
+ * {@@link https://github.com/request/request#requestoptions-callback Options doc}
+ *
+ * @@param {bool} [options.noRetryPolicy] - If set to true, turn off default retry policy
+ */
+function @(Model.Name)(@(Model.RequiredConstructorParameters), options) {
+@foreach (var param in parameters)
+{
+@:  if (@(param.Name) === null || @(param.Name) === undefined) {
+@:    throw new Error('\'@(param.Name)\' cannot be null.');
+@:  }
+}
+  @EmptyLine
+  if (!options) options = {};
+  @EmptyLine
+  @(Model.Name)['super_'].call(this, @(parameters.Any(p => p.Name == "credentials") ? "credentials" : "null"), options);
+  this.baseUri = baseUri;
+  if (!this.baseUri) {
+    this.baseUri = '@Model.BaseUrl';
+  }
+@foreach (var param in parameters)
+{
+@:  this.@(param.Name) = @(param.Name);
+}
+  @EmptyLine
+  @foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
+  {
+  @:if(!this.@(property.Name)) { 
+  @:  this.@(property.Name) = @(property.DefaultValue);
+  @:}
+  }
+  
+  @foreach (var methodGroup in Model.MethodGroupModels)
+  {
+  @:this.@(methodGroup.MethodGroupName) = new operations.@(methodGroup.MethodGroupType)(this);
+  }
+  
+  @if (Model.ModelTypes.Any())
+  {
+  @:this._models = models;
+  }
+}
+@EmptyLine
+util.inherits(@Model.Name, ServiceClient);
+@foreach (var method in Model.MethodTemplateModels)
+{
+@EmptyLine
+@:@(Include(new MethodTemplate(), method))
+}
+@EmptyLine
+module.exports = @Model.Name;
