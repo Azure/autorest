@@ -13,18 +13,23 @@ module MsRestAzure
     # @param [String] body the HTTP response body.
     # @param [String] error message.
     def initialize(*args)
-      if (args.size == 1)
+      if args.size == 1
         # When only message is provided.
         @message = args[0]
-      elsif (args.size == 3)
+      elsif args.size == 2
+        # When only request and response provided, body is nil.
+        request = args[0]
+        response = args[1]
+        super(request, response, nil)
+      elsif args.size == 3
         # When request, response and body were provided.
         super(*args)
-      elsif (args.size == 4)
+      elsif args.size == 4
         # When request, response, body and message were provided.
         super(*args[0...-1])
         @message = args[3]
       else
-        fail ArgumentError, 'Invalid number of arguments was provided to AzureOperationError, valid number: 1, 3 or 4'
+        fail ArgumentError, 'Invalid number of arguments was provided to AzureOperationError, valid number: 1, 2, 3 or 4'
       end
     end
   end

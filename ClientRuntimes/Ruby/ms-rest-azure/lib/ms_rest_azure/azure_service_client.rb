@@ -277,7 +277,6 @@ module MsRestAzure
       # Create HTTP transport object
       connection = Faraday.new(:url => url) do |faraday|
         faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use MsRestAzure::TokenRefreshMiddleware, credentials: @credentials
         faraday.use :cookie_jar
         faraday.adapter Faraday.default_adapter
       end

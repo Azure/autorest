@@ -159,19 +159,6 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
         }
 
         /// <summary>
-        /// Esnures that required and optional are correctly set on parameters based on their location
-        /// </summary>
-        /// <param name="parameter">The parameter to check</param>
-        /// <returns>The updated parameter</returns>
-        public static Parameter SetRequiredOptional(this Parameter parameter)
-        {
-            parameter.IsRequired = parameter.IsRequired ||
-                                   (parameter.Location == ParameterLocation.Path ||
-                                    parameter.Location == ParameterLocation.Body);
-            return parameter;
-        }
-
-        /// <summary>
         /// Generats null check instruction.
         /// </summary>
         /// <param name="valueReference">Object for null check.</param>

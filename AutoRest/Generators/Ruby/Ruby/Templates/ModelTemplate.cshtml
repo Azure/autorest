@@ -67,10 +67,6 @@ module @(Settings.Namespace)
         {
         @EmptyLine
         @:serialized_property = @("object." + property.Name)
-        if (property.IsRequired)
-        {
-        @:fail ArgumentError, 'property @property.Name is nil' if serialized_property.nil?
-        }
         @:@Model.SerializeProperty("serialized_property", property.Type)
         @:output_object['@(property.SerializedName)'] = serialized_property unless serialized_property.nil?
         }

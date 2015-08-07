@@ -6,6 +6,8 @@ require 'openssl'
 require 'net/http'
 require 'ms_rest/version'
 
+require 'ms_rest/credentials/token_provider'
+require 'ms_rest/credentials/string_token_provider'
 require 'ms_rest/credentials/service_client_credentials'
 require 'ms_rest/credentials/basic_authentication_credentials'
 require 'ms_rest/credentials/token_credentials'
