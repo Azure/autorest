@@ -83,7 +83,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                             Type = propertyType,
                             IsRequired = property.Value.IsRequired
                         };
-                        SetContraints(propertyObj.Constraints, property.Value);
+                        SetConstraints(propertyObj.Constraints, property.Value);
 
                         //propertyObj.Type = objectType;
                         propertyObj.Documentation = property.Value.Description;

@@ -121,8 +121,17 @@ namespace Microsoft.Rest.Modeler.Swagger
             return type;
         }
 
-        public static void SetContraints(Dictionary<Constraint, string> constraints, SwaggerObject swaggerObject)
+        public static void SetConstraints(Dictionary<Constraint, string> constraints, SwaggerObject swaggerObject)
         {
+            if (constraints == null)
+            {
+                throw new ArgumentNullException("constraints");
+            }
+            if (swaggerObject == null)
+            {
+                throw new ArgumentNullException("swaggerObject");
+            }
+
             if (!string.IsNullOrEmpty(swaggerObject.Maximum) && !swaggerObject.ExclusiveMaximum)
             {
                 constraints[Constraint.InclusiveMaximum] = swaggerObject.Maximum;

@@ -56,7 +56,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 Location = (Generator.ClientModel.ParameterLocation)Enum.Parse(typeof(Generator.ClientModel.ParameterLocation), unwrappedParameter.In.ToString())
             };
             parameter.IsRequired = parameter.IsRequired || parameter.Location == Generator.ClientModel.ParameterLocation.Path;
-            SetContraints(parameter.Constraints, unwrappedParameter);
+            SetConstraints(parameter.Constraints, unwrappedParameter);
 
             parameter.CollectionFormat = unwrappedParameter.CollectionFormat;
             parameter.Documentation = unwrappedParameter.Description;
