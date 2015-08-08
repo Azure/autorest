@@ -33,6 +33,7 @@ using Fixtures.AcceptanceTestsUrl.Models;
 using Fixtures.AcceptanceTestsHeader;
 using Fixtures.AcceptanceTestsHeader.Models;
 using Fixtures.AcceptanceTestsRequiredOptional;
+using Fixtures.AcceptanceTestsValidation;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger.Tests;
 using Newtonsoft.Json;
@@ -62,6 +63,68 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         private static string SwaggerPath(string file)
         {
             return Path.Combine("Swagger", file);
+        }
+
+        [Fact]
+        public void ValidationTests()
+        {
+            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+                SwaggerPath("validation.json"),
+                ExpectedPath("Validation"));
+            var client = new AutoRestValidationTest(Fixture.Uri)
+            {
+                SubscriptionId = "abc123",
+                ApiVersion = "12-34-5678"
+            };
+            var exception = Assert.Throws<ValidationException>(() => client.ValidationOfMethodParameters("1", 100));
+            Assert.Equal(ValidationRules.MinimumLength, exception.Rule);
+            Assert.Equal("resourceGroupName", exception.Target);
+            exception = Assert.Throws<ValidationException>(() => client.ValidationOfMethodParameters("1234567890A", 100));
+            Assert.Equal(ValidationRules.MaximumLength, exception.Rule);
+            Assert.Equal("resourceGroupName", exception.Target);
+            exception = Assert.Throws<ValidationException>(() => client.ValidationOfMethodParameters("!@#$", 100));
+            Assert.Equal(ValidationRules.Pattern, exception.Rule);
+            Assert.Equal("resourceGroupName", exception.Target);
+            exception = Assert.Throws<ValidationException>(() => client.ValidationOfMethodParameters("123", 5));
+            Assert.Equal(ValidationRules.MultipleOf, exception.Rule);
+            Assert.Equal("id", exception.Target);
+            exception = Assert.Throws<ValidationException>(() => client.ValidationOfMethodParameters("123", 0));
+            Assert.Equal(ValidationRules.Minimum, exception.Rule);
+            Assert.Equal("id", exception.Target);
+            exception = Assert.Throws<ValidationException>(() => client.ValidationOfMethodParameters("123", 200));
+            Assert.Equal(ValidationRules.Maximum, exception.Rule);
+            Assert.Equal("id", exception.Target);
+
+            exception = Assert.Throws<ValidationException>(() => client.ValidationOfBody("123", 50, new Fixtures.AcceptanceTestsValidation.Models.Product
+            {
+                Capacity = 0
+            }));
+            Assert.Equal(ValidationRules.ExclusiveMinimum, exception.Rule);
+            Assert.Equal("Capacity", exception.Target);
+            exception = Assert.Throws<ValidationException>(() => client.ValidationOfBody("123", 50, new Fixtures.AcceptanceTestsValidation.Models.Product
+            {
+                Capacity = 100
+            }));
+            Assert.Equal(ValidationRules.ExclusiveMaximum, exception.Rule);
+            Assert.Equal("Capacity", exception.Target);
+            exception = Assert.Throws<ValidationException>(() => client.ValidationOfBody("123", 50, new Fixtures.AcceptanceTestsValidation.Models.Product
+            {
+                DisplayNames = new List<string>
+                {
+                    "item1","item2","item3","item4","item5","item6","item7"
+                }
+            }));
+            Assert.Equal(ValidationRules.MaximumItems, exception.Rule);
+            Assert.Equal("DisplayNames", exception.Target);
+
+            var client2 = new AutoRestValidationTest(Fixture.Uri)
+            {
+                SubscriptionId = "abc123",
+                ApiVersion = "abc"
+            };
+            exception = Assert.Throws<ValidationException>(() => client.ValidationOfMethodParameters("123", 50));
+            Assert.Equal(ValidationRules.Pattern, exception.Rule);
+            Assert.Equal("ApiVersion", exception.Target);
         }
 
         [Fact]

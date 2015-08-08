@@ -1,0 +1,186 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutoRest Validation Test",
+    "description": "Test Infrastructure for AutoRest. No server backend exists for these tests.",
+    "version": "1.0.0"
+  },
+  "host": "localhost",
+  "schemes": [
+    "http"
+  ],
+  "produces": [ "application/json" ],
+  "consumes": [ "application/json" ],
+  "paths": {
+    "/fakepath/{subscriptionId}/{resourceGroupName}/{id}?api-version={apiVersion}": {
+      "get": {
+        "operationId": "validationOfMethodParameters",
+        "summary": "",
+        "description": "Validates input parameters on the method. See swagger for details.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParamterer"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.",
+            "required": true,
+            "type": "string",
+            "maxLength": 10,
+            "minLength": 3,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Required int multiple of 10 from 100 to 1000.",
+            "required": true,
+            "type": "integer",
+            "multipleOf": 10,
+            "maximum": 1000,
+            "minimum": 100
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "tags": [
+          "Redis"
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of caches",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "validationOfBody",
+        "summary": "",
+        "description": "Validates body parameters on the method. See swagger for details.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParamterer"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.",
+            "required": true,
+            "type": "string",
+            "maxLength": 10,
+            "minLength": 3,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Required int multiple of 10 from 100 to 1000.",
+            "required": true,
+            "type": "integer",
+            "multipleOf": 10,
+            "maximum": 1000,
+            "minimum": 100
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "tags": [
+          "Redis"
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of caches",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Product": {
+      "description": "The product documentation.",
+      "properties": {
+        "display_names": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Non required array of unique items from 0 to 6 elements.",
+          "maxItems": 6,
+          "uniqueItems": true,
+          "minItems": 0
+        },
+        "capacity": {
+          "type": "integer",
+          "description": "Non required int betwen 0 and 100 exclusive.",
+          "exclusiveMinimum": true,
+          "exclusiveMaximum": true,
+          "maximum": 100,
+          "minimum": 0
+        },
+        "image": {
+          "type": "string",
+          "description": "Image URL representing the product.",
+          "pattern": "http://\\w+"
+        }
+      }
+    },
+    "Error": {
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParamterer": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "ApiVersionParameter": {
+      "name": "apiVersion",
+      "in": "query",
+      "description": "Required string following pattern \\d{2}-\\d{2}-\\d{4}",
+      "required": true,
+      "type": "string",
+      "pattern": "\\d{2}-\\d{2}-\\d{4}"
+    }
+  }
+}
