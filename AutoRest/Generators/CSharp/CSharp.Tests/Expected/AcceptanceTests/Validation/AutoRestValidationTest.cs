@@ -178,7 +178,15 @@ namespace Fixtures.AcceptanceTestsValidation
             url = url.Replace("{subscriptionId}", Uri.EscapeDataString(this.SubscriptionId));
             url = url.Replace("{resourceGroupName}", Uri.EscapeDataString(resourceGroupName));
             url = url.Replace("{id}", Uri.EscapeDataString(JsonConvert.SerializeObject(id, this.SerializationSettings).Trim('"')));
-            url = url.Replace("{apiVersion}", Uri.EscapeDataString(this.ApiVersion));
+            List<string> queryParameters = new List<string>();
+            if (this.ApiVersion != null)
+            {
+                queryParameters.Add(string.Format("apiVersion={0}", Uri.EscapeDataString(this.ApiVersion)));
+            }
+            if (queryParameters.Count > 0)
+            {
+                url += "?" + string.Join("&", queryParameters);
+            }
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -296,7 +304,15 @@ namespace Fixtures.AcceptanceTestsValidation
             url = url.Replace("{subscriptionId}", Uri.EscapeDataString(this.SubscriptionId));
             url = url.Replace("{resourceGroupName}", Uri.EscapeDataString(resourceGroupName));
             url = url.Replace("{id}", Uri.EscapeDataString(JsonConvert.SerializeObject(id, this.SerializationSettings).Trim('"')));
-            url = url.Replace("{apiVersion}", Uri.EscapeDataString(this.ApiVersion));
+            List<string> queryParameters = new List<string>();
+            if (this.ApiVersion != null)
+            {
+                queryParameters.Add(string.Format("apiVersion={0}", Uri.EscapeDataString(this.ApiVersion)));
+            }
+            if (queryParameters.Count > 0)
+            {
+                url += "?" + string.Join("&", queryParameters);
+            }
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");

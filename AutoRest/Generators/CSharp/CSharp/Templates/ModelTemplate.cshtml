@@ -65,7 +65,7 @@ namespace @(Settings.Namespace).Models
             foreach (var property in Model.Properties.Where(p => !(p.Type is PrimaryType)))
             {
                 anythingToValidate = true;
-            @:@property.Type.ValidateType(Model.Scope, string.Format("this.{0}", property.Name))
+            @:@property.Type.ValidateType(Model.Scope, string.Format("this.{0}", property.Name), property.Constraints)
             @:
             }
             if (!anythingToValidate)

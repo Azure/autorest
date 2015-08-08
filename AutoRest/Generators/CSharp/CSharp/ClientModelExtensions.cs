@@ -229,8 +229,10 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
         /// <param name="type">The type to validate</param>
         /// <param name="scope">A scope provider for generating variable names as necessary</param>
         /// <param name="valueReference">A reference to the value being validated</param>
+        /// <param name="constraints">Constraints</param>
         /// <returns>The code to validate the reference of the given type</returns>
-        public static string ValidateType(this IType type, IScopeProvider scope, string valueReference)
+        public static string ValidateType(this IType type, IScopeProvider scope, string valueReference, 
+            Dictionary<Constraint, string> constraints)
         {
             if (scope == null)
             {
@@ -240,42 +242,42 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
             CompositeType model = type as CompositeType;
             SequenceType sequence = type as SequenceType;
             DictionaryType dictionary = type as DictionaryType;
+
+            var sb = new IndentedStringBuilder();
+
             if (model != null && model.ShouldValidateChain())
             {
-                return CheckNull(valueReference, string.Format(CultureInfo.InvariantCulture, 
-                    "{0}.Validate();", valueReference));
+                sb.AppendLine("{0}.Validate();", valueReference);
             }
+
             if (sequence != null && sequence.ShouldValidateChain())
             {
                 var elementVar = scope.GetVariableName("element");
-                var innerValidation = sequence.ElementType.ValidateType(scope, elementVar);
+                var innerValidation = sequence.ElementType.ValidateType(scope, elementVar, null);
                 if (!string.IsNullOrEmpty(innerValidation))
                 {
-                    var sb = new IndentedStringBuilder();
                     sb.AppendLine("foreach (var {0} in {1})", elementVar, valueReference)
-                        .AppendLine("{").Indent()
-                            .AppendLine(innerValidation).Outdent()
-                        .AppendLine("}");
-                    return CheckNull(valueReference, sb.ToString());
+                       .AppendLine("{").Indent()
+                           .AppendLine(innerValidation).Outdent()
+                       .AppendLine("}");
                 }
             }
             else if (dictionary != null && dictionary.ShouldValidateChain())
             {
                 var valueVar = scope.GetVariableName("valueElement");
-                var innerValidation = dictionary.ValueType.ValidateType(scope, valueVar);
+                var innerValidation = dictionary.ValueType.ValidateType(scope, valueVar, null);
                 if (!string.IsNullOrEmpty(innerValidation))
                 {
-                    var sb = new IndentedStringBuilder();
-                    sb.AppendLine("if ({0} != null)", valueReference)
-                        .AppendLine("{").Indent()
-                            .AppendLine("foreach (var {0} in {1}.Values)",valueVar,valueReference)
-                            .AppendLine("{").Indent()
-                                .AppendLine(innerValidation).Outdent()
-                            .AppendLine("}").Outdent()
-                        .AppendLine("}");
-
-                    return CheckNull(valueReference, sb.ToString());
+                    sb.AppendLine("foreach (var {0} in {1}.Values)", valueVar, valueReference)
+                      .AppendLine("{").Indent()
+                          .AppendLine(innerValidation).Outdent()
+                      .AppendLine("}").Outdent();
                 }
+            }
+
+            if (sb.ToString().Trim().Length > 0)
+            {
+                return CheckNull(valueReference, sb.ToString());
             }
 
             return null;
