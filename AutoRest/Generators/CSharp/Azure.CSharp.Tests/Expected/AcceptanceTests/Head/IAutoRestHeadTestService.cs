@@ -15,7 +15,6 @@ namespace Fixtures.Azure.AcceptanceTestsHead
     using System.Threading.Tasks;
     using Newtonsoft.Json;
     using Microsoft.Rest;
-    using System.Linq;
     using Microsoft.Rest.Azure;
 
     /// <summary>

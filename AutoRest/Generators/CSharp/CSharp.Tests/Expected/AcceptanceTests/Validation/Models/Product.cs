@@ -9,6 +9,7 @@
 namespace Fixtures.AcceptanceTestsValidation.Models
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using Newtonsoft.Json;
     using Microsoft.Rest;
@@ -37,5 +38,44 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         [JsonProperty(PropertyName = "image")]
         public string Image { get; set; }
 
+        /// <summary>
+        /// Validate the object. Throws ArgumentException or ArgumentNullException if validation fails.
+        /// </summary>
+        public virtual void Validate()
+        {
+            if (this.DisplayNames != null)
+            {
+                if (this.DisplayNames.Count > 6)
+                {
+                    throw new ValidationException(ValidationRules.MaxItems, "DisplayNames", 6);
+                }
+                if (this.DisplayNames.Count < 0)
+                {
+                    throw new ValidationException(ValidationRules.MinItems, "DisplayNames", 0);
+                }
+                if (this.DisplayNames.Count != this.DisplayNames.Distinct().Count())
+                {
+                    throw new ValidationException(ValidationRules.UniqueItems, "DisplayNames");
+                }
+            }
+            if (this.Capacity != null)
+            {
+                if (this.Capacity >= 100)
+                {
+                    throw new ValidationException(ValidationRules.ExclusiveMaximum, "Capacity", 100);
+                }
+                if (this.Capacity <= 0)
+                {
+                    throw new ValidationException(ValidationRules.ExclusiveMinimum, "Capacity", 0);
+                }
+            }
+            if (this.Image != null)
+            {
+                if (!System.Text.RegularExpressions.Regex.IsMatch(this.Image, "http://\\w+"))
+                {
+                    throw new ValidationException(ValidationRules.Pattern, "Image", "http://\\w+");
+                }
+            }
+        }
     }
 }

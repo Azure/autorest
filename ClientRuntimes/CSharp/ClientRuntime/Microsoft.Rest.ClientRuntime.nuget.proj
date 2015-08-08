@@ -5,7 +5,7 @@
     Microsoft.Rest.ClientRuntime
     -->
     <SdkNuGetPackage Include="Microsoft.Rest.ClientRuntime">
-      <PackageVersion>1.2.0</PackageVersion>
+      <PackageVersion>1.3.0</PackageVersion>
       <Folder>ClientRuntimes/CSharp/ClientRuntime/</Folder>
       <Name>Microsoft.Rest.ClientRuntime</Name>
     </SdkNuGetPackage>

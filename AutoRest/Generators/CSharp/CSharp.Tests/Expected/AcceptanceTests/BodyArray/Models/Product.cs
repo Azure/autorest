@@ -9,6 +9,7 @@
 namespace Fixtures.AcceptanceTestsBodyArray.Models
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using Newtonsoft.Json;
     using Microsoft.Rest;

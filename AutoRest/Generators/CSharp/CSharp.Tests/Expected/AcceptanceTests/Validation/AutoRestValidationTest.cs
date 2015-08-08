@@ -9,6 +9,7 @@
 namespace Fixtures.AcceptanceTestsValidation
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
@@ -153,9 +154,39 @@ namespace Fixtures.AcceptanceTestsValidation
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "resourceGroupName");
             }
+            if (resourceGroupName != null)
+            {
+                if (resourceGroupName.Length > 10)
+                {
+                    throw new ValidationException(ValidationRules.MaxLength, "resourceGroupName", 10);
+                }
+                if (resourceGroupName.Length < 3)
+                {
+                    throw new ValidationException(ValidationRules.MinLength, "resourceGroupName", 3);
+                }
+                if (!System.Text.RegularExpressions.Regex.IsMatch(resourceGroupName, "[a-zA-Z0-9]+"))
+                {
+                    throw new ValidationException(ValidationRules.Pattern, "resourceGroupName", "[a-zA-Z0-9]+");
+                }
+            }
             if (id == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "id");
+            }
+            if (id != null)
+            {
+                if (id > 1000)
+                {
+                    throw new ValidationException(ValidationRules.InclusiveMaximum, "id", 1000);
+                }
+                if (id < 100)
+                {
+                    throw new ValidationException(ValidationRules.InclusiveMinimum, "id", 100);
+                }
+                if (id % 10 != 0)
+                {
+                    throw new ValidationException(ValidationRules.MultipleOf, "id", 10);
+                }
             }
             if (this.ApiVersion == null)
             {
@@ -278,9 +309,43 @@ namespace Fixtures.AcceptanceTestsValidation
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "resourceGroupName");
             }
+            if (resourceGroupName != null)
+            {
+                if (resourceGroupName.Length > 10)
+                {
+                    throw new ValidationException(ValidationRules.MaxLength, "resourceGroupName", 10);
+                }
+                if (resourceGroupName.Length < 3)
+                {
+                    throw new ValidationException(ValidationRules.MinLength, "resourceGroupName", 3);
+                }
+                if (!System.Text.RegularExpressions.Regex.IsMatch(resourceGroupName, "[a-zA-Z0-9]+"))
+                {
+                    throw new ValidationException(ValidationRules.Pattern, "resourceGroupName", "[a-zA-Z0-9]+");
+                }
+            }
             if (id == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "id");
+            }
+            if (id != null)
+            {
+                if (id > 1000)
+                {
+                    throw new ValidationException(ValidationRules.InclusiveMaximum, "id", 1000);
+                }
+                if (id < 100)
+                {
+                    throw new ValidationException(ValidationRules.InclusiveMinimum, "id", 100);
+                }
+                if (id % 10 != 0)
+                {
+                    throw new ValidationException(ValidationRules.MultipleOf, "id", 10);
+                }
+            }
+            if (body != null)
+            {
+                body.Validate();
             }
             if (this.ApiVersion == null)
             {
