@@ -1,0 +1,9 @@
+language: csharp
+mono:
+  - nightly
+before_script:
+  - npm install
+  - gem install bundler
+  - bundle install
+script:
+  - gulp
