@@ -231,6 +231,17 @@ gulp.task('build', function(cb) {
   }));
 });
 
+gulp.task('build:release', function(cb) {
+  // warning 0219 is for unused variables, which causes the build to fail on xbuild
+  return gulp.src('build.proj').pipe(msbuild({
+    targets: ['build'],
+    stdout: process.stdout,
+    stderr: process.stderr,
+    maxBuffer: MAX_BUFFER,
+    properties: { WarningsNotAsErrors: 0219, Configuration: 'Release' }
+  }));
+});
+
 gulp.task('package', function(cb) {
   return gulp.src('build.proj').pipe(msbuild({
     targets: ['package'],
@@ -264,6 +275,8 @@ gulp.task('analysis', function(cb) {
 });
 
 gulp.task('default', function(cb){
-  // build is not called here because analysis causes a rebuild of the solutions
-  runSequence('clean', 'build', 'analysis', 'package', 'test', cb);
+  // analysis runs rebuild under the covers, so this cause build to be run in debug
+  // the build release causes release bits to be built, so we can package release dlls
+  // test then runs in debug, but uses the packages created in package
+  runSequence('clean', 'analysis', 'build:release', 'package', 'test', cb);
 });

@@ -8,7 +8,7 @@
     <ProjectGuid>{7F524559-93F9-4F3F-9E2C-AF41A0C2E6F4}</ProjectGuid>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Microsoft.Rest</RootNamespace>
-    <AssemblyName>ClientRuntime</AssemblyName>
+    <AssemblyName>Microsoft.Rest.ClientRuntime</AssemblyName>
     <OutputType>Library</OutputType>
     <RestorePackages>true</RestorePackages>
     <Configuration Condition=" '$(Configuration)' == '' ">Net45-Debug</Configuration>
