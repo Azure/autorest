@@ -78,7 +78,7 @@
 
   <PropertyGroup>
     <NuGetCommand Condition=" '$(OS)' == 'Windows_NT'">&quot;$(LibraryToolsFolder)\nuget.exe&quot;</NuGetCommand>
-    <NuGetCommand Condition=" '$(OS)' != 'Windows_NT'">mono &quot;$(LibraryToolsFolder)\nuget.exe&quot;</NuGetCommand>
+    <NuGetCommand Condition=" '$(OS)' != 'Windows_NT'">mono &quot;$(LibraryToolsFolder)\NuGet.exe&quot;</NuGetCommand>
    </PropertyGroup>
 
   <UsingTask AssemblyFile="tools\AutoRest.Build.Tasks.dll" TaskName="ValidateStrongNameSignatureTask" />
