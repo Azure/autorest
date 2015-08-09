@@ -45,7 +45,7 @@ namespace Microsoft.Rest.Generator.Java
 
         public override string ImplementationFileExtension
         {
-            get { return ".js"; }
+            get { return ".java"; }
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Microsoft.Rest.Generator.Java
         }
 
         /// <summary>
-        /// Generate NodeJS client code for given ServiceClient.
+        /// Generate Java client code for given ServiceClient.
         /// </summary>
         /// <param name="serviceClient"></param>
         /// <returns></returns>
@@ -72,41 +72,37 @@ namespace Microsoft.Rest.Generator.Java
             {
                 Model = serviceClientTemplateModel,
             };
-            await Write(serviceClientTemplate, serviceClient.Name.ToCamelCase() + ".js");
+            await Write(serviceClientTemplate, serviceClient.Name.ToPascalCase() + "Impl.java");
+
+            var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate
+            {
+                Model = serviceClientTemplateModel,
+            };
+            await Write(serviceClientInterfaceTemplate, serviceClient.Name.ToPascalCase() + ".java");
 
             //Models
             if (serviceClient.ModelTypes.Any())
             {
-                var modelIndexTemplate = new ModelIndexTemplate
-                {
-                    Model = serviceClientTemplateModel
-                };
-                await Write(modelIndexTemplate, Path.Combine("models", "index.js"));
                 foreach (var modelType in serviceClientTemplateModel.ModelTemplateModels)
                 {
                     var modelTemplate = new ModelTemplate
                     {
                         Model = modelType
                     };
-                    await Write(modelTemplate, Path.Combine("models", modelType.Name.ToCamelCase() + ".js"));
+                    await Write(modelTemplate, Path.Combine("models", modelType.Name.ToPascalCase() + ".java"));
                 }
             }
 
             //MethodGroups
             if (serviceClientTemplateModel.MethodGroupModels.Any())
             {
-                var methodGroupIndexTemplate = new MethodGroupIndexTemplate
-                {
-                    Model = serviceClientTemplateModel
-                };
-                await Write(methodGroupIndexTemplate, Path.Combine("operations", "index.js"));
                 foreach (var methodGroupModel in serviceClientTemplateModel.MethodGroupModels)
                 {
                     var methodGroupTemplate = new MethodGroupTemplate
                     {
                         Model = methodGroupModel
                     };
-                    await Write(methodGroupTemplate, Path.Combine("operations", methodGroupModel.MethodGroupType.ToCamelCase() + ".js"));
+                    await Write(methodGroupTemplate, methodGroupModel.MethodGroupType.ToPascalCase() + ".java");
                 }
             }
         }

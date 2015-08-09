@@ -21,10 +21,10 @@
     <Compile Include="$(SolutionDir)\Tools\AssemblyVersionInfo.cs">
       <Link>Properties\AssemblyVersionInfo.cs</Link>
     </Compile>
+    <Compile Include="JavaCodeGenerator.cs" />
+    <Compile Include="JavaCodeNamer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="NodeJSCodeGenerator.cs" />
-    <Compile Include="NodeJsCodeNamer.cs" />
     <Compile Include="IScopeProvider.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -53,11 +53,11 @@
     <Compile Include="Templates\MethodTemplate.cs">
       <DependentUpon>MethodTemplate.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Templates\ModelIndexTemplate.cs">
-      <DependentUpon>ModelIndexTemplate.cshtml</DependentUpon>
-    </Compile>
     <Compile Include="Templates\ModelTemplate.cs">
       <DependentUpon>ModelTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ServiceClientInterfaceTemplate.cs">
+      <DependentUpon>ServiceClientInterfaceTemplate.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Templates\ServiceClientTemplate.cs">
       <DependentUpon>ServiceClientTemplate.cshtml</DependentUpon>
@@ -66,8 +66,8 @@
     <None Include="Templates\MethodJsonPipelineTemplate.cshtml" />
     <None Include="Templates\MethodStreamPipelineTemplate.cshtml" />
     <None Include="Templates\ModelTemplate.cshtml" />
-    <None Include="Templates\ModelIndexTemplate.cshtml" />
     <None Include="Templates\MethodGroupIndexTemplate.cshtml" />
+    <None Include="Templates\ServiceClientInterfaceTemplate.cshtml" />
     <None Include="Templates\ServiceClientTemplate.cshtml" />
     <None Include="Templates\MethodTemplate.cshtml" />
   </ItemGroup>

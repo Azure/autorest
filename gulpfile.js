@@ -126,6 +126,21 @@ gulp.task('regenerate:expected:node', function(cb){
   }, cb);
 })
 
+gulp.task('regenerate:expected:java', function(cb){
+  mappings = {};
+  for (var key in defaultMappings) {
+    mappings[key.substring(16).toLowerCase()] = defaultMappings[key];
+  }
+  regenExpected({
+    'outputBaseDir': 'AutoRest/Generators/Java/Java.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'mappings': mappings,
+    'outputDir': 'src/main/java/fixtures',
+    'codeGenerator': 'Java',
+    'nsPrefix': 'Fixtures'
+  }, cb);
+})
+
 gulp.task('regenerate:expected:csazure', function(cb){
   mappings = merge_options(defaultAzureMappings);
   regenExpected({

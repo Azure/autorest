@@ -35,43 +35,22 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public string PolymorphicDictionary
+        public virtual IEnumerable<MethodGroupTemplateModel> Operations
         {
             get
             {
-                IndentedStringBuilder builder = new IndentedStringBuilder(IndentedStringBuilder.TwoSpaces);
-                var polymorphicTypes = ModelTemplateModels.Where(m => m.IsPolymorphic);
-
-                for (int i = 0; i < polymorphicTypes.Count(); i++ )
-                {
-                    builder.Append(string.Format(CultureInfo.InvariantCulture, 
-                        "'{0}' : exports.{1}",
-                            polymorphicTypes.ElementAt(i).SerializedName, 
-                            polymorphicTypes.ElementAt(i).Name));
-
-                    if(i == polymorphicTypes.Count() -1)
-                    {
-                        builder.AppendLine();
-                    }
-                    else 
-                    {
-                        builder.AppendLine(",");
-                    }
-                }
-                
-                return builder.ToString();
+                return MethodGroups.Select(mg => new MethodGroupTemplateModel(this, mg));
             }
         }
 
-        public string RequiredConstructorParameters
+        public virtual IEnumerable<string> Imports
         {
             get
             {
-                var requireParams = new List<string>();
-                this.Properties.Where(p => p.IsRequired)
-                    .ForEach(p => requireParams.Add(p.Name.ToCamelCase()));
-                requireParams.Add("baseUri");
-                return string.Join(", ", requireParams);
+                if (this.ModelTypes.Any())
+                {
+                }
+                return new List<string>();
             }
         }
     }
