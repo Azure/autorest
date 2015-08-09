@@ -223,11 +223,11 @@ gulp.task('build', function(cb) {
   // warning 0219 is for unused variables, which causes the build to fail on xbuild
   return gulp.src('build.proj').pipe(msbuild({
     targets: ['build'],
-    stdout: process.stdout, 
+    stdout: process.stdout,
     stderr: process.stderr,
     maxBuffer: MAX_BUFFER,
     errorOnFail: true,
-    properties: { WarningsNotAsErrors: 0219 }
+    properties: { WarningsNotAsErrors: 0219, Configuration: 'Debug' }
   }));
 });
 
@@ -247,7 +247,8 @@ gulp.task('test', function (cb) {
     stdout: process.stdout,
     stderr: process.stderr,
     errorOnFail: true,
-    maxBuffer: MAX_BUFFER
+    maxBuffer: MAX_BUFFER,
+    properties: { Configuration: 'Debug' }
   }));
 });
 
@@ -258,7 +259,7 @@ gulp.task('analysis', function(cb) {
     stderr: process.stderr,
     maxBuffer: MAX_BUFFER,
     errorOnFail: true,
-    properties: { WarningsNotAsErrors: 0219 }
+    properties: { WarningsNotAsErrors: 0219, Configuration: 'Debug' }
   }));
 });
 

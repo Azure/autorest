@@ -35,12 +35,6 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClientRuntime\ClientRuntime.csproj">
-      <Project>{7F524559-93F9-4F3F-9E2C-AF41A0C2E6F4}</Project>
-      <Name>ClientRuntime</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\..\Tools\CustomDictionary.xml">
       <Link>CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>
