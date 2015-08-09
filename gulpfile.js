@@ -18,7 +18,7 @@ var runSequence = require('run-sequence');
 var requireDir = require('require-dir')('./Tools/gulp');
 
 const DEFAULT_ASSEMBLY_VERSION = '0.9.0.0';
-const MAX_BUFFER = 1024 * 1024;
+const MAX_BUFFER = 1024 * 4096;
 process.env.MSBUILDDISABLENODEREUSE = 1;
 
 function basePathOrThrow() {
@@ -50,7 +50,7 @@ function runProcess(name, args, options, cb){
   });
 }
 
-function merge_options(obj1,obj2){
+function mergeOptions(obj1,obj2){
     var obj3 = {};
     for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
     for (var attrname in obj2) { obj3[attrname] = obj2[attrname]; }
@@ -128,7 +128,7 @@ gulp.task('regenerate:expected:node', function(cb){
 })
 
 gulp.task('regenerate:expected:csazure', function(cb){
-  mappings = merge_options(defaultAzureMappings);
+  mappings = mergeOptions(defaultAzureMappings);
   regenExpected({
     'outputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
     'inputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
@@ -140,7 +140,7 @@ gulp.task('regenerate:expected:csazure', function(cb){
 });
 
 gulp.task('regenerate:expected:cs', function(cb){
-  mappings = merge_options({
+  mappings = mergeOptions({
     'PetstoreV2': 'Swagger/swagger.2.0.example.v2.json',
     'Mirror.RecursiveTypes': 'Swagger/swagger-mirror-recursive-type.json',
     'Mirror.Primitives': 'Swagger/swagger-mirror-primitives.json',
@@ -219,59 +219,45 @@ gulp.task('syncDependencies:runtime', ['syncDependencies:runtime:cs', 'syncDepen
 
 gulp.task('syncDependencies', ['syncDependencies:nugetProj', 'syncDependencies:nuspec', 'syncDependencies:runtime']);
 
+var msbuildDefaults = {
+  stdout: process.stdout,
+  stderr: process.stderr,
+  maxBuffer: MAX_BUFFER,
+  errorOnFail: true,
+};
+
 gulp.task('build', function(cb) {
   // warning 0219 is for unused variables, which causes the build to fail on xbuild
-  return gulp.src('build.proj').pipe(msbuild({
+  return gulp.src('build.proj').pipe(msbuild(mergeOptions(msbuildDefaults, {
     targets: ['build'],
-    stdout: process.stdout,
-    stderr: process.stderr,
-    maxBuffer: MAX_BUFFER,
-    errorOnFail: true,
     properties: { WarningsNotAsErrors: 0219, Configuration: 'Debug' }
-  }));
+  })));
 });
 
 gulp.task('build:release', function(cb) {
   // warning 0219 is for unused variables, which causes the build to fail on xbuild
-  return gulp.src('build.proj').pipe(msbuild({
+  return gulp.src('build.proj').pipe(msbuild(mergeOptions(msbuildDefaults,{
     targets: ['build'],
-    stdout: process.stdout,
-    stderr: process.stderr,
-    maxBuffer: MAX_BUFFER,
     properties: { WarningsNotAsErrors: 0219, Configuration: 'Release' }
-  }));
+  })));
 });
 
 gulp.task('package', function(cb) {
-  return gulp.src('build.proj').pipe(msbuild({
-    targets: ['package'],
-    stdout: process.stdout,
-    stderr: process.stderr,
-    errorOnFail: true,
-    maxBuffer: MAX_BUFFER
-  }));
+  return gulp.src('build.proj').pipe(msbuild(mergeOptions(msbuildDefaults, { targets: ['package'] })));
 });
 
 gulp.task('test', function (cb) {
-  return gulp.src('build.proj').pipe(msbuild({
+  return gulp.src('build.proj').pipe(msbuild(mergeOptions(msbuildDefaults, {
     targets: ['test'],
-    stdout: process.stdout,
-    stderr: process.stderr,
-    errorOnFail: true,
-    maxBuffer: MAX_BUFFER,
     properties: { Configuration: 'Debug' }
-  }));
+  })));
 });
 
 gulp.task('analysis', function(cb) {
-  return gulp.src('build.proj').pipe(msbuild({
+  return gulp.src('build.proj').pipe(msbuild(mergeOptions(msbuildDefaults, {
     targets: ['codeanalysis'],
-    stdout: process.stdout,
-    stderr: process.stderr,
-    maxBuffer: MAX_BUFFER,
-    errorOnFail: true,
     properties: { WarningsNotAsErrors: 0219, Configuration: 'Debug' }
-  }));
+  })));
 });
 
 gulp.task('default', function(cb){
