@@ -2,6 +2,15 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Net45-Debug</Configuration>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Net45-Debug|AnyCPU' ">
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Net45-Debug</OutputPath>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <CommonRoot>$(MsBuildThisFileDirectory)..</CommonRoot>
     <CommonNugetPackageFolder>$(CommonRoot)\packages</CommonNugetPackageFolder>
     <AssemblyOriginatorKeyFile Condition=" '$(AssemblyOriginatorKeyFile)' == '' ">$(CommonRoot)\Tools\MSSharedLibKey.snk</AssemblyOriginatorKeyFile>
