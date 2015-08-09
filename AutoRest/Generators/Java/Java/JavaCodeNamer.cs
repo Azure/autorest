@@ -110,6 +110,16 @@ namespace Microsoft.Rest.Generator.Java
             name = GetEscapedReservedName(name, "Method");
             return CamelCase(name);
         }
+        
+        public override string GetMethodGroupName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return name;
+            }
+            name = GetEscapedReservedName(name, "Operations");
+            return PascalCase(name);
+        }
 
         public override string GetEnumMemberName(string name)
         {
@@ -241,15 +251,15 @@ namespace Microsoft.Rest.Generator.Java
             }
             else if (primaryType == PrimaryType.Double)
             {
-                primaryType.Name = "Number";
+                primaryType.Name = "Double";
             }
             else if (primaryType == PrimaryType.Int)
             {
-                primaryType.Name = "Number";
+                primaryType.Name = "Integer";
             }
             else if (primaryType == PrimaryType.Long)
             {
-                primaryType.Name = "Number";
+                primaryType.Name = "Long";
             }
             else if (primaryType == PrimaryType.Stream)
             {

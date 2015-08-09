@@ -8,11 +8,8 @@
 package com.microsoft.rest.bat;
 
 import com.microsoft.rest.ServiceClient;
-import com.microsoft.rest.ServiceException;
 import com.squareup.okhttp.OkHttpClient;
-import retrofit.ErrorHandler;
 import retrofit.RestAdapter;
-import retrofit.RetrofitError;
 
 /**
  *
@@ -46,7 +43,7 @@ public class AutoRestIntegerTestServiceImpl extends ServiceClient<AutoRestIntege
         initialize();
     }
 
-    protected void initialize() {
+    private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
         this.intOperations = restAdapter.create(IntOperations.class);
     }

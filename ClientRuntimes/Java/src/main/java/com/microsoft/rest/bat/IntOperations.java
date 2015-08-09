@@ -34,5 +34,5 @@ public interface IntOperations {
     Response putMax32(@Body int intBody) throws ServiceException;
 
     @PUT("/int/max/32")
-    void putMax32Async(Callback<Void> cb) throws ServiceException;
+    void putMax32Async(Callback<Response> cb) throws ServiceException;
 }

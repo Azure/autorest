@@ -109,7 +109,7 @@ namespace Microsoft.Rest.Generator
             foreach (var method in client.Methods)
             {
                 method.Name = GetMethodName(method.Name);
-                method.Group = GetTypeName(method.Group);
+                method.Group = GetMethodGroupName(method.Group);
                 method.ReturnType = NormalizeType(method.ReturnType);
                 method.DefaultResponse = NormalizeType(method.DefaultResponse);
                 var normalizedResponses = new Dictionary<HttpStatusCode, IType>();
@@ -235,6 +235,20 @@ namespace Microsoft.Rest.Generator
         /// <param name="name"></param>
         /// <returns>The formatted string.</returns>
         public virtual string GetTypeName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return name;
+            }
+            return PascalCase(RemoveInvalidCharacters(GetEscapedReservedName(name, "Model")));
+        }
+
+        /// <summary>
+        /// Formats a string for naming a Method Group using Pascal case by default.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>The formatted string.</returns>
+        public virtual string GetMethodGroupName(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
             {

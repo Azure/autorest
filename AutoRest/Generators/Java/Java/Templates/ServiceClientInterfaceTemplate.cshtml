@@ -1,0 +1,47 @@
+﻿@using Microsoft.Rest.Generator.Java
+@using Microsoft.Rest.Generator.Java.Templates
+@using Microsoft.Rest.Generator.Utilities
+@using System.Linq
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.ServiceClientTemplateModel>
+@Header("// ")
+@EmptyLine
+
+package @(Settings.Namespace.ToLower());
+@EmptyLine
+
+import com.microsoft.rest.ServiceClient;
+@foreach (var importClass in Model.Imports) {
+@:import @importClass;
+}
+@EmptyLine
+
+/**
+ * The interface for @Model.Name class.
+ */
+public interface @Model.Name {
+    /**
+     * Gets the URI used as the base for all cloud service requests.
+     * @@return The BaseUri value.
+     */
+    String getBaseUri();
+@{var parameters = Model.Properties.Where(p => p.IsRequired);}
+@foreach (var param in parameters)
+{
+@EmptyLine
+@:    /**
+@:     * @(param.Documentation)
+@:     * @@return the @(param.Name) value.
+@:     */
+@:    @param.Type get@(param.Name.ToPascalCase())();
+}
+
+@foreach (var operation in Model.Operations)
+{
+@EmptyLine
+@:    /**
+@:     * @(operation.Documentation)
+@:     * @@return the @(operation.MethodGroupName) value.
+@:     */
+@:    @(operation.MethodGroupType) get@(operation.MethodGroupName.ToPascalCase())();
+}
+}

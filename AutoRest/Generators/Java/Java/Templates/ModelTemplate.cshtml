@@ -1,69 +1,34 @@
 ﻿@using System.Linq
 @using System.Collections.Generic
+@using Microsoft.Rest.Generator.Utilities
 @using Microsoft.Rest.Generator.ClientModel
 @using Microsoft.Rest.Generator.Java.TemplateModels
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.ModelTemplateModel>
-'use strict';
+@Header("// ")
 @EmptyLine
-var util = require('util');
+
+package @(Settings.Namespace.ToLower()).models;
 @EmptyLine
-var models = require('./index');
-@EmptyLine
+
 /**
- * @@class
- * Initializes a new instance of the @(Model.Name) class.
- * @@constructor
+ * @Model.Documentation
  */
-function @(Model.Name)() { }
+public class @(Model.Name) {
+@foreach (var property in Model.Properties)
+{
+@:    private @property.Type @property.Name;
 @EmptyLine
-/**
- * Validate the payload against the @Model.Name schema
- *
- * @@param {JSON} payload
- *
- */
-@(Model.Name).prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('@(Model.Name) cannot be null.');
-  }
-  @{
-  var propertyList = new List<Property>(Model.ComposedProperties);
-  for (int i = 0; i < propertyList.Count; i++)
-  {
-  @:@(Model.ValidateProperty("payload", propertyList[i]))
-  if (i != propertyList.Count-1)
-  {
-  @EmptyLine
-  }
-  }
 }
-};
+
+@foreach (var property in Model.Properties)
+{
+@:    public @property.Type get@(property.Name.ToPascalCase())() {
+@:        return this.@(property.Name);
+@:    }
 @EmptyLine
-/**
- * Deserialize the instance to @Model.Name schema
- *
- * @@param {JSON} instance
- *
- */
-@(Model.Name).prototype.deserialize = function (instance) {
-  @{
-  var specialProperties = Model.SpecialProperties;
-  if (specialProperties.Count() > 0)
-  {
-  @:if (instance) {
-    var specialPropertyList = new List<Property>(Model.SpecialProperties);
-    for (int i = 0; i < specialPropertyList.Count; i++)
-    {
-    @:@(Model.DeserializeProperty("instance", specialPropertyList[i]))
-    if (i != specialPropertyList.Count - 1)
-    {
-    @EmptyLine
-    }
-    }
-  @:}
-  }
-  @:return instance;
-  }
-};
+@:    public void set@(property.Name.ToPascalCase())(@property.Type @property.Name) {
+@:        this.@(property.Name) = @property.Name;
+@:    }
 @EmptyLine
-module.exports = new @(Model.Name)();
+}
+}
