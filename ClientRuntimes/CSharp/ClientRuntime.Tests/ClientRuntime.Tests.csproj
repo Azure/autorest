@@ -18,8 +18,14 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <NuGetPackageImportStamp>464ffb68</NuGetPackageImportStamp>
+    <Configuration Condition=" '$(Configuration)' == '' ">Net45-Debug</Configuration>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\Tools\AutoRest.Settings.targets" />
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Net45-Debug|AnyCPU' ">
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Net45-Debug</OutputPath>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="Fakes\MirrorDelegatingHandler.cs" />
     <Compile Include="Fakes\MirrorMessageHandler.cs" />
@@ -61,7 +67,7 @@
       <HintPath>..\..\..\packages\xunit.assert.2.1.0-beta4-build3050\lib\portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.assert.dll</HintPath>
     </Reference>
     <Reference Include="xunit.core">
-      <HintPath>..\..\..\packages\xunit.extensibility.core.2.1.0-beta4-build3050/lib/portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.dll</HintPath>
+      <HintPath>..\..\..\packages\xunit.extensibility.core.2.1.0-beta4-build3050\lib\portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

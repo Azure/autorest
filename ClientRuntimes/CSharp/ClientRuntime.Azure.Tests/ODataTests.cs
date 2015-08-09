@@ -115,7 +115,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void UnsupportedMethodThrowsNotSupportedException()
         {
-            var param = new InputParam2
+			new InputParam2
             {
                 Param = new InputParam1
                 {
