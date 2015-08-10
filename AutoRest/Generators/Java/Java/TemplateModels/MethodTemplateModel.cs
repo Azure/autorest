@@ -78,12 +78,10 @@ namespace Microsoft.Rest.Generator.Java
                 List<string> declarations = new List<string>();
                 foreach (var parameter in LocalParameters)
                 {
-                    declarations.Add(parameter.Name);
+                    declarations.Add(parameter.Type.ToString() + " " + parameter.Name);
                 }
 
-                declarations.Add("options");
                 var declaration = string.Join(", ", declarations);
-                declaration += ", ";
                 return declaration;
             }
         }
@@ -107,7 +105,11 @@ namespace Microsoft.Rest.Generator.Java
             get
             {
                 var parameters = MethodParameterDeclaration;
-                parameters += "callback";
+                if (!parameters.IsNullOrEmpty())
+                {
+                    parameters += ", ";
+                }
+                parameters += "Callback<Response> cb";
                 return parameters;
             }
         }

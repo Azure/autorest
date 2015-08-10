@@ -1,41 +1,27 @@
 ﻿@using Microsoft.Rest.Generator.Java
 @using Microsoft.Rest.Generator.Java.Templates
+@using Microsoft.Rest.Generator.Utilities
 @using System.Linq;
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.MethodGroupTemplateModel>
 @Header("// ")
 @EmptyLine
-'use strict';
-@EmptyLine
-var util = require('util');
-var msRest = require('ms-rest');
-var ServiceClient = msRest.ServiceClient;
-var WebResource = msRest.WebResource;
 
-@if (Model.ModelTypes.Any())
-{
+package @(Settings.Namespace.ToLower());
 @EmptyLine
-@:var models = require('../models');
-}
-@EmptyLine
-/**
- * @@class
- * @Model.MethodGroupType
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the @Model.Name.
- * Initializes a new instance of the @Model.MethodGroupType class.
- * @@constructor
- *
- * @@param {@Model.Name} client Reference to the service client.
- */
-function @(Model.MethodGroupType)(client) {
-  this.client = client;
-}
 
+import com.microsoft.rest.ServiceException;
+import retrofit.Callback;
+import retrofit.client.Response;
 @EmptyLine
+
+public interface @Model.MethodGroupName {
 @foreach (var method in Model.MethodTemplateModels)
 {
-@:@(Include(new MethodTemplate(), method))
+@:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url)")
+@:    @method.ReturnType @(method.Name)(@method.MethodParameterDeclaration);
+@EmptyLine
+@:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url)")
+@:    void @(method.Name)Async(@method.MethodParameterDeclarationWithCallback);
 @EmptyLine
 }
-@EmptyLine
-module.exports = @(Model.MethodGroupType);
+}
