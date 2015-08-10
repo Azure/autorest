@@ -249,77 +249,10 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
             {
                 sb.AppendLine("{0}.Validate();", valueReference);
             }
+
             if (constraints != null && constraints.Any())
             {
-                foreach (var constraint in constraints.Keys)
-                {
-                    string constraintCheck;
-                    string constraintValue = constraints[constraint];
-                    switch (constraint)
-                    {
-                        case Constraint.ExclusiveMaximum:
-                            constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0} >= {1}", valueReference, constraints[constraint]);
-                            break;
-                        case Constraint.ExclusiveMinimum:
-                            constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0} <= {1}", valueReference, constraints[constraint]);
-                            break;
-                        case Constraint.InclusiveMaximum:
-                            constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0} > {1}", valueReference, constraints[constraint]);
-                            break;
-                        case Constraint.InclusiveMinimum:
-                            constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0} < {1}", valueReference, constraints[constraint]);
-                            break;
-                        case Constraint.MaxItems:
-                            constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0}.Count > {1}", valueReference, constraints[constraint]);
-                            break;
-                        case Constraint.MaxLength:
-                            constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0}.Length > {1}", valueReference, constraints[constraint]);
-                            break;
-                        case Constraint.MinItems:
-                            constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0}.Count < {1}", valueReference, constraints[constraint]);
-                            break;
-                        case Constraint.MinLength:
-                            constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0}.Length < {1}", valueReference, constraints[constraint]);
-                            break;
-                        case Constraint.MultipleOf:
-                            constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0} % {1} != 0", valueReference, constraints[constraint]);
-                            break;
-                        case Constraint.Pattern:
-                            constraintValue = "\"" + constraintValue.Replace("\\","\\\\") + "\"";
-                            constraintCheck = string.Format(CultureInfo.InvariantCulture, "!System.Text.RegularExpressions.Regex.IsMatch({0}, {1})", valueReference, constraintValue);
-                            break;
-                        case Constraint.UniqueItems:
-                            if ("true".Equals(constraints[constraint], StringComparison.InvariantCultureIgnoreCase))
-                            {
-                                constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0}.Count != {0}.Distinct().Count()", valueReference);
-                            }
-                            else
-                            {
-                                constraintCheck = null;
-                            }
-                            break;
-                        default:
-                            throw new NotSupportedException("Constraint '" + constraint + "' is not supported.");
-                    }
-                    if (constraintCheck != null)
-                    {
-                        if (constraint != Constraint.UniqueItems)
-                        {
-                            sb.AppendLine("if ({0})", constraintCheck)
-                                .AppendLine("{").Indent()
-                                    .AppendLine("throw new ValidationException(ValidationRules.{0}, \"{1}\", {2});",
-                                        constraint, valueReference.Replace("this.", ""), constraintValue).Outdent()
-                                .AppendLine("}");
-                        } else
-                        {
-                            sb.AppendLine("if ({0})", constraintCheck)
-                                .AppendLine("{").Indent()
-                                    .AppendLine("throw new ValidationException(ValidationRules.{0}, \"{1}\");",
-                                        constraint, valueReference.Replace("this.", "")).Outdent()
-                                .AppendLine("}");
-                        }
-                    }                         
-                }
+                AppendConstraintValidations(valueReference, constraints, sb);
             }
 
             if (sequence != null && sequence.ShouldValidateChain())
@@ -353,6 +286,91 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
             }
 
             return null;
+        }
+
+        private static void AppendConstraintValidations(string valueReference, Dictionary<Constraint, string> constraints, IndentedStringBuilder sb)
+        {
+            foreach (var constraint in constraints.Keys)
+            {
+                string constraintCheck;
+                string constraintValue = constraints[constraint];
+                switch (constraint)
+                {
+                    case Constraint.ExclusiveMaximum:
+                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0} >= {1}", valueReference,
+                            constraints[constraint]);
+                        break;
+                    case Constraint.ExclusiveMinimum:
+                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0} <= {1}", valueReference,
+                            constraints[constraint]);
+                        break;
+                    case Constraint.InclusiveMaximum:
+                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0} > {1}", valueReference,
+                            constraints[constraint]);
+                        break;
+                    case Constraint.InclusiveMinimum:
+                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0} < {1}", valueReference,
+                            constraints[constraint]);
+                        break;
+                    case Constraint.MaxItems:
+                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0}.Count > {1}", valueReference,
+                            constraints[constraint]);
+                        break;
+                    case Constraint.MaxLength:
+                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0}.Length > {1}", valueReference,
+                            constraints[constraint]);
+                        break;
+                    case Constraint.MinItems:
+                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0}.Count < {1}", valueReference,
+                            constraints[constraint]);
+                        break;
+                    case Constraint.MinLength:
+                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0}.Length < {1}", valueReference,
+                            constraints[constraint]);
+                        break;
+                    case Constraint.MultipleOf:
+                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0} % {1} != 0", valueReference,
+                            constraints[constraint]);
+                        break;
+                    case Constraint.Pattern:
+                        constraintValue = "\"" + constraintValue.Replace("\\", "\\\\") + "\"";
+                        constraintCheck = string.Format(CultureInfo.InvariantCulture,
+                            "!System.Text.RegularExpressions.Regex.IsMatch({0}, {1})", valueReference, constraintValue);
+                        break;
+                    case Constraint.UniqueItems:
+                        if ("true".Equals(constraints[constraint], StringComparison.OrdinalIgnoreCase))
+                        {
+                            constraintCheck = string.Format(CultureInfo.InvariantCulture,
+                                "{0}.Count != {0}.Distinct().Count()", valueReference);
+                        }
+                        else
+                        {
+                            constraintCheck = null;
+                        }
+                        break;
+                    default:
+                        throw new NotSupportedException("Constraint '" + constraint + "' is not supported.");
+                }
+                if (constraintCheck != null)
+                {
+                    if (constraint != Constraint.UniqueItems)
+                    {
+                        sb.AppendLine("if ({0})", constraintCheck)
+                            .AppendLine("{").Indent()
+                            .AppendLine("throw new ValidationException(ValidationRules.{0}, \"{1}\", {2});",
+                                constraint, valueReference.Replace("this.", ""), constraintValue).Outdent()
+                            .AppendLine("}");
+                    }
+                    else
+                    {
+                        sb.AppendLine("if ({0})", constraintCheck)
+                            .AppendLine("{").Indent()
+                            .AppendLine("throw new ValidationException(ValidationRules.{0}, \"{1}\");",
+                                constraint, valueReference.Replace("this.", "")).Outdent()
+                            .AppendLine("}");
+                    }
+                }
+            }
         }
     }
 }

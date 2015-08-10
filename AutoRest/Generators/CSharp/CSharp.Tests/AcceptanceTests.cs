@@ -71,11 +71,9 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
                 SwaggerPath("validation.json"),
                 ExpectedPath("Validation"));
-            var client = new AutoRestValidationTest(Fixture.Uri)
-            {
-                SubscriptionId = "abc123",
-                ApiVersion = "12-34-5678"
-            };
+            var client = new AutoRestValidationTest(Fixture.Uri);
+            client.SubscriptionId = "abc123";
+            client.ApiVersion = "12-34-5678";
             var exception = Assert.Throws<ValidationException>(() => client.ValidationOfMethodParameters("1", 100));
             Assert.Equal(ValidationRules.MinLength, exception.Rule);
             Assert.Equal("resourceGroupName", exception.Target);
@@ -117,12 +115,10 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             Assert.Equal(ValidationRules.MaxItems, exception.Rule);
             Assert.Equal("DisplayNames", exception.Target);
 
-            var client2 = new AutoRestValidationTest(Fixture.Uri)
-            {
-                SubscriptionId = "abc123",
-                ApiVersion = "abc"
-            };
-            exception = Assert.Throws<ValidationException>(() => client.ValidationOfMethodParameters("123", 150));
+            var client2 = new AutoRestValidationTest(Fixture.Uri);
+            client2.SubscriptionId = "abc123";
+            client2.ApiVersion = "abc";
+            exception = Assert.Throws<ValidationException>(() => client2.ValidationOfMethodParameters("123", 150));
             Assert.Equal(ValidationRules.Pattern, exception.Rule);
             Assert.Equal("ApiVersion", exception.Target);
         }
