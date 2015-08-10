@@ -5,6 +5,13 @@
 @EmptyLine
 @Model.GetDependencyGems()
 @EmptyLine
-@Model.GetModelsRequiredFiles()
-@Model.GetOperationsRequiredFiles()
-@Model.GetClientRequiredFile()
+module @Settings.Namespace
+
+  @Model.GetOperationsRequiredFiles()
+  @Model.GetClientRequiredFile()
+
+  @EmptyLine
+  module Models
+    @Model.GetModelsRequiredFiles()
+  end
+end

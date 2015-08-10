@@ -67,7 +67,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             {
                 Model = new AzureServiceClientTemplateModel(serviceClient),
             };
-            await Write(serviceClientTemplate, RubyCodeNamer.UnderscoreCase(serviceClient.Name) + ImplementationFileExtension);
+            await Write(serviceClientTemplate, Path.Combine(sdkPath, RubyCodeNamer.UnderscoreCase(serviceClient.Name) + ImplementationFileExtension));
 
             // Operations
             foreach (var group in serviceClient.MethodGroups)
@@ -77,7 +77,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                 {
                     Model = new AzureMethodGroupTemplateModel(serviceClient, group),
                 };
-                await Write(operationsTemplate, RubyCodeNamer.UnderscoreCase(operationsTemplate.Model.MethodGroupName) + ImplementationFileExtension);
+                await Write(operationsTemplate, Path.Combine(sdkPath, RubyCodeNamer.UnderscoreCase(operationsTemplate.Model.MethodGroupName) + ImplementationFileExtension));
             }
 
             // Models
@@ -93,7 +93,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                     Model = new AzureModelTemplateModel(model, serviceClient),
                 };
 
-                await Write(modelTemplate, Path.Combine("models", RubyCodeNamer.UnderscoreCase(model.Name) + ImplementationFileExtension));
+                await Write(modelTemplate, Path.Combine(modelsPath, RubyCodeNamer.UnderscoreCase(model.Name) + ImplementationFileExtension));
             }
 
             // Enums
@@ -103,16 +103,16 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                 {
                     Model = new EnumTemplateModel(enumType),
                 };
-                await Write(enumTemplate, Path.Combine("models", RubyCodeNamer.UnderscoreCase(enumTemplate.Model.TypeDefinitionName) + ImplementationFileExtension));
+                await Write(enumTemplate, Path.Combine(modelsPath, RubyCodeNamer.UnderscoreCase(enumTemplate.Model.TypeDefinitionName) + ImplementationFileExtension));
             }
 
             // Requirements
             var requirementsTemplate = new RequirementsTemplate
             {
-                Model = new AzureRequirementsTemplateModel(serviceClient),
+                Model = new AzureRequirementsTemplateModel(serviceClient, sdkName, this.ImplementationFileExtension),
             };
             await Write(requirementsTemplate,
-                RubyCodeNamer.UnderscoreCase("sdk_requirements") + ImplementationFileExtension);
+                RubyCodeNamer.UnderscoreCase(sdkName) + ImplementationFileExtension);
         }
     }
 }
