@@ -132,7 +132,7 @@
     },
     "ApiVersionParameter": {
       "name": "apiVersion",
-      "in": "path",
+      "in": "query",
       "description": "API ID.",
       "required": true,
       "type": "string",

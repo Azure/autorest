@@ -414,6 +414,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal("1000", clientModel.Methods[0].Parameters[2].Constraints[Constraint.InclusiveMaximum]);
 
             Assert.Equal("apiVersion", clientModel.Methods[0].Parameters[3].Name);
+            Assert.NotNull(clientModel.Methods[0].Parameters[3].ClientProperty);
             Assert.Equal(1, clientModel.Methods[0].Parameters[3].Constraints.Count);
             Assert.Equal("\\d{2}-\\d{2}-\\d{4}", clientModel.Methods[0].Parameters[3].Constraints[Constraint.Pattern]);
 

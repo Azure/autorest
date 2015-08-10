@@ -192,6 +192,13 @@ namespace Fixtures.AcceptanceTestsValidation
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "this.ApiVersion");
             }
+            if (this.ApiVersion != null)
+            {
+                if (!System.Text.RegularExpressions.Regex.IsMatch(this.ApiVersion, "\\d{2}-\\d{2}-\\d{4}"))
+                {
+                    throw new ValidationException(ValidationRules.Pattern, "ApiVersion", "\\d{2}-\\d{2}-\\d{4}");
+                }
+            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -350,6 +357,13 @@ namespace Fixtures.AcceptanceTestsValidation
             if (this.ApiVersion == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "this.ApiVersion");
+            }
+            if (this.ApiVersion != null)
+            {
+                if (!System.Text.RegularExpressions.Regex.IsMatch(this.ApiVersion, "\\d{2}-\\d{2}-\\d{4}"))
+                {
+                    throw new ValidationException(ValidationRules.Pattern, "ApiVersion", "\\d{2}-\\d{2}-\\d{4}");
+                }
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
