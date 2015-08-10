@@ -14,17 +14,23 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <summary>
         /// Predefined dictionary of known types.
         /// </summary>
-        private static readonly Dictionary<SupportedPrimaryType, PrimaryType> KnownTypes;
+        private static Dictionary<SupportedPrimaryType, PrimaryType> KnownTypes;
 
         /// <summary>
         /// Initializes static members of PrimaryType class.
         /// </summary>
         static PrimaryType()
         {
+            Reset();
+        }
+
+        public static void Reset()
+        {
             KnownTypes = new Dictionary<SupportedPrimaryType, PrimaryType>();
             foreach (SupportedPrimaryType knownType in System.Enum.GetValues(typeof (SupportedPrimaryType)))
             {
-                KnownTypes[knownType] = new PrimaryType {Name = knownType.ToString(), Type = knownType};
+                var name = System.Enum.GetName(typeof (SupportedPrimaryType), knownType);
+                KnownTypes[knownType] = new PrimaryType {Name = name, Type = knownType};
             }
         }
 

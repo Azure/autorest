@@ -36,7 +36,7 @@ namespace Microsoft.Rest.Generator.Ruby
                 "unless",   "begin",    "ensure",   "redo",     "until",
                 "break",    "false",    "rescue",   "when",     "case",
                 "for",      "retry",    "while",    "class",    "if",
-                "return",   "while",    "def",      "in",       "self",   
+                "return",   "while",    "def",      "in",       "self",
                 "__file__", "defined?", "module",   "super",    "__line__",
                 "yield"
             }.ForEach(s => ReservedWords.Add(s));
@@ -153,7 +153,7 @@ namespace Microsoft.Rest.Generator.Ruby
         /// </summary>
         /// <param name="type">Type to normalize.</param>
         /// <returns>Normalized type.</returns>
-        protected override IType NormalizeType(IType type)
+        public override IType NormalizeType(IType type)
         {
             if (type == null)
             {
@@ -225,7 +225,7 @@ namespace Microsoft.Rest.Generator.Ruby
                 {
                     enumType.Values[i].Name = GetEnumMemberName(RubyRemoveInvalidCharacters(enumType.Values[i].Name));
                 }
-                
+
             }
 
             return enumType;

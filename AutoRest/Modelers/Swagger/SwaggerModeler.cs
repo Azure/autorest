@@ -60,6 +60,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         /// <returns></returns>
         public override ServiceClient Build()
         {
+            PrimaryType.Reset();
             Logger.LogInfo(Resources.ParsingSwagger);
             ServiceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
             Logger.LogInfo(Resources.GeneratingClient);
@@ -86,7 +87,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                     if (string.IsNullOrWhiteSpace(operation.OperationId))
                     {
                         throw ErrorManager.CreateError(
-                            string.Format(CultureInfo.InvariantCulture, 
+                            string.Format(CultureInfo.InvariantCulture,
                                 Resources.OperationIdMissing,
                                 verb,
                                 path.Key));
@@ -163,7 +164,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             {
                 ServiceDefinition.Host = "localhost";
             }
-            ServiceClient.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}://{1}{2}", 
+            ServiceClient.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}://{1}{2}",
                 ServiceDefinition.Schemes[0].ToString().ToLower(CultureInfo.InvariantCulture),
                 ServiceDefinition.Host, ServiceDefinition.BasePath);
         }
@@ -304,7 +305,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 if (!ServiceDefinition.Parameters.ContainsKey(referenceKey))
                 {
                     throw new ArgumentException(
-                        string.Format(CultureInfo.InvariantCulture, 
+                        string.Format(CultureInfo.InvariantCulture,
                         Resources.DefinitionDoesNotExist, referenceKey));
                 }
 

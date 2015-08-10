@@ -5,6 +5,7 @@ var debug = require('gulp-debug');
 var env = require('gulp-env');
 var path = require('path');
 var fs = require('fs');
+var shell = require('gulp-shell')
 var glob = require('glob');
 var spawn = require('child_process').spawn;
 var assemblyInfo = require('gulp-dotnet-assembly-info');
@@ -26,28 +27,6 @@ function basePathOrThrow() {
     return __dirname;
   }
   return gutil.env.basePath;
-}
-
-function runProcess(name, args, options, cb){
-  if (typeof(options) == 'function') {
-    cb = options;
-  }
-
-  var child = spawn(name, args, { stdio: ['pipe', process.stdout, process.stderr] });
-
-  child.on('error', function(err){
-    cb(err);
-  });
-
-  child.on('close', function(code) {
-    var message = "Done with exit code " + code;
-    gutil.log(message);
-    if(code != 0){
-      cb(message)
-    } else {
-      cb();
-    }
-  });
 }
 
 function mergeOptions(obj1,obj2){
@@ -223,6 +202,7 @@ var msbuildDefaults = {
   stdout: process.stdout,
   stderr: process.stderr,
   maxBuffer: MAX_BUFFER,
+  verbosity: 'minimal',
   errorOnFail: true,
 };
 
@@ -243,20 +223,49 @@ gulp.task('build:release', function(cb) {
 });
 
 gulp.task('package', function(cb) {
-  return gulp.src('build.proj').pipe(msbuild(mergeOptions(msbuildDefaults, { targets: ['package'] })));
+  return gulp.src('build.proj').pipe(msbuild(mergeOptions(msbuildDefaults, {
+    targets: ['package'],
+    verbosity: 'normal',
+  })));
 });
 
-gulp.task('test', function (cb) {
+gulp.task('test:node', shell.task('npm test', {cwd: './AutoRest/Generators/NodeJS/NodeJS.Tests/', verbosity: 3}));
+gulp.task('test:node:azure', shell.task('npm test', {cwd: './AutoRest/Generators/NodeJS/Azure.NodeJS.Tests/', verbosity: 3}));
+
+var xunitTestsDlls = [
+  'AutoRest/AutoRest.Core.Tests/bin/Net45-Debug/AutoRest.Core.Tests.dll',
+  'AutoRest/Generators/Azure.Common/Azure.Common.Tests/bin/Net45-Debug/AutoRest.Generator.Azure.Common.Tests.dll',
+  'AutoRest/Generators/CSharp/Azure.CSharp.Tests/bin/Net45-Debug/Azure.CSharp.Tests.dll',
+  'AutoRest/Generators/CSharp/CSharp.Tests/bin/Net45-Debug/CSharp.Tests.dll',
+  'AutoRest/Generators/Ruby/Azure.Ruby.Tests/bin/Net45-Debug/AutoRest.Generator.Azure.Ruby.Tests.dll',
+  'AutoRest/Generators/Ruby/Ruby.Tests/bin/Net45-Debug/AutoRest.Generator.Ruby.Tests.dll',
+  'AutoRest/Modelers/Swagger.Tests/bin/Net45-Debug/AutoRest.Swagger.Tests.dll',
+  'ClientRuntimes/CSharp/ClientRuntime.Azure.Tests/bin/Net45-Debug/ClientRuntime.Azure.Tests.dll',
+  'ClientRuntimes/CSharp/ClientRuntime.Tests/bin/Net45-Debug/ClientRuntime.Tests.dll',
+];
+
+gulp.task('test:xunit', function () {
+  var xunitRunner = 'packages/xunit.runner.console.2.1.0-beta4-build3109/tools/xunit.console.x86.exe <%= file.path %> -noshadow';
+  var isWindows = (process.platform.lastIndexOf('win') === 0);
+  var cmd = isWindows ? xunitRunner : ('mono ' + xunitRunner);
+  return gulp.src(xunitTestsDlls).pipe(shell(cmd, {verbosity: 3}))
+});
+
+gulp.task('test:msbuild', function(cb) {
   return gulp.src('build.proj').pipe(msbuild(mergeOptions(msbuildDefaults, {
     targets: ['test'],
-    properties: { Configuration: 'Debug' }
+    properties: { WarningsNotAsErrors: 0219},
   })));
+});
+
+gulp.task('test', function(cb){
+  runSequence('test:xunit', 'test:node', 'test:node:azure', 'test:msbuild', cb);
 });
 
 gulp.task('analysis', function(cb) {
   return gulp.src('build.proj').pipe(msbuild(mergeOptions(msbuildDefaults, {
     targets: ['codeanalysis'],
-    properties: { WarningsNotAsErrors: 0219, Configuration: 'Debug' }
+    properties: { WarningsNotAsErrors: 0219, Configuration: 'Debug' },
   })));
 });
 

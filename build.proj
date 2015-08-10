@@ -156,42 +156,9 @@
   </Target>
 
   <!-- Run tests. -->
-  <UsingTask TaskName="Xunit.Runner.MSBuild.xunit" AssemblyFile="packages\xunit.runner.msbuild.2.1.0-beta4-build3050\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.runner.msbuild.dll" />
+  <UsingTask TaskName="Xunit.Runner.MSBuild.xunit" AssemblyFile="packages\xunit.runner.msbuild.2.1.0-beta4-build3109\build\portable-net45+netcore45+wp8+wpa81\xunit.runner.msbuild.dll" />
   <Target Name="Test" DependsOnTargets="RestoreNugetPackages">
-    <CallTarget Targets="TestClientRuntime" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />
-    <CallTarget Targets="TestCodeGenerator" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
     <CallTarget Targets="TestNuGetPackages" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
-  </Target>
-
-  <Target Name="TestClientRuntime">
-    <ItemGroup>
-      <ClientRuntimeTestDlls Include="$(LibraryRoot)\ClientRuntimes\CSharp\*.Tests\bin\*\*Tests.dll" />
-    </ItemGroup>
-
-    <Message Text="@(ClientRuntimeTestDlls)" />
-    <MakeDir Directories="$(TestResultsFolder)"/>
-    <xunit Assemblies="@(ClientRuntimeTestDlls)" Html="$(TestResultsFolder)\xunit.clientruntime.html" ContinueOnError="false" />
-    <Exec WorkingDirectory=".\ClientRuntimes\NodeJS\ms-rest\" Command="npm test"/>
-    <Exec WorkingDirectory=".\ClientRuntimes\NodeJS\ms-rest-azure\" Command="npm test"/>
-  </Target>
-
-  <Target Name="TestCodeGenerator">
-    <ItemGroup>
-      <CodeGenTestDlls Include="$(LibraryRoot)\AutoRest\Generators\Azure.Common\Azure.Common.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.Azure.Common.Tests.dll" />
-      <CodeGenTestDlls Include="$(LibraryRoot)\AutoRest\Generators\CSharp\CSharp.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.CSharp.Tests.dll" />
-      <CodeGenTestDlls Include="$(LibraryRoot)\AutoRest\Generators\CSharp\Azure.CSharp.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.Azure.CSharp.Tests.dll" />
-      <CodeGenTestDlls Include="$(LibraryRoot)\AutoRest\AutoRest.Core.Tests\bin\Net45-$(Configuration)\AutoRest.Core.Tests.dll" />
-      <CodeGenTestDlls Include="$(LibraryRoot)\AutoRest\Modelers\Swagger.Tests\bin\Net45-$(Configuration)\AutoRest.Modeler.Swagger.Tests.dll" />
-      <CodeGenTestDlls Include="$(LibraryRoot)\AutoRest\Generators\Ruby\Ruby.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.Ruby.Tests.dll" />
-      <CodeGenTestDlls Include="$(LibraryRoot)\AutoRest\Generators\Ruby\Azure.Ruby.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.Azure.Ruby.Tests.dll" />
-    </ItemGroup>
-
-    <Message Text="@(CodeGenTestDlls)" />
-    <MakeDir Directories="$(TestResultsFolder)"/>
-    <!-- <Exec WorkingDirectory=".\ClientRuntimes\Ruby\" Command="UpdateRuntime"/> -->
-    <xunit Assemblies="@(CodeGenTestDlls)" Html="$(TestResultsFolder)\xunit.codegen.html" ContinueOnError="false" />
-    <Exec WorkingDirectory="$(LibraryRoot)\AutoRest\Generators\NodeJS\NodeJS.Tests\" Command="npm test"/>
-    <Exec WorkingDirectory="$(LibraryRoot)\AutoRest\Generators\NodeJS\Azure.NodeJS.Tests\" Command="npm test"/>
   </Target>
 
   <Target Name="TestNuGetPackages">
