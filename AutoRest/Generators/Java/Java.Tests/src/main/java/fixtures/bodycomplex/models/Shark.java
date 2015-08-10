@@ -13,24 +13,24 @@ package fixtures.bodycomplex.models;
  * 
  */
 public class Shark {
-    private int age;
+    private int Age;
 
-    private Date birthday;
+    private Date Birthday;
 
     public int getAge() {
-        return this.age;
+        return this.Age;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setAge(int Age) {
+        this.Age = Age;
     }
 
     public Date getBirthday() {
-        return this.birthday;
+        return this.Birthday;
     }
 
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
+    public void setBirthday(Date Birthday) {
+        this.Birthday = Birthday;
     }
 
 }

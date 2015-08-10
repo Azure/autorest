@@ -13,24 +13,24 @@ package fixtures.bodycomplex.models;
  * 
  */
 public class DateWrapper {
-    private Date field;
+    private Date Field;
 
-    private Date leap;
+    private Date Leap;
 
     public Date getField() {
-        return this.field;
+        return this.Field;
     }
 
-    public void setField(Date field) {
-        this.field = field;
+    public void setField(Date Field) {
+        this.Field = Field;
     }
 
     public Date getLeap() {
-        return this.leap;
+        return this.Leap;
     }
 
-    public void setLeap(Date leap) {
-        this.leap = leap;
+    public void setLeap(Date Leap) {
+        this.Leap = Leap;
     }
 
 }

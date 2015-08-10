@@ -10,7 +10,7 @@
 package fixtures.bodyboolean;
 
 import com.microsoft.rest.ServiceClient;
-import com.squareup.okhtpp.OkHttpClient;
+import com.squareup.okhttp.OkHttpClient;
 import retrofit.RestAdapter;
 
 /**
@@ -23,7 +23,9 @@ public class AutoRestBoolTestServiceImpl extends ServiceClient<AutoRestBoolTestS
      * Gets the URI used as the base for all cloud service requests.
      * @return The BaseUri value.
      */
-    public String getBaseUri();
+    public String getBaseUri() {
+        return this.baseUri;
+    }
 
     private Bool bool;
 
@@ -31,21 +33,23 @@ public class AutoRestBoolTestServiceImpl extends ServiceClient<AutoRestBoolTestS
      * Test Infrastructure for AutoRest
      * @return the bool value.
      */
-    Bool getBool();
+    public Bool getBool() {
+        return this.bool;
+    }
 
-    public AutoRestBoolTestService() {
+    public AutoRestBoolTestServiceImpl() {
         this("http://localhost");
     }
 
-    public AutoRestBoolTestService(String baseUri) {
+    public AutoRestBoolTestServiceImpl(String baseUri) {
         super();
         this.baseUri = baseUri;
         initialize();
     }
 
-    public AutoRestBoolTestService(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
+    public AutoRestBoolTestServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
         super(client, restAdapterBuilder);
-        this.baseUri = baseUri();
+        this.baseUri = baseUri;
         initialize();
     }
 

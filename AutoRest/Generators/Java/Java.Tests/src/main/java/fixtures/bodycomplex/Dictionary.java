@@ -13,7 +13,7 @@ import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
 
-public interface dictionary {
+public interface Dictionary {
     @GET("/complex/dictionary/typed/valid")
     DictionaryWrapper getValid();
 

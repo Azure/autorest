@@ -13,7 +13,7 @@ import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
 
-public interface basicOperations {
+public interface BasicOperations {
     @GET("/complex/basic/valid")
     Basic getValid();
 

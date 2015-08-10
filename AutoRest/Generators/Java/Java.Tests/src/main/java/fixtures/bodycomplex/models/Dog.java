@@ -13,14 +13,14 @@ package fixtures.bodycomplex.models;
  * 
  */
 public class Dog {
-    private String food;
+    private String Food;
 
     public String getFood() {
-        return this.food;
+        return this.Food;
     }
 
-    public void setFood(String food) {
-        this.food = food;
+    public void setFood(String Food) {
+        this.Food = Food;
     }
 
 }

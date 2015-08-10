@@ -13,34 +13,34 @@ package fixtures.bodycomplex.models;
  * 
  */
 public class Basic {
-    private int id;
+    private int Id;
 
-    private String name;
+    private String Name;
 
-    private CMYKColors color;
+    private CMYKColors Color;
 
     public int getId() {
-        return this.id;
+        return this.Id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int Id) {
+        this.Id = Id;
     }
 
     public String getName() {
-        return this.name;
+        return this.Name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String Name) {
+        this.Name = Name;
     }
 
     public CMYKColors getColor() {
-        return this.color;
+        return this.Color;
     }
 
-    public void setColor(CMYKColors color) {
-        this.color = color;
+    public void setColor(CMYKColors Color) {
+        this.Color = Color;
     }
 
 }

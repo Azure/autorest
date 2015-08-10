@@ -13,7 +13,7 @@ import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
 
-public interface files {
+public interface Files {
     @GET("/files/stream/nonempty")
     Stream getFile();
 

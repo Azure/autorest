@@ -13,7 +13,7 @@ import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
 
-public interface httpSuccess {
+public interface HttpSuccess {
     @HEAD("/http/success/200")
     void head200();
 

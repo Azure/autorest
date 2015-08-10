@@ -13,34 +13,34 @@ package fixtures.bodycomplex.models;
  * 
  */
 public class StringWrapper {
-    private String field;
+    private String Field;
 
-    private String empty;
+    private String Empty;
 
-    private String null;
+    private String NullProperty;
 
     public String getField() {
-        return this.field;
+        return this.Field;
     }
 
-    public void setField(String field) {
-        this.field = field;
+    public void setField(String Field) {
+        this.Field = Field;
     }
 
     public String getEmpty() {
-        return this.empty;
+        return this.Empty;
     }
 
-    public void setEmpty(String empty) {
-        this.empty = empty;
+    public void setEmpty(String Empty) {
+        this.Empty = Empty;
     }
 
-    public String getNull() {
-        return this.null;
+    public String getNullProperty() {
+        return this.NullProperty;
     }
 
-    public void setNull(String null) {
-        this.null = null;
+    public void setNullProperty(String NullProperty) {
+        this.NullProperty = NullProperty;
     }
 
 }

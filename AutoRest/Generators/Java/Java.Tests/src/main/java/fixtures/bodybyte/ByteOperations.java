@@ -13,7 +13,7 @@ import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
 
-public interface byteOperations {
+public interface ByteOperations {
     @GET("/byte/null")
     byte[] getNull();
 

@@ -97,12 +97,20 @@ namespace Microsoft.Rest.Generator.Java
 
         public override string GetFieldName(string name)
         {
-            return CamelCase(name);
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return name;
+            }
+            return '_' + GetVariableName(name);
         }
 
         public override string GetPropertyName(string name)
         {
-            return CamelCase(name);
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return name;
+            }
+            return PascalCase(RemoveInvalidCharacters(GetEscapedReservedName(name, "Property")));
         }
 
         public override string GetMethodName(string name)

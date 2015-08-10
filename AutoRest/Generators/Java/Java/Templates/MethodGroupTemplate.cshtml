@@ -14,7 +14,7 @@ import retrofit.Callback;
 import retrofit.client.Response;
 @EmptyLine
 
-public interface @Model.MethodGroupName {
+public interface @Model.MethodGroupName.ToPascalCase() {
 @foreach (var method in Model.MethodTemplateModels)
 {
 @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url)")

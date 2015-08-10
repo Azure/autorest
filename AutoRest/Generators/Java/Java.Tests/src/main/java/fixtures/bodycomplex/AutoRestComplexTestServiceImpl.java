@@ -10,7 +10,7 @@
 package fixtures.bodycomplex;
 
 import com.microsoft.rest.ServiceClient;
-import com.squareup.okhtpp.OkHttpClient;
+import com.squareup.okhttp.OkHttpClient;
 import retrofit.RestAdapter;
 
 /**
@@ -23,7 +23,9 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient<AutoRestComple
      * Gets the URI used as the base for all cloud service requests.
      * @return The BaseUri value.
      */
-    public String getBaseUri();
+    public String getBaseUri() {
+        return this.baseUri;
+    }
 
     private BasicOperations basicOperations;
 
@@ -31,7 +33,9 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient<AutoRestComple
      * Test Infrastructure for AutoRest
      * @return the basicOperations value.
      */
-    BasicOperations getBasicOperations();
+    public BasicOperations getBasicOperations() {
+        return this.basicOperations;
+    }
 
     private Primitive primitive;
 
@@ -39,7 +43,9 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient<AutoRestComple
      * Test Infrastructure for AutoRest
      * @return the primitive value.
      */
-    Primitive getPrimitive();
+    public Primitive getPrimitive() {
+        return this.primitive;
+    }
 
     private ArrayOperations arrayOperations;
 
@@ -47,7 +53,9 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient<AutoRestComple
      * Test Infrastructure for AutoRest
      * @return the arrayOperations value.
      */
-    ArrayOperations getArrayOperations();
+    public ArrayOperations getArrayOperations() {
+        return this.arrayOperations;
+    }
 
     private Dictionary dictionary;
 
@@ -55,7 +63,9 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient<AutoRestComple
      * Test Infrastructure for AutoRest
      * @return the dictionary value.
      */
-    Dictionary getDictionary();
+    public Dictionary getDictionary() {
+        return this.dictionary;
+    }
 
     private Inheritance inheritance;
 
@@ -63,7 +73,9 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient<AutoRestComple
      * Test Infrastructure for AutoRest
      * @return the inheritance value.
      */
-    Inheritance getInheritance();
+    public Inheritance getInheritance() {
+        return this.inheritance;
+    }
 
     private Polymorphism polymorphism;
 
@@ -71,7 +83,9 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient<AutoRestComple
      * Test Infrastructure for AutoRest
      * @return the polymorphism value.
      */
-    Polymorphism getPolymorphism();
+    public Polymorphism getPolymorphism() {
+        return this.polymorphism;
+    }
 
     private Polymorphicrecursive polymorphicrecursive;
 
@@ -79,21 +93,23 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient<AutoRestComple
      * Test Infrastructure for AutoRest
      * @return the polymorphicrecursive value.
      */
-    Polymorphicrecursive getPolymorphicrecursive();
+    public Polymorphicrecursive getPolymorphicrecursive() {
+        return this.polymorphicrecursive;
+    }
 
-    public AutoRestComplexTestService() {
+    public AutoRestComplexTestServiceImpl() {
         this("http://localhost");
     }
 
-    public AutoRestComplexTestService(String baseUri) {
+    public AutoRestComplexTestServiceImpl(String baseUri) {
         super();
         this.baseUri = baseUri;
         initialize();
     }
 
-    public AutoRestComplexTestService(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
+    public AutoRestComplexTestServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
         super(client, restAdapterBuilder);
-        this.baseUri = baseUri();
+        this.baseUri = baseUri;
         initialize();
     }
 

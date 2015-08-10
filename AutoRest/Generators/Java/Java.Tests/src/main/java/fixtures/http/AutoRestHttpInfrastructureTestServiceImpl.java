@@ -10,7 +10,7 @@
 package fixtures.http;
 
 import com.microsoft.rest.ServiceClient;
-import com.squareup.okhtpp.OkHttpClient;
+import com.squareup.okhttp.OkHttpClient;
 import retrofit.RestAdapter;
 
 /**
@@ -23,7 +23,9 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient<Aut
      * Gets the URI used as the base for all cloud service requests.
      * @return The BaseUri value.
      */
-    public String getBaseUri();
+    public String getBaseUri() {
+        return this.baseUri;
+    }
 
     private HttpFailure httpFailure;
 
@@ -31,7 +33,9 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient<Aut
      * Test Infrastructure for AutoRest
      * @return the httpFailure value.
      */
-    HttpFailure getHttpFailure();
+    public HttpFailure getHttpFailure() {
+        return this.httpFailure;
+    }
 
     private HttpSuccess httpSuccess;
 
@@ -39,7 +43,9 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient<Aut
      * Test Infrastructure for AutoRest
      * @return the httpSuccess value.
      */
-    HttpSuccess getHttpSuccess();
+    public HttpSuccess getHttpSuccess() {
+        return this.httpSuccess;
+    }
 
     private HttpRedirects httpRedirects;
 
@@ -47,7 +53,9 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient<Aut
      * Test Infrastructure for AutoRest
      * @return the httpRedirects value.
      */
-    HttpRedirects getHttpRedirects();
+    public HttpRedirects getHttpRedirects() {
+        return this.httpRedirects;
+    }
 
     private HttpClientFailure httpClientFailure;
 
@@ -55,7 +63,9 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient<Aut
      * Test Infrastructure for AutoRest
      * @return the httpClientFailure value.
      */
-    HttpClientFailure getHttpClientFailure();
+    public HttpClientFailure getHttpClientFailure() {
+        return this.httpClientFailure;
+    }
 
     private HttpServerFailure httpServerFailure;
 
@@ -63,7 +73,9 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient<Aut
      * Test Infrastructure for AutoRest
      * @return the httpServerFailure value.
      */
-    HttpServerFailure getHttpServerFailure();
+    public HttpServerFailure getHttpServerFailure() {
+        return this.httpServerFailure;
+    }
 
     private HttpRetry httpRetry;
 
@@ -71,7 +83,9 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient<Aut
      * Test Infrastructure for AutoRest
      * @return the httpRetry value.
      */
-    HttpRetry getHttpRetry();
+    public HttpRetry getHttpRetry() {
+        return this.httpRetry;
+    }
 
     private MultipleResponses multipleResponses;
 
@@ -79,21 +93,23 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient<Aut
      * Test Infrastructure for AutoRest
      * @return the multipleResponses value.
      */
-    MultipleResponses getMultipleResponses();
+    public MultipleResponses getMultipleResponses() {
+        return this.multipleResponses;
+    }
 
-    public AutoRestHttpInfrastructureTestService() {
+    public AutoRestHttpInfrastructureTestServiceImpl() {
         this("http://localhost");
     }
 
-    public AutoRestHttpInfrastructureTestService(String baseUri) {
+    public AutoRestHttpInfrastructureTestServiceImpl(String baseUri) {
         super();
         this.baseUri = baseUri;
         initialize();
     }
 
-    public AutoRestHttpInfrastructureTestService(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
+    public AutoRestHttpInfrastructureTestServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
         super(client, restAdapterBuilder);
-        this.baseUri = baseUri();
+        this.baseUri = baseUri;
         initialize();
     }
 

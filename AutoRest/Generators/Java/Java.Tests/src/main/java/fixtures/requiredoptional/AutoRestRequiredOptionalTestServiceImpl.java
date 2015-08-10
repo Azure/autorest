@@ -10,7 +10,7 @@
 package fixtures.requiredoptional;
 
 import com.microsoft.rest.ServiceClient;
-import com.squareup.okhtpp.OkHttpClient;
+import com.squareup.okhttp.OkHttpClient;
 import retrofit.RestAdapter;
 
 /**
@@ -23,13 +23,15 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient<AutoR
      * Gets the URI used as the base for all cloud service requests.
      * @return The BaseUri value.
      */
-    public String getBaseUri();
+    public String getBaseUri() {
+        return this.baseUri;
+    }
 
     private String requiredGlobalPath;
 
     /**
      * number of items to skip
-     * @return the requiredGlobalPath value.
+     * @return the RequiredGlobalPath value.
      */
     public String getRequiredGlobalPath();
 
@@ -37,7 +39,7 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient<AutoR
 
     /**
      * number of items to skip
-     * @return the requiredGlobalQuery value.
+     * @return the RequiredGlobalQuery value.
      */
     public String getRequiredGlobalQuery();
 
@@ -47,7 +49,9 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient<AutoR
      * Test Infrastructure for AutoRest
      * @return the implicit value.
      */
-    Implicit getImplicit();
+    public Implicit getImplicit() {
+        return this.implicit;
+    }
 
     private Explicit explicit;
 
@@ -55,21 +59,23 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient<AutoR
      * Test Infrastructure for AutoRest
      * @return the explicit value.
      */
-    Explicit getExplicit();
+    public Explicit getExplicit() {
+        return this.explicit;
+    }
 
-    public AutoRestRequiredOptionalTestService() {
+    public AutoRestRequiredOptionalTestServiceImpl() {
         this("http://localhost");
     }
 
-    public AutoRestRequiredOptionalTestService(String baseUri) {
+    public AutoRestRequiredOptionalTestServiceImpl(String baseUri) {
         super();
         this.baseUri = baseUri;
         initialize();
     }
 
-    public AutoRestRequiredOptionalTestService(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
+    public AutoRestRequiredOptionalTestServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
         super(client, restAdapterBuilder);
-        this.baseUri = baseUri();
+        this.baseUri = baseUri;
         initialize();
     }
 

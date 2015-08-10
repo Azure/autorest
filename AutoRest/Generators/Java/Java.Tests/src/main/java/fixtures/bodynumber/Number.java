@@ -13,7 +13,7 @@ import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
 
-public interface number {
+public interface Number {
     @GET("/number/null")
     double getNull();
 

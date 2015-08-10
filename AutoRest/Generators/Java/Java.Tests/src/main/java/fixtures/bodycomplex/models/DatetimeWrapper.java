@@ -13,24 +13,24 @@ package fixtures.bodycomplex.models;
  * 
  */
 public class DatetimeWrapper {
-    private Date field;
+    private Date Field;
 
-    private Date now;
+    private Date Now;
 
     public Date getField() {
-        return this.field;
+        return this.Field;
     }
 
-    public void setField(Date field) {
-        this.field = field;
+    public void setField(Date Field) {
+        this.Field = Field;
     }
 
     public Date getNow() {
-        return this.now;
+        return this.Now;
     }
 
-    public void setNow(Date now) {
-        this.now = now;
+    public void setNow(Date Now) {
+        this.Now = Now;
     }
 
 }

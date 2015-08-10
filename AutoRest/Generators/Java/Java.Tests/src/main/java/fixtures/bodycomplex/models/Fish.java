@@ -13,34 +13,34 @@ package fixtures.bodycomplex.models;
  * 
  */
 public class Fish {
-    private String species;
+    private String Species;
 
-    private double length;
+    private double Length;
 
-    private List<Fish> siblings;
+    private List<Fish> Siblings;
 
     public String getSpecies() {
-        return this.species;
+        return this.Species;
     }
 
-    public void setSpecies(String species) {
-        this.species = species;
+    public void setSpecies(String Species) {
+        this.Species = Species;
     }
 
     public double getLength() {
-        return this.length;
+        return this.Length;
     }
 
-    public void setLength(double length) {
-        this.length = length;
+    public void setLength(double Length) {
+        this.Length = Length;
     }
 
     public List<Fish> getSiblings() {
-        return this.siblings;
+        return this.Siblings;
     }
 
-    public void setSiblings(List<Fish> siblings) {
-        this.siblings = siblings;
+    public void setSiblings(List<Fish> Siblings) {
+        this.Siblings = Siblings;
     }
 
 }

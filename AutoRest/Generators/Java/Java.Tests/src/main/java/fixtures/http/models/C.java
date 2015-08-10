@@ -13,14 +13,14 @@ package fixtures.http.models;
  * 
  */
 public class C {
-    private String httpCode;
+    private String HttpCode;
 
     public String getHttpCode() {
-        return this.httpCode;
+        return this.HttpCode;
     }
 
-    public void setHttpCode(String httpCode) {
-        this.httpCode = httpCode;
+    public void setHttpCode(String HttpCode) {
+        this.HttpCode = HttpCode;
     }
 
 }

@@ -10,7 +10,7 @@
 package fixtures.bodybyte;
 
 import com.microsoft.rest.ServiceClient;
-import com.squareup.okhtpp.OkHttpClient;
+import com.squareup.okhttp.OkHttpClient;
 import retrofit.RestAdapter;
 
 /**
@@ -23,7 +23,9 @@ public class AutoRestSwaggerBATByteServiceImpl extends ServiceClient<AutoRestSwa
      * Gets the URI used as the base for all cloud service requests.
      * @return The BaseUri value.
      */
-    public String getBaseUri();
+    public String getBaseUri() {
+        return this.baseUri;
+    }
 
     private ByteOperations byteOperations;
 
@@ -31,21 +33,23 @@ public class AutoRestSwaggerBATByteServiceImpl extends ServiceClient<AutoRestSwa
      * Test Infrastructure for AutoRest Swagger BAT
      * @return the byteOperations value.
      */
-    ByteOperations getByteOperations();
+    public ByteOperations getByteOperations() {
+        return this.byteOperations;
+    }
 
-    public AutoRestSwaggerBATByteService() {
+    public AutoRestSwaggerBATByteServiceImpl() {
         this("http://localhost");
     }
 
-    public AutoRestSwaggerBATByteService(String baseUri) {
+    public AutoRestSwaggerBATByteServiceImpl(String baseUri) {
         super();
         this.baseUri = baseUri;
         initialize();
     }
 
-    public AutoRestSwaggerBATByteService(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
+    public AutoRestSwaggerBATByteServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
         super(client, restAdapterBuilder);
-        this.baseUri = baseUri();
+        this.baseUri = baseUri;
         initialize();
     }
 

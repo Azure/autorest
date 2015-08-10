@@ -13,7 +13,7 @@ import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
 
-public interface implicit {
+public interface Implicit {
     @GET("/reqopt/implicit/required/path/{pathParameter}")
     ErrorModel getRequiredPath(String pathParameter);
 

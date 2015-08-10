@@ -13,7 +13,7 @@ import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
 
-public interface httpServerFailure {
+public interface HttpServerFailure {
     @HEAD("/http/failure/server/501")
     ErrorModel head501();
 

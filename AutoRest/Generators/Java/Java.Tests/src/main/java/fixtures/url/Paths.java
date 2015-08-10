@@ -13,7 +13,7 @@ import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
 
-public interface paths {
+public interface Paths {
     @GET("/paths/bool/true/{boolPath}")
     void getBooleanTrue(boolean boolPath);
 

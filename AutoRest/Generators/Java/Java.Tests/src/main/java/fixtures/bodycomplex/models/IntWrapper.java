@@ -13,24 +13,24 @@ package fixtures.bodycomplex.models;
  * 
  */
 public class IntWrapper {
-    private int field1;
+    private int Field1;
 
-    private int field2;
+    private int Field2;
 
     public int getField1() {
-        return this.field1;
+        return this.Field1;
     }
 
-    public void setField1(int field1) {
-        this.field1 = field1;
+    public void setField1(int Field1) {
+        this.Field1 = Field1;
     }
 
     public int getField2() {
-        return this.field2;
+        return this.Field2;
     }
 
-    public void setField2(int field2) {
-        this.field2 = field2;
+    public void setField2(int Field2) {
+        this.Field2 = Field2;
     }
 
 }

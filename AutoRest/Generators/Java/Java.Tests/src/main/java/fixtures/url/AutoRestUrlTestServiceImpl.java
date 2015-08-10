@@ -10,7 +10,7 @@
 package fixtures.url;
 
 import com.microsoft.rest.ServiceClient;
-import com.squareup.okhtpp.OkHttpClient;
+import com.squareup.okhttp.OkHttpClient;
 import retrofit.RestAdapter;
 
 /**
@@ -23,13 +23,15 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient<AutoRestUrlTestSer
      * Gets the URI used as the base for all cloud service requests.
      * @return The BaseUri value.
      */
-    public String getBaseUri();
+    public String getBaseUri() {
+        return this.baseUri;
+    }
 
     private String globalStringPath;
 
     /**
      * A string value 'globalItemStringPath' that appears in the path
-     * @return the globalStringPath value.
+     * @return the GlobalStringPath value.
      */
     public String getGlobalStringPath();
 
@@ -39,7 +41,9 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient<AutoRestUrlTestSer
      * Test Infrastructure for AutoRest
      * @return the paths value.
      */
-    Paths getPaths();
+    public Paths getPaths() {
+        return this.paths;
+    }
 
     private Queries queries;
 
@@ -47,7 +51,9 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient<AutoRestUrlTestSer
      * Test Infrastructure for AutoRest
      * @return the queries value.
      */
-    Queries getQueries();
+    public Queries getQueries() {
+        return this.queries;
+    }
 
     private PathItems pathItems;
 
@@ -55,21 +61,23 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient<AutoRestUrlTestSer
      * Test Infrastructure for AutoRest
      * @return the pathItems value.
      */
-    PathItems getPathItems();
+    public PathItems getPathItems() {
+        return this.pathItems;
+    }
 
-    public AutoRestUrlTestService() {
+    public AutoRestUrlTestServiceImpl() {
         this("http://localhost");
     }
 
-    public AutoRestUrlTestService(String baseUri) {
+    public AutoRestUrlTestServiceImpl(String baseUri) {
         super();
         this.baseUri = baseUri;
         initialize();
     }
 
-    public AutoRestUrlTestService(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
+    public AutoRestUrlTestServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
         super(client, restAdapterBuilder);
-        this.baseUri = baseUri();
+        this.baseUri = baseUri;
         initialize();
     }
 

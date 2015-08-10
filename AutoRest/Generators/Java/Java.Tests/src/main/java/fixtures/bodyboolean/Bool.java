@@ -13,7 +13,7 @@ import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
 
-public interface bool {
+public interface Bool {
     @GET("/bool/true")
     boolean getTrue();
 

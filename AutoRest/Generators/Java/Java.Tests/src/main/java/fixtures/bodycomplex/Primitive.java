@@ -13,7 +13,7 @@ import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
 
-public interface primitive {
+public interface Primitive {
     @GET("/complex/primitive/integer")
     IntWrapper getInt();
 

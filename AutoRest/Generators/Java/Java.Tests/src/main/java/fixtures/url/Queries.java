@@ -13,7 +13,7 @@ import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
 
-public interface queries {
+public interface Queries {
     @GET("/queries/bool/true")
     void getBooleanTrue(boolean boolQuery);
 

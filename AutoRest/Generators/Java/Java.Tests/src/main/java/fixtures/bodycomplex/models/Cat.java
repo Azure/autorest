@@ -13,24 +13,24 @@ package fixtures.bodycomplex.models;
  * 
  */
 public class Cat {
-    private String color;
+    private String Color;
 
-    private List<Dog> hates;
+    private List<Dog> Hates;
 
     public String getColor() {
-        return this.color;
+        return this.Color;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setColor(String Color) {
+        this.Color = Color;
     }
 
     public List<Dog> getHates() {
-        return this.hates;
+        return this.Hates;
     }
 
-    public void setHates(List<Dog> hates) {
-        this.hates = hates;
+    public void setHates(List<Dog> Hates) {
+        this.Hates = Hates;
     }
 
 }

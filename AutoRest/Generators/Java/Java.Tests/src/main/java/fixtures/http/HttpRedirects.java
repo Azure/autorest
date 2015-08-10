@@ -13,7 +13,7 @@ import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
 
-public interface httpRedirects {
+public interface HttpRedirects {
     @HEAD("/http/redirect/300")
     void head300();
 
