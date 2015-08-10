@@ -13,15 +13,15 @@ package fixtures.bodynumber.models;
  * 
  */
 public class ErrorModel {
-    private Integer status;
+    private int status;
 
     private String message;
 
-    public Integer getStatus() {
+    public int getStatus() {
         return this.status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

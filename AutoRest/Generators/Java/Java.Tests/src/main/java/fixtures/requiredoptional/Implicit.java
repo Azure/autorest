@@ -18,22 +18,22 @@ public interface implicit {
     ErrorModel getRequiredPath(String pathParameter);
 
     @GET("/reqopt/implicit/required/path/{pathParameter}")
-    void getRequiredPathAsync(String pathParameter, Callback<Response> cb);
+    void getRequiredPathAsync(String pathParameter, Callback<ErrorModel> cb);
 
     @PUT("/reqopt/implicit/optional/query")
-     putOptionalQuery(String queryParameter);
+    void putOptionalQuery(String queryParameter);
 
     @PUT("/reqopt/implicit/optional/query")
     void putOptionalQueryAsync(String queryParameter, Callback<Response> cb);
 
     @PUT("/reqopt/implicit/optional/header")
-     putOptionalHeader(String queryParameter);
+    void putOptionalHeader(String queryParameter);
 
     @PUT("/reqopt/implicit/optional/header")
     void putOptionalHeaderAsync(String queryParameter, Callback<Response> cb);
 
     @PUT("/reqopt/implicit/optional/body")
-     putOptionalBody(String bodyParameter);
+    void putOptionalBody(String bodyParameter);
 
     @PUT("/reqopt/implicit/optional/body")
     void putOptionalBodyAsync(String bodyParameter, Callback<Response> cb);
@@ -42,18 +42,18 @@ public interface implicit {
     ErrorModel getRequiredGlobalPath();
 
     @GET("/reqopt/global/required/path/{required-global-path}")
-    void getRequiredGlobalPathAsync(Callback<Response> cb);
+    void getRequiredGlobalPathAsync(Callback<ErrorModel> cb);
 
     @GET("/reqopt/global/required/query")
     ErrorModel getRequiredGlobalQuery();
 
     @GET("/reqopt/global/required/query")
-    void getRequiredGlobalQueryAsync(Callback<Response> cb);
+    void getRequiredGlobalQueryAsync(Callback<ErrorModel> cb);
 
     @GET("/reqopt/global/optional/query")
     ErrorModel getOptionalGlobalQuery();
 
     @GET("/reqopt/global/optional/query")
-    void getOptionalGlobalQueryAsync(Callback<Response> cb);
+    void getOptionalGlobalQueryAsync(Callback<ErrorModel> cb);
 
 }

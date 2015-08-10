@@ -13,13 +13,13 @@ package fixtures.bodycomplex.models;
  * 
  */
 public class DictionaryWrapper {
-    private Object defaultProgram;
+    private Map<String> defaultProgram;
 
-    public Object getDefaultProgram() {
+    public Map<String> getDefaultProgram() {
         return this.defaultProgram;
     }
 
-    public void setDefaultProgram(Object defaultProgram) {
+    public void setDefaultProgram(Map<String> defaultProgram) {
         this.defaultProgram = defaultProgram;
     }
 

@@ -13,23 +13,23 @@ package fixtures.bodycomplex.models;
  * 
  */
 public class BooleanWrapper {
-    private Boolean fieldTrue;
+    private boolean fieldTrue;
 
-    private Boolean fieldFalse;
+    private boolean fieldFalse;
 
-    public Boolean getFieldTrue() {
+    public boolean getFieldTrue() {
         return this.fieldTrue;
     }
 
-    public void setFieldTrue(Boolean fieldTrue) {
+    public void setFieldTrue(boolean fieldTrue) {
         this.fieldTrue = fieldTrue;
     }
 
-    public Boolean getFieldFalse() {
+    public boolean getFieldFalse() {
         return this.fieldFalse;
     }
 
-    public void setFieldFalse(Boolean fieldFalse) {
+    public void setFieldFalse(boolean fieldFalse) {
         this.fieldFalse = fieldFalse;
     }
 

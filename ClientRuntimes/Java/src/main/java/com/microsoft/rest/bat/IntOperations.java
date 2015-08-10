@@ -19,16 +19,16 @@ public interface IntOperations {
     int getNull();
 
     @GET("/int/null")
-    void getNullAsync(Callback<Response> cb);
+    void getNullAsync(Callback<Integer> cb);
 
     @GET("/int/invalid")
     int getInvalid();
 
     @GET("/int/invalid")
-    void getInvalidAsync(Callback<Response> cb);
+    void getInvalidAsync(Callback<Integer> cb);
 
     @PUT("/int/max/32")
-    Response putMax32(@Body int intBody) throws ServiceException;
+    void putMax32(@Body int intBody) throws ServiceException;
 
     @PUT("/int/max/32")
     void putMax32Async(Callback<Response> cb) throws ServiceException;

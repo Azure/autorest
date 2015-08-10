@@ -18,10 +18,10 @@ public interface dictionary {
     DictionaryWrapper getValid();
 
     @GET("/complex/dictionary/typed/valid")
-    void getValidAsync(Callback<Response> cb);
+    void getValidAsync(Callback<DictionaryWrapper> cb);
 
     @PUT("/complex/dictionary/typed/valid")
-     putValid(DictionaryWrapper complexBody);
+    void putValid(DictionaryWrapper complexBody);
 
     @PUT("/complex/dictionary/typed/valid")
     void putValidAsync(DictionaryWrapper complexBody, Callback<Response> cb);
@@ -30,10 +30,10 @@ public interface dictionary {
     DictionaryWrapper getEmpty();
 
     @GET("/complex/dictionary/typed/empty")
-    void getEmptyAsync(Callback<Response> cb);
+    void getEmptyAsync(Callback<DictionaryWrapper> cb);
 
     @PUT("/complex/dictionary/typed/empty")
-     putEmpty(DictionaryWrapper complexBody);
+    void putEmpty(DictionaryWrapper complexBody);
 
     @PUT("/complex/dictionary/typed/empty")
     void putEmptyAsync(DictionaryWrapper complexBody, Callback<Response> cb);
@@ -42,12 +42,12 @@ public interface dictionary {
     DictionaryWrapper getNull();
 
     @GET("/complex/dictionary/typed/null")
-    void getNullAsync(Callback<Response> cb);
+    void getNullAsync(Callback<DictionaryWrapper> cb);
 
     @GET("/complex/dictionary/typed/notprovided")
     DictionaryWrapper getNotProvided();
 
     @GET("/complex/dictionary/typed/notprovided")
-    void getNotProvidedAsync(Callback<Response> cb);
+    void getNotProvidedAsync(Callback<DictionaryWrapper> cb);
 
 }

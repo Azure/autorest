@@ -15,207 +15,207 @@ import retrofit.client.Response;
 
 public interface queries {
     @GET("/queries/bool/true")
-     getBooleanTrue(Boolean boolQuery);
+    void getBooleanTrue(boolean boolQuery);
 
     @GET("/queries/bool/true")
-    void getBooleanTrueAsync(Boolean boolQuery, Callback<Response> cb);
+    void getBooleanTrueAsync(boolean boolQuery, Callback<Response> cb);
 
     @GET("/queries/bool/false")
-     getBooleanFalse(Boolean boolQuery);
+    void getBooleanFalse(boolean boolQuery);
 
     @GET("/queries/bool/false")
-    void getBooleanFalseAsync(Boolean boolQuery, Callback<Response> cb);
+    void getBooleanFalseAsync(boolean boolQuery, Callback<Response> cb);
 
     @GET("/queries/bool/null")
-     getBooleanNull(Boolean boolQuery);
+    void getBooleanNull(boolean boolQuery);
 
     @GET("/queries/bool/null")
-    void getBooleanNullAsync(Boolean boolQuery, Callback<Response> cb);
+    void getBooleanNullAsync(boolean boolQuery, Callback<Response> cb);
 
     @GET("/queries/int/1000000")
-     getIntOneMillion(Integer intQuery);
+    void getIntOneMillion(int intQuery);
 
     @GET("/queries/int/1000000")
-    void getIntOneMillionAsync(Integer intQuery, Callback<Response> cb);
+    void getIntOneMillionAsync(int intQuery, Callback<Response> cb);
 
     @GET("/queries/int/-1000000")
-     getIntNegativeOneMillion(Integer intQuery);
+    void getIntNegativeOneMillion(int intQuery);
 
     @GET("/queries/int/-1000000")
-    void getIntNegativeOneMillionAsync(Integer intQuery, Callback<Response> cb);
+    void getIntNegativeOneMillionAsync(int intQuery, Callback<Response> cb);
 
     @GET("/queries/int/null")
-     getIntNull(Integer intQuery);
+    void getIntNull(int intQuery);
 
     @GET("/queries/int/null")
-    void getIntNullAsync(Integer intQuery, Callback<Response> cb);
+    void getIntNullAsync(int intQuery, Callback<Response> cb);
 
     @GET("/queries/long/10000000000")
-     getTenBillion(Long longQuery);
+    void getTenBillion(long longQuery);
 
     @GET("/queries/long/10000000000")
-    void getTenBillionAsync(Long longQuery, Callback<Response> cb);
+    void getTenBillionAsync(long longQuery, Callback<Response> cb);
 
     @GET("/queries/long/-10000000000")
-     getNegativeTenBillion(Long longQuery);
+    void getNegativeTenBillion(long longQuery);
 
     @GET("/queries/long/-10000000000")
-    void getNegativeTenBillionAsync(Long longQuery, Callback<Response> cb);
+    void getNegativeTenBillionAsync(long longQuery, Callback<Response> cb);
 
     @GET("/queries/long/null")
-     getLongNull(Long longQuery);
+    void getLongNull(long longQuery);
 
     @GET("/queries/long/null")
-    void getLongNullAsync(Long longQuery, Callback<Response> cb);
+    void getLongNullAsync(long longQuery, Callback<Response> cb);
 
     @GET("/queries/float/1.034E+20")
-     floatScientificPositive(Double floatQuery);
+    void floatScientificPositive(double floatQuery);
 
     @GET("/queries/float/1.034E+20")
-    void floatScientificPositiveAsync(Double floatQuery, Callback<Response> cb);
+    void floatScientificPositiveAsync(double floatQuery, Callback<Response> cb);
 
     @GET("/queries/float/-1.034E-20")
-     floatScientificNegative(Double floatQuery);
+    void floatScientificNegative(double floatQuery);
 
     @GET("/queries/float/-1.034E-20")
-    void floatScientificNegativeAsync(Double floatQuery, Callback<Response> cb);
+    void floatScientificNegativeAsync(double floatQuery, Callback<Response> cb);
 
     @GET("/queries/float/null")
-     floatNull(Double floatQuery);
+    void floatNull(double floatQuery);
 
     @GET("/queries/float/null")
-    void floatNullAsync(Double floatQuery, Callback<Response> cb);
+    void floatNullAsync(double floatQuery, Callback<Response> cb);
 
     @GET("/queries/double/9999999.999")
-     doubleDecimalPositive(Double doubleQuery);
+    void doubleDecimalPositive(double doubleQuery);
 
     @GET("/queries/double/9999999.999")
-    void doubleDecimalPositiveAsync(Double doubleQuery, Callback<Response> cb);
+    void doubleDecimalPositiveAsync(double doubleQuery, Callback<Response> cb);
 
     @GET("/queries/double/-9999999.999")
-     doubleDecimalNegative(Double doubleQuery);
+    void doubleDecimalNegative(double doubleQuery);
 
     @GET("/queries/double/-9999999.999")
-    void doubleDecimalNegativeAsync(Double doubleQuery, Callback<Response> cb);
+    void doubleDecimalNegativeAsync(double doubleQuery, Callback<Response> cb);
 
     @GET("/queries/double/null")
-     doubleNull(Double doubleQuery);
+    void doubleNull(double doubleQuery);
 
     @GET("/queries/double/null")
-    void doubleNullAsync(Double doubleQuery, Callback<Response> cb);
+    void doubleNullAsync(double doubleQuery, Callback<Response> cb);
 
     @GET("/queries/string/unicode/")
-     stringUnicode(String stringQuery);
+    void stringUnicode(String stringQuery);
 
     @GET("/queries/string/unicode/")
     void stringUnicodeAsync(String stringQuery, Callback<Response> cb);
 
     @GET("/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend")
-     stringUrlEncoded(String stringQuery);
+    void stringUrlEncoded(String stringQuery);
 
     @GET("/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend")
     void stringUrlEncodedAsync(String stringQuery, Callback<Response> cb);
 
     @GET("/queries/string/empty")
-     stringEmpty(String stringQuery);
+    void stringEmpty(String stringQuery);
 
     @GET("/queries/string/empty")
     void stringEmptyAsync(String stringQuery, Callback<Response> cb);
 
     @GET("/queries/string/null")
-     stringNull(String stringQuery);
+    void stringNull(String stringQuery);
 
     @GET("/queries/string/null")
     void stringNullAsync(String stringQuery, Callback<Response> cb);
 
     @GET("/queries/enum/green%20color")
-     enumValid(UriColor enumQuery);
+    void enumValid(UriColor enumQuery);
 
     @GET("/queries/enum/green%20color")
     void enumValidAsync(UriColor enumQuery, Callback<Response> cb);
 
     @GET("/queries/enum/null")
-     enumNull(UriColor enumQuery);
+    void enumNull(UriColor enumQuery);
 
     @GET("/queries/enum/null")
     void enumNullAsync(UriColor enumQuery, Callback<Response> cb);
 
     @GET("/queries/byte/multibyte")
-     byteMultiByte(Buffer byteQuery);
+    void byteMultiByte(byte[] byteQuery);
 
     @GET("/queries/byte/multibyte")
-    void byteMultiByteAsync(Buffer byteQuery, Callback<Response> cb);
+    void byteMultiByteAsync(byte[] byteQuery, Callback<Response> cb);
 
     @GET("/queries/byte/empty")
-     byteEmpty(Buffer byteQuery);
+    void byteEmpty(byte[] byteQuery);
 
     @GET("/queries/byte/empty")
-    void byteEmptyAsync(Buffer byteQuery, Callback<Response> cb);
+    void byteEmptyAsync(byte[] byteQuery, Callback<Response> cb);
 
     @GET("/queries/byte/null")
-     byteNull(Buffer byteQuery);
+    void byteNull(byte[] byteQuery);
 
     @GET("/queries/byte/null")
-    void byteNullAsync(Buffer byteQuery, Callback<Response> cb);
+    void byteNullAsync(byte[] byteQuery, Callback<Response> cb);
 
     @GET("/queries/date/2012-01-01")
-     dateValid(Date dateQuery);
+    void dateValid(Date dateQuery);
 
     @GET("/queries/date/2012-01-01")
     void dateValidAsync(Date dateQuery, Callback<Response> cb);
 
     @GET("/queries/date/null")
-     dateNull(Date dateQuery);
+    void dateNull(Date dateQuery);
 
     @GET("/queries/date/null")
     void dateNullAsync(Date dateQuery, Callback<Response> cb);
 
     @GET("/queries/datetime/2012-01-01T01%3A01%3A01Z")
-     dateTimeValid(Date dateTimeQuery);
+    void dateTimeValid(Date dateTimeQuery);
 
     @GET("/queries/datetime/2012-01-01T01%3A01%3A01Z")
     void dateTimeValidAsync(Date dateTimeQuery, Callback<Response> cb);
 
     @GET("/queries/datetime/null")
-     dateTimeNull(Date dateTimeQuery);
+    void dateTimeNull(Date dateTimeQuery);
 
     @GET("/queries/datetime/null")
     void dateTimeNullAsync(Date dateTimeQuery, Callback<Response> cb);
 
     @GET("/queries/array/csv/string/valid")
-     arrayStringCsvValid(Array arrayQuery);
+    void arrayStringCsvValid(List<String> arrayQuery);
 
     @GET("/queries/array/csv/string/valid")
-    void arrayStringCsvValidAsync(Array arrayQuery, Callback<Response> cb);
+    void arrayStringCsvValidAsync(List<String> arrayQuery, Callback<Response> cb);
 
     @GET("/queries/array/csv/string/null")
-     arrayStringCsvNull(Array arrayQuery);
+    void arrayStringCsvNull(List<String> arrayQuery);
 
     @GET("/queries/array/csv/string/null")
-    void arrayStringCsvNullAsync(Array arrayQuery, Callback<Response> cb);
+    void arrayStringCsvNullAsync(List<String> arrayQuery, Callback<Response> cb);
 
     @GET("/queries/array/csv/string/empty")
-     arrayStringCsvEmpty(Array arrayQuery);
+    void arrayStringCsvEmpty(List<String> arrayQuery);
 
     @GET("/queries/array/csv/string/empty")
-    void arrayStringCsvEmptyAsync(Array arrayQuery, Callback<Response> cb);
+    void arrayStringCsvEmptyAsync(List<String> arrayQuery, Callback<Response> cb);
 
     @GET("/queries/array/ssv/string/valid")
-     arrayStringSsvValid(Array arrayQuery);
+    void arrayStringSsvValid(List<String> arrayQuery);
 
     @GET("/queries/array/ssv/string/valid")
-    void arrayStringSsvValidAsync(Array arrayQuery, Callback<Response> cb);
+    void arrayStringSsvValidAsync(List<String> arrayQuery, Callback<Response> cb);
 
     @GET("/queries/array/tsv/string/valid")
-     arrayStringTsvValid(Array arrayQuery);
+    void arrayStringTsvValid(List<String> arrayQuery);
 
     @GET("/queries/array/tsv/string/valid")
-    void arrayStringTsvValidAsync(Array arrayQuery, Callback<Response> cb);
+    void arrayStringTsvValidAsync(List<String> arrayQuery, Callback<Response> cb);
 
     @GET("/queries/array/pipes/string/valid")
-     arrayStringPipesValid(Array arrayQuery);
+    void arrayStringPipesValid(List<String> arrayQuery);
 
     @GET("/queries/array/pipes/string/valid")
-    void arrayStringPipesValidAsync(Array arrayQuery, Callback<Response> cb);
+    void arrayStringPipesValidAsync(List<String> arrayQuery, Callback<Response> cb);
 
 }

@@ -15,345 +15,345 @@ import retrofit.client.Response;
 
 public interface arrayOperations {
     @GET("/array/null")
-    Array getNull();
+    List<Integer> getNull();
 
     @GET("/array/null")
-    void getNullAsync(Callback<Response> cb);
+    void getNullAsync(Callback<List<Integer>> cb);
 
     @GET("/array/invalid")
-    Array getInvalid();
+    List<Integer> getInvalid();
 
     @GET("/array/invalid")
-    void getInvalidAsync(Callback<Response> cb);
+    void getInvalidAsync(Callback<List<Integer>> cb);
 
     @GET("/array/empty")
-    Array getEmpty();
+    List<Integer> getEmpty();
 
     @GET("/array/empty")
-    void getEmptyAsync(Callback<Response> cb);
+    void getEmptyAsync(Callback<List<Integer>> cb);
 
     @PUT("/array/empty")
-     putEmpty(Array arrayBody);
+    void putEmpty(List<String> arrayBody);
 
     @PUT("/array/empty")
-    void putEmptyAsync(Array arrayBody, Callback<Response> cb);
+    void putEmptyAsync(List<String> arrayBody, Callback<Response> cb);
 
     @GET("/array/prim/boolean/tfft")
-    Array getBooleanTfft();
+    List<Boolean> getBooleanTfft();
 
     @GET("/array/prim/boolean/tfft")
-    void getBooleanTfftAsync(Callback<Response> cb);
+    void getBooleanTfftAsync(Callback<List<Boolean>> cb);
 
     @PUT("/array/prim/boolean/tfft")
-     putBooleanTfft(Array arrayBody);
+    void putBooleanTfft(List<Boolean> arrayBody);
 
     @PUT("/array/prim/boolean/tfft")
-    void putBooleanTfftAsync(Array arrayBody, Callback<Response> cb);
+    void putBooleanTfftAsync(List<Boolean> arrayBody, Callback<Response> cb);
 
     @GET("/array/prim/boolean/true.null.false")
-    Array getBooleanInvalidNull();
+    List<Boolean> getBooleanInvalidNull();
 
     @GET("/array/prim/boolean/true.null.false")
-    void getBooleanInvalidNullAsync(Callback<Response> cb);
+    void getBooleanInvalidNullAsync(Callback<List<Boolean>> cb);
 
     @GET("/array/prim/boolean/true.boolean.false")
-    Array getBooleanInvalidString();
+    List<Boolean> getBooleanInvalidString();
 
     @GET("/array/prim/boolean/true.boolean.false")
-    void getBooleanInvalidStringAsync(Callback<Response> cb);
+    void getBooleanInvalidStringAsync(Callback<List<Boolean>> cb);
 
     @GET("/array/prim/integer/1.-1.3.300")
-    Array getIntegerValid();
+    List<Integer> getIntegerValid();
 
     @GET("/array/prim/integer/1.-1.3.300")
-    void getIntegerValidAsync(Callback<Response> cb);
+    void getIntegerValidAsync(Callback<List<Integer>> cb);
 
     @PUT("/array/prim/integer/1.-1.3.300")
-     putIntegerValid(Array arrayBody);
+    void putIntegerValid(List<Integer> arrayBody);
 
     @PUT("/array/prim/integer/1.-1.3.300")
-    void putIntegerValidAsync(Array arrayBody, Callback<Response> cb);
+    void putIntegerValidAsync(List<Integer> arrayBody, Callback<Response> cb);
 
     @GET("/array/prim/integer/1.null.zero")
-    Array getIntInvalidNull();
+    List<Integer> getIntInvalidNull();
 
     @GET("/array/prim/integer/1.null.zero")
-    void getIntInvalidNullAsync(Callback<Response> cb);
+    void getIntInvalidNullAsync(Callback<List<Integer>> cb);
 
     @GET("/array/prim/integer/1.integer.0")
-    Array getIntInvalidString();
+    List<Integer> getIntInvalidString();
 
     @GET("/array/prim/integer/1.integer.0")
-    void getIntInvalidStringAsync(Callback<Response> cb);
+    void getIntInvalidStringAsync(Callback<List<Integer>> cb);
 
     @GET("/array/prim/long/1.-1.3.300")
-    Array getLongValid();
+    List<Long> getLongValid();
 
     @GET("/array/prim/long/1.-1.3.300")
-    void getLongValidAsync(Callback<Response> cb);
+    void getLongValidAsync(Callback<List<Long>> cb);
 
     @PUT("/array/prim/long/1.-1.3.300")
-     putLongValid(Array arrayBody);
+    void putLongValid(List<Long> arrayBody);
 
     @PUT("/array/prim/long/1.-1.3.300")
-    void putLongValidAsync(Array arrayBody, Callback<Response> cb);
+    void putLongValidAsync(List<Long> arrayBody, Callback<Response> cb);
 
     @GET("/array/prim/long/1.null.zero")
-    Array getLongInvalidNull();
+    List<Long> getLongInvalidNull();
 
     @GET("/array/prim/long/1.null.zero")
-    void getLongInvalidNullAsync(Callback<Response> cb);
+    void getLongInvalidNullAsync(Callback<List<Long>> cb);
 
     @GET("/array/prim/long/1.integer.0")
-    Array getLongInvalidString();
+    List<Long> getLongInvalidString();
 
     @GET("/array/prim/long/1.integer.0")
-    void getLongInvalidStringAsync(Callback<Response> cb);
+    void getLongInvalidStringAsync(Callback<List<Long>> cb);
 
     @GET("/array/prim/float/0--0.01-1.2e20")
-    Array getFloatValid();
+    List<Double> getFloatValid();
 
     @GET("/array/prim/float/0--0.01-1.2e20")
-    void getFloatValidAsync(Callback<Response> cb);
+    void getFloatValidAsync(Callback<List<Double>> cb);
 
     @PUT("/array/prim/float/0--0.01-1.2e20")
-     putFloatValid(Array arrayBody);
+    void putFloatValid(List<Double> arrayBody);
 
     @PUT("/array/prim/float/0--0.01-1.2e20")
-    void putFloatValidAsync(Array arrayBody, Callback<Response> cb);
+    void putFloatValidAsync(List<Double> arrayBody, Callback<Response> cb);
 
     @GET("/array/prim/float/0.0-null-1.2e20")
-    Array getFloatInvalidNull();
+    List<Double> getFloatInvalidNull();
 
     @GET("/array/prim/float/0.0-null-1.2e20")
-    void getFloatInvalidNullAsync(Callback<Response> cb);
+    void getFloatInvalidNullAsync(Callback<List<Double>> cb);
 
     @GET("/array/prim/float/1.number.0")
-    Array getFloatInvalidString();
+    List<Double> getFloatInvalidString();
 
     @GET("/array/prim/float/1.number.0")
-    void getFloatInvalidStringAsync(Callback<Response> cb);
+    void getFloatInvalidStringAsync(Callback<List<Double>> cb);
 
     @GET("/array/prim/double/0--0.01-1.2e20")
-    Array getDoubleValid();
+    List<Double> getDoubleValid();
 
     @GET("/array/prim/double/0--0.01-1.2e20")
-    void getDoubleValidAsync(Callback<Response> cb);
+    void getDoubleValidAsync(Callback<List<Double>> cb);
 
     @PUT("/array/prim/double/0--0.01-1.2e20")
-     putDoubleValid(Array arrayBody);
+    void putDoubleValid(List<Double> arrayBody);
 
     @PUT("/array/prim/double/0--0.01-1.2e20")
-    void putDoubleValidAsync(Array arrayBody, Callback<Response> cb);
+    void putDoubleValidAsync(List<Double> arrayBody, Callback<Response> cb);
 
     @GET("/array/prim/double/0.0-null-1.2e20")
-    Array getDoubleInvalidNull();
+    List<Double> getDoubleInvalidNull();
 
     @GET("/array/prim/double/0.0-null-1.2e20")
-    void getDoubleInvalidNullAsync(Callback<Response> cb);
+    void getDoubleInvalidNullAsync(Callback<List<Double>> cb);
 
     @GET("/array/prim/double/1.number.0")
-    Array getDoubleInvalidString();
+    List<Double> getDoubleInvalidString();
 
     @GET("/array/prim/double/1.number.0")
-    void getDoubleInvalidStringAsync(Callback<Response> cb);
+    void getDoubleInvalidStringAsync(Callback<List<Double>> cb);
 
     @GET("/array/prim/string/foo1.foo2.foo3")
-    Array getStringValid();
+    List<String> getStringValid();
 
     @GET("/array/prim/string/foo1.foo2.foo3")
-    void getStringValidAsync(Callback<Response> cb);
+    void getStringValidAsync(Callback<List<String>> cb);
 
     @PUT("/array/prim/string/foo1.foo2.foo3")
-     putStringValid(Array arrayBody);
+    void putStringValid(List<String> arrayBody);
 
     @PUT("/array/prim/string/foo1.foo2.foo3")
-    void putStringValidAsync(Array arrayBody, Callback<Response> cb);
+    void putStringValidAsync(List<String> arrayBody, Callback<Response> cb);
 
     @GET("/array/prim/string/foo.null.foo2")
-    Array getStringWithNull();
+    List<String> getStringWithNull();
 
     @GET("/array/prim/string/foo.null.foo2")
-    void getStringWithNullAsync(Callback<Response> cb);
+    void getStringWithNullAsync(Callback<List<String>> cb);
 
     @GET("/array/prim/string/foo.123.foo2")
-    Array getStringWithInvalid();
+    List<String> getStringWithInvalid();
 
     @GET("/array/prim/string/foo.123.foo2")
-    void getStringWithInvalidAsync(Callback<Response> cb);
+    void getStringWithInvalidAsync(Callback<List<String>> cb);
 
     @GET("/array/prim/date/valid")
-    Array getDateValid();
+    List<Date> getDateValid();
 
     @GET("/array/prim/date/valid")
-    void getDateValidAsync(Callback<Response> cb);
+    void getDateValidAsync(Callback<List<Date>> cb);
 
     @PUT("/array/prim/date/valid")
-     putDateValid(Array arrayBody);
+    void putDateValid(List<Date> arrayBody);
 
     @PUT("/array/prim/date/valid")
-    void putDateValidAsync(Array arrayBody, Callback<Response> cb);
+    void putDateValidAsync(List<Date> arrayBody, Callback<Response> cb);
 
     @GET("/array/prim/date/invalidnull")
-    Array getDateInvalidNull();
+    List<Date> getDateInvalidNull();
 
     @GET("/array/prim/date/invalidnull")
-    void getDateInvalidNullAsync(Callback<Response> cb);
+    void getDateInvalidNullAsync(Callback<List<Date>> cb);
 
     @GET("/array/prim/date/invalidchars")
-    Array getDateInvalidChars();
+    List<Date> getDateInvalidChars();
 
     @GET("/array/prim/date/invalidchars")
-    void getDateInvalidCharsAsync(Callback<Response> cb);
+    void getDateInvalidCharsAsync(Callback<List<Date>> cb);
 
     @GET("/array/prim/date-time/valid")
-    Array getDateTimeValid();
+    List<Date> getDateTimeValid();
 
     @GET("/array/prim/date-time/valid")
-    void getDateTimeValidAsync(Callback<Response> cb);
+    void getDateTimeValidAsync(Callback<List<Date>> cb);
 
     @PUT("/array/prim/date-time/valid")
-     putDateTimeValid(Array arrayBody);
+    void putDateTimeValid(List<Date> arrayBody);
 
     @PUT("/array/prim/date-time/valid")
-    void putDateTimeValidAsync(Array arrayBody, Callback<Response> cb);
+    void putDateTimeValidAsync(List<Date> arrayBody, Callback<Response> cb);
 
     @GET("/array/prim/date-time/invalidnull")
-    Array getDateTimeInvalidNull();
+    List<Date> getDateTimeInvalidNull();
 
     @GET("/array/prim/date-time/invalidnull")
-    void getDateTimeInvalidNullAsync(Callback<Response> cb);
+    void getDateTimeInvalidNullAsync(Callback<List<Date>> cb);
 
     @GET("/array/prim/date-time/invalidchars")
-    Array getDateTimeInvalidChars();
+    List<Date> getDateTimeInvalidChars();
 
     @GET("/array/prim/date-time/invalidchars")
-    void getDateTimeInvalidCharsAsync(Callback<Response> cb);
+    void getDateTimeInvalidCharsAsync(Callback<List<Date>> cb);
 
     @GET("/array/prim/byte/valid")
-    Array getByteValid();
+    List<Byte[]> getByteValid();
 
     @GET("/array/prim/byte/valid")
-    void getByteValidAsync(Callback<Response> cb);
+    void getByteValidAsync(Callback<List<Byte[]>> cb);
 
     @PUT("/array/prim/byte/valid")
-     putByteValid(Array arrayBody);
+    void putByteValid(List<Byte[]> arrayBody);
 
     @PUT("/array/prim/byte/valid")
-    void putByteValidAsync(Array arrayBody, Callback<Response> cb);
+    void putByteValidAsync(List<Byte[]> arrayBody, Callback<Response> cb);
 
     @GET("/array/prim/byte/invalidnull")
-    Array getByteInvalidNull();
+    List<Byte[]> getByteInvalidNull();
 
     @GET("/array/prim/byte/invalidnull")
-    void getByteInvalidNullAsync(Callback<Response> cb);
+    void getByteInvalidNullAsync(Callback<List<Byte[]>> cb);
 
     @GET("/array/complex/null")
-    Array getComplexNull();
+    List<Product> getComplexNull();
 
     @GET("/array/complex/null")
-    void getComplexNullAsync(Callback<Response> cb);
+    void getComplexNullAsync(Callback<List<Product>> cb);
 
     @GET("/array/complex/empty")
-    Array getComplexEmpty();
+    List<Product> getComplexEmpty();
 
     @GET("/array/complex/empty")
-    void getComplexEmptyAsync(Callback<Response> cb);
+    void getComplexEmptyAsync(Callback<List<Product>> cb);
 
     @GET("/array/complex/itemnull")
-    Array getComplexItemNull();
+    List<Product> getComplexItemNull();
 
     @GET("/array/complex/itemnull")
-    void getComplexItemNullAsync(Callback<Response> cb);
+    void getComplexItemNullAsync(Callback<List<Product>> cb);
 
     @GET("/array/complex/itemempty")
-    Array getComplexItemEmpty();
+    List<Product> getComplexItemEmpty();
 
     @GET("/array/complex/itemempty")
-    void getComplexItemEmptyAsync(Callback<Response> cb);
+    void getComplexItemEmptyAsync(Callback<List<Product>> cb);
 
     @GET("/array/complex/valid")
-    Array getComplexValid();
+    List<Product> getComplexValid();
 
     @GET("/array/complex/valid")
-    void getComplexValidAsync(Callback<Response> cb);
+    void getComplexValidAsync(Callback<List<Product>> cb);
 
     @PUT("/array/complex/valid")
-     putComplexValid(Array arrayBody);
+    void putComplexValid(List<Product> arrayBody);
 
     @PUT("/array/complex/valid")
-    void putComplexValidAsync(Array arrayBody, Callback<Response> cb);
+    void putComplexValidAsync(List<Product> arrayBody, Callback<Response> cb);
 
     @GET("/array/array/null")
-    Array getArrayNull();
+    List<List<String>> getArrayNull();
 
     @GET("/array/array/null")
-    void getArrayNullAsync(Callback<Response> cb);
+    void getArrayNullAsync(Callback<List<List<String>>> cb);
 
     @GET("/array/array/empty")
-    Array getArrayEmpty();
+    List<List<String>> getArrayEmpty();
 
     @GET("/array/array/empty")
-    void getArrayEmptyAsync(Callback<Response> cb);
+    void getArrayEmptyAsync(Callback<List<List<String>>> cb);
 
     @GET("/array/array/itemnull")
-    Array getArrayItemNull();
+    List<List<String>> getArrayItemNull();
 
     @GET("/array/array/itemnull")
-    void getArrayItemNullAsync(Callback<Response> cb);
+    void getArrayItemNullAsync(Callback<List<List<String>>> cb);
 
     @GET("/array/array/itemempty")
-    Array getArrayItemEmpty();
+    List<List<String>> getArrayItemEmpty();
 
     @GET("/array/array/itemempty")
-    void getArrayItemEmptyAsync(Callback<Response> cb);
+    void getArrayItemEmptyAsync(Callback<List<List<String>>> cb);
 
     @GET("/array/array/valid")
-    Array getArrayValid();
+    List<List<String>> getArrayValid();
 
     @GET("/array/array/valid")
-    void getArrayValidAsync(Callback<Response> cb);
+    void getArrayValidAsync(Callback<List<List<String>>> cb);
 
     @PUT("/array/array/valid")
-     putArrayValid(Array arrayBody);
+    void putArrayValid(List<List<String>> arrayBody);
 
     @PUT("/array/array/valid")
-    void putArrayValidAsync(Array arrayBody, Callback<Response> cb);
+    void putArrayValidAsync(List<List<String>> arrayBody, Callback<Response> cb);
 
     @GET("/array/dictionary/null")
-    Array getDictionaryNull();
+    List<Map<String>> getDictionaryNull();
 
     @GET("/array/dictionary/null")
-    void getDictionaryNullAsync(Callback<Response> cb);
+    void getDictionaryNullAsync(Callback<List<Map<String>>> cb);
 
     @GET("/array/dictionary/empty")
-    Array getDictionaryEmpty();
+    List<Map<String>> getDictionaryEmpty();
 
     @GET("/array/dictionary/empty")
-    void getDictionaryEmptyAsync(Callback<Response> cb);
+    void getDictionaryEmptyAsync(Callback<List<Map<String>>> cb);
 
     @GET("/array/dictionary/itemnull")
-    Array getDictionaryItemNull();
+    List<Map<String>> getDictionaryItemNull();
 
     @GET("/array/dictionary/itemnull")
-    void getDictionaryItemNullAsync(Callback<Response> cb);
+    void getDictionaryItemNullAsync(Callback<List<Map<String>>> cb);
 
     @GET("/array/dictionary/itemempty")
-    Array getDictionaryItemEmpty();
+    List<Map<String>> getDictionaryItemEmpty();
 
     @GET("/array/dictionary/itemempty")
-    void getDictionaryItemEmptyAsync(Callback<Response> cb);
+    void getDictionaryItemEmptyAsync(Callback<List<Map<String>>> cb);
 
     @GET("/array/dictionary/valid")
-    Array getDictionaryValid();
+    List<Map<String>> getDictionaryValid();
 
     @GET("/array/dictionary/valid")
-    void getDictionaryValidAsync(Callback<Response> cb);
+    void getDictionaryValidAsync(Callback<List<Map<String>>> cb);
 
     @PUT("/array/dictionary/valid")
-     putDictionaryValid(Array arrayBody);
+    void putDictionaryValid(List<Map<String>> arrayBody);
 
     @PUT("/array/dictionary/valid")
-    void putDictionaryValidAsync(Array arrayBody, Callback<Response> cb);
+    void putDictionaryValidAsync(List<Map<String>> arrayBody, Callback<Response> cb);
 
 }

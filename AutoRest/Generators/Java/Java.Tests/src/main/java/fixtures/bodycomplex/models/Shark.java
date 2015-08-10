@@ -13,15 +13,15 @@ package fixtures.bodycomplex.models;
  * 
  */
 public class Shark {
-    private Integer age;
+    private int age;
 
     private Date birthday;
 
-    public Integer getAge() {
+    public int getAge() {
         return this.age;
     }
 
-    public void setAge(Integer age) {
+    public void setAge(int age) {
         this.age = age;
     }
 

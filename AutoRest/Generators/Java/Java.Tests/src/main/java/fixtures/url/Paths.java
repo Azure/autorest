@@ -15,139 +15,139 @@ import retrofit.client.Response;
 
 public interface paths {
     @GET("/paths/bool/true/{boolPath}")
-     getBooleanTrue(Boolean boolPath);
+    void getBooleanTrue(boolean boolPath);
 
     @GET("/paths/bool/true/{boolPath}")
-    void getBooleanTrueAsync(Boolean boolPath, Callback<Response> cb);
+    void getBooleanTrueAsync(boolean boolPath, Callback<Response> cb);
 
     @GET("/paths/bool/false/{boolPath}")
-     getBooleanFalse(Boolean boolPath);
+    void getBooleanFalse(boolean boolPath);
 
     @GET("/paths/bool/false/{boolPath}")
-    void getBooleanFalseAsync(Boolean boolPath, Callback<Response> cb);
+    void getBooleanFalseAsync(boolean boolPath, Callback<Response> cb);
 
     @GET("/paths/int/1000000/{intPath}")
-     getIntOneMillion(Integer intPath);
+    void getIntOneMillion(int intPath);
 
     @GET("/paths/int/1000000/{intPath}")
-    void getIntOneMillionAsync(Integer intPath, Callback<Response> cb);
+    void getIntOneMillionAsync(int intPath, Callback<Response> cb);
 
     @GET("/paths/int/-1000000/{intPath}")
-     getIntNegativeOneMillion(Integer intPath);
+    void getIntNegativeOneMillion(int intPath);
 
     @GET("/paths/int/-1000000/{intPath}")
-    void getIntNegativeOneMillionAsync(Integer intPath, Callback<Response> cb);
+    void getIntNegativeOneMillionAsync(int intPath, Callback<Response> cb);
 
     @GET("/paths/long/10000000000/{longPath}")
-     getTenBillion(Long longPath);
+    void getTenBillion(long longPath);
 
     @GET("/paths/long/10000000000/{longPath}")
-    void getTenBillionAsync(Long longPath, Callback<Response> cb);
+    void getTenBillionAsync(long longPath, Callback<Response> cb);
 
     @GET("/paths/long/-10000000000/{longPath}")
-     getNegativeTenBillion(Long longPath);
+    void getNegativeTenBillion(long longPath);
 
     @GET("/paths/long/-10000000000/{longPath}")
-    void getNegativeTenBillionAsync(Long longPath, Callback<Response> cb);
+    void getNegativeTenBillionAsync(long longPath, Callback<Response> cb);
 
     @GET("/paths/float/1.034E+20/{floatPath}")
-     floatScientificPositive(Double floatPath);
+    void floatScientificPositive(double floatPath);
 
     @GET("/paths/float/1.034E+20/{floatPath}")
-    void floatScientificPositiveAsync(Double floatPath, Callback<Response> cb);
+    void floatScientificPositiveAsync(double floatPath, Callback<Response> cb);
 
     @GET("/paths/float/-1.034E-20/{floatPath}")
-     floatScientificNegative(Double floatPath);
+    void floatScientificNegative(double floatPath);
 
     @GET("/paths/float/-1.034E-20/{floatPath}")
-    void floatScientificNegativeAsync(Double floatPath, Callback<Response> cb);
+    void floatScientificNegativeAsync(double floatPath, Callback<Response> cb);
 
     @GET("/paths/double/9999999.999/{doublePath}")
-     doubleDecimalPositive(Double doublePath);
+    void doubleDecimalPositive(double doublePath);
 
     @GET("/paths/double/9999999.999/{doublePath}")
-    void doubleDecimalPositiveAsync(Double doublePath, Callback<Response> cb);
+    void doubleDecimalPositiveAsync(double doublePath, Callback<Response> cb);
 
     @GET("/paths/double/-9999999.999/{doublePath}")
-     doubleDecimalNegative(Double doublePath);
+    void doubleDecimalNegative(double doublePath);
 
     @GET("/paths/double/-9999999.999/{doublePath}")
-    void doubleDecimalNegativeAsync(Double doublePath, Callback<Response> cb);
+    void doubleDecimalNegativeAsync(double doublePath, Callback<Response> cb);
 
     @GET("/paths/string/unicode/{stringPath}")
-     stringUnicode(String stringPath);
+    void stringUnicode(String stringPath);
 
     @GET("/paths/string/unicode/{stringPath}")
     void stringUnicodeAsync(String stringPath, Callback<Response> cb);
 
     @GET("/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}")
-     stringUrlEncoded(String stringPath);
+    void stringUrlEncoded(String stringPath);
 
     @GET("/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}")
     void stringUrlEncodedAsync(String stringPath, Callback<Response> cb);
 
     @GET("/paths/string/empty/{stringPath}")
-     stringEmpty(String stringPath);
+    void stringEmpty(String stringPath);
 
     @GET("/paths/string/empty/{stringPath}")
     void stringEmptyAsync(String stringPath, Callback<Response> cb);
 
     @GET("/paths/string/null/{stringPath}")
-     stringNull(String stringPath);
+    void stringNull(String stringPath);
 
     @GET("/paths/string/null/{stringPath}")
     void stringNullAsync(String stringPath, Callback<Response> cb);
 
     @GET("/paths/enum/green%20color/{enumPath}")
-     enumValid(UriColor enumPath);
+    void enumValid(UriColor enumPath);
 
     @GET("/paths/enum/green%20color/{enumPath}")
     void enumValidAsync(UriColor enumPath, Callback<Response> cb);
 
     @GET("/paths/string/null/{enumPath}")
-     enumNull(UriColor enumPath);
+    void enumNull(UriColor enumPath);
 
     @GET("/paths/string/null/{enumPath}")
     void enumNullAsync(UriColor enumPath, Callback<Response> cb);
 
     @GET("/paths/byte/multibyte/{bytePath}")
-     byteMultiByte(Buffer bytePath);
+    void byteMultiByte(byte[] bytePath);
 
     @GET("/paths/byte/multibyte/{bytePath}")
-    void byteMultiByteAsync(Buffer bytePath, Callback<Response> cb);
+    void byteMultiByteAsync(byte[] bytePath, Callback<Response> cb);
 
     @GET("/paths/byte/empty/{bytePath}")
-     byteEmpty(Buffer bytePath);
+    void byteEmpty(byte[] bytePath);
 
     @GET("/paths/byte/empty/{bytePath}")
-    void byteEmptyAsync(Buffer bytePath, Callback<Response> cb);
+    void byteEmptyAsync(byte[] bytePath, Callback<Response> cb);
 
     @GET("/paths/byte/null/{bytePath}")
-     byteNull(Buffer bytePath);
+    void byteNull(byte[] bytePath);
 
     @GET("/paths/byte/null/{bytePath}")
-    void byteNullAsync(Buffer bytePath, Callback<Response> cb);
+    void byteNullAsync(byte[] bytePath, Callback<Response> cb);
 
     @GET("/paths/date/2012-01-01/{datePath}")
-     dateValid(Date datePath);
+    void dateValid(Date datePath);
 
     @GET("/paths/date/2012-01-01/{datePath}")
     void dateValidAsync(Date datePath, Callback<Response> cb);
 
     @GET("/paths/date/null/{datePath}")
-     dateNull(Date datePath);
+    void dateNull(Date datePath);
 
     @GET("/paths/date/null/{datePath}")
     void dateNullAsync(Date datePath, Callback<Response> cb);
 
     @GET("/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}")
-     dateTimeValid(Date dateTimePath);
+    void dateTimeValid(Date dateTimePath);
 
     @GET("/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}")
     void dateTimeValidAsync(Date dateTimePath, Callback<Response> cb);
 
     @GET("/paths/datetime/null/{dateTimePath}")
-     dateTimeNull(Date dateTimePath);
+    void dateTimeNull(Date dateTimePath);
 
     @GET("/paths/datetime/null/{dateTimePath}")
     void dateTimeNullAsync(Date dateTimePath, Callback<Response> cb);

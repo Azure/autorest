@@ -15,13 +15,13 @@ import retrofit.client.Response;
 
 public interface bool {
     @GET("/bool/true")
-    Boolean getTrue();
+    boolean getTrue();
 
     @GET("/bool/true")
-    void getTrueAsync(Callback<Response> cb);
+    void getTrueAsync(Callback<Boolean> cb);
 
     @PUT("/bool/true")
-     putTrue(Boolean boolBody);
+    void putTrue(Boolean boolBody);
 
     @PUT("/bool/true")
     void putTrueAsync(Boolean boolBody, Callback<Response> cb);
@@ -30,10 +30,10 @@ public interface bool {
     Boolean getFalse();
 
     @GET("/bool/false")
-    void getFalseAsync(Callback<Response> cb);
+    void getFalseAsync(Callback<Boolean> cb);
 
     @PUT("/bool/false")
-     putFalse(Boolean boolBody);
+    void putFalse(Boolean boolBody);
 
     @PUT("/bool/false")
     void putFalseAsync(Boolean boolBody, Callback<Response> cb);
@@ -42,12 +42,12 @@ public interface bool {
     Boolean getNull();
 
     @GET("/bool/null")
-    void getNullAsync(Callback<Response> cb);
+    void getNullAsync(Callback<Boolean> cb);
 
     @GET("/bool/invalid")
     Boolean getInvalid();
 
     @GET("/bool/invalid")
-    void getInvalidAsync(Callback<Response> cb);
+    void getInvalidAsync(Callback<Boolean> cb);
 
 }

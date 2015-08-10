@@ -18,10 +18,10 @@ public interface polymorphicrecursive {
     Fish getValid();
 
     @GET("/complex/polymorphicrecursive/valid")
-    void getValidAsync(Callback<Response> cb);
+    void getValidAsync(Callback<Fish> cb);
 
     @PUT("/complex/polymorphicrecursive/valid")
-     putValid(Fish complexBody);
+    void putValid(Fish complexBody);
 
     @PUT("/complex/polymorphicrecursive/valid")
     void putValidAsync(Fish complexBody, Callback<Response> cb);

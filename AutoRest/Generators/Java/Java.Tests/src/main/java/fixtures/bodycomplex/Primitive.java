@@ -18,10 +18,10 @@ public interface primitive {
     IntWrapper getInt();
 
     @GET("/complex/primitive/integer")
-    void getIntAsync(Callback<Response> cb);
+    void getIntAsync(Callback<IntWrapper> cb);
 
     @PUT("/complex/primitive/integer")
-     putInt(IntWrapper complexBody);
+    void putInt(IntWrapper complexBody);
 
     @PUT("/complex/primitive/integer")
     void putIntAsync(IntWrapper complexBody, Callback<Response> cb);
@@ -30,10 +30,10 @@ public interface primitive {
     LongWrapper getLong();
 
     @GET("/complex/primitive/long")
-    void getLongAsync(Callback<Response> cb);
+    void getLongAsync(Callback<LongWrapper> cb);
 
     @PUT("/complex/primitive/long")
-     putLong(LongWrapper complexBody);
+    void putLong(LongWrapper complexBody);
 
     @PUT("/complex/primitive/long")
     void putLongAsync(LongWrapper complexBody, Callback<Response> cb);
@@ -42,10 +42,10 @@ public interface primitive {
     FloatWrapper getFloat();
 
     @GET("/complex/primitive/float")
-    void getFloatAsync(Callback<Response> cb);
+    void getFloatAsync(Callback<FloatWrapper> cb);
 
     @PUT("/complex/primitive/float")
-     putFloat(FloatWrapper complexBody);
+    void putFloat(FloatWrapper complexBody);
 
     @PUT("/complex/primitive/float")
     void putFloatAsync(FloatWrapper complexBody, Callback<Response> cb);
@@ -54,10 +54,10 @@ public interface primitive {
     DoubleWrapper getDouble();
 
     @GET("/complex/primitive/double")
-    void getDoubleAsync(Callback<Response> cb);
+    void getDoubleAsync(Callback<DoubleWrapper> cb);
 
     @PUT("/complex/primitive/double")
-     putDouble(DoubleWrapper complexBody);
+    void putDouble(DoubleWrapper complexBody);
 
     @PUT("/complex/primitive/double")
     void putDoubleAsync(DoubleWrapper complexBody, Callback<Response> cb);
@@ -66,10 +66,10 @@ public interface primitive {
     BooleanWrapper getBool();
 
     @GET("/complex/primitive/bool")
-    void getBoolAsync(Callback<Response> cb);
+    void getBoolAsync(Callback<BooleanWrapper> cb);
 
     @PUT("/complex/primitive/bool")
-     putBool(BooleanWrapper complexBody);
+    void putBool(BooleanWrapper complexBody);
 
     @PUT("/complex/primitive/bool")
     void putBoolAsync(BooleanWrapper complexBody, Callback<Response> cb);
@@ -78,10 +78,10 @@ public interface primitive {
     StringWrapper getString();
 
     @GET("/complex/primitive/string")
-    void getStringAsync(Callback<Response> cb);
+    void getStringAsync(Callback<StringWrapper> cb);
 
     @PUT("/complex/primitive/string")
-     putString(StringWrapper complexBody);
+    void putString(StringWrapper complexBody);
 
     @PUT("/complex/primitive/string")
     void putStringAsync(StringWrapper complexBody, Callback<Response> cb);
@@ -90,10 +90,10 @@ public interface primitive {
     DateWrapper getDate();
 
     @GET("/complex/primitive/date")
-    void getDateAsync(Callback<Response> cb);
+    void getDateAsync(Callback<DateWrapper> cb);
 
     @PUT("/complex/primitive/date")
-     putDate(DateWrapper complexBody);
+    void putDate(DateWrapper complexBody);
 
     @PUT("/complex/primitive/date")
     void putDateAsync(DateWrapper complexBody, Callback<Response> cb);
@@ -102,10 +102,10 @@ public interface primitive {
     DatetimeWrapper getDateTime();
 
     @GET("/complex/primitive/datetime")
-    void getDateTimeAsync(Callback<Response> cb);
+    void getDateTimeAsync(Callback<DatetimeWrapper> cb);
 
     @PUT("/complex/primitive/datetime")
-     putDateTime(DatetimeWrapper complexBody);
+    void putDateTime(DatetimeWrapper complexBody);
 
     @PUT("/complex/primitive/datetime")
     void putDateTimeAsync(DatetimeWrapper complexBody, Callback<Response> cb);
@@ -114,10 +114,10 @@ public interface primitive {
     ByteWrapper getByte();
 
     @GET("/complex/primitive/byte")
-    void getByteAsync(Callback<Response> cb);
+    void getByteAsync(Callback<ByteWrapper> cb);
 
     @PUT("/complex/primitive/byte")
-     putByte(ByteWrapper complexBody);
+    void putByte(ByteWrapper complexBody);
 
     @PUT("/complex/primitive/byte")
     void putByteAsync(ByteWrapper complexBody, Callback<Response> cb);

@@ -15,33 +15,33 @@ import retrofit.client.Response;
 
 public interface byteOperations {
     @GET("/byte/null")
-    Buffer getNull();
+    byte[] getNull();
 
     @GET("/byte/null")
-    void getNullAsync(Callback<Response> cb);
+    void getNullAsync(Callback<Byte[]> cb);
 
     @GET("/byte/empty")
-    Buffer getEmpty();
+    Byte[] getEmpty();
 
     @GET("/byte/empty")
-    void getEmptyAsync(Callback<Response> cb);
+    void getEmptyAsync(Callback<Byte[]> cb);
 
     @GET("/byte/nonAscii")
-    Buffer getNonAscii();
+    Byte[] getNonAscii();
 
     @GET("/byte/nonAscii")
-    void getNonAsciiAsync(Callback<Response> cb);
+    void getNonAsciiAsync(Callback<Byte[]> cb);
 
     @PUT("/byte/nonAscii")
-     putNonAscii(Buffer byteBody);
+    void putNonAscii(Byte[] byteBody);
 
     @PUT("/byte/nonAscii")
-    void putNonAsciiAsync(Buffer byteBody, Callback<Response> cb);
+    void putNonAsciiAsync(Byte[] byteBody, Callback<Response> cb);
 
     @GET("/byte/invalid")
-    Buffer getInvalid();
+    Byte[] getInvalid();
 
     @GET("/byte/invalid")
-    void getInvalidAsync(Callback<Response> cb);
+    void getInvalidAsync(Callback<Byte[]> cb);
 
 }

@@ -18,10 +18,10 @@ public interface string {
     String getNull();
 
     @GET("/string/null")
-    void getNullAsync(Callback<Response> cb);
+    void getNullAsync(Callback<String> cb);
 
     @PUT("/string/null")
-     putNull(String stringBody);
+    void putNull(String stringBody);
 
     @PUT("/string/null")
     void putNullAsync(String stringBody, Callback<Response> cb);
@@ -30,10 +30,10 @@ public interface string {
     String getEmpty();
 
     @GET("/string/empty")
-    void getEmptyAsync(Callback<Response> cb);
+    void getEmptyAsync(Callback<String> cb);
 
     @PUT("/string/empty")
-     putEmpty(String stringBody);
+    void putEmpty(String stringBody);
 
     @PUT("/string/empty")
     void putEmptyAsync(String stringBody, Callback<Response> cb);
@@ -42,10 +42,10 @@ public interface string {
     String getMbcs();
 
     @GET("/string/mbcs")
-    void getMbcsAsync(Callback<Response> cb);
+    void getMbcsAsync(Callback<String> cb);
 
     @PUT("/string/mbcs")
-     putMbcs(String stringBody);
+    void putMbcs(String stringBody);
 
     @PUT("/string/mbcs")
     void putMbcsAsync(String stringBody, Callback<Response> cb);
@@ -54,10 +54,10 @@ public interface string {
     String getWhitespace();
 
     @GET("/string/whitespace")
-    void getWhitespaceAsync(Callback<Response> cb);
+    void getWhitespaceAsync(Callback<String> cb);
 
     @PUT("/string/whitespace")
-     putWhitespace(String stringBody);
+    void putWhitespace(String stringBody);
 
     @PUT("/string/whitespace")
     void putWhitespaceAsync(String stringBody, Callback<Response> cb);
@@ -66,6 +66,6 @@ public interface string {
     String getNotProvided();
 
     @GET("/string/notProvided")
-    void getNotProvidedAsync(Callback<Response> cb);
+    void getNotProvidedAsync(Callback<String> cb);
 
 }

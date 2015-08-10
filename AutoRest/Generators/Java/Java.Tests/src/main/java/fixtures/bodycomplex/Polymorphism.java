@@ -18,16 +18,16 @@ public interface polymorphism {
     Fish getValid();
 
     @GET("/complex/polymorphism/valid")
-    void getValidAsync(Callback<Response> cb);
+    void getValidAsync(Callback<Fish> cb);
 
     @PUT("/complex/polymorphism/valid")
-     putValid(Fish complexBody);
+    void putValid(Fish complexBody);
 
     @PUT("/complex/polymorphism/valid")
     void putValidAsync(Fish complexBody, Callback<Response> cb);
 
     @PUT("/complex/polymorphism/missingrequired/invalid")
-     putValidMissingRequired(Fish complexBody);
+    void putValidMissingRequired(Fish complexBody);
 
     @PUT("/complex/polymorphism/missingrequired/invalid")
     void putValidMissingRequiredAsync(Fish complexBody, Callback<Response> cb);

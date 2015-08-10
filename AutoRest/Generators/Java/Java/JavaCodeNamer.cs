@@ -231,15 +231,15 @@ namespace Microsoft.Rest.Generator.Java
             return compositeType;
         }
 
-        private static IType NormalizePrimaryType(PrimaryType primaryType)
+        private static PrimaryType NormalizePrimaryType(PrimaryType primaryType)
         {
             if (primaryType == PrimaryType.Boolean)
             {
-                primaryType.Name = "Boolean";
+                primaryType.Name = "boolean";
             }
             else if (primaryType == PrimaryType.ByteArray)
             {
-                primaryType.Name = "Buffer";
+                primaryType.Name = "byte[]";
             }
             else if (primaryType == PrimaryType.Date)
             {
@@ -251,19 +251,19 @@ namespace Microsoft.Rest.Generator.Java
             }
             else if (primaryType == PrimaryType.Double)
             {
-                primaryType.Name = "Double";
+                primaryType.Name = "double";
             }
             else if (primaryType == PrimaryType.Int)
             {
-                primaryType.Name = "Integer";
+                primaryType.Name = "int";
             }
             else if (primaryType == PrimaryType.Long)
             {
-                primaryType.Name = "Long";
+                primaryType.Name = "long";
             }
             else if (primaryType == PrimaryType.Stream)
             {
-                primaryType.Name = "Object";
+                primaryType.Name = "Stream";
             }
             else if (primaryType == PrimaryType.String)
             {
@@ -271,7 +271,7 @@ namespace Microsoft.Rest.Generator.Java
             }
             else if (primaryType == PrimaryType.TimeSpan)
             {
-                primaryType.Name = "TimeSpan";
+                primaryType.Name = "Period";
             }
             else if (primaryType == PrimaryType.Object)
             {
@@ -281,17 +281,50 @@ namespace Microsoft.Rest.Generator.Java
             return primaryType;
         }
 
+        public static IType NormalizeGenericType(IType type)
+        {
+            if (type is PrimaryType)
+            {
+                var primaryType = type as PrimaryType;
+                if (primaryType.Name == "boolean")
+                {
+                    primaryType.Name = "Boolean";
+                }
+                else if (primaryType.Name == "byte[]")
+                {
+                    primaryType.Name = "Byte[]";
+                }
+                else if (primaryType.Name == "double")
+                {
+                    primaryType.Name = "Double";
+                }
+                else if (primaryType.Name == "int")
+                {
+                    primaryType.Name = "Integer";
+                }
+                else if (primaryType.Name == "long")
+                {
+                    primaryType.Name = "Long";
+                }
+                return primaryType;
+            }
+            else
+            {
+                return type;
+            }
+        }
+
         private IType NormalizeSequenceType(SequenceType sequenceType)
         {
-            sequenceType.ElementType = NormalizeType(sequenceType.ElementType);
-            sequenceType.NameFormat = "Array";
+            sequenceType.ElementType = NormalizeGenericType(NormalizeType(sequenceType.ElementType));
+            sequenceType.NameFormat = "List<{0}>";
             return sequenceType;
         }
 
         private IType NormalizeDictionaryType(DictionaryType dictionaryType)
         {
-            dictionaryType.ValueType = NormalizeType(dictionaryType.ValueType);
-            dictionaryType.NameFormat = "Object";
+            dictionaryType.ValueType = NormalizeGenericType(NormalizeType(dictionaryType.ValueType));
+            dictionaryType.NameFormat = "Map<{0}>";
             return dictionaryType;
         }
     }

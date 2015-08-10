@@ -18,112 +18,112 @@ public interface multipleResponses {
     A get200Model204NoModelDefaultError200Valid();
 
     @GET("/http/payloads/200/A/204/none/default/Error/response/200/valid")
-    void get200Model204NoModelDefaultError200ValidAsync(Callback<Response> cb);
+    void get200Model204NoModelDefaultError200ValidAsync(Callback<A> cb);
 
     @GET("/http/payloads/200/A/204/none/default/Error/response/204/none")
     A get200Model204NoModelDefaultError204Valid();
 
     @GET("/http/payloads/200/A/204/none/default/Error/response/204/none")
-    void get200Model204NoModelDefaultError204ValidAsync(Callback<Response> cb);
+    void get200Model204NoModelDefaultError204ValidAsync(Callback<A> cb);
 
     @GET("/http/payloads/200/A/204/none/default/Error/response/201/valid")
     A get200Model204NoModelDefaultError201Invalid();
 
     @GET("/http/payloads/200/A/204/none/default/Error/response/201/valid")
-    void get200Model204NoModelDefaultError201InvalidAsync(Callback<Response> cb);
+    void get200Model204NoModelDefaultError201InvalidAsync(Callback<A> cb);
 
     @GET("/http/payloads/200/A/204/none/default/Error/response/202/none")
     A get200Model204NoModelDefaultError202None();
 
     @GET("/http/payloads/200/A/204/none/default/Error/response/202/none")
-    void get200Model204NoModelDefaultError202NoneAsync(Callback<Response> cb);
+    void get200Model204NoModelDefaultError202NoneAsync(Callback<A> cb);
 
     @GET("/http/payloads/200/A/204/none/default/Error/response/400/valid")
     A get200Model204NoModelDefaultError400Valid();
 
     @GET("/http/payloads/200/A/204/none/default/Error/response/400/valid")
-    void get200Model204NoModelDefaultError400ValidAsync(Callback<Response> cb);
+    void get200Model204NoModelDefaultError400ValidAsync(Callback<A> cb);
 
     @GET("/http/payloads/200/A/201/B/default/Error/response/200/valid")
     A get200Model201ModelDefaultError200Valid();
 
     @GET("/http/payloads/200/A/201/B/default/Error/response/200/valid")
-    void get200Model201ModelDefaultError200ValidAsync(Callback<Response> cb);
+    void get200Model201ModelDefaultError200ValidAsync(Callback<A> cb);
 
     @GET("/http/payloads/200/A/201/B/default/Error/response/201/valid")
     A get200Model201ModelDefaultError201Valid();
 
     @GET("/http/payloads/200/A/201/B/default/Error/response/201/valid")
-    void get200Model201ModelDefaultError201ValidAsync(Callback<Response> cb);
+    void get200Model201ModelDefaultError201ValidAsync(Callback<A> cb);
 
     @GET("/http/payloads/200/A/201/B/default/Error/response/400/valid")
     A get200Model201ModelDefaultError400Valid();
 
     @GET("/http/payloads/200/A/201/B/default/Error/response/400/valid")
-    void get200Model201ModelDefaultError400ValidAsync(Callback<Response> cb);
+    void get200Model201ModelDefaultError400ValidAsync(Callback<A> cb);
 
     @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/200/valid")
     Object get200ModelA201ModelC404ModelDDefaultError200Valid();
 
     @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/200/valid")
-    void get200ModelA201ModelC404ModelDDefaultError200ValidAsync(Callback<Response> cb);
+    void get200ModelA201ModelC404ModelDDefaultError200ValidAsync(Callback<Object> cb);
 
     @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/201/valid")
     Object get200ModelA201ModelC404ModelDDefaultError201Valid();
 
     @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/201/valid")
-    void get200ModelA201ModelC404ModelDDefaultError201ValidAsync(Callback<Response> cb);
+    void get200ModelA201ModelC404ModelDDefaultError201ValidAsync(Callback<Object> cb);
 
     @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/404/valid")
     Object get200ModelA201ModelC404ModelDDefaultError404Valid();
 
     @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/404/valid")
-    void get200ModelA201ModelC404ModelDDefaultError404ValidAsync(Callback<Response> cb);
+    void get200ModelA201ModelC404ModelDDefaultError404ValidAsync(Callback<Object> cb);
 
     @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/400/valid")
     Object get200ModelA201ModelC404ModelDDefaultError400Valid();
 
     @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/400/valid")
-    void get200ModelA201ModelC404ModelDDefaultError400ValidAsync(Callback<Response> cb);
+    void get200ModelA201ModelC404ModelDDefaultError400ValidAsync(Callback<Object> cb);
 
     @GET("/http/payloads/202/none/204/none/default/Error/response/202/none")
-     get202None204NoneDefaultError202None();
+    void get202None204NoneDefaultError202None();
 
     @GET("/http/payloads/202/none/204/none/default/Error/response/202/none")
     void get202None204NoneDefaultError202NoneAsync(Callback<Response> cb);
 
     @GET("/http/payloads/202/none/204/none/default/Error/response/204/none")
-     get202None204NoneDefaultError204None();
+    void get202None204NoneDefaultError204None();
 
     @GET("/http/payloads/202/none/204/none/default/Error/response/204/none")
     void get202None204NoneDefaultError204NoneAsync(Callback<Response> cb);
 
     @GET("/http/payloads/202/none/204/none/default/Error/response/400/valid")
-     get202None204NoneDefaultError400Valid();
+    void get202None204NoneDefaultError400Valid();
 
     @GET("/http/payloads/202/none/204/none/default/Error/response/400/valid")
     void get202None204NoneDefaultError400ValidAsync(Callback<Response> cb);
 
     @GET("/http/payloads/202/none/204/none/default/none/response/202/invalid")
-     get202None204NoneDefaultNone202Invalid();
+    void get202None204NoneDefaultNone202Invalid();
 
     @GET("/http/payloads/202/none/204/none/default/none/response/202/invalid")
     void get202None204NoneDefaultNone202InvalidAsync(Callback<Response> cb);
 
     @GET("/http/payloads/202/none/204/none/default/none/response/204/none")
-     get202None204NoneDefaultNone204None();
+    void get202None204NoneDefaultNone204None();
 
     @GET("/http/payloads/202/none/204/none/default/none/response/204/none")
     void get202None204NoneDefaultNone204NoneAsync(Callback<Response> cb);
 
     @GET("/http/payloads/202/none/204/none/default/none/response/400/none")
-     get202None204NoneDefaultNone400None();
+    void get202None204NoneDefaultNone400None();
 
     @GET("/http/payloads/202/none/204/none/default/none/response/400/none")
     void get202None204NoneDefaultNone400NoneAsync(Callback<Response> cb);
 
     @GET("/http/payloads/202/none/204/none/default/none/response/400/invalid")
-     get202None204NoneDefaultNone400Invalid();
+    void get202None204NoneDefaultNone400Invalid();
 
     @GET("/http/payloads/202/none/204/none/default/none/response/400/invalid")
     void get202None204NoneDefaultNone400InvalidAsync(Callback<Response> cb);
@@ -132,46 +132,46 @@ public interface multipleResponses {
     A getDefaultModelA200Valid();
 
     @GET("/http/payloads/default/A/response/200/valid")
-    void getDefaultModelA200ValidAsync(Callback<Response> cb);
+    void getDefaultModelA200ValidAsync(Callback<A> cb);
 
     @GET("/http/payloads/default/A/response/200/none")
     A getDefaultModelA200None();
 
     @GET("/http/payloads/default/A/response/200/none")
-    void getDefaultModelA200NoneAsync(Callback<Response> cb);
+    void getDefaultModelA200NoneAsync(Callback<A> cb);
 
     @GET("/http/payloads/default/A/response/400/valid")
     A getDefaultModelA400Valid();
 
     @GET("/http/payloads/default/A/response/400/valid")
-    void getDefaultModelA400ValidAsync(Callback<Response> cb);
+    void getDefaultModelA400ValidAsync(Callback<A> cb);
 
     @GET("/http/payloads/default/A/response/400/none")
     A getDefaultModelA400None();
 
     @GET("/http/payloads/default/A/response/400/none")
-    void getDefaultModelA400NoneAsync(Callback<Response> cb);
+    void getDefaultModelA400NoneAsync(Callback<A> cb);
 
     @GET("/http/payloads/default/none/response/200/invalid")
-     getDefaultNone200Invalid();
+    void getDefaultNone200Invalid();
 
     @GET("/http/payloads/default/none/response/200/invalid")
     void getDefaultNone200InvalidAsync(Callback<Response> cb);
 
     @GET("/http/payloads/default/none/response/200/none")
-     getDefaultNone200None();
+    void getDefaultNone200None();
 
     @GET("/http/payloads/default/none/response/200/none")
     void getDefaultNone200NoneAsync(Callback<Response> cb);
 
     @GET("/http/payloads/default/none/response/400/invalid")
-     getDefaultNone400Invalid();
+    void getDefaultNone400Invalid();
 
     @GET("/http/payloads/default/none/response/400/invalid")
     void getDefaultNone400InvalidAsync(Callback<Response> cb);
 
     @GET("/http/payloads/default/none/response/400/none")
-     getDefaultNone400None();
+    void getDefaultNone400None();
 
     @GET("/http/payloads/default/none/response/400/none")
     void getDefaultNone400NoneAsync(Callback<Response> cb);
@@ -180,42 +180,42 @@ public interface multipleResponses {
     A get200ModelA200None();
 
     @GET("/http/payloads/200/A/response/200/none")
-    void get200ModelA200NoneAsync(Callback<Response> cb);
+    void get200ModelA200NoneAsync(Callback<A> cb);
 
     @GET("/http/payloads/200/A/response/200/valid")
     A get200ModelA200Valid();
 
     @GET("/http/payloads/200/A/response/200/valid")
-    void get200ModelA200ValidAsync(Callback<Response> cb);
+    void get200ModelA200ValidAsync(Callback<A> cb);
 
     @GET("/http/payloads/200/A/response/200/invalid")
     A get200ModelA200Invalid();
 
     @GET("/http/payloads/200/A/response/200/invalid")
-    void get200ModelA200InvalidAsync(Callback<Response> cb);
+    void get200ModelA200InvalidAsync(Callback<A> cb);
 
     @GET("/http/payloads/200/A/response/400/none")
     A get200ModelA400None();
 
     @GET("/http/payloads/200/A/response/400/none")
-    void get200ModelA400NoneAsync(Callback<Response> cb);
+    void get200ModelA400NoneAsync(Callback<A> cb);
 
     @GET("/http/payloads/200/A/response/400/valid")
     A get200ModelA400Valid();
 
     @GET("/http/payloads/200/A/response/400/valid")
-    void get200ModelA400ValidAsync(Callback<Response> cb);
+    void get200ModelA400ValidAsync(Callback<A> cb);
 
     @GET("/http/payloads/200/A/response/400/invalid")
     A get200ModelA400Invalid();
 
     @GET("/http/payloads/200/A/response/400/invalid")
-    void get200ModelA400InvalidAsync(Callback<Response> cb);
+    void get200ModelA400InvalidAsync(Callback<A> cb);
 
     @GET("/http/payloads/200/A/response/202/valid")
     A get200ModelA202Valid();
 
     @GET("/http/payloads/200/A/response/202/valid")
-    void get200ModelA202ValidAsync(Callback<Response> cb);
+    void get200ModelA202ValidAsync(Callback<A> cb);
 
 }

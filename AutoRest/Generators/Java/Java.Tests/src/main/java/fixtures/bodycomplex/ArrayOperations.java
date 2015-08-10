@@ -18,10 +18,10 @@ public interface arrayOperations {
     ArrayWrapper getValid();
 
     @GET("/complex/array/valid")
-    void getValidAsync(Callback<Response> cb);
+    void getValidAsync(Callback<ArrayWrapper> cb);
 
     @PUT("/complex/array/valid")
-     putValid(ArrayWrapper complexBody);
+    void putValid(ArrayWrapper complexBody);
 
     @PUT("/complex/array/valid")
     void putValidAsync(ArrayWrapper complexBody, Callback<Response> cb);
@@ -30,10 +30,10 @@ public interface arrayOperations {
     ArrayWrapper getEmpty();
 
     @GET("/complex/array/empty")
-    void getEmptyAsync(Callback<Response> cb);
+    void getEmptyAsync(Callback<ArrayWrapper> cb);
 
     @PUT("/complex/array/empty")
-     putEmpty(ArrayWrapper complexBody);
+    void putEmpty(ArrayWrapper complexBody);
 
     @PUT("/complex/array/empty")
     void putEmptyAsync(ArrayWrapper complexBody, Callback<Response> cb);
@@ -42,6 +42,6 @@ public interface arrayOperations {
     ArrayWrapper getNotProvided();
 
     @GET("/complex/array/notprovided")
-    void getNotProvidedAsync(Callback<Response> cb);
+    void getNotProvidedAsync(Callback<ArrayWrapper> cb);
 
 }

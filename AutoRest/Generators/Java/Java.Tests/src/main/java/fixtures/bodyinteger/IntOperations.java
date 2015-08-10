@@ -15,61 +15,61 @@ import retrofit.client.Response;
 
 public interface intOperations {
     @GET("/int/null")
-    Integer getNull();
+    int getNull();
 
     @GET("/int/null")
-    void getNullAsync(Callback<Response> cb);
+    void getNullAsync(Callback<Integer> cb);
 
     @GET("/int/invalid")
     Integer getInvalid();
 
     @GET("/int/invalid")
-    void getInvalidAsync(Callback<Response> cb);
+    void getInvalidAsync(Callback<Integer> cb);
 
     @GET("/int/overflowint32")
     Integer getOverflowInt32();
 
     @GET("/int/overflowint32")
-    void getOverflowInt32Async(Callback<Response> cb);
+    void getOverflowInt32Async(Callback<Integer> cb);
 
     @GET("/int/underflowint32")
     Integer getUnderflowInt32();
 
     @GET("/int/underflowint32")
-    void getUnderflowInt32Async(Callback<Response> cb);
+    void getUnderflowInt32Async(Callback<Integer> cb);
 
     @GET("/int/overflowint64")
-    Long getOverflowInt64();
+    long getOverflowInt64();
 
     @GET("/int/overflowint64")
-    void getOverflowInt64Async(Callback<Response> cb);
+    void getOverflowInt64Async(Callback<Long> cb);
 
     @GET("/int/underflowint64")
     Long getUnderflowInt64();
 
     @GET("/int/underflowint64")
-    void getUnderflowInt64Async(Callback<Response> cb);
+    void getUnderflowInt64Async(Callback<Long> cb);
 
     @PUT("/int/max/32")
-     putMax32(Integer intBody);
+    void putMax32(Integer intBody);
 
     @PUT("/int/max/32")
     void putMax32Async(Integer intBody, Callback<Response> cb);
 
     @PUT("/int/max/64")
-     putMax64(Long intBody);
+    void putMax64(Long intBody);
 
     @PUT("/int/max/64")
     void putMax64Async(Long intBody, Callback<Response> cb);
 
     @PUT("/int/min/32")
-     putMin32(Integer intBody);
+    void putMin32(Integer intBody);
 
     @PUT("/int/min/32")
     void putMin32Async(Integer intBody, Callback<Response> cb);
 
     @PUT("/int/min/64")
-     putMin64(Long intBody);
+    void putMin64(Long intBody);
 
     @PUT("/int/min/64")
     void putMin64Async(Long intBody, Callback<Response> cb);

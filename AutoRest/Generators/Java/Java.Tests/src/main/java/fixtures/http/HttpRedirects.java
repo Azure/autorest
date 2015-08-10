@@ -15,91 +15,91 @@ import retrofit.client.Response;
 
 public interface httpRedirects {
     @HEAD("/http/redirect/300")
-     head300();
+    void head300();
 
     @HEAD("/http/redirect/300")
     void head300Async(Callback<Response> cb);
 
     @GET("/http/redirect/300")
-    Array get300();
+    List<String> get300();
 
     @GET("/http/redirect/300")
-    void get300Async(Callback<Response> cb);
+    void get300Async(Callback<List<String>> cb);
 
     @HEAD("/http/redirect/301")
-     head301();
+    void head301();
 
     @HEAD("/http/redirect/301")
     void head301Async(Callback<Response> cb);
 
     @GET("/http/redirect/301")
-     get301();
+    void get301();
 
     @GET("/http/redirect/301")
     void get301Async(Callback<Response> cb);
 
     @PUT("/http/redirect/301")
-     put301(Boolean booleanValue);
+    void put301(Boolean booleanValue);
 
     @PUT("/http/redirect/301")
     void put301Async(Boolean booleanValue, Callback<Response> cb);
 
     @HEAD("/http/redirect/302")
-     head302();
+    void head302();
 
     @HEAD("/http/redirect/302")
     void head302Async(Callback<Response> cb);
 
     @GET("/http/redirect/302")
-     get302();
+    void get302();
 
     @GET("/http/redirect/302")
     void get302Async(Callback<Response> cb);
 
     @PATCH("/http/redirect/302")
-     patch302(Boolean booleanValue);
+    void patch302(Boolean booleanValue);
 
     @PATCH("/http/redirect/302")
     void patch302Async(Boolean booleanValue, Callback<Response> cb);
 
     @POST("/http/redirect/303")
-     post303(Boolean booleanValue);
+    void post303(Boolean booleanValue);
 
     @POST("/http/redirect/303")
     void post303Async(Boolean booleanValue, Callback<Response> cb);
 
     @HEAD("/http/redirect/307")
-     head307();
+    void head307();
 
     @HEAD("/http/redirect/307")
     void head307Async(Callback<Response> cb);
 
     @GET("/http/redirect/307")
-     get307();
+    void get307();
 
     @GET("/http/redirect/307")
     void get307Async(Callback<Response> cb);
 
     @PUT("/http/redirect/307")
-     put307(Boolean booleanValue);
+    void put307(Boolean booleanValue);
 
     @PUT("/http/redirect/307")
     void put307Async(Boolean booleanValue, Callback<Response> cb);
 
     @PATCH("/http/redirect/307")
-     patch307(Boolean booleanValue);
+    void patch307(Boolean booleanValue);
 
     @PATCH("/http/redirect/307")
     void patch307Async(Boolean booleanValue, Callback<Response> cb);
 
     @POST("/http/redirect/307")
-     post307(Boolean booleanValue);
+    void post307(Boolean booleanValue);
 
     @POST("/http/redirect/307")
     void post307Async(Boolean booleanValue, Callback<Response> cb);
 
     @DELETE("/http/redirect/307")
-     delete307(Boolean booleanValue);
+    void delete307(Boolean booleanValue);
 
     @DELETE("/http/redirect/307")
     void delete307Async(Boolean booleanValue, Callback<Response> cb);

@@ -13,13 +13,13 @@ package fixtures.requiredoptional.models;
  * 
  */
 public class ArrayOptionalWrapper {
-    private Array value;
+    private List<String> value;
 
-    public Array getValue() {
+    public List<String> getValue() {
         return this.value;
     }
 
-    public void setValue(Array value) {
+    public void setValue(List<String> value) {
         this.value = value;
     }
 

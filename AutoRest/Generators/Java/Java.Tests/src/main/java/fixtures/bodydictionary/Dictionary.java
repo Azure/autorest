@@ -15,363 +15,363 @@ import retrofit.client.Response;
 
 public interface dictionary {
     @GET("/dictionary/null")
-    Object getNull();
+    Map<Integer> getNull();
 
     @GET("/dictionary/null")
-    void getNullAsync(Callback<Response> cb);
+    void getNullAsync(Callback<Map<Integer>> cb);
 
     @GET("/dictionary/empty")
-    Object getEmpty();
+    Map<Integer> getEmpty();
 
     @GET("/dictionary/empty")
-    void getEmptyAsync(Callback<Response> cb);
+    void getEmptyAsync(Callback<Map<Integer>> cb);
 
     @PUT("/dictionary/empty")
-     putEmpty(Object arrayBody);
+    void putEmpty(Map<String> arrayBody);
 
     @PUT("/dictionary/empty")
-    void putEmptyAsync(Object arrayBody, Callback<Response> cb);
+    void putEmptyAsync(Map<String> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/nullvalue")
-    Object getNullValue();
+    Map<String> getNullValue();
 
     @GET("/dictionary/nullvalue")
-    void getNullValueAsync(Callback<Response> cb);
+    void getNullValueAsync(Callback<Map<String>> cb);
 
     @GET("/dictionary/nullkey")
-    Object getNullKey();
+    Map<String> getNullKey();
 
     @GET("/dictionary/nullkey")
-    void getNullKeyAsync(Callback<Response> cb);
+    void getNullKeyAsync(Callback<Map<String>> cb);
 
     @GET("/dictionary/keyemptystring")
-    Object getEmptyStringKey();
+    Map<String> getEmptyStringKey();
 
     @GET("/dictionary/keyemptystring")
-    void getEmptyStringKeyAsync(Callback<Response> cb);
+    void getEmptyStringKeyAsync(Callback<Map<String>> cb);
 
     @GET("/dictionary/invalid")
-    Object getInvalid();
+    Map<String> getInvalid();
 
     @GET("/dictionary/invalid")
-    void getInvalidAsync(Callback<Response> cb);
+    void getInvalidAsync(Callback<Map<String>> cb);
 
     @GET("/dictionary/prim/boolean/tfft")
-    Object getBooleanTfft();
+    Map<Boolean> getBooleanTfft();
 
     @GET("/dictionary/prim/boolean/tfft")
-    void getBooleanTfftAsync(Callback<Response> cb);
+    void getBooleanTfftAsync(Callback<Map<Boolean>> cb);
 
     @PUT("/dictionary/prim/boolean/tfft")
-     putBooleanTfft(Object arrayBody);
+    void putBooleanTfft(Map<Boolean> arrayBody);
 
     @PUT("/dictionary/prim/boolean/tfft")
-    void putBooleanTfftAsync(Object arrayBody, Callback<Response> cb);
+    void putBooleanTfftAsync(Map<Boolean> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/prim/boolean/true.null.false")
-    Object getBooleanInvalidNull();
+    Map<Boolean> getBooleanInvalidNull();
 
     @GET("/dictionary/prim/boolean/true.null.false")
-    void getBooleanInvalidNullAsync(Callback<Response> cb);
+    void getBooleanInvalidNullAsync(Callback<Map<Boolean>> cb);
 
     @GET("/dictionary/prim/boolean/true.boolean.false")
-    Object getBooleanInvalidString();
+    Map<Boolean> getBooleanInvalidString();
 
     @GET("/dictionary/prim/boolean/true.boolean.false")
-    void getBooleanInvalidStringAsync(Callback<Response> cb);
+    void getBooleanInvalidStringAsync(Callback<Map<Boolean>> cb);
 
     @GET("/dictionary/prim/integer/1.-1.3.300")
-    Object getIntegerValid();
+    Map<Integer> getIntegerValid();
 
     @GET("/dictionary/prim/integer/1.-1.3.300")
-    void getIntegerValidAsync(Callback<Response> cb);
+    void getIntegerValidAsync(Callback<Map<Integer>> cb);
 
     @PUT("/dictionary/prim/integer/1.-1.3.300")
-     putIntegerValid(Object arrayBody);
+    void putIntegerValid(Map<Integer> arrayBody);
 
     @PUT("/dictionary/prim/integer/1.-1.3.300")
-    void putIntegerValidAsync(Object arrayBody, Callback<Response> cb);
+    void putIntegerValidAsync(Map<Integer> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/prim/integer/1.null.zero")
-    Object getIntInvalidNull();
+    Map<Integer> getIntInvalidNull();
 
     @GET("/dictionary/prim/integer/1.null.zero")
-    void getIntInvalidNullAsync(Callback<Response> cb);
+    void getIntInvalidNullAsync(Callback<Map<Integer>> cb);
 
     @GET("/dictionary/prim/integer/1.integer.0")
-    Object getIntInvalidString();
+    Map<Integer> getIntInvalidString();
 
     @GET("/dictionary/prim/integer/1.integer.0")
-    void getIntInvalidStringAsync(Callback<Response> cb);
+    void getIntInvalidStringAsync(Callback<Map<Integer>> cb);
 
     @GET("/dictionary/prim/long/1.-1.3.300")
-    Object getLongValid();
+    Map<Long> getLongValid();
 
     @GET("/dictionary/prim/long/1.-1.3.300")
-    void getLongValidAsync(Callback<Response> cb);
+    void getLongValidAsync(Callback<Map<Long>> cb);
 
     @PUT("/dictionary/prim/long/1.-1.3.300")
-     putLongValid(Object arrayBody);
+    void putLongValid(Map<Long> arrayBody);
 
     @PUT("/dictionary/prim/long/1.-1.3.300")
-    void putLongValidAsync(Object arrayBody, Callback<Response> cb);
+    void putLongValidAsync(Map<Long> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/prim/long/1.null.zero")
-    Object getLongInvalidNull();
+    Map<Long> getLongInvalidNull();
 
     @GET("/dictionary/prim/long/1.null.zero")
-    void getLongInvalidNullAsync(Callback<Response> cb);
+    void getLongInvalidNullAsync(Callback<Map<Long>> cb);
 
     @GET("/dictionary/prim/long/1.integer.0")
-    Object getLongInvalidString();
+    Map<Long> getLongInvalidString();
 
     @GET("/dictionary/prim/long/1.integer.0")
-    void getLongInvalidStringAsync(Callback<Response> cb);
+    void getLongInvalidStringAsync(Callback<Map<Long>> cb);
 
     @GET("/dictionary/prim/float/0--0.01-1.2e20")
-    Object getFloatValid();
+    Map<Double> getFloatValid();
 
     @GET("/dictionary/prim/float/0--0.01-1.2e20")
-    void getFloatValidAsync(Callback<Response> cb);
+    void getFloatValidAsync(Callback<Map<Double>> cb);
 
     @PUT("/dictionary/prim/float/0--0.01-1.2e20")
-     putFloatValid(Object arrayBody);
+    void putFloatValid(Map<Double> arrayBody);
 
     @PUT("/dictionary/prim/float/0--0.01-1.2e20")
-    void putFloatValidAsync(Object arrayBody, Callback<Response> cb);
+    void putFloatValidAsync(Map<Double> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/prim/float/0.0-null-1.2e20")
-    Object getFloatInvalidNull();
+    Map<Double> getFloatInvalidNull();
 
     @GET("/dictionary/prim/float/0.0-null-1.2e20")
-    void getFloatInvalidNullAsync(Callback<Response> cb);
+    void getFloatInvalidNullAsync(Callback<Map<Double>> cb);
 
     @GET("/dictionary/prim/float/1.number.0")
-    Object getFloatInvalidString();
+    Map<Double> getFloatInvalidString();
 
     @GET("/dictionary/prim/float/1.number.0")
-    void getFloatInvalidStringAsync(Callback<Response> cb);
+    void getFloatInvalidStringAsync(Callback<Map<Double>> cb);
 
     @GET("/dictionary/prim/double/0--0.01-1.2e20")
-    Object getDoubleValid();
+    Map<Double> getDoubleValid();
 
     @GET("/dictionary/prim/double/0--0.01-1.2e20")
-    void getDoubleValidAsync(Callback<Response> cb);
+    void getDoubleValidAsync(Callback<Map<Double>> cb);
 
     @PUT("/dictionary/prim/double/0--0.01-1.2e20")
-     putDoubleValid(Object arrayBody);
+    void putDoubleValid(Map<Double> arrayBody);
 
     @PUT("/dictionary/prim/double/0--0.01-1.2e20")
-    void putDoubleValidAsync(Object arrayBody, Callback<Response> cb);
+    void putDoubleValidAsync(Map<Double> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/prim/double/0.0-null-1.2e20")
-    Object getDoubleInvalidNull();
+    Map<Double> getDoubleInvalidNull();
 
     @GET("/dictionary/prim/double/0.0-null-1.2e20")
-    void getDoubleInvalidNullAsync(Callback<Response> cb);
+    void getDoubleInvalidNullAsync(Callback<Map<Double>> cb);
 
     @GET("/dictionary/prim/double/1.number.0")
-    Object getDoubleInvalidString();
+    Map<Double> getDoubleInvalidString();
 
     @GET("/dictionary/prim/double/1.number.0")
-    void getDoubleInvalidStringAsync(Callback<Response> cb);
+    void getDoubleInvalidStringAsync(Callback<Map<Double>> cb);
 
     @GET("/dictionary/prim/string/foo1.foo2.foo3")
-    Object getStringValid();
+    Map<String> getStringValid();
 
     @GET("/dictionary/prim/string/foo1.foo2.foo3")
-    void getStringValidAsync(Callback<Response> cb);
+    void getStringValidAsync(Callback<Map<String>> cb);
 
     @PUT("/dictionary/prim/string/foo1.foo2.foo3")
-     putStringValid(Object arrayBody);
+    void putStringValid(Map<String> arrayBody);
 
     @PUT("/dictionary/prim/string/foo1.foo2.foo3")
-    void putStringValidAsync(Object arrayBody, Callback<Response> cb);
+    void putStringValidAsync(Map<String> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/prim/string/foo.null.foo2")
-    Object getStringWithNull();
+    Map<String> getStringWithNull();
 
     @GET("/dictionary/prim/string/foo.null.foo2")
-    void getStringWithNullAsync(Callback<Response> cb);
+    void getStringWithNullAsync(Callback<Map<String>> cb);
 
     @GET("/dictionary/prim/string/foo.123.foo2")
-    Object getStringWithInvalid();
+    Map<String> getStringWithInvalid();
 
     @GET("/dictionary/prim/string/foo.123.foo2")
-    void getStringWithInvalidAsync(Callback<Response> cb);
+    void getStringWithInvalidAsync(Callback<Map<String>> cb);
 
     @GET("/dictionary/prim/date/valid")
-    Object getDateValid();
+    Map<Date> getDateValid();
 
     @GET("/dictionary/prim/date/valid")
-    void getDateValidAsync(Callback<Response> cb);
+    void getDateValidAsync(Callback<Map<Date>> cb);
 
     @PUT("/dictionary/prim/date/valid")
-     putDateValid(Object arrayBody);
+    void putDateValid(Map<Date> arrayBody);
 
     @PUT("/dictionary/prim/date/valid")
-    void putDateValidAsync(Object arrayBody, Callback<Response> cb);
+    void putDateValidAsync(Map<Date> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/prim/date/invalidnull")
-    Object getDateInvalidNull();
+    Map<Date> getDateInvalidNull();
 
     @GET("/dictionary/prim/date/invalidnull")
-    void getDateInvalidNullAsync(Callback<Response> cb);
+    void getDateInvalidNullAsync(Callback<Map<Date>> cb);
 
     @GET("/dictionary/prim/date/invalidchars")
-    Object getDateInvalidChars();
+    Map<Date> getDateInvalidChars();
 
     @GET("/dictionary/prim/date/invalidchars")
-    void getDateInvalidCharsAsync(Callback<Response> cb);
+    void getDateInvalidCharsAsync(Callback<Map<Date>> cb);
 
     @GET("/dictionary/prim/date-time/valid")
-    Object getDateTimeValid();
+    Map<Date> getDateTimeValid();
 
     @GET("/dictionary/prim/date-time/valid")
-    void getDateTimeValidAsync(Callback<Response> cb);
+    void getDateTimeValidAsync(Callback<Map<Date>> cb);
 
     @PUT("/dictionary/prim/date-time/valid")
-     putDateTimeValid(Object arrayBody);
+    void putDateTimeValid(Map<Date> arrayBody);
 
     @PUT("/dictionary/prim/date-time/valid")
-    void putDateTimeValidAsync(Object arrayBody, Callback<Response> cb);
+    void putDateTimeValidAsync(Map<Date> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/prim/date-time/invalidnull")
-    Object getDateTimeInvalidNull();
+    Map<Date> getDateTimeInvalidNull();
 
     @GET("/dictionary/prim/date-time/invalidnull")
-    void getDateTimeInvalidNullAsync(Callback<Response> cb);
+    void getDateTimeInvalidNullAsync(Callback<Map<Date>> cb);
 
     @GET("/dictionary/prim/date-time/invalidchars")
-    Object getDateTimeInvalidChars();
+    Map<Date> getDateTimeInvalidChars();
 
     @GET("/dictionary/prim/date-time/invalidchars")
-    void getDateTimeInvalidCharsAsync(Callback<Response> cb);
+    void getDateTimeInvalidCharsAsync(Callback<Map<Date>> cb);
 
     @GET("/dictionary/prim/byte/valid")
-    Object getByteValid();
+    Map<Byte[]> getByteValid();
 
     @GET("/dictionary/prim/byte/valid")
-    void getByteValidAsync(Callback<Response> cb);
+    void getByteValidAsync(Callback<Map<Byte[]>> cb);
 
     @PUT("/dictionary/prim/byte/valid")
-     putByteValid(Object arrayBody);
+    void putByteValid(Map<Byte[]> arrayBody);
 
     @PUT("/dictionary/prim/byte/valid")
-    void putByteValidAsync(Object arrayBody, Callback<Response> cb);
+    void putByteValidAsync(Map<Byte[]> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/prim/byte/invalidnull")
-    Object getByteInvalidNull();
+    Map<Byte[]> getByteInvalidNull();
 
     @GET("/dictionary/prim/byte/invalidnull")
-    void getByteInvalidNullAsync(Callback<Response> cb);
+    void getByteInvalidNullAsync(Callback<Map<Byte[]>> cb);
 
     @GET("/dictionary/complex/null")
-    Object getComplexNull();
+    Map<Widget> getComplexNull();
 
     @GET("/dictionary/complex/null")
-    void getComplexNullAsync(Callback<Response> cb);
+    void getComplexNullAsync(Callback<Map<Widget>> cb);
 
     @GET("/dictionary/complex/empty")
-    Object getComplexEmpty();
+    Map<Widget> getComplexEmpty();
 
     @GET("/dictionary/complex/empty")
-    void getComplexEmptyAsync(Callback<Response> cb);
+    void getComplexEmptyAsync(Callback<Map<Widget>> cb);
 
     @GET("/dictionary/complex/itemnull")
-    Object getComplexItemNull();
+    Map<Widget> getComplexItemNull();
 
     @GET("/dictionary/complex/itemnull")
-    void getComplexItemNullAsync(Callback<Response> cb);
+    void getComplexItemNullAsync(Callback<Map<Widget>> cb);
 
     @GET("/dictionary/complex/itemempty")
-    Object getComplexItemEmpty();
+    Map<Widget> getComplexItemEmpty();
 
     @GET("/dictionary/complex/itemempty")
-    void getComplexItemEmptyAsync(Callback<Response> cb);
+    void getComplexItemEmptyAsync(Callback<Map<Widget>> cb);
 
     @GET("/dictionary/complex/valid")
-    Object getComplexValid();
+    Map<Widget> getComplexValid();
 
     @GET("/dictionary/complex/valid")
-    void getComplexValidAsync(Callback<Response> cb);
+    void getComplexValidAsync(Callback<Map<Widget>> cb);
 
     @PUT("/dictionary/complex/valid")
-     putComplexValid(Object arrayBody);
+    void putComplexValid(Map<Widget> arrayBody);
 
     @PUT("/dictionary/complex/valid")
-    void putComplexValidAsync(Object arrayBody, Callback<Response> cb);
+    void putComplexValidAsync(Map<Widget> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/array/null")
-    Object getArrayNull();
+    Map<List<String>> getArrayNull();
 
     @GET("/dictionary/array/null")
-    void getArrayNullAsync(Callback<Response> cb);
+    void getArrayNullAsync(Callback<Map<List<String>>> cb);
 
     @GET("/dictionary/array/empty")
-    Object getArrayEmpty();
+    Map<List<String>> getArrayEmpty();
 
     @GET("/dictionary/array/empty")
-    void getArrayEmptyAsync(Callback<Response> cb);
+    void getArrayEmptyAsync(Callback<Map<List<String>>> cb);
 
     @GET("/dictionary/array/itemnull")
-    Object getArrayItemNull();
+    Map<List<String>> getArrayItemNull();
 
     @GET("/dictionary/array/itemnull")
-    void getArrayItemNullAsync(Callback<Response> cb);
+    void getArrayItemNullAsync(Callback<Map<List<String>>> cb);
 
     @GET("/dictionary/array/itemempty")
-    Object getArrayItemEmpty();
+    Map<List<String>> getArrayItemEmpty();
 
     @GET("/dictionary/array/itemempty")
-    void getArrayItemEmptyAsync(Callback<Response> cb);
+    void getArrayItemEmptyAsync(Callback<Map<List<String>>> cb);
 
     @GET("/dictionary/array/valid")
-    Object getArrayValid();
+    Map<List<String>> getArrayValid();
 
     @GET("/dictionary/array/valid")
-    void getArrayValidAsync(Callback<Response> cb);
+    void getArrayValidAsync(Callback<Map<List<String>>> cb);
 
     @PUT("/dictionary/array/valid")
-     putArrayValid(Object arrayBody);
+    void putArrayValid(Map<List<String>> arrayBody);
 
     @PUT("/dictionary/array/valid")
-    void putArrayValidAsync(Object arrayBody, Callback<Response> cb);
+    void putArrayValidAsync(Map<List<String>> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/dictionary/null")
-    Object getDictionaryNull();
+    Map<Map<String>> getDictionaryNull();
 
     @GET("/dictionary/dictionary/null")
-    void getDictionaryNullAsync(Callback<Response> cb);
+    void getDictionaryNullAsync(Callback<Map<Map<String>>> cb);
 
     @GET("/dictionary/dictionary/empty")
-    Object getDictionaryEmpty();
+    Map<Map<String>> getDictionaryEmpty();
 
     @GET("/dictionary/dictionary/empty")
-    void getDictionaryEmptyAsync(Callback<Response> cb);
+    void getDictionaryEmptyAsync(Callback<Map<Map<String>>> cb);
 
     @GET("/dictionary/dictionary/itemnull")
-    Object getDictionaryItemNull();
+    Map<Map<String>> getDictionaryItemNull();
 
     @GET("/dictionary/dictionary/itemnull")
-    void getDictionaryItemNullAsync(Callback<Response> cb);
+    void getDictionaryItemNullAsync(Callback<Map<Map<String>>> cb);
 
     @GET("/dictionary/dictionary/itemempty")
-    Object getDictionaryItemEmpty();
+    Map<Map<String>> getDictionaryItemEmpty();
 
     @GET("/dictionary/dictionary/itemempty")
-    void getDictionaryItemEmptyAsync(Callback<Response> cb);
+    void getDictionaryItemEmptyAsync(Callback<Map<Map<String>>> cb);
 
     @GET("/dictionary/dictionary/valid")
-    Object getDictionaryValid();
+    Map<Map<String>> getDictionaryValid();
 
     @GET("/dictionary/dictionary/valid")
-    void getDictionaryValidAsync(Callback<Response> cb);
+    void getDictionaryValidAsync(Callback<Map<Map<String>>> cb);
 
     @PUT("/dictionary/dictionary/valid")
-     putDictionaryValid(Object arrayBody);
+    void putDictionaryValid(Map<Map<String>> arrayBody);
 
     @PUT("/dictionary/dictionary/valid")
-    void putDictionaryValidAsync(Object arrayBody, Callback<Response> cb);
+    void putDictionaryValidAsync(Map<Map<String>> arrayBody, Callback<Response> cb);
 
 }
