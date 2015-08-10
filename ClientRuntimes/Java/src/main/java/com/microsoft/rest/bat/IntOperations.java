@@ -7,7 +7,6 @@
 
 package com.microsoft.rest.bat;
 
-import com.microsoft.rest.HttpOperationResponse;
 import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
@@ -15,20 +14,18 @@ import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.PUT;
 
-import java.util.concurrent.Future;
-
 public interface IntOperations {
     @GET("/int/null")
     int getNull();
 
     @GET("/int/null")
-    void getNullAsync(Callback<Integer> cb);
+    void getNullAsync(Callback<Response> cb);
 
     @GET("/int/invalid")
     int getInvalid();
 
     @GET("/int/invalid")
-    void getInvalidAsync(Callback<Integer> cb);
+    void getInvalidAsync(Callback<Response> cb);
 
     @PUT("/int/max/32")
     Response putMax32(@Body int intBody) throws ServiceException;
