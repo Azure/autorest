@@ -13,7 +13,7 @@ import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
 
-public interface headerOperations {
+public interface HeaderOperations {
     @POST("/header/param/existingkey")
     void paramExistingKey(String userAgent);
 

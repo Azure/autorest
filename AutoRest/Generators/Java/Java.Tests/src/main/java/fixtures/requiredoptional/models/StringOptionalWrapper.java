@@ -13,14 +13,14 @@ package fixtures.requiredoptional.models;
  * 
  */
 public class StringOptionalWrapper {
-    private String value;
+    private String Value;
 
     public String getValue() {
-        return this.value;
+        return this.Value;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setValue(String Value) {
+        this.Value = Value;
     }
 
 }

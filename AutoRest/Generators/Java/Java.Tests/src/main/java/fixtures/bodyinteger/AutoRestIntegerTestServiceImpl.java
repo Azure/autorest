@@ -10,7 +10,7 @@
 package fixtures.bodyinteger;
 
 import com.microsoft.rest.ServiceClient;
-import com.squareup.okhtpp.OkHttpClient;
+import com.squareup.okhttp.OkHttpClient;
 import retrofit.RestAdapter;
 
 /**
@@ -23,7 +23,9 @@ public class AutoRestIntegerTestServiceImpl extends ServiceClient<AutoRestIntege
      * Gets the URI used as the base for all cloud service requests.
      * @return The BaseUri value.
      */
-    public String getBaseUri();
+    public String getBaseUri() {
+        return this.baseUri;
+    }
 
     private IntOperations intOperations;
 
@@ -31,21 +33,23 @@ public class AutoRestIntegerTestServiceImpl extends ServiceClient<AutoRestIntege
      * Test Infrastructure for AutoRest
      * @return the intOperations value.
      */
-    IntOperations getIntOperations();
+    public IntOperations getIntOperations() {
+        return this.intOperations;
+    }
 
-    public AutoRestIntegerTestService() {
+    public AutoRestIntegerTestServiceImpl() {
         this("https://localhost");
     }
 
-    public AutoRestIntegerTestService(String baseUri) {
+    public AutoRestIntegerTestServiceImpl(String baseUri) {
         super();
         this.baseUri = baseUri;
         initialize();
     }
 
-    public AutoRestIntegerTestService(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
+    public AutoRestIntegerTestServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
         super(client, restAdapterBuilder);
-        this.baseUri = baseUri();
+        this.baseUri = baseUri;
         initialize();
     }
 

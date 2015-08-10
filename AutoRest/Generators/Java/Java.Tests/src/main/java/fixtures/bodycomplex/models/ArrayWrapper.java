@@ -13,14 +13,14 @@ package fixtures.bodycomplex.models;
  * 
  */
 public class ArrayWrapper {
-    private List<String> array;
+    private List<String> ArrayProperty;
 
-    public List<String> getArray() {
-        return this.array;
+    public List<String> getArrayProperty() {
+        return this.ArrayProperty;
     }
 
-    public void setArray(List<String> array) {
-        this.array = array;
+    public void setArrayProperty(List<String> ArrayProperty) {
+        this.ArrayProperty = ArrayProperty;
     }
 
 }

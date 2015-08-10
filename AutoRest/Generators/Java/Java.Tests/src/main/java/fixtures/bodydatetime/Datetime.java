@@ -13,7 +13,7 @@ import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
 
-public interface datetime {
+public interface Datetime {
     @GET("/datetime/null")
     Date getNull();
 

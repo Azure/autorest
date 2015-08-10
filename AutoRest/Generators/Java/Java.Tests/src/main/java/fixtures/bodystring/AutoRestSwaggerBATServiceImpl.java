@@ -10,7 +10,7 @@
 package fixtures.bodystring;
 
 import com.microsoft.rest.ServiceClient;
-import com.squareup.okhtpp.OkHttpClient;
+import com.squareup.okhttp.OkHttpClient;
 import retrofit.RestAdapter;
 
 /**
@@ -23,7 +23,9 @@ public class AutoRestSwaggerBATServiceImpl extends ServiceClient<AutoRestSwagger
      * Gets the URI used as the base for all cloud service requests.
      * @return The BaseUri value.
      */
-    public String getBaseUri();
+    public String getBaseUri() {
+        return this.baseUri;
+    }
 
     private String string;
 
@@ -31,7 +33,9 @@ public class AutoRestSwaggerBATServiceImpl extends ServiceClient<AutoRestSwagger
      * Test Infrastructure for AutoRest Swagger BAT
      * @return the string value.
      */
-    String getString();
+    public String getString() {
+        return this.string;
+    }
 
     private EnumOperations enumOperations;
 
@@ -39,21 +43,23 @@ public class AutoRestSwaggerBATServiceImpl extends ServiceClient<AutoRestSwagger
      * Test Infrastructure for AutoRest Swagger BAT
      * @return the enumOperations value.
      */
-    EnumOperations getEnumOperations();
+    public EnumOperations getEnumOperations() {
+        return this.enumOperations;
+    }
 
-    public AutoRestSwaggerBATService() {
+    public AutoRestSwaggerBATServiceImpl() {
         this("http://localhost");
     }
 
-    public AutoRestSwaggerBATService(String baseUri) {
+    public AutoRestSwaggerBATServiceImpl(String baseUri) {
         super();
         this.baseUri = baseUri;
         initialize();
     }
 
-    public AutoRestSwaggerBATService(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
+    public AutoRestSwaggerBATServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
         super(client, restAdapterBuilder);
-        this.baseUri = baseUri();
+        this.baseUri = baseUri;
         initialize();
     }
 

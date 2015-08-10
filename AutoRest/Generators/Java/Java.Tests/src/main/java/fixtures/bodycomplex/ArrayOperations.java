@@ -13,7 +13,7 @@ import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
 
-public interface arrayOperations {
+public interface ArrayOperations {
     @GET("/complex/array/valid")
     ArrayWrapper getValid();
 

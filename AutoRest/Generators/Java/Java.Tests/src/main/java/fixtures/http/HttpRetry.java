@@ -13,7 +13,7 @@ import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
 
-public interface httpRetry {
+public interface HttpRetry {
     @HEAD("/http/retry/408")
     void head408();
 

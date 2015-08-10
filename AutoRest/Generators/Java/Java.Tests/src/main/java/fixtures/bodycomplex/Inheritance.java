@@ -13,7 +13,7 @@ import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
 
-public interface inheritance {
+public interface Inheritance {
     @GET("/complex/inheritance/valid")
     Siamese getValid();
 

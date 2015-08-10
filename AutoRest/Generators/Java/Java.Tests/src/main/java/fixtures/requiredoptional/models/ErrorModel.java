@@ -13,24 +13,24 @@ package fixtures.requiredoptional.models;
  * 
  */
 public class ErrorModel {
-    private int status;
+    private int Status;
 
-    private String message;
+    private String Message;
 
     public int getStatus() {
-        return this.status;
+        return this.Status;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setStatus(int Status) {
+        this.Status = Status;
     }
 
     public String getMessage() {
-        return this.message;
+        return this.Message;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMessage(String Message) {
+        this.Message = Message;
     }
 
 }

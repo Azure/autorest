@@ -13,7 +13,7 @@ import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
 
-public interface httpFailure {
+public interface HttpFailure {
     @GET("/http/failure/emptybody/error")
     boolean getEmptyError();
 

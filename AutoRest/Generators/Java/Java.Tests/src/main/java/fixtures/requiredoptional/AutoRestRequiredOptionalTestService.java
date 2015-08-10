@@ -23,13 +23,13 @@ public interface AutoRestRequiredOptionalTestService {
 
     /**
      * number of items to skip
-     * @return the requiredGlobalPath value.
+     * @return the RequiredGlobalPath value.
      */
     String getRequiredGlobalPath();
 
     /**
      * number of items to skip
-     * @return the requiredGlobalQuery value.
+     * @return the RequiredGlobalQuery value.
      */
     String getRequiredGlobalQuery();
 

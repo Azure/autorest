@@ -13,7 +13,7 @@ import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
 
-public interface httpClientFailure {
+public interface HttpClientFailure {
     @HEAD("/http/failure/client/400")
     ErrorModel head400();
 

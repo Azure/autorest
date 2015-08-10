@@ -13,7 +13,7 @@ import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
 
-public interface explicit {
+public interface Explicit {
     @POST("/reqopt/requied/integer/parameter")
     ErrorModel postRequiredIntegerParameter(int bodyParameter);
 

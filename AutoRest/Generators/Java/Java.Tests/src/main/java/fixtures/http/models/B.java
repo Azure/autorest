@@ -13,14 +13,14 @@ package fixtures.http.models;
  * 
  */
 public class B {
-    private String textStatusCode;
+    private String TextStatusCode;
 
     public String getTextStatusCode() {
-        return this.textStatusCode;
+        return this.TextStatusCode;
     }
 
-    public void setTextStatusCode(String textStatusCode) {
-        this.textStatusCode = textStatusCode;
+    public void setTextStatusCode(String TextStatusCode) {
+        this.TextStatusCode = TextStatusCode;
     }
 
 }

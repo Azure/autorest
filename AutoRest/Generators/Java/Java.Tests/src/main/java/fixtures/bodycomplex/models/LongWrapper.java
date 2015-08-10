@@ -13,24 +13,24 @@ package fixtures.bodycomplex.models;
  * 
  */
 public class LongWrapper {
-    private long field1;
+    private long Field1;
 
-    private long field2;
+    private long Field2;
 
     public long getField1() {
-        return this.field1;
+        return this.Field1;
     }
 
-    public void setField1(long field1) {
-        this.field1 = field1;
+    public void setField1(long Field1) {
+        this.Field1 = Field1;
     }
 
     public long getField2() {
-        return this.field2;
+        return this.Field2;
     }
 
-    public void setField2(long field2) {
-        this.field2 = field2;
+    public void setField2(long Field2) {
+        this.Field2 = Field2;
     }
 
 }

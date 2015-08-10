@@ -13,24 +13,24 @@ package fixtures.bodydictionary.models;
  * 
  */
 public class Widget {
-    private Integer integer;
+    private Integer Integer;
 
-    private String string;
+    private String String;
 
     public Integer getInteger() {
-        return this.integer;
+        return this.Integer;
     }
 
-    public void setInteger(Integer integer) {
-        this.integer = integer;
+    public void setInteger(Integer Integer) {
+        this.Integer = Integer;
     }
 
     public String getString() {
-        return this.string;
+        return this.String;
     }
 
-    public void setString(String string) {
-        this.string = string;
+    public void setString(String String) {
+        this.String = String;
     }
 
 }

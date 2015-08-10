@@ -10,7 +10,7 @@
 package fixtures.bodydatetime;
 
 import com.microsoft.rest.ServiceClient;
-import com.squareup.okhtpp.OkHttpClient;
+import com.squareup.okhttp.OkHttpClient;
 import retrofit.RestAdapter;
 
 /**
@@ -23,7 +23,9 @@ public class AutoRestDateTimeTestServiceImpl extends ServiceClient<AutoRestDateT
      * Gets the URI used as the base for all cloud service requests.
      * @return The BaseUri value.
      */
-    public String getBaseUri();
+    public String getBaseUri() {
+        return this.baseUri;
+    }
 
     private Datetime datetime;
 
@@ -31,21 +33,23 @@ public class AutoRestDateTimeTestServiceImpl extends ServiceClient<AutoRestDateT
      * Test Infrastructure for AutoRest
      * @return the datetime value.
      */
-    Datetime getDatetime();
+    public Datetime getDatetime() {
+        return this.datetime;
+    }
 
-    public AutoRestDateTimeTestService() {
+    public AutoRestDateTimeTestServiceImpl() {
         this("https://localhost");
     }
 
-    public AutoRestDateTimeTestService(String baseUri) {
+    public AutoRestDateTimeTestServiceImpl(String baseUri) {
         super();
         this.baseUri = baseUri;
         initialize();
     }
 
-    public AutoRestDateTimeTestService(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
+    public AutoRestDateTimeTestServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
         super(client, restAdapterBuilder);
-        this.baseUri = baseUri();
+        this.baseUri = baseUri;
         initialize();
     }
 

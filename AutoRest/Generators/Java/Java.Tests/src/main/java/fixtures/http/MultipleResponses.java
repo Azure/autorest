@@ -13,7 +13,7 @@ import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
 
-public interface multipleResponses {
+public interface MultipleResponses {
     @GET("/http/payloads/200/A/204/none/default/Error/response/200/valid")
     A get200Model204NoModelDefaultError200Valid();
 

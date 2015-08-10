@@ -13,24 +13,24 @@ package fixtures.bodydictionary.models;
  * 
  */
 public class ErrorModel {
-    private Integer status;
+    private Integer Status;
 
-    private String message;
+    private String Message;
 
     public Integer getStatus() {
-        return this.status;
+        return this.Status;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setStatus(Integer Status) {
+        this.Status = Status;
     }
 
     public String getMessage() {
-        return this.message;
+        return this.Message;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMessage(String Message) {
+        this.Message = Message;
     }
 
 }

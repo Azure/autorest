@@ -10,7 +10,7 @@
 package fixtures.header;
 
 import com.microsoft.rest.ServiceClient;
-import com.squareup.okhtpp.OkHttpClient;
+import com.squareup.okhttp.OkHttpClient;
 import retrofit.RestAdapter;
 
 /**
@@ -23,7 +23,9 @@ public class AutoRestSwaggerBATHeaderServiceImpl extends ServiceClient<AutoRestS
      * Gets the URI used as the base for all cloud service requests.
      * @return The BaseUri value.
      */
-    public String getBaseUri();
+    public String getBaseUri() {
+        return this.baseUri;
+    }
 
     private HeaderOperations headerOperations;
 
@@ -31,21 +33,23 @@ public class AutoRestSwaggerBATHeaderServiceImpl extends ServiceClient<AutoRestS
      * Test Infrastructure for AutoRest
      * @return the headerOperations value.
      */
-    HeaderOperations getHeaderOperations();
+    public HeaderOperations getHeaderOperations() {
+        return this.headerOperations;
+    }
 
-    public AutoRestSwaggerBATHeaderService() {
+    public AutoRestSwaggerBATHeaderServiceImpl() {
         this("http://localhost");
     }
 
-    public AutoRestSwaggerBATHeaderService(String baseUri) {
+    public AutoRestSwaggerBATHeaderServiceImpl(String baseUri) {
         super();
         this.baseUri = baseUri;
         initialize();
     }
 
-    public AutoRestSwaggerBATHeaderService(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
+    public AutoRestSwaggerBATHeaderServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
         super(client, restAdapterBuilder);
-        this.baseUri = baseUri();
+        this.baseUri = baseUri;
         initialize();
     }
 

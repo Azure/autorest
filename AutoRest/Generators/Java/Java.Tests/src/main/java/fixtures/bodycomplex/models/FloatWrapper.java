@@ -13,24 +13,24 @@ package fixtures.bodycomplex.models;
  * 
  */
 public class FloatWrapper {
-    private double field1;
+    private double Field1;
 
-    private double field2;
+    private double Field2;
 
     public double getField1() {
-        return this.field1;
+        return this.Field1;
     }
 
-    public void setField1(double field1) {
-        this.field1 = field1;
+    public void setField1(double Field1) {
+        this.Field1 = Field1;
     }
 
     public double getField2() {
-        return this.field2;
+        return this.Field2;
     }
 
-    public void setField2(double field2) {
-        this.field2 = field2;
+    public void setField2(double Field2) {
+        this.Field2 = Field2;
     }
 
 }

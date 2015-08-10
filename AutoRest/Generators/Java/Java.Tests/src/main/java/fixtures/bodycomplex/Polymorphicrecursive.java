@@ -13,7 +13,7 @@ import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
 
-public interface polymorphicrecursive {
+public interface Polymorphicrecursive {
     @GET("/complex/polymorphicrecursive/valid")
     Fish getValid();
 
