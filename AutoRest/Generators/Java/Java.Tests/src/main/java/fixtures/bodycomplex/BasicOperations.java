@@ -18,10 +18,10 @@ public interface basicOperations {
     Basic getValid();
 
     @GET("/complex/basic/valid")
-    void getValidAsync(Callback<Response> cb);
+    void getValidAsync(Callback<Basic> cb);
 
     @PUT("/complex/basic/valid")
-     putValid(Basic complexBody);
+    void putValid(Basic complexBody);
 
     @PUT("/complex/basic/valid")
     void putValidAsync(Basic complexBody, Callback<Response> cb);
@@ -30,24 +30,24 @@ public interface basicOperations {
     Basic getInvalid();
 
     @GET("/complex/basic/invalid")
-    void getInvalidAsync(Callback<Response> cb);
+    void getInvalidAsync(Callback<Basic> cb);
 
     @GET("/complex/basic/empty")
     Basic getEmpty();
 
     @GET("/complex/basic/empty")
-    void getEmptyAsync(Callback<Response> cb);
+    void getEmptyAsync(Callback<Basic> cb);
 
     @GET("/complex/basic/null")
     Basic getNull();
 
     @GET("/complex/basic/null")
-    void getNullAsync(Callback<Response> cb);
+    void getNullAsync(Callback<Basic> cb);
 
     @GET("/complex/basic/notprovided")
     Basic getNotProvided();
 
     @GET("/complex/basic/notprovided")
-    void getNotProvidedAsync(Callback<Response> cb);
+    void getNotProvidedAsync(Callback<Basic> cb);
 
 }

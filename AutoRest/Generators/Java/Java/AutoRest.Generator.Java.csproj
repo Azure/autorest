@@ -38,9 +38,6 @@
     <Compile Include="TemplateModels\MethodTemplateModel.cs" />
     <Compile Include="ClientModelExtensions.cs" />
     <Compile Include="TemplateModels\ParameterTemplateModel.cs" />
-    <Compile Include="Templates\MethodGroupIndexTemplate.cs">
-      <DependentUpon>MethodGroupIndexTemplate.cshtml</DependentUpon>
-    </Compile>
     <Compile Include="Templates\MethodGroupTemplate.cs">
       <DependentUpon>MethodGroupTemplate.cshtml</DependentUpon>
     </Compile>
@@ -66,7 +63,6 @@
     <None Include="Templates\MethodJsonPipelineTemplate.cshtml" />
     <None Include="Templates\MethodStreamPipelineTemplate.cshtml" />
     <None Include="Templates\ModelTemplate.cshtml" />
-    <None Include="Templates\MethodGroupIndexTemplate.cshtml" />
     <None Include="Templates\ServiceClientInterfaceTemplate.cshtml" />
     <None Include="Templates\ServiceClientTemplate.cshtml" />
     <None Include="Templates\MethodTemplate.cshtml" />

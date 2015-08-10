@@ -15,7 +15,7 @@ package fixtures.bodycomplex.models;
 public class Salmon {
     private String location;
 
-    private Boolean iswild;
+    private boolean iswild;
 
     public String getLocation() {
         return this.location;
@@ -25,11 +25,11 @@ public class Salmon {
         this.location = location;
     }
 
-    public Boolean getIswild() {
+    public boolean getIswild() {
         return this.iswild;
     }
 
-    public void setIswild(Boolean iswild) {
+    public void setIswild(boolean iswild) {
         this.iswild = iswild;
     }
 

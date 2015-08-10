@@ -13,13 +13,13 @@ package fixtures.bodycomplex.models;
  * 
  */
 public class ByteWrapper {
-    private Buffer field;
+    private byte[] field;
 
-    public Buffer getField() {
+    public byte[] getField() {
         return this.field;
     }
 
-    public void setField(Buffer field) {
+    public void setField(byte[] field) {
         this.field = field;
     }
 

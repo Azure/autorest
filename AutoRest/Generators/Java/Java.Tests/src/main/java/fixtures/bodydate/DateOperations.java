@@ -18,28 +18,28 @@ public interface dateOperations {
     Date getNull();
 
     @GET("/date/null")
-    void getNullAsync(Callback<Response> cb);
+    void getNullAsync(Callback<Date> cb);
 
     @GET("/date/invaliddate")
     Date getInvalidDate();
 
     @GET("/date/invaliddate")
-    void getInvalidDateAsync(Callback<Response> cb);
+    void getInvalidDateAsync(Callback<Date> cb);
 
     @GET("/date/overflowdate")
     Date getOverflowDate();
 
     @GET("/date/overflowdate")
-    void getOverflowDateAsync(Callback<Response> cb);
+    void getOverflowDateAsync(Callback<Date> cb);
 
     @GET("/date/underflowdate")
     Date getUnderflowDate();
 
     @GET("/date/underflowdate")
-    void getUnderflowDateAsync(Callback<Response> cb);
+    void getUnderflowDateAsync(Callback<Date> cb);
 
     @PUT("/date/max")
-     putMaxDate(Date dateBody);
+    void putMaxDate(Date dateBody);
 
     @PUT("/date/max")
     void putMaxDateAsync(Date dateBody, Callback<Response> cb);
@@ -48,10 +48,10 @@ public interface dateOperations {
     Date getMaxDate();
 
     @GET("/date/max")
-    void getMaxDateAsync(Callback<Response> cb);
+    void getMaxDateAsync(Callback<Date> cb);
 
     @PUT("/date/min")
-     putMinDate(Date dateBody);
+    void putMinDate(Date dateBody);
 
     @PUT("/date/min")
     void putMinDateAsync(Date dateBody, Callback<Response> cb);
@@ -60,6 +60,6 @@ public interface dateOperations {
     Date getMinDate();
 
     @GET("/date/min")
-    void getMinDateAsync(Callback<Response> cb);
+    void getMinDateAsync(Callback<Date> cb);
 
 }

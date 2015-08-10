@@ -18,28 +18,28 @@ public interface datetime {
     Date getNull();
 
     @GET("/datetime/null")
-    void getNullAsync(Callback<Response> cb);
+    void getNullAsync(Callback<Date> cb);
 
     @GET("/datetime/invalid")
     Date getInvalid();
 
     @GET("/datetime/invalid")
-    void getInvalidAsync(Callback<Response> cb);
+    void getInvalidAsync(Callback<Date> cb);
 
     @GET("/datetime/overflow")
     Date getOverflow();
 
     @GET("/datetime/overflow")
-    void getOverflowAsync(Callback<Response> cb);
+    void getOverflowAsync(Callback<Date> cb);
 
     @GET("/datetime/underflow")
     Date getUnderflow();
 
     @GET("/datetime/underflow")
-    void getUnderflowAsync(Callback<Response> cb);
+    void getUnderflowAsync(Callback<Date> cb);
 
     @PUT("/datetime/max/utc")
-     putUtcMaxDateTime(Date datetimeBody);
+    void putUtcMaxDateTime(Date datetimeBody);
 
     @PUT("/datetime/max/utc")
     void putUtcMaxDateTimeAsync(Date datetimeBody, Callback<Response> cb);
@@ -48,16 +48,16 @@ public interface datetime {
     Date getUtcLowercaseMaxDateTime();
 
     @GET("/datetime/max/utc/lowercase")
-    void getUtcLowercaseMaxDateTimeAsync(Callback<Response> cb);
+    void getUtcLowercaseMaxDateTimeAsync(Callback<Date> cb);
 
     @GET("/datetime/max/utc/uppercase")
     Date getUtcUppercaseMaxDateTime();
 
     @GET("/datetime/max/utc/uppercase")
-    void getUtcUppercaseMaxDateTimeAsync(Callback<Response> cb);
+    void getUtcUppercaseMaxDateTimeAsync(Callback<Date> cb);
 
     @PUT("/datetime/max/localpositiveoffset")
-     putLocalPositiveOffsetMaxDateTime(Date datetimeBody);
+    void putLocalPositiveOffsetMaxDateTime(Date datetimeBody);
 
     @PUT("/datetime/max/localpositiveoffset")
     void putLocalPositiveOffsetMaxDateTimeAsync(Date datetimeBody, Callback<Response> cb);
@@ -66,16 +66,16 @@ public interface datetime {
     Date getLocalPositiveOffsetLowercaseMaxDateTime();
 
     @GET("/datetime/max/localpositiveoffset/lowercase")
-    void getLocalPositiveOffsetLowercaseMaxDateTimeAsync(Callback<Response> cb);
+    void getLocalPositiveOffsetLowercaseMaxDateTimeAsync(Callback<Date> cb);
 
     @GET("/datetime/max/localpositiveoffset/uppercase")
     Date getLocalPositiveOffsetUppercaseMaxDateTime();
 
     @GET("/datetime/max/localpositiveoffset/uppercase")
-    void getLocalPositiveOffsetUppercaseMaxDateTimeAsync(Callback<Response> cb);
+    void getLocalPositiveOffsetUppercaseMaxDateTimeAsync(Callback<Date> cb);
 
     @PUT("/datetime/max/localnegativeoffset")
-     putLocalNegativeOffsetMaxDateTime(Date datetimeBody);
+    void putLocalNegativeOffsetMaxDateTime(Date datetimeBody);
 
     @PUT("/datetime/max/localnegativeoffset")
     void putLocalNegativeOffsetMaxDateTimeAsync(Date datetimeBody, Callback<Response> cb);
@@ -84,16 +84,16 @@ public interface datetime {
     Date getLocalNegativeOffsetUppercaseMaxDateTime();
 
     @GET("/datetime/max/localnegativeoffset/uppercase")
-    void getLocalNegativeOffsetUppercaseMaxDateTimeAsync(Callback<Response> cb);
+    void getLocalNegativeOffsetUppercaseMaxDateTimeAsync(Callback<Date> cb);
 
     @GET("/datetime/max/localnegativeoffset/lowercase")
     Date getLocalNegativeOffsetLowercaseMaxDateTime();
 
     @GET("/datetime/max/localnegativeoffset/lowercase")
-    void getLocalNegativeOffsetLowercaseMaxDateTimeAsync(Callback<Response> cb);
+    void getLocalNegativeOffsetLowercaseMaxDateTimeAsync(Callback<Date> cb);
 
     @PUT("/datetime/min/utc")
-     putUtcMinDateTime(Date datetimeBody);
+    void putUtcMinDateTime(Date datetimeBody);
 
     @PUT("/datetime/min/utc")
     void putUtcMinDateTimeAsync(Date datetimeBody, Callback<Response> cb);
@@ -102,10 +102,10 @@ public interface datetime {
     Date getUtcMinDateTime();
 
     @GET("/datetime/min/utc")
-    void getUtcMinDateTimeAsync(Callback<Response> cb);
+    void getUtcMinDateTimeAsync(Callback<Date> cb);
 
     @PUT("/datetime/min/localpositiveoffset")
-     putLocalPositiveOffsetMinDateTime(Date datetimeBody);
+    void putLocalPositiveOffsetMinDateTime(Date datetimeBody);
 
     @PUT("/datetime/min/localpositiveoffset")
     void putLocalPositiveOffsetMinDateTimeAsync(Date datetimeBody, Callback<Response> cb);
@@ -114,10 +114,10 @@ public interface datetime {
     Date getLocalPositiveOffsetMinDateTime();
 
     @GET("/datetime/min/localpositiveoffset")
-    void getLocalPositiveOffsetMinDateTimeAsync(Callback<Response> cb);
+    void getLocalPositiveOffsetMinDateTimeAsync(Callback<Date> cb);
 
     @PUT("/datetime/min/localnegativeoffset")
-     putLocalNegativeOffsetMinDateTime(Date datetimeBody);
+    void putLocalNegativeOffsetMinDateTime(Date datetimeBody);
 
     @PUT("/datetime/min/localnegativeoffset")
     void putLocalNegativeOffsetMinDateTimeAsync(Date datetimeBody, Callback<Response> cb);
@@ -126,6 +126,6 @@ public interface datetime {
     Date getLocalNegativeOffsetMinDateTime();
 
     @GET("/datetime/min/localnegativeoffset")
-    void getLocalNegativeOffsetMinDateTimeAsync(Callback<Response> cb);
+    void getLocalNegativeOffsetMinDateTimeAsync(Callback<Date> cb);
 
 }

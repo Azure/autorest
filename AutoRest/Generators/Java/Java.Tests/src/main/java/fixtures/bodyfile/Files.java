@@ -15,15 +15,15 @@ import retrofit.client.Response;
 
 public interface files {
     @GET("/files/stream/nonempty")
-    Object getFile();
+    Stream getFile();
 
     @GET("/files/stream/nonempty")
-    void getFileAsync(Callback<Response> cb);
+    void getFileAsync(Callback<Stream> cb);
 
     @GET("/files/stream/empty")
-    Object getEmptyFile();
+    Stream getEmptyFile();
 
     @GET("/files/stream/empty")
-    void getEmptyFileAsync(Callback<Response> cb);
+    void getEmptyFileAsync(Callback<Stream> cb);
 
 }

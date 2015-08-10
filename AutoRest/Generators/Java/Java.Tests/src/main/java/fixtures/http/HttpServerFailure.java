@@ -18,24 +18,24 @@ public interface httpServerFailure {
     ErrorModel head501();
 
     @HEAD("/http/failure/server/501")
-    void head501Async(Callback<Response> cb);
+    void head501Async(Callback<ErrorModel> cb);
 
     @GET("/http/failure/server/501")
     ErrorModel get501();
 
     @GET("/http/failure/server/501")
-    void get501Async(Callback<Response> cb);
+    void get501Async(Callback<ErrorModel> cb);
 
     @POST("/http/failure/server/505")
     ErrorModel post505(Boolean booleanValue);
 
     @POST("/http/failure/server/505")
-    void post505Async(Boolean booleanValue, Callback<Response> cb);
+    void post505Async(Boolean booleanValue, Callback<ErrorModel> cb);
 
     @DELETE("/http/failure/server/505")
     ErrorModel delete505(Boolean booleanValue);
 
     @DELETE("/http/failure/server/505")
-    void delete505Async(Boolean booleanValue, Callback<Response> cb);
+    void delete505Async(Boolean booleanValue, Callback<ErrorModel> cb);
 
 }

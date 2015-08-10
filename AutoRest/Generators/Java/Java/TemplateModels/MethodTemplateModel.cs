@@ -109,7 +109,8 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     parameters += ", ";
                 }
-                parameters += "Callback<Response> cb";
+                parameters += string.Format("Callback<{0}> cb", 
+                    ReturnType != null ? JavaCodeNamer.NormalizeGenericType(ReturnType).ToString() : "Response");
                 return parameters;
             }
         }

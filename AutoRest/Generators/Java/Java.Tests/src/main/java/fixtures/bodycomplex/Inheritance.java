@@ -18,10 +18,10 @@ public interface inheritance {
     Siamese getValid();
 
     @GET("/complex/inheritance/valid")
-    void getValidAsync(Callback<Response> cb);
+    void getValidAsync(Callback<Siamese> cb);
 
     @PUT("/complex/inheritance/valid")
-     putValid(Siamese complexBody);
+    void putValid(Siamese complexBody);
 
     @PUT("/complex/inheritance/valid")
     void putValidAsync(Siamese complexBody, Callback<Response> cb);

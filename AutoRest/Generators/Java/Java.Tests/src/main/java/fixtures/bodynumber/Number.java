@@ -15,25 +15,25 @@ import retrofit.client.Response;
 
 public interface number {
     @GET("/number/null")
-    Double getNull();
+    double getNull();
 
     @GET("/number/null")
-    void getNullAsync(Callback<Response> cb);
+    void getNullAsync(Callback<Double> cb);
 
     @GET("/number/invalidfloat")
     Double getInvalidFloat();
 
     @GET("/number/invalidfloat")
-    void getInvalidFloatAsync(Callback<Response> cb);
+    void getInvalidFloatAsync(Callback<Double> cb);
 
     @GET("/number/invaliddouble")
     Double getInvalidDouble();
 
     @GET("/number/invaliddouble")
-    void getInvalidDoubleAsync(Callback<Response> cb);
+    void getInvalidDoubleAsync(Callback<Double> cb);
 
     @PUT("/number/big/float/3.402823e+20")
-     putBigFloat(Double numberBody);
+    void putBigFloat(Double numberBody);
 
     @PUT("/number/big/float/3.402823e+20")
     void putBigFloatAsync(Double numberBody, Callback<Response> cb);
@@ -42,10 +42,10 @@ public interface number {
     Double getBigFloat();
 
     @GET("/number/big/float/3.402823e+20")
-    void getBigFloatAsync(Callback<Response> cb);
+    void getBigFloatAsync(Callback<Double> cb);
 
     @PUT("/number/big/double/2.5976931e+101")
-     putBigDouble(Double numberBody);
+    void putBigDouble(Double numberBody);
 
     @PUT("/number/big/double/2.5976931e+101")
     void putBigDoubleAsync(Double numberBody, Callback<Response> cb);
@@ -54,10 +54,10 @@ public interface number {
     Double getBigDouble();
 
     @GET("/number/big/double/2.5976931e+101")
-    void getBigDoubleAsync(Callback<Response> cb);
+    void getBigDoubleAsync(Callback<Double> cb);
 
     @PUT("/number/big/double/99999999.99")
-     putBigDoublePositiveDecimal(Double numberBody);
+    void putBigDoublePositiveDecimal(Double numberBody);
 
     @PUT("/number/big/double/99999999.99")
     void putBigDoublePositiveDecimalAsync(Double numberBody, Callback<Response> cb);
@@ -66,10 +66,10 @@ public interface number {
     Double getBigDoublePositiveDecimal();
 
     @GET("/number/big/double/99999999.99")
-    void getBigDoublePositiveDecimalAsync(Callback<Response> cb);
+    void getBigDoublePositiveDecimalAsync(Callback<Double> cb);
 
     @PUT("/number/big/double/-99999999.99")
-     putBigDoubleNegativeDecimal(Double numberBody);
+    void putBigDoubleNegativeDecimal(Double numberBody);
 
     @PUT("/number/big/double/-99999999.99")
     void putBigDoubleNegativeDecimalAsync(Double numberBody, Callback<Response> cb);
@@ -78,10 +78,10 @@ public interface number {
     Double getBigDoubleNegativeDecimal();
 
     @GET("/number/big/double/-99999999.99")
-    void getBigDoubleNegativeDecimalAsync(Callback<Response> cb);
+    void getBigDoubleNegativeDecimalAsync(Callback<Double> cb);
 
     @PUT("/number/small/float/3.402823e-20")
-     putSmallFloat(Double numberBody);
+    void putSmallFloat(Double numberBody);
 
     @PUT("/number/small/float/3.402823e-20")
     void putSmallFloatAsync(Double numberBody, Callback<Response> cb);
@@ -90,10 +90,10 @@ public interface number {
     Double getSmallFloat();
 
     @GET("/number/small/float/3.402823e-20")
-    void getSmallFloatAsync(Callback<Response> cb);
+    void getSmallFloatAsync(Callback<Double> cb);
 
     @PUT("/number/small/double/2.5976931e-101")
-     putSmallDouble(Double numberBody);
+    void putSmallDouble(Double numberBody);
 
     @PUT("/number/small/double/2.5976931e-101")
     void putSmallDoubleAsync(Double numberBody, Callback<Response> cb);
@@ -102,6 +102,6 @@ public interface number {
     Double getSmallDouble();
 
     @GET("/number/small/double/2.5976931e-101")
-    void getSmallDoubleAsync(Callback<Response> cb);
+    void getSmallDoubleAsync(Callback<Double> cb);
 
 }

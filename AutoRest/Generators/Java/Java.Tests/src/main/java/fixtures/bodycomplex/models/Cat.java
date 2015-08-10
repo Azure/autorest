@@ -15,7 +15,7 @@ package fixtures.bodycomplex.models;
 public class Cat {
     private String color;
 
-    private Array hates;
+    private List<Dog> hates;
 
     public String getColor() {
         return this.color;
@@ -25,11 +25,11 @@ public class Cat {
         this.color = color;
     }
 
-    public Array getHates() {
+    public List<Dog> getHates() {
         return this.hates;
     }
 
-    public void setHates(Array hates) {
+    public void setHates(List<Dog> hates) {
         this.hates = hates;
     }
 

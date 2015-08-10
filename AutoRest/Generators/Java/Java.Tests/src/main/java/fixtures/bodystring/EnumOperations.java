@@ -18,10 +18,10 @@ public interface enumOperations {
     Colors getNotExpandable();
 
     @GET("/string/enum/notExpandable")
-    void getNotExpandableAsync(Callback<Response> cb);
+    void getNotExpandableAsync(Callback<Colors> cb);
 
     @PUT("/string/enum/notExpandable")
-     putNotExpandable(Colors stringBody);
+    void putNotExpandable(Colors stringBody);
 
     @PUT("/string/enum/notExpandable")
     void putNotExpandableAsync(Colors stringBody, Callback<Response> cb);

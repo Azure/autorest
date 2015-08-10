@@ -13,15 +13,15 @@ package fixtures.bodycomplex.models;
  * 
  */
 public class Pet {
-    private Integer id;
+    private int id;
 
     private String name;
 
-    public Integer getId() {
+    public int getId() {
         return this.id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

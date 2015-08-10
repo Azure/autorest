@@ -13,13 +13,13 @@ package fixtures.requiredoptional.models;
  * 
  */
 public class IntOptionalWrapper {
-    private Integer value;
+    private int value;
 
-    public Integer getValue() {
+    public int getValue() {
         return this.value;
     }
 
-    public void setValue(Integer value) {
+    public void setValue(int value) {
         this.value = value;
     }
 

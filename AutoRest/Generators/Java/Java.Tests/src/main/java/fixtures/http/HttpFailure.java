@@ -15,9 +15,9 @@ import retrofit.client.Response;
 
 public interface httpFailure {
     @GET("/http/failure/emptybody/error")
-    Boolean getEmptyError();
+    boolean getEmptyError();
 
     @GET("/http/failure/emptybody/error")
-    void getEmptyErrorAsync(Callback<Response> cb);
+    void getEmptyErrorAsync(Callback<Boolean> cb);
 
 }

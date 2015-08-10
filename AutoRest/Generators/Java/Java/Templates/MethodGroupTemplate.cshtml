@@ -18,7 +18,7 @@ public interface @Model.MethodGroupName {
 @foreach (var method in Model.MethodTemplateModels)
 {
 @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url)")
-@:    @method.ReturnType @(method.Name)(@method.MethodParameterDeclaration);
+@:    @method.ReturnTypeString @(method.Name)(@method.MethodParameterDeclaration);
 @EmptyLine
 @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url)")
 @:    void @(method.Name)Async(@method.MethodParameterDeclarationWithCallback);

@@ -13,17 +13,17 @@ package fixtures.bodycomplex.models;
  * 
  */
 public class Basic {
-    private Integer id;
+    private int id;
 
     private String name;
 
     private CMYKColors color;
 
-    public Integer getId() {
+    public int getId() {
         return this.id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

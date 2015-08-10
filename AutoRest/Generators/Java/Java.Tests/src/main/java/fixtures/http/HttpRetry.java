@@ -15,49 +15,49 @@ import retrofit.client.Response;
 
 public interface httpRetry {
     @HEAD("/http/retry/408")
-     head408();
+    void head408();
 
     @HEAD("/http/retry/408")
     void head408Async(Callback<Response> cb);
 
     @PUT("/http/retry/500")
-     put500(Boolean booleanValue);
+    void put500(Boolean booleanValue);
 
     @PUT("/http/retry/500")
     void put500Async(Boolean booleanValue, Callback<Response> cb);
 
     @PATCH("/http/retry/500")
-     patch500(Boolean booleanValue);
+    void patch500(Boolean booleanValue);
 
     @PATCH("/http/retry/500")
     void patch500Async(Boolean booleanValue, Callback<Response> cb);
 
     @GET("/http/retry/502")
-     get502();
+    void get502();
 
     @GET("/http/retry/502")
     void get502Async(Callback<Response> cb);
 
     @POST("/http/retry/503")
-     post503(Boolean booleanValue);
+    void post503(Boolean booleanValue);
 
     @POST("/http/retry/503")
     void post503Async(Boolean booleanValue, Callback<Response> cb);
 
     @DELETE("/http/retry/503")
-     delete503(Boolean booleanValue);
+    void delete503(Boolean booleanValue);
 
     @DELETE("/http/retry/503")
     void delete503Async(Boolean booleanValue, Callback<Response> cb);
 
     @PUT("/http/retry/504")
-     put504(Boolean booleanValue);
+    void put504(Boolean booleanValue);
 
     @PUT("/http/retry/504")
     void put504Async(Boolean booleanValue, Callback<Response> cb);
 
     @PATCH("/http/retry/504")
-     patch504(Boolean booleanValue);
+    void patch504(Boolean booleanValue);
 
     @PATCH("/http/retry/504")
     void patch504Async(Boolean booleanValue, Callback<Response> cb);

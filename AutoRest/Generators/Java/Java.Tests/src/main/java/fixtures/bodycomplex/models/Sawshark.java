@@ -13,13 +13,13 @@ package fixtures.bodycomplex.models;
  * 
  */
 public class Sawshark {
-    private Buffer picture;
+    private byte[] picture;
 
-    public Buffer getPicture() {
+    public byte[] getPicture() {
         return this.picture;
     }
 
-    public void setPicture(Buffer picture) {
+    public void setPicture(byte[] picture) {
         this.picture = picture;
     }
 
