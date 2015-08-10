@@ -1,5 +1,8 @@
+$: << 'RspecTests/date'
+
 require 'rspec'
-require_relative 'Date/sdk_requirements'
+require 'body_date'
+
 include MyNamespace
 
 describe Date do
@@ -7,8 +10,8 @@ describe Date do
   before(:all) do
     @base_url = ENV['StubServerURI']
 
-	dummyToken = 'dummy12321343423'
-	@credentials = MsRest::TokenCredentials.new(dummyToken)
+    dummyToken = 'dummy12321343423'
+    @credentials = MsRest::TokenCredentials.new(dummyToken)
 
     client = AutoRestDateTestService.new(@credentials, @base_url)
     @date_client = MyNamespace::Date.new(client)

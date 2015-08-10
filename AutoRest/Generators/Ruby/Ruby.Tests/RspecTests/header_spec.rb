@@ -1,6 +1,10 @@
+$: << 'RspecTests/header'
+
 require "base64"
-require_relative 'Header/sdk_requirements'
+require 'header'
+
 include MyNamespace
+include MyNamespace::Models
 
 describe Header do
   before(:all) do
@@ -9,8 +13,8 @@ describe Header do
     dummyToken = 'dummy12321343423'
     @credentials = MsRest::TokenCredentials.new('Bearer', dummyToken)
 
-    client = MyNamespace::AutoRestSwaggerBATHeaderService.new(@credentials, @base_url)
-    @header_client = MyNamespace::Header.new(client)
+    client = AutoRestSwaggerBATHeaderService.new(@credentials, @base_url)
+    @header_client = Header.new(client)
   end
 
   def to_bool(str)
@@ -20,7 +24,7 @@ describe Header do
   end
 
   it 'should create test service' do
-    expect { MyNamespace::AutoRestSwaggerBATHeaderService.new(@credentials, @base_url) }.not_to raise_error
+    expect { AutoRestSwaggerBATHeaderService.new(@credentials, @base_url) }.not_to raise_error
   end
 
   it 'should post param existing key' do

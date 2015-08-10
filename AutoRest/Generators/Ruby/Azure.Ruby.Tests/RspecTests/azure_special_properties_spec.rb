@@ -1,6 +1,10 @@
+$: << 'RspecTests/azure_special_properties'
+
 require 'rspec'
 require 'securerandom'
-require_relative 'AzureSpecialProperties/sdk_requirements'
+
+require 'azure_special_properties'
+
 include MyNamespace
 
 describe 'Azure Special properties behaviour' do

@@ -1,5 +1,7 @@
+$: << 'RspecTests/resource_flattening'
+
 require 'securerandom'
-require_relative 'ResourceFlattening/sdk_requirements'
+require 'resource_flattening'
 
 include MyNamespace
 include MyNamespace::Models

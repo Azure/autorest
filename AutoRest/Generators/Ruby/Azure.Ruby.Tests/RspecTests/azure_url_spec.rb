@@ -1,6 +1,10 @@
+$: << 'RspecTests/azure_url'
+
 require 'rspec'
 require 'securerandom'
-require_relative 'AzureURL/sdk_requirements'
+
+require 'subscription_id_api_version'
+
 include MyNamespace
 
 describe Group do

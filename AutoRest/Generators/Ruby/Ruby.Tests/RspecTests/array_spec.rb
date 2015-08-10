@@ -1,17 +1,23 @@
+$: << 'RspecTests/array'
+$: << 'RspecTests'
+
 require 'rspec'
-require_relative 'Array/sdk_requirements'
-require_relative './helper'
+require 'body_array'
+require 'helper'
+
 include MyNamespace
+include MyNamespace::Models
 
 describe Array do
 
   before(:all) do
     @base_url = ENV['StubServerURI']
 
-	dummyToken = 'dummy12321343423'
-	@credentials = MsRest::TokenCredentials.new(dummyToken)
+    dummyToken = 'dummy12321343423'
+    @credentials = MsRest::TokenCredentials.new(dummyToken)
 
     client = AutoRestSwaggerBATArrayService.new(@credentials, @base_url)
+
     @array_client = MyNamespace::Array.new(client)
     @arr_bool = [true, false, false, true]
     @arr_string = ["foo1", "foo2", "foo3"]
@@ -22,9 +28,9 @@ describe Array do
     @arr_dateTime = [DateTime.new(2000, 12, 01, 0, 0, 1), DateTime.new(1980, 1, 2, 0, 11, 35),DateTime.new(1492, 10, 12, 10, 15, 1)]
     @arr_dateTime_nil = [DateTime.new(2000, 12, 01, 0, 0, 1), nil]
 
-    @product1 = Models::Product.new
-    @product2 = Models::Product.new
-    @product3 = Models::Product.new
+    @product1 = Product.new
+    @product2 = Product.new
+    @product3 = Product.new
     @product1.string = "2"
     @product1.integer = 1
     @product2.string = "4"
@@ -33,7 +39,7 @@ describe Array do
     @product3.integer = 5
     @arr_complex = [@product1, @product2, @product3]
 
-    @arr_complex_empty = [@product1, Models::Product.new, @product3]
+    @arr_complex_empty = [@product1, Product.new, @product3]
 
     @arr_complex_nil = [@product1, nil, @product3]
 
@@ -88,7 +94,7 @@ describe Array do
     expect(result.body).to eq([true, "boolean", false])
   end
 
-  #Integer tests
+  # Integer tests
   it 'should get integer valid' do
     result = @array_client.get_integer_valid().value!
     expect(result.response.status).to eq(200)
@@ -110,7 +116,7 @@ describe Array do
     expect { result = @array_client.get_int_invalid_string().value! }.to raise_error(MsRest::DeserializationError)
   end
 
-  #Long integer tests. Ruby automtically converts int to long int, so there is no
+  # Long integer tests. Ruby automtically converts int to long int, so there is no
   # special data type.
   it 'should get long valid' do
     result = @array_client.get_long_valid().value!
@@ -133,7 +139,7 @@ describe Array do
     expect { result = @array_client.get_long_invalid_string().value! }.to raise_error(MsRest::DeserializationError)
   end
 
-  #Float tests
+  # Float tests
   it 'should get float valid' do
     result = @array_client.get_float_valid().value!
     expect(result.response.status).to eq(200)
@@ -155,7 +161,7 @@ describe Array do
     expect { result = @array_client.get_float_invalid_string().value! }.to raise_error(MsRest::DeserializationError)
   end
 
-  #Double tests
+  # Double tests
   it 'should get double valid' do
     result = @array_client.get_double_valid().value!
     expect(result.response.status).to eq(200)
@@ -177,7 +183,7 @@ describe Array do
     expect { result = @array_client.get_double_invalid_string().value! }.to raise_error(MsRest::DeserializationError)
   end
 
-  #String tests
+  # String tests
   it 'should get string valid' do
     result = @array_client.get_string_valid().value!
     expect(result.response.status).to eq(200)
@@ -201,7 +207,7 @@ describe Array do
     expect(result.body).to eq(["foo", 123, "foo2"])
   end
 
-  #Date tests
+  # Date tests
   it 'should get date valid' do
     result = @array_client.get_date_valid().value!
     expect(result.response.status).to eq(200)
@@ -223,7 +229,7 @@ describe Array do
     expect { @array_client.get_date_invalid_chars().value! }.to raise_exception(MsRest::DeserializationError)
   end
 
-  #DateTime tests
+  # DateTime tests
   it 'should get dateTime valid' do
     result = @array_client.get_date_time_valid().value!
     expect(result.response.status).to eq(200)
@@ -245,7 +251,7 @@ describe Array do
     expect { @array_client.get_date_time_invalid_chars().value! }.to raise_exception(MsRest::DeserializationError)
   end
 
-  #Byte tests
+  # Byte tests
   it 'should get byte valid' do
     result = @array_client.get_byte_valid().value!
     expect(result.response.status).to eq(200)
@@ -308,7 +314,7 @@ describe Array do
     expect(result.response.status).to eq(200)
   end
 
-  #Array tests
+  # Array tests
   it 'should get array null' do
     result = @array_client.get_array_null().value!
     expect(result.response.status).to eq(200)
@@ -344,7 +350,7 @@ describe Array do
     expect(result.response.status).to eq(200)
   end
 
-  #Dictionary tests
+  # Dictionary tests
   it 'should get dictionary null' do
     result = @array_client.get_dictionary_null().value!
     expect(result.response.status).to eq(200)

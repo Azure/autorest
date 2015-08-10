@@ -1,4 +1,7 @@
-require_relative 'AzureReport/sdk_requirements'
+$: << 'RspecTests/azure_report'
+
+require 'azure_report'
+
 include MyNamespace
 
 describe 'AutoRestReportService' do

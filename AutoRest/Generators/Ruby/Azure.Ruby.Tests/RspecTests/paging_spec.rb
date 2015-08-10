@@ -1,5 +1,8 @@
+$: << 'RspecTests/paging'
+
 require 'rspec'
-require_relative 'Paging/sdk_requirements'
+require 'paging'
+
 include MyNamespace
 
 describe 'Paging' do

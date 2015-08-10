@@ -1,6 +1,9 @@
+$: << 'RspecTests/datetime'
+
 require 'rspec'
-require_relative 'DateTime/sdk_requirements'
+require 'body_datetime'
 require_relative './helper'
+
 include MyNamespace
 
 describe Date do
@@ -12,7 +15,7 @@ describe Date do
 	@credentials = MsRest::TokenCredentials.new(dummyToken)
 
     client = AutoRestDateTimeTestService.new(@credentials, @base_url)
-    @date_client = MyNamespace::Datetime.new(client)
+    @date_client = Datetime.new(client)
   end
 
   it 'should create test service' do

@@ -1,25 +1,28 @@
-require_relative 'Number/sdk_requirements'
+$: << 'RspecTests/number'
+
+require 'body_number'
+
 include MyNamespace
 
 describe Number do
   before(:all) do
     @base_url = ENV['StubServerURI']
 
-	dummyToken = 'dummy12321343423'
-	@credentials = MsRest::TokenCredentials.new(dummyToken)
+    dummyToken = 'dummy12321343423'
+    @credentials = MsRest::TokenCredentials.new(dummyToken)
 
-    client = MyNamespace::AutoRestNumberTestService.new(@credentials, @base_url)
-    @number_client = MyNamespace::Number.new(client)
+    client = AutoRestNumberTestService.new(@credentials, @base_url)
+    @number_client = Number.new(client)
   end
 
   it 'should create test service' do
-    expect { MyNamespace::AutoRestNumberTestService.new(@credentials, @base_url) }.not_to raise_error
+    expect { AutoRestNumberTestService.new(@credentials, @base_url) }.not_to raise_error
   end
 
   it 'should get null' do
     result = @number_client.get_null().value!
-	expect(result.response.status).to eq(200)
-	expect(result.body).to eq(nil)
+    expect(result.response.status).to eq(200)
+    expect(result.body).to eq(nil)
   end
 
   it 'should get invalid float' do

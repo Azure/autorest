@@ -1,4 +1,7 @@
-require_relative 'Boolean/sdk_requirements'
+$: << 'RspecTests/boolean'
+
+require 'body_boolean'
+
 include MyNamespace
 
 describe Bool do
@@ -6,11 +9,12 @@ describe Bool do
     @base_url = ENV['StubServerURI']
 
     dummyToken = 'dummy12321343423'
-	@credentials = MsRest::TokenCredentials.new(dummyToken)
+    @credentials = MsRest::TokenCredentials.new(dummyToken)
 
-    client = MyNamespace::AutoRestBoolTestService.new(@credentials, @base_url)
-    @bool_client = MyNamespace::Bool.new(client)
+    client = AutoRestBoolTestService.new(@credentials, @base_url)
+    @bool_client = Bool.new(client)
   end
+
   def to_bool(str)
     return true if str =~ (/^(true)$/i)
     return false if str =~ (/^(false)$/i)
@@ -18,7 +22,7 @@ describe Bool do
   end
 
   it 'should create test service' do
-    expect { MyNamespace::AutoRestBoolTestService.new(@credentials, @base_url) }.not_to raise_error
+    expect { AutoRestBoolTestService.new(@credentials, @base_url) }.not_to raise_error
   end
 
   it 'should get true' do

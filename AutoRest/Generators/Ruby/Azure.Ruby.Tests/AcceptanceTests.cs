@@ -15,44 +15,44 @@ namespace Microsoft.Rest.Generator.Azure.Ruby.Tests
         [Fact]
         public void HeadTests()
         {
-            Test("head_spec.rb", "head.json", "Head");
+            Test("head_spec.rb", "head.json", "head");
         }
 
         [Fact]
         public void PagingTests()
         {
-            Test("paging_spec.rb", "paging.json", "Paging");
+            Test("paging_spec.rb", "paging.json", "paging");
         }
 
         [Fact]
         public void ResourceFlatteningTests()
         {
-            Test("resource_flattening_spec.rb", "resource-flattening.json", "ResourceFlattening");
+            Test("resource_flattening_spec.rb", "resource-flattening.json", "resource_flattening");
         }
 
         [Fact]
         public void LroTests()
         {
-            Test("lro_spec.rb", "lro.json", "Lro");
+            Test("lro_spec.rb", "lro.json", "lro");
         }
 
         [Fact]
         public void AzureURLTests()
         {
-            Test("azure_url_spec.rb", "subscriptionId-apiVersion.json", "AzureURL");
+            Test("azure_url_spec.rb", "subscriptionId-apiVersion.json", "azure_url");
         }
 
         [Fact]
         public void AzureSpecialPropertiesTests()
         {
-            Test("azure_special_properties_spec.rb", "azure-special-properties.json", "AzureSpecialProperties");
+            Test("azure_special_properties_spec.rb", "azure-special-properties.json", "azure_special_properties");
         }
 
         [Trait("Report", "true")]
         [Fact]
         public void EnsureTestCoverage()
         {
-            Test("azure_report_spec.rb", "azure-report.json", "AzureReport");
+            Test("azure_report_spec.rb", "azure-report.json", "azure_report");
         }
     }
 }

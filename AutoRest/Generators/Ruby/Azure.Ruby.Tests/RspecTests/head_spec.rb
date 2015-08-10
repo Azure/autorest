@@ -1,5 +1,7 @@
+$: << 'RspecTests/head'
+
 require 'rspec'
-require_relative 'Head/sdk_requirements'
+require 'head'
 
 include MyNamespace
 

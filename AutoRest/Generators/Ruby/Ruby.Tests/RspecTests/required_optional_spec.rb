@@ -1,5 +1,9 @@
-require_relative 'RequiredOptional/sdk_requirements'
+$: << 'RspecTests/required_optional'
+
+require 'required_optional'
+
 include MyNamespace
+include MyNamespace::Models
 
 describe AutoRestRequiredOptionalTestService do
   before(:all) do
@@ -8,14 +12,14 @@ describe AutoRestRequiredOptionalTestService do
     dummyToken = 'dummy12321343423'
     @credentials = MsRest::TokenCredentials.new(dummyToken)
 
-    client = MyNamespace::AutoRestRequiredOptionalTestService.new(@credentials, @base_url)
-    @explicit_client = MyNamespace::Explicit.new(client)
-    @implicit_client = MyNamespace::Implicit.new(client)
+    client = AutoRestRequiredOptionalTestService.new(@credentials, @base_url)
+    @explicit_client = Explicit.new(client)
+    @implicit_client = Implicit.new(client)
   end
 
   # Negative tests
   it 'should create test service' do
-    expect { MyNamespace::AutoRestRequiredOptionalTestService.new(@credentials, @base_url) }.not_to raise_error
+    expect { AutoRestRequiredOptionalTestService.new(@credentials, @base_url) }.not_to raise_error
   end
 
   it 'should throw error for implicitly required parameter' do
@@ -31,7 +35,7 @@ describe AutoRestRequiredOptionalTestService do
   end
 
   it 'should throw error for explicitly required string-wrapper parameter' do
-    input = MyNamespace::Models::StringWrapper.new
+    input = StringWrapper.new
     input.value = nil
     expect { @explicit_client.post_required_string_property(input) }.to raise_error(MsRest::ValidationError)
   end
@@ -45,7 +49,7 @@ describe AutoRestRequiredOptionalTestService do
   end
 
   it 'should throw error for explicitly required array-wrapper parameter' do
-    input = MyNamespace::Models::ArrayWrapper.new
+    input = ArrayWrapper.new
     input.value = nil
     expect { @explicit_client.post_required_array_property(input) }.to raise_error(MsRest::ValidationError)
   end
@@ -55,7 +59,7 @@ describe AutoRestRequiredOptionalTestService do
   end
 
   it 'should throw error for explicitly required class-wrapper parameter' do
-    input = MyNamespace::Models::ClassWrapper.new
+    input = ClassWrapper.new
     input.value = nil
     expect { @explicit_client.post_required_class_property(input) }.to raise_error(MsRest::ValidationError)
   end
@@ -100,7 +104,7 @@ describe AutoRestRequiredOptionalTestService do
   end
 
   it 'should permit use integer-wrapper with nil for optional parameters' do
-    value = MyNamespace::Models::IntOptionalWrapper.new
+    value = IntOptionalWrapper.new
     value.value = nil
     result = @explicit_client.post_optional_integer_property(value).value!
     expect(result.response.status).to eq(200)
@@ -117,7 +121,7 @@ describe AutoRestRequiredOptionalTestService do
   end
 
   it 'should permit use string-wrapper with nil for optional parameters' do
-    input = MyNamespace::Models::StringOptionalWrapper.new
+    input = StringOptionalWrapper.new
     input.value = nil
     result = @explicit_client.post_optional_string_property(input).value!
     expect(result.response.status).to eq(200)
@@ -134,7 +138,7 @@ describe AutoRestRequiredOptionalTestService do
   end
 
   it 'should permit use array-wrapper with nil for optional parameters' do
-    input = MyNamespace::Models::ArrayOptionalWrapper.new
+    input = ArrayOptionalWrapper.new
     input.value = nil
     result = @explicit_client.post_optional_array_property(input).value!
     expect(result.response.status).to eq(200)
@@ -146,7 +150,7 @@ describe AutoRestRequiredOptionalTestService do
   end
 
   it 'should permit use class-wrapper with nil for optional parameters' do
-    input = MyNamespace::Models::ClassOptionalWrapper.new
+    input = ClassOptionalWrapper.new
     input.value = nil
     result = @explicit_client.post_optional_class_property(input).value!
     expect(result.response.status).to eq(200)

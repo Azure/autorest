@@ -1,6 +1,10 @@
+$: << 'RspecTests/lro'
+
 require 'rspec'
-require_relative 'Lro/sdk_requirements'
+require 'lro'
+
 include MyNamespace
+include MyNamespace::Models
 
 describe 'LongRunningOperation' do
 
@@ -12,7 +16,7 @@ describe 'LongRunningOperation' do
 
     @client = AutoRestLongRunningOperationTestService.new(@credentials, @base_url)
     @client.long_running_operation_retry_timeout = 0
-    @product = Models::Product.new
+    @product = Product.new
     @product.location = "West US"
   end
 
