@@ -112,7 +112,12 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
 
             foreach (var param in queryParametres)
             {
-                if (param.Extensions.ContainsKey(AzureCodeGenerator.SkipUrlEncodingExtension))
+                bool isFilter = param.SerializedName.Equals("$filter", StringComparison.OrdinalIgnoreCase) &&
+                                param.Location == ParameterLocation.Query;
+
+                bool hasSkipUrlExtension = param.Extensions.ContainsKey(AzureCodeGenerator.SkipUrlEncodingExtension);
+
+                if (isFilter || hasSkipUrlExtension)
                 {
                     builder.AppendLine("properties['{0}'] = {1} unless {1}.nil?", param.SerializedName, param.Name);
                 }

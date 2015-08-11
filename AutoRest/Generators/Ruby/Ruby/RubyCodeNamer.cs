@@ -138,11 +138,6 @@ namespace Microsoft.Rest.Generator.Ruby
                     {
                         parameter.Name = scope.GetVariableName(parameter.Name);
                     }
-
-                    parameter.Name = scope.GetVariableName(parameter.Name);
-
-                    // TODO: verify whether we need set required.
-                    // parameter.SetRequiredOptional();
                 }
             }
         }

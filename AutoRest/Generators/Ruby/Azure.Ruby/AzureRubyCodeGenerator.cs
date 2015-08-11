@@ -1,12 +1,14 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Threading.Tasks;
 using Microsoft.Rest.Generator.Azure.Ruby.Templates;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Ruby;
 using Microsoft.Rest.Generator.Ruby.Templates;
 using System.IO;
+using System.Linq;
 
 namespace Microsoft.Rest.Generator.Azure.Ruby
 {
@@ -32,14 +34,6 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         }
 
         /// <summary>
-        /// Gets the exte
-        /// </summary>
-        public override string ImplementationFileExtension
-        {
-            get { return ".rb"; }
-        }
-
-        /// <summary>
         /// Normalizes client model by updating names and types to be language specific.
         /// </summary>
         /// <param name="serviceClient"></param>
@@ -52,7 +46,28 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             AzureCodeGenerator.AddLongRunningOperations(serviceClient);
             AzureCodeGenerator.AddAzureProperties(serviceClient);
             AzureCodeGenerator.SetDefaultResponses(serviceClient);
+            this.CorrectFilterParameters(serviceClient);
             base.NormalizeClientModel(serviceClient);
+        }
+
+        /// <summary>
+        /// Corrects type of the filter parameter. Currently typization of filters isn't
+        /// supported and therefore we provide to user an opportunity to pass it in form
+        /// of raw string.
+        /// </summary>
+        /// <param name="serviceClient">The service client.</param>
+        public void CorrectFilterParameters(ServiceClient serviceClient)
+        {
+            foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureCodeGenerator.ODataExtension)))
+            {
+                var filterParameter = method.Parameters
+                    .FirstOrDefault(p => p.Location == ParameterLocation.Query && p.Name == "$filter");
+
+                if (filterParameter != null)
+                {
+                    filterParameter.Type = PrimaryType.String;
+                }
+            }
         }
 
         /// <summary>
