@@ -12,208 +12,212 @@ package fixtures.url;
 import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
+import fixtures.url.models.UriColor;
+import java.util.Date;
+import java.util.List;
+import retrofit.http.GET;
 
 public interface Queries {
     @GET("/queries/bool/true")
-    void getBooleanTrue(boolean boolQuery);
+    void getBooleanTrue(boolean boolQuery) throws ServiceException;
 
     @GET("/queries/bool/true")
     void getBooleanTrueAsync(boolean boolQuery, Callback<Response> cb);
 
     @GET("/queries/bool/false")
-    void getBooleanFalse(boolean boolQuery);
+    void getBooleanFalse(boolean boolQuery) throws ServiceException;
 
     @GET("/queries/bool/false")
     void getBooleanFalseAsync(boolean boolQuery, Callback<Response> cb);
 
     @GET("/queries/bool/null")
-    void getBooleanNull(boolean boolQuery);
+    void getBooleanNull(boolean boolQuery) throws ServiceException;
 
     @GET("/queries/bool/null")
     void getBooleanNullAsync(boolean boolQuery, Callback<Response> cb);
 
     @GET("/queries/int/1000000")
-    void getIntOneMillion(int intQuery);
+    void getIntOneMillion(int intQuery) throws ServiceException;
 
     @GET("/queries/int/1000000")
     void getIntOneMillionAsync(int intQuery, Callback<Response> cb);
 
     @GET("/queries/int/-1000000")
-    void getIntNegativeOneMillion(int intQuery);
+    void getIntNegativeOneMillion(int intQuery) throws ServiceException;
 
     @GET("/queries/int/-1000000")
     void getIntNegativeOneMillionAsync(int intQuery, Callback<Response> cb);
 
     @GET("/queries/int/null")
-    void getIntNull(int intQuery);
+    void getIntNull(int intQuery) throws ServiceException;
 
     @GET("/queries/int/null")
     void getIntNullAsync(int intQuery, Callback<Response> cb);
 
     @GET("/queries/long/10000000000")
-    void getTenBillion(long longQuery);
+    void getTenBillion(long longQuery) throws ServiceException;
 
     @GET("/queries/long/10000000000")
     void getTenBillionAsync(long longQuery, Callback<Response> cb);
 
     @GET("/queries/long/-10000000000")
-    void getNegativeTenBillion(long longQuery);
+    void getNegativeTenBillion(long longQuery) throws ServiceException;
 
     @GET("/queries/long/-10000000000")
     void getNegativeTenBillionAsync(long longQuery, Callback<Response> cb);
 
     @GET("/queries/long/null")
-    void getLongNull(long longQuery);
+    void getLongNull(long longQuery) throws ServiceException;
 
     @GET("/queries/long/null")
     void getLongNullAsync(long longQuery, Callback<Response> cb);
 
     @GET("/queries/float/1.034E+20")
-    void floatScientificPositive(double floatQuery);
+    void floatScientificPositive(double floatQuery) throws ServiceException;
 
     @GET("/queries/float/1.034E+20")
     void floatScientificPositiveAsync(double floatQuery, Callback<Response> cb);
 
     @GET("/queries/float/-1.034E-20")
-    void floatScientificNegative(double floatQuery);
+    void floatScientificNegative(double floatQuery) throws ServiceException;
 
     @GET("/queries/float/-1.034E-20")
     void floatScientificNegativeAsync(double floatQuery, Callback<Response> cb);
 
     @GET("/queries/float/null")
-    void floatNull(double floatQuery);
+    void floatNull(double floatQuery) throws ServiceException;
 
     @GET("/queries/float/null")
     void floatNullAsync(double floatQuery, Callback<Response> cb);
 
     @GET("/queries/double/9999999.999")
-    void doubleDecimalPositive(double doubleQuery);
+    void doubleDecimalPositive(double doubleQuery) throws ServiceException;
 
     @GET("/queries/double/9999999.999")
     void doubleDecimalPositiveAsync(double doubleQuery, Callback<Response> cb);
 
     @GET("/queries/double/-9999999.999")
-    void doubleDecimalNegative(double doubleQuery);
+    void doubleDecimalNegative(double doubleQuery) throws ServiceException;
 
     @GET("/queries/double/-9999999.999")
     void doubleDecimalNegativeAsync(double doubleQuery, Callback<Response> cb);
 
     @GET("/queries/double/null")
-    void doubleNull(double doubleQuery);
+    void doubleNull(double doubleQuery) throws ServiceException;
 
     @GET("/queries/double/null")
     void doubleNullAsync(double doubleQuery, Callback<Response> cb);
 
     @GET("/queries/string/unicode/")
-    void stringUnicode(String stringQuery);
+    void stringUnicode(String stringQuery) throws ServiceException;
 
     @GET("/queries/string/unicode/")
     void stringUnicodeAsync(String stringQuery, Callback<Response> cb);
 
     @GET("/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend")
-    void stringUrlEncoded(String stringQuery);
+    void stringUrlEncoded(String stringQuery) throws ServiceException;
 
     @GET("/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend")
     void stringUrlEncodedAsync(String stringQuery, Callback<Response> cb);
 
     @GET("/queries/string/empty")
-    void stringEmpty(String stringQuery);
+    void stringEmpty(String stringQuery) throws ServiceException;
 
     @GET("/queries/string/empty")
     void stringEmptyAsync(String stringQuery, Callback<Response> cb);
 
     @GET("/queries/string/null")
-    void stringNull(String stringQuery);
+    void stringNull(String stringQuery) throws ServiceException;
 
     @GET("/queries/string/null")
     void stringNullAsync(String stringQuery, Callback<Response> cb);
 
     @GET("/queries/enum/green%20color")
-    void enumValid(UriColor enumQuery);
+    void enumValid(UriColor enumQuery) throws ServiceException;
 
     @GET("/queries/enum/green%20color")
     void enumValidAsync(UriColor enumQuery, Callback<Response> cb);
 
     @GET("/queries/enum/null")
-    void enumNull(UriColor enumQuery);
+    void enumNull(UriColor enumQuery) throws ServiceException;
 
     @GET("/queries/enum/null")
     void enumNullAsync(UriColor enumQuery, Callback<Response> cb);
 
     @GET("/queries/byte/multibyte")
-    void byteMultiByte(byte[] byteQuery);
+    void byteMultiByte(byte[] byteQuery) throws ServiceException;
 
     @GET("/queries/byte/multibyte")
     void byteMultiByteAsync(byte[] byteQuery, Callback<Response> cb);
 
     @GET("/queries/byte/empty")
-    void byteEmpty(byte[] byteQuery);
+    void byteEmpty(byte[] byteQuery) throws ServiceException;
 
     @GET("/queries/byte/empty")
     void byteEmptyAsync(byte[] byteQuery, Callback<Response> cb);
 
     @GET("/queries/byte/null")
-    void byteNull(byte[] byteQuery);
+    void byteNull(byte[] byteQuery) throws ServiceException;
 
     @GET("/queries/byte/null")
     void byteNullAsync(byte[] byteQuery, Callback<Response> cb);
 
     @GET("/queries/date/2012-01-01")
-    void dateValid(Date dateQuery);
+    void dateValid(Date dateQuery) throws ServiceException;
 
     @GET("/queries/date/2012-01-01")
     void dateValidAsync(Date dateQuery, Callback<Response> cb);
 
     @GET("/queries/date/null")
-    void dateNull(Date dateQuery);
+    void dateNull(Date dateQuery) throws ServiceException;
 
     @GET("/queries/date/null")
     void dateNullAsync(Date dateQuery, Callback<Response> cb);
 
     @GET("/queries/datetime/2012-01-01T01%3A01%3A01Z")
-    void dateTimeValid(Date dateTimeQuery);
+    void dateTimeValid(Date dateTimeQuery) throws ServiceException;
 
     @GET("/queries/datetime/2012-01-01T01%3A01%3A01Z")
     void dateTimeValidAsync(Date dateTimeQuery, Callback<Response> cb);
 
     @GET("/queries/datetime/null")
-    void dateTimeNull(Date dateTimeQuery);
+    void dateTimeNull(Date dateTimeQuery) throws ServiceException;
 
     @GET("/queries/datetime/null")
     void dateTimeNullAsync(Date dateTimeQuery, Callback<Response> cb);
 
     @GET("/queries/array/csv/string/valid")
-    void arrayStringCsvValid(List<String> arrayQuery);
+    void arrayStringCsvValid(List<String> arrayQuery) throws ServiceException;
 
     @GET("/queries/array/csv/string/valid")
     void arrayStringCsvValidAsync(List<String> arrayQuery, Callback<Response> cb);
 
     @GET("/queries/array/csv/string/null")
-    void arrayStringCsvNull(List<String> arrayQuery);
+    void arrayStringCsvNull(List<String> arrayQuery) throws ServiceException;
 
     @GET("/queries/array/csv/string/null")
     void arrayStringCsvNullAsync(List<String> arrayQuery, Callback<Response> cb);
 
     @GET("/queries/array/csv/string/empty")
-    void arrayStringCsvEmpty(List<String> arrayQuery);
+    void arrayStringCsvEmpty(List<String> arrayQuery) throws ServiceException;
 
     @GET("/queries/array/csv/string/empty")
     void arrayStringCsvEmptyAsync(List<String> arrayQuery, Callback<Response> cb);
 
     @GET("/queries/array/ssv/string/valid")
-    void arrayStringSsvValid(List<String> arrayQuery);
+    void arrayStringSsvValid(List<String> arrayQuery) throws ServiceException;
 
     @GET("/queries/array/ssv/string/valid")
     void arrayStringSsvValidAsync(List<String> arrayQuery, Callback<Response> cb);
 
     @GET("/queries/array/tsv/string/valid")
-    void arrayStringTsvValid(List<String> arrayQuery);
+    void arrayStringTsvValid(List<String> arrayQuery) throws ServiceException;
 
     @GET("/queries/array/tsv/string/valid")
     void arrayStringTsvValidAsync(List<String> arrayQuery, Callback<Response> cb);
 
     @GET("/queries/array/pipes/string/valid")
-    void arrayStringPipesValid(List<String> arrayQuery);
+    void arrayStringPipesValid(List<String> arrayQuery) throws ServiceException;
 
     @GET("/queries/array/pipes/string/valid")
     void arrayStringPipesValidAsync(List<String> arrayQuery, Callback<Response> cb);

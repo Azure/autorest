@@ -12,34 +12,36 @@ package fixtures.bodybyte;
 import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
+import retrofit.http.GET;
+import retrofit.http.PUT;
 
 public interface ByteOperations {
     @GET("/byte/null")
-    byte[] getNull();
+    byte[] getNull() throws ServiceException;
 
     @GET("/byte/null")
     void getNullAsync(Callback<Byte[]> cb);
 
     @GET("/byte/empty")
-    Byte[] getEmpty();
+    Byte[] getEmpty() throws ServiceException;
 
     @GET("/byte/empty")
     void getEmptyAsync(Callback<Byte[]> cb);
 
     @GET("/byte/nonAscii")
-    Byte[] getNonAscii();
+    Byte[] getNonAscii() throws ServiceException;
 
     @GET("/byte/nonAscii")
     void getNonAsciiAsync(Callback<Byte[]> cb);
 
     @PUT("/byte/nonAscii")
-    void putNonAscii(Byte[] byteBody);
+    void putNonAscii(Byte[] byteBody) throws ServiceException;
 
     @PUT("/byte/nonAscii")
     void putNonAsciiAsync(Byte[] byteBody, Callback<Response> cb);
 
     @GET("/byte/invalid")
-    Byte[] getInvalid();
+    Byte[] getInvalid() throws ServiceException;
 
     @GET("/byte/invalid")
     void getInvalidAsync(Callback<Byte[]> cb);

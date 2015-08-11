@@ -7,12 +7,13 @@
 // regenerated.
 
 
-package fixtures.bodyboolean.models;
+package fixtures.header.models;
+
 
 /**
  * 
  */
-public class ErrorModel {
+public class Error {
     private int Status;
 
     private String Message;

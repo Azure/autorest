@@ -7,21 +7,15 @@
 // regenerated.
 
 
-package fixtures.http.models;
-
+package fixtures.bodystring.models;
 
 /**
- * 
+ * Defines values for Colors.
  */
-public class C {
-    private String HttpCode;
+public enum Colors {
+    RED_COLOR,
 
-    public String getHttpCode() {
-        return this.HttpCode;
-    }
+    GREEN_COLOR,
 
-    public void setHttpCode(String HttpCode) {
-        this.HttpCode = HttpCode;
-    }
-
+    BLUE_COLOR;
 }

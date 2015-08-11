@@ -9,13 +9,14 @@
 
 package fixtures.bodyarray.models;
 
+
 /**
  * 
  */
 public class Product {
     private Integer Integer;
 
-    private String String;
+    private String StringProperty;
 
     public Integer getInteger() {
         return this.Integer;
@@ -25,12 +26,12 @@ public class Product {
         this.Integer = Integer;
     }
 
-    public String getString() {
-        return this.String;
+    public String getStringProperty() {
+        return this.StringProperty;
     }
 
-    public void setString(String String) {
-        this.String = String;
+    public void setStringProperty(String StringProperty) {
+        this.StringProperty = StringProperty;
     }
 
 }

@@ -28,5 +28,52 @@ namespace Microsoft.Rest.Generator.Java
         public string MethodGroupName { get; set; }
 
         public string MethodGroupType { get; set; }
+
+        public IEnumerable<String> Imports
+        {
+            get
+            {
+                HashSet<String> classes = new HashSet<string>();
+                IList<IType> types = this.MethodTemplateModels
+                    .SelectMany(mtm => mtm.Parameters.Select(p => p.Type))
+                    .Concat(this.MethodTemplateModels.Select(mtm => mtm.ReturnType))
+                    .Distinct()
+                    .ToList();
+
+                for (int i = 0; i < types.Count; i++)
+                {
+                    var type = types[i];
+                    if (type is SequenceType)
+                    {
+                        classes.Add("java.util.List");
+                        types.Add(((SequenceType)type).ElementType);
+                    }
+                    else if (type is DictionaryType)
+                    {
+                        classes.Add("java.util.Map");
+                        types.Add(((DictionaryType)type).ValueType);
+                    }
+                    else if (type is CompositeType || type is EnumType)
+                    {
+                        var ctype = type as CompositeType;
+                        classes.Add(string.Join(".", this.Namespace.ToLower(), "models", type.Name));
+                    }
+                    else if (type is PrimaryType)
+                    {
+                        var importedFrom = JavaCodeNamer.ImportedFrom(type as PrimaryType);
+                        if (importedFrom != null)
+                        {
+                            classes.Add(importedFrom);
+                        }
+                    }
+                }
+                foreach (var method in this.MethodTemplateModels)
+                {
+                    classes.Add("retrofit.http." + method.HttpMethod.ToString().ToUpper());
+                }
+
+                return classes.AsEnumerable();
+            }
+        }
     }
 }

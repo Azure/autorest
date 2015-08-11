@@ -12,16 +12,19 @@ package fixtures.bodycomplex;
 import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
+import fixtures.bodycomplex.models.Fish;
+import retrofit.http.GET;
+import retrofit.http.PUT;
 
 public interface Polymorphicrecursive {
     @GET("/complex/polymorphicrecursive/valid")
-    Fish getValid();
+    Fish getValid() throws ServiceException;
 
     @GET("/complex/polymorphicrecursive/valid")
     void getValidAsync(Callback<Fish> cb);
 
     @PUT("/complex/polymorphicrecursive/valid")
-    void putValid(Fish complexBody);
+    void putValid(Fish complexBody) throws ServiceException;
 
     @PUT("/complex/polymorphicrecursive/valid")
     void putValidAsync(Fish complexBody, Callback<Response> cb);

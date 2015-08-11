@@ -12,13 +12,17 @@ package @(Settings.Namespace.ToLower());
 import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
+@foreach (var importClass in Model.Imports)
+{
+@:import @importClass;
+}
 @EmptyLine
 
 public interface @Model.MethodGroupName.ToPascalCase() {
 @foreach (var method in Model.MethodTemplateModels)
 {
 @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url)")
-@:    @method.ReturnTypeString @(method.Name)(@method.MethodParameterDeclaration);
+@:    @method.ReturnTypeString @(method.Name)(@method.MethodParameterDeclaration) throws ServiceException;
 @EmptyLine
 @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url)")
 @:    void @(method.Name)Async(@method.MethodParameterDeclarationWithCallback);

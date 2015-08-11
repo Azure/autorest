@@ -105,6 +105,16 @@ namespace Microsoft.Rest.Generator.Java
                     await Write(methodGroupTemplate, methodGroupModel.MethodGroupType.ToPascalCase() + ".java");
                 }
             }
+
+            //Enums
+            foreach (var enumType in serviceClient.EnumTypes)
+            {
+                var enumTemplate = new EnumTemplate
+                {
+                    Model = new EnumTemplateModel(enumType),
+                };
+                await Write(enumTemplate, Path.Combine("models", enumTemplate.Model.Name.ToPascalCase() + ".java"));
+            }
         }
     }
 }

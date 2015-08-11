@@ -10,6 +10,12 @@
 package @(Settings.Namespace.ToLower()).models;
 @EmptyLine
 
+@foreach (var importClass in Model.Imports)
+{
+@:import @importClass;
+}
+@EmptyLine
+
 /**
  * @Model.Documentation
  */

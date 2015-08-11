@@ -12,40 +12,43 @@ package fixtures.bodycomplex;
 import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
+import fixtures.bodycomplex.models.Basic;
+import retrofit.http.GET;
+import retrofit.http.PUT;
 
 public interface BasicOperations {
     @GET("/complex/basic/valid")
-    Basic getValid();
+    Basic getValid() throws ServiceException;
 
     @GET("/complex/basic/valid")
     void getValidAsync(Callback<Basic> cb);
 
     @PUT("/complex/basic/valid")
-    void putValid(Basic complexBody);
+    void putValid(Basic complexBody) throws ServiceException;
 
     @PUT("/complex/basic/valid")
     void putValidAsync(Basic complexBody, Callback<Response> cb);
 
     @GET("/complex/basic/invalid")
-    Basic getInvalid();
+    Basic getInvalid() throws ServiceException;
 
     @GET("/complex/basic/invalid")
     void getInvalidAsync(Callback<Basic> cb);
 
     @GET("/complex/basic/empty")
-    Basic getEmpty();
+    Basic getEmpty() throws ServiceException;
 
     @GET("/complex/basic/empty")
     void getEmptyAsync(Callback<Basic> cb);
 
     @GET("/complex/basic/null")
-    Basic getNull();
+    Basic getNull() throws ServiceException;
 
     @GET("/complex/basic/null")
     void getNullAsync(Callback<Basic> cb);
 
     @GET("/complex/basic/notprovided")
-    Basic getNotProvided();
+    Basic getNotProvided() throws ServiceException;
 
     @GET("/complex/basic/notprovided")
     void getNotProvidedAsync(Callback<Basic> cb);

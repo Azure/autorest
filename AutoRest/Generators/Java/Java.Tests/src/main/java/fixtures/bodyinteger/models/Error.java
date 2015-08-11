@@ -9,10 +9,11 @@
 
 package fixtures.bodyinteger.models;
 
+
 /**
  * 
  */
-public class ErrorModel {
+public class Error {
     private int Status;
 
     private String Message;

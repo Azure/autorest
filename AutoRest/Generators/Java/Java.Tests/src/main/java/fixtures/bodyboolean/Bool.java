@@ -12,40 +12,42 @@ package fixtures.bodyboolean;
 import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
+import retrofit.http.GET;
+import retrofit.http.PUT;
 
 public interface Bool {
     @GET("/bool/true")
-    boolean getTrue();
+    boolean getTrue() throws ServiceException;
 
     @GET("/bool/true")
     void getTrueAsync(Callback<Boolean> cb);
 
     @PUT("/bool/true")
-    void putTrue(Boolean boolBody);
+    void putTrue(Boolean boolBody) throws ServiceException;
 
     @PUT("/bool/true")
     void putTrueAsync(Boolean boolBody, Callback<Response> cb);
 
     @GET("/bool/false")
-    Boolean getFalse();
+    Boolean getFalse() throws ServiceException;
 
     @GET("/bool/false")
     void getFalseAsync(Callback<Boolean> cb);
 
     @PUT("/bool/false")
-    void putFalse(Boolean boolBody);
+    void putFalse(Boolean boolBody) throws ServiceException;
 
     @PUT("/bool/false")
     void putFalseAsync(Boolean boolBody, Callback<Response> cb);
 
     @GET("/bool/null")
-    Boolean getNull();
+    Boolean getNull() throws ServiceException;
 
     @GET("/bool/null")
     void getNullAsync(Callback<Boolean> cb);
 
     @GET("/bool/invalid")
-    Boolean getInvalid();
+    Boolean getInvalid() throws ServiceException;
 
     @GET("/bool/invalid")
     void getInvalidAsync(Callback<Boolean> cb);

@@ -12,52 +12,58 @@ package fixtures.http;
 import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
+import retrofit.http.HEAD;
+import retrofit.http.PUT;
+import retrofit.http.PATCH;
+import retrofit.http.GET;
+import retrofit.http.POST;
+import retrofit.http.DELETE;
 
 public interface HttpRetry {
     @HEAD("/http/retry/408")
-    void head408();
+    void head408() throws ServiceException;
 
     @HEAD("/http/retry/408")
     void head408Async(Callback<Response> cb);
 
     @PUT("/http/retry/500")
-    void put500(Boolean booleanValue);
+    void put500(Boolean booleanValue) throws ServiceException;
 
     @PUT("/http/retry/500")
     void put500Async(Boolean booleanValue, Callback<Response> cb);
 
     @PATCH("/http/retry/500")
-    void patch500(Boolean booleanValue);
+    void patch500(Boolean booleanValue) throws ServiceException;
 
     @PATCH("/http/retry/500")
     void patch500Async(Boolean booleanValue, Callback<Response> cb);
 
     @GET("/http/retry/502")
-    void get502();
+    void get502() throws ServiceException;
 
     @GET("/http/retry/502")
     void get502Async(Callback<Response> cb);
 
     @POST("/http/retry/503")
-    void post503(Boolean booleanValue);
+    void post503(Boolean booleanValue) throws ServiceException;
 
     @POST("/http/retry/503")
     void post503Async(Boolean booleanValue, Callback<Response> cb);
 
     @DELETE("/http/retry/503")
-    void delete503(Boolean booleanValue);
+    void delete503(Boolean booleanValue) throws ServiceException;
 
     @DELETE("/http/retry/503")
     void delete503Async(Boolean booleanValue, Callback<Response> cb);
 
     @PUT("/http/retry/504")
-    void put504(Boolean booleanValue);
+    void put504(Boolean booleanValue) throws ServiceException;
 
     @PUT("/http/retry/504")
     void put504Async(Boolean booleanValue, Callback<Response> cb);
 
     @PATCH("/http/retry/504")
-    void patch504(Boolean booleanValue);
+    void patch504(Boolean booleanValue) throws ServiceException;
 
     @PATCH("/http/retry/504")
     void patch504Async(Boolean booleanValue, Callback<Response> cb);

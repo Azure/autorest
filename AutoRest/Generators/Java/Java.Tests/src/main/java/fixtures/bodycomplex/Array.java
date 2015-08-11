@@ -12,34 +12,37 @@ package fixtures.bodycomplex;
 import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
+import fixtures.bodycomplex.models.ArrayWrapper;
+import retrofit.http.GET;
+import retrofit.http.PUT;
 
-public interface ArrayOperations {
+public interface Array {
     @GET("/complex/array/valid")
-    ArrayWrapper getValid();
+    ArrayWrapper getValid() throws ServiceException;
 
     @GET("/complex/array/valid")
     void getValidAsync(Callback<ArrayWrapper> cb);
 
     @PUT("/complex/array/valid")
-    void putValid(ArrayWrapper complexBody);
+    void putValid(ArrayWrapper complexBody) throws ServiceException;
 
     @PUT("/complex/array/valid")
     void putValidAsync(ArrayWrapper complexBody, Callback<Response> cb);
 
     @GET("/complex/array/empty")
-    ArrayWrapper getEmpty();
+    ArrayWrapper getEmpty() throws ServiceException;
 
     @GET("/complex/array/empty")
     void getEmptyAsync(Callback<ArrayWrapper> cb);
 
     @PUT("/complex/array/empty")
-    void putEmpty(ArrayWrapper complexBody);
+    void putEmpty(ArrayWrapper complexBody) throws ServiceException;
 
     @PUT("/complex/array/empty")
     void putEmptyAsync(ArrayWrapper complexBody, Callback<Response> cb);
 
     @GET("/complex/array/notprovided")
-    ArrayWrapper getNotProvided();
+    ArrayWrapper getNotProvided() throws ServiceException;
 
     @GET("/complex/array/notprovided")
     void getNotProvidedAsync(Callback<ArrayWrapper> cb);

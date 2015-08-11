@@ -40,7 +40,9 @@ public class @(Model.Name)Impl extends ServiceClient<@Model.Name> implements @Mo
 @:     * @(param.Documentation)
 @:     * @@return the @(param.Name) value.
 @:     */
-@:    public @(param.Type) get@(param.Name.ToPascalCase())();
+@:    public @(param.Type) get@(param.Name.ToPascalCase())() {
+@:        return this.@(param.Name.ToCamelCase());
+@:    }
 }
 
 @foreach (var operation in Model.Operations)

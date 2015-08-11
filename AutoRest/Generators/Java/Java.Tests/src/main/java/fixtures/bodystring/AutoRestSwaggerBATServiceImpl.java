@@ -27,14 +27,14 @@ public class AutoRestSwaggerBATServiceImpl extends ServiceClient<AutoRestSwagger
         return this.baseUri;
     }
 
-    private String string;
+    private StringOperations stringOperations;
 
     /**
      * Test Infrastructure for AutoRest Swagger BAT
-     * @return the string value.
+     * @return the stringOperations value.
      */
-    public String getString() {
-        return this.string;
+    public StringOperations getStringOperations() {
+        return this.stringOperations;
     }
 
     private EnumOperations enumOperations;
@@ -65,7 +65,7 @@ public class AutoRestSwaggerBATServiceImpl extends ServiceClient<AutoRestSwagger
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.string = restAdapter.create(String.class);
+        this.stringOperations = restAdapter.create(StringOperations.class);
         this.enumOperations = restAdapter.create(EnumOperations.class);
     }
 }

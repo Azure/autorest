@@ -47,14 +47,14 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient<AutoRestComple
         return this.primitive;
     }
 
-    private ArrayOperations arrayOperations;
+    private Array array;
 
     /**
      * Test Infrastructure for AutoRest
-     * @return the arrayOperations value.
+     * @return the array value.
      */
-    public ArrayOperations getArrayOperations() {
-        return this.arrayOperations;
+    public Array getArray() {
+        return this.array;
     }
 
     private Dictionary dictionary;
@@ -117,7 +117,7 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient<AutoRestComple
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
         this.basicOperations = restAdapter.create(BasicOperations.class);
         this.primitive = restAdapter.create(Primitive.class);
-        this.arrayOperations = restAdapter.create(ArrayOperations.class);
+        this.array = restAdapter.create(Array.class);
         this.dictionary = restAdapter.create(Dictionary.class);
         this.inheritance = restAdapter.create(Inheritance.class);
         this.polymorphism = restAdapter.create(Polymorphism.class);

@@ -9,6 +9,8 @@
 
 package fixtures.requiredoptional.models;
 
+import java.util.List;
+
 /**
  * 
  */

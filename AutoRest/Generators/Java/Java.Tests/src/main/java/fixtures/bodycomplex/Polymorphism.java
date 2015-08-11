@@ -12,22 +12,25 @@ package fixtures.bodycomplex;
 import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
+import fixtures.bodycomplex.models.Fish;
+import retrofit.http.GET;
+import retrofit.http.PUT;
 
 public interface Polymorphism {
     @GET("/complex/polymorphism/valid")
-    Fish getValid();
+    Fish getValid() throws ServiceException;
 
     @GET("/complex/polymorphism/valid")
     void getValidAsync(Callback<Fish> cb);
 
     @PUT("/complex/polymorphism/valid")
-    void putValid(Fish complexBody);
+    void putValid(Fish complexBody) throws ServiceException;
 
     @PUT("/complex/polymorphism/valid")
     void putValidAsync(Fish complexBody, Callback<Response> cb);
 
     @PUT("/complex/polymorphism/missingrequired/invalid")
-    void putValidMissingRequired(Fish complexBody);
+    void putValidMissingRequired(Fish complexBody) throws ServiceException;
 
     @PUT("/complex/polymorphism/missingrequired/invalid")
     void putValidMissingRequiredAsync(Fish complexBody, Callback<Response> cb);

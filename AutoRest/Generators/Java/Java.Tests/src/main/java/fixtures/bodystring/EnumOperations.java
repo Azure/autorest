@@ -12,16 +12,19 @@ package fixtures.bodystring;
 import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
+import fixtures.bodystring.models.Colors;
+import retrofit.http.GET;
+import retrofit.http.PUT;
 
 public interface EnumOperations {
     @GET("/string/enum/notExpandable")
-    Colors getNotExpandable();
+    Colors getNotExpandable() throws ServiceException;
 
     @GET("/string/enum/notExpandable")
     void getNotExpandableAsync(Callback<Colors> cb);
 
     @PUT("/string/enum/notExpandable")
-    void putNotExpandable(Colors stringBody);
+    void putNotExpandable(Colors stringBody) throws ServiceException;
 
     @PUT("/string/enum/notExpandable")
     void putNotExpandableAsync(Colors stringBody, Callback<Response> cb);

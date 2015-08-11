@@ -7,12 +7,13 @@
 // regenerated.
 
 
-package fixtures.bodydate.models;
+package fixtures.bodydatetime.models;
+
 
 /**
  * 
  */
-public class ErrorModel {
+public class Error {
     private int Status;
 
     private String Message;

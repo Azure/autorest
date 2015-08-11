@@ -12,366 +12,372 @@ package fixtures.bodydictionary;
 import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
+import java.util.Map;
+import java.util.Date;
+import fixtures.bodydictionary.models.Widget;
+import java.util.List;
+import retrofit.http.GET;
+import retrofit.http.PUT;
 
 public interface Dictionary {
     @GET("/dictionary/null")
-    Map<Integer> getNull();
+    Map<String, Integer> getNull() throws ServiceException;
 
     @GET("/dictionary/null")
-    void getNullAsync(Callback<Map<Integer>> cb);
+    void getNullAsync(Callback<Map<String, Integer>> cb);
 
     @GET("/dictionary/empty")
-    Map<Integer> getEmpty();
+    Map<String, Integer> getEmpty() throws ServiceException;
 
     @GET("/dictionary/empty")
-    void getEmptyAsync(Callback<Map<Integer>> cb);
+    void getEmptyAsync(Callback<Map<String, Integer>> cb);
 
     @PUT("/dictionary/empty")
-    void putEmpty(Map<String> arrayBody);
+    void putEmpty(Map<String, String> arrayBody) throws ServiceException;
 
     @PUT("/dictionary/empty")
-    void putEmptyAsync(Map<String> arrayBody, Callback<Response> cb);
+    void putEmptyAsync(Map<String, String> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/nullvalue")
-    Map<String> getNullValue();
+    Map<String, String> getNullValue() throws ServiceException;
 
     @GET("/dictionary/nullvalue")
-    void getNullValueAsync(Callback<Map<String>> cb);
+    void getNullValueAsync(Callback<Map<String, String>> cb);
 
     @GET("/dictionary/nullkey")
-    Map<String> getNullKey();
+    Map<String, String> getNullKey() throws ServiceException;
 
     @GET("/dictionary/nullkey")
-    void getNullKeyAsync(Callback<Map<String>> cb);
+    void getNullKeyAsync(Callback<Map<String, String>> cb);
 
     @GET("/dictionary/keyemptystring")
-    Map<String> getEmptyStringKey();
+    Map<String, String> getEmptyStringKey() throws ServiceException;
 
     @GET("/dictionary/keyemptystring")
-    void getEmptyStringKeyAsync(Callback<Map<String>> cb);
+    void getEmptyStringKeyAsync(Callback<Map<String, String>> cb);
 
     @GET("/dictionary/invalid")
-    Map<String> getInvalid();
+    Map<String, String> getInvalid() throws ServiceException;
 
     @GET("/dictionary/invalid")
-    void getInvalidAsync(Callback<Map<String>> cb);
+    void getInvalidAsync(Callback<Map<String, String>> cb);
 
     @GET("/dictionary/prim/boolean/tfft")
-    Map<Boolean> getBooleanTfft();
+    Map<String, Boolean> getBooleanTfft() throws ServiceException;
 
     @GET("/dictionary/prim/boolean/tfft")
-    void getBooleanTfftAsync(Callback<Map<Boolean>> cb);
+    void getBooleanTfftAsync(Callback<Map<String, Boolean>> cb);
 
     @PUT("/dictionary/prim/boolean/tfft")
-    void putBooleanTfft(Map<Boolean> arrayBody);
+    void putBooleanTfft(Map<String, Boolean> arrayBody) throws ServiceException;
 
     @PUT("/dictionary/prim/boolean/tfft")
-    void putBooleanTfftAsync(Map<Boolean> arrayBody, Callback<Response> cb);
+    void putBooleanTfftAsync(Map<String, Boolean> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/prim/boolean/true.null.false")
-    Map<Boolean> getBooleanInvalidNull();
+    Map<String, Boolean> getBooleanInvalidNull() throws ServiceException;
 
     @GET("/dictionary/prim/boolean/true.null.false")
-    void getBooleanInvalidNullAsync(Callback<Map<Boolean>> cb);
+    void getBooleanInvalidNullAsync(Callback<Map<String, Boolean>> cb);
 
     @GET("/dictionary/prim/boolean/true.boolean.false")
-    Map<Boolean> getBooleanInvalidString();
+    Map<String, Boolean> getBooleanInvalidString() throws ServiceException;
 
     @GET("/dictionary/prim/boolean/true.boolean.false")
-    void getBooleanInvalidStringAsync(Callback<Map<Boolean>> cb);
+    void getBooleanInvalidStringAsync(Callback<Map<String, Boolean>> cb);
 
     @GET("/dictionary/prim/integer/1.-1.3.300")
-    Map<Integer> getIntegerValid();
+    Map<String, Integer> getIntegerValid() throws ServiceException;
 
     @GET("/dictionary/prim/integer/1.-1.3.300")
-    void getIntegerValidAsync(Callback<Map<Integer>> cb);
+    void getIntegerValidAsync(Callback<Map<String, Integer>> cb);
 
     @PUT("/dictionary/prim/integer/1.-1.3.300")
-    void putIntegerValid(Map<Integer> arrayBody);
+    void putIntegerValid(Map<String, Integer> arrayBody) throws ServiceException;
 
     @PUT("/dictionary/prim/integer/1.-1.3.300")
-    void putIntegerValidAsync(Map<Integer> arrayBody, Callback<Response> cb);
+    void putIntegerValidAsync(Map<String, Integer> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/prim/integer/1.null.zero")
-    Map<Integer> getIntInvalidNull();
+    Map<String, Integer> getIntInvalidNull() throws ServiceException;
 
     @GET("/dictionary/prim/integer/1.null.zero")
-    void getIntInvalidNullAsync(Callback<Map<Integer>> cb);
+    void getIntInvalidNullAsync(Callback<Map<String, Integer>> cb);
 
     @GET("/dictionary/prim/integer/1.integer.0")
-    Map<Integer> getIntInvalidString();
+    Map<String, Integer> getIntInvalidString() throws ServiceException;
 
     @GET("/dictionary/prim/integer/1.integer.0")
-    void getIntInvalidStringAsync(Callback<Map<Integer>> cb);
+    void getIntInvalidStringAsync(Callback<Map<String, Integer>> cb);
 
     @GET("/dictionary/prim/long/1.-1.3.300")
-    Map<Long> getLongValid();
+    Map<String, Long> getLongValid() throws ServiceException;
 
     @GET("/dictionary/prim/long/1.-1.3.300")
-    void getLongValidAsync(Callback<Map<Long>> cb);
+    void getLongValidAsync(Callback<Map<String, Long>> cb);
 
     @PUT("/dictionary/prim/long/1.-1.3.300")
-    void putLongValid(Map<Long> arrayBody);
+    void putLongValid(Map<String, Long> arrayBody) throws ServiceException;
 
     @PUT("/dictionary/prim/long/1.-1.3.300")
-    void putLongValidAsync(Map<Long> arrayBody, Callback<Response> cb);
+    void putLongValidAsync(Map<String, Long> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/prim/long/1.null.zero")
-    Map<Long> getLongInvalidNull();
+    Map<String, Long> getLongInvalidNull() throws ServiceException;
 
     @GET("/dictionary/prim/long/1.null.zero")
-    void getLongInvalidNullAsync(Callback<Map<Long>> cb);
+    void getLongInvalidNullAsync(Callback<Map<String, Long>> cb);
 
     @GET("/dictionary/prim/long/1.integer.0")
-    Map<Long> getLongInvalidString();
+    Map<String, Long> getLongInvalidString() throws ServiceException;
 
     @GET("/dictionary/prim/long/1.integer.0")
-    void getLongInvalidStringAsync(Callback<Map<Long>> cb);
+    void getLongInvalidStringAsync(Callback<Map<String, Long>> cb);
 
     @GET("/dictionary/prim/float/0--0.01-1.2e20")
-    Map<Double> getFloatValid();
+    Map<String, Double> getFloatValid() throws ServiceException;
 
     @GET("/dictionary/prim/float/0--0.01-1.2e20")
-    void getFloatValidAsync(Callback<Map<Double>> cb);
+    void getFloatValidAsync(Callback<Map<String, Double>> cb);
 
     @PUT("/dictionary/prim/float/0--0.01-1.2e20")
-    void putFloatValid(Map<Double> arrayBody);
+    void putFloatValid(Map<String, Double> arrayBody) throws ServiceException;
 
     @PUT("/dictionary/prim/float/0--0.01-1.2e20")
-    void putFloatValidAsync(Map<Double> arrayBody, Callback<Response> cb);
+    void putFloatValidAsync(Map<String, Double> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/prim/float/0.0-null-1.2e20")
-    Map<Double> getFloatInvalidNull();
+    Map<String, Double> getFloatInvalidNull() throws ServiceException;
 
     @GET("/dictionary/prim/float/0.0-null-1.2e20")
-    void getFloatInvalidNullAsync(Callback<Map<Double>> cb);
+    void getFloatInvalidNullAsync(Callback<Map<String, Double>> cb);
 
     @GET("/dictionary/prim/float/1.number.0")
-    Map<Double> getFloatInvalidString();
+    Map<String, Double> getFloatInvalidString() throws ServiceException;
 
     @GET("/dictionary/prim/float/1.number.0")
-    void getFloatInvalidStringAsync(Callback<Map<Double>> cb);
+    void getFloatInvalidStringAsync(Callback<Map<String, Double>> cb);
 
     @GET("/dictionary/prim/double/0--0.01-1.2e20")
-    Map<Double> getDoubleValid();
+    Map<String, Double> getDoubleValid() throws ServiceException;
 
     @GET("/dictionary/prim/double/0--0.01-1.2e20")
-    void getDoubleValidAsync(Callback<Map<Double>> cb);
+    void getDoubleValidAsync(Callback<Map<String, Double>> cb);
 
     @PUT("/dictionary/prim/double/0--0.01-1.2e20")
-    void putDoubleValid(Map<Double> arrayBody);
+    void putDoubleValid(Map<String, Double> arrayBody) throws ServiceException;
 
     @PUT("/dictionary/prim/double/0--0.01-1.2e20")
-    void putDoubleValidAsync(Map<Double> arrayBody, Callback<Response> cb);
+    void putDoubleValidAsync(Map<String, Double> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/prim/double/0.0-null-1.2e20")
-    Map<Double> getDoubleInvalidNull();
+    Map<String, Double> getDoubleInvalidNull() throws ServiceException;
 
     @GET("/dictionary/prim/double/0.0-null-1.2e20")
-    void getDoubleInvalidNullAsync(Callback<Map<Double>> cb);
+    void getDoubleInvalidNullAsync(Callback<Map<String, Double>> cb);
 
     @GET("/dictionary/prim/double/1.number.0")
-    Map<Double> getDoubleInvalidString();
+    Map<String, Double> getDoubleInvalidString() throws ServiceException;
 
     @GET("/dictionary/prim/double/1.number.0")
-    void getDoubleInvalidStringAsync(Callback<Map<Double>> cb);
+    void getDoubleInvalidStringAsync(Callback<Map<String, Double>> cb);
 
     @GET("/dictionary/prim/string/foo1.foo2.foo3")
-    Map<String> getStringValid();
+    Map<String, String> getStringValid() throws ServiceException;
 
     @GET("/dictionary/prim/string/foo1.foo2.foo3")
-    void getStringValidAsync(Callback<Map<String>> cb);
+    void getStringValidAsync(Callback<Map<String, String>> cb);
 
     @PUT("/dictionary/prim/string/foo1.foo2.foo3")
-    void putStringValid(Map<String> arrayBody);
+    void putStringValid(Map<String, String> arrayBody) throws ServiceException;
 
     @PUT("/dictionary/prim/string/foo1.foo2.foo3")
-    void putStringValidAsync(Map<String> arrayBody, Callback<Response> cb);
+    void putStringValidAsync(Map<String, String> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/prim/string/foo.null.foo2")
-    Map<String> getStringWithNull();
+    Map<String, String> getStringWithNull() throws ServiceException;
 
     @GET("/dictionary/prim/string/foo.null.foo2")
-    void getStringWithNullAsync(Callback<Map<String>> cb);
+    void getStringWithNullAsync(Callback<Map<String, String>> cb);
 
     @GET("/dictionary/prim/string/foo.123.foo2")
-    Map<String> getStringWithInvalid();
+    Map<String, String> getStringWithInvalid() throws ServiceException;
 
     @GET("/dictionary/prim/string/foo.123.foo2")
-    void getStringWithInvalidAsync(Callback<Map<String>> cb);
+    void getStringWithInvalidAsync(Callback<Map<String, String>> cb);
 
     @GET("/dictionary/prim/date/valid")
-    Map<Date> getDateValid();
+    Map<String, Date> getDateValid() throws ServiceException;
 
     @GET("/dictionary/prim/date/valid")
-    void getDateValidAsync(Callback<Map<Date>> cb);
+    void getDateValidAsync(Callback<Map<String, Date>> cb);
 
     @PUT("/dictionary/prim/date/valid")
-    void putDateValid(Map<Date> arrayBody);
+    void putDateValid(Map<String, Date> arrayBody) throws ServiceException;
 
     @PUT("/dictionary/prim/date/valid")
-    void putDateValidAsync(Map<Date> arrayBody, Callback<Response> cb);
+    void putDateValidAsync(Map<String, Date> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/prim/date/invalidnull")
-    Map<Date> getDateInvalidNull();
+    Map<String, Date> getDateInvalidNull() throws ServiceException;
 
     @GET("/dictionary/prim/date/invalidnull")
-    void getDateInvalidNullAsync(Callback<Map<Date>> cb);
+    void getDateInvalidNullAsync(Callback<Map<String, Date>> cb);
 
     @GET("/dictionary/prim/date/invalidchars")
-    Map<Date> getDateInvalidChars();
+    Map<String, Date> getDateInvalidChars() throws ServiceException;
 
     @GET("/dictionary/prim/date/invalidchars")
-    void getDateInvalidCharsAsync(Callback<Map<Date>> cb);
+    void getDateInvalidCharsAsync(Callback<Map<String, Date>> cb);
 
     @GET("/dictionary/prim/date-time/valid")
-    Map<Date> getDateTimeValid();
+    Map<String, Date> getDateTimeValid() throws ServiceException;
 
     @GET("/dictionary/prim/date-time/valid")
-    void getDateTimeValidAsync(Callback<Map<Date>> cb);
+    void getDateTimeValidAsync(Callback<Map<String, Date>> cb);
 
     @PUT("/dictionary/prim/date-time/valid")
-    void putDateTimeValid(Map<Date> arrayBody);
+    void putDateTimeValid(Map<String, Date> arrayBody) throws ServiceException;
 
     @PUT("/dictionary/prim/date-time/valid")
-    void putDateTimeValidAsync(Map<Date> arrayBody, Callback<Response> cb);
+    void putDateTimeValidAsync(Map<String, Date> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/prim/date-time/invalidnull")
-    Map<Date> getDateTimeInvalidNull();
+    Map<String, Date> getDateTimeInvalidNull() throws ServiceException;
 
     @GET("/dictionary/prim/date-time/invalidnull")
-    void getDateTimeInvalidNullAsync(Callback<Map<Date>> cb);
+    void getDateTimeInvalidNullAsync(Callback<Map<String, Date>> cb);
 
     @GET("/dictionary/prim/date-time/invalidchars")
-    Map<Date> getDateTimeInvalidChars();
+    Map<String, Date> getDateTimeInvalidChars() throws ServiceException;
 
     @GET("/dictionary/prim/date-time/invalidchars")
-    void getDateTimeInvalidCharsAsync(Callback<Map<Date>> cb);
+    void getDateTimeInvalidCharsAsync(Callback<Map<String, Date>> cb);
 
     @GET("/dictionary/prim/byte/valid")
-    Map<Byte[]> getByteValid();
+    Map<String, Byte[]> getByteValid() throws ServiceException;
 
     @GET("/dictionary/prim/byte/valid")
-    void getByteValidAsync(Callback<Map<Byte[]>> cb);
+    void getByteValidAsync(Callback<Map<String, Byte[]>> cb);
 
     @PUT("/dictionary/prim/byte/valid")
-    void putByteValid(Map<Byte[]> arrayBody);
+    void putByteValid(Map<String, Byte[]> arrayBody) throws ServiceException;
 
     @PUT("/dictionary/prim/byte/valid")
-    void putByteValidAsync(Map<Byte[]> arrayBody, Callback<Response> cb);
+    void putByteValidAsync(Map<String, Byte[]> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/prim/byte/invalidnull")
-    Map<Byte[]> getByteInvalidNull();
+    Map<String, Byte[]> getByteInvalidNull() throws ServiceException;
 
     @GET("/dictionary/prim/byte/invalidnull")
-    void getByteInvalidNullAsync(Callback<Map<Byte[]>> cb);
+    void getByteInvalidNullAsync(Callback<Map<String, Byte[]>> cb);
 
     @GET("/dictionary/complex/null")
-    Map<Widget> getComplexNull();
+    Map<String, Widget> getComplexNull() throws ServiceException;
 
     @GET("/dictionary/complex/null")
-    void getComplexNullAsync(Callback<Map<Widget>> cb);
+    void getComplexNullAsync(Callback<Map<String, Widget>> cb);
 
     @GET("/dictionary/complex/empty")
-    Map<Widget> getComplexEmpty();
+    Map<String, Widget> getComplexEmpty() throws ServiceException;
 
     @GET("/dictionary/complex/empty")
-    void getComplexEmptyAsync(Callback<Map<Widget>> cb);
+    void getComplexEmptyAsync(Callback<Map<String, Widget>> cb);
 
     @GET("/dictionary/complex/itemnull")
-    Map<Widget> getComplexItemNull();
+    Map<String, Widget> getComplexItemNull() throws ServiceException;
 
     @GET("/dictionary/complex/itemnull")
-    void getComplexItemNullAsync(Callback<Map<Widget>> cb);
+    void getComplexItemNullAsync(Callback<Map<String, Widget>> cb);
 
     @GET("/dictionary/complex/itemempty")
-    Map<Widget> getComplexItemEmpty();
+    Map<String, Widget> getComplexItemEmpty() throws ServiceException;
 
     @GET("/dictionary/complex/itemempty")
-    void getComplexItemEmptyAsync(Callback<Map<Widget>> cb);
+    void getComplexItemEmptyAsync(Callback<Map<String, Widget>> cb);
 
     @GET("/dictionary/complex/valid")
-    Map<Widget> getComplexValid();
+    Map<String, Widget> getComplexValid() throws ServiceException;
 
     @GET("/dictionary/complex/valid")
-    void getComplexValidAsync(Callback<Map<Widget>> cb);
+    void getComplexValidAsync(Callback<Map<String, Widget>> cb);
 
     @PUT("/dictionary/complex/valid")
-    void putComplexValid(Map<Widget> arrayBody);
+    void putComplexValid(Map<String, Widget> arrayBody) throws ServiceException;
 
     @PUT("/dictionary/complex/valid")
-    void putComplexValidAsync(Map<Widget> arrayBody, Callback<Response> cb);
+    void putComplexValidAsync(Map<String, Widget> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/array/null")
-    Map<List<String>> getArrayNull();
+    Map<String, List<String>> getArrayNull() throws ServiceException;
 
     @GET("/dictionary/array/null")
-    void getArrayNullAsync(Callback<Map<List<String>>> cb);
+    void getArrayNullAsync(Callback<Map<String, List<String>>> cb);
 
     @GET("/dictionary/array/empty")
-    Map<List<String>> getArrayEmpty();
+    Map<String, List<String>> getArrayEmpty() throws ServiceException;
 
     @GET("/dictionary/array/empty")
-    void getArrayEmptyAsync(Callback<Map<List<String>>> cb);
+    void getArrayEmptyAsync(Callback<Map<String, List<String>>> cb);
 
     @GET("/dictionary/array/itemnull")
-    Map<List<String>> getArrayItemNull();
+    Map<String, List<String>> getArrayItemNull() throws ServiceException;
 
     @GET("/dictionary/array/itemnull")
-    void getArrayItemNullAsync(Callback<Map<List<String>>> cb);
+    void getArrayItemNullAsync(Callback<Map<String, List<String>>> cb);
 
     @GET("/dictionary/array/itemempty")
-    Map<List<String>> getArrayItemEmpty();
+    Map<String, List<String>> getArrayItemEmpty() throws ServiceException;
 
     @GET("/dictionary/array/itemempty")
-    void getArrayItemEmptyAsync(Callback<Map<List<String>>> cb);
+    void getArrayItemEmptyAsync(Callback<Map<String, List<String>>> cb);
 
     @GET("/dictionary/array/valid")
-    Map<List<String>> getArrayValid();
+    Map<String, List<String>> getArrayValid() throws ServiceException;
 
     @GET("/dictionary/array/valid")
-    void getArrayValidAsync(Callback<Map<List<String>>> cb);
+    void getArrayValidAsync(Callback<Map<String, List<String>>> cb);
 
     @PUT("/dictionary/array/valid")
-    void putArrayValid(Map<List<String>> arrayBody);
+    void putArrayValid(Map<String, List<String>> arrayBody) throws ServiceException;
 
     @PUT("/dictionary/array/valid")
-    void putArrayValidAsync(Map<List<String>> arrayBody, Callback<Response> cb);
+    void putArrayValidAsync(Map<String, List<String>> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/dictionary/null")
-    Map<Map<String>> getDictionaryNull();
+    Map<String, Map<String, String>> getDictionaryNull() throws ServiceException;
 
     @GET("/dictionary/dictionary/null")
-    void getDictionaryNullAsync(Callback<Map<Map<String>>> cb);
+    void getDictionaryNullAsync(Callback<Map<String, Map<String, String>>> cb);
 
     @GET("/dictionary/dictionary/empty")
-    Map<Map<String>> getDictionaryEmpty();
+    Map<String, Map<String, String>> getDictionaryEmpty() throws ServiceException;
 
     @GET("/dictionary/dictionary/empty")
-    void getDictionaryEmptyAsync(Callback<Map<Map<String>>> cb);
+    void getDictionaryEmptyAsync(Callback<Map<String, Map<String, String>>> cb);
 
     @GET("/dictionary/dictionary/itemnull")
-    Map<Map<String>> getDictionaryItemNull();
+    Map<String, Map<String, String>> getDictionaryItemNull() throws ServiceException;
 
     @GET("/dictionary/dictionary/itemnull")
-    void getDictionaryItemNullAsync(Callback<Map<Map<String>>> cb);
+    void getDictionaryItemNullAsync(Callback<Map<String, Map<String, String>>> cb);
 
     @GET("/dictionary/dictionary/itemempty")
-    Map<Map<String>> getDictionaryItemEmpty();
+    Map<String, Map<String, String>> getDictionaryItemEmpty() throws ServiceException;
 
     @GET("/dictionary/dictionary/itemempty")
-    void getDictionaryItemEmptyAsync(Callback<Map<Map<String>>> cb);
+    void getDictionaryItemEmptyAsync(Callback<Map<String, Map<String, String>>> cb);
 
     @GET("/dictionary/dictionary/valid")
-    Map<Map<String>> getDictionaryValid();
+    Map<String, Map<String, String>> getDictionaryValid() throws ServiceException;
 
     @GET("/dictionary/dictionary/valid")
-    void getDictionaryValidAsync(Callback<Map<Map<String>>> cb);
+    void getDictionaryValidAsync(Callback<Map<String, Map<String, String>>> cb);
 
     @PUT("/dictionary/dictionary/valid")
-    void putDictionaryValid(Map<Map<String>> arrayBody);
+    void putDictionaryValid(Map<String, Map<String, String>> arrayBody) throws ServiceException;
 
     @PUT("/dictionary/dictionary/valid")
-    void putDictionaryValidAsync(Map<Map<String>> arrayBody, Callback<Response> cb);
+    void putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody, Callback<Response> cb);
 
 }

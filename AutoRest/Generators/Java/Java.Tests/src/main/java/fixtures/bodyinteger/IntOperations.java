@@ -12,64 +12,66 @@ package fixtures.bodyinteger;
 import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
+import retrofit.http.GET;
+import retrofit.http.PUT;
 
 public interface IntOperations {
     @GET("/int/null")
-    int getNull();
+    int getNull() throws ServiceException;
 
     @GET("/int/null")
     void getNullAsync(Callback<Integer> cb);
 
     @GET("/int/invalid")
-    Integer getInvalid();
+    Integer getInvalid() throws ServiceException;
 
     @GET("/int/invalid")
     void getInvalidAsync(Callback<Integer> cb);
 
     @GET("/int/overflowint32")
-    Integer getOverflowInt32();
+    Integer getOverflowInt32() throws ServiceException;
 
     @GET("/int/overflowint32")
     void getOverflowInt32Async(Callback<Integer> cb);
 
     @GET("/int/underflowint32")
-    Integer getUnderflowInt32();
+    Integer getUnderflowInt32() throws ServiceException;
 
     @GET("/int/underflowint32")
     void getUnderflowInt32Async(Callback<Integer> cb);
 
     @GET("/int/overflowint64")
-    long getOverflowInt64();
+    long getOverflowInt64() throws ServiceException;
 
     @GET("/int/overflowint64")
     void getOverflowInt64Async(Callback<Long> cb);
 
     @GET("/int/underflowint64")
-    Long getUnderflowInt64();
+    Long getUnderflowInt64() throws ServiceException;
 
     @GET("/int/underflowint64")
     void getUnderflowInt64Async(Callback<Long> cb);
 
     @PUT("/int/max/32")
-    void putMax32(Integer intBody);
+    void putMax32(Integer intBody) throws ServiceException;
 
     @PUT("/int/max/32")
     void putMax32Async(Integer intBody, Callback<Response> cb);
 
     @PUT("/int/max/64")
-    void putMax64(Long intBody);
+    void putMax64(Long intBody) throws ServiceException;
 
     @PUT("/int/max/64")
     void putMax64Async(Long intBody, Callback<Response> cb);
 
     @PUT("/int/min/32")
-    void putMin32(Integer intBody);
+    void putMin32(Integer intBody) throws ServiceException;
 
     @PUT("/int/min/32")
     void putMin32Async(Integer intBody, Callback<Response> cb);
 
     @PUT("/int/min/64")
-    void putMin64(Long intBody);
+    void putMin64(Long intBody) throws ServiceException;
 
     @PUT("/int/min/64")
     void putMin64Async(Long intBody, Callback<Response> cb);

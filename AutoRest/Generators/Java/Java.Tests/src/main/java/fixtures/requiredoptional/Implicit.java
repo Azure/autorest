@@ -12,48 +12,51 @@ package fixtures.requiredoptional;
 import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
+import fixtures.requiredoptional.models.Error;
+import retrofit.http.GET;
+import retrofit.http.PUT;
 
 public interface Implicit {
     @GET("/reqopt/implicit/required/path/{pathParameter}")
-    ErrorModel getRequiredPath(String pathParameter);
+    Error getRequiredPath(String pathParameter) throws ServiceException;
 
     @GET("/reqopt/implicit/required/path/{pathParameter}")
-    void getRequiredPathAsync(String pathParameter, Callback<ErrorModel> cb);
+    void getRequiredPathAsync(String pathParameter, Callback<Error> cb);
 
     @PUT("/reqopt/implicit/optional/query")
-    void putOptionalQuery(String queryParameter);
+    void putOptionalQuery(String queryParameter) throws ServiceException;
 
     @PUT("/reqopt/implicit/optional/query")
     void putOptionalQueryAsync(String queryParameter, Callback<Response> cb);
 
     @PUT("/reqopt/implicit/optional/header")
-    void putOptionalHeader(String queryParameter);
+    void putOptionalHeader(String queryParameter) throws ServiceException;
 
     @PUT("/reqopt/implicit/optional/header")
     void putOptionalHeaderAsync(String queryParameter, Callback<Response> cb);
 
     @PUT("/reqopt/implicit/optional/body")
-    void putOptionalBody(String bodyParameter);
+    void putOptionalBody(String bodyParameter) throws ServiceException;
 
     @PUT("/reqopt/implicit/optional/body")
     void putOptionalBodyAsync(String bodyParameter, Callback<Response> cb);
 
     @GET("/reqopt/global/required/path/{required-global-path}")
-    ErrorModel getRequiredGlobalPath();
+    Error getRequiredGlobalPath() throws ServiceException;
 
     @GET("/reqopt/global/required/path/{required-global-path}")
-    void getRequiredGlobalPathAsync(Callback<ErrorModel> cb);
+    void getRequiredGlobalPathAsync(Callback<Error> cb);
 
     @GET("/reqopt/global/required/query")
-    ErrorModel getRequiredGlobalQuery();
+    Error getRequiredGlobalQuery() throws ServiceException;
 
     @GET("/reqopt/global/required/query")
-    void getRequiredGlobalQueryAsync(Callback<ErrorModel> cb);
+    void getRequiredGlobalQueryAsync(Callback<Error> cb);
 
     @GET("/reqopt/global/optional/query")
-    ErrorModel getOptionalGlobalQuery();
+    Error getOptionalGlobalQuery() throws ServiceException;
 
     @GET("/reqopt/global/optional/query")
-    void getOptionalGlobalQueryAsync(Callback<ErrorModel> cb);
+    void getOptionalGlobalQueryAsync(Callback<Error> cb);
 
 }

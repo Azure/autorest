@@ -35,9 +35,9 @@ public interface AutoRestComplexTestService {
 
     /**
      * Test Infrastructure for AutoRest
-     * @return the arrayOperations value.
+     * @return the array value.
      */
-    ArrayOperations getArrayOperations();
+    Array getArray();
 
     /**
      * Test Infrastructure for AutoRest

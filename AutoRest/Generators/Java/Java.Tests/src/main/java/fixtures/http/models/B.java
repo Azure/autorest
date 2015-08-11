@@ -9,6 +9,7 @@
 
 package fixtures.http.models;
 
+
 /**
  * 
  */
