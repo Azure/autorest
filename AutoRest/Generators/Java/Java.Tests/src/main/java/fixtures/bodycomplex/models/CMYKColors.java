@@ -7,21 +7,17 @@
 // regenerated.
 
 
-package fixtures.http.models;
-
+package fixtures.bodycomplex.models;
 
 /**
- * 
+ * Defines values for CMYKColors.
  */
-public class C {
-    private String HttpCode;
+public enum CMYKColors {
+    CYAN,
 
-    public String getHttpCode() {
-        return this.HttpCode;
-    }
+    MAGENTA,
 
-    public void setHttpCode(String HttpCode) {
-        this.HttpCode = HttpCode;
-    }
+    YELLOW,
 
+    BLACK;
 }

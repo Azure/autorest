@@ -8,6 +8,7 @@ using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Java.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace Microsoft.Rest.Generator.Java
 {
@@ -21,75 +22,21 @@ namespace Microsoft.Rest.Generator.Java
         public JavaCodeNamer()
         {
             // List retrieved from 
-            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Keywords
+            // http://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html
             new HashSet<string>
             {
-                "array",
-                "await",
-                "abstract",
-                "boolean",
-                "buffer",
-                "break",
-                "byte",
-                "case",
-                "catch",
-                "char",
-                "class",
-                "const",
-                "continue",
-                "debugger",
-                "default",
-                "delete",
-                "do",
-                "double",
-                "date",
-                "else",
-                "enum",
-                "error",
-                "export",
-                "extends",
-                "false",
-                "final",
-                "finally",
-                "float",
-                "for",
-                "function",
-                "goto",
-                "if",
-                "implements",
-                "import",
-                "in",
-                "int",
-                "interface",
-                "instanceof",
-                "let",
-                "long",
-                "native",
-                "new",
-                "null",
-                "package",
-                "private",
-                "protected",
-                "public",
-                "return",
-                "short",
-                "static",
-                "super",
-                "switch",
-                "synchronized",
-                "this",
-                "throw",
-                "transient",
-                "true",
-                "try",
-                "typeof",
-                "util",
-                "var",
-                "void",
-                "volatile",
-                "while",
-                "with",
-                "yield"
+                "abstract", "assert",   "boolean",  "break",    "byte",
+                "case",     "catch",    "char",     "class",    "const",
+                "continue", "default",  "do",       "double",   "else",
+                "enum",     "extends",  "false",    "final",    "finally",
+                "float",    "for",      "goto",     "if",       "implements",
+                "import",   "int",      "long",     "interface","instanceof",
+                "native",   "new",      "null",     "package",  "private",
+                "protected","public",   "return",   "short",    "static",
+                "strictfp", "super",    "switch",   "synchronized","this",
+                "throw",    "throws",   "transient","true",     "try",
+                "void",     "volatile", "while",    "date",     "datetime",
+                "period",   "stream",   "string",   "object"
             }.ForEach(s => ReservedWords.Add(s));
 
             _normalizedTypes = new HashSet<IType>();
@@ -131,7 +78,11 @@ namespace Microsoft.Rest.Generator.Java
 
         public override string GetEnumMemberName(string name)
         {
-            return CamelCase(name);
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return name;
+            }
+            return RemoveInvalidCharacters(new Regex("[\\ -]+").Replace(name, "_")).ToUpper();
         }
 
         public override string GetParameterName(string name)
@@ -221,8 +172,21 @@ namespace Microsoft.Rest.Generator.Java
                 "Type {0} is not supported.", type.GetType()));
         }
 
-        private static IType NormalizeEnumType(EnumType enumType)
+        private IType NormalizeEnumType(EnumType enumType)
         {
+            if (enumType.IsExpandable)
+            {
+                enumType.SerializedName = "string";
+                enumType.Name = "string";
+            }
+            else
+            {
+                enumType.Name = GetTypeName(enumType.Name);
+            }
+            for (int i = 0; i < enumType.Values.Count; i++)
+            {
+                enumType.Values[i].Name = GetEnumMemberName(enumType.Values[i].Name);
+            }
             return enumType;
         }
 
@@ -271,7 +235,7 @@ namespace Microsoft.Rest.Generator.Java
             }
             else if (primaryType == PrimaryType.Stream)
             {
-                primaryType.Name = "Stream";
+                primaryType.Name = "InputStream";
             }
             else if (primaryType == PrimaryType.String)
             {
@@ -332,8 +296,32 @@ namespace Microsoft.Rest.Generator.Java
         private IType NormalizeDictionaryType(DictionaryType dictionaryType)
         {
             dictionaryType.ValueType = NormalizeGenericType(NormalizeType(dictionaryType.ValueType));
-            dictionaryType.NameFormat = "Map<{0}>";
+            dictionaryType.NameFormat = "Map<String, {0}>";
             return dictionaryType;
+        }
+
+        public static String ImportedFrom(PrimaryType primaryType)
+        {
+            if (primaryType == PrimaryType.Date)
+            {
+                return "java.util.Date";
+            }
+            else if (primaryType == PrimaryType.DateTime)
+            {
+                return "java.util.Date";
+            }
+            else if (primaryType == PrimaryType.Stream)
+            {
+                return "java.io.InputStream";
+            }
+            else if (primaryType == PrimaryType.TimeSpan)
+            {
+                return "java.time.Period";
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

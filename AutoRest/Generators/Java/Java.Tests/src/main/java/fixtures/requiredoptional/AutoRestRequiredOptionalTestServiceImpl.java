@@ -33,7 +33,9 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient<AutoR
      * number of items to skip
      * @return the RequiredGlobalPath value.
      */
-    public String getRequiredGlobalPath();
+    public String getRequiredGlobalPath() {
+        return this.requiredGlobalPath;
+    }
 
     private String requiredGlobalQuery;
 
@@ -41,7 +43,9 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient<AutoR
      * number of items to skip
      * @return the RequiredGlobalQuery value.
      */
-    public String getRequiredGlobalQuery();
+    public String getRequiredGlobalQuery() {
+        return this.requiredGlobalQuery;
+    }
 
     private Implicit implicit;
 

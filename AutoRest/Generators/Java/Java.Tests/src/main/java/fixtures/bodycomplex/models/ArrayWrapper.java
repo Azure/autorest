@@ -9,18 +9,20 @@
 
 package fixtures.bodycomplex.models;
 
+import java.util.List;
+
 /**
  * 
  */
 public class ArrayWrapper {
-    private List<String> ArrayProperty;
+    private List<String> Array;
 
-    public List<String> getArrayProperty() {
-        return this.ArrayProperty;
+    public List<String> getArray() {
+        return this.Array;
     }
 
-    public void setArrayProperty(List<String> ArrayProperty) {
-        this.ArrayProperty = ArrayProperty;
+    public void setArray(List<String> Array) {
+        this.Array = Array;
     }
 
 }

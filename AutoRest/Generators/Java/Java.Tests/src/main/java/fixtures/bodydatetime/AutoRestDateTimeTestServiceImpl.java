@@ -27,14 +27,14 @@ public class AutoRestDateTimeTestServiceImpl extends ServiceClient<AutoRestDateT
         return this.baseUri;
     }
 
-    private Datetime datetime;
+    private DatetimeOperations datetimeOperations;
 
     /**
      * Test Infrastructure for AutoRest
-     * @return the datetime value.
+     * @return the datetimeOperations value.
      */
-    public Datetime getDatetime() {
-        return this.datetime;
+    public DatetimeOperations getDatetimeOperations() {
+        return this.datetimeOperations;
     }
 
     public AutoRestDateTimeTestServiceImpl() {
@@ -55,6 +55,6 @@ public class AutoRestDateTimeTestServiceImpl extends ServiceClient<AutoRestDateT
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.datetime = restAdapter.create(Datetime.class);
+        this.datetimeOperations = restAdapter.create(DatetimeOperations.class);
     }
 }

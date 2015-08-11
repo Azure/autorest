@@ -7,21 +7,15 @@
 // regenerated.
 
 
-package fixtures.http.models;
-
+package fixtures.header.models;
 
 /**
- * 
+ * Defines values for GreyscaleColors.
  */
-public class C {
-    private String HttpCode;
+public enum GreyscaleColors {
+    WHITE,
 
-    public String getHttpCode() {
-        return this.HttpCode;
-    }
+    BLACK,
 
-    public void setHttpCode(String HttpCode) {
-        this.HttpCode = HttpCode;
-    }
-
+    GREY;
 }

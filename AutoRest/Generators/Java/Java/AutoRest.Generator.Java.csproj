@@ -32,12 +32,16 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="ScopeProvider.cs" />
+    <Compile Include="TemplateModels\EnumTemplateModel.cs" />
     <Compile Include="TemplateModels\MethodGroupTemplateModel.cs" />
     <Compile Include="TemplateModels\ModelTemplateModel.cs" />
     <Compile Include="TemplateModels\ServiceClientTemplateModel.cs" />
     <Compile Include="TemplateModels\MethodTemplateModel.cs" />
     <Compile Include="ClientModelExtensions.cs" />
     <Compile Include="TemplateModels\ParameterTemplateModel.cs" />
+    <Compile Include="Templates\EnumTemplate.cs">
+      <DependentUpon>EnumTemplate.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Templates\MethodGroupTemplate.cs">
       <DependentUpon>MethodGroupTemplate.cshtml</DependentUpon>
     </Compile>
@@ -59,6 +63,7 @@
     <Compile Include="Templates\ServiceClientTemplate.cs">
       <DependentUpon>ServiceClientTemplate.cshtml</DependentUpon>
     </Compile>
+    <None Include="Templates\EnumTemplate.cshtml" />
     <None Include="Templates\MethodGroupTemplate.cshtml" />
     <None Include="Templates\MethodJsonPipelineTemplate.cshtml" />
     <None Include="Templates\MethodStreamPipelineTemplate.cshtml" />

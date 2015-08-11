@@ -12,112 +12,123 @@ package fixtures.bodycomplex;
 import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
+import fixtures.bodycomplex.models.IntWrapper;
+import fixtures.bodycomplex.models.LongWrapper;
+import fixtures.bodycomplex.models.FloatWrapper;
+import fixtures.bodycomplex.models.DoubleWrapper;
+import fixtures.bodycomplex.models.BooleanWrapper;
+import fixtures.bodycomplex.models.StringWrapper;
+import fixtures.bodycomplex.models.DateWrapper;
+import fixtures.bodycomplex.models.DatetimeWrapper;
+import fixtures.bodycomplex.models.ByteWrapper;
+import retrofit.http.GET;
+import retrofit.http.PUT;
 
 public interface Primitive {
     @GET("/complex/primitive/integer")
-    IntWrapper getInt();
+    IntWrapper getInt() throws ServiceException;
 
     @GET("/complex/primitive/integer")
     void getIntAsync(Callback<IntWrapper> cb);
 
     @PUT("/complex/primitive/integer")
-    void putInt(IntWrapper complexBody);
+    void putInt(IntWrapper complexBody) throws ServiceException;
 
     @PUT("/complex/primitive/integer")
     void putIntAsync(IntWrapper complexBody, Callback<Response> cb);
 
     @GET("/complex/primitive/long")
-    LongWrapper getLong();
+    LongWrapper getLong() throws ServiceException;
 
     @GET("/complex/primitive/long")
     void getLongAsync(Callback<LongWrapper> cb);
 
     @PUT("/complex/primitive/long")
-    void putLong(LongWrapper complexBody);
+    void putLong(LongWrapper complexBody) throws ServiceException;
 
     @PUT("/complex/primitive/long")
     void putLongAsync(LongWrapper complexBody, Callback<Response> cb);
 
     @GET("/complex/primitive/float")
-    FloatWrapper getFloat();
+    FloatWrapper getFloat() throws ServiceException;
 
     @GET("/complex/primitive/float")
     void getFloatAsync(Callback<FloatWrapper> cb);
 
     @PUT("/complex/primitive/float")
-    void putFloat(FloatWrapper complexBody);
+    void putFloat(FloatWrapper complexBody) throws ServiceException;
 
     @PUT("/complex/primitive/float")
     void putFloatAsync(FloatWrapper complexBody, Callback<Response> cb);
 
     @GET("/complex/primitive/double")
-    DoubleWrapper getDouble();
+    DoubleWrapper getDouble() throws ServiceException;
 
     @GET("/complex/primitive/double")
     void getDoubleAsync(Callback<DoubleWrapper> cb);
 
     @PUT("/complex/primitive/double")
-    void putDouble(DoubleWrapper complexBody);
+    void putDouble(DoubleWrapper complexBody) throws ServiceException;
 
     @PUT("/complex/primitive/double")
     void putDoubleAsync(DoubleWrapper complexBody, Callback<Response> cb);
 
     @GET("/complex/primitive/bool")
-    BooleanWrapper getBool();
+    BooleanWrapper getBool() throws ServiceException;
 
     @GET("/complex/primitive/bool")
     void getBoolAsync(Callback<BooleanWrapper> cb);
 
     @PUT("/complex/primitive/bool")
-    void putBool(BooleanWrapper complexBody);
+    void putBool(BooleanWrapper complexBody) throws ServiceException;
 
     @PUT("/complex/primitive/bool")
     void putBoolAsync(BooleanWrapper complexBody, Callback<Response> cb);
 
     @GET("/complex/primitive/string")
-    StringWrapper getString();
+    StringWrapper getString() throws ServiceException;
 
     @GET("/complex/primitive/string")
     void getStringAsync(Callback<StringWrapper> cb);
 
     @PUT("/complex/primitive/string")
-    void putString(StringWrapper complexBody);
+    void putString(StringWrapper complexBody) throws ServiceException;
 
     @PUT("/complex/primitive/string")
     void putStringAsync(StringWrapper complexBody, Callback<Response> cb);
 
     @GET("/complex/primitive/date")
-    DateWrapper getDate();
+    DateWrapper getDate() throws ServiceException;
 
     @GET("/complex/primitive/date")
     void getDateAsync(Callback<DateWrapper> cb);
 
     @PUT("/complex/primitive/date")
-    void putDate(DateWrapper complexBody);
+    void putDate(DateWrapper complexBody) throws ServiceException;
 
     @PUT("/complex/primitive/date")
     void putDateAsync(DateWrapper complexBody, Callback<Response> cb);
 
     @GET("/complex/primitive/datetime")
-    DatetimeWrapper getDateTime();
+    DatetimeWrapper getDateTime() throws ServiceException;
 
     @GET("/complex/primitive/datetime")
     void getDateTimeAsync(Callback<DatetimeWrapper> cb);
 
     @PUT("/complex/primitive/datetime")
-    void putDateTime(DatetimeWrapper complexBody);
+    void putDateTime(DatetimeWrapper complexBody) throws ServiceException;
 
     @PUT("/complex/primitive/datetime")
     void putDateTimeAsync(DatetimeWrapper complexBody, Callback<Response> cb);
 
     @GET("/complex/primitive/byte")
-    ByteWrapper getByte();
+    ByteWrapper getByte() throws ServiceException;
 
     @GET("/complex/primitive/byte")
     void getByteAsync(Callback<ByteWrapper> cb);
 
     @PUT("/complex/primitive/byte")
-    void putByte(ByteWrapper complexBody);
+    void putByte(ByteWrapper complexBody) throws ServiceException;
 
     @PUT("/complex/primitive/byte")
     void putByteAsync(ByteWrapper complexBody, Callback<Response> cb);

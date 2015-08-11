@@ -9,6 +9,7 @@
 
 package fixtures.requiredoptional.models;
 
+
 /**
  * 
  */

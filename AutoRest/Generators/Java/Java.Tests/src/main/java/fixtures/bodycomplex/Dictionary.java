@@ -12,40 +12,43 @@ package fixtures.bodycomplex;
 import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
+import fixtures.bodycomplex.models.DictionaryWrapper;
+import retrofit.http.GET;
+import retrofit.http.PUT;
 
 public interface Dictionary {
     @GET("/complex/dictionary/typed/valid")
-    DictionaryWrapper getValid();
+    DictionaryWrapper getValid() throws ServiceException;
 
     @GET("/complex/dictionary/typed/valid")
     void getValidAsync(Callback<DictionaryWrapper> cb);
 
     @PUT("/complex/dictionary/typed/valid")
-    void putValid(DictionaryWrapper complexBody);
+    void putValid(DictionaryWrapper complexBody) throws ServiceException;
 
     @PUT("/complex/dictionary/typed/valid")
     void putValidAsync(DictionaryWrapper complexBody, Callback<Response> cb);
 
     @GET("/complex/dictionary/typed/empty")
-    DictionaryWrapper getEmpty();
+    DictionaryWrapper getEmpty() throws ServiceException;
 
     @GET("/complex/dictionary/typed/empty")
     void getEmptyAsync(Callback<DictionaryWrapper> cb);
 
     @PUT("/complex/dictionary/typed/empty")
-    void putEmpty(DictionaryWrapper complexBody);
+    void putEmpty(DictionaryWrapper complexBody) throws ServiceException;
 
     @PUT("/complex/dictionary/typed/empty")
     void putEmptyAsync(DictionaryWrapper complexBody, Callback<Response> cb);
 
     @GET("/complex/dictionary/typed/null")
-    DictionaryWrapper getNull();
+    DictionaryWrapper getNull() throws ServiceException;
 
     @GET("/complex/dictionary/typed/null")
     void getNullAsync(Callback<DictionaryWrapper> cb);
 
     @GET("/complex/dictionary/typed/notprovided")
-    DictionaryWrapper getNotProvided();
+    DictionaryWrapper getNotProvided() throws ServiceException;
 
     @GET("/complex/dictionary/typed/notprovided")
     void getNotProvidedAsync(Callback<DictionaryWrapper> cb);

@@ -12,30 +12,35 @@ package fixtures.http;
 import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
+import fixtures.http.models.Error;
+import retrofit.http.HEAD;
+import retrofit.http.GET;
+import retrofit.http.POST;
+import retrofit.http.DELETE;
 
 public interface HttpServerFailure {
     @HEAD("/http/failure/server/501")
-    ErrorModel head501();
+    Error head501() throws ServiceException;
 
     @HEAD("/http/failure/server/501")
-    void head501Async(Callback<ErrorModel> cb);
+    void head501Async(Callback<Error> cb);
 
     @GET("/http/failure/server/501")
-    ErrorModel get501();
+    Error get501() throws ServiceException;
 
     @GET("/http/failure/server/501")
-    void get501Async(Callback<ErrorModel> cb);
+    void get501Async(Callback<Error> cb);
 
     @POST("/http/failure/server/505")
-    ErrorModel post505(Boolean booleanValue);
+    Error post505(Boolean booleanValue) throws ServiceException;
 
     @POST("/http/failure/server/505")
-    void post505Async(Boolean booleanValue, Callback<ErrorModel> cb);
+    void post505Async(Boolean booleanValue, Callback<Error> cb);
 
     @DELETE("/http/failure/server/505")
-    ErrorModel delete505(Boolean booleanValue);
+    Error delete505(Boolean booleanValue) throws ServiceException;
 
     @DELETE("/http/failure/server/505")
-    void delete505Async(Boolean booleanValue, Callback<ErrorModel> cb);
+    void delete505Async(Boolean booleanValue, Callback<Error> cb);
 
 }

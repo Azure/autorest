@@ -27,14 +27,14 @@ public class AutoRestSwaggerBATArrayServiceImpl extends ServiceClient<AutoRestSw
         return this.baseUri;
     }
 
-    private ArrayOperations arrayOperations;
+    private Array array;
 
     /**
      * Test Infrastructure for AutoRest Swagger BAT
-     * @return the arrayOperations value.
+     * @return the array value.
      */
-    public ArrayOperations getArrayOperations() {
-        return this.arrayOperations;
+    public Array getArray() {
+        return this.array;
     }
 
     public AutoRestSwaggerBATArrayServiceImpl() {
@@ -55,6 +55,6 @@ public class AutoRestSwaggerBATArrayServiceImpl extends ServiceClient<AutoRestSw
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.arrayOperations = restAdapter.create(ArrayOperations.class);
+        this.array = restAdapter.create(Array.class);
     }
 }

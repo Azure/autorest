@@ -12,348 +12,354 @@ package fixtures.bodyarray;
 import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
+import java.util.List;
+import java.util.Date;
+import fixtures.bodyarray.models.Product;
+import java.util.Map;
+import retrofit.http.GET;
+import retrofit.http.PUT;
 
-public interface ArrayOperations {
+public interface Array {
     @GET("/array/null")
-    List<Integer> getNull();
+    List<Integer> getNull() throws ServiceException;
 
     @GET("/array/null")
     void getNullAsync(Callback<List<Integer>> cb);
 
     @GET("/array/invalid")
-    List<Integer> getInvalid();
+    List<Integer> getInvalid() throws ServiceException;
 
     @GET("/array/invalid")
     void getInvalidAsync(Callback<List<Integer>> cb);
 
     @GET("/array/empty")
-    List<Integer> getEmpty();
+    List<Integer> getEmpty() throws ServiceException;
 
     @GET("/array/empty")
     void getEmptyAsync(Callback<List<Integer>> cb);
 
     @PUT("/array/empty")
-    void putEmpty(List<String> arrayBody);
+    void putEmpty(List<String> arrayBody) throws ServiceException;
 
     @PUT("/array/empty")
     void putEmptyAsync(List<String> arrayBody, Callback<Response> cb);
 
     @GET("/array/prim/boolean/tfft")
-    List<Boolean> getBooleanTfft();
+    List<Boolean> getBooleanTfft() throws ServiceException;
 
     @GET("/array/prim/boolean/tfft")
     void getBooleanTfftAsync(Callback<List<Boolean>> cb);
 
     @PUT("/array/prim/boolean/tfft")
-    void putBooleanTfft(List<Boolean> arrayBody);
+    void putBooleanTfft(List<Boolean> arrayBody) throws ServiceException;
 
     @PUT("/array/prim/boolean/tfft")
     void putBooleanTfftAsync(List<Boolean> arrayBody, Callback<Response> cb);
 
     @GET("/array/prim/boolean/true.null.false")
-    List<Boolean> getBooleanInvalidNull();
+    List<Boolean> getBooleanInvalidNull() throws ServiceException;
 
     @GET("/array/prim/boolean/true.null.false")
     void getBooleanInvalidNullAsync(Callback<List<Boolean>> cb);
 
     @GET("/array/prim/boolean/true.boolean.false")
-    List<Boolean> getBooleanInvalidString();
+    List<Boolean> getBooleanInvalidString() throws ServiceException;
 
     @GET("/array/prim/boolean/true.boolean.false")
     void getBooleanInvalidStringAsync(Callback<List<Boolean>> cb);
 
     @GET("/array/prim/integer/1.-1.3.300")
-    List<Integer> getIntegerValid();
+    List<Integer> getIntegerValid() throws ServiceException;
 
     @GET("/array/prim/integer/1.-1.3.300")
     void getIntegerValidAsync(Callback<List<Integer>> cb);
 
     @PUT("/array/prim/integer/1.-1.3.300")
-    void putIntegerValid(List<Integer> arrayBody);
+    void putIntegerValid(List<Integer> arrayBody) throws ServiceException;
 
     @PUT("/array/prim/integer/1.-1.3.300")
     void putIntegerValidAsync(List<Integer> arrayBody, Callback<Response> cb);
 
     @GET("/array/prim/integer/1.null.zero")
-    List<Integer> getIntInvalidNull();
+    List<Integer> getIntInvalidNull() throws ServiceException;
 
     @GET("/array/prim/integer/1.null.zero")
     void getIntInvalidNullAsync(Callback<List<Integer>> cb);
 
     @GET("/array/prim/integer/1.integer.0")
-    List<Integer> getIntInvalidString();
+    List<Integer> getIntInvalidString() throws ServiceException;
 
     @GET("/array/prim/integer/1.integer.0")
     void getIntInvalidStringAsync(Callback<List<Integer>> cb);
 
     @GET("/array/prim/long/1.-1.3.300")
-    List<Long> getLongValid();
+    List<Long> getLongValid() throws ServiceException;
 
     @GET("/array/prim/long/1.-1.3.300")
     void getLongValidAsync(Callback<List<Long>> cb);
 
     @PUT("/array/prim/long/1.-1.3.300")
-    void putLongValid(List<Long> arrayBody);
+    void putLongValid(List<Long> arrayBody) throws ServiceException;
 
     @PUT("/array/prim/long/1.-1.3.300")
     void putLongValidAsync(List<Long> arrayBody, Callback<Response> cb);
 
     @GET("/array/prim/long/1.null.zero")
-    List<Long> getLongInvalidNull();
+    List<Long> getLongInvalidNull() throws ServiceException;
 
     @GET("/array/prim/long/1.null.zero")
     void getLongInvalidNullAsync(Callback<List<Long>> cb);
 
     @GET("/array/prim/long/1.integer.0")
-    List<Long> getLongInvalidString();
+    List<Long> getLongInvalidString() throws ServiceException;
 
     @GET("/array/prim/long/1.integer.0")
     void getLongInvalidStringAsync(Callback<List<Long>> cb);
 
     @GET("/array/prim/float/0--0.01-1.2e20")
-    List<Double> getFloatValid();
+    List<Double> getFloatValid() throws ServiceException;
 
     @GET("/array/prim/float/0--0.01-1.2e20")
     void getFloatValidAsync(Callback<List<Double>> cb);
 
     @PUT("/array/prim/float/0--0.01-1.2e20")
-    void putFloatValid(List<Double> arrayBody);
+    void putFloatValid(List<Double> arrayBody) throws ServiceException;
 
     @PUT("/array/prim/float/0--0.01-1.2e20")
     void putFloatValidAsync(List<Double> arrayBody, Callback<Response> cb);
 
     @GET("/array/prim/float/0.0-null-1.2e20")
-    List<Double> getFloatInvalidNull();
+    List<Double> getFloatInvalidNull() throws ServiceException;
 
     @GET("/array/prim/float/0.0-null-1.2e20")
     void getFloatInvalidNullAsync(Callback<List<Double>> cb);
 
     @GET("/array/prim/float/1.number.0")
-    List<Double> getFloatInvalidString();
+    List<Double> getFloatInvalidString() throws ServiceException;
 
     @GET("/array/prim/float/1.number.0")
     void getFloatInvalidStringAsync(Callback<List<Double>> cb);
 
     @GET("/array/prim/double/0--0.01-1.2e20")
-    List<Double> getDoubleValid();
+    List<Double> getDoubleValid() throws ServiceException;
 
     @GET("/array/prim/double/0--0.01-1.2e20")
     void getDoubleValidAsync(Callback<List<Double>> cb);
 
     @PUT("/array/prim/double/0--0.01-1.2e20")
-    void putDoubleValid(List<Double> arrayBody);
+    void putDoubleValid(List<Double> arrayBody) throws ServiceException;
 
     @PUT("/array/prim/double/0--0.01-1.2e20")
     void putDoubleValidAsync(List<Double> arrayBody, Callback<Response> cb);
 
     @GET("/array/prim/double/0.0-null-1.2e20")
-    List<Double> getDoubleInvalidNull();
+    List<Double> getDoubleInvalidNull() throws ServiceException;
 
     @GET("/array/prim/double/0.0-null-1.2e20")
     void getDoubleInvalidNullAsync(Callback<List<Double>> cb);
 
     @GET("/array/prim/double/1.number.0")
-    List<Double> getDoubleInvalidString();
+    List<Double> getDoubleInvalidString() throws ServiceException;
 
     @GET("/array/prim/double/1.number.0")
     void getDoubleInvalidStringAsync(Callback<List<Double>> cb);
 
     @GET("/array/prim/string/foo1.foo2.foo3")
-    List<String> getStringValid();
+    List<String> getStringValid() throws ServiceException;
 
     @GET("/array/prim/string/foo1.foo2.foo3")
     void getStringValidAsync(Callback<List<String>> cb);
 
     @PUT("/array/prim/string/foo1.foo2.foo3")
-    void putStringValid(List<String> arrayBody);
+    void putStringValid(List<String> arrayBody) throws ServiceException;
 
     @PUT("/array/prim/string/foo1.foo2.foo3")
     void putStringValidAsync(List<String> arrayBody, Callback<Response> cb);
 
     @GET("/array/prim/string/foo.null.foo2")
-    List<String> getStringWithNull();
+    List<String> getStringWithNull() throws ServiceException;
 
     @GET("/array/prim/string/foo.null.foo2")
     void getStringWithNullAsync(Callback<List<String>> cb);
 
     @GET("/array/prim/string/foo.123.foo2")
-    List<String> getStringWithInvalid();
+    List<String> getStringWithInvalid() throws ServiceException;
 
     @GET("/array/prim/string/foo.123.foo2")
     void getStringWithInvalidAsync(Callback<List<String>> cb);
 
     @GET("/array/prim/date/valid")
-    List<Date> getDateValid();
+    List<Date> getDateValid() throws ServiceException;
 
     @GET("/array/prim/date/valid")
     void getDateValidAsync(Callback<List<Date>> cb);
 
     @PUT("/array/prim/date/valid")
-    void putDateValid(List<Date> arrayBody);
+    void putDateValid(List<Date> arrayBody) throws ServiceException;
 
     @PUT("/array/prim/date/valid")
     void putDateValidAsync(List<Date> arrayBody, Callback<Response> cb);
 
     @GET("/array/prim/date/invalidnull")
-    List<Date> getDateInvalidNull();
+    List<Date> getDateInvalidNull() throws ServiceException;
 
     @GET("/array/prim/date/invalidnull")
     void getDateInvalidNullAsync(Callback<List<Date>> cb);
 
     @GET("/array/prim/date/invalidchars")
-    List<Date> getDateInvalidChars();
+    List<Date> getDateInvalidChars() throws ServiceException;
 
     @GET("/array/prim/date/invalidchars")
     void getDateInvalidCharsAsync(Callback<List<Date>> cb);
 
     @GET("/array/prim/date-time/valid")
-    List<Date> getDateTimeValid();
+    List<Date> getDateTimeValid() throws ServiceException;
 
     @GET("/array/prim/date-time/valid")
     void getDateTimeValidAsync(Callback<List<Date>> cb);
 
     @PUT("/array/prim/date-time/valid")
-    void putDateTimeValid(List<Date> arrayBody);
+    void putDateTimeValid(List<Date> arrayBody) throws ServiceException;
 
     @PUT("/array/prim/date-time/valid")
     void putDateTimeValidAsync(List<Date> arrayBody, Callback<Response> cb);
 
     @GET("/array/prim/date-time/invalidnull")
-    List<Date> getDateTimeInvalidNull();
+    List<Date> getDateTimeInvalidNull() throws ServiceException;
 
     @GET("/array/prim/date-time/invalidnull")
     void getDateTimeInvalidNullAsync(Callback<List<Date>> cb);
 
     @GET("/array/prim/date-time/invalidchars")
-    List<Date> getDateTimeInvalidChars();
+    List<Date> getDateTimeInvalidChars() throws ServiceException;
 
     @GET("/array/prim/date-time/invalidchars")
     void getDateTimeInvalidCharsAsync(Callback<List<Date>> cb);
 
     @GET("/array/prim/byte/valid")
-    List<Byte[]> getByteValid();
+    List<Byte[]> getByteValid() throws ServiceException;
 
     @GET("/array/prim/byte/valid")
     void getByteValidAsync(Callback<List<Byte[]>> cb);
 
     @PUT("/array/prim/byte/valid")
-    void putByteValid(List<Byte[]> arrayBody);
+    void putByteValid(List<Byte[]> arrayBody) throws ServiceException;
 
     @PUT("/array/prim/byte/valid")
     void putByteValidAsync(List<Byte[]> arrayBody, Callback<Response> cb);
 
     @GET("/array/prim/byte/invalidnull")
-    List<Byte[]> getByteInvalidNull();
+    List<Byte[]> getByteInvalidNull() throws ServiceException;
 
     @GET("/array/prim/byte/invalidnull")
     void getByteInvalidNullAsync(Callback<List<Byte[]>> cb);
 
     @GET("/array/complex/null")
-    List<Product> getComplexNull();
+    List<Product> getComplexNull() throws ServiceException;
 
     @GET("/array/complex/null")
     void getComplexNullAsync(Callback<List<Product>> cb);
 
     @GET("/array/complex/empty")
-    List<Product> getComplexEmpty();
+    List<Product> getComplexEmpty() throws ServiceException;
 
     @GET("/array/complex/empty")
     void getComplexEmptyAsync(Callback<List<Product>> cb);
 
     @GET("/array/complex/itemnull")
-    List<Product> getComplexItemNull();
+    List<Product> getComplexItemNull() throws ServiceException;
 
     @GET("/array/complex/itemnull")
     void getComplexItemNullAsync(Callback<List<Product>> cb);
 
     @GET("/array/complex/itemempty")
-    List<Product> getComplexItemEmpty();
+    List<Product> getComplexItemEmpty() throws ServiceException;
 
     @GET("/array/complex/itemempty")
     void getComplexItemEmptyAsync(Callback<List<Product>> cb);
 
     @GET("/array/complex/valid")
-    List<Product> getComplexValid();
+    List<Product> getComplexValid() throws ServiceException;
 
     @GET("/array/complex/valid")
     void getComplexValidAsync(Callback<List<Product>> cb);
 
     @PUT("/array/complex/valid")
-    void putComplexValid(List<Product> arrayBody);
+    void putComplexValid(List<Product> arrayBody) throws ServiceException;
 
     @PUT("/array/complex/valid")
     void putComplexValidAsync(List<Product> arrayBody, Callback<Response> cb);
 
     @GET("/array/array/null")
-    List<List<String>> getArrayNull();
+    List<List<String>> getArrayNull() throws ServiceException;
 
     @GET("/array/array/null")
     void getArrayNullAsync(Callback<List<List<String>>> cb);
 
     @GET("/array/array/empty")
-    List<List<String>> getArrayEmpty();
+    List<List<String>> getArrayEmpty() throws ServiceException;
 
     @GET("/array/array/empty")
     void getArrayEmptyAsync(Callback<List<List<String>>> cb);
 
     @GET("/array/array/itemnull")
-    List<List<String>> getArrayItemNull();
+    List<List<String>> getArrayItemNull() throws ServiceException;
 
     @GET("/array/array/itemnull")
     void getArrayItemNullAsync(Callback<List<List<String>>> cb);
 
     @GET("/array/array/itemempty")
-    List<List<String>> getArrayItemEmpty();
+    List<List<String>> getArrayItemEmpty() throws ServiceException;
 
     @GET("/array/array/itemempty")
     void getArrayItemEmptyAsync(Callback<List<List<String>>> cb);
 
     @GET("/array/array/valid")
-    List<List<String>> getArrayValid();
+    List<List<String>> getArrayValid() throws ServiceException;
 
     @GET("/array/array/valid")
     void getArrayValidAsync(Callback<List<List<String>>> cb);
 
     @PUT("/array/array/valid")
-    void putArrayValid(List<List<String>> arrayBody);
+    void putArrayValid(List<List<String>> arrayBody) throws ServiceException;
 
     @PUT("/array/array/valid")
     void putArrayValidAsync(List<List<String>> arrayBody, Callback<Response> cb);
 
     @GET("/array/dictionary/null")
-    List<Map<String>> getDictionaryNull();
+    List<Map<String, String>> getDictionaryNull() throws ServiceException;
 
     @GET("/array/dictionary/null")
-    void getDictionaryNullAsync(Callback<List<Map<String>>> cb);
+    void getDictionaryNullAsync(Callback<List<Map<String, String>>> cb);
 
     @GET("/array/dictionary/empty")
-    List<Map<String>> getDictionaryEmpty();
+    List<Map<String, String>> getDictionaryEmpty() throws ServiceException;
 
     @GET("/array/dictionary/empty")
-    void getDictionaryEmptyAsync(Callback<List<Map<String>>> cb);
+    void getDictionaryEmptyAsync(Callback<List<Map<String, String>>> cb);
 
     @GET("/array/dictionary/itemnull")
-    List<Map<String>> getDictionaryItemNull();
+    List<Map<String, String>> getDictionaryItemNull() throws ServiceException;
 
     @GET("/array/dictionary/itemnull")
-    void getDictionaryItemNullAsync(Callback<List<Map<String>>> cb);
+    void getDictionaryItemNullAsync(Callback<List<Map<String, String>>> cb);
 
     @GET("/array/dictionary/itemempty")
-    List<Map<String>> getDictionaryItemEmpty();
+    List<Map<String, String>> getDictionaryItemEmpty() throws ServiceException;
 
     @GET("/array/dictionary/itemempty")
-    void getDictionaryItemEmptyAsync(Callback<List<Map<String>>> cb);
+    void getDictionaryItemEmptyAsync(Callback<List<Map<String, String>>> cb);
 
     @GET("/array/dictionary/valid")
-    List<Map<String>> getDictionaryValid();
+    List<Map<String, String>> getDictionaryValid() throws ServiceException;
 
     @GET("/array/dictionary/valid")
-    void getDictionaryValidAsync(Callback<List<Map<String>>> cb);
+    void getDictionaryValidAsync(Callback<List<Map<String, String>>> cb);
 
     @PUT("/array/dictionary/valid")
-    void putDictionaryValid(List<Map<String>> arrayBody);
+    void putDictionaryValid(List<Map<String, String>> arrayBody) throws ServiceException;
 
     @PUT("/array/dictionary/valid")
-    void putDictionaryValidAsync(List<Map<String>> arrayBody, Callback<Response> cb);
+    void putDictionaryValidAsync(List<Map<String, String>> arrayBody, Callback<Response> cb);
 
 }

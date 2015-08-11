@@ -12,10 +12,11 @@ package fixtures.http;
 import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
+import retrofit.http.GET;
 
 public interface HttpFailure {
     @GET("/http/failure/emptybody/error")
-    boolean getEmptyError();
+    boolean getEmptyError() throws ServiceException;
 
     @GET("/http/failure/emptybody/error")
     void getEmptyErrorAsync(Callback<Boolean> cb);

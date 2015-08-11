@@ -12,52 +12,55 @@ package fixtures.bodydate;
 import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
+import java.util.Date;
+import retrofit.http.GET;
+import retrofit.http.PUT;
 
 public interface DateOperations {
     @GET("/date/null")
-    Date getNull();
+    Date getNull() throws ServiceException;
 
     @GET("/date/null")
     void getNullAsync(Callback<Date> cb);
 
     @GET("/date/invaliddate")
-    Date getInvalidDate();
+    Date getInvalidDate() throws ServiceException;
 
     @GET("/date/invaliddate")
     void getInvalidDateAsync(Callback<Date> cb);
 
     @GET("/date/overflowdate")
-    Date getOverflowDate();
+    Date getOverflowDate() throws ServiceException;
 
     @GET("/date/overflowdate")
     void getOverflowDateAsync(Callback<Date> cb);
 
     @GET("/date/underflowdate")
-    Date getUnderflowDate();
+    Date getUnderflowDate() throws ServiceException;
 
     @GET("/date/underflowdate")
     void getUnderflowDateAsync(Callback<Date> cb);
 
     @PUT("/date/max")
-    void putMaxDate(Date dateBody);
+    void putMaxDate(Date dateBody) throws ServiceException;
 
     @PUT("/date/max")
     void putMaxDateAsync(Date dateBody, Callback<Response> cb);
 
     @GET("/date/max")
-    Date getMaxDate();
+    Date getMaxDate() throws ServiceException;
 
     @GET("/date/max")
     void getMaxDateAsync(Callback<Date> cb);
 
     @PUT("/date/min")
-    void putMinDate(Date dateBody);
+    void putMinDate(Date dateBody) throws ServiceException;
 
     @PUT("/date/min")
     void putMinDateAsync(Date dateBody, Callback<Response> cb);
 
     @GET("/date/min")
-    Date getMinDate();
+    Date getMinDate() throws ServiceException;
 
     @GET("/date/min")
     void getMinDateAsync(Callback<Date> cb);

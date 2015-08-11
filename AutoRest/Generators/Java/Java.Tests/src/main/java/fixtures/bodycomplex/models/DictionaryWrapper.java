@@ -9,17 +9,19 @@
 
 package fixtures.bodycomplex.models;
 
+import java.util.Map;
+
 /**
  * 
  */
 public class DictionaryWrapper {
-    private Map<String> DefaultProgram;
+    private Map<String, String> DefaultProgram;
 
-    public Map<String> getDefaultProgram() {
+    public Map<String, String> getDefaultProgram() {
         return this.DefaultProgram;
     }
 
-    public void setDefaultProgram(Map<String> DefaultProgram) {
+    public void setDefaultProgram(Map<String, String> DefaultProgram) {
         this.DefaultProgram = DefaultProgram;
     }
 

@@ -9,6 +9,8 @@
 
 package fixtures.bodycomplex.models;
 
+import java.util.Date;
+
 /**
  * 
  */

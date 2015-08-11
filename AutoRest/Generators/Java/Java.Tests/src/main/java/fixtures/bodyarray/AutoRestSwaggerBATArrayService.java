@@ -23,7 +23,7 @@ public interface AutoRestSwaggerBATArrayService {
 
     /**
      * Test Infrastructure for AutoRest Swagger BAT
-     * @return the arrayOperations value.
+     * @return the array value.
      */
-    ArrayOperations getArrayOperations();
+    Array getArray();
 }

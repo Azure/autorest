@@ -12,144 +12,151 @@ package fixtures.http;
 import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
+import fixtures.http.models.Error;
+import retrofit.http.HEAD;
+import retrofit.http.GET;
+import retrofit.http.PUT;
+import retrofit.http.PATCH;
+import retrofit.http.POST;
+import retrofit.http.DELETE;
 
 public interface HttpClientFailure {
     @HEAD("/http/failure/client/400")
-    ErrorModel head400();
+    Error head400() throws ServiceException;
 
     @HEAD("/http/failure/client/400")
-    void head400Async(Callback<ErrorModel> cb);
+    void head400Async(Callback<Error> cb);
 
     @GET("/http/failure/client/400")
-    ErrorModel get400();
+    Error get400() throws ServiceException;
 
     @GET("/http/failure/client/400")
-    void get400Async(Callback<ErrorModel> cb);
+    void get400Async(Callback<Error> cb);
 
     @PUT("/http/failure/client/400")
-    ErrorModel put400(Boolean booleanValue);
+    Error put400(Boolean booleanValue) throws ServiceException;
 
     @PUT("/http/failure/client/400")
-    void put400Async(Boolean booleanValue, Callback<ErrorModel> cb);
+    void put400Async(Boolean booleanValue, Callback<Error> cb);
 
     @PATCH("/http/failure/client/400")
-    ErrorModel patch400(Boolean booleanValue);
+    Error patch400(Boolean booleanValue) throws ServiceException;
 
     @PATCH("/http/failure/client/400")
-    void patch400Async(Boolean booleanValue, Callback<ErrorModel> cb);
+    void patch400Async(Boolean booleanValue, Callback<Error> cb);
 
     @POST("/http/failure/client/400")
-    ErrorModel post400(Boolean booleanValue);
+    Error post400(Boolean booleanValue) throws ServiceException;
 
     @POST("/http/failure/client/400")
-    void post400Async(Boolean booleanValue, Callback<ErrorModel> cb);
+    void post400Async(Boolean booleanValue, Callback<Error> cb);
 
     @DELETE("/http/failure/client/400")
-    ErrorModel delete400(Boolean booleanValue);
+    Error delete400(Boolean booleanValue) throws ServiceException;
 
     @DELETE("/http/failure/client/400")
-    void delete400Async(Boolean booleanValue, Callback<ErrorModel> cb);
+    void delete400Async(Boolean booleanValue, Callback<Error> cb);
 
     @HEAD("/http/failure/client/401")
-    ErrorModel head401();
+    Error head401() throws ServiceException;
 
     @HEAD("/http/failure/client/401")
-    void head401Async(Callback<ErrorModel> cb);
+    void head401Async(Callback<Error> cb);
 
     @GET("/http/failure/client/402")
-    ErrorModel get402();
+    Error get402() throws ServiceException;
 
     @GET("/http/failure/client/402")
-    void get402Async(Callback<ErrorModel> cb);
+    void get402Async(Callback<Error> cb);
 
     @GET("/http/failure/client/403")
-    ErrorModel get403();
+    Error get403() throws ServiceException;
 
     @GET("/http/failure/client/403")
-    void get403Async(Callback<ErrorModel> cb);
+    void get403Async(Callback<Error> cb);
 
     @PUT("/http/failure/client/404")
-    ErrorModel put404(Boolean booleanValue);
+    Error put404(Boolean booleanValue) throws ServiceException;
 
     @PUT("/http/failure/client/404")
-    void put404Async(Boolean booleanValue, Callback<ErrorModel> cb);
+    void put404Async(Boolean booleanValue, Callback<Error> cb);
 
     @PATCH("/http/failure/client/405")
-    ErrorModel patch405(Boolean booleanValue);
+    Error patch405(Boolean booleanValue) throws ServiceException;
 
     @PATCH("/http/failure/client/405")
-    void patch405Async(Boolean booleanValue, Callback<ErrorModel> cb);
+    void patch405Async(Boolean booleanValue, Callback<Error> cb);
 
     @POST("/http/failure/client/406")
-    ErrorModel post406(Boolean booleanValue);
+    Error post406(Boolean booleanValue) throws ServiceException;
 
     @POST("/http/failure/client/406")
-    void post406Async(Boolean booleanValue, Callback<ErrorModel> cb);
+    void post406Async(Boolean booleanValue, Callback<Error> cb);
 
     @DELETE("/http/failure/client/407")
-    ErrorModel delete407(Boolean booleanValue);
+    Error delete407(Boolean booleanValue) throws ServiceException;
 
     @DELETE("/http/failure/client/407")
-    void delete407Async(Boolean booleanValue, Callback<ErrorModel> cb);
+    void delete407Async(Boolean booleanValue, Callback<Error> cb);
 
     @PUT("/http/failure/client/409")
-    ErrorModel put409(Boolean booleanValue);
+    Error put409(Boolean booleanValue) throws ServiceException;
 
     @PUT("/http/failure/client/409")
-    void put409Async(Boolean booleanValue, Callback<ErrorModel> cb);
+    void put409Async(Boolean booleanValue, Callback<Error> cb);
 
     @HEAD("/http/failure/client/410")
-    ErrorModel head410();
+    Error head410() throws ServiceException;
 
     @HEAD("/http/failure/client/410")
-    void head410Async(Callback<ErrorModel> cb);
+    void head410Async(Callback<Error> cb);
 
     @GET("/http/failure/client/411")
-    ErrorModel get411();
+    Error get411() throws ServiceException;
 
     @GET("/http/failure/client/411")
-    void get411Async(Callback<ErrorModel> cb);
+    void get411Async(Callback<Error> cb);
 
     @GET("/http/failure/client/412")
-    ErrorModel get412();
+    Error get412() throws ServiceException;
 
     @GET("/http/failure/client/412")
-    void get412Async(Callback<ErrorModel> cb);
+    void get412Async(Callback<Error> cb);
 
     @PUT("/http/failure/client/413")
-    ErrorModel put413(Boolean booleanValue);
+    Error put413(Boolean booleanValue) throws ServiceException;
 
     @PUT("/http/failure/client/413")
-    void put413Async(Boolean booleanValue, Callback<ErrorModel> cb);
+    void put413Async(Boolean booleanValue, Callback<Error> cb);
 
     @PATCH("/http/failure/client/414")
-    ErrorModel patch414(Boolean booleanValue);
+    Error patch414(Boolean booleanValue) throws ServiceException;
 
     @PATCH("/http/failure/client/414")
-    void patch414Async(Boolean booleanValue, Callback<ErrorModel> cb);
+    void patch414Async(Boolean booleanValue, Callback<Error> cb);
 
     @POST("/http/failure/client/415")
-    ErrorModel post415(Boolean booleanValue);
+    Error post415(Boolean booleanValue) throws ServiceException;
 
     @POST("/http/failure/client/415")
-    void post415Async(Boolean booleanValue, Callback<ErrorModel> cb);
+    void post415Async(Boolean booleanValue, Callback<Error> cb);
 
     @GET("/http/failure/client/416")
-    ErrorModel get416();
+    Error get416() throws ServiceException;
 
     @GET("/http/failure/client/416")
-    void get416Async(Callback<ErrorModel> cb);
+    void get416Async(Callback<Error> cb);
 
     @DELETE("/http/failure/client/417")
-    ErrorModel delete417(Boolean booleanValue);
+    Error delete417(Boolean booleanValue) throws ServiceException;
 
     @DELETE("/http/failure/client/417")
-    void delete417Async(Boolean booleanValue, Callback<ErrorModel> cb);
+    void delete417Async(Boolean booleanValue, Callback<Error> cb);
 
     @HEAD("/http/failure/client/429")
-    ErrorModel head429();
+    Error head429() throws ServiceException;
 
     @HEAD("/http/failure/client/429")
-    void head429Async(Callback<ErrorModel> cb);
+    void head429Async(Callback<Error> cb);
 
 }

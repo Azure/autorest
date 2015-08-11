@@ -23,7 +23,7 @@ public interface AutoRestDateTimeTestService {
 
     /**
      * Test Infrastructure for AutoRest
-     * @return the datetime value.
+     * @return the datetimeOperations value.
      */
-    Datetime getDatetime();
+    DatetimeOperations getDatetimeOperations();
 }

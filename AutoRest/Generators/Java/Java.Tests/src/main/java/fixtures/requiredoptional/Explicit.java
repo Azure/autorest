@@ -12,136 +12,148 @@ package fixtures.requiredoptional;
 import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
+import fixtures.requiredoptional.models.IntWrapper;
+import fixtures.requiredoptional.models.IntOptionalWrapper;
+import fixtures.requiredoptional.models.StringWrapper;
+import fixtures.requiredoptional.models.StringOptionalWrapper;
+import fixtures.requiredoptional.models.Product;
+import fixtures.requiredoptional.models.ClassWrapper;
+import fixtures.requiredoptional.models.ClassOptionalWrapper;
+import java.util.List;
+import fixtures.requiredoptional.models.ArrayWrapper;
+import fixtures.requiredoptional.models.ArrayOptionalWrapper;
+import fixtures.requiredoptional.models.Error;
+import retrofit.http.POST;
 
 public interface Explicit {
     @POST("/reqopt/requied/integer/parameter")
-    ErrorModel postRequiredIntegerParameter(int bodyParameter);
+    Error postRequiredIntegerParameter(int bodyParameter) throws ServiceException;
 
     @POST("/reqopt/requied/integer/parameter")
-    void postRequiredIntegerParameterAsync(int bodyParameter, Callback<ErrorModel> cb);
+    void postRequiredIntegerParameterAsync(int bodyParameter, Callback<Error> cb);
 
     @POST("/reqopt/optional/integer/parameter")
-    void postOptionalIntegerParameter(int bodyParameter);
+    void postOptionalIntegerParameter(int bodyParameter) throws ServiceException;
 
     @POST("/reqopt/optional/integer/parameter")
     void postOptionalIntegerParameterAsync(int bodyParameter, Callback<Response> cb);
 
     @POST("/reqopt/requied/integer/property")
-    ErrorModel postRequiredIntegerProperty(IntWrapper bodyParameter);
+    Error postRequiredIntegerProperty(IntWrapper bodyParameter) throws ServiceException;
 
     @POST("/reqopt/requied/integer/property")
-    void postRequiredIntegerPropertyAsync(IntWrapper bodyParameter, Callback<ErrorModel> cb);
+    void postRequiredIntegerPropertyAsync(IntWrapper bodyParameter, Callback<Error> cb);
 
     @POST("/reqopt/optional/integer/property")
-    void postOptionalIntegerProperty(IntOptionalWrapper bodyParameter);
+    void postOptionalIntegerProperty(IntOptionalWrapper bodyParameter) throws ServiceException;
 
     @POST("/reqopt/optional/integer/property")
     void postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter, Callback<Response> cb);
 
     @POST("/reqopt/requied/integer/header")
-    ErrorModel postRequiredIntegerHeader(int headerParameter);
+    Error postRequiredIntegerHeader(int headerParameter) throws ServiceException;
 
     @POST("/reqopt/requied/integer/header")
-    void postRequiredIntegerHeaderAsync(int headerParameter, Callback<ErrorModel> cb);
+    void postRequiredIntegerHeaderAsync(int headerParameter, Callback<Error> cb);
 
     @POST("/reqopt/optional/integer/header")
-    void postOptionalIntegerHeader(int headerParameter);
+    void postOptionalIntegerHeader(int headerParameter) throws ServiceException;
 
     @POST("/reqopt/optional/integer/header")
     void postOptionalIntegerHeaderAsync(int headerParameter, Callback<Response> cb);
 
     @POST("/reqopt/requied/string/parameter")
-    ErrorModel postRequiredStringParameter(String bodyParameter);
+    Error postRequiredStringParameter(String bodyParameter) throws ServiceException;
 
     @POST("/reqopt/requied/string/parameter")
-    void postRequiredStringParameterAsync(String bodyParameter, Callback<ErrorModel> cb);
+    void postRequiredStringParameterAsync(String bodyParameter, Callback<Error> cb);
 
     @POST("/reqopt/optional/string/parameter")
-    void postOptionalStringParameter(String bodyParameter);
+    void postOptionalStringParameter(String bodyParameter) throws ServiceException;
 
     @POST("/reqopt/optional/string/parameter")
     void postOptionalStringParameterAsync(String bodyParameter, Callback<Response> cb);
 
     @POST("/reqopt/requied/string/property")
-    ErrorModel postRequiredStringProperty(StringWrapper bodyParameter);
+    Error postRequiredStringProperty(StringWrapper bodyParameter) throws ServiceException;
 
     @POST("/reqopt/requied/string/property")
-    void postRequiredStringPropertyAsync(StringWrapper bodyParameter, Callback<ErrorModel> cb);
+    void postRequiredStringPropertyAsync(StringWrapper bodyParameter, Callback<Error> cb);
 
     @POST("/reqopt/optional/string/property")
-    void postOptionalStringProperty(StringOptionalWrapper bodyParameter);
+    void postOptionalStringProperty(StringOptionalWrapper bodyParameter) throws ServiceException;
 
     @POST("/reqopt/optional/string/property")
     void postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter, Callback<Response> cb);
 
     @POST("/reqopt/requied/string/header")
-    ErrorModel postRequiredStringHeader(String headerParameter);
+    Error postRequiredStringHeader(String headerParameter) throws ServiceException;
 
     @POST("/reqopt/requied/string/header")
-    void postRequiredStringHeaderAsync(String headerParameter, Callback<ErrorModel> cb);
+    void postRequiredStringHeaderAsync(String headerParameter, Callback<Error> cb);
 
     @POST("/reqopt/optional/string/header")
-    void postOptionalStringHeader(String bodyParameter);
+    void postOptionalStringHeader(String bodyParameter) throws ServiceException;
 
     @POST("/reqopt/optional/string/header")
     void postOptionalStringHeaderAsync(String bodyParameter, Callback<Response> cb);
 
     @POST("/reqopt/requied/class/parameter")
-    ErrorModel postRequiredClassParameter(Product bodyParameter);
+    Error postRequiredClassParameter(Product bodyParameter) throws ServiceException;
 
     @POST("/reqopt/requied/class/parameter")
-    void postRequiredClassParameterAsync(Product bodyParameter, Callback<ErrorModel> cb);
+    void postRequiredClassParameterAsync(Product bodyParameter, Callback<Error> cb);
 
     @POST("/reqopt/optional/class/parameter")
-    void postOptionalClassParameter(Product bodyParameter);
+    void postOptionalClassParameter(Product bodyParameter) throws ServiceException;
 
     @POST("/reqopt/optional/class/parameter")
     void postOptionalClassParameterAsync(Product bodyParameter, Callback<Response> cb);
 
     @POST("/reqopt/requied/class/property")
-    ErrorModel postRequiredClassProperty(ClassWrapper bodyParameter);
+    Error postRequiredClassProperty(ClassWrapper bodyParameter) throws ServiceException;
 
     @POST("/reqopt/requied/class/property")
-    void postRequiredClassPropertyAsync(ClassWrapper bodyParameter, Callback<ErrorModel> cb);
+    void postRequiredClassPropertyAsync(ClassWrapper bodyParameter, Callback<Error> cb);
 
     @POST("/reqopt/optional/class/property")
-    void postOptionalClassProperty(ClassOptionalWrapper bodyParameter);
+    void postOptionalClassProperty(ClassOptionalWrapper bodyParameter) throws ServiceException;
 
     @POST("/reqopt/optional/class/property")
     void postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter, Callback<Response> cb);
 
     @POST("/reqopt/requied/array/parameter")
-    ErrorModel postRequiredArrayParameter(List<String> bodyParameter);
+    Error postRequiredArrayParameter(List<String> bodyParameter) throws ServiceException;
 
     @POST("/reqopt/requied/array/parameter")
-    void postRequiredArrayParameterAsync(List<String> bodyParameter, Callback<ErrorModel> cb);
+    void postRequiredArrayParameterAsync(List<String> bodyParameter, Callback<Error> cb);
 
     @POST("/reqopt/optional/array/parameter")
-    void postOptionalArrayParameter(List<String> bodyParameter);
+    void postOptionalArrayParameter(List<String> bodyParameter) throws ServiceException;
 
     @POST("/reqopt/optional/array/parameter")
     void postOptionalArrayParameterAsync(List<String> bodyParameter, Callback<Response> cb);
 
     @POST("/reqopt/requied/array/property")
-    ErrorModel postRequiredArrayProperty(ArrayWrapper bodyParameter);
+    Error postRequiredArrayProperty(ArrayWrapper bodyParameter) throws ServiceException;
 
     @POST("/reqopt/requied/array/property")
-    void postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter, Callback<ErrorModel> cb);
+    void postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter, Callback<Error> cb);
 
     @POST("/reqopt/optional/array/property")
-    void postOptionalArrayProperty(ArrayOptionalWrapper bodyParameter);
+    void postOptionalArrayProperty(ArrayOptionalWrapper bodyParameter) throws ServiceException;
 
     @POST("/reqopt/optional/array/property")
     void postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter, Callback<Response> cb);
 
     @POST("/reqopt/requied/array/header")
-    ErrorModel postRequiredArrayHeader(List<String> headerParameter);
+    Error postRequiredArrayHeader(List<String> headerParameter) throws ServiceException;
 
     @POST("/reqopt/requied/array/header")
-    void postRequiredArrayHeaderAsync(List<String> headerParameter, Callback<ErrorModel> cb);
+    void postRequiredArrayHeaderAsync(List<String> headerParameter, Callback<Error> cb);
 
     @POST("/reqopt/optional/array/header")
-    void postOptionalArrayHeader(List<String> headerParameter);
+    void postOptionalArrayHeader(List<String> headerParameter) throws ServiceException;
 
     @POST("/reqopt/optional/array/header")
     void postOptionalArrayHeaderAsync(List<String> headerParameter, Callback<Response> cb);

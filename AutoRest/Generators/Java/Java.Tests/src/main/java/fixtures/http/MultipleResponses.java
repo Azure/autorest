@@ -12,208 +12,210 @@ package fixtures.http;
 import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
+import fixtures.http.models.A;
+import retrofit.http.GET;
 
 public interface MultipleResponses {
     @GET("/http/payloads/200/A/204/none/default/Error/response/200/valid")
-    A get200Model204NoModelDefaultError200Valid();
+    A get200Model204NoModelDefaultError200Valid() throws ServiceException;
 
     @GET("/http/payloads/200/A/204/none/default/Error/response/200/valid")
     void get200Model204NoModelDefaultError200ValidAsync(Callback<A> cb);
 
     @GET("/http/payloads/200/A/204/none/default/Error/response/204/none")
-    A get200Model204NoModelDefaultError204Valid();
+    A get200Model204NoModelDefaultError204Valid() throws ServiceException;
 
     @GET("/http/payloads/200/A/204/none/default/Error/response/204/none")
     void get200Model204NoModelDefaultError204ValidAsync(Callback<A> cb);
 
     @GET("/http/payloads/200/A/204/none/default/Error/response/201/valid")
-    A get200Model204NoModelDefaultError201Invalid();
+    A get200Model204NoModelDefaultError201Invalid() throws ServiceException;
 
     @GET("/http/payloads/200/A/204/none/default/Error/response/201/valid")
     void get200Model204NoModelDefaultError201InvalidAsync(Callback<A> cb);
 
     @GET("/http/payloads/200/A/204/none/default/Error/response/202/none")
-    A get200Model204NoModelDefaultError202None();
+    A get200Model204NoModelDefaultError202None() throws ServiceException;
 
     @GET("/http/payloads/200/A/204/none/default/Error/response/202/none")
     void get200Model204NoModelDefaultError202NoneAsync(Callback<A> cb);
 
     @GET("/http/payloads/200/A/204/none/default/Error/response/400/valid")
-    A get200Model204NoModelDefaultError400Valid();
+    A get200Model204NoModelDefaultError400Valid() throws ServiceException;
 
     @GET("/http/payloads/200/A/204/none/default/Error/response/400/valid")
     void get200Model204NoModelDefaultError400ValidAsync(Callback<A> cb);
 
     @GET("/http/payloads/200/A/201/B/default/Error/response/200/valid")
-    A get200Model201ModelDefaultError200Valid();
+    A get200Model201ModelDefaultError200Valid() throws ServiceException;
 
     @GET("/http/payloads/200/A/201/B/default/Error/response/200/valid")
     void get200Model201ModelDefaultError200ValidAsync(Callback<A> cb);
 
     @GET("/http/payloads/200/A/201/B/default/Error/response/201/valid")
-    A get200Model201ModelDefaultError201Valid();
+    A get200Model201ModelDefaultError201Valid() throws ServiceException;
 
     @GET("/http/payloads/200/A/201/B/default/Error/response/201/valid")
     void get200Model201ModelDefaultError201ValidAsync(Callback<A> cb);
 
     @GET("/http/payloads/200/A/201/B/default/Error/response/400/valid")
-    A get200Model201ModelDefaultError400Valid();
+    A get200Model201ModelDefaultError400Valid() throws ServiceException;
 
     @GET("/http/payloads/200/A/201/B/default/Error/response/400/valid")
     void get200Model201ModelDefaultError400ValidAsync(Callback<A> cb);
 
     @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/200/valid")
-    Object get200ModelA201ModelC404ModelDDefaultError200Valid();
+    Object get200ModelA201ModelC404ModelDDefaultError200Valid() throws ServiceException;
 
     @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/200/valid")
     void get200ModelA201ModelC404ModelDDefaultError200ValidAsync(Callback<Object> cb);
 
     @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/201/valid")
-    Object get200ModelA201ModelC404ModelDDefaultError201Valid();
+    Object get200ModelA201ModelC404ModelDDefaultError201Valid() throws ServiceException;
 
     @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/201/valid")
     void get200ModelA201ModelC404ModelDDefaultError201ValidAsync(Callback<Object> cb);
 
     @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/404/valid")
-    Object get200ModelA201ModelC404ModelDDefaultError404Valid();
+    Object get200ModelA201ModelC404ModelDDefaultError404Valid() throws ServiceException;
 
     @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/404/valid")
     void get200ModelA201ModelC404ModelDDefaultError404ValidAsync(Callback<Object> cb);
 
     @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/400/valid")
-    Object get200ModelA201ModelC404ModelDDefaultError400Valid();
+    Object get200ModelA201ModelC404ModelDDefaultError400Valid() throws ServiceException;
 
     @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/400/valid")
     void get200ModelA201ModelC404ModelDDefaultError400ValidAsync(Callback<Object> cb);
 
     @GET("/http/payloads/202/none/204/none/default/Error/response/202/none")
-    void get202None204NoneDefaultError202None();
+    void get202None204NoneDefaultError202None() throws ServiceException;
 
     @GET("/http/payloads/202/none/204/none/default/Error/response/202/none")
     void get202None204NoneDefaultError202NoneAsync(Callback<Response> cb);
 
     @GET("/http/payloads/202/none/204/none/default/Error/response/204/none")
-    void get202None204NoneDefaultError204None();
+    void get202None204NoneDefaultError204None() throws ServiceException;
 
     @GET("/http/payloads/202/none/204/none/default/Error/response/204/none")
     void get202None204NoneDefaultError204NoneAsync(Callback<Response> cb);
 
     @GET("/http/payloads/202/none/204/none/default/Error/response/400/valid")
-    void get202None204NoneDefaultError400Valid();
+    void get202None204NoneDefaultError400Valid() throws ServiceException;
 
     @GET("/http/payloads/202/none/204/none/default/Error/response/400/valid")
     void get202None204NoneDefaultError400ValidAsync(Callback<Response> cb);
 
     @GET("/http/payloads/202/none/204/none/default/none/response/202/invalid")
-    void get202None204NoneDefaultNone202Invalid();
+    void get202None204NoneDefaultNone202Invalid() throws ServiceException;
 
     @GET("/http/payloads/202/none/204/none/default/none/response/202/invalid")
     void get202None204NoneDefaultNone202InvalidAsync(Callback<Response> cb);
 
     @GET("/http/payloads/202/none/204/none/default/none/response/204/none")
-    void get202None204NoneDefaultNone204None();
+    void get202None204NoneDefaultNone204None() throws ServiceException;
 
     @GET("/http/payloads/202/none/204/none/default/none/response/204/none")
     void get202None204NoneDefaultNone204NoneAsync(Callback<Response> cb);
 
     @GET("/http/payloads/202/none/204/none/default/none/response/400/none")
-    void get202None204NoneDefaultNone400None();
+    void get202None204NoneDefaultNone400None() throws ServiceException;
 
     @GET("/http/payloads/202/none/204/none/default/none/response/400/none")
     void get202None204NoneDefaultNone400NoneAsync(Callback<Response> cb);
 
     @GET("/http/payloads/202/none/204/none/default/none/response/400/invalid")
-    void get202None204NoneDefaultNone400Invalid();
+    void get202None204NoneDefaultNone400Invalid() throws ServiceException;
 
     @GET("/http/payloads/202/none/204/none/default/none/response/400/invalid")
     void get202None204NoneDefaultNone400InvalidAsync(Callback<Response> cb);
 
     @GET("/http/payloads/default/A/response/200/valid")
-    A getDefaultModelA200Valid();
+    A getDefaultModelA200Valid() throws ServiceException;
 
     @GET("/http/payloads/default/A/response/200/valid")
     void getDefaultModelA200ValidAsync(Callback<A> cb);
 
     @GET("/http/payloads/default/A/response/200/none")
-    A getDefaultModelA200None();
+    A getDefaultModelA200None() throws ServiceException;
 
     @GET("/http/payloads/default/A/response/200/none")
     void getDefaultModelA200NoneAsync(Callback<A> cb);
 
     @GET("/http/payloads/default/A/response/400/valid")
-    A getDefaultModelA400Valid();
+    A getDefaultModelA400Valid() throws ServiceException;
 
     @GET("/http/payloads/default/A/response/400/valid")
     void getDefaultModelA400ValidAsync(Callback<A> cb);
 
     @GET("/http/payloads/default/A/response/400/none")
-    A getDefaultModelA400None();
+    A getDefaultModelA400None() throws ServiceException;
 
     @GET("/http/payloads/default/A/response/400/none")
     void getDefaultModelA400NoneAsync(Callback<A> cb);
 
     @GET("/http/payloads/default/none/response/200/invalid")
-    void getDefaultNone200Invalid();
+    void getDefaultNone200Invalid() throws ServiceException;
 
     @GET("/http/payloads/default/none/response/200/invalid")
     void getDefaultNone200InvalidAsync(Callback<Response> cb);
 
     @GET("/http/payloads/default/none/response/200/none")
-    void getDefaultNone200None();
+    void getDefaultNone200None() throws ServiceException;
 
     @GET("/http/payloads/default/none/response/200/none")
     void getDefaultNone200NoneAsync(Callback<Response> cb);
 
     @GET("/http/payloads/default/none/response/400/invalid")
-    void getDefaultNone400Invalid();
+    void getDefaultNone400Invalid() throws ServiceException;
 
     @GET("/http/payloads/default/none/response/400/invalid")
     void getDefaultNone400InvalidAsync(Callback<Response> cb);
 
     @GET("/http/payloads/default/none/response/400/none")
-    void getDefaultNone400None();
+    void getDefaultNone400None() throws ServiceException;
 
     @GET("/http/payloads/default/none/response/400/none")
     void getDefaultNone400NoneAsync(Callback<Response> cb);
 
     @GET("/http/payloads/200/A/response/200/none")
-    A get200ModelA200None();
+    A get200ModelA200None() throws ServiceException;
 
     @GET("/http/payloads/200/A/response/200/none")
     void get200ModelA200NoneAsync(Callback<A> cb);
 
     @GET("/http/payloads/200/A/response/200/valid")
-    A get200ModelA200Valid();
+    A get200ModelA200Valid() throws ServiceException;
 
     @GET("/http/payloads/200/A/response/200/valid")
     void get200ModelA200ValidAsync(Callback<A> cb);
 
     @GET("/http/payloads/200/A/response/200/invalid")
-    A get200ModelA200Invalid();
+    A get200ModelA200Invalid() throws ServiceException;
 
     @GET("/http/payloads/200/A/response/200/invalid")
     void get200ModelA200InvalidAsync(Callback<A> cb);
 
     @GET("/http/payloads/200/A/response/400/none")
-    A get200ModelA400None();
+    A get200ModelA400None() throws ServiceException;
 
     @GET("/http/payloads/200/A/response/400/none")
     void get200ModelA400NoneAsync(Callback<A> cb);
 
     @GET("/http/payloads/200/A/response/400/valid")
-    A get200ModelA400Valid();
+    A get200ModelA400Valid() throws ServiceException;
 
     @GET("/http/payloads/200/A/response/400/valid")
     void get200ModelA400ValidAsync(Callback<A> cb);
 
     @GET("/http/payloads/200/A/response/400/invalid")
-    A get200ModelA400Invalid();
+    A get200ModelA400Invalid() throws ServiceException;
 
     @GET("/http/payloads/200/A/response/400/invalid")
     void get200ModelA400InvalidAsync(Callback<A> cb);
 
     @GET("/http/payloads/200/A/response/202/valid")
-    A get200ModelA202Valid();
+    A get200ModelA202Valid() throws ServiceException;
 
     @GET("/http/payloads/200/A/response/202/valid")
     void get200ModelA202ValidAsync(Callback<A> cb);

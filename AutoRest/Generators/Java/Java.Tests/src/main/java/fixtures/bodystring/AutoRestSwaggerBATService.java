@@ -23,9 +23,9 @@ public interface AutoRestSwaggerBATService {
 
     /**
      * Test Infrastructure for AutoRest Swagger BAT
-     * @return the string value.
+     * @return the stringOperations value.
      */
-    String getString();
+    StringOperations getStringOperations();
 
     /**
      * Test Infrastructure for AutoRest Swagger BAT

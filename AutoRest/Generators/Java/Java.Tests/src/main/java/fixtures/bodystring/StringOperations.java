@@ -12,58 +12,60 @@ package fixtures.bodystring;
 import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
+import retrofit.http.GET;
+import retrofit.http.PUT;
 
-public interface String {
+public interface StringOperations {
     @GET("/string/null")
-    String getNull();
+    String getNull() throws ServiceException;
 
     @GET("/string/null")
     void getNullAsync(Callback<String> cb);
 
     @PUT("/string/null")
-    void putNull(String stringBody);
+    void putNull(String stringBody) throws ServiceException;
 
     @PUT("/string/null")
     void putNullAsync(String stringBody, Callback<Response> cb);
 
     @GET("/string/empty")
-    String getEmpty();
+    String getEmpty() throws ServiceException;
 
     @GET("/string/empty")
     void getEmptyAsync(Callback<String> cb);
 
     @PUT("/string/empty")
-    void putEmpty(String stringBody);
+    void putEmpty(String stringBody) throws ServiceException;
 
     @PUT("/string/empty")
     void putEmptyAsync(String stringBody, Callback<Response> cb);
 
     @GET("/string/mbcs")
-    String getMbcs();
+    String getMbcs() throws ServiceException;
 
     @GET("/string/mbcs")
     void getMbcsAsync(Callback<String> cb);
 
     @PUT("/string/mbcs")
-    void putMbcs(String stringBody);
+    void putMbcs(String stringBody) throws ServiceException;
 
     @PUT("/string/mbcs")
     void putMbcsAsync(String stringBody, Callback<Response> cb);
 
     @GET("/string/whitespace")
-    String getWhitespace();
+    String getWhitespace() throws ServiceException;
 
     @GET("/string/whitespace")
     void getWhitespaceAsync(Callback<String> cb);
 
     @PUT("/string/whitespace")
-    void putWhitespace(String stringBody);
+    void putWhitespace(String stringBody) throws ServiceException;
 
     @PUT("/string/whitespace")
     void putWhitespaceAsync(String stringBody, Callback<Response> cb);
 
     @GET("/string/notProvided")
-    String getNotProvided();
+    String getNotProvided() throws ServiceException;
 
     @GET("/string/notProvided")
     void getNotProvidedAsync(Callback<String> cb);

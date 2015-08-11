@@ -12,94 +12,101 @@ package fixtures.http;
 import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
+import java.util.List;
+import retrofit.http.HEAD;
+import retrofit.http.GET;
+import retrofit.http.PUT;
+import retrofit.http.PATCH;
+import retrofit.http.POST;
+import retrofit.http.DELETE;
 
 public interface HttpRedirects {
     @HEAD("/http/redirect/300")
-    void head300();
+    void head300() throws ServiceException;
 
     @HEAD("/http/redirect/300")
     void head300Async(Callback<Response> cb);
 
     @GET("/http/redirect/300")
-    List<String> get300();
+    List<String> get300() throws ServiceException;
 
     @GET("/http/redirect/300")
     void get300Async(Callback<List<String>> cb);
 
     @HEAD("/http/redirect/301")
-    void head301();
+    void head301() throws ServiceException;
 
     @HEAD("/http/redirect/301")
     void head301Async(Callback<Response> cb);
 
     @GET("/http/redirect/301")
-    void get301();
+    void get301() throws ServiceException;
 
     @GET("/http/redirect/301")
     void get301Async(Callback<Response> cb);
 
     @PUT("/http/redirect/301")
-    void put301(Boolean booleanValue);
+    void put301(Boolean booleanValue) throws ServiceException;
 
     @PUT("/http/redirect/301")
     void put301Async(Boolean booleanValue, Callback<Response> cb);
 
     @HEAD("/http/redirect/302")
-    void head302();
+    void head302() throws ServiceException;
 
     @HEAD("/http/redirect/302")
     void head302Async(Callback<Response> cb);
 
     @GET("/http/redirect/302")
-    void get302();
+    void get302() throws ServiceException;
 
     @GET("/http/redirect/302")
     void get302Async(Callback<Response> cb);
 
     @PATCH("/http/redirect/302")
-    void patch302(Boolean booleanValue);
+    void patch302(Boolean booleanValue) throws ServiceException;
 
     @PATCH("/http/redirect/302")
     void patch302Async(Boolean booleanValue, Callback<Response> cb);
 
     @POST("/http/redirect/303")
-    void post303(Boolean booleanValue);
+    void post303(Boolean booleanValue) throws ServiceException;
 
     @POST("/http/redirect/303")
     void post303Async(Boolean booleanValue, Callback<Response> cb);
 
     @HEAD("/http/redirect/307")
-    void head307();
+    void head307() throws ServiceException;
 
     @HEAD("/http/redirect/307")
     void head307Async(Callback<Response> cb);
 
     @GET("/http/redirect/307")
-    void get307();
+    void get307() throws ServiceException;
 
     @GET("/http/redirect/307")
     void get307Async(Callback<Response> cb);
 
     @PUT("/http/redirect/307")
-    void put307(Boolean booleanValue);
+    void put307(Boolean booleanValue) throws ServiceException;
 
     @PUT("/http/redirect/307")
     void put307Async(Boolean booleanValue, Callback<Response> cb);
 
     @PATCH("/http/redirect/307")
-    void patch307(Boolean booleanValue);
+    void patch307(Boolean booleanValue) throws ServiceException;
 
     @PATCH("/http/redirect/307")
     void patch307Async(Boolean booleanValue, Callback<Response> cb);
 
     @POST("/http/redirect/307")
-    void post307(Boolean booleanValue);
+    void post307(Boolean booleanValue) throws ServiceException;
 
     @POST("/http/redirect/307")
     void post307Async(Boolean booleanValue, Callback<Response> cb);
 
     @DELETE("/http/redirect/307")
-    void delete307(Boolean booleanValue);
+    void delete307(Boolean booleanValue) throws ServiceException;
 
     @DELETE("/http/redirect/307")
     void delete307Async(Boolean booleanValue, Callback<Response> cb);

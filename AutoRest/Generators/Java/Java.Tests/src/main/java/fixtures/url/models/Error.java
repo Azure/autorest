@@ -7,21 +7,22 @@
 // regenerated.
 
 
-package fixtures.bodyarray.models;
+package fixtures.url.models;
+
 
 /**
  * 
  */
-public class ErrorModel {
-    private Integer Status;
+public class Error {
+    private int Status;
 
     private String Message;
 
-    public Integer getStatus() {
+    public int getStatus() {
         return this.Status;
     }
 
-    public void setStatus(Integer Status) {
+    public void setStatus(int Status) {
         this.Status = Status;
     }
 

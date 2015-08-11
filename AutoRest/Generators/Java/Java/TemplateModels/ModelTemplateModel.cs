@@ -124,5 +124,32 @@ namespace Microsoft.Rest.Generator.Java
             }
             return false;
         }
+
+        public IEnumerable<String> Imports {
+            get
+            {
+                HashSet<String> classes = new HashSet<string>();
+                foreach (var property in this.Properties)
+                {
+                    if (property.Type is SequenceType)
+                    {
+                        classes.Add("java.util.List");
+                    }
+                    else if (property.Type is DictionaryType)
+                    {
+                        classes.Add("java.util.Map");
+                    }
+                    else if (property.Type is PrimaryType)
+                    {
+                        var importedFrom = JavaCodeNamer.ImportedFrom(property.Type as PrimaryType);
+                        if (importedFrom != null)
+                        {
+                            classes.Add(importedFrom);
+                        }
+                    }
+                }
+                return classes.AsEnumerable();
+            }
+        }
     }
 }

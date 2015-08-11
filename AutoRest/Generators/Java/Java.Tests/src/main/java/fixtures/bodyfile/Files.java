@@ -12,18 +12,20 @@ package fixtures.bodyfile;
 import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
 import retrofit.client.Response;
+import java.io.InputStream;
+import retrofit.http.GET;
 
 public interface Files {
     @GET("/files/stream/nonempty")
-    Stream getFile();
+    InputStream getFile() throws ServiceException;
 
     @GET("/files/stream/nonempty")
-    void getFileAsync(Callback<Stream> cb);
+    void getFileAsync(Callback<InputStream> cb);
 
     @GET("/files/stream/empty")
-    Stream getEmptyFile();
+    InputStream getEmptyFile() throws ServiceException;
 
     @GET("/files/stream/empty")
-    void getEmptyFileAsync(Callback<Stream> cb);
+    void getEmptyFileAsync(Callback<InputStream> cb);
 
 }
