@@ -14,6 +14,7 @@ import retrofit.Callback;
 import retrofit.client.Response;
 import retrofit.http.GET;
 import retrofit.http.PUT;
+import retrofit.http.Body;
 
 public interface Bool {
     @GET("/bool/true")
@@ -23,10 +24,10 @@ public interface Bool {
     void getTrueAsync(Callback<Boolean> cb);
 
     @PUT("/bool/true")
-    void putTrue(Boolean boolBody) throws ServiceException;
+    Response putTrue(@Body Boolean boolBody) throws ServiceException;
 
     @PUT("/bool/true")
-    void putTrueAsync(Boolean boolBody, Callback<Response> cb);
+    void putTrueAsync(@Body Boolean boolBody, Callback<Response> cb);
 
     @GET("/bool/false")
     Boolean getFalse() throws ServiceException;
@@ -35,10 +36,10 @@ public interface Bool {
     void getFalseAsync(Callback<Boolean> cb);
 
     @PUT("/bool/false")
-    void putFalse(Boolean boolBody) throws ServiceException;
+    Response putFalse(@Body Boolean boolBody) throws ServiceException;
 
     @PUT("/bool/false")
-    void putFalseAsync(Boolean boolBody, Callback<Response> cb);
+    void putFalseAsync(@Body Boolean boolBody, Callback<Response> cb);
 
     @GET("/bool/null")
     Boolean getNull() throws ServiceException;

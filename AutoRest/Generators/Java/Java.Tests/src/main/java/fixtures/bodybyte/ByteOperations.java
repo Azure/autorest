@@ -14,6 +14,7 @@ import retrofit.Callback;
 import retrofit.client.Response;
 import retrofit.http.GET;
 import retrofit.http.PUT;
+import retrofit.http.Body;
 
 public interface ByteOperations {
     @GET("/byte/null")
@@ -35,10 +36,10 @@ public interface ByteOperations {
     void getNonAsciiAsync(Callback<Byte[]> cb);
 
     @PUT("/byte/nonAscii")
-    void putNonAscii(Byte[] byteBody) throws ServiceException;
+    Response putNonAscii(@Body Byte[] byteBody) throws ServiceException;
 
     @PUT("/byte/nonAscii")
-    void putNonAsciiAsync(Byte[] byteBody, Callback<Response> cb);
+    void putNonAsciiAsync(@Body Byte[] byteBody, Callback<Response> cb);
 
     @GET("/byte/invalid")
     Byte[] getInvalid() throws ServiceException;

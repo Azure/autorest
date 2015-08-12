@@ -14,7 +14,7 @@ import retrofit.RestAdapter;
 /**
  *
  */
-public class AutoRestIntegerTestServiceImpl extends ServiceClient<AutoRestIntegerTestService> implements AutoRestIntegerTestService {
+public class AutoRestIntegerTestServiceImpl extends ServiceClient implements AutoRestIntegerTestService {
     private String baseUri;
 
     public String getBaseUri() {
@@ -45,6 +45,6 @@ public class AutoRestIntegerTestServiceImpl extends ServiceClient<AutoRestIntege
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.intOperations = restAdapter.create(IntOperations.class);
+        this.intOperations = new IntOperations(restAdapter);
     }
 }

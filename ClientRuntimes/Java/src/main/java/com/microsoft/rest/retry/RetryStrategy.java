@@ -9,9 +9,6 @@ package com.microsoft.rest.retry;
 
 import com.squareup.okhttp.Response;
 
-import javax.ws.rs.client.ClientResponseContext;
-import java.io.IOException;
-
 public abstract class RetryStrategy {
     public static final int DEFAULT_CLIENT_RETRY_COUNT = 10;
     public static final int DEFAULT_RETRY_INTERVAL = 1000;

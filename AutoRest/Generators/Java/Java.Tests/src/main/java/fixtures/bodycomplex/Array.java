@@ -15,6 +15,7 @@ import retrofit.client.Response;
 import fixtures.bodycomplex.models.ArrayWrapper;
 import retrofit.http.GET;
 import retrofit.http.PUT;
+import retrofit.http.Body;
 
 public interface Array {
     @GET("/complex/array/valid")
@@ -24,10 +25,10 @@ public interface Array {
     void getValidAsync(Callback<ArrayWrapper> cb);
 
     @PUT("/complex/array/valid")
-    void putValid(ArrayWrapper complexBody) throws ServiceException;
+    Response putValid(@Body ArrayWrapper complexBody) throws ServiceException;
 
     @PUT("/complex/array/valid")
-    void putValidAsync(ArrayWrapper complexBody, Callback<Response> cb);
+    void putValidAsync(@Body ArrayWrapper complexBody, Callback<Response> cb);
 
     @GET("/complex/array/empty")
     ArrayWrapper getEmpty() throws ServiceException;
@@ -36,10 +37,10 @@ public interface Array {
     void getEmptyAsync(Callback<ArrayWrapper> cb);
 
     @PUT("/complex/array/empty")
-    void putEmpty(ArrayWrapper complexBody) throws ServiceException;
+    Response putEmpty(@Body ArrayWrapper complexBody) throws ServiceException;
 
     @PUT("/complex/array/empty")
-    void putEmptyAsync(ArrayWrapper complexBody, Callback<Response> cb);
+    void putEmptyAsync(@Body ArrayWrapper complexBody, Callback<Response> cb);
 
     @GET("/complex/array/notprovided")
     ArrayWrapper getNotProvided() throws ServiceException;

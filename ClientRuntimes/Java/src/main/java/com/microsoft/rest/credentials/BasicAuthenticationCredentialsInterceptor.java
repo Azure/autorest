@@ -12,10 +12,7 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import org.apache.commons.codec.binary.Base64;
 
-import javax.ws.rs.client.ClientRequestContext;
-import javax.ws.rs.client.ClientRequestFilter;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 /**
  * Basic Auth credentials filter for placing a basic auth credentials into Apache pipeline.

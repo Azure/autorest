@@ -14,6 +14,7 @@ import retrofit.Callback;
 import retrofit.client.Response;
 import retrofit.http.GET;
 import retrofit.http.PUT;
+import retrofit.http.Body;
 
 public interface IntOperations {
     @GET("/int/null")
@@ -53,27 +54,27 @@ public interface IntOperations {
     void getUnderflowInt64Async(Callback<Long> cb);
 
     @PUT("/int/max/32")
-    void putMax32(Integer intBody) throws ServiceException;
+    Response putMax32(@Body Integer intBody) throws ServiceException;
 
     @PUT("/int/max/32")
-    void putMax32Async(Integer intBody, Callback<Response> cb);
+    void putMax32Async(@Body Integer intBody, Callback<Response> cb);
 
     @PUT("/int/max/64")
-    void putMax64(Long intBody) throws ServiceException;
+    Response putMax64(@Body Long intBody) throws ServiceException;
 
     @PUT("/int/max/64")
-    void putMax64Async(Long intBody, Callback<Response> cb);
+    void putMax64Async(@Body Long intBody, Callback<Response> cb);
 
     @PUT("/int/min/32")
-    void putMin32(Integer intBody) throws ServiceException;
+    Response putMin32(@Body Integer intBody) throws ServiceException;
 
     @PUT("/int/min/32")
-    void putMin32Async(Integer intBody, Callback<Response> cb);
+    void putMin32Async(@Body Integer intBody, Callback<Response> cb);
 
     @PUT("/int/min/64")
-    void putMin64(Long intBody) throws ServiceException;
+    Response putMin64(@Body Long intBody) throws ServiceException;
 
     @PUT("/int/min/64")
-    void putMin64Async(Long intBody, Callback<Response> cb);
+    void putMin64Async(@Body Long intBody, Callback<Response> cb);
 
 }

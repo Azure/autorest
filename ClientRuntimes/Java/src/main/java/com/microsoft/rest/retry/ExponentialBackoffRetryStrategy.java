@@ -40,6 +40,8 @@ public class ExponentialBackoffRetryStrategy extends RetryStrategy {
 
     @Override
     public boolean shouldRetry(int retryCount, Response response) {
-        return retryCount < this.retryCount;
+        int code = response.code();
+        return retryCount < this.retryCount &&
+                (code == 408 || (code >= 500 && code != 501 && code != 505));
     }
 }

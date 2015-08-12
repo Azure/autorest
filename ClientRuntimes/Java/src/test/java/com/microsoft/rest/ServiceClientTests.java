@@ -10,12 +10,8 @@ package com.microsoft.rest;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.Response;
 import junit.framework.Assert;
-import org.glassfish.jersey.client.ClientConfig;
 import org.junit.Test;
 
-import javax.ws.rs.client.ClientRequestContext;
-import javax.ws.rs.client.ClientRequestFilter;
-import javax.ws.rs.client.WebTarget;
 import java.io.IOException;
 
 public class ServiceClientTests {

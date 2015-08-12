@@ -15,154 +15,155 @@ import retrofit.client.Response;
 import java.util.Date;
 import fixtures.header.models.GreyscaleColors;
 import retrofit.http.POST;
+import retrofit.http.Header;
 
 public interface HeaderOperations {
     @POST("/header/param/existingkey")
-    void paramExistingKey(String userAgent) throws ServiceException;
+    Response paramExistingKey(@Header("User-Agent") String userAgent) throws ServiceException;
 
     @POST("/header/param/existingkey")
-    void paramExistingKeyAsync(String userAgent, Callback<Response> cb);
+    void paramExistingKeyAsync(@Header("User-Agent") String userAgent, Callback<Response> cb);
 
     @POST("/header/response/existingkey")
-    void responseExistingKey() throws ServiceException;
+    Response responseExistingKey() throws ServiceException;
 
     @POST("/header/response/existingkey")
     void responseExistingKeyAsync(Callback<Response> cb);
 
     @POST("/header/param/protectedkey")
-    void paramProtectedKey(String contentType) throws ServiceException;
+    Response paramProtectedKey(@Header("Content-Type") String contentType) throws ServiceException;
 
     @POST("/header/param/protectedkey")
-    void paramProtectedKeyAsync(String contentType, Callback<Response> cb);
+    void paramProtectedKeyAsync(@Header("Content-Type") String contentType, Callback<Response> cb);
 
     @POST("/header/response/protectedkey")
-    void responseProtectedKey() throws ServiceException;
+    Response responseProtectedKey() throws ServiceException;
 
     @POST("/header/response/protectedkey")
     void responseProtectedKeyAsync(Callback<Response> cb);
 
     @POST("/header/param/prim/integer")
-    void paramInteger(String scenario, int value) throws ServiceException;
+    Response paramInteger(@Header("scenario") String scenario, @Header("value") int value) throws ServiceException;
 
     @POST("/header/param/prim/integer")
-    void paramIntegerAsync(String scenario, int value, Callback<Response> cb);
+    void paramIntegerAsync(@Header("scenario") String scenario, @Header("value") int value, Callback<Response> cb);
 
     @POST("/header/response/prim/integer")
-    void responseInteger(String scenario) throws ServiceException;
+    Response responseInteger(@Header("scenario") String scenario) throws ServiceException;
 
     @POST("/header/response/prim/integer")
-    void responseIntegerAsync(String scenario, Callback<Response> cb);
+    void responseIntegerAsync(@Header("scenario") String scenario, Callback<Response> cb);
 
     @POST("/header/param/prim/long")
-    void paramLong(String scenario, long value) throws ServiceException;
+    Response paramLong(@Header("scenario") String scenario, @Header("value") long value) throws ServiceException;
 
     @POST("/header/param/prim/long")
-    void paramLongAsync(String scenario, long value, Callback<Response> cb);
+    void paramLongAsync(@Header("scenario") String scenario, @Header("value") long value, Callback<Response> cb);
 
     @POST("/header/response/prim/long")
-    void responseLong(String scenario) throws ServiceException;
+    Response responseLong(@Header("scenario") String scenario) throws ServiceException;
 
     @POST("/header/response/prim/long")
-    void responseLongAsync(String scenario, Callback<Response> cb);
+    void responseLongAsync(@Header("scenario") String scenario, Callback<Response> cb);
 
     @POST("/header/param/prim/float")
-    void paramFloat(String scenario, double value) throws ServiceException;
+    Response paramFloat(@Header("scenario") String scenario, @Header("value") double value) throws ServiceException;
 
     @POST("/header/param/prim/float")
-    void paramFloatAsync(String scenario, double value, Callback<Response> cb);
+    void paramFloatAsync(@Header("scenario") String scenario, @Header("value") double value, Callback<Response> cb);
 
     @POST("/header/response/prim/float")
-    void responseFloat(String scenario) throws ServiceException;
+    Response responseFloat(@Header("scenario") String scenario) throws ServiceException;
 
     @POST("/header/response/prim/float")
-    void responseFloatAsync(String scenario, Callback<Response> cb);
+    void responseFloatAsync(@Header("scenario") String scenario, Callback<Response> cb);
 
     @POST("/header/param/prim/double")
-    void paramDouble(String scenario, double value) throws ServiceException;
+    Response paramDouble(@Header("scenario") String scenario, @Header("value") double value) throws ServiceException;
 
     @POST("/header/param/prim/double")
-    void paramDoubleAsync(String scenario, double value, Callback<Response> cb);
+    void paramDoubleAsync(@Header("scenario") String scenario, @Header("value") double value, Callback<Response> cb);
 
     @POST("/header/response/prim/double")
-    void responseDouble(String scenario) throws ServiceException;
+    Response responseDouble(@Header("scenario") String scenario) throws ServiceException;
 
     @POST("/header/response/prim/double")
-    void responseDoubleAsync(String scenario, Callback<Response> cb);
+    void responseDoubleAsync(@Header("scenario") String scenario, Callback<Response> cb);
 
     @POST("/header/param/prim/bool")
-    void paramBool(String scenario, boolean value) throws ServiceException;
+    Response paramBool(@Header("scenario") String scenario, @Header("value") boolean value) throws ServiceException;
 
     @POST("/header/param/prim/bool")
-    void paramBoolAsync(String scenario, boolean value, Callback<Response> cb);
+    void paramBoolAsync(@Header("scenario") String scenario, @Header("value") boolean value, Callback<Response> cb);
 
     @POST("/header/response/prim/bool")
-    void responseBool(String scenario) throws ServiceException;
+    Response responseBool(@Header("scenario") String scenario) throws ServiceException;
 
     @POST("/header/response/prim/bool")
-    void responseBoolAsync(String scenario, Callback<Response> cb);
+    void responseBoolAsync(@Header("scenario") String scenario, Callback<Response> cb);
 
     @POST("/header/param/prim/string")
-    void paramString(String scenario, String value) throws ServiceException;
+    Response paramString(@Header("scenario") String scenario, @Header("value") String value) throws ServiceException;
 
     @POST("/header/param/prim/string")
-    void paramStringAsync(String scenario, String value, Callback<Response> cb);
+    void paramStringAsync(@Header("scenario") String scenario, @Header("value") String value, Callback<Response> cb);
 
     @POST("/header/response/prim/string")
-    void responseString(String scenario) throws ServiceException;
+    Response responseString(@Header("scenario") String scenario) throws ServiceException;
 
     @POST("/header/response/prim/string")
-    void responseStringAsync(String scenario, Callback<Response> cb);
+    void responseStringAsync(@Header("scenario") String scenario, Callback<Response> cb);
 
     @POST("/header/param/prim/date")
-    void paramDate(String scenario, Date value) throws ServiceException;
+    Response paramDate(@Header("scenario") String scenario, @Header("value") Date value) throws ServiceException;
 
     @POST("/header/param/prim/date")
-    void paramDateAsync(String scenario, Date value, Callback<Response> cb);
+    void paramDateAsync(@Header("scenario") String scenario, @Header("value") Date value, Callback<Response> cb);
 
     @POST("/header/response/prim/date")
-    void responseDate(String scenario) throws ServiceException;
+    Response responseDate(@Header("scenario") String scenario) throws ServiceException;
 
     @POST("/header/response/prim/date")
-    void responseDateAsync(String scenario, Callback<Response> cb);
+    void responseDateAsync(@Header("scenario") String scenario, Callback<Response> cb);
 
     @POST("/header/param/prim/datetime")
-    void paramDatetime(String scenario, Date value) throws ServiceException;
+    Response paramDatetime(@Header("scenario") String scenario, @Header("value") Date value) throws ServiceException;
 
     @POST("/header/param/prim/datetime")
-    void paramDatetimeAsync(String scenario, Date value, Callback<Response> cb);
+    void paramDatetimeAsync(@Header("scenario") String scenario, @Header("value") Date value, Callback<Response> cb);
 
     @POST("/header/response/prim/datetime")
-    void responseDatetime(String scenario) throws ServiceException;
+    Response responseDatetime(@Header("scenario") String scenario) throws ServiceException;
 
     @POST("/header/response/prim/datetime")
-    void responseDatetimeAsync(String scenario, Callback<Response> cb);
+    void responseDatetimeAsync(@Header("scenario") String scenario, Callback<Response> cb);
 
     @POST("/header/param/prim/byte")
-    void paramByte(String scenario, byte[] value) throws ServiceException;
+    Response paramByte(@Header("scenario") String scenario, @Header("value") byte[] value) throws ServiceException;
 
     @POST("/header/param/prim/byte")
-    void paramByteAsync(String scenario, byte[] value, Callback<Response> cb);
+    void paramByteAsync(@Header("scenario") String scenario, @Header("value") byte[] value, Callback<Response> cb);
 
     @POST("/header/response/prim/byte")
-    void responseByte(String scenario) throws ServiceException;
+    Response responseByte(@Header("scenario") String scenario) throws ServiceException;
 
     @POST("/header/response/prim/byte")
-    void responseByteAsync(String scenario, Callback<Response> cb);
+    void responseByteAsync(@Header("scenario") String scenario, Callback<Response> cb);
 
     @POST("/header/param/prim/enum")
-    void paramEnum(String scenario, GreyscaleColors value) throws ServiceException;
+    Response paramEnum(@Header("scenario") String scenario, @Header("value") GreyscaleColors value) throws ServiceException;
 
     @POST("/header/param/prim/enum")
-    void paramEnumAsync(String scenario, GreyscaleColors value, Callback<Response> cb);
+    void paramEnumAsync(@Header("scenario") String scenario, @Header("value") GreyscaleColors value, Callback<Response> cb);
 
     @POST("/header/response/prim/enum")
-    void responseEnum(String scenario) throws ServiceException;
+    Response responseEnum(@Header("scenario") String scenario) throws ServiceException;
 
     @POST("/header/response/prim/enum")
-    void responseEnumAsync(String scenario, Callback<Response> cb);
+    void responseEnumAsync(@Header("scenario") String scenario, Callback<Response> cb);
 
     @POST("/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0")
-    void customRequestId() throws ServiceException;
+    Response customRequestId() throws ServiceException;
 
     @POST("/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0")
     void customRequestIdAsync(Callback<Response> cb);

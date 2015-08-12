@@ -15,6 +15,7 @@ import retrofit.client.Response;
 import fixtures.bodycomplex.models.Basic;
 import retrofit.http.GET;
 import retrofit.http.PUT;
+import retrofit.http.Body;
 
 public interface BasicOperations {
     @GET("/complex/basic/valid")
@@ -24,10 +25,10 @@ public interface BasicOperations {
     void getValidAsync(Callback<Basic> cb);
 
     @PUT("/complex/basic/valid")
-    void putValid(Basic complexBody) throws ServiceException;
+    Response putValid(@Body Basic complexBody) throws ServiceException;
 
     @PUT("/complex/basic/valid")
-    void putValidAsync(Basic complexBody, Callback<Response> cb);
+    void putValidAsync(@Body Basic complexBody, Callback<Response> cb);
 
     @GET("/complex/basic/invalid")
     Basic getInvalid() throws ServiceException;

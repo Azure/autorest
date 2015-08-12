@@ -15,6 +15,7 @@ import retrofit.client.Response;
 import fixtures.bodycomplex.models.Siamese;
 import retrofit.http.GET;
 import retrofit.http.PUT;
+import retrofit.http.Body;
 
 public interface Inheritance {
     @GET("/complex/inheritance/valid")
@@ -24,9 +25,9 @@ public interface Inheritance {
     void getValidAsync(Callback<Siamese> cb);
 
     @PUT("/complex/inheritance/valid")
-    void putValid(Siamese complexBody) throws ServiceException;
+    Response putValid(@Body Siamese complexBody) throws ServiceException;
 
     @PUT("/complex/inheritance/valid")
-    void putValidAsync(Siamese complexBody, Callback<Response> cb);
+    void putValidAsync(@Body Siamese complexBody, Callback<Response> cb);
 
 }

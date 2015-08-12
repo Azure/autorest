@@ -15,144 +15,145 @@ import retrofit.client.Response;
 import fixtures.url.models.UriColor;
 import java.util.Date;
 import retrofit.http.GET;
+import retrofit.http.Path;
 
 public interface Paths {
     @GET("/paths/bool/true/{boolPath}")
-    void getBooleanTrue(boolean boolPath) throws ServiceException;
+    Response getBooleanTrue(@Path("boolPath") boolean boolPath) throws ServiceException;
 
     @GET("/paths/bool/true/{boolPath}")
-    void getBooleanTrueAsync(boolean boolPath, Callback<Response> cb);
+    void getBooleanTrueAsync(@Path("boolPath") boolean boolPath, Callback<Response> cb);
 
     @GET("/paths/bool/false/{boolPath}")
-    void getBooleanFalse(boolean boolPath) throws ServiceException;
+    Response getBooleanFalse(@Path("boolPath") boolean boolPath) throws ServiceException;
 
     @GET("/paths/bool/false/{boolPath}")
-    void getBooleanFalseAsync(boolean boolPath, Callback<Response> cb);
+    void getBooleanFalseAsync(@Path("boolPath") boolean boolPath, Callback<Response> cb);
 
     @GET("/paths/int/1000000/{intPath}")
-    void getIntOneMillion(int intPath) throws ServiceException;
+    Response getIntOneMillion(@Path("intPath") int intPath) throws ServiceException;
 
     @GET("/paths/int/1000000/{intPath}")
-    void getIntOneMillionAsync(int intPath, Callback<Response> cb);
+    void getIntOneMillionAsync(@Path("intPath") int intPath, Callback<Response> cb);
 
     @GET("/paths/int/-1000000/{intPath}")
-    void getIntNegativeOneMillion(int intPath) throws ServiceException;
+    Response getIntNegativeOneMillion(@Path("intPath") int intPath) throws ServiceException;
 
     @GET("/paths/int/-1000000/{intPath}")
-    void getIntNegativeOneMillionAsync(int intPath, Callback<Response> cb);
+    void getIntNegativeOneMillionAsync(@Path("intPath") int intPath, Callback<Response> cb);
 
     @GET("/paths/long/10000000000/{longPath}")
-    void getTenBillion(long longPath) throws ServiceException;
+    Response getTenBillion(@Path("longPath") long longPath) throws ServiceException;
 
     @GET("/paths/long/10000000000/{longPath}")
-    void getTenBillionAsync(long longPath, Callback<Response> cb);
+    void getTenBillionAsync(@Path("longPath") long longPath, Callback<Response> cb);
 
     @GET("/paths/long/-10000000000/{longPath}")
-    void getNegativeTenBillion(long longPath) throws ServiceException;
+    Response getNegativeTenBillion(@Path("longPath") long longPath) throws ServiceException;
 
     @GET("/paths/long/-10000000000/{longPath}")
-    void getNegativeTenBillionAsync(long longPath, Callback<Response> cb);
+    void getNegativeTenBillionAsync(@Path("longPath") long longPath, Callback<Response> cb);
 
     @GET("/paths/float/1.034E+20/{floatPath}")
-    void floatScientificPositive(double floatPath) throws ServiceException;
+    Response floatScientificPositive(@Path("floatPath") double floatPath) throws ServiceException;
 
     @GET("/paths/float/1.034E+20/{floatPath}")
-    void floatScientificPositiveAsync(double floatPath, Callback<Response> cb);
+    void floatScientificPositiveAsync(@Path("floatPath") double floatPath, Callback<Response> cb);
 
     @GET("/paths/float/-1.034E-20/{floatPath}")
-    void floatScientificNegative(double floatPath) throws ServiceException;
+    Response floatScientificNegative(@Path("floatPath") double floatPath) throws ServiceException;
 
     @GET("/paths/float/-1.034E-20/{floatPath}")
-    void floatScientificNegativeAsync(double floatPath, Callback<Response> cb);
+    void floatScientificNegativeAsync(@Path("floatPath") double floatPath, Callback<Response> cb);
 
     @GET("/paths/double/9999999.999/{doublePath}")
-    void doubleDecimalPositive(double doublePath) throws ServiceException;
+    Response doubleDecimalPositive(@Path("doublePath") double doublePath) throws ServiceException;
 
     @GET("/paths/double/9999999.999/{doublePath}")
-    void doubleDecimalPositiveAsync(double doublePath, Callback<Response> cb);
+    void doubleDecimalPositiveAsync(@Path("doublePath") double doublePath, Callback<Response> cb);
 
     @GET("/paths/double/-9999999.999/{doublePath}")
-    void doubleDecimalNegative(double doublePath) throws ServiceException;
+    Response doubleDecimalNegative(@Path("doublePath") double doublePath) throws ServiceException;
 
     @GET("/paths/double/-9999999.999/{doublePath}")
-    void doubleDecimalNegativeAsync(double doublePath, Callback<Response> cb);
+    void doubleDecimalNegativeAsync(@Path("doublePath") double doublePath, Callback<Response> cb);
 
     @GET("/paths/string/unicode/{stringPath}")
-    void stringUnicode(String stringPath) throws ServiceException;
+    Response stringUnicode(@Path("stringPath") String stringPath) throws ServiceException;
 
     @GET("/paths/string/unicode/{stringPath}")
-    void stringUnicodeAsync(String stringPath, Callback<Response> cb);
+    void stringUnicodeAsync(@Path("stringPath") String stringPath, Callback<Response> cb);
 
     @GET("/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}")
-    void stringUrlEncoded(String stringPath) throws ServiceException;
+    Response stringUrlEncoded(@Path("stringPath") String stringPath) throws ServiceException;
 
     @GET("/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}")
-    void stringUrlEncodedAsync(String stringPath, Callback<Response> cb);
+    void stringUrlEncodedAsync(@Path("stringPath") String stringPath, Callback<Response> cb);
 
     @GET("/paths/string/empty/{stringPath}")
-    void stringEmpty(String stringPath) throws ServiceException;
+    Response stringEmpty(@Path("stringPath") String stringPath) throws ServiceException;
 
     @GET("/paths/string/empty/{stringPath}")
-    void stringEmptyAsync(String stringPath, Callback<Response> cb);
+    void stringEmptyAsync(@Path("stringPath") String stringPath, Callback<Response> cb);
 
     @GET("/paths/string/null/{stringPath}")
-    void stringNull(String stringPath) throws ServiceException;
+    Response stringNull(@Path("stringPath") String stringPath) throws ServiceException;
 
     @GET("/paths/string/null/{stringPath}")
-    void stringNullAsync(String stringPath, Callback<Response> cb);
+    void stringNullAsync(@Path("stringPath") String stringPath, Callback<Response> cb);
 
     @GET("/paths/enum/green%20color/{enumPath}")
-    void enumValid(UriColor enumPath) throws ServiceException;
+    Response enumValid(@Path("enumPath") UriColor enumPath) throws ServiceException;
 
     @GET("/paths/enum/green%20color/{enumPath}")
-    void enumValidAsync(UriColor enumPath, Callback<Response> cb);
+    void enumValidAsync(@Path("enumPath") UriColor enumPath, Callback<Response> cb);
 
     @GET("/paths/string/null/{enumPath}")
-    void enumNull(UriColor enumPath) throws ServiceException;
+    Response enumNull(@Path("enumPath") UriColor enumPath) throws ServiceException;
 
     @GET("/paths/string/null/{enumPath}")
-    void enumNullAsync(UriColor enumPath, Callback<Response> cb);
+    void enumNullAsync(@Path("enumPath") UriColor enumPath, Callback<Response> cb);
 
     @GET("/paths/byte/multibyte/{bytePath}")
-    void byteMultiByte(byte[] bytePath) throws ServiceException;
+    Response byteMultiByte(@Path("bytePath") byte[] bytePath) throws ServiceException;
 
     @GET("/paths/byte/multibyte/{bytePath}")
-    void byteMultiByteAsync(byte[] bytePath, Callback<Response> cb);
+    void byteMultiByteAsync(@Path("bytePath") byte[] bytePath, Callback<Response> cb);
 
     @GET("/paths/byte/empty/{bytePath}")
-    void byteEmpty(byte[] bytePath) throws ServiceException;
+    Response byteEmpty(@Path("bytePath") byte[] bytePath) throws ServiceException;
 
     @GET("/paths/byte/empty/{bytePath}")
-    void byteEmptyAsync(byte[] bytePath, Callback<Response> cb);
+    void byteEmptyAsync(@Path("bytePath") byte[] bytePath, Callback<Response> cb);
 
     @GET("/paths/byte/null/{bytePath}")
-    void byteNull(byte[] bytePath) throws ServiceException;
+    Response byteNull(@Path("bytePath") byte[] bytePath) throws ServiceException;
 
     @GET("/paths/byte/null/{bytePath}")
-    void byteNullAsync(byte[] bytePath, Callback<Response> cb);
+    void byteNullAsync(@Path("bytePath") byte[] bytePath, Callback<Response> cb);
 
     @GET("/paths/date/2012-01-01/{datePath}")
-    void dateValid(Date datePath) throws ServiceException;
+    Response dateValid(@Path("datePath") Date datePath) throws ServiceException;
 
     @GET("/paths/date/2012-01-01/{datePath}")
-    void dateValidAsync(Date datePath, Callback<Response> cb);
+    void dateValidAsync(@Path("datePath") Date datePath, Callback<Response> cb);
 
     @GET("/paths/date/null/{datePath}")
-    void dateNull(Date datePath) throws ServiceException;
+    Response dateNull(@Path("datePath") Date datePath) throws ServiceException;
 
     @GET("/paths/date/null/{datePath}")
-    void dateNullAsync(Date datePath, Callback<Response> cb);
+    void dateNullAsync(@Path("datePath") Date datePath, Callback<Response> cb);
 
     @GET("/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}")
-    void dateTimeValid(Date dateTimePath) throws ServiceException;
+    Response dateTimeValid(@Path("dateTimePath") Date dateTimePath) throws ServiceException;
 
     @GET("/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}")
-    void dateTimeValidAsync(Date dateTimePath, Callback<Response> cb);
+    void dateTimeValidAsync(@Path("dateTimePath") Date dateTimePath, Callback<Response> cb);
 
     @GET("/paths/datetime/null/{dateTimePath}")
-    void dateTimeNull(Date dateTimePath) throws ServiceException;
+    Response dateTimeNull(@Path("dateTimePath") Date dateTimePath) throws ServiceException;
 
     @GET("/paths/datetime/null/{dateTimePath}")
-    void dateTimeNullAsync(Date dateTimePath, Callback<Response> cb);
+    void dateTimeNullAsync(@Path("dateTimePath") Date dateTimePath, Callback<Response> cb);
 
 }
