@@ -38,11 +38,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AcceptanceTests.cs" />
-    <Compile Include="AcceptanceTestsBase.cs" />
-    <Compile Include="ProcessSync.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\..\AutoRest.Core\AutoRest.Core.csproj">
       <Project>{c876085f-9dc3-41f0-b7b4-17022cd84684}</Project>
       <Name>AutoRest.Core</Name>
@@ -71,9 +66,6 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="RegenerateExpectedClasses.ps1" />
-    <None Include="rspec">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="RspecTests\array_spec.rb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

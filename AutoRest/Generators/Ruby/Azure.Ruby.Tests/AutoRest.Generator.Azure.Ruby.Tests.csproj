@@ -76,9 +76,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AcceptanceTests.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
     <None Include="RspecTests\**\*.rb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
