@@ -10,6 +10,7 @@ using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Java.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
 using System.Globalization;
+using System.Text;
 
 namespace Microsoft.Rest.Generator.Java
 {
@@ -78,7 +79,25 @@ namespace Microsoft.Rest.Generator.Java
                 List<string> declarations = new List<string>();
                 foreach (var parameter in LocalParameters)
                 {
-                    declarations.Add(parameter.Type.ToString() + " " + parameter.Name);
+                    StringBuilder declarationBuilder = new StringBuilder();
+                    if (Url.Contains("{" + parameter.Name + "}"))
+                    {
+                        parameter.Location = ParameterLocation.Path;
+                    }
+                    if (parameter.Location == ParameterLocation.Path || 
+                        parameter.Location == ParameterLocation.Query ||
+                        parameter.Location == ParameterLocation.Header)
+                    {
+                        declarationBuilder.Append(string.Format("@{0}(\"{1}\") ", 
+                            parameter.Location.ToString(), 
+                            parameter.SerializedName));
+                    }
+                    else if (parameter.Location == ParameterLocation.Body)
+                    {
+                        declarationBuilder.Append(string.Format("@{0} ", parameter.Location.ToString()));
+                    }
+                    declarationBuilder.Append(parameter.Type.ToString() + " " + parameter.Name);
+                    declarations.Add(declarationBuilder.ToString());
                 }
 
                 var declaration = string.Join(", ", declarations);
@@ -130,53 +149,6 @@ namespace Microsoft.Rest.Generator.Java
         }
 
         /// <summary>
-        /// Returns list of parameters and their properties in (alphabetical order) that needs to be documented over a method.
-        /// This property does simple tree traversal using stack and hashtable for already visited complex types.
-        /// </summary>
-        public IEnumerable<ParameterTemplateModel> DocumentationParameters
-        {
-            get
-            {
-                var traversalStack = new Stack<ParameterTemplateModel>();
-                var visitedHash = new Dictionary<string, ParameterTemplateModel>();
-                var retValue = new List<ParameterTemplateModel>();
-
-                foreach (var param in LocalParameters)
-                {
-                    traversalStack.Push(param);
-                }
-
-                while (traversalStack.Count() != 0)
-                {
-                    var param = traversalStack.Pop();
-                    retValue.Add(param);
-                    if (param.Type is CompositeType)
-                    {
-                        if (!visitedHash.ContainsKey(param.Type.Name))
-                        {
-                            foreach (var property in ((CompositeType)param.Type).Properties)
-                            {
-                                if (property.IsReadOnly)
-                                {
-                                    continue;
-                                }
-
-                                var propertyParameter = new Parameter();
-                                propertyParameter.Type = property.Type;
-                                propertyParameter.Name = param.Name + "." + property.Name;
-                                propertyParameter.Documentation = property.Documentation;
-                                traversalStack.Push(new ParameterTemplateModel(propertyParameter));
-                            }
-                            visitedHash.Add(param.Type.Name, new ParameterTemplateModel(param));
-                        }
-                    }
-                }
-
-                return retValue.OrderBy(p => p.Name).ToList();
-            }
-        }
-
-        /// <summary>
         /// Get the type name for the method's return type
         /// </summary>
         public string ReturnTypeString
@@ -187,7 +159,7 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     return ReturnType.Name;
                 }
-                return "void";
+                return "Response";
             }
         }
 

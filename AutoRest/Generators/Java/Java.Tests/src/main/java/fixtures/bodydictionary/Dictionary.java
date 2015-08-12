@@ -18,6 +18,7 @@ import fixtures.bodydictionary.models.Widget;
 import java.util.List;
 import retrofit.http.GET;
 import retrofit.http.PUT;
+import retrofit.http.Body;
 
 public interface Dictionary {
     @GET("/dictionary/null")
@@ -33,10 +34,10 @@ public interface Dictionary {
     void getEmptyAsync(Callback<Map<String, Integer>> cb);
 
     @PUT("/dictionary/empty")
-    void putEmpty(Map<String, String> arrayBody) throws ServiceException;
+    Response putEmpty(@Body Map<String, String> arrayBody) throws ServiceException;
 
     @PUT("/dictionary/empty")
-    void putEmptyAsync(Map<String, String> arrayBody, Callback<Response> cb);
+    void putEmptyAsync(@Body Map<String, String> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/nullvalue")
     Map<String, String> getNullValue() throws ServiceException;
@@ -69,10 +70,10 @@ public interface Dictionary {
     void getBooleanTfftAsync(Callback<Map<String, Boolean>> cb);
 
     @PUT("/dictionary/prim/boolean/tfft")
-    void putBooleanTfft(Map<String, Boolean> arrayBody) throws ServiceException;
+    Response putBooleanTfft(@Body Map<String, Boolean> arrayBody) throws ServiceException;
 
     @PUT("/dictionary/prim/boolean/tfft")
-    void putBooleanTfftAsync(Map<String, Boolean> arrayBody, Callback<Response> cb);
+    void putBooleanTfftAsync(@Body Map<String, Boolean> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/prim/boolean/true.null.false")
     Map<String, Boolean> getBooleanInvalidNull() throws ServiceException;
@@ -93,10 +94,10 @@ public interface Dictionary {
     void getIntegerValidAsync(Callback<Map<String, Integer>> cb);
 
     @PUT("/dictionary/prim/integer/1.-1.3.300")
-    void putIntegerValid(Map<String, Integer> arrayBody) throws ServiceException;
+    Response putIntegerValid(@Body Map<String, Integer> arrayBody) throws ServiceException;
 
     @PUT("/dictionary/prim/integer/1.-1.3.300")
-    void putIntegerValidAsync(Map<String, Integer> arrayBody, Callback<Response> cb);
+    void putIntegerValidAsync(@Body Map<String, Integer> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/prim/integer/1.null.zero")
     Map<String, Integer> getIntInvalidNull() throws ServiceException;
@@ -117,10 +118,10 @@ public interface Dictionary {
     void getLongValidAsync(Callback<Map<String, Long>> cb);
 
     @PUT("/dictionary/prim/long/1.-1.3.300")
-    void putLongValid(Map<String, Long> arrayBody) throws ServiceException;
+    Response putLongValid(@Body Map<String, Long> arrayBody) throws ServiceException;
 
     @PUT("/dictionary/prim/long/1.-1.3.300")
-    void putLongValidAsync(Map<String, Long> arrayBody, Callback<Response> cb);
+    void putLongValidAsync(@Body Map<String, Long> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/prim/long/1.null.zero")
     Map<String, Long> getLongInvalidNull() throws ServiceException;
@@ -141,10 +142,10 @@ public interface Dictionary {
     void getFloatValidAsync(Callback<Map<String, Double>> cb);
 
     @PUT("/dictionary/prim/float/0--0.01-1.2e20")
-    void putFloatValid(Map<String, Double> arrayBody) throws ServiceException;
+    Response putFloatValid(@Body Map<String, Double> arrayBody) throws ServiceException;
 
     @PUT("/dictionary/prim/float/0--0.01-1.2e20")
-    void putFloatValidAsync(Map<String, Double> arrayBody, Callback<Response> cb);
+    void putFloatValidAsync(@Body Map<String, Double> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/prim/float/0.0-null-1.2e20")
     Map<String, Double> getFloatInvalidNull() throws ServiceException;
@@ -165,10 +166,10 @@ public interface Dictionary {
     void getDoubleValidAsync(Callback<Map<String, Double>> cb);
 
     @PUT("/dictionary/prim/double/0--0.01-1.2e20")
-    void putDoubleValid(Map<String, Double> arrayBody) throws ServiceException;
+    Response putDoubleValid(@Body Map<String, Double> arrayBody) throws ServiceException;
 
     @PUT("/dictionary/prim/double/0--0.01-1.2e20")
-    void putDoubleValidAsync(Map<String, Double> arrayBody, Callback<Response> cb);
+    void putDoubleValidAsync(@Body Map<String, Double> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/prim/double/0.0-null-1.2e20")
     Map<String, Double> getDoubleInvalidNull() throws ServiceException;
@@ -189,10 +190,10 @@ public interface Dictionary {
     void getStringValidAsync(Callback<Map<String, String>> cb);
 
     @PUT("/dictionary/prim/string/foo1.foo2.foo3")
-    void putStringValid(Map<String, String> arrayBody) throws ServiceException;
+    Response putStringValid(@Body Map<String, String> arrayBody) throws ServiceException;
 
     @PUT("/dictionary/prim/string/foo1.foo2.foo3")
-    void putStringValidAsync(Map<String, String> arrayBody, Callback<Response> cb);
+    void putStringValidAsync(@Body Map<String, String> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/prim/string/foo.null.foo2")
     Map<String, String> getStringWithNull() throws ServiceException;
@@ -213,10 +214,10 @@ public interface Dictionary {
     void getDateValidAsync(Callback<Map<String, Date>> cb);
 
     @PUT("/dictionary/prim/date/valid")
-    void putDateValid(Map<String, Date> arrayBody) throws ServiceException;
+    Response putDateValid(@Body Map<String, Date> arrayBody) throws ServiceException;
 
     @PUT("/dictionary/prim/date/valid")
-    void putDateValidAsync(Map<String, Date> arrayBody, Callback<Response> cb);
+    void putDateValidAsync(@Body Map<String, Date> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/prim/date/invalidnull")
     Map<String, Date> getDateInvalidNull() throws ServiceException;
@@ -237,10 +238,10 @@ public interface Dictionary {
     void getDateTimeValidAsync(Callback<Map<String, Date>> cb);
 
     @PUT("/dictionary/prim/date-time/valid")
-    void putDateTimeValid(Map<String, Date> arrayBody) throws ServiceException;
+    Response putDateTimeValid(@Body Map<String, Date> arrayBody) throws ServiceException;
 
     @PUT("/dictionary/prim/date-time/valid")
-    void putDateTimeValidAsync(Map<String, Date> arrayBody, Callback<Response> cb);
+    void putDateTimeValidAsync(@Body Map<String, Date> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/prim/date-time/invalidnull")
     Map<String, Date> getDateTimeInvalidNull() throws ServiceException;
@@ -261,10 +262,10 @@ public interface Dictionary {
     void getByteValidAsync(Callback<Map<String, Byte[]>> cb);
 
     @PUT("/dictionary/prim/byte/valid")
-    void putByteValid(Map<String, Byte[]> arrayBody) throws ServiceException;
+    Response putByteValid(@Body Map<String, Byte[]> arrayBody) throws ServiceException;
 
     @PUT("/dictionary/prim/byte/valid")
-    void putByteValidAsync(Map<String, Byte[]> arrayBody, Callback<Response> cb);
+    void putByteValidAsync(@Body Map<String, Byte[]> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/prim/byte/invalidnull")
     Map<String, Byte[]> getByteInvalidNull() throws ServiceException;
@@ -303,10 +304,10 @@ public interface Dictionary {
     void getComplexValidAsync(Callback<Map<String, Widget>> cb);
 
     @PUT("/dictionary/complex/valid")
-    void putComplexValid(Map<String, Widget> arrayBody) throws ServiceException;
+    Response putComplexValid(@Body Map<String, Widget> arrayBody) throws ServiceException;
 
     @PUT("/dictionary/complex/valid")
-    void putComplexValidAsync(Map<String, Widget> arrayBody, Callback<Response> cb);
+    void putComplexValidAsync(@Body Map<String, Widget> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/array/null")
     Map<String, List<String>> getArrayNull() throws ServiceException;
@@ -339,10 +340,10 @@ public interface Dictionary {
     void getArrayValidAsync(Callback<Map<String, List<String>>> cb);
 
     @PUT("/dictionary/array/valid")
-    void putArrayValid(Map<String, List<String>> arrayBody) throws ServiceException;
+    Response putArrayValid(@Body Map<String, List<String>> arrayBody) throws ServiceException;
 
     @PUT("/dictionary/array/valid")
-    void putArrayValidAsync(Map<String, List<String>> arrayBody, Callback<Response> cb);
+    void putArrayValidAsync(@Body Map<String, List<String>> arrayBody, Callback<Response> cb);
 
     @GET("/dictionary/dictionary/null")
     Map<String, Map<String, String>> getDictionaryNull() throws ServiceException;
@@ -375,9 +376,9 @@ public interface Dictionary {
     void getDictionaryValidAsync(Callback<Map<String, Map<String, String>>> cb);
 
     @PUT("/dictionary/dictionary/valid")
-    void putDictionaryValid(Map<String, Map<String, String>> arrayBody) throws ServiceException;
+    Response putDictionaryValid(@Body Map<String, Map<String, String>> arrayBody) throws ServiceException;
 
     @PUT("/dictionary/dictionary/valid")
-    void putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody, Callback<Response> cb);
+    void putDictionaryValidAsync(@Body Map<String, Map<String, String>> arrayBody, Callback<Response> cb);
 
 }

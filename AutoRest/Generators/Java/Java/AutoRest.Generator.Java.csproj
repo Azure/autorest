@@ -51,9 +51,6 @@
     <Compile Include="Templates\MethodStreamPipelineTemplate.cs">
       <DependentUpon>MethodStreamPipelineTemplate.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Templates\MethodTemplate.cs">
-      <DependentUpon>MethodTemplate.cshtml</DependentUpon>
-    </Compile>
     <Compile Include="Templates\ModelTemplate.cs">
       <DependentUpon>ModelTemplate.cshtml</DependentUpon>
     </Compile>
@@ -70,7 +67,6 @@
     <None Include="Templates\ModelTemplate.cshtml" />
     <None Include="Templates\ServiceClientInterfaceTemplate.cshtml" />
     <None Include="Templates\ServiceClientTemplate.cshtml" />
-    <None Include="Templates\MethodTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\AutoRest.Core\AutoRest.Core.csproj">

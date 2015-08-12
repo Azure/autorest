@@ -15,6 +15,7 @@ import retrofit.client.Response;
 import java.util.Date;
 import retrofit.http.GET;
 import retrofit.http.PUT;
+import retrofit.http.Body;
 
 public interface DateOperations {
     @GET("/date/null")
@@ -42,10 +43,10 @@ public interface DateOperations {
     void getUnderflowDateAsync(Callback<Date> cb);
 
     @PUT("/date/max")
-    void putMaxDate(Date dateBody) throws ServiceException;
+    Response putMaxDate(@Body Date dateBody) throws ServiceException;
 
     @PUT("/date/max")
-    void putMaxDateAsync(Date dateBody, Callback<Response> cb);
+    void putMaxDateAsync(@Body Date dateBody, Callback<Response> cb);
 
     @GET("/date/max")
     Date getMaxDate() throws ServiceException;
@@ -54,10 +55,10 @@ public interface DateOperations {
     void getMaxDateAsync(Callback<Date> cb);
 
     @PUT("/date/min")
-    void putMinDate(Date dateBody) throws ServiceException;
+    Response putMinDate(@Body Date dateBody) throws ServiceException;
 
     @PUT("/date/min")
-    void putMinDateAsync(Date dateBody, Callback<Response> cb);
+    void putMinDateAsync(@Body Date dateBody, Callback<Response> cb);
 
     @GET("/date/min")
     Date getMinDate() throws ServiceException;

@@ -15,13 +15,14 @@ import retrofit.client.Response;
 import retrofit.http.HEAD;
 import retrofit.http.GET;
 import retrofit.http.PUT;
+import retrofit.http.Body;
 import retrofit.http.PATCH;
 import retrofit.http.POST;
 import retrofit.http.DELETE;
 
 public interface HttpSuccess {
     @HEAD("/http/success/200")
-    void head200() throws ServiceException;
+    Response head200() throws ServiceException;
 
     @HEAD("/http/success/200")
     void head200Async(Callback<Response> cb);
@@ -33,97 +34,97 @@ public interface HttpSuccess {
     void get200Async(Callback<Boolean> cb);
 
     @PUT("/http/success/200")
-    void put200(Boolean booleanValue) throws ServiceException;
+    Response put200(@Body Boolean booleanValue) throws ServiceException;
 
     @PUT("/http/success/200")
-    void put200Async(Boolean booleanValue, Callback<Response> cb);
+    void put200Async(@Body Boolean booleanValue, Callback<Response> cb);
 
     @PATCH("/http/success/200")
-    void patch200(Boolean booleanValue) throws ServiceException;
+    Response patch200(@Body Boolean booleanValue) throws ServiceException;
 
     @PATCH("/http/success/200")
-    void patch200Async(Boolean booleanValue, Callback<Response> cb);
+    void patch200Async(@Body Boolean booleanValue, Callback<Response> cb);
 
     @POST("/http/success/200")
-    void post200(Boolean booleanValue) throws ServiceException;
+    Response post200(@Body Boolean booleanValue) throws ServiceException;
 
     @POST("/http/success/200")
-    void post200Async(Boolean booleanValue, Callback<Response> cb);
+    void post200Async(@Body Boolean booleanValue, Callback<Response> cb);
 
     @DELETE("/http/success/200")
-    void delete200(Boolean booleanValue) throws ServiceException;
+    Response delete200(@Body Boolean booleanValue) throws ServiceException;
 
     @DELETE("/http/success/200")
-    void delete200Async(Boolean booleanValue, Callback<Response> cb);
+    void delete200Async(@Body Boolean booleanValue, Callback<Response> cb);
 
     @PUT("/http/success/201")
-    void put201(Boolean booleanValue) throws ServiceException;
+    Response put201(@Body Boolean booleanValue) throws ServiceException;
 
     @PUT("/http/success/201")
-    void put201Async(Boolean booleanValue, Callback<Response> cb);
+    void put201Async(@Body Boolean booleanValue, Callback<Response> cb);
 
     @POST("/http/success/201")
-    void post201(Boolean booleanValue) throws ServiceException;
+    Response post201(@Body Boolean booleanValue) throws ServiceException;
 
     @POST("/http/success/201")
-    void post201Async(Boolean booleanValue, Callback<Response> cb);
+    void post201Async(@Body Boolean booleanValue, Callback<Response> cb);
 
     @PUT("/http/success/202")
-    void put202(Boolean booleanValue) throws ServiceException;
+    Response put202(@Body Boolean booleanValue) throws ServiceException;
 
     @PUT("/http/success/202")
-    void put202Async(Boolean booleanValue, Callback<Response> cb);
+    void put202Async(@Body Boolean booleanValue, Callback<Response> cb);
 
     @PATCH("/http/success/202")
-    void patch202(Boolean booleanValue) throws ServiceException;
+    Response patch202(@Body Boolean booleanValue) throws ServiceException;
 
     @PATCH("/http/success/202")
-    void patch202Async(Boolean booleanValue, Callback<Response> cb);
+    void patch202Async(@Body Boolean booleanValue, Callback<Response> cb);
 
     @POST("/http/success/202")
-    void post202(Boolean booleanValue) throws ServiceException;
+    Response post202(@Body Boolean booleanValue) throws ServiceException;
 
     @POST("/http/success/202")
-    void post202Async(Boolean booleanValue, Callback<Response> cb);
+    void post202Async(@Body Boolean booleanValue, Callback<Response> cb);
 
     @DELETE("/http/success/202")
-    void delete202(Boolean booleanValue) throws ServiceException;
+    Response delete202(@Body Boolean booleanValue) throws ServiceException;
 
     @DELETE("/http/success/202")
-    void delete202Async(Boolean booleanValue, Callback<Response> cb);
+    void delete202Async(@Body Boolean booleanValue, Callback<Response> cb);
 
     @HEAD("/http/success/204")
-    void head204() throws ServiceException;
+    Response head204() throws ServiceException;
 
     @HEAD("/http/success/204")
     void head204Async(Callback<Response> cb);
 
     @PUT("/http/success/204")
-    void put204(Boolean booleanValue) throws ServiceException;
+    Response put204(@Body Boolean booleanValue) throws ServiceException;
 
     @PUT("/http/success/204")
-    void put204Async(Boolean booleanValue, Callback<Response> cb);
+    void put204Async(@Body Boolean booleanValue, Callback<Response> cb);
 
     @PATCH("/http/success/204")
-    void patch204(Boolean booleanValue) throws ServiceException;
+    Response patch204(@Body Boolean booleanValue) throws ServiceException;
 
     @PATCH("/http/success/204")
-    void patch204Async(Boolean booleanValue, Callback<Response> cb);
+    void patch204Async(@Body Boolean booleanValue, Callback<Response> cb);
 
     @POST("/http/success/204")
-    void post204(Boolean booleanValue) throws ServiceException;
+    Response post204(@Body Boolean booleanValue) throws ServiceException;
 
     @POST("/http/success/204")
-    void post204Async(Boolean booleanValue, Callback<Response> cb);
+    void post204Async(@Body Boolean booleanValue, Callback<Response> cb);
 
     @DELETE("/http/success/204")
-    void delete204(Boolean booleanValue) throws ServiceException;
+    Response delete204(@Body Boolean booleanValue) throws ServiceException;
 
     @DELETE("/http/success/204")
-    void delete204Async(Boolean booleanValue, Callback<Response> cb);
+    void delete204Async(@Body Boolean booleanValue, Callback<Response> cb);
 
     @HEAD("/http/success/404")
-    void head404() throws ServiceException;
+    Response head404() throws ServiceException;
 
     @HEAD("/http/success/404")
     void head404Async(Callback<Response> cb);

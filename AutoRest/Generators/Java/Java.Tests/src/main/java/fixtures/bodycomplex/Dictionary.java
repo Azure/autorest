@@ -15,6 +15,7 @@ import retrofit.client.Response;
 import fixtures.bodycomplex.models.DictionaryWrapper;
 import retrofit.http.GET;
 import retrofit.http.PUT;
+import retrofit.http.Body;
 
 public interface Dictionary {
     @GET("/complex/dictionary/typed/valid")
@@ -24,10 +25,10 @@ public interface Dictionary {
     void getValidAsync(Callback<DictionaryWrapper> cb);
 
     @PUT("/complex/dictionary/typed/valid")
-    void putValid(DictionaryWrapper complexBody) throws ServiceException;
+    Response putValid(@Body DictionaryWrapper complexBody) throws ServiceException;
 
     @PUT("/complex/dictionary/typed/valid")
-    void putValidAsync(DictionaryWrapper complexBody, Callback<Response> cb);
+    void putValidAsync(@Body DictionaryWrapper complexBody, Callback<Response> cb);
 
     @GET("/complex/dictionary/typed/empty")
     DictionaryWrapper getEmpty() throws ServiceException;
@@ -36,10 +37,10 @@ public interface Dictionary {
     void getEmptyAsync(Callback<DictionaryWrapper> cb);
 
     @PUT("/complex/dictionary/typed/empty")
-    void putEmpty(DictionaryWrapper complexBody) throws ServiceException;
+    Response putEmpty(@Body DictionaryWrapper complexBody) throws ServiceException;
 
     @PUT("/complex/dictionary/typed/empty")
-    void putEmptyAsync(DictionaryWrapper complexBody, Callback<Response> cb);
+    void putEmptyAsync(@Body DictionaryWrapper complexBody, Callback<Response> cb);
 
     @GET("/complex/dictionary/typed/null")
     DictionaryWrapper getNull() throws ServiceException;

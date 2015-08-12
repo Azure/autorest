@@ -9,7 +9,7 @@ package com.microsoft.rest;
 
 import com.microsoft.rest.bat.AutoRestIntegerTestService;
 import com.microsoft.rest.bat.AutoRestIntegerTestServiceImpl;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -20,32 +20,35 @@ public class AutoRestIntegerTestServiceTests {
     @Test
     public void PutMaxInt() throws Exception {
         AutoRestIntegerTestService client = new AutoRestIntegerTestServiceImpl();
-        try {
-            Response response = client.getIntOperations().putMax32(Integer.MAX_VALUE);
-            Assert.assertEquals(200, response.getStatus());
-        } catch (Exception ex) {
-            System.out.println(ex.toString());
-        }
+        Response response = client.getIntOperations().putMax32(Integer.MAX_VALUE);
+        Assert.assertEquals(200, response.getStatus());
     }
 
     @Test
     public void GetNullInt() throws Exception {
         AutoRestIntegerTestService client = new AutoRestIntegerTestServiceImpl();
         try {
-            client.getIntOperations().getNullAsync(new Callback<Response>() {
-                @Override
-                public void success(Response response, Response response2) {
-
-                }
-
-                @Override
-                public void failure(RetrofitError error) {
-
-                }
-            });
-            Assert.assertEquals(200, response.getStatus());
-        } catch (Exception ex) {
-            System.out.println(ex.toString());
+            client.getIntOperations().getNull();
+        } catch (NullPointerException exception) {
+            return;
         }
+        Assert.assertTrue(false);
+    }
+
+    @Test
+    public void GetNullIntAsync() throws Exception {
+        AutoRestIntegerTestService client = new AutoRestIntegerTestServiceImpl();
+        client.getIntOperations().getNullAsync(new Callback<Integer>() {
+            @Override
+            public void success(Integer integer, Response response) {
+                Assert.assertNull(integer);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                throw error;
+            }
+        });
+        Thread.sleep(1000);
     }
 }

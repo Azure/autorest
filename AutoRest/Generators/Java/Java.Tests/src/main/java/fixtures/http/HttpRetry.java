@@ -14,6 +14,7 @@ import retrofit.Callback;
 import retrofit.client.Response;
 import retrofit.http.HEAD;
 import retrofit.http.PUT;
+import retrofit.http.Body;
 import retrofit.http.PATCH;
 import retrofit.http.GET;
 import retrofit.http.POST;
@@ -21,51 +22,51 @@ import retrofit.http.DELETE;
 
 public interface HttpRetry {
     @HEAD("/http/retry/408")
-    void head408() throws ServiceException;
+    Response head408() throws ServiceException;
 
     @HEAD("/http/retry/408")
     void head408Async(Callback<Response> cb);
 
     @PUT("/http/retry/500")
-    void put500(Boolean booleanValue) throws ServiceException;
+    Response put500(@Body Boolean booleanValue) throws ServiceException;
 
     @PUT("/http/retry/500")
-    void put500Async(Boolean booleanValue, Callback<Response> cb);
+    void put500Async(@Body Boolean booleanValue, Callback<Response> cb);
 
     @PATCH("/http/retry/500")
-    void patch500(Boolean booleanValue) throws ServiceException;
+    Response patch500(@Body Boolean booleanValue) throws ServiceException;
 
     @PATCH("/http/retry/500")
-    void patch500Async(Boolean booleanValue, Callback<Response> cb);
+    void patch500Async(@Body Boolean booleanValue, Callback<Response> cb);
 
     @GET("/http/retry/502")
-    void get502() throws ServiceException;
+    Response get502() throws ServiceException;
 
     @GET("/http/retry/502")
     void get502Async(Callback<Response> cb);
 
     @POST("/http/retry/503")
-    void post503(Boolean booleanValue) throws ServiceException;
+    Response post503(@Body Boolean booleanValue) throws ServiceException;
 
     @POST("/http/retry/503")
-    void post503Async(Boolean booleanValue, Callback<Response> cb);
+    void post503Async(@Body Boolean booleanValue, Callback<Response> cb);
 
     @DELETE("/http/retry/503")
-    void delete503(Boolean booleanValue) throws ServiceException;
+    Response delete503(@Body Boolean booleanValue) throws ServiceException;
 
     @DELETE("/http/retry/503")
-    void delete503Async(Boolean booleanValue, Callback<Response> cb);
+    void delete503Async(@Body Boolean booleanValue, Callback<Response> cb);
 
     @PUT("/http/retry/504")
-    void put504(Boolean booleanValue) throws ServiceException;
+    Response put504(@Body Boolean booleanValue) throws ServiceException;
 
     @PUT("/http/retry/504")
-    void put504Async(Boolean booleanValue, Callback<Response> cb);
+    void put504Async(@Body Boolean booleanValue, Callback<Response> cb);
 
     @PATCH("/http/retry/504")
-    void patch504(Boolean booleanValue) throws ServiceException;
+    Response patch504(@Body Boolean booleanValue) throws ServiceException;
 
     @PATCH("/http/retry/504")
-    void patch504Async(Boolean booleanValue, Callback<Response> cb);
+    void patch504Async(@Body Boolean booleanValue, Callback<Response> cb);
 
 }

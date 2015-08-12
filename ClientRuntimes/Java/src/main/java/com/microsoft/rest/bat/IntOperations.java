@@ -9,27 +9,52 @@ package com.microsoft.rest.bat;
 
 import com.microsoft.rest.ServiceException;
 import retrofit.Callback;
+import retrofit.RestAdapter;
 import retrofit.client.Response;
 import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.PUT;
 
-public interface IntOperations {
-    @GET("/int/null")
-    int getNull();
+public class IntOperations {
+    private IntService service;
 
-    @GET("/int/null")
-    void getNullAsync(Callback<Integer> cb);
+    public IntOperations(RestAdapter restAdapter) {
+        service = restAdapter.create(IntService.class);
+    }
 
-    @GET("/int/invalid")
-    int getInvalid();
+    private interface IntService {
+        @GET("/int/null")
+        int getNull() throws ServiceException;
 
-    @GET("/int/invalid")
-    void getInvalidAsync(Callback<Integer> cb);
+        @GET("/int/null")
+        void getNullAsync(Callback<Integer> cb);
 
-    @PUT("/int/max/32")
-    void putMax32(@Body int intBody) throws ServiceException;
+        @GET("/int/invalid")
+        int getInvalid() throws ServiceException;
 
-    @PUT("/int/max/32")
-    void putMax32Async(Callback<Response> cb) throws ServiceException;
+        @GET("/int/invalid")
+        void getInvalidAsync(Callback<Integer> cb);
+
+        @PUT("/int/max/32")
+        Response putMax32(@Body int intBody) throws ServiceException;
+
+        @PUT("/int/max/32")
+        void putMax32Async(@Body int intBody, Callback<Response> cb);
+    }
+
+    public int getNull() throws ServiceException {
+        return service.getNull();
+    }
+
+    public void getNullAsync(Callback<Integer> cb) {
+        service.getNullAsync(cb);
+    }
+
+    public Response putMax32(int intBody) throws ServiceException {
+        return service.putMax32(intBody);
+    }
+
+    public void putMax32Async(int intBody, Callback<Response> cb) {
+        service.putMax32Async(intBody, cb);
+    }
 }

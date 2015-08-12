@@ -15,6 +15,7 @@ import retrofit.client.Response;
 import java.util.Date;
 import retrofit.http.GET;
 import retrofit.http.PUT;
+import retrofit.http.Body;
 
 public interface DatetimeOperations {
     @GET("/datetime/null")
@@ -42,10 +43,10 @@ public interface DatetimeOperations {
     void getUnderflowAsync(Callback<Date> cb);
 
     @PUT("/datetime/max/utc")
-    void putUtcMaxDateTime(Date datetimeBody) throws ServiceException;
+    Response putUtcMaxDateTime(@Body Date datetimeBody) throws ServiceException;
 
     @PUT("/datetime/max/utc")
-    void putUtcMaxDateTimeAsync(Date datetimeBody, Callback<Response> cb);
+    void putUtcMaxDateTimeAsync(@Body Date datetimeBody, Callback<Response> cb);
 
     @GET("/datetime/max/utc/lowercase")
     Date getUtcLowercaseMaxDateTime() throws ServiceException;
@@ -60,10 +61,10 @@ public interface DatetimeOperations {
     void getUtcUppercaseMaxDateTimeAsync(Callback<Date> cb);
 
     @PUT("/datetime/max/localpositiveoffset")
-    void putLocalPositiveOffsetMaxDateTime(Date datetimeBody) throws ServiceException;
+    Response putLocalPositiveOffsetMaxDateTime(@Body Date datetimeBody) throws ServiceException;
 
     @PUT("/datetime/max/localpositiveoffset")
-    void putLocalPositiveOffsetMaxDateTimeAsync(Date datetimeBody, Callback<Response> cb);
+    void putLocalPositiveOffsetMaxDateTimeAsync(@Body Date datetimeBody, Callback<Response> cb);
 
     @GET("/datetime/max/localpositiveoffset/lowercase")
     Date getLocalPositiveOffsetLowercaseMaxDateTime() throws ServiceException;
@@ -78,10 +79,10 @@ public interface DatetimeOperations {
     void getLocalPositiveOffsetUppercaseMaxDateTimeAsync(Callback<Date> cb);
 
     @PUT("/datetime/max/localnegativeoffset")
-    void putLocalNegativeOffsetMaxDateTime(Date datetimeBody) throws ServiceException;
+    Response putLocalNegativeOffsetMaxDateTime(@Body Date datetimeBody) throws ServiceException;
 
     @PUT("/datetime/max/localnegativeoffset")
-    void putLocalNegativeOffsetMaxDateTimeAsync(Date datetimeBody, Callback<Response> cb);
+    void putLocalNegativeOffsetMaxDateTimeAsync(@Body Date datetimeBody, Callback<Response> cb);
 
     @GET("/datetime/max/localnegativeoffset/uppercase")
     Date getLocalNegativeOffsetUppercaseMaxDateTime() throws ServiceException;
@@ -96,10 +97,10 @@ public interface DatetimeOperations {
     void getLocalNegativeOffsetLowercaseMaxDateTimeAsync(Callback<Date> cb);
 
     @PUT("/datetime/min/utc")
-    void putUtcMinDateTime(Date datetimeBody) throws ServiceException;
+    Response putUtcMinDateTime(@Body Date datetimeBody) throws ServiceException;
 
     @PUT("/datetime/min/utc")
-    void putUtcMinDateTimeAsync(Date datetimeBody, Callback<Response> cb);
+    void putUtcMinDateTimeAsync(@Body Date datetimeBody, Callback<Response> cb);
 
     @GET("/datetime/min/utc")
     Date getUtcMinDateTime() throws ServiceException;
@@ -108,10 +109,10 @@ public interface DatetimeOperations {
     void getUtcMinDateTimeAsync(Callback<Date> cb);
 
     @PUT("/datetime/min/localpositiveoffset")
-    void putLocalPositiveOffsetMinDateTime(Date datetimeBody) throws ServiceException;
+    Response putLocalPositiveOffsetMinDateTime(@Body Date datetimeBody) throws ServiceException;
 
     @PUT("/datetime/min/localpositiveoffset")
-    void putLocalPositiveOffsetMinDateTimeAsync(Date datetimeBody, Callback<Response> cb);
+    void putLocalPositiveOffsetMinDateTimeAsync(@Body Date datetimeBody, Callback<Response> cb);
 
     @GET("/datetime/min/localpositiveoffset")
     Date getLocalPositiveOffsetMinDateTime() throws ServiceException;
@@ -120,10 +121,10 @@ public interface DatetimeOperations {
     void getLocalPositiveOffsetMinDateTimeAsync(Callback<Date> cb);
 
     @PUT("/datetime/min/localnegativeoffset")
-    void putLocalNegativeOffsetMinDateTime(Date datetimeBody) throws ServiceException;
+    Response putLocalNegativeOffsetMinDateTime(@Body Date datetimeBody) throws ServiceException;
 
     @PUT("/datetime/min/localnegativeoffset")
-    void putLocalNegativeOffsetMinDateTimeAsync(Date datetimeBody, Callback<Response> cb);
+    void putLocalNegativeOffsetMinDateTimeAsync(@Body Date datetimeBody, Callback<Response> cb);
 
     @GET("/datetime/min/localnegativeoffset")
     Date getLocalNegativeOffsetMinDateTime() throws ServiceException;

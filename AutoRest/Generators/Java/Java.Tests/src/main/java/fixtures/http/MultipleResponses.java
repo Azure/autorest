@@ -89,43 +89,43 @@ public interface MultipleResponses {
     void get200ModelA201ModelC404ModelDDefaultError400ValidAsync(Callback<Object> cb);
 
     @GET("/http/payloads/202/none/204/none/default/Error/response/202/none")
-    void get202None204NoneDefaultError202None() throws ServiceException;
+    Response get202None204NoneDefaultError202None() throws ServiceException;
 
     @GET("/http/payloads/202/none/204/none/default/Error/response/202/none")
     void get202None204NoneDefaultError202NoneAsync(Callback<Response> cb);
 
     @GET("/http/payloads/202/none/204/none/default/Error/response/204/none")
-    void get202None204NoneDefaultError204None() throws ServiceException;
+    Response get202None204NoneDefaultError204None() throws ServiceException;
 
     @GET("/http/payloads/202/none/204/none/default/Error/response/204/none")
     void get202None204NoneDefaultError204NoneAsync(Callback<Response> cb);
 
     @GET("/http/payloads/202/none/204/none/default/Error/response/400/valid")
-    void get202None204NoneDefaultError400Valid() throws ServiceException;
+    Response get202None204NoneDefaultError400Valid() throws ServiceException;
 
     @GET("/http/payloads/202/none/204/none/default/Error/response/400/valid")
     void get202None204NoneDefaultError400ValidAsync(Callback<Response> cb);
 
     @GET("/http/payloads/202/none/204/none/default/none/response/202/invalid")
-    void get202None204NoneDefaultNone202Invalid() throws ServiceException;
+    Response get202None204NoneDefaultNone202Invalid() throws ServiceException;
 
     @GET("/http/payloads/202/none/204/none/default/none/response/202/invalid")
     void get202None204NoneDefaultNone202InvalidAsync(Callback<Response> cb);
 
     @GET("/http/payloads/202/none/204/none/default/none/response/204/none")
-    void get202None204NoneDefaultNone204None() throws ServiceException;
+    Response get202None204NoneDefaultNone204None() throws ServiceException;
 
     @GET("/http/payloads/202/none/204/none/default/none/response/204/none")
     void get202None204NoneDefaultNone204NoneAsync(Callback<Response> cb);
 
     @GET("/http/payloads/202/none/204/none/default/none/response/400/none")
-    void get202None204NoneDefaultNone400None() throws ServiceException;
+    Response get202None204NoneDefaultNone400None() throws ServiceException;
 
     @GET("/http/payloads/202/none/204/none/default/none/response/400/none")
     void get202None204NoneDefaultNone400NoneAsync(Callback<Response> cb);
 
     @GET("/http/payloads/202/none/204/none/default/none/response/400/invalid")
-    void get202None204NoneDefaultNone400Invalid() throws ServiceException;
+    Response get202None204NoneDefaultNone400Invalid() throws ServiceException;
 
     @GET("/http/payloads/202/none/204/none/default/none/response/400/invalid")
     void get202None204NoneDefaultNone400InvalidAsync(Callback<Response> cb);
@@ -155,25 +155,25 @@ public interface MultipleResponses {
     void getDefaultModelA400NoneAsync(Callback<A> cb);
 
     @GET("/http/payloads/default/none/response/200/invalid")
-    void getDefaultNone200Invalid() throws ServiceException;
+    Response getDefaultNone200Invalid() throws ServiceException;
 
     @GET("/http/payloads/default/none/response/200/invalid")
     void getDefaultNone200InvalidAsync(Callback<Response> cb);
 
     @GET("/http/payloads/default/none/response/200/none")
-    void getDefaultNone200None() throws ServiceException;
+    Response getDefaultNone200None() throws ServiceException;
 
     @GET("/http/payloads/default/none/response/200/none")
     void getDefaultNone200NoneAsync(Callback<Response> cb);
 
     @GET("/http/payloads/default/none/response/400/invalid")
-    void getDefaultNone400Invalid() throws ServiceException;
+    Response getDefaultNone400Invalid() throws ServiceException;
 
     @GET("/http/payloads/default/none/response/400/invalid")
     void getDefaultNone400InvalidAsync(Callback<Response> cb);
 
     @GET("/http/payloads/default/none/response/400/none")
-    void getDefaultNone400None() throws ServiceException;
+    Response getDefaultNone400None() throws ServiceException;
 
     @GET("/http/payloads/default/none/response/400/none")
     void getDefaultNone400NoneAsync(Callback<Response> cb);

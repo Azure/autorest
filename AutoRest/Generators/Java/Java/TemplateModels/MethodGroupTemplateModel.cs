@@ -70,6 +70,12 @@ namespace Microsoft.Rest.Generator.Java
                 foreach (var method in this.MethodTemplateModels)
                 {
                     classes.Add("retrofit.http." + method.HttpMethod.ToString().ToUpper());
+                    foreach (var param in method.Parameters)
+                    {
+                        if (param.Location != ParameterLocation.None &&
+                            param.Location != ParameterLocation.FormData)
+                        classes.Add("retrofit.http." + param.Location.ToString());
+                    }
                 }
 
                 return classes.AsEnumerable();

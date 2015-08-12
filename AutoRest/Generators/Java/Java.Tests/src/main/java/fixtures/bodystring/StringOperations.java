@@ -14,6 +14,7 @@ import retrofit.Callback;
 import retrofit.client.Response;
 import retrofit.http.GET;
 import retrofit.http.PUT;
+import retrofit.http.Body;
 
 public interface StringOperations {
     @GET("/string/null")
@@ -23,10 +24,10 @@ public interface StringOperations {
     void getNullAsync(Callback<String> cb);
 
     @PUT("/string/null")
-    void putNull(String stringBody) throws ServiceException;
+    Response putNull(@Body String stringBody) throws ServiceException;
 
     @PUT("/string/null")
-    void putNullAsync(String stringBody, Callback<Response> cb);
+    void putNullAsync(@Body String stringBody, Callback<Response> cb);
 
     @GET("/string/empty")
     String getEmpty() throws ServiceException;
@@ -35,10 +36,10 @@ public interface StringOperations {
     void getEmptyAsync(Callback<String> cb);
 
     @PUT("/string/empty")
-    void putEmpty(String stringBody) throws ServiceException;
+    Response putEmpty(@Body String stringBody) throws ServiceException;
 
     @PUT("/string/empty")
-    void putEmptyAsync(String stringBody, Callback<Response> cb);
+    void putEmptyAsync(@Body String stringBody, Callback<Response> cb);
 
     @GET("/string/mbcs")
     String getMbcs() throws ServiceException;
@@ -47,10 +48,10 @@ public interface StringOperations {
     void getMbcsAsync(Callback<String> cb);
 
     @PUT("/string/mbcs")
-    void putMbcs(String stringBody) throws ServiceException;
+    Response putMbcs(@Body String stringBody) throws ServiceException;
 
     @PUT("/string/mbcs")
-    void putMbcsAsync(String stringBody, Callback<Response> cb);
+    void putMbcsAsync(@Body String stringBody, Callback<Response> cb);
 
     @GET("/string/whitespace")
     String getWhitespace() throws ServiceException;
@@ -59,10 +60,10 @@ public interface StringOperations {
     void getWhitespaceAsync(Callback<String> cb);
 
     @PUT("/string/whitespace")
-    void putWhitespace(String stringBody) throws ServiceException;
+    Response putWhitespace(@Body String stringBody) throws ServiceException;
 
     @PUT("/string/whitespace")
-    void putWhitespaceAsync(String stringBody, Callback<Response> cb);
+    void putWhitespaceAsync(@Body String stringBody, Callback<Response> cb);
 
     @GET("/string/notProvided")
     String getNotProvided() throws ServiceException;

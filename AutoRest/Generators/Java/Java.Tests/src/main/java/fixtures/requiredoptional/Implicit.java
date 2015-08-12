@@ -14,32 +14,36 @@ import retrofit.Callback;
 import retrofit.client.Response;
 import fixtures.requiredoptional.models.Error;
 import retrofit.http.GET;
+import retrofit.http.Path;
 import retrofit.http.PUT;
+import retrofit.http.Query;
+import retrofit.http.Header;
+import retrofit.http.Body;
 
 public interface Implicit {
     @GET("/reqopt/implicit/required/path/{pathParameter}")
-    Error getRequiredPath(String pathParameter) throws ServiceException;
+    Error getRequiredPath(@Path("pathParameter") String pathParameter) throws ServiceException;
 
     @GET("/reqopt/implicit/required/path/{pathParameter}")
-    void getRequiredPathAsync(String pathParameter, Callback<Error> cb);
+    void getRequiredPathAsync(@Path("pathParameter") String pathParameter, Callback<Error> cb);
 
     @PUT("/reqopt/implicit/optional/query")
-    void putOptionalQuery(String queryParameter) throws ServiceException;
+    Response putOptionalQuery(@Query("queryParameter") String queryParameter) throws ServiceException;
 
     @PUT("/reqopt/implicit/optional/query")
-    void putOptionalQueryAsync(String queryParameter, Callback<Response> cb);
+    void putOptionalQueryAsync(@Query("queryParameter") String queryParameter, Callback<Response> cb);
 
     @PUT("/reqopt/implicit/optional/header")
-    void putOptionalHeader(String queryParameter) throws ServiceException;
+    Response putOptionalHeader(@Header("queryParameter") String queryParameter) throws ServiceException;
 
     @PUT("/reqopt/implicit/optional/header")
-    void putOptionalHeaderAsync(String queryParameter, Callback<Response> cb);
+    void putOptionalHeaderAsync(@Header("queryParameter") String queryParameter, Callback<Response> cb);
 
     @PUT("/reqopt/implicit/optional/body")
-    void putOptionalBody(String bodyParameter) throws ServiceException;
+    Response putOptionalBody(@Body String bodyParameter) throws ServiceException;
 
     @PUT("/reqopt/implicit/optional/body")
-    void putOptionalBodyAsync(String bodyParameter, Callback<Response> cb);
+    void putOptionalBodyAsync(@Body String bodyParameter, Callback<Response> cb);
 
     @GET("/reqopt/global/required/path/{required-global-path}")
     Error getRequiredGlobalPath() throws ServiceException;

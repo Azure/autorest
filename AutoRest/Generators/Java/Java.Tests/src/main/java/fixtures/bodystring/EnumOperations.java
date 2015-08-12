@@ -15,6 +15,7 @@ import retrofit.client.Response;
 import fixtures.bodystring.models.Colors;
 import retrofit.http.GET;
 import retrofit.http.PUT;
+import retrofit.http.Body;
 
 public interface EnumOperations {
     @GET("/string/enum/notExpandable")
@@ -24,9 +25,9 @@ public interface EnumOperations {
     void getNotExpandableAsync(Callback<Colors> cb);
 
     @PUT("/string/enum/notExpandable")
-    void putNotExpandable(Colors stringBody) throws ServiceException;
+    Response putNotExpandable(@Body Colors stringBody) throws ServiceException;
 
     @PUT("/string/enum/notExpandable")
-    void putNotExpandableAsync(Colors stringBody, Callback<Response> cb);
+    void putNotExpandableAsync(@Body Colors stringBody, Callback<Response> cb);
 
 }

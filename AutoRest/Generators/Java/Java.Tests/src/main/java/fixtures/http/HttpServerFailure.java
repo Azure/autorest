@@ -16,6 +16,7 @@ import fixtures.http.models.Error;
 import retrofit.http.HEAD;
 import retrofit.http.GET;
 import retrofit.http.POST;
+import retrofit.http.Body;
 import retrofit.http.DELETE;
 
 public interface HttpServerFailure {
@@ -32,15 +33,15 @@ public interface HttpServerFailure {
     void get501Async(Callback<Error> cb);
 
     @POST("/http/failure/server/505")
-    Error post505(Boolean booleanValue) throws ServiceException;
+    Error post505(@Body Boolean booleanValue) throws ServiceException;
 
     @POST("/http/failure/server/505")
-    void post505Async(Boolean booleanValue, Callback<Error> cb);
+    void post505Async(@Body Boolean booleanValue, Callback<Error> cb);
 
     @DELETE("/http/failure/server/505")
-    Error delete505(Boolean booleanValue) throws ServiceException;
+    Error delete505(@Body Boolean booleanValue) throws ServiceException;
 
     @DELETE("/http/failure/server/505")
-    void delete505Async(Boolean booleanValue, Callback<Error> cb);
+    void delete505Async(@Body Boolean booleanValue, Callback<Error> cb);
 
 }

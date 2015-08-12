@@ -10,10 +10,7 @@ package com.microsoft.rest.credentials;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
-import org.apache.commons.codec.binary.Base64;
 
-import javax.ws.rs.client.ClientRequestContext;
-import javax.ws.rs.client.ClientRequestFilter;
 import java.io.IOException;
 
 /**
