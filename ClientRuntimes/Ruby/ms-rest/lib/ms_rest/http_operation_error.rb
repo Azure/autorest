@@ -5,7 +5,7 @@ module MsRest
   #
   # Class which represents an error meaning that either HTTP request or HTTP response was invalid.
   #
-  class HttpOperationException < StandardError
+  class HttpOperationError < RestError
 
     # @return [Net::HTTPRequest] the HTTP request object.
     attr_accessor :request
@@ -26,6 +26,6 @@ module MsRest
       @response = response
       @body = body
     end
-
   end
+
 end
