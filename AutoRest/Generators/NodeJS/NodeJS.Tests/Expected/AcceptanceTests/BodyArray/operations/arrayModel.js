@@ -308,7 +308,7 @@ ArrayModel.prototype.getEmpty = function (options, callback) {
 
 /**
  * Set array value empty []
- * @param {Array} arrayBody 
+ * @param {array} arrayBody 
  *
  * @param {object} [options]
  *
@@ -497,7 +497,7 @@ ArrayModel.prototype.getBooleanTfft = function (options, callback) {
 
 /**
  * Set array value empty [true, false, false, true]
- * @param {Array} arrayBody 
+ * @param {array} arrayBody 
  *
  * @param {object} [options]
  *
@@ -870,7 +870,7 @@ ArrayModel.prototype.getIntegerValid = function (options, callback) {
 
 /**
  * Set array value empty [1, -1, 3, 300]
- * @param {Array} arrayBody 
+ * @param {array} arrayBody 
  *
  * @param {object} [options]
  *
@@ -1243,7 +1243,7 @@ ArrayModel.prototype.getLongValid = function (options, callback) {
 
 /**
  * Set array value empty [1, -1, 3, 300]
- * @param {Array} arrayBody 
+ * @param {array} arrayBody 
  *
  * @param {object} [options]
  *
@@ -1616,7 +1616,7 @@ ArrayModel.prototype.getFloatValid = function (options, callback) {
 
 /**
  * Set array value [0, -0.01, 1.2e20]
- * @param {Array} arrayBody 
+ * @param {array} arrayBody 
  *
  * @param {object} [options]
  *
@@ -1989,7 +1989,7 @@ ArrayModel.prototype.getDoubleValid = function (options, callback) {
 
 /**
  * Set array value [0, -0.01, 1.2e20]
- * @param {Array} arrayBody 
+ * @param {array} arrayBody 
  *
  * @param {object} [options]
  *
@@ -2362,7 +2362,7 @@ ArrayModel.prototype.getStringValid = function (options, callback) {
 
 /**
  * Set array value ['foo1', 'foo2', 'foo3']
- * @param {Array} arrayBody 
+ * @param {array} arrayBody 
  *
  * @param {object} [options]
  *
@@ -2742,7 +2742,7 @@ ArrayModel.prototype.getDateValid = function (options, callback) {
 
 /**
  * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']
- * @param {Array} arrayBody 
+ * @param {array} arrayBody 
  *
  * @param {object} [options]
  *
@@ -3139,7 +3139,7 @@ ArrayModel.prototype.getDateTimeValid = function (options, callback) {
 /**
  * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00',
  * '1492-10-12T10:15:01-08:00']
- * @param {Array} arrayBody 
+ * @param {array} arrayBody 
  *
  * @param {object} [options]
  *
@@ -3536,7 +3536,7 @@ ArrayModel.prototype.getByteValid = function (options, callback) {
 /**
  * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)]
  * with each elementencoded in base 64
- * @param {Array} arrayBody 
+ * @param {array} arrayBody 
  *
  * @param {object} [options]
  *
@@ -4232,7 +4232,7 @@ ArrayModel.prototype.getComplexValid = function (options, callback) {
 /**
  * Put an array of complex type with values [{'integer': 1 'string': '2'},
  * {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
- * @param {Array} arrayBody 
+ * @param {array} arrayBody 
  *
  * @param {object} [options]
  *
@@ -4791,7 +4791,7 @@ ArrayModel.prototype.getArrayValid = function (options, callback) {
 /**
  * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7',
  * '8', '9']]
- * @param {Array} arrayBody 
+ * @param {array} arrayBody 
  *
  * @param {object} [options]
  *
@@ -5360,7 +5360,7 @@ ArrayModel.prototype.getDictionaryValid = function (options, callback) {
  * Get an array of Dictionaries of type <string, string> with value [{'1':
  * 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'},
  * {'7': 'seven', '8': 'eight', '9': 'nine'}]
- * @param {Array} arrayBody 
+ * @param {array} arrayBody 
  *
  * @param {object} [options]
  *

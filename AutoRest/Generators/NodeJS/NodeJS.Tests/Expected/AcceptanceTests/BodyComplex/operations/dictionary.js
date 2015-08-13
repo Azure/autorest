@@ -127,9 +127,9 @@ Dictionary.prototype.getValid = function (options, callback) {
 
 /**
  * Put complex types with dictionary property
- * @param {DictionaryWrapper} complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
+ * @param {object} complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
  *
- * @param {Object} [complexBody.defaultProgram] 
+ * @param {object} [complexBody.defaultProgram] 
  *
  * @param {object} [options]
  *
@@ -318,9 +318,9 @@ Dictionary.prototype.getEmpty = function (options, callback) {
 
 /**
  * Put complex types with dictionary property which is empty
- * @param {DictionaryWrapper} complexBody Please put an empty dictionary
+ * @param {object} complexBody Please put an empty dictionary
  *
- * @param {Object} [complexBody.defaultProgram] 
+ * @param {object} [complexBody.defaultProgram] 
  *
  * @param {object} [options]
  *

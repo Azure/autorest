@@ -127,11 +127,11 @@ Primitive.prototype.getInt = function (options, callback) {
 
 /**
  * Put complex types with integer properties
- * @param {IntWrapper} complexBody Please put -1 and 2
+ * @param {object} complexBody Please put -1 and 2
  *
- * @param {Number} [complexBody.field1] 
+ * @param {number} [complexBody.field1] 
  *
- * @param {Number} [complexBody.field2] 
+ * @param {number} [complexBody.field2] 
  *
  * @param {object} [options]
  *
@@ -320,11 +320,11 @@ Primitive.prototype.getLong = function (options, callback) {
 
 /**
  * Put complex types with long properties
- * @param {LongWrapper} complexBody Please put 1099511627775 and -999511627788
+ * @param {object} complexBody Please put 1099511627775 and -999511627788
  *
- * @param {Number} [complexBody.field1] 
+ * @param {number} [complexBody.field1] 
  *
- * @param {Number} [complexBody.field2] 
+ * @param {number} [complexBody.field2] 
  *
  * @param {object} [options]
  *
@@ -513,11 +513,11 @@ Primitive.prototype.getFloat = function (options, callback) {
 
 /**
  * Put complex types with float properties
- * @param {FloatWrapper} complexBody Please put 1.05 and -0.003
+ * @param {object} complexBody Please put 1.05 and -0.003
  *
- * @param {Number} [complexBody.field1] 
+ * @param {number} [complexBody.field1] 
  *
- * @param {Number} [complexBody.field2] 
+ * @param {number} [complexBody.field2] 
  *
  * @param {object} [options]
  *
@@ -706,11 +706,11 @@ Primitive.prototype.getDouble = function (options, callback) {
 
 /**
  * Put complex types with double properties
- * @param {DoubleWrapper} complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
+ * @param {object} complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
  *
- * @param {Number} [complexBody.field1] 
+ * @param {number} [complexBody.field1] 
  *
- * @param {Number} [complexBody.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose] 
+ * @param {number} [complexBody.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose] 
  *
  * @param {object} [options]
  *
@@ -899,11 +899,11 @@ Primitive.prototype.getBool = function (options, callback) {
 
 /**
  * Put complex types with bool properties
- * @param {BooleanWrapper} complexBody Please put true and false
+ * @param {object} complexBody Please put true and false
  *
- * @param {Boolean} [complexBody.fieldFalse] 
+ * @param {boolean} [complexBody.fieldFalse] 
  *
- * @param {Boolean} [complexBody.fieldTrue] 
+ * @param {boolean} [complexBody.fieldTrue] 
  *
  * @param {object} [options]
  *
@@ -1092,13 +1092,13 @@ Primitive.prototype.getString = function (options, callback) {
 
 /**
  * Put complex types with string properties
- * @param {StringWrapper} complexBody Please put 'goodrequest', '', and null
+ * @param {object} complexBody Please put 'goodrequest', '', and null
  *
- * @param {String} [complexBody.empty] 
+ * @param {string} [complexBody.empty] 
  *
- * @param {String} [complexBody.field] 
+ * @param {string} [complexBody.field] 
  *
- * @param {String} [complexBody.null] 
+ * @param {string} [complexBody.null] 
  *
  * @param {object} [options]
  *
@@ -1287,11 +1287,11 @@ Primitive.prototype.getDate = function (options, callback) {
 
 /**
  * Put complex types with date properties
- * @param {DateWrapper} complexBody Please put '0001-01-01' and '2016-02-29'
+ * @param {object} complexBody Please put '0001-01-01' and '2016-02-29'
  *
- * @param {Date} [complexBody.field] 
+ * @param {date} [complexBody.field] 
  *
- * @param {Date} [complexBody.leap] 
+ * @param {date} [complexBody.leap] 
  *
  * @param {object} [options]
  *
@@ -1480,11 +1480,11 @@ Primitive.prototype.getDateTime = function (options, callback) {
 
 /**
  * Put complex types with datetime properties
- * @param {DatetimeWrapper} complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
+ * @param {object} complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
  *
- * @param {Date} [complexBody.field] 
+ * @param {date} [complexBody.field] 
  *
- * @param {Date} [complexBody.now] 
+ * @param {date} [complexBody.now] 
  *
  * @param {object} [options]
  *
@@ -1673,9 +1673,9 @@ Primitive.prototype.getByte = function (options, callback) {
 
 /**
  * Put complex types with byte properties
- * @param {ByteWrapper} complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
+ * @param {object} complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
  *
- * @param {Buffer} [complexBody.field] 
+ * @param {buffer} [complexBody.field] 
  *
  * @param {object} [options]
  *

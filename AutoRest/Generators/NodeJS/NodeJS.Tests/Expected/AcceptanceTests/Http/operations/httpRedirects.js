@@ -363,7 +363,7 @@ HttpRedirects.prototype.get301 = function (options, callback) {
  * Put true Boolean value in request returns 301.  This request should not be
  * automatically redirected, but should return the received 301 to the caller
  * for evaluation
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -615,7 +615,7 @@ HttpRedirects.prototype.get302 = function (options, callback) {
  * Patch true Boolean value in request returns 302.  This request should not
  * be automatically redirected, but should return the received 302 to the
  * caller for evaluation
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -709,7 +709,7 @@ HttpRedirects.prototype.patch302 = function (booleanValue, options, callback) {
  * Post true Boolean value in request returns 303.  This request should be
  * automatically redirected usign a get, ultimately returning a 200 status
  * code
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -959,7 +959,7 @@ HttpRedirects.prototype.get307 = function (options, callback) {
 
 /**
  * Put redirected with 307, resulting in a 200 after redirect
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -1051,7 +1051,7 @@ HttpRedirects.prototype.put307 = function (booleanValue, options, callback) {
 
 /**
  * Patch redirected with 307, resulting in a 200 after redirect
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -1143,7 +1143,7 @@ HttpRedirects.prototype.patch307 = function (booleanValue, options, callback) {
 
 /**
  * Post redirected with 307, resulting in a 200 after redirect
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -1235,7 +1235,7 @@ HttpRedirects.prototype.post307 = function (booleanValue, options, callback) {
 
 /**
  * Delete redirected with 307, resulting in a 200 after redirect
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *

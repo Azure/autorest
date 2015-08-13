@@ -216,7 +216,7 @@ HttpServerFailure.prototype.get501 = function (options, callback) {
 
 /**
  * Return 505 status code - should be represented in the client as an error
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -321,7 +321,7 @@ HttpServerFailure.prototype.post505 = function (booleanValue, options, callback)
 
 /**
  * Return 505 status code - should be represented in the client as an error
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *

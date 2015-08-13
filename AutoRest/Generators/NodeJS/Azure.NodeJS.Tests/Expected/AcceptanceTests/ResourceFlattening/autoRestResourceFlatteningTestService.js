@@ -62,7 +62,7 @@ util.inherits(AutoRestResourceFlatteningTestService, ServiceClient);
 
 /**
  * Put External Resource as an Array
- * @param {Array} [resourceArray] External Resource as an Array to put
+ * @param {array} [resourceArray] External Resource as an Array to put
  *
  * @param {object} [options]
  *
@@ -286,7 +286,7 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
 
 /**
  * Put External Resource as a Dictionary
- * @param {Object} [resourceDictionary] External Resource as a Dictionary to put
+ * @param {object} [resourceDictionary] External Resource as a Dictionary to put
  *
  * @param {object} [options]
  *
@@ -510,21 +510,21 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
 
 /**
  * Put External Resource as a ResourceCollection
- * @param {ResourceCollection} [resourceComplexObject] External Resource as a ResourceCollection to put
+ * @param {object} [resourceComplexObject] External Resource as a ResourceCollection to put
  *
- * @param {Array} [resourceComplexObject.arrayofresources] 
+ * @param {array} [resourceComplexObject.arrayofresources] 
  *
- * @param {Object} [resourceComplexObject.dictionaryofresources] 
+ * @param {object} [resourceComplexObject.dictionaryofresources] 
  *
- * @param {FlattenedProduct} [resourceComplexObject.productresource] 
+ * @param {object} [resourceComplexObject.productresource] 
  *
- * @param {FlattenedProductProperties} [resourceComplexObject.productresource.properties] 
+ * @param {object} [resourceComplexObject.productresource.properties] 
  *
- * @param {String} [resourceComplexObject.productresource.properties.pname] 
+ * @param {string} [resourceComplexObject.productresource.properties.pname] 
  *
- * @param {String} [resourceComplexObject.productresource.properties.provisioningState] 
+ * @param {string} [resourceComplexObject.productresource.properties.provisioningState] 
  *
- * @param {String} [resourceComplexObject.productresource.properties.type] 
+ * @param {string} [resourceComplexObject.productresource.properties.type] 
  *
  * @param {object} [options]
  *

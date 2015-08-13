@@ -32,7 +32,7 @@ function Implicit(client) {
 
 /**
  * Test implicitly required path parameter
- * @param {String} pathParameter 
+ * @param {string} pathParameter 
  *
  * @param {object} [options]
  *
@@ -135,7 +135,7 @@ Implicit.prototype.getRequiredPath = function (pathParameter, options, callback)
 
 /**
  * Test implicitly optional query parameter
- * @param {String} [queryParameter] 
+ * @param {string} [queryParameter] 
  *
  * @param {object} [options]
  *
@@ -231,7 +231,7 @@ Implicit.prototype.putOptionalQuery = function (queryParameter, options, callbac
 
 /**
  * Test implicitly optional header parameter
- * @param {String} [queryParameter] 
+ * @param {string} [queryParameter] 
  *
  * @param {object} [options]
  *
@@ -323,7 +323,7 @@ Implicit.prototype.putOptionalHeader = function (queryParameter, options, callba
 
 /**
  * Test implicitly optional body parameter
- * @param {String} [bodyParameter] 
+ * @param {string} [bodyParameter] 
  *
  * @param {object} [options]
  *

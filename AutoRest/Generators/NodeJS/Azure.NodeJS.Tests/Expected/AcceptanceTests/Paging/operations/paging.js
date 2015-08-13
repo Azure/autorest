@@ -820,7 +820,7 @@ Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
 
 /**
  * A paging operation that finishes on the first call without a nextlink
- * @param {String} nextPageLink The NextLink from the previous successful call to List operation.
+ * @param {string} nextPageLink The NextLink from the previous successful call to List operation.
  *
  * @param {object} [options]
  *
@@ -933,7 +933,7 @@ Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback)
 
 /**
  * A paging operation that includes a nextLink that has 10 pages
- * @param {String} nextPageLink The NextLink from the previous successful call to List operation.
+ * @param {string} nextPageLink The NextLink from the previous successful call to List operation.
  *
  * @param {object} [options]
  *
@@ -1047,7 +1047,7 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
 /**
  * A paging operation that fails on the first call with 500 and then retries
  * and then get a response including a nextLink that has 10 pages
- * @param {String} nextPageLink The NextLink from the previous successful call to List operation.
+ * @param {string} nextPageLink The NextLink from the previous successful call to List operation.
  *
  * @param {object} [options]
  *
@@ -1162,7 +1162,7 @@ Paging.prototype.getMultiplePagesRetryFirstNext = function (nextPageLink, option
  * A paging operation that includes a nextLink that has 10 pages, of which the
  * 2nd call fails first with 500. The client should retry and finish all 10
  * pages eventually.
- * @param {String} nextPageLink The NextLink from the previous successful call to List operation.
+ * @param {string} nextPageLink The NextLink from the previous successful call to List operation.
  *
  * @param {object} [options]
  *
@@ -1275,7 +1275,7 @@ Paging.prototype.getMultiplePagesRetrySecondNext = function (nextPageLink, optio
 
 /**
  * A paging operation that receives a 400 on the first call
- * @param {String} nextPageLink The NextLink from the previous successful call to List operation.
+ * @param {string} nextPageLink The NextLink from the previous successful call to List operation.
  *
  * @param {object} [options]
  *
@@ -1388,7 +1388,7 @@ Paging.prototype.getSinglePagesFailureNext = function (nextPageLink, options, ca
 
 /**
  * A paging operation that receives a 400 on the second call
- * @param {String} nextPageLink The NextLink from the previous successful call to List operation.
+ * @param {string} nextPageLink The NextLink from the previous successful call to List operation.
  *
  * @param {object} [options]
  *
@@ -1501,7 +1501,7 @@ Paging.prototype.getMultiplePagesFailureNext = function (nextPageLink, options, 
 
 /**
  * A paging operation that receives an invalid nextLink
- * @param {String} nextPageLink The NextLink from the previous successful call to List operation.
+ * @param {string} nextPageLink The NextLink from the previous successful call to List operation.
  *
  * @param {object} [options]
  *

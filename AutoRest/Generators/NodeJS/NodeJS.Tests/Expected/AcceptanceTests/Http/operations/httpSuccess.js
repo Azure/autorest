@@ -203,7 +203,7 @@ HttpSuccess.prototype.get200 = function (options, callback) {
 
 /**
  * Put boolean value true returning 200 success
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -295,7 +295,7 @@ HttpSuccess.prototype.put200 = function (booleanValue, options, callback) {
 
 /**
  * Patch true Boolean value in request returning 200
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -387,7 +387,7 @@ HttpSuccess.prototype.patch200 = function (booleanValue, options, callback) {
 
 /**
  * Post bollean value true in request that returns a 200
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -479,7 +479,7 @@ HttpSuccess.prototype.post200 = function (booleanValue, options, callback) {
 
 /**
  * Delete simple boolean value true returns 200
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -571,7 +571,7 @@ HttpSuccess.prototype.delete200 = function (booleanValue, options, callback) {
 
 /**
  * Put true Boolean value in request returns 201
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -663,7 +663,7 @@ HttpSuccess.prototype.put201 = function (booleanValue, options, callback) {
 
 /**
  * Post true Boolean value in request returns 201 (Created)
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -755,7 +755,7 @@ HttpSuccess.prototype.post201 = function (booleanValue, options, callback) {
 
 /**
  * Put true Boolean value in request returns 202 (Accepted)
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -847,7 +847,7 @@ HttpSuccess.prototype.put202 = function (booleanValue, options, callback) {
 
 /**
  * Patch true Boolean value in request returns 202
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -939,7 +939,7 @@ HttpSuccess.prototype.patch202 = function (booleanValue, options, callback) {
 
 /**
  * Post true Boolean value in request returns 202 (Accepted)
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -1031,7 +1031,7 @@ HttpSuccess.prototype.post202 = function (booleanValue, options, callback) {
 
 /**
  * Delete true Boolean value in request returns 202 (accepted)
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -1202,7 +1202,7 @@ HttpSuccess.prototype.head204 = function (options, callback) {
 
 /**
  * Put true Boolean value in request returns 204 (no content)
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -1294,7 +1294,7 @@ HttpSuccess.prototype.put204 = function (booleanValue, options, callback) {
 
 /**
  * Patch true Boolean value in request returns 204 (no content)
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -1386,7 +1386,7 @@ HttpSuccess.prototype.patch204 = function (booleanValue, options, callback) {
 
 /**
  * Post true Boolean value in request returns 204 (no content)
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -1478,7 +1478,7 @@ HttpSuccess.prototype.post204 = function (booleanValue, options, callback) {
 
 /**
  * Delete true Boolean value in request returns 204 (no content)
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *

@@ -38,11 +38,11 @@ function LROsCustomHeader(client) {
  * a 200 to the initial request, with an entity that contains
  * ProvisioningState=’Creating’. Poll the endpoint indicated in the
  * Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -82,11 +82,11 @@ LROsCustomHeader.prototype.putAsyncRetrySucceeded = function (product, options, 
  * a 200 to the initial request, with an entity that contains
  * ProvisioningState=’Creating’. Poll the endpoint indicated in the
  * Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -327,11 +327,11 @@ LROsCustomHeader.prototype.getAsyncRetrySucceeded = function (options, callback)
  * a 201 to the initial request, with an entity that contains
  * ProvisioningState=’Creating’.  Polls return this value until the last poll
  * returns a ‘200’ with ProvisioningState=’Succeeded’
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -371,11 +371,11 @@ LROsCustomHeader.prototype.put201CreatingSucceeded200 = function (product, optio
  * a 201 to the initial request, with an entity that contains
  * ProvisioningState=’Creating’.  Polls return this value until the last poll
  * returns a ‘200’ with ProvisioningState=’Succeeded’
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -629,11 +629,11 @@ LROsCustomHeader.prototype.get201CreatingSucceeded200Polling = function (options
  * message header for all requests. Long running post request, service
  * returns a 202 to the initial request, with 'Location' and 'Retry-After'
  * headers, Polls return a 200 with a response body after success
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -662,11 +662,11 @@ LROsCustomHeader.prototype.post202Retry200 = function (product, options, callbac
  * message header for all requests. Long running post request, service
  * returns a 202 to the initial request, with 'Location' and 'Retry-After'
  * headers, Polls return a 200 with a response body after success
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -775,11 +775,11 @@ LROsCustomHeader.prototype.beginPost202Retry200 = function (product, options, ca
  * returns a 202 to the initial request, with an entity that contains
  * ProvisioningState=’Creating’. Poll the endpoint indicated in the
  * Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -809,11 +809,11 @@ LROsCustomHeader.prototype.postAsyncRetrySucceeded = function (product, options,
  * returns a 202 to the initial request, with an entity that contains
  * ProvisioningState=’Creating’. Poll the endpoint indicated in the
  * Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *

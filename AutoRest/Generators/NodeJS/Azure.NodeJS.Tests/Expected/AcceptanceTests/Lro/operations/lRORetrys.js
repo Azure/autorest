@@ -37,11 +37,11 @@ function LRORetrys(client) {
  * request, with an entity that contains ProvisioningState=’Creating’.  Polls
  * return this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Succeeded’
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -80,11 +80,11 @@ LRORetrys.prototype.put201CreatingSucceeded200 = function (product, options, cal
  * request, with an entity that contains ProvisioningState=’Creating’.  Polls
  * return this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Succeeded’
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -337,11 +337,11 @@ LRORetrys.prototype.getRetry201CreatingSucceeded200Polling = function (options, 
  * request, with an entity that contains ProvisioningState=’Creating’. Poll
  * the endpoint indicated in the Azure-AsyncOperation header for operation
  * status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -380,11 +380,11 @@ LRORetrys.prototype.putAsyncRelativeRetrySucceeded = function (product, options,
  * request, with an entity that contains ProvisioningState=’Creating’. Poll
  * the endpoint indicated in the Azure-AsyncOperation header for operation
  * status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -1031,11 +1031,11 @@ LRORetrys.prototype.beginDeleteAsyncRelativeRetrySucceeded = function (options, 
  * Long running post request, service returns a 500, then a 202 to the initial
  * request, with 'Location' and 'Retry-After' headers, Polls return a 200
  * with a response body after success
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -1063,11 +1063,11 @@ LRORetrys.prototype.post202Retry200 = function (product, options, callback) {
  * Long running post request, service returns a 500, then a 202 to the initial
  * request, with 'Location' and 'Retry-After' headers, Polls return a 200
  * with a response body after success
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -1175,11 +1175,11 @@ LRORetrys.prototype.beginPost202Retry200 = function (product, options, callback)
  * request, with an entity that contains ProvisioningState=’Creating’. Poll
  * the endpoint indicated in the Azure-AsyncOperation header for operation
  * status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -1208,11 +1208,11 @@ LRORetrys.prototype.postAsyncRelativeRetrySucceeded = function (product, options
  * request, with an entity that contains ProvisioningState=’Creating’. Poll
  * the endpoint indicated in the Azure-AsyncOperation header for operation
  * status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *

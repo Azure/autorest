@@ -127,13 +127,13 @@ BasicOperations.prototype.getValid = function (options, callback) {
 
 /**
  * Please put {id: 2, name: 'abc', color: 'Magenta'}
- * @param {Basic} complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
+ * @param {object} complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
  *
- * @param {CMYKColors} [complexBody.color] Possible values for this property include: 'cyan', 'Magenta', 'YELLOW', 'blacK'.
+ * @param {string} [complexBody.color] Possible values for this property include: 'cyan', 'Magenta', 'YELLOW', 'blacK'.
  *
- * @param {Number} [complexBody.id] 
+ * @param {number} [complexBody.id] 
  *
- * @param {String} [complexBody.name] 
+ * @param {string} [complexBody.name] 
  *
  * @param {object} [options]
  *

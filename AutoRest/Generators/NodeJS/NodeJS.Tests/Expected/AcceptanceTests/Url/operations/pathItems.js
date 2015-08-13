@@ -36,13 +36,13 @@ function PathItems(client) {
  * localStringPath='localStringPath', globalStringQuery='globalStringQuery',
  * pathItemStringQuery='pathItemStringQuery',
  * localStringQuery='localStringQuery'
- * @param {String} localStringPath should contain value 'localStringPath'
+ * @param {string} localStringPath should contain value 'localStringPath'
  *
- * @param {String} [localStringQuery] should contain value 'localStringQuery'
+ * @param {string} [localStringQuery] should contain value 'localStringQuery'
  *
- * @param {String} pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+ * @param {string} pathItemStringPath A string value 'pathItemStringPath' that appears in the path
  *
- * @param {String} [pathItemStringQuery] A string value 'pathItemStringQuery' that appears as a query parameter
+ * @param {string} [pathItemStringQuery] A string value 'pathItemStringQuery' that appears as a query parameter
  *
  * @param {object} [options]
  *
@@ -166,13 +166,13 @@ PathItems.prototype.getAllWithValues = function (localStringPath, pathItemString
  * localStringPath='localStringPath', globalStringQuery=null,
  * pathItemStringQuery='pathItemStringQuery',
  * localStringQuery='localStringQuery'
- * @param {String} localStringPath should contain value 'localStringPath'
+ * @param {string} localStringPath should contain value 'localStringPath'
  *
- * @param {String} [localStringQuery] should contain value 'localStringQuery'
+ * @param {string} [localStringQuery] should contain value 'localStringQuery'
  *
- * @param {String} pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+ * @param {string} pathItemStringPath A string value 'pathItemStringPath' that appears in the path
  *
- * @param {String} [pathItemStringQuery] A string value 'pathItemStringQuery' that appears as a query parameter
+ * @param {string} [pathItemStringQuery] A string value 'pathItemStringQuery' that appears as a query parameter
  *
  * @param {object} [options]
  *
@@ -295,13 +295,13 @@ PathItems.prototype.getGlobalQueryNull = function (localStringPath, pathItemStri
  * pathItemStringPath='pathItemStringPath',
  * localStringPath='localStringPath', globalStringQuery=null,
  * pathItemStringQuery='pathItemStringQuery', localStringQuery=null
- * @param {String} localStringPath should contain value 'localStringPath'
+ * @param {string} localStringPath should contain value 'localStringPath'
  *
- * @param {String} [localStringQuery] should contain null value
+ * @param {string} [localStringQuery] should contain null value
  *
- * @param {String} pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+ * @param {string} pathItemStringPath A string value 'pathItemStringPath' that appears in the path
  *
- * @param {String} [pathItemStringQuery] A string value 'pathItemStringQuery' that appears as a query parameter
+ * @param {string} [pathItemStringQuery] A string value 'pathItemStringQuery' that appears as a query parameter
  *
  * @param {object} [options]
  *
@@ -424,13 +424,13 @@ PathItems.prototype.getGlobalAndLocalQueryNull = function (localStringPath, path
  * pathItemStringPath='pathItemStringPath',
  * localStringPath='localStringPath', globalStringQuery='globalStringQuery',
  * pathItemStringQuery=null, localStringQuery=null
- * @param {String} localStringPath should contain value 'localStringPath'
+ * @param {string} localStringPath should contain value 'localStringPath'
  *
- * @param {String} [localStringQuery] should contain value null
+ * @param {string} [localStringQuery] should contain value null
  *
- * @param {String} pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+ * @param {string} pathItemStringPath A string value 'pathItemStringPath' that appears in the path
  *
- * @param {String} [pathItemStringQuery] should contain value null
+ * @param {string} [pathItemStringQuery] should contain value null
  *
  * @param {object} [options]
  *

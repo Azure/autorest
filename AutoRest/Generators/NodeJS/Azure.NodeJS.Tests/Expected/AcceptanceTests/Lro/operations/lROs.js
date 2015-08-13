@@ -35,11 +35,11 @@ function LROs(client) {
  *
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Succeeded’.
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -76,11 +76,11 @@ LROs.prototype.put200Succeeded = function (product, options, callback) {
 /**
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Succeeded’.
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -315,11 +315,11 @@ LROs.prototype.get200Succeeded = function (options, callback) {
  *
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that does not contain ProvisioningState=’Succeeded’.
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -356,11 +356,11 @@ LROs.prototype.put200SucceededNoState = function (product, options, callback) {
 /**
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that does not contain ProvisioningState=’Succeeded’.
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -596,11 +596,11 @@ LROs.prototype.get200SucceededNoState = function (options, callback) {
  * Long running put request, service returns a 202 to the initial request,
  * with a location header that points to a polling URL that returns a 200 and
  * an entity that doesn't contains ProvisioningState
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -638,11 +638,11 @@ LROs.prototype.put202Retry200 = function (product, options, callback) {
  * Long running put request, service returns a 202 to the initial request,
  * with a location header that points to a polling URL that returns a 200 and
  * an entity that doesn't contains ProvisioningState
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -879,11 +879,11 @@ LROs.prototype.getPut202Retry200 = function (options, callback) {
  * with an entity that contains ProvisioningState=’Creating’.  Polls return
  * this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Succeeded’
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -922,11 +922,11 @@ LROs.prototype.put201CreatingSucceeded200 = function (product, options, callback
  * with an entity that contains ProvisioningState=’Creating’.  Polls return
  * this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Succeeded’
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -1179,11 +1179,11 @@ LROs.prototype.get201CreatingSucceeded200Polling = function (options, callback) 
  * with an entity that contains ProvisioningState=’Updating’.  Polls return
  * this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Succeeded’
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -1222,11 +1222,11 @@ LROs.prototype.put200UpdatingSucceeded204 = function (product, options, callback
  * with an entity that contains ProvisioningState=’Updating’.  Polls return
  * this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Succeeded’
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -1462,11 +1462,11 @@ LROs.prototype.get200CreatingSucceeded200Poll = function (options, callback) {
  * with an entity that contains ProvisioningState=’Created’.  Polls return
  * this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Failed’
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -1505,11 +1505,11 @@ LROs.prototype.put201CreatingFailed200 = function (product, options, callback) {
  * with an entity that contains ProvisioningState=’Created’.  Polls return
  * this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Failed’
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -1762,11 +1762,11 @@ LROs.prototype.get201CreatingFailed200Polling = function (options, callback) {
  * with an entity that contains ProvisioningState=’Creating’.  Polls return
  * this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Canceled’
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -1805,11 +1805,11 @@ LROs.prototype.put200Acceptedcanceled200 = function (product, options, callback)
  * with an entity that contains ProvisioningState=’Creating’.  Polls return
  * this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Canceled’
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -2044,11 +2044,11 @@ LROs.prototype.get200Acceptedcanceled200Poll = function (options, callback) {
  * Long running put request, service returns a 202 to the initial request with
  * location header. Subsequent calls to operation status do not contain
  * location header.
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -2086,11 +2086,11 @@ LROs.prototype.putNoHeaderInRetry = function (product, options, callback) {
  * Long running put request, service returns a 202 to the initial request with
  * location header. Subsequent calls to operation status do not contain
  * location header.
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -2326,11 +2326,11 @@ LROs.prototype.getPutNoHeaderInRetry = function (options, callback) {
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -2368,11 +2368,11 @@ LROs.prototype.putAsyncRetrySucceeded = function (product, options, callback) {
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -2609,11 +2609,11 @@ LROs.prototype.getAsyncRetrySucceeded = function (options, callback) {
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -2651,11 +2651,11 @@ LROs.prototype.putAsyncNoRetrySucceeded = function (product, options, callback) 
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -2892,11 +2892,11 @@ LROs.prototype.getAsyncNoRetrySucceeded = function (options, callback) {
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -2934,11 +2934,11 @@ LROs.prototype.putAsyncRetryFailed = function (product, options, callback) {
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -3175,11 +3175,11 @@ LROs.prototype.getAsyncRetryFailed = function (options, callback) {
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -3217,11 +3217,11 @@ LROs.prototype.putAsyncNoRetrycanceled = function (product, options, callback) {
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -3458,11 +3458,11 @@ LROs.prototype.getAsyncNoRetrycanceled = function (options, callback) {
  * Long running put request, service returns a 202 to the initial request with
  * Azure-AsyncOperation header. Subsequent calls to operation status do not
  * contain Azure-AsyncOperation header.
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -3500,11 +3500,11 @@ LROs.prototype.putAsyncNoHeaderInRetry = function (product, options, callback) {
  * Long running put request, service returns a 202 to the initial request with
  * Azure-AsyncOperation header. Subsequent calls to operation status do not
  * contain Azure-AsyncOperation header.
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -3737,11 +3737,11 @@ LROs.prototype.getPutAsyncNoHeaderInRetry = function (options, callback) {
 /**
  *
  * Long running put request with non resource.
- * @param {Sku} [sku] sku to put
+ * @param {object} [sku] sku to put
  *
- * @param {String} [sku.id] 
+ * @param {string} [sku.id] 
  *
- * @param {String} [sku.name] 
+ * @param {string} [sku.name] 
  *
  * @param {object} [options]
  *
@@ -3777,11 +3777,11 @@ LROs.prototype.putNonResource = function (sku, options, callback) {
 
 /**
  * Long running put request with non resource.
- * @param {Sku} [sku] sku to put
+ * @param {object} [sku] sku to put
  *
- * @param {String} [sku.id] 
+ * @param {string} [sku.id] 
  *
- * @param {String} [sku.name] 
+ * @param {string} [sku.name] 
  *
  * @param {object} [options]
  *
@@ -4014,11 +4014,11 @@ LROs.prototype.getNonResource = function (options, callback) {
 /**
  *
  * Long running put request with non resource.
- * @param {Sku} [sku] Sku to put
+ * @param {object} [sku] Sku to put
  *
- * @param {String} [sku.id] 
+ * @param {string} [sku.id] 
  *
- * @param {String} [sku.name] 
+ * @param {string} [sku.name] 
  *
  * @param {object} [options]
  *
@@ -4054,11 +4054,11 @@ LROs.prototype.putAsyncNonResource = function (sku, options, callback) {
 
 /**
  * Long running put request with non resource.
- * @param {Sku} [sku] Sku to put
+ * @param {object} [sku] Sku to put
  *
- * @param {String} [sku.id] 
+ * @param {string} [sku.id] 
  *
- * @param {String} [sku.name] 
+ * @param {string} [sku.name] 
  *
  * @param {object} [options]
  *
@@ -4291,11 +4291,11 @@ LROs.prototype.getAsyncNonResource = function (options, callback) {
 /**
  *
  * Long running put request with sub resource.
- * @param {SubProduct} [product] Sub Product to put
+ * @param {object} [product] Sub Product to put
  *
- * @param {SubProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -4331,11 +4331,11 @@ LROs.prototype.putSubResource = function (product, options, callback) {
 
 /**
  * Long running put request with sub resource.
- * @param {SubProduct} [product] Sub Product to put
+ * @param {object} [product] Sub Product to put
  *
- * @param {SubProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -4568,11 +4568,11 @@ LROs.prototype.getSubResource = function (options, callback) {
 /**
  *
  * Long running put request with sub resource.
- * @param {SubProduct} [product] Sub Product to put
+ * @param {object} [product] Sub Product to put
  *
- * @param {SubProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -4608,11 +4608,11 @@ LROs.prototype.putAsyncSubResource = function (product, options, callback) {
 
 /**
  * Long running put request with sub resource.
- * @param {SubProduct} [product] Sub Product to put
+ * @param {object} [product] Sub Product to put
  *
- * @param {SubProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -6634,11 +6634,11 @@ LROs.prototype.beginPost200WithPayload = function (options, callback) {
  * Long running post request, service returns a 202 to the initial request,
  * with 'Location' and 'Retry-After' headers, Polls return a 200 with a
  * response body after success
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -6666,11 +6666,11 @@ LROs.prototype.post202Retry200 = function (product, options, callback) {
  * Long running post request, service returns a 202 to the initial request,
  * with 'Location' and 'Retry-After' headers, Polls return a 200 with a
  * response body after success
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -6776,11 +6776,11 @@ LROs.prototype.beginPost202Retry200 = function (product, options, callback) {
  *
  * Long running post request, service returns a 202 to the initial request,
  * with 'Location' header, 204 with noresponse body after success
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -6807,11 +6807,11 @@ LROs.prototype.post202NoRetry204 = function (product, options, callback) {
 /**
  * Long running post request, service returns a 202 to the initial request,
  * with 'Location' header, 204 with noresponse body after success
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -6934,11 +6934,11 @@ LROs.prototype.beginPost202NoRetry204 = function (product, options, callback) {
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -6966,11 +6966,11 @@ LROs.prototype.postAsyncRetrySucceeded = function (product, options, callback) {
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -7077,11 +7077,11 @@ LROs.prototype.beginPostAsyncRetrySucceeded = function (product, options, callba
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -7109,11 +7109,11 @@ LROs.prototype.postAsyncNoRetrySucceeded = function (product, options, callback)
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -7220,11 +7220,11 @@ LROs.prototype.beginPostAsyncNoRetrySucceeded = function (product, options, call
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -7252,11 +7252,11 @@ LROs.prototype.postAsyncRetryFailed = function (product, options, callback) {
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -7363,11 +7363,11 @@ LROs.prototype.beginPostAsyncRetryFailed = function (product, options, callback)
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -7395,11 +7395,11 @@ LROs.prototype.postAsyncRetrycanceled = function (product, options, callback) {
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *

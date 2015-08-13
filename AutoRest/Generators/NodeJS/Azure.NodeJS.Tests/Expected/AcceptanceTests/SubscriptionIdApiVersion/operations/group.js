@@ -33,7 +33,7 @@ function Group(client) {
 
 /**
  * Provides a resouce group with name 'testgroup101' and location 'West US'.
- * @param {String} resourceGroupName Resource Group name 'testgroup101'.
+ * @param {string} resourceGroupName Resource Group name 'testgroup101'.
  *
  * @param {object} [options]
  *

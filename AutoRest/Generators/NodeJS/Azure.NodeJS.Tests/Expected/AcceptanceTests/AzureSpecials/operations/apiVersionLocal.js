@@ -34,7 +34,7 @@ function ApiVersionLocal(client) {
 /**
  * Get method with api-version modeled in the method.  pass in api-version =
  * '2.0' to succeed
- * @param {String} apiVersion This should appear as a method parameter, use value '2.0'. Possible values for this parameter include: '2.0'
+ * @param {string} apiVersion This should appear as a method parameter, use value '2.0'. Possible values for this parameter include: '2.0'
  *
  * @param {object} [options]
  *
@@ -137,7 +137,7 @@ ApiVersionLocal.prototype.getMethodLocalValid = function (apiVersion, options, c
 /**
  * Get method with api-version modeled in the method.  pass in api-version =
  * null to succeed
- * @param {String} [apiVersion] This should appear as a method parameter, use value null, this should result in no serialized parameter
+ * @param {string} [apiVersion] This should appear as a method parameter, use value null, this should result in no serialized parameter
  *
  * @param {object} [options]
  *
@@ -242,7 +242,7 @@ ApiVersionLocal.prototype.getMethodLocalNull = function (apiVersion, options, ca
 /**
  * Get method with api-version modeled in the method.  pass in api-version =
  * '2.0' to succeed
- * @param {String} apiVersion This should appear as a method parameter, use value '2.0'. Possible values for this parameter include: '2.0'
+ * @param {string} apiVersion This should appear as a method parameter, use value '2.0'. Possible values for this parameter include: '2.0'
  *
  * @param {object} [options]
  *
@@ -345,7 +345,7 @@ ApiVersionLocal.prototype.getPathLocalValid = function (apiVersion, options, cal
 /**
  * Get method with api-version modeled in the method.  pass in api-version =
  * '2.0' to succeed
- * @param {String} apiVersion The api version, which appears in the query, the value is always '2.0'. Possible values for this parameter include: '2.0'
+ * @param {string} apiVersion The api version, which appears in the query, the value is always '2.0'. Possible values for this parameter include: '2.0'
  *
  * @param {object} [options]
  *

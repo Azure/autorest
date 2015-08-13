@@ -308,7 +308,7 @@ Number.prototype.getInvalidDouble = function (options, callback) {
 
 /**
  * Put big float value 3.402823e+20
- * @param {Number} numberBody 
+ * @param {number} numberBody 
  *
  * @param {object} [options]
  *
@@ -492,7 +492,7 @@ Number.prototype.getBigFloat = function (options, callback) {
 
 /**
  * Put big double value 2.5976931e+101
- * @param {Number} numberBody 
+ * @param {number} numberBody 
  *
  * @param {object} [options]
  *
@@ -676,7 +676,7 @@ Number.prototype.getBigDouble = function (options, callback) {
 
 /**
  * Put big double value 99999999.99
- * @param {Number} numberBody 
+ * @param {number} numberBody 
  *
  * @param {object} [options]
  *
@@ -860,7 +860,7 @@ Number.prototype.getBigDoublePositiveDecimal = function (options, callback) {
 
 /**
  * Put big double value -99999999.99
- * @param {Number} numberBody 
+ * @param {number} numberBody 
  *
  * @param {object} [options]
  *
@@ -1044,7 +1044,7 @@ Number.prototype.getBigDoubleNegativeDecimal = function (options, callback) {
 
 /**
  * Put small float value 3.402823e-20
- * @param {Number} numberBody 
+ * @param {number} numberBody 
  *
  * @param {object} [options]
  *
@@ -1228,7 +1228,7 @@ Number.prototype.getSmallFloat = function (options, callback) {
 
 /**
  * Put small double value 2.5976931e-101
- * @param {Number} numberBody 
+ * @param {number} numberBody 
  *
  * @param {object} [options]
  *

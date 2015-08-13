@@ -131,7 +131,7 @@ Polymorphism.prototype.getValid = function (options, callback) {
 
 /**
  * Put complex types that are polymorphic
- * @param {Fish} complexBody Please put a salmon that looks like this:
+ * @param {object} complexBody Please put a salmon that looks like this:
  {
          'dtype':'Salmon',
          'location':'alaska',
@@ -157,11 +157,11 @@ Polymorphism.prototype.getValid = function (options, callback) {
          ]
        };
  *
- * @param {Number} [complexBody.length] 
+ * @param {number} [complexBody.length] 
  *
- * @param {Array} [complexBody.siblings] 
+ * @param {array} [complexBody.siblings] 
  *
- * @param {String} [complexBody.species] 
+ * @param {string} [complexBody.species] 
  *
  * @param {object} [options]
  *
@@ -260,7 +260,7 @@ Polymorphism.prototype.putValid = function (complexBody, options, callback) {
 /**
  * Put complex types that are polymorphic, attempting to omit required
  * 'birthday' field - the request should not be allowed from the client
- * @param {Fish} complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to be sent:
+ * @param {object} complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to be sent:
  {
      "dtype": "sawshark",
      "species": "snaggle toothed",
@@ -287,11 +287,11 @@ Polymorphism.prototype.putValid = function (complexBody, options, callback) {
      ]
  }
  *
- * @param {Number} [complexBody.length] 
+ * @param {number} [complexBody.length] 
  *
- * @param {Array} [complexBody.siblings] 
+ * @param {array} [complexBody.siblings] 
  *
- * @param {String} [complexBody.species] 
+ * @param {string} [complexBody.species] 
  *
  * @param {object} [options]
  *

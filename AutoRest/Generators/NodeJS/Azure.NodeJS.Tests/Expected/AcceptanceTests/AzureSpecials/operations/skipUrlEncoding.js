@@ -33,7 +33,7 @@ function SkipUrlEncoding(client) {
 
 /**
  * Get method with unencoded path parameter with value 'path1/path2/path3'
- * @param {String} unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
+ * @param {string} unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
  *
  * @param {object} [options]
  *
@@ -135,7 +135,7 @@ SkipUrlEncoding.prototype.getMethodPathValid = function (unencodedPathParam, opt
 
 /**
  * Get method with unencoded path parameter with value 'path1/path2/path3'
- * @param {String} unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
+ * @param {string} unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
  *
  * @param {object} [options]
  *
@@ -237,7 +237,7 @@ SkipUrlEncoding.prototype.getPathPathValid = function (unencodedPathParam, optio
 
 /**
  * Get method with unencoded path parameter with value 'path1/path2/path3'
- * @param {String} unencodedPathParam An unencoded path parameter with value 'path1/path2/path3'. Possible values for this parameter include: 'path1/path2/path3'
+ * @param {string} unencodedPathParam An unencoded path parameter with value 'path1/path2/path3'. Possible values for this parameter include: 'path1/path2/path3'
  *
  * @param {object} [options]
  *
@@ -340,7 +340,7 @@ SkipUrlEncoding.prototype.getSwaggerPathValid = function (unencodedPathParam, op
 /**
  * Get method with unencoded query parameter with value
  * 'value1&q2=value2&q3=value3'
- * @param {String} q1 Unencoded query parameter with value 'value1&q2=value2&q3=value3'
+ * @param {string} q1 Unencoded query parameter with value 'value1&q2=value2&q3=value3'
  *
  * @param {object} [options]
  *
@@ -442,7 +442,7 @@ SkipUrlEncoding.prototype.getMethodQueryValid = function (q1, options, callback)
 
 /**
  * Get method with unencoded query parameter with value null
- * @param {String} [q1] Unencoded query parameter with value null
+ * @param {string} [q1] Unencoded query parameter with value null
  *
  * @param {object} [options]
  *
@@ -547,7 +547,7 @@ SkipUrlEncoding.prototype.getMethodQueryNull = function (q1, options, callback) 
 /**
  * Get method with unencoded query parameter with value
  * 'value1&q2=value2&q3=value3'
- * @param {String} q1 Unencoded query parameter with value 'value1&q2=value2&q3=value3'
+ * @param {string} q1 Unencoded query parameter with value 'value1&q2=value2&q3=value3'
  *
  * @param {object} [options]
  *
@@ -650,7 +650,7 @@ SkipUrlEncoding.prototype.getPathQueryValid = function (q1, options, callback) {
 /**
  * Get method with unencoded query parameter with value
  * 'value1&q2=value2&q3=value3'
- * @param {String} [q1] An unencoded query parameter with value 'value1&q2=value2&q3=value3'. Possible values for this parameter include: 'value1&q2=value2&q3=value3'
+ * @param {string} [q1] An unencoded query parameter with value 'value1&q2=value2&q3=value3'. Possible values for this parameter include: 'value1&q2=value2&q3=value3'
  *
  * @param {object} [options]
  *

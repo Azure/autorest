@@ -111,7 +111,7 @@ HttpRetry.prototype.head408 = function (options, callback) {
 
 /**
  * Return 500 status code, then 200 after retry
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -203,7 +203,7 @@ HttpRetry.prototype.put500 = function (booleanValue, options, callback) {
 
 /**
  * Return 500 status code, then 200 after retry
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -374,7 +374,7 @@ HttpRetry.prototype.get502 = function (options, callback) {
 
 /**
  * Return 503 status code, then 200 after retry
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -466,7 +466,7 @@ HttpRetry.prototype.post503 = function (booleanValue, options, callback) {
 
 /**
  * Return 503 status code, then 200 after retry
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -558,7 +558,7 @@ HttpRetry.prototype.delete503 = function (booleanValue, options, callback) {
 
 /**
  * Return 504 status code, then 200 after retry
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -650,7 +650,7 @@ HttpRetry.prototype.put504 = function (booleanValue, options, callback) {
 
 /**
  * Return 504 status code, then 200 after retry
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *

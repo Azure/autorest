@@ -32,7 +32,7 @@ function Paths(client) {
 
 /**
  * Get true Boolean value on path
- * @param {Boolean} boolPath true boolean value
+ * @param {boolean} boolPath true boolean value
  *
  * @param {object} [options]
  *
@@ -122,7 +122,7 @@ Paths.prototype.getBooleanTrue = function (boolPath, options, callback) {
 
 /**
  * Get false Boolean value on path
- * @param {Boolean} boolPath false boolean value
+ * @param {boolean} boolPath false boolean value
  *
  * @param {object} [options]
  *
@@ -212,7 +212,7 @@ Paths.prototype.getBooleanFalse = function (boolPath, options, callback) {
 
 /**
  * Get '1000000' integer value
- * @param {Number} intPath '1000000' integer value
+ * @param {number} intPath '1000000' integer value
  *
  * @param {object} [options]
  *
@@ -302,7 +302,7 @@ Paths.prototype.getIntOneMillion = function (intPath, options, callback) {
 
 /**
  * Get '-1000000' integer value
- * @param {Number} intPath '-1000000' integer value
+ * @param {number} intPath '-1000000' integer value
  *
  * @param {object} [options]
  *
@@ -392,7 +392,7 @@ Paths.prototype.getIntNegativeOneMillion = function (intPath, options, callback)
 
 /**
  * Get '10000000000' 64 bit integer value
- * @param {Number} longPath '10000000000' 64 bit integer value
+ * @param {number} longPath '10000000000' 64 bit integer value
  *
  * @param {object} [options]
  *
@@ -482,7 +482,7 @@ Paths.prototype.getTenBillion = function (longPath, options, callback) {
 
 /**
  * Get '-10000000000' 64 bit integer value
- * @param {Number} longPath '-10000000000' 64 bit integer value
+ * @param {number} longPath '-10000000000' 64 bit integer value
  *
  * @param {object} [options]
  *
@@ -572,7 +572,7 @@ Paths.prototype.getNegativeTenBillion = function (longPath, options, callback) {
 
 /**
  * Get '1.034E+20' numeric value
- * @param {Number} floatPath '1.034E+20'numeric value
+ * @param {number} floatPath '1.034E+20'numeric value
  *
  * @param {object} [options]
  *
@@ -662,7 +662,7 @@ Paths.prototype.floatScientificPositive = function (floatPath, options, callback
 
 /**
  * Get '-1.034E-20' numeric value
- * @param {Number} floatPath '-1.034E-20'numeric value
+ * @param {number} floatPath '-1.034E-20'numeric value
  *
  * @param {object} [options]
  *
@@ -752,7 +752,7 @@ Paths.prototype.floatScientificNegative = function (floatPath, options, callback
 
 /**
  * Get '9999999.999' numeric value
- * @param {Number} doublePath '9999999.999'numeric value
+ * @param {number} doublePath '9999999.999'numeric value
  *
  * @param {object} [options]
  *
@@ -842,7 +842,7 @@ Paths.prototype.doubleDecimalPositive = function (doublePath, options, callback)
 
 /**
  * Get '-9999999.999' numeric value
- * @param {Number} doublePath '-9999999.999'numeric value
+ * @param {number} doublePath '-9999999.999'numeric value
  *
  * @param {object} [options]
  *
@@ -932,7 +932,7 @@ Paths.prototype.doubleDecimalNegative = function (doublePath, options, callback)
 
 /**
  * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
- * @param {String} stringPath '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
+ * @param {string} stringPath '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
  *
  * @param {object} [options]
  *
@@ -1022,7 +1022,7 @@ Paths.prototype.stringUnicode = function (stringPath, options, callback) {
 
 /**
  * Get 'begin!*'();:@ &=+$,/?#[]end
- * @param {String} stringPath 'begin!*'();:@ &=+$,/?#[]end' url encoded string value. Possible values for this parameter include: 'begin!*'();:@ &=+$,/?#[]end'
+ * @param {string} stringPath 'begin!*'();:@ &=+$,/?#[]end' url encoded string value. Possible values for this parameter include: 'begin!*'();:@ &=+$,/?#[]end'
  *
  * @param {object} [options]
  *
@@ -1112,7 +1112,7 @@ Paths.prototype.stringUrlEncoded = function (stringPath, options, callback) {
 
 /**
  * Get ''
- * @param {String} stringPath '' string value. Possible values for this parameter include: ''
+ * @param {string} stringPath '' string value. Possible values for this parameter include: ''
  *
  * @param {object} [options]
  *
@@ -1202,7 +1202,7 @@ Paths.prototype.stringEmpty = function (stringPath, options, callback) {
 
 /**
  * Get null (should throw)
- * @param {String} stringPath null string value
+ * @param {string} stringPath null string value
  *
  * @param {object} [options]
  *
@@ -1292,7 +1292,7 @@ Paths.prototype.stringNull = function (stringPath, options, callback) {
 
 /**
  * Get using uri with 'green color' in path parameter
- * @param {UriColor} enumPath send the value green. Possible values for this parameter include: 'red color', 'green color', 'blue color'
+ * @param {string} enumPath send the value green. Possible values for this parameter include: 'red color', 'green color', 'blue color'
  *
  * @param {object} [options]
  *
@@ -1387,7 +1387,7 @@ Paths.prototype.enumValid = function (enumPath, options, callback) {
 
 /**
  * Get null (should throw on the client before the request is sent on wire)
- * @param {UriColor} enumPath send null should throw. Possible values for this parameter include: 'red color', 'green color', 'blue color'
+ * @param {string} enumPath send null should throw. Possible values for this parameter include: 'red color', 'green color', 'blue color'
  *
  * @param {object} [options]
  *
@@ -1481,7 +1481,7 @@ Paths.prototype.enumNull = function (enumPath, options, callback) {
 
 /**
  * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
- * @param {Buffer} bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+ * @param {buffer} bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
  *
  * @param {object} [options]
  *
@@ -1571,7 +1571,7 @@ Paths.prototype.byteMultiByte = function (bytePath, options, callback) {
 
 /**
  * Get '' as byte array
- * @param {Buffer} bytePath '' as byte array
+ * @param {buffer} bytePath '' as byte array
  *
  * @param {object} [options]
  *
@@ -1661,7 +1661,7 @@ Paths.prototype.byteEmpty = function (bytePath, options, callback) {
 
 /**
  * Get null as byte array (should throw)
- * @param {Buffer} bytePath null as byte array (should throw)
+ * @param {buffer} bytePath null as byte array (should throw)
  *
  * @param {object} [options]
  *
@@ -1751,7 +1751,7 @@ Paths.prototype.byteNull = function (bytePath, options, callback) {
 
 /**
  * Get '2012-01-01' as date
- * @param {Date} datePath '2012-01-01' as date
+ * @param {date} datePath '2012-01-01' as date
  *
  * @param {object} [options]
  *
@@ -1843,7 +1843,7 @@ Paths.prototype.dateValid = function (datePath, options, callback) {
 /**
  * Get null as date - this should throw or be unusable on the client side,
  * depending on date representation
- * @param {Date} datePath null as date (should throw)
+ * @param {date} datePath null as date (should throw)
  *
  * @param {object} [options]
  *
@@ -1934,7 +1934,7 @@ Paths.prototype.dateNull = function (datePath, options, callback) {
 
 /**
  * Get '2012-01-01T01:01:01Z' as date-time
- * @param {Date} dateTimePath '2012-01-01T01:01:01Z' as date-time
+ * @param {date} dateTimePath '2012-01-01T01:01:01Z' as date-time
  *
  * @param {object} [options]
  *
@@ -2026,7 +2026,7 @@ Paths.prototype.dateTimeValid = function (dateTimePath, options, callback) {
 /**
  * Get null as date-time, should be disallowed or throw depending on
  * representation of date-time
- * @param {Date} dateTimePath null as date-time
+ * @param {date} dateTimePath null as date-time
  *
  * @param {object} [options]
  *
