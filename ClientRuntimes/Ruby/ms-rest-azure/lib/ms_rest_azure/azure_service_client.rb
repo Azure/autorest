@@ -59,7 +59,10 @@ module MsRestAzure
           end
         end
 
-        task.execution_interval = polling_state.get_delay
+        polling_delay = polling_state.get_delay
+        polling_delay = 0.1 if polling_delay.nil? || polling_delay == 0
+
+        task.execution_interval = polling_delay
         task.execute
         task.wait_for_termination
 
