@@ -5,11 +5,7 @@
  *
  */
 
-package com.microsoft.rest.bat;
-
-import com.microsoft.rest.ServiceClient;
-
-import java.net.URI;
+package com.microsoft.rest.retrofit;
 
 /**
  *
