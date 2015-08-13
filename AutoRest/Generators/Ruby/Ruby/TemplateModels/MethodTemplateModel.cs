@@ -257,14 +257,18 @@ namespace Microsoft.Rest.Generator.Ruby
             return builder.ToString();
         }
 
+        /// <summary>
+        /// Ensures that there is no duplicate forward slashes in the url.
+        /// </summary>
+        /// <param name="urlVariableName">The url variable.</param>
+        /// <returns>Updated url.</returns>
         public virtual string RemoveDuplicateForwardSlashes(string urlVariableName)
         {
             var builder = new IndentedStringBuilder("  ");
 
-            // TODO: convert it to Ruby.
-            //builder.AppendLine("# trim all duplicate forward slashes in the url");
-            //builder.AppendLine("var regex = /([^:]\\/)\\/+/gi;");
-            //builder.AppendLine("{0} = {0}.replace(regex, '$1');", urlVariableName);
+            // Removing duplicate forward slashes.
+            builder.AppendLine(@"corrected_url = {0}.to_s.gsub(/([^:])\/\//, '\1/')", urlVariableName);
+            builder.AppendLine(@"{0} = URI.parse(corrected_url)", urlVariableName);
 
             return builder.ToString();
         }
