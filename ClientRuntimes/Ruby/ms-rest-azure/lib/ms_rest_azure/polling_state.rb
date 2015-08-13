@@ -49,17 +49,17 @@ module MsRestAzure
     end
 
     #
-    # Returns the amount of time in milliseconds for long running operation polling dealy.
+    # Returns the amount of time in seconds for long running operation polling delay.
     #
-    # @return [Integer] Amount of time in milliseconds for long running operation polling dealy.
-    def get_delay_in_milliseconds
+    # @return [Integer] Amount of time in seconds for long running operation polling delay.
+    def get_delay
       return @retry_timeout unless @retry_timeout.nil?
 
       if (!response.nil? && !response.headers['Retry-After'].nil?)
-        return response.headers['Retry-After'].to_i * 1000
+        return response.headers['Retry-After'].to_i
       end
 
-      return MsRestAzure::AzureAsyncOperation.DEFAULT_DELAY
+      return AsyncOperationStatus.DEFAULT_DELAY
     end
 
     #
