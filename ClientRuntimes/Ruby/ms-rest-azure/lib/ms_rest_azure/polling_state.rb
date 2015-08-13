@@ -59,7 +59,7 @@ module MsRestAzure
         return response.headers['Retry-After'].to_i
       end
 
-      return AsyncOperationStatus.DEFAULT_DELAY
+      return AsyncOperationStatus::DEFAULT_DELAY
     end
 
     #
