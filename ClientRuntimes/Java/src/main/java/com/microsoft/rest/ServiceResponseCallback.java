@@ -7,13 +7,13 @@
 
 package com.microsoft.rest;
 
-import retrofit.Callback;
 import retrofit.ResponseCallback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- * Exception thrown for an invalid response with custom error information.
+ * Inner callback used to merge both successful and failed responses into one
+ * callback for customized response handling in a response handling delegate.
  */
 public abstract class ServiceResponseCallback extends ResponseCallback {
     @Override
@@ -26,5 +26,5 @@ public abstract class ServiceResponseCallback extends ResponseCallback {
         response(response, null);
     }
 
-    public abstract void response(Response response, RetrofitError ex);
+    public abstract void response(Response response, RetrofitError error);
 }

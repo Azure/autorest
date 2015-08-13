@@ -7,20 +7,14 @@
 
 package com.microsoft.rest.retrofit;
 
-import com.google.gson.Gson;
-import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.Callback;
+import com.microsoft.rest.*;
+import com.microsoft.rest.retrofit.models.ErrorModel;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import retrofit.converter.GsonConverter;
 import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.PUT;
-import retrofit.mime.TypedInput;
 
 public class IntOperations {
     private IntService service;
@@ -37,74 +31,102 @@ public class IntOperations {
         void getNullAsync(ServiceResponseCallback cb);
 
         @GET("/int/invalid")
-        int getInvalid();
+        Response getInvalid();
 
         @GET("/int/invalid")
-        void getInvalidAsync(Callback<Integer> cb);
+        void getInvalidAsync(ServiceResponseCallback cb);
 
         @PUT("/int/max/32")
         Response putMax32(@Body int intBody);
 
         @PUT("/int/max/32")
-        void putMax32Async(@Body int intBody, Callback<Response> cb);
+        void putMax32Async(@Body int intBody, ServiceResponseCallback cb);
     }
 
     public int getNull() throws ServiceException {
-        Response response;
-
         try {
-            response = service.getNull();
+            return getNullDelegate(service.getNull(), null).getBody();
         } catch (RetrofitError error) {
-            response = error.getResponse();
+            return getNullDelegate(error.getResponse(), error).getBody();
         }
-
-        return getNullResponse(response).getBody();
     }
 
-    public void getNullAsync(final ServiceCallback<Integer> cb) {
+    public void getNullAsync(final ServiceCallback<Integer> serviceCallback) {
         service.getNullAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
-                    ServiceResponse<Integer> res = getNullResponse(response);
-                    cb.success(res.getBody(), res.getResponse());
+                    serviceCallback.success(getNullDelegate(response, error));
                 } catch (ServiceException ex) {
-                    cb.failure(ex);
+                    serviceCallback.failure(ex);
                 }
             }
         });
     }
 
-    private ServiceResponse<Integer> getNullResponse(Response response) throws ServiceException {
-        if (response == null) {
-            throw new ServiceException("Service returns null without throwing an exception.");
-        }
+    private ServiceResponse<Integer> getNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Integer>()
+                .register(200, Integer.class)
+                .registerError(ErrorModel.class)
+                .build(response, error);
+    }
 
-        ServiceResponse<Integer> result;
+    public int getInvalid() throws ServiceException {
         try {
-            TypedInput responseContent = response.getBody();
-            GsonConverter converter = new GsonConverter(new Gson());
-            if (response.getStatus() == 200) {
-                result = new ServiceResponse<Integer>(
-                        (Integer) converter.fromBody(responseContent, Integer.class),
-                        response);
-            } else {
-                ServiceException exception = new ServiceException();
-                exception.setResponse(response);
-                throw exception;
-            }
-            return result;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
+            return getInvalidDelegate(service.getInvalid(), null).getBody();
+        } catch (RetrofitError error) {
+            return getInvalidDelegate(error.getResponse(), error).getBody();
         }
     }
 
-
-    public Response putMax32(int intBody) throws ServiceException {
-        return service.putMax32(intBody);
+    public void getInvalidAsync(final ServiceCallback<Integer> serviceCallback) {
+        service.getNullAsync(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getInvalidDelegate(response, error));
+                } catch (ServiceException ex) {
+                    serviceCallback.failure(ex);
+                }
+            }
+        });
     }
 
-    public void putMax32Async(int intBody, Callback<Response> cb) {
-        service.putMax32Async(intBody, cb);
+    private ServiceResponse<Integer> getInvalidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Integer>()
+                .register(200, Integer.class)
+                .registerError(ErrorModel.class)
+                .build(response, error);
     }
+
+
+    public void putMax32(int intBody) throws ServiceException {
+        try {
+            putMax32Delegate(service.putMax32(intBody), null);
+        } catch (RetrofitError error) {
+            putMax32Delegate(error.getResponse(), error);
+        }
+    }
+
+    public void putMax32Async(int intBody, final ServiceCallback<Void> serviceCallback) {
+        service.putMax32Async(intBody, new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(putMax32Delegate(response, error));
+                } catch (ServiceException ex) {
+                    serviceCallback.failure(ex);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> putMax32Delegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                .register(200, Void.class)
+                .registerError(ErrorModel.class)
+                .build(response, error);
+    }
+
+
 }

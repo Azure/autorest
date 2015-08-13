@@ -16,11 +16,6 @@ import retrofit.client.Response;
 public class ServiceException extends Exception {
 
     /**
-     * Information about the associated HTTP request.
-     */
-    private Request request;
-
-    /**
      * Information about the associated HTTP response.
      */
     private Response response;
@@ -66,15 +61,6 @@ public class ServiceException extends Exception {
     }
 
     /**
-     * Gets information about the associated HTTP request.
-     *
-     * @return the HTTP request
-     */
-    public Request getRequest() {
-        return request;
-    }
-
-    /**
      * Gets information about the associated HTTP response.
      *
      * @return the HTTP response
@@ -90,15 +76,6 @@ public class ServiceException extends Exception {
      */
     public Object getErrorModel() {
         return errorModel;
-    }
-
-    /**
-     * Sets the HTTP request.
-     *
-     * @param request the HTTP request
-     */
-    public void setRequest(Request request) {
-        this.request = request;
     }
 
     /**
