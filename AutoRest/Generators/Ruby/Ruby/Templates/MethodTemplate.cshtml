@@ -99,7 +99,6 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
     end
 
     @EmptyLine
-    @* TODO: add propert request object into HttpOperationResponse and HttpOperationException *@
     # Create Result
     result = @(Model.OperationResponseReturnTypeString).new(connection, http_response)
     @Model.InitializeResponseBody

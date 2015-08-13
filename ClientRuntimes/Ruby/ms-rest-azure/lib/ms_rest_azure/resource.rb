@@ -19,7 +19,7 @@ module MsRestAzure
     # @return [String] the location of the resource (required).
     attr_accessor :location
 
-    # @return [Hash{String => String}}] the tags attached to resources (optional).
+    # @return [Hash{String => String}] the tags attached to resources (optional).
     attr_accessor :tags
 
     #

@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
 using System.Threading.Tasks;
 using Microsoft.Rest.Generator.Azure.Ruby.Templates;
 using Microsoft.Rest.Generator.ClientModel;
@@ -12,25 +11,41 @@ using System.Linq;
 
 namespace Microsoft.Rest.Generator.Azure.Ruby
 {
+    /// <summary>
+    /// A class with main code generation logic for Azure.Ruby.
+    /// </summary>
     public class AzureRubyCodeGenerator : RubyCodeGenerator
     {
+        /// <summary>
+        /// Initializes a new instance of the class AzureRubyCodeGenerator.
+        /// </summary>
+        /// <param name="settings">The settings.</param>
         public AzureRubyCodeGenerator(Settings settings) : base(settings)
         {
         }
 
+        /// <summary>
+        /// Gets the name of code generator.
+        /// </summary>
         public override string Name
         {
             get { return "Azure.Ruby"; }
         }
 
+        /// <summary>
+        /// Gets the description of code generator.
+        /// </summary>
         public override string Description
         {
             get { return "Ruby for Http Client Libraries"; }
         }
 
+        /// <summary>
+        /// Gets the usage instructions for the code generator.
+        /// </summary>
         public override string UsageInstructions
         {
-            get { return "TODO"; }
+            get { return "The gem 'ms-rest-azure' is required for working with generated code."; }
         }
 
         /// <summary>

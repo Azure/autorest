@@ -257,7 +257,7 @@ namespace Microsoft.Rest.Generator.Ruby
             }
             else if (primaryType == PrimaryType.Stream)
             {
-                //TODO: verify this
+                // TODO: Ruby doesn't supports streams.
                 primaryType.Name = "System.IO.Stream";
             }
             else if (primaryType == PrimaryType.String)

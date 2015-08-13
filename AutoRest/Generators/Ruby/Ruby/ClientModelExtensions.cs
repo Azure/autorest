@@ -45,9 +45,10 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
         /// <returns>Doc in form of string.</returns>
         private static string PrepareTypeForDocRecursively(IType type)
         {
-            // TODO: add more primitive types, also dictionary and composite ones.
             var sequenceType = type as SequenceType;
             var compositeType = type as CompositeType;
+            var enumType = type as EnumType;
+            var dictionaryType = type as DictionaryType;
 
             if (type == PrimaryType.String)
             {
@@ -69,9 +70,29 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
                 return "Float";
             }
 
+            if (type == PrimaryType.Date)
+            {
+                return "Date";
+            }
+
+            if (type == PrimaryType.DateTime)
+            {
+                return "DateTime";
+            }
+
+            if (type == PrimaryType.ByteArray)
+            {
+                return "Array<Integer>";
+            }
+
             if (compositeType != null)
             {
                 return compositeType.Name;
+            }
+
+            if (enumType != null)
+            {
+                return enumType.Name;
             }
 
             if (sequenceType != null)
@@ -81,6 +102,18 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
                 if (!string.IsNullOrEmpty(internalString))
                 {
                     return string.Format("Array<{0}>", internalString);
+                }
+
+                return string.Empty;
+            }
+
+            if (dictionaryType != null)
+            {
+                string internalString = PrepareTypeForDocRecursively(dictionaryType.ValueType);
+
+                if (!string.IsNullOrEmpty(internalString))
+                {
+                    return string.Format("Hash{{String => {0}}}", internalString);
                 }
 
                 return string.Empty;

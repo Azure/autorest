@@ -79,7 +79,7 @@ namespace Microsoft.Rest.Generator.Ruby
         /// </summary>
         public override string UsageInstructions
         {
-            get { return "Require to install ms-rest gem"; }
+            get { return "The gem 'ms-rest' is required for working with generated code."; }
         }
 
         /// <summary>
