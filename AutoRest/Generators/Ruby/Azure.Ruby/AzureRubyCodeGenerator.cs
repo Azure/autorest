@@ -61,7 +61,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             AzureCodeGenerator.AddLongRunningOperations(serviceClient);
             AzureCodeGenerator.AddAzureProperties(serviceClient);
             AzureCodeGenerator.SetDefaultResponses(serviceClient);
-            this.CorrectFilterParameters(serviceClient);
+            CorrectFilterParameters(serviceClient);
             base.NormalizeClientModel(serviceClient);
         }
 
@@ -71,7 +71,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// of raw string.
         /// </summary>
         /// <param name="serviceClient">The service client.</param>
-        public void CorrectFilterParameters(ServiceClient serviceClient)
+        public static void CorrectFilterParameters(ServiceClient serviceClient)
         {
             foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureCodeGenerator.ODataExtension)))
             {
