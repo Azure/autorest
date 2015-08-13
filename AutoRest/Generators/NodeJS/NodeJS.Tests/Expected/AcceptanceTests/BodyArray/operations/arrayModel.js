@@ -39,7 +39,7 @@ function ArrayModel(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getNull = function (options, callback) {
   var client = this.client;
@@ -131,7 +131,7 @@ ArrayModel.prototype.getNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getInvalid = function (options, callback) {
   var client = this.client;
@@ -223,7 +223,7 @@ ArrayModel.prototype.getInvalid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getEmpty = function (options, callback) {
   var client = this.client;
@@ -317,7 +317,7 @@ ArrayModel.prototype.getEmpty = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.putEmpty = function (arrayBody, options, callback) {
   var client = this.client;
@@ -412,7 +412,7 @@ ArrayModel.prototype.putEmpty = function (arrayBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getBooleanTfft = function (options, callback) {
   var client = this.client;
@@ -506,7 +506,7 @@ ArrayModel.prototype.getBooleanTfft = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.putBooleanTfft = function (arrayBody, options, callback) {
   var client = this.client;
@@ -601,7 +601,7 @@ ArrayModel.prototype.putBooleanTfft = function (arrayBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getBooleanInvalidNull = function (options, callback) {
   var client = this.client;
@@ -693,7 +693,7 @@ ArrayModel.prototype.getBooleanInvalidNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getBooleanInvalidString = function (options, callback) {
   var client = this.client;
@@ -785,7 +785,7 @@ ArrayModel.prototype.getBooleanInvalidString = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getIntegerValid = function (options, callback) {
   var client = this.client;
@@ -879,7 +879,7 @@ ArrayModel.prototype.getIntegerValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.putIntegerValid = function (arrayBody, options, callback) {
   var client = this.client;
@@ -974,7 +974,7 @@ ArrayModel.prototype.putIntegerValid = function (arrayBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getIntInvalidNull = function (options, callback) {
   var client = this.client;
@@ -1066,7 +1066,7 @@ ArrayModel.prototype.getIntInvalidNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getIntInvalidString = function (options, callback) {
   var client = this.client;
@@ -1158,7 +1158,7 @@ ArrayModel.prototype.getIntInvalidString = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getLongValid = function (options, callback) {
   var client = this.client;
@@ -1252,7 +1252,7 @@ ArrayModel.prototype.getLongValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.putLongValid = function (arrayBody, options, callback) {
   var client = this.client;
@@ -1347,7 +1347,7 @@ ArrayModel.prototype.putLongValid = function (arrayBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getLongInvalidNull = function (options, callback) {
   var client = this.client;
@@ -1439,7 +1439,7 @@ ArrayModel.prototype.getLongInvalidNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getLongInvalidString = function (options, callback) {
   var client = this.client;
@@ -1531,7 +1531,7 @@ ArrayModel.prototype.getLongInvalidString = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getFloatValid = function (options, callback) {
   var client = this.client;
@@ -1625,7 +1625,7 @@ ArrayModel.prototype.getFloatValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.putFloatValid = function (arrayBody, options, callback) {
   var client = this.client;
@@ -1720,7 +1720,7 @@ ArrayModel.prototype.putFloatValid = function (arrayBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getFloatInvalidNull = function (options, callback) {
   var client = this.client;
@@ -1812,7 +1812,7 @@ ArrayModel.prototype.getFloatInvalidNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getFloatInvalidString = function (options, callback) {
   var client = this.client;
@@ -1904,7 +1904,7 @@ ArrayModel.prototype.getFloatInvalidString = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getDoubleValid = function (options, callback) {
   var client = this.client;
@@ -1998,7 +1998,7 @@ ArrayModel.prototype.getDoubleValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.putDoubleValid = function (arrayBody, options, callback) {
   var client = this.client;
@@ -2093,7 +2093,7 @@ ArrayModel.prototype.putDoubleValid = function (arrayBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getDoubleInvalidNull = function (options, callback) {
   var client = this.client;
@@ -2185,7 +2185,7 @@ ArrayModel.prototype.getDoubleInvalidNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getDoubleInvalidString = function (options, callback) {
   var client = this.client;
@@ -2277,7 +2277,7 @@ ArrayModel.prototype.getDoubleInvalidString = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getStringValid = function (options, callback) {
   var client = this.client;
@@ -2371,7 +2371,7 @@ ArrayModel.prototype.getStringValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.putStringValid = function (arrayBody, options, callback) {
   var client = this.client;
@@ -2466,7 +2466,7 @@ ArrayModel.prototype.putStringValid = function (arrayBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getStringWithNull = function (options, callback) {
   var client = this.client;
@@ -2558,7 +2558,7 @@ ArrayModel.prototype.getStringWithNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getStringWithInvalid = function (options, callback) {
   var client = this.client;
@@ -2650,7 +2650,7 @@ ArrayModel.prototype.getStringWithInvalid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getDateValid = function (options, callback) {
   var client = this.client;
@@ -2751,7 +2751,7 @@ ArrayModel.prototype.getDateValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.putDateValid = function (arrayBody, options, callback) {
   var client = this.client;
@@ -2847,7 +2847,7 @@ ArrayModel.prototype.putDateValid = function (arrayBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getDateInvalidNull = function (options, callback) {
   var client = this.client;
@@ -2946,7 +2946,7 @@ ArrayModel.prototype.getDateInvalidNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getDateInvalidChars = function (options, callback) {
   var client = this.client;
@@ -3046,7 +3046,7 @@ ArrayModel.prototype.getDateInvalidChars = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getDateTimeValid = function (options, callback) {
   var client = this.client;
@@ -3148,7 +3148,7 @@ ArrayModel.prototype.getDateTimeValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.putDateTimeValid = function (arrayBody, options, callback) {
   var client = this.client;
@@ -3244,7 +3244,7 @@ ArrayModel.prototype.putDateTimeValid = function (arrayBody, options, callback) 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getDateTimeInvalidNull = function (options, callback) {
   var client = this.client;
@@ -3343,7 +3343,7 @@ ArrayModel.prototype.getDateTimeInvalidNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getDateTimeInvalidChars = function (options, callback) {
   var client = this.client;
@@ -3443,7 +3443,7 @@ ArrayModel.prototype.getDateTimeInvalidChars = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getByteValid = function (options, callback) {
   var client = this.client;
@@ -3545,7 +3545,7 @@ ArrayModel.prototype.getByteValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.putByteValid = function (arrayBody, options, callback) {
   var client = this.client;
@@ -3641,7 +3641,7 @@ ArrayModel.prototype.putByteValid = function (arrayBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getByteInvalidNull = function (options, callback) {
   var client = this.client;
@@ -3740,7 +3740,7 @@ ArrayModel.prototype.getByteInvalidNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getComplexNull = function (options, callback) {
   var client = this.client;
@@ -3839,7 +3839,7 @@ ArrayModel.prototype.getComplexNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getComplexEmpty = function (options, callback) {
   var client = this.client;
@@ -3939,7 +3939,7 @@ ArrayModel.prototype.getComplexEmpty = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getComplexItemNull = function (options, callback) {
   var client = this.client;
@@ -4039,7 +4039,7 @@ ArrayModel.prototype.getComplexItemNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getComplexItemEmpty = function (options, callback) {
   var client = this.client;
@@ -4139,7 +4139,7 @@ ArrayModel.prototype.getComplexItemEmpty = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getComplexValid = function (options, callback) {
   var client = this.client;
@@ -4241,7 +4241,7 @@ ArrayModel.prototype.getComplexValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.putComplexValid = function (arrayBody, options, callback) {
   var client = this.client;
@@ -4336,7 +4336,7 @@ ArrayModel.prototype.putComplexValid = function (arrayBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getArrayNull = function (options, callback) {
   var client = this.client;
@@ -4428,7 +4428,7 @@ ArrayModel.prototype.getArrayNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getArrayEmpty = function (options, callback) {
   var client = this.client;
@@ -4520,7 +4520,7 @@ ArrayModel.prototype.getArrayEmpty = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getArrayItemNull = function (options, callback) {
   var client = this.client;
@@ -4612,7 +4612,7 @@ ArrayModel.prototype.getArrayItemNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getArrayItemEmpty = function (options, callback) {
   var client = this.client;
@@ -4705,7 +4705,7 @@ ArrayModel.prototype.getArrayItemEmpty = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getArrayValid = function (options, callback) {
   var client = this.client;
@@ -4800,7 +4800,7 @@ ArrayModel.prototype.getArrayValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.putArrayValid = function (arrayBody, options, callback) {
   var client = this.client;
@@ -4899,7 +4899,7 @@ ArrayModel.prototype.putArrayValid = function (arrayBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getDictionaryNull = function (options, callback) {
   var client = this.client;
@@ -4991,7 +4991,7 @@ ArrayModel.prototype.getDictionaryNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getDictionaryEmpty = function (options, callback) {
   var client = this.client;
@@ -5085,7 +5085,7 @@ ArrayModel.prototype.getDictionaryEmpty = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getDictionaryItemNull = function (options, callback) {
   var client = this.client;
@@ -5179,7 +5179,7 @@ ArrayModel.prototype.getDictionaryItemNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getDictionaryItemEmpty = function (options, callback) {
   var client = this.client;
@@ -5273,7 +5273,7 @@ ArrayModel.prototype.getDictionaryItemEmpty = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getDictionaryValid = function (options, callback) {
   var client = this.client;
@@ -5369,7 +5369,7 @@ ArrayModel.prototype.getDictionaryValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.putDictionaryValid = function (arrayBody, options, callback) {
   var client = this.client;

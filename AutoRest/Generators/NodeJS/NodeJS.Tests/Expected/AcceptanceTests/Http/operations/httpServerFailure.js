@@ -39,7 +39,7 @@ function HttpServerFailure(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpServerFailure.prototype.head501 = function (options, callback) {
   var client = this.client;
@@ -131,7 +131,7 @@ HttpServerFailure.prototype.head501 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpServerFailure.prototype.get501 = function (options, callback) {
   var client = this.client;
@@ -225,7 +225,7 @@ HttpServerFailure.prototype.get501 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpServerFailure.prototype.post505 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -330,7 +330,7 @@ HttpServerFailure.prototype.post505 = function (booleanValue, options, callback)
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpServerFailure.prototype.delete505 = function (booleanValue, options, callback) {
   var client = this.client;

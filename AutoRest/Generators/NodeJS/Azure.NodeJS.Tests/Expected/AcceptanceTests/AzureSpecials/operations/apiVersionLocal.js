@@ -43,7 +43,7 @@ function ApiVersionLocal(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ApiVersionLocal.prototype.getMethodLocalValid = function (apiVersion, options, callback) {
   var client = this.client;
@@ -146,7 +146,7 @@ ApiVersionLocal.prototype.getMethodLocalValid = function (apiVersion, options, c
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ApiVersionLocal.prototype.getMethodLocalNull = function (apiVersion, options, callback) {
   var client = this.client;
@@ -251,7 +251,7 @@ ApiVersionLocal.prototype.getMethodLocalNull = function (apiVersion, options, ca
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ApiVersionLocal.prototype.getPathLocalValid = function (apiVersion, options, callback) {
   var client = this.client;
@@ -354,7 +354,7 @@ ApiVersionLocal.prototype.getPathLocalValid = function (apiVersion, options, cal
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ApiVersionLocal.prototype.getSwaggerLocalValid = function (apiVersion, options, callback) {
   var client = this.client;

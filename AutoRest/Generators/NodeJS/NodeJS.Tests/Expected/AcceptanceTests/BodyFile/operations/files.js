@@ -39,7 +39,7 @@ function Files(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Files.prototype.getFile = function (options, callback) {
   var client = this.client;
@@ -108,7 +108,7 @@ Files.prototype.getFile = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Files.prototype.getEmptyFile = function (options, callback) {
   var client = this.client;

@@ -39,7 +39,7 @@ function HttpRedirects(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRedirects.prototype.head300 = function (options, callback) {
   var client = this.client;
@@ -118,7 +118,7 @@ HttpRedirects.prototype.head300 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRedirects.prototype.get300 = function (options, callback) {
   var client = this.client;
@@ -210,7 +210,7 @@ HttpRedirects.prototype.get300 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRedirects.prototype.head301 = function (options, callback) {
   var client = this.client;
@@ -289,7 +289,7 @@ HttpRedirects.prototype.head301 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRedirects.prototype.get301 = function (options, callback) {
   var client = this.client;
@@ -372,7 +372,7 @@ HttpRedirects.prototype.get301 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRedirects.prototype.put301 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -462,7 +462,7 @@ HttpRedirects.prototype.put301 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRedirects.prototype.head302 = function (options, callback) {
   var client = this.client;
@@ -541,7 +541,7 @@ HttpRedirects.prototype.head302 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRedirects.prototype.get302 = function (options, callback) {
   var client = this.client;
@@ -624,7 +624,7 @@ HttpRedirects.prototype.get302 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRedirects.prototype.patch302 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -718,7 +718,7 @@ HttpRedirects.prototype.patch302 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRedirects.prototype.post303 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -808,7 +808,7 @@ HttpRedirects.prototype.post303 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRedirects.prototype.head307 = function (options, callback) {
   var client = this.client;
@@ -887,7 +887,7 @@ HttpRedirects.prototype.head307 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRedirects.prototype.get307 = function (options, callback) {
   var client = this.client;
@@ -968,7 +968,7 @@ HttpRedirects.prototype.get307 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRedirects.prototype.put307 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -1060,7 +1060,7 @@ HttpRedirects.prototype.put307 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRedirects.prototype.patch307 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -1152,7 +1152,7 @@ HttpRedirects.prototype.patch307 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRedirects.prototype.post307 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -1244,7 +1244,7 @@ HttpRedirects.prototype.post307 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRedirects.prototype.delete307 = function (booleanValue, options, callback) {
   var client = this.client;

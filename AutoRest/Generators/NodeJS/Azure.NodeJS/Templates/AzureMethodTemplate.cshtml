@@ -29,7 +29,7 @@ else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.D
  *
 @WrapComment(" * ", " @param {function} callback")
  *
-@WrapComment(" * ", " @returns {Stream} The Response stream")
+@WrapComment(" * ", " @returns {stream} The Response stream")
  */
 @(Model.OperationName).prototype.@(Model.Name) = function (@(Model.MethodParameterDeclarationWithCallback)) {
   var self = @(Model.ClientReference);
@@ -62,7 +62,7 @@ else if (Model.HttpMethod == HttpMethod.Put || Model.HttpMethod == HttpMethod.Pa
  *
 @WrapComment(" * ", " @param {function} callback")
  *
-@WrapComment(" * ", " @returns {Stream} The Response stream")
+@WrapComment(" * ", " @returns {stream} The Response stream")
  */
 @(Model.OperationName).prototype.@(Model.Name) = function (@(Model.MethodParameterDeclarationWithCallback)) {
   var client = @(Model.ClientReference);

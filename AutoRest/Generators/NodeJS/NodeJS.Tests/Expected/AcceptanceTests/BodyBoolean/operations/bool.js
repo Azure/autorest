@@ -39,7 +39,7 @@ function Bool(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Bool.prototype.getTrue = function (options, callback) {
   var client = this.client;
@@ -133,7 +133,7 @@ Bool.prototype.getTrue = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Bool.prototype.putTrue = function (boolBody, options, callback) {
   var client = this.client;
@@ -223,7 +223,7 @@ Bool.prototype.putTrue = function (boolBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Bool.prototype.getFalse = function (options, callback) {
   var client = this.client;
@@ -317,7 +317,7 @@ Bool.prototype.getFalse = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Bool.prototype.putFalse = function (boolBody, options, callback) {
   var client = this.client;
@@ -407,7 +407,7 @@ Bool.prototype.putFalse = function (boolBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Bool.prototype.getNull = function (options, callback) {
   var client = this.client;
@@ -499,7 +499,7 @@ Bool.prototype.getNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Bool.prototype.getInvalid = function (options, callback) {
   var client = this.client;

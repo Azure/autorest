@@ -41,7 +41,7 @@ function Paths(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paths.prototype.getBooleanTrue = function (boolPath, options, callback) {
   var client = this.client;
@@ -131,7 +131,7 @@ Paths.prototype.getBooleanTrue = function (boolPath, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paths.prototype.getBooleanFalse = function (boolPath, options, callback) {
   var client = this.client;
@@ -221,7 +221,7 @@ Paths.prototype.getBooleanFalse = function (boolPath, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paths.prototype.getIntOneMillion = function (intPath, options, callback) {
   var client = this.client;
@@ -311,7 +311,7 @@ Paths.prototype.getIntOneMillion = function (intPath, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paths.prototype.getIntNegativeOneMillion = function (intPath, options, callback) {
   var client = this.client;
@@ -401,7 +401,7 @@ Paths.prototype.getIntNegativeOneMillion = function (intPath, options, callback)
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paths.prototype.getTenBillion = function (longPath, options, callback) {
   var client = this.client;
@@ -491,7 +491,7 @@ Paths.prototype.getTenBillion = function (longPath, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paths.prototype.getNegativeTenBillion = function (longPath, options, callback) {
   var client = this.client;
@@ -581,7 +581,7 @@ Paths.prototype.getNegativeTenBillion = function (longPath, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paths.prototype.floatScientificPositive = function (floatPath, options, callback) {
   var client = this.client;
@@ -671,7 +671,7 @@ Paths.prototype.floatScientificPositive = function (floatPath, options, callback
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paths.prototype.floatScientificNegative = function (floatPath, options, callback) {
   var client = this.client;
@@ -761,7 +761,7 @@ Paths.prototype.floatScientificNegative = function (floatPath, options, callback
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paths.prototype.doubleDecimalPositive = function (doublePath, options, callback) {
   var client = this.client;
@@ -851,7 +851,7 @@ Paths.prototype.doubleDecimalPositive = function (doublePath, options, callback)
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paths.prototype.doubleDecimalNegative = function (doublePath, options, callback) {
   var client = this.client;
@@ -941,7 +941,7 @@ Paths.prototype.doubleDecimalNegative = function (doublePath, options, callback)
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paths.prototype.stringUnicode = function (stringPath, options, callback) {
   var client = this.client;
@@ -1031,7 +1031,7 @@ Paths.prototype.stringUnicode = function (stringPath, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paths.prototype.stringUrlEncoded = function (stringPath, options, callback) {
   var client = this.client;
@@ -1121,7 +1121,7 @@ Paths.prototype.stringUrlEncoded = function (stringPath, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paths.prototype.stringEmpty = function (stringPath, options, callback) {
   var client = this.client;
@@ -1211,7 +1211,7 @@ Paths.prototype.stringEmpty = function (stringPath, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paths.prototype.stringNull = function (stringPath, options, callback) {
   var client = this.client;
@@ -1301,7 +1301,7 @@ Paths.prototype.stringNull = function (stringPath, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paths.prototype.enumValid = function (enumPath, options, callback) {
   var client = this.client;
@@ -1396,7 +1396,7 @@ Paths.prototype.enumValid = function (enumPath, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paths.prototype.enumNull = function (enumPath, options, callback) {
   var client = this.client;
@@ -1490,7 +1490,7 @@ Paths.prototype.enumNull = function (enumPath, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paths.prototype.byteMultiByte = function (bytePath, options, callback) {
   var client = this.client;
@@ -1580,7 +1580,7 @@ Paths.prototype.byteMultiByte = function (bytePath, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paths.prototype.byteEmpty = function (bytePath, options, callback) {
   var client = this.client;
@@ -1670,7 +1670,7 @@ Paths.prototype.byteEmpty = function (bytePath, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paths.prototype.byteNull = function (bytePath, options, callback) {
   var client = this.client;
@@ -1760,7 +1760,7 @@ Paths.prototype.byteNull = function (bytePath, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paths.prototype.dateValid = function (datePath, options, callback) {
   var client = this.client;
@@ -1852,7 +1852,7 @@ Paths.prototype.dateValid = function (datePath, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paths.prototype.dateNull = function (datePath, options, callback) {
   var client = this.client;
@@ -1943,7 +1943,7 @@ Paths.prototype.dateNull = function (datePath, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paths.prototype.dateTimeValid = function (dateTimePath, options, callback) {
   var client = this.client;
@@ -2035,7 +2035,7 @@ Paths.prototype.dateTimeValid = function (dateTimePath, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paths.prototype.dateTimeNull = function (dateTimePath, options, callback) {
   var client = this.client;

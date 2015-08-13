@@ -42,7 +42,7 @@ function Explicit(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -147,7 +147,7 @@ Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, optio
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postOptionalIntegerParameter = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -243,7 +243,7 @@ Explicit.prototype.postOptionalIntegerParameter = function (bodyParameter, optio
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postRequiredIntegerProperty = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -353,7 +353,7 @@ Explicit.prototype.postRequiredIntegerProperty = function (bodyParameter, option
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postOptionalIntegerProperty = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -446,7 +446,7 @@ Explicit.prototype.postOptionalIntegerProperty = function (bodyParameter, option
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postRequiredIntegerHeader = function (headerParameter, options, callback) {
   var client = this.client;
@@ -552,7 +552,7 @@ Explicit.prototype.postRequiredIntegerHeader = function (headerParameter, option
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postOptionalIntegerHeader = function (headerParameter, options, callback) {
   var client = this.client;
@@ -645,7 +645,7 @@ Explicit.prototype.postOptionalIntegerHeader = function (headerParameter, option
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postRequiredStringParameter = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -750,7 +750,7 @@ Explicit.prototype.postRequiredStringParameter = function (bodyParameter, option
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postOptionalStringParameter = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -846,7 +846,7 @@ Explicit.prototype.postOptionalStringParameter = function (bodyParameter, option
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postRequiredStringProperty = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -956,7 +956,7 @@ Explicit.prototype.postRequiredStringProperty = function (bodyParameter, options
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postOptionalStringProperty = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -1049,7 +1049,7 @@ Explicit.prototype.postOptionalStringProperty = function (bodyParameter, options
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postRequiredStringHeader = function (headerParameter, options, callback) {
   var client = this.client;
@@ -1155,7 +1155,7 @@ Explicit.prototype.postRequiredStringHeader = function (headerParameter, options
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postOptionalStringHeader = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -1252,7 +1252,7 @@ Explicit.prototype.postOptionalStringHeader = function (bodyParameter, options, 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -1363,7 +1363,7 @@ Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postOptionalClassParameter = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -1463,7 +1463,7 @@ Explicit.prototype.postOptionalClassParameter = function (bodyParameter, options
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postRequiredClassProperty = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -1577,7 +1577,7 @@ Explicit.prototype.postRequiredClassProperty = function (bodyParameter, options,
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postOptionalClassProperty = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -1670,7 +1670,7 @@ Explicit.prototype.postOptionalClassProperty = function (bodyParameter, options,
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -1780,7 +1780,7 @@ Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, options
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postOptionalArrayParameter = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -1880,7 +1880,7 @@ Explicit.prototype.postOptionalArrayParameter = function (bodyParameter, options
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postRequiredArrayProperty = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -1990,7 +1990,7 @@ Explicit.prototype.postRequiredArrayProperty = function (bodyParameter, options,
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postOptionalArrayProperty = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -2083,7 +2083,7 @@ Explicit.prototype.postOptionalArrayProperty = function (bodyParameter, options,
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postRequiredArrayHeader = function (headerParameter, options, callback) {
   var client = this.client;
@@ -2194,7 +2194,7 @@ Explicit.prototype.postRequiredArrayHeader = function (headerParameter, options,
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postOptionalArrayHeader = function (headerParameter, options, callback) {
   var client = this.client;

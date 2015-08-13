@@ -41,7 +41,7 @@ function DONOTCALLs(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 DONOTCALLs.prototype.getProvisioning202Accepted200Succeeded = function (options, callback) {
   var client = this.client;
@@ -154,7 +154,7 @@ DONOTCALLs.prototype.getProvisioning202Accepted200Succeeded = function (options,
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 DONOTCALLs.prototype.getProvisioning202Deleting200Failed = function (options, callback) {
   var client = this.client;
@@ -267,7 +267,7 @@ DONOTCALLs.prototype.getProvisioning202Deleting200Failed = function (options, ca
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 DONOTCALLs.prototype.getProvisioning202Deleting200canceled = function (options, callback) {
   var client = this.client;
@@ -380,7 +380,7 @@ DONOTCALLs.prototype.getProvisioning202Deleting200canceled = function (options, 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 DONOTCALLs.prototype.getDelete202Retry200 = function (options, callback) {
   var client = this.client;
@@ -477,7 +477,7 @@ DONOTCALLs.prototype.getDelete202Retry200 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 DONOTCALLs.prototype.get202NoRetry204 = function (options, callback) {
   var client = this.client;
@@ -574,7 +574,7 @@ DONOTCALLs.prototype.get202NoRetry204 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 DONOTCALLs.prototype.post202Retry200Polling = function (options, callback) {
   var client = this.client;
@@ -687,7 +687,7 @@ DONOTCALLs.prototype.post202Retry200Polling = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 DONOTCALLs.prototype.post202NoRetry204Polling = function (options, callback) {
   var client = this.client;
@@ -784,7 +784,7 @@ DONOTCALLs.prototype.post202NoRetry204Polling = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 DONOTCALLs.prototype.getRetryProvisioning202Accepted200Succeeded = function (options, callback) {
   var client = this.client;
@@ -897,7 +897,7 @@ DONOTCALLs.prototype.getRetryProvisioning202Accepted200Succeeded = function (opt
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 DONOTCALLs.prototype.getRetry202Retry200 = function (options, callback) {
   var client = this.client;
@@ -994,7 +994,7 @@ DONOTCALLs.prototype.getRetry202Retry200 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 DONOTCALLs.prototype.postRetry202Retry200Polling = function (options, callback) {
   var client = this.client;
@@ -1106,7 +1106,7 @@ DONOTCALLs.prototype.postRetry202Retry200Polling = function (options, callback) 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 DONOTCALLs.prototype.getNonRetry400 = function (options, callback) {
   var client = this.client;
@@ -1202,7 +1202,7 @@ DONOTCALLs.prototype.getNonRetry400 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 DONOTCALLs.prototype.getRetry202NonRetry400 = function (options, callback) {
   var client = this.client;
@@ -1299,7 +1299,7 @@ DONOTCALLs.prototype.getRetry202NonRetry400 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 DONOTCALLs.prototype.postRetry202Retry400Polling = function (options, callback) {
   var client = this.client;
@@ -1411,7 +1411,7 @@ DONOTCALLs.prototype.postRetry202Retry400Polling = function (options, callback) 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 DONOTCALLs.prototype.postRetry202NonRetry400Polling = function (options, callback) {
   var client = this.client;
@@ -1524,7 +1524,7 @@ DONOTCALLs.prototype.postRetry202NonRetry400Polling = function (options, callbac
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 DONOTCALLs.prototype.post202Retry200PollingCustomHeader = function (options, callback) {
   var client = this.client;

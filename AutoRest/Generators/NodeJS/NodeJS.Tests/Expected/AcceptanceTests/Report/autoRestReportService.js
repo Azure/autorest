@@ -59,7 +59,7 @@ util.inherits(AutoRestReportService, ServiceClient);
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 AutoRestReportService.prototype.getReport = function (options, callback) {
   var client = this;

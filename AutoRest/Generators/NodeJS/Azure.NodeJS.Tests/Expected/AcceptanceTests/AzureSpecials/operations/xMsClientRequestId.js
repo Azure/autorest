@@ -41,7 +41,7 @@ function XMsClientRequestId(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 XMsClientRequestId.prototype.get = function (options, callback) {
   var client = this.client;
@@ -140,7 +140,7 @@ XMsClientRequestId.prototype.get = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 XMsClientRequestId.prototype.paramGet = function (xMsClientRequestId, options, callback) {
   var client = this.client;

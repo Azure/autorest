@@ -5,8 +5,17 @@
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.NodeJS.ModelTemplateModel>
 'use strict';
 @EmptyLine
-var models = require('./index');
+@if (Model.ContainsPropertiesInCompositeType())
+{
+@:var models = require('./index');
 @EmptyLine
+}
+@if (Model.ContainsPropertiesInSequenceType())
+{
+@:var util = require('util');
+@EmptyLine
+}
+
 /**
  * @@class
  * Initializes a new instance of the @(Model.Name) class.

@@ -39,7 +39,7 @@ function Polymorphism(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Polymorphism.prototype.getValid = function (options, callback) {
   var client = this.client;
@@ -170,7 +170,7 @@ Polymorphism.prototype.getValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Polymorphism.prototype.putValid = function (complexBody, options, callback) {
   var client = this.client;
@@ -300,7 +300,7 @@ Polymorphism.prototype.putValid = function (complexBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Polymorphism.prototype.putValidMissingRequired = function (complexBody, options, callback) {
   var client = this.client;

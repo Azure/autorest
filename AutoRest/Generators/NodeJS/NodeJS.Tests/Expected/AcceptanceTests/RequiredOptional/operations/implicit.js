@@ -41,7 +41,7 @@ function Implicit(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Implicit.prototype.getRequiredPath = function (pathParameter, options, callback) {
   var client = this.client;
@@ -144,7 +144,7 @@ Implicit.prototype.getRequiredPath = function (pathParameter, options, callback)
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Implicit.prototype.putOptionalQuery = function (queryParameter, options, callback) {
   var client = this.client;
@@ -240,7 +240,7 @@ Implicit.prototype.putOptionalQuery = function (queryParameter, options, callbac
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Implicit.prototype.putOptionalHeader = function (queryParameter, options, callback) {
   var client = this.client;
@@ -332,7 +332,7 @@ Implicit.prototype.putOptionalHeader = function (queryParameter, options, callba
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Implicit.prototype.putOptionalBody = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -422,7 +422,7 @@ Implicit.prototype.putOptionalBody = function (bodyParameter, options, callback)
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Implicit.prototype.getRequiredGlobalPath = function (options, callback) {
   var client = this.client;
@@ -523,7 +523,7 @@ Implicit.prototype.getRequiredGlobalPath = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Implicit.prototype.getRequiredGlobalQuery = function (options, callback) {
   var client = this.client;
@@ -628,7 +628,7 @@ Implicit.prototype.getRequiredGlobalQuery = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Implicit.prototype.getOptionalGlobalQuery = function (options, callback) {
   var client = this.client;

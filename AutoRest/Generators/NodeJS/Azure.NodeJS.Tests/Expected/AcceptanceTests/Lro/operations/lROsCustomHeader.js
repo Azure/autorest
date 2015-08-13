@@ -51,7 +51,7 @@ function LROsCustomHeader(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROsCustomHeader.prototype.putAsyncRetrySucceeded = function (product, options, callback) {
   var client = this.client;
@@ -95,7 +95,7 @@ LROsCustomHeader.prototype.putAsyncRetrySucceeded = function (product, options, 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (product, options, callback) {
   var client = this.client;
@@ -217,7 +217,7 @@ LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (product, opti
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROsCustomHeader.prototype.getAsyncRetrySucceeded = function (options, callback) {
   var client = this.client;
@@ -340,7 +340,7 @@ LROsCustomHeader.prototype.getAsyncRetrySucceeded = function (options, callback)
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROsCustomHeader.prototype.put201CreatingSucceeded200 = function (product, options, callback) {
   var client = this.client;
@@ -384,7 +384,7 @@ LROsCustomHeader.prototype.put201CreatingSucceeded200 = function (product, optio
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (product, options, callback) {
   var client = this.client;
@@ -520,7 +520,7 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (product, 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROsCustomHeader.prototype.get201CreatingSucceeded200Polling = function (options, callback) {
   var client = this.client;
@@ -642,7 +642,7 @@ LROsCustomHeader.prototype.get201CreatingSucceeded200Polling = function (options
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROsCustomHeader.prototype.post202Retry200 = function (product, options, callback) {
   var self = this.client;
@@ -675,7 +675,7 @@ LROsCustomHeader.prototype.post202Retry200 = function (product, options, callbac
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROsCustomHeader.prototype.beginPost202Retry200 = function (product, options, callback) {
   var client = this.client;
@@ -788,7 +788,7 @@ LROsCustomHeader.prototype.beginPost202Retry200 = function (product, options, ca
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROsCustomHeader.prototype.postAsyncRetrySucceeded = function (product, options, callback) {
   var self = this.client;
@@ -822,7 +822,7 @@ LROsCustomHeader.prototype.postAsyncRetrySucceeded = function (product, options,
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROsCustomHeader.prototype.beginPostAsyncRetrySucceeded = function (product, options, callback) {
   var client = this.client;

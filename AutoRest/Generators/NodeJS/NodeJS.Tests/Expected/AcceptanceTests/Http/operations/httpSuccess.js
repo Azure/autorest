@@ -39,7 +39,7 @@ function HttpSuccess(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpSuccess.prototype.head200 = function (options, callback) {
   var client = this.client;
@@ -118,7 +118,7 @@ HttpSuccess.prototype.head200 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpSuccess.prototype.get200 = function (options, callback) {
   var client = this.client;
@@ -212,7 +212,7 @@ HttpSuccess.prototype.get200 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpSuccess.prototype.put200 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -304,7 +304,7 @@ HttpSuccess.prototype.put200 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpSuccess.prototype.patch200 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -396,7 +396,7 @@ HttpSuccess.prototype.patch200 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpSuccess.prototype.post200 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -488,7 +488,7 @@ HttpSuccess.prototype.post200 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpSuccess.prototype.delete200 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -580,7 +580,7 @@ HttpSuccess.prototype.delete200 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpSuccess.prototype.put201 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -672,7 +672,7 @@ HttpSuccess.prototype.put201 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpSuccess.prototype.post201 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -764,7 +764,7 @@ HttpSuccess.prototype.post201 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpSuccess.prototype.put202 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -856,7 +856,7 @@ HttpSuccess.prototype.put202 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpSuccess.prototype.patch202 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -948,7 +948,7 @@ HttpSuccess.prototype.patch202 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpSuccess.prototype.post202 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -1040,7 +1040,7 @@ HttpSuccess.prototype.post202 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpSuccess.prototype.delete202 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -1130,7 +1130,7 @@ HttpSuccess.prototype.delete202 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpSuccess.prototype.head204 = function (options, callback) {
   var client = this.client;
@@ -1211,7 +1211,7 @@ HttpSuccess.prototype.head204 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpSuccess.prototype.put204 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -1303,7 +1303,7 @@ HttpSuccess.prototype.put204 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpSuccess.prototype.patch204 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -1395,7 +1395,7 @@ HttpSuccess.prototype.patch204 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpSuccess.prototype.post204 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -1487,7 +1487,7 @@ HttpSuccess.prototype.post204 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpSuccess.prototype.delete204 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -1577,7 +1577,7 @@ HttpSuccess.prototype.delete204 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpSuccess.prototype.head404 = function (options, callback) {
   var client = this.client;

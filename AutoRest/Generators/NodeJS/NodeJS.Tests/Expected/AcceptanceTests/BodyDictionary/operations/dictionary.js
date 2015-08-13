@@ -39,7 +39,7 @@ function Dictionary(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getNull = function (options, callback) {
   var client = this.client;
@@ -131,7 +131,7 @@ Dictionary.prototype.getNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getEmpty = function (options, callback) {
   var client = this.client;
@@ -225,7 +225,7 @@ Dictionary.prototype.getEmpty = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.putEmpty = function (arrayBody, options, callback) {
   var client = this.client;
@@ -320,7 +320,7 @@ Dictionary.prototype.putEmpty = function (arrayBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getNullValue = function (options, callback) {
   var client = this.client;
@@ -412,7 +412,7 @@ Dictionary.prototype.getNullValue = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getNullKey = function (options, callback) {
   var client = this.client;
@@ -504,7 +504,7 @@ Dictionary.prototype.getNullKey = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getEmptyStringKey = function (options, callback) {
   var client = this.client;
@@ -596,7 +596,7 @@ Dictionary.prototype.getEmptyStringKey = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getInvalid = function (options, callback) {
   var client = this.client;
@@ -688,7 +688,7 @@ Dictionary.prototype.getInvalid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getBooleanTfft = function (options, callback) {
   var client = this.client;
@@ -782,7 +782,7 @@ Dictionary.prototype.getBooleanTfft = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.putBooleanTfft = function (arrayBody, options, callback) {
   var client = this.client;
@@ -877,7 +877,7 @@ Dictionary.prototype.putBooleanTfft = function (arrayBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getBooleanInvalidNull = function (options, callback) {
   var client = this.client;
@@ -969,7 +969,7 @@ Dictionary.prototype.getBooleanInvalidNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getBooleanInvalidString = function (options, callback) {
   var client = this.client;
@@ -1061,7 +1061,7 @@ Dictionary.prototype.getBooleanInvalidString = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getIntegerValid = function (options, callback) {
   var client = this.client;
@@ -1155,7 +1155,7 @@ Dictionary.prototype.getIntegerValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.putIntegerValid = function (arrayBody, options, callback) {
   var client = this.client;
@@ -1250,7 +1250,7 @@ Dictionary.prototype.putIntegerValid = function (arrayBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getIntInvalidNull = function (options, callback) {
   var client = this.client;
@@ -1342,7 +1342,7 @@ Dictionary.prototype.getIntInvalidNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getIntInvalidString = function (options, callback) {
   var client = this.client;
@@ -1434,7 +1434,7 @@ Dictionary.prototype.getIntInvalidString = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getLongValid = function (options, callback) {
   var client = this.client;
@@ -1528,7 +1528,7 @@ Dictionary.prototype.getLongValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.putLongValid = function (arrayBody, options, callback) {
   var client = this.client;
@@ -1623,7 +1623,7 @@ Dictionary.prototype.putLongValid = function (arrayBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getLongInvalidNull = function (options, callback) {
   var client = this.client;
@@ -1715,7 +1715,7 @@ Dictionary.prototype.getLongInvalidNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getLongInvalidString = function (options, callback) {
   var client = this.client;
@@ -1807,7 +1807,7 @@ Dictionary.prototype.getLongInvalidString = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getFloatValid = function (options, callback) {
   var client = this.client;
@@ -1901,7 +1901,7 @@ Dictionary.prototype.getFloatValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.putFloatValid = function (arrayBody, options, callback) {
   var client = this.client;
@@ -1996,7 +1996,7 @@ Dictionary.prototype.putFloatValid = function (arrayBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getFloatInvalidNull = function (options, callback) {
   var client = this.client;
@@ -2088,7 +2088,7 @@ Dictionary.prototype.getFloatInvalidNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getFloatInvalidString = function (options, callback) {
   var client = this.client;
@@ -2180,7 +2180,7 @@ Dictionary.prototype.getFloatInvalidString = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getDoubleValid = function (options, callback) {
   var client = this.client;
@@ -2274,7 +2274,7 @@ Dictionary.prototype.getDoubleValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.putDoubleValid = function (arrayBody, options, callback) {
   var client = this.client;
@@ -2369,7 +2369,7 @@ Dictionary.prototype.putDoubleValid = function (arrayBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getDoubleInvalidNull = function (options, callback) {
   var client = this.client;
@@ -2461,7 +2461,7 @@ Dictionary.prototype.getDoubleInvalidNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getDoubleInvalidString = function (options, callback) {
   var client = this.client;
@@ -2553,7 +2553,7 @@ Dictionary.prototype.getDoubleInvalidString = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getStringValid = function (options, callback) {
   var client = this.client;
@@ -2647,7 +2647,7 @@ Dictionary.prototype.getStringValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.putStringValid = function (arrayBody, options, callback) {
   var client = this.client;
@@ -2742,7 +2742,7 @@ Dictionary.prototype.putStringValid = function (arrayBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getStringWithNull = function (options, callback) {
   var client = this.client;
@@ -2834,7 +2834,7 @@ Dictionary.prototype.getStringWithNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getStringWithInvalid = function (options, callback) {
   var client = this.client;
@@ -2927,7 +2927,7 @@ Dictionary.prototype.getStringWithInvalid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getDateValid = function (options, callback) {
   var client = this.client;
@@ -3029,7 +3029,7 @@ Dictionary.prototype.getDateValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.putDateValid = function (arrayBody, options, callback) {
   var client = this.client;
@@ -3125,7 +3125,7 @@ Dictionary.prototype.putDateValid = function (arrayBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getDateInvalidNull = function (options, callback) {
   var client = this.client;
@@ -3224,7 +3224,7 @@ Dictionary.prototype.getDateInvalidNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getDateInvalidChars = function (options, callback) {
   var client = this.client;
@@ -3324,7 +3324,7 @@ Dictionary.prototype.getDateInvalidChars = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getDateTimeValid = function (options, callback) {
   var client = this.client;
@@ -3426,7 +3426,7 @@ Dictionary.prototype.getDateTimeValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.putDateTimeValid = function (arrayBody, options, callback) {
   var client = this.client;
@@ -3522,7 +3522,7 @@ Dictionary.prototype.putDateTimeValid = function (arrayBody, options, callback) 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getDateTimeInvalidNull = function (options, callback) {
   var client = this.client;
@@ -3621,7 +3621,7 @@ Dictionary.prototype.getDateTimeInvalidNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getDateTimeInvalidChars = function (options, callback) {
   var client = this.client;
@@ -3721,7 +3721,7 @@ Dictionary.prototype.getDateTimeInvalidChars = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getByteValid = function (options, callback) {
   var client = this.client;
@@ -3823,7 +3823,7 @@ Dictionary.prototype.getByteValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.putByteValid = function (arrayBody, options, callback) {
   var client = this.client;
@@ -3919,7 +3919,7 @@ Dictionary.prototype.putByteValid = function (arrayBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getByteInvalidNull = function (options, callback) {
   var client = this.client;
@@ -4018,7 +4018,7 @@ Dictionary.prototype.getByteInvalidNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getComplexNull = function (options, callback) {
   var client = this.client;
@@ -4117,7 +4117,7 @@ Dictionary.prototype.getComplexNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getComplexEmpty = function (options, callback) {
   var client = this.client;
@@ -4217,7 +4217,7 @@ Dictionary.prototype.getComplexEmpty = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getComplexItemNull = function (options, callback) {
   var client = this.client;
@@ -4317,7 +4317,7 @@ Dictionary.prototype.getComplexItemNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getComplexItemEmpty = function (options, callback) {
   var client = this.client;
@@ -4417,7 +4417,7 @@ Dictionary.prototype.getComplexItemEmpty = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getComplexValid = function (options, callback) {
   var client = this.client;
@@ -4520,7 +4520,7 @@ Dictionary.prototype.getComplexValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.putComplexValid = function (arrayBody, options, callback) {
   var client = this.client;
@@ -4615,7 +4615,7 @@ Dictionary.prototype.putComplexValid = function (arrayBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getArrayNull = function (options, callback) {
   var client = this.client;
@@ -4707,7 +4707,7 @@ Dictionary.prototype.getArrayNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getArrayEmpty = function (options, callback) {
   var client = this.client;
@@ -4800,7 +4800,7 @@ Dictionary.prototype.getArrayEmpty = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getArrayItemNull = function (options, callback) {
   var client = this.client;
@@ -4893,7 +4893,7 @@ Dictionary.prototype.getArrayItemNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getArrayItemEmpty = function (options, callback) {
   var client = this.client;
@@ -4986,7 +4986,7 @@ Dictionary.prototype.getArrayItemEmpty = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getArrayValid = function (options, callback) {
   var client = this.client;
@@ -5081,7 +5081,7 @@ Dictionary.prototype.getArrayValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.putArrayValid = function (arrayBody, options, callback) {
   var client = this.client;
@@ -5180,7 +5180,7 @@ Dictionary.prototype.putArrayValid = function (arrayBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getDictionaryNull = function (options, callback) {
   var client = this.client;
@@ -5272,7 +5272,7 @@ Dictionary.prototype.getDictionaryNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getDictionaryEmpty = function (options, callback) {
   var client = this.client;
@@ -5366,7 +5366,7 @@ Dictionary.prototype.getDictionaryEmpty = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getDictionaryItemNull = function (options, callback) {
   var client = this.client;
@@ -5460,7 +5460,7 @@ Dictionary.prototype.getDictionaryItemNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getDictionaryItemEmpty = function (options, callback) {
   var client = this.client;
@@ -5554,7 +5554,7 @@ Dictionary.prototype.getDictionaryItemEmpty = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getDictionaryValid = function (options, callback) {
   var client = this.client;
@@ -5650,7 +5650,7 @@ Dictionary.prototype.getDictionaryValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.putDictionaryValid = function (arrayBody, options, callback) {
   var client = this.client;

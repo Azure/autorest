@@ -42,7 +42,7 @@ function SkipUrlEncoding(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 SkipUrlEncoding.prototype.getMethodPathValid = function (unencodedPathParam, options, callback) {
   var client = this.client;
@@ -144,7 +144,7 @@ SkipUrlEncoding.prototype.getMethodPathValid = function (unencodedPathParam, opt
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 SkipUrlEncoding.prototype.getPathPathValid = function (unencodedPathParam, options, callback) {
   var client = this.client;
@@ -246,7 +246,7 @@ SkipUrlEncoding.prototype.getPathPathValid = function (unencodedPathParam, optio
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 SkipUrlEncoding.prototype.getSwaggerPathValid = function (unencodedPathParam, options, callback) {
   var client = this.client;
@@ -349,7 +349,7 @@ SkipUrlEncoding.prototype.getSwaggerPathValid = function (unencodedPathParam, op
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 SkipUrlEncoding.prototype.getMethodQueryValid = function (q1, options, callback) {
   var client = this.client;
@@ -451,7 +451,7 @@ SkipUrlEncoding.prototype.getMethodQueryValid = function (q1, options, callback)
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 SkipUrlEncoding.prototype.getMethodQueryNull = function (q1, options, callback) {
   var client = this.client;
@@ -556,7 +556,7 @@ SkipUrlEncoding.prototype.getMethodQueryNull = function (q1, options, callback) 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 SkipUrlEncoding.prototype.getPathQueryValid = function (q1, options, callback) {
   var client = this.client;
@@ -659,7 +659,7 @@ SkipUrlEncoding.prototype.getPathQueryValid = function (q1, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 SkipUrlEncoding.prototype.getSwaggerQueryValid = function (q1, options, callback) {
   var client = this.client;

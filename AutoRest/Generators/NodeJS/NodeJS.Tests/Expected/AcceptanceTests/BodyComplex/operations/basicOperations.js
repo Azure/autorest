@@ -39,7 +39,7 @@ function BasicOperations(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 BasicOperations.prototype.getValid = function (options, callback) {
   var client = this.client;
@@ -142,7 +142,7 @@ BasicOperations.prototype.getValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 BasicOperations.prototype.putValid = function (complexBody, options, callback) {
   var client = this.client;
@@ -234,7 +234,7 @@ BasicOperations.prototype.putValid = function (complexBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 BasicOperations.prototype.getInvalid = function (options, callback) {
   var client = this.client;
@@ -329,7 +329,7 @@ BasicOperations.prototype.getInvalid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 BasicOperations.prototype.getEmpty = function (options, callback) {
   var client = this.client;
@@ -424,7 +424,7 @@ BasicOperations.prototype.getEmpty = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 BasicOperations.prototype.getNull = function (options, callback) {
   var client = this.client;
@@ -519,7 +519,7 @@ BasicOperations.prototype.getNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 BasicOperations.prototype.getNotProvided = function (options, callback) {
   var client = this.client;

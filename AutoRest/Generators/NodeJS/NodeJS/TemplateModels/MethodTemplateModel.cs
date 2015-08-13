@@ -3,13 +3,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using Microsoft.CSharp;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.NodeJS.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
-using System.Globalization;
 
 namespace Microsoft.Rest.Generator.NodeJS
 {
@@ -229,6 +229,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
         public static string GetParameterDocumentationType(Parameter parameter)
         {
             if (parameter == null)
@@ -249,7 +250,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                 typeName = PrimaryType.String.Name;
             }
 
-            return typeName.ToLower();
+            return typeName.ToLower(CultureInfo.InvariantCulture);
         }
 
         public string GetDeserializationString(IType type, string valueReference = "result.body")
