@@ -8,23 +8,27 @@
 package com.microsoft.rest;
 
 import retrofit.Callback;
-import retrofit.ResponseCallback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import retrofit.converter.Converter;
 
 /**
  * Exception thrown for an invalid response with custom error information.
  */
-public abstract class ServiceResponseCallback extends ResponseCallback {
-    @Override
-    public void failure(RetrofitError error) {
-        response(error.getResponse(), error);
+public class ServiceResponse<T> {
+    private T body;
+    private Response response;
+
+    public ServiceResponse(T body, Response response) {
+        this.body = body;
+        this.response = response;
     }
 
-    @Override
-    public void success(Response response) {
-        response(response, null);
+    public T getBody() {
+        return this.body;
     }
 
-    public abstract void response(Response response, RetrofitError ex);
+    public Response getResponse() {
+        return this.response;
+    }
 }
