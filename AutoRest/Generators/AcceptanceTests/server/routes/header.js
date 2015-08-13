@@ -180,10 +180,17 @@ var header = function(coverage, optionalCoverage) {
                 utils.send400(res, next, "Did not like date scenario \"" + scenario + "\" with value " + value);
             case "datetime":
                 if (scenario === "valid") {
-                    if (utils.coerceDate(value) === "2010-01-01T12:34:56Z") {
+                    var dtVar;
+                    try {
+                      dtVar = utils.coerceDate(value);
+                      if (dtVar === "2010-01-01T12:34:56Z") {
                         coverage['HeaderParameterDateTimeValid']++;
                         res.status(200).end();
                         break;
+                      }
+                    }
+                    catch (e) {
+                      console.log(e);
                     }
                 } else if (scenario === "min") {
                     if (utils.coerceDate(value) === "0001-01-01T00:00:00Z") {
