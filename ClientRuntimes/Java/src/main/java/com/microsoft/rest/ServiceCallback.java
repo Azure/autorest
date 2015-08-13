@@ -8,18 +8,13 @@
 package com.microsoft.rest;
 
 import retrofit.Callback;
-import retrofit.ResponseCallback;
 import retrofit.RetrofitError;
-import retrofit.client.Request;
 import retrofit.client.Response;
 
 /**
- * Exception thrown for an invalid response with custom error information.
+ * The callback used for client side asynchronous operations.
  */
-public abstract class ServiceCallback<T> implements Callback<T> {
-    public T result;
-    public ServiceException exception;
-
+public abstract class ServiceCallback<T> implements Callback<ServiceResponse<T>> {
     @Override
     public void failure(RetrofitError error) {
         ServiceException ex = new ServiceException(error);
@@ -28,5 +23,22 @@ public abstract class ServiceCallback<T> implements Callback<T> {
         failure(ex);
     }
 
-    public abstract void failure(ServiceException ex);
+    @Override
+    public void success(ServiceResponse<T> result, Response response) {
+        success(result);
+    }
+
+    /**
+     * Override this method to handle REST call failures.
+     *
+     * @param exception the exception thrown from the pipeline.
+     */
+    public abstract void failure(ServiceException exception);
+
+    /**
+     * Override this method to handle successful REST call results.
+     *
+     * @param result the ServiceResponse holding the response.
+     */
+    public abstract void success(ServiceResponse<T> result);
 }

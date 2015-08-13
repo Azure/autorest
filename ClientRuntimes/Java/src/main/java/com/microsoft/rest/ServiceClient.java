@@ -27,7 +27,7 @@ public abstract class ServiceClient {
     /**
      * Initializes a new instance of the ServiceClient class.
      */
-    public ServiceClient() {
+    protected ServiceClient() {
         this(new OkHttpClient(), new RestAdapter.Builder());
     }
 
@@ -37,7 +37,7 @@ public abstract class ServiceClient {
      * @param client the OkHttpClient instance to use
      * @param restAdapterBuilder the builder to build up a rest adapter
      */
-    public ServiceClient(OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
+    protected ServiceClient(OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
         if (client == null) {
             throw new IllegalArgumentException("client == null");
         }
@@ -54,7 +54,7 @@ public abstract class ServiceClient {
         Executor executor = Executors.newCachedThreadPool();
         this.restAdapterBuilder = restAdapterBuilder
                 .setClient(okClient)
-                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .setLogLevel(RestAdapter.LogLevel.BASIC)
                 .setExecutors(executor, executor);
     }
 
