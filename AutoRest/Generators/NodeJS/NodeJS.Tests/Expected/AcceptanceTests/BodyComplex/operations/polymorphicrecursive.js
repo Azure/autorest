@@ -39,7 +39,7 @@ function Polymorphicrecursive(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Polymorphicrecursive.prototype.getValid = function (options, callback) {
   var client = this.client;
@@ -198,7 +198,7 @@ Polymorphicrecursive.prototype.getValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Polymorphicrecursive.prototype.putValid = function (complexBody, options, callback) {
   var client = this.client;

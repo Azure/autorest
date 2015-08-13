@@ -39,7 +39,7 @@ function ArrayModel(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getValid = function (options, callback) {
   var client = this.client;
@@ -138,7 +138,7 @@ ArrayModel.prototype.getValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.putValid = function (complexBody, options, callback) {
   var client = this.client;
@@ -230,7 +230,7 @@ ArrayModel.prototype.putValid = function (complexBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getEmpty = function (options, callback) {
   var client = this.client;
@@ -329,7 +329,7 @@ ArrayModel.prototype.getEmpty = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.putEmpty = function (complexBody, options, callback) {
   var client = this.client;
@@ -422,7 +422,7 @@ ArrayModel.prototype.putEmpty = function (complexBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getNotProvided = function (options, callback) {
   var client = this.client;

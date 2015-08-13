@@ -39,7 +39,7 @@ function DateModel(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 DateModel.prototype.getNull = function (options, callback) {
   var client = this.client;
@@ -134,7 +134,7 @@ DateModel.prototype.getNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 DateModel.prototype.getInvalidDate = function (options, callback) {
   var client = this.client;
@@ -229,7 +229,7 @@ DateModel.prototype.getInvalidDate = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 DateModel.prototype.getOverflowDate = function (options, callback) {
   var client = this.client;
@@ -324,7 +324,7 @@ DateModel.prototype.getOverflowDate = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 DateModel.prototype.getUnderflowDate = function (options, callback) {
   var client = this.client;
@@ -421,7 +421,7 @@ DateModel.prototype.getUnderflowDate = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 DateModel.prototype.putMaxDate = function (dateBody, options, callback) {
   var client = this.client;
@@ -512,7 +512,7 @@ DateModel.prototype.putMaxDate = function (dateBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 DateModel.prototype.getMaxDate = function (options, callback) {
   var client = this.client;
@@ -609,7 +609,7 @@ DateModel.prototype.getMaxDate = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 DateModel.prototype.putMinDate = function (dateBody, options, callback) {
   var client = this.client;
@@ -700,7 +700,7 @@ DateModel.prototype.putMinDate = function (dateBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 DateModel.prototype.getMinDate = function (options, callback) {
   var client = this.client;

@@ -39,7 +39,7 @@ function MultipleResponses(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.get200Model204NoModelDefaultError200Valid = function (options, callback) {
   var client = this.client;
@@ -134,7 +134,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError200Valid = function
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.get200Model204NoModelDefaultError204Valid = function (options, callback) {
   var client = this.client;
@@ -229,7 +229,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError204Valid = function
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.get200Model204NoModelDefaultError201Invalid = function (options, callback) {
   var client = this.client;
@@ -324,7 +324,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError201Invalid = functi
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.get200Model204NoModelDefaultError202None = function (options, callback) {
   var client = this.client;
@@ -420,7 +420,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError202None = function 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.get200Model204NoModelDefaultError400Valid = function (options, callback) {
   var client = this.client;
@@ -515,7 +515,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError400Valid = function
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.get200Model201ModelDefaultError200Valid = function (options, callback) {
   var client = this.client;
@@ -627,7 +627,7 @@ MultipleResponses.prototype.get200Model201ModelDefaultError200Valid = function (
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.get200Model201ModelDefaultError201Valid = function (options, callback) {
   var client = this.client;
@@ -739,7 +739,7 @@ MultipleResponses.prototype.get200Model201ModelDefaultError201Valid = function (
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.get200Model201ModelDefaultError400Valid = function (options, callback) {
   var client = this.client;
@@ -850,7 +850,7 @@ MultipleResponses.prototype.get200Model201ModelDefaultError400Valid = function (
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError200Valid = function (options, callback) {
   var client = this.client;
@@ -968,7 +968,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError200Valid =
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError201Valid = function (options, callback) {
   var client = this.client;
@@ -1086,7 +1086,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError201Valid =
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError404Valid = function (options, callback) {
   var client = this.client;
@@ -1205,7 +1205,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError404Valid =
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError400Valid = function (options, callback) {
   var client = this.client;
@@ -1323,7 +1323,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError400Valid =
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.get202None204NoneDefaultError202None = function (options, callback) {
   var client = this.client;
@@ -1402,7 +1402,7 @@ MultipleResponses.prototype.get202None204NoneDefaultError202None = function (opt
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.get202None204NoneDefaultError204None = function (options, callback) {
   var client = this.client;
@@ -1482,7 +1482,7 @@ MultipleResponses.prototype.get202None204NoneDefaultError204None = function (opt
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.get202None204NoneDefaultError400Valid = function (options, callback) {
   var client = this.client;
@@ -1561,7 +1561,7 @@ MultipleResponses.prototype.get202None204NoneDefaultError400Valid = function (op
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.get202None204NoneDefaultNone202Invalid = function (options, callback) {
   var client = this.client;
@@ -1637,7 +1637,7 @@ MultipleResponses.prototype.get202None204NoneDefaultNone202Invalid = function (o
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.get202None204NoneDefaultNone204None = function (options, callback) {
   var client = this.client;
@@ -1713,7 +1713,7 @@ MultipleResponses.prototype.get202None204NoneDefaultNone204None = function (opti
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.get202None204NoneDefaultNone400None = function (options, callback) {
   var client = this.client;
@@ -1789,7 +1789,7 @@ MultipleResponses.prototype.get202None204NoneDefaultNone400None = function (opti
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.get202None204NoneDefaultNone400Invalid = function (options, callback) {
   var client = this.client;
@@ -1865,7 +1865,7 @@ MultipleResponses.prototype.get202None204NoneDefaultNone400Invalid = function (o
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.getDefaultModelA200Valid = function (options, callback) {
   var client = this.client;
@@ -1957,7 +1957,7 @@ MultipleResponses.prototype.getDefaultModelA200Valid = function (options, callba
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.getDefaultModelA200None = function (options, callback) {
   var client = this.client;
@@ -2049,7 +2049,7 @@ MultipleResponses.prototype.getDefaultModelA200None = function (options, callbac
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.getDefaultModelA400Valid = function (options, callback) {
   var client = this.client;
@@ -2141,7 +2141,7 @@ MultipleResponses.prototype.getDefaultModelA400Valid = function (options, callba
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.getDefaultModelA400None = function (options, callback) {
   var client = this.client;
@@ -2233,7 +2233,7 @@ MultipleResponses.prototype.getDefaultModelA400None = function (options, callbac
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.getDefaultNone200Invalid = function (options, callback) {
   var client = this.client;
@@ -2309,7 +2309,7 @@ MultipleResponses.prototype.getDefaultNone200Invalid = function (options, callba
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.getDefaultNone200None = function (options, callback) {
   var client = this.client;
@@ -2385,7 +2385,7 @@ MultipleResponses.prototype.getDefaultNone200None = function (options, callback)
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.getDefaultNone400Invalid = function (options, callback) {
   var client = this.client;
@@ -2461,7 +2461,7 @@ MultipleResponses.prototype.getDefaultNone400Invalid = function (options, callba
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.getDefaultNone400None = function (options, callback) {
   var client = this.client;
@@ -2538,7 +2538,7 @@ MultipleResponses.prototype.getDefaultNone400None = function (options, callback)
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.get200ModelA200None = function (options, callback) {
   var client = this.client;
@@ -2630,7 +2630,7 @@ MultipleResponses.prototype.get200ModelA200None = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.get200ModelA200Valid = function (options, callback) {
   var client = this.client;
@@ -2722,7 +2722,7 @@ MultipleResponses.prototype.get200ModelA200Valid = function (options, callback) 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.get200ModelA200Invalid = function (options, callback) {
   var client = this.client;
@@ -2815,7 +2815,7 @@ MultipleResponses.prototype.get200ModelA200Invalid = function (options, callback
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.get200ModelA400None = function (options, callback) {
   var client = this.client;
@@ -2907,7 +2907,7 @@ MultipleResponses.prototype.get200ModelA400None = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.get200ModelA400Valid = function (options, callback) {
   var client = this.client;
@@ -2999,7 +2999,7 @@ MultipleResponses.prototype.get200ModelA400Valid = function (options, callback) 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.get200ModelA400Invalid = function (options, callback) {
   var client = this.client;
@@ -3091,7 +3091,7 @@ MultipleResponses.prototype.get200ModelA400Invalid = function (options, callback
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 MultipleResponses.prototype.get200ModelA202Valid = function (options, callback) {
   var client = this.client;

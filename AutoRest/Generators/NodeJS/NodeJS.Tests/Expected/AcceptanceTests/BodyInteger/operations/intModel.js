@@ -39,7 +39,7 @@ function IntModel(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 IntModel.prototype.getNull = function (options, callback) {
   var client = this.client;
@@ -131,7 +131,7 @@ IntModel.prototype.getNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 IntModel.prototype.getInvalid = function (options, callback) {
   var client = this.client;
@@ -223,7 +223,7 @@ IntModel.prototype.getInvalid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 IntModel.prototype.getOverflowInt32 = function (options, callback) {
   var client = this.client;
@@ -315,7 +315,7 @@ IntModel.prototype.getOverflowInt32 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 IntModel.prototype.getUnderflowInt32 = function (options, callback) {
   var client = this.client;
@@ -407,7 +407,7 @@ IntModel.prototype.getUnderflowInt32 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 IntModel.prototype.getOverflowInt64 = function (options, callback) {
   var client = this.client;
@@ -499,7 +499,7 @@ IntModel.prototype.getOverflowInt64 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 IntModel.prototype.getUnderflowInt64 = function (options, callback) {
   var client = this.client;
@@ -593,7 +593,7 @@ IntModel.prototype.getUnderflowInt64 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 IntModel.prototype.putMax32 = function (intBody, options, callback) {
   var client = this.client;
@@ -685,7 +685,7 @@ IntModel.prototype.putMax32 = function (intBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 IntModel.prototype.putMax64 = function (intBody, options, callback) {
   var client = this.client;
@@ -777,7 +777,7 @@ IntModel.prototype.putMax64 = function (intBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 IntModel.prototype.putMin32 = function (intBody, options, callback) {
   var client = this.client;
@@ -869,7 +869,7 @@ IntModel.prototype.putMin32 = function (intBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 IntModel.prototype.putMin64 = function (intBody, options, callback) {
   var client = this.client;

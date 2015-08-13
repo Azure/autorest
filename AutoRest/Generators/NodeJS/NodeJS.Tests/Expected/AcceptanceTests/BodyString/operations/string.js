@@ -39,7 +39,7 @@ function String(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 String.prototype.getNull = function (options, callback) {
   var client = this.client;
@@ -133,7 +133,7 @@ String.prototype.getNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 String.prototype.putNull = function (stringBody, options, callback) {
   var client = this.client;
@@ -223,7 +223,7 @@ String.prototype.putNull = function (stringBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 String.prototype.getEmpty = function (options, callback) {
   var client = this.client;
@@ -317,7 +317,7 @@ String.prototype.getEmpty = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 String.prototype.putEmpty = function (stringBody, options, callback) {
   var client = this.client;
@@ -408,7 +408,7 @@ String.prototype.putEmpty = function (stringBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 String.prototype.getMbcs = function (options, callback) {
   var client = this.client;
@@ -503,7 +503,7 @@ String.prototype.getMbcs = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 String.prototype.putMbcs = function (stringBody, options, callback) {
   var client = this.client;
@@ -595,7 +595,7 @@ String.prototype.putMbcs = function (stringBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 String.prototype.getWhitespace = function (options, callback) {
   var client = this.client;
@@ -691,7 +691,7 @@ String.prototype.getWhitespace = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 String.prototype.putWhitespace = function (stringBody, options, callback) {
   var client = this.client;
@@ -781,7 +781,7 @@ String.prototype.putWhitespace = function (stringBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 String.prototype.getNotProvided = function (options, callback) {
   var client = this.client;

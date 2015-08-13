@@ -51,7 +51,7 @@ function PathItems(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 PathItems.prototype.getAllWithValues = function (localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery, options, callback) {
   var client = this.client;
@@ -181,7 +181,7 @@ PathItems.prototype.getAllWithValues = function (localStringPath, pathItemString
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 PathItems.prototype.getGlobalQueryNull = function (localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery, options, callback) {
   var client = this.client;
@@ -310,7 +310,7 @@ PathItems.prototype.getGlobalQueryNull = function (localStringPath, pathItemStri
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 PathItems.prototype.getGlobalAndLocalQueryNull = function (localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery, options, callback) {
   var client = this.client;
@@ -439,7 +439,7 @@ PathItems.prototype.getGlobalAndLocalQueryNull = function (localStringPath, path
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 PathItems.prototype.getLocalPathItemQueryNull = function (localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery, options, callback) {
   var client = this.client;

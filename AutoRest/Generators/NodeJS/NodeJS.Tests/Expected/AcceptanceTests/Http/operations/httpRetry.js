@@ -39,7 +39,7 @@ function HttpRetry(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRetry.prototype.head408 = function (options, callback) {
   var client = this.client;
@@ -120,7 +120,7 @@ HttpRetry.prototype.head408 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRetry.prototype.put500 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -212,7 +212,7 @@ HttpRetry.prototype.put500 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRetry.prototype.patch500 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -302,7 +302,7 @@ HttpRetry.prototype.patch500 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRetry.prototype.get502 = function (options, callback) {
   var client = this.client;
@@ -383,7 +383,7 @@ HttpRetry.prototype.get502 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRetry.prototype.post503 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -475,7 +475,7 @@ HttpRetry.prototype.post503 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRetry.prototype.delete503 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -567,7 +567,7 @@ HttpRetry.prototype.delete503 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRetry.prototype.put504 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -659,7 +659,7 @@ HttpRetry.prototype.put504 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRetry.prototype.patch504 = function (booleanValue, options, callback) {
   var client = this.client;

@@ -39,7 +39,7 @@ function Primitive(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Primitive.prototype.getInt = function (options, callback) {
   var client = this.client;
@@ -140,7 +140,7 @@ Primitive.prototype.getInt = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Primitive.prototype.putInt = function (complexBody, options, callback) {
   var client = this.client;
@@ -232,7 +232,7 @@ Primitive.prototype.putInt = function (complexBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Primitive.prototype.getLong = function (options, callback) {
   var client = this.client;
@@ -333,7 +333,7 @@ Primitive.prototype.getLong = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Primitive.prototype.putLong = function (complexBody, options, callback) {
   var client = this.client;
@@ -425,7 +425,7 @@ Primitive.prototype.putLong = function (complexBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Primitive.prototype.getFloat = function (options, callback) {
   var client = this.client;
@@ -526,7 +526,7 @@ Primitive.prototype.getFloat = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Primitive.prototype.putFloat = function (complexBody, options, callback) {
   var client = this.client;
@@ -618,7 +618,7 @@ Primitive.prototype.putFloat = function (complexBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Primitive.prototype.getDouble = function (options, callback) {
   var client = this.client;
@@ -719,7 +719,7 @@ Primitive.prototype.getDouble = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Primitive.prototype.putDouble = function (complexBody, options, callback) {
   var client = this.client;
@@ -811,7 +811,7 @@ Primitive.prototype.putDouble = function (complexBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Primitive.prototype.getBool = function (options, callback) {
   var client = this.client;
@@ -912,7 +912,7 @@ Primitive.prototype.getBool = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Primitive.prototype.putBool = function (complexBody, options, callback) {
   var client = this.client;
@@ -1004,7 +1004,7 @@ Primitive.prototype.putBool = function (complexBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Primitive.prototype.getString = function (options, callback) {
   var client = this.client;
@@ -1107,7 +1107,7 @@ Primitive.prototype.getString = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Primitive.prototype.putString = function (complexBody, options, callback) {
   var client = this.client;
@@ -1199,7 +1199,7 @@ Primitive.prototype.putString = function (complexBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Primitive.prototype.getDate = function (options, callback) {
   var client = this.client;
@@ -1300,7 +1300,7 @@ Primitive.prototype.getDate = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Primitive.prototype.putDate = function (complexBody, options, callback) {
   var client = this.client;
@@ -1392,7 +1392,7 @@ Primitive.prototype.putDate = function (complexBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Primitive.prototype.getDateTime = function (options, callback) {
   var client = this.client;
@@ -1493,7 +1493,7 @@ Primitive.prototype.getDateTime = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Primitive.prototype.putDateTime = function (complexBody, options, callback) {
   var client = this.client;
@@ -1585,7 +1585,7 @@ Primitive.prototype.putDateTime = function (complexBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Primitive.prototype.getByte = function (options, callback) {
   var client = this.client;
@@ -1684,7 +1684,7 @@ Primitive.prototype.getByte = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Primitive.prototype.putByte = function (complexBody, options, callback) {
   var client = this.client;

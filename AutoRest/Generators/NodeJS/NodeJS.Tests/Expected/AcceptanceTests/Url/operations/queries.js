@@ -41,7 +41,7 @@ function Queries(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.getBooleanTrue = function (boolQuery, options, callback) {
   var client = this.client;
@@ -137,7 +137,7 @@ Queries.prototype.getBooleanTrue = function (boolQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.getBooleanFalse = function (boolQuery, options, callback) {
   var client = this.client;
@@ -233,7 +233,7 @@ Queries.prototype.getBooleanFalse = function (boolQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.getBooleanNull = function (boolQuery, options, callback) {
   var client = this.client;
@@ -329,7 +329,7 @@ Queries.prototype.getBooleanNull = function (boolQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.getIntOneMillion = function (intQuery, options, callback) {
   var client = this.client;
@@ -425,7 +425,7 @@ Queries.prototype.getIntOneMillion = function (intQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.getIntNegativeOneMillion = function (intQuery, options, callback) {
   var client = this.client;
@@ -521,7 +521,7 @@ Queries.prototype.getIntNegativeOneMillion = function (intQuery, options, callba
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.getIntNull = function (intQuery, options, callback) {
   var client = this.client;
@@ -617,7 +617,7 @@ Queries.prototype.getIntNull = function (intQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.getTenBillion = function (longQuery, options, callback) {
   var client = this.client;
@@ -713,7 +713,7 @@ Queries.prototype.getTenBillion = function (longQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.getNegativeTenBillion = function (longQuery, options, callback) {
   var client = this.client;
@@ -809,7 +809,7 @@ Queries.prototype.getNegativeTenBillion = function (longQuery, options, callback
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.getLongNull = function (longQuery, options, callback) {
   var client = this.client;
@@ -905,7 +905,7 @@ Queries.prototype.getLongNull = function (longQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.floatScientificPositive = function (floatQuery, options, callback) {
   var client = this.client;
@@ -1001,7 +1001,7 @@ Queries.prototype.floatScientificPositive = function (floatQuery, options, callb
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.floatScientificNegative = function (floatQuery, options, callback) {
   var client = this.client;
@@ -1097,7 +1097,7 @@ Queries.prototype.floatScientificNegative = function (floatQuery, options, callb
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.floatNull = function (floatQuery, options, callback) {
   var client = this.client;
@@ -1193,7 +1193,7 @@ Queries.prototype.floatNull = function (floatQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.doubleDecimalPositive = function (doubleQuery, options, callback) {
   var client = this.client;
@@ -1289,7 +1289,7 @@ Queries.prototype.doubleDecimalPositive = function (doubleQuery, options, callba
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.doubleDecimalNegative = function (doubleQuery, options, callback) {
   var client = this.client;
@@ -1385,7 +1385,7 @@ Queries.prototype.doubleDecimalNegative = function (doubleQuery, options, callba
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.doubleNull = function (doubleQuery, options, callback) {
   var client = this.client;
@@ -1481,7 +1481,7 @@ Queries.prototype.doubleNull = function (doubleQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.stringUnicode = function (stringQuery, options, callback) {
   var client = this.client;
@@ -1577,7 +1577,7 @@ Queries.prototype.stringUnicode = function (stringQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.stringUrlEncoded = function (stringQuery, options, callback) {
   var client = this.client;
@@ -1673,7 +1673,7 @@ Queries.prototype.stringUrlEncoded = function (stringQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.stringEmpty = function (stringQuery, options, callback) {
   var client = this.client;
@@ -1769,7 +1769,7 @@ Queries.prototype.stringEmpty = function (stringQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.stringNull = function (stringQuery, options, callback) {
   var client = this.client;
@@ -1865,7 +1865,7 @@ Queries.prototype.stringNull = function (stringQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.enumValid = function (enumQuery, options, callback) {
   var client = this.client;
@@ -1964,7 +1964,7 @@ Queries.prototype.enumValid = function (enumQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.enumNull = function (enumQuery, options, callback) {
   var client = this.client;
@@ -2063,7 +2063,7 @@ Queries.prototype.enumNull = function (enumQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.byteMultiByte = function (byteQuery, options, callback) {
   var client = this.client;
@@ -2159,7 +2159,7 @@ Queries.prototype.byteMultiByte = function (byteQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.byteEmpty = function (byteQuery, options, callback) {
   var client = this.client;
@@ -2255,7 +2255,7 @@ Queries.prototype.byteEmpty = function (byteQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.byteNull = function (byteQuery, options, callback) {
   var client = this.client;
@@ -2351,7 +2351,7 @@ Queries.prototype.byteNull = function (byteQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.dateValid = function (dateQuery, options, callback) {
   var client = this.client;
@@ -2448,7 +2448,7 @@ Queries.prototype.dateValid = function (dateQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.dateNull = function (dateQuery, options, callback) {
   var client = this.client;
@@ -2545,7 +2545,7 @@ Queries.prototype.dateNull = function (dateQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.dateTimeValid = function (dateTimeQuery, options, callback) {
   var client = this.client;
@@ -2642,7 +2642,7 @@ Queries.prototype.dateTimeValid = function (dateTimeQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.dateTimeNull = function (dateTimeQuery, options, callback) {
   var client = this.client;
@@ -2740,7 +2740,7 @@ Queries.prototype.dateTimeNull = function (dateTimeQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.arrayStringCsvValid = function (arrayQuery, options, callback) {
   var client = this.client;
@@ -2840,7 +2840,7 @@ Queries.prototype.arrayStringCsvValid = function (arrayQuery, options, callback)
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.arrayStringCsvNull = function (arrayQuery, options, callback) {
   var client = this.client;
@@ -2940,7 +2940,7 @@ Queries.prototype.arrayStringCsvNull = function (arrayQuery, options, callback) 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.arrayStringCsvEmpty = function (arrayQuery, options, callback) {
   var client = this.client;
@@ -3041,7 +3041,7 @@ Queries.prototype.arrayStringCsvEmpty = function (arrayQuery, options, callback)
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.arrayStringSsvValid = function (arrayQuery, options, callback) {
   var client = this.client;
@@ -3142,7 +3142,7 @@ Queries.prototype.arrayStringSsvValid = function (arrayQuery, options, callback)
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.arrayStringTsvValid = function (arrayQuery, options, callback) {
   var client = this.client;
@@ -3243,7 +3243,7 @@ Queries.prototype.arrayStringTsvValid = function (arrayQuery, options, callback)
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Queries.prototype.arrayStringPipesValid = function (arrayQuery, options, callback) {
   var client = this.client;

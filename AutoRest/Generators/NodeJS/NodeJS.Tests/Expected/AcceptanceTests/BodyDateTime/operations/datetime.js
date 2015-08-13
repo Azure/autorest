@@ -39,7 +39,7 @@ function Datetime(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Datetime.prototype.getNull = function (options, callback) {
   var client = this.client;
@@ -134,7 +134,7 @@ Datetime.prototype.getNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Datetime.prototype.getInvalid = function (options, callback) {
   var client = this.client;
@@ -229,7 +229,7 @@ Datetime.prototype.getInvalid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Datetime.prototype.getOverflow = function (options, callback) {
   var client = this.client;
@@ -324,7 +324,7 @@ Datetime.prototype.getOverflow = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Datetime.prototype.getUnderflow = function (options, callback) {
   var client = this.client;
@@ -421,7 +421,7 @@ Datetime.prototype.getUnderflow = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Datetime.prototype.putUtcMaxDateTime = function (datetimeBody, options, callback) {
   var client = this.client;
@@ -512,7 +512,7 @@ Datetime.prototype.putUtcMaxDateTime = function (datetimeBody, options, callback
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Datetime.prototype.getUtcLowercaseMaxDateTime = function (options, callback) {
   var client = this.client;
@@ -607,7 +607,7 @@ Datetime.prototype.getUtcLowercaseMaxDateTime = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Datetime.prototype.getUtcUppercaseMaxDateTime = function (options, callback) {
   var client = this.client;
@@ -705,7 +705,7 @@ Datetime.prototype.getUtcUppercaseMaxDateTime = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Datetime.prototype.putLocalPositiveOffsetMaxDateTime = function (datetimeBody, options, callback) {
   var client = this.client;
@@ -797,7 +797,7 @@ Datetime.prototype.putLocalPositiveOffsetMaxDateTime = function (datetimeBody, o
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Datetime.prototype.getLocalPositiveOffsetLowercaseMaxDateTime = function (options, callback) {
   var client = this.client;
@@ -893,7 +893,7 @@ Datetime.prototype.getLocalPositiveOffsetLowercaseMaxDateTime = function (option
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Datetime.prototype.getLocalPositiveOffsetUppercaseMaxDateTime = function (options, callback) {
   var client = this.client;
@@ -991,7 +991,7 @@ Datetime.prototype.getLocalPositiveOffsetUppercaseMaxDateTime = function (option
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Datetime.prototype.putLocalNegativeOffsetMaxDateTime = function (datetimeBody, options, callback) {
   var client = this.client;
@@ -1083,7 +1083,7 @@ Datetime.prototype.putLocalNegativeOffsetMaxDateTime = function (datetimeBody, o
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Datetime.prototype.getLocalNegativeOffsetUppercaseMaxDateTime = function (options, callback) {
   var client = this.client;
@@ -1179,7 +1179,7 @@ Datetime.prototype.getLocalNegativeOffsetUppercaseMaxDateTime = function (option
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Datetime.prototype.getLocalNegativeOffsetLowercaseMaxDateTime = function (options, callback) {
   var client = this.client;
@@ -1276,7 +1276,7 @@ Datetime.prototype.getLocalNegativeOffsetLowercaseMaxDateTime = function (option
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Datetime.prototype.putUtcMinDateTime = function (datetimeBody, options, callback) {
   var client = this.client;
@@ -1367,7 +1367,7 @@ Datetime.prototype.putUtcMinDateTime = function (datetimeBody, options, callback
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Datetime.prototype.getUtcMinDateTime = function (options, callback) {
   var client = this.client;
@@ -1464,7 +1464,7 @@ Datetime.prototype.getUtcMinDateTime = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Datetime.prototype.putLocalPositiveOffsetMinDateTime = function (datetimeBody, options, callback) {
   var client = this.client;
@@ -1555,7 +1555,7 @@ Datetime.prototype.putLocalPositiveOffsetMinDateTime = function (datetimeBody, o
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Datetime.prototype.getLocalPositiveOffsetMinDateTime = function (options, callback) {
   var client = this.client;
@@ -1652,7 +1652,7 @@ Datetime.prototype.getLocalPositiveOffsetMinDateTime = function (options, callba
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Datetime.prototype.putLocalNegativeOffsetMinDateTime = function (datetimeBody, options, callback) {
   var client = this.client;
@@ -1743,7 +1743,7 @@ Datetime.prototype.putLocalNegativeOffsetMinDateTime = function (datetimeBody, o
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Datetime.prototype.getLocalNegativeOffsetMinDateTime = function (options, callback) {
   var client = this.client;

@@ -39,7 +39,7 @@ function HttpFailure(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpFailure.prototype.getEmptyError = function (options, callback) {
   var client = this.client;

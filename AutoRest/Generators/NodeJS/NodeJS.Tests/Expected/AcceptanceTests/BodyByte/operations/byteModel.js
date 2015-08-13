@@ -39,7 +39,7 @@ function ByteModel(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ByteModel.prototype.getNull = function (options, callback) {
   var client = this.client;
@@ -134,7 +134,7 @@ ByteModel.prototype.getNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ByteModel.prototype.getEmpty = function (options, callback) {
   var client = this.client;
@@ -229,7 +229,7 @@ ByteModel.prototype.getEmpty = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ByteModel.prototype.getNonAscii = function (options, callback) {
   var client = this.client;
@@ -326,7 +326,7 @@ ByteModel.prototype.getNonAscii = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ByteModel.prototype.putNonAscii = function (byteBody, options, callback) {
   var client = this.client;
@@ -416,7 +416,7 @@ ByteModel.prototype.putNonAscii = function (byteBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ByteModel.prototype.getInvalid = function (options, callback) {
   var client = this.client;

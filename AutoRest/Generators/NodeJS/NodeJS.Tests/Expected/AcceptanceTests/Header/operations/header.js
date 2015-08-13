@@ -41,7 +41,7 @@ function Header(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Header.prototype.paramExistingKey = function (userAgent, options, callback) {
   var client = this.client;
@@ -131,7 +131,7 @@ Header.prototype.paramExistingKey = function (userAgent, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Header.prototype.responseExistingKey = function (options, callback) {
   var client = this.client;
@@ -212,7 +212,7 @@ Header.prototype.responseExistingKey = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Header.prototype.paramProtectedKey = function (contentType, options, callback) {
   var client = this.client;
@@ -302,7 +302,7 @@ Header.prototype.paramProtectedKey = function (contentType, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Header.prototype.responseProtectedKey = function (options, callback) {
   var client = this.client;
@@ -386,7 +386,7 @@ Header.prototype.responseProtectedKey = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Header.prototype.paramInteger = function (scenario, value, options, callback) {
   var client = this.client;
@@ -484,7 +484,7 @@ Header.prototype.paramInteger = function (scenario, value, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Header.prototype.responseInteger = function (scenario, options, callback) {
   var client = this.client;
@@ -579,7 +579,7 @@ Header.prototype.responseInteger = function (scenario, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Header.prototype.paramLong = function (scenario, value, options, callback) {
   var client = this.client;
@@ -677,7 +677,7 @@ Header.prototype.paramLong = function (scenario, value, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Header.prototype.responseLong = function (scenario, options, callback) {
   var client = this.client;
@@ -772,7 +772,7 @@ Header.prototype.responseLong = function (scenario, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Header.prototype.paramFloat = function (scenario, value, options, callback) {
   var client = this.client;
@@ -870,7 +870,7 @@ Header.prototype.paramFloat = function (scenario, value, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Header.prototype.responseFloat = function (scenario, options, callback) {
   var client = this.client;
@@ -965,7 +965,7 @@ Header.prototype.responseFloat = function (scenario, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Header.prototype.paramDouble = function (scenario, value, options, callback) {
   var client = this.client;
@@ -1063,7 +1063,7 @@ Header.prototype.paramDouble = function (scenario, value, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Header.prototype.responseDouble = function (scenario, options, callback) {
   var client = this.client;
@@ -1158,7 +1158,7 @@ Header.prototype.responseDouble = function (scenario, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Header.prototype.paramBool = function (scenario, value, options, callback) {
   var client = this.client;
@@ -1256,7 +1256,7 @@ Header.prototype.paramBool = function (scenario, value, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Header.prototype.responseBool = function (scenario, options, callback) {
   var client = this.client;
@@ -1352,7 +1352,7 @@ Header.prototype.responseBool = function (scenario, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Header.prototype.paramString = function (scenario, value, options, callback) {
   var client = this.client;
@@ -1451,7 +1451,7 @@ Header.prototype.paramString = function (scenario, value, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Header.prototype.responseString = function (scenario, options, callback) {
   var client = this.client;
@@ -1546,7 +1546,7 @@ Header.prototype.responseString = function (scenario, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Header.prototype.paramDate = function (scenario, value, options, callback) {
   var client = this.client;
@@ -1645,7 +1645,7 @@ Header.prototype.paramDate = function (scenario, value, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Header.prototype.responseDate = function (scenario, options, callback) {
   var client = this.client;
@@ -1741,7 +1741,7 @@ Header.prototype.responseDate = function (scenario, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Header.prototype.paramDatetime = function (scenario, value, options, callback) {
   var client = this.client;
@@ -1841,7 +1841,7 @@ Header.prototype.paramDatetime = function (scenario, value, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Header.prototype.responseDatetime = function (scenario, options, callback) {
   var client = this.client;
@@ -1936,7 +1936,7 @@ Header.prototype.responseDatetime = function (scenario, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Header.prototype.paramByte = function (scenario, value, options, callback) {
   var client = this.client;
@@ -2034,7 +2034,7 @@ Header.prototype.paramByte = function (scenario, value, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Header.prototype.responseByte = function (scenario, options, callback) {
   var client = this.client;
@@ -2129,7 +2129,7 @@ Header.prototype.responseByte = function (scenario, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Header.prototype.paramEnum = function (scenario, value, options, callback) {
   var client = this.client;
@@ -2230,7 +2230,7 @@ Header.prototype.paramEnum = function (scenario, value, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Header.prototype.responseEnum = function (scenario, options, callback) {
   var client = this.client;
@@ -2321,7 +2321,7 @@ Header.prototype.responseEnum = function (scenario, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Header.prototype.customRequestId = function (options, callback) {
   var client = this.client;

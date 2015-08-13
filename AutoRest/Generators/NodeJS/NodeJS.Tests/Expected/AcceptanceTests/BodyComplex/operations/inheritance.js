@@ -39,7 +39,7 @@ function Inheritance(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Inheritance.prototype.getValid = function (options, callback) {
   var client = this.client;
@@ -138,7 +138,7 @@ Inheritance.prototype.getValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Inheritance.prototype.putValid = function (complexBody, options, callback) {
   var client = this.client;
