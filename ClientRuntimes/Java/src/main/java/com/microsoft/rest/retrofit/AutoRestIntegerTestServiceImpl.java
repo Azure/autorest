@@ -5,7 +5,7 @@
  *
  */
 
-package com.microsoft.rest.bat;
+package com.microsoft.rest.retrofit;
 
 import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;

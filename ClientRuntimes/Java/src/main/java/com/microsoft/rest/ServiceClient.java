@@ -10,9 +10,7 @@ package com.microsoft.rest;
 import com.microsoft.rest.retry.RetryHandler;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
-import retrofit.ErrorHandler;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
+import retrofit.*;
 import retrofit.client.OkClient;
 
 import java.util.List;
@@ -50,22 +48,14 @@ public abstract class ServiceClient {
         // Set up OkHttp client
         this.client = client;
         this.client.interceptors().add(new RetryHandler());
+        OkClient okClient = new OkClient(client);
 
         // Set up rest adapter builder
         Executor executor = Executors.newCachedThreadPool();
         this.restAdapterBuilder = restAdapterBuilder
-                .setClient(new OkClient(this.client))
+                .setClient(okClient)
                 .setLogLevel(RestAdapter.LogLevel.FULL)
-                .setExecutors(executor, executor)
-                .setErrorHandler(new ErrorHandler() {
-                    @Override
-                    public Throwable handleError(RetrofitError cause) {
-                        ServiceException ex = new ServiceException(cause);
-                        ex.setResponse(cause.getResponse());
-                        ex.setErrorModel(cause.getBody());
-                        return ex;
-                    }
-                });
+                .setExecutors(executor, executor);
     }
 
     /**
