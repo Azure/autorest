@@ -9,6 +9,7 @@
 
 package fixtures.http;
 
+import com.google.gson.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -27,129 +28,131 @@ import retrofit.http.DELETE;
 
 public class HttpSuccess {
     private HttpSuccessService service;
+
     public HttpSuccess(RestAdapter restAdapter) {
         service = restAdapter.create(HttpSuccessService.class);
     }
+
     public interface HttpSuccessService {
         @HEAD("/http/success/200")
-        void head200() throws ServiceException;
+        Response head200() throws ServiceException;
 
         @HEAD("/http/success/200")
-        void head200Async(ServiceCallback<Void> serviceCallback);
+        void head200Async(ServiceResponseCallback cb);
 
         @GET("/http/success/200")
-        Boolean get200() throws ServiceException;
+        Response get200() throws ServiceException;
 
         @GET("/http/success/200")
-        void get200Async(ServiceCallback<Boolean> serviceCallback);
+        void get200Async(ServiceResponseCallback cb);
 
         @PUT("/http/success/200")
-        void put200(@Body Boolean booleanValue) throws ServiceException;
+        Response put200(@Body Boolean booleanValue) throws ServiceException;
 
         @PUT("/http/success/200")
-        void put200Async(@Body Boolean booleanValue, ServiceCallback<Void> serviceCallback);
+        void put200Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @PATCH("/http/success/200")
-        void patch200(@Body Boolean booleanValue) throws ServiceException;
+        Response patch200(@Body Boolean booleanValue) throws ServiceException;
 
         @PATCH("/http/success/200")
-        void patch200Async(@Body Boolean booleanValue, ServiceCallback<Void> serviceCallback);
+        void patch200Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @POST("/http/success/200")
-        void post200(@Body Boolean booleanValue) throws ServiceException;
+        Response post200(@Body Boolean booleanValue) throws ServiceException;
 
         @POST("/http/success/200")
-        void post200Async(@Body Boolean booleanValue, ServiceCallback<Void> serviceCallback);
+        void post200Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @DELETE("/http/success/200")
-        void delete200(@Body Boolean booleanValue) throws ServiceException;
+        Response delete200(@Body Boolean booleanValue) throws ServiceException;
 
         @DELETE("/http/success/200")
-        void delete200Async(@Body Boolean booleanValue, ServiceCallback<Void> serviceCallback);
+        void delete200Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @PUT("/http/success/201")
-        void put201(@Body Boolean booleanValue) throws ServiceException;
+        Response put201(@Body Boolean booleanValue) throws ServiceException;
 
         @PUT("/http/success/201")
-        void put201Async(@Body Boolean booleanValue, ServiceCallback<Void> serviceCallback);
+        void put201Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @POST("/http/success/201")
-        void post201(@Body Boolean booleanValue) throws ServiceException;
+        Response post201(@Body Boolean booleanValue) throws ServiceException;
 
         @POST("/http/success/201")
-        void post201Async(@Body Boolean booleanValue, ServiceCallback<Void> serviceCallback);
+        void post201Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @PUT("/http/success/202")
-        void put202(@Body Boolean booleanValue) throws ServiceException;
+        Response put202(@Body Boolean booleanValue) throws ServiceException;
 
         @PUT("/http/success/202")
-        void put202Async(@Body Boolean booleanValue, ServiceCallback<Void> serviceCallback);
+        void put202Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @PATCH("/http/success/202")
-        void patch202(@Body Boolean booleanValue) throws ServiceException;
+        Response patch202(@Body Boolean booleanValue) throws ServiceException;
 
         @PATCH("/http/success/202")
-        void patch202Async(@Body Boolean booleanValue, ServiceCallback<Void> serviceCallback);
+        void patch202Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @POST("/http/success/202")
-        void post202(@Body Boolean booleanValue) throws ServiceException;
+        Response post202(@Body Boolean booleanValue) throws ServiceException;
 
         @POST("/http/success/202")
-        void post202Async(@Body Boolean booleanValue, ServiceCallback<Void> serviceCallback);
+        void post202Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @DELETE("/http/success/202")
-        void delete202(@Body Boolean booleanValue) throws ServiceException;
+        Response delete202(@Body Boolean booleanValue) throws ServiceException;
 
         @DELETE("/http/success/202")
-        void delete202Async(@Body Boolean booleanValue, ServiceCallback<Void> serviceCallback);
+        void delete202Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @HEAD("/http/success/204")
-        void head204() throws ServiceException;
+        Response head204() throws ServiceException;
 
         @HEAD("/http/success/204")
-        void head204Async(ServiceCallback<Void> serviceCallback);
+        void head204Async(ServiceResponseCallback cb);
 
         @PUT("/http/success/204")
-        void put204(@Body Boolean booleanValue) throws ServiceException;
+        Response put204(@Body Boolean booleanValue) throws ServiceException;
 
         @PUT("/http/success/204")
-        void put204Async(@Body Boolean booleanValue, ServiceCallback<Void> serviceCallback);
+        void put204Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @PATCH("/http/success/204")
-        void patch204(@Body Boolean booleanValue) throws ServiceException;
+        Response patch204(@Body Boolean booleanValue) throws ServiceException;
 
         @PATCH("/http/success/204")
-        void patch204Async(@Body Boolean booleanValue, ServiceCallback<Void> serviceCallback);
+        void patch204Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @POST("/http/success/204")
-        void post204(@Body Boolean booleanValue) throws ServiceException;
+        Response post204(@Body Boolean booleanValue) throws ServiceException;
 
         @POST("/http/success/204")
-        void post204Async(@Body Boolean booleanValue, ServiceCallback<Void> serviceCallback);
+        void post204Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @DELETE("/http/success/204")
-        void delete204(@Body Boolean booleanValue) throws ServiceException;
+        Response delete204(@Body Boolean booleanValue) throws ServiceException;
 
         @DELETE("/http/success/204")
-        void delete204Async(@Body Boolean booleanValue, ServiceCallback<Void> serviceCallback);
+        void delete204Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @HEAD("/http/success/404")
-        void head404() throws ServiceException;
+        Response head404() throws ServiceException;
 
         @HEAD("/http/success/404")
-        void head404Async(ServiceCallback<Void> serviceCallback);
+        void head404Async(ServiceResponseCallback cb);
 
     }
     public void head200() throws ServiceException {
         try {
-            return head200Delegate(service.head200(), null).getBody();
+            head200Delegate(service.head200(), null).getBody();
         } catch (RetrofitError error) {
-            return head200Delegate(error.getResponse(), error).getBody();
+            head200Delegate(error.getResponse(), error).getBody();
         }
     }
 
     public void head200Async(final ServiceCallback<Void> serviceCallback) {
-        service.head200Asyncd(new ServiceResponseCallback() {
+        service.head200Async(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -163,9 +166,9 @@ public class HttpSuccess {
 
     private ServiceResponse<Void> head200Delegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public Boolean get200() throws ServiceException {
@@ -177,7 +180,7 @@ public class HttpSuccess {
     }
 
     public void get200Async(final ServiceCallback<Boolean> serviceCallback) {
-        service.get200Asyncd(new ServiceResponseCallback() {
+        service.get200Async(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -191,21 +194,21 @@ public class HttpSuccess {
 
     private ServiceResponse<Boolean> get200Delegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Boolean>()
-                  .register(200, Boolean.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Boolean>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void put200(Boolean booleanValue) throws ServiceException {
         try {
-            return put200Delegate(service.put200(booleanValue), null).getBody();
+            put200Delegate(service.put200(booleanValue), null).getBody();
         } catch (RetrofitError error) {
-            return put200Delegate(error.getResponse(), error).getBody();
+            put200Delegate(error.getResponse(), error).getBody();
         }
     }
 
     public void put200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        service.put200Asyncd(new ServiceResponseCallback() {
+        service.put200Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -219,21 +222,21 @@ public class HttpSuccess {
 
     private ServiceResponse<Void> put200Delegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void patch200(Boolean booleanValue) throws ServiceException {
         try {
-            return patch200Delegate(service.patch200(booleanValue), null).getBody();
+            patch200Delegate(service.patch200(booleanValue), null).getBody();
         } catch (RetrofitError error) {
-            return patch200Delegate(error.getResponse(), error).getBody();
+            patch200Delegate(error.getResponse(), error).getBody();
         }
     }
 
     public void patch200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        service.patch200Asyncd(new ServiceResponseCallback() {
+        service.patch200Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -247,21 +250,21 @@ public class HttpSuccess {
 
     private ServiceResponse<Void> patch200Delegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void post200(Boolean booleanValue) throws ServiceException {
         try {
-            return post200Delegate(service.post200(booleanValue), null).getBody();
+            post200Delegate(service.post200(booleanValue), null).getBody();
         } catch (RetrofitError error) {
-            return post200Delegate(error.getResponse(), error).getBody();
+            post200Delegate(error.getResponse(), error).getBody();
         }
     }
 
     public void post200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        service.post200Asyncd(new ServiceResponseCallback() {
+        service.post200Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -275,21 +278,21 @@ public class HttpSuccess {
 
     private ServiceResponse<Void> post200Delegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void delete200(Boolean booleanValue) throws ServiceException {
         try {
-            return delete200Delegate(service.delete200(booleanValue), null).getBody();
+            delete200Delegate(service.delete200(booleanValue), null).getBody();
         } catch (RetrofitError error) {
-            return delete200Delegate(error.getResponse(), error).getBody();
+            delete200Delegate(error.getResponse(), error).getBody();
         }
     }
 
     public void delete200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        service.delete200Asyncd(new ServiceResponseCallback() {
+        service.delete200Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -303,21 +306,21 @@ public class HttpSuccess {
 
     private ServiceResponse<Void> delete200Delegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void put201(Boolean booleanValue) throws ServiceException {
         try {
-            return put201Delegate(service.put201(booleanValue), null).getBody();
+            put201Delegate(service.put201(booleanValue), null).getBody();
         } catch (RetrofitError error) {
-            return put201Delegate(error.getResponse(), error).getBody();
+            put201Delegate(error.getResponse(), error).getBody();
         }
     }
 
     public void put201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        service.put201Asyncd(new ServiceResponseCallback() {
+        service.put201Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -331,21 +334,21 @@ public class HttpSuccess {
 
     private ServiceResponse<Void> put201Delegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(201, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(201, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void post201(Boolean booleanValue) throws ServiceException {
         try {
-            return post201Delegate(service.post201(booleanValue), null).getBody();
+            post201Delegate(service.post201(booleanValue), null).getBody();
         } catch (RetrofitError error) {
-            return post201Delegate(error.getResponse(), error).getBody();
+            post201Delegate(error.getResponse(), error).getBody();
         }
     }
 
     public void post201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        service.post201Asyncd(new ServiceResponseCallback() {
+        service.post201Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -359,21 +362,21 @@ public class HttpSuccess {
 
     private ServiceResponse<Void> post201Delegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(201, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(201, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void put202(Boolean booleanValue) throws ServiceException {
         try {
-            return put202Delegate(service.put202(booleanValue), null).getBody();
+            put202Delegate(service.put202(booleanValue), null).getBody();
         } catch (RetrofitError error) {
-            return put202Delegate(error.getResponse(), error).getBody();
+            put202Delegate(error.getResponse(), error).getBody();
         }
     }
 
     public void put202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        service.put202Asyncd(new ServiceResponseCallback() {
+        service.put202Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -387,21 +390,21 @@ public class HttpSuccess {
 
     private ServiceResponse<Void> put202Delegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(202, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(202, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void patch202(Boolean booleanValue) throws ServiceException {
         try {
-            return patch202Delegate(service.patch202(booleanValue), null).getBody();
+            patch202Delegate(service.patch202(booleanValue), null).getBody();
         } catch (RetrofitError error) {
-            return patch202Delegate(error.getResponse(), error).getBody();
+            patch202Delegate(error.getResponse(), error).getBody();
         }
     }
 
     public void patch202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        service.patch202Asyncd(new ServiceResponseCallback() {
+        service.patch202Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -415,21 +418,21 @@ public class HttpSuccess {
 
     private ServiceResponse<Void> patch202Delegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(202, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(202, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void post202(Boolean booleanValue) throws ServiceException {
         try {
-            return post202Delegate(service.post202(booleanValue), null).getBody();
+            post202Delegate(service.post202(booleanValue), null).getBody();
         } catch (RetrofitError error) {
-            return post202Delegate(error.getResponse(), error).getBody();
+            post202Delegate(error.getResponse(), error).getBody();
         }
     }
 
     public void post202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        service.post202Asyncd(new ServiceResponseCallback() {
+        service.post202Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -443,21 +446,21 @@ public class HttpSuccess {
 
     private ServiceResponse<Void> post202Delegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(202, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(202, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void delete202(Boolean booleanValue) throws ServiceException {
         try {
-            return delete202Delegate(service.delete202(booleanValue), null).getBody();
+            delete202Delegate(service.delete202(booleanValue), null).getBody();
         } catch (RetrofitError error) {
-            return delete202Delegate(error.getResponse(), error).getBody();
+            delete202Delegate(error.getResponse(), error).getBody();
         }
     }
 
     public void delete202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        service.delete202Asyncd(new ServiceResponseCallback() {
+        service.delete202Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -471,21 +474,21 @@ public class HttpSuccess {
 
     private ServiceResponse<Void> delete202Delegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(202, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(202, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void head204() throws ServiceException {
         try {
-            return head204Delegate(service.head204(), null).getBody();
+            head204Delegate(service.head204(), null).getBody();
         } catch (RetrofitError error) {
-            return head204Delegate(error.getResponse(), error).getBody();
+            head204Delegate(error.getResponse(), error).getBody();
         }
     }
 
     public void head204Async(final ServiceCallback<Void> serviceCallback) {
-        service.head204Asyncd(new ServiceResponseCallback() {
+        service.head204Async(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -499,21 +502,21 @@ public class HttpSuccess {
 
     private ServiceResponse<Void> head204Delegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(204, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(204, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void put204(Boolean booleanValue) throws ServiceException {
         try {
-            return put204Delegate(service.put204(booleanValue), null).getBody();
+            put204Delegate(service.put204(booleanValue), null).getBody();
         } catch (RetrofitError error) {
-            return put204Delegate(error.getResponse(), error).getBody();
+            put204Delegate(error.getResponse(), error).getBody();
         }
     }
 
     public void put204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        service.put204Asyncd(new ServiceResponseCallback() {
+        service.put204Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -527,21 +530,21 @@ public class HttpSuccess {
 
     private ServiceResponse<Void> put204Delegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(204, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(204, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void patch204(Boolean booleanValue) throws ServiceException {
         try {
-            return patch204Delegate(service.patch204(booleanValue), null).getBody();
+            patch204Delegate(service.patch204(booleanValue), null).getBody();
         } catch (RetrofitError error) {
-            return patch204Delegate(error.getResponse(), error).getBody();
+            patch204Delegate(error.getResponse(), error).getBody();
         }
     }
 
     public void patch204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        service.patch204Asyncd(new ServiceResponseCallback() {
+        service.patch204Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -555,21 +558,21 @@ public class HttpSuccess {
 
     private ServiceResponse<Void> patch204Delegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(204, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(204, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void post204(Boolean booleanValue) throws ServiceException {
         try {
-            return post204Delegate(service.post204(booleanValue), null).getBody();
+            post204Delegate(service.post204(booleanValue), null).getBody();
         } catch (RetrofitError error) {
-            return post204Delegate(error.getResponse(), error).getBody();
+            post204Delegate(error.getResponse(), error).getBody();
         }
     }
 
     public void post204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        service.post204Asyncd(new ServiceResponseCallback() {
+        service.post204Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -583,21 +586,21 @@ public class HttpSuccess {
 
     private ServiceResponse<Void> post204Delegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(204, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(204, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void delete204(Boolean booleanValue) throws ServiceException {
         try {
-            return delete204Delegate(service.delete204(booleanValue), null).getBody();
+            delete204Delegate(service.delete204(booleanValue), null).getBody();
         } catch (RetrofitError error) {
-            return delete204Delegate(error.getResponse(), error).getBody();
+            delete204Delegate(error.getResponse(), error).getBody();
         }
     }
 
     public void delete204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        service.delete204Asyncd(new ServiceResponseCallback() {
+        service.delete204Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -611,21 +614,21 @@ public class HttpSuccess {
 
     private ServiceResponse<Void> delete204Delegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(204, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(204, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void head404() throws ServiceException {
         try {
-            return head404Delegate(service.head404(), null).getBody();
+            head404Delegate(service.head404(), null).getBody();
         } catch (RetrofitError error) {
-            return head404Delegate(error.getResponse(), error).getBody();
+            head404Delegate(error.getResponse(), error).getBody();
         }
     }
 
     public void head404Async(final ServiceCallback<Void> serviceCallback) {
-        service.head404Asyncd(new ServiceResponseCallback() {
+        service.head404Async(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -639,10 +642,10 @@ public class HttpSuccess {
 
     private ServiceResponse<Void> head404Delegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(204, Void.class)
-                  .register(404, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(204, new TypeToken<Void>(){}.getType())
+                .register(404, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
 }

@@ -16,7 +16,7 @@ import retrofit.RestAdapter;
 /**
  * Initializes a new instance of the AutoRestRequiredOptionalTestService class.
  */
-public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient<AutoRestRequiredOptionalTestService> implements AutoRestRequiredOptionalTestService {
+public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient implements AutoRestRequiredOptionalTestService {
     private String baseUri;
 
     /**

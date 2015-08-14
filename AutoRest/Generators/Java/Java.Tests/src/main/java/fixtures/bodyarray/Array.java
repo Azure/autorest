@@ -9,6 +9,7 @@
 
 package fixtures.bodyarray;
 
+import com.google.gson.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -27,351 +28,353 @@ import retrofit.http.Body;
 
 public class Array {
     private ArrayService service;
+
     public Array(RestAdapter restAdapter) {
         service = restAdapter.create(ArrayService.class);
     }
+
     public interface ArrayService {
         @GET("/array/null")
-        List<Integer> getNull() throws ServiceException;
+        Response getNull() throws ServiceException;
 
         @GET("/array/null")
-        void getNullAsync(ServiceCallback<List<Integer>> serviceCallback);
+        void getNullAsync(ServiceResponseCallback cb);
 
         @GET("/array/invalid")
-        List<Integer> getInvalid() throws ServiceException;
+        Response getInvalid() throws ServiceException;
 
         @GET("/array/invalid")
-        void getInvalidAsync(ServiceCallback<List<Integer>> serviceCallback);
+        void getInvalidAsync(ServiceResponseCallback cb);
 
         @GET("/array/empty")
-        List<Integer> getEmpty() throws ServiceException;
+        Response getEmpty() throws ServiceException;
 
         @GET("/array/empty")
-        void getEmptyAsync(ServiceCallback<List<Integer>> serviceCallback);
+        void getEmptyAsync(ServiceResponseCallback cb);
 
         @PUT("/array/empty")
-        void putEmpty(@Body List<String> arrayBody) throws ServiceException;
+        Response putEmpty(@Body List<String> arrayBody) throws ServiceException;
 
         @PUT("/array/empty")
-        void putEmptyAsync(@Body List<String> arrayBody, ServiceCallback<Void> serviceCallback);
+        void putEmptyAsync(@Body List<String> arrayBody, ServiceResponseCallback cb);
 
         @GET("/array/prim/boolean/tfft")
-        List<Boolean> getBooleanTfft() throws ServiceException;
+        Response getBooleanTfft() throws ServiceException;
 
         @GET("/array/prim/boolean/tfft")
-        void getBooleanTfftAsync(ServiceCallback<List<Boolean>> serviceCallback);
+        void getBooleanTfftAsync(ServiceResponseCallback cb);
 
         @PUT("/array/prim/boolean/tfft")
-        void putBooleanTfft(@Body List<Boolean> arrayBody) throws ServiceException;
+        Response putBooleanTfft(@Body List<Boolean> arrayBody) throws ServiceException;
 
         @PUT("/array/prim/boolean/tfft")
-        void putBooleanTfftAsync(@Body List<Boolean> arrayBody, ServiceCallback<Void> serviceCallback);
+        void putBooleanTfftAsync(@Body List<Boolean> arrayBody, ServiceResponseCallback cb);
 
         @GET("/array/prim/boolean/true.null.false")
-        List<Boolean> getBooleanInvalidNull() throws ServiceException;
+        Response getBooleanInvalidNull() throws ServiceException;
 
         @GET("/array/prim/boolean/true.null.false")
-        void getBooleanInvalidNullAsync(ServiceCallback<List<Boolean>> serviceCallback);
+        void getBooleanInvalidNullAsync(ServiceResponseCallback cb);
 
         @GET("/array/prim/boolean/true.boolean.false")
-        List<Boolean> getBooleanInvalidString() throws ServiceException;
+        Response getBooleanInvalidString() throws ServiceException;
 
         @GET("/array/prim/boolean/true.boolean.false")
-        void getBooleanInvalidStringAsync(ServiceCallback<List<Boolean>> serviceCallback);
+        void getBooleanInvalidStringAsync(ServiceResponseCallback cb);
 
         @GET("/array/prim/integer/1.-1.3.300")
-        List<Integer> getIntegerValid() throws ServiceException;
+        Response getIntegerValid() throws ServiceException;
 
         @GET("/array/prim/integer/1.-1.3.300")
-        void getIntegerValidAsync(ServiceCallback<List<Integer>> serviceCallback);
+        void getIntegerValidAsync(ServiceResponseCallback cb);
 
         @PUT("/array/prim/integer/1.-1.3.300")
-        void putIntegerValid(@Body List<Integer> arrayBody) throws ServiceException;
+        Response putIntegerValid(@Body List<Integer> arrayBody) throws ServiceException;
 
         @PUT("/array/prim/integer/1.-1.3.300")
-        void putIntegerValidAsync(@Body List<Integer> arrayBody, ServiceCallback<Void> serviceCallback);
+        void putIntegerValidAsync(@Body List<Integer> arrayBody, ServiceResponseCallback cb);
 
         @GET("/array/prim/integer/1.null.zero")
-        List<Integer> getIntInvalidNull() throws ServiceException;
+        Response getIntInvalidNull() throws ServiceException;
 
         @GET("/array/prim/integer/1.null.zero")
-        void getIntInvalidNullAsync(ServiceCallback<List<Integer>> serviceCallback);
+        void getIntInvalidNullAsync(ServiceResponseCallback cb);
 
         @GET("/array/prim/integer/1.integer.0")
-        List<Integer> getIntInvalidString() throws ServiceException;
+        Response getIntInvalidString() throws ServiceException;
 
         @GET("/array/prim/integer/1.integer.0")
-        void getIntInvalidStringAsync(ServiceCallback<List<Integer>> serviceCallback);
+        void getIntInvalidStringAsync(ServiceResponseCallback cb);
 
         @GET("/array/prim/long/1.-1.3.300")
-        List<Long> getLongValid() throws ServiceException;
+        Response getLongValid() throws ServiceException;
 
         @GET("/array/prim/long/1.-1.3.300")
-        void getLongValidAsync(ServiceCallback<List<Long>> serviceCallback);
+        void getLongValidAsync(ServiceResponseCallback cb);
 
         @PUT("/array/prim/long/1.-1.3.300")
-        void putLongValid(@Body List<Long> arrayBody) throws ServiceException;
+        Response putLongValid(@Body List<Long> arrayBody) throws ServiceException;
 
         @PUT("/array/prim/long/1.-1.3.300")
-        void putLongValidAsync(@Body List<Long> arrayBody, ServiceCallback<Void> serviceCallback);
+        void putLongValidAsync(@Body List<Long> arrayBody, ServiceResponseCallback cb);
 
         @GET("/array/prim/long/1.null.zero")
-        List<Long> getLongInvalidNull() throws ServiceException;
+        Response getLongInvalidNull() throws ServiceException;
 
         @GET("/array/prim/long/1.null.zero")
-        void getLongInvalidNullAsync(ServiceCallback<List<Long>> serviceCallback);
+        void getLongInvalidNullAsync(ServiceResponseCallback cb);
 
         @GET("/array/prim/long/1.integer.0")
-        List<Long> getLongInvalidString() throws ServiceException;
+        Response getLongInvalidString() throws ServiceException;
 
         @GET("/array/prim/long/1.integer.0")
-        void getLongInvalidStringAsync(ServiceCallback<List<Long>> serviceCallback);
+        void getLongInvalidStringAsync(ServiceResponseCallback cb);
 
         @GET("/array/prim/float/0--0.01-1.2e20")
-        List<Double> getFloatValid() throws ServiceException;
+        Response getFloatValid() throws ServiceException;
 
         @GET("/array/prim/float/0--0.01-1.2e20")
-        void getFloatValidAsync(ServiceCallback<List<Double>> serviceCallback);
+        void getFloatValidAsync(ServiceResponseCallback cb);
 
         @PUT("/array/prim/float/0--0.01-1.2e20")
-        void putFloatValid(@Body List<Double> arrayBody) throws ServiceException;
+        Response putFloatValid(@Body List<Double> arrayBody) throws ServiceException;
 
         @PUT("/array/prim/float/0--0.01-1.2e20")
-        void putFloatValidAsync(@Body List<Double> arrayBody, ServiceCallback<Void> serviceCallback);
+        void putFloatValidAsync(@Body List<Double> arrayBody, ServiceResponseCallback cb);
 
         @GET("/array/prim/float/0.0-null-1.2e20")
-        List<Double> getFloatInvalidNull() throws ServiceException;
+        Response getFloatInvalidNull() throws ServiceException;
 
         @GET("/array/prim/float/0.0-null-1.2e20")
-        void getFloatInvalidNullAsync(ServiceCallback<List<Double>> serviceCallback);
+        void getFloatInvalidNullAsync(ServiceResponseCallback cb);
 
         @GET("/array/prim/float/1.number.0")
-        List<Double> getFloatInvalidString() throws ServiceException;
+        Response getFloatInvalidString() throws ServiceException;
 
         @GET("/array/prim/float/1.number.0")
-        void getFloatInvalidStringAsync(ServiceCallback<List<Double>> serviceCallback);
+        void getFloatInvalidStringAsync(ServiceResponseCallback cb);
 
         @GET("/array/prim/double/0--0.01-1.2e20")
-        List<Double> getDoubleValid() throws ServiceException;
+        Response getDoubleValid() throws ServiceException;
 
         @GET("/array/prim/double/0--0.01-1.2e20")
-        void getDoubleValidAsync(ServiceCallback<List<Double>> serviceCallback);
+        void getDoubleValidAsync(ServiceResponseCallback cb);
 
         @PUT("/array/prim/double/0--0.01-1.2e20")
-        void putDoubleValid(@Body List<Double> arrayBody) throws ServiceException;
+        Response putDoubleValid(@Body List<Double> arrayBody) throws ServiceException;
 
         @PUT("/array/prim/double/0--0.01-1.2e20")
-        void putDoubleValidAsync(@Body List<Double> arrayBody, ServiceCallback<Void> serviceCallback);
+        void putDoubleValidAsync(@Body List<Double> arrayBody, ServiceResponseCallback cb);
 
         @GET("/array/prim/double/0.0-null-1.2e20")
-        List<Double> getDoubleInvalidNull() throws ServiceException;
+        Response getDoubleInvalidNull() throws ServiceException;
 
         @GET("/array/prim/double/0.0-null-1.2e20")
-        void getDoubleInvalidNullAsync(ServiceCallback<List<Double>> serviceCallback);
+        void getDoubleInvalidNullAsync(ServiceResponseCallback cb);
 
         @GET("/array/prim/double/1.number.0")
-        List<Double> getDoubleInvalidString() throws ServiceException;
+        Response getDoubleInvalidString() throws ServiceException;
 
         @GET("/array/prim/double/1.number.0")
-        void getDoubleInvalidStringAsync(ServiceCallback<List<Double>> serviceCallback);
+        void getDoubleInvalidStringAsync(ServiceResponseCallback cb);
 
         @GET("/array/prim/string/foo1.foo2.foo3")
-        List<String> getStringValid() throws ServiceException;
+        Response getStringValid() throws ServiceException;
 
         @GET("/array/prim/string/foo1.foo2.foo3")
-        void getStringValidAsync(ServiceCallback<List<String>> serviceCallback);
+        void getStringValidAsync(ServiceResponseCallback cb);
 
         @PUT("/array/prim/string/foo1.foo2.foo3")
-        void putStringValid(@Body List<String> arrayBody) throws ServiceException;
+        Response putStringValid(@Body List<String> arrayBody) throws ServiceException;
 
         @PUT("/array/prim/string/foo1.foo2.foo3")
-        void putStringValidAsync(@Body List<String> arrayBody, ServiceCallback<Void> serviceCallback);
+        void putStringValidAsync(@Body List<String> arrayBody, ServiceResponseCallback cb);
 
         @GET("/array/prim/string/foo.null.foo2")
-        List<String> getStringWithNull() throws ServiceException;
+        Response getStringWithNull() throws ServiceException;
 
         @GET("/array/prim/string/foo.null.foo2")
-        void getStringWithNullAsync(ServiceCallback<List<String>> serviceCallback);
+        void getStringWithNullAsync(ServiceResponseCallback cb);
 
         @GET("/array/prim/string/foo.123.foo2")
-        List<String> getStringWithInvalid() throws ServiceException;
+        Response getStringWithInvalid() throws ServiceException;
 
         @GET("/array/prim/string/foo.123.foo2")
-        void getStringWithInvalidAsync(ServiceCallback<List<String>> serviceCallback);
+        void getStringWithInvalidAsync(ServiceResponseCallback cb);
 
         @GET("/array/prim/date/valid")
-        List<Date> getDateValid() throws ServiceException;
+        Response getDateValid() throws ServiceException;
 
         @GET("/array/prim/date/valid")
-        void getDateValidAsync(ServiceCallback<List<Date>> serviceCallback);
+        void getDateValidAsync(ServiceResponseCallback cb);
 
         @PUT("/array/prim/date/valid")
-        void putDateValid(@Body List<Date> arrayBody) throws ServiceException;
+        Response putDateValid(@Body List<Date> arrayBody) throws ServiceException;
 
         @PUT("/array/prim/date/valid")
-        void putDateValidAsync(@Body List<Date> arrayBody, ServiceCallback<Void> serviceCallback);
+        void putDateValidAsync(@Body List<Date> arrayBody, ServiceResponseCallback cb);
 
         @GET("/array/prim/date/invalidnull")
-        List<Date> getDateInvalidNull() throws ServiceException;
+        Response getDateInvalidNull() throws ServiceException;
 
         @GET("/array/prim/date/invalidnull")
-        void getDateInvalidNullAsync(ServiceCallback<List<Date>> serviceCallback);
+        void getDateInvalidNullAsync(ServiceResponseCallback cb);
 
         @GET("/array/prim/date/invalidchars")
-        List<Date> getDateInvalidChars() throws ServiceException;
+        Response getDateInvalidChars() throws ServiceException;
 
         @GET("/array/prim/date/invalidchars")
-        void getDateInvalidCharsAsync(ServiceCallback<List<Date>> serviceCallback);
+        void getDateInvalidCharsAsync(ServiceResponseCallback cb);
 
         @GET("/array/prim/date-time/valid")
-        List<Date> getDateTimeValid() throws ServiceException;
+        Response getDateTimeValid() throws ServiceException;
 
         @GET("/array/prim/date-time/valid")
-        void getDateTimeValidAsync(ServiceCallback<List<Date>> serviceCallback);
+        void getDateTimeValidAsync(ServiceResponseCallback cb);
 
         @PUT("/array/prim/date-time/valid")
-        void putDateTimeValid(@Body List<Date> arrayBody) throws ServiceException;
+        Response putDateTimeValid(@Body List<Date> arrayBody) throws ServiceException;
 
         @PUT("/array/prim/date-time/valid")
-        void putDateTimeValidAsync(@Body List<Date> arrayBody, ServiceCallback<Void> serviceCallback);
+        void putDateTimeValidAsync(@Body List<Date> arrayBody, ServiceResponseCallback cb);
 
         @GET("/array/prim/date-time/invalidnull")
-        List<Date> getDateTimeInvalidNull() throws ServiceException;
+        Response getDateTimeInvalidNull() throws ServiceException;
 
         @GET("/array/prim/date-time/invalidnull")
-        void getDateTimeInvalidNullAsync(ServiceCallback<List<Date>> serviceCallback);
+        void getDateTimeInvalidNullAsync(ServiceResponseCallback cb);
 
         @GET("/array/prim/date-time/invalidchars")
-        List<Date> getDateTimeInvalidChars() throws ServiceException;
+        Response getDateTimeInvalidChars() throws ServiceException;
 
         @GET("/array/prim/date-time/invalidchars")
-        void getDateTimeInvalidCharsAsync(ServiceCallback<List<Date>> serviceCallback);
+        void getDateTimeInvalidCharsAsync(ServiceResponseCallback cb);
 
         @GET("/array/prim/byte/valid")
-        List<Byte[]> getByteValid() throws ServiceException;
+        Response getByteValid() throws ServiceException;
 
         @GET("/array/prim/byte/valid")
-        void getByteValidAsync(ServiceCallback<List<Byte[]>> serviceCallback);
+        void getByteValidAsync(ServiceResponseCallback cb);
 
         @PUT("/array/prim/byte/valid")
-        void putByteValid(@Body List<Byte[]> arrayBody) throws ServiceException;
+        Response putByteValid(@Body List<Byte[]> arrayBody) throws ServiceException;
 
         @PUT("/array/prim/byte/valid")
-        void putByteValidAsync(@Body List<Byte[]> arrayBody, ServiceCallback<Void> serviceCallback);
+        void putByteValidAsync(@Body List<Byte[]> arrayBody, ServiceResponseCallback cb);
 
         @GET("/array/prim/byte/invalidnull")
-        List<Byte[]> getByteInvalidNull() throws ServiceException;
+        Response getByteInvalidNull() throws ServiceException;
 
         @GET("/array/prim/byte/invalidnull")
-        void getByteInvalidNullAsync(ServiceCallback<List<Byte[]>> serviceCallback);
+        void getByteInvalidNullAsync(ServiceResponseCallback cb);
 
         @GET("/array/complex/null")
-        List<Product> getComplexNull() throws ServiceException;
+        Response getComplexNull() throws ServiceException;
 
         @GET("/array/complex/null")
-        void getComplexNullAsync(ServiceCallback<List<Product>> serviceCallback);
+        void getComplexNullAsync(ServiceResponseCallback cb);
 
         @GET("/array/complex/empty")
-        List<Product> getComplexEmpty() throws ServiceException;
+        Response getComplexEmpty() throws ServiceException;
 
         @GET("/array/complex/empty")
-        void getComplexEmptyAsync(ServiceCallback<List<Product>> serviceCallback);
+        void getComplexEmptyAsync(ServiceResponseCallback cb);
 
         @GET("/array/complex/itemnull")
-        List<Product> getComplexItemNull() throws ServiceException;
+        Response getComplexItemNull() throws ServiceException;
 
         @GET("/array/complex/itemnull")
-        void getComplexItemNullAsync(ServiceCallback<List<Product>> serviceCallback);
+        void getComplexItemNullAsync(ServiceResponseCallback cb);
 
         @GET("/array/complex/itemempty")
-        List<Product> getComplexItemEmpty() throws ServiceException;
+        Response getComplexItemEmpty() throws ServiceException;
 
         @GET("/array/complex/itemempty")
-        void getComplexItemEmptyAsync(ServiceCallback<List<Product>> serviceCallback);
+        void getComplexItemEmptyAsync(ServiceResponseCallback cb);
 
         @GET("/array/complex/valid")
-        List<Product> getComplexValid() throws ServiceException;
+        Response getComplexValid() throws ServiceException;
 
         @GET("/array/complex/valid")
-        void getComplexValidAsync(ServiceCallback<List<Product>> serviceCallback);
+        void getComplexValidAsync(ServiceResponseCallback cb);
 
         @PUT("/array/complex/valid")
-        void putComplexValid(@Body List<Product> arrayBody) throws ServiceException;
+        Response putComplexValid(@Body List<Product> arrayBody) throws ServiceException;
 
         @PUT("/array/complex/valid")
-        void putComplexValidAsync(@Body List<Product> arrayBody, ServiceCallback<Void> serviceCallback);
+        void putComplexValidAsync(@Body List<Product> arrayBody, ServiceResponseCallback cb);
 
         @GET("/array/array/null")
-        List<List<String>> getArrayNull() throws ServiceException;
+        Response getArrayNull() throws ServiceException;
 
         @GET("/array/array/null")
-        void getArrayNullAsync(ServiceCallback<List<List<String>>> serviceCallback);
+        void getArrayNullAsync(ServiceResponseCallback cb);
 
         @GET("/array/array/empty")
-        List<List<String>> getArrayEmpty() throws ServiceException;
+        Response getArrayEmpty() throws ServiceException;
 
         @GET("/array/array/empty")
-        void getArrayEmptyAsync(ServiceCallback<List<List<String>>> serviceCallback);
+        void getArrayEmptyAsync(ServiceResponseCallback cb);
 
         @GET("/array/array/itemnull")
-        List<List<String>> getArrayItemNull() throws ServiceException;
+        Response getArrayItemNull() throws ServiceException;
 
         @GET("/array/array/itemnull")
-        void getArrayItemNullAsync(ServiceCallback<List<List<String>>> serviceCallback);
+        void getArrayItemNullAsync(ServiceResponseCallback cb);
 
         @GET("/array/array/itemempty")
-        List<List<String>> getArrayItemEmpty() throws ServiceException;
+        Response getArrayItemEmpty() throws ServiceException;
 
         @GET("/array/array/itemempty")
-        void getArrayItemEmptyAsync(ServiceCallback<List<List<String>>> serviceCallback);
+        void getArrayItemEmptyAsync(ServiceResponseCallback cb);
 
         @GET("/array/array/valid")
-        List<List<String>> getArrayValid() throws ServiceException;
+        Response getArrayValid() throws ServiceException;
 
         @GET("/array/array/valid")
-        void getArrayValidAsync(ServiceCallback<List<List<String>>> serviceCallback);
+        void getArrayValidAsync(ServiceResponseCallback cb);
 
         @PUT("/array/array/valid")
-        void putArrayValid(@Body List<List<String>> arrayBody) throws ServiceException;
+        Response putArrayValid(@Body List<List<String>> arrayBody) throws ServiceException;
 
         @PUT("/array/array/valid")
-        void putArrayValidAsync(@Body List<List<String>> arrayBody, ServiceCallback<Void> serviceCallback);
+        void putArrayValidAsync(@Body List<List<String>> arrayBody, ServiceResponseCallback cb);
 
         @GET("/array/dictionary/null")
-        List<Map<String, String>> getDictionaryNull() throws ServiceException;
+        Response getDictionaryNull() throws ServiceException;
 
         @GET("/array/dictionary/null")
-        void getDictionaryNullAsync(ServiceCallback<List<Map<String, String>>> serviceCallback);
+        void getDictionaryNullAsync(ServiceResponseCallback cb);
 
         @GET("/array/dictionary/empty")
-        List<Map<String, String>> getDictionaryEmpty() throws ServiceException;
+        Response getDictionaryEmpty() throws ServiceException;
 
         @GET("/array/dictionary/empty")
-        void getDictionaryEmptyAsync(ServiceCallback<List<Map<String, String>>> serviceCallback);
+        void getDictionaryEmptyAsync(ServiceResponseCallback cb);
 
         @GET("/array/dictionary/itemnull")
-        List<Map<String, String>> getDictionaryItemNull() throws ServiceException;
+        Response getDictionaryItemNull() throws ServiceException;
 
         @GET("/array/dictionary/itemnull")
-        void getDictionaryItemNullAsync(ServiceCallback<List<Map<String, String>>> serviceCallback);
+        void getDictionaryItemNullAsync(ServiceResponseCallback cb);
 
         @GET("/array/dictionary/itemempty")
-        List<Map<String, String>> getDictionaryItemEmpty() throws ServiceException;
+        Response getDictionaryItemEmpty() throws ServiceException;
 
         @GET("/array/dictionary/itemempty")
-        void getDictionaryItemEmptyAsync(ServiceCallback<List<Map<String, String>>> serviceCallback);
+        void getDictionaryItemEmptyAsync(ServiceResponseCallback cb);
 
         @GET("/array/dictionary/valid")
-        List<Map<String, String>> getDictionaryValid() throws ServiceException;
+        Response getDictionaryValid() throws ServiceException;
 
         @GET("/array/dictionary/valid")
-        void getDictionaryValidAsync(ServiceCallback<List<Map<String, String>>> serviceCallback);
+        void getDictionaryValidAsync(ServiceResponseCallback cb);
 
         @PUT("/array/dictionary/valid")
-        void putDictionaryValid(@Body List<Map<String, String>> arrayBody) throws ServiceException;
+        Response putDictionaryValid(@Body List<Map<String, String>> arrayBody) throws ServiceException;
 
         @PUT("/array/dictionary/valid")
-        void putDictionaryValidAsync(@Body List<Map<String, String>> arrayBody, ServiceCallback<Void> serviceCallback);
+        void putDictionaryValidAsync(@Body List<Map<String, String>> arrayBody, ServiceResponseCallback cb);
 
     }
     public List<Integer> getNull() throws ServiceException {
@@ -383,7 +386,7 @@ public class Array {
     }
 
     public void getNullAsync(final ServiceCallback<List<Integer>> serviceCallback) {
-        service.getNullAsyncd(new ServiceResponseCallback() {
+        service.getNullAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -397,9 +400,9 @@ public class Array {
 
     private ServiceResponse<List<Integer>> getNullDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Integer>>()
-                  .register(200, List<Integer>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Integer>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Integer> getInvalid() throws ServiceException {
@@ -411,7 +414,7 @@ public class Array {
     }
 
     public void getInvalidAsync(final ServiceCallback<List<Integer>> serviceCallback) {
-        service.getInvalidAsyncd(new ServiceResponseCallback() {
+        service.getInvalidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -425,9 +428,9 @@ public class Array {
 
     private ServiceResponse<List<Integer>> getInvalidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Integer>>()
-                  .register(200, List<Integer>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Integer>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Integer> getEmpty() throws ServiceException {
@@ -439,7 +442,7 @@ public class Array {
     }
 
     public void getEmptyAsync(final ServiceCallback<List<Integer>> serviceCallback) {
-        service.getEmptyAsyncd(new ServiceResponseCallback() {
+        service.getEmptyAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -453,21 +456,21 @@ public class Array {
 
     private ServiceResponse<List<Integer>> getEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Integer>>()
-                  .register(200, List<Integer>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Integer>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putEmpty(List<String> arrayBody) throws ServiceException {
         try {
-            return putEmptyDelegate(service.putEmpty(arrayBody), null).getBody();
+            putEmptyDelegate(service.putEmpty(arrayBody), null).getBody();
         } catch (RetrofitError error) {
-            return putEmptyDelegate(error.getResponse(), error).getBody();
+            putEmptyDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putEmptyAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        service.putEmptyAsyncd(new ServiceResponseCallback() {
+        service.putEmptyAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -481,9 +484,9 @@ public class Array {
 
     private ServiceResponse<Void> putEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Boolean> getBooleanTfft() throws ServiceException {
@@ -495,7 +498,7 @@ public class Array {
     }
 
     public void getBooleanTfftAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
-        service.getBooleanTfftAsyncd(new ServiceResponseCallback() {
+        service.getBooleanTfftAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -509,21 +512,21 @@ public class Array {
 
     private ServiceResponse<List<Boolean>> getBooleanTfftDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Boolean>>()
-                  .register(200, List<Boolean>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Boolean>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putBooleanTfft(List<Boolean> arrayBody) throws ServiceException {
         try {
-            return putBooleanTfftDelegate(service.putBooleanTfft(arrayBody), null).getBody();
+            putBooleanTfftDelegate(service.putBooleanTfft(arrayBody), null).getBody();
         } catch (RetrofitError error) {
-            return putBooleanTfftDelegate(error.getResponse(), error).getBody();
+            putBooleanTfftDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putBooleanTfftAsync(List<Boolean> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        service.putBooleanTfftAsyncd(new ServiceResponseCallback() {
+        service.putBooleanTfftAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -537,9 +540,9 @@ public class Array {
 
     private ServiceResponse<Void> putBooleanTfftDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Boolean> getBooleanInvalidNull() throws ServiceException {
@@ -551,7 +554,7 @@ public class Array {
     }
 
     public void getBooleanInvalidNullAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
-        service.getBooleanInvalidNullAsyncd(new ServiceResponseCallback() {
+        service.getBooleanInvalidNullAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -565,9 +568,9 @@ public class Array {
 
     private ServiceResponse<List<Boolean>> getBooleanInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Boolean>>()
-                  .register(200, List<Boolean>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Boolean>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Boolean> getBooleanInvalidString() throws ServiceException {
@@ -579,7 +582,7 @@ public class Array {
     }
 
     public void getBooleanInvalidStringAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
-        service.getBooleanInvalidStringAsyncd(new ServiceResponseCallback() {
+        service.getBooleanInvalidStringAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -593,9 +596,9 @@ public class Array {
 
     private ServiceResponse<List<Boolean>> getBooleanInvalidStringDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Boolean>>()
-                  .register(200, List<Boolean>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Boolean>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Integer> getIntegerValid() throws ServiceException {
@@ -607,7 +610,7 @@ public class Array {
     }
 
     public void getIntegerValidAsync(final ServiceCallback<List<Integer>> serviceCallback) {
-        service.getIntegerValidAsyncd(new ServiceResponseCallback() {
+        service.getIntegerValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -621,21 +624,21 @@ public class Array {
 
     private ServiceResponse<List<Integer>> getIntegerValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Integer>>()
-                  .register(200, List<Integer>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Integer>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putIntegerValid(List<Integer> arrayBody) throws ServiceException {
         try {
-            return putIntegerValidDelegate(service.putIntegerValid(arrayBody), null).getBody();
+            putIntegerValidDelegate(service.putIntegerValid(arrayBody), null).getBody();
         } catch (RetrofitError error) {
-            return putIntegerValidDelegate(error.getResponse(), error).getBody();
+            putIntegerValidDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putIntegerValidAsync(List<Integer> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        service.putIntegerValidAsyncd(new ServiceResponseCallback() {
+        service.putIntegerValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -649,9 +652,9 @@ public class Array {
 
     private ServiceResponse<Void> putIntegerValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Integer> getIntInvalidNull() throws ServiceException {
@@ -663,7 +666,7 @@ public class Array {
     }
 
     public void getIntInvalidNullAsync(final ServiceCallback<List<Integer>> serviceCallback) {
-        service.getIntInvalidNullAsyncd(new ServiceResponseCallback() {
+        service.getIntInvalidNullAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -677,9 +680,9 @@ public class Array {
 
     private ServiceResponse<List<Integer>> getIntInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Integer>>()
-                  .register(200, List<Integer>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Integer>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Integer> getIntInvalidString() throws ServiceException {
@@ -691,7 +694,7 @@ public class Array {
     }
 
     public void getIntInvalidStringAsync(final ServiceCallback<List<Integer>> serviceCallback) {
-        service.getIntInvalidStringAsyncd(new ServiceResponseCallback() {
+        service.getIntInvalidStringAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -705,9 +708,9 @@ public class Array {
 
     private ServiceResponse<List<Integer>> getIntInvalidStringDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Integer>>()
-                  .register(200, List<Integer>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Integer>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Long> getLongValid() throws ServiceException {
@@ -719,7 +722,7 @@ public class Array {
     }
 
     public void getLongValidAsync(final ServiceCallback<List<Long>> serviceCallback) {
-        service.getLongValidAsyncd(new ServiceResponseCallback() {
+        service.getLongValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -733,21 +736,21 @@ public class Array {
 
     private ServiceResponse<List<Long>> getLongValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Long>>()
-                  .register(200, List<Long>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Long>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putLongValid(List<Long> arrayBody) throws ServiceException {
         try {
-            return putLongValidDelegate(service.putLongValid(arrayBody), null).getBody();
+            putLongValidDelegate(service.putLongValid(arrayBody), null).getBody();
         } catch (RetrofitError error) {
-            return putLongValidDelegate(error.getResponse(), error).getBody();
+            putLongValidDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putLongValidAsync(List<Long> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        service.putLongValidAsyncd(new ServiceResponseCallback() {
+        service.putLongValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -761,9 +764,9 @@ public class Array {
 
     private ServiceResponse<Void> putLongValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Long> getLongInvalidNull() throws ServiceException {
@@ -775,7 +778,7 @@ public class Array {
     }
 
     public void getLongInvalidNullAsync(final ServiceCallback<List<Long>> serviceCallback) {
-        service.getLongInvalidNullAsyncd(new ServiceResponseCallback() {
+        service.getLongInvalidNullAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -789,9 +792,9 @@ public class Array {
 
     private ServiceResponse<List<Long>> getLongInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Long>>()
-                  .register(200, List<Long>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Long>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Long> getLongInvalidString() throws ServiceException {
@@ -803,7 +806,7 @@ public class Array {
     }
 
     public void getLongInvalidStringAsync(final ServiceCallback<List<Long>> serviceCallback) {
-        service.getLongInvalidStringAsyncd(new ServiceResponseCallback() {
+        service.getLongInvalidStringAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -817,9 +820,9 @@ public class Array {
 
     private ServiceResponse<List<Long>> getLongInvalidStringDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Long>>()
-                  .register(200, List<Long>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Long>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Double> getFloatValid() throws ServiceException {
@@ -831,7 +834,7 @@ public class Array {
     }
 
     public void getFloatValidAsync(final ServiceCallback<List<Double>> serviceCallback) {
-        service.getFloatValidAsyncd(new ServiceResponseCallback() {
+        service.getFloatValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -845,21 +848,21 @@ public class Array {
 
     private ServiceResponse<List<Double>> getFloatValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Double>>()
-                  .register(200, List<Double>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Double>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putFloatValid(List<Double> arrayBody) throws ServiceException {
         try {
-            return putFloatValidDelegate(service.putFloatValid(arrayBody), null).getBody();
+            putFloatValidDelegate(service.putFloatValid(arrayBody), null).getBody();
         } catch (RetrofitError error) {
-            return putFloatValidDelegate(error.getResponse(), error).getBody();
+            putFloatValidDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putFloatValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        service.putFloatValidAsyncd(new ServiceResponseCallback() {
+        service.putFloatValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -873,9 +876,9 @@ public class Array {
 
     private ServiceResponse<Void> putFloatValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Double> getFloatInvalidNull() throws ServiceException {
@@ -887,7 +890,7 @@ public class Array {
     }
 
     public void getFloatInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback) {
-        service.getFloatInvalidNullAsyncd(new ServiceResponseCallback() {
+        service.getFloatInvalidNullAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -901,9 +904,9 @@ public class Array {
 
     private ServiceResponse<List<Double>> getFloatInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Double>>()
-                  .register(200, List<Double>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Double>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Double> getFloatInvalidString() throws ServiceException {
@@ -915,7 +918,7 @@ public class Array {
     }
 
     public void getFloatInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback) {
-        service.getFloatInvalidStringAsyncd(new ServiceResponseCallback() {
+        service.getFloatInvalidStringAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -929,9 +932,9 @@ public class Array {
 
     private ServiceResponse<List<Double>> getFloatInvalidStringDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Double>>()
-                  .register(200, List<Double>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Double>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Double> getDoubleValid() throws ServiceException {
@@ -943,7 +946,7 @@ public class Array {
     }
 
     public void getDoubleValidAsync(final ServiceCallback<List<Double>> serviceCallback) {
-        service.getDoubleValidAsyncd(new ServiceResponseCallback() {
+        service.getDoubleValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -957,21 +960,21 @@ public class Array {
 
     private ServiceResponse<List<Double>> getDoubleValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Double>>()
-                  .register(200, List<Double>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Double>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putDoubleValid(List<Double> arrayBody) throws ServiceException {
         try {
-            return putDoubleValidDelegate(service.putDoubleValid(arrayBody), null).getBody();
+            putDoubleValidDelegate(service.putDoubleValid(arrayBody), null).getBody();
         } catch (RetrofitError error) {
-            return putDoubleValidDelegate(error.getResponse(), error).getBody();
+            putDoubleValidDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putDoubleValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        service.putDoubleValidAsyncd(new ServiceResponseCallback() {
+        service.putDoubleValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -985,9 +988,9 @@ public class Array {
 
     private ServiceResponse<Void> putDoubleValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Double> getDoubleInvalidNull() throws ServiceException {
@@ -999,7 +1002,7 @@ public class Array {
     }
 
     public void getDoubleInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback) {
-        service.getDoubleInvalidNullAsyncd(new ServiceResponseCallback() {
+        service.getDoubleInvalidNullAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1013,9 +1016,9 @@ public class Array {
 
     private ServiceResponse<List<Double>> getDoubleInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Double>>()
-                  .register(200, List<Double>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Double>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Double> getDoubleInvalidString() throws ServiceException {
@@ -1027,7 +1030,7 @@ public class Array {
     }
 
     public void getDoubleInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback) {
-        service.getDoubleInvalidStringAsyncd(new ServiceResponseCallback() {
+        service.getDoubleInvalidStringAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1041,9 +1044,9 @@ public class Array {
 
     private ServiceResponse<List<Double>> getDoubleInvalidStringDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Double>>()
-                  .register(200, List<Double>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Double>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<String> getStringValid() throws ServiceException {
@@ -1055,7 +1058,7 @@ public class Array {
     }
 
     public void getStringValidAsync(final ServiceCallback<List<String>> serviceCallback) {
-        service.getStringValidAsyncd(new ServiceResponseCallback() {
+        service.getStringValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1069,21 +1072,21 @@ public class Array {
 
     private ServiceResponse<List<String>> getStringValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<String>>()
-                  .register(200, List<String>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<String>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putStringValid(List<String> arrayBody) throws ServiceException {
         try {
-            return putStringValidDelegate(service.putStringValid(arrayBody), null).getBody();
+            putStringValidDelegate(service.putStringValid(arrayBody), null).getBody();
         } catch (RetrofitError error) {
-            return putStringValidDelegate(error.getResponse(), error).getBody();
+            putStringValidDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putStringValidAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        service.putStringValidAsyncd(new ServiceResponseCallback() {
+        service.putStringValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1097,9 +1100,9 @@ public class Array {
 
     private ServiceResponse<Void> putStringValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<String> getStringWithNull() throws ServiceException {
@@ -1111,7 +1114,7 @@ public class Array {
     }
 
     public void getStringWithNullAsync(final ServiceCallback<List<String>> serviceCallback) {
-        service.getStringWithNullAsyncd(new ServiceResponseCallback() {
+        service.getStringWithNullAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1125,9 +1128,9 @@ public class Array {
 
     private ServiceResponse<List<String>> getStringWithNullDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<String>>()
-                  .register(200, List<String>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<String>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<String> getStringWithInvalid() throws ServiceException {
@@ -1139,7 +1142,7 @@ public class Array {
     }
 
     public void getStringWithInvalidAsync(final ServiceCallback<List<String>> serviceCallback) {
-        service.getStringWithInvalidAsyncd(new ServiceResponseCallback() {
+        service.getStringWithInvalidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1153,9 +1156,9 @@ public class Array {
 
     private ServiceResponse<List<String>> getStringWithInvalidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<String>>()
-                  .register(200, List<String>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<String>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Date> getDateValid() throws ServiceException {
@@ -1167,7 +1170,7 @@ public class Array {
     }
 
     public void getDateValidAsync(final ServiceCallback<List<Date>> serviceCallback) {
-        service.getDateValidAsyncd(new ServiceResponseCallback() {
+        service.getDateValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1181,21 +1184,21 @@ public class Array {
 
     private ServiceResponse<List<Date>> getDateValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Date>>()
-                  .register(200, List<Date>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Date>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putDateValid(List<Date> arrayBody) throws ServiceException {
         try {
-            return putDateValidDelegate(service.putDateValid(arrayBody), null).getBody();
+            putDateValidDelegate(service.putDateValid(arrayBody), null).getBody();
         } catch (RetrofitError error) {
-            return putDateValidDelegate(error.getResponse(), error).getBody();
+            putDateValidDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putDateValidAsync(List<Date> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        service.putDateValidAsyncd(new ServiceResponseCallback() {
+        service.putDateValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1209,9 +1212,9 @@ public class Array {
 
     private ServiceResponse<Void> putDateValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Date> getDateInvalidNull() throws ServiceException {
@@ -1223,7 +1226,7 @@ public class Array {
     }
 
     public void getDateInvalidNullAsync(final ServiceCallback<List<Date>> serviceCallback) {
-        service.getDateInvalidNullAsyncd(new ServiceResponseCallback() {
+        service.getDateInvalidNullAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1237,9 +1240,9 @@ public class Array {
 
     private ServiceResponse<List<Date>> getDateInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Date>>()
-                  .register(200, List<Date>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Date>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Date> getDateInvalidChars() throws ServiceException {
@@ -1251,7 +1254,7 @@ public class Array {
     }
 
     public void getDateInvalidCharsAsync(final ServiceCallback<List<Date>> serviceCallback) {
-        service.getDateInvalidCharsAsyncd(new ServiceResponseCallback() {
+        service.getDateInvalidCharsAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1265,9 +1268,9 @@ public class Array {
 
     private ServiceResponse<List<Date>> getDateInvalidCharsDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Date>>()
-                  .register(200, List<Date>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Date>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Date> getDateTimeValid() throws ServiceException {
@@ -1279,7 +1282,7 @@ public class Array {
     }
 
     public void getDateTimeValidAsync(final ServiceCallback<List<Date>> serviceCallback) {
-        service.getDateTimeValidAsyncd(new ServiceResponseCallback() {
+        service.getDateTimeValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1293,21 +1296,21 @@ public class Array {
 
     private ServiceResponse<List<Date>> getDateTimeValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Date>>()
-                  .register(200, List<Date>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Date>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putDateTimeValid(List<Date> arrayBody) throws ServiceException {
         try {
-            return putDateTimeValidDelegate(service.putDateTimeValid(arrayBody), null).getBody();
+            putDateTimeValidDelegate(service.putDateTimeValid(arrayBody), null).getBody();
         } catch (RetrofitError error) {
-            return putDateTimeValidDelegate(error.getResponse(), error).getBody();
+            putDateTimeValidDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putDateTimeValidAsync(List<Date> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        service.putDateTimeValidAsyncd(new ServiceResponseCallback() {
+        service.putDateTimeValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1321,9 +1324,9 @@ public class Array {
 
     private ServiceResponse<Void> putDateTimeValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Date> getDateTimeInvalidNull() throws ServiceException {
@@ -1335,7 +1338,7 @@ public class Array {
     }
 
     public void getDateTimeInvalidNullAsync(final ServiceCallback<List<Date>> serviceCallback) {
-        service.getDateTimeInvalidNullAsyncd(new ServiceResponseCallback() {
+        service.getDateTimeInvalidNullAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1349,9 +1352,9 @@ public class Array {
 
     private ServiceResponse<List<Date>> getDateTimeInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Date>>()
-                  .register(200, List<Date>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Date>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Date> getDateTimeInvalidChars() throws ServiceException {
@@ -1363,7 +1366,7 @@ public class Array {
     }
 
     public void getDateTimeInvalidCharsAsync(final ServiceCallback<List<Date>> serviceCallback) {
-        service.getDateTimeInvalidCharsAsyncd(new ServiceResponseCallback() {
+        service.getDateTimeInvalidCharsAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1377,9 +1380,9 @@ public class Array {
 
     private ServiceResponse<List<Date>> getDateTimeInvalidCharsDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Date>>()
-                  .register(200, List<Date>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Date>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Byte[]> getByteValid() throws ServiceException {
@@ -1391,7 +1394,7 @@ public class Array {
     }
 
     public void getByteValidAsync(final ServiceCallback<List<Byte[]>> serviceCallback) {
-        service.getByteValidAsyncd(new ServiceResponseCallback() {
+        service.getByteValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1405,21 +1408,21 @@ public class Array {
 
     private ServiceResponse<List<Byte[]>> getByteValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Byte[]>>()
-                  .register(200, List<Byte[]>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Byte[]>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putByteValid(List<Byte[]> arrayBody) throws ServiceException {
         try {
-            return putByteValidDelegate(service.putByteValid(arrayBody), null).getBody();
+            putByteValidDelegate(service.putByteValid(arrayBody), null).getBody();
         } catch (RetrofitError error) {
-            return putByteValidDelegate(error.getResponse(), error).getBody();
+            putByteValidDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putByteValidAsync(List<Byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        service.putByteValidAsyncd(new ServiceResponseCallback() {
+        service.putByteValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1433,9 +1436,9 @@ public class Array {
 
     private ServiceResponse<Void> putByteValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Byte[]> getByteInvalidNull() throws ServiceException {
@@ -1447,7 +1450,7 @@ public class Array {
     }
 
     public void getByteInvalidNullAsync(final ServiceCallback<List<Byte[]>> serviceCallback) {
-        service.getByteInvalidNullAsyncd(new ServiceResponseCallback() {
+        service.getByteInvalidNullAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1461,9 +1464,9 @@ public class Array {
 
     private ServiceResponse<List<Byte[]>> getByteInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Byte[]>>()
-                  .register(200, List<Byte[]>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Byte[]>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Product> getComplexNull() throws ServiceException {
@@ -1475,7 +1478,7 @@ public class Array {
     }
 
     public void getComplexNullAsync(final ServiceCallback<List<Product>> serviceCallback) {
-        service.getComplexNullAsyncd(new ServiceResponseCallback() {
+        service.getComplexNullAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1489,9 +1492,9 @@ public class Array {
 
     private ServiceResponse<List<Product>> getComplexNullDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Product>>()
-                  .register(200, List<Product>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Product>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Product> getComplexEmpty() throws ServiceException {
@@ -1503,7 +1506,7 @@ public class Array {
     }
 
     public void getComplexEmptyAsync(final ServiceCallback<List<Product>> serviceCallback) {
-        service.getComplexEmptyAsyncd(new ServiceResponseCallback() {
+        service.getComplexEmptyAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1517,9 +1520,9 @@ public class Array {
 
     private ServiceResponse<List<Product>> getComplexEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Product>>()
-                  .register(200, List<Product>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Product>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Product> getComplexItemNull() throws ServiceException {
@@ -1531,7 +1534,7 @@ public class Array {
     }
 
     public void getComplexItemNullAsync(final ServiceCallback<List<Product>> serviceCallback) {
-        service.getComplexItemNullAsyncd(new ServiceResponseCallback() {
+        service.getComplexItemNullAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1545,9 +1548,9 @@ public class Array {
 
     private ServiceResponse<List<Product>> getComplexItemNullDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Product>>()
-                  .register(200, List<Product>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Product>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Product> getComplexItemEmpty() throws ServiceException {
@@ -1559,7 +1562,7 @@ public class Array {
     }
 
     public void getComplexItemEmptyAsync(final ServiceCallback<List<Product>> serviceCallback) {
-        service.getComplexItemEmptyAsyncd(new ServiceResponseCallback() {
+        service.getComplexItemEmptyAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1573,9 +1576,9 @@ public class Array {
 
     private ServiceResponse<List<Product>> getComplexItemEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Product>>()
-                  .register(200, List<Product>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Product>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Product> getComplexValid() throws ServiceException {
@@ -1587,7 +1590,7 @@ public class Array {
     }
 
     public void getComplexValidAsync(final ServiceCallback<List<Product>> serviceCallback) {
-        service.getComplexValidAsyncd(new ServiceResponseCallback() {
+        service.getComplexValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1601,21 +1604,21 @@ public class Array {
 
     private ServiceResponse<List<Product>> getComplexValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Product>>()
-                  .register(200, List<Product>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Product>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putComplexValid(List<Product> arrayBody) throws ServiceException {
         try {
-            return putComplexValidDelegate(service.putComplexValid(arrayBody), null).getBody();
+            putComplexValidDelegate(service.putComplexValid(arrayBody), null).getBody();
         } catch (RetrofitError error) {
-            return putComplexValidDelegate(error.getResponse(), error).getBody();
+            putComplexValidDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putComplexValidAsync(List<Product> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        service.putComplexValidAsyncd(new ServiceResponseCallback() {
+        service.putComplexValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1629,9 +1632,9 @@ public class Array {
 
     private ServiceResponse<Void> putComplexValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<List<String>> getArrayNull() throws ServiceException {
@@ -1643,7 +1646,7 @@ public class Array {
     }
 
     public void getArrayNullAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
-        service.getArrayNullAsyncd(new ServiceResponseCallback() {
+        service.getArrayNullAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1657,9 +1660,9 @@ public class Array {
 
     private ServiceResponse<List<List<String>>> getArrayNullDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<List<String>>>()
-                  .register(200, List<List<String>>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<List<String>>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<List<String>> getArrayEmpty() throws ServiceException {
@@ -1671,7 +1674,7 @@ public class Array {
     }
 
     public void getArrayEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
-        service.getArrayEmptyAsyncd(new ServiceResponseCallback() {
+        service.getArrayEmptyAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1685,9 +1688,9 @@ public class Array {
 
     private ServiceResponse<List<List<String>>> getArrayEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<List<String>>>()
-                  .register(200, List<List<String>>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<List<String>>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<List<String>> getArrayItemNull() throws ServiceException {
@@ -1699,7 +1702,7 @@ public class Array {
     }
 
     public void getArrayItemNullAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
-        service.getArrayItemNullAsyncd(new ServiceResponseCallback() {
+        service.getArrayItemNullAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1713,9 +1716,9 @@ public class Array {
 
     private ServiceResponse<List<List<String>>> getArrayItemNullDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<List<String>>>()
-                  .register(200, List<List<String>>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<List<String>>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<List<String>> getArrayItemEmpty() throws ServiceException {
@@ -1727,7 +1730,7 @@ public class Array {
     }
 
     public void getArrayItemEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
-        service.getArrayItemEmptyAsyncd(new ServiceResponseCallback() {
+        service.getArrayItemEmptyAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1741,9 +1744,9 @@ public class Array {
 
     private ServiceResponse<List<List<String>>> getArrayItemEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<List<String>>>()
-                  .register(200, List<List<String>>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<List<String>>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<List<String>> getArrayValid() throws ServiceException {
@@ -1755,7 +1758,7 @@ public class Array {
     }
 
     public void getArrayValidAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
-        service.getArrayValidAsyncd(new ServiceResponseCallback() {
+        service.getArrayValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1769,21 +1772,21 @@ public class Array {
 
     private ServiceResponse<List<List<String>>> getArrayValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<List<String>>>()
-                  .register(200, List<List<String>>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<List<String>>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putArrayValid(List<List<String>> arrayBody) throws ServiceException {
         try {
-            return putArrayValidDelegate(service.putArrayValid(arrayBody), null).getBody();
+            putArrayValidDelegate(service.putArrayValid(arrayBody), null).getBody();
         } catch (RetrofitError error) {
-            return putArrayValidDelegate(error.getResponse(), error).getBody();
+            putArrayValidDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putArrayValidAsync(List<List<String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        service.putArrayValidAsyncd(new ServiceResponseCallback() {
+        service.putArrayValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1797,9 +1800,9 @@ public class Array {
 
     private ServiceResponse<Void> putArrayValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Map<String, String>> getDictionaryNull() throws ServiceException {
@@ -1811,7 +1814,7 @@ public class Array {
     }
 
     public void getDictionaryNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
-        service.getDictionaryNullAsyncd(new ServiceResponseCallback() {
+        service.getDictionaryNullAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1825,9 +1828,9 @@ public class Array {
 
     private ServiceResponse<List<Map<String, String>>> getDictionaryNullDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Map<String, String>>>()
-                  .register(200, List<Map<String, String>>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Map<String, String>>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Map<String, String>> getDictionaryEmpty() throws ServiceException {
@@ -1839,7 +1842,7 @@ public class Array {
     }
 
     public void getDictionaryEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
-        service.getDictionaryEmptyAsyncd(new ServiceResponseCallback() {
+        service.getDictionaryEmptyAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1853,9 +1856,9 @@ public class Array {
 
     private ServiceResponse<List<Map<String, String>>> getDictionaryEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Map<String, String>>>()
-                  .register(200, List<Map<String, String>>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Map<String, String>>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Map<String, String>> getDictionaryItemNull() throws ServiceException {
@@ -1867,7 +1870,7 @@ public class Array {
     }
 
     public void getDictionaryItemNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
-        service.getDictionaryItemNullAsyncd(new ServiceResponseCallback() {
+        service.getDictionaryItemNullAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1881,9 +1884,9 @@ public class Array {
 
     private ServiceResponse<List<Map<String, String>>> getDictionaryItemNullDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Map<String, String>>>()
-                  .register(200, List<Map<String, String>>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Map<String, String>>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Map<String, String>> getDictionaryItemEmpty() throws ServiceException {
@@ -1895,7 +1898,7 @@ public class Array {
     }
 
     public void getDictionaryItemEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
-        service.getDictionaryItemEmptyAsyncd(new ServiceResponseCallback() {
+        service.getDictionaryItemEmptyAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1909,9 +1912,9 @@ public class Array {
 
     private ServiceResponse<List<Map<String, String>>> getDictionaryItemEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Map<String, String>>>()
-                  .register(200, List<Map<String, String>>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Map<String, String>>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public List<Map<String, String>> getDictionaryValid() throws ServiceException {
@@ -1923,7 +1926,7 @@ public class Array {
     }
 
     public void getDictionaryValidAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
-        service.getDictionaryValidAsyncd(new ServiceResponseCallback() {
+        service.getDictionaryValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1937,21 +1940,21 @@ public class Array {
 
     private ServiceResponse<List<Map<String, String>>> getDictionaryValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<List<Map<String, String>>>()
-                  .register(200, List<Map<String, String>>.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<List<Map<String, String>>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putDictionaryValid(List<Map<String, String>> arrayBody) throws ServiceException {
         try {
-            return putDictionaryValidDelegate(service.putDictionaryValid(arrayBody), null).getBody();
+            putDictionaryValidDelegate(service.putDictionaryValid(arrayBody), null).getBody();
         } catch (RetrofitError error) {
-            return putDictionaryValidDelegate(error.getResponse(), error).getBody();
+            putDictionaryValidDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putDictionaryValidAsync(List<Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        service.putDictionaryValidAsyncd(new ServiceResponseCallback() {
+        service.putDictionaryValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1965,9 +1968,9 @@ public class Array {
 
     private ServiceResponse<Void> putDictionaryValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
 }

@@ -9,6 +9,7 @@
 
 package fixtures.url;
 
+import com.google.gson.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -23,45 +24,47 @@ import retrofit.http.Query;
 
 public class PathItems {
     private PathItemsService service;
+
     public PathItems(RestAdapter restAdapter) {
         service = restAdapter.create(PathItemsService.class);
     }
+
     public interface PathItemsService {
         @GET("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery")
-        void getAllWithValues(@Path("localStringPath") String localStringPath, @Path("pathItemStringPath") String pathItemStringPath, @Query("localStringQuery") String localStringQuery, @Query("pathItemStringQuery") String pathItemStringQuery) throws ServiceException;
+        Response getAllWithValues(@Path("localStringPath") String localStringPath, @Path("pathItemStringPath") String pathItemStringPath, @Query("localStringQuery") String localStringQuery, @Query("pathItemStringQuery") String pathItemStringQuery) throws ServiceException;
 
         @GET("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery")
-        void getAllWithValuesAsync(@Path("localStringPath") String localStringPath, @Path("pathItemStringPath") String pathItemStringPath, @Query("localStringQuery") String localStringQuery, @Query("pathItemStringQuery") String pathItemStringQuery, ServiceCallback<Void> serviceCallback);
+        void getAllWithValuesAsync(@Path("localStringPath") String localStringPath, @Path("pathItemStringPath") String pathItemStringPath, @Query("localStringQuery") String localStringQuery, @Query("pathItemStringQuery") String pathItemStringQuery, ServiceResponseCallback cb);
 
         @GET("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery")
-        void getGlobalQueryNull(@Path("localStringPath") String localStringPath, @Path("pathItemStringPath") String pathItemStringPath, @Query("localStringQuery") String localStringQuery, @Query("pathItemStringQuery") String pathItemStringQuery) throws ServiceException;
+        Response getGlobalQueryNull(@Path("localStringPath") String localStringPath, @Path("pathItemStringPath") String pathItemStringPath, @Query("localStringQuery") String localStringQuery, @Query("pathItemStringQuery") String pathItemStringQuery) throws ServiceException;
 
         @GET("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery")
-        void getGlobalQueryNullAsync(@Path("localStringPath") String localStringPath, @Path("pathItemStringPath") String pathItemStringPath, @Query("localStringQuery") String localStringQuery, @Query("pathItemStringQuery") String pathItemStringQuery, ServiceCallback<Void> serviceCallback);
+        void getGlobalQueryNullAsync(@Path("localStringPath") String localStringPath, @Path("pathItemStringPath") String pathItemStringPath, @Query("localStringQuery") String localStringQuery, @Query("pathItemStringQuery") String pathItemStringQuery, ServiceResponseCallback cb);
 
         @GET("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null")
-        void getGlobalAndLocalQueryNull(@Path("localStringPath") String localStringPath, @Path("pathItemStringPath") String pathItemStringPath, @Query("localStringQuery") String localStringQuery, @Query("pathItemStringQuery") String pathItemStringQuery) throws ServiceException;
+        Response getGlobalAndLocalQueryNull(@Path("localStringPath") String localStringPath, @Path("pathItemStringPath") String pathItemStringPath, @Query("localStringQuery") String localStringQuery, @Query("pathItemStringQuery") String pathItemStringQuery) throws ServiceException;
 
         @GET("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null")
-        void getGlobalAndLocalQueryNullAsync(@Path("localStringPath") String localStringPath, @Path("pathItemStringPath") String pathItemStringPath, @Query("localStringQuery") String localStringQuery, @Query("pathItemStringQuery") String pathItemStringQuery, ServiceCallback<Void> serviceCallback);
+        void getGlobalAndLocalQueryNullAsync(@Path("localStringPath") String localStringPath, @Path("pathItemStringPath") String pathItemStringPath, @Query("localStringQuery") String localStringQuery, @Query("pathItemStringQuery") String pathItemStringQuery, ServiceResponseCallback cb);
 
         @GET("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null")
-        void getLocalPathItemQueryNull(@Path("localStringPath") String localStringPath, @Path("pathItemStringPath") String pathItemStringPath, @Query("localStringQuery") String localStringQuery, @Query("pathItemStringQuery") String pathItemStringQuery) throws ServiceException;
+        Response getLocalPathItemQueryNull(@Path("localStringPath") String localStringPath, @Path("pathItemStringPath") String pathItemStringPath, @Query("localStringQuery") String localStringQuery, @Query("pathItemStringQuery") String pathItemStringQuery) throws ServiceException;
 
         @GET("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null")
-        void getLocalPathItemQueryNullAsync(@Path("localStringPath") String localStringPath, @Path("pathItemStringPath") String pathItemStringPath, @Query("localStringQuery") String localStringQuery, @Query("pathItemStringQuery") String pathItemStringQuery, ServiceCallback<Void> serviceCallback);
+        void getLocalPathItemQueryNullAsync(@Path("localStringPath") String localStringPath, @Path("pathItemStringPath") String pathItemStringPath, @Query("localStringQuery") String localStringQuery, @Query("pathItemStringQuery") String pathItemStringQuery, ServiceResponseCallback cb);
 
     }
     public void getAllWithValues(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException {
         try {
-            return getAllWithValuesDelegate(service.getAllWithValues(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), null).getBody();
+            getAllWithValuesDelegate(service.getAllWithValues(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), null).getBody();
         } catch (RetrofitError error) {
-            return getAllWithValuesDelegate(error.getResponse(), error).getBody();
+            getAllWithValuesDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void getAllWithValuesAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
-        service.getAllWithValuesAsyncd(new ServiceResponseCallback() {
+        service.getAllWithValuesAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -75,21 +78,21 @@ public class PathItems {
 
     private ServiceResponse<Void> getAllWithValuesDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void getGlobalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException {
         try {
-            return getGlobalQueryNullDelegate(service.getGlobalQueryNull(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), null).getBody();
+            getGlobalQueryNullDelegate(service.getGlobalQueryNull(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), null).getBody();
         } catch (RetrofitError error) {
-            return getGlobalQueryNullDelegate(error.getResponse(), error).getBody();
+            getGlobalQueryNullDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
-        service.getGlobalQueryNullAsyncd(new ServiceResponseCallback() {
+        service.getGlobalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -103,21 +106,21 @@ public class PathItems {
 
     private ServiceResponse<Void> getGlobalQueryNullDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void getGlobalAndLocalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException {
         try {
-            return getGlobalAndLocalQueryNullDelegate(service.getGlobalAndLocalQueryNull(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), null).getBody();
+            getGlobalAndLocalQueryNullDelegate(service.getGlobalAndLocalQueryNull(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), null).getBody();
         } catch (RetrofitError error) {
-            return getGlobalAndLocalQueryNullDelegate(error.getResponse(), error).getBody();
+            getGlobalAndLocalQueryNullDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
-        service.getGlobalAndLocalQueryNullAsyncd(new ServiceResponseCallback() {
+        service.getGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -131,21 +134,21 @@ public class PathItems {
 
     private ServiceResponse<Void> getGlobalAndLocalQueryNullDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void getLocalPathItemQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException {
         try {
-            return getLocalPathItemQueryNullDelegate(service.getLocalPathItemQueryNull(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), null).getBody();
+            getLocalPathItemQueryNullDelegate(service.getLocalPathItemQueryNull(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), null).getBody();
         } catch (RetrofitError error) {
-            return getLocalPathItemQueryNullDelegate(error.getResponse(), error).getBody();
+            getLocalPathItemQueryNullDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
-        service.getLocalPathItemQueryNullAsyncd(new ServiceResponseCallback() {
+        service.getLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -159,9 +162,9 @@ public class PathItems {
 
     private ServiceResponse<Void> getLocalPathItemQueryNullDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
 }

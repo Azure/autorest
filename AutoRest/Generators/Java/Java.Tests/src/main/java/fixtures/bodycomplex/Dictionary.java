@@ -9,6 +9,7 @@
 
 package fixtures.bodycomplex;
 
+import com.google.gson.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -24,45 +25,47 @@ import retrofit.http.Body;
 
 public class Dictionary {
     private DictionaryService service;
+
     public Dictionary(RestAdapter restAdapter) {
         service = restAdapter.create(DictionaryService.class);
     }
+
     public interface DictionaryService {
         @GET("/complex/dictionary/typed/valid")
-        DictionaryWrapper getValid() throws ServiceException;
+        Response getValid() throws ServiceException;
 
         @GET("/complex/dictionary/typed/valid")
-        void getValidAsync(ServiceCallback<DictionaryWrapper> serviceCallback);
+        void getValidAsync(ServiceResponseCallback cb);
 
         @PUT("/complex/dictionary/typed/valid")
-        void putValid(@Body DictionaryWrapper complexBody) throws ServiceException;
+        Response putValid(@Body DictionaryWrapper complexBody) throws ServiceException;
 
         @PUT("/complex/dictionary/typed/valid")
-        void putValidAsync(@Body DictionaryWrapper complexBody, ServiceCallback<Void> serviceCallback);
+        void putValidAsync(@Body DictionaryWrapper complexBody, ServiceResponseCallback cb);
 
         @GET("/complex/dictionary/typed/empty")
-        DictionaryWrapper getEmpty() throws ServiceException;
+        Response getEmpty() throws ServiceException;
 
         @GET("/complex/dictionary/typed/empty")
-        void getEmptyAsync(ServiceCallback<DictionaryWrapper> serviceCallback);
+        void getEmptyAsync(ServiceResponseCallback cb);
 
         @PUT("/complex/dictionary/typed/empty")
-        void putEmpty(@Body DictionaryWrapper complexBody) throws ServiceException;
+        Response putEmpty(@Body DictionaryWrapper complexBody) throws ServiceException;
 
         @PUT("/complex/dictionary/typed/empty")
-        void putEmptyAsync(@Body DictionaryWrapper complexBody, ServiceCallback<Void> serviceCallback);
+        void putEmptyAsync(@Body DictionaryWrapper complexBody, ServiceResponseCallback cb);
 
         @GET("/complex/dictionary/typed/null")
-        DictionaryWrapper getNull() throws ServiceException;
+        Response getNull() throws ServiceException;
 
         @GET("/complex/dictionary/typed/null")
-        void getNullAsync(ServiceCallback<DictionaryWrapper> serviceCallback);
+        void getNullAsync(ServiceResponseCallback cb);
 
         @GET("/complex/dictionary/typed/notprovided")
-        DictionaryWrapper getNotProvided() throws ServiceException;
+        Response getNotProvided() throws ServiceException;
 
         @GET("/complex/dictionary/typed/notprovided")
-        void getNotProvidedAsync(ServiceCallback<DictionaryWrapper> serviceCallback);
+        void getNotProvidedAsync(ServiceResponseCallback cb);
 
     }
     public DictionaryWrapper getValid() throws ServiceException {
@@ -74,7 +77,7 @@ public class Dictionary {
     }
 
     public void getValidAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
-        service.getValidAsyncd(new ServiceResponseCallback() {
+        service.getValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -88,21 +91,21 @@ public class Dictionary {
 
     private ServiceResponse<DictionaryWrapper> getValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<DictionaryWrapper>()
-                  .register(200, DictionaryWrapper.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<DictionaryWrapper>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putValid(DictionaryWrapper complexBody) throws ServiceException {
         try {
-            return putValidDelegate(service.putValid(complexBody), null).getBody();
+            putValidDelegate(service.putValid(complexBody), null).getBody();
         } catch (RetrofitError error) {
-            return putValidDelegate(error.getResponse(), error).getBody();
+            putValidDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putValidAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        service.putValidAsyncd(new ServiceResponseCallback() {
+        service.putValidAsync(complexBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -116,9 +119,9 @@ public class Dictionary {
 
     private ServiceResponse<Void> putValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public DictionaryWrapper getEmpty() throws ServiceException {
@@ -130,7 +133,7 @@ public class Dictionary {
     }
 
     public void getEmptyAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
-        service.getEmptyAsyncd(new ServiceResponseCallback() {
+        service.getEmptyAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -144,21 +147,21 @@ public class Dictionary {
 
     private ServiceResponse<DictionaryWrapper> getEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<DictionaryWrapper>()
-                  .register(200, DictionaryWrapper.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<DictionaryWrapper>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putEmpty(DictionaryWrapper complexBody) throws ServiceException {
         try {
-            return putEmptyDelegate(service.putEmpty(complexBody), null).getBody();
+            putEmptyDelegate(service.putEmpty(complexBody), null).getBody();
         } catch (RetrofitError error) {
-            return putEmptyDelegate(error.getResponse(), error).getBody();
+            putEmptyDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putEmptyAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        service.putEmptyAsyncd(new ServiceResponseCallback() {
+        service.putEmptyAsync(complexBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -172,9 +175,9 @@ public class Dictionary {
 
     private ServiceResponse<Void> putEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public DictionaryWrapper getNull() throws ServiceException {
@@ -186,7 +189,7 @@ public class Dictionary {
     }
 
     public void getNullAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
-        service.getNullAsyncd(new ServiceResponseCallback() {
+        service.getNullAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -200,9 +203,9 @@ public class Dictionary {
 
     private ServiceResponse<DictionaryWrapper> getNullDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<DictionaryWrapper>()
-                  .register(200, DictionaryWrapper.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<DictionaryWrapper>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public DictionaryWrapper getNotProvided() throws ServiceException {
@@ -214,7 +217,7 @@ public class Dictionary {
     }
 
     public void getNotProvidedAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
-        service.getNotProvidedAsyncd(new ServiceResponseCallback() {
+        service.getNotProvidedAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -228,9 +231,9 @@ public class Dictionary {
 
     private ServiceResponse<DictionaryWrapper> getNotProvidedDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<DictionaryWrapper>()
-                  .register(200, DictionaryWrapper.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<DictionaryWrapper>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
 }

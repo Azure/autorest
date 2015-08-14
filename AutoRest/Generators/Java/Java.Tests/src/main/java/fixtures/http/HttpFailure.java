@@ -9,6 +9,7 @@
 
 package fixtures.http;
 
+import com.google.gson.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -21,15 +22,17 @@ import retrofit.http.GET;
 
 public class HttpFailure {
     private HttpFailureService service;
+
     public HttpFailure(RestAdapter restAdapter) {
         service = restAdapter.create(HttpFailureService.class);
     }
+
     public interface HttpFailureService {
         @GET("/http/failure/emptybody/error")
-        boolean getEmptyError() throws ServiceException;
+        Response getEmptyError() throws ServiceException;
 
         @GET("/http/failure/emptybody/error")
-        void getEmptyErrorAsync(ServiceCallback<Boolean> serviceCallback);
+        void getEmptyErrorAsync(ServiceResponseCallback cb);
 
     }
     public Boolean getEmptyError() throws ServiceException {
@@ -41,7 +44,7 @@ public class HttpFailure {
     }
 
     public void getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
-        service.getEmptyErrorAsyncd(new ServiceResponseCallback() {
+        service.getEmptyErrorAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -55,9 +58,9 @@ public class HttpFailure {
 
     private ServiceResponse<Boolean> getEmptyErrorDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Boolean>()
-                  .register(200, Boolean.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Boolean>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
 }

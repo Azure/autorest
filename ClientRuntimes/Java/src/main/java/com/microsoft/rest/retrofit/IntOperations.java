@@ -7,6 +7,7 @@
 
 package com.microsoft.rest.retrofit;
 
+import com.google.gson.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -70,7 +71,7 @@ public class IntOperations {
 
     private ServiceResponse<Integer> getNullDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Integer>()
-                .register(200, Integer.class)
+                .register(200, new TypeToken<Integer>(){}.getType())
                 .registerError(ErrorModel.class)
                 .build(response, error);
     }
