@@ -5,7 +5,7 @@
  *
  */
 
-package com.microsoft.rest.retrofit.models;
+package com.microsoft.rest.sample.models;
 
 public class ErrorModel {
     private int status;

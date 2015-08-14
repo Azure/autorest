@@ -5,11 +5,11 @@
  *
  */
 
-package com.microsoft.rest.retrofit;
+package com.microsoft.rest.sample;
 
 import com.google.gson.reflect.TypeToken;
 import com.microsoft.rest.*;
-import com.microsoft.rest.retrofit.models.ErrorModel;
+import com.microsoft.rest.sample.models.ErrorModel;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;

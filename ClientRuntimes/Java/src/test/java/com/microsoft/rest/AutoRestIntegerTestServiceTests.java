@@ -7,11 +7,10 @@
 
 package com.microsoft.rest;
 
-import com.microsoft.rest.retrofit.AutoRestIntegerTestService;
-import com.microsoft.rest.retrofit.AutoRestIntegerTestServiceImpl;
+import com.microsoft.rest.sample.AutoRestIntegerTestService;
+import com.microsoft.rest.sample.AutoRestIntegerTestServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
-import retrofit.client.Response;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
