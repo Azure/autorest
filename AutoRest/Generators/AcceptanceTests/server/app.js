@@ -4,14 +4,15 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var fs = require('fs');
+var morgan = require('morgan');
 var routes = require('./routes/index');
 var number = require('./routes/number');
 var array = require('./routes/array');
 var bool = require('./routes/bool');
 var integer = require('./routes/int');
 var string = require('./routes/string');
-var byte = require('./routes/byte')
+var byte = require('./routes/byte');
 var date = require('./routes/date');
 var datetime = require('./routes/datetime');
 var complex = require('./routes/complex');
@@ -29,8 +30,15 @@ var paging = require('./routes/paging');
 var resourceFlatten = require('./routes/resource-flatten');
 var azureUrl = require('./routes/azureUrl');
 var azureSpecial = require('./routes/azureSpecials');
-var app = express();
 var util = require('util');
+
+var app = express();
+//set up server log
+var now = new Date();
+var logFileName = 'AccTestServer-' + now.getHours() +  
+    now.getMinutes() + now.getSeconds() + '.log';
+var logfile = fs.createWriteStream('../../../../TestResults/' + logFileName, {flags: 'a'});
+app.use(morgan('combined', {stream: logfile}));
 
 var azurecoverage = {};
 var optionalCoverage = {};
@@ -205,7 +213,6 @@ var coverage = {
   "getComplexPolymorphicRecursiveValid": 0,
   "UrlPathsBoolFalse": 0,
   "UrlPathsBoolTrue": 0,
-  "UrlPathsBoolFalse": 0,
   "UrlPathsIntPositive": 0,
   "UrlPathsIntNegative": 0,
   "UrlPathsLongPositive": 0,
@@ -407,23 +414,9 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-// error handlers
-
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.end(JSON.stringify(err));
-  });
-}
-
-// production error handler
-// no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.end(err);
+  res.end(JSON.stringify(err));
 });
-
 
 module.exports = app;
