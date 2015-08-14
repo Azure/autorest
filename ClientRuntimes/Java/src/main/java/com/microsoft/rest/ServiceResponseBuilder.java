@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * The builder for building a {@link ServiceResponse<T>}.
+ * The builder for building a {@link ServiceResponse}.
  */
 public class ServiceResponseBuilder<T> {
     private Map<Integer, Type> responseTypes;

@@ -85,7 +85,7 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient<AutoR
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.implicit = restAdapter.create(Implicit.class);
-        this.explicit = restAdapter.create(Explicit.class);
+        this.implicit = new Implicit(restAdapter);
+        this.explicit = new Explicit(restAdapter);
     }
 }

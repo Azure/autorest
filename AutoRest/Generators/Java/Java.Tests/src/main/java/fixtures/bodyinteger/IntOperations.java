@@ -9,72 +9,363 @@
 
 package fixtures.bodyinteger;
 
+import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import retrofit.Callback;
+import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.ServiceResponseBuilder;
+import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
 import retrofit.http.GET;
 import retrofit.http.PUT;
 import retrofit.http.Body;
 
-public interface IntOperations {
-    @GET("/int/null")
-    int getNull() throws ServiceException;
+public class IntOperations {
+    private IntService service;
+    public IntOperations(RestAdapter restAdapter) {
+        service = restAdapter.create(IntService.class);
+    }
+    public interface IntService {
+        @GET("/int/null")
+        int getNull() throws ServiceException;
 
-    @GET("/int/null")
-    void getNullAsync(Callback<Integer> cb);
+        @GET("/int/null")
+        void getNullAsync(ServiceCallback<Integer> serviceCallback);
 
-    @GET("/int/invalid")
-    Integer getInvalid() throws ServiceException;
+        @GET("/int/invalid")
+        Integer getInvalid() throws ServiceException;
 
-    @GET("/int/invalid")
-    void getInvalidAsync(Callback<Integer> cb);
+        @GET("/int/invalid")
+        void getInvalidAsync(ServiceCallback<Integer> serviceCallback);
 
-    @GET("/int/overflowint32")
-    Integer getOverflowInt32() throws ServiceException;
+        @GET("/int/overflowint32")
+        Integer getOverflowInt32() throws ServiceException;
 
-    @GET("/int/overflowint32")
-    void getOverflowInt32Async(Callback<Integer> cb);
+        @GET("/int/overflowint32")
+        void getOverflowInt32Async(ServiceCallback<Integer> serviceCallback);
 
-    @GET("/int/underflowint32")
-    Integer getUnderflowInt32() throws ServiceException;
+        @GET("/int/underflowint32")
+        Integer getUnderflowInt32() throws ServiceException;
 
-    @GET("/int/underflowint32")
-    void getUnderflowInt32Async(Callback<Integer> cb);
+        @GET("/int/underflowint32")
+        void getUnderflowInt32Async(ServiceCallback<Integer> serviceCallback);
 
-    @GET("/int/overflowint64")
-    long getOverflowInt64() throws ServiceException;
+        @GET("/int/overflowint64")
+        long getOverflowInt64() throws ServiceException;
 
-    @GET("/int/overflowint64")
-    void getOverflowInt64Async(Callback<Long> cb);
+        @GET("/int/overflowint64")
+        void getOverflowInt64Async(ServiceCallback<Long> serviceCallback);
 
-    @GET("/int/underflowint64")
-    Long getUnderflowInt64() throws ServiceException;
+        @GET("/int/underflowint64")
+        Long getUnderflowInt64() throws ServiceException;
 
-    @GET("/int/underflowint64")
-    void getUnderflowInt64Async(Callback<Long> cb);
+        @GET("/int/underflowint64")
+        void getUnderflowInt64Async(ServiceCallback<Long> serviceCallback);
 
-    @PUT("/int/max/32")
-    Response putMax32(@Body Integer intBody) throws ServiceException;
+        @PUT("/int/max/32")
+        void putMax32(@Body Integer intBody) throws ServiceException;
 
-    @PUT("/int/max/32")
-    void putMax32Async(@Body Integer intBody, Callback<Response> cb);
+        @PUT("/int/max/32")
+        void putMax32Async(@Body Integer intBody, ServiceCallback<Void> serviceCallback);
 
-    @PUT("/int/max/64")
-    Response putMax64(@Body Long intBody) throws ServiceException;
+        @PUT("/int/max/64")
+        void putMax64(@Body Long intBody) throws ServiceException;
 
-    @PUT("/int/max/64")
-    void putMax64Async(@Body Long intBody, Callback<Response> cb);
+        @PUT("/int/max/64")
+        void putMax64Async(@Body Long intBody, ServiceCallback<Void> serviceCallback);
 
-    @PUT("/int/min/32")
-    Response putMin32(@Body Integer intBody) throws ServiceException;
+        @PUT("/int/min/32")
+        void putMin32(@Body Integer intBody) throws ServiceException;
 
-    @PUT("/int/min/32")
-    void putMin32Async(@Body Integer intBody, Callback<Response> cb);
+        @PUT("/int/min/32")
+        void putMin32Async(@Body Integer intBody, ServiceCallback<Void> serviceCallback);
 
-    @PUT("/int/min/64")
-    Response putMin64(@Body Long intBody) throws ServiceException;
+        @PUT("/int/min/64")
+        void putMin64(@Body Long intBody) throws ServiceException;
 
-    @PUT("/int/min/64")
-    void putMin64Async(@Body Long intBody, Callback<Response> cb);
+        @PUT("/int/min/64")
+        void putMin64Async(@Body Long intBody, ServiceCallback<Void> serviceCallback);
+
+    }
+    public Integer getNull() throws ServiceException {
+        try {
+            return getNullDelegate(service.getNull(), null).getBody();
+        } catch (RetrofitError error) {
+            return getNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getNullAsync(final ServiceCallback<Integer> serviceCallback) {
+        service.getNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Integer> getNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Integer>()
+                  .register(200, Integer.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public Integer getInvalid() throws ServiceException {
+        try {
+            return getInvalidDelegate(service.getInvalid(), null).getBody();
+        } catch (RetrofitError error) {
+            return getInvalidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getInvalidAsync(final ServiceCallback<Integer> serviceCallback) {
+        service.getInvalidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getInvalidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Integer> getInvalidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Integer>()
+                  .register(200, Integer.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public Integer getOverflowInt32() throws ServiceException {
+        try {
+            return getOverflowInt32Delegate(service.getOverflowInt32(), null).getBody();
+        } catch (RetrofitError error) {
+            return getOverflowInt32Delegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getOverflowInt32Async(final ServiceCallback<Integer> serviceCallback) {
+        service.getOverflowInt32Asyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getOverflowInt32Delegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Integer> getOverflowInt32Delegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Integer>()
+                  .register(200, Integer.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public Integer getUnderflowInt32() throws ServiceException {
+        try {
+            return getUnderflowInt32Delegate(service.getUnderflowInt32(), null).getBody();
+        } catch (RetrofitError error) {
+            return getUnderflowInt32Delegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getUnderflowInt32Async(final ServiceCallback<Integer> serviceCallback) {
+        service.getUnderflowInt32Asyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getUnderflowInt32Delegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Integer> getUnderflowInt32Delegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Integer>()
+                  .register(200, Integer.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public Long getOverflowInt64() throws ServiceException {
+        try {
+            return getOverflowInt64Delegate(service.getOverflowInt64(), null).getBody();
+        } catch (RetrofitError error) {
+            return getOverflowInt64Delegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getOverflowInt64Async(final ServiceCallback<Long> serviceCallback) {
+        service.getOverflowInt64Asyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getOverflowInt64Delegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Long> getOverflowInt64Delegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Long>()
+                  .register(200, Long.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public Long getUnderflowInt64() throws ServiceException {
+        try {
+            return getUnderflowInt64Delegate(service.getUnderflowInt64(), null).getBody();
+        } catch (RetrofitError error) {
+            return getUnderflowInt64Delegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getUnderflowInt64Async(final ServiceCallback<Long> serviceCallback) {
+        service.getUnderflowInt64Asyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getUnderflowInt64Delegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Long> getUnderflowInt64Delegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Long>()
+                  .register(200, Long.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void putMax32(Integer intBody) throws ServiceException {
+        try {
+            return putMax32Delegate(service.putMax32(intBody), null).getBody();
+        } catch (RetrofitError error) {
+            return putMax32Delegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void putMax32Async(Integer intBody, final ServiceCallback<Void> serviceCallback) {
+        service.putMax32Asyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(putMax32Delegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> putMax32Delegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void putMax64(Long intBody) throws ServiceException {
+        try {
+            return putMax64Delegate(service.putMax64(intBody), null).getBody();
+        } catch (RetrofitError error) {
+            return putMax64Delegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void putMax64Async(Long intBody, final ServiceCallback<Void> serviceCallback) {
+        service.putMax64Asyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(putMax64Delegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> putMax64Delegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void putMin32(Integer intBody) throws ServiceException {
+        try {
+            return putMin32Delegate(service.putMin32(intBody), null).getBody();
+        } catch (RetrofitError error) {
+            return putMin32Delegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void putMin32Async(Integer intBody, final ServiceCallback<Void> serviceCallback) {
+        service.putMin32Asyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(putMin32Delegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> putMin32Delegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void putMin64(Long intBody) throws ServiceException {
+        try {
+            return putMin64Delegate(service.putMin64(intBody), null).getBody();
+        } catch (RetrofitError error) {
+            return putMin64Delegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void putMin64Async(Long intBody, final ServiceCallback<Void> serviceCallback) {
+        service.putMin64Asyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(putMin64Delegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> putMin64Delegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
 
 }

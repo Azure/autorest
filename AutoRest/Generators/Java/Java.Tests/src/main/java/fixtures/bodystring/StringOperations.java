@@ -9,66 +9,329 @@
 
 package fixtures.bodystring;
 
+import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import retrofit.Callback;
+import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.ServiceResponseBuilder;
+import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
 import retrofit.http.GET;
 import retrofit.http.PUT;
 import retrofit.http.Body;
 
-public interface StringOperations {
-    @GET("/string/null")
-    String getNull() throws ServiceException;
+public class StringOperations {
+    private StringService service;
+    public StringOperations(RestAdapter restAdapter) {
+        service = restAdapter.create(StringService.class);
+    }
+    public interface StringService {
+        @GET("/string/null")
+        String getNull() throws ServiceException;
 
-    @GET("/string/null")
-    void getNullAsync(Callback<String> cb);
+        @GET("/string/null")
+        void getNullAsync(ServiceCallback<String> serviceCallback);
 
-    @PUT("/string/null")
-    Response putNull(@Body String stringBody) throws ServiceException;
+        @PUT("/string/null")
+        void putNull(@Body String stringBody) throws ServiceException;
 
-    @PUT("/string/null")
-    void putNullAsync(@Body String stringBody, Callback<Response> cb);
+        @PUT("/string/null")
+        void putNullAsync(@Body String stringBody, ServiceCallback<Void> serviceCallback);
 
-    @GET("/string/empty")
-    String getEmpty() throws ServiceException;
+        @GET("/string/empty")
+        String getEmpty() throws ServiceException;
 
-    @GET("/string/empty")
-    void getEmptyAsync(Callback<String> cb);
+        @GET("/string/empty")
+        void getEmptyAsync(ServiceCallback<String> serviceCallback);
 
-    @PUT("/string/empty")
-    Response putEmpty(@Body String stringBody) throws ServiceException;
+        @PUT("/string/empty")
+        void putEmpty(@Body String stringBody) throws ServiceException;
 
-    @PUT("/string/empty")
-    void putEmptyAsync(@Body String stringBody, Callback<Response> cb);
+        @PUT("/string/empty")
+        void putEmptyAsync(@Body String stringBody, ServiceCallback<Void> serviceCallback);
 
-    @GET("/string/mbcs")
-    String getMbcs() throws ServiceException;
+        @GET("/string/mbcs")
+        String getMbcs() throws ServiceException;
 
-    @GET("/string/mbcs")
-    void getMbcsAsync(Callback<String> cb);
+        @GET("/string/mbcs")
+        void getMbcsAsync(ServiceCallback<String> serviceCallback);
 
-    @PUT("/string/mbcs")
-    Response putMbcs(@Body String stringBody) throws ServiceException;
+        @PUT("/string/mbcs")
+        void putMbcs(@Body String stringBody) throws ServiceException;
 
-    @PUT("/string/mbcs")
-    void putMbcsAsync(@Body String stringBody, Callback<Response> cb);
+        @PUT("/string/mbcs")
+        void putMbcsAsync(@Body String stringBody, ServiceCallback<Void> serviceCallback);
 
-    @GET("/string/whitespace")
-    String getWhitespace() throws ServiceException;
+        @GET("/string/whitespace")
+        String getWhitespace() throws ServiceException;
 
-    @GET("/string/whitespace")
-    void getWhitespaceAsync(Callback<String> cb);
+        @GET("/string/whitespace")
+        void getWhitespaceAsync(ServiceCallback<String> serviceCallback);
 
-    @PUT("/string/whitespace")
-    Response putWhitespace(@Body String stringBody) throws ServiceException;
+        @PUT("/string/whitespace")
+        void putWhitespace(@Body String stringBody) throws ServiceException;
 
-    @PUT("/string/whitespace")
-    void putWhitespaceAsync(@Body String stringBody, Callback<Response> cb);
+        @PUT("/string/whitespace")
+        void putWhitespaceAsync(@Body String stringBody, ServiceCallback<Void> serviceCallback);
 
-    @GET("/string/notProvided")
-    String getNotProvided() throws ServiceException;
+        @GET("/string/notProvided")
+        String getNotProvided() throws ServiceException;
 
-    @GET("/string/notProvided")
-    void getNotProvidedAsync(Callback<String> cb);
+        @GET("/string/notProvided")
+        void getNotProvidedAsync(ServiceCallback<String> serviceCallback);
+
+    }
+    public String getNull() throws ServiceException {
+        try {
+            return getNullDelegate(service.getNull(), null).getBody();
+        } catch (RetrofitError error) {
+            return getNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getNullAsync(final ServiceCallback<String> serviceCallback) {
+        service.getNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<String> getNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<String>()
+                  .register(200, String.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void putNull(String stringBody) throws ServiceException {
+        try {
+            return putNullDelegate(service.putNull(stringBody), null).getBody();
+        } catch (RetrofitError error) {
+            return putNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void putNullAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
+        service.putNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(putNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> putNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public String getEmpty() throws ServiceException {
+        try {
+            return getEmptyDelegate(service.getEmpty(), null).getBody();
+        } catch (RetrofitError error) {
+            return getEmptyDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getEmptyAsync(final ServiceCallback<String> serviceCallback) {
+        service.getEmptyAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getEmptyDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<String> getEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<String>()
+                  .register(200, String.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void putEmpty(String stringBody) throws ServiceException {
+        try {
+            return putEmptyDelegate(service.putEmpty(stringBody), null).getBody();
+        } catch (RetrofitError error) {
+            return putEmptyDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void putEmptyAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
+        service.putEmptyAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(putEmptyDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> putEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public String getMbcs() throws ServiceException {
+        try {
+            return getMbcsDelegate(service.getMbcs(), null).getBody();
+        } catch (RetrofitError error) {
+            return getMbcsDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getMbcsAsync(final ServiceCallback<String> serviceCallback) {
+        service.getMbcsAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getMbcsDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<String> getMbcsDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<String>()
+                  .register(200, String.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void putMbcs(String stringBody) throws ServiceException {
+        try {
+            return putMbcsDelegate(service.putMbcs(stringBody), null).getBody();
+        } catch (RetrofitError error) {
+            return putMbcsDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void putMbcsAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
+        service.putMbcsAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(putMbcsDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> putMbcsDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public String getWhitespace() throws ServiceException {
+        try {
+            return getWhitespaceDelegate(service.getWhitespace(), null).getBody();
+        } catch (RetrofitError error) {
+            return getWhitespaceDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getWhitespaceAsync(final ServiceCallback<String> serviceCallback) {
+        service.getWhitespaceAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getWhitespaceDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<String> getWhitespaceDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<String>()
+                  .register(200, String.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void putWhitespace(String stringBody) throws ServiceException {
+        try {
+            return putWhitespaceDelegate(service.putWhitespace(stringBody), null).getBody();
+        } catch (RetrofitError error) {
+            return putWhitespaceDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void putWhitespaceAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
+        service.putWhitespaceAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(putWhitespaceDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> putWhitespaceDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public String getNotProvided() throws ServiceException {
+        try {
+            return getNotProvidedDelegate(service.getNotProvided(), null).getBody();
+        } catch (RetrofitError error) {
+            return getNotProvidedDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getNotProvidedAsync(final ServiceCallback<String> serviceCallback) {
+        service.getNotProvidedAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getNotProvidedDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<String> getNotProvidedDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<String>()
+                  .register(200, String.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
 
 }

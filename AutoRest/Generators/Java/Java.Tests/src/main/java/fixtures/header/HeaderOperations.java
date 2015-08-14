@@ -9,163 +9,874 @@
 
 package fixtures.header;
 
+import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import retrofit.Callback;
+import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.ServiceResponseBuilder;
+import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
 import java.util.Date;
 import fixtures.header.models.GreyscaleColors;
 import retrofit.http.POST;
 import retrofit.http.Header;
 
-public interface HeaderOperations {
-    @POST("/header/param/existingkey")
-    Response paramExistingKey(@Header("User-Agent") String userAgent) throws ServiceException;
+public class HeaderOperations {
+    private HeaderService service;
+    public HeaderOperations(RestAdapter restAdapter) {
+        service = restAdapter.create(HeaderService.class);
+    }
+    public interface HeaderService {
+        @POST("/header/param/existingkey")
+        void paramExistingKey(@Header("User-Agent") String userAgent) throws ServiceException;
 
-    @POST("/header/param/existingkey")
-    void paramExistingKeyAsync(@Header("User-Agent") String userAgent, Callback<Response> cb);
+        @POST("/header/param/existingkey")
+        void paramExistingKeyAsync(@Header("User-Agent") String userAgent, ServiceCallback<Void> serviceCallback);
 
-    @POST("/header/response/existingkey")
-    Response responseExistingKey() throws ServiceException;
+        @POST("/header/response/existingkey")
+        void responseExistingKey() throws ServiceException;
 
-    @POST("/header/response/existingkey")
-    void responseExistingKeyAsync(Callback<Response> cb);
+        @POST("/header/response/existingkey")
+        void responseExistingKeyAsync(ServiceCallback<Void> serviceCallback);
 
-    @POST("/header/param/protectedkey")
-    Response paramProtectedKey(@Header("Content-Type") String contentType) throws ServiceException;
+        @POST("/header/param/protectedkey")
+        void paramProtectedKey(@Header("Content-Type") String contentType) throws ServiceException;
 
-    @POST("/header/param/protectedkey")
-    void paramProtectedKeyAsync(@Header("Content-Type") String contentType, Callback<Response> cb);
+        @POST("/header/param/protectedkey")
+        void paramProtectedKeyAsync(@Header("Content-Type") String contentType, ServiceCallback<Void> serviceCallback);
 
-    @POST("/header/response/protectedkey")
-    Response responseProtectedKey() throws ServiceException;
+        @POST("/header/response/protectedkey")
+        void responseProtectedKey() throws ServiceException;
 
-    @POST("/header/response/protectedkey")
-    void responseProtectedKeyAsync(Callback<Response> cb);
+        @POST("/header/response/protectedkey")
+        void responseProtectedKeyAsync(ServiceCallback<Void> serviceCallback);
 
-    @POST("/header/param/prim/integer")
-    Response paramInteger(@Header("scenario") String scenario, @Header("value") int value) throws ServiceException;
+        @POST("/header/param/prim/integer")
+        void paramInteger(@Header("scenario") String scenario, @Header("value") int value) throws ServiceException;
 
-    @POST("/header/param/prim/integer")
-    void paramIntegerAsync(@Header("scenario") String scenario, @Header("value") int value, Callback<Response> cb);
+        @POST("/header/param/prim/integer")
+        void paramIntegerAsync(@Header("scenario") String scenario, @Header("value") int value, ServiceCallback<Void> serviceCallback);
 
-    @POST("/header/response/prim/integer")
-    Response responseInteger(@Header("scenario") String scenario) throws ServiceException;
+        @POST("/header/response/prim/integer")
+        void responseInteger(@Header("scenario") String scenario) throws ServiceException;
 
-    @POST("/header/response/prim/integer")
-    void responseIntegerAsync(@Header("scenario") String scenario, Callback<Response> cb);
+        @POST("/header/response/prim/integer")
+        void responseIntegerAsync(@Header("scenario") String scenario, ServiceCallback<Void> serviceCallback);
 
-    @POST("/header/param/prim/long")
-    Response paramLong(@Header("scenario") String scenario, @Header("value") long value) throws ServiceException;
+        @POST("/header/param/prim/long")
+        void paramLong(@Header("scenario") String scenario, @Header("value") long value) throws ServiceException;
 
-    @POST("/header/param/prim/long")
-    void paramLongAsync(@Header("scenario") String scenario, @Header("value") long value, Callback<Response> cb);
+        @POST("/header/param/prim/long")
+        void paramLongAsync(@Header("scenario") String scenario, @Header("value") long value, ServiceCallback<Void> serviceCallback);
 
-    @POST("/header/response/prim/long")
-    Response responseLong(@Header("scenario") String scenario) throws ServiceException;
+        @POST("/header/response/prim/long")
+        void responseLong(@Header("scenario") String scenario) throws ServiceException;
 
-    @POST("/header/response/prim/long")
-    void responseLongAsync(@Header("scenario") String scenario, Callback<Response> cb);
+        @POST("/header/response/prim/long")
+        void responseLongAsync(@Header("scenario") String scenario, ServiceCallback<Void> serviceCallback);
 
-    @POST("/header/param/prim/float")
-    Response paramFloat(@Header("scenario") String scenario, @Header("value") double value) throws ServiceException;
+        @POST("/header/param/prim/float")
+        void paramFloat(@Header("scenario") String scenario, @Header("value") double value) throws ServiceException;
 
-    @POST("/header/param/prim/float")
-    void paramFloatAsync(@Header("scenario") String scenario, @Header("value") double value, Callback<Response> cb);
+        @POST("/header/param/prim/float")
+        void paramFloatAsync(@Header("scenario") String scenario, @Header("value") double value, ServiceCallback<Void> serviceCallback);
 
-    @POST("/header/response/prim/float")
-    Response responseFloat(@Header("scenario") String scenario) throws ServiceException;
+        @POST("/header/response/prim/float")
+        void responseFloat(@Header("scenario") String scenario) throws ServiceException;
 
-    @POST("/header/response/prim/float")
-    void responseFloatAsync(@Header("scenario") String scenario, Callback<Response> cb);
+        @POST("/header/response/prim/float")
+        void responseFloatAsync(@Header("scenario") String scenario, ServiceCallback<Void> serviceCallback);
 
-    @POST("/header/param/prim/double")
-    Response paramDouble(@Header("scenario") String scenario, @Header("value") double value) throws ServiceException;
+        @POST("/header/param/prim/double")
+        void paramDouble(@Header("scenario") String scenario, @Header("value") double value) throws ServiceException;
 
-    @POST("/header/param/prim/double")
-    void paramDoubleAsync(@Header("scenario") String scenario, @Header("value") double value, Callback<Response> cb);
+        @POST("/header/param/prim/double")
+        void paramDoubleAsync(@Header("scenario") String scenario, @Header("value") double value, ServiceCallback<Void> serviceCallback);
 
-    @POST("/header/response/prim/double")
-    Response responseDouble(@Header("scenario") String scenario) throws ServiceException;
+        @POST("/header/response/prim/double")
+        void responseDouble(@Header("scenario") String scenario) throws ServiceException;
 
-    @POST("/header/response/prim/double")
-    void responseDoubleAsync(@Header("scenario") String scenario, Callback<Response> cb);
+        @POST("/header/response/prim/double")
+        void responseDoubleAsync(@Header("scenario") String scenario, ServiceCallback<Void> serviceCallback);
 
-    @POST("/header/param/prim/bool")
-    Response paramBool(@Header("scenario") String scenario, @Header("value") boolean value) throws ServiceException;
+        @POST("/header/param/prim/bool")
+        void paramBool(@Header("scenario") String scenario, @Header("value") boolean value) throws ServiceException;
 
-    @POST("/header/param/prim/bool")
-    void paramBoolAsync(@Header("scenario") String scenario, @Header("value") boolean value, Callback<Response> cb);
+        @POST("/header/param/prim/bool")
+        void paramBoolAsync(@Header("scenario") String scenario, @Header("value") boolean value, ServiceCallback<Void> serviceCallback);
 
-    @POST("/header/response/prim/bool")
-    Response responseBool(@Header("scenario") String scenario) throws ServiceException;
+        @POST("/header/response/prim/bool")
+        void responseBool(@Header("scenario") String scenario) throws ServiceException;
 
-    @POST("/header/response/prim/bool")
-    void responseBoolAsync(@Header("scenario") String scenario, Callback<Response> cb);
+        @POST("/header/response/prim/bool")
+        void responseBoolAsync(@Header("scenario") String scenario, ServiceCallback<Void> serviceCallback);
 
-    @POST("/header/param/prim/string")
-    Response paramString(@Header("scenario") String scenario, @Header("value") String value) throws ServiceException;
+        @POST("/header/param/prim/string")
+        void paramString(@Header("scenario") String scenario, @Header("value") String value) throws ServiceException;
 
-    @POST("/header/param/prim/string")
-    void paramStringAsync(@Header("scenario") String scenario, @Header("value") String value, Callback<Response> cb);
+        @POST("/header/param/prim/string")
+        void paramStringAsync(@Header("scenario") String scenario, @Header("value") String value, ServiceCallback<Void> serviceCallback);
 
-    @POST("/header/response/prim/string")
-    Response responseString(@Header("scenario") String scenario) throws ServiceException;
+        @POST("/header/response/prim/string")
+        void responseString(@Header("scenario") String scenario) throws ServiceException;
 
-    @POST("/header/response/prim/string")
-    void responseStringAsync(@Header("scenario") String scenario, Callback<Response> cb);
+        @POST("/header/response/prim/string")
+        void responseStringAsync(@Header("scenario") String scenario, ServiceCallback<Void> serviceCallback);
 
-    @POST("/header/param/prim/date")
-    Response paramDate(@Header("scenario") String scenario, @Header("value") Date value) throws ServiceException;
+        @POST("/header/param/prim/date")
+        void paramDate(@Header("scenario") String scenario, @Header("value") Date value) throws ServiceException;
 
-    @POST("/header/param/prim/date")
-    void paramDateAsync(@Header("scenario") String scenario, @Header("value") Date value, Callback<Response> cb);
+        @POST("/header/param/prim/date")
+        void paramDateAsync(@Header("scenario") String scenario, @Header("value") Date value, ServiceCallback<Void> serviceCallback);
 
-    @POST("/header/response/prim/date")
-    Response responseDate(@Header("scenario") String scenario) throws ServiceException;
+        @POST("/header/response/prim/date")
+        void responseDate(@Header("scenario") String scenario) throws ServiceException;
 
-    @POST("/header/response/prim/date")
-    void responseDateAsync(@Header("scenario") String scenario, Callback<Response> cb);
+        @POST("/header/response/prim/date")
+        void responseDateAsync(@Header("scenario") String scenario, ServiceCallback<Void> serviceCallback);
 
-    @POST("/header/param/prim/datetime")
-    Response paramDatetime(@Header("scenario") String scenario, @Header("value") Date value) throws ServiceException;
+        @POST("/header/param/prim/datetime")
+        void paramDatetime(@Header("scenario") String scenario, @Header("value") Date value) throws ServiceException;
 
-    @POST("/header/param/prim/datetime")
-    void paramDatetimeAsync(@Header("scenario") String scenario, @Header("value") Date value, Callback<Response> cb);
+        @POST("/header/param/prim/datetime")
+        void paramDatetimeAsync(@Header("scenario") String scenario, @Header("value") Date value, ServiceCallback<Void> serviceCallback);
 
-    @POST("/header/response/prim/datetime")
-    Response responseDatetime(@Header("scenario") String scenario) throws ServiceException;
+        @POST("/header/response/prim/datetime")
+        void responseDatetime(@Header("scenario") String scenario) throws ServiceException;
 
-    @POST("/header/response/prim/datetime")
-    void responseDatetimeAsync(@Header("scenario") String scenario, Callback<Response> cb);
+        @POST("/header/response/prim/datetime")
+        void responseDatetimeAsync(@Header("scenario") String scenario, ServiceCallback<Void> serviceCallback);
 
-    @POST("/header/param/prim/byte")
-    Response paramByte(@Header("scenario") String scenario, @Header("value") byte[] value) throws ServiceException;
+        @POST("/header/param/prim/byte")
+        void paramByte(@Header("scenario") String scenario, @Header("value") byte[] value) throws ServiceException;
 
-    @POST("/header/param/prim/byte")
-    void paramByteAsync(@Header("scenario") String scenario, @Header("value") byte[] value, Callback<Response> cb);
+        @POST("/header/param/prim/byte")
+        void paramByteAsync(@Header("scenario") String scenario, @Header("value") byte[] value, ServiceCallback<Void> serviceCallback);
 
-    @POST("/header/response/prim/byte")
-    Response responseByte(@Header("scenario") String scenario) throws ServiceException;
+        @POST("/header/response/prim/byte")
+        void responseByte(@Header("scenario") String scenario) throws ServiceException;
 
-    @POST("/header/response/prim/byte")
-    void responseByteAsync(@Header("scenario") String scenario, Callback<Response> cb);
+        @POST("/header/response/prim/byte")
+        void responseByteAsync(@Header("scenario") String scenario, ServiceCallback<Void> serviceCallback);
 
-    @POST("/header/param/prim/enum")
-    Response paramEnum(@Header("scenario") String scenario, @Header("value") GreyscaleColors value) throws ServiceException;
+        @POST("/header/param/prim/enum")
+        void paramEnum(@Header("scenario") String scenario, @Header("value") GreyscaleColors value) throws ServiceException;
 
-    @POST("/header/param/prim/enum")
-    void paramEnumAsync(@Header("scenario") String scenario, @Header("value") GreyscaleColors value, Callback<Response> cb);
+        @POST("/header/param/prim/enum")
+        void paramEnumAsync(@Header("scenario") String scenario, @Header("value") GreyscaleColors value, ServiceCallback<Void> serviceCallback);
 
-    @POST("/header/response/prim/enum")
-    Response responseEnum(@Header("scenario") String scenario) throws ServiceException;
+        @POST("/header/response/prim/enum")
+        void responseEnum(@Header("scenario") String scenario) throws ServiceException;
 
-    @POST("/header/response/prim/enum")
-    void responseEnumAsync(@Header("scenario") String scenario, Callback<Response> cb);
+        @POST("/header/response/prim/enum")
+        void responseEnumAsync(@Header("scenario") String scenario, ServiceCallback<Void> serviceCallback);
 
-    @POST("/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0")
-    Response customRequestId() throws ServiceException;
+        @POST("/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0")
+        void customRequestId() throws ServiceException;
 
-    @POST("/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0")
-    void customRequestIdAsync(Callback<Response> cb);
+        @POST("/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0")
+        void customRequestIdAsync(ServiceCallback<Void> serviceCallback);
+
+    }
+    public void paramExistingKey(String userAgent) throws ServiceException {
+        try {
+            return paramExistingKeyDelegate(service.paramExistingKey(userAgent), null).getBody();
+        } catch (RetrofitError error) {
+            return paramExistingKeyDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void paramExistingKeyAsync(String userAgent, final ServiceCallback<Void> serviceCallback) {
+        service.paramExistingKeyAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(paramExistingKeyDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> paramExistingKeyDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void responseExistingKey() throws ServiceException {
+        try {
+            return responseExistingKeyDelegate(service.responseExistingKey(), null).getBody();
+        } catch (RetrofitError error) {
+            return responseExistingKeyDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void responseExistingKeyAsync(final ServiceCallback<Void> serviceCallback) {
+        service.responseExistingKeyAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(responseExistingKeyDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> responseExistingKeyDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void paramProtectedKey(String contentType) throws ServiceException {
+        try {
+            return paramProtectedKeyDelegate(service.paramProtectedKey(contentType), null).getBody();
+        } catch (RetrofitError error) {
+            return paramProtectedKeyDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void paramProtectedKeyAsync(String contentType, final ServiceCallback<Void> serviceCallback) {
+        service.paramProtectedKeyAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(paramProtectedKeyDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> paramProtectedKeyDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void responseProtectedKey() throws ServiceException {
+        try {
+            return responseProtectedKeyDelegate(service.responseProtectedKey(), null).getBody();
+        } catch (RetrofitError error) {
+            return responseProtectedKeyDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void responseProtectedKeyAsync(final ServiceCallback<Void> serviceCallback) {
+        service.responseProtectedKeyAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(responseProtectedKeyDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> responseProtectedKeyDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void paramInteger(String scenario, int value) throws ServiceException {
+        try {
+            return paramIntegerDelegate(service.paramInteger(scenario, value), null).getBody();
+        } catch (RetrofitError error) {
+            return paramIntegerDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void paramIntegerAsync(String scenario, int value, final ServiceCallback<Void> serviceCallback) {
+        service.paramIntegerAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(paramIntegerDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> paramIntegerDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void responseInteger(String scenario) throws ServiceException {
+        try {
+            return responseIntegerDelegate(service.responseInteger(scenario), null).getBody();
+        } catch (RetrofitError error) {
+            return responseIntegerDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void responseIntegerAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        service.responseIntegerAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(responseIntegerDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> responseIntegerDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void paramLong(String scenario, long value) throws ServiceException {
+        try {
+            return paramLongDelegate(service.paramLong(scenario, value), null).getBody();
+        } catch (RetrofitError error) {
+            return paramLongDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void paramLongAsync(String scenario, long value, final ServiceCallback<Void> serviceCallback) {
+        service.paramLongAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(paramLongDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> paramLongDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void responseLong(String scenario) throws ServiceException {
+        try {
+            return responseLongDelegate(service.responseLong(scenario), null).getBody();
+        } catch (RetrofitError error) {
+            return responseLongDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void responseLongAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        service.responseLongAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(responseLongDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> responseLongDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void paramFloat(String scenario, double value) throws ServiceException {
+        try {
+            return paramFloatDelegate(service.paramFloat(scenario, value), null).getBody();
+        } catch (RetrofitError error) {
+            return paramFloatDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void paramFloatAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
+        service.paramFloatAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(paramFloatDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> paramFloatDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void responseFloat(String scenario) throws ServiceException {
+        try {
+            return responseFloatDelegate(service.responseFloat(scenario), null).getBody();
+        } catch (RetrofitError error) {
+            return responseFloatDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void responseFloatAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        service.responseFloatAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(responseFloatDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> responseFloatDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void paramDouble(String scenario, double value) throws ServiceException {
+        try {
+            return paramDoubleDelegate(service.paramDouble(scenario, value), null).getBody();
+        } catch (RetrofitError error) {
+            return paramDoubleDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void paramDoubleAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
+        service.paramDoubleAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(paramDoubleDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> paramDoubleDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void responseDouble(String scenario) throws ServiceException {
+        try {
+            return responseDoubleDelegate(service.responseDouble(scenario), null).getBody();
+        } catch (RetrofitError error) {
+            return responseDoubleDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void responseDoubleAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        service.responseDoubleAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(responseDoubleDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> responseDoubleDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void paramBool(String scenario, boolean value) throws ServiceException {
+        try {
+            return paramBoolDelegate(service.paramBool(scenario, value), null).getBody();
+        } catch (RetrofitError error) {
+            return paramBoolDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void paramBoolAsync(String scenario, boolean value, final ServiceCallback<Void> serviceCallback) {
+        service.paramBoolAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(paramBoolDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> paramBoolDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void responseBool(String scenario) throws ServiceException {
+        try {
+            return responseBoolDelegate(service.responseBool(scenario), null).getBody();
+        } catch (RetrofitError error) {
+            return responseBoolDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void responseBoolAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        service.responseBoolAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(responseBoolDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> responseBoolDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void paramString(String scenario, String value) throws ServiceException {
+        try {
+            return paramStringDelegate(service.paramString(scenario, value), null).getBody();
+        } catch (RetrofitError error) {
+            return paramStringDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void paramStringAsync(String scenario, String value, final ServiceCallback<Void> serviceCallback) {
+        service.paramStringAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(paramStringDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> paramStringDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void responseString(String scenario) throws ServiceException {
+        try {
+            return responseStringDelegate(service.responseString(scenario), null).getBody();
+        } catch (RetrofitError error) {
+            return responseStringDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void responseStringAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        service.responseStringAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(responseStringDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> responseStringDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void paramDate(String scenario, Date value) throws ServiceException {
+        try {
+            return paramDateDelegate(service.paramDate(scenario, value), null).getBody();
+        } catch (RetrofitError error) {
+            return paramDateDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void paramDateAsync(String scenario, Date value, final ServiceCallback<Void> serviceCallback) {
+        service.paramDateAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(paramDateDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> paramDateDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void responseDate(String scenario) throws ServiceException {
+        try {
+            return responseDateDelegate(service.responseDate(scenario), null).getBody();
+        } catch (RetrofitError error) {
+            return responseDateDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void responseDateAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        service.responseDateAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(responseDateDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> responseDateDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void paramDatetime(String scenario, Date value) throws ServiceException {
+        try {
+            return paramDatetimeDelegate(service.paramDatetime(scenario, value), null).getBody();
+        } catch (RetrofitError error) {
+            return paramDatetimeDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void paramDatetimeAsync(String scenario, Date value, final ServiceCallback<Void> serviceCallback) {
+        service.paramDatetimeAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(paramDatetimeDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> paramDatetimeDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void responseDatetime(String scenario) throws ServiceException {
+        try {
+            return responseDatetimeDelegate(service.responseDatetime(scenario), null).getBody();
+        } catch (RetrofitError error) {
+            return responseDatetimeDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void responseDatetimeAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        service.responseDatetimeAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(responseDatetimeDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> responseDatetimeDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void paramByte(String scenario, byte[] value) throws ServiceException {
+        try {
+            return paramByteDelegate(service.paramByte(scenario, value), null).getBody();
+        } catch (RetrofitError error) {
+            return paramByteDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void paramByteAsync(String scenario, byte[] value, final ServiceCallback<Void> serviceCallback) {
+        service.paramByteAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(paramByteDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> paramByteDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void responseByte(String scenario) throws ServiceException {
+        try {
+            return responseByteDelegate(service.responseByte(scenario), null).getBody();
+        } catch (RetrofitError error) {
+            return responseByteDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void responseByteAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        service.responseByteAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(responseByteDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> responseByteDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void paramEnum(String scenario, GreyscaleColors value) throws ServiceException {
+        try {
+            return paramEnumDelegate(service.paramEnum(scenario, value), null).getBody();
+        } catch (RetrofitError error) {
+            return paramEnumDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void paramEnumAsync(String scenario, GreyscaleColors value, final ServiceCallback<Void> serviceCallback) {
+        service.paramEnumAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(paramEnumDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> paramEnumDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void responseEnum(String scenario) throws ServiceException {
+        try {
+            return responseEnumDelegate(service.responseEnum(scenario), null).getBody();
+        } catch (RetrofitError error) {
+            return responseEnumDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void responseEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        service.responseEnumAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(responseEnumDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> responseEnumDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void customRequestId() throws ServiceException {
+        try {
+            return customRequestIdDelegate(service.customRequestId(), null).getBody();
+        } catch (RetrofitError error) {
+            return customRequestIdDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void customRequestIdAsync(final ServiceCallback<Void> serviceCallback) {
+        service.customRequestIdAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(customRequestIdDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> customRequestIdDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
 
 }

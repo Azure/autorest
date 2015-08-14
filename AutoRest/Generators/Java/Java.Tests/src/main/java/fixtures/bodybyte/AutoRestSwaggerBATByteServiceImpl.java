@@ -55,6 +55,6 @@ public class AutoRestSwaggerBATByteServiceImpl extends ServiceClient<AutoRestSwa
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.byteOperations = restAdapter.create(ByteOperations.class);
+        this.byteOperations = new ByteOperations(restAdapter);
     }
 }

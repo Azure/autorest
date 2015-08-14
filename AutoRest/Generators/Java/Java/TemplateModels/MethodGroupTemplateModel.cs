@@ -29,6 +29,19 @@ namespace Microsoft.Rest.Generator.Java
 
         public string MethodGroupType { get; set; }
 
+        public string MethodGroupServiceType
+        {
+            get
+            {
+                string ret = MethodGroupType;
+                if (MethodGroupType.EndsWith("Operations"))
+                {
+                    ret = MethodGroupType.Substring(0, MethodGroupType.Length - 10);
+                }
+                return ret + "Service";
+            }
+        }
+
         public IEnumerable<String> Imports
         {
             get

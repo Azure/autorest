@@ -72,7 +72,7 @@ namespace Microsoft.Rest.Generator.Java
         /// <summary>
         /// Generate the method parameter declarations for a method
         /// </summary>
-        public string MethodParameterDeclaration
+        public string MethodParameterApiDeclaration
         {
             get
             {
@@ -84,12 +84,12 @@ namespace Microsoft.Rest.Generator.Java
                     {
                         parameter.Location = ParameterLocation.Path;
                     }
-                    if (parameter.Location == ParameterLocation.Path || 
+                    if (parameter.Location == ParameterLocation.Path ||
                         parameter.Location == ParameterLocation.Query ||
                         parameter.Location == ParameterLocation.Header)
                     {
-                        declarationBuilder.Append(string.Format("@{0}(\"{1}\") ", 
-                            parameter.Location.ToString(), 
+                        declarationBuilder.Append(string.Format("@{0}(\"{1}\") ",
+                            parameter.Location.ToString(),
                             parameter.SerializedName));
                     }
                     else if (parameter.Location == ParameterLocation.Body)
@@ -98,6 +98,36 @@ namespace Microsoft.Rest.Generator.Java
                     }
                     declarationBuilder.Append(parameter.Type.ToString() + " " + parameter.Name);
                     declarations.Add(declarationBuilder.ToString());
+                }
+
+                var declaration = string.Join(", ", declarations);
+                return declaration;
+            }
+        }
+
+        public string MethodParameterDeclaration
+        {
+            get
+            {
+                List<string> declarations = new List<string>();
+                foreach (var parameter in LocalParameters)
+                {
+                    declarations.Add(parameter.Type.ToString() + " " + parameter.Name);
+                }
+
+                var declaration = string.Join(", ", declarations);
+                return declaration;
+            }
+        }
+
+        public string MethodParameterInvocation
+        {
+            get
+            {
+                List<string> declarations = new List<string>();
+                foreach (var parameter in LocalParameters)
+                {
+                    declarations.Add(parameter.Name);
                 }
 
                 var declaration = string.Join(", ", declarations);
@@ -119,6 +149,21 @@ namespace Microsoft.Rest.Generator.Java
         /// <summary>
         /// Generate the method parameter declarations with callback for a method
         /// </summary>
+        public string MethodParameterApiDeclarationWithCallback
+        {
+            get
+            {
+                var parameters = MethodParameterApiDeclaration;
+                if (!parameters.IsNullOrEmpty())
+                {
+                    parameters += ", ";
+                }
+                parameters += string.Format("ServiceCallback<{0}> serviceCallback",
+                    ReturnType != null ? JavaCodeNamer.NormalizeGenericType(ReturnType).ToString() : "Void");
+                return parameters;
+            }
+        }
+
         public string MethodParameterDeclarationWithCallback
         {
             get
@@ -128,8 +173,8 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     parameters += ", ";
                 }
-                parameters += string.Format("Callback<{0}> cb", 
-                    ReturnType != null ? JavaCodeNamer.NormalizeGenericType(ReturnType).ToString() : "Response");
+                parameters += string.Format("final ServiceCallback<{0}> serviceCallback",
+                    ReturnType != null ? JavaCodeNamer.NormalizeGenericType(ReturnType).ToString() : "Void");
                 return parameters;
             }
         }
@@ -159,7 +204,19 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     return ReturnType.Name;
                 }
-                return "Response";
+                return "void";
+            }
+        }
+
+        public string GenericReturnTypeString
+        {
+            get
+            {
+                if (ReturnType != null)
+                {
+                    return JavaCodeNamer.NormalizeGenericType(ReturnType).Name;
+                }
+                return "Void";
             }
         }
 

@@ -9,218 +9,1181 @@
 
 package fixtures.url;
 
+import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import retrofit.Callback;
+import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.ServiceResponseBuilder;
+import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
 import fixtures.url.models.UriColor;
 import java.util.Date;
 import java.util.List;
 import retrofit.http.GET;
 import retrofit.http.Query;
 
-public interface Queries {
-    @GET("/queries/bool/true")
-    Response getBooleanTrue(@Query("boolQuery") boolean boolQuery) throws ServiceException;
+public class Queries {
+    private QueriesService service;
+    public Queries(RestAdapter restAdapter) {
+        service = restAdapter.create(QueriesService.class);
+    }
+    public interface QueriesService {
+        @GET("/queries/bool/true")
+        void getBooleanTrue(@Query("boolQuery") boolean boolQuery) throws ServiceException;
 
-    @GET("/queries/bool/true")
-    void getBooleanTrueAsync(@Query("boolQuery") boolean boolQuery, Callback<Response> cb);
+        @GET("/queries/bool/true")
+        void getBooleanTrueAsync(@Query("boolQuery") boolean boolQuery, ServiceCallback<Void> serviceCallback);
 
-    @GET("/queries/bool/false")
-    Response getBooleanFalse(@Query("boolQuery") boolean boolQuery) throws ServiceException;
+        @GET("/queries/bool/false")
+        void getBooleanFalse(@Query("boolQuery") boolean boolQuery) throws ServiceException;
 
-    @GET("/queries/bool/false")
-    void getBooleanFalseAsync(@Query("boolQuery") boolean boolQuery, Callback<Response> cb);
+        @GET("/queries/bool/false")
+        void getBooleanFalseAsync(@Query("boolQuery") boolean boolQuery, ServiceCallback<Void> serviceCallback);
 
-    @GET("/queries/bool/null")
-    Response getBooleanNull(@Query("boolQuery") boolean boolQuery) throws ServiceException;
+        @GET("/queries/bool/null")
+        void getBooleanNull(@Query("boolQuery") boolean boolQuery) throws ServiceException;
 
-    @GET("/queries/bool/null")
-    void getBooleanNullAsync(@Query("boolQuery") boolean boolQuery, Callback<Response> cb);
+        @GET("/queries/bool/null")
+        void getBooleanNullAsync(@Query("boolQuery") boolean boolQuery, ServiceCallback<Void> serviceCallback);
 
-    @GET("/queries/int/1000000")
-    Response getIntOneMillion(@Query("intQuery") int intQuery) throws ServiceException;
+        @GET("/queries/int/1000000")
+        void getIntOneMillion(@Query("intQuery") int intQuery) throws ServiceException;
 
-    @GET("/queries/int/1000000")
-    void getIntOneMillionAsync(@Query("intQuery") int intQuery, Callback<Response> cb);
+        @GET("/queries/int/1000000")
+        void getIntOneMillionAsync(@Query("intQuery") int intQuery, ServiceCallback<Void> serviceCallback);
 
-    @GET("/queries/int/-1000000")
-    Response getIntNegativeOneMillion(@Query("intQuery") int intQuery) throws ServiceException;
+        @GET("/queries/int/-1000000")
+        void getIntNegativeOneMillion(@Query("intQuery") int intQuery) throws ServiceException;
 
-    @GET("/queries/int/-1000000")
-    void getIntNegativeOneMillionAsync(@Query("intQuery") int intQuery, Callback<Response> cb);
+        @GET("/queries/int/-1000000")
+        void getIntNegativeOneMillionAsync(@Query("intQuery") int intQuery, ServiceCallback<Void> serviceCallback);
 
-    @GET("/queries/int/null")
-    Response getIntNull(@Query("intQuery") int intQuery) throws ServiceException;
+        @GET("/queries/int/null")
+        void getIntNull(@Query("intQuery") int intQuery) throws ServiceException;
 
-    @GET("/queries/int/null")
-    void getIntNullAsync(@Query("intQuery") int intQuery, Callback<Response> cb);
+        @GET("/queries/int/null")
+        void getIntNullAsync(@Query("intQuery") int intQuery, ServiceCallback<Void> serviceCallback);
 
-    @GET("/queries/long/10000000000")
-    Response getTenBillion(@Query("longQuery") long longQuery) throws ServiceException;
+        @GET("/queries/long/10000000000")
+        void getTenBillion(@Query("longQuery") long longQuery) throws ServiceException;
 
-    @GET("/queries/long/10000000000")
-    void getTenBillionAsync(@Query("longQuery") long longQuery, Callback<Response> cb);
+        @GET("/queries/long/10000000000")
+        void getTenBillionAsync(@Query("longQuery") long longQuery, ServiceCallback<Void> serviceCallback);
 
-    @GET("/queries/long/-10000000000")
-    Response getNegativeTenBillion(@Query("longQuery") long longQuery) throws ServiceException;
+        @GET("/queries/long/-10000000000")
+        void getNegativeTenBillion(@Query("longQuery") long longQuery) throws ServiceException;
 
-    @GET("/queries/long/-10000000000")
-    void getNegativeTenBillionAsync(@Query("longQuery") long longQuery, Callback<Response> cb);
+        @GET("/queries/long/-10000000000")
+        void getNegativeTenBillionAsync(@Query("longQuery") long longQuery, ServiceCallback<Void> serviceCallback);
 
-    @GET("/queries/long/null")
-    Response getLongNull(@Query("longQuery") long longQuery) throws ServiceException;
+        @GET("/queries/long/null")
+        void getLongNull(@Query("longQuery") long longQuery) throws ServiceException;
 
-    @GET("/queries/long/null")
-    void getLongNullAsync(@Query("longQuery") long longQuery, Callback<Response> cb);
+        @GET("/queries/long/null")
+        void getLongNullAsync(@Query("longQuery") long longQuery, ServiceCallback<Void> serviceCallback);
 
-    @GET("/queries/float/1.034E+20")
-    Response floatScientificPositive(@Query("floatQuery") double floatQuery) throws ServiceException;
+        @GET("/queries/float/1.034E+20")
+        void floatScientificPositive(@Query("floatQuery") double floatQuery) throws ServiceException;
 
-    @GET("/queries/float/1.034E+20")
-    void floatScientificPositiveAsync(@Query("floatQuery") double floatQuery, Callback<Response> cb);
+        @GET("/queries/float/1.034E+20")
+        void floatScientificPositiveAsync(@Query("floatQuery") double floatQuery, ServiceCallback<Void> serviceCallback);
 
-    @GET("/queries/float/-1.034E-20")
-    Response floatScientificNegative(@Query("floatQuery") double floatQuery) throws ServiceException;
+        @GET("/queries/float/-1.034E-20")
+        void floatScientificNegative(@Query("floatQuery") double floatQuery) throws ServiceException;
 
-    @GET("/queries/float/-1.034E-20")
-    void floatScientificNegativeAsync(@Query("floatQuery") double floatQuery, Callback<Response> cb);
+        @GET("/queries/float/-1.034E-20")
+        void floatScientificNegativeAsync(@Query("floatQuery") double floatQuery, ServiceCallback<Void> serviceCallback);
 
-    @GET("/queries/float/null")
-    Response floatNull(@Query("floatQuery") double floatQuery) throws ServiceException;
+        @GET("/queries/float/null")
+        void floatNull(@Query("floatQuery") double floatQuery) throws ServiceException;
 
-    @GET("/queries/float/null")
-    void floatNullAsync(@Query("floatQuery") double floatQuery, Callback<Response> cb);
+        @GET("/queries/float/null")
+        void floatNullAsync(@Query("floatQuery") double floatQuery, ServiceCallback<Void> serviceCallback);
 
-    @GET("/queries/double/9999999.999")
-    Response doubleDecimalPositive(@Query("doubleQuery") double doubleQuery) throws ServiceException;
+        @GET("/queries/double/9999999.999")
+        void doubleDecimalPositive(@Query("doubleQuery") double doubleQuery) throws ServiceException;
 
-    @GET("/queries/double/9999999.999")
-    void doubleDecimalPositiveAsync(@Query("doubleQuery") double doubleQuery, Callback<Response> cb);
+        @GET("/queries/double/9999999.999")
+        void doubleDecimalPositiveAsync(@Query("doubleQuery") double doubleQuery, ServiceCallback<Void> serviceCallback);
 
-    @GET("/queries/double/-9999999.999")
-    Response doubleDecimalNegative(@Query("doubleQuery") double doubleQuery) throws ServiceException;
+        @GET("/queries/double/-9999999.999")
+        void doubleDecimalNegative(@Query("doubleQuery") double doubleQuery) throws ServiceException;
 
-    @GET("/queries/double/-9999999.999")
-    void doubleDecimalNegativeAsync(@Query("doubleQuery") double doubleQuery, Callback<Response> cb);
+        @GET("/queries/double/-9999999.999")
+        void doubleDecimalNegativeAsync(@Query("doubleQuery") double doubleQuery, ServiceCallback<Void> serviceCallback);
 
-    @GET("/queries/double/null")
-    Response doubleNull(@Query("doubleQuery") double doubleQuery) throws ServiceException;
+        @GET("/queries/double/null")
+        void doubleNull(@Query("doubleQuery") double doubleQuery) throws ServiceException;
 
-    @GET("/queries/double/null")
-    void doubleNullAsync(@Query("doubleQuery") double doubleQuery, Callback<Response> cb);
+        @GET("/queries/double/null")
+        void doubleNullAsync(@Query("doubleQuery") double doubleQuery, ServiceCallback<Void> serviceCallback);
 
-    @GET("/queries/string/unicode/")
-    Response stringUnicode(@Query("stringQuery") String stringQuery) throws ServiceException;
+        @GET("/queries/string/unicode/")
+        void stringUnicode(@Query("stringQuery") String stringQuery) throws ServiceException;
 
-    @GET("/queries/string/unicode/")
-    void stringUnicodeAsync(@Query("stringQuery") String stringQuery, Callback<Response> cb);
+        @GET("/queries/string/unicode/")
+        void stringUnicodeAsync(@Query("stringQuery") String stringQuery, ServiceCallback<Void> serviceCallback);
 
-    @GET("/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend")
-    Response stringUrlEncoded(@Query("stringQuery") String stringQuery) throws ServiceException;
+        @GET("/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend")
+        void stringUrlEncoded(@Query("stringQuery") String stringQuery) throws ServiceException;
 
-    @GET("/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend")
-    void stringUrlEncodedAsync(@Query("stringQuery") String stringQuery, Callback<Response> cb);
+        @GET("/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend")
+        void stringUrlEncodedAsync(@Query("stringQuery") String stringQuery, ServiceCallback<Void> serviceCallback);
 
-    @GET("/queries/string/empty")
-    Response stringEmpty(@Query("stringQuery") String stringQuery) throws ServiceException;
+        @GET("/queries/string/empty")
+        void stringEmpty(@Query("stringQuery") String stringQuery) throws ServiceException;
 
-    @GET("/queries/string/empty")
-    void stringEmptyAsync(@Query("stringQuery") String stringQuery, Callback<Response> cb);
+        @GET("/queries/string/empty")
+        void stringEmptyAsync(@Query("stringQuery") String stringQuery, ServiceCallback<Void> serviceCallback);
 
-    @GET("/queries/string/null")
-    Response stringNull(@Query("stringQuery") String stringQuery) throws ServiceException;
+        @GET("/queries/string/null")
+        void stringNull(@Query("stringQuery") String stringQuery) throws ServiceException;
 
-    @GET("/queries/string/null")
-    void stringNullAsync(@Query("stringQuery") String stringQuery, Callback<Response> cb);
+        @GET("/queries/string/null")
+        void stringNullAsync(@Query("stringQuery") String stringQuery, ServiceCallback<Void> serviceCallback);
 
-    @GET("/queries/enum/green%20color")
-    Response enumValid(@Query("enumQuery") UriColor enumQuery) throws ServiceException;
+        @GET("/queries/enum/green%20color")
+        void enumValid(@Query("enumQuery") UriColor enumQuery) throws ServiceException;
 
-    @GET("/queries/enum/green%20color")
-    void enumValidAsync(@Query("enumQuery") UriColor enumQuery, Callback<Response> cb);
+        @GET("/queries/enum/green%20color")
+        void enumValidAsync(@Query("enumQuery") UriColor enumQuery, ServiceCallback<Void> serviceCallback);
 
-    @GET("/queries/enum/null")
-    Response enumNull(@Query("enumQuery") UriColor enumQuery) throws ServiceException;
+        @GET("/queries/enum/null")
+        void enumNull(@Query("enumQuery") UriColor enumQuery) throws ServiceException;
 
-    @GET("/queries/enum/null")
-    void enumNullAsync(@Query("enumQuery") UriColor enumQuery, Callback<Response> cb);
+        @GET("/queries/enum/null")
+        void enumNullAsync(@Query("enumQuery") UriColor enumQuery, ServiceCallback<Void> serviceCallback);
 
-    @GET("/queries/byte/multibyte")
-    Response byteMultiByte(@Query("byteQuery") byte[] byteQuery) throws ServiceException;
+        @GET("/queries/byte/multibyte")
+        void byteMultiByte(@Query("byteQuery") byte[] byteQuery) throws ServiceException;
 
-    @GET("/queries/byte/multibyte")
-    void byteMultiByteAsync(@Query("byteQuery") byte[] byteQuery, Callback<Response> cb);
+        @GET("/queries/byte/multibyte")
+        void byteMultiByteAsync(@Query("byteQuery") byte[] byteQuery, ServiceCallback<Void> serviceCallback);
 
-    @GET("/queries/byte/empty")
-    Response byteEmpty(@Query("byteQuery") byte[] byteQuery) throws ServiceException;
+        @GET("/queries/byte/empty")
+        void byteEmpty(@Query("byteQuery") byte[] byteQuery) throws ServiceException;
 
-    @GET("/queries/byte/empty")
-    void byteEmptyAsync(@Query("byteQuery") byte[] byteQuery, Callback<Response> cb);
+        @GET("/queries/byte/empty")
+        void byteEmptyAsync(@Query("byteQuery") byte[] byteQuery, ServiceCallback<Void> serviceCallback);
 
-    @GET("/queries/byte/null")
-    Response byteNull(@Query("byteQuery") byte[] byteQuery) throws ServiceException;
+        @GET("/queries/byte/null")
+        void byteNull(@Query("byteQuery") byte[] byteQuery) throws ServiceException;
 
-    @GET("/queries/byte/null")
-    void byteNullAsync(@Query("byteQuery") byte[] byteQuery, Callback<Response> cb);
+        @GET("/queries/byte/null")
+        void byteNullAsync(@Query("byteQuery") byte[] byteQuery, ServiceCallback<Void> serviceCallback);
 
-    @GET("/queries/date/2012-01-01")
-    Response dateValid(@Query("dateQuery") Date dateQuery) throws ServiceException;
+        @GET("/queries/date/2012-01-01")
+        void dateValid(@Query("dateQuery") Date dateQuery) throws ServiceException;
 
-    @GET("/queries/date/2012-01-01")
-    void dateValidAsync(@Query("dateQuery") Date dateQuery, Callback<Response> cb);
+        @GET("/queries/date/2012-01-01")
+        void dateValidAsync(@Query("dateQuery") Date dateQuery, ServiceCallback<Void> serviceCallback);
 
-    @GET("/queries/date/null")
-    Response dateNull(@Query("dateQuery") Date dateQuery) throws ServiceException;
+        @GET("/queries/date/null")
+        void dateNull(@Query("dateQuery") Date dateQuery) throws ServiceException;
 
-    @GET("/queries/date/null")
-    void dateNullAsync(@Query("dateQuery") Date dateQuery, Callback<Response> cb);
+        @GET("/queries/date/null")
+        void dateNullAsync(@Query("dateQuery") Date dateQuery, ServiceCallback<Void> serviceCallback);
 
-    @GET("/queries/datetime/2012-01-01T01%3A01%3A01Z")
-    Response dateTimeValid(@Query("dateTimeQuery") Date dateTimeQuery) throws ServiceException;
+        @GET("/queries/datetime/2012-01-01T01%3A01%3A01Z")
+        void dateTimeValid(@Query("dateTimeQuery") Date dateTimeQuery) throws ServiceException;
 
-    @GET("/queries/datetime/2012-01-01T01%3A01%3A01Z")
-    void dateTimeValidAsync(@Query("dateTimeQuery") Date dateTimeQuery, Callback<Response> cb);
+        @GET("/queries/datetime/2012-01-01T01%3A01%3A01Z")
+        void dateTimeValidAsync(@Query("dateTimeQuery") Date dateTimeQuery, ServiceCallback<Void> serviceCallback);
 
-    @GET("/queries/datetime/null")
-    Response dateTimeNull(@Query("dateTimeQuery") Date dateTimeQuery) throws ServiceException;
+        @GET("/queries/datetime/null")
+        void dateTimeNull(@Query("dateTimeQuery") Date dateTimeQuery) throws ServiceException;
 
-    @GET("/queries/datetime/null")
-    void dateTimeNullAsync(@Query("dateTimeQuery") Date dateTimeQuery, Callback<Response> cb);
+        @GET("/queries/datetime/null")
+        void dateTimeNullAsync(@Query("dateTimeQuery") Date dateTimeQuery, ServiceCallback<Void> serviceCallback);
+
+        @GET("/queries/array/csv/string/valid")
+        void arrayStringCsvValid(@Query("arrayQuery") List<String> arrayQuery) throws ServiceException;
 
-    @GET("/queries/array/csv/string/valid")
-    Response arrayStringCsvValid(@Query("arrayQuery") List<String> arrayQuery) throws ServiceException;
-
-    @GET("/queries/array/csv/string/valid")
-    void arrayStringCsvValidAsync(@Query("arrayQuery") List<String> arrayQuery, Callback<Response> cb);
-
-    @GET("/queries/array/csv/string/null")
-    Response arrayStringCsvNull(@Query("arrayQuery") List<String> arrayQuery) throws ServiceException;
-
-    @GET("/queries/array/csv/string/null")
-    void arrayStringCsvNullAsync(@Query("arrayQuery") List<String> arrayQuery, Callback<Response> cb);
-
-    @GET("/queries/array/csv/string/empty")
-    Response arrayStringCsvEmpty(@Query("arrayQuery") List<String> arrayQuery) throws ServiceException;
-
-    @GET("/queries/array/csv/string/empty")
-    void arrayStringCsvEmptyAsync(@Query("arrayQuery") List<String> arrayQuery, Callback<Response> cb);
-
-    @GET("/queries/array/ssv/string/valid")
-    Response arrayStringSsvValid(@Query("arrayQuery") List<String> arrayQuery) throws ServiceException;
-
-    @GET("/queries/array/ssv/string/valid")
-    void arrayStringSsvValidAsync(@Query("arrayQuery") List<String> arrayQuery, Callback<Response> cb);
-
-    @GET("/queries/array/tsv/string/valid")
-    Response arrayStringTsvValid(@Query("arrayQuery") List<String> arrayQuery) throws ServiceException;
-
-    @GET("/queries/array/tsv/string/valid")
-    void arrayStringTsvValidAsync(@Query("arrayQuery") List<String> arrayQuery, Callback<Response> cb);
-
-    @GET("/queries/array/pipes/string/valid")
-    Response arrayStringPipesValid(@Query("arrayQuery") List<String> arrayQuery) throws ServiceException;
-
-    @GET("/queries/array/pipes/string/valid")
-    void arrayStringPipesValidAsync(@Query("arrayQuery") List<String> arrayQuery, Callback<Response> cb);
+        @GET("/queries/array/csv/string/valid")
+        void arrayStringCsvValidAsync(@Query("arrayQuery") List<String> arrayQuery, ServiceCallback<Void> serviceCallback);
+
+        @GET("/queries/array/csv/string/null")
+        void arrayStringCsvNull(@Query("arrayQuery") List<String> arrayQuery) throws ServiceException;
+
+        @GET("/queries/array/csv/string/null")
+        void arrayStringCsvNullAsync(@Query("arrayQuery") List<String> arrayQuery, ServiceCallback<Void> serviceCallback);
+
+        @GET("/queries/array/csv/string/empty")
+        void arrayStringCsvEmpty(@Query("arrayQuery") List<String> arrayQuery) throws ServiceException;
+
+        @GET("/queries/array/csv/string/empty")
+        void arrayStringCsvEmptyAsync(@Query("arrayQuery") List<String> arrayQuery, ServiceCallback<Void> serviceCallback);
+
+        @GET("/queries/array/ssv/string/valid")
+        void arrayStringSsvValid(@Query("arrayQuery") List<String> arrayQuery) throws ServiceException;
+
+        @GET("/queries/array/ssv/string/valid")
+        void arrayStringSsvValidAsync(@Query("arrayQuery") List<String> arrayQuery, ServiceCallback<Void> serviceCallback);
+
+        @GET("/queries/array/tsv/string/valid")
+        void arrayStringTsvValid(@Query("arrayQuery") List<String> arrayQuery) throws ServiceException;
+
+        @GET("/queries/array/tsv/string/valid")
+        void arrayStringTsvValidAsync(@Query("arrayQuery") List<String> arrayQuery, ServiceCallback<Void> serviceCallback);
+
+        @GET("/queries/array/pipes/string/valid")
+        void arrayStringPipesValid(@Query("arrayQuery") List<String> arrayQuery) throws ServiceException;
+
+        @GET("/queries/array/pipes/string/valid")
+        void arrayStringPipesValidAsync(@Query("arrayQuery") List<String> arrayQuery, ServiceCallback<Void> serviceCallback);
+
+    }
+    public void getBooleanTrue(boolean boolQuery) throws ServiceException {
+        try {
+            return getBooleanTrueDelegate(service.getBooleanTrue(boolQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return getBooleanTrueDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getBooleanTrueAsync(boolean boolQuery, final ServiceCallback<Void> serviceCallback) {
+        service.getBooleanTrueAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getBooleanTrueDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> getBooleanTrueDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void getBooleanFalse(boolean boolQuery) throws ServiceException {
+        try {
+            return getBooleanFalseDelegate(service.getBooleanFalse(boolQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return getBooleanFalseDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getBooleanFalseAsync(boolean boolQuery, final ServiceCallback<Void> serviceCallback) {
+        service.getBooleanFalseAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getBooleanFalseDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> getBooleanFalseDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void getBooleanNull(boolean boolQuery) throws ServiceException {
+        try {
+            return getBooleanNullDelegate(service.getBooleanNull(boolQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return getBooleanNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getBooleanNullAsync(boolean boolQuery, final ServiceCallback<Void> serviceCallback) {
+        service.getBooleanNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getBooleanNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> getBooleanNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void getIntOneMillion(int intQuery) throws ServiceException {
+        try {
+            return getIntOneMillionDelegate(service.getIntOneMillion(intQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return getIntOneMillionDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getIntOneMillionAsync(int intQuery, final ServiceCallback<Void> serviceCallback) {
+        service.getIntOneMillionAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getIntOneMillionDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> getIntOneMillionDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void getIntNegativeOneMillion(int intQuery) throws ServiceException {
+        try {
+            return getIntNegativeOneMillionDelegate(service.getIntNegativeOneMillion(intQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return getIntNegativeOneMillionDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getIntNegativeOneMillionAsync(int intQuery, final ServiceCallback<Void> serviceCallback) {
+        service.getIntNegativeOneMillionAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getIntNegativeOneMillionDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> getIntNegativeOneMillionDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void getIntNull(int intQuery) throws ServiceException {
+        try {
+            return getIntNullDelegate(service.getIntNull(intQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return getIntNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getIntNullAsync(int intQuery, final ServiceCallback<Void> serviceCallback) {
+        service.getIntNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getIntNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> getIntNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void getTenBillion(long longQuery) throws ServiceException {
+        try {
+            return getTenBillionDelegate(service.getTenBillion(longQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return getTenBillionDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getTenBillionAsync(long longQuery, final ServiceCallback<Void> serviceCallback) {
+        service.getTenBillionAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getTenBillionDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> getTenBillionDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void getNegativeTenBillion(long longQuery) throws ServiceException {
+        try {
+            return getNegativeTenBillionDelegate(service.getNegativeTenBillion(longQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return getNegativeTenBillionDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getNegativeTenBillionAsync(long longQuery, final ServiceCallback<Void> serviceCallback) {
+        service.getNegativeTenBillionAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getNegativeTenBillionDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> getNegativeTenBillionDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void getLongNull(long longQuery) throws ServiceException {
+        try {
+            return getLongNullDelegate(service.getLongNull(longQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return getLongNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getLongNullAsync(long longQuery, final ServiceCallback<Void> serviceCallback) {
+        service.getLongNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getLongNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> getLongNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void floatScientificPositive(double floatQuery) throws ServiceException {
+        try {
+            return floatScientificPositiveDelegate(service.floatScientificPositive(floatQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return floatScientificPositiveDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void floatScientificPositiveAsync(double floatQuery, final ServiceCallback<Void> serviceCallback) {
+        service.floatScientificPositiveAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(floatScientificPositiveDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> floatScientificPositiveDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void floatScientificNegative(double floatQuery) throws ServiceException {
+        try {
+            return floatScientificNegativeDelegate(service.floatScientificNegative(floatQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return floatScientificNegativeDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void floatScientificNegativeAsync(double floatQuery, final ServiceCallback<Void> serviceCallback) {
+        service.floatScientificNegativeAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(floatScientificNegativeDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> floatScientificNegativeDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void floatNull(double floatQuery) throws ServiceException {
+        try {
+            return floatNullDelegate(service.floatNull(floatQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return floatNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void floatNullAsync(double floatQuery, final ServiceCallback<Void> serviceCallback) {
+        service.floatNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(floatNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> floatNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void doubleDecimalPositive(double doubleQuery) throws ServiceException {
+        try {
+            return doubleDecimalPositiveDelegate(service.doubleDecimalPositive(doubleQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return doubleDecimalPositiveDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void doubleDecimalPositiveAsync(double doubleQuery, final ServiceCallback<Void> serviceCallback) {
+        service.doubleDecimalPositiveAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(doubleDecimalPositiveDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> doubleDecimalPositiveDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void doubleDecimalNegative(double doubleQuery) throws ServiceException {
+        try {
+            return doubleDecimalNegativeDelegate(service.doubleDecimalNegative(doubleQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return doubleDecimalNegativeDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void doubleDecimalNegativeAsync(double doubleQuery, final ServiceCallback<Void> serviceCallback) {
+        service.doubleDecimalNegativeAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(doubleDecimalNegativeDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> doubleDecimalNegativeDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void doubleNull(double doubleQuery) throws ServiceException {
+        try {
+            return doubleNullDelegate(service.doubleNull(doubleQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return doubleNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void doubleNullAsync(double doubleQuery, final ServiceCallback<Void> serviceCallback) {
+        service.doubleNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(doubleNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> doubleNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void stringUnicode(String stringQuery) throws ServiceException {
+        try {
+            return stringUnicodeDelegate(service.stringUnicode(stringQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return stringUnicodeDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void stringUnicodeAsync(String stringQuery, final ServiceCallback<Void> serviceCallback) {
+        service.stringUnicodeAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(stringUnicodeDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> stringUnicodeDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void stringUrlEncoded(String stringQuery) throws ServiceException {
+        try {
+            return stringUrlEncodedDelegate(service.stringUrlEncoded(stringQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return stringUrlEncodedDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void stringUrlEncodedAsync(String stringQuery, final ServiceCallback<Void> serviceCallback) {
+        service.stringUrlEncodedAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(stringUrlEncodedDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> stringUrlEncodedDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void stringEmpty(String stringQuery) throws ServiceException {
+        try {
+            return stringEmptyDelegate(service.stringEmpty(stringQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return stringEmptyDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void stringEmptyAsync(String stringQuery, final ServiceCallback<Void> serviceCallback) {
+        service.stringEmptyAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(stringEmptyDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> stringEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void stringNull(String stringQuery) throws ServiceException {
+        try {
+            return stringNullDelegate(service.stringNull(stringQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return stringNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void stringNullAsync(String stringQuery, final ServiceCallback<Void> serviceCallback) {
+        service.stringNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(stringNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> stringNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void enumValid(UriColor enumQuery) throws ServiceException {
+        try {
+            return enumValidDelegate(service.enumValid(enumQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return enumValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void enumValidAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) {
+        service.enumValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(enumValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> enumValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void enumNull(UriColor enumQuery) throws ServiceException {
+        try {
+            return enumNullDelegate(service.enumNull(enumQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return enumNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void enumNullAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) {
+        service.enumNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(enumNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> enumNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void byteMultiByte(byte[] byteQuery) throws ServiceException {
+        try {
+            return byteMultiByteDelegate(service.byteMultiByte(byteQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return byteMultiByteDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void byteMultiByteAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback) {
+        service.byteMultiByteAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(byteMultiByteDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> byteMultiByteDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void byteEmpty(byte[] byteQuery) throws ServiceException {
+        try {
+            return byteEmptyDelegate(service.byteEmpty(byteQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return byteEmptyDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void byteEmptyAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback) {
+        service.byteEmptyAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(byteEmptyDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> byteEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void byteNull(byte[] byteQuery) throws ServiceException {
+        try {
+            return byteNullDelegate(service.byteNull(byteQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return byteNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void byteNullAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback) {
+        service.byteNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(byteNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> byteNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void dateValid(Date dateQuery) throws ServiceException {
+        try {
+            return dateValidDelegate(service.dateValid(dateQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return dateValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void dateValidAsync(Date dateQuery, final ServiceCallback<Void> serviceCallback) {
+        service.dateValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(dateValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> dateValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void dateNull(Date dateQuery) throws ServiceException {
+        try {
+            return dateNullDelegate(service.dateNull(dateQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return dateNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void dateNullAsync(Date dateQuery, final ServiceCallback<Void> serviceCallback) {
+        service.dateNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(dateNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> dateNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void dateTimeValid(Date dateTimeQuery) throws ServiceException {
+        try {
+            return dateTimeValidDelegate(service.dateTimeValid(dateTimeQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return dateTimeValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void dateTimeValidAsync(Date dateTimeQuery, final ServiceCallback<Void> serviceCallback) {
+        service.dateTimeValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(dateTimeValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> dateTimeValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void dateTimeNull(Date dateTimeQuery) throws ServiceException {
+        try {
+            return dateTimeNullDelegate(service.dateTimeNull(dateTimeQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return dateTimeNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void dateTimeNullAsync(Date dateTimeQuery, final ServiceCallback<Void> serviceCallback) {
+        service.dateTimeNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(dateTimeNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> dateTimeNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void arrayStringCsvValid(List<String> arrayQuery) throws ServiceException {
+        try {
+            return arrayStringCsvValidDelegate(service.arrayStringCsvValid(arrayQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return arrayStringCsvValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void arrayStringCsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
+        service.arrayStringCsvValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(arrayStringCsvValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> arrayStringCsvValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void arrayStringCsvNull(List<String> arrayQuery) throws ServiceException {
+        try {
+            return arrayStringCsvNullDelegate(service.arrayStringCsvNull(arrayQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return arrayStringCsvNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void arrayStringCsvNullAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
+        service.arrayStringCsvNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(arrayStringCsvNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> arrayStringCsvNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void arrayStringCsvEmpty(List<String> arrayQuery) throws ServiceException {
+        try {
+            return arrayStringCsvEmptyDelegate(service.arrayStringCsvEmpty(arrayQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return arrayStringCsvEmptyDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void arrayStringCsvEmptyAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
+        service.arrayStringCsvEmptyAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(arrayStringCsvEmptyDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> arrayStringCsvEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void arrayStringSsvValid(List<String> arrayQuery) throws ServiceException {
+        try {
+            return arrayStringSsvValidDelegate(service.arrayStringSsvValid(arrayQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return arrayStringSsvValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void arrayStringSsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
+        service.arrayStringSsvValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(arrayStringSsvValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> arrayStringSsvValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void arrayStringTsvValid(List<String> arrayQuery) throws ServiceException {
+        try {
+            return arrayStringTsvValidDelegate(service.arrayStringTsvValid(arrayQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return arrayStringTsvValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void arrayStringTsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
+        service.arrayStringTsvValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(arrayStringTsvValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> arrayStringTsvValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void arrayStringPipesValid(List<String> arrayQuery) throws ServiceException {
+        try {
+            return arrayStringPipesValidDelegate(service.arrayStringPipesValid(arrayQuery), null).getBody();
+        } catch (RetrofitError error) {
+            return arrayStringPipesValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void arrayStringPipesValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
+        service.arrayStringPipesValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(arrayStringPipesValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> arrayStringPipesValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
 
 }

@@ -280,6 +280,12 @@ namespace Microsoft.Rest.Generator.Java
                 }
                 return primaryType;
             }
+            else if (type == null)
+            {
+                var newType = new PrimaryType();
+                newType.Name = "Void";
+                return newType;
+            }
             else
             {
                 return type;

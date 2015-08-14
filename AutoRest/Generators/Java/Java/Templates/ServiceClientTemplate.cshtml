@@ -79,7 +79,7 @@ public class @(Model.Name)Impl extends ServiceClient<@Model.Name> implements @Mo
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
         @foreach (var operation in Model.Operations)
         {
-        @:this.@(operation.MethodGroupName.ToCamelCase()) = restAdapter.create(@(operation.MethodGroupType).class);
+        @:this.@(operation.MethodGroupName.ToCamelCase()) = new @(operation.MethodGroupType)(restAdapter);
         }
     }
 }

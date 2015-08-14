@@ -9,16 +9,55 @@
 
 package fixtures.http;
 
+import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import retrofit.Callback;
+import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.ServiceResponseBuilder;
+import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
 import retrofit.http.GET;
 
-public interface HttpFailure {
-    @GET("/http/failure/emptybody/error")
-    boolean getEmptyError() throws ServiceException;
+public class HttpFailure {
+    private HttpFailureService service;
+    public HttpFailure(RestAdapter restAdapter) {
+        service = restAdapter.create(HttpFailureService.class);
+    }
+    public interface HttpFailureService {
+        @GET("/http/failure/emptybody/error")
+        boolean getEmptyError() throws ServiceException;
 
-    @GET("/http/failure/emptybody/error")
-    void getEmptyErrorAsync(Callback<Boolean> cb);
+        @GET("/http/failure/emptybody/error")
+        void getEmptyErrorAsync(ServiceCallback<Boolean> serviceCallback);
+
+    }
+    public Boolean getEmptyError() throws ServiceException {
+        try {
+            return getEmptyErrorDelegate(service.getEmptyError(), null).getBody();
+        } catch (RetrofitError error) {
+            return getEmptyErrorDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
+        service.getEmptyErrorAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getEmptyErrorDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Boolean> getEmptyErrorDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Boolean>()
+                  .register(200, Boolean.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
 
 }

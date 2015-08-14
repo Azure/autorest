@@ -55,6 +55,6 @@ public class AutoRestBoolTestServiceImpl extends ServiceClient<AutoRestBoolTestS
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.bool = restAdapter.create(Bool.class);
+        this.bool = new Bool(restAdapter);
     }
 }

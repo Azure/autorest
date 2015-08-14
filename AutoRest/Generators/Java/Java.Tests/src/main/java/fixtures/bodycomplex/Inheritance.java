@@ -9,25 +9,92 @@
 
 package fixtures.bodycomplex;
 
+import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import retrofit.Callback;
+import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.ServiceResponseBuilder;
+import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
 import fixtures.bodycomplex.models.Siamese;
 import retrofit.http.GET;
 import retrofit.http.PUT;
 import retrofit.http.Body;
 
-public interface Inheritance {
-    @GET("/complex/inheritance/valid")
-    Siamese getValid() throws ServiceException;
+public class Inheritance {
+    private InheritanceService service;
+    public Inheritance(RestAdapter restAdapter) {
+        service = restAdapter.create(InheritanceService.class);
+    }
+    public interface InheritanceService {
+        @GET("/complex/inheritance/valid")
+        Siamese getValid() throws ServiceException;
 
-    @GET("/complex/inheritance/valid")
-    void getValidAsync(Callback<Siamese> cb);
+        @GET("/complex/inheritance/valid")
+        void getValidAsync(ServiceCallback<Siamese> serviceCallback);
 
-    @PUT("/complex/inheritance/valid")
-    Response putValid(@Body Siamese complexBody) throws ServiceException;
+        @PUT("/complex/inheritance/valid")
+        void putValid(@Body Siamese complexBody) throws ServiceException;
 
-    @PUT("/complex/inheritance/valid")
-    void putValidAsync(@Body Siamese complexBody, Callback<Response> cb);
+        @PUT("/complex/inheritance/valid")
+        void putValidAsync(@Body Siamese complexBody, ServiceCallback<Void> serviceCallback);
+
+    }
+    public Siamese getValid() throws ServiceException {
+        try {
+            return getValidDelegate(service.getValid(), null).getBody();
+        } catch (RetrofitError error) {
+            return getValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getValidAsync(final ServiceCallback<Siamese> serviceCallback) {
+        service.getValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Siamese> getValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Siamese>()
+                  .register(200, Siamese.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void putValid(Siamese complexBody) throws ServiceException {
+        try {
+            return putValidDelegate(service.putValid(complexBody), null).getBody();
+        } catch (RetrofitError error) {
+            return putValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void putValidAsync(Siamese complexBody, final ServiceCallback<Void> serviceCallback) {
+        service.putValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(putValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> putValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
 
 }

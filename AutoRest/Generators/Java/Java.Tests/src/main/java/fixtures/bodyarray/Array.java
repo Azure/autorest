@@ -9,9 +9,14 @@
 
 package fixtures.bodyarray;
 
+import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import retrofit.Callback;
+import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.ServiceResponseBuilder;
+import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
 import java.util.List;
 import java.util.Date;
 import fixtures.bodyarray.models.Product;
@@ -20,347 +25,1949 @@ import retrofit.http.GET;
 import retrofit.http.PUT;
 import retrofit.http.Body;
 
-public interface Array {
-    @GET("/array/null")
-    List<Integer> getNull() throws ServiceException;
+public class Array {
+    private ArrayService service;
+    public Array(RestAdapter restAdapter) {
+        service = restAdapter.create(ArrayService.class);
+    }
+    public interface ArrayService {
+        @GET("/array/null")
+        List<Integer> getNull() throws ServiceException;
 
-    @GET("/array/null")
-    void getNullAsync(Callback<List<Integer>> cb);
+        @GET("/array/null")
+        void getNullAsync(ServiceCallback<List<Integer>> serviceCallback);
 
-    @GET("/array/invalid")
-    List<Integer> getInvalid() throws ServiceException;
+        @GET("/array/invalid")
+        List<Integer> getInvalid() throws ServiceException;
 
-    @GET("/array/invalid")
-    void getInvalidAsync(Callback<List<Integer>> cb);
+        @GET("/array/invalid")
+        void getInvalidAsync(ServiceCallback<List<Integer>> serviceCallback);
 
-    @GET("/array/empty")
-    List<Integer> getEmpty() throws ServiceException;
+        @GET("/array/empty")
+        List<Integer> getEmpty() throws ServiceException;
 
-    @GET("/array/empty")
-    void getEmptyAsync(Callback<List<Integer>> cb);
+        @GET("/array/empty")
+        void getEmptyAsync(ServiceCallback<List<Integer>> serviceCallback);
 
-    @PUT("/array/empty")
-    Response putEmpty(@Body List<String> arrayBody) throws ServiceException;
+        @PUT("/array/empty")
+        void putEmpty(@Body List<String> arrayBody) throws ServiceException;
 
-    @PUT("/array/empty")
-    void putEmptyAsync(@Body List<String> arrayBody, Callback<Response> cb);
+        @PUT("/array/empty")
+        void putEmptyAsync(@Body List<String> arrayBody, ServiceCallback<Void> serviceCallback);
 
-    @GET("/array/prim/boolean/tfft")
-    List<Boolean> getBooleanTfft() throws ServiceException;
+        @GET("/array/prim/boolean/tfft")
+        List<Boolean> getBooleanTfft() throws ServiceException;
 
-    @GET("/array/prim/boolean/tfft")
-    void getBooleanTfftAsync(Callback<List<Boolean>> cb);
+        @GET("/array/prim/boolean/tfft")
+        void getBooleanTfftAsync(ServiceCallback<List<Boolean>> serviceCallback);
 
-    @PUT("/array/prim/boolean/tfft")
-    Response putBooleanTfft(@Body List<Boolean> arrayBody) throws ServiceException;
+        @PUT("/array/prim/boolean/tfft")
+        void putBooleanTfft(@Body List<Boolean> arrayBody) throws ServiceException;
 
-    @PUT("/array/prim/boolean/tfft")
-    void putBooleanTfftAsync(@Body List<Boolean> arrayBody, Callback<Response> cb);
+        @PUT("/array/prim/boolean/tfft")
+        void putBooleanTfftAsync(@Body List<Boolean> arrayBody, ServiceCallback<Void> serviceCallback);
 
-    @GET("/array/prim/boolean/true.null.false")
-    List<Boolean> getBooleanInvalidNull() throws ServiceException;
+        @GET("/array/prim/boolean/true.null.false")
+        List<Boolean> getBooleanInvalidNull() throws ServiceException;
 
-    @GET("/array/prim/boolean/true.null.false")
-    void getBooleanInvalidNullAsync(Callback<List<Boolean>> cb);
+        @GET("/array/prim/boolean/true.null.false")
+        void getBooleanInvalidNullAsync(ServiceCallback<List<Boolean>> serviceCallback);
 
-    @GET("/array/prim/boolean/true.boolean.false")
-    List<Boolean> getBooleanInvalidString() throws ServiceException;
+        @GET("/array/prim/boolean/true.boolean.false")
+        List<Boolean> getBooleanInvalidString() throws ServiceException;
 
-    @GET("/array/prim/boolean/true.boolean.false")
-    void getBooleanInvalidStringAsync(Callback<List<Boolean>> cb);
+        @GET("/array/prim/boolean/true.boolean.false")
+        void getBooleanInvalidStringAsync(ServiceCallback<List<Boolean>> serviceCallback);
 
-    @GET("/array/prim/integer/1.-1.3.300")
-    List<Integer> getIntegerValid() throws ServiceException;
+        @GET("/array/prim/integer/1.-1.3.300")
+        List<Integer> getIntegerValid() throws ServiceException;
 
-    @GET("/array/prim/integer/1.-1.3.300")
-    void getIntegerValidAsync(Callback<List<Integer>> cb);
+        @GET("/array/prim/integer/1.-1.3.300")
+        void getIntegerValidAsync(ServiceCallback<List<Integer>> serviceCallback);
 
-    @PUT("/array/prim/integer/1.-1.3.300")
-    Response putIntegerValid(@Body List<Integer> arrayBody) throws ServiceException;
+        @PUT("/array/prim/integer/1.-1.3.300")
+        void putIntegerValid(@Body List<Integer> arrayBody) throws ServiceException;
 
-    @PUT("/array/prim/integer/1.-1.3.300")
-    void putIntegerValidAsync(@Body List<Integer> arrayBody, Callback<Response> cb);
+        @PUT("/array/prim/integer/1.-1.3.300")
+        void putIntegerValidAsync(@Body List<Integer> arrayBody, ServiceCallback<Void> serviceCallback);
 
-    @GET("/array/prim/integer/1.null.zero")
-    List<Integer> getIntInvalidNull() throws ServiceException;
+        @GET("/array/prim/integer/1.null.zero")
+        List<Integer> getIntInvalidNull() throws ServiceException;
 
-    @GET("/array/prim/integer/1.null.zero")
-    void getIntInvalidNullAsync(Callback<List<Integer>> cb);
+        @GET("/array/prim/integer/1.null.zero")
+        void getIntInvalidNullAsync(ServiceCallback<List<Integer>> serviceCallback);
 
-    @GET("/array/prim/integer/1.integer.0")
-    List<Integer> getIntInvalidString() throws ServiceException;
+        @GET("/array/prim/integer/1.integer.0")
+        List<Integer> getIntInvalidString() throws ServiceException;
 
-    @GET("/array/prim/integer/1.integer.0")
-    void getIntInvalidStringAsync(Callback<List<Integer>> cb);
+        @GET("/array/prim/integer/1.integer.0")
+        void getIntInvalidStringAsync(ServiceCallback<List<Integer>> serviceCallback);
 
-    @GET("/array/prim/long/1.-1.3.300")
-    List<Long> getLongValid() throws ServiceException;
+        @GET("/array/prim/long/1.-1.3.300")
+        List<Long> getLongValid() throws ServiceException;
 
-    @GET("/array/prim/long/1.-1.3.300")
-    void getLongValidAsync(Callback<List<Long>> cb);
+        @GET("/array/prim/long/1.-1.3.300")
+        void getLongValidAsync(ServiceCallback<List<Long>> serviceCallback);
 
-    @PUT("/array/prim/long/1.-1.3.300")
-    Response putLongValid(@Body List<Long> arrayBody) throws ServiceException;
+        @PUT("/array/prim/long/1.-1.3.300")
+        void putLongValid(@Body List<Long> arrayBody) throws ServiceException;
 
-    @PUT("/array/prim/long/1.-1.3.300")
-    void putLongValidAsync(@Body List<Long> arrayBody, Callback<Response> cb);
+        @PUT("/array/prim/long/1.-1.3.300")
+        void putLongValidAsync(@Body List<Long> arrayBody, ServiceCallback<Void> serviceCallback);
 
-    @GET("/array/prim/long/1.null.zero")
-    List<Long> getLongInvalidNull() throws ServiceException;
+        @GET("/array/prim/long/1.null.zero")
+        List<Long> getLongInvalidNull() throws ServiceException;
 
-    @GET("/array/prim/long/1.null.zero")
-    void getLongInvalidNullAsync(Callback<List<Long>> cb);
+        @GET("/array/prim/long/1.null.zero")
+        void getLongInvalidNullAsync(ServiceCallback<List<Long>> serviceCallback);
 
-    @GET("/array/prim/long/1.integer.0")
-    List<Long> getLongInvalidString() throws ServiceException;
+        @GET("/array/prim/long/1.integer.0")
+        List<Long> getLongInvalidString() throws ServiceException;
 
-    @GET("/array/prim/long/1.integer.0")
-    void getLongInvalidStringAsync(Callback<List<Long>> cb);
+        @GET("/array/prim/long/1.integer.0")
+        void getLongInvalidStringAsync(ServiceCallback<List<Long>> serviceCallback);
 
-    @GET("/array/prim/float/0--0.01-1.2e20")
-    List<Double> getFloatValid() throws ServiceException;
+        @GET("/array/prim/float/0--0.01-1.2e20")
+        List<Double> getFloatValid() throws ServiceException;
 
-    @GET("/array/prim/float/0--0.01-1.2e20")
-    void getFloatValidAsync(Callback<List<Double>> cb);
+        @GET("/array/prim/float/0--0.01-1.2e20")
+        void getFloatValidAsync(ServiceCallback<List<Double>> serviceCallback);
 
-    @PUT("/array/prim/float/0--0.01-1.2e20")
-    Response putFloatValid(@Body List<Double> arrayBody) throws ServiceException;
+        @PUT("/array/prim/float/0--0.01-1.2e20")
+        void putFloatValid(@Body List<Double> arrayBody) throws ServiceException;
 
-    @PUT("/array/prim/float/0--0.01-1.2e20")
-    void putFloatValidAsync(@Body List<Double> arrayBody, Callback<Response> cb);
+        @PUT("/array/prim/float/0--0.01-1.2e20")
+        void putFloatValidAsync(@Body List<Double> arrayBody, ServiceCallback<Void> serviceCallback);
 
-    @GET("/array/prim/float/0.0-null-1.2e20")
-    List<Double> getFloatInvalidNull() throws ServiceException;
+        @GET("/array/prim/float/0.0-null-1.2e20")
+        List<Double> getFloatInvalidNull() throws ServiceException;
 
-    @GET("/array/prim/float/0.0-null-1.2e20")
-    void getFloatInvalidNullAsync(Callback<List<Double>> cb);
+        @GET("/array/prim/float/0.0-null-1.2e20")
+        void getFloatInvalidNullAsync(ServiceCallback<List<Double>> serviceCallback);
 
-    @GET("/array/prim/float/1.number.0")
-    List<Double> getFloatInvalidString() throws ServiceException;
+        @GET("/array/prim/float/1.number.0")
+        List<Double> getFloatInvalidString() throws ServiceException;
 
-    @GET("/array/prim/float/1.number.0")
-    void getFloatInvalidStringAsync(Callback<List<Double>> cb);
+        @GET("/array/prim/float/1.number.0")
+        void getFloatInvalidStringAsync(ServiceCallback<List<Double>> serviceCallback);
 
-    @GET("/array/prim/double/0--0.01-1.2e20")
-    List<Double> getDoubleValid() throws ServiceException;
+        @GET("/array/prim/double/0--0.01-1.2e20")
+        List<Double> getDoubleValid() throws ServiceException;
 
-    @GET("/array/prim/double/0--0.01-1.2e20")
-    void getDoubleValidAsync(Callback<List<Double>> cb);
+        @GET("/array/prim/double/0--0.01-1.2e20")
+        void getDoubleValidAsync(ServiceCallback<List<Double>> serviceCallback);
 
-    @PUT("/array/prim/double/0--0.01-1.2e20")
-    Response putDoubleValid(@Body List<Double> arrayBody) throws ServiceException;
+        @PUT("/array/prim/double/0--0.01-1.2e20")
+        void putDoubleValid(@Body List<Double> arrayBody) throws ServiceException;
 
-    @PUT("/array/prim/double/0--0.01-1.2e20")
-    void putDoubleValidAsync(@Body List<Double> arrayBody, Callback<Response> cb);
+        @PUT("/array/prim/double/0--0.01-1.2e20")
+        void putDoubleValidAsync(@Body List<Double> arrayBody, ServiceCallback<Void> serviceCallback);
 
-    @GET("/array/prim/double/0.0-null-1.2e20")
-    List<Double> getDoubleInvalidNull() throws ServiceException;
+        @GET("/array/prim/double/0.0-null-1.2e20")
+        List<Double> getDoubleInvalidNull() throws ServiceException;
 
-    @GET("/array/prim/double/0.0-null-1.2e20")
-    void getDoubleInvalidNullAsync(Callback<List<Double>> cb);
+        @GET("/array/prim/double/0.0-null-1.2e20")
+        void getDoubleInvalidNullAsync(ServiceCallback<List<Double>> serviceCallback);
 
-    @GET("/array/prim/double/1.number.0")
-    List<Double> getDoubleInvalidString() throws ServiceException;
+        @GET("/array/prim/double/1.number.0")
+        List<Double> getDoubleInvalidString() throws ServiceException;
 
-    @GET("/array/prim/double/1.number.0")
-    void getDoubleInvalidStringAsync(Callback<List<Double>> cb);
+        @GET("/array/prim/double/1.number.0")
+        void getDoubleInvalidStringAsync(ServiceCallback<List<Double>> serviceCallback);
 
-    @GET("/array/prim/string/foo1.foo2.foo3")
-    List<String> getStringValid() throws ServiceException;
+        @GET("/array/prim/string/foo1.foo2.foo3")
+        List<String> getStringValid() throws ServiceException;
 
-    @GET("/array/prim/string/foo1.foo2.foo3")
-    void getStringValidAsync(Callback<List<String>> cb);
+        @GET("/array/prim/string/foo1.foo2.foo3")
+        void getStringValidAsync(ServiceCallback<List<String>> serviceCallback);
 
-    @PUT("/array/prim/string/foo1.foo2.foo3")
-    Response putStringValid(@Body List<String> arrayBody) throws ServiceException;
+        @PUT("/array/prim/string/foo1.foo2.foo3")
+        void putStringValid(@Body List<String> arrayBody) throws ServiceException;
 
-    @PUT("/array/prim/string/foo1.foo2.foo3")
-    void putStringValidAsync(@Body List<String> arrayBody, Callback<Response> cb);
+        @PUT("/array/prim/string/foo1.foo2.foo3")
+        void putStringValidAsync(@Body List<String> arrayBody, ServiceCallback<Void> serviceCallback);
 
-    @GET("/array/prim/string/foo.null.foo2")
-    List<String> getStringWithNull() throws ServiceException;
+        @GET("/array/prim/string/foo.null.foo2")
+        List<String> getStringWithNull() throws ServiceException;
 
-    @GET("/array/prim/string/foo.null.foo2")
-    void getStringWithNullAsync(Callback<List<String>> cb);
+        @GET("/array/prim/string/foo.null.foo2")
+        void getStringWithNullAsync(ServiceCallback<List<String>> serviceCallback);
 
-    @GET("/array/prim/string/foo.123.foo2")
-    List<String> getStringWithInvalid() throws ServiceException;
+        @GET("/array/prim/string/foo.123.foo2")
+        List<String> getStringWithInvalid() throws ServiceException;
 
-    @GET("/array/prim/string/foo.123.foo2")
-    void getStringWithInvalidAsync(Callback<List<String>> cb);
+        @GET("/array/prim/string/foo.123.foo2")
+        void getStringWithInvalidAsync(ServiceCallback<List<String>> serviceCallback);
 
-    @GET("/array/prim/date/valid")
-    List<Date> getDateValid() throws ServiceException;
+        @GET("/array/prim/date/valid")
+        List<Date> getDateValid() throws ServiceException;
 
-    @GET("/array/prim/date/valid")
-    void getDateValidAsync(Callback<List<Date>> cb);
+        @GET("/array/prim/date/valid")
+        void getDateValidAsync(ServiceCallback<List<Date>> serviceCallback);
 
-    @PUT("/array/prim/date/valid")
-    Response putDateValid(@Body List<Date> arrayBody) throws ServiceException;
+        @PUT("/array/prim/date/valid")
+        void putDateValid(@Body List<Date> arrayBody) throws ServiceException;
 
-    @PUT("/array/prim/date/valid")
-    void putDateValidAsync(@Body List<Date> arrayBody, Callback<Response> cb);
+        @PUT("/array/prim/date/valid")
+        void putDateValidAsync(@Body List<Date> arrayBody, ServiceCallback<Void> serviceCallback);
 
-    @GET("/array/prim/date/invalidnull")
-    List<Date> getDateInvalidNull() throws ServiceException;
+        @GET("/array/prim/date/invalidnull")
+        List<Date> getDateInvalidNull() throws ServiceException;
 
-    @GET("/array/prim/date/invalidnull")
-    void getDateInvalidNullAsync(Callback<List<Date>> cb);
+        @GET("/array/prim/date/invalidnull")
+        void getDateInvalidNullAsync(ServiceCallback<List<Date>> serviceCallback);
 
-    @GET("/array/prim/date/invalidchars")
-    List<Date> getDateInvalidChars() throws ServiceException;
+        @GET("/array/prim/date/invalidchars")
+        List<Date> getDateInvalidChars() throws ServiceException;
 
-    @GET("/array/prim/date/invalidchars")
-    void getDateInvalidCharsAsync(Callback<List<Date>> cb);
+        @GET("/array/prim/date/invalidchars")
+        void getDateInvalidCharsAsync(ServiceCallback<List<Date>> serviceCallback);
 
-    @GET("/array/prim/date-time/valid")
-    List<Date> getDateTimeValid() throws ServiceException;
+        @GET("/array/prim/date-time/valid")
+        List<Date> getDateTimeValid() throws ServiceException;
 
-    @GET("/array/prim/date-time/valid")
-    void getDateTimeValidAsync(Callback<List<Date>> cb);
+        @GET("/array/prim/date-time/valid")
+        void getDateTimeValidAsync(ServiceCallback<List<Date>> serviceCallback);
 
-    @PUT("/array/prim/date-time/valid")
-    Response putDateTimeValid(@Body List<Date> arrayBody) throws ServiceException;
+        @PUT("/array/prim/date-time/valid")
+        void putDateTimeValid(@Body List<Date> arrayBody) throws ServiceException;
 
-    @PUT("/array/prim/date-time/valid")
-    void putDateTimeValidAsync(@Body List<Date> arrayBody, Callback<Response> cb);
+        @PUT("/array/prim/date-time/valid")
+        void putDateTimeValidAsync(@Body List<Date> arrayBody, ServiceCallback<Void> serviceCallback);
 
-    @GET("/array/prim/date-time/invalidnull")
-    List<Date> getDateTimeInvalidNull() throws ServiceException;
+        @GET("/array/prim/date-time/invalidnull")
+        List<Date> getDateTimeInvalidNull() throws ServiceException;
 
-    @GET("/array/prim/date-time/invalidnull")
-    void getDateTimeInvalidNullAsync(Callback<List<Date>> cb);
+        @GET("/array/prim/date-time/invalidnull")
+        void getDateTimeInvalidNullAsync(ServiceCallback<List<Date>> serviceCallback);
 
-    @GET("/array/prim/date-time/invalidchars")
-    List<Date> getDateTimeInvalidChars() throws ServiceException;
+        @GET("/array/prim/date-time/invalidchars")
+        List<Date> getDateTimeInvalidChars() throws ServiceException;
 
-    @GET("/array/prim/date-time/invalidchars")
-    void getDateTimeInvalidCharsAsync(Callback<List<Date>> cb);
+        @GET("/array/prim/date-time/invalidchars")
+        void getDateTimeInvalidCharsAsync(ServiceCallback<List<Date>> serviceCallback);
 
-    @GET("/array/prim/byte/valid")
-    List<Byte[]> getByteValid() throws ServiceException;
+        @GET("/array/prim/byte/valid")
+        List<Byte[]> getByteValid() throws ServiceException;
 
-    @GET("/array/prim/byte/valid")
-    void getByteValidAsync(Callback<List<Byte[]>> cb);
+        @GET("/array/prim/byte/valid")
+        void getByteValidAsync(ServiceCallback<List<Byte[]>> serviceCallback);
 
-    @PUT("/array/prim/byte/valid")
-    Response putByteValid(@Body List<Byte[]> arrayBody) throws ServiceException;
+        @PUT("/array/prim/byte/valid")
+        void putByteValid(@Body List<Byte[]> arrayBody) throws ServiceException;
 
-    @PUT("/array/prim/byte/valid")
-    void putByteValidAsync(@Body List<Byte[]> arrayBody, Callback<Response> cb);
+        @PUT("/array/prim/byte/valid")
+        void putByteValidAsync(@Body List<Byte[]> arrayBody, ServiceCallback<Void> serviceCallback);
 
-    @GET("/array/prim/byte/invalidnull")
-    List<Byte[]> getByteInvalidNull() throws ServiceException;
+        @GET("/array/prim/byte/invalidnull")
+        List<Byte[]> getByteInvalidNull() throws ServiceException;
 
-    @GET("/array/prim/byte/invalidnull")
-    void getByteInvalidNullAsync(Callback<List<Byte[]>> cb);
+        @GET("/array/prim/byte/invalidnull")
+        void getByteInvalidNullAsync(ServiceCallback<List<Byte[]>> serviceCallback);
 
-    @GET("/array/complex/null")
-    List<Product> getComplexNull() throws ServiceException;
+        @GET("/array/complex/null")
+        List<Product> getComplexNull() throws ServiceException;
 
-    @GET("/array/complex/null")
-    void getComplexNullAsync(Callback<List<Product>> cb);
+        @GET("/array/complex/null")
+        void getComplexNullAsync(ServiceCallback<List<Product>> serviceCallback);
 
-    @GET("/array/complex/empty")
-    List<Product> getComplexEmpty() throws ServiceException;
+        @GET("/array/complex/empty")
+        List<Product> getComplexEmpty() throws ServiceException;
 
-    @GET("/array/complex/empty")
-    void getComplexEmptyAsync(Callback<List<Product>> cb);
+        @GET("/array/complex/empty")
+        void getComplexEmptyAsync(ServiceCallback<List<Product>> serviceCallback);
 
-    @GET("/array/complex/itemnull")
-    List<Product> getComplexItemNull() throws ServiceException;
+        @GET("/array/complex/itemnull")
+        List<Product> getComplexItemNull() throws ServiceException;
 
-    @GET("/array/complex/itemnull")
-    void getComplexItemNullAsync(Callback<List<Product>> cb);
+        @GET("/array/complex/itemnull")
+        void getComplexItemNullAsync(ServiceCallback<List<Product>> serviceCallback);
 
-    @GET("/array/complex/itemempty")
-    List<Product> getComplexItemEmpty() throws ServiceException;
+        @GET("/array/complex/itemempty")
+        List<Product> getComplexItemEmpty() throws ServiceException;
 
-    @GET("/array/complex/itemempty")
-    void getComplexItemEmptyAsync(Callback<List<Product>> cb);
+        @GET("/array/complex/itemempty")
+        void getComplexItemEmptyAsync(ServiceCallback<List<Product>> serviceCallback);
 
-    @GET("/array/complex/valid")
-    List<Product> getComplexValid() throws ServiceException;
+        @GET("/array/complex/valid")
+        List<Product> getComplexValid() throws ServiceException;
 
-    @GET("/array/complex/valid")
-    void getComplexValidAsync(Callback<List<Product>> cb);
+        @GET("/array/complex/valid")
+        void getComplexValidAsync(ServiceCallback<List<Product>> serviceCallback);
 
-    @PUT("/array/complex/valid")
-    Response putComplexValid(@Body List<Product> arrayBody) throws ServiceException;
+        @PUT("/array/complex/valid")
+        void putComplexValid(@Body List<Product> arrayBody) throws ServiceException;
 
-    @PUT("/array/complex/valid")
-    void putComplexValidAsync(@Body List<Product> arrayBody, Callback<Response> cb);
+        @PUT("/array/complex/valid")
+        void putComplexValidAsync(@Body List<Product> arrayBody, ServiceCallback<Void> serviceCallback);
 
-    @GET("/array/array/null")
-    List<List<String>> getArrayNull() throws ServiceException;
+        @GET("/array/array/null")
+        List<List<String>> getArrayNull() throws ServiceException;
 
-    @GET("/array/array/null")
-    void getArrayNullAsync(Callback<List<List<String>>> cb);
+        @GET("/array/array/null")
+        void getArrayNullAsync(ServiceCallback<List<List<String>>> serviceCallback);
 
-    @GET("/array/array/empty")
-    List<List<String>> getArrayEmpty() throws ServiceException;
+        @GET("/array/array/empty")
+        List<List<String>> getArrayEmpty() throws ServiceException;
 
-    @GET("/array/array/empty")
-    void getArrayEmptyAsync(Callback<List<List<String>>> cb);
+        @GET("/array/array/empty")
+        void getArrayEmptyAsync(ServiceCallback<List<List<String>>> serviceCallback);
 
-    @GET("/array/array/itemnull")
-    List<List<String>> getArrayItemNull() throws ServiceException;
+        @GET("/array/array/itemnull")
+        List<List<String>> getArrayItemNull() throws ServiceException;
 
-    @GET("/array/array/itemnull")
-    void getArrayItemNullAsync(Callback<List<List<String>>> cb);
+        @GET("/array/array/itemnull")
+        void getArrayItemNullAsync(ServiceCallback<List<List<String>>> serviceCallback);
 
-    @GET("/array/array/itemempty")
-    List<List<String>> getArrayItemEmpty() throws ServiceException;
+        @GET("/array/array/itemempty")
+        List<List<String>> getArrayItemEmpty() throws ServiceException;
 
-    @GET("/array/array/itemempty")
-    void getArrayItemEmptyAsync(Callback<List<List<String>>> cb);
+        @GET("/array/array/itemempty")
+        void getArrayItemEmptyAsync(ServiceCallback<List<List<String>>> serviceCallback);
 
-    @GET("/array/array/valid")
-    List<List<String>> getArrayValid() throws ServiceException;
+        @GET("/array/array/valid")
+        List<List<String>> getArrayValid() throws ServiceException;
 
-    @GET("/array/array/valid")
-    void getArrayValidAsync(Callback<List<List<String>>> cb);
+        @GET("/array/array/valid")
+        void getArrayValidAsync(ServiceCallback<List<List<String>>> serviceCallback);
 
-    @PUT("/array/array/valid")
-    Response putArrayValid(@Body List<List<String>> arrayBody) throws ServiceException;
+        @PUT("/array/array/valid")
+        void putArrayValid(@Body List<List<String>> arrayBody) throws ServiceException;
 
-    @PUT("/array/array/valid")
-    void putArrayValidAsync(@Body List<List<String>> arrayBody, Callback<Response> cb);
+        @PUT("/array/array/valid")
+        void putArrayValidAsync(@Body List<List<String>> arrayBody, ServiceCallback<Void> serviceCallback);
 
-    @GET("/array/dictionary/null")
-    List<Map<String, String>> getDictionaryNull() throws ServiceException;
+        @GET("/array/dictionary/null")
+        List<Map<String, String>> getDictionaryNull() throws ServiceException;
 
-    @GET("/array/dictionary/null")
-    void getDictionaryNullAsync(Callback<List<Map<String, String>>> cb);
+        @GET("/array/dictionary/null")
+        void getDictionaryNullAsync(ServiceCallback<List<Map<String, String>>> serviceCallback);
 
-    @GET("/array/dictionary/empty")
-    List<Map<String, String>> getDictionaryEmpty() throws ServiceException;
+        @GET("/array/dictionary/empty")
+        List<Map<String, String>> getDictionaryEmpty() throws ServiceException;
 
-    @GET("/array/dictionary/empty")
-    void getDictionaryEmptyAsync(Callback<List<Map<String, String>>> cb);
+        @GET("/array/dictionary/empty")
+        void getDictionaryEmptyAsync(ServiceCallback<List<Map<String, String>>> serviceCallback);
 
-    @GET("/array/dictionary/itemnull")
-    List<Map<String, String>> getDictionaryItemNull() throws ServiceException;
+        @GET("/array/dictionary/itemnull")
+        List<Map<String, String>> getDictionaryItemNull() throws ServiceException;
 
-    @GET("/array/dictionary/itemnull")
-    void getDictionaryItemNullAsync(Callback<List<Map<String, String>>> cb);
+        @GET("/array/dictionary/itemnull")
+        void getDictionaryItemNullAsync(ServiceCallback<List<Map<String, String>>> serviceCallback);
 
-    @GET("/array/dictionary/itemempty")
-    List<Map<String, String>> getDictionaryItemEmpty() throws ServiceException;
+        @GET("/array/dictionary/itemempty")
+        List<Map<String, String>> getDictionaryItemEmpty() throws ServiceException;
 
-    @GET("/array/dictionary/itemempty")
-    void getDictionaryItemEmptyAsync(Callback<List<Map<String, String>>> cb);
+        @GET("/array/dictionary/itemempty")
+        void getDictionaryItemEmptyAsync(ServiceCallback<List<Map<String, String>>> serviceCallback);
 
-    @GET("/array/dictionary/valid")
-    List<Map<String, String>> getDictionaryValid() throws ServiceException;
+        @GET("/array/dictionary/valid")
+        List<Map<String, String>> getDictionaryValid() throws ServiceException;
 
-    @GET("/array/dictionary/valid")
-    void getDictionaryValidAsync(Callback<List<Map<String, String>>> cb);
+        @GET("/array/dictionary/valid")
+        void getDictionaryValidAsync(ServiceCallback<List<Map<String, String>>> serviceCallback);
 
-    @PUT("/array/dictionary/valid")
-    Response putDictionaryValid(@Body List<Map<String, String>> arrayBody) throws ServiceException;
+        @PUT("/array/dictionary/valid")
+        void putDictionaryValid(@Body List<Map<String, String>> arrayBody) throws ServiceException;
 
-    @PUT("/array/dictionary/valid")
-    void putDictionaryValidAsync(@Body List<Map<String, String>> arrayBody, Callback<Response> cb);
+        @PUT("/array/dictionary/valid")
+        void putDictionaryValidAsync(@Body List<Map<String, String>> arrayBody, ServiceCallback<Void> serviceCallback);
+
+    }
+    public List<Integer> getNull() throws ServiceException {
+        try {
+            return getNullDelegate(service.getNull(), null).getBody();
+        } catch (RetrofitError error) {
+            return getNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getNullAsync(final ServiceCallback<List<Integer>> serviceCallback) {
+        service.getNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Integer>> getNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Integer>>()
+                  .register(200, List<Integer>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Integer> getInvalid() throws ServiceException {
+        try {
+            return getInvalidDelegate(service.getInvalid(), null).getBody();
+        } catch (RetrofitError error) {
+            return getInvalidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getInvalidAsync(final ServiceCallback<List<Integer>> serviceCallback) {
+        service.getInvalidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getInvalidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Integer>> getInvalidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Integer>>()
+                  .register(200, List<Integer>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Integer> getEmpty() throws ServiceException {
+        try {
+            return getEmptyDelegate(service.getEmpty(), null).getBody();
+        } catch (RetrofitError error) {
+            return getEmptyDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getEmptyAsync(final ServiceCallback<List<Integer>> serviceCallback) {
+        service.getEmptyAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getEmptyDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Integer>> getEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Integer>>()
+                  .register(200, List<Integer>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void putEmpty(List<String> arrayBody) throws ServiceException {
+        try {
+            return putEmptyDelegate(service.putEmpty(arrayBody), null).getBody();
+        } catch (RetrofitError error) {
+            return putEmptyDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void putEmptyAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        service.putEmptyAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(putEmptyDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> putEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Boolean> getBooleanTfft() throws ServiceException {
+        try {
+            return getBooleanTfftDelegate(service.getBooleanTfft(), null).getBody();
+        } catch (RetrofitError error) {
+            return getBooleanTfftDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getBooleanTfftAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
+        service.getBooleanTfftAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getBooleanTfftDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Boolean>> getBooleanTfftDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Boolean>>()
+                  .register(200, List<Boolean>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void putBooleanTfft(List<Boolean> arrayBody) throws ServiceException {
+        try {
+            return putBooleanTfftDelegate(service.putBooleanTfft(arrayBody), null).getBody();
+        } catch (RetrofitError error) {
+            return putBooleanTfftDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void putBooleanTfftAsync(List<Boolean> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        service.putBooleanTfftAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(putBooleanTfftDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> putBooleanTfftDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Boolean> getBooleanInvalidNull() throws ServiceException {
+        try {
+            return getBooleanInvalidNullDelegate(service.getBooleanInvalidNull(), null).getBody();
+        } catch (RetrofitError error) {
+            return getBooleanInvalidNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getBooleanInvalidNullAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
+        service.getBooleanInvalidNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getBooleanInvalidNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Boolean>> getBooleanInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Boolean>>()
+                  .register(200, List<Boolean>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Boolean> getBooleanInvalidString() throws ServiceException {
+        try {
+            return getBooleanInvalidStringDelegate(service.getBooleanInvalidString(), null).getBody();
+        } catch (RetrofitError error) {
+            return getBooleanInvalidStringDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getBooleanInvalidStringAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
+        service.getBooleanInvalidStringAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getBooleanInvalidStringDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Boolean>> getBooleanInvalidStringDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Boolean>>()
+                  .register(200, List<Boolean>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Integer> getIntegerValid() throws ServiceException {
+        try {
+            return getIntegerValidDelegate(service.getIntegerValid(), null).getBody();
+        } catch (RetrofitError error) {
+            return getIntegerValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getIntegerValidAsync(final ServiceCallback<List<Integer>> serviceCallback) {
+        service.getIntegerValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getIntegerValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Integer>> getIntegerValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Integer>>()
+                  .register(200, List<Integer>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void putIntegerValid(List<Integer> arrayBody) throws ServiceException {
+        try {
+            return putIntegerValidDelegate(service.putIntegerValid(arrayBody), null).getBody();
+        } catch (RetrofitError error) {
+            return putIntegerValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void putIntegerValidAsync(List<Integer> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        service.putIntegerValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(putIntegerValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> putIntegerValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Integer> getIntInvalidNull() throws ServiceException {
+        try {
+            return getIntInvalidNullDelegate(service.getIntInvalidNull(), null).getBody();
+        } catch (RetrofitError error) {
+            return getIntInvalidNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getIntInvalidNullAsync(final ServiceCallback<List<Integer>> serviceCallback) {
+        service.getIntInvalidNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getIntInvalidNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Integer>> getIntInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Integer>>()
+                  .register(200, List<Integer>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Integer> getIntInvalidString() throws ServiceException {
+        try {
+            return getIntInvalidStringDelegate(service.getIntInvalidString(), null).getBody();
+        } catch (RetrofitError error) {
+            return getIntInvalidStringDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getIntInvalidStringAsync(final ServiceCallback<List<Integer>> serviceCallback) {
+        service.getIntInvalidStringAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getIntInvalidStringDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Integer>> getIntInvalidStringDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Integer>>()
+                  .register(200, List<Integer>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Long> getLongValid() throws ServiceException {
+        try {
+            return getLongValidDelegate(service.getLongValid(), null).getBody();
+        } catch (RetrofitError error) {
+            return getLongValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getLongValidAsync(final ServiceCallback<List<Long>> serviceCallback) {
+        service.getLongValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getLongValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Long>> getLongValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Long>>()
+                  .register(200, List<Long>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void putLongValid(List<Long> arrayBody) throws ServiceException {
+        try {
+            return putLongValidDelegate(service.putLongValid(arrayBody), null).getBody();
+        } catch (RetrofitError error) {
+            return putLongValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void putLongValidAsync(List<Long> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        service.putLongValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(putLongValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> putLongValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Long> getLongInvalidNull() throws ServiceException {
+        try {
+            return getLongInvalidNullDelegate(service.getLongInvalidNull(), null).getBody();
+        } catch (RetrofitError error) {
+            return getLongInvalidNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getLongInvalidNullAsync(final ServiceCallback<List<Long>> serviceCallback) {
+        service.getLongInvalidNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getLongInvalidNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Long>> getLongInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Long>>()
+                  .register(200, List<Long>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Long> getLongInvalidString() throws ServiceException {
+        try {
+            return getLongInvalidStringDelegate(service.getLongInvalidString(), null).getBody();
+        } catch (RetrofitError error) {
+            return getLongInvalidStringDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getLongInvalidStringAsync(final ServiceCallback<List<Long>> serviceCallback) {
+        service.getLongInvalidStringAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getLongInvalidStringDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Long>> getLongInvalidStringDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Long>>()
+                  .register(200, List<Long>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Double> getFloatValid() throws ServiceException {
+        try {
+            return getFloatValidDelegate(service.getFloatValid(), null).getBody();
+        } catch (RetrofitError error) {
+            return getFloatValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getFloatValidAsync(final ServiceCallback<List<Double>> serviceCallback) {
+        service.getFloatValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getFloatValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Double>> getFloatValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Double>>()
+                  .register(200, List<Double>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void putFloatValid(List<Double> arrayBody) throws ServiceException {
+        try {
+            return putFloatValidDelegate(service.putFloatValid(arrayBody), null).getBody();
+        } catch (RetrofitError error) {
+            return putFloatValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void putFloatValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        service.putFloatValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(putFloatValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> putFloatValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Double> getFloatInvalidNull() throws ServiceException {
+        try {
+            return getFloatInvalidNullDelegate(service.getFloatInvalidNull(), null).getBody();
+        } catch (RetrofitError error) {
+            return getFloatInvalidNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getFloatInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback) {
+        service.getFloatInvalidNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getFloatInvalidNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Double>> getFloatInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Double>>()
+                  .register(200, List<Double>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Double> getFloatInvalidString() throws ServiceException {
+        try {
+            return getFloatInvalidStringDelegate(service.getFloatInvalidString(), null).getBody();
+        } catch (RetrofitError error) {
+            return getFloatInvalidStringDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getFloatInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback) {
+        service.getFloatInvalidStringAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getFloatInvalidStringDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Double>> getFloatInvalidStringDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Double>>()
+                  .register(200, List<Double>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Double> getDoubleValid() throws ServiceException {
+        try {
+            return getDoubleValidDelegate(service.getDoubleValid(), null).getBody();
+        } catch (RetrofitError error) {
+            return getDoubleValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getDoubleValidAsync(final ServiceCallback<List<Double>> serviceCallback) {
+        service.getDoubleValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getDoubleValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Double>> getDoubleValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Double>>()
+                  .register(200, List<Double>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void putDoubleValid(List<Double> arrayBody) throws ServiceException {
+        try {
+            return putDoubleValidDelegate(service.putDoubleValid(arrayBody), null).getBody();
+        } catch (RetrofitError error) {
+            return putDoubleValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void putDoubleValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        service.putDoubleValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(putDoubleValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> putDoubleValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Double> getDoubleInvalidNull() throws ServiceException {
+        try {
+            return getDoubleInvalidNullDelegate(service.getDoubleInvalidNull(), null).getBody();
+        } catch (RetrofitError error) {
+            return getDoubleInvalidNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getDoubleInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback) {
+        service.getDoubleInvalidNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getDoubleInvalidNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Double>> getDoubleInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Double>>()
+                  .register(200, List<Double>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Double> getDoubleInvalidString() throws ServiceException {
+        try {
+            return getDoubleInvalidStringDelegate(service.getDoubleInvalidString(), null).getBody();
+        } catch (RetrofitError error) {
+            return getDoubleInvalidStringDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getDoubleInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback) {
+        service.getDoubleInvalidStringAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getDoubleInvalidStringDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Double>> getDoubleInvalidStringDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Double>>()
+                  .register(200, List<Double>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<String> getStringValid() throws ServiceException {
+        try {
+            return getStringValidDelegate(service.getStringValid(), null).getBody();
+        } catch (RetrofitError error) {
+            return getStringValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getStringValidAsync(final ServiceCallback<List<String>> serviceCallback) {
+        service.getStringValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getStringValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<String>> getStringValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<String>>()
+                  .register(200, List<String>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void putStringValid(List<String> arrayBody) throws ServiceException {
+        try {
+            return putStringValidDelegate(service.putStringValid(arrayBody), null).getBody();
+        } catch (RetrofitError error) {
+            return putStringValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void putStringValidAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        service.putStringValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(putStringValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> putStringValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<String> getStringWithNull() throws ServiceException {
+        try {
+            return getStringWithNullDelegate(service.getStringWithNull(), null).getBody();
+        } catch (RetrofitError error) {
+            return getStringWithNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getStringWithNullAsync(final ServiceCallback<List<String>> serviceCallback) {
+        service.getStringWithNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getStringWithNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<String>> getStringWithNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<String>>()
+                  .register(200, List<String>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<String> getStringWithInvalid() throws ServiceException {
+        try {
+            return getStringWithInvalidDelegate(service.getStringWithInvalid(), null).getBody();
+        } catch (RetrofitError error) {
+            return getStringWithInvalidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getStringWithInvalidAsync(final ServiceCallback<List<String>> serviceCallback) {
+        service.getStringWithInvalidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getStringWithInvalidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<String>> getStringWithInvalidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<String>>()
+                  .register(200, List<String>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Date> getDateValid() throws ServiceException {
+        try {
+            return getDateValidDelegate(service.getDateValid(), null).getBody();
+        } catch (RetrofitError error) {
+            return getDateValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getDateValidAsync(final ServiceCallback<List<Date>> serviceCallback) {
+        service.getDateValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getDateValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Date>> getDateValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Date>>()
+                  .register(200, List<Date>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void putDateValid(List<Date> arrayBody) throws ServiceException {
+        try {
+            return putDateValidDelegate(service.putDateValid(arrayBody), null).getBody();
+        } catch (RetrofitError error) {
+            return putDateValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void putDateValidAsync(List<Date> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        service.putDateValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(putDateValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> putDateValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Date> getDateInvalidNull() throws ServiceException {
+        try {
+            return getDateInvalidNullDelegate(service.getDateInvalidNull(), null).getBody();
+        } catch (RetrofitError error) {
+            return getDateInvalidNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getDateInvalidNullAsync(final ServiceCallback<List<Date>> serviceCallback) {
+        service.getDateInvalidNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getDateInvalidNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Date>> getDateInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Date>>()
+                  .register(200, List<Date>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Date> getDateInvalidChars() throws ServiceException {
+        try {
+            return getDateInvalidCharsDelegate(service.getDateInvalidChars(), null).getBody();
+        } catch (RetrofitError error) {
+            return getDateInvalidCharsDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getDateInvalidCharsAsync(final ServiceCallback<List<Date>> serviceCallback) {
+        service.getDateInvalidCharsAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getDateInvalidCharsDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Date>> getDateInvalidCharsDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Date>>()
+                  .register(200, List<Date>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Date> getDateTimeValid() throws ServiceException {
+        try {
+            return getDateTimeValidDelegate(service.getDateTimeValid(), null).getBody();
+        } catch (RetrofitError error) {
+            return getDateTimeValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getDateTimeValidAsync(final ServiceCallback<List<Date>> serviceCallback) {
+        service.getDateTimeValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getDateTimeValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Date>> getDateTimeValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Date>>()
+                  .register(200, List<Date>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void putDateTimeValid(List<Date> arrayBody) throws ServiceException {
+        try {
+            return putDateTimeValidDelegate(service.putDateTimeValid(arrayBody), null).getBody();
+        } catch (RetrofitError error) {
+            return putDateTimeValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void putDateTimeValidAsync(List<Date> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        service.putDateTimeValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(putDateTimeValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> putDateTimeValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Date> getDateTimeInvalidNull() throws ServiceException {
+        try {
+            return getDateTimeInvalidNullDelegate(service.getDateTimeInvalidNull(), null).getBody();
+        } catch (RetrofitError error) {
+            return getDateTimeInvalidNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getDateTimeInvalidNullAsync(final ServiceCallback<List<Date>> serviceCallback) {
+        service.getDateTimeInvalidNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getDateTimeInvalidNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Date>> getDateTimeInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Date>>()
+                  .register(200, List<Date>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Date> getDateTimeInvalidChars() throws ServiceException {
+        try {
+            return getDateTimeInvalidCharsDelegate(service.getDateTimeInvalidChars(), null).getBody();
+        } catch (RetrofitError error) {
+            return getDateTimeInvalidCharsDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getDateTimeInvalidCharsAsync(final ServiceCallback<List<Date>> serviceCallback) {
+        service.getDateTimeInvalidCharsAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getDateTimeInvalidCharsDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Date>> getDateTimeInvalidCharsDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Date>>()
+                  .register(200, List<Date>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Byte[]> getByteValid() throws ServiceException {
+        try {
+            return getByteValidDelegate(service.getByteValid(), null).getBody();
+        } catch (RetrofitError error) {
+            return getByteValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getByteValidAsync(final ServiceCallback<List<Byte[]>> serviceCallback) {
+        service.getByteValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getByteValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Byte[]>> getByteValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Byte[]>>()
+                  .register(200, List<Byte[]>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void putByteValid(List<Byte[]> arrayBody) throws ServiceException {
+        try {
+            return putByteValidDelegate(service.putByteValid(arrayBody), null).getBody();
+        } catch (RetrofitError error) {
+            return putByteValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void putByteValidAsync(List<Byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        service.putByteValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(putByteValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> putByteValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Byte[]> getByteInvalidNull() throws ServiceException {
+        try {
+            return getByteInvalidNullDelegate(service.getByteInvalidNull(), null).getBody();
+        } catch (RetrofitError error) {
+            return getByteInvalidNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getByteInvalidNullAsync(final ServiceCallback<List<Byte[]>> serviceCallback) {
+        service.getByteInvalidNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getByteInvalidNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Byte[]>> getByteInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Byte[]>>()
+                  .register(200, List<Byte[]>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Product> getComplexNull() throws ServiceException {
+        try {
+            return getComplexNullDelegate(service.getComplexNull(), null).getBody();
+        } catch (RetrofitError error) {
+            return getComplexNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getComplexNullAsync(final ServiceCallback<List<Product>> serviceCallback) {
+        service.getComplexNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getComplexNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Product>> getComplexNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Product>>()
+                  .register(200, List<Product>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Product> getComplexEmpty() throws ServiceException {
+        try {
+            return getComplexEmptyDelegate(service.getComplexEmpty(), null).getBody();
+        } catch (RetrofitError error) {
+            return getComplexEmptyDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getComplexEmptyAsync(final ServiceCallback<List<Product>> serviceCallback) {
+        service.getComplexEmptyAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getComplexEmptyDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Product>> getComplexEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Product>>()
+                  .register(200, List<Product>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Product> getComplexItemNull() throws ServiceException {
+        try {
+            return getComplexItemNullDelegate(service.getComplexItemNull(), null).getBody();
+        } catch (RetrofitError error) {
+            return getComplexItemNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getComplexItemNullAsync(final ServiceCallback<List<Product>> serviceCallback) {
+        service.getComplexItemNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getComplexItemNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Product>> getComplexItemNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Product>>()
+                  .register(200, List<Product>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Product> getComplexItemEmpty() throws ServiceException {
+        try {
+            return getComplexItemEmptyDelegate(service.getComplexItemEmpty(), null).getBody();
+        } catch (RetrofitError error) {
+            return getComplexItemEmptyDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getComplexItemEmptyAsync(final ServiceCallback<List<Product>> serviceCallback) {
+        service.getComplexItemEmptyAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getComplexItemEmptyDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Product>> getComplexItemEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Product>>()
+                  .register(200, List<Product>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Product> getComplexValid() throws ServiceException {
+        try {
+            return getComplexValidDelegate(service.getComplexValid(), null).getBody();
+        } catch (RetrofitError error) {
+            return getComplexValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getComplexValidAsync(final ServiceCallback<List<Product>> serviceCallback) {
+        service.getComplexValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getComplexValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Product>> getComplexValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Product>>()
+                  .register(200, List<Product>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void putComplexValid(List<Product> arrayBody) throws ServiceException {
+        try {
+            return putComplexValidDelegate(service.putComplexValid(arrayBody), null).getBody();
+        } catch (RetrofitError error) {
+            return putComplexValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void putComplexValidAsync(List<Product> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        service.putComplexValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(putComplexValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> putComplexValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<List<String>> getArrayNull() throws ServiceException {
+        try {
+            return getArrayNullDelegate(service.getArrayNull(), null).getBody();
+        } catch (RetrofitError error) {
+            return getArrayNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getArrayNullAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
+        service.getArrayNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getArrayNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<List<String>>> getArrayNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<List<String>>>()
+                  .register(200, List<List<String>>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<List<String>> getArrayEmpty() throws ServiceException {
+        try {
+            return getArrayEmptyDelegate(service.getArrayEmpty(), null).getBody();
+        } catch (RetrofitError error) {
+            return getArrayEmptyDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getArrayEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
+        service.getArrayEmptyAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getArrayEmptyDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<List<String>>> getArrayEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<List<String>>>()
+                  .register(200, List<List<String>>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<List<String>> getArrayItemNull() throws ServiceException {
+        try {
+            return getArrayItemNullDelegate(service.getArrayItemNull(), null).getBody();
+        } catch (RetrofitError error) {
+            return getArrayItemNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getArrayItemNullAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
+        service.getArrayItemNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getArrayItemNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<List<String>>> getArrayItemNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<List<String>>>()
+                  .register(200, List<List<String>>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<List<String>> getArrayItemEmpty() throws ServiceException {
+        try {
+            return getArrayItemEmptyDelegate(service.getArrayItemEmpty(), null).getBody();
+        } catch (RetrofitError error) {
+            return getArrayItemEmptyDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getArrayItemEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
+        service.getArrayItemEmptyAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getArrayItemEmptyDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<List<String>>> getArrayItemEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<List<String>>>()
+                  .register(200, List<List<String>>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<List<String>> getArrayValid() throws ServiceException {
+        try {
+            return getArrayValidDelegate(service.getArrayValid(), null).getBody();
+        } catch (RetrofitError error) {
+            return getArrayValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getArrayValidAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
+        service.getArrayValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getArrayValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<List<String>>> getArrayValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<List<String>>>()
+                  .register(200, List<List<String>>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void putArrayValid(List<List<String>> arrayBody) throws ServiceException {
+        try {
+            return putArrayValidDelegate(service.putArrayValid(arrayBody), null).getBody();
+        } catch (RetrofitError error) {
+            return putArrayValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void putArrayValidAsync(List<List<String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        service.putArrayValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(putArrayValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> putArrayValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Map<String, String>> getDictionaryNull() throws ServiceException {
+        try {
+            return getDictionaryNullDelegate(service.getDictionaryNull(), null).getBody();
+        } catch (RetrofitError error) {
+            return getDictionaryNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getDictionaryNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
+        service.getDictionaryNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getDictionaryNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Map<String, String>>> getDictionaryNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Map<String, String>>>()
+                  .register(200, List<Map<String, String>>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Map<String, String>> getDictionaryEmpty() throws ServiceException {
+        try {
+            return getDictionaryEmptyDelegate(service.getDictionaryEmpty(), null).getBody();
+        } catch (RetrofitError error) {
+            return getDictionaryEmptyDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getDictionaryEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
+        service.getDictionaryEmptyAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getDictionaryEmptyDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Map<String, String>>> getDictionaryEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Map<String, String>>>()
+                  .register(200, List<Map<String, String>>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Map<String, String>> getDictionaryItemNull() throws ServiceException {
+        try {
+            return getDictionaryItemNullDelegate(service.getDictionaryItemNull(), null).getBody();
+        } catch (RetrofitError error) {
+            return getDictionaryItemNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getDictionaryItemNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
+        service.getDictionaryItemNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getDictionaryItemNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Map<String, String>>> getDictionaryItemNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Map<String, String>>>()
+                  .register(200, List<Map<String, String>>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Map<String, String>> getDictionaryItemEmpty() throws ServiceException {
+        try {
+            return getDictionaryItemEmptyDelegate(service.getDictionaryItemEmpty(), null).getBody();
+        } catch (RetrofitError error) {
+            return getDictionaryItemEmptyDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getDictionaryItemEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
+        service.getDictionaryItemEmptyAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getDictionaryItemEmptyDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Map<String, String>>> getDictionaryItemEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Map<String, String>>>()
+                  .register(200, List<Map<String, String>>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public List<Map<String, String>> getDictionaryValid() throws ServiceException {
+        try {
+            return getDictionaryValidDelegate(service.getDictionaryValid(), null).getBody();
+        } catch (RetrofitError error) {
+            return getDictionaryValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getDictionaryValidAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
+        service.getDictionaryValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getDictionaryValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<List<Map<String, String>>> getDictionaryValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<Map<String, String>>>()
+                  .register(200, List<Map<String, String>>.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void putDictionaryValid(List<Map<String, String>> arrayBody) throws ServiceException {
+        try {
+            return putDictionaryValidDelegate(service.putDictionaryValid(arrayBody), null).getBody();
+        } catch (RetrofitError error) {
+            return putDictionaryValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void putDictionaryValidAsync(List<Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        service.putDictionaryValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(putDictionaryValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> putDictionaryValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
 
 }

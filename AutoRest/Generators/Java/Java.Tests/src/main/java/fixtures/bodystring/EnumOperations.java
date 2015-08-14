@@ -9,25 +9,92 @@
 
 package fixtures.bodystring;
 
+import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import retrofit.Callback;
+import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.ServiceResponseBuilder;
+import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
 import fixtures.bodystring.models.Colors;
 import retrofit.http.GET;
 import retrofit.http.PUT;
 import retrofit.http.Body;
 
-public interface EnumOperations {
-    @GET("/string/enum/notExpandable")
-    Colors getNotExpandable() throws ServiceException;
+public class EnumOperations {
+    private EnumService service;
+    public EnumOperations(RestAdapter restAdapter) {
+        service = restAdapter.create(EnumService.class);
+    }
+    public interface EnumService {
+        @GET("/string/enum/notExpandable")
+        Colors getNotExpandable() throws ServiceException;
 
-    @GET("/string/enum/notExpandable")
-    void getNotExpandableAsync(Callback<Colors> cb);
+        @GET("/string/enum/notExpandable")
+        void getNotExpandableAsync(ServiceCallback<Colors> serviceCallback);
 
-    @PUT("/string/enum/notExpandable")
-    Response putNotExpandable(@Body Colors stringBody) throws ServiceException;
+        @PUT("/string/enum/notExpandable")
+        void putNotExpandable(@Body Colors stringBody) throws ServiceException;
 
-    @PUT("/string/enum/notExpandable")
-    void putNotExpandableAsync(@Body Colors stringBody, Callback<Response> cb);
+        @PUT("/string/enum/notExpandable")
+        void putNotExpandableAsync(@Body Colors stringBody, ServiceCallback<Void> serviceCallback);
+
+    }
+    public Colors getNotExpandable() throws ServiceException {
+        try {
+            return getNotExpandableDelegate(service.getNotExpandable(), null).getBody();
+        } catch (RetrofitError error) {
+            return getNotExpandableDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback) {
+        service.getNotExpandableAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getNotExpandableDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Colors> getNotExpandableDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Colors>()
+                  .register(200, Colors.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void putNotExpandable(Colors stringBody) throws ServiceException {
+        try {
+            return putNotExpandableDelegate(service.putNotExpandable(stringBody), null).getBody();
+        } catch (RetrofitError error) {
+            return putNotExpandableDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback) {
+        service.putNotExpandableAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(putNotExpandableDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> putNotExpandableDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
 
 }

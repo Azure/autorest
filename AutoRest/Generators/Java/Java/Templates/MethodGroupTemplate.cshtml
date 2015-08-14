@@ -9,23 +9,72 @@
 package @(Settings.Namespace.ToLower());
 @EmptyLine
 
+import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import retrofit.Callback;
+import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.ServiceResponseBuilder;
+import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
 @foreach (var importClass in Model.Imports)
 {
 @:import @importClass;
 }
 @EmptyLine
 
-public interface @Model.MethodGroupName.ToPascalCase() {
-@foreach (var method in Model.MethodTemplateModels)
-{
-@:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url)")
-@:    @method.ReturnTypeString @(method.Name)(@method.MethodParameterDeclaration) throws ServiceException;
-@EmptyLine
-@:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url)")
-@:    void @(method.Name)Async(@method.MethodParameterDeclarationWithCallback);
-@EmptyLine
+public class @Model.MethodGroupType {
+    private @Model.MethodGroupServiceType service;
+
+    public @(Model.MethodGroupType)(RestAdapter restAdapter) {
+        service = restAdapter.create(@(Model.MethodGroupServiceType).class);
+    }
+
+    public interface @Model.MethodGroupServiceType {
+    @foreach (var method in Model.MethodTemplateModels)
+    {
+    @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url)")
+    @:    @method.ReturnTypeString @(method.Name)(@method.MethodParameterApiDeclaration) throws ServiceException;
+    @EmptyLine
+    @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url)")
+    @:    void @(method.Name)Async(@method.MethodParameterApiDeclarationWithCallback);
+    @EmptyLine
+    }
+    }
+
+    @foreach (var method in Model.MethodTemplateModels)
+    {
+    @:public @method.ReturnTypeString @(method.Name)(@method.MethodParameterDeclaration) throws ServiceException {
+    @:    try {
+    @:        return @(method.Name)Delegate(service.@(method.Name)(@method.MethodParameterInvocation), null).getBody();
+    @:    } catch (RetrofitError error) {
+    @:        return @(method.Name)Delegate(error.getResponse(), error).getBody();
+    @:    }
+    @:}
+    @EmptyLine
+    @:public void @(method.Name)Async(@method.MethodParameterDeclarationWithCallback) {
+    @:    service.@(method.Name)Asyncd(new ServiceResponseCallback() {
+    @:        @@Override
+    @:        public void response(Response response, RetrofitError error) {
+    @:            try {
+    @:                serviceCallback.success(@(method.Name)Delegate(response, error));
+    @:            } catch (ServiceException exception) {
+    @:                serviceCallback.failure(exception);
+    @:            }
+    @:        }
+    @:    });
+    @:}
+    @EmptyLine
+    @:private ServiceResponse<@method.GenericReturnTypeString> @(method.Name)Delegate(Response response, RetrofitError error) throws ServiceException {
+    @:    return new ServiceResponseBuilder<@method.GenericReturnTypeString>()
+                  foreach (var response in method.Responses)
+                  {
+                  @:.register(@((int)response.Key), @(JavaCodeNamer.NormalizeGenericType(response.Value).Name).class)
+                  }
+                  @:.registerError(@JavaCodeNamer.NormalizeGenericType(method.DefaultResponse).Name)
+                  @:.build(response, error);
+    @:}
+    @EmptyLine
+    }
 }
-}
+
