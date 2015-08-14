@@ -5,7 +5,7 @@
  *
  */
 
-package com.microsoft.rest.retrofit;
+package com.microsoft.rest.sample;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;

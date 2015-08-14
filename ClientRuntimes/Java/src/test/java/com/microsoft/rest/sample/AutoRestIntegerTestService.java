@@ -5,7 +5,7 @@
  *
  */
 
-package com.microsoft.rest.retrofit;
+package com.microsoft.rest.sample;
 
 /**
  *
