@@ -38,11 +38,11 @@ function LROsCustomHeader(client) {
  * a 200 to the initial request, with an entity that contains
  * ProvisioningState=’Creating’. Poll the endpoint indicated in the
  * Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -51,7 +51,7 @@ function LROsCustomHeader(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROsCustomHeader.prototype.putAsyncRetrySucceeded = function (product, options, callback) {
   var client = this.client;
@@ -82,11 +82,11 @@ LROsCustomHeader.prototype.putAsyncRetrySucceeded = function (product, options, 
  * a 200 to the initial request, with an entity that contains
  * ProvisioningState=’Creating’. Poll the endpoint indicated in the
  * Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -95,7 +95,7 @@ LROsCustomHeader.prototype.putAsyncRetrySucceeded = function (product, options, 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (product, options, callback) {
   var client = this.client;
@@ -217,7 +217,7 @@ LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (product, opti
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROsCustomHeader.prototype.getAsyncRetrySucceeded = function (options, callback) {
   var client = this.client;
@@ -327,11 +327,11 @@ LROsCustomHeader.prototype.getAsyncRetrySucceeded = function (options, callback)
  * a 201 to the initial request, with an entity that contains
  * ProvisioningState=’Creating’.  Polls return this value until the last poll
  * returns a ‘200’ with ProvisioningState=’Succeeded’
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -340,7 +340,7 @@ LROsCustomHeader.prototype.getAsyncRetrySucceeded = function (options, callback)
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROsCustomHeader.prototype.put201CreatingSucceeded200 = function (product, options, callback) {
   var client = this.client;
@@ -371,11 +371,11 @@ LROsCustomHeader.prototype.put201CreatingSucceeded200 = function (product, optio
  * a 201 to the initial request, with an entity that contains
  * ProvisioningState=’Creating’.  Polls return this value until the last poll
  * returns a ‘200’ with ProvisioningState=’Succeeded’
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -384,7 +384,7 @@ LROsCustomHeader.prototype.put201CreatingSucceeded200 = function (product, optio
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (product, options, callback) {
   var client = this.client;
@@ -520,7 +520,7 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (product, 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROsCustomHeader.prototype.get201CreatingSucceeded200Polling = function (options, callback) {
   var client = this.client;
@@ -629,11 +629,11 @@ LROsCustomHeader.prototype.get201CreatingSucceeded200Polling = function (options
  * message header for all requests. Long running post request, service
  * returns a 202 to the initial request, with 'Location' and 'Retry-After'
  * headers, Polls return a 200 with a response body after success
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -642,7 +642,7 @@ LROsCustomHeader.prototype.get201CreatingSucceeded200Polling = function (options
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROsCustomHeader.prototype.post202Retry200 = function (product, options, callback) {
   var self = this.client;
@@ -662,11 +662,11 @@ LROsCustomHeader.prototype.post202Retry200 = function (product, options, callbac
  * message header for all requests. Long running post request, service
  * returns a 202 to the initial request, with 'Location' and 'Retry-After'
  * headers, Polls return a 200 with a response body after success
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -675,7 +675,7 @@ LROsCustomHeader.prototype.post202Retry200 = function (product, options, callbac
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROsCustomHeader.prototype.beginPost202Retry200 = function (product, options, callback) {
   var client = this.client;
@@ -775,11 +775,11 @@ LROsCustomHeader.prototype.beginPost202Retry200 = function (product, options, ca
  * returns a 202 to the initial request, with an entity that contains
  * ProvisioningState=’Creating’. Poll the endpoint indicated in the
  * Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -788,7 +788,7 @@ LROsCustomHeader.prototype.beginPost202Retry200 = function (product, options, ca
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROsCustomHeader.prototype.postAsyncRetrySucceeded = function (product, options, callback) {
   var self = this.client;
@@ -809,11 +809,11 @@ LROsCustomHeader.prototype.postAsyncRetrySucceeded = function (product, options,
  * returns a 202 to the initial request, with an entity that contains
  * ProvisioningState=’Creating’. Poll the endpoint indicated in the
  * Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -822,7 +822,7 @@ LROsCustomHeader.prototype.postAsyncRetrySucceeded = function (product, options,
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROsCustomHeader.prototype.beginPostAsyncRetrySucceeded = function (product, options, callback) {
   var client = this.client;

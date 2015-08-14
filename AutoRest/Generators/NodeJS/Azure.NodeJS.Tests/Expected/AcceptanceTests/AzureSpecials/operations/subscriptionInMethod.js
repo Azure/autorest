@@ -34,7 +34,7 @@ function SubscriptionInMethod(client) {
 /**
  * POST method with subscriptionId modeled in the method.  pass in
  * subscription id = '1234-5678-9012-3456' to succeed
- * @param {String} subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'
+ * @param {string} subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'
  *
  * @param {object} [options]
  *
@@ -43,7 +43,7 @@ function SubscriptionInMethod(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 SubscriptionInMethod.prototype.postMethodLocalValid = function (subscriptionId, options, callback) {
   var client = this.client;
@@ -138,7 +138,7 @@ SubscriptionInMethod.prototype.postMethodLocalValid = function (subscriptionId, 
  * POST method with subscriptionId modeled in the method.  pass in
  * subscription id = null, client-side validation should prevent you from
  * making this call
- * @param {String} subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call
+ * @param {string} subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call
  *
  * @param {object} [options]
  *
@@ -147,7 +147,7 @@ SubscriptionInMethod.prototype.postMethodLocalValid = function (subscriptionId, 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 SubscriptionInMethod.prototype.postMethodLocalNull = function (subscriptionId, options, callback) {
   var client = this.client;
@@ -241,7 +241,7 @@ SubscriptionInMethod.prototype.postMethodLocalNull = function (subscriptionId, o
 /**
  * POST method with subscriptionId modeled in the method.  pass in
  * subscription id = '1234-5678-9012-3456' to succeed
- * @param {String} subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'
+ * @param {string} subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'
  *
  * @param {object} [options]
  *
@@ -250,7 +250,7 @@ SubscriptionInMethod.prototype.postMethodLocalNull = function (subscriptionId, o
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 SubscriptionInMethod.prototype.postPathLocalValid = function (subscriptionId, options, callback) {
   var client = this.client;
@@ -344,7 +344,7 @@ SubscriptionInMethod.prototype.postPathLocalValid = function (subscriptionId, op
 /**
  * POST method with subscriptionId modeled in the method.  pass in
  * subscription id = '1234-5678-9012-3456' to succeed
- * @param {String} subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
+ * @param {string} subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
  *
  * @param {object} [options]
  *
@@ -353,7 +353,7 @@ SubscriptionInMethod.prototype.postPathLocalValid = function (subscriptionId, op
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 SubscriptionInMethod.prototype.postSwaggerLocalValid = function (subscriptionId, options, callback) {
   var client = this.client;

@@ -40,7 +40,7 @@ function EnumModel(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 EnumModel.prototype.getNotExpandable = function (options, callback) {
   var client = this.client;
@@ -126,7 +126,7 @@ EnumModel.prototype.getNotExpandable = function (options, callback) {
 /**
  * Sends value 'red color' from enumeration of 'red color', 'green-color',
  * 'blue_color'
- * @param {Colors} stringBody Possible values for this parameter include: 'red color', 'green-color', 'blue_color'
+ * @param {string} stringBody Possible values for this parameter include: 'red color', 'green-color', 'blue_color'
  *
  * @param {object} [options]
  *
@@ -135,7 +135,7 @@ EnumModel.prototype.getNotExpandable = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 EnumModel.prototype.putNotExpandable = function (stringBody, options, callback) {
   var client = this.client;

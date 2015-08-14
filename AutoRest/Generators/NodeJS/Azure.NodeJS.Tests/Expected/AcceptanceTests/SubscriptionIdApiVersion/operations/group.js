@@ -33,7 +33,7 @@ function Group(client) {
 
 /**
  * Provides a resouce group with name 'testgroup101' and location 'West US'.
- * @param {String} resourceGroupName Resource Group name 'testgroup101'.
+ * @param {string} resourceGroupName Resource Group name 'testgroup101'.
  *
  * @param {object} [options]
  *
@@ -42,7 +42,7 @@ function Group(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Group.prototype.getSampleResourceGroup = function (resourceGroupName, options, callback) {
   var client = this.client;

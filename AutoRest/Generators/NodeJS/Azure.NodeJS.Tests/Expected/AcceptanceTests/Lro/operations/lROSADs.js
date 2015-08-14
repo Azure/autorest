@@ -34,11 +34,11 @@ function LROSADs(client) {
 /**
  *
  * Long running put request, service returns a 400 to the initial request
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -47,7 +47,7 @@ function LROSADs(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.putNonRetry400 = function (product, options, callback) {
   var client = this.client;
@@ -74,11 +74,11 @@ LROSADs.prototype.putNonRetry400 = function (product, options, callback) {
 
 /**
  * Long running put request, service returns a 400 to the initial request
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -87,7 +87,7 @@ LROSADs.prototype.putNonRetry400 = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.beginPutNonRetry400 = function (product, options, callback) {
   var client = this.client;
@@ -221,7 +221,7 @@ LROSADs.prototype.beginPutNonRetry400 = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.getNonRetry400 = function (options, callback) {
   var client = this.client;
@@ -328,11 +328,11 @@ LROSADs.prototype.getNonRetry400 = function (options, callback) {
  *
  * Long running put request, service returns a Product with
  * 'ProvisioningState' = 'Creating' and 201 response code
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -341,7 +341,7 @@ LROSADs.prototype.getNonRetry400 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.putNonRetry201Creating400 = function (product, options, callback) {
   var client = this.client;
@@ -369,11 +369,11 @@ LROSADs.prototype.putNonRetry201Creating400 = function (product, options, callba
 /**
  * Long running put request, service returns a Product with
  * 'ProvisioningState' = 'Creating' and 201 response code
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -382,7 +382,7 @@ LROSADs.prototype.putNonRetry201Creating400 = function (product, options, callba
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.beginPutNonRetry201Creating400 = function (product, options, callback) {
   var client = this.client;
@@ -516,7 +516,7 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (product, options, c
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.getNonRetry201Creating400 = function (options, callback) {
   var client = this.client;
@@ -624,11 +624,11 @@ LROSADs.prototype.getNonRetry201Creating400 = function (options, callback) {
  * Long running put request, service returns a 200 with
  * ProvisioningState=’Creating’. Poll the endpoint indicated in the
  * Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -637,7 +637,7 @@ LROSADs.prototype.getNonRetry201Creating400 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.putAsyncRelativeRetry400 = function (product, options, callback) {
   var client = this.client;
@@ -666,11 +666,11 @@ LROSADs.prototype.putAsyncRelativeRetry400 = function (product, options, callbac
  * Long running put request, service returns a 200 with
  * ProvisioningState=’Creating’. Poll the endpoint indicated in the
  * Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -679,7 +679,7 @@ LROSADs.prototype.putAsyncRelativeRetry400 = function (product, options, callbac
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.beginPutAsyncRelativeRetry400 = function (product, options, callback) {
   var client = this.client;
@@ -797,7 +797,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetry400 = function (product, options, ca
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.getAsyncRelativeRetry400 = function (options, callback) {
   var client = this.client;
@@ -910,7 +910,7 @@ LROSADs.prototype.getAsyncRelativeRetry400 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.deleteNonRetry400 = function (options, callback) {
   var self = this.client;
@@ -934,7 +934,7 @@ LROSADs.prototype.deleteNonRetry400 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.beginDeleteNonRetry400 = function (options, callback) {
   var client = this.client;
@@ -1031,7 +1031,7 @@ LROSADs.prototype.beginDeleteNonRetry400 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.delete202NonRetry400 = function (options, callback) {
   var self = this.client;
@@ -1055,7 +1055,7 @@ LROSADs.prototype.delete202NonRetry400 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.beginDelete202NonRetry400 = function (options, callback) {
   var client = this.client;
@@ -1154,7 +1154,7 @@ LROSADs.prototype.beginDelete202NonRetry400 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.deleteAsyncRelativeRetry400 = function (options, callback) {
   var self = this.client;
@@ -1180,7 +1180,7 @@ LROSADs.prototype.deleteAsyncRelativeRetry400 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.beginDeleteAsyncRelativeRetry400 = function (options, callback) {
   var client = this.client;
@@ -1270,11 +1270,11 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetry400 = function (options, callback
 /**
  *
  * Long running post request, service returns a 400 with no error body
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -1283,7 +1283,7 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetry400 = function (options, callback
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.postNonRetry400 = function (product, options, callback) {
   var self = this.client;
@@ -1300,11 +1300,11 @@ LROSADs.prototype.postNonRetry400 = function (product, options, callback) {
 
 /**
  * Long running post request, service returns a 400 with no error body
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -1313,7 +1313,7 @@ LROSADs.prototype.postNonRetry400 = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.beginPostNonRetry400 = function (product, options, callback) {
   var client = this.client;
@@ -1409,11 +1409,11 @@ LROSADs.prototype.beginPostNonRetry400 = function (product, options, callback) {
 /**
  *
  * Long running post request, service returns a 202 with a location header
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -1422,7 +1422,7 @@ LROSADs.prototype.beginPostNonRetry400 = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.post202NonRetry400 = function (product, options, callback) {
   var self = this.client;
@@ -1439,11 +1439,11 @@ LROSADs.prototype.post202NonRetry400 = function (product, options, callback) {
 
 /**
  * Long running post request, service returns a 202 with a location header
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -1452,7 +1452,7 @@ LROSADs.prototype.post202NonRetry400 = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.beginPost202NonRetry400 = function (product, options, callback) {
   var client = this.client;
@@ -1550,11 +1550,11 @@ LROSADs.prototype.beginPost202NonRetry400 = function (product, options, callback
  * Long running post request, service returns a 202 to the initial request
  * Poll the endpoint indicated in the Azure-AsyncOperation header for
  * operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -1563,7 +1563,7 @@ LROSADs.prototype.beginPost202NonRetry400 = function (product, options, callback
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.postAsyncRelativeRetry400 = function (product, options, callback) {
   var self = this.client;
@@ -1582,11 +1582,11 @@ LROSADs.prototype.postAsyncRelativeRetry400 = function (product, options, callba
  * Long running post request, service returns a 202 to the initial request
  * Poll the endpoint indicated in the Azure-AsyncOperation header for
  * operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -1595,7 +1595,7 @@ LROSADs.prototype.postAsyncRelativeRetry400 = function (product, options, callba
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.beginPostAsyncRelativeRetry400 = function (product, options, callback) {
   var client = this.client;
@@ -1692,11 +1692,11 @@ LROSADs.prototype.beginPostAsyncRelativeRetry400 = function (product, options, c
  *
  * Long running put request, service returns a 201 to the initial request with
  * no payload
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -1705,7 +1705,7 @@ LROSADs.prototype.beginPostAsyncRelativeRetry400 = function (product, options, c
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.putError201NoProvisioningStatePayload = function (product, options, callback) {
   var client = this.client;
@@ -1733,11 +1733,11 @@ LROSADs.prototype.putError201NoProvisioningStatePayload = function (product, opt
 /**
  * Long running put request, service returns a 201 to the initial request with
  * no payload
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -1746,7 +1746,7 @@ LROSADs.prototype.putError201NoProvisioningStatePayload = function (product, opt
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (product, options, callback) {
   var client = this.client;
@@ -1880,7 +1880,7 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (product
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.getError201NoProvisioningStatePayload = function (options, callback) {
   var client = this.client;
@@ -1988,11 +1988,11 @@ LROSADs.prototype.getError201NoProvisioningStatePayload = function (options, cal
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -2001,7 +2001,7 @@ LROSADs.prototype.getError201NoProvisioningStatePayload = function (options, cal
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.putAsyncRelativeRetryNoStatus = function (product, options, callback) {
   var client = this.client;
@@ -2030,11 +2030,11 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatus = function (product, options, ca
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -2043,7 +2043,7 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatus = function (product, options, ca
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (product, options, callback) {
   var client = this.client;
@@ -2163,7 +2163,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (product, option
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.getAsyncRelativeRetryNoStatus = function (options, callback) {
   var client = this.client;
@@ -2271,11 +2271,11 @@ LROSADs.prototype.getAsyncRelativeRetryNoStatus = function (options, callback) {
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -2284,7 +2284,7 @@ LROSADs.prototype.getAsyncRelativeRetryNoStatus = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.putAsyncRelativeRetryNoStatusPayload = function (product, options, callback) {
   var client = this.client;
@@ -2313,11 +2313,11 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatusPayload = function (product, opti
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -2326,7 +2326,7 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatusPayload = function (product, opti
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.beginPutAsyncRelativeRetryNoStatusPayload = function (product, options, callback) {
   var client = this.client;
@@ -2446,7 +2446,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatusPayload = function (product,
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.getAsyncRelativeRetryNoStatusPayload = function (options, callback) {
   var client = this.client;
@@ -2560,7 +2560,7 @@ LROSADs.prototype.getAsyncRelativeRetryNoStatusPayload = function (options, call
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.delete204Succeeded = function (options, callback) {
   var self = this.client;
@@ -2585,7 +2585,7 @@ LROSADs.prototype.delete204Succeeded = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.beginDelete204Succeeded = function (options, callback) {
   var client = this.client;
@@ -2684,7 +2684,7 @@ LROSADs.prototype.beginDelete204Succeeded = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.deleteAsyncRelativeRetryNoStatus = function (options, callback) {
   var self = this.client;
@@ -2710,7 +2710,7 @@ LROSADs.prototype.deleteAsyncRelativeRetryNoStatus = function (options, callback
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.beginDeleteAsyncRelativeRetryNoStatus = function (options, callback) {
   var client = this.client;
@@ -2801,11 +2801,11 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryNoStatus = function (options, cal
  *
  * Long running post request, service returns a 202 to the initial request,
  * without a location header.
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -2814,7 +2814,7 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryNoStatus = function (options, cal
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.post202NoLocation = function (product, options, callback) {
   var self = this.client;
@@ -2832,11 +2832,11 @@ LROSADs.prototype.post202NoLocation = function (product, options, callback) {
 /**
  * Long running post request, service returns a 202 to the initial request,
  * without a location header.
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -2845,7 +2845,7 @@ LROSADs.prototype.post202NoLocation = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.beginPost202NoLocation = function (product, options, callback) {
   var client = this.client;
@@ -2943,11 +2943,11 @@ LROSADs.prototype.beginPost202NoLocation = function (product, options, callback)
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -2956,7 +2956,7 @@ LROSADs.prototype.beginPost202NoLocation = function (product, options, callback)
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.postAsyncRelativeRetryNoPayload = function (product, options, callback) {
   var self = this.client;
@@ -2975,11 +2975,11 @@ LROSADs.prototype.postAsyncRelativeRetryNoPayload = function (product, options, 
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -2988,7 +2988,7 @@ LROSADs.prototype.postAsyncRelativeRetryNoPayload = function (product, options, 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.beginPostAsyncRelativeRetryNoPayload = function (product, options, callback) {
   var client = this.client;
@@ -3085,11 +3085,11 @@ LROSADs.prototype.beginPostAsyncRelativeRetryNoPayload = function (product, opti
  *
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that is not a valid json
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -3098,7 +3098,7 @@ LROSADs.prototype.beginPostAsyncRelativeRetryNoPayload = function (product, opti
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.put200InvalidJson = function (product, options, callback) {
   var client = this.client;
@@ -3126,11 +3126,11 @@ LROSADs.prototype.put200InvalidJson = function (product, options, callback) {
 /**
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that is not a valid json
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -3139,7 +3139,7 @@ LROSADs.prototype.put200InvalidJson = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.beginPut200InvalidJson = function (product, options, callback) {
   var client = this.client;
@@ -3257,7 +3257,7 @@ LROSADs.prototype.beginPut200InvalidJson = function (product, options, callback)
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.get200Succeeded = function (options, callback) {
   var client = this.client;
@@ -3365,11 +3365,11 @@ LROSADs.prototype.get200Succeeded = function (options, callback) {
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. The endpoint
  * indicated in the Azure-AsyncOperation header is invalid.
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -3378,7 +3378,7 @@ LROSADs.prototype.get200Succeeded = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.putAsyncRelativeRetryInvalidHeader = function (product, options, callback) {
   var client = this.client;
@@ -3407,11 +3407,11 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidHeader = function (product, option
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. The endpoint
  * indicated in the Azure-AsyncOperation header is invalid.
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -3420,7 +3420,7 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidHeader = function (product, option
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (product, options, callback) {
   var client = this.client;
@@ -3538,7 +3538,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (product, o
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.getAsyncRelativeRetryInvalidHeader = function (options, callback) {
   var client = this.client;
@@ -3646,11 +3646,11 @@ LROSADs.prototype.getAsyncRelativeRetryInvalidHeader = function (options, callba
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -3659,7 +3659,7 @@ LROSADs.prototype.getAsyncRelativeRetryInvalidHeader = function (options, callba
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.putAsyncRelativeRetryInvalidJsonPolling = function (product, options, callback) {
   var client = this.client;
@@ -3688,11 +3688,11 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidJsonPolling = function (product, o
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -3701,7 +3701,7 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidJsonPolling = function (product, o
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.beginPutAsyncRelativeRetryInvalidJsonPolling = function (product, options, callback) {
   var client = this.client;
@@ -3821,7 +3821,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidJsonPolling = function (produ
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.getAsyncRelativeRetryInvalidJsonPolling = function (options, callback) {
   var client = this.client;
@@ -3935,7 +3935,7 @@ LROSADs.prototype.getAsyncRelativeRetryInvalidJsonPolling = function (options, c
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.delete202RetryInvalidHeader = function (options, callback) {
   var self = this.client;
@@ -3960,7 +3960,7 @@ LROSADs.prototype.delete202RetryInvalidHeader = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.beginDelete202RetryInvalidHeader = function (options, callback) {
   var client = this.client;
@@ -4058,7 +4058,7 @@ LROSADs.prototype.beginDelete202RetryInvalidHeader = function (options, callback
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.deleteAsyncRelativeRetryInvalidHeader = function (options, callback) {
   var self = this.client;
@@ -4083,7 +4083,7 @@ LROSADs.prototype.deleteAsyncRelativeRetryInvalidHeader = function (options, cal
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidHeader = function (options, callback) {
   var client = this.client;
@@ -4182,7 +4182,7 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidHeader = function (options
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.deleteAsyncRelativeRetryInvalidJsonPolling = function (options, callback) {
   var self = this.client;
@@ -4208,7 +4208,7 @@ LROSADs.prototype.deleteAsyncRelativeRetryInvalidJsonPolling = function (options
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidJsonPolling = function (options, callback) {
   var client = this.client;
@@ -4299,11 +4299,11 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidJsonPolling = function (op
  *
  * Long running post request, service returns a 202 to the initial request,
  * with invalid 'Location' and 'Retry-After' headers.
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -4312,7 +4312,7 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidJsonPolling = function (op
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.post202RetryInvalidHeader = function (product, options, callback) {
   var self = this.client;
@@ -4330,11 +4330,11 @@ LROSADs.prototype.post202RetryInvalidHeader = function (product, options, callba
 /**
  * Long running post request, service returns a 202 to the initial request,
  * with invalid 'Location' and 'Retry-After' headers.
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -4343,7 +4343,7 @@ LROSADs.prototype.post202RetryInvalidHeader = function (product, options, callba
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.beginPost202RetryInvalidHeader = function (product, options, callback) {
   var client = this.client;
@@ -4441,11 +4441,11 @@ LROSADs.prototype.beginPost202RetryInvalidHeader = function (product, options, c
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. The endpoint
  * indicated in the Azure-AsyncOperation header is invalid.
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -4454,7 +4454,7 @@ LROSADs.prototype.beginPost202RetryInvalidHeader = function (product, options, c
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.postAsyncRelativeRetryInvalidHeader = function (product, options, callback) {
   var self = this.client;
@@ -4473,11 +4473,11 @@ LROSADs.prototype.postAsyncRelativeRetryInvalidHeader = function (product, optio
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. The endpoint
  * indicated in the Azure-AsyncOperation header is invalid.
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -4486,7 +4486,7 @@ LROSADs.prototype.postAsyncRelativeRetryInvalidHeader = function (product, optio
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.beginPostAsyncRelativeRetryInvalidHeader = function (product, options, callback) {
   var client = this.client;
@@ -4584,11 +4584,11 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidHeader = function (product, 
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -4597,7 +4597,7 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidHeader = function (product, 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.postAsyncRelativeRetryInvalidJsonPolling = function (product, options, callback) {
   var self = this.client;
@@ -4616,11 +4616,11 @@ LROSADs.prototype.postAsyncRelativeRetryInvalidJsonPolling = function (product, 
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -4629,7 +4629,7 @@ LROSADs.prototype.postAsyncRelativeRetryInvalidJsonPolling = function (product, 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROSADs.prototype.beginPostAsyncRelativeRetryInvalidJsonPolling = function (product, options, callback) {
   var client = this.client;

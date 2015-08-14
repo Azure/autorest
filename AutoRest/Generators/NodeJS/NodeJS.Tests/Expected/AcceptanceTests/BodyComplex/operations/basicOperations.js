@@ -39,7 +39,7 @@ function BasicOperations(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 BasicOperations.prototype.getValid = function (options, callback) {
   var client = this.client;
@@ -127,13 +127,13 @@ BasicOperations.prototype.getValid = function (options, callback) {
 
 /**
  * Please put {id: 2, name: 'abc', color: 'Magenta'}
- * @param {Basic} complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
+ * @param {object} complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
  *
- * @param {CMYKColors} [complexBody.color] Possible values for this property include: 'cyan', 'Magenta', 'YELLOW', 'blacK'.
+ * @param {string} [complexBody.color] Possible values for this property include: 'cyan', 'Magenta', 'YELLOW', 'blacK'.
  *
- * @param {Number} [complexBody.id] 
+ * @param {number} [complexBody.id] 
  *
- * @param {String} [complexBody.name] 
+ * @param {string} [complexBody.name] 
  *
  * @param {object} [options]
  *
@@ -142,7 +142,7 @@ BasicOperations.prototype.getValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 BasicOperations.prototype.putValid = function (complexBody, options, callback) {
   var client = this.client;
@@ -234,7 +234,7 @@ BasicOperations.prototype.putValid = function (complexBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 BasicOperations.prototype.getInvalid = function (options, callback) {
   var client = this.client;
@@ -329,7 +329,7 @@ BasicOperations.prototype.getInvalid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 BasicOperations.prototype.getEmpty = function (options, callback) {
   var client = this.client;
@@ -424,7 +424,7 @@ BasicOperations.prototype.getEmpty = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 BasicOperations.prototype.getNull = function (options, callback) {
   var client = this.client;
@@ -519,7 +519,7 @@ BasicOperations.prototype.getNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 BasicOperations.prototype.getNotProvided = function (options, callback) {
   var client = this.client;

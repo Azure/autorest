@@ -39,7 +39,7 @@ function Dictionary(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getValid = function (options, callback) {
   var client = this.client;
@@ -127,9 +127,9 @@ Dictionary.prototype.getValid = function (options, callback) {
 
 /**
  * Put complex types with dictionary property
- * @param {DictionaryWrapper} complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
+ * @param {object} complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
  *
- * @param {Object} [complexBody.defaultProgram] 
+ * @param {object} [complexBody.defaultProgram] 
  *
  * @param {object} [options]
  *
@@ -138,7 +138,7 @@ Dictionary.prototype.getValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.putValid = function (complexBody, options, callback) {
   var client = this.client;
@@ -230,7 +230,7 @@ Dictionary.prototype.putValid = function (complexBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getEmpty = function (options, callback) {
   var client = this.client;
@@ -318,9 +318,9 @@ Dictionary.prototype.getEmpty = function (options, callback) {
 
 /**
  * Put complex types with dictionary property which is empty
- * @param {DictionaryWrapper} complexBody Please put an empty dictionary
+ * @param {object} complexBody Please put an empty dictionary
  *
- * @param {Object} [complexBody.defaultProgram] 
+ * @param {object} [complexBody.defaultProgram] 
  *
  * @param {object} [options]
  *
@@ -329,7 +329,7 @@ Dictionary.prototype.getEmpty = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.putEmpty = function (complexBody, options, callback) {
   var client = this.client;
@@ -421,7 +421,7 @@ Dictionary.prototype.putEmpty = function (complexBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getNull = function (options, callback) {
   var client = this.client;
@@ -517,7 +517,7 @@ Dictionary.prototype.getNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Dictionary.prototype.getNotProvided = function (options, callback) {
   var client = this.client;

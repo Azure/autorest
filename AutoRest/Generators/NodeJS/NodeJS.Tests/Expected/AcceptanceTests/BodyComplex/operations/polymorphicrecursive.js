@@ -39,7 +39,7 @@ function Polymorphicrecursive(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Polymorphicrecursive.prototype.getValid = function (options, callback) {
   var client = this.client;
@@ -131,7 +131,7 @@ Polymorphicrecursive.prototype.getValid = function (options, callback) {
 
 /**
  * Put complex types that are polymorphic and have recursive references
- * @param {Fish} complexBody Please put a salmon that looks like this:
+ * @param {object} complexBody Please put a salmon that looks like this:
  {
      "dtype": "salmon",
      "species": "king",
@@ -185,11 +185,11 @@ Polymorphicrecursive.prototype.getValid = function (options, callback) {
      ]
  }
  *
- * @param {Number} [complexBody.length] 
+ * @param {number} [complexBody.length] 
  *
- * @param {Array} [complexBody.siblings] 
+ * @param {array} [complexBody.siblings] 
  *
- * @param {String} [complexBody.species] 
+ * @param {string} [complexBody.species] 
  *
  * @param {object} [options]
  *
@@ -198,7 +198,7 @@ Polymorphicrecursive.prototype.getValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Polymorphicrecursive.prototype.putValid = function (complexBody, options, callback) {
   var client = this.client;

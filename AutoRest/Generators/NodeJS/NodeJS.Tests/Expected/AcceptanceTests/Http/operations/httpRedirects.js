@@ -39,7 +39,7 @@ function HttpRedirects(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRedirects.prototype.head300 = function (options, callback) {
   var client = this.client;
@@ -118,7 +118,7 @@ HttpRedirects.prototype.head300 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRedirects.prototype.get300 = function (options, callback) {
   var client = this.client;
@@ -210,7 +210,7 @@ HttpRedirects.prototype.get300 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRedirects.prototype.head301 = function (options, callback) {
   var client = this.client;
@@ -289,7 +289,7 @@ HttpRedirects.prototype.head301 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRedirects.prototype.get301 = function (options, callback) {
   var client = this.client;
@@ -363,7 +363,7 @@ HttpRedirects.prototype.get301 = function (options, callback) {
  * Put true Boolean value in request returns 301.  This request should not be
  * automatically redirected, but should return the received 301 to the caller
  * for evaluation
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -372,7 +372,7 @@ HttpRedirects.prototype.get301 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRedirects.prototype.put301 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -462,7 +462,7 @@ HttpRedirects.prototype.put301 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRedirects.prototype.head302 = function (options, callback) {
   var client = this.client;
@@ -541,7 +541,7 @@ HttpRedirects.prototype.head302 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRedirects.prototype.get302 = function (options, callback) {
   var client = this.client;
@@ -615,7 +615,7 @@ HttpRedirects.prototype.get302 = function (options, callback) {
  * Patch true Boolean value in request returns 302.  This request should not
  * be automatically redirected, but should return the received 302 to the
  * caller for evaluation
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -624,7 +624,7 @@ HttpRedirects.prototype.get302 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRedirects.prototype.patch302 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -709,7 +709,7 @@ HttpRedirects.prototype.patch302 = function (booleanValue, options, callback) {
  * Post true Boolean value in request returns 303.  This request should be
  * automatically redirected usign a get, ultimately returning a 200 status
  * code
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -718,7 +718,7 @@ HttpRedirects.prototype.patch302 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRedirects.prototype.post303 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -808,7 +808,7 @@ HttpRedirects.prototype.post303 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRedirects.prototype.head307 = function (options, callback) {
   var client = this.client;
@@ -887,7 +887,7 @@ HttpRedirects.prototype.head307 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRedirects.prototype.get307 = function (options, callback) {
   var client = this.client;
@@ -959,7 +959,7 @@ HttpRedirects.prototype.get307 = function (options, callback) {
 
 /**
  * Put redirected with 307, resulting in a 200 after redirect
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -968,7 +968,7 @@ HttpRedirects.prototype.get307 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRedirects.prototype.put307 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -1051,7 +1051,7 @@ HttpRedirects.prototype.put307 = function (booleanValue, options, callback) {
 
 /**
  * Patch redirected with 307, resulting in a 200 after redirect
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -1060,7 +1060,7 @@ HttpRedirects.prototype.put307 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRedirects.prototype.patch307 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -1143,7 +1143,7 @@ HttpRedirects.prototype.patch307 = function (booleanValue, options, callback) {
 
 /**
  * Post redirected with 307, resulting in a 200 after redirect
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -1152,7 +1152,7 @@ HttpRedirects.prototype.patch307 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRedirects.prototype.post307 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -1235,7 +1235,7 @@ HttpRedirects.prototype.post307 = function (booleanValue, options, callback) {
 
 /**
  * Delete redirected with 307, resulting in a 200 after redirect
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -1244,7 +1244,7 @@ HttpRedirects.prototype.post307 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpRedirects.prototype.delete307 = function (booleanValue, options, callback) {
   var client = this.client;

@@ -39,7 +39,7 @@ function ArrayModel(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getValid = function (options, callback) {
   var client = this.client;
@@ -127,9 +127,9 @@ ArrayModel.prototype.getValid = function (options, callback) {
 
 /**
  * Put complex types with array property
- * @param {ArrayWrapper} complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&S#$(*Y", "The quick brown fox jumps over the lazy dog"
+ * @param {object} complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&S#$(*Y", "The quick brown fox jumps over the lazy dog"
  *
- * @param {Array} [complexBody.array] 
+ * @param {array} [complexBody.array] 
  *
  * @param {object} [options]
  *
@@ -138,7 +138,7 @@ ArrayModel.prototype.getValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.putValid = function (complexBody, options, callback) {
   var client = this.client;
@@ -230,7 +230,7 @@ ArrayModel.prototype.putValid = function (complexBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getEmpty = function (options, callback) {
   var client = this.client;
@@ -318,9 +318,9 @@ ArrayModel.prototype.getEmpty = function (options, callback) {
 
 /**
  * Put complex types with array property which is empty
- * @param {ArrayWrapper} complexBody Please put an empty array
+ * @param {object} complexBody Please put an empty array
  *
- * @param {Array} [complexBody.array] 
+ * @param {array} [complexBody.array] 
  *
  * @param {object} [options]
  *
@@ -329,7 +329,7 @@ ArrayModel.prototype.getEmpty = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.putEmpty = function (complexBody, options, callback) {
   var client = this.client;
@@ -422,7 +422,7 @@ ArrayModel.prototype.putEmpty = function (complexBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ArrayModel.prototype.getNotProvided = function (options, callback) {
   var client = this.client;

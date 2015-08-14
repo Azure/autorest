@@ -62,7 +62,7 @@ util.inherits(AutoRestResourceFlatteningTestService, ServiceClient);
 
 /**
  * Put External Resource as an Array
- * @param {Array} [resourceArray] External Resource as an Array to put
+ * @param {array} [resourceArray] External Resource as an Array to put
  *
  * @param {object} [options]
  *
@@ -71,7 +71,7 @@ util.inherits(AutoRestResourceFlatteningTestService, ServiceClient);
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 AutoRestResourceFlatteningTestService.prototype.putArray = function (resourceArray, options, callback) {
   var client = this;
@@ -177,7 +177,7 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (resourceArr
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 AutoRestResourceFlatteningTestService.prototype.getArray = function (options, callback) {
   var client = this;
@@ -286,7 +286,7 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
 
 /**
  * Put External Resource as a Dictionary
- * @param {Object} [resourceDictionary] External Resource as a Dictionary to put
+ * @param {object} [resourceDictionary] External Resource as a Dictionary to put
  *
  * @param {object} [options]
  *
@@ -295,7 +295,7 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resourceDictionary, options, callback) {
   var client = this;
@@ -401,7 +401,7 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resour
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 AutoRestResourceFlatteningTestService.prototype.getDictionary = function (options, callback) {
   var client = this;
@@ -510,21 +510,21 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
 
 /**
  * Put External Resource as a ResourceCollection
- * @param {ResourceCollection} [resourceComplexObject] External Resource as a ResourceCollection to put
+ * @param {object} [resourceComplexObject] External Resource as a ResourceCollection to put
  *
- * @param {Array} [resourceComplexObject.arrayofresources] 
+ * @param {array} [resourceComplexObject.arrayofresources] 
  *
- * @param {Object} [resourceComplexObject.dictionaryofresources] 
+ * @param {object} [resourceComplexObject.dictionaryofresources] 
  *
- * @param {FlattenedProduct} [resourceComplexObject.productresource] 
+ * @param {object} [resourceComplexObject.productresource] 
  *
- * @param {FlattenedProductProperties} [resourceComplexObject.productresource.properties] 
+ * @param {object} [resourceComplexObject.productresource.properties] 
  *
- * @param {String} [resourceComplexObject.productresource.properties.pname] 
+ * @param {string} [resourceComplexObject.productresource.properties.pname] 
  *
- * @param {String} [resourceComplexObject.productresource.properties.provisioningState] 
+ * @param {string} [resourceComplexObject.productresource.properties.provisioningState] 
  *
- * @param {String} [resourceComplexObject.productresource.properties.type] 
+ * @param {string} [resourceComplexObject.productresource.properties.type] 
  *
  * @param {object} [options]
  *
@@ -533,7 +533,7 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function (resourceComplexObject, options, callback) {
   var client = this;
@@ -635,7 +635,7 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function (options, callback) {
   var client = this;

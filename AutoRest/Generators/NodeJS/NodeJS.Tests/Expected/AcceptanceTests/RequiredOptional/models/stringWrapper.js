@@ -1,9 +1,5 @@
 'use strict';
 
-var util = require('util');
-
-var models = require('./index');
-
 /**
  * @class
  * Initializes a new instance of the StringWrapper class.

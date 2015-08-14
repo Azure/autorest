@@ -39,7 +39,7 @@ function Inheritance(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Inheritance.prototype.getValid = function (options, callback) {
   var client = this.client;
@@ -127,9 +127,9 @@ Inheritance.prototype.getValid = function (options, callback) {
 
 /**
  * Put complex types that extend others
- * @param {Siamese} complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
+ * @param {object} complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
  *
- * @param {String} [complexBody.breed] 
+ * @param {string} [complexBody.breed] 
  *
  * @param {object} [options]
  *
@@ -138,7 +138,7 @@ Inheritance.prototype.getValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Inheritance.prototype.putValid = function (complexBody, options, callback) {
   var client = this.client;

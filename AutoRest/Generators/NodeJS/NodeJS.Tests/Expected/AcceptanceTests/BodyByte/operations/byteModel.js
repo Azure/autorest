@@ -39,7 +39,7 @@ function ByteModel(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ByteModel.prototype.getNull = function (options, callback) {
   var client = this.client;
@@ -134,7 +134,7 @@ ByteModel.prototype.getNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ByteModel.prototype.getEmpty = function (options, callback) {
   var client = this.client;
@@ -229,7 +229,7 @@ ByteModel.prototype.getEmpty = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ByteModel.prototype.getNonAscii = function (options, callback) {
   var client = this.client;
@@ -317,7 +317,7 @@ ByteModel.prototype.getNonAscii = function (options, callback) {
 
 /**
  * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
- * @param {Buffer} byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
+ * @param {buffer} byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
  *
  * @param {object} [options]
  *
@@ -326,7 +326,7 @@ ByteModel.prototype.getNonAscii = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ByteModel.prototype.putNonAscii = function (byteBody, options, callback) {
   var client = this.client;
@@ -416,7 +416,7 @@ ByteModel.prototype.putNonAscii = function (byteBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ByteModel.prototype.getInvalid = function (options, callback) {
   var client = this.client;

@@ -39,7 +39,7 @@ function Number(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Number.prototype.getNull = function (options, callback) {
   var client = this.client;
@@ -131,7 +131,7 @@ Number.prototype.getNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Number.prototype.getInvalidFloat = function (options, callback) {
   var client = this.client;
@@ -223,7 +223,7 @@ Number.prototype.getInvalidFloat = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Number.prototype.getInvalidDouble = function (options, callback) {
   var client = this.client;
@@ -308,7 +308,7 @@ Number.prototype.getInvalidDouble = function (options, callback) {
 
 /**
  * Put big float value 3.402823e+20
- * @param {Number} numberBody 
+ * @param {number} numberBody 
  *
  * @param {object} [options]
  *
@@ -317,7 +317,7 @@ Number.prototype.getInvalidDouble = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Number.prototype.putBigFloat = function (numberBody, options, callback) {
   var client = this.client;
@@ -407,7 +407,7 @@ Number.prototype.putBigFloat = function (numberBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Number.prototype.getBigFloat = function (options, callback) {
   var client = this.client;
@@ -492,7 +492,7 @@ Number.prototype.getBigFloat = function (options, callback) {
 
 /**
  * Put big double value 2.5976931e+101
- * @param {Number} numberBody 
+ * @param {number} numberBody 
  *
  * @param {object} [options]
  *
@@ -501,7 +501,7 @@ Number.prototype.getBigFloat = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Number.prototype.putBigDouble = function (numberBody, options, callback) {
   var client = this.client;
@@ -591,7 +591,7 @@ Number.prototype.putBigDouble = function (numberBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Number.prototype.getBigDouble = function (options, callback) {
   var client = this.client;
@@ -676,7 +676,7 @@ Number.prototype.getBigDouble = function (options, callback) {
 
 /**
  * Put big double value 99999999.99
- * @param {Number} numberBody 
+ * @param {number} numberBody 
  *
  * @param {object} [options]
  *
@@ -685,7 +685,7 @@ Number.prototype.getBigDouble = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Number.prototype.putBigDoublePositiveDecimal = function (numberBody, options, callback) {
   var client = this.client;
@@ -775,7 +775,7 @@ Number.prototype.putBigDoublePositiveDecimal = function (numberBody, options, ca
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Number.prototype.getBigDoublePositiveDecimal = function (options, callback) {
   var client = this.client;
@@ -860,7 +860,7 @@ Number.prototype.getBigDoublePositiveDecimal = function (options, callback) {
 
 /**
  * Put big double value -99999999.99
- * @param {Number} numberBody 
+ * @param {number} numberBody 
  *
  * @param {object} [options]
  *
@@ -869,7 +869,7 @@ Number.prototype.getBigDoublePositiveDecimal = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Number.prototype.putBigDoubleNegativeDecimal = function (numberBody, options, callback) {
   var client = this.client;
@@ -959,7 +959,7 @@ Number.prototype.putBigDoubleNegativeDecimal = function (numberBody, options, ca
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Number.prototype.getBigDoubleNegativeDecimal = function (options, callback) {
   var client = this.client;
@@ -1044,7 +1044,7 @@ Number.prototype.getBigDoubleNegativeDecimal = function (options, callback) {
 
 /**
  * Put small float value 3.402823e-20
- * @param {Number} numberBody 
+ * @param {number} numberBody 
  *
  * @param {object} [options]
  *
@@ -1053,7 +1053,7 @@ Number.prototype.getBigDoubleNegativeDecimal = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Number.prototype.putSmallFloat = function (numberBody, options, callback) {
   var client = this.client;
@@ -1143,7 +1143,7 @@ Number.prototype.putSmallFloat = function (numberBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Number.prototype.getSmallFloat = function (options, callback) {
   var client = this.client;
@@ -1228,7 +1228,7 @@ Number.prototype.getSmallFloat = function (options, callback) {
 
 /**
  * Put small double value 2.5976931e-101
- * @param {Number} numberBody 
+ * @param {number} numberBody 
  *
  * @param {object} [options]
  *
@@ -1237,7 +1237,7 @@ Number.prototype.getSmallFloat = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Number.prototype.putSmallDouble = function (numberBody, options, callback) {
   var client = this.client;
@@ -1327,7 +1327,7 @@ Number.prototype.putSmallDouble = function (numberBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Number.prototype.getSmallDouble = function (options, callback) {
   var client = this.client;

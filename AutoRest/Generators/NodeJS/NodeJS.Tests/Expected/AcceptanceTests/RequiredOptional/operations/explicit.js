@@ -33,7 +33,7 @@ function Explicit(client) {
 /**
  * Test explicitly required integer. Please put null and the client library
  * should throw before the request is sent.
- * @param {Number} bodyParameter 
+ * @param {number} bodyParameter 
  *
  * @param {object} [options]
  *
@@ -42,7 +42,7 @@ function Explicit(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -138,7 +138,7 @@ Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, optio
 
 /**
  * Test explicitly optional integer. Please put null.
- * @param {Number} [bodyParameter] 
+ * @param {number} [bodyParameter] 
  *
  * @param {object} [options]
  *
@@ -147,7 +147,7 @@ Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, optio
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postOptionalIntegerParameter = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -232,9 +232,9 @@ Explicit.prototype.postOptionalIntegerParameter = function (bodyParameter, optio
  * Test explicitly required integer. Please put a valid int-wrapper with
  * 'value' = null and the client library should throw before the request is
  * sent.
- * @param {IntWrapper} bodyParameter 
+ * @param {object} bodyParameter 
  *
- * @param {Number} [bodyParameter.value] 
+ * @param {number} [bodyParameter.value] 
  *
  * @param {object} [options]
  *
@@ -243,7 +243,7 @@ Explicit.prototype.postOptionalIntegerParameter = function (bodyParameter, optio
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postRequiredIntegerProperty = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -342,9 +342,9 @@ Explicit.prototype.postRequiredIntegerProperty = function (bodyParameter, option
 /**
  * Test explicitly optional integer. Please put a valid int-wrapper with
  * 'value' = null.
- * @param {IntOptionalWrapper} [bodyParameter] 
+ * @param {object} [bodyParameter] 
  *
- * @param {Number} [bodyParameter.value] 
+ * @param {number} [bodyParameter.value] 
  *
  * @param {object} [options]
  *
@@ -353,7 +353,7 @@ Explicit.prototype.postRequiredIntegerProperty = function (bodyParameter, option
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postOptionalIntegerProperty = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -437,7 +437,7 @@ Explicit.prototype.postOptionalIntegerProperty = function (bodyParameter, option
 /**
  * Test explicitly required integer. Please put a header 'headerParameter' =>
  * null and the client library should throw before the request is sent.
- * @param {Number} headerParameter 
+ * @param {number} headerParameter 
  *
  * @param {object} [options]
  *
@@ -446,7 +446,7 @@ Explicit.prototype.postOptionalIntegerProperty = function (bodyParameter, option
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postRequiredIntegerHeader = function (headerParameter, options, callback) {
   var client = this.client;
@@ -543,7 +543,7 @@ Explicit.prototype.postRequiredIntegerHeader = function (headerParameter, option
 /**
  * Test explicitly optional integer. Please put a header 'headerParameter' =>
  * null.
- * @param {Number} [headerParameter] 
+ * @param {number} [headerParameter] 
  *
  * @param {object} [options]
  *
@@ -552,7 +552,7 @@ Explicit.prototype.postRequiredIntegerHeader = function (headerParameter, option
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postOptionalIntegerHeader = function (headerParameter, options, callback) {
   var client = this.client;
@@ -636,7 +636,7 @@ Explicit.prototype.postOptionalIntegerHeader = function (headerParameter, option
 /**
  * Test explicitly required string. Please put null and the client library
  * should throw before the request is sent.
- * @param {String} bodyParameter 
+ * @param {string} bodyParameter 
  *
  * @param {object} [options]
  *
@@ -645,7 +645,7 @@ Explicit.prototype.postOptionalIntegerHeader = function (headerParameter, option
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postRequiredStringParameter = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -741,7 +741,7 @@ Explicit.prototype.postRequiredStringParameter = function (bodyParameter, option
 
 /**
  * Test explicitly optional string. Please put null.
- * @param {String} [bodyParameter] 
+ * @param {string} [bodyParameter] 
  *
  * @param {object} [options]
  *
@@ -750,7 +750,7 @@ Explicit.prototype.postRequiredStringParameter = function (bodyParameter, option
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postOptionalStringParameter = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -835,9 +835,9 @@ Explicit.prototype.postOptionalStringParameter = function (bodyParameter, option
  * Test explicitly required string. Please put a valid string-wrapper with
  * 'value' = null and the client library should throw before the request is
  * sent.
- * @param {StringWrapper} bodyParameter 
+ * @param {object} bodyParameter 
  *
- * @param {String} [bodyParameter.value] 
+ * @param {string} [bodyParameter.value] 
  *
  * @param {object} [options]
  *
@@ -846,7 +846,7 @@ Explicit.prototype.postOptionalStringParameter = function (bodyParameter, option
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postRequiredStringProperty = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -945,9 +945,9 @@ Explicit.prototype.postRequiredStringProperty = function (bodyParameter, options
 /**
  * Test explicitly optional integer. Please put a valid string-wrapper with
  * 'value' = null.
- * @param {StringOptionalWrapper} [bodyParameter] 
+ * @param {object} [bodyParameter] 
  *
- * @param {String} [bodyParameter.value] 
+ * @param {string} [bodyParameter.value] 
  *
  * @param {object} [options]
  *
@@ -956,7 +956,7 @@ Explicit.prototype.postRequiredStringProperty = function (bodyParameter, options
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postOptionalStringProperty = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -1040,7 +1040,7 @@ Explicit.prototype.postOptionalStringProperty = function (bodyParameter, options
 /**
  * Test explicitly required string. Please put a header 'headerParameter' =>
  * null and the client library should throw before the request is sent.
- * @param {String} headerParameter 
+ * @param {string} headerParameter 
  *
  * @param {object} [options]
  *
@@ -1049,7 +1049,7 @@ Explicit.prototype.postOptionalStringProperty = function (bodyParameter, options
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postRequiredStringHeader = function (headerParameter, options, callback) {
   var client = this.client;
@@ -1146,7 +1146,7 @@ Explicit.prototype.postRequiredStringHeader = function (headerParameter, options
 /**
  * Test explicitly optional string. Please put a header 'headerParameter' =>
  * null.
- * @param {String} [bodyParameter] 
+ * @param {string} [bodyParameter] 
  *
  * @param {object} [options]
  *
@@ -1155,7 +1155,7 @@ Explicit.prototype.postRequiredStringHeader = function (headerParameter, options
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postOptionalStringHeader = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -1239,11 +1239,11 @@ Explicit.prototype.postOptionalStringHeader = function (bodyParameter, options, 
 /**
  * Test explicitly required complex object. Please put null and the client
  * library should throw before the request is sent.
- * @param {Product} bodyParameter 
+ * @param {object} bodyParameter 
  *
- * @param {Number} [bodyParameter.id] 
+ * @param {number} [bodyParameter.id] 
  *
- * @param {String} [bodyParameter.name] 
+ * @param {string} [bodyParameter.name] 
  *
  * @param {object} [options]
  *
@@ -1252,7 +1252,7 @@ Explicit.prototype.postOptionalStringHeader = function (bodyParameter, options, 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -1350,11 +1350,11 @@ Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options
 
 /**
  * Test explicitly optional complex object. Please put null.
- * @param {Product} [bodyParameter] 
+ * @param {object} [bodyParameter] 
  *
- * @param {Number} [bodyParameter.id] 
+ * @param {number} [bodyParameter.id] 
  *
- * @param {String} [bodyParameter.name] 
+ * @param {string} [bodyParameter.name] 
  *
  * @param {object} [options]
  *
@@ -1363,7 +1363,7 @@ Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postOptionalClassParameter = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -1448,13 +1448,13 @@ Explicit.prototype.postOptionalClassParameter = function (bodyParameter, options
  * Test explicitly required complex object. Please put a valid class-wrapper
  * with 'value' = null and the client library should throw before the request
  * is sent.
- * @param {ClassWrapper} bodyParameter 
+ * @param {object} bodyParameter 
  *
- * @param {Product} [bodyParameter.value] 
+ * @param {object} [bodyParameter.value] 
  *
- * @param {Number} [bodyParameter.value.id] 
+ * @param {number} [bodyParameter.value.id] 
  *
- * @param {String} [bodyParameter.value.name] 
+ * @param {string} [bodyParameter.value.name] 
  *
  * @param {object} [options]
  *
@@ -1463,7 +1463,7 @@ Explicit.prototype.postOptionalClassParameter = function (bodyParameter, options
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postRequiredClassProperty = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -1562,13 +1562,13 @@ Explicit.prototype.postRequiredClassProperty = function (bodyParameter, options,
 /**
  * Test explicitly optional complex object. Please put a valid class-wrapper
  * with 'value' = null.
- * @param {ClassOptionalWrapper} [bodyParameter] 
+ * @param {object} [bodyParameter] 
  *
- * @param {Product} [bodyParameter.value] 
+ * @param {object} [bodyParameter.value] 
  *
- * @param {Number} [bodyParameter.value.id] 
+ * @param {number} [bodyParameter.value.id] 
  *
- * @param {String} [bodyParameter.value.name] 
+ * @param {string} [bodyParameter.value.name] 
  *
  * @param {object} [options]
  *
@@ -1577,7 +1577,7 @@ Explicit.prototype.postRequiredClassProperty = function (bodyParameter, options,
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postOptionalClassProperty = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -1661,7 +1661,7 @@ Explicit.prototype.postOptionalClassProperty = function (bodyParameter, options,
 /**
  * Test explicitly required array. Please put null and the client library
  * should throw before the request is sent.
- * @param {Array} bodyParameter 
+ * @param {array} bodyParameter 
  *
  * @param {object} [options]
  *
@@ -1670,7 +1670,7 @@ Explicit.prototype.postOptionalClassProperty = function (bodyParameter, options,
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -1771,7 +1771,7 @@ Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, options
 
 /**
  * Test explicitly optional array. Please put null.
- * @param {Array} [bodyParameter] 
+ * @param {array} [bodyParameter] 
  *
  * @param {object} [options]
  *
@@ -1780,7 +1780,7 @@ Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, options
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postOptionalArrayParameter = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -1869,9 +1869,9 @@ Explicit.prototype.postOptionalArrayParameter = function (bodyParameter, options
  * Test explicitly required array. Please put a valid array-wrapper with
  * 'value' = null and the client library should throw before the request is
  * sent.
- * @param {ArrayWrapper} bodyParameter 
+ * @param {object} bodyParameter 
  *
- * @param {Array} [bodyParameter.value] 
+ * @param {array} [bodyParameter.value] 
  *
  * @param {object} [options]
  *
@@ -1880,7 +1880,7 @@ Explicit.prototype.postOptionalArrayParameter = function (bodyParameter, options
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postRequiredArrayProperty = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -1979,9 +1979,9 @@ Explicit.prototype.postRequiredArrayProperty = function (bodyParameter, options,
 /**
  * Test explicitly optional array. Please put a valid array-wrapper with
  * 'value' = null.
- * @param {ArrayOptionalWrapper} [bodyParameter] 
+ * @param {object} [bodyParameter] 
  *
- * @param {Array} [bodyParameter.value] 
+ * @param {array} [bodyParameter.value] 
  *
  * @param {object} [options]
  *
@@ -1990,7 +1990,7 @@ Explicit.prototype.postRequiredArrayProperty = function (bodyParameter, options,
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postOptionalArrayProperty = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -2074,7 +2074,7 @@ Explicit.prototype.postOptionalArrayProperty = function (bodyParameter, options,
 /**
  * Test explicitly required array. Please put a header 'headerParameter' =>
  * null and the client library should throw before the request is sent.
- * @param {Array} headerParameter 
+ * @param {array} headerParameter 
  *
  * @param {object} [options]
  *
@@ -2083,7 +2083,7 @@ Explicit.prototype.postOptionalArrayProperty = function (bodyParameter, options,
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postRequiredArrayHeader = function (headerParameter, options, callback) {
   var client = this.client;
@@ -2185,7 +2185,7 @@ Explicit.prototype.postRequiredArrayHeader = function (headerParameter, options,
 /**
  * Test explicitly optional integer. Please put a header 'headerParameter' =>
  * null.
- * @param {Array} [headerParameter] 
+ * @param {array} [headerParameter] 
  *
  * @param {object} [options]
  *
@@ -2194,7 +2194,7 @@ Explicit.prototype.postRequiredArrayHeader = function (headerParameter, options,
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Explicit.prototype.postOptionalArrayHeader = function (headerParameter, options, callback) {
   var client = this.client;

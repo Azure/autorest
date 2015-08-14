@@ -39,7 +39,7 @@ function HttpClientFailure(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpClientFailure.prototype.head400 = function (options, callback) {
   var client = this.client;
@@ -131,7 +131,7 @@ HttpClientFailure.prototype.head400 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpClientFailure.prototype.get400 = function (options, callback) {
   var client = this.client;
@@ -216,7 +216,7 @@ HttpClientFailure.prototype.get400 = function (options, callback) {
 
 /**
  * Return 400 status code - should be represented in the client as an error
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -225,7 +225,7 @@ HttpClientFailure.prototype.get400 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpClientFailure.prototype.put400 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -321,7 +321,7 @@ HttpClientFailure.prototype.put400 = function (booleanValue, options, callback) 
 
 /**
  * Return 400 status code - should be represented in the client as an error
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -330,7 +330,7 @@ HttpClientFailure.prototype.put400 = function (booleanValue, options, callback) 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpClientFailure.prototype.patch400 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -426,7 +426,7 @@ HttpClientFailure.prototype.patch400 = function (booleanValue, options, callback
 
 /**
  * Return 400 status code - should be represented in the client as an error
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -435,7 +435,7 @@ HttpClientFailure.prototype.patch400 = function (booleanValue, options, callback
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpClientFailure.prototype.post400 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -531,7 +531,7 @@ HttpClientFailure.prototype.post400 = function (booleanValue, options, callback)
 
 /**
  * Return 400 status code - should be represented in the client as an error
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -540,7 +540,7 @@ HttpClientFailure.prototype.post400 = function (booleanValue, options, callback)
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpClientFailure.prototype.delete400 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -643,7 +643,7 @@ HttpClientFailure.prototype.delete400 = function (booleanValue, options, callbac
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpClientFailure.prototype.head401 = function (options, callback) {
   var client = this.client;
@@ -735,7 +735,7 @@ HttpClientFailure.prototype.head401 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpClientFailure.prototype.get402 = function (options, callback) {
   var client = this.client;
@@ -827,7 +827,7 @@ HttpClientFailure.prototype.get402 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpClientFailure.prototype.get403 = function (options, callback) {
   var client = this.client;
@@ -912,7 +912,7 @@ HttpClientFailure.prototype.get403 = function (options, callback) {
 
 /**
  * Return 404 status code - should be represented in the client as an error
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -921,7 +921,7 @@ HttpClientFailure.prototype.get403 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpClientFailure.prototype.put404 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -1017,7 +1017,7 @@ HttpClientFailure.prototype.put404 = function (booleanValue, options, callback) 
 
 /**
  * Return 405 status code - should be represented in the client as an error
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -1026,7 +1026,7 @@ HttpClientFailure.prototype.put404 = function (booleanValue, options, callback) 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpClientFailure.prototype.patch405 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -1122,7 +1122,7 @@ HttpClientFailure.prototype.patch405 = function (booleanValue, options, callback
 
 /**
  * Return 406 status code - should be represented in the client as an error
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -1131,7 +1131,7 @@ HttpClientFailure.prototype.patch405 = function (booleanValue, options, callback
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpClientFailure.prototype.post406 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -1227,7 +1227,7 @@ HttpClientFailure.prototype.post406 = function (booleanValue, options, callback)
 
 /**
  * Return 407 status code - should be represented in the client as an error
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -1236,7 +1236,7 @@ HttpClientFailure.prototype.post406 = function (booleanValue, options, callback)
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpClientFailure.prototype.delete407 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -1332,7 +1332,7 @@ HttpClientFailure.prototype.delete407 = function (booleanValue, options, callbac
 
 /**
  * Return 409 status code - should be represented in the client as an error
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -1341,7 +1341,7 @@ HttpClientFailure.prototype.delete407 = function (booleanValue, options, callbac
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpClientFailure.prototype.put409 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -1444,7 +1444,7 @@ HttpClientFailure.prototype.put409 = function (booleanValue, options, callback) 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpClientFailure.prototype.head410 = function (options, callback) {
   var client = this.client;
@@ -1536,7 +1536,7 @@ HttpClientFailure.prototype.head410 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpClientFailure.prototype.get411 = function (options, callback) {
   var client = this.client;
@@ -1628,7 +1628,7 @@ HttpClientFailure.prototype.get411 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpClientFailure.prototype.get412 = function (options, callback) {
   var client = this.client;
@@ -1713,7 +1713,7 @@ HttpClientFailure.prototype.get412 = function (options, callback) {
 
 /**
  * Return 413 status code - should be represented in the client as an error
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -1722,7 +1722,7 @@ HttpClientFailure.prototype.get412 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpClientFailure.prototype.put413 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -1818,7 +1818,7 @@ HttpClientFailure.prototype.put413 = function (booleanValue, options, callback) 
 
 /**
  * Return 414 status code - should be represented in the client as an error
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -1827,7 +1827,7 @@ HttpClientFailure.prototype.put413 = function (booleanValue, options, callback) 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpClientFailure.prototype.patch414 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -1923,7 +1923,7 @@ HttpClientFailure.prototype.patch414 = function (booleanValue, options, callback
 
 /**
  * Return 415 status code - should be represented in the client as an error
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -1932,7 +1932,7 @@ HttpClientFailure.prototype.patch414 = function (booleanValue, options, callback
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpClientFailure.prototype.post415 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -2035,7 +2035,7 @@ HttpClientFailure.prototype.post415 = function (booleanValue, options, callback)
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpClientFailure.prototype.get416 = function (options, callback) {
   var client = this.client;
@@ -2120,7 +2120,7 @@ HttpClientFailure.prototype.get416 = function (options, callback) {
 
 /**
  * Return 417 status code - should be represented in the client as an error
- * @param {Boolean} [booleanValue] Simple boolean value true
+ * @param {boolean} [booleanValue] Simple boolean value true
  *
  * @param {object} [options]
  *
@@ -2129,7 +2129,7 @@ HttpClientFailure.prototype.get416 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpClientFailure.prototype.delete417 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -2232,7 +2232,7 @@ HttpClientFailure.prototype.delete417 = function (booleanValue, options, callbac
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpClientFailure.prototype.head429 = function (options, callback) {
   var client = this.client;

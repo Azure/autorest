@@ -35,11 +35,11 @@ function LROs(client) {
  *
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Succeeded’.
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -48,7 +48,7 @@ function LROs(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.put200Succeeded = function (product, options, callback) {
   var client = this.client;
@@ -76,11 +76,11 @@ LROs.prototype.put200Succeeded = function (product, options, callback) {
 /**
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Succeeded’.
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -89,7 +89,7 @@ LROs.prototype.put200Succeeded = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginPut200Succeeded = function (product, options, callback) {
   var client = this.client;
@@ -208,7 +208,7 @@ LROs.prototype.beginPut200Succeeded = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.get200Succeeded = function (options, callback) {
   var client = this.client;
@@ -315,11 +315,11 @@ LROs.prototype.get200Succeeded = function (options, callback) {
  *
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that does not contain ProvisioningState=’Succeeded’.
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -328,7 +328,7 @@ LROs.prototype.get200Succeeded = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.put200SucceededNoState = function (product, options, callback) {
   var client = this.client;
@@ -356,11 +356,11 @@ LROs.prototype.put200SucceededNoState = function (product, options, callback) {
 /**
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that does not contain ProvisioningState=’Succeeded’.
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -369,7 +369,7 @@ LROs.prototype.put200SucceededNoState = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginPut200SucceededNoState = function (product, options, callback) {
   var client = this.client;
@@ -488,7 +488,7 @@ LROs.prototype.beginPut200SucceededNoState = function (product, options, callbac
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.get200SucceededNoState = function (options, callback) {
   var client = this.client;
@@ -596,11 +596,11 @@ LROs.prototype.get200SucceededNoState = function (options, callback) {
  * Long running put request, service returns a 202 to the initial request,
  * with a location header that points to a polling URL that returns a 200 and
  * an entity that doesn't contains ProvisioningState
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -609,7 +609,7 @@ LROs.prototype.get200SucceededNoState = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.put202Retry200 = function (product, options, callback) {
   var client = this.client;
@@ -638,11 +638,11 @@ LROs.prototype.put202Retry200 = function (product, options, callback) {
  * Long running put request, service returns a 202 to the initial request,
  * with a location header that points to a polling URL that returns a 200 and
  * an entity that doesn't contains ProvisioningState
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -651,7 +651,7 @@ LROs.prototype.put202Retry200 = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginPut202Retry200 = function (product, options, callback) {
   var client = this.client;
@@ -770,7 +770,7 @@ LROs.prototype.beginPut202Retry200 = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.getPut202Retry200 = function (options, callback) {
   var client = this.client;
@@ -879,11 +879,11 @@ LROs.prototype.getPut202Retry200 = function (options, callback) {
  * with an entity that contains ProvisioningState=’Creating’.  Polls return
  * this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Succeeded’
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -892,7 +892,7 @@ LROs.prototype.getPut202Retry200 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.put201CreatingSucceeded200 = function (product, options, callback) {
   var client = this.client;
@@ -922,11 +922,11 @@ LROs.prototype.put201CreatingSucceeded200 = function (product, options, callback
  * with an entity that contains ProvisioningState=’Creating’.  Polls return
  * this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Succeeded’
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -935,7 +935,7 @@ LROs.prototype.put201CreatingSucceeded200 = function (product, options, callback
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginPut201CreatingSucceeded200 = function (product, options, callback) {
   var client = this.client;
@@ -1070,7 +1070,7 @@ LROs.prototype.beginPut201CreatingSucceeded200 = function (product, options, cal
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.get201CreatingSucceeded200Polling = function (options, callback) {
   var client = this.client;
@@ -1179,11 +1179,11 @@ LROs.prototype.get201CreatingSucceeded200Polling = function (options, callback) 
  * with an entity that contains ProvisioningState=’Updating’.  Polls return
  * this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Succeeded’
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -1192,7 +1192,7 @@ LROs.prototype.get201CreatingSucceeded200Polling = function (options, callback) 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.put200UpdatingSucceeded204 = function (product, options, callback) {
   var client = this.client;
@@ -1222,11 +1222,11 @@ LROs.prototype.put200UpdatingSucceeded204 = function (product, options, callback
  * with an entity that contains ProvisioningState=’Updating’.  Polls return
  * this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Succeeded’
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -1235,7 +1235,7 @@ LROs.prototype.put200UpdatingSucceeded204 = function (product, options, callback
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginPut200UpdatingSucceeded204 = function (product, options, callback) {
   var client = this.client;
@@ -1353,7 +1353,7 @@ LROs.prototype.beginPut200UpdatingSucceeded204 = function (product, options, cal
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.get200CreatingSucceeded200Poll = function (options, callback) {
   var client = this.client;
@@ -1462,11 +1462,11 @@ LROs.prototype.get200CreatingSucceeded200Poll = function (options, callback) {
  * with an entity that contains ProvisioningState=’Created’.  Polls return
  * this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Failed’
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -1475,7 +1475,7 @@ LROs.prototype.get200CreatingSucceeded200Poll = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.put201CreatingFailed200 = function (product, options, callback) {
   var client = this.client;
@@ -1505,11 +1505,11 @@ LROs.prototype.put201CreatingFailed200 = function (product, options, callback) {
  * with an entity that contains ProvisioningState=’Created’.  Polls return
  * this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Failed’
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -1518,7 +1518,7 @@ LROs.prototype.put201CreatingFailed200 = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginPut201CreatingFailed200 = function (product, options, callback) {
   var client = this.client;
@@ -1653,7 +1653,7 @@ LROs.prototype.beginPut201CreatingFailed200 = function (product, options, callba
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.get201CreatingFailed200Polling = function (options, callback) {
   var client = this.client;
@@ -1762,11 +1762,11 @@ LROs.prototype.get201CreatingFailed200Polling = function (options, callback) {
  * with an entity that contains ProvisioningState=’Creating’.  Polls return
  * this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Canceled’
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -1775,7 +1775,7 @@ LROs.prototype.get201CreatingFailed200Polling = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.put200Acceptedcanceled200 = function (product, options, callback) {
   var client = this.client;
@@ -1805,11 +1805,11 @@ LROs.prototype.put200Acceptedcanceled200 = function (product, options, callback)
  * with an entity that contains ProvisioningState=’Creating’.  Polls return
  * this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Canceled’
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -1818,7 +1818,7 @@ LROs.prototype.put200Acceptedcanceled200 = function (product, options, callback)
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginPut200Acceptedcanceled200 = function (product, options, callback) {
   var client = this.client;
@@ -1936,7 +1936,7 @@ LROs.prototype.beginPut200Acceptedcanceled200 = function (product, options, call
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.get200Acceptedcanceled200Poll = function (options, callback) {
   var client = this.client;
@@ -2044,11 +2044,11 @@ LROs.prototype.get200Acceptedcanceled200Poll = function (options, callback) {
  * Long running put request, service returns a 202 to the initial request with
  * location header. Subsequent calls to operation status do not contain
  * location header.
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -2057,7 +2057,7 @@ LROs.prototype.get200Acceptedcanceled200Poll = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.putNoHeaderInRetry = function (product, options, callback) {
   var client = this.client;
@@ -2086,11 +2086,11 @@ LROs.prototype.putNoHeaderInRetry = function (product, options, callback) {
  * Long running put request, service returns a 202 to the initial request with
  * location header. Subsequent calls to operation status do not contain
  * location header.
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -2099,7 +2099,7 @@ LROs.prototype.putNoHeaderInRetry = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginPutNoHeaderInRetry = function (product, options, callback) {
   var client = this.client;
@@ -2218,7 +2218,7 @@ LROs.prototype.beginPutNoHeaderInRetry = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.getPutNoHeaderInRetry = function (options, callback) {
   var client = this.client;
@@ -2326,11 +2326,11 @@ LROs.prototype.getPutNoHeaderInRetry = function (options, callback) {
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -2339,7 +2339,7 @@ LROs.prototype.getPutNoHeaderInRetry = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.putAsyncRetrySucceeded = function (product, options, callback) {
   var client = this.client;
@@ -2368,11 +2368,11 @@ LROs.prototype.putAsyncRetrySucceeded = function (product, options, callback) {
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -2381,7 +2381,7 @@ LROs.prototype.putAsyncRetrySucceeded = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginPutAsyncRetrySucceeded = function (product, options, callback) {
   var client = this.client;
@@ -2501,7 +2501,7 @@ LROs.prototype.beginPutAsyncRetrySucceeded = function (product, options, callbac
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.getAsyncRetrySucceeded = function (options, callback) {
   var client = this.client;
@@ -2609,11 +2609,11 @@ LROs.prototype.getAsyncRetrySucceeded = function (options, callback) {
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -2622,7 +2622,7 @@ LROs.prototype.getAsyncRetrySucceeded = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.putAsyncNoRetrySucceeded = function (product, options, callback) {
   var client = this.client;
@@ -2651,11 +2651,11 @@ LROs.prototype.putAsyncNoRetrySucceeded = function (product, options, callback) 
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -2664,7 +2664,7 @@ LROs.prototype.putAsyncNoRetrySucceeded = function (product, options, callback) 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginPutAsyncNoRetrySucceeded = function (product, options, callback) {
   var client = this.client;
@@ -2784,7 +2784,7 @@ LROs.prototype.beginPutAsyncNoRetrySucceeded = function (product, options, callb
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.getAsyncNoRetrySucceeded = function (options, callback) {
   var client = this.client;
@@ -2892,11 +2892,11 @@ LROs.prototype.getAsyncNoRetrySucceeded = function (options, callback) {
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -2905,7 +2905,7 @@ LROs.prototype.getAsyncNoRetrySucceeded = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.putAsyncRetryFailed = function (product, options, callback) {
   var client = this.client;
@@ -2934,11 +2934,11 @@ LROs.prototype.putAsyncRetryFailed = function (product, options, callback) {
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -2947,7 +2947,7 @@ LROs.prototype.putAsyncRetryFailed = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginPutAsyncRetryFailed = function (product, options, callback) {
   var client = this.client;
@@ -3067,7 +3067,7 @@ LROs.prototype.beginPutAsyncRetryFailed = function (product, options, callback) 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.getAsyncRetryFailed = function (options, callback) {
   var client = this.client;
@@ -3175,11 +3175,11 @@ LROs.prototype.getAsyncRetryFailed = function (options, callback) {
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -3188,7 +3188,7 @@ LROs.prototype.getAsyncRetryFailed = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.putAsyncNoRetrycanceled = function (product, options, callback) {
   var client = this.client;
@@ -3217,11 +3217,11 @@ LROs.prototype.putAsyncNoRetrycanceled = function (product, options, callback) {
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -3230,7 +3230,7 @@ LROs.prototype.putAsyncNoRetrycanceled = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginPutAsyncNoRetrycanceled = function (product, options, callback) {
   var client = this.client;
@@ -3350,7 +3350,7 @@ LROs.prototype.beginPutAsyncNoRetrycanceled = function (product, options, callba
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.getAsyncNoRetrycanceled = function (options, callback) {
   var client = this.client;
@@ -3458,11 +3458,11 @@ LROs.prototype.getAsyncNoRetrycanceled = function (options, callback) {
  * Long running put request, service returns a 202 to the initial request with
  * Azure-AsyncOperation header. Subsequent calls to operation status do not
  * contain Azure-AsyncOperation header.
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -3471,7 +3471,7 @@ LROs.prototype.getAsyncNoRetrycanceled = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.putAsyncNoHeaderInRetry = function (product, options, callback) {
   var client = this.client;
@@ -3500,11 +3500,11 @@ LROs.prototype.putAsyncNoHeaderInRetry = function (product, options, callback) {
  * Long running put request, service returns a 202 to the initial request with
  * Azure-AsyncOperation header. Subsequent calls to operation status do not
  * contain Azure-AsyncOperation header.
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -3513,7 +3513,7 @@ LROs.prototype.putAsyncNoHeaderInRetry = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginPutAsyncNoHeaderInRetry = function (product, options, callback) {
   var client = this.client;
@@ -3631,7 +3631,7 @@ LROs.prototype.beginPutAsyncNoHeaderInRetry = function (product, options, callba
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.getPutAsyncNoHeaderInRetry = function (options, callback) {
   var client = this.client;
@@ -3737,11 +3737,11 @@ LROs.prototype.getPutAsyncNoHeaderInRetry = function (options, callback) {
 /**
  *
  * Long running put request with non resource.
- * @param {Sku} [sku] sku to put
+ * @param {object} [sku] sku to put
  *
- * @param {String} [sku.id] 
+ * @param {string} [sku.id] 
  *
- * @param {String} [sku.name] 
+ * @param {string} [sku.name] 
  *
  * @param {object} [options]
  *
@@ -3750,7 +3750,7 @@ LROs.prototype.getPutAsyncNoHeaderInRetry = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.putNonResource = function (sku, options, callback) {
   var client = this.client;
@@ -3777,11 +3777,11 @@ LROs.prototype.putNonResource = function (sku, options, callback) {
 
 /**
  * Long running put request with non resource.
- * @param {Sku} [sku] sku to put
+ * @param {object} [sku] sku to put
  *
- * @param {String} [sku.id] 
+ * @param {string} [sku.id] 
  *
- * @param {String} [sku.name] 
+ * @param {string} [sku.name] 
  *
  * @param {object} [options]
  *
@@ -3790,7 +3790,7 @@ LROs.prototype.putNonResource = function (sku, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginPutNonResource = function (sku, options, callback) {
   var client = this.client;
@@ -3908,7 +3908,7 @@ LROs.prototype.beginPutNonResource = function (sku, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.getNonResource = function (options, callback) {
   var client = this.client;
@@ -4014,11 +4014,11 @@ LROs.prototype.getNonResource = function (options, callback) {
 /**
  *
  * Long running put request with non resource.
- * @param {Sku} [sku] Sku to put
+ * @param {object} [sku] Sku to put
  *
- * @param {String} [sku.id] 
+ * @param {string} [sku.id] 
  *
- * @param {String} [sku.name] 
+ * @param {string} [sku.name] 
  *
  * @param {object} [options]
  *
@@ -4027,7 +4027,7 @@ LROs.prototype.getNonResource = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.putAsyncNonResource = function (sku, options, callback) {
   var client = this.client;
@@ -4054,11 +4054,11 @@ LROs.prototype.putAsyncNonResource = function (sku, options, callback) {
 
 /**
  * Long running put request with non resource.
- * @param {Sku} [sku] Sku to put
+ * @param {object} [sku] Sku to put
  *
- * @param {String} [sku.id] 
+ * @param {string} [sku.id] 
  *
- * @param {String} [sku.name] 
+ * @param {string} [sku.name] 
  *
  * @param {object} [options]
  *
@@ -4067,7 +4067,7 @@ LROs.prototype.putAsyncNonResource = function (sku, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginPutAsyncNonResource = function (sku, options, callback) {
   var client = this.client;
@@ -4185,7 +4185,7 @@ LROs.prototype.beginPutAsyncNonResource = function (sku, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.getAsyncNonResource = function (options, callback) {
   var client = this.client;
@@ -4291,11 +4291,11 @@ LROs.prototype.getAsyncNonResource = function (options, callback) {
 /**
  *
  * Long running put request with sub resource.
- * @param {SubProduct} [product] Sub Product to put
+ * @param {object} [product] Sub Product to put
  *
- * @param {SubProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -4304,7 +4304,7 @@ LROs.prototype.getAsyncNonResource = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.putSubResource = function (product, options, callback) {
   var client = this.client;
@@ -4331,11 +4331,11 @@ LROs.prototype.putSubResource = function (product, options, callback) {
 
 /**
  * Long running put request with sub resource.
- * @param {SubProduct} [product] Sub Product to put
+ * @param {object} [product] Sub Product to put
  *
- * @param {SubProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -4344,7 +4344,7 @@ LROs.prototype.putSubResource = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginPutSubResource = function (product, options, callback) {
   var client = this.client;
@@ -4462,7 +4462,7 @@ LROs.prototype.beginPutSubResource = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.getSubResource = function (options, callback) {
   var client = this.client;
@@ -4568,11 +4568,11 @@ LROs.prototype.getSubResource = function (options, callback) {
 /**
  *
  * Long running put request with sub resource.
- * @param {SubProduct} [product] Sub Product to put
+ * @param {object} [product] Sub Product to put
  *
- * @param {SubProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -4581,7 +4581,7 @@ LROs.prototype.getSubResource = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.putAsyncSubResource = function (product, options, callback) {
   var client = this.client;
@@ -4608,11 +4608,11 @@ LROs.prototype.putAsyncSubResource = function (product, options, callback) {
 
 /**
  * Long running put request with sub resource.
- * @param {SubProduct} [product] Sub Product to put
+ * @param {object} [product] Sub Product to put
  *
- * @param {SubProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -4621,7 +4621,7 @@ LROs.prototype.putAsyncSubResource = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginPutAsyncSubResource = function (product, options, callback) {
   var client = this.client;
@@ -4739,7 +4739,7 @@ LROs.prototype.beginPutAsyncSubResource = function (product, options, callback) 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.getAsyncSubResource = function (options, callback) {
   var client = this.client;
@@ -4855,7 +4855,7 @@ LROs.prototype.getAsyncSubResource = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.deleteProvisioning202Accepted200Succeeded = function (options, callback) {
   var self = this.client;
@@ -4882,7 +4882,7 @@ LROs.prototype.deleteProvisioning202Accepted200Succeeded = function (options, ca
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (options, callback) {
   var client = this.client;
@@ -5014,7 +5014,7 @@ LROs.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (option
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.deleteProvisioning202DeletingFailed200 = function (options, callback) {
   var self = this.client;
@@ -5041,7 +5041,7 @@ LROs.prototype.deleteProvisioning202DeletingFailed200 = function (options, callb
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginDeleteProvisioning202DeletingFailed200 = function (options, callback) {
   var client = this.client;
@@ -5173,7 +5173,7 @@ LROs.prototype.beginDeleteProvisioning202DeletingFailed200 = function (options, 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.deleteProvisioning202Deletingcanceled200 = function (options, callback) {
   var self = this.client;
@@ -5200,7 +5200,7 @@ LROs.prototype.deleteProvisioning202Deletingcanceled200 = function (options, cal
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginDeleteProvisioning202Deletingcanceled200 = function (options, callback) {
   var client = this.client;
@@ -5329,7 +5329,7 @@ LROs.prototype.beginDeleteProvisioning202Deletingcanceled200 = function (options
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.delete204Succeeded = function (options, callback) {
   var self = this.client;
@@ -5353,7 +5353,7 @@ LROs.prototype.delete204Succeeded = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginDelete204Succeeded = function (options, callback) {
   var client = this.client;
@@ -5452,7 +5452,7 @@ LROs.prototype.beginDelete204Succeeded = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.delete202Retry200 = function (options, callback) {
   var self = this.client;
@@ -5478,7 +5478,7 @@ LROs.prototype.delete202Retry200 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginDelete202Retry200 = function (options, callback) {
   var client = this.client;
@@ -5593,7 +5593,7 @@ LROs.prototype.beginDelete202Retry200 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.delete202NoRetry204 = function (options, callback) {
   var self = this.client;
@@ -5619,7 +5619,7 @@ LROs.prototype.delete202NoRetry204 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginDelete202NoRetry204 = function (options, callback) {
   var client = this.client;
@@ -5734,7 +5734,7 @@ LROs.prototype.beginDelete202NoRetry204 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.deleteNoHeaderInRetry = function (options, callback) {
   var self = this.client;
@@ -5760,7 +5760,7 @@ LROs.prototype.deleteNoHeaderInRetry = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginDeleteNoHeaderInRetry = function (options, callback) {
   var client = this.client;
@@ -5859,7 +5859,7 @@ LROs.prototype.beginDeleteNoHeaderInRetry = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.deleteAsyncNoHeaderInRetry = function (options, callback) {
   var self = this.client;
@@ -5885,7 +5885,7 @@ LROs.prototype.deleteAsyncNoHeaderInRetry = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginDeleteAsyncNoHeaderInRetry = function (options, callback) {
   var client = this.client;
@@ -5984,7 +5984,7 @@ LROs.prototype.beginDeleteAsyncNoHeaderInRetry = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.deleteAsyncRetrySucceeded = function (options, callback) {
   var self = this.client;
@@ -6010,7 +6010,7 @@ LROs.prototype.deleteAsyncRetrySucceeded = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginDeleteAsyncRetrySucceeded = function (options, callback) {
   var client = this.client;
@@ -6109,7 +6109,7 @@ LROs.prototype.beginDeleteAsyncRetrySucceeded = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.deleteAsyncNoRetrySucceeded = function (options, callback) {
   var self = this.client;
@@ -6135,7 +6135,7 @@ LROs.prototype.deleteAsyncNoRetrySucceeded = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginDeleteAsyncNoRetrySucceeded = function (options, callback) {
   var client = this.client;
@@ -6234,7 +6234,7 @@ LROs.prototype.beginDeleteAsyncNoRetrySucceeded = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.deleteAsyncRetryFailed = function (options, callback) {
   var self = this.client;
@@ -6260,7 +6260,7 @@ LROs.prototype.deleteAsyncRetryFailed = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginDeleteAsyncRetryFailed = function (options, callback) {
   var client = this.client;
@@ -6359,7 +6359,7 @@ LROs.prototype.beginDeleteAsyncRetryFailed = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.deleteAsyncRetrycanceled = function (options, callback) {
   var self = this.client;
@@ -6385,7 +6385,7 @@ LROs.prototype.deleteAsyncRetrycanceled = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginDeleteAsyncRetrycanceled = function (options, callback) {
   var client = this.client;
@@ -6484,7 +6484,7 @@ LROs.prototype.beginDeleteAsyncRetrycanceled = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.post200WithPayload = function (options, callback) {
   var self = this.client;
@@ -6510,7 +6510,7 @@ LROs.prototype.post200WithPayload = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginPost200WithPayload = function (options, callback) {
   var client = this.client;
@@ -6634,11 +6634,11 @@ LROs.prototype.beginPost200WithPayload = function (options, callback) {
  * Long running post request, service returns a 202 to the initial request,
  * with 'Location' and 'Retry-After' headers, Polls return a 200 with a
  * response body after success
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -6647,7 +6647,7 @@ LROs.prototype.beginPost200WithPayload = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.post202Retry200 = function (product, options, callback) {
   var self = this.client;
@@ -6666,11 +6666,11 @@ LROs.prototype.post202Retry200 = function (product, options, callback) {
  * Long running post request, service returns a 202 to the initial request,
  * with 'Location' and 'Retry-After' headers, Polls return a 200 with a
  * response body after success
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -6679,7 +6679,7 @@ LROs.prototype.post202Retry200 = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginPost202Retry200 = function (product, options, callback) {
   var client = this.client;
@@ -6776,11 +6776,11 @@ LROs.prototype.beginPost202Retry200 = function (product, options, callback) {
  *
  * Long running post request, service returns a 202 to the initial request,
  * with 'Location' header, 204 with noresponse body after success
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -6789,7 +6789,7 @@ LROs.prototype.beginPost202Retry200 = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.post202NoRetry204 = function (product, options, callback) {
   var self = this.client;
@@ -6807,11 +6807,11 @@ LROs.prototype.post202NoRetry204 = function (product, options, callback) {
 /**
  * Long running post request, service returns a 202 to the initial request,
  * with 'Location' header, 204 with noresponse body after success
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -6820,7 +6820,7 @@ LROs.prototype.post202NoRetry204 = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginPost202NoRetry204 = function (product, options, callback) {
   var client = this.client;
@@ -6934,11 +6934,11 @@ LROs.prototype.beginPost202NoRetry204 = function (product, options, callback) {
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -6947,7 +6947,7 @@ LROs.prototype.beginPost202NoRetry204 = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.postAsyncRetrySucceeded = function (product, options, callback) {
   var self = this.client;
@@ -6966,11 +6966,11 @@ LROs.prototype.postAsyncRetrySucceeded = function (product, options, callback) {
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -6979,7 +6979,7 @@ LROs.prototype.postAsyncRetrySucceeded = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginPostAsyncRetrySucceeded = function (product, options, callback) {
   var client = this.client;
@@ -7077,11 +7077,11 @@ LROs.prototype.beginPostAsyncRetrySucceeded = function (product, options, callba
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -7090,7 +7090,7 @@ LROs.prototype.beginPostAsyncRetrySucceeded = function (product, options, callba
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.postAsyncNoRetrySucceeded = function (product, options, callback) {
   var self = this.client;
@@ -7109,11 +7109,11 @@ LROs.prototype.postAsyncNoRetrySucceeded = function (product, options, callback)
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -7122,7 +7122,7 @@ LROs.prototype.postAsyncNoRetrySucceeded = function (product, options, callback)
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginPostAsyncNoRetrySucceeded = function (product, options, callback) {
   var client = this.client;
@@ -7220,11 +7220,11 @@ LROs.prototype.beginPostAsyncNoRetrySucceeded = function (product, options, call
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -7233,7 +7233,7 @@ LROs.prototype.beginPostAsyncNoRetrySucceeded = function (product, options, call
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.postAsyncRetryFailed = function (product, options, callback) {
   var self = this.client;
@@ -7252,11 +7252,11 @@ LROs.prototype.postAsyncRetryFailed = function (product, options, callback) {
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -7265,7 +7265,7 @@ LROs.prototype.postAsyncRetryFailed = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginPostAsyncRetryFailed = function (product, options, callback) {
   var client = this.client;
@@ -7363,11 +7363,11 @@ LROs.prototype.beginPostAsyncRetryFailed = function (product, options, callback)
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -7376,7 +7376,7 @@ LROs.prototype.beginPostAsyncRetryFailed = function (product, options, callback)
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.postAsyncRetrycanceled = function (product, options, callback) {
   var self = this.client;
@@ -7395,11 +7395,11 @@ LROs.prototype.postAsyncRetrycanceled = function (product, options, callback) {
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {Product} [product] Product to put
+ * @param {object} [product] Product to put
  *
- * @param {ProductProperties} [product.properties] 
+ * @param {object} [product.properties] 
  *
- * @param {String} [product.properties.provisioningState] 
+ * @param {string} [product.properties.provisioningState] 
  *
  * @param {object} [options]
  *
@@ -7408,7 +7408,7 @@ LROs.prototype.postAsyncRetrycanceled = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LROs.prototype.beginPostAsyncRetrycanceled = function (product, options, callback) {
   var client = this.client;
