@@ -7,7 +7,11 @@
 
 package com.microsoft.rest.retrofit;
 
-import com.microsoft.rest.*;
+import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceException;
+import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.ServiceResponseBuilder;
+import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.retrofit.models.ErrorModel;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -80,7 +84,7 @@ public class IntOperations {
     }
 
     public void getInvalidAsync(final ServiceCallback<Integer> serviceCallback) {
-        service.getNullAsync(new ServiceResponseCallback() {
+        service.getInvalidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -127,6 +131,4 @@ public class IntOperations {
                 .registerError(ErrorModel.class)
                 .build(response, error);
     }
-
-
 }

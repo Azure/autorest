@@ -55,6 +55,6 @@ public class AutoRestSwaggerBATFileServiceImpl extends ServiceClient<AutoRestSwa
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.files = restAdapter.create(Files.class);
+        this.files = new Files(restAdapter);
     }
 }

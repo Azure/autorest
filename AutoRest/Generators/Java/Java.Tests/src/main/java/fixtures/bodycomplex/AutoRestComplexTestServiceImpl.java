@@ -115,12 +115,12 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient<AutoRestComple
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.basicOperations = restAdapter.create(BasicOperations.class);
-        this.primitive = restAdapter.create(Primitive.class);
-        this.array = restAdapter.create(Array.class);
-        this.dictionary = restAdapter.create(Dictionary.class);
-        this.inheritance = restAdapter.create(Inheritance.class);
-        this.polymorphism = restAdapter.create(Polymorphism.class);
-        this.polymorphicrecursive = restAdapter.create(Polymorphicrecursive.class);
+        this.basicOperations = new BasicOperations(restAdapter);
+        this.primitive = new Primitive(restAdapter);
+        this.array = new Array(restAdapter);
+        this.dictionary = new Dictionary(restAdapter);
+        this.inheritance = new Inheritance(restAdapter);
+        this.polymorphism = new Polymorphism(restAdapter);
+        this.polymorphicrecursive = new Polymorphicrecursive(restAdapter);
     }
 }

@@ -55,6 +55,6 @@ public class AutoRestDateTimeTestServiceImpl extends ServiceClient<AutoRestDateT
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.datetimeOperations = restAdapter.create(DatetimeOperations.class);
+        this.datetimeOperations = new DatetimeOperations(restAdapter);
     }
 }

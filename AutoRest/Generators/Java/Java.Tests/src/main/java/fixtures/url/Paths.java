@@ -9,151 +9,806 @@
 
 package fixtures.url;
 
+import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import retrofit.Callback;
+import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.ServiceResponseBuilder;
+import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
 import fixtures.url.models.UriColor;
 import java.util.Date;
 import retrofit.http.GET;
 import retrofit.http.Path;
 
-public interface Paths {
-    @GET("/paths/bool/true/{boolPath}")
-    Response getBooleanTrue(@Path("boolPath") boolean boolPath) throws ServiceException;
+public class Paths {
+    private PathsService service;
+    public Paths(RestAdapter restAdapter) {
+        service = restAdapter.create(PathsService.class);
+    }
+    public interface PathsService {
+        @GET("/paths/bool/true/{boolPath}")
+        void getBooleanTrue(@Path("boolPath") boolean boolPath) throws ServiceException;
 
-    @GET("/paths/bool/true/{boolPath}")
-    void getBooleanTrueAsync(@Path("boolPath") boolean boolPath, Callback<Response> cb);
+        @GET("/paths/bool/true/{boolPath}")
+        void getBooleanTrueAsync(@Path("boolPath") boolean boolPath, ServiceCallback<Void> serviceCallback);
 
-    @GET("/paths/bool/false/{boolPath}")
-    Response getBooleanFalse(@Path("boolPath") boolean boolPath) throws ServiceException;
+        @GET("/paths/bool/false/{boolPath}")
+        void getBooleanFalse(@Path("boolPath") boolean boolPath) throws ServiceException;
 
-    @GET("/paths/bool/false/{boolPath}")
-    void getBooleanFalseAsync(@Path("boolPath") boolean boolPath, Callback<Response> cb);
+        @GET("/paths/bool/false/{boolPath}")
+        void getBooleanFalseAsync(@Path("boolPath") boolean boolPath, ServiceCallback<Void> serviceCallback);
 
-    @GET("/paths/int/1000000/{intPath}")
-    Response getIntOneMillion(@Path("intPath") int intPath) throws ServiceException;
+        @GET("/paths/int/1000000/{intPath}")
+        void getIntOneMillion(@Path("intPath") int intPath) throws ServiceException;
 
-    @GET("/paths/int/1000000/{intPath}")
-    void getIntOneMillionAsync(@Path("intPath") int intPath, Callback<Response> cb);
+        @GET("/paths/int/1000000/{intPath}")
+        void getIntOneMillionAsync(@Path("intPath") int intPath, ServiceCallback<Void> serviceCallback);
 
-    @GET("/paths/int/-1000000/{intPath}")
-    Response getIntNegativeOneMillion(@Path("intPath") int intPath) throws ServiceException;
+        @GET("/paths/int/-1000000/{intPath}")
+        void getIntNegativeOneMillion(@Path("intPath") int intPath) throws ServiceException;
 
-    @GET("/paths/int/-1000000/{intPath}")
-    void getIntNegativeOneMillionAsync(@Path("intPath") int intPath, Callback<Response> cb);
+        @GET("/paths/int/-1000000/{intPath}")
+        void getIntNegativeOneMillionAsync(@Path("intPath") int intPath, ServiceCallback<Void> serviceCallback);
 
-    @GET("/paths/long/10000000000/{longPath}")
-    Response getTenBillion(@Path("longPath") long longPath) throws ServiceException;
+        @GET("/paths/long/10000000000/{longPath}")
+        void getTenBillion(@Path("longPath") long longPath) throws ServiceException;
 
-    @GET("/paths/long/10000000000/{longPath}")
-    void getTenBillionAsync(@Path("longPath") long longPath, Callback<Response> cb);
+        @GET("/paths/long/10000000000/{longPath}")
+        void getTenBillionAsync(@Path("longPath") long longPath, ServiceCallback<Void> serviceCallback);
 
-    @GET("/paths/long/-10000000000/{longPath}")
-    Response getNegativeTenBillion(@Path("longPath") long longPath) throws ServiceException;
+        @GET("/paths/long/-10000000000/{longPath}")
+        void getNegativeTenBillion(@Path("longPath") long longPath) throws ServiceException;
 
-    @GET("/paths/long/-10000000000/{longPath}")
-    void getNegativeTenBillionAsync(@Path("longPath") long longPath, Callback<Response> cb);
+        @GET("/paths/long/-10000000000/{longPath}")
+        void getNegativeTenBillionAsync(@Path("longPath") long longPath, ServiceCallback<Void> serviceCallback);
 
-    @GET("/paths/float/1.034E+20/{floatPath}")
-    Response floatScientificPositive(@Path("floatPath") double floatPath) throws ServiceException;
+        @GET("/paths/float/1.034E+20/{floatPath}")
+        void floatScientificPositive(@Path("floatPath") double floatPath) throws ServiceException;
 
-    @GET("/paths/float/1.034E+20/{floatPath}")
-    void floatScientificPositiveAsync(@Path("floatPath") double floatPath, Callback<Response> cb);
+        @GET("/paths/float/1.034E+20/{floatPath}")
+        void floatScientificPositiveAsync(@Path("floatPath") double floatPath, ServiceCallback<Void> serviceCallback);
 
-    @GET("/paths/float/-1.034E-20/{floatPath}")
-    Response floatScientificNegative(@Path("floatPath") double floatPath) throws ServiceException;
+        @GET("/paths/float/-1.034E-20/{floatPath}")
+        void floatScientificNegative(@Path("floatPath") double floatPath) throws ServiceException;
 
-    @GET("/paths/float/-1.034E-20/{floatPath}")
-    void floatScientificNegativeAsync(@Path("floatPath") double floatPath, Callback<Response> cb);
+        @GET("/paths/float/-1.034E-20/{floatPath}")
+        void floatScientificNegativeAsync(@Path("floatPath") double floatPath, ServiceCallback<Void> serviceCallback);
 
-    @GET("/paths/double/9999999.999/{doublePath}")
-    Response doubleDecimalPositive(@Path("doublePath") double doublePath) throws ServiceException;
+        @GET("/paths/double/9999999.999/{doublePath}")
+        void doubleDecimalPositive(@Path("doublePath") double doublePath) throws ServiceException;
 
-    @GET("/paths/double/9999999.999/{doublePath}")
-    void doubleDecimalPositiveAsync(@Path("doublePath") double doublePath, Callback<Response> cb);
+        @GET("/paths/double/9999999.999/{doublePath}")
+        void doubleDecimalPositiveAsync(@Path("doublePath") double doublePath, ServiceCallback<Void> serviceCallback);
 
-    @GET("/paths/double/-9999999.999/{doublePath}")
-    Response doubleDecimalNegative(@Path("doublePath") double doublePath) throws ServiceException;
+        @GET("/paths/double/-9999999.999/{doublePath}")
+        void doubleDecimalNegative(@Path("doublePath") double doublePath) throws ServiceException;
 
-    @GET("/paths/double/-9999999.999/{doublePath}")
-    void doubleDecimalNegativeAsync(@Path("doublePath") double doublePath, Callback<Response> cb);
+        @GET("/paths/double/-9999999.999/{doublePath}")
+        void doubleDecimalNegativeAsync(@Path("doublePath") double doublePath, ServiceCallback<Void> serviceCallback);
 
-    @GET("/paths/string/unicode/{stringPath}")
-    Response stringUnicode(@Path("stringPath") String stringPath) throws ServiceException;
+        @GET("/paths/string/unicode/{stringPath}")
+        void stringUnicode(@Path("stringPath") String stringPath) throws ServiceException;
 
-    @GET("/paths/string/unicode/{stringPath}")
-    void stringUnicodeAsync(@Path("stringPath") String stringPath, Callback<Response> cb);
+        @GET("/paths/string/unicode/{stringPath}")
+        void stringUnicodeAsync(@Path("stringPath") String stringPath, ServiceCallback<Void> serviceCallback);
 
-    @GET("/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}")
-    Response stringUrlEncoded(@Path("stringPath") String stringPath) throws ServiceException;
+        @GET("/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}")
+        void stringUrlEncoded(@Path("stringPath") String stringPath) throws ServiceException;
 
-    @GET("/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}")
-    void stringUrlEncodedAsync(@Path("stringPath") String stringPath, Callback<Response> cb);
+        @GET("/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}")
+        void stringUrlEncodedAsync(@Path("stringPath") String stringPath, ServiceCallback<Void> serviceCallback);
 
-    @GET("/paths/string/empty/{stringPath}")
-    Response stringEmpty(@Path("stringPath") String stringPath) throws ServiceException;
+        @GET("/paths/string/empty/{stringPath}")
+        void stringEmpty(@Path("stringPath") String stringPath) throws ServiceException;
 
-    @GET("/paths/string/empty/{stringPath}")
-    void stringEmptyAsync(@Path("stringPath") String stringPath, Callback<Response> cb);
+        @GET("/paths/string/empty/{stringPath}")
+        void stringEmptyAsync(@Path("stringPath") String stringPath, ServiceCallback<Void> serviceCallback);
 
-    @GET("/paths/string/null/{stringPath}")
-    Response stringNull(@Path("stringPath") String stringPath) throws ServiceException;
+        @GET("/paths/string/null/{stringPath}")
+        void stringNull(@Path("stringPath") String stringPath) throws ServiceException;
 
-    @GET("/paths/string/null/{stringPath}")
-    void stringNullAsync(@Path("stringPath") String stringPath, Callback<Response> cb);
+        @GET("/paths/string/null/{stringPath}")
+        void stringNullAsync(@Path("stringPath") String stringPath, ServiceCallback<Void> serviceCallback);
 
-    @GET("/paths/enum/green%20color/{enumPath}")
-    Response enumValid(@Path("enumPath") UriColor enumPath) throws ServiceException;
+        @GET("/paths/enum/green%20color/{enumPath}")
+        void enumValid(@Path("enumPath") UriColor enumPath) throws ServiceException;
 
-    @GET("/paths/enum/green%20color/{enumPath}")
-    void enumValidAsync(@Path("enumPath") UriColor enumPath, Callback<Response> cb);
+        @GET("/paths/enum/green%20color/{enumPath}")
+        void enumValidAsync(@Path("enumPath") UriColor enumPath, ServiceCallback<Void> serviceCallback);
 
-    @GET("/paths/string/null/{enumPath}")
-    Response enumNull(@Path("enumPath") UriColor enumPath) throws ServiceException;
+        @GET("/paths/string/null/{enumPath}")
+        void enumNull(@Path("enumPath") UriColor enumPath) throws ServiceException;
 
-    @GET("/paths/string/null/{enumPath}")
-    void enumNullAsync(@Path("enumPath") UriColor enumPath, Callback<Response> cb);
+        @GET("/paths/string/null/{enumPath}")
+        void enumNullAsync(@Path("enumPath") UriColor enumPath, ServiceCallback<Void> serviceCallback);
 
-    @GET("/paths/byte/multibyte/{bytePath}")
-    Response byteMultiByte(@Path("bytePath") byte[] bytePath) throws ServiceException;
+        @GET("/paths/byte/multibyte/{bytePath}")
+        void byteMultiByte(@Path("bytePath") byte[] bytePath) throws ServiceException;
 
-    @GET("/paths/byte/multibyte/{bytePath}")
-    void byteMultiByteAsync(@Path("bytePath") byte[] bytePath, Callback<Response> cb);
+        @GET("/paths/byte/multibyte/{bytePath}")
+        void byteMultiByteAsync(@Path("bytePath") byte[] bytePath, ServiceCallback<Void> serviceCallback);
 
-    @GET("/paths/byte/empty/{bytePath}")
-    Response byteEmpty(@Path("bytePath") byte[] bytePath) throws ServiceException;
+        @GET("/paths/byte/empty/{bytePath}")
+        void byteEmpty(@Path("bytePath") byte[] bytePath) throws ServiceException;
 
-    @GET("/paths/byte/empty/{bytePath}")
-    void byteEmptyAsync(@Path("bytePath") byte[] bytePath, Callback<Response> cb);
+        @GET("/paths/byte/empty/{bytePath}")
+        void byteEmptyAsync(@Path("bytePath") byte[] bytePath, ServiceCallback<Void> serviceCallback);
 
-    @GET("/paths/byte/null/{bytePath}")
-    Response byteNull(@Path("bytePath") byte[] bytePath) throws ServiceException;
+        @GET("/paths/byte/null/{bytePath}")
+        void byteNull(@Path("bytePath") byte[] bytePath) throws ServiceException;
 
-    @GET("/paths/byte/null/{bytePath}")
-    void byteNullAsync(@Path("bytePath") byte[] bytePath, Callback<Response> cb);
+        @GET("/paths/byte/null/{bytePath}")
+        void byteNullAsync(@Path("bytePath") byte[] bytePath, ServiceCallback<Void> serviceCallback);
 
-    @GET("/paths/date/2012-01-01/{datePath}")
-    Response dateValid(@Path("datePath") Date datePath) throws ServiceException;
+        @GET("/paths/date/2012-01-01/{datePath}")
+        void dateValid(@Path("datePath") Date datePath) throws ServiceException;
 
-    @GET("/paths/date/2012-01-01/{datePath}")
-    void dateValidAsync(@Path("datePath") Date datePath, Callback<Response> cb);
+        @GET("/paths/date/2012-01-01/{datePath}")
+        void dateValidAsync(@Path("datePath") Date datePath, ServiceCallback<Void> serviceCallback);
 
-    @GET("/paths/date/null/{datePath}")
-    Response dateNull(@Path("datePath") Date datePath) throws ServiceException;
+        @GET("/paths/date/null/{datePath}")
+        void dateNull(@Path("datePath") Date datePath) throws ServiceException;
 
-    @GET("/paths/date/null/{datePath}")
-    void dateNullAsync(@Path("datePath") Date datePath, Callback<Response> cb);
+        @GET("/paths/date/null/{datePath}")
+        void dateNullAsync(@Path("datePath") Date datePath, ServiceCallback<Void> serviceCallback);
 
-    @GET("/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}")
-    Response dateTimeValid(@Path("dateTimePath") Date dateTimePath) throws ServiceException;
+        @GET("/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}")
+        void dateTimeValid(@Path("dateTimePath") Date dateTimePath) throws ServiceException;
 
-    @GET("/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}")
-    void dateTimeValidAsync(@Path("dateTimePath") Date dateTimePath, Callback<Response> cb);
+        @GET("/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}")
+        void dateTimeValidAsync(@Path("dateTimePath") Date dateTimePath, ServiceCallback<Void> serviceCallback);
 
-    @GET("/paths/datetime/null/{dateTimePath}")
-    Response dateTimeNull(@Path("dateTimePath") Date dateTimePath) throws ServiceException;
+        @GET("/paths/datetime/null/{dateTimePath}")
+        void dateTimeNull(@Path("dateTimePath") Date dateTimePath) throws ServiceException;
 
-    @GET("/paths/datetime/null/{dateTimePath}")
-    void dateTimeNullAsync(@Path("dateTimePath") Date dateTimePath, Callback<Response> cb);
+        @GET("/paths/datetime/null/{dateTimePath}")
+        void dateTimeNullAsync(@Path("dateTimePath") Date dateTimePath, ServiceCallback<Void> serviceCallback);
+
+    }
+    public void getBooleanTrue(boolean boolPath) throws ServiceException {
+        try {
+            return getBooleanTrueDelegate(service.getBooleanTrue(boolPath), null).getBody();
+        } catch (RetrofitError error) {
+            return getBooleanTrueDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getBooleanTrueAsync(boolean boolPath, final ServiceCallback<Void> serviceCallback) {
+        service.getBooleanTrueAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getBooleanTrueDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> getBooleanTrueDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void getBooleanFalse(boolean boolPath) throws ServiceException {
+        try {
+            return getBooleanFalseDelegate(service.getBooleanFalse(boolPath), null).getBody();
+        } catch (RetrofitError error) {
+            return getBooleanFalseDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getBooleanFalseAsync(boolean boolPath, final ServiceCallback<Void> serviceCallback) {
+        service.getBooleanFalseAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getBooleanFalseDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> getBooleanFalseDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void getIntOneMillion(int intPath) throws ServiceException {
+        try {
+            return getIntOneMillionDelegate(service.getIntOneMillion(intPath), null).getBody();
+        } catch (RetrofitError error) {
+            return getIntOneMillionDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getIntOneMillionAsync(int intPath, final ServiceCallback<Void> serviceCallback) {
+        service.getIntOneMillionAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getIntOneMillionDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> getIntOneMillionDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void getIntNegativeOneMillion(int intPath) throws ServiceException {
+        try {
+            return getIntNegativeOneMillionDelegate(service.getIntNegativeOneMillion(intPath), null).getBody();
+        } catch (RetrofitError error) {
+            return getIntNegativeOneMillionDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getIntNegativeOneMillionAsync(int intPath, final ServiceCallback<Void> serviceCallback) {
+        service.getIntNegativeOneMillionAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getIntNegativeOneMillionDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> getIntNegativeOneMillionDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void getTenBillion(long longPath) throws ServiceException {
+        try {
+            return getTenBillionDelegate(service.getTenBillion(longPath), null).getBody();
+        } catch (RetrofitError error) {
+            return getTenBillionDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getTenBillionAsync(long longPath, final ServiceCallback<Void> serviceCallback) {
+        service.getTenBillionAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getTenBillionDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> getTenBillionDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void getNegativeTenBillion(long longPath) throws ServiceException {
+        try {
+            return getNegativeTenBillionDelegate(service.getNegativeTenBillion(longPath), null).getBody();
+        } catch (RetrofitError error) {
+            return getNegativeTenBillionDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getNegativeTenBillionAsync(long longPath, final ServiceCallback<Void> serviceCallback) {
+        service.getNegativeTenBillionAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getNegativeTenBillionDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> getNegativeTenBillionDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void floatScientificPositive(double floatPath) throws ServiceException {
+        try {
+            return floatScientificPositiveDelegate(service.floatScientificPositive(floatPath), null).getBody();
+        } catch (RetrofitError error) {
+            return floatScientificPositiveDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void floatScientificPositiveAsync(double floatPath, final ServiceCallback<Void> serviceCallback) {
+        service.floatScientificPositiveAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(floatScientificPositiveDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> floatScientificPositiveDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void floatScientificNegative(double floatPath) throws ServiceException {
+        try {
+            return floatScientificNegativeDelegate(service.floatScientificNegative(floatPath), null).getBody();
+        } catch (RetrofitError error) {
+            return floatScientificNegativeDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void floatScientificNegativeAsync(double floatPath, final ServiceCallback<Void> serviceCallback) {
+        service.floatScientificNegativeAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(floatScientificNegativeDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> floatScientificNegativeDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void doubleDecimalPositive(double doublePath) throws ServiceException {
+        try {
+            return doubleDecimalPositiveDelegate(service.doubleDecimalPositive(doublePath), null).getBody();
+        } catch (RetrofitError error) {
+            return doubleDecimalPositiveDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void doubleDecimalPositiveAsync(double doublePath, final ServiceCallback<Void> serviceCallback) {
+        service.doubleDecimalPositiveAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(doubleDecimalPositiveDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> doubleDecimalPositiveDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void doubleDecimalNegative(double doublePath) throws ServiceException {
+        try {
+            return doubleDecimalNegativeDelegate(service.doubleDecimalNegative(doublePath), null).getBody();
+        } catch (RetrofitError error) {
+            return doubleDecimalNegativeDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void doubleDecimalNegativeAsync(double doublePath, final ServiceCallback<Void> serviceCallback) {
+        service.doubleDecimalNegativeAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(doubleDecimalNegativeDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> doubleDecimalNegativeDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void stringUnicode(String stringPath) throws ServiceException {
+        try {
+            return stringUnicodeDelegate(service.stringUnicode(stringPath), null).getBody();
+        } catch (RetrofitError error) {
+            return stringUnicodeDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void stringUnicodeAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
+        service.stringUnicodeAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(stringUnicodeDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> stringUnicodeDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void stringUrlEncoded(String stringPath) throws ServiceException {
+        try {
+            return stringUrlEncodedDelegate(service.stringUrlEncoded(stringPath), null).getBody();
+        } catch (RetrofitError error) {
+            return stringUrlEncodedDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void stringUrlEncodedAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
+        service.stringUrlEncodedAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(stringUrlEncodedDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> stringUrlEncodedDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void stringEmpty(String stringPath) throws ServiceException {
+        try {
+            return stringEmptyDelegate(service.stringEmpty(stringPath), null).getBody();
+        } catch (RetrofitError error) {
+            return stringEmptyDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void stringEmptyAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
+        service.stringEmptyAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(stringEmptyDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> stringEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void stringNull(String stringPath) throws ServiceException {
+        try {
+            return stringNullDelegate(service.stringNull(stringPath), null).getBody();
+        } catch (RetrofitError error) {
+            return stringNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void stringNullAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
+        service.stringNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(stringNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> stringNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(400, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void enumValid(UriColor enumPath) throws ServiceException {
+        try {
+            return enumValidDelegate(service.enumValid(enumPath), null).getBody();
+        } catch (RetrofitError error) {
+            return enumValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void enumValidAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) {
+        service.enumValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(enumValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> enumValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void enumNull(UriColor enumPath) throws ServiceException {
+        try {
+            return enumNullDelegate(service.enumNull(enumPath), null).getBody();
+        } catch (RetrofitError error) {
+            return enumNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void enumNullAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) {
+        service.enumNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(enumNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> enumNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(400, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void byteMultiByte(byte[] bytePath) throws ServiceException {
+        try {
+            return byteMultiByteDelegate(service.byteMultiByte(bytePath), null).getBody();
+        } catch (RetrofitError error) {
+            return byteMultiByteDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void byteMultiByteAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
+        service.byteMultiByteAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(byteMultiByteDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> byteMultiByteDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void byteEmpty(byte[] bytePath) throws ServiceException {
+        try {
+            return byteEmptyDelegate(service.byteEmpty(bytePath), null).getBody();
+        } catch (RetrofitError error) {
+            return byteEmptyDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void byteEmptyAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
+        service.byteEmptyAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(byteEmptyDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> byteEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void byteNull(byte[] bytePath) throws ServiceException {
+        try {
+            return byteNullDelegate(service.byteNull(bytePath), null).getBody();
+        } catch (RetrofitError error) {
+            return byteNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void byteNullAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
+        service.byteNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(byteNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> byteNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(400, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void dateValid(Date datePath) throws ServiceException {
+        try {
+            return dateValidDelegate(service.dateValid(datePath), null).getBody();
+        } catch (RetrofitError error) {
+            return dateValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void dateValidAsync(Date datePath, final ServiceCallback<Void> serviceCallback) {
+        service.dateValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(dateValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> dateValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void dateNull(Date datePath) throws ServiceException {
+        try {
+            return dateNullDelegate(service.dateNull(datePath), null).getBody();
+        } catch (RetrofitError error) {
+            return dateNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void dateNullAsync(Date datePath, final ServiceCallback<Void> serviceCallback) {
+        service.dateNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(dateNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> dateNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(400, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void dateTimeValid(Date dateTimePath) throws ServiceException {
+        try {
+            return dateTimeValidDelegate(service.dateTimeValid(dateTimePath), null).getBody();
+        } catch (RetrofitError error) {
+            return dateTimeValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void dateTimeValidAsync(Date dateTimePath, final ServiceCallback<Void> serviceCallback) {
+        service.dateTimeValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(dateTimeValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> dateTimeValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void dateTimeNull(Date dateTimePath) throws ServiceException {
+        try {
+            return dateTimeNullDelegate(service.dateTimeNull(dateTimePath), null).getBody();
+        } catch (RetrofitError error) {
+            return dateTimeNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void dateTimeNullAsync(Date dateTimePath, final ServiceCallback<Void> serviceCallback) {
+        service.dateTimeNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(dateTimeNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> dateTimeNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(400, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
 
 }

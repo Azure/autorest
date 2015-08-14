@@ -9,42 +9,193 @@
 
 package fixtures.bodybyte;
 
+import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import retrofit.Callback;
+import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.ServiceResponseBuilder;
+import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
 import retrofit.http.GET;
 import retrofit.http.PUT;
 import retrofit.http.Body;
 
-public interface ByteOperations {
-    @GET("/byte/null")
-    byte[] getNull() throws ServiceException;
+public class ByteOperations {
+    private ByteService service;
+    public ByteOperations(RestAdapter restAdapter) {
+        service = restAdapter.create(ByteService.class);
+    }
+    public interface ByteService {
+        @GET("/byte/null")
+        byte[] getNull() throws ServiceException;
 
-    @GET("/byte/null")
-    void getNullAsync(Callback<Byte[]> cb);
+        @GET("/byte/null")
+        void getNullAsync(ServiceCallback<Byte[]> serviceCallback);
 
-    @GET("/byte/empty")
-    Byte[] getEmpty() throws ServiceException;
+        @GET("/byte/empty")
+        Byte[] getEmpty() throws ServiceException;
 
-    @GET("/byte/empty")
-    void getEmptyAsync(Callback<Byte[]> cb);
+        @GET("/byte/empty")
+        void getEmptyAsync(ServiceCallback<Byte[]> serviceCallback);
 
-    @GET("/byte/nonAscii")
-    Byte[] getNonAscii() throws ServiceException;
+        @GET("/byte/nonAscii")
+        Byte[] getNonAscii() throws ServiceException;
 
-    @GET("/byte/nonAscii")
-    void getNonAsciiAsync(Callback<Byte[]> cb);
+        @GET("/byte/nonAscii")
+        void getNonAsciiAsync(ServiceCallback<Byte[]> serviceCallback);
 
-    @PUT("/byte/nonAscii")
-    Response putNonAscii(@Body Byte[] byteBody) throws ServiceException;
+        @PUT("/byte/nonAscii")
+        void putNonAscii(@Body Byte[] byteBody) throws ServiceException;
 
-    @PUT("/byte/nonAscii")
-    void putNonAsciiAsync(@Body Byte[] byteBody, Callback<Response> cb);
+        @PUT("/byte/nonAscii")
+        void putNonAsciiAsync(@Body Byte[] byteBody, ServiceCallback<Void> serviceCallback);
 
-    @GET("/byte/invalid")
-    Byte[] getInvalid() throws ServiceException;
+        @GET("/byte/invalid")
+        Byte[] getInvalid() throws ServiceException;
 
-    @GET("/byte/invalid")
-    void getInvalidAsync(Callback<Byte[]> cb);
+        @GET("/byte/invalid")
+        void getInvalidAsync(ServiceCallback<Byte[]> serviceCallback);
+
+    }
+    public Byte[] getNull() throws ServiceException {
+        try {
+            return getNullDelegate(service.getNull(), null).getBody();
+        } catch (RetrofitError error) {
+            return getNullDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getNullAsync(final ServiceCallback<Byte[]> serviceCallback) {
+        service.getNullAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getNullDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Byte[]> getNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Byte[]>()
+                  .register(200, Byte[].class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public Byte[] getEmpty() throws ServiceException {
+        try {
+            return getEmptyDelegate(service.getEmpty(), null).getBody();
+        } catch (RetrofitError error) {
+            return getEmptyDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getEmptyAsync(final ServiceCallback<Byte[]> serviceCallback) {
+        service.getEmptyAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getEmptyDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Byte[]> getEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Byte[]>()
+                  .register(200, Byte[].class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public Byte[] getNonAscii() throws ServiceException {
+        try {
+            return getNonAsciiDelegate(service.getNonAscii(), null).getBody();
+        } catch (RetrofitError error) {
+            return getNonAsciiDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getNonAsciiAsync(final ServiceCallback<Byte[]> serviceCallback) {
+        service.getNonAsciiAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getNonAsciiDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Byte[]> getNonAsciiDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Byte[]>()
+                  .register(200, Byte[].class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void putNonAscii(Byte[] byteBody) throws ServiceException {
+        try {
+            return putNonAsciiDelegate(service.putNonAscii(byteBody), null).getBody();
+        } catch (RetrofitError error) {
+            return putNonAsciiDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void putNonAsciiAsync(Byte[] byteBody, final ServiceCallback<Void> serviceCallback) {
+        service.putNonAsciiAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(putNonAsciiDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> putNonAsciiDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public Byte[] getInvalid() throws ServiceException {
+        try {
+            return getInvalidDelegate(service.getInvalid(), null).getBody();
+        } catch (RetrofitError error) {
+            return getInvalidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getInvalidAsync(final ServiceCallback<Byte[]> serviceCallback) {
+        service.getInvalidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getInvalidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Byte[]> getInvalidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Byte[]>()
+                  .register(200, Byte[].class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
 
 }

@@ -55,6 +55,6 @@ public class AutoRestSwaggerBATHeaderServiceImpl extends ServiceClient<AutoRestS
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.headerOperations = restAdapter.create(HeaderOperations.class);
+        this.headerOperations = new HeaderOperations(restAdapter);
     }
 }

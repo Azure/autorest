@@ -55,6 +55,6 @@ public class AutoRestSwaggerBATdictionaryServiceImpl extends ServiceClient<AutoR
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.dictionary = restAdapter.create(Dictionary.class);
+        this.dictionary = new Dictionary(restAdapter);
     }
 }

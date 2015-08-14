@@ -55,6 +55,6 @@ public class AutoRestSwaggerBATArrayServiceImpl extends ServiceClient<AutoRestSw
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.array = restAdapter.create(Array.class);
+        this.array = new Array(restAdapter);
     }
 }

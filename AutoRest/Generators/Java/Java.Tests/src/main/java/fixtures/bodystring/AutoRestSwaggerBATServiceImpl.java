@@ -65,7 +65,7 @@ public class AutoRestSwaggerBATServiceImpl extends ServiceClient<AutoRestSwagger
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.stringOperations = restAdapter.create(StringOperations.class);
-        this.enumOperations = restAdapter.create(EnumOperations.class);
+        this.stringOperations = new StringOperations(restAdapter);
+        this.enumOperations = new EnumOperations(restAdapter);
     }
 }

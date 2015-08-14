@@ -9,25 +9,92 @@
 
 package fixtures.bodycomplex;
 
+import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import retrofit.Callback;
+import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.ServiceResponseBuilder;
+import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
 import fixtures.bodycomplex.models.Fish;
 import retrofit.http.GET;
 import retrofit.http.PUT;
 import retrofit.http.Body;
 
-public interface Polymorphicrecursive {
-    @GET("/complex/polymorphicrecursive/valid")
-    Fish getValid() throws ServiceException;
+public class Polymorphicrecursive {
+    private PolymorphicrecursiveService service;
+    public Polymorphicrecursive(RestAdapter restAdapter) {
+        service = restAdapter.create(PolymorphicrecursiveService.class);
+    }
+    public interface PolymorphicrecursiveService {
+        @GET("/complex/polymorphicrecursive/valid")
+        Fish getValid() throws ServiceException;
 
-    @GET("/complex/polymorphicrecursive/valid")
-    void getValidAsync(Callback<Fish> cb);
+        @GET("/complex/polymorphicrecursive/valid")
+        void getValidAsync(ServiceCallback<Fish> serviceCallback);
 
-    @PUT("/complex/polymorphicrecursive/valid")
-    Response putValid(@Body Fish complexBody) throws ServiceException;
+        @PUT("/complex/polymorphicrecursive/valid")
+        void putValid(@Body Fish complexBody) throws ServiceException;
 
-    @PUT("/complex/polymorphicrecursive/valid")
-    void putValidAsync(@Body Fish complexBody, Callback<Response> cb);
+        @PUT("/complex/polymorphicrecursive/valid")
+        void putValidAsync(@Body Fish complexBody, ServiceCallback<Void> serviceCallback);
+
+    }
+    public Fish getValid() throws ServiceException {
+        try {
+            return getValidDelegate(service.getValid(), null).getBody();
+        } catch (RetrofitError error) {
+            return getValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void getValidAsync(final ServiceCallback<Fish> serviceCallback) {
+        service.getValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Fish> getValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Fish>()
+                  .register(200, Fish.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
+
+    public void putValid(Fish complexBody) throws ServiceException {
+        try {
+            return putValidDelegate(service.putValid(complexBody), null).getBody();
+        } catch (RetrofitError error) {
+            return putValidDelegate(error.getResponse(), error).getBody();
+        }
+    }
+
+    public void putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
+        service.putValidAsyncd(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(putValidDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> putValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                  .register(200, Void.class)
+                  .registerError(Error)
+                  .build(response, error);
+    }
 
 }
