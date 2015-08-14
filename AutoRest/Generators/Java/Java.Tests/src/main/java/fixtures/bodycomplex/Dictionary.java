@@ -9,28 +9,17 @@
 
 package fixtures.bodycomplex;
 
-import com.google.gson.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
 import fixtures.bodycomplex.models.DictionaryWrapper;
 import retrofit.http.GET;
 import retrofit.http.PUT;
 import retrofit.http.Body;
 
-public class Dictionary {
-    private DictionaryService service;
-
-    public Dictionary(RestAdapter restAdapter) {
-        service = restAdapter.create(DictionaryService.class);
-    }
-
-    public interface DictionaryService {
+public interface Dictionary {
+    interface DictionaryService {
         @GET("/complex/dictionary/typed/valid")
         Response getValid() throws ServiceException;
 
@@ -68,172 +57,28 @@ public class Dictionary {
         void getNotProvidedAsync(ServiceResponseCallback cb);
 
     }
-    public DictionaryWrapper getValid() throws ServiceException {
-        try {
-            return getValidDelegate(service.getValid(), null).getBody();
-        } catch (RetrofitError error) {
-            return getValidDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    DictionaryWrapper getValid() throws ServiceException;
 
-    public void getValidAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
-        service.getValidAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getValidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void getValidAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
 
-    private ServiceResponse<DictionaryWrapper> getValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<DictionaryWrapper>()
-                .register(200, new TypeToken<DictionaryWrapper>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void putValid(DictionaryWrapper complexBody) throws ServiceException;
 
-    public void putValid(DictionaryWrapper complexBody) throws ServiceException {
-        try {
-            putValidDelegate(service.putValid(complexBody), null).getBody();
-        } catch (RetrofitError error) {
-            putValidDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    void putValidAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
-    public void putValidAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        service.putValidAsync(complexBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putValidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    DictionaryWrapper getEmpty() throws ServiceException;
 
-    private ServiceResponse<Void> putValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void getEmptyAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
 
-    public DictionaryWrapper getEmpty() throws ServiceException {
-        try {
-            return getEmptyDelegate(service.getEmpty(), null).getBody();
-        } catch (RetrofitError error) {
-            return getEmptyDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    void putEmpty(DictionaryWrapper complexBody) throws ServiceException;
 
-    public void getEmptyAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
-        service.getEmptyAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getEmptyDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void putEmptyAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
-    private ServiceResponse<DictionaryWrapper> getEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<DictionaryWrapper>()
-                .register(200, new TypeToken<DictionaryWrapper>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    DictionaryWrapper getNull() throws ServiceException;
 
-    public void putEmpty(DictionaryWrapper complexBody) throws ServiceException {
-        try {
-            putEmptyDelegate(service.putEmpty(complexBody), null).getBody();
-        } catch (RetrofitError error) {
-            putEmptyDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    void getNullAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
 
-    public void putEmptyAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        service.putEmptyAsync(complexBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putEmptyDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    DictionaryWrapper getNotProvided() throws ServiceException;
 
-    private ServiceResponse<Void> putEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public DictionaryWrapper getNull() throws ServiceException {
-        try {
-            return getNullDelegate(service.getNull(), null).getBody();
-        } catch (RetrofitError error) {
-            return getNullDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getNullAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
-        service.getNullAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getNullDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<DictionaryWrapper> getNullDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<DictionaryWrapper>()
-                .register(200, new TypeToken<DictionaryWrapper>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public DictionaryWrapper getNotProvided() throws ServiceException {
-        try {
-            return getNotProvidedDelegate(service.getNotProvided(), null).getBody();
-        } catch (RetrofitError error) {
-            return getNotProvidedDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getNotProvidedAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
-        service.getNotProvidedAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getNotProvidedDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<DictionaryWrapper> getNotProvidedDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<DictionaryWrapper>()
-                .register(200, new TypeToken<DictionaryWrapper>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void getNotProvidedAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
 
 }

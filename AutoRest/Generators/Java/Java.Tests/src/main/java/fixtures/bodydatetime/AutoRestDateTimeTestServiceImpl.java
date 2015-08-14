@@ -55,6 +55,6 @@ public class AutoRestDateTimeTestServiceImpl extends ServiceClient implements Au
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.datetimeOperations = new DatetimeOperations(restAdapter);
+        this.datetimeOperations = new DatetimeOperationsImpl(restAdapter);
     }
 }

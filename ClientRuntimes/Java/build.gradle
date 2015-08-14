@@ -19,6 +19,7 @@ repositories {
 }
 
 dependencies {
+    compile group: 'org.apache.commons', name:'commons-lang3', version:'3.4'
     compile group: 'commons-codec', name: 'commons-codec', version: '1.10'
     compile group: 'com.squareup.retrofit', name:'retrofit', version:'1.9.0'
     compile group: 'com.squareup.okhttp', name:'okhttp', version:'2.4.0'

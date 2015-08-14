@@ -9,27 +9,16 @@
 
 package fixtures.bodybyte;
 
-import com.google.gson.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
 import retrofit.http.GET;
 import retrofit.http.PUT;
 import retrofit.http.Body;
 
-public class ByteOperations {
-    private ByteService service;
-
-    public ByteOperations(RestAdapter restAdapter) {
-        service = restAdapter.create(ByteService.class);
-    }
-
-    public interface ByteService {
+public interface ByteOperations {
+    interface ByteService {
         @GET("/byte/null")
         Response getNull() throws ServiceException;
 
@@ -49,10 +38,10 @@ public class ByteOperations {
         void getNonAsciiAsync(ServiceResponseCallback cb);
 
         @PUT("/byte/nonAscii")
-        Response putNonAscii(@Body Byte[] byteBody) throws ServiceException;
+        Response putNonAscii(@Body byte[] byteBody) throws ServiceException;
 
         @PUT("/byte/nonAscii")
-        void putNonAsciiAsync(@Body Byte[] byteBody, ServiceResponseCallback cb);
+        void putNonAsciiAsync(@Body byte[] byteBody, ServiceResponseCallback cb);
 
         @GET("/byte/invalid")
         Response getInvalid() throws ServiceException;
@@ -61,144 +50,24 @@ public class ByteOperations {
         void getInvalidAsync(ServiceResponseCallback cb);
 
     }
-    public Byte[] getNull() throws ServiceException {
-        try {
-            return getNullDelegate(service.getNull(), null).getBody();
-        } catch (RetrofitError error) {
-            return getNullDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    byte[] getNull() throws ServiceException;
 
-    public void getNullAsync(final ServiceCallback<Byte[]> serviceCallback) {
-        service.getNullAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getNullDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void getNullAsync(final ServiceCallback<Byte[]> serviceCallback);
 
-    private ServiceResponse<Byte[]> getNullDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Byte[]>()
-                .register(200, new TypeToken<Byte[]>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    byte[] getEmpty() throws ServiceException;
 
-    public Byte[] getEmpty() throws ServiceException {
-        try {
-            return getEmptyDelegate(service.getEmpty(), null).getBody();
-        } catch (RetrofitError error) {
-            return getEmptyDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    void getEmptyAsync(final ServiceCallback<Byte[]> serviceCallback);
 
-    public void getEmptyAsync(final ServiceCallback<Byte[]> serviceCallback) {
-        service.getEmptyAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getEmptyDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    byte[] getNonAscii() throws ServiceException;
 
-    private ServiceResponse<Byte[]> getEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Byte[]>()
-                .register(200, new TypeToken<Byte[]>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void getNonAsciiAsync(final ServiceCallback<Byte[]> serviceCallback);
 
-    public Byte[] getNonAscii() throws ServiceException {
-        try {
-            return getNonAsciiDelegate(service.getNonAscii(), null).getBody();
-        } catch (RetrofitError error) {
-            return getNonAsciiDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    void putNonAscii(byte[] byteBody) throws ServiceException;
 
-    public void getNonAsciiAsync(final ServiceCallback<Byte[]> serviceCallback) {
-        service.getNonAsciiAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getNonAsciiDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void putNonAsciiAsync(byte[] byteBody, final ServiceCallback<Void> serviceCallback);
 
-    private ServiceResponse<Byte[]> getNonAsciiDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Byte[]>()
-                .register(200, new TypeToken<Byte[]>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    byte[] getInvalid() throws ServiceException;
 
-    public void putNonAscii(Byte[] byteBody) throws ServiceException {
-        try {
-            putNonAsciiDelegate(service.putNonAscii(byteBody), null).getBody();
-        } catch (RetrofitError error) {
-            putNonAsciiDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void putNonAsciiAsync(Byte[] byteBody, final ServiceCallback<Void> serviceCallback) {
-        service.putNonAsciiAsync(byteBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putNonAsciiDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> putNonAsciiDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Byte[] getInvalid() throws ServiceException {
-        try {
-            return getInvalidDelegate(service.getInvalid(), null).getBody();
-        } catch (RetrofitError error) {
-            return getInvalidDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getInvalidAsync(final ServiceCallback<Byte[]> serviceCallback) {
-        service.getInvalidAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getInvalidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Byte[]> getInvalidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Byte[]>()
-                .register(200, new TypeToken<Byte[]>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void getInvalidAsync(final ServiceCallback<Byte[]> serviceCallback);
 
 }

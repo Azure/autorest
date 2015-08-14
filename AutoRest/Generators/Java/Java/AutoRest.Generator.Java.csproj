@@ -42,14 +42,11 @@
     <Compile Include="Templates\EnumTemplate.cs">
       <DependentUpon>EnumTemplate.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Templates\MethodGroupInterfaceTemplate.cs">
+      <DependentUpon>MethodGroupInterfaceTemplate.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Templates\MethodGroupTemplate.cs">
       <DependentUpon>MethodGroupTemplate.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\MethodJsonPipelineTemplate.cs">
-      <DependentUpon>MethodJsonPipelineTemplate.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\MethodStreamPipelineTemplate.cs">
-      <DependentUpon>MethodStreamPipelineTemplate.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Templates\ModelTemplate.cs">
       <DependentUpon>ModelTemplate.cshtml</DependentUpon>
@@ -61,9 +58,8 @@
       <DependentUpon>ServiceClientTemplate.cshtml</DependentUpon>
     </Compile>
     <None Include="Templates\EnumTemplate.cshtml" />
+    <None Include="Templates\MethodGroupInterfaceTemplate.cshtml" />
     <None Include="Templates\MethodGroupTemplate.cshtml" />
-    <None Include="Templates\MethodJsonPipelineTemplate.cshtml" />
-    <None Include="Templates\MethodStreamPipelineTemplate.cshtml" />
     <None Include="Templates\ModelTemplate.cshtml" />
     <None Include="Templates\ServiceClientInterfaceTemplate.cshtml" />
     <None Include="Templates\ServiceClientTemplate.cshtml" />

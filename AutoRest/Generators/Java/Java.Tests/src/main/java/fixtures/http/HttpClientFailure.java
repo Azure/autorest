@@ -9,15 +9,11 @@
 
 package fixtures.http;
 
-import com.google.gson.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
+import fixtures.http.models.Error;
 import retrofit.http.HEAD;
 import retrofit.http.GET;
 import retrofit.http.PUT;
@@ -26,14 +22,8 @@ import retrofit.http.PATCH;
 import retrofit.http.POST;
 import retrofit.http.DELETE;
 
-public class HttpClientFailure {
-    private HttpClientFailureService service;
-
-    public HttpClientFailure(RestAdapter restAdapter) {
-        service = restAdapter.create(HttpClientFailureService.class);
-    }
-
-    public interface HttpClientFailureService {
+public interface HttpClientFailure {
+    interface HttpClientFailureService {
         @HEAD("/http/failure/client/400")
         Response head400() throws ServiceException;
 
@@ -47,28 +37,28 @@ public class HttpClientFailure {
         void get400Async(ServiceResponseCallback cb);
 
         @PUT("/http/failure/client/400")
-        Response put400(@Body Boolean booleanValue) throws ServiceException;
+        Response put400(@Body boolean booleanValue) throws ServiceException;
 
         @PUT("/http/failure/client/400")
-        void put400Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
+        void put400Async(@Body boolean booleanValue, ServiceResponseCallback cb);
 
         @PATCH("/http/failure/client/400")
-        Response patch400(@Body Boolean booleanValue) throws ServiceException;
+        Response patch400(@Body boolean booleanValue) throws ServiceException;
 
         @PATCH("/http/failure/client/400")
-        void patch400Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
+        void patch400Async(@Body boolean booleanValue, ServiceResponseCallback cb);
 
         @POST("/http/failure/client/400")
-        Response post400(@Body Boolean booleanValue) throws ServiceException;
+        Response post400(@Body boolean booleanValue) throws ServiceException;
 
         @POST("/http/failure/client/400")
-        void post400Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
+        void post400Async(@Body boolean booleanValue, ServiceResponseCallback cb);
 
         @DELETE("/http/failure/client/400")
-        Response delete400(@Body Boolean booleanValue) throws ServiceException;
+        Response delete400(@Body boolean booleanValue) throws ServiceException;
 
         @DELETE("/http/failure/client/400")
-        void delete400Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
+        void delete400Async(@Body boolean booleanValue, ServiceResponseCallback cb);
 
         @HEAD("/http/failure/client/401")
         Response head401() throws ServiceException;
@@ -89,34 +79,34 @@ public class HttpClientFailure {
         void get403Async(ServiceResponseCallback cb);
 
         @PUT("/http/failure/client/404")
-        Response put404(@Body Boolean booleanValue) throws ServiceException;
+        Response put404(@Body boolean booleanValue) throws ServiceException;
 
         @PUT("/http/failure/client/404")
-        void put404Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
+        void put404Async(@Body boolean booleanValue, ServiceResponseCallback cb);
 
         @PATCH("/http/failure/client/405")
-        Response patch405(@Body Boolean booleanValue) throws ServiceException;
+        Response patch405(@Body boolean booleanValue) throws ServiceException;
 
         @PATCH("/http/failure/client/405")
-        void patch405Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
+        void patch405Async(@Body boolean booleanValue, ServiceResponseCallback cb);
 
         @POST("/http/failure/client/406")
-        Response post406(@Body Boolean booleanValue) throws ServiceException;
+        Response post406(@Body boolean booleanValue) throws ServiceException;
 
         @POST("/http/failure/client/406")
-        void post406Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
+        void post406Async(@Body boolean booleanValue, ServiceResponseCallback cb);
 
         @DELETE("/http/failure/client/407")
-        Response delete407(@Body Boolean booleanValue) throws ServiceException;
+        Response delete407(@Body boolean booleanValue) throws ServiceException;
 
         @DELETE("/http/failure/client/407")
-        void delete407Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
+        void delete407Async(@Body boolean booleanValue, ServiceResponseCallback cb);
 
         @PUT("/http/failure/client/409")
-        Response put409(@Body Boolean booleanValue) throws ServiceException;
+        Response put409(@Body boolean booleanValue) throws ServiceException;
 
         @PUT("/http/failure/client/409")
-        void put409Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
+        void put409Async(@Body boolean booleanValue, ServiceResponseCallback cb);
 
         @HEAD("/http/failure/client/410")
         Response head410() throws ServiceException;
@@ -137,22 +127,22 @@ public class HttpClientFailure {
         void get412Async(ServiceResponseCallback cb);
 
         @PUT("/http/failure/client/413")
-        Response put413(@Body Boolean booleanValue) throws ServiceException;
+        Response put413(@Body boolean booleanValue) throws ServiceException;
 
         @PUT("/http/failure/client/413")
-        void put413Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
+        void put413Async(@Body boolean booleanValue, ServiceResponseCallback cb);
 
         @PATCH("/http/failure/client/414")
-        Response patch414(@Body Boolean booleanValue) throws ServiceException;
+        Response patch414(@Body boolean booleanValue) throws ServiceException;
 
         @PATCH("/http/failure/client/414")
-        void patch414Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
+        void patch414Async(@Body boolean booleanValue, ServiceResponseCallback cb);
 
         @POST("/http/failure/client/415")
-        Response post415(@Body Boolean booleanValue) throws ServiceException;
+        Response post415(@Body boolean booleanValue) throws ServiceException;
 
         @POST("/http/failure/client/415")
-        void post415Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
+        void post415Async(@Body boolean booleanValue, ServiceResponseCallback cb);
 
         @GET("/http/failure/client/416")
         Response get416() throws ServiceException;
@@ -161,10 +151,10 @@ public class HttpClientFailure {
         void get416Async(ServiceResponseCallback cb);
 
         @DELETE("/http/failure/client/417")
-        Response delete417(@Body Boolean booleanValue) throws ServiceException;
+        Response delete417(@Body boolean booleanValue) throws ServiceException;
 
         @DELETE("/http/failure/client/417")
-        void delete417Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
+        void delete417Async(@Body boolean booleanValue, ServiceResponseCallback cb);
 
         @HEAD("/http/failure/client/429")
         Response head429() throws ServiceException;
@@ -173,625 +163,96 @@ public class HttpClientFailure {
         void head429Async(ServiceResponseCallback cb);
 
     }
-    public Error head400() throws ServiceException {
-        try {
-            return head400Delegate(service.head400(), null).getBody();
-        } catch (RetrofitError error) {
-            return head400Delegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void head400Async(final ServiceCallback<Error> serviceCallback) {
-        service.head400Async(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(head400Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> head400Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Error get400() throws ServiceException {
-        try {
-            return get400Delegate(service.get400(), null).getBody();
-        } catch (RetrofitError error) {
-            return get400Delegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void get400Async(final ServiceCallback<Error> serviceCallback) {
-        service.get400Async(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(get400Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> get400Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Error put400(Boolean booleanValue) throws ServiceException {
-        try {
-            return put400Delegate(service.put400(booleanValue), null).getBody();
-        } catch (RetrofitError error) {
-            return put400Delegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void put400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        service.put400Async(booleanValue, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(put400Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> put400Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Error patch400(Boolean booleanValue) throws ServiceException {
-        try {
-            return patch400Delegate(service.patch400(booleanValue), null).getBody();
-        } catch (RetrofitError error) {
-            return patch400Delegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void patch400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        service.patch400Async(booleanValue, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(patch400Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> patch400Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Error post400(Boolean booleanValue) throws ServiceException {
-        try {
-            return post400Delegate(service.post400(booleanValue), null).getBody();
-        } catch (RetrofitError error) {
-            return post400Delegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void post400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        service.post400Async(booleanValue, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(post400Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> post400Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Error delete400(Boolean booleanValue) throws ServiceException {
-        try {
-            return delete400Delegate(service.delete400(booleanValue), null).getBody();
-        } catch (RetrofitError error) {
-            return delete400Delegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void delete400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        service.delete400Async(booleanValue, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(delete400Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> delete400Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Error head401() throws ServiceException {
-        try {
-            return head401Delegate(service.head401(), null).getBody();
-        } catch (RetrofitError error) {
-            return head401Delegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void head401Async(final ServiceCallback<Error> serviceCallback) {
-        service.head401Async(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(head401Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> head401Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Error get402() throws ServiceException {
-        try {
-            return get402Delegate(service.get402(), null).getBody();
-        } catch (RetrofitError error) {
-            return get402Delegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void get402Async(final ServiceCallback<Error> serviceCallback) {
-        service.get402Async(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(get402Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> get402Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Error get403() throws ServiceException {
-        try {
-            return get403Delegate(service.get403(), null).getBody();
-        } catch (RetrofitError error) {
-            return get403Delegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void get403Async(final ServiceCallback<Error> serviceCallback) {
-        service.get403Async(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(get403Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> get403Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Error put404(Boolean booleanValue) throws ServiceException {
-        try {
-            return put404Delegate(service.put404(booleanValue), null).getBody();
-        } catch (RetrofitError error) {
-            return put404Delegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void put404Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        service.put404Async(booleanValue, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(put404Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> put404Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Error patch405(Boolean booleanValue) throws ServiceException {
-        try {
-            return patch405Delegate(service.patch405(booleanValue), null).getBody();
-        } catch (RetrofitError error) {
-            return patch405Delegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void patch405Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        service.patch405Async(booleanValue, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(patch405Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> patch405Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Error post406(Boolean booleanValue) throws ServiceException {
-        try {
-            return post406Delegate(service.post406(booleanValue), null).getBody();
-        } catch (RetrofitError error) {
-            return post406Delegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void post406Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        service.post406Async(booleanValue, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(post406Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> post406Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Error delete407(Boolean booleanValue) throws ServiceException {
-        try {
-            return delete407Delegate(service.delete407(booleanValue), null).getBody();
-        } catch (RetrofitError error) {
-            return delete407Delegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void delete407Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        service.delete407Async(booleanValue, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(delete407Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> delete407Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Error put409(Boolean booleanValue) throws ServiceException {
-        try {
-            return put409Delegate(service.put409(booleanValue), null).getBody();
-        } catch (RetrofitError error) {
-            return put409Delegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void put409Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        service.put409Async(booleanValue, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(put409Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> put409Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Error head410() throws ServiceException {
-        try {
-            return head410Delegate(service.head410(), null).getBody();
-        } catch (RetrofitError error) {
-            return head410Delegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void head410Async(final ServiceCallback<Error> serviceCallback) {
-        service.head410Async(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(head410Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> head410Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Error get411() throws ServiceException {
-        try {
-            return get411Delegate(service.get411(), null).getBody();
-        } catch (RetrofitError error) {
-            return get411Delegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void get411Async(final ServiceCallback<Error> serviceCallback) {
-        service.get411Async(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(get411Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> get411Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Error get412() throws ServiceException {
-        try {
-            return get412Delegate(service.get412(), null).getBody();
-        } catch (RetrofitError error) {
-            return get412Delegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void get412Async(final ServiceCallback<Error> serviceCallback) {
-        service.get412Async(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(get412Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> get412Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Error put413(Boolean booleanValue) throws ServiceException {
-        try {
-            return put413Delegate(service.put413(booleanValue), null).getBody();
-        } catch (RetrofitError error) {
-            return put413Delegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void put413Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        service.put413Async(booleanValue, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(put413Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> put413Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Error patch414(Boolean booleanValue) throws ServiceException {
-        try {
-            return patch414Delegate(service.patch414(booleanValue), null).getBody();
-        } catch (RetrofitError error) {
-            return patch414Delegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void patch414Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        service.patch414Async(booleanValue, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(patch414Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> patch414Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Error post415(Boolean booleanValue) throws ServiceException {
-        try {
-            return post415Delegate(service.post415(booleanValue), null).getBody();
-        } catch (RetrofitError error) {
-            return post415Delegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void post415Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        service.post415Async(booleanValue, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(post415Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> post415Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Error get416() throws ServiceException {
-        try {
-            return get416Delegate(service.get416(), null).getBody();
-        } catch (RetrofitError error) {
-            return get416Delegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void get416Async(final ServiceCallback<Error> serviceCallback) {
-        service.get416Async(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(get416Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> get416Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Error delete417(Boolean booleanValue) throws ServiceException {
-        try {
-            return delete417Delegate(service.delete417(booleanValue), null).getBody();
-        } catch (RetrofitError error) {
-            return delete417Delegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void delete417Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        service.delete417Async(booleanValue, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(delete417Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> delete417Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Error head429() throws ServiceException {
-        try {
-            return head429Delegate(service.head429(), null).getBody();
-        } catch (RetrofitError error) {
-            return head429Delegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void head429Async(final ServiceCallback<Error> serviceCallback) {
-        service.head429Async(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(head429Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> head429Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    Error head400() throws ServiceException;
+
+    void head400Async(final ServiceCallback<Error> serviceCallback);
+
+    Error get400() throws ServiceException;
+
+    void get400Async(final ServiceCallback<Error> serviceCallback);
+
+    Error put400(boolean booleanValue) throws ServiceException;
+
+    void put400Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+
+    Error patch400(boolean booleanValue) throws ServiceException;
+
+    void patch400Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+
+    Error post400(boolean booleanValue) throws ServiceException;
+
+    void post400Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+
+    Error delete400(boolean booleanValue) throws ServiceException;
+
+    void delete400Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+
+    Error head401() throws ServiceException;
+
+    void head401Async(final ServiceCallback<Error> serviceCallback);
+
+    Error get402() throws ServiceException;
+
+    void get402Async(final ServiceCallback<Error> serviceCallback);
+
+    Error get403() throws ServiceException;
+
+    void get403Async(final ServiceCallback<Error> serviceCallback);
+
+    Error put404(boolean booleanValue) throws ServiceException;
+
+    void put404Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+
+    Error patch405(boolean booleanValue) throws ServiceException;
+
+    void patch405Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+
+    Error post406(boolean booleanValue) throws ServiceException;
+
+    void post406Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+
+    Error delete407(boolean booleanValue) throws ServiceException;
+
+    void delete407Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+
+    Error put409(boolean booleanValue) throws ServiceException;
+
+    void put409Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+
+    Error head410() throws ServiceException;
+
+    void head410Async(final ServiceCallback<Error> serviceCallback);
+
+    Error get411() throws ServiceException;
+
+    void get411Async(final ServiceCallback<Error> serviceCallback);
+
+    Error get412() throws ServiceException;
+
+    void get412Async(final ServiceCallback<Error> serviceCallback);
+
+    Error put413(boolean booleanValue) throws ServiceException;
+
+    void put413Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+
+    Error patch414(boolean booleanValue) throws ServiceException;
+
+    void patch414Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+
+    Error post415(boolean booleanValue) throws ServiceException;
+
+    void post415Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+
+    Error get416() throws ServiceException;
+
+    void get416Async(final ServiceCallback<Error> serviceCallback);
+
+    Error delete417(boolean booleanValue) throws ServiceException;
+
+    void delete417Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+
+    Error head429() throws ServiceException;
+
+    void head429Async(final ServiceCallback<Error> serviceCallback);
 
 }

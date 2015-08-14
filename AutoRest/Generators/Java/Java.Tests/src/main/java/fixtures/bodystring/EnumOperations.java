@@ -9,28 +9,17 @@
 
 package fixtures.bodystring;
 
-import com.google.gson.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
 import fixtures.bodystring.models.Colors;
 import retrofit.http.GET;
 import retrofit.http.PUT;
 import retrofit.http.Body;
 
-public class EnumOperations {
-    private EnumService service;
-
-    public EnumOperations(RestAdapter restAdapter) {
-        service = restAdapter.create(EnumService.class);
-    }
-
-    public interface EnumService {
+public interface EnumOperations {
+    interface EnumService {
         @GET("/string/enum/notExpandable")
         Response getNotExpandable() throws ServiceException;
 
@@ -44,60 +33,12 @@ public class EnumOperations {
         void putNotExpandableAsync(@Body Colors stringBody, ServiceResponseCallback cb);
 
     }
-    public Colors getNotExpandable() throws ServiceException {
-        try {
-            return getNotExpandableDelegate(service.getNotExpandable(), null).getBody();
-        } catch (RetrofitError error) {
-            return getNotExpandableDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    Colors getNotExpandable() throws ServiceException;
 
-    public void getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback) {
-        service.getNotExpandableAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getNotExpandableDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback);
 
-    private ServiceResponse<Colors> getNotExpandableDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Colors>()
-                .register(200, new TypeToken<Colors>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void putNotExpandable(Colors stringBody) throws ServiceException;
 
-    public void putNotExpandable(Colors stringBody) throws ServiceException {
-        try {
-            putNotExpandableDelegate(service.putNotExpandable(stringBody), null).getBody();
-        } catch (RetrofitError error) {
-            putNotExpandableDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback) {
-        service.putNotExpandableAsync(stringBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putNotExpandableDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> putNotExpandableDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback);
 
 }

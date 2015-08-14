@@ -55,6 +55,6 @@ public class AutoRestSwaggerBATdictionaryServiceImpl extends ServiceClient imple
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.dictionary = new Dictionary(restAdapter);
+        this.dictionary = new DictionaryImpl(restAdapter);
     }
 }

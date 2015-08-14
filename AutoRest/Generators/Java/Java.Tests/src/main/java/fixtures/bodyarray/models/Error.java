@@ -14,15 +14,15 @@ package fixtures.bodyarray.models;
  * 
  */
 public class Error {
-    private Integer Status;
+    private int Status;
 
     private String Message;
 
-    public Integer getStatus() {
+    public int getStatus() {
         return this.Status;
     }
 
-    public void setStatus(Integer Status) {
+    public void setStatus(int Status) {
         this.Status = Status;
     }
 

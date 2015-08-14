@@ -20,7 +20,7 @@ repositories {
 }
 
 dependencies {
-    compile group: 'com.microsoft.rest', name:'client-runtime', version:"0.0.1-SNAPSHOT"
+    compile group: 'com.microsoft.rest', name:'client-runtime', version:'0.0.1-SNAPSHOT'
     compile group: 'com.squareup.retrofit', name:'retrofit', version:'1.9.0'
     compile group: 'com.squareup.okhttp', name:'okhttp', version:'2.4.0'
     compile group: 'com.squareup.retrofit', name:'converter-jackson', version:'1.9.0'

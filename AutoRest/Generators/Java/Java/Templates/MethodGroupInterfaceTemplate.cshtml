@@ -1,0 +1,42 @@
+﻿@using Microsoft.Rest.Generator.Java
+@using Microsoft.Rest.Generator.Java.Templates
+@using Microsoft.Rest.Generator.Utilities
+@using System.Linq;
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.MethodGroupTemplateModel>
+@Header("// ")
+@EmptyLine
+
+package @(Settings.Namespace.ToLower());
+@EmptyLine
+import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceException;
+import com.microsoft.rest.ServiceResponseCallback;
+import retrofit.client.Response;
+@foreach (var importClass in Model.InterfaceImports)
+{
+@:import @importClass;
+}
+@EmptyLine
+
+public interface @Model.MethodGroupType {
+    interface @Model.MethodGroupServiceType {
+    @foreach (var method in Model.MethodTemplateModels)
+    {
+    @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url)")
+    @:    Response @(method.Name)(@method.MethodParameterApiDeclaration) throws ServiceException;
+    @EmptyLine
+    @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url)")
+    @:    void @(method.Name)Async(@method.MethodParameterApiDeclarationWithCallback);
+    @EmptyLine
+    }
+    }
+
+    @foreach (var method in Model.MethodTemplateModels)
+    {
+    @:@method.ReturnTypeString @(method.Name)(@method.MethodParameterDeclaration) throws ServiceException;
+    @EmptyLine
+    @:void @(method.Name)Async(@method.MethodParameterDeclarationWithCallback);
+    @EmptyLine
+    }
+}
+

@@ -85,8 +85,8 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.paths = new Paths(restAdapter);
-        this.queries = new Queries(restAdapter);
-        this.pathItems = new PathItems(restAdapter);
+        this.paths = new PathsImpl(restAdapter);
+        this.queries = new QueriesImpl(restAdapter);
+        this.pathItems = new PathItemsImpl(restAdapter);
     }
 }

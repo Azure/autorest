@@ -9,15 +9,10 @@
 
 package fixtures.requiredoptional;
 
-import com.google.gson.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
 import fixtures.requiredoptional.models.IntWrapper;
 import fixtures.requiredoptional.models.IntOptionalWrapper;
 import fixtures.requiredoptional.models.StringWrapper;
@@ -28,18 +23,13 @@ import fixtures.requiredoptional.models.ClassOptionalWrapper;
 import java.util.List;
 import fixtures.requiredoptional.models.ArrayWrapper;
 import fixtures.requiredoptional.models.ArrayOptionalWrapper;
+import fixtures.requiredoptional.models.Error;
 import retrofit.http.POST;
 import retrofit.http.Body;
 import retrofit.http.Header;
 
-public class Explicit {
-    private ExplicitService service;
-
-    public Explicit(RestAdapter restAdapter) {
-        service = restAdapter.create(ExplicitService.class);
-    }
-
-    public interface ExplicitService {
+public interface Explicit {
+    interface ExplicitService {
         @POST("/reqopt/requied/integer/parameter")
         Response postRequiredIntegerParameter(@Body int bodyParameter) throws ServiceException;
 
@@ -173,609 +163,92 @@ public class Explicit {
         void postOptionalArrayHeaderAsync(@Header("headerParameter") List<String> headerParameter, ServiceResponseCallback cb);
 
     }
-    public Error postRequiredIntegerParameter(int bodyParameter) throws ServiceException {
-        try {
-            return postRequiredIntegerParameterDelegate(service.postRequiredIntegerParameter(bodyParameter), null).getBody();
-        } catch (RetrofitError error) {
-            return postRequiredIntegerParameterDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void postRequiredIntegerParameterAsync(int bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        service.postRequiredIntegerParameterAsync(bodyParameter, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(postRequiredIntegerParameterDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> postRequiredIntegerParameterDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void postOptionalIntegerParameter(int bodyParameter) throws ServiceException {
-        try {
-            postOptionalIntegerParameterDelegate(service.postOptionalIntegerParameter(bodyParameter), null).getBody();
-        } catch (RetrofitError error) {
-            postOptionalIntegerParameterDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void postOptionalIntegerParameterAsync(int bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        service.postOptionalIntegerParameterAsync(bodyParameter, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(postOptionalIntegerParameterDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> postOptionalIntegerParameterDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Error postRequiredIntegerProperty(IntWrapper bodyParameter) throws ServiceException {
-        try {
-            return postRequiredIntegerPropertyDelegate(service.postRequiredIntegerProperty(bodyParameter), null).getBody();
-        } catch (RetrofitError error) {
-            return postRequiredIntegerPropertyDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void postRequiredIntegerPropertyAsync(IntWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        service.postRequiredIntegerPropertyAsync(bodyParameter, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(postRequiredIntegerPropertyDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> postRequiredIntegerPropertyDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void postOptionalIntegerProperty(IntOptionalWrapper bodyParameter) throws ServiceException {
-        try {
-            postOptionalIntegerPropertyDelegate(service.postOptionalIntegerProperty(bodyParameter), null).getBody();
-        } catch (RetrofitError error) {
-            postOptionalIntegerPropertyDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        service.postOptionalIntegerPropertyAsync(bodyParameter, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(postOptionalIntegerPropertyDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> postOptionalIntegerPropertyDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Error postRequiredIntegerHeader(int headerParameter) throws ServiceException {
-        try {
-            return postRequiredIntegerHeaderDelegate(service.postRequiredIntegerHeader(headerParameter), null).getBody();
-        } catch (RetrofitError error) {
-            return postRequiredIntegerHeaderDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void postRequiredIntegerHeaderAsync(int headerParameter, final ServiceCallback<Error> serviceCallback) {
-        service.postRequiredIntegerHeaderAsync(headerParameter, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(postRequiredIntegerHeaderDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> postRequiredIntegerHeaderDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void postOptionalIntegerHeader(int headerParameter) throws ServiceException {
-        try {
-            postOptionalIntegerHeaderDelegate(service.postOptionalIntegerHeader(headerParameter), null).getBody();
-        } catch (RetrofitError error) {
-            postOptionalIntegerHeaderDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void postOptionalIntegerHeaderAsync(int headerParameter, final ServiceCallback<Void> serviceCallback) {
-        service.postOptionalIntegerHeaderAsync(headerParameter, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(postOptionalIntegerHeaderDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> postOptionalIntegerHeaderDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Error postRequiredStringParameter(String bodyParameter) throws ServiceException {
-        try {
-            return postRequiredStringParameterDelegate(service.postRequiredStringParameter(bodyParameter), null).getBody();
-        } catch (RetrofitError error) {
-            return postRequiredStringParameterDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void postRequiredStringParameterAsync(String bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        service.postRequiredStringParameterAsync(bodyParameter, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(postRequiredStringParameterDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> postRequiredStringParameterDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void postOptionalStringParameter(String bodyParameter) throws ServiceException {
-        try {
-            postOptionalStringParameterDelegate(service.postOptionalStringParameter(bodyParameter), null).getBody();
-        } catch (RetrofitError error) {
-            postOptionalStringParameterDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void postOptionalStringParameterAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        service.postOptionalStringParameterAsync(bodyParameter, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(postOptionalStringParameterDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> postOptionalStringParameterDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Error postRequiredStringProperty(StringWrapper bodyParameter) throws ServiceException {
-        try {
-            return postRequiredStringPropertyDelegate(service.postRequiredStringProperty(bodyParameter), null).getBody();
-        } catch (RetrofitError error) {
-            return postRequiredStringPropertyDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void postRequiredStringPropertyAsync(StringWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        service.postRequiredStringPropertyAsync(bodyParameter, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(postRequiredStringPropertyDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> postRequiredStringPropertyDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void postOptionalStringProperty(StringOptionalWrapper bodyParameter) throws ServiceException {
-        try {
-            postOptionalStringPropertyDelegate(service.postOptionalStringProperty(bodyParameter), null).getBody();
-        } catch (RetrofitError error) {
-            postOptionalStringPropertyDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        service.postOptionalStringPropertyAsync(bodyParameter, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(postOptionalStringPropertyDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> postOptionalStringPropertyDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Error postRequiredStringHeader(String headerParameter) throws ServiceException {
-        try {
-            return postRequiredStringHeaderDelegate(service.postRequiredStringHeader(headerParameter), null).getBody();
-        } catch (RetrofitError error) {
-            return postRequiredStringHeaderDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void postRequiredStringHeaderAsync(String headerParameter, final ServiceCallback<Error> serviceCallback) {
-        service.postRequiredStringHeaderAsync(headerParameter, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(postRequiredStringHeaderDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> postRequiredStringHeaderDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void postOptionalStringHeader(String bodyParameter) throws ServiceException {
-        try {
-            postOptionalStringHeaderDelegate(service.postOptionalStringHeader(bodyParameter), null).getBody();
-        } catch (RetrofitError error) {
-            postOptionalStringHeaderDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void postOptionalStringHeaderAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        service.postOptionalStringHeaderAsync(bodyParameter, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(postOptionalStringHeaderDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> postOptionalStringHeaderDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Error postRequiredClassParameter(Product bodyParameter) throws ServiceException {
-        try {
-            return postRequiredClassParameterDelegate(service.postRequiredClassParameter(bodyParameter), null).getBody();
-        } catch (RetrofitError error) {
-            return postRequiredClassParameterDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void postRequiredClassParameterAsync(Product bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        service.postRequiredClassParameterAsync(bodyParameter, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(postRequiredClassParameterDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> postRequiredClassParameterDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void postOptionalClassParameter(Product bodyParameter) throws ServiceException {
-        try {
-            postOptionalClassParameterDelegate(service.postOptionalClassParameter(bodyParameter), null).getBody();
-        } catch (RetrofitError error) {
-            postOptionalClassParameterDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void postOptionalClassParameterAsync(Product bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        service.postOptionalClassParameterAsync(bodyParameter, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(postOptionalClassParameterDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> postOptionalClassParameterDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Error postRequiredClassProperty(ClassWrapper bodyParameter) throws ServiceException {
-        try {
-            return postRequiredClassPropertyDelegate(service.postRequiredClassProperty(bodyParameter), null).getBody();
-        } catch (RetrofitError error) {
-            return postRequiredClassPropertyDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void postRequiredClassPropertyAsync(ClassWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        service.postRequiredClassPropertyAsync(bodyParameter, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(postRequiredClassPropertyDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> postRequiredClassPropertyDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void postOptionalClassProperty(ClassOptionalWrapper bodyParameter) throws ServiceException {
-        try {
-            postOptionalClassPropertyDelegate(service.postOptionalClassProperty(bodyParameter), null).getBody();
-        } catch (RetrofitError error) {
-            postOptionalClassPropertyDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        service.postOptionalClassPropertyAsync(bodyParameter, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(postOptionalClassPropertyDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> postOptionalClassPropertyDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Error postRequiredArrayParameter(List<String> bodyParameter) throws ServiceException {
-        try {
-            return postRequiredArrayParameterDelegate(service.postRequiredArrayParameter(bodyParameter), null).getBody();
-        } catch (RetrofitError error) {
-            return postRequiredArrayParameterDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void postRequiredArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        service.postRequiredArrayParameterAsync(bodyParameter, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(postRequiredArrayParameterDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> postRequiredArrayParameterDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void postOptionalArrayParameter(List<String> bodyParameter) throws ServiceException {
-        try {
-            postOptionalArrayParameterDelegate(service.postOptionalArrayParameter(bodyParameter), null).getBody();
-        } catch (RetrofitError error) {
-            postOptionalArrayParameterDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void postOptionalArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        service.postOptionalArrayParameterAsync(bodyParameter, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(postOptionalArrayParameterDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> postOptionalArrayParameterDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Error postRequiredArrayProperty(ArrayWrapper bodyParameter) throws ServiceException {
-        try {
-            return postRequiredArrayPropertyDelegate(service.postRequiredArrayProperty(bodyParameter), null).getBody();
-        } catch (RetrofitError error) {
-            return postRequiredArrayPropertyDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        service.postRequiredArrayPropertyAsync(bodyParameter, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(postRequiredArrayPropertyDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> postRequiredArrayPropertyDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void postOptionalArrayProperty(ArrayOptionalWrapper bodyParameter) throws ServiceException {
-        try {
-            postOptionalArrayPropertyDelegate(service.postOptionalArrayProperty(bodyParameter), null).getBody();
-        } catch (RetrofitError error) {
-            postOptionalArrayPropertyDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        service.postOptionalArrayPropertyAsync(bodyParameter, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(postOptionalArrayPropertyDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> postOptionalArrayPropertyDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Error postRequiredArrayHeader(List<String> headerParameter) throws ServiceException {
-        try {
-            return postRequiredArrayHeaderDelegate(service.postRequiredArrayHeader(headerParameter), null).getBody();
-        } catch (RetrofitError error) {
-            return postRequiredArrayHeaderDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void postRequiredArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Error> serviceCallback) {
-        service.postRequiredArrayHeaderAsync(headerParameter, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(postRequiredArrayHeaderDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Error> postRequiredArrayHeaderDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Error>()
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void postOptionalArrayHeader(List<String> headerParameter) throws ServiceException {
-        try {
-            postOptionalArrayHeaderDelegate(service.postOptionalArrayHeader(headerParameter), null).getBody();
-        } catch (RetrofitError error) {
-            postOptionalArrayHeaderDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void postOptionalArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Void> serviceCallback) {
-        service.postOptionalArrayHeaderAsync(headerParameter, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(postOptionalArrayHeaderDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> postOptionalArrayHeaderDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    Error postRequiredIntegerParameter(int bodyParameter) throws ServiceException;
+
+    void postRequiredIntegerParameterAsync(int bodyParameter, final ServiceCallback<Error> serviceCallback);
+
+    void postOptionalIntegerParameter(int bodyParameter) throws ServiceException;
+
+    void postOptionalIntegerParameterAsync(int bodyParameter, final ServiceCallback<Void> serviceCallback);
+
+    Error postRequiredIntegerProperty(IntWrapper bodyParameter) throws ServiceException;
+
+    void postRequiredIntegerPropertyAsync(IntWrapper bodyParameter, final ServiceCallback<Error> serviceCallback);
+
+    void postOptionalIntegerProperty(IntOptionalWrapper bodyParameter) throws ServiceException;
+
+    void postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback);
+
+    Error postRequiredIntegerHeader(int headerParameter) throws ServiceException;
+
+    void postRequiredIntegerHeaderAsync(int headerParameter, final ServiceCallback<Error> serviceCallback);
+
+    void postOptionalIntegerHeader(int headerParameter) throws ServiceException;
+
+    void postOptionalIntegerHeaderAsync(int headerParameter, final ServiceCallback<Void> serviceCallback);
+
+    Error postRequiredStringParameter(String bodyParameter) throws ServiceException;
+
+    void postRequiredStringParameterAsync(String bodyParameter, final ServiceCallback<Error> serviceCallback);
+
+    void postOptionalStringParameter(String bodyParameter) throws ServiceException;
+
+    void postOptionalStringParameterAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback);
+
+    Error postRequiredStringProperty(StringWrapper bodyParameter) throws ServiceException;
+
+    void postRequiredStringPropertyAsync(StringWrapper bodyParameter, final ServiceCallback<Error> serviceCallback);
+
+    void postOptionalStringProperty(StringOptionalWrapper bodyParameter) throws ServiceException;
+
+    void postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback);
+
+    Error postRequiredStringHeader(String headerParameter) throws ServiceException;
+
+    void postRequiredStringHeaderAsync(String headerParameter, final ServiceCallback<Error> serviceCallback);
+
+    void postOptionalStringHeader(String bodyParameter) throws ServiceException;
+
+    void postOptionalStringHeaderAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback);
+
+    Error postRequiredClassParameter(Product bodyParameter) throws ServiceException;
+
+    void postRequiredClassParameterAsync(Product bodyParameter, final ServiceCallback<Error> serviceCallback);
+
+    void postOptionalClassParameter(Product bodyParameter) throws ServiceException;
+
+    void postOptionalClassParameterAsync(Product bodyParameter, final ServiceCallback<Void> serviceCallback);
+
+    Error postRequiredClassProperty(ClassWrapper bodyParameter) throws ServiceException;
+
+    void postRequiredClassPropertyAsync(ClassWrapper bodyParameter, final ServiceCallback<Error> serviceCallback);
+
+    void postOptionalClassProperty(ClassOptionalWrapper bodyParameter) throws ServiceException;
+
+    void postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback);
+
+    Error postRequiredArrayParameter(List<String> bodyParameter) throws ServiceException;
+
+    void postRequiredArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Error> serviceCallback);
+
+    void postOptionalArrayParameter(List<String> bodyParameter) throws ServiceException;
+
+    void postOptionalArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Void> serviceCallback);
+
+    Error postRequiredArrayProperty(ArrayWrapper bodyParameter) throws ServiceException;
+
+    void postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter, final ServiceCallback<Error> serviceCallback);
+
+    void postOptionalArrayProperty(ArrayOptionalWrapper bodyParameter) throws ServiceException;
+
+    void postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback);
+
+    Error postRequiredArrayHeader(List<String> headerParameter) throws ServiceException;
+
+    void postRequiredArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Error> serviceCallback);
+
+    void postOptionalArrayHeader(List<String> headerParameter) throws ServiceException;
+
+    void postOptionalArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Void> serviceCallback);
 
 }

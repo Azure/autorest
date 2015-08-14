@@ -9,28 +9,17 @@
 
 package fixtures.bodycomplex;
 
-import com.google.gson.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
 import fixtures.bodycomplex.models.Basic;
 import retrofit.http.GET;
 import retrofit.http.PUT;
 import retrofit.http.Body;
 
-public class BasicOperations {
-    private BasicService service;
-
-    public BasicOperations(RestAdapter restAdapter) {
-        service = restAdapter.create(BasicService.class);
-    }
-
-    public interface BasicService {
+public interface BasicOperations {
+    interface BasicService {
         @GET("/complex/basic/valid")
         Response getValid() throws ServiceException;
 
@@ -68,172 +57,28 @@ public class BasicOperations {
         void getNotProvidedAsync(ServiceResponseCallback cb);
 
     }
-    public Basic getValid() throws ServiceException {
-        try {
-            return getValidDelegate(service.getValid(), null).getBody();
-        } catch (RetrofitError error) {
-            return getValidDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    Basic getValid() throws ServiceException;
 
-    public void getValidAsync(final ServiceCallback<Basic> serviceCallback) {
-        service.getValidAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getValidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void getValidAsync(final ServiceCallback<Basic> serviceCallback);
 
-    private ServiceResponse<Basic> getValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Basic>()
-                .register(200, new TypeToken<Basic>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void putValid(Basic complexBody) throws ServiceException;
 
-    public void putValid(Basic complexBody) throws ServiceException {
-        try {
-            putValidDelegate(service.putValid(complexBody), null).getBody();
-        } catch (RetrofitError error) {
-            putValidDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    void putValidAsync(Basic complexBody, final ServiceCallback<Void> serviceCallback);
 
-    public void putValidAsync(Basic complexBody, final ServiceCallback<Void> serviceCallback) {
-        service.putValidAsync(complexBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putValidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    Basic getInvalid() throws ServiceException;
 
-    private ServiceResponse<Void> putValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void getInvalidAsync(final ServiceCallback<Basic> serviceCallback);
 
-    public Basic getInvalid() throws ServiceException {
-        try {
-            return getInvalidDelegate(service.getInvalid(), null).getBody();
-        } catch (RetrofitError error) {
-            return getInvalidDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    Basic getEmpty() throws ServiceException;
 
-    public void getInvalidAsync(final ServiceCallback<Basic> serviceCallback) {
-        service.getInvalidAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getInvalidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void getEmptyAsync(final ServiceCallback<Basic> serviceCallback);
 
-    private ServiceResponse<Basic> getInvalidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Basic>()
-                .register(200, new TypeToken<Basic>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    Basic getNull() throws ServiceException;
 
-    public Basic getEmpty() throws ServiceException {
-        try {
-            return getEmptyDelegate(service.getEmpty(), null).getBody();
-        } catch (RetrofitError error) {
-            return getEmptyDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    void getNullAsync(final ServiceCallback<Basic> serviceCallback);
 
-    public void getEmptyAsync(final ServiceCallback<Basic> serviceCallback) {
-        service.getEmptyAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getEmptyDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    Basic getNotProvided() throws ServiceException;
 
-    private ServiceResponse<Basic> getEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Basic>()
-                .register(200, new TypeToken<Basic>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Basic getNull() throws ServiceException {
-        try {
-            return getNullDelegate(service.getNull(), null).getBody();
-        } catch (RetrofitError error) {
-            return getNullDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getNullAsync(final ServiceCallback<Basic> serviceCallback) {
-        service.getNullAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getNullDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Basic> getNullDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Basic>()
-                .register(200, new TypeToken<Basic>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Basic getNotProvided() throws ServiceException {
-        try {
-            return getNotProvidedDelegate(service.getNotProvided(), null).getBody();
-        } catch (RetrofitError error) {
-            return getNotProvidedDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getNotProvidedAsync(final ServiceCallback<Basic> serviceCallback) {
-        service.getNotProvidedAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getNotProvidedDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Basic> getNotProvidedDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Basic>()
-                .register(200, new TypeToken<Basic>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void getNotProvidedAsync(final ServiceCallback<Basic> serviceCallback);
 
 }

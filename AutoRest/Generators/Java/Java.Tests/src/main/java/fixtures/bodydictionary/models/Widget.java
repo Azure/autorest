@@ -14,15 +14,15 @@ package fixtures.bodydictionary.models;
  * 
  */
 public class Widget {
-    private Integer Integer;
+    private int Integer;
 
     private String StringProperty;
 
-    public Integer getInteger() {
+    public int getInteger() {
         return this.Integer;
     }
 
-    public void setInteger(Integer Integer) {
+    public void setInteger(int Integer) {
         this.Integer = Integer;
     }
 
