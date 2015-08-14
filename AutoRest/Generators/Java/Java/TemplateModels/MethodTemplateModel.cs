@@ -135,6 +135,20 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        public string MethodParameterInvocationWithCallback
+        {
+            get
+            {
+                var parameters = MethodParameterInvocation;
+                if (!parameters.IsNullOrEmpty())
+                {
+                    parameters += ", ";
+                }
+                parameters += string.Format("new ServiceResponseCallback()");
+                return parameters;
+            }
+        }
+
         /// <summary>
         /// Gets the expression for response body initialization 
         /// </summary>
@@ -158,7 +172,7 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     parameters += ", ";
                 }
-                parameters += string.Format("ServiceCallback<{0}> serviceCallback",
+                parameters += string.Format("ServiceResponseCallback cb",
                     ReturnType != null ? JavaCodeNamer.NormalizeGenericType(ReturnType).ToString() : "Void");
                 return parameters;
             }

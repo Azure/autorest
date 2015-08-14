@@ -9,6 +9,7 @@
 
 package fixtures.http;
 
+import com.google.gson.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -18,217 +19,222 @@ import retrofit.client.Response;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import fixtures.http.models.A;
+import fixtures.http.models.B;
+import fixtures.http.models.C;
+import fixtures.http.models.D;
 import retrofit.http.GET;
 
 public class MultipleResponses {
     private MultipleResponsesService service;
+
     public MultipleResponses(RestAdapter restAdapter) {
         service = restAdapter.create(MultipleResponsesService.class);
     }
+
     public interface MultipleResponsesService {
         @GET("/http/payloads/200/A/204/none/default/Error/response/200/valid")
-        A get200Model204NoModelDefaultError200Valid() throws ServiceException;
+        Response get200Model204NoModelDefaultError200Valid() throws ServiceException;
 
         @GET("/http/payloads/200/A/204/none/default/Error/response/200/valid")
-        void get200Model204NoModelDefaultError200ValidAsync(ServiceCallback<A> serviceCallback);
+        void get200Model204NoModelDefaultError200ValidAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/200/A/204/none/default/Error/response/204/none")
-        A get200Model204NoModelDefaultError204Valid() throws ServiceException;
+        Response get200Model204NoModelDefaultError204Valid() throws ServiceException;
 
         @GET("/http/payloads/200/A/204/none/default/Error/response/204/none")
-        void get200Model204NoModelDefaultError204ValidAsync(ServiceCallback<A> serviceCallback);
+        void get200Model204NoModelDefaultError204ValidAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/200/A/204/none/default/Error/response/201/valid")
-        A get200Model204NoModelDefaultError201Invalid() throws ServiceException;
+        Response get200Model204NoModelDefaultError201Invalid() throws ServiceException;
 
         @GET("/http/payloads/200/A/204/none/default/Error/response/201/valid")
-        void get200Model204NoModelDefaultError201InvalidAsync(ServiceCallback<A> serviceCallback);
+        void get200Model204NoModelDefaultError201InvalidAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/200/A/204/none/default/Error/response/202/none")
-        A get200Model204NoModelDefaultError202None() throws ServiceException;
+        Response get200Model204NoModelDefaultError202None() throws ServiceException;
 
         @GET("/http/payloads/200/A/204/none/default/Error/response/202/none")
-        void get200Model204NoModelDefaultError202NoneAsync(ServiceCallback<A> serviceCallback);
+        void get200Model204NoModelDefaultError202NoneAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/200/A/204/none/default/Error/response/400/valid")
-        A get200Model204NoModelDefaultError400Valid() throws ServiceException;
+        Response get200Model204NoModelDefaultError400Valid() throws ServiceException;
 
         @GET("/http/payloads/200/A/204/none/default/Error/response/400/valid")
-        void get200Model204NoModelDefaultError400ValidAsync(ServiceCallback<A> serviceCallback);
+        void get200Model204NoModelDefaultError400ValidAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/200/A/201/B/default/Error/response/200/valid")
-        A get200Model201ModelDefaultError200Valid() throws ServiceException;
+        Response get200Model201ModelDefaultError200Valid() throws ServiceException;
 
         @GET("/http/payloads/200/A/201/B/default/Error/response/200/valid")
-        void get200Model201ModelDefaultError200ValidAsync(ServiceCallback<A> serviceCallback);
+        void get200Model201ModelDefaultError200ValidAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/200/A/201/B/default/Error/response/201/valid")
-        A get200Model201ModelDefaultError201Valid() throws ServiceException;
+        Response get200Model201ModelDefaultError201Valid() throws ServiceException;
 
         @GET("/http/payloads/200/A/201/B/default/Error/response/201/valid")
-        void get200Model201ModelDefaultError201ValidAsync(ServiceCallback<A> serviceCallback);
+        void get200Model201ModelDefaultError201ValidAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/200/A/201/B/default/Error/response/400/valid")
-        A get200Model201ModelDefaultError400Valid() throws ServiceException;
+        Response get200Model201ModelDefaultError400Valid() throws ServiceException;
 
         @GET("/http/payloads/200/A/201/B/default/Error/response/400/valid")
-        void get200Model201ModelDefaultError400ValidAsync(ServiceCallback<A> serviceCallback);
+        void get200Model201ModelDefaultError400ValidAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/200/valid")
-        Object get200ModelA201ModelC404ModelDDefaultError200Valid() throws ServiceException;
+        Response get200ModelA201ModelC404ModelDDefaultError200Valid() throws ServiceException;
 
         @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/200/valid")
-        void get200ModelA201ModelC404ModelDDefaultError200ValidAsync(ServiceCallback<Object> serviceCallback);
+        void get200ModelA201ModelC404ModelDDefaultError200ValidAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/201/valid")
-        Object get200ModelA201ModelC404ModelDDefaultError201Valid() throws ServiceException;
+        Response get200ModelA201ModelC404ModelDDefaultError201Valid() throws ServiceException;
 
         @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/201/valid")
-        void get200ModelA201ModelC404ModelDDefaultError201ValidAsync(ServiceCallback<Object> serviceCallback);
+        void get200ModelA201ModelC404ModelDDefaultError201ValidAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/404/valid")
-        Object get200ModelA201ModelC404ModelDDefaultError404Valid() throws ServiceException;
+        Response get200ModelA201ModelC404ModelDDefaultError404Valid() throws ServiceException;
 
         @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/404/valid")
-        void get200ModelA201ModelC404ModelDDefaultError404ValidAsync(ServiceCallback<Object> serviceCallback);
+        void get200ModelA201ModelC404ModelDDefaultError404ValidAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/400/valid")
-        Object get200ModelA201ModelC404ModelDDefaultError400Valid() throws ServiceException;
+        Response get200ModelA201ModelC404ModelDDefaultError400Valid() throws ServiceException;
 
         @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/400/valid")
-        void get200ModelA201ModelC404ModelDDefaultError400ValidAsync(ServiceCallback<Object> serviceCallback);
+        void get200ModelA201ModelC404ModelDDefaultError400ValidAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/202/none/204/none/default/Error/response/202/none")
-        void get202None204NoneDefaultError202None() throws ServiceException;
+        Response get202None204NoneDefaultError202None() throws ServiceException;
 
         @GET("/http/payloads/202/none/204/none/default/Error/response/202/none")
-        void get202None204NoneDefaultError202NoneAsync(ServiceCallback<Void> serviceCallback);
+        void get202None204NoneDefaultError202NoneAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/202/none/204/none/default/Error/response/204/none")
-        void get202None204NoneDefaultError204None() throws ServiceException;
+        Response get202None204NoneDefaultError204None() throws ServiceException;
 
         @GET("/http/payloads/202/none/204/none/default/Error/response/204/none")
-        void get202None204NoneDefaultError204NoneAsync(ServiceCallback<Void> serviceCallback);
+        void get202None204NoneDefaultError204NoneAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/202/none/204/none/default/Error/response/400/valid")
-        void get202None204NoneDefaultError400Valid() throws ServiceException;
+        Response get202None204NoneDefaultError400Valid() throws ServiceException;
 
         @GET("/http/payloads/202/none/204/none/default/Error/response/400/valid")
-        void get202None204NoneDefaultError400ValidAsync(ServiceCallback<Void> serviceCallback);
+        void get202None204NoneDefaultError400ValidAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/202/none/204/none/default/none/response/202/invalid")
-        void get202None204NoneDefaultNone202Invalid() throws ServiceException;
+        Response get202None204NoneDefaultNone202Invalid() throws ServiceException;
 
         @GET("/http/payloads/202/none/204/none/default/none/response/202/invalid")
-        void get202None204NoneDefaultNone202InvalidAsync(ServiceCallback<Void> serviceCallback);
+        void get202None204NoneDefaultNone202InvalidAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/202/none/204/none/default/none/response/204/none")
-        void get202None204NoneDefaultNone204None() throws ServiceException;
+        Response get202None204NoneDefaultNone204None() throws ServiceException;
 
         @GET("/http/payloads/202/none/204/none/default/none/response/204/none")
-        void get202None204NoneDefaultNone204NoneAsync(ServiceCallback<Void> serviceCallback);
+        void get202None204NoneDefaultNone204NoneAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/202/none/204/none/default/none/response/400/none")
-        void get202None204NoneDefaultNone400None() throws ServiceException;
+        Response get202None204NoneDefaultNone400None() throws ServiceException;
 
         @GET("/http/payloads/202/none/204/none/default/none/response/400/none")
-        void get202None204NoneDefaultNone400NoneAsync(ServiceCallback<Void> serviceCallback);
+        void get202None204NoneDefaultNone400NoneAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/202/none/204/none/default/none/response/400/invalid")
-        void get202None204NoneDefaultNone400Invalid() throws ServiceException;
+        Response get202None204NoneDefaultNone400Invalid() throws ServiceException;
 
         @GET("/http/payloads/202/none/204/none/default/none/response/400/invalid")
-        void get202None204NoneDefaultNone400InvalidAsync(ServiceCallback<Void> serviceCallback);
+        void get202None204NoneDefaultNone400InvalidAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/default/A/response/200/valid")
-        A getDefaultModelA200Valid() throws ServiceException;
+        Response getDefaultModelA200Valid() throws ServiceException;
 
         @GET("/http/payloads/default/A/response/200/valid")
-        void getDefaultModelA200ValidAsync(ServiceCallback<A> serviceCallback);
+        void getDefaultModelA200ValidAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/default/A/response/200/none")
-        A getDefaultModelA200None() throws ServiceException;
+        Response getDefaultModelA200None() throws ServiceException;
 
         @GET("/http/payloads/default/A/response/200/none")
-        void getDefaultModelA200NoneAsync(ServiceCallback<A> serviceCallback);
+        void getDefaultModelA200NoneAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/default/A/response/400/valid")
-        A getDefaultModelA400Valid() throws ServiceException;
+        Response getDefaultModelA400Valid() throws ServiceException;
 
         @GET("/http/payloads/default/A/response/400/valid")
-        void getDefaultModelA400ValidAsync(ServiceCallback<A> serviceCallback);
+        void getDefaultModelA400ValidAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/default/A/response/400/none")
-        A getDefaultModelA400None() throws ServiceException;
+        Response getDefaultModelA400None() throws ServiceException;
 
         @GET("/http/payloads/default/A/response/400/none")
-        void getDefaultModelA400NoneAsync(ServiceCallback<A> serviceCallback);
+        void getDefaultModelA400NoneAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/default/none/response/200/invalid")
-        void getDefaultNone200Invalid() throws ServiceException;
+        Response getDefaultNone200Invalid() throws ServiceException;
 
         @GET("/http/payloads/default/none/response/200/invalid")
-        void getDefaultNone200InvalidAsync(ServiceCallback<Void> serviceCallback);
+        void getDefaultNone200InvalidAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/default/none/response/200/none")
-        void getDefaultNone200None() throws ServiceException;
+        Response getDefaultNone200None() throws ServiceException;
 
         @GET("/http/payloads/default/none/response/200/none")
-        void getDefaultNone200NoneAsync(ServiceCallback<Void> serviceCallback);
+        void getDefaultNone200NoneAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/default/none/response/400/invalid")
-        void getDefaultNone400Invalid() throws ServiceException;
+        Response getDefaultNone400Invalid() throws ServiceException;
 
         @GET("/http/payloads/default/none/response/400/invalid")
-        void getDefaultNone400InvalidAsync(ServiceCallback<Void> serviceCallback);
+        void getDefaultNone400InvalidAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/default/none/response/400/none")
-        void getDefaultNone400None() throws ServiceException;
+        Response getDefaultNone400None() throws ServiceException;
 
         @GET("/http/payloads/default/none/response/400/none")
-        void getDefaultNone400NoneAsync(ServiceCallback<Void> serviceCallback);
+        void getDefaultNone400NoneAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/200/A/response/200/none")
-        A get200ModelA200None() throws ServiceException;
+        Response get200ModelA200None() throws ServiceException;
 
         @GET("/http/payloads/200/A/response/200/none")
-        void get200ModelA200NoneAsync(ServiceCallback<A> serviceCallback);
+        void get200ModelA200NoneAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/200/A/response/200/valid")
-        A get200ModelA200Valid() throws ServiceException;
+        Response get200ModelA200Valid() throws ServiceException;
 
         @GET("/http/payloads/200/A/response/200/valid")
-        void get200ModelA200ValidAsync(ServiceCallback<A> serviceCallback);
+        void get200ModelA200ValidAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/200/A/response/200/invalid")
-        A get200ModelA200Invalid() throws ServiceException;
+        Response get200ModelA200Invalid() throws ServiceException;
 
         @GET("/http/payloads/200/A/response/200/invalid")
-        void get200ModelA200InvalidAsync(ServiceCallback<A> serviceCallback);
+        void get200ModelA200InvalidAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/200/A/response/400/none")
-        A get200ModelA400None() throws ServiceException;
+        Response get200ModelA400None() throws ServiceException;
 
         @GET("/http/payloads/200/A/response/400/none")
-        void get200ModelA400NoneAsync(ServiceCallback<A> serviceCallback);
+        void get200ModelA400NoneAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/200/A/response/400/valid")
-        A get200ModelA400Valid() throws ServiceException;
+        Response get200ModelA400Valid() throws ServiceException;
 
         @GET("/http/payloads/200/A/response/400/valid")
-        void get200ModelA400ValidAsync(ServiceCallback<A> serviceCallback);
+        void get200ModelA400ValidAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/200/A/response/400/invalid")
-        A get200ModelA400Invalid() throws ServiceException;
+        Response get200ModelA400Invalid() throws ServiceException;
 
         @GET("/http/payloads/200/A/response/400/invalid")
-        void get200ModelA400InvalidAsync(ServiceCallback<A> serviceCallback);
+        void get200ModelA400InvalidAsync(ServiceResponseCallback cb);
 
         @GET("/http/payloads/200/A/response/202/valid")
-        A get200ModelA202Valid() throws ServiceException;
+        Response get200ModelA202Valid() throws ServiceException;
 
         @GET("/http/payloads/200/A/response/202/valid")
-        void get200ModelA202ValidAsync(ServiceCallback<A> serviceCallback);
+        void get200ModelA202ValidAsync(ServiceResponseCallback cb);
 
     }
     public A get200Model204NoModelDefaultError200Valid() throws ServiceException {
@@ -240,7 +246,7 @@ public class MultipleResponses {
     }
 
     public void get200Model204NoModelDefaultError200ValidAsync(final ServiceCallback<A> serviceCallback) {
-        service.get200Model204NoModelDefaultError200ValidAsyncd(new ServiceResponseCallback() {
+        service.get200Model204NoModelDefaultError200ValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -254,10 +260,10 @@ public class MultipleResponses {
 
     private ServiceResponse<A> get200Model204NoModelDefaultError200ValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<A>()
-                  .register(200, A.class)
-                  .register(204, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<A>(){}.getType())
+                .register(204, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public A get200Model204NoModelDefaultError204Valid() throws ServiceException {
@@ -269,7 +275,7 @@ public class MultipleResponses {
     }
 
     public void get200Model204NoModelDefaultError204ValidAsync(final ServiceCallback<A> serviceCallback) {
-        service.get200Model204NoModelDefaultError204ValidAsyncd(new ServiceResponseCallback() {
+        service.get200Model204NoModelDefaultError204ValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -283,10 +289,10 @@ public class MultipleResponses {
 
     private ServiceResponse<A> get200Model204NoModelDefaultError204ValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<A>()
-                  .register(200, A.class)
-                  .register(204, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<A>(){}.getType())
+                .register(204, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public A get200Model204NoModelDefaultError201Invalid() throws ServiceException {
@@ -298,7 +304,7 @@ public class MultipleResponses {
     }
 
     public void get200Model204NoModelDefaultError201InvalidAsync(final ServiceCallback<A> serviceCallback) {
-        service.get200Model204NoModelDefaultError201InvalidAsyncd(new ServiceResponseCallback() {
+        service.get200Model204NoModelDefaultError201InvalidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -312,10 +318,10 @@ public class MultipleResponses {
 
     private ServiceResponse<A> get200Model204NoModelDefaultError201InvalidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<A>()
-                  .register(200, A.class)
-                  .register(204, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<A>(){}.getType())
+                .register(204, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public A get200Model204NoModelDefaultError202None() throws ServiceException {
@@ -327,7 +333,7 @@ public class MultipleResponses {
     }
 
     public void get200Model204NoModelDefaultError202NoneAsync(final ServiceCallback<A> serviceCallback) {
-        service.get200Model204NoModelDefaultError202NoneAsyncd(new ServiceResponseCallback() {
+        service.get200Model204NoModelDefaultError202NoneAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -341,10 +347,10 @@ public class MultipleResponses {
 
     private ServiceResponse<A> get200Model204NoModelDefaultError202NoneDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<A>()
-                  .register(200, A.class)
-                  .register(204, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<A>(){}.getType())
+                .register(204, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public A get200Model204NoModelDefaultError400Valid() throws ServiceException {
@@ -356,7 +362,7 @@ public class MultipleResponses {
     }
 
     public void get200Model204NoModelDefaultError400ValidAsync(final ServiceCallback<A> serviceCallback) {
-        service.get200Model204NoModelDefaultError400ValidAsyncd(new ServiceResponseCallback() {
+        service.get200Model204NoModelDefaultError400ValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -370,10 +376,10 @@ public class MultipleResponses {
 
     private ServiceResponse<A> get200Model204NoModelDefaultError400ValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<A>()
-                  .register(200, A.class)
-                  .register(204, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<A>(){}.getType())
+                .register(204, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public A get200Model201ModelDefaultError200Valid() throws ServiceException {
@@ -385,7 +391,7 @@ public class MultipleResponses {
     }
 
     public void get200Model201ModelDefaultError200ValidAsync(final ServiceCallback<A> serviceCallback) {
-        service.get200Model201ModelDefaultError200ValidAsyncd(new ServiceResponseCallback() {
+        service.get200Model201ModelDefaultError200ValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -399,10 +405,10 @@ public class MultipleResponses {
 
     private ServiceResponse<A> get200Model201ModelDefaultError200ValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<A>()
-                  .register(200, A.class)
-                  .register(201, B.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<A>(){}.getType())
+                .register(201, new TypeToken<B>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public A get200Model201ModelDefaultError201Valid() throws ServiceException {
@@ -414,7 +420,7 @@ public class MultipleResponses {
     }
 
     public void get200Model201ModelDefaultError201ValidAsync(final ServiceCallback<A> serviceCallback) {
-        service.get200Model201ModelDefaultError201ValidAsyncd(new ServiceResponseCallback() {
+        service.get200Model201ModelDefaultError201ValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -428,10 +434,10 @@ public class MultipleResponses {
 
     private ServiceResponse<A> get200Model201ModelDefaultError201ValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<A>()
-                  .register(200, A.class)
-                  .register(201, B.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<A>(){}.getType())
+                .register(201, new TypeToken<B>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public A get200Model201ModelDefaultError400Valid() throws ServiceException {
@@ -443,7 +449,7 @@ public class MultipleResponses {
     }
 
     public void get200Model201ModelDefaultError400ValidAsync(final ServiceCallback<A> serviceCallback) {
-        service.get200Model201ModelDefaultError400ValidAsyncd(new ServiceResponseCallback() {
+        service.get200Model201ModelDefaultError400ValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -457,10 +463,10 @@ public class MultipleResponses {
 
     private ServiceResponse<A> get200Model201ModelDefaultError400ValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<A>()
-                  .register(200, A.class)
-                  .register(201, B.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<A>(){}.getType())
+                .register(201, new TypeToken<B>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public Object get200ModelA201ModelC404ModelDDefaultError200Valid() throws ServiceException {
@@ -472,7 +478,7 @@ public class MultipleResponses {
     }
 
     public void get200ModelA201ModelC404ModelDDefaultError200ValidAsync(final ServiceCallback<Object> serviceCallback) {
-        service.get200ModelA201ModelC404ModelDDefaultError200ValidAsyncd(new ServiceResponseCallback() {
+        service.get200ModelA201ModelC404ModelDDefaultError200ValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -486,11 +492,11 @@ public class MultipleResponses {
 
     private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError200ValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Object>()
-                  .register(200, A.class)
-                  .register(201, C.class)
-                  .register(404, D.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<A>(){}.getType())
+                .register(201, new TypeToken<C>(){}.getType())
+                .register(404, new TypeToken<D>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public Object get200ModelA201ModelC404ModelDDefaultError201Valid() throws ServiceException {
@@ -502,7 +508,7 @@ public class MultipleResponses {
     }
 
     public void get200ModelA201ModelC404ModelDDefaultError201ValidAsync(final ServiceCallback<Object> serviceCallback) {
-        service.get200ModelA201ModelC404ModelDDefaultError201ValidAsyncd(new ServiceResponseCallback() {
+        service.get200ModelA201ModelC404ModelDDefaultError201ValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -516,11 +522,11 @@ public class MultipleResponses {
 
     private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError201ValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Object>()
-                  .register(200, A.class)
-                  .register(201, C.class)
-                  .register(404, D.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<A>(){}.getType())
+                .register(201, new TypeToken<C>(){}.getType())
+                .register(404, new TypeToken<D>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public Object get200ModelA201ModelC404ModelDDefaultError404Valid() throws ServiceException {
@@ -532,7 +538,7 @@ public class MultipleResponses {
     }
 
     public void get200ModelA201ModelC404ModelDDefaultError404ValidAsync(final ServiceCallback<Object> serviceCallback) {
-        service.get200ModelA201ModelC404ModelDDefaultError404ValidAsyncd(new ServiceResponseCallback() {
+        service.get200ModelA201ModelC404ModelDDefaultError404ValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -546,11 +552,11 @@ public class MultipleResponses {
 
     private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError404ValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Object>()
-                  .register(200, A.class)
-                  .register(201, C.class)
-                  .register(404, D.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<A>(){}.getType())
+                .register(201, new TypeToken<C>(){}.getType())
+                .register(404, new TypeToken<D>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public Object get200ModelA201ModelC404ModelDDefaultError400Valid() throws ServiceException {
@@ -562,7 +568,7 @@ public class MultipleResponses {
     }
 
     public void get200ModelA201ModelC404ModelDDefaultError400ValidAsync(final ServiceCallback<Object> serviceCallback) {
-        service.get200ModelA201ModelC404ModelDDefaultError400ValidAsyncd(new ServiceResponseCallback() {
+        service.get200ModelA201ModelC404ModelDDefaultError400ValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -576,23 +582,23 @@ public class MultipleResponses {
 
     private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError400ValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Object>()
-                  .register(200, A.class)
-                  .register(201, C.class)
-                  .register(404, D.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<A>(){}.getType())
+                .register(201, new TypeToken<C>(){}.getType())
+                .register(404, new TypeToken<D>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void get202None204NoneDefaultError202None() throws ServiceException {
         try {
-            return get202None204NoneDefaultError202NoneDelegate(service.get202None204NoneDefaultError202None(), null).getBody();
+            get202None204NoneDefaultError202NoneDelegate(service.get202None204NoneDefaultError202None(), null).getBody();
         } catch (RetrofitError error) {
-            return get202None204NoneDefaultError202NoneDelegate(error.getResponse(), error).getBody();
+            get202None204NoneDefaultError202NoneDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void get202None204NoneDefaultError202NoneAsync(final ServiceCallback<Void> serviceCallback) {
-        service.get202None204NoneDefaultError202NoneAsyncd(new ServiceResponseCallback() {
+        service.get202None204NoneDefaultError202NoneAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -606,22 +612,22 @@ public class MultipleResponses {
 
     private ServiceResponse<Void> get202None204NoneDefaultError202NoneDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(202, Void.class)
-                  .register(204, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(202, new TypeToken<Void>(){}.getType())
+                .register(204, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void get202None204NoneDefaultError204None() throws ServiceException {
         try {
-            return get202None204NoneDefaultError204NoneDelegate(service.get202None204NoneDefaultError204None(), null).getBody();
+            get202None204NoneDefaultError204NoneDelegate(service.get202None204NoneDefaultError204None(), null).getBody();
         } catch (RetrofitError error) {
-            return get202None204NoneDefaultError204NoneDelegate(error.getResponse(), error).getBody();
+            get202None204NoneDefaultError204NoneDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void get202None204NoneDefaultError204NoneAsync(final ServiceCallback<Void> serviceCallback) {
-        service.get202None204NoneDefaultError204NoneAsyncd(new ServiceResponseCallback() {
+        service.get202None204NoneDefaultError204NoneAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -635,22 +641,22 @@ public class MultipleResponses {
 
     private ServiceResponse<Void> get202None204NoneDefaultError204NoneDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(202, Void.class)
-                  .register(204, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(202, new TypeToken<Void>(){}.getType())
+                .register(204, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void get202None204NoneDefaultError400Valid() throws ServiceException {
         try {
-            return get202None204NoneDefaultError400ValidDelegate(service.get202None204NoneDefaultError400Valid(), null).getBody();
+            get202None204NoneDefaultError400ValidDelegate(service.get202None204NoneDefaultError400Valid(), null).getBody();
         } catch (RetrofitError error) {
-            return get202None204NoneDefaultError400ValidDelegate(error.getResponse(), error).getBody();
+            get202None204NoneDefaultError400ValidDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void get202None204NoneDefaultError400ValidAsync(final ServiceCallback<Void> serviceCallback) {
-        service.get202None204NoneDefaultError400ValidAsyncd(new ServiceResponseCallback() {
+        service.get202None204NoneDefaultError400ValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -664,22 +670,22 @@ public class MultipleResponses {
 
     private ServiceResponse<Void> get202None204NoneDefaultError400ValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(202, Void.class)
-                  .register(204, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(202, new TypeToken<Void>(){}.getType())
+                .register(204, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void get202None204NoneDefaultNone202Invalid() throws ServiceException {
         try {
-            return get202None204NoneDefaultNone202InvalidDelegate(service.get202None204NoneDefaultNone202Invalid(), null).getBody();
+            get202None204NoneDefaultNone202InvalidDelegate(service.get202None204NoneDefaultNone202Invalid(), null).getBody();
         } catch (RetrofitError error) {
-            return get202None204NoneDefaultNone202InvalidDelegate(error.getResponse(), error).getBody();
+            get202None204NoneDefaultNone202InvalidDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void get202None204NoneDefaultNone202InvalidAsync(final ServiceCallback<Void> serviceCallback) {
-        service.get202None204NoneDefaultNone202InvalidAsyncd(new ServiceResponseCallback() {
+        service.get202None204NoneDefaultNone202InvalidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -693,22 +699,21 @@ public class MultipleResponses {
 
     private ServiceResponse<Void> get202None204NoneDefaultNone202InvalidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(202, Void.class)
-                  .register(204, Void.class)
-                  .registerError(Void)
-                  .build(response, error);
+                .register(202, new TypeToken<Void>(){}.getType())
+                .register(204, new TypeToken<Void>(){}.getType())
+                .build(response, error);
     }
 
     public void get202None204NoneDefaultNone204None() throws ServiceException {
         try {
-            return get202None204NoneDefaultNone204NoneDelegate(service.get202None204NoneDefaultNone204None(), null).getBody();
+            get202None204NoneDefaultNone204NoneDelegate(service.get202None204NoneDefaultNone204None(), null).getBody();
         } catch (RetrofitError error) {
-            return get202None204NoneDefaultNone204NoneDelegate(error.getResponse(), error).getBody();
+            get202None204NoneDefaultNone204NoneDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void get202None204NoneDefaultNone204NoneAsync(final ServiceCallback<Void> serviceCallback) {
-        service.get202None204NoneDefaultNone204NoneAsyncd(new ServiceResponseCallback() {
+        service.get202None204NoneDefaultNone204NoneAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -722,22 +727,21 @@ public class MultipleResponses {
 
     private ServiceResponse<Void> get202None204NoneDefaultNone204NoneDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(202, Void.class)
-                  .register(204, Void.class)
-                  .registerError(Void)
-                  .build(response, error);
+                .register(202, new TypeToken<Void>(){}.getType())
+                .register(204, new TypeToken<Void>(){}.getType())
+                .build(response, error);
     }
 
     public void get202None204NoneDefaultNone400None() throws ServiceException {
         try {
-            return get202None204NoneDefaultNone400NoneDelegate(service.get202None204NoneDefaultNone400None(), null).getBody();
+            get202None204NoneDefaultNone400NoneDelegate(service.get202None204NoneDefaultNone400None(), null).getBody();
         } catch (RetrofitError error) {
-            return get202None204NoneDefaultNone400NoneDelegate(error.getResponse(), error).getBody();
+            get202None204NoneDefaultNone400NoneDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void get202None204NoneDefaultNone400NoneAsync(final ServiceCallback<Void> serviceCallback) {
-        service.get202None204NoneDefaultNone400NoneAsyncd(new ServiceResponseCallback() {
+        service.get202None204NoneDefaultNone400NoneAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -751,22 +755,21 @@ public class MultipleResponses {
 
     private ServiceResponse<Void> get202None204NoneDefaultNone400NoneDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(202, Void.class)
-                  .register(204, Void.class)
-                  .registerError(Void)
-                  .build(response, error);
+                .register(202, new TypeToken<Void>(){}.getType())
+                .register(204, new TypeToken<Void>(){}.getType())
+                .build(response, error);
     }
 
     public void get202None204NoneDefaultNone400Invalid() throws ServiceException {
         try {
-            return get202None204NoneDefaultNone400InvalidDelegate(service.get202None204NoneDefaultNone400Invalid(), null).getBody();
+            get202None204NoneDefaultNone400InvalidDelegate(service.get202None204NoneDefaultNone400Invalid(), null).getBody();
         } catch (RetrofitError error) {
-            return get202None204NoneDefaultNone400InvalidDelegate(error.getResponse(), error).getBody();
+            get202None204NoneDefaultNone400InvalidDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void get202None204NoneDefaultNone400InvalidAsync(final ServiceCallback<Void> serviceCallback) {
-        service.get202None204NoneDefaultNone400InvalidAsyncd(new ServiceResponseCallback() {
+        service.get202None204NoneDefaultNone400InvalidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -780,10 +783,9 @@ public class MultipleResponses {
 
     private ServiceResponse<Void> get202None204NoneDefaultNone400InvalidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(202, Void.class)
-                  .register(204, Void.class)
-                  .registerError(Void)
-                  .build(response, error);
+                .register(202, new TypeToken<Void>(){}.getType())
+                .register(204, new TypeToken<Void>(){}.getType())
+                .build(response, error);
     }
 
     public A getDefaultModelA200Valid() throws ServiceException {
@@ -795,7 +797,7 @@ public class MultipleResponses {
     }
 
     public void getDefaultModelA200ValidAsync(final ServiceCallback<A> serviceCallback) {
-        service.getDefaultModelA200ValidAsyncd(new ServiceResponseCallback() {
+        service.getDefaultModelA200ValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -809,8 +811,8 @@ public class MultipleResponses {
 
     private ServiceResponse<A> getDefaultModelA200ValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<A>()
-                  .registerError(A)
-                  .build(response, error);
+                .registerError(new TypeToken<A>(){}.getType())
+                .build(response, error);
     }
 
     public A getDefaultModelA200None() throws ServiceException {
@@ -822,7 +824,7 @@ public class MultipleResponses {
     }
 
     public void getDefaultModelA200NoneAsync(final ServiceCallback<A> serviceCallback) {
-        service.getDefaultModelA200NoneAsyncd(new ServiceResponseCallback() {
+        service.getDefaultModelA200NoneAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -836,8 +838,8 @@ public class MultipleResponses {
 
     private ServiceResponse<A> getDefaultModelA200NoneDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<A>()
-                  .registerError(A)
-                  .build(response, error);
+                .registerError(new TypeToken<A>(){}.getType())
+                .build(response, error);
     }
 
     public A getDefaultModelA400Valid() throws ServiceException {
@@ -849,7 +851,7 @@ public class MultipleResponses {
     }
 
     public void getDefaultModelA400ValidAsync(final ServiceCallback<A> serviceCallback) {
-        service.getDefaultModelA400ValidAsyncd(new ServiceResponseCallback() {
+        service.getDefaultModelA400ValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -863,8 +865,8 @@ public class MultipleResponses {
 
     private ServiceResponse<A> getDefaultModelA400ValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<A>()
-                  .registerError(A)
-                  .build(response, error);
+                .registerError(new TypeToken<A>(){}.getType())
+                .build(response, error);
     }
 
     public A getDefaultModelA400None() throws ServiceException {
@@ -876,7 +878,7 @@ public class MultipleResponses {
     }
 
     public void getDefaultModelA400NoneAsync(final ServiceCallback<A> serviceCallback) {
-        service.getDefaultModelA400NoneAsyncd(new ServiceResponseCallback() {
+        service.getDefaultModelA400NoneAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -890,20 +892,20 @@ public class MultipleResponses {
 
     private ServiceResponse<A> getDefaultModelA400NoneDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<A>()
-                  .registerError(A)
-                  .build(response, error);
+                .registerError(new TypeToken<A>(){}.getType())
+                .build(response, error);
     }
 
     public void getDefaultNone200Invalid() throws ServiceException {
         try {
-            return getDefaultNone200InvalidDelegate(service.getDefaultNone200Invalid(), null).getBody();
+            getDefaultNone200InvalidDelegate(service.getDefaultNone200Invalid(), null).getBody();
         } catch (RetrofitError error) {
-            return getDefaultNone200InvalidDelegate(error.getResponse(), error).getBody();
+            getDefaultNone200InvalidDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void getDefaultNone200InvalidAsync(final ServiceCallback<Void> serviceCallback) {
-        service.getDefaultNone200InvalidAsyncd(new ServiceResponseCallback() {
+        service.getDefaultNone200InvalidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -917,20 +919,19 @@ public class MultipleResponses {
 
     private ServiceResponse<Void> getDefaultNone200InvalidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .registerError(Void)
-                  .build(response, error);
+                .build(response, error);
     }
 
     public void getDefaultNone200None() throws ServiceException {
         try {
-            return getDefaultNone200NoneDelegate(service.getDefaultNone200None(), null).getBody();
+            getDefaultNone200NoneDelegate(service.getDefaultNone200None(), null).getBody();
         } catch (RetrofitError error) {
-            return getDefaultNone200NoneDelegate(error.getResponse(), error).getBody();
+            getDefaultNone200NoneDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void getDefaultNone200NoneAsync(final ServiceCallback<Void> serviceCallback) {
-        service.getDefaultNone200NoneAsyncd(new ServiceResponseCallback() {
+        service.getDefaultNone200NoneAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -944,20 +945,19 @@ public class MultipleResponses {
 
     private ServiceResponse<Void> getDefaultNone200NoneDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .registerError(Void)
-                  .build(response, error);
+                .build(response, error);
     }
 
     public void getDefaultNone400Invalid() throws ServiceException {
         try {
-            return getDefaultNone400InvalidDelegate(service.getDefaultNone400Invalid(), null).getBody();
+            getDefaultNone400InvalidDelegate(service.getDefaultNone400Invalid(), null).getBody();
         } catch (RetrofitError error) {
-            return getDefaultNone400InvalidDelegate(error.getResponse(), error).getBody();
+            getDefaultNone400InvalidDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void getDefaultNone400InvalidAsync(final ServiceCallback<Void> serviceCallback) {
-        service.getDefaultNone400InvalidAsyncd(new ServiceResponseCallback() {
+        service.getDefaultNone400InvalidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -971,20 +971,19 @@ public class MultipleResponses {
 
     private ServiceResponse<Void> getDefaultNone400InvalidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .registerError(Void)
-                  .build(response, error);
+                .build(response, error);
     }
 
     public void getDefaultNone400None() throws ServiceException {
         try {
-            return getDefaultNone400NoneDelegate(service.getDefaultNone400None(), null).getBody();
+            getDefaultNone400NoneDelegate(service.getDefaultNone400None(), null).getBody();
         } catch (RetrofitError error) {
-            return getDefaultNone400NoneDelegate(error.getResponse(), error).getBody();
+            getDefaultNone400NoneDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void getDefaultNone400NoneAsync(final ServiceCallback<Void> serviceCallback) {
-        service.getDefaultNone400NoneAsyncd(new ServiceResponseCallback() {
+        service.getDefaultNone400NoneAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -998,8 +997,7 @@ public class MultipleResponses {
 
     private ServiceResponse<Void> getDefaultNone400NoneDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .registerError(Void)
-                  .build(response, error);
+                .build(response, error);
     }
 
     public A get200ModelA200None() throws ServiceException {
@@ -1011,7 +1009,7 @@ public class MultipleResponses {
     }
 
     public void get200ModelA200NoneAsync(final ServiceCallback<A> serviceCallback) {
-        service.get200ModelA200NoneAsyncd(new ServiceResponseCallback() {
+        service.get200ModelA200NoneAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1025,9 +1023,8 @@ public class MultipleResponses {
 
     private ServiceResponse<A> get200ModelA200NoneDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<A>()
-                  .register(200, A.class)
-                  .registerError(Void)
-                  .build(response, error);
+                .register(200, new TypeToken<A>(){}.getType())
+                .build(response, error);
     }
 
     public A get200ModelA200Valid() throws ServiceException {
@@ -1039,7 +1036,7 @@ public class MultipleResponses {
     }
 
     public void get200ModelA200ValidAsync(final ServiceCallback<A> serviceCallback) {
-        service.get200ModelA200ValidAsyncd(new ServiceResponseCallback() {
+        service.get200ModelA200ValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1053,9 +1050,8 @@ public class MultipleResponses {
 
     private ServiceResponse<A> get200ModelA200ValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<A>()
-                  .register(200, A.class)
-                  .registerError(Void)
-                  .build(response, error);
+                .register(200, new TypeToken<A>(){}.getType())
+                .build(response, error);
     }
 
     public A get200ModelA200Invalid() throws ServiceException {
@@ -1067,7 +1063,7 @@ public class MultipleResponses {
     }
 
     public void get200ModelA200InvalidAsync(final ServiceCallback<A> serviceCallback) {
-        service.get200ModelA200InvalidAsyncd(new ServiceResponseCallback() {
+        service.get200ModelA200InvalidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1081,9 +1077,8 @@ public class MultipleResponses {
 
     private ServiceResponse<A> get200ModelA200InvalidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<A>()
-                  .register(200, A.class)
-                  .registerError(Void)
-                  .build(response, error);
+                .register(200, new TypeToken<A>(){}.getType())
+                .build(response, error);
     }
 
     public A get200ModelA400None() throws ServiceException {
@@ -1095,7 +1090,7 @@ public class MultipleResponses {
     }
 
     public void get200ModelA400NoneAsync(final ServiceCallback<A> serviceCallback) {
-        service.get200ModelA400NoneAsyncd(new ServiceResponseCallback() {
+        service.get200ModelA400NoneAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1109,9 +1104,8 @@ public class MultipleResponses {
 
     private ServiceResponse<A> get200ModelA400NoneDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<A>()
-                  .register(200, A.class)
-                  .registerError(Void)
-                  .build(response, error);
+                .register(200, new TypeToken<A>(){}.getType())
+                .build(response, error);
     }
 
     public A get200ModelA400Valid() throws ServiceException {
@@ -1123,7 +1117,7 @@ public class MultipleResponses {
     }
 
     public void get200ModelA400ValidAsync(final ServiceCallback<A> serviceCallback) {
-        service.get200ModelA400ValidAsyncd(new ServiceResponseCallback() {
+        service.get200ModelA400ValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1137,9 +1131,8 @@ public class MultipleResponses {
 
     private ServiceResponse<A> get200ModelA400ValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<A>()
-                  .register(200, A.class)
-                  .registerError(Void)
-                  .build(response, error);
+                .register(200, new TypeToken<A>(){}.getType())
+                .build(response, error);
     }
 
     public A get200ModelA400Invalid() throws ServiceException {
@@ -1151,7 +1144,7 @@ public class MultipleResponses {
     }
 
     public void get200ModelA400InvalidAsync(final ServiceCallback<A> serviceCallback) {
-        service.get200ModelA400InvalidAsyncd(new ServiceResponseCallback() {
+        service.get200ModelA400InvalidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1165,9 +1158,8 @@ public class MultipleResponses {
 
     private ServiceResponse<A> get200ModelA400InvalidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<A>()
-                  .register(200, A.class)
-                  .registerError(Void)
-                  .build(response, error);
+                .register(200, new TypeToken<A>(){}.getType())
+                .build(response, error);
     }
 
     public A get200ModelA202Valid() throws ServiceException {
@@ -1179,7 +1171,7 @@ public class MultipleResponses {
     }
 
     public void get200ModelA202ValidAsync(final ServiceCallback<A> serviceCallback) {
-        service.get200ModelA202ValidAsyncd(new ServiceResponseCallback() {
+        service.get200ModelA202ValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1193,9 +1185,8 @@ public class MultipleResponses {
 
     private ServiceResponse<A> get200ModelA202ValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<A>()
-                  .register(200, A.class)
-                  .registerError(Void)
-                  .build(response, error);
+                .register(200, new TypeToken<A>(){}.getType())
+                .build(response, error);
     }
 
 }

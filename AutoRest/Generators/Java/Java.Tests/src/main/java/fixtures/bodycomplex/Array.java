@@ -9,6 +9,7 @@
 
 package fixtures.bodycomplex;
 
+import com.google.gson.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -24,39 +25,41 @@ import retrofit.http.Body;
 
 public class Array {
     private ArrayService service;
+
     public Array(RestAdapter restAdapter) {
         service = restAdapter.create(ArrayService.class);
     }
+
     public interface ArrayService {
         @GET("/complex/array/valid")
-        ArrayWrapper getValid() throws ServiceException;
+        Response getValid() throws ServiceException;
 
         @GET("/complex/array/valid")
-        void getValidAsync(ServiceCallback<ArrayWrapper> serviceCallback);
+        void getValidAsync(ServiceResponseCallback cb);
 
         @PUT("/complex/array/valid")
-        void putValid(@Body ArrayWrapper complexBody) throws ServiceException;
+        Response putValid(@Body ArrayWrapper complexBody) throws ServiceException;
 
         @PUT("/complex/array/valid")
-        void putValidAsync(@Body ArrayWrapper complexBody, ServiceCallback<Void> serviceCallback);
+        void putValidAsync(@Body ArrayWrapper complexBody, ServiceResponseCallback cb);
 
         @GET("/complex/array/empty")
-        ArrayWrapper getEmpty() throws ServiceException;
+        Response getEmpty() throws ServiceException;
 
         @GET("/complex/array/empty")
-        void getEmptyAsync(ServiceCallback<ArrayWrapper> serviceCallback);
+        void getEmptyAsync(ServiceResponseCallback cb);
 
         @PUT("/complex/array/empty")
-        void putEmpty(@Body ArrayWrapper complexBody) throws ServiceException;
+        Response putEmpty(@Body ArrayWrapper complexBody) throws ServiceException;
 
         @PUT("/complex/array/empty")
-        void putEmptyAsync(@Body ArrayWrapper complexBody, ServiceCallback<Void> serviceCallback);
+        void putEmptyAsync(@Body ArrayWrapper complexBody, ServiceResponseCallback cb);
 
         @GET("/complex/array/notprovided")
-        ArrayWrapper getNotProvided() throws ServiceException;
+        Response getNotProvided() throws ServiceException;
 
         @GET("/complex/array/notprovided")
-        void getNotProvidedAsync(ServiceCallback<ArrayWrapper> serviceCallback);
+        void getNotProvidedAsync(ServiceResponseCallback cb);
 
     }
     public ArrayWrapper getValid() throws ServiceException {
@@ -68,7 +71,7 @@ public class Array {
     }
 
     public void getValidAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
-        service.getValidAsyncd(new ServiceResponseCallback() {
+        service.getValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -82,21 +85,21 @@ public class Array {
 
     private ServiceResponse<ArrayWrapper> getValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<ArrayWrapper>()
-                  .register(200, ArrayWrapper.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<ArrayWrapper>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putValid(ArrayWrapper complexBody) throws ServiceException {
         try {
-            return putValidDelegate(service.putValid(complexBody), null).getBody();
+            putValidDelegate(service.putValid(complexBody), null).getBody();
         } catch (RetrofitError error) {
-            return putValidDelegate(error.getResponse(), error).getBody();
+            putValidDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putValidAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        service.putValidAsyncd(new ServiceResponseCallback() {
+        service.putValidAsync(complexBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -110,9 +113,9 @@ public class Array {
 
     private ServiceResponse<Void> putValidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public ArrayWrapper getEmpty() throws ServiceException {
@@ -124,7 +127,7 @@ public class Array {
     }
 
     public void getEmptyAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
-        service.getEmptyAsyncd(new ServiceResponseCallback() {
+        service.getEmptyAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -138,21 +141,21 @@ public class Array {
 
     private ServiceResponse<ArrayWrapper> getEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<ArrayWrapper>()
-                  .register(200, ArrayWrapper.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<ArrayWrapper>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putEmpty(ArrayWrapper complexBody) throws ServiceException {
         try {
-            return putEmptyDelegate(service.putEmpty(complexBody), null).getBody();
+            putEmptyDelegate(service.putEmpty(complexBody), null).getBody();
         } catch (RetrofitError error) {
-            return putEmptyDelegate(error.getResponse(), error).getBody();
+            putEmptyDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putEmptyAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        service.putEmptyAsyncd(new ServiceResponseCallback() {
+        service.putEmptyAsync(complexBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -166,9 +169,9 @@ public class Array {
 
     private ServiceResponse<Void> putEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public ArrayWrapper getNotProvided() throws ServiceException {
@@ -180,7 +183,7 @@ public class Array {
     }
 
     public void getNotProvidedAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
-        service.getNotProvidedAsyncd(new ServiceResponseCallback() {
+        service.getNotProvidedAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -194,9 +197,9 @@ public class Array {
 
     private ServiceResponse<ArrayWrapper> getNotProvidedDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<ArrayWrapper>()
-                  .register(200, ArrayWrapper.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<ArrayWrapper>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
 }

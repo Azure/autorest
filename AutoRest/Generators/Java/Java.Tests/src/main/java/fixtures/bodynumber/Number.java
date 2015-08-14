@@ -9,6 +9,7 @@
 
 package fixtures.bodynumber;
 
+import com.google.gson.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -23,99 +24,101 @@ import retrofit.http.Body;
 
 public class Number {
     private NumberService service;
+
     public Number(RestAdapter restAdapter) {
         service = restAdapter.create(NumberService.class);
     }
+
     public interface NumberService {
         @GET("/number/null")
-        double getNull() throws ServiceException;
+        Response getNull() throws ServiceException;
 
         @GET("/number/null")
-        void getNullAsync(ServiceCallback<Double> serviceCallback);
+        void getNullAsync(ServiceResponseCallback cb);
 
         @GET("/number/invalidfloat")
-        Double getInvalidFloat() throws ServiceException;
+        Response getInvalidFloat() throws ServiceException;
 
         @GET("/number/invalidfloat")
-        void getInvalidFloatAsync(ServiceCallback<Double> serviceCallback);
+        void getInvalidFloatAsync(ServiceResponseCallback cb);
 
         @GET("/number/invaliddouble")
-        Double getInvalidDouble() throws ServiceException;
+        Response getInvalidDouble() throws ServiceException;
 
         @GET("/number/invaliddouble")
-        void getInvalidDoubleAsync(ServiceCallback<Double> serviceCallback);
+        void getInvalidDoubleAsync(ServiceResponseCallback cb);
 
         @PUT("/number/big/float/3.402823e+20")
-        void putBigFloat(@Body Double numberBody) throws ServiceException;
+        Response putBigFloat(@Body Double numberBody) throws ServiceException;
 
         @PUT("/number/big/float/3.402823e+20")
-        void putBigFloatAsync(@Body Double numberBody, ServiceCallback<Void> serviceCallback);
+        void putBigFloatAsync(@Body Double numberBody, ServiceResponseCallback cb);
 
         @GET("/number/big/float/3.402823e+20")
-        Double getBigFloat() throws ServiceException;
+        Response getBigFloat() throws ServiceException;
 
         @GET("/number/big/float/3.402823e+20")
-        void getBigFloatAsync(ServiceCallback<Double> serviceCallback);
+        void getBigFloatAsync(ServiceResponseCallback cb);
 
         @PUT("/number/big/double/2.5976931e+101")
-        void putBigDouble(@Body Double numberBody) throws ServiceException;
+        Response putBigDouble(@Body Double numberBody) throws ServiceException;
 
         @PUT("/number/big/double/2.5976931e+101")
-        void putBigDoubleAsync(@Body Double numberBody, ServiceCallback<Void> serviceCallback);
+        void putBigDoubleAsync(@Body Double numberBody, ServiceResponseCallback cb);
 
         @GET("/number/big/double/2.5976931e+101")
-        Double getBigDouble() throws ServiceException;
+        Response getBigDouble() throws ServiceException;
 
         @GET("/number/big/double/2.5976931e+101")
-        void getBigDoubleAsync(ServiceCallback<Double> serviceCallback);
+        void getBigDoubleAsync(ServiceResponseCallback cb);
 
         @PUT("/number/big/double/99999999.99")
-        void putBigDoublePositiveDecimal(@Body Double numberBody) throws ServiceException;
+        Response putBigDoublePositiveDecimal(@Body Double numberBody) throws ServiceException;
 
         @PUT("/number/big/double/99999999.99")
-        void putBigDoublePositiveDecimalAsync(@Body Double numberBody, ServiceCallback<Void> serviceCallback);
+        void putBigDoublePositiveDecimalAsync(@Body Double numberBody, ServiceResponseCallback cb);
 
         @GET("/number/big/double/99999999.99")
-        Double getBigDoublePositiveDecimal() throws ServiceException;
+        Response getBigDoublePositiveDecimal() throws ServiceException;
 
         @GET("/number/big/double/99999999.99")
-        void getBigDoublePositiveDecimalAsync(ServiceCallback<Double> serviceCallback);
+        void getBigDoublePositiveDecimalAsync(ServiceResponseCallback cb);
 
         @PUT("/number/big/double/-99999999.99")
-        void putBigDoubleNegativeDecimal(@Body Double numberBody) throws ServiceException;
+        Response putBigDoubleNegativeDecimal(@Body Double numberBody) throws ServiceException;
 
         @PUT("/number/big/double/-99999999.99")
-        void putBigDoubleNegativeDecimalAsync(@Body Double numberBody, ServiceCallback<Void> serviceCallback);
+        void putBigDoubleNegativeDecimalAsync(@Body Double numberBody, ServiceResponseCallback cb);
 
         @GET("/number/big/double/-99999999.99")
-        Double getBigDoubleNegativeDecimal() throws ServiceException;
+        Response getBigDoubleNegativeDecimal() throws ServiceException;
 
         @GET("/number/big/double/-99999999.99")
-        void getBigDoubleNegativeDecimalAsync(ServiceCallback<Double> serviceCallback);
+        void getBigDoubleNegativeDecimalAsync(ServiceResponseCallback cb);
 
         @PUT("/number/small/float/3.402823e-20")
-        void putSmallFloat(@Body Double numberBody) throws ServiceException;
+        Response putSmallFloat(@Body Double numberBody) throws ServiceException;
 
         @PUT("/number/small/float/3.402823e-20")
-        void putSmallFloatAsync(@Body Double numberBody, ServiceCallback<Void> serviceCallback);
+        void putSmallFloatAsync(@Body Double numberBody, ServiceResponseCallback cb);
 
         @GET("/number/small/float/3.402823e-20")
-        Double getSmallFloat() throws ServiceException;
+        Response getSmallFloat() throws ServiceException;
 
         @GET("/number/small/float/3.402823e-20")
-        void getSmallFloatAsync(ServiceCallback<Double> serviceCallback);
+        void getSmallFloatAsync(ServiceResponseCallback cb);
 
         @PUT("/number/small/double/2.5976931e-101")
-        void putSmallDouble(@Body Double numberBody) throws ServiceException;
+        Response putSmallDouble(@Body Double numberBody) throws ServiceException;
 
         @PUT("/number/small/double/2.5976931e-101")
-        void putSmallDoubleAsync(@Body Double numberBody, ServiceCallback<Void> serviceCallback);
+        void putSmallDoubleAsync(@Body Double numberBody, ServiceResponseCallback cb);
 
         @GET("/number/small/double/2.5976931e-101")
-        Double getSmallDouble() throws ServiceException;
+        Response getSmallDouble() throws ServiceException;
 
         @GET("/number/small/double/2.5976931e-101")
-        void getSmallDoubleAsync(ServiceCallback<Double> serviceCallback);
+        void getSmallDoubleAsync(ServiceResponseCallback cb);
 
     }
     public Double getNull() throws ServiceException {
@@ -127,7 +130,7 @@ public class Number {
     }
 
     public void getNullAsync(final ServiceCallback<Double> serviceCallback) {
-        service.getNullAsyncd(new ServiceResponseCallback() {
+        service.getNullAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -141,9 +144,9 @@ public class Number {
 
     private ServiceResponse<Double> getNullDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Double>()
-                  .register(200, Double.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Double>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public Double getInvalidFloat() throws ServiceException {
@@ -155,7 +158,7 @@ public class Number {
     }
 
     public void getInvalidFloatAsync(final ServiceCallback<Double> serviceCallback) {
-        service.getInvalidFloatAsyncd(new ServiceResponseCallback() {
+        service.getInvalidFloatAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -169,9 +172,9 @@ public class Number {
 
     private ServiceResponse<Double> getInvalidFloatDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Double>()
-                  .register(200, Double.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Double>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public Double getInvalidDouble() throws ServiceException {
@@ -183,7 +186,7 @@ public class Number {
     }
 
     public void getInvalidDoubleAsync(final ServiceCallback<Double> serviceCallback) {
-        service.getInvalidDoubleAsyncd(new ServiceResponseCallback() {
+        service.getInvalidDoubleAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -197,21 +200,21 @@ public class Number {
 
     private ServiceResponse<Double> getInvalidDoubleDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Double>()
-                  .register(200, Double.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Double>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putBigFloat(Double numberBody) throws ServiceException {
         try {
-            return putBigFloatDelegate(service.putBigFloat(numberBody), null).getBody();
+            putBigFloatDelegate(service.putBigFloat(numberBody), null).getBody();
         } catch (RetrofitError error) {
-            return putBigFloatDelegate(error.getResponse(), error).getBody();
+            putBigFloatDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putBigFloatAsync(Double numberBody, final ServiceCallback<Void> serviceCallback) {
-        service.putBigFloatAsyncd(new ServiceResponseCallback() {
+        service.putBigFloatAsync(numberBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -225,9 +228,9 @@ public class Number {
 
     private ServiceResponse<Void> putBigFloatDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public Double getBigFloat() throws ServiceException {
@@ -239,7 +242,7 @@ public class Number {
     }
 
     public void getBigFloatAsync(final ServiceCallback<Double> serviceCallback) {
-        service.getBigFloatAsyncd(new ServiceResponseCallback() {
+        service.getBigFloatAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -253,21 +256,21 @@ public class Number {
 
     private ServiceResponse<Double> getBigFloatDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Double>()
-                  .register(200, Double.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Double>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putBigDouble(Double numberBody) throws ServiceException {
         try {
-            return putBigDoubleDelegate(service.putBigDouble(numberBody), null).getBody();
+            putBigDoubleDelegate(service.putBigDouble(numberBody), null).getBody();
         } catch (RetrofitError error) {
-            return putBigDoubleDelegate(error.getResponse(), error).getBody();
+            putBigDoubleDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putBigDoubleAsync(Double numberBody, final ServiceCallback<Void> serviceCallback) {
-        service.putBigDoubleAsyncd(new ServiceResponseCallback() {
+        service.putBigDoubleAsync(numberBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -281,9 +284,9 @@ public class Number {
 
     private ServiceResponse<Void> putBigDoubleDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public Double getBigDouble() throws ServiceException {
@@ -295,7 +298,7 @@ public class Number {
     }
 
     public void getBigDoubleAsync(final ServiceCallback<Double> serviceCallback) {
-        service.getBigDoubleAsyncd(new ServiceResponseCallback() {
+        service.getBigDoubleAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -309,21 +312,21 @@ public class Number {
 
     private ServiceResponse<Double> getBigDoubleDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Double>()
-                  .register(200, Double.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Double>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putBigDoublePositiveDecimal(Double numberBody) throws ServiceException {
         try {
-            return putBigDoublePositiveDecimalDelegate(service.putBigDoublePositiveDecimal(numberBody), null).getBody();
+            putBigDoublePositiveDecimalDelegate(service.putBigDoublePositiveDecimal(numberBody), null).getBody();
         } catch (RetrofitError error) {
-            return putBigDoublePositiveDecimalDelegate(error.getResponse(), error).getBody();
+            putBigDoublePositiveDecimalDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putBigDoublePositiveDecimalAsync(Double numberBody, final ServiceCallback<Void> serviceCallback) {
-        service.putBigDoublePositiveDecimalAsyncd(new ServiceResponseCallback() {
+        service.putBigDoublePositiveDecimalAsync(numberBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -337,9 +340,9 @@ public class Number {
 
     private ServiceResponse<Void> putBigDoublePositiveDecimalDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public Double getBigDoublePositiveDecimal() throws ServiceException {
@@ -351,7 +354,7 @@ public class Number {
     }
 
     public void getBigDoublePositiveDecimalAsync(final ServiceCallback<Double> serviceCallback) {
-        service.getBigDoublePositiveDecimalAsyncd(new ServiceResponseCallback() {
+        service.getBigDoublePositiveDecimalAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -365,21 +368,21 @@ public class Number {
 
     private ServiceResponse<Double> getBigDoublePositiveDecimalDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Double>()
-                  .register(200, Double.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Double>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putBigDoubleNegativeDecimal(Double numberBody) throws ServiceException {
         try {
-            return putBigDoubleNegativeDecimalDelegate(service.putBigDoubleNegativeDecimal(numberBody), null).getBody();
+            putBigDoubleNegativeDecimalDelegate(service.putBigDoubleNegativeDecimal(numberBody), null).getBody();
         } catch (RetrofitError error) {
-            return putBigDoubleNegativeDecimalDelegate(error.getResponse(), error).getBody();
+            putBigDoubleNegativeDecimalDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putBigDoubleNegativeDecimalAsync(Double numberBody, final ServiceCallback<Void> serviceCallback) {
-        service.putBigDoubleNegativeDecimalAsyncd(new ServiceResponseCallback() {
+        service.putBigDoubleNegativeDecimalAsync(numberBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -393,9 +396,9 @@ public class Number {
 
     private ServiceResponse<Void> putBigDoubleNegativeDecimalDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public Double getBigDoubleNegativeDecimal() throws ServiceException {
@@ -407,7 +410,7 @@ public class Number {
     }
 
     public void getBigDoubleNegativeDecimalAsync(final ServiceCallback<Double> serviceCallback) {
-        service.getBigDoubleNegativeDecimalAsyncd(new ServiceResponseCallback() {
+        service.getBigDoubleNegativeDecimalAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -421,21 +424,21 @@ public class Number {
 
     private ServiceResponse<Double> getBigDoubleNegativeDecimalDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Double>()
-                  .register(200, Double.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Double>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putSmallFloat(Double numberBody) throws ServiceException {
         try {
-            return putSmallFloatDelegate(service.putSmallFloat(numberBody), null).getBody();
+            putSmallFloatDelegate(service.putSmallFloat(numberBody), null).getBody();
         } catch (RetrofitError error) {
-            return putSmallFloatDelegate(error.getResponse(), error).getBody();
+            putSmallFloatDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putSmallFloatAsync(Double numberBody, final ServiceCallback<Void> serviceCallback) {
-        service.putSmallFloatAsyncd(new ServiceResponseCallback() {
+        service.putSmallFloatAsync(numberBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -449,9 +452,9 @@ public class Number {
 
     private ServiceResponse<Void> putSmallFloatDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public Double getSmallFloat() throws ServiceException {
@@ -463,7 +466,7 @@ public class Number {
     }
 
     public void getSmallFloatAsync(final ServiceCallback<Double> serviceCallback) {
-        service.getSmallFloatAsyncd(new ServiceResponseCallback() {
+        service.getSmallFloatAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -477,21 +480,21 @@ public class Number {
 
     private ServiceResponse<Double> getSmallFloatDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Double>()
-                  .register(200, Double.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Double>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putSmallDouble(Double numberBody) throws ServiceException {
         try {
-            return putSmallDoubleDelegate(service.putSmallDouble(numberBody), null).getBody();
+            putSmallDoubleDelegate(service.putSmallDouble(numberBody), null).getBody();
         } catch (RetrofitError error) {
-            return putSmallDoubleDelegate(error.getResponse(), error).getBody();
+            putSmallDoubleDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putSmallDoubleAsync(Double numberBody, final ServiceCallback<Void> serviceCallback) {
-        service.putSmallDoubleAsyncd(new ServiceResponseCallback() {
+        service.putSmallDoubleAsync(numberBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -505,9 +508,9 @@ public class Number {
 
     private ServiceResponse<Void> putSmallDoubleDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public Double getSmallDouble() throws ServiceException {
@@ -519,7 +522,7 @@ public class Number {
     }
 
     public void getSmallDoubleAsync(final ServiceCallback<Double> serviceCallback) {
-        service.getSmallDoubleAsyncd(new ServiceResponseCallback() {
+        service.getSmallDoubleAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -533,9 +536,9 @@ public class Number {
 
     private ServiceResponse<Double> getSmallDoubleDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Double>()
-                  .register(200, Double.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Double>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
 }

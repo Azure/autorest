@@ -9,6 +9,7 @@
 
 package fixtures.requiredoptional;
 
+import com.google.gson.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -17,7 +18,6 @@ import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
-import fixtures.requiredoptional.models.Error;
 import retrofit.http.GET;
 import retrofit.http.Path;
 import retrofit.http.PUT;
@@ -27,51 +27,53 @@ import retrofit.http.Body;
 
 public class Implicit {
     private ImplicitService service;
+
     public Implicit(RestAdapter restAdapter) {
         service = restAdapter.create(ImplicitService.class);
     }
+
     public interface ImplicitService {
         @GET("/reqopt/implicit/required/path/{pathParameter}")
-        Error getRequiredPath(@Path("pathParameter") String pathParameter) throws ServiceException;
+        Response getRequiredPath(@Path("pathParameter") String pathParameter) throws ServiceException;
 
         @GET("/reqopt/implicit/required/path/{pathParameter}")
-        void getRequiredPathAsync(@Path("pathParameter") String pathParameter, ServiceCallback<Error> serviceCallback);
+        void getRequiredPathAsync(@Path("pathParameter") String pathParameter, ServiceResponseCallback cb);
 
         @PUT("/reqopt/implicit/optional/query")
-        void putOptionalQuery(@Query("queryParameter") String queryParameter) throws ServiceException;
+        Response putOptionalQuery(@Query("queryParameter") String queryParameter) throws ServiceException;
 
         @PUT("/reqopt/implicit/optional/query")
-        void putOptionalQueryAsync(@Query("queryParameter") String queryParameter, ServiceCallback<Void> serviceCallback);
+        void putOptionalQueryAsync(@Query("queryParameter") String queryParameter, ServiceResponseCallback cb);
 
         @PUT("/reqopt/implicit/optional/header")
-        void putOptionalHeader(@Header("queryParameter") String queryParameter) throws ServiceException;
+        Response putOptionalHeader(@Header("queryParameter") String queryParameter) throws ServiceException;
 
         @PUT("/reqopt/implicit/optional/header")
-        void putOptionalHeaderAsync(@Header("queryParameter") String queryParameter, ServiceCallback<Void> serviceCallback);
+        void putOptionalHeaderAsync(@Header("queryParameter") String queryParameter, ServiceResponseCallback cb);
 
         @PUT("/reqopt/implicit/optional/body")
-        void putOptionalBody(@Body String bodyParameter) throws ServiceException;
+        Response putOptionalBody(@Body String bodyParameter) throws ServiceException;
 
         @PUT("/reqopt/implicit/optional/body")
-        void putOptionalBodyAsync(@Body String bodyParameter, ServiceCallback<Void> serviceCallback);
+        void putOptionalBodyAsync(@Body String bodyParameter, ServiceResponseCallback cb);
 
         @GET("/reqopt/global/required/path/{required-global-path}")
-        Error getRequiredGlobalPath() throws ServiceException;
+        Response getRequiredGlobalPath() throws ServiceException;
 
         @GET("/reqopt/global/required/path/{required-global-path}")
-        void getRequiredGlobalPathAsync(ServiceCallback<Error> serviceCallback);
+        void getRequiredGlobalPathAsync(ServiceResponseCallback cb);
 
         @GET("/reqopt/global/required/query")
-        Error getRequiredGlobalQuery() throws ServiceException;
+        Response getRequiredGlobalQuery() throws ServiceException;
 
         @GET("/reqopt/global/required/query")
-        void getRequiredGlobalQueryAsync(ServiceCallback<Error> serviceCallback);
+        void getRequiredGlobalQueryAsync(ServiceResponseCallback cb);
 
         @GET("/reqopt/global/optional/query")
-        Error getOptionalGlobalQuery() throws ServiceException;
+        Response getOptionalGlobalQuery() throws ServiceException;
 
         @GET("/reqopt/global/optional/query")
-        void getOptionalGlobalQueryAsync(ServiceCallback<Error> serviceCallback);
+        void getOptionalGlobalQueryAsync(ServiceResponseCallback cb);
 
     }
     public Error getRequiredPath(String pathParameter) throws ServiceException {
@@ -83,7 +85,7 @@ public class Implicit {
     }
 
     public void getRequiredPathAsync(String pathParameter, final ServiceCallback<Error> serviceCallback) {
-        service.getRequiredPathAsyncd(new ServiceResponseCallback() {
+        service.getRequiredPathAsync(pathParameter, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -97,20 +99,20 @@ public class Implicit {
 
     private ServiceResponse<Error> getRequiredPathDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Error>()
-                  .registerError(Error)
-                  .build(response, error);
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putOptionalQuery(String queryParameter) throws ServiceException {
         try {
-            return putOptionalQueryDelegate(service.putOptionalQuery(queryParameter), null).getBody();
+            putOptionalQueryDelegate(service.putOptionalQuery(queryParameter), null).getBody();
         } catch (RetrofitError error) {
-            return putOptionalQueryDelegate(error.getResponse(), error).getBody();
+            putOptionalQueryDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putOptionalQueryAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) {
-        service.putOptionalQueryAsyncd(new ServiceResponseCallback() {
+        service.putOptionalQueryAsync(queryParameter, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -124,21 +126,21 @@ public class Implicit {
 
     private ServiceResponse<Void> putOptionalQueryDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putOptionalHeader(String queryParameter) throws ServiceException {
         try {
-            return putOptionalHeaderDelegate(service.putOptionalHeader(queryParameter), null).getBody();
+            putOptionalHeaderDelegate(service.putOptionalHeader(queryParameter), null).getBody();
         } catch (RetrofitError error) {
-            return putOptionalHeaderDelegate(error.getResponse(), error).getBody();
+            putOptionalHeaderDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putOptionalHeaderAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) {
-        service.putOptionalHeaderAsyncd(new ServiceResponseCallback() {
+        service.putOptionalHeaderAsync(queryParameter, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -152,21 +154,21 @@ public class Implicit {
 
     private ServiceResponse<Void> putOptionalHeaderDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putOptionalBody(String bodyParameter) throws ServiceException {
         try {
-            return putOptionalBodyDelegate(service.putOptionalBody(bodyParameter), null).getBody();
+            putOptionalBodyDelegate(service.putOptionalBody(bodyParameter), null).getBody();
         } catch (RetrofitError error) {
-            return putOptionalBodyDelegate(error.getResponse(), error).getBody();
+            putOptionalBodyDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putOptionalBodyAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        service.putOptionalBodyAsyncd(new ServiceResponseCallback() {
+        service.putOptionalBodyAsync(bodyParameter, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -180,9 +182,9 @@ public class Implicit {
 
     private ServiceResponse<Void> putOptionalBodyDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public Error getRequiredGlobalPath() throws ServiceException {
@@ -194,7 +196,7 @@ public class Implicit {
     }
 
     public void getRequiredGlobalPathAsync(final ServiceCallback<Error> serviceCallback) {
-        service.getRequiredGlobalPathAsyncd(new ServiceResponseCallback() {
+        service.getRequiredGlobalPathAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -208,8 +210,8 @@ public class Implicit {
 
     private ServiceResponse<Error> getRequiredGlobalPathDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Error>()
-                  .registerError(Error)
-                  .build(response, error);
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public Error getRequiredGlobalQuery() throws ServiceException {
@@ -221,7 +223,7 @@ public class Implicit {
     }
 
     public void getRequiredGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
-        service.getRequiredGlobalQueryAsyncd(new ServiceResponseCallback() {
+        service.getRequiredGlobalQueryAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -235,8 +237,8 @@ public class Implicit {
 
     private ServiceResponse<Error> getRequiredGlobalQueryDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Error>()
-                  .registerError(Error)
-                  .build(response, error);
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public Error getOptionalGlobalQuery() throws ServiceException {
@@ -248,7 +250,7 @@ public class Implicit {
     }
 
     public void getOptionalGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
-        service.getOptionalGlobalQueryAsyncd(new ServiceResponseCallback() {
+        service.getOptionalGlobalQueryAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -262,8 +264,8 @@ public class Implicit {
 
     private ServiceResponse<Error> getOptionalGlobalQueryDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Error>()
-                  .registerError(Error)
-                  .build(response, error);
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
 }

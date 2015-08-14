@@ -8,7 +8,7 @@
 
 package @(Settings.Namespace.ToLower());
 @EmptyLine
-
+import com.google.gson.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -25,16 +25,17 @@ import retrofit.RetrofitError;
 
 public class @Model.MethodGroupType {
     private @Model.MethodGroupServiceType service;
-
+    @EmptyLine
     public @(Model.MethodGroupType)(RestAdapter restAdapter) {
         service = restAdapter.create(@(Model.MethodGroupServiceType).class);
     }
+    @EmptyLine
 
     public interface @Model.MethodGroupServiceType {
     @foreach (var method in Model.MethodTemplateModels)
     {
     @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url)")
-    @:    @method.ReturnTypeString @(method.Name)(@method.MethodParameterApiDeclaration) throws ServiceException;
+    @:    Response @(method.Name)(@method.MethodParameterApiDeclaration) throws ServiceException;
     @EmptyLine
     @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url)")
     @:    void @(method.Name)Async(@method.MethodParameterApiDeclarationWithCallback);
@@ -45,15 +46,26 @@ public class @Model.MethodGroupType {
     @foreach (var method in Model.MethodTemplateModels)
     {
     @:public @method.ReturnTypeString @(method.Name)(@method.MethodParameterDeclaration) throws ServiceException {
+    if (method.ReturnType != null)
+    {
     @:    try {
     @:        return @(method.Name)Delegate(service.@(method.Name)(@method.MethodParameterInvocation), null).getBody();
     @:    } catch (RetrofitError error) {
     @:        return @(method.Name)Delegate(error.getResponse(), error).getBody();
     @:    }
+    }
+    else
+    {
+    @:    try {
+    @:        @(method.Name)Delegate(service.@(method.Name)(@method.MethodParameterInvocation), null).getBody();
+    @:    } catch (RetrofitError error) {
+    @:        @(method.Name)Delegate(error.getResponse(), error).getBody();
+    @:    }
+    }
     @:}
     @EmptyLine
     @:public void @(method.Name)Async(@method.MethodParameterDeclarationWithCallback) {
-    @:    service.@(method.Name)Asyncd(new ServiceResponseCallback() {
+    @:    service.@(method.Name)Async(@method.MethodParameterInvocationWithCallback {
     @:        @@Override
     @:        public void response(Response response, RetrofitError error) {
     @:            try {
@@ -67,12 +79,15 @@ public class @Model.MethodGroupType {
     @EmptyLine
     @:private ServiceResponse<@method.GenericReturnTypeString> @(method.Name)Delegate(Response response, RetrofitError error) throws ServiceException {
     @:    return new ServiceResponseBuilder<@method.GenericReturnTypeString>()
-                  foreach (var response in method.Responses)
-                  {
-                  @:.register(@((int)response.Key), @(JavaCodeNamer.NormalizeGenericType(response.Value).Name).class)
-                  }
-                  @:.registerError(@JavaCodeNamer.NormalizeGenericType(method.DefaultResponse).Name)
-                  @:.build(response, error);
+                foreach (var response in method.Responses)
+                {
+                @:.register(@((int)response.Key), new TypeToken<@JavaCodeNamer.NormalizeGenericType(response.Value).Name>(){}.getType())
+                }
+                if (method.DefaultResponse != null)
+                {
+                @:.registerError(new TypeToken<@(JavaCodeNamer.NormalizeGenericType(method.DefaultResponse).Name)>(){}.getType())
+                }
+                @:.build(response, error);
     @:}
     @EmptyLine
     }

@@ -49,7 +49,7 @@ namespace Microsoft.Rest.Generator.Java
                 HashSet<String> classes = new HashSet<string>();
                 IList<IType> types = this.MethodTemplateModels
                     .SelectMany(mtm => mtm.Parameters.Select(p => p.Type))
-                    .Concat(this.MethodTemplateModels.Select(mtm => mtm.ReturnType))
+                    .Concat(this.MethodTemplateModels.SelectMany(mtm => mtm.Responses.Select(res => res.Value)))
                     .Distinct()
                     .ToList();
 

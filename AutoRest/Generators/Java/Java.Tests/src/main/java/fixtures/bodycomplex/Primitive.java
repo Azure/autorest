@@ -9,6 +9,7 @@
 
 package fixtures.bodycomplex;
 
+import com.google.gson.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -32,117 +33,119 @@ import retrofit.http.Body;
 
 public class Primitive {
     private PrimitiveService service;
+
     public Primitive(RestAdapter restAdapter) {
         service = restAdapter.create(PrimitiveService.class);
     }
+
     public interface PrimitiveService {
         @GET("/complex/primitive/integer")
-        IntWrapper getInt() throws ServiceException;
+        Response getInt() throws ServiceException;
 
         @GET("/complex/primitive/integer")
-        void getIntAsync(ServiceCallback<IntWrapper> serviceCallback);
+        void getIntAsync(ServiceResponseCallback cb);
 
         @PUT("/complex/primitive/integer")
-        void putInt(@Body IntWrapper complexBody) throws ServiceException;
+        Response putInt(@Body IntWrapper complexBody) throws ServiceException;
 
         @PUT("/complex/primitive/integer")
-        void putIntAsync(@Body IntWrapper complexBody, ServiceCallback<Void> serviceCallback);
+        void putIntAsync(@Body IntWrapper complexBody, ServiceResponseCallback cb);
 
         @GET("/complex/primitive/long")
-        LongWrapper getLong() throws ServiceException;
+        Response getLong() throws ServiceException;
 
         @GET("/complex/primitive/long")
-        void getLongAsync(ServiceCallback<LongWrapper> serviceCallback);
+        void getLongAsync(ServiceResponseCallback cb);
 
         @PUT("/complex/primitive/long")
-        void putLong(@Body LongWrapper complexBody) throws ServiceException;
+        Response putLong(@Body LongWrapper complexBody) throws ServiceException;
 
         @PUT("/complex/primitive/long")
-        void putLongAsync(@Body LongWrapper complexBody, ServiceCallback<Void> serviceCallback);
+        void putLongAsync(@Body LongWrapper complexBody, ServiceResponseCallback cb);
 
         @GET("/complex/primitive/float")
-        FloatWrapper getFloat() throws ServiceException;
+        Response getFloat() throws ServiceException;
 
         @GET("/complex/primitive/float")
-        void getFloatAsync(ServiceCallback<FloatWrapper> serviceCallback);
+        void getFloatAsync(ServiceResponseCallback cb);
 
         @PUT("/complex/primitive/float")
-        void putFloat(@Body FloatWrapper complexBody) throws ServiceException;
+        Response putFloat(@Body FloatWrapper complexBody) throws ServiceException;
 
         @PUT("/complex/primitive/float")
-        void putFloatAsync(@Body FloatWrapper complexBody, ServiceCallback<Void> serviceCallback);
+        void putFloatAsync(@Body FloatWrapper complexBody, ServiceResponseCallback cb);
 
         @GET("/complex/primitive/double")
-        DoubleWrapper getDouble() throws ServiceException;
+        Response getDouble() throws ServiceException;
 
         @GET("/complex/primitive/double")
-        void getDoubleAsync(ServiceCallback<DoubleWrapper> serviceCallback);
+        void getDoubleAsync(ServiceResponseCallback cb);
 
         @PUT("/complex/primitive/double")
-        void putDouble(@Body DoubleWrapper complexBody) throws ServiceException;
+        Response putDouble(@Body DoubleWrapper complexBody) throws ServiceException;
 
         @PUT("/complex/primitive/double")
-        void putDoubleAsync(@Body DoubleWrapper complexBody, ServiceCallback<Void> serviceCallback);
+        void putDoubleAsync(@Body DoubleWrapper complexBody, ServiceResponseCallback cb);
 
         @GET("/complex/primitive/bool")
-        BooleanWrapper getBool() throws ServiceException;
+        Response getBool() throws ServiceException;
 
         @GET("/complex/primitive/bool")
-        void getBoolAsync(ServiceCallback<BooleanWrapper> serviceCallback);
+        void getBoolAsync(ServiceResponseCallback cb);
 
         @PUT("/complex/primitive/bool")
-        void putBool(@Body BooleanWrapper complexBody) throws ServiceException;
+        Response putBool(@Body BooleanWrapper complexBody) throws ServiceException;
 
         @PUT("/complex/primitive/bool")
-        void putBoolAsync(@Body BooleanWrapper complexBody, ServiceCallback<Void> serviceCallback);
+        void putBoolAsync(@Body BooleanWrapper complexBody, ServiceResponseCallback cb);
 
         @GET("/complex/primitive/string")
-        StringWrapper getString() throws ServiceException;
+        Response getString() throws ServiceException;
 
         @GET("/complex/primitive/string")
-        void getStringAsync(ServiceCallback<StringWrapper> serviceCallback);
+        void getStringAsync(ServiceResponseCallback cb);
 
         @PUT("/complex/primitive/string")
-        void putString(@Body StringWrapper complexBody) throws ServiceException;
+        Response putString(@Body StringWrapper complexBody) throws ServiceException;
 
         @PUT("/complex/primitive/string")
-        void putStringAsync(@Body StringWrapper complexBody, ServiceCallback<Void> serviceCallback);
+        void putStringAsync(@Body StringWrapper complexBody, ServiceResponseCallback cb);
 
         @GET("/complex/primitive/date")
-        DateWrapper getDate() throws ServiceException;
+        Response getDate() throws ServiceException;
 
         @GET("/complex/primitive/date")
-        void getDateAsync(ServiceCallback<DateWrapper> serviceCallback);
+        void getDateAsync(ServiceResponseCallback cb);
 
         @PUT("/complex/primitive/date")
-        void putDate(@Body DateWrapper complexBody) throws ServiceException;
+        Response putDate(@Body DateWrapper complexBody) throws ServiceException;
 
         @PUT("/complex/primitive/date")
-        void putDateAsync(@Body DateWrapper complexBody, ServiceCallback<Void> serviceCallback);
+        void putDateAsync(@Body DateWrapper complexBody, ServiceResponseCallback cb);
 
         @GET("/complex/primitive/datetime")
-        DatetimeWrapper getDateTime() throws ServiceException;
+        Response getDateTime() throws ServiceException;
 
         @GET("/complex/primitive/datetime")
-        void getDateTimeAsync(ServiceCallback<DatetimeWrapper> serviceCallback);
+        void getDateTimeAsync(ServiceResponseCallback cb);
 
         @PUT("/complex/primitive/datetime")
-        void putDateTime(@Body DatetimeWrapper complexBody) throws ServiceException;
+        Response putDateTime(@Body DatetimeWrapper complexBody) throws ServiceException;
 
         @PUT("/complex/primitive/datetime")
-        void putDateTimeAsync(@Body DatetimeWrapper complexBody, ServiceCallback<Void> serviceCallback);
+        void putDateTimeAsync(@Body DatetimeWrapper complexBody, ServiceResponseCallback cb);
 
         @GET("/complex/primitive/byte")
-        ByteWrapper getByte() throws ServiceException;
+        Response getByte() throws ServiceException;
 
         @GET("/complex/primitive/byte")
-        void getByteAsync(ServiceCallback<ByteWrapper> serviceCallback);
+        void getByteAsync(ServiceResponseCallback cb);
 
         @PUT("/complex/primitive/byte")
-        void putByte(@Body ByteWrapper complexBody) throws ServiceException;
+        Response putByte(@Body ByteWrapper complexBody) throws ServiceException;
 
         @PUT("/complex/primitive/byte")
-        void putByteAsync(@Body ByteWrapper complexBody, ServiceCallback<Void> serviceCallback);
+        void putByteAsync(@Body ByteWrapper complexBody, ServiceResponseCallback cb);
 
     }
     public IntWrapper getInt() throws ServiceException {
@@ -154,7 +157,7 @@ public class Primitive {
     }
 
     public void getIntAsync(final ServiceCallback<IntWrapper> serviceCallback) {
-        service.getIntAsyncd(new ServiceResponseCallback() {
+        service.getIntAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -168,21 +171,21 @@ public class Primitive {
 
     private ServiceResponse<IntWrapper> getIntDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<IntWrapper>()
-                  .register(200, IntWrapper.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<IntWrapper>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putInt(IntWrapper complexBody) throws ServiceException {
         try {
-            return putIntDelegate(service.putInt(complexBody), null).getBody();
+            putIntDelegate(service.putInt(complexBody), null).getBody();
         } catch (RetrofitError error) {
-            return putIntDelegate(error.getResponse(), error).getBody();
+            putIntDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putIntAsync(IntWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        service.putIntAsyncd(new ServiceResponseCallback() {
+        service.putIntAsync(complexBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -196,9 +199,9 @@ public class Primitive {
 
     private ServiceResponse<Void> putIntDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public LongWrapper getLong() throws ServiceException {
@@ -210,7 +213,7 @@ public class Primitive {
     }
 
     public void getLongAsync(final ServiceCallback<LongWrapper> serviceCallback) {
-        service.getLongAsyncd(new ServiceResponseCallback() {
+        service.getLongAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -224,21 +227,21 @@ public class Primitive {
 
     private ServiceResponse<LongWrapper> getLongDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<LongWrapper>()
-                  .register(200, LongWrapper.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<LongWrapper>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putLong(LongWrapper complexBody) throws ServiceException {
         try {
-            return putLongDelegate(service.putLong(complexBody), null).getBody();
+            putLongDelegate(service.putLong(complexBody), null).getBody();
         } catch (RetrofitError error) {
-            return putLongDelegate(error.getResponse(), error).getBody();
+            putLongDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putLongAsync(LongWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        service.putLongAsyncd(new ServiceResponseCallback() {
+        service.putLongAsync(complexBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -252,9 +255,9 @@ public class Primitive {
 
     private ServiceResponse<Void> putLongDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public FloatWrapper getFloat() throws ServiceException {
@@ -266,7 +269,7 @@ public class Primitive {
     }
 
     public void getFloatAsync(final ServiceCallback<FloatWrapper> serviceCallback) {
-        service.getFloatAsyncd(new ServiceResponseCallback() {
+        service.getFloatAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -280,21 +283,21 @@ public class Primitive {
 
     private ServiceResponse<FloatWrapper> getFloatDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<FloatWrapper>()
-                  .register(200, FloatWrapper.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<FloatWrapper>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putFloat(FloatWrapper complexBody) throws ServiceException {
         try {
-            return putFloatDelegate(service.putFloat(complexBody), null).getBody();
+            putFloatDelegate(service.putFloat(complexBody), null).getBody();
         } catch (RetrofitError error) {
-            return putFloatDelegate(error.getResponse(), error).getBody();
+            putFloatDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putFloatAsync(FloatWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        service.putFloatAsyncd(new ServiceResponseCallback() {
+        service.putFloatAsync(complexBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -308,9 +311,9 @@ public class Primitive {
 
     private ServiceResponse<Void> putFloatDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public DoubleWrapper getDouble() throws ServiceException {
@@ -322,7 +325,7 @@ public class Primitive {
     }
 
     public void getDoubleAsync(final ServiceCallback<DoubleWrapper> serviceCallback) {
-        service.getDoubleAsyncd(new ServiceResponseCallback() {
+        service.getDoubleAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -336,21 +339,21 @@ public class Primitive {
 
     private ServiceResponse<DoubleWrapper> getDoubleDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<DoubleWrapper>()
-                  .register(200, DoubleWrapper.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<DoubleWrapper>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putDouble(DoubleWrapper complexBody) throws ServiceException {
         try {
-            return putDoubleDelegate(service.putDouble(complexBody), null).getBody();
+            putDoubleDelegate(service.putDouble(complexBody), null).getBody();
         } catch (RetrofitError error) {
-            return putDoubleDelegate(error.getResponse(), error).getBody();
+            putDoubleDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putDoubleAsync(DoubleWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        service.putDoubleAsyncd(new ServiceResponseCallback() {
+        service.putDoubleAsync(complexBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -364,9 +367,9 @@ public class Primitive {
 
     private ServiceResponse<Void> putDoubleDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public BooleanWrapper getBool() throws ServiceException {
@@ -378,7 +381,7 @@ public class Primitive {
     }
 
     public void getBoolAsync(final ServiceCallback<BooleanWrapper> serviceCallback) {
-        service.getBoolAsyncd(new ServiceResponseCallback() {
+        service.getBoolAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -392,21 +395,21 @@ public class Primitive {
 
     private ServiceResponse<BooleanWrapper> getBoolDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<BooleanWrapper>()
-                  .register(200, BooleanWrapper.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<BooleanWrapper>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putBool(BooleanWrapper complexBody) throws ServiceException {
         try {
-            return putBoolDelegate(service.putBool(complexBody), null).getBody();
+            putBoolDelegate(service.putBool(complexBody), null).getBody();
         } catch (RetrofitError error) {
-            return putBoolDelegate(error.getResponse(), error).getBody();
+            putBoolDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putBoolAsync(BooleanWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        service.putBoolAsyncd(new ServiceResponseCallback() {
+        service.putBoolAsync(complexBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -420,9 +423,9 @@ public class Primitive {
 
     private ServiceResponse<Void> putBoolDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public StringWrapper getString() throws ServiceException {
@@ -434,7 +437,7 @@ public class Primitive {
     }
 
     public void getStringAsync(final ServiceCallback<StringWrapper> serviceCallback) {
-        service.getStringAsyncd(new ServiceResponseCallback() {
+        service.getStringAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -448,21 +451,21 @@ public class Primitive {
 
     private ServiceResponse<StringWrapper> getStringDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<StringWrapper>()
-                  .register(200, StringWrapper.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<StringWrapper>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putString(StringWrapper complexBody) throws ServiceException {
         try {
-            return putStringDelegate(service.putString(complexBody), null).getBody();
+            putStringDelegate(service.putString(complexBody), null).getBody();
         } catch (RetrofitError error) {
-            return putStringDelegate(error.getResponse(), error).getBody();
+            putStringDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putStringAsync(StringWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        service.putStringAsyncd(new ServiceResponseCallback() {
+        service.putStringAsync(complexBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -476,9 +479,9 @@ public class Primitive {
 
     private ServiceResponse<Void> putStringDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public DateWrapper getDate() throws ServiceException {
@@ -490,7 +493,7 @@ public class Primitive {
     }
 
     public void getDateAsync(final ServiceCallback<DateWrapper> serviceCallback) {
-        service.getDateAsyncd(new ServiceResponseCallback() {
+        service.getDateAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -504,21 +507,21 @@ public class Primitive {
 
     private ServiceResponse<DateWrapper> getDateDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<DateWrapper>()
-                  .register(200, DateWrapper.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<DateWrapper>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putDate(DateWrapper complexBody) throws ServiceException {
         try {
-            return putDateDelegate(service.putDate(complexBody), null).getBody();
+            putDateDelegate(service.putDate(complexBody), null).getBody();
         } catch (RetrofitError error) {
-            return putDateDelegate(error.getResponse(), error).getBody();
+            putDateDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putDateAsync(DateWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        service.putDateAsyncd(new ServiceResponseCallback() {
+        service.putDateAsync(complexBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -532,9 +535,9 @@ public class Primitive {
 
     private ServiceResponse<Void> putDateDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public DatetimeWrapper getDateTime() throws ServiceException {
@@ -546,7 +549,7 @@ public class Primitive {
     }
 
     public void getDateTimeAsync(final ServiceCallback<DatetimeWrapper> serviceCallback) {
-        service.getDateTimeAsyncd(new ServiceResponseCallback() {
+        service.getDateTimeAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -560,21 +563,21 @@ public class Primitive {
 
     private ServiceResponse<DatetimeWrapper> getDateTimeDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<DatetimeWrapper>()
-                  .register(200, DatetimeWrapper.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<DatetimeWrapper>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putDateTime(DatetimeWrapper complexBody) throws ServiceException {
         try {
-            return putDateTimeDelegate(service.putDateTime(complexBody), null).getBody();
+            putDateTimeDelegate(service.putDateTime(complexBody), null).getBody();
         } catch (RetrofitError error) {
-            return putDateTimeDelegate(error.getResponse(), error).getBody();
+            putDateTimeDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putDateTimeAsync(DatetimeWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        service.putDateTimeAsyncd(new ServiceResponseCallback() {
+        service.putDateTimeAsync(complexBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -588,9 +591,9 @@ public class Primitive {
 
     private ServiceResponse<Void> putDateTimeDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public ByteWrapper getByte() throws ServiceException {
@@ -602,7 +605,7 @@ public class Primitive {
     }
 
     public void getByteAsync(final ServiceCallback<ByteWrapper> serviceCallback) {
-        service.getByteAsyncd(new ServiceResponseCallback() {
+        service.getByteAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -616,21 +619,21 @@ public class Primitive {
 
     private ServiceResponse<ByteWrapper> getByteDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<ByteWrapper>()
-                  .register(200, ByteWrapper.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<ByteWrapper>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putByte(ByteWrapper complexBody) throws ServiceException {
         try {
-            return putByteDelegate(service.putByte(complexBody), null).getBody();
+            putByteDelegate(service.putByte(complexBody), null).getBody();
         } catch (RetrofitError error) {
-            return putByteDelegate(error.getResponse(), error).getBody();
+            putByteDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putByteAsync(ByteWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        service.putByteAsyncd(new ServiceResponseCallback() {
+        service.putByteAsync(complexBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -644,9 +647,9 @@ public class Primitive {
 
     private ServiceResponse<Void> putByteDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
 }

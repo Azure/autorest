@@ -16,7 +16,7 @@ import retrofit.RestAdapter;
 /**
  * Initializes a new instance of the AutoRestSwaggerBATService class.
  */
-public class AutoRestSwaggerBATServiceImpl extends ServiceClient<AutoRestSwaggerBATService> implements AutoRestSwaggerBATService {
+public class AutoRestSwaggerBATServiceImpl extends ServiceClient implements AutoRestSwaggerBATService {
     private String baseUri;
 
     /**

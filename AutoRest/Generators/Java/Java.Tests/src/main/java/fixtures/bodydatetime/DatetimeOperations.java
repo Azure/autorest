@@ -9,6 +9,7 @@
 
 package fixtures.bodydatetime;
 
+import com.google.gson.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -24,123 +25,125 @@ import retrofit.http.Body;
 
 public class DatetimeOperations {
     private DatetimeService service;
+
     public DatetimeOperations(RestAdapter restAdapter) {
         service = restAdapter.create(DatetimeService.class);
     }
+
     public interface DatetimeService {
         @GET("/datetime/null")
-        Date getNull() throws ServiceException;
+        Response getNull() throws ServiceException;
 
         @GET("/datetime/null")
-        void getNullAsync(ServiceCallback<Date> serviceCallback);
+        void getNullAsync(ServiceResponseCallback cb);
 
         @GET("/datetime/invalid")
-        Date getInvalid() throws ServiceException;
+        Response getInvalid() throws ServiceException;
 
         @GET("/datetime/invalid")
-        void getInvalidAsync(ServiceCallback<Date> serviceCallback);
+        void getInvalidAsync(ServiceResponseCallback cb);
 
         @GET("/datetime/overflow")
-        Date getOverflow() throws ServiceException;
+        Response getOverflow() throws ServiceException;
 
         @GET("/datetime/overflow")
-        void getOverflowAsync(ServiceCallback<Date> serviceCallback);
+        void getOverflowAsync(ServiceResponseCallback cb);
 
         @GET("/datetime/underflow")
-        Date getUnderflow() throws ServiceException;
+        Response getUnderflow() throws ServiceException;
 
         @GET("/datetime/underflow")
-        void getUnderflowAsync(ServiceCallback<Date> serviceCallback);
+        void getUnderflowAsync(ServiceResponseCallback cb);
 
         @PUT("/datetime/max/utc")
-        void putUtcMaxDateTime(@Body Date datetimeBody) throws ServiceException;
+        Response putUtcMaxDateTime(@Body Date datetimeBody) throws ServiceException;
 
         @PUT("/datetime/max/utc")
-        void putUtcMaxDateTimeAsync(@Body Date datetimeBody, ServiceCallback<Void> serviceCallback);
+        void putUtcMaxDateTimeAsync(@Body Date datetimeBody, ServiceResponseCallback cb);
 
         @GET("/datetime/max/utc/lowercase")
-        Date getUtcLowercaseMaxDateTime() throws ServiceException;
+        Response getUtcLowercaseMaxDateTime() throws ServiceException;
 
         @GET("/datetime/max/utc/lowercase")
-        void getUtcLowercaseMaxDateTimeAsync(ServiceCallback<Date> serviceCallback);
+        void getUtcLowercaseMaxDateTimeAsync(ServiceResponseCallback cb);
 
         @GET("/datetime/max/utc/uppercase")
-        Date getUtcUppercaseMaxDateTime() throws ServiceException;
+        Response getUtcUppercaseMaxDateTime() throws ServiceException;
 
         @GET("/datetime/max/utc/uppercase")
-        void getUtcUppercaseMaxDateTimeAsync(ServiceCallback<Date> serviceCallback);
+        void getUtcUppercaseMaxDateTimeAsync(ServiceResponseCallback cb);
 
         @PUT("/datetime/max/localpositiveoffset")
-        void putLocalPositiveOffsetMaxDateTime(@Body Date datetimeBody) throws ServiceException;
+        Response putLocalPositiveOffsetMaxDateTime(@Body Date datetimeBody) throws ServiceException;
 
         @PUT("/datetime/max/localpositiveoffset")
-        void putLocalPositiveOffsetMaxDateTimeAsync(@Body Date datetimeBody, ServiceCallback<Void> serviceCallback);
+        void putLocalPositiveOffsetMaxDateTimeAsync(@Body Date datetimeBody, ServiceResponseCallback cb);
 
         @GET("/datetime/max/localpositiveoffset/lowercase")
-        Date getLocalPositiveOffsetLowercaseMaxDateTime() throws ServiceException;
+        Response getLocalPositiveOffsetLowercaseMaxDateTime() throws ServiceException;
 
         @GET("/datetime/max/localpositiveoffset/lowercase")
-        void getLocalPositiveOffsetLowercaseMaxDateTimeAsync(ServiceCallback<Date> serviceCallback);
+        void getLocalPositiveOffsetLowercaseMaxDateTimeAsync(ServiceResponseCallback cb);
 
         @GET("/datetime/max/localpositiveoffset/uppercase")
-        Date getLocalPositiveOffsetUppercaseMaxDateTime() throws ServiceException;
+        Response getLocalPositiveOffsetUppercaseMaxDateTime() throws ServiceException;
 
         @GET("/datetime/max/localpositiveoffset/uppercase")
-        void getLocalPositiveOffsetUppercaseMaxDateTimeAsync(ServiceCallback<Date> serviceCallback);
+        void getLocalPositiveOffsetUppercaseMaxDateTimeAsync(ServiceResponseCallback cb);
 
         @PUT("/datetime/max/localnegativeoffset")
-        void putLocalNegativeOffsetMaxDateTime(@Body Date datetimeBody) throws ServiceException;
+        Response putLocalNegativeOffsetMaxDateTime(@Body Date datetimeBody) throws ServiceException;
 
         @PUT("/datetime/max/localnegativeoffset")
-        void putLocalNegativeOffsetMaxDateTimeAsync(@Body Date datetimeBody, ServiceCallback<Void> serviceCallback);
+        void putLocalNegativeOffsetMaxDateTimeAsync(@Body Date datetimeBody, ServiceResponseCallback cb);
 
         @GET("/datetime/max/localnegativeoffset/uppercase")
-        Date getLocalNegativeOffsetUppercaseMaxDateTime() throws ServiceException;
+        Response getLocalNegativeOffsetUppercaseMaxDateTime() throws ServiceException;
 
         @GET("/datetime/max/localnegativeoffset/uppercase")
-        void getLocalNegativeOffsetUppercaseMaxDateTimeAsync(ServiceCallback<Date> serviceCallback);
+        void getLocalNegativeOffsetUppercaseMaxDateTimeAsync(ServiceResponseCallback cb);
 
         @GET("/datetime/max/localnegativeoffset/lowercase")
-        Date getLocalNegativeOffsetLowercaseMaxDateTime() throws ServiceException;
+        Response getLocalNegativeOffsetLowercaseMaxDateTime() throws ServiceException;
 
         @GET("/datetime/max/localnegativeoffset/lowercase")
-        void getLocalNegativeOffsetLowercaseMaxDateTimeAsync(ServiceCallback<Date> serviceCallback);
+        void getLocalNegativeOffsetLowercaseMaxDateTimeAsync(ServiceResponseCallback cb);
 
         @PUT("/datetime/min/utc")
-        void putUtcMinDateTime(@Body Date datetimeBody) throws ServiceException;
+        Response putUtcMinDateTime(@Body Date datetimeBody) throws ServiceException;
 
         @PUT("/datetime/min/utc")
-        void putUtcMinDateTimeAsync(@Body Date datetimeBody, ServiceCallback<Void> serviceCallback);
+        void putUtcMinDateTimeAsync(@Body Date datetimeBody, ServiceResponseCallback cb);
 
         @GET("/datetime/min/utc")
-        Date getUtcMinDateTime() throws ServiceException;
+        Response getUtcMinDateTime() throws ServiceException;
 
         @GET("/datetime/min/utc")
-        void getUtcMinDateTimeAsync(ServiceCallback<Date> serviceCallback);
+        void getUtcMinDateTimeAsync(ServiceResponseCallback cb);
 
         @PUT("/datetime/min/localpositiveoffset")
-        void putLocalPositiveOffsetMinDateTime(@Body Date datetimeBody) throws ServiceException;
+        Response putLocalPositiveOffsetMinDateTime(@Body Date datetimeBody) throws ServiceException;
 
         @PUT("/datetime/min/localpositiveoffset")
-        void putLocalPositiveOffsetMinDateTimeAsync(@Body Date datetimeBody, ServiceCallback<Void> serviceCallback);
+        void putLocalPositiveOffsetMinDateTimeAsync(@Body Date datetimeBody, ServiceResponseCallback cb);
 
         @GET("/datetime/min/localpositiveoffset")
-        Date getLocalPositiveOffsetMinDateTime() throws ServiceException;
+        Response getLocalPositiveOffsetMinDateTime() throws ServiceException;
 
         @GET("/datetime/min/localpositiveoffset")
-        void getLocalPositiveOffsetMinDateTimeAsync(ServiceCallback<Date> serviceCallback);
+        void getLocalPositiveOffsetMinDateTimeAsync(ServiceResponseCallback cb);
 
         @PUT("/datetime/min/localnegativeoffset")
-        void putLocalNegativeOffsetMinDateTime(@Body Date datetimeBody) throws ServiceException;
+        Response putLocalNegativeOffsetMinDateTime(@Body Date datetimeBody) throws ServiceException;
 
         @PUT("/datetime/min/localnegativeoffset")
-        void putLocalNegativeOffsetMinDateTimeAsync(@Body Date datetimeBody, ServiceCallback<Void> serviceCallback);
+        void putLocalNegativeOffsetMinDateTimeAsync(@Body Date datetimeBody, ServiceResponseCallback cb);
 
         @GET("/datetime/min/localnegativeoffset")
-        Date getLocalNegativeOffsetMinDateTime() throws ServiceException;
+        Response getLocalNegativeOffsetMinDateTime() throws ServiceException;
 
         @GET("/datetime/min/localnegativeoffset")
-        void getLocalNegativeOffsetMinDateTimeAsync(ServiceCallback<Date> serviceCallback);
+        void getLocalNegativeOffsetMinDateTimeAsync(ServiceResponseCallback cb);
 
     }
     public Date getNull() throws ServiceException {
@@ -152,7 +155,7 @@ public class DatetimeOperations {
     }
 
     public void getNullAsync(final ServiceCallback<Date> serviceCallback) {
-        service.getNullAsyncd(new ServiceResponseCallback() {
+        service.getNullAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -166,9 +169,9 @@ public class DatetimeOperations {
 
     private ServiceResponse<Date> getNullDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Date>()
-                  .register(200, Date.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Date>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public Date getInvalid() throws ServiceException {
@@ -180,7 +183,7 @@ public class DatetimeOperations {
     }
 
     public void getInvalidAsync(final ServiceCallback<Date> serviceCallback) {
-        service.getInvalidAsyncd(new ServiceResponseCallback() {
+        service.getInvalidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -194,9 +197,9 @@ public class DatetimeOperations {
 
     private ServiceResponse<Date> getInvalidDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Date>()
-                  .register(200, Date.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Date>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public Date getOverflow() throws ServiceException {
@@ -208,7 +211,7 @@ public class DatetimeOperations {
     }
 
     public void getOverflowAsync(final ServiceCallback<Date> serviceCallback) {
-        service.getOverflowAsyncd(new ServiceResponseCallback() {
+        service.getOverflowAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -222,9 +225,9 @@ public class DatetimeOperations {
 
     private ServiceResponse<Date> getOverflowDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Date>()
-                  .register(200, Date.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Date>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public Date getUnderflow() throws ServiceException {
@@ -236,7 +239,7 @@ public class DatetimeOperations {
     }
 
     public void getUnderflowAsync(final ServiceCallback<Date> serviceCallback) {
-        service.getUnderflowAsyncd(new ServiceResponseCallback() {
+        service.getUnderflowAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -250,21 +253,21 @@ public class DatetimeOperations {
 
     private ServiceResponse<Date> getUnderflowDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Date>()
-                  .register(200, Date.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Date>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putUtcMaxDateTime(Date datetimeBody) throws ServiceException {
         try {
-            return putUtcMaxDateTimeDelegate(service.putUtcMaxDateTime(datetimeBody), null).getBody();
+            putUtcMaxDateTimeDelegate(service.putUtcMaxDateTime(datetimeBody), null).getBody();
         } catch (RetrofitError error) {
-            return putUtcMaxDateTimeDelegate(error.getResponse(), error).getBody();
+            putUtcMaxDateTimeDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putUtcMaxDateTimeAsync(Date datetimeBody, final ServiceCallback<Void> serviceCallback) {
-        service.putUtcMaxDateTimeAsyncd(new ServiceResponseCallback() {
+        service.putUtcMaxDateTimeAsync(datetimeBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -278,9 +281,9 @@ public class DatetimeOperations {
 
     private ServiceResponse<Void> putUtcMaxDateTimeDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public Date getUtcLowercaseMaxDateTime() throws ServiceException {
@@ -292,7 +295,7 @@ public class DatetimeOperations {
     }
 
     public void getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<Date> serviceCallback) {
-        service.getUtcLowercaseMaxDateTimeAsyncd(new ServiceResponseCallback() {
+        service.getUtcLowercaseMaxDateTimeAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -306,9 +309,9 @@ public class DatetimeOperations {
 
     private ServiceResponse<Date> getUtcLowercaseMaxDateTimeDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Date>()
-                  .register(200, Date.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Date>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public Date getUtcUppercaseMaxDateTime() throws ServiceException {
@@ -320,7 +323,7 @@ public class DatetimeOperations {
     }
 
     public void getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<Date> serviceCallback) {
-        service.getUtcUppercaseMaxDateTimeAsyncd(new ServiceResponseCallback() {
+        service.getUtcUppercaseMaxDateTimeAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -334,21 +337,21 @@ public class DatetimeOperations {
 
     private ServiceResponse<Date> getUtcUppercaseMaxDateTimeDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Date>()
-                  .register(200, Date.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Date>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putLocalPositiveOffsetMaxDateTime(Date datetimeBody) throws ServiceException {
         try {
-            return putLocalPositiveOffsetMaxDateTimeDelegate(service.putLocalPositiveOffsetMaxDateTime(datetimeBody), null).getBody();
+            putLocalPositiveOffsetMaxDateTimeDelegate(service.putLocalPositiveOffsetMaxDateTime(datetimeBody), null).getBody();
         } catch (RetrofitError error) {
-            return putLocalPositiveOffsetMaxDateTimeDelegate(error.getResponse(), error).getBody();
+            putLocalPositiveOffsetMaxDateTimeDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putLocalPositiveOffsetMaxDateTimeAsync(Date datetimeBody, final ServiceCallback<Void> serviceCallback) {
-        service.putLocalPositiveOffsetMaxDateTimeAsyncd(new ServiceResponseCallback() {
+        service.putLocalPositiveOffsetMaxDateTimeAsync(datetimeBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -362,9 +365,9 @@ public class DatetimeOperations {
 
     private ServiceResponse<Void> putLocalPositiveOffsetMaxDateTimeDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public Date getLocalPositiveOffsetLowercaseMaxDateTime() throws ServiceException {
@@ -376,7 +379,7 @@ public class DatetimeOperations {
     }
 
     public void getLocalPositiveOffsetLowercaseMaxDateTimeAsync(final ServiceCallback<Date> serviceCallback) {
-        service.getLocalPositiveOffsetLowercaseMaxDateTimeAsyncd(new ServiceResponseCallback() {
+        service.getLocalPositiveOffsetLowercaseMaxDateTimeAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -390,9 +393,9 @@ public class DatetimeOperations {
 
     private ServiceResponse<Date> getLocalPositiveOffsetLowercaseMaxDateTimeDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Date>()
-                  .register(200, Date.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Date>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public Date getLocalPositiveOffsetUppercaseMaxDateTime() throws ServiceException {
@@ -404,7 +407,7 @@ public class DatetimeOperations {
     }
 
     public void getLocalPositiveOffsetUppercaseMaxDateTimeAsync(final ServiceCallback<Date> serviceCallback) {
-        service.getLocalPositiveOffsetUppercaseMaxDateTimeAsyncd(new ServiceResponseCallback() {
+        service.getLocalPositiveOffsetUppercaseMaxDateTimeAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -418,21 +421,21 @@ public class DatetimeOperations {
 
     private ServiceResponse<Date> getLocalPositiveOffsetUppercaseMaxDateTimeDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Date>()
-                  .register(200, Date.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Date>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putLocalNegativeOffsetMaxDateTime(Date datetimeBody) throws ServiceException {
         try {
-            return putLocalNegativeOffsetMaxDateTimeDelegate(service.putLocalNegativeOffsetMaxDateTime(datetimeBody), null).getBody();
+            putLocalNegativeOffsetMaxDateTimeDelegate(service.putLocalNegativeOffsetMaxDateTime(datetimeBody), null).getBody();
         } catch (RetrofitError error) {
-            return putLocalNegativeOffsetMaxDateTimeDelegate(error.getResponse(), error).getBody();
+            putLocalNegativeOffsetMaxDateTimeDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putLocalNegativeOffsetMaxDateTimeAsync(Date datetimeBody, final ServiceCallback<Void> serviceCallback) {
-        service.putLocalNegativeOffsetMaxDateTimeAsyncd(new ServiceResponseCallback() {
+        service.putLocalNegativeOffsetMaxDateTimeAsync(datetimeBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -446,9 +449,9 @@ public class DatetimeOperations {
 
     private ServiceResponse<Void> putLocalNegativeOffsetMaxDateTimeDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public Date getLocalNegativeOffsetUppercaseMaxDateTime() throws ServiceException {
@@ -460,7 +463,7 @@ public class DatetimeOperations {
     }
 
     public void getLocalNegativeOffsetUppercaseMaxDateTimeAsync(final ServiceCallback<Date> serviceCallback) {
-        service.getLocalNegativeOffsetUppercaseMaxDateTimeAsyncd(new ServiceResponseCallback() {
+        service.getLocalNegativeOffsetUppercaseMaxDateTimeAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -474,9 +477,9 @@ public class DatetimeOperations {
 
     private ServiceResponse<Date> getLocalNegativeOffsetUppercaseMaxDateTimeDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Date>()
-                  .register(200, Date.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Date>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public Date getLocalNegativeOffsetLowercaseMaxDateTime() throws ServiceException {
@@ -488,7 +491,7 @@ public class DatetimeOperations {
     }
 
     public void getLocalNegativeOffsetLowercaseMaxDateTimeAsync(final ServiceCallback<Date> serviceCallback) {
-        service.getLocalNegativeOffsetLowercaseMaxDateTimeAsyncd(new ServiceResponseCallback() {
+        service.getLocalNegativeOffsetLowercaseMaxDateTimeAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -502,21 +505,21 @@ public class DatetimeOperations {
 
     private ServiceResponse<Date> getLocalNegativeOffsetLowercaseMaxDateTimeDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Date>()
-                  .register(200, Date.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Date>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putUtcMinDateTime(Date datetimeBody) throws ServiceException {
         try {
-            return putUtcMinDateTimeDelegate(service.putUtcMinDateTime(datetimeBody), null).getBody();
+            putUtcMinDateTimeDelegate(service.putUtcMinDateTime(datetimeBody), null).getBody();
         } catch (RetrofitError error) {
-            return putUtcMinDateTimeDelegate(error.getResponse(), error).getBody();
+            putUtcMinDateTimeDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putUtcMinDateTimeAsync(Date datetimeBody, final ServiceCallback<Void> serviceCallback) {
-        service.putUtcMinDateTimeAsyncd(new ServiceResponseCallback() {
+        service.putUtcMinDateTimeAsync(datetimeBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -530,9 +533,9 @@ public class DatetimeOperations {
 
     private ServiceResponse<Void> putUtcMinDateTimeDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public Date getUtcMinDateTime() throws ServiceException {
@@ -544,7 +547,7 @@ public class DatetimeOperations {
     }
 
     public void getUtcMinDateTimeAsync(final ServiceCallback<Date> serviceCallback) {
-        service.getUtcMinDateTimeAsyncd(new ServiceResponseCallback() {
+        service.getUtcMinDateTimeAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -558,21 +561,21 @@ public class DatetimeOperations {
 
     private ServiceResponse<Date> getUtcMinDateTimeDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Date>()
-                  .register(200, Date.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Date>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putLocalPositiveOffsetMinDateTime(Date datetimeBody) throws ServiceException {
         try {
-            return putLocalPositiveOffsetMinDateTimeDelegate(service.putLocalPositiveOffsetMinDateTime(datetimeBody), null).getBody();
+            putLocalPositiveOffsetMinDateTimeDelegate(service.putLocalPositiveOffsetMinDateTime(datetimeBody), null).getBody();
         } catch (RetrofitError error) {
-            return putLocalPositiveOffsetMinDateTimeDelegate(error.getResponse(), error).getBody();
+            putLocalPositiveOffsetMinDateTimeDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putLocalPositiveOffsetMinDateTimeAsync(Date datetimeBody, final ServiceCallback<Void> serviceCallback) {
-        service.putLocalPositiveOffsetMinDateTimeAsyncd(new ServiceResponseCallback() {
+        service.putLocalPositiveOffsetMinDateTimeAsync(datetimeBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -586,9 +589,9 @@ public class DatetimeOperations {
 
     private ServiceResponse<Void> putLocalPositiveOffsetMinDateTimeDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public Date getLocalPositiveOffsetMinDateTime() throws ServiceException {
@@ -600,7 +603,7 @@ public class DatetimeOperations {
     }
 
     public void getLocalPositiveOffsetMinDateTimeAsync(final ServiceCallback<Date> serviceCallback) {
-        service.getLocalPositiveOffsetMinDateTimeAsyncd(new ServiceResponseCallback() {
+        service.getLocalPositiveOffsetMinDateTimeAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -614,21 +617,21 @@ public class DatetimeOperations {
 
     private ServiceResponse<Date> getLocalPositiveOffsetMinDateTimeDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Date>()
-                  .register(200, Date.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Date>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public void putLocalNegativeOffsetMinDateTime(Date datetimeBody) throws ServiceException {
         try {
-            return putLocalNegativeOffsetMinDateTimeDelegate(service.putLocalNegativeOffsetMinDateTime(datetimeBody), null).getBody();
+            putLocalNegativeOffsetMinDateTimeDelegate(service.putLocalNegativeOffsetMinDateTime(datetimeBody), null).getBody();
         } catch (RetrofitError error) {
-            return putLocalNegativeOffsetMinDateTimeDelegate(error.getResponse(), error).getBody();
+            putLocalNegativeOffsetMinDateTimeDelegate(error.getResponse(), error).getBody();
         }
     }
 
     public void putLocalNegativeOffsetMinDateTimeAsync(Date datetimeBody, final ServiceCallback<Void> serviceCallback) {
-        service.putLocalNegativeOffsetMinDateTimeAsyncd(new ServiceResponseCallback() {
+        service.putLocalNegativeOffsetMinDateTimeAsync(datetimeBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -642,9 +645,9 @@ public class DatetimeOperations {
 
     private ServiceResponse<Void> putLocalNegativeOffsetMinDateTimeDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
-                  .register(200, Void.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public Date getLocalNegativeOffsetMinDateTime() throws ServiceException {
@@ -656,7 +659,7 @@ public class DatetimeOperations {
     }
 
     public void getLocalNegativeOffsetMinDateTimeAsync(final ServiceCallback<Date> serviceCallback) {
-        service.getLocalNegativeOffsetMinDateTimeAsyncd(new ServiceResponseCallback() {
+        service.getLocalNegativeOffsetMinDateTimeAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -670,9 +673,9 @@ public class DatetimeOperations {
 
     private ServiceResponse<Date> getLocalNegativeOffsetMinDateTimeDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Date>()
-                  .register(200, Date.class)
-                  .registerError(Error)
-                  .build(response, error);
+                .register(200, new TypeToken<Date>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
 }

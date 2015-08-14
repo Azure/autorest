@@ -9,6 +9,7 @@
 
 package fixtures.http;
 
+import com.google.gson.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -17,7 +18,6 @@ import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
-import fixtures.http.models.Error;
 import retrofit.http.HEAD;
 import retrofit.http.GET;
 import retrofit.http.POST;
@@ -26,33 +26,35 @@ import retrofit.http.DELETE;
 
 public class HttpServerFailure {
     private HttpServerFailureService service;
+
     public HttpServerFailure(RestAdapter restAdapter) {
         service = restAdapter.create(HttpServerFailureService.class);
     }
+
     public interface HttpServerFailureService {
         @HEAD("/http/failure/server/501")
-        Error head501() throws ServiceException;
+        Response head501() throws ServiceException;
 
         @HEAD("/http/failure/server/501")
-        void head501Async(ServiceCallback<Error> serviceCallback);
+        void head501Async(ServiceResponseCallback cb);
 
         @GET("/http/failure/server/501")
-        Error get501() throws ServiceException;
+        Response get501() throws ServiceException;
 
         @GET("/http/failure/server/501")
-        void get501Async(ServiceCallback<Error> serviceCallback);
+        void get501Async(ServiceResponseCallback cb);
 
         @POST("/http/failure/server/505")
-        Error post505(@Body Boolean booleanValue) throws ServiceException;
+        Response post505(@Body Boolean booleanValue) throws ServiceException;
 
         @POST("/http/failure/server/505")
-        void post505Async(@Body Boolean booleanValue, ServiceCallback<Error> serviceCallback);
+        void post505Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @DELETE("/http/failure/server/505")
-        Error delete505(@Body Boolean booleanValue) throws ServiceException;
+        Response delete505(@Body Boolean booleanValue) throws ServiceException;
 
         @DELETE("/http/failure/server/505")
-        void delete505Async(@Body Boolean booleanValue, ServiceCallback<Error> serviceCallback);
+        void delete505Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
     }
     public Error head501() throws ServiceException {
@@ -64,7 +66,7 @@ public class HttpServerFailure {
     }
 
     public void head501Async(final ServiceCallback<Error> serviceCallback) {
-        service.head501Asyncd(new ServiceResponseCallback() {
+        service.head501Async(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -78,8 +80,8 @@ public class HttpServerFailure {
 
     private ServiceResponse<Error> head501Delegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Error>()
-                  .registerError(Error)
-                  .build(response, error);
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public Error get501() throws ServiceException {
@@ -91,7 +93,7 @@ public class HttpServerFailure {
     }
 
     public void get501Async(final ServiceCallback<Error> serviceCallback) {
-        service.get501Asyncd(new ServiceResponseCallback() {
+        service.get501Async(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -105,8 +107,8 @@ public class HttpServerFailure {
 
     private ServiceResponse<Error> get501Delegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Error>()
-                  .registerError(Error)
-                  .build(response, error);
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public Error post505(Boolean booleanValue) throws ServiceException {
@@ -118,7 +120,7 @@ public class HttpServerFailure {
     }
 
     public void post505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        service.post505Asyncd(new ServiceResponseCallback() {
+        service.post505Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -132,8 +134,8 @@ public class HttpServerFailure {
 
     private ServiceResponse<Error> post505Delegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Error>()
-                  .registerError(Error)
-                  .build(response, error);
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
     public Error delete505(Boolean booleanValue) throws ServiceException {
@@ -145,7 +147,7 @@ public class HttpServerFailure {
     }
 
     public void delete505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        service.delete505Asyncd(new ServiceResponseCallback() {
+        service.delete505Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -159,8 +161,8 @@ public class HttpServerFailure {
 
     private ServiceResponse<Error> delete505Delegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Error>()
-                  .registerError(Error)
-                  .build(response, error);
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
 }

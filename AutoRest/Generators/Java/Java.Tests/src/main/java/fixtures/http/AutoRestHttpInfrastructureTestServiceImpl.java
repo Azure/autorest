@@ -16,7 +16,7 @@ import retrofit.RestAdapter;
 /**
  * Initializes a new instance of the AutoRestHttpInfrastructureTestService class.
  */
-public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient<AutoRestHttpInfrastructureTestService> implements AutoRestHttpInfrastructureTestService {
+public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient implements AutoRestHttpInfrastructureTestService {
     private String baseUri;
 
     /**
