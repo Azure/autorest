@@ -57,7 +57,7 @@ namespace Microsoft.Rest.Generator.Java
             {
                 return name;
             }
-            return PascalCase(RemoveInvalidCharacters(GetEscapedReservedName(name, "Property")));
+            return CamelCase(RemoveInvalidCharacters(GetEscapedReservedName(name, "Property")));
         }
 
         public override string GetMethodName(string name)

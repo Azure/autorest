@@ -11,53 +11,53 @@ package fixtures.bodycomplex.models;
 
 
 /**
- * 
+ * The IntWrapper model.
  */
 public class IntWrapper {
-    /*
-     * 
+    /**
+     * The field1 property.
      */
-    private int Field1;
+    private int field1;
 
-    /*
-     * 
+    /**
+     * The field2 property.
      */
-    private int Field2;
+    private int field2;
 
-    /*
-     * Get 
+    /**
+     * Get the field1 value.
      *
-     * @return the Field1 value
+     * @return the field1 value
      */ 
     public int getField1() {
-        return this.Field1;
+        return this.field1;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the field1 value.
      *
-     * @param the Field1 value to set
+     * @param field1 the field1 value to set
      */
-    public void setField1(int Field1) {
-        this.Field1 = Field1;
+    public void setField1(int field1) {
+        this.field1 = field1;
     }
 
-    /*
-     * Get 
+    /**
+     * Get the field2 value.
      *
-     * @return the Field2 value
+     * @return the field2 value
      */ 
     public int getField2() {
-        return this.Field2;
+        return this.field2;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the field2 value.
      *
-     * @param the Field2 value to set
+     * @param field2 the field2 value to set
      */
-    public void setField2(int Field2) {
-        this.Field2 = Field2;
+    public void setField2(int field2) {
+        this.field2 = field2;
     }
 
 }

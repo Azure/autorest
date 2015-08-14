@@ -12,76 +12,76 @@ package fixtures.bodycomplex.models;
 import java.util.List;
 
 /**
- * 
+ * The Fish model.
  */
 public class Fish {
-    /*
-     * 
+    /**
+     * The species property.
      */
-    private String Species;
+    private String species;
 
-    /*
-     * 
+    /**
+     * The length property.
      */
-    private double Length;
+    private double length;
 
-    /*
-     * 
+    /**
+     * The siblings property.
      */
-    private List<Fish> Siblings;
+    private List<Fish> siblings;
 
-    /*
-     * Get 
+    /**
+     * Get the species value.
      *
-     * @return the Species value
+     * @return the species value
      */ 
     public String getSpecies() {
-        return this.Species;
+        return this.species;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the species value.
      *
-     * @param the Species value to set
+     * @param species the species value to set
      */
-    public void setSpecies(String Species) {
-        this.Species = Species;
+    public void setSpecies(String species) {
+        this.species = species;
     }
 
-    /*
-     * Get 
+    /**
+     * Get the length value.
      *
-     * @return the Length value
+     * @return the length value
      */ 
     public double getLength() {
-        return this.Length;
+        return this.length;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the length value.
      *
-     * @param the Length value to set
+     * @param length the length value to set
      */
-    public void setLength(double Length) {
-        this.Length = Length;
+    public void setLength(double length) {
+        this.length = length;
     }
 
-    /*
-     * Get 
+    /**
+     * Get the siblings value.
      *
-     * @return the Siblings value
+     * @return the siblings value
      */ 
     public List<Fish> getSiblings() {
-        return this.Siblings;
+        return this.siblings;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the siblings value.
      *
-     * @param the Siblings value to set
+     * @param siblings the siblings value to set
      */
-    public void setSiblings(List<Fish> Siblings) {
-        this.Siblings = Siblings;
+    public void setSiblings(List<Fish> siblings) {
+        this.siblings = siblings;
     }
 
 }

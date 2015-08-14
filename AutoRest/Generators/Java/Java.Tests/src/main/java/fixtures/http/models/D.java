@@ -11,30 +11,30 @@ package fixtures.http.models;
 
 
 /**
- * 
+ * The D model.
  */
 public class D {
-    /*
-     * 
+    /**
+     * The httpStatusCode property.
      */
-    private String HttpStatusCode;
+    private String httpStatusCode;
 
-    /*
-     * Get 
+    /**
+     * Get the httpStatusCode value.
      *
-     * @return the HttpStatusCode value
+     * @return the httpStatusCode value
      */ 
     public String getHttpStatusCode() {
-        return this.HttpStatusCode;
+        return this.httpStatusCode;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the httpStatusCode value.
      *
-     * @param the HttpStatusCode value to set
+     * @param httpStatusCode the httpStatusCode value to set
      */
-    public void setHttpStatusCode(String HttpStatusCode) {
-        this.HttpStatusCode = HttpStatusCode;
+    public void setHttpStatusCode(String httpStatusCode) {
+        this.httpStatusCode = httpStatusCode;
     }
 
 }

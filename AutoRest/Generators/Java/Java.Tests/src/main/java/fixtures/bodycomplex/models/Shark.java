@@ -12,53 +12,53 @@ package fixtures.bodycomplex.models;
 import java.util.Date;
 
 /**
- * 
+ * The Shark model.
  */
 public class Shark {
-    /*
-     * 
+    /**
+     * The age property.
      */
-    private int Age;
+    private int age;
 
-    /*
-     * 
+    /**
+     * The birthday property.
      */
-    private Date Birthday;
+    private Date birthday;
 
-    /*
-     * Get 
+    /**
+     * Get the age value.
      *
-     * @return the Age value
+     * @return the age value
      */ 
     public int getAge() {
-        return this.Age;
+        return this.age;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the age value.
      *
-     * @param the Age value to set
+     * @param age the age value to set
      */
-    public void setAge(int Age) {
-        this.Age = Age;
+    public void setAge(int age) {
+        this.age = age;
     }
 
-    /*
-     * Get 
+    /**
+     * Get the birthday value.
      *
-     * @return the Birthday value
+     * @return the birthday value
      */ 
     public Date getBirthday() {
-        return this.Birthday;
+        return this.birthday;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the birthday value.
      *
-     * @param the Birthday value to set
+     * @param birthday the birthday value to set
      */
-    public void setBirthday(Date Birthday) {
-        this.Birthday = Birthday;
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 
 }

@@ -11,30 +11,30 @@ package fixtures.http.models;
 
 
 /**
- * 
+ * The B model.
  */
 public class B {
-    /*
-     * 
+    /**
+     * The textStatusCode property.
      */
-    private String TextStatusCode;
+    private String textStatusCode;
 
-    /*
-     * Get 
+    /**
+     * Get the textStatusCode value.
      *
-     * @return the TextStatusCode value
+     * @return the textStatusCode value
      */ 
     public String getTextStatusCode() {
-        return this.TextStatusCode;
+        return this.textStatusCode;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the textStatusCode value.
      *
-     * @param the TextStatusCode value to set
+     * @param textStatusCode the textStatusCode value to set
      */
-    public void setTextStatusCode(String TextStatusCode) {
-        this.TextStatusCode = TextStatusCode;
+    public void setTextStatusCode(String textStatusCode) {
+        this.textStatusCode = textStatusCode;
     }
 
 }

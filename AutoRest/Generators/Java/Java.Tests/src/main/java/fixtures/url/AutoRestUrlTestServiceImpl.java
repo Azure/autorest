@@ -32,7 +32,7 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
     /**
      * A string value 'globalItemStringPath' that appears in the path
      *
-     * @return the GlobalStringPath value.
+     * @return the globalStringPath value.
      */
     public String getGlobalStringPath() {
         return this.globalStringPath;

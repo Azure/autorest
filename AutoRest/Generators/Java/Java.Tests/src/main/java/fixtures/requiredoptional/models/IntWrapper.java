@@ -11,30 +11,30 @@ package fixtures.requiredoptional.models;
 
 
 /**
- * 
+ * The IntWrapper model.
  */
 public class IntWrapper {
-    /*
-     * 
+    /**
+     * The value property.
      */
-    private int Value;
+    private int value;
 
-    /*
-     * Get 
+    /**
+     * Get the value value.
      *
-     * @return the Value value
+     * @return the value value
      */ 
     public int getValue() {
-        return this.Value;
+        return this.value;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the value value.
      *
-     * @param the Value value to set
+     * @param value the value value to set
      */
-    public void setValue(int Value) {
-        this.Value = Value;
+    public void setValue(int value) {
+        this.value = value;
     }
 
 }

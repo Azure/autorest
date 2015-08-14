@@ -12,30 +12,30 @@ package fixtures.bodycomplex.models;
 import org.apache.commons.lang3.ArrayUtils;
 
 /**
- * 
+ * The Sawshark model.
  */
 public class Sawshark {
-    /*
-     * 
+    /**
+     * The picture property.
      */
-    private byte[] Picture;
+    private byte[] picture;
 
-    /*
-     * Get 
+    /**
+     * Get the picture value.
      *
-     * @return the Picture value
+     * @return the picture value
      */ 
     public byte[] getPicture() {
-        return this.Picture;
+        return this.picture;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the picture value.
      *
-     * @param the Picture value to set
+     * @param picture the picture value to set
      */
-    public void setPicture(byte[] Picture) {
-        this.Picture = Picture;
+    public void setPicture(byte[] picture) {
+        this.picture = picture;
     }
 
 }

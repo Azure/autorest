@@ -11,30 +11,30 @@ package fixtures.bodycomplex.models;
 
 
 /**
- * 
+ * The Dog model.
  */
 public class Dog {
-    /*
-     * 
+    /**
+     * The food property.
      */
-    private String Food;
+    private String food;
 
-    /*
-     * Get 
+    /**
+     * Get the food value.
      *
-     * @return the Food value
+     * @return the food value
      */ 
     public String getFood() {
-        return this.Food;
+        return this.food;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the food value.
      *
-     * @param the Food value to set
+     * @param food the food value to set
      */
-    public void setFood(String Food) {
-        this.Food = Food;
+    public void setFood(String food) {
+        this.food = food;
     }
 
 }

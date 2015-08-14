@@ -11,53 +11,53 @@ package fixtures.bodyarray.models;
 
 
 /**
- * 
+ * The Product model.
  */
 public class Product {
-    /*
-     * 
+    /**
+     * The integer property.
      */
-    private int Integer;
+    private int integer;
 
-    /*
-     * 
+    /**
+     * The stringProperty property.
      */
-    private String StringProperty;
+    private String stringProperty;
 
-    /*
-     * Get 
+    /**
+     * Get the integer value.
      *
-     * @return the Integer value
+     * @return the integer value
      */ 
     public int getInteger() {
-        return this.Integer;
+        return this.integer;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the integer value.
      *
-     * @param the Integer value to set
+     * @param integer the integer value to set
      */
-    public void setInteger(int Integer) {
-        this.Integer = Integer;
+    public void setInteger(int integer) {
+        this.integer = integer;
     }
 
-    /*
-     * Get 
+    /**
+     * Get the stringProperty value.
      *
-     * @return the StringProperty value
+     * @return the stringProperty value
      */ 
     public String getStringProperty() {
-        return this.StringProperty;
+        return this.stringProperty;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the stringProperty value.
      *
-     * @param the StringProperty value to set
+     * @param stringProperty the stringProperty value to set
      */
-    public void setStringProperty(String StringProperty) {
-        this.StringProperty = StringProperty;
+    public void setStringProperty(String stringProperty) {
+        this.stringProperty = stringProperty;
     }
 
 }

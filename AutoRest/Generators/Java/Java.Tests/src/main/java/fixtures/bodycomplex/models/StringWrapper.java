@@ -11,76 +11,76 @@ package fixtures.bodycomplex.models;
 
 
 /**
- * 
+ * The StringWrapper model.
  */
 public class StringWrapper {
-    /*
-     * 
+    /**
+     * The field property.
      */
-    private String Field;
+    private String field;
 
-    /*
-     * 
+    /**
+     * The empty property.
      */
-    private String Empty;
+    private String empty;
 
-    /*
-     * 
+    /**
+     * The nullProperty property.
      */
-    private String NullProperty;
+    private String nullProperty;
 
-    /*
-     * Get 
+    /**
+     * Get the field value.
      *
-     * @return the Field value
+     * @return the field value
      */ 
     public String getField() {
-        return this.Field;
+        return this.field;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the field value.
      *
-     * @param the Field value to set
+     * @param field the field value to set
      */
-    public void setField(String Field) {
-        this.Field = Field;
+    public void setField(String field) {
+        this.field = field;
     }
 
-    /*
-     * Get 
+    /**
+     * Get the empty value.
      *
-     * @return the Empty value
+     * @return the empty value
      */ 
     public String getEmpty() {
-        return this.Empty;
+        return this.empty;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the empty value.
      *
-     * @param the Empty value to set
+     * @param empty the empty value to set
      */
-    public void setEmpty(String Empty) {
-        this.Empty = Empty;
+    public void setEmpty(String empty) {
+        this.empty = empty;
     }
 
-    /*
-     * Get 
+    /**
+     * Get the nullProperty value.
      *
-     * @return the NullProperty value
+     * @return the nullProperty value
      */ 
     public String getNullProperty() {
-        return this.NullProperty;
+        return this.nullProperty;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the nullProperty value.
      *
-     * @param the NullProperty value to set
+     * @param nullProperty the nullProperty value to set
      */
-    public void setNullProperty(String NullProperty) {
-        this.NullProperty = NullProperty;
+    public void setNullProperty(String nullProperty) {
+        this.nullProperty = nullProperty;
     }
 
 }

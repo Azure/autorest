@@ -11,53 +11,55 @@ package fixtures.bodycomplex.models;
 
 
 /**
- * 
+ * The DoubleWrapper model.
  */
 public class DoubleWrapper {
-    /*
-     * 
+    /**
+     * The field1 property.
      */
-    private double Field1;
+    private double field1;
 
-    /*
-     * 
+    /**
+     * The
+     * field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose
+     * property.
      */
-    private double Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose;
+    private double field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose;
 
-    /*
-     * Get 
+    /**
+     * Get the field1 value.
      *
-     * @return the Field1 value
+     * @return the field1 value
      */ 
     public double getField1() {
-        return this.Field1;
+        return this.field1;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the field1 value.
      *
-     * @param the Field1 value to set
+     * @param field1 the field1 value to set
      */
-    public void setField1(double Field1) {
-        this.Field1 = Field1;
+    public void setField1(double field1) {
+        this.field1 = field1;
     }
 
-    /*
-     * Get 
+    /**
+     * Get the field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose value.
      *
-     * @return the Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose value
+     * @return the field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose value
      */ 
     public double getField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose() {
-        return this.Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose;
+        return this.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose value.
      *
-     * @param the Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose value to set
+     * @param field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose the field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose value to set
      */
-    public void setField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose(double Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose) {
-        this.Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose = Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose;
+    public void setField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose(double field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose) {
+        this.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose = field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose;
     }
 
 }

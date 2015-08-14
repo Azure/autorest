@@ -11,53 +11,53 @@ package fixtures.bodycomplex.models;
 
 
 /**
- * 
+ * The Salmon model.
  */
 public class Salmon {
-    /*
-     * 
+    /**
+     * The location property.
      */
-    private String Location;
+    private String location;
 
-    /*
-     * 
+    /**
+     * The iswild property.
      */
-    private boolean Iswild;
+    private boolean iswild;
 
-    /*
-     * Get 
+    /**
+     * Get the location value.
      *
-     * @return the Location value
+     * @return the location value
      */ 
     public String getLocation() {
-        return this.Location;
+        return this.location;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the location value.
      *
-     * @param the Location value to set
+     * @param location the location value to set
      */
-    public void setLocation(String Location) {
-        this.Location = Location;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
-    /*
-     * Get 
+    /**
+     * Get the iswild value.
      *
-     * @return the Iswild value
+     * @return the iswild value
      */ 
     public boolean getIswild() {
-        return this.Iswild;
+        return this.iswild;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the iswild value.
      *
-     * @param the Iswild value to set
+     * @param iswild the iswild value to set
      */
-    public void setIswild(boolean Iswild) {
-        this.Iswild = Iswild;
+    public void setIswild(boolean iswild) {
+        this.iswild = iswild;
     }
 
 }

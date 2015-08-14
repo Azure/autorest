@@ -11,76 +11,77 @@ package fixtures.bodycomplex.models;
 
 
 /**
- * 
+ * The Basic model.
  */
 public class Basic {
-    /*
-     * 
+    /**
+     * The id property.
      */
-    private int Id;
+    private int id;
 
-    /*
-     * 
+    /**
+     * The name property.
      */
-    private String Name;
+    private String name;
 
-    /*
-     * Possible values for this property include: 'cyan', 'Magenta', 'YELLOW', 'blacK'.
+    /**
+     * Possible values for this property include: 'cyan', 'Magenta', 'YELLOW',
+     * 'blacK'.
      */
-    private CMYKColors Color;
+    private CMYKColors color;
 
-    /*
-     * Get 
+    /**
+     * Get the id value.
      *
-     * @return the Id value
+     * @return the id value
      */ 
     public int getId() {
-        return this.Id;
+        return this.id;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the id value.
      *
-     * @param the Id value to set
+     * @param id the id value to set
      */
-    public void setId(int Id) {
-        this.Id = Id;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    /*
-     * Get 
+    /**
+     * Get the name value.
      *
-     * @return the Name value
+     * @return the name value
      */ 
     public String getName() {
-        return this.Name;
+        return this.name;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the name value.
      *
-     * @param the Name value to set
+     * @param name the name value to set
      */
-    public void setName(String Name) {
-        this.Name = Name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    /*
-     * Get Possible values for this property include: 'cyan', 'Magenta', 'YELLOW', 'blacK'.
+    /**
+     * Get the color value.
      *
-     * @return the Color value
+     * @return the color value
      */ 
     public CMYKColors getColor() {
-        return this.Color;
+        return this.color;
     }
 
-    /*
-     * Set Possible values for this property include: 'cyan', 'Magenta', 'YELLOW', 'blacK'.
+    /**
+     * Set the color value.
      *
-     * @param the Color value to set
+     * @param color the color value to set
      */
-    public void setColor(CMYKColors Color) {
-        this.Color = Color;
+    public void setColor(CMYKColors color) {
+        this.color = color;
     }
 
 }

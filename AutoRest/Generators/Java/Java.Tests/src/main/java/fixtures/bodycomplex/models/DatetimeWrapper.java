@@ -12,53 +12,53 @@ package fixtures.bodycomplex.models;
 import java.util.Date;
 
 /**
- * 
+ * The DatetimeWrapper model.
  */
 public class DatetimeWrapper {
-    /*
-     * 
+    /**
+     * The field property.
      */
-    private Date Field;
+    private Date field;
 
-    /*
-     * 
+    /**
+     * The now property.
      */
-    private Date Now;
+    private Date now;
 
-    /*
-     * Get 
+    /**
+     * Get the field value.
      *
-     * @return the Field value
+     * @return the field value
      */ 
     public Date getField() {
-        return this.Field;
+        return this.field;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the field value.
      *
-     * @param the Field value to set
+     * @param field the field value to set
      */
-    public void setField(Date Field) {
-        this.Field = Field;
+    public void setField(Date field) {
+        this.field = field;
     }
 
-    /*
-     * Get 
+    /**
+     * Get the now value.
      *
-     * @return the Now value
+     * @return the now value
      */ 
     public Date getNow() {
-        return this.Now;
+        return this.now;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the now value.
      *
-     * @param the Now value to set
+     * @param now the now value to set
      */
-    public void setNow(Date Now) {
-        this.Now = Now;
+    public void setNow(Date now) {
+        this.now = now;
     }
 
 }

@@ -12,30 +12,30 @@ package fixtures.bodycomplex.models;
 import java.util.List;
 
 /**
- * 
+ * The ArrayWrapper model.
  */
 public class ArrayWrapper {
-    /*
-     * 
+    /**
+     * The array property.
      */
-    private List<String> Array;
+    private List<String> array;
 
-    /*
-     * Get 
+    /**
+     * Get the array value.
      *
-     * @return the Array value
+     * @return the array value
      */ 
     public List<String> getArray() {
-        return this.Array;
+        return this.array;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the array value.
      *
-     * @param the Array value to set
+     * @param array the array value to set
      */
-    public void setArray(List<String> Array) {
-        this.Array = Array;
+    public void setArray(List<String> array) {
+        this.array = array;
     }
 
 }

@@ -11,53 +11,53 @@ package fixtures.bodyinteger.models;
 
 
 /**
- * 
+ * The Error model.
  */
 public class Error {
-    /*
-     * 
+    /**
+     * The status property.
      */
-    private int Status;
+    private int status;
 
-    /*
-     * 
+    /**
+     * The message property.
      */
-    private String Message;
+    private String message;
 
-    /*
-     * Get 
+    /**
+     * Get the status value.
      *
-     * @return the Status value
+     * @return the status value
      */ 
     public int getStatus() {
-        return this.Status;
+        return this.status;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the status value.
      *
-     * @param the Status value to set
+     * @param status the status value to set
      */
-    public void setStatus(int Status) {
-        this.Status = Status;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
-    /*
-     * Get 
+    /**
+     * Get the message value.
      *
-     * @return the Message value
+     * @return the message value
      */ 
     public String getMessage() {
-        return this.Message;
+        return this.message;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the message value.
      *
-     * @param the Message value to set
+     * @param message the message value to set
      */
-    public void setMessage(String Message) {
-        this.Message = Message;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
 }

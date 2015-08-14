@@ -21,7 +21,7 @@ public interface AutoRestUrlTestService {
 
     /**
      * Gets A string value 'globalItemStringPath' that appears in the path.
-     * @return the GlobalStringPath value.
+     * @return the globalStringPath value.
      */
     String getGlobalStringPath();
 
