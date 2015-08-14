@@ -42,7 +42,7 @@ function Group(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Group.prototype.getSampleResourceGroup = function (resourceGroupName, options, callback) {
   var client = this.client;

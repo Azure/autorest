@@ -40,7 +40,7 @@ function Paging(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paging.prototype.getSinglePages = function (options, callback) {
   var client = this.client;
@@ -152,7 +152,7 @@ Paging.prototype.getSinglePages = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paging.prototype.getMultiplePages = function (options, callback) {
   var client = this.client;
@@ -265,7 +265,7 @@ Paging.prototype.getMultiplePages = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
   var client = this.client;
@@ -379,7 +379,7 @@ Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
   var client = this.client;
@@ -491,7 +491,7 @@ Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paging.prototype.getSinglePagesFailure = function (options, callback) {
   var client = this.client;
@@ -603,7 +603,7 @@ Paging.prototype.getSinglePagesFailure = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paging.prototype.getMultiplePagesFailure = function (options, callback) {
   var client = this.client;
@@ -715,7 +715,7 @@ Paging.prototype.getMultiplePagesFailure = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
   var client = this.client;
@@ -829,7 +829,7 @@ Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback) {
   var client = this.client;
@@ -942,7 +942,7 @@ Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback)
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callback) {
   var client = this.client;
@@ -1056,7 +1056,7 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paging.prototype.getMultiplePagesRetryFirstNext = function (nextPageLink, options, callback) {
   var client = this.client;
@@ -1171,7 +1171,7 @@ Paging.prototype.getMultiplePagesRetryFirstNext = function (nextPageLink, option
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paging.prototype.getMultiplePagesRetrySecondNext = function (nextPageLink, options, callback) {
   var client = this.client;
@@ -1284,7 +1284,7 @@ Paging.prototype.getMultiplePagesRetrySecondNext = function (nextPageLink, optio
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paging.prototype.getSinglePagesFailureNext = function (nextPageLink, options, callback) {
   var client = this.client;
@@ -1397,7 +1397,7 @@ Paging.prototype.getSinglePagesFailureNext = function (nextPageLink, options, ca
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paging.prototype.getMultiplePagesFailureNext = function (nextPageLink, options, callback) {
   var client = this.client;
@@ -1510,7 +1510,7 @@ Paging.prototype.getMultiplePagesFailureNext = function (nextPageLink, options, 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 Paging.prototype.getMultiplePagesFailureUriNext = function (nextPageLink, options, callback) {
   var client = this.client;

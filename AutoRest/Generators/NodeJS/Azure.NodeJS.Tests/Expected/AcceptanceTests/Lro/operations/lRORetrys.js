@@ -50,7 +50,7 @@ function LRORetrys(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LRORetrys.prototype.put201CreatingSucceeded200 = function (product, options, callback) {
   var client = this.client;
@@ -93,7 +93,7 @@ LRORetrys.prototype.put201CreatingSucceeded200 = function (product, options, cal
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LRORetrys.prototype.beginPut201CreatingSucceeded200 = function (product, options, callback) {
   var client = this.client;
@@ -228,7 +228,7 @@ LRORetrys.prototype.beginPut201CreatingSucceeded200 = function (product, options
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LRORetrys.prototype.getRetry201CreatingSucceeded200Polling = function (options, callback) {
   var client = this.client;
@@ -350,7 +350,7 @@ LRORetrys.prototype.getRetry201CreatingSucceeded200Polling = function (options, 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LRORetrys.prototype.putAsyncRelativeRetrySucceeded = function (product, options, callback) {
   var client = this.client;
@@ -393,7 +393,7 @@ LRORetrys.prototype.putAsyncRelativeRetrySucceeded = function (product, options,
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LRORetrys.prototype.beginPutAsyncRelativeRetrySucceeded = function (product, options, callback) {
   var client = this.client;
@@ -514,7 +514,7 @@ LRORetrys.prototype.beginPutAsyncRelativeRetrySucceeded = function (product, opt
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LRORetrys.prototype.getAsyncRelativeRetrySucceeded = function (options, callback) {
   var client = this.client;
@@ -630,7 +630,7 @@ LRORetrys.prototype.getAsyncRelativeRetrySucceeded = function (options, callback
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LRORetrys.prototype.deleteProvisioning202Accepted200Succeeded = function (options, callback) {
   var self = this.client;
@@ -657,7 +657,7 @@ LRORetrys.prototype.deleteProvisioning202Accepted200Succeeded = function (option
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LRORetrys.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (options, callback) {
   var client = this.client;
@@ -788,7 +788,7 @@ LRORetrys.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (o
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LRORetrys.prototype.delete202Retry200 = function (options, callback) {
   var self = this.client;
@@ -814,7 +814,7 @@ LRORetrys.prototype.delete202Retry200 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LRORetrys.prototype.beginDelete202Retry200 = function (options, callback) {
   var client = this.client;
@@ -913,7 +913,7 @@ LRORetrys.prototype.beginDelete202Retry200 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LRORetrys.prototype.deleteAsyncRelativeRetrySucceeded = function (options, callback) {
   var self = this.client;
@@ -939,7 +939,7 @@ LRORetrys.prototype.deleteAsyncRelativeRetrySucceeded = function (options, callb
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LRORetrys.prototype.beginDeleteAsyncRelativeRetrySucceeded = function (options, callback) {
   var client = this.client;
@@ -1044,7 +1044,7 @@ LRORetrys.prototype.beginDeleteAsyncRelativeRetrySucceeded = function (options, 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LRORetrys.prototype.post202Retry200 = function (product, options, callback) {
   var self = this.client;
@@ -1076,7 +1076,7 @@ LRORetrys.prototype.post202Retry200 = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LRORetrys.prototype.beginPost202Retry200 = function (product, options, callback) {
   var client = this.client;
@@ -1188,7 +1188,7 @@ LRORetrys.prototype.beginPost202Retry200 = function (product, options, callback)
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LRORetrys.prototype.postAsyncRelativeRetrySucceeded = function (product, options, callback) {
   var self = this.client;
@@ -1221,7 +1221,7 @@ LRORetrys.prototype.postAsyncRelativeRetrySucceeded = function (product, options
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 LRORetrys.prototype.beginPostAsyncRelativeRetrySucceeded = function (product, options, callback) {
   var client = this.client;

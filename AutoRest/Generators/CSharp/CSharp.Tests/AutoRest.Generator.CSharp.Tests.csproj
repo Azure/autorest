@@ -157,7 +157,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="app.config" />
-    <None Include="RegenerateExpectedClasses.ps1" />
     <None Include="Swagger\swagger-mirror-polymorphic.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

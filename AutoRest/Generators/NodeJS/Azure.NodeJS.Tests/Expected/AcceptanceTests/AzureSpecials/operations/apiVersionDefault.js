@@ -40,7 +40,7 @@ function ApiVersionDefault(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ApiVersionDefault.prototype.getMethodGlobalValid = function (options, callback) {
   var client = this.client;
@@ -140,7 +140,7 @@ ApiVersionDefault.prototype.getMethodGlobalValid = function (options, callback) 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ApiVersionDefault.prototype.getMethodGlobalNotProvidedValid = function (options, callback) {
   var client = this.client;
@@ -240,7 +240,7 @@ ApiVersionDefault.prototype.getMethodGlobalNotProvidedValid = function (options,
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ApiVersionDefault.prototype.getPathGlobalValid = function (options, callback) {
   var client = this.client;
@@ -340,7 +340,7 @@ ApiVersionDefault.prototype.getPathGlobalValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 ApiVersionDefault.prototype.getSwaggerGlobalValid = function (options, callback) {
   var client = this.client;

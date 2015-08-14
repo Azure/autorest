@@ -41,7 +41,7 @@ function SubscriptionInCredentials(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 SubscriptionInCredentials.prototype.postMethodGlobalValid = function (options, callback) {
   var client = this.client;
@@ -143,7 +143,7 @@ SubscriptionInCredentials.prototype.postMethodGlobalValid = function (options, c
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 SubscriptionInCredentials.prototype.postMethodGlobalNull = function (options, callback) {
   var client = this.client;
@@ -244,7 +244,7 @@ SubscriptionInCredentials.prototype.postMethodGlobalNull = function (options, ca
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 SubscriptionInCredentials.prototype.postMethodGlobalNotProvidedValid = function (options, callback) {
   var client = this.client;
@@ -349,7 +349,7 @@ SubscriptionInCredentials.prototype.postMethodGlobalNotProvidedValid = function 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 SubscriptionInCredentials.prototype.postPathGlobalValid = function (options, callback) {
   var client = this.client;
@@ -450,7 +450,7 @@ SubscriptionInCredentials.prototype.postPathGlobalValid = function (options, cal
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 SubscriptionInCredentials.prototype.postSwaggerGlobalValid = function (options, callback) {
   var client = this.client;

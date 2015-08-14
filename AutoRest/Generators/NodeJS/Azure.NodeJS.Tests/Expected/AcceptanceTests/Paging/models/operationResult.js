@@ -1,7 +1,5 @@
 'use strict';
 
-var models = require('./index');
-
 /**
  * @class
  * Initializes a new instance of the OperationResult class.

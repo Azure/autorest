@@ -71,7 +71,7 @@ util.inherits(AutoRestResourceFlatteningTestService, ServiceClient);
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 AutoRestResourceFlatteningTestService.prototype.putArray = function (resourceArray, options, callback) {
   var client = this;
@@ -177,7 +177,7 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (resourceArr
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 AutoRestResourceFlatteningTestService.prototype.getArray = function (options, callback) {
   var client = this;
@@ -295,7 +295,7 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resourceDictionary, options, callback) {
   var client = this;
@@ -401,7 +401,7 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resour
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 AutoRestResourceFlatteningTestService.prototype.getDictionary = function (options, callback) {
   var client = this;
@@ -533,7 +533,7 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function (resourceComplexObject, options, callback) {
   var client = this;
@@ -635,7 +635,7 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function (options, callback) {
   var client = this;

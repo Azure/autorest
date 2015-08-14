@@ -1,6 +1,6 @@
 'use strict';
 
-var models = require('./index');
+var util = require('util');
 
 /**
  * @class

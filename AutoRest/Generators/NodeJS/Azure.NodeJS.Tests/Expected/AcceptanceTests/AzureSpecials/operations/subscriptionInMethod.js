@@ -43,7 +43,7 @@ function SubscriptionInMethod(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 SubscriptionInMethod.prototype.postMethodLocalValid = function (subscriptionId, options, callback) {
   var client = this.client;
@@ -147,7 +147,7 @@ SubscriptionInMethod.prototype.postMethodLocalValid = function (subscriptionId, 
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 SubscriptionInMethod.prototype.postMethodLocalNull = function (subscriptionId, options, callback) {
   var client = this.client;
@@ -250,7 +250,7 @@ SubscriptionInMethod.prototype.postMethodLocalNull = function (subscriptionId, o
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 SubscriptionInMethod.prototype.postPathLocalValid = function (subscriptionId, options, callback) {
   var client = this.client;
@@ -353,7 +353,7 @@ SubscriptionInMethod.prototype.postPathLocalValid = function (subscriptionId, op
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 SubscriptionInMethod.prototype.postSwaggerLocalValid = function (subscriptionId, options, callback) {
   var client = this.client;

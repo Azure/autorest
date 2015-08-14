@@ -40,7 +40,7 @@ function HttpSuccess(client) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpSuccess.prototype.head204 = function (options, callback) {
   var client = this.client;
@@ -137,7 +137,7 @@ HttpSuccess.prototype.head204 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {Stream} The Response stream
+ * @returns {stream} The Response stream
  */
 HttpSuccess.prototype.head404 = function (options, callback) {
   var client = this.client;

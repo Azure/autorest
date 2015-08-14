@@ -2,6 +2,8 @@
 
 var models = require('./index');
 
+var util = require('util');
+
 /**
  * @class
  * Initializes a new instance of the Fish class.
