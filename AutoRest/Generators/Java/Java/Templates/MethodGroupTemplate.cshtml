@@ -33,6 +33,19 @@ public class @(Model.MethodGroupType)Impl implements @Model.MethodGroupType {
 
     @foreach (var method in Model.MethodTemplateModels)
     {
+    @:/**
+    @:@WrapComment(" * ", method.Documentation)
+    @: *
+    @foreach (var param in method.LocalParameters)
+    {
+    @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
+    }
+    @if (method.ReturnType != null)
+    {
+    @: * @@return the @method.ReturnTypeString.EscapeXmlComment() object if successful.
+    }
+    @: * @@throws ServiceException the exception wrapped in ServiceException if failed.
+    @: */
     @:public @method.ReturnTypeString @(method.Name)(@method.MethodParameterDeclaration) throws ServiceException {
     @:    try {
     @:        ServiceResponse<@method.GenericReturnTypeString> response = @(method.Name)Delegate(service.@(method.Name)(@method.MethodParameterInvocation), null);
@@ -43,6 +56,15 @@ public class @(Model.MethodGroupType)Impl implements @Model.MethodGroupType {
     @:    }
     @:}
     @EmptyLine
+    @:/**
+    @:@WrapComment(" * ", method.Documentation)
+    @: *
+    @foreach (var param in method.LocalParameters)
+    {
+    @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
+    }
+    @: * @@param serviceCallback the async ServiceCallback to handle successful and failed responses.
+    @: */
     @:public void @(method.Name)Async(@method.MethodParameterDeclarationWithCallback) {
     @:    service.@(method.Name)Async(@method.MethodParameterInvocationWithCallback {
     @:        @@Override

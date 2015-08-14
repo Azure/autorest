@@ -15,12 +15,25 @@ import java.util.Map;
  * 
  */
 public class DictionaryWrapper {
+    /*
+     * 
+     */
     private Map<String, String> DefaultProgram;
 
+    /*
+     * Get 
+     *
+     * @return the DefaultProgram value
+     */ 
     public Map<String, String> getDefaultProgram() {
         return this.DefaultProgram;
     }
 
+    /*
+     * Set 
+     *
+     * @param the DefaultProgram value to set
+     */
     public void setDefaultProgram(Map<String, String> DefaultProgram) {
         this.DefaultProgram = DefaultProgram;
     }

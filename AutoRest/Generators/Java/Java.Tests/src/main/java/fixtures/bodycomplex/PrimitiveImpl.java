@@ -36,6 +36,12 @@ public class PrimitiveImpl implements Primitive {
         service = restAdapter.create(PrimitiveService.class);
     }
 
+    /**
+     * Get complex types with integer properties
+     *
+     * @return the IntWrapper object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public IntWrapper getInt() throws ServiceException {
         try {
             ServiceResponse<IntWrapper> response = getIntDelegate(service.getInt(), null);
@@ -46,6 +52,11 @@ public class PrimitiveImpl implements Primitive {
         }
     }
 
+    /**
+     * Get complex types with integer properties
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getIntAsync(final ServiceCallback<IntWrapper> serviceCallback) {
         service.getIntAsync(new ServiceResponseCallback() {
             @Override
@@ -66,6 +77,12 @@ public class PrimitiveImpl implements Primitive {
                 .build(response, error);
     }
 
+    /**
+     * Put complex types with integer properties
+     *
+     * @param complexBody Please put -1 and 2
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putInt(IntWrapper complexBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putIntDelegate(service.putInt(complexBody), null);
@@ -76,6 +93,12 @@ public class PrimitiveImpl implements Primitive {
         }
     }
 
+    /**
+     * Put complex types with integer properties
+     *
+     * @param complexBody Please put -1 and 2
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putIntAsync(IntWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         service.putIntAsync(complexBody, new ServiceResponseCallback() {
             @Override
@@ -96,6 +119,12 @@ public class PrimitiveImpl implements Primitive {
                 .build(response, error);
     }
 
+    /**
+     * Get complex types with long properties
+     *
+     * @return the LongWrapper object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public LongWrapper getLong() throws ServiceException {
         try {
             ServiceResponse<LongWrapper> response = getLongDelegate(service.getLong(), null);
@@ -106,6 +135,11 @@ public class PrimitiveImpl implements Primitive {
         }
     }
 
+    /**
+     * Get complex types with long properties
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getLongAsync(final ServiceCallback<LongWrapper> serviceCallback) {
         service.getLongAsync(new ServiceResponseCallback() {
             @Override
@@ -126,6 +160,12 @@ public class PrimitiveImpl implements Primitive {
                 .build(response, error);
     }
 
+    /**
+     * Put complex types with long properties
+     *
+     * @param complexBody Please put 1099511627775 and -999511627788
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putLong(LongWrapper complexBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putLongDelegate(service.putLong(complexBody), null);
@@ -136,6 +176,12 @@ public class PrimitiveImpl implements Primitive {
         }
     }
 
+    /**
+     * Put complex types with long properties
+     *
+     * @param complexBody Please put 1099511627775 and -999511627788
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putLongAsync(LongWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         service.putLongAsync(complexBody, new ServiceResponseCallback() {
             @Override
@@ -156,6 +202,12 @@ public class PrimitiveImpl implements Primitive {
                 .build(response, error);
     }
 
+    /**
+     * Get complex types with float properties
+     *
+     * @return the FloatWrapper object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public FloatWrapper getFloat() throws ServiceException {
         try {
             ServiceResponse<FloatWrapper> response = getFloatDelegate(service.getFloat(), null);
@@ -166,6 +218,11 @@ public class PrimitiveImpl implements Primitive {
         }
     }
 
+    /**
+     * Get complex types with float properties
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getFloatAsync(final ServiceCallback<FloatWrapper> serviceCallback) {
         service.getFloatAsync(new ServiceResponseCallback() {
             @Override
@@ -186,6 +243,12 @@ public class PrimitiveImpl implements Primitive {
                 .build(response, error);
     }
 
+    /**
+     * Put complex types with float properties
+     *
+     * @param complexBody Please put 1.05 and -0.003
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putFloat(FloatWrapper complexBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putFloatDelegate(service.putFloat(complexBody), null);
@@ -196,6 +259,12 @@ public class PrimitiveImpl implements Primitive {
         }
     }
 
+    /**
+     * Put complex types with float properties
+     *
+     * @param complexBody Please put 1.05 and -0.003
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putFloatAsync(FloatWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         service.putFloatAsync(complexBody, new ServiceResponseCallback() {
             @Override
@@ -216,6 +285,12 @@ public class PrimitiveImpl implements Primitive {
                 .build(response, error);
     }
 
+    /**
+     * Get complex types with double properties
+     *
+     * @return the DoubleWrapper object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public DoubleWrapper getDouble() throws ServiceException {
         try {
             ServiceResponse<DoubleWrapper> response = getDoubleDelegate(service.getDouble(), null);
@@ -226,6 +301,11 @@ public class PrimitiveImpl implements Primitive {
         }
     }
 
+    /**
+     * Get complex types with double properties
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getDoubleAsync(final ServiceCallback<DoubleWrapper> serviceCallback) {
         service.getDoubleAsync(new ServiceResponseCallback() {
             @Override
@@ -246,6 +326,12 @@ public class PrimitiveImpl implements Primitive {
                 .build(response, error);
     }
 
+    /**
+     * Put complex types with double properties
+     *
+     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putDouble(DoubleWrapper complexBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putDoubleDelegate(service.putDouble(complexBody), null);
@@ -256,6 +342,12 @@ public class PrimitiveImpl implements Primitive {
         }
     }
 
+    /**
+     * Put complex types with double properties
+     *
+     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putDoubleAsync(DoubleWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         service.putDoubleAsync(complexBody, new ServiceResponseCallback() {
             @Override
@@ -276,6 +368,12 @@ public class PrimitiveImpl implements Primitive {
                 .build(response, error);
     }
 
+    /**
+     * Get complex types with bool properties
+     *
+     * @return the BooleanWrapper object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public BooleanWrapper getBool() throws ServiceException {
         try {
             ServiceResponse<BooleanWrapper> response = getBoolDelegate(service.getBool(), null);
@@ -286,6 +384,11 @@ public class PrimitiveImpl implements Primitive {
         }
     }
 
+    /**
+     * Get complex types with bool properties
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getBoolAsync(final ServiceCallback<BooleanWrapper> serviceCallback) {
         service.getBoolAsync(new ServiceResponseCallback() {
             @Override
@@ -306,6 +409,12 @@ public class PrimitiveImpl implements Primitive {
                 .build(response, error);
     }
 
+    /**
+     * Put complex types with bool properties
+     *
+     * @param complexBody Please put true and false
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putBool(BooleanWrapper complexBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putBoolDelegate(service.putBool(complexBody), null);
@@ -316,6 +425,12 @@ public class PrimitiveImpl implements Primitive {
         }
     }
 
+    /**
+     * Put complex types with bool properties
+     *
+     * @param complexBody Please put true and false
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putBoolAsync(BooleanWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         service.putBoolAsync(complexBody, new ServiceResponseCallback() {
             @Override
@@ -336,6 +451,12 @@ public class PrimitiveImpl implements Primitive {
                 .build(response, error);
     }
 
+    /**
+     * Get complex types with string properties
+     *
+     * @return the StringWrapper object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public StringWrapper getString() throws ServiceException {
         try {
             ServiceResponse<StringWrapper> response = getStringDelegate(service.getString(), null);
@@ -346,6 +467,11 @@ public class PrimitiveImpl implements Primitive {
         }
     }
 
+    /**
+     * Get complex types with string properties
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getStringAsync(final ServiceCallback<StringWrapper> serviceCallback) {
         service.getStringAsync(new ServiceResponseCallback() {
             @Override
@@ -366,6 +492,12 @@ public class PrimitiveImpl implements Primitive {
                 .build(response, error);
     }
 
+    /**
+     * Put complex types with string properties
+     *
+     * @param complexBody Please put 'goodrequest', '', and null
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putString(StringWrapper complexBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putStringDelegate(service.putString(complexBody), null);
@@ -376,6 +508,12 @@ public class PrimitiveImpl implements Primitive {
         }
     }
 
+    /**
+     * Put complex types with string properties
+     *
+     * @param complexBody Please put 'goodrequest', '', and null
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putStringAsync(StringWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         service.putStringAsync(complexBody, new ServiceResponseCallback() {
             @Override
@@ -396,6 +534,12 @@ public class PrimitiveImpl implements Primitive {
                 .build(response, error);
     }
 
+    /**
+     * Get complex types with date properties
+     *
+     * @return the DateWrapper object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public DateWrapper getDate() throws ServiceException {
         try {
             ServiceResponse<DateWrapper> response = getDateDelegate(service.getDate(), null);
@@ -406,6 +550,11 @@ public class PrimitiveImpl implements Primitive {
         }
     }
 
+    /**
+     * Get complex types with date properties
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getDateAsync(final ServiceCallback<DateWrapper> serviceCallback) {
         service.getDateAsync(new ServiceResponseCallback() {
             @Override
@@ -426,6 +575,12 @@ public class PrimitiveImpl implements Primitive {
                 .build(response, error);
     }
 
+    /**
+     * Put complex types with date properties
+     *
+     * @param complexBody Please put '0001-01-01' and '2016-02-29'
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putDate(DateWrapper complexBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putDateDelegate(service.putDate(complexBody), null);
@@ -436,6 +591,12 @@ public class PrimitiveImpl implements Primitive {
         }
     }
 
+    /**
+     * Put complex types with date properties
+     *
+     * @param complexBody Please put '0001-01-01' and '2016-02-29'
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putDateAsync(DateWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         service.putDateAsync(complexBody, new ServiceResponseCallback() {
             @Override
@@ -456,6 +617,12 @@ public class PrimitiveImpl implements Primitive {
                 .build(response, error);
     }
 
+    /**
+     * Get complex types with datetime properties
+     *
+     * @return the DatetimeWrapper object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public DatetimeWrapper getDateTime() throws ServiceException {
         try {
             ServiceResponse<DatetimeWrapper> response = getDateTimeDelegate(service.getDateTime(), null);
@@ -466,6 +633,11 @@ public class PrimitiveImpl implements Primitive {
         }
     }
 
+    /**
+     * Get complex types with datetime properties
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getDateTimeAsync(final ServiceCallback<DatetimeWrapper> serviceCallback) {
         service.getDateTimeAsync(new ServiceResponseCallback() {
             @Override
@@ -486,6 +658,12 @@ public class PrimitiveImpl implements Primitive {
                 .build(response, error);
     }
 
+    /**
+     * Put complex types with datetime properties
+     *
+     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putDateTime(DatetimeWrapper complexBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putDateTimeDelegate(service.putDateTime(complexBody), null);
@@ -496,6 +674,12 @@ public class PrimitiveImpl implements Primitive {
         }
     }
 
+    /**
+     * Put complex types with datetime properties
+     *
+     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putDateTimeAsync(DatetimeWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         service.putDateTimeAsync(complexBody, new ServiceResponseCallback() {
             @Override
@@ -516,6 +700,12 @@ public class PrimitiveImpl implements Primitive {
                 .build(response, error);
     }
 
+    /**
+     * Get complex types with byte properties
+     *
+     * @return the ByteWrapper object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public ByteWrapper getByte() throws ServiceException {
         try {
             ServiceResponse<ByteWrapper> response = getByteDelegate(service.getByte(), null);
@@ -526,6 +716,11 @@ public class PrimitiveImpl implements Primitive {
         }
     }
 
+    /**
+     * Get complex types with byte properties
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getByteAsync(final ServiceCallback<ByteWrapper> serviceCallback) {
         service.getByteAsync(new ServiceResponseCallback() {
             @Override
@@ -546,6 +741,12 @@ public class PrimitiveImpl implements Primitive {
                 .build(response, error);
     }
 
+    /**
+     * Put complex types with byte properties
+     *
+     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putByte(ByteWrapper complexBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putByteDelegate(service.putByte(complexBody), null);
@@ -556,6 +757,12 @@ public class PrimitiveImpl implements Primitive {
         }
     }
 
+    /**
+     * Put complex types with byte properties
+     *
+     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putByteAsync(ByteWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         service.putByteAsync(complexBody, new ServiceResponseCallback() {
             @Override

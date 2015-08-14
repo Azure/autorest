@@ -14,12 +14,25 @@ package fixtures.requiredoptional.models;
  * 
  */
 public class ClassWrapper {
+    /*
+     * 
+     */
     private Product Value;
 
+    /*
+     * Get 
+     *
+     * @return the Value value
+     */ 
     public Product getValue() {
         return this.Value;
     }
 
+    /*
+     * Set 
+     *
+     * @param the Value value to set
+     */
     public void setValue(Product Value) {
         this.Value = Value;
     }

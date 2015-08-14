@@ -21,7 +21,15 @@ import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.DELETE;
 
+/**
+ * An instance of this class provides access to all the operations defined
+ * in HttpRetry.
+ */
 public interface HttpRetry {
+    /**
+     * The interface defining all the services for HttpRetry to be
+     * used by Retrofit to perform actually REST calls.
+     */
     interface HttpRetryService {
         @HEAD("/http/retry/408")
         Response head408() throws ServiceException;
@@ -72,36 +80,128 @@ public interface HttpRetry {
         void patch504Async(@Body boolean booleanValue, ServiceResponseCallback cb);
 
     }
+    /**
+     * Return 408 status code, then 200 after retry
+     *
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void head408() throws ServiceException;
 
+    /**
+     * Return 408 status code, then 200 after retry
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void head408Async(final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Return 500 status code, then 200 after retry
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void put500(boolean booleanValue) throws ServiceException;
 
+    /**
+     * Return 500 status code, then 200 after retry
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void put500Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Return 500 status code, then 200 after retry
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void patch500(boolean booleanValue) throws ServiceException;
 
+    /**
+     * Return 500 status code, then 200 after retry
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void patch500Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Return 502 status code, then 200 after retry
+     *
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void get502() throws ServiceException;
 
+    /**
+     * Return 502 status code, then 200 after retry
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void get502Async(final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Return 503 status code, then 200 after retry
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void post503(boolean booleanValue) throws ServiceException;
 
+    /**
+     * Return 503 status code, then 200 after retry
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void post503Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Return 503 status code, then 200 after retry
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void delete503(boolean booleanValue) throws ServiceException;
 
+    /**
+     * Return 503 status code, then 200 after retry
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void delete503Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Return 504 status code, then 200 after retry
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void put504(boolean booleanValue) throws ServiceException;
 
+    /**
+     * Return 504 status code, then 200 after retry
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void put504Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Return 504 status code, then 200 after retry
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void patch504(boolean booleanValue) throws ServiceException;
 
+    /**
+     * Return 504 status code, then 200 after retry
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void patch504Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
 }

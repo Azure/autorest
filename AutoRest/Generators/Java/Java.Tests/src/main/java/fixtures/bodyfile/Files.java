@@ -16,7 +16,15 @@ import retrofit.client.Response;
 import java.io.InputStream;
 import retrofit.http.GET;
 
+/**
+ * An instance of this class provides access to all the operations defined
+ * in Files.
+ */
 public interface Files {
+    /**
+     * The interface defining all the services for Files to be
+     * used by Retrofit to perform actually REST calls.
+     */
     interface FilesService {
         @GET("/files/stream/nonempty")
         Response getFile() throws ServiceException;
@@ -31,12 +39,34 @@ public interface Files {
         void getEmptyFileAsync(ServiceResponseCallback cb);
 
     }
+    /**
+     * Get file
+     *
+     * @return the InputStream object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     InputStream getFile() throws ServiceException;
 
+    /**
+     * Get file
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getFileAsync(final ServiceCallback<InputStream> serviceCallback);
 
+    /**
+     * Get empty file
+     *
+     * @return the InputStream object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     InputStream getEmptyFile() throws ServiceException;
 
+    /**
+     * Get empty file
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback);
 
 }

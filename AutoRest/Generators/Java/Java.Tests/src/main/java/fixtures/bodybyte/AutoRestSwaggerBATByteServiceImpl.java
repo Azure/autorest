@@ -30,23 +30,38 @@ public class AutoRestSwaggerBATByteServiceImpl extends ServiceClient implements 
     private ByteOperations byteOperations;
 
     /**
-     * Test Infrastructure for AutoRest Swagger BAT
+     * Gets the ByteOperations object to access its operations.
      * @return the byteOperations value.
      */
     public ByteOperations getByteOperations() {
         return this.byteOperations;
     }
 
+    /**
+     * Initializes an instance of AutoRestSwaggerBATByteService client.
+     */
     public AutoRestSwaggerBATByteServiceImpl() {
         this("http://localhost");
     }
 
+    /**
+     * Initializes an instance of AutoRestSwaggerBATByteService client.
+     *
+     * @param baseUri the base URI of the host
+     */
     public AutoRestSwaggerBATByteServiceImpl(String baseUri) {
         super();
         this.baseUri = baseUri;
         initialize();
     }
 
+    /**
+     * Initializes an instance of AutoRestSwaggerBATByteService client.
+     *
+     * @param baseUri the base URI of the host
+     * @param client the {@link OkHttpClient} client to use for REST calls
+     * @param restAdapterBuilder the builder for building up a {@link RestAdapter}
+     */
     public AutoRestSwaggerBATByteServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
         super(client, restAdapterBuilder);
         this.baseUri = baseUri;

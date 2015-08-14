@@ -27,6 +27,12 @@ public class IntOperationsImpl implements IntOperations {
         service = restAdapter.create(IntService.class);
     }
 
+    /**
+     * Get null Int value
+     *
+     * @return the int object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public int getNull() throws ServiceException {
         try {
             ServiceResponse<Integer> response = getNullDelegate(service.getNull(), null);
@@ -37,6 +43,11 @@ public class IntOperationsImpl implements IntOperations {
         }
     }
 
+    /**
+     * Get null Int value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getNullAsync(final ServiceCallback<Integer> serviceCallback) {
         service.getNullAsync(new ServiceResponseCallback() {
             @Override
@@ -57,6 +68,12 @@ public class IntOperationsImpl implements IntOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get invalid Int value
+     *
+     * @return the int object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public int getInvalid() throws ServiceException {
         try {
             ServiceResponse<Integer> response = getInvalidDelegate(service.getInvalid(), null);
@@ -67,6 +84,11 @@ public class IntOperationsImpl implements IntOperations {
         }
     }
 
+    /**
+     * Get invalid Int value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getInvalidAsync(final ServiceCallback<Integer> serviceCallback) {
         service.getInvalidAsync(new ServiceResponseCallback() {
             @Override
@@ -87,6 +109,12 @@ public class IntOperationsImpl implements IntOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get overflow Int32 value
+     *
+     * @return the int object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public int getOverflowInt32() throws ServiceException {
         try {
             ServiceResponse<Integer> response = getOverflowInt32Delegate(service.getOverflowInt32(), null);
@@ -97,6 +125,11 @@ public class IntOperationsImpl implements IntOperations {
         }
     }
 
+    /**
+     * Get overflow Int32 value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getOverflowInt32Async(final ServiceCallback<Integer> serviceCallback) {
         service.getOverflowInt32Async(new ServiceResponseCallback() {
             @Override
@@ -117,6 +150,12 @@ public class IntOperationsImpl implements IntOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get underflow Int32 value
+     *
+     * @return the int object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public int getUnderflowInt32() throws ServiceException {
         try {
             ServiceResponse<Integer> response = getUnderflowInt32Delegate(service.getUnderflowInt32(), null);
@@ -127,6 +166,11 @@ public class IntOperationsImpl implements IntOperations {
         }
     }
 
+    /**
+     * Get underflow Int32 value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getUnderflowInt32Async(final ServiceCallback<Integer> serviceCallback) {
         service.getUnderflowInt32Async(new ServiceResponseCallback() {
             @Override
@@ -147,6 +191,12 @@ public class IntOperationsImpl implements IntOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get overflow Int64 value
+     *
+     * @return the long object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public long getOverflowInt64() throws ServiceException {
         try {
             ServiceResponse<Long> response = getOverflowInt64Delegate(service.getOverflowInt64(), null);
@@ -157,6 +207,11 @@ public class IntOperationsImpl implements IntOperations {
         }
     }
 
+    /**
+     * Get overflow Int64 value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getOverflowInt64Async(final ServiceCallback<Long> serviceCallback) {
         service.getOverflowInt64Async(new ServiceResponseCallback() {
             @Override
@@ -177,6 +232,12 @@ public class IntOperationsImpl implements IntOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get underflow Int64 value
+     *
+     * @return the long object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public long getUnderflowInt64() throws ServiceException {
         try {
             ServiceResponse<Long> response = getUnderflowInt64Delegate(service.getUnderflowInt64(), null);
@@ -187,6 +248,11 @@ public class IntOperationsImpl implements IntOperations {
         }
     }
 
+    /**
+     * Get underflow Int64 value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getUnderflowInt64Async(final ServiceCallback<Long> serviceCallback) {
         service.getUnderflowInt64Async(new ServiceResponseCallback() {
             @Override
@@ -207,6 +273,12 @@ public class IntOperationsImpl implements IntOperations {
                 .build(response, error);
     }
 
+    /**
+     * Put max int32 value
+     *
+     * @param intBody the int value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putMax32(int intBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putMax32Delegate(service.putMax32(intBody), null);
@@ -217,6 +289,12 @@ public class IntOperationsImpl implements IntOperations {
         }
     }
 
+    /**
+     * Put max int32 value
+     *
+     * @param intBody the int value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putMax32Async(int intBody, final ServiceCallback<Void> serviceCallback) {
         service.putMax32Async(intBody, new ServiceResponseCallback() {
             @Override
@@ -237,6 +315,12 @@ public class IntOperationsImpl implements IntOperations {
                 .build(response, error);
     }
 
+    /**
+     * Put max int64 value
+     *
+     * @param intBody the long value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putMax64(long intBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putMax64Delegate(service.putMax64(intBody), null);
@@ -247,6 +331,12 @@ public class IntOperationsImpl implements IntOperations {
         }
     }
 
+    /**
+     * Put max int64 value
+     *
+     * @param intBody the long value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putMax64Async(long intBody, final ServiceCallback<Void> serviceCallback) {
         service.putMax64Async(intBody, new ServiceResponseCallback() {
             @Override
@@ -267,6 +357,12 @@ public class IntOperationsImpl implements IntOperations {
                 .build(response, error);
     }
 
+    /**
+     * Put min int32 value
+     *
+     * @param intBody the int value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putMin32(int intBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putMin32Delegate(service.putMin32(intBody), null);
@@ -277,6 +373,12 @@ public class IntOperationsImpl implements IntOperations {
         }
     }
 
+    /**
+     * Put min int32 value
+     *
+     * @param intBody the int value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putMin32Async(int intBody, final ServiceCallback<Void> serviceCallback) {
         service.putMin32Async(intBody, new ServiceResponseCallback() {
             @Override
@@ -297,6 +399,12 @@ public class IntOperationsImpl implements IntOperations {
                 .build(response, error);
     }
 
+    /**
+     * Put min int64 value
+     *
+     * @param intBody the long value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putMin64(long intBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putMin64Delegate(service.putMin64(intBody), null);
@@ -307,6 +415,12 @@ public class IntOperationsImpl implements IntOperations {
         }
     }
 
+    /**
+     * Put min int64 value
+     *
+     * @param intBody the long value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putMin64Async(long intBody, final ServiceCallback<Void> serviceCallback) {
         service.putMin64Async(intBody, new ServiceResponseCallback() {
             @Override

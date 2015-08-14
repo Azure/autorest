@@ -30,6 +30,12 @@ public class PathsImpl implements Paths {
         service = restAdapter.create(PathsService.class);
     }
 
+    /**
+     * Get true Boolean value on path
+     *
+     * @param boolPath true boolean value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void getBooleanTrue(boolean boolPath) throws ServiceException {
         try {
             ServiceResponse<Void> response = getBooleanTrueDelegate(service.getBooleanTrue(boolPath), null);
@@ -40,6 +46,12 @@ public class PathsImpl implements Paths {
         }
     }
 
+    /**
+     * Get true Boolean value on path
+     *
+     * @param boolPath true boolean value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getBooleanTrueAsync(boolean boolPath, final ServiceCallback<Void> serviceCallback) {
         service.getBooleanTrueAsync(boolPath, new ServiceResponseCallback() {
             @Override
@@ -60,6 +72,12 @@ public class PathsImpl implements Paths {
                 .build(response, error);
     }
 
+    /**
+     * Get false Boolean value on path
+     *
+     * @param boolPath false boolean value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void getBooleanFalse(boolean boolPath) throws ServiceException {
         try {
             ServiceResponse<Void> response = getBooleanFalseDelegate(service.getBooleanFalse(boolPath), null);
@@ -70,6 +88,12 @@ public class PathsImpl implements Paths {
         }
     }
 
+    /**
+     * Get false Boolean value on path
+     *
+     * @param boolPath false boolean value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getBooleanFalseAsync(boolean boolPath, final ServiceCallback<Void> serviceCallback) {
         service.getBooleanFalseAsync(boolPath, new ServiceResponseCallback() {
             @Override
@@ -90,6 +114,12 @@ public class PathsImpl implements Paths {
                 .build(response, error);
     }
 
+    /**
+     * Get '1000000' integer value
+     *
+     * @param intPath '1000000' integer value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void getIntOneMillion(int intPath) throws ServiceException {
         try {
             ServiceResponse<Void> response = getIntOneMillionDelegate(service.getIntOneMillion(intPath), null);
@@ -100,6 +130,12 @@ public class PathsImpl implements Paths {
         }
     }
 
+    /**
+     * Get '1000000' integer value
+     *
+     * @param intPath '1000000' integer value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getIntOneMillionAsync(int intPath, final ServiceCallback<Void> serviceCallback) {
         service.getIntOneMillionAsync(intPath, new ServiceResponseCallback() {
             @Override
@@ -120,6 +156,12 @@ public class PathsImpl implements Paths {
                 .build(response, error);
     }
 
+    /**
+     * Get '-1000000' integer value
+     *
+     * @param intPath '-1000000' integer value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void getIntNegativeOneMillion(int intPath) throws ServiceException {
         try {
             ServiceResponse<Void> response = getIntNegativeOneMillionDelegate(service.getIntNegativeOneMillion(intPath), null);
@@ -130,6 +172,12 @@ public class PathsImpl implements Paths {
         }
     }
 
+    /**
+     * Get '-1000000' integer value
+     *
+     * @param intPath '-1000000' integer value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getIntNegativeOneMillionAsync(int intPath, final ServiceCallback<Void> serviceCallback) {
         service.getIntNegativeOneMillionAsync(intPath, new ServiceResponseCallback() {
             @Override
@@ -150,6 +198,12 @@ public class PathsImpl implements Paths {
                 .build(response, error);
     }
 
+    /**
+     * Get '10000000000' 64 bit integer value
+     *
+     * @param longPath '10000000000' 64 bit integer value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void getTenBillion(long longPath) throws ServiceException {
         try {
             ServiceResponse<Void> response = getTenBillionDelegate(service.getTenBillion(longPath), null);
@@ -160,6 +214,12 @@ public class PathsImpl implements Paths {
         }
     }
 
+    /**
+     * Get '10000000000' 64 bit integer value
+     *
+     * @param longPath '10000000000' 64 bit integer value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getTenBillionAsync(long longPath, final ServiceCallback<Void> serviceCallback) {
         service.getTenBillionAsync(longPath, new ServiceResponseCallback() {
             @Override
@@ -180,6 +240,12 @@ public class PathsImpl implements Paths {
                 .build(response, error);
     }
 
+    /**
+     * Get '-10000000000' 64 bit integer value
+     *
+     * @param longPath '-10000000000' 64 bit integer value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void getNegativeTenBillion(long longPath) throws ServiceException {
         try {
             ServiceResponse<Void> response = getNegativeTenBillionDelegate(service.getNegativeTenBillion(longPath), null);
@@ -190,6 +256,12 @@ public class PathsImpl implements Paths {
         }
     }
 
+    /**
+     * Get '-10000000000' 64 bit integer value
+     *
+     * @param longPath '-10000000000' 64 bit integer value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getNegativeTenBillionAsync(long longPath, final ServiceCallback<Void> serviceCallback) {
         service.getNegativeTenBillionAsync(longPath, new ServiceResponseCallback() {
             @Override
@@ -210,6 +282,12 @@ public class PathsImpl implements Paths {
                 .build(response, error);
     }
 
+    /**
+     * Get '1.034E+20' numeric value
+     *
+     * @param floatPath '1.034E+20'numeric value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void floatScientificPositive(double floatPath) throws ServiceException {
         try {
             ServiceResponse<Void> response = floatScientificPositiveDelegate(service.floatScientificPositive(floatPath), null);
@@ -220,6 +298,12 @@ public class PathsImpl implements Paths {
         }
     }
 
+    /**
+     * Get '1.034E+20' numeric value
+     *
+     * @param floatPath '1.034E+20'numeric value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void floatScientificPositiveAsync(double floatPath, final ServiceCallback<Void> serviceCallback) {
         service.floatScientificPositiveAsync(floatPath, new ServiceResponseCallback() {
             @Override
@@ -240,6 +324,12 @@ public class PathsImpl implements Paths {
                 .build(response, error);
     }
 
+    /**
+     * Get '-1.034E-20' numeric value
+     *
+     * @param floatPath '-1.034E-20'numeric value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void floatScientificNegative(double floatPath) throws ServiceException {
         try {
             ServiceResponse<Void> response = floatScientificNegativeDelegate(service.floatScientificNegative(floatPath), null);
@@ -250,6 +340,12 @@ public class PathsImpl implements Paths {
         }
     }
 
+    /**
+     * Get '-1.034E-20' numeric value
+     *
+     * @param floatPath '-1.034E-20'numeric value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void floatScientificNegativeAsync(double floatPath, final ServiceCallback<Void> serviceCallback) {
         service.floatScientificNegativeAsync(floatPath, new ServiceResponseCallback() {
             @Override
@@ -270,6 +366,12 @@ public class PathsImpl implements Paths {
                 .build(response, error);
     }
 
+    /**
+     * Get '9999999.999' numeric value
+     *
+     * @param doublePath '9999999.999'numeric value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void doubleDecimalPositive(double doublePath) throws ServiceException {
         try {
             ServiceResponse<Void> response = doubleDecimalPositiveDelegate(service.doubleDecimalPositive(doublePath), null);
@@ -280,6 +382,12 @@ public class PathsImpl implements Paths {
         }
     }
 
+    /**
+     * Get '9999999.999' numeric value
+     *
+     * @param doublePath '9999999.999'numeric value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void doubleDecimalPositiveAsync(double doublePath, final ServiceCallback<Void> serviceCallback) {
         service.doubleDecimalPositiveAsync(doublePath, new ServiceResponseCallback() {
             @Override
@@ -300,6 +408,12 @@ public class PathsImpl implements Paths {
                 .build(response, error);
     }
 
+    /**
+     * Get '-9999999.999' numeric value
+     *
+     * @param doublePath '-9999999.999'numeric value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void doubleDecimalNegative(double doublePath) throws ServiceException {
         try {
             ServiceResponse<Void> response = doubleDecimalNegativeDelegate(service.doubleDecimalNegative(doublePath), null);
@@ -310,6 +424,12 @@ public class PathsImpl implements Paths {
         }
     }
 
+    /**
+     * Get '-9999999.999' numeric value
+     *
+     * @param doublePath '-9999999.999'numeric value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void doubleDecimalNegativeAsync(double doublePath, final ServiceCallback<Void> serviceCallback) {
         service.doubleDecimalNegativeAsync(doublePath, new ServiceResponseCallback() {
             @Override
@@ -330,6 +450,12 @@ public class PathsImpl implements Paths {
                 .build(response, error);
     }
 
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
+     *
+     * @param stringPath '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void stringUnicode(String stringPath) throws ServiceException {
         try {
             ServiceResponse<Void> response = stringUnicodeDelegate(service.stringUnicode(stringPath), null);
@@ -340,6 +466,12 @@ public class PathsImpl implements Paths {
         }
     }
 
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
+     *
+     * @param stringPath '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void stringUnicodeAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
         service.stringUnicodeAsync(stringPath, new ServiceResponseCallback() {
             @Override
@@ -360,6 +492,12 @@ public class PathsImpl implements Paths {
                 .build(response, error);
     }
 
+    /**
+     * Get 'begin!*'();:@ &amp;=+$,/?#[]end
+     *
+     * @param stringPath 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void stringUrlEncoded(String stringPath) throws ServiceException {
         try {
             ServiceResponse<Void> response = stringUrlEncodedDelegate(service.stringUrlEncoded(stringPath), null);
@@ -370,6 +508,12 @@ public class PathsImpl implements Paths {
         }
     }
 
+    /**
+     * Get 'begin!*'();:@ &amp;=+$,/?#[]end
+     *
+     * @param stringPath 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void stringUrlEncodedAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
         service.stringUrlEncodedAsync(stringPath, new ServiceResponseCallback() {
             @Override
@@ -390,6 +534,12 @@ public class PathsImpl implements Paths {
                 .build(response, error);
     }
 
+    /**
+     * Get ''
+     *
+     * @param stringPath '' string value. Possible values for this parameter include: ''
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void stringEmpty(String stringPath) throws ServiceException {
         try {
             ServiceResponse<Void> response = stringEmptyDelegate(service.stringEmpty(stringPath), null);
@@ -400,6 +550,12 @@ public class PathsImpl implements Paths {
         }
     }
 
+    /**
+     * Get ''
+     *
+     * @param stringPath '' string value. Possible values for this parameter include: ''
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void stringEmptyAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
         service.stringEmptyAsync(stringPath, new ServiceResponseCallback() {
             @Override
@@ -420,6 +576,12 @@ public class PathsImpl implements Paths {
                 .build(response, error);
     }
 
+    /**
+     * Get null (should throw)
+     *
+     * @param stringPath null string value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void stringNull(String stringPath) throws ServiceException {
         try {
             ServiceResponse<Void> response = stringNullDelegate(service.stringNull(stringPath), null);
@@ -430,6 +592,12 @@ public class PathsImpl implements Paths {
         }
     }
 
+    /**
+     * Get null (should throw)
+     *
+     * @param stringPath null string value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void stringNullAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
         service.stringNullAsync(stringPath, new ServiceResponseCallback() {
             @Override
@@ -450,6 +618,12 @@ public class PathsImpl implements Paths {
                 .build(response, error);
     }
 
+    /**
+     * Get using uri with 'green color' in path parameter
+     *
+     * @param enumPath send the value green. Possible values for this parameter include: 'red color', 'green color', 'blue color'
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void enumValid(UriColor enumPath) throws ServiceException {
         try {
             ServiceResponse<Void> response = enumValidDelegate(service.enumValid(enumPath), null);
@@ -460,6 +634,12 @@ public class PathsImpl implements Paths {
         }
     }
 
+    /**
+     * Get using uri with 'green color' in path parameter
+     *
+     * @param enumPath send the value green. Possible values for this parameter include: 'red color', 'green color', 'blue color'
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void enumValidAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) {
         service.enumValidAsync(enumPath, new ServiceResponseCallback() {
             @Override
@@ -480,6 +660,12 @@ public class PathsImpl implements Paths {
                 .build(response, error);
     }
 
+    /**
+     * Get null (should throw on the client before the request is sent on wire)
+     *
+     * @param enumPath send null should throw. Possible values for this parameter include: 'red color', 'green color', 'blue color'
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void enumNull(UriColor enumPath) throws ServiceException {
         try {
             ServiceResponse<Void> response = enumNullDelegate(service.enumNull(enumPath), null);
@@ -490,6 +676,12 @@ public class PathsImpl implements Paths {
         }
     }
 
+    /**
+     * Get null (should throw on the client before the request is sent on wire)
+     *
+     * @param enumPath send null should throw. Possible values for this parameter include: 'red color', 'green color', 'blue color'
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void enumNullAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) {
         service.enumNullAsync(enumPath, new ServiceResponseCallback() {
             @Override
@@ -510,6 +702,12 @@ public class PathsImpl implements Paths {
                 .build(response, error);
     }
 
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+     *
+     * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void byteMultiByte(byte[] bytePath) throws ServiceException {
         try {
             ServiceResponse<Void> response = byteMultiByteDelegate(service.byteMultiByte(bytePath), null);
@@ -520,6 +718,12 @@ public class PathsImpl implements Paths {
         }
     }
 
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+     *
+     * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void byteMultiByteAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
         service.byteMultiByteAsync(bytePath, new ServiceResponseCallback() {
             @Override
@@ -540,6 +744,12 @@ public class PathsImpl implements Paths {
                 .build(response, error);
     }
 
+    /**
+     * Get '' as byte array
+     *
+     * @param bytePath '' as byte array
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void byteEmpty(byte[] bytePath) throws ServiceException {
         try {
             ServiceResponse<Void> response = byteEmptyDelegate(service.byteEmpty(bytePath), null);
@@ -550,6 +760,12 @@ public class PathsImpl implements Paths {
         }
     }
 
+    /**
+     * Get '' as byte array
+     *
+     * @param bytePath '' as byte array
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void byteEmptyAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
         service.byteEmptyAsync(bytePath, new ServiceResponseCallback() {
             @Override
@@ -570,6 +786,12 @@ public class PathsImpl implements Paths {
                 .build(response, error);
     }
 
+    /**
+     * Get null as byte array (should throw)
+     *
+     * @param bytePath null as byte array (should throw)
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void byteNull(byte[] bytePath) throws ServiceException {
         try {
             ServiceResponse<Void> response = byteNullDelegate(service.byteNull(bytePath), null);
@@ -580,6 +802,12 @@ public class PathsImpl implements Paths {
         }
     }
 
+    /**
+     * Get null as byte array (should throw)
+     *
+     * @param bytePath null as byte array (should throw)
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void byteNullAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
         service.byteNullAsync(bytePath, new ServiceResponseCallback() {
             @Override
@@ -600,6 +828,12 @@ public class PathsImpl implements Paths {
                 .build(response, error);
     }
 
+    /**
+     * Get '2012-01-01' as date
+     *
+     * @param datePath '2012-01-01' as date
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void dateValid(Date datePath) throws ServiceException {
         try {
             ServiceResponse<Void> response = dateValidDelegate(service.dateValid(datePath), null);
@@ -610,6 +844,12 @@ public class PathsImpl implements Paths {
         }
     }
 
+    /**
+     * Get '2012-01-01' as date
+     *
+     * @param datePath '2012-01-01' as date
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void dateValidAsync(Date datePath, final ServiceCallback<Void> serviceCallback) {
         service.dateValidAsync(datePath, new ServiceResponseCallback() {
             @Override
@@ -630,6 +870,13 @@ public class PathsImpl implements Paths {
                 .build(response, error);
     }
 
+    /**
+     * Get null as date - this should throw or be unusable on the client side,
+     * depending on date representation
+     *
+     * @param datePath null as date (should throw)
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void dateNull(Date datePath) throws ServiceException {
         try {
             ServiceResponse<Void> response = dateNullDelegate(service.dateNull(datePath), null);
@@ -640,6 +887,13 @@ public class PathsImpl implements Paths {
         }
     }
 
+    /**
+     * Get null as date - this should throw or be unusable on the client side,
+     * depending on date representation
+     *
+     * @param datePath null as date (should throw)
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void dateNullAsync(Date datePath, final ServiceCallback<Void> serviceCallback) {
         service.dateNullAsync(datePath, new ServiceResponseCallback() {
             @Override
@@ -660,6 +914,12 @@ public class PathsImpl implements Paths {
                 .build(response, error);
     }
 
+    /**
+     * Get '2012-01-01T01:01:01Z' as date-time
+     *
+     * @param dateTimePath '2012-01-01T01:01:01Z' as date-time
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void dateTimeValid(Date dateTimePath) throws ServiceException {
         try {
             ServiceResponse<Void> response = dateTimeValidDelegate(service.dateTimeValid(dateTimePath), null);
@@ -670,6 +930,12 @@ public class PathsImpl implements Paths {
         }
     }
 
+    /**
+     * Get '2012-01-01T01:01:01Z' as date-time
+     *
+     * @param dateTimePath '2012-01-01T01:01:01Z' as date-time
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void dateTimeValidAsync(Date dateTimePath, final ServiceCallback<Void> serviceCallback) {
         service.dateTimeValidAsync(dateTimePath, new ServiceResponseCallback() {
             @Override
@@ -690,6 +956,13 @@ public class PathsImpl implements Paths {
                 .build(response, error);
     }
 
+    /**
+     * Get null as date-time, should be disallowed or throw depending on
+     * representation of date-time
+     *
+     * @param dateTimePath null as date-time
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void dateTimeNull(Date dateTimePath) throws ServiceException {
         try {
             ServiceResponse<Void> response = dateTimeNullDelegate(service.dateTimeNull(dateTimePath), null);
@@ -700,6 +973,13 @@ public class PathsImpl implements Paths {
         }
     }
 
+    /**
+     * Get null as date-time, should be disallowed or throw depending on
+     * representation of date-time
+     *
+     * @param dateTimePath null as date-time
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void dateTimeNullAsync(Date dateTimePath, final ServiceCallback<Void> serviceCallback) {
         service.dateTimeNullAsync(dateTimePath, new ServiceResponseCallback() {
             @Override

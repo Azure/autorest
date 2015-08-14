@@ -15,22 +15,48 @@ import java.util.Date;
  * 
  */
 public class Shark {
+    /*
+     * 
+     */
     private int Age;
 
+    /*
+     * 
+     */
     private Date Birthday;
 
+    /*
+     * Get 
+     *
+     * @return the Age value
+     */ 
     public int getAge() {
         return this.Age;
     }
 
+    /*
+     * Set 
+     *
+     * @param the Age value to set
+     */
     public void setAge(int Age) {
         this.Age = Age;
     }
 
+    /*
+     * Get 
+     *
+     * @return the Birthday value
+     */ 
     public Date getBirthday() {
         return this.Birthday;
     }
 
+    /*
+     * Set 
+     *
+     * @param the Birthday value to set
+     */
     public void setBirthday(Date Birthday) {
         this.Birthday = Birthday;
     }

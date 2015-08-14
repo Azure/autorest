@@ -30,23 +30,38 @@ public class AutoRestSwaggerBATdictionaryServiceImpl extends ServiceClient imple
     private Dictionary dictionary;
 
     /**
-     * Test Infrastructure for AutoRest Swagger BAT
+     * Gets the Dictionary object to access its operations.
      * @return the dictionary value.
      */
     public Dictionary getDictionary() {
         return this.dictionary;
     }
 
+    /**
+     * Initializes an instance of AutoRestSwaggerBATdictionaryService client.
+     */
     public AutoRestSwaggerBATdictionaryServiceImpl() {
         this("http://localhost");
     }
 
+    /**
+     * Initializes an instance of AutoRestSwaggerBATdictionaryService client.
+     *
+     * @param baseUri the base URI of the host
+     */
     public AutoRestSwaggerBATdictionaryServiceImpl(String baseUri) {
         super();
         this.baseUri = baseUri;
         initialize();
     }
 
+    /**
+     * Initializes an instance of AutoRestSwaggerBATdictionaryService client.
+     *
+     * @param baseUri the base URI of the host
+     * @param client the {@link OkHttpClient} client to use for REST calls
+     * @param restAdapterBuilder the builder for building up a {@link RestAdapter}
+     */
     public AutoRestSwaggerBATdictionaryServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
         super(client, restAdapterBuilder);
         this.baseUri = baseUri;

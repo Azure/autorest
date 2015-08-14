@@ -30,7 +30,7 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
     private HttpFailure httpFailure;
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the HttpFailure object to access its operations.
      * @return the httpFailure value.
      */
     public HttpFailure getHttpFailure() {
@@ -40,7 +40,7 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
     private HttpSuccess httpSuccess;
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the HttpSuccess object to access its operations.
      * @return the httpSuccess value.
      */
     public HttpSuccess getHttpSuccess() {
@@ -50,7 +50,7 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
     private HttpRedirects httpRedirects;
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the HttpRedirects object to access its operations.
      * @return the httpRedirects value.
      */
     public HttpRedirects getHttpRedirects() {
@@ -60,7 +60,7 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
     private HttpClientFailure httpClientFailure;
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the HttpClientFailure object to access its operations.
      * @return the httpClientFailure value.
      */
     public HttpClientFailure getHttpClientFailure() {
@@ -70,7 +70,7 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
     private HttpServerFailure httpServerFailure;
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the HttpServerFailure object to access its operations.
      * @return the httpServerFailure value.
      */
     public HttpServerFailure getHttpServerFailure() {
@@ -80,7 +80,7 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
     private HttpRetry httpRetry;
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the HttpRetry object to access its operations.
      * @return the httpRetry value.
      */
     public HttpRetry getHttpRetry() {
@@ -90,23 +90,38 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
     private MultipleResponses multipleResponses;
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the MultipleResponses object to access its operations.
      * @return the multipleResponses value.
      */
     public MultipleResponses getMultipleResponses() {
         return this.multipleResponses;
     }
 
+    /**
+     * Initializes an instance of AutoRestHttpInfrastructureTestService client.
+     */
     public AutoRestHttpInfrastructureTestServiceImpl() {
         this("http://localhost");
     }
 
+    /**
+     * Initializes an instance of AutoRestHttpInfrastructureTestService client.
+     *
+     * @param baseUri the base URI of the host
+     */
     public AutoRestHttpInfrastructureTestServiceImpl(String baseUri) {
         super();
         this.baseUri = baseUri;
         initialize();
     }
 
+    /**
+     * Initializes an instance of AutoRestHttpInfrastructureTestService client.
+     *
+     * @param baseUri the base URI of the host
+     * @param client the {@link OkHttpClient} client to use for REST calls
+     * @param restAdapterBuilder the builder for building up a {@link RestAdapter}
+     */
     public AutoRestHttpInfrastructureTestServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
         super(client, restAdapterBuilder);
         this.baseUri = baseUri;

@@ -14,22 +14,48 @@ package fixtures.bodycomplex.models;
  * 
  */
 public class DoubleWrapper {
+    /*
+     * 
+     */
     private double Field1;
 
+    /*
+     * 
+     */
     private double Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose;
 
+    /*
+     * Get 
+     *
+     * @return the Field1 value
+     */ 
     public double getField1() {
         return this.Field1;
     }
 
+    /*
+     * Set 
+     *
+     * @param the Field1 value to set
+     */
     public void setField1(double Field1) {
         this.Field1 = Field1;
     }
 
+    /*
+     * Get 
+     *
+     * @return the Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose value
+     */ 
     public double getField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose() {
         return this.Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose;
     }
 
+    /*
+     * Set 
+     *
+     * @param the Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose value to set
+     */
     public void setField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose(double Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose) {
         this.Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose = Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose;
     }

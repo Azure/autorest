@@ -9,8 +9,6 @@
 
 package fixtures.url;
 
-import com.microsoft.rest.ServiceClient;
-
 /**
  * The interface for AutoRestUrlTestService class.
  */
@@ -22,25 +20,25 @@ public interface AutoRestUrlTestService {
     String getBaseUri();
 
     /**
-     * A string value 'globalItemStringPath' that appears in the path
+     * Gets A string value 'globalItemStringPath' that appears in the path.
      * @return the GlobalStringPath value.
      */
     String getGlobalStringPath();
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the Paths object to access its operations.
      * @return the paths value.
      */
     Paths getPaths();
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the Queries object to access its operations.
      * @return the queries value.
      */
     Queries getQueries();
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the PathItems object to access its operations.
      * @return the pathItems value.
      */
     PathItems getPathItems();

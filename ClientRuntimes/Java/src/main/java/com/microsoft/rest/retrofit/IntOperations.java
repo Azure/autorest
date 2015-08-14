@@ -36,8 +36,17 @@ public interface IntOperations {
         void putMax32Async(@Body int intBody, ServiceResponseCallback cb);
     }
 
+    /**
+     *
+     * @return
+     * @throws ServiceException
+     */
     int getNull() throws ServiceException;
 
+    /**
+     *
+     * @param serviceCallback
+     */
     void getNullAsync(final ServiceCallback<Integer> serviceCallback);
 
     int getInvalid() throws ServiceException;

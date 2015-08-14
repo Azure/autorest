@@ -30,23 +30,38 @@ public class AutoRestSwaggerBATHeaderServiceImpl extends ServiceClient implement
     private HeaderOperations headerOperations;
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the HeaderOperations object to access its operations.
      * @return the headerOperations value.
      */
     public HeaderOperations getHeaderOperations() {
         return this.headerOperations;
     }
 
+    /**
+     * Initializes an instance of AutoRestSwaggerBATHeaderService client.
+     */
     public AutoRestSwaggerBATHeaderServiceImpl() {
         this("http://localhost");
     }
 
+    /**
+     * Initializes an instance of AutoRestSwaggerBATHeaderService client.
+     *
+     * @param baseUri the base URI of the host
+     */
     public AutoRestSwaggerBATHeaderServiceImpl(String baseUri) {
         super();
         this.baseUri = baseUri;
         initialize();
     }
 
+    /**
+     * Initializes an instance of AutoRestSwaggerBATHeaderService client.
+     *
+     * @param baseUri the base URI of the host
+     * @param client the {@link OkHttpClient} client to use for REST calls
+     * @param restAdapterBuilder the builder for building up a {@link RestAdapter}
+     */
     public AutoRestSwaggerBATHeaderServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
         super(client, restAdapterBuilder);
         this.baseUri = baseUri;

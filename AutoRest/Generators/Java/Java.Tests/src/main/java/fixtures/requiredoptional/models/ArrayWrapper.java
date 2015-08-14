@@ -15,12 +15,25 @@ import java.util.List;
  * 
  */
 public class ArrayWrapper {
+    /*
+     * 
+     */
     private List<String> Value;
 
+    /*
+     * Get 
+     *
+     * @return the Value value
+     */ 
     public List<String> getValue() {
         return this.Value;
     }
 
+    /*
+     * Set 
+     *
+     * @param the Value value to set
+     */
     public void setValue(List<String> Value) {
         this.Value = Value;
     }

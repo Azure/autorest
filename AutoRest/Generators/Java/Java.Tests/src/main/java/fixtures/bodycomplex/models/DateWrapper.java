@@ -15,22 +15,48 @@ import java.util.Date;
  * 
  */
 public class DateWrapper {
+    /*
+     * 
+     */
     private Date Field;
 
+    /*
+     * 
+     */
     private Date Leap;
 
+    /*
+     * Get 
+     *
+     * @return the Field value
+     */ 
     public Date getField() {
         return this.Field;
     }
 
+    /*
+     * Set 
+     *
+     * @param the Field value to set
+     */
     public void setField(Date Field) {
         this.Field = Field;
     }
 
+    /*
+     * Get 
+     *
+     * @return the Leap value
+     */ 
     public Date getLeap() {
         return this.Leap;
     }
 
+    /*
+     * Set 
+     *
+     * @param the Leap value to set
+     */
     public void setLeap(Date Leap) {
         this.Leap = Leap;
     }

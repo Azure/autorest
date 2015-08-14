@@ -28,6 +28,12 @@ public class ArrayImpl implements Array {
         service = restAdapter.create(ArrayService.class);
     }
 
+    /**
+     * Get complex types with array property
+     *
+     * @return the ArrayWrapper object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public ArrayWrapper getValid() throws ServiceException {
         try {
             ServiceResponse<ArrayWrapper> response = getValidDelegate(service.getValid(), null);
@@ -38,6 +44,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get complex types with array property
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getValidAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
         service.getValidAsync(new ServiceResponseCallback() {
             @Override
@@ -58,6 +69,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Put complex types with array property
+     *
+     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putValid(ArrayWrapper complexBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putValidDelegate(service.putValid(complexBody), null);
@@ -68,6 +85,12 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Put complex types with array property
+     *
+     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putValidAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         service.putValidAsync(complexBody, new ServiceResponseCallback() {
             @Override
@@ -88,6 +111,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get complex types with array property which is empty
+     *
+     * @return the ArrayWrapper object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public ArrayWrapper getEmpty() throws ServiceException {
         try {
             ServiceResponse<ArrayWrapper> response = getEmptyDelegate(service.getEmpty(), null);
@@ -98,6 +127,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get complex types with array property which is empty
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getEmptyAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
         service.getEmptyAsync(new ServiceResponseCallback() {
             @Override
@@ -118,6 +152,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Put complex types with array property which is empty
+     *
+     * @param complexBody Please put an empty array
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putEmpty(ArrayWrapper complexBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putEmptyDelegate(service.putEmpty(complexBody), null);
@@ -128,6 +168,12 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Put complex types with array property which is empty
+     *
+     * @param complexBody Please put an empty array
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putEmptyAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         service.putEmptyAsync(complexBody, new ServiceResponseCallback() {
             @Override
@@ -148,6 +194,13 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get complex types with array property while server doesn't provide a
+     * response payload
+     *
+     * @return the ArrayWrapper object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public ArrayWrapper getNotProvided() throws ServiceException {
         try {
             ServiceResponse<ArrayWrapper> response = getNotProvidedDelegate(service.getNotProvided(), null);
@@ -158,6 +211,12 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get complex types with array property while server doesn't provide a
+     * response payload
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getNotProvidedAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
         service.getNotProvidedAsync(new ServiceResponseCallback() {
             @Override

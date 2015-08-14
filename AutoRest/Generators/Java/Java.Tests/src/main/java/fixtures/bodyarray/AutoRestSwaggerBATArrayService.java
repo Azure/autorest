@@ -9,8 +9,6 @@
 
 package fixtures.bodyarray;
 
-import com.microsoft.rest.ServiceClient;
-
 /**
  * The interface for AutoRestSwaggerBATArrayService class.
  */
@@ -22,7 +20,7 @@ public interface AutoRestSwaggerBATArrayService {
     String getBaseUri();
 
     /**
-     * Test Infrastructure for AutoRest Swagger BAT
+     * Gets the Array object to access its operations.
      * @return the array value.
      */
     Array getArray();

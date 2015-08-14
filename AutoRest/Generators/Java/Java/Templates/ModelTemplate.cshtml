@@ -22,16 +22,29 @@ package @(Settings.Namespace.ToLower()).models;
 public class @(Model.Name) {
 @foreach (var property in Model.Properties)
 {
+@:    /*
+@:     * @property.Documentation
+@:     */
 @:    private @property.Type @property.Name;
 @EmptyLine
 }
 
 @foreach (var property in Model.Properties)
 {
+@:    /*
+@:     * Get @property.Documentation
+@:     *
+@:     * @@return the @property.Name value
+@:     */ 
 @:    public @property.Type get@(property.Name.ToPascalCase())() {
 @:        return this.@(property.Name);
 @:    }
 @EmptyLine
+@:    /*
+@:     * Set @property.Documentation
+@:     *
+@:     * @@param the @property.Name value to set
+@:     */
 @:    public void set@(property.Name.ToPascalCase())(@property.Type @property.Name) {
 @:        this.@(property.Name) = @property.Name;
 @:    }

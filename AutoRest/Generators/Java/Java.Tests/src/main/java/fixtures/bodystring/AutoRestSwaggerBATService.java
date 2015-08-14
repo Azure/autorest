@@ -9,8 +9,6 @@
 
 package fixtures.bodystring;
 
-import com.microsoft.rest.ServiceClient;
-
 /**
  * The interface for AutoRestSwaggerBATService class.
  */
@@ -22,13 +20,13 @@ public interface AutoRestSwaggerBATService {
     String getBaseUri();
 
     /**
-     * Test Infrastructure for AutoRest Swagger BAT
+     * Gets the StringOperations object to access its operations.
      * @return the stringOperations value.
      */
     StringOperations getStringOperations();
 
     /**
-     * Test Infrastructure for AutoRest Swagger BAT
+     * Gets the EnumOperations object to access its operations.
      * @return the enumOperations value.
      */
     EnumOperations getEnumOperations();

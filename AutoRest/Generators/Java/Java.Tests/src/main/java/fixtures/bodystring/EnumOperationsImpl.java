@@ -28,6 +28,13 @@ public class EnumOperationsImpl implements EnumOperations {
         service = restAdapter.create(EnumService.class);
     }
 
+    /**
+     * Get enum value 'red color' from enumeration of 'red color',
+     * 'green-color', 'blue_color'.
+     *
+     * @return the Colors object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Colors getNotExpandable() throws ServiceException {
         try {
             ServiceResponse<Colors> response = getNotExpandableDelegate(service.getNotExpandable(), null);
@@ -38,6 +45,12 @@ public class EnumOperationsImpl implements EnumOperations {
         }
     }
 
+    /**
+     * Get enum value 'red color' from enumeration of 'red color',
+     * 'green-color', 'blue_color'.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback) {
         service.getNotExpandableAsync(new ServiceResponseCallback() {
             @Override
@@ -58,6 +71,13 @@ public class EnumOperationsImpl implements EnumOperations {
                 .build(response, error);
     }
 
+    /**
+     * Sends value 'red color' from enumeration of 'red color', 'green-color',
+     * 'blue_color'
+     *
+     * @param stringBody Possible values for this parameter include: 'red color', 'green-color', 'blue_color'
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putNotExpandable(Colors stringBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putNotExpandableDelegate(service.putNotExpandable(stringBody), null);
@@ -68,6 +88,13 @@ public class EnumOperationsImpl implements EnumOperations {
         }
     }
 
+    /**
+     * Sends value 'red color' from enumeration of 'red color', 'green-color',
+     * 'blue_color'
+     *
+     * @param stringBody Possible values for this parameter include: 'red color', 'green-color', 'blue_color'
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback) {
         service.putNotExpandableAsync(stringBody, new ServiceResponseCallback() {
             @Override

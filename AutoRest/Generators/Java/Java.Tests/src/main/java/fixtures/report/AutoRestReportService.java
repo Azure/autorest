@@ -9,8 +9,6 @@
 
 package fixtures.report;
 
-import com.microsoft.rest.ServiceClient;
-
 /**
  * The interface for AutoRestReportService class.
  */

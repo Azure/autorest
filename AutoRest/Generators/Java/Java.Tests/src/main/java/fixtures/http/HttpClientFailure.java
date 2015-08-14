@@ -22,7 +22,15 @@ import retrofit.http.PATCH;
 import retrofit.http.POST;
 import retrofit.http.DELETE;
 
+/**
+ * An instance of this class provides access to all the operations defined
+ * in HttpClientFailure.
+ */
 public interface HttpClientFailure {
+    /**
+     * The interface defining all the services for HttpClientFailure to be
+     * used by Retrofit to perform actually REST calls.
+     */
     interface HttpClientFailureService {
         @HEAD("/http/failure/client/400")
         Response head400() throws ServiceException;
@@ -163,96 +171,375 @@ public interface HttpClientFailure {
         void head429Async(ServiceResponseCallback cb);
 
     }
+    /**
+     * Return 400 status code - should be represented in the client as an error
+     *
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error head400() throws ServiceException;
 
+    /**
+     * Return 400 status code - should be represented in the client as an error
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void head400Async(final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Return 400 status code - should be represented in the client as an error
+     *
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error get400() throws ServiceException;
 
+    /**
+     * Return 400 status code - should be represented in the client as an error
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void get400Async(final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Return 400 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error put400(boolean booleanValue) throws ServiceException;
 
+    /**
+     * Return 400 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void put400Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Return 400 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error patch400(boolean booleanValue) throws ServiceException;
 
+    /**
+     * Return 400 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void patch400Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Return 400 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error post400(boolean booleanValue) throws ServiceException;
 
+    /**
+     * Return 400 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void post400Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Return 400 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error delete400(boolean booleanValue) throws ServiceException;
 
+    /**
+     * Return 400 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void delete400Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Return 401 status code - should be represented in the client as an error
+     *
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error head401() throws ServiceException;
 
+    /**
+     * Return 401 status code - should be represented in the client as an error
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void head401Async(final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Return 402 status code - should be represented in the client as an error
+     *
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error get402() throws ServiceException;
 
+    /**
+     * Return 402 status code - should be represented in the client as an error
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void get402Async(final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Return 403 status code - should be represented in the client as an error
+     *
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error get403() throws ServiceException;
 
+    /**
+     * Return 403 status code - should be represented in the client as an error
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void get403Async(final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Return 404 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error put404(boolean booleanValue) throws ServiceException;
 
+    /**
+     * Return 404 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void put404Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Return 405 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error patch405(boolean booleanValue) throws ServiceException;
 
+    /**
+     * Return 405 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void patch405Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Return 406 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error post406(boolean booleanValue) throws ServiceException;
 
+    /**
+     * Return 406 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void post406Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Return 407 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error delete407(boolean booleanValue) throws ServiceException;
 
+    /**
+     * Return 407 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void delete407Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Return 409 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error put409(boolean booleanValue) throws ServiceException;
 
+    /**
+     * Return 409 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void put409Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Return 410 status code - should be represented in the client as an error
+     *
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error head410() throws ServiceException;
 
+    /**
+     * Return 410 status code - should be represented in the client as an error
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void head410Async(final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Return 411 status code - should be represented in the client as an error
+     *
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error get411() throws ServiceException;
 
+    /**
+     * Return 411 status code - should be represented in the client as an error
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void get411Async(final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Return 412 status code - should be represented in the client as an error
+     *
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error get412() throws ServiceException;
 
+    /**
+     * Return 412 status code - should be represented in the client as an error
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void get412Async(final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Return 413 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error put413(boolean booleanValue) throws ServiceException;
 
+    /**
+     * Return 413 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void put413Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Return 414 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error patch414(boolean booleanValue) throws ServiceException;
 
+    /**
+     * Return 414 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void patch414Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Return 415 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error post415(boolean booleanValue) throws ServiceException;
 
+    /**
+     * Return 415 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void post415Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Return 416 status code - should be represented in the client as an error
+     *
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error get416() throws ServiceException;
 
+    /**
+     * Return 416 status code - should be represented in the client as an error
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void get416Async(final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Return 417 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error delete417(boolean booleanValue) throws ServiceException;
 
+    /**
+     * Return 417 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void delete417Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Return 429 status code - should be represented in the client as an error
+     *
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error head429() throws ServiceException;
 
+    /**
+     * Return 429 status code - should be represented in the client as an error
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void head429Async(final ServiceCallback<Error> serviceCallback);
 
 }

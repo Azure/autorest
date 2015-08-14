@@ -18,7 +18,15 @@ import retrofit.http.GET;
 import retrofit.http.PUT;
 import retrofit.http.Body;
 
+/**
+ * An instance of this class provides access to all the operations defined
+ * in EnumOperations.
+ */
 public interface EnumOperations {
+    /**
+     * The interface defining all the services for EnumOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
     interface EnumService {
         @GET("/string/enum/notExpandable")
         Response getNotExpandable() throws ServiceException;
@@ -33,12 +41,39 @@ public interface EnumOperations {
         void putNotExpandableAsync(@Body Colors stringBody, ServiceResponseCallback cb);
 
     }
+    /**
+     * Get enum value 'red color' from enumeration of 'red color',
+     * 'green-color', 'blue_color'.
+     *
+     * @return the Colors object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Colors getNotExpandable() throws ServiceException;
 
+    /**
+     * Get enum value 'red color' from enumeration of 'red color',
+     * 'green-color', 'blue_color'.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback);
 
+    /**
+     * Sends value 'red color' from enumeration of 'red color', 'green-color',
+     * 'blue_color'
+     *
+     * @param stringBody Possible values for this parameter include: 'red color', 'green-color', 'blue_color'
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void putNotExpandable(Colors stringBody) throws ServiceException;
 
+    /**
+     * Sends value 'red color' from enumeration of 'red color', 'green-color',
+     * 'blue_color'
+     *
+     * @param stringBody Possible values for this parameter include: 'red color', 'green-color', 'blue_color'
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback);
 
 }

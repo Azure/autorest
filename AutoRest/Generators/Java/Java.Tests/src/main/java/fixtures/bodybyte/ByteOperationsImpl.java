@@ -28,6 +28,12 @@ public class ByteOperationsImpl implements ByteOperations {
         service = restAdapter.create(ByteService.class);
     }
 
+    /**
+     * Get null byte value
+     *
+     * @return the byte[] object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public byte[] getNull() throws ServiceException {
         try {
             ServiceResponse<Byte[]> response = getNullDelegate(service.getNull(), null);
@@ -38,6 +44,11 @@ public class ByteOperationsImpl implements ByteOperations {
         }
     }
 
+    /**
+     * Get null byte value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getNullAsync(final ServiceCallback<Byte[]> serviceCallback) {
         service.getNullAsync(new ServiceResponseCallback() {
             @Override
@@ -58,6 +69,12 @@ public class ByteOperationsImpl implements ByteOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get empty byte value ''
+     *
+     * @return the byte[] object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public byte[] getEmpty() throws ServiceException {
         try {
             ServiceResponse<Byte[]> response = getEmptyDelegate(service.getEmpty(), null);
@@ -68,6 +85,11 @@ public class ByteOperationsImpl implements ByteOperations {
         }
     }
 
+    /**
+     * Get empty byte value ''
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getEmptyAsync(final ServiceCallback<Byte[]> serviceCallback) {
         service.getEmptyAsync(new ServiceResponseCallback() {
             @Override
@@ -88,6 +110,12 @@ public class ByteOperationsImpl implements ByteOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
+     *
+     * @return the byte[] object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public byte[] getNonAscii() throws ServiceException {
         try {
             ServiceResponse<Byte[]> response = getNonAsciiDelegate(service.getNonAscii(), null);
@@ -98,6 +126,11 @@ public class ByteOperationsImpl implements ByteOperations {
         }
     }
 
+    /**
+     * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getNonAsciiAsync(final ServiceCallback<Byte[]> serviceCallback) {
         service.getNonAsciiAsync(new ServiceResponseCallback() {
             @Override
@@ -118,6 +151,12 @@ public class ByteOperationsImpl implements ByteOperations {
                 .build(response, error);
     }
 
+    /**
+     * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
+     *
+     * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putNonAscii(byte[] byteBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putNonAsciiDelegate(service.putNonAscii(byteBody), null);
@@ -128,6 +167,12 @@ public class ByteOperationsImpl implements ByteOperations {
         }
     }
 
+    /**
+     * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
+     *
+     * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putNonAsciiAsync(byte[] byteBody, final ServiceCallback<Void> serviceCallback) {
         service.putNonAsciiAsync(byteBody, new ServiceResponseCallback() {
             @Override
@@ -148,6 +193,12 @@ public class ByteOperationsImpl implements ByteOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get invalid byte value ':::SWAGGER::::'
+     *
+     * @return the byte[] object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public byte[] getInvalid() throws ServiceException {
         try {
             ServiceResponse<Byte[]> response = getInvalidDelegate(service.getInvalid(), null);
@@ -158,6 +209,11 @@ public class ByteOperationsImpl implements ByteOperations {
         }
     }
 
+    /**
+     * Get invalid byte value ':::SWAGGER::::'
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getInvalidAsync(final ServiceCallback<Byte[]> serviceCallback) {
         service.getInvalidAsync(new ServiceResponseCallback() {
             @Override

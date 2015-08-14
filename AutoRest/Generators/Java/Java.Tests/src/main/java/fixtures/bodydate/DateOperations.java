@@ -18,7 +18,15 @@ import retrofit.http.GET;
 import retrofit.http.PUT;
 import retrofit.http.Body;
 
+/**
+ * An instance of this class provides access to all the operations defined
+ * in DateOperations.
+ */
 public interface DateOperations {
+    /**
+     * The interface defining all the services for DateOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
     interface DateService {
         @GET("/date/null")
         Response getNull() throws ServiceException;
@@ -69,36 +77,126 @@ public interface DateOperations {
         void getMinDateAsync(ServiceResponseCallback cb);
 
     }
+    /**
+     * Get null date value
+     *
+     * @return the Date object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Date getNull() throws ServiceException;
 
+    /**
+     * Get null date value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getNullAsync(final ServiceCallback<Date> serviceCallback);
 
+    /**
+     * Get invalid date value
+     *
+     * @return the Date object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Date getInvalidDate() throws ServiceException;
 
+    /**
+     * Get invalid date value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getInvalidDateAsync(final ServiceCallback<Date> serviceCallback);
 
+    /**
+     * Get overflow date value
+     *
+     * @return the Date object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Date getOverflowDate() throws ServiceException;
 
+    /**
+     * Get overflow date value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getOverflowDateAsync(final ServiceCallback<Date> serviceCallback);
 
+    /**
+     * Get underflow date value
+     *
+     * @return the Date object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Date getUnderflowDate() throws ServiceException;
 
+    /**
+     * Get underflow date value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getUnderflowDateAsync(final ServiceCallback<Date> serviceCallback);
 
+    /**
+     * Put max date value 9999-12-31
+     *
+     * @param dateBody the Date value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void putMaxDate(Date dateBody) throws ServiceException;
 
+    /**
+     * Put max date value 9999-12-31
+     *
+     * @param dateBody the Date value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void putMaxDateAsync(Date dateBody, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get max date value 9999-12-31
+     *
+     * @return the Date object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Date getMaxDate() throws ServiceException;
 
+    /**
+     * Get max date value 9999-12-31
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getMaxDateAsync(final ServiceCallback<Date> serviceCallback);
 
+    /**
+     * Put min date value 0000-01-01
+     *
+     * @param dateBody the Date value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void putMinDate(Date dateBody) throws ServiceException;
 
+    /**
+     * Put min date value 0000-01-01
+     *
+     * @param dateBody the Date value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void putMinDateAsync(Date dateBody, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get min date value 0000-01-01
+     *
+     * @return the Date object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Date getMinDate() throws ServiceException;
 
+    /**
+     * Get min date value 0000-01-01
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getMinDateAsync(final ServiceCallback<Date> serviceCallback);
 
 }

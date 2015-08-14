@@ -9,8 +9,6 @@
 
 package fixtures.bodyfile;
 
-import com.microsoft.rest.ServiceClient;
-
 /**
  * The interface for AutoRestSwaggerBATFileService class.
  */
@@ -22,7 +20,7 @@ public interface AutoRestSwaggerBATFileService {
     String getBaseUri();
 
     /**
-     * Test Infrastructure for AutoRest Swagger BAT
+     * Gets the Files object to access its operations.
      * @return the files value.
      */
     Files getFiles();

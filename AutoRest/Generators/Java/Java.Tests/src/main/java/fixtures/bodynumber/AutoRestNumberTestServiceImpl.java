@@ -30,23 +30,38 @@ public class AutoRestNumberTestServiceImpl extends ServiceClient implements Auto
     private Number number;
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the Number object to access its operations.
      * @return the number value.
      */
     public Number getNumber() {
         return this.number;
     }
 
+    /**
+     * Initializes an instance of AutoRestNumberTestService client.
+     */
     public AutoRestNumberTestServiceImpl() {
         this("https://localhost");
     }
 
+    /**
+     * Initializes an instance of AutoRestNumberTestService client.
+     *
+     * @param baseUri the base URI of the host
+     */
     public AutoRestNumberTestServiceImpl(String baseUri) {
         super();
         this.baseUri = baseUri;
         initialize();
     }
 
+    /**
+     * Initializes an instance of AutoRestNumberTestService client.
+     *
+     * @param baseUri the base URI of the host
+     * @param client the {@link OkHttpClient} client to use for REST calls
+     * @param restAdapterBuilder the builder for building up a {@link RestAdapter}
+     */
     public AutoRestNumberTestServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
         super(client, restAdapterBuilder);
         this.baseUri = baseUri;

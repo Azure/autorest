@@ -9,8 +9,6 @@
 
 package fixtures.bodynumber;
 
-import com.microsoft.rest.ServiceClient;
-
 /**
  * The interface for AutoRestNumberTestService class.
  */
@@ -22,7 +20,7 @@ public interface AutoRestNumberTestService {
     String getBaseUri();
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the Number object to access its operations.
      * @return the number value.
      */
     Number getNumber();

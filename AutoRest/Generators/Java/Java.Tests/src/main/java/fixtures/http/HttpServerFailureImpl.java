@@ -27,6 +27,12 @@ public class HttpServerFailureImpl implements HttpServerFailure {
         service = restAdapter.create(HttpServerFailureService.class);
     }
 
+    /**
+     * Return 501 status code - should be represented in the client as an error
+     *
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Error head501() throws ServiceException {
         try {
             ServiceResponse<Error> response = head501Delegate(service.head501(), null);
@@ -37,6 +43,11 @@ public class HttpServerFailureImpl implements HttpServerFailure {
         }
     }
 
+    /**
+     * Return 501 status code - should be represented in the client as an error
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void head501Async(final ServiceCallback<Error> serviceCallback) {
         service.head501Async(new ServiceResponseCallback() {
             @Override
@@ -56,6 +67,12 @@ public class HttpServerFailureImpl implements HttpServerFailure {
                 .build(response, error);
     }
 
+    /**
+     * Return 501 status code - should be represented in the client as an error
+     *
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Error get501() throws ServiceException {
         try {
             ServiceResponse<Error> response = get501Delegate(service.get501(), null);
@@ -66,6 +83,11 @@ public class HttpServerFailureImpl implements HttpServerFailure {
         }
     }
 
+    /**
+     * Return 501 status code - should be represented in the client as an error
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void get501Async(final ServiceCallback<Error> serviceCallback) {
         service.get501Async(new ServiceResponseCallback() {
             @Override
@@ -85,6 +107,13 @@ public class HttpServerFailureImpl implements HttpServerFailure {
                 .build(response, error);
     }
 
+    /**
+     * Return 505 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Error post505(boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Error> response = post505Delegate(service.post505(booleanValue), null);
@@ -95,6 +124,12 @@ public class HttpServerFailureImpl implements HttpServerFailure {
         }
     }
 
+    /**
+     * Return 505 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void post505Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         service.post505Async(booleanValue, new ServiceResponseCallback() {
             @Override
@@ -114,6 +149,13 @@ public class HttpServerFailureImpl implements HttpServerFailure {
                 .build(response, error);
     }
 
+    /**
+     * Return 505 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Error delete505(boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Error> response = delete505Delegate(service.delete505(booleanValue), null);
@@ -124,6 +166,12 @@ public class HttpServerFailureImpl implements HttpServerFailure {
         }
     }
 
+    /**
+     * Return 505 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void delete505Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         service.delete505Async(booleanValue, new ServiceResponseCallback() {
             @Override

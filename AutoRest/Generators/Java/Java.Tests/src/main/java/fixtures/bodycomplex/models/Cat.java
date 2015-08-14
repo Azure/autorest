@@ -15,22 +15,48 @@ import java.util.List;
  * 
  */
 public class Cat {
+    /*
+     * 
+     */
     private String Color;
 
+    /*
+     * 
+     */
     private List<Dog> Hates;
 
+    /*
+     * Get 
+     *
+     * @return the Color value
+     */ 
     public String getColor() {
         return this.Color;
     }
 
+    /*
+     * Set 
+     *
+     * @param the Color value to set
+     */
     public void setColor(String Color) {
         this.Color = Color;
     }
 
+    /*
+     * Get 
+     *
+     * @return the Hates value
+     */ 
     public List<Dog> getHates() {
         return this.Hates;
     }
 
+    /*
+     * Set 
+     *
+     * @param the Hates value to set
+     */
     public void setHates(List<Dog> Hates) {
         this.Hates = Hates;
     }

@@ -30,23 +30,38 @@ public class AutoRestDateTestServiceImpl extends ServiceClient implements AutoRe
     private DateOperations dateOperations;
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the DateOperations object to access its operations.
      * @return the dateOperations value.
      */
     public DateOperations getDateOperations() {
         return this.dateOperations;
     }
 
+    /**
+     * Initializes an instance of AutoRestDateTestService client.
+     */
     public AutoRestDateTestServiceImpl() {
         this("https://localhost");
     }
 
+    /**
+     * Initializes an instance of AutoRestDateTestService client.
+     *
+     * @param baseUri the base URI of the host
+     */
     public AutoRestDateTestServiceImpl(String baseUri) {
         super();
         this.baseUri = baseUri;
         initialize();
     }
 
+    /**
+     * Initializes an instance of AutoRestDateTestService client.
+     *
+     * @param baseUri the base URI of the host
+     * @param client the {@link OkHttpClient} client to use for REST calls
+     * @param restAdapterBuilder the builder for building up a {@link RestAdapter}
+     */
     public AutoRestDateTestServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
         super(client, restAdapterBuilder);
         this.baseUri = baseUri;

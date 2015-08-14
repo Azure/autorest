@@ -9,8 +9,6 @@
 
 package fixtures.bodydictionary;
 
-import com.microsoft.rest.ServiceClient;
-
 /**
  * The interface for AutoRestSwaggerBATdictionaryService class.
  */
@@ -22,7 +20,7 @@ public interface AutoRestSwaggerBATdictionaryService {
     String getBaseUri();
 
     /**
-     * Test Infrastructure for AutoRest Swagger BAT
+     * Gets the Dictionary object to access its operations.
      * @return the dictionary value.
      */
     Dictionary getDictionary();

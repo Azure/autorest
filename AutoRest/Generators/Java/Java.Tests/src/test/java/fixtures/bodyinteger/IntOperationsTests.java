@@ -10,7 +10,7 @@ public class IntOperationsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestIntegerTestServiceImpl("localhost:3000");
+        client = new AutoRestIntegerTestServiceImpl("http://localhost:3000");
     }
 
     @Test
@@ -42,6 +42,29 @@ public class IntOperationsTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             Assert.assertEquals(ServiceException.class, exception.getClass());
+            Assert.assertTrue(exception.getMessage().contains("NumberFormatException"));
+        }
+    }
+
+    @Test
+    public void getUnderflowInt32() throws Exception {
+        try {
+            client.getIntOperations().getUnderflowInt32();
+            Assert.assertTrue(false);
+        } catch (Exception exception) {
+            Assert.assertEquals(ServiceException.class, exception.getClass());
+            Assert.assertTrue(exception.getMessage().contains("NumberFormatException"));
+        }
+    }
+
+    @Test
+    public void getOverflowInt64() throws Exception {
+        try {
+            long value = client.getIntOperations().getOverflowInt64();
+            Assert.assertEquals(Long.MAX_VALUE, value);
+        } catch (Exception exception) {
+            Assert.assertEquals(ServiceException.class, exception.getClass());
+            Assert.assertTrue(exception.getMessage().contains("NumberFormatException"));
         }
     }
 }

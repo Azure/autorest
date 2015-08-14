@@ -9,8 +9,6 @@
 
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.ServiceClient;
-
 /**
  * The interface for AutoRestComplexTestService class.
  */
@@ -22,43 +20,43 @@ public interface AutoRestComplexTestService {
     String getBaseUri();
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the BasicOperations object to access its operations.
      * @return the basicOperations value.
      */
     BasicOperations getBasicOperations();
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the Primitive object to access its operations.
      * @return the primitive value.
      */
     Primitive getPrimitive();
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the Array object to access its operations.
      * @return the array value.
      */
     Array getArray();
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the Dictionary object to access its operations.
      * @return the dictionary value.
      */
     Dictionary getDictionary();
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the Inheritance object to access its operations.
      * @return the inheritance value.
      */
     Inheritance getInheritance();
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the Polymorphism object to access its operations.
      * @return the polymorphism value.
      */
     Polymorphism getPolymorphism();
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the Polymorphicrecursive object to access its operations.
      * @return the polymorphicrecursive value.
      */
     Polymorphicrecursive getPolymorphicrecursive();

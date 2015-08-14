@@ -27,6 +27,12 @@ public class BoolImpl implements Bool {
         service = restAdapter.create(BoolService.class);
     }
 
+    /**
+     * Get true Boolean value
+     *
+     * @return the boolean object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public boolean getTrue() throws ServiceException {
         try {
             ServiceResponse<Boolean> response = getTrueDelegate(service.getTrue(), null);
@@ -37,6 +43,11 @@ public class BoolImpl implements Bool {
         }
     }
 
+    /**
+     * Get true Boolean value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getTrueAsync(final ServiceCallback<Boolean> serviceCallback) {
         service.getTrueAsync(new ServiceResponseCallback() {
             @Override
@@ -57,6 +68,12 @@ public class BoolImpl implements Bool {
                 .build(response, error);
     }
 
+    /**
+     * Set Boolean value true
+     *
+     * @param boolBody the boolean value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putTrue(boolean boolBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putTrueDelegate(service.putTrue(boolBody), null);
@@ -67,6 +84,12 @@ public class BoolImpl implements Bool {
         }
     }
 
+    /**
+     * Set Boolean value true
+     *
+     * @param boolBody the boolean value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
         service.putTrueAsync(boolBody, new ServiceResponseCallback() {
             @Override
@@ -87,6 +110,12 @@ public class BoolImpl implements Bool {
                 .build(response, error);
     }
 
+    /**
+     * Get false Boolean value
+     *
+     * @return the boolean object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public boolean getFalse() throws ServiceException {
         try {
             ServiceResponse<Boolean> response = getFalseDelegate(service.getFalse(), null);
@@ -97,6 +126,11 @@ public class BoolImpl implements Bool {
         }
     }
 
+    /**
+     * Get false Boolean value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getFalseAsync(final ServiceCallback<Boolean> serviceCallback) {
         service.getFalseAsync(new ServiceResponseCallback() {
             @Override
@@ -117,6 +151,12 @@ public class BoolImpl implements Bool {
                 .build(response, error);
     }
 
+    /**
+     * Set Boolean value false
+     *
+     * @param boolBody the boolean value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putFalse(boolean boolBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putFalseDelegate(service.putFalse(boolBody), null);
@@ -127,6 +167,12 @@ public class BoolImpl implements Bool {
         }
     }
 
+    /**
+     * Set Boolean value false
+     *
+     * @param boolBody the boolean value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
         service.putFalseAsync(boolBody, new ServiceResponseCallback() {
             @Override
@@ -147,6 +193,12 @@ public class BoolImpl implements Bool {
                 .build(response, error);
     }
 
+    /**
+     * Get null Boolean value
+     *
+     * @return the boolean object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public boolean getNull() throws ServiceException {
         try {
             ServiceResponse<Boolean> response = getNullDelegate(service.getNull(), null);
@@ -157,6 +209,11 @@ public class BoolImpl implements Bool {
         }
     }
 
+    /**
+     * Get null Boolean value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getNullAsync(final ServiceCallback<Boolean> serviceCallback) {
         service.getNullAsync(new ServiceResponseCallback() {
             @Override
@@ -177,6 +234,12 @@ public class BoolImpl implements Bool {
                 .build(response, error);
     }
 
+    /**
+     * Get invalid Boolean value
+     *
+     * @return the boolean object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public boolean getInvalid() throws ServiceException {
         try {
             ServiceResponse<Boolean> response = getInvalidDelegate(service.getInvalid(), null);
@@ -187,6 +250,11 @@ public class BoolImpl implements Bool {
         }
     }
 
+    /**
+     * Get invalid Boolean value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getInvalidAsync(final ServiceCallback<Boolean> serviceCallback) {
         service.getInvalidAsync(new ServiceResponseCallback() {
             @Override

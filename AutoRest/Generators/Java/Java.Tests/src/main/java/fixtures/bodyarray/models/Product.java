@@ -14,22 +14,48 @@ package fixtures.bodyarray.models;
  * 
  */
 public class Product {
+    /*
+     * 
+     */
     private int Integer;
 
+    /*
+     * 
+     */
     private String StringProperty;
 
+    /*
+     * Get 
+     *
+     * @return the Integer value
+     */ 
     public int getInteger() {
         return this.Integer;
     }
 
+    /*
+     * Set 
+     *
+     * @param the Integer value to set
+     */
     public void setInteger(int Integer) {
         this.Integer = Integer;
     }
 
+    /*
+     * Get 
+     *
+     * @return the StringProperty value
+     */ 
     public String getStringProperty() {
         return this.StringProperty;
     }
 
+    /*
+     * Set 
+     *
+     * @param the StringProperty value to set
+     */
     public void setStringProperty(String StringProperty) {
         this.StringProperty = StringProperty;
     }

@@ -9,8 +9,6 @@
 
 package fixtures.http;
 
-import com.microsoft.rest.ServiceClient;
-
 /**
  * The interface for AutoRestHttpInfrastructureTestService class.
  */
@@ -22,43 +20,43 @@ public interface AutoRestHttpInfrastructureTestService {
     String getBaseUri();
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the HttpFailure object to access its operations.
      * @return the httpFailure value.
      */
     HttpFailure getHttpFailure();
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the HttpSuccess object to access its operations.
      * @return the httpSuccess value.
      */
     HttpSuccess getHttpSuccess();
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the HttpRedirects object to access its operations.
      * @return the httpRedirects value.
      */
     HttpRedirects getHttpRedirects();
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the HttpClientFailure object to access its operations.
      * @return the httpClientFailure value.
      */
     HttpClientFailure getHttpClientFailure();
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the HttpServerFailure object to access its operations.
      * @return the httpServerFailure value.
      */
     HttpServerFailure getHttpServerFailure();
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the HttpRetry object to access its operations.
      * @return the httpRetry value.
      */
     HttpRetry getHttpRetry();
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the MultipleResponses object to access its operations.
      * @return the multipleResponses value.
      */
     MultipleResponses getMultipleResponses();

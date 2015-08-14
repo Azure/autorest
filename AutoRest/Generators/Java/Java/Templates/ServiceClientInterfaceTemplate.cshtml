@@ -9,12 +9,6 @@
 package @(Settings.Namespace.ToLower());
 @EmptyLine
 
-import com.microsoft.rest.ServiceClient;
-@foreach (var importClass in Model.Imports) {
-@:import @importClass;
-}
-@EmptyLine
-
 /**
  * The interface for @Model.Name class.
  */
@@ -29,7 +23,7 @@ public interface @Model.Name {
 {
 @EmptyLine
 @:    /**
-@:     * @(param.Documentation)
+@:     * Gets @(param.Documentation).
 @:     * @@return the @(param.Name) value.
 @:     */
 @:    @param.Type get@(param.Name.ToPascalCase())();
@@ -39,7 +33,7 @@ public interface @Model.Name {
 {
 @EmptyLine
 @:    /**
-@:     * @(operation.Documentation)
+@:     * Gets the @(operation.MethodGroupType) object to access its operations.
 @:     * @@return the @(operation.MethodGroupName) value.
 @:     */
 @:    @(operation.MethodGroupType) get@(operation.MethodGroupName.ToPascalCase())();

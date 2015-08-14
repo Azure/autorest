@@ -31,6 +31,7 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
 
     /**
      * A string value 'globalItemStringPath' that appears in the path
+     *
      * @return the GlobalStringPath value.
      */
     public String getGlobalStringPath() {
@@ -40,7 +41,7 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
     private Paths paths;
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the Paths object to access its operations.
      * @return the paths value.
      */
     public Paths getPaths() {
@@ -50,7 +51,7 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
     private Queries queries;
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the Queries object to access its operations.
      * @return the queries value.
      */
     public Queries getQueries() {
@@ -60,23 +61,38 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
     private PathItems pathItems;
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the PathItems object to access its operations.
      * @return the pathItems value.
      */
     public PathItems getPathItems() {
         return this.pathItems;
     }
 
+    /**
+     * Initializes an instance of AutoRestUrlTestService client.
+     */
     public AutoRestUrlTestServiceImpl() {
         this("http://localhost");
     }
 
+    /**
+     * Initializes an instance of AutoRestUrlTestService client.
+     *
+     * @param baseUri the base URI of the host
+     */
     public AutoRestUrlTestServiceImpl(String baseUri) {
         super();
         this.baseUri = baseUri;
         initialize();
     }
 
+    /**
+     * Initializes an instance of AutoRestUrlTestService client.
+     *
+     * @param baseUri the base URI of the host
+     * @param client the {@link OkHttpClient} client to use for REST calls
+     * @param restAdapterBuilder the builder for building up a {@link RestAdapter}
+     */
     public AutoRestUrlTestServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
         super(client, restAdapterBuilder);
         this.baseUri = baseUri;

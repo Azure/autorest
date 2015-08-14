@@ -9,8 +9,6 @@
 
 package fixtures.bodyboolean;
 
-import com.microsoft.rest.ServiceClient;
-
 /**
  * The interface for AutoRestBoolTestService class.
  */
@@ -22,7 +20,7 @@ public interface AutoRestBoolTestService {
     String getBaseUri();
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the Bool object to access its operations.
      * @return the bool value.
      */
     Bool getBool();

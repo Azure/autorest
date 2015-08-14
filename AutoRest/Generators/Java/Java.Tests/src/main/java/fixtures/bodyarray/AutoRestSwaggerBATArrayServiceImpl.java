@@ -30,23 +30,38 @@ public class AutoRestSwaggerBATArrayServiceImpl extends ServiceClient implements
     private Array array;
 
     /**
-     * Test Infrastructure for AutoRest Swagger BAT
+     * Gets the Array object to access its operations.
      * @return the array value.
      */
     public Array getArray() {
         return this.array;
     }
 
+    /**
+     * Initializes an instance of AutoRestSwaggerBATArrayService client.
+     */
     public AutoRestSwaggerBATArrayServiceImpl() {
         this("http://localhost");
     }
 
+    /**
+     * Initializes an instance of AutoRestSwaggerBATArrayService client.
+     *
+     * @param baseUri the base URI of the host
+     */
     public AutoRestSwaggerBATArrayServiceImpl(String baseUri) {
         super();
         this.baseUri = baseUri;
         initialize();
     }
 
+    /**
+     * Initializes an instance of AutoRestSwaggerBATArrayService client.
+     *
+     * @param baseUri the base URI of the host
+     * @param client the {@link OkHttpClient} client to use for REST calls
+     * @param restAdapterBuilder the builder for building up a {@link RestAdapter}
+     */
     public AutoRestSwaggerBATArrayServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
         super(client, restAdapterBuilder);
         this.baseUri = baseUri;

@@ -27,6 +27,12 @@ public class StringOperationsImpl implements StringOperations {
         service = restAdapter.create(StringService.class);
     }
 
+    /**
+     * Get null string value value
+     *
+     * @return the String object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public String getNull() throws ServiceException {
         try {
             ServiceResponse<String> response = getNullDelegate(service.getNull(), null);
@@ -37,6 +43,11 @@ public class StringOperationsImpl implements StringOperations {
         }
     }
 
+    /**
+     * Get null string value value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getNullAsync(final ServiceCallback<String> serviceCallback) {
         service.getNullAsync(new ServiceResponseCallback() {
             @Override
@@ -57,6 +68,12 @@ public class StringOperationsImpl implements StringOperations {
                 .build(response, error);
     }
 
+    /**
+     * Set string value null
+     *
+     * @param stringBody Possible values for this parameter include: ''
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putNull(String stringBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putNullDelegate(service.putNull(stringBody), null);
@@ -67,6 +84,12 @@ public class StringOperationsImpl implements StringOperations {
         }
     }
 
+    /**
+     * Set string value null
+     *
+     * @param stringBody Possible values for this parameter include: ''
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putNullAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
         service.putNullAsync(stringBody, new ServiceResponseCallback() {
             @Override
@@ -87,6 +110,12 @@ public class StringOperationsImpl implements StringOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get empty string value value ''
+     *
+     * @return the String object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public String getEmpty() throws ServiceException {
         try {
             ServiceResponse<String> response = getEmptyDelegate(service.getEmpty(), null);
@@ -97,6 +126,11 @@ public class StringOperationsImpl implements StringOperations {
         }
     }
 
+    /**
+     * Get empty string value value ''
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getEmptyAsync(final ServiceCallback<String> serviceCallback) {
         service.getEmptyAsync(new ServiceResponseCallback() {
             @Override
@@ -117,6 +151,12 @@ public class StringOperationsImpl implements StringOperations {
                 .build(response, error);
     }
 
+    /**
+     * Set string value empty ''
+     *
+     * @param stringBody Possible values for this parameter include: ''
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putEmpty(String stringBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putEmptyDelegate(service.putEmpty(stringBody), null);
@@ -127,6 +167,12 @@ public class StringOperationsImpl implements StringOperations {
         }
     }
 
+    /**
+     * Set string value empty ''
+     *
+     * @param stringBody Possible values for this parameter include: ''
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putEmptyAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
         service.putEmptyAsync(stringBody, new ServiceResponseCallback() {
             @Override
@@ -147,6 +193,14 @@ public class StringOperationsImpl implements StringOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get mbcs string value
+     * '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
+     * '
+     *
+     * @return the String object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public String getMbcs() throws ServiceException {
         try {
             ServiceResponse<String> response = getMbcsDelegate(service.getMbcs(), null);
@@ -157,6 +211,13 @@ public class StringOperationsImpl implements StringOperations {
         }
     }
 
+    /**
+     * Get mbcs string value
+     * '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
+     * '
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getMbcsAsync(final ServiceCallback<String> serviceCallback) {
         service.getMbcsAsync(new ServiceResponseCallback() {
             @Override
@@ -177,6 +238,14 @@ public class StringOperationsImpl implements StringOperations {
                 .build(response, error);
     }
 
+    /**
+     * Set string value mbcs
+     * '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
+     * '
+     *
+     * @param stringBody Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putMbcs(String stringBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putMbcsDelegate(service.putMbcs(stringBody), null);
@@ -187,6 +256,14 @@ public class StringOperationsImpl implements StringOperations {
         }
     }
 
+    /**
+     * Set string value mbcs
+     * '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
+     * '
+     *
+     * @param stringBody Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putMbcsAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
         service.putMbcsAsync(stringBody, new ServiceResponseCallback() {
             @Override
@@ -207,6 +284,15 @@ public class StringOperationsImpl implements StringOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get string value with leading and trailing whitespace
+     * '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men
+     * to come to the aid of their
+     * country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
+     *
+     * @return the String object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public String getWhitespace() throws ServiceException {
         try {
             ServiceResponse<String> response = getWhitespaceDelegate(service.getWhitespace(), null);
@@ -217,6 +303,14 @@ public class StringOperationsImpl implements StringOperations {
         }
     }
 
+    /**
+     * Get string value with leading and trailing whitespace
+     * '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men
+     * to come to the aid of their
+     * country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getWhitespaceAsync(final ServiceCallback<String> serviceCallback) {
         service.getWhitespaceAsync(new ServiceResponseCallback() {
             @Override
@@ -237,6 +331,15 @@ public class StringOperationsImpl implements StringOperations {
                 .build(response, error);
     }
 
+    /**
+     * Set String value with leading and trailing whitespace
+     * '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men
+     * to come to the aid of their
+     * country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
+     *
+     * @param stringBody Possible values for this parameter include: '    Now is the time for all good men to come to the aid of their country    '
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putWhitespace(String stringBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putWhitespaceDelegate(service.putWhitespace(stringBody), null);
@@ -247,6 +350,15 @@ public class StringOperationsImpl implements StringOperations {
         }
     }
 
+    /**
+     * Set String value with leading and trailing whitespace
+     * '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men
+     * to come to the aid of their
+     * country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
+     *
+     * @param stringBody Possible values for this parameter include: '    Now is the time for all good men to come to the aid of their country    '
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putWhitespaceAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
         service.putWhitespaceAsync(stringBody, new ServiceResponseCallback() {
             @Override
@@ -267,6 +379,12 @@ public class StringOperationsImpl implements StringOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get String value when no string value is sent in response payload
+     *
+     * @return the String object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public String getNotProvided() throws ServiceException {
         try {
             ServiceResponse<String> response = getNotProvidedDelegate(service.getNotProvided(), null);
@@ -277,6 +395,11 @@ public class StringOperationsImpl implements StringOperations {
         }
     }
 
+    /**
+     * Get String value when no string value is sent in response payload
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getNotProvidedAsync(final ServiceCallback<String> serviceCallback) {
         service.getNotProvidedAsync(new ServiceResponseCallback() {
             @Override
