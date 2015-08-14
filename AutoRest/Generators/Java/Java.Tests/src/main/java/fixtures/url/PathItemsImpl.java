@@ -27,6 +27,20 @@ public class PathItemsImpl implements PathItems {
         service = restAdapter.create(PathItemsService.class);
     }
 
+    /**
+     * send globalStringPath='globalStringPath',
+     * pathItemStringPath='pathItemStringPath',
+     * localStringPath='localStringPath',
+     * globalStringQuery='globalStringQuery',
+     * pathItemStringQuery='pathItemStringQuery',
+     * localStringQuery='localStringQuery'
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @param localStringQuery should contain value 'localStringQuery'
+     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void getAllWithValues(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException {
         try {
             ServiceResponse<Void> response = getAllWithValuesDelegate(service.getAllWithValues(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), null);
@@ -37,6 +51,20 @@ public class PathItemsImpl implements PathItems {
         }
     }
 
+    /**
+     * send globalStringPath='globalStringPath',
+     * pathItemStringPath='pathItemStringPath',
+     * localStringPath='localStringPath',
+     * globalStringQuery='globalStringQuery',
+     * pathItemStringQuery='pathItemStringQuery',
+     * localStringQuery='localStringQuery'
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @param localStringQuery should contain value 'localStringQuery'
+     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getAllWithValuesAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
         service.getAllWithValuesAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery, new ServiceResponseCallback() {
             @Override
@@ -57,6 +85,19 @@ public class PathItemsImpl implements PathItems {
                 .build(response, error);
     }
 
+    /**
+     * send globalStringPath='globalStringPath',
+     * pathItemStringPath='pathItemStringPath',
+     * localStringPath='localStringPath', globalStringQuery=null,
+     * pathItemStringQuery='pathItemStringQuery',
+     * localStringQuery='localStringQuery'
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @param localStringQuery should contain value 'localStringQuery'
+     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void getGlobalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException {
         try {
             ServiceResponse<Void> response = getGlobalQueryNullDelegate(service.getGlobalQueryNull(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), null);
@@ -67,6 +108,19 @@ public class PathItemsImpl implements PathItems {
         }
     }
 
+    /**
+     * send globalStringPath='globalStringPath',
+     * pathItemStringPath='pathItemStringPath',
+     * localStringPath='localStringPath', globalStringQuery=null,
+     * pathItemStringQuery='pathItemStringQuery',
+     * localStringQuery='localStringQuery'
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @param localStringQuery should contain value 'localStringQuery'
+     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
         service.getGlobalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery, new ServiceResponseCallback() {
             @Override
@@ -87,6 +141,18 @@ public class PathItemsImpl implements PathItems {
                 .build(response, error);
     }
 
+    /**
+     * send globalStringPath=globalStringPath,
+     * pathItemStringPath='pathItemStringPath',
+     * localStringPath='localStringPath', globalStringQuery=null,
+     * pathItemStringQuery='pathItemStringQuery', localStringQuery=null
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @param localStringQuery should contain null value
+     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void getGlobalAndLocalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException {
         try {
             ServiceResponse<Void> response = getGlobalAndLocalQueryNullDelegate(service.getGlobalAndLocalQueryNull(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), null);
@@ -97,6 +163,18 @@ public class PathItemsImpl implements PathItems {
         }
     }
 
+    /**
+     * send globalStringPath=globalStringPath,
+     * pathItemStringPath='pathItemStringPath',
+     * localStringPath='localStringPath', globalStringQuery=null,
+     * pathItemStringQuery='pathItemStringQuery', localStringQuery=null
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @param localStringQuery should contain null value
+     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
         service.getGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery, new ServiceResponseCallback() {
             @Override
@@ -117,6 +195,19 @@ public class PathItemsImpl implements PathItems {
                 .build(response, error);
     }
 
+    /**
+     * send globalStringPath='globalStringPath',
+     * pathItemStringPath='pathItemStringPath',
+     * localStringPath='localStringPath',
+     * globalStringQuery='globalStringQuery', pathItemStringQuery=null,
+     * localStringQuery=null
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @param localStringQuery should contain value null
+     * @param pathItemStringQuery should contain value null
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void getLocalPathItemQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException {
         try {
             ServiceResponse<Void> response = getLocalPathItemQueryNullDelegate(service.getLocalPathItemQueryNull(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), null);
@@ -127,6 +218,19 @@ public class PathItemsImpl implements PathItems {
         }
     }
 
+    /**
+     * send globalStringPath='globalStringPath',
+     * pathItemStringPath='pathItemStringPath',
+     * localStringPath='localStringPath',
+     * globalStringQuery='globalStringQuery', pathItemStringQuery=null,
+     * localStringQuery=null
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @param localStringQuery should contain value null
+     * @param pathItemStringQuery should contain value null
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
         service.getLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery, new ServiceResponseCallback() {
             @Override

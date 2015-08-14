@@ -30,23 +30,38 @@ public class AutoRestBoolTestServiceImpl extends ServiceClient implements AutoRe
     private Bool bool;
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the Bool object to access its operations.
      * @return the bool value.
      */
     public Bool getBool() {
         return this.bool;
     }
 
+    /**
+     * Initializes an instance of AutoRestBoolTestService client.
+     */
     public AutoRestBoolTestServiceImpl() {
         this("http://localhost");
     }
 
+    /**
+     * Initializes an instance of AutoRestBoolTestService client.
+     *
+     * @param baseUri the base URI of the host
+     */
     public AutoRestBoolTestServiceImpl(String baseUri) {
         super();
         this.baseUri = baseUri;
         initialize();
     }
 
+    /**
+     * Initializes an instance of AutoRestBoolTestService client.
+     *
+     * @param baseUri the base URI of the host
+     * @param client the {@link OkHttpClient} client to use for REST calls
+     * @param restAdapterBuilder the builder for building up a {@link RestAdapter}
+     */
     public AutoRestBoolTestServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
         super(client, restAdapterBuilder);
         this.baseUri = baseUri;

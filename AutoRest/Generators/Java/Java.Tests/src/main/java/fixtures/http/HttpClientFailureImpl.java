@@ -27,6 +27,12 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         service = restAdapter.create(HttpClientFailureService.class);
     }
 
+    /**
+     * Return 400 status code - should be represented in the client as an error
+     *
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Error head400() throws ServiceException {
         try {
             ServiceResponse<Error> response = head400Delegate(service.head400(), null);
@@ -37,6 +43,11 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         }
     }
 
+    /**
+     * Return 400 status code - should be represented in the client as an error
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void head400Async(final ServiceCallback<Error> serviceCallback) {
         service.head400Async(new ServiceResponseCallback() {
             @Override
@@ -56,6 +67,12 @@ public class HttpClientFailureImpl implements HttpClientFailure {
                 .build(response, error);
     }
 
+    /**
+     * Return 400 status code - should be represented in the client as an error
+     *
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Error get400() throws ServiceException {
         try {
             ServiceResponse<Error> response = get400Delegate(service.get400(), null);
@@ -66,6 +83,11 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         }
     }
 
+    /**
+     * Return 400 status code - should be represented in the client as an error
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void get400Async(final ServiceCallback<Error> serviceCallback) {
         service.get400Async(new ServiceResponseCallback() {
             @Override
@@ -85,6 +107,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
                 .build(response, error);
     }
 
+    /**
+     * Return 400 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Error put400(boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Error> response = put400Delegate(service.put400(booleanValue), null);
@@ -95,6 +124,12 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         }
     }
 
+    /**
+     * Return 400 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void put400Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         service.put400Async(booleanValue, new ServiceResponseCallback() {
             @Override
@@ -114,6 +149,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
                 .build(response, error);
     }
 
+    /**
+     * Return 400 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Error patch400(boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Error> response = patch400Delegate(service.patch400(booleanValue), null);
@@ -124,6 +166,12 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         }
     }
 
+    /**
+     * Return 400 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void patch400Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         service.patch400Async(booleanValue, new ServiceResponseCallback() {
             @Override
@@ -143,6 +191,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
                 .build(response, error);
     }
 
+    /**
+     * Return 400 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Error post400(boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Error> response = post400Delegate(service.post400(booleanValue), null);
@@ -153,6 +208,12 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         }
     }
 
+    /**
+     * Return 400 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void post400Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         service.post400Async(booleanValue, new ServiceResponseCallback() {
             @Override
@@ -172,6 +233,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
                 .build(response, error);
     }
 
+    /**
+     * Return 400 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Error delete400(boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Error> response = delete400Delegate(service.delete400(booleanValue), null);
@@ -182,6 +250,12 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         }
     }
 
+    /**
+     * Return 400 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void delete400Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         service.delete400Async(booleanValue, new ServiceResponseCallback() {
             @Override
@@ -201,6 +275,12 @@ public class HttpClientFailureImpl implements HttpClientFailure {
                 .build(response, error);
     }
 
+    /**
+     * Return 401 status code - should be represented in the client as an error
+     *
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Error head401() throws ServiceException {
         try {
             ServiceResponse<Error> response = head401Delegate(service.head401(), null);
@@ -211,6 +291,11 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         }
     }
 
+    /**
+     * Return 401 status code - should be represented in the client as an error
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void head401Async(final ServiceCallback<Error> serviceCallback) {
         service.head401Async(new ServiceResponseCallback() {
             @Override
@@ -230,6 +315,12 @@ public class HttpClientFailureImpl implements HttpClientFailure {
                 .build(response, error);
     }
 
+    /**
+     * Return 402 status code - should be represented in the client as an error
+     *
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Error get402() throws ServiceException {
         try {
             ServiceResponse<Error> response = get402Delegate(service.get402(), null);
@@ -240,6 +331,11 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         }
     }
 
+    /**
+     * Return 402 status code - should be represented in the client as an error
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void get402Async(final ServiceCallback<Error> serviceCallback) {
         service.get402Async(new ServiceResponseCallback() {
             @Override
@@ -259,6 +355,12 @@ public class HttpClientFailureImpl implements HttpClientFailure {
                 .build(response, error);
     }
 
+    /**
+     * Return 403 status code - should be represented in the client as an error
+     *
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Error get403() throws ServiceException {
         try {
             ServiceResponse<Error> response = get403Delegate(service.get403(), null);
@@ -269,6 +371,11 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         }
     }
 
+    /**
+     * Return 403 status code - should be represented in the client as an error
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void get403Async(final ServiceCallback<Error> serviceCallback) {
         service.get403Async(new ServiceResponseCallback() {
             @Override
@@ -288,6 +395,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
                 .build(response, error);
     }
 
+    /**
+     * Return 404 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Error put404(boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Error> response = put404Delegate(service.put404(booleanValue), null);
@@ -298,6 +412,12 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         }
     }
 
+    /**
+     * Return 404 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void put404Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         service.put404Async(booleanValue, new ServiceResponseCallback() {
             @Override
@@ -317,6 +437,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
                 .build(response, error);
     }
 
+    /**
+     * Return 405 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Error patch405(boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Error> response = patch405Delegate(service.patch405(booleanValue), null);
@@ -327,6 +454,12 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         }
     }
 
+    /**
+     * Return 405 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void patch405Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         service.patch405Async(booleanValue, new ServiceResponseCallback() {
             @Override
@@ -346,6 +479,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
                 .build(response, error);
     }
 
+    /**
+     * Return 406 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Error post406(boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Error> response = post406Delegate(service.post406(booleanValue), null);
@@ -356,6 +496,12 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         }
     }
 
+    /**
+     * Return 406 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void post406Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         service.post406Async(booleanValue, new ServiceResponseCallback() {
             @Override
@@ -375,6 +521,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
                 .build(response, error);
     }
 
+    /**
+     * Return 407 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Error delete407(boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Error> response = delete407Delegate(service.delete407(booleanValue), null);
@@ -385,6 +538,12 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         }
     }
 
+    /**
+     * Return 407 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void delete407Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         service.delete407Async(booleanValue, new ServiceResponseCallback() {
             @Override
@@ -404,6 +563,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
                 .build(response, error);
     }
 
+    /**
+     * Return 409 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Error put409(boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Error> response = put409Delegate(service.put409(booleanValue), null);
@@ -414,6 +580,12 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         }
     }
 
+    /**
+     * Return 409 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void put409Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         service.put409Async(booleanValue, new ServiceResponseCallback() {
             @Override
@@ -433,6 +605,12 @@ public class HttpClientFailureImpl implements HttpClientFailure {
                 .build(response, error);
     }
 
+    /**
+     * Return 410 status code - should be represented in the client as an error
+     *
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Error head410() throws ServiceException {
         try {
             ServiceResponse<Error> response = head410Delegate(service.head410(), null);
@@ -443,6 +621,11 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         }
     }
 
+    /**
+     * Return 410 status code - should be represented in the client as an error
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void head410Async(final ServiceCallback<Error> serviceCallback) {
         service.head410Async(new ServiceResponseCallback() {
             @Override
@@ -462,6 +645,12 @@ public class HttpClientFailureImpl implements HttpClientFailure {
                 .build(response, error);
     }
 
+    /**
+     * Return 411 status code - should be represented in the client as an error
+     *
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Error get411() throws ServiceException {
         try {
             ServiceResponse<Error> response = get411Delegate(service.get411(), null);
@@ -472,6 +661,11 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         }
     }
 
+    /**
+     * Return 411 status code - should be represented in the client as an error
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void get411Async(final ServiceCallback<Error> serviceCallback) {
         service.get411Async(new ServiceResponseCallback() {
             @Override
@@ -491,6 +685,12 @@ public class HttpClientFailureImpl implements HttpClientFailure {
                 .build(response, error);
     }
 
+    /**
+     * Return 412 status code - should be represented in the client as an error
+     *
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Error get412() throws ServiceException {
         try {
             ServiceResponse<Error> response = get412Delegate(service.get412(), null);
@@ -501,6 +701,11 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         }
     }
 
+    /**
+     * Return 412 status code - should be represented in the client as an error
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void get412Async(final ServiceCallback<Error> serviceCallback) {
         service.get412Async(new ServiceResponseCallback() {
             @Override
@@ -520,6 +725,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
                 .build(response, error);
     }
 
+    /**
+     * Return 413 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Error put413(boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Error> response = put413Delegate(service.put413(booleanValue), null);
@@ -530,6 +742,12 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         }
     }
 
+    /**
+     * Return 413 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void put413Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         service.put413Async(booleanValue, new ServiceResponseCallback() {
             @Override
@@ -549,6 +767,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
                 .build(response, error);
     }
 
+    /**
+     * Return 414 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Error patch414(boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Error> response = patch414Delegate(service.patch414(booleanValue), null);
@@ -559,6 +784,12 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         }
     }
 
+    /**
+     * Return 414 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void patch414Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         service.patch414Async(booleanValue, new ServiceResponseCallback() {
             @Override
@@ -578,6 +809,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
                 .build(response, error);
     }
 
+    /**
+     * Return 415 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Error post415(boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Error> response = post415Delegate(service.post415(booleanValue), null);
@@ -588,6 +826,12 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         }
     }
 
+    /**
+     * Return 415 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void post415Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         service.post415Async(booleanValue, new ServiceResponseCallback() {
             @Override
@@ -607,6 +851,12 @@ public class HttpClientFailureImpl implements HttpClientFailure {
                 .build(response, error);
     }
 
+    /**
+     * Return 416 status code - should be represented in the client as an error
+     *
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Error get416() throws ServiceException {
         try {
             ServiceResponse<Error> response = get416Delegate(service.get416(), null);
@@ -617,6 +867,11 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         }
     }
 
+    /**
+     * Return 416 status code - should be represented in the client as an error
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void get416Async(final ServiceCallback<Error> serviceCallback) {
         service.get416Async(new ServiceResponseCallback() {
             @Override
@@ -636,6 +891,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
                 .build(response, error);
     }
 
+    /**
+     * Return 417 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Error delete417(boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Error> response = delete417Delegate(service.delete417(booleanValue), null);
@@ -646,6 +908,12 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         }
     }
 
+    /**
+     * Return 417 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void delete417Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         service.delete417Async(booleanValue, new ServiceResponseCallback() {
             @Override
@@ -665,6 +933,12 @@ public class HttpClientFailureImpl implements HttpClientFailure {
                 .build(response, error);
     }
 
+    /**
+     * Return 429 status code - should be represented in the client as an error
+     *
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Error head429() throws ServiceException {
         try {
             ServiceResponse<Error> response = head429Delegate(service.head429(), null);
@@ -675,6 +949,11 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         }
     }
 
+    /**
+     * Return 429 status code - should be represented in the client as an error
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void head429Async(final ServiceCallback<Error> serviceCallback) {
         service.head429Async(new ServiceResponseCallback() {
             @Override

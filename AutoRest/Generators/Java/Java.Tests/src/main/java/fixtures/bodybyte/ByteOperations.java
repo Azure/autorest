@@ -17,7 +17,15 @@ import retrofit.http.GET;
 import retrofit.http.PUT;
 import retrofit.http.Body;
 
+/**
+ * An instance of this class provides access to all the operations defined
+ * in ByteOperations.
+ */
 public interface ByteOperations {
+    /**
+     * The interface defining all the services for ByteOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
     interface ByteService {
         @GET("/byte/null")
         Response getNull() throws ServiceException;
@@ -50,24 +58,80 @@ public interface ByteOperations {
         void getInvalidAsync(ServiceResponseCallback cb);
 
     }
+    /**
+     * Get null byte value
+     *
+     * @return the byte[] object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     byte[] getNull() throws ServiceException;
 
+    /**
+     * Get null byte value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getNullAsync(final ServiceCallback<Byte[]> serviceCallback);
 
+    /**
+     * Get empty byte value ''
+     *
+     * @return the byte[] object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     byte[] getEmpty() throws ServiceException;
 
+    /**
+     * Get empty byte value ''
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getEmptyAsync(final ServiceCallback<Byte[]> serviceCallback);
 
+    /**
+     * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
+     *
+     * @return the byte[] object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     byte[] getNonAscii() throws ServiceException;
 
+    /**
+     * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getNonAsciiAsync(final ServiceCallback<Byte[]> serviceCallback);
 
+    /**
+     * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
+     *
+     * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void putNonAscii(byte[] byteBody) throws ServiceException;
 
+    /**
+     * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
+     *
+     * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void putNonAsciiAsync(byte[] byteBody, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get invalid byte value ':::SWAGGER::::'
+     *
+     * @return the byte[] object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     byte[] getInvalid() throws ServiceException;
 
+    /**
+     * Get invalid byte value ':::SWAGGER::::'
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getInvalidAsync(final ServiceCallback<Byte[]> serviceCallback);
 
 }

@@ -28,6 +28,12 @@ public class BasicOperationsImpl implements BasicOperations {
         service = restAdapter.create(BasicService.class);
     }
 
+    /**
+     * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
+     *
+     * @return the Basic object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Basic getValid() throws ServiceException {
         try {
             ServiceResponse<Basic> response = getValidDelegate(service.getValid(), null);
@@ -38,6 +44,11 @@ public class BasicOperationsImpl implements BasicOperations {
         }
     }
 
+    /**
+     * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getValidAsync(final ServiceCallback<Basic> serviceCallback) {
         service.getValidAsync(new ServiceResponseCallback() {
             @Override
@@ -58,6 +69,12 @@ public class BasicOperationsImpl implements BasicOperations {
                 .build(response, error);
     }
 
+    /**
+     * Please put {id: 2, name: 'abc', color: 'Magenta'}
+     *
+     * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putValid(Basic complexBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putValidDelegate(service.putValid(complexBody), null);
@@ -68,6 +85,12 @@ public class BasicOperationsImpl implements BasicOperations {
         }
     }
 
+    /**
+     * Please put {id: 2, name: 'abc', color: 'Magenta'}
+     *
+     * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putValidAsync(Basic complexBody, final ServiceCallback<Void> serviceCallback) {
         service.putValidAsync(complexBody, new ServiceResponseCallback() {
             @Override
@@ -88,6 +111,12 @@ public class BasicOperationsImpl implements BasicOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get a basic complex type that is invalid for the local strong type
+     *
+     * @return the Basic object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Basic getInvalid() throws ServiceException {
         try {
             ServiceResponse<Basic> response = getInvalidDelegate(service.getInvalid(), null);
@@ -98,6 +127,11 @@ public class BasicOperationsImpl implements BasicOperations {
         }
     }
 
+    /**
+     * Get a basic complex type that is invalid for the local strong type
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getInvalidAsync(final ServiceCallback<Basic> serviceCallback) {
         service.getInvalidAsync(new ServiceResponseCallback() {
             @Override
@@ -118,6 +152,12 @@ public class BasicOperationsImpl implements BasicOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get a basic complex type that is empty
+     *
+     * @return the Basic object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Basic getEmpty() throws ServiceException {
         try {
             ServiceResponse<Basic> response = getEmptyDelegate(service.getEmpty(), null);
@@ -128,6 +168,11 @@ public class BasicOperationsImpl implements BasicOperations {
         }
     }
 
+    /**
+     * Get a basic complex type that is empty
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getEmptyAsync(final ServiceCallback<Basic> serviceCallback) {
         service.getEmptyAsync(new ServiceResponseCallback() {
             @Override
@@ -148,6 +193,12 @@ public class BasicOperationsImpl implements BasicOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get a basic complex type whose properties are null
+     *
+     * @return the Basic object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Basic getNull() throws ServiceException {
         try {
             ServiceResponse<Basic> response = getNullDelegate(service.getNull(), null);
@@ -158,6 +209,11 @@ public class BasicOperationsImpl implements BasicOperations {
         }
     }
 
+    /**
+     * Get a basic complex type whose properties are null
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getNullAsync(final ServiceCallback<Basic> serviceCallback) {
         service.getNullAsync(new ServiceResponseCallback() {
             @Override
@@ -178,6 +234,13 @@ public class BasicOperationsImpl implements BasicOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get a basic complex type while the server doesn't provide a response
+     * payload
+     *
+     * @return the Basic object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Basic getNotProvided() throws ServiceException {
         try {
             ServiceResponse<Basic> response = getNotProvidedDelegate(service.getNotProvided(), null);
@@ -188,6 +251,12 @@ public class BasicOperationsImpl implements BasicOperations {
         }
     }
 
+    /**
+     * Get a basic complex type while the server doesn't provide a response
+     * payload
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getNotProvidedAsync(final ServiceCallback<Basic> serviceCallback) {
         service.getNotProvidedAsync(new ServiceResponseCallback() {
             @Override

@@ -15,12 +15,25 @@ import org.apache.commons.lang3.ArrayUtils;
  * 
  */
 public class Sawshark {
+    /*
+     * 
+     */
     private byte[] Picture;
 
+    /*
+     * Get 
+     *
+     * @return the Picture value
+     */ 
     public byte[] getPicture() {
         return this.Picture;
     }
 
+    /*
+     * Set 
+     *
+     * @param the Picture value to set
+     */
     public void setPicture(byte[] Picture) {
         this.Picture = Picture;
     }

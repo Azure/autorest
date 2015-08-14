@@ -27,6 +27,13 @@ public class ImplicitImpl implements Implicit {
         service = restAdapter.create(ImplicitService.class);
     }
 
+    /**
+     * Test implicitly required path parameter
+     *
+     * @param pathParameter the String value
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Error getRequiredPath(String pathParameter) throws ServiceException {
         try {
             ServiceResponse<Error> response = getRequiredPathDelegate(service.getRequiredPath(pathParameter), null);
@@ -37,6 +44,12 @@ public class ImplicitImpl implements Implicit {
         }
     }
 
+    /**
+     * Test implicitly required path parameter
+     *
+     * @param pathParameter the String value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getRequiredPathAsync(String pathParameter, final ServiceCallback<Error> serviceCallback) {
         service.getRequiredPathAsync(pathParameter, new ServiceResponseCallback() {
             @Override
@@ -56,6 +69,12 @@ public class ImplicitImpl implements Implicit {
                 .build(response, error);
     }
 
+    /**
+     * Test implicitly optional query parameter
+     *
+     * @param queryParameter the String value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putOptionalQuery(String queryParameter) throws ServiceException {
         try {
             ServiceResponse<Void> response = putOptionalQueryDelegate(service.putOptionalQuery(queryParameter), null);
@@ -66,6 +85,12 @@ public class ImplicitImpl implements Implicit {
         }
     }
 
+    /**
+     * Test implicitly optional query parameter
+     *
+     * @param queryParameter the String value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putOptionalQueryAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) {
         service.putOptionalQueryAsync(queryParameter, new ServiceResponseCallback() {
             @Override
@@ -86,6 +111,12 @@ public class ImplicitImpl implements Implicit {
                 .build(response, error);
     }
 
+    /**
+     * Test implicitly optional header parameter
+     *
+     * @param queryParameter the String value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putOptionalHeader(String queryParameter) throws ServiceException {
         try {
             ServiceResponse<Void> response = putOptionalHeaderDelegate(service.putOptionalHeader(queryParameter), null);
@@ -96,6 +127,12 @@ public class ImplicitImpl implements Implicit {
         }
     }
 
+    /**
+     * Test implicitly optional header parameter
+     *
+     * @param queryParameter the String value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putOptionalHeaderAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) {
         service.putOptionalHeaderAsync(queryParameter, new ServiceResponseCallback() {
             @Override
@@ -116,6 +153,12 @@ public class ImplicitImpl implements Implicit {
                 .build(response, error);
     }
 
+    /**
+     * Test implicitly optional body parameter
+     *
+     * @param bodyParameter the String value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putOptionalBody(String bodyParameter) throws ServiceException {
         try {
             ServiceResponse<Void> response = putOptionalBodyDelegate(service.putOptionalBody(bodyParameter), null);
@@ -126,6 +169,12 @@ public class ImplicitImpl implements Implicit {
         }
     }
 
+    /**
+     * Test implicitly optional body parameter
+     *
+     * @param bodyParameter the String value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putOptionalBodyAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
         service.putOptionalBodyAsync(bodyParameter, new ServiceResponseCallback() {
             @Override
@@ -146,6 +195,12 @@ public class ImplicitImpl implements Implicit {
                 .build(response, error);
     }
 
+    /**
+     * Test implicitly required path parameter
+     *
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Error getRequiredGlobalPath() throws ServiceException {
         try {
             ServiceResponse<Error> response = getRequiredGlobalPathDelegate(service.getRequiredGlobalPath(), null);
@@ -156,6 +211,11 @@ public class ImplicitImpl implements Implicit {
         }
     }
 
+    /**
+     * Test implicitly required path parameter
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getRequiredGlobalPathAsync(final ServiceCallback<Error> serviceCallback) {
         service.getRequiredGlobalPathAsync(new ServiceResponseCallback() {
             @Override
@@ -175,6 +235,12 @@ public class ImplicitImpl implements Implicit {
                 .build(response, error);
     }
 
+    /**
+     * Test implicitly required query parameter
+     *
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Error getRequiredGlobalQuery() throws ServiceException {
         try {
             ServiceResponse<Error> response = getRequiredGlobalQueryDelegate(service.getRequiredGlobalQuery(), null);
@@ -185,6 +251,11 @@ public class ImplicitImpl implements Implicit {
         }
     }
 
+    /**
+     * Test implicitly required query parameter
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getRequiredGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
         service.getRequiredGlobalQueryAsync(new ServiceResponseCallback() {
             @Override
@@ -204,6 +275,12 @@ public class ImplicitImpl implements Implicit {
                 .build(response, error);
     }
 
+    /**
+     * Test implicitly optional query parameter
+     *
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Error getOptionalGlobalQuery() throws ServiceException {
         try {
             ServiceResponse<Error> response = getOptionalGlobalQueryDelegate(service.getOptionalGlobalQuery(), null);
@@ -214,6 +291,11 @@ public class ImplicitImpl implements Implicit {
         }
     }
 
+    /**
+     * Test implicitly optional query parameter
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getOptionalGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
         service.getOptionalGlobalQueryAsync(new ServiceResponseCallback() {
             @Override

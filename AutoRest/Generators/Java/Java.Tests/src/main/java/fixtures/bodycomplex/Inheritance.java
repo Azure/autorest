@@ -18,7 +18,15 @@ import retrofit.http.GET;
 import retrofit.http.PUT;
 import retrofit.http.Body;
 
+/**
+ * An instance of this class provides access to all the operations defined
+ * in Inheritance.
+ */
 public interface Inheritance {
+    /**
+     * The interface defining all the services for Inheritance to be
+     * used by Retrofit to perform actually REST calls.
+     */
     interface InheritanceService {
         @GET("/complex/inheritance/valid")
         Response getValid() throws ServiceException;
@@ -33,12 +41,35 @@ public interface Inheritance {
         void putValidAsync(@Body Siamese complexBody, ServiceResponseCallback cb);
 
     }
+    /**
+     * Get complex types that extend others
+     *
+     * @return the Siamese object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Siamese getValid() throws ServiceException;
 
+    /**
+     * Get complex types that extend others
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getValidAsync(final ServiceCallback<Siamese> serviceCallback);
 
+    /**
+     * Put complex types that extend others
+     *
+     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void putValid(Siamese complexBody) throws ServiceException;
 
+    /**
+     * Put complex types that extend others
+     *
+     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void putValidAsync(Siamese complexBody, final ServiceCallback<Void> serviceCallback);
 
 }

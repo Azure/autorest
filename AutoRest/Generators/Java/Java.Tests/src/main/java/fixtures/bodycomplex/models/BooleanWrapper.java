@@ -14,22 +14,48 @@ package fixtures.bodycomplex.models;
  * 
  */
 public class BooleanWrapper {
+    /*
+     * 
+     */
     private boolean FieldTrue;
 
+    /*
+     * 
+     */
     private boolean FieldFalse;
 
+    /*
+     * Get 
+     *
+     * @return the FieldTrue value
+     */ 
     public boolean getFieldTrue() {
         return this.FieldTrue;
     }
 
+    /*
+     * Set 
+     *
+     * @param the FieldTrue value to set
+     */
     public void setFieldTrue(boolean FieldTrue) {
         this.FieldTrue = FieldTrue;
     }
 
+    /*
+     * Get 
+     *
+     * @return the FieldFalse value
+     */ 
     public boolean getFieldFalse() {
         return this.FieldFalse;
     }
 
+    /*
+     * Set 
+     *
+     * @param the FieldFalse value to set
+     */
     public void setFieldFalse(boolean FieldFalse) {
         this.FieldFalse = FieldFalse;
     }

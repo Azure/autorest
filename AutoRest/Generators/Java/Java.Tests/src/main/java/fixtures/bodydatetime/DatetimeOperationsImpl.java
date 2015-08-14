@@ -28,6 +28,12 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
         service = restAdapter.create(DatetimeService.class);
     }
 
+    /**
+     * Get null datetime value
+     *
+     * @return the Date object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Date getNull() throws ServiceException {
         try {
             ServiceResponse<Date> response = getNullDelegate(service.getNull(), null);
@@ -38,6 +44,11 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
         }
     }
 
+    /**
+     * Get null datetime value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getNullAsync(final ServiceCallback<Date> serviceCallback) {
         service.getNullAsync(new ServiceResponseCallback() {
             @Override
@@ -58,6 +69,12 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get invalid datetime value
+     *
+     * @return the Date object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Date getInvalid() throws ServiceException {
         try {
             ServiceResponse<Date> response = getInvalidDelegate(service.getInvalid(), null);
@@ -68,6 +85,11 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
         }
     }
 
+    /**
+     * Get invalid datetime value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getInvalidAsync(final ServiceCallback<Date> serviceCallback) {
         service.getInvalidAsync(new ServiceResponseCallback() {
             @Override
@@ -88,6 +110,12 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get overflow datetime value
+     *
+     * @return the Date object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Date getOverflow() throws ServiceException {
         try {
             ServiceResponse<Date> response = getOverflowDelegate(service.getOverflow(), null);
@@ -98,6 +126,11 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
         }
     }
 
+    /**
+     * Get overflow datetime value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getOverflowAsync(final ServiceCallback<Date> serviceCallback) {
         service.getOverflowAsync(new ServiceResponseCallback() {
             @Override
@@ -118,6 +151,12 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get underflow datetime value
+     *
+     * @return the Date object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Date getUnderflow() throws ServiceException {
         try {
             ServiceResponse<Date> response = getUnderflowDelegate(service.getUnderflow(), null);
@@ -128,6 +167,11 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
         }
     }
 
+    /**
+     * Get underflow datetime value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getUnderflowAsync(final ServiceCallback<Date> serviceCallback) {
         service.getUnderflowAsync(new ServiceResponseCallback() {
             @Override
@@ -148,6 +192,12 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
                 .build(response, error);
     }
 
+    /**
+     * Put max datetime value 9999-12-31T23:59:59.9999999Z
+     *
+     * @param datetimeBody the Date value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putUtcMaxDateTime(Date datetimeBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putUtcMaxDateTimeDelegate(service.putUtcMaxDateTime(datetimeBody), null);
@@ -158,6 +208,12 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
         }
     }
 
+    /**
+     * Put max datetime value 9999-12-31T23:59:59.9999999Z
+     *
+     * @param datetimeBody the Date value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putUtcMaxDateTimeAsync(Date datetimeBody, final ServiceCallback<Void> serviceCallback) {
         service.putUtcMaxDateTimeAsync(datetimeBody, new ServiceResponseCallback() {
             @Override
@@ -178,6 +234,12 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get max datetime value 9999-12-31t23:59:59.9999999z
+     *
+     * @return the Date object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Date getUtcLowercaseMaxDateTime() throws ServiceException {
         try {
             ServiceResponse<Date> response = getUtcLowercaseMaxDateTimeDelegate(service.getUtcLowercaseMaxDateTime(), null);
@@ -188,6 +250,11 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
         }
     }
 
+    /**
+     * Get max datetime value 9999-12-31t23:59:59.9999999z
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<Date> serviceCallback) {
         service.getUtcLowercaseMaxDateTimeAsync(new ServiceResponseCallback() {
             @Override
@@ -208,6 +275,12 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get max datetime value 9999-12-31T23:59:59.9999999Z
+     *
+     * @return the Date object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Date getUtcUppercaseMaxDateTime() throws ServiceException {
         try {
             ServiceResponse<Date> response = getUtcUppercaseMaxDateTimeDelegate(service.getUtcUppercaseMaxDateTime(), null);
@@ -218,6 +291,11 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
         }
     }
 
+    /**
+     * Get max datetime value 9999-12-31T23:59:59.9999999Z
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<Date> serviceCallback) {
         service.getUtcUppercaseMaxDateTimeAsync(new ServiceResponseCallback() {
             @Override
@@ -238,6 +316,13 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
                 .build(response, error);
     }
 
+    /**
+     * Put max datetime value with positive numoffset
+     * 9999-12-31t23:59:59.9999999+14:00
+     *
+     * @param datetimeBody the Date value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putLocalPositiveOffsetMaxDateTime(Date datetimeBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putLocalPositiveOffsetMaxDateTimeDelegate(service.putLocalPositiveOffsetMaxDateTime(datetimeBody), null);
@@ -248,6 +333,13 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
         }
     }
 
+    /**
+     * Put max datetime value with positive numoffset
+     * 9999-12-31t23:59:59.9999999+14:00
+     *
+     * @param datetimeBody the Date value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putLocalPositiveOffsetMaxDateTimeAsync(Date datetimeBody, final ServiceCallback<Void> serviceCallback) {
         service.putLocalPositiveOffsetMaxDateTimeAsync(datetimeBody, new ServiceResponseCallback() {
             @Override
@@ -268,6 +360,13 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get max datetime value with positive num offset
+     * 9999-12-31t23:59:59.9999999+14:00
+     *
+     * @return the Date object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Date getLocalPositiveOffsetLowercaseMaxDateTime() throws ServiceException {
         try {
             ServiceResponse<Date> response = getLocalPositiveOffsetLowercaseMaxDateTimeDelegate(service.getLocalPositiveOffsetLowercaseMaxDateTime(), null);
@@ -278,6 +377,12 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
         }
     }
 
+    /**
+     * Get max datetime value with positive num offset
+     * 9999-12-31t23:59:59.9999999+14:00
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getLocalPositiveOffsetLowercaseMaxDateTimeAsync(final ServiceCallback<Date> serviceCallback) {
         service.getLocalPositiveOffsetLowercaseMaxDateTimeAsync(new ServiceResponseCallback() {
             @Override
@@ -298,6 +403,13 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get max datetime value with positive num offset
+     * 9999-12-31T23:59:59.9999999+14:00
+     *
+     * @return the Date object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Date getLocalPositiveOffsetUppercaseMaxDateTime() throws ServiceException {
         try {
             ServiceResponse<Date> response = getLocalPositiveOffsetUppercaseMaxDateTimeDelegate(service.getLocalPositiveOffsetUppercaseMaxDateTime(), null);
@@ -308,6 +420,12 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
         }
     }
 
+    /**
+     * Get max datetime value with positive num offset
+     * 9999-12-31T23:59:59.9999999+14:00
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getLocalPositiveOffsetUppercaseMaxDateTimeAsync(final ServiceCallback<Date> serviceCallback) {
         service.getLocalPositiveOffsetUppercaseMaxDateTimeAsync(new ServiceResponseCallback() {
             @Override
@@ -328,6 +446,13 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
                 .build(response, error);
     }
 
+    /**
+     * Put max datetime value with positive numoffset
+     * 9999-12-31t23:59:59.9999999-14:00
+     *
+     * @param datetimeBody the Date value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putLocalNegativeOffsetMaxDateTime(Date datetimeBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putLocalNegativeOffsetMaxDateTimeDelegate(service.putLocalNegativeOffsetMaxDateTime(datetimeBody), null);
@@ -338,6 +463,13 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
         }
     }
 
+    /**
+     * Put max datetime value with positive numoffset
+     * 9999-12-31t23:59:59.9999999-14:00
+     *
+     * @param datetimeBody the Date value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putLocalNegativeOffsetMaxDateTimeAsync(Date datetimeBody, final ServiceCallback<Void> serviceCallback) {
         service.putLocalNegativeOffsetMaxDateTimeAsync(datetimeBody, new ServiceResponseCallback() {
             @Override
@@ -358,6 +490,13 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get max datetime value with positive num offset
+     * 9999-12-31T23:59:59.9999999-14:00
+     *
+     * @return the Date object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Date getLocalNegativeOffsetUppercaseMaxDateTime() throws ServiceException {
         try {
             ServiceResponse<Date> response = getLocalNegativeOffsetUppercaseMaxDateTimeDelegate(service.getLocalNegativeOffsetUppercaseMaxDateTime(), null);
@@ -368,6 +507,12 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
         }
     }
 
+    /**
+     * Get max datetime value with positive num offset
+     * 9999-12-31T23:59:59.9999999-14:00
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getLocalNegativeOffsetUppercaseMaxDateTimeAsync(final ServiceCallback<Date> serviceCallback) {
         service.getLocalNegativeOffsetUppercaseMaxDateTimeAsync(new ServiceResponseCallback() {
             @Override
@@ -388,6 +533,13 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get max datetime value with positive num offset
+     * 9999-12-31t23:59:59.9999999-14:00
+     *
+     * @return the Date object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Date getLocalNegativeOffsetLowercaseMaxDateTime() throws ServiceException {
         try {
             ServiceResponse<Date> response = getLocalNegativeOffsetLowercaseMaxDateTimeDelegate(service.getLocalNegativeOffsetLowercaseMaxDateTime(), null);
@@ -398,6 +550,12 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
         }
     }
 
+    /**
+     * Get max datetime value with positive num offset
+     * 9999-12-31t23:59:59.9999999-14:00
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getLocalNegativeOffsetLowercaseMaxDateTimeAsync(final ServiceCallback<Date> serviceCallback) {
         service.getLocalNegativeOffsetLowercaseMaxDateTimeAsync(new ServiceResponseCallback() {
             @Override
@@ -418,6 +576,12 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
                 .build(response, error);
     }
 
+    /**
+     * Put min datetime value 0001-01-01T00:00:00Z
+     *
+     * @param datetimeBody the Date value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putUtcMinDateTime(Date datetimeBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putUtcMinDateTimeDelegate(service.putUtcMinDateTime(datetimeBody), null);
@@ -428,6 +592,12 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
         }
     }
 
+    /**
+     * Put min datetime value 0001-01-01T00:00:00Z
+     *
+     * @param datetimeBody the Date value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putUtcMinDateTimeAsync(Date datetimeBody, final ServiceCallback<Void> serviceCallback) {
         service.putUtcMinDateTimeAsync(datetimeBody, new ServiceResponseCallback() {
             @Override
@@ -448,6 +618,12 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get min datetime value 0001-01-01T00:00:00Z
+     *
+     * @return the Date object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Date getUtcMinDateTime() throws ServiceException {
         try {
             ServiceResponse<Date> response = getUtcMinDateTimeDelegate(service.getUtcMinDateTime(), null);
@@ -458,6 +634,11 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
         }
     }
 
+    /**
+     * Get min datetime value 0001-01-01T00:00:00Z
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getUtcMinDateTimeAsync(final ServiceCallback<Date> serviceCallback) {
         service.getUtcMinDateTimeAsync(new ServiceResponseCallback() {
             @Override
@@ -478,6 +659,12 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
                 .build(response, error);
     }
 
+    /**
+     * Put min datetime value 0001-01-01T00:00:00+14:00
+     *
+     * @param datetimeBody the Date value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putLocalPositiveOffsetMinDateTime(Date datetimeBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putLocalPositiveOffsetMinDateTimeDelegate(service.putLocalPositiveOffsetMinDateTime(datetimeBody), null);
@@ -488,6 +675,12 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
         }
     }
 
+    /**
+     * Put min datetime value 0001-01-01T00:00:00+14:00
+     *
+     * @param datetimeBody the Date value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putLocalPositiveOffsetMinDateTimeAsync(Date datetimeBody, final ServiceCallback<Void> serviceCallback) {
         service.putLocalPositiveOffsetMinDateTimeAsync(datetimeBody, new ServiceResponseCallback() {
             @Override
@@ -508,6 +701,12 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get min datetime value 0001-01-01T00:00:00+14:00
+     *
+     * @return the Date object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Date getLocalPositiveOffsetMinDateTime() throws ServiceException {
         try {
             ServiceResponse<Date> response = getLocalPositiveOffsetMinDateTimeDelegate(service.getLocalPositiveOffsetMinDateTime(), null);
@@ -518,6 +717,11 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
         }
     }
 
+    /**
+     * Get min datetime value 0001-01-01T00:00:00+14:00
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getLocalPositiveOffsetMinDateTimeAsync(final ServiceCallback<Date> serviceCallback) {
         service.getLocalPositiveOffsetMinDateTimeAsync(new ServiceResponseCallback() {
             @Override
@@ -538,6 +742,12 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
                 .build(response, error);
     }
 
+    /**
+     * Put min datetime value 0001-01-01T00:00:00-14:00
+     *
+     * @param datetimeBody the Date value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putLocalNegativeOffsetMinDateTime(Date datetimeBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putLocalNegativeOffsetMinDateTimeDelegate(service.putLocalNegativeOffsetMinDateTime(datetimeBody), null);
@@ -548,6 +758,12 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
         }
     }
 
+    /**
+     * Put min datetime value 0001-01-01T00:00:00-14:00
+     *
+     * @param datetimeBody the Date value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putLocalNegativeOffsetMinDateTimeAsync(Date datetimeBody, final ServiceCallback<Void> serviceCallback) {
         service.putLocalNegativeOffsetMinDateTimeAsync(datetimeBody, new ServiceResponseCallback() {
             @Override
@@ -568,6 +784,12 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get min datetime value 0001-01-01T00:00:00-14:00
+     *
+     * @return the Date object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Date getLocalNegativeOffsetMinDateTime() throws ServiceException {
         try {
             ServiceResponse<Date> response = getLocalNegativeOffsetMinDateTimeDelegate(service.getLocalNegativeOffsetMinDateTime(), null);
@@ -578,6 +800,11 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
         }
     }
 
+    /**
+     * Get min datetime value 0001-01-01T00:00:00-14:00
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getLocalNegativeOffsetMinDateTimeAsync(final ServiceCallback<Date> serviceCallback) {
         service.getLocalNegativeOffsetMinDateTimeAsync(new ServiceResponseCallback() {
             @Override

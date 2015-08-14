@@ -30,7 +30,7 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
     private BasicOperations basicOperations;
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the BasicOperations object to access its operations.
      * @return the basicOperations value.
      */
     public BasicOperations getBasicOperations() {
@@ -40,7 +40,7 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
     private Primitive primitive;
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the Primitive object to access its operations.
      * @return the primitive value.
      */
     public Primitive getPrimitive() {
@@ -50,7 +50,7 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
     private Array array;
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the Array object to access its operations.
      * @return the array value.
      */
     public Array getArray() {
@@ -60,7 +60,7 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
     private Dictionary dictionary;
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the Dictionary object to access its operations.
      * @return the dictionary value.
      */
     public Dictionary getDictionary() {
@@ -70,7 +70,7 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
     private Inheritance inheritance;
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the Inheritance object to access its operations.
      * @return the inheritance value.
      */
     public Inheritance getInheritance() {
@@ -80,7 +80,7 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
     private Polymorphism polymorphism;
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the Polymorphism object to access its operations.
      * @return the polymorphism value.
      */
     public Polymorphism getPolymorphism() {
@@ -90,23 +90,38 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
     private Polymorphicrecursive polymorphicrecursive;
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the Polymorphicrecursive object to access its operations.
      * @return the polymorphicrecursive value.
      */
     public Polymorphicrecursive getPolymorphicrecursive() {
         return this.polymorphicrecursive;
     }
 
+    /**
+     * Initializes an instance of AutoRestComplexTestService client.
+     */
     public AutoRestComplexTestServiceImpl() {
         this("http://localhost");
     }
 
+    /**
+     * Initializes an instance of AutoRestComplexTestService client.
+     *
+     * @param baseUri the base URI of the host
+     */
     public AutoRestComplexTestServiceImpl(String baseUri) {
         super();
         this.baseUri = baseUri;
         initialize();
     }
 
+    /**
+     * Initializes an instance of AutoRestComplexTestService client.
+     *
+     * @param baseUri the base URI of the host
+     * @param client the {@link OkHttpClient} client to use for REST calls
+     * @param restAdapterBuilder the builder for building up a {@link RestAdapter}
+     */
     public AutoRestComplexTestServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
         super(client, restAdapterBuilder);
         this.baseUri = baseUri;

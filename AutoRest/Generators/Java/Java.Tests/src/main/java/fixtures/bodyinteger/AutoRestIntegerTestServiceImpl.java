@@ -30,23 +30,38 @@ public class AutoRestIntegerTestServiceImpl extends ServiceClient implements Aut
     private IntOperations intOperations;
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the IntOperations object to access its operations.
      * @return the intOperations value.
      */
     public IntOperations getIntOperations() {
         return this.intOperations;
     }
 
+    /**
+     * Initializes an instance of AutoRestIntegerTestService client.
+     */
     public AutoRestIntegerTestServiceImpl() {
         this("https://localhost");
     }
 
+    /**
+     * Initializes an instance of AutoRestIntegerTestService client.
+     *
+     * @param baseUri the base URI of the host
+     */
     public AutoRestIntegerTestServiceImpl(String baseUri) {
         super();
         this.baseUri = baseUri;
         initialize();
     }
 
+    /**
+     * Initializes an instance of AutoRestIntegerTestService client.
+     *
+     * @param baseUri the base URI of the host
+     * @param client the {@link OkHttpClient} client to use for REST calls
+     * @param restAdapterBuilder the builder for building up a {@link RestAdapter}
+     */
     public AutoRestIntegerTestServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
         super(client, restAdapterBuilder);
         this.baseUri = baseUri;

@@ -27,6 +27,12 @@ public class HttpFailureImpl implements HttpFailure {
         service = restAdapter.create(HttpFailureService.class);
     }
 
+    /**
+     * Get empty error form server
+     *
+     * @return the boolean object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public boolean getEmptyError() throws ServiceException {
         try {
             ServiceResponse<Boolean> response = getEmptyErrorDelegate(service.getEmptyError(), null);
@@ -37,6 +43,11 @@ public class HttpFailureImpl implements HttpFailure {
         }
     }
 
+    /**
+     * Get empty error form server
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
         service.getEmptyErrorAsync(new ServiceResponseCallback() {
             @Override

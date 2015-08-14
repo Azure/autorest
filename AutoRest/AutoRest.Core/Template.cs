@@ -199,6 +199,7 @@ namespace Microsoft.Rest.Generator
 
             // escape comment as needed
             comment = comment.Replace("\\", Resources.CommentString);
+            comment = comment.EscapeXmlComment();
 
             int available =
                 MaximumCommentColumn - // Maximum desired width

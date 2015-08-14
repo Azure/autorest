@@ -19,7 +19,15 @@ import java.util.List;
 import retrofit.http.GET;
 import retrofit.http.Query;
 
+/**
+ * An instance of this class provides access to all the operations defined
+ * in Queries.
+ */
 public interface Queries {
+    /**
+     * The interface defining all the services for Queries to be
+     * used by Retrofit to perform actually REST calls.
+     */
     interface QueriesService {
         @GET("/queries/bool/true")
         Response getBooleanTrue(@Query("boolQuery") boolean boolQuery) throws ServiceException;
@@ -226,140 +234,556 @@ public interface Queries {
         void arrayStringPipesValidAsync(@Query("arrayQuery") List<String> arrayQuery, ServiceResponseCallback cb);
 
     }
+    /**
+     * Get true Boolean value on path
+     *
+     * @param boolQuery true boolean value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void getBooleanTrue(boolean boolQuery) throws ServiceException;
 
+    /**
+     * Get true Boolean value on path
+     *
+     * @param boolQuery true boolean value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getBooleanTrueAsync(boolean boolQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get false Boolean value on path
+     *
+     * @param boolQuery false boolean value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void getBooleanFalse(boolean boolQuery) throws ServiceException;
 
+    /**
+     * Get false Boolean value on path
+     *
+     * @param boolQuery false boolean value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getBooleanFalseAsync(boolean boolQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get null Boolean value on query (query string should be absent)
+     *
+     * @param boolQuery null boolean value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void getBooleanNull(boolean boolQuery) throws ServiceException;
 
+    /**
+     * Get null Boolean value on query (query string should be absent)
+     *
+     * @param boolQuery null boolean value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getBooleanNullAsync(boolean boolQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get '1000000' integer value
+     *
+     * @param intQuery '1000000' integer value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void getIntOneMillion(int intQuery) throws ServiceException;
 
+    /**
+     * Get '1000000' integer value
+     *
+     * @param intQuery '1000000' integer value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getIntOneMillionAsync(int intQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get '-1000000' integer value
+     *
+     * @param intQuery '-1000000' integer value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void getIntNegativeOneMillion(int intQuery) throws ServiceException;
 
+    /**
+     * Get '-1000000' integer value
+     *
+     * @param intQuery '-1000000' integer value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getIntNegativeOneMillionAsync(int intQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get null integer value (no query parameter)
+     *
+     * @param intQuery null integer value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void getIntNull(int intQuery) throws ServiceException;
 
+    /**
+     * Get null integer value (no query parameter)
+     *
+     * @param intQuery null integer value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getIntNullAsync(int intQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get '10000000000' 64 bit integer value
+     *
+     * @param longQuery '10000000000' 64 bit integer value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void getTenBillion(long longQuery) throws ServiceException;
 
+    /**
+     * Get '10000000000' 64 bit integer value
+     *
+     * @param longQuery '10000000000' 64 bit integer value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getTenBillionAsync(long longQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get '-10000000000' 64 bit integer value
+     *
+     * @param longQuery '-10000000000' 64 bit integer value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void getNegativeTenBillion(long longQuery) throws ServiceException;
 
+    /**
+     * Get '-10000000000' 64 bit integer value
+     *
+     * @param longQuery '-10000000000' 64 bit integer value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getNegativeTenBillionAsync(long longQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get 'null 64 bit integer value (no query param in uri)
+     *
+     * @param longQuery null 64 bit integer value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void getLongNull(long longQuery) throws ServiceException;
 
+    /**
+     * Get 'null 64 bit integer value (no query param in uri)
+     *
+     * @param longQuery null 64 bit integer value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getLongNullAsync(long longQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get '1.034E+20' numeric value
+     *
+     * @param floatQuery '1.034E+20'numeric value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void floatScientificPositive(double floatQuery) throws ServiceException;
 
+    /**
+     * Get '1.034E+20' numeric value
+     *
+     * @param floatQuery '1.034E+20'numeric value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void floatScientificPositiveAsync(double floatQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get '-1.034E-20' numeric value
+     *
+     * @param floatQuery '-1.034E-20'numeric value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void floatScientificNegative(double floatQuery) throws ServiceException;
 
+    /**
+     * Get '-1.034E-20' numeric value
+     *
+     * @param floatQuery '-1.034E-20'numeric value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void floatScientificNegativeAsync(double floatQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get null numeric value (no query parameter)
+     *
+     * @param floatQuery null numeric value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void floatNull(double floatQuery) throws ServiceException;
 
+    /**
+     * Get null numeric value (no query parameter)
+     *
+     * @param floatQuery null numeric value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void floatNullAsync(double floatQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get '9999999.999' numeric value
+     *
+     * @param doubleQuery '9999999.999'numeric value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void doubleDecimalPositive(double doubleQuery) throws ServiceException;
 
+    /**
+     * Get '9999999.999' numeric value
+     *
+     * @param doubleQuery '9999999.999'numeric value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void doubleDecimalPositiveAsync(double doubleQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get '-9999999.999' numeric value
+     *
+     * @param doubleQuery '-9999999.999'numeric value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void doubleDecimalNegative(double doubleQuery) throws ServiceException;
 
+    /**
+     * Get '-9999999.999' numeric value
+     *
+     * @param doubleQuery '-9999999.999'numeric value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void doubleDecimalNegativeAsync(double doubleQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get null numeric value (no query parameter)
+     *
+     * @param doubleQuery null numeric value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void doubleNull(double doubleQuery) throws ServiceException;
 
+    /**
+     * Get null numeric value (no query parameter)
+     *
+     * @param doubleQuery null numeric value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void doubleNullAsync(double doubleQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
+     *
+     * @param stringQuery '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void stringUnicode(String stringQuery) throws ServiceException;
 
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
+     *
+     * @param stringQuery '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void stringUnicodeAsync(String stringQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get 'begin!*'();:@ &amp;=+$,/?#[]end
+     *
+     * @param stringQuery 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void stringUrlEncoded(String stringQuery) throws ServiceException;
 
+    /**
+     * Get 'begin!*'();:@ &amp;=+$,/?#[]end
+     *
+     * @param stringQuery 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void stringUrlEncodedAsync(String stringQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get ''
+     *
+     * @param stringQuery '' string value. Possible values for this parameter include: ''
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void stringEmpty(String stringQuery) throws ServiceException;
 
+    /**
+     * Get ''
+     *
+     * @param stringQuery '' string value. Possible values for this parameter include: ''
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void stringEmptyAsync(String stringQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get null (no query parameter in url)
+     *
+     * @param stringQuery null string value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void stringNull(String stringQuery) throws ServiceException;
 
+    /**
+     * Get null (no query parameter in url)
+     *
+     * @param stringQuery null string value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void stringNullAsync(String stringQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get using uri with query parameter 'green color'
+     *
+     * @param enumQuery 'green color' enum value. Possible values for this parameter include: 'red color', 'green color', 'blue color'
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void enumValid(UriColor enumQuery) throws ServiceException;
 
+    /**
+     * Get using uri with query parameter 'green color'
+     *
+     * @param enumQuery 'green color' enum value. Possible values for this parameter include: 'red color', 'green color', 'blue color'
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void enumValidAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get null (no query parameter in url)
+     *
+     * @param enumQuery null string value. Possible values for this parameter include: 'red color', 'green color', 'blue color'
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void enumNull(UriColor enumQuery) throws ServiceException;
 
+    /**
+     * Get null (no query parameter in url)
+     *
+     * @param enumQuery null string value. Possible values for this parameter include: 'red color', 'green color', 'blue color'
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void enumNullAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+     *
+     * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void byteMultiByte(byte[] byteQuery) throws ServiceException;
 
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+     *
+     * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void byteMultiByteAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get '' as byte array
+     *
+     * @param byteQuery '' as byte array
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void byteEmpty(byte[] byteQuery) throws ServiceException;
 
+    /**
+     * Get '' as byte array
+     *
+     * @param byteQuery '' as byte array
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void byteEmptyAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get null as byte array (no query parameters in uri)
+     *
+     * @param byteQuery null as byte array (no query parameters in uri)
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void byteNull(byte[] byteQuery) throws ServiceException;
 
+    /**
+     * Get null as byte array (no query parameters in uri)
+     *
+     * @param byteQuery null as byte array (no query parameters in uri)
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void byteNullAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get '2012-01-01' as date
+     *
+     * @param dateQuery '2012-01-01' as date
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void dateValid(Date dateQuery) throws ServiceException;
 
+    /**
+     * Get '2012-01-01' as date
+     *
+     * @param dateQuery '2012-01-01' as date
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void dateValidAsync(Date dateQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get null as date - this should result in no query parameters in uri
+     *
+     * @param dateQuery null as date (no query parameters in uri)
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void dateNull(Date dateQuery) throws ServiceException;
 
+    /**
+     * Get null as date - this should result in no query parameters in uri
+     *
+     * @param dateQuery null as date (no query parameters in uri)
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void dateNullAsync(Date dateQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get '2012-01-01T01:01:01Z' as date-time
+     *
+     * @param dateTimeQuery '2012-01-01T01:01:01Z' as date-time
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void dateTimeValid(Date dateTimeQuery) throws ServiceException;
 
+    /**
+     * Get '2012-01-01T01:01:01Z' as date-time
+     *
+     * @param dateTimeQuery '2012-01-01T01:01:01Z' as date-time
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void dateTimeValidAsync(Date dateTimeQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get null as date-time, should result in no query parameters in uri
+     *
+     * @param dateTimeQuery null as date-time (no query parameters)
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void dateTimeNull(Date dateTimeQuery) throws ServiceException;
 
+    /**
+     * Get null as date-time, should result in no query parameters in uri
+     *
+     * @param dateTimeQuery null as date-time (no query parameters)
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void dateTimeNullAsync(Date dateTimeQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@
+     * &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void arrayStringCsvValid(List<String> arrayQuery) throws ServiceException;
 
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@
+     * &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void arrayStringCsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get a null array of string using the csv-array format
+     *
+     * @param arrayQuery a null array of string using the csv-array format
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void arrayStringCsvNull(List<String> arrayQuery) throws ServiceException;
 
+    /**
+     * Get a null array of string using the csv-array format
+     *
+     * @param arrayQuery a null array of string using the csv-array format
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void arrayStringCsvNullAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get an empty array [] of string using the csv-array format
+     *
+     * @param arrayQuery an empty array [] of string using the csv-array format
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void arrayStringCsvEmpty(List<String> arrayQuery) throws ServiceException;
 
+    /**
+     * Get an empty array [] of string using the csv-array format
+     *
+     * @param arrayQuery an empty array [] of string using the csv-array format
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void arrayStringCsvEmptyAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@
+     * &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void arrayStringSsvValid(List<String> arrayQuery) throws ServiceException;
 
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@
+     * &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void arrayStringSsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@
+     * &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void arrayStringTsvValid(List<String> arrayQuery) throws ServiceException;
 
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@
+     * &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void arrayStringTsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@
+     * &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void arrayStringPipesValid(List<String> arrayQuery) throws ServiceException;
 
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@
+     * &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void arrayStringPipesValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
 
 }

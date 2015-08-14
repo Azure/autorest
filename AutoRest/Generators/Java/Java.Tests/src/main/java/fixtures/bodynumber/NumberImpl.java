@@ -27,6 +27,12 @@ public class NumberImpl implements Number {
         service = restAdapter.create(NumberService.class);
     }
 
+    /**
+     * Get null Number value
+     *
+     * @return the double object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public double getNull() throws ServiceException {
         try {
             ServiceResponse<Double> response = getNullDelegate(service.getNull(), null);
@@ -37,6 +43,11 @@ public class NumberImpl implements Number {
         }
     }
 
+    /**
+     * Get null Number value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getNullAsync(final ServiceCallback<Double> serviceCallback) {
         service.getNullAsync(new ServiceResponseCallback() {
             @Override
@@ -57,6 +68,12 @@ public class NumberImpl implements Number {
                 .build(response, error);
     }
 
+    /**
+     * Get invalid float Number value
+     *
+     * @return the double object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public double getInvalidFloat() throws ServiceException {
         try {
             ServiceResponse<Double> response = getInvalidFloatDelegate(service.getInvalidFloat(), null);
@@ -67,6 +84,11 @@ public class NumberImpl implements Number {
         }
     }
 
+    /**
+     * Get invalid float Number value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getInvalidFloatAsync(final ServiceCallback<Double> serviceCallback) {
         service.getInvalidFloatAsync(new ServiceResponseCallback() {
             @Override
@@ -87,6 +109,12 @@ public class NumberImpl implements Number {
                 .build(response, error);
     }
 
+    /**
+     * Get invalid double Number value
+     *
+     * @return the double object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public double getInvalidDouble() throws ServiceException {
         try {
             ServiceResponse<Double> response = getInvalidDoubleDelegate(service.getInvalidDouble(), null);
@@ -97,6 +125,11 @@ public class NumberImpl implements Number {
         }
     }
 
+    /**
+     * Get invalid double Number value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getInvalidDoubleAsync(final ServiceCallback<Double> serviceCallback) {
         service.getInvalidDoubleAsync(new ServiceResponseCallback() {
             @Override
@@ -117,6 +150,12 @@ public class NumberImpl implements Number {
                 .build(response, error);
     }
 
+    /**
+     * Put big float value 3.402823e+20
+     *
+     * @param numberBody the double value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putBigFloat(double numberBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putBigFloatDelegate(service.putBigFloat(numberBody), null);
@@ -127,6 +166,12 @@ public class NumberImpl implements Number {
         }
     }
 
+    /**
+     * Put big float value 3.402823e+20
+     *
+     * @param numberBody the double value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putBigFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
         service.putBigFloatAsync(numberBody, new ServiceResponseCallback() {
             @Override
@@ -147,6 +192,12 @@ public class NumberImpl implements Number {
                 .build(response, error);
     }
 
+    /**
+     * Get big float value 3.402823e+20
+     *
+     * @return the double object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public double getBigFloat() throws ServiceException {
         try {
             ServiceResponse<Double> response = getBigFloatDelegate(service.getBigFloat(), null);
@@ -157,6 +208,11 @@ public class NumberImpl implements Number {
         }
     }
 
+    /**
+     * Get big float value 3.402823e+20
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getBigFloatAsync(final ServiceCallback<Double> serviceCallback) {
         service.getBigFloatAsync(new ServiceResponseCallback() {
             @Override
@@ -177,6 +233,12 @@ public class NumberImpl implements Number {
                 .build(response, error);
     }
 
+    /**
+     * Put big double value 2.5976931e+101
+     *
+     * @param numberBody the double value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putBigDouble(double numberBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putBigDoubleDelegate(service.putBigDouble(numberBody), null);
@@ -187,6 +249,12 @@ public class NumberImpl implements Number {
         }
     }
 
+    /**
+     * Put big double value 2.5976931e+101
+     *
+     * @param numberBody the double value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putBigDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
         service.putBigDoubleAsync(numberBody, new ServiceResponseCallback() {
             @Override
@@ -207,6 +275,12 @@ public class NumberImpl implements Number {
                 .build(response, error);
     }
 
+    /**
+     * Get big double value 2.5976931e+101
+     *
+     * @return the double object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public double getBigDouble() throws ServiceException {
         try {
             ServiceResponse<Double> response = getBigDoubleDelegate(service.getBigDouble(), null);
@@ -217,6 +291,11 @@ public class NumberImpl implements Number {
         }
     }
 
+    /**
+     * Get big double value 2.5976931e+101
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getBigDoubleAsync(final ServiceCallback<Double> serviceCallback) {
         service.getBigDoubleAsync(new ServiceResponseCallback() {
             @Override
@@ -237,6 +316,12 @@ public class NumberImpl implements Number {
                 .build(response, error);
     }
 
+    /**
+     * Put big double value 99999999.99
+     *
+     * @param numberBody the double value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putBigDoublePositiveDecimal(double numberBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putBigDoublePositiveDecimalDelegate(service.putBigDoublePositiveDecimal(numberBody), null);
@@ -247,6 +332,12 @@ public class NumberImpl implements Number {
         }
     }
 
+    /**
+     * Put big double value 99999999.99
+     *
+     * @param numberBody the double value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putBigDoublePositiveDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
         service.putBigDoublePositiveDecimalAsync(numberBody, new ServiceResponseCallback() {
             @Override
@@ -267,6 +358,12 @@ public class NumberImpl implements Number {
                 .build(response, error);
     }
 
+    /**
+     * Get big double value 99999999.99
+     *
+     * @return the double object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public double getBigDoublePositiveDecimal() throws ServiceException {
         try {
             ServiceResponse<Double> response = getBigDoublePositiveDecimalDelegate(service.getBigDoublePositiveDecimal(), null);
@@ -277,6 +374,11 @@ public class NumberImpl implements Number {
         }
     }
 
+    /**
+     * Get big double value 99999999.99
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getBigDoublePositiveDecimalAsync(final ServiceCallback<Double> serviceCallback) {
         service.getBigDoublePositiveDecimalAsync(new ServiceResponseCallback() {
             @Override
@@ -297,6 +399,12 @@ public class NumberImpl implements Number {
                 .build(response, error);
     }
 
+    /**
+     * Put big double value -99999999.99
+     *
+     * @param numberBody the double value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putBigDoubleNegativeDecimal(double numberBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putBigDoubleNegativeDecimalDelegate(service.putBigDoubleNegativeDecimal(numberBody), null);
@@ -307,6 +415,12 @@ public class NumberImpl implements Number {
         }
     }
 
+    /**
+     * Put big double value -99999999.99
+     *
+     * @param numberBody the double value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putBigDoubleNegativeDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
         service.putBigDoubleNegativeDecimalAsync(numberBody, new ServiceResponseCallback() {
             @Override
@@ -327,6 +441,12 @@ public class NumberImpl implements Number {
                 .build(response, error);
     }
 
+    /**
+     * Get big double value -99999999.99
+     *
+     * @return the double object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public double getBigDoubleNegativeDecimal() throws ServiceException {
         try {
             ServiceResponse<Double> response = getBigDoubleNegativeDecimalDelegate(service.getBigDoubleNegativeDecimal(), null);
@@ -337,6 +457,11 @@ public class NumberImpl implements Number {
         }
     }
 
+    /**
+     * Get big double value -99999999.99
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getBigDoubleNegativeDecimalAsync(final ServiceCallback<Double> serviceCallback) {
         service.getBigDoubleNegativeDecimalAsync(new ServiceResponseCallback() {
             @Override
@@ -357,6 +482,12 @@ public class NumberImpl implements Number {
                 .build(response, error);
     }
 
+    /**
+     * Put small float value 3.402823e-20
+     *
+     * @param numberBody the double value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putSmallFloat(double numberBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putSmallFloatDelegate(service.putSmallFloat(numberBody), null);
@@ -367,6 +498,12 @@ public class NumberImpl implements Number {
         }
     }
 
+    /**
+     * Put small float value 3.402823e-20
+     *
+     * @param numberBody the double value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putSmallFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
         service.putSmallFloatAsync(numberBody, new ServiceResponseCallback() {
             @Override
@@ -387,6 +524,12 @@ public class NumberImpl implements Number {
                 .build(response, error);
     }
 
+    /**
+     * Get big double value 3.402823e-20
+     *
+     * @return the double object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public double getSmallFloat() throws ServiceException {
         try {
             ServiceResponse<Double> response = getSmallFloatDelegate(service.getSmallFloat(), null);
@@ -397,6 +540,11 @@ public class NumberImpl implements Number {
         }
     }
 
+    /**
+     * Get big double value 3.402823e-20
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getSmallFloatAsync(final ServiceCallback<Double> serviceCallback) {
         service.getSmallFloatAsync(new ServiceResponseCallback() {
             @Override
@@ -417,6 +565,12 @@ public class NumberImpl implements Number {
                 .build(response, error);
     }
 
+    /**
+     * Put small double value 2.5976931e-101
+     *
+     * @param numberBody the double value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putSmallDouble(double numberBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putSmallDoubleDelegate(service.putSmallDouble(numberBody), null);
@@ -427,6 +581,12 @@ public class NumberImpl implements Number {
         }
     }
 
+    /**
+     * Put small double value 2.5976931e-101
+     *
+     * @param numberBody the double value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putSmallDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
         service.putSmallDoubleAsync(numberBody, new ServiceResponseCallback() {
             @Override
@@ -447,6 +607,12 @@ public class NumberImpl implements Number {
                 .build(response, error);
     }
 
+    /**
+     * Get big double value 2.5976931e-101
+     *
+     * @return the double object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public double getSmallDouble() throws ServiceException {
         try {
             ServiceResponse<Double> response = getSmallDoubleDelegate(service.getSmallDouble(), null);
@@ -457,6 +623,11 @@ public class NumberImpl implements Number {
         }
     }
 
+    /**
+     * Get big double value 2.5976931e-101
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getSmallDoubleAsync(final ServiceCallback<Double> serviceCallback) {
         service.getSmallDoubleAsync(new ServiceResponseCallback() {
             @Override

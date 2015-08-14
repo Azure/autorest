@@ -15,12 +15,25 @@ import org.apache.commons.lang3.ArrayUtils;
  * 
  */
 public class ByteWrapper {
+    /*
+     * 
+     */
     private byte[] Field;
 
+    /*
+     * Get 
+     *
+     * @return the Field value
+     */ 
     public byte[] getField() {
         return this.Field;
     }
 
+    /*
+     * Set 
+     *
+     * @param the Field value to set
+     */
     public void setField(byte[] Field) {
         this.Field = Field;
     }

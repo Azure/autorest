@@ -12,9 +12,6 @@ package @(Settings.Namespace.ToLower());
 import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
 import retrofit.RestAdapter;
-@foreach (var importClass in Model.Imports) {
-@:import @importClass;
-}
 @EmptyLine
 
 /**
@@ -38,6 +35,7 @@ public class @(Model.Name)Impl extends ServiceClient implements @Model.Name {
 @EmptyLine
 @:    /**
 @:     * @(param.Documentation)
+@:     *
 @:     * @@return the @(param.Name) value.
 @:     */
 @:    public @(param.Type) get@(param.Name.ToPascalCase())() {
@@ -51,7 +49,7 @@ public class @(Model.Name)Impl extends ServiceClient implements @Model.Name {
 @:    private @(operation.MethodGroupType) @(operation.MethodGroupName.ToCamelCase());
 @EmptyLine
 @:    /**
-@:     * @(operation.Documentation)
+@:     * Gets the @(operation.MethodGroupType) object to access its operations.
 @:     * @@return the @(operation.MethodGroupName) value.
 @:     */
 @:    public @(operation.MethodGroupType) get@(operation.MethodGroupName.ToPascalCase())() {
@@ -59,16 +57,31 @@ public class @(Model.Name)Impl extends ServiceClient implements @Model.Name {
 @:    }
 }
 @EmptyLine
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     */
     public @(Model.Name)Impl() {
         this("@Model.BaseUrl");
     }
 @EmptyLine
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     *
+     * @@param baseUri the base URI of the host
+     */
     public @(Model.Name)Impl(String baseUri) {
         super();
         this.baseUri = baseUri;
         initialize();
     }
 @EmptyLine
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     *
+     * @@param baseUri the base URI of the host
+     * @@param client the {@@link OkHttpClient} client to use for REST calls
+     * @@param restAdapterBuilder the builder for building up a {@@link RestAdapter}
+     */
     public @(Model.Name)Impl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
         super(client, restAdapterBuilder);
         this.baseUri = baseUri;

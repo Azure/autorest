@@ -14,12 +14,25 @@ package fixtures.http.models;
  * 
  */
 public class B {
+    /*
+     * 
+     */
     private String TextStatusCode;
 
+    /*
+     * Get 
+     *
+     * @return the TextStatusCode value
+     */ 
     public String getTextStatusCode() {
         return this.TextStatusCode;
     }
 
+    /*
+     * Set 
+     *
+     * @param the TextStatusCode value to set
+     */
     public void setTextStatusCode(String TextStatusCode) {
         this.TextStatusCode = TextStatusCode;
     }

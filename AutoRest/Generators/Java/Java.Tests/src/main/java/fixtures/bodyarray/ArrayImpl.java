@@ -31,6 +31,12 @@ public class ArrayImpl implements Array {
         service = restAdapter.create(ArrayService.class);
     }
 
+    /**
+     * Get null array value
+     *
+     * @return the List&lt;Integer&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Integer> getNull() throws ServiceException {
         try {
             ServiceResponse<List<Integer>> response = getNullDelegate(service.getNull(), null);
@@ -41,6 +47,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get null array value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getNullAsync(final ServiceCallback<List<Integer>> serviceCallback) {
         service.getNullAsync(new ServiceResponseCallback() {
             @Override
@@ -61,6 +72,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get invalid array [1, 2, 3
+     *
+     * @return the List&lt;Integer&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Integer> getInvalid() throws ServiceException {
         try {
             ServiceResponse<List<Integer>> response = getInvalidDelegate(service.getInvalid(), null);
@@ -71,6 +88,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get invalid array [1, 2, 3
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getInvalidAsync(final ServiceCallback<List<Integer>> serviceCallback) {
         service.getInvalidAsync(new ServiceResponseCallback() {
             @Override
@@ -91,6 +113,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get empty array value []
+     *
+     * @return the List&lt;Integer&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Integer> getEmpty() throws ServiceException {
         try {
             ServiceResponse<List<Integer>> response = getEmptyDelegate(service.getEmpty(), null);
@@ -101,6 +129,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get empty array value []
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getEmptyAsync(final ServiceCallback<List<Integer>> serviceCallback) {
         service.getEmptyAsync(new ServiceResponseCallback() {
             @Override
@@ -121,6 +154,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Set array value empty []
+     *
+     * @param arrayBody the List&lt;String&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putEmpty(List<String> arrayBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putEmptyDelegate(service.putEmpty(arrayBody), null);
@@ -131,6 +170,12 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Set array value empty []
+     *
+     * @param arrayBody the List&lt;String&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putEmptyAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) {
         service.putEmptyAsync(arrayBody, new ServiceResponseCallback() {
             @Override
@@ -151,6 +196,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get boolean array value [true, false, false, true]
+     *
+     * @return the List&lt;Boolean&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Boolean> getBooleanTfft() throws ServiceException {
         try {
             ServiceResponse<List<Boolean>> response = getBooleanTfftDelegate(service.getBooleanTfft(), null);
@@ -161,6 +212,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get boolean array value [true, false, false, true]
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getBooleanTfftAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
         service.getBooleanTfftAsync(new ServiceResponseCallback() {
             @Override
@@ -181,6 +237,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Set array value empty [true, false, false, true]
+     *
+     * @param arrayBody the List&lt;Boolean&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putBooleanTfft(List<Boolean> arrayBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putBooleanTfftDelegate(service.putBooleanTfft(arrayBody), null);
@@ -191,6 +253,12 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Set array value empty [true, false, false, true]
+     *
+     * @param arrayBody the List&lt;Boolean&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putBooleanTfftAsync(List<Boolean> arrayBody, final ServiceCallback<Void> serviceCallback) {
         service.putBooleanTfftAsync(arrayBody, new ServiceResponseCallback() {
             @Override
@@ -211,6 +279,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get boolean array value [true, null, false]
+     *
+     * @return the List&lt;Boolean&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Boolean> getBooleanInvalidNull() throws ServiceException {
         try {
             ServiceResponse<List<Boolean>> response = getBooleanInvalidNullDelegate(service.getBooleanInvalidNull(), null);
@@ -221,6 +295,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get boolean array value [true, null, false]
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getBooleanInvalidNullAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
         service.getBooleanInvalidNullAsync(new ServiceResponseCallback() {
             @Override
@@ -241,6 +320,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get boolean array value [true, 'boolean', false]
+     *
+     * @return the List&lt;Boolean&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Boolean> getBooleanInvalidString() throws ServiceException {
         try {
             ServiceResponse<List<Boolean>> response = getBooleanInvalidStringDelegate(service.getBooleanInvalidString(), null);
@@ -251,6 +336,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get boolean array value [true, 'boolean', false]
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getBooleanInvalidStringAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
         service.getBooleanInvalidStringAsync(new ServiceResponseCallback() {
             @Override
@@ -271,6 +361,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get integer array value [1, -1, 3, 300]
+     *
+     * @return the List&lt;Integer&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Integer> getIntegerValid() throws ServiceException {
         try {
             ServiceResponse<List<Integer>> response = getIntegerValidDelegate(service.getIntegerValid(), null);
@@ -281,6 +377,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get integer array value [1, -1, 3, 300]
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getIntegerValidAsync(final ServiceCallback<List<Integer>> serviceCallback) {
         service.getIntegerValidAsync(new ServiceResponseCallback() {
             @Override
@@ -301,6 +402,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Set array value empty [1, -1, 3, 300]
+     *
+     * @param arrayBody the List&lt;Integer&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putIntegerValid(List<Integer> arrayBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putIntegerValidDelegate(service.putIntegerValid(arrayBody), null);
@@ -311,6 +418,12 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Set array value empty [1, -1, 3, 300]
+     *
+     * @param arrayBody the List&lt;Integer&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putIntegerValidAsync(List<Integer> arrayBody, final ServiceCallback<Void> serviceCallback) {
         service.putIntegerValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
@@ -331,6 +444,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get integer array value [1, null, 0]
+     *
+     * @return the List&lt;Integer&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Integer> getIntInvalidNull() throws ServiceException {
         try {
             ServiceResponse<List<Integer>> response = getIntInvalidNullDelegate(service.getIntInvalidNull(), null);
@@ -341,6 +460,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get integer array value [1, null, 0]
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getIntInvalidNullAsync(final ServiceCallback<List<Integer>> serviceCallback) {
         service.getIntInvalidNullAsync(new ServiceResponseCallback() {
             @Override
@@ -361,6 +485,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get integer array value [1, 'integer', 0]
+     *
+     * @return the List&lt;Integer&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Integer> getIntInvalidString() throws ServiceException {
         try {
             ServiceResponse<List<Integer>> response = getIntInvalidStringDelegate(service.getIntInvalidString(), null);
@@ -371,6 +501,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get integer array value [1, 'integer', 0]
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getIntInvalidStringAsync(final ServiceCallback<List<Integer>> serviceCallback) {
         service.getIntInvalidStringAsync(new ServiceResponseCallback() {
             @Override
@@ -391,6 +526,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get integer array value [1, -1, 3, 300]
+     *
+     * @return the List&lt;Long&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Long> getLongValid() throws ServiceException {
         try {
             ServiceResponse<List<Long>> response = getLongValidDelegate(service.getLongValid(), null);
@@ -401,6 +542,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get integer array value [1, -1, 3, 300]
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getLongValidAsync(final ServiceCallback<List<Long>> serviceCallback) {
         service.getLongValidAsync(new ServiceResponseCallback() {
             @Override
@@ -421,6 +567,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Set array value empty [1, -1, 3, 300]
+     *
+     * @param arrayBody the List&lt;Long&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putLongValid(List<Long> arrayBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putLongValidDelegate(service.putLongValid(arrayBody), null);
@@ -431,6 +583,12 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Set array value empty [1, -1, 3, 300]
+     *
+     * @param arrayBody the List&lt;Long&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putLongValidAsync(List<Long> arrayBody, final ServiceCallback<Void> serviceCallback) {
         service.putLongValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
@@ -451,6 +609,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get long array value [1, null, 0]
+     *
+     * @return the List&lt;Long&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Long> getLongInvalidNull() throws ServiceException {
         try {
             ServiceResponse<List<Long>> response = getLongInvalidNullDelegate(service.getLongInvalidNull(), null);
@@ -461,6 +625,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get long array value [1, null, 0]
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getLongInvalidNullAsync(final ServiceCallback<List<Long>> serviceCallback) {
         service.getLongInvalidNullAsync(new ServiceResponseCallback() {
             @Override
@@ -481,6 +650,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get long array value [1, 'integer', 0]
+     *
+     * @return the List&lt;Long&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Long> getLongInvalidString() throws ServiceException {
         try {
             ServiceResponse<List<Long>> response = getLongInvalidStringDelegate(service.getLongInvalidString(), null);
@@ -491,6 +666,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get long array value [1, 'integer', 0]
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getLongInvalidStringAsync(final ServiceCallback<List<Long>> serviceCallback) {
         service.getLongInvalidStringAsync(new ServiceResponseCallback() {
             @Override
@@ -511,6 +691,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get float array value [0, -0.01, 1.2e20]
+     *
+     * @return the List&lt;Double&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Double> getFloatValid() throws ServiceException {
         try {
             ServiceResponse<List<Double>> response = getFloatValidDelegate(service.getFloatValid(), null);
@@ -521,6 +707,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get float array value [0, -0.01, 1.2e20]
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getFloatValidAsync(final ServiceCallback<List<Double>> serviceCallback) {
         service.getFloatValidAsync(new ServiceResponseCallback() {
             @Override
@@ -541,6 +732,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Set array value [0, -0.01, 1.2e20]
+     *
+     * @param arrayBody the List&lt;Double&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putFloatValid(List<Double> arrayBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putFloatValidDelegate(service.putFloatValid(arrayBody), null);
@@ -551,6 +748,12 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Set array value [0, -0.01, 1.2e20]
+     *
+     * @param arrayBody the List&lt;Double&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putFloatValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
         service.putFloatValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
@@ -571,6 +774,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get float array value [0.0, null, -1.2e20]
+     *
+     * @return the List&lt;Double&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Double> getFloatInvalidNull() throws ServiceException {
         try {
             ServiceResponse<List<Double>> response = getFloatInvalidNullDelegate(service.getFloatInvalidNull(), null);
@@ -581,6 +790,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get float array value [0.0, null, -1.2e20]
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getFloatInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback) {
         service.getFloatInvalidNullAsync(new ServiceResponseCallback() {
             @Override
@@ -601,6 +815,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get boolean array value [1.0, 'number', 0.0]
+     *
+     * @return the List&lt;Double&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Double> getFloatInvalidString() throws ServiceException {
         try {
             ServiceResponse<List<Double>> response = getFloatInvalidStringDelegate(service.getFloatInvalidString(), null);
@@ -611,6 +831,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get boolean array value [1.0, 'number', 0.0]
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getFloatInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback) {
         service.getFloatInvalidStringAsync(new ServiceResponseCallback() {
             @Override
@@ -631,6 +856,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get float array value [0, -0.01, 1.2e20]
+     *
+     * @return the List&lt;Double&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Double> getDoubleValid() throws ServiceException {
         try {
             ServiceResponse<List<Double>> response = getDoubleValidDelegate(service.getDoubleValid(), null);
@@ -641,6 +872,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get float array value [0, -0.01, 1.2e20]
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getDoubleValidAsync(final ServiceCallback<List<Double>> serviceCallback) {
         service.getDoubleValidAsync(new ServiceResponseCallback() {
             @Override
@@ -661,6 +897,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Set array value [0, -0.01, 1.2e20]
+     *
+     * @param arrayBody the List&lt;Double&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putDoubleValid(List<Double> arrayBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putDoubleValidDelegate(service.putDoubleValid(arrayBody), null);
@@ -671,6 +913,12 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Set array value [0, -0.01, 1.2e20]
+     *
+     * @param arrayBody the List&lt;Double&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putDoubleValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
         service.putDoubleValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
@@ -691,6 +939,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get float array value [0.0, null, -1.2e20]
+     *
+     * @return the List&lt;Double&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Double> getDoubleInvalidNull() throws ServiceException {
         try {
             ServiceResponse<List<Double>> response = getDoubleInvalidNullDelegate(service.getDoubleInvalidNull(), null);
@@ -701,6 +955,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get float array value [0.0, null, -1.2e20]
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getDoubleInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback) {
         service.getDoubleInvalidNullAsync(new ServiceResponseCallback() {
             @Override
@@ -721,6 +980,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get boolean array value [1.0, 'number', 0.0]
+     *
+     * @return the List&lt;Double&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Double> getDoubleInvalidString() throws ServiceException {
         try {
             ServiceResponse<List<Double>> response = getDoubleInvalidStringDelegate(service.getDoubleInvalidString(), null);
@@ -731,6 +996,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get boolean array value [1.0, 'number', 0.0]
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getDoubleInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback) {
         service.getDoubleInvalidStringAsync(new ServiceResponseCallback() {
             @Override
@@ -751,6 +1021,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get string array value ['foo1', 'foo2', 'foo3']
+     *
+     * @return the List&lt;String&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<String> getStringValid() throws ServiceException {
         try {
             ServiceResponse<List<String>> response = getStringValidDelegate(service.getStringValid(), null);
@@ -761,6 +1037,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get string array value ['foo1', 'foo2', 'foo3']
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getStringValidAsync(final ServiceCallback<List<String>> serviceCallback) {
         service.getStringValidAsync(new ServiceResponseCallback() {
             @Override
@@ -781,6 +1062,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Set array value ['foo1', 'foo2', 'foo3']
+     *
+     * @param arrayBody the List&lt;String&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putStringValid(List<String> arrayBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putStringValidDelegate(service.putStringValid(arrayBody), null);
@@ -791,6 +1078,12 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Set array value ['foo1', 'foo2', 'foo3']
+     *
+     * @param arrayBody the List&lt;String&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putStringValidAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) {
         service.putStringValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
@@ -811,6 +1104,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get string array value ['foo', null, 'foo2']
+     *
+     * @return the List&lt;String&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<String> getStringWithNull() throws ServiceException {
         try {
             ServiceResponse<List<String>> response = getStringWithNullDelegate(service.getStringWithNull(), null);
@@ -821,6 +1120,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get string array value ['foo', null, 'foo2']
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getStringWithNullAsync(final ServiceCallback<List<String>> serviceCallback) {
         service.getStringWithNullAsync(new ServiceResponseCallback() {
             @Override
@@ -841,6 +1145,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get string array value ['foo', 123, 'foo2']
+     *
+     * @return the List&lt;String&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<String> getStringWithInvalid() throws ServiceException {
         try {
             ServiceResponse<List<String>> response = getStringWithInvalidDelegate(service.getStringWithInvalid(), null);
@@ -851,6 +1161,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get string array value ['foo', 123, 'foo2']
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getStringWithInvalidAsync(final ServiceCallback<List<String>> serviceCallback) {
         service.getStringWithInvalidAsync(new ServiceResponseCallback() {
             @Override
@@ -871,6 +1186,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12']
+     *
+     * @return the List&lt;Date&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Date> getDateValid() throws ServiceException {
         try {
             ServiceResponse<List<Date>> response = getDateValidDelegate(service.getDateValid(), null);
@@ -881,6 +1202,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12']
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getDateValidAsync(final ServiceCallback<List<Date>> serviceCallback) {
         service.getDateValidAsync(new ServiceResponseCallback() {
             @Override
@@ -901,6 +1227,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']
+     *
+     * @param arrayBody the List&lt;Date&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putDateValid(List<Date> arrayBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putDateValidDelegate(service.putDateValid(arrayBody), null);
@@ -911,6 +1243,12 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']
+     *
+     * @param arrayBody the List&lt;Date&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putDateValidAsync(List<Date> arrayBody, final ServiceCallback<Void> serviceCallback) {
         service.putDateValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
@@ -931,6 +1269,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get date array value ['2012-01-01', null, '1776-07-04']
+     *
+     * @return the List&lt;Date&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Date> getDateInvalidNull() throws ServiceException {
         try {
             ServiceResponse<List<Date>> response = getDateInvalidNullDelegate(service.getDateInvalidNull(), null);
@@ -941,6 +1285,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get date array value ['2012-01-01', null, '1776-07-04']
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getDateInvalidNullAsync(final ServiceCallback<List<Date>> serviceCallback) {
         service.getDateInvalidNullAsync(new ServiceResponseCallback() {
             @Override
@@ -961,6 +1310,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get date array value ['2011-03-22', 'date']
+     *
+     * @return the List&lt;Date&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Date> getDateInvalidChars() throws ServiceException {
         try {
             ServiceResponse<List<Date>> response = getDateInvalidCharsDelegate(service.getDateInvalidChars(), null);
@@ -971,6 +1326,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get date array value ['2011-03-22', 'date']
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getDateInvalidCharsAsync(final ServiceCallback<List<Date>> serviceCallback) {
         service.getDateInvalidCharsAsync(new ServiceResponseCallback() {
             @Override
@@ -991,6 +1351,13 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get date-time array value ['2000-12-01t00:00:01z',
+     * '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
+     *
+     * @return the List&lt;Date&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Date> getDateTimeValid() throws ServiceException {
         try {
             ServiceResponse<List<Date>> response = getDateTimeValidDelegate(service.getDateTimeValid(), null);
@@ -1001,6 +1368,12 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get date-time array value ['2000-12-01t00:00:01z',
+     * '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getDateTimeValidAsync(final ServiceCallback<List<Date>> serviceCallback) {
         service.getDateTimeValidAsync(new ServiceResponseCallback() {
             @Override
@@ -1021,6 +1394,13 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00',
+     * '1492-10-12T10:15:01-08:00']
+     *
+     * @param arrayBody the List&lt;Date&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putDateTimeValid(List<Date> arrayBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putDateTimeValidDelegate(service.putDateTimeValid(arrayBody), null);
@@ -1031,6 +1411,13 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00',
+     * '1492-10-12T10:15:01-08:00']
+     *
+     * @param arrayBody the List&lt;Date&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putDateTimeValidAsync(List<Date> arrayBody, final ServiceCallback<Void> serviceCallback) {
         service.putDateTimeValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
@@ -1051,6 +1438,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get date array value ['2000-12-01t00:00:01z', null]
+     *
+     * @return the List&lt;Date&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Date> getDateTimeInvalidNull() throws ServiceException {
         try {
             ServiceResponse<List<Date>> response = getDateTimeInvalidNullDelegate(service.getDateTimeInvalidNull(), null);
@@ -1061,6 +1454,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get date array value ['2000-12-01t00:00:01z', null]
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getDateTimeInvalidNullAsync(final ServiceCallback<List<Date>> serviceCallback) {
         service.getDateTimeInvalidNullAsync(new ServiceResponseCallback() {
             @Override
@@ -1081,6 +1479,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get date array value ['2000-12-01t00:00:01z', 'date-time']
+     *
+     * @return the List&lt;Date&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Date> getDateTimeInvalidChars() throws ServiceException {
         try {
             ServiceResponse<List<Date>> response = getDateTimeInvalidCharsDelegate(service.getDateTimeInvalidChars(), null);
@@ -1091,6 +1495,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get date array value ['2000-12-01t00:00:01z', 'date-time']
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getDateTimeInvalidCharsAsync(final ServiceCallback<List<Date>> serviceCallback) {
         service.getDateTimeInvalidCharsAsync(new ServiceResponseCallback() {
             @Override
@@ -1111,6 +1520,13 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29,
+     * 43)] with each item encoded in base64
+     *
+     * @return the List&lt;Byte[]&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Byte[]> getByteValid() throws ServiceException {
         try {
             ServiceResponse<List<Byte[]>> response = getByteValidDelegate(service.getByteValid(), null);
@@ -1121,6 +1537,12 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29,
+     * 43)] with each item encoded in base64
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getByteValidAsync(final ServiceCallback<List<Byte[]>> serviceCallback) {
         service.getByteValidAsync(new ServiceResponseCallback() {
             @Override
@@ -1141,6 +1563,13 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)]
+     * with each elementencoded in base 64
+     *
+     * @param arrayBody the List&lt;Byte[]&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putByteValid(List<Byte[]> arrayBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putByteValidDelegate(service.putByteValid(arrayBody), null);
@@ -1151,6 +1580,13 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)]
+     * with each elementencoded in base 64
+     *
+     * @param arrayBody the List&lt;Byte[]&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putByteValidAsync(List<Byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) {
         service.putByteValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
@@ -1171,6 +1607,13 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get byte array value [hex(AB, AC, AD), null] with the first item base64
+     * encoded
+     *
+     * @return the List&lt;Byte[]&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Byte[]> getByteInvalidNull() throws ServiceException {
         try {
             ServiceResponse<List<Byte[]>> response = getByteInvalidNullDelegate(service.getByteInvalidNull(), null);
@@ -1181,6 +1624,12 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get byte array value [hex(AB, AC, AD), null] with the first item base64
+     * encoded
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getByteInvalidNullAsync(final ServiceCallback<List<Byte[]>> serviceCallback) {
         service.getByteInvalidNullAsync(new ServiceResponseCallback() {
             @Override
@@ -1201,6 +1650,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get array of complex type null value
+     *
+     * @return the List&lt;Product&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Product> getComplexNull() throws ServiceException {
         try {
             ServiceResponse<List<Product>> response = getComplexNullDelegate(service.getComplexNull(), null);
@@ -1211,6 +1666,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get array of complex type null value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getComplexNullAsync(final ServiceCallback<List<Product>> serviceCallback) {
         service.getComplexNullAsync(new ServiceResponseCallback() {
             @Override
@@ -1231,6 +1691,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get empty array of complex type []
+     *
+     * @return the List&lt;Product&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Product> getComplexEmpty() throws ServiceException {
         try {
             ServiceResponse<List<Product>> response = getComplexEmptyDelegate(service.getComplexEmpty(), null);
@@ -1241,6 +1707,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get empty array of complex type []
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getComplexEmptyAsync(final ServiceCallback<List<Product>> serviceCallback) {
         service.getComplexEmptyAsync(new ServiceResponseCallback() {
             @Override
@@ -1261,6 +1732,13 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get array of complex type with null item [{'integer': 1 'string': '2'},
+     * null, {'integer': 5, 'string': '6'}]
+     *
+     * @return the List&lt;Product&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Product> getComplexItemNull() throws ServiceException {
         try {
             ServiceResponse<List<Product>> response = getComplexItemNullDelegate(service.getComplexItemNull(), null);
@@ -1271,6 +1749,12 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get array of complex type with null item [{'integer': 1 'string': '2'},
+     * null, {'integer': 5, 'string': '6'}]
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getComplexItemNullAsync(final ServiceCallback<List<Product>> serviceCallback) {
         service.getComplexItemNullAsync(new ServiceResponseCallback() {
             @Override
@@ -1291,6 +1775,13 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get array of complex type with empty item [{'integer': 1 'string':
+     * '2'}, {}, {'integer': 5, 'string': '6'}]
+     *
+     * @return the List&lt;Product&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Product> getComplexItemEmpty() throws ServiceException {
         try {
             ServiceResponse<List<Product>> response = getComplexItemEmptyDelegate(service.getComplexItemEmpty(), null);
@@ -1301,6 +1792,12 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get array of complex type with empty item [{'integer': 1 'string':
+     * '2'}, {}, {'integer': 5, 'string': '6'}]
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getComplexItemEmptyAsync(final ServiceCallback<List<Product>> serviceCallback) {
         service.getComplexItemEmptyAsync(new ServiceResponseCallback() {
             @Override
@@ -1321,6 +1818,13 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get array of complex type with [{'integer': 1 'string': '2'},
+     * {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
+     *
+     * @return the List&lt;Product&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Product> getComplexValid() throws ServiceException {
         try {
             ServiceResponse<List<Product>> response = getComplexValidDelegate(service.getComplexValid(), null);
@@ -1331,6 +1835,12 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get array of complex type with [{'integer': 1 'string': '2'},
+     * {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getComplexValidAsync(final ServiceCallback<List<Product>> serviceCallback) {
         service.getComplexValidAsync(new ServiceResponseCallback() {
             @Override
@@ -1351,6 +1861,13 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Put an array of complex type with values [{'integer': 1 'string': '2'},
+     * {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
+     *
+     * @param arrayBody the List&lt;Product&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putComplexValid(List<Product> arrayBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putComplexValidDelegate(service.putComplexValid(arrayBody), null);
@@ -1361,6 +1878,13 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Put an array of complex type with values [{'integer': 1 'string': '2'},
+     * {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
+     *
+     * @param arrayBody the List&lt;Product&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putComplexValidAsync(List<Product> arrayBody, final ServiceCallback<Void> serviceCallback) {
         service.putComplexValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
@@ -1381,6 +1905,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get a null array
+     *
+     * @return the List&lt;List&lt;String&gt;&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<List<String>> getArrayNull() throws ServiceException {
         try {
             ServiceResponse<List<List<String>>> response = getArrayNullDelegate(service.getArrayNull(), null);
@@ -1391,6 +1921,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get a null array
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getArrayNullAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
         service.getArrayNullAsync(new ServiceResponseCallback() {
             @Override
@@ -1411,6 +1946,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get an empty array []
+     *
+     * @return the List&lt;List&lt;String&gt;&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<List<String>> getArrayEmpty() throws ServiceException {
         try {
             ServiceResponse<List<List<String>>> response = getArrayEmptyDelegate(service.getArrayEmpty(), null);
@@ -1421,6 +1962,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get an empty array []
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getArrayEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
         service.getArrayEmptyAsync(new ServiceResponseCallback() {
             @Override
@@ -1441,6 +1987,13 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get an array of array of strings [['1', '2', '3'], null, ['7', '8',
+     * '9']]
+     *
+     * @return the List&lt;List&lt;String&gt;&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<List<String>> getArrayItemNull() throws ServiceException {
         try {
             ServiceResponse<List<List<String>>> response = getArrayItemNullDelegate(service.getArrayItemNull(), null);
@@ -1451,6 +2004,12 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get an array of array of strings [['1', '2', '3'], null, ['7', '8',
+     * '9']]
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getArrayItemNullAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
         service.getArrayItemNullAsync(new ServiceResponseCallback() {
             @Override
@@ -1471,6 +2030,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']]
+     *
+     * @return the List&lt;List&lt;String&gt;&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<List<String>> getArrayItemEmpty() throws ServiceException {
         try {
             ServiceResponse<List<List<String>>> response = getArrayItemEmptyDelegate(service.getArrayItemEmpty(), null);
@@ -1481,6 +2046,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']]
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getArrayItemEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
         service.getArrayItemEmptyAsync(new ServiceResponseCallback() {
             @Override
@@ -1501,6 +2071,13 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'],
+     * ['7', '8', '9']]
+     *
+     * @return the List&lt;List&lt;String&gt;&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<List<String>> getArrayValid() throws ServiceException {
         try {
             ServiceResponse<List<List<String>>> response = getArrayValidDelegate(service.getArrayValid(), null);
@@ -1511,6 +2088,12 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'],
+     * ['7', '8', '9']]
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getArrayValidAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
         service.getArrayValidAsync(new ServiceResponseCallback() {
             @Override
@@ -1531,6 +2114,13 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'],
+     * ['7', '8', '9']]
+     *
+     * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putArrayValid(List<List<String>> arrayBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putArrayValidDelegate(service.putArrayValid(arrayBody), null);
@@ -1541,6 +2131,13 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'],
+     * ['7', '8', '9']]
+     *
+     * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putArrayValidAsync(List<List<String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
         service.putArrayValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
@@ -1561,6 +2158,12 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get an array of Dictionaries with value null
+     *
+     * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Map<String, String>> getDictionaryNull() throws ServiceException {
         try {
             ServiceResponse<List<Map<String, String>>> response = getDictionaryNullDelegate(service.getDictionaryNull(), null);
@@ -1571,6 +2174,11 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get an array of Dictionaries with value null
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getDictionaryNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
         service.getDictionaryNullAsync(new ServiceResponseCallback() {
             @Override
@@ -1591,6 +2199,13 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value
+     * []
+     *
+     * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Map<String, String>> getDictionaryEmpty() throws ServiceException {
         try {
             ServiceResponse<List<Map<String, String>>> response = getDictionaryEmptyDelegate(service.getDictionaryEmpty(), null);
@@ -1601,6 +2216,12 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value
+     * []
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getDictionaryEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
         service.getDictionaryEmptyAsync(new ServiceResponseCallback() {
             @Override
@@ -1621,6 +2242,14 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value
+     * [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8':
+     * 'eight', '9': 'nine'}]
+     *
+     * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Map<String, String>> getDictionaryItemNull() throws ServiceException {
         try {
             ServiceResponse<List<Map<String, String>>> response = getDictionaryItemNullDelegate(service.getDictionaryItemNull(), null);
@@ -1631,6 +2260,13 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value
+     * [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8':
+     * 'eight', '9': 'nine'}]
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getDictionaryItemNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
         service.getDictionaryItemNullAsync(new ServiceResponseCallback() {
             @Override
@@ -1651,6 +2287,14 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value
+     * [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8':
+     * 'eight', '9': 'nine'}]
+     *
+     * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Map<String, String>> getDictionaryItemEmpty() throws ServiceException {
         try {
             ServiceResponse<List<Map<String, String>>> response = getDictionaryItemEmptyDelegate(service.getDictionaryItemEmpty(), null);
@@ -1661,6 +2305,13 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value
+     * [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8':
+     * 'eight', '9': 'nine'}]
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getDictionaryItemEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
         service.getDictionaryItemEmptyAsync(new ServiceResponseCallback() {
             @Override
@@ -1681,6 +2332,14 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value
+     * [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five',
+     * '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
+     *
+     * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public List<Map<String, String>> getDictionaryValid() throws ServiceException {
         try {
             ServiceResponse<List<Map<String, String>>> response = getDictionaryValidDelegate(service.getDictionaryValid(), null);
@@ -1691,6 +2350,13 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value
+     * [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five',
+     * '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getDictionaryValidAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
         service.getDictionaryValidAsync(new ServiceResponseCallback() {
             @Override
@@ -1711,6 +2377,14 @@ public class ArrayImpl implements Array {
                 .build(response, error);
     }
 
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value
+     * [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five',
+     * '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
+     *
+     * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putDictionaryValid(List<Map<String, String>> arrayBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putDictionaryValidDelegate(service.putDictionaryValid(arrayBody), null);
@@ -1721,6 +2395,14 @@ public class ArrayImpl implements Array {
         }
     }
 
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value
+     * [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five',
+     * '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
+     *
+     * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putDictionaryValidAsync(List<Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
         service.putDictionaryValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override

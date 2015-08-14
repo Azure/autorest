@@ -28,6 +28,12 @@ public class DictionaryImpl implements Dictionary {
         service = restAdapter.create(DictionaryService.class);
     }
 
+    /**
+     * Get complex types with dictionary property
+     *
+     * @return the DictionaryWrapper object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public DictionaryWrapper getValid() throws ServiceException {
         try {
             ServiceResponse<DictionaryWrapper> response = getValidDelegate(service.getValid(), null);
@@ -38,6 +44,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get complex types with dictionary property
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getValidAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
         service.getValidAsync(new ServiceResponseCallback() {
             @Override
@@ -58,6 +69,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Put complex types with dictionary property
+     *
+     * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putValid(DictionaryWrapper complexBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putValidDelegate(service.putValid(complexBody), null);
@@ -68,6 +85,12 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Put complex types with dictionary property
+     *
+     * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putValidAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         service.putValidAsync(complexBody, new ServiceResponseCallback() {
             @Override
@@ -88,6 +111,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get complex types with dictionary property which is empty
+     *
+     * @return the DictionaryWrapper object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public DictionaryWrapper getEmpty() throws ServiceException {
         try {
             ServiceResponse<DictionaryWrapper> response = getEmptyDelegate(service.getEmpty(), null);
@@ -98,6 +127,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get complex types with dictionary property which is empty
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getEmptyAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
         service.getEmptyAsync(new ServiceResponseCallback() {
             @Override
@@ -118,6 +152,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Put complex types with dictionary property which is empty
+     *
+     * @param complexBody Please put an empty dictionary
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putEmpty(DictionaryWrapper complexBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putEmptyDelegate(service.putEmpty(complexBody), null);
@@ -128,6 +168,12 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Put complex types with dictionary property which is empty
+     *
+     * @param complexBody Please put an empty dictionary
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putEmptyAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         service.putEmptyAsync(complexBody, new ServiceResponseCallback() {
             @Override
@@ -148,6 +194,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get complex types with dictionary property which is null
+     *
+     * @return the DictionaryWrapper object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public DictionaryWrapper getNull() throws ServiceException {
         try {
             ServiceResponse<DictionaryWrapper> response = getNullDelegate(service.getNull(), null);
@@ -158,6 +210,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get complex types with dictionary property which is null
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getNullAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
         service.getNullAsync(new ServiceResponseCallback() {
             @Override
@@ -178,6 +235,13 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get complex types with dictionary property while server doesn't provide
+     * a response payload
+     *
+     * @return the DictionaryWrapper object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public DictionaryWrapper getNotProvided() throws ServiceException {
         try {
             ServiceResponse<DictionaryWrapper> response = getNotProvidedDelegate(service.getNotProvided(), null);
@@ -188,6 +252,12 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get complex types with dictionary property while server doesn't provide
+     * a response payload
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getNotProvidedAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
         service.getNotProvidedAsync(new ServiceResponseCallback() {
             @Override

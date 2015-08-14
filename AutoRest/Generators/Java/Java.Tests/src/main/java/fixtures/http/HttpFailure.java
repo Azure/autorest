@@ -15,7 +15,15 @@ import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
 import retrofit.http.GET;
 
+/**
+ * An instance of this class provides access to all the operations defined
+ * in HttpFailure.
+ */
 public interface HttpFailure {
+    /**
+     * The interface defining all the services for HttpFailure to be
+     * used by Retrofit to perform actually REST calls.
+     */
     interface HttpFailureService {
         @GET("/http/failure/emptybody/error")
         Response getEmptyError() throws ServiceException;
@@ -24,8 +32,19 @@ public interface HttpFailure {
         void getEmptyErrorAsync(ServiceResponseCallback cb);
 
     }
+    /**
+     * Get empty error form server
+     *
+     * @return the boolean object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     boolean getEmptyError() throws ServiceException;
 
+    /**
+     * Get empty error form server
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback);
 
 }

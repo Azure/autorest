@@ -9,8 +9,6 @@
 
 package fixtures.header;
 
-import com.microsoft.rest.ServiceClient;
-
 /**
  * The interface for AutoRestSwaggerBATHeaderService class.
  */
@@ -22,7 +20,7 @@ public interface AutoRestSwaggerBATHeaderService {
     String getBaseUri();
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the HeaderOperations object to access its operations.
      * @return the headerOperations value.
      */
     HeaderOperations getHeaderOperations();

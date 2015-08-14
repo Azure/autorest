@@ -28,6 +28,12 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
         service = restAdapter.create(PolymorphicrecursiveService.class);
     }
 
+    /**
+     * Get complex types that are polymorphic and have recursive references
+     *
+     * @return the Fish object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Fish getValid() throws ServiceException {
         try {
             ServiceResponse<Fish> response = getValidDelegate(service.getValid(), null);
@@ -38,6 +44,11 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
         }
     }
 
+    /**
+     * Get complex types that are polymorphic and have recursive references
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getValidAsync(final ServiceCallback<Fish> serviceCallback) {
         service.getValidAsync(new ServiceResponseCallback() {
             @Override
@@ -58,6 +69,64 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
                 .build(response, error);
     }
 
+    /**
+     * Put complex types that are polymorphic and have recursive references
+     *
+     * @param complexBody Please put a salmon that looks like this:
+ {
+     "dtype": "salmon",
+     "species": "king",
+     "length": 1,
+     "age": 1,
+     "location": "alaska",
+     "iswild": true,
+     "siblings": [
+         {
+             "dtype": "shark",
+             "species": "predator",
+             "length": 20,
+             "age": 6,
+             "siblings": [
+                 {
+                     "dtype": "salmon",
+                     "species": "coho",
+                     "length": 2,
+                     "age": 2,
+                     "location": "atlantic",
+                     "iswild": true,
+                     "siblings": [
+                         {
+                             "dtype": "shark",
+                             "species": "predator",
+                             "length": 20,
+                             "age": 6
+                         },
+                         {
+                             "dtype": "sawshark",
+                             "species": "dangerous",
+                             "length": 10,
+                             "age": 105
+                         }
+                     ]
+                 },
+                 {
+                     "dtype": "sawshark",
+                     "species": "dangerous",
+                     "length": 10,
+                     "age": 105
+                 }
+             ]
+         },
+         {
+             "dtype": "sawshark",
+             "species": "dangerous",
+             "length": 10,
+             "age": 105
+         }
+     ]
+ }
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putValid(Fish complexBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putValidDelegate(service.putValid(complexBody), null);
@@ -68,6 +137,64 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
         }
     }
 
+    /**
+     * Put complex types that are polymorphic and have recursive references
+     *
+     * @param complexBody Please put a salmon that looks like this:
+ {
+     "dtype": "salmon",
+     "species": "king",
+     "length": 1,
+     "age": 1,
+     "location": "alaska",
+     "iswild": true,
+     "siblings": [
+         {
+             "dtype": "shark",
+             "species": "predator",
+             "length": 20,
+             "age": 6,
+             "siblings": [
+                 {
+                     "dtype": "salmon",
+                     "species": "coho",
+                     "length": 2,
+                     "age": 2,
+                     "location": "atlantic",
+                     "iswild": true,
+                     "siblings": [
+                         {
+                             "dtype": "shark",
+                             "species": "predator",
+                             "length": 20,
+                             "age": 6
+                         },
+                         {
+                             "dtype": "sawshark",
+                             "species": "dangerous",
+                             "length": 10,
+                             "age": 105
+                         }
+                     ]
+                 },
+                 {
+                     "dtype": "sawshark",
+                     "species": "dangerous",
+                     "length": 10,
+                     "age": 105
+                 }
+             ]
+         },
+         {
+             "dtype": "sawshark",
+             "species": "dangerous",
+             "length": 10,
+             "age": 105
+         }
+     ]
+ }
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
         service.putValidAsync(complexBody, new ServiceResponseCallback() {
             @Override

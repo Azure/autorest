@@ -15,22 +15,48 @@ import java.util.Date;
  * 
  */
 public class DatetimeWrapper {
+    /*
+     * 
+     */
     private Date Field;
 
+    /*
+     * 
+     */
     private Date Now;
 
+    /*
+     * Get 
+     *
+     * @return the Field value
+     */ 
     public Date getField() {
         return this.Field;
     }
 
+    /*
+     * Set 
+     *
+     * @param the Field value to set
+     */
     public void setField(Date Field) {
         this.Field = Field;
     }
 
+    /*
+     * Get 
+     *
+     * @return the Now value
+     */ 
     public Date getNow() {
         return this.Now;
     }
 
+    /*
+     * Set 
+     *
+     * @param the Now value to set
+     */
     public void setNow(Date Now) {
         this.Now = Now;
     }

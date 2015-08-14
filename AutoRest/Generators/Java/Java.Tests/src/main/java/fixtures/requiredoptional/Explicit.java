@@ -28,7 +28,15 @@ import retrofit.http.POST;
 import retrofit.http.Body;
 import retrofit.http.Header;
 
+/**
+ * An instance of this class provides access to all the operations defined
+ * in Explicit.
+ */
 public interface Explicit {
+    /**
+     * The interface defining all the services for Explicit to be
+     * used by Retrofit to perform actually REST calls.
+     */
     interface ExplicitService {
         @POST("/reqopt/requied/integer/parameter")
         Response postRequiredIntegerParameter(@Body int bodyParameter) throws ServiceException;
@@ -163,92 +171,417 @@ public interface Explicit {
         void postOptionalArrayHeaderAsync(@Header("headerParameter") List<String> headerParameter, ServiceResponseCallback cb);
 
     }
+    /**
+     * Test explicitly required integer. Please put null and the client
+     * library should throw before the request is sent.
+     *
+     * @param bodyParameter the int value
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error postRequiredIntegerParameter(int bodyParameter) throws ServiceException;
 
+    /**
+     * Test explicitly required integer. Please put null and the client
+     * library should throw before the request is sent.
+     *
+     * @param bodyParameter the int value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void postRequiredIntegerParameterAsync(int bodyParameter, final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Test explicitly optional integer. Please put null.
+     *
+     * @param bodyParameter the int value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void postOptionalIntegerParameter(int bodyParameter) throws ServiceException;
 
+    /**
+     * Test explicitly optional integer. Please put null.
+     *
+     * @param bodyParameter the int value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void postOptionalIntegerParameterAsync(int bodyParameter, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Test explicitly required integer. Please put a valid int-wrapper with
+     * 'value' = null and the client library should throw before the request
+     * is sent.
+     *
+     * @param bodyParameter the IntWrapper value
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error postRequiredIntegerProperty(IntWrapper bodyParameter) throws ServiceException;
 
+    /**
+     * Test explicitly required integer. Please put a valid int-wrapper with
+     * 'value' = null and the client library should throw before the request
+     * is sent.
+     *
+     * @param bodyParameter the IntWrapper value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void postRequiredIntegerPropertyAsync(IntWrapper bodyParameter, final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Test explicitly optional integer. Please put a valid int-wrapper with
+     * 'value' = null.
+     *
+     * @param bodyParameter the IntOptionalWrapper value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void postOptionalIntegerProperty(IntOptionalWrapper bodyParameter) throws ServiceException;
 
+    /**
+     * Test explicitly optional integer. Please put a valid int-wrapper with
+     * 'value' = null.
+     *
+     * @param bodyParameter the IntOptionalWrapper value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Test explicitly required integer. Please put a header 'headerParameter'
+     * =&gt; null and the client library should throw before the request is
+     * sent.
+     *
+     * @param headerParameter the int value
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error postRequiredIntegerHeader(int headerParameter) throws ServiceException;
 
+    /**
+     * Test explicitly required integer. Please put a header 'headerParameter'
+     * =&gt; null and the client library should throw before the request is
+     * sent.
+     *
+     * @param headerParameter the int value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void postRequiredIntegerHeaderAsync(int headerParameter, final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Test explicitly optional integer. Please put a header 'headerParameter'
+     * =&gt; null.
+     *
+     * @param headerParameter the int value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void postOptionalIntegerHeader(int headerParameter) throws ServiceException;
 
+    /**
+     * Test explicitly optional integer. Please put a header 'headerParameter'
+     * =&gt; null.
+     *
+     * @param headerParameter the int value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void postOptionalIntegerHeaderAsync(int headerParameter, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Test explicitly required string. Please put null and the client library
+     * should throw before the request is sent.
+     *
+     * @param bodyParameter the String value
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error postRequiredStringParameter(String bodyParameter) throws ServiceException;
 
+    /**
+     * Test explicitly required string. Please put null and the client library
+     * should throw before the request is sent.
+     *
+     * @param bodyParameter the String value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void postRequiredStringParameterAsync(String bodyParameter, final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Test explicitly optional string. Please put null.
+     *
+     * @param bodyParameter the String value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void postOptionalStringParameter(String bodyParameter) throws ServiceException;
 
+    /**
+     * Test explicitly optional string. Please put null.
+     *
+     * @param bodyParameter the String value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void postOptionalStringParameterAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Test explicitly required string. Please put a valid string-wrapper with
+     * 'value' = null and the client library should throw before the request
+     * is sent.
+     *
+     * @param bodyParameter the StringWrapper value
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error postRequiredStringProperty(StringWrapper bodyParameter) throws ServiceException;
 
+    /**
+     * Test explicitly required string. Please put a valid string-wrapper with
+     * 'value' = null and the client library should throw before the request
+     * is sent.
+     *
+     * @param bodyParameter the StringWrapper value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void postRequiredStringPropertyAsync(StringWrapper bodyParameter, final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Test explicitly optional integer. Please put a valid string-wrapper
+     * with 'value' = null.
+     *
+     * @param bodyParameter the StringOptionalWrapper value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void postOptionalStringProperty(StringOptionalWrapper bodyParameter) throws ServiceException;
 
+    /**
+     * Test explicitly optional integer. Please put a valid string-wrapper
+     * with 'value' = null.
+     *
+     * @param bodyParameter the StringOptionalWrapper value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Test explicitly required string. Please put a header 'headerParameter'
+     * =&gt; null and the client library should throw before the request is
+     * sent.
+     *
+     * @param headerParameter the String value
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error postRequiredStringHeader(String headerParameter) throws ServiceException;
 
+    /**
+     * Test explicitly required string. Please put a header 'headerParameter'
+     * =&gt; null and the client library should throw before the request is
+     * sent.
+     *
+     * @param headerParameter the String value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void postRequiredStringHeaderAsync(String headerParameter, final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Test explicitly optional string. Please put a header 'headerParameter'
+     * =&gt; null.
+     *
+     * @param bodyParameter the String value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void postOptionalStringHeader(String bodyParameter) throws ServiceException;
 
+    /**
+     * Test explicitly optional string. Please put a header 'headerParameter'
+     * =&gt; null.
+     *
+     * @param bodyParameter the String value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void postOptionalStringHeaderAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Test explicitly required complex object. Please put null and the client
+     * library should throw before the request is sent.
+     *
+     * @param bodyParameter the Product value
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error postRequiredClassParameter(Product bodyParameter) throws ServiceException;
 
+    /**
+     * Test explicitly required complex object. Please put null and the client
+     * library should throw before the request is sent.
+     *
+     * @param bodyParameter the Product value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void postRequiredClassParameterAsync(Product bodyParameter, final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Test explicitly optional complex object. Please put null.
+     *
+     * @param bodyParameter the Product value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void postOptionalClassParameter(Product bodyParameter) throws ServiceException;
 
+    /**
+     * Test explicitly optional complex object. Please put null.
+     *
+     * @param bodyParameter the Product value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void postOptionalClassParameterAsync(Product bodyParameter, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Test explicitly required complex object. Please put a valid
+     * class-wrapper with 'value' = null and the client library should throw
+     * before the request is sent.
+     *
+     * @param bodyParameter the ClassWrapper value
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error postRequiredClassProperty(ClassWrapper bodyParameter) throws ServiceException;
 
+    /**
+     * Test explicitly required complex object. Please put a valid
+     * class-wrapper with 'value' = null and the client library should throw
+     * before the request is sent.
+     *
+     * @param bodyParameter the ClassWrapper value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void postRequiredClassPropertyAsync(ClassWrapper bodyParameter, final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Test explicitly optional complex object. Please put a valid
+     * class-wrapper with 'value' = null.
+     *
+     * @param bodyParameter the ClassOptionalWrapper value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void postOptionalClassProperty(ClassOptionalWrapper bodyParameter) throws ServiceException;
 
+    /**
+     * Test explicitly optional complex object. Please put a valid
+     * class-wrapper with 'value' = null.
+     *
+     * @param bodyParameter the ClassOptionalWrapper value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Test explicitly required array. Please put null and the client library
+     * should throw before the request is sent.
+     *
+     * @param bodyParameter the List&lt;String&gt; value
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error postRequiredArrayParameter(List<String> bodyParameter) throws ServiceException;
 
+    /**
+     * Test explicitly required array. Please put null and the client library
+     * should throw before the request is sent.
+     *
+     * @param bodyParameter the List&lt;String&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void postRequiredArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Test explicitly optional array. Please put null.
+     *
+     * @param bodyParameter the List&lt;String&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void postOptionalArrayParameter(List<String> bodyParameter) throws ServiceException;
 
+    /**
+     * Test explicitly optional array. Please put null.
+     *
+     * @param bodyParameter the List&lt;String&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void postOptionalArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Test explicitly required array. Please put a valid array-wrapper with
+     * 'value' = null and the client library should throw before the request
+     * is sent.
+     *
+     * @param bodyParameter the ArrayWrapper value
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error postRequiredArrayProperty(ArrayWrapper bodyParameter) throws ServiceException;
 
+    /**
+     * Test explicitly required array. Please put a valid array-wrapper with
+     * 'value' = null and the client library should throw before the request
+     * is sent.
+     *
+     * @param bodyParameter the ArrayWrapper value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter, final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Test explicitly optional array. Please put a valid array-wrapper with
+     * 'value' = null.
+     *
+     * @param bodyParameter the ArrayOptionalWrapper value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void postOptionalArrayProperty(ArrayOptionalWrapper bodyParameter) throws ServiceException;
 
+    /**
+     * Test explicitly optional array. Please put a valid array-wrapper with
+     * 'value' = null.
+     *
+     * @param bodyParameter the ArrayOptionalWrapper value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Test explicitly required array. Please put a header 'headerParameter'
+     * =&gt; null and the client library should throw before the request is
+     * sent.
+     *
+     * @param headerParameter the List&lt;String&gt; value
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error postRequiredArrayHeader(List<String> headerParameter) throws ServiceException;
 
+    /**
+     * Test explicitly required array. Please put a header 'headerParameter'
+     * =&gt; null and the client library should throw before the request is
+     * sent.
+     *
+     * @param headerParameter the List&lt;String&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void postRequiredArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Test explicitly optional integer. Please put a header 'headerParameter'
+     * =&gt; null.
+     *
+     * @param headerParameter the List&lt;String&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void postOptionalArrayHeader(List<String> headerParameter) throws ServiceException;
 
+    /**
+     * Test explicitly optional integer. Please put a header 'headerParameter'
+     * =&gt; null.
+     *
+     * @param headerParameter the List&lt;String&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void postOptionalArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Void> serviceCallback);
 
 }

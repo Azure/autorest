@@ -28,6 +28,12 @@ public class PolymorphismImpl implements Polymorphism {
         service = restAdapter.create(PolymorphismService.class);
     }
 
+    /**
+     * Get complex types that are polymorphic
+     *
+     * @return the Fish object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Fish getValid() throws ServiceException {
         try {
             ServiceResponse<Fish> response = getValidDelegate(service.getValid(), null);
@@ -38,6 +44,11 @@ public class PolymorphismImpl implements Polymorphism {
         }
     }
 
+    /**
+     * Get complex types that are polymorphic
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getValidAsync(final ServiceCallback<Fish> serviceCallback) {
         service.getValidAsync(new ServiceResponseCallback() {
             @Override
@@ -58,6 +69,36 @@ public class PolymorphismImpl implements Polymorphism {
                 .build(response, error);
     }
 
+    /**
+     * Put complex types that are polymorphic
+     *
+     * @param complexBody Please put a salmon that looks like this:
+ {
+         'dtype':'Salmon',
+         'location':'alaska',
+         'iswild':true,
+         'species':'king',
+         'length':1.0,
+         'siblings':[
+           {
+             'dtype':'Shark',
+             'age':6,
+             'birthday': '2012-01-05T01:00:00Z',
+             'length':20.0,
+             'species':'predator',
+           },
+           {
+             'dtype':'Sawshark',
+             'age':105,
+             'birthday': '1900-01-05T01:00:00Z',
+             'length':10.0,
+             'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+             'species':'dangerous',
+           }
+         ]
+       };
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putValid(Fish complexBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putValidDelegate(service.putValid(complexBody), null);
@@ -68,6 +109,36 @@ public class PolymorphismImpl implements Polymorphism {
         }
     }
 
+    /**
+     * Put complex types that are polymorphic
+     *
+     * @param complexBody Please put a salmon that looks like this:
+ {
+         'dtype':'Salmon',
+         'location':'alaska',
+         'iswild':true,
+         'species':'king',
+         'length':1.0,
+         'siblings':[
+           {
+             'dtype':'Shark',
+             'age':6,
+             'birthday': '2012-01-05T01:00:00Z',
+             'length':20.0,
+             'species':'predator',
+           },
+           {
+             'dtype':'Sawshark',
+             'age':105,
+             'birthday': '1900-01-05T01:00:00Z',
+             'length':10.0,
+             'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+             'species':'dangerous',
+           }
+         ]
+       };
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
         service.putValidAsync(complexBody, new ServiceResponseCallback() {
             @Override
@@ -88,6 +159,38 @@ public class PolymorphismImpl implements Polymorphism {
                 .build(response, error);
     }
 
+    /**
+     * Put complex types that are polymorphic, attempting to omit required
+     * 'birthday' field - the request should not be allowed from the client
+     *
+     * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to be sent:
+ {
+     "dtype": "sawshark",
+     "species": "snaggle toothed",
+     "length": 18.5,
+     "age": 2,
+     "birthday": "2013-06-01T01:00:00Z",
+     "location": "alaska",
+     "picture": base64(FF FF FF FF FE),
+     "siblings": [
+         {
+             "dtype": "shark",
+             "species": "predator",
+             "birthday": "2012-01-05T01:00:00Z",
+             "length": 20,
+             "age": 6
+         },
+         {
+             "dtype": "sawshark",
+             "species": "dangerous",
+             "picture": base64(FF FF FF FF FE),
+             "length": 10,
+             "age": 105
+         }
+     ]
+ }
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putValidMissingRequired(Fish complexBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putValidMissingRequiredDelegate(service.putValidMissingRequired(complexBody), null);
@@ -98,6 +201,38 @@ public class PolymorphismImpl implements Polymorphism {
         }
     }
 
+    /**
+     * Put complex types that are polymorphic, attempting to omit required
+     * 'birthday' field - the request should not be allowed from the client
+     *
+     * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to be sent:
+ {
+     "dtype": "sawshark",
+     "species": "snaggle toothed",
+     "length": 18.5,
+     "age": 2,
+     "birthday": "2013-06-01T01:00:00Z",
+     "location": "alaska",
+     "picture": base64(FF FF FF FF FE),
+     "siblings": [
+         {
+             "dtype": "shark",
+             "species": "predator",
+             "birthday": "2012-01-05T01:00:00Z",
+             "length": 20,
+             "age": 6
+         },
+         {
+             "dtype": "sawshark",
+             "species": "dangerous",
+             "picture": base64(FF FF FF FF FE),
+             "length": 10,
+             "age": 105
+         }
+     ]
+ }
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putValidMissingRequiredAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
         service.putValidMissingRequiredAsync(complexBody, new ServiceResponseCallback() {
             @Override

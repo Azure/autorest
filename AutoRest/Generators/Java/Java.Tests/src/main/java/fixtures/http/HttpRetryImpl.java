@@ -27,6 +27,11 @@ public class HttpRetryImpl implements HttpRetry {
         service = restAdapter.create(HttpRetryService.class);
     }
 
+    /**
+     * Return 408 status code, then 200 after retry
+     *
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void head408() throws ServiceException {
         try {
             ServiceResponse<Void> response = head408Delegate(service.head408(), null);
@@ -37,6 +42,11 @@ public class HttpRetryImpl implements HttpRetry {
         }
     }
 
+    /**
+     * Return 408 status code, then 200 after retry
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void head408Async(final ServiceCallback<Void> serviceCallback) {
         service.head408Async(new ServiceResponseCallback() {
             @Override
@@ -57,6 +67,12 @@ public class HttpRetryImpl implements HttpRetry {
                 .build(response, error);
     }
 
+    /**
+     * Return 500 status code, then 200 after retry
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void put500(boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = put500Delegate(service.put500(booleanValue), null);
@@ -67,6 +83,12 @@ public class HttpRetryImpl implements HttpRetry {
         }
     }
 
+    /**
+     * Return 500 status code, then 200 after retry
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void put500Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.put500Async(booleanValue, new ServiceResponseCallback() {
             @Override
@@ -87,6 +109,12 @@ public class HttpRetryImpl implements HttpRetry {
                 .build(response, error);
     }
 
+    /**
+     * Return 500 status code, then 200 after retry
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void patch500(boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = patch500Delegate(service.patch500(booleanValue), null);
@@ -97,6 +125,12 @@ public class HttpRetryImpl implements HttpRetry {
         }
     }
 
+    /**
+     * Return 500 status code, then 200 after retry
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void patch500Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.patch500Async(booleanValue, new ServiceResponseCallback() {
             @Override
@@ -117,6 +151,11 @@ public class HttpRetryImpl implements HttpRetry {
                 .build(response, error);
     }
 
+    /**
+     * Return 502 status code, then 200 after retry
+     *
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void get502() throws ServiceException {
         try {
             ServiceResponse<Void> response = get502Delegate(service.get502(), null);
@@ -127,6 +166,11 @@ public class HttpRetryImpl implements HttpRetry {
         }
     }
 
+    /**
+     * Return 502 status code, then 200 after retry
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void get502Async(final ServiceCallback<Void> serviceCallback) {
         service.get502Async(new ServiceResponseCallback() {
             @Override
@@ -147,6 +191,12 @@ public class HttpRetryImpl implements HttpRetry {
                 .build(response, error);
     }
 
+    /**
+     * Return 503 status code, then 200 after retry
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void post503(boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = post503Delegate(service.post503(booleanValue), null);
@@ -157,6 +207,12 @@ public class HttpRetryImpl implements HttpRetry {
         }
     }
 
+    /**
+     * Return 503 status code, then 200 after retry
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void post503Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.post503Async(booleanValue, new ServiceResponseCallback() {
             @Override
@@ -177,6 +233,12 @@ public class HttpRetryImpl implements HttpRetry {
                 .build(response, error);
     }
 
+    /**
+     * Return 503 status code, then 200 after retry
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void delete503(boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = delete503Delegate(service.delete503(booleanValue), null);
@@ -187,6 +249,12 @@ public class HttpRetryImpl implements HttpRetry {
         }
     }
 
+    /**
+     * Return 503 status code, then 200 after retry
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void delete503Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.delete503Async(booleanValue, new ServiceResponseCallback() {
             @Override
@@ -207,6 +275,12 @@ public class HttpRetryImpl implements HttpRetry {
                 .build(response, error);
     }
 
+    /**
+     * Return 504 status code, then 200 after retry
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void put504(boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = put504Delegate(service.put504(booleanValue), null);
@@ -217,6 +291,12 @@ public class HttpRetryImpl implements HttpRetry {
         }
     }
 
+    /**
+     * Return 504 status code, then 200 after retry
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void put504Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.put504Async(booleanValue, new ServiceResponseCallback() {
             @Override
@@ -237,6 +317,12 @@ public class HttpRetryImpl implements HttpRetry {
                 .build(response, error);
     }
 
+    /**
+     * Return 504 status code, then 200 after retry
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void patch504(boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = patch504Delegate(service.patch504(booleanValue), null);
@@ -247,6 +333,12 @@ public class HttpRetryImpl implements HttpRetry {
         }
     }
 
+    /**
+     * Return 504 status code, then 200 after retry
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void patch504Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.patch504Async(booleanValue, new ServiceResponseCallback() {
             @Override

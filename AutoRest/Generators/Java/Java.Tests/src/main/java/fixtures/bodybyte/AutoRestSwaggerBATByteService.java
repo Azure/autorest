@@ -9,8 +9,6 @@
 
 package fixtures.bodybyte;
 
-import com.microsoft.rest.ServiceClient;
-
 /**
  * The interface for AutoRestSwaggerBATByteService class.
  */
@@ -22,7 +20,7 @@ public interface AutoRestSwaggerBATByteService {
     String getBaseUri();
 
     /**
-     * Test Infrastructure for AutoRest Swagger BAT
+     * Gets the ByteOperations object to access its operations.
      * @return the byteOperations value.
      */
     ByteOperations getByteOperations();

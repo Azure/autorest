@@ -9,8 +9,6 @@
 
 package fixtures.requiredoptional;
 
-import com.microsoft.rest.ServiceClient;
-
 /**
  * The interface for AutoRestRequiredOptionalTestService class.
  */
@@ -22,25 +20,25 @@ public interface AutoRestRequiredOptionalTestService {
     String getBaseUri();
 
     /**
-     * number of items to skip
+     * Gets number of items to skip.
      * @return the RequiredGlobalPath value.
      */
     String getRequiredGlobalPath();
 
     /**
-     * number of items to skip
+     * Gets number of items to skip.
      * @return the RequiredGlobalQuery value.
      */
     String getRequiredGlobalQuery();
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the Implicit object to access its operations.
      * @return the implicit value.
      */
     Implicit getImplicit();
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the Explicit object to access its operations.
      * @return the explicit value.
      */
     Explicit getExplicit();

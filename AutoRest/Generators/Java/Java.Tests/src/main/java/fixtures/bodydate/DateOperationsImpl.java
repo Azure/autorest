@@ -28,6 +28,12 @@ public class DateOperationsImpl implements DateOperations {
         service = restAdapter.create(DateService.class);
     }
 
+    /**
+     * Get null date value
+     *
+     * @return the Date object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Date getNull() throws ServiceException {
         try {
             ServiceResponse<Date> response = getNullDelegate(service.getNull(), null);
@@ -38,6 +44,11 @@ public class DateOperationsImpl implements DateOperations {
         }
     }
 
+    /**
+     * Get null date value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getNullAsync(final ServiceCallback<Date> serviceCallback) {
         service.getNullAsync(new ServiceResponseCallback() {
             @Override
@@ -58,6 +69,12 @@ public class DateOperationsImpl implements DateOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get invalid date value
+     *
+     * @return the Date object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Date getInvalidDate() throws ServiceException {
         try {
             ServiceResponse<Date> response = getInvalidDateDelegate(service.getInvalidDate(), null);
@@ -68,6 +85,11 @@ public class DateOperationsImpl implements DateOperations {
         }
     }
 
+    /**
+     * Get invalid date value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getInvalidDateAsync(final ServiceCallback<Date> serviceCallback) {
         service.getInvalidDateAsync(new ServiceResponseCallback() {
             @Override
@@ -88,6 +110,12 @@ public class DateOperationsImpl implements DateOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get overflow date value
+     *
+     * @return the Date object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Date getOverflowDate() throws ServiceException {
         try {
             ServiceResponse<Date> response = getOverflowDateDelegate(service.getOverflowDate(), null);
@@ -98,6 +126,11 @@ public class DateOperationsImpl implements DateOperations {
         }
     }
 
+    /**
+     * Get overflow date value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getOverflowDateAsync(final ServiceCallback<Date> serviceCallback) {
         service.getOverflowDateAsync(new ServiceResponseCallback() {
             @Override
@@ -118,6 +151,12 @@ public class DateOperationsImpl implements DateOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get underflow date value
+     *
+     * @return the Date object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Date getUnderflowDate() throws ServiceException {
         try {
             ServiceResponse<Date> response = getUnderflowDateDelegate(service.getUnderflowDate(), null);
@@ -128,6 +167,11 @@ public class DateOperationsImpl implements DateOperations {
         }
     }
 
+    /**
+     * Get underflow date value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getUnderflowDateAsync(final ServiceCallback<Date> serviceCallback) {
         service.getUnderflowDateAsync(new ServiceResponseCallback() {
             @Override
@@ -148,6 +192,12 @@ public class DateOperationsImpl implements DateOperations {
                 .build(response, error);
     }
 
+    /**
+     * Put max date value 9999-12-31
+     *
+     * @param dateBody the Date value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putMaxDate(Date dateBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putMaxDateDelegate(service.putMaxDate(dateBody), null);
@@ -158,6 +208,12 @@ public class DateOperationsImpl implements DateOperations {
         }
     }
 
+    /**
+     * Put max date value 9999-12-31
+     *
+     * @param dateBody the Date value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putMaxDateAsync(Date dateBody, final ServiceCallback<Void> serviceCallback) {
         service.putMaxDateAsync(dateBody, new ServiceResponseCallback() {
             @Override
@@ -178,6 +234,12 @@ public class DateOperationsImpl implements DateOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get max date value 9999-12-31
+     *
+     * @return the Date object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Date getMaxDate() throws ServiceException {
         try {
             ServiceResponse<Date> response = getMaxDateDelegate(service.getMaxDate(), null);
@@ -188,6 +250,11 @@ public class DateOperationsImpl implements DateOperations {
         }
     }
 
+    /**
+     * Get max date value 9999-12-31
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getMaxDateAsync(final ServiceCallback<Date> serviceCallback) {
         service.getMaxDateAsync(new ServiceResponseCallback() {
             @Override
@@ -208,6 +275,12 @@ public class DateOperationsImpl implements DateOperations {
                 .build(response, error);
     }
 
+    /**
+     * Put min date value 0000-01-01
+     *
+     * @param dateBody the Date value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putMinDate(Date dateBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putMinDateDelegate(service.putMinDate(dateBody), null);
@@ -218,6 +291,12 @@ public class DateOperationsImpl implements DateOperations {
         }
     }
 
+    /**
+     * Put min date value 0000-01-01
+     *
+     * @param dateBody the Date value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putMinDateAsync(Date dateBody, final ServiceCallback<Void> serviceCallback) {
         service.putMinDateAsync(dateBody, new ServiceResponseCallback() {
             @Override
@@ -238,6 +317,12 @@ public class DateOperationsImpl implements DateOperations {
                 .build(response, error);
     }
 
+    /**
+     * Get min date value 0000-01-01
+     *
+     * @return the Date object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Date getMinDate() throws ServiceException {
         try {
             ServiceResponse<Date> response = getMinDateDelegate(service.getMinDate(), null);
@@ -248,6 +333,11 @@ public class DateOperationsImpl implements DateOperations {
         }
     }
 
+    /**
+     * Get min date value 0000-01-01
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getMinDateAsync(final ServiceCallback<Date> serviceCallback) {
         service.getMinDateAsync(new ServiceResponseCallback() {
             @Override

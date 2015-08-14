@@ -14,22 +14,48 @@ package fixtures.bodycomplex.models;
  * 
  */
 public class IntWrapper {
+    /*
+     * 
+     */
     private int Field1;
 
+    /*
+     * 
+     */
     private int Field2;
 
+    /*
+     * Get 
+     *
+     * @return the Field1 value
+     */ 
     public int getField1() {
         return this.Field1;
     }
 
+    /*
+     * Set 
+     *
+     * @param the Field1 value to set
+     */
     public void setField1(int Field1) {
         this.Field1 = Field1;
     }
 
+    /*
+     * Get 
+     *
+     * @return the Field2 value
+     */ 
     public int getField2() {
         return this.Field2;
     }
 
+    /*
+     * Set 
+     *
+     * @param the Field2 value to set
+     */
     public void setField2(int Field2) {
         this.Field2 = Field2;
     }

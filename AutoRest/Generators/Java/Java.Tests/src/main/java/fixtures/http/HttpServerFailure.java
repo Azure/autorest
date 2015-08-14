@@ -20,7 +20,15 @@ import retrofit.http.POST;
 import retrofit.http.Body;
 import retrofit.http.DELETE;
 
+/**
+ * An instance of this class provides access to all the operations defined
+ * in HttpServerFailure.
+ */
 public interface HttpServerFailure {
+    /**
+     * The interface defining all the services for HttpServerFailure to be
+     * used by Retrofit to perform actually REST calls.
+     */
     interface HttpServerFailureService {
         @HEAD("/http/failure/server/501")
         Response head501() throws ServiceException;
@@ -47,20 +55,68 @@ public interface HttpServerFailure {
         void delete505Async(@Body boolean booleanValue, ServiceResponseCallback cb);
 
     }
+    /**
+     * Return 501 status code - should be represented in the client as an error
+     *
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error head501() throws ServiceException;
 
+    /**
+     * Return 501 status code - should be represented in the client as an error
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void head501Async(final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Return 501 status code - should be represented in the client as an error
+     *
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error get501() throws ServiceException;
 
+    /**
+     * Return 501 status code - should be represented in the client as an error
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void get501Async(final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Return 505 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error post505(boolean booleanValue) throws ServiceException;
 
+    /**
+     * Return 505 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void post505Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
+    /**
+     * Return 505 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the Error object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     Error delete505(boolean booleanValue) throws ServiceException;
 
+    /**
+     * Return 505 status code - should be represented in the client as an error
+     *
+     * @param booleanValue Simple boolean value true
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void delete505Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
 }

@@ -14,12 +14,25 @@ package fixtures.bodycomplex.models;
  * 
  */
 public class Siamese {
+    /*
+     * 
+     */
     private String Breed;
 
+    /*
+     * Get 
+     *
+     * @return the Breed value
+     */ 
     public String getBreed() {
         return this.Breed;
     }
 
+    /*
+     * Set 
+     *
+     * @param the Breed value to set
+     */
     public void setBreed(String Breed) {
         this.Breed = Breed;
     }

@@ -14,12 +14,25 @@ package fixtures.bodycomplex.models;
  * 
  */
 public class Dog {
+    /*
+     * 
+     */
     private String Food;
 
+    /*
+     * Get 
+     *
+     * @return the Food value
+     */ 
     public String getFood() {
         return this.Food;
     }
 
+    /*
+     * Set 
+     *
+     * @param the Food value to set
+     */
     public void setFood(String Food) {
         this.Food = Food;
     }

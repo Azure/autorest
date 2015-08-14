@@ -28,6 +28,12 @@ public class FilesImpl implements Files {
         service = restAdapter.create(FilesService.class);
     }
 
+    /**
+     * Get file
+     *
+     * @return the InputStream object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public InputStream getFile() throws ServiceException {
         try {
             ServiceResponse<InputStream> response = getFileDelegate(service.getFile(), null);
@@ -38,6 +44,11 @@ public class FilesImpl implements Files {
         }
     }
 
+    /**
+     * Get file
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getFileAsync(final ServiceCallback<InputStream> serviceCallback) {
         service.getFileAsync(new ServiceResponseCallback() {
             @Override
@@ -58,6 +69,12 @@ public class FilesImpl implements Files {
                 .build(response, error);
     }
 
+    /**
+     * Get empty file
+     *
+     * @return the InputStream object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public InputStream getEmptyFile() throws ServiceException {
         try {
             ServiceResponse<InputStream> response = getEmptyFileDelegate(service.getEmptyFile(), null);
@@ -68,6 +85,11 @@ public class FilesImpl implements Files {
         }
     }
 
+    /**
+     * Get empty file
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback) {
         service.getEmptyFileAsync(new ServiceResponseCallback() {
             @Override

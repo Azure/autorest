@@ -31,6 +31,7 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
 
     /**
      * number of items to skip
+     *
      * @return the RequiredGlobalPath value.
      */
     public String getRequiredGlobalPath() {
@@ -41,6 +42,7 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
 
     /**
      * number of items to skip
+     *
      * @return the RequiredGlobalQuery value.
      */
     public String getRequiredGlobalQuery() {
@@ -50,7 +52,7 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
     private Implicit implicit;
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the Implicit object to access its operations.
      * @return the implicit value.
      */
     public Implicit getImplicit() {
@@ -60,23 +62,38 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
     private Explicit explicit;
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the Explicit object to access its operations.
      * @return the explicit value.
      */
     public Explicit getExplicit() {
         return this.explicit;
     }
 
+    /**
+     * Initializes an instance of AutoRestRequiredOptionalTestService client.
+     */
     public AutoRestRequiredOptionalTestServiceImpl() {
         this("http://localhost");
     }
 
+    /**
+     * Initializes an instance of AutoRestRequiredOptionalTestService client.
+     *
+     * @param baseUri the base URI of the host
+     */
     public AutoRestRequiredOptionalTestServiceImpl(String baseUri) {
         super();
         this.baseUri = baseUri;
         initialize();
     }
 
+    /**
+     * Initializes an instance of AutoRestRequiredOptionalTestService client.
+     *
+     * @param baseUri the base URI of the host
+     * @param client the {@link OkHttpClient} client to use for REST calls
+     * @param restAdapterBuilder the builder for building up a {@link RestAdapter}
+     */
     public AutoRestRequiredOptionalTestServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
         super(client, restAdapterBuilder);
         this.baseUri = baseUri;

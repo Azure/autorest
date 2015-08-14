@@ -9,8 +9,6 @@
 
 package fixtures.bodyinteger;
 
-import com.microsoft.rest.ServiceClient;
-
 /**
  * The interface for AutoRestIntegerTestService class.
  */
@@ -22,7 +20,7 @@ public interface AutoRestIntegerTestService {
     String getBaseUri();
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the IntOperations object to access its operations.
      * @return the intOperations value.
      */
     IntOperations getIntOperations();

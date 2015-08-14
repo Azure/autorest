@@ -15,32 +15,71 @@ import java.util.List;
  * 
  */
 public class Fish {
+    /*
+     * 
+     */
     private String Species;
 
+    /*
+     * 
+     */
     private double Length;
 
+    /*
+     * 
+     */
     private List<Fish> Siblings;
 
+    /*
+     * Get 
+     *
+     * @return the Species value
+     */ 
     public String getSpecies() {
         return this.Species;
     }
 
+    /*
+     * Set 
+     *
+     * @param the Species value to set
+     */
     public void setSpecies(String Species) {
         this.Species = Species;
     }
 
+    /*
+     * Get 
+     *
+     * @return the Length value
+     */ 
     public double getLength() {
         return this.Length;
     }
 
+    /*
+     * Set 
+     *
+     * @param the Length value to set
+     */
     public void setLength(double Length) {
         this.Length = Length;
     }
 
+    /*
+     * Get 
+     *
+     * @return the Siblings value
+     */ 
     public List<Fish> getSiblings() {
         return this.Siblings;
     }
 
+    /*
+     * Set 
+     *
+     * @param the Siblings value to set
+     */
     public void setSiblings(List<Fish> Siblings) {
         this.Siblings = Siblings;
     }

@@ -31,6 +31,12 @@ public class DictionaryImpl implements Dictionary {
         service = restAdapter.create(DictionaryService.class);
     }
 
+    /**
+     * Get null dictionary value
+     *
+     * @return the Map&lt;String, Integer&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Integer> getNull() throws ServiceException {
         try {
             ServiceResponse<Map<String, Integer>> response = getNullDelegate(service.getNull(), null);
@@ -41,6 +47,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get null dictionary value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getNullAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
         service.getNullAsync(new ServiceResponseCallback() {
             @Override
@@ -61,6 +72,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get empty dictionary value {}
+     *
+     * @return the Map&lt;String, Integer&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Integer> getEmpty() throws ServiceException {
         try {
             ServiceResponse<Map<String, Integer>> response = getEmptyDelegate(service.getEmpty(), null);
@@ -71,6 +88,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get empty dictionary value {}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getEmptyAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
         service.getEmptyAsync(new ServiceResponseCallback() {
             @Override
@@ -91,6 +113,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Set dictionary value empty {}
+     *
+     * @param arrayBody the Map&lt;String, String&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putEmpty(Map<String, String> arrayBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putEmptyDelegate(service.putEmpty(arrayBody), null);
@@ -101,6 +129,12 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Set dictionary value empty {}
+     *
+     * @param arrayBody the Map&lt;String, String&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putEmptyAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback) {
         service.putEmptyAsync(arrayBody, new ServiceResponseCallback() {
             @Override
@@ -121,6 +155,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get Dictionary with null value
+     *
+     * @return the Map&lt;String, String&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, String> getNullValue() throws ServiceException {
         try {
             ServiceResponse<Map<String, String>> response = getNullValueDelegate(service.getNullValue(), null);
@@ -131,6 +171,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get Dictionary with null value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getNullValueAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
         service.getNullValueAsync(new ServiceResponseCallback() {
             @Override
@@ -151,6 +196,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get Dictionary with null key
+     *
+     * @return the Map&lt;String, String&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, String> getNullKey() throws ServiceException {
         try {
             ServiceResponse<Map<String, String>> response = getNullKeyDelegate(service.getNullKey(), null);
@@ -161,6 +212,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get Dictionary with null key
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getNullKeyAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
         service.getNullKeyAsync(new ServiceResponseCallback() {
             @Override
@@ -181,6 +237,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get Dictionary with key as empty string
+     *
+     * @return the Map&lt;String, String&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, String> getEmptyStringKey() throws ServiceException {
         try {
             ServiceResponse<Map<String, String>> response = getEmptyStringKeyDelegate(service.getEmptyStringKey(), null);
@@ -191,6 +253,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get Dictionary with key as empty string
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getEmptyStringKeyAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
         service.getEmptyStringKeyAsync(new ServiceResponseCallback() {
             @Override
@@ -211,6 +278,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get invalid Dictionary value
+     *
+     * @return the Map&lt;String, String&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, String> getInvalid() throws ServiceException {
         try {
             ServiceResponse<Map<String, String>> response = getInvalidDelegate(service.getInvalid(), null);
@@ -221,6 +294,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get invalid Dictionary value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
         service.getInvalidAsync(new ServiceResponseCallback() {
             @Override
@@ -241,6 +319,13 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get boolean dictionary value {"0": true, "1": false, "2": false, "3":
+     * true }
+     *
+     * @return the Map&lt;String, Boolean&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Boolean> getBooleanTfft() throws ServiceException {
         try {
             ServiceResponse<Map<String, Boolean>> response = getBooleanTfftDelegate(service.getBooleanTfft(), null);
@@ -251,6 +336,12 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get boolean dictionary value {"0": true, "1": false, "2": false, "3":
+     * true }
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getBooleanTfftAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
         service.getBooleanTfftAsync(new ServiceResponseCallback() {
             @Override
@@ -271,6 +362,13 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Set dictionary value empty {"0": true, "1": false, "2": false, "3":
+     * true }
+     *
+     * @param arrayBody the Map&lt;String, Boolean&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putBooleanTfft(Map<String, Boolean> arrayBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putBooleanTfftDelegate(service.putBooleanTfft(arrayBody), null);
@@ -281,6 +379,13 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Set dictionary value empty {"0": true, "1": false, "2": false, "3":
+     * true }
+     *
+     * @param arrayBody the Map&lt;String, Boolean&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putBooleanTfftAsync(Map<String, Boolean> arrayBody, final ServiceCallback<Void> serviceCallback) {
         service.putBooleanTfftAsync(arrayBody, new ServiceResponseCallback() {
             @Override
@@ -301,6 +406,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get boolean dictionary value {"0": true, "1": null, "2": false }
+     *
+     * @return the Map&lt;String, Boolean&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Boolean> getBooleanInvalidNull() throws ServiceException {
         try {
             ServiceResponse<Map<String, Boolean>> response = getBooleanInvalidNullDelegate(service.getBooleanInvalidNull(), null);
@@ -311,6 +422,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get boolean dictionary value {"0": true, "1": null, "2": false }
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getBooleanInvalidNullAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
         service.getBooleanInvalidNullAsync(new ServiceResponseCallback() {
             @Override
@@ -331,6 +447,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'
+     *
+     * @return the Map&lt;String, Boolean&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Boolean> getBooleanInvalidString() throws ServiceException {
         try {
             ServiceResponse<Map<String, Boolean>> response = getBooleanInvalidStringDelegate(service.getBooleanInvalidString(), null);
@@ -341,6 +463,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getBooleanInvalidStringAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
         service.getBooleanInvalidStringAsync(new ServiceResponseCallback() {
             @Override
@@ -361,6 +488,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
+     *
+     * @return the Map&lt;String, Integer&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Integer> getIntegerValid() throws ServiceException {
         try {
             ServiceResponse<Map<String, Integer>> response = getIntegerValidDelegate(service.getIntegerValid(), null);
@@ -371,6 +504,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getIntegerValidAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
         service.getIntegerValidAsync(new ServiceResponseCallback() {
             @Override
@@ -391,6 +529,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
+     *
+     * @param arrayBody the Map&lt;String, Integer&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putIntegerValid(Map<String, Integer> arrayBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putIntegerValidDelegate(service.putIntegerValid(arrayBody), null);
@@ -401,6 +545,12 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
+     *
+     * @param arrayBody the Map&lt;String, Integer&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putIntegerValidAsync(Map<String, Integer> arrayBody, final ServiceCallback<Void> serviceCallback) {
         service.putIntegerValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
@@ -421,6 +571,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get integer dictionary value {"0": 1, "1": null, "2": 0}
+     *
+     * @return the Map&lt;String, Integer&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Integer> getIntInvalidNull() throws ServiceException {
         try {
             ServiceResponse<Map<String, Integer>> response = getIntInvalidNullDelegate(service.getIntInvalidNull(), null);
@@ -431,6 +587,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get integer dictionary value {"0": 1, "1": null, "2": 0}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getIntInvalidNullAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
         service.getIntInvalidNullAsync(new ServiceResponseCallback() {
             @Override
@@ -451,6 +612,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}
+     *
+     * @return the Map&lt;String, Integer&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Integer> getIntInvalidString() throws ServiceException {
         try {
             ServiceResponse<Map<String, Integer>> response = getIntInvalidStringDelegate(service.getIntInvalidString(), null);
@@ -461,6 +628,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getIntInvalidStringAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
         service.getIntInvalidStringAsync(new ServiceResponseCallback() {
             @Override
@@ -481,6 +653,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
+     *
+     * @return the Map&lt;String, Long&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Long> getLongValid() throws ServiceException {
         try {
             ServiceResponse<Map<String, Long>> response = getLongValidDelegate(service.getLongValid(), null);
@@ -491,6 +669,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getLongValidAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
         service.getLongValidAsync(new ServiceResponseCallback() {
             @Override
@@ -511,6 +694,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
+     *
+     * @param arrayBody the Map&lt;String, Long&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putLongValid(Map<String, Long> arrayBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putLongValidDelegate(service.putLongValid(arrayBody), null);
@@ -521,6 +710,12 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
+     *
+     * @param arrayBody the Map&lt;String, Long&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putLongValidAsync(Map<String, Long> arrayBody, final ServiceCallback<Void> serviceCallback) {
         service.putLongValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
@@ -541,6 +736,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get long dictionary value {"0": 1, "1": null, "2": 0}
+     *
+     * @return the Map&lt;String, Long&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Long> getLongInvalidNull() throws ServiceException {
         try {
             ServiceResponse<Map<String, Long>> response = getLongInvalidNullDelegate(service.getLongInvalidNull(), null);
@@ -551,6 +752,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get long dictionary value {"0": 1, "1": null, "2": 0}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getLongInvalidNullAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
         service.getLongInvalidNullAsync(new ServiceResponseCallback() {
             @Override
@@ -571,6 +777,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get long dictionary value {"0": 1, "1": "integer", "2": 0}
+     *
+     * @return the Map&lt;String, Long&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Long> getLongInvalidString() throws ServiceException {
         try {
             ServiceResponse<Map<String, Long>> response = getLongInvalidStringDelegate(service.getLongInvalidString(), null);
@@ -581,6 +793,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get long dictionary value {"0": 1, "1": "integer", "2": 0}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getLongInvalidStringAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
         service.getLongInvalidStringAsync(new ServiceResponseCallback() {
             @Override
@@ -601,6 +818,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+     *
+     * @return the Map&lt;String, Double&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Double> getFloatValid() throws ServiceException {
         try {
             ServiceResponse<Map<String, Double>> response = getFloatValidDelegate(service.getFloatValid(), null);
@@ -611,6 +834,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getFloatValidAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
         service.getFloatValidAsync(new ServiceResponseCallback() {
             @Override
@@ -631,6 +859,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+     *
+     * @param arrayBody the Map&lt;String, Double&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putFloatValid(Map<String, Double> arrayBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putFloatValidDelegate(service.putFloatValid(arrayBody), null);
@@ -641,6 +875,12 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+     *
+     * @param arrayBody the Map&lt;String, Double&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putFloatValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
         service.putFloatValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
@@ -661,6 +901,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
+     *
+     * @return the Map&lt;String, Double&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Double> getFloatInvalidNull() throws ServiceException {
         try {
             ServiceResponse<Map<String, Double>> response = getFloatInvalidNullDelegate(service.getFloatInvalidNull(), null);
@@ -671,6 +917,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getFloatInvalidNullAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
         service.getFloatInvalidNullAsync(new ServiceResponseCallback() {
             @Override
@@ -691,6 +942,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
+     *
+     * @return the Map&lt;String, Double&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Double> getFloatInvalidString() throws ServiceException {
         try {
             ServiceResponse<Map<String, Double>> response = getFloatInvalidStringDelegate(service.getFloatInvalidString(), null);
@@ -701,6 +958,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getFloatInvalidStringAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
         service.getFloatInvalidStringAsync(new ServiceResponseCallback() {
             @Override
@@ -721,6 +983,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+     *
+     * @return the Map&lt;String, Double&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Double> getDoubleValid() throws ServiceException {
         try {
             ServiceResponse<Map<String, Double>> response = getDoubleValidDelegate(service.getDoubleValid(), null);
@@ -731,6 +999,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getDoubleValidAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
         service.getDoubleValidAsync(new ServiceResponseCallback() {
             @Override
@@ -751,6 +1024,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+     *
+     * @param arrayBody the Map&lt;String, Double&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putDoubleValid(Map<String, Double> arrayBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putDoubleValidDelegate(service.putDoubleValid(arrayBody), null);
@@ -761,6 +1040,12 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+     *
+     * @param arrayBody the Map&lt;String, Double&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putDoubleValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
         service.putDoubleValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
@@ -781,6 +1066,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
+     *
+     * @return the Map&lt;String, Double&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Double> getDoubleInvalidNull() throws ServiceException {
         try {
             ServiceResponse<Map<String, Double>> response = getDoubleInvalidNullDelegate(service.getDoubleInvalidNull(), null);
@@ -791,6 +1082,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getDoubleInvalidNullAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
         service.getDoubleInvalidNullAsync(new ServiceResponseCallback() {
             @Override
@@ -811,6 +1107,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
+     *
+     * @return the Map&lt;String, Double&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Double> getDoubleInvalidString() throws ServiceException {
         try {
             ServiceResponse<Map<String, Double>> response = getDoubleInvalidStringDelegate(service.getDoubleInvalidString(), null);
@@ -821,6 +1123,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getDoubleInvalidStringAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
         service.getDoubleInvalidStringAsync(new ServiceResponseCallback() {
             @Override
@@ -841,6 +1148,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
+     *
+     * @return the Map&lt;String, String&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, String> getStringValid() throws ServiceException {
         try {
             ServiceResponse<Map<String, String>> response = getStringValidDelegate(service.getStringValid(), null);
@@ -851,6 +1164,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getStringValidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
         service.getStringValidAsync(new ServiceResponseCallback() {
             @Override
@@ -871,6 +1189,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
+     *
+     * @param arrayBody the Map&lt;String, String&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putStringValid(Map<String, String> arrayBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putStringValidDelegate(service.putStringValid(arrayBody), null);
@@ -881,6 +1205,12 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
+     *
+     * @param arrayBody the Map&lt;String, String&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putStringValidAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback) {
         service.putStringValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
@@ -901,6 +1231,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}
+     *
+     * @return the Map&lt;String, String&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, String> getStringWithNull() throws ServiceException {
         try {
             ServiceResponse<Map<String, String>> response = getStringWithNullDelegate(service.getStringWithNull(), null);
@@ -911,6 +1247,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getStringWithNullAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
         service.getStringWithNullAsync(new ServiceResponseCallback() {
             @Override
@@ -931,6 +1272,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}
+     *
+     * @return the Map&lt;String, String&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, String> getStringWithInvalid() throws ServiceException {
         try {
             ServiceResponse<Map<String, String>> response = getStringWithInvalidDelegate(service.getStringWithInvalid(), null);
@@ -941,6 +1288,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getStringWithInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
         service.getStringWithInvalidAsync(new ServiceResponseCallback() {
             @Override
@@ -961,6 +1313,13 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02",
+     * "2": "1492-10-12"}
+     *
+     * @return the Map&lt;String, Date&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Date> getDateValid() throws ServiceException {
         try {
             ServiceResponse<Map<String, Date>> response = getDateValidDelegate(service.getDateValid(), null);
@@ -971,6 +1330,12 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02",
+     * "2": "1492-10-12"}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getDateValidAsync(final ServiceCallback<Map<String, Date>> serviceCallback) {
         service.getDateValidAsync(new ServiceResponseCallback() {
             @Override
@@ -991,6 +1356,13 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2":
+     * "1492-10-12"}
+     *
+     * @param arrayBody the Map&lt;String, Date&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putDateValid(Map<String, Date> arrayBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putDateValidDelegate(service.putDateValid(arrayBody), null);
@@ -1001,6 +1373,13 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2":
+     * "1492-10-12"}
+     *
+     * @param arrayBody the Map&lt;String, Date&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putDateValidAsync(Map<String, Date> arrayBody, final ServiceCallback<Void> serviceCallback) {
         service.putDateValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
@@ -1021,6 +1400,13 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get date dictionary value {"0": "2012-01-01", "1": null, "2":
+     * "1776-07-04"}
+     *
+     * @return the Map&lt;String, Date&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Date> getDateInvalidNull() throws ServiceException {
         try {
             ServiceResponse<Map<String, Date>> response = getDateInvalidNullDelegate(service.getDateInvalidNull(), null);
@@ -1031,6 +1417,12 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get date dictionary value {"0": "2012-01-01", "1": null, "2":
+     * "1776-07-04"}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getDateInvalidNullAsync(final ServiceCallback<Map<String, Date>> serviceCallback) {
         service.getDateInvalidNullAsync(new ServiceResponseCallback() {
             @Override
@@ -1051,6 +1443,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get date dictionary value {"0": "2011-03-22", "1": "date"}
+     *
+     * @return the Map&lt;String, Date&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Date> getDateInvalidChars() throws ServiceException {
         try {
             ServiceResponse<Map<String, Date>> response = getDateInvalidCharsDelegate(service.getDateInvalidChars(), null);
@@ -1061,6 +1459,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get date dictionary value {"0": "2011-03-22", "1": "date"}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getDateInvalidCharsAsync(final ServiceCallback<Map<String, Date>> serviceCallback) {
         service.getDateInvalidCharsAsync(new ServiceResponseCallback() {
             @Override
@@ -1081,6 +1484,13 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1":
+     * "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
+     *
+     * @return the Map&lt;String, Date&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Date> getDateTimeValid() throws ServiceException {
         try {
             ServiceResponse<Map<String, Date>> response = getDateTimeValidDelegate(service.getDateTimeValid(), null);
@@ -1091,6 +1501,12 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1":
+     * "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getDateTimeValidAsync(final ServiceCallback<Map<String, Date>> serviceCallback) {
         service.getDateTimeValidAsync(new ServiceResponseCallback() {
             @Override
@@ -1111,6 +1527,13 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1":
+     * "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
+     *
+     * @param arrayBody the Map&lt;String, Date&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putDateTimeValid(Map<String, Date> arrayBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putDateTimeValidDelegate(service.putDateTimeValid(arrayBody), null);
@@ -1121,6 +1544,13 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1":
+     * "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
+     *
+     * @param arrayBody the Map&lt;String, Date&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putDateTimeValidAsync(Map<String, Date> arrayBody, final ServiceCallback<Void> serviceCallback) {
         service.putDateTimeValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
@@ -1141,6 +1571,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}
+     *
+     * @return the Map&lt;String, Date&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Date> getDateTimeInvalidNull() throws ServiceException {
         try {
             ServiceResponse<Map<String, Date>> response = getDateTimeInvalidNullDelegate(service.getDateTimeInvalidNull(), null);
@@ -1151,6 +1587,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getDateTimeInvalidNullAsync(final ServiceCallback<Map<String, Date>> serviceCallback) {
         service.getDateTimeInvalidNullAsync(new ServiceResponseCallback() {
             @Override
@@ -1171,6 +1612,13 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1":
+     * "date-time"}
+     *
+     * @return the Map&lt;String, Date&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Date> getDateTimeInvalidChars() throws ServiceException {
         try {
             ServiceResponse<Map<String, Date>> response = getDateTimeInvalidCharsDelegate(service.getDateTimeInvalidChars(), null);
@@ -1181,6 +1629,12 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1":
+     * "date-time"}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getDateTimeInvalidCharsAsync(final ServiceCallback<Map<String, Date>> serviceCallback) {
         service.getDateTimeInvalidCharsAsync(new ServiceResponseCallback() {
             @Override
@@ -1201,6 +1655,13 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03),
+     * "2": hex (25, 29, 43)} with each item encoded in base64
+     *
+     * @return the Map&lt;String, Byte[]&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Byte[]> getByteValid() throws ServiceException {
         try {
             ServiceResponse<Map<String, Byte[]>> response = getByteValidDelegate(service.getByteValid(), null);
@@ -1211,6 +1672,12 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03),
+     * "2": hex (25, 29, 43)} with each item encoded in base64
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getByteValidAsync(final ServiceCallback<Map<String, Byte[]>> serviceCallback) {
         service.getByteValidAsync(new ServiceResponseCallback() {
             @Override
@@ -1231,6 +1698,13 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03),
+     * "2": hex (25, 29, 43)} with each elementencoded in base 64
+     *
+     * @param arrayBody the Map&lt;String, Byte[]&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putByteValid(Map<String, Byte[]> arrayBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putByteValidDelegate(service.putByteValid(arrayBody), null);
@@ -1241,6 +1715,13 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03),
+     * "2": hex (25, 29, 43)} with each elementencoded in base 64
+     *
+     * @param arrayBody the Map&lt;String, Byte[]&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putByteValidAsync(Map<String, Byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) {
         service.putByteValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
@@ -1261,6 +1742,13 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the
+     * first item base64 encoded
+     *
+     * @return the Map&lt;String, Byte[]&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Byte[]> getByteInvalidNull() throws ServiceException {
         try {
             ServiceResponse<Map<String, Byte[]>> response = getByteInvalidNullDelegate(service.getByteInvalidNull(), null);
@@ -1271,6 +1759,12 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the
+     * first item base64 encoded
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getByteInvalidNullAsync(final ServiceCallback<Map<String, Byte[]>> serviceCallback) {
         service.getByteInvalidNullAsync(new ServiceResponseCallback() {
             @Override
@@ -1291,6 +1785,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get dictionary of complex type null value
+     *
+     * @return the Map&lt;String, Widget&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Widget> getComplexNull() throws ServiceException {
         try {
             ServiceResponse<Map<String, Widget>> response = getComplexNullDelegate(service.getComplexNull(), null);
@@ -1301,6 +1801,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get dictionary of complex type null value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getComplexNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
         service.getComplexNullAsync(new ServiceResponseCallback() {
             @Override
@@ -1321,6 +1826,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get empty dictionary of complex type {}
+     *
+     * @return the Map&lt;String, Widget&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Widget> getComplexEmpty() throws ServiceException {
         try {
             ServiceResponse<Map<String, Widget>> response = getComplexEmptyDelegate(service.getComplexEmpty(), null);
@@ -1331,6 +1842,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get empty dictionary of complex type {}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getComplexEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
         service.getComplexEmptyAsync(new ServiceResponseCallback() {
             @Override
@@ -1351,6 +1867,13 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get dictionary of complex type with null item {"0": {"integer": 1,
+     * "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}
+     *
+     * @return the Map&lt;String, Widget&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Widget> getComplexItemNull() throws ServiceException {
         try {
             ServiceResponse<Map<String, Widget>> response = getComplexItemNullDelegate(service.getComplexItemNull(), null);
@@ -1361,6 +1884,12 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get dictionary of complex type with null item {"0": {"integer": 1,
+     * "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getComplexItemNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
         service.getComplexItemNullAsync(new ServiceResponseCallback() {
             @Override
@@ -1381,6 +1910,13 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get dictionary of complex type with empty item {"0": {"integer": 1,
+     * "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}
+     *
+     * @return the Map&lt;String, Widget&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Widget> getComplexItemEmpty() throws ServiceException {
         try {
             ServiceResponse<Map<String, Widget>> response = getComplexItemEmptyDelegate(service.getComplexItemEmpty(), null);
@@ -1391,6 +1927,12 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get dictionary of complex type with empty item {"0": {"integer": 1,
+     * "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getComplexItemEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
         service.getComplexItemEmptyAsync(new ServiceResponseCallback() {
             @Override
@@ -1411,6 +1953,14 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get dictionary of complex type with {"0": {"integer": 1, "string":
+     * "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5,
+     * "string": "6"}}
+     *
+     * @return the Map&lt;String, Widget&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Widget> getComplexValid() throws ServiceException {
         try {
             ServiceResponse<Map<String, Widget>> response = getComplexValidDelegate(service.getComplexValid(), null);
@@ -1421,6 +1971,13 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get dictionary of complex type with {"0": {"integer": 1, "string":
+     * "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5,
+     * "string": "6"}}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getComplexValidAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
         service.getComplexValidAsync(new ServiceResponseCallback() {
             @Override
@@ -1441,6 +1998,14 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Put an dictionary of complex type with values {"0": {"integer": 1,
+     * "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer":
+     * 5, "string": "6"}}
+     *
+     * @param arrayBody the Map&lt;String, Widget&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putComplexValid(Map<String, Widget> arrayBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putComplexValidDelegate(service.putComplexValid(arrayBody), null);
@@ -1451,6 +2016,14 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Put an dictionary of complex type with values {"0": {"integer": 1,
+     * "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer":
+     * 5, "string": "6"}}
+     *
+     * @param arrayBody the Map&lt;String, Widget&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putComplexValidAsync(Map<String, Widget> arrayBody, final ServiceCallback<Void> serviceCallback) {
         service.putComplexValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
@@ -1471,6 +2044,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get a null array
+     *
+     * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, List<String>> getArrayNull() throws ServiceException {
         try {
             ServiceResponse<Map<String, List<String>>> response = getArrayNullDelegate(service.getArrayNull(), null);
@@ -1481,6 +2060,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get a null array
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getArrayNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
         service.getArrayNullAsync(new ServiceResponseCallback() {
             @Override
@@ -1501,6 +2085,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get an empty dictionary {}
+     *
+     * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, List<String>> getArrayEmpty() throws ServiceException {
         try {
             ServiceResponse<Map<String, List<String>>> response = getArrayEmptyDelegate(service.getArrayEmpty(), null);
@@ -1511,6 +2101,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get an empty dictionary {}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getArrayEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
         service.getArrayEmptyAsync(new ServiceResponseCallback() {
             @Override
@@ -1531,6 +2126,13 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null,
+     * "2": ["7", "8", "9"]}
+     *
+     * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, List<String>> getArrayItemNull() throws ServiceException {
         try {
             ServiceResponse<Map<String, List<String>>> response = getArrayItemNullDelegate(service.getArrayItemNull(), null);
@@ -1541,6 +2143,12 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null,
+     * "2": ["7", "8", "9"]}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getArrayItemNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
         service.getArrayItemNullAsync(new ServiceResponseCallback() {
             @Override
@@ -1561,6 +2169,13 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2":
+     * ["7", "8", "9"]}
+     *
+     * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, List<String>> getArrayItemEmpty() throws ServiceException {
         try {
             ServiceResponse<Map<String, List<String>>> response = getArrayItemEmptyDelegate(service.getArrayItemEmpty(), null);
@@ -1571,6 +2186,12 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2":
+     * ["7", "8", "9"]}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getArrayItemEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
         service.getArrayItemEmptyAsync(new ServiceResponseCallback() {
             @Override
@@ -1591,6 +2212,13 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
+     * "6"], "2": ["7", "8", "9"]}
+     *
+     * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, List<String>> getArrayValid() throws ServiceException {
         try {
             ServiceResponse<Map<String, List<String>>> response = getArrayValidDelegate(service.getArrayValid(), null);
@@ -1601,6 +2229,12 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
+     * "6"], "2": ["7", "8", "9"]}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getArrayValidAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
         service.getArrayValidAsync(new ServiceResponseCallback() {
             @Override
@@ -1621,6 +2255,13 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
+     * "6"], "2": ["7", "8", "9"]}
+     *
+     * @param arrayBody the Map&lt;String, List&lt;String&gt;&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putArrayValid(Map<String, List<String>> arrayBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putArrayValidDelegate(service.putArrayValid(arrayBody), null);
@@ -1631,6 +2272,13 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
+     * "6"], "2": ["7", "8", "9"]}
+     *
+     * @param arrayBody the Map&lt;String, List&lt;String&gt;&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putArrayValidAsync(Map<String, List<String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
         service.putArrayValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
@@ -1651,6 +2299,12 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get an dictionaries of dictionaries with value null
+     *
+     * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Map<String, String>> getDictionaryNull() throws ServiceException {
         try {
             ServiceResponse<Map<String, Map<String, String>>> response = getDictionaryNullDelegate(service.getDictionaryNull(), null);
@@ -1661,6 +2315,11 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get an dictionaries of dictionaries with value null
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getDictionaryNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
         service.getDictionaryNullAsync(new ServiceResponseCallback() {
             @Override
@@ -1681,6 +2340,13 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
+     * value {}
+     *
+     * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Map<String, String>> getDictionaryEmpty() throws ServiceException {
         try {
             ServiceResponse<Map<String, Map<String, String>>> response = getDictionaryEmptyDelegate(service.getDictionaryEmpty(), null);
@@ -1691,6 +2357,12 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
+     * value {}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getDictionaryEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
         service.getDictionaryEmptyAsync(new ServiceResponseCallback() {
             @Override
@@ -1711,6 +2383,14 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
+     * value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2":
+     * {"7": "seven", "8": "eight", "9": "nine"}}
+     *
+     * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Map<String, String>> getDictionaryItemNull() throws ServiceException {
         try {
             ServiceResponse<Map<String, Map<String, String>>> response = getDictionaryItemNullDelegate(service.getDictionaryItemNull(), null);
@@ -1721,6 +2401,13 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
+     * value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2":
+     * {"7": "seven", "8": "eight", "9": "nine"}}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getDictionaryItemNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
         service.getDictionaryItemNullAsync(new ServiceResponseCallback() {
             @Override
@@ -1741,6 +2428,14 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
+     * value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2":
+     * {"7": "seven", "8": "eight", "9": "nine"}}
+     *
+     * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Map<String, String>> getDictionaryItemEmpty() throws ServiceException {
         try {
             ServiceResponse<Map<String, Map<String, String>>> response = getDictionaryItemEmptyDelegate(service.getDictionaryItemEmpty(), null);
@@ -1751,6 +2446,13 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
+     * value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2":
+     * {"7": "seven", "8": "eight", "9": "nine"}}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getDictionaryItemEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
         service.getDictionaryItemEmptyAsync(new ServiceResponseCallback() {
             @Override
@@ -1771,6 +2473,15 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
+     * value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four",
+     * "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9":
+     * "nine"}}
+     *
+     * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public Map<String, Map<String, String>> getDictionaryValid() throws ServiceException {
         try {
             ServiceResponse<Map<String, Map<String, String>>> response = getDictionaryValidDelegate(service.getDictionaryValid(), null);
@@ -1781,6 +2492,14 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
+     * value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four",
+     * "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9":
+     * "nine"}}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void getDictionaryValidAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
         service.getDictionaryValidAsync(new ServiceResponseCallback() {
             @Override
@@ -1801,6 +2520,15 @@ public class DictionaryImpl implements Dictionary {
                 .build(response, error);
     }
 
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
+     * value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four",
+     * "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9":
+     * "nine"}}
+     *
+     * @param arrayBody the Map&lt;String, Map&lt;String, String&gt;&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     public void putDictionaryValid(Map<String, Map<String, String>> arrayBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putDictionaryValidDelegate(service.putDictionaryValid(arrayBody), null);
@@ -1811,6 +2539,15 @@ public class DictionaryImpl implements Dictionary {
         }
     }
 
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
+     * value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four",
+     * "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9":
+     * "nine"}}
+     *
+     * @param arrayBody the Map&lt;String, Map&lt;String, String&gt;&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     public void putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
         service.putDictionaryValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override

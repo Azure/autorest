@@ -30,7 +30,7 @@ public class AutoRestSwaggerBATServiceImpl extends ServiceClient implements Auto
     private StringOperations stringOperations;
 
     /**
-     * Test Infrastructure for AutoRest Swagger BAT
+     * Gets the StringOperations object to access its operations.
      * @return the stringOperations value.
      */
     public StringOperations getStringOperations() {
@@ -40,23 +40,38 @@ public class AutoRestSwaggerBATServiceImpl extends ServiceClient implements Auto
     private EnumOperations enumOperations;
 
     /**
-     * Test Infrastructure for AutoRest Swagger BAT
+     * Gets the EnumOperations object to access its operations.
      * @return the enumOperations value.
      */
     public EnumOperations getEnumOperations() {
         return this.enumOperations;
     }
 
+    /**
+     * Initializes an instance of AutoRestSwaggerBATService client.
+     */
     public AutoRestSwaggerBATServiceImpl() {
         this("http://localhost");
     }
 
+    /**
+     * Initializes an instance of AutoRestSwaggerBATService client.
+     *
+     * @param baseUri the base URI of the host
+     */
     public AutoRestSwaggerBATServiceImpl(String baseUri) {
         super();
         this.baseUri = baseUri;
         initialize();
     }
 
+    /**
+     * Initializes an instance of AutoRestSwaggerBATService client.
+     *
+     * @param baseUri the base URI of the host
+     * @param client the {@link OkHttpClient} client to use for REST calls
+     * @param restAdapterBuilder the builder for building up a {@link RestAdapter}
+     */
     public AutoRestSwaggerBATServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
         super(client, restAdapterBuilder);
         this.baseUri = baseUri;

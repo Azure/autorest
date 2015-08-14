@@ -14,32 +14,71 @@ package fixtures.bodycomplex.models;
  * 
  */
 public class Basic {
+    /*
+     * 
+     */
     private int Id;
 
+    /*
+     * 
+     */
     private String Name;
 
+    /*
+     * Possible values for this property include: 'cyan', 'Magenta', 'YELLOW', 'blacK'.
+     */
     private CMYKColors Color;
 
+    /*
+     * Get 
+     *
+     * @return the Id value
+     */ 
     public int getId() {
         return this.Id;
     }
 
+    /*
+     * Set 
+     *
+     * @param the Id value to set
+     */
     public void setId(int Id) {
         this.Id = Id;
     }
 
+    /*
+     * Get 
+     *
+     * @return the Name value
+     */ 
     public String getName() {
         return this.Name;
     }
 
+    /*
+     * Set 
+     *
+     * @param the Name value to set
+     */
     public void setName(String Name) {
         this.Name = Name;
     }
 
+    /*
+     * Get Possible values for this property include: 'cyan', 'Magenta', 'YELLOW', 'blacK'.
+     *
+     * @return the Color value
+     */ 
     public CMYKColors getColor() {
         return this.Color;
     }
 
+    /*
+     * Set Possible values for this property include: 'cyan', 'Magenta', 'YELLOW', 'blacK'.
+     *
+     * @param the Color value to set
+     */
     public void setColor(CMYKColors Color) {
         this.Color = Color;
     }

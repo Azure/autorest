@@ -17,7 +17,15 @@ import retrofit.http.GET;
 import retrofit.http.PUT;
 import retrofit.http.Body;
 
+/**
+ * An instance of this class provides access to all the operations defined
+ * in Bool.
+ */
 public interface Bool {
+    /**
+     * The interface defining all the services for Bool to be
+     * used by Retrofit to perform actually REST calls.
+     */
     interface BoolService {
         @GET("/bool/true")
         Response getTrue() throws ServiceException;
@@ -56,28 +64,96 @@ public interface Bool {
         void getInvalidAsync(ServiceResponseCallback cb);
 
     }
+    /**
+     * Get true Boolean value
+     *
+     * @return the boolean object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     boolean getTrue() throws ServiceException;
 
+    /**
+     * Get true Boolean value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getTrueAsync(final ServiceCallback<Boolean> serviceCallback);
 
+    /**
+     * Set Boolean value true
+     *
+     * @param boolBody the boolean value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void putTrue(boolean boolBody) throws ServiceException;
 
+    /**
+     * Set Boolean value true
+     *
+     * @param boolBody the boolean value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get false Boolean value
+     *
+     * @return the boolean object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     boolean getFalse() throws ServiceException;
 
+    /**
+     * Get false Boolean value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getFalseAsync(final ServiceCallback<Boolean> serviceCallback);
 
+    /**
+     * Set Boolean value false
+     *
+     * @param boolBody the boolean value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void putFalse(boolean boolBody) throws ServiceException;
 
+    /**
+     * Set Boolean value false
+     *
+     * @param boolBody the boolean value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get null Boolean value
+     *
+     * @return the boolean object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     boolean getNull() throws ServiceException;
 
+    /**
+     * Get null Boolean value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getNullAsync(final ServiceCallback<Boolean> serviceCallback);
 
+    /**
+     * Get invalid Boolean value
+     *
+     * @return the boolean object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     boolean getInvalid() throws ServiceException;
 
+    /**
+     * Get invalid Boolean value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getInvalidAsync(final ServiceCallback<Boolean> serviceCallback);
 
 }

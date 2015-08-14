@@ -42,16 +42,5 @@ namespace Microsoft.Rest.Generator.Java
                 return MethodGroups.Select(mg => new MethodGroupTemplateModel(this, mg));
             }
         }
-
-        public virtual IEnumerable<string> Imports
-        {
-            get
-            {
-                if (this.ModelTypes.Any())
-                {
-                }
-                return new List<string>();
-            }
-        }
     }
 }

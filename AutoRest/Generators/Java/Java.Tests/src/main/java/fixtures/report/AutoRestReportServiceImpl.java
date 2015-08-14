@@ -27,16 +27,31 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
         return this.baseUri;
     }
 
+    /**
+     * Initializes an instance of AutoRestReportService client.
+     */
     public AutoRestReportServiceImpl() {
         this("http://localhost");
     }
 
+    /**
+     * Initializes an instance of AutoRestReportService client.
+     *
+     * @param baseUri the base URI of the host
+     */
     public AutoRestReportServiceImpl(String baseUri) {
         super();
         this.baseUri = baseUri;
         initialize();
     }
 
+    /**
+     * Initializes an instance of AutoRestReportService client.
+     *
+     * @param baseUri the base URI of the host
+     * @param client the {@link OkHttpClient} client to use for REST calls
+     * @param restAdapterBuilder the builder for building up a {@link RestAdapter}
+     */
     public AutoRestReportServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
         super(client, restAdapterBuilder);
         this.baseUri = baseUri;

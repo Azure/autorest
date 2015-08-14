@@ -26,7 +26,15 @@ import retrofit.http.GET;
 import retrofit.http.PUT;
 import retrofit.http.Body;
 
+/**
+ * An instance of this class provides access to all the operations defined
+ * in Primitive.
+ */
 public interface Primitive {
+    /**
+     * The interface defining all the services for Primitive to be
+     * used by Retrofit to perform actually REST calls.
+     */
     interface PrimitiveService {
         @GET("/complex/primitive/integer")
         Response getInt() throws ServiceException;
@@ -137,76 +145,283 @@ public interface Primitive {
         void putByteAsync(@Body ByteWrapper complexBody, ServiceResponseCallback cb);
 
     }
+    /**
+     * Get complex types with integer properties
+     *
+     * @return the IntWrapper object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     IntWrapper getInt() throws ServiceException;
 
+    /**
+     * Get complex types with integer properties
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getIntAsync(final ServiceCallback<IntWrapper> serviceCallback);
 
+    /**
+     * Put complex types with integer properties
+     *
+     * @param complexBody Please put -1 and 2
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void putInt(IntWrapper complexBody) throws ServiceException;
 
+    /**
+     * Put complex types with integer properties
+     *
+     * @param complexBody Please put -1 and 2
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void putIntAsync(IntWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get complex types with long properties
+     *
+     * @return the LongWrapper object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     LongWrapper getLong() throws ServiceException;
 
+    /**
+     * Get complex types with long properties
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getLongAsync(final ServiceCallback<LongWrapper> serviceCallback);
 
+    /**
+     * Put complex types with long properties
+     *
+     * @param complexBody Please put 1099511627775 and -999511627788
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void putLong(LongWrapper complexBody) throws ServiceException;
 
+    /**
+     * Put complex types with long properties
+     *
+     * @param complexBody Please put 1099511627775 and -999511627788
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void putLongAsync(LongWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get complex types with float properties
+     *
+     * @return the FloatWrapper object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     FloatWrapper getFloat() throws ServiceException;
 
+    /**
+     * Get complex types with float properties
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getFloatAsync(final ServiceCallback<FloatWrapper> serviceCallback);
 
+    /**
+     * Put complex types with float properties
+     *
+     * @param complexBody Please put 1.05 and -0.003
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void putFloat(FloatWrapper complexBody) throws ServiceException;
 
+    /**
+     * Put complex types with float properties
+     *
+     * @param complexBody Please put 1.05 and -0.003
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void putFloatAsync(FloatWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get complex types with double properties
+     *
+     * @return the DoubleWrapper object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     DoubleWrapper getDouble() throws ServiceException;
 
+    /**
+     * Get complex types with double properties
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getDoubleAsync(final ServiceCallback<DoubleWrapper> serviceCallback);
 
+    /**
+     * Put complex types with double properties
+     *
+     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void putDouble(DoubleWrapper complexBody) throws ServiceException;
 
+    /**
+     * Put complex types with double properties
+     *
+     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void putDoubleAsync(DoubleWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get complex types with bool properties
+     *
+     * @return the BooleanWrapper object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     BooleanWrapper getBool() throws ServiceException;
 
+    /**
+     * Get complex types with bool properties
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getBoolAsync(final ServiceCallback<BooleanWrapper> serviceCallback);
 
+    /**
+     * Put complex types with bool properties
+     *
+     * @param complexBody Please put true and false
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void putBool(BooleanWrapper complexBody) throws ServiceException;
 
+    /**
+     * Put complex types with bool properties
+     *
+     * @param complexBody Please put true and false
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void putBoolAsync(BooleanWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get complex types with string properties
+     *
+     * @return the StringWrapper object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     StringWrapper getString() throws ServiceException;
 
+    /**
+     * Get complex types with string properties
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getStringAsync(final ServiceCallback<StringWrapper> serviceCallback);
 
+    /**
+     * Put complex types with string properties
+     *
+     * @param complexBody Please put 'goodrequest', '', and null
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void putString(StringWrapper complexBody) throws ServiceException;
 
+    /**
+     * Put complex types with string properties
+     *
+     * @param complexBody Please put 'goodrequest', '', and null
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void putStringAsync(StringWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get complex types with date properties
+     *
+     * @return the DateWrapper object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     DateWrapper getDate() throws ServiceException;
 
+    /**
+     * Get complex types with date properties
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getDateAsync(final ServiceCallback<DateWrapper> serviceCallback);
 
+    /**
+     * Put complex types with date properties
+     *
+     * @param complexBody Please put '0001-01-01' and '2016-02-29'
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void putDate(DateWrapper complexBody) throws ServiceException;
 
+    /**
+     * Put complex types with date properties
+     *
+     * @param complexBody Please put '0001-01-01' and '2016-02-29'
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void putDateAsync(DateWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get complex types with datetime properties
+     *
+     * @return the DatetimeWrapper object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     DatetimeWrapper getDateTime() throws ServiceException;
 
+    /**
+     * Get complex types with datetime properties
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getDateTimeAsync(final ServiceCallback<DatetimeWrapper> serviceCallback);
 
+    /**
+     * Put complex types with datetime properties
+     *
+     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void putDateTime(DatetimeWrapper complexBody) throws ServiceException;
 
+    /**
+     * Put complex types with datetime properties
+     *
+     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void putDateTimeAsync(DatetimeWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
+    /**
+     * Get complex types with byte properties
+     *
+     * @return the ByteWrapper object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     ByteWrapper getByte() throws ServiceException;
 
+    /**
+     * Get complex types with byte properties
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void getByteAsync(final ServiceCallback<ByteWrapper> serviceCallback);
 
+    /**
+     * Put complex types with byte properties
+     *
+     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
     void putByte(ByteWrapper complexBody) throws ServiceException;
 
+    /**
+     * Put complex types with byte properties
+     *
+     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
     void putByteAsync(ByteWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
 }

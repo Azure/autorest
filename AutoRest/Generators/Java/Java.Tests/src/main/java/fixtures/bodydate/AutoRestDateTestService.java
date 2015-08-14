@@ -9,8 +9,6 @@
 
 package fixtures.bodydate;
 
-import com.microsoft.rest.ServiceClient;
-
 /**
  * The interface for AutoRestDateTestService class.
  */
@@ -22,7 +20,7 @@ public interface AutoRestDateTestService {
     String getBaseUri();
 
     /**
-     * Test Infrastructure for AutoRest
+     * Gets the DateOperations object to access its operations.
      * @return the dateOperations value.
      */
     DateOperations getDateOperations();
