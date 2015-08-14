@@ -12,30 +12,30 @@ package fixtures.bodycomplex.models;
 import java.util.Map;
 
 /**
- * 
+ * The DictionaryWrapper model.
  */
 public class DictionaryWrapper {
-    /*
-     * 
+    /**
+     * The defaultProgram property.
      */
-    private Map<String, String> DefaultProgram;
+    private Map<String, String> defaultProgram;
 
-    /*
-     * Get 
+    /**
+     * Get the defaultProgram value.
      *
-     * @return the DefaultProgram value
+     * @return the defaultProgram value
      */ 
     public Map<String, String> getDefaultProgram() {
-        return this.DefaultProgram;
+        return this.defaultProgram;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the defaultProgram value.
      *
-     * @param the DefaultProgram value to set
+     * @param defaultProgram the defaultProgram value to set
      */
-    public void setDefaultProgram(Map<String, String> DefaultProgram) {
-        this.DefaultProgram = DefaultProgram;
+    public void setDefaultProgram(Map<String, String> defaultProgram) {
+        this.defaultProgram = defaultProgram;
     }
 
 }

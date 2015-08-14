@@ -12,53 +12,53 @@ package fixtures.bodycomplex.models;
 import java.util.List;
 
 /**
- * 
+ * The Cat model.
  */
 public class Cat {
-    /*
-     * 
+    /**
+     * The color property.
      */
-    private String Color;
+    private String color;
 
-    /*
-     * 
+    /**
+     * The hates property.
      */
-    private List<Dog> Hates;
+    private List<Dog> hates;
 
-    /*
-     * Get 
+    /**
+     * Get the color value.
      *
-     * @return the Color value
+     * @return the color value
      */ 
     public String getColor() {
-        return this.Color;
+        return this.color;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the color value.
      *
-     * @param the Color value to set
+     * @param color the color value to set
      */
-    public void setColor(String Color) {
-        this.Color = Color;
+    public void setColor(String color) {
+        this.color = color;
     }
 
-    /*
-     * Get 
+    /**
+     * Get the hates value.
      *
-     * @return the Hates value
+     * @return the hates value
      */ 
     public List<Dog> getHates() {
-        return this.Hates;
+        return this.hates;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the hates value.
      *
-     * @param the Hates value to set
+     * @param hates the hates value to set
      */
-    public void setHates(List<Dog> Hates) {
-        this.Hates = Hates;
+    public void setHates(List<Dog> hates) {
+        this.hates = hates;
     }
 
 }

@@ -12,30 +12,30 @@ package fixtures.requiredoptional.models;
 import java.util.List;
 
 /**
- * 
+ * The ArrayWrapper model.
  */
 public class ArrayWrapper {
-    /*
-     * 
+    /**
+     * The value property.
      */
-    private List<String> Value;
+    private List<String> value;
 
-    /*
-     * Get 
+    /**
+     * Get the value value.
      *
-     * @return the Value value
+     * @return the value value
      */ 
     public List<String> getValue() {
-        return this.Value;
+        return this.value;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the value value.
      *
-     * @param the Value value to set
+     * @param value the value value to set
      */
-    public void setValue(List<String> Value) {
-        this.Value = Value;
+    public void setValue(List<String> value) {
+        this.value = value;
     }
 
 }

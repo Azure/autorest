@@ -11,53 +11,53 @@ package fixtures.bodycomplex.models;
 
 
 /**
- * 
+ * The FloatWrapper model.
  */
 public class FloatWrapper {
-    /*
-     * 
+    /**
+     * The field1 property.
      */
-    private double Field1;
+    private double field1;
 
-    /*
-     * 
+    /**
+     * The field2 property.
      */
-    private double Field2;
+    private double field2;
 
-    /*
-     * Get 
+    /**
+     * Get the field1 value.
      *
-     * @return the Field1 value
+     * @return the field1 value
      */ 
     public double getField1() {
-        return this.Field1;
+        return this.field1;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the field1 value.
      *
-     * @param the Field1 value to set
+     * @param field1 the field1 value to set
      */
-    public void setField1(double Field1) {
-        this.Field1 = Field1;
+    public void setField1(double field1) {
+        this.field1 = field1;
     }
 
-    /*
-     * Get 
+    /**
+     * Get the field2 value.
      *
-     * @return the Field2 value
+     * @return the field2 value
      */ 
     public double getField2() {
-        return this.Field2;
+        return this.field2;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the field2 value.
      *
-     * @param the Field2 value to set
+     * @param field2 the field2 value to set
      */
-    public void setField2(double Field2) {
-        this.Field2 = Field2;
+    public void setField2(double field2) {
+        this.field2 = field2;
     }
 
 }

@@ -11,53 +11,53 @@ package fixtures.bodycomplex.models;
 
 
 /**
- * 
+ * The BooleanWrapper model.
  */
 public class BooleanWrapper {
-    /*
-     * 
+    /**
+     * The fieldTrue property.
      */
-    private boolean FieldTrue;
+    private boolean fieldTrue;
 
-    /*
-     * 
+    /**
+     * The fieldFalse property.
      */
-    private boolean FieldFalse;
+    private boolean fieldFalse;
 
-    /*
-     * Get 
+    /**
+     * Get the fieldTrue value.
      *
-     * @return the FieldTrue value
+     * @return the fieldTrue value
      */ 
     public boolean getFieldTrue() {
-        return this.FieldTrue;
+        return this.fieldTrue;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the fieldTrue value.
      *
-     * @param the FieldTrue value to set
+     * @param fieldTrue the fieldTrue value to set
      */
-    public void setFieldTrue(boolean FieldTrue) {
-        this.FieldTrue = FieldTrue;
+    public void setFieldTrue(boolean fieldTrue) {
+        this.fieldTrue = fieldTrue;
     }
 
-    /*
-     * Get 
+    /**
+     * Get the fieldFalse value.
      *
-     * @return the FieldFalse value
+     * @return the fieldFalse value
      */ 
     public boolean getFieldFalse() {
-        return this.FieldFalse;
+        return this.fieldFalse;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the fieldFalse value.
      *
-     * @param the FieldFalse value to set
+     * @param fieldFalse the fieldFalse value to set
      */
-    public void setFieldFalse(boolean FieldFalse) {
-        this.FieldFalse = FieldFalse;
+    public void setFieldFalse(boolean fieldFalse) {
+        this.fieldFalse = fieldFalse;
     }
 
 }

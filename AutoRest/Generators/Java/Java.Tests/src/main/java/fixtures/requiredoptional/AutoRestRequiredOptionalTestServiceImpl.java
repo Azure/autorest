@@ -32,7 +32,7 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
     /**
      * number of items to skip
      *
-     * @return the RequiredGlobalPath value.
+     * @return the requiredGlobalPath value.
      */
     public String getRequiredGlobalPath() {
         return this.requiredGlobalPath;
@@ -43,7 +43,7 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
     /**
      * number of items to skip
      *
-     * @return the RequiredGlobalQuery value.
+     * @return the requiredGlobalQuery value.
      */
     public String getRequiredGlobalQuery() {
         return this.requiredGlobalQuery;

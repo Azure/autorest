@@ -12,30 +12,30 @@ package fixtures.bodycomplex.models;
 import org.apache.commons.lang3.ArrayUtils;
 
 /**
- * 
+ * The ByteWrapper model.
  */
 public class ByteWrapper {
-    /*
-     * 
+    /**
+     * The field property.
      */
-    private byte[] Field;
+    private byte[] field;
 
-    /*
-     * Get 
+    /**
+     * Get the field value.
      *
-     * @return the Field value
+     * @return the field value
      */ 
     public byte[] getField() {
-        return this.Field;
+        return this.field;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the field value.
      *
-     * @param the Field value to set
+     * @param field the field value to set
      */
-    public void setField(byte[] Field) {
-        this.Field = Field;
+    public void setField(byte[] field) {
+        this.field = field;
     }
 
 }

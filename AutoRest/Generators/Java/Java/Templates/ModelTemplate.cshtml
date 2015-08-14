@@ -17,13 +17,13 @@ package @(Settings.Namespace.ToLower()).models;
 @EmptyLine
 
 /**
- * @Model.Documentation
+@WrapComment(" * ", Model.Documentation ?? "The " + Model.Name + " model.")
  */
 public class @(Model.Name) {
 @foreach (var property in Model.Properties)
 {
-@:    /*
-@:     * @property.Documentation
+@:    /**
+@:    @WrapComment(" * ", property.Documentation ?? "The " + property.Name + " property.")
 @:     */
 @:    private @property.Type @property.Name;
 @EmptyLine
@@ -31,8 +31,8 @@ public class @(Model.Name) {
 
 @foreach (var property in Model.Properties)
 {
-@:    /*
-@:     * Get @property.Documentation
+@:    /**
+@:     * Get the @property.Name value.
 @:     *
 @:     * @@return the @property.Name value
 @:     */ 
@@ -40,10 +40,10 @@ public class @(Model.Name) {
 @:        return this.@(property.Name);
 @:    }
 @EmptyLine
-@:    /*
-@:     * Set @property.Documentation
+@:    /**
+@:     * Set the @property.Name value.
 @:     *
-@:     * @@param the @property.Name value to set
+@:     * @@param @property.Name the @property.Name value to set
 @:     */
 @:    public void set@(property.Name.ToPascalCase())(@property.Type @property.Name) {
 @:        this.@(property.Name) = @property.Name;

@@ -11,30 +11,30 @@ package fixtures.http.models;
 
 
 /**
- * 
+ * The C model.
  */
 public class C {
-    /*
-     * 
+    /**
+     * The httpCode property.
      */
-    private String HttpCode;
+    private String httpCode;
 
-    /*
-     * Get 
+    /**
+     * Get the httpCode value.
      *
-     * @return the HttpCode value
+     * @return the httpCode value
      */ 
     public String getHttpCode() {
-        return this.HttpCode;
+        return this.httpCode;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the httpCode value.
      *
-     * @param the HttpCode value to set
+     * @param httpCode the httpCode value to set
      */
-    public void setHttpCode(String HttpCode) {
-        this.HttpCode = HttpCode;
+    public void setHttpCode(String httpCode) {
+        this.httpCode = httpCode;
     }
 
 }

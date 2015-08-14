@@ -11,30 +11,30 @@ package fixtures.bodycomplex.models;
 
 
 /**
- * 
+ * The Siamese model.
  */
 public class Siamese {
-    /*
-     * 
+    /**
+     * The breed property.
      */
-    private String Breed;
+    private String breed;
 
-    /*
-     * Get 
+    /**
+     * Get the breed value.
      *
-     * @return the Breed value
+     * @return the breed value
      */ 
     public String getBreed() {
-        return this.Breed;
+        return this.breed;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the breed value.
      *
-     * @param the Breed value to set
+     * @param breed the breed value to set
      */
-    public void setBreed(String Breed) {
-        this.Breed = Breed;
+    public void setBreed(String breed) {
+        this.breed = breed;
     }
 
 }

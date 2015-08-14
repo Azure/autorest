@@ -11,30 +11,30 @@ package fixtures.requiredoptional.models;
 
 
 /**
- * 
+ * The ClassOptionalWrapper model.
  */
 public class ClassOptionalWrapper {
-    /*
-     * 
+    /**
+     * The value property.
      */
-    private Product Value;
+    private Product value;
 
-    /*
-     * Get 
+    /**
+     * Get the value value.
      *
-     * @return the Value value
+     * @return the value value
      */ 
     public Product getValue() {
-        return this.Value;
+        return this.value;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the value value.
      *
-     * @param the Value value to set
+     * @param value the value value to set
      */
-    public void setValue(Product Value) {
-        this.Value = Value;
+    public void setValue(Product value) {
+        this.value = value;
     }
 
 }

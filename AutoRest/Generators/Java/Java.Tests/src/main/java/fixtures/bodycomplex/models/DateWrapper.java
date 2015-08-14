@@ -12,53 +12,53 @@ package fixtures.bodycomplex.models;
 import java.util.Date;
 
 /**
- * 
+ * The DateWrapper model.
  */
 public class DateWrapper {
-    /*
-     * 
+    /**
+     * The field property.
      */
-    private Date Field;
+    private Date field;
 
-    /*
-     * 
+    /**
+     * The leap property.
      */
-    private Date Leap;
+    private Date leap;
 
-    /*
-     * Get 
+    /**
+     * Get the field value.
      *
-     * @return the Field value
+     * @return the field value
      */ 
     public Date getField() {
-        return this.Field;
+        return this.field;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the field value.
      *
-     * @param the Field value to set
+     * @param field the field value to set
      */
-    public void setField(Date Field) {
-        this.Field = Field;
+    public void setField(Date field) {
+        this.field = field;
     }
 
-    /*
-     * Get 
+    /**
+     * Get the leap value.
      *
-     * @return the Leap value
+     * @return the leap value
      */ 
     public Date getLeap() {
-        return this.Leap;
+        return this.leap;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the leap value.
      *
-     * @param the Leap value to set
+     * @param leap the leap value to set
      */
-    public void setLeap(Date Leap) {
-        this.Leap = Leap;
+    public void setLeap(Date leap) {
+        this.leap = leap;
     }
 
 }

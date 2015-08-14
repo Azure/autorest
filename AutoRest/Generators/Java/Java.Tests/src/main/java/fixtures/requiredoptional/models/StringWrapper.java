@@ -11,30 +11,30 @@ package fixtures.requiredoptional.models;
 
 
 /**
- * 
+ * The StringWrapper model.
  */
 public class StringWrapper {
-    /*
-     * 
+    /**
+     * The value property.
      */
-    private String Value;
+    private String value;
 
-    /*
-     * Get 
+    /**
+     * Get the value value.
      *
-     * @return the Value value
+     * @return the value value
      */ 
     public String getValue() {
-        return this.Value;
+        return this.value;
     }
 
-    /*
-     * Set 
+    /**
+     * Set the value value.
      *
-     * @param the Value value to set
+     * @param value the value value to set
      */
-    public void setValue(String Value) {
-        this.Value = Value;
+    public void setValue(String value) {
+        this.value = value;
     }
 
 }
