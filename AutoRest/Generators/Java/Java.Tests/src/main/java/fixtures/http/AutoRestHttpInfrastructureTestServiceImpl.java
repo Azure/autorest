@@ -115,12 +115,12 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.httpFailure = new HttpFailure(restAdapter);
-        this.httpSuccess = new HttpSuccess(restAdapter);
-        this.httpRedirects = new HttpRedirects(restAdapter);
-        this.httpClientFailure = new HttpClientFailure(restAdapter);
-        this.httpServerFailure = new HttpServerFailure(restAdapter);
-        this.httpRetry = new HttpRetry(restAdapter);
-        this.multipleResponses = new MultipleResponses(restAdapter);
+        this.httpFailure = new HttpFailureImpl(restAdapter);
+        this.httpSuccess = new HttpSuccessImpl(restAdapter);
+        this.httpRedirects = new HttpRedirectsImpl(restAdapter);
+        this.httpClientFailure = new HttpClientFailureImpl(restAdapter);
+        this.httpServerFailure = new HttpServerFailureImpl(restAdapter);
+        this.httpRetry = new HttpRetryImpl(restAdapter);
+        this.multipleResponses = new MultipleResponsesImpl(restAdapter);
     }
 }

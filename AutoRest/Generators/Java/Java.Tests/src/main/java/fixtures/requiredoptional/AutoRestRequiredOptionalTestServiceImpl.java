@@ -85,7 +85,7 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.implicit = new Implicit(restAdapter);
-        this.explicit = new Explicit(restAdapter);
+        this.implicit = new ImplicitImpl(restAdapter);
+        this.explicit = new ExplicitImpl(restAdapter);
     }
 }

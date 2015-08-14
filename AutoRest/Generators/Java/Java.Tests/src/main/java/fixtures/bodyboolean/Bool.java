@@ -9,27 +9,16 @@
 
 package fixtures.bodyboolean;
 
-import com.google.gson.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
 import retrofit.http.GET;
 import retrofit.http.PUT;
 import retrofit.http.Body;
 
-public class Bool {
-    private BoolService service;
-
-    public Bool(RestAdapter restAdapter) {
-        service = restAdapter.create(BoolService.class);
-    }
-
-    public interface BoolService {
+public interface Bool {
+    interface BoolService {
         @GET("/bool/true")
         Response getTrue() throws ServiceException;
 
@@ -37,10 +26,10 @@ public class Bool {
         void getTrueAsync(ServiceResponseCallback cb);
 
         @PUT("/bool/true")
-        Response putTrue(@Body Boolean boolBody) throws ServiceException;
+        Response putTrue(@Body boolean boolBody) throws ServiceException;
 
         @PUT("/bool/true")
-        void putTrueAsync(@Body Boolean boolBody, ServiceResponseCallback cb);
+        void putTrueAsync(@Body boolean boolBody, ServiceResponseCallback cb);
 
         @GET("/bool/false")
         Response getFalse() throws ServiceException;
@@ -49,10 +38,10 @@ public class Bool {
         void getFalseAsync(ServiceResponseCallback cb);
 
         @PUT("/bool/false")
-        Response putFalse(@Body Boolean boolBody) throws ServiceException;
+        Response putFalse(@Body boolean boolBody) throws ServiceException;
 
         @PUT("/bool/false")
-        void putFalseAsync(@Body Boolean boolBody, ServiceResponseCallback cb);
+        void putFalseAsync(@Body boolean boolBody, ServiceResponseCallback cb);
 
         @GET("/bool/null")
         Response getNull() throws ServiceException;
@@ -67,172 +56,28 @@ public class Bool {
         void getInvalidAsync(ServiceResponseCallback cb);
 
     }
-    public Boolean getTrue() throws ServiceException {
-        try {
-            return getTrueDelegate(service.getTrue(), null).getBody();
-        } catch (RetrofitError error) {
-            return getTrueDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    boolean getTrue() throws ServiceException;
 
-    public void getTrueAsync(final ServiceCallback<Boolean> serviceCallback) {
-        service.getTrueAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getTrueDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void getTrueAsync(final ServiceCallback<Boolean> serviceCallback);
 
-    private ServiceResponse<Boolean> getTrueDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Boolean>()
-                .register(200, new TypeToken<Boolean>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void putTrue(boolean boolBody) throws ServiceException;
 
-    public void putTrue(Boolean boolBody) throws ServiceException {
-        try {
-            putTrueDelegate(service.putTrue(boolBody), null).getBody();
-        } catch (RetrofitError error) {
-            putTrueDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    void putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback);
 
-    public void putTrueAsync(Boolean boolBody, final ServiceCallback<Void> serviceCallback) {
-        service.putTrueAsync(boolBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putTrueDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    boolean getFalse() throws ServiceException;
 
-    private ServiceResponse<Void> putTrueDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void getFalseAsync(final ServiceCallback<Boolean> serviceCallback);
 
-    public Boolean getFalse() throws ServiceException {
-        try {
-            return getFalseDelegate(service.getFalse(), null).getBody();
-        } catch (RetrofitError error) {
-            return getFalseDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    void putFalse(boolean boolBody) throws ServiceException;
 
-    public void getFalseAsync(final ServiceCallback<Boolean> serviceCallback) {
-        service.getFalseAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getFalseDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback);
 
-    private ServiceResponse<Boolean> getFalseDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Boolean>()
-                .register(200, new TypeToken<Boolean>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    boolean getNull() throws ServiceException;
 
-    public void putFalse(Boolean boolBody) throws ServiceException {
-        try {
-            putFalseDelegate(service.putFalse(boolBody), null).getBody();
-        } catch (RetrofitError error) {
-            putFalseDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    void getNullAsync(final ServiceCallback<Boolean> serviceCallback);
 
-    public void putFalseAsync(Boolean boolBody, final ServiceCallback<Void> serviceCallback) {
-        service.putFalseAsync(boolBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putFalseDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    boolean getInvalid() throws ServiceException;
 
-    private ServiceResponse<Void> putFalseDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Boolean getNull() throws ServiceException {
-        try {
-            return getNullDelegate(service.getNull(), null).getBody();
-        } catch (RetrofitError error) {
-            return getNullDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getNullAsync(final ServiceCallback<Boolean> serviceCallback) {
-        service.getNullAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getNullDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Boolean> getNullDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Boolean>()
-                .register(200, new TypeToken<Boolean>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Boolean getInvalid() throws ServiceException {
-        try {
-            return getInvalidDelegate(service.getInvalid(), null).getBody();
-        } catch (RetrofitError error) {
-            return getInvalidDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getInvalidAsync(final ServiceCallback<Boolean> serviceCallback) {
-        service.getInvalidAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getInvalidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Boolean> getInvalidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Boolean>()
-                .register(200, new TypeToken<Boolean>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void getInvalidAsync(final ServiceCallback<Boolean> serviceCallback);
 
 }

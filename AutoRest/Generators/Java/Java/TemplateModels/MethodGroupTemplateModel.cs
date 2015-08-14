@@ -42,7 +42,7 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public IEnumerable<String> Imports
+        public IEnumerable<String> ImplImports
         {
             get
             {
@@ -50,6 +50,7 @@ namespace Microsoft.Rest.Generator.Java
                 IList<IType> types = this.MethodTemplateModels
                     .SelectMany(mtm => mtm.Parameters.Select(p => p.Type))
                     .Concat(this.MethodTemplateModels.SelectMany(mtm => mtm.Responses.Select(res => res.Value)))
+                    .Concat(this.MethodTemplateModels.Select(mtm => mtm.DefaultResponse))
                     .Distinct()
                     .ToList();
 
@@ -80,6 +81,48 @@ namespace Microsoft.Rest.Generator.Java
                         }
                     }
                 }
+                return classes.AsEnumerable();
+            }
+        }
+
+        public IEnumerable<String> InterfaceImports
+        {
+            get
+            {
+                HashSet<String> classes = new HashSet<string>();
+                IList<IType> types = this.MethodTemplateModels
+                    .SelectMany(mtm => mtm.Parameters.Select(p => p.Type))
+                    .Concat(this.MethodTemplateModels.Select(mtm => mtm.ReturnType))
+                    .Distinct()
+                    .ToList();
+                for (int i = 0; i < types.Count; i++)
+                {
+                    var type = types[i];
+                    if (type is SequenceType)
+                    {
+                        classes.Add("java.util.List");
+                        types.Add(((SequenceType)type).ElementType);
+                    }
+                    else if (type is DictionaryType)
+                    {
+                        classes.Add("java.util.Map");
+                        types.Add(((DictionaryType)type).ValueType);
+                    }
+                    else if (type is CompositeType || type is EnumType)
+                    {
+                        var ctype = type as CompositeType;
+                        classes.Add(string.Join(".", this.Namespace.ToLower(), "models", type.Name));
+                    }
+                    else if (type is PrimaryType && type != PrimaryType.ByteArray)
+                    {
+                        var importedFrom = JavaCodeNamer.ImportedFrom(type as PrimaryType);
+                        if (importedFrom != null)
+                        {
+                            classes.Add(importedFrom);
+                        }
+                    }
+                }
+
                 foreach (var method in this.MethodTemplateModels)
                 {
                     classes.Add("retrofit.http." + method.HttpMethod.ToString().ToUpper());
@@ -87,10 +130,9 @@ namespace Microsoft.Rest.Generator.Java
                     {
                         if (param.Location != ParameterLocation.None &&
                             param.Location != ParameterLocation.FormData)
-                        classes.Add("retrofit.http." + param.Location.ToString());
+                            classes.Add("retrofit.http." + param.Location.ToString());
                     }
                 }
-
                 return classes.AsEnumerable();
             }
         }

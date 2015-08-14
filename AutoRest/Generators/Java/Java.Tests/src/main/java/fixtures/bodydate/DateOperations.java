@@ -9,28 +9,17 @@
 
 package fixtures.bodydate;
 
-import com.google.gson.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
 import java.util.Date;
 import retrofit.http.GET;
 import retrofit.http.PUT;
 import retrofit.http.Body;
 
-public class DateOperations {
-    private DateService service;
-
-    public DateOperations(RestAdapter restAdapter) {
-        service = restAdapter.create(DateService.class);
-    }
-
-    public interface DateService {
+public interface DateOperations {
+    interface DateService {
         @GET("/date/null")
         Response getNull() throws ServiceException;
 
@@ -80,228 +69,36 @@ public class DateOperations {
         void getMinDateAsync(ServiceResponseCallback cb);
 
     }
-    public Date getNull() throws ServiceException {
-        try {
-            return getNullDelegate(service.getNull(), null).getBody();
-        } catch (RetrofitError error) {
-            return getNullDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    Date getNull() throws ServiceException;
 
-    public void getNullAsync(final ServiceCallback<Date> serviceCallback) {
-        service.getNullAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getNullDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void getNullAsync(final ServiceCallback<Date> serviceCallback);
 
-    private ServiceResponse<Date> getNullDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Date>()
-                .register(200, new TypeToken<Date>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    Date getInvalidDate() throws ServiceException;
 
-    public Date getInvalidDate() throws ServiceException {
-        try {
-            return getInvalidDateDelegate(service.getInvalidDate(), null).getBody();
-        } catch (RetrofitError error) {
-            return getInvalidDateDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    void getInvalidDateAsync(final ServiceCallback<Date> serviceCallback);
 
-    public void getInvalidDateAsync(final ServiceCallback<Date> serviceCallback) {
-        service.getInvalidDateAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getInvalidDateDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    Date getOverflowDate() throws ServiceException;
 
-    private ServiceResponse<Date> getInvalidDateDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Date>()
-                .register(200, new TypeToken<Date>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void getOverflowDateAsync(final ServiceCallback<Date> serviceCallback);
 
-    public Date getOverflowDate() throws ServiceException {
-        try {
-            return getOverflowDateDelegate(service.getOverflowDate(), null).getBody();
-        } catch (RetrofitError error) {
-            return getOverflowDateDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    Date getUnderflowDate() throws ServiceException;
 
-    public void getOverflowDateAsync(final ServiceCallback<Date> serviceCallback) {
-        service.getOverflowDateAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getOverflowDateDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void getUnderflowDateAsync(final ServiceCallback<Date> serviceCallback);
 
-    private ServiceResponse<Date> getOverflowDateDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Date>()
-                .register(200, new TypeToken<Date>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void putMaxDate(Date dateBody) throws ServiceException;
 
-    public Date getUnderflowDate() throws ServiceException {
-        try {
-            return getUnderflowDateDelegate(service.getUnderflowDate(), null).getBody();
-        } catch (RetrofitError error) {
-            return getUnderflowDateDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    void putMaxDateAsync(Date dateBody, final ServiceCallback<Void> serviceCallback);
 
-    public void getUnderflowDateAsync(final ServiceCallback<Date> serviceCallback) {
-        service.getUnderflowDateAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getUnderflowDateDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    Date getMaxDate() throws ServiceException;
 
-    private ServiceResponse<Date> getUnderflowDateDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Date>()
-                .register(200, new TypeToken<Date>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void getMaxDateAsync(final ServiceCallback<Date> serviceCallback);
 
-    public void putMaxDate(Date dateBody) throws ServiceException {
-        try {
-            putMaxDateDelegate(service.putMaxDate(dateBody), null).getBody();
-        } catch (RetrofitError error) {
-            putMaxDateDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    void putMinDate(Date dateBody) throws ServiceException;
 
-    public void putMaxDateAsync(Date dateBody, final ServiceCallback<Void> serviceCallback) {
-        service.putMaxDateAsync(dateBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putMaxDateDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void putMinDateAsync(Date dateBody, final ServiceCallback<Void> serviceCallback);
 
-    private ServiceResponse<Void> putMaxDateDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    Date getMinDate() throws ServiceException;
 
-    public Date getMaxDate() throws ServiceException {
-        try {
-            return getMaxDateDelegate(service.getMaxDate(), null).getBody();
-        } catch (RetrofitError error) {
-            return getMaxDateDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getMaxDateAsync(final ServiceCallback<Date> serviceCallback) {
-        service.getMaxDateAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getMaxDateDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Date> getMaxDateDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Date>()
-                .register(200, new TypeToken<Date>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void putMinDate(Date dateBody) throws ServiceException {
-        try {
-            putMinDateDelegate(service.putMinDate(dateBody), null).getBody();
-        } catch (RetrofitError error) {
-            putMinDateDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void putMinDateAsync(Date dateBody, final ServiceCallback<Void> serviceCallback) {
-        service.putMinDateAsync(dateBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putMinDateDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> putMinDateDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Date getMinDate() throws ServiceException {
-        try {
-            return getMinDateDelegate(service.getMinDate(), null).getBody();
-        } catch (RetrofitError error) {
-            return getMinDateDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getMinDateAsync(final ServiceCallback<Date> serviceCallback) {
-        service.getMinDateAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getMinDateDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Date> getMinDateDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Date>()
-                .register(200, new TypeToken<Date>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void getMinDateAsync(final ServiceCallback<Date> serviceCallback);
 
 }

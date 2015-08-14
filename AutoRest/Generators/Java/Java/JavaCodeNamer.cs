@@ -253,30 +253,34 @@ namespace Microsoft.Rest.Generator.Java
             return primaryType;
         }
 
-        public static IType NormalizeGenericType(IType type)
+        public static IType WrapPrimitiveType(IType type)
         {
             if (type is PrimaryType)
             {
-                var primaryType = type as PrimaryType;
-                if (primaryType.Name == "boolean")
+                var primaryType = new PrimaryType();
+                if (type.Name == "boolean")
                 {
                     primaryType.Name = "Boolean";
                 }
-                else if (primaryType.Name == "byte[]")
+                else if (type.Name == "byte[]")
                 {
                     primaryType.Name = "Byte[]";
                 }
-                else if (primaryType.Name == "double")
+                else if (type.Name == "double")
                 {
                     primaryType.Name = "Double";
                 }
-                else if (primaryType.Name == "int")
+                else if (type.Name == "int")
                 {
                     primaryType.Name = "Integer";
                 }
-                else if (primaryType.Name == "long")
+                else if (type.Name == "long")
                 {
                     primaryType.Name = "Long";
+                }
+                else
+                {
+                    primaryType.Name = type.Name;
                 }
                 return primaryType;
             }
@@ -294,35 +298,40 @@ namespace Microsoft.Rest.Generator.Java
 
         private IType NormalizeSequenceType(SequenceType sequenceType)
         {
-            sequenceType.ElementType = NormalizeGenericType(NormalizeType(sequenceType.ElementType));
+            sequenceType.ElementType = WrapPrimitiveType(NormalizeType(sequenceType.ElementType));
             sequenceType.NameFormat = "List<{0}>";
             return sequenceType;
         }
 
         private IType NormalizeDictionaryType(DictionaryType dictionaryType)
         {
-            dictionaryType.ValueType = NormalizeGenericType(NormalizeType(dictionaryType.ValueType));
+            dictionaryType.ValueType = WrapPrimitiveType(NormalizeType(dictionaryType.ValueType));
             dictionaryType.NameFormat = "Map<String, {0}>";
             return dictionaryType;
         }
 
         public static String ImportedFrom(PrimaryType primaryType)
         {
-            if (primaryType == PrimaryType.Date)
+            if (primaryType == PrimaryType.Date ||
+                primaryType == PrimaryType.DateTime ||
+                primaryType.Name == "Date")
             {
                 return "java.util.Date";
             }
-            else if (primaryType == PrimaryType.DateTime)
-            {
-                return "java.util.Date";
-            }
-            else if (primaryType == PrimaryType.Stream)
+            else if (primaryType == PrimaryType.Stream ||
+                primaryType.Name == "InputStream")
             {
                 return "java.io.InputStream";
             }
-            else if (primaryType == PrimaryType.TimeSpan)
+            else if (primaryType == PrimaryType.TimeSpan ||
+                primaryType.Name == "Period")
             {
                 return "java.time.Period";
+            }
+            else if (primaryType == PrimaryType.ByteArray ||
+                primaryType.Name == "byte[]")
+            {
+                return "org.apache.commons.lang3.ArrayUtils";
             }
             else
             {

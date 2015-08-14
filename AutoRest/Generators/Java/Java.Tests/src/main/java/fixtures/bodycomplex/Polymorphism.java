@@ -9,28 +9,17 @@
 
 package fixtures.bodycomplex;
 
-import com.google.gson.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
 import fixtures.bodycomplex.models.Fish;
 import retrofit.http.GET;
 import retrofit.http.PUT;
 import retrofit.http.Body;
 
-public class Polymorphism {
-    private PolymorphismService service;
-
-    public Polymorphism(RestAdapter restAdapter) {
-        service = restAdapter.create(PolymorphismService.class);
-    }
-
-    public interface PolymorphismService {
+public interface Polymorphism {
+    interface PolymorphismService {
         @GET("/complex/polymorphism/valid")
         Response getValid() throws ServiceException;
 
@@ -50,88 +39,16 @@ public class Polymorphism {
         void putValidMissingRequiredAsync(@Body Fish complexBody, ServiceResponseCallback cb);
 
     }
-    public Fish getValid() throws ServiceException {
-        try {
-            return getValidDelegate(service.getValid(), null).getBody();
-        } catch (RetrofitError error) {
-            return getValidDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    Fish getValid() throws ServiceException;
 
-    public void getValidAsync(final ServiceCallback<Fish> serviceCallback) {
-        service.getValidAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getValidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void getValidAsync(final ServiceCallback<Fish> serviceCallback);
 
-    private ServiceResponse<Fish> getValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Fish>()
-                .register(200, new TypeToken<Fish>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void putValid(Fish complexBody) throws ServiceException;
 
-    public void putValid(Fish complexBody) throws ServiceException {
-        try {
-            putValidDelegate(service.putValid(complexBody), null).getBody();
-        } catch (RetrofitError error) {
-            putValidDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    void putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
 
-    public void putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
-        service.putValidAsync(complexBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putValidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void putValidMissingRequired(Fish complexBody) throws ServiceException;
 
-    private ServiceResponse<Void> putValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void putValidMissingRequired(Fish complexBody) throws ServiceException {
-        try {
-            putValidMissingRequiredDelegate(service.putValidMissingRequired(complexBody), null).getBody();
-        } catch (RetrofitError error) {
-            putValidMissingRequiredDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void putValidMissingRequiredAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
-        service.putValidMissingRequiredAsync(complexBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putValidMissingRequiredDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> putValidMissingRequiredDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void putValidMissingRequiredAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
 
 }

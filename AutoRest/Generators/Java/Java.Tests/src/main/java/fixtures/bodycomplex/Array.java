@@ -9,28 +9,17 @@
 
 package fixtures.bodycomplex;
 
-import com.google.gson.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
 import fixtures.bodycomplex.models.ArrayWrapper;
 import retrofit.http.GET;
 import retrofit.http.PUT;
 import retrofit.http.Body;
 
-public class Array {
-    private ArrayService service;
-
-    public Array(RestAdapter restAdapter) {
-        service = restAdapter.create(ArrayService.class);
-    }
-
-    public interface ArrayService {
+public interface Array {
+    interface ArrayService {
         @GET("/complex/array/valid")
         Response getValid() throws ServiceException;
 
@@ -62,144 +51,24 @@ public class Array {
         void getNotProvidedAsync(ServiceResponseCallback cb);
 
     }
-    public ArrayWrapper getValid() throws ServiceException {
-        try {
-            return getValidDelegate(service.getValid(), null).getBody();
-        } catch (RetrofitError error) {
-            return getValidDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    ArrayWrapper getValid() throws ServiceException;
 
-    public void getValidAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
-        service.getValidAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getValidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void getValidAsync(final ServiceCallback<ArrayWrapper> serviceCallback);
 
-    private ServiceResponse<ArrayWrapper> getValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<ArrayWrapper>()
-                .register(200, new TypeToken<ArrayWrapper>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void putValid(ArrayWrapper complexBody) throws ServiceException;
 
-    public void putValid(ArrayWrapper complexBody) throws ServiceException {
-        try {
-            putValidDelegate(service.putValid(complexBody), null).getBody();
-        } catch (RetrofitError error) {
-            putValidDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    void putValidAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
-    public void putValidAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        service.putValidAsync(complexBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putValidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    ArrayWrapper getEmpty() throws ServiceException;
 
-    private ServiceResponse<Void> putValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void getEmptyAsync(final ServiceCallback<ArrayWrapper> serviceCallback);
 
-    public ArrayWrapper getEmpty() throws ServiceException {
-        try {
-            return getEmptyDelegate(service.getEmpty(), null).getBody();
-        } catch (RetrofitError error) {
-            return getEmptyDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    void putEmpty(ArrayWrapper complexBody) throws ServiceException;
 
-    public void getEmptyAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
-        service.getEmptyAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getEmptyDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void putEmptyAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
-    private ServiceResponse<ArrayWrapper> getEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<ArrayWrapper>()
-                .register(200, new TypeToken<ArrayWrapper>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    ArrayWrapper getNotProvided() throws ServiceException;
 
-    public void putEmpty(ArrayWrapper complexBody) throws ServiceException {
-        try {
-            putEmptyDelegate(service.putEmpty(complexBody), null).getBody();
-        } catch (RetrofitError error) {
-            putEmptyDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void putEmptyAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        service.putEmptyAsync(complexBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putEmptyDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> putEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public ArrayWrapper getNotProvided() throws ServiceException {
-        try {
-            return getNotProvidedDelegate(service.getNotProvided(), null).getBody();
-        } catch (RetrofitError error) {
-            return getNotProvidedDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getNotProvidedAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
-        service.getNotProvidedAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getNotProvidedDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<ArrayWrapper> getNotProvidedDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<ArrayWrapper>()
-                .register(200, new TypeToken<ArrayWrapper>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void getNotProvidedAsync(final ServiceCallback<ArrayWrapper> serviceCallback);
 
 }

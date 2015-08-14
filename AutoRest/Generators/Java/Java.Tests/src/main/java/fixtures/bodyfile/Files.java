@@ -9,26 +9,15 @@
 
 package fixtures.bodyfile;
 
-import com.google.gson.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
 import java.io.InputStream;
 import retrofit.http.GET;
 
-public class Files {
-    private FilesService service;
-
-    public Files(RestAdapter restAdapter) {
-        service = restAdapter.create(FilesService.class);
-    }
-
-    public interface FilesService {
+public interface Files {
+    interface FilesService {
         @GET("/files/stream/nonempty")
         Response getFile() throws ServiceException;
 
@@ -42,60 +31,12 @@ public class Files {
         void getEmptyFileAsync(ServiceResponseCallback cb);
 
     }
-    public InputStream getFile() throws ServiceException {
-        try {
-            return getFileDelegate(service.getFile(), null).getBody();
-        } catch (RetrofitError error) {
-            return getFileDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    InputStream getFile() throws ServiceException;
 
-    public void getFileAsync(final ServiceCallback<InputStream> serviceCallback) {
-        service.getFileAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getFileDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void getFileAsync(final ServiceCallback<InputStream> serviceCallback);
 
-    private ServiceResponse<InputStream> getFileDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<InputStream>()
-                .register(200, new TypeToken<InputStream>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    InputStream getEmptyFile() throws ServiceException;
 
-    public InputStream getEmptyFile() throws ServiceException {
-        try {
-            return getEmptyFileDelegate(service.getEmptyFile(), null).getBody();
-        } catch (RetrofitError error) {
-            return getEmptyFileDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback) {
-        service.getEmptyFileAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getEmptyFileDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<InputStream> getEmptyFileDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<InputStream>()
-                .register(200, new TypeToken<InputStream>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback);
 
 }

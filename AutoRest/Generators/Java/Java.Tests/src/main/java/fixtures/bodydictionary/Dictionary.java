@@ -9,15 +9,10 @@
 
 package fixtures.bodydictionary;
 
-import com.google.gson.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
 import java.util.Map;
 import java.util.Date;
 import fixtures.bodydictionary.models.Widget;
@@ -26,14 +21,8 @@ import retrofit.http.GET;
 import retrofit.http.PUT;
 import retrofit.http.Body;
 
-public class Dictionary {
-    private DictionaryService service;
-
-    public Dictionary(RestAdapter restAdapter) {
-        service = restAdapter.create(DictionaryService.class);
-    }
-
-    public interface DictionaryService {
+public interface Dictionary {
+    interface DictionaryService {
         @GET("/dictionary/null")
         Response getNull() throws ServiceException;
 
@@ -395,1684 +384,244 @@ public class Dictionary {
         void putDictionaryValidAsync(@Body Map<String, Map<String, String>> arrayBody, ServiceResponseCallback cb);
 
     }
-    public Map<String, Integer> getNull() throws ServiceException {
-        try {
-            return getNullDelegate(service.getNull(), null).getBody();
-        } catch (RetrofitError error) {
-            return getNullDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getNullAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        service.getNullAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getNullDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Integer>> getNullDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Integer>>()
-                .register(200, new TypeToken<Map<String, Integer>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Integer> getEmpty() throws ServiceException {
-        try {
-            return getEmptyDelegate(service.getEmpty(), null).getBody();
-        } catch (RetrofitError error) {
-            return getEmptyDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getEmptyAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        service.getEmptyAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getEmptyDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Integer>> getEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Integer>>()
-                .register(200, new TypeToken<Map<String, Integer>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void putEmpty(Map<String, String> arrayBody) throws ServiceException {
-        try {
-            putEmptyDelegate(service.putEmpty(arrayBody), null).getBody();
-        } catch (RetrofitError error) {
-            putEmptyDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void putEmptyAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        service.putEmptyAsync(arrayBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putEmptyDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> putEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, String> getNullValue() throws ServiceException {
-        try {
-            return getNullValueDelegate(service.getNullValue(), null).getBody();
-        } catch (RetrofitError error) {
-            return getNullValueDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getNullValueAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        service.getNullValueAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getNullValueDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, String>> getNullValueDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, String>>()
-                .register(200, new TypeToken<Map<String, String>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, String> getNullKey() throws ServiceException {
-        try {
-            return getNullKeyDelegate(service.getNullKey(), null).getBody();
-        } catch (RetrofitError error) {
-            return getNullKeyDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getNullKeyAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        service.getNullKeyAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getNullKeyDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, String>> getNullKeyDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, String>>()
-                .register(200, new TypeToken<Map<String, String>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, String> getEmptyStringKey() throws ServiceException {
-        try {
-            return getEmptyStringKeyDelegate(service.getEmptyStringKey(), null).getBody();
-        } catch (RetrofitError error) {
-            return getEmptyStringKeyDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getEmptyStringKeyAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        service.getEmptyStringKeyAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getEmptyStringKeyDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, String>> getEmptyStringKeyDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, String>>()
-                .register(200, new TypeToken<Map<String, String>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, String> getInvalid() throws ServiceException {
-        try {
-            return getInvalidDelegate(service.getInvalid(), null).getBody();
-        } catch (RetrofitError error) {
-            return getInvalidDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        service.getInvalidAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getInvalidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, String>> getInvalidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, String>>()
-                .register(200, new TypeToken<Map<String, String>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Boolean> getBooleanTfft() throws ServiceException {
-        try {
-            return getBooleanTfftDelegate(service.getBooleanTfft(), null).getBody();
-        } catch (RetrofitError error) {
-            return getBooleanTfftDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getBooleanTfftAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
-        service.getBooleanTfftAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getBooleanTfftDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Boolean>> getBooleanTfftDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Boolean>>()
-                .register(200, new TypeToken<Map<String, Boolean>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void putBooleanTfft(Map<String, Boolean> arrayBody) throws ServiceException {
-        try {
-            putBooleanTfftDelegate(service.putBooleanTfft(arrayBody), null).getBody();
-        } catch (RetrofitError error) {
-            putBooleanTfftDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void putBooleanTfftAsync(Map<String, Boolean> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        service.putBooleanTfftAsync(arrayBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putBooleanTfftDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> putBooleanTfftDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Boolean> getBooleanInvalidNull() throws ServiceException {
-        try {
-            return getBooleanInvalidNullDelegate(service.getBooleanInvalidNull(), null).getBody();
-        } catch (RetrofitError error) {
-            return getBooleanInvalidNullDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getBooleanInvalidNullAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
-        service.getBooleanInvalidNullAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getBooleanInvalidNullDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Boolean>> getBooleanInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Boolean>>()
-                .register(200, new TypeToken<Map<String, Boolean>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Boolean> getBooleanInvalidString() throws ServiceException {
-        try {
-            return getBooleanInvalidStringDelegate(service.getBooleanInvalidString(), null).getBody();
-        } catch (RetrofitError error) {
-            return getBooleanInvalidStringDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getBooleanInvalidStringAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
-        service.getBooleanInvalidStringAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getBooleanInvalidStringDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Boolean>> getBooleanInvalidStringDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Boolean>>()
-                .register(200, new TypeToken<Map<String, Boolean>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Integer> getIntegerValid() throws ServiceException {
-        try {
-            return getIntegerValidDelegate(service.getIntegerValid(), null).getBody();
-        } catch (RetrofitError error) {
-            return getIntegerValidDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getIntegerValidAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        service.getIntegerValidAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getIntegerValidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Integer>> getIntegerValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Integer>>()
-                .register(200, new TypeToken<Map<String, Integer>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void putIntegerValid(Map<String, Integer> arrayBody) throws ServiceException {
-        try {
-            putIntegerValidDelegate(service.putIntegerValid(arrayBody), null).getBody();
-        } catch (RetrofitError error) {
-            putIntegerValidDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void putIntegerValidAsync(Map<String, Integer> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        service.putIntegerValidAsync(arrayBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putIntegerValidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> putIntegerValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Integer> getIntInvalidNull() throws ServiceException {
-        try {
-            return getIntInvalidNullDelegate(service.getIntInvalidNull(), null).getBody();
-        } catch (RetrofitError error) {
-            return getIntInvalidNullDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getIntInvalidNullAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        service.getIntInvalidNullAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getIntInvalidNullDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Integer>> getIntInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Integer>>()
-                .register(200, new TypeToken<Map<String, Integer>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Integer> getIntInvalidString() throws ServiceException {
-        try {
-            return getIntInvalidStringDelegate(service.getIntInvalidString(), null).getBody();
-        } catch (RetrofitError error) {
-            return getIntInvalidStringDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getIntInvalidStringAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        service.getIntInvalidStringAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getIntInvalidStringDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Integer>> getIntInvalidStringDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Integer>>()
-                .register(200, new TypeToken<Map<String, Integer>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Long> getLongValid() throws ServiceException {
-        try {
-            return getLongValidDelegate(service.getLongValid(), null).getBody();
-        } catch (RetrofitError error) {
-            return getLongValidDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getLongValidAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
-        service.getLongValidAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getLongValidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Long>> getLongValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Long>>()
-                .register(200, new TypeToken<Map<String, Long>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void putLongValid(Map<String, Long> arrayBody) throws ServiceException {
-        try {
-            putLongValidDelegate(service.putLongValid(arrayBody), null).getBody();
-        } catch (RetrofitError error) {
-            putLongValidDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void putLongValidAsync(Map<String, Long> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        service.putLongValidAsync(arrayBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putLongValidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> putLongValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Long> getLongInvalidNull() throws ServiceException {
-        try {
-            return getLongInvalidNullDelegate(service.getLongInvalidNull(), null).getBody();
-        } catch (RetrofitError error) {
-            return getLongInvalidNullDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getLongInvalidNullAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
-        service.getLongInvalidNullAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getLongInvalidNullDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Long>> getLongInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Long>>()
-                .register(200, new TypeToken<Map<String, Long>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Long> getLongInvalidString() throws ServiceException {
-        try {
-            return getLongInvalidStringDelegate(service.getLongInvalidString(), null).getBody();
-        } catch (RetrofitError error) {
-            return getLongInvalidStringDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getLongInvalidStringAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
-        service.getLongInvalidStringAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getLongInvalidStringDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Long>> getLongInvalidStringDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Long>>()
-                .register(200, new TypeToken<Map<String, Long>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Double> getFloatValid() throws ServiceException {
-        try {
-            return getFloatValidDelegate(service.getFloatValid(), null).getBody();
-        } catch (RetrofitError error) {
-            return getFloatValidDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getFloatValidAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
-        service.getFloatValidAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getFloatValidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Double>> getFloatValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Double>>()
-                .register(200, new TypeToken<Map<String, Double>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void putFloatValid(Map<String, Double> arrayBody) throws ServiceException {
-        try {
-            putFloatValidDelegate(service.putFloatValid(arrayBody), null).getBody();
-        } catch (RetrofitError error) {
-            putFloatValidDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void putFloatValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        service.putFloatValidAsync(arrayBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putFloatValidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> putFloatValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Double> getFloatInvalidNull() throws ServiceException {
-        try {
-            return getFloatInvalidNullDelegate(service.getFloatInvalidNull(), null).getBody();
-        } catch (RetrofitError error) {
-            return getFloatInvalidNullDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getFloatInvalidNullAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
-        service.getFloatInvalidNullAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getFloatInvalidNullDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Double>> getFloatInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Double>>()
-                .register(200, new TypeToken<Map<String, Double>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Double> getFloatInvalidString() throws ServiceException {
-        try {
-            return getFloatInvalidStringDelegate(service.getFloatInvalidString(), null).getBody();
-        } catch (RetrofitError error) {
-            return getFloatInvalidStringDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getFloatInvalidStringAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
-        service.getFloatInvalidStringAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getFloatInvalidStringDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Double>> getFloatInvalidStringDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Double>>()
-                .register(200, new TypeToken<Map<String, Double>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Double> getDoubleValid() throws ServiceException {
-        try {
-            return getDoubleValidDelegate(service.getDoubleValid(), null).getBody();
-        } catch (RetrofitError error) {
-            return getDoubleValidDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getDoubleValidAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
-        service.getDoubleValidAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getDoubleValidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Double>> getDoubleValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Double>>()
-                .register(200, new TypeToken<Map<String, Double>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void putDoubleValid(Map<String, Double> arrayBody) throws ServiceException {
-        try {
-            putDoubleValidDelegate(service.putDoubleValid(arrayBody), null).getBody();
-        } catch (RetrofitError error) {
-            putDoubleValidDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void putDoubleValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        service.putDoubleValidAsync(arrayBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putDoubleValidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> putDoubleValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Double> getDoubleInvalidNull() throws ServiceException {
-        try {
-            return getDoubleInvalidNullDelegate(service.getDoubleInvalidNull(), null).getBody();
-        } catch (RetrofitError error) {
-            return getDoubleInvalidNullDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getDoubleInvalidNullAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
-        service.getDoubleInvalidNullAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getDoubleInvalidNullDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Double>> getDoubleInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Double>>()
-                .register(200, new TypeToken<Map<String, Double>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Double> getDoubleInvalidString() throws ServiceException {
-        try {
-            return getDoubleInvalidStringDelegate(service.getDoubleInvalidString(), null).getBody();
-        } catch (RetrofitError error) {
-            return getDoubleInvalidStringDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getDoubleInvalidStringAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
-        service.getDoubleInvalidStringAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getDoubleInvalidStringDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Double>> getDoubleInvalidStringDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Double>>()
-                .register(200, new TypeToken<Map<String, Double>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, String> getStringValid() throws ServiceException {
-        try {
-            return getStringValidDelegate(service.getStringValid(), null).getBody();
-        } catch (RetrofitError error) {
-            return getStringValidDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getStringValidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        service.getStringValidAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getStringValidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, String>> getStringValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, String>>()
-                .register(200, new TypeToken<Map<String, String>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void putStringValid(Map<String, String> arrayBody) throws ServiceException {
-        try {
-            putStringValidDelegate(service.putStringValid(arrayBody), null).getBody();
-        } catch (RetrofitError error) {
-            putStringValidDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void putStringValidAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        service.putStringValidAsync(arrayBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putStringValidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> putStringValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, String> getStringWithNull() throws ServiceException {
-        try {
-            return getStringWithNullDelegate(service.getStringWithNull(), null).getBody();
-        } catch (RetrofitError error) {
-            return getStringWithNullDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getStringWithNullAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        service.getStringWithNullAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getStringWithNullDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, String>> getStringWithNullDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, String>>()
-                .register(200, new TypeToken<Map<String, String>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, String> getStringWithInvalid() throws ServiceException {
-        try {
-            return getStringWithInvalidDelegate(service.getStringWithInvalid(), null).getBody();
-        } catch (RetrofitError error) {
-            return getStringWithInvalidDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getStringWithInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        service.getStringWithInvalidAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getStringWithInvalidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, String>> getStringWithInvalidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, String>>()
-                .register(200, new TypeToken<Map<String, String>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Date> getDateValid() throws ServiceException {
-        try {
-            return getDateValidDelegate(service.getDateValid(), null).getBody();
-        } catch (RetrofitError error) {
-            return getDateValidDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getDateValidAsync(final ServiceCallback<Map<String, Date>> serviceCallback) {
-        service.getDateValidAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getDateValidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Date>> getDateValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Date>>()
-                .register(200, new TypeToken<Map<String, Date>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void putDateValid(Map<String, Date> arrayBody) throws ServiceException {
-        try {
-            putDateValidDelegate(service.putDateValid(arrayBody), null).getBody();
-        } catch (RetrofitError error) {
-            putDateValidDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void putDateValidAsync(Map<String, Date> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        service.putDateValidAsync(arrayBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putDateValidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> putDateValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Date> getDateInvalidNull() throws ServiceException {
-        try {
-            return getDateInvalidNullDelegate(service.getDateInvalidNull(), null).getBody();
-        } catch (RetrofitError error) {
-            return getDateInvalidNullDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getDateInvalidNullAsync(final ServiceCallback<Map<String, Date>> serviceCallback) {
-        service.getDateInvalidNullAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getDateInvalidNullDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Date>> getDateInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Date>>()
-                .register(200, new TypeToken<Map<String, Date>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Date> getDateInvalidChars() throws ServiceException {
-        try {
-            return getDateInvalidCharsDelegate(service.getDateInvalidChars(), null).getBody();
-        } catch (RetrofitError error) {
-            return getDateInvalidCharsDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getDateInvalidCharsAsync(final ServiceCallback<Map<String, Date>> serviceCallback) {
-        service.getDateInvalidCharsAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getDateInvalidCharsDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Date>> getDateInvalidCharsDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Date>>()
-                .register(200, new TypeToken<Map<String, Date>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Date> getDateTimeValid() throws ServiceException {
-        try {
-            return getDateTimeValidDelegate(service.getDateTimeValid(), null).getBody();
-        } catch (RetrofitError error) {
-            return getDateTimeValidDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getDateTimeValidAsync(final ServiceCallback<Map<String, Date>> serviceCallback) {
-        service.getDateTimeValidAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getDateTimeValidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Date>> getDateTimeValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Date>>()
-                .register(200, new TypeToken<Map<String, Date>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void putDateTimeValid(Map<String, Date> arrayBody) throws ServiceException {
-        try {
-            putDateTimeValidDelegate(service.putDateTimeValid(arrayBody), null).getBody();
-        } catch (RetrofitError error) {
-            putDateTimeValidDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void putDateTimeValidAsync(Map<String, Date> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        service.putDateTimeValidAsync(arrayBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putDateTimeValidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> putDateTimeValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Date> getDateTimeInvalidNull() throws ServiceException {
-        try {
-            return getDateTimeInvalidNullDelegate(service.getDateTimeInvalidNull(), null).getBody();
-        } catch (RetrofitError error) {
-            return getDateTimeInvalidNullDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getDateTimeInvalidNullAsync(final ServiceCallback<Map<String, Date>> serviceCallback) {
-        service.getDateTimeInvalidNullAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getDateTimeInvalidNullDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Date>> getDateTimeInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Date>>()
-                .register(200, new TypeToken<Map<String, Date>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Date> getDateTimeInvalidChars() throws ServiceException {
-        try {
-            return getDateTimeInvalidCharsDelegate(service.getDateTimeInvalidChars(), null).getBody();
-        } catch (RetrofitError error) {
-            return getDateTimeInvalidCharsDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getDateTimeInvalidCharsAsync(final ServiceCallback<Map<String, Date>> serviceCallback) {
-        service.getDateTimeInvalidCharsAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getDateTimeInvalidCharsDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Date>> getDateTimeInvalidCharsDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Date>>()
-                .register(200, new TypeToken<Map<String, Date>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Byte[]> getByteValid() throws ServiceException {
-        try {
-            return getByteValidDelegate(service.getByteValid(), null).getBody();
-        } catch (RetrofitError error) {
-            return getByteValidDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getByteValidAsync(final ServiceCallback<Map<String, Byte[]>> serviceCallback) {
-        service.getByteValidAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getByteValidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Byte[]>> getByteValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Byte[]>>()
-                .register(200, new TypeToken<Map<String, Byte[]>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void putByteValid(Map<String, Byte[]> arrayBody) throws ServiceException {
-        try {
-            putByteValidDelegate(service.putByteValid(arrayBody), null).getBody();
-        } catch (RetrofitError error) {
-            putByteValidDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void putByteValidAsync(Map<String, Byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        service.putByteValidAsync(arrayBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putByteValidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> putByteValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Byte[]> getByteInvalidNull() throws ServiceException {
-        try {
-            return getByteInvalidNullDelegate(service.getByteInvalidNull(), null).getBody();
-        } catch (RetrofitError error) {
-            return getByteInvalidNullDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getByteInvalidNullAsync(final ServiceCallback<Map<String, Byte[]>> serviceCallback) {
-        service.getByteInvalidNullAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getByteInvalidNullDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Byte[]>> getByteInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Byte[]>>()
-                .register(200, new TypeToken<Map<String, Byte[]>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Widget> getComplexNull() throws ServiceException {
-        try {
-            return getComplexNullDelegate(service.getComplexNull(), null).getBody();
-        } catch (RetrofitError error) {
-            return getComplexNullDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getComplexNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
-        service.getComplexNullAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getComplexNullDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Widget>> getComplexNullDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Widget>>()
-                .register(200, new TypeToken<Map<String, Widget>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Widget> getComplexEmpty() throws ServiceException {
-        try {
-            return getComplexEmptyDelegate(service.getComplexEmpty(), null).getBody();
-        } catch (RetrofitError error) {
-            return getComplexEmptyDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getComplexEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
-        service.getComplexEmptyAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getComplexEmptyDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Widget>> getComplexEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Widget>>()
-                .register(200, new TypeToken<Map<String, Widget>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Widget> getComplexItemNull() throws ServiceException {
-        try {
-            return getComplexItemNullDelegate(service.getComplexItemNull(), null).getBody();
-        } catch (RetrofitError error) {
-            return getComplexItemNullDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getComplexItemNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
-        service.getComplexItemNullAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getComplexItemNullDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Widget>> getComplexItemNullDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Widget>>()
-                .register(200, new TypeToken<Map<String, Widget>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Widget> getComplexItemEmpty() throws ServiceException {
-        try {
-            return getComplexItemEmptyDelegate(service.getComplexItemEmpty(), null).getBody();
-        } catch (RetrofitError error) {
-            return getComplexItemEmptyDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getComplexItemEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
-        service.getComplexItemEmptyAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getComplexItemEmptyDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Widget>> getComplexItemEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Widget>>()
-                .register(200, new TypeToken<Map<String, Widget>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Widget> getComplexValid() throws ServiceException {
-        try {
-            return getComplexValidDelegate(service.getComplexValid(), null).getBody();
-        } catch (RetrofitError error) {
-            return getComplexValidDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getComplexValidAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
-        service.getComplexValidAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getComplexValidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Widget>> getComplexValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Widget>>()
-                .register(200, new TypeToken<Map<String, Widget>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void putComplexValid(Map<String, Widget> arrayBody) throws ServiceException {
-        try {
-            putComplexValidDelegate(service.putComplexValid(arrayBody), null).getBody();
-        } catch (RetrofitError error) {
-            putComplexValidDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void putComplexValidAsync(Map<String, Widget> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        service.putComplexValidAsync(arrayBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putComplexValidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> putComplexValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, List<String>> getArrayNull() throws ServiceException {
-        try {
-            return getArrayNullDelegate(service.getArrayNull(), null).getBody();
-        } catch (RetrofitError error) {
-            return getArrayNullDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getArrayNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
-        service.getArrayNullAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getArrayNullDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, List<String>>> getArrayNullDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, List<String>>>()
-                .register(200, new TypeToken<Map<String, List<String>>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, List<String>> getArrayEmpty() throws ServiceException {
-        try {
-            return getArrayEmptyDelegate(service.getArrayEmpty(), null).getBody();
-        } catch (RetrofitError error) {
-            return getArrayEmptyDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getArrayEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
-        service.getArrayEmptyAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getArrayEmptyDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, List<String>>> getArrayEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, List<String>>>()
-                .register(200, new TypeToken<Map<String, List<String>>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, List<String>> getArrayItemNull() throws ServiceException {
-        try {
-            return getArrayItemNullDelegate(service.getArrayItemNull(), null).getBody();
-        } catch (RetrofitError error) {
-            return getArrayItemNullDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getArrayItemNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
-        service.getArrayItemNullAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getArrayItemNullDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, List<String>>> getArrayItemNullDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, List<String>>>()
-                .register(200, new TypeToken<Map<String, List<String>>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, List<String>> getArrayItemEmpty() throws ServiceException {
-        try {
-            return getArrayItemEmptyDelegate(service.getArrayItemEmpty(), null).getBody();
-        } catch (RetrofitError error) {
-            return getArrayItemEmptyDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getArrayItemEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
-        service.getArrayItemEmptyAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getArrayItemEmptyDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, List<String>>> getArrayItemEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, List<String>>>()
-                .register(200, new TypeToken<Map<String, List<String>>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, List<String>> getArrayValid() throws ServiceException {
-        try {
-            return getArrayValidDelegate(service.getArrayValid(), null).getBody();
-        } catch (RetrofitError error) {
-            return getArrayValidDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getArrayValidAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
-        service.getArrayValidAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getArrayValidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, List<String>>> getArrayValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, List<String>>>()
-                .register(200, new TypeToken<Map<String, List<String>>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void putArrayValid(Map<String, List<String>> arrayBody) throws ServiceException {
-        try {
-            putArrayValidDelegate(service.putArrayValid(arrayBody), null).getBody();
-        } catch (RetrofitError error) {
-            putArrayValidDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void putArrayValidAsync(Map<String, List<String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        service.putArrayValidAsync(arrayBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putArrayValidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> putArrayValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Map<String, String>> getDictionaryNull() throws ServiceException {
-        try {
-            return getDictionaryNullDelegate(service.getDictionaryNull(), null).getBody();
-        } catch (RetrofitError error) {
-            return getDictionaryNullDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getDictionaryNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
-        service.getDictionaryNullAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getDictionaryNullDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Map<String, String>>> getDictionaryNullDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Map<String, String>>>()
-                .register(200, new TypeToken<Map<String, Map<String, String>>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Map<String, String>> getDictionaryEmpty() throws ServiceException {
-        try {
-            return getDictionaryEmptyDelegate(service.getDictionaryEmpty(), null).getBody();
-        } catch (RetrofitError error) {
-            return getDictionaryEmptyDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getDictionaryEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
-        service.getDictionaryEmptyAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getDictionaryEmptyDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Map<String, String>>> getDictionaryEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Map<String, String>>>()
-                .register(200, new TypeToken<Map<String, Map<String, String>>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Map<String, String>> getDictionaryItemNull() throws ServiceException {
-        try {
-            return getDictionaryItemNullDelegate(service.getDictionaryItemNull(), null).getBody();
-        } catch (RetrofitError error) {
-            return getDictionaryItemNullDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getDictionaryItemNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
-        service.getDictionaryItemNullAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getDictionaryItemNullDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Map<String, String>>> getDictionaryItemNullDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Map<String, String>>>()
-                .register(200, new TypeToken<Map<String, Map<String, String>>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Map<String, String>> getDictionaryItemEmpty() throws ServiceException {
-        try {
-            return getDictionaryItemEmptyDelegate(service.getDictionaryItemEmpty(), null).getBody();
-        } catch (RetrofitError error) {
-            return getDictionaryItemEmptyDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getDictionaryItemEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
-        service.getDictionaryItemEmptyAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getDictionaryItemEmptyDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Map<String, String>>> getDictionaryItemEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Map<String, String>>>()
-                .register(200, new TypeToken<Map<String, Map<String, String>>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public Map<String, Map<String, String>> getDictionaryValid() throws ServiceException {
-        try {
-            return getDictionaryValidDelegate(service.getDictionaryValid(), null).getBody();
-        } catch (RetrofitError error) {
-            return getDictionaryValidDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getDictionaryValidAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
-        service.getDictionaryValidAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getDictionaryValidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Map<String, Map<String, String>>> getDictionaryValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Map<String, String>>>()
-                .register(200, new TypeToken<Map<String, Map<String, String>>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void putDictionaryValid(Map<String, Map<String, String>> arrayBody) throws ServiceException {
-        try {
-            putDictionaryValidDelegate(service.putDictionaryValid(arrayBody), null).getBody();
-        } catch (RetrofitError error) {
-            putDictionaryValidDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        service.putDictionaryValidAsync(arrayBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putDictionaryValidDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> putDictionaryValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    Map<String, Integer> getNull() throws ServiceException;
+
+    void getNullAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
+
+    Map<String, Integer> getEmpty() throws ServiceException;
+
+    void getEmptyAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
+
+    void putEmpty(Map<String, String> arrayBody) throws ServiceException;
+
+    void putEmptyAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback);
+
+    Map<String, String> getNullValue() throws ServiceException;
+
+    void getNullValueAsync(final ServiceCallback<Map<String, String>> serviceCallback);
+
+    Map<String, String> getNullKey() throws ServiceException;
+
+    void getNullKeyAsync(final ServiceCallback<Map<String, String>> serviceCallback);
+
+    Map<String, String> getEmptyStringKey() throws ServiceException;
+
+    void getEmptyStringKeyAsync(final ServiceCallback<Map<String, String>> serviceCallback);
+
+    Map<String, String> getInvalid() throws ServiceException;
+
+    void getInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback);
+
+    Map<String, Boolean> getBooleanTfft() throws ServiceException;
+
+    void getBooleanTfftAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback);
+
+    void putBooleanTfft(Map<String, Boolean> arrayBody) throws ServiceException;
+
+    void putBooleanTfftAsync(Map<String, Boolean> arrayBody, final ServiceCallback<Void> serviceCallback);
+
+    Map<String, Boolean> getBooleanInvalidNull() throws ServiceException;
+
+    void getBooleanInvalidNullAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback);
+
+    Map<String, Boolean> getBooleanInvalidString() throws ServiceException;
+
+    void getBooleanInvalidStringAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback);
+
+    Map<String, Integer> getIntegerValid() throws ServiceException;
+
+    void getIntegerValidAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
+
+    void putIntegerValid(Map<String, Integer> arrayBody) throws ServiceException;
+
+    void putIntegerValidAsync(Map<String, Integer> arrayBody, final ServiceCallback<Void> serviceCallback);
+
+    Map<String, Integer> getIntInvalidNull() throws ServiceException;
+
+    void getIntInvalidNullAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
+
+    Map<String, Integer> getIntInvalidString() throws ServiceException;
+
+    void getIntInvalidStringAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
+
+    Map<String, Long> getLongValid() throws ServiceException;
+
+    void getLongValidAsync(final ServiceCallback<Map<String, Long>> serviceCallback);
+
+    void putLongValid(Map<String, Long> arrayBody) throws ServiceException;
+
+    void putLongValidAsync(Map<String, Long> arrayBody, final ServiceCallback<Void> serviceCallback);
+
+    Map<String, Long> getLongInvalidNull() throws ServiceException;
+
+    void getLongInvalidNullAsync(final ServiceCallback<Map<String, Long>> serviceCallback);
+
+    Map<String, Long> getLongInvalidString() throws ServiceException;
+
+    void getLongInvalidStringAsync(final ServiceCallback<Map<String, Long>> serviceCallback);
+
+    Map<String, Double> getFloatValid() throws ServiceException;
+
+    void getFloatValidAsync(final ServiceCallback<Map<String, Double>> serviceCallback);
+
+    void putFloatValid(Map<String, Double> arrayBody) throws ServiceException;
+
+    void putFloatValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback);
+
+    Map<String, Double> getFloatInvalidNull() throws ServiceException;
+
+    void getFloatInvalidNullAsync(final ServiceCallback<Map<String, Double>> serviceCallback);
+
+    Map<String, Double> getFloatInvalidString() throws ServiceException;
+
+    void getFloatInvalidStringAsync(final ServiceCallback<Map<String, Double>> serviceCallback);
+
+    Map<String, Double> getDoubleValid() throws ServiceException;
+
+    void getDoubleValidAsync(final ServiceCallback<Map<String, Double>> serviceCallback);
+
+    void putDoubleValid(Map<String, Double> arrayBody) throws ServiceException;
+
+    void putDoubleValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback);
+
+    Map<String, Double> getDoubleInvalidNull() throws ServiceException;
+
+    void getDoubleInvalidNullAsync(final ServiceCallback<Map<String, Double>> serviceCallback);
+
+    Map<String, Double> getDoubleInvalidString() throws ServiceException;
+
+    void getDoubleInvalidStringAsync(final ServiceCallback<Map<String, Double>> serviceCallback);
+
+    Map<String, String> getStringValid() throws ServiceException;
+
+    void getStringValidAsync(final ServiceCallback<Map<String, String>> serviceCallback);
+
+    void putStringValid(Map<String, String> arrayBody) throws ServiceException;
+
+    void putStringValidAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback);
+
+    Map<String, String> getStringWithNull() throws ServiceException;
+
+    void getStringWithNullAsync(final ServiceCallback<Map<String, String>> serviceCallback);
+
+    Map<String, String> getStringWithInvalid() throws ServiceException;
+
+    void getStringWithInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback);
+
+    Map<String, Date> getDateValid() throws ServiceException;
+
+    void getDateValidAsync(final ServiceCallback<Map<String, Date>> serviceCallback);
+
+    void putDateValid(Map<String, Date> arrayBody) throws ServiceException;
+
+    void putDateValidAsync(Map<String, Date> arrayBody, final ServiceCallback<Void> serviceCallback);
+
+    Map<String, Date> getDateInvalidNull() throws ServiceException;
+
+    void getDateInvalidNullAsync(final ServiceCallback<Map<String, Date>> serviceCallback);
+
+    Map<String, Date> getDateInvalidChars() throws ServiceException;
+
+    void getDateInvalidCharsAsync(final ServiceCallback<Map<String, Date>> serviceCallback);
+
+    Map<String, Date> getDateTimeValid() throws ServiceException;
+
+    void getDateTimeValidAsync(final ServiceCallback<Map<String, Date>> serviceCallback);
+
+    void putDateTimeValid(Map<String, Date> arrayBody) throws ServiceException;
+
+    void putDateTimeValidAsync(Map<String, Date> arrayBody, final ServiceCallback<Void> serviceCallback);
+
+    Map<String, Date> getDateTimeInvalidNull() throws ServiceException;
+
+    void getDateTimeInvalidNullAsync(final ServiceCallback<Map<String, Date>> serviceCallback);
+
+    Map<String, Date> getDateTimeInvalidChars() throws ServiceException;
+
+    void getDateTimeInvalidCharsAsync(final ServiceCallback<Map<String, Date>> serviceCallback);
+
+    Map<String, Byte[]> getByteValid() throws ServiceException;
+
+    void getByteValidAsync(final ServiceCallback<Map<String, Byte[]>> serviceCallback);
+
+    void putByteValid(Map<String, Byte[]> arrayBody) throws ServiceException;
+
+    void putByteValidAsync(Map<String, Byte[]> arrayBody, final ServiceCallback<Void> serviceCallback);
+
+    Map<String, Byte[]> getByteInvalidNull() throws ServiceException;
+
+    void getByteInvalidNullAsync(final ServiceCallback<Map<String, Byte[]>> serviceCallback);
+
+    Map<String, Widget> getComplexNull() throws ServiceException;
+
+    void getComplexNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback);
+
+    Map<String, Widget> getComplexEmpty() throws ServiceException;
+
+    void getComplexEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback);
+
+    Map<String, Widget> getComplexItemNull() throws ServiceException;
+
+    void getComplexItemNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback);
+
+    Map<String, Widget> getComplexItemEmpty() throws ServiceException;
+
+    void getComplexItemEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback);
+
+    Map<String, Widget> getComplexValid() throws ServiceException;
+
+    void getComplexValidAsync(final ServiceCallback<Map<String, Widget>> serviceCallback);
+
+    void putComplexValid(Map<String, Widget> arrayBody) throws ServiceException;
+
+    void putComplexValidAsync(Map<String, Widget> arrayBody, final ServiceCallback<Void> serviceCallback);
+
+    Map<String, List<String>> getArrayNull() throws ServiceException;
+
+    void getArrayNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback);
+
+    Map<String, List<String>> getArrayEmpty() throws ServiceException;
+
+    void getArrayEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback);
+
+    Map<String, List<String>> getArrayItemNull() throws ServiceException;
+
+    void getArrayItemNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback);
+
+    Map<String, List<String>> getArrayItemEmpty() throws ServiceException;
+
+    void getArrayItemEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback);
+
+    Map<String, List<String>> getArrayValid() throws ServiceException;
+
+    void getArrayValidAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback);
+
+    void putArrayValid(Map<String, List<String>> arrayBody) throws ServiceException;
+
+    void putArrayValidAsync(Map<String, List<String>> arrayBody, final ServiceCallback<Void> serviceCallback);
+
+    Map<String, Map<String, String>> getDictionaryNull() throws ServiceException;
+
+    void getDictionaryNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
+
+    Map<String, Map<String, String>> getDictionaryEmpty() throws ServiceException;
+
+    void getDictionaryEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
+
+    Map<String, Map<String, String>> getDictionaryItemNull() throws ServiceException;
+
+    void getDictionaryItemNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
+
+    Map<String, Map<String, String>> getDictionaryItemEmpty() throws ServiceException;
+
+    void getDictionaryItemEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
+
+    Map<String, Map<String, String>> getDictionaryValid() throws ServiceException;
+
+    void getDictionaryValidAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
+
+    void putDictionaryValid(Map<String, Map<String, String>> arrayBody) throws ServiceException;
+
+    void putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback);
 
 }

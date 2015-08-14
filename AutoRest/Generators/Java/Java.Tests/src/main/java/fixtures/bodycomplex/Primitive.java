@@ -9,15 +9,10 @@
 
 package fixtures.bodycomplex;
 
-import com.google.gson.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
 import fixtures.bodycomplex.models.IntWrapper;
 import fixtures.bodycomplex.models.LongWrapper;
 import fixtures.bodycomplex.models.FloatWrapper;
@@ -31,14 +26,8 @@ import retrofit.http.GET;
 import retrofit.http.PUT;
 import retrofit.http.Body;
 
-public class Primitive {
-    private PrimitiveService service;
-
-    public Primitive(RestAdapter restAdapter) {
-        service = restAdapter.create(PrimitiveService.class);
-    }
-
-    public interface PrimitiveService {
+public interface Primitive {
+    interface PrimitiveService {
         @GET("/complex/primitive/integer")
         Response getInt() throws ServiceException;
 
@@ -148,508 +137,76 @@ public class Primitive {
         void putByteAsync(@Body ByteWrapper complexBody, ServiceResponseCallback cb);
 
     }
-    public IntWrapper getInt() throws ServiceException {
-        try {
-            return getIntDelegate(service.getInt(), null).getBody();
-        } catch (RetrofitError error) {
-            return getIntDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    IntWrapper getInt() throws ServiceException;
 
-    public void getIntAsync(final ServiceCallback<IntWrapper> serviceCallback) {
-        service.getIntAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getIntDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void getIntAsync(final ServiceCallback<IntWrapper> serviceCallback);
 
-    private ServiceResponse<IntWrapper> getIntDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<IntWrapper>()
-                .register(200, new TypeToken<IntWrapper>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void putInt(IntWrapper complexBody) throws ServiceException;
 
-    public void putInt(IntWrapper complexBody) throws ServiceException {
-        try {
-            putIntDelegate(service.putInt(complexBody), null).getBody();
-        } catch (RetrofitError error) {
-            putIntDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    void putIntAsync(IntWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
-    public void putIntAsync(IntWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        service.putIntAsync(complexBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putIntDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    LongWrapper getLong() throws ServiceException;
 
-    private ServiceResponse<Void> putIntDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void getLongAsync(final ServiceCallback<LongWrapper> serviceCallback);
 
-    public LongWrapper getLong() throws ServiceException {
-        try {
-            return getLongDelegate(service.getLong(), null).getBody();
-        } catch (RetrofitError error) {
-            return getLongDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    void putLong(LongWrapper complexBody) throws ServiceException;
 
-    public void getLongAsync(final ServiceCallback<LongWrapper> serviceCallback) {
-        service.getLongAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getLongDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void putLongAsync(LongWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
-    private ServiceResponse<LongWrapper> getLongDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<LongWrapper>()
-                .register(200, new TypeToken<LongWrapper>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    FloatWrapper getFloat() throws ServiceException;
 
-    public void putLong(LongWrapper complexBody) throws ServiceException {
-        try {
-            putLongDelegate(service.putLong(complexBody), null).getBody();
-        } catch (RetrofitError error) {
-            putLongDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    void getFloatAsync(final ServiceCallback<FloatWrapper> serviceCallback);
 
-    public void putLongAsync(LongWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        service.putLongAsync(complexBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putLongDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void putFloat(FloatWrapper complexBody) throws ServiceException;
 
-    private ServiceResponse<Void> putLongDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void putFloatAsync(FloatWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
-    public FloatWrapper getFloat() throws ServiceException {
-        try {
-            return getFloatDelegate(service.getFloat(), null).getBody();
-        } catch (RetrofitError error) {
-            return getFloatDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    DoubleWrapper getDouble() throws ServiceException;
 
-    public void getFloatAsync(final ServiceCallback<FloatWrapper> serviceCallback) {
-        service.getFloatAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getFloatDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void getDoubleAsync(final ServiceCallback<DoubleWrapper> serviceCallback);
 
-    private ServiceResponse<FloatWrapper> getFloatDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<FloatWrapper>()
-                .register(200, new TypeToken<FloatWrapper>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void putDouble(DoubleWrapper complexBody) throws ServiceException;
 
-    public void putFloat(FloatWrapper complexBody) throws ServiceException {
-        try {
-            putFloatDelegate(service.putFloat(complexBody), null).getBody();
-        } catch (RetrofitError error) {
-            putFloatDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    void putDoubleAsync(DoubleWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
-    public void putFloatAsync(FloatWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        service.putFloatAsync(complexBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putFloatDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    BooleanWrapper getBool() throws ServiceException;
 
-    private ServiceResponse<Void> putFloatDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void getBoolAsync(final ServiceCallback<BooleanWrapper> serviceCallback);
 
-    public DoubleWrapper getDouble() throws ServiceException {
-        try {
-            return getDoubleDelegate(service.getDouble(), null).getBody();
-        } catch (RetrofitError error) {
-            return getDoubleDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    void putBool(BooleanWrapper complexBody) throws ServiceException;
 
-    public void getDoubleAsync(final ServiceCallback<DoubleWrapper> serviceCallback) {
-        service.getDoubleAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getDoubleDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void putBoolAsync(BooleanWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
-    private ServiceResponse<DoubleWrapper> getDoubleDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<DoubleWrapper>()
-                .register(200, new TypeToken<DoubleWrapper>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    StringWrapper getString() throws ServiceException;
 
-    public void putDouble(DoubleWrapper complexBody) throws ServiceException {
-        try {
-            putDoubleDelegate(service.putDouble(complexBody), null).getBody();
-        } catch (RetrofitError error) {
-            putDoubleDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    void getStringAsync(final ServiceCallback<StringWrapper> serviceCallback);
 
-    public void putDoubleAsync(DoubleWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        service.putDoubleAsync(complexBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putDoubleDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void putString(StringWrapper complexBody) throws ServiceException;
 
-    private ServiceResponse<Void> putDoubleDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void putStringAsync(StringWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
-    public BooleanWrapper getBool() throws ServiceException {
-        try {
-            return getBoolDelegate(service.getBool(), null).getBody();
-        } catch (RetrofitError error) {
-            return getBoolDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    DateWrapper getDate() throws ServiceException;
 
-    public void getBoolAsync(final ServiceCallback<BooleanWrapper> serviceCallback) {
-        service.getBoolAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getBoolDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void getDateAsync(final ServiceCallback<DateWrapper> serviceCallback);
 
-    private ServiceResponse<BooleanWrapper> getBoolDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<BooleanWrapper>()
-                .register(200, new TypeToken<BooleanWrapper>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void putDate(DateWrapper complexBody) throws ServiceException;
 
-    public void putBool(BooleanWrapper complexBody) throws ServiceException {
-        try {
-            putBoolDelegate(service.putBool(complexBody), null).getBody();
-        } catch (RetrofitError error) {
-            putBoolDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    void putDateAsync(DateWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
-    public void putBoolAsync(BooleanWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        service.putBoolAsync(complexBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putBoolDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    DatetimeWrapper getDateTime() throws ServiceException;
 
-    private ServiceResponse<Void> putBoolDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void getDateTimeAsync(final ServiceCallback<DatetimeWrapper> serviceCallback);
 
-    public StringWrapper getString() throws ServiceException {
-        try {
-            return getStringDelegate(service.getString(), null).getBody();
-        } catch (RetrofitError error) {
-            return getStringDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    void putDateTime(DatetimeWrapper complexBody) throws ServiceException;
 
-    public void getStringAsync(final ServiceCallback<StringWrapper> serviceCallback) {
-        service.getStringAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getStringDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void putDateTimeAsync(DatetimeWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
-    private ServiceResponse<StringWrapper> getStringDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<StringWrapper>()
-                .register(200, new TypeToken<StringWrapper>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    ByteWrapper getByte() throws ServiceException;
 
-    public void putString(StringWrapper complexBody) throws ServiceException {
-        try {
-            putStringDelegate(service.putString(complexBody), null).getBody();
-        } catch (RetrofitError error) {
-            putStringDelegate(error.getResponse(), error).getBody();
-        }
-    }
+    void getByteAsync(final ServiceCallback<ByteWrapper> serviceCallback);
 
-    public void putStringAsync(StringWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        service.putStringAsync(complexBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putStringDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void putByte(ByteWrapper complexBody) throws ServiceException;
 
-    private ServiceResponse<Void> putStringDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public DateWrapper getDate() throws ServiceException {
-        try {
-            return getDateDelegate(service.getDate(), null).getBody();
-        } catch (RetrofitError error) {
-            return getDateDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getDateAsync(final ServiceCallback<DateWrapper> serviceCallback) {
-        service.getDateAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getDateDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<DateWrapper> getDateDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<DateWrapper>()
-                .register(200, new TypeToken<DateWrapper>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void putDate(DateWrapper complexBody) throws ServiceException {
-        try {
-            putDateDelegate(service.putDate(complexBody), null).getBody();
-        } catch (RetrofitError error) {
-            putDateDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void putDateAsync(DateWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        service.putDateAsync(complexBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putDateDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> putDateDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public DatetimeWrapper getDateTime() throws ServiceException {
-        try {
-            return getDateTimeDelegate(service.getDateTime(), null).getBody();
-        } catch (RetrofitError error) {
-            return getDateTimeDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getDateTimeAsync(final ServiceCallback<DatetimeWrapper> serviceCallback) {
-        service.getDateTimeAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getDateTimeDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<DatetimeWrapper> getDateTimeDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<DatetimeWrapper>()
-                .register(200, new TypeToken<DatetimeWrapper>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void putDateTime(DatetimeWrapper complexBody) throws ServiceException {
-        try {
-            putDateTimeDelegate(service.putDateTime(complexBody), null).getBody();
-        } catch (RetrofitError error) {
-            putDateTimeDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void putDateTimeAsync(DatetimeWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        service.putDateTimeAsync(complexBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putDateTimeDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> putDateTimeDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public ByteWrapper getByte() throws ServiceException {
-        try {
-            return getByteDelegate(service.getByte(), null).getBody();
-        } catch (RetrofitError error) {
-            return getByteDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void getByteAsync(final ServiceCallback<ByteWrapper> serviceCallback) {
-        service.getByteAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getByteDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<ByteWrapper> getByteDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<ByteWrapper>()
-                .register(200, new TypeToken<ByteWrapper>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void putByte(ByteWrapper complexBody) throws ServiceException {
-        try {
-            putByteDelegate(service.putByte(complexBody), null).getBody();
-        } catch (RetrofitError error) {
-            putByteDelegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void putByteAsync(ByteWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        service.putByteAsync(complexBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putByteDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> putByteDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void putByteAsync(ByteWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
 }

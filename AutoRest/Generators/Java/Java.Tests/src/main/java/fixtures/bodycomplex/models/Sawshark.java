@@ -9,6 +9,7 @@
 
 package fixtures.bodycomplex.models;
 
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * 

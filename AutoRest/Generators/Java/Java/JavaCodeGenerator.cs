@@ -102,7 +102,12 @@ namespace Microsoft.Rest.Generator.Java
                     {
                         Model = methodGroupModel
                     };
-                    await Write(methodGroupTemplate, methodGroupModel.MethodGroupType.ToPascalCase() + ".java");
+                    await Write(methodGroupTemplate, methodGroupModel.MethodGroupType.ToPascalCase() + "Impl.java");
+                    var methodGroupInterfaceTemplate = new MethodGroupInterfaceTemplate
+                    {
+                        Model = methodGroupModel
+                    };
+                    await Write(methodGroupInterfaceTemplate, methodGroupModel.MethodGroupType.ToPascalCase() + ".java");
                 }
             }
 

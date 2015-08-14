@@ -9,15 +9,10 @@
 
 package fixtures.http;
 
-import com.google.gson.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
 import java.util.List;
 import retrofit.http.HEAD;
 import retrofit.http.GET;
@@ -27,14 +22,8 @@ import retrofit.http.PATCH;
 import retrofit.http.POST;
 import retrofit.http.DELETE;
 
-public class HttpRedirects {
-    private HttpRedirectsService service;
-
-    public HttpRedirects(RestAdapter restAdapter) {
-        service = restAdapter.create(HttpRedirectsService.class);
-    }
-
-    public interface HttpRedirectsService {
+public interface HttpRedirects {
+    interface HttpRedirectsService {
         @HEAD("/http/redirect/300")
         Response head300() throws ServiceException;
 
@@ -60,10 +49,10 @@ public class HttpRedirects {
         void get301Async(ServiceResponseCallback cb);
 
         @PUT("/http/redirect/301")
-        Response put301(@Body Boolean booleanValue) throws ServiceException;
+        Response put301(@Body boolean booleanValue) throws ServiceException;
 
         @PUT("/http/redirect/301")
-        void put301Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
+        void put301Async(@Body boolean booleanValue, ServiceResponseCallback cb);
 
         @HEAD("/http/redirect/302")
         Response head302() throws ServiceException;
@@ -78,16 +67,16 @@ public class HttpRedirects {
         void get302Async(ServiceResponseCallback cb);
 
         @PATCH("/http/redirect/302")
-        Response patch302(@Body Boolean booleanValue) throws ServiceException;
+        Response patch302(@Body boolean booleanValue) throws ServiceException;
 
         @PATCH("/http/redirect/302")
-        void patch302Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
+        void patch302Async(@Body boolean booleanValue, ServiceResponseCallback cb);
 
         @POST("/http/redirect/303")
-        Response post303(@Body Boolean booleanValue) throws ServiceException;
+        Response post303(@Body boolean booleanValue) throws ServiceException;
 
         @POST("/http/redirect/303")
-        void post303Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
+        void post303Async(@Body boolean booleanValue, ServiceResponseCallback cb);
 
         @HEAD("/http/redirect/307")
         Response head307() throws ServiceException;
@@ -102,461 +91,88 @@ public class HttpRedirects {
         void get307Async(ServiceResponseCallback cb);
 
         @PUT("/http/redirect/307")
-        Response put307(@Body Boolean booleanValue) throws ServiceException;
+        Response put307(@Body boolean booleanValue) throws ServiceException;
 
         @PUT("/http/redirect/307")
-        void put307Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
+        void put307Async(@Body boolean booleanValue, ServiceResponseCallback cb);
 
         @PATCH("/http/redirect/307")
-        Response patch307(@Body Boolean booleanValue) throws ServiceException;
+        Response patch307(@Body boolean booleanValue) throws ServiceException;
 
         @PATCH("/http/redirect/307")
-        void patch307Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
+        void patch307Async(@Body boolean booleanValue, ServiceResponseCallback cb);
 
         @POST("/http/redirect/307")
-        Response post307(@Body Boolean booleanValue) throws ServiceException;
+        Response post307(@Body boolean booleanValue) throws ServiceException;
 
         @POST("/http/redirect/307")
-        void post307Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
+        void post307Async(@Body boolean booleanValue, ServiceResponseCallback cb);
 
         @DELETE("/http/redirect/307")
-        Response delete307(@Body Boolean booleanValue) throws ServiceException;
+        Response delete307(@Body boolean booleanValue) throws ServiceException;
 
         @DELETE("/http/redirect/307")
-        void delete307Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
+        void delete307Async(@Body boolean booleanValue, ServiceResponseCallback cb);
 
     }
-    public void head300() throws ServiceException {
-        try {
-            head300Delegate(service.head300(), null).getBody();
-        } catch (RetrofitError error) {
-            head300Delegate(error.getResponse(), error).getBody();
-        }
-    }
+    void head300() throws ServiceException;
 
-    public void head300Async(final ServiceCallback<Void> serviceCallback) {
-        service.head300Async(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(head300Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void head300Async(final ServiceCallback<Void> serviceCallback);
 
-    private ServiceResponse<Void> head300Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .register(300, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    List<String> get300() throws ServiceException;
 
-    public List<String> get300() throws ServiceException {
-        try {
-            return get300Delegate(service.get300(), null).getBody();
-        } catch (RetrofitError error) {
-            return get300Delegate(error.getResponse(), error).getBody();
-        }
-    }
+    void get300Async(final ServiceCallback<List<String>> serviceCallback);
 
-    public void get300Async(final ServiceCallback<List<String>> serviceCallback) {
-        service.get300Async(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(get300Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void head301() throws ServiceException;
 
-    private ServiceResponse<List<String>> get300Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<List<String>>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .register(300, new TypeToken<List<String>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void head301Async(final ServiceCallback<Void> serviceCallback);
 
-    public void head301() throws ServiceException {
-        try {
-            head301Delegate(service.head301(), null).getBody();
-        } catch (RetrofitError error) {
-            head301Delegate(error.getResponse(), error).getBody();
-        }
-    }
+    void get301() throws ServiceException;
 
-    public void head301Async(final ServiceCallback<Void> serviceCallback) {
-        service.head301Async(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(head301Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void get301Async(final ServiceCallback<Void> serviceCallback);
 
-    private ServiceResponse<Void> head301Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .register(301, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void put301(boolean booleanValue) throws ServiceException;
 
-    public void get301() throws ServiceException {
-        try {
-            get301Delegate(service.get301(), null).getBody();
-        } catch (RetrofitError error) {
-            get301Delegate(error.getResponse(), error).getBody();
-        }
-    }
+    void put301Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
-    public void get301Async(final ServiceCallback<Void> serviceCallback) {
-        service.get301Async(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(get301Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void head302() throws ServiceException;
 
-    private ServiceResponse<Void> get301Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .register(301, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void head302Async(final ServiceCallback<Void> serviceCallback);
 
-    public void put301(Boolean booleanValue) throws ServiceException {
-        try {
-            put301Delegate(service.put301(booleanValue), null).getBody();
-        } catch (RetrofitError error) {
-            put301Delegate(error.getResponse(), error).getBody();
-        }
-    }
+    void get302() throws ServiceException;
 
-    public void put301Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        service.put301Async(booleanValue, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(put301Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void get302Async(final ServiceCallback<Void> serviceCallback);
 
-    private ServiceResponse<Void> put301Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(301, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void patch302(boolean booleanValue) throws ServiceException;
 
-    public void head302() throws ServiceException {
-        try {
-            head302Delegate(service.head302(), null).getBody();
-        } catch (RetrofitError error) {
-            head302Delegate(error.getResponse(), error).getBody();
-        }
-    }
+    void patch302Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
-    public void head302Async(final ServiceCallback<Void> serviceCallback) {
-        service.head302Async(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(head302Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void post303(boolean booleanValue) throws ServiceException;
 
-    private ServiceResponse<Void> head302Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .register(302, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void post303Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
-    public void get302() throws ServiceException {
-        try {
-            get302Delegate(service.get302(), null).getBody();
-        } catch (RetrofitError error) {
-            get302Delegate(error.getResponse(), error).getBody();
-        }
-    }
+    void head307() throws ServiceException;
 
-    public void get302Async(final ServiceCallback<Void> serviceCallback) {
-        service.get302Async(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(get302Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void head307Async(final ServiceCallback<Void> serviceCallback);
 
-    private ServiceResponse<Void> get302Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .register(302, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void get307() throws ServiceException;
 
-    public void patch302(Boolean booleanValue) throws ServiceException {
-        try {
-            patch302Delegate(service.patch302(booleanValue), null).getBody();
-        } catch (RetrofitError error) {
-            patch302Delegate(error.getResponse(), error).getBody();
-        }
-    }
+    void get307Async(final ServiceCallback<Void> serviceCallback);
 
-    public void patch302Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        service.patch302Async(booleanValue, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(patch302Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void put307(boolean booleanValue) throws ServiceException;
 
-    private ServiceResponse<Void> patch302Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(302, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void put307Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
-    public void post303(Boolean booleanValue) throws ServiceException {
-        try {
-            post303Delegate(service.post303(booleanValue), null).getBody();
-        } catch (RetrofitError error) {
-            post303Delegate(error.getResponse(), error).getBody();
-        }
-    }
+    void patch307(boolean booleanValue) throws ServiceException;
 
-    public void post303Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        service.post303Async(booleanValue, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(post303Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void patch307Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
-    private ServiceResponse<Void> post303Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .register(303, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void post307(boolean booleanValue) throws ServiceException;
 
-    public void head307() throws ServiceException {
-        try {
-            head307Delegate(service.head307(), null).getBody();
-        } catch (RetrofitError error) {
-            head307Delegate(error.getResponse(), error).getBody();
-        }
-    }
+    void post307Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
-    public void head307Async(final ServiceCallback<Void> serviceCallback) {
-        service.head307Async(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(head307Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
+    void delete307(boolean booleanValue) throws ServiceException;
 
-    private ServiceResponse<Void> head307Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .register(307, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void get307() throws ServiceException {
-        try {
-            get307Delegate(service.get307(), null).getBody();
-        } catch (RetrofitError error) {
-            get307Delegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void get307Async(final ServiceCallback<Void> serviceCallback) {
-        service.get307Async(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(get307Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> get307Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .register(307, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void put307(Boolean booleanValue) throws ServiceException {
-        try {
-            put307Delegate(service.put307(booleanValue), null).getBody();
-        } catch (RetrofitError error) {
-            put307Delegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void put307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        service.put307Async(booleanValue, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(put307Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> put307Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .register(307, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void patch307(Boolean booleanValue) throws ServiceException {
-        try {
-            patch307Delegate(service.patch307(booleanValue), null).getBody();
-        } catch (RetrofitError error) {
-            patch307Delegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void patch307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        service.patch307Async(booleanValue, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(patch307Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> patch307Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .register(307, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void post307(Boolean booleanValue) throws ServiceException {
-        try {
-            post307Delegate(service.post307(booleanValue), null).getBody();
-        } catch (RetrofitError error) {
-            post307Delegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void post307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        service.post307Async(booleanValue, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(post307Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> post307Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .register(307, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    public void delete307(Boolean booleanValue) throws ServiceException {
-        try {
-            delete307Delegate(service.delete307(booleanValue), null).getBody();
-        } catch (RetrofitError error) {
-            delete307Delegate(error.getResponse(), error).getBody();
-        }
-    }
-
-    public void delete307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        service.delete307Async(booleanValue, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(delete307Delegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> delete307Delegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .register(307, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
+    void delete307Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
 }
